@@ -1,0 +1,63 @@
+# ==========================================
+# .gitignore for Theory of Systems Coq Project
+# ==========================================
+
+# Coq compiled files
+*.vo
+*.vos
+*.vok
+*.glob
+*.v.d
+.coqdeps.d
+
+# CoqIDE files
+.coqide-*
+
+# Proof General files
+*.aux
+*.log
+
+# Coq compilation database
+_CoqProject.d
+.lia.cache
+.nia.cache
+
+# Generated documentation
+*.html
+coqdoc/
+
+# Emacs backup files
+*~
+\#*\#
+.\#*
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Archives (if you create them)
+*.zip
+*.tar.gz
+*.tgz
+
+# Personal notes (if you want to keep them local)
+PRIVATE_NOTES.md
+TODO_LOCAL.md
