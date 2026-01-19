@@ -159,10 +159,10 @@ If you use this work, please cite:
 
 ```bibtex
 @software{theory_of_systems_coq,
-  author = {[Author Name]},
+  author = {Horsocrates},
   title = {Theory of Systems — Coq Formalization},
   year = {2026},
-  url = {https://github.com/[username]/theory-of-systems-coq}
+  url = {https://github.com/horsocrates/theory-of-systems-coq}
 }
 ```
 
