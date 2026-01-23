@@ -30,6 +30,99 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 
 ---
 
+## Installation & Verification
+
+### Prerequisites
+
+- Coq 8.18.0 or higher
+- Standard Library (included with Coq)
+
+### Build Instructions
+
+```bash
+git clone https://github.com/horsocrates/theory-of-systems-coq.git
+cd theory-of-systems-coq
+
+# Generate Makefile and compile
+coq_makefile -f _CoqProject -o Makefile
+make
+```
+
+### Verification of the Main Result
+
+The core proof of uncountability resides in `ShrinkingIntervals_uncountable_ERR.v`. To verify its status and dependencies:
+
+```bash
+# Check theorem compiles and inspect axioms
+coqc ShrinkingIntervals_uncountable_ERR.v
+coqtop -l ShrinkingIntervals_uncountable_ERR.v -batch -exec "Print Assumptions unit_interval_uncountable_trisect."
+```
+
+**Expected output:**
+```
+Axioms:
+classic : forall P : Prop, P \/ ~P
+```
+
+> **Note:** This theorem tree contains **0 Admitted** and only the foundational `classic` axiom (L3: Law of Excluded Middle). No Axiom of Choice. No Axiom of Infinity.
+
+### Quick Verification Commands
+
+```bash
+# Count proven vs admitted lemmas
+echo "Proven (Qed):"; grep -c "Qed\." *.v | awk -F: '{sum+=$2} END {print sum}'
+echo "Admitted:"; grep -c "Admitted\." *.v | awk -F: '{sum+=$2} END {print sum}'
+
+# Verify no unexpected axioms in main theorem
+grep -A5 "Print Assumptions" ShrinkingIntervals_uncountable_ERR.v
+```
+
+---
+
+## Project Structure
+
+```
+theory-of-systems-coq/
+│
+├── Core/                              # Foundational E/R/R framework
+│   └── TheoryOfSystems_Core_ERR.v       # Laws L1-L5, paradox blocking, FunctionalSystem
+│
+├── Analysis/                          # Classical analysis theorems  
+│   ├── Archimedean_ERR.v                # Archimedean property of ℚ
+│   ├── IVT_ERR.v                        # Intermediate Value Theorem
+│   ├── EVT_idx.v                        # Extreme Value Theorem (L5-compliant)
+│   └── HeineBorel_ERR.v                 # Compactness (partial — needs ℝ)
+│
+├── Theorems/                          # Main uncountability proofs
+│   ├── ShrinkingIntervals_uncountable_ERR.v  # ★ Primary proof via trisection
+│   ├── DiagonalArgument_ERR.v           # Alternative: Cantor diagonal
+│   ├── TernaryRepresentation_ERR.v      # Digit representation support
+│   └── SchroederBernstein_ERR.v         # Set-theoretic injection theorem
+│
+└── docs/                              # Documentation
+    ├── Theory_of_Systems_Preprint_v4.md   # Full philosophical paper
+    ├── ERR_FRAMEWORK.md                 # E/R/R methodology explained
+    ├── L5_LEFTMOST_DEDUCTION.md         # L5-resolution derivation
+    └── DIAGONAL_VS_INTERVALS.md         # Why intervals > digits
+```
+
+### File Status Overview
+
+| File | Qed | Admitted | Completion |
+|------|-----|----------|------------|
+| `ShrinkingIntervals_uncountable_ERR.v` | 167 | 0 | ✅ **100%** |
+| `EVT_idx.v` | 23 | 0 | ✅ **100%** |
+| `IVT_ERR.v` | 23 | 0 | ✅ **100%** |
+| `Archimedean_ERR.v` | 14 | 0 | ✅ **100%** |
+| `SchroederBernstein_ERR.v` | 14 | 0 | ✅ **100%** |
+| `TernaryRepresentation_ERR.v` | 52 | 2 | 96% |
+| `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
+| `HeineBorel_ERR.v` | 22 | 2 | 92% |
+| `TheoryOfSystems_Core_ERR.v` | 29 | 3 | 91% |
+| **TOTAL** | **385** | **8** | **98%** |
+
+---
+
 ## Philosophical Position
 
 **Logical Realism:** Logic is the structure of being, not a tool of thought.
@@ -37,69 +130,6 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 **Process Philosophy (P4):** Infinity is a property of process, not of object. Numbers are limits of convergent sequences, not completed infinite sets.
 
 **L5 (Law of Order):** When multiple positions share the same Role, select the minimal index. This principle resolved key formalization challenges (EVT breakthrough).
-
----
-
-## Project Structure
-
-### Core Files (100% Complete)
-
-| File | Lemmas | Description |
-|------|--------|-------------|
-| `ShrinkingIntervals_uncountable_ERR.v` | 167 | Uncountability via nested intervals |
-| `EVT_idx.v` | 23 | Extreme Value Theorem (index-based) |
-| `IVT_ERR.v` | 23 | Intermediate Value Theorem |
-| `Archimedean_ERR.v` | 14 | Archimedean Property |
-| `SchroederBernstein_ERR.v` | 14 | Set theory injection theorem |
-
-### Supporting Files
-
-| File | Status | Description |
-|------|--------|-------------|
-| `TheoryOfSystems_Core_ERR.v` | 91% | Philosophical core (L4, L5, paradox blocking) |
-| `TernaryRepresentation_ERR.v` | 96% | Ternary digit representation |
-| `DiagonalArgument_ERR.v` | 98% | Cantor's diagonal in ternary |
-| `HeineBorel_ERR.v` | 92% | Compactness (requires ℝ for 100%) |
-
-### Documentation
-
-- `Theory_of_Systems_Preprint_v3.md` — Full philosophical derivation
-- `ERR_FRAMEWORK.md` — Elements/Roles/Rules methodology
-- `L5_LEFTMOST_DEDUCTION.md` — L5-resolution principle derivation
-- `DIAGONAL_VS_INTERVALS.md` — Why intervals supersede digits
-
----
-
-## Building
-
-### Requirements
-
-- Coq 8.18.0 or later
-- Standard library only (no external dependencies)
-
-### Compilation
-
-```bash
-# Compile individual files
-coqc TheoryOfSystems_Core_ERR.v
-coqc Archimedean_ERR.v
-coqc IVT_ERR.v
-coqc EVT_idx.v
-coqc ShrinkingIntervals_uncountable_ERR.v
-
-# Or compile all
-for f in *.v; do coqc "$f"; done
-```
-
-### Verification
-
-```bash
-# Check for remaining Admitted statements
-grep -c "Admitted" *.v
-
-# Count proven lemmas
-grep -c "Qed" *.v
-```
 
 ---
 
@@ -150,6 +180,8 @@ Qfloor and mod 3 are discontinuous L3 operations on continuous L2 objects. The i
 
 **Digit Stability (3):**
 - Bypassed by interval approach
+
+> **Important:** The main uncountability theorem (`unit_interval_uncountable_trisect`) has **0 Admitted** dependencies.
 
 ---
 
