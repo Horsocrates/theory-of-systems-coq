@@ -185,6 +185,13 @@ Qfloor and mod 3 are discontinuous L3 operations on continuous L2 objects. The i
 
 ---
 
+## Publications
+
+- **[The Laws of Logic as Conditions of Existence: A Derivation from The First Principle](https://philpapers.org/archive/HORTLO-18.pdf)** — Full philosophical derivation of L1–L5 and P1–P4
+- **[The Law of Order: Sequence and Hierarchy in the Structure of Logic](https://philpapers.org/archive/HORTLO-19.pdf)** — L5 application and the EVT breakthrough
+
+---
+
 ## Citation
 
 If you use this work, please cite:
