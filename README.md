@@ -43,6 +43,10 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | ε-Extreme Value Theorem | 23 | 0 | ✅ **100%** |
 | Archimedean Property | 14 | 0 | ✅ **100%** |
 | Schröder-Bernstein | 14 | 0 | ✅ **100%** |
+| Ternary Representation | 52 | 2 | 96% |
+| Diagonal Argument (alternative) | 41 | 1 | 98% |
+| Heine-Borel (partial) | 22 | 2 | 92% |
+| Core Framework (L1-L5, P1-P4) | 29 | 3 | 91% |
 | **Total** | **397** | **10** | **98%** |
 
 **Single external axiom:** `classic` (Law of Excluded Middle, L3)  
