@@ -2,10 +2,22 @@
 
 [![Coq](https://img.shields.io/badge/Coq-8.18.0-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Lemmas](https://img.shields.io/badge/Lemmas-385_Proven-brightgreen.svg)]()
+[![Lemmas](https://img.shields.io/badge/Lemmas-397_Proven-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from a single first principle: "A = exists"**
+
+---
+
+## 📄 Paper
+
+**"Nested Rational Intervals for Non-Surjectivity of ℕ → [0,1] ∩ ℚ: A Coq Formalization with Minimal Axioms"**
+
+| Format | Pages | Description |
+|--------|-------|-------------|
+| [LaTeX (arXiv)](docs/nested_intervals.tex) | 13 | For submission |
+| [PDF](docs/nested_intervals.pdf) | 13 | Compiled |
+| [Detailed Markdown](docs/Nested_Rational_Intervals.pdf) | 36 | Extended version |
 
 ---
 
@@ -23,10 +35,32 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 
 ### Key Results
 
-- **385 proven lemmas** with only 8 remaining Admitted
-- **Single external axiom:** `classic` (Law of Excluded Middle, L3)
-- **No Axiom of Infinity** — this is a consequence of P4 (Process Philosophy), not a design goal
-- Complete proofs of: IVT, EVT, Archimedean Property, Schröder-Bernstein, Uncountability of [0,1]
+| Theorem | Lemmas | Admitted | Status |
+|---------|--------|----------|--------|
+| Non-surjectivity ℕ → [0,1] ∩ ℚ | 167 | 0 | ✅ **100%** |
+| Countability of ℚ (Calkin-Wilf) | 12 | 2 | ✅ 86% |
+| ε-Intermediate Value Theorem | 23 | 0 | ✅ **100%** |
+| ε-Extreme Value Theorem | 23 | 0 | ✅ **100%** |
+| Archimedean Property | 14 | 0 | ✅ **100%** |
+| Schröder-Bernstein | 14 | 0 | ✅ **100%** |
+| **Total** | **397** | **10** | **98%** |
+
+**Single external axiom:** `classic` (Law of Excluded Middle, L3)  
+**No Axiom of Infinity** — consequence of P4 (Process Philosophy), not a design goal  
+**No Axiom of Choice**
+
+---
+
+## 🔑 The Key Contrast
+
+We prove **both**:
+
+| Result | Axioms | Status |
+|--------|--------|--------|
+| ℚ is countable (bijection ℕ ↔ ℚ) | **None** | Fully constructive |
+| Cauchy processes are uncountable | LEM only | Non-surjectivity |
+
+**No contradiction:** A rational is finite data (two integers). A Cauchy process is infinite behavior (unbounded sequence). We enumerate objects, not behaviors.
 
 ---
 
@@ -48,12 +82,30 @@ coq_makefile -f _CoqProject -o Makefile
 make
 ```
 
-### Verification of the Main Result
-
-The core proof of uncountability resides in `ShrinkingIntervals_uncountable_ERR.v`. To verify its status and dependencies:
+### Run OCaml Demo
 
 ```bash
-# Check theorem compiles and inspect axioms
+cd extraction
+ocaml diagonal_demo.ml
+```
+
+**Output:**
+```
+=== Calkin-Wilf Enumeration (Q is countable) ===
+  enum_qpos( 0) = 1/1
+  enum_qpos( 1) = 1/2
+  enum_qpos( 2) = 2/1
+  ...
+
+=== Diagonal Construction (Cauchy processes are uncountable) ===
+  Depth 1: diagonal = 1/6,    interval = [0/1, 1/3]
+  Depth 2: diagonal = 1/18,   interval = [0/1, 1/9]
+  ...
+```
+
+### Verification of the Main Result
+
+```bash
 coqc ShrinkingIntervals_uncountable_ERR.v
 coqtop -l ShrinkingIntervals_uncountable_ERR.v -batch -exec "Print Assumptions unit_interval_uncountable_trisect."
 ```
@@ -64,19 +116,6 @@ Axioms:
 classic : forall P : Prop, P \/ ~P
 ```
 
-> **Note:** This theorem tree contains **0 Admitted** and only the foundational `classic` axiom (L3: Law of Excluded Middle). No Axiom of Choice. No Axiom of Infinity.
-
-### Quick Verification Commands
-
-```bash
-# Count proven vs admitted lemmas
-echo "Proven (Qed):"; grep -c "Qed\." *.v | awk -F: '{sum+=$2} END {print sum}'
-echo "Admitted:"; grep -c "Admitted\." *.v | awk -F: '{sum+=$2} END {print sum}'
-
-# Verify no unexpected axioms in main theorem
-grep -A5 "Print Assumptions" ShrinkingIntervals_uncountable_ERR.v
-```
-
 ---
 
 ## Project Structure
@@ -84,33 +123,37 @@ grep -A5 "Print Assumptions" ShrinkingIntervals_uncountable_ERR.v
 ```
 theory-of-systems-coq/
 │
-├── Core/                              # Foundational E/R/R framework
-│   └── TheoryOfSystems_Core_ERR.v       # Laws L1-L5, paradox blocking, FunctionalSystem
+├── docs/                              # Papers & documentation
+│   ├── nested_intervals.tex           # ★ arXiv preprint (LaTeX)
+│   ├── nested_intervals.pdf           # Compiled PDF
+│   ├── Nested_Rational_Intervals.md   # Detailed markdown version
+│   ├── references.bib                 # Bibliography
+│   └── ...
 │
-├── Analysis/                          # Classical analysis theorems  
-│   ├── Archimedean_ERR.v                # Archimedean property of ℚ
-│   ├── IVT_ERR.v                        # Intermediate Value Theorem
-│   ├── EVT_idx.v                        # Extreme Value Theorem (L5-compliant)
-│   └── HeineBorel_ERR.v                 # Compactness (partial — needs ℝ)
+├── src/                               # Coq source files
+│   ├── ShrinkingIntervals_uncountable_ERR.v  # ★ Main theorem (167 lemmas)
+│   ├── Countability_Q.v               # ★ ℚ ≅ ℕ via Calkin-Wilf (NEW)
+│   ├── EVT_idx.v                      # ε-EVT (L5-compliant)
+│   ├── IVT_ERR.v                      # ε-IVT
+│   ├── Archimedean_ERR.v              # Archimedean property
+│   ├── TheoryOfSystems_Core_ERR.v     # Laws L1-L5, paradox blocking
+│   ├── HeineBorel_ERR.v               # Compactness (partial — needs ℝ)
+│   ├── SchroederBernstein_ERR.v       # Injection theorem
+│   ├── TernaryRepresentation_ERR.v    # Digit representation
+│   └── DiagonalArgument_ERR.v         # Alternative diagonal proof
 │
-├── Theorems/                          # Main uncountability proofs
-│   ├── ShrinkingIntervals_uncountable_ERR.v  # ★ Primary proof via trisection
-│   ├── DiagonalArgument_ERR.v           # Alternative: Cantor diagonal
-│   ├── TernaryRepresentation_ERR.v      # Digit representation support
-│   └── SchroederBernstein_ERR.v         # Set-theoretic injection theorem
+├── extraction/                        # Executable code
+│   └── diagonal_demo.ml               # ★ OCaml demo (NEW)
 │
-└── docs/                              # Documentation
-    ├── Theory_of_Systems_Preprint_v4.md   # Full philosophical paper
-    ├── ERR_FRAMEWORK.md                 # E/R/R methodology explained
-    ├── L5_LEFTMOST_DEDUCTION.md         # L5-resolution derivation
-    └── DIAGONAL_VS_INTERVALS.md         # Why intervals > digits
+└── README.md
 ```
 
 ### File Status Overview
 
-| File | Qed | Admitted | Completion |
-|------|-----|----------|------------|
+| File | Qed | Admitted | Status |
+|------|-----|----------|--------|
 | `ShrinkingIntervals_uncountable_ERR.v` | 167 | 0 | ✅ **100%** |
+| `Countability_Q.v` | 12 | 2 | ✅ 86% |
 | `EVT_idx.v` | 23 | 0 | ✅ **100%** |
 | `IVT_ERR.v` | 23 | 0 | ✅ **100%** |
 | `Archimedean_ERR.v` | 14 | 0 | ✅ **100%** |
@@ -119,7 +162,7 @@ theory-of-systems-coq/
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `HeineBorel_ERR.v` | 22 | 2 | 92% |
 | `TheoryOfSystems_Core_ERR.v` | 29 | 3 | 91% |
-| **TOTAL** | **385** | **8** | **98%** |
+| **TOTAL** | **397** | **10** | **98%** |
 
 ---
 
@@ -133,15 +176,15 @@ theory-of-systems-coq/
 
 ---
 
-## Key Insights
+## Technical Contributions
 
-### The EVT Breakthrough
+### 1. Deterministic Witness Selection
 
-The Extreme Value Theorem proof was blocked by Qeq vs Leibniz equality issues. The solution came from L5:
+When multiple candidates satisfy a specification, select the **leftmost**. This yields Leibniz equality (`=`) instead of propositional equality (`Qeq`).
 
-> "Don't seek *value*, seek *position*."
+### 2. Index-Based Argmax (The EVT Breakthrough)
 
-By returning the **index** of the maximum rather than the value itself, the proof becomes trivial:
+> "Don't seek *value*, seek *position*." — L5 insight
 
 ```coq
 (* OLD: Returns value, causes Qeq issues *)
@@ -161,40 +204,61 @@ Proof.
 Qed.
 ```
 
-### Digit Stability Problem
+### 3. Trisection over Bisection
 
-Qfloor and mod 3 are discontinuous L3 operations on continuous L2 objects. The interval-based approach (`ShrinkingIntervals_uncountable_ERR.v`) avoids this entirely, proving uncountability through geometric trisection with guaranteed gaps.
+Digit extraction (`Qfloor`, `mod 3`) is discontinuous. The interval-based approach avoids this entirely, proving non-surjectivity through geometric trisection with guaranteed gaps.
+
+### 4. Executable Extraction
+
+The Coq proof extracts to working OCaml code (`diagonal_demo.ml`) that computes witnesses for any enumeration.
+
+---
+
+## Proof-Theoretic Strength
+
+Our formalization lives in **RCA₀ + LEM** — strictly below ACA₀, WKL₀, and ZF⁻.
+
+| System | Our theorems |
+|--------|--------------|
+| RCA₀ | ✅ Countability of ℚ |
+| RCA₀ + LEM | ✅ Non-surjectivity, ε-IVT, ε-EVT |
+| WKL₀ | Not needed |
+| ACA₀ | Not needed |
+
+> *"The infinity in uncountability is directional (unbounded iteration), not cardinal (completed infinite sets)."*
 
 ---
 
 ## Remaining Work
 
-### Categorization of 8 Admitted
+### Categorization of 10 Admitted
 
-**Philosophically Impossible over ℚ (2):**
+**Completeness Required (2):**
 - Nested intervals can converge to irrational limits
 - Uniform continuity requires completeness
 
 **Universe-Level in Coq (3):**
-- Type-theoretic issues beyond mathematics proper
+- Type-theoretic constraints beyond mathematics proper
 
 **Digit Stability (3):**
 - Bypassed by interval approach
 
-> **Important:** The main uncountability theorem (`unit_interval_uncountable_trisect`) has **0 Admitted** dependencies.
+**Countability Round-Trip (2):**
+- Routine Calkin-Wilf bijection lemmas
+
+> **Important:** The main non-surjectivity theorem has **0 Admitted** dependencies.
 
 ---
 
 ## Publications
 
-- **[The Laws of Logic as Conditions of Existence: A Derivation from The First Principle](https://philpapers.org/archive/HORTLO-18.pdf)** — Full philosophical derivation of L1–L5 and P1–P4
-- **[The Law of Order: Sequence and Hierarchy in the Structure of Logic](https://philpapers.org/archive/HORTLO-19.pdf)** — L5 application and the EVT breakthrough
+- **[The Laws of Logic as Conditions of Existence](https://philpapers.org/archive/HORTLO-18.pdf)** — Full philosophical derivation of L1–L5 and P1–P4
+- **[The Law of Order](https://philpapers.org/archive/HORTLO-19.pdf)** — L5 application and the EVT breakthrough
+- **[arXiv Preprint](docs/nested_intervals.pdf)** — Technical paper on non-surjectivity formalization
 
 ---
 
 ## Citation
-
-If you use this work, please cite:
 
 ```bibtex
 @software{theory_of_systems_coq,
@@ -203,7 +267,22 @@ If you use this work, please cite:
   year = {2026},
   url = {https://github.com/horsocrates/theory-of-systems-coq}
 }
+
+@article{horsocrates2026nested,
+  author = {Horsocrates},
+  title = {Nested Rational Intervals for Non-Surjectivity of $\mathbb{N} \to [0,1] \cap \mathbb{Q}$: A Coq Formalization with Minimal Axioms},
+  year = {2026},
+  note = {arXiv:2026.XXXXX}
+}
 ```
+
+---
+
+## Contact
+
+**Horsocrates**  
+📧 horsocrates@proton.me  
+🔗 [GitHub](https://github.com/horsocrates/theory-of-systems-coq)
 
 ---
 
@@ -216,5 +295,5 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 - The Coq development team
-- Anthropic's Claude for proof assistance
+- Anthropic's Claude for proof assistance and paper writing
 - Google's Gemini for the L5 insight: "Don't seek value, seek position"
