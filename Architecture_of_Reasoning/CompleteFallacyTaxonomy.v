@@ -501,7 +501,18 @@ Theorem type_breakdown :
 Proof. repeat split; reflexivity. Qed.
 
 (** Type 2 is 70% of non-context-dependent fallacies *)
-(* 105 / (36 + 105 + 3 + 6) = 105 / 150 = 70% *)
+(**
+   WHY 150 vs 156?
+   
+   Articles say "~150 fallacies" because Type 5 (6 methods) are 
+   CONTEXT-DEPENDENT — valid in some contexts, fallacious in others.
+   They are not "errors" in the same sense as Types 1-4.
+   
+   Core fallacies (always errors): Type 1 + Type 2 + Type 3 + Type 4
+   = 36 + 105 + 3 + 6 = 150
+   
+   Complete taxonomy (including context-dependent): 150 + 6 = 156
+*)
 Definition core_fallacies : nat := total_type1 + total_type2 + total_type3 + total_type4.
 
 Theorem type2_is_70_percent : 

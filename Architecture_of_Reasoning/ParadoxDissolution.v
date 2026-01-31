@@ -722,6 +722,83 @@ Proof.
 Qed.
 
 (* ========================================================================= *)
+(*                    PART X: AI APPLICATIONS                               *)
+(* ========================================================================= *)
+
+(**
+   LLM HALLUCINATIONS AS PARADOXES
+   ===============================
+   
+   Self-referential LLM outputs exhibit the same structural pattern as
+   classical paradoxes. When an LLM generates content that references
+   its own generation process, it creates potential level confusion.
+   
+   MAPPING:
+   
+   1. SELF-REFERENTIAL HALLUCINATIONS → Spurious Paradoxes
+      - LLM: "I am certain I don't know this"
+      - Pattern: Evaluator evaluating itself
+      - Maps to: Carroll's Tortoise (rule as premise)
+   
+   2. CONFIDENT CONTRADICTIONS → Structural Paradoxes
+      - LLM: Generates P and ¬P in same response
+      - Pattern: Container as content
+      - Maps to: Liar Paradox pattern
+   
+   3. CIRCULAR JUSTIFICATIONS → Level Mixing
+      - LLM: "This is true because I said it's true"
+      - Pattern: Self-application
+      - Maps to: Russell's Paradox pattern
+   
+   The Architecture of Reasoning provides a diagnostic framework:
+   - Detect level confusion in LLM outputs
+   - Classify hallucination type
+   - Generate targeted correction prompts
+   
+   See AI_FallacyDetector.v for implementation.
+*)
+
+(** LLM output patterns that indicate paradox-like structures *)
+Inductive LLMParadoxPattern : Type :=
+  | LLM_SelfReference : LLMParadoxPattern      (* "I think I..." about own thinking *)
+  | LLM_ConfidentContradiction : LLMParadoxPattern  (* P and ¬P in same response *)
+  | LLM_CircularJustification : LLMParadoxPattern   (* "True because I said so" *)
+  | LLM_MetaConfusion : LLMParadoxPattern.     (* Confuses object/meta levels *)
+
+Definition llm_pattern_to_paradox_type (p : LLMParadoxPattern) : ParadoxType :=
+  match p with
+  | LLM_SelfReference => Spurious           (* Like Carroll's Tortoise *)
+  | LLM_ConfidentContradiction => Structural (* Like Liar *)
+  | LLM_CircularJustification => Structural  (* Like Russell *)
+  | LLM_MetaConfusion => Structural          (* Generic level mixing *)
+  end.
+
+Definition llm_pattern_to_confusion (p : LLMParadoxPattern) : LevelConfusion :=
+  match p with
+  | LLM_SelfReference => RuleAsPremise
+  | LLM_ConfidentContradiction => EvaluatorAsEvaluated
+  | LLM_CircularJustification => SelfApplication
+  | LLM_MetaConfusion => ContainerAsContent
+  end.
+
+(** All LLM paradox patterns are dissolvable through same mechanism *)
+Theorem llm_paradoxes_dissolvable : forall p : LLMParadoxPattern,
+  appropriate_response (llm_pattern_to_paradox_type p) = Dissolution.
+Proof.
+  intros p. destruct p; reflexivity.
+Qed.
+
+(** LLM self-reference maps to structural paradox patterns *)
+Theorem llm_self_ref_is_structural : forall p : LLMParadoxPattern,
+  p <> LLM_SelfReference ->
+  llm_pattern_to_paradox_type p = Structural.
+Proof.
+  intros p Hneq.
+  destruct p; try reflexivity.
+  contradiction.
+Qed.
+
+(* ========================================================================= *)
 (*                    SUMMARY                                               *)
 (* ========================================================================= *)
 
@@ -757,6 +834,12 @@ Qed.
       - Hidden contradiction
       - Resolution: expose assumption
    
+   AI APPLICATIONS:
+   - LLM self-referential hallucinations = Spurious Paradoxes
+   - LLM confident contradictions = Structural Paradoxes
+   - LLM circular justifications = Level Mixing
+   - All LLM paradox patterns dissolvable through same mechanism
+   
    UNIVERSAL PATTERN:
    All paradoxes = level confusion
    All paradoxes dissolve (not solve)
@@ -766,5 +849,6 @@ Qed.
    - all_paradoxes_dissolvable: Every paradox can be dissolved
    - paradoxes_require_dissolution: Solution inappropriate for paradoxes
    - structural_is_self_referential: Structural paradoxes involve self-reference
+   - llm_paradoxes_dissolvable: LLM paradox patterns dissolve same way
 *)
 

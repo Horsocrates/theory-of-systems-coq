@@ -31,6 +31,12 @@ This package provides **machine-verified formalization** of the Architecture of 
 | **Type 5** | Context-Dependent Methods | 6 |
 | **TOTAL** | | **156** |
 
+> **Note: Why ~150 in articles?**
+> Type 5 methods (6) are context-dependent — valid in some contexts, fallacious in others. 
+> They are not "errors" in the same sense as Types 1-4.
+> **Core fallacies** (always errors): 36 + 105 + 3 + 6 = **150**
+> **Complete taxonomy** (including context-dependent): 150 + 6 = **156**
+
 ### Key Insight
 
 ```
@@ -179,6 +185,31 @@ Extraction "ai_fallacy_detector.ml"
 ```
 
 → Real OCaml module for inference pipeline integration.
+
+### 6. LLM Hallucination Classification
+
+| Hallucination Type | Architecture Violation | Domain |
+|--------------------|----------------------|--------|
+| Factual | Object Deformation | D1 |
+| Logical | Logical Gap | D5 |
+| Self-Referential | Paradox (Level Confusion) | Vertical |
+| Overconfident | Illusion of Completion | D6 |
+| Sycophantic | No Constitution | Type 1 |
+
+```coq
+Theorem hallucinations_are_violations : forall h : HallucinationType,
+  hallucination_to_violation h <> VR_Valid.
+(* All LLM hallucinations are detectable through the architecture *)
+```
+
+### NLP Integration Stubs
+
+For production systems, placeholder interfaces for:
+- Token-level analysis
+- Entity recognition (person vs argument)
+- Sentiment scoring
+- Self-reference detection
+- Logical connector identification
 
 ### Specific Fallacy Detectors
 

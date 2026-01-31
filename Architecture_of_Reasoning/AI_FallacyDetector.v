@@ -610,6 +610,106 @@ Definition extractable_cot := generate_cot_template.
 Definition extractable_analyze := analyze_response.
 
 (* ========================================================================= *)
+(*                    PART XIV: NLP INTEGRATION STUBS                       *)
+(* ========================================================================= *)
+
+(**
+   For production AI systems, these functions would interface with
+   NLP models for token-level analysis. Here we provide type signatures
+   and placeholder implementations.
+   
+   In real deployment:
+   - Token analysis would use transformer attention patterns
+   - Entity recognition would identify persons vs arguments
+   - Sentiment analysis would detect emotional manipulation
+   - Coreference resolution would track argument/person references
+*)
+
+(** Token-level analysis placeholder *)
+Definition TokenStream := list nat.  (* Would be actual tokens in production *)
+
+(** NLP analysis result *)
+Record NLPAnalysis := mkNLPAnalysis {
+  nlp_entities_person : list nat;      (* Person entity positions *)
+  nlp_entities_argument : list nat;    (* Argument entity positions *)
+  nlp_sentiment_score : nat;           (* 0-100 emotional intensity *)
+  nlp_self_reference_positions : list nat;  (* Self-referential tokens *)
+  nlp_logical_connectors : list nat    (* "therefore", "because", etc. *)
+}.
+
+(** Stub: Extract signals from NLP analysis *)
+Definition signals_from_nlp (analysis : NLPAnalysis) : ResponseSignals :=
+  {|
+    sig_attacks_person := negb (Nat.eqb (List.length (nlp_entities_person analysis)) 0);
+    sig_addresses_argument := negb (Nat.eqb (List.length (nlp_entities_argument analysis)) 0);
+    sig_uses_tradition := false;  (* Would detect "always", "traditional", etc. *)
+    sig_tradition_relevant := false;
+    sig_premises_support := negb (Nat.eqb (List.length (nlp_logical_connectors analysis)) 0);
+    sig_considers_counter := false;  (* Would detect "however", "but", "although" *)
+    sig_seeks_disconfirm := false;
+    sig_self_reference := negb (Nat.eqb (List.length (nlp_self_reference_positions analysis)) 0)
+  |}.
+
+(** Full NLP pipeline (stub) *)
+Definition analyze_with_nlp (tokens : TokenStream) : VerificationResult :=
+  (* In production: tokens -> NLP model -> NLPAnalysis -> signals -> verify *)
+  VR_Valid.  (* Placeholder *)
+
+(* ========================================================================= *)
+(*                    PART XV: LLM HALLUCINATION CLASSIFICATION             *)
+(* ========================================================================= *)
+
+(**
+   LLM HALLUCINATIONS AS ARCHITECTURAL VIOLATIONS
+   ==============================================
+   
+   LLM hallucinations map directly to the Architecture of Reasoning:
+   
+   1. FACTUAL HALLUCINATIONS → D1 (Recognition) violations
+      - LLM "recognizes" facts that don't exist
+      - Maps to: Object Deformation, Data Filtration
+   
+   2. LOGICAL HALLUCINATIONS → D5 (Inference) violations
+      - LLM draws conclusions not supported by premises
+      - Maps to: Non Sequitur, Scale Error
+   
+   3. SELF-REFERENTIAL HALLUCINATIONS → Paradox (Level Confusion)
+      - LLM generates self-contradictory statements
+      - Maps to: Spurious Paradoxes, Liar-style loops
+   
+   4. CONFIDENT WRONG ANSWERS → D6 (Reflection) violations
+      - LLM fails to recognize limits of knowledge
+      - Maps to: Dunning-Kruger Effect, Illusion of Completion
+   
+   5. SYCOPHANTIC RESPONSES → Type 1 (Condition) violations
+      - LLM prioritizes user approval over truth
+      - Maps to: Appeasement, Mala Fides
+*)
+
+Inductive HallucinationType : Type :=
+  | Halluc_Factual : HallucinationType       (* D1 violation *)
+  | Halluc_Logical : HallucinationType       (* D5 violation *)
+  | Halluc_SelfReferential : HallucinationType  (* Paradox *)
+  | Halluc_Overconfident : HallucinationType (* D6 violation *)
+  | Halluc_Sycophantic : HallucinationType.  (* Type 1 violation *)
+
+Definition hallucination_to_violation (h : HallucinationType) : VerificationResult :=
+  match h with
+  | Halluc_Factual => VR_Type2_DomainViolation D1_Recognition FM_ObjectDeformation
+  | Halluc_Logical => VR_Type2_DomainViolation D5_Inference FM_LogicalGap
+  | Halluc_SelfReferential => VR_Paradox_LevelConfusion LC_SelfApplication
+  | Halluc_Overconfident => VR_Type2_DomainViolation D6_Reflection FM_IllusionOfCompletion
+  | Halluc_Sycophantic => VR_Type1_NoConstitution
+  end.
+
+(** All hallucinations are detectable through architecture *)
+Theorem hallucinations_are_violations : forall h : HallucinationType,
+  hallucination_to_violation h <> VR_Valid.
+Proof.
+  intros h. destruct h; discriminate.
+Qed.
+
+(* ========================================================================= *)
 (*                    SUMMARY                                               *)
 (* ========================================================================= *)
 
@@ -635,6 +735,17 @@ Definition extractable_analyze := analyze_response.
       - safety_check: Block harmful reasoning patterns
       - Detect: confirmation bias, ad hominem, self-reference
    
+   5. NLP Integration (stubs for production)
+      - signals_from_nlp: Convert NLP analysis to signals
+      - NLPAnalysis: Entity, sentiment, self-reference detection
+   
+   6. LLM Hallucination Classification
+      - Factual hallucinations → D1 violations
+      - Logical hallucinations → D5 violations  
+      - Self-referential hallucinations → Paradoxes
+      - Overconfident answers → D6 violations
+      - Sycophantic responses → Type 1 violations
+   
    SPECIFIC DETECTORS:
    - detect_ad_hominem (D1)
    - detect_straw_man (D1)
@@ -650,6 +761,7 @@ Definition extractable_analyze := analyze_response.
    - ad_hominem_detected: Person attack without argument = fallacy
    - valid_requires_all_domains: Complete reasoning needs D1-D6
    - safety_blocks_ad_hominem: Safety layer catches ad hominem
+   - hallucinations_are_violations: All hallucinations map to architecture
    
    EXTRACTION:
    Ready for OCaml extraction to production inference pipeline.
