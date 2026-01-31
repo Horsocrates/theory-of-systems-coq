@@ -249,11 +249,31 @@ Our formalization lives in **RCA₀ + LEM** — strictly below ACA₀, WKL₀, a
 
 ---
 
+### Architecture of Reasoning (NEW)
+
+Formal verification of fallacy detection and paradox dissolution:
+
+| Module | Content | Theorems |
+|--------|---------|----------|
+| `AI_FallacyDetector.v` | LLM verification, safety layer | 5 |
+| `Architecture_of_Reasoning.v` | Unified L1-L5, D1-D6, E/R/R | 17 |
+| `DomainViolations_Complete.v` | 105 fallacies | 17 |
+| `ParadoxDissolution.v` | 7 paradoxes | 24 |
+
+**AI Applications:**
+- Chain-of-thought validation (D1→D6)
+- Self-reflection loop with fix prompts
+- Safety layer: blocks ad hominem, confirmation bias
+- OCaml extraction for production pipelines
+
+---
+
 ## Publications
 
 - **[The Laws of Logic as Conditions of Existence](https://philpapers.org/archive/HORTLO-18.pdf)** — Full philosophical derivation of L1–L5 and P1–P4
 - **[The Law of Order](https://philpapers.org/archive/HORTLO-19.pdf)** — L5 application and the EVT breakthrough
-- **[arXiv Preprint](docs/nested_intervals.pdf)** — Technical paper on non-surjectivity formalization
+- **[Nexted Intervals](docs/nested_intervals.pdf)** — Technical paper on non-surjectivity formalization
+- **[The Architecture of Error: A Structural Theory of Logical Fallacies](https://philpapers.org/archive/HORTAO-17.pdf)** - Philosophical paper on logical fallacies (part 1/2)
 
 ---
 
