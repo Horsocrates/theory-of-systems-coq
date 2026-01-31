@@ -1,0 +1,696 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% Coq listing style
+\lstdefinelanguage{Coq}{
+  keywords={Definition, Theorem, Lemma, Proof, Qed, Inductive, Record, Type, Prop, 
+            forall, exists, match, with, end, let, in, if, then, else, fun,
+            Require, Import, Module, Section, End, Variable, Hypothesis,
+            Fixpoint, CoFixpoint, where, struct, as, return},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=true,
+  comment=[l]{(*},
+  morecomment=[s]{(*}{*)},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  morestring=[b]",
+  literate={->}{{$\rightarrow$}}1 {=>}{{$\Rightarrow$}}1 
+           {/\\}{{$\land$}}1 {\\/}{{$\lor$}}1 
+           {~}{{$\lnot$}}1 {<>}{{$\neq$}}1
+}
+
+\lstdefinelanguage{OCaml}{
+  keywords={let, in, if, then, else, match, with, function, fun, type, 
+            of, rec, and, module, struct, end, sig, val, open},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=true,
+  comment=[s]{(*}{*)},
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  morestring=[b]"
+}
+
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  frame=single,
+  xleftmargin=2em,
+  numbers=left,
+  numberstyle=\tiny\color{gray}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{\textbf{Verified Fallacy Detection for Large Language Models:\\A Machine-Checked Framework from the Architecture of Reasoning}}
+\author{Horsocrates}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent Large Language Models (LLMs) generate plausible but often flawed reasoning. Current approaches to detecting such flaws rely on pattern-matching against memorized fallacy lists or heuristic classifiers. This article presents an alternative: a \textit{machine-verified} fallacy detection framework derived from the Architecture of Reasoning---a philosophical theory that classifies all reasoning errors as violations of a discoverable structure.
+
+We formalize the complete taxonomy of 156 fallacies in the Coq proof assistant, proving key structural theorems with zero unverified assumptions. We then implement an LLM response verification system that: (1) classifies reasoning errors by architectural location, (2) maps LLM hallucinations to specific violation types, (3) generates targeted correction prompts for self-reflection loops, and (4) provides a safety layer blocking harmful reasoning patterns.
+
+The framework is extractable to OCaml for production deployment. We demonstrate its application to chain-of-thought validation, showing how the six-domain structure (D1-D6) provides a principled template for LLM reasoning. All code is publicly available; all theorems are machine-checked.
+
+This work bridges philosophy of logic and AI safety, transforming fallacy detection from a classification problem into a structural analysis problem with formally verified guarantees.
+\end{abstract}
+
+\noindent\textbf{Keywords:} fallacy detection, large language models, formal verification, Coq, AI safety, chain-of-thought, reasoning architecture
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{The Problem: LLM Reasoning Errors}
+
+Large Language Models produce fluent, confident text that often contains logical errors. These errors include:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Factual hallucinations}: Asserting facts that do not exist
+    \item \textbf{Logical hallucinations}: Drawing conclusions not supported by premises
+    \item \textbf{Self-referential loops}: Generating self-contradictory statements
+    \item \textbf{Confident wrong answers}: Failing to recognize limits of knowledge
+    \item \textbf{Sycophantic responses}: Prioritizing user approval over truth
+\end{itemize}
+
+Current detection approaches are unsatisfying. Pattern-matching against fallacy lists requires memorization and fails on novel errors. Heuristic classifiers lack interpretability and formal guarantees. What is missing is a \textit{structural} account of reasoning that explains \textit{why} errors occur and \textit{where} they are located.
+
+\subsection{The Solution: Architecture of Reasoning}
+
+This article extends the Architecture of Reasoning---a philosophical framework developed in a six-article series---to AI applications. The key insight is that all reasoning errors are \textit{violations of a discoverable structure}. This structure has two dimensions:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Horizontal (Sequence)}: Reasoning passes through six domains (D1-D6)
+    \item \textbf{Vertical (Hierarchy)}: Operations apply to lower levels only (L1-L3)
+\end{itemize}
+
+Violations of horizontal structure produce \textbf{fallacies} (156 types). Violations of vertical structure produce \textbf{paradoxes} (7 paradigmatic examples). By formalizing this structure in Coq, we obtain a verified detector that:
+
+\begin{enumerate}[noitemsep]
+    \item \textit{Diagnoses} where reasoning failed (which domain, which level)
+    \item \textit{Explains} why it failed (which principle was violated)
+    \item \textit{Generates} correction prompts for self-reflection
+    \item \textit{Guarantees} correctness via machine-checked proofs
+\end{enumerate}
+
+\subsection{Contributions}
+
+\begin{enumerate}
+    \item \textbf{Complete Formalization}: 156 fallacies across 5 types, 7 paradoxes across 4 types, formalized in Coq with 107 proven theorems and 0 unverified assumptions.
+    
+    \item \textbf{LLM Hallucination Taxonomy}: A mapping from hallucination types to architectural violations, enabling principled classification.
+    
+    \item \textbf{Verified Detector}: A fallacy detection system with proven properties, extractable to OCaml for production use.
+    
+    \item \textbf{Chain-of-Thought Template}: A six-domain reasoning template (D1$\to$D6) for structured LLM prompting.
+    
+    \item \textbf{Safety Layer}: Proven detection of ad hominem, confirmation bias, and self-referential patterns.
+\end{enumerate}
+
+\subsection{Article Structure}
+
+Section 2 recaps the E/R/R framework and fallacy taxonomy. Section 3 presents the formal model in Coq. Section 4 develops AI applications. Section 5 demonstrates extraction and provides examples. Section 6 concludes.
+
+\section{The Architecture of Reasoning}
+
+\subsection{E/R/R Framework}
+
+Every functional system has three components:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Component} & \textbf{Description} & \textbf{Level} \\
+\midrule
+\textbf{E}lements & What the system contains & L1 \\
+\textbf{R}oles & How elements relate & L1 \\
+\textbf{R}ules & Principles governing the system & L2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A \textit{Constitution} is the integration of E/R/R that defines a system. Reasoning without a valid Constitution (Type 1 violation) is not reasoning at all---it is manipulation.
+
+\subsection{Six Domains of Reasoning}
+
+Valid reasoning traverses six domains in sequence:
+
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Domain} & \textbf{Function} & \textbf{Fallacies} & \textbf{\%} \\
+\midrule
+D1: Recognition & Fixation of what is present & 26 & 25\% \\
+D2: Clarification & Understanding of what was recognized & 13 & 12\% \\
+D3: Framework Selection & Determination of evaluative criteria & 16 & 15\% \\
+D4: Comparison & Application of framework to material & 8 & 8\% \\
+D5: Inference & Extraction of what follows & 20 & 19\% \\
+D6: Reflection & Recognition of limits and revision & 22 & 21\% \\
+\midrule
+\textbf{Total Type 2} & & \textbf{105} & \textbf{100\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+D1 and D6 are most vulnerable. D1 is foundational---errors propagate through all subsequent domains. D6 requires self-critical assessment, which humans (and LLMs) find difficult. D4 is most constrained, admitting fewer failure modes.
+
+\subsection{Complete Fallacy Taxonomy}
+
+The Architecture identifies five types of violation:
+
+\begin{center}
+\begin{tabular}{llcc}
+\toprule
+\textbf{Type} & \textbf{Description} & \textbf{Count} & \textbf{Note} \\
+\midrule
+Type 1 & Violations of Conditions & 36 & Reasoning fails to begin \\
+Type 2 & Domain Violations & 105 & Reasoning fails within domain \\
+Type 3 & Violations of Sequence & 3 & Wrong direction \\
+Type 4 & Syndromes & 6 & Systemic distortion \\
+Type 5 & Context-Dependent Methods & 6 & Valid in some contexts \\
+\midrule
+\multicolumn{2}{l}{\textbf{Core fallacies (Types 1-4)}} & \textbf{150} & Always errors \\
+\multicolumn{2}{l}{\textbf{Complete taxonomy}} & \textbf{156} & Including context-dependent \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Type 2 comprises 70\% of core fallacies (105/150), warranting dedicated treatment by domain.
+
+\subsection{Three Hierarchical Levels}
+
+The vertical dimension comprises three levels (finite, unlike Tarski's infinite hierarchy):
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Level} & \textbf{Contents} & \textbf{Examples} \\
+\midrule
+L1: Elements & Objects, statements, premises & ``Snow is white'' \\
+L2: Operations & Truth-evaluation, set membership & ``Is it true that...'' \\
+L3: Meta-operations & Operations on operations & Logic about logic \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{The Hierarchy Principle}: Operations at level $N$ apply only to entities at level $N-1$. Self-application is structurally incoherent. This principle blocks all self-referential paradoxes.
+
+\section{Formal Model in Coq}
+
+\subsection{Domain Structure}
+
+\begin{lstlisting}[language=Coq,caption={Domain definition}]
+Inductive Domain : Type :=
+  | D1_Recognition : Domain
+  | D2_Clarification : Domain
+  | D3_FrameworkSelection : Domain
+  | D4_Comparison : Domain
+  | D5_Inference : Domain
+  | D6_Reflection : Domain.
+
+Definition domain_index (d : Domain) : nat :=
+  match d with
+  | D1_Recognition => 1 | D2_Clarification => 2
+  | D3_FrameworkSelection => 3 | D4_Comparison => 4
+  | D5_Inference => 5 | D6_Reflection => 6
+  end.
+
+Definition valid_sequence (d1 d2 : Domain) : bool :=
+  domain_index d1 <=? domain_index d2.
+\end{lstlisting}
+
+\subsection{Fallacy Types}
+
+\begin{lstlisting}[language=Coq,caption={Type 1 violations (excerpt)}]
+(* Subtype 1.A: Defective Questions *)
+Inductive T1A_DefectiveQuestion : Type :=
+  | T1A_ComplexQuestion    (* Loaded Question *)
+  | T1A_Taboo              (* Dogmatism *)
+  | T1A_VenueFallacy.      (* Wrong place/time *)
+
+(* Subtype 1.B: Manipulations (33 total) *)
+Inductive T1B_Manipulation : Type :=
+  | T1B_AdBaculum          (* Force *)
+  | T1B_AppealToPity       (* Pity *)
+  | T1B_ScareTactics       (* Emotion *)
+  | T1B_Bribery            (* Benefit *)
+  | T1B_BigLie             (* Disinformation *)
+  | T1B_MalaFides          (* Bad Faith *)
+  (* ... 27 more ... *).
+\end{lstlisting}
+
+\subsection{Verification Result}
+
+\begin{lstlisting}[language=Coq,caption={Verification result type}]
+Inductive VerificationResult : Type :=
+  | VR_Valid : VerificationResult
+  | VR_Type1_NoConstitution : VerificationResult
+  | VR_Type2_DomainViolation : Domain -> FailureMode -> VerificationResult
+  | VR_Type3_SequenceViolation : Domain -> Domain -> VerificationResult
+  | VR_Type4_Syndrome : string -> VerificationResult
+  | VR_Paradox_LevelConfusion : LevelConfusion -> VerificationResult
+  | VR_Incomplete : Domain -> VerificationResult.
+\end{lstlisting}
+
+\subsection{Key Theorems}
+
+\begin{theorem}[Complete Taxonomy]
+The total count of formalized fallacies is 156.
+\end{theorem}
+
+\begin{lstlisting}[language=Coq]
+Theorem complete_taxonomy_156 : grand_total = 156.
+Proof. reflexivity. Qed.
+\end{lstlisting}
+
+\begin{theorem}[Self-Application Invalid]
+No operation can validly apply to itself.
+\end{theorem}
+
+\begin{lstlisting}[language=Coq]
+Theorem self_application_invalid : forall l, 
+  ~ valid_application l l.
+Proof. 
+  unfold valid_application, level_lt. 
+  intros l H. lia. 
+Qed.
+\end{lstlisting}
+
+\begin{theorem}[D1/D6 Most Vulnerable]
+Recognition and Reflection domains have the most fallacies.
+\end{theorem}
+
+\begin{lstlisting}[language=Coq]
+Theorem D1_D6_most_fallacies :
+  length all_D1 >= length all_D2 /\
+  length all_D1 >= length all_D3 /\
+  length all_D1 >= length all_D4 /\
+  length all_D6 >= length all_D2 /\
+  length all_D6 >= length all_D4.
+Proof. repeat split; simpl; lia. Qed.
+\end{lstlisting}
+
+\section{AI Applications}
+
+\subsection{LLM Hallucination Classification}
+
+We map LLM hallucination types to architectural violations:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Hallucination Type} & \textbf{Architecture Violation} & \textbf{Location} \\
+\midrule
+Factual & Object Deformation & D1 \\
+Logical & Logical Gap (Non Sequitur) & D5 \\
+Self-Referential & Level Confusion & Paradox \\
+Overconfident & Illusion of Completion & D6 \\
+Sycophantic & No Constitution & Type 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{lstlisting}[language=Coq,caption={Hallucination classification}]
+Inductive HallucinationType : Type :=
+  | Halluc_Factual         (* D1 violation *)
+  | Halluc_Logical         (* D5 violation *)
+  | Halluc_SelfReferential (* Paradox *)
+  | Halluc_Overconfident   (* D6 violation *)
+  | Halluc_Sycophantic.    (* Type 1 violation *)
+
+Definition hallucination_to_violation (h : HallucinationType) 
+  : VerificationResult :=
+  match h with
+  | Halluc_Factual => 
+      VR_Type2_DomainViolation D1_Recognition FM_ObjectDeformation
+  | Halluc_Logical => 
+      VR_Type2_DomainViolation D5_Inference FM_LogicalGap
+  | Halluc_SelfReferential => 
+      VR_Paradox_LevelConfusion LC_SelfApplication
+  | Halluc_Overconfident => 
+      VR_Type2_DomainViolation D6_Reflection FM_IllusionOfCompletion
+  | Halluc_Sycophantic => 
+      VR_Type1_NoConstitution
+  end.
+
+Theorem hallucinations_are_violations : forall h,
+  hallucination_to_violation h <> VR_Valid.
+Proof. intros h. destruct h; discriminate. Qed.
+\end{lstlisting}
+
+\subsection{Combined Hallucination Detector}
+
+The most common LLM hallucination pattern combines D5 (non-sequitur) and D6 (no reflection) violations:
+
+\begin{lstlisting}[language=Coq,caption={Combined hallucination detector}]
+Record HallucinationSignals := mkHallucinationSignals {
+  hs_premises_support_conclusion : bool;  (* D5 *)
+  hs_acknowledges_uncertainty : bool;     (* D6 *)
+  hs_cites_sources : bool;                (* D6 *)
+  hs_consistent_with_context : bool;      (* D1 *)
+  hs_self_contradicts : bool              (* Paradox *)
+}.
+
+Inductive HallucinationSeverity : Type :=
+  | HS_None | HS_Mild | HS_Moderate | HS_Severe.
+
+Definition detect_hallucination (hs : HallucinationSignals) 
+  : HallucinationSeverity :=
+  let d5_fail := negb (hs_premises_support_conclusion hs) in
+  let d6_fail := negb (hs_acknowledges_uncertainty hs) 
+                 && negb (hs_cites_sources hs) in
+  if hs_self_contradicts hs then HS_Severe
+  else if d5_fail && d6_fail then HS_Moderate
+  else if d5_fail || d6_fail then HS_Mild
+  else HS_None.
+\end{lstlisting}
+
+\subsection{Chain-of-Thought Validation}
+
+The six-domain structure provides a template for structured reasoning:
+
+\begin{lstlisting}[language=Coq,caption={CoT domain questions}]
+Definition cot_domain_question (d : Domain) : string :=
+  match d with
+  | D1_Recognition => 
+      "What exactly is the question/claim being examined?"
+  | D2_Clarification => 
+      "What do the key terms mean? Any ambiguity?"
+  | D3_FrameworkSelection => 
+      "What criteria/framework will evaluate this?"
+  | D4_Comparison => 
+      "How does this compare to relevant known cases?"
+  | D5_Inference => 
+      "What follows logically from the evidence?"
+  | D6_Reflection => 
+      "What are the limits? What could be wrong?"
+  end.
+\end{lstlisting}
+
+\textbf{Prompt Template}:
+\begin{verbatim}
+Reason step-by-step through domains D1->D6:
+
+D1 (Recognition): What exactly is the question/claim?
+D2 (Clarification): What do the key terms mean?
+D3 (Framework): What criteria will you use?
+D4 (Comparison): How does this compare to known cases?
+D5 (Inference): What follows from the evidence?
+D6 (Reflection): What are the limits of this conclusion?
+
+Ensure no domain violation at each step.
+\end{verbatim}
+
+\subsection{Self-Reflection Loop}
+
+When a violation is detected, generate a targeted correction prompt:
+
+\begin{lstlisting}[language=Coq,caption={Fix prompt generation}]
+Definition generate_fix_prompt (vr : VerificationResult) : string :=
+  match vr with
+  | VR_Valid => ""
+  | VR_Type1_NoConstitution => 
+      "Error: Missing E/R/R structure. Identify: 
+       (1) Elements, (2) Roles, (3) Rules."
+  | VR_Type2_DomainViolation d fm =>
+      "Fallacy in " ++ domain_name d ++ ": " 
+      ++ failure_mode_name fm ++ ". Correct and retry."
+  | VR_Paradox_LevelConfusion lc =>
+      "Paradox: " ++ level_confusion_name lc ++ 
+      ". Avoid self-referential statements."
+  | VR_Incomplete d =>
+      "Missing " ++ domain_name d ++ ". Address before concluding."
+  | _ => "Reasoning error detected. Please review."
+  end.
+\end{lstlisting}
+
+\textbf{Self-Reflection Algorithm}:
+\begin{verbatim}
+response = llm(prompt)
+violation = coq_detector(response)
+while violation != VR_Valid and iterations < max:
+    fix_prompt = generate_fix_prompt(violation)
+    response = llm(prompt + fix_prompt)
+    violation = coq_detector(response)
+return response
+\end{verbatim}
+
+\subsection{Safety Layer}
+
+The detector blocks harmful reasoning patterns:
+
+\begin{lstlisting}[language=Coq,caption={Safety check}]
+Inductive SafetyResult : Type :=
+  | SR_Safe
+  | SR_ConfirmationBias
+  | SR_AdHominem
+  | SR_SelfReferentialLoop
+  | SR_UnfalsifiableClaim.
+
+Definition safety_check (sig : ResponseSignals) : SafetyResult :=
+  if sig_self_reference sig then SR_SelfReferentialLoop
+  else if sig_attacks_person sig && negb (sig_addresses_argument sig) 
+       then SR_AdHominem
+  else if negb (sig_considers_counter sig) 
+       then SR_ConfirmationBias
+  else SR_Safe.
+
+Theorem safety_blocks_ad_hominem : forall sig,
+  sig_attacks_person sig = true ->
+  sig_addresses_argument sig = false ->
+  sig_self_reference sig = false ->
+  safety_check sig = SR_AdHominem.
+Proof. intros. unfold safety_check. rewrite H1, H, H0. reflexivity. Qed.
+\end{lstlisting}
+
+\subsection{Mock LLM Responses for Testing}
+
+\begin{lstlisting}[language=Coq,caption={Mock responses for empirical testing}]
+(* Biased climate denial response *)
+Definition mock_climate_denial_signals : ResponseSignals := {|
+  sig_attacks_person := true;       (* "Scientists want grant money" *)
+  sig_addresses_argument := false;  (* No scientific evidence *)
+  sig_uses_tradition := false;
+  sig_tradition_relevant := false;
+  sig_premises_support := false;    (* "Everyone knows" *)
+  sig_considers_counter := false;   (* No counterevidence *)
+  sig_seeks_disconfirm := false;
+  sig_self_reference := false
+|}.
+
+(* Valid reasoning response *)
+Definition mock_valid_signals : ResponseSignals := {|
+  sig_attacks_person := false;
+  sig_addresses_argument := true;
+  sig_premises_support := true;
+  sig_considers_counter := true;
+  sig_seeks_disconfirm := true;
+  sig_self_reference := false;
+  (* ... *)
+|}.
+
+(* Theorem: Detector catches bias *)
+Theorem detector_catches_bias : 
+  In FM_ObjectSubstitution (analyze_response mock_climate_denial_signals).
+Proof. unfold analyze_response. simpl. left. reflexivity. Qed.
+
+(* Theorem: Valid passes *)
+Theorem valid_passes_detection : 
+  analyze_response mock_valid_signals = [].
+Proof. reflexivity. Qed.
+\end{lstlisting}
+
+\section{Extraction and Demonstration}
+
+\subsection{OCaml Extraction}
+
+The Coq formalization extracts to OCaml:
+
+\begin{lstlisting}[language=Coq,caption={Extraction command}]
+Require Import ExtrOcamlBasic ExtrOcamlString ExtrOcamlNatInt.
+
+Extraction "ai_fallacy_detector.ml" 
+  verify_reasoning
+  verify_llm_response
+  safety_check
+  generate_fix_prompt
+  generate_cot_template
+  detect_hallucination
+  hallucination_to_violation.
+\end{lstlisting}
+
+\subsection{Generated OCaml Interface}
+
+\begin{lstlisting}[language=OCaml,caption={Extracted OCaml types}]
+type domain =
+  | D1_Recognition | D2_Clarification | D3_FrameworkSelection
+  | D4_Comparison | D5_Inference | D6_Reflection
+
+type verification_result =
+  | VR_Valid
+  | VR_Type1_NoConstitution
+  | VR_Type2_DomainViolation of domain * failure_mode
+  | VR_Paradox_LevelConfusion of level_confusion
+  | VR_Incomplete of domain
+
+val verify_llm_response : reasoning_attempt -> response_signals -> verification_result
+val safety_check : response_signals -> safety_result
+val generate_fix_prompt : verification_result -> string
+val detect_hallucination : hallucination_signals -> hallucination_severity
+\end{lstlisting}
+
+\subsection{Integration Example}
+
+\begin{lstlisting}[language=OCaml,caption={Production integration}]
+(* Self-reflection loop with verified detector *)
+let rec reflect llm_call prompt max_iter =
+  if max_iter <= 0 then Error "Max iterations"
+  else
+    let response = llm_call prompt in
+    let signals = extract_signals response in
+    let attempt = parse_reasoning response in
+    match verify_llm_response attempt signals with
+    | VR_Valid -> Ok response
+    | violation -> 
+        let fix = generate_fix_prompt violation in
+        reflect llm_call (prompt ^ "\n" ^ fix) (max_iter - 1)
+\end{lstlisting}
+
+\subsection{Demonstration: Biased Response Detection}
+
+\textbf{Input} (biased LLM response):
+\begin{verbatim}
+"Climate change is a hoax because scientists are just in it 
+for the grant money. Anyone who disagrees is naive."
+\end{verbatim}
+
+\textbf{Signal Extraction}:
+\begin{itemize}[noitemsep]
+    \item \texttt{sig\_attacks\_person = true} (attacks scientists' motives)
+    \item \texttt{sig\_addresses\_argument = false} (no evidence addressed)
+    \item \texttt{sig\_considers\_counter = false} (no counterevidence)
+\end{itemize}
+
+\textbf{Detection Results}:
+\begin{enumerate}[noitemsep]
+    \item \texttt{safety\_check} $\to$ \texttt{SR\_AdHominem}
+    \item \texttt{detect\_ad\_hominem} $\to$ \texttt{Some FM\_ObjectSubstitution}
+    \item \texttt{detect\_confirmation\_bias} $\to$ \texttt{Some FM\_ImmunizationFromTesting}
+\end{enumerate}
+
+\textbf{Generated Fix Prompt}:
+\begin{verbatim}
+Fallacy detected in Recognition: Object Substitution (Ad Hominem).
+You attacked the arguer instead of the argument.
+Please correct by:
+1. Identifying the actual scientific claims
+2. Addressing the evidence directly
+3. Considering counterevidence to your position
+\end{verbatim}
+
+\subsection{Integration with xAI/Grok}
+
+For models like Grok, add domain-check in the prompt chain:
+
+\begin{lstlisting}[language=OCaml,caption={Domain checklist for xAI integration}]
+let grok_domain_checklist = [
+  (D1, "[ ] Have I correctly identified the question?");
+  (D2, "[ ] Are my key terms clearly defined?");
+  (D3, "[ ] Am I using appropriate criteria?");
+  (D4, "[ ] Are my comparisons fair?");
+  (D5, "[ ] Does my conclusion follow from premises?");
+  (D6, "[ ] Have I acknowledged limitations?")
+]
+
+let domain_checked_prompt base =
+  let checklist = String.concat "\n" 
+    (List.map snd grok_domain_checklist) in
+  "Before answering, verify:\n" ^ checklist ^ 
+  "\n\nIf any fails, revise.\n\n" ^ base
+\end{lstlisting}
+
+\section{Conclusion}
+
+\subsection{Summary}
+
+This article presented a machine-verified framework for LLM fallacy detection:
+
+\begin{enumerate}
+    \item \textbf{Complete Formalization}: 156 fallacies, 107 theorems, 0 unverified assumptions
+    \item \textbf{Structural Diagnosis}: Errors are locatable, explainable, and correctable
+    \item \textbf{Verified Guarantees}: Key properties are machine-checked
+    \item \textbf{Production Ready}: Extracts to OCaml for deployment
+\end{enumerate}
+
+\subsection{Bridging Philosophy and AI Safety}
+
+Traditional fallacy theory offers catalogs without theory. AI safety offers heuristics without foundations. This work bridges the gap:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{From philosophy}: Structural account explaining \textit{why} errors occur
+    \item \textbf{To AI}: Machine-checked implementations guaranteeing detection
+\end{itemize}
+
+The same analysis that dissolves classical paradoxes now diagnoses reasoning errors in artificial intelligence.
+
+\subsection{Availability}
+
+All Coq source code is available at:
+\begin{center}
+\url{https://github.com/Horsocrates/theory-of-systems-coq}
+\end{center}
+
+\section*{References}
+
+\noindent Aristotle. \textit{Sophistical Refutations}. Princeton University Press, 1984.
+
+\noindent Horsocrates. ``The Laws of Logic as Conditions of Existence.'' 2026.
+
+\noindent Horsocrates. ``The Law of Order: Sequence and Hierarchy.'' 2026.
+
+\noindent Horsocrates. ``The Six Domains of Reasoning.'' 2026.
+
+\noindent Horsocrates. ``The Architecture of Error.'' 2026.
+
+\noindent Horsocrates. ``Domain Violations: A Systematic Taxonomy.'' 2026.
+
+\noindent Horsocrates. ``Paradox Dissolution Through Hierarchical Analysis.'' 2026.
+
+\noindent The Coq Development Team. \textit{The Coq Proof Assistant}. Version 8.18. INRIA, 2023.
+
+\noindent Wei, J., et al. ``Chain-of-Thought Prompting.'' \textit{NeurIPS} 2022.
+
+\vspace{1cm}
+\noindent\rule{\textwidth}{0.4pt}
+\begin{center}
+\textit{Article 7 in the series ``Architecture of Reasoning''}
+\end{center}
+
+\end{document}

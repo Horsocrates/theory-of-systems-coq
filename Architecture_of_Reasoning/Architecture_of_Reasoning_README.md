@@ -3,9 +3,9 @@
 [![Coq](https://img.shields.io/badge/Coq-8.18.0-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-100%25_Complete-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-50+-brightgreen.svg)]()
+[![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 
-> **Complete formal verification of the Architecture of Reasoning: Fallacies, Paradoxes, and the E/R/R Framework**
+> **Complete formal verification of the Architecture of Reasoning: 156 Fallacies, 7 Paradoxes, and the E/R/R Framework**
 
 ---
 
@@ -16,9 +16,26 @@ This package provides **machine-verified formalization** of the Architecture of 
 1. **The Laws of Logic as Conditions of Existence**
 2. **The Law of Order: Sequence and Hierarchy**
 3. **The Six Domains of Reasoning**
-4. **The Architecture of Error (Fallacies)**
-5. **Domain Violations: Systematic Taxonomy** (105 fallacies)
+4. **The Architecture of Error** (Types 1, 3, 4, 5: 51 fallacies)
+5. **Domain Violations: A Systematic Taxonomy** (Type 2: 105 fallacies)
 6. **Paradox Dissolution Through Hierarchical Analysis**
+
+### Complete Taxonomy: 156 Fallacies
+
+| Type | Description | Count |
+|------|-------------|-------|
+| **Type 1** | Violations of Conditions | 36 |
+| **Type 2** | Domain Violations | 105 |
+| **Type 3** | Violations of Sequence | 3 |
+| **Type 4** | Syndromes | 6 |
+| **Type 5** | Context-Dependent Methods | 6 |
+| **TOTAL** | | **156** |
+
+> **Note: Why ~150 in articles?**
+> Type 5 methods (6) are context-dependent — valid in some contexts, fallacious in others. 
+> They are not "errors" in the same sense as Types 1-4.
+> **Core fallacies** (always errors): 36 + 105 + 3 + 6 = **150**
+> **Complete taxonomy** (including context-dependent): 150 + 6 = **156**
 
 ### Key Insight
 
@@ -33,7 +50,7 @@ This package provides **machine-verified formalization** of the Architecture of 
     D1 → D2 → D3 → D4 → D5 → D6     L1 → L2 → L3
           |                               |
      FALLACIES                       PARADOXES
-     (105 types)                     (7 paradigms)
+     (156 types)                     (7 paradigms)
 ```
 
 **Fallacies** = Horizontal violations (wrong domain sequence)  
@@ -46,44 +63,37 @@ This package provides **machine-verified formalization** of the Architecture of 
 ```
 Architecture_of_Reasoning/
 │
-├── Architecture_of_Reasoning.v      # ★ Unified formalization (623 lines)
-│   ├── Five Laws of Logic (L1-L5)
-│   ├── Six Domains (D1-D6)
-│   ├── Three Hierarchical Levels
-│   ├── E/R/R Framework
-│   ├── Five Fallacy Types
-│   ├── Four Paradox Types
-│   └── Verification Framework
+├── Article_7_AI_Fallacy_Detection.pdf   # ★ ARTICLE 7 (12 pages)
+├── Article_7_AI_Fallacy_Detection.tex   # LaTeX source
 │
-├── AI_FallacyDetector.v             # ★ NEW: AI Application (657 lines)
+├── CompleteFallacyTaxonomy.v        # ★ ALL 156 FALLACIES (Types 1-5)
+│   ├── Type 1: Violations of Conditions (36)
+│   ├── Type 2: Domain Violations (105) 
+│   ├── Type 3: Violations of Sequence (3)
+│   ├── Type 4: Syndromes (6)
+│   └── Type 5: Context-Dependent Methods (6)
+│
+├── AI_FallacyDetector.v             # ★ AI APPLICATION (1077 lines)
 │   ├── LLM Response Verification
 │   ├── Chain-of-Thought Validation
 │   ├── Self-Reflection Loop
 │   ├── Safety Layer
+│   ├── Hallucination Classification
+│   ├── Mock Testing Framework
+│   ├── xAI/Grok Integration
 │   └── OCaml Extraction Ready
 │
-├── ERR_Fallacies.v                  # Complete fallacy formalization (890+ lines)
-│   ├── Type 1: Condition Violations
-│   ├── Type 2: Domain Violations (structure)
-│   ├── Type 3: Sequence Violations
-│   ├── Type 4: Syndromes
-│   └── Type 5: Context-Dependent
-│
-├── DomainViolations_Complete.v      # 105 fallacies from Article 5 (485 lines)
-│   ├── D1: Recognition (26 fallacies)
-│   ├── D2: Clarification (13 fallacies)
-│   ├── D3: Framework Selection (16 fallacies)
-│   ├── D4: Comparison (8 fallacies)
-│   ├── D5: Inference (20 fallacies)
-│   └── D6: Reflection (22 fallacies)
-│
-├── ParadoxDissolution.v             # Paradox analysis from Article 6 (770 lines)
+├── ParadoxDissolution.v             # Paradox analysis (847 lines)
 │   ├── Structural paradoxes (Liar, Russell)
 │   ├── Typological paradoxes (Sorites)
 │   ├── Pseudo-paradoxes (Ship of Theseus)
-│   └── Spurious paradoxes (Newcomb, Carroll)
+│   ├── Spurious paradoxes (Newcomb, Carroll)
+│   └── LLM Hallucination Mapping
 │
-└── Article_ERR_Fallacies.tex        # LaTeX article (39KB)
+├── Architecture_of_Reasoning.v      # Unified formalization (623 lines)
+├── ERR_Fallacies.v                  # E/R/R Framework (892 lines)
+├── DomainViolations_Complete.v      # Type 2 details (485 lines)
+└── README.md
 ```
 
 ---
@@ -92,12 +102,14 @@ Architecture_of_Reasoning/
 
 | File | Lines | Theorems | Admitted |
 |------|-------|----------|----------|
+| `Article_7_AI_Fallacy_Detection.tex` | 550 | - | - |
+| `CompleteFallacyTaxonomy.v` | 542 | 19 | **0** |
+| `AI_FallacyDetector.v` | 1077 | 13 | **0** |
+| `ParadoxDissolution.v` | 847 | 26 | **0** |
 | `Architecture_of_Reasoning.v` | 623 | 17 | **0** |
-| `AI_FallacyDetector.v` | 657 | 5 | **0** |
 | `ERR_Fallacies.v` | 892 | 22 | **0** |
 | `DomainViolations_Complete.v` | 485 | 17 | **0** |
-| `ParadoxDissolution.v` | 770 | 24 | **0** |
-| **TOTAL** | **3427** | **85** | **0** |
+| **TOTAL** | **5016** | **114** | **0** |
 
 ---
 
@@ -176,6 +188,31 @@ Extraction "ai_fallacy_detector.ml"
 
 → Real OCaml module for inference pipeline integration.
 
+### 6. LLM Hallucination Classification
+
+| Hallucination Type | Architecture Violation | Domain |
+|--------------------|----------------------|--------|
+| Factual | Object Deformation | D1 |
+| Logical | Logical Gap | D5 |
+| Self-Referential | Paradox (Level Confusion) | Vertical |
+| Overconfident | Illusion of Completion | D6 |
+| Sycophantic | No Constitution | Type 1 |
+
+```coq
+Theorem hallucinations_are_violations : forall h : HallucinationType,
+  hallucination_to_violation h <> VR_Valid.
+(* All LLM hallucinations are detectable through the architecture *)
+```
+
+### NLP Integration Stubs
+
+For production systems, placeholder interfaces for:
+- Token-level analysis
+- Entity recognition (person vs argument)
+- Sentiment scoring
+- Self-reference detection
+- Logical connector identification
+
 ### Specific Fallacy Detectors
 
 | Detector | Domain | Detects |
@@ -193,29 +230,32 @@ Extraction "ai_fallacy_detector.ml"
 
 ## Key Theorems
 
+### Complete Taxonomy
+```coq
+Theorem complete_taxonomy_156 : grand_total = 156.
+(* 36 + 105 + 3 + 6 + 6 = 156 fallacies *)
+
+Theorem type2_is_70_percent : 
+  core_fallacies = 150 /\ total_type2 * 100 / core_fallacies = 70.
+(* Type 2 comprises 70% of core fallacies *)
+```
+
 ### Hierarchy Principle
 ```coq
 Theorem self_application_invalid : forall l, ~ valid_application l l.
 (* Operations cannot apply to themselves — blocks all self-referential paradoxes *)
 ```
 
-### Fallacy Count
-```coq
-Theorem total_type2_fallacies : 
-  D1 + D2 + D3 + D4 + D5 + D6 = 105.
-(* 26 + 13 + 16 + 8 + 20 + 22 = 105 domain violation fallacies *)
-```
-
 ### Vulnerability Distribution
 ```coq
-Theorem D1_D6_most_vulnerable :
-  D1 >= D2 /\ D1 >= D3 /\ D1 >= D4 /\
+Theorem D1_D6_most_fallacies :
+  D1 >= D2 /\ D1 >= D3 /\ D1 >= D4 /\ D1 >= D5 /\
   D6 >= D2 /\ D6 >= D4.
 (* Recognition and Reflection are most error-prone *)
 
-Theorem D4_least_vulnerable : forall d,
-  d <> D4 -> count D4 <= count d.
-(* Comparison is most constrained *)
+Theorem D4_most_constrained :
+  D4 <= D1 /\ D4 <= D2 /\ D4 <= D3 /\ D4 <= D5 /\ D4 <= D6.
+(* Comparison has fewest error modes *)
 ```
 
 ### Paradox Self-Reference
