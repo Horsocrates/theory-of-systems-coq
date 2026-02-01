@@ -120,40 +120,70 @@ Proof. unfold valid_application, level_lt. simpl. lia. Qed.
 (* ========================================================================= *)
 
 (**
-   Four types of paradoxes based on where the problem is located:
+   THREE categories of paradoxes based on where the problem is located
+   (Article 6 v2 classification - 46 paradoxes total):
    
-   1. STRUCTURAL (true paradoxes): 
-      - Premises appear correct, reasoning valid, but contradiction results
-      - Problem: structure permits level mixing
+   1. STRUCTURAL PARADOXES (13): 
+      - Self-referential constructions that mix hierarchical levels
+      - Problem: the construction itself permits level confusion
       - Resolution: hierarchical separation
-      - Examples: Liar, Russell, Grelling-Nelson
+      - Subtypes:
+        * Semantic (9): Liar, Epimenides, Grelling-Nelson, Berry, Richard,
+                        Curry, Crocodile, Buridan's Bridge, Yablo
+        * Set-theoretic (4): Russell, Barber, Burali-Forti, Cantor
    
-   2. TYPOLOGICAL:
-      - Wrong logical instrument applied to object
-      - Problem: mismatch between tool and material (D3 error)
-      - Resolution: change framework
-      - Example: Sorites
+   2. DEFECTIVE PARADOXES (25):
+      - Premises contain flaws; no genuine contradiction exists
+      - Problem: detected in Domain 2 (Clarification) or Domain 3 (Framework)
+      - Resolution: explicate and reject the defect
+      - Subtypes:
+        * Indeterminacy (6): Sorites, Bald Man, Color Spectrum, Ship of Theseus,
+                             Grandfather's Axe, Teleportation
+        * Indeterminacy-Infinity (5): Hilbert's Hotel, Galileo, Banach-Tarski,
+                                      Thomson's Lamp, Ross-Littlewood
+        * Contradiction (4): Unexpected Hanging, Court, Omnipotence, Stone
+        * Hidden Contradiction (1): Newcomb
+        * False Premise (4): Grandfather, Zeno's Achilles/Dichotomy/Arrow
+        * Reasoning Error (4): Two Envelopes, Horned Man, Horse, Masked Man
+        * Category Error (1): Carroll's Tortoise
    
-   3. PSEUDO-PARADOXES:
-      - Explicit defect in premises (contradiction/ambiguity)
-      - Problem: detected in D2 Clarification
-      - Resolution: clarify or reject premises
-      - Examples: Unexpected Hanging, Ship of Theseus, Omnipotence
-   
-   4. SPURIOUS:
-      - Hidden contradiction or category error
-      - Problem: concealed assumption
-      - Resolution: expose and reject conflation
-      - Examples: Newcomb, Carroll's Tortoise
+   3. NON-PARADOXES (8):
+      - No contradiction exists; result is correct but counter-intuitive
+      - Problem: none (intuition misleads)
+      - Resolution: explain the correct but surprising result
+      - Subtypes:
+        * Counter-intuitive (4): Monty Hall, Birthday, Simpson's, False Positive
+        * Epistemic (2): Lottery, Preface
+        * Other (2): Buridan's Ass, Raven
 *)
 
-Inductive ParadoxType : Type :=
-  | Structural : ParadoxType      (* True paradoxes - level mixing *)
-  | Typological : ParadoxType     (* Instrument-object mismatch *)
-  | Pseudo : ParadoxType          (* Explicit premise defect *)
-  | Spurious : ParadoxType.       (* Hidden contradiction *)
+Inductive ParadoxCategory : Type :=
+  | Structural : ParadoxCategory     (* True paradoxes - self-referential level mixing *)
+  | Defective : ParadoxCategory      (* Flawed premises - no genuine contradiction *)
+  | NonParadox : ParadoxCategory.    (* Counter-intuitive but correct results *)
 
-(** Where each type is diagnosed in domain analysis *)
+(** Subtypes for Structural paradoxes *)
+Inductive StructuralSubtype : Type :=
+  | Semantic : StructuralSubtype        (* Language-based self-reference *)
+  | SetTheoretic : StructuralSubtype.   (* Set-theoretic self-reference *)
+
+(** Subtypes for Defective paradoxes *)
+Inductive DefectiveSubtype : Type :=
+  | Indeterminacy : DefectiveSubtype       (* Vague concepts *)
+  | IndeterminacyInfinity : DefectiveSubtype (* Infinity as object vs process *)
+  | Contradiction : DefectiveSubtype       (* Explicit or hidden contradiction *)
+  | HiddenContradiction : DefectiveSubtype (* Concealed incompatible premises *)
+  | FalsePremise : DefectiveSubtype        (* Assumed but false premises *)
+  | ReasoningError : DefectiveSubtype      (* Correct premises, flawed reasoning *)
+  | CategoryError : DefectiveSubtype.      (* Level confusion via illegitimate demand *)
+
+(** Subtypes for Non-paradoxes *)
+Inductive NonParadoxSubtype : Type :=
+  | CounterIntuitive : NonParadoxSubtype   (* Probability/statistics surprises *)
+  | Epistemic : NonParadoxSubtype          (* Belief/knowledge puzzles *)
+  | Other : NonParadoxSubtype.             (* Miscellaneous *)
+
+(** Where each category is diagnosed in domain analysis *)
 Inductive Domain : Type :=
   | D1_Recognition : Domain
   | D2_Clarification : Domain
@@ -162,27 +192,39 @@ Inductive Domain : Type :=
   | D5_Inference : Domain
   | D6_Reflection : Domain.
 
-Definition paradox_diagnosis_domain (pt : ParadoxType) : Domain :=
-  match pt with
-  | Structural => D6_Reflection      (* Requires framework correction *)
-  | Typological => D3_FrameworkSelection (* Wrong instrument selected *)
-  | Pseudo => D2_Clarification       (* Premise defect exposed *)
-  | Spurious => D2_Clarification     (* Hidden assumption exposed *)
+Definition category_diagnosis_domain (pc : ParadoxCategory) : Domain :=
+  match pc with
+  | Structural => D3_FrameworkSelection   (* Framework permits level confusion *)
+  | Defective => D2_Clarification         (* Premise defect exposed *)
+  | NonParadox => D5_Inference            (* Correct reasoning, counter-intuitive result *)
   end.
 
-(** Resolution strategy for each type *)
+(** Resolution strategy for each category *)
 Inductive Resolution : Type :=
   | HierarchicalSeparation : Resolution   (* Enforce level distinction *)
-  | ChangeFramework : Resolution          (* Select appropriate logic *)
-  | ClarifyPremises : Resolution          (* Expose/reject defect *)
-  | ExposeHiddenAssumption : Resolution.  (* Reveal conflation *)
+  | ExplicateDefect : Resolution          (* Expose and reject flawed premise *)
+  | ExplainResult : Resolution.           (* Clarify the correct but surprising result *)
 
-Definition paradox_resolution (pt : ParadoxType) : Resolution :=
-  match pt with
+Definition category_resolution (pc : ParadoxCategory) : Resolution :=
+  match pc with
   | Structural => HierarchicalSeparation
-  | Typological => ChangeFramework
-  | Pseudo => ClarifyPremises
-  | Spurious => ExposeHiddenAssumption
+  | Defective => ExplicateDefect
+  | NonParadox => ExplainResult
+  end.
+
+(* Legacy compatibility - map old types to new categories *)
+Inductive ParadoxType : Type :=
+  | Structural_Old : ParadoxType     (* Maps to Structural *)
+  | Typological : ParadoxType        (* Maps to Defective (Category Error) *)
+  | Pseudo : ParadoxType             (* Maps to Defective *)
+  | Spurious : ParadoxType.          (* Maps to Defective (Hidden Contradiction) *)
+
+Definition old_type_to_category (pt : ParadoxType) : ParadoxCategory :=
+  match pt with
+  | Structural_Old => Structural
+  | Typological => Defective
+  | Pseudo => Defective
+  | Spurious => Defective
   end.
 
 (* ========================================================================= *)
@@ -206,131 +248,438 @@ Inductive LevelConfusion : Type :=
   | HiddenDeterminism : LevelConfusion.
       (* Free choice vs determination conflict *)
 
-(** Which paradox type each confusion pattern generates *)
+(** Which paradox type each confusion pattern generates (legacy) *)
 Definition confusion_to_paradox_type (c : LevelConfusion) : ParadoxType :=
   match c with
-  | SelfApplication => Structural
-  | ContainerAsContent => Structural
-  | EvaluatorAsEvaluated => Structural
+  | SelfApplication => Structural_Old
+  | ContainerAsContent => Structural_Old
+  | EvaluatorAsEvaluated => Structural_Old
   | RuleAsPremise => Spurious
   | InstrumentObjectMismatch => Typological
   | ConceptualAmbiguity => Pseudo
   | HiddenDeterminism => Spurious
   end.
 
+(** Which category each confusion pattern generates (new) *)
+Definition confusion_to_category (c : LevelConfusion) : ParadoxCategory :=
+  match c with
+  | SelfApplication => Structural
+  | ContainerAsContent => Structural
+  | EvaluatorAsEvaluated => Structural
+  | RuleAsPremise => Defective       (* Category error *)
+  | InstrumentObjectMismatch => Defective  (* Indeterminacy *)
+  | ConceptualAmbiguity => Defective (* Various defects *)
+  | HiddenDeterminism => Defective   (* Hidden contradiction *)
+  end.
+
 (* ========================================================================= *)
-(*                    PART V: SPECIFIC PARADOXES                            *)
+(*                    PART V: COMPLETE CATALOG OF 46 PARADOXES              *)
 (* ========================================================================= *)
 
-(** Classical paradox record with full analysis *)
-Record ClassicalParadox := mkClassicalParadox {
-  p_name : nat;                        (* Identifier *)
-  p_type : ParadoxType;                (* Classification *)
-  p_confusion : LevelConfusion;        (* Pattern of level confusion *)
-  p_level_violated : HierarchicalLevel (* Which level boundary crossed *)
+(**
+   Full catalog based on Article 6 v2:
+   - Structural (13): S.1-S.13
+   - Defective (25): D.1-D.25
+   - Non-paradox (8): N.1-N.8
+   Total: 46
+*)
+
+(** Paradox record with new classification *)
+Record Paradox46 := mkParadox46 {
+  px_id : nat;                          (* Unique identifier *)
+  px_name : nat;                        (* Name encoding *)
+  px_category : ParadoxCategory;        (* Main category *)
+  px_confusion : LevelConfusion;        (* Pattern of level confusion *)
+  px_level_violated : HierarchicalLevel (* Which level boundary crossed *)
 }.
 
-(** Define specific paradoxes *)
+(** ============ STRUCTURAL PARADOXES (13) ============ *)
 
-(** STRUCTURAL PARADOXES *)
-
-Definition Liar_Paradox : ClassicalParadox := {|
-  p_name := 1;
-  p_type := Structural;
-  p_confusion := EvaluatorAsEvaluated;
-  p_level_violated := L2_Operations  (* Truth-evaluation at L2 in L1 statement *)
+(** S.1-S.9: Semantic paradoxes *)
+Definition S1_Liar : Paradox46 := {|
+  px_id := 1; px_name := 1;
+  px_category := Structural;
+  px_confusion := EvaluatorAsEvaluated;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Russell_Paradox : ClassicalParadox := {|
-  p_name := 2;
-  p_type := Structural;
-  p_confusion := ContainerAsContent;
-  p_level_violated := L2_Operations  (* Set (L2) as element of itself (L1) *)
+Definition S2_Epimenides : Paradox46 := {|
+  px_id := 2; px_name := 2;
+  px_category := Structural;
+  px_confusion := EvaluatorAsEvaluated;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Grelling_Nelson : ClassicalParadox := {|
-  p_name := 3;
-  p_type := Structural;
-  p_confusion := SelfApplication;
-  p_level_violated := L2_Operations  (* Predicate applies to itself *)
+Definition S3_GrellingNelson : Paradox46 := {|
+  px_id := 3; px_name := 3;
+  px_category := Structural;
+  px_confusion := SelfApplication;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Berry_Paradox : ClassicalParadox := {|
-  p_name := 4;
-  p_type := Structural;
-  p_confusion := SelfApplication;
-  p_level_violated := L2_Operations  (* Self-referential definition *)
+Definition S4_Berry : Paradox46 := {|
+  px_id := 4; px_name := 4;
+  px_category := Structural;
+  px_confusion := SelfApplication;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Richard_Paradox : ClassicalParadox := {|
-  p_name := 5;
-  p_type := Structural;
-  p_confusion := SelfApplication;
-  p_level_violated := L2_Operations  (* Diagonal on definable reals *)
+Definition S5_Richard : Paradox46 := {|
+  px_id := 5; px_name := 5;
+  px_category := Structural;
+  px_confusion := SelfApplication;
+  px_level_violated := L2_Operations
 |}.
 
-(** TYPOLOGICAL PARADOXES *)
-
-Definition Sorites_Paradox : ClassicalParadox := {|
-  p_name := 6;
-  p_type := Typological;
-  p_confusion := InstrumentObjectMismatch;
-  p_level_violated := L1_Elements  (* Vague concept treated with binary logic *)
+Definition S6_Curry : Paradox46 := {|
+  px_id := 6; px_name := 6;
+  px_category := Structural;
+  px_confusion := EvaluatorAsEvaluated;
+  px_level_violated := L2_Operations
 |}.
 
-(** PSEUDO-PARADOXES *)
-
-Definition Unexpected_Hanging : ClassicalParadox := {|
-  p_name := 7;
-  p_type := Pseudo;
-  p_confusion := ConceptualAmbiguity;
-  p_level_violated := L1_Elements  (* "Announced surprise" contradictory *)
+Definition S7_Crocodile : Paradox46 := {|
+  px_id := 7; px_name := 7;
+  px_category := Structural;
+  px_confusion := EvaluatorAsEvaluated;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Ship_of_Theseus : ClassicalParadox := {|
-  p_name := 8;
-  p_type := Pseudo;
-  p_confusion := ConceptualAmbiguity;
-  p_level_violated := L1_Elements  (* Multiple identity criteria conflated *)
+Definition S8_BuridanBridge : Paradox46 := {|
+  px_id := 8; px_name := 8;
+  px_category := Structural;
+  px_confusion := EvaluatorAsEvaluated;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Omnipotence_Paradox : ClassicalParadox := {|
-  p_name := 9;
-  p_type := Pseudo;
-  p_confusion := ConceptualAmbiguity;
-  p_level_violated := L3_MetaOperations  (* Power over vs within logic *)
+Definition S9_Yablo : Paradox46 := {|
+  px_id := 9; px_name := 9;
+  px_category := Structural;
+  px_confusion := EvaluatorAsEvaluated;
+  px_level_violated := L2_Operations
 |}.
 
-(** SPURIOUS PARADOXES *)
-
-Definition Newcomb_Paradox : ClassicalParadox := {|
-  p_name := 10;
-  p_type := Spurious;
-  p_confusion := HiddenDeterminism;
-  p_level_violated := L2_Operations  (* Determinism vs free choice *)
+(** S.10-S.13: Set-theoretic paradoxes *)
+Definition S10_Russell : Paradox46 := {|
+  px_id := 10; px_name := 10;
+  px_category := Structural;
+  px_confusion := ContainerAsContent;
+  px_level_violated := L2_Operations
 |}.
 
-Definition Carroll_Tortoise : ClassicalParadox := {|
-  p_name := 11;
-  p_type := Spurious;
-  p_confusion := RuleAsPremise;
-  p_level_violated := L2_Operations  (* Inference rule (L2) as premise (L1) *)
+Definition S11_Barber : Paradox46 := {|
+  px_id := 11; px_name := 11;
+  px_category := Structural;
+  px_confusion := ContainerAsContent;
+  px_level_violated := L2_Operations
 |}.
 
-(** Complete catalog *)
-Definition all_paradoxes : list ClassicalParadox := [
-  Liar_Paradox;
-  Russell_Paradox;
-  Grelling_Nelson;
-  Berry_Paradox;
-  Richard_Paradox;
-  Sorites_Paradox;
-  Unexpected_Hanging;
-  Ship_of_Theseus;
-  Omnipotence_Paradox;
-  Newcomb_Paradox;
-  Carroll_Tortoise
+Definition S12_BuraliForti : Paradox46 := {|
+  px_id := 12; px_name := 12;
+  px_category := Structural;
+  px_confusion := ContainerAsContent;
+  px_level_violated := L3_MetaOperations
+|}.
+
+Definition S13_Cantor : Paradox46 := {|
+  px_id := 13; px_name := 13;
+  px_category := Structural;
+  px_confusion := ContainerAsContent;
+  px_level_violated := L3_MetaOperations
+|}.
+
+(** ============ DEFECTIVE PARADOXES (25) ============ *)
+
+(** D.1-D.6: Indeterminacy *)
+Definition D1_Sorites : Paradox46 := {|
+  px_id := 14; px_name := 101;
+  px_category := Defective;
+  px_confusion := InstrumentObjectMismatch;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D2_BaldMan : Paradox46 := {|
+  px_id := 15; px_name := 102;
+  px_category := Defective;
+  px_confusion := InstrumentObjectMismatch;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D3_ColorSpectrum : Paradox46 := {|
+  px_id := 16; px_name := 103;
+  px_category := Defective;
+  px_confusion := InstrumentObjectMismatch;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D4_ShipOfTheseus : Paradox46 := {|
+  px_id := 17; px_name := 104;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D5_GrandfatherAxe : Paradox46 := {|
+  px_id := 18; px_name := 105;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D6_Teleportation : Paradox46 := {|
+  px_id := 19; px_name := 106;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+(** D.7-D.10: Contradiction *)
+Definition D7_UnexpectedHanging : Paradox46 := {|
+  px_id := 20; px_name := 107;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D8_ParadoxOfCourt : Paradox46 := {|
+  px_id := 21; px_name := 108;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition D9_Omnipotence : Paradox46 := {|
+  px_id := 22; px_name := 109;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L3_MetaOperations
+|}.
+
+Definition D10_Stone : Paradox46 := {|
+  px_id := 23; px_name := 110;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L3_MetaOperations
+|}.
+
+(** D.11: Hidden contradiction *)
+Definition D11_Newcomb : Paradox46 := {|
+  px_id := 24; px_name := 111;
+  px_category := Defective;
+  px_confusion := HiddenDeterminism;
+  px_level_violated := L2_Operations
+|}.
+
+(** D.12-D.15: False premise *)
+Definition D12_Grandfather : Paradox46 := {|
+  px_id := 25; px_name := 112;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D13_ZenoAchilles : Paradox46 := {|
+  px_id := 26; px_name := 113;
+  px_category := Defective;
+  px_confusion := InstrumentObjectMismatch;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D14_ZenoDichotomy : Paradox46 := {|
+  px_id := 27; px_name := 114;
+  px_category := Defective;
+  px_confusion := InstrumentObjectMismatch;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D15_ZenoArrow : Paradox46 := {|
+  px_id := 28; px_name := 115;
+  px_category := Defective;
+  px_confusion := InstrumentObjectMismatch;
+  px_level_violated := L1_Elements
+|}.
+
+(** D.16-D.19: Reasoning error *)
+Definition D16_TwoEnvelopes : Paradox46 := {|
+  px_id := 29; px_name := 116;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition D17_HornedMan : Paradox46 := {|
+  px_id := 30; px_name := 117;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D18_Horse : Paradox46 := {|
+  px_id := 31; px_name := 118;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition D19_MaskedMan : Paradox46 := {|
+  px_id := 32; px_name := 119;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+(** D.20: Category error *)
+Definition D20_CarrollTortoise : Paradox46 := {|
+  px_id := 33; px_name := 120;
+  px_category := Defective;
+  px_confusion := RuleAsPremise;
+  px_level_violated := L2_Operations
+|}.
+
+(** D.21-D.25: Infinity (conceptual indeterminacy) *)
+Definition D21_HilbertHotel : Paradox46 := {|
+  px_id := 34; px_name := 121;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D22_Galileo : Paradox46 := {|
+  px_id := 35; px_name := 122;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D23_BanachTarski : Paradox46 := {|
+  px_id := 36; px_name := 123;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L3_MetaOperations
+|}.
+
+Definition D24_ThomsonLamp : Paradox46 := {|
+  px_id := 37; px_name := 124;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition D25_RossLittlewood : Paradox46 := {|
+  px_id := 38; px_name := 125;
+  px_category := Defective;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+(** ============ NON-PARADOXES (8) ============ *)
+
+Definition N1_MontyHall : Paradox46 := {|
+  px_id := 39; px_name := 201;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;  (* Intuition misleads *)
+  px_level_violated := L1_Elements
+|}.
+
+Definition N2_Birthday : Paradox46 := {|
+  px_id := 40; px_name := 202;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition N3_Simpson : Paradox46 := {|
+  px_id := 41; px_name := 203;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition N4_FalsePositive : Paradox46 := {|
+  px_id := 42; px_name := 204;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition N5_Lottery : Paradox46 := {|
+  px_id := 43; px_name := 205;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition N6_Preface : Paradox46 := {|
+  px_id := 44; px_name := 206;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+Definition N7_BuridanAss : Paradox46 := {|
+  px_id := 45; px_name := 207;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L1_Elements
+|}.
+
+Definition N8_Raven : Paradox46 := {|
+  px_id := 46; px_name := 208;
+  px_category := NonParadox;
+  px_confusion := ConceptualAmbiguity;
+  px_level_violated := L2_Operations
+|}.
+
+(** Complete catalog of 46 paradoxes *)
+Definition all_paradoxes_46 : list Paradox46 := [
+  (* Structural: 13 *)
+  S1_Liar; S2_Epimenides; S3_GrellingNelson; S4_Berry; S5_Richard;
+  S6_Curry; S7_Crocodile; S8_BuridanBridge; S9_Yablo;
+  S10_Russell; S11_Barber; S12_BuraliForti; S13_Cantor;
+  (* Defective: 25 *)
+  D1_Sorites; D2_BaldMan; D3_ColorSpectrum; D4_ShipOfTheseus;
+  D5_GrandfatherAxe; D6_Teleportation;
+  D7_UnexpectedHanging; D8_ParadoxOfCourt; D9_Omnipotence; D10_Stone;
+  D11_Newcomb;
+  D12_Grandfather; D13_ZenoAchilles; D14_ZenoDichotomy; D15_ZenoArrow;
+  D16_TwoEnvelopes; D17_HornedMan; D18_Horse; D19_MaskedMan;
+  D20_CarrollTortoise;
+  D21_HilbertHotel; D22_Galileo; D23_BanachTarski; D24_ThomsonLamp; D25_RossLittlewood;
+  (* Non-paradox: 8 *)
+  N1_MontyHall; N2_Birthday; N3_Simpson; N4_FalsePositive;
+  N5_Lottery; N6_Preface; N7_BuridanAss; N8_Raven
 ].
+
+(** Counting theorems *)
+Definition count_by_category (cat : ParadoxCategory) (l : list Paradox46) : nat :=
+  length (filter (fun p => 
+    match px_category p, cat with
+    | Structural, Structural => true
+    | Defective, Defective => true
+    | NonParadox, NonParadox => true
+    | _, _ => false
+    end) l).
+
+Theorem total_paradoxes_46 : length all_paradoxes_46 = 46.
+Proof. reflexivity. Qed.
+
+Theorem structural_count_13 : count_by_category Structural all_paradoxes_46 = 13.
+Proof. reflexivity. Qed.
+
+Theorem defective_count_25 : count_by_category Defective all_paradoxes_46 = 25.
+Proof. reflexivity. Qed.
+
+Theorem nonparadox_count_8 : count_by_category NonParadox all_paradoxes_46 = 8.
+Proof. reflexivity. Qed.
+
+Theorem category_sum_correct :
+  count_by_category Structural all_paradoxes_46 +
+  count_by_category Defective all_paradoxes_46 +
+  count_by_category NonParadox all_paradoxes_46 = 46.
+Proof. reflexivity. Qed.
+
+(* Legacy compatibility *)
+Definition all_paradoxes : list Paradox46 := all_paradoxes_46.
 
 (* ========================================================================= *)
 (*                    PART VI: DISSOLUTION MECHANISM                        *)
@@ -344,29 +693,43 @@ Inductive DissolutionStatus : Type :=
   | RequiresPremiseRejection : DissolutionStatus (* Premises incoherent *)
   | NotAParadox : DissolutionStatus.    (* Was never a real paradox *)
 
-Definition dissolve_paradox (p : ClassicalParadox) : DissolutionStatus :=
-  match p_type p with
+(** Dissolution for new 3-category classification *)
+Definition dissolve_paradox_46 (p : Paradox46) : DissolutionStatus :=
+  match px_category p with
   | Structural => Dissolved  (* Hierarchical separation dissolves *)
-  | Typological => RequiresFrameworkChange
-  | Pseudo => RequiresPremiseRejection
-  | Spurious => Dissolved  (* Hidden assumption exposed *)
+  | Defective => RequiresPremiseRejection  (* Explicate defect *)
+  | NonParadox => NotAParadox  (* No paradox to dissolve *)
   end.
 
-(** All paradoxes can be dissolved *)
-Theorem all_paradoxes_dissolvable : forall p : ClassicalParadox,
-  dissolve_paradox p = Dissolved \/
-  dissolve_paradox p = RequiresFrameworkChange \/
-  dissolve_paradox p = RequiresPremiseRejection.
+(** All 46 paradoxes can be dissolved or explained *)
+Theorem all_46_dissolvable : forall p : Paradox46,
+  dissolve_paradox_46 p = Dissolved \/
+  dissolve_paradox_46 p = RequiresPremiseRejection \/
+  dissolve_paradox_46 p = NotAParadox.
 Proof.
-  intros p. unfold dissolve_paradox.
-  destruct (p_type p); auto.
+  intros p. unfold dissolve_paradox_46.
+  destruct (px_category p); auto.
 Qed.
 
 (** Structural paradoxes dissolve through hierarchical analysis *)
-Theorem structural_dissolves : forall p : ClassicalParadox,
-  p_type p = Structural -> dissolve_paradox p = Dissolved.
+Theorem structural_46_dissolves : forall p : Paradox46,
+  px_category p = Structural -> dissolve_paradox_46 p = Dissolved.
 Proof.
-  intros p H. unfold dissolve_paradox. rewrite H. reflexivity.
+  intros p H. unfold dissolve_paradox_46. rewrite H. reflexivity.
+Qed.
+
+(** Defective paradoxes require premise rejection *)
+Theorem defective_46_requires_rejection : forall p : Paradox46,
+  px_category p = Defective -> dissolve_paradox_46 p = RequiresPremiseRejection.
+Proof.
+  intros p H. unfold dissolve_paradox_46. rewrite H. reflexivity.
+Qed.
+
+(** Non-paradoxes are not paradoxes at all *)
+Theorem nonparadox_46_not_paradox : forall p : Paradox46,
+  px_category p = NonParadox -> dissolve_paradox_46 p = NotAParadox.
+Proof.
+  intros p H. unfold dissolve_paradox_46. rewrite H. reflexivity.
 Qed.
 
 (* ========================================================================= *)
@@ -555,10 +918,10 @@ Qed.
 *)
 
 (** The unified diagnosis: all paradoxes are level confusion *)
-Theorem paradox_is_level_confusion : forall p : ClassicalParadox,
-  exists c : LevelConfusion, p_confusion p = c.
+Theorem paradox_is_level_confusion : forall p : Paradox46,
+  exists c : LevelConfusion, px_confusion p = c.
 Proof.
-  intros p. exists (p_confusion p). reflexivity.
+  intros p. exists (px_confusion p). reflexivity.
 Qed.
 
 (** Structural paradoxes all involve self-reference patterns *)
@@ -571,72 +934,51 @@ Definition is_self_referential (c : LevelConfusion) : bool :=
   end.
 
 (** Check if a paradox satisfies: Structural => self-referential *)
-Definition structural_implies_self_ref (p : ClassicalParadox) : bool :=
-  match p_type p with
-  | Structural => is_self_referential (p_confusion p)
+Definition structural_implies_self_ref_46 (p : Paradox46) : bool :=
+  match px_category p with
+  | Structural => is_self_referential (px_confusion p)
   | _ => true  (* Non-structural paradoxes trivially satisfy *)
   end.
 
 (** All paradoxes in catalog satisfy the property *)
-Definition all_structural_self_ref : bool :=
-  forallb structural_implies_self_ref all_paradoxes.
+Definition all_structural_self_ref_46 : bool :=
+  forallb structural_implies_self_ref_46 all_paradoxes_46.
 
-(** Verify each structural paradox individually *)
-Lemma liar_self_ref : is_self_referential (p_confusion Liar_Paradox) = true.
+(** Verify individual structural paradoxes *)
+Lemma S1_liar_self_ref : is_self_referential (px_confusion S1_Liar) = true.
 Proof. reflexivity. Qed.
 
-Lemma russell_self_ref : is_self_referential (p_confusion Russell_Paradox) = true.
+Lemma S10_russell_self_ref : is_self_referential (px_confusion S10_Russell) = true.
 Proof. reflexivity. Qed.
 
-Lemma grelling_self_ref : is_self_referential (p_confusion Grelling_Nelson) = true.
-Proof. reflexivity. Qed.
-
-Lemma berry_self_ref : is_self_referential (p_confusion Berry_Paradox) = true.
-Proof. reflexivity. Qed.
-
-Lemma richard_self_ref : is_self_referential (p_confusion Richard_Paradox) = true.
+Lemma S3_grelling_self_ref : is_self_referential (px_confusion S3_GrellingNelson) = true.
 Proof. reflexivity. Qed.
 
 (** Main theorem: all catalogued structural paradoxes are self-referential *)
-Theorem structural_is_self_referential_in_catalog : 
-  all_structural_self_ref = true.
+Theorem structural_is_self_referential_in_catalog_46 : 
+  all_structural_self_ref_46 = true.
 Proof. reflexivity. Qed.
 
-(** For any paradox in the catalog with Structural type, confusion is self-referential *)
-Theorem structural_in_catalog_self_ref : forall p : ClassicalParadox,
-  In p all_paradoxes ->
-  p_type p = Structural -> 
-  is_self_referential (p_confusion p) = true.
+(** For any paradox in the catalog with Structural category, confusion is self-referential *)
+Theorem structural_in_catalog_self_ref_46 : forall p : Paradox46,
+  In p all_paradoxes_46 ->
+  px_category p = Structural -> 
+  is_self_referential (px_confusion p) = true.
 Proof.
-  intros p Hin Htype.
-  unfold all_paradoxes in Hin.
+  intros p Hin Hcat.
+  unfold all_paradoxes_46 in Hin.
   repeat (destruct Hin as [Heq | Hin]; 
-    [subst p; simpl in Htype; try discriminate; simpl; reflexivity | ]).
+    [subst p; simpl in Hcat; try discriminate; simpl; reflexivity | ]).
   destruct Hin.
 Qed.
 
-(** Count by type *)
-Definition count_by_type (t : ParadoxType) : nat :=
-  List.length (List.filter (fun p => 
-    match t, p_type p with
-    | Structural, Structural => true
-    | Typological, Typological => true
-    | Pseudo, Pseudo => true
-    | Spurious, Spurious => true
-    | _, _ => false
-    end) all_paradoxes).
-
-Lemma structural_count : count_by_type Structural = 5.
-Proof. reflexivity. Qed.
-
-Lemma typological_count : count_by_type Typological = 1.
-Proof. reflexivity. Qed.
-
-Lemma pseudo_count : count_by_type Pseudo = 3.
-Proof. reflexivity. Qed.
-
-Lemma spurious_count : count_by_type Spurious = 2.
-Proof. reflexivity. Qed.
+(** Old count_by_type deprecated - use count_by_category instead *)
+(* See PART V for: 
+   - structural_count_13 
+   - defective_count_25
+   - nonparadox_count_8
+   - category_sum_correct
+*)
 
 (* ========================================================================= *)
 (*                    PART XI: INTEGRATION WITH ERR FRAMEWORK               *)
@@ -706,19 +1048,37 @@ Inductive Response : Type :=
   | Solution : Response       (* Answers the question *)
   | Dissolution : Response.   (* Shows question malformed *)
 
+(** Appropriate response for old 4-type classification *)
 Definition appropriate_response (pt : ParadoxType) : Response :=
   match pt with
-  | Structural => Dissolution  (* Question malformed *)
-  | Typological => Dissolution (* Framework inappropriate *)
-  | Pseudo => Dissolution      (* Premises contradictory *)
-  | Spurious => Dissolution    (* Hidden assumption *)
+  | Structural_Old => Dissolution  (* Question malformed *)
+  | Typological => Dissolution     (* Framework inappropriate *)
+  | Pseudo => Dissolution          (* Premises contradictory *)
+  | Spurious => Dissolution        (* Hidden assumption *)
   end.
 
-(** All paradoxes require dissolution, not solution *)
+(** Appropriate response for new 3-category classification *)
+Definition appropriate_response_46 (pc : ParadoxCategory) : Response :=
+  match pc with
+  | Structural => Dissolution      (* Question malformed *)
+  | Defective => Dissolution       (* Premises defective *)
+  | NonParadox => Solution         (* Not actually a paradox *)
+  end.
+
+(** All true paradoxes require dissolution, not solution *)
 Theorem paradoxes_require_dissolution : forall pt : ParadoxType,
   appropriate_response pt = Dissolution.
 Proof.
   intros pt. destruct pt; reflexivity.
+Qed.
+
+(** Only non-paradoxes admit solution *)
+Theorem only_nonparadox_admits_solution : forall pc : ParadoxCategory,
+  appropriate_response_46 pc = Solution <-> pc = NonParadox.
+Proof.
+  intros pc. split; intros H.
+  - destruct pc; simpl in H; try discriminate; reflexivity.
+  - subst pc. reflexivity.
 Qed.
 
 (* ========================================================================= *)
@@ -767,10 +1127,19 @@ Inductive LLMParadoxPattern : Type :=
 
 Definition llm_pattern_to_paradox_type (p : LLMParadoxPattern) : ParadoxType :=
   match p with
-  | LLM_SelfReference => Spurious           (* Like Carroll's Tortoise *)
-  | LLM_ConfidentContradiction => Structural (* Like Liar *)
-  | LLM_CircularJustification => Structural  (* Like Russell *)
-  | LLM_MetaConfusion => Structural          (* Generic level mixing *)
+  | LLM_SelfReference => Spurious              (* Like Carroll's Tortoise *)
+  | LLM_ConfidentContradiction => Structural_Old (* Like Liar *)
+  | LLM_CircularJustification => Structural_Old  (* Like Russell *)
+  | LLM_MetaConfusion => Structural_Old         (* Generic level mixing *)
+  end.
+
+(** New mapping to ParadoxCategory *)
+Definition llm_pattern_to_category (p : LLMParadoxPattern) : ParadoxCategory :=
+  match p with
+  | LLM_SelfReference => Defective             (* Category error *)
+  | LLM_ConfidentContradiction => Structural   (* Like Liar *)
+  | LLM_CircularJustification => Structural    (* Like Russell *)
+  | LLM_MetaConfusion => Structural            (* Generic level mixing *)
   end.
 
 Definition llm_pattern_to_confusion (p : LLMParadoxPattern) : LevelConfusion :=
@@ -788,10 +1157,20 @@ Proof.
   intros p. destruct p; reflexivity.
 Qed.
 
-(** LLM self-reference maps to structural paradox patterns *)
+(** LLM self-reference maps to structural paradox patterns (old type) *)
 Theorem llm_self_ref_is_structural : forall p : LLMParadoxPattern,
   p <> LLM_SelfReference ->
-  llm_pattern_to_paradox_type p = Structural.
+  llm_pattern_to_paradox_type p = Structural_Old.
+Proof.
+  intros p Hneq.
+  destruct p; try reflexivity.
+  contradiction.
+Qed.
+
+(** LLM self-reference maps to structural category (new) *)
+Theorem llm_self_ref_is_structural_46 : forall p : LLMParadoxPattern,
+  p <> LLM_SelfReference ->
+  llm_pattern_to_category p = Structural.
 Proof.
   intros p Hneq.
   destruct p; try reflexivity.
@@ -806,49 +1185,66 @@ Qed.
    PARADOX DISSOLUTION FORMALIZATION
    =================================
    
-   From Article 6: "Paradox Dissolution Through Hierarchical Analysis"
+   From Article 6 v2: "Paradox Dissolution Through Hierarchical Analysis:
+                       A Diagnostic Framework"
    
    KEY INSIGHT:
-   - Fallacies = HORIZONTAL violations (domain sequence)
-   - Paradoxes = VERTICAL violations (level hierarchy)
+   - Fallacies = HORIZONTAL violations (domain sequence D1→D6)
+   - Paradoxes = VERTICAL violations (level hierarchy L1→L2→L3)
    
    THREE LEVELS (finite, unlike Tarski's infinite hierarchy):
    - L1: Elements (objects, statements, premises)
    - L2: Operations (truth-evaluation, set membership, inference rules)
    - L3: Meta-operations (operations on operations)
    
-   FOUR PARADOX TYPES:
-   1. Structural (5): Liar, Russell, Grelling-Nelson, Berry, Richard
-      - Self-reference, level mixing
+   THREE PARADOX CATEGORIES (46 total):
+   
+   1. STRUCTURAL (13): Self-referential level mixing
+      - Semantic (9): Liar, Epimenides, Grelling-Nelson, Berry, Richard,
+                      Curry, Crocodile, Buridan's Bridge, Yablo
+      - Set-theoretic (4): Russell, Barber, Burali-Forti, Cantor
       - Resolution: hierarchical separation
    
-   2. Typological (1): Sorites
-      - Wrong instrument for object
-      - Resolution: change framework
+   2. DEFECTIVE (25): Flawed premises
+      - Indeterminacy (6): Sorites, Bald Man, Color Spectrum, 
+                           Ship of Theseus, Grandfather's Axe, Teleportation
+      - Infinity (5): Hilbert's Hotel, Galileo, Banach-Tarski,
+                      Thomson's Lamp, Ross-Littlewood
+      - Contradiction (4): Unexpected Hanging, Court, Omnipotence, Stone
+      - Hidden contradiction (1): Newcomb
+      - False premise (4): Grandfather, Zeno's Achilles/Dichotomy/Arrow
+      - Reasoning error (4): Two Envelopes, Horned Man, Horse, Masked Man
+      - Category error (1): Carroll's Tortoise
+      - Resolution: explicate and reject defect
    
-   3. Pseudo (3): Unexpected Hanging, Ship of Theseus, Omnipotence
-      - Explicit premise defect
-      - Resolution: clarify/reject premises
-   
-   4. Spurious (2): Newcomb, Carroll's Tortoise
-      - Hidden contradiction
-      - Resolution: expose assumption
+   3. NON-PARADOXES (8): Counter-intuitive correct results
+      - Counter-intuitive (4): Monty Hall, Birthday, Simpson's, False Positive
+      - Epistemic (2): Lottery, Preface
+      - Other (2): Buridan's Ass, Raven
+      - Resolution: explain the surprising result
    
    AI APPLICATIONS:
-   - LLM self-referential hallucinations = Spurious Paradoxes
-   - LLM confident contradictions = Structural Paradoxes
-   - LLM circular justifications = Level Mixing
-   - All LLM paradox patterns dissolvable through same mechanism
-   
-   UNIVERSAL PATTERN:
-   All paradoxes = level confusion
-   All paradoxes dissolve (not solve)
+   - LLM self-referential hallucinations → Structural (level confusion)
+   - LLM confident contradictions → Structural (Liar pattern)
+   - LLM circular justifications → Structural (Russell pattern)
+   - All LLM paradox patterns dissolvable through Architecture of Reasoning
    
    KEY THEOREMS:
+   - total_paradoxes_46: 46 paradoxes in catalog
+   - structural_count_13: 13 structural paradoxes
+   - defective_count_25: 25 defective paradoxes
+   - nonparadox_count_8: 8 non-paradoxes
+   - category_sum_correct: 13 + 25 + 8 = 46
    - self_application_invalid: Operations cannot apply to themselves
-   - all_paradoxes_dissolvable: Every paradox can be dissolved
-   - paradoxes_require_dissolution: Solution inappropriate for paradoxes
-   - structural_is_self_referential: Structural paradoxes involve self-reference
+   - all_46_dissolvable: Every paradox can be dissolved or explained
+   - structural_46_dissolves: Structural → Dissolved
+   - only_nonparadox_admits_solution: Only non-paradoxes admit "solution"
+   
+   STATISTICS:
+   - 46 paradoxes catalogued
+   - 30+ proven theorems
+   - 0 admitted lemmas
+   - ~1200 lines
    - llm_paradoxes_dissolvable: LLM paradox patterns dissolve same way
 *)
 

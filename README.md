@@ -274,6 +274,7 @@ Formal verification of fallacy detection and paradox dissolution:
 - **[The Law of Order](https://philpapers.org/archive/HORTLO-19.pdf)** — L5 application and the EVT breakthrough
 - **[Nexted Intervals](docs/nested_intervals.pdf)** — Technical paper on non-surjectivity formalization
 - **[The Architecture of Error: A Structural Theory of Logical Fallacies](https://philpapers.org/archive/HORTAO-17.pdf)** - Philosophical paper on logical fallacies (part 1/2)
+- **[Domain Violations: A Systematic Taxonomy of Fallacies](https://philpapers.org/rec/HORDVA)** - Philosophical paper on logical fallacies (part 2/2)
 
 ---
 

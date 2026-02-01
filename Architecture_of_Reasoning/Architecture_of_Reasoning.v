@@ -526,7 +526,7 @@ Record ClassicalParadox := mkClassicalParadox {
   cp_level : HierarchicalLevel
 }.
 
-(** The seven paradigmatic paradoxes *)
+(** Seven paradigmatic paradoxes (examples from full catalog of 46 in ParadoxDissolution.v) *)
 Definition Liar : ClassicalParadox := {|
   cp_name := 1; cp_type := Structural;
   cp_confusion := EvaluatorAsEvaluated; cp_level := Level2_Operations |}.
