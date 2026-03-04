@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-711_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-733_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -40,10 +40,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Ordered field on Cauchy reals** | 15 lemmas, 0 Admitted |
 | **Metric completeness (NIP, sup, diagonal)** | 23 lemmas, 0 Admitted |
 | **Monotone Convergence Theorem** | 15 lemmas, 0 Admitted |
+| **Series Convergence (geometric, comparison)** | 22 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 711 proven theorems (594 core + 117 reasoning architecture)**
+**Total: 733 proven theorems (616 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -99,6 +100,7 @@ theory-of-systems-coq/
 │   ├── RealField.v                  # Ordered field on Cauchy reals (15 lemmas)
 │   ├── Completeness.v               # Metric completeness: NIP, sup, diagonal (23 lemmas)
 │   ├── MonotoneConvergence.v        # Monotone Convergence Theorem (15 lemmas)
+│   ├── SeriesConvergence.v          # Series convergence: geometric, comparison (22 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -150,12 +152,13 @@ theory-of-systems-coq/
 | `RealField.v` | 15 | 0 | **100%** |
 | `Completeness.v` | 23 | 0 | **100%** |
 | `MonotoneConvergence.v` | 15 | 0 | **100%** |
+| `SeriesConvergence.v` | 22 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **594** | **13** | **98%** |
+| **Core TOTAL** | **616** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -173,9 +176,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 594 | 13 |
+| Core Mathematics | 616 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **711** | **13** |
+| **TOTAL** | **733** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -190,6 +193,19 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Series Convergence (`SeriesConvergence.v`)
+
+Convergence of series over Q via monotone convergence:
+- `bernoulli_ineq`: (1+x)^n >= 1 + n*x for x >= 0 (induction on n)
+- `Qpow_vanish` / `Qpow_limit_zero`: r^n → 0 for 0 <= r < 1 (via Bernoulli)
+- `Qpow_cauchy`: r^n is Cauchy for 0 <= r < 1 (MCT: decreasing + bounded)
+- `geometric_sum_identity`: (1-r)*S_n = 1 - r^{n+1} (division-free)
+- `geometric_series_cauchy`: geometric series converges for |r| < 1
+- `comparison_test`: 0 <= a(n) <= b(n) and Σb converges → Σa converges
+- `absolute_convergence`: Σ|a(n)| converges → Σa(n) is Cauchy (triangle inequality on tails)
+- `series_nonneg_upper_bound`: nonneg series partial sums bounded by limit
+- Axiom: `classic` (inherited from MCT)
 
 ### Monotone Convergence Theorem (`MonotoneConvergence.v`)
 
