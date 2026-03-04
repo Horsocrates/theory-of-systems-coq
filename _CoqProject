@@ -19,6 +19,8 @@ src/Probability.v
 src/CauchyReal.v
 src/RoundingSafety.v
 src/IVT_CauchyReal.v
+src/Measure.v
+src/SoftmaxProbability.v
 
 # Architecture of Reasoning (0 axioms, self-contained)
 Architecture_of_Reasoning/Architecture_of_Reasoning.v

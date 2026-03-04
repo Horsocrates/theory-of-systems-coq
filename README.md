@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-629_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-658_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -35,10 +35,12 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Cauchy reals (constructive completion)** | 19 lemmas, 0 Admitted |
 | **Rounding safety (IEEE 754)** | 13 lemmas, 0 Admitted |
 | **Bayes' theorem + probabilistic fallacies** | 12 lemmas, 0 Admitted |
+| **Constructive measure & integration** | 15 lemmas, 0 Admitted |
+| **Softmax probability soundness** | 14 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 629 proven theorems (512 core + 117 reasoning architecture)**
+**Total: 658 proven theorems (541 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -89,6 +91,8 @@ theory-of-systems-coq/
 │   ├── CauchyReal.v                  # Cauchy reals: completion of ℚ (19 lemmas)
 │   ├── RoundingSafety.v              # IEEE 754 rounding within intervals (13 lemmas)
 │   ├── IVT_CauchyReal.v             # Full IVT on Cauchy reals (8 lemmas)
+│   ├── Measure.v                    # Constructive measure & integration (15 lemmas)
+│   ├── SoftmaxProbability.v         # IBP → probability soundness (14 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -135,12 +139,14 @@ theory-of-systems-coq/
 | `RoundingSafety.v` | 13 | 0 | **100%** |
 | `Probability.v` | 12 | 0 | **100%** |
 | `IVT_CauchyReal.v` | 8 | 0 | **100%** |
+| `Measure.v` | 15 | 0 | **100%** |
+| `SoftmaxProbability.v` | 14 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **512** | **13** | **98%** |
+| **Core TOTAL** | **541** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -158,9 +164,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 512 | 13 |
+| Core Mathematics | 541 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **629** | **13** |
+| **TOTAL** | **658** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -210,6 +216,24 @@ IEEE 754 floating-point rounding within interval bounds:
 - `crown_affine_rounding`: CROWN bounds survive rounding (positive/negative slope)
 - `double_rounding_error`: |round(round(x)) - x| ≤ 2ε
 - `ibp_two_steps`: composition of two rounding steps
+
+### Softmax Probability Soundness (`SoftmaxProbability.v`)
+
+Division-free bridge from interval bounds to probability statements:
+- `softmax_probability_sound`: lo_i·Σv ≤ v_i·Σhi ∧ v_i·Σlo ≤ hi_i·Σv
+- `cross_mul_lower` / `cross_mul_upper`: two-step monotonicity via cross-multiplication
+- `probability_bounds_consistent`: interval [lo/Σhi, hi/Σlo] is non-degenerate
+- Key technique: avoid division by cross-multiplying with positive denominators
+
+### Constructive Measure & Integration (`Measure.v`)
+
+Riemann-style integration over ℚ using step functions:
+- `integral_step_add`: linearity (integral of sum = sum of integrals)
+- `integral_step_mono`: monotonicity (f ≤ g ⟹ ∫f ≤ ∫g)
+- `integral_bounds`: value bounds propagate (lo·width ≤ ∫ ≤ hi·width)
+- `integral_step_abs_bound`: triangle inequality (|∫f| ≤ M·width)
+- `lower_upper_bound`: lower/upper Riemann sums bracket the integral
+- `measure_additive`: μ([a,c]) = μ([a,b]) + μ([b,c])
 
 ### IVT on Cauchy Reals (`IVT_CauchyReal.v`)
 
