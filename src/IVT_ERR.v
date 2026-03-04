@@ -33,7 +33,7 @@
 Require Import Coq.QArith.QArith Coq.QArith.Qabs Coq.QArith.Qfield.
 Require Import Coq.Logic.Classical_Prop.
 Require Import Coq.micromega.Lia Coq.ZArith.ZArith Coq.Setoids.Setoid.
-Require Import Archimedean.
+From ToS Require Import Archimedean_ERR.
 
 Open Scope Q_scope.
 

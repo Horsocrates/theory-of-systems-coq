@@ -1,0 +1,48 @@
+name: Coq CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        coq_version: ['8.19']
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Coq ${{ matrix.coq_version }}
+      uses: coq-community/docker-coq-action@v1
+      with:
+        coq_version: ${{ matrix.coq_version }}
+        ocaml_version: default
+        custom_script: |
+          # Generate Makefile from _CoqProject
+          coq_makefile -f _CoqProject -o CoqMakefile
+
+          # Compile all files
+          make -f CoqMakefile -j2
+
+          # Report results
+          echo ""
+          echo "=== Compilation successful ==="
+          echo ""
+
+          # Count theorems and Admitted
+          echo "=== Theorem Count ==="
+          grep -c "Theorem\|Lemma\|Corollary\|Proposition" src/*.v Architecture_of_Reasoning/*.v || true
+          echo ""
+          echo "=== Admitted Count ==="
+          grep -c "Admitted" src/*.v Architecture_of_Reasoning/*.v || true
+          echo ""
+          echo -n "Total Theorems: "
+          grep -r "Theorem\|Lemma\|Corollary\|Proposition" src/*.v Architecture_of_Reasoning/*.v | wc -l
+          echo -n "Total Admitted: "
+          grep -r "Admitted" src/*.v Architecture_of_Reasoning/*.v | wc -l

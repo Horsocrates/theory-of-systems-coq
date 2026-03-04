@@ -1,0 +1,24 @@
+-Q src ToS
+-Q Architecture_of_Reasoning ToS_Arch
+
+# Mathematical core (src/)
+# Archimedean must come first — IVT depends on it
+src/Archimedean_ERR.v
+src/IVT_ERR.v
+src/EVT_idx.v
+src/EVT_ERR.v
+src/ShrinkingIntervals_ERR.v
+src/DiagonalArgument_ERR.v
+src/TheoryOfSystems_Core_ERR.v
+src/Countability_Q.v
+src/SchroederBernstein_ERR.v
+src/HeineBorel_ERR.v
+src/TernaryRepresentation_ERR.v
+
+# Architecture of Reasoning (0 axioms, self-contained)
+Architecture_of_Reasoning/Architecture_of_Reasoning.v
+Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
+Architecture_of_Reasoning/ERR_Fallacies.v
+Architecture_of_Reasoning/DomainViolations_Complete.v
+Architecture_of_Reasoning/AI_FallacyDetector.v
+Architecture_of_Reasoning/ParadoxDissolution.v
