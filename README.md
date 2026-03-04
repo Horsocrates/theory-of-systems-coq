@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-658_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-711_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -37,10 +37,13 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Bayes' theorem + probabilistic fallacies** | 12 lemmas, 0 Admitted |
 | **Constructive measure & integration** | 15 lemmas, 0 Admitted |
 | **Softmax probability soundness** | 14 lemmas, 0 Admitted |
+| **Ordered field on Cauchy reals** | 15 lemmas, 0 Admitted |
+| **Metric completeness (NIP, sup, diagonal)** | 23 lemmas, 0 Admitted |
+| **Monotone Convergence Theorem** | 15 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 658 proven theorems (541 core + 117 reasoning architecture)**
+**Total: 711 proven theorems (594 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -93,6 +96,9 @@ theory-of-systems-coq/
 │   ├── IVT_CauchyReal.v             # Full IVT on Cauchy reals (8 lemmas)
 │   ├── Measure.v                    # Constructive measure & integration (15 lemmas)
 │   ├── SoftmaxProbability.v         # IBP → probability soundness (14 lemmas)
+│   ├── RealField.v                  # Ordered field on Cauchy reals (15 lemmas)
+│   ├── Completeness.v               # Metric completeness: NIP, sup, diagonal (23 lemmas)
+│   ├── MonotoneConvergence.v        # Monotone Convergence Theorem (15 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -141,12 +147,15 @@ theory-of-systems-coq/
 | `IVT_CauchyReal.v` | 8 | 0 | **100%** |
 | `Measure.v` | 15 | 0 | **100%** |
 | `SoftmaxProbability.v` | 14 | 0 | **100%** |
+| `RealField.v` | 15 | 0 | **100%** |
+| `Completeness.v` | 23 | 0 | **100%** |
+| `MonotoneConvergence.v` | 15 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **541** | **13** | **98%** |
+| **Core TOTAL** | **594** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -164,9 +173,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 541 | 13 |
+| Core Mathematics | 594 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **658** | **13** |
+| **TOTAL** | **711** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -181,6 +190,37 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Monotone Convergence Theorem (`MonotoneConvergence.v`)
+
+Classical proof that bounded monotone Q-sequences are Cauchy:
+- `q_inc_bounded_cauchy`: increasing + bounded above → is_cauchy (by contradiction via NNPP)
+- `q_dec_bounded_cauchy`: decreasing + bounded below → is_cauchy (dual)
+- `mct_limit_inc` / `mct_limit_dec`: construct CauchySeq from monotone bounded sequence
+- `mct_inc_upper_bound`: limit is upper bound for all terms
+- `mct_inc_least`: limit is least upper bound (cauchy_le)
+- `cauchy_le_trans` / `cauchy_le_antisym`: ordering on CauchySeqs
+- `squeeze_equiv` / `squeeze_cauchy_le`: squeeze theorem variants
+- `seq_increasing_le`: transitive ordering for sequences of CauchySeqs
+- Axiom: `classic` (LEM) — required; MCT is equivalent to LPO over Q
+
+### Metric Completeness (`Completeness.v`)
+
+Three equivalent formulations of completeness for Cauchy reals:
+- `nested_interval_limit`: nested rational intervals have a CauchySeq limit
+- `sup_bisect_cauchy`: bounded sets have supremum via bisection
+- `diagonal_limit` / `diagonal_converges`: Cauchy-sequences-of-CauchySeqs converge (diagonal extraction)
+- `meta_cauchy`: uniform Cauchy condition for sequences of CauchySeqs
+- 0 axioms — fully constructive
+
+### Ordered Field on Cauchy Reals (`RealField.v`)
+
+Field structure and ordering for CauchySeq:
+- `cauchy_mul`: multiplication with Cauchy proof
+- `cauchy_bounded`: every CauchySeq is bounded
+- `cauchy_inv_pos`: multiplicative inverse for positive sequences
+- Field laws: commutativity, associativity, distributivity
+- 0 axioms — fully constructive
 
 ### CROWN Linear Relaxation Soundness (`PInterval_CROWN.v`)
 

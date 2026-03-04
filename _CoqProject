@@ -21,6 +21,7 @@ src/RoundingSafety.v
 src/IVT_CauchyReal.v
 src/RealField.v
 src/Completeness.v
+src/MonotoneConvergence.v
 src/Measure.v
 src/SoftmaxProbability.v
 
