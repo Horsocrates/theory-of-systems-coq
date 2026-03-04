@@ -23,6 +23,7 @@ src/RealField.v
 src/Completeness.v
 src/MonotoneConvergence.v
 src/SeriesConvergence.v
+src/PowerSeries.v
 src/Measure.v
 src/SoftmaxProbability.v
 

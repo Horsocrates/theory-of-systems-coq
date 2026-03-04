@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-733_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-752_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -41,10 +41,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Metric completeness (NIP, sup, diagonal)** | 23 lemmas, 0 Admitted |
 | **Monotone Convergence Theorem** | 15 lemmas, 0 Admitted |
 | **Series Convergence (geometric, comparison)** | 22 lemmas, 0 Admitted |
+| **Power Series + Exponential convergence** | 19 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 733 proven theorems (616 core + 117 reasoning architecture)**
+**Total: 752 proven theorems (635 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -101,6 +102,7 @@ theory-of-systems-coq/
 │   ├── Completeness.v               # Metric completeness: NIP, sup, diagonal (23 lemmas)
 │   ├── MonotoneConvergence.v        # Monotone Convergence Theorem (15 lemmas)
 │   ├── SeriesConvergence.v          # Series convergence: geometric, comparison (22 lemmas)
+│   ├── PowerSeries.v               # Power series + exponential convergence (19 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -153,12 +155,13 @@ theory-of-systems-coq/
 | `Completeness.v` | 23 | 0 | **100%** |
 | `MonotoneConvergence.v` | 15 | 0 | **100%** |
 | `SeriesConvergence.v` | 22 | 0 | **100%** |
+| `PowerSeries.v` | 19 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **616** | **13** | **98%** |
+| **Core TOTAL** | **635** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -176,9 +179,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 616 | 13 |
+| Core Mathematics | 635 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **733** | **13** |
+| **TOTAL** | **752** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -193,6 +196,18 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Power Series & Exponential Convergence (`PowerSeries.v`)
+
+Ratio test and convergence of power series and exp(x):
+- `geometric_domination`: |a(S n)| ≤ r·|a(n)| eventually → |a(N+k)| ≤ |a(N)|·r^k
+- `ratio_test_abs`: division-free ratio test — eventual ratio bound implies Cauchy
+- `power_series_converges`: coefficient ratio bound → Σ(a_n·x^n) converges
+- `exp_term_ratio`: (n+1)·x^{n+1}/fact(n+1) = x·x^n/fact(n) (via `field`)
+- `exp_ratio_bound`: ∀ 0<r<1, ∃N, ∀n≥N, |x^{n+1}/fact(n+1)| ≤ r·|x^n/fact(n)|
+- **`exp_series_cauchy`**: Crown jewel — ∀x∈Q, Σ x^n/n! is Cauchy
+- `exp_series_zero`: exp(0) ~ const 1
+- Axiom: `classic` (inherited from MCT)
 
 ### Series Convergence (`SeriesConvergence.v`)
 
