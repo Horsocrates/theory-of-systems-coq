@@ -16,6 +16,8 @@ src/HeineBorel_ERR.v
 src/TernaryRepresentation_ERR.v
 src/PInterval_CROWN.v
 src/Probability.v
+src/CauchyReal.v
+src/RoundingSafety.v
 
 # Architecture of Reasoning (0 axioms, self-contained)
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
