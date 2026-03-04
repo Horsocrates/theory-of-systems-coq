@@ -9,7 +9,7 @@
 (*  This file provides an alternative approach to EVT using argmax on grid   *)
 (*  instead of bisection search.                                             *)
 (*                                                                           *)
-(*  STATUS: 20 Qed, 4 Admitted (83%) — SUPERSEDED by EVT_idx.v (100%)       *)
+(*  STATUS: 28 Qed, 4 Admitted (88%) — SUPERSEDED by EVT_idx.v (100%)       *)
 (*                                                                           *)
 (*  Author: Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026          *)
 (* ========================================================================= *)

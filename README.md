@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-621_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-629_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -38,7 +38,7 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 621 proven theorems (504 core + 117 reasoning architecture)**
+**Total: 629 proven theorems (512 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -88,6 +88,7 @@ theory-of-systems-coq/
 │   ├── Probability.v                 # Probability + Bayesian fallacies (12 lemmas)
 │   ├── CauchyReal.v                  # Cauchy reals: completion of ℚ (19 lemmas)
 │   ├── RoundingSafety.v              # IEEE 754 rounding within intervals (13 lemmas)
+│   ├── IVT_CauchyReal.v             # Full IVT on Cauchy reals (8 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -133,12 +134,13 @@ theory-of-systems-coq/
 | `SchroederBernstein_ERR.v` | 14 | 0 | **100%** |
 | `RoundingSafety.v` | 13 | 0 | **100%** |
 | `Probability.v` | 12 | 0 | **100%** |
+| `IVT_CauchyReal.v` | 8 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **504** | **13** | **97%** |
+| **Core TOTAL** | **512** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -156,9 +158,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 504 | 13 |
+| Core Mathematics | 512 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **621** | **13** |
+| **TOTAL** | **629** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -208,6 +210,14 @@ IEEE 754 floating-point rounding within interval bounds:
 - `crown_affine_rounding`: CROWN bounds survive rounding (positive/negative slope)
 - `double_rounding_error`: |round(round(x)) - x| ≤ 2ε
 - `ibp_two_steps`: composition of two rounding steps
+
+### IVT on Cauchy Reals (`IVT_CauchyReal.v`)
+
+Full Intermediate Value Theorem lifted to Cauchy real numbers:
+- `ivt_cauchy_real`: ∃ c : CauchySeq, ∀ n, a ≤ c(n) ≤ b ∧ f(c(n)) → 0
+- `ivt_cauchy_real_equiv`: f ∘ root is Cauchy-equivalent to `cauchy_const 0`
+- `continuous_compose_cauchy`: uniform continuity preserves Cauchy property
+- Bridge lemmas: `is_Cauchy ↔ is_cauchy` between IVT_ERR and CauchyReal definitions
 
 ---
 
