@@ -1,8 +1,8 @@
 # Theory of Systems — Coq Formalization
 
-[![Coq](https://img.shields.io/badge/Coq-8.18.0-blue.svg)](https://coq.inria.fr/)
+[![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Lemmas](https://img.shields.io/badge/Lemmas-509_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-621_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -27,22 +27,26 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 
 | Theorem | Status |
 |---------|--------|
-| **Non-surjectivity ℕ → [0,1] ∩ ℚ** | ✅ 167 lemmas, 0 Admitted |
-| **Countability of ℚ** (Calkin-Wilf) | ✅ Fully constructive, no axioms |
-| **ε-Intermediate Value Theorem** | ✅ 23 lemmas, 0 Admitted |
-| **ε-Extreme Value Theorem** | ✅ 23 lemmas, 0 Admitted |
-| **156 Fallacies Formalized** | ✅ Complete taxonomy |
-| **46 Paradoxes Classified** | ✅ All dissolved |
+| **Non-surjectivity ℕ → [0,1] ∩ ℚ** | 167 lemmas, 0 Admitted |
+| **Countability of ℚ** (Calkin-Wilf) | 17 lemmas, 0 Admitted |
+| **ε-Intermediate Value Theorem** | 23 lemmas, 0 Admitted |
+| **ε-Extreme Value Theorem** | 26 lemmas, 0 Admitted |
+| **CROWN linear relaxation soundness** | 25 lemmas, 0 Admitted |
+| **Cauchy reals (constructive completion)** | 19 lemmas, 0 Admitted |
+| **Rounding safety (IEEE 754)** | 13 lemmas, 0 Admitted |
+| **Bayes' theorem + probabilistic fallacies** | 12 lemmas, 0 Admitted |
+| **156 Fallacies Formalized** | Complete taxonomy |
+| **46 Paradoxes Classified** | All dissolved |
 
-**Total: 509 proven theorems (385 core + 124 reasoning architecture)**
+**Total: 621 proven theorems (504 core + 117 reasoning architecture)**
 
-- **Single external axiom:** `classic` (Law of Excluded Middle, L3)  
-- **No Axiom of Infinity** — consequence of P4 (Process Philosophy)  
+- **Single external axiom:** `classic` (Law of Excluded Middle, L3)
+- **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
 - **No Axiom of Choice**
 
 ---
 
-## 📄 Papers
+## Papers
 
 | Title | Pages | Link |
 |-------|-------|------|
@@ -51,7 +55,7 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 
 ---
 
-## 🔑 The Key Contrast
+## The Key Contrast
 
 We prove **both**:
 
@@ -70,23 +74,28 @@ We prove **both**:
 theory-of-systems-coq/
 │
 ├── docs/                              # Papers & documentation
-│   ├── Theory_of_Systems_v5.pdf       # ★ Main paper (38 pages)
+│   ├── Theory_of_Systems_v5.pdf       # Main paper (38 pages)
 │   ├── nested_intervals.tex           # arXiv preprint (LaTeX)
 │   └── nested_intervals.pdf           # Compiled PDF
 │
 ├── src/                               # Coq source files
-│   ├── ShrinkingIntervals_uncountable_ERR.v  # ★ Main theorem (167 lemmas)
-│   ├── Countability_Q.v               # ℚ ≅ ℕ via Calkin-Wilf
-│   ├── EVT_idx.v                      # ε-EVT (L5-compliant)
-│   ├── IVT_ERR.v                      # ε-IVT
-│   ├── Archimedean_ERR.v              # Archimedean property
-│   ├── TheoryOfSystems_Core_ERR.v     # Laws L1-L5, paradox blocking
-│   ├── HeineBorel_ERR.v               # Compactness (partial — needs ℝ)
-│   ├── SchroederBernstein_ERR.v       # Injection theorem
-│   ├── TernaryRepresentation_ERR.v    # Digit representation
-│   └── DiagonalArgument_ERR.v         # Alternative diagonal proof
+│   ├── ShrinkingIntervals_ERR.v       # Main theorem: non-surjectivity (167 lemmas)
+│   ├── Countability_Q.v              # ℚ ≅ ℕ via Calkin-Wilf (17 lemmas, 0 Admitted)
+│   ├── EVT_idx.v                     # ε-EVT, L5-compliant (26 lemmas)
+│   ├── IVT_ERR.v                     # ε-IVT (23 lemmas)
+│   ├── Archimedean_ERR.v             # Archimedean property (14 lemmas)
+│   ├── PInterval_CROWN.v            # CROWN linear relaxation soundness (25 lemmas)
+│   ├── Probability.v                 # Probability + Bayesian fallacies (12 lemmas)
+│   ├── CauchyReal.v                  # Cauchy reals: completion of ℚ (19 lemmas)
+│   ├── RoundingSafety.v              # IEEE 754 rounding within intervals (13 lemmas)
+│   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
+│   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
+│   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
+│   ├── TernaryRepresentation_ERR.v   # Digit representation
+│   ├── DiagonalArgument_ERR.v        # Alternative diagonal proof
+│   └── EVT_ERR.v                     # EVT (deprecated, replaced by EVT_idx.v)
 │
-├── Architecture_of_Reasoning/         # ★ Fallacy & Paradox formalization
+├── Architecture_of_Reasoning/         # Fallacy & Paradox formalization
 │   ├── README.md                      # Detailed documentation
 │   ├── CompleteFallacyTaxonomy.v      # All 156 fallacies
 │   ├── AI_FallacyDetector.v           # LLM verification module
@@ -98,8 +107,11 @@ theory-of-systems-coq/
 │   └── demo.py                        # Python demo
 │
 ├── extraction/                        # Executable code
-│   └── diagonal_demo.ml               # OCaml demo
+│   └── diagonal_demo.ml              # OCaml demo
 │
+├── _CoqProject                        # Build configuration
+├── Makefile                           # Generated via coq_makefile
+├── .github/workflows/coq-ci.yml      # CI (coqorg/coq:8.19)
 └── README.md
 ```
 
@@ -111,37 +123,91 @@ theory-of-systems-coq/
 
 | File | Qed | Admitted | Status |
 |------|-----|----------|--------|
-| `ShrinkingIntervals_uncountable_ERR.v` | 167 | 0 | ✅ **100%** |
-| `Countability_Q.v` | 12 | 2 | 86% |
-| `EVT_idx.v` | 23 | 0 | ✅ **100%** |
-| `IVT_ERR.v` | 23 | 0 | ✅ **100%** |
-| `Archimedean_ERR.v` | 14 | 0 | ✅ **100%** |
-| `SchroederBernstein_ERR.v` | 14 | 0 | ✅ **100%** |
-| `TernaryRepresentation_ERR.v` | 52 | 2 | 96% |
+| `ShrinkingIntervals_ERR.v` | 167 | 0 | **100%** |
+| `EVT_idx.v` | 26 | 0 | **100%** |
+| `PInterval_CROWN.v` | 25 | 0 | **100%** |
+| `IVT_ERR.v` | 23 | 0 | **100%** |
+| `CauchyReal.v` | 19 | 0 | **100%** |
+| `Countability_Q.v` | 17 | 0 | **100%** |
+| `Archimedean_ERR.v` | 14 | 0 | **100%** |
+| `SchroederBernstein_ERR.v` | 14 | 0 | **100%** |
+| `RoundingSafety.v` | 13 | 0 | **100%** |
+| `Probability.v` | 12 | 0 | **100%** |
+| `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
-| `HeineBorel_ERR.v` | 22 | 2 | 92% |
-| `TheoryOfSystems_Core_ERR.v` | 29 | 3 | 91% |
-| **Core TOTAL** | **397** | **10** | **98%** |
+| `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
+| `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
+| `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
+| **Core TOTAL** | **504** | **13** | **97%** |
 
 ### Architecture of Reasoning
 
-| File | Lines | Theorems | Admitted |
-|------|-------|----------|----------|
-| `CompleteFallacyTaxonomy.v` | 601 | 19 | **0** |
-| `AI_FallacyDetector.v` | 1279 | 20 | **0** |
-| `ParadoxDissolution.v` | 1250 | 29 | **0** |
-| `Architecture_of_Reasoning.v` | 623 | 17 | **0** |
-| `ERR_Fallacies.v` | 906 | 22 | **0** |
-| `DomainViolations_Complete.v` | 485 | 17 | **0** |
-| **Reasoning TOTAL** | **5144** | **124** | **0** |
+| File | Theorems | Admitted |
+|------|----------|----------|
+| `CompleteFallacyTaxonomy.v` | 19 | **0** |
+| `AI_FallacyDetector.v` | 20 | **0** |
+| `ParadoxDissolution.v` | 29 | **0** |
+| `Architecture_of_Reasoning.v` | 17 | **0** |
+| `ERR_Fallacies.v` | 22 | **0** |
+| `DomainViolations_Complete.v` | 10 | **0** |
+| **Reasoning TOTAL** | **117** | **0** |
 
 ### Combined
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 397 | 10 |
-| Architecture of Reasoning | 124 | 0 |
-| **TOTAL** | **521** | **10** |
+| Core Mathematics | 504 | 13 |
+| Architecture of Reasoning | 117 | 0 |
+| **TOTAL** | **621** | **13** |
+
+**Remaining Admitted (documented):**
+
+| File | Count | Reason |
+|------|-------|--------|
+| `EVT_ERR.v` | 4 | Deprecated — replaced by `EVT_idx.v` (0 Admitted) |
+| `TernaryRepresentation_ERR.v` | 3 | `Qfloor` discontinuity; needs ~15 auxiliary lemmas |
+| `TheoryOfSystems_Core_ERR.v` | 3 | Universe polymorphism limitations (intentional) |
+| `HeineBorel_ERR.v` | 2 | Unprovable over ℚ (requires real-valued continuity) |
+| `DiagonalArgument_ERR.v` | 1 | Alternative approach; use `ShrinkingIntervals` instead |
+
+---
+
+## New in March 2026
+
+### CROWN Linear Relaxation Soundness (`PInterval_CROWN.v`)
+
+Formal soundness proof for the CROWN neural network verification method:
+- `relu_lower_bound_sound`: optimal lower bound for ReLU relaxation
+- `relu_upper_bound_sound`: triangle upper bound for ReLU
+- `crown_backward_sound`: backward-propagated bounds contain true output
+- `crown_tighter_ibp`: CROWN bounds are always tighter than IBP
+
+### Probability Theory + Bayesian Fallacies (`Probability.v`)
+
+Constructive probability over ℚ with Bayes' theorem and fallacy detection:
+- `bayes_rule`: P(H|E) = P(E|H) * P(H) / P(E)
+- `base_rate_fallacy_detected`: P(H|E) = P(E|H) iff P(H) = P(E)
+- `conjunction_fallacy_detected`: P(A∧B) ≤ P(A) always
+- `gamblers_fallacy_detected`: independence preserved across trials
+- `bayes_asymmetry`: contrapositive of base rate fallacy
+
+### Cauchy Reals (`CauchyReal.v`)
+
+Constructive completion of ℚ via Cauchy sequences:
+- Equivalence relation (refl, sym, trans) with congruence for arithmetic
+- Addition, negation, subtraction, constant sequences
+- Ordering, positivity, Archimedean property
+- Completeness: rational approximation, self-convergence, subsequence extraction
+- Algebraic laws: commutativity, associativity, identity, inverse
+
+### Rounding Safety (`RoundingSafety.v`)
+
+IEEE 754 floating-point rounding within interval bounds:
+- `rounding_safe`: x ∈ [lo,hi] → round(x) ∈ [lo-ε, hi+ε]
+- `ibp_rounding_step`: margin accumulates additively per layer
+- `crown_affine_rounding`: CROWN bounds survive rounding (positive/negative slope)
+- `double_rounding_error`: |round(round(x)) - x| ≤ 2ε
+- `ibp_two_steps`: composition of two rounding steps
 
 ---
 
@@ -149,8 +215,8 @@ theory-of-systems-coq/
 
 ### Prerequisites
 
-- Coq 8.18.0 or higher
-- Standard Library (included with Coq)
+- Rocq 9.0.1 (or Coq 8.18+)
+- Standard Library (included)
 
 ### Build Instructions
 
@@ -158,7 +224,7 @@ theory-of-systems-coq/
 git clone https://github.com/horsocrates/theory-of-systems-coq.git
 cd theory-of-systems-coq
 
-# Generate Makefile and compile
+# Generate Makefile and compile all files
 coq_makefile -f _CoqProject -o Makefile
 make
 ```
@@ -166,8 +232,9 @@ make
 ### Verify Main Theorem
 
 ```bash
-coqc src/ShrinkingIntervals_uncountable_ERR.v
-coqtop -l src/ShrinkingIntervals_uncountable_ERR.v -batch \
+cd src
+coqc -Q . ToS ShrinkingIntervals_ERR.v
+coqtop -Q . ToS -l ShrinkingIntervals_ERR.v -batch \
   -exec "Print Assumptions unit_interval_uncountable_trisect."
 ```
 
@@ -186,10 +253,6 @@ python3 demo.py
 
 # Or with custom input
 python3 demo.py "You're wrong because you're stupid."
-
-# OCaml (faster)
-ocamlfind ocamlopt -package str -linkpkg ai_fallacy_detector.ml -o detector
-./detector
 ```
 
 ---
@@ -274,8 +337,8 @@ See [Architecture_of_Reasoning/README.md](Architecture_of_Reasoning/README.md) f
 
 @article{horsocrates2026nested,
   author = {Horsocrates},
-  title = {Nested Rational Intervals for Non-Surjectivity of 
-           $\mathbb{N} \to [0,1] \cap \mathbb{Q}$: 
+  title = {Nested Rational Intervals for Non-Surjectivity of
+           $\mathbb{N} \to [0,1] \cap \mathbb{Q}$:
            A Coq Formalization with Minimal Axioms},
   year = {2026},
   note = {arXiv preprint}
@@ -286,9 +349,9 @@ See [Architecture_of_Reasoning/README.md](Architecture_of_Reasoning/README.md) f
 
 ## Contact
 
-**Horsocrates**  
-📧 horsocrates@proton.me  
-🔗 [GitHub](https://github.com/horsocrates)
+**Horsocrates**
+horsocrates@proton.me
+[GitHub](https://github.com/horsocrates)
 
 ---
 
