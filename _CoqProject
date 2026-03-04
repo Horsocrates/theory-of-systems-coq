@@ -14,6 +14,7 @@ src/Countability_Q.v
 src/SchroederBernstein_ERR.v
 src/HeineBorel_ERR.v
 src/TernaryRepresentation_ERR.v
+src/PInterval_CROWN.v
 
 # Architecture of Reasoning (0 axioms, self-contained)
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
