@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-752_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-770_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -42,10 +42,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Monotone Convergence Theorem** | 15 lemmas, 0 Admitted |
 | **Series Convergence (geometric, comparison)** | 22 lemmas, 0 Admitted |
 | **Power Series + Exponential convergence** | 19 lemmas, 0 Admitted |
+| **Gradient Descent convergence (quadratic)** | 18 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 752 proven theorems (635 core + 117 reasoning architecture)**
+**Total: 770 proven theorems (653 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -103,6 +104,7 @@ theory-of-systems-coq/
 │   ├── MonotoneConvergence.v        # Monotone Convergence Theorem (15 lemmas)
 │   ├── SeriesConvergence.v          # Series convergence: geometric, comparison (22 lemmas)
 │   ├── PowerSeries.v               # Power series + exponential convergence (19 lemmas)
+│   ├── GradientDescent.v           # GD convergence for quadratic loss (18 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -156,12 +158,13 @@ theory-of-systems-coq/
 | `MonotoneConvergence.v` | 15 | 0 | **100%** |
 | `SeriesConvergence.v` | 22 | 0 | **100%** |
 | `PowerSeries.v` | 19 | 0 | **100%** |
+| `GradientDescent.v` | 18 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **635** | **13** | **98%** |
+| **Core TOTAL** | **653** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -179,9 +182,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 635 | 13 |
+| Core Mathematics | 653 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **752** | **13** |
+| **TOTAL** | **770** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -196,6 +199,19 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Gradient Descent Convergence (`GradientDescent.v`)
+
+Formal proof that gradient descent on quadratic loss converges geometrically:
+- `gd_error_pow`: error at step n equals contraction^n times initial error
+- `gd_error_cauchy`: error sequence is Cauchy (weight convergence)
+- `gd_weight_converges`: weights converge to optimum w*
+- `gd_loss_decreasing`: loss is monotonically decreasing
+- **`gd_loss_converges_zero`**: Crown jewel -- quadratic loss converges to 0
+- `gd_convergence_rate`: |w_n - w*| <= |1-2eta|^n * |w_0 - w*|
+- `optimal_lr_one_step`: eta = 1/2 gives exact convergence in one step
+- `gd_cumulative_error`: cumulative error bounded by |e_0|/(1-|c|)
+- **0 axioms** -- fully constructive (no classic needed)
 
 ### Power Series & Exponential Convergence (`PowerSeries.v`)
 
