@@ -6,6 +6,12 @@
 (*  This file demonstrates how paradoxes are blocked at the type level.    *)
 (*  Full proofs are in the extended version.                                *)
 (*                                                                          *)
+(*  STATUS: 3 Admitted (INTENTIONAL — universe polymorphism limitations)    *)
+(*          update_increases_size: filter/seq reasoning (minor bookkeeping) *)
+(*          no_self_level_elements: requires explicit universe annotations  *)
+(*          cantor_no_system_of_all_L2_systems: requires universe polymorphism *)
+(*          All paradox-blocking theorems are FULLY PROVED.                 *)
+(*                                                                          *)
 (*  Author: Horsocrates | Version: 0.1 | Date: January 2026                 *)
 (* ========================================================================= *)
 

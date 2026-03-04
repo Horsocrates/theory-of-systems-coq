@@ -10,6 +10,8 @@
 (*                                                                           *)
 (*  METHOD: Calkin-Wilf tree enumeration                                     *)
 (*                                                                           *)
+(*  STATUS: 100% COMPLETE (0 Admitted, 0 axioms, fully constructive)         *)
+(*                                                                           *)
 (*  AXIOMS: NONE (not even classic!) - fully constructive                    *)
 (*                                                                           *)
 (*  Author: Horsocrates | Date: January 2026                                 *)
@@ -151,9 +153,8 @@ Lemma gcd_cw_left : forall a b,
 Proof.
   intros a b Hgcd.
   rewrite Pos2Z.inj_add.
-  rewrite Z.gcd_comm.
+  rewrite Z.add_comm.
   rewrite Z.gcd_add_diag_r.
-  rewrite Z.gcd_comm.
   exact Hgcd.
 Qed.
 
@@ -163,7 +164,9 @@ Lemma gcd_cw_right : forall a b,
 Proof.
   intros a b Hgcd.
   rewrite Pos2Z.inj_add.
+  rewrite Z.gcd_comm.
   rewrite Z.gcd_add_diag_r.
+  rewrite Z.gcd_comm.
   exact Hgcd.
 Qed.
 
@@ -233,7 +236,7 @@ Proof.
     right. right. split. exact Heq.
     (* gcd(a,a) = a = 1 *)
     subst. rewrite Z.gcd_diag in Hgcd.
-    destruct a; simpl in Hgcd; try discriminate. reflexivity.
+    destruct b; simpl in Hgcd; try discriminate. reflexivity.
   - left. exact Hlt.
   - right. left. exact Hgt.
 Qed.
@@ -289,20 +292,159 @@ Proof.
   intros n m H.
   unfold enum_QPos in H.
   apply cw_node_injective in H.
-  apply Pos2Nat.inj in H.
-  lia.
+  apply Nat2Pos.inj in H; lia.
 Qed.
 
 (* ========================================================================= *)
 (* SECTION 7: SURJECTIVITY                                                   *)
 (* ========================================================================= *)
 
+(* --- Helper: cw_node components are always >= 1 (trivial for positive) --- *)
+
+Lemma cw_node_pos : forall p,
+  let (a, b) := cw_node p in
+  (Pos.to_nat a >= 1 /\ Pos.to_nat b >= 1)%nat.
+Proof.
+  intros p. destruct (cw_node p) as [a b].
+  split; apply Pos2Nat.is_pos.
+Qed.
+
+(* --- Helper: path_to_node_fuel gives correct result with sufficient fuel --- *)
+
+Lemma path_fuel_cw_node : forall p fuel,
+  let (a, b) := cw_node p in
+  (fuel >= Pos.to_nat a + Pos.to_nat b)%nat ->
+  path_to_node_fuel fuel a b = p.
+Proof.
+  induction p; intros fuel.
+  - (* p = xI p' : right child *)
+    simpl cw_node.
+    destruct (cw_node p) as [a b] eqn:Heq.
+    unfold cw_right.
+    intros Hfuel.
+    (* fuel >= Pos.to_nat (a+b) + Pos.to_nat b, which is >= 2, so fuel = S fuel' *)
+    destruct fuel as [| fuel'].
+    { exfalso. rewrite Pos2Nat.inj_add in Hfuel.
+      pose proof (Pos2Nat.is_pos a). pose proof (Pos2Nat.is_pos b). lia. }
+    simpl path_to_node_fuel.
+    (* a+b =? b is false because a > 0 *)
+    destruct ((a + b =? b)%positive) eqn:E1.
+    { apply Pos.eqb_eq in E1. lia. }
+    (* a+b <? b is false because a+b > b *)
+    destruct ((a + b <? b)%positive) eqn:E2.
+    { apply Pos.ltb_lt in E2. lia. }
+    (* recurse on (a+b - b, b) = (a, b) *)
+    rewrite Pos.add_sub.
+    f_equal.
+    apply IHp.
+    rewrite Pos2Nat.inj_add in Hfuel.
+    pose proof (Pos2Nat.is_pos b). lia.
+  - (* p = xO p' : left child *)
+    simpl cw_node.
+    destruct (cw_node p) as [a b] eqn:Heq.
+    unfold cw_left.
+    intros Hfuel.
+    (* fuel >= Pos.to_nat a + Pos.to_nat (a+b), which is >= 2 *)
+    destruct fuel as [| fuel'].
+    { exfalso. rewrite Pos2Nat.inj_add in Hfuel.
+      pose proof (Pos2Nat.is_pos a). pose proof (Pos2Nat.is_pos b). lia. }
+    simpl path_to_node_fuel.
+    (* a =? a+b is false because b > 0 *)
+    destruct ((a =? a + b)%positive) eqn:E1.
+    { apply Pos.eqb_eq in E1. lia. }
+    (* a <? a+b is true *)
+    destruct ((a <? a + b)%positive) eqn:E2.
+    2:{ apply Pos.ltb_ge in E2. pose proof (Pos.lt_add_r a b). lia. }
+    (* recurse on (a, a+b - a) = (a, b) *)
+    rewrite Pos.add_comm. rewrite Pos.add_sub.
+    f_equal.
+    apply IHp.
+    rewrite Pos2Nat.inj_add in Hfuel.
+    pose proof (Pos2Nat.is_pos a). lia.
+  - (* p = xH : root *)
+    simpl. intros Hfuel.
+    destruct fuel as [| fuel'].
+    { lia. }
+    simpl. reflexivity.
+Qed.
+
 (* Round-trip lemma: path_to_node inverts cw_node *)
 Lemma path_cw_node_roundtrip : forall p,
   path_to_node (cw_node p) = p.
 Proof.
-  (* This requires careful induction on p with fuel analysis *)
-Admitted. (* TODO: Complete this proof *)
+  intros p.
+  unfold path_to_node.
+  pose proof (path_fuel_cw_node p (let (a, b) := cw_node p in Pos.to_nat a + Pos.to_nat b)) as H.
+  destruct (cw_node p) as [a b] eqn:Heq in *.
+  apply H. lia.
+Qed.
+
+(* --- Helper: reverse round-trip for coprime pairs --- *)
+(* cw_node (path_to_node (a,b)) = (a,b) when gcd(a,b) = 1 *)
+
+Lemma path_fuel_coprime_fuel_mono : forall fuel a b,
+  Z.gcd (Z.pos a) (Z.pos b) = 1%Z ->
+  (fuel >= Pos.to_nat a + Pos.to_nat b)%nat ->
+  cw_node (path_to_node_fuel fuel a b) = (a, b).
+Proof.
+  induction fuel as [fuel IH] using lt_wf_ind.
+  intros a b Hgcd Hfuel.
+  destruct fuel as [| fuel'].
+  { exfalso. pose proof (Pos2Nat.is_pos a). pose proof (Pos2Nat.is_pos b). lia. }
+  simpl path_to_node_fuel.
+  destruct (Pos.eqb_spec a b) as [Hab_eq | Hab_neq].
+  - (* a = b: must have a = b = 1 *)
+    subst. rewrite Z.gcd_diag in Hgcd.
+    destruct b; simpl in Hgcd; try discriminate.
+    simpl. reflexivity.
+  - (* a <> b *)
+    destruct (Pos.ltb_spec a b) as [Ha_lt | Ha_ge].
+    + (* a < b: left child, recurse on (a, b - a) *)
+      simpl cw_node. unfold cw_left.
+      (* Need: cw_node (path_to_node_fuel fuel' a (b - a)) = (a', b') *)
+      (* and then a' = a, a' + b' = b, i.e. b' = b - a *)
+      assert (Hsub : (a + (b - a) = b)%positive).
+      { rewrite Pos.add_comm. apply Pos.sub_add. exact Ha_lt. }
+      (* By IH, cw_node (path_to_node_fuel fuel' a (b-a)) = (a, b-a) *)
+      assert (Hgcd' : Z.gcd (Z.pos a) (Z.pos (b - a)) = 1%Z).
+      { rewrite Pos2Z.inj_sub by exact Ha_lt.
+        rewrite Z.gcd_sub_diag_r. exact Hgcd. }
+      assert (Hfuel' : (fuel' >= Pos.to_nat a + Pos.to_nat (b - a))%nat).
+      { rewrite Pos2Nat.inj_sub by exact Ha_lt.
+        pose proof (Pos2Nat.is_pos a).
+        pose proof (Pos2Nat.is_pos b).
+        pose proof (Pos2Nat.is_pos (b - a)).
+        lia. }
+      rewrite (IH fuel' (Nat.lt_succ_diag_r _) a (b - a) Hgcd' Hfuel').
+      rewrite Hsub. reflexivity.
+    + (* a >= b, a <> b, so a > b: right child, recurse on (a - b, b) *)
+      assert (Hb_lt : (b < a)%positive) by lia.
+      simpl cw_node. unfold cw_right.
+      assert (Hsub : (a - b + b = a)%positive).
+      { apply Pos.sub_add. exact Hb_lt. }
+      assert (Hgcd' : Z.gcd (Z.pos (a - b)) (Z.pos b) = 1%Z).
+      { rewrite Pos2Z.inj_sub by exact Hb_lt.
+        rewrite Z.gcd_comm. rewrite Z.gcd_sub_diag_r.
+        rewrite Z.gcd_comm. exact Hgcd. }
+      assert (Hfuel' : (fuel' >= Pos.to_nat (a - b) + Pos.to_nat b)%nat).
+      { rewrite Pos2Nat.inj_sub by exact Hb_lt.
+        pose proof (Pos2Nat.is_pos a).
+        pose proof (Pos2Nat.is_pos b).
+        lia. }
+      rewrite (IH fuel' (Nat.lt_succ_diag_r _) (a - b) b Hgcd' Hfuel').
+      rewrite Hsub. reflexivity.
+Qed.
+
+Lemma cw_node_path_roundtrip : forall a b,
+  Z.gcd (Z.pos a) (Z.pos b) = 1%Z ->
+  cw_node (path_to_node (a, b)) = (a, b).
+Proof.
+  intros a b Hgcd.
+  unfold path_to_node.
+  apply path_fuel_coprime_fuel_mono.
+  - exact Hgcd.
+  - lia.
+Qed.
 
 Theorem enum_surjective : forall a b : positive,
   Z.gcd (Z.pos a) (Z.pos b) = 1%Z ->
@@ -312,8 +454,14 @@ Proof.
   exists (index_of_QPos (a, b)).
   unfold enum_QPos, index_of_QPos.
   (* Need: cw_node (Pos.of_nat (S (Pos.to_nat (path_to_node (a,b)) - 1))) = (a,b) *)
-  (* Simplifies to: cw_node (path_to_node (a,b)) = (a,b) *)
-Admitted. (* TODO: Prove round-trip property *)
+  (* Since Pos.to_nat p >= 1, S (Pos.to_nat p - 1) = Pos.to_nat p *)
+  assert (Hpos : (Pos.to_nat (path_to_node (a, b)) >= 1)%nat).
+  { apply Pos2Nat.is_pos. }
+  replace (S (Pos.to_nat (path_to_node (a, b)) - 1)) with
+    (Pos.to_nat (path_to_node (a, b))) by lia.
+  rewrite Pos2Nat.id.
+  apply cw_node_path_roundtrip. exact Hgcd.
+Qed.
 
 (* ========================================================================= *)
 (* SECTION 8: MAIN THEOREM                                                   *)

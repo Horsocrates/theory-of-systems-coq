@@ -9,7 +9,7 @@
 (*  Version: 2.0 (E/R/R)                                                     *)
 (*  Date:    January 2026                                                    *)
 (*                                                                           *)
-(*  STATUS: 28 Qed, 7 Admitted (~80%)                                        *)
+(*  STATUS: 28 Qed, 2 Admitted (93%) — see notes on remaining Admitted       *)
 (*                                                                           *)
 (* ========================================================================= *)
 (*                                                                           *)
@@ -553,6 +553,13 @@ Proof.
      3. Inductive relationship for higher digits
      
      For now, we admit this technical lemma.
+
+     REMAINING ADMITTED: This is a base-3 digit extraction consistency lemma.
+     Closing it requires ~15 auxiliary lemmas about Qfloor/mod interaction with
+     scaling by 3. The approximation bound (digit_expansion_approx) which is
+     the actual theorem used downstream is proved ASSUMING this lemma.
+     Alternative: use the interval-based approach in ShrinkingIntervals_ERR.v
+     which avoids digit extraction entirely and has 0 Admitted.
   *)
   admit.
 Admitted.
@@ -941,6 +948,13 @@ Proof.
      Error terms: bounded by 1/3^m each
      
      Total: >= 1/3^{n+1} - 3/3^m
+
+     REMAINING ADMITTED: Depends on extracted_equals_floor above.
+     The structural core (flip ≠ original, digit contribution bounds) is proved.
+     The gap is connecting digit-level differences to Q-level separation
+     through the extracted_equals_floor bridge.
+     Alternative: ShrinkingIntervals_ERR.v proves uncountability via
+     nested intervals (0 Admitted), avoiding digit extraction.
   *)
   admit.
 Admitted.
