@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-842_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-860_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -47,10 +47,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Mean Value Theorem (grid MVT, monotonicity, Lipschitz)** | 18 lemmas, 0 Admitted |
 | **Riemann Integration (FTC, integral comparison)** | 18 lemmas, 0 Admitted |
 | **Integral Applications (product rule, IBP)** | 18 lemmas, 0 Admitted |
+| **Taylor Series (remainder, convexity, sandwich)** | 18 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 842 proven theorems (725 core + 117 reasoning architecture)**
+**Total: 860 proven theorems (743 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -113,6 +114,7 @@ theory-of-systems-coq/
 │   ├── MeanValueTheorem.v          # Grid MVT, monotonicity, Lipschitz (18 lemmas)
 │   ├── RiemannIntegration.v        # Riemann sums, FTC, integral comparison (18 lemmas)
 │   ├── IntegralApplications.v     # Product rule, IBP, antiderivative uniqueness (18 lemmas)
+│   ├── TaylorSeries.v             # Taylor remainder, convexity, sandwich bounds (18 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -171,12 +173,13 @@ theory-of-systems-coq/
 | `MeanValueTheorem.v` | 18 | 0 | **100%** |
 | `RiemannIntegration.v` | 18 | 0 | **100%** |
 | `IntegralApplications.v` | 18 | 0 | **100%** |
+| `TaylorSeries.v` | 18 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **725** | **13** | **98%** |
+| **Core TOTAL** | **743** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -246,6 +249,24 @@ Product rule for uniform differentiability and Integration by Parts:
 - `udiff_negate`, `udiff_sub`: closure under negation and subtraction
 - `antiderivative_unique`: same derivative implies same increment (up to ε)
 - `ibp_identity`: IBP with identity function `f(x)=x`
+- **0 axioms** — fully constructive
+
+### Taylor Series — Remainder Bounds, Convexity, Sandwich (`TaylorSeries.v`)
+
+First-order Taylor expansion with constructive remainder bounds:
+- `udiff_const`, `udiff_bmt`, `bmt_sq_udiff`: building blocks for Taylor remainder
+- `taylor_remainder_udiff`: remainder function `f(x) - f(a) - f'(a)(x-a)` is udiff
+- **`taylor1_ftc`**: first-order Taylor via FTC — remainder ≈ RS(f'-f'(a))
+- **`taylor1_bound`**: `|f(b)-f(a)-f'(a)(b-a)| ≤ (C+ε)(b-a)` if `|f'-f'(a)| ≤ C`
+- `taylor1_affine`, `taylor1_quadratic`: affine remainder = 0, quadratic remainder = (b-a)²
+- `ibp_taylor1_decomp`: IBP-based Taylor decomposition via `∫f''·(b-t)`
+- `taylor_nonneg_remainder`: nonnegative remainder from nonneg f''
+- **`taylor1_var_bound`**: variable second-derivative bound via unified grid
+- **`taylor_convexity`**: f'' ≥ 0 implies approximate convexity
+- **`taylor_concavity`**: f'' ≤ 0 implies approximate concavity
+- `taylor_local_min`: second derivative test for approximate local minimum
+- **`taylor_sandwich`**: combined convexity + upper bound sandwich theorem
+- `taylor_sandwich_const_deriv`: constant derivative implies exact affine approximation
 - **0 axioms** — fully constructive
 
 ### Mean Value Theorem — Grid MVT, Monotonicity, Lipschitz (`MeanValueTheorem.v`)
