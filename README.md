@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-860_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-880_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -48,10 +48,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Riemann Integration (FTC, integral comparison)** | 18 lemmas, 0 Admitted |
 | **Integral Applications (product rule, IBP)** | 18 lemmas, 0 Admitted |
 | **Taylor Series (remainder, convexity, sandwich)** | 18 lemmas, 0 Admitted |
+| **Uniform Convergence (limit exchange, Dini)** | 20 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 860 proven theorems (743 core + 117 reasoning architecture)**
+**Total: 880 proven theorems (763 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -115,6 +116,7 @@ theory-of-systems-coq/
 │   ├── RiemannIntegration.v        # Riemann sums, FTC, integral comparison (18 lemmas)
 │   ├── IntegralApplications.v     # Product rule, IBP, antiderivative uniqueness (18 lemmas)
 │   ├── TaylorSeries.v             # Taylor remainder, convexity, sandwich bounds (18 lemmas)
+│   ├── UniformConvergence.v       # Uniform convergence, limit exchange, Dini (20 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -174,12 +176,13 @@ theory-of-systems-coq/
 | `RiemannIntegration.v` | 18 | 0 | **100%** |
 | `IntegralApplications.v` | 18 | 0 | **100%** |
 | `TaylorSeries.v` | 18 | 0 | **100%** |
+| `UniformConvergence.v` | 20 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **743** | **13** | **98%** |
+| **Core TOTAL** | **763** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -197,9 +200,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 725 | 13 |
+| Core Mathematics | 763 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **842** | **13** |
+| **TOTAL** | **880** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -214,6 +217,27 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Uniform Convergence — Limit Exchange, Dini's Theorem (`UniformConvergence.v`)
+
+Uniform convergence of function sequences with limit exchange theorems:
+- `pointwise_limit_const`, `uniform_limit_const`: constant sequence convergence
+- `uniform_implies_pointwise`: uniform → pointwise convergence
+- `uniform_limit_unique`: limit is unique (up to Qeq on the interval)
+- **`uniform_limit_continuous_at`**: ε/3 trick — uniform limit of continuous functions is continuous at a point
+- `uniform_limit_continuous_on`: continuity preservation on entire interval
+- `uniform_cauchy_of_convergent`: uniform convergence → uniform Cauchy
+- `uniform_cauchy_pointwise`: uniform Cauchy → pointwise Cauchy
+- `riemann_sum_sub`, `riemann_sum_close`: Riemann sum approximation infrastructure
+- **`integral_limit_exchange`**: ∫(lim fn) ≈ lim ∫(fn) — main integral-limit exchange
+- `integral_uniform_cauchy`, `riemann_sum_uniform_bound`: integral Cauchy and bounds
+- `udiff_close`, `bounded_deriv_diff_increment`: derivative closeness control
+- **`derivative_limit_exchange`**: pointwise increment control from uniform derivative convergence
+- `uniform_deriv_preserves_bound`: bounded derivatives preserved in limit
+- `uniform_limit_add`: sum of uniform convergences
+- `finite_max_N`: helper — extract uniform N from finitely many pointwise convergences
+- **`dini_monotone`**: Dini's theorem — monotone pointwise convergence on finite grid → uniform convergence
+- **0 axioms** — fully constructive
 
 ### Riemann Integration — Sums, FTC, Integral Comparison (`RiemannIntegration.v`)
 
