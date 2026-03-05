@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-806_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-824_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -45,10 +45,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Gradient Descent convergence (quadratic)** | 18 lemmas, 0 Admitted |
 | **Differentiation (division-free, power rule)** | 18 lemmas, 0 Admitted |
 | **Mean Value Theorem (grid MVT, monotonicity, Lipschitz)** | 18 lemmas, 0 Admitted |
+| **Riemann Integration (FTC, integral comparison)** | 18 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 806 proven theorems (689 core + 117 reasoning architecture)**
+**Total: 824 proven theorems (707 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -109,6 +110,7 @@ theory-of-systems-coq/
 │   ├── GradientDescent.v           # GD convergence for quadratic loss (18 lemmas)
 │   ├── Differentiation.v           # Division-free derivatives, power rule (18 lemmas)
 │   ├── MeanValueTheorem.v          # Grid MVT, monotonicity, Lipschitz (18 lemmas)
+│   ├── RiemannIntegration.v        # Riemann sums, FTC, integral comparison (18 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -165,12 +167,13 @@ theory-of-systems-coq/
 | `GradientDescent.v` | 18 | 0 | **100%** |
 | `Differentiation.v` | 18 | 0 | **100%** |
 | `MeanValueTheorem.v` | 18 | 0 | **100%** |
+| `RiemannIntegration.v` | 18 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **689** | **13** | **98%** |
+| **Core TOTAL** | **707** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -188,9 +191,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 689 | 13 |
+| Core Mathematics | 707 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **806** | **13** |
+| **TOTAL** | **824** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -205,6 +208,22 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Riemann Integration — Sums, FTC, Integral Comparison (`RiemannIntegration.v`)
+
+Walk-point Riemann sums with Fundamental Theorem of Calculus:
+- `riemann_sum`: left Riemann sum on uniform walk-point grid
+- `tele_sum`: telescoping sum for FTC proof
+- `riemann_sum_const`, `riemann_sum_add`, `riemann_sum_scale`: linearity of Riemann sums
+- `riemann_sum_nonneg`, `riemann_sum_monotone`: ordering properties
+- `riemann_sum_abs_bound`, `riemann_sum_global_bound`: integral bounds
+- `telescope_collapse`: telescoping sum = f(end) - f(a) (Qeq)
+- **`ftc_grid`**: Fundamental Theorem of Calculus — Riemann sum of f' approximates f(end) - f(a)
+- `ftc_constant`, `ftc_affine`: exact FTC cases
+- `ftc_nonneg_integral`: nonneg derivative implies nonneg integral
+- `udiff_add`, `udiff_scale`: udiff closure under addition and scaling
+- `ftc_linearity`, `ftc_comparison`: integral linearity and comparison
+- **0 axioms** — fully constructive
 
 ### Mean Value Theorem — Grid MVT, Monotonicity, Lipschitz (`MeanValueTheorem.v`)
 
