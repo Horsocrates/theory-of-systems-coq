@@ -28,6 +28,7 @@ src/GradientDescent.v
 src/Differentiation.v
 src/MeanValueTheorem.v
 src/RiemannIntegration.v
+src/IntegralApplications.v
 src/Measure.v
 src/SoftmaxProbability.v
 

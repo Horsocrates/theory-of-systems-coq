@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-824_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-842_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -46,10 +46,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Differentiation (division-free, power rule)** | 18 lemmas, 0 Admitted |
 | **Mean Value Theorem (grid MVT, monotonicity, Lipschitz)** | 18 lemmas, 0 Admitted |
 | **Riemann Integration (FTC, integral comparison)** | 18 lemmas, 0 Admitted |
+| **Integral Applications (product rule, IBP)** | 18 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 824 proven theorems (707 core + 117 reasoning architecture)**
+**Total: 842 proven theorems (725 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -111,6 +112,7 @@ theory-of-systems-coq/
 │   ├── Differentiation.v           # Division-free derivatives, power rule (18 lemmas)
 │   ├── MeanValueTheorem.v          # Grid MVT, monotonicity, Lipschitz (18 lemmas)
 │   ├── RiemannIntegration.v        # Riemann sums, FTC, integral comparison (18 lemmas)
+│   ├── IntegralApplications.v     # Product rule, IBP, antiderivative uniqueness (18 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -168,12 +170,13 @@ theory-of-systems-coq/
 | `Differentiation.v` | 18 | 0 | **100%** |
 | `MeanValueTheorem.v` | 18 | 0 | **100%** |
 | `RiemannIntegration.v` | 18 | 0 | **100%** |
+| `IntegralApplications.v` | 18 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **707** | **13** | **98%** |
+| **Core TOTAL** | **725** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -191,9 +194,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 707 | 13 |
+| Core Mathematics | 725 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **824** | **13** |
+| **TOTAL** | **842** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -223,6 +226,26 @@ Walk-point Riemann sums with Fundamental Theorem of Calculus:
 - `ftc_nonneg_integral`: nonneg derivative implies nonneg integral
 - `udiff_add`, `udiff_scale`: udiff closure under addition and scaling
 - `ftc_linearity`, `ftc_comparison`: integral linearity and comparison
+- **0 axioms** — fully constructive
+
+### Integral Applications — Product Rule, IBP, Antiderivative Uniqueness (`IntegralApplications.v`)
+
+Product rule for uniform differentiability and Integration by Parts:
+- `product_decomp`: algebraic identity for product increments
+- `product_tele_collapse`: telescoping product sums collapse to endpoint difference
+- `triple_abs_bound`: triangle inequality for three terms
+- `riemann_sum_ext`: extensionality for Riemann sums
+- `increment_from_udiff`: udiff gives linear increment bound
+- `increment_product_bound`, `product_error_bound`: error bounds for product terms
+- `udiff_ext`: transfer udiff across extensionally equal functions
+- **`udiff_product`**: product rule — `(fg)' = f'g + fg'` for uniform differentiability
+- `udiff_square`: corollary — `(f²)' = 2ff'`
+- **`ftc_product`**: FTC for products via udiff_product
+- **`integration_by_parts`**: IBP — `∫f'g ≈ fg|_a^b - ∫fg'`
+- `ibp_bound`, `ibp_self`: IBP corollaries
+- `udiff_negate`, `udiff_sub`: closure under negation and subtraction
+- `antiderivative_unique`: same derivative implies same increment (up to ε)
+- `ibp_identity`: IBP with identity function `f(x)=x`
 - **0 axioms** — fully constructive
 
 ### Mean Value Theorem — Grid MVT, Monotonicity, Lipschitz (`MeanValueTheorem.v`)
