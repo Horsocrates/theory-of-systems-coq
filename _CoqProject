@@ -25,6 +25,7 @@ src/MonotoneConvergence.v
 src/SeriesConvergence.v
 src/PowerSeries.v
 src/GradientDescent.v
+src/Differentiation.v
 src/Measure.v
 src/SoftmaxProbability.v
 

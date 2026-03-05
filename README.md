@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-770_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-788_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -46,7 +46,7 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 770 proven theorems (653 core + 117 reasoning architecture)**
+**Total: 788 proven theorems (671 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -159,6 +159,7 @@ theory-of-systems-coq/
 | `SeriesConvergence.v` | 22 | 0 | **100%** |
 | `PowerSeries.v` | 19 | 0 | **100%** |
 | `GradientDescent.v` | 18 | 0 | **100%** |
+| `Differentiation.v` | 18 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
@@ -199,6 +200,19 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Differentiation — Division-Free Derivatives & Power Rule (`Differentiation.v`)
+
+Division-free derivative formalization using `|f(x+h) - f(x) - L*h| < eps * |h|`:
+- `deriv_const`, `deriv_id`, `deriv_affine`: basic derivative rules
+- `deriv_scale`, `deriv_neg`, `deriv_sum`, `deriv_sub`: linearity of derivatives
+- `deriv_product`: product rule `(fg)' = f'g + fg'` (hardest proof)
+- `deriv_power_succ`: power rule by induction `d/dx(x^{n+1}) = (n+1)*x^n`
+- `deriv_implies_continuous`: differentiable implies continuous
+- `deriv_unique`: derivative is unique (Qeq)
+- `quadratic_loss_derivative`: connects to GD — `d/dw (w-w*)^2 = 2(w-w*)`
+- **`local_min_zero_deriv`**: Fermat's theorem — local min implies zero derivative
+- **0 axioms** -- fully constructive
 
 ### Gradient Descent Convergence (`GradientDescent.v`)
 
