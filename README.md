@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-880_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-900_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -49,10 +49,11 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Integral Applications (product rule, IBP)** | 18 lemmas, 0 Admitted |
 | **Taylor Series (remainder, convexity, sandwich)** | 18 lemmas, 0 Admitted |
 | **Uniform Convergence (limit exchange, Dini)** | 20 lemmas, 0 Admitted |
+| **Fixed Point Theory (Banach contraction, perturbation)** | 20 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 880 proven theorems (763 core + 117 reasoning architecture)**
+**Total: 900 proven theorems (783 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -117,6 +118,7 @@ theory-of-systems-coq/
 │   ├── IntegralApplications.v     # Product rule, IBP, antiderivative uniqueness (18 lemmas)
 │   ├── TaylorSeries.v             # Taylor remainder, convexity, sandwich bounds (18 lemmas)
 │   ├── UniformConvergence.v       # Uniform convergence, limit exchange, Dini (20 lemmas)
+│   ├── FixedPoint.v              # Banach contraction mapping, perturbation bounds (20 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -177,12 +179,13 @@ theory-of-systems-coq/
 | `IntegralApplications.v` | 18 | 0 | **100%** |
 | `TaylorSeries.v` | 18 | 0 | **100%** |
 | `UniformConvergence.v` | 20 | 0 | **100%** |
+| `FixedPoint.v` | 20 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **763** | **13** | **98%** |
+| **Core TOTAL** | **783** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -200,9 +203,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 763 | 13 |
+| Core Mathematics | 783 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **880** | **13** |
+| **TOTAL** | **900** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -217,6 +220,29 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Fixed Point Theory — Banach Contraction, Perturbation Stability (`FixedPoint.v`)
+
+Banach contraction mapping theorem and fixed point theory over constructive Q:
+- `is_contraction`: contraction mapping definition on [a,b] with factor 0 ≤ c < 1
+- `iterate`: iterated function application f^n(x)
+- `iterate_in_interval`, `iterate_shift`: iterates stay in [a,b], shift identity
+- `iterate_contraction`: |f^n(x) - f^n(y)| ≤ c^n |x-y| — exponential convergence
+- `iterate_step_shrink`: |f^{n+1}(x) - f^n(x)| ≤ c^n |f(x)-x| — step decay
+- `qpow_le_mono`: c^m ≤ c^n for n ≤ m when 0 ≤ c ≤ 1
+- **`contraction_unique_fixed`**: fixed points are unique — f(p)=p ∧ f(q)=q → p=q
+- **`iterate_diff_bound`**: (1-c)|f^m(x)-f^n(x)| ≤ |f(x)-x|(c^n - c^m) — a priori error
+- **`iterate_is_cauchy`**: contraction iterates form a Cauchy sequence (via geometric bound)
+- **`banach_fixed_point`**: Banach fixed point as CauchySeq limit of iterates
+- `approximate_fixed_point`: |f(f^n(x)) - f^n(x)| < ε for large n
+- **`fixed_point_independent`**: iterates from different starting points converge
+- `contraction_limit_in_interval`: limit stays approximately in [a,b]
+- `iterate_add`: f^{m+n}(x) = f^m(f^n(x)) — iterate composition
+- **`contraction_compose`**: composition of contractions is a contraction (c₁·c₂ factor)
+- **`iterate_is_contraction`**: k-th iterate is contraction with factor c^k (k≥1)
+- `contraction_monotone_iterate`: monotone f with f(x)≥x gives non-decreasing iterates
+- **`perturbed_iterate_bound`**: |f^n(x)-g^n(x)| ≤ δ·Σc^k — perturbation stability
+- **0 axioms** — fully constructive
 
 ### Uniform Convergence — Limit Exchange, Dini's Theorem (`UniformConvergence.v`)
 
