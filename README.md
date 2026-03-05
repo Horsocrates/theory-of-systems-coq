@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-788_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-806_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -43,10 +43,12 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Series Convergence (geometric, comparison)** | 22 lemmas, 0 Admitted |
 | **Power Series + Exponential convergence** | 19 lemmas, 0 Admitted |
 | **Gradient Descent convergence (quadratic)** | 18 lemmas, 0 Admitted |
+| **Differentiation (division-free, power rule)** | 18 lemmas, 0 Admitted |
+| **Mean Value Theorem (grid MVT, monotonicity, Lipschitz)** | 18 lemmas, 0 Admitted |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 788 proven theorems (671 core + 117 reasoning architecture)**
+**Total: 806 proven theorems (689 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -105,6 +107,8 @@ theory-of-systems-coq/
 │   ├── SeriesConvergence.v          # Series convergence: geometric, comparison (22 lemmas)
 │   ├── PowerSeries.v               # Power series + exponential convergence (19 lemmas)
 │   ├── GradientDescent.v           # GD convergence for quadratic loss (18 lemmas)
+│   ├── Differentiation.v           # Division-free derivatives, power rule (18 lemmas)
+│   ├── MeanValueTheorem.v          # Grid MVT, monotonicity, Lipschitz (18 lemmas)
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
 │   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
@@ -160,12 +164,13 @@ theory-of-systems-coq/
 | `PowerSeries.v` | 19 | 0 | **100%** |
 | `GradientDescent.v` | 18 | 0 | **100%** |
 | `Differentiation.v` | 18 | 0 | **100%** |
+| `MeanValueTheorem.v` | 18 | 0 | **100%** |
 | `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
 | `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
 | `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
 | `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
 | `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **653** | **13** | **98%** |
+| **Core TOTAL** | **689** | **13** | **98%** |
 
 ### Architecture of Reasoning
 
@@ -183,9 +188,9 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 653 | 13 |
+| Core Mathematics | 689 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **770** | **13** |
+| **TOTAL** | **806** | **13** |
 
 **Remaining Admitted (documented):**
 
@@ -200,6 +205,21 @@ theory-of-systems-coq/
 ---
 
 ## New in March 2026
+
+### Mean Value Theorem — Grid MVT, Monotonicity, Lipschitz (`MeanValueTheorem.v`)
+
+Walk-point telescoping approach that bypasses Q incompleteness and setoid issues:
+- `walk_point_qeq`, `walk_point_in_interval`: infrastructure for Leibniz-exact grid points
+- `udiff_on`: uniform differentiability on intervals (single delta for all points)
+- `bounded_deriv_bounded_increment`: **Main theorem** — bounded derivative implies bounded increment via grid telescoping
+- `zero_deriv_near_constant`: zero derivative implies near-constant (corollary)
+- `pos_deriv_increases` / `neg_deriv_decreases`: monotonicity from derivative sign
+- `nonneg_deriv_approx_nondec`: approximate monotonicity for nonneg derivative
+- `bounded_deriv_lipschitz_local`: local Lipschitz from derivative bound
+- `walk_endpoint_qeq`: walk endpoint equals b (cancellation)
+- `affine_udiff` / `quadratic_udiff`: concrete udiff examples
+- `mvt_quadratic_midpoint`: algebraic MVT identity for quadratics
+- **0 axioms** — fully constructive
 
 ### Differentiation — Division-Free Derivatives & Power Rule (`Differentiation.v`)
 

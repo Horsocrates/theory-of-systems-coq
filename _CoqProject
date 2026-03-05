@@ -26,6 +26,7 @@ src/SeriesConvergence.v
 src/PowerSeries.v
 src/GradientDescent.v
 src/Differentiation.v
+src/MeanValueTheorem.v
 src/Measure.v
 src/SoftmaxProbability.v
 
