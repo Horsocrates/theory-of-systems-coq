@@ -107,6 +107,25 @@ src/Subtyping.v
 # B5: Depends on Judgments + FormationRules + Conversion + Subtyping + Roles
 src/Soundness.v
 
+# === Phase C: Operational Semantics ===
+# C1: Depends on Core_ERR + UniversePolymorphism
+src/Expressions.v
+
+# C2: Depends on Expressions
+src/Reduction.v
+
+# C3: Depends on Expressions + Core_ERR + UniversePolymorphism
+src/Typing_Expr.v
+
+# C4: Depends on Expressions + Reduction + Typing_Expr
+src/SubjectReduction.v
+
+# C5: Depends on Expressions + Reduction + Typing_Expr
+src/Progress.v
+
+# C6: Depends on SubjectReduction + Progress
+src/TypeSafety.v
+
 # === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
 src/Extraction.v
 
