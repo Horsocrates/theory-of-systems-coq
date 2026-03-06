@@ -91,6 +91,22 @@ src/UniformConvergence.v
 # === Phase A Integration (depends on all Phase A files) ===
 src/PhaseA_Examples.v
 
+# === Phase B: Typing Rules ===
+# B1: Depends on Core_ERR + UniversePolymorphism
+src/Judgments.v
+
+# B2: Depends on Judgments + DependentSystems + L5Resolution + InfoLayer + CoinductiveSystems
+src/FormationRules.v
+
+# B3: Depends on Core_ERR + IntensionalIdentity + DependentSystems + L5Resolution
+src/Conversion.v
+
+# B4: Depends on Judgments + SystemMorphism + DependentSystems
+src/Subtyping.v
+
+# B5: Depends on Judgments + FormationRules + Conversion + Subtyping + Roles
+src/Soundness.v
+
 # === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
 src/Extraction.v
 
