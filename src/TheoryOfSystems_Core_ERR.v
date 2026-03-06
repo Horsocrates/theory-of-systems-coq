@@ -6,8 +6,8 @@
 (*  This file demonstrates how paradoxes are blocked at the type level.    *)
 (*  Full proofs are in the extended version.                                *)
 (*                                                                          *)
-(*  STATUS: 3 Admitted (INTENTIONAL — universe polymorphism limitations)    *)
-(*          update_increases_size: filter/seq reasoning (minor bookkeeping) *)
+(*  STATUS: 2 Admitted (INTENTIONAL — universe polymorphism limitations)    *)
+(*          update_increases_size: CLOSED (was filter/seq reasoning)        *)
 (*          no_self_level_elements: requires explicit universe annotations  *)
 (*          cantor_no_system_of_all_L2_systems: requires universe polymorphism *)
 (*          All paradox-blocking theorems are FULLY PROVED.                 *)
@@ -1012,6 +1012,28 @@ Definition system_size (S : StructuredSystem L) (bound : nat) : nat :=
                            end) 
                  (seq 0 bound)).
 
+(** Helper: filter with pointwise-equal predicates gives equal results *)
+Lemma filter_ext_in_nat :
+  forall (f g : nat -> bool) (l : list nat),
+    (forall a, In a l -> f a = g a) -> filter f l = filter g l.
+Proof.
+  intros f g l Hfg. induction l as [|x l' IH].
+  - reflexivity.
+  - simpl. rewrite Hfg by (left; reflexivity).
+    destruct (g x); [f_equal |]; apply IH;
+    intros a Ha; apply Hfg; right; exact Ha.
+Qed.
+
+(** Helper: seq produces a list with no duplicates *)
+Lemma NoDup_seq_local : forall start len, NoDup (seq start len).
+Proof.
+  intros start len. revert start. induction len as [|n IH]; intro start.
+  - constructor.
+  - simpl. constructor.
+    + rewrite in_seq. lia.
+    + apply IH.
+Qed.
+
 (** After update, size increases by 1 *)
 Lemma update_increases_size :
   forall (Sys : StructuredSystem L) (p : Position) (e : ElemType Sys)
@@ -1020,10 +1042,43 @@ Lemma update_increases_size :
     system_size (system_update Sys p e Hvalid) bound = (1 + system_size Sys bound)%nat.
 Proof.
   intros Sys p e Hvalid bound Hp.
-  unfold system_size.
-  (* This would require detailed reasoning about filter and seq *)
-  (* Admitted for now ??? the key invariant proofs are complete *)
-Admitted.
+  destruct Hvalid as [Hfree Hdist].
+  unfold system_size, system_update, update_assignment. simpl.
+  (* Prove via induction on a general NoDup list containing p *)
+  enough (H : forall l,
+    NoDup l -> In p l ->
+    length (filter
+      (fun q => match (if (q =? p)%nat then Some e
+                       else ss_assignment L Sys q)
+                with Some _ => true | None => false end) l) =
+    S (length (filter
+      (fun q => match ss_assignment L Sys q
+                with Some _ => true | None => false end) l))).
+  { apply H. apply NoDup_seq_local. apply in_seq. lia. }
+  intros l Hnd Hin.
+  induction l as [|a l' IH].
+  - inversion Hin.
+  - inversion Hnd as [| ? ? Hna Hnd']. subst.
+    destruct Hin as [Heq | Hin'].
+    + (* a = p *)
+      subst a. simpl filter.
+      rewrite Nat.eqb_refl. simpl.
+      rewrite Hfree. simpl.
+      (* S (length (filter f l')) = S (length (filter g l')) *)
+      f_equal. f_equal.
+      apply filter_ext_in_nat.
+      intros q Hq.
+      assert (Hqp : (q =? p)%nat = false).
+      { apply Nat.eqb_neq. intro. subst. contradiction. }
+      rewrite Hqp. reflexivity.
+    + (* a <> p, but p is in l' *)
+      assert (Hneq : a <> p) by (intro; subst; contradiction).
+      simpl filter.
+      assert (Hap : (a =? p)%nat = false) by (apply Nat.eqb_neq; exact Hneq).
+      rewrite Hap.
+      destruct (ss_assignment L Sys a); simpl;
+        [f_equal |]; apply IH; assumption.
+Qed.
 
 End SystemUpdate.
 

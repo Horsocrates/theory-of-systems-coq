@@ -9,7 +9,7 @@
 (*  This file provides an alternative approach to EVT using argmax on grid   *)
 (*  instead of bisection search.                                             *)
 (*                                                                           *)
-(*  STATUS: 28 Qed, 4 Admitted (88%) — SUPERSEDED by EVT_idx.v (100%)       *)
+(*  STATUS: 30 Qed, 3 Admitted (91%) — SUPERSEDED by EVT_idx.v (100%)       *)
 (*                                                                           *)
 (*  Author: Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026          *)
 (* ========================================================================= *)
@@ -250,23 +250,46 @@ Proof.
         { apply IHl. exact Hin'. }
 Qed.
 
-(* Key lemma: f(argmax) equals max_list when d is in l.
-   TECHNICAL NOTE: This requires careful case analysis on list structure.
-   The proof is straightforward but involves nested pattern matching.
-   argmax finds element with max f value; this equals max_list of mapped values. *)
+(* Helper: any element of l is <= max_list d l *)
+Lemma max_list_elem_le : forall d l x,
+  In x l -> x <= max_list d l.
+Proof.
+  intros d l x Hin. induction l as [|a l' IH].
+  - inversion Hin.
+  - simpl. destruct Hin as [Heq | Hin'].
+    + subst. apply Q.le_max_l.
+    + apply Qle_trans with (max_list d l'). apply IH. exact Hin'. apply Q.le_max_r.
+Qed.
+
+(* Helper: max_list is bounded by any upper bound of default and all elements *)
+Lemma max_list_le_bound : forall d l M,
+  d <= M -> (forall x, In x l -> x <= M) -> max_list d l <= M.
+Proof.
+  intros d l M Hd Hall. induction l as [|a l' IH].
+  - simpl. exact Hd.
+  - simpl. destruct (Q.max_dec a (max_list d l')) as [Ha | Hr].
+    + rewrite Ha. apply Hall. left. reflexivity.
+    + rewrite Hr. apply IH. intros x Hx. apply Hall. right. exact Hx.
+Qed.
+
+(* Key lemma: f(argmax) equals max_list when d is in l. *)
 Lemma f_argmax_eq_max_list : forall f d l,
   l <> [] -> In d l -> f (argmax_list f d l) == max_list (f d) (map f l).
 Proof.
-  (* The key insight: 
-     - argmax finds x in l with f(x) >= f(y) for all y in l
-     - max_list (f d) (map f l) = max of (f d) and all f(y) for y in l
-     - Since d is in l, f(d) is already covered by argmax
-     - So f(argmax) = max over all f(y) for y in l >= f(d)
-     - Therefore f(argmax) = max_list (f d) (map f l)
-     
-     The formal proof requires case analysis that Coq's unification struggles with. *)
-  admit.
-Admitted.
+  intros f d l Hne Hdin.
+  apply Qle_antisym.
+  - (* f(argmax) <= max_list: argmax is in l, so f(argmax) is in map f l *)
+    apply max_list_elem_le.
+    apply in_map. apply argmax_in_list. exact Hne.
+  - (* max_list <= f(argmax): all candidates are bounded by argmax *)
+    apply max_list_le_bound.
+    + apply argmax_is_max. exact Hdin.
+    + intros x Hxin.
+      apply in_map_iff in Hxin.
+      destruct Hxin as [y [Hfy Hyin]].
+      subst x.
+      apply argmax_is_max. exact Hyin.
+Qed.
 
 (* Elements of grid_list_aux are in [a,b] *)
 Lemma grid_list_aux_in_interval : forall a b n k x,
