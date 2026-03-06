@@ -63,6 +63,9 @@ src/IntegralApplications.v
 src/TaylorSeries.v
 src/UniformConvergence.v
 
+# === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
+src/Extraction.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
