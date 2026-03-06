@@ -9,6 +9,7 @@ src/DiagonalArgument_ERR.v
 src/EVT_ERR.v
 src/EVT_idx.v
 src/HeineBorel_ERR.v
+src/LinearAlgebra.v
 src/Measure.v
 src/PInterval_CROWN.v
 src/Probability.v
@@ -22,6 +23,11 @@ src/TheoryOfSystems_Core_ERR.v
 # === Layer 0.5: Depends on Core_ERR only ===
 src/Roles.v
 src/IntensionalIdentity.v
+src/L5Resolution.v
+src/SystemMorphism.v
+
+# === Layer 0.5c: Depends on Core_ERR + IntensionalIdentity ===
+src/InfoLayer.v
 
 # === Layer 0.5b: Depends on Core_ERR + CauchyReal ===
 src/ProcessGeneral.v

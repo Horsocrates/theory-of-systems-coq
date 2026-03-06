@@ -9,7 +9,7 @@
 (*  This file provides an alternative approach to EVT using argmax on grid   *)
 (*  instead of bisection search.                                             *)
 (*                                                                           *)
-(*  STATUS: 30 Qed, 3 Admitted (91%) — SUPERSEDED by EVT_idx.v (100%)       *)
+(*  STATUS: 34 Qed, 1 Admitted (97%) — SUPERSEDED by EVT_idx.v (100%)       *)
 (*                                                                           *)
 (*  Author: Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026          *)
 (* ========================================================================= *)
@@ -646,38 +646,35 @@ Proof.
 Qed.
 
 (* max_on_grid is achieved at some grid point *)
-(* TECHNICAL NOTE: This requires that f respects Qeq, i.e., if q1 == q2 then f q1 = f q2.
-   This is mathematically obvious for any reasonable function, but Coq's Q type
-   allows different representations of the same rational number.
-   
-   The proof is 99% complete - the only gap is when max_list returns the default (f a),
-   we need f (grid_point 0) = f a, which requires f to not distinguish between
-   grid_point a b n 0 and a (which are Qeq but may differ in representation). *)
+(* DESIGN NOTE: Requires f(grid_point 0) == f(a) because grid_point a b n 0
+   and a are Qeq-equal but not Leibniz-equal (different Q representations).
+   This hypothesis is derivable from uniformly_continuous_on via
+   uc_implies_proper + grid_point_0, so it does not restrict downstream usage. *)
 Lemma max_on_grid_attained : forall f a b n,
   (n > 0)%nat ->
+  f (grid_point a b n 0) == f a ->
   exists y, In y (grid_list a b n) /\ max_on_grid f a b n == f y.
 Proof.
-  intros f a b n Hn.
+  intros f a b n Hn Hfgp.
   unfold max_on_grid.
   assert (Hne : grid_list a b n <> []).
   { unfold grid_list. destruct n; [lia | discriminate]. }
   assert (Hmne : map f (grid_list a b n) <> []).
   { destruct (grid_list a b n) eqn:Hgl; [contradiction | discriminate]. }
-  destruct (max_list_attained_classical (f a) (map f (grid_list a b n)) Hmne) 
+  destruct (max_list_attained_classical (f a) (map f (grid_list a b n)) Hmne)
     as [fx [[Hfxa | Hfxin] Heq]].
-  - (* max == f a: need f (grid_point 0) == f a *)
+  - (* max == f a: use Hfgp to show f(grid_point 0) == f(a) *)
     exists (grid_point a b n 0). split.
     + apply grid_point_in_list; lia.
-    + rewrite Heq.
-      (* grid_point a b n 0 == a (by Qeq), so f should give same result *)
-      (* This requires f to respect Qeq - a reasonable assumption *)
-      admit.
+    + rewrite Heq. apply Qeq_trans with (f a).
+      * exact Hfxa.
+      * apply Qeq_sym. exact Hfgp.
   - (* max is in the list - straightforward *)
     apply in_map_iff in Hfxin.
     destruct Hfxin as [y [Hfy Hiny]].
     exists y. split; [exact Hiny |].
     rewrite Heq, Hfy. reflexivity.
-Admitted.
+Qed.
 
 (* Grid value is bounded by max_on_grid *)
 Lemma grid_value_le_max : forall f a b n y,
@@ -783,6 +780,46 @@ Qed.
    any x in [a,b] is close to some grid point, so by UC, f(x) is close
    to some grid value, hence to max_on_grid. *)
 
+(** Helper: if |z| < eps for all eps > 0, then z == 0.
+    Archimedean squeeze for Q. *)
+Lemma Qabs_small_eq_zero : forall z : Q,
+  (forall eps, eps > 0 -> Qabs z < eps) -> z == 0.
+Proof.
+  intros z Hall.
+  destruct (Qlt_le_dec 0 z) as [Hpos | Hle0].
+  - (* z > 0 → Qabs z = z, take eps = z → z < z contradiction *)
+    exfalso. specialize (Hall z Hpos).
+    rewrite Qabs_pos in Hall; [|apply Qlt_le_weak; exact Hpos].
+    apply (Qlt_irrefl z). exact Hall.
+  - destruct (Qlt_le_dec z 0) as [Hneg | Hge0].
+    + (* z < 0 → Qabs z = -z, take eps = -z → -z < -z contradiction *)
+      exfalso. assert (Hz : -z > 0) by (unfold Qlt in *; simpl in *; lia).
+      specialize (Hall (-z) Hz).
+      rewrite Qabs_neg in Hall; [|exact Hle0].
+      apply (Qlt_irrefl (-z)). exact Hall.
+    + (* 0 <= z <= 0 → z == 0 *)
+      apply Qle_antisym; assumption.
+Qed.
+
+(** UC implies f respects Qeq: if x == y (same rational, different representation),
+    then |x - y| == 0 < delta for any delta, so |f(x) - f(y)| < eps for all eps > 0. *)
+Lemma uc_implies_proper : forall f a b,
+  uniformly_continuous_on f a b ->
+  forall x y, a <= x <= b -> a <= y <= b -> x == y -> f x == f y.
+Proof.
+  intros f a b Huc x y Hx Hy Hxy.
+  apply Qplus_inj_r with (- f y).
+  setoid_replace (f y + - f y) with 0 by ring.
+  setoid_replace (f x + - f y) with (f x - f y) by ring.
+  apply Qabs_small_eq_zero.
+  intros eps Heps.
+  destruct (Huc eps Heps) as [delta [Hdelta Hdelta_cont]].
+  apply Hdelta_cont; try assumption.
+  assert (Hxy0 : x - y == 0) by (setoid_rewrite Hxy; ring).
+  apply Qle_lt_trans with 0; [|exact Hdelta].
+  setoid_rewrite Hxy0. rewrite Qabs_pos; [apply Qle_refl | apply Qle_refl].
+Qed.
+
 Theorem sup_process_is_Cauchy : forall f a b,
   a < b ->
   uniformly_continuous_on f a b ->
@@ -810,8 +847,18 @@ Proof.
   (* Get the maximizers *)
   assert (HSm : (S m > 0)%nat) by lia.
   assert (HSn : (S n > 0)%nat) by lia.
-  destruct (max_on_grid_attained f a b (S m) HSm) as [xm [Hxm_in Hmax_m]].
-  destruct (max_on_grid_attained f a b (S n) HSn) as [xn [Hxn_in Hmax_n]].
+  assert (Hfgp_m : f (grid_point a b (S m) 0) == f a).
+  { apply (uc_implies_proper f a b Hcont).
+    - apply grid_point_in_interval; [apply Qlt_le_weak; exact Hab | lia | lia].
+    - split; [apply Qle_refl | apply Qlt_le_weak; exact Hab].
+    - apply grid_point_0. lia. }
+  assert (Hfgp_n : f (grid_point a b (S n) 0) == f a).
+  { apply (uc_implies_proper f a b Hcont).
+    - apply grid_point_in_interval; [apply Qlt_le_weak; exact Hab | lia | lia].
+    - split; [apply Qle_refl | apply Qlt_le_weak; exact Hab].
+    - apply grid_point_0. lia. }
+  destruct (max_on_grid_attained f a b (S m) HSm Hfgp_m) as [xm [Hxm_in Hmax_m]].
+  destruct (max_on_grid_attained f a b (S n) HSn Hfgp_n) as [xn [Hxn_in Hmax_n]].
   
   (* xm, xn are in [a,b] *)
   assert (Hxm_interval : a <= xm <= b).
@@ -889,13 +936,19 @@ Definition process_le (P Q : RealProcess) : Prop :=
 Definition apply_f (f : ContinuousFunction) (P : RealProcess) : RealProcess :=
   fun n => f (P n).
 
-(** MAIN THEOREM: Extreme Value Theorem (P4-compliant, process-theoretic) *)
+(** MAIN THEOREM: Extreme Value Theorem (P4-compliant, process-theoretic)
+
+    NOTE: The original statement included is_Cauchy c (argmax process Cauchy),
+    but this is false in general — constant functions have non-Cauchy argmax.
+    See argmax_process_is_Cauchy above for discussion.
+
+    The theorem below captures the essential EVT content:
+    sup_process is Cauchy and bounds all function values. *)
 Theorem EVT_complete : forall f a b,
   a < b ->
   uniformly_continuous_on f a b ->
   exists (M : RealProcess) (c : RealProcess),
     is_Cauchy M /\
-    is_Cauchy c /\
     (* c is in [a,b] *)
     (forall n, a <= c n <= b) /\
     (* f(c) achieves M *)
@@ -906,34 +959,37 @@ Proof.
   intros f a b Hab Hcont.
   exists (sup_process f a b).
   exists (argmax_process f a b).
-  split; [|split; [|split; [|split]]].
+  split; [|split; [|split]].
   - (* sup_process is Cauchy *)
     apply sup_process_is_Cauchy; assumption.
-  - (* argmax_process is Cauchy *)
-    apply argmax_process_is_Cauchy; assumption.
   - (* argmax is in [a,b] *)
     intro n. apply argmax_in_interval.
     + lia.
     + apply Qlt_le_weak. exact Hab.
-  - (* f(argmax) == sup *)
-    intro n. unfold apply_f, argmax_process, sup_process, argmax_on_grid, max_on_grid.
-    (* argmax achieves the maximum on the grid *)
-    (* So f(argmax) = max_list (f a) (map f grid_list) *)
+  - (* f(argmax) == sup: use argmax_is_max + grid_value_le_max + max_on_grid_attained *)
+    intro n. unfold apply_f, argmax_process, sup_process, argmax_on_grid.
+    assert (HSn : (S n > 0)%nat) by lia.
     assert (Hne : grid_list a b (S n) <> []).
     { unfold grid_list. discriminate. }
-    (* a is in grid_list: grid_point 0 = a (by Qeq), and a is used as default *)
-    (* For f_argmax_eq_max_list, we need a in grid_list *)
-    (* grid_list a b (S n) contains grid_point 0 which equals a *)
-    (* But In uses Leibniz equality, and grid_point 0 may differ from a as Q values *)
-    (* We use that argmax_list is called with default a, and returns element from list *)
-    apply f_argmax_eq_max_list.
-    + exact Hne.
-    + (* a in grid_list - this requires showing grid_point 0 equals a as Q term *)
-      (* Actually, the default a doesn't need to be in list for f_argmax_eq_max_list *)
-      (* Let me check... no, we DO need a in grid_list *)
-      (* grid_point a b (S n) 0 = a + 0 * (b-a) / (S n) which simplifies to a *)
-      (* But this is Qeq, not Leibniz equality *)
-      admit.
+    (* argmax_list returns an element of grid_list *)
+    assert (Hargmax_in : In (argmax_list f a (grid_list a b (S n))) (grid_list a b (S n))).
+    { apply argmax_in_list. exact Hne. }
+    (* f(argmax) <= max_on_grid *)
+    assert (Hle : f (argmax_list f a (grid_list a b (S n))) <= max_on_grid f a b (S n)).
+    { apply grid_value_le_max; [exact HSn | exact Hargmax_in]. }
+    (* max_on_grid <= f(argmax): by max_on_grid_attained, max_on_grid == f(y)
+       for some y in grid_list, and f(y) <= f(argmax) by argmax_is_max *)
+    assert (Hfgp : f (grid_point a b (S n) 0) == f a).
+    { apply (uc_implies_proper f a b Hcont).
+      - apply grid_point_in_interval; [apply Qlt_le_weak; exact Hab | lia | lia].
+      - split; [apply Qle_refl | apply Qlt_le_weak; exact Hab].
+      - apply grid_point_0. lia. }
+    destruct (max_on_grid_attained f a b (S n) HSn Hfgp) as [y [Hy_in Hmax_eq]].
+    assert (Hge : max_on_grid f a b (S n) <= f (argmax_list f a (grid_list a b (S n)))).
+    { apply Qle_trans with (f y).
+      - rewrite Hmax_eq. apply Qle_refl.
+      - apply argmax_is_max. exact Hy_in. }
+    apply Qle_antisym; assumption.
   - (* f(x) <= M for all x *)
     intros x Hx.
     unfold process_le. intros eps Heps.
@@ -956,7 +1012,7 @@ Proof.
     apply Qlt_le_weak.
     apply f_bounded_by_grid_max with delta; try assumption.
     + lia. (* S n > 0 *)
-Admitted.
+Qed.
 
 (* ========================================================================= *)
 (*                     SUMMARY                                               *)
@@ -966,41 +1022,35 @@ Print Assumptions argmax_in_interval.
 Print Assumptions near_grid_point.
 
 (*
-  FINAL STATUS: 20 Qed, 4 Admitted
-  
-  FULLY PROVEN (Qed):
-  ==================
+  FINAL STATUS: 34 Qed, 1 Admitted (97%)
+
+  FULLY PROVEN (Qed) — Phase 3 additions:
+  ========================================
+  + Qabs_small_eq_zero — Archimedean squeeze for Q
+  + uc_implies_proper — UC => f respects Qeq
+  + max_on_grid_attained — grid max is achieved (was Admitted, now Qed)
+  + EVT_complete — Main EVT theorem (was Admitted, now Qed)
+
+  Previously proven:
   - grid_point_0, grid_point_n, grid_point_in_interval, grid_point_n_is_b
   - grid_spacing_alt, grid_spacing
   - grid_point_in_aux, grid_point_in_list
   - grid_list_aux_in_interval, grid_list_in_interval
   - argmax_in_list, argmax_is_max, argmax_in_interval
-  - grid_point_mono
-  - x_between_grid_points (classical)
-  - near_grid_point (uses classical logic)
-  - pow2_unbounded, Archimedean_nat
-  - Qlt_minus_pos
-  - max_list_upper
-  
-  ADMITTED (4 remaining):
+  - grid_point_mono, x_between_grid_points, near_grid_point
+  - pow2_unbounded, Archimedean_nat, Qlt_minus_pos
+  - max_list_upper, max_list_elem_le, max_list_le_bound
+  - max_list_attained_classical, f_argmax_eq_max_list
+  - grid_value_le_max, f_bounded_by_grid_max
+  - Qdiv_le_compat_l, sup_process_is_Cauchy
+
+  ADMITTED (1 remaining):
   ======================
-  1. argmax_process_is_Cauchy
-     - Note: argmax_process may NOT be Cauchy if f has multiple maxima!
-     - This is only needed if we want the argmax point, not just the max value.
-     
-  2. max_on_grid_mono
-     - States: larger grid => larger or equal max
-     - Not strictly true for general grids (different points)
-     - Would need common refinement argument
-     
-  3. sup_process_is_Cauchy
-     - Key remaining lemma
-     - Proof strategy outlined in comments
-     - Requires f_bounded_by_grid_max (proven in EVT.v)
-     
-  4. EVT_complete
-     - Main theorem
-     - Depends on sup_process_is_Cauchy
+  1. argmax_process_is_Cauchy — Category C (mathematically incorrect)
+     - The argmax process is NOT Cauchy for constant functions
+     - For f(x) = 1, argmax at different grid sizes can jump across [a,b]
+     - Correct fix: add unique maximum hypothesis, or use subsequence
+     - NOT used by EVT_complete (which was restructured to avoid it)
      
   COMPARISON WITH EVT.v:
   ======================
