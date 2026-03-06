@@ -25,12 +25,28 @@ src/Roles.v
 src/IntensionalIdentity.v
 src/L5Resolution.v
 src/SystemMorphism.v
+src/UniversePolymorphism.v
 
 # === Layer 0.5c: Depends on Core_ERR + IntensionalIdentity ===
 src/InfoLayer.v
 
+# === Layer 0.5d: Depends on Core_ERR + Roles ===
+src/ErasureTheory.v
+
+# === Layer 0.5e: Depends on Core_ERR + Roles + SystemMorphism ===
+src/DependentSystems.v
+
+# === Layer 0.5f: Depends on Core_ERR + Roles + DependentSystems ===
+src/InductiveSystems.v
+
+# === Layer 0.5g: Depends on Core_ERR + IntensionalIdentity + L5Resolution ===
+src/ConstitutionChecking.v
+
 # === Layer 0.5b: Depends on Core_ERR + CauchyReal ===
 src/ProcessGeneral.v
+
+# === Layer 0.5h: Depends on ProcessGeneral ===
+src/CoinductiveSystems.v
 
 # === Layer 1 ===
 src/IVT_ERR.v
@@ -71,6 +87,9 @@ src/IntegralApplications.v
 # === Layer 11 ===
 src/TaylorSeries.v
 src/UniformConvergence.v
+
+# === Phase A Integration (depends on all Phase A files) ===
+src/PhaseA_Examples.v
 
 # === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
 src/Extraction.v
