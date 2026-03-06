@@ -1,0 +1,3 @@
+-- Simple constant
+-- Expected: Type: Nat, Value: 42
+42

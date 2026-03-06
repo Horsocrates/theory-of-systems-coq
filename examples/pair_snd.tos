@@ -1,0 +1,3 @@
+-- Pair construction and second projection
+-- Expected: Type: Nat, Value: 7
+snd (42, 7)

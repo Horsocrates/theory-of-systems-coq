@@ -126,6 +126,19 @@ src/Progress.v
 # C6: Depends on SubjectReduction + Progress
 src/TypeSafety.v
 
+# === Phase D: Verified Compiler ===
+# D1: Depends on Core_ERR + UniversePolymorphism + Expressions + Typing_Expr
+src/TypeChecker.v
+
+# D2: Depends on ALL Phase C + TypeChecker
+src/Evaluator.v
+
+# D6: Depends on Phase C + TypeChecker + Evaluator
+src/AIInterface.v
+
+# D4: Depends on ALL above (must be last — does extraction)
+src/ToS_Lang_Extraction.v
+
 # === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
 src/Extraction.v
 

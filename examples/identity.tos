@@ -1,0 +1,3 @@
+-- Identity function applied to 42
+-- Expected: Type: Nat, Value: 42
+(\(x : Nat). x) 42

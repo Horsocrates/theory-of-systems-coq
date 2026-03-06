@@ -1,0 +1,3 @@
+-- Pair construction and first projection
+-- Expected: Type: Nat, Value: 42
+fst (42, 7)

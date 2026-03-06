@@ -1,0 +1,3 @@
+-- Swap pair components using projections
+-- Expected: Type: Nat * Nat, Value: (7, 42)
+(\(p : Nat * Nat). (snd p, fst p)) (42, 7)

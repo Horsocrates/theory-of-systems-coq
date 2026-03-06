@@ -1,0 +1,3 @@
+-- Higher-order function: apply f to 42, where f = identity
+-- Expected: Type: Nat, Value: 42
+(\(f : Nat -> Nat). f 42) (\(x : Nat). x)

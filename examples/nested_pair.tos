@@ -1,0 +1,3 @@
+-- Nested pair with double projection
+-- Expected: Type: Nat, Value: 1
+fst (fst ((1, 2), 3))

@@ -1,0 +1,3 @@
+-- Function composition: apply f twice
+-- Expected: Type: Nat, Value: 5
+(\(f : Nat -> Nat). \(x : Nat). f (f x)) (\(n : Nat). n) 5

@@ -1,0 +1,28 @@
+; ================================================================= ;
+; ToS-Lang: Verified Expression Checker + Evaluator                  ;
+;                                                                    ;
+; Core modules (TypeChecker, Evaluator, Expressions, Reduction)      ;
+; are EXTRACTED FROM COQ and proven correct.                         ;
+;                                                                    ;
+; Parser and Printer are handwritten OCaml (unverified glue).        ;
+; ================================================================= ;
+
+(executable
+ (name main)
+ (public_name tos_check)
+ (modules
+   ; === Coq standard library support ===
+   Datatypes List Nat PeanoNat Specif
+   ; === Extracted from Coq (VERIFIED) ===
+   UniversePolymorphism          ; Level type + level_eq_dec
+   TheoryOfSystems_Core_ERR      ; Core ToS types
+   Typing_Expr                   ; Ty, TyCtx, ty_eq_dec
+   Expressions                   ; Expr, shift, subst, is_value_dec
+   Reduction                     ; try_step, eval_fuel
+   TypeChecker                   ; typecheck, typecheck_ann (SOUND)
+   Evaluator                     ; safe_eval, classify_eval (SAFE)
+   ; === Handwritten (unverified glue) ===
+   Parser                        ; ToS-Lang parser
+   Printer                       ; Pretty printer
+   Main                          ; CLI entry point
+ ))

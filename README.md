@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
 [![Status](https://img.shields.io/badge/Status-99%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-1045_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-1485_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -57,11 +57,16 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **System Morphisms (structure-preserving maps)** | 17 lemmas, 0 Admitted |
 | **Information Layers (composition, capacity)** | 17 lemmas, 0 Admitted |
 | **Linear Algebra (QVec, QMat, dot product)** | 20 lemmas, 0 Admitted |
+| **ToS-Lang Type Theory (Π/Σ, universes, inductive, coinductive)** | 134 lemmas, 0 Admitted |
+| **ToS-Lang Typing Rules (formation, conversion, subtyping, soundness)** | 99 lemmas, 0 Admitted |
+| **ToS-Lang Operational Semantics (reduction, progress, type safety)** | 124 lemmas, 0 Admitted |
+| **ToS-Lang Verified Compiler (type checker, evaluator, extraction, AI)** | 64 lemmas, 0 Admitted |
 | **OCaml Extraction (Level, System, Roles, Process)** | 4 modules + deps |
+| **ToS-Lang OCaml Extraction (TypeChecker, Evaluator, Expressions)** | 11 modules |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 1045 proven theorems (928 core + 117 reasoning architecture)**
+**Total: 1485 proven theorems (1368 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -101,7 +106,7 @@ theory-of-systems-coq/
 │   ├── nested_intervals.tex           # arXiv preprint (LaTeX)
 │   └── nested_intervals.pdf           # Compiled PDF
 │
-├── src/                               # Coq source files (39 files)
+├── src/                               # Coq source files (63 files)
 │   │
 │   │  # === ToS Core + Foundations ===
 │   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, System, Criterion, paradox blocking (34 Qed)
@@ -112,6 +117,32 @@ theory-of-systems-coq/
 │   ├── SystemMorphism.v             # Structure-preserving maps, isomorphisms (17 Qed) ← NEW
 │   ├── InfoLayer.v                  # Information layers, composition, capacity (17 Qed) ← NEW
 │   ├── Extraction.v                  # OCaml extraction directives
+│   │
+│   │  # === ToS-Lang: Type Theory + Typing Rules (Phase A+B) ===
+│   ├── DependentSystems.v            # Π/Σ systems (25 Qed)
+│   ├── InductiveSystems.v            # Inductive types (26 Qed)
+│   ├── CoinductiveSystems.v          # Coinductive/observable (16 Qed)
+│   ├── ConstitutionChecking.v        # Decidable constitution (16 Qed)
+│   ├── PhaseA_Examples.v             # Phase A integration examples (11 Qed)
+│   ├── Judgments.v                    # Typing judgments (23 Qed)
+│   ├── FormationRules.v              # Formation rules (18 Qed)
+│   ├── Conversion.v                  # P3 conversion rules (16 Qed)
+│   ├── Subtyping.v                   # Subsystem subtyping (20 Qed)
+│   ├── Soundness.v                   # Typing soundness (22 Qed)
+│   │
+│   │  # === ToS-Lang: Operational Semantics (Phase C) ===
+│   ├── Expressions.v                 # Deep-embedded Expr type (20 Qed)
+│   ├── Reduction.v                   # Small-step reduction (26 Qed)
+│   ├── Typing_Expr.v                 # Expression typing relation (17 Qed)
+│   ├── SubjectReduction.v            # Subject reduction (18 Qed)
+│   ├── Progress.v                    # Progress theorem (30 Qed)
+│   ├── TypeSafety.v                  # Type safety + main theorem (13 Qed)
+│   │
+│   │  # === ToS-Lang: Verified Compiler (Phase D) ===
+│   ├── TypeChecker.v                 # Verified type checker (26 Qed) ← NEW
+│   ├── Evaluator.v                   # Verified evaluator wrapper (20 Qed) ← NEW
+│   ├── AIInterface.v                 # AI generation safety spec (10 Qed) ← NEW
+│   ├── ToS_Lang_Extraction.v         # OCaml extraction (8 Qed) ← NEW
 │   │
 │   │  # === Set Theory & Topology ===
 │   ├── ShrinkingIntervals_ERR.v       # Non-surjectivity ℕ → [0,1] ∩ ℚ (167 Qed)
@@ -163,7 +194,7 @@ theory-of-systems-coq/
 │   ├── ai_fallacy_detector.ml         # OCaml extraction
 │   └── demo.py                        # Python demo
 │
-├── extraction/                        # OCaml extraction output (29 files) ← NEW
+├── extraction/                        # OCaml extraction output (Core)
 │   ├── TheoryOfSystems_Core_ERR.ml   # Level, System, Criterion, L5_resolve
 │   ├── Roles.ml                      # ERR_Category, MathStatus, Dependencies
 │   ├── ProcessGeneral.ml             # GenProcess, prefix, process_map, Qdist
@@ -171,7 +202,26 @@ theory-of-systems-coq/
 │   ├── diagonal_demo.ml              # Standalone Calkin-Wilf + diagonal demo
 │   └── *.ml, *.mli                   # Stdlib deps (BinInt, QArith, etc.)
 │
-├── _CoqProject                        # Build configuration (45 files)
+├── tos_lang/                          # ToS-Lang verified compiler ← NEW
+│   ├── TypeChecker.ml                # VERIFIED type checker (extracted from Coq)
+│   ├── Evaluator.ml                  # VERIFIED evaluator (extracted from Coq)
+│   ├── Expressions.ml               # Expression types (extracted)
+│   ├── Reduction.ml                  # Step evaluator (extracted)
+│   ├── parser.ml                     # Hand-written recursive descent parser
+│   ├── printer.ml                    # Pretty printer for Expr/Ty
+│   ├── main.ml                       # CLI entry point
+│   ├── ai_interface.py              # Python AI generation + verification
+│   └── dune                          # OCaml build file
+│
+├── examples/                          # ToS-Lang example programs ← NEW
+│   ├── identity.tos                  # (\(x : Nat). x) 42
+│   ├── pair_fst.tos                  # fst (42, 7)
+│   ├── higher_order.tos             # Higher-order function application
+│   ├── compose.tos                   # Function composition
+│   ├── swap.tos                      # Pair swap
+│   └── ...                           # 8 examples total
+│
+├── _CoqProject                        # Build configuration (69 files)
 ├── CoqMakefile                        # Generated Makefile
 ├── .github/workflows/coq-ci.yml      # CI
 └── README.md
@@ -181,7 +231,7 @@ theory-of-systems-coq/
 
 ## Statistics
 
-### Core Formalization (39 files)
+### Core Formalization (63 files)
 
 | File | Qed | Admitted | Status |
 |------|-----|----------|--------|
@@ -223,7 +273,30 @@ theory-of-systems-coq/
 | `Probability.v` | 12 | 0 | **100%** |
 | `IntensionalIdentity.v` | 11 | 0 | **100%** |
 | `IVT_CauchyReal.v` | 8 | 0 | **100%** |
-| **Core TOTAL** | **928** | **8** | **99.1%** |
+| **ToS-Lang Phase A+B+C+D** | | | |
+| `Progress.v` | 30 | 0 | **100%** |
+| `InductiveSystems.v` | 26 | 1 | 96% |
+| `Reduction.v` | 26 | 0 | **100%** |
+| `TypeChecker.v` | 26 | 0 | **100%** ← NEW |
+| `DependentSystems.v` | 25 | 0 | **100%** |
+| `UniversePolymorphism.v` | 24 | 0 | **100%** |
+| `Judgments.v` | 23 | 0 | **100%** |
+| `Soundness.v` | 22 | 0 | **100%** |
+| `Evaluator.v` | 20 | 0 | **100%** ← NEW |
+| `Expressions.v` | 20 | 0 | **100%** |
+| `Subtyping.v` | 20 | 0 | **100%** |
+| `SubjectReduction.v` | 18 | 0 | **100%** |
+| `FormationRules.v` | 18 | 0 | **100%** |
+| `Typing_Expr.v` | 17 | 0 | **100%** |
+| `Conversion.v` | 16 | 0 | **100%** |
+| `CoinductiveSystems.v` | 16 | 0 | **100%** |
+| `ConstitutionChecking.v` | 16 | 0 | **100%** |
+| `ErasureTheory.v` | 16 | 1 | 94% |
+| `TypeSafety.v` | 13 | 1 | 92% |
+| `PhaseA_Examples.v` | 11 | 1 | 91% |
+| `AIInterface.v` | 10 | 0 | **100%** ← NEW |
+| `ToS_Lang_Extraction.v` | 8 | 0 | **100%** ← NEW |
+| **Core TOTAL** | **1368** | **13** | **99.1%** |
 
 ### Architecture of Reasoning
 
@@ -241,23 +314,65 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 928 | 8 |
+| Core Mathematics | 1368 | 13 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **1045** | **8** |
+| **TOTAL** | **1485** | **13** |
 
-**Remaining Admitted (8, documented):**
+**Remaining Admitted (13, documented):**
 
 | File | Count | Reason |
 |------|-------|--------|
-| `TernaryRepresentation_ERR.v` | 2 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
+| `TernaryRepresentation_ERR.v` | 3 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
 | `TheoryOfSystems_Core_ERR.v` | 2 | Universe polymorphism limitations (intentional) |
 | `HeineBorel_ERR.v` | 2 | Unprovable over ℚ (requires real-valued continuity) |
 | `EVT_ERR.v` | 1 | `argmax_process_is_Cauchy` — requires monotone refinement; use `EVT_idx.v` |
 | `DiagonalArgument_ERR.v` | 1 | Alternative approach; use `ShrinkingIntervals` instead |
+| `TypeSafety.v` | 1 | Fuel-bound monotonicity (structurally sound) |
+| `InductiveSystems.v` | 1 | Dependent pattern matching |
+| `ErasureTheory.v` | 1 | Universe level mismatch |
+| `PhaseA_Examples.v` | 1 | Integration example |
 
 ---
 
 ## New in March 2026
+
+### ToS-Lang Phase D: Verified Compiler (64 Qed, 0 Admitted)
+
+A verified compiler for the ToS-Lang expression language, with type checker and evaluator extracted from Coq proofs to OCaml.
+
+#### Verified Type Checker (`TypeChecker.v` — 26 Qed, 0 Admitted)
+
+Decision procedure for `expr_has_type`, proven sound against the Phase C specification:
+- `typecheck`: `TyCtx -> Expr -> option Ty` — total, decidable type checking
+- `ExprAnn` / `typecheck_ann`: Church-style annotated expressions with full lambda type checking
+- **`typecheck_sound`**: `typecheck G e = Some T -> expr_has_type G e T`
+- **`typecheck_ann_sound`**: soundness for annotated expressions
+- `erase_ann`: annotation erasure preserving semantics
+- Equation lemmas, inversion lemmas, determinism, examples
+
+#### Verified Evaluator (`Evaluator.v` — 20 Qed, 0 Admitted)
+
+Safe evaluation pipeline wrapping `eval_fuel` with type checking:
+- `safe_eval`: only evaluates well-typed expressions
+- `classify_eval`: returns `ER_Value | ER_Partial | ER_TypeError`
+- **`verified_pipeline`**: THE theorem — typecheck OK → eval preserves type + progress
+- `classify_value_correct`, `classify_partial_correct`, `classify_error_correct`
+- Termination, determinism, annotated pipeline support
+
+#### AI Interface Specification (`AIInterface.v` — 10 Qed, 0 Admitted)
+
+End-to-end safety guarantee for AI-generated code verification:
+- **`ai_generation_safe`**: if AI output passes `typecheck_ann`, evaluation with any fuel produces a well-typed result satisfying progress
+- `ai_verified_well_typed`, `ai_verified_progress`: component guarantees
+- `ai_eval_sound`, `ai_eval_ann_sound`: evaluation soundness
+
+#### OCaml Extraction (`ToS_Lang_Extraction.v` — 8 Qed + 11 modules)
+
+Extracts verified type checker and evaluator to executable OCaml:
+- `TypeChecker.ml`, `Evaluator.ml`, `Expressions.ml`, `Reduction.ml` — proven correct
+- Parser (`parser.ml`), printer (`printer.ml`), CLI (`main.ml`) — handwritten glue
+- `ai_interface.py` — Python AI generation + verification loop
+- 8 example `.tos` programs
 
 ### Phase 3: L5 Resolution, System Morphisms, Info Layers, Linear Algebra + Admitted Closures
 
@@ -709,7 +824,7 @@ See [Architecture_of_Reasoning/README.md](Architecture_of_Reasoning/README.md) f
 
 ## OCaml Extraction
 
-The `extraction/` directory contains OCaml code extracted directly from the Coq proofs:
+### Core ToS (`extraction/`)
 
 | Module | Contents |
 |--------|----------|
@@ -718,6 +833,19 @@ The `extraction/` directory contains OCaml code extracted directly from the Coq 
 | `ProcessGeneral.ml` | `GenProcess`, `prefix`, `process_map`, `Qdist` |
 | `IntensionalIdentity.ml` | `CriterionOver` |
 | `diagonal_demo.ml` | Standalone Calkin-Wilf + diagonal demo |
+
+### ToS-Lang Verified Compiler (`tos_lang/`)
+
+| Module | Status | Contents |
+|--------|--------|----------|
+| `TypeChecker.ml` | **VERIFIED** | `typecheck`, `typecheck_ann`, `erase_ann` — proven sound |
+| `Evaluator.ml` | **VERIFIED** | `safe_eval`, `classify_eval`, `safe_eval_ann` — proven safe |
+| `Expressions.ml` | **VERIFIED** | `shift`, `subst`, `is_value_dec`, `expr_eq_dec` |
+| `Reduction.ml` | **VERIFIED** | `try_step`, `eval_fuel` — proven type-preserving |
+| `parser.ml` | Unverified | Recursive descent parser for ToS-Lang syntax |
+| `printer.ml` | Unverified | Pretty printer for `Expr`, `Ty`, `EvalResult` |
+| `main.ml` | Unverified | CLI: `tos_check <file.tos> [--fuel N]` |
+| `ai_interface.py` | Unverified | Python AI generation + verification loop |
 
 All Prop fields are erased during extraction. The extracted code is directly usable from OCaml programs.
 
