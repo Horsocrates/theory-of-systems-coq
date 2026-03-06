@@ -81,7 +81,7 @@ Proof.
   - destruct (IHT1 T2) as [H | H].
     + left; subst; reflexivity.
     + right; intro Heq; inversion Heq; contradiction.
-Qed.
+Defined.  (* Defined, not Qed — must be transparent for Eval compute *)
 
 Lemma const_has_type_nat : forall Gamma n T,
     expr_has_type Gamma (EConst n) T -> T = TyNat.

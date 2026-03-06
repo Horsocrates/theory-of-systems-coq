@@ -193,7 +193,7 @@ Proof.
   - right. intros H. inversion H.
   - right. intros H. inversion H.
   - left. apply VConst.
-Qed.
+Defined.  (* Defined, not Qed — must be transparent for Eval compute *)
 
 Lemma expr_size_positive : forall e, expr_size e > 0.
 Proof.

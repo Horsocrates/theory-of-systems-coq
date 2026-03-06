@@ -107,7 +107,7 @@ Proof.
   - destruct (IH l2') as [Heq | Hneq].
     + left. f_equal. exact Heq.
     + right. intros H. apply Hneq. inversion H. reflexivity.
-Qed.
+Defined.  (* Defined, not Qed — must be transparent for Eval compute *)
 
 (** Lemma 9: Strict ordering on levels is decidable *)
 Lemma level_lt_dec : forall (l1 l2 : Level), {l1 << l2} + {~ l1 << l2}.
