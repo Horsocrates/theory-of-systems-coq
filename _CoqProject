@@ -50,6 +50,9 @@ src/SeriesConvergence.v
 src/PowerSeries.v
 src/FixedPoint.v
 
+# === Layer 5b: Depends on FixedPoint + SeriesConvergence ===
+src/ReasoningConvergence.v
+
 # === Layer 6 ===
 src/GradientDescent.v
 
