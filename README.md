@@ -1,8 +1,8 @@
 # Theory of Systems — Coq Formalization
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://coq.inria.fr/)
-[![Status](https://img.shields.io/badge/Status-98%25_Complete-green.svg)]()
-[![Theorems](https://img.shields.io/badge/Theorems-900_Proven-brightgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-99%25_Complete-green.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-967_Proven-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
 [![Paradoxes](https://img.shields.io/badge/Paradoxes-46-blue.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -50,10 +50,14 @@ A = exists → Distinction (A/¬A) → Laws of Logic (L1–L5) → Principles (P
 | **Taylor Series (remainder, convexity, sandwich)** | 18 lemmas, 0 Admitted |
 | **Uniform Convergence (limit exchange, Dini)** | 20 lemmas, 0 Admitted |
 | **Fixed Point Theory (Banach contraction, perturbation)** | 20 lemmas, 0 Admitted |
+| **E/R/R Roles, Status, Dependencies, Paradox diagnosis** | 30 lemmas, 0 Admitted |
+| **P3 Intensional Identity (ext ≠ int separation)** | 11 lemmas, 0 Admitted |
+| **General Process Theory (GenProcess, Cauchy bridge)** | 16 lemmas, 0 Admitted |
+| **OCaml Extraction (Level, System, Roles, Process)** | 4 modules + deps |
 | **156 Fallacies Formalized** | Complete taxonomy |
 | **46 Paradoxes Classified** | All dissolved |
 
-**Total: 900 proven theorems (783 core + 117 reasoning architecture)**
+**Total: 967 proven theorems (850 core + 117 reasoning architecture)**
 
 - **Single external axiom:** `classic` (Law of Excluded Middle, L3)
 - **No Axiom of Infinity** — consequence of P4 (Process Philosophy)
@@ -93,56 +97,75 @@ theory-of-systems-coq/
 │   ├── nested_intervals.tex           # arXiv preprint (LaTeX)
 │   └── nested_intervals.pdf           # Compiled PDF
 │
-├── src/                               # Coq source files
-│   ├── ShrinkingIntervals_ERR.v       # Main theorem: non-surjectivity (167 lemmas)
-│   ├── Countability_Q.v              # ℚ ≅ ℕ via Calkin-Wilf (17 lemmas, 0 Admitted)
-│   ├── EVT_idx.v                     # ε-EVT, L5-compliant (26 lemmas)
-│   ├── IVT_ERR.v                     # ε-IVT (23 lemmas)
-│   ├── Archimedean_ERR.v             # Archimedean property (14 lemmas)
-│   ├── PInterval_CROWN.v            # CROWN linear relaxation soundness (25 lemmas)
-│   ├── Probability.v                 # Probability + Bayesian fallacies (12 lemmas)
-│   ├── CauchyReal.v                  # Cauchy reals: completion of ℚ (19 lemmas)
-│   ├── RoundingSafety.v              # IEEE 754 rounding within intervals (13 lemmas)
-│   ├── IVT_CauchyReal.v             # Full IVT on Cauchy reals (8 lemmas)
-│   ├── Measure.v                    # Constructive measure & integration (15 lemmas)
-│   ├── SoftmaxProbability.v         # IBP → probability soundness (14 lemmas)
-│   ├── RealField.v                  # Ordered field on Cauchy reals (15 lemmas)
-│   ├── Completeness.v               # Metric completeness: NIP, sup, diagonal (23 lemmas)
-│   ├── MonotoneConvergence.v        # Monotone Convergence Theorem (15 lemmas)
-│   ├── SeriesConvergence.v          # Series convergence: geometric, comparison (22 lemmas)
-│   ├── PowerSeries.v               # Power series + exponential convergence (19 lemmas)
-│   ├── GradientDescent.v           # GD convergence for quadratic loss (18 lemmas)
-│   ├── Differentiation.v           # Division-free derivatives, power rule (18 lemmas)
-│   ├── MeanValueTheorem.v          # Grid MVT, monotonicity, Lipschitz (18 lemmas)
-│   ├── RiemannIntegration.v        # Riemann sums, FTC, integral comparison (18 lemmas)
-│   ├── IntegralApplications.v     # Product rule, IBP, antiderivative uniqueness (18 lemmas)
-│   ├── TaylorSeries.v             # Taylor remainder, convexity, sandwich bounds (18 lemmas)
-│   ├── UniformConvergence.v       # Uniform convergence, limit exchange, Dini (20 lemmas)
-│   ├── FixedPoint.v              # Banach contraction mapping, perturbation bounds (20 lemmas)
-│   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, paradox blocking
+├── src/                               # Coq source files (34 files)
+│   │
+│   │  # === ToS Core + Phase 2 Foundations ===
+│   ├── TheoryOfSystems_Core_ERR.v    # Laws L1-L5, System, Criterion, paradox blocking (34 Qed)
+│   ├── Roles.v                       # E/R/R roles, status, deps, paradox diagnosis (30 Qed) ← NEW
+│   ├── IntensionalIdentity.v         # P3: extensional ≠ intensional identity (11 Qed) ← NEW
+│   ├── ProcessGeneral.v              # General process theory, Cauchy bridge (16 Qed) ← NEW
+│   ├── Extraction.v                  # OCaml extraction directives ← NEW
+│   │
+│   │  # === Set Theory & Topology ===
+│   ├── ShrinkingIntervals_ERR.v       # Non-surjectivity ℕ → [0,1] ∩ ℚ (167 Qed)
+│   ├── Countability_Q.v              # ℚ ≅ ℕ via Calkin-Wilf (17 Qed)
+│   ├── SchroederBernstein_ERR.v      # Injection theorem (14 Qed)
+│   ├── DiagonalArgument_ERR.v        # Alternative diagonal proof (41 Qed)
+│   ├── TernaryRepresentation_ERR.v   # Digit representation (52 Qed)
 │   ├── HeineBorel_ERR.v              # Compactness (partial — needs ℝ)
-│   ├── SchroederBernstein_ERR.v      # Injection theorem (14 lemmas)
-│   ├── TernaryRepresentation_ERR.v   # Digit representation
-│   ├── DiagonalArgument_ERR.v        # Alternative diagonal proof
-│   └── EVT_ERR.v                     # EVT (deprecated, replaced by EVT_idx.v)
+│   │
+│   │  # === Analysis: Foundations ===
+│   ├── Archimedean_ERR.v             # Archimedean property (14 Qed)
+│   ├── CauchyReal.v                  # Cauchy reals: completion of ℚ (19 Qed)
+│   ├── RealField.v                   # Ordered field on Cauchy reals (17 Qed)
+│   ├── Completeness.v                # Metric completeness: NIP, sup, diagonal (24 Qed)
+│   │
+│   │  # === Analysis: Calculus Chain (B16-B22) ===
+│   ├── MonotoneConvergence.v         # MCT (15 Qed)
+│   ├── SeriesConvergence.v           # Geometric, comparison series (22 Qed)
+│   ├── PowerSeries.v                 # Power series + exp convergence (19 Qed)
+│   ├── FixedPoint.v                  # Banach contraction mapping (20 Qed)
+│   ├── GradientDescent.v            # GD convergence for quadratic loss (18 Qed)
+│   ├── Differentiation.v            # Division-free derivatives, power rule (18 Qed)
+│   ├── MeanValueTheorem.v           # Grid MVT, monotonicity, Lipschitz (18 Qed)
+│   ├── RiemannIntegration.v         # Riemann sums, FTC (18 Qed)
+│   ├── IntegralApplications.v      # Product rule, IBP (19 Qed)
+│   ├── TaylorSeries.v              # Taylor remainder, convexity (18 Qed)
+│   ├── UniformConvergence.v        # Limit exchange, Dini (20 Qed)
+│   │
+│   │  # === Applied: IVT, EVT, NN Verification ===
+│   ├── IVT_ERR.v                     # ε-IVT (23 Qed)
+│   ├── IVT_CauchyReal.v             # Full IVT on Cauchy reals (8 Qed)
+│   ├── EVT_idx.v                     # ε-EVT, L5-compliant (26 Qed)
+│   ├── EVT_ERR.v                     # EVT (legacy, 31 Qed)
+│   ├── PInterval_CROWN.v            # CROWN linear relaxation soundness (25 Qed)
+│   ├── RoundingSafety.v              # IEEE 754 rounding within intervals (13 Qed)
+│   ├── SoftmaxProbability.v         # Softmax probability soundness (14 Qed)
+│   ├── Probability.v                # Probability + Bayesian fallacies (12 Qed)
+│   └── Measure.v                   # Constructive measure & integration (15 Qed)
 │
-├── Architecture_of_Reasoning/         # Fallacy & Paradox formalization
-│   ├── README.md                      # Detailed documentation
-│   ├── CompleteFallacyTaxonomy.v      # All 156 fallacies
-│   ├── AI_FallacyDetector.v           # LLM verification module
-│   ├── ParadoxDissolution.v           # 46 paradoxes classified
-│   ├── Architecture_of_Reasoning.v    # Unified L1-L5, D1-D6, E/R/R
-│   ├── ERR_Fallacies.v                # E/R/R Framework
-│   ├── DomainViolations_Complete.v    # Type 2: 105 fallacies
+├── Architecture_of_Reasoning/         # Fallacy & Paradox formalization (6 files, 117 Qed)
+│   ├── README.md
+│   ├── CompleteFallacyTaxonomy.v      # All 156 fallacies (19 Qed)
+│   ├── AI_FallacyDetector.v           # LLM verification module (13 Qed)
+│   ├── ParadoxDissolution.v           # 46 paradoxes classified (29 Qed)
+│   ├── Architecture_of_Reasoning.v    # Unified L1-L5, D1-D6, E/R/R (17 Qed)
+│   ├── ERR_Fallacies.v                # E/R/R fallacy mapping (22 Qed)
+│   ├── DomainViolations_Complete.v    # D1-D6 violation types (17 Qed)
 │   ├── ai_fallacy_detector.ml         # OCaml extraction
 │   └── demo.py                        # Python demo
 │
-├── extraction/                        # Executable code
-│   └── diagonal_demo.ml              # OCaml demo
+├── extraction/                        # OCaml extraction output (29 files) ← NEW
+│   ├── TheoryOfSystems_Core_ERR.ml   # Level, System, Criterion, L5_resolve
+│   ├── Roles.ml                      # ERR_Category, MathStatus, Dependencies
+│   ├── ProcessGeneral.ml             # GenProcess, prefix, process_map, Qdist
+│   ├── IntensionalIdentity.ml        # CriterionOver
+│   ├── diagonal_demo.ml              # Standalone Calkin-Wilf + diagonal demo
+│   └── *.ml, *.mli                   # Stdlib deps (BinInt, QArith, etc.)
 │
-├── _CoqProject                        # Build configuration
-├── Makefile                           # Generated via coq_makefile
-├── .github/workflows/coq-ci.yml      # CI (coqorg/coq:8.19)
+├── _CoqProject                        # Build configuration (41 files)
+├── CoqMakefile                        # Generated Makefile
+├── .github/workflows/coq-ci.yml      # CI
 └── README.md
 ```
 
@@ -150,42 +173,45 @@ theory-of-systems-coq/
 
 ## Statistics
 
-### Core Formalization
+### Core Formalization (34 files)
 
 | File | Qed | Admitted | Status |
 |------|-----|----------|--------|
 | `ShrinkingIntervals_ERR.v` | 167 | 0 | **100%** |
+| `TernaryRepresentation_ERR.v` | 52 | 2 | 96% |
+| `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
+| `TheoryOfSystems_Core_ERR.v` | 34 | 2 | 94% |
+| `EVT_ERR.v` | 31 | 3 | *(legacy)* |
+| **Roles.v** | **30** | **0** | **100%** ← NEW |
 | `EVT_idx.v` | 26 | 0 | **100%** |
 | `PInterval_CROWN.v` | 25 | 0 | **100%** |
+| `Completeness.v` | 24 | 0 | **100%** |
 | `IVT_ERR.v` | 23 | 0 | **100%** |
-| `CauchyReal.v` | 19 | 0 | **100%** |
-| `Countability_Q.v` | 17 | 0 | **100%** |
-| `Archimedean_ERR.v` | 14 | 0 | **100%** |
-| `SchroederBernstein_ERR.v` | 14 | 0 | **100%** |
-| `RoundingSafety.v` | 13 | 0 | **100%** |
-| `Probability.v` | 12 | 0 | **100%** |
-| `IVT_CauchyReal.v` | 8 | 0 | **100%** |
-| `Measure.v` | 15 | 0 | **100%** |
-| `SoftmaxProbability.v` | 14 | 0 | **100%** |
-| `RealField.v` | 15 | 0 | **100%** |
-| `Completeness.v` | 23 | 0 | **100%** |
-| `MonotoneConvergence.v` | 15 | 0 | **100%** |
 | `SeriesConvergence.v` | 22 | 0 | **100%** |
+| `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
+| `FixedPoint.v` | 20 | 0 | **100%** |
+| `UniformConvergence.v` | 20 | 0 | **100%** |
+| `CauchyReal.v` | 19 | 0 | **100%** |
+| `IntegralApplications.v` | 19 | 0 | **100%** |
 | `PowerSeries.v` | 19 | 0 | **100%** |
-| `GradientDescent.v` | 18 | 0 | **100%** |
 | `Differentiation.v` | 18 | 0 | **100%** |
+| `GradientDescent.v` | 18 | 0 | **100%** |
 | `MeanValueTheorem.v` | 18 | 0 | **100%** |
 | `RiemannIntegration.v` | 18 | 0 | **100%** |
-| `IntegralApplications.v` | 18 | 0 | **100%** |
 | `TaylorSeries.v` | 18 | 0 | **100%** |
-| `UniformConvergence.v` | 20 | 0 | **100%** |
-| `FixedPoint.v` | 20 | 0 | **100%** |
-| `TernaryRepresentation_ERR.v` | 52 | 3 | 95% |
-| `DiagonalArgument_ERR.v` | 41 | 1 | 98% |
-| `TheoryOfSystems_Core_ERR.v` | 31 | 3 | 91% |
-| `EVT_ERR.v` | 28 | 4 | *(deprecated)* |
-| `HeineBorel_ERR.v` | 22 | 2 | *(unprovable over ℚ)* |
-| **Core TOTAL** | **783** | **13** | **98%** |
+| `Countability_Q.v` | 17 | 0 | **100%** |
+| `RealField.v` | 17 | 0 | **100%** |
+| **ProcessGeneral.v** | **16** | **0** | **100%** ← NEW |
+| `Measure.v` | 15 | 0 | **100%** |
+| `MonotoneConvergence.v` | 15 | 0 | **100%** |
+| `Archimedean_ERR.v` | 14 | 0 | **100%** |
+| `SchroederBernstein_ERR.v` | 14 | 0 | **100%** |
+| `SoftmaxProbability.v` | 14 | 0 | **100%** |
+| `RoundingSafety.v` | 13 | 0 | **100%** |
+| `Probability.v` | 12 | 0 | **100%** |
+| **IntensionalIdentity.v** | **11** | **0** | **100%** ← NEW |
+| `IVT_CauchyReal.v` | 8 | 0 | **100%** |
+| **Core TOTAL** | **850** | **10** | **99%** |
 
 ### Architecture of Reasoning
 
@@ -203,23 +229,68 @@ theory-of-systems-coq/
 
 | Category | Theorems | Admitted |
 |----------|----------|----------|
-| Core Mathematics | 783 | 13 |
+| Core Mathematics | 850 | 10 |
 | Architecture of Reasoning | 117 | 0 |
-| **TOTAL** | **900** | **13** |
+| **TOTAL** | **967** | **10** |
 
-**Remaining Admitted (documented):**
+**Remaining Admitted (10, documented):**
 
 | File | Count | Reason |
 |------|-------|--------|
-| `EVT_ERR.v` | 4 | Deprecated — replaced by `EVT_idx.v` (0 Admitted) |
-| `TernaryRepresentation_ERR.v` | 3 | `Qfloor` discontinuity; needs ~15 auxiliary lemmas |
-| `TheoryOfSystems_Core_ERR.v` | 3 | Universe polymorphism limitations (intentional) |
+| `EVT_ERR.v` | 3 | Legacy — replaced by `EVT_idx.v` (0 Admitted) |
+| `TernaryRepresentation_ERR.v` | 2 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
+| `TheoryOfSystems_Core_ERR.v` | 2 | Universe polymorphism limitations (intentional) |
 | `HeineBorel_ERR.v` | 2 | Unprovable over ℚ (requires real-valued continuity) |
 | `DiagonalArgument_ERR.v` | 1 | Alternative approach; use `ShrinkingIntervals` instead |
 
 ---
 
 ## New in March 2026
+
+### Phase 2: ToS-Lang Foundations — Roles, Identity, Processes + OCaml Extraction
+
+Three new files formalize the core Theory of Systems concepts, with all proofs extracted to executable OCaml:
+
+#### E/R/R Roles, Status & Dependencies (`Roles.v` — 30 Qed, 0 Admitted)
+
+Full formalization of the E/R/R framework from the ERR paper:
+- `RoleAssignment`: Element-to-role binding with level proof
+- `ERR_Category`: Three-fold classification (Element / Role / Rule)
+- `MathStatus` / `EpistemicStatus`: Status as **derived** concept (not a fourth primitive)
+- `Dependency` with `DepDirection` (Vertical / Horizontal / External)
+- `reachable_in`: Fuel-bounded graph reachability for cycle detection
+- `strongly_acyclic`: No element reaches itself through any dependency chain
+- `ERR_WellFormed_Full`: 4-condition well-formedness (ERR paper §7)
+- **`circular_dep_is_paradox`**: Unified paradox diagnosis — `s = negb s → False`
+- `russell_is_circular_status`, `liar_is_circular_status`: Classical paradoxes as circular status
+- `no_fixpoint_no_status`, `well_formed_no_paradox`: Well-formedness prevents paradoxes
+
+#### P3: Intensional Identity (`IntensionalIdentity.v` — 11 Qed, 0 Admitted)
+
+Formal proof that extensional equivalence ≠ intensional identity:
+- `CriterionOver`: Domain-fixed criterion record (avoids dependent type transport)
+- `ext_equiv`: Extensional equivalence (same elements) as equivalence relation
+- **`extensional_not_implies_intensional`**: Separation theorem — two criteria accepting the same elements can have different level witnesses → different P3 identity
+- `system_P3_separation`: Lifts the separation result to full `System` records
+
+#### General Process Theory (`ProcessGeneral.v` — 16 Qed, 0 Admitted)
+
+Universal step-indexed computation type bridging to Cauchy analysis:
+- `GenProcess A := nat → A`: Universal process type
+- `observe`, `prefix`, `process_map`, `const_process`: Core operations
+- `process_equiv` as equivalence relation (refl / sym / trans)
+- `is_cauchy_gen`: Cauchy condition on Q-valued processes via `Qdist`
+- `cauchy_seq_is_gen_process`: Bridge from `CauchyQ` to `GenProcess Q`
+- `process_map_cauchy`: Non-expansive maps preserve Cauchy property
+
+#### OCaml Extraction (`Extraction.v` → `extraction/`)
+
+All key ToS types extracted to executable OCaml:
+- `Level`, `System`, `Criterion`, `StructuredSystem`, `L5_resolve`
+- `ERR_Category`, `MathStatus`, `EpistemicStatus`, `Dependency`
+- `GenProcess`, `prefix`, `process_map`, `Qdist`
+- `role_candidates`, `resolve_role` (L5 integration)
+- Prop fields correctly erased; `nat → int` via `ExtrOcamlNatInt`
 
 ### Fixed Point Theory — Banach Contraction, Perturbation Stability (`FixedPoint.v`)
 
@@ -567,9 +638,25 @@ The `Architecture_of_Reasoning/` folder contains formal verification of fallacy 
 - **Self-Reflection Loop** — Automatic fix prompts
 - **Safety Layer** — Block ad hominem, confirmation bias
 - **Propaganda Detection** — Identify manipulation patterns
-- **OCaml Extraction** — Production-ready code
+- **OCaml Extraction** — Production-ready code from Coq proofs
 
 See [Architecture_of_Reasoning/README.md](Architecture_of_Reasoning/README.md) for full documentation.
+
+---
+
+## OCaml Extraction
+
+The `extraction/` directory contains OCaml code extracted directly from the Coq proofs:
+
+| Module | Contents |
+|--------|----------|
+| `TheoryOfSystems_Core_ERR.ml` | `Level`, `System`, `Criterion`, `Generator`, `unfold_gen`, `L5_resolve` |
+| `Roles.ml` | `ERR_Category`, `MathStatus`, `EpistemicStatus`, `Dependency`, `role_candidates` |
+| `ProcessGeneral.ml` | `GenProcess`, `prefix`, `process_map`, `Qdist` |
+| `IntensionalIdentity.ml` | `CriterionOver` |
+| `diagonal_demo.ml` | Standalone Calkin-Wilf + diagonal demo |
+
+All Prop fields are erased during extraction. The extracted code is directly usable from OCaml programs.
 
 ---
 

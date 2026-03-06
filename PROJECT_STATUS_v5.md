@@ -11,7 +11,7 @@
 
 | Metric | src/ | Architecture_of_Reasoning/ | Total |
 |--------|------|---------------------------|-------|
-| Files | 34 | 6 | **40** |
+| Files | 35 | 6 | **41** |
 | Qed | 850 | 117 | **967** |
 | Admitted | 10 | 0 | **10** |
 | Lines | 24,230 | 4,946 | **29,176** |
@@ -34,7 +34,7 @@ All proofs are constructive over Q (rationals). Zero axioms across the entire co
 
 ## 2. Per-File Statistics
 
-### src/ (34 files)
+### src/ (35 files, incl. Extraction.v)
 
 | # | File | Qed | Adm | Lines | Topic |
 |---|------|-----|-----|-------|-------|
@@ -334,7 +334,7 @@ These encode Cantor's paradox for the Theory of Systems hierarchy. The type-theo
 | **LinearAlgebra.v** | LOW | Vectors, matrices (needed for multi-dim NN verification) | ~500+ lines, 25+ Qed |
 | **SystemMorphisms.v** | LOW | Structure-preserving maps between systems | ~250 lines, 12-15 Qed |
 | **WellFormedness checker** | LOW | Decision procedure for valid system construction | ~200 lines |
-| **OCaml extraction** | LOW | `Extraction` directives, `.mli` files, build integration | ~100 lines config |
+| ~~**OCaml extraction**~~ | ~~LOW~~ | **DONE** — `Extraction.v` + 29 files in `extraction/` | ✓ |
 
 ### Observations
 
@@ -364,8 +364,8 @@ These encode Cantor's paradox for the Theory of Systems hierarchy. The type-theo
 
 ### Priority 3: Infrastructure
 
-- **OCaml extraction**: Add `Extraction` directives for key definitions.
-- **Makefile / _CoqProject**: Currently files are compiled individually via command line.
+- ~~**OCaml extraction**~~: **DONE** — `src/Extraction.v` + 29 files in `extraction/`.
+- ~~**Makefile / _CoqProject**~~: **DONE** — `_CoqProject` (41 files) + `CoqMakefile`.
 
 ---
 
@@ -394,7 +394,7 @@ ROCQLIB="C:\\Coq\\Rocq-Platform~9.0~2025.08\\lib\\coq" \
 
 ### Build system
 
-`_CoqProject` defines the full dependency graph (40 files). Compile with:
+`_CoqProject` defines the full dependency graph (41 files). Compile with:
 
 ```bash
 make -f CoqMakefile    # or compile individual files via coqc command above
