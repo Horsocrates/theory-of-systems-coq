@@ -148,6 +148,43 @@ src/PipelineExtraction.v
 # === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
 src/Extraction.v
 
+# === Stdlib Tier 2: Verified Data Structures & Algorithms ===
+# S1: Depends on Core_ERR + L5Resolution + InductiveSystems + ConstitutionChecking
+src/stdlib/TMap.v
+
+# S2: Depends on TMap
+src/stdlib/TSet.v
+
+# S3: Depends on Core_ERR + L5Resolution + InductiveSystems
+src/stdlib/TTree.v
+
+# S4: Depends on Core_ERR + InductiveSystems
+src/stdlib/TQueue.v
+
+# S5: Depends on Core_ERR (uses ZArith)
+src/stdlib/TInt.v
+
+# S6: Depends on Core_ERR (uses QArith)
+src/stdlib/TComplex.v
+
+# S7: Depends on Core_ERR + ProcessGeneral + CoinductiveSystems
+src/stdlib/TStream.v
+
+# S8: Depends on Core_ERR + L5Resolution
+src/stdlib/TSort.v
+
+# S9: Depends on Core_ERR + L5Resolution + ConstitutionChecking
+src/stdlib/TSearch.v
+
+# S10: Depends on Core_ERR + DependentSystems + ConstitutionChecking
+src/stdlib/THigherOrder.v
+
+# S11: Depends on Core_ERR + DependentSystems
+src/stdlib/TOption.v
+
+# S12: Cross-module integration (depends on all stdlib modules except TSort, TComplex)
+src/stdlib/StdlibExamples.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
