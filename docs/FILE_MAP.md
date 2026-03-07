@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-07 21:17
+Auto-generated: 2026-03-07 22:01
 
 ## Core
 
@@ -80,21 +80,30 @@ Auto-generated: 2026-03-07 21:17
 | File | Qed | Admitted | Key Imports |
 |------|-----|---------|-------------|
 | `Automata.v` | 20 | 0 |  |
+| `Category.v` | 20 | 0 |  |
+| `CategoryStatExamples.v` | 16 | 0 | TheoryOfSystems_Core_ERR,stdlibCategory.,stdlibFunctor.,stdl |
 | `Combinatorics.v` | 22 | 0 |  |
 | `ConditionalProbability.v` | 26 | 0 |  |
 | `DiscreteMathExamples.v` | 12 | 0 | stdlibPrimes.,stdlibGCD.,stdlibModularArith.,stdlibCombinato |
+| `Distributions.v` | 23 | 0 | TheoryOfSystems_Core_ERR |
+| `Estimation.v` | 18 | 0 | TheoryOfSystems_Core_ERR |
 | `FormalLanguages.v` | 18 | 0 | stdlibAutomata. |
+| `Functor.v` | 18 | 0 | stdlibCategory. |
 | `GCD.v` | 22 | 0 | stdlibPrimes. |
 | `Graph.v` | 30 | 0 |  |
 | `GraphAlgorithms.v` | 20 | 0 | stdlibGraph. |
 | `GroupTheory.v` | 22 | 0 |  |
 | `Hessian.v` | 22 | 0 |  |
+| `InformationTheory.v` | 20 | 0 | TheoryOfSystems_Core_ERR |
+| `Lattice.v` | 30 | 0 | TheoryOfSystems_Core_ERR |
 | `MDPFoundations.v` | 24 | 0 |  |
 | `MathExamples.v` | 15 | 0 | GroupTheory RingField Topology |
 | `MetricSpace.v` | 18 | 0 | CauchyReal,ProcessGeneral,LinearAlgebra |
 | `ModularArith.v` | 22 | 0 | stdlibPrimes.,stdlibGCD. |
+| `Monad.v` | 20 | 0 | TheoryOfSystems_Core_ERR,stdlibTOption. |
 | `Primes.v` | 21 | 0 |  |
 | `RingField.v` | 20 | 0 | GroupTheory |
+| `Statistics.v` | 26 | 0 |  |
 | `StdlibExamples.v` | 12 | 0 | TheoryOfSystems_Core_ERR,L5Resolution,stdlibTMap.,stdlibTSet |
 | `TComplex.v` | 19 | 0 | TheoryOfSystems_Core_ERR |
 | `THigherOrder.v` | 18 | 0 | TheoryOfSystems_Core_ERR,DependentSystems,ConstitutionChecki |
@@ -124,6 +133,6 @@ Auto-generated: 2026-03-07 21:17
 
 | Metric | Count |
 |--------|-------|
-| Files | 103 |
-| Qed | 2141 |
+| Files | 112 |
+| Qed | 2332 |
 | Admitted | 13 |

@@ -89,6 +89,19 @@ ModularArith (22) <-- Primes + GCD
 DiscreteMathExamples (12) <-- all above
 ```
 
+### Batch 4: Category Theory + Statistics + Information Theory (9 files, 191 Qed)
+```
+Category (20)       <-- standalone
+Monad (20)          <-- standalone (TOption)
+Lattice (30)        <-- standalone (L5Resolution)
+Distributions (23)  <-- standalone (QArith)
+Statistics (26)     <-- standalone (QArith)
+Functor (18)        <-- Category
+InformationTheory (20) <-- standalone (Section-parameterized log)
+Estimation (18)     <-- standalone (QArith)
+CategoryStatExamples (16) <-- all above
+```
+
 ## Key Theorem Chains
 
 ### Chain 1: Type Safety

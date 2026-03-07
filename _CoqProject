@@ -238,6 +238,34 @@ src/stdlib/ModularArith.v
 # B3-9: Cross-module (depends on all Batch 3)
 src/stdlib/DiscreteMathExamples.v
 
+# === Stdlib Batch 4: Category Theory + Statistics + Information Theory ===
+# B4-1: Standalone
+src/stdlib/Category.v
+
+# B4-2: Standalone
+src/stdlib/Monad.v
+
+# B4-3: Standalone
+src/stdlib/Lattice.v
+
+# B4-4: Standalone (uses QArith)
+src/stdlib/Distributions.v
+
+# B4-5: Standalone (uses QArith)
+src/stdlib/Statistics.v
+
+# B4-6: Depends on Category
+src/stdlib/Functor.v
+
+# B4-7: Standalone (Section-parameterized log)
+src/stdlib/InformationTheory.v
+
+# B4-8: Standalone (uses QArith)
+src/stdlib/Estimation.v
+
+# B4-9: Cross-module (depends on all Batch 4)
+src/stdlib/CategoryStatExamples.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v

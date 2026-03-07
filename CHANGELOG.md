@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-03-07] Stdlib Batch 4: Category Theory + Statistics + Information Theory
+- Category.v (20), Functor.v (18), Monad.v (20), Lattice.v (30)
+- Distributions.v (23), Statistics.v (26), InformationTheory.v (20), Estimation.v (18)
+- CategoryStatExamples.v (16)
+- Knaster-Tarski fixed point theorem, Category/Functor/Monad formalization
+- Section-parameterized log for information theory (0 custom axioms)
+- +191 Qed, 9 files
+
 ## [2026-03-07] Stdlib Batch 3: Discrete Math
 - Primes.v (21), GCD.v (22), ModularArith.v (22), Combinatorics.v (22)
 - Graph.v (30), GraphAlgorithms.v (20), Automata.v (20), FormalLanguages.v (18)

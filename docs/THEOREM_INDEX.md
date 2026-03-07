@@ -110,3 +110,49 @@ Key theorems organized by category. For the complete file-by-file listing, see [
 | `dfa_complement_accepts` | Automata.v | Complement DFA accepts iff original rejects |
 | `re_nullable_correct_true` | FormalLanguages.v | Nullable soundness: re_nullable r = true -> matches r [] |
 | `re_nullable_correct_false` | FormalLanguages.v | Nullable completeness: matches r [] -> re_nullable r = true |
+
+## Category Theory (Stdlib)
+
+| Theorem | File | Statement |
+|---------|------|-----------|
+| `iso_refl` | Category.v | Identity is an isomorphism |
+| `iso_sym` | Category.v | Iso is symmetric |
+| `iso_trans` | Category.v | Composition of isos is iso |
+| `comp_mono` | Category.v | Composition of monos is mono |
+| `comp_epi` | Category.v | Composition of epis is epi |
+| `initial_unique_up_to_iso` | Category.v | Initial objects unique up to iso |
+| `list_fmor_id` | Functor.v | List functor preserves identity (map id = id) |
+| `list_fmor_comp` | Functor.v | List functor preserves composition |
+| `fmor_preserves_iso` | Functor.v | Functors preserve isomorphisms |
+
+## Monads (Stdlib)
+
+| Theorem | File | Statement |
+|---------|------|-----------|
+| `option_left_id` | Monad.v | Option monad left identity |
+| `list_assoc` | Monad.v | List monad associativity |
+| `kleisli_assoc` | Monad.v | Kleisli composition is associative |
+
+## Lattice Theory (Stdlib)
+
+| Theorem | File | Statement |
+|---------|------|-----------|
+| `knaster_tarski` | Lattice.v | Monotone f on complete lattice has fixed point |
+| `knaster_tarski_lfp` | Lattice.v | Least fixed point of monotone function |
+| `knaster_tarski_gfp` | Lattice.v | Greatest fixed point of monotone function |
+| `absorption_1` | Lattice.v | meet x (join x y) = x |
+| `absorption_2` | Lattice.v | join x (meet x y) = x |
+
+## Statistics & Information Theory (Stdlib)
+
+| Theorem | File | Statement |
+|---------|------|-----------|
+| `bern_pmf_sum` | Distributions.v | Bernoulli PMF sums to 1 |
+| `bern_pmf_nonneg_0` | Distributions.v | Bernoulli PMF is non-negative |
+| `Qpow_nonneg` | Distributions.v | Non-negative base gives non-negative power |
+| `sum_Q_app` | Statistics.v | sum distributes over append |
+| `mean_singleton` | Statistics.v | mean [x] = x |
+| `kl_divergence_self_zero` | InformationTheory.v | KL(p || p) = 0 |
+| `mutual_info_symmetric` | InformationTheory.v | I(X;Y) = I(Y;X) |
+| `cross_entropy_self_eq_entropy` | InformationTheory.v | H(p,p) = H(p) |
+| `mle_grid_maximizes` | Estimation.v | MLE finds maximum on grid |

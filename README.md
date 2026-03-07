@@ -1,13 +1,13 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-2141_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-2332_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-13-yellow.svg)]()
 [![Axioms](https://img.shields.io/badge/Custom_Axioms-0-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 2141 machine-verified theorems, a verified programming language,
+> 2332 machine-verified theorems, a verified programming language,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -39,12 +39,12 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 2141 |
+| Proven theorems (Qed) | 2332 |
 | Coq files | 103 |
 | Custom axioms | 0 |
 | External axioms | 1 (`classic` — Law of Excluded Middle, = L3) |
 | Admitted | 13 (all documented, most by design) |
-| Stdlib modules | 29 |
+| Stdlib modules | 38 |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
 | Pipeline: structural safety | proven (`validate_pipeline_sound`) |
 
@@ -80,7 +80,8 @@ src/
   Pipeline (4 files)       DomainTypes, Validation, PipelineSemantics, Extraction
   Analysis (18 files)      CauchyReal, Calculus chain, Series, IVT, EVT, FixedPoint...
   Applied Math (8 files)   CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
-  stdlib/ (29 files)       Data structures, algorithms, number theory, graphs, algebra...
+  stdlib/ (38 files)       Data structures, algorithms, number theory, graphs, algebra,
+                           categories, lattices, distributions, statistics, estimation...
 
 Architecture_of_Reasoning/ (6 files)
   156 Fallacies, 46 Paradoxes, AI Fallacy Detection, Domain Violations
@@ -151,10 +152,10 @@ Complete chain from first principles to:
 | Analysis + Applied Math | 26 | 555 | 4 |
 | ToS-Lang (Semantics + Compiler) | 10 | 198 | 1 |
 | Pipeline | 4 | 76 | 0 |
-| Stdlib | 29 | 583 | 0 |
+| Stdlib | 38 | 774 | 0 |
 | Architecture of Reasoning | 6 | 117 | 0 |
 | Integration + Extraction | 2 | 68 | 3 |
-| **TOTAL** | **103** | **2141** | **13** |
+| **TOTAL** | **112** | **2332** | **13** |
 
 ### Admitted (13, all documented)
 
@@ -186,6 +187,7 @@ MonotoneConvergence (15) -> SeriesConvergence (22) -> PowerSeries (19)
 | Tier 2 | 12 | 230 | TMap, TSet, TTree, TQueue, TSort, TSearch, TStream, TInt, TComplex, THigherOrder, TOption, StdlibExamples |
 | Tier 2b | 8 | 166 | GroupTheory, RingField, MetricSpace, Topology, ConditionalProbability, Hessian, MDPFoundations, MathExamples |
 | Batch 3 | 9 | 187 | Primes, GCD, ModularArith, Combinatorics, Graph, GraphAlgorithms, Automata, FormalLanguages, DiscreteMathExamples |
+| Batch 4 | 9 | 191 | Category, Functor, Monad, Lattice, Distributions, Statistics, InformationTheory, Estimation, CategoryStatExamples |
 
 ---
 
