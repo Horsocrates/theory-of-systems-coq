@@ -139,6 +139,12 @@ src/AIInterface.v
 # D4: Depends on ALL above (must be last — does extraction)
 src/ToS_Lang_Extraction.v
 
+# === Verified D1-D6 Pipeline (standalone, Stdlib only) ===
+src/DomainTypes.v
+src/DomainValidation.v
+src/PipelineSemantics.v
+src/PipelineExtraction.v
+
 # === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
 src/Extraction.v
 
