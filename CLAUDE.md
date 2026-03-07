@@ -2,7 +2,7 @@
 
 ## Stats (as of 2026-03-07)
 - **Qed:** 2332
-- **Admitted:** 13
+- **Admitted:** 8
 - **Files:** 112
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)

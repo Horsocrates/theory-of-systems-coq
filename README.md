@@ -2,7 +2,7 @@
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
 [![Theorems](https://img.shields.io/badge/Theorems-2332_Proven-brightgreen.svg)]()
-[![Admitted](https://img.shields.io/badge/Admitted-13-yellow.svg)]()
+[![Admitted](https://img.shields.io/badge/Admitted-8-yellow.svg)]()
 [![Axioms](https://img.shields.io/badge/Custom_Axioms-0-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -43,7 +43,7 @@ A = exists
 | Coq files | 103 |
 | Custom axioms | 0 |
 | External axioms | 1 (`classic` — Law of Excluded Middle, = L3) |
-| Admitted | 13 (all documented, most by design) |
+| Admitted | 8 (all documented, most by design) |
 | Stdlib modules | 38 |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
 | Pipeline: structural safety | proven (`validate_pipeline_sound`) |
@@ -154,22 +154,18 @@ Complete chain from first principles to:
 | Pipeline | 4 | 76 | 0 |
 | Stdlib | 38 | 774 | 0 |
 | Architecture of Reasoning | 6 | 117 | 0 |
-| Integration + Extraction | 2 | 68 | 3 |
-| **TOTAL** | **112** | **2332** | **13** |
+| Integration + Extraction | 2 | 68 | 0 |
+| **TOTAL** | **112** | **2332** | **8** |
 
-### Admitted (13, all documented)
+### Admitted (8, all documented)
 
 | File | Count | Reason |
 |------|-------|--------|
-| `TernaryRepresentation_ERR.v` | 3 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
-| `TheoryOfSystems_Core_ERR.v` | 2 | Bootstrap axioms (L1-L5 foundation) |
+| `TernaryRepresentation_ERR.v` | 2 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
+| `TheoryOfSystems_Core_ERR.v` | 2 | Universe-level proofs (require explicit universe annotations) |
 | `HeineBorel_ERR.v` | 2 | Unprovable over Q (requires real-valued continuity) |
 | `EVT_ERR.v` | 1 | `argmax_process_is_Cauchy`; use `EVT_idx.v` instead |
 | `DiagonalArgument_ERR.v` | 1 | Alternative approach; use `ShrinkingIntervals` instead |
-| `InductiveSystems.v` | 1 | Accessibility well-foundedness |
-| `ErasureTheory.v` | 1 | Erasure preserves behavior |
-| `PhaseA_Examples.v` | 1 | Integration example |
-| `TypeSafety.v` | 1 | Fuel-bound monotonicity (structurally sound) |
 
 ### Calculus Chain (167 Qed, 0 Admitted)
 
@@ -180,7 +176,7 @@ MonotoneConvergence (15) -> SeriesConvergence (22) -> PowerSeries (19)
       -> FixedPoint (20)
 ```
 
-### Verified Standard Library (29 files, 583 Qed, 0 Admitted)
+### Verified Standard Library (38 files, 774 Qed, 0 Admitted)
 
 | Tier | Files | Qed | Contents |
 |------|-------|-----|----------|

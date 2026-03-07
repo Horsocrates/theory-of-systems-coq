@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-07 22:01
+Auto-generated: 2026-03-07 22:10
 
 ## Core
 
@@ -22,7 +22,7 @@ Auto-generated: 2026-03-07 22:01
 | `DomainValidation.v` | 32 | 0 | DomainTypes |
 | `EVT_ERR.v` | 35 | 1 |  |
 | `EVT_idx.v` | 26 | 0 |  |
-| `ErasureTheory.v` | 16 | 1 | TheoryOfSystems_Core_ERR,Roles |
+| `ErasureTheory.v` | 16 | 0 | TheoryOfSystems_Core_ERR,Roles |
 | `Evaluator.v` | 20 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
 | `Expressions.v` | 28 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism |
 | `Extraction.v` | 0 | 0 | TheoryOfSystems_Core_ERR,Roles,IntensionalIdentity,ProcessGe |
@@ -32,7 +32,7 @@ Auto-generated: 2026-03-07 22:01
 | `HeineBorel_ERR.v` | 22 | 2 |  |
 | `IVT_CauchyReal.v` | 8 | 0 | Archimedean_ERR,IVT_ERR,CauchyReal |
 | `IVT_ERR.v` | 23 | 0 | Archimedean_ERR |
-| `InductiveSystems.v` | 26 | 1 | TheoryOfSystems_Core_ERR |
+| `InductiveSystems.v` | 26 | 0 | TheoryOfSystems_Core_ERR |
 | `InfoLayer.v` | 17 | 0 | TheoryOfSystems_Core_ERR,IntensionalIdentity |
 | `IntegralApplications.v` | 19 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
 | `IntensionalIdentity.v` | 11 | 0 | TheoryOfSystems_Core_ERR |
@@ -43,7 +43,7 @@ Auto-generated: 2026-03-07 22:01
 | `Measure.v` | 15 | 0 |  |
 | `MonotoneConvergence.v` | 15 | 0 | CauchyReal,Completeness |
 | `PInterval_CROWN.v` | 25 | 0 |  |
-| `PhaseA_Examples.v` | 11 | 1 | TheoryOfSystems_Core_ERR,SystemMorphism,DependentSystems,Ind |
+| `PhaseA_Examples.v` | 11 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,DependentSystems,Ind |
 | `PipelineExtraction.v` | 7 | 0 | DomainTypes,DomainValidation,PipelineSemantics |
 | `PipelineSemantics.v` | 17 | 0 | DomainTypes,DomainValidation |
 | `PowerSeries.v` | 19 | 0 | CauchyReal,RealField,MonotoneConvergence,SeriesConvergence |
@@ -65,12 +65,12 @@ Auto-generated: 2026-03-07 22:01
 | `Subtyping.v` | 20 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,Judgments,DependentS |
 | `SystemMorphism.v` | 17 | 0 | TheoryOfSystems_Core_ERR |
 | `TaylorSeries.v` | 18 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
-| `TernaryRepresentation_ERR.v` | 52 | 3 |  |
+| `TernaryRepresentation_ERR.v` | 52 | 2 |  |
 | `TestNode.v` | 0 | 0 |  |
 | `TheoryOfSystems_Core_ERR.v` | 34 | 2 |  |
 | `ToS_Lang_Extraction.v` | 8 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
 | `TypeChecker.v` | 26 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Ty |
-| `TypeSafety.v` | 13 | 1 | Expressions,Reduction,Typing_Expr,SubjectReduction,Progress |
+| `TypeSafety.v` | 13 | 0 | Expressions,Reduction,Typing_Expr,SubjectReduction,Progress |
 | `Typing_Expr.v` | 22 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions |
 | `UniformConvergence.v` | 20 | 0 | CauchyReal,Completeness,MonotoneConvergence,Differentiation, |
 | `UniversePolymorphism.v` | 23 | 0 | TheoryOfSystems_Core_ERR |
@@ -135,4 +135,4 @@ Auto-generated: 2026-03-07 22:01
 |--------|-------|
 | Files | 112 |
 | Qed | 2332 |
-| Admitted | 13 |
+| Admitted | 8 |

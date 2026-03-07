@@ -26,7 +26,7 @@ for section in "src/*.v:Core" "src/stdlib/*.v:Stdlib" "Architecture_of_Reasoning
     [ -f "$f" ] || continue
     name=$(basename "$f")
     qed=$(grep -c 'Qed\.' "$f" 2>/dev/null | tr -d '\r\n' || echo 0)
-    admitted=$(grep -c 'Admitted\.' "$f" 2>/dev/null | tr -d '\r\n' || echo 0)
+    admitted=$(grep -E '^\s*Admitted\.' "$f" 2>/dev/null | wc -l | tr -d ' \r\n' || echo 0)
     # Default to 0 if empty
     [ -z "$qed" ] && qed=0
     [ -z "$admitted" ] && admitted=0
