@@ -185,6 +185,31 @@ src/stdlib/TOption.v
 # S12: Cross-module integration (depends on all stdlib modules except TSort, TComplex)
 src/stdlib/StdlibExamples.v
 
+# === Stdlib Tier 2b: Mathematical Structures ===
+# T1: Standalone (uses QArith, ZArith)
+src/stdlib/GroupTheory.v
+
+# T2: Depends on GroupTheory
+src/stdlib/RingField.v
+
+# T3: Standalone (uses QArith, CauchyReal, ProcessGeneral, FixedPoint)
+src/stdlib/MetricSpace.v
+
+# T4: Standalone (uses QArith)
+src/stdlib/Topology.v
+
+# T5: Standalone (uses Probability)
+src/stdlib/ConditionalProbability.v
+
+# T6: Standalone (uses QArith, ZArith)
+src/stdlib/Hessian.v
+
+# T7: Standalone (uses QArith, Lists)
+src/stdlib/MDPFoundations.v
+
+# T8: Cross-module (depends on GroupTheory, RingField, Topology)
+src/stdlib/MathExamples.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
