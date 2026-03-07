@@ -210,6 +210,34 @@ src/stdlib/MDPFoundations.v
 # T8: Cross-module (depends on GroupTheory, RingField, Topology)
 src/stdlib/MathExamples.v
 
+# === Stdlib Batch 3: Discrete Math ===
+# B3-1: Standalone (uses PeanoNat, Lists)
+src/stdlib/Primes.v
+
+# B3-2: Standalone (uses PeanoNat, Lists)
+src/stdlib/Combinatorics.v
+
+# B3-3: Standalone (uses PeanoNat, Lists)
+src/stdlib/Graph.v
+
+# B3-4: Standalone (uses PeanoNat, Lists)
+src/stdlib/Automata.v
+
+# B3-5: Depends on Primes
+src/stdlib/GCD.v
+
+# B3-6: Depends on Graph
+src/stdlib/GraphAlgorithms.v
+
+# B3-7: Depends on Automata
+src/stdlib/FormalLanguages.v
+
+# B3-8: Depends on Primes + GCD
+src/stdlib/ModularArith.v
+
+# B3-9: Cross-module (depends on all Batch 3)
+src/stdlib/DiscreteMathExamples.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
