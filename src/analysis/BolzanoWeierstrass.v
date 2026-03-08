@@ -12,7 +12,8 @@
     Strategy: bisect [a,b], choose half with infinitely many terms (classic),
     nested intervals -> convergent subsequence via Completeness.v
 
-    STATUS: 22 Qed, 0 Admitted, 0 axioms (uses classic from Classical_Prop)
+    STATUS: 22 Qed, 0 Admitted
+    Axioms: classic, constructive_definite_description
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -25,7 +26,7 @@ Require Import Coq.ZArith.ZArith.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.Logic.Classical_Prop.
 Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.Logic.ClassicalEpsilon.
+Require Import Coq.Logic.ClassicalDescription.
 
 From ToS Require Import Archimedean_ERR.
 From ToS Require Import CauchyReal.

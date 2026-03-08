@@ -30,13 +30,14 @@
 (*  THEOREM: If exist injections f : A -> B and g : B -> A,                  *)
 (*           then exists bijection h : A -> B.                               *)
 (*                                                                           *)
-(*  AXIOMS: classic (L3) + epsilon. NO Axiom of Infinity.                    *)
+(*  AXIOMS: classic + constructive_definite_description (CDD).               *)
+(*          NO epsilon. NO Axiom of Infinity.                                *)
 (*                                                                           *)
 (* ========================================================================= *)
 
 Require Import Coq.Logic.Classical_Prop.
 Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.Logic.ClassicalEpsilon.
+Require Import Coq.Logic.ClassicalDescription.
 Require Import Coq.Init.Nat.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.Arith.Wf_nat.
@@ -59,17 +60,41 @@ Hypothesis g_inj : forall b1 b2, g b1 = g b2 -> b1 = b2.
 (* PARTIAL INVERSES         *)
 (* ======================== *)
 
-Definition f_inv (b : B) : A := epsilon inhA (fun a => f a = b).
-Definition g_inv (a : A) : B := epsilon inhB (fun b => g b = a).
+(* Injectivity gives uniqueness of preimages, enabling CDD *)
 
-Lemma f_inv_spec : forall b, (exists a, f a = b) -> f (f_inv b) = b.
+Lemma f_preimage_unique : forall b, (exists a, f a = b) -> exists! a, f a = b.
 Proof.
-  intros b [a Ha]. unfold f_inv. apply epsilon_spec. exists a. exact Ha.
+  intros b [a Ha]. exists a. split.
+  - exact Ha.
+  - intros a' Ha'. apply f_inj. congruence.
 Qed.
 
-Lemma g_inv_spec : forall a, (exists b, g b = a) -> g (g_inv a) = a.
+Lemma g_preimage_unique : forall a, (exists b, g b = a) -> exists! b, g b = a.
 Proof.
-  intros a [b Hb]. unfold g_inv. apply epsilon_spec. exists b. exact Hb.
+  intros a [b Hb]. exists b. split.
+  - exact Hb.
+  - intros b' Hb'. apply g_inj. congruence.
+Qed.
+
+(* Partial inverses using constructive_definite_description (CDD) *)
+Definition f_inv (b : B) (H : exists a, f a = b) : A :=
+  proj1_sig (constructive_definite_description (fun a => f a = b) (f_preimage_unique H)).
+Arguments f_inv : clear implicits.
+
+Definition g_inv (a : A) (H : exists b, g b = a) : B :=
+  proj1_sig (constructive_definite_description (fun b => g b = a) (g_preimage_unique H)).
+Arguments g_inv : clear implicits.
+
+Lemma f_inv_spec : forall b (H : exists a, f a = b), f (f_inv b H) = b.
+Proof.
+  intros b H. unfold f_inv.
+  destruct (constructive_definite_description _ _) as [a Ha]. simpl. exact Ha.
+Qed.
+
+Lemma g_inv_spec : forall a (H : exists b, g b = a), g (g_inv a H) = a.
+Proof.
+  intros a H. unfold g_inv.
+  destruct (constructive_definite_description _ _) as [b Hb]. simpl. exact Hb.
 Qed.
 
 (* ======================== *)
@@ -247,11 +272,10 @@ Qed.
 (* ======================== *)
 
 Definition h (a : A) : B :=
-  if excluded_middle_informative (B_rooted a)
-  then if excluded_middle_informative (exists b, g b = a)
-       then g_inv a
-       else f a
-  else f a.
+  match excluded_middle_informative (B_rooted a) with
+  | left HBa => g_inv a (B_rooted_has_g_preimage HBa)
+  | right _ => f a
+  end.
 
 (* ======================== *)
 (* INJECTIVITY              *)
@@ -263,49 +287,35 @@ Proof.
   unfold h in Heq.
   destruct (excluded_middle_informative (B_rooted a1)) as [HB1 | HnB1];
   destruct (excluded_middle_informative (B_rooted a2)) as [HB2 | HnB2].
-  
-  - (* Both B_rooted *)
-    destruct (excluded_middle_informative (exists b, g b = a1)) as [Hex1 | Hnex1];
-    destruct (excluded_middle_informative (exists b, g b = a2)) as [Hex2 | Hnex2].
-    + (* Both: g_inv a1 = g_inv a2, so a1 = a2 *)
-      assert (g (g_inv a1) = a1) by (apply g_inv_spec; exact Hex1).
-      assert (g (g_inv a2) = a2) by (apply g_inv_spec; exact Hex2).
-      congruence.
-    + exfalso. apply Hnex2. apply B_rooted_has_g_preimage. exact HB2.
-    + exfalso. apply Hnex1. apply B_rooted_has_g_preimage. exact HB1.
-    + apply f_inj. exact Heq.
-      
-  - (* a1 B_rooted, a2 not *)
-    destruct (excluded_middle_informative (exists b, g b = a1)) as [Hex1 | Hnex1].
-    + (* g_inv a1 = f a2 *)
-      exfalso.
-      (* g_inv a1 is in B-rooted chain *)
-      assert (HBgv : B_rooted_in_B (g_inv a1)).
-      { apply g_preserves_B_rooted.
-        assert (Hgg : g (g_inv a1) = a1) by (apply g_inv_spec; exact Hex1).
-        rewrite Hgg. exact HB1. }
-      (* f a2 = g_inv a1 is B_rooted_in_B *)
-      (* So a2 should be B_rooted *)
-      apply HnB2.
-      apply f_preimage_B_rooted with (g_inv a1).
-      * symmetry. exact Heq.
-      * exact HBgv.
-    + apply f_inj. exact Heq.
-    
-  - (* a2 B_rooted, a1 not - symmetric *)
-    destruct (excluded_middle_informative (exists b, g b = a2)) as [Hex2 | Hnex2].
-    + exfalso.
-      assert (HBgv : B_rooted_in_B (g_inv a2)).
-      { apply g_preserves_B_rooted.
-        assert (Hgg : g (g_inv a2) = a2) by (apply g_inv_spec; exact Hex2).
-        rewrite Hgg. exact HB2. }
-      apply HnB1.
-      apply f_preimage_B_rooted with (g_inv a2).
-      * exact Heq.
-      * exact HBgv.
-    + apply f_inj. exact Heq.
-    
-  - (* Neither B_rooted *)
+
+  - (* Both B_rooted: g_inv a1 ... = g_inv a2 ... *)
+    assert (H1 : g (g_inv a1 (B_rooted_has_g_preimage HB1)) = a1)
+      by apply g_inv_spec.
+    assert (H2 : g (g_inv a2 (B_rooted_has_g_preimage HB2)) = a2)
+      by apply g_inv_spec.
+    congruence.
+
+  - (* a1 B_rooted, a2 not: g_inv a1 ... = f a2 *)
+    exfalso.
+    assert (HBgv : B_rooted_in_B (g_inv a1 (B_rooted_has_g_preimage HB1))).
+    { apply g_preserves_B_rooted.
+      rewrite g_inv_spec. exact HB1. }
+    apply HnB2.
+    apply f_preimage_B_rooted with (g_inv a1 (B_rooted_has_g_preimage HB1)).
+    + symmetry. exact Heq.
+    + exact HBgv.
+
+  - (* a2 B_rooted, a1 not: f a1 = g_inv a2 ... *)
+    exfalso.
+    assert (HBgv : B_rooted_in_B (g_inv a2 (B_rooted_has_g_preimage HB2))).
+    { apply g_preserves_B_rooted.
+      rewrite g_inv_spec. exact HB2. }
+    apply HnB1.
+    apply f_preimage_B_rooted with (g_inv a2 (B_rooted_has_g_preimage HB2)).
+    + exact Heq.
+    + exact HBgv.
+
+  - (* Neither B_rooted: f a1 = f a2 *)
     apply f_inj. exact Heq.
 Qed.
 
@@ -317,18 +327,16 @@ Theorem h_surjective : forall b, exists a, h a = b.
 Proof.
   intro b.
   destruct (excluded_middle_informative (B_rooted_in_B b)) as [HBb | HnBb].
-  
+
   - (* b is B_rooted_in_B: use g b *)
     exists (g b).
     unfold h.
     destruct (excluded_middle_informative (B_rooted (g b))) as [HBgb | HnBgb].
-    + destruct (excluded_middle_informative (exists b0, g b0 = g b)) as [Hex | Hnex].
-      * assert (g (g_inv (g b)) = g b) by (apply g_inv_spec; exact Hex).
-        apply g_inj. exact H.
-      * exfalso. apply Hnex. exists b. reflexivity.
+    + (* h (g b) = g_inv (g b) ... *)
+      apply g_inj. apply g_inv_spec.
     + exfalso. apply HnBgb.
       apply B_rooted_in_B_implies_B_rooted_g. exact HBb.
-        
+
   - (* b is not B_rooted_in_B: use f-preimage *)
     destruct (excluded_middle_informative (exists a, f a = b)) as [Hex | Hnex].
     + destruct Hex as [a Ha].
@@ -337,9 +345,9 @@ Proof.
       destruct (excluded_middle_informative (B_rooted a)) as [HBa | HnBa].
       * (* a B_rooted implies f a = b is B_rooted_in_B: contradiction *)
         exfalso. apply HnBb. apply chain_separation with a; assumption.
-      * destruct (excluded_middle_informative (exists b0, g b0 = a)); exact Ha.
+      * exact Ha.
     + (* b has no f-preimage: b is B_rooted_in_B base case *)
-      exfalso. apply HnBb. 
+      exfalso. apply HnBb.
       exists 0. apply B_rooted_B_depth_0. exact Hnex.
 Qed.
 
@@ -389,9 +397,10 @@ Print Assumptions Schroeder_Bernstein.
    - This demonstrates P4 (Finite Actuality): at any point, we work with finite depth
    
    AXIOMS USED:
-   
+
    - classic (excluded middle) - this is L3 in Theory of Systems
-   - epsilon (Hilbert's choice) - for partial inverses
-   
-   NO actual infinity is used. Chains are characterized by FINITE depth.
+   - constructive_definite_description (CDD) - for partial inverses
+     (weaker than epsilon: only extracts UNIQUE witnesses)
+
+   NO epsilon. NO actual infinity. Chains are characterized by FINITE depth.
 *)

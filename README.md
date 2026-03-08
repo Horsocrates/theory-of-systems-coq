@@ -42,7 +42,7 @@ A = exists
 | Proven theorems (Qed) | 2943 |
 | Coq files | 138 |
 | Custom axioms | 0 |
-| External axioms | 1 (`classic` — Law of Excluded Middle, = L3) |
+| External axioms | `classic` (all files); `constructive_definite_description` (BW, SB); `constructive_indefinite_description` (PCH) |
 | Admitted | 6 (all documented, most by design) |
 | Stdlib modules | 53 |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |

@@ -13,8 +13,8 @@
 (*    Rules:    Continuum hypothesis dichotomy, Cantor-Bendixson              *)
 (*                                                                           *)
 (*  STATUS: 41 Qed, 0 Admitted                                              *)
-(*  Axioms: classic, excluded_middle_informative,                            *)
-(*          constructive_indefinite_description                              *)
+(*  Axioms: classic, constructive_indefinite_description (CID)               *)
+(*          (CID for countable_union_enum; EMI derived from classic+CID)     *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (*                                                                           *)
 (* ========================================================================= *)
@@ -22,12 +22,29 @@
 Require Import Coq.Init.Nat.
 Require Import Coq.Lists.List.
 Require Import Coq.Arith.PeanoNat.
+Require Import Coq.Arith.Compare_dec.
 Require Import Coq.Arith.Cantor.
 Require Import Coq.Arith.Wf_nat.
 Require Import Coq.micromega.Lia.
 Require Import Coq.Bool.Bool.
 Require Import Coq.Logic.Classical_Prop.
-Require Import Coq.Logic.ClassicalEpsilon.
+Require Import Coq.Logic.IndefiniteDescription.
+
+(* Derive excluded_middle_informative from classic + CID.
+   This avoids importing ClassicalDescription (which adds CDD as a separate axiom).
+   The trick: encode the P/~P disjunction as a boolean via CID. *)
+Lemma excluded_middle_informative : forall P : Prop, {P} + {~P}.
+Proof.
+  intro P.
+  assert (Hex : exists b : bool, if b then P else ~P).
+  { destruct (classic P) as [HP | HnP].
+    - exists true. exact HP.
+    - exists false. exact HnP. }
+  destruct (constructive_indefinite_description _ Hex) as [b Hb].
+  destruct b.
+  - left. exact Hb.
+  - right. exact Hb.
+Defined.
 Import ListNotations.
 
 From ToS Require Import ProcessTypes.
@@ -361,7 +378,7 @@ Qed.
 (** The chain-following process: determined by sigma and the chain directions. *)
 Definition chain_process (T : PrunedTree) (sigma : list bool) : BinProcess :=
   fun n =>
-    if excluded_middle_informative ((n < length sigma)%nat) then
+    if lt_dec n (length sigma) then
       nth n sigma false
     else
       pick_dir T (chain T sigma (n - length sigma)).
@@ -392,7 +409,7 @@ Lemma follows_chain_eq : forall T sigma p,
 Proof.
   intros T sigma p Hext Hfollow.
   unfold bp_eq, chain_process. intro n.
-  destruct (excluded_middle_informative _) as [Hlt | Hnlt].
+  destruct (lt_dec n (length sigma)) as [Hlt | Hnlt].
   - symmetry. apply Hext. lia.
   - assert (Hge : (n >= length sigma)%nat) by lia.
     set (k := (n - length sigma)%nat).
