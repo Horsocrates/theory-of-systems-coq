@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-08 17:28
+Auto-generated: 2026-03-08 18:52
 
 ## Core
 
@@ -20,6 +20,7 @@ Auto-generated: 2026-03-08 17:28
 | `Differentiation.v` | 18 | 0 | CauchyReal,RealField,SeriesConvergence,GradientDescent |
 | `DomainTypes.v` | 20 | 0 |  |
 | `DomainValidation.v` | 32 | 0 | DomainTypes |
+| `ERR_Categorical.v` | 24 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
 | `EVT_ERR.v` | 35 | 1 |  |
 | `EVT_idx.v` | 26 | 0 |  |
 | `ErasureTheory.v` | 16 | 0 | TheoryOfSystems_Core_ERR,Roles |
@@ -38,6 +39,8 @@ Auto-generated: 2026-03-08 17:28
 | `IntensionalIdentity.v` | 11 | 0 | TheoryOfSystems_Core_ERR |
 | `Judgments.v` | 23 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism |
 | `L5Resolution.v` | 18 | 0 | TheoryOfSystems_Core_ERR |
+| `LevelAdjunction.v` | 25 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
+| `LevelFunctors.v` | 27 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
 | `LinearAlgebra.v` | 22 | 0 |  |
 | `MeanValueTheorem.v` | 18 | 0 | CauchyReal,RealField,EVT_idx,Differentiation |
 | `Measure.v` | 15 | 0 |  |
@@ -66,6 +69,7 @@ Auto-generated: 2026-03-08 17:28
 | `Soundness.v` | 22 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,IntensionalIde |
 | `SubjectReduction.v` | 17 | 0 | Expressions,Reduction,Typing_Expr |
 | `Subtyping.v` | 20 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,Judgments,DependentS |
+| `SystemCategory.v` | 29 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
 | `SystemMorphism.v` | 17 | 0 | TheoryOfSystems_Core_ERR |
 | `TaylorSeries.v` | 18 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
 | `TernaryRepresentation_ERR.v` | 52 | 2 |  |
@@ -160,6 +164,6 @@ Auto-generated: 2026-03-08 17:28
 
 | Metric | Count |
 |--------|-------|
-| Files | 134 |
-| Qed | 2838 |
+| Files | 138 |
+| Qed | 2943 |
 | Admitted | 6 |

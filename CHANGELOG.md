@@ -1,5 +1,16 @@
 # Changelog
 
+## [2026-03-08] Phase 2: Category of Systems
+- SystemCategory.v (29), LevelFunctors.v (27), LevelAdjunction.v (25), ERR_Categorical.v (24)
+- `SystemCat L : Category` — full category instance bridging SystemMorphism.v → Category.v
+- `EmbedFunctor L : Functor (SystemCat L) (SystemCat (LS L))` — cross-level embedding
+- `is_forgettable` predicate, restricted `forget_obj`/`forget_mor` with roundtrip proofs
+- Level Adjunction: hom-set bijection, unit/counit, triangle identities
+- P1 obstruction: not all systems are forgettable (witness = L violates P1)
+- E/R/R categorical: `ElementsFunctor` (faithful), P3 separation categorical
+- `iso_not_implies_P3`: isomorphic but P3-distinct systems (sys_all_nat_L1 ≅ sys_all_nat_L2 ≠)
+- +105 Qed, 4 files, 0 Admitted (total: 2943 Qed, 138 files, 6 Admitted)
+
 ## [2026-03-08] Phase 1: Process Continuum Hypothesis
 - ProcessTypes.v (25), ProcessDiagonal.v (20), ProcessContinuumHypothesis.v (41)
 - Binary processes (Cantor space 2^N) as ToS-native set theory

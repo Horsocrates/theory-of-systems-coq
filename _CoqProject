@@ -329,6 +329,19 @@ src/ProcessDiagonal.v
 # PCH-3: Depends on ProcessTypes + ProcessDiagonal + classic
 src/ProcessContinuumHypothesis.v
 
+# === Phase 2: Category of Systems ===
+# CoS-1: Depends on Core_ERR + SystemMorphism + stdlib/Category + UniversePolymorphism
+src/SystemCategory.v
+
+# CoS-2: Depends on SystemCategory + stdlib/Functor
+src/LevelFunctors.v
+
+# CoS-3: Depends on LevelFunctors + stdlib/Functor
+src/LevelAdjunction.v
+
+# CoS-4: Depends on SystemCategory + LevelFunctors + Roles + IntensionalIdentity
+src/ERR_Categorical.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v

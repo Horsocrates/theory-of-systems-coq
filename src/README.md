@@ -1,6 +1,6 @@
 # src/ — Core Coq Formalization
 
-**71 files | ~1749 Qed | 6 Admitted**
+**75 files | ~1854 Qed | 6 Admitted**
 
 This directory contains the core formalization of the Theory of Systems in Coq/Rocq 9.0.
 
@@ -106,6 +106,15 @@ stdlib/: Verified data structures (depends on foundation files)
 | **ProcessTypes.v** | 25 | `BinProcess`, `BinCollection`, `is_enumerable`, trees, paths |
 | **ProcessDiagonal.v** | 20 | Constructive Cantor diagonal for bool, `binary_processes_not_enumerable` |
 | **ProcessContinuumHypothesis.v** | 41 | Cantor-Bendixson, **`process_continuum_hypothesis`** |
+
+### Category of Systems (Phase 2, 105 Qed)
+
+| File | Qed | Description |
+|------|-----|-------------|
+| **SystemCategory.v** | 29 | `SystemCat L : Category` instance, iso/mono/epi bridges |
+| **LevelFunctors.v** | 27 | `embed_functor`, restricted forget, `is_forgettable`, faithfulness |
+| **LevelAdjunction.v** | 25 | Hom-set bijection, unit/counit, triangle identities |
+| **ERR_Categorical.v** | 24 | E/R/R functorial decomposition, P3↔iso separation |
 
 ### Analysis: Gap Closures (analysis/, 102 Qed)
 

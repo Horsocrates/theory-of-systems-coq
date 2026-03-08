@@ -1,13 +1,13 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-2838_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-2943_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-6-yellow.svg)]()
 [![Axioms](https://img.shields.io/badge/Custom_Axioms-0-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 2838 machine-verified theorems, a verified programming language,
+> 2943 machine-verified theorems, a verified programming language,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -39,8 +39,8 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 2838 |
-| Coq files | 134 |
+| Proven theorems (Qed) | 2943 |
+| Coq files | 138 |
 | Custom axioms | 0 |
 | External axioms | 1 (`classic` — Law of Excluded Middle, = L3) |
 | Admitted | 6 (all documented, most by design) |
@@ -72,7 +72,8 @@ coqc -Q src ToS src/Demo.v
 
 ```
 src/
-  Core (14 files)          L1-L5, P1-P4, E/R/R, Systems, Levels, Morphisms
+  Core (18 files)          L1-L5, P1-P4, E/R/R, Systems, Levels, Morphisms,
+                           Category of Systems, Level Functors, Adjunction
   Type Theory (7 files)    Pi, Sigma, Inductive, Coinductive, Constitution, Erasure, Universes
   Type System (5 files)    Judgments, Formation, Conversion, Subtyping, Soundness
   Semantics (6 files)      Expressions, Reduction, Typing, SubjectReduction, Progress, TypeSafety
@@ -149,6 +150,7 @@ Complete chain from first principles to:
 - **Control & Dynamics**: ODEs (Euler/Picard), LTI systems, Lyapunov stability, Multi-agent consensus
 - **Convex Analysis**: Jensen's inequality, strong convexity, local-is-global optimality
 - **Set Theory**: Process Continuum Hypothesis, Cantor diagonal, perfect subset theorem
+- **Category of Systems**: Sys(L) as Category, embed/forget functors, level adjunction, E/R/R functorial decomposition
 
 ---
 
@@ -159,6 +161,7 @@ Complete chain from first principles to:
 | Category | Files | Qed | Admitted |
 |----------|-------|-----|----------|
 | Core + Type Theory | 26 | 544 | 2 |
+| Category of Systems | 4 | 105 | 0 |
 | Analysis + Applied Math | 30 | 660 | 4 |
 | Set Theory (PCH) | 3 | 86 | 0 |
 | ToS-Lang (Semantics + Compiler) | 10 | 198 | 0 |
@@ -166,7 +169,7 @@ Complete chain from first principles to:
 | Stdlib | 53 | 1089 | 0 |
 | Architecture of Reasoning | 6 | 117 | 0 |
 | Integration + Extraction | 2 | 68 | 0 |
-| **TOTAL** | **134** | **2838** | **6** |
+| **TOTAL** | **138** | **2943** | **6** |
 
 ### Admitted (6, all documented)
 
