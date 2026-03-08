@@ -1,9 +1,9 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
-## Stats (as of 2026-03-07)
-- **Qed:** 2332
-- **Admitted:** 8
-- **Files:** 112
+## Stats (as of 2026-03-08)
+- **Qed:** 2838
+- **Admitted:** 6
+- **Files:** 134
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
@@ -101,6 +101,9 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 | `Expr`, `step`, `eval_fuel` | `Expressions.v`, `Reduction.v` |
 | `typecheck_ann`, `safe_eval` | `TypeChecker.v`, `Evaluator.v` |
 | `is_contraction`, `banach_convergence` | `FixedPoint.v` |
+| `BinProcess`, `BinCollection`, `is_enumerable` | `ProcessTypes.v` |
+| `diagonal`, `binary_processes_not_enumerable` | `ProcessDiagonal.v` |
+| `process_continuum_hypothesis` | `ProcessContinuumHypothesis.v` |
 | `divides`, `is_prime`, `sieve` | `stdlib/Primes.v` |
 | `gcd`, `coprime`, `lcm` | `stdlib/GCD.v` |
 | `Graph`, `has_node`, `has_edge` | `stdlib/Graph.v` |
@@ -109,8 +112,8 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 ## File Organization
 
 ```
-src/                    — core files (68 .v files)
-src/stdlib/             — standard library (29 .v files)
+src/                    — core files (71 .v files)
+src/stdlib/             — standard library (53 .v files)
 Architecture_of_Reasoning/ — fallacy/paradox taxonomy (6 .v files)
 tos_lang/               — OCaml extraction + parser + CLI
 extraction/             — extracted OCaml modules

@@ -266,6 +266,69 @@ src/stdlib/Estimation.v
 # B4-9: Cross-module (depends on all Batch 4)
 src/stdlib/CategoryStatExamples.v
 
+# === Stdlib Batch 5: Advanced Algebra + Game Theory + Control ===
+# B5-1: Standalone (uses QArith, LinearAlgebra)
+src/stdlib/VectorSpace.v
+
+# B5-2: Standalone (uses QArith, ProcessGeneral)
+src/stdlib/ODE.v
+
+# B5-3: Standalone (uses QArith)
+src/stdlib/ConvexAnalysis.v
+
+# B5-4: Standalone (uses QArith, Lists)
+src/stdlib/GameTheory.v
+
+# B5-5: Standalone (uses QArith, LinearAlgebra, ProcessGeneral)
+src/stdlib/ControlTheory.v
+
+# B5-6: Depends on VectorSpace (uses LinearAlgebra)
+src/stdlib/Tensor.v
+
+# B5-7: Standalone (uses QArith, Lists)
+src/stdlib/AuctionTheory.v
+
+# B5-8: Depends on Graph (uses QArith)
+src/stdlib/MultiAgent.v
+
+# B5-9: Cross-module (depends on all Batch 5)
+src/stdlib/AdvancedExamples.v
+
+# === Phase 0: Analysis Gaps ===
+src/analysis/BolzanoWeierstrass.v
+src/analysis/FTC.v
+src/analysis/HeineBorelComplete.v
+src/analysis/ImplicitFunction.v
+
+# === Stdlib Batch 6: Domain-Specific Libraries ===
+# B6-1: Depends on Statistics
+src/stdlib/CreditScoring.v
+
+# B6-2: Depends on Statistics
+src/stdlib/NeuralNet.v
+
+# B6-3: Standalone
+src/stdlib/TextAnalysis.v
+
+# B6-4: Depends on ProcessGeneral + Statistics
+src/stdlib/TimeSeries.v
+
+# B6-5: Standalone (pure bool, no Q)
+src/stdlib/FormalVerification.v
+
+# B6-6: Cross-module (depends on all Batch 6)
+src/stdlib/DomainExamples.v
+
+# === Phase 1: Process Continuum Hypothesis ===
+# PCH-1: Standalone (bool, lists, nat)
+src/ProcessTypes.v
+
+# PCH-2: Depends on ProcessTypes
+src/ProcessDiagonal.v
+
+# PCH-3: Depends on ProcessTypes + ProcessDiagonal + classic
+src/ProcessContinuumHypothesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v

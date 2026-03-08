@@ -1,13 +1,13 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-2332_Proven-brightgreen.svg)]()
-[![Admitted](https://img.shields.io/badge/Admitted-8-yellow.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-2838_Proven-brightgreen.svg)]()
+[![Admitted](https://img.shields.io/badge/Admitted-6-yellow.svg)]()
 [![Axioms](https://img.shields.io/badge/Custom_Axioms-0-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 2332 machine-verified theorems, a verified programming language,
+> 2838 machine-verified theorems, a verified programming language,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -39,12 +39,12 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 2332 |
-| Coq files | 103 |
+| Proven theorems (Qed) | 2838 |
+| Coq files | 134 |
 | Custom axioms | 0 |
 | External axioms | 1 (`classic` — Law of Excluded Middle, = L3) |
-| Admitted | 8 (all documented, most by design) |
-| Stdlib modules | 38 |
+| Admitted | 6 (all documented, most by design) |
+| Stdlib modules | 53 |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
 | Pipeline: structural safety | proven (`validate_pipeline_sound`) |
 
@@ -78,10 +78,16 @@ src/
   Semantics (6 files)      Expressions, Reduction, Typing, SubjectReduction, Progress, TypeSafety
   Compiler (4 files)       TypeChecker, Evaluator, AIInterface, Extraction
   Pipeline (4 files)       DomainTypes, Validation, PipelineSemantics, Extraction
-  Analysis (18 files)      CauchyReal, Calculus chain, Series, IVT, EVT, FixedPoint...
+  Analysis (22 files)      CauchyReal, Calculus chain, Series, IVT, EVT, FixedPoint,
+                           BolzanoWeierstrass, FTC, HeineBorelComplete, ImplicitFunction
+  Set Theory (3 files)     ProcessTypes, ProcessDiagonal, ProcessContinuumHypothesis
   Applied Math (8 files)   CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
-  stdlib/ (38 files)       Data structures, algorithms, number theory, graphs, algebra,
-                           categories, lattices, distributions, statistics, estimation...
+  stdlib/ (53 files)       Data structures, algorithms, number theory, graphs, algebra,
+                           categories, lattices, distributions, statistics, estimation,
+                           vector spaces, tensors, ODEs, convex analysis, game theory,
+                           auctions, control theory, multi-agent consensus,
+                           credit scoring, neural nets, text analysis, time series,
+                           formal verification...
 
 Architecture_of_Reasoning/ (6 files)
   156 Fallacies, 46 Paradoxes, AI Fallacy Detection, Domain Violations
@@ -139,6 +145,10 @@ Complete chain from first principles to:
 - **Data Structures**: Map, Set, Tree, Queue, Sort, Search (all as ToS Systems)
 - **Discrete Math**: Primes, GCD, Modular Arithmetic, Graphs, Automata, Formal Languages
 - **Number Theory**: Combinatorics, Pigeonhole principle, Sieve of Eratosthenes
+- **Game Theory**: Nash equilibrium, Prisoner's Dilemma, Auctions (Vickrey), Pareto optimality
+- **Control & Dynamics**: ODEs (Euler/Picard), LTI systems, Lyapunov stability, Multi-agent consensus
+- **Convex Analysis**: Jensen's inequality, strong convexity, local-is-global optimality
+- **Set Theory**: Process Continuum Hypothesis, Cantor diagonal, perfect subset theorem
 
 ---
 
@@ -148,22 +158,22 @@ Complete chain from first principles to:
 
 | Category | Files | Qed | Admitted |
 |----------|-------|-----|----------|
-| Core + Type Theory | 26 | 544 | 5 |
-| Analysis + Applied Math | 26 | 555 | 4 |
-| ToS-Lang (Semantics + Compiler) | 10 | 198 | 1 |
+| Core + Type Theory | 26 | 544 | 2 |
+| Analysis + Applied Math | 30 | 660 | 4 |
+| Set Theory (PCH) | 3 | 86 | 0 |
+| ToS-Lang (Semantics + Compiler) | 10 | 198 | 0 |
 | Pipeline | 4 | 76 | 0 |
-| Stdlib | 38 | 774 | 0 |
+| Stdlib | 53 | 1089 | 0 |
 | Architecture of Reasoning | 6 | 117 | 0 |
 | Integration + Extraction | 2 | 68 | 0 |
-| **TOTAL** | **112** | **2332** | **8** |
+| **TOTAL** | **134** | **2838** | **6** |
 
-### Admitted (8, all documented)
+### Admitted (6, all documented)
 
 | File | Count | Reason |
 |------|-------|--------|
 | `TernaryRepresentation_ERR.v` | 2 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
 | `TheoryOfSystems_Core_ERR.v` | 2 | Universe-level proofs (require explicit universe annotations) |
-| `HeineBorel_ERR.v` | 2 | Unprovable over Q (requires real-valued continuity) |
 | `EVT_ERR.v` | 1 | `argmax_process_is_Cauchy`; use `EVT_idx.v` instead |
 | `DiagonalArgument_ERR.v` | 1 | Alternative approach; use `ShrinkingIntervals` instead |
 
@@ -176,7 +186,7 @@ MonotoneConvergence (15) -> SeriesConvergence (22) -> PowerSeries (19)
       -> FixedPoint (20)
 ```
 
-### Verified Standard Library (38 files, 774 Qed, 0 Admitted)
+### Verified Standard Library (53 files, 1089 Qed, 0 Admitted)
 
 | Tier | Files | Qed | Contents |
 |------|-------|-----|----------|
@@ -184,6 +194,8 @@ MonotoneConvergence (15) -> SeriesConvergence (22) -> PowerSeries (19)
 | Tier 2b | 8 | 166 | GroupTheory, RingField, MetricSpace, Topology, ConditionalProbability, Hessian, MDPFoundations, MathExamples |
 | Batch 3 | 9 | 187 | Primes, GCD, ModularArith, Combinatorics, Graph, GraphAlgorithms, Automata, FormalLanguages, DiscreteMathExamples |
 | Batch 4 | 9 | 191 | Category, Functor, Monad, Lattice, Distributions, Statistics, InformationTheory, Estimation, CategoryStatExamples |
+| Batch 5 | 9 | 209 | VectorSpace, Tensor, ODE, ConvexAnalysis, GameTheory, AuctionTheory, ControlTheory, MultiAgent, AdvancedExamples |
+| Batch 6 | 6 | 106 | CreditScoring, NeuralNet, TextAnalysis, TimeSeries, FormalVerification, DomainExamples |
 
 ---
 

@@ -1,8 +1,12 @@
 # src/stdlib/ — Verified Standard Library
 
-**12 files | 230 Qed | 0 Admitted | 0 axioms**
+**53 files | 1089 Qed | 0 Admitted | 0 axioms**
 
-Verified data structures and algorithms for Theory of Systems, each modeled as a ToS System with Elements, Roles, Rules, and Constitution.
+Verified data structures, algorithms, and mathematical libraries for Theory of Systems, each modeled as a ToS System with Elements, Roles, Rules, and Constitution.
+
+> Includes: Tier 2 (data structures), Tier 2b (math structures), Batch 3 (discrete math),
+> Batch 4 (categories + statistics), Batch 5 (advanced algebra + game theory + control),
+> Batch 6 (domain-specific: credit scoring, neural nets, text analysis, time series, formal verification).
 
 ---
 

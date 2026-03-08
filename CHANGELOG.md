@@ -1,5 +1,53 @@
 # Changelog
 
+## [2026-03-08] Phase 1: Process Continuum Hypothesis
+- ProcessTypes.v (25), ProcessDiagonal.v (20), ProcessContinuumHypothesis.v (41)
+- Binary processes (Cantor space 2^N) as ToS-native set theory
+- Constructive diagonal argument for bool (no boundary issues)
+- Cantor-Bendixson via perf_subtree: nodes with non-enumerable path extensions
+- `process_continuum_hypothesis`: closed collection either enumerable or has perfect subset
+- `no_intermediate_process_type`: no cardinality between N and 2^N
+- Axioms: `classic` + `constructive_indefinite_description` only
+- +86 Qed, 3 files, 0 Admitted (total: 2838 Qed, 134 files, 6 Admitted)
+
+## [2026-03-08] HeineBorel_ERR: Eliminate 2 Admitted
+- Replaced unprovable `Heine_Borel` with corollary requiring Lebesgue number hypothesis
+- Replaced `continuity_implies_uniform` with provable `lipschitz_implies_uniform`
+- Added `Qdiv_lt_0` helper lemma
+- HeineBorel_ERR.v: 22 Qed → 25 Qed, 2 Admitted → 0 Admitted
+- Total Admitted: 8 → 6 (total: 2752 Qed, 131 files, 6 Admitted)
+
+## [2026-03-08] Phase 0: Close Analysis Gaps
+- BolzanoWeierstrass.v (26), FTC.v (28), HeineBorelComplete.v (28), ImplicitFunction.v (20)
+- Bolzano-Weierstrass: bounded sequence → Cauchy subsequence via bisection
+- FTC extensions: Lipschitz theory, u-substitution, monotonicity consequences
+- Heine-Borel alternatives: total boundedness, eps-nets, uniform continuity via Lipschitz
+- Implicit Function: Newton iteration as Banach contraction (6th fixed-point application)
+- +102 Qed, 4 files, 0 Admitted
+
+## [2026-03-08] Stdlib Batch 6: Domain-Specific Libraries
+- CreditScoring.v (22), NeuralNet.v (18), TextAnalysis.v (16), TimeSeries.v (16)
+- FormalVerification.v (20), DomainExamples.v (14)
+- Credit scoring: weighted-sum models, threshold classification, clamp_01 idempotent
+- Neural networks: relu activation, layer_forward, sigmoid approximation, two-layer networks
+- Text analysis: bag-of-words, term frequency, cosine similarity primitives
+- Time series: moving average, differencing, exponential decay, stationarity
+- Formal verification: propositional logic, satisfiability, validity, entailment
+- Cross-domain: credit scoring = zero-bias neuron, relu/clamp agreement, modus ponens
+- +106 Qed, 6 files (total: 2647 Qed, 127 files)
+
+## [2026-03-07] Stdlib Batch 5: Advanced Algebra + Game Theory + Control
+- VectorSpace.v (27), Tensor.v (39), ODE.v (22), ConvexAnalysis.v (22)
+- GameTheory.v (25), AuctionTheory.v (22), ControlTheory.v (21), MultiAgent.v (18)
+- AdvancedExamples.v (13)
+- Five fixed-point applications: Pipeline, Bellman, Picard, Nash, Consensus
+- Prisoner's Dilemma: Nash equilibrium, Pareto optimality, strict domination
+- Vickrey auctions: truthfulness, winner-pays-second
+- Euler method + Picard iteration for ODEs, Lipschitz conditions
+- Scalar LTI systems with Lyapunov stability
+- Jensen's inequality, strongly convex unique minimizer
+- +209 Qed, 9 files (total: 2541 Qed, 121 files)
+
 ## [2026-03-07] Stdlib Batch 4: Category Theory + Statistics + Information Theory
 - Category.v (20), Functor.v (18), Monad.v (20), Lattice.v (30)
 - Distributions.v (23), Statistics.v (26), InformationTheory.v (20), Estimation.v (18)

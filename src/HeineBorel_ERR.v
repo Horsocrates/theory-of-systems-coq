@@ -5,9 +5,9 @@
 (*  Part of: Theory of Systems - Coq Formalization (E/R/R Framework)         *)
 (*  Author:  Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026         *)
 (*                                                                           *)
-(*  STATUS: 22 Qed, 2 Admitted (UNPROVABLE OVER Q — intentional)             *)
-(*          Admitted: Heine_Borel (false over Q), continuity_implies_uniform *)
-(*          These theorems require completeness; see detailed notes in body  *)
+(*  STATUS: 25 Qed, 0 Admitted                                              *)
+(*          Previously 2 Admitted (unprovable over Q); replaced with         *)
+(*          provable alternatives: Lebesgue-number corollary + Lipschitz    *)
 (*                                                                           *)
 (* ========================================================================= *)
 (*                                                                           *)
@@ -530,34 +530,18 @@ Proof.
   - exact HN.
 Qed.
 
-(* Original Heine-Borel without uniform bound: NOT PROVABLE over Q *)
-(* This is kept as documentation of the classical statement *)
+(* Original Heine-Borel without uniform bound is FALSE over Q.
+   Counterexample: C(x) = |x - sqrt(2)| > 0 for all x in Q, but no finite subcover.
+   Simplified version: add Lebesgue number hypothesis (uniform lower bound on radii). *)
 Theorem Heine_Borel : forall (C : OpenCover) (a b : Q),
   a < b ->
   valid_cover C a b ->
+  (exists delta : Q, uniform_cover C a b delta) ->
   exists centers : FiniteSubcover, covers_interval C centers a b.
 Proof.
-  intros C a b Hab Hvalid.
-  (*
-    THIS THEOREM IS FALSE OVER Q.
-    
-    Counterexample: Let C(x) = |x - 2/2| for x  Q  [0,1].
-    Then C(x) > 0 for all rational x (since 2/2 is irrational),
-    but there is no finite subcover because any finite collection
-    of balls leaves uncovered rationals arbitrarily close to 2/2.
-    
-    The classical proof requires:
-    1. Nested intervals converge to a LIMIT POINT
-    2. The limit point c has C(c) > 0
-    3. Ball around c covers sufficiently small interval
-    
-    Step 1 fails in Q: nested intervals may "converge" to an irrational.
-    
-    For a provable version, use Heine_Borel_uniform with a uniform
-    lower bound on the cover radii (Lebesgue number assumption).
-  *)
-  admit.
-Admitted.
+  intros C a b Hab Hvalid [delta Hunif].
+  exact (Heine_Borel_uniform C a b delta Hab Hunif).
+Qed.
 
 (* ===== SECTION 6: COROLLARY - UNIFORM CONTINUITY ===== *)
 
@@ -583,59 +567,85 @@ Definition uniformly_continuous_on (f : ContinuousFunction) (a b : Q) : Prop :=
     forall x y : Q, a <= x <= b -> a <= y <= b ->
     Qabs (x - y) < delta -> Qabs (f x - f y) < eps.
 
-Theorem continuity_implies_uniform : forall f a b,
+(* Classical "continuity → uniform continuity" requires completeness, FALSE over Q.
+   Simplified version: Lipschitz → uniform continuity (provable over Q).
+   For udiff-based version, see HeineBorelComplete.v: udiff_implies_uniform_cont. *)
+(* Helper: 0 < a -> 0 < b -> 0 < a / b *)
+Lemma Qdiv_lt_0 : forall a b : Q, 0 < a -> 0 < b -> 0 < a / b.
+Proof.
+  intros a b Ha Hb. unfold Qdiv.
+  apply Qmult_lt_0_compat. exact Ha. apply Qinv_lt_0_compat. exact Hb.
+Qed.
+
+Theorem lipschitz_implies_uniform : forall f a b K,
   a < b ->
-  continuous_on f a b ->
+  0 < K ->
+  (forall x y : Q, a <= x <= b -> a <= y <= b ->
+    Qabs (f x - f y) <= K * Qabs (x - y)) ->
   uniformly_continuous_on f a b.
 Proof.
-  intros f a b Hab Hcont.
-  unfold uniformly_continuous_on.
-  intros eps Heps.
-  (*
-    THIS THEOREM REQUIRES COMPLETENESS (or equivalent).
-    
-    The classical proof:
-    1. For each x  [a,b], continuity gives delta(x) > 0
-    2. These deltas form an open cover
-    3. By Heine-Borel (classical), take finite subcover
-    4. Minimum delta from finite subcover works uniformly
-    
-    The problem over Q:
-    - Step 3 uses classical Heine-Borel, which is FALSE over Q
-    - Even with Heine_Borel_uniform, we need a uniform lower bound on deltas
-    - Pointwise continuity does NOT give such a bound
-    
-    For a provable version, assume uniform continuity directly,
-    or work with a specific function class (Lipschitz, etc.).
-  *)
-  admit.
-Admitted.
+  intros f a b K Hab HK Hlip eps Heps.
+  assert (HKp : 0 < K + 1).
+  { apply Qlt_trans with K; [exact HK |].
+    assert (H : K + 1 == K + 1) by ring.
+    assert (H2 : K < K + 1).
+    { unfold Qlt, Qplus. simpl. lia. }
+    exact H2. }
+  exists (eps / (K + 1)).
+  split.
+  - exact (Qdiv_lt_0 eps (K + 1) Heps HKp).
+  - intros x y Hx Hy Hclose.
+    apply Qle_lt_trans with (K * Qabs (x - y)).
+    + apply Hlip; assumption.
+    + (* K * |x-y| < K * (eps/(K+1)) < eps *)
+      apply Qlt_trans with (K * (eps / (K + 1))).
+      * apply Qmult_lt_l; [exact HK | exact Hclose].
+      * (* K * eps/(K+1) < eps because K < K+1 and eps > 0 *)
+        (* Strategy: show K * (eps/(K+1)) < 1 * eps = eps
+           by showing K * (eps/(K+1)) * (K+1) < eps * (K+1)
+           i.e. K * eps < eps * (K+1) = eps*K + eps
+           which follows from 0 < eps *)
+        assert (HKp_neq : ~ K + 1 == 0).
+        { apply Qnot_eq_sym. apply Qlt_not_eq. exact HKp. }
+        (* Equivalent: K * (eps * / (K+1)) < eps *)
+        (* Multiply both sides by (K+1), using Qmult_lt_r *)
+        apply Qmult_lt_r with (K + 1).
+        { exact HKp. }
+        setoid_replace (K * (eps / (K + 1)) * (K + 1)) with (K * eps).
+        2: { field. exact HKp_neq. }
+        setoid_replace (eps * (K + 1)) with (eps * K + eps).
+        2: { ring. }
+        (* Now: K * eps < eps * K + eps, i.e., 0 < eps *)
+        assert (Heq4 : eps * K == K * eps) by ring.
+        setoid_rewrite Heq4.
+        (* Goal: K * eps < K * eps + eps *)
+        setoid_replace (K * eps + eps) with (K * eps + 1 * eps) by ring.
+        setoid_replace (K * eps) with (K * eps + 0) at 1 by ring.
+        apply Qplus_lt_r.
+        apply Qmult_lt_0_compat. unfold Qlt. simpl. lia. exact Heps.
+Qed.
 
 (* ===== SECTION 7: SUMMARY ===== *)
 
 (**
-  PROVEN LEMMAS (22 Qed):
+  PROVEN LEMMAS (25 Qed, 0 Admitted):
   - Qpow2_pos, Qpow2_nonzero, pow2_eventually_large
   - Heine_Borel_by_depth (bisection induction with uniform bound)
   - Heine_Borel_uniform (main theorem WITH Lebesgue number assumption)
+  - Heine_Borel (simplified: adds Lebesgue number hypothesis, corollary of uniform)
+  - lipschitz_implies_uniform (replaces classical continuity_implies_uniform)
   - coverable_concat, not_coverable_half, small_interval_coverable
   - All helper lemmas for Q arithmetic
-  
-  ADMITTED (2 lemmas, documented as unprovable over Q):
-  - Heine_Borel (classical version WITHOUT uniform bound - FALSE over Q)
-  - continuity_implies_uniform (requires completeness - FALSE over Q)
-  
+
+  PREVIOUSLY ADMITTED (now resolved):
+  - Heine_Borel: simplified statement adds Lebesgue number hypothesis
+  - continuity_implies_uniform: replaced with lipschitz_implies_uniform
+  - For udiff-based uniform continuity, see HeineBorelComplete.v
+
   KEY INSIGHT:
-  The classical Heine-Borel theorem requires completeness of the underlying
-  space. In Q, nested intervals may "converge" to an irrational, breaking
-  the proof. The Heine_Borel_uniform version adds a Lebesgue number assumption
-  (uniform lower bound on cover radii), making the theorem provable via
-  finite bisection.
-  
-  PHILOSOPHICAL NOTE:
-  This demonstrates a genuine limitation: not all classical analysis theorems
-  transfer to Q. The process-based approach using Cauchy sequences (nat  Q)
-  can recover R-like behavior, but requires explicit completeness axioms.
+  Classical Heine-Borel and continuity→uniform continuity require completeness.
+  Over Q, we use Lebesgue number + Lipschitz conditions as provable alternatives.
+  See also: analysis/HeineBorelComplete.v for eps-nets and total boundedness.
 *)
 
 Print Assumptions Qpow2_pos.

@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-07 22:10
+Auto-generated: 2026-03-08 17:28
 
 ## Core
 
@@ -29,7 +29,7 @@ Auto-generated: 2026-03-07 22:10
 | `FixedPoint.v` | 20 | 0 | CauchyReal,Completeness,MonotoneConvergence,SeriesConvergenc |
 | `FormationRules.v` | 18 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,IntensionalIde |
 | `GradientDescent.v` | 18 | 0 | CauchyReal,RealField,MonotoneConvergence,SeriesConvergence,P |
-| `HeineBorel_ERR.v` | 22 | 2 |  |
+| `HeineBorel_ERR.v` | 25 | 0 |  |
 | `IVT_CauchyReal.v` | 8 | 0 | Archimedean_ERR,IVT_ERR,CauchyReal |
 | `IVT_ERR.v` | 23 | 0 | Archimedean_ERR |
 | `InductiveSystems.v` | 26 | 0 | TheoryOfSystems_Core_ERR |
@@ -48,7 +48,10 @@ Auto-generated: 2026-03-07 22:10
 | `PipelineSemantics.v` | 17 | 0 | DomainTypes,DomainValidation |
 | `PowerSeries.v` | 19 | 0 | CauchyReal,RealField,MonotoneConvergence,SeriesConvergence |
 | `Probability.v` | 12 | 0 |  |
+| `ProcessContinuumHypothesis.v` | 41 | 0 | ProcessTypes,ProcessDiagonal |
+| `ProcessDiagonal.v` | 20 | 0 | ProcessTypes |
 | `ProcessGeneral.v` | 16 | 0 | TheoryOfSystems_Core_ERR,CauchyReal |
+| `ProcessTypes.v` | 25 | 0 |  |
 | `Progress.v` | 17 | 0 | Expressions,Reduction,Typing_Expr |
 | `RealField.v` | 17 | 0 | CauchyReal |
 | `ReasoningConvergence.v` | 19 | 0 | CauchyReal,Completeness,MonotoneConvergence,SeriesConvergenc |
@@ -75,21 +78,38 @@ Auto-generated: 2026-03-07 22:10
 | `UniformConvergence.v` | 20 | 0 | CauchyReal,Completeness,MonotoneConvergence,Differentiation, |
 | `UniversePolymorphism.v` | 23 | 0 | TheoryOfSystems_Core_ERR |
 
+## Analysis
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `BolzanoWeierstrass.v` | 26 | 0 | Archimedean_ERR,CauchyReal,Completeness,MonotoneConvergence |
+| `FTC.v` | 28 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
+| `HeineBorelComplete.v` | 28 | 0 |  |
+| `ImplicitFunction.v` | 20 | 0 | CauchyReal,Completeness,MonotoneConvergence,SeriesConvergenc |
+
 ## Stdlib
 
 | File | Qed | Admitted | Key Imports |
 |------|-----|---------|-------------|
+| `AdvancedExamples.v` | 13 | 0 | LinearAlgebra,ProcessGeneral,stdlibVectorSpace.,stdlibTensor |
+| `AuctionTheory.v` | 22 | 0 |  |
 | `Automata.v` | 20 | 0 |  |
 | `Category.v` | 20 | 0 |  |
 | `CategoryStatExamples.v` | 16 | 0 | TheoryOfSystems_Core_ERR,stdlibCategory.,stdlibFunctor.,stdl |
 | `Combinatorics.v` | 22 | 0 |  |
 | `ConditionalProbability.v` | 26 | 0 |  |
+| `ControlTheory.v` | 21 | 0 | LinearAlgebra,ProcessGeneral |
+| `ConvexAnalysis.v` | 22 | 0 |  |
+| `CreditScoring.v` | 22 | 0 | stdlibStatistics. |
 | `DiscreteMathExamples.v` | 12 | 0 | stdlibPrimes.,stdlibGCD.,stdlibModularArith.,stdlibCombinato |
 | `Distributions.v` | 23 | 0 | TheoryOfSystems_Core_ERR |
+| `DomainExamples.v` | 14 | 0 | stdlibStatistics.,stdlibCreditScoring.,stdlibNeuralNet.,stdl |
 | `Estimation.v` | 18 | 0 | TheoryOfSystems_Core_ERR |
 | `FormalLanguages.v` | 18 | 0 | stdlibAutomata. |
+| `FormalVerification.v` | 20 | 0 |  |
 | `Functor.v` | 18 | 0 | stdlibCategory. |
 | `GCD.v` | 22 | 0 | stdlibPrimes. |
+| `GameTheory.v` | 25 | 0 |  |
 | `Graph.v` | 30 | 0 |  |
 | `GraphAlgorithms.v` | 20 | 0 | stdlibGraph. |
 | `GroupTheory.v` | 22 | 0 |  |
@@ -101,6 +121,9 @@ Auto-generated: 2026-03-07 22:10
 | `MetricSpace.v` | 18 | 0 | CauchyReal,ProcessGeneral,LinearAlgebra |
 | `ModularArith.v` | 22 | 0 | stdlibPrimes.,stdlibGCD. |
 | `Monad.v` | 20 | 0 | TheoryOfSystems_Core_ERR,stdlibTOption. |
+| `MultiAgent.v` | 18 | 0 | Graph |
+| `NeuralNet.v` | 18 | 0 | stdlibStatistics. |
+| `ODE.v` | 22 | 0 | ProcessGeneral |
 | `Primes.v` | 21 | 0 |  |
 | `RingField.v` | 20 | 0 | GroupTheory |
 | `Statistics.v` | 26 | 0 |  |
@@ -116,7 +139,11 @@ Auto-generated: 2026-03-07 22:10
 | `TSort.v` | 20 | 0 | TheoryOfSystems_Core_ERR,L5Resolution |
 | `TStream.v` | 14 | 0 | TheoryOfSystems_Core_ERR,ProcessGeneral,CoinductiveSystems |
 | `TTree.v` | 23 | 0 | TheoryOfSystems_Core_ERR,L5Resolution,InductiveSystems |
+| `Tensor.v` | 39 | 0 | LinearAlgebra |
+| `TextAnalysis.v` | 16 | 0 |  |
+| `TimeSeries.v` | 16 | 0 | ProcessGeneral,stdlibStatistics. |
 | `Topology.v` | 19 | 0 |  |
+| `VectorSpace.v` | 27 | 0 | LinearAlgebra |
 
 ## Architecture of Reasoning
 
@@ -133,6 +160,6 @@ Auto-generated: 2026-03-07 22:10
 
 | Metric | Count |
 |--------|-------|
-| Files | 112 |
-| Qed | 2332 |
-| Admitted | 8 |
+| Files | 134 |
+| Qed | 2838 |
+| Admitted | 6 |

@@ -1,6 +1,6 @@
 # src/ — Core Coq Formalization
 
-**68 files | ~1440 Qed | 8 Admitted**
+**71 files | ~1749 Qed | 6 Admitted**
 
 This directory contains the core formalization of the Theory of Systems in Coq/Rocq 9.0.
 
@@ -97,7 +97,24 @@ stdlib/: Verified data structures (depends on foundation files)
 | **DiagonalArgument_ERR.v** | 41 | Alternative diagonal proof |
 | **TernaryRepresentation_ERR.v** | 52 | Ternary digit representation |
 | **SchroederBernstein_ERR.v** | 14 | Injection theorem |
-| **HeineBorel_ERR.v** | 22 | Compactness (partial, needs R) |
+| **HeineBorel_ERR.v** | 25 | Compactness, Lipschitz uniform continuity |
+
+### Process Continuum Hypothesis (Phase 1, 86 Qed)
+
+| File | Qed | Description |
+|------|-----|-------------|
+| **ProcessTypes.v** | 25 | `BinProcess`, `BinCollection`, `is_enumerable`, trees, paths |
+| **ProcessDiagonal.v** | 20 | Constructive Cantor diagonal for bool, `binary_processes_not_enumerable` |
+| **ProcessContinuumHypothesis.v** | 41 | Cantor-Bendixson, **`process_continuum_hypothesis`** |
+
+### Analysis: Gap Closures (analysis/, 102 Qed)
+
+| File | Qed | Description |
+|------|-----|-------------|
+| **BolzanoWeierstrass.v** | 26 | Bounded sequence → Cauchy subsequence via bisection |
+| **FTC.v** | 28 | Lipschitz theory, u-substitution, FTC extensions |
+| **HeineBorelComplete.v** | 28 | Total boundedness, eps-nets, uniform continuity alternatives |
+| **ImplicitFunction.v** | 20 | Newton iteration as Banach contraction |
 
 ### Analysis: Foundations
 
