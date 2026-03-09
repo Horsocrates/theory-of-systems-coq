@@ -155,6 +155,18 @@ Auto-generated: 2026-03-08 18:52
 | `Topology.v` | 19 | 0 |  |
 | `VectorSpace.v` | 27 | 0 | LinearAlgebra |
 
+## Process Physics (Phase 3A)
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `InnerProductSpace.v` | 36 | 0 | LinearAlgebra, stdlib.VectorSpace, CauchyReal |
+| `Orthogonality.v` | 27 | 0 | InnerProductSpace |
+| `QState.v` | 19 | 0 | InnerProductSpace, CauchyReal, ProcessGeneral |
+| `QObservable.v` | 16 | 0 | InnerProductSpace, QState, LinearAlgebra |
+| `BornRule.v` | 13 | 0 | QState, QObservable, InnerProductSpace |
+| `SpectralDichotomy.v` | 30 | 0 | ToS_Axioms, ProcessTypes, ProcessContinuumHypothesis, QObservable |
+| `MeasurementProcess.v` | 19 | 0 | SpectralDichotomy, BornRule |
+
 ## Architecture of Reasoning
 
 | File | Qed | Admitted | Key Imports |
@@ -170,6 +182,6 @@ Auto-generated: 2026-03-08 18:52
 
 | Metric | Count |
 |--------|-------|
-| Files | 139 |
-| Qed | 2946 |
-| Admitted | 6 |
+| Files | 146 |
+| Qed | 3111 |
+| Admitted | 11 |

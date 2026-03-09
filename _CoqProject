@@ -322,6 +322,28 @@ src/stdlib/FormalVerification.v
 # B6-6: Cross-module (depends on all Batch 6)
 src/stdlib/DomainExamples.v
 
+# === Phase 3A: Process Physics ===
+# PP-1: Depends on LinearAlgebra, stdlib/VectorSpace, CauchyReal
+src/physics/InnerProductSpace.v
+
+# PP-2: Depends on InnerProductSpace
+src/physics/Orthogonality.v
+
+# PP-3: Depends on InnerProductSpace, CauchyReal, ProcessGeneral
+src/physics/QState.v
+
+# PP-4: Depends on InnerProductSpace, QState, LinearAlgebra
+src/physics/QObservable.v
+
+# PP-5: Depends on QState, QObservable, InnerProductSpace
+src/physics/BornRule.v
+
+# PP-6: Depends on ToS_Axioms, ProcessTypes, ProcessContinuumHypothesis, QObservable
+src/physics/SpectralDichotomy.v
+
+# PP-7: Depends on SpectralDichotomy, BornRule
+src/physics/MeasurementProcess.v
+
 # === Phase 1: Process Continuum Hypothesis ===
 # PCH-1: Standalone (bool, lists, nat)
 src/ProcessTypes.v

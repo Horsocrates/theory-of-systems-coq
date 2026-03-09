@@ -39,6 +39,15 @@ Layer 1: Analysis
   -> IntegralApplications -> TaylorSeries -> UniformConvergence -> FixedPoint
   -> ReasoningConvergence -> GradientDescent
 
+Layer 1.5: Process Physics
+  InnerProductSpace (LinearAlgebra, VectorSpace, CauchyReal)
+    -> Orthogonality
+      -> QState (+ CauchyReal, ProcessGeneral)
+        -> QObservable (+ LinearAlgebra)
+          -> BornRule
+          -> SpectralDichotomy (+ ProcessContinuumHypothesis, ToS_Axioms)
+            -> MeasurementProcess (+ BornRule)
+
 Layer 0: Standalone Mathematics
   Archimedean_ERR, Countability_Q, DiagonalArgument_ERR, HeineBorel_ERR
   ShrinkingIntervals_ERR, TernaryRepresentation_ERR, SchroederBernstein_ERR
@@ -137,7 +146,20 @@ ERR_WellFormed (Roles.v)
         -> validate_pipeline_sound (DomainValidation.v)
 ```
 
-### Chain 4: Calculus
+### Chain 4: Process Physics (Spectral Dichotomy)
+```
+state_cauchy_schwarz (InnerProductSpace.v)
+  -> born_cauchy_schwarz (BornRule.v)
+    -> born_prob_cauchy (BornRule.v)
+      -> measurement_prob_structure (MeasurementProcess.v)
+
+process_continuum_hypothesis (ProcessContinuumHypothesis.v)
+  -> spectral_dichotomy (SpectralDichotomy.v)
+    -> measurement_dichotomy (MeasurementProcess.v)
+      -> process_physics_measurement (MeasurementProcess.v)
+```
+
+### Chain 5: Calculus
 ```
 CauchyReal -> RealField -> Completeness
   -> MonotoneConvergence -> SeriesConvergence -> PowerSeries
