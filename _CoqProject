@@ -344,6 +344,15 @@ src/physics/SpectralDichotomy.v
 # PP-7: Depends on SpectralDichotomy, BornRule
 src/physics/MeasurementProcess.v
 
+# PP-8: Depends on QState + LinearAlgebra + Tensor + ProcessContinuumHypothesis
+src/physics/Entanglement.v
+
+# PP-9: Depends on ProcessTypes + ProcessContinuumHypothesis
+src/physics/Decoherence.v
+
+# PP-10: Depends on Decoherence
+src/physics/ThermodynamicArrow.v
+
 # === Phase 1: Process Continuum Hypothesis ===
 # PCH-1: Standalone (bool, lists, nat)
 src/ProcessTypes.v
