@@ -13,7 +13,7 @@
     nested intervals -> convergent subsequence via Completeness.v
 
     STATUS: 22 Qed, 0 Admitted
-    Axioms: classic, constructive_definite_description
+    Axioms: classic (L3), L4_witness (L4) — via ToS_Axioms.v
     Author: Horsocrates | Date: March 2026
 *)
 
