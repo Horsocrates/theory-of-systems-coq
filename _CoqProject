@@ -395,6 +395,16 @@ src/zeta/ZeroStructure.v
 # Z6: Depends on ZetaZeros + RH_Statement (1 Axiom: functional_equation_structure)
 src/zeta/FunctionalEquation.v
 
+# === Zeta Phase 2: Research Directions ===
+# Z7: Depends on zeta/* + FixedPoint + stdlib/TComplex
+src/zeta/ContractionZeros.v
+
+# Z8: Depends on zeta/* + ProcessTypes + PCH + MonotoneConvergence
+src/zeta/ApproximateZeros.v
+
+# Z9: Depends on EulerProduct + MonotoneConvergence + Primes
+src/zeta/EulerExtension.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
