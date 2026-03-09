@@ -367,6 +367,25 @@ src/LevelAdjunction.v
 # CoS-4: Depends on SystemCategory + LevelFunctors + Roles + IntensionalIdentity
 src/ERR_Categorical.v
 
+# === Zeta Branch: Exploratory (ζ as process) ===
+# Z1: Depends on ToS_Axioms + CauchyReal + MonotoneConvergence + SeriesConvergence + ProcessGeneral
+src/zeta/ZetaProcess.v
+
+# Z2: Depends on ZetaProcess + stdlib/Primes
+src/zeta/EulerProduct.v
+
+# Z3: Depends on ToS_Axioms + CauchyReal + ProcessGeneral + stdlib/TComplex + ZetaProcess
+src/zeta/ZetaZeros.v
+
+# Z4: Depends on ZetaZeros
+src/zeta/RH_Statement.v
+
+# Z5: Depends on ZetaZeros + ProcessTypes + ProcessContinuumHypothesis
+src/zeta/ZeroStructure.v
+
+# Z6: Depends on ZetaZeros + RH_Statement (1 Axiom: functional_equation_structure)
+src/zeta/FunctionalEquation.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
