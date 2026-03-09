@@ -69,7 +69,8 @@ Require Import Coq.micromega.Lia.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.PArith.Pnat.
-Require Import Coq.Logic.Classical.
+From ToS Require Import ToS_Axioms.
+Require Import Coq.Logic.Classical_Pred_Type.
 
 (** 
  PHILOSOPHICAL NOTE ON CLASSICAL LOGIC:
@@ -1629,7 +1630,7 @@ Qed.
  4. The gap is preserved
 *)
 
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 
 (** Helper: Diagonal is in interval at any step *)
 Lemma diagonal_in_interval : forall E m,

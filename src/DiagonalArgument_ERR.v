@@ -51,7 +51,7 @@
 
 Require Import Coq.QArith.QArith.
 Require Import Coq.QArith.Qabs.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Require Import Coq.Logic.Classical_Pred_Type.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.Arith.Wf_nat.

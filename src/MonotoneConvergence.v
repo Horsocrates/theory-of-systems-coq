@@ -22,7 +22,7 @@ Require Import Coq.micromega.Lqa.
 Require Import Coq.micromega.Lia.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 
 From ToS Require Import CauchyReal.
 From ToS Require Import Completeness.

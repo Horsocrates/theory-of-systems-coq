@@ -25,7 +25,7 @@ Require Import Coq.micromega.Lia.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.Lists.List.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Import ListNotations.
 
 Open Scope Q_scope.

@@ -3,6 +3,9 @@
 ## Dependency Layers
 
 ```
+Layer -1: ToS Axioms
+  ToS_Axioms.v (classic = L3, L4_witness = L4 — the ONLY axioms)
+
 Layer 7: Applications
   Pipeline (DomainTypes, DomainValidation, PipelineSemantics, PipelineExtraction)
   Architecture_of_Reasoning (Fallacies, Paradoxes, AI Detection)
@@ -143,11 +146,30 @@ CauchyReal -> RealField -> Completeness
         -> TaylorSeries -> UniformConvergence -> FixedPoint
 ```
 
+## Axiom Architecture
+
+All axioms are declared in `src/ToS_Axioms.v` (Layer -1):
+
+| Axiom | Type | ToS Law |
+|-------|------|---------|
+| `classic` | `forall P, P \/ ~P` | L3 (Excluded Middle) |
+| `L4_witness` | `(exists x, P x) -> {x \| P x}` | L4 (Sufficient Reason) |
+
+Derived principles (not axioms): `L3_informative`, `L4_definite`, `NNPP_from_L3`.
+
+**Banned imports** (no file may use these):
+- `Coq.Logic.ClassicalDescription`
+- `Coq.Logic.ClassicalEpsilon`
+- `Coq.Logic.IndefiniteDescription`
+
 ## Import Patterns
 
 All files use `From ToS Require Import ...` (not bare `Require Import`).
 
 ```coq
+(* Axioms — every file gets these via ToS_Axioms *)
+From ToS Require Import ToS_Axioms.
+
 (* Core imports *)
 From ToS Require Import TheoryOfSystems_Core_ERR.
 From ToS Require Import Roles.

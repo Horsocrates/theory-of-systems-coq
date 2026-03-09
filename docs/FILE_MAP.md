@@ -2,6 +2,12 @@
 
 Auto-generated: 2026-03-08 18:52
 
+## Axioms (Layer -1)
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `ToS_Axioms.v` | 3 | 0 | Classical_Prop (re-exports classic) |
+
 ## Core
 
 | File | Qed | Admitted | Key Imports |
@@ -164,6 +170,6 @@ Auto-generated: 2026-03-08 18:52
 
 | Metric | Count |
 |--------|-------|
-| Files | 138 |
-| Qed | 2943 |
+| Files | 139 |
+| Qed | 2946 |
 | Admitted | 6 |

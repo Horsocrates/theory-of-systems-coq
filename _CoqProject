@@ -1,7 +1,10 @@
 -Q src ToS
 -Q Architecture_of_Reasoning ToS_Arch
 
-# === Layer 0: Standalone (no ToS imports) ===
+# === Layer -1: ToS Axioms (L3 + L4, no dependencies) ===
+src/ToS_Axioms.v
+
+# === Layer 0: Standalone (no ToS imports except ToS_Axioms) ===
 src/Archimedean_ERR.v
 src/CauchyReal.v
 src/Countability_Q.v

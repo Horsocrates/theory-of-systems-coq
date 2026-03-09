@@ -30,14 +30,13 @@
 (*  THEOREM: If exist injections f : A -> B and g : B -> A,                  *)
 (*           then exists bijection h : A -> B.                               *)
 (*                                                                           *)
-(*  AXIOMS: classic + constructive_definite_description (CDD).               *)
+(*  AXIOMS: classic + L4_definite (CDD).               *)
 (*          NO epsilon. NO Axiom of Infinity.                                *)
 (*                                                                           *)
 (* ========================================================================= *)
 
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.Logic.ClassicalDescription.
 Require Import Coq.Init.Nat.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.Arith.Wf_nat.
@@ -60,7 +59,7 @@ Hypothesis g_inj : forall b1 b2, g b1 = g b2 -> b1 = b2.
 (* PARTIAL INVERSES         *)
 (* ======================== *)
 
-(* Injectivity gives uniqueness of preimages, enabling CDD *)
+(* Injectivity gives uniqueness of preimages, enabling L4_definite *)
 
 Lemma f_preimage_unique : forall b, (exists a, f a = b) -> exists! a, f a = b.
 Proof.
@@ -76,25 +75,25 @@ Proof.
   - intros b' Hb'. apply g_inj. congruence.
 Qed.
 
-(* Partial inverses using constructive_definite_description (CDD) *)
+(* Partial inverses using L4_definite (definite description from L4) *)
 Definition f_inv (b : B) (H : exists a, f a = b) : A :=
-  proj1_sig (constructive_definite_description (fun a => f a = b) (f_preimage_unique H)).
+  proj1_sig (L4_definite (fun a => f a = b) (f_preimage_unique H)).
 Arguments f_inv : clear implicits.
 
 Definition g_inv (a : A) (H : exists b, g b = a) : B :=
-  proj1_sig (constructive_definite_description (fun b => g b = a) (g_preimage_unique H)).
+  proj1_sig (L4_definite (fun b => g b = a) (g_preimage_unique H)).
 Arguments g_inv : clear implicits.
 
 Lemma f_inv_spec : forall b (H : exists a, f a = b), f (f_inv b H) = b.
 Proof.
   intros b H. unfold f_inv.
-  destruct (constructive_definite_description _ _) as [a Ha]. simpl. exact Ha.
+  destruct (L4_definite _ _) as [a Ha]. simpl. exact Ha.
 Qed.
 
 Lemma g_inv_spec : forall a (H : exists b, g b = a), g (g_inv a H) = a.
 Proof.
   intros a H. unfold g_inv.
-  destruct (constructive_definite_description _ _) as [b Hb]. simpl. exact Hb.
+  destruct (L4_definite _ _) as [b Hb]. simpl. exact Hb.
 Qed.
 
 (* ======================== *)
@@ -272,7 +271,7 @@ Qed.
 (* ======================== *)
 
 Definition h (a : A) : B :=
-  match excluded_middle_informative (B_rooted a) with
+  match L3_informative (B_rooted a) with
   | left HBa => g_inv a (B_rooted_has_g_preimage HBa)
   | right _ => f a
   end.
@@ -285,8 +284,8 @@ Theorem h_injective : forall a1 a2, h a1 = h a2 -> a1 = a2.
 Proof.
   intros a1 a2 Heq.
   unfold h in Heq.
-  destruct (excluded_middle_informative (B_rooted a1)) as [HB1 | HnB1];
-  destruct (excluded_middle_informative (B_rooted a2)) as [HB2 | HnB2].
+  destruct (L3_informative (B_rooted a1)) as [HB1 | HnB1];
+  destruct (L3_informative (B_rooted a2)) as [HB2 | HnB2].
 
   - (* Both B_rooted: g_inv a1 ... = g_inv a2 ... *)
     assert (H1 : g (g_inv a1 (B_rooted_has_g_preimage HB1)) = a1)
@@ -326,23 +325,23 @@ Qed.
 Theorem h_surjective : forall b, exists a, h a = b.
 Proof.
   intro b.
-  destruct (excluded_middle_informative (B_rooted_in_B b)) as [HBb | HnBb].
+  destruct (L3_informative (B_rooted_in_B b)) as [HBb | HnBb].
 
   - (* b is B_rooted_in_B: use g b *)
     exists (g b).
     unfold h.
-    destruct (excluded_middle_informative (B_rooted (g b))) as [HBgb | HnBgb].
+    destruct (L3_informative (B_rooted (g b))) as [HBgb | HnBgb].
     + (* h (g b) = g_inv (g b) ... *)
       apply g_inj. apply g_inv_spec.
     + exfalso. apply HnBgb.
       apply B_rooted_in_B_implies_B_rooted_g. exact HBb.
 
   - (* b is not B_rooted_in_B: use f-preimage *)
-    destruct (excluded_middle_informative (exists a, f a = b)) as [Hex | Hnex].
+    destruct (L3_informative (exists a, f a = b)) as [Hex | Hnex].
     + destruct Hex as [a Ha].
       exists a.
       unfold h.
-      destruct (excluded_middle_informative (B_rooted a)) as [HBa | HnBa].
+      destruct (L3_informative (B_rooted a)) as [HBa | HnBa].
       * (* a B_rooted implies f a = b is B_rooted_in_B: contradiction *)
         exfalso. apply HnBb. apply chain_separation with a; assumption.
       * exact Ha.
@@ -399,7 +398,7 @@ Print Assumptions Schroeder_Bernstein.
    AXIOMS USED:
 
    - classic (excluded middle) - this is L3 in Theory of Systems
-   - constructive_definite_description (CDD) - for partial inverses
+   - L4_definite (CDD) - for partial inverses
      (weaker than epsilon: only extracts UNIQUE witnesses)
 
    NO epsilon. NO actual infinity. Chains are characterized by FINITE depth.

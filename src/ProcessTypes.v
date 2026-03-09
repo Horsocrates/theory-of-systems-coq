@@ -22,7 +22,7 @@ Require Import Coq.Lists.List.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.micromega.Lia.
 Require Import Coq.Bool.Bool.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Import ListNotations.
 
 (* ========================================================================= *)

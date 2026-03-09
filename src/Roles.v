@@ -19,7 +19,8 @@ Require Import Coq.Init.Nat.
 Require Import Coq.Lists.List.
 Require Import Coq.Arith.PeanoNat.
 Require Import Coq.micromega.Lia.
-Require Import Coq.Logic.Classical.
+From ToS Require Import ToS_Axioms.
+Require Import Coq.Logic.Classical_Pred_Type.
 Import ListNotations.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.

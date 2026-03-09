@@ -1,13 +1,13 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-2943_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-2946_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-6-yellow.svg)]()
-[![Axioms](https://img.shields.io/badge/Custom_Axioms-0-green.svg)]()
+[![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 2943 machine-verified theorems, a verified programming language,
+> 2946 machine-verified theorems, a verified programming language,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -39,10 +39,9 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 2943 |
-| Coq files | 138 |
-| Custom axioms | 0 |
-| External axioms | `classic` (all files); `constructive_definite_description` (BW, SB); `constructive_indefinite_description` (PCH) |
+| Proven theorems (Qed) | 2946 |
+| Coq files | 139 |
+| Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | 6 (all documented, most by design) |
 | Stdlib modules | 53 |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
@@ -72,6 +71,7 @@ coqc -Q src ToS src/Demo.v
 
 ```
 src/
+  ToS_Axioms.v             L3 (classic) + L4 (L4_witness) — the ONLY axioms
   Core (18 files)          L1-L5, P1-P4, E/R/R, Systems, Levels, Morphisms,
                            Category of Systems, Level Functors, Adjunction
   Type Theory (7 files)    Pi, Sigma, Inductive, Coinductive, Constitution, Erasure, Universes
@@ -160,6 +160,7 @@ Complete chain from first principles to:
 
 | Category | Files | Qed | Admitted |
 |----------|-------|-----|----------|
+| Axioms | 1 | 3 | 0 |
 | Core + Type Theory | 26 | 544 | 2 |
 | Category of Systems | 4 | 105 | 0 |
 | Analysis + Applied Math | 30 | 660 | 4 |
@@ -169,7 +170,7 @@ Complete chain from first principles to:
 | Stdlib | 53 | 1089 | 0 |
 | Architecture of Reasoning | 6 | 117 | 0 |
 | Integration + Extraction | 2 | 68 | 0 |
-| **TOTAL** | **138** | **2943** | **6** |
+| **TOTAL** | **139** | **2946** | **6** |
 
 ### Admitted (6, all documented)
 
@@ -201,6 +202,24 @@ MonotoneConvergence (15) -> SeriesConvergence (22) -> PowerSeries (19)
 | Batch 6 | 6 | 106 | CreditScoring, NeuralNet, TextAnalysis, TimeSeries, FormalVerification, DomainExamples |
 
 ---
+
+## Axiom Architecture
+
+The entire formalization uses exactly **two axioms**, both declared in
+`src/ToS_Axioms.v`:
+
+| Axiom | Statement | ToS Origin |
+|-------|-----------|------------|
+| `classic` (L3) | `forall P, P \/ ~P` | Totality of distinction — no third region |
+| `L4_witness` (L4) | `(exists x, P x) -> {x \| P x}` | Determinacy of existence — every Role has a ground |
+
+From these, three derived principles are provided (not additional axioms):
+- `L3_informative` — decidable excluded middle (`{P} + {~P}`)
+- `L4_definite` — constructive definite description (`exists! x` → `{x}`)
+- `NNPP_from_L3` — double negation elimination
+
+No file imports `ClassicalDescription`, `ClassicalEpsilon`, or
+`IndefiniteDescription`. All axiom usage traces back to `ToS_Axioms.v`.
 
 ## Philosophical Foundation
 

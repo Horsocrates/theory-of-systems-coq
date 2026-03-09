@@ -50,7 +50,7 @@
 Require Import Coq.QArith.QArith.
 Require Import Coq.QArith.Qabs.
 Require Import Coq.QArith.Qfield.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Require Import Coq.micromega.Lia.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Setoids.Setoid.

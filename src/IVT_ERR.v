@@ -31,7 +31,7 @@
 (* ========================================================================= *)
 
 Require Import Coq.QArith.QArith Coq.QArith.Qabs Coq.QArith.Qfield.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Require Import Coq.micromega.Lia Coq.ZArith.ZArith Coq.Setoids.Setoid.
 From ToS Require Import Archimedean_ERR.
 

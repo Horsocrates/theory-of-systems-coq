@@ -13,8 +13,8 @@
 (*    Rules:    Continuum hypothesis dichotomy, Cantor-Bendixson              *)
 (*                                                                           *)
 (*  STATUS: 41 Qed, 0 Admitted                                              *)
-(*  Axioms: classic, constructive_indefinite_description (CID)               *)
-(*          (CID for countable_union_enum; EMI derived from classic+CID)     *)
+(*  Axioms: L3 (classic) + L4 (L4_witness) — Laws of Logic only             *)
+(*          (L4 for countable_union_enum; L3_informative derived)           *)
 (*  P4 REFACTORING: PrunedTree is now list bool -> bool (decidable)         *)
 (*                  perf_subtree remains Prop-valued (CB kernel)            *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
@@ -30,26 +30,9 @@ Require Import Coq.Arith.Wf_nat.
 Require Import Coq.micromega.Lia.
 Require Import Coq.Bool.Bool.
 Coercion is_true : bool >-> Sortclass.
-Require Import Coq.Logic.Classical_Prop.
-Require Import Coq.Logic.IndefiniteDescription.
-
-(* Derive excluded_middle_informative from classic + CID.
-   This avoids importing ClassicalDescription (which adds CDD as a separate axiom).
-   The trick: encode the P/~P disjunction as a boolean via CID. *)
-Lemma excluded_middle_informative : forall P : Prop, {P} + {~P}.
-Proof.
-  intro P.
-  assert (Hex : exists b : bool, if b then P else ~P).
-  { destruct (classic P) as [HP | HnP].
-    - exists true. exact HP.
-    - exists false. exact HnP. }
-  destruct (constructive_indefinite_description _ Hex) as [b Hb].
-  destruct b.
-  - left. exact Hb.
-  - right. exact Hb.
-Defined.
 Import ListNotations.
 
+From ToS Require Import ToS_Axioms.
 From ToS Require Import ProcessTypes.
 From ToS Require Import ProcessDiagonal.
 
@@ -92,7 +75,7 @@ Proof.
   intros F HF.
   assert (Hfam : forall n,
     {f : nat -> BinProcess | forall p, F n p -> exists m, bp_eq (f m) p}).
-  { intros n. apply constructive_indefinite_description. exact (HF n). }
+  { intros n. apply L4_witness. exact (HF n). }
   apply (countable_union_from_fam (fun n => proj1_sig (Hfam n)) F).
   intros n p Hn. exact (proj2_sig (Hfam n) p Hn).
 Qed.
@@ -287,7 +270,7 @@ Qed.
 (* ========================================================================= *)
 
 Definition pick_dir (T : PrunedTree) (sigma : list bool) : bool :=
-  if excluded_middle_informative (perf_subtree T (sigma ++ [false]))
+  if L3_informative (perf_subtree T (sigma ++ [false]))
   then false
   else true.
 
@@ -316,7 +299,7 @@ Proof.
   induction n as [|n IH].
   - simpl. exact Hperf.
   - simpl. unfold pick_dir.
-    destruct (excluded_middle_informative (perf_subtree T (chain T sigma n ++ [false])))
+    destruct (L3_informative (perf_subtree T (chain T sigma n ++ [false])))
       as [Hf | Hnf].
     + exact Hf.
     + destruct (perf_subtree_has_child T (chain T sigma n) HT IH) as [Hf2 | Ht2].
@@ -337,7 +320,7 @@ Proof.
   { apply chain_in_perf; assumption. }
   set (s := chain T sigma n) in *.
   unfold pick_dir.
-  destruct (excluded_middle_informative (perf_subtree T (s ++ [false]))) as [Hf | Hnf].
+  destruct (L3_informative (perf_subtree T (s ++ [false]))) as [Hf | Hnf].
   + destruct (classic (perf_subtree T (s ++ [true]))) as [Ht | Hnt].
     * exfalso. apply (Hnosplit n). split; assumption.
     * destruct (classic (T (s ++ [true]))) as [Hin | Hnin].

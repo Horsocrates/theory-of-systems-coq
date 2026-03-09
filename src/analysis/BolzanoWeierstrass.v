@@ -24,9 +24,8 @@ Require Import Coq.micromega.Lqa.
 Require Import Coq.micromega.Lia.
 Require Import Coq.ZArith.ZArith.
 Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Logic.Classical_Prop.
+From ToS Require Import ToS_Axioms.
 Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.Logic.ClassicalDescription.
 
 From ToS Require Import Archimedean_ERR.
 From ToS Require Import CauchyReal.
@@ -101,7 +100,7 @@ Definition bw_step_left (s : nat -> Q) (st : BWState) : Prop :=
     Uses Defined so it computes (needed for Fixpoint). *)
 Definition bw_step (s : nat -> Q) (st : BWState) : BWState.
 Proof.
-  destruct (excluded_middle_informative (bw_step_left s st)) as [H | H].
+  destruct (L3_informative (bw_step_left s st)) as [H | H].
   - exact (mkBW (bw_left st) (bw_mid st)).
   - exact (mkBW (bw_mid st) (bw_right st)).
 Defined.
@@ -131,7 +130,7 @@ Lemma bw_step_valid : forall s st,
 Proof.
   intros s [l r] Hlr. change (l <= r) in Hlr.
   unfold bw_step.
-  destruct (excluded_middle_informative (bw_step_left s (mkBW l r))) as [H | H];
+  destruct (L3_informative (bw_step_left s (mkBW l r))) as [H | H];
     simpl; unfold bw_mid; simpl; bw_qdiv2_lra.
 Qed.
 
@@ -142,7 +141,7 @@ Lemma bw_step_width : forall s st,
 Proof.
   intros s [l r].
   unfold bw_step.
-  destruct (excluded_middle_informative (bw_step_left s (mkBW l r))) as [H | H];
+  destruct (L3_informative (bw_step_left s (mkBW l r))) as [H | H];
     simpl; unfold bw_mid; simpl; field.
 Qed.
 
@@ -153,7 +152,7 @@ Lemma bw_step_nested_left : forall s st,
 Proof.
   intros s [l r] Hlr. change (l <= r) in Hlr.
   unfold bw_step.
-  destruct (excluded_middle_informative (bw_step_left s (mkBW l r))) as [H | H];
+  destruct (L3_informative (bw_step_left s (mkBW l r))) as [H | H];
     simpl; unfold bw_mid; simpl; bw_qdiv2_lra.
 Qed.
 
@@ -164,7 +163,7 @@ Lemma bw_step_nested_right : forall s st,
 Proof.
   intros s [l r] Hlr. change (l <= r) in Hlr.
   unfold bw_step.
-  destruct (excluded_middle_informative (bw_step_left s (mkBW l r))) as [H | H];
+  destruct (L3_informative (bw_step_left s (mkBW l r))) as [H | H];
     simpl; unfold bw_mid; simpl; bw_qdiv2_lra.
 Qed.
 
@@ -176,7 +175,7 @@ Lemma bw_step_preserves_infinite : forall s st,
 Proof.
   intros s [l r] Hlr Hinf. change (l <= r) in Hlr.
   unfold bw_step.
-  destruct (excluded_middle_informative (bw_step_left s (mkBW l r))) as [H | H]; simpl.
+  destruct (L3_informative (bw_step_left s (mkBW l r))) as [H | H]; simpl.
   - exact H.
   - unfold bw_step_left in H. simpl in H. unfold bw_mid in H. simpl in H.
     destruct (infinite_pigeonhole s l r Hinf) as [Hl | Hr].
