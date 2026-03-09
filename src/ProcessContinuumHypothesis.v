@@ -15,6 +15,8 @@
 (*  STATUS: 41 Qed, 0 Admitted                                              *)
 (*  Axioms: classic, constructive_indefinite_description (CID)               *)
 (*          (CID for countable_union_enum; EMI derived from classic+CID)     *)
+(*  P4 REFACTORING: PrunedTree is now list bool -> bool (decidable)         *)
+(*                  perf_subtree remains Prop-valued (CB kernel)            *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (*                                                                           *)
 (* ========================================================================= *)
@@ -27,6 +29,7 @@ Require Import Coq.Arith.Cantor.
 Require Import Coq.Arith.Wf_nat.
 Require Import Coq.micromega.Lia.
 Require Import Coq.Bool.Bool.
+Coercion is_true : bool >-> Sortclass.
 Require Import Coq.Logic.Classical_Prop.
 Require Import Coq.Logic.IndefiniteDescription.
 
@@ -198,8 +201,8 @@ Proof.
   exists f. intros p Hp. apply Hf. apply paths_split_lr; assumption.
 Qed.
 
-Lemma paths_extending_empty_if_not_in_tree : forall T sigma,
-  ~ T sigma -> is_enumerable (paths_extending T sigma).
+Lemma paths_extending_empty_if_not_in_tree : forall (T : PrunedTree) sigma,
+  T sigma <> true -> is_enumerable (paths_extending T sigma).
 Proof.
   intros T sigma HnT.
   apply enumerable_empty. unfold is_empty, paths_extending.
@@ -213,7 +216,7 @@ Qed.
 (*         PART IV: THE PERFECT SUBTREE                                      *)
 (* ========================================================================= *)
 
-Definition perf_subtree (T : PrunedTree) : PrunedTree :=
+Definition perf_subtree (T : PrunedTree) : list bool -> Prop :=
   fun sigma => T sigma /\ ~ is_enumerable (paths_extending T sigma).
 
 Lemma perf_subtree_in_tree : forall T sigma,
@@ -535,7 +538,8 @@ Lemma perf_subtree_has_splitting : forall T sigma,
   is_tree T ->
   perf_subtree T sigma ->
   exists tau, perf_subtree T (sigma ++ tau) /\
-              is_splitting (perf_subtree T) (sigma ++ tau).
+              perf_subtree T (sigma ++ tau ++ [false]) /\
+              perf_subtree T (sigma ++ tau ++ [true]).
 Proof.
   intros T sigma HT Hperf.
   destruct (classic (exists tau, perf_subtree T (sigma ++ tau) /\
@@ -544,8 +548,7 @@ Proof.
   - destruct Hex as [tau [Htau [Hf Ht]]].
     exists tau. split.
     + exact Htau.
-    + unfold is_splitting, has_left, has_right.
-      rewrite <- app_assoc. rewrite <- app_assoc. split; assumption.
+    + split; assumption.
   - exfalso.
     assert (Hnosplit : forall n, ~ (perf_subtree T (chain T sigma n ++ [false]) /\
                                     perf_subtree T (chain T sigma n ++ [true]))).
@@ -572,7 +575,8 @@ Qed.
 
 Lemma perf_subtree_is_tree : forall T,
   is_tree T -> ~ is_enumerable (fun p => is_path T p) ->
-  is_tree (perf_subtree T).
+  perf_subtree T [] /\
+  forall sigma, perf_subtree T sigma -> perf_subtree T (removelast sigma).
 Proof.
   intros T HT Hne. split.
   - apply perf_subtree_root; assumption.
@@ -585,7 +589,12 @@ Qed.
 
 Lemma perf_subtree_is_perfect : forall T,
   is_tree T -> ~ is_enumerable (fun p => is_path T p) ->
-  is_perfect (perf_subtree T).
+  (perf_subtree T [] /\
+   forall sigma, perf_subtree T sigma -> perf_subtree T (removelast sigma)) /\
+  forall sigma, perf_subtree T sigma ->
+    exists tau, perf_subtree T (sigma ++ tau) /\
+                perf_subtree T (sigma ++ tau ++ [false]) /\
+                perf_subtree T (sigma ++ tau ++ [true]).
 Proof.
   intros T HT Hne. split.
   - apply perf_subtree_is_tree; assumption.
@@ -601,7 +610,7 @@ Qed.
 (* ========================================================================= *)
 
 Lemma perf_path_is_T_path : forall T p,
-  is_path (perf_subtree T) p -> is_path T p.
+  (forall n, perf_subtree T (bp_prefix p n)) -> is_path T p.
 Proof.
   unfold is_path. intros T p Hp n.
   apply perf_subtree_in_tree. apply Hp.
@@ -616,9 +625,12 @@ Theorem not_enum_has_perfect_subset : forall T,
   has_perfect_subset (fun p => is_path T p).
 Proof.
   intros T HT Hne.
-  exists (perf_subtree T). split.
-  - apply perf_subtree_is_perfect; assumption.
-  - intros p Hp. apply perf_path_is_T_path. exact Hp.
+  exists (perf_subtree T).
+  destruct (perf_subtree_is_perfect T HT Hne) as [[Hroot Hpre] Hperf].
+  split. exact Hroot.
+  split. exact Hpre.
+  split. exact Hperf.
+  intros p Hp. apply perf_path_is_T_path. exact Hp.
 Qed.
 
 Theorem process_continuum_hypothesis :
@@ -634,10 +646,13 @@ Proof.
     { intro Henum. apply Hnenum.
       destruct Henum as [f Hf].
       exists f. intros p Hp. apply Hf. apply Hiff. exact Hp. }
-    destruct (not_enum_has_perfect_subset T HT Hne) as [S [Hperf HS]].
-    exists S. split.
-    + exact Hperf.
-    + intros p Hp. apply Hiff. apply HS. exact Hp.
+    destruct (not_enum_has_perfect_subset T HT Hne)
+      as [mem [Hroot [Hpre [Hperf Hpaths]]]].
+    exists mem.
+    split. exact Hroot.
+    split. exact Hpre.
+    split. exact Hperf.
+    intros p Hp. apply Hiff. apply Hpaths. exact Hp.
 Qed.
 
 Theorem no_intermediate_process_type :
@@ -667,10 +682,10 @@ Proof. exact full_collection_not_enumerable. Qed.
 
 Lemma full_collection_closed : is_closed (fun _ : BinProcess => True).
 Proof.
-  exists (fun _ : list bool => True). split.
-  - split; [exact I | intros; exact I].
+  exists (fun _ : list bool => true). split.
+  - split; [reflexivity | intros; reflexivity].
   - intros p. split.
-    + intros _. unfold is_path. intros n. exact I.
+    + intros _. unfold is_path. intro n. reflexivity.
     + intros _. exact I.
 Qed.
 
@@ -684,10 +699,13 @@ Qed.
 Lemma empty_closed_enum : is_closed (fun _ => False) /\ is_enumerable (fun _ => False).
 Proof.
   split.
-  - exists (fun sigma => sigma = []). split.
+  - exists (fun sigma : list bool =>
+      match sigma with [] => true | _ => false end). split.
     + split.
       * reflexivity.
-      * intros sigma Hsig. subst. simpl. reflexivity.
+      * intros sigma Hsig. destruct sigma as [|b sigma'].
+        -- simpl. reflexivity.
+        -- simpl in Hsig. discriminate.
     + intros p. split.
       * intro Habs. contradiction.
       * intro Hpath. unfold is_path in Hpath.

@@ -11,7 +11,8 @@
 (*    Roles:    bp_eq, bp_agree (equivalence and prefix agreement)           *)
 (*    Rules:    Enumeration, tree structure, splitting, isolation             *)
 (*                                                                           *)
-(*  STATUS: 25 Qed, 0 Admitted, 0 axioms (except classic for 1 lemma)       *)
+(*  STATUS: 29 Qed, 0 Admitted, 0 axioms (except classic for 1 lemma)       *)
+(*  P4 REFACTORING: PrunedTree is now list bool -> bool (decidable)         *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (*                                                                           *)
 (* ========================================================================= *)
@@ -60,20 +61,22 @@ Definition is_empty (C : BinCollection) : Prop := forall p, ~ C p.
 (*                  PART III: PRUNED TREES                                   *)
 (* ========================================================================= *)
 
-(** A pruned tree is a set of finite binary strings (nodes). *)
-Definition PrunedTree := list bool -> Prop.
+(** A pruned tree is a decidable predicate on finite binary strings.
+    By P4 (Finite Actuality), membership is a finite operation
+    that must terminate with a definite answer: bool, not Prop. *)
+Definition PrunedTree := list bool -> bool.
 
 (** A valid tree contains the root and is prefix-closed. *)
 Definition is_tree (T : PrunedTree) : Prop :=
-  T [] /\ forall sigma, T sigma -> T (removelast sigma).
+  T [] = true /\ forall sigma, T sigma = true -> T (removelast sigma) = true.
 
 (** Node has a left child. *)
 Definition has_left (T : PrunedTree) (sigma : list bool) : Prop :=
-  T (sigma ++ [false]).
+  T (sigma ++ [false]) = true.
 
 (** Node has a right child. *)
 Definition has_right (T : PrunedTree) (sigma : list bool) : Prop :=
-  T (sigma ++ [true]).
+  T (sigma ++ [true]) = true.
 
 (** A node is splitting if it has both children. *)
 Definition is_splitting (T : PrunedTree) (sigma : list bool) : Prop :=
@@ -81,17 +84,29 @@ Definition is_splitting (T : PrunedTree) (sigma : list bool) : Prop :=
 
 (** An infinite path through the tree. *)
 Definition is_path (T : PrunedTree) (p : BinProcess) : Prop :=
-  forall n, T (bp_prefix p n).
+  forall n, T (bp_prefix p n) = true.
 
 (** A perfect tree: every node extends to a splitting node. *)
 Definition is_perfect (T : PrunedTree) : Prop :=
   is_tree T /\
-  forall sigma, T sigma ->
-    exists tau, T (sigma ++ tau) /\ is_splitting T (sigma ++ tau).
+  forall sigma, T sigma = true ->
+    exists tau, T (sigma ++ tau) = true /\ is_splitting T (sigma ++ tau).
 
-(** A collection has a perfect subset if some perfect tree's paths lie in it. *)
+(** A collection has a perfect subset if some perfect tree's paths lie in it.
+    The witness tree is Prop-valued (list bool -> Prop) to accommodate
+    non-decidable witnesses like the Cantor-Bendixson kernel.
+    A decidable tree T : PrunedTree can always be lifted via (fun s => T s = true). *)
 Definition has_perfect_subset (C : BinCollection) : Prop :=
-  exists T : PrunedTree, is_perfect T /\ forall p, is_path T p -> C p.
+  exists (mem : list bool -> Prop),
+    (* tree: root + prefix-closed *)
+    mem [] /\
+    (forall sigma, mem sigma -> mem (removelast sigma)) /\
+    (* perfect: every node extends to a splitting node *)
+    (forall sigma, mem sigma ->
+       exists tau, mem (sigma ++ tau) /\
+                   mem (sigma ++ tau ++ [false]) /\ mem (sigma ++ tau ++ [true])) /\
+    (* paths lie in C *)
+    (forall p, (forall n, mem (bp_prefix p n)) -> C p).
 
 (** A point is isolated if some prefix separates it from all other members. *)
 Definition is_isolated (C : BinCollection) (p : BinProcess) : Prop :=
@@ -260,6 +275,36 @@ Proof.
   intros p q n. apply bool_eq_dec.
 Qed.
 
+(** P4 decidability: tree membership is decidable (free from bool). *)
+Lemma tree_mem_dec : forall (T : PrunedTree) sigma,
+  {T sigma = true} + {T sigma = false}.
+Proof.
+  intros. destruct (T sigma); [left|right]; reflexivity.
+Qed.
+
+Lemma has_left_dec : forall T sigma,
+  {has_left T sigma} + {~ has_left T sigma}.
+Proof.
+  intros. unfold has_left. destruct (T (sigma ++ [false])).
+  - left. reflexivity.
+  - right. discriminate.
+Qed.
+
+Lemma has_right_dec : forall T sigma,
+  {has_right T sigma} + {~ has_right T sigma}.
+Proof.
+  intros. unfold has_right. destruct (T (sigma ++ [true])).
+  - left. reflexivity.
+  - right. discriminate.
+Qed.
+
+Lemma is_splitting_dec : forall T sigma,
+  {is_splitting T sigma} + {~ is_splitting T sigma}.
+Proof.
+  intros. destruct (has_left_dec T sigma); destruct (has_right_dec T sigma);
+  [left|right|right|right]; unfold is_splitting; tauto.
+Qed.
+
 (* ========================================================================= *)
 (*                  PART IX: ENUMERABILITY LEMMAS                            *)
 (* ========================================================================= *)
@@ -283,13 +328,13 @@ Qed.
 (*                  PART X: TREE LEMMAS                                      *)
 (* ========================================================================= *)
 
-Lemma tree_root : forall T, is_tree T -> T [].
+Lemma tree_root : forall T, is_tree T -> T [] = true.
 Proof.
   intros T [Hroot _]. exact Hroot.
 Qed.
 
 Lemma path_prefix_in_tree : forall T p,
-  is_path T p -> forall n, T (bp_prefix p n).
+  is_path T p -> forall n, T (bp_prefix p n) = true.
 Proof.
   unfold is_path. intros T p Hpath n. apply Hpath.
 Qed.
@@ -373,11 +418,13 @@ Qed.
 (*    is_path, is_perfect, has_perfect_subset, is_isolated                    *)
 (*    extends_prefix, paths_extending                                        *)
 (*                                                                           *)
-(*  LEMMAS (25 Qed, 0 Admitted):                                             *)
+(*  LEMMAS (29 Qed, 0 Admitted):                                             *)
 (*    bp_eq:      refl, sym, trans                                            *)
 (*    bp_agree:   0, refl, mono, S, ext, eq_iff                              *)
 (*    bp_prefix:  length, O, nth, S, agree                                    *)
-(*    decidability: bool_eq_dec, bp_eq_dec_at_n                               *)
+(*    decidability: bool_eq_dec, bp_eq_dec_at_n,                              *)
+(*                  tree_mem_dec, has_left_dec, has_right_dec,                *)
+(*                  is_splitting_dec  (P4 — no axioms!)                       *)
 (*    enumeration: enumerable_empty, singleton_enumerable,                   *)
 (*                 enum_union_enum, not_enum_union                            *)
 (*    trees:      tree_root, path_prefix_in_tree                              *)
@@ -385,6 +432,8 @@ Qed.
 (*                paths_extending_nil                                         *)
 (*                                                                           *)
 (*  AXIOMS USED: classic (only for not_enum_union)                           *)
+(*  NOTE: PrunedTree is list bool -> bool (P4 decidability), all tree        *)
+(*        decidability lemmas are axiom-free.                                 *)
 (*                                                                           *)
 (* ========================================================================= *)
 
