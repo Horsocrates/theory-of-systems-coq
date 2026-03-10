@@ -405,6 +405,19 @@ src/zeta/ApproximateZeros.v
 # Z9: Depends on EulerProduct + MonotoneConvergence + Primes
 src/zeta/EulerExtension.v
 
+# === Phase 3E: Concrete Quantum Systems ===
+# CQS-1: Depends on all Phase 3A physics files
+src/physics/Qubit.v
+
+# CQS-2: Depends on Qubit (eigenstate_eigenvalue_compat)
+src/physics/HarmonicOscillator.v
+
+# CQS-3: Depends on Qubit + Entanglement
+src/physics/SpinChain.v
+
+# CQS-4: Depends on core physics (QState + QObservable + BornRule)
+src/physics/QuantumDynamics.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v

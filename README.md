@@ -1,13 +1,13 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-3111_Proven-brightgreen.svg)]()
-[![Admitted](https://img.shields.io/badge/Admitted-11-yellow.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-3518_Proven-brightgreen.svg)]()
+[![Admitted](https://img.shields.io/badge/Admitted-6-yellow.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 3111 machine-verified theorems, a verified programming language,
+> 3518 machine-verified theorems, a verified programming language,
 > formally verified quantum measurement theory, and the first formally
 > verified reasoning pipeline for LLMs.**
 
@@ -40,10 +40,10 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 3111 |
-| Coq files | 146 |
+| Proven theorems (Qed) | 3518 |
+| Coq files | 162 |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
-| Admitted | 11 (all documented, most by design) |
+| Admitted | 6 (all documented, all in `_ERR` files with clean alternatives) |
 | Stdlib modules | 53 |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
 | Pipeline: structural safety | proven (`validate_pipeline_sound`) |
@@ -59,8 +59,8 @@ cd theory-of-systems-coq
 make
 
 # Verify counts
-echo "Proven:"; grep -rc 'Qed\.' src/ Architecture_of_Reasoning/ | awk -F: '{s+=$2}END{print s}'
-echo "Admitted:"; grep -rc 'Admitted\.' src/ Architecture_of_Reasoning/ | awk -F: '{s+=$2}END{print s}'
+echo "Proven:"; grep -r 'Qed\.' src/ Architecture_of_Reasoning/ --include="*.v" | wc -l
+echo "Admitted:"; grep -rn '^Admitted\.' src/ Architecture_of_Reasoning/ --include="*.v" | wc -l
 
 # Run the verified ToS-Lang demo
 coqc -Q src ToS src/Demo.v
@@ -84,8 +84,10 @@ src/
                            BolzanoWeierstrass, FTC, HeineBorelComplete, ImplicitFunction
   Set Theory (3 files)     ProcessTypes, ProcessDiagonal, ProcessContinuumHypothesis
   Applied Math (8 files)   CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
-  Physics (7 files)        InnerProductSpace, Orthogonality, QState, QObservable,
-                           BornRule, SpectralDichotomy, MeasurementProcess
+  Physics (14 files)       InnerProductSpace, Orthogonality, QState, QObservable,
+                           BornRule, SpectralDichotomy, MeasurementProcess,
+                           Entanglement, Decoherence, ThermodynamicArrow,
+                           Qubit, HarmonicOscillator, SpinChain, QuantumDynamics
   stdlib/ (53 files)       Data structures, algorithms, number theory, graphs, algebra,
                            categories, lattices, distributions, statistics, estimation,
                            vector spaces, tensors, ODEs, convex analysis, game theory,
@@ -137,19 +139,31 @@ Six-domain reasoning pipeline for any LLM:
 Structural guarantees: domains can't be skipped (type error), dependencies can't be
 circular (structurally impossible), confidence is computed from scorecard (not self-reported).
 
-### Process Physics (Phase 3A) — Quantum Measurement Theory
+### Process Physics — Quantum Measurement Theory (356 Qed)
 
 Quantum mechanics derived from process theory, with the **spectral dichotomy**
 as the crown jewel: every observable's eigenspace is either discrete or continuous,
 with no intermediate type — proven directly from the Process Continuum Hypothesis.
 
+**Phase 3A — Abstract Framework (160 Qed):**
 - **Inner Product Space**: Cauchy-Schwarz inequality, process inner products (36 Qed)
 - **Orthogonality**: Pythagorean theorem, Bessel inequality, Gram-Schmidt (27 Qed)
 - **Quantum States**: Process-valued state vectors, basis states, normalization (19 Qed)
 - **Observables**: Symmetric matrix processes, eigenstate theory, diagonal observables (16 Qed)
 - **Born Rule**: Transition probabilities, expectation values, all as Cauchy processes (13 Qed)
 - **Spectral Dichotomy**: PCH → discrete/continuous spectrum classification (30 Qed)
-- **Measurement Process**: Post-measurement projection, repeatability, integration theorems (19 Qed)
+- **Measurement Process**: Post-measurement projection, repeatability (19 Qed)
+
+**Phase 3B-3D — Entanglement & Thermodynamics (63 Qed):**
+- **Entanglement**: Tensor products, Bell state, `bell_entangled` theorem (25 Qed)
+- **Decoherence**: Environment-induced decoherence, pointer states (21 Qed)
+- **Thermodynamic Arrow**: Entropy increase from decoherence (17 Qed)
+
+**Phase 3E — Concrete Quantum Systems (133 Qed):**
+- **Qubit**: Pauli-X/Z, equal superposition probability = 1/2, complementarity (42 Qed)
+- **Harmonic Oscillator**: Equispaced levels (`spacing = 1`), non-degeneracy (35 Qed)
+- **Spin Chain**: Bell state entanglement, Ising `⟨Φ+|H|Φ+⟩ = 2J`, ferro/antiferro (32 Qed)
+- **Quantum Dynamics**: Time evolution, norm preservation, conservation laws (24 Qed)
 
 ### Mathematical Library
 
@@ -167,7 +181,10 @@ Complete chain from first principles to:
 - **Control & Dynamics**: ODEs (Euler/Picard), LTI systems, Lyapunov stability, Multi-agent consensus
 - **Convex Analysis**: Jensen's inequality, strong convexity, local-is-global optimality
 - **Set Theory**: Process Continuum Hypothesis, Cantor diagonal, perfect subset theorem
-- **Quantum Physics**: Born rule, spectral dichotomy, measurement process, expectation values
+- **Quantum Physics**: Born rule, spectral dichotomy, measurement, entanglement, decoherence,
+  qubit (Pauli-X/Z), harmonic oscillator, spin chains (Ising), quantum dynamics
+- **Number Theory (Zeta)**: ζ as process, Euler product, zero structure, functional equation,
+  contraction zeros, approximate zeros (211 Qed, exploratory)
 - **Category of Systems**: Sys(L) as Category, embed/forget functors, level adjunction, E/R/R functorial decomposition
 
 ---
@@ -178,31 +195,35 @@ Complete chain from first principles to:
 
 | Category | Files | Qed | Admitted |
 |----------|-------|-----|----------|
-| Axioms | 1 | 3 | 0 |
-| Core + Type Theory | 26 | 544 | 5 |
+| ToS Core + Framework | 14 | 267 | 2 |
+| Type System (Phase B) | 5 | 99 | 0 |
 | Category of Systems | 4 | 105 | 0 |
-| Analysis + Applied Math | 30 | 660 | 4 |
-| Set Theory (PCH) | 3 | 86 | 0 |
-| Process Physics | 7 | 160 | 0 |
-| ToS-Lang (Semantics + Compiler) | 10 | 198 | 2 |
+| Analysis | 27 | 721 | 4 |
+| Analysis Gaps | 4 | 102 | 0 |
+| Applied Math | 5 | 88 | 0 |
+| Set Theory (PCH) | 3 | 90 | 0 |
+| Process Physics | 14 | 356 | 0 |
+| Zeta Branch | 9 | 211 | 0 |
+| ToS-Lang (Semantics + Compiler) | 10 | 186 | 0 |
 | Pipeline | 4 | 76 | 0 |
 | Stdlib | 53 | 1089 | 0 |
 | Architecture of Reasoning | 6 | 117 | 0 |
-| Integration + Extraction | 2 | 68 | 0 |
-| **TOTAL** | **146** | **3111** | **11** |
+| Integration + Extraction | 2 | 11 | 0 |
+| **TOTAL** | **160+2** | **3518** | **6** |
 
-### Admitted (11, all documented)
++2 utility files (Demo.v, TestNode.v) contain 0 Qed.
+
+### Admitted (6, all documented)
+
+All Admitted are in `_ERR` (Error-Recovery-Resolution) files which have
+clean alternative implementations. No Admitted in any non-ERR file.
 
 | File | Count | Reason |
 |------|-------|--------|
-| `TernaryRepresentation_ERR.v` | 3 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
+| `TernaryRepresentation_ERR.v` | 2 | `Qfloor` discontinuity; alternative: `ShrinkingIntervals` |
 | `TheoryOfSystems_Core_ERR.v` | 2 | Universe-level proofs (require explicit universe annotations) |
 | `EVT_ERR.v` | 1 | `argmax_process_is_Cauchy`; use `EVT_idx.v` instead |
 | `DiagonalArgument_ERR.v` | 1 | Alternative approach; use `ShrinkingIntervals` instead |
-| `ErasureTheory.v` | 1 | Erasure of coinductive streams (structural timeout) |
-| `InductiveSystems.v` | 1 | Deep induction on system levels |
-| `PhaseA_Examples.v` | 1 | Integration example (depends on above) |
-| `TypeSafety.v` | 1 | P4 termination (fuel-based, holds by construction) |
 
 ### Calculus Chain (167 Qed, 0 Admitted)
 
