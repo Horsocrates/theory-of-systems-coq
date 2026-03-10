@@ -457,6 +457,13 @@ src/experimental/VacuumEnergy.v
 # EXP-6: Self-contained (CauchyReal + SeriesConvergence + MonotoneConvergence)
 src/experimental/CoulombTower.v
 
+# === Experimental Verification Phase 3: Full 3D Coulomb + Lamb Shift ===
+# EXP-7: Depends on CoulombTower
+src/experimental/CoulombFull3D.v
+
+# EXP-8: Depends on CoulombFull3D + CoulombTower
+src/experimental/LambShiftTower.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
