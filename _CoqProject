@@ -464,6 +464,25 @@ src/experimental/CoulombFull3D.v
 # EXP-8: Depends on CoulombFull3D + CoulombTower
 src/experimental/LambShiftTower.v
 
+# === Linear Algebra Extensions: Eigenvalue Theory ===
+# LA-1: Depends on LinearAlgebra + QObservable + InnerProductSpace + QState + SpinChain
+src/linalg/MatrixOps.v
+
+# LA-2: Depends on MatrixOps + QState + SpinChain
+src/linalg/EigenvalueTheory.v
+
+# LA-3: Depends on MatrixOps + EigenvalueTheory
+src/linalg/GershgorinDiscs.v
+
+# LA-4: Depends on MatrixOps + EigenvalueTheory + SeriesConvergence + MonotoneConvergence
+src/linalg/PowerMethod.v
+
+# LA-5: Depends on CoulombTower + CoulombFull3D + MonotoneConvergence
+src/linalg/IonizationThreshold.v
+
+# LA-6: Depends on all linalg + CoulombTower + CoulombFull3D + SpinChain
+src/linalg/EigenvalueSynthesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
