@@ -437,6 +437,19 @@ src/projective/ProcessMeasure.v
 # PS-6: Depends on all PS-* + CauchyReal + FixedPoint + Completeness + physics
 src/projective/ConnectionTheorems.v
 
+# === Experimental Verification: Casimir Effect ===
+# EXP-1: Depends on stdlib.Combinatorics + SeriesConvergence + MonotoneConvergence + CauchyReal
+src/experimental/BernoulliNumbers.v
+
+# EXP-2: Depends on EXP-1 + zeta/ZetaProcess + MonotoneConvergence
+src/experimental/ZetaNegative.v
+
+# EXP-3: Depends on EXP-1 + EXP-2 + SeriesConvergence
+src/experimental/CasimirProcess.v
+
+# EXP-4: Depends on EXP-3 + CauchyReal
+src/experimental/AbelRegularization.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
