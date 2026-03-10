@@ -418,6 +418,25 @@ src/physics/SpinChain.v
 # CQS-4: Depends on core physics (QState + QObservable + BornRule)
 src/physics/QuantumDynamics.v
 
+# === Projective Systems: P4 Frontier ===
+# PS-1: Depends on CauchyReal + LinearAlgebra + ProcessGeneral
+src/projective/ProjectiveSystem.v
+
+# PS-2: Depends on PS-1 + Completeness + MonotoneConvergence + SeriesConvergence + FixedPoint + MetricSpace
+src/projective/ProjectiveLimit.v
+
+# PS-3: Depends on PS-1 + PS-2 + physics (InnerProductSpace, QState, QObservable) + MonotoneConvergence
+src/projective/QuantumTower.v
+
+# PS-4: Depends on PS-1 + PS-3 + physics
+src/projective/ProcessOperator.v
+
+# PS-5: Depends on PS-1 + LinearAlgebra + CauchyReal + SeriesConvergence + Measure
+src/projective/ProcessMeasure.v
+
+# PS-6: Depends on all PS-* + CauchyReal + FixedPoint + Completeness + physics
+src/projective/ConnectionTheorems.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
