@@ -450,6 +450,13 @@ src/experimental/CasimirProcess.v
 # EXP-4: Depends on EXP-3 + CauchyReal
 src/experimental/AbelRegularization.v
 
+# === Experimental Verification Phase 2: Vacuum Energy + Coulomb Tower ===
+# EXP-5: Depends on BernoulliNumbers + ZetaNegative + CasimirProcess + MonotoneConvergence
+src/experimental/VacuumEnergy.v
+
+# EXP-6: Self-contained (CauchyReal + SeriesConvergence + MonotoneConvergence)
+src/experimental/CoulombTower.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
