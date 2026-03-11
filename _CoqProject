@@ -567,6 +567,16 @@ src/gauge/GapBound.v
 # G-38: Continuum synthesis — from A=exists to gap≥1/8
 src/gauge/ContinuumSynthesis.v
 
+# === 2+1D Mass Gap ===
+# G-39: Coupled 2D — 4×4 transfer matrix with spatial plaquette
+src/gauge/Coupled2D.v
+# G-40: Block diagonal — symmetry decomposition, eigenvectors
+src/gauge/BlockDiagonal2D.v
+# G-41: Gap 2D — gap = 3/4 at β=8, positive for all β
+src/gauge/Gap2D.v
+# G-42: Synthesis 2D — complete 2+1D result
+src/gauge/Synthesis2D.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
