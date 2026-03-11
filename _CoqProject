@@ -508,6 +508,16 @@ src/gauge/StrongCoupling.v
 src/gauge/RGFlow.v
 # G-12: SU(2) synthesis
 src/gauge/SU2Synthesis.v
+# G-13: Cosine Taylor terms
+src/gauge/CosineAction.v
+# G-14: Higher-order RG corrections
+src/gauge/HigherOrderRG.v
+# G-15: Perturbation bounds
+src/gauge/PerturbationRG.v
+# G-16: RG convergence
+src/gauge/RGConvergence.v
+# G-17: Mass gap bound
+src/gauge/MassGapBound.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
