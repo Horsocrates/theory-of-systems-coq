@@ -557,6 +557,16 @@ src/gauge/InstantonEnhanced.v
 # G-34: Wall breach synthesis
 src/gauge/WallBreachSynthesis.v
 
+# === Continuum Limit ===
+# G-35: Continuum operator — integral operator, rank-3 reduction
+src/gauge/ContinuumOperator.v
+# G-36: Exact eigenvalues — char poly, λ₀=2/3, discriminant
+src/gauge/ExactEigenvalues.v
+# G-37: Gap bound — gap ≥ 1/8 via 135>112
+src/gauge/GapBound.v
+# G-38: Continuum synthesis — from A=exists to gap≥1/8
+src/gauge/ContinuumSynthesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
