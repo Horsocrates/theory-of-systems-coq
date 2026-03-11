@@ -604,6 +604,16 @@ src/gauge/ExtendedAction7.v
 src/gauge/TensorGapBound.v
 # G-53: Continuum 3D synthesis — complete 1D→2D→3D continuum
 src/gauge/Continuum3DSynthesis.v
+# G-54: Domain walls — binary string combinatorics for strip model
+src/gauge/DomainWalls.v
+# G-55: Strip transfer — N x 1 transfer matrix
+src/gauge/StripTransfer.v
+# G-56: Strip spectrum — eigenvalues at beta=8 for all N
+src/gauge/StripSpectrum.v
+# G-57: Thermodynamic limit — gap survives N -> infinity
+src/gauge/ThermodynamicLimit.v
+# G-58: Strip synthesis — unifying domain wall & dimension ladder
+src/gauge/StripSynthesis.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
