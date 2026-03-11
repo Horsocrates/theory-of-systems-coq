@@ -525,6 +525,18 @@ src/gauge/ExtendedInterval.v
 # G-20: Global mass gap synthesis (Steps 8-9)
 src/gauge/GlobalMassGap.v
 
+# === Exact Non-Perturbative RG ===
+# G-21: Larger lattice gap bounds
+src/gauge/LargerLattice.v
+# G-22: Gap matching (gap inversion + exact RG)
+src/gauge/GapMatching.v
+# G-23: Exact RG process (Cauchy proof)
+src/gauge/ExactRGProcess.v
+# G-24: Non-perturbative gap (conditional + unconditional)
+src/gauge/NonperturbativeGap.v
+# G-25: Millennium synthesis
+src/gauge/MillenniumSynthesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
