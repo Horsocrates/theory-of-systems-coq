@@ -518,6 +518,12 @@ src/gauge/PerturbationRG.v
 src/gauge/RGConvergence.v
 # G-17: Mass gap bound
 src/gauge/MassGapBound.v
+# G-18: Nonlinear RG contraction (Step 8)
+src/gauge/NonlinearRG.v
+# G-19: Extended interval — all β > 0 (Step 9)
+src/gauge/ExtendedInterval.v
+# G-20: Global mass gap synthesis (Steps 8-9)
+src/gauge/GlobalMassGap.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
