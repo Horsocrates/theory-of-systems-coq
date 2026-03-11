@@ -587,6 +587,16 @@ src/gauge/EigenAnalysis2D.v
 # G-46: Continuum gap 2D — dimension ladder, synthesis
 src/gauge/ContinuumGap2D.v
 
+# === 3+1D Mass Gap ===
+# G-47: Coupled 3D — 8×8 matrix, spatial weights, Hamming sums
+src/gauge/Coupled3D.v
+# G-48: Block 3D — S₃×Z₂ decomposition → two 2×2 blocks
+src/gauge/Block3D.v
+# G-49: Gap 3D — gap = 15/16 at β=8, dimension formula
+src/gauge/Gap3D.v
+# G-50: Dimension ladder — complete 1D→2D→3D synthesis
+src/gauge/DimensionLadder.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
