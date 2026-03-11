@@ -547,6 +547,16 @@ src/gauge/WallTheorem.v
 # G-30: Yang-Mills final synthesis
 src/gauge/YangMillsFinal.v
 
+# === Three Attacks on the Wall ===
+# G-31: Spectral bound — σ > 0 implies gap > 0
+src/gauge/SpectralBound.v
+# G-32: K-dependence — K=3 gap > 0 at β=8
+src/gauge/KDependence.v
+# G-33: Instanton enhanced — sufficient correction framework
+src/gauge/InstantonEnhanced.v
+# G-34: Wall breach synthesis
+src/gauge/WallBreachSynthesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
