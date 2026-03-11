@@ -597,6 +597,14 @@ src/gauge/Gap3D.v
 # G-50: Dimension ladder — complete 1D→2D→3D synthesis
 src/gauge/DimensionLadder.v
 
+# === 3+1D Continuum Limit ===
+# G-51: Extended action 7 — E matrix columns 5-6
+src/gauge/ExtendedAction7.v
+# G-52: Tensor gap bound — 3+1D continuum gap ≥ 1/18
+src/gauge/TensorGapBound.v
+# G-53: Continuum 3D synthesis — complete 1D→2D→3D continuum
+src/gauge/Continuum3DSynthesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
