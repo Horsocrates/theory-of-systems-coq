@@ -577,6 +577,16 @@ src/gauge/Gap2D.v
 # G-42: Synthesis 2D — complete 2+1D result
 src/gauge/Synthesis2D.v
 
+# === 2+1D Continuum Limit ===
+# G-43: Extended action — T₁ on monomials up to degree 4
+src/gauge/ExtendedAction.v
+# G-44: Continuum matrix 2D — 9×9 two-body operator N
+src/gauge/ContinuumMatrix2D.v
+# G-45: Eigen analysis 2D — block decomposition, anti/sym traces
+src/gauge/EigenAnalysis2D.v
+# G-46: Continuum gap 2D — dimension ladder, synthesis
+src/gauge/ContinuumGap2D.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
