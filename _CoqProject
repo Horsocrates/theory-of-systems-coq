@@ -536,6 +536,16 @@ src/gauge/ExactRGProcess.v
 src/gauge/NonperturbativeGap.v
 # G-25: Millennium synthesis
 src/gauge/MillenniumSynthesis.v
+# G-26: Gap decay rate along RG orbit
+src/gauge/GapDecayRate.v
+# G-27: Confinement correction and impossibility
+src/gauge/ConfinementCorrection.v
+# G-28: Topological obstruction
+src/gauge/TopologicalObstruction.v
+# G-29: Wall theorem
+src/gauge/WallTheorem.v
+# G-30: Yang-Mills final synthesis
+src/gauge/YangMillsFinal.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
