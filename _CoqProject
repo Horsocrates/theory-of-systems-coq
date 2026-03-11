@@ -483,6 +483,20 @@ src/linalg/IonizationThreshold.v
 # LA-6: Depends on all linalg + CoulombTower + CoulombFull3D + SpinChain
 src/linalg/EigenvalueSynthesis.v
 
+# === Gauge Theory (Lattice Gauge, Transfer Matrix, Mass Gap) ===
+# G-1: No gauge deps
+src/gauge/LatticeStructure.v
+# G-2: Depends on LatticeStructure
+src/gauge/GaugeField.v
+# G-3: Depends on GaugeField + EigenvalueTheory
+src/gauge/WilsonAction.v
+# G-4: Depends on WilsonAction + PowerMethod
+src/gauge/TransferMatrix.v
+# G-5: Depends on TransferMatrix + ProjectiveSystem + SpectralDichotomy
+src/gauge/MassGapProcess.v
+# G-6: Depends on all gauge files
+src/gauge/GaugeSynthesis.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
