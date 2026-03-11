@@ -496,6 +496,18 @@ src/gauge/TransferMatrix.v
 src/gauge/MassGapProcess.v
 # G-6: Depends on all gauge files
 src/gauge/GaugeSynthesis.v
+# G-7: SU(2) quaternion algebra
+src/gauge/SU2Group.v
+# G-8: SU(2) lattice gauge field
+src/gauge/SU2Lattice.v
+# G-9: SU(2) transfer matrix (near-identity)
+src/gauge/SU2TransferMatrix.v
+# G-10: Strong coupling expansion
+src/gauge/StrongCoupling.v
+# G-11: RG flow as contraction mapping
+src/gauge/RGFlow.v
+# G-12: SU(2) synthesis
+src/gauge/SU2Synthesis.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
