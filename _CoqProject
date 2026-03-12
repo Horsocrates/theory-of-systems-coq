@@ -638,6 +638,17 @@ src/navier_stokes/EnstrophyProduction.v
 src/navier_stokes/GronwallAnalysis.v
 # NS-10: Process vorticity, P4 resolution, synthesis
 src/navier_stokes/ProcessVorticity.v
+# NS Phase 3: Three Attacks on the Exponent Wall
+# NS-11: Attack A — frequency splitting
+src/navier_stokes/FrequencySplit.v
+# NS-12: Attack B — energy constraint
+src/navier_stokes/EnergyConstraint.v
+# NS-13: Attack C — geometric depletion
+src/navier_stokes/Depletion.v
+# NS-14: Attack synthesis — α=2 robustness
+src/navier_stokes/AttackSynthesis.v
+# NS-15: Final NS result — two Millennium problems
+src/navier_stokes/NSProcessFinal.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
