@@ -1,133 +1,68 @@
 # File Map
 
-Auto-generated: 2026-03-12 08:47
+Auto-generated: 2026-03-12 09:47
 
 ## Core
 
 | File | Qed | Admitted | Key Imports |
 |------|-----|---------|-------------|
-| `SU2Synthesis.v` | 13 | 0 | LinearAlgebra,CauchyReal,FixedPoint,gaugeLatticeStructure.,g |
 | `AIInterface.v` | 10 | 0 | Expressions,Reduction,Typing_Expr,Progress,TypeSafety,TypeCh |
-| `SU2TransferMatrix.v` | 19 | 0 | LinearAlgebra,CauchyReal,linalgMatrixOps.,linalgEigenvalueTh |
 | `Archimedean_ERR.v` | 14 | 0 |  |
 | `CauchyReal.v` | 19 | 0 |  |
-| `SpectralBound.v` | 22 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
 | `CoinductiveSystems.v` | 16 | 0 | ProcessGeneral |
-| `StripSpectrum.v` | 25 | 0 | gaugeDomainWalls gauge.StripTransfer gauge.Coupled2D. |
 | `Completeness.v` | 24 | 0 | Archimedean_ERR,CauchyReal,RealField |
-| `StripSynthesis.v` | 21 | 0 | gaugeDomainWalls gauge.StripTransfer |
 | `ConstitutionChecking.v` | 16 | 0 | TheoryOfSystems_Core_ERR,IntensionalIdentity,L5Resolution |
-| `StripTransfer.v` | 33 | 0 | gaugeDomainWalls gauge.Coupled2D. |
 | `Conversion.v` | 16 | 0 | TheoryOfSystems_Core_ERR,IntensionalIdentity,SystemMorphism, |
 | `Countability_Q.v` | 17 | 0 |  |
-| `StrongCoupling.v` | 21 | 0 | LinearAlgebra,CauchyReal,SeriesConvergence,MonotoneConvergen |
 | `Demo.v` | 0 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
-| `Synthesis2D.v` | 10 | 0 | gaugeCoupled2D.,gaugeBlockDiagonal2D.,gaugeGap2D.,gaugeTrans |
 | `DependentSystems.v` | 25 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism |
-| `TensorGapBound.v` | 14 | 0 | gaugeExactEigenvalues.,gaugeGapBound.,gaugeGap3D. |
 | `DiagonalArgument_ERR.v` | 41 | 1 | ToS_Axioms |
-| `ThermodynamicLimit.v` | 20 | 0 | gaugeDomainWalls gauge.StripTransfer |
 | `Differentiation.v` | 18 | 0 | CauchyReal,RealField,SeriesConvergence,GradientDescent |
 | `DomainTypes.v` | 20 | 0 |  |
-| `TopologicalObstruction.v` | 12 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
 | `DomainValidation.v` | 32 | 0 | DomainTypes |
-| `TransferMatrix.v` | 23 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `ERR_Categorical.v` | 24 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
-| `WallBreachSynthesis.v` | 14 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
 | `EVT_ERR.v` | 35 | 1 | ToS_Axioms |
-| `WallTheorem.v` | 12 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
 | `EVT_idx.v` | 26 | 0 | ToS_Axioms |
 | `ErasureTheory.v` | 16 | 0 | TheoryOfSystems_Core_ERR,Roles |
-| `WilsonAction.v` | 13 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `Evaluator.v` | 20 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
-| `YangMillsFinal.v` | 9 | 0 | CauchyReal,FixedPoint,gaugeTransferMatrix.,gaugeSU2TransferM |
-
-## Linear Algebra
-
-| File | Qed | Admitted | Key Imports |
-|------|-----|---------|-------------|
 | `Expressions.v` | 28 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism |
 | `Extraction.v` | 0 | 0 | TheoryOfSystems_Core_ERR,Roles,IntensionalIdentity,ProcessGe |
-| `EigenvalueSynthesis.v` | 15 | 0 | LinearAlgebra,CauchyReal,SeriesConvergence,MonotoneConvergen |
 | `FixedPoint.v` | 20 | 0 | CauchyReal,Completeness,MonotoneConvergence,SeriesConvergenc |
-| `EigenvalueTheory.v` | 24 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `FormationRules.v` | 18 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,IntensionalIde |
-| `GershgorinDiscs.v` | 19 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsQS |
 | `GradientDescent.v` | 18 | 0 | CauchyReal,RealField,MonotoneConvergence,SeriesConvergence,P |
 | `HeineBorel_ERR.v` | 25 | 0 | ToS_Axioms |
-| `IonizationThreshold.v` | 22 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
 | `IVT_CauchyReal.v` | 8 | 0 | Archimedean_ERR,IVT_ERR,CauchyReal |
 | `IVT_ERR.v` | 23 | 0 | ToS_Axioms,Archimedean_ERR |
-| `MatrixOps.v` | 32 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `InductiveSystems.v` | 26 | 0 | TheoryOfSystems_Core_ERR |
-| `PowerMethod.v` | 18 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsQS |
-
-## Physics
-
-| File | Qed | Admitted | Key Imports |
-|------|-----|---------|-------------|
 | `InfoLayer.v` | 17 | 0 | TheoryOfSystems_Core_ERR,IntensionalIdentity |
-| `BornRule.v` | 13 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `IntegralApplications.v` | 19 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
 | `IntensionalIdentity.v` | 11 | 0 | TheoryOfSystems_Core_ERR |
-| `Decoherence.v` | 25 | 0 | ToS_Axioms,ProcessTypes,ProcessContinuumHypothesis |
 | `Judgments.v` | 23 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism |
-| `Entanglement.v` | 21 | 0 | ToS_Axioms,CauchyReal,LinearAlgebra,ProcessTypes,ProcessCont |
 | `L5Resolution.v` | 18 | 0 | TheoryOfSystems_Core_ERR |
 | `LevelAdjunction.v` | 25 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
-| `HarmonicOscillator.v` | 35 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `LevelFunctors.v` | 27 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
-| `InnerProductSpace.v` | 36 | 0 | LinearAlgebra,CauchyReal |
 | `LinearAlgebra.v` | 22 | 0 |  |
 | `MeanValueTheorem.v` | 18 | 0 | CauchyReal,RealField,EVT_idx,Differentiation |
-| `MeasurementProcess.v` | 19 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessContinuumHypothesi |
 | `Measure.v` | 15 | 0 |  |
-| `Orthogonality.v` | 27 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace. |
 | `MonotoneConvergence.v` | 15 | 0 | ToS_Axioms,CauchyReal,Completeness |
 | `PInterval_CROWN.v` | 25 | 0 |  |
-| `QObservable.v` | 16 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `PhaseA_Examples.v` | 11 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,DependentSystems,Ind |
-| `QState.v` | 19 | 0 | LinearAlgebra,CauchyReal,ProcessGeneral,physicsInnerProductS |
 | `PipelineExtraction.v` | 7 | 0 | DomainTypes,DomainValidation,PipelineSemantics |
-| `QuantumDynamics.v` | 24 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsQS |
 | `PipelineSemantics.v` | 17 | 0 | DomainTypes,DomainValidation |
 | `PowerSeries.v` | 19 | 0 | CauchyReal,RealField,MonotoneConvergence,SeriesConvergence |
-| `Qubit.v` | 42 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `Probability.v` | 12 | 0 |  |
-| `SpectralDichotomy.v` | 30 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessDiagonal,ProcessCo |
 | `ProcessContinuumHypothesis.v` | 41 | 0 | ToS_Axioms,ProcessTypes,ProcessDiagonal |
 | `ProcessDiagonal.v` | 20 | 0 | ToS_Axioms,ProcessTypes |
-| `SpinChain.v` | 32 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `ProcessGeneral.v` | 16 | 0 | TheoryOfSystems_Core_ERR,CauchyReal |
-| `ThermodynamicArrow.v` | 17 | 0 | ProcessTypes,physicsDecoherence. |
-
-## Architecture of Reasoning
-
-| File | Qed | Admitted | Key Imports |
-|------|-----|---------|-------------|
 | `ProcessTypes.v` | 29 | 0 | ToS_Axioms |
 | `Progress.v` | 17 | 0 | Expressions,Reduction,Typing_Expr |
-| `AI_FallacyDetector.v` | 13 | 0 |  |
 | `RealField.v` | 17 | 0 | CauchyReal |
-| `Architecture_of_Reasoning.v` | 17 | 0 |  |
 | `ReasoningConvergence.v` | 19 | 0 | CauchyReal,Completeness,MonotoneConvergence,SeriesConvergenc |
 | `Reduction.v` | 25 | 0 | Expressions |
-| `CompleteFallacyTaxonomy.v` | 19 | 0 |  |
 | `RiemannIntegration.v` | 18 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
-| `DomainViolations_Complete.v` | 17 | 0 |  |
 | `Roles.v` | 30 | 0 | ToS_Axioms,TheoryOfSystems_Core_ERR |
-| `ERR_Fallacies.v` | 22 | 0 |  |
 | `RoundingSafety.v` | 13 | 0 |  |
 | `SchroederBernstein_ERR.v` | 16 | 0 | ToS_Axioms |
-| `ParadoxDissolution.v` | 29 | 0 |  |
-
-## Totals
-
-| Metric | Count |
-|--------|-------|
-| Files | 217 |
-| Qed | 4541 |
-| Admitted | 6 |
 | `SeriesConvergence.v` | 22 | 0 | CauchyReal,Completeness,MonotoneConvergence |
 | `ShrinkingIntervals_ERR.v` | 167 | 0 | ToS_Axioms,ToS_Axioms |
 | `SoftmaxProbability.v` | 14 | 0 |  |

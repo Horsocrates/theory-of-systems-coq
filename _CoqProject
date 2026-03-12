@@ -627,6 +627,18 @@ src/navier_stokes/EnergyEstimate.v
 # NS-05: Process solution, P4 resolution, summary theorems
 src/navier_stokes/ProcessNS.v
 
+# NS Phase 2: Vorticity and BKM Criterion
+# NS-06: Vorticity, palinstrophy, stretching, norm hierarchy
+src/navier_stokes/Vorticity.v
+# NS-07: BKM criterion, blowup characterization, bootstrap
+src/navier_stokes/BKMCriterion.v
+# NS-08: Enstrophy production, quadratic ODE, small energy
+src/navier_stokes/EnstrophyProduction.v
+# NS-09: Gronwall analysis, critical exponents, the gap
+src/navier_stokes/GronwallAnalysis.v
+# NS-10: Process vorticity, P4 resolution, synthesis
+src/navier_stokes/ProcessVorticity.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
