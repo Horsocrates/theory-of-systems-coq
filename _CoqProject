@@ -615,6 +615,18 @@ src/gauge/ThermodynamicLimit.v
 # G-58: Strip synthesis — unifying domain wall & dimension ladder
 src/gauge/StripSynthesis.v
 
+# === Navier-Stokes Phase 1 ===
+# NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
+src/navier_stokes/GridFunction.v
+# NS-02: Finite differences, Abel summation, periodicity
+src/navier_stokes/FiniteDifference.v
+# NS-03: Galerkin modal ODE, nonlinear term, B_antisym, energy rate
+src/navier_stokes/GalerkinSystem.v
+# NS-04: Energy estimates, dissipation, 2D/3D regularity
+src/navier_stokes/EnergyEstimate.v
+# NS-05: Process solution, P4 resolution, summary theorems
+src/navier_stokes/ProcessNS.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
