@@ -721,6 +721,16 @@ src/gauge/ContinuumCovariance.v
 # GAUGE-85: Complete Yang-Mills mass gap theorem
 src/gauge/YangMillsComplete.v
 
+# === Yang-Mills Phase B: Transfer Matrix Proofs ===
+# GAUGE-86: Transfer matrix diagonal, eigenvalues, mass gap positivity
+src/gauge/TransferMatrixProof.v
+# GAUGE-87: Reflection positivity from eigenvalue positivity, energy gap
+src/gauge/ReflectionPositiveProof.v
+# GAUGE-88: Cluster property from eigenvalue ratio decay
+src/gauge/ClusterProof.v
+# GAUGE-89: Phase B synthesis — capstone theorem with full proof terms
+src/gauge/PhaseB_Synthesis.v
+
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
 src/navier_stokes/GridFunction.v
