@@ -695,6 +695,20 @@ src/gauge/ContinuumGap.v
 # GAUGE-74: Depends on all Level 4 + YM3DComplete
 src/gauge/YMLevel4Complete.v
 
+# === YM Level 5: OS Axioms + Wightman ===
+# GAUGE-75: Depends on CharacterTransfer + ExactMassGap + GapRatio
+src/gauge/LatticeCorrelations.v
+# GAUGE-76: Depends on LatticeCorrelations + Combinatorics
+src/gauge/LatticeOS1_Analyticity.v
+# GAUGE-77: Depends on LatticeCorrelations + GapRatio
+src/gauge/LatticeOS2_Regularity.v
+# GAUGE-78: Depends on LatticeCorrelations
+src/gauge/LatticeOS3_Covariance.v
+# GAUGE-79: Depends on ReflectionPositivity + LatticeCorrelations
+src/gauge/WightmanReconstruction.v
+# GAUGE-80: Depends on all Level 5 + Level 4
+src/gauge/YMLevel5Complete.v
+
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
 src/navier_stokes/GridFunction.v
