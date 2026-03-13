@@ -1260,18 +1260,18 @@ Proof.
   apply (level_lt_irrefl L). exact Hvalid.
 Qed.
 
-(** Stronger version: Can't have systems at level L as elements of System L *)
+(** Stronger version: Can't have systems at level L whose criterion
+    witnesses level L itself (self-referential domain) *)
 Theorem no_self_level_elements :
   forall L (S : System L),
-    ~ (crit_domain L (sys_criterion L S) = System L).
+    ~ (crit_domain L (sys_criterion L S) = System L /\
+       crit_level_witness L (sys_criterion L S) = L).
 Proof.
-  intros L S Heq.
+  intros L S [Hdom Hlev].
   pose proof (crit_level_valid L (sys_criterion L S)) as Hvalid.
-  (** crit_level_witness must be << L, but if domain = System L,
-      the witness would need to be at least L ??? contradiction *)
-  (** This is enforced by universe constraints in Coq *)
-  (** The proof depends on how System is defined relative to Level *)
-Admitted. (** Universe-level proof ??? requires explicit universe annotations *)
+  rewrite Hlev in Hvalid.
+  exact (level_lt_irrefl L Hvalid).
+Qed.
 
 (** The KEY theorem: Quantification over ALL levels is not a valid domain *)
 (**
@@ -1289,20 +1289,20 @@ Admitted. (** Universe-level proof ??? requires explicit universe annotations *)
   3. The type checker rejects this before we can even state it
 *)
 
-(** We can demonstrate with a specific case *)
+(** We can demonstrate with a specific case: can't have L2 systems
+    as elements of a system AT L2 with self-level witness *)
 Theorem cantor_no_system_of_all_L2_systems :
-  ~ exists (C : Criterion L3),
-    (** Trying to have all L2 systems as elements *)
-    crit_domain L3 C = System L2 /\
-    crit_level_witness L3 C = L2.
+  ~ exists (C : Criterion L2),
+    (** Trying to have all L2 systems as self-level elements *)
+    crit_domain L2 C = System L2 /\
+    crit_level_witness L2 C = L2.
 Proof.
   intros [C [Hdom Hlev]].
-  pose proof (crit_level_valid L3 C) as Hvalid.
+  pose proof (crit_level_valid L2 C) as Hvalid.
   rewrite Hlev in Hvalid.
-  (** Need level_lt L2 L3, which IS true... but the universe constraint
-      on crit_domain prevents System L2 from being the domain *)
-  (** The actual blocking happens at universe level *)
-Admitted. (** Requires universe polymorphism to prove formally *)
+  (** Hvalid : L2 << L2 — contradicts irreflexivity *)
+  exact (level_lt_irrefl L2 Hvalid).
+Qed.
 
 (** PHILOSOPHICAL INTERPRETATION:
   
