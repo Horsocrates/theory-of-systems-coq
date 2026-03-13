@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-13 08:50
+Auto-generated: 2026-03-13 12:54
 
 ## Core
 
@@ -16,12 +16,12 @@ Auto-generated: 2026-03-13 08:50
 | `Countability_Q.v` | 17 | 0 |  |
 | `Demo.v` | 0 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
 | `DependentSystems.v` | 25 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism |
-| `DiagonalArgument_ERR.v` | 41 | 1 | ToS_Axioms |
+| `DiagonalArgument_ERR.v` | 42 | 0 | ToS_Axioms |
 | `Differentiation.v` | 18 | 0 | CauchyReal,RealField,SeriesConvergence,GradientDescent |
 | `DomainTypes.v` | 20 | 0 |  |
 | `DomainValidation.v` | 32 | 0 | DomainTypes |
 | `ERR_Categorical.v` | 24 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
-| `EVT_ERR.v` | 35 | 1 | ToS_Axioms |
+| `EVT_ERR.v` | 36 | 0 | ToS_Axioms |
 | `EVT_idx.v` | 26 | 0 | ToS_Axioms |
 | `ErasureTheory.v` | 16 | 0 | TheoryOfSystems_Core_ERR,Roles |
 | `Evaluator.v` | 20 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
@@ -72,9 +72,9 @@ Auto-generated: 2026-03-13 08:50
 | `SystemCategory.v` | 29 | 0 | TheoryOfSystems_Core_ERR,SystemMorphism,UniversePolymorphism |
 | `SystemMorphism.v` | 17 | 0 | TheoryOfSystems_Core_ERR |
 | `TaylorSeries.v` | 18 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
-| `TernaryRepresentation_ERR.v` | 52 | 2 | ToS_Axioms |
+| `TernaryRepresentation_ERR.v` | 54 | 0 | ToS_Axioms |
 | `TestNode.v` | 0 | 0 |  |
-| `TheoryOfSystems_Core_ERR.v` | 34 | 2 | ToS_Axioms |
+| `TheoryOfSystems_Core_ERR.v` | 36 | 0 | ToS_Axioms |
 | `ToS_Axioms.v` | 2 | 0 |       ToS_Axioms,      ToS_Axioms |
 | `ToS_Lang_Extraction.v` | 8 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Re |
 | `TypeChecker.v` | 26 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,Expressions,Ty |
@@ -259,5 +259,5 @@ Auto-generated: 2026-03-13 08:50
 | Metric | Count |
 |--------|-------|
 | Files | 217 |
-| Qed | 4541 |
-| Admitted | 6 |
+| Qed | 4547 |
+| Admitted | 0 |
