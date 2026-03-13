@@ -709,6 +709,18 @@ src/gauge/WightmanReconstruction.v
 # GAUGE-80: Depends on all Level 5 + Level 4
 src/gauge/YMLevel5Complete.v
 
+# === YM Level 6: Universality and Continuum Covariance ===
+# GAUGE-81: Irrelevant operators, lattice artifacts, anisotropy
+src/gauge/IrrelevantOperators.v
+# GAUGE-82: RG contraction, artifact shrinking, double contraction
+src/gauge/RGContraction.v
+# GAUGE-83: Universality class, fixed point, SO(4) at fixed point
+src/gauge/UniversalityClass.v
+# GAUGE-84: SO(4) restoration, all OS in continuum, quantitative bounds
+src/gauge/ContinuumCovariance.v
+# GAUGE-85: Complete Yang-Mills mass gap theorem
+src/gauge/YangMillsComplete.v
+
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
 src/navier_stokes/GridFunction.v
