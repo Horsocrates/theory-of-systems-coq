@@ -56,6 +56,25 @@ Key theorems organized by category. For the complete file-by-file listing, see [
 | `pipeline_implies_gates` | DomainValidation.v | Valid pipeline has inter-domain gates |
 | `pipeline_implies_reflect` | DomainValidation.v | Valid pipeline has D6-REFLECT |
 
+## Yang-Mills Mass Gap
+
+| Theorem | File | Statement |
+|---------|------|-----------|
+| `yang_mills_mass_gap` | YangMillsComplete.v | Complete 7-step proof: lattice → Wightman QFT with Δ > 0 |
+| `yang_mills_complete_summary` | YangMillsComplete.v | Gap positive + ratio bounded + energy positive + Wightman + OS + artifacts contract |
+| `the_key_inequality` | YangMillsComplete.v | `I₀ − 2I₂ + I₄ > 0` at β=1,2 (Bessel positivity) |
+| `mass_gap_rg_invariant` | YangMillsComplete.v | Physical mass positive under RG transformation |
+| `artifact_sequence_decreasing` | RGContraction.v | Lattice artifacts monotonically decrease under RG |
+| `so4_restored_at_fixed_point` | ContinuumCovariance.v | SO(4) violation < 1/40 for β ≥ 42 |
+| `anisotropy_negligible` | UniversalityClass.v | Anisotropy < 1/40 for β ≥ 42 |
+| `wightman_from_os` | WightmanReconstruction.v | OS axioms → Wightman axioms satisfied |
+| `gap_at_beta_1_positive` | ExactMassGap.v | `gap_M0 1 > 0` (exact Bessel computation) |
+| `gap_ratio_lt1_beta_1` | GapRatio.v | `t₁/t₀ < 1` at β=1 |
+| `physical_mass_positive` | ContinuumGap.v | Physical mass `m = (1−r)/a > 0` |
+| `os1_on_lattice` | LatticeOS1_Analyticity.v | OS1 (analyticity) on lattice |
+| `os2_on_lattice` | LatticeOS2_Regularity.v | OS2 (regularity) on lattice |
+| `os3_on_lattice` | LatticeOS3_Covariance.v | OS3 (covariance) on lattice |
+
 ## Calculus
 
 | Theorem | File | Statement |

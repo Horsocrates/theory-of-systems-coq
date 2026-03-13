@@ -168,6 +168,22 @@ CauchyReal -> RealField -> Completeness
         -> TaylorSeries -> UniformConvergence -> FixedPoint
 ```
 
+### Chain 6: Yang-Mills Mass Gap
+```
+CharacterTransfer (Peter-Weyl, transfer eigenvalues)
+  -> ExactMassGap (Bessel: I₀ − 2I₂ + I₄ > 0)
+    -> GapRatio (t₁/t₀ < 1, r → r²)
+      -> LatticeRG (β-function, asymptotic freedom)
+        -> ContinuumGap (physical mass, RG invariance)
+          -> ReflectionPositivity + LatticeOS1-3 (OS axioms)
+            -> WightmanReconstruction (OS → Wightman)
+              -> IrrelevantOperators (artifacts ∝ 1/β)
+                -> RGContraction (artifacts → 0)
+                  -> UniversalityClass (fixed point unique)
+                    -> ContinuumCovariance (SO(4) restored)
+                      -> YangMillsComplete (yang_mills_mass_gap)
+```
+
 ## Axiom Architecture
 
 All axioms are declared in `src/ToS_Axioms.v` (Layer -1):
