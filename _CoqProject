@@ -437,6 +437,18 @@ src/zeta/ExplicitFormula.v
 # RH-10: Depends on all Phase 2 + RH_Phase1_Synthesis
 src/zeta/RH_Phase2_Synthesis.v
 
+# === RH Phase 3: Li Criterion & Process Zero Migration ===
+# RH-11: Depends on ZetaProcess, ComplexZeta, ExplicitFormula
+src/zeta/LiCoefficients.v
+# RH-12: Depends on ZetaProcess, PartialSumZeros, LogZeta, ZeroCountingProcess
+src/zeta/ZeroMigration.v
+# RH-13: Depends on LiCoefficients, ZeroCountingProcess
+src/zeta/LiProcess.v
+# RH-14: Depends on LiProcess, LiCoefficients
+src/zeta/WeilPositivity.v
+# RH-15: Depends on all Phase 3 files
+src/zeta/RH_FinalAssessment.v
+
 # === Phase 3E: Concrete Quantum Systems ===
 # CQS-1: Depends on all Phase 3A physics files
 src/physics/Qubit.v
