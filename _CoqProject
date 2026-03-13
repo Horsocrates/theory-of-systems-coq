@@ -740,6 +740,15 @@ src/gauge/CovarianceProof.v
 src/gauge/HilbertConstruction.v
 # GAUGE-93: Final proof closure — all 9 gaps closed
 src/gauge/ProofClosure.v
+# === Yang-Mills Formal Definitions ===
+# GAUGE-SEAL-01: Formal OS1 analyticity definition
+src/gauge/FormalAnalytic.v
+# GAUGE-SEAL-02: Formal OS2 tempered definition
+src/gauge/FormalTempered.v
+# GAUGE-SEAL-03: Formal OS3 SO(4) invariance definition
+src/gauge/FormalSO4.v
+# GAUGE-SEAL-04: Sealed theorem with all formal OS1-3
+src/gauge/YangMillsSealed.v
 
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
