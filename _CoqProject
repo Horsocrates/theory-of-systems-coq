@@ -405,6 +405,22 @@ src/zeta/ApproximateZeros.v
 # Z9: Depends on EulerProduct + MonotoneConvergence + Primes
 src/zeta/EulerExtension.v
 
+# === Zeta Phase 3: RH Phase 1 — Complex Zeta Process and Zero-Free Region ===
+# Z10: Depends on nothing new (self-contained Q algebra)
+src/zeta/TrigInequality.v
+
+# Z11: Depends on ZetaProcess + CauchyReal + SeriesConvergence
+src/zeta/ComplexZeta.v
+
+# Z12: Depends on ZetaProcess + TrigInequality (dvp region)
+src/zeta/ZeroFreeRegion.v
+
+# Z13: Depends on ZetaProcess + ComplexZeta + SeriesConvergence (reflection)
+src/zeta/PartialSumZeros.v
+
+# Z14: Depends on Z10-Z13 + CauchyReal (synthesis)
+src/zeta/RH_Phase1_Synthesis.v
+
 # === Phase 3E: Concrete Quantum Systems ===
 # CQS-1: Depends on all Phase 3A physics files
 src/physics/Qubit.v
