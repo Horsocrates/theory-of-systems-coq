@@ -731,6 +731,16 @@ src/gauge/ClusterProof.v
 # GAUGE-89: Phase B synthesis — capstone theorem with full proof terms
 src/gauge/PhaseB_Synthesis.v
 
+# === Yang-Mills Proof Closure: OS1-3 + Wightman ===
+# GAUGE-90: OS1 (analyticity) + OS2 (regularity) from eigenvalue ratios
+src/gauge/CorrelationProof.v
+# GAUGE-91: OS3 (covariance) from separation-only dependence
+src/gauge/CovarianceProof.v
+# GAUGE-92: Wightman QFT construction from transfer matrix
+src/gauge/HilbertConstruction.v
+# GAUGE-93: Final proof closure — all 9 gaps closed
+src/gauge/ProofClosure.v
+
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
 src/navier_stokes/GridFunction.v
