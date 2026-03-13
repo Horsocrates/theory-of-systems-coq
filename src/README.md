@@ -1,6 +1,6 @@
 # src/ — Core Coq Formalization
 
-**75 files | ~1854 Qed | 6 Admitted**
+**75 files | ~1854 Qed | 0 Admitted**
 
 This directory contains the core formalization of the Theory of Systems in Coq/Rocq 9.0.
 

@@ -1,6 +1,6 @@
 # Architecture of Reasoning — Coq Formalization
 
-[![Coq](https://img.shields.io/badge/Coq-8.18.0-blue.svg)](https://coq.inria.fr/)
+[![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
 [![Status](https://img.shields.io/badge/Status-100%25_Complete-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Fallacies](https://img.shields.io/badge/Fallacies-156-blue.svg)]()
