@@ -659,6 +659,18 @@ src/gauge/ThermodynamicLimit.v
 # G-58: Strip synthesis — unifying domain wall & dimension ladder
 src/gauge/StripSynthesis.v
 
+# === Yang-Mills Wall Breach (Character Expansion) ===
+# GAUGE-60: SU(2) characters via Chebyshev, orthogonality, Haar
+src/gauge/SU2Characters.v
+# GAUGE-61: Diagonal transfer matrix, Bessel eigenvalues t_j
+src/gauge/CharacterTransfer.v
+# GAUGE-62: Exact mass gap t_0−t_1 > 0, explicit values
+src/gauge/ExactMassGap.v
+# GAUGE-63: RG flow, continuum limit, dimensional extension
+src/gauge/ContinuumCharacter.v
+# GAUGE-64: Wall breach synthesis, three millennium comparison
+src/gauge/YMWallBreach.v
+
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
 src/navier_stokes/GridFunction.v
