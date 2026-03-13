@@ -685,6 +685,15 @@ src/navier_stokes/ClassicalRegularity.v
 # NS-30: Depends on ClassicalRegularity + FullRegularity + TwoMillennium
 src/navier_stokes/MillenniumComplete.v
 
+# NS-31: Depends on InvariantRegion + PerModeBound + EnstrophyProduction + GronwallAnalysis + TransientClosure
+src/navier_stokes/HonestAssessment.v
+# NS-32: Depends on GridFunction + GalerkinSystem + EnergyEstimate + TriadicInteraction
+src/navier_stokes/FatouRegularity.v
+# NS-33: Depends on GridFunction + GalerkinSystem + EnergyEstimate + TriadicInteraction + ProcessNS + FatouRegularity
+src/navier_stokes/ResolutionRegularity.v
+# NS-34: Depends on all NS files + StripSpectrum
+src/navier_stokes/NSComplete.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
