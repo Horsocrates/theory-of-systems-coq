@@ -673,6 +673,18 @@ src/navier_stokes/FullRegularity.v
 # NS-25: Two Millennium Problems unified
 src/navier_stokes/TwoMillennium.v
 
+# === Navier-Stokes Phase 6 ===
+# NS-26: Depends on GalerkinSystem + EnergyEstimate + InvariantRegion + TransientClosure
+src/navier_stokes/LowModeControl.v
+# NS-27: Depends on LowModeControl + InvariantRegion + TransientClosure + EnstrophyConvergence
+src/navier_stokes/UniformBounds.v
+# NS-28: Depends on UniformBounds + GalerkinSystem
+src/navier_stokes/GalerkinConvergence.v
+# NS-29: Depends on GalerkinConvergence + UniformBounds
+src/navier_stokes/ClassicalRegularity.v
+# NS-30: Depends on ClassicalRegularity + FullRegularity + TwoMillennium
+src/navier_stokes/MillenniumComplete.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
