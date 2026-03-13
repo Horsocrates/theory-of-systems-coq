@@ -649,6 +649,29 @@ src/navier_stokes/Depletion.v
 src/navier_stokes/AttackSynthesis.v
 # NS-15: Final NS result — two Millennium problems
 src/navier_stokes/NSProcessFinal.v
+# === Navier-Stokes Phase 4: Per-Mode Bounds via Sufficient Reason ===
+# NS-16: Triadic interactions
+src/navier_stokes/TriadicInteraction.v
+# NS-17: Per-mode bounds
+src/navier_stokes/PerModeBound.v
+# NS-18: Enstrophy convergence
+src/navier_stokes/EnstrophyConvergence.v
+# NS-19: Concentration bounds
+src/navier_stokes/ConcentrationBound.v
+# NS-20: Regularity synthesis
+src/navier_stokes/RegularitySynthesis.v
+
+# === Navier-Stokes Phase 5: Invariant Region ===
+# NS-21: Invariant region definition and boundary flow
+src/navier_stokes/InvariantRegion.v
+# NS-22: Smooth initial data enters region
+src/navier_stokes/SmoothInitialData.v
+# NS-23: Transient closure — invariance → regularity
+src/navier_stokes/TransientClosure.v
+# NS-24: Full regularity and Millennium statement
+src/navier_stokes/FullRegularity.v
+# NS-25: Two Millennium Problems unified
+src/navier_stokes/TwoMillennium.v
 
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
