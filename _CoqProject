@@ -421,6 +421,22 @@ src/zeta/PartialSumZeros.v
 # Z14: Depends on Z10-Z13 + CauchyReal (synthesis)
 src/zeta/RH_Phase1_Synthesis.v
 
+# === Riemann Hypothesis Phase 2 ===
+# RH-06: Depends on EulerProduct + ZetaProcess + ComplexZeta
+src/zeta/LogZeta.v
+
+# RH-07: Depends on LogZeta + EulerProduct + ComplexZeta + stdlib/Primes
+src/zeta/PrimeSumBounds.v
+
+# RH-08: Depends on ZetaProcess + ComplexZeta + PartialSumZeros + LogZeta
+src/zeta/ZeroCountingProcess.v
+
+# RH-09: Depends on CauchyReal + ZetaProcess + ComplexZeta + PartialSumZeros + ZeroFreeRegion
+src/zeta/ExplicitFormula.v
+
+# RH-10: Depends on all Phase 2 + RH_Phase1_Synthesis
+src/zeta/RH_Phase2_Synthesis.v
+
 # === Phase 3E: Concrete Quantum Systems ===
 # CQS-1: Depends on all Phase 3A physics files
 src/physics/Qubit.v
