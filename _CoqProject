@@ -683,6 +683,18 @@ src/gauge/TridiagonalGap.v
 # GAUGE-69: 3+1D SU(2) mass gap synthesis
 src/gauge/YM3DComplete.v
 
+# === Yang-Mills Level 4: Continuum ===
+# GAUGE-70: Depends on ExactMassGap + CharacterTransfer + CombinedTransfer3D
+src/gauge/GapRatio.v
+# GAUGE-71: Depends on GapRatio + ExactMassGap
+src/gauge/LatticeRG.v
+# GAUGE-72: Depends on ExactMassGap + CharacterTransfer + CombinedTransfer3D
+src/gauge/ReflectionPositivity.v
+# GAUGE-73: Depends on GapRatio + LatticeRG + ReflectionPositivity
+src/gauge/ContinuumGap.v
+# GAUGE-74: Depends on all Level 4 + YM3DComplete
+src/gauge/YMLevel4Complete.v
+
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
 src/navier_stokes/GridFunction.v
