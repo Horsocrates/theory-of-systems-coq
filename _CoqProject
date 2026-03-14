@@ -752,6 +752,9 @@ src/gauge/YangMillsSealed.v
 # GAUGE-FIX: Correct spectral gap |t₀−t₁| for all β
 src/gauge/SpectralGapCorrect.v
 src/gauge/YangMillsCorrected.v
+# GAUGE-PMG: Process mass gap (P4 interpretation)
+src/gauge/ProcessMassGap.v
+src/gauge/YangMillsProcess.v
 
 # === Navier-Stokes Phase 1 ===
 # NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
