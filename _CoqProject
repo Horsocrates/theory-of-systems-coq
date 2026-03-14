@@ -85,6 +85,10 @@ src/process/ProcessIntegral.v
 src/process/ProcessSeries.v
 src/process/ProcessTaylor.v
 src/process/ProcessFTC.v
+src/process/ProcessPicard.v
+src/process/ProcessGronwall.v
+src/process/ProcessODE.v
+src/process/ProcessODEExamples.v
 
 # === Layer 5 ===
 src/PowerSeries.v
