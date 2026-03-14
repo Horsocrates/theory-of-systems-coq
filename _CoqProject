@@ -867,6 +867,22 @@ src/navier_stokes/ResolutionRegularity.v
 # NS-34: Depends on all NS files + StripSpectrum
 src/navier_stokes/NSComplete.v
 
+# === Process Functional Analysis (Phase 6) ===
+# PFA-1: Depends on ProcessCore + ProcessArithmetic + ProcessBounds
+src/process/ProcessFiniteDim.v
+
+# PFA-2: Depends on PFA-1 + ProcessCore + ProcessBounds
+src/process/ProcessL2.v
+
+# PFA-3: Depends on PFA-1 + PFA-2 + ProcessCore + ProcessBounds
+src/process/ProcessOperatorFA.v
+
+# PFA-4: Depends on PFA-1 + PFA-2 + PFA-3 + ProcessCore + ProcessBounds
+src/process/ProcessSpectral.v
+
+# PFA-5: Depends on all PFA-*
+src/process/ProcessFuncUnified.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
