@@ -65,6 +65,12 @@ src/MonotoneConvergence.v
 # === Layer 4 ===
 src/SeriesConvergence.v
 
+# === Layer 4b: Process Foundation (depends on CauchyReal + SeriesConvergence) ===
+src/process/ProcessCore.v
+src/process/ProcessArithmetic.v
+src/process/ProcessBounds.v
+src/process/ProcessBridge.v
+
 # === Layer 5 ===
 src/PowerSeries.v
 src/FixedPoint.v
