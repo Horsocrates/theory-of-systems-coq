@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-13 19:01
+Auto-generated: 2026-03-14 10:07
 
 ## Core
 
@@ -158,6 +158,7 @@ Auto-generated: 2026-03-13 19:01
 | `BlockDiagonal2D.v` | 26 | 0 | gaugeCoupled2D. |
 | `CharacterTransfer.v` | 21 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
 | `ClebschGordan.v` | 37 | 0 | CauchyReal,SeriesConvergence,gaugeSU2Characters. |
+| `ClusterProof.v` | 23 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `CombinedTransfer3D.v` | 24 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
 | `ConfinementCorrection.v` | 19 | 0 | CauchyReal,SeriesConvergence,gaugeTransferMatrix.,gaugeSU2Tr |
 | `Continuum3DSynthesis.v` | 9 | 0 | gaugeTransferMatrix.,gaugeExactEigenvalues.,gaugeGapBound.,g |
@@ -168,9 +169,11 @@ Auto-generated: 2026-03-13 19:01
 | `ContinuumMatrix2D.v` | 22 | 0 | gaugeContinuumOperator.,gaugeExtendedAction. |
 | `ContinuumOperator.v` | 24 | 0 |  |
 | `ContinuumSynthesis.v` | 11 | 0 | gaugeTransferMatrix.,gaugeStrongCoupling.,gaugeKDependence., |
+| `CorrelationProof.v` | 24 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `CosineAction.v` | 22 | 0 | CauchyReal,SeriesConvergence,PowerSeries,RealField,zetaZetaP |
 | `Coupled2D.v` | 20 | 0 |  |
 | `Coupled3D.v` | 19 | 0 | gaugeCoupled2D. |
+| `CovarianceProof.v` | 13 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `DimensionLadder.v` | 10 | 0 | gaugeCoupled2D.,gaugeCoupled3D.,gaugeBlock3D.,gaugeGap3D.,ga |
 | `DomainWalls.v` | 37 | 0 |  |
 | `EigenAnalysis2D.v` | 16 | 0 | gaugeContinuumOperator.,gaugeExtendedAction.,gaugeContinuumM |
@@ -180,6 +183,9 @@ Auto-generated: 2026-03-13 19:01
 | `ExtendedAction.v` | 26 | 0 | gaugeContinuumOperator. |
 | `ExtendedAction7.v` | 12 | 0 | gaugeExtendedAction. |
 | `ExtendedInterval.v` | 28 | 0 | CauchyReal,SeriesConvergence,FixedPoint,MonotoneConvergence, |
+| `FormalAnalytic.v` | 15 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `FormalSO4.v` | 9 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `FormalTempered.v` | 11 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `Gap2D.v` | 18 | 0 | gaugeCoupled2D.,gaugeBlockDiagonal2D.,gaugeTransferMatrix. |
 | `Gap3D.v` | 14 | 0 | gaugeCoupled2D.,gaugeCoupled3D.,gaugeBlock3D.,gaugeGap2D.,ga |
 | `GapBound.v` | 17 | 0 | gaugeContinuumOperator.,gaugeExactEigenvalues. |
@@ -190,6 +196,7 @@ Auto-generated: 2026-03-13 19:01
 | `GaugeSynthesis.v` | 11 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
 | `GlobalMassGap.v` | 18 | 0 | CauchyReal,FixedPoint,gaugeRGFlow.,gaugeSU2TransferMatrix.,g |
 | `HigherOrderRG.v` | 24 | 0 | CauchyReal,SeriesConvergence,RealField,FixedPoint,zetaZetaPr |
+| `HilbertConstruction.v` | 18 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `InstantonEnhanced.v` | 16 | 0 | CauchyReal,SeriesConvergence,gaugeTransferMatrix.,gaugeSU2Tr |
 | `IrrelevantOperators.v` | 24 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `KDependence.v` | 32 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeGapDecayRate. |
@@ -206,9 +213,13 @@ Auto-generated: 2026-03-13 19:01
 | `NonlinearRG.v` | 36 | 0 | CauchyReal,SeriesConvergence,RealField,FixedPoint,gaugeRGFlo |
 | `NonperturbativeGap.v` | 12 | 0 | CauchyReal,FixedPoint,gaugeTransferMatrix.,gaugeSU2TransferM |
 | `PerturbationRG.v` | 18 | 0 | CauchyReal,SeriesConvergence,FixedPoint,gaugeRGFlow.,gaugeSU |
+| `PhaseB_Synthesis.v` | 17 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `ProcessMassGap.v` | 44 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `ProofClosure.v` | 18 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `RGContraction.v` | 24 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `RGConvergence.v` | 13 | 0 | CauchyReal,SeriesConvergence,FixedPoint,gaugeRGFlow.,gaugeCo |
 | `RGFlow.v` | 23 | 0 | LinearAlgebra,CauchyReal,SeriesConvergence,MonotoneConvergen |
+| `ReflectionPositiveProof.v` | 29 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `ReflectionPositivity.v` | 28 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
 | `SU2Characters.v` | 38 | 0 | CauchyReal,SeriesConvergence |
 | `SU2Group.v` | 30 | 0 |  |
@@ -217,6 +228,7 @@ Auto-generated: 2026-03-13 19:01
 | `SU2TransferMatrix.v` | 19 | 0 | LinearAlgebra,CauchyReal,linalgMatrixOps.,linalgEigenvalueTh |
 | `SpatialHamiltonian.v` | 26 | 0 | CauchyReal,SeriesConvergence,gaugeSU2Characters.,gaugeClebsc |
 | `SpectralBound.v` | 22 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
+| `SpectralGapCorrect.v` | 28 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `StripSpectrum.v` | 25 | 0 | gaugeDomainWalls gauge.StripTransfer gauge.Coupled2D. |
 | `StripSynthesis.v` | 21 | 0 | gaugeDomainWalls gauge.StripTransfer |
 | `StripTransfer.v` | 33 | 0 | gaugeDomainWalls gauge.Coupled2D. |
@@ -226,6 +238,7 @@ Auto-generated: 2026-03-13 19:01
 | `ThermodynamicLimit.v` | 20 | 0 | gaugeDomainWalls gauge.StripTransfer |
 | `TopologicalObstruction.v` | 12 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
 | `TransferMatrix.v` | 23 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `TransferMatrixProof.v` | 32 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `TridiagonalGap.v` | 18 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
 | `UniversalityClass.v` | 17 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `WallBreachSynthesis.v` | 14 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
@@ -237,7 +250,10 @@ Auto-generated: 2026-03-13 19:01
 | `YMLevel5Complete.v` | 15 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 | `YMWallBreach.v` | 19 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
 | `YangMillsComplete.v` | 13 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
-| `YangMillsFinal.v` | 9 | 0 | CauchyReal,FixedPoint,gaugeTransferMatrix.,gaugeSU2TransferM |
+| `YangMillsCorrected.v` | 23 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `YangMillsFinal.v` | 8 | 0 | CauchyReal,FixedPoint,gaugeTransferMatrix.,gaugeSU2TransferM |
+| `YangMillsProcess.v` | 12 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeSp |
+| `YangMillsSealed.v` | 11 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
 
 ## Navier-Stokes
 
@@ -376,6 +392,6 @@ Auto-generated: 2026-03-13 19:01
 
 | Metric | Count |
 |--------|-------|
-| Files | 315 |
-| Qed | 7107 |
+| Files | 331 |
+| Qed | 7433 |
 | Admitted | 0 |

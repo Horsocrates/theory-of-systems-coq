@@ -1,15 +1,16 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-7108_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-7433_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 7108 machine-verified theorems, 0 Admitted, a verified programming language,
+> 7433 machine-verified theorems, 0 Admitted, a verified programming language,
 > formally verified quantum measurement theory, the Yang-Mills mass gap theorem
-> (complete proof chain from lattice to Wightman QFT with Δ > 0),
+> (complete proof chain from lattice to Wightman QFT with Δ > 0,
+> plus P4 process mass gap criterion),
 > Navier-Stokes regularity, and the first formally verified reasoning pipeline
 > for LLMs.**
 
@@ -42,14 +43,15 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 7108 |
-| Coq files | 315 |
+| Proven theorems (Qed) | 7433 |
+| Coq files | 331 |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Stdlib modules | 53 |
-| Gauge theory (Yang-Mills) | 84 files, 1704 Qed |
+| Gauge theory (Yang-Mills) | 100 files, 2030 Qed |
 | Navier-Stokes | 34 files, 654 Qed |
 | Yang-Mills mass gap | proven (`yang_mills_mass_gap`) |
+| P4 process mass gap | proven (`su2_has_process_mass_gap`) |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
 | Pipeline: structural safety | proven (`validate_pipeline_sound`) |
 
@@ -90,8 +92,9 @@ src/
   Applied Math (8 files)      CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
   Physics (14 files)          Quantum: InnerProduct, Born Rule, Spectral Dichotomy,
                               Entanglement, Decoherence, Qubit, Oscillator, SpinChain...
-  gauge/ (84 files, 1704 Qed) Yang-Mills mass gap: complete proof chain from lattice
-                              to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`)
+  gauge/ (100 files, 2030 Qed) Yang-Mills mass gap: complete proof chain from lattice
+                              to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`),
+                              P4 process mass gap (`su2_has_process_mass_gap`)
   navier_stokes/ (34 files, 654 Qed)  Galerkin, energy estimates, triadic interaction,
                               invariant region, Fatou regularity, honest assessment
   stdlib/ (53 files)          Data structures, algorithms, number theory, graphs, algebra,
@@ -168,7 +171,7 @@ with no intermediate type — proven directly from the Process Continuum Hypothe
 - **Spin Chain**: Bell state entanglement, Ising `⟨Φ+|H|Φ+⟩ = 2J`, ferro/antiferro (32 Qed)
 - **Quantum Dynamics**: Time evolution, norm preservation, conservation laws (24 Qed)
 
-### Yang-Mills Mass Gap (84 files, 1704 Qed)
+### Yang-Mills Mass Gap (100 files, 2030 Qed)
 
 Complete proof chain for the Clay Millennium Prize Problem — from Wilson lattice
 action to Wightman QFT with mass gap Δ > 0:
@@ -181,7 +184,18 @@ action to Wightman QFT with mass gap Δ > 0:
 6. **Universality + SO(4)**: artifacts `∝ 1/β → 0` under RG, hypercubic → SO(4)
 7. **Wightman reconstruction**: OS1-5 → Wightman QFT with `Δ = −log(r) > 0`
 
-**Key theorem**: `yang_mills_mass_gap` — the complete 7-step proof chain
+**Key theorems**:
+- `yang_mills_mass_gap` — the complete 7-step proof chain
+- `spectral_gap_pos_all_rational` — spectral gap `|t₀−t₁| > 0` for ALL rational `β > 0`
+- `su2_has_process_mass_gap` — **P4 process mass gap** at `β=1`: gap ≥ 289/384,
+  Cauchy rate `C=2, r=1/4`, monotonically increasing
+
+**P4 Process Mass Gap** (ProcessMassGap.v + YangMillsProcess.v, 56 Qed):
+The P4 interpretation: mass gap IS the process `{gap_M}`, not its limit.
+Three criteria are machine-verified:
+- **PMG1**: `gap_M ≥ 289/384` for all M (uniform lower bound)
+- **PMG2**: `|gap_{M+1} − gap_M| ≤ 2·(1/4)^M` (exponential Cauchy rate)
+- **PMG3**: `gap_{M+1} ≥ gap_M` (monotonicity)
 
 Earlier phases also include: lattice structure, SU(2) group axioms, strong coupling,
 RG flow, confinement analysis, strip geometry, 2+1D and 3+1D dimension ladder
@@ -241,12 +255,12 @@ Complete chain from first principles to:
 | Projective Systems | 6 | 197 |
 | Experimental (Casimir, Coulomb, Lamb) | 8 | 300 |
 | Eigenvalue + Ionization | 6 | 130 |
-| Gauge Theory (Yang-Mills) | 84 | 1704 |
+| Gauge Theory (Yang-Mills) | 100 | 2030 |
 | Navier-Stokes | 34 | 654 |
 | Stdlib | 53 | 1089 |
 | Architecture of Reasoning | 6 | 117 |
 | Integration + Extraction | 2 | 11 |
-| **TOTAL** | **315** | **7108** |
+| **TOTAL** | **331** | **7433** |
 
 ### Admitted: **0**
 

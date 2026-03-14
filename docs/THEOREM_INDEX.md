@@ -74,6 +74,10 @@ Key theorems organized by category. For the complete file-by-file listing, see [
 | `os1_on_lattice` | LatticeOS1_Analyticity.v | OS1 (analyticity) on lattice |
 | `os2_on_lattice` | LatticeOS2_Regularity.v | OS2 (regularity) on lattice |
 | `os3_on_lattice` | LatticeOS3_Covariance.v | OS3 (covariance) on lattice |
+| `spectral_gap_pos_all_rational` | SpectralGapCorrect.v | Spectral gap `|t₀−t₁| > 0` for ALL rational `β > 0` |
+| `su2_has_process_mass_gap` | ProcessMassGap.v | P4 process mass gap: gap ≥ 289/384, Cauchy rate C=2 r=1/4, monotone |
+| `p4_mass_gap_beta_1` | YangMillsProcess.v | P4 mass gap exists for SU(2) at β=1 |
+| `yang_mills_with_process` | YangMillsProcess.v | PMG + spectral gap + RG wall + mass gap combined |
 
 ## Calculus
 
