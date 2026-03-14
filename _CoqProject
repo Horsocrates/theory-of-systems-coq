@@ -79,6 +79,13 @@ src/process/ProcessHB.v
 src/process/ProcessUncountable.v
 src/process/ProcessUnified.v
 
+# === Layer 4d: Process Analysis (depends on 4c + calculus chain) ===
+src/process/ProcessDerivative.v
+src/process/ProcessIntegral.v
+src/process/ProcessSeries.v
+src/process/ProcessTaylor.v
+src/process/ProcessFTC.v
+
 # === Layer 5 ===
 src/PowerSeries.v
 src/FixedPoint.v
