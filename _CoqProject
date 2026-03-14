@@ -71,6 +71,14 @@ src/process/ProcessArithmetic.v
 src/process/ProcessBounds.v
 src/process/ProcessBridge.v
 
+# === Layer 4c: Process Wrappers (depends on 4b + ERR theorems) ===
+src/process/ProcessIVT.v
+src/process/ProcessEVT.v
+src/process/ProcessBW.v
+src/process/ProcessHB.v
+src/process/ProcessUncountable.v
+src/process/ProcessUnified.v
+
 # === Layer 5 ===
 src/PowerSeries.v
 src/FixedPoint.v
