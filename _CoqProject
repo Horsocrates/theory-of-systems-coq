@@ -883,6 +883,18 @@ src/process/ProcessSpectral.v
 # PFA-5: Depends on all PFA-*
 src/process/ProcessFuncUnified.v
 
+# === Phase 10: PMG Generalization (5 files, 68 Qed) ===
+# PMG-1: Depends on ProcessCore + ProcessBounds + SeriesConvergence
+src/process/ProcessPMGMarkov.v
+# PMG-2: Depends on PMG-1
+src/process/ProcessPMGQuantum.v
+# PMG-3: Depends on PMG-1 + SeriesConvergence
+src/process/ProcessPMGSchrodinger.v
+# PMG-4: Depends on PMG-1
+src/process/ProcessPMGEssential.v
+# PMG-5: Depends on PMG-1 + PMG-2 + PMG-3 + PMG-4
+src/process/ProcessPMGUnified.v
+
 # === Architecture of Reasoning (standalone) ===
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
 Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
