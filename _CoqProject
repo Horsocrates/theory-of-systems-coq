@@ -948,3 +948,8 @@ src/process/ProcessBackReaction.v
 src/process/ProcessCoupling.v
 src/process/ProcessTime.v
 src/process/ProcessPhysicsSynthesis.v
+
+# === Phase 16A: Emergence = Quantum Gravity (3 files, 60 Qed) ===
+src/process/ProcessEmergencePhysics.v
+src/process/ProcessQuantumGravity.v
+src/process/ProcessGrandUnification.v
