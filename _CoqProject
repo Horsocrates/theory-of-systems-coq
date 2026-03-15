@@ -914,3 +914,10 @@ src/process/ProcessRing.v
 src/process/ProcessNoetherian.v
 src/process/ProcessHomomorphism.v
 src/process/ProcessAlgebraUnified.v
+
+# === Phase 8: Process Topology (5 files, 73 Qed) ===
+src/process/ProcessTopOpen.v
+src/process/ProcessTopMetric.v
+src/process/ProcessTopConnected.v
+src/process/ProcessTopCompact.v
+src/process/ProcessTopUnified.v
