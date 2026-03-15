@@ -370,6 +370,7 @@ are identical. Not "have the same elements" — "have the same constitution."
 
 ### Foundational
 
+- **[Theory of Systems](https://philpapers.org/archive/HORTOS.pdf)** — The complete framework: from A = exists to mathematics
 - **[The Laws of Logic as Conditions of Existence](https://philpapers.org/archive/HORTLO-18.pdf)** — Derivation of L1-L5 from first principle
 - **[The Law of Order](https://philpapers.org/archive/HORTLO-19.pdf)** — L5 and the EVT breakthrough
 
