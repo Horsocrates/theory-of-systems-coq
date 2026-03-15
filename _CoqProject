@@ -941,3 +941,10 @@ src/process/ProcessGGGalois.v
 src/process/ProcessGGAdjProcess.v
 src/process/ProcessGGAdjWeak.v
 src/process/ProcessGGAdjSynthesis.v
+
+# === Phase 15A: Physical Interpretation (5 files, 80 Qed) ===
+src/process/ProcessQuantization.v
+src/process/ProcessBackReaction.v
+src/process/ProcessCoupling.v
+src/process/ProcessTime.v
+src/process/ProcessPhysicsSynthesis.v
