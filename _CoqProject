@@ -934,3 +934,10 @@ src/process/ProcessGeomCategory.v
 src/process/ProcessGaugeCategory.v
 src/process/ProcessGeomGaugeFunctor.v
 src/process/ProcessGeomGaugeBasic.v
+
+# === Phase 14A: The Adjunction (5 files, 78 Qed) ===
+src/process/ProcessGGAdjStrict.v
+src/process/ProcessGGGalois.v
+src/process/ProcessGGAdjProcess.v
+src/process/ProcessGGAdjWeak.v
+src/process/ProcessGGAdjSynthesis.v
