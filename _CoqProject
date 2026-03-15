@@ -953,3 +953,10 @@ src/process/ProcessPhysicsSynthesis.v
 src/process/ProcessEmergencePhysics.v
 src/process/ProcessQuantumGravity.v
 src/process/ProcessGrandUnification.v
+
+# === Path B: Regge Process + Combined Transfer + Crossing (5 files, 81 Qed) ===
+src/process/ProcessRegge.v
+src/process/ProcessReggeTransfer.v
+src/process/ProcessCombinedTransfer.v
+src/process/ProcessCrossing.v
+src/process/ProcessPathBSynthesis.v
