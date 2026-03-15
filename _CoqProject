@@ -921,3 +921,10 @@ src/process/ProcessTopMetric.v
 src/process/ProcessTopConnected.v
 src/process/ProcessTopCompact.v
 src/process/ProcessTopUnified.v
+
+# === Phase 9: Process Category Theory (5 files, 117 Qed) ===
+src/process/ProcessCategory.v
+src/process/ProcessLimitColimit.v
+src/process/ProcessAdjunction.v
+src/process/ProcessWholeness.v
+src/process/ProcessFourPrinciples.v
