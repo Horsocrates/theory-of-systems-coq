@@ -895,3 +895,10 @@ Architecture_of_Reasoning/ParadoxDissolution.v
 src/extraction/GapCompute.v
 src/extraction/GapCertificate.v
 src/extraction/GapExtraction.v
+
+# === Process Algebra (Phase 7) ===
+src/process/ProcessGroup.v
+src/process/ProcessRing.v
+src/process/ProcessNoetherian.v
+src/process/ProcessHomomorphism.v
+src/process/ProcessAlgebraUnified.v
