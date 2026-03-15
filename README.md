@@ -1,18 +1,18 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-7884_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-7932_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 7884 machine-verified theorems, 0 Admitted, a verified programming language,
+> 7932 machine-verified theorems, 0 Admitted, a verified programming language,
 > formally verified quantum measurement theory, the Yang-Mills mass gap theorem
 > (complete proof chain from lattice to Wightman QFT with Δ > 0,
 > plus P4 process mass gap criterion), P4 process mathematics (451 Qed),
-> Navier-Stokes regularity, and the first formally verified reasoning pipeline
-> for LLMs.**
+> Navier-Stokes regularity, a certified gap calculator extracted to OCaml,
+> and the first formally verified reasoning pipeline for LLMs.**
 
 ---
 
@@ -42,14 +42,15 @@ A = exists
               -> Yang-Mills Mass Gap (Δ > 0, 2030 Qed)
               -> Navier-Stokes Regularity (654 Qed)
               -> Process Functional Analysis (L², spectral theory)
+              -> Certified Gap Calculator (extracted to OCaml, exact Q arithmetic)
 ```
 
 ### Key Numbers
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 7884 |
-| Coq files | 360 |
+| Proven theorems (Qed) | 7932 |
+| Coq files | 363 |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Stdlib modules | 53 |

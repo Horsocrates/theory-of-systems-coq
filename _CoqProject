@@ -890,3 +890,8 @@ Architecture_of_Reasoning/ERR_Fallacies.v
 Architecture_of_Reasoning/DomainViolations_Complete.v
 Architecture_of_Reasoning/AI_FallacyDetector.v
 Architecture_of_Reasoning/ParadoxDissolution.v
+
+# === Computational Extraction (Phase 11) ===
+src/extraction/GapCompute.v
+src/extraction/GapCertificate.v
+src/extraction/GapExtraction.v
