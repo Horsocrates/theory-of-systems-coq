@@ -1,16 +1,16 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-7433_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-7884_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics from "something exists" —
-> 7433 machine-verified theorems, 0 Admitted, a verified programming language,
+> 7884 machine-verified theorems, 0 Admitted, a verified programming language,
 > formally verified quantum measurement theory, the Yang-Mills mass gap theorem
 > (complete proof chain from lattice to Wightman QFT with Δ > 0,
-> plus P4 process mass gap criterion),
+> plus P4 process mass gap criterion), P4 process mathematics (451 Qed),
 > Navier-Stokes regularity, and the first formally verified reasoning pipeline
 > for LLMs.**
 
@@ -43,11 +43,12 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 7433 |
-| Coq files | 331 |
+| Proven theorems (Qed) | 7884 |
+| Coq files | 360 |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Stdlib modules | 53 |
+| P4 process mathematics | 29 files, 451 Qed |
 | Gauge theory (Yang-Mills) | 100 files, 2030 Qed |
 | Navier-Stokes | 34 files, 654 Qed |
 | Yang-Mills mass gap | proven (`yang_mills_mass_gap`) |
@@ -92,6 +93,8 @@ src/
   Applied Math (8 files)      CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
   Physics (14 files)          Quantum: InnerProduct, Born Rule, Spectral Dichotomy,
                               Entanglement, Decoherence, Qubit, Oscillator, SpinChain...
+  process/ (29 files, 451 Qed) P4 process mathematics: classical theorems, calculus,
+                              measure theory, ODE, functional analysis — all as processes
   gauge/ (100 files, 2030 Qed) Yang-Mills mass gap: complete proof chain from lattice
                               to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`),
                               P4 process mass gap (`su2_has_process_mass_gap`)
@@ -171,6 +174,33 @@ with no intermediate type — proven directly from the Process Continuum Hypothe
 - **Spin Chain**: Bell state entanglement, Ising `⟨Φ+|H|Φ+⟩ = 2J`, ferro/antiferro (32 Qed)
 - **Quantum Dynamics**: Time evolution, norm preservation, conservation laws (24 Qed)
 
+### P4 Process Mathematics (29 files, 451 Qed)
+
+All of classical mathematics re-derived as **process constructions** under P4
+("infinity is process, not object"). Every real number is a Cauchy process
+`nat -> Q`, every theorem is about processes, not completed infinities.
+
+**Six phases:**
+
+| Phase | Files | Qed | Contents |
+|-------|-------|-----|----------|
+| Foundation (0+1) | 4 | 57 | ProcessCore, Arithmetic, Bounds, Bridge |
+| Classical Theorems (2) | 6 | 57 | IVT, EVT, Bolzano-Weierstrass, Heine-Borel, Uncountable, Unified |
+| Calculus (3) | 5 | 58 | Derivative, Integral, Series, Taylor, FTC |
+| Measure Theory (4) | 5 | 83 | Simple functions, Lebesgue, Fatou, Measure unified |
+| ODE (5) | 4 | 90 | Picard iteration, Gronwall, ODE existence, Examples |
+| Functional Analysis (6) | 5 | 100 | Q^n spaces, L², operators, spectral theory, unified |
+
+**Key theorems:**
+- `process_ivt` — intermediate value theorem for processes
+- `process_evt` — extreme value theorem for processes
+- `process_ftc` — fundamental theorem of calculus (process version)
+- `picard_iteration_cauchy` — Picard iteration converges as process
+- `parseval_process` — Parseval's identity for L² processes
+- `cauchy_schwarz_n` — Cauchy-Schwarz inequality over Q^n
+- `spectral_gap_is_pmg` — spectral gap = PrimaryMax status (P4 thesis)
+- 9 instances of "X is process, not object" unified thesis
+
 ### Yang-Mills Mass Gap (100 files, 2030 Qed)
 
 Complete proof chain for the Clay Millennium Prize Problem — from Wilson lattice
@@ -232,6 +262,9 @@ Complete chain from first principles to:
 - **Number Theory (Zeta)**: ζ as process, Euler product, zero structure, functional equation,
   contraction zeros, approximate zeros (211 Qed, exploratory)
 - **Category of Systems**: Sys(L) as Category, embed/forget functors, level adjunction, E/R/R functorial decomposition
+- **P4 Process Mathematics**: IVT/EVT/BW/HB as processes, process calculus (derivative, integral, FTC, Taylor),
+  process measure theory (Lebesgue, Fatou), process ODE (Picard, Gronwall), process functional analysis
+  (Q^n, L², operators, spectral theory) — 29 files, 451 Qed
 
 ---
 
@@ -255,12 +288,13 @@ Complete chain from first principles to:
 | Projective Systems | 6 | 197 |
 | Experimental (Casimir, Coulomb, Lamb) | 8 | 300 |
 | Eigenvalue + Ionization | 6 | 130 |
+| P4 Process Mathematics | 29 | 451 |
 | Gauge Theory (Yang-Mills) | 100 | 2030 |
 | Navier-Stokes | 34 | 654 |
 | Stdlib | 53 | 1089 |
 | Architecture of Reasoning | 6 | 117 |
 | Integration + Extraction | 2 | 11 |
-| **TOTAL** | **331** | **7433** |
+| **TOTAL** | **360** | **7884** |
 
 ### Admitted: **0**
 

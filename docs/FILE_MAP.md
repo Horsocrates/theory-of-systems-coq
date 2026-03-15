@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-14 21:44
+Auto-generated: 2026-03-15 07:22
 
 ## Core
 
@@ -91,6 +91,40 @@ Auto-generated: 2026-03-14 21:44
 | `FTC.v` | 28 | 0 | CauchyReal,RealField,EVT_idx,Differentiation,MeanValueTheore |
 | `HeineBorelComplete.v` | 28 | 0 | ToS_Axioms |
 | `ImplicitFunction.v` | 20 | 0 | CauchyReal,Completeness,MonotoneConvergence,SeriesConvergenc |
+
+## P4 Process Mathematics
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `ProcessArithmetic.v` | 17 | 0 | processProcessCore. |
+| `ProcessBW.v` | 9 | 0 | CauchyReal,processProcessCore.,processProcessArithmetic.,pro |
+| `ProcessBounds.v` | 11 | 0 | processProcessCore.,processProcessArithmetic.,SeriesConverge |
+| `ProcessBridge.v` | 10 | 0 | CauchyReal,processProcessCore. |
+| `ProcessCore.v` | 19 | 0 |  |
+| `ProcessDerivative.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,Differentiatio |
+| `ProcessEVT.v` | 9 | 0 | processProcessCore.,processProcessArithmetic.,EVT_ERR |
+| `ProcessFTC.v` | 9 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessFatou.v` | 16 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessFiniteDim.v` | 30 | 0 | processProcessCore.,processProcessArithmetic. |
+| `ProcessFuncUnified.v` | 12 | 0 | processProcessCore.,processProcessBounds.,processProcessArit |
+| `ProcessGronwall.v` | 18 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessHB.v` | 7 | 0 | processProcessCore.,HeineBorel_ERR |
+| `ProcessIVT.v` | 13 | 0 | processProcessCore.,processProcessArithmetic.,IVT_ERR,Archim |
+| `ProcessIntegral.v` | 12 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessL2.v` | 21 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessLebesgue.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessMeasureTheory.v` | 22 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessMeasureUnified.v` | 9 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessODE.v` | 20 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessODEExamples.v` | 20 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessOperatorFA.v` | 18 | 0 | processProcessCore.,processProcessBounds.,processProcessFini |
+| `ProcessPicard.v` | 32 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessSeries.v` | 13 | 0 | processProcessCore.,processProcessArithmetic.,CauchyReal,Ser |
+| `ProcessSimple.v` | 19 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessSpectral.v` | 19 | 0 | processProcessCore.,processProcessBounds.,processProcessFini |
+| `ProcessTaylor.v` | 13 | 0 | processProcessCore.,processProcessArithmetic.,CauchyReal,Ser |
+| `ProcessUncountable.v` | 7 | 0 | processProcessCore.,ShrinkingIntervals_ERR |
+| `ProcessUnified.v` | 12 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 
 ## Stdlib
 
@@ -202,3 +236,196 @@ Auto-generated: 2026-03-14 21:44
 | `KDependence.v` | 32 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeGapDecayRate. |
 | `LargerLattice.v` | 29 | 0 | CauchyReal,FixedPoint,MonotoneConvergence,gaugeTransferMatri |
 | `LatticeCorrelations.v` | 21 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `LatticeOS1_Analyticity.v` | 19 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeChara |
+| `LatticeOS2_Regularity.v` | 15 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `LatticeOS3_Covariance.v` | 16 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `LatticeRG.v` | 29 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `LatticeStructure.v` | 23 | 0 |  |
+| `MassGapBound.v` | 13 | 0 | CauchyReal,FixedPoint,gaugeRGFlow.,gaugeSU2TransferMatrix.,g |
+| `MassGapProcess.v` | 12 | 0 | LinearAlgebra,CauchyReal,ProcessGeneral,physicsInnerProductS |
+| `MillenniumSynthesis.v` | 13 | 0 | CauchyReal,FixedPoint,gaugeRGFlow.,gaugeTransferMatrix.,gaug |
+| `NonlinearRG.v` | 36 | 0 | CauchyReal,SeriesConvergence,RealField,FixedPoint,gaugeRGFlo |
+| `NonperturbativeGap.v` | 12 | 0 | CauchyReal,FixedPoint,gaugeTransferMatrix.,gaugeSU2TransferM |
+| `PerturbationRG.v` | 18 | 0 | CauchyReal,SeriesConvergence,FixedPoint,gaugeRGFlow.,gaugeSU |
+| `PhaseB_Synthesis.v` | 17 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `ProcessMassGap.v` | 44 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `ProofClosure.v` | 18 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `RGContraction.v` | 24 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `RGConvergence.v` | 13 | 0 | CauchyReal,SeriesConvergence,FixedPoint,gaugeRGFlow.,gaugeCo |
+| `RGFlow.v` | 23 | 0 | LinearAlgebra,CauchyReal,SeriesConvergence,MonotoneConvergen |
+| `ReflectionPositiveProof.v` | 29 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `ReflectionPositivity.v` | 28 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `SU2Characters.v` | 38 | 0 | CauchyReal,SeriesConvergence |
+| `SU2Group.v` | 30 | 0 |  |
+| `SU2Lattice.v` | 20 | 0 | LinearAlgebra,CauchyReal,linalgMatrixOps.,gaugeLatticeStruct |
+| `SU2Synthesis.v` | 13 | 0 | LinearAlgebra,CauchyReal,FixedPoint,gaugeLatticeStructure.,g |
+| `SU2TransferMatrix.v` | 19 | 0 | LinearAlgebra,CauchyReal,linalgMatrixOps.,linalgEigenvalueTh |
+| `SpatialHamiltonian.v` | 26 | 0 | CauchyReal,SeriesConvergence,gaugeSU2Characters.,gaugeClebsc |
+| `SpectralBound.v` | 22 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
+| `SpectralGapCorrect.v` | 28 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `StripSpectrum.v` | 25 | 0 | gaugeDomainWalls gauge.StripTransfer gauge.Coupled2D. |
+| `StripSynthesis.v` | 21 | 0 | gaugeDomainWalls gauge.StripTransfer |
+| `StripTransfer.v` | 33 | 0 | gaugeDomainWalls gauge.Coupled2D. |
+| `StrongCoupling.v` | 21 | 0 | LinearAlgebra,CauchyReal,SeriesConvergence,MonotoneConvergen |
+| `Synthesis2D.v` | 10 | 0 | gaugeCoupled2D.,gaugeBlockDiagonal2D.,gaugeGap2D.,gaugeTrans |
+| `TensorGapBound.v` | 14 | 0 | gaugeExactEigenvalues.,gaugeGapBound.,gaugeGap3D. |
+| `ThermodynamicLimit.v` | 20 | 0 | gaugeDomainWalls gauge.StripTransfer |
+| `TopologicalObstruction.v` | 12 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
+| `TransferMatrix.v` | 23 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `TransferMatrixProof.v` | 32 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `TridiagonalGap.v` | 18 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `UniversalityClass.v` | 17 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `WallBreachSynthesis.v` | 14 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
+| `WallTheorem.v` | 12 | 0 | CauchyReal,gaugeTransferMatrix.,gaugeSU2TransferMatrix.,gaug |
+| `WightmanReconstruction.v` | 23 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `WilsonAction.v` | 13 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `YM3DComplete.v` | 16 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `YMLevel4Complete.v` | 25 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `YMLevel5Complete.v` | 15 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `YMWallBreach.v` | 19 | 0 | CauchyReal,SeriesConvergence,stdlibCombinatorics.,gaugeSU2Ch |
+| `YangMillsComplete.v` | 13 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `YangMillsCorrected.v` | 23 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+| `YangMillsFinal.v` | 8 | 0 | CauchyReal,FixedPoint,gaugeTransferMatrix.,gaugeSU2TransferM |
+| `YangMillsProcess.v` | 12 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeSp |
+| `YangMillsSealed.v` | 11 | 0 | CauchyReal,SeriesConvergence,gaugeCharacterTransfer.,gaugeEx |
+
+## Navier-Stokes
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `AttackSynthesis.v` | 33 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `BKMCriterion.v` | 18 | 0 | navier_stokesGridFunction.,navier_stokesFiniteDifference.,na |
+| `ClassicalRegularity.v` | 30 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `ConcentrationBound.v` | 20 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `Depletion.v` | 15 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `EnergyConstraint.v` | 20 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `EnergyEstimate.v` | 25 | 0 | navier_stokesGridFunction.,navier_stokesFiniteDifference.,na |
+| `EnstrophyConvergence.v` | 26 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `EnstrophyProduction.v` | 17 | 0 | navier_stokesGridFunction.,navier_stokesFiniteDifference.,na |
+| `FatouRegularity.v` | 23 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `FiniteDifference.v` | 41 | 0 | navier_stokesGridFunction. |
+| `FrequencySplit.v` | 20 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `FullRegularity.v` | 25 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `GalerkinConvergence.v` | 35 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `GalerkinSystem.v` | 29 | 0 | navier_stokesGridFunction navier_stokes.FiniteDifference. |
+| `GridFunction.v` | 43 | 0 |  |
+| `GronwallAnalysis.v` | 20 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `HonestAssessment.v` | 26 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `InvariantRegion.v` | 28 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `LowModeControl.v` | 32 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `MillenniumComplete.v` | 37 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `NSComplete.v` | 24 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `NSProcessFinal.v` | 22 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `PerModeBound.v` | 28 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `ProcessNS.v` | 21 | 0 | navier_stokesGridFunction.,navier_stokesFiniteDifference.,na |
+| `ProcessVorticity.v` | 13 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `RegularitySynthesis.v` | 19 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `ResolutionRegularity.v` | 22 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `SmoothInitialData.v` | 19 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `TransientClosure.v` | 19 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `TriadicInteraction.v` | 36 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `TwoMillennium.v` | 20 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `UniformBounds.v` | 37 | 0 | navier_stokesGridFunction.,navier_stokesGalerkinSystem.,navi |
+| `Vorticity.v` | 26 | 0 | navier_stokesGridFunction.,navier_stokesFiniteDifference.,na |
+
+## Linear Algebra
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `EigenvalueSynthesis.v` | 15 | 0 | LinearAlgebra,CauchyReal,SeriesConvergence,MonotoneConvergen |
+| `EigenvalueTheory.v` | 24 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `GershgorinDiscs.v` | 19 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsQS |
+| `IonizationThreshold.v` | 22 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+| `MatrixOps.v` | 32 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `PowerMethod.v` | 18 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsQS |
+
+## Physics
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `BornRule.v` | 13 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `Decoherence.v` | 25 | 0 | ToS_Axioms,ProcessTypes,ProcessContinuumHypothesis |
+| `Entanglement.v` | 21 | 0 | ToS_Axioms,CauchyReal,LinearAlgebra,ProcessTypes,ProcessCont |
+| `HarmonicOscillator.v` | 35 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `InnerProductSpace.v` | 36 | 0 | LinearAlgebra,CauchyReal |
+| `MeasurementProcess.v` | 19 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessContinuumHypothesi |
+| `Orthogonality.v` | 27 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace. |
+| `QObservable.v` | 16 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `QState.v` | 19 | 0 | LinearAlgebra,CauchyReal,ProcessGeneral,physicsInnerProductS |
+| `QuantumDynamics.v` | 24 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsQS |
+| `Qubit.v` | 42 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `SpectralDichotomy.v` | 30 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessDiagonal,ProcessCo |
+| `SpinChain.v` | 32 | 0 | LinearAlgebra,CauchyReal,physicsInnerProductSpace.,physicsOr |
+| `ThermodynamicArrow.v` | 17 | 0 | ProcessTypes,physicsDecoherence. |
+
+## Projective Systems
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `ConnectionTheorems.v` | 22 | 0 | CauchyReal,LinearAlgebra,SeriesConvergence,FixedPoint,Comple |
+| `ProcessMeasure.v` | 32 | 0 | CauchyReal,LinearAlgebra,SeriesConvergence,Measure,projectiv |
+| `ProcessOperator.v` | 29 | 0 | CauchyReal,LinearAlgebra,ProcessGeneral,SeriesConvergence,ph |
+| `ProjectiveLimit.v` | 38 | 0 | CauchyReal,LinearAlgebra,SeriesConvergence,MonotoneConvergen |
+| `ProjectiveSystem.v` | 41 | 0 | CauchyReal,LinearAlgebra,ProcessGeneral |
+| `QuantumTower.v` | 35 | 0 | CauchyReal,LinearAlgebra,ProcessGeneral,SeriesConvergence,Mo |
+
+## Experimental Verification
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `AbelRegularization.v` | 23 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+| `BernoulliNumbers.v` | 34 | 0 | stdlibCombinatorics.,SeriesConvergence,CauchyReal,MonotoneCo |
+| `CasimirProcess.v` | 33 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+| `CoulombFull3D.v` | 50 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+| `CoulombTower.v` | 42 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence |
+| `LambShiftTower.v` | 42 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+| `VacuumEnergy.v` | 44 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+| `ZetaNegative.v` | 32 | 0 | CauchyReal,SeriesConvergence,MonotoneConvergence,experimenta |
+
+## Zeta Function
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `ApproximateZeros.v` | 34 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessContinuumHypothesi |
+| `ComplexZeta.v` | 29 | 0 | ToS_Axioms,CauchyReal,SeriesConvergence,zetaZetaProcess. |
+| `ContractionZeros.v` | 43 | 0 | ToS_Axioms,CauchyReal,stdlibTComplex.,zetaZetaZeros.,zetaZet |
+| `EulerExtension.v` | 36 | 0 | ToS_Axioms,CauchyReal,MonotoneConvergence,SeriesConvergence, |
+| `EulerProduct.v` | 26 | 0 | ToS_Axioms,CauchyReal,SeriesConvergence,ProcessGeneral,stdli |
+| `ExplicitFormula.v` | 28 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `FunctionalEquation.v` | 13 | 0 | ToS_Axioms,CauchyReal,stdlibTComplex.,zetaZetaZeros.,zetaRH_ |
+| `LiCoefficients.v` | 35 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `LiProcess.v` | 22 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `LogZeta.v` | 30 | 0 | SeriesConvergence,stdlibPrimes.,zetaEulerProduct.,zetaZetaPr |
+| `PartialSumZeros.v` | 23 | 0 | SeriesConvergence,zetaComplexZeta.,zetaZetaProcess. |
+| `PrimeSumBounds.v` | 27 | 0 | SeriesConvergence,stdlibPrimes.,zetaZetaProcess.,zetaEulerPr |
+| `RH_FinalAssessment.v` | 16 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `RH_Phase1_Synthesis.v` | 13 | 0 | zetaZeroFreeRegion.,zetaPartialSumZeros.,zetaTrigInequality. |
+| `RH_Phase2_Synthesis.v` | 22 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaTrigInequa |
+| `RH_Statement.v` | 8 | 0 | ToS_Axioms,CauchyReal,stdlibTComplex.,zetaZetaZeros. |
+| `TrigInequality.v` | 34 | 0 |  |
+| `WeilPositivity.v` | 22 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `ZeroCountingProcess.v` | 33 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `ZeroFreeRegion.v` | 21 | 0 | zetaTrigInequality.,zetaComplexZeta.,zetaZetaProcess. |
+| `ZeroMigration.v` | 28 | 0 | CauchyReal,SeriesConvergence,zetaZetaProcess.,zetaComplexZet |
+| `ZeroStructure.v` | 12 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessContinuumHypothesi |
+| `ZetaProcess.v` | 25 | 0 | ToS_Axioms,CauchyReal,MonotoneConvergence,SeriesConvergence, |
+| `ZetaZeros.v` | 14 | 0 | ToS_Axioms,CauchyReal,ProcessGeneral,stdlibTComplex.,zetaZet |
+
+## Architecture of Reasoning
+
+| File | Qed | Admitted | Key Imports |
+|------|-----|---------|-------------|
+| `AI_FallacyDetector.v` | 13 | 0 |  |
+| `Architecture_of_Reasoning.v` | 17 | 0 |  |
+| `CompleteFallacyTaxonomy.v` | 19 | 0 |  |
+| `DomainViolations_Complete.v` | 17 | 0 |  |
+| `ERR_Fallacies.v` | 22 | 0 |  |
+| `ParadoxDissolution.v` | 29 | 0 |  |
+
+## Totals
+
+| Metric | Count |
+|--------|-------|
+| Files | 360 |
+| Qed | 7884 |
+| Admitted | 0 |

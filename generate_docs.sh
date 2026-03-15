@@ -13,7 +13,7 @@ total_qed=0
 total_admitted=0
 total_files=0
 
-for section in "src/*.v:Core" "src/analysis/*.v:Analysis" "src/stdlib/*.v:Stdlib" "src/gauge/*.v:Gauge Theory" "src/navier_stokes/*.v:Navier-Stokes" "src/linalg/*.v:Linear Algebra" "src/physics/*.v:Physics" "src/projective/*.v:Projective Systems" "src/experimental/*.v:Experimental Verification" "src/zeta/*.v:Zeta Function" "Architecture_of_Reasoning/*.v:Architecture of Reasoning"; do
+for section in "src/*.v:Core" "src/analysis/*.v:Analysis" "src/process/*.v:P4 Process Mathematics" "src/stdlib/*.v:Stdlib" "src/gauge/*.v:Gauge Theory" "src/navier_stokes/*.v:Navier-Stokes" "src/linalg/*.v:Linear Algebra" "src/physics/*.v:Physics" "src/projective/*.v:Projective Systems" "src/experimental/*.v:Experimental Verification" "src/zeta/*.v:Zeta Function" "Architecture_of_Reasoning/*.v:Architecture of Reasoning"; do
   pattern="${section%%:*}"
   label="${section##*:}"
 
