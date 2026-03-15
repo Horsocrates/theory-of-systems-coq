@@ -36,7 +36,12 @@ A = exists
         -> E/R/R Framework (Elements, Roles, Rules)
           -> N, Q, R, Calculus, Algebra, Probability, Optimization
             -> ToS-Lang (verified programming language)
-              -> Verified D1-D6 Reasoning Pipeline for LLMs
+            -> D1-D6 Reasoning Pipeline (verified structural safety)
+            -> P4 Process Mathematics (all math as process, 451 Qed)
+              -> Quantum Measurement Theory (spectral dichotomy)
+              -> Yang-Mills Mass Gap (Δ > 0, 2030 Qed)
+              -> Navier-Stokes Regularity (654 Qed)
+              -> Process Functional Analysis (L², spectral theory)
 ```
 
 ### Key Numbers
