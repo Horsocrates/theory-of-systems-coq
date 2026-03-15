@@ -928,3 +928,9 @@ src/process/ProcessLimitColimit.v
 src/process/ProcessAdjunction.v
 src/process/ProcessWholeness.v
 src/process/ProcessFourPrinciples.v
+
+# === Phase 13A: GeomGauge Categories (4 files, 77 Qed) ===
+src/process/ProcessGeomCategory.v
+src/process/ProcessGaugeCategory.v
+src/process/ProcessGeomGaugeFunctor.v
+src/process/ProcessGeomGaugeBasic.v
