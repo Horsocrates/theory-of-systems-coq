@@ -1069,3 +1069,7 @@ src/process/ProcessGUTScale.v
 # === Step 9 Phase 41: Proton Mass Structure ===
 src/process/ProcessDimTransmutation.v
 src/process/ProcessProtonStructure.v
+
+# === Phase 42: Vacuum Energy as Process ===
+src/process/ProcessVacuumEnergy.v
+src/process/ProcessCosmologicalConst.v
