@@ -1026,3 +1026,7 @@ src/process/ProcessRGPrecision.v
 src/process/ProcessNonAbelianERR.v
 src/process/ProcessPathOrdering.v
 src/process/ProcessNonAbelianSU2.v
+
+# === Step 7 Phase 33: Higgs Potential from E/R/R ===
+src/process/ProcessHiggsPotentialERR.v
+src/process/ProcessHiggsVEV.v
