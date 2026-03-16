@@ -990,3 +990,8 @@ src/process/ProcessLorentzian.v
 src/process/ProcessLightCone.v
 src/process/ProcessLorentzianRegge.v
 src/process/ProcessLorentzianSynthesis.v
+src/process/ProcessAnomaly.v
+src/process/ProcessAnomalyCancel.v
+src/process/ProcessRoleConstraints.v
+src/process/ProcessStandardModel.v
+src/process/ProcessStep4Synthesis.v
