@@ -1057,3 +1057,7 @@ src/process/ProcessIntrinsicDefect.v
 # === Step 8 Phase 38: String Tension (W8) ===
 src/process/ProcessStringTension.v
 src/process/ProcessLatticeObservable.v
+
+# === Step 8 Phase 39: Derived vs Consistent + Synthesis ===
+src/process/ProcessDerivedVsConsistent.v
+src/process/ProcessStep8Synthesis.v
