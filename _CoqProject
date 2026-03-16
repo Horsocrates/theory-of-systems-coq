@@ -1013,3 +1013,6 @@ src/process/ProcessStep5Synthesis.v
 
 src/process/ProcessWeinbergAngle.v
 src/process/ProcessElectroweakMasses.v
+
+src/process/ProcessSchwarzschildRegge.v
+src/process/ProcessBlackHole.v
