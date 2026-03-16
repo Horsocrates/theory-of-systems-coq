@@ -1003,3 +1003,7 @@ src/process/ProcessElectroweak.v
 src/process/ProcessBlocking.v
 src/process/ProcessRGFlow.v
 src/process/ProcessAsymptoticFreedom.v
+src/process/ProcessSimplex4D.v
+src/process/ProcessRegge4D.v
+src/process/ProcessGravWave.v
+src/process/ProcessGravWavePMG.v
