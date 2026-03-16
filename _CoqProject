@@ -1049,3 +1049,7 @@ src/process/ProcessHiggsMassCorrected.v
 src/process/ProcessSynthesisStrengthened.v
 src/process/ProcessChainVerified.v
 src/process/ProcessAxiomAudit.v
+
+# === Step 8 Phase 37: Adjunction Rigor ===
+src/process/ProcessUniversalAdjunction.v
+src/process/ProcessIntrinsicDefect.v
