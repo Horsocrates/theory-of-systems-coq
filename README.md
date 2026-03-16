@@ -1,18 +1,20 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-8285_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-9713_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **A complete deductive derivation of mathematics from "something exists" —
-> 8285 machine-verified theorems, 0 Admitted, a verified programming language,
+> **A complete deductive derivation of mathematics and physics from "something exists" —
+> 9713 machine-verified theorems, 0 Admitted, a verified programming language,
 > formally verified quantum measurement theory, the Yang-Mills mass gap theorem
 > (complete proof chain from lattice to Wightman QFT with Δ > 0,
-> plus P4 process mass gap criterion), P4 process mathematics (804 Qed, 49 files),
+> plus P4 process mass gap criterion), P4 process mathematics (2232 Qed, 145 files),
 > the crown jewel `four_principles_complete` (P1∧P2∧P3∧P4),
-> Navier-Stokes regularity, a certified gap calculator extracted to OCaml,
+> Navier-Stokes regularity, Geom⊣Gauge adjunction with W3/W4 rigor,
+> Standard Model derivation (gauge→fermions→Higgs→CP violation→3 generations),
+> a certified gap calculator extracted to OCaml,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -38,10 +40,10 @@ A = exists
           -> N, Q, R, Calculus, Algebra, Probability, Optimization
             -> ToS-Lang (verified programming language)
             -> D1-D6 Reasoning Pipeline (verified structural safety)
-            -> P4 Process Mathematics (all math as process, 804 Qed)
+            -> P4 Process Mathematics (all math as process, 2232 Qed)
               -> Quantum Measurement Theory (spectral dichotomy)
               -> Yang-Mills Mass Gap (Δ > 0, 2030 Qed)
-              -> Navier-Stokes Regularity (654 Qed)
+              -> Navier-Stokes Regularity (869 Qed)
               -> Process Category Theory (P1∧P2∧P3∧P4, 117 Qed)
               -> Process Functional Analysis (L², spectral theory)
               -> Certified Gap Calculator (extracted to OCaml, exact Q arithmetic)
@@ -51,14 +53,14 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 8285 |
-| Coq files | 383 |
+| Proven theorems (Qed) | 9713 |
+| Coq files | 479 |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Stdlib modules | 53 |
-| P4 process mathematics | 49 files, 804 Qed |
+| P4 process mathematics | 145 files, 2232 Qed |
 | Gauge theory (Yang-Mills) | 100 files, 2030 Qed |
-| Navier-Stokes | 34 files, 654 Qed |
+| Navier-Stokes | 34 files, 869 Qed |
 | Four principles complete | proven (`four_principles_complete`) |
 | Yang-Mills mass gap | proven (`yang_mills_mass_gap`) |
 | P4 process mass gap | proven (`su2_has_process_mass_gap`) |
@@ -102,13 +104,14 @@ src/
   Applied Math (8 files)      CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
   Physics (14 files)          Quantum: InnerProduct, Born Rule, Spectral Dichotomy,
                               Entanglement, Decoherence, Qubit, Oscillator, SpinChain...
-  process/ (49 files, 804 Qed) P4 process mathematics: classical theorems, calculus,
+  process/ (145 files, 2232 Qed) P4 process mathematics: classical theorems, calculus,
                               measure theory, ODE, functional analysis, algebra, topology,
-                              category theory — crowned by `four_principles_complete`
+                              category theory, Geom⊣Gauge adjunction, physical interpretation,
+                              Standard Model derivation — crowned by `four_principles_complete`
   gauge/ (100 files, 2030 Qed) Yang-Mills mass gap: complete proof chain from lattice
                               to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`),
                               P4 process mass gap (`su2_has_process_mass_gap`)
-  navier_stokes/ (34 files, 654 Qed)  Galerkin, energy estimates, triadic interaction,
+  navier_stokes/ (34 files, 869 Qed)  Galerkin, energy estimates, triadic interaction,
                               invariant region, Fatou regularity, honest assessment
   stdlib/ (53 files)          Data structures, algorithms, number theory, graphs, algebra,
                               categories, lattices, distributions, statistics, estimation,
@@ -184,13 +187,13 @@ with no intermediate type — proven directly from the Process Continuum Hypothe
 - **Spin Chain**: Bell state entanglement, Ising `⟨Φ+|H|Φ+⟩ = 2J`, ferro/antiferro (32 Qed)
 - **Quantum Dynamics**: Time evolution, norm preservation, conservation laws (24 Qed)
 
-### P4 Process Mathematics (49 files, 804 Qed)
+### P4 Process Mathematics (145 files, 2232 Qed)
 
 All of classical mathematics re-derived as **process constructions** under P4
 ("infinity is process, not object"). Every real number is a Cauchy process
 `nat -> Q`, every theorem is about processes, not completed infinities.
 
-**Ten phases:**
+**Phases 0–10 (Foundation):**
 
 | Phase | Files | Qed | Contents |
 |-------|-------|-----|----------|
@@ -204,6 +207,33 @@ All of classical mathematics re-derived as **process constructions** under P4
 | Topology (8) | 5 | 73 | Open sets, metric, connected, compact, unified |
 | **Category Theory (9)** | **5** | **117** | **Categories, limits/colimits, adjunction, wholeness, four principles** |
 | PMG Generalization (10) | 5 | 68 | Markov, Quantum, Schrodinger, Essential, unified |
+| Computational (11) | 3 | 48 | GapCompute, GapCertificate, GapExtraction + OCaml |
+
+**Phases 13A–37 (Physics Derivation Chain):**
+
+| Phase | Files | Qed | Contents |
+|-------|-------|-----|----------|
+| Geom⊣Gauge Categories (13A) | 4 | 77 | QGeometry, GaugeConfig, F/G functors, basic properties |
+| The Adjunction (14A) | 5 | 78 | Strict fails, Galois connection, defect process, weak adj |
+| Physical Interpretation (15A) | 5 | 80 | Quantization (η), back-reaction (ε), coupling, time, synthesis |
+| Quantum Gravity (16A) | 3 | 60 | Emergence physics, quantum gravity, grand unification |
+| E/R/R Derived (17.5) | 1 | 16 | HasParts, HasInteractions, HasAspects from P1+P2+P3 |
+| E/R/R → Gauge (18) | 5 | 63 | Symmetry, gauge invariance, Wilson loops, gauge group |
+| P3 → Gravity (19) | 5 | 53 | Metric, dynamics, gravity, Einstein, synthesis |
+| L4 → Einstein (19.5) | 3 | 46 | Variational principle, Regge variation, discrete Einstein |
+| Dimension (20) | 5 | 68 | Stability, crossing, dimension selection |
+| Fermions (21) | 5 | 72 | E/R/R→fermion, Pauli exclusion, Grassmann, lattice fermion |
+| Lorentzian (22) | 5 | 58 | Spacetime, Lorentzian signature, light cone, Regge |
+| Standard Model (23) | 5 | 62 | Anomaly cancellation, role constraints, SM group |
+| Higgs (24) | 4 | 58 | Symmetry breaking, Goldstone, Higgs mechanism, electroweak |
+| RG Flow (25) | 3 | 49 | Blocking, RG flow, asymptotic freedom |
+| Gravitational Waves (26) | 4 | 59 | 4D simplex, Regge 4D, grav waves, PMG |
+| Mass Hierarchy (27) | 3 | 38 | Yukawa, mass hierarchy, Step 5 synthesis |
+| Weinberg Angle (28) | 2 | 34 | sin²θ_W = 3/13, electroweak masses, ρ = 1 |
+| Black Holes (29) | 2 | 34 | Schwarzschild on Regge, Hawking temperature, entropy |
+| Path B (Regge+Transfer) | 5 | 81 | Regge, combined transfer, crossing, synthesis |
+| Strengthen+Audit (36) | 3 | 45 | Strengthened synthesis, verified chain, axiom audit |
+| Adjunction Rigor (37) | 2 | 47 | EffLengthFn typeclass, intrinsic defect pseudometric |
 
 **Key theorems:**
 - **`four_principles_complete`** — P1 ∧ P2 ∧ P3 ∧ P4 (the crown jewel)
@@ -245,7 +275,7 @@ Three criteria are machine-verified:
 Earlier phases also include: lattice structure, SU(2) group axioms, strong coupling,
 RG flow, confinement analysis, strip geometry, 2+1D and 3+1D dimension ladder
 
-### Navier-Stokes Regularity (34 files, 654 Qed)
+### Navier-Stokes Regularity (34 files, 869 Qed)
 
 Process-based approach to 3D Navier-Stokes regularity:
 - **Galerkin system**: modal decomposition, energy estimates, process solutions
@@ -280,7 +310,9 @@ Complete chain from first principles to:
 - **P4 Process Mathematics**: IVT/EVT/BW/HB as processes, process calculus (derivative, integral, FTC, Taylor),
   process measure theory (Lebesgue, Fatou), process ODE (Picard, Gronwall), process functional analysis
   (Q^n, L², operators, spectral theory), process algebra (groups, rings, Noetherian), process topology
-  (metric, connected, compact), process category theory (adjunction, limits/colimits, P1∧P2∧P3∧P4) — 49 files, 804 Qed
+  (metric, connected, compact), process category theory (adjunction, limits/colimits, P1∧P2∧P3∧P4),
+  Geom⊣Gauge adjunction (EffLengthFn typeclass, intrinsic defect), physics derivation chain
+  (quantization, coupling, fermions, Higgs, Standard Model, black holes) — 145 files, 2232 Qed
 
 ---
 
@@ -304,13 +336,13 @@ Complete chain from first principles to:
 | Projective Systems | 6 | 197 |
 | Experimental (Casimir, Coulomb, Lamb) | 8 | 300 |
 | Eigenvalue + Ionization | 6 | 130 |
-| P4 Process Mathematics | 49 | 804 |
+| P4 Process Mathematics | 145 | 2232 |
 | Gauge Theory (Yang-Mills) | 100 | 2030 |
-| Navier-Stokes | 34 | 654 |
+| Navier-Stokes | 34 | 869 |
 | Stdlib | 53 | 1089 |
 | Architecture of Reasoning | 6 | 117 |
 | Integration + Extraction | 2 | 11 |
-| **TOTAL** | **383** | **8285** |
+| **TOTAL** | **479** | **9713** |
 
 ### Admitted: **0**
 
