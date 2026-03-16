@@ -1040,3 +1040,7 @@ src/process/ProcessCPViolation.v
 src/process/ProcessFermion3D.v
 src/process/ProcessNielsenNinomiya.v
 src/process/ProcessStaggered.v
+
+# === Step 7 Phase 35.5: Fermion Loop -> Higgs Mass ===
+src/process/ProcessFermionLoop.v
+src/process/ProcessHiggsMassCorrected.v
