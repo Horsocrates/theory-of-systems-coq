@@ -1053,3 +1053,7 @@ src/process/ProcessAxiomAudit.v
 # === Step 8 Phase 37: Adjunction Rigor ===
 src/process/ProcessUniversalAdjunction.v
 src/process/ProcessIntrinsicDefect.v
+
+# === Step 8 Phase 38: String Tension (W8) ===
+src/process/ProcessStringTension.v
+src/process/ProcessLatticeObservable.v
