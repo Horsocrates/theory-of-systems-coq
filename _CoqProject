@@ -972,3 +972,6 @@ src/process/ProcessP3Dynamics.v
 src/process/ProcessP3Gravity.v
 src/process/ProcessP3Einstein.v
 src/process/ProcessP3GravitySynthesis.v
+src/process/ProcessL4Variational.v
+src/process/ProcessReggeVariation.v
+src/process/ProcessDiscreteEinstein.v
