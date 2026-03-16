@@ -975,3 +975,8 @@ src/process/ProcessP3GravitySynthesis.v
 src/process/ProcessL4Variational.v
 src/process/ProcessReggeVariation.v
 src/process/ProcessDiscreteEinstein.v
+src/process/ProcessDimension.v
+src/process/ProcessCrossingD.v
+src/process/ProcessStability.v
+src/process/ProcessDimensionSelect.v
+src/process/ProcessStep3Synthesis.v
