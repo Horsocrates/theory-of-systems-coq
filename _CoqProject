@@ -985,3 +985,8 @@ src/process/ProcessPauliExclusion.v
 src/process/ProcessGrassmann.v
 src/process/ProcessLatticeFermion.v
 src/process/ProcessFermionSynthesis.v
+src/process/ProcessSpacetime.v
+src/process/ProcessLorentzian.v
+src/process/ProcessLightCone.v
+src/process/ProcessLorentzianRegge.v
+src/process/ProcessLorentzianSynthesis.v
