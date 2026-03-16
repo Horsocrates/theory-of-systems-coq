@@ -1073,3 +1073,7 @@ src/process/ProcessProtonStructure.v
 # === Phase 42: Vacuum Energy as Process ===
 src/process/ProcessVacuumEnergy.v
 src/process/ProcessCosmologicalConst.v
+
+# === Phase 43: Final Assessment ===
+src/process/ProcessFinalAssessment.v
+src/process/ProcessOpenQuestions.v
