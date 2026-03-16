@@ -1010,3 +1010,6 @@ src/process/ProcessGravWavePMG.v
 src/process/ProcessYukawa.v
 src/process/ProcessMassHierarchy.v
 src/process/ProcessStep5Synthesis.v
+
+src/process/ProcessWeinbergAngle.v
+src/process/ProcessElectroweakMasses.v
