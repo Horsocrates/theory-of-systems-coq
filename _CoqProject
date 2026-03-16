@@ -980,3 +980,8 @@ src/process/ProcessCrossingD.v
 src/process/ProcessStability.v
 src/process/ProcessDimensionSelect.v
 src/process/ProcessStep3Synthesis.v
+src/process/ProcessERRFermion.v
+src/process/ProcessPauliExclusion.v
+src/process/ProcessGrassmann.v
+src/process/ProcessLatticeFermion.v
+src/process/ProcessFermionSynthesis.v
