@@ -1000,3 +1000,6 @@ src/process/ProcessSymBreaking.v
 src/process/ProcessGoldstone.v
 src/process/ProcessHiggsMechanism.v
 src/process/ProcessElectroweak.v
+src/process/ProcessBlocking.v
+src/process/ProcessRGFlow.v
+src/process/ProcessAsymptoticFreedom.v
