@@ -171,8 +171,8 @@ Qed.
 (*  Part III: The Grand Total  (~4 lemmas)                            *)
 (* ================================================================== *)
 
-(** The Theory of Systems — fully developed *)
-Theorem theory_of_systems_final :
+(** The Theory of Systems — status at Step 3 *)
+Theorem theory_of_systems_step3 :
   (* Step 1: P4 Mathematical Program *)
   (*   12 process instances, four_principles_complete *)
   (* Step 2: Process Physics *)
