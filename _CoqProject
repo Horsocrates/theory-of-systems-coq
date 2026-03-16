@@ -967,3 +967,8 @@ src/process/ProcessERRGauge.v
 src/process/ProcessERRWilson.v
 src/process/ProcessERRGaugeGroup.v
 src/process/ProcessERRGaugeSynthesis.v
+src/process/ProcessP3Metric.v
+src/process/ProcessP3Dynamics.v
+src/process/ProcessP3Gravity.v
+src/process/ProcessP3Einstein.v
+src/process/ProcessP3GravitySynthesis.v
