@@ -1022,3 +1022,7 @@ src/process/ProcessFermionDoubling.v
 
 src/process/ProcessRGHigherOrder.v
 src/process/ProcessRGPrecision.v
+
+src/process/ProcessNonAbelianERR.v
+src/process/ProcessPathOrdering.v
+src/process/ProcessNonAbelianSU2.v
