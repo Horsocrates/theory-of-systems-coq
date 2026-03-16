@@ -1019,3 +1019,6 @@ src/process/ProcessBlackHole.v
 
 src/process/ProcessFermionSpectrum.v
 src/process/ProcessFermionDoubling.v
+
+src/process/ProcessRGHigherOrder.v
+src/process/ProcessRGPrecision.v
