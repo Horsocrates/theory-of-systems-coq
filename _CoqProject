@@ -1007,3 +1007,6 @@ src/process/ProcessSimplex4D.v
 src/process/ProcessRegge4D.v
 src/process/ProcessGravWave.v
 src/process/ProcessGravWavePMG.v
+src/process/ProcessYukawa.v
+src/process/ProcessMassHierarchy.v
+src/process/ProcessStep5Synthesis.v
