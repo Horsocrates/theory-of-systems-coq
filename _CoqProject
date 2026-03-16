@@ -1061,3 +1061,7 @@ src/process/ProcessLatticeObservable.v
 # === Step 8 Phase 39: Derived vs Consistent + Synthesis ===
 src/process/ProcessDerivedVsConsistent.v
 src/process/ProcessStep8Synthesis.v
+
+# === Phase 40: RG Running of sin²θ_W ===
+src/process/ProcessRGWeinberg.v
+src/process/ProcessGUTScale.v
