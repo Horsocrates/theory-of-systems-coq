@@ -996,3 +996,7 @@ src/process/ProcessRoleConstraints.v
 src/process/ProcessStandardModel.v
 src/process/ProcessStep4Synthesis.v
 src/process/ProcessERRDerived.v
+src/process/ProcessSymBreaking.v
+src/process/ProcessGoldstone.v
+src/process/ProcessHiggsMechanism.v
+src/process/ProcessElectroweak.v
