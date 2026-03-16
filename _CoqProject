@@ -1044,3 +1044,8 @@ src/process/ProcessStaggered.v
 # === Step 7 Phase 35.5: Fermion Loop -> Higgs Mass ===
 src/process/ProcessFermionLoop.v
 src/process/ProcessHiggsMassCorrected.v
+
+# === Step 8 Phase 36: Strengthen + Audit ===
+src/process/ProcessSynthesisStrengthened.v
+src/process/ProcessChainVerified.v
+src/process/ProcessAxiomAudit.v
