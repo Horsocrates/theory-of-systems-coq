@@ -1016,3 +1016,6 @@ src/process/ProcessElectroweakMasses.v
 
 src/process/ProcessSchwarzschildRegge.v
 src/process/ProcessBlackHole.v
+
+src/process/ProcessFermionSpectrum.v
+src/process/ProcessFermionDoubling.v
