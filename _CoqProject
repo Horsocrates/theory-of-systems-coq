@@ -1035,3 +1035,8 @@ src/process/ProcessHiggsVEV.v
 src/process/ProcessGaussianQ.v
 src/process/ProcessComplexRules.v
 src/process/ProcessCPViolation.v
+
+# === Step 7 Phase 35: 3+1D Fermion Doubling ===
+src/process/ProcessFermion3D.v
+src/process/ProcessNielsenNinomiya.v
+src/process/ProcessStaggered.v
