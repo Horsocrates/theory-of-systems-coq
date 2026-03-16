@@ -1065,3 +1065,7 @@ src/process/ProcessStep8Synthesis.v
 # === Phase 40: RG Running of sin²θ_W ===
 src/process/ProcessRGWeinberg.v
 src/process/ProcessGUTScale.v
+
+# === Step 9 Phase 41: Proton Mass Structure ===
+src/process/ProcessDimTransmutation.v
+src/process/ProcessProtonStructure.v
