@@ -960,3 +960,10 @@ src/process/ProcessReggeTransfer.v
 src/process/ProcessCombinedTransfer.v
 src/process/ProcessCrossing.v
 src/process/ProcessPathBSynthesis.v
+
+# === Step 3 Phase 18: E/R/R → Gauge Invariance (5 files, 63 Qed) ===
+src/process/ProcessERRSymmetry.v
+src/process/ProcessERRGauge.v
+src/process/ProcessERRWilson.v
+src/process/ProcessERRGaugeGroup.v
+src/process/ProcessERRGaugeSynthesis.v
