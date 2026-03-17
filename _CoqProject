@@ -1085,3 +1085,7 @@ src/process/ProcessUncertaintyBound.v
 # === Step 10 Phase 45: Born Rule from L3 ===
 src/process/ProcessBornRule.v
 src/process/ProcessProbability.v
+
+# === Step 10 Phase 46: Entanglement from P1 ===
+src/process/ProcessEntanglement.v
+src/process/ProcessBellInequality.v
