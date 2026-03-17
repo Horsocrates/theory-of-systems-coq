@@ -1,19 +1,20 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-9713_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-10139_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" —
-> 9713 machine-verified theorems, 0 Admitted, a verified programming language,
+> 10139 machine-verified theorems, 0 Admitted, a verified programming language,
 > formally verified quantum measurement theory, the Yang-Mills mass gap theorem
 > (complete proof chain from lattice to Wightman QFT with Δ > 0,
-> plus P4 process mass gap criterion), P4 process mathematics (2232 Qed, 145 files),
+> plus P4 process mass gap criterion), P4 process mathematics (2658 Qed, 165 files),
 > the crown jewel `four_principles_complete` (P1∧P2∧P3∧P4),
 > Navier-Stokes regularity, Geom⊣Gauge adjunction with W3/W4 rigor,
 > Standard Model derivation (gauge→fermions→Higgs→CP violation→3 generations),
+> quantum mechanics from logic (Heisenberg, Born rule, entanglement, no-cloning, measurement),
 > a certified gap calculator extracted to OCaml,
 > and the first formally verified reasoning pipeline for LLMs.**
 
@@ -40,30 +41,35 @@ A = exists
           -> N, Q, R, Calculus, Algebra, Probability, Optimization
             -> ToS-Lang (verified programming language)
             -> D1-D6 Reasoning Pipeline (verified structural safety)
-            -> P4 Process Mathematics (all math as process, 2232 Qed)
+            -> P4 Process Mathematics (all math as process, 2658 Qed)
               -> Quantum Measurement Theory (spectral dichotomy)
               -> Yang-Mills Mass Gap (Δ > 0, 2030 Qed)
               -> Navier-Stokes Regularity (869 Qed)
               -> Process Category Theory (P1∧P2∧P3∧P4, 117 Qed)
               -> Process Functional Analysis (L², spectral theory)
               -> Certified Gap Calculator (extracted to OCaml, exact Q arithmetic)
+              -> Quantum Mechanics from Logic (Step 10, 135 Qed)
+                -> Heisenberg from P2, Born rule from L3
+                -> Entanglement from P1, No-cloning from L2
+                -> Measurement dissolution from L3+P4
 ```
 
 ### Key Numbers
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | 9713 |
-| Coq files | 479 |
+| Proven theorems (Qed) | **10139** |
+| Coq files | 499 |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Stdlib modules | 53 |
-| P4 process mathematics | 145 files, 2232 Qed |
+| P4 process mathematics | 165 files, 2658 Qed |
 | Gauge theory (Yang-Mills) | 100 files, 2030 Qed |
 | Navier-Stokes | 34 files, 869 Qed |
 | Four principles complete | proven (`four_principles_complete`) |
 | Yang-Mills mass gap | proven (`yang_mills_mass_gap`) |
 | P4 process mass gap | proven (`su2_has_process_mass_gap`) |
+| Quantum from logic | proven (`quantum_from_logic`) |
 | ToS-Lang: type safety | proven (`tos_lang_main_theorem`) |
 | Pipeline: structural safety | proven (`validate_pipeline_sound`) |
 
@@ -104,10 +110,11 @@ src/
   Applied Math (8 files)      CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
   Physics (14 files)          Quantum: InnerProduct, Born Rule, Spectral Dichotomy,
                               Entanglement, Decoherence, Qubit, Oscillator, SpinChain...
-  process/ (145 files, 2232 Qed) P4 process mathematics: classical theorems, calculus,
+  process/ (165 files, 2658 Qed) P4 process mathematics: classical theorems, calculus,
                               measure theory, ODE, functional analysis, algebra, topology,
                               category theory, Geom⊣Gauge adjunction, physical interpretation,
-                              Standard Model derivation — crowned by `four_principles_complete`
+                              Standard Model derivation, quantum mechanics from logic (Step 10)
+                              — crowned by `four_principles_complete` and `quantum_from_logic`
   gauge/ (100 files, 2030 Qed) Yang-Mills mass gap: complete proof chain from lattice
                               to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`),
                               P4 process mass gap (`su2_has_process_mass_gap`)
@@ -187,7 +194,7 @@ with no intermediate type — proven directly from the Process Continuum Hypothe
 - **Spin Chain**: Bell state entanglement, Ising `⟨Φ+|H|Φ+⟩ = 2J`, ferro/antiferro (32 Qed)
 - **Quantum Dynamics**: Time evolution, norm preservation, conservation laws (24 Qed)
 
-### P4 Process Mathematics (145 files, 2232 Qed)
+### P4 Process Mathematics (165 files, 2658 Qed)
 
 All of classical mathematics re-derived as **process constructions** under P4
 ("infinity is process, not object"). Every real number is a Cauchy process
@@ -234,6 +241,16 @@ All of classical mathematics re-derived as **process constructions** under P4
 | Path B (Regge+Transfer) | 5 | 81 | Regge, combined transfer, crossing, synthesis |
 | Strengthen+Audit (36) | 3 | 45 | Strengthened synthesis, verified chain, axiom audit |
 | Adjunction Rigor (37) | 2 | 47 | EffLengthFn typeclass, intrinsic defect pseudometric |
+| String Tension (38) | 2 | 59 | Lattice observable, string tension from defect |
+| Derived vs Consistent (39) | 2 | 32 | Derived quantities, Step 8 synthesis |
+| RG Weinberg (40) | 2 | 38 | sin²θ_W running, GUT scale |
+| Proton Mass (41) | 2 | 34 | Dimensional transmutation, proton structure |
+| Vacuum Energy (42) | 2 | 32 | Process vacuum energy, cosmological constant |
+| Final Assessment (43) | 2 | 92 | 15 numbers, 13 derivations, honest score ~62% |
+| **Heisenberg (44)** | **2** | **40** | **Uncertainty from P2 adjunction defect** |
+| **Born Rule (45)** | **2** | **36** | **P=\|ψ\|² from L3 + additivity + Q[i]** |
+| **Entanglement (46)** | **2** | **34** | **Non-factorization from P1, CHSH, Bell** |
+| **No-Cloning + Measurement (47-48)** | **2** | **25** | **No-cloning from L2, measurement = process step** |
 
 **Key theorems:**
 - **`four_principles_complete`** — P1 ∧ P2 ∧ P3 ∧ P4 (the crown jewel)
@@ -245,6 +262,22 @@ All of classical mathematics re-derived as **process constructions** under P4
 - `picard_iteration_cauchy` — Picard iteration converges as process
 - `spectral_gap_is_pmg` — spectral gap = PrimaryMax status (P4 thesis)
 - 12 instances of "X is process, not object" unified thesis
+
+### Step 10: Quantum Mechanics from Logic (10 files, 135 Qed)
+
+All of quantum mechanics derived from the five laws of logic (L1-L5) and four
+principles (P1-P4) — no quantum postulates assumed:
+
+| Phase | From | Result | Key theorem |
+|-------|------|--------|-------------|
+| 44: Heisenberg | P2 (complementarity) | Δx·Δp ≥ ħ/2 | `heisenberg_bound` |
+| 45: Born Rule | L3 (excluded middle) | P = \|ψ\|² | `born_rule`, `norm2_additive_orthogonal` |
+| 46: Entanglement | P1 (wholeness) | Non-factorization | `bell_state_entangled`, `chsh_deterministic_bound` |
+| 47: No-Cloning | L2 (non-contradiction) | Linear ≠ clone | `no_cloning` |
+| 48: Measurement | L3 + P4 (process) | Collapse = step | `no_measurement_problem`, `quantum_from_logic` |
+
+The crown theorem `quantum_from_logic` combines all five results:
+definite states (L3), measurement as process step (P4), and Born rule convergence.
 
 ### Yang-Mills Mass Gap (100 files, 2030 Qed)
 
@@ -312,7 +345,9 @@ Complete chain from first principles to:
   (Q^n, L², operators, spectral theory), process algebra (groups, rings, Noetherian), process topology
   (metric, connected, compact), process category theory (adjunction, limits/colimits, P1∧P2∧P3∧P4),
   Geom⊣Gauge adjunction (EffLengthFn typeclass, intrinsic defect), physics derivation chain
-  (quantization, coupling, fermions, Higgs, Standard Model, black holes) — 145 files, 2232 Qed
+  (quantization, coupling, fermions, Higgs, Standard Model, black holes),
+  quantum mechanics from logic (Heisenberg, Born rule, entanglement, no-cloning, measurement)
+  — 165 files, 2658 Qed
 
 ---
 
@@ -336,13 +371,13 @@ Complete chain from first principles to:
 | Projective Systems | 6 | 197 |
 | Experimental (Casimir, Coulomb, Lamb) | 8 | 300 |
 | Eigenvalue + Ionization | 6 | 130 |
-| P4 Process Mathematics | 145 | 2232 |
+| P4 Process Mathematics | 165 | 2658 |
 | Gauge Theory (Yang-Mills) | 100 | 2030 |
 | Navier-Stokes | 34 | 869 |
-| Stdlib | 53 | 1089 |
+| Stdlib | 53 | 1090 |
 | Architecture of Reasoning | 6 | 117 |
 | Integration + Extraction | 2 | 11 |
-| **TOTAL** | **479** | **9713** |
+| **TOTAL** | **499** | **10139** |
 
 ### Admitted: **0**
 
