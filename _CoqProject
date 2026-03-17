@@ -1135,3 +1135,9 @@ src/process/Process3DSigmaCurve.v
 src/process/ProcessDarkMatter.v
 src/process/ProcessDimensionLadder.v
 src/process/ProcessSigmaM3.v
+src/process/ProcessGravitonSelfEnergy.v
+src/process/Process3DGlueball.v
+src/process/ProcessOSConnection.v
+src/process/ProcessNeutrinoMass.v
+src/process/ProcessClusterConnection.v
+src/process/ProcessExactRGConnection.v

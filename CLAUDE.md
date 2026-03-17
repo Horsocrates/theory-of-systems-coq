@@ -1,9 +1,9 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
 ## Stats (as of 2026-03-17)
-- **Qed:** 10601
+- **Qed:** 10707
 - **Admitted:** 0
-- **Files:** 523
+- **Files:** 529
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
