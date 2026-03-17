@@ -1098,3 +1098,6 @@ src/process/ProcessMeasurement.v
 
 # === Phase 49: sigma(beta) Curve ===
 src/process/ProcessSigmaCurve.v
+
+# === Phase 50: Glueball Mass ===
+src/process/ProcessGlueballMass.v
