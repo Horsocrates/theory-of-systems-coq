@@ -1107,3 +1107,6 @@ src/process/ProcessSigmaHigherM.v
 
 # === Phase 50.5b: Physical Sigma ===
 src/process/ProcessPhysicalSigma.v
+
+# === Phase 51: 2D Physics ===
+src/process/Process2DPhysics.v
