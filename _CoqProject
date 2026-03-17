@@ -1110,3 +1110,4 @@ src/process/ProcessPhysicalSigma.v
 
 # === Phase 51: 2D Physics ===
 src/process/Process2DPhysics.v
+src/process/ProcessRGTrajectory.v
