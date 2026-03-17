@@ -1119,3 +1119,6 @@ src/process/ProcessSU3Gauge.v
 # === Phase 56: Fermion Determinant ===
 src/process/ProcessWilsonDirac.v
 src/process/ProcessFermionDet.v
+
+# === Step 12 Phase 58: Synthesis ===
+src/process/ProcessStep12Synthesis.v
