@@ -1141,3 +1141,11 @@ src/process/ProcessOSConnection.v
 src/process/ProcessNeutrinoMass.v
 src/process/ProcessClusterConnection.v
 src/process/ProcessExactRGConnection.v
+src/process/ProcessUnifiedLattice.v
+src/process/ProcessGravGaugeCorrection.v
+src/process/ProcessBHMicrostates.v
+src/process/ProcessThreeCoupling.v
+src/process/ProcessExtendedCP.v
+src/process/ProcessEFTHierarchy.v
+src/process/ProcessDeconfining.v
+src/process/ProcessSpinStatistics.v
