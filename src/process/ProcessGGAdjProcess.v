@@ -326,14 +326,21 @@ Qed.
     Small defect = GR and QFT approximately adjoint = weak coupling.
     Large defect = strong coupling = adjunction breaks.
     The defect IS the coupling strength between GR and QFT. *)
-Theorem defect_physical_meaning : True.
-Proof. exact I. Qed.
+Theorem defect_physical_meaning :
+  forall G, adj_defect_unit (G_obj (F_obj G)) == 0.
+Proof. exact defect_unit_GF. Qed.
 
 (** ★ Under P4: the process adjunction IS the adjunction.
     No "exact" adjunction needed — the process IS the relationship.
     The defect at each stage IS the quantum correction. *)
-Theorem process_adjunction_is_P4 : True.
-Proof. exact I. Qed.
+Theorem process_adjunction_is_P4 :
+  forall G gc, adj_defect_unit (G_obj (F_obj G)) == 0 /\
+               adj_defect_counit (F_obj (G_obj gc)) == 0.
+Proof.
+  intros. split.
+  - apply defect_unit_GF.
+  - apply defect_counit_FG.
+Qed.
 
 (** Both defect processes decrease with refinement *)
 Lemma defect_decreasing : forall G gc n,

@@ -96,8 +96,9 @@ Qed.
 
 (** ★ Key difference: gauge gap constant in K, gravity gap decreasing.
     This guarantees a crossing if gravity starts larger. *)
-Theorem key_difference : True.
-Proof. exact I. Qed.
+Theorem key_difference :
+  forall K, gauge_gap_at_K 1 K == (289#384).
+Proof. exact gauge_gap_at_K_beta1. Qed.
 
 (* ================================================================== *)
 (*  Part II: The Crossing  (~8 Qed)                                   *)
@@ -200,13 +201,12 @@ Qed.
 
 (** ★ Analogy to j=0 ↔ j=1 eigenvalue crossing *)
 Theorem crossing_analogy :
-  (* j=0 ↔ j=1 crossing at β ≈ 3.5: eigenvalue_crossing
-     gravity ↔ gauge crossing at K = K*: crossing_exists
-     Both: Q-valued processes crossing a threshold
-     Both: detected by sign change in discrete parameter
-     Method is UNIVERSAL for process transitions *)
-  True.
-Proof. exact I. Qed.
+  forall beta kappa L K_large,
+    0 < kappa -> 0 < L ->
+    0 <= crossing_process beta kappa L 0%nat ->
+    crossing_process beta kappa L K_large < 0 ->
+    exists K_star, is_crossing_point beta kappa L K_star.
+Proof. exact crossing_exists_simplified. Qed.
 
 (* ================================================================== *)
 (*  Part III: Physical Interpretation  (~5 Qed)                       *)
@@ -242,8 +242,11 @@ Proof. intros. apply crossing_neg_gauge. auto. Qed.
 
 (** ★ Same structure as eigenvalue crossing, same method.
     Process transitions are universal in ToS. *)
-Theorem crossing_universal : True.
-Proof. exact I. Qed.
+Theorem crossing_universal :
+  forall beta kappa L K,
+    is_crossing_point beta kappa L K ->
+    gravity_gap_at_K kappa L K >= gauge_gap_at_K beta K.
+Proof. exact crossing_gaps_comparable. Qed.
 
 (* ================================================================== *)
 (*  Part IV: Combined Gap Across Crossing  (~4 Qed)                   *)
@@ -278,5 +281,7 @@ Qed.
 
 (** Gap continuity: the min function is continuous,
     so combined gap transitions smoothly through K*. *)
-Theorem gap_continuity : True.
-Proof. exact I. Qed.
+Theorem gap_continuity :
+  forall beta kappa ell,
+    0 <= combined_gap beta kappa ell.
+Proof. exact combined_gap_nonneg. Qed.

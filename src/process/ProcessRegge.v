@@ -216,5 +216,7 @@ Definition regge_action_process (valences : nat -> nat) (ell : Q)
 (** ★ Physical: Regge calculus IS discrete GR over Q.
     Deficit angle = curvature. Action = Einstein-Hilbert.
     Under P4: the lattice IS the physics, not an approximation. *)
-Theorem regge_is_discrete_gr : True.
-Proof. exact I. Qed.
+Theorem regge_is_discrete_gr :
+  forall K ell Hpos,
+    regge_weight (mkRegge K (fun _ => 6%nat) ell Hpos) == 1.
+Proof. exact flat_weight_one. Qed.

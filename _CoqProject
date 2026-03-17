@@ -1130,3 +1130,8 @@ src/process/ProcessStrongCouplingComparison.v
 src/process/ProcessWightmanConnection.v
 src/process/ProcessThermodynamicConnection.v
 src/process/ProcessCorrelationConnection.v
+src/process/ProcessStrongCP.v
+src/process/Process3DSigmaCurve.v
+src/process/ProcessDarkMatter.v
+src/process/ProcessDimensionLadder.v
+src/process/ProcessSigmaM3.v

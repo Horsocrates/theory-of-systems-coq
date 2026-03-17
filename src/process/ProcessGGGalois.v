@@ -199,5 +199,13 @@ Qed.
     between geometric coarseness and field triviality.
     Coarser geometry → more trivial gauge (all links 1).
     More trivial gauge → more uniform effective geometry. *)
-Theorem galois_physical_meaning : True.
-Proof. exact I. Qed.
+Theorem galois_physical_meaning :
+  (forall G e, In e (geom_edges (G_obj (F_obj G))) ->
+    edge_length e == 1 # 2) /\
+  (forall gc k, (k < length (gc_edges (F_obj (G_obj gc))))%nat ->
+    gc_nth_link (F_obj (G_obj gc)) k == 1).
+Proof.
+  split.
+  - apply galois_upper.
+  - apply FG_loses_links.
+Qed.

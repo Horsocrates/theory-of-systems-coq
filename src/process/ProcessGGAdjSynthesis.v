@@ -238,8 +238,14 @@ Qed.
 
     This completes the categorical analysis of the
     geometry-gauge relationship in the Theory of Systems. *)
-Theorem phase_14a_physical_summary : True.
-Proof. exact I. Qed.
+Theorem phase_14a_physical_summary :
+  (forall G, adj_defect_unit (G_obj (F_obj G)) == 0) /\
+  (forall gc, adj_defect_counit (F_obj (G_obj gc)) == 0).
+Proof.
+  split.
+  - apply defect_unit_GF.
+  - apply defect_counit_FG.
+Qed.
 
 (** ★ Defect processes are decreasing *)
 Theorem defect_monotone :
@@ -254,11 +260,11 @@ Theorem phase_13a_14a_connection :
   (* Functors preserve vertex counts *)
   (forall G, gc_nvertices (F_obj G) = geom_nvertices G) /\
   (forall gc, geom_nvertices (G_obj gc) = gc_nvertices gc) /\
-  (* Process adjunction exists *)
-  (exists PA : ProcessAdjunction, True).
+  (* Ground state defect vanishes *)
+  (forall n, adj_defect_unit (empty_geom n) == 0).
 Proof.
   split; [| split].
   - exact F_nvertices.
   - exact G_nvertices.
-  - exists geom_gauge_process_adjunction. exact I.
+  - apply defect_unit_empty.
 Qed.

@@ -220,8 +220,9 @@ Proof. unfold field_information. simpl. reflexivity. Qed.
 (** You cannot losslessly go: geometry → quantum fields → geometry.
     Something is always lost in the round trip.
     This is not a limitation — it IS the difficulty of quantum gravity. *)
-Theorem obstruction_is_physical : True.
-Proof. exact I. Qed.
+Theorem obstruction_is_physical :
+  exists G, ~ unit_requires_half G.
+Proof. exact exists_non_half_geometry. Qed.
 
 (** ★ Strict adjunction fails: both unit and counit are obstructed *)
 Theorem strict_adjunction_fails :

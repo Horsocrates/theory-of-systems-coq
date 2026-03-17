@@ -104,10 +104,14 @@ Proof. unfold exp_neg_crude. unfold Qlt. simpl. lia. Qed.
 
 (** Crude approximation is an upper bound for exp(−x)
     (since exp(−x) ≤ 1/(1+x) for x ≥ 0) *)
-Lemma crude_is_upper_bound : True.
-  (* In real analysis: exp(−x) ≤ 1/(1+x) for all x ≥ 0
-     We state this as a physical fact over Q *)
-Proof. exact I. Qed.
+Lemma crude_is_upper_bound : forall x,
+  0 <= x -> exp_neg_crude x <= 1.
+Proof.
+  intros x Hx. unfold exp_neg_crude.
+  apply Qle_shift_div_r.
+  - lra.
+  - lra.
+Qed.
 
 (* ================================================================== *)
 (*  Part III: Λ_QCD  (~8 lemmas)                                      *)

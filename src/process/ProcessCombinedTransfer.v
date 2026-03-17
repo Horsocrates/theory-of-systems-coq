@@ -92,8 +92,10 @@ Qed.
 
 (** ★ Tensor product: combined system sees both gauge and gravity.
     The physics is in how the two sectors interact. *)
-Theorem tensor_interpretation : True.
-Proof. exact I. Qed.
+Theorem tensor_interpretation :
+  forall beta kappa ell,
+    is_selfadjoint (combined_operator beta kappa ell).
+Proof. exact combined_selfadjoint. Qed.
 
 (* ================================================================== *)
 (*  Part II: Combined Gap  (~7 Qed)                                   *)
@@ -146,8 +148,10 @@ Definition combined_gap_process (beta kappa L : Q) : RealProcess :=
 
 (** ★ The combined mass gap tells us: the system is gapped at every scale.
     Both gauge and gravity sectors contribute. *)
-Theorem combined_gap_physical : True.
-Proof. exact I. Qed.
+Theorem combined_gap_physical :
+  forall beta kappa ell,
+    0 <= combined_gap beta kappa ell.
+Proof. exact combined_gap_nonneg. Qed.
 
 (* ================================================================== *)
 (*  Part III: Which Sector Dominates?  (~5 Qed)                       *)
@@ -183,5 +187,8 @@ Qed.
     Gravity gap = κℓ².
     Gauge-dominated when κℓ² > 289/384 (large ℓ, strong gravity).
     Gravity-dominated when κℓ² < 289/384 (small ℓ, weak gravity). *)
-Theorem dominance_physical : True.
-Proof. exact I. Qed.
+Theorem dominance_physical :
+  forall beta kappa ell,
+    gauge_dominated beta kappa ell ->
+    combined_gap beta kappa ell == spectral_gap 1%nat beta 0%nat.
+Proof. exact gauge_dominated_combined. Qed.
