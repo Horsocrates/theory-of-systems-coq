@@ -1149,3 +1149,13 @@ src/process/ProcessExtendedCP.v
 src/process/ProcessEFTHierarchy.v
 src/process/ProcessDeconfining.v
 src/process/ProcessSpinStatistics.v
+src/process/ProcessHolographic.v
+src/process/ProcessPlanckLength.v
+src/process/ProcessProtonDecay.v
+src/process/ProcessInflation.v
+src/process/ProcessDecoherence.v
+src/process/ProcessQuantumZeno.v
+src/process/ProcessSuperposition.v
+src/process/ProcessContinuumLimit.v
+src/process/ProcessAccuracyTable.v
+src/process/ProcessWave5Synthesis.v
