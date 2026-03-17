@@ -44,6 +44,7 @@ From ToS Require Import process.ProcessAsymptoticFreedom.
 From ToS Require Import process.ProcessAnomaly.
 From ToS Require Import process.ProcessAnomalyCancel.
 From ToS Require Import process.ProcessChainVerified.
+From ToS Require Import process.ProcessPhysicalSigma.
 
 (* ================================================================== *)
 (*  Part I: Every Computed Number  (~15 lemmas)                       *)
@@ -94,6 +95,18 @@ Proof. unfold bh_entropy. vm_compute. reflexivity. Qed.
 (** 10. String tension order 1 = 289/336 (corrected: gap/t₀, t₀=7/8) *)
 Theorem number_sigma : string_tension 1 1 == 289 # 336.
 Proof. exact sigma_order_1. Qed.
+
+(** 10b. Physical sigma ratio I1/I0 at beta=1 M=1 = 9/20
+    sigma_phys = -ln(9/20) = ln(20/9) ~ 0.799, exact 0.807 -> 1% *)
+Theorem number_sigma_physical_b1 :
+  I1_partial 1 1 / I0_partial 1 1 == 9 # 20.
+Proof. exact ratio_b1_M1. Qed.
+
+(** 10c. Physical sigma ratio I1/I0 at beta=2 M=2 = 19/27
+    sigma_phys = -ln(19/27) = ln(27/19) ~ 0.352, exact 0.360 -> 2% *)
+Theorem number_sigma_physical_b2 :
+  I1_partial 2 2 / I0_partial 2 2 == 19 # 27.
+Proof. exact ratio_b2_M2. Qed.
 
 (** 11. Beta function coefficient: beta_0(SU3, 6f) = 49/88 *)
 Theorem number_beta0 : beta_0 3%nat 6%nat == 49 # 88.
@@ -300,6 +313,8 @@ Theorem all_numbers :
   rho_parameter r_physical == 1 /\
   rg_step 4 == 4 /\
   string_tension 1 1 == 289 # 336 /\
+  I1_partial 1 1 / I0_partial 1 1 == 9 # 20 /\
+  I1_partial 2 2 / I0_partial 2 2 == 19 # 27 /\
   vacuum_eigenvalue 1 == 7 # 8.
 Proof.
   refine (conj spectral_gap_beta_1
@@ -307,7 +322,9 @@ Proof.
       (conj number_wz_ratio
         (conj rho_from_two_roles
           (conj rg_fixed_point_4
-            (conj sigma_order_1 vacuum_eigenvalue_beta1)))))).
+            (conj sigma_order_1
+              (conj ratio_b1_M1
+                (conj ratio_b2_M2 vacuum_eigenvalue_beta1)))))))).
 Qed.
 
 (** ★ Axiom summary *)

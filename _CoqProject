@@ -1104,3 +1104,6 @@ src/process/ProcessGlueballMass.v
 
 # === Phase 50.5: Sigma at Higher M ===
 src/process/ProcessSigmaHigherM.v
+
+# === Phase 50.5b: Physical Sigma ===
+src/process/ProcessPhysicalSigma.v

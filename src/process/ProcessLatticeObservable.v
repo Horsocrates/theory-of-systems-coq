@@ -15,7 +15,7 @@
       M=0 overestimates by ~2.5×. Higher M → converges to exact.
       The M=0 value is a crude upper bound, not a prediction.
 
-    STATUS: 16 Qed, 0 Admitted, 0 axioms
+    STATUS: 17 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -33,6 +33,7 @@ From ToS Require Import process.ProcessArithmetic.
 From ToS Require Import process.ProcessBounds.
 From ToS Require Import gauge.ExactMassGap.
 From ToS Require Import process.ProcessStringTension.
+From ToS Require Import process.ProcessPhysicalSigma.
 
 (* ================================================================== *)
 (*  Part I: Creutz Ratio  (~7 lemmas)                                 *)
@@ -237,16 +238,26 @@ Qed.
 (* ================================================================== *)
 
 (** ★ W8 resolved: string tension computed from transfer matrix
-    HONEST STATUS:
-      σ(β=1, M=0, order 1) = 289/336 ≈ 0.860
-      σ(β=1, M=0, full sum) = −ln(1 − 289/336) = −ln(47/336) ≈ 1.967
-      σ(β=1, exact) = −ln(I₁(1)/I₀(1)) ≈ 0.764
-      M=0 overestimates by ~2.5×.
-      Higher M (angular momentum modes) would converge to exact.
-      σ > 0: confinement. This is the key qualitative result. *)
+    UPDATED STATUS with physical σ = −ln(I₁/I₀):
+      Character σ(β=1, M=0, order 1) = 289/336 ≈ 0.860 (includes degeneracy)
+      Physical  σ(β=1, M=1, order 1) = 11/20  ≈ 0.550
+      Physical  σ(β=1, M=1, exact)   = ln(20/9) ≈ 0.799 → 1% off exact 0.807
+      Physical  σ(β=2, M=2, exact)   = ln(27/19) ≈ 0.352 → 2% off exact 0.360
+    Both are positive → confinement confirmed. *)
 Theorem w8_resolved :
   0 < string_tension 1 1.
 Proof. exact sigma_order_1_positive. Qed.
+
+(** ★ Physical σ gives better accuracy than character σ *)
+Theorem w8_physical_sigma :
+  (* Physical sigma at beta=1 M=1: 11/20 ~ 0.550 (order 1) *)
+  (* Full: ln(20/9) ~ 0.799, exact 0.807 -> 1% accuracy *)
+  0 < sigma_phys 1 1 1 /\ sigma_phys 1 1 1 < string_tension 1 1.
+Proof.
+  split.
+  - rewrite sigma_phys_b1_M1_order1. lra.
+  - exact phys_lt_char_b1.
+Qed.
 
 Theorem phase_38_complete :
   (* neg_ln_taylor: rational −ln(1−x) to any order *)

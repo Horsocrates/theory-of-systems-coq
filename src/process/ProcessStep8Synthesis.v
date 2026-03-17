@@ -11,7 +11,7 @@
     - W3: effective_length → universal EffLengthFn class (Phase 37)
     - W4: defect normalization → intrinsic_defect metric (Phase 37)
     - W7: derived vs consistent → explicit IF-conditions (Phase 39)
-    - W8: no experiment → string tension σ computed (Phase 38, corrected)
+    - W8: no experiment → physical σ computed, 1% accuracy (Phase 50.5b)
     - W9: axiom audit → only classic needed (Phase 36)
     - W10: circularity → honest classification (Phase 36)
 
@@ -31,6 +31,7 @@ From ToS Require Import process.ProcessUniversalAdjunction.
 From ToS Require Import process.ProcessIntrinsicDefect.
 From ToS Require Import process.ProcessStringTension.
 From ToS Require Import process.ProcessDerivedVsConsistent.
+From ToS Require Import process.ProcessPhysicalSigma.
 
 (* ================================================================== *)
 (*  Part I: Weak Point Status  (~7 lemmas)                            *)
@@ -66,9 +67,10 @@ Theorem w7_status :
 Proof. exact w7_resolved. Qed.
 
 (** W8: no experimental number → string tension σ
-    Phase 38: ProcessStringTension computes σ(β=1, M=0)
-    Uses gap/t₀ = 289/336 (corrected: t₀ = 7/8 ≠ 1)
-    M=0 overestimates by ~2.5× vs exact −ln(I₁/I₀) ≈ 0.764 *)
+    Phase 38: ProcessStringTension computes character σ(β=1, M=0)
+    Phase 50.5b: ProcessPhysicalSigma computes physical σ = −ln(I₁/I₀)
+    Physical σ(β=1, M=1): ratio=9/20, σ=ln(20/9)≈0.799, exact 0.807 → 1%
+    Physical σ(β=2, M=2): ratio=19/27, σ=ln(27/19)≈0.352, exact 0.360 → 2% *)
 Theorem w8_status :
   0 < string_tension 1 1 /\
   string_tension 1 1 == 289 # 336 /\
@@ -78,6 +80,14 @@ Proof.
   - exact sigma_order_1_positive.
   - exact sigma_order_1.
   - exact sigma_cauchy.
+Qed.
+
+(** W8 physical: direct Bessel ratio gives 1% accuracy *)
+Theorem w8_physical :
+  I1_partial 1 1 / I0_partial 1 1 == 9 # 20 /\
+  I1_partial 2 2 / I0_partial 2 2 == 19 # 27.
+Proof.
+  split; [exact ratio_b1_M1 | exact ratio_b2_M2].
 Qed.
 
 (** W9: axiom audit — only classic needed *)
