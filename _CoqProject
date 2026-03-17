@@ -1077,3 +1077,7 @@ src/process/ProcessCosmologicalConst.v
 # === Phase 43: Final Assessment ===
 src/process/ProcessFinalAssessment.v
 src/process/ProcessOpenQuestions.v
+
+# === Step 10 Phase 44: Heisenberg from P2 ===
+src/process/ProcessHeisenberg.v
+src/process/ProcessUncertaintyBound.v
