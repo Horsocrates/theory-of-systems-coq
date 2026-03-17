@@ -1089,3 +1089,9 @@ src/process/ProcessProbability.v
 # === Step 10 Phase 46: Entanglement from P1 ===
 src/process/ProcessEntanglement.v
 src/process/ProcessBellInequality.v
+
+# === Step 10 Phase 47: No-Cloning from L2 ===
+src/process/ProcessNoCloning.v
+
+# === Step 10 Phase 48: Measurement from L3+P4 ===
+src/process/ProcessMeasurement.v
