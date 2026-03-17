@@ -1101,3 +1101,6 @@ src/process/ProcessSigmaCurve.v
 
 # === Phase 50: Glueball Mass ===
 src/process/ProcessGlueballMass.v
+
+# === Phase 50.5: Sigma at Higher M ===
+src/process/ProcessSigmaHigherM.v
