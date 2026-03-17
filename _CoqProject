@@ -1095,3 +1095,6 @@ src/process/ProcessNoCloning.v
 
 # === Step 10 Phase 48: Measurement from L3+P4 ===
 src/process/ProcessMeasurement.v
+
+# === Phase 49: sigma(beta) Curve ===
+src/process/ProcessSigmaCurve.v
