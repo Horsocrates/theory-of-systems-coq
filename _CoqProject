@@ -1115,3 +1115,7 @@ src/process/ProcessCorrelationLength.v
 src/process/ProcessStep11Synthesis.v
 src/process/ProcessSU3Matrix.v
 src/process/ProcessSU3Gauge.v
+
+# === Phase 56: Fermion Determinant ===
+src/process/ProcessWilsonDirac.v
+src/process/ProcessFermionDet.v
