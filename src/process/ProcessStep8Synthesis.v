@@ -11,7 +11,7 @@
     - W3: effective_length → universal EffLengthFn class (Phase 37)
     - W4: defect normalization → intrinsic_defect metric (Phase 37)
     - W7: derived vs consistent → explicit IF-conditions (Phase 39)
-    - W8: no experiment → string tension σ matches literature (Phase 38)
+    - W8: no experiment → string tension σ computed (Phase 38, corrected)
     - W9: axiom audit → only classic needed (Phase 36)
     - W10: circularity → honest classification (Phase 36)
 
@@ -66,10 +66,12 @@ Theorem w7_status :
 Proof. exact w7_resolved. Qed.
 
 (** W8: no experimental number → string tension σ
-    Phase 38: ProcessStringTension computes σ(β=1) ≈ 1.0-1.4 *)
+    Phase 38: ProcessStringTension computes σ(β=1, M=0)
+    Uses gap/t₀ = 289/336 (corrected: t₀ = 7/8 ≠ 1)
+    M=0 overestimates by ~2.5× vs exact −ln(I₁/I₀) ≈ 0.764 *)
 Theorem w8_status :
   0 < string_tension 1 1 /\
-  string_tension 1 1 == 289 # 384 /\
+  string_tension 1 1 == 289 # 336 /\
   is_Cauchy sigma_process.
 Proof.
   split; [| split].
@@ -102,7 +104,7 @@ Theorem step8_complete :
   True /\
   (* W7: derived vs consistent → 4 forced, 5 natural, 3 chosen *)
   (count_forced = 4%nat /\ count_natural = 5%nat /\ count_chosen = 3%nat) /\
-  (* W8: string tension → σ(β=1) matches lattice QCD *)
+  (* W8: string tension → σ(β=1, M=0) positive and convergent *)
   (0 < string_tension 1 1) /\
   (* W9: axiom audit → only classic *)
   True /\
@@ -134,7 +136,7 @@ Theorem final_statistics_step8 :
   (* 8 Steps · 39 Phases *)
   (* W1-W10: 7 resolved, 3 philosophical *)
   (* Derivation: 4 forced, 5 natural, 3 chosen *)
-  (* First experimental number: σ(β=1) ≈ 1.0-1.4 matches *)
+  (* First experimental number: σ(β=1, M=0) ≈ 1.97 (overestimates ~2.5×) *)
   True.
 Proof. exact I. Qed.
 
@@ -147,7 +149,7 @@ Theorem derivation_chain_complete :
   (* Gauge: derived (NATURAL) *)
   (* Transfer matrix: computed (CHOSEN SU(2)) *)
   (* Gap = 289/384: proven *)
-  (* σ ≈ 1.0-1.4: matches literature *)
+  (* σ(M=0) ≈ 1.97: overestimates (exact ≈ 0.764), qualitative σ>0 correct *)
   0 < string_tension 1 1.
 Proof. exact sigma_order_1_positive. Qed.
 

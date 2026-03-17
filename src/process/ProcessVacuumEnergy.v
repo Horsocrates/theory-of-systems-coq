@@ -80,15 +80,15 @@ Qed.
 
 (** Relative mode energy: E_j = −ln(t_j/t₀) ≈ neg_ln_taylor
     For j=1: E_1 = string tension σ = −ln(1 − gap)
-    where gap = 1 − t₁/t₀ = gap_M0 1 / t₀ *)
+    where gap/t₀ = (1 − t₁/t₀) = gap_M0 / t₀ *)
 
 (** Mode energy at order N (Taylor approximation) *)
 Definition mode_energy (beta : Q) (order : nat) : Q :=
   string_tension beta order.
 
-(** Mode energy at β=1, order 1 = 289/384 *)
+(** Mode energy at β=1, order 1 = 289/336 (corrected: gap/t₀) *)
 Lemma mode_energy_order1 :
-  mode_energy 1 1 == 289 # 384.
+  mode_energy 1 1 == 289 # 336.
 Proof. unfold mode_energy. exact sigma_order_1. Qed.
 
 (** Mode energy is a finite Q for any order *)
@@ -127,17 +127,17 @@ Definition total_fluctuation (K : nat) (energy_per_mode : Q) : Q :=
 
 (** Total at K=0: no modes → no energy *)
 Lemma total_zero_modes :
-  total_fluctuation 0%nat (289#384) == 0.
+  total_fluctuation 0%nat (289#336) == 0.
 Proof. unfold total_fluctuation. vm_compute. reflexivity. Qed.
 
 (** Total at K=1: single mode *)
 Lemma total_one_mode :
-  total_fluctuation 1%nat (289#384) == 289 # 384.
+  total_fluctuation 1%nat (289#336) == 289 # 336.
 Proof. unfold total_fluctuation. vm_compute. reflexivity. Qed.
 
 (** Total at K=10 *)
 Lemma total_ten_modes :
-  total_fluctuation 10%nat (289#384) == 2890 # 384.
+  total_fluctuation 10%nat (289#336) == 2890 # 336.
 Proof. unfold total_fluctuation. vm_compute. reflexivity. Qed.
 
 (** Total is FINITE for any K (trivially: Q is closed under multiplication) *)
@@ -180,12 +180,12 @@ Qed.
 
 (** ★ Contrast with QFT: our sum is finite, theirs diverges *)
 Theorem finite_not_divergent :
-  (* At β=1 with 10 modes: total = 2890/384 ≈ 7.5 *)
-  total_fluctuation 10%nat (289#384) == 2890 # 384 /\
+  (* At β=1 with 10 modes: total = 2890/336 ≈ 7.5 *)
+  total_fluctuation 10%nat (289#336) == 2890 # 336 /\
   (* This is a FINITE rational number *)
-  0 < total_fluctuation 10%nat (289#384) /\
+  0 < total_fluctuation 10%nat (289#336) /\
   (* Grows linearly with K, NOT as K⁴ *)
-  total_fluctuation 10%nat (289#384) < 10.
+  total_fluctuation 10%nat (289#336) < 10.
 Proof.
   split. { exact total_ten_modes. }
   split.

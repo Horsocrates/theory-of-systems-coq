@@ -3,15 +3,16 @@
 
     Elements: neg_ln_taylor, string_tension, sigma_process
     Roles:    compute σa² = −ln(t₁/t₀) via Taylor series over Q
-    Rules:    σa² = Σ gap^k/k, each partial sum exact rational
+    Rules:    σa² = −ln(1 − gap/t₀) = Σ (gap/t₀)^k/k
     Status:   complete
 
     The string tension σ is the coefficient of the area law in Wilson
     loops — the fundamental observable of confinement. We compute it
     from our transfer matrix eigenvalues using Taylor series of −ln(1−x).
 
-    At β=1, M=0: gap = 289/384, σa² = −ln(95/384) ≈ 1.396
-    This is the FIRST experimentally comparable number from our framework.
+    σ = −ln(t₁/t₀) = −ln(1 − gap/t₀) where gap = t₀ − t₁.
+    At β=1, M=0: gap/t₀ = (289/384)/(7/8) = 289/336.
+    M=0 overestimates; exact value −ln(I₁/I₀) ≈ 0.764.
 
     STATUS: 43 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
@@ -350,66 +351,76 @@ Qed.
 (*  Part II: String Tension  (~10 lemmas)                             *)
 (* ================================================================== *)
 
-(** String tension: σa² = −ln(t₁/t₀) = −ln(1 − gap)
-    Using Taylor: σa² = Σ gap^k/k
-    At β=1, M=0: gap = gap_M0 1 = 289/384 *)
+(** String tension: σa² = −ln(t₁/t₀) = −ln(1 − gap/t₀)
+    Using Taylor: σa² = Σ (gap/t₀)^k/k
+    At β=1, M=0: gap/t₀ = (289/384)/(7/8) = 289/336 *)
 
 Definition string_tension_gap (gap : Q) (order : nat) : Q :=
   neg_ln_taylor gap order.
 
-(** String tension from spectral gap *)
+(** String tension from spectral gap, corrected: use gap/t₀ *)
 Definition string_tension (beta : Q) (order : nat) : Q :=
-  string_tension_gap (gap_M0 beta) order.
+  neg_ln_taylor (gap_M0 beta / t0_M0 beta) order.
 
-(** At β=1: gap = 289/384 *)
+(** At β=1: gap = 289/384, t₀ = 7/8, gap/t₀ = 289/336 *)
 Lemma gap_289_384 : gap_M0 1 == 289 # 384.
 Proof. exact gap_at_beta_1. Qed.
 
-(** σ order 1 = gap = 289/384 *)
-Lemma sigma_order_1 : string_tension 1 1 == 289 # 384.
+Lemma gap_over_t0_beta_1 : gap_M0 1 / t0_M0 1 == 289 # 336.
 Proof.
-  unfold string_tension, string_tension_gap.
-  rewrite taylor_order_1. exact gap_289_384.
+  rewrite gap_at_beta_1. rewrite t0_at_beta_1.
+  unfold Qdiv. unfold Qeq. simpl. lia.
 Qed.
 
-(** σ order 2 = gap + gap²/2 *)
-Lemma sigma_order_2 : string_tension 1 2 ==
-  (289 # 384) + ((289 # 384) * (289 # 384) / (2#1)).
+(** σ order 1 = gap/t₀ = 289/336 *)
+Lemma sigma_order_1 : string_tension 1 1 == 289 # 336.
 Proof.
-  unfold string_tension, string_tension_gap.
-  rewrite taylor_order_2. rewrite gap_289_384. reflexivity.
+  unfold string_tension.
+  rewrite taylor_order_1. exact gap_over_t0_beta_1.
+Qed.
+
+(** σ order 2 = gap/t₀ + (gap/t₀)²/2 *)
+Lemma sigma_order_2 : string_tension 1 2 ==
+  (289 # 336) + ((289 # 336) * (289 # 336) / (2#1)).
+Proof.
+  unfold string_tension.
+  rewrite taylor_order_2. rewrite gap_over_t0_beta_1. reflexivity.
 Qed.
 
 (** σ order 3 *)
 Lemma sigma_order_3 : string_tension 1 3 ==
-  (289 # 384) + ((289 # 384) * (289 # 384) / (2#1)) +
-  ((289 # 384) * ((289 # 384) * (289 # 384)) / (3#1)).
+  (289 # 336) + ((289 # 336) * (289 # 336) / (2#1)) +
+  ((289 # 336) * ((289 # 336) * (289 # 336)) / (3#1)).
 Proof.
-  unfold string_tension, string_tension_gap.
-  rewrite taylor_order_3. rewrite gap_289_384. reflexivity.
+  unfold string_tension.
+  rewrite taylor_order_3. rewrite gap_over_t0_beta_1. reflexivity.
 Qed.
+
+(** gap/t₀ > 0 at β=1 *)
+Lemma gap_over_t0_positive : 0 < gap_M0 1 / t0_M0 1.
+Proof. rewrite gap_over_t0_beta_1. lra. Qed.
 
 (** σ is increasing in order *)
 Lemma sigma_increasing : forall N,
   string_tension 1 N <= string_tension 1 (S N).
 Proof.
-  intros N. unfold string_tension, string_tension_gap.
-  apply taylor_increasing. exact gap_at_beta_1_positive.
+  intros N. unfold string_tension.
+  apply taylor_increasing. exact gap_over_t0_positive.
 Qed.
 
 (** σ is nonneg *)
 Lemma sigma_nonneg : forall N,
   0 <= string_tension 1 N.
 Proof.
-  intros N. unfold string_tension, string_tension_gap.
-  apply taylor_nonneg. apply Qlt_le_weak. exact gap_at_beta_1_positive.
+  intros N. unfold string_tension.
+  apply taylor_nonneg. apply Qlt_le_weak. exact gap_over_t0_positive.
 Qed.
 
 (** σ at order 1 is positive *)
 Lemma sigma_order_1_positive : 0 < string_tension 1 1.
 Proof.
   assert (H := sigma_order_1).
-  assert (H2 : (0:Q) < 289 # 384) by lra. lra.
+  assert (H2 : (0:Q) < 289 # 336) by lra. lra.
 Qed.
 
 (** ★ The string tension as a process (in Taylor order) *)
@@ -423,25 +434,22 @@ Proof.
   apply sigma_increasing.
 Qed.
 
-(** gap_M0 1 < 1 *)
-Lemma gap_lt_1 : gap_M0 1 < 1.
+(** gap/t₀ < 1 at β=1 *)
+Lemma gap_over_t0_lt_1 : gap_M0 1 / t0_M0 1 < 1.
 Proof.
-  rewrite gap_289_384. lra.
+  rewrite gap_over_t0_beta_1. lra.
 Qed.
 
 (** Sigma process is Cauchy *)
 Theorem sigma_cauchy : is_Cauchy sigma_process.
 Proof.
   unfold sigma_process.
-  assert (Hcauchy := ln_process_cauchy (gap_M0 1) gap_at_beta_1_positive gap_lt_1).
+  assert (Hcauchy := ln_process_cauchy _ gap_over_t0_positive gap_over_t0_lt_1).
   unfold ln_process in Hcauchy.
-  (* sigma_process n = string_tension 1 (S n) = neg_ln_taylor (gap_M0 1) (S n)
-     = ln_process (gap_M0 1) n *)
-  (* sigma_process n = string_tension 1 (S n) = neg_ln_taylor (gap_M0 1) (S n) *)
   intros eps Heps. destruct (Hcauchy eps Heps) as [N HN].
   exists N. intros m n Hm Hn.
   specialize (HN m n Hm Hn).
-  unfold string_tension, string_tension_gap in *.
+  unfold string_tension in *.
   exact HN.
 Qed.
 
@@ -454,15 +462,15 @@ Lemma sigma_lower_bound : forall N,
   string_tension 1 N <= string_tension 1 (S N).
 Proof. exact sigma_increasing. Qed.
 
-(** Upper bound from geometric series *)
+(** Upper bound from geometric series: (gap/t₀) / (1 − gap/t₀) *)
 Definition sigma_upper_bound : Q :=
-  (289 # 384) / (1 - (289 # 384)).
+  (289 # 336) / (1 - (289 # 336)).
 
-(** sigma_upper_bound = 289/95 *)
-Lemma sigma_upper_bound_value : sigma_upper_bound == 289 # 95.
+(** sigma_upper_bound = 289/47 *)
+Lemma sigma_upper_bound_value : sigma_upper_bound == 289 # 47.
 Proof.
   unfold sigma_upper_bound. unfold Qdiv.
-  assert (H : 1 - (289 # 384) == 95 # 384) by (unfold Qeq; simpl; lia).
+  assert (H : 1 - (289 # 336) == 47 # 336) by (unfold Qeq; simpl; lia).
   rewrite H. unfold Qeq. simpl. lia.
 Qed.
 
@@ -470,34 +478,34 @@ Qed.
 Lemma sigma_bounded_above : forall N,
   string_tension 1 N <= sigma_upper_bound.
 Proof.
-  intros N. unfold string_tension, string_tension_gap.
-  assert (Hgap := gap_at_beta_1_positive).
-  assert (Hlt := gap_lt_1).
-  assert (Hbnd := taylor_bounded (gap_M0 1) N Hgap Hlt).
+  intros N. unfold string_tension.
+  assert (Hgap := gap_over_t0_positive).
+  assert (Hlt := gap_over_t0_lt_1).
+  assert (Hbnd := taylor_bounded _ N Hgap Hlt).
   unfold sigma_upper_bound.
-  assert (Heq : gap_M0 1 / (1 - gap_M0 1) == (289 # 384) / (1 - (289 # 384))).
-  { rewrite gap_289_384. reflexivity. }
+  assert (Heq : gap_M0 1 / t0_M0 1 / (1 - gap_M0 1 / t0_M0 1) ==
+    (289 # 336) / (1 - (289 # 336))).
+  { rewrite gap_over_t0_beta_1. reflexivity. }
   lra.
 Qed.
 
-(** σ₁ ≈ 0.753 — concrete lower bound *)
-Lemma sigma_ge_three_quarter : 289 # 384 <= string_tension 1 1.
+(** σ₁ ≈ 0.860 — concrete lower bound *)
+Lemma sigma_ge_half : 289 # 336 <= string_tension 1 1.
 Proof.
   rewrite sigma_order_1. lra.
 Qed.
 
-(** σ is bracketed: 289/384 <= σ <= 289/95 *)
+(** σ is bracketed: 289/336 <= σ <= 289/47 *)
 Lemma sigma_bracketed : forall N,
   (1 <= N)%nat ->
-  289 # 384 <= string_tension 1 N /\
-  string_tension 1 N <= 289 # 95.
+  289 # 336 <= string_tension 1 N /\
+  string_tension 1 N <= 289 # 47.
 Proof.
   intros N HN. split.
-  - assert (H1 : 289 # 384 <= string_tension 1 1).
+  - assert (H1 : 289 # 336 <= string_tension 1 1).
     { rewrite sigma_order_1. lra. }
     assert (Hmono : forall k, string_tension 1 k <= string_tension 1 (S k)).
     { exact sigma_increasing. }
-    (* string_tension 1 1 <= string_tension 1 N by monotonicity *)
     induction N as [| m IH].
     + lia.
     + destruct (Nat.eq_dec m 0).
@@ -563,11 +571,17 @@ Proof.
     lra.
 Qed.
 
-(** At β=2: gap = 1/24, σ is smaller *)
-Lemma sigma_beta_2_order_1 : string_tension 2 1 == 1 # 24.
+(** At β=2: gap/t₀ = (1/24)/(1/2) = 1/12, σ is smaller *)
+Lemma gap_over_t0_beta_2 : gap_M0 2 / t0_M0 2 == 1 # 12.
 Proof.
-  unfold string_tension, string_tension_gap.
-  rewrite taylor_order_1. exact gap_at_beta_2.
+  rewrite gap_at_beta_2. rewrite t0_at_beta_2.
+  unfold Qdiv. unfold Qeq. simpl. lia.
+Qed.
+
+Lemma sigma_beta_2_order_1 : string_tension 2 1 == 1 # 12.
+Proof.
+  unfold string_tension.
+  rewrite taylor_order_1. exact gap_over_t0_beta_2.
 Qed.
 
 (** σ(β=2) < σ(β=1) at order 1 *)
@@ -581,8 +595,8 @@ Qed.
 Theorem w8_string_tension :
   (* σ(β=1) > 0 — confinement *)
   0 < string_tension 1 1 /\
-  (* σ(β=1) = 289/384 at first order *)
-  string_tension 1 1 == 289 # 384 /\
+  (* σ(β=1) = 289/336 at first order (gap/t₀) *)
+  string_tension 1 1 == 289 # 336 /\
   (* σ process is Cauchy — convergent *)
   is_Cauchy sigma_process /\
   (* σ(β=2) < σ(β=1) — weaker coupling, less tension *)

@@ -91,8 +91,8 @@ Proof. unfold hawking_temperature. vm_compute. reflexivity. Qed.
 Theorem number_bh_entropy : bh_entropy 5 == 2200 # 7.
 Proof. unfold bh_entropy. vm_compute. reflexivity. Qed.
 
-(** 10. String tension order 1 = 289/384 *)
-Theorem number_sigma : string_tension 1 1 == 289 # 384.
+(** 10. String tension order 1 = 289/336 (corrected: gap/t₀, t₀=7/8) *)
+Theorem number_sigma : string_tension 1 1 == 289 # 336.
 Proof. exact sigma_order_1. Qed.
 
 (** 11. Beta function coefficient: beta_0(SU3, 6f) = 49/88 *)
@@ -299,7 +299,7 @@ Theorem all_numbers :
   mW2_over_mZ2 r_physical == 10 # 13 /\
   rho_parameter r_physical == 1 /\
   rg_step 4 == 4 /\
-  string_tension 1 1 == 289 # 384 /\
+  string_tension 1 1 == 289 # 336 /\
   vacuum_eigenvalue 1 == 7 # 8.
 Proof.
   refine (conj spectral_gap_beta_1

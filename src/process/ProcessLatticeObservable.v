@@ -3,12 +3,17 @@
 
     Elements: creutz_ratio, LatticeObservable, sigma_observable
     Roles:    comparison framework for experimental verification
-    Rules:    σ(β=1) within lattice QCD literature range [1.0, 1.5]
+    Rules:    σ(β=1, M=0) positive and convergent; honest M=0 assessment
     Status:   complete
 
     The string tension σ is the standard benchmark observable for
-    lattice gauge theory. We establish a comparison framework:
-    our computed σ vs known lattice QCD results.
+    lattice gauge theory. We establish a comparison framework.
+
+    HONEST ASSESSMENT (M=0 truncation):
+      σ(β=1, M=0) ≈ 1.97 (full Taylor sum of −ln(1 − 289/336))
+      σ(β=1, exact) = −ln(I₁(β)/I₀(β)) ≈ 0.764
+      M=0 overestimates by ~2.5×. Higher M → converges to exact.
+      The M=0 value is a crude upper bound, not a prediction.
 
     STATUS: 16 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
@@ -38,113 +43,115 @@ From ToS Require Import process.ProcessStringTension.
     For area law: χ(R,T) → σa² as R,T → ∞
 
     In our framework: W(R,T) = (t₁/t₀)^T for angular momentum R
-    So: χ reduces to our −ln(t₁/t₀) = string_tension *)
+    So: χ reduces to our −ln(t₁/t₀) = −ln(1 − gap/t₀) = string_tension
 
-(** Creutz ratio is just neg_ln_taylor applied to (1 − eigenvalue ratio) *)
-Definition creutz_ratio (gap : Q) (order : nat) : Q :=
-  neg_ln_taylor gap order.
+    The argument to neg_ln_taylor is gap/t₀, NOT gap directly,
+    since t₀(β=1) = 7/8 ≠ 1. *)
+
+(** Creutz ratio is just neg_ln_taylor applied to the eigenvalue ratio *)
+Definition creutz_ratio (x : Q) (order : nat) : Q :=
+  neg_ln_taylor x order.
 
 (** ★ The Creutz ratio IS the string tension on our lattice *)
-Lemma creutz_is_sigma : forall gap order,
-  creutz_ratio gap order == string_tension_gap gap order.
+Lemma creutz_is_sigma : forall x order,
+  creutz_ratio x order == string_tension_gap x order.
 Proof. intros. unfold creutz_ratio, string_tension_gap. reflexivity. Qed.
 
-(** Creutz ratio at β=1 *)
+(** Creutz ratio at β=1: use gap/t₀ = 289/336 *)
 Lemma creutz_beta_1 : forall order,
-  creutz_ratio (gap_M0 1) order == string_tension 1 order.
+  creutz_ratio (gap_M0 1 / t0_M0 1) order == string_tension 1 order.
 Proof.
-  intros. unfold creutz_ratio, string_tension, string_tension_gap. reflexivity.
+  intros. unfold creutz_ratio, string_tension. reflexivity.
 Qed.
 
-(** Creutz ratio is positive for positive gap *)
-Lemma creutz_positive : forall gap order,
-  0 < gap -> (1 <= order)%nat ->
-  0 < creutz_ratio gap order.
+(** Creutz ratio is positive for positive argument *)
+Lemma creutz_positive : forall x order,
+  0 < x -> (1 <= order)%nat ->
+  0 < creutz_ratio x order.
 Proof.
-  intros gap order Hg Hord.
+  intros x order Hg Hord.
   unfold creutz_ratio.
-  assert (Hn := taylor_nonneg gap order (Qlt_le_weak _ _ Hg)).
-  assert (Hs := taylor_strict_increasing gap (pred order) Hg).
+  assert (Hn := taylor_nonneg x order (Qlt_le_weak _ _ Hg)).
+  assert (Hs := taylor_strict_increasing x (pred order) Hg).
   destruct order; [lia |].
   simpl pred in Hs.
-  assert (Hn0 := taylor_nonneg gap order (Qlt_le_weak _ _ Hg)).
+  assert (Hn0 := taylor_nonneg x order (Qlt_le_weak _ _ Hg)).
   lra.
 Qed.
 
 (** Creutz ratio is increasing in order *)
-Lemma creutz_increasing : forall gap order,
-  0 < gap ->
-  creutz_ratio gap order <= creutz_ratio gap (S order).
+Lemma creutz_increasing : forall x order,
+  0 < x ->
+  creutz_ratio x order <= creutz_ratio x (S order).
 Proof.
   intros. unfold creutz_ratio. apply taylor_increasing. exact H.
 Qed.
 
 (** Creutz ratio is bounded *)
-Lemma creutz_bounded : forall gap order,
-  0 < gap -> gap < 1 ->
-  creutz_ratio gap order <= gap / (1 - gap).
+Lemma creutz_bounded : forall x order,
+  0 < x -> x < 1 ->
+  creutz_ratio x order <= x / (1 - x).
 Proof.
   intros. unfold creutz_ratio. apply taylor_bounded; assumption.
 Qed.
 
 (** Creutz process *)
-Definition creutz_process (gap : Q) : RealProcess :=
-  fun N => creutz_ratio gap (S N).
+Definition creutz_process (x : Q) : RealProcess :=
+  fun N => creutz_ratio x (S N).
 
-Lemma creutz_process_cauchy : forall gap,
-  0 < gap -> gap < 1 ->
-  is_Cauchy (creutz_process gap).
+Lemma creutz_process_cauchy : forall x,
+  0 < x -> x < 1 ->
+  is_Cauchy (creutz_process x).
 Proof.
-  intros gap Hg Hg1.
+  intros x Hg Hg1.
   unfold creutz_process, creutz_ratio.
-  exact (ln_process_cauchy gap Hg Hg1).
+  exact (ln_process_cauchy x Hg Hg1).
 Qed.
 
 (* ================================================================== *)
-(*  Part II: Known Values  (~6 lemmas)                                *)
+(*  Part II: Computational Bounds  (~6 lemmas)                        *)
 (* ================================================================== *)
 
-(** Literature values for SU(2) string tension
-    Source: lattice QCD Monte Carlo simulations
-    At β = 1 (our strong coupling): σa² ≈ 1.0-1.4
-    Our computation: σ(β=1) ≈ 1.4 (full sum) → WITHIN RANGE *)
+(** Computational bounds for σ(β=1, M=0).
+    NOTE: these are bounds on our M=0 APPROXIMATION, not on the
+    true physical string tension. The M=0 truncation overestimates
+    by a factor of ~2.5 compared to the exact −ln(I₁/I₀) ≈ 0.764.
+    Higher angular momentum modes (M>0) would bring the value down. *)
 
-Definition literature_sigma_beta1_lower : Q := 1.
-(** Upper bound from geometric series: 289/95 ≈ 3.04.
-    The true value −ln(95/384) ≈ 1.396 is much tighter,
-    but proving it requires infinitely many terms.
-    The geometric bound suffices to show σ is finite. *)
-Definition literature_sigma_beta1_upper : Q := 289 # 95.
+Definition sigma_beta1_lower_bound : Q := 1.
+(** Upper bound from geometric series: (289/336)/(1 - 289/336) = 289/47. *)
+Definition sigma_beta1_upper_bound : Q := 289 # 47.
 
-(** Our value at order 2 is above literature lower bound *)
+(** Our M=0 value at order 2 is above 1 *)
 Lemma sigma_order_2_above_1 :
-  literature_sigma_beta1_lower <= string_tension 1 2.
+  sigma_beta1_lower_bound <= string_tension 1 2.
 Proof.
-  unfold literature_sigma_beta1_lower.
+  unfold sigma_beta1_lower_bound.
   assert (H := sigma_order_2).
-  (* 289/384 + 289²/384²/2 ≈ 1.036 > 1 *)
+  (* 289/336 + 289²/336²/2 = 289/336 + 83521/225792 *)
+  (* = 194208/225792 + 83521/225792 = 277729/225792 ≈ 1.230 > 1 *)
   assert (Hval : string_tension 1 2 ==
-    (289 # 384) + ((289 # 384) * (289 # 384) / (2#1))) by exact H.
-  assert (Hnum : (289 # 384) + ((289 # 384) * (289 # 384) / (2#1)) ==
-    305473 # 294912).
+    (289 # 336) + ((289 # 336) * (289 # 336) / (2#1))) by exact H.
+  assert (Hnum : (289 # 336) + ((289 # 336) * (289 # 336) / (2#1)) ==
+    277729 # 225792).
   { unfold Qeq. simpl. lia. }
-  assert (Hge : 1 <= 305473 # 294912).
+  assert (Hge : 1 <= 277729 # 225792).
   { unfold Qle. simpl. lia. }
   lra.
 Qed.
 
-(** Our upper bound is within literature range *)
-Lemma sigma_upper_below_lit :
-  sigma_upper_bound <= 289 # 95.
+(** Our upper bound matches the geometric bound *)
+Lemma sigma_upper_below_bound :
+  sigma_upper_bound <= 289 # 47.
 Proof.
   assert (H := sigma_upper_bound_value). lra.
 Qed.
 
-(** ★ Our σ at any order ≥ 2 is in range [1, 289/95] *)
+(** ★ Our M=0 σ at any order ≥ 2 is in range [1, 289/47] *)
 Theorem sigma_in_range : forall N,
   (2 <= N)%nat ->
-  literature_sigma_beta1_lower <= string_tension 1 N /\
-  string_tension 1 N <= literature_sigma_beta1_upper.
+  sigma_beta1_lower_bound <= string_tension 1 N /\
+  string_tension 1 N <= sigma_beta1_upper_bound.
 Proof.
   intros N HN. split.
   - (* Lower bound: σ(N) >= σ(2) >= 1 *)
@@ -160,14 +167,14 @@ Proof.
           -- assert (m = 1)%nat by lia. subst.
              assert (Hm := sigma_increasing 1). lra. }
     lra.
-  - (* Upper bound: σ(N) <= 289/95 from geometric series *)
+  - (* Upper bound: σ(N) <= 289/47 from geometric series *)
     assert (Hub := sigma_bounded_above N).
     assert (Hval := sigma_upper_bound_value).
-    unfold literature_sigma_beta1_upper. lra.
+    unfold sigma_beta1_upper_bound. lra.
 Qed.
 
-(** σ is at least 1 at order 2 — the key experimental comparison *)
-Lemma sigma_experimental_comparison :
+(** σ is at least 1 at order 2 *)
+Lemma sigma_computational_check :
   1 <= string_tension 1 2.
 Proof. exact sigma_order_2_above_1. Qed.
 
@@ -195,9 +202,9 @@ Proof.
   intros order. unfold sigma_compute. exact (sigma_nonneg order).
 Qed.
 
-(** The observable value at β=1, order 1 *)
+(** The observable value at β=1, order 1: gap/t₀ = 289/336 *)
 Lemma sigma_obs_beta1_order1 :
-  lo_compute sigma_observable 1 1 == 289 # 384.
+  lo_compute sigma_observable 1 1 == 289 # 336.
 Proof.
   simpl. unfold sigma_compute. exact sigma_order_1.
 Qed.
@@ -214,12 +221,6 @@ Proof.
 Qed.
 
 (** ★ The observable IS a process under P4 *)
-(** Future observables to compute:
-    - Deconfining temperature T_c (from Polyakov loop)
-    - Glueball mass (from excited state gap)
-    - Topological susceptibility (from instanton density)
-    All computable from our transfer matrix framework *)
-
 Theorem observable_is_process :
   is_Cauchy (obs_process sigma_observable 1).
 Proof.
@@ -227,7 +228,6 @@ Proof.
   destruct (sigma_cauchy eps Heps) as [N HN].
   exists N. intros m n Hm Hn.
   specialize (HN m n Hm Hn).
-  (* obs_process sigma_observable 1 n = sigma_process n definitionally *)
   unfold obs_process, sigma_observable, lo_compute, sigma_compute in *.
   exact HN.
 Qed.
@@ -236,21 +236,24 @@ Qed.
 (*  Part IV: Summary Theorems                                         *)
 (* ================================================================== *)
 
-(** ★ W8 resolved: string tension computed from transfer matrix *)
+(** ★ W8 resolved: string tension computed from transfer matrix
+    HONEST STATUS:
+      σ(β=1, M=0, order 1) = 289/336 ≈ 0.860
+      σ(β=1, M=0, full sum) = −ln(1 − 289/336) = −ln(47/336) ≈ 1.967
+      σ(β=1, exact) = −ln(I₁(1)/I₀(1)) ≈ 0.764
+      M=0 overestimates by ~2.5×.
+      Higher M (angular momentum modes) would converge to exact.
+      σ > 0: confinement. This is the key qualitative result. *)
 Theorem w8_resolved :
-  (* String tension σ computed over Q from transfer matrix *)
-  (* σ(β=1) ≈ 1.2-1.4 (order dependent) *)
-  (* Literature: σ(β=1) ≈ 1.0-1.4 for SU(2) *)
-  (* Agreement: within expected range *)
-  (* FIRST experimentally comparable number from ToS *)
   0 < string_tension 1 1.
 Proof. exact sigma_order_1_positive. Qed.
 
 Theorem phase_38_complete :
   (* neg_ln_taylor: rational −ln(1−x) to any order *)
-  (* string_tension: σa² = Σ gap^k/k, exact Q at each order *)
+  (* string_tension: σa² = −ln(1 − gap/t₀), exact Q at each order *)
+  (* Uses gap/t₀ = 289/336 at β=1 (since t₀ = 7/8 ≠ 1) *)
   (* sigma_process: Cauchy, increasing, converges *)
   (* Creutz ratio: standard lattice technique, matches ours *)
-  (* Comparison: σ(β=1) within lattice QCD literature range *)
+  (* M=0 approximation overestimates by ~2.5×; qualitative (σ>0) is correct *)
   True.
 Proof. exact I. Qed.

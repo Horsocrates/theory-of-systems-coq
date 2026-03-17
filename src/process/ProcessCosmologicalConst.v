@@ -56,8 +56,8 @@ Definition vacuum_density (K D : nat) (energy_per_mode : Q) : Q :=
 (** ★ Density DECREASES when K grows (D=3) *)
 (** K=5 vs K=2: density(5,3) < density(2,3) *)
 Theorem density_decreases :
-  vacuum_density 5%nat 3%nat (289#384) <
-  vacuum_density 2%nat 3%nat (289#384).
+  vacuum_density 5%nat 3%nat (289#336) <
+  vacuum_density 2%nat 3%nat (289#336).
 Proof.
   unfold vacuum_density, total_fluctuation, lattice_volume, Qlt.
   vm_compute. reflexivity.
@@ -65,7 +65,7 @@ Qed.
 
 (** Density < 1 at K=2, D=3 *)
 Lemma density_less_than_one :
-  vacuum_density 2%nat 3%nat (289#384) < 1.
+  vacuum_density 2%nat 3%nat (289#336) < 1.
 Proof.
   unfold vacuum_density, total_fluctuation, lattice_volume, Qlt.
   vm_compute. reflexivity.
@@ -120,9 +120,9 @@ Definition cc_process (D : nat) (energy_per_mode : Q) : RealProcess :=
 
 (** CC process at D=3 is a well-defined process *)
 Lemma cc_process_well_defined : forall K,
-  exists q : Q, cc_process 3%nat (289#384) K == q.
+  exists q : Q, cc_process 3%nat (289#336) K == q.
 Proof.
-  intros K. exists (cc_process 3%nat (289#384) K). reflexivity.
+  intros K. exists (cc_process 3%nat (289#336) K). reflexivity.
 Qed.
 
 (** CC process gives finite Q at every step *)
@@ -162,13 +162,13 @@ Qed.
 (** ★ P4 resolves the cosmological constant problem *)
 Theorem p4_resolves_cc :
   (* 1. Vacuum energy is FINITE (not divergent) *)
-  0 < total_fluctuation 5%nat (289#384) /\
-  total_fluctuation 5%nat (289#384) < 10 /\
+  0 < total_fluctuation 5%nat (289#336) /\
+  total_fluctuation 5%nat (289#336) < 10 /\
   (* 2. Density DECREASES with K for D=3 *)
-  vacuum_density 5%nat 3%nat (289#384) <
-  vacuum_density 2%nat 3%nat (289#384) /\
+  vacuum_density 5%nat 3%nat (289#336) <
+  vacuum_density 2%nat 3%nat (289#336) /\
   (* 3. Density is SMALL *)
-  vacuum_density 2%nat 3%nat (289#384) < 1.
+  vacuum_density 2%nat 3%nat (289#336) < 1.
 Proof.
   split.
   - unfold total_fluctuation, Qlt. vm_compute. reflexivity.
@@ -181,13 +181,13 @@ Qed.
 Theorem phase_42_complete :
   (* Vacuum eigenvalue: t₀ = 7/8 at β=1 (NOT 1, NOT normalized) *)
   vacuum_eigenvalue 1 == 7 # 8 /\
-  (* Mode energy: σ = 289/384 (finite Q) *)
-  mode_energy 1 1 == 289 # 384 /\
+  (* Mode energy: σ = 289/336 (finite Q) *)
+  mode_energy 1 1 == 289 # 336 /\
   (* Total fluctuation: finite sum of finite Q *)
-  0 < total_fluctuation 5%nat (289#384) /\
+  0 < total_fluctuation 5%nat (289#336) /\
   (* Density decreases with K *)
-  vacuum_density 5%nat 3%nat (289#384) <
-  vacuum_density 2%nat 3%nat (289#384).
+  vacuum_density 5%nat 3%nat (289#336) <
+  vacuum_density 2%nat 3%nat (289#336).
 Proof.
   refine (conj vacuum_eigenvalue_beta1
     (conj mode_energy_order1 (conj _ density_decreases))).
