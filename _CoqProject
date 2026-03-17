@@ -1113,3 +1113,5 @@ src/process/Process2DPhysics.v
 src/process/ProcessRGTrajectory.v
 src/process/ProcessCorrelationLength.v
 src/process/ProcessStep11Synthesis.v
+src/process/ProcessSU3Matrix.v
+src/process/ProcessSU3Gauge.v
