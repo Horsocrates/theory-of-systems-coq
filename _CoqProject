@@ -1224,3 +1224,9 @@ src/process/ProcessLambdaQCD.v
 # Phase 6
 src/process/ProcessUniversalityExplicit.v
 src/process/ProcessFinalMap.v
+
+# === P4-Native Libraries ===
+src/stdlib/TheoremBundle.v
+src/stdlib/QiPowerSeries.v
+src/stdlib/FiniteGroup.v
+src/stdlib/ProcessDistribution.v
