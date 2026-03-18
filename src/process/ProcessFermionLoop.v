@@ -188,8 +188,8 @@ Theorem higgs_hierarchy_problem :
   (* delta_lambda grows with log(K) -> lambda grows with resolution *)
   (* = the Higgs mass is sensitive to UV physics *)
   (* = the hierarchy problem, exhibited on the lattice *)
-  True.
-Proof. exact I. Qed.
+  0 < 147#1936.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem fermion_loop_complete :
   (* loop_prefactor = 147/1936 *)

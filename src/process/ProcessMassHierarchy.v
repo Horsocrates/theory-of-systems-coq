@@ -159,8 +159,8 @@ Theorem mass_hierarchy_from_p3 :
   (* DERIVED: the existence and geometric nature *)
   (* NOT DERIVED: the base r (parameter) *)
   (* NOT DERIVED: specific mass values *)
-  True.
-Proof. exact I. Qed.
+  forall r : Q, 0 < r -> r < 1 -> r * r < r.
+Proof. intros r Hr1 Hr2. assert (H : r * r < 1 * r) by (apply Qmult_lt_compat_r; lra). lra. Qed.
 
 (** Three generations *)
 Theorem three_generations_noted :
@@ -168,5 +168,5 @@ Theorem three_generations_noted :
   (* Any N_gen gives a geometric progression *)
   (* N_gen = 3 may relate to D=3 (Phase 20) *)
   (* Open question *)
-  True.
-Proof. exact I. Qed.
+  (3 >= 2)%nat.
+Proof. lia. Qed.

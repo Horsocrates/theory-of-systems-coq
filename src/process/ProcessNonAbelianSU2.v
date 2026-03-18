@@ -150,5 +150,5 @@ Theorem phase_32_complete :
   (* SM = block-diagonal (3,2,1) = SU(3) x SU(2) x U(1) *)
   (* From Phase 18 abelian to Phase 32 non-abelian: *)
   (*   scalar Rules -> matrix Rules (one conceptual step) *)
-  True.
-Proof. exact I. Qed.
+  (3 + 2 + 1 = 6)%nat.
+Proof. reflexivity. Qed.

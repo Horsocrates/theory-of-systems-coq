@@ -128,9 +128,8 @@ Theorem rg_map_converges_in_M :
   (* The RG flow is doubly a process: *)
   (*   Process in n (blocking steps) -> flow to fixed point *)
   (*   Process in M (Taylor order) -> more precise flow *)
-  (* Both Cauchy. Both over Q. P4 native. *)
-  True.
-Proof. exact I. Qed.
+  rg_step 4 == 4 /\ rg_derivative_at_4 == 0.
+Proof. split; [apply rg_fixed_point_4 | apply rg_derivative_zero]. Qed.
 
 (** Step 6 RG analysis complete *)
 Theorem step6_rg_complete :
@@ -153,11 +152,9 @@ Theorem step6_complete :
   (* Phase 29: Schwarzschild, T_H = 7/(176M), S = (88/7)M^2 *)
   (* Phase 30: Fermion spectrum, Wilson doubling fix *)
   (* Phase 31: Higher-order RG, quadratic convergence *)
-  (*                                                    *)
-  (* Quantitative depth ADDED to all four sectors: *)
-  (* Electroweak, gravity, fermions, strong force *)
-  True.
-Proof. exact I. Qed.
+  distance_from_fp 1 1%nat == distance_from_fp 1 0%nat *
+                               distance_from_fp 1 0%nat / 4.
+Proof. apply quadratic_rate_01. Qed.
 
 Theorem phase_31_complete :
   (* RG flow at higher Bessel order M: *)
@@ -167,5 +164,5 @@ Theorem phase_31_complete :
   (* 4. f'(4) = 0: quadratic convergence *)
   (* 5. Distance chain: 3 -> 9/4 -> 81/64 -> 6561/16384 *)
   (* 6. Each step squares the distance: d_{n+1} = d_n^2/4 *)
-  True.
-Proof. exact I. Qed.
+  distance_from_fp 1 3%nat == 6561 # 16384.
+Proof. apply distance_3. Qed.

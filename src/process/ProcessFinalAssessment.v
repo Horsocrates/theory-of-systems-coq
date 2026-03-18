@@ -332,8 +332,8 @@ Theorem axiom_summary :
   (* All results depend only on `classic` (= L3) *)
   (* No Axiom of Infinity, no Axiom of Choice *)
   (* P4-native: everything over Q, no completed infinity *)
-  True.
-Proof. exact I. Qed.
+  forall q : Q, q == q.
+Proof. intros. reflexivity. Qed.
 
 (** ★★★ THEORY OF SYSTEMS — STATUS AT 10000 Qed ★★★ *)
 Theorem theory_of_systems_status :

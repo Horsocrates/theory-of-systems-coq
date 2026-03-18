@@ -155,5 +155,5 @@ Theorem phase_31_file1 :
   (* Gap increases with M (more Bessel terms) *)
   (* Blocked eigenvalues stay below 1 at all M *)
   (* RG gap chain converges universally *)
-  True.
-Proof. exact I. Qed.
+  rg_step 4 == 4.
+Proof. apply rg_fixed_point_4. Qed.

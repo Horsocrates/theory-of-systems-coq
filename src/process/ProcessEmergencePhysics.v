@@ -145,16 +145,16 @@ Theorem P1_equals_quantum_gravity :
   (* Emergence of Geom-Gauge system =
      what you can't see from GR alone or QFT alone =
      the quantum gravity correction *)
-  True.
-Proof. exact I. Qed.
+  forall G gc, physical_emergence (G_obj (F_obj G)) (F_obj (G_obj gc)) == 0.
+Proof. intros. apply emergence_after_feedback. Qed.
 
 (** Physical P1: nonzero emergence means the combined system
     has more than either part alone *)
 Theorem physical_P1 : forall G gc,
   0 < physical_emergence G gc ->
   (* The combined system (G, gc) has MORE than G alone or gc alone *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= physical_emergence G gc.
+Proof. intros. lra. Qed.
 
 (** Ground state IS quantum ground in the P1 sense *)
 Theorem ground_state_is_P1_vacuum : forall n,

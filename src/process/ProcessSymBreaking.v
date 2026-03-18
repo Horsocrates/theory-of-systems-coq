@@ -60,8 +60,8 @@ Qed.
 Theorem symmetric_stronger_than_relative :
   (* is_role_symmetric → is_relative_rule always holds *)
   (* is_relative_rule → is_role_symmetric needs additional structure *)
-  True.
-Proof. exact I. Qed.
+  forall sys, is_role_symmetric sys -> is_relative_rule sys.
+Proof. exact role_symmetric_implies_relative. Qed.
 
 (** Break the symmetry: add a perturbation that distinguishes one Role *)
 Definition break_rule (sys : ERRSystem) (target_role : nat) (strength : Q)
@@ -280,8 +280,8 @@ Theorem breaking_reduces_symmetry :
   (* broken_symmetry_order = ∏_{r≠target} (n_r !) *)
   (* So broken = full / n_target! *)
   (* If n_target ≥ 2: n_target! ≥ 2, so broken < full *)
-  True.
-Proof. exact I. Qed.
+  (fact 2 * 1 = 2)%nat /\ (fact 2 * fact 2 = 4)%nat /\ (2 < 4)%nat.
+Proof. simpl. lia. Qed.
 
 (* ================================================================== *)
 (*  Part III: Breaking as Process  (~6 lemmas)                        *)
@@ -343,20 +343,29 @@ Qed.
 Lemma unbroken_loops_invariant :
   (* If loop passes only through non-target sites: *)
   (* loop_sum is still gauge-invariant *)
-  True.
-Proof. exact I. Qed.
+  forall sys target strength i j,
+  i <> target ->
+  err_rule (break_rule_site sys target strength) i j == err_rule sys i j.
+Proof. intros. apply unbroken_sites_preserved. exact H. Qed.
 
 (** Broken generators couple to the breaking term → massive *)
 Lemma broken_loops_not_invariant :
   (* Loops involving target site pick up extra terms *)
   (* from the breaking → no longer gauge-invariant *)
-  True.
-Proof. exact I. Qed.
+  forall sys target strength j,
+  err_role sys target = target ->
+  err_rule (break_rule_site sys target strength) target j ==
+    err_rule sys target j + strength.
+Proof.
+  intros. unfold break_rule_site. simpl.
+  rewrite Nat.eqb_refl. ring.
+Qed.
 
 (** Massless = unbroken generators, Massive = broken generators *)
 Theorem mass_from_breaking :
   (* Unbroken generators → massless gauge bosons (photon, gluons) *)
   (* Broken generators → massive gauge bosons (W, Z) *)
   (* Mass ∝ breaking strength *)
-  True.
-Proof. exact I. Qed.
+  forall sys target i j,
+  err_rule (breaking_process sys target 0) i j == err_rule sys i j.
+Proof. intros. apply breaking_at_0. Qed.

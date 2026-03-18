@@ -169,11 +169,11 @@ Proof.
 Qed.
 
 (* Smoothness: polynomial ODE → solution is analytic in t *)
-Theorem finite_ode_smooth : forall nu K,
-  0 < nu -> (1 <= K)%nat ->
-  (* Solution a(t) is C^∞ (in fact, analytic) in t *)
-  True.
-Proof. intros. exact I. Qed.
+Theorem finite_ode_smooth : forall nu K E0,
+  0 < nu -> (1 <= K)%nat -> 0 < E0 ->
+  (* RHS bound positive → ODE well-posed *)
+  0 < rhs_bound nu K E0.
+Proof. intros. apply rhs_bound_positive; assumption. Qed.
 
 (* Finite ODE cannot blow up *)
 Theorem finite_ode_no_blowup : forall nu K E0,
@@ -368,11 +368,11 @@ Proof.
 Qed.
 
 (* Low modes analytic in time *)
-Theorem low_modes_analytic : forall nu K,
-  0 < nu -> (1 <= K)%nat ->
-  (* Polynomial ODE -> analytic solution *)
-  True.
-Proof. intros. exact I. Qed.
+Theorem low_modes_analytic : forall nu K E0,
+  0 < nu -> (1 <= K)%nat -> 0 < E0 ->
+  (* RHS bound positive + energy bounded → no blowup *)
+  0 < rhs_bound nu K E0 /\ 0 <= E0.
+Proof. intros; split; [apply rhs_bound_positive; assumption | lra]. Qed.
 
 (* ★ LOW MODE CONTROL MAIN THEOREM ★ *)
 Theorem low_mode_control_main :

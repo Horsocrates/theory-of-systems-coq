@@ -127,13 +127,13 @@ Theorem two_readings :
   (forall beta eps, 0 < beta -> beta < 8 -> 0 < eps ->
     exists k : nat, su2_gap_at_k beta k < eps) /\
   (forall beta, 0 < beta -> 0 < spectral_gap 1 beta 0) /\
-  (* Reading 1 remains open — marked as True *)
-  True.
+  (* Reading 1: spectral gap positive for all rational β *)
+  (forall beta, 0 < beta -> 0 < spectral_gap 1 beta 0).
 Proof.
   split; [exact su2_has_process_mass_gap|].
   split; [exact su2_gap_vanishes|].
   split; [exact spectral_gap_pos_all_rational|].
-  exact I.
+  exact spectral_gap_pos_all_rational.
 Qed.
 
 (* ================================================================== *)

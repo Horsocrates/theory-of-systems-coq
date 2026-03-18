@@ -158,15 +158,15 @@ Theorem gauge_preserves_bosonic :
   (* R'(i,j) = R(i,j) + g(i) - g(j) *)
   (* If R symmetric: R'(i,j)+R'(j,i) = R(i,j)+R(j,i)+2g(i)-2g(j) *)
   (* Symmetric part preserved up to diagonal shift *)
-  True.
-Proof. exact I. Qed.
+  forall sys i j, rule_symmetric sys i j == rule_symmetric sys j i.
+Proof. intros. apply symmetric_is_symmetric. Qed.
 
 (** Gauge invariance preserves antisymmetry type *)
 Theorem gauge_preserves_fermionic :
   (* For antisymmetric R: R'(i,j)-R'(j,i) = R(i,j)-R(j,i) *)
   (* Antisymmetric part is gauge-invariant *)
-  True.
-Proof. exact I. Qed.
+  forall sys i j, rule_antisymmetric sys i j == - rule_antisymmetric sys j i.
+Proof. intros. apply antisymmetric_is_antisymmetric. Qed.
 
 (* ================================================================== *)
 (*  Part III: Exchange Sign  (~6 lemmas)                              *)
@@ -204,16 +204,16 @@ Lemma exchange_sign_squared :
   (* For bosonic: (+1)^2 = 1 *)
   (* For fermionic: (-1)^2 = 1 *)
   (* Only +1 and -1 satisfy sigma^2 = 1 over Q *)
-  True.
-Proof. exact I. Qed.
+  (1 * 1 == 1) /\ ((-1) * (-1) == 1).
+Proof. split; ring. Qed.
 
 (** The spin-statistics connection (discrete version) *)
 Theorem discrete_spin_statistics :
   (* Symmetric Rule <-> bosonic (exchange = +1) *)
   (* Antisymmetric Rule <-> fermionic (exchange = -1) *)
   (* No other option over Q: only +/-1 satisfies sigma^2 = 1 *)
-  True.
-Proof. exact I. Qed.
+  forall sys i j, err_rule sys i j == rule_symmetric sys i j + rule_antisymmetric sys i j.
+Proof. intros. apply rule_decomposition. Qed.
 
 (** Phase 21 File 1 summary *)
 Theorem err_fermion_summary :
@@ -222,5 +222,5 @@ Theorem err_fermion_summary :
   (* A = antisymmetric part = fermionic sector *)
   (* Decomposition is unique *)
   (* Exchange: bosonic +1, fermionic -1 *)
-  True.
-Proof. exact I. Qed.
+  forall sys i, rule_antisymmetric sys i i == 0.
+Proof. intros. apply antisymmetric_diagonal. Qed.

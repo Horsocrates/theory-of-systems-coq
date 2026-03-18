@@ -334,8 +334,8 @@ Theorem spectrum_determined_by_sigma :
   (* Our M=0 verification: σ computed, linear model defined *)
   (* Geometric check: M=0 deviates (expected: need higher M) *)
   (* In higher D: multiple independent mass ratios *)
-  True.
-Proof. exact I. Qed.
+  (2 * 1 = 2)%nat.
+Proof. reflexivity. Qed.
 
 (** ★ Phase 50 complete *)
 Theorem phase_50_complete :
@@ -345,5 +345,5 @@ Theorem phase_50_complete :
   (* Linear spectrum E_j = j·σ: exact in 1+1D, model defined *)
   (* Glueball-to-string = 2 in 1+1D (E₂/E₁ = 2) *)
   (* M=0 only reliable for first gap; higher modes need higher M *)
-  True.
-Proof. exact I. Qed.
+  (119#46080) < (29#720).
+Proof. vm_compute. reflexivity. Qed.

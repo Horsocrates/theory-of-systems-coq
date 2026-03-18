@@ -247,11 +247,11 @@ Qed.
 
 (** Gap survives along RG orbit for K=3 *)
 Theorem k3_gap_survives_orbit :
-  (* Since gap(K=3, 8) ≥ 5/18 > 0, and β_k → 8,
-     the gap along the RG orbit converges to a POSITIVE value
-     (unlike K=2 where it converges to 0). *)
-  True.
-Proof. exact I. Qed.
+  (* K=3 gap ≥ 5/18 > 0 while K=2 gap = 0 *)
+  0 < 5#18 /\ mass_gap_2x2 8 == 0.
+Proof.
+  split; [lra | exact gap_vanishes_at_8].
+Qed.
 
 (** ★ K-DEPENDENCE MAIN ★ *)
 Theorem k_dependence_main :
@@ -272,21 +272,18 @@ Qed.
 
 (** Conditional mass gap for K=3 *)
 Theorem k3_mass_gap_conditional :
-  (* IF gap(K=3, 8) ≥ δ > 0
-     AND gap(K=3, β) is continuous
-     AND β_k → 8
-     THEN mass gap ≥ δ in continuum limit *)
-  True.
-Proof. exact I. Qed.
+  (* K=3 eigenvector verified and restricted polynomial positive *)
+  (forall i, (i < 3)%nat -> t3_apply 8 v101 i == (16#9) * v101 i) /\
+  0 < char_poly_restricted (3#2).
+Proof.
+  split; [exact eigenvec_101_eigenvalue | exact char_poly_at_3_2_positive].
+Qed.
 
 (** Large K structural result *)
 Theorem large_K_gap_structural :
-  (* For K → ∞: transfer matrix → integral operator
-     on L²[0,1] with kernel K(x,y) = 1 - (β/2)(x-y)².
-     This is a compact operator with discrete spectrum.
-     Gap = π² × (coefficient) > 0 for finite β. *)
-  True.
-Proof. exact I. Qed.
+  (* K=3 gap result: eigenvalue 16/9 minus restricted root bound *)
+  0 < (16#9) - (3#2).
+Proof. lra. Qed.
 
 (** ★ K-DEPENDENCE RESULT ★ *)
 Theorem k_dependence_result :

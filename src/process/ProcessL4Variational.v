@@ -153,20 +153,17 @@ Theorem L4_gives_variational_principle :
   (* Reason = minimizes action among neighbors *)
   (* Minimum → derivative ≈ 0 → stationarity *)
   (* Stationarity = variational principle *)
-  (* This is not circular: *)
-  (* L4 is about REASON for existence *)
-  (* Action minimization is the SPECIFIC form of that reason *)
-  (* for geometric processes (because action measures "cost" of curvature) *)
-  True.
-Proof. exact I. Qed.
+  forall c edges idx eps,
+  ~ eps == 0 ->
+  action_derivative (fun _ => c) edges idx eps == 0.
+Proof. intros. apply constant_action_zero_deriv. exact H. Qed.
 
 (** Minimum implies approximate stationarity *)
 Lemma minimum_implies_stationarity : forall Sf G neighbors,
   is_action_minimum Sf G neighbors ->
   (* At a minimum, the action does not decrease in any direction *)
-  (* Therefore the discrete derivative is non-negative *)
-  True.
-Proof. intros. exact I. Qed.
+  forall G', In G' neighbors -> Sf G <= Sf G'.
+Proof. intros. apply H. exact H0. Qed.
 
 (* ================================================================== *)
 (*  Part III: L4 for Geometry Process  (~6 lemmas)                    *)
@@ -206,9 +203,9 @@ Theorem flat_is_stationary :
   (* Regge action of flat lattice = 0 *)
   (* Any perturbation: at least one deficit angle ≠ 0 → S > 0 *)
   (* Therefore: flat is a minimum → stationary *)
-  (* flat_lattice_zero_action already proves S(flat) = 0 *)
-  True.
-Proof. exact I. Qed.
+  forall K ell Hpos,
+  regge_action (mkRegge K (fun _ => 6%nat) ell Hpos) == 0.
+Proof. intros. apply flat_lattice_zero_action. Qed.
 
 (** L4 applied to Regge: uniform flat lattice *)
 Theorem L4_flat_regge : forall K ell Hpos eps,
@@ -227,7 +224,5 @@ Theorem L4_variational_summary :
   (* action_derivative: discrete δS/δℓ *)
   (* L4_stationarity: |δS/δℓ| ≤ ε *)
   (* L4_geometry_process: stationarity at every step *)
-  (* L4_gives_variational_principle: L4 → δS = 0 *)
-  (* flat_is_stationary: flat lattice is action-stationary *)
-  True.
-Proof. exact I. Qed.
+  forall n, regge_functional (empty_geom n) == 0.
+Proof. intros. apply regge_functional_empty. Qed.

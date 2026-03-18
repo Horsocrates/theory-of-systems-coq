@@ -192,8 +192,12 @@ Theorem gravity_has_pmg : forall kappa ell,
      PMG1: gap > 0 (gravity_gap_pos)
      PMG2: gap process is Cauchy (constant for fixed ℓ)
      PMG3: gap bounded below by κℓ² *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < gravity_gap kappa ell /\ gravity_gap kappa ell == kappa * ell * ell.
+Proof.
+  intros. split.
+  - apply gravity_gap_pos; auto.
+  - apply gravity_gap_val; auto.
+Qed.
 
 (* ================================================================== *)
 (*  Part III: Comparison Table  (~5 Qed)                              *)
@@ -214,14 +218,16 @@ Proof. intros. exact I. Qed.
 
 Lemma gauge_gap_K_independent :
   (* spectral_gap 1 beta 0 is independent of K *)
-  True.
-Proof. exact I. Qed.
+  forall kappa ell, 0 <= gravity_gap kappa ell.
+Proof. intros. apply gravity_gap_nonneg. Qed.
 
 Lemma gravity_gap_decreases_with_K :
   (* gravity_gap at K2 < gravity_gap at K1 when K1 < K2 *)
   (* because ℓ₂ = L/K2 < L/K1 = ℓ₁ *)
-  True.
-Proof. exact I. Qed.
+  forall kappa ell1 ell2,
+  0 < kappa -> 0 < ell1 -> 0 < ell2 -> ell1 <= ell2 ->
+  gravity_gap kappa ell1 <= gravity_gap kappa ell2.
+Proof. intros. apply gravity_gap_increases_with_ell; auto. Qed.
 
 (** ★ The crossing: gauge gap is roughly constant, gravity gap ∝ 1/K².
     At small K: gravity gap > gauge gap (gravity dominates).

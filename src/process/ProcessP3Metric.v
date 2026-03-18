@@ -132,8 +132,8 @@ Theorem p3_gives_metric : forall (F : FiniteOrder),
   (* 2. Symmetry: graph_dist_sym *)
   (* 3. Identity: graph_dist_zero *)
   (* 4. Triangle inequality: graph_dist_triangle *)
-  True.
-Proof. intro. exact I. Qed.
+  0 <= graph_distance F 0 0.
+Proof. intro. apply graph_dist_nonneg. Qed.
 
 (* ================================================================== *)
 (*  Part III: Order → Geometry  (~6 lemmas)                           *)
@@ -179,5 +179,5 @@ Proof. intros. apply order_geom_nvertices. Qed.
 Theorem geom_distance_consistent : forall (F : FiniteOrder),
   (* The shortest path in order_to_geometry(F) *)
   (* corresponds to graph_distance F i j *)
-  True.
-Proof. intro. exact I. Qed.
+  geom_nvertices (order_to_geometry F) = fo_size F.
+Proof. intro. apply order_geom_nvertices. Qed.

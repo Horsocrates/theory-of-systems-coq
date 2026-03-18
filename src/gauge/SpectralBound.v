@@ -227,25 +227,25 @@ Theorem spectral_bound_result :
   (* 4. Tension ≤ gap for β ∈ {1,2,4,6,7} *)
   string_tension 1 <= spectral_gap_lower 1 /\
   string_tension 7 <= spectral_gap_lower 7 /\
-  (* 5. Tension exceeds gap at β=8 (σ > gap = 0) *)
-  (* → 2×2 transfer matrix is INSUFFICIENT *)
-  True.
+  (* 5. Tension exceeds gap at β=8: σ(8) > 0 = gap(8) *)
+  spectral_gap_lower 8 == 0 /\ 0 < string_tension 8.
 Proof.
   split; [exact spectral_gap_positive |].
   split; [exact spectral_gap_at_8 |].
   split; [apply string_tension_positive; lra |].
   split; [exact tension_vs_gap_at_1 |].
   split; [exact tension_vs_gap_at_7 |].
-  exact I.
+  split; [exact spectral_gap_at_8 |].
+  apply string_tension_positive. lra.
 Qed.
 
 (** σ > 0 implies need for K ≥ 3 *)
 Theorem tension_implies_larger_matrix :
-  (* If σ(8) > 0 is a valid lower bound on the true mass gap,
-     then the 2×2 (K=2) transfer matrix underestimates the gap.
-     Need K ≥ 3 to see nonzero gap at β=8. *)
-  True.
-Proof. exact I. Qed.
+  (* σ(8) > 0 but spectral gap(8) = 0: 2x2 matrix insufficient *)
+  0 < string_tension 8 /\ spectral_gap_lower 8 == 0.
+Proof.
+  split; [apply string_tension_positive; lra | exact spectral_gap_at_8].
+Qed.
 
 (** ★ SPECTRAL BOUND MAIN ★ *)
 Theorem spectral_main :

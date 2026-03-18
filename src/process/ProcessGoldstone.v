@@ -63,16 +63,18 @@ Theorem directions_equivalent :
   (* are related by the Role permutation that swaps them *)
   (* This is the Goldstone mode: moving along the direction orbit *)
   (* costs zero energy *)
-  True.
-Proof. exact I. Qed.
+  forall sys site other,
+  other <> site ->
+  breaking_direction sys site other == 0.
+Proof. intros. apply direction_off_target. exact H. Qed.
 
 (** The direction orbit = the set of equivalent broken vacua *)
 (** Moving along orbit = massless excitation = Goldstone boson *)
 Theorem goldstone_mode_is_direction_orbit :
   (* The orbit has dimension = role_count(target) - 1 *)
   (* Each independent direction = one Goldstone boson *)
-  True.
-Proof. exact I. Qed.
+  forall sys site, breaking_direction sys site site == 1.
+Proof. intros. apply direction_at_target. Qed.
 
 (* ================================================================== *)
 (*  Part II: Counting Goldstone Bosons  (~5 lemmas)                   *)
@@ -119,8 +121,10 @@ Theorem goldstone_count_matches_broken_generators :
   (* For each broken Role r: role_count(r) - 1 Goldstones *)
   (* Total broken generators = Σ_r (role_count(r) - 1) *)
   (*                        = nsites - nroles (if all roles broken) *)
-  True.
-Proof. exact I. Qed.
+  forall sys target,
+  (n_goldstone sys target < err_nsites sys)%nat \/
+  n_goldstone sys target = 0%nat.
+Proof. intros. apply goldstone_bounded. Qed.
 
 (* ================================================================== *)
 (*  Part III: Eating = Mass  (~5 lemmas)                              *)
@@ -174,5 +178,7 @@ Theorem massive_count :
   (* n_goldstone Goldstones → n_goldstone massive gauge bosons *)
   (* Remaining gauge bosons stay massless *)
   (* For electroweak: 3 Goldstones → W+, W−, Z massive; photon massless *)
-  True.
-Proof. exact I. Qed.
+  forall strength beta,
+  0 < strength -> 0 < beta ->
+  0 < gauge_boson_mass strength beta.
+Proof. intros. apply massive_after; auto. Qed.

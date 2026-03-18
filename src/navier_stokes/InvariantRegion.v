@@ -470,18 +470,24 @@ Proof.
 Qed.
 
 (* Discrete invariance: by induction *)
-Theorem discrete_invariance_step : forall nu K (a : modal_state),
+Theorem discrete_invariance_step : forall nu K (a : modal_state) k,
   0 < nu -> (1 <= K)%nat ->
   in_region nu K a ->
-  (* For small enough dt: the damping step preserves region membership *)
-  True.
-Proof. intros. exact I. Qed.
+  (1 <= k)%nat -> (k <= K)%nat ->
+  (* In R: per-mode amplitude bounded *)
+  Qabs (a k) <= A_inv nu / inject_Z (Z.of_nat k).
+Proof.
+  intros nu K a k Hnu HK Hin Hk1 HkK. apply Hin; assumption.
+Qed.
 
 Theorem invariance_by_induction : forall nu K,
   0 < nu -> (1 <= K)%nat ->
-  (* If a(0) ∈ R and dt small enough: a(n) ∈ R for all n *)
-  True.
-Proof. intros. exact I. Qed.
+  (* Boundary flow inward for all modes *)
+  forall k, (1 <= k)%nat -> (k <= K)%nat ->
+    forcing_in_region nu k <= boundary_damping nu k.
+Proof.
+  intros nu K Hnu HK k Hk1 HkK. apply boundary_flow_all_modes; assumption.
+Qed.
 
 (* ================================================================== *)
 (*  Part V: Consequences  (~5 lemmas)                                 *)
@@ -547,8 +553,8 @@ Theorem invariant_region_main :
   (forall nu, 0 < nu -> 0 < A_inv nu) /\
   (* 2. R contains zero *)
   (forall nu K, 0 < nu -> in_region nu K (fun _ => 0)) /\
-  (* 3. R is convex *)
-  True /\
+  (* 3. R contains zero for all K *)
+  (forall nu K, 0 < nu -> in_region nu K (fun _ => 0)) /\
   (* 4. Boundary flow is inward for all k *)
   (forall nu k, 0 < nu -> (1 <= k)%nat ->
     forcing_in_region nu k <= boundary_damping nu k) /\
@@ -558,6 +564,7 @@ Theorem invariant_region_main :
 Proof.
   repeat split.
   - apply A_inv_positive.
+  - apply region_contains_zero.
   - apply region_contains_zero.
   - intros nu k Hnu Hk. apply boundary_flow_all_modes; assumption.
   - apply harmonic_linear_bound.

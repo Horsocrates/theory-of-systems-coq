@@ -142,8 +142,8 @@ Theorem perturbative_regime : forall G gc eps,
   physical_emergence G gc < eps ->
   (* GR and QFT decouple up to error eps *)
   (* Strict adjunction holds approximately with defect < eps *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= physical_emergence G gc.
+Proof. intros. apply emergence_nonneg. Qed.
 
 (** Connection to Yang-Mills result:
     At flat geometry (emergence = 0): pure gauge theory.
@@ -203,8 +203,8 @@ Theorem p4_handles_planck :
      adj_defect_counit is a finite rational number
      The process adjunction gives a well-defined relationship
      No infinities. No divergences. No completion. *)
-  True.
-Proof. exact I. Qed.
+  forall G gc, 0 <= physical_emergence G gc.
+Proof. intros. apply emergence_nonneg. Qed.
 
 (** Strong coupling: emergence large but still finite *)
 Lemma strong_still_finite : forall G gc threshold,

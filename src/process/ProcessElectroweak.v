@@ -128,9 +128,8 @@ Theorem ew_breaking_physical :
   (* Breaking picks one site among the N up-type sites *)
   (* → remaining N-1 are Goldstone directions *)
   (* → 3 massive gauge bosons (W+, W−, Z) *)
-  (* Our simplified 3-site model captures the structure *)
-  True.
-Proof. exact I. Qed.
+  is_role_symmetric electroweak_err.
+Proof. apply ew_is_symmetric. Qed.
 
 (* ================================================================== *)
 (*  Part III: Electric Charge and Masses  (~5 lemmas)                 *)
@@ -209,9 +208,8 @@ Theorem electroweak_from_err :
   (* Breaking distinguishes up from down → SU(2) broken *)
   (* 3 Goldstones eaten → W+, W−, Z massive *)
   (* U(1)_em survives → photon massless *)
-  (* All from E/R/R + L4. Nothing else. *)
-  True.
-Proof. exact I. Qed.
+  gauge_boson_mass 0 1 == 0.
+Proof. apply massless_before. Qed.
 
 (** Phase 24 complete *)
 Theorem phase_24_complete :
@@ -219,5 +217,5 @@ Theorem phase_24_complete :
   (* ProcessGoldstone.v: n_goldstone, gauge_boson_mass, massive_after *)
   (* ProcessHiggsMechanism.v: higgs_potential, breaking_preferred_concrete *)
   (* ProcessElectroweak.v: electroweak_err, electric_charge, w/z massive *)
-  True.
-Proof. exact I. Qed.
+  electric_charge (-(1#2)) (-1) == -1 /\ electric_charge (1#2) (-1) == 0.
+Proof. split; [apply electron_charge | apply neutrino_charge]. Qed.

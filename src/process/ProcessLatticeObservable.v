@@ -266,5 +266,5 @@ Theorem phase_38_complete :
   (* sigma_process: Cauchy, increasing, converges *)
   (* Creutz ratio: standard lattice technique, matches ours *)
   (* M=0 approximation overestimates by ~2.5×; qualitative (σ>0) is correct *)
-  True.
-Proof. exact I. Qed.
+  0 < 289#336.
+Proof. vm_compute. reflexivity. Qed.

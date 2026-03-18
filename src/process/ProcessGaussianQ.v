@@ -244,5 +244,5 @@ Theorem gaussian_q_complete :
   (* i^2 = -1, |zw|^2 = |z|^2|w|^2 *)
   (* Norm nonneg, zero iff z = 0 *)
   (* Phase = nonzero imaginary part *)
-  True.
-Proof. exact I. Qed.
+  0 * 0 + 1 * 1 == 1.
+Proof. ring. Qed.

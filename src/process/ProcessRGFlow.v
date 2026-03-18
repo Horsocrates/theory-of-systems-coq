@@ -189,16 +189,21 @@ Theorem asymptotic_freedom_su2 :
   (* u decreases → coupling weakens → quarks free *)
   (* Under IR flow (blocking): *)
   (* u increases → coupling strengthens → quarks confined *)
-  True.
-Proof. exact I. Qed.
+  forall u, 0 < u -> u < 4 -> u < rg_step u /\ rg_step u <= 4.
+Proof.
+  intros u Hu1 Hu2. split.
+  - apply rg_increases_below_4; auto.
+  - apply rg_step_bounded; auto. lra.
+Qed.
 
 (** Gap flows to maximum in IR *)
 Theorem gap_flows_to_maximum :
   (* Under RG (blocking): gap(β) → gap at fixed point *)
   (* The mass gap strengthens in the IR *)
   (* = confinement gets STRONGER at larger distances *)
-  True.
-Proof. exact I. Qed.
+  forall u, 0 < u -> u < 4 ->
+  Qabs (rg_step u - 4) < Qabs (u - 4).
+Proof. intros. apply rg_contracts_toward_4; auto. Qed.
 
 (** Running coupling derived, not postulated *)
 Theorem running_coupling_derived :
@@ -208,8 +213,8 @@ Theorem running_coupling_derived :
   (* → RG map u' = 2u − u²/4 *)
   (* → Asymptotic freedom + confinement *)
   (* → Fixed point at u=4 *)
-  True.
-Proof. exact I. Qed.
+  rg_step 0 == 0 /\ rg_step 4 == 4.
+Proof. split; [apply rg_step_zero | apply rg_fixed_point_4]. Qed.
 
 (** The RG flow IS a process (P4) *)
 Theorem rg_is_P4_process :
@@ -217,8 +222,8 @@ Theorem rg_is_P4_process :
   (* Each step is a rational map: computable over Q *)
   (* The process converges to the fixed point *)
   (* No continuum limit needed — the process IS the physics *)
-  True.
-Proof. exact I. Qed.
+  forall n, rg_iterate 0 n == 0 /\ rg_iterate 4 n == 4.
+Proof. intros n. split; [apply rg_from_0 | apply rg_from_4]. Qed.
 
 (** Connection to mass gap *)
 Theorem rg_confirms_mass_gap :
@@ -226,5 +231,6 @@ Theorem rg_confirms_mass_gap :
   (* RG: gap flows toward maximum in IR *)
   (* Together: gap is bounded below AND strengthens *)
   (* = stable confinement *)
-  True.
-Proof. exact I. Qed.
+  forall u, 0 < u -> u <= 4 ->
+  0 < rg_step u /\ rg_step u <= 4.
+Proof. intros. apply rg_step_bounded; auto. Qed.

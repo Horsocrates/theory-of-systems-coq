@@ -114,14 +114,14 @@ Theorem unified_framework :
   (* Navier-Stokes via process mathematics *)
   (forall n, (1 <= n)%nat ->
     2 * harmonic_sum n <= inject_Z (Z.of_nat n) + 1) /\
-  (* Both from A = exists *)
-  True.
+  (* Both: conditional regularity threshold *)
+  (forall nu, 0 < nu -> 0 < A_inv nu).
 Proof.
   split; [| split; [| split]].
   - unfold strip_gap_at_8. lra.
   - unfold strip_gap_at_8. lra.
   - apply harmonic_linear_bound.
-  - exact I.
+  - apply A_inv_positive.
 Qed.
 
 (* Yang-Mills dimension ladder *)
@@ -130,12 +130,12 @@ Theorem ym_dimension_ladder :
   0 < (1#8) /\
   (* 2+1D gap = 3/4 *)
   strip_gap_at_8 == 3#4 /\
-  (* Gap increases with dimension *)
-  True.
+  (* 2+1D > 1+1D *)
+  (3#4) > (1#8).
 Proof.
   split; [lra |].
   split; [unfold strip_gap_at_8; lra |].
-  exact I.
+  lra.
 Qed.
 
 (* Navier-Stokes regularity chain *)

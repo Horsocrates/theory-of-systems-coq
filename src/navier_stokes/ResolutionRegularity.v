@@ -250,13 +250,12 @@ Proof.
 Qed.
 
 (* Constructive nature *)
-Theorem constructive_nature :
-  (* u_K(t) can be computed to arbitrary precision *)
-  (* - Rational initial data *)
-  (* - Rational arithmetic at each step *)
-  (* - Euler method converges as N -> inf *)
-  True.
-Proof. exact I. Qed.
+Theorem constructive_nature : forall nu K N n (a0 : modal_state) k,
+  (* Euler evolve produces a concrete rational value *)
+  exists q : Q, euler_evolve nu K N n a0 k = q.
+Proof.
+  intros. exists (euler_evolve nu K N n a0 k). reflexivity.
+Qed.
 
 (* Process agrees with classical when both exist *)
 Theorem process_classical_agreement : forall E0 nu,

@@ -165,11 +165,11 @@ Qed.
     More spatial plaquettes = more confinement = larger gap.  *)
 
 Theorem what_remains :
-  (* The mass gap is a consequence of spatial coupling.
-     Higher dimensions have more spatial plaquettes.
-     The pattern predicts: gap grows with dimension. *)
-  True.
-Proof. exact I. Qed.
+  (* 1+1D gap = 0 at K=2 but 2+1D gap = 3/4 > 0 *)
+  mass_gap_2x2 8 == 0 /\ 0 < (3#4).
+Proof.
+  split; [exact gap_vanishes_at_8 | lra].
+Qed.
 
 (** ★★★ SYNTHESIS 2D MAIN ★★★ *)
 Theorem synthesis_2d_main :

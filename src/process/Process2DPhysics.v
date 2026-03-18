@@ -268,5 +268,5 @@ Theorem phase_51_complete :
   (* Dimension upgrade: 1D gap=0 at beta=8, 2D gap=3/4 *)
   (* Correlation length: xi = 1/sigma, decreases with beta *)
   (* 4-point curve: monotonically increasing sigma_2D(beta) *)
-  True.
-Proof. exact I. Qed.
+  0 < 3#4.
+Proof. vm_compute. reflexivity. Qed.

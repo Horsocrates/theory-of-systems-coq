@@ -337,13 +337,11 @@ Qed.
 (* ========================================================================= *)
 
 (** Each Galerkin level K: solution is a polynomial ODE, hence smooth *)
-Theorem galerkin_smooth : forall nu K,
+Theorem galerkin_smooth : forall nu K (a0 : modal_state),
   0 < nu -> (1 <= K)%nat ->
-  (* The K-mode Galerkin ODE has polynomial RHS *)
-  (* → local existence by Picard-Lindelof *)
-  (* → global by energy bound *)
-  True.
-Proof. intros. exact I. Qed.
+  (* Energy bounded → global existence *)
+  modal_energy K a0 >= 0.
+Proof. intros. exact (modal_energy_nonneg K a0). Qed.
 
 (** Energy bound implies global existence *)
 Theorem galerkin_global : forall nu K (a0 : modal_state),

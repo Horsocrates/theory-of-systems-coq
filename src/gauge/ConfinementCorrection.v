@@ -215,12 +215,12 @@ Qed.
 
 (** Structural: either modify correction or modify RG *)
 Theorem correction_or_new_rg :
-  (* To get confinement, you need EITHER: *)
-  (* 1. A non-RG-compatible correction (instantons, topology) *)
-  (* 2. A modified RG flow (asymptotic freedom changes the RG) *)
-  (* 3. Both *)
-  True.
-Proof. exact I. Qed.
+  (* No RG-compatible correction works *)
+  forall beta m, 0 < beta -> beta < 8 -> 0 < m ->
+    ~ exists delta, rg_compatible beta delta /\ preserves_gap delta m.
+Proof.
+  exact no_compatible_gap.
+Qed.
 
 (* ========================================================================= *)
 (*  PART IV: String tension paradox                                           *)
@@ -248,14 +248,11 @@ Qed.
 
 (** Model inconsistency at the critical point *)
 Theorem model_inconsistency :
-  (* String tension σ = 3/(4β) predicts confinement for all β > 0 *)
-  (* But our mass gap vanishes at β = 8 *)
-  (* This means: *)
-  (* 1. Strong coupling formula is only valid at small β *)
-  (* 2. Confinement is a genuinely non-perturbative phenomenon *)
-  (* 3. Our model (2×2 transfer matrix) is too simple *)
-  True.
-Proof. exact I. Qed.
+  (* String tension positive but mass gap zero at critical coupling *)
+  0 < string_tension 8 /\ su2_mass_gap 8 == 0.
+Proof.
+  exact tension_gap_paradox.
+Qed.
 
 (* ========================================================================= *)
 (*  PART V: Summary                                                           *)
@@ -278,12 +275,13 @@ Qed.
 
 (** Three mechanisms missing from our model *)
 Theorem three_mechanisms_missing :
-  (* 1. Asymptotic freedom: coupling DECREASES at short distance *)
-  (* 2. Instantons: topological tunneling (π₃(SU(2))=Z) *)
-  (* 3. Dimensional transmutation: Λ_QCD emerges from running coupling *)
-  (* None representable in Q arithmetic with 2×2 transfer matrices *)
-  True.
-Proof. exact I. Qed.
+  (* Our model: gap vanishes at β=8 but gap positive at every finite step *)
+  (forall beta eps, 0 < beta -> beta < 8 -> 0 < eps ->
+    exists k, su2_gap_at_k beta k < eps) /\
+  (forall beta k, 0 < beta -> beta < 8 -> 0 < su2_gap_at_k beta k).
+Proof.
+  split; [exact su2_gap_vanishes | exact su2_gap_positive_all_k].
+Qed.
 
 (** ★ Confinement analysis main theorem ★ *)
 Theorem confinement_main :

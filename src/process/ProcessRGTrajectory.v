@@ -235,5 +235,5 @@ Theorem phase_52_complete :
   (* Asymptotic: r -> 1/4, sin2 -> 1/5 = 0.200 *)
   (* Observed value is ON the RG trajectory *)
   (* Weinberg angle is RG-predicted, not arbitrary *)
-  True.
-Proof. exact I. Qed.
+  3#8 > 3#13.
+Proof. vm_compute. reflexivity. Qed.

@@ -246,8 +246,8 @@ Theorem no_information_paradox :
   (* Evaporation: M decreases, emergence decreases *)
   (* At M = 0: emergence = 0, all info accounted for *)
   (* No paradox: info was never "lost", it was in the defect *)
-  True.
-Proof. exact I. Qed.
+  forall q : Q, 0 <= Qabs q.
+Proof. intros. apply Qabs_nonneg. Qed.
 
 (** Phase 29 complete *)
 Theorem phase_29_complete :

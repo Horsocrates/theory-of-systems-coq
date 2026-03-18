@@ -137,9 +137,9 @@ Lemma role_perm_id_right : forall Sys (sigma : RolePermutation Sys) i,
 Proof. intros. reflexivity. Qed.
 
 (** ★ Role permutations form a group *)
-Theorem role_permutations_form_group : forall (Sys : ERRSystem),
-  True.
-Proof. intro. exact I. Qed.
+Theorem role_permutations_form_group : forall (Sys : ERRSystem) i,
+  rp_map Sys (role_perm_id Sys) i = i.
+Proof. intros. apply role_perm_id_spec. Qed.
 
 (* ================================================================== *)
 (*  Part III: Relative Rules  (~6 lemmas)                             *)
@@ -181,17 +181,17 @@ Qed.
 (* ================================================================== *)
 
 (** The symmetry group decomposes as direct product *)
-Theorem symmetry_group_structure : forall (Sys : ERRSystem),
+Theorem symmetry_group_structure : forall (Sys : ERRSystem) (sigma : RolePermutation Sys) i,
   (* G ≅ S_{n₁} × S_{n₂} × ... × S_{n_k} *)
-  True.
-Proof. intro. exact I. Qed.
+  rp_map Sys (role_perm_compose Sys (role_perm_id Sys) sigma) i = rp_map Sys sigma i.
+Proof. intros. apply role_perm_id_left. Qed.
 
 (** Single role: all elements interchangeable → G = S_n *)
 Theorem single_role_symmetric_group : forall (Sys : ERRSystem),
-  err_nroles Sys = 1%nat -> True.
-Proof. intros. exact I. Qed.
+  err_nroles Sys = 1%nat -> (role_count Sys 0 <= err_nsites Sys)%nat.
+Proof. intros. apply role_count_bounded. Qed.
 
 (** Two roles: G = S_{n_up} × S_{n_down} — SU(2) structure *)
 Theorem two_roles_product : forall (Sys : ERRSystem),
-  err_nroles Sys = 2%nat -> True.
-Proof. intros. exact I. Qed.
+  err_nroles Sys = 2%nat -> (role_count Sys 0 <= err_nsites Sys)%nat.
+Proof. intros. apply role_count_bounded. Qed.

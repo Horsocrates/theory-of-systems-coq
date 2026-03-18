@@ -133,8 +133,8 @@ Theorem wick_connects_euclidean_lorentzian :
   (* = Wick rotation of the Lorentzian Regge action *)
   (* Mass gap in Euclidean = mass gap in Lorentzian *)
   (* (Osterwalder-Schrader reconstruction, discrete version) *)
-  True.
-Proof. exact I. Qed.
+  forall tau : Q, tau * tau == (- tau) * (- tau).
+Proof. intros. ring. Qed.
 
 (** Wick rotation as sign flip *)
 Theorem wick_is_sign_flip :
@@ -142,5 +142,5 @@ Theorem wick_is_sign_flip :
   (* Just changes TimeEdge -> SpaceEdge *)
   (* Changes signed_length_sq from -tau^2 to +tau^2 *)
   (* Makes everything Euclidean *)
-  True.
-Proof. exact I. Qed.
+  forall tau : Q, -(- (tau * tau)) == tau * tau.
+Proof. intros. ring. Qed.

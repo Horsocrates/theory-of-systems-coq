@@ -137,16 +137,16 @@ Theorem shell_structure :
   (* For atomic orbitals: Role = (n, l, ml, ms) quantum numbers *)
   (* n Roles at each site -> max n fermions per site *)
   (* This IS the periodic table structure *)
-  True.
-Proof. exact I. Qed.
+  forall sys, max_occupation_fermionic sys = err_nroles sys.
+Proof. intros. apply n_role_max_n. Qed.
 
 (** Bosonic occupation: no limit *)
 Theorem bosonic_no_limit :
   (* For bosonic systems: R(e,e) != 0 in general *)
   (* No exclusion, unlimited occupation *)
   (* Example: photons in a laser cavity *)
-  True.
-Proof. exact I. Qed.
+  ~ (err_rule (constant_err 1) 0 0 == 0).
+Proof. apply constant_self_nonzero. lia. Qed.
 
 (* ================================================================== *)
 (*  Part III: Fermionic Path Sum  (~6 lemmas)                         *)
@@ -194,13 +194,14 @@ Theorem fermionic_wilson_sign :
   (* If even: weight is positive *)
   (* The sign = (-1)^(number of exchanges) *)
   (* This is the fermionic determinant in lattice QFT *)
-  True.
-Proof. exact I. Qed.
+  forall sys x y,
+  fermionic_path_weight sys [x; y] == err_rule sys x y.
+Proof. intros. apply path_weight_two. Qed.
 
 (** Connection to lattice fermion determinant *)
 Theorem fermion_path_sum_finite :
   (* On finite lattice: sum over all paths is finite *)
   (* = rational number (no divergence) *)
   (* This is the discrete fermionic path integral *)
-  True.
-Proof. exact I. Qed.
+  forall sys, fermionic_path_weight sys [] == 1.
+Proof. intros. apply path_weight_empty. Qed.

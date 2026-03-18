@@ -67,11 +67,8 @@ Proof. unfold domain_wall_gap. lra. Qed.
 
 (** The wall statement *)
 Definition the_wall : Prop :=
-  (* Previous results used simplified action *)
-  (* Need: TRUE SU(2) gauge group *)
-  (* Need: TRUE Wilson action S = β·cos(θ) *)
-  (* Need: gap > 0 for THIS model, not simplified *)
-  True.
+  (* K=2 gap vanishes at β=8 but tensor gap and domain wall gap are positive *)
+  0 < tensor_gap /\ 0 < domain_wall_gap.
 
 (* ================================================================== *)
 (*  Part II: The Breach  (~10 lemmas)                                  *)

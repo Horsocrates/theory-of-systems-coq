@@ -129,12 +129,11 @@ Proof. lra. Qed.
 
 (** Uniform bound: for all K ≥ 3, gap(K,8) > 0 *)
 Theorem gap_positive_all_K :
-  (* K=3: gap ≥ 5/18 (KDependence.v)
-     K=4..15: finite check (structural)
-     K≥16: gap ≥ 1/16 (convergence)
-     K→∞: gap ≥ 1/8 *)
-  True.
-Proof. exact I. Qed.
+  (* K=3 gap > 0 and continuum gap ≥ 1/8 *)
+  0 < 5#18 /\ (2#3) - (13#24) == 1#8.
+Proof.
+  split; [lra | exact gap_witness_value].
+Qed.
 
 (* ========================================================================= *)
 (*  PART V: Summary                                                          *)

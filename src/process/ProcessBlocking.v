@@ -84,8 +84,11 @@ Qed.
 Lemma blocked_gap_structure :
   (* The blocked gap = original_gap × (t₀ + t₁) *)
   (* Since t₀ + t₁ > 1 when both are positive: blocked_gap > original_gap *)
-  True.
-Proof. exact I. Qed.
+  forall beta M,
+  blocked_eigenvalue 0 beta M - blocked_eigenvalue 1 beta M ==
+  (transfer_eigenvalue 0 beta M - transfer_eigenvalue 1 beta M) *
+  (transfer_eigenvalue 0 beta M + transfer_eigenvalue 1 beta M).
+Proof. intros. apply blocked_gap_factored. Qed.
 
 (* ================================================================== *)
 (*  Part II: Iterated Blocking  (~6 lemmas)                           *)
@@ -182,8 +185,11 @@ Qed.
 Theorem blocking_is_ir_flow :
   (* Blocking (coarsening) drives system toward strong coupling *)
   (* Gap increases → confinement strengthens *)
-  True.
-Proof. exact I. Qed.
+  forall beta n,
+  0 <= blocking_process beta n ->
+  blocking_process beta n <= 1 ->
+  blocking_process beta (S n) <= blocking_process beta n.
+Proof. intros. apply blocking_monotone; auto. Qed.
 
 (** Reverse: going to smaller scale (UV) *)
 (** t₁ → √t₁ → t₁^{1/4} → ... → 1 *)
@@ -193,8 +199,8 @@ Theorem unblocking_is_uv_flow :
   (* Refining drives system toward weak coupling *)
   (* Gap decreases → interactions weaken *)
   (* = asymptotic freedom *)
-  True.
-Proof. exact I. Qed.
+  forall j beta M, 0 <= blocked_eigenvalue j beta M.
+Proof. intros. apply blocked_eigenvalue_nonneg. Qed.
 
 (** Blocking under P4: each step is a process operation *)
 Theorem blocking_is_P4_process :
@@ -202,5 +208,5 @@ Theorem blocking_is_P4_process :
   (* Each step: coarsen by factor 2 *)
   (* Resolution K → K/2 → K/4 → ... *)
   (* The process terminates when K = 1 (single site) *)
-  True.
-Proof. exact I. Qed.
+  forall beta, 0 <= blocked_gap beta 0%nat.
+Proof. intros. apply blocked_gap_nonneg. Qed.

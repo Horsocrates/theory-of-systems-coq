@@ -167,24 +167,24 @@ Theorem gap_monotone_ir :
   (* For 0 < u < 4: blocking increases u *)
   (* Higher u → stronger coupling → larger gap *)
   (* Gap monotonically increases toward IR fixed point *)
-  True.
-Proof. exact I. Qed.
+  forall u, 0 < u -> u < 4 -> 0 < discrete_beta u.
+Proof. intros. apply beta_positive; auto. Qed.
 
 (** AF and confinement are two sides of the SAME coin *)
 Theorem af_confinement_duality :
   (* UV: coupling decreases (AF) — same RG map, reversed *)
   (* IR: coupling increases (confinement) — same RG map, forward *)
   (* Both from: u' = 2u − u²/4 with fixed points at 0 and 4 *)
-  True.
-Proof. exact I. Qed.
+  discrete_beta 0 == 0 /\ discrete_beta 4 == 0.
+Proof. split; [apply beta_zero | apply beta_fixed]. Qed.
 
 (** All from E/R/R: no additional input needed *)
 Theorem all_from_err :
   (* E/R/R → transfer matrix → blocking → eigenvalue squaring *)
   (* → gap matching → RG map → beta function → AF + confinement *)
   (* The entire running coupling is DERIVED *)
-  True.
-Proof. exact I. Qed.
+  forall u, (4#1) * discrete_beta u == u * (4 - u).
+Proof. intros. apply beta_factored. Qed.
 
 (** Phase 25 complete *)
 Theorem phase_25_complete :
@@ -192,8 +192,8 @@ Theorem phase_25_complete :
   (* ProcessRGFlow.v: rg_step, fixed points, convergence *)
   (* ProcessAsymptoticFreedom.v: beta function, AF, confinement *)
   (* Total: ~54 Qed across 3 files *)
-  True.
-Proof. exact I. Qed.
+  rg_step 1 == 7 # 4.
+Proof. apply concrete_rg_step_1. Qed.
 
 (** Connection to Phase 24 *)
 Theorem phase_24_25_connection :
@@ -201,5 +201,5 @@ Theorem phase_24_25_connection :
   (* Phase 25: Blocking → RG flow → AF + confinement *)
   (* Together: the Standard Model structure is derived *)
   (* Masses from breaking, running from blocking *)
-  True.
-Proof. exact I. Qed.
+  1 < 7#4 /\ (7#4) < 161#64 /\ 161#64 < 4.
+Proof. apply coupling_chain. Qed.

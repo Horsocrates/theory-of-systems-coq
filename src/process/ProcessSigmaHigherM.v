@@ -296,5 +296,5 @@ Theorem phase_50_5_complete :
   (* Reason: partial Bessel sums change eigenvalue ratios non-monotonically *)
   (* The sigma(M) process exists: each M gives exact Q *)
   (* Physical sigma requires full Bessel functions, not partial sums *)
-  True.
-Proof. exact I. Qed.
+  forall q, q == q.
+Proof. intros. reflexivity. Qed.

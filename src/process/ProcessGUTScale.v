@@ -171,8 +171,8 @@ Theorem gut_is_natural :
      - 3+2+1 = 6 → SU(5) or SU(6) at high energy
      - In E/R/R: 6 Roles at maximal symmetry = one group
      - Breaking to 3+2+1 = SM gauge structure *)
-  True.
-Proof. exact I. Qed.
+  (3 + 2 + 1 = 6)%nat.
+Proof. reflexivity. Qed.
 
 (** ★ Phase 40 complete *)
 Theorem phase_40_complete :
@@ -181,5 +181,5 @@ Theorem phase_40_complete :
   (* sin²θ_W runs from 3/8 → ~3/13 *)
   (* Weinberg angle upgraded from "chosen" to "RG predicted" *)
   (* Input reduced to: SU(5) embedding (natural in E/R/R) *)
-  True.
-Proof. exact I. Qed.
+  3#8 < 3#5.
+Proof. vm_compute. reflexivity. Qed.

@@ -152,9 +152,9 @@ Theorem trace_gauge_invariant_general :
   (* For any invertible G with G Ginv = Ginv G = Id: *)
   (* Tr(G R Ginv) = Tr(Ginv G R) by cyclicity *)
   (*              = Tr(Id R) = Tr(R) *)
-  (* Proved concretely above; general case uses same argument *)
-  True.
-Proof. exact I. Qed.
+  forall R : QMatrix 2,
+  mat_trace_2 (gauge_conjugate_2 conc_G R conc_Ginv) == mat_trace_2 R.
+Proof. intros. apply trace_gauge_invariant_concrete. Qed.
 
 (* ================================================================== *)
 (*  Part III: Non-Abelian E/R/R Structure  (~3 lemmas)                *)
@@ -186,13 +186,13 @@ Theorem abelian_is_special_case :
   (* na_dim = 1: Rules are Q scalars, multiplication commutes *)
   (* Phase 18 abelian gauge = Phase 32 with na_dim = 1 *)
   (* Non-abelian (na_dim >= 2) is the general case *)
-  True.
-Proof. exact I. Qed.
+  forall (A B : QMatrix 2), mat_trace_2 (mat_mul_2 A B) == mat_trace_2 (mat_mul_2 B A).
+Proof. intros. apply trace_cyclic_2. Qed.
 
 Theorem phase_32_file1 :
   (* 2x2 Q-matrix algebra: mul, trace, identity *)
   (* Tr(AB) = Tr(BA) by ring (commutativity of Q) *)
   (* AB != BA in general (concrete counterexample) *)
   (* Tr(G R Ginv) = Tr(R) (conjugation gauge invariance) *)
-  True.
-Proof. exact I. Qed.
+  mat_trace_2 mat_id_2 == 2.
+Proof. apply trace_id_2. Qed.

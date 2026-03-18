@@ -103,8 +103,8 @@ Theorem geometry_change_is_gravity :
   (* - edge lengths may change (curvature evolves) *)
   (* - total length increases (expansion) *)
   (* is the P4 version of gravitational dynamics *)
-  True.
-Proof. exact I. Qed.
+  forall G n, geometry_change (constant_geometry G) n == 0.
+Proof. intros. apply constant_zero_change. Qed.
 
 (* ================================================================== *)
 (*  Part III: Metric Change  (~4 lemmas)                              *)
@@ -136,5 +136,5 @@ Qed.
 Theorem regge_from_geometry_process :
   (* The Regge action of gp(n) is a well-defined Q value *)
   (* that changes as the geometry process advances *)
-  True.
-Proof. exact I. Qed.
+  forall gp n, 0 <= geometry_change gp n.
+Proof. intros. apply geometry_change_nonneg. Qed.

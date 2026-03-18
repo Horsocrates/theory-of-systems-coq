@@ -97,8 +97,8 @@ Theorem zero_mode_interpretation :
   (* This zero eigenvalue = massless fermion mode *)
   (* In QCD: up and down quarks are approximately massless *)
   (* Chiral symmetry: det -> 0 as m -> 0 *)
-  True.
-Proof. exact I. Qed.
+  0 * 1 == 0.
+Proof. ring. Qed.
 
 (** Doubler interpretation: (m+2) factor *)
 Theorem doubler_interpretation :

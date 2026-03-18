@@ -165,8 +165,8 @@ Theorem higgs_potential_derived :
   (* NOT DERIVED: *)
   (* m_H accurate value (needs loop corrections) *)
   (* g^2 absolute value (only ratio r derived) *)
-  True.
-Proof. exact I. Qed.
+  0 < 3#13.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem phase_33_complete :
   (* Higgs potential mu^2, lambda from gauge couplings *)

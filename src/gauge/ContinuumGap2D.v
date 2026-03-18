@@ -155,8 +155,12 @@ Qed.
     📋 3+1D continuum: the Millennium Problem *)
 
 Theorem what_remains :
-  True.
-Proof. exact I. Qed.
+  (* 1+1D gap = 0 at K=2 but 2+1D gap > 0 *)
+  mass_gap_2x2 8 == 0 /\ 0 < mass_gap_2d_at_8.
+Proof.
+  split; [exact gap_vanishes_at_8 |].
+  unfold mass_gap_2d_at_8. lra.
+Qed.
 
 (** ★★★ CONTINUUM GAP 2D MAIN ★★★ *)
 Theorem continuum_gap_2d_main :

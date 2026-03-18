@@ -147,8 +147,8 @@ Theorem higgs_mass_is_process :
   (* Increasing: tree-level + growing fermion loop *)
   (* Matches experiment at specific K *)
   (* The "right" K = physical Planck-to-EW ratio *)
-  True.
-Proof. exact I. Qed.
+  0 < lambda_physical.
+Proof. unfold lambda_physical. vm_compute. reflexivity. Qed.
 
 (** What's improved *)
 Theorem phase_35_5_improvement :
@@ -173,5 +173,5 @@ Theorem higgs_remaining :
   (* Resummation (large logs need RG improvement) *)
   (* Why K ~ 500? (= hierarchy problem: why is Planck/EW ~ 10^17?) *)
   (* Naturalness: delta_lambda >> lambda_tree = fine-tuning problem *)
-  True.
-Proof. exact I. Qed.
+  lambda_physical < delta_lambda 8.
+Proof. apply correction_dominates_K8. Qed.

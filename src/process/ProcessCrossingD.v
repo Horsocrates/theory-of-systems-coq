@@ -106,29 +106,35 @@ Theorem K_star_depends_on_D :
   (* K*^D = 384κL^D / 289 *)
   (* Higher D: K* = L · (384κ/289)^{1/D} *)
   (* As D increases, K* grows (more lattice sites needed) *)
-  True.
-Proof. exact I. Qed.
+  forall beta kappa L D K_large,
+  0 <= crossing_D beta kappa L D 0%nat ->
+  crossing_D beta kappa L D K_large < 0 ->
+  exists K_star, is_crossing_point_D beta kappa L D K_star.
+Proof.
+  intros. destruct (crossing_exists_D beta kappa L D K_large H H0) as [K [Hk1 Hk2]].
+  exists K. unfold is_crossing_point_D. auto.
+Qed.
 
 (** Concrete: D=1, κ=1/10, L=10 → crossing at small K *)
 Theorem concrete_D1 :
   (* D=1: κL = 1/10 · 10 = 1 > 289/384 ≈ 0.752 *)
   (* Crossing at K* ≈ 1 *)
-  True.
-Proof. exact I. Qed.
+  Qpow (1#10) 1 * Qpow 10 1 == 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** Concrete: D=2, κ=1/10, L=10 → crossing at moderate K *)
 Theorem concrete_D2 :
   (* D=2: κL² = 1/10 · 100 = 10 > 289/384 *)
   (* Crossing at K* ≈ 3 *)
-  True.
-Proof. exact I. Qed.
+  Qpow (1#10) 1 * Qpow 10 2 == 10.
+Proof. vm_compute. reflexivity. Qed.
 
 (** Concrete: D=3, κ=1/10, L=10 → crossing at larger K *)
 Theorem concrete_D3 :
   (* D=3: κL³ = 1/10 · 1000 = 100 > 289/384 *)
   (* Crossing at K* ≈ 7 *)
-  True.
-Proof. exact I. Qed.
+  Qpow (1#10) 1 * Qpow 10 3 == 100.
+Proof. vm_compute. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  Part III: Combined Gap in D Dimensions  (~5 lemmas)               *)
@@ -175,5 +181,8 @@ Theorem crossing_D_summary :
   (* crossing_exists_D: crossing exists in any D *)
   (* combined_gap_D: min(gauge, gravity) in D *)
   (* gap_survives_crossing_D: gap positive when both positive *)
-  True.
-Proof. exact I. Qed.
+  forall beta kappa L D K,
+  0 < gauge_gap_any_D beta D K ->
+  0 < gravity_gap_D_at_K kappa L D K ->
+  0 < combined_gap_D beta kappa L D K.
+Proof. intros. apply combined_gap_D_pos; auto. Qed.

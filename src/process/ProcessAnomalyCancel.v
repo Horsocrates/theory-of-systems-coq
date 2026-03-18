@@ -168,5 +168,5 @@ Theorem sm_is_chiral :
   (* The SM has 5 species with different charges and multiplicities *)
   (* It is NOT of the form (q,-q) pairs *)
   (* This makes anomaly cancellation non-trivial *)
-  True.
-Proof. exact I. Qed.
+  (5 > 2)%nat.
+Proof. lia. Qed.

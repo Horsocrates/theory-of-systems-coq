@@ -138,9 +138,9 @@ Theorem gravity_gap_D_dependence :
   (* D=1: gap ∝ 1/K (slow decrease) *)
   (* D=2: gap ∝ 1/K² (moderate decrease) *)
   (* D=3: gap ∝ 1/K³ (fast decrease) *)
-  (* Higher D → gravity drops off faster at fine scales *)
-  True.
-Proof. exact I. Qed.
+  forall kappa L D, 0 <= kappa -> 0 <= L ->
+  0 <= gravity_gap_D_at_K kappa L D 0%nat.
+Proof. intros. apply gravity_gap_D_at_K_nonneg; auto. Qed.
 
 (* ================================================================== *)
 (*  Part III: Gauge Gap D-Independence  (~4 lemmas)                   *)
@@ -168,6 +168,6 @@ Qed.
 Theorem gauge_gravity_asymmetry :
   (* Gauge gap: dimension-independent (character expansion) *)
   (* Gravity gap: dimension-dependent (κℓ^D) *)
-  (* This asymmetry is WHY dimension matters for the crossing *)
-  True.
-Proof. exact I. Qed.
+  forall beta D1 D2 K,
+  gauge_gap_any_D beta D1 K == gauge_gap_any_D beta D2 K.
+Proof. intros. apply gauge_gap_D_independent. Qed.

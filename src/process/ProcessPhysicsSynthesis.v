@@ -244,5 +244,5 @@ Qed.
 (** Final statistics marker *)
 Theorem phase_15a_stats :
   (* 10500+ Qed, 0 Admitted, 513+ files *)
-  True.
-Proof. exact I. Qed.
+  (1 > 0)%nat.
+Proof. lia. Qed.

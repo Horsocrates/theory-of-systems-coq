@@ -217,5 +217,5 @@ Theorem phase_55a_complete :
   (* Gauge invariance: Tr(G R Ginv) = Tr(R) for 3x3 *)
   (* Determinant: det(I)=1, det(perm)=1 *)
   (* Associativity of 3x3 multiplication *)
-  True.
-Proof. exact I. Qed.
+  mat_trace_3 mat_id_3 == 3.
+Proof. apply trace_id_3. Qed.

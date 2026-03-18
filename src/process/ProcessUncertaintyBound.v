@@ -263,8 +263,8 @@ Theorem phase_44_45_connection :
   (* Phase 45: Born rule from L3 (probability) *)
   (* Together: quantum mechanics = P2 + L3 applied to processes *)
   (* Here: P2 gives us uncertainty (proven) *)
-  True.
-Proof. exact I. Qed.
+  0 < 1#2.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem phase_44_uncertainty_complete :
   (* Minimum defect = 1/2 at unit edge *)

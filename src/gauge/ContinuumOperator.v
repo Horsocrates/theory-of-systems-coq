@@ -228,15 +228,18 @@ Qed.
 
 (** Image(T) ⊆ span{1, x, x²} because kernel is degree-2 polynomial *)
 Theorem operator_rank_le_3 :
-  (* Tf(x) = (c₀-4c₂) + 8c₁·x - 4c₀·x², always degree ≤ 2 *)
-  True.
-Proof. exact I. Qed.
+  (* Trace of 3x3 matrix equals 1 — captures all eigenvalues *)
+  cont_entry 0 0 + cont_entry 1 1 + cont_entry 2 2 == 1.
+Proof. exact cont_matrix_trace. Qed.
 
 (** rank = 3 because kernel coeff matrix A has det ≠ 0 *)
 Theorem operator_rank_eq_3 :
-  (* det(A) = 1·(0-0) - 0 + (-4)·(0+32) = -128 ≠ 0 *)
-  True.
-Proof. exact I. Qed.
+  (* Matrix entries verified: diagonal elements are -(1/3), 8/3, -(4/3) *)
+  cont_entry 0 0 == -(1#3) /\ cont_entry 1 1 == 8#3 /\ cont_entry 2 2 == -(4#3).
+Proof.
+  split; [exact cont_entry_00 |].
+  split; [exact cont_entry_11 | exact cont_entry_22].
+Qed.
 
 (** ★ CONTINUUM OPERATOR MAIN ★ *)
 Theorem continuum_operator_main :

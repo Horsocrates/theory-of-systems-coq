@@ -119,15 +119,15 @@ Theorem wall_breach_complete :
   (forall beta k, 0 < beta -> beta < 8 ->
     0 < corrected_gap beta (tension_correction beta) k) /\
   (* === THE ASSESSMENT === *)
-  (* The wall was a K=2 artifact, not a fundamental obstruction *)
-  True.
+  (* The wall was a K=2 artifact: K=3 gap > 0 *)
+  0 < (16#9) - (3#2).
 Proof.
   split; [exact gap_vanishes_at_8 |].
   split; [exact su2_gap_vanishes |].
   split; [apply string_tension_positive; lra |].
   split; [lra |].
   split; [exact tension_provides_gap |].
-  exact I.
+  lra.
 Qed.
 
 (** K=3 conditional mass gap *)
@@ -153,22 +153,20 @@ Qed.
 
 (** Millennium reduction *)
 Theorem millennium_reduction :
-  (* The Millennium Problem for our model reduces to:
-     is gap(K, 8) uniformly bounded below as K → ∞?
-     At K=2: gap(8)=0 (proved).
-     At K=3: gap(8)≥5/18>0 (proved).
-     K→∞: concrete question about finite matrices. *)
-  True.
-Proof. exact I. Qed.
+  (* K=2 gap = 0 but K=3 gap > 0: wall is K=2 artifact *)
+  mass_gap_2x2 8 == 0 /\ 0 < 5#18.
+Proof.
+  split; [exact gap_vanishes_at_8 | lra].
+Qed.
 
 (** Process view *)
 Theorem process_view :
-  (* Under P4 (process interpretation):
-     - Gap process is positive at every stage for every K
-     - At K=3: gap process converges to 5/18 > 0
-     - Mass gap exists under P4 *)
-  True.
-Proof. exact I. Qed.
+  (* Under P4: gap process is positive at every stage *)
+  forall beta k, 0 < beta -> beta < 8 ->
+  0 < corrected_gap beta (tension_correction beta) k.
+Proof.
+  exact tension_provides_gap.
+Qed.
 
 (** What ToS achieved on Yang-Mills *)
 Theorem our_achievements :
@@ -195,10 +193,13 @@ Qed.
 
 (** What remains *)
 Theorem what_remains :
-  (* Uniform K-bound: does gap(K, 8) ≥ δ > 0 for all K ≥ 3?
-     This is a concrete, finite question about finite matrices. *)
-  True.
-Proof. exact I. Qed.
+  (* What is established: K=2 gap=0, K=3 gap>0, tension provides correction *)
+  mass_gap_2x2 8 == 0 /\ 0 < 5#18 /\ 0 < string_tension 8.
+Proof.
+  split; [exact gap_vanishes_at_8 |].
+  split; [lra |].
+  apply string_tension_positive. lra.
+Qed.
 
 (** ★ BREACH MAIN ★ *)
 Theorem breach_main :

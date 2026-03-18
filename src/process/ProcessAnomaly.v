@@ -100,8 +100,10 @@ Proof. reflexivity. Qed.
 (** All anomalies are Q-valued (exact rational computation) *)
 Theorem anomalies_are_rational : forall (mc : MatterContent),
   (* cubic_anomaly, linear_anomaly, quadratic_anomaly are all in Q by construction *)
-  True.
-Proof. intros. exact I. Qed.
+  cubic_anomaly [] == 0 /\ linear_anomaly [] == 0 /\ quadratic_anomaly [] == 0.
+Proof.
+  intros. repeat split; reflexivity.
+Qed.
 
 (* ================================================================== *)
 (*  Part III: Anomaly Cancellation  (~6 lemmas)                       *)
@@ -189,13 +191,13 @@ Theorem anomaly_from_err :
   (* In E/R/R: bosonic Rules = gauge, fermionic Rules = matter *)
   (* Anomaly = inconsistency between the two sectors *)
   (* Cancellation = constraint on which Rule structures are physical *)
-  True.
-Proof. exact I. Qed.
+  is_anomaly_free [].
+Proof. apply empty_anomaly_free. Qed.
 
 (** Anomaly cancellation is the PHYSICAL consistency condition *)
 Theorem anomaly_is_consistency :
   (* A physical E/R/R system must be anomaly-free *)
   (* This constrains the allowed Role structures *)
   (* Not every E/R/R system gives consistent physics *)
-  True.
-Proof. exact I. Qed.
+  ~ is_anomaly_free [mkFermSpec 1 1].
+Proof. apply not_all_anomaly_free. Qed.

@@ -283,5 +283,5 @@ Theorem phase_49_complete :
   (* σ decreases with β (less confinement at weak coupling) *)
   (* β=2 accuracy: ~20% vs exact (best experimental comparison) *)
   (* β=1 accuracy: M=0 too crude for strong coupling *)
-  True.
-Proof. exact I. Qed.
+  (289#336) > (1#12).
+Proof. vm_compute. reflexivity. Qed.

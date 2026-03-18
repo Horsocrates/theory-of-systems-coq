@@ -109,8 +109,8 @@ Theorem spacetime_asymmetry :
   (* Space: lattice at step n, edges go both ways *)
   (* Time: nat constructor S, goes forward only *)
   (* S has no general inverse at O *)
-  True.
-Proof. exact I. Qed.
+  forall n : nat, (S n <> 0)%nat.
+Proof. intros. lia. Qed.
 
 (** Empty lattice is trivially reversible *)
 Definition empty_stlattice : SpacetimeLattice :=
@@ -198,5 +198,6 @@ Theorem p4_produces_spacetime :
   (* Combined: SpacetimeLattice with two edge types *)
   (* Space edges reversible, time edges irreversible *)
   (* This is the structural basis for Lorentzian signature *)
-  True.
-Proof. exact I. Qed.
+  forall ell tau, space_reversible (simple_spacetime ell tau) /\
+  time_irreversible (simple_spacetime ell tau).
+Proof. intros. split; [apply simple_is_reversible | apply simple_is_irreversible]. Qed.

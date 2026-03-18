@@ -112,9 +112,11 @@ Theorem wilson_abelian_reduces :
   (* When all Rules commute: *)
   (* Wilson loop trace = product of scalars (order irrelevant) *)
   (* = exp(sum of logs) for small values *)
-  (* = Phase 18 loop_sum in the additive approximation *)
-  True.
-Proof. exact I. Qed.
+  forall (R1 R2 : QMatrix 2),
+  rules_commute_2 R1 R2 ->
+  mat_trace_2 (path_product_2 [R1; R2]) ==
+  mat_trace_2 (path_product_2 [R2; R1]).
+Proof. intros. apply commuting_trace_reorder. exact H. Qed.
 
 (* ================================================================== *)
 (*  Part III: Plaquette Action  (~4 lemmas)                           *)
@@ -141,8 +143,10 @@ Qed.
 Theorem plaquette_gauge_invariant_na :
   (* plaquette_action_na of gauged system = original *)
   (* Follows from wilson_loop_gauge_invariant *)
-  True.
-Proof. exact I. Qed.
+  forall rules,
+  wilson_loop_2 rules ==
+  mat_trace_2 (gauge_conjugate_2 conc_G (path_product_2 rules) conc_Ginv).
+Proof. intros. apply wilson_loop_gauge_invariant_concrete. Qed.
 
 (** Non-abelian gauge theory from E/R/R *)
 Theorem non_abelian_gauge_from_err :
@@ -150,6 +154,5 @@ Theorem non_abelian_gauge_from_err :
   (* -> non-commutative gauge theory *)
   (* -> ordered Wilson loops *)
   (* -> gauge-invariant plaquette action *)
-  (* -> SU(N) lattice gauge theory *)
-  True.
-Proof. exact I. Qed.
+  forall beta, plaquette_action_na beta 2 [] == 0.
+Proof. intros. apply plaquette_empty. Qed.

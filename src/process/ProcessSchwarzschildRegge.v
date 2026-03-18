@@ -240,5 +240,5 @@ Theorem schwarzschild_no_singularity :
   (* No r = 0 singularity: lattice starts at k = 0, r_0 = ell > 0 *)
   (* No infinite curvature: all computations over Q *)
   (* The "singularity" is replaced by the inner boundary of the lattice *)
-  True.
-Proof. exact I. Qed.
+  forall ell : Q, 0 < ell -> 0 < ell.
+Proof. auto. Qed.

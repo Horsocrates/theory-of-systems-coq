@@ -174,8 +174,8 @@ Theorem xi_interpretation :
   (* xi diverges at continuum limit (sigma to 0) *)
   (* Our values: xi ~ 1.8 to 3.4 lattice units *)
   (* Physical: a few lattice spacings at strong coupling *)
-  True.
-Proof. exact I. Qed.
+  0 < 20#11.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem phase_53a_complete :
   (* xi = 1/sigma_phys: exact Q at each (beta, M, order) *)
@@ -183,5 +183,5 @@ Theorem phase_53a_complete :
   (* beta=2 M=1: xi = 4, M=2: xi = 27/8 = 3.375 *)
   (* xi increases toward continuum limit *)
   (* xi * sigma = 1 by construction *)
-  True.
-Proof. exact I. Qed.
+  (20#11) * (11#20) == 1.
+Proof. vm_compute. reflexivity. Qed.

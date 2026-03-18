@@ -110,8 +110,8 @@ Proof. intros. unfold vacuum_energy, quantization_strength. apply defect_unit_GF
     Under P4, the lattice IS the physics — no continuum limit needed.
     The lattice regulates automatically: no renormalization required. *)
 Theorem no_uv_divergence : forall (G : QGeometry),
-  True.
-Proof. intros. exact I. Qed.
+  0 <= quantization_strength G.
+Proof. intros. apply quantization_nonneg. Qed.
 
 (** ★ Cosmological constant connection:
     Total vacuum energy = quantization_strength(G).

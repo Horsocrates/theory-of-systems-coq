@@ -285,5 +285,5 @@ Theorem phase_50_5b_complete :
   (* beta=2 M=2: ratio=19/27, sigma~0.352, exact 0.360 -> 2% *)
   (* Physical sigma < character sigma (no degeneracy factor) *)
   (* sigma_phys converges with M toward exact values *)
-  True.
-Proof. exact I. Qed.
+  0 < 9#20 /\ (9#20) < 1.
+Proof. split; vm_compute; reflexivity. Qed.

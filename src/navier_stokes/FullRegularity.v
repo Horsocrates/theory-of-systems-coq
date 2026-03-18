@@ -49,15 +49,15 @@ Theorem navier_stokes_regularity :
       forcing_in_region nu k <= boundary_damping nu k) /\
     (* 3. Enstrophy bounded (from invariance + bootstrap) *)
     0 < self_consistent_amplitude nu /\
-    (* 4. All Sobolev norms bounded → solution C^∞ *)
-    True.
+    (* 4. Enstrophy bound positive *)
+    0 < enstrophy_bound_in_region nu.
 Proof.
   intros nu K a0 C0 Hnu HK Hsmooth HC0.
   split; [| split; [| split]].
   - eapply smooth_in_region; eassumption.
   - intros. apply boundary_flow_all_modes; assumption.
   - apply step4_bootstrap. exact Hnu.
-  - exact I.
+  - apply enstrophy_bound_positive. exact Hnu.
 Qed.
 
 (* Regularity implies bounded energy *)

@@ -680,9 +680,7 @@ Proof. intros. reflexivity. Qed.
 
 (** Final summary: every "infinite" construction in ToS is a tower *)
 Lemma P4_projective_principle :
-  (* Infinity = process (P4) is mathematically expressed as:
-     every "infinite-dimensional" object is a ProjElem of some ProjSys.
-     At each stage n, we observe ps_obj P n — a CONCRETE, FINITE type.
-     The "infinite" is the tower itself, never a completed object. *)
-  True.
-Proof. exact I. Qed.
+  (* P4: every infinite object is observed at finite stages *)
+  forall P Q (x : ProjElem P) (y : ProjElem Q) n,
+    observe_at (prod_elem x y) n = (observe_at x n, observe_at y n).
+Proof. intros. reflexivity. Qed.

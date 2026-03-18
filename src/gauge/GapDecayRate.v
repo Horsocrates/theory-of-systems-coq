@@ -306,13 +306,12 @@ Theorem our_model_vs_reality :
     exists k, su2_gap_at_k beta k < eps) /\
   (* But gap(k) > 0 at every finite k *)
   (forall beta k, 0 < beta -> beta < 8 -> 0 < su2_gap_at_k beta k) /\
-  (* Reality: gap should stabilize (confinement) *)
-  (* We can't prove this — it requires confinement correction *)
-  True.
+  (* SU(2) factor bounded: gap ratio < 4 for any fixed β *)
+  forall beta, 0 < beta -> beta < 8 -> su2_mass_gap_factor beta < 4.
 Proof.
   split; [exact su2_gap_vanishes |].
   split; [exact su2_gap_positive_all_k |].
-  exact I.
+  exact su2_factor_lt_4.
 Qed.
 
 (** End marker *)

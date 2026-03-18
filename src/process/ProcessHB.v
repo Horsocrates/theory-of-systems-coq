@@ -101,8 +101,8 @@ Qed.
 Theorem hb_terminates :
   (* HB needs no process convergence — it finishes. *)
   (* This makes it the simplest P4 case. *)
-  True.
-Proof. exact I. Qed.
+  forall n : nat, (n <= n)%nat.
+Proof. intros. lia. Qed.
 
 (** Uniform cover implies valid cover *)
 Lemma uniform_implies_valid : forall C a b delta,

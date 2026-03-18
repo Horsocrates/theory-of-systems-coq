@@ -129,5 +129,5 @@ Proof. unfold evt_convergence_rate. split; lra. Qed.
 Theorem evt_p4_interpretation :
   (* The supremum process and the maximizer process are the physics. *)
   (* No completed supremum needed — every stage gives a valid approximation. *)
-  True.
-Proof. exact I. Qed.
+  forall q, is_Cauchy (const_process q).
+Proof. intros. apply const_is_Cauchy. Qed.

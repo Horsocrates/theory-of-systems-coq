@@ -231,8 +231,9 @@ Theorem regge_equation_physical :
   (* This IS the discrete vacuum Einstein equation: Rμν = 0 *)
   (* Flat space (all deficit = 0) solves the vacuum field equations *)
   (* For non-uniform lattice: per-edge equations give full Regge equations *)
-  True.
-Proof. exact I. Qed.
+  forall K valences ell,
+  total_action_derivative K valences ell 0 == regge_true_derivative K valences ell.
+Proof. intros. apply vacuum_total_stationarity. Qed.
 
 (* ================================================================== *)
 (*  Part IV: With Matter  (~4 extra lemmas, included in count)        *)
@@ -267,5 +268,5 @@ Theorem discrete_einstein_with_matter :
   (* → curvature = matter (discrete Einstein) *)
   (* At zeroth order: matter independent of ℓ → gravity equation unchanged *)
   (* Higher order: plaquette area changes → correction terms *)
-  True.
-Proof. exact I. Qed.
+  forall beta, matter_action_derivative beta == 0.
+Proof. intros. apply vacuum_matter_zero. Qed.

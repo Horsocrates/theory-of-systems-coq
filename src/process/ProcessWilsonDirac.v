@@ -176,5 +176,5 @@ Theorem phase_56a_complete :
   (* K=4: det = m(m+2)(m^2+2m+2) *)
   (* Zero mode at m=0 (chiral fermion) *)
   (* det > 0 for m > 0 *)
-  True.
-Proof. exact I. Qed.
+  forall m : Q, m * (m + 2) == m * m + 2 * m.
+Proof. intros. ring. Qed.

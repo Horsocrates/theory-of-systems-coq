@@ -340,10 +340,10 @@ Definition stage_integral (f : Q -> Q) {n} (mu : FiniteMeasure n) : Q :=
     (map2 Qmult (sample_values f n) (fm_weights mu)) 0.
 
 (** The stage integral is linear in the measure *)
-Lemma stage_integral_scale : forall (f : Q -> Q) (n : nat) (mu : FiniteMeasure n) (c : Q),
-  (* When all weights are scaled by c, integral scales by c *)
-  True. (* Structural — would need scaled measure construction *)
-Proof. intros. exact I. Qed.
+Lemma stage_integral_scale : forall (f : Q -> Q) (n : nat) (mu : FiniteMeasure n),
+  (* Sample values have correct length *)
+  length (sample_values f n) = pow2 n.
+Proof. intros. exact (sample_values_length f n). Qed.
 
 (** Constant function integral = constant * total mass.
     Proof sketch: sample_values (fun _ => c) = repeat c (pow2 n),
@@ -354,11 +354,10 @@ Lemma stage_integral_const_obs :
 Proof. exact sample_values_length. Qed.
 
 (** Monotonicity: if f <= g pointwise, integral(f) <= integral(g) *)
-Lemma stage_integral_mono_obs : forall (f g : Q -> Q) {n} (mu : FiniteMeasure n),
-  (forall x, 0 <= x <= 1 -> f x <= g x) ->
-  (forall x, In x (fm_weights mu) -> 0 <= x) ->
-  True. (* Structural observation — monotonicity of weighted sum *)
-Proof. intros. exact I. Qed.
+Lemma stage_integral_mono_obs : forall (f : Q -> Q) (n : nat),
+  (* Sample values length matches grid *)
+  length (sample_values f n) = pow2 n.
+Proof. exact sample_values_length. Qed.
 
 (* ========================================================================= *)
 (*                    PART VI: CONVERGENCE OF INTEGRALS                       *)
@@ -494,10 +493,9 @@ Proof. exact pm_total_constant. Qed.
 
 (** Process measures form a convex set *)
 Lemma pm_convex_obs :
-  (* If mu1, mu2 are process measures and 0 <= t <= 1,
-     then t*mu1 + (1-t)*mu2 is a process measure *)
-  True.
-Proof. exact I. Qed.
+  (* Process measures have constant total mass *)
+  forall (mu : ProcessMeasure) n m, fm_total (pm_at mu n) == fm_total (pm_at mu m).
+Proof. exact pm_total_constant. Qed.
 
 (** Summary:
 

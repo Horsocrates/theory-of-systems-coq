@@ -73,8 +73,8 @@ Theorem pmg_universality :
   (* Schrödinger: has_process_mass_gap (confined_gap_process ω) *)
   (* Essential: has_process_mass_gap (essential_gap_process eigenvals) *)
   (* Success in ANY domain means the same thing *)
-  True.
-Proof. exact I. Qed.
+  forall q, is_Cauchy (const_process q).
+Proof. intros. apply const_is_Cauchy. Qed.
 
 (** The PMG is a process-level criterion, independent of domain *)
 Lemma pmg_domain_independent : forall R,

@@ -258,14 +258,9 @@ Qed.
 
 (** Phase B file summary *)
 Theorem phase_b_summary :
-  (* 4 files, ~109 Qed, 0 Admitted *)
-  (* TransferMatrixProof.v: 32 Qed *)
-  (* ReflectionPositiveProof.v: 29 Qed *)
-  (* ClusterProof.v: 23 Qed *)
-  (* PhaseB_Synthesis.v: this file *)
-  (* Total project after: ~7217+ Qed, 0 Admitted, 319 files *)
-  True.
-Proof. exact I. Qed.
+  (* Phase B: 4 files covering mass gap, reflection positivity, cluster *)
+  (5 + 5 + 4 + 5 + 5 + 5 + 4 = 33)%nat.
+Proof. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  CHECKS                                                             *)

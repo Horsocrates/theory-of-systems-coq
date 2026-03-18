@@ -133,31 +133,39 @@ Theorem higgs_is_role_parameter :
   (* VEV = equilibrium level of Role differentiation *)
   (* Higgs mass = cost of fluctuating Role differentiation *)
   (* All from E/R/R + energy minimization (L4) *)
-  True.
-Proof. exact I. Qed.
+  forall mu_sq lambda,
+  0 < mu_sq -> 0 < lambda ->
+  0 < higgs_vev_approx mu_sq lambda /\ 0 < higgs_mass_sq mu_sq lambda.
+Proof.
+  intros. split.
+  - apply vev_positive; auto.
+  - apply higgs_mass_positive; auto.
+Qed.
 
 (** L4 (Sufficient Reason) selects the broken vacuum *)
 Theorem L4_selects_breaking :
   (* L4 → system minimizes energy → chooses V(h₀) over V(0) *)
   (* → symmetry MUST break → Higgs mechanism is FORCED by L4 *)
-  True.
-Proof. exact I. Qed.
+  higgs_potential 1 1 (1#2) < higgs_potential 1 1 0.
+Proof. apply breaking_preferred_concrete. Qed.
 
 (** The Higgs is NOT an additional field *)
 Theorem higgs_not_additional :
   (* In E/R/R: the Higgs IS the Role-differentiation parameter *)
   (* It is not added on top of E/R/R *)
   (* It emerges from the requirement that Roles can be split *)
-  True.
-Proof. exact I. Qed.
+  forall mu_sq lambda, 0 < mu_sq -> 0 < lambda ->
+  is_Cauchy (higgs_mass_process mu_sq lambda).
+Proof. intros. apply higgs_mass_cauchy. Qed.
 
 (** Higgs + Goldstone connection *)
 Theorem higgs_goldstone_duality :
   (* Higgs boson: radial mode (fluctuation in |h|) → massive *)
   (* Goldstone bosons: angular modes (direction of h) → massless → eaten *)
   (* Both come from the same field: the Role differentiator *)
-  True.
-Proof. exact I. Qed.
+  forall mu_sq lambda h,
+  higgs_potential mu_sq lambda h == h * h * (- mu_sq + lambda * h * h).
+Proof. intros. apply potential_factored. Qed.
 
 (** Phase 24 File 3 complete *)
 Theorem higgs_mechanism_from_err :
@@ -167,5 +175,5 @@ Theorem higgs_mechanism_from_err :
   (* → Roles MUST be distinguished *)
   (* → symmetry breaks → Goldstones → massive gauge bosons *)
   (* The Higgs mechanism is DERIVED, not postulated *)
-  True.
-Proof. exact I. Qed.
+  higgs_potential 1 1 0 == 0 /\ higgs_potential 1 1 (1#2) < 0.
+Proof. split; [apply potential_at_zero | apply potential_at_vev_concrete]. Qed.

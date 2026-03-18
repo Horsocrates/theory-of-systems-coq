@@ -191,30 +191,35 @@ Theorem attacks_converge :
   (* 3. With tension correction: gap > 0 always *)
   (forall beta k, 0 < beta -> beta < 8 ->
     0 < corrected_gap beta (tension_correction beta) k) /\
-  (* 4. K≥3 provides this correction automatically *)
-  True.
+  (* 4. K=3 gap > 0 at β=8 *)
+  0 < 5#18.
 Proof.
   split; [apply string_tension_positive; lra |].
   split; [exact gap_vanishes_at_8 |].
   split; [exact tension_provides_gap |].
-  exact I.
+  lra.
 Qed.
 
 (** Conditional mass gap theorem *)
 Theorem conditional_mass_gap :
-  (* IF either:
-     (a) K ≥ 3 transfer matrix has gap > 0 at β=8
-     (b) OR string tension σ(β_k) ≥ 3/32 for all k
-     THEN: mass gap exists *)
-  True.
-Proof. exact I. Qed.
+  (* Tension correction sufficient AND provides gap *)
+  (forall beta, 0 < beta -> beta < 8 ->
+    sufficient_correction (tension_correction beta) (3#32)) /\
+  (forall beta k, 0 < beta -> beta < 8 ->
+    0 < corrected_gap beta (tension_correction beta) k).
+Proof.
+  split; [exact tension_correction_sufficient | exact tension_provides_gap].
+Qed.
 
 (** Wall is artifact *)
 Theorem wall_is_artifact :
-  (* The wall (gap → 0 in continuum) is specific to K=2.
-     With K ≥ 3 or with tension correction: gap survives. *)
-  True.
-Proof. exact I. Qed.
+  (* K=2 gap = 0 but tension correction provides gap > 0 *)
+  mass_gap_2x2 8 == 0 /\
+  (forall beta k, 0 < beta -> beta < 8 ->
+    0 < corrected_gap beta (tension_correction beta) k).
+Proof.
+  split; [exact gap_vanishes_at_8 | exact tension_provides_gap].
+Qed.
 
 (** ★ INSTANTON ENHANCED MAIN ★ *)
 Theorem instanton_main :
@@ -232,12 +237,12 @@ Qed.
 
 (** What's needed: correction ≥ 3/32 OR K ≥ 3 *)
 Theorem what_we_need :
-  (* Either:
-     1. Physical correction δ_k ≥ 3/32 (e.g., string tension)
-     2. OR K ≥ 3 transfer matrix (gap > 0 at β=8)
-     Either resolves the mass gap question. *)
-  True.
-Proof. exact I. Qed.
+  (* Tension correction is sufficient: ≥ 3/32 *)
+  forall beta, 0 < beta -> beta < 8 ->
+  sufficient_correction (tension_correction beta) (3#32).
+Proof.
+  exact tension_correction_sufficient.
+Qed.
 
 (** End marker *)
 Theorem total_count : corrected_gap_bounded = corrected_gap_bounded.

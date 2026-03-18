@@ -126,8 +126,8 @@ Theorem mass_structure_complementary :
   (* P3 hierarchy → mass ratios between generations (Phase 27) *)
   (* Dimensional transmutation → absolute mass scale (Phase 41) *)
   (* Together: both RATIOS and SCALE are derived *)
-  True.
-Proof. exact I. Qed.
+  0 < mass_ratio 3%nat 6%nat (4#9).
+Proof. exact hierarchy_positive. Qed.
 
 (** ★ What's derived *)
 Theorem proton_mass_derived :
@@ -154,5 +154,5 @@ Theorem phase_41_complete :
   (* Proton mass ∝ Λ_QCD: exponentially small *)
   (* Hierarchy natural, not fine-tuned *)
   (* m_p is a process: P4-native *)
-  True.
-Proof. exact I. Qed.
+  mass_ratio 3%nat 6%nat (4#9) < 1.
+Proof. unfold mass_ratio. exact lambda_qcd_small. Qed.

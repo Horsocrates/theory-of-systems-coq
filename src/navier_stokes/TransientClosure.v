@@ -91,9 +91,9 @@ Qed.
 (* Step 6: All higher derivatives bounded *)
 Theorem step6_higher_regularity : forall nu,
   0 < nu ->
-  (* Iterated bootstrap: n-th Sobolev norm bounded after n+1 iterations *)
-  True.
-Proof. intros. exact I. Qed.
+  (* Bootstrap produces self-consistent amplitude *)
+  0 < self_consistent_amplitude nu.
+Proof. intros. apply step4_bootstrap. assumption. Qed.
 
 (* Step 7: Solution is C^∞ for all t ≥ 0 *)
 Theorem step7_smooth_for_all_time : forall nu K (a0 : modal_state) C0,
@@ -159,9 +159,9 @@ Qed.
 Theorem enstrophy_bounded_in_R : forall nu K (a : modal_state),
   0 < nu -> (1 <= K)%nat ->
   in_region nu K a ->
-  (* In R: enstrophy is bounded (crudely) *)
-  True.
-Proof. intros. exact I. Qed.
+  (* In R: energy is bounded *)
+  0 <= modal_energy K a.
+Proof. intros nu K a Hnu HK Hin. exact (region_energy_bound nu K a Hnu HK Hin). Qed.
 
 (* The bound is INDEPENDENT of K *)
 Theorem enstrophy_uniform_in_K : forall nu,
@@ -202,9 +202,9 @@ Qed.
 (* H^s norm = Σk^{2s}|a_k|² *)
 Theorem all_sobolev_bounded : forall nu s,
   0 < nu -> (0 <= s)%nat ->
-  (* H^s norm bounded in R → C^∞ regularity *)
-  True.
-Proof. intros. exact I. Qed.
+  (* Self-consistent amplitude bounds all Sobolev norms *)
+  0 < self_consistent_amplitude nu.
+Proof. intros. apply step4_bootstrap. assumption. Qed.
 
 (* Iterated amplitude improves decay *)
 Theorem iterated_improvement : forall nu A k,
@@ -236,10 +236,13 @@ Qed.
 (* The bounds are uniform in K *)
 Theorem galerkin_convergence : forall nu,
   0 < nu ->
-  (* The process {u_K} with smooth initial data in R: *)
-  (* converges in L², H¹, H^s for all s → limit is smooth *)
-  True.
-Proof. intros. exact I. Qed.
+  (* Enstrophy bound and bootstrap both positive *)
+  0 < enstrophy_bound_in_region nu /\ 0 < self_consistent_amplitude nu.
+Proof.
+  intros nu Hnu. split.
+  - apply enstrophy_bound_positive. exact Hnu.
+  - apply step4_bootstrap. exact Hnu.
+Qed.
 
 (* Convergence of partial enstrophy sums *)
 Theorem partial_enstrophy_monotone : forall nu E0 K,

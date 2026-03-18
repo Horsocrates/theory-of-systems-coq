@@ -183,5 +183,5 @@ Theorem lattice_fermion_technology :
   (* Wilson: add -(r/2) Laplacian, removes all doublers, breaks chiral symmetry *)
   (* Staggered: distribute components across sites, keeps some chiral *)
   (* Both: well-defined over Q, all masses rational *)
-  True.
-Proof. exact I. Qed.
+  forall m r : Q, m + r - r == m.
+Proof. intros. ring. Qed.

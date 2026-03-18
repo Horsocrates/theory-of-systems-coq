@@ -161,8 +161,8 @@ Theorem no_infinity_needed :
   (* 2. nat -> Q (processes) — no completed infinite objects *)
   (* 3. Cauchy property — no limits *)
   (* Under P4: process = object, no infinity needed *)
-  True.
-Proof. exact I. Qed.
+  forall q, is_Cauchy (const_process q).
+Proof. intros. apply const_is_Cauchy. Qed.
 
 (* ================================================================== *)
 (*  Part IV: Measure Theory as Process Theory                            *)

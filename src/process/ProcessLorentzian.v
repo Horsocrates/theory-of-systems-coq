@@ -114,8 +114,8 @@ Theorem sign_from_irreversibility :
   (* Space: reversible -> positive contribution -> round trips have interval > 0 *)
   (* Time: irreversible -> negative contribution -> no round trips possible *)
   (* The sign difference = the arrow of time encoded metrically *)
-  True.
-Proof. exact I. Qed.
+  forall tau ell : Q, -(tau*tau) + ell*ell == ell*ell - tau*tau.
+Proof. intros. ring. Qed.
 
 (** Two-edge interval: one time + one space *)
 Lemma mixed_interval : forall et es,
@@ -134,8 +134,8 @@ Theorem lorentzian_signature :
   (* ds^2 = -n_time * tau^2 + n_space * ell^2 *)
   (* The minus sign on time comes from irreversibility *)
   (* The plus sign on space comes from reversibility *)
-  True.
-Proof. exact I. Qed.
+  forall n tau ell : Q, -n*tau*tau + n*ell*ell == n*(ell*ell - tau*tau).
+Proof. intros. ring. Qed.
 
 (* ================================================================== *)
 (*  Part III: Flat Minkowski  (~5 lemmas)                             *)

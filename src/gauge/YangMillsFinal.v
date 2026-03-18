@@ -110,14 +110,16 @@ Qed.
 Theorem resolution_paths :
   (* Under P4 (process interpretation): gap process is positive = mass gap exists *)
   (forall beta (k : nat), 0 < beta -> beta < 8 -> 0 < su2_gap_at_k beta k) /\
-  (* Under standard: need instantons + asymptotic freedom *)
-  True /\
-  (* Our model is maximal for local gauge actions *)
-  True.
+  (* Gap vanishes in continuum limit *)
+  (forall beta eps, 0 < beta -> beta < 8 -> 0 < eps ->
+    exists k : nat, su2_gap_at_k beta k < eps) /\
+  (* No RG-compatible correction preserves gap *)
+  (forall beta m, 0 < beta -> beta < 8 -> 0 < m ->
+    ~ exists delta, rg_compatible beta delta /\ preserves_gap delta m).
 Proof.
   split; [exact su2_gap_positive_all_k |].
-  split; [exact I |].
-  exact I.
+  split; [exact su2_gap_vanishes |].
+  exact no_compatible_gap.
 Qed.
 
 (** P4 resolution *)
