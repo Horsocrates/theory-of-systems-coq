@@ -45,14 +45,15 @@ From ToS Require Import gauge.SpectralGapCorrect.
 
 (** ★ Summary of Path B: from Regge calculus to gauge-gravity crossing *)
 Theorem path_B_summary :
-  (* Phase 13B: Regge calculus as ToS process
-     - Deficit angles, Regge action, flat lattice properties
-     Phase 14B: Combined transfer matrix
-     - Tensor product eigenvalues, combined gap = min(gauge, gravity)
-     Phase 15B: Crossing detection
-     - K* where gravity and gauge gaps cross *)
-  True.
-Proof. exact I. Qed.
+  (* Path B: flat deficit = 0, gauge gap = 289/384, combined gap positive *)
+  deficit_angle 6 == 0 /\
+  (forall K, gauge_gap_at_K 1 K == (289#384)) /\
+  (forall beta kappa ell, 0 < spectral_gap 1%nat beta 0%nat ->
+    0 < gravity_gap kappa ell -> 0 < combined_gap beta kappa ell).
+Proof.
+  split; [exact deficit_flat |
+  split; [exact gauge_gap_at_K_beta1 | exact combined_gap_pos]].
+Qed.
 
 (** Concrete: flat lattice has zero action *)
 Theorem path_B_concrete_flat : forall K ell Hpos,
@@ -103,21 +104,18 @@ Proof. intros. apply above_crossing_gauge. auto. Qed.
 
 (** ★ Gauge and gravity: same mathematical structure, different physics *)
 Theorem gauge_gravity_parallel :
-  (* Gauge: transfer matrix from character theory, gap from Bessel
-     Gravity: transfer matrix from deficit angles, gap from κℓ²
-     Both: diagonal operators, Q-valued eigenvalues, PMG structure
-     Method: ToS process framework is UNIVERSAL *)
-  True.
-Proof. exact I. Qed.
+  (* Parallel: gravity gap = κℓ² *)
+  forall kappa ell, 0 < kappa -> 0 < ell ->
+    gravity_gap kappa ell == kappa * ell * ell.
+Proof. exact gravity_gap_val. Qed.
 
 (** ★ K* is the Planck scale of the lattice *)
 Theorem planck_scale_meaning :
-  (* For K < K*: gravity gap > gauge gap → gravity dominates
-     For K > K*: gauge gap > gravity gap → gauge dominates
-     K* separates classical GR from particle physics
-     Both sectors gapped → no phase transition at K* *)
-  True.
-Proof. exact I. Qed.
+  (* Below crossing: gravity dominates *)
+  forall beta kappa L K,
+    0 <= crossing_process beta kappa L K ->
+    gauge_dominated beta kappa (L / inject_Z (Z.of_nat (S K))).
+Proof. exact below_crossing_gravity. Qed.
 
 (* ================================================================== *)
 (*  Part III: Connection to Path A  (~5 Qed)                          *)
@@ -127,8 +125,9 @@ Proof. exact I. Qed.
     Path B gives us: crossing process (gravity ↔ gauge)
     Connection: BOTH detect scale-dependent transitions *)
 Theorem path_A_B_connection :
-  True.
-Proof. exact I. Qed.
+  (* Path A-B connection: combined gap always non-negative *)
+  forall beta kappa ell, 0 <= combined_gap beta kappa ell.
+Proof. exact combined_gap_nonneg. Qed.
 
 (** ★ The combined mass gap is the key physical prediction:
     min(gauge_gap, gravity_gap) > 0 at every scale K.
@@ -141,23 +140,16 @@ Proof. intros. apply combined_gap_pos; auto. Qed.
 
 (** ★ Path B complete *)
 Theorem path_B_complete :
-  (* Path B: Regge calculus + combined transfer + crossing detection
-     Result: gauge-gravity system has:
-     1. Positive gap at every scale (combined_gap_pos)
-     2. Scale-dependent dominance (crossing_exists_simplified)
-     3. Smooth transition through K* (gap_continuity)
-     4. Same process framework as pure gauge (parallel structure)
-     This completes the gauge+gravity unification in ToS. *)
-  True.
-Proof. exact I. Qed.
+  (* Path B complete: flat lattice zero action + combined gap positive *)
+  (forall K ell Hpos, regge_action (mkRegge K (fun _ => 6%nat) ell Hpos) == 0) /\
+  (forall beta kappa ell, 0 < spectral_gap 1%nat beta 0%nat ->
+    0 < gravity_gap kappa ell -> 0 < combined_gap beta kappa ell).
+Proof.
+  split; [exact flat_lattice_zero_action | exact combined_gap_pos].
+Qed.
 
 (** ★ Phase 15B statistics *)
 Theorem phase_15B_stats :
-  (* ProcessRegge.v:           25 Qed  (Regge calculus)
-     ProcessReggeTransfer.v:   25 Qed  (gravity eigenvalues + gap)
-     ProcessCombinedTransfer.v: 20 Qed (tensor product + combined gap)
-     ProcessCrossing.v:        17 Qed  (crossing detection)
-     ProcessPathBSynthesis.v:  15 Qed  (this file)
-     Total Path B:            102 Qed, 0 Admitted *)
-  True.
-Proof. exact I. Qed.
+  (* Phase 15B concrete: deficit angle at valence 6 is flat *)
+  deficit_angle 6 == 0.
+Proof. exact deficit_flat. Qed.

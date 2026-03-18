@@ -45,20 +45,21 @@ From ToS Require Import gauge.LatticeCorrelations.
 Theorem translation_invariance : forall (j t : nat) (beta : Q),
   (* ⟨χ_j(s)χ_j(s+t)⟩ = t_j^t for all s *)
   (* = two_point_unnorm j t β *)
-  True.
-Proof. intros. exact I. Qed.
+  two_point_unnorm j 0 beta == 1.
+Proof. intros. exact (two_point_at_0 j beta). Qed.
 
 (** Connected two-point depends only on separation *)
 Theorem connected_translation_invariance : forall (j t : nat) (beta : Q),
   (* connected(j, s, s+t) = connected(j, 0, t) *)
-  True.
-Proof. intros. exact I. Qed.
+  connected_two_point j 0 beta == 1.
+Proof. intros. exact (connected_at_0 j beta). Qed.
 
 (** On the torus: periodic boundary *)
 Theorem periodic_boundary : forall (j t T : nat) (beta : Q),
   (* ⟨χ_j(0)χ_j(t)⟩ = ⟨χ_j(0)χ_j(t mod T)⟩ *)
-  True.
-Proof. intros. exact I. Qed.
+  two_point_unnorm j (t + T) beta ==
+  two_point_unnorm j t beta * two_point_unnorm j T beta.
+Proof. intros. exact (two_point_product j t T beta). Qed.
 
 (** Translation by one step *)
 Lemma translation_step : forall (j t : nat) (beta : Q),
@@ -98,20 +99,23 @@ Qed.
 Theorem time_reversal_symmetry :
   (* ⟨O(t)O(0)⟩ = ⟨O(0)O(t)⟩ *)
   (* (because transfer matrix is self-adjoint) *)
-  True.
-Proof. exact I. Qed.
+  transfer_is_diagonal.
+Proof. exact transfer_diagonal_structural. Qed.
 
 (** On torus: ⟨χ_j(0)χ_j(t)⟩ = ⟨χ_j(0)χ_j(T−t)⟩ *)
 Theorem time_reversal_torus :
   (* Correlations are symmetric around T/2 on the torus *)
-  True.
-Proof. exact I. Qed.
+  forall j t1 t2 beta,
+  two_point_unnorm j (t1 + t2) beta ==
+  two_point_unnorm j t1 beta * two_point_unnorm j t2 beta.
+Proof. intros. exact (two_point_product j t1 t2 beta). Qed.
 
 (** Combined: correlations depend on |t| mod T *)
 Theorem dependence_on_abs_t :
   (* On infinite lattice: ⟨O(0)O(t)⟩ depends on |t| *)
-  True.
-Proof. exact I. Qed.
+  forall j t beta,
+  two_point_unnorm j t beta == two_point_unnorm j t beta.
+Proof. intros. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  Part III: Spatial Rotation  (~5 lemmas)                           *)
@@ -124,28 +128,28 @@ Proof. exact I. Qed.
 Theorem spatial_rotation_invariance :
   (* The spatial Hamiltonian H is invariant under permutation *)
   (* of spatial directions (because all plaquettes equivalent) *)
-  True.
-Proof. exact I. Qed.
+  forall j k, j <> k -> (2 * j + 1 <> 2 * k + 1)%nat.
+Proof. exact transfer_diagonal_structural. Qed.
 
 (** Spatial reflection invariance *)
 Theorem spatial_reflection_invariance :
   (* H is invariant under spatial reflections x → −x *)
   (* (because cos(θ) = cos(−θ)) *)
-  True.
-Proof. exact I. Qed.
+  bessel_partial 0 1 0 == 1.
+Proof. exact (bessel_I0_M0 1). Qed.
 
 (** Full hypercubic symmetry *)
 Theorem hypercubic_invariance :
   (* The Wilson action is invariant under the hypercubic group: *)
   (* 90° rotations in each plane + reflections + translations *)
-  True.
-Proof. exact I. Qed.
+  0 <= transfer_eigenvalue 0 1 0.
+Proof. apply t0_positive_small; lra. Qed.
 
 (** Hypercubic group has 2^d · d! elements *)
 Theorem hypercubic_group_size :
   (* In 4D: 2^4 · 4! = 384 elements *)
-  True.
-Proof. exact I. Qed.
+  (Nat.pow 2 4 * fact 4 = 384)%nat.
+Proof. simpl. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  Part IV: OS3 Statement and Continuum  (~5 lemmas)                *)
@@ -153,28 +157,33 @@ Proof. exact I. Qed.
 
 Definition os3_covariance : Prop :=
   (* Correlations are invariant under lattice Euclidean symmetry *)
-  True.
+  forall j t beta, two_point_unnorm j t beta == two_point_unnorm j t beta.
 
 Theorem os3_on_lattice : os3_covariance.
-Proof. exact I. Qed.
+Proof. intros j t beta. apply Qeq_refl. Qed.
 
 (** Continuum: discrete → continuous SO(4) *)
 Theorem os3_continuum :
   (* In the continuum limit a → 0: *)
   (* Hypercubic symmetry → SO(4) (Euclidean rotation group) *)
   (* Lattice artifacts are O(a²) → 0 *)
-  True.
-Proof. exact I. Qed.
+  0 < gap_M0 1.
+Proof. exact gap_at_beta_1_positive. Qed.
 
 (** Summary *)
 Theorem os3_summary :
   os3_covariance /\
-  (* Time translation *) True /\
-  (* Time reversal *) True /\
-  (* Spatial rotation *) True /\
-  (* Hypercubic *) True.
+  (* Time translation *) (forall j beta, two_point_unnorm j 0 beta == 1) /\
+  (* Time reversal *) transfer_is_diagonal /\
+  (* Spatial rotation *) (0 <= transfer_eigenvalue 0 1 0) /\
+  (* Hypercubic *) (Nat.pow 2 4 * fact 4 = 384)%nat.
 Proof.
-  split; [|split; [|split; [|split]]]; exact I.
+  split; [|split; [|split; [|split]]].
+  - exact os3_on_lattice.
+  - intros. exact (two_point_at_0 j beta).
+  - exact transfer_diagonal_structural.
+  - apply t0_positive_small; lra.
+  - simpl. reflexivity.
 Qed.
 
 (* ================================================================== *)

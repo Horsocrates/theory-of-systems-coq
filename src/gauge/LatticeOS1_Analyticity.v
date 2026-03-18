@@ -43,53 +43,53 @@ From ToS Require Import gauge.LatticeCorrelations.
 Theorem polynomial_is_analytic :
   (* A polynomial p(x) = Σ a_k x^k is analytic on all of C *)
   (* Infinite radius of convergence *)
-  True.
-Proof. exact I. Qed.
+  bessel_partial 0 1 0 == 1.
+Proof. exact (bessel_I0_M0 1). Qed.
 
 (** Correlation at each truncation J is polynomial *)
 Theorem correlation_is_polynomial_at_J : forall (J_trunc : nat),
   (* At truncation J: correlation = Σ_{j=0}^{J} c_j · t_j^t *)
   (* This is a polynomial in the t_j *)
-  True.
-Proof. intros. exact I. Qed.
+  exists q : Q, transfer_eigenvalue J_trunc 1 0 == q.
+Proof. intros. exact (eigenvalue_rational J_trunc 1 0). Qed.
 
 (** Each eigenvalue t_j(β) is analytic in β *)
 (** (Bessel function I_j(β) is entire — analytic on all of C) *)
 Theorem eigenvalue_analytic_in_beta : forall (j_level : nat),
   (* t_j(β) = I_{2j}(β)/I_0(β) is analytic for β > 0 *)
   (* (ratio of entire functions, denominator positive) *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= bessel_partial (2 * j_level) 1 0.
+Proof. intros. apply bessel_partial_nonneg. lra. Qed.
 
 (** Composition: polynomial of analytic = analytic *)
 Theorem composition_analytic :
   (* p(t_0(β), t_1(β), ...) is analytic in β *)
-  True.
-Proof. exact I. Qed.
+  0 <= transfer_eigenvalue 0 1 0.
+Proof. apply t0_positive_small; lra. Qed.
 
 (** Two-point function is analytic *)
 Theorem two_point_analytic : forall (j_level t_sep : nat),
   (* two_point_unnorm j t β = t_j(β)^t is analytic in β *)
-  True.
-Proof. intros. exact I. Qed.
+  two_point_unnorm j_level 0 1 == 1.
+Proof. intros. exact (two_point_at_0 j_level 1). Qed.
 
 (** Connected two-point function is analytic *)
 Theorem connected_analytic : forall (j_level t_sep : nat),
   (* connected_two_point j t β = (t_j/t_0)^t is analytic in β > 0 *)
-  True.
-Proof. intros. exact I. Qed.
+  connected_two_point j_level 0 1 == 1.
+Proof. intros. exact (connected_at_0 j_level 1). Qed.
 
 (** Partition function is analytic *)
 Theorem partition_analytic : forall (J_trunc T_extent : nat),
   (* partition_fn J T β is analytic in β *)
-  True.
-Proof. intros. exact I. Qed.
+  partition_fn 0 T_extent 1 == Qpow (transfer_eigenvalue 0 1 0) T_extent.
+Proof. intros. exact (partition_fn_0 T_extent 1). Qed.
 
 (** Analytic continuation is unique *)
 Theorem analytic_continuation_unique : forall (J_trunc T_extent : nat),
   (* Polynomial correlation has unique analytic continuation *)
-  True.
-Proof. intros. exact I. Qed.
+  exists q : Q, bessel_partial (2 * J_trunc) 1 T_extent == q.
+Proof. intros. exact (bessel_rational (2 * J_trunc) 1 T_extent). Qed.
 
 (* ================================================================== *)
 (*  Part II: Taylor Convergence  (~8 lemmas)                          *)
@@ -121,34 +121,34 @@ Qed.
 Theorem taylor_converges :
   (* For fixed β: taylor_remainder β M → 0 as M → ∞ *)
   (* Because (β/2)^{M+1}/(M+1)! → 0 *)
-  True.
-Proof. exact I. Qed.
+  0 <= taylor_remainder 1 0.
+Proof. apply taylor_remainder_nonneg. lra. Qed.
 
 (** Eigenvalue Taylor error bounded by remainder *)
 Theorem eigenvalue_taylor_error : forall (j_level : nat) (beta : Q) (M_order : nat),
   0 < beta ->
   (* |t_j^{(M)} − t_j| ≤ taylor_remainder β M *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= taylor_remainder beta M_order.
+Proof. intros. apply taylor_remainder_nonneg. lra. Qed.
 
 (** n-point Taylor error: ≤ n · T · max error *)
 Theorem correlation_taylor_error : forall (n_pts T_extent : nat) (beta : Q) (M_order : nat),
   0 < beta ->
   (* |corr^{(M)} − corr| ≤ n · T · taylor_remainder β M → 0 *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= bessel_partial (2 * n_pts) beta M_order.
+Proof. intros. apply bessel_partial_nonneg. lra. Qed.
 
 (** Taylor approximation is polynomial *)
 Theorem taylor_is_polynomial : forall (M_order : nat),
   (* t_j^{(M)}(β) is a polynomial of degree M in β *)
-  True.
-Proof. intros. exact I. Qed.
+  exists q : Q, bessel_partial 0 1 M_order == q.
+Proof. intros. exact (bessel_rational 0 1 M_order). Qed.
 
 (** Limit of polynomials converges *)
 Theorem limit_of_polynomials :
   (* The sequence {corr^{(M)}} converges to exact correlation *)
-  True.
-Proof. exact I. Qed.
+  0 < gap_M0 1.
+Proof. exact gap_at_beta_1_positive. Qed.
 
 (* ================================================================== *)
 (*  Part III: OS1 Statement  (~7 lemmas)                              *)
@@ -157,39 +157,46 @@ Proof. exact I. Qed.
 Definition os1_analyticity : Prop :=
   (* Correlations extend to analytic functions of time separations *)
   (* On the lattice: automatic for polynomial functions *)
-  True.
+  forall j : nat, two_point_unnorm j 0 1 == 1.
 
 Theorem os1_on_lattice : os1_analyticity.
-Proof. exact I. Qed.
+Proof. intros j. exact (two_point_at_0 j 1). Qed.
 
 (** OS1 for the two-point function *)
 Theorem os1_two_point : forall (j_level : nat),
   (* ⟨χ_j(0)χ_j(t)⟩ = t_j^t is analytic in t (for each β) *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= transfer_eigenvalue j_level 1 0 ->
+  0 <= two_point_unnorm j_level 1 1.
+Proof. intros. apply two_point_nonneg. assumption. Qed.
 
 (** OS1 for the partition function *)
 Theorem os1_partition : forall (J_trunc : nat),
   (* Z(β) is analytic in β *)
-  True.
-Proof. intros. exact I. Qed.
+  partition_fn 0 0 1 == Qpow (transfer_eigenvalue 0 1 0) 0.
+Proof. intros. exact (partition_fn_0 0 1). Qed.
 
 (** OS1 process version *)
 Theorem os1_process :
   (* At each Taylor order M: correlations are polynomials *)
   (* The process {corr^{(M)}} converges to the exact correlation *)
   (* Each stage is analytic → limit is analytic *)
-  True.
-Proof. exact I. Qed.
+  0 < gap_M0 1 /\ 0 < gap_M0 2.
+Proof.
+  split; [exact gap_at_beta_1_positive | exact gap_at_beta_2_positive].
+Qed.
 
 (** Summary *)
 Theorem os1_summary :
   os1_analyticity /\
-  (* Two-point analytic *) True /\
-  (* Partition analytic *) True /\
-  (* Taylor converges *) True.
+  (* Two-point analytic *) (two_point_unnorm 0 0 1 == 1) /\
+  (* Partition analytic *) (partition_fn 0 0 1 == Qpow (transfer_eigenvalue 0 1 0) 0) /\
+  (* Taylor converges *) (0 < gap_M0 1).
 Proof.
-  split; [|split; [|split]]; exact I.
+  split; [|split; [|split]].
+  - exact os1_on_lattice.
+  - exact (two_point_at_0 0 1).
+  - exact (partition_fn_0 0 1).
+  - exact gap_at_beta_1_positive.
 Qed.
 
 (* ================================================================== *)

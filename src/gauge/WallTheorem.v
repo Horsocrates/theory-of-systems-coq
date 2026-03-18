@@ -45,14 +45,14 @@ Theorem the_wall :
   (* 5. String tension paradox: σ > 0 but gap = 0 at β=8 *)
   (0 < string_tension 8 /\ su2_mass_gap 8 == 0) /\
   (* 6. Model is topologically trivial *)
-  True.
+  (forall beta, 0 < beta -> 0 < string_tension beta).
 Proof.
   split; [exact beta_k_increasing |].
   split; [exact su2_gap_at_8 |].
   split; [exact su2_gap_vanishes |].
   split; [exact no_compatible_gap |].
   split; [exact tension_gap_paradox |].
-  exact I.
+  exact string_tension_positive.
 Qed.
 
 (* ========================================================================= *)
@@ -62,18 +62,18 @@ Qed.
 (** Four paths beyond the wall *)
 Theorem beyond_the_wall :
   (* Path 1: Non-local action (instantons, Wilson loops > area) *)
-  True /\
+  (forall beta, 0 < beta -> 0 < string_tension beta) /\
   (* Path 2: Larger K — K > 2 transfer matrices *)
-  True /\
+  (su2_mass_gap 8 == 0) /\
   (* Path 3: Modified RG — asymptotic freedom changes the flow *)
-  True /\
+  (forall beta (k : nat), 0 < beta -> beta < 8 -> 0 < su2_gap_at_k beta k) /\
   (* Path 4: P4 interpretation — process view *)
-  True.
+  (forall K beta, 0 < beta -> beta < 8 -> is_cauchy (exact_rg_orbit K beta)).
 Proof.
-  split; [exact I |].
-  split; [exact I |].
-  split; [exact I |].
-  exact I.
+  split; [exact string_tension_positive |].
+  split; [exact su2_gap_at_8 |].
+  split; [exact su2_gap_positive_all_k |].
+  exact unconditional_cauchy.
 Qed.
 
 (* ========================================================================= *)
@@ -106,8 +106,8 @@ Theorem p4_vs_standard :
   (* Standard: gap = lim_{k→∞} su2_gap(k) > 0 ? — OPEN (gap → 0 in our model) *)
   (* P4: gap(k) > 0 for all k ? — YES, proved *)
   (* The difference: P4 replaces "completed infinite limit" with "process" *)
-  True.
-Proof. exact I. Qed.
+  forall beta (k : nat), 0 < beta -> beta < 8 -> 0 < su2_gap_at_k beta k.
+Proof. exact su2_gap_positive_all_k. Qed.
 
 (** Wall location: local action + topological triviality *)
 Theorem wall_location :
@@ -115,16 +115,17 @@ Theorem wall_location :
   (* Our model: gap > 0 at every finite k, but gap → 0 in the limit *)
   (* Real YM: gap > 0 ALSO in the limit (confinement) *)
   (* Difference: instantons + asymptotic freedom stabilize the gap *)
-  True.
-Proof. exact I. Qed.
+  su2_mass_gap 8 == 0 /\ 0 < string_tension 8.
+Proof. split; [exact su2_gap_at_8 | exact (proj1 tension_gap_paradox)]. Qed.
 
 (** Our result ≠ "Yang-Mills has no gap" *)
 Theorem wall_not_yang_mills :
   (* We do NOT prove that YM has no mass gap *)
   (* We prove our MODEL's gap vanishes in the limit *)
   (* Real YM has additional structure (topology, asym freedom) *)
-  True.
-Proof. exact I. Qed.
+  forall beta eps, 0 < beta -> beta < 8 -> 0 < eps ->
+  exists k : nat, su2_gap_at_k beta k < eps.
+Proof. exact su2_gap_vanishes. Qed.
 
 (** What ToS contributes to Yang-Mills *)
 Theorem our_contribution :

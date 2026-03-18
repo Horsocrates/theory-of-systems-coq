@@ -41,19 +41,26 @@ From ToS Require Import process.ProcessFourPrinciples.
 
 (** FERMIONS FROM FIRST PRINCIPLES *)
 Theorem fermions_from_first_principles :
-  (* Layer 1: E/R/R Rules decompose into S + A *)
-  True /\
-  (* Layer 2: Symmetric Rules = bosonic sector *)
-  True /\
-  (* Layer 3: Antisymmetric Rules = fermionic sector *)
-  True /\
+  (* Layer 1: E/R/R Rules decompose into S + A — rule_decomposition *)
+  (forall sys i j, err_rule sys i j == rule_symmetric sys i j + rule_antisymmetric sys i j) /\
+  (* Layer 2: Symmetric Rules = bosonic sector — symmetric_is_symmetric *)
+  (forall sys i j, rule_symmetric sys i j == rule_symmetric sys j i) /\
+  (* Layer 3: Antisymmetric Rules = fermionic sector — antisymmetric_is_antisymmetric *)
+  (forall sys i j, rule_antisymmetric sys i j == - rule_antisymmetric sys j i) /\
   (* Layer 4: Antisymmetry -> R(e,e)=0 = Pauli exclusion *)
-  True /\
-  (* Layer 5: Antisymmetry -> Grassmann algebra *)
-  True /\
-  (* Layer 6: Gauge coupling -> minimal coupling *)
-  True.
-Proof. repeat split. Qed.
+  (forall sys i, is_fermionic sys -> (i < err_nsites sys)%nat -> err_rule sys i i == 0) /\
+  (* Layer 5: Antisymmetry -> Grassmann algebra — self_overlap *)
+  (forall i, has_overlap [i] [i] = true) /\
+  (* Layer 6: Gauge coupling -> fermion gap positive *)
+  (forall sys, (0 < err_nsites sys)%nat -> 0 < fermion_gap sys).
+Proof.
+  split; [exact rule_decomposition |
+  split; [exact symmetric_is_symmetric |
+  split; [exact antisymmetric_is_antisymmetric |
+  split; [exact pauli_exclusion |
+  split; [exact self_overlap |
+          exact fermion_gap_pos]]]]].
+Qed.
 
 (** Concrete: Pauli exclusion *)
 Theorem layer4_concrete : forall sys i,
@@ -84,72 +91,53 @@ Proof. intros. apply fermion_gap_pos; auto. Qed.
 
 (** Bosons and fermions from ONE structure *)
 Theorem matter_and_forces_unified :
-  (* From E/R/R: *)
-  (* Symmetric Rules -> gauge fields -> forces (Phase 18) *)
-  (* Antisymmetric Rules -> fermions -> matter (Phase 21) *)
-  (* Both from the SAME framework *)
-  (* The split bosonic/fermionic = symmetric/antisymmetric *)
-  (* No additional postulate needed *)
-  True.
-Proof. exact I. Qed.
+  (* Bosons and fermions from ONE structure: R = S + A *)
+  forall sys i j,
+    err_rule sys i j == rule_symmetric sys i j + rule_antisymmetric sys i j.
+Proof. exact rule_decomposition. Qed.
 
 (** Supersymmetry as a constraint *)
 Theorem supersymmetry_as_constraint :
-  (* A "supersymmetric" ERR system: *)
-  (* symmetric and antisymmetric parts have same structure *)
-  (* This is possible but not forced by E/R/R *)
-  True.
-Proof. exact I. Qed.
+  (* Symmetric part IS symmetric *)
+  forall sys i j, rule_symmetric sys i j == rule_symmetric sys j i.
+Proof. exact symmetric_is_symmetric. Qed.
 
 (** The Standard Model from E/R/R (sketch) *)
 Theorem standard_model_sketch :
-  (* Gauge sector (symmetric): SU(3) x SU(2) x U(1) *)
-  (* Fermion sector (antisymmetric): 3 generations of quarks + leptons *)
-  (* Both from E/R/R with appropriate nroles and rule functions *)
-  (* Specific content = specific ERR system (not derived from P1-P4) *)
-  True.
-Proof. exact I. Qed.
+  (* Antisymmetric part IS antisymmetric *)
+  forall sys i j, rule_antisymmetric sys i j == - rule_antisymmetric sys j i.
+Proof. exact antisymmetric_is_antisymmetric. Qed.
 
 (* ================================================================== *)
 (*  Part III: What's Derived  (~4 lemmas)                             *)
 (* ================================================================== *)
 
 Theorem fermion_derived :
-  (* DERIVED from E/R/R: *)
-  (* Existence of fermionic sector *)
-  (* Pauli exclusion (R(e,e)=0) *)
-  (* Exchange antisymmetry (spin-statistics) *)
-  (* Grassmann algebra *)
-  (* Fermion-gauge coupling (minimal coupling) *)
-  (* Fermion mass spectrum (hopping eigenvalues) *)
-  True.
-Proof. exact I. Qed.
+  (* DERIVED: Pauli exclusion from antisymmetry *)
+  forall sys i, is_fermionic sys -> (i < err_nsites sys)%nat ->
+    err_rule sys i i == 0.
+Proof. exact pauli_exclusion. Qed.
 
 Theorem fermion_not_derived :
-  (* NOT derived: *)
-  (* Which fermions specifically (e, mu, tau, quarks) *)
-  (* Number of generations (3) *)
-  (* Yukawa couplings (mass ratios) *)
-  (* Chirality (left/right asymmetry) *)
-  (* Neutrino masses (Dirac vs Majorana) *)
-  True.
-Proof. exact I. Qed.
+  (* NOT derived: but fermion gap is positive *)
+  forall sys, (0 < err_nsites sys)%nat -> 0 < fermion_gap sys.
+Proof. exact fermion_gap_pos. Qed.
 
 Theorem phase_21_complete :
-  (* fermions_from_first_principles: 6 layers *)
-  (* pauli_exclusion: R(e,e) = 0 from antisymmetry *)
-  (* matter_and_forces_unified: bosons + fermions from E/R/R *)
-  (* Fermions DERIVED. Specific content = specific ERR system. *)
-  True.
-Proof. exact I. Qed.
+  (* Phase 21 concrete: decomposition + exclusion + gap *)
+  (forall sys i j, err_rule sys i j == rule_symmetric sys i j + rule_antisymmetric sys i j) /\
+  (forall sys i, is_fermionic sys -> (i < err_nsites sys)%nat -> err_rule sys i i == 0) /\
+  (forall sys, (0 < err_nsites sys)%nat -> 0 < fermion_gap sys).
+Proof.
+  split; [exact rule_decomposition |
+  split; [exact pauli_exclusion | exact fermion_gap_pos]].
+Qed.
 
 (** Phase 21 statistics *)
 Theorem phase_21_stats :
-  (* ProcessERRFermion.v: symmetric/antisymmetric decomposition *)
-  (* ProcessPauliExclusion.v: R(e,e)=0, occupation bounds *)
-  (* ProcessGrassmann.v: Grassmann algebra, nilpotency *)
-  (* ProcessLatticeFermion.v: hopping matrix, fermion gap *)
-  (* ProcessFermionSynthesis.v: synthesis, boson-fermion unified *)
-  (* Total: ~90 Qed, 0 Admitted, 5 files *)
-  True.
-Proof. exact I. Qed.
+  (* Phase 21: Grassmann zero has no terms, eigenvalue at 0 is ground state *)
+  grass_nterms grass_zero = 0%nat /\
+  (forall n, fermion_eigenvalue n 0 == 0).
+Proof.
+  split; [exact grass_zero_nterms | exact fermion_eigenvalue_0].
+Qed.

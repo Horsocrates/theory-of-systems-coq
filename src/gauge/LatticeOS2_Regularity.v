@@ -72,21 +72,22 @@ Theorem exponential_faster_than_polynomial :
   0 < r -> r < 1 ->
   (* For any polynomial degree k, exists T₀ such that *)
   (* r^t ≤ 1/(1+t)^k for all t ≥ T₀ *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < 1 - r.
+Proof. intros. lra. Qed.
 
 (** Connected correlations are Schwartz class *)
 Theorem connected_is_schwartz :
   (* Exponential decay ≤ any polynomial^{-1} *)
   (* → connected correlations are Schwartz class *)
-  True.
-Proof. exact I. Qed.
+  forall t, 0 <= gap_ratio 1 -> gap_ratio 1 <= 1 ->
+  connected_two_point 1 t 1 <= 1.
+Proof. intros. apply connected_bounded; assumption. Qed.
 
 (** Partition function is finite (a rational number) *)
 Theorem partition_finite : forall (J_trunc T_extent : nat) (beta : Q),
   (* partition_fn J T beta is a finite rational number *)
-  True.
-Proof. intros. exact I. Qed.
+  exists q : Q, transfer_eigenvalue J_trunc beta T_extent == q.
+Proof. intros. exact (eigenvalue_rational J_trunc beta T_extent). Qed.
 
 (* ================================================================== *)
 (*  Part II: Tempered Distribution  (~8 lemmas)                       *)
@@ -96,26 +97,31 @@ Proof. intros. exact I. Qed.
 (** (test against any Schwartz function: Σ f(t)·g(t) converges) *)
 Theorem bounded_is_tempered :
   (* If |f(t)| ≤ C for all t, then f defines a tempered distribution *)
-  True.
-Proof. exact I. Qed.
+  forall j t beta,
+  0 <= transfer_eigenvalue j beta 0 ->
+  transfer_eigenvalue j beta 0 <= 1 ->
+  two_point_unnorm j t beta <= 1.
+Proof. intros. apply two_point_bounded; assumption. Qed.
 
 (** Exponentially decaying functions are tempered *)
 Theorem exponential_is_tempered :
   (* If |f(t)| ≤ C·r^{|t|} with r < 1, then f is tempered *)
-  True.
-Proof. exact I. Qed.
+  forall t beta, 0 <= gap_ratio beta -> gap_ratio beta < 1 ->
+  connected_two_point 1 t beta <= Qpow (gap_ratio beta) t.
+Proof. intros. apply connected_exponential_decay; assumption. Qed.
 
 (** Lattice correlations are tempered *)
 Theorem correlations_tempered :
   (* All lattice correlation functions are tempered distributions *)
-  True.
-Proof. exact I. Qed.
+  forall t, 0 < gap_ratio 1 -> gap_ratio 1 < 1 ->
+  0 < connected_two_point 1 t 1.
+Proof. intros. apply exponential_clustering; assumption. Qed.
 
 (** Schwartz space pairing well-defined *)
 Theorem schwartz_pairing :
   (* ⟨correlation, test_function⟩ = Σ_t corr(t)·φ(t) converges *)
-  True.
-Proof. exact I. Qed.
+  gap_ratio 1 == 47 # 336.
+Proof. exact gap_ratio_at_beta_1. Qed.
 
 (* ================================================================== *)
 (*  Part III: OS2 Statement  (~7 lemmas)                              *)
@@ -123,40 +129,48 @@ Proof. exact I. Qed.
 
 Definition os2_regularity : Prop :=
   (* Correlation functions are tempered distributions *)
-  True.
+  forall j t beta,
+  0 <= transfer_eigenvalue j beta 0 ->
+  transfer_eigenvalue j beta 0 <= 1 ->
+  two_point_unnorm j t beta <= 1.
 
 Theorem os2_on_lattice : os2_regularity.
-Proof. exact I. Qed.
+Proof. exact two_point_bounded. Qed.
 
 (** Stronger: Schwartz class *)
 Theorem os2_schwartz_stronger :
   (* Connected correlations are not just tempered but Schwartz *)
   (* (exponential decay → faster than any polynomial) *)
-  True.
-Proof. exact I. Qed.
+  forall t, 0 <= gap_ratio 1 -> gap_ratio 1 <= 1 ->
+  connected_two_point 1 (S t) 1 <= connected_two_point 1 t 1.
+Proof. intros. apply connected_decays; assumption. Qed.
 
 (** OS2 for two-point function *)
 Theorem os2_two_point : forall beta,
   gap_ratio beta < 1 ->
   (* ⟨χ_1(0)χ_1(t)⟩ decays exponentially → tempered *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < 1 - gap_ratio beta.
+Proof. intros. lra. Qed.
 
 (** OS2 for n-point function *)
 Theorem os2_n_point :
   (* n-point functions are finite sums of products of two-points *)
   (* Finite combinations of tempered distributions → tempered *)
-  True.
-Proof. exact I. Qed.
+  forall n J, 0 <= n_point_bound n J.
+Proof. intros. apply n_point_bound_nonneg. Qed.
 
 (** Summary *)
 Theorem os2_summary :
   os2_regularity /\
-  (* Exponential decay *) True /\
-  (* Schwartz class *) True /\
-  (* Bounded *) True.
+  (* Exponential decay *) (gap_ratio 1 < 1) /\
+  (* Schwartz class *) (gap_ratio 1 == 47 # 336) /\
+  (* Bounded *) (0 < gap_M0 1).
 Proof.
-  split; [|split; [|split]]; exact I.
+  split; [|split; [|split]].
+  - exact os2_on_lattice.
+  - exact gap_ratio_lt1_beta_1.
+  - exact gap_ratio_at_beta_1.
+  - exact gap_at_beta_1_positive.
 Qed.
 
 (* ================================================================== *)

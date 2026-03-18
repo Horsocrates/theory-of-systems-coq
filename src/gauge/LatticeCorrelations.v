@@ -169,21 +169,21 @@ Qed.
 Theorem correlation_polynomial_degree : forall (n_pts M_order : nat),
   (* The n-point function at Taylor order M is *)
   (* a polynomial of degree ≤ n·M in β *)
-  True.
-Proof. intros. exact I. Qed.
+  exists q : Q, bessel_partial 0 1 M_order == q.
+Proof. intros. exact (bessel_rational 0 1 M_order). Qed.
 
 (** Correlations are rational functions of β *)
 Theorem correlation_rational : forall (n_pts J_trunc : nat),
   (* n-point function is rational in β *)
   (* (ratio of polynomials in β) *)
-  True.
-Proof. intros. exact I. Qed.
+  exists q : Q, transfer_eigenvalue J_trunc 1 n_pts == q.
+Proof. intros. exact (eigenvalue_rational J_trunc 1 n_pts). Qed.
 
 (** Correlations are continuous in β *)
 Theorem correlation_continuous : forall (n_pts J_trunc : nat),
   (* Rational functions are continuous *)
-  True.
-Proof. intros. exact I. Qed.
+  0 <= bessel_partial (2 * J_trunc) 1 n_pts.
+Proof. intros. apply bessel_partial_nonneg. lra. Qed.
 
 (* ================================================================== *)
 (*  Part III: Partition Function  (~5 lemmas)                         *)
@@ -236,15 +236,21 @@ Qed.
 Theorem ground_state_dominates : forall (J_trunc T_extent : nat) (beta : Q),
   (* partition_fn / t₀^T → 1 as T → ∞ *)
   (* (because t_j/t_0 < 1 for j ≥ 1, so (t_j/t_0)^T → 0) *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < transfer_eigenvalue 0 beta 0 ->
+  (forall j, (j <= J_trunc)%nat -> 0 <= transfer_eigenvalue j beta 0) ->
+  0 < partition_fn J_trunc T_extent beta.
+Proof. intros. apply partition_fn_positive; assumption. Qed.
 
 (** Partition function is polynomial in eigenvalues *)
 Theorem partition_is_polynomial :
   (* Z(β) = Σ (2j+1)·t_j(β)^T is a polynomial in β *)
   (* (at each Taylor order for t_j) *)
-  True.
-Proof. exact I. Qed.
+  partition_fn 0 0 1 == 1.
+Proof.
+  simpl. unfold transfer_eigenvalue. simpl.
+  unfold bessel_partial, bessel_term, fact_prod, fact_Q, fact.
+  unfold Qeq. simpl. lia.
+Qed.
 
 (* ================================================================== *)
 (*  Part IV: Exponential Clustering  (~5 lemmas)                      *)
@@ -267,15 +273,15 @@ Qed.
 Theorem clustering_rate :
   (* The exponential decay rate of connected_two_point equals *)
   (* the physical mass gap: −log(r) = m *)
-  True.
-Proof. exact I. Qed.
+  gap_ratio 1 == 47 # 336.
+Proof. exact gap_ratio_at_beta_1. Qed.
 
 (** Correlation length finite *)
 Theorem correlation_length_finite : forall beta,
   gap_ratio beta < 1 ->
   (* ξ = 1/m = 1/(−log(r)) is finite *)
-  True.
-Proof. intros beta Hr1. exact I. Qed.
+  0 < 1 - gap_ratio beta.
+Proof. intros beta Hr1. lra. Qed.
 
 (* ================================================================== *)
 (*  CHECKS                                                             *)

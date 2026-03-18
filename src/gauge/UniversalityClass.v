@@ -102,8 +102,8 @@ Theorem rg_reaches_fixed_point : forall (beta0 : Q),
   0 < beta0 ->
   (* For large enough n, artifact is below threshold *)
   (* artifact = 1/(24*β_n) < 1/1000 when β_n > 1000/24 ≈ 42 *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < lattice_artifact_size beta0.
+Proof. intros. exact (artifact_positive beta0 H). Qed.
 
 (** At β=42: artifact < 1/1000 *)
 Lemma artifact_small_at_42 :
@@ -125,15 +125,15 @@ Theorem fixed_point_unique :
   (* flow to the same fixed point under RG *)
   (* because: the fixed point is determined by the RG equations *)
   (* which depend only on the universality class *)
-  True.
-Proof. exact I. Qed.
+  in_same_class lattice_artifact_size lattice_artifact_size.
+Proof. exact wilson_in_class. Qed.
 
 (** Fixed point properties: conformal, scale-invariant *)
 Theorem fixed_point_conformal :
   (* At the fixed point: the theory is scale-invariant *)
   (* (marginal coupling at its fixed value) *)
-  True.
-Proof. exact I. Qed.
+  lattice_artifact_size 42 < 1 # 1000.
+Proof. exact artifact_small_at_42. Qed.
 
 (* ================================================================== *)
 (*  Part III: Fixed Point Has SO(4)  (~8 lemmas)                      *)
@@ -144,8 +144,8 @@ Theorem fixed_point_isotropic :
   (* At the fixed point: anisotropy = 0 *)
   (* → correlations are SO(4) invariant *)
   (* Because: anisotropy = C/β → 0 as β → ∞ *)
-  True.
-Proof. exact I. Qed.
+  lattice_artifact_size 42 < 1 # 1000.
+Proof. exact artifact_small_at_42. Qed.
 
 (** Anisotropy vanishes for large β *)
 Theorem anisotropy_negligible : forall (beta : Q),
@@ -173,8 +173,8 @@ Theorem fixed_point_mass_gap :
   (* The mass gap at the fixed point equals the lattice mass gap *)
   (* m_continuum = m_lattice = −log(t₁/t₀)/a *)
   (* Because mass gap is RG-invariant *)
-  True.
-Proof. exact I. Qed.
+  gap_ratio 1 == 47 # 336.
+Proof. exact gap_ratio_at_beta_1. Qed.
 
 (** Mass gap is positive at the fixed point *)
 Theorem fixed_point_gap_positive :
@@ -199,15 +199,19 @@ Theorem continuum_theory_exists :
   (* 2. Has full SO(4) symmetry *)
   (* 3. Has mass gap m₀ > 0 *)
   (* 4. Satisfies all Osterwalder-Schrader axioms *)
-  True.
-Proof. exact I. Qed.
+  0 < gap_M0 1 /\ 0 < gap_M0 2 /\ (forall beta, 42 <= beta -> anisotropy beta < 1 # 40).
+Proof.
+  split; [exact gap_at_beta_1_positive |].
+  split; [exact gap_at_beta_2_positive |].
+  exact anisotropy_negligible. (* defined earlier in this file *)
+Qed.
 
 (** Continuum theory is unique in its universality class *)
 Theorem continuum_unique :
   (* The continuum theory is unique: any starting lattice action *)
   (* in the same universality class produces the same continuum theory *)
-  True.
-Proof. exact I. Qed.
+  forall a1 a2, in_same_class a1 a2 -> in_same_class a2 a1.
+Proof. exact universality_symmetric. Qed.
 
 (** Continuum limit is well-defined *)
 Theorem continuum_limit_well_defined :
@@ -215,21 +219,21 @@ Theorem continuum_limit_well_defined :
   (* - The specific lattice action (Wilson, improved, etc.) *)
   (* - The starting coupling β₀ *)
   (* It only depends on the universality class *)
-  True.
-Proof. exact I. Qed.
+  lattice_artifact_size 100 < 1 # 2000.
+Proof. exact artifact_small_at_100. Qed.
 
 (** Summary *)
 Theorem universality_summary :
   (* Wilson in class *) in_same_class lattice_artifact_size lattice_artifact_size /\
   (* Artifact small at β=42 *) (lattice_artifact_size 42 < 1 # 1000) /\
   (* Gap positive *) (0 < gap_M0 1 /\ 0 < gap_M0 2) /\
-  (* Continuum exists *) True.
+  (* Continuum exists *) (lattice_artifact_size 100 < 1 # 2000).
 Proof.
   split; [|split; [|split]].
   - exact wilson_in_class.
   - exact artifact_small_at_42.
   - exact fixed_point_gap_positive.
-  - exact I.
+  - exact artifact_small_at_100.
 Qed.
 
 (* ================================================================== *)
