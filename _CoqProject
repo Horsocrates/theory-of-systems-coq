@@ -1193,3 +1193,10 @@ src/process/ProcessSpecificHeat.v
 src/process/ProcessPolyakovLoop.v
 src/process/ProcessMWOneLoop.v
 src/process/ProcessStepASynthesis.v
+
+# === Step B: Breakthrough ===
+src/process/Process2DWeakCoupling.v
+src/process/ProcessHVP.v
+src/process/ProcessSpectralTheoryQ.v
+src/process/ProcessGlueballExtended.v
+src/process/ProcessLatticeTopology.v
