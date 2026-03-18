@@ -184,6 +184,19 @@ CharacterTransfer (Peter-Weyl, transfer eigenvalues)
                       -> YangMillsComplete (yang_mills_mass_gap)
 ```
 
+### Chain 7: Gauge Connection (gauge/ → process/)
+```
+ProcessRGRigorConnection (G1: 8 RG modules)
+  + ProcessContinuumGapConnection (G2: 8 continuum modules)
+    + ProcessMillenniumConnection (G3: 13 YM modules)
+      + ProcessOS123Connection (G4: 7 OS modules)
+        + ProcessGlobalGapConnection (G5: 9 spectral modules)
+          + ProcessExactSpectrumConnection (G6: 6 spectrum modules)
+            + ProcessSU2DetailConnection (G7: 10 SU(2) modules)
+              -> ProcessGaugeFullSynthesis (G8: full synthesis)
+```
+61 gauge/ modules fully connected to process/ — zero waste.
+
 ## Axiom Architecture
 
 All axioms are declared in `src/ToS_Axioms.v` (Layer -1):

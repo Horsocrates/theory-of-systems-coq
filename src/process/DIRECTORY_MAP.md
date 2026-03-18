@@ -1,6 +1,6 @@
 # process/ Directory Map
 
-165 files, 2658 Qed. All of P4 process mathematics + physics derivation.
+221 files, 3524 Qed. All of P4 process mathematics + physics derivation + gauge connections.
 
 ---
 

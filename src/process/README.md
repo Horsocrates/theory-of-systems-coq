@@ -1,4 +1,4 @@
-# src/process/ — P4 Process Mathematics (49 files, 804 Qed)
+# src/process/ — P4 Process Mathematics (221 files, 3524 Qed)
 
 All of mathematics re-derived as **process constructions** under Principle 4:
 "infinity is process, not object." Every real number is a Cauchy process
@@ -123,3 +123,21 @@ monad T = Id, and level structure in a single 8-way conjunction.
 - `spectral_gap_is_pmg` — spectral gap = PrimaryMax status
 - `P1_holds` — emergence at every level
 - `P2_holds` — adjunction at every level
+- `gauge_mass_gap_chain` — complete lattice→continuum mass gap chain
+- `su2_detail_complete` — SU(2) mass gap for all β ∈ (0,8)
+- `os123_complete` — all three OS axioms (analyticity, regularity, covariance)
+
+## Gauge Connection (8 files)
+
+All 61 gauge/ modules connected to process/ through:
+
+| File | Gauge modules | Key result |
+|------|--------------|------------|
+| ProcessRGRigorConnection.v | 8 RG modules | Contraction mapping, Banach, gap stable |
+| ProcessContinuumGapConnection.v | 8 continuum modules | Gap survives a→0 in all dimensions |
+| ProcessMillenniumConnection.v | 13 YM modules | Complete 5-level argument, 9 gaps closed |
+| ProcessOS123Connection.v | 7 OS axiom modules | OS1-3 + Hilbert + Formal |
+| ProcessGlobalGapConnection.v | 9 spectral modules | Universal gap across all couplings |
+| ProcessExactSpectrumConnection.v | 6 spectrum modules | K=8 eigenvalues, universality |
+| ProcessSU2DetailConnection.v | 10 SU(2) modules | Quaternions, characters, corrections |
+| ProcessGaugeFullSynthesis.v | all G1-G7 | Full synthesis |

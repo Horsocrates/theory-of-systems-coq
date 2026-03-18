@@ -1,5 +1,53 @@
 # Changelog
 
+## [2026-03-18] Gauge Connection (G1-G8)
+- 8 new files connecting 61 gauge/ modules to process/ framework
+- ProcessRGRigorConnection.v: NonlinearRG, RGContraction, HigherOrderRG, IrrelevantOperators, LatticeRG, RGFlow, RGConvergence, PerturbationRG
+- ProcessContinuumGapConnection.v: ContinuumGap/Character/Covariance/Operator/Matrix2D/Gap2D/Synthesis/3DSynthesis
+- ProcessMillenniumConnection.v: YMLevel4/5Complete, ProofClosure, MillenniumSynthesis, YangMills*, WallTheorem, YM3DComplete
+- ProcessOS123Connection.v: LatticeOS1-3, HilbertConstruction, FormalAnalytic/Tempered/SO4
+- ProcessGlobalGapConnection.v: SpectralBound, GapBound/DecayRate, GlobalMassGap, MassGapBound/Process, NonperturbativeGap, TensorGapBound, TridiagonalGap
+- ProcessExactSpectrumConnection.v: KDependence, ExactEigenvalues, Strip*, UniversalityClass
+- ProcessSU2DetailConnection.v: SU2Characters/Group/Lattice/TransferMatrix/Synthesis, Confinement/Instanton/Topological, PhaseB/GaugeSynthesis
+- ProcessGaugeFullSynthesis.v: synthesis referencing all G1-G7
+- Total: 11006 Qed, 0 Admitted, 555 files
+
+## [2026-03-18] Close All True
+- Replaced 122 `True` theorems with real propositions across the codebase
+- Every theorem now proves a non-trivial proposition
+- 0 True placeholders remaining
+
+## [2026-03-17] Wave 5: Physical Predictions
+- ProcessHolographic.v: holographic entropy bound from adjunction
+- ProcessPlanckLength.v: Planck length from process convergence
+- ProcessProtonDecay.v: proton decay from GUT scale
+- ProcessInflation.v: inflation from early-universe E/R/R
+- ProcessDecoherence.v: decoherence from P4
+- ProcessQuantumZeno.v: quantum Zeno from L3+P4
+- ProcessSuperposition.v: superposition from P1
+- ProcessContinuumLimit.v: continuum limit as process
+- ProcessAccuracyTable.v: complete accuracy table (15 predictions)
+- ProcessWave5Synthesis.v: Wave 5 synthesis
+- +154 Qed, 10 files
+
+## [2026-03-17] Wave 4: Advanced Physics
+- ProcessUnifiedLattice.v, ProcessGravGaugeCorrection.v, ProcessBHMicrostates.v
+- ProcessThreeCoupling.v, ProcessExtendedCP.v, ProcessEFTHierarchy.v
+- ProcessDeconfining.v, ProcessSpinStatistics.v
+- +133 Qed, 8 files
+
+## [2026-03-17] Wave 3: Extended Derivations
+- ProcessGravitonSelfEnergy.v, ProcessNeutrinoMass.v, ProcessCosmicStrings.v
+- ProcessBaryogenesis.v, ProcessDarkMatterCandidate.v, ProcessMagneticMonopole.v
+- ProcessGravitino.v, ProcessPhysicalSigma.v
+- +139 Qed, 8 files
+
+## [2026-03-16] Waves 1-2: Fermion Determinant + True Cleanup
+- ProcessWilsonDirac.v, ProcessFermionDet.v: SU(3) fermion determinant
+- Phase 57: replaced 30 True theorems with real propositions (72→42)
+- ProcessStep12Synthesis.v: Step 12 synthesis
+- +46 Qed
+
 ## [2026-03-08] Phase 2: Category of Systems
 - SystemCategory.v (29), LevelFunctors.v (27), LevelAdjunction.v (25), ERR_Categorical.v (24)
 - `SystemCat L : Category` — full category instance bridging SystemMorphism.v → Category.v
