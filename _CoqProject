@@ -1266,3 +1266,14 @@ src/process/ProcessCouplingAnalysis.v
 src/process/ProcessHigherDComparison.v
 src/process/ProcessFermionMassAnalysis.v
 src/process/ProcessAccuracySummary.v
+
+# === Master Plan v7: Steps 5-7 ===
+src/process/ProcessTwoLoopWeinberg.v
+src/process/ProcessZetaComputation.v
+src/process/ProcessAccuracyPush.v
+src/process/ProcessEffectivePotential.v
+src/process/ProcessGravWaveform.v
+src/process/ProcessProcessPhysics.v
+src/process/ProcessDMPhenomenology.v
+src/process/ProcessZetaValues.v
+src/process/ProcessStepFinalSynthesis.v
