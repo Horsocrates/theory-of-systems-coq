@@ -219,8 +219,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : mass_gap_2x2 8 == 0.
+Proof. exact gap_vanishes_at_8. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

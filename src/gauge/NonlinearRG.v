@@ -422,8 +422,8 @@ Theorem what_step8_opens :
 Proof. exact rg_linear_neq_quadratic. Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : (33 = 33)%nat.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)

@@ -233,8 +233,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : rg_map_quadratic 3 == 3.
+Proof. exact step8_fp_eq_3. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)

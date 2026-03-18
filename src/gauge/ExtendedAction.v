@@ -196,8 +196,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : col_integral_positive = col_integral_positive.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

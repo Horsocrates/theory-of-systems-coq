@@ -451,8 +451,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : orbit_inc_below = orbit_inc_below.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)

@@ -65,8 +65,9 @@ Qed.
 (** ★ Physical: the coupling process tracks how the geometry-gauge
     interaction strength varies across resolution levels.
     Asymptotic freedom: coupling → 0 at high resolution. *)
-Theorem coupling_interpretation : True.
-Proof. exact I. Qed.
+Theorem coupling_interpretation :
+  forall G, is_Cauchy (coupling_process (fun _ => G)).
+Proof. exact coupling_const_cauchy. Qed.
 
 (* ================================================================== *)
 (*  Part II: Combined Gauge+Gravity Coupling  (~6 Qed)                *)
@@ -110,8 +111,9 @@ Proof. intros. unfold combined_coupling. ring. Qed.
     The combined coupling β × defect captures both gauge and
     gravitational effects. When defect = 0 (flat): pure gauge.
     When β = 0 (no gauge): pure gravity (trivial). *)
-Theorem combined_interpretation : True.
-Proof. exact I. Qed.
+Theorem combined_interpretation :
+  forall beta n, combined_coupling beta (empty_geom n) == 0.
+Proof. exact pure_gauge_limit. Qed.
 
 (* ================================================================== *)
 (*  Part III: Scale Dependence  (~6 Qed)                              *)
@@ -164,5 +166,6 @@ Qed.
     Here: the combined coupling modifies this flow.
     Gravity adds a correction proportional to defect.
     The RG flow process converges for constant families. *)
-Theorem rg_flow_physical : True.
-Proof. exact I. Qed.
+Theorem rg_flow_physical :
+  forall beta G, is_Cauchy (rg_flow beta (fun _ => G)).
+Proof. exact rg_flow_const_cauchy. Qed.

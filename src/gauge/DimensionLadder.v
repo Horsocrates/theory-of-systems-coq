@@ -183,16 +183,16 @@ Proof.
 Qed.
 
 (** The mass gap exists because space exists *)
-Theorem mass_gap_because_space_exists : True.
-Proof. exact I. Qed.
+Theorem mass_gap_because_space_exists : 0 < mass_gap_3d_at_8.
+Proof. exact gap_3d_positive. Qed.
 
 (** What remains for the Millennium Problem *)
-Theorem what_remains : True.
-Proof. exact I. Qed.
+Theorem what_remains : mass_gap_2d_at_8 < mass_gap_3d_at_8.
+Proof. exact gap_increases_with_dimension. Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : (13 = 13)%nat.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

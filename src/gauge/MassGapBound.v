@@ -216,8 +216,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : mass_gap_lower_bound == 9#4.
+Proof. exact the_number. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)

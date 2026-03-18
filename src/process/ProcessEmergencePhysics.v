@@ -119,8 +119,10 @@ Qed.
     quantization_strength = how far G is from flat (how much η changes).
     backreaction_strength = how far gc is from vacuum (how much ε changes).
     Their sum = total coupling between geometry and fields = quantum gravity. *)
-Theorem emergence_interpretation : True.
-Proof. exact I. Qed.
+Theorem emergence_interpretation :
+  forall G gc, physical_emergence G gc ==
+    quantization_strength G + backreaction_strength gc.
+Proof. intros. unfold physical_emergence. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  Part II: Connection to Abstract P1  (~6 Qed)                      *)
@@ -173,8 +175,9 @@ Proof. intros. apply emergence_after_feedback. Qed.
     physical_emergence (concrete). Both measure "what the system
     has that its parts don't". In the Geom-Gauge system, this is
     precisely the quantum gravity coupling. *)
-Theorem P1_physical_connection : True.
-Proof. exact I. Qed.
+Theorem P1_physical_connection :
+  forall G gc, physical_emergence (G_obj (F_obj G)) (F_obj (G_obj gc)) == 0.
+Proof. exact feedback_kills_emergence. Qed.
 
 (* ================================================================== *)
 (*  Part III: Emergence Process  (~6 Qed)                             *)
@@ -257,5 +260,6 @@ Qed.
 
 (** ★ Under P4: emergence at each scale IS the quantum gravity at that scale.
     No need to take a limit. The process IS the physics. *)
-Theorem emergence_is_P4 : True.
-Proof. exact I. Qed.
+Theorem emergence_is_P4 :
+  forall G gc, is_Cauchy (emergence_process (fun _ => G) (fun _ => gc)).
+Proof. exact emergence_const_cauchy. Qed.

@@ -139,8 +139,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : 0 < tensor_gap_3d.
+Proof. exact tensor_gap_3d_positive. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

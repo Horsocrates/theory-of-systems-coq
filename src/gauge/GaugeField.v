@@ -285,8 +285,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : plaquette_gauge_invariant = plaquette_gauge_invariant.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

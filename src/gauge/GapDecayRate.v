@@ -316,8 +316,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : forall beta, beta_k beta 0 == beta.
+Proof. exact beta_k_at_0. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

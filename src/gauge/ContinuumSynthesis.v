@@ -206,8 +206,8 @@ Theorem the_final_number :
 Proof. lra. Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : 0 < 1#8.
+Proof. exact the_final_number. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

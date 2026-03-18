@@ -66,8 +66,9 @@ Qed.
 (** ★ Physical: ε captures how fields modify geometry.
     Back-reaction strength = total field excitation above vacuum.
     Zero excitation = vacuum = flat spacetime. *)
-Theorem backreaction_interpretation : True.
-Proof. exact I. Qed.
+Theorem backreaction_interpretation :
+  forall gc, 0 <= backreaction_strength gc.
+Proof. exact backreaction_nonneg. Qed.
 
 (* ================================================================== *)
 (*  Part II: Einstein's Equation (Discrete Version)  (~6 Qed)         *)
@@ -118,8 +119,9 @@ Qed.
     The first step uses 2(1+a) ≥ 1. The second is the reverse triangle
     inequality. Together: curvature_from_fields ≤ backreaction_strength.
     This is the process-physics analogue of Einstein's equation. *)
-Theorem curvature_bounded_by_matter : True.
-Proof. exact I. Qed.
+Theorem curvature_bounded_by_matter :
+  forall lv, Qabs (effective_length lv - (1#2)) <= (1#2).
+Proof. exact curvature_per_link_bound. Qed.
 
 (* ================================================================== *)
 (*  Part III: The Feedback Loop  (~6 Qed)                             *)
@@ -165,5 +167,6 @@ Qed.
 (** ★ Physical: the self-consistent geometry+fields system has a unique
     ground state (flat + vacuum) reached in ONE step of the feedback loop.
     Excited states have nonzero defect = nonzero coupling. *)
-Theorem feedback_physical : True.
-Proof. exact I. Qed.
+Theorem feedback_physical :
+  forall G, adj_defect_unit (feedback_iterate G 1) == 0.
+Proof. exact feedback_ground_state. Qed.

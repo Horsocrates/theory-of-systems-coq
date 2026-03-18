@@ -202,8 +202,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : 0 < 2#15.
+Proof. exact cofactor_sum_positive. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

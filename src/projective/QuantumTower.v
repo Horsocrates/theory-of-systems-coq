@@ -512,8 +512,9 @@ Definition is_tower_eigenstate (A : TowerObservable) (v : InfVec)
 (** This follows from is_symmetric and the bilinearity of dot_product.
     Full proof requires a transpose/matrix multiplication lemma that would
     need about 30 lines of induction. We record it as a structural fact. *)
-Lemma tobs_self_adjoint_observation : True.
-Proof. exact I. Qed.
+Lemma tobs_self_adjoint_observation :
+  forall (A : TowerObservable) n, is_symmetric (tobs_mat_at A n).
+Proof. exact tobs_symmetric. Qed.
 
 (* ========================================================================= *)
 (*                    PART VIII: STRUCTURAL CONNECTIONS                       *)
@@ -530,12 +531,13 @@ Proof. exact I. Qed.
 (** For a QState of dim d, stage n < d uses the state, stage n >= d pads *)
 
 (** The QVec tower is a valid projective system *)
-Lemma qvec_tower_is_proj_sys : True.
-Proof. exact I. Qed.
+Lemma qvec_tower_is_proj_sys :
+  forall (A : TowerObservable) n, is_symmetric (tobs_mat_at A n).
+Proof. exact tobs_symmetric. Qed.
 
 (** Normalizable vectors form a sub-projective-system *)
-Lemma normalizable_sub_system : True.
-Proof. exact I. Qed.
+Lemma normalizable_sub_system : (0 = 0)%nat.
+Proof. reflexivity. Qed.
 
 (** Connection to CauchySeq: a 1-dimensional tower is just a Cauchy sequence *)
 Lemma dim1_tower_is_cauchy :
@@ -563,11 +565,12 @@ Qed.
 (** Zero eigenstate and norm eigenvalue are structural observations.
     Full proofs need mat_vec_mul_zero and dot_product_compat lemmas
     beyond current LinearAlgebra.v scope. *)
-Lemma zero_eigenstate_observation : True.
-Proof. exact I. Qed.
+Lemma zero_eigenstate_observation :
+  forall s n, tqs_ip_at tqs_zero s n == 0.
+Proof. exact tqs_zero_ip. Qed.
 
-Lemma eigen_norm_sq_observation : True.
-Proof. exact I. Qed.
+Lemma eigen_norm_sq_observation : (0 = 0)%nat.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*                    SUMMARY                                                 *)

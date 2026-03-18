@@ -315,8 +315,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : lattice_state_dim 2 1 = 2%nat.
+Proof. exact lattice_dim_2_1. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

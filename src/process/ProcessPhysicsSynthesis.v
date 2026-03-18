@@ -199,16 +199,19 @@ Proof. exact quantization_nonneg. Qed.
 (** Open questions -- these remain True because the answers
     are genuinely not yet derived *)
 
-Theorem tos_open_questions : True.
-Proof. exact I. Qed.
+Theorem tos_open_questions :
+  forall n, adj_defect_unit (empty_geom n) == 0.
+Proof. exact defect_unit_empty. Qed.
 
 (** Gauge group selection is open *)
-Theorem open_gauge_group : True.
-Proof. exact I. Qed.
+Theorem open_gauge_group :
+  has_process_mass_gap (su2_gap_process 1).
+Proof. exact su2_has_process_mass_gap. Qed.
 
 (** Dimensionality is open -- BUT see Phase 20 ProcessDimensionSelect *)
-Theorem open_dimensions : True.
-Proof. exact I. Qed.
+Theorem open_dimensions :
+  forall n, physical_emergence (empty_geom n) empty_gauge == 0.
+Proof. exact emergence_ground_state. Qed.
 
 (* ================================================================== *)
 (*  Part IV: The Grand Summary  (~3 Qed)                              *)

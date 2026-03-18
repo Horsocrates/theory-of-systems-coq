@@ -257,8 +257,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : forall n, Qabs (alt_sign n) == 1.
+Proof. exact alt_sign_abs. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)

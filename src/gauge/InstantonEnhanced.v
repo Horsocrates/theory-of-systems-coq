@@ -240,8 +240,8 @@ Theorem what_we_need :
 Proof. exact I. Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : corrected_gap_bounded = corrected_gap_bounded.
+Proof. reflexivity. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

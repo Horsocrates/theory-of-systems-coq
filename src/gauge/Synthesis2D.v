@@ -196,8 +196,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : 0 < mass_gap_2d_at_8.
+Proof. exact gap_2d_positive. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

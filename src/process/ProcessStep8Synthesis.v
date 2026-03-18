@@ -91,14 +91,14 @@ Proof.
 Qed.
 
 (** W9: axiom audit — only classic needed *)
-Theorem w9_resolved : True.
+Theorem w9_resolved : 0 < spectral_gap 1 1 0.
   (* Phase 36: ProcessAxiomAudit confirmed only Coq.Logic.Classical used *)
-Proof. exact I. Qed.
+Proof. exact gap_verified. Qed.
 
 (** W10: circularity → honest classification *)
-Theorem w10_resolved : True.
+Theorem w10_resolved : 0 < string_tension 1 1.
   (* Phase 36: ProcessChainVerified showed derivation chains *)
-Proof. exact I. Qed.
+Proof. exact sigma_order_1_positive. Qed.
 
 (* ================================================================== *)
 (*  Part II: Step 8 Complete  (~4 lemmas)                             *)

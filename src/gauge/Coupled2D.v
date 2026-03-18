@@ -181,8 +181,8 @@ Definition v_q : vec4 := fun i =>
   match i with O => 0 | S O => 1 | S (S O) => -(1) | S (S (S O)) => 0 | _ => 0 end.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : alpha_2d 0 == 1.
+Proof. exact alpha_at_0. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

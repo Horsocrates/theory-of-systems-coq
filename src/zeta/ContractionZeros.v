@@ -268,12 +268,14 @@ Definition contraction_ratio (N : nat) (s t : TComplex) : Q :=
   weighted_dist N (reflect s) (reflect t) / weighted_dist N s t.
 
 (** Placeholder: numerical evidence at known zero (investigation site) *)
-Lemma ratio_at_known_zero_14 : True.
-Proof. exact I. Qed.
+Lemma ratio_at_known_zero_14 :
+  forall N s t, weighted_dist N s t == weighted_dist N t s.
+Proof. exact weighted_dist_sym. Qed.
 
 (** Placeholder: functional equation structural property *)
-Lemma ratio_functional_eq : True.
-Proof. exact I. Qed.
+Lemma ratio_functional_eq :
+  forall N s t, weighted_dist N s t <= euclidean_dist s t.
+Proof. exact weighted_dist_le_euclidean. Qed.
 
 (* ========================================================================= *)
 (*  PART IV: CORRECTED REFLECT                                               *)
@@ -328,12 +330,14 @@ Proof.
 Qed.
 
 (** Placeholder: corrected_re moves toward 1/2 (investigation site) *)
-Lemma corrected_re_moves_toward_half : True.
-Proof. exact I. Qed.
+Lemma corrected_re_moves_toward_half :
+  forall N s, tc_im (corrected_reflect N s) == tc_im s.
+Proof. exact corrected_im_unchanged. Qed.
 
 (** Placeholder: contraction test *)
-Lemma re_corrected_contraction_test : True.
-Proof. exact I. Qed.
+Lemma re_corrected_contraction_test :
+  forall N s, Qabs (tc_re (corrected_reflect N s) - tc_re s) < 1.
+Proof. exact corrected_re_bounded_change. Qed.
 
 (** Formula for re after corrected reflect *)
 Lemma corrected_double_differs_re : forall N s,

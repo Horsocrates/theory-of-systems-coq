@@ -79,8 +79,9 @@ Proof. intros. unfold quantization_strength. apply defect_unit_nonneg. Qed.
     The quantization strength measures how far the original geometry
     deviates from this quantum ground state. Under P4, this is
     the vacuum energy of the geometry at that resolution. *)
-Theorem quantization_interpretation : True.
-Proof. exact I. Qed.
+Theorem quantization_interpretation :
+  forall G, 0 <= quantization_strength G.
+Proof. exact quantization_nonneg. Qed.
 
 (* ================================================================== *)
 (*  Part II: Vacuum Energy  (~6 Qed)                                  *)
@@ -116,8 +117,9 @@ Proof. intros. exact I. Qed.
     Total vacuum energy = quantization_strength(G).
     For K-vertex uniform lattice: ∝ K · |ℓ − 1/2|.
     FINITE, COMPUTABLE number at every lattice resolution. *)
-Theorem vacuum_energy_physical : True.
-Proof. exact I. Qed.
+Theorem vacuum_energy_physical :
+  forall n, vacuum_energy (empty_geom n) == 0.
+Proof. exact vacuum_energy_flat. Qed.
 
 (* ================================================================== *)
 (*  Part III: Quantization Process  (~6 Qed)                          *)
@@ -164,5 +166,6 @@ Proof. intros G_family Hg n. unfold quantization_process. apply Hg. Qed.
 (** ★ Under P4: quantization IS the process of computing vacuum effects
     at each lattice resolution. No "UV completion" needed.
     The process converges by monotone + bounded (or decreasing + bounded). *)
-Theorem quantization_is_P4 : True.
-Proof. exact I. Qed.
+Theorem quantization_is_P4 :
+  forall G, is_Cauchy (quantization_process (fun _ => G)).
+Proof. exact quantization_const_cauchy. Qed.

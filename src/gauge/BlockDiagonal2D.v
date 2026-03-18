@@ -229,8 +229,8 @@ Theorem eigenvalue_trace_check :
 Proof. unfold Qeq. simpl. lia. Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : 1 + (1#4) + (1#4) + 1 == 5#2.
+Proof. exact eigenvalue_trace_check. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

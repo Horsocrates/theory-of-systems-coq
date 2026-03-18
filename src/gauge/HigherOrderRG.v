@@ -389,8 +389,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : forall beta, 0 < beta -> 0 < beta * beta.
+Proof. exact beta_sq_pos. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)

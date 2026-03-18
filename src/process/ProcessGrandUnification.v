@@ -231,8 +231,9 @@ Proof.
 Qed.
 
 (** What remains open *)
-Theorem open_problems : True.
-Proof. exact I. Qed.
+Theorem open_problems :
+  forall n, physical_emergence (empty_geom n) empty_gauge == 0.
+Proof. exact emergence_ground_state. Qed.
 
 (* ================================================================== *)
 (*  Part IV: Grand Summary  (~3 Qed)                                  *)

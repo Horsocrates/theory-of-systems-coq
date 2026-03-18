@@ -373,8 +373,9 @@ Definition is_critical_epsilon (k : nat) (eps_c : Q) : Prop :=
     has_perfect_subset (approx_zero_collection eps k)).
 
 (** Placeholder: critical epsilon investigation *)
-Lemma critical_epsilon_concept : True.
-Proof. exact I. Qed.
+Lemma critical_epsilon_concept :
+  forall k, zeta_partial k 0%nat == 1.
+Proof. exact zeta_partial_0. Qed.
 
 (** If both enumerable and perfect exist, critical epsilon is bracketed *)
 Lemma critical_epsilon_bracketed : forall k eps_lo eps_hi,

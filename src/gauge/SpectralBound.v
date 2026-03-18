@@ -263,8 +263,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : spectral_gap_lower 8 == 0.
+Proof. exact spectral_gap_at_8. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

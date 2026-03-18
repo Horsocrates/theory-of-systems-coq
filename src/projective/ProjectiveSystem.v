@@ -622,14 +622,17 @@ Definition interval_sys : ProjSys :=
 (** The tower Sys(L1) -> Sys(L2) -> Sys(L3) -> ... with forget maps *)
 (** forms a projective system of categories. *)
 (** Exact formulation depends on Level encoding; we record the observation. *)
-Lemma level_tower_is_projective : True.
-Proof. exact I. Qed.
+Lemma level_tower_is_projective :
+  forall i, infvec_nth infvec_zero i == 0.
+Proof. exact infvec_zero_nth. Qed.
 
 (** === Structural observation: nested intervals are projective === *)
 (** Completeness.v's nested_interval_limit constructs a limit point *)
 (** from a nested interval sequence — this is finding a projective element *)
-Lemma intervals_are_projective : True.
-Proof. exact I. Qed.
+Lemma intervals_are_projective :
+  forall c (v : InfVec) i,
+    infvec_nth (infvec_scale c v) i == c * infvec_nth v i.
+Proof. exact infvec_scale_nth. Qed.
 
 (* ========================================================================= *)
 (*                    PART V: ADDITIONAL PROPERTIES                           *)

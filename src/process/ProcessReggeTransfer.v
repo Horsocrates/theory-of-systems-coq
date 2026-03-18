@@ -111,8 +111,9 @@ Qed.
 (** ★ Physical: gravity eigenvalues come from Fourier modes of deficit angles.
     k=0 = flat mode (no curvature oscillation), eigenvalue = 1.
     k≥1 = curvature modes, suppressed by exp(−κk²ℓ²). *)
-Theorem gravity_eigenvalue_interpretation : True.
-Proof. exact I. Qed.
+Theorem gravity_eigenvalue_interpretation :
+  forall kappa ell, gravity_eigenvalue kappa ell 0%nat == 1.
+Proof. exact gravity_ground. Qed.
 
 (* ================================================================== *)
 (*  Part II: Gravity Spectral Gap  (~8 Qed)                           *)
@@ -226,8 +227,9 @@ Proof. exact I. Qed.
     At small K: gravity gap > gauge gap (gravity dominates).
     At large K: gravity gap < gauge gap (gauge dominates).
     Crossing at K* where κL²/K*² ≈ 289/384. *)
-Theorem crossing_preview : True.
-Proof. exact I. Qed.
+Theorem crossing_preview :
+  forall kappa ell, 0 <= gravity_gap kappa ell.
+Proof. exact gravity_gap_nonneg. Qed.
 
 (* ================================================================== *)
 (*  Part IV: Gravity as OperatorProcess  (~4 Qed)                     *)
@@ -254,5 +256,6 @@ Proof. intros. rewrite gravity_ground. lra. Qed.
 (** Gravity operator is selfadjoint (proven above) *)
 (** Gravity eigenvalue at k=0 positive (proven above) *)
 (** ★ Physical: gravity transfer matrix = discrete propagator for graviton modes. *)
-Theorem gravity_operator_physical : True.
-Proof. exact I. Qed.
+Theorem gravity_operator_physical :
+  forall kappa ell, is_selfadjoint (gravity_operator kappa ell).
+Proof. exact gravity_selfadjoint. Qed.

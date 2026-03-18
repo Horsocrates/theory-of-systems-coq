@@ -280,8 +280,12 @@ Qed.
     is Cauchy when f is a contraction on [a,b].
     The key theorem: is_contraction f a b c -> a <= x -> x <= b ->
       is_cauchy (fun n => iterate f x n). *)
-Theorem banach_iterations_cauchy_obs : True.
-Proof. exact I. Qed.
+Theorem banach_iterations_cauchy_obs :
+  forall f a b c x,
+    is_contraction f a b c ->
+    a <= x -> x <= b ->
+    is_cauchy (fun n => iterate f x n).
+Proof. exact iterate_is_cauchy. Qed.
 
 (** Concrete instance: iterate_is_cauchy from FixedPoint.v *)
 Lemma banach_iterations_cauchy :

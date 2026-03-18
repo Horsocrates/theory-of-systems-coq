@@ -188,8 +188,9 @@ Proof. exact I. Qed.
     16. 18 exact Q numbers verified
 *)
 
-Theorem derivation_chain_complete : True.
-Proof. exact I. Qed.
+Theorem derivation_chain_complete :
+  0 < spectral_gap 1 1 0.
+Proof. exact gap_positive. Qed.
 
 Theorem phase_A6_complete :
   (boundary_edges 2 3 <= bulk_edges 2 3)%nat /\

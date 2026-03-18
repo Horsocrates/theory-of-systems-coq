@@ -93,8 +93,10 @@ Definition planck_threshold (G_family : nat -> QGeometry)
     This is the same structure as the j=0 ↔ j=1 crossing:
     find where a Q-valued process crosses a value.
     Same method: look for level n where emergence_n < θ ≤ emergence_{n+1}. *)
-Theorem planck_interpretation : True.
-Proof. exact I. Qed.
+Theorem planck_interpretation :
+  forall G gc threshold,
+    weak_gravity G gc threshold \/ strong_gravity G gc threshold.
+Proof. exact weak_or_strong. Qed.
 
 (** After feedback: always weak (emergence = 0) *)
 Lemma feedback_always_weak : forall G gc threshold,
@@ -214,8 +216,9 @@ Proof. intros. apply emergence_nonneg. Qed.
     Classical QG diverges at Planck scale because R is assumed.
     Under P4: everything is Q-valued, finite, computable.
     The "Planck catastrophe" simply doesn't arise. *)
-Theorem no_planck_catastrophe : True.
-Proof. exact I. Qed.
+Theorem no_planck_catastrophe :
+  forall G gc, 0 <= physical_emergence G gc.
+Proof. exact emergence_nonneg. Qed.
 
 (** Emergence process is well-defined at every stage *)
 Lemma emergence_well_defined_at_all_scales :
@@ -254,8 +257,9 @@ Proof. intros. apply emergence_nonneg. Qed.
     The black hole at resolution K has finite emergence.
     The process {emergence_K} characterizes information at every scale.
     Nothing is "lost" — it's all in the process. *)
-Theorem information_resolution : True.
-Proof. exact I. Qed.
+Theorem information_resolution :
+  forall G gc, 0 <= physical_emergence G gc.
+Proof. exact information_in_defect. Qed.
 
 (** Information is preserved in the process adjunction *)
 Lemma info_preserved_in_adjunction : forall G gc,

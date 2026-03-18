@@ -303,8 +303,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : forall K x, 0 < K -> wrap K x < K.
+Proof. exact wrap_lt. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)

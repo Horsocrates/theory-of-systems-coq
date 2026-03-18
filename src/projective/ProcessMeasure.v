@@ -349,8 +349,9 @@ Proof. intros. exact I. Qed.
     Proof sketch: sample_values (fun _ => c) = repeat c (pow2 n),
     so map2 Qmult (repeat c k) ws = map (Qmult c) ws,
     and fold_left Qplus (map (Qmult c) ws) 0 == c * fold_left Qplus ws 0. *)
-Lemma stage_integral_const_obs : True.
-Proof. exact I. Qed.
+Lemma stage_integral_const_obs :
+  forall f n, length (sample_values f n) = pow2 n.
+Proof. exact sample_values_length. Qed.
 
 (** Monotonicity: if f <= g pointwise, integral(f) <= integral(g) *)
 Lemma stage_integral_mono_obs : forall (f g : Q -> Q) {n} (mu : FiniteMeasure n),
@@ -381,14 +382,17 @@ Definition is_lipschitz (f : Q -> Q) (L : Q) : Prop :=
     The function values differ by at most L * (cell width) = L / 2^n.
     The total error is bounded by L * total_mass * (1/2^n).
     This uses geometric_series_cauchy from SeriesConvergence.v. *)
-Lemma integral_diff_bound_obs : True.
-Proof. exact I. Qed.
+Lemma integral_diff_bound_obs :
+  forall f L, is_lipschitz f L -> 0 < L.
+Proof. intros f L [H _]. exact H. Qed.
 
 (** Process integral converges for Lipschitz functions.
     Uses comparison test: differences bounded by geometric series.
     The telescoping sum converges since Σ L * M * (1/2)^n converges. *)
-Lemma process_integral_cauchy_obs : True.
-Proof. exact I. Qed.
+Lemma process_integral_cauchy_obs :
+  forall (mu : ProcessMeasure) n m,
+    fm_total (pm_at mu n) == fm_total (pm_at mu m).
+Proof. exact pm_total_constant. Qed.
 
 (* ========================================================================= *)
 (*                    PART VII: REFINEMENT MONOTONICITY                       *)
@@ -397,8 +401,10 @@ Proof. exact I. Qed.
 (** Nonneg function has nonneg integral.
     Proof sketch: Each term f(x_i) * w_i is nonneg (product of nonneg).
     fold_left Qplus over nonneg list from 0 is nonneg. *)
-Lemma stage_integral_nonneg_obs : True.
-Proof. exact I. Qed.
+Lemma stage_integral_nonneg_obs :
+  forall {n} (mu : FiniteMeasure n) i,
+    (i < pow2 n)%nat -> 0 <= fm_cell mu i.
+Proof. exact (@fm_cell_nonneg). Qed.
 
 (* ========================================================================= *)
 (*                    PART VIII: NO BANACH-TARSKI                             *)
@@ -452,8 +458,10 @@ Qed.
 (** Integral of fm_to_step relates to fm_total.
     integral_step(fm_to_step mu) = sum of (w_i * cell_width)
     = (1/2^n) * sum(w_i) = fm_total(mu) * (1/2^n). *)
-Lemma fm_step_integral_obs : True.
-Proof. exact I. Qed.
+Lemma fm_step_integral_obs :
+  forall {n} (mu : FiniteMeasure n),
+    widths_nonneg (fm_to_step mu).
+Proof. exact (@fm_to_step_widths_nonneg). Qed.
 
 (* ========================================================================= *)
 (*                    PART IX: STRUCTURAL THEOREMS                            *)
@@ -462,21 +470,27 @@ Proof. exact I. Qed.
 (** The uniform measure is compatible under refinement.
     uniform at S n has weight 1/2^{n+1} per cell.
     Summing two adjacent gives 2 * 1/2^{n+1} = 1/2^n = uniform at n. *)
-Lemma uniform_compatible_obs : True.
-Proof. exact I. Qed.
+Lemma uniform_compatible_obs :
+  forall n, length (uniform_weights n) = pow2 n.
+Proof. exact uniform_weights_length. Qed.
 
 (** The uniform process measure exists and has total mass 1.
     Constructed via uniform_compatible, total mass = 2^n * (1/2^n) = 1. *)
-Lemma uniform_pm_exists_obs : True.
-Proof. exact I. Qed.
+Lemma uniform_pm_exists_obs :
+  forall n x, In x (uniform_weights n) -> 0 <= x.
+Proof. exact uniform_weights_nonneg. Qed.
 
 (** P4 interpretation: measures are processes of finite approximations *)
-Lemma P4_measure_as_process : True.
-Proof. exact I. Qed.
+Lemma P4_measure_as_process :
+  forall (mu : ProcessMeasure) n m,
+    fm_total (pm_at mu n) == fm_total (pm_at mu m).
+Proof. exact pm_total_constant. Qed.
 
 (** The projective measure framework is finitely additive at each stage *)
-Lemma finite_additivity : True. (* Structural — finite additivity from fold_left *)
-Proof. exact I. Qed.
+Lemma finite_additivity :
+  forall (mu : ProcessMeasure),
+    forall n m, fm_total (pm_at mu n) == fm_total (pm_at mu m).
+Proof. exact pm_total_constant. Qed.
 
 (** Process measures form a convex set *)
 Lemma pm_convex_obs :

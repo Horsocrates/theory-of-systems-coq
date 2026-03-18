@@ -165,8 +165,8 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : True.
-Proof. exact I. Qed.
+Theorem total_count : 0 < su2_gap_at_fixed_point.
+Proof. exact su2_gap_at_fp_positive. Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
