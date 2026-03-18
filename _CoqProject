@@ -1200,3 +1200,27 @@ src/process/ProcessHVP.v
 src/process/ProcessSpectralTheoryQ.v
 src/process/ProcessGlueballExtended.v
 src/process/ProcessLatticeTopology.v
+
+# === All 6 Phases: Cross-validation + Connections ===
+# Phase 1
+src/process/ProcessPlaquetteFix.v
+src/process/ProcessBornCrossValidation.v
+src/process/ProcessQMCrossValidation.v
+src/process/ProcessQMSynthesis.v
+# Phase 2
+src/process/ProcessCasimirCrossValidation.v
+src/process/ProcessCoulombConnection.v
+src/process/ProcessLambShiftConnection.v
+# Phase 3
+src/process/ProcessProjectiveConnection.v
+src/process/ProcessLinalgConnection.v
+# Phase 4
+src/process/ProcessZetaConnection.v
+src/process/ProcessNavierStokesConnection.v
+# Phase 5
+src/process/ProcessSpectralIndex.v
+src/process/ProcessErrorBounds.v
+src/process/ProcessLambdaQCD.v
+# Phase 6
+src/process/ProcessUniversalityExplicit.v
+src/process/ProcessFinalMap.v
