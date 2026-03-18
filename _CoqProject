@@ -1230,3 +1230,13 @@ src/stdlib/TheoremBundle.v
 src/stdlib/QiPowerSeries.v
 src/stdlib/FiniteGroup.v
 src/stdlib/ProcessDistribution.v
+
+# === Closure Pass ===
+src/stdlib/OS1Closure.v
+src/stdlib/OS2Closure.v
+src/stdlib/OS3Closure.v
+src/stdlib/GaugeOSClosure.v
+src/stdlib/GaugeRemainingClosure.v
+src/process/ProcessSynthesisCleanup1.v
+src/process/ProcessSynthesisCleanup2.v
+src/process/ProcessSynthesisCleanup3.v
