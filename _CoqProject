@@ -1169,3 +1169,10 @@ src/process/ProcessGlobalGapConnection.v
 src/process/ProcessExactSpectrumConnection.v
 src/process/ProcessSU2DetailConnection.v
 src/process/ProcessGaugeFullSynthesis.v
+
+# === Verifiable Physics (V1-V5) ===
+src/process/ProcessPlaquette.v
+src/process/ProcessBeta4.v
+src/process/ProcessWMassRatio.v
+src/process/ProcessWilsonLoop.v
+src/process/ProcessThermodynamics.v
