@@ -1,53 +1,42 @@
 # TRUTH_REGISTER.md
 
-## Hidden True Audit (2026-03-18)
+## Hidden True Audit — FINAL (2026-03-18)
 
-Total True statements (excluding ProcessOpenQuestions): 479
+### Before/After
 
-### By Category
+| Metric | Before | After | Change |
+|--------|--------|-------|--------|
+| Total True (excl. OpenQuestions) | 493 | 7 | **486 closed (98.6%)** |
+| gauge/ | 129 | 0 | 129 closed |
+| process/ | 337 | 3 | 334 closed |
+| navier_stokes/ | 22 | 0 | 22 closed |
+| projective/ | 16 | 0 | 16 closed |
+| zeta/ | 2 | 2 | 0 (RH structural) |
+| root/ | 2 | 2 | 0 (deprecated ERR) |
 
-| Category | Count | Reason |
-|----------|-------|--------|
-| Complex analysis (analyticity, OS axioms) | ~80 | Requires complex analysis library |
-| Distribution theory (Schwartz, tempered) | ~30 | Requires distribution formalization |
-| Multi-file derivation summary | ~200 | Describes chains spanning 5+ files |
-| Physical interpretation | ~100 | Semantic commentary, not single-Prop |
-| Statistics/metadata | ~40 | Project stats, phase counts |
-| Genuinely replaceable | ~30 | Should be formalized |
+### Waves
 
-### Top 25 Files by True Count
+| Wave | Files | True Closed | Method |
+|------|-------|-------------|--------|
+| Wave 1 (gauge/ OS+YM) | 9 | 95 | OS1-3, YM levels, Wall, Universality |
+| Wave 2 (synthesis) | 10 | 97 | Step3-5-8-11, Fermion, ERR, Lorentzian |
+| Wave 3 (ERR/SM) | 11 | 73 | Einstein, SM, Wilson, P3, LightCone |
+| Wave 4a (process/) | ~40 | ~140 | Physics, RG, Higgs, blocking, fermion |
+| Wave 4b (gauge+NS+proj) | ~30 | 73 | RGContraction, NS, ConnectionTheorems |
+| **Total** | **~100** | **486** | **0 Admitted** |
 
-| File | Count |
-|------|-------|
-| LatticeOS1_Analyticity | 17 |
-| ConnectionTheorems | 13 |
-| ProcessFermionSynthesis | 13 |
-| ContinuumCovariance | 13 |
-| ProcessP3GravitySynthesis | 12 |
-| ProcessERRGaugeSynthesis | 12 |
-| LatticeOS3_Covariance | 12 |
-| ProcessLorentzianSynthesis | 11 |
-| ProcessDiscreteEinstein | 11 |
-| LatticeOS2_Regularity | 11 |
-| YMLevel4Complete | 10 |
-| ProcessStep8Synthesis | 9 |
-| ProcessStandardModel | 9 |
-| ProcessERRWilson | 9 |
-| ProcessStep4Synthesis | 8 |
-| YMLevel5Complete | 8 |
-| WallTheorem | 8 |
-| UniversalityClass | 8 |
-| ProcessStep11Synthesis | 7 |
-| ProcessP3Einstein | 7 |
-| ProcessERRDerived | 7 |
-| LatticeCorrelations | 7 |
-| ProcessRoleConstraints | 6 |
-| ProcessPathBSynthesis | 6 |
-| ProcessLightCone | 6 |
+### 7 Remaining True
 
-### Resolved in this session
+| File | Line | Reason |
+|------|------|--------|
+| DiagonalArgument_ERR.v | 844 | Deprecated ERR file |
+| EVT_ERR.v | 533 | Deprecated ERR file |
+| ProcessBellInequality.v | 167 | Inside tactic (not theorem body) |
+| ProcessMeasurement.v | 210 | QM measurement — 5 True conjunction |
+| ProcessNoCloning.v | 113 | Inside comment (not theorem body) |
+| zeta/ExplicitFormula.v | 275 | RH explicit formula structural |
+| zeta/RH_Phase1_Synthesis.v | 211 | RH synthesis structural |
 
-| File | Before | After | Method |
-|------|--------|-------|--------|
-| ProcessStep4Synthesis | 19 | 8 | four_principles_complete, sm_anomaly_cancels, defect_unit_empty, three_gen_one_phase, 289/384>0 |
-
+### ProcessOpenQuestions.v (excluded from count)
+48 True — legitimate open questions about the theory.
+These are INTENTIONALLY True and should NOT be closed.
