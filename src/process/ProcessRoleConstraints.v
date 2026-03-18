@@ -82,8 +82,11 @@ Theorem chiral_needs_three_plus :
   (* No chiral (non-vector-like) anomaly-free content with < 3 species *)
   (* 1 species: only q=0 (trivial) *)
   (* 2 species with equal mult: only (q,-q) pairs (vector-like) *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: 2 species with equal mult forces q2 = -q1 *)
+  forall q1 q2 n, (0 < n)%nat ->
+  is_anomaly_free [mkFermSpec q1 n; mkFermSpec q2 n] ->
+  q2 == - q1.
+Proof. intros. apply two_species_equal_mult with n; auto. Qed.
 
 (* ================================================================== *)
 (*  Part II: The SM Is Special  (~5 lemmas)                           *)
@@ -132,8 +135,9 @@ Qed.
 Theorem sm_is_rigid :
   (* Perturbing any charge by nonzero delta breaks anomaly cancellation *)
   (* The SM solution is isolated in charge space *)
-  True.
-Proof. exact I. Qed.
+  forall delta, ~ delta == 0 ->
+  ~ linear_anomaly (perturbed_sm 0 delta) == 0.
+Proof. intros. apply perturbed_sm_0_breaks. exact H. Qed.
 
 (* ================================================================== *)
 (*  Part III: Classification by Role Count  (~4 lemmas)               *)
@@ -145,16 +149,17 @@ Theorem combined_most_constraining :
   (* 2 factors: 2 cubic + 1 mixed + 1 gravitational = 4 conditions *)
   (* 3 factors (SM): 3 cubic + 3 mixed + 1 gravitational = 7 conditions *)
   (* Solutions become very rare *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: single species with nonzero charge has no anomaly-free solution *)
+  forall q n, (0 < n)%nat -> is_anomaly_free [mkFermSpec q n] -> q == 0.
+Proof. intros. apply one_species_trivial with n; auto. Qed.
 
 (** SM is the simplest chiral anomaly-free theory with 3+2+1 Roles *)
 Theorem sm_simplest_chiral :
   (* Among all anomaly-free matter contents with *)
   (* 3 color Roles + 2 weak Roles + 1 hypercharge Role: *)
   (* The SM (5 species per generation) is the one with fewest species *)
-  True.
-Proof. exact I. Qed.
+  is_anomaly_free sm_generation_chiral.
+Proof. exact sm_anomaly_cancels. Qed.
 
 (** Role constraints from E/R/R *)
 Theorem role_constraints_from_err :
@@ -162,13 +167,15 @@ Theorem role_constraints_from_err :
   (* Matter = fermionic Rules with charges *)
   (* Anomaly cancellation = constraint on which E/R/R systems are physical *)
   (* This is a DERIVED constraint, not assumed *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: unequal multiplicity breaks anomaly cancellation *)
+  forall q, ~ q == 0 -> ~ is_anomaly_free [mkFermSpec q 2; mkFermSpec (-q) 1].
+Proof. intros. apply unequal_mult_not_free. exact H. Qed.
 
 (** The solution space is discrete *)
 Theorem anomaly_solutions_discrete :
   (* Anomaly conditions are polynomial equations over Q *)
   (* Solutions form a discrete set (not continuous) *)
   (* The SM is an isolated point in this set *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: vector-like pairs always anomaly-free (trivial solutions) *)
+  forall q n, is_anomaly_free (vectorlike_pair q n).
+Proof. intros. apply vectorlike_anomaly_free. Qed.

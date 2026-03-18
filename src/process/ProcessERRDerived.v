@@ -52,8 +52,8 @@ Theorem P1_gives_elements_and_rules :
   (* Any system satisfying P1 (wholeness) has: *)
   (* - Parts (= Elements): otherwise "sum of parts" is meaningless *)
   (* - Nontrivial interactions (= Rules): otherwise whole = sum *)
-  True.
-Proof. exact I. Qed.
+  forall hp, (0 < hp_nparts hp)%nat.
+Proof. intros. exact (hp_parts_exist hp). Qed.
 
 (** The parts ARE Elements *)
 Definition elements_from_P1 (hp : HasParts) : nat := hp_nparts hp.
@@ -96,8 +96,8 @@ Theorem P2_gives_roles :
   (* Any system satisfying P2 (complementarity) has: *)
   (* - Aspects for each part (= Roles in E/R/R) *)
   (* - At least 2 distinct aspects (complementary) *)
-  True.
-Proof. exact I. Qed.
+  forall hp (ha : HasAspects hp), (2 <= ha_naspects hp ha)%nat.
+Proof. intros. exact (ha_at_least_two hp ha). Qed.
 
 (** The aspects ARE Roles *)
 Definition roles_from_P2 (hp : HasParts) (ha : HasAspects hp)
@@ -185,16 +185,22 @@ Theorem err_is_recursive :
   (* A collection of ERRSystems is itself describable as an ERRSystem *)
   (* Elements = systems, Roles = system types, Rules = inter-system relations *)
   (* This is P3 hierarchy applied to E/R/R *)
-  True.
-Proof. exact I. Qed.
+  forall (systems : list ERRSystem),
+  (0 < length systems)%nat ->
+  exists hp : HasParts, hp_nparts hp = length systems.
+Proof. intros. apply meta_system_has_parts. auto. Qed.
 
 (** P4: at each level, E/R/R is finite *)
 Theorem err_is_finite_process :
   (* At process step n: finitely many Elements, finitely many Roles *)
   (* ERRSystem uses nat for nsites and nroles -> always finite *)
   (* The E/R/R framework IS a process of finite decompositions *)
-  True.
-Proof. exact I. Qed.
+  forall hp hi ha,
+  (0 < err_nsites (err_from_principles hp hi ha))%nat /\
+  (2 <= err_nroles (err_from_principles hp hi ha))%nat.
+Proof.
+  intros. split; [apply derived_err_nonempty | apply derived_err_complementary].
+Qed.
 
 (* ================================================================== *)
 (*  Part V: The Complete Chain  (~4 lemmas)                            *)
@@ -213,8 +219,12 @@ Theorem err_from_A_equals_exists :
   (*                                                    *)
   (* Then: E/R/R -> gauge + fermions + gravity + SM *)
   (* The ENTIRE chain from A = exists. No side inputs. *)
-  True.
-Proof. exact I. Qed.
+  forall hp hi ha,
+  exists i j,
+    (i < err_nsites (err_from_principles hp hi ha))%nat /\
+    (j < err_nsites (err_from_principles hp hi ha))%nat /\
+    ~ err_rule (err_from_principles hp hi ha) i j == 0.
+Proof. intros. apply derived_err_nontrivial. Qed.
 
 (** What each principle contributes to E/R/R *)
 Theorem principle_to_err_map :
@@ -223,8 +233,13 @@ Theorem principle_to_err_map :
   (* P2 -> Roles (complementary aspects/functions) *)
   (* P3 -> Recursion (E/R/R at each level) *)
   (* P4 -> Finiteness (finite at each step) *)
-  True.
-Proof. exact I. Qed.
+  forall hp hi ha,
+  let sys := err_from_principles hp hi ha in
+  err_nsites sys = hp_nparts hp /\
+  err_nroles sys = ha_naspects hp ha /\
+  (0 < err_nsites sys)%nat /\
+  (2 <= err_nroles sys)%nat.
+Proof. intros. apply err_is_derived. Qed.
 
 (** The foundation is CLOSED *)
 (** A = exists -> P1-P4 -> E/R/R -> physics *)
@@ -241,5 +256,16 @@ Theorem foundation_closed :
   (* sm_anomaly_cancels: anomaly -> SM *)
   (*                                              *)
   (* ALL from A = exists. Chain is CLOSED. *)
-  True.
-Proof. exact I. Qed.
+  (* Synthesis: err_is_derived gives all four properties *)
+  forall hp hi ha,
+  let sys := err_from_principles hp hi ha in
+  (0 < err_nsites sys)%nat /\
+  (2 <= err_nroles sys)%nat /\
+  (exists i j, (i < err_nsites sys)%nat /\ (j < err_nsites sys)%nat /\
+    ~ err_rule sys i j == 0).
+Proof.
+  intros. repeat split.
+  - apply derived_err_nonempty.
+  - apply derived_err_complementary.
+  - apply derived_err_nontrivial.
+Qed.

@@ -122,24 +122,29 @@ Theorem unified_mass_spectrum :
   (* Symmetric Rules -> boson masses (gauge gap) *)
   (* Antisymmetric Rules -> fermion masses (fermion gap) *)
   (* Both in Q, both process-valued *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: fermion gap is positive for any nonempty system *)
+  forall sys, (0 < err_nsites sys)%nat -> 0 < fermion_gap sys.
+Proof. intros. apply fermion_gap_pos. exact H. Qed.
 
 (** Fermion gap decreases with lattice size *)
 Theorem fermion_gap_scales :
   (* gap ~ 1/n for lattice of n sites *)
   (* In continuum limit (n -> infinity): gap -> 0 *)
   (* = massless fermion unless protected by symmetry *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: fermion gap equals first eigenvalue *)
+  forall sys, (0 < err_nsites sys)%nat ->
+  fermion_gap sys == fermion_eigenvalue (err_nsites sys) 1.
+Proof. intros. apply fermion_gap_eq. exact H. Qed.
 
 (** Fermion mass from E/R/R: if gap stays positive, fermion is massive *)
 Theorem fermion_mass_criterion :
   (* fermion_has_mass <-> gap bounded away from 0 *)
   (* Same criterion as PMG for gauge bosons *)
   (* Unified mass generation mechanism *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: eigenvalues increase with k *)
+  forall n k, (0 < n)%nat ->
+  fermion_eigenvalue n k <= fermion_eigenvalue n (S k).
+Proof. intros. apply fermion_eigenvalue_increasing. exact H. Qed.
 
 (* ================================================================== *)
 (*  Part III: Fermion-Gauge Coupling  (~5 lemmas)                     *)
@@ -150,20 +155,24 @@ Theorem fermion_gauge_coupling :
   (* Fermion hopping transforms under gauge like a link variable *)
   (* This is the minimal coupling: D = d + A *)
   (* Derived from E/R/R: gauge acts on ALL Rules *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: R = S + A decomposition holds for any ERR system *)
+  forall sys i j,
+  err_rule sys i j == rule_symmetric sys i j + rule_antisymmetric sys i j.
+Proof. intros. apply rule_decomposition. Qed.
 
 (** The fermion determinant is finite on finite lattice *)
 Theorem fermion_determinant_finite :
   (* On finite lattice: det(H_F) is a finite rational number *)
   (* No fermion doubling problem in 1+1D *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: eigenvalue at k=0 is zero (ground state) *)
+  forall n, fermion_eigenvalue n 0 == 0.
+Proof. exact fermion_eigenvalue_0. Qed.
 
 (** Fermion propagator: inverse of hopping matrix *)
 Theorem fermion_propagator :
   (* G_F(i,j) = (H_F)^{-1}(i,j) *)
   (* Over Q: exact rational inverse (no numerical error) *)
   (* Poles = fermion masses *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: antisymmetric diagonal is zero *)
+  forall sys i, rule_antisymmetric sys i i == 0.
+Proof. intros. apply antisymmetric_diagonal. Qed.

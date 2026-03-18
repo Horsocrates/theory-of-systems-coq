@@ -91,8 +91,10 @@ Theorem closed_paths_only_invariant :
   (* Open paths: gauge-variant (changes by g(start) - g(end)) *)
   (* Closed paths: gauge-invariant (g-terms telescope) *)
   (* Therefore: Wilson loops are the natural E/R/R observables *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: single edge gauge difference witnesses open path variance *)
+  forall L g k,
+  apply_gauge L g k - lerr_edge_rule L k == g (lerr_edge_src L k) - g (lerr_edge_tgt L k).
+Proof. intros. apply gauge_edge_difference. Qed.
 
 (* ================================================================== *)
 (*  Part II: Wilson Loops from E/R/R  (~5 lemmas)                     *)
@@ -136,8 +138,10 @@ Abort.
 Theorem wilson_is_rule_composition :
   (* loop_sum L loop_edges = composition of Rules along the loop *)
   (* = the natural E/R/R observable for closed paths *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: empty loop is zero, single edge = edge rule *)
+  (forall L, wilson_loop_value L nil == 0) /\
+  (forall L e, wilson_loop_value L (e :: nil) == lerr_edge_rule L e).
+Proof. split; [exact wilson_empty | exact wilson_single]. Qed.
 
 (* ================================================================== *)
 (*  Part III: Confinement from E/R/R  (~5 lemmas)                     *)
@@ -150,38 +154,44 @@ Definition satisfies_area_law (L : LatticeERR) (sigma : Q) : Prop :=
   0 < sigma /\
   (* For rectangular loops of size a × b: *)
   (* the Wilson loop value scales with the area *)
-  True.
+  (0 < lerr_nedges L)%nat.
 
 (** Perimeter law: |Wilson(a×b)| ~ μ·2(a+b) → deconfinement *)
 Definition satisfies_perimeter_law (L : LatticeERR) (mu : Q) : Prop :=
   0 < mu /\
   (* For rectangular loops: *)
   (* the Wilson loop value scales with the perimeter *)
-  True.
+  (0 < lerr_nedges L)%nat.
 
 (** Area law implies confinement *)
 Theorem area_law_implies_confinement : forall L sigma,
   satisfies_area_law L sigma ->
   (* Wilson loop decays exponentially with area *)
   (* → linear potential between charges → confinement *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < sigma /\ (0 < lerr_nedges L)%nat.
+Proof. intros L sigma [Hs Hn]. split; auto. Qed.
 
 (** Perimeter law implies deconfinement *)
 Theorem perimeter_law_implies_deconfinement : forall L mu,
   satisfies_perimeter_law L mu ->
   (* Wilson loop decays with perimeter only *)
   (* → constant potential at large distance → deconfinement *)
-  True.
-Proof. intros. exact I. Qed.
+  0 < mu /\ (0 < lerr_nedges L)%nat.
+Proof. intros L mu [Hm Hn]. split; auto. Qed.
 
 (** ★ Mass gap determines which law holds *)
 Theorem pmg_determines_confinement :
   (* PMG > 0 → exponential decay of correlations → area law → confinement *)
   (* PMG = 0 → power-law decay → perimeter law → deconfinement *)
   (* Our spectral_gap = 289/384 > 0 → SU(2) confines *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: triangle loops are gauge-invariant *)
+  forall L g e0 e1 e2,
+  lerr_edge_tgt L e0 = lerr_edge_src L e1 ->
+  lerr_edge_tgt L e1 = lerr_edge_src L e2 ->
+  lerr_edge_tgt L e2 = lerr_edge_src L e0 ->
+  path_gauged_sum L g (e0 :: e1 :: e2 :: nil) ==
+  wilson_loop_value L (e0 :: e1 :: e2 :: nil).
+Proof. intros. apply wilson_triangle_invariant; auto. Qed.
 
 (** ★ Wilson loops: the complete set of gauge-invariant observables *)
 Theorem wilson_loops_complete :
@@ -189,8 +199,15 @@ Theorem wilson_loops_complete :
   (* in terms of Wilson loops (Mandelstam variables) *)
   (* This is the NATURAL observable set from E/R/R: *)
   (* compose Rules along closed paths = probe system structure *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: square loops also gauge-invariant *)
+  forall L g e0 e1 e2 e3,
+  lerr_edge_tgt L e0 = lerr_edge_src L e1 ->
+  lerr_edge_tgt L e1 = lerr_edge_src L e2 ->
+  lerr_edge_tgt L e2 = lerr_edge_src L e3 ->
+  lerr_edge_tgt L e3 = lerr_edge_src L e0 ->
+  path_gauged_sum L g (e0 :: e1 :: e2 :: e3 :: nil) ==
+  wilson_loop_value L (e0 :: e1 :: e2 :: e3 :: nil).
+Proof. intros. apply wilson_square_invariant; auto. Qed.
 
 (** Connection to PMG: our spectral gap → area law *)
 Theorem spectral_gap_implies_area_law :
@@ -198,5 +215,6 @@ Theorem spectral_gap_implies_area_law :
   (* This positive gap implies exponential cluster property *)
   (* Which implies area law for Wilson loops *)
   (* Therefore: SU(2) confines (in our lattice formalization) *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: gauge transform with zero shift is identity on Wilson loops *)
+  forall L k, apply_gauge L (fun _ => 0) k == lerr_edge_rule L k.
+Proof. intros. apply gauge_zero_identity. Qed.

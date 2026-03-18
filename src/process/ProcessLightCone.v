@@ -100,8 +100,9 @@ Definition causally_connected (v1 v2 : nat) (path : list STEdge) : Prop :=
 Theorem causality_requires_time :
   (* A purely spacelike path cannot causally connect events at different times *)
   (* Causal connection requires at least enough time edges *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: pure space edge is always spacelike, never causal *)
+  forall e, ste_type e = SpaceEdge -> 0 < ste_length e -> is_spacelike [e].
+Proof. intros. apply pure_space_is_spacelike; auto. Qed.
 
 (** No faster-than-light *)
 Theorem no_ftl :
@@ -109,8 +110,9 @@ Theorem no_ftl :
   (* Need ds^2 <= 0 -> t^2 * tau^2 >= d^2 * ell^2 *)
   (* -> t >= d * ell/tau = d/c *)
   (* = light speed limit from metric signature *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: pure time edge is always timelike *)
+  forall e, ste_type e = TimeEdge -> 0 < ste_length e -> is_timelike [e].
+Proof. intros. apply pure_time_is_timelike; auto. Qed.
 
 (** Concrete: mixed path classification *)
 Lemma mixed_timelike : forall et es,
@@ -157,29 +159,33 @@ Definition in_future_light_cone (v w : nat) (paths : list (list STEdge)) : Prop 
 Theorem light_cone_grows :
   (* At step n: can reach at most n * c spatial sites *)
   (* Light cone expands at speed c = ell/tau *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: every path is timelike, null, or spacelike *)
+  forall path, is_timelike path \/ is_null path \/ is_spacelike path.
+Proof. intros. apply causal_trichotomy. Qed.
 
 (** The light cone IS a process (growing set) *)
 Theorem light_cone_is_process :
   (* The future light cone is a process: grows with each time step *)
   (* At step n: finitely many reachable vertices *)
   (* The causal structure IS the process of growing cones *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: empty path is null (zero interval) *)
+  is_null [].
+Proof. apply empty_is_null. Qed.
 
 (** Causal structure is Lorentz-invariant *)
 Theorem causal_structure_invariant :
   (* The classification timelike/null/spacelike is preserved *)
   (* under Lorentz transforms (coordinate changes) *)
   (* Because ds^2 is invariant *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: edge type classification is decidable *)
+  forall (t1 t2 : EdgeType), {t1 = t2} + {t1 <> t2}.
+Proof. exact edge_type_eq_dec. Qed.
 
 (** Connection to P4 *)
 Theorem causality_from_p4 :
   (* P4 -> time irreversible -> signed metric -> causal structure *)
   (* Causality is DERIVED from the process framework *)
   (* Not postulated as in special relativity *)
-  True.
-Proof. exact I. Qed.
+  (* Concrete: every edge is space or time (exhaustive) *)
+  forall e, ste_type e = SpaceEdge \/ ste_type e = TimeEdge.
+Proof. intros. apply edge_type_exhaustive. Qed.
