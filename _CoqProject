@@ -1240,3 +1240,14 @@ src/stdlib/GaugeRemainingClosure.v
 src/process/ProcessSynthesisCleanup1.v
 src/process/ProcessSynthesisCleanup2.v
 src/process/ProcessSynthesisCleanup3.v
+
+# === GR Enhancement ===
+src/process/ProcessGravRedshift.v
+src/process/ProcessGWSpeed.v
+src/process/ProcessGeodesic.v
+src/process/ProcessPrecession.v
+src/process/ProcessLightDeflection.v
+src/process/ProcessFriedmann.v
+src/process/ProcessScaleMatching.v
+src/process/ProcessGRObservables.v
+src/process/ProcessGRSynthesis.v
