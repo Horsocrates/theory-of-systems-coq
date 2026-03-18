@@ -1,6 +1,6 @@
 # File Map
 
-Auto-generated: 2026-03-18 11:09
+Auto-generated: 2026-03-18 21:22
 
 ## Core
 
@@ -97,12 +97,16 @@ Auto-generated: 2026-03-18 11:09
 | File | Qed | Admitted | Key Imports |
 |------|-----|---------|-------------|
 | `Process2DPhysics.v` | 27 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `Process2DWeakCoupling.v` | 25 | 0 | SeriesConvergence,processProcessCore.,gaugeCoupled2D.,gaugeB |
 | `Process3DGlueball.v` | 15 | 0 | processProcessCore.,processProcessStringTension.,gaugeBlockD |
 | `Process3DPhysics.v` | 13 | 0 | processProcessCore.,processProcessStringTension.,gaugeGap3D. |
 | `Process3DSigmaCurve.v` | 17 | 0 | processProcessCore.,processProcessStringTension.,gaugeCombin |
+| `ProcessAccuracyPush.v` | 9 | 0 | processProcessCore.,gaugeCharacterTransfer.,processProcessPh |
+| `ProcessAccuracySummary.v` | 3 | 0 | processProcessCore. From ToS Require Import process.ProcessP |
 | `ProcessAccuracyTable.v` | 17 | 0 | processProcessCore.,gaugeSpectralGapCorrect.,processProcessP |
 | `ProcessAdjunction.v` | 28 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,SystemMorphism |
 | `ProcessAlgebraUnified.v` | 12 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessAnalysis.v` | 18 | 0 | processProcessCore. |
 | `ProcessAnomaly.v` | 17 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessAnomalyCancel.v` | 12 | 0 | processProcessCore.,processProcessAnomaly. |
 | `ProcessArithmetic.v` | 17 | 0 | processProcessCore. |
@@ -112,26 +116,36 @@ Auto-generated: 2026-03-18 11:09
 | `ProcessBW.v` | 9 | 0 | CauchyReal,processProcessCore.,processProcessArithmetic.,pro |
 | `ProcessBackReaction.v` | 15 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessBellInequality.v` | 15 | 0 | processProcessCore.,processProcessGaussianQ.,processProcessE |
+| `ProcessBeta4.v` | 9 | 0 | processProcessCore.,gaugeCharacterTransfer.,processProcessPh |
 | `ProcessBlackHole.v` | 17 | 0 | processProcessCore.,processProcessSchwarzschildRegge. |
 | `ProcessBlocking.v` | 15 | 0 | processProcessCore.,processProcessBounds.,gaugeCharacterTran |
+| `ProcessBornCrossValidation.v` | 5 | 0 | processProcessCore.,physicsBornRule.,physicsQState. |
 | `ProcessBornRule.v` | 20 | 0 | processProcessCore process.ProcessBounds.,processProcessGaus |
 | `ProcessBounds.v` | 11 | 0 | processProcessCore.,processProcessArithmetic.,SeriesConverge |
 | `ProcessBridge.v` | 10 | 0 | CauchyReal,processProcessCore. |
+| `ProcessCCExplicit.v` | 10 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
 | `ProcessCPViolation.v` | 15 | 0 | processProcessCore.,processProcessGaussianQ.,processProcessC |
+| `ProcessCasimirCrossValidation.v` | 4 | 0 | processProcessCore.,experimentalCasimirProcess.,experimental |
 | `ProcessCategory.v` | 20 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,SystemMorphism |
 | `ProcessChainVerified.v` | 14 | 0 | processProcessCore.,processProcessFourPrinciples.,processPro |
 | `ProcessClusterConnection.v` | 15 | 0 | processProcessCore.,gaugeClusterProof.,gaugeGapRatio.,gaugeS |
 | `ProcessCombinedTransfer.v` | 14 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessComplexRules.v` | 12 | 0 | processProcessCore.,processProcessGaussianQ. |
+| `ProcessContinuumArgument.v` | 4 | 0 | processProcessCore.,processProcessSchwarzschildRegge.,proces |
 | `ProcessContinuumGapConnection.v` | 1 | 0 | processProcessCore.,gaugeContinuumGap.,gaugeContinuumCharact |
 | `ProcessContinuumLimit.v` | 17 | 0 | processProcessCore. |
+| `ProcessConvergenceRates.v` | 15 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
 | `ProcessCore.v` | 19 | 0 |  |
 | `ProcessCorrelationConnection.v` | 11 | 0 | processProcessCore.,SeriesConvergence,gaugeTransferMatrixPro |
 | `ProcessCorrelationLength.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessCosmologicalConst.v` | 14 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessCoulombConnection.v` | 4 | 0 | processProcessCore.,experimentalCoulombFull3D.,experimentalL |
 | `ProcessCoupling.v` | 14 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessCouplingAnalysis.v` | 3 | 0 | processProcessCore.,processProcessWeinbergAngle. From ToS Re |
 | `ProcessCrossing.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessCrossingD.v` | 13 | 0 | SeriesConvergence,processProcessCore.,processProcessBounds., |
+| `ProcessDMCrossSection.v` | 5 | 0 | processProcessCore. From ToS Require Import process.ProcessR |
+| `ProcessDMPhenomenology.v` | 9 | 0 | processProcessCore.,SeriesConvergence |
 | `ProcessDarkMatter.v` | 21 | 0 | processProcessCore.,processProcessERRSymmetry.,gaugeLatticeC |
 | `ProcessDecoherence.v` | 13 | 0 | processProcessCore. |
 | `ProcessDeconfining.v` | 16 | 0 | processProcessCore.,processProcessArithmetic. |
@@ -151,76 +165,107 @@ Auto-generated: 2026-03-18 11:09
 | `ProcessERRSymmetry.v` | 15 | 0 | processProcessCore. |
 | `ProcessERRWilson.v` | 12 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessEVT.v` | 9 | 0 | processProcessCore.,processProcessArithmetic.,EVT_ERR |
+| `ProcessEffectivePotential.v` | 10 | 0 | processProcessCore.,processProcessSchwarzschildRegge. |
 | `ProcessElectroweak.v` | 17 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessElectroweakMasses.v` | 20 | 0 | processProcessCore.,processProcessWeinbergAngle. |
 | `ProcessEmergencePhysics.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessEntanglement.v` | 19 | 0 | processProcessCore.,processProcessGaussianQ. |
+| `ProcessErrorBounds.v` | 6 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
 | `ProcessExactRGConnection.v` | 15 | 0 | processProcessCore.,CauchyReal,gaugeLargerLattice.,gaugeGapM |
 | `ProcessExactSpectrumConnection.v` | 1 | 0 | processProcessCore.,gaugeKDependence.,gaugeExactEigenvalues. |
 | `ProcessExtendedCP.v` | 15 | 0 | processProcessCore.,processProcessCPViolation. |
+| `ProcessExtremeAccuracy.v` | 9 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
 | `ProcessFTC.v` | 9 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessFatou.v` | 16 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessFermion3D.v` | 16 | 0 | processProcessCore.,processProcessFermionSpectrum.,processPr |
 | `ProcessFermionDet.v` | 16 | 0 | processProcessCore.,processProcessBounds.,processProcessNonA |
 | `ProcessFermionDoubling.v` | 12 | 0 | processProcessCore.,processProcessRegge.,processProcessFermi |
 | `ProcessFermionLoop.v` | 18 | 0 | processProcessCore.,processProcessRegge.,processProcessHiggs |
+| `ProcessFermionMassAnalysis.v` | 6 | 0 | processProcessCore. From ToS Require Import process.ProcessN |
 | `ProcessFermionSpectrum.v` | 20 | 0 | processProcessCore.,processProcessRegge. |
 | `ProcessFermionSynthesis.v` | 12 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessFinalAssessment.v` | 46 | 0 | processProcessCore.,processProcessFourPrinciples.,processPro |
+| `ProcessFinalMap.v` | 1 | 0 | processProcessCore.,processProcessPlaquette.,processProcessP |
 | `ProcessFiniteDim.v` | 30 | 0 | processProcessCore.,processProcessArithmetic. |
+| `ProcessFiniteRG.v` | 13 | 0 | processProcessCore.,processProcessRGFlow.,gaugeRGFlow.,gauge |
 | `ProcessFourPrinciples.v` | 25 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,SystemMorphism |
+| `ProcessFriedmann.v` | 8 | 0 | processProcessCore. |
 | `ProcessFuncUnified.v` | 12 | 0 | processProcessCore.,processProcessBounds.,processProcessArit |
 | `ProcessGGAdjProcess.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGGAdjStrict.v` | 15 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGGAdjSynthesis.v` | 15 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGGAdjWeak.v` | 15 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGGGalois.v` | 15 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
+| `ProcessGRObservables.v` | 2 | 0 | processProcessCore.,processProcessGravRedshift.,processProce |
+| `ProcessGRSynthesis.v` | 1 | 0 | processProcessCore.,processProcessGravRedshift.,processProce |
 | `ProcessGUTScale.v` | 15 | 0 | processProcessCore.,processProcessRGFlow.,processProcessWein |
+| `ProcessGWSpeed.v` | 5 | 0 | processProcessCore.,processProcessGravWave. |
 | `ProcessGaugeCategory.v` | 20 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGaugeFullSynthesis.v` | 2 | 0 | processProcessCore.,processProcessRGRigorConnection.,process |
+| `ProcessGaugeGravityUnification.v` | 9 | 0 | processProcessCore.,processProcessKappaDerivation.,processPr |
 | `ProcessGaussianQ.v` | 18 | 0 | processProcessCore. |
+| `ProcessGeodesic.v` | 11 | 0 | processProcessCore.,processProcessSchwarzschildRegge. |
 | `ProcessGeomCategory.v` | 24 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGeomGaugeBasic.v` | 10 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGeomGaugeFunctor.v` | 23 | 0 | processProcessCore.,processProcessArithmetic.,stdlibCategory |
 | `ProcessGlobalGapConnection.v` | 1 | 0 | processProcessCore.,gaugeSpectralBound.,gaugeGapBound.,gauge |
+| `ProcessGlueballExtended.v` | 13 | 0 | SeriesConvergence,processProcessCore.,gaugeCoupled2D.,gaugeB |
 | `ProcessGlueballMass.v` | 29 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessGoldstone.v` | 12 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessGrandUnification.v` | 22 | 0 | processProcessCore.,processProcessGeomCategory.,processProce |
 | `ProcessGrassmann.v` | 15 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessGravGaugeCorrection.v` | 15 | 0 | processProcessCore.,gaugeSpectralGapCorrect.,gaugeExactMassG |
+| `ProcessGravRedshift.v` | 9 | 0 | processProcessCore.,processProcessSchwarzschildRegge. |
 | `ProcessGravWave.v` | 14 | 0 | processProcessCore.,processProcessBounds.,processProcessSimp |
 | `ProcessGravWavePMG.v` | 13 | 0 | processProcessCore.,processProcessBounds.,processProcessSimp |
+| `ProcessGravWaveform.v` | 10 | 0 | processProcessCore.,gaugeCosineAction.,PowerSeries,SeriesCon |
+| `ProcessGravitonScattering.v` | 11 | 0 | processProcessCore.,processProcessRegge.,processProcessGravi |
 | `ProcessGravitonSelfEnergy.v` | 25 | 0 | processProcessCore.,processProcessRegge.,processProcessRegge |
 | `ProcessGronwall.v` | 18 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessGroup.v` | 26 | 0 | processProcessCore.,processProcessArithmetic. |
 | `ProcessHB.v` | 7 | 0 | processProcessCore.,HeineBorel_ERR |
+| `ProcessHVP.v` | 7 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
+| `ProcessHVPConvergence.v` | 5 | 0 | SeriesConvergence,processProcessCore.,processProcessPlaquett |
 | `ProcessHeisenberg.v` | 22 | 0 | processProcessCore process.ProcessBounds.,processProcessGeom |
+| `ProcessHierarchyResolution.v` | 15 | 0 | processProcessKappaDerivation. |
 | `ProcessHiggsMassCorrected.v` | 14 | 0 | processProcessCore.,processProcessHiggsPotentialERR.,process |
 | `ProcessHiggsMechanism.v` | 13 | 0 | processProcessCore.,processProcessSymBreaking.,processProces |
 | `ProcessHiggsPotentialERR.v` | 18 | 0 | processProcessCore.,processProcessHiggsMechanism.,processPro |
+| `ProcessHiggsRatio.v` | 6 | 0 | processProcessCore. From ToS Require Import process.ProcessW |
 | `ProcessHiggsVEV.v` | 15 | 0 | processProcessCore.,processProcessHiggsPotentialERR.,process |
+| `ProcessHigherDComparison.v` | 6 | 0 | processProcessCore.,processProcessPlaquette. From ToS Requir |
 | `ProcessHolographic.v` | 17 | 0 | processProcessCore.,processProcessBHMicrostates. |
 | `ProcessHomomorphism.v` | 16 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessIVT.v` | 13 | 0 | processProcessCore.,processProcessArithmetic.,IVT_ERR,Archim |
 | `ProcessInflation.v` | 19 | 0 | processProcessCore. |
 | `ProcessIntegral.v` | 12 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessIntrinsicDefect.v` | 23 | 0 | processProcessCore.,processProcessGeomCategory.,processProce |
+| `ProcessKappaAnalysis.v` | 5 | 0 | processProcessCore. From ToS Require Import process.ProcessW |
+| `ProcessKappaDerivation.v` | 15 | 0 | processProcessGravWave.,processProcessWeinbergAngle.,process |
 | `ProcessL2.v` | 21 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessL4Variational.v` | 12 | 0 | processProcessCore.,processProcessRegge.,processProcessGeomC |
+| `ProcessLambShiftConnection.v` | 3 | 0 | processProcessCore.,experimentalLambShiftTower. |
+| `ProcessLambdaQCD.v` | 4 | 0 | processProcessCore. |
 | `ProcessLatticeFermion.v` | 11 | 0 | processProcessCore.,processProcessBounds.,processProcessERRS |
 | `ProcessLatticeObservable.v` | 17 | 0 | CauchyReal,SeriesConvergence,processProcessCore.,processProc |
+| `ProcessLatticeTopology.v` | 24 | 0 | processProcessCore. |
 | `ProcessLebesgue.v` | 17 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessLightCone.v` | 12 | 0 | processProcessCore.,processProcessSpacetime.,processProcessL |
+| `ProcessLightDeflection.v` | 6 | 0 | processProcessCore.,processProcessSchwarzschildRegge. |
 | `ProcessLimitColimit.v` | 20 | 0 | processProcessCore.,processProcessArithmetic. |
+| `ProcessLinalgConnection.v` | 5 | 0 | processProcessCore.,processProcessNonAbelianERR.,processProc |
 | `ProcessLorentzian.v` | 15 | 0 | processProcessCore.,processProcessSpacetime. |
 | `ProcessLorentzianRegge.v` | 9 | 0 | processProcessCore.,processProcessSpacetime.,processProcessL |
 | `ProcessLorentzianSynthesis.v` | 10 | 0 | processProcessCore.,processProcessSpacetime.,processProcessL |
+| `ProcessMWOneLoop.v` | 11 | 0 | processProcessCore.,processProcessWeinbergAngle.,processProc |
 | `ProcessMassHierarchy.v` | 13 | 0 | processProcessCore.,processProcessBounds.,processProcessYuka |
 | `ProcessMeasureTheory.v` | 22 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessMeasureUnified.v` | 9 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessMeasurement.v` | 13 | 0 | processProcessCore.,processProcessGaussianQ.,processProcessB |
 | `ProcessMillenniumConnection.v` | 1 | 0 | processProcessCore.,gaugeYMLevel4Complete.,gaugeYMLevel5Comp |
+| `ProcessNavierStokesConnection.v` | 3 | 0 | processProcessCore.,navier_stokesEnergyEstimate. |
 | `ProcessNeutrinoMass.v` | 20 | 0 | processProcessCore.,processProcessERRSymmetry.,SeriesConverg |
+| `ProcessNeutrinoRatio.v` | 11 | 0 | SeriesConvergence,processProcessCore.,gaugeGap3D. |
 | `ProcessNielsenNinomiya.v` | 12 | 0 | processProcessCore.,processProcessFermion3D. |
 | `ProcessNoCloning.v` | 12 | 0 | processProcessCore.,processProcessGaussianQ. |
 | `ProcessNoetherian.v` | 17 | 0 | processProcessCore.,processProcessArithmetic. |
@@ -249,9 +294,20 @@ Auto-generated: 2026-03-18 11:09
 | `ProcessPhysicsSynthesis.v` | 20 | 0 | processProcessCore.,processProcessGeomCategory.,processProce |
 | `ProcessPicard.v` | 32 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessPlanckLength.v` | 16 | 0 | processProcessCore. |
+| `ProcessPlaquette.v` | 16 | 0 | processProcessCore.,gaugeCharacterTransfer.,processProcessPh |
+| `ProcessPlaquetteCurve.v` | 13 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
+| `ProcessPlaquetteExtended.v` | 19 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
+| `ProcessPlaquetteFix.v` | 9 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
+| `ProcessPolyakovLoop.v` | 10 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
+| `ProcessPostNewtonian.v` | 4 | 0 | processProcessCore.,processProcessSchwarzschildRegge. |
+| `ProcessPrecession.v` | 6 | 0 | processProcessCore.,processProcessSchwarzschildRegge.,proces |
 | `ProcessProbability.v` | 16 | 0 | processProcessCore process.ProcessBounds.,processProcessGaus |
+| `ProcessProcessPhysics.v` | 10 | 0 | processProcessCore. |
+| `ProcessProjectiveConnection.v` | 2 | 0 | processProcessCore.,projectiveProjectiveSystem.,projectiveCo |
 | `ProcessProtonDecay.v` | 14 | 0 | processProcessCore.,processProcessGUTScale. |
 | `ProcessProtonStructure.v` | 14 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessQMCrossValidation.v` | 8 | 0 | processProcessCore.,physicsHarmonicOscillator.,LinearAlgebra |
+| `ProcessQMSynthesis.v` | 2 | 0 | processProcessCore. |
 | `ProcessQuantization.v` | 16 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessQuantumGravity.v` | 20 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessQuantumZeno.v` | 14 | 0 | processProcessCore. |
@@ -270,6 +326,7 @@ Auto-generated: 2026-03-18 11:09
 | `ProcessSU2DetailConnection.v` | 1 | 0 | processProcessCore.,gaugeSU2Characters.,gaugeSU2Group.,gauge |
 | `ProcessSU3Gauge.v` | 16 | 0 | processProcessCore.,processProcessNonAbelianERR.,processProc |
 | `ProcessSU3Matrix.v` | 18 | 0 | processProcessCore.,processProcessNonAbelianERR. |
+| `ProcessScaleMatching.v` | 3 | 0 | processProcessCore.,processProcessPhysicalSigma.,processProc |
 | `ProcessSchwarzschildRegge.v` | 17 | 0 | processProcessCore. |
 | `ProcessSeries.v` | 13 | 0 | processProcessCore.,processProcessArithmetic.,CauchyReal,Ser |
 | `ProcessSigmaCurve.v` | 30 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
@@ -279,25 +336,35 @@ Auto-generated: 2026-03-18 11:09
 | `ProcessSimple.v` | 19 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessSimplex4D.v` | 19 | 0 | processProcessCore.,processProcessRegge. |
 | `ProcessSpacetime.v` | 12 | 0 | processProcessCore. |
+| `ProcessSpecificHeat.v` | 10 | 0 | SeriesConvergence,processProcessCore.,gaugeCharacterTransfer |
 | `ProcessSpectral.v` | 19 | 0 | processProcessCore.,processProcessBounds.,processProcessFini |
+| `ProcessSpectralIndex.v` | 7 | 0 | processProcessCore. |
+| `ProcessSpectralTheoryQ.v` | 18 | 0 | processProcessCore.,processProcessNonAbelianERR.,processProc |
 | `ProcessSpinStatistics.v` | 18 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
 | `ProcessStability.v` | 14 | 0 | processProcessCore.,processProcessBounds.,processProcessDime |
 | `ProcessStaggered.v` | 11 | 0 | processProcessCore.,processProcessFermion3D.,processProcessN |
 | `ProcessStandardModel.v` | 12 | 0 | processProcessCore.,processProcessAnomaly.,processProcessAno |
 | `ProcessStep11Synthesis.v` | 14 | 0 | processProcessCore.,processProcessPhysicalSigma.,processProc |
 | `ProcessStep12Synthesis.v` | 14 | 0 | processProcessCore.,processProcessFourPrinciples.,processPro |
-| `ProcessStep3Synthesis.v` | 16 | 0 | processProcessCore.,processProcessBounds.,processProcessFour |
+| `ProcessStep3Synthesis.v` | 15 | 0 | processProcessCore.,processProcessBounds.,processProcessFour |
 | `ProcessStep4Synthesis.v` | 12 | 0 | processProcessCore.,processProcessBounds.,processProcessFour |
 | `ProcessStep5Synthesis.v` | 11 | 0 | processProcessCore.,processProcessFourPrinciples.,processPro |
 | `ProcessStep8Synthesis.v` | 13 | 0 | processProcessCore.,gaugeSpectralGapCorrect.,processProcessS |
+| `ProcessStepASynthesis.v` | 5 | 0 | processProcessCore.,processProcessPlaquette.,processProcessP |
+| `ProcessStepFinalSynthesis.v` | 9 | 0 | processProcessCore.,processProcessWeinbergAngle.,processProc |
 | `ProcessStringTension.v` | 46 | 0 | CauchyReal,SeriesConvergence,processProcessCore.,processProc |
 | `ProcessStrongCP.v` | 39 | 0 | processProcessCore.,gaugeCharacterTransfer.,gaugeExactMassGa |
 | `ProcessStrongCouplingComparison.v` | 9 | 0 | processProcessCore.,processProcessStringTension.,processProc |
 | `ProcessSuperposition.v` | 13 | 0 | processProcessCore.,processProcessGaussianQ. |
 | `ProcessSymBreaking.v` | 16 | 0 | processProcessCore.,processProcessERRSymmetry.,processProces |
+| `ProcessSynthesisCleanup1.v` | 6 | 0 | stdlibTheoremBundle.,stdlibOS1Closure.,processProcessERRDeri |
+| `ProcessSynthesisCleanup2.v` | 6 | 0 | stdlibTheoremBundle.,processProcessERRSymmetry.,processProce |
+| `ProcessSynthesisCleanup3.v` | 6 | 0 | stdlibTheoremBundle.,stdlibOS1Closure.,stdlibOS2Closure.,std |
 | `ProcessSynthesisStrengthened.v` | 18 | 0 | processProcessCore.,processProcessFourPrinciples.,processPro |
 | `ProcessTaylor.v` | 13 | 0 | processProcessCore.,processProcessArithmetic.,CauchyReal,Ser |
 | `ProcessThermodynamicConnection.v` | 10 | 0 | processProcessCore.,gaugeCoupled2D.,gaugeDomainWalls.,gaugeT |
+| `ProcessThermodynamics.v` | 11 | 0 | SeriesConvergence,gaugeCharacterTransfer.,processProcessCore |
+| `ProcessThetaExplicit.v` | 21 | 0 | processProcessCore. |
 | `ProcessThreeCoupling.v` | 16 | 0 | processProcessCore.,processProcessRGFlow.,processProcessRGWe |
 | `ProcessTime.v` | 14 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessTopCompact.v` | 16 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
@@ -305,18 +372,27 @@ Auto-generated: 2026-03-18 11:09
 | `ProcessTopMetric.v` | 17 | 0 | processProcessCore.,processProcessArithmetic. |
 | `ProcessTopOpen.v` | 14 | 0 | processProcessCore.,processProcessArithmetic. |
 | `ProcessTopUnified.v` | 10 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessTwoLoopWeinberg.v` | 14 | 0 | processProcessCore.,processProcessWeinbergAngle. |
 | `ProcessUncertaintyBound.v` | 22 | 0 | processProcessCore process.ProcessBounds.,processProcessGeom |
 | `ProcessUncountable.v` | 7 | 0 | processProcessCore.,ShrinkingIntervals_ERR |
 | `ProcessUnified.v` | 12 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
 | `ProcessUnifiedLattice.v` | 17 | 0 | processProcessCore.,processProcessRegge4D.,gaugeSpectralGapC |
 | `ProcessUniversalAdjunction.v` | 24 | 0 | processProcessCore.,processProcessGeomCategory.,processProce |
+| `ProcessUniversality.v` | 13 | 0 | processProcessCore.,gaugeSU2Characters.,gaugeSU2Group.,gauge |
+| `ProcessUniversalityExplicit.v` | 5 | 0 | processProcessCore.,SeriesConvergence,PowerSeries,gaugeCosin |
 | `ProcessVacuumEnergy.v` | 18 | 0 | processProcessCore.,processProcessArithmetic.,processProcess |
+| `ProcessWMassRatio.v` | 7 | 0 | processProcessCore.,processProcessWeinbergAngle. |
 | `ProcessWave5Synthesis.v` | 14 | 0 | processProcessCore.,processProcessHolographic.,processProces |
 | `ProcessWeinbergAngle.v` | 14 | 0 | processProcessCore. |
 | `ProcessWholeness.v` | 24 | 0 | TheoryOfSystems_Core_ERR,UniversePolymorphism,SystemMorphism |
 | `ProcessWightmanConnection.v` | 18 | 0 | processProcessCore.,SeriesConvergence,gaugeTransferMatrixPro |
 | `ProcessWilsonDirac.v` | 16 | 0 | processProcessCore.,processProcessNonAbelianERR. |
+| `ProcessWilsonLoop.v` | 8 | 0 | SeriesConvergence,processProcessCore.,processProcessPlaquett |
+| `ProcessYMCapstone.v` | 18 | 0 | processProcessCore.,gaugeYMLevel5Complete.,gaugeYMLevel4Comp |
 | `ProcessYukawa.v` | 14 | 0 | processProcessCore.,processProcessBounds.,SeriesConvergence |
+| `ProcessZetaComputation.v` | 15 | 0 | processProcessCore. |
+| `ProcessZetaConnection.v` | 3 | 0 | processProcessCore.,experimentalCasimirProcess. |
+| `ProcessZetaValues.v` | 10 | 0 | processProcessCore. |
 
 ## Stdlib
 
@@ -336,11 +412,14 @@ Auto-generated: 2026-03-18 11:09
 | `Distributions.v` | 23 | 0 | TheoryOfSystems_Core_ERR |
 | `DomainExamples.v` | 14 | 0 | stdlibStatistics.,stdlibCreditScoring.,stdlibNeuralNet.,stdl |
 | `Estimation.v` | 18 | 0 | TheoryOfSystems_Core_ERR |
+| `FiniteGroup.v` | 13 | 0 |  |
 | `FormalLanguages.v` | 18 | 0 | stdlibAutomata. |
 | `FormalVerification.v` | 20 | 0 |  |
 | `Functor.v` | 18 | 0 | stdlibCategory. |
 | `GCD.v` | 22 | 0 | stdlibPrimes. |
 | `GameTheory.v` | 25 | 0 |  |
+| `GaugeOSClosure.v` | 7 | 0 | stdlibOS1Closure.,stdlibOS2Closure.,stdlibOS3Closure.,stdlib |
+| `GaugeRemainingClosure.v` | 5 | 0 | stdlibTheoremBundle.,gaugeCharacterTransfer.,gaugeExactMassG |
 | `Graph.v` | 30 | 0 |  |
 | `GraphAlgorithms.v` | 20 | 0 | stdlibGraph. |
 | `GroupTheory.v` | 22 | 0 |  |
@@ -355,7 +434,12 @@ Auto-generated: 2026-03-18 11:09
 | `MultiAgent.v` | 18 | 0 | Graph |
 | `NeuralNet.v` | 18 | 0 | stdlibStatistics. |
 | `ODE.v` | 22 | 0 | ProcessGeneral |
+| `OS1Closure.v` | 14 | 0 | stdlibQiPowerSeries.,processProcessGaussianQ.,gaugeCharacter |
+| `OS2Closure.v` | 10 | 0 | SeriesConvergence,stdlibProcessDistribution.,gaugeCharacterT |
+| `OS3Closure.v` | 11 | 0 | SeriesConvergence,stdlibFiniteGroup.,gaugeCharacterTransfer. |
 | `Primes.v` | 21 | 0 |  |
+| `ProcessDistribution.v` | 9 | 0 | SeriesConvergence,processProcessCore. |
+| `QiPowerSeries.v` | 21 | 0 | processProcessGaussianQ. |
 | `RingField.v` | 20 | 0 | GroupTheory |
 | `Statistics.v` | 26 | 0 |  |
 | `StdlibExamples.v` | 12 | 0 | TheoryOfSystems_Core_ERR,L5Resolution,stdlibTMap.,stdlibTSet |
@@ -372,6 +456,7 @@ Auto-generated: 2026-03-18 11:09
 | `TTree.v` | 23 | 0 | TheoryOfSystems_Core_ERR,L5Resolution,InductiveSystems |
 | `Tensor.v` | 39 | 0 | LinearAlgebra |
 | `TextAnalysis.v` | 16 | 0 |  |
+| `TheoremBundle.v` | 14 | 0 | gaugeCharacterTransfer.,gaugeExactMassGap.,gaugeGapRatio.,ga |
 | `TimeSeries.v` | 16 | 0 | ProcessGeneral,stdlibStatistics. |
 | `Topology.v` | 19 | 0 |  |
 | `VectorSpace.v` | 27 | 0 | LinearAlgebra |
@@ -578,7 +663,7 @@ Auto-generated: 2026-03-18 11:09
 
 | File | Qed | Admitted | Key Imports |
 |------|-----|---------|-------------|
-| `ApproximateZeros.v` | 0 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessContinuumHypothesi |
+| `ApproximateZeros.v` | 34 | 0 | ToS_Axioms,CauchyReal,ProcessTypes,ProcessContinuumHypothesi |
 | `ComplexZeta.v` | 29 | 0 | ToS_Axioms,CauchyReal,SeriesConvergence,zetaZetaProcess. |
 | `ContractionZeros.v` | 43 | 0 | ToS_Axioms,CauchyReal,stdlibTComplex.,zetaZetaZeros.,zetaZet |
 | `EulerExtension.v` | 36 | 0 | ToS_Axioms,CauchyReal,MonotoneConvergence,SeriesConvergence, |
@@ -618,6 +703,6 @@ Auto-generated: 2026-03-18 11:09
 
 | Metric | Count |
 |--------|-------|
-| Files | 555 |
-| Qed | 11006 |
+| Files | 637 |
+| Qed | 11726 |
 | Admitted | 0 |
