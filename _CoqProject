@@ -1159,3 +1159,13 @@ src/process/ProcessSuperposition.v
 src/process/ProcessContinuumLimit.v
 src/process/ProcessAccuracyTable.v
 src/process/ProcessWave5Synthesis.v
+
+# === Gauge Connection (G1-G8) ===
+src/process/ProcessRGRigorConnection.v
+src/process/ProcessContinuumGapConnection.v
+src/process/ProcessMillenniumConnection.v
+src/process/ProcessOS123Connection.v
+src/process/ProcessGlobalGapConnection.v
+src/process/ProcessExactSpectrumConnection.v
+src/process/ProcessSU2DetailConnection.v
+src/process/ProcessGaugeFullSynthesis.v
