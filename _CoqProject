@@ -1186,3 +1186,10 @@ src/process/ProcessThetaExplicit.v
 src/process/ProcessNeutrinoRatio.v
 src/process/ProcessAnalysis.v
 src/process/ProcessFiniteRG.v
+
+# === Step A: Fill Gaps + m_W 1-Loop ===
+src/process/ProcessPlaquetteExtended.v
+src/process/ProcessSpecificHeat.v
+src/process/ProcessPolyakovLoop.v
+src/process/ProcessMWOneLoop.v
+src/process/ProcessStepASynthesis.v
