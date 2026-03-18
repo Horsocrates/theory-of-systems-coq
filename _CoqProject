@@ -1251,3 +1251,18 @@ src/process/ProcessFriedmann.v
 src/process/ProcessScaleMatching.v
 src/process/ProcessGRObservables.v
 src/process/ProcessGRSynthesis.v
+
+# === Master Plan v7: Steps 1-4 ===
+src/process/ProcessExtremeAccuracy.v
+src/process/ProcessGravitonScattering.v
+src/process/ProcessConvergenceRates.v
+src/process/ProcessHVPConvergence.v
+src/process/ProcessHiggsRatio.v
+src/process/ProcessDMCrossSection.v
+src/process/ProcessKappaAnalysis.v
+src/process/ProcessContinuumArgument.v
+src/process/ProcessPostNewtonian.v
+src/process/ProcessCouplingAnalysis.v
+src/process/ProcessHigherDComparison.v
+src/process/ProcessFermionMassAnalysis.v
+src/process/ProcessAccuracySummary.v
