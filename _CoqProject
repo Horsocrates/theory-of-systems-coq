@@ -1176,3 +1176,13 @@ src/process/ProcessBeta4.v
 src/process/ProcessWMassRatio.v
 src/process/ProcessWilsonLoop.v
 src/process/ProcessThermodynamics.v
+
+# === Three Phases: Gauge + SM Failures + New Math ===
+src/process/ProcessYMCapstone.v
+src/process/ProcessUniversality.v
+src/process/ProcessPlaquetteCurve.v
+src/process/ProcessCCExplicit.v
+src/process/ProcessThetaExplicit.v
+src/process/ProcessNeutrinoRatio.v
+src/process/ProcessAnalysis.v
+src/process/ProcessFiniteRG.v
