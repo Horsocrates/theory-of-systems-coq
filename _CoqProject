@@ -1322,3 +1322,16 @@ src/stdlib/R2_ProcessEinsteinEq.v
 src/stdlib/R2_ProcessSingularity.v
 src/stdlib/R2_ProcessEinsteinSolutions.v
 src/stdlib/R2_EinsteinSynthesis.v
+# Phase F3: Deep Categorical
+src/stdlib/D1_DerivedFunctor.v
+src/stdlib/H1_LatticeDirac.v
+src/stdlib/H1_IndexTheorem.v
+src/stdlib/H2_ChernClass.v
+src/stdlib/H2_TopologicalCharge.v
+# Phase F5: K-theory + Applications
+src/stdlib/A2_ProcessKTheory.v
+src/stdlib/A2_InstantonClass.v
+src/stdlib/A2_MonopoleClass.v
+src/stdlib/T2_RGDynamics.v
+src/stdlib/T2_PhaseDiagram.v
+src/stdlib/T2_BifurcationTheory.v
