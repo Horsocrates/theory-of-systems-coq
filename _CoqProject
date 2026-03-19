@@ -1354,3 +1354,10 @@ src/stdlib/I1_CorrelationFromZ.v
 src/stdlib/I1_PathIntegralSynthesis.v
 src/stdlib/I2_StatMech.v
 src/stdlib/I2_Thermodynamics.v
+# Track 1: Ad-Hoc Fixes
+src/stdlib/QMUnification.v
+src/stdlib/LoopUnification.v
+src/stdlib/EigenvalueUnification.v
+src/stdlib/PathIntegralUnification.v
+src/stdlib/TopologyUnification.v
+src/stdlib/IndexAnomalyUnification.v
