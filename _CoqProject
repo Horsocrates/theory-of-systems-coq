@@ -1335,3 +1335,15 @@ src/stdlib/A2_MonopoleClass.v
 src/stdlib/T2_RGDynamics.v
 src/stdlib/T2_PhaseDiagram.v
 src/stdlib/T2_BifurcationTheory.v
+# Phase F3 batch 2
+src/stdlib/D1_LoopExpansion.v
+src/stdlib/D1_LoopConvergence.v
+# Phase F4 batch
+src/stdlib/A1_SpecProcessRing.v
+src/stdlib/A1_ProcessSheaf.v
+src/stdlib/I1_FormalPathIntegral.v
+# Phase F5 batch 2
+src/stdlib/A2_InstantonClass.v
+src/stdlib/A2_MonopoleClass.v
+src/stdlib/H3_PersistentHomology.v
+src/stdlib/H3_PersistentExamples.v
