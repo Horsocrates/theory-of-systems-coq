@@ -1,1394 +1,725 @@
--Q src ToS
 -Q Architecture_of_Reasoning ToS_Arch
-
-# === Layer -1: ToS Axioms (L3 + L4, no dependencies) ===
-src/ToS_Axioms.v
-
-# === Layer 0: Standalone (no ToS imports except ToS_Axioms) ===
+-Q src ToS
+Architecture_of_Reasoning/AI_FallacyDetector.v
+Architecture_of_Reasoning/Architecture_of_Reasoning.v
+Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
+Architecture_of_Reasoning/DomainViolations_Complete.v
+Architecture_of_Reasoning/ERR_Fallacies.v
+Architecture_of_Reasoning/ParadoxDissolution.v
+src/AIInterface.v
 src/Archimedean_ERR.v
 src/CauchyReal.v
-src/Countability_Q.v
-src/DiagonalArgument_ERR.v
-src/EVT_ERR.v
-src/EVT_idx.v
-src/HeineBorel_ERR.v
-src/LinearAlgebra.v
-src/Measure.v
-src/PInterval_CROWN.v
-src/Probability.v
-src/RoundingSafety.v
-src/SchroederBernstein_ERR.v
-src/ShrinkingIntervals_ERR.v
-src/SoftmaxProbability.v
-src/TernaryRepresentation_ERR.v
-src/TheoryOfSystems_Core_ERR.v
-
-# === Layer 0.5: Depends on Core_ERR only ===
-src/Roles.v
-src/IntensionalIdentity.v
-src/L5Resolution.v
-src/SystemMorphism.v
-src/UniversePolymorphism.v
-
-# === Layer 0.5c: Depends on Core_ERR + IntensionalIdentity ===
-src/InfoLayer.v
-
-# === Layer 0.5d: Depends on Core_ERR + Roles ===
-src/ErasureTheory.v
-
-# === Layer 0.5e: Depends on Core_ERR + Roles + SystemMorphism ===
-src/DependentSystems.v
-
-# === Layer 0.5f: Depends on Core_ERR + Roles + DependentSystems ===
-src/InductiveSystems.v
-
-# === Layer 0.5g: Depends on Core_ERR + IntensionalIdentity + L5Resolution ===
-src/ConstitutionChecking.v
-
-# === Layer 0.5b: Depends on Core_ERR + CauchyReal ===
-src/ProcessGeneral.v
-
-# === Layer 0.5h: Depends on ProcessGeneral ===
 src/CoinductiveSystems.v
-
-# === Layer 1 ===
-src/IVT_ERR.v
-src/RealField.v
-
-# === Layer 2 ===
 src/Completeness.v
-src/IVT_CauchyReal.v
-
-# === Layer 3 ===
-src/MonotoneConvergence.v
-
-# === Layer 4 ===
-src/SeriesConvergence.v
-
-# === Layer 4b: Process Foundation (depends on CauchyReal + SeriesConvergence) ===
-src/process/ProcessCore.v
-src/process/ProcessArithmetic.v
-src/process/ProcessBounds.v
-src/process/ProcessBridge.v
-
-# === Layer 4c: Process Wrappers (depends on 4b + ERR theorems) ===
-src/process/ProcessIVT.v
-src/process/ProcessEVT.v
-src/process/ProcessBW.v
-src/process/ProcessHB.v
-src/process/ProcessUncountable.v
-src/process/ProcessUnified.v
-
-# === Layer 4d: Process Analysis (depends on 4c + calculus chain) ===
-src/process/ProcessDerivative.v
-src/process/ProcessIntegral.v
-src/process/ProcessSeries.v
-src/process/ProcessTaylor.v
-src/process/ProcessFTC.v
-src/process/ProcessPicard.v
-src/process/ProcessGronwall.v
-src/process/ProcessODE.v
-src/process/ProcessODEExamples.v
-
-# === Process Measure Theory (Phase 4) ===
-src/process/ProcessSimple.v
-src/process/ProcessMeasureTheory.v
-src/process/ProcessLebesgue.v
-src/process/ProcessFatou.v
-src/process/ProcessMeasureUnified.v
-
-# === Layer 5 ===
-src/PowerSeries.v
-src/FixedPoint.v
-
-# === Layer 5b: Depends on FixedPoint + SeriesConvergence ===
-src/ReasoningConvergence.v
-
-# === Layer 6 ===
-src/GradientDescent.v
-
-# === Layer 7 ===
-src/Differentiation.v
-
-# === Layer 8 ===
-src/MeanValueTheorem.v
-
-# === Layer 9 ===
-src/RiemannIntegration.v
-
-# === Layer 10 ===
-src/IntegralApplications.v
-
-# === Layer 11 ===
-src/TaylorSeries.v
-src/UniformConvergence.v
-
-# === Phase A Integration (depends on all Phase A files) ===
-src/PhaseA_Examples.v
-
-# === Phase B: Typing Rules ===
-# B1: Depends on Core_ERR + UniversePolymorphism
-src/Judgments.v
-
-# B2: Depends on Judgments + DependentSystems + L5Resolution + InfoLayer + CoinductiveSystems
-src/FormationRules.v
-
-# B3: Depends on Core_ERR + IntensionalIdentity + DependentSystems + L5Resolution
+src/ConstitutionChecking.v
 src/Conversion.v
-
-# B4: Depends on Judgments + SystemMorphism + DependentSystems
-src/Subtyping.v
-
-# B5: Depends on Judgments + FormationRules + Conversion + Subtyping + Roles
-src/Soundness.v
-
-# === Phase C: Operational Semantics ===
-# C1: Depends on Core_ERR + UniversePolymorphism
-src/Expressions.v
-
-# C2: Depends on Expressions
-src/Reduction.v
-
-# C3: Depends on Expressions + Core_ERR + UniversePolymorphism
-src/Typing_Expr.v
-
-# C4: Depends on Expressions + Reduction + Typing_Expr
-src/SubjectReduction.v
-
-# C5: Depends on Expressions + Reduction + Typing_Expr
-src/Progress.v
-
-# C6: Depends on SubjectReduction + Progress
-src/TypeSafety.v
-
-# === Phase D: Verified Compiler ===
-# D1: Depends on Core_ERR + UniversePolymorphism + Expressions + Typing_Expr
-src/TypeChecker.v
-
-# D2: Depends on ALL Phase C + TypeChecker
-src/Evaluator.v
-
-# D6: Depends on Phase C + TypeChecker + Evaluator
-src/AIInterface.v
-
-# D4: Depends on ALL above (must be last — does extraction)
-src/ToS_Lang_Extraction.v
-
-# === Verified D1-D6 Pipeline (standalone, Stdlib only) ===
+src/Countability_Q.v
+src/DependentSystems.v
+src/DiagonalArgument_ERR.v
+src/Differentiation.v
 src/DomainTypes.v
 src/DomainValidation.v
-src/PipelineSemantics.v
-src/PipelineExtraction.v
-
-# === Extraction (depends on Core_ERR, Roles, IntensionalIdentity, ProcessGeneral) ===
+src/ERR_Categorical.v
+src/EVT_ERR.v
+src/EVT_idx.v
+src/ErasureTheory.v
+src/Evaluator.v
+src/Expressions.v
 src/Extraction.v
-
-# === Stdlib Tier 2: Verified Data Structures & Algorithms ===
-# S1: Depends on Core_ERR + L5Resolution + InductiveSystems + ConstitutionChecking
-src/stdlib/TMap.v
-
-# S2: Depends on TMap
-src/stdlib/TSet.v
-
-# S3: Depends on Core_ERR + L5Resolution + InductiveSystems
-src/stdlib/TTree.v
-
-# S4: Depends on Core_ERR + InductiveSystems
-src/stdlib/TQueue.v
-
-# S5: Depends on Core_ERR (uses ZArith)
-src/stdlib/TInt.v
-
-# S6: Depends on Core_ERR (uses QArith)
-src/stdlib/TComplex.v
-
-# S7: Depends on Core_ERR + ProcessGeneral + CoinductiveSystems
-src/stdlib/TStream.v
-
-# S8: Depends on Core_ERR + L5Resolution
-src/stdlib/TSort.v
-
-# S9: Depends on Core_ERR + L5Resolution + ConstitutionChecking
-src/stdlib/TSearch.v
-
-# S10: Depends on Core_ERR + DependentSystems + ConstitutionChecking
-src/stdlib/THigherOrder.v
-
-# S11: Depends on Core_ERR + DependentSystems
-src/stdlib/TOption.v
-
-# S12: Cross-module integration (depends on all stdlib modules except TSort, TComplex)
-src/stdlib/StdlibExamples.v
-
-# === Stdlib Tier 2b: Mathematical Structures ===
-# T1: Standalone (uses QArith, ZArith)
-src/stdlib/GroupTheory.v
-
-# T2: Depends on GroupTheory
-src/stdlib/RingField.v
-
-# T3: Standalone (uses QArith, CauchyReal, ProcessGeneral, FixedPoint)
-src/stdlib/MetricSpace.v
-
-# T4: Standalone (uses QArith)
-src/stdlib/Topology.v
-
-# T5: Standalone (uses Probability)
-src/stdlib/ConditionalProbability.v
-
-# T6: Standalone (uses QArith, ZArith)
-src/stdlib/Hessian.v
-
-# T7: Standalone (uses QArith, Lists)
-src/stdlib/MDPFoundations.v
-
-# T8: Cross-module (depends on GroupTheory, RingField, Topology)
-src/stdlib/MathExamples.v
-
-# === Stdlib Batch 3: Discrete Math ===
-# B3-1: Standalone (uses PeanoNat, Lists)
-src/stdlib/Primes.v
-
-# B3-2: Standalone (uses PeanoNat, Lists)
-src/stdlib/Combinatorics.v
-
-# B3-3: Standalone (uses PeanoNat, Lists)
-src/stdlib/Graph.v
-
-# B3-4: Standalone (uses PeanoNat, Lists)
-src/stdlib/Automata.v
-
-# B3-5: Depends on Primes
-src/stdlib/GCD.v
-
-# B3-6: Depends on Graph
-src/stdlib/GraphAlgorithms.v
-
-# B3-7: Depends on Automata
-src/stdlib/FormalLanguages.v
-
-# B3-8: Depends on Primes + GCD
-src/stdlib/ModularArith.v
-
-# B3-9: Cross-module (depends on all Batch 3)
-src/stdlib/DiscreteMathExamples.v
-
-# === Stdlib Batch 4: Category Theory + Statistics + Information Theory ===
-# B4-1: Standalone
-src/stdlib/Category.v
-
-# B4-2: Standalone
-src/stdlib/Monad.v
-
-# B4-3: Standalone
-src/stdlib/Lattice.v
-
-# B4-4: Standalone (uses QArith)
-src/stdlib/Distributions.v
-
-# B4-5: Standalone (uses QArith)
-src/stdlib/Statistics.v
-
-# B4-6: Depends on Category
-src/stdlib/Functor.v
-
-# B4-7: Standalone (Section-parameterized log)
-src/stdlib/InformationTheory.v
-
-# B4-8: Standalone (uses QArith)
-src/stdlib/Estimation.v
-
-# B4-9: Cross-module (depends on all Batch 4)
-src/stdlib/CategoryStatExamples.v
-
-# === Stdlib Batch 5: Advanced Algebra + Game Theory + Control ===
-# B5-1: Standalone (uses QArith, LinearAlgebra)
-src/stdlib/VectorSpace.v
-
-# B5-2: Standalone (uses QArith, ProcessGeneral)
-src/stdlib/ODE.v
-
-# B5-3: Standalone (uses QArith)
-src/stdlib/ConvexAnalysis.v
-
-# B5-4: Standalone (uses QArith, Lists)
-src/stdlib/GameTheory.v
-
-# B5-5: Standalone (uses QArith, LinearAlgebra, ProcessGeneral)
-src/stdlib/ControlTheory.v
-
-# B5-6: Depends on VectorSpace (uses LinearAlgebra)
-src/stdlib/Tensor.v
-
-# B5-7: Standalone (uses QArith, Lists)
-src/stdlib/AuctionTheory.v
-
-# B5-8: Depends on Graph (uses QArith)
-src/stdlib/MultiAgent.v
-
-# B5-9: Cross-module (depends on all Batch 5)
-src/stdlib/AdvancedExamples.v
-
-# === Phase 0: Analysis Gaps ===
+src/FixedPoint.v
+src/FormationRules.v
+src/GradientDescent.v
+src/HeineBorel_ERR.v
+src/IVT_CauchyReal.v
+src/IVT_ERR.v
+src/InductiveSystems.v
+src/InfoLayer.v
+src/IntegralApplications.v
+src/IntensionalIdentity.v
+src/Judgments.v
+src/L5Resolution.v
+src/LevelAdjunction.v
+src/LevelFunctors.v
+src/LinearAlgebra.v
+src/MeanValueTheorem.v
+src/Measure.v
+src/MonotoneConvergence.v
+src/PInterval_CROWN.v
+src/PhaseA_Examples.v
+src/PipelineExtraction.v
+src/PipelineSemantics.v
+src/PowerSeries.v
+src/Probability.v
+src/ProcessContinuumHypothesis.v
+src/ProcessDiagonal.v
+src/ProcessGeneral.v
+src/ProcessTypes.v
+src/Progress.v
+src/RealField.v
+src/ReasoningConvergence.v
+src/Reduction.v
+src/RiemannIntegration.v
+src/Roles.v
+src/RoundingSafety.v
+src/SchroederBernstein_ERR.v
+src/SeriesConvergence.v
+src/ShrinkingIntervals_ERR.v
+src/SoftmaxProbability.v
+src/Soundness.v
+src/SubjectReduction.v
+src/Subtyping.v
+src/SystemCategory.v
+src/SystemMorphism.v
+src/TaylorSeries.v
+src/TernaryRepresentation_ERR.v
+src/TheoryOfSystems_Core_ERR.v
+src/ToS_Axioms.v
+src/ToS_Lang_Extraction.v
+src/TypeChecker.v
+src/TypeSafety.v
+src/Typing_Expr.v
+src/UniformConvergence.v
+src/UniversePolymorphism.v
 src/analysis/BolzanoWeierstrass.v
 src/analysis/FTC.v
 src/analysis/HeineBorelComplete.v
 src/analysis/ImplicitFunction.v
-
-# === Stdlib Batch 6: Domain-Specific Libraries ===
-# B6-1: Depends on Statistics
-src/stdlib/CreditScoring.v
-
-# B6-2: Depends on Statistics
-src/stdlib/NeuralNet.v
-
-# B6-3: Standalone
-src/stdlib/TextAnalysis.v
-
-# B6-4: Depends on ProcessGeneral + Statistics
-src/stdlib/TimeSeries.v
-
-# B6-5: Standalone (pure bool, no Q)
-src/stdlib/FormalVerification.v
-
-# B6-6: Cross-module (depends on all Batch 6)
-src/stdlib/DomainExamples.v
-
-# === Phase 3A: Process Physics ===
-# PP-1: Depends on LinearAlgebra, stdlib/VectorSpace, CauchyReal
-src/physics/InnerProductSpace.v
-
-# PP-2: Depends on InnerProductSpace
-src/physics/Orthogonality.v
-
-# PP-3: Depends on InnerProductSpace, CauchyReal, ProcessGeneral
-src/physics/QState.v
-
-# PP-4: Depends on InnerProductSpace, QState, LinearAlgebra
-src/physics/QObservable.v
-
-# PP-5: Depends on QState, QObservable, InnerProductSpace
-src/physics/BornRule.v
-
-# PP-6: Depends on ToS_Axioms, ProcessTypes, ProcessContinuumHypothesis, QObservable
-src/physics/SpectralDichotomy.v
-
-# PP-7: Depends on SpectralDichotomy, BornRule
-src/physics/MeasurementProcess.v
-
-# PP-8: Depends on QState + LinearAlgebra + Tensor + ProcessContinuumHypothesis
-src/physics/Entanglement.v
-
-# PP-9: Depends on ProcessTypes + ProcessContinuumHypothesis
-src/physics/Decoherence.v
-
-# PP-10: Depends on Decoherence
-src/physics/ThermodynamicArrow.v
-
-# === Phase 1: Process Continuum Hypothesis ===
-# PCH-1: Standalone (bool, lists, nat)
-src/ProcessTypes.v
-
-# PCH-2: Depends on ProcessTypes
-src/ProcessDiagonal.v
-
-# PCH-3: Depends on ProcessTypes + ProcessDiagonal + classic
-src/ProcessContinuumHypothesis.v
-
-# === Phase 2: Category of Systems ===
-# CoS-1: Depends on Core_ERR + SystemMorphism + stdlib/Category + UniversePolymorphism
-src/SystemCategory.v
-
-# CoS-2: Depends on SystemCategory + stdlib/Functor
-src/LevelFunctors.v
-
-# CoS-3: Depends on LevelFunctors + stdlib/Functor
-src/LevelAdjunction.v
-
-# CoS-4: Depends on SystemCategory + LevelFunctors + Roles + IntensionalIdentity
-src/ERR_Categorical.v
-
-# === Zeta Branch: Exploratory (ζ as process) ===
-# Z1: Depends on ToS_Axioms + CauchyReal + MonotoneConvergence + SeriesConvergence + ProcessGeneral
-src/zeta/ZetaProcess.v
-
-# Z2: Depends on ZetaProcess + stdlib/Primes
-src/zeta/EulerProduct.v
-
-# Z3: Depends on ToS_Axioms + CauchyReal + ProcessGeneral + stdlib/TComplex + ZetaProcess
-src/zeta/ZetaZeros.v
-
-# Z4: Depends on ZetaZeros
-src/zeta/RH_Statement.v
-
-# Z5: Depends on ZetaZeros + ProcessTypes + ProcessContinuumHypothesis
-src/zeta/ZeroStructure.v
-
-# Z6: Depends on ZetaZeros + RH_Statement (1 Axiom: functional_equation_structure)
-src/zeta/FunctionalEquation.v
-
-# === Zeta Phase 2: Research Directions ===
-# Z7: Depends on zeta/* + FixedPoint + stdlib/TComplex
-src/zeta/ContractionZeros.v
-
-# Z8: Depends on zeta/* + ProcessTypes + PCH + MonotoneConvergence
-src/zeta/ApproximateZeros.v
-
-# Z9: Depends on EulerProduct + MonotoneConvergence + Primes
-src/zeta/EulerExtension.v
-
-# === Zeta Phase 3: RH Phase 1 — Complex Zeta Process and Zero-Free Region ===
-# Z10: Depends on nothing new (self-contained Q algebra)
-src/zeta/TrigInequality.v
-
-# Z11: Depends on ZetaProcess + CauchyReal + SeriesConvergence
-src/zeta/ComplexZeta.v
-
-# Z12: Depends on ZetaProcess + TrigInequality (dvp region)
-src/zeta/ZeroFreeRegion.v
-
-# Z13: Depends on ZetaProcess + ComplexZeta + SeriesConvergence (reflection)
-src/zeta/PartialSumZeros.v
-
-# Z14: Depends on Z10-Z13 + CauchyReal (synthesis)
-src/zeta/RH_Phase1_Synthesis.v
-
-# === Riemann Hypothesis Phase 2 ===
-# RH-06: Depends on EulerProduct + ZetaProcess + ComplexZeta
-src/zeta/LogZeta.v
-
-# RH-07: Depends on LogZeta + EulerProduct + ComplexZeta + stdlib/Primes
-src/zeta/PrimeSumBounds.v
-
-# RH-08: Depends on ZetaProcess + ComplexZeta + PartialSumZeros + LogZeta
-src/zeta/ZeroCountingProcess.v
-
-# RH-09: Depends on CauchyReal + ZetaProcess + ComplexZeta + PartialSumZeros + ZeroFreeRegion
-src/zeta/ExplicitFormula.v
-
-# RH-10: Depends on all Phase 2 + RH_Phase1_Synthesis
-src/zeta/RH_Phase2_Synthesis.v
-
-# === RH Phase 3: Li Criterion & Process Zero Migration ===
-# RH-11: Depends on ZetaProcess, ComplexZeta, ExplicitFormula
-src/zeta/LiCoefficients.v
-# RH-12: Depends on ZetaProcess, PartialSumZeros, LogZeta, ZeroCountingProcess
-src/zeta/ZeroMigration.v
-# RH-13: Depends on LiCoefficients, ZeroCountingProcess
-src/zeta/LiProcess.v
-# RH-14: Depends on LiProcess, LiCoefficients
-src/zeta/WeilPositivity.v
-# RH-15: Depends on all Phase 3 files
-src/zeta/RH_FinalAssessment.v
-
-# === Phase 3E: Concrete Quantum Systems ===
-# CQS-1: Depends on all Phase 3A physics files
-src/physics/Qubit.v
-
-# CQS-2: Depends on Qubit (eigenstate_eigenvalue_compat)
-src/physics/HarmonicOscillator.v
-
-# CQS-3: Depends on Qubit + Entanglement
-src/physics/SpinChain.v
-
-# CQS-4: Depends on core physics (QState + QObservable + BornRule)
-src/physics/QuantumDynamics.v
-
-# === Projective Systems: P4 Frontier ===
-# PS-1: Depends on CauchyReal + LinearAlgebra + ProcessGeneral
-src/projective/ProjectiveSystem.v
-
-# PS-2: Depends on PS-1 + Completeness + MonotoneConvergence + SeriesConvergence + FixedPoint + MetricSpace
-src/projective/ProjectiveLimit.v
-
-# PS-3: Depends on PS-1 + PS-2 + physics (InnerProductSpace, QState, QObservable) + MonotoneConvergence
-src/projective/QuantumTower.v
-
-# PS-4: Depends on PS-1 + PS-3 + physics
-src/projective/ProcessOperator.v
-
-# PS-5: Depends on PS-1 + LinearAlgebra + CauchyReal + SeriesConvergence + Measure
-src/projective/ProcessMeasure.v
-
-# PS-6: Depends on all PS-* + CauchyReal + FixedPoint + Completeness + physics
-src/projective/ConnectionTheorems.v
-
-# === Experimental Verification: Casimir Effect ===
-# EXP-1: Depends on stdlib.Combinatorics + SeriesConvergence + MonotoneConvergence + CauchyReal
-src/experimental/BernoulliNumbers.v
-
-# EXP-2: Depends on EXP-1 + zeta/ZetaProcess + MonotoneConvergence
-src/experimental/ZetaNegative.v
-
-# EXP-3: Depends on EXP-1 + EXP-2 + SeriesConvergence
-src/experimental/CasimirProcess.v
-
-# EXP-4: Depends on EXP-3 + CauchyReal
 src/experimental/AbelRegularization.v
-
-# === Experimental Verification Phase 2: Vacuum Energy + Coulomb Tower ===
-# EXP-5: Depends on BernoulliNumbers + ZetaNegative + CasimirProcess + MonotoneConvergence
-src/experimental/VacuumEnergy.v
-
-# EXP-6: Self-contained (CauchyReal + SeriesConvergence + MonotoneConvergence)
-src/experimental/CoulombTower.v
-
-# === Experimental Verification Phase 3: Full 3D Coulomb + Lamb Shift ===
-# EXP-7: Depends on CoulombTower
+src/experimental/AtomicSynthesis.v
+src/experimental/BernoulliNumbers.v
+src/experimental/CasimirProcess.v
 src/experimental/CoulombFull3D.v
-
-# EXP-8: Depends on CoulombFull3D + CoulombTower
+src/experimental/CoulombTower.v
+src/experimental/HeliumLattice.v
 src/experimental/LambShiftTower.v
-
-# === Linear Algebra Extensions: Eigenvalue Theory ===
-# LA-1: Depends on LinearAlgebra + QObservable + InnerProductSpace + QState + SpinChain
-src/linalg/MatrixOps.v
-
-# LA-2: Depends on MatrixOps + QState + SpinChain
-src/linalg/EigenvalueTheory.v
-
-# LA-3: Depends on MatrixOps + EigenvalueTheory
-src/linalg/GershgorinDiscs.v
-
-# LA-4: Depends on MatrixOps + EigenvalueTheory + SeriesConvergence + MonotoneConvergence
-src/linalg/PowerMethod.v
-
-# LA-5: Depends on CoulombTower + CoulombFull3D + MonotoneConvergence
-src/linalg/IonizationThreshold.v
-
-# LA-6: Depends on all linalg + CoulombTower + CoulombFull3D + SpinChain
-src/linalg/EigenvalueSynthesis.v
-
-# === Gauge Theory (Lattice Gauge, Transfer Matrix, Mass Gap) ===
-# G-1: No gauge deps
-src/gauge/LatticeStructure.v
-# G-2: Depends on LatticeStructure
-src/gauge/GaugeField.v
-# G-3: Depends on GaugeField + EigenvalueTheory
-src/gauge/WilsonAction.v
-# G-4: Depends on WilsonAction + PowerMethod
-src/gauge/TransferMatrix.v
-# G-5: Depends on TransferMatrix + ProjectiveSystem + SpectralDichotomy
-src/gauge/MassGapProcess.v
-# G-6: Depends on all gauge files
-src/gauge/GaugeSynthesis.v
-# G-7: SU(2) quaternion algebra
-src/gauge/SU2Group.v
-# G-8: SU(2) lattice gauge field
-src/gauge/SU2Lattice.v
-# G-9: SU(2) transfer matrix (near-identity)
-src/gauge/SU2TransferMatrix.v
-# G-10: Strong coupling expansion
-src/gauge/StrongCoupling.v
-# G-11: RG flow as contraction mapping
-src/gauge/RGFlow.v
-# G-12: SU(2) synthesis
-src/gauge/SU2Synthesis.v
-# G-13: Cosine Taylor terms
-src/gauge/CosineAction.v
-# G-14: Higher-order RG corrections
-src/gauge/HigherOrderRG.v
-# G-15: Perturbation bounds
-src/gauge/PerturbationRG.v
-# G-16: RG convergence
-src/gauge/RGConvergence.v
-# G-17: Mass gap bound
-src/gauge/MassGapBound.v
-# G-18: Nonlinear RG contraction (Step 8)
-src/gauge/NonlinearRG.v
-# G-19: Extended interval — all β > 0 (Step 9)
-src/gauge/ExtendedInterval.v
-# G-20: Global mass gap synthesis (Steps 8-9)
-src/gauge/GlobalMassGap.v
-
-# === Exact Non-Perturbative RG ===
-# G-21: Larger lattice gap bounds
-src/gauge/LargerLattice.v
-# G-22: Gap matching (gap inversion + exact RG)
-src/gauge/GapMatching.v
-# G-23: Exact RG process (Cauchy proof)
-src/gauge/ExactRGProcess.v
-# G-24: Non-perturbative gap (conditional + unconditional)
-src/gauge/NonperturbativeGap.v
-# G-25: Millennium synthesis
-src/gauge/MillenniumSynthesis.v
-# G-26: Gap decay rate along RG orbit
-src/gauge/GapDecayRate.v
-# G-27: Confinement correction and impossibility
-src/gauge/ConfinementCorrection.v
-# G-28: Topological obstruction
-src/gauge/TopologicalObstruction.v
-# G-29: Wall theorem
-src/gauge/WallTheorem.v
-# G-30: Yang-Mills final synthesis
-src/gauge/YangMillsFinal.v
-
-# === Three Attacks on the Wall ===
-# G-31: Spectral bound — σ > 0 implies gap > 0
-src/gauge/SpectralBound.v
-# G-32: K-dependence — K=3 gap > 0 at β=8
-src/gauge/KDependence.v
-# G-33: Instanton enhanced — sufficient correction framework
-src/gauge/InstantonEnhanced.v
-# G-34: Wall breach synthesis
-src/gauge/WallBreachSynthesis.v
-
-# === Continuum Limit ===
-# G-35: Continuum operator — integral operator, rank-3 reduction
-src/gauge/ContinuumOperator.v
-# G-36: Exact eigenvalues — char poly, λ₀=2/3, discriminant
-src/gauge/ExactEigenvalues.v
-# G-37: Gap bound — gap ≥ 1/8 via 135>112
-src/gauge/GapBound.v
-# G-38: Continuum synthesis — from A=exists to gap≥1/8
-src/gauge/ContinuumSynthesis.v
-
-# === 2+1D Mass Gap ===
-# G-39: Coupled 2D — 4×4 transfer matrix with spatial plaquette
-src/gauge/Coupled2D.v
-# G-40: Block diagonal — symmetry decomposition, eigenvectors
-src/gauge/BlockDiagonal2D.v
-# G-41: Gap 2D — gap = 3/4 at β=8, positive for all β
-src/gauge/Gap2D.v
-# G-42: Synthesis 2D — complete 2+1D result
-src/gauge/Synthesis2D.v
-
-# === 2+1D Continuum Limit ===
-# G-43: Extended action — T₁ on monomials up to degree 4
-src/gauge/ExtendedAction.v
-# G-44: Continuum matrix 2D — 9×9 two-body operator N
-src/gauge/ContinuumMatrix2D.v
-# G-45: Eigen analysis 2D — block decomposition, anti/sym traces
-src/gauge/EigenAnalysis2D.v
-# G-46: Continuum gap 2D — dimension ladder, synthesis
-src/gauge/ContinuumGap2D.v
-
-# === 3+1D Mass Gap ===
-# G-47: Coupled 3D — 8×8 matrix, spatial weights, Hamming sums
-src/gauge/Coupled3D.v
-# G-48: Block 3D — S₃×Z₂ decomposition → two 2×2 blocks
-src/gauge/Block3D.v
-# G-49: Gap 3D — gap = 15/16 at β=8, dimension formula
-src/gauge/Gap3D.v
-# G-50: Dimension ladder — complete 1D→2D→3D synthesis
-src/gauge/DimensionLadder.v
-
-# === 3+1D Continuum Limit ===
-# G-51: Extended action 7 — E matrix columns 5-6
-src/gauge/ExtendedAction7.v
-# G-52: Tensor gap bound — 3+1D continuum gap ≥ 1/18
-src/gauge/TensorGapBound.v
-# G-53: Continuum 3D synthesis — complete 1D→2D→3D continuum
-src/gauge/Continuum3DSynthesis.v
-# G-54: Domain walls — binary string combinatorics for strip model
-src/gauge/DomainWalls.v
-# G-55: Strip transfer — N x 1 transfer matrix
-src/gauge/StripTransfer.v
-# G-56: Strip spectrum — eigenvalues at beta=8 for all N
-src/gauge/StripSpectrum.v
-# G-57: Thermodynamic limit — gap survives N -> infinity
-src/gauge/ThermodynamicLimit.v
-# G-58: Strip synthesis — unifying domain wall & dimension ladder
-src/gauge/StripSynthesis.v
-
-# === Yang-Mills Wall Breach (Character Expansion) ===
-# GAUGE-60: SU(2) characters via Chebyshev, orthogonality, Haar
-src/gauge/SU2Characters.v
-# GAUGE-61: Diagonal transfer matrix, Bessel eigenvalues t_j
-src/gauge/CharacterTransfer.v
-# GAUGE-62: Exact mass gap t_0−t_1 > 0, explicit values
-src/gauge/ExactMassGap.v
-# GAUGE-63: RG flow, continuum limit, dimensional extension
-src/gauge/ContinuumCharacter.v
-# GAUGE-64: Wall breach synthesis, three millennium comparison
-src/gauge/YMWallBreach.v
-
-# === Yang-Mills Level 3: 3+1D SU(2) ===
-# GAUGE-65: Clebsch-Gordan selection rules, coupling coefficients
-src/gauge/ClebschGordan.v
-# GAUGE-66: Spatial Hamiltonian, tridiagonal matrix
-src/gauge/SpatialHamiltonian.v
-# GAUGE-67: Combined temporal × spatial transfer matrix
-src/gauge/CombinedTransfer3D.v
-# GAUGE-68: Tridiagonal gap, Gershgorin bounds, perturbation
-src/gauge/TridiagonalGap.v
-# GAUGE-69: 3+1D SU(2) mass gap synthesis
-src/gauge/YM3DComplete.v
-
-# === Yang-Mills Level 4: Continuum ===
-# GAUGE-70: Depends on ExactMassGap + CharacterTransfer + CombinedTransfer3D
-src/gauge/GapRatio.v
-# GAUGE-71: Depends on GapRatio + ExactMassGap
-src/gauge/LatticeRG.v
-# GAUGE-72: Depends on ExactMassGap + CharacterTransfer + CombinedTransfer3D
-src/gauge/ReflectionPositivity.v
-# GAUGE-73: Depends on GapRatio + LatticeRG + ReflectionPositivity
-src/gauge/ContinuumGap.v
-# GAUGE-74: Depends on all Level 4 + YM3DComplete
-src/gauge/YMLevel4Complete.v
-
-# === YM Level 5: OS Axioms + Wightman ===
-# GAUGE-75: Depends on CharacterTransfer + ExactMassGap + GapRatio
-src/gauge/LatticeCorrelations.v
-# GAUGE-76: Depends on LatticeCorrelations + Combinatorics
-src/gauge/LatticeOS1_Analyticity.v
-# GAUGE-77: Depends on LatticeCorrelations + GapRatio
-src/gauge/LatticeOS2_Regularity.v
-# GAUGE-78: Depends on LatticeCorrelations
-src/gauge/LatticeOS3_Covariance.v
-# GAUGE-79: Depends on ReflectionPositivity + LatticeCorrelations
-src/gauge/WightmanReconstruction.v
-# GAUGE-80: Depends on all Level 5 + Level 4
-src/gauge/YMLevel5Complete.v
-
-# === YM Level 6: Universality and Continuum Covariance ===
-# GAUGE-81: Irrelevant operators, lattice artifacts, anisotropy
-src/gauge/IrrelevantOperators.v
-# GAUGE-82: RG contraction, artifact shrinking, double contraction
-src/gauge/RGContraction.v
-# GAUGE-83: Universality class, fixed point, SO(4) at fixed point
-src/gauge/UniversalityClass.v
-# GAUGE-84: SO(4) restoration, all OS in continuum, quantitative bounds
-src/gauge/ContinuumCovariance.v
-# GAUGE-85: Complete Yang-Mills mass gap theorem
-src/gauge/YangMillsComplete.v
-
-# === Yang-Mills Phase B: Transfer Matrix Proofs ===
-# GAUGE-86: Transfer matrix diagonal, eigenvalues, mass gap positivity
-src/gauge/TransferMatrixProof.v
-# GAUGE-87: Reflection positivity from eigenvalue positivity, energy gap
-src/gauge/ReflectionPositiveProof.v
-# GAUGE-88: Cluster property from eigenvalue ratio decay
-src/gauge/ClusterProof.v
-# GAUGE-89: Phase B synthesis — capstone theorem with full proof terms
-src/gauge/PhaseB_Synthesis.v
-
-# === Yang-Mills Proof Closure: OS1-3 + Wightman ===
-# GAUGE-90: OS1 (analyticity) + OS2 (regularity) from eigenvalue ratios
-src/gauge/CorrelationProof.v
-# GAUGE-91: OS3 (covariance) from separation-only dependence
-src/gauge/CovarianceProof.v
-# GAUGE-92: Wightman QFT construction from transfer matrix
-src/gauge/HilbertConstruction.v
-# GAUGE-93: Final proof closure — all 9 gaps closed
-src/gauge/ProofClosure.v
-# === Yang-Mills Formal Definitions ===
-# GAUGE-SEAL-01: Formal OS1 analyticity definition
-src/gauge/FormalAnalytic.v
-# GAUGE-SEAL-02: Formal OS2 tempered definition
-src/gauge/FormalTempered.v
-# GAUGE-SEAL-03: Formal OS3 SO(4) invariance definition
-src/gauge/FormalSO4.v
-# GAUGE-SEAL-04: Sealed theorem with all formal OS1-3
-src/gauge/YangMillsSealed.v
-# GAUGE-FIX: Correct spectral gap |t₀−t₁| for all β
-src/gauge/SpectralGapCorrect.v
-src/gauge/YangMillsCorrected.v
-# GAUGE-PMG: Process mass gap (P4 interpretation)
-src/gauge/ProcessMassGap.v
-src/gauge/YangMillsProcess.v
-
-# === Navier-Stokes Phase 1 ===
-# NS-01: Grid functions, L2 norm, inner product, Cauchy-Schwarz
-src/navier_stokes/GridFunction.v
-# NS-02: Finite differences, Abel summation, periodicity
-src/navier_stokes/FiniteDifference.v
-# NS-03: Galerkin modal ODE, nonlinear term, B_antisym, energy rate
-src/navier_stokes/GalerkinSystem.v
-# NS-04: Energy estimates, dissipation, 2D/3D regularity
-src/navier_stokes/EnergyEstimate.v
-# NS-05: Process solution, P4 resolution, summary theorems
-src/navier_stokes/ProcessNS.v
-
-# NS Phase 2: Vorticity and BKM Criterion
-# NS-06: Vorticity, palinstrophy, stretching, norm hierarchy
-src/navier_stokes/Vorticity.v
-# NS-07: BKM criterion, blowup characterization, bootstrap
-src/navier_stokes/BKMCriterion.v
-# NS-08: Enstrophy production, quadratic ODE, small energy
-src/navier_stokes/EnstrophyProduction.v
-# NS-09: Gronwall analysis, critical exponents, the gap
-src/navier_stokes/GronwallAnalysis.v
-# NS-10: Process vorticity, P4 resolution, synthesis
-src/navier_stokes/ProcessVorticity.v
-# NS Phase 3: Three Attacks on the Exponent Wall
-# NS-11: Attack A — frequency splitting
-src/navier_stokes/FrequencySplit.v
-# NS-12: Attack B — energy constraint
-src/navier_stokes/EnergyConstraint.v
-# NS-13: Attack C — geometric depletion
-src/navier_stokes/Depletion.v
-# NS-14: Attack synthesis — α=2 robustness
-src/navier_stokes/AttackSynthesis.v
-# NS-15: Final NS result — two Millennium problems
-src/navier_stokes/NSProcessFinal.v
-# === Navier-Stokes Phase 4: Per-Mode Bounds via Sufficient Reason ===
-# NS-16: Triadic interactions
-src/navier_stokes/TriadicInteraction.v
-# NS-17: Per-mode bounds
-src/navier_stokes/PerModeBound.v
-# NS-18: Enstrophy convergence
-src/navier_stokes/EnstrophyConvergence.v
-# NS-19: Concentration bounds
-src/navier_stokes/ConcentrationBound.v
-# NS-20: Regularity synthesis
-src/navier_stokes/RegularitySynthesis.v
-
-# === Navier-Stokes Phase 5: Invariant Region ===
-# NS-21: Invariant region definition and boundary flow
-src/navier_stokes/InvariantRegion.v
-# NS-22: Smooth initial data enters region
-src/navier_stokes/SmoothInitialData.v
-# NS-23: Transient closure — invariance → regularity
-src/navier_stokes/TransientClosure.v
-# NS-24: Full regularity and Millennium statement
-src/navier_stokes/FullRegularity.v
-# NS-25: Two Millennium Problems unified
-src/navier_stokes/TwoMillennium.v
-
-# === Navier-Stokes Phase 6 ===
-# NS-26: Depends on GalerkinSystem + EnergyEstimate + InvariantRegion + TransientClosure
-src/navier_stokes/LowModeControl.v
-# NS-27: Depends on LowModeControl + InvariantRegion + TransientClosure + EnstrophyConvergence
-src/navier_stokes/UniformBounds.v
-# NS-28: Depends on UniformBounds + GalerkinSystem
-src/navier_stokes/GalerkinConvergence.v
-# NS-29: Depends on GalerkinConvergence + UniformBounds
-src/navier_stokes/ClassicalRegularity.v
-# NS-30: Depends on ClassicalRegularity + FullRegularity + TwoMillennium
-src/navier_stokes/MillenniumComplete.v
-
-# NS-31: Depends on InvariantRegion + PerModeBound + EnstrophyProduction + GronwallAnalysis + TransientClosure
-src/navier_stokes/HonestAssessment.v
-# NS-32: Depends on GridFunction + GalerkinSystem + EnergyEstimate + TriadicInteraction
-src/navier_stokes/FatouRegularity.v
-# NS-33: Depends on GridFunction + GalerkinSystem + EnergyEstimate + TriadicInteraction + ProcessNS + FatouRegularity
-src/navier_stokes/ResolutionRegularity.v
-# NS-34: Depends on all NS files + StripSpectrum
-src/navier_stokes/NSComplete.v
-
-# === Process Functional Analysis (Phase 6) ===
-# PFA-1: Depends on ProcessCore + ProcessArithmetic + ProcessBounds
-src/process/ProcessFiniteDim.v
-
-# PFA-2: Depends on PFA-1 + ProcessCore + ProcessBounds
-src/process/ProcessL2.v
-
-# PFA-3: Depends on PFA-1 + PFA-2 + ProcessCore + ProcessBounds
-src/process/ProcessOperatorFA.v
-
-# PFA-4: Depends on PFA-1 + PFA-2 + PFA-3 + ProcessCore + ProcessBounds
-src/process/ProcessSpectral.v
-
-# PFA-5: Depends on all PFA-*
-src/process/ProcessFuncUnified.v
-
-# === Phase 10: PMG Generalization (5 files, 68 Qed) ===
-# PMG-1: Depends on ProcessCore + ProcessBounds + SeriesConvergence
-src/process/ProcessPMGMarkov.v
-# PMG-2: Depends on PMG-1
-src/process/ProcessPMGQuantum.v
-# PMG-3: Depends on PMG-1 + SeriesConvergence
-src/process/ProcessPMGSchrodinger.v
-# PMG-4: Depends on PMG-1
-src/process/ProcessPMGEssential.v
-# PMG-5: Depends on PMG-1 + PMG-2 + PMG-3 + PMG-4
-src/process/ProcessPMGUnified.v
-
-# === Architecture of Reasoning (standalone) ===
-Architecture_of_Reasoning/Architecture_of_Reasoning.v
-Architecture_of_Reasoning/CompleteFallacyTaxonomy.v
-Architecture_of_Reasoning/ERR_Fallacies.v
-Architecture_of_Reasoning/DomainViolations_Complete.v
-Architecture_of_Reasoning/AI_FallacyDetector.v
-Architecture_of_Reasoning/ParadoxDissolution.v
-
-# === Computational Extraction (Phase 11) ===
-src/extraction/GapCompute.v
+src/experimental/LithiumLattice.v
+src/experimental/TwoParticleLattice.v
+src/experimental/VacuumEnergy.v
+src/experimental/ZetaNegative.v
 src/extraction/GapCertificate.v
+src/extraction/GapCompute.v
 src/extraction/GapExtraction.v
-
-# === Process Algebra (Phase 7) ===
-src/process/ProcessGroup.v
-src/process/ProcessRing.v
-src/process/ProcessNoetherian.v
-src/process/ProcessHomomorphism.v
-src/process/ProcessAlgebraUnified.v
-
-# === Phase 8: Process Topology (5 files, 73 Qed) ===
-src/process/ProcessTopOpen.v
-src/process/ProcessTopMetric.v
-src/process/ProcessTopConnected.v
-src/process/ProcessTopCompact.v
-src/process/ProcessTopUnified.v
-
-# === Phase 9: Process Category Theory (5 files, 117 Qed) ===
-src/process/ProcessCategory.v
-src/process/ProcessLimitColimit.v
+src/gauge/Block3D.v
+src/gauge/BlockDiagonal2D.v
+src/gauge/CharacterTransfer.v
+src/gauge/ClebschGordan.v
+src/gauge/ClusterProof.v
+src/gauge/CombinedTransfer3D.v
+src/gauge/ConfinementCorrection.v
+src/gauge/Continuum3DSynthesis.v
+src/gauge/ContinuumCharacter.v
+src/gauge/ContinuumCovariance.v
+src/gauge/ContinuumGap.v
+src/gauge/ContinuumGap2D.v
+src/gauge/ContinuumMatrix2D.v
+src/gauge/ContinuumOperator.v
+src/gauge/ContinuumSynthesis.v
+src/gauge/CorrelationProof.v
+src/gauge/CosineAction.v
+src/gauge/Coupled2D.v
+src/gauge/Coupled3D.v
+src/gauge/CovarianceProof.v
+src/gauge/DimensionLadder.v
+src/gauge/DomainWalls.v
+src/gauge/EigenAnalysis2D.v
+src/gauge/ExactEigenvalues.v
+src/gauge/ExactMassGap.v
+src/gauge/ExactRGProcess.v
+src/gauge/ExtendedAction.v
+src/gauge/ExtendedAction7.v
+src/gauge/ExtendedInterval.v
+src/gauge/FormalAnalytic.v
+src/gauge/FormalSO4.v
+src/gauge/FormalTempered.v
+src/gauge/Gap2D.v
+src/gauge/Gap3D.v
+src/gauge/GapBound.v
+src/gauge/GapDecayRate.v
+src/gauge/GapMatching.v
+src/gauge/GapRatio.v
+src/gauge/GaugeField.v
+src/gauge/GaugeSynthesis.v
+src/gauge/GlobalMassGap.v
+src/gauge/HigherOrderRG.v
+src/gauge/HilbertConstruction.v
+src/gauge/InstantonEnhanced.v
+src/gauge/IrrelevantOperators.v
+src/gauge/KDependence.v
+src/gauge/LargerLattice.v
+src/gauge/LatticeCorrelations.v
+src/gauge/LatticeOS1_Analyticity.v
+src/gauge/LatticeOS2_Regularity.v
+src/gauge/LatticeOS3_Covariance.v
+src/gauge/LatticeRG.v
+src/gauge/LatticeStructure.v
+src/gauge/MassGapBound.v
+src/gauge/MassGapProcess.v
+src/gauge/MillenniumSynthesis.v
+src/gauge/NonlinearRG.v
+src/gauge/NonperturbativeGap.v
+src/gauge/PerturbationRG.v
+src/gauge/PhaseB_Synthesis.v
+src/gauge/ProcessMassGap.v
+src/gauge/ProofClosure.v
+src/gauge/RGContraction.v
+src/gauge/RGConvergence.v
+src/gauge/RGFlow.v
+src/gauge/ReflectionPositiveProof.v
+src/gauge/ReflectionPositivity.v
+src/gauge/SU2Characters.v
+src/gauge/SU2Group.v
+src/gauge/SU2Lattice.v
+src/gauge/SU2Synthesis.v
+src/gauge/SU2TransferMatrix.v
+src/gauge/SpatialHamiltonian.v
+src/gauge/SpectralBound.v
+src/gauge/SpectralGapCorrect.v
+src/gauge/StripSpectrum.v
+src/gauge/StripSynthesis.v
+src/gauge/StripTransfer.v
+src/gauge/StrongCoupling.v
+src/gauge/Synthesis2D.v
+src/gauge/TensorGapBound.v
+src/gauge/ThermodynamicLimit.v
+src/gauge/TopologicalObstruction.v
+src/gauge/TransferMatrix.v
+src/gauge/TransferMatrixProof.v
+src/gauge/TridiagonalGap.v
+src/gauge/UniversalityClass.v
+src/gauge/WallBreachSynthesis.v
+src/gauge/WallTheorem.v
+src/gauge/WightmanReconstruction.v
+src/gauge/WilsonAction.v
+src/gauge/YM3DComplete.v
+src/gauge/YMLevel4Complete.v
+src/gauge/YMLevel5Complete.v
+src/gauge/YMWallBreach.v
+src/gauge/YangMillsComplete.v
+src/gauge/YangMillsCorrected.v
+src/gauge/YangMillsFinal.v
+src/gauge/YangMillsProcess.v
+src/gauge/YangMillsSealed.v
+src/linalg/EigenvalueSynthesis.v
+src/linalg/EigenvalueTheory.v
+src/linalg/GershgorinDiscs.v
+src/linalg/IonizationThreshold.v
+src/linalg/MatrixOps.v
+src/linalg/PowerMethod.v
+src/navier_stokes/AttackSynthesis.v
+src/navier_stokes/BKMCriterion.v
+src/navier_stokes/ClassicalRegularity.v
+src/navier_stokes/ConcentrationBound.v
+src/navier_stokes/Depletion.v
+src/navier_stokes/EnergyConstraint.v
+src/navier_stokes/EnergyEstimate.v
+src/navier_stokes/EnstrophyConvergence.v
+src/navier_stokes/EnstrophyProduction.v
+src/navier_stokes/FatouRegularity.v
+src/navier_stokes/FiniteDifference.v
+src/navier_stokes/FrequencySplit.v
+src/navier_stokes/FullRegularity.v
+src/navier_stokes/GalerkinConvergence.v
+src/navier_stokes/GalerkinSystem.v
+src/navier_stokes/GridFunction.v
+src/navier_stokes/GronwallAnalysis.v
+src/navier_stokes/HonestAssessment.v
+src/navier_stokes/InvariantRegion.v
+src/navier_stokes/LowModeControl.v
+src/navier_stokes/MillenniumComplete.v
+src/navier_stokes/NSComplete.v
+src/navier_stokes/NSProcessFinal.v
+src/navier_stokes/PerModeBound.v
+src/navier_stokes/ProcessNS.v
+src/navier_stokes/ProcessVorticity.v
+src/navier_stokes/RegularitySynthesis.v
+src/navier_stokes/ResolutionRegularity.v
+src/navier_stokes/SmoothInitialData.v
+src/navier_stokes/TransientClosure.v
+src/navier_stokes/TriadicInteraction.v
+src/navier_stokes/TwoMillennium.v
+src/navier_stokes/UniformBounds.v
+src/navier_stokes/Vorticity.v
+src/physics/BornRule.v
+src/physics/Decoherence.v
+src/physics/Entanglement.v
+src/physics/HarmonicOscillator.v
+src/physics/InnerProductSpace.v
+src/physics/MeasurementProcess.v
+src/physics/Orthogonality.v
+src/physics/QObservable.v
+src/physics/QState.v
+src/physics/QuantumDynamics.v
+src/physics/Qubit.v
+src/physics/SpectralDichotomy.v
+src/physics/SpinChain.v
+src/physics/ThermodynamicArrow.v
+src/process/Process2DPhysics.v
+src/process/Process2DWeakCoupling.v
+src/process/Process3DGlueball.v
+src/process/Process3DPhysics.v
+src/process/Process3DSigmaCurve.v
+src/process/ProcessAccuracyPush.v
+src/process/ProcessAccuracySummary.v
+src/process/ProcessAccuracyTable.v
 src/process/ProcessAdjunction.v
-src/process/ProcessWholeness.v
-src/process/ProcessFourPrinciples.v
-
-# === Phase 13A: GeomGauge Categories (4 files, 77 Qed) ===
-src/process/ProcessGeomCategory.v
-src/process/ProcessGaugeCategory.v
-src/process/ProcessGeomGaugeFunctor.v
-src/process/ProcessGeomGaugeBasic.v
-
-# === Phase 14A: The Adjunction (5 files, 78 Qed) ===
-src/process/ProcessGGAdjStrict.v
-src/process/ProcessGGGalois.v
-src/process/ProcessGGAdjProcess.v
-src/process/ProcessGGAdjWeak.v
-src/process/ProcessGGAdjSynthesis.v
-
-# === Phase 15A: Physical Interpretation (5 files, 80 Qed) ===
-src/process/ProcessQuantization.v
-src/process/ProcessBackReaction.v
-src/process/ProcessCoupling.v
-src/process/ProcessTime.v
-src/process/ProcessPhysicsSynthesis.v
-
-# === Phase 16A: Emergence = Quantum Gravity (3 files, 60 Qed) ===
-src/process/ProcessEmergencePhysics.v
-src/process/ProcessQuantumGravity.v
-src/process/ProcessGrandUnification.v
-
-# === Path B: Regge Process + Combined Transfer + Crossing (5 files, 81 Qed) ===
-src/process/ProcessRegge.v
-src/process/ProcessReggeTransfer.v
-src/process/ProcessCombinedTransfer.v
-src/process/ProcessCrossing.v
-src/process/ProcessPathBSynthesis.v
-
-# === Step 3 Phase 18: E/R/R → Gauge Invariance (5 files, 63 Qed) ===
-src/process/ProcessERRSymmetry.v
-src/process/ProcessERRGauge.v
-src/process/ProcessERRWilson.v
-src/process/ProcessERRGaugeGroup.v
-src/process/ProcessERRGaugeSynthesis.v
-src/process/ProcessP3Metric.v
-src/process/ProcessP3Dynamics.v
-src/process/ProcessP3Gravity.v
-src/process/ProcessP3Einstein.v
-src/process/ProcessP3GravitySynthesis.v
-src/process/ProcessL4Variational.v
-src/process/ProcessReggeVariation.v
-src/process/ProcessDiscreteEinstein.v
-src/process/ProcessDimension.v
-src/process/ProcessCrossingD.v
-src/process/ProcessStability.v
-src/process/ProcessDimensionSelect.v
-src/process/ProcessStep3Synthesis.v
-src/process/ProcessERRFermion.v
-src/process/ProcessPauliExclusion.v
-src/process/ProcessGrassmann.v
-src/process/ProcessLatticeFermion.v
-src/process/ProcessFermionSynthesis.v
-src/process/ProcessSpacetime.v
-src/process/ProcessLorentzian.v
-src/process/ProcessLightCone.v
-src/process/ProcessLorentzianRegge.v
-src/process/ProcessLorentzianSynthesis.v
+src/process/ProcessAlgebraUnified.v
+src/process/ProcessAnalysis.v
 src/process/ProcessAnomaly.v
 src/process/ProcessAnomalyCancel.v
-src/process/ProcessRoleConstraints.v
-src/process/ProcessStandardModel.v
-src/process/ProcessStep4Synthesis.v
-src/process/ProcessERRDerived.v
-src/process/ProcessSymBreaking.v
-src/process/ProcessGoldstone.v
-src/process/ProcessHiggsMechanism.v
-src/process/ProcessElectroweak.v
-src/process/ProcessBlocking.v
-src/process/ProcessRGFlow.v
+src/process/ProcessArithmetic.v
 src/process/ProcessAsymptoticFreedom.v
-src/process/ProcessSimplex4D.v
-src/process/ProcessRegge4D.v
+src/process/ProcessAxiomAudit.v
+src/process/ProcessBHMicrostates.v
+src/process/ProcessBW.v
+src/process/ProcessBackReaction.v
+src/process/ProcessBellInequality.v
+src/process/ProcessBeta4.v
+src/process/ProcessBlackHole.v
+src/process/ProcessBlocking.v
+src/process/ProcessBornCrossValidation.v
+src/process/ProcessBornRule.v
+src/process/ProcessBounds.v
+src/process/ProcessBridge.v
+src/process/ProcessCCExplicit.v
+src/process/ProcessCPViolation.v
+src/process/ProcessCasimirCrossValidation.v
+src/process/ProcessCategory.v
+src/process/ProcessChainVerified.v
+src/process/ProcessClusterConnection.v
+src/process/ProcessCombinedTransfer.v
+src/process/ProcessComplexRules.v
+src/process/ProcessContinuumArgument.v
+src/process/ProcessContinuumGapConnection.v
+src/process/ProcessContinuumLimit.v
+src/process/ProcessConvergenceRates.v
+src/process/ProcessCore.v
+src/process/ProcessCorrelationConnection.v
+src/process/ProcessCorrelationLength.v
+src/process/ProcessCosmologicalConst.v
+src/process/ProcessCoulombConnection.v
+src/process/ProcessCoupling.v
+src/process/ProcessCouplingAnalysis.v
+src/process/ProcessCrossing.v
+src/process/ProcessCrossingD.v
+src/process/ProcessDMCrossSection.v
+src/process/ProcessDMPhenomenology.v
+src/process/ProcessDarkMatter.v
+src/process/ProcessDecoherence.v
+src/process/ProcessDeconfining.v
+src/process/ProcessDerivative.v
+src/process/ProcessDerivedVsConsistent.v
+src/process/ProcessDimTransmutation.v
+src/process/ProcessDimension.v
+src/process/ProcessDimensionLadder.v
+src/process/ProcessDimensionSelect.v
+src/process/ProcessDiscreteEinstein.v
+src/process/ProcessEFTHierarchy.v
+src/process/ProcessERRDerived.v
+src/process/ProcessERRFermion.v
+src/process/ProcessERRGauge.v
+src/process/ProcessERRGaugeGroup.v
+src/process/ProcessERRGaugeSynthesis.v
+src/process/ProcessERRSymmetry.v
+src/process/ProcessERRWilson.v
+src/process/ProcessEVT.v
+src/process/ProcessEffectivePotential.v
+src/process/ProcessElectroweak.v
+src/process/ProcessElectroweakMasses.v
+src/process/ProcessEmergencePhysics.v
+src/process/ProcessEntanglement.v
+src/process/ProcessErrorBounds.v
+src/process/ProcessExactRGConnection.v
+src/process/ProcessExactSpectrumConnection.v
+src/process/ProcessExtendedCP.v
+src/process/ProcessExtremeAccuracy.v
+src/process/ProcessFTC.v
+src/process/ProcessFatou.v
+src/process/ProcessFermion3D.v
+src/process/ProcessFermionDet.v
+src/process/ProcessFermionDoubling.v
+src/process/ProcessFermionLoop.v
+src/process/ProcessFermionMassAnalysis.v
+src/process/ProcessFermionSpectrum.v
+src/process/ProcessFermionSynthesis.v
+src/process/ProcessFinalAssessment.v
+src/process/ProcessFinalMap.v
+src/process/ProcessFiniteDim.v
+src/process/ProcessFiniteRG.v
+src/process/ProcessFourPrinciples.v
+src/process/ProcessFriedmann.v
+src/process/ProcessFuncUnified.v
+src/process/ProcessGGAdjProcess.v
+src/process/ProcessGGAdjStrict.v
+src/process/ProcessGGAdjSynthesis.v
+src/process/ProcessGGAdjWeak.v
+src/process/ProcessGGGalois.v
+src/process/ProcessGRObservables.v
+src/process/ProcessGRSynthesis.v
+src/process/ProcessGUTScale.v
+src/process/ProcessGWSpeed.v
+src/process/ProcessGaugeCategory.v
+src/process/ProcessGaugeFullSynthesis.v
+src/process/ProcessGaugeGravityUnification.v
+src/process/ProcessGaussianQ.v
+src/process/ProcessGeodesic.v
+src/process/ProcessGeomCategory.v
+src/process/ProcessGeomGaugeBasic.v
+src/process/ProcessGeomGaugeFunctor.v
+src/process/ProcessGlobalGapConnection.v
+src/process/ProcessGlueballExtended.v
+src/process/ProcessGlueballMass.v
+src/process/ProcessGoldstone.v
+src/process/ProcessGrandUnification.v
+src/process/ProcessGrassmann.v
+src/process/ProcessGravGaugeCorrection.v
+src/process/ProcessGravRedshift.v
 src/process/ProcessGravWave.v
 src/process/ProcessGravWavePMG.v
-src/process/ProcessYukawa.v
-src/process/ProcessMassHierarchy.v
-src/process/ProcessStep5Synthesis.v
-
-src/process/ProcessWeinbergAngle.v
-src/process/ProcessElectroweakMasses.v
-
-src/process/ProcessSchwarzschildRegge.v
-src/process/ProcessBlackHole.v
-
-src/process/ProcessFermionSpectrum.v
-src/process/ProcessFermionDoubling.v
-
-src/process/ProcessRGHigherOrder.v
-src/process/ProcessRGPrecision.v
-
-src/process/ProcessNonAbelianERR.v
-src/process/ProcessPathOrdering.v
-src/process/ProcessNonAbelianSU2.v
-
-# === Step 7 Phase 33: Higgs Potential from E/R/R ===
-src/process/ProcessHiggsPotentialERR.v
-src/process/ProcessHiggsVEV.v
-
-# === Step 7 Phase 34: CP Violation from Complex Rules ===
-src/process/ProcessGaussianQ.v
-src/process/ProcessComplexRules.v
-src/process/ProcessCPViolation.v
-
-# === Step 7 Phase 35: 3+1D Fermion Doubling ===
-src/process/ProcessFermion3D.v
-src/process/ProcessNielsenNinomiya.v
-src/process/ProcessStaggered.v
-
-# === Step 7 Phase 35.5: Fermion Loop -> Higgs Mass ===
-src/process/ProcessFermionLoop.v
-src/process/ProcessHiggsMassCorrected.v
-
-# === Step 8 Phase 36: Strengthen + Audit ===
-src/process/ProcessSynthesisStrengthened.v
-src/process/ProcessChainVerified.v
-src/process/ProcessAxiomAudit.v
-
-# === Step 8 Phase 37: Adjunction Rigor ===
-src/process/ProcessUniversalAdjunction.v
-src/process/ProcessIntrinsicDefect.v
-
-# === Step 8 Phase 38: String Tension (W8) ===
-src/process/ProcessStringTension.v
-src/process/ProcessLatticeObservable.v
-
-# === Step 8 Phase 39: Derived vs Consistent + Synthesis ===
-src/process/ProcessDerivedVsConsistent.v
-src/process/ProcessStep8Synthesis.v
-
-# === Phase 40: RG Running of sin²θ_W ===
-src/process/ProcessRGWeinberg.v
-src/process/ProcessGUTScale.v
-
-# === Step 9 Phase 41: Proton Mass Structure ===
-src/process/ProcessDimTransmutation.v
-src/process/ProcessProtonStructure.v
-
-# === Phase 42: Vacuum Energy as Process ===
-src/process/ProcessVacuumEnergy.v
-src/process/ProcessCosmologicalConst.v
-
-# === Phase 43: Final Assessment ===
-src/process/ProcessFinalAssessment.v
-src/process/ProcessOpenQuestions.v
-
-# === Step 10 Phase 44: Heisenberg from P2 ===
-src/process/ProcessHeisenberg.v
-src/process/ProcessUncertaintyBound.v
-
-# === Step 10 Phase 45: Born Rule from L3 ===
-src/process/ProcessBornRule.v
-src/process/ProcessProbability.v
-
-# === Step 10 Phase 46: Entanglement from P1 ===
-src/process/ProcessEntanglement.v
-src/process/ProcessBellInequality.v
-
-# === Step 10 Phase 47: No-Cloning from L2 ===
-src/process/ProcessNoCloning.v
-
-# === Step 10 Phase 48: Measurement from L3+P4 ===
-src/process/ProcessMeasurement.v
-
-# === Phase 49: sigma(beta) Curve ===
-src/process/ProcessSigmaCurve.v
-
-# === Phase 50: Glueball Mass ===
-src/process/ProcessGlueballMass.v
-
-# === Phase 50.5: Sigma at Higher M ===
-src/process/ProcessSigmaHigherM.v
-
-# === Phase 50.5b: Physical Sigma ===
-src/process/ProcessPhysicalSigma.v
-
-# === Phase 51: 2D Physics ===
-src/process/Process2DPhysics.v
-src/process/ProcessRGTrajectory.v
-src/process/ProcessCorrelationLength.v
-src/process/ProcessStep11Synthesis.v
-src/process/ProcessSU3Matrix.v
-src/process/ProcessSU3Gauge.v
-
-# === Phase 56: Fermion Determinant ===
-src/process/ProcessWilsonDirac.v
-src/process/ProcessFermionDet.v
-
-# === Step 12 Phase 58: Synthesis ===
-src/process/ProcessStep12Synthesis.v
-
-# === Wave 1: Physical Connections ===
-src/process/ProcessSigmaM2.v
-src/process/Process3DPhysics.v
-src/process/ProcessStrongCouplingComparison.v
-src/process/ProcessWightmanConnection.v
-src/process/ProcessThermodynamicConnection.v
-src/process/ProcessCorrelationConnection.v
-src/process/ProcessStrongCP.v
-src/process/Process3DSigmaCurve.v
-src/process/ProcessDarkMatter.v
-src/process/ProcessDimensionLadder.v
-src/process/ProcessSigmaM3.v
+src/process/ProcessGravWaveform.v
+src/process/ProcessGravitonScattering.v
 src/process/ProcessGravitonSelfEnergy.v
-src/process/Process3DGlueball.v
-src/process/ProcessOSConnection.v
-src/process/ProcessNeutrinoMass.v
-src/process/ProcessClusterConnection.v
-src/process/ProcessExactRGConnection.v
-src/process/ProcessUnifiedLattice.v
-src/process/ProcessGravGaugeCorrection.v
-src/process/ProcessBHMicrostates.v
-src/process/ProcessThreeCoupling.v
-src/process/ProcessExtendedCP.v
-src/process/ProcessEFTHierarchy.v
-src/process/ProcessDeconfining.v
-src/process/ProcessSpinStatistics.v
-src/process/ProcessHolographic.v
-src/process/ProcessPlanckLength.v
-src/process/ProcessProtonDecay.v
-src/process/ProcessInflation.v
-src/process/ProcessDecoherence.v
-src/process/ProcessQuantumZeno.v
-src/process/ProcessSuperposition.v
-src/process/ProcessContinuumLimit.v
-src/process/ProcessAccuracyTable.v
-src/process/ProcessWave5Synthesis.v
-
-# === Gauge Connection (G1-G8) ===
-src/process/ProcessRGRigorConnection.v
-src/process/ProcessContinuumGapConnection.v
-src/process/ProcessMillenniumConnection.v
-src/process/ProcessOS123Connection.v
-src/process/ProcessGlobalGapConnection.v
-src/process/ProcessExactSpectrumConnection.v
-src/process/ProcessSU2DetailConnection.v
-src/process/ProcessGaugeFullSynthesis.v
-
-# === Verifiable Physics (V1-V5) ===
-src/process/ProcessPlaquette.v
-src/process/ProcessBeta4.v
-src/process/ProcessWMassRatio.v
-src/process/ProcessWilsonLoop.v
-src/process/ProcessThermodynamics.v
-
-# === Three Phases: Gauge + SM Failures + New Math ===
-src/process/ProcessYMCapstone.v
-src/process/ProcessUniversality.v
-src/process/ProcessPlaquetteCurve.v
-src/process/ProcessCCExplicit.v
-src/process/ProcessThetaExplicit.v
-src/process/ProcessNeutrinoRatio.v
-src/process/ProcessAnalysis.v
-src/process/ProcessFiniteRG.v
-
-# === Step A: Fill Gaps + m_W 1-Loop ===
-src/process/ProcessPlaquetteExtended.v
-src/process/ProcessSpecificHeat.v
-src/process/ProcessPolyakovLoop.v
-src/process/ProcessMWOneLoop.v
-src/process/ProcessStepASynthesis.v
-
-# === Step B: Breakthrough ===
-src/process/Process2DWeakCoupling.v
+src/process/ProcessGronwall.v
+src/process/ProcessGroup.v
+src/process/ProcessHB.v
 src/process/ProcessHVP.v
-src/process/ProcessSpectralTheoryQ.v
-src/process/ProcessGlueballExtended.v
+src/process/ProcessHVPConvergence.v
+src/process/ProcessHeisenberg.v
+src/process/ProcessHierarchyResolution.v
+src/process/ProcessHiggsMassCorrected.v
+src/process/ProcessHiggsMechanism.v
+src/process/ProcessHiggsPotentialERR.v
+src/process/ProcessHiggsRatio.v
+src/process/ProcessHiggsVEV.v
+src/process/ProcessHigherDComparison.v
+src/process/ProcessHolographic.v
+src/process/ProcessHomomorphism.v
+src/process/ProcessIVT.v
+src/process/ProcessInflation.v
+src/process/ProcessIntegral.v
+src/process/ProcessIntrinsicDefect.v
+src/process/ProcessKappaAnalysis.v
+src/process/ProcessKappaDerivation.v
+src/process/ProcessL2.v
+src/process/ProcessL4Variational.v
+src/process/ProcessLambShiftConnection.v
+src/process/ProcessLambdaQCD.v
+src/process/ProcessLatticeFermion.v
+src/process/ProcessLatticeObservable.v
 src/process/ProcessLatticeTopology.v
-
-# === All 6 Phases: Cross-validation + Connections ===
-# Phase 1
+src/process/ProcessLebesgue.v
+src/process/ProcessLightCone.v
+src/process/ProcessLightDeflection.v
+src/process/ProcessLimitColimit.v
+src/process/ProcessLinalgConnection.v
+src/process/ProcessLorentzian.v
+src/process/ProcessLorentzianRegge.v
+src/process/ProcessLorentzianSynthesis.v
+src/process/ProcessMWOneLoop.v
+src/process/ProcessMassHierarchy.v
+src/process/ProcessMeasureTheory.v
+src/process/ProcessMeasureUnified.v
+src/process/ProcessMeasurement.v
+src/process/ProcessMillenniumConnection.v
+src/process/ProcessNavierStokesConnection.v
+src/process/ProcessNeutrinoMass.v
+src/process/ProcessNeutrinoRatio.v
+src/process/ProcessNielsenNinomiya.v
+src/process/ProcessNoCloning.v
+src/process/ProcessNoetherian.v
+src/process/ProcessNonAbelianERR.v
+src/process/ProcessNonAbelianSU2.v
+src/process/ProcessODE.v
+src/process/ProcessODEExamples.v
+src/process/ProcessOS123Connection.v
+src/process/ProcessOSConnection.v
+src/process/ProcessOpenQuestions.v
+src/process/ProcessOperatorFA.v
+src/process/ProcessP3Dynamics.v
+src/process/ProcessP3Einstein.v
+src/process/ProcessP3Gravity.v
+src/process/ProcessP3GravitySynthesis.v
+src/process/ProcessP3Metric.v
+src/process/ProcessPMGEssential.v
+src/process/ProcessPMGMarkov.v
+src/process/ProcessPMGQuantum.v
+src/process/ProcessPMGSchrodinger.v
+src/process/ProcessPMGUnified.v
+src/process/ProcessPathBSynthesis.v
+src/process/ProcessPathOrdering.v
+src/process/ProcessPauliExclusion.v
+src/process/ProcessPhysicalSigma.v
+src/process/ProcessPhysicsSynthesis.v
+src/process/ProcessPicard.v
+src/process/ProcessPlanckLength.v
+src/process/ProcessPlaquette.v
+src/process/ProcessPlaquetteCurve.v
+src/process/ProcessPlaquetteExtended.v
 src/process/ProcessPlaquetteFix.v
-src/process/ProcessBornCrossValidation.v
+src/process/ProcessPolyakovLoop.v
+src/process/ProcessPostNewtonian.v
+src/process/ProcessPrecession.v
+src/process/ProcessProbability.v
+src/process/ProcessProcessPhysics.v
+src/process/ProcessProjectiveConnection.v
+src/process/ProcessProtonDecay.v
+src/process/ProcessProtonStructure.v
 src/process/ProcessQMCrossValidation.v
 src/process/ProcessQMSynthesis.v
-# Phase 2
-src/process/ProcessCasimirCrossValidation.v
-src/process/ProcessCoulombConnection.v
-src/process/ProcessLambShiftConnection.v
-# Phase 3
-src/process/ProcessProjectiveConnection.v
-src/process/ProcessLinalgConnection.v
-# Phase 4
-src/process/ProcessZetaConnection.v
-src/process/ProcessNavierStokesConnection.v
-# Phase 5
+src/process/ProcessQuantization.v
+src/process/ProcessQuantumGravity.v
+src/process/ProcessQuantumZeno.v
+src/process/ProcessRGFlow.v
+src/process/ProcessRGHigherOrder.v
+src/process/ProcessRGPrecision.v
+src/process/ProcessRGRigorConnection.v
+src/process/ProcessRGTrajectory.v
+src/process/ProcessRGWeinberg.v
+src/process/ProcessRegge.v
+src/process/ProcessRegge4D.v
+src/process/ProcessReggeTransfer.v
+src/process/ProcessReggeVariation.v
+src/process/ProcessRing.v
+src/process/ProcessRoleConstraints.v
+src/process/ProcessSU2DetailConnection.v
+src/process/ProcessSU3Gauge.v
+src/process/ProcessSU3Matrix.v
+src/process/ProcessScaleMatching.v
+src/process/ProcessSchwarzschildRegge.v
+src/process/ProcessSeries.v
+src/process/ProcessSigmaCurve.v
+src/process/ProcessSigmaHigherM.v
+src/process/ProcessSigmaM2.v
+src/process/ProcessSigmaM3.v
+src/process/ProcessSimple.v
+src/process/ProcessSimplex4D.v
+src/process/ProcessSpacetime.v
+src/process/ProcessSpecificHeat.v
+src/process/ProcessSpectral.v
 src/process/ProcessSpectralIndex.v
-src/process/ProcessErrorBounds.v
-src/process/ProcessLambdaQCD.v
-# Phase 6
-src/process/ProcessUniversalityExplicit.v
-src/process/ProcessFinalMap.v
-
-# === P4-Native Libraries ===
-src/stdlib/TheoremBundle.v
-src/stdlib/QiPowerSeries.v
-src/stdlib/FiniteGroup.v
-src/stdlib/ProcessDistribution.v
-
-# === Closure Pass ===
-src/stdlib/OS1Closure.v
-src/stdlib/OS2Closure.v
-src/stdlib/OS3Closure.v
-src/stdlib/GaugeOSClosure.v
-src/stdlib/GaugeRemainingClosure.v
+src/process/ProcessSpectralTheoryQ.v
+src/process/ProcessSpinStatistics.v
+src/process/ProcessStability.v
+src/process/ProcessStaggered.v
+src/process/ProcessStandardModel.v
+src/process/ProcessStep11Synthesis.v
+src/process/ProcessStep12Synthesis.v
+src/process/ProcessStep3Synthesis.v
+src/process/ProcessStep4Synthesis.v
+src/process/ProcessStep5Synthesis.v
+src/process/ProcessStep8Synthesis.v
+src/process/ProcessStepASynthesis.v
+src/process/ProcessStepFinalSynthesis.v
+src/process/ProcessStringTension.v
+src/process/ProcessStrongCP.v
+src/process/ProcessStrongCouplingComparison.v
+src/process/ProcessSuperposition.v
+src/process/ProcessSymBreaking.v
 src/process/ProcessSynthesisCleanup1.v
 src/process/ProcessSynthesisCleanup2.v
 src/process/ProcessSynthesisCleanup3.v
-
-# === GR Enhancement ===
-src/process/ProcessGravRedshift.v
-src/process/ProcessGWSpeed.v
-src/process/ProcessGeodesic.v
-src/process/ProcessPrecession.v
-src/process/ProcessLightDeflection.v
-src/process/ProcessFriedmann.v
-src/process/ProcessScaleMatching.v
-src/process/ProcessGRObservables.v
-src/process/ProcessGRSynthesis.v
-
-# === Master Plan v7: Steps 1-4 ===
-src/process/ProcessExtremeAccuracy.v
-src/process/ProcessGravitonScattering.v
-src/process/ProcessConvergenceRates.v
-src/process/ProcessHVPConvergence.v
-src/process/ProcessHiggsRatio.v
-src/process/ProcessDMCrossSection.v
-src/process/ProcessKappaAnalysis.v
-src/process/ProcessContinuumArgument.v
-src/process/ProcessPostNewtonian.v
-src/process/ProcessCouplingAnalysis.v
-src/process/ProcessHigherDComparison.v
-src/process/ProcessFermionMassAnalysis.v
-src/process/ProcessAccuracySummary.v
-
-# === Master Plan v7: Steps 5-7 ===
+src/process/ProcessSynthesisStrengthened.v
+src/process/ProcessTaylor.v
+src/process/ProcessThermodynamicConnection.v
+src/process/ProcessThermodynamics.v
+src/process/ProcessThetaExplicit.v
+src/process/ProcessThreeCoupling.v
+src/process/ProcessTime.v
+src/process/ProcessTopCompact.v
+src/process/ProcessTopConnected.v
+src/process/ProcessTopMetric.v
+src/process/ProcessTopOpen.v
+src/process/ProcessTopUnified.v
 src/process/ProcessTwoLoopWeinberg.v
+src/process/ProcessUncertaintyBound.v
+src/process/ProcessUncountable.v
+src/process/ProcessUnified.v
+src/process/ProcessUnifiedLattice.v
+src/process/ProcessUniversalAdjunction.v
+src/process/ProcessUniversality.v
+src/process/ProcessUniversalityExplicit.v
+src/process/ProcessVacuumEnergy.v
+src/process/ProcessWMassRatio.v
+src/process/ProcessWave5Synthesis.v
+src/process/ProcessWeinbergAngle.v
+src/process/ProcessWholeness.v
+src/process/ProcessWightmanConnection.v
+src/process/ProcessWilsonDirac.v
+src/process/ProcessWilsonLoop.v
+src/process/ProcessYMCapstone.v
+src/process/ProcessYukawa.v
 src/process/ProcessZetaComputation.v
-src/process/ProcessAccuracyPush.v
-src/process/ProcessEffectivePotential.v
-src/process/ProcessGravWaveform.v
-src/process/ProcessProcessPhysics.v
-src/process/ProcessDMPhenomenology.v
+src/process/ProcessZetaConnection.v
 src/process/ProcessZetaValues.v
-src/process/ProcessStepFinalSynthesis.v
-
-# === κ Derivation ===
-src/process/ProcessKappaDerivation.v
-src/process/ProcessHierarchyResolution.v
-src/process/ProcessGaugeGravityUnification.v
-
-# === Process Mathematics N1 ===
-# Phase P1: Process Algebra
-src/stdlib/ProcessRing.v
-src/stdlib/ProcessSubring.v
-src/stdlib/ProcessModule.v
-src/stdlib/ProcessAlgebraSynthesis.v
-# Phase P3: General Adjunction
+src/projective/ConnectionTheorems.v
+src/projective/ProcessMeasure.v
+src/projective/ProcessOperator.v
+src/projective/ProjectiveLimit.v
+src/projective/ProjectiveSystem.v
+src/projective/QuantumTower.v
+src/stdlib/A1_ProcessSheaf.v
+src/stdlib/A1_SpecProcessRing.v
+src/stdlib/A2_InstantonClass.v
+src/stdlib/A2_MonopoleClass.v
+src/stdlib/A2_ProcessKTheory.v
 src/stdlib/Adjunction.v
 src/stdlib/AdjunctionInstances.v
-# Phase P4: Homological Algebra
+src/stdlib/AdvancedExamples.v
+src/stdlib/AreaLawSynthesis.v
+src/stdlib/AuctionTheory.v
+src/stdlib/Automata.v
+src/stdlib/BlochHamiltonian.v
+src/stdlib/Category.v
+src/stdlib/CategoryStatExamples.v
 src/stdlib/ChainComplex.v
-src/stdlib/SimplicialHomology.v
-src/stdlib/HomologySynthesis.v
-# Phase P2: Process Topology
-src/stdlib/ProcessSpace.v
-src/stdlib/ProcessCompactness.v
-src/stdlib/ProcessContinuity.v
-# Phase P5: Process Diff Geometry
-src/stdlib/ReggeDictionary.v
-src/stdlib/ProcessManifold.v
-src/stdlib/ProcessConnection.v
-# Phase P6: Process Measure
-src/stdlib/ProcessIntegration.v
-src/stdlib/ProcessLebesgue.v
-src/stdlib/ProcessMeasureSynthesis.v
-# Phase F1: QM = Spectral Theory
-src/stdlib/ProcessOperatorF.v
-src/stdlib/TransferAsOperator.v
-src/stdlib/HamiltonianProcess.v
-src/stdlib/ProcessBornRuleUnified.v
-src/stdlib/MeasurementProcessF.v
-src/stdlib/ProcessDiscreteOperator.v
-src/stdlib/SpectralSynthesis.v
-# Phase F2: Einstein as Process
-src/stdlib/R1_ReggeEinsteinConvergence.v
-src/stdlib/R2_ProcessEinsteinEq.v
-src/stdlib/R2_ProcessSingularity.v
-src/stdlib/R2_ProcessEinsteinSolutions.v
-src/stdlib/R2_EinsteinSynthesis.v
-# Phase F3: Deep Categorical
+src/stdlib/ChernInsulator.v
+src/stdlib/Combinatorics.v
+src/stdlib/ConditionalProbability.v
+src/stdlib/ControlTheory.v
+src/stdlib/ConvexAnalysis.v
+src/stdlib/CosmologySynthesis.v
+src/stdlib/CreditScoring.v
 src/stdlib/D1_DerivedFunctor.v
-src/stdlib/H1_LatticeDirac.v
-src/stdlib/H1_IndexTheorem.v
-src/stdlib/H2_ChernClass.v
-src/stdlib/H2_TopologicalCharge.v
-# Phase F5: K-theory + Applications
-src/stdlib/A2_ProcessKTheory.v
-src/stdlib/A2_InstantonClass.v
-src/stdlib/A2_MonopoleClass.v
-src/stdlib/T2_RGDynamics.v
-src/stdlib/T2_PhaseDiagram.v
-src/stdlib/T2_BifurcationTheory.v
-# Phase F3 batch 2
-src/stdlib/D1_LoopExpansion.v
 src/stdlib/D1_LoopConvergence.v
-# Phase F4 batch
-src/stdlib/A1_SpecProcessRing.v
-src/stdlib/A1_ProcessSheaf.v
-src/stdlib/I1_FormalPathIntegral.v
-# Phase F5 batch 2
-src/stdlib/A2_InstantonClass.v
-src/stdlib/A2_MonopoleClass.v
-src/stdlib/H3_PersistentHomology.v
-src/stdlib/H3_PersistentExamples.v
-# Phase F3 final
+src/stdlib/D1_LoopExpansion.v
+src/stdlib/DensityMatrix.v
+src/stdlib/DiscreteMathExamples.v
+src/stdlib/Distributions.v
+src/stdlib/DomainExamples.v
+src/stdlib/EigenvalueUnification.v
+src/stdlib/EntanglementEntropy.v
+src/stdlib/Estimation.v
+src/stdlib/FiniteGroup.v
+src/stdlib/FormalLanguages.v
+src/stdlib/FormalVerification.v
+src/stdlib/Functor.v
+src/stdlib/GCD.v
+src/stdlib/GameTheory.v
+src/stdlib/GaugeGravityQG.v
+src/stdlib/GaugeOSClosure.v
+src/stdlib/GaugeRemainingClosure.v
+src/stdlib/Graph.v
+src/stdlib/GraphAlgorithms.v
+src/stdlib/GravitonSpectrum.v
+src/stdlib/GroupTheory.v
+src/stdlib/H1_IndexTheorem.v
+src/stdlib/H1_LatticeDirac.v
+src/stdlib/H2_ChernClass.v
 src/stdlib/H2_StructureSynthesis.v
-# Phase F4 final
+src/stdlib/H2_TopologicalCharge.v
+src/stdlib/H3_PersistentExamples.v
+src/stdlib/H3_PersistentHomology.v
+src/stdlib/HamiltonianProcess.v
+src/stdlib/Hessian.v
+src/stdlib/HomologySynthesis.v
 src/stdlib/I1_CorrelationFromZ.v
+src/stdlib/I1_FormalPathIntegral.v
 src/stdlib/I1_PathIntegralSynthesis.v
 src/stdlib/I2_StatMech.v
 src/stdlib/I2_Thermodynamics.v
-# Track 1: Ad-Hoc Fixes
-src/stdlib/QMUnification.v
-src/stdlib/LoopUnification.v
-src/stdlib/EigenvalueUnification.v
-src/stdlib/PathIntegralUnification.v
-src/stdlib/TopologyUnification.v
 src/stdlib/IndexAnomalyUnification.v
-# Track 2: Emergent Quantization
-src/stdlib/ProcessLatticeDispersion.v
-src/stdlib/ProcessLatticeCoulomb.v
+src/stdlib/InformationTheory.v
+src/stdlib/Lattice.v
+src/stdlib/LoopUnification.v
+src/stdlib/MDPFoundations.v
+src/stdlib/MathExamples.v
+src/stdlib/MeasurementProcessF.v
+src/stdlib/MetricSpace.v
+src/stdlib/ModularArith.v
+src/stdlib/Monad.v
+src/stdlib/MultiAgent.v
+src/stdlib/NeuralNet.v
+src/stdlib/ODE.v
+src/stdlib/OS1Closure.v
+src/stdlib/OS2Closure.v
+src/stdlib/OS3Closure.v
+src/stdlib/PathIntegralUnification.v
+src/stdlib/Primes.v
+src/stdlib/ProcessAlgebraSynthesis.v
+src/stdlib/ProcessBornRuleUnified.v
+src/stdlib/ProcessCompactness.v
+src/stdlib/ProcessConnection.v
+src/stdlib/ProcessContinuity.v
+src/stdlib/ProcessDiscreteOperator.v
+src/stdlib/ProcessDistribution.v
 src/stdlib/ProcessEmergentQuantization.v
-# Track 3: 2-Loop Predictions
-src/stdlib/TwoLoopWeinberg.v
+src/stdlib/ProcessIntegration.v
+src/stdlib/ProcessLatticeCoulomb.v
+src/stdlib/ProcessLatticeDispersion.v
+src/stdlib/ProcessLebesgue.v
+src/stdlib/ProcessManifold.v
+src/stdlib/ProcessMeasureSynthesis.v
+src/stdlib/ProcessModule.v
+src/stdlib/ProcessOperatorF.v
+src/stdlib/ProcessRing.v
+src/stdlib/ProcessSpace.v
+src/stdlib/ProcessSubring.v
+src/stdlib/ProcessWheelerDeWitt.v
+src/stdlib/QGPathIntegral.v
+src/stdlib/QGSynthesis.v
+src/stdlib/QMUnification.v
+src/stdlib/QiPowerSeries.v
+src/stdlib/QuantumBounce.v
+src/stdlib/QuantumCosmology.v
+src/stdlib/R1_ReggeEinsteinConvergence.v
+src/stdlib/R2_EinsteinSynthesis.v
+src/stdlib/R2_ProcessEinsteinEq.v
+src/stdlib/R2_ProcessEinsteinSolutions.v
+src/stdlib/R2_ProcessSingularity.v
+src/stdlib/ReggeDictionary.v
+src/stdlib/ReggeSynthesis.v
+src/stdlib/ReggeTrajectory.v
+src/stdlib/RingField.v
+src/stdlib/SimplicialHomology.v
+src/stdlib/SpectralSynthesis.v
+src/stdlib/Statistics.v
+src/stdlib/StdlibExamples.v
+src/stdlib/T2_BifurcationTheory.v
+src/stdlib/T2_PhaseDiagram.v
+src/stdlib/T2_RGDynamics.v
+src/stdlib/TComplex.v
+src/stdlib/THigherOrder.v
+src/stdlib/TInt.v
+src/stdlib/TMap.v
+src/stdlib/TOption.v
+src/stdlib/TQueue.v
+src/stdlib/TSearch.v
+src/stdlib/TSet.v
+src/stdlib/TSort.v
+src/stdlib/TStream.v
+src/stdlib/TTree.v
+src/stdlib/Tensor.v
+src/stdlib/TextAnalysis.v
+src/stdlib/TheoremBundle.v
+src/stdlib/TimeSeries.v
+src/stdlib/TopoPhaseSynthesis.v
+src/stdlib/Topology.v
+src/stdlib/TopologyUnification.v
+src/stdlib/TransferAsOperator.v
 src/stdlib/TwoLoopMW.v
 src/stdlib/TwoLoopSynthesis.v
-# Track 4: Quantum Gravity
-src/stdlib/ProcessWheelerDeWitt.v
-src/stdlib/GravitonSpectrum.v
-src/stdlib/QGPathIntegral.v
-src/stdlib/GaugeGravityQG.v
-src/stdlib/QGSynthesis.v
-
-# === 5 New Directions ===
-# Dir 5: Entanglement Entropy
-src/stdlib/DensityMatrix.v
-src/stdlib/EntanglementEntropy.v
-src/stdlib/AreaLawSynthesis.v
-# Dir 3: Topological Phases
-src/stdlib/BlochHamiltonian.v
-src/stdlib/ChernInsulator.v
-src/stdlib/TopoPhaseSynthesis.v
-# Dir 4: Regge Poles
-src/stdlib/ReggeTrajectory.v
-src/stdlib/ReggeSynthesis.v
-# Dir 1: Atomic Physics
-src/experimental/TwoParticleLattice.v
-src/experimental/HeliumLattice.v
-src/experimental/LithiumLattice.v
+src/stdlib/TwoLoopWeinberg.v
+src/stdlib/VectorSpace.v
+src/zeta/ApproximateZeros.v
+src/zeta/ComplexZeta.v
+src/zeta/ContractionZeros.v
+src/zeta/EulerExtension.v
+src/zeta/EulerProduct.v
+src/zeta/ExplicitFormula.v
+src/zeta/FunctionalEquation.v
+src/zeta/LiCoefficients.v
+src/zeta/LiProcess.v
+src/zeta/LogZeta.v
+src/zeta/PartialSumZeros.v
+src/zeta/PrimeSumBounds.v
+src/zeta/RH_FinalAssessment.v
+src/zeta/RH_Phase1_Synthesis.v
+src/zeta/RH_Phase2_Synthesis.v
+src/zeta/RH_Statement.v
+src/zeta/TrigInequality.v
+src/zeta/WeilPositivity.v
+src/zeta/ZeroCountingProcess.v
+src/zeta/ZeroFreeRegion.v
+src/zeta/ZeroMigration.v
+src/zeta/ZeroStructure.v
+src/zeta/ZetaProcess.v
+src/zeta/ZetaZeros.v
