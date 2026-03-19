@@ -1375,3 +1375,20 @@ src/stdlib/GravitonSpectrum.v
 src/stdlib/QGPathIntegral.v
 src/stdlib/GaugeGravityQG.v
 src/stdlib/QGSynthesis.v
+
+# === 5 New Directions ===
+# Dir 5: Entanglement Entropy
+src/stdlib/DensityMatrix.v
+src/stdlib/EntanglementEntropy.v
+src/stdlib/AreaLawSynthesis.v
+# Dir 3: Topological Phases
+src/stdlib/BlochHamiltonian.v
+src/stdlib/ChernInsulator.v
+src/stdlib/TopoPhaseSynthesis.v
+# Dir 4: Regge Poles
+src/stdlib/ReggeTrajectory.v
+src/stdlib/ReggeSynthesis.v
+# Dir 1: Atomic Physics
+src/experimental/TwoParticleLattice.v
+src/experimental/HeliumLattice.v
+src/experimental/LithiumLattice.v
