@@ -1,14 +1,14 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-12668_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-12728_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Free_Params](https://img.shields.io/badge/Free_Parameters-~0.3-orange.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" —
-> 12,668 machine-verified theorems, 0 Admitted, 742 files, ~0.3 free parameters.
+> 12,728 machine-verified theorems, 0 Admitted, 746 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > κ = 1/10 DERIVED from D(D+1)/2. sin²θ_W = 3/13 DERIVED from dim(SU(2))/metric_comp.
@@ -62,13 +62,13 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | **12,668** |
-| Coq files | **742** |
+| Proven theorems (Qed) | **12,728** |
+| Coq files | **746** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Free parameters | **~0.3** — gauge group, generations, κ, r, Λ scaling, η all DERIVED |
 | Verified observables | **30+** |
-| Foundation (formal) | 18 files, 169 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → SM |
+| Foundation (formal) | 22 files, 229 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → SM |
 | P4 process mathematics | 300+ files, 5000+ Qed |
 | Gauge theory (Yang-Mills) | 100+ files, 2000+ Qed |
 | Navier-Stokes | 34 files, 869 Qed |
@@ -110,7 +110,7 @@ coqc -Q src ToS src/Demo.v
 ```
 src/
   ToS_Axioms.v               L3 (classic) + L4 (L4_witness) — the ONLY axioms
-  foundation/ (18 files)      Distinction, L1-L5 as theorems, P1-P4 derived, E/R/R,
+  foundation/ (22 files)      Distinction, L1-L5 as theorems, P1-P4 derived, E/R/R,
                               Asymmetric distinction, nested distinction → SM gauge group,
                               3 generations from L4, measurement, Λ, η
   Core (18 files)             L1-L5, P1-P4, E/R/R, Systems, Levels, Morphisms,
@@ -156,7 +156,7 @@ See [docs/FILE_MAP.md](docs/FILE_MAP.md) for every file with Qed count.
 
 ## Highlights
 
-### Foundation Formalization (18 files, 169 Qed)
+### Foundation Formalization (22 files, 229 Qed)
 
 The philosophical-formal gap is now **closed**: L1-L5 are theorems about Distinction,
 P1-P4 are derived from L1-L5, and the SM gauge group, generations, Λ, and η all
@@ -185,14 +185,25 @@ follow from the foundation.
 | Λ Prediction | 1 | 11 | Λ > 0 always, Λ ∝ 1/K naturally small, no fine-tuning |
 | Baryon η | 1 | 14 | Distinction → CP → Jarlskog → η > 0 necessary |
 
+**SM Uniqueness (4 files, 60 Qed):**
+
+| File | Qed | Key Result |
+|------|-----|------------|
+| ChiralityFromL2.v | 17 | L2 (non-contradiction) → chirality required; vector-like rejected |
+| AsymptoticFreedomBound.v | 17 | β₀ > 0 for SU(3) w/3 gen; AF fails at 9 gen |
+| ChiralAnomalyUniqueness.v | 16 | SM fermion content = unique nontrivial chiral solution |
+| SMUniqueness.v | 10 | Crown theorem: full SM derived from distinction |
+
 **Free parameters eliminated:**
 ```
 BEFORE FOUNDATION:               AFTER:
 sm_decomposition := [3,2,1]      [3,2,1] DERIVED from nested distinction
+Fermion content: empirical        DERIVED: unique chiral anomaly-free solution
 3 generations: empirical          3 = min for CP (L4 stops)
 Λ: "small somehow"               Λ > 0 necessary, ∝ 1/K
 η: "Sakharov conditions"          η > 0 necessary (balance impossible)
 Measurement: "collapse" postulate Distinction process converging
+Chirality: assumed                DERIVED from L2 (non-contradiction)
 ```
 
 ### Verified Programming Language (ToS-Lang)
@@ -471,7 +482,7 @@ Complete chain from first principles to:
 | Stdlib | 60+ | 1200+ |
 | Architecture of Reasoning | 6 | 117 |
 | Integration + Extraction | 2 | 11 |
-| **TOTAL** | **742** | **12,668** |
+| **TOTAL** | **746** | **12,728** |
 
 ### Admitted: **0**
 
