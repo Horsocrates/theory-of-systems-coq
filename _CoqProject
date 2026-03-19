@@ -744,3 +744,16 @@ src/zeta/ZeroMigration.v
 src/zeta/ZeroStructure.v
 src/zeta/ZetaProcess.v
 src/zeta/ZetaZeros.v
+# Gap B: ERR → Wilson bridge
+src/foundation/ERRWilsonBridge.v
+src/foundation/ERRComputationBridge.v
+# Gap C: GR = Process complete
+src/stdlib/EinsteinTensorProcess.v
+src/stdlib/ContinuumConvergence.v
+src/stdlib/GRProcessComplete.v
+# Gap D: QG computation
+src/stdlib/QGConcreteComputation.v
+src/stdlib/QGCompleteSynthesis.v
+# Gap A: [3,2,1] uniqueness
+src/foundation/DistinctionRepetition.v
+src/foundation/DepthThreeNecessity.v
