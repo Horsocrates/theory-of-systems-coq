@@ -1361,3 +1361,7 @@ src/stdlib/EigenvalueUnification.v
 src/stdlib/PathIntegralUnification.v
 src/stdlib/TopologyUnification.v
 src/stdlib/IndexAnomalyUnification.v
+# Track 2: Emergent Quantization
+src/stdlib/ProcessLatticeDispersion.v
+src/stdlib/ProcessLatticeCoulomb.v
+src/stdlib/ProcessEmergentQuantization.v
