@@ -1347,3 +1347,10 @@ src/stdlib/A2_InstantonClass.v
 src/stdlib/A2_MonopoleClass.v
 src/stdlib/H3_PersistentHomology.v
 src/stdlib/H3_PersistentExamples.v
+# Phase F3 final
+src/stdlib/H2_StructureSynthesis.v
+# Phase F4 final
+src/stdlib/I1_CorrelationFromZ.v
+src/stdlib/I1_PathIntegralSynthesis.v
+src/stdlib/I2_StatMech.v
+src/stdlib/I2_Thermodynamics.v
