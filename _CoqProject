@@ -1369,3 +1369,9 @@ src/stdlib/ProcessEmergentQuantization.v
 src/stdlib/TwoLoopWeinberg.v
 src/stdlib/TwoLoopMW.v
 src/stdlib/TwoLoopSynthesis.v
+# Track 4: Quantum Gravity
+src/stdlib/ProcessWheelerDeWitt.v
+src/stdlib/GravitonSpectrum.v
+src/stdlib/QGPathIntegral.v
+src/stdlib/GaugeGravityQG.v
+src/stdlib/QGSynthesis.v
