@@ -10,7 +10,8 @@
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
-Require Import QArith QArith_base Qabs.
+From Stdlib Require Import QArith QArith_base QArith.Qabs Lia ZArith.
+From Stdlib Require Import Lqa.
 From ToS Require Import process.ProcessCore.
 From ToS Require Import process.ProcessGaussianQ.
 
@@ -118,15 +119,35 @@ Theorem no_cloning : forall alpha beta,
           (s4_01 (true_clone_output alpha beta)).
 Proof.
   intros alpha beta Hpos Heq.
-  rewrite linear_01_zero in Heq.
-  rewrite true_clone_01 in Heq.
-  unfold qi_eq in Heq. destruct Heq as [Hr Hi].
-  unfold qi_zero in Hr, Hi. simpl in Hr, Hi.
-  (* qi_norm2 (qi_mul alpha beta) = re^2 + im^2 > 0 but re=0 and im=0 *)
-  unfold qi_norm2 in Hpos. unfold qi_mul in Hpos. simpl in Hpos.
-  assert (Hre : qi_re alpha * qi_re beta - qi_im alpha * qi_im beta == 0) by exact Hr.
-  assert (Him : qi_re alpha * qi_im beta + qi_im alpha * qi_re beta == 0) by exact Hi.
-  rewrite Hre in Hpos. rewrite Him in Hpos.
+  (* linear_clone gives 0 at (0,1), true_clone gives alpha*beta *)
+  assert (Hlin := linear_01_zero alpha beta).
+  assert (Htrue := true_clone_01 alpha beta).
+  unfold qi_eq in Heq, Hlin, Htrue. destruct Heq as [Heqr Heqi].
+  destruct Hlin as [Hlinr Hlini]. destruct Htrue as [Htruer Htruei].
+  unfold qi_zero in Hlinr, Hlini. simpl in Hlinr, Hlini.
+  (* linear(0,1) = 0 component-wise → Hlinr, Hlini *)
+  (* true_clone(0,1) = alpha*beta component-wise → Htruer, Htruei *)
+  (* Heqr: re(linear) == re(true_clone) *)
+  (* Combined: re(alpha*beta) == 0, im(alpha*beta) == 0 *)
+  (* But qi_norm2(alpha*beta) > 0: contradiction *)
+  (* From Hlinr: re(s4_01(linear)) == 0 *)
+  (* From Heqr: re(s4_01(linear)) == re(s4_01(true_clone)) *)
+  (* → re(s4_01(true_clone)) == 0 *)
+  (* From Htruei: im(s4_01(true_clone)) = im(alpha*beta) *)
+  (* Similarly for imaginary part *)
+  (* But qi_norm2(alpha*beta) > 0 requires re^2+im^2 > 0 *)
+  (* With both re=0 and im=0: norm=0, contradiction *)
+  assert (Hre0 : qi_re (s4_01 (true_clone_output alpha beta)) == 0).
+  { transitivity (qi_re (s4_01 (linear_clone_output alpha beta))).
+    - symmetry. exact Heqr.
+    - exact Hlinr. }
+  assert (Him0 : qi_im (s4_01 (true_clone_output alpha beta)) == 0).
+  { transitivity (qi_im (s4_01 (linear_clone_output alpha beta))).
+    - symmetry. exact Heqi.
+    - exact Hlini. }
+  unfold true_clone_output, s4_01 in Hre0, Him0. simpl in Hre0, Him0.
+  unfold qi_norm2, qi_mul in Hpos. simpl in Hpos.
+  rewrite Hre0 in Hpos. rewrite Him0 in Hpos.
   assert (Hval : 0 * 0 + 0 * 0 == 0) by ring.
   rewrite Hval in Hpos. lra.
 Qed.

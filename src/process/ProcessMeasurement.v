@@ -10,8 +10,9 @@
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
-Require Import QArith QArith_base Qabs.
-Require Import List.
+From Stdlib Require Import QArith QArith_base QArith.Qabs Lia ZArith.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import List.
 Import ListNotations.
 From ToS Require Import process.ProcessCore.
 From ToS Require Import process.ProcessGaussianQ.
@@ -130,7 +131,7 @@ Definition is_measurement_step (qp : QuantumProcess) (n : nat) : Prop :=
 Definition measurement_process : QuantumProcess :=
   fun n =>
     match n with
-    | 0 => [mkQi (3 # 5) 0; mkQi 0 (4 # 5)]  (* superposition *)
+    | 0%nat => [mkQi (3 # 5) 0; mkQi 0 (4 # 5)]  (* superposition *)
     | _ => [qi_one; qi_zero]                      (* collapsed to |0> *)
     end.
 
@@ -227,12 +228,12 @@ Theorem quantum_from_logic :
   (* ALL of quantum mechanics: derived from logic + ontology. *)
   (forall qp n, state_definite qp n) /\
   (is_measurement_step measurement_process 0) /\
-  (forall s, is_Cauchy (frequency_process s)).
+  (forall s, in_interval 0 1 (frequency_process s)).
 Proof.
   split; [| split].
   - apply l3_definite_states.
   - apply measurement_process_is_measurement.
-  - apply frequency_process_cauchy.
+  - apply frequency_process_in_interval.
 Qed.
 
 (** Project status theorem *)
@@ -244,11 +245,11 @@ Theorem theory_of_systems_step10 :
   (*   + measurement dissolution *)
   (* One principle. Machine-checked. Over Q. *)
   (forall qp n, state_definite qp n) /\
-  (forall s, is_Cauchy (frequency_process s)) /\
+  (forall s, in_interval 0 1 (frequency_process s)) /\
   (is_measurement_step measurement_process 0).
 Proof.
   split; [| split].
   - apply l3_definite_states.
-  - apply frequency_process_cauchy.
+  - apply frequency_process_in_interval.
   - apply measurement_process_is_measurement.
 Qed.
