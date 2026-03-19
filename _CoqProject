@@ -99,6 +99,10 @@ src/experimental/ZetaNegative.v
 src/extraction/GapCertificate.v
 src/extraction/GapCompute.v
 src/extraction/GapExtraction.v
+src/foundation/Distinction.v
+src/foundation/ERRFromDistinction.v
+src/foundation/LawsFromDistinction.v
+src/foundation/PrinciplesFromLaws.v
 src/gauge/Block3D.v
 src/gauge/BlockDiagonal2D.v
 src/gauge/CharacterTransfer.v
