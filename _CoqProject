@@ -1308,3 +1308,11 @@ src/stdlib/ProcessConnection.v
 src/stdlib/ProcessIntegration.v
 src/stdlib/ProcessLebesgue.v
 src/stdlib/ProcessMeasureSynthesis.v
+# Phase F1: QM = Spectral Theory
+src/stdlib/ProcessOperatorF.v
+src/stdlib/TransferAsOperator.v
+src/stdlib/HamiltonianProcess.v
+src/stdlib/ProcessBornRuleUnified.v
+src/stdlib/MeasurementProcessF.v
+src/stdlib/ProcessDiscreteOperator.v
+src/stdlib/SpectralSynthesis.v
