@@ -1365,3 +1365,7 @@ src/stdlib/IndexAnomalyUnification.v
 src/stdlib/ProcessLatticeDispersion.v
 src/stdlib/ProcessLatticeCoulomb.v
 src/stdlib/ProcessEmergentQuantization.v
+# Track 3: 2-Loop Predictions
+src/stdlib/TwoLoopWeinberg.v
+src/stdlib/TwoLoopMW.v
+src/stdlib/TwoLoopSynthesis.v
