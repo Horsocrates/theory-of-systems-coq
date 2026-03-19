@@ -18,15 +18,15 @@
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (* ========================================================================= *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.micromega.Lia.
-Require Import Coq.ZArith.ZArith.
-Require Import Coq.Bool.Bool.
-Require Import Coq.QArith.Qround.
-Require Import Coq.Lists.List.
-Require Import Coq.Logic.Classical_Pred_Type.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import ZArith.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Qround.
+From Stdlib Require Import List.
+From Stdlib Require Import Classical_Pred_Type.
 Import ListNotations.
 
 From ToS Require Import ToS_Axioms.

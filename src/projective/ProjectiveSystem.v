@@ -20,11 +20,11 @@
 (*  Author: Horsocrates | Date: March 2026                                    *)
 (* ========================================================================= *)
 
-Require Import QArith QArith.Qabs.
-Require Import Coq.micromega.Lqa.
-Require Import Lia.
-Require Import List.
-Require Import PeanoNat.
+From Stdlib Require Import QArith Qabs.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
 Import ListNotations.
 Open Scope Q_scope.
 

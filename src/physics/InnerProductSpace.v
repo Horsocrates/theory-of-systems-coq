@@ -17,8 +17,8 @@
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (* ========================================================================= *)
 
-Require Import QArith QArith.Qabs QArith.Qminmax List Lia ZArith.
-Require Import Coq.micromega.Lqa.
+From Stdlib Require Import QArith Qabs Qminmax List Lia ZArith.
+From Stdlib Require Import Lqa.
 Import ListNotations.
 Open Scope Q_scope.
 

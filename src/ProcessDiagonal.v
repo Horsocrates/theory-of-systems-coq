@@ -19,13 +19,13 @@
 (*                                                                           *)
 (* ========================================================================= *)
 
-Require Import Coq.Init.Nat.
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.micromega.Lia.
-Require Import Coq.Bool.Bool.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Lia.
+From Stdlib Require Import Bool.
 From ToS Require Import ToS_Axioms.
-Require Import Coq.Logic.Classical_Pred_Type.
+From Stdlib Require Import Classical_Pred_Type.
 Import ListNotations.
 
 From ToS Require Import ProcessTypes.

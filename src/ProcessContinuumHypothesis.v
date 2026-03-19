@@ -21,14 +21,14 @@
 (*                                                                           *)
 (* ========================================================================= *)
 
-Require Import Coq.Init.Nat.
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Arith.Compare_dec.
-Require Import Coq.Arith.Cantor.
-Require Import Coq.Arith.Wf_nat.
-Require Import Coq.micromega.Lia.
-Require Import Coq.Bool.Bool.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Compare_dec.
+From Stdlib Require Import Cantor.
+From Stdlib Require Import Wf_nat.
+From Stdlib Require Import Lia.
+From Stdlib Require Import Bool.
 Coercion is_true : bool >-> Sortclass.
 Import ListNotations.
 

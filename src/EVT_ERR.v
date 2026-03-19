@@ -32,14 +32,14 @@
 (*                                                                           *)
 (* ========================================================================= *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.QArith.Qminmax.
-Require Import Coq.micromega.Lia.
-Require Import Coq.ZArith.ZArith.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.PArith.Pnat.
-Require Import Coq.Lists.List.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Qminmax.
+From Stdlib Require Import Lia.
+From Stdlib Require Import ZArith.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import PArith.Pnat.
+From Stdlib Require Import List.
 From ToS Require Import ToS_Axioms.
 Import ListNotations.
 

@@ -8,16 +8,16 @@
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
 
-Require Import Coq.Init.Nat.
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
 Import ListNotations.
 
-Require Import Coq.extraction.ExtrOcamlBasic.
-Require Import Coq.extraction.ExtrOcamlNatInt.
-Require Import Coq.extraction.ExtrOcamlZInt.
+From Stdlib Require Import ExtrOcamlBasic.
+From Stdlib Require Import ExtrOcamlNatInt.
+From Stdlib Require Import ExtrOcamlZInt.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.
 From ToS Require Import Roles.

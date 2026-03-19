@@ -1,10 +1,10 @@
 (* TComplex: Complex Numbers as ToS System *)
 (* STATUS: 18 Qed, 0 Admitted, 0 axioms *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.Lists.List.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import List.
 Import ListNotations.
 Open Scope Q_scope.
 

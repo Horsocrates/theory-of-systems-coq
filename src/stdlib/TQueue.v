@@ -2,9 +2,9 @@
 (* STATUS: 14 Qed, 0 Admitted, 0 axioms *)
 (* Author: Horsocrates | Date: 2026 *)
 
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.micromega.Lia.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Lia.
 Import ListNotations.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.

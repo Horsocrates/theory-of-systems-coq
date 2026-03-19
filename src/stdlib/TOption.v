@@ -14,9 +14,9 @@
 (* Author: Horsocrates | Date: 2026                                          *)
 (* ========================================================================= *)
 
-Require Import Stdlib.Lists.List.
-Require Import Stdlib.Arith.PeanoNat.
-Require Import Stdlib.Bool.Bool.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Arith.PeanoNat.
+From Stdlib Require Import Bool.Bool.
 Import ListNotations.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.

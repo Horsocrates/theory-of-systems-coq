@@ -17,13 +17,13 @@
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
 
-Require Import Stdlib.QArith.QArith.
-Require Import Stdlib.QArith.Qabs.
-Require Import Stdlib.QArith.Qminmax.
-Require Import Stdlib.micromega.Lqa.
-Require Import Stdlib.micromega.Lia.
-Require Import Stdlib.ZArith.ZArith.
-Require Import Stdlib.Arith.PeanoNat.
+From Stdlib Require Import QArith.QArith.
+From Stdlib Require Import QArith.Qabs.
+From Stdlib Require Import QArith.Qminmax.
+From Stdlib Require Import micromega.Lqa.
+From Stdlib Require Import micromega.Lia.
+From Stdlib Require Import ZArith.ZArith.
+From Stdlib Require Import Arith.PeanoNat.
 
 From ToS Require Import CauchyReal.
 From ToS Require Import Completeness.

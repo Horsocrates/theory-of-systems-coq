@@ -36,10 +36,10 @@
 (* ========================================================================= *)
 
 From ToS Require Import ToS_Axioms.
-Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.Init.Nat.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Arith.Wf_nat.
+From Stdlib Require Import Classical_Pred_Type.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Wf_nat.
 
 Set Implicit Arguments.
 

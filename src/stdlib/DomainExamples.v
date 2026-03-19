@@ -10,13 +10,13 @@
     Author: Horsocrates | Date: March 2026
 *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qminmax.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.micromega.Lia.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Bool.Bool.
-Require Import Coq.Lists.List.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qminmax.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Bool.
+From Stdlib Require Import List.
 Import ListNotations.
 Open Scope Q_scope.
 From ToS Require Import stdlib.Statistics.

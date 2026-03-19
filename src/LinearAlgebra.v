@@ -17,7 +17,7 @@
   Qed: 20 (+4 Defined), Admitted: 0
 *)
 
-Require Import QArith List Lia.
+From Stdlib Require Import QArith List Lia.
 Import ListNotations.
 
 Open Scope Q_scope.

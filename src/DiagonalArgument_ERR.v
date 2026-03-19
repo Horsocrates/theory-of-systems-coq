@@ -49,14 +49,14 @@
 (*                                                                           *)
 (* ========================================================================= *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
 From ToS Require Import ToS_Axioms.
-Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Arith.Wf_nat.
-Require Import Coq.micromega.Lia.
-Require Import Coq.ZArith.ZArith.
+From Stdlib Require Import Classical_Pred_Type.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Wf_nat.
+From Stdlib Require Import Lia.
+From Stdlib Require Import ZArith.
 
 Set Implicit Arguments.
 Open Scope Q_scope.

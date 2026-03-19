@@ -13,10 +13,10 @@
     Author: Horsocrates | Date: March 2026
 *)
 
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Bool.Bool.
-Require Import Coq.micromega.Lia.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Lia.
 Import ListNotations.
 
 From ToS Require Import stdlib.Primes.

@@ -11,13 +11,13 @@
 (*  Author: Horsocrates | Date: March 2026                                *)
 (* ========================================================================= *)
 
-Require Import Stdlib.Init.Nat.
-Require Import Stdlib.Lists.List.
-Require Import Stdlib.Arith.PeanoNat.
-Require Import Stdlib.micromega.Lia.
-Require Import Stdlib.Bool.Bool.
-Require Import Stdlib.Arith.Compare_dec.
-Require Import Stdlib.QArith.QArith.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Arith.PeanoNat.
+From Stdlib Require Import micromega.Lia.
+From Stdlib Require Import Bool.Bool.
+From Stdlib Require Import Arith.Compare_dec.
+From Stdlib Require Import QArith.QArith.
 Import ListNotations.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.

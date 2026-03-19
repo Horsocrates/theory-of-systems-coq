@@ -15,14 +15,14 @@
 (*  Author: Horsocrates | Version: 0.1 | Date: January 2026                 *)
 (* ========================================================================= *)
 
-Require Import Coq.Init.Nat.
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.micromega.Lia.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Lia.
 From ToS Require Import ToS_Axioms.
-Require Import Coq.Logic.Classical_Pred_Type.
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
+From Stdlib Require Import Classical_Pred_Type.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
 Import ListNotations.
 
 (* ========================================================================= *)

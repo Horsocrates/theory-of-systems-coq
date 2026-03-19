@@ -11,8 +11,8 @@
     Author: Horsocrates | Date: March 2026
 *)
 
-Require Import Stdlib.Lists.List.
-Require Import Stdlib.Bool.Bool.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Bool.Bool.
 Import ListNotations.
 From ToS Require Import TheoryOfSystems_Core_ERR.
 From ToS Require Import stdlib.TOption.

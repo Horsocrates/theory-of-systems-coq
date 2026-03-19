@@ -26,7 +26,7 @@
 
 From ToS Require Import TheoryOfSystems_Core_ERR.
 From ToS Require Import IntensionalIdentity.
-Require Import List Lia.
+From Stdlib Require Import List Lia.
 Import ListNotations.
 
 (* ================================================================= *)

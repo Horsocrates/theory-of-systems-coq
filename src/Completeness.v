@@ -13,14 +13,14 @@
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (* ========================================================================= *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.QArith.Qminmax.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.micromega.Lia.
-Require Import Coq.ZArith.ZArith.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.PArith.Pnat.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Qminmax.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import ZArith.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import PArith.Pnat.
 
 From ToS Require Import Archimedean_ERR.
 From ToS Require Import CauchyReal.

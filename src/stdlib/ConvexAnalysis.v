@@ -15,11 +15,11 @@
     Author: Horsocrates | Date: March 2026
 *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.micromega.Lia.
-Require Import Coq.Lists.List.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import List.
 Import ListNotations.
 Open Scope Q_scope.
 
@@ -280,7 +280,7 @@ Proof.
   assert (x - y == 0) by (apply Q_sq_zero_eq; exact H1). lra.
 Qed.
 
-Require Import Coq.Classes.Morphisms.
+From Stdlib Require Import Morphisms.
 
 Lemma convex_at_endpoints : forall f (S : Q -> Prop) a b x,
   Proper (Qeq ==> Qeq) f ->

@@ -20,7 +20,7 @@
 *)
 
 From ToS Require Import TheoryOfSystems_Core_ERR.
-Require Import List Arith Lia.
+From Stdlib Require Import List Arith Lia.
 Import ListNotations.
 
 Generalizable Variables A.

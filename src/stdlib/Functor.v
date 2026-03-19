@@ -14,8 +14,8 @@
     Author: Horsocrates | Date: March 2026
 *)
 
-Require Import Coq.Lists.List.
-Require Import Coq.Bool.Bool.
+From Stdlib Require Import List.
+From Stdlib Require Import Bool.
 Import ListNotations.
 From ToS Require Import stdlib.Category.
 

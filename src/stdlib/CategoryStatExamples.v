@@ -14,11 +14,11 @@
     Author: Horsocrates | Date: March 2026
 *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.Lists.List.
-Require Import Coq.Bool.Bool.
-Require Import Coq.Arith.PeanoNat.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import List.
+From Stdlib Require Import Bool.
+From Stdlib Require Import PeanoNat.
 Import ListNotations.
 Open Scope Q_scope.
 

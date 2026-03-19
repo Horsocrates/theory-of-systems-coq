@@ -13,8 +13,8 @@
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
 
-Require Import Coq.Init.Nat.
-Require Import Coq.Lists.List.
+From Stdlib Require Import Init.Nat.
+From Stdlib Require Import List.
 Import ListNotations.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.

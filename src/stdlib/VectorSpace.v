@@ -9,12 +9,12 @@
     STATUS: 27 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026 *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.micromega.Lia.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Lia.
 Import ListNotations.
 Open Scope Q_scope.
 From ToS Require Import LinearAlgebra.

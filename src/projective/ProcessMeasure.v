@@ -14,11 +14,11 @@
   STATUS: 32 Qed + 1 Defined, 0 Admitted
 *)
 
-Require Import QArith QArith.Qabs QArith.Qminmax.
-Require Import ZArith.
-From Coq Require Import Lqa.
-Require Import Lia.
-Require Import List.
+From Stdlib Require Import QArith Qabs Qminmax.
+From Stdlib Require Import ZArith.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import List.
 Import ListNotations.
 
 Open Scope Q_scope.

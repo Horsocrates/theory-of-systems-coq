@@ -23,12 +23,12 @@
   AXIOMS: none (exact rational computation)
 *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.micromega.Lqa.
-Require Import Coq.micromega.Lia.
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Lqa.
+From Stdlib Require Import Lia.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
 Import ListNotations.
 
 Open Scope Q_scope.

@@ -11,7 +11,7 @@
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith.Qabs List Lia ZArith.
-From Coq Require Import Lqa.
+From Stdlib Require Import Lqa.
 Import ListNotations.
 Open Scope Q_scope.
 

@@ -14,11 +14,11 @@
 (* Author: Horsocrates | Date: 2026                                          *)
 (* ========================================================================= *)
 
-Require Import Coq.Lists.List.
-Require Import Coq.Arith.PeanoNat.
-Require Import Coq.Bool.Bool.
-Require Import Coq.micromega.Lia.
-Require Import Coq.Sorting.Permutation.
+From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Bool.
+From Stdlib Require Import Lia.
+From Stdlib Require Import Permutation.
 Import ListNotations.
 
 From ToS Require Import TheoryOfSystems_Core_ERR.

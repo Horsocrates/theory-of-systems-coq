@@ -11,8 +11,8 @@
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
-Require Import QArith QArith_base Qabs.
-Require Import List.
+From Stdlib Require Import QArith QArith_base Qabs.
+From Stdlib Require Import List.
 Import ListNotations.
 From ToS Require Import process.ProcessCore process.ProcessBounds.
 From ToS Require Import process.ProcessGeomCategory.

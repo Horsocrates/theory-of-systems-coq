@@ -29,13 +29,13 @@
 (*                                                                          *)
 (* ========================================================================= *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.QArith.Qminmax.
-Require Import Coq.QArith.Qfield.
-Require Import Coq.micromega.Lia.
-Require Import Coq.ZArith.ZArith.
-Require Import Coq.Setoids.Setoid.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Qminmax.
+From Stdlib Require Import Qfield.
+From Stdlib Require Import Lia.
+From Stdlib Require Import ZArith.
+From Stdlib Require Import Setoid.
 
 Open Scope Q_scope.
 

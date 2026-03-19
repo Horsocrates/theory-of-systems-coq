@@ -30,9 +30,9 @@
 (*                                                                           *)
 (* ========================================================================= *)
 
-Require Import Coq.QArith.QArith Coq.QArith.Qabs Coq.QArith.Qfield.
+From Stdlib Require Import QArith Qabs Qfield.
 From ToS Require Import ToS_Axioms.
-Require Import Coq.micromega.Lia Coq.ZArith.ZArith Coq.Setoids.Setoid.
+From Stdlib Require Import Lia ZArith Setoid.
 From ToS Require Import Archimedean_ERR.
 
 Open Scope Q_scope.

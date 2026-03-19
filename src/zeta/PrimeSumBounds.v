@@ -19,12 +19,12 @@
 (*  AXIOMS: none (beyond inherited from dependencies)                         *)
 (* ========================================================================= *)
 
-Require Import Stdlib.QArith.QArith.
-Require Import Stdlib.QArith.Qabs.
-Require Import Stdlib.micromega.Lqa.
-Require Import Stdlib.micromega.Lia.
-Require Import Stdlib.Lists.List.
-Require Import Stdlib.Arith.PeanoNat.
+From Stdlib Require Import QArith.QArith.
+From Stdlib Require Import QArith.Qabs.
+From Stdlib Require Import micromega.Lqa.
+From Stdlib Require Import micromega.Lia.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Arith.PeanoNat.
 Import ListNotations.
 
 From ToS Require Import SeriesConvergence.

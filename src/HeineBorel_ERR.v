@@ -47,14 +47,14 @@
   NO AXIOM OF INFINITY is used - all quantification is over natural numbers.
 *)
 
-Require Import Coq.QArith.QArith.
-Require Import Coq.QArith.Qabs.
-Require Import Coq.QArith.Qfield.
+From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
+From Stdlib Require Import Qfield.
 From ToS Require Import ToS_Axioms.
-Require Import Coq.micromega.Lia.
-Require Import Coq.ZArith.ZArith.
-Require Import Coq.Setoids.Setoid.
-Require Import Coq.Lists.List.
+From Stdlib Require Import Lia.
+From Stdlib Require Import ZArith.
+From Stdlib Require Import Setoid.
+From Stdlib Require Import List.
 Import ListNotations.
 
 Open Scope Q_scope.
