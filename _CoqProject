@@ -1316,3 +1316,9 @@ src/stdlib/ProcessBornRuleUnified.v
 src/stdlib/MeasurementProcessF.v
 src/stdlib/ProcessDiscreteOperator.v
 src/stdlib/SpectralSynthesis.v
+# Phase F2: Einstein as Process
+src/stdlib/R1_ReggeEinsteinConvergence.v
+src/stdlib/R2_ProcessEinsteinEq.v
+src/stdlib/R2_ProcessSingularity.v
+src/stdlib/R2_ProcessEinsteinSolutions.v
+src/stdlib/R2_EinsteinSynthesis.v
