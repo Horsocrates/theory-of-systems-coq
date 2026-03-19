@@ -1296,3 +1296,15 @@ src/stdlib/AdjunctionInstances.v
 src/stdlib/ChainComplex.v
 src/stdlib/SimplicialHomology.v
 src/stdlib/HomologySynthesis.v
+# Phase P2: Process Topology
+src/stdlib/ProcessSpace.v
+src/stdlib/ProcessCompactness.v
+src/stdlib/ProcessContinuity.v
+# Phase P5: Process Diff Geometry
+src/stdlib/ReggeDictionary.v
+src/stdlib/ProcessManifold.v
+src/stdlib/ProcessConnection.v
+# Phase P6: Process Measure
+src/stdlib/ProcessIntegration.v
+src/stdlib/ProcessLebesgue.v
+src/stdlib/ProcessMeasureSynthesis.v
