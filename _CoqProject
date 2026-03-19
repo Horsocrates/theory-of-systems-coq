@@ -1282,3 +1282,17 @@ src/process/ProcessStepFinalSynthesis.v
 src/process/ProcessKappaDerivation.v
 src/process/ProcessHierarchyResolution.v
 src/process/ProcessGaugeGravityUnification.v
+
+# === Process Mathematics N1 ===
+# Phase P1: Process Algebra
+src/stdlib/ProcessRing.v
+src/stdlib/ProcessSubring.v
+src/stdlib/ProcessModule.v
+src/stdlib/ProcessAlgebraSynthesis.v
+# Phase P3: General Adjunction
+src/stdlib/Adjunction.v
+src/stdlib/AdjunctionInstances.v
+# Phase P4: Homological Algebra
+src/stdlib/ChainComplex.v
+src/stdlib/SimplicialHomology.v
+src/stdlib/HomologySynthesis.v
