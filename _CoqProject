@@ -845,3 +845,7 @@ src/stdlib/EntropyProcessSynthesis.v
 src/stdlib/PerronFrobenius.v
 src/stdlib/CharacteristicPolynomial.v
 src/stdlib/PerronFrobeniusSynthesis.v
+# General SFT Entropy Process
+src/stdlib/SFTEntropyGeneral.v
+src/stdlib/SFTClassification.v
+src/stdlib/SFTClassificationSynthesis.v
