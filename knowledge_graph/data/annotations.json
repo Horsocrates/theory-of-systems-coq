@@ -1,0 +1,1048 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "created": "2026-03-20",
+    "project": "theory-of-systems-coq",
+    "stats": {
+      "qed": 13038,
+      "admitted": 0,
+      "files": 776,
+      "axioms_core": 2,
+      "axioms_domain": 4
+    },
+    "note": "All Admitted have been closed. Priority 1 (Admitted annotations) is moot."
+  },
+
+  "admitted": [],
+
+  "landmarks": [
+    {
+      "id": "unit_interval_uncountable_trisect_v2",
+      "file": "src/ShrinkingIntervals_ERR.v",
+      "line": 3569,
+      "status": "Qed",
+      "level": "10.1",
+      "level_major": 10,
+      "domains": ["set-theory", "analysis", "foundation"],
+      "philo_role": "Central result: the unit interval over Cauchy-process reals is uncountable. Resolves Cantor's theorem within ToS without Axiom of Infinity.",
+      "publications": ["ToS v5 Section 3.2", "Cantor 1874"],
+      "external_validation": {
+        "classical_name": "Cantor's Uncountability Theorem",
+        "classical_ref": "Cantor 1874; Rudin, Principles, Thm 2.43",
+        "match_type": "incomparable",
+        "checkpoints": [
+          {
+            "what": "Unit interval is uncountable",
+            "our_value": "For any enumeration E:nat->CauchyProcess, exists D in [0,1] not equivalent to any E(n). Via shrinking trisection intervals.",
+            "reference_value": "|[0,1]| = 2^aleph_0 > aleph_0, by diagonal/nested intervals on R",
+            "source": "Cantor 1874",
+            "match": true
+          }
+        ],
+        "discrepancies": ["We do not formulate cardinalities; result is constructive avoidance, not cardinal comparison"],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "forall E : nat -> CauchyProcess, exists D, forall n, ~ process_equiv D (E n)",
+        "classical": {
+          "statement": "|[0,1]| > aleph_0; equivalently, no bijection N -> [0,1]",
+          "framework": "ZFC",
+          "axioms_used": ["Axiom of Infinity", "Power Set"],
+          "standard_proof": "Cantor's diagonal or nested intervals on complete R",
+          "reference": "Rudin, Principles of Mathematical Analysis, Thm 2.43"
+        },
+        "comparison": {
+          "what_we_share": "No enumeration exhausts [0,1]",
+          "ontological_diff": "We use processes (nat->Q) instead of completed reals. No actual infinity assumed.",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["Axiom of Infinity", "Power Set", "Replacement"],
+            "we_avoid": ["Axiom of Infinity"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Trisection intervals guarantee 2/3 of interval is free at each step; classical uses binary nested intervals or diagonal on digits",
+          "strength_comparison": "incomparable",
+          "strength_detail": "We avoid Axiom of Infinity but work over Q-Cauchy processes, not completed reals. Our result is constructive (computes the avoided point) but in a weaker number system.",
+          "gaps_vs_classical": ["No cardinality arithmetic", "No 2^aleph_0 = c"],
+          "advantages_vs_classical": ["No Axiom of Infinity", "Constructive witness", "Interval-based avoids digit stability issues"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Central uncountability result — proves the process-real continuum is genuinely larger than the naturals",
+        "used_by_chain": ["ProcessContinuumHypothesis.process_continuum_hypothesis"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Interval-based trisection avoids digit stability (Qfloor discontinuity); sync invariant 2*delta < w/3 ensures convergence"
+      }
+    },
+
+    {
+      "id": "EVT_strong_process",
+      "file": "src/EVT_idx.v",
+      "line": 666,
+      "status": "Qed",
+      "level": "10.2",
+      "level_major": 10,
+      "domains": ["analysis", "foundation"],
+      "philo_role": "Extreme Value Theorem via L5-Resolution: constructive argmax on grid refinement. Demonstrates P4 finite actuality — maximum found by finite algorithm.",
+      "publications": ["Weierstrass; Rudin, Principles, Thm 4.16"],
+      "external_validation": {
+        "classical_name": "Extreme Value Theorem",
+        "classical_ref": "Weierstrass; Rudin, Principles, Thm 4.16",
+        "match_type": "ours_stronger",
+        "checkpoints": [
+          {
+            "what": "Continuous f on [a,b] attains maximum",
+            "our_value": "Constructive argmax via L5-Resolution (leftmost index on grid), process converges as Cauchy",
+            "reference_value": "Existence by compactness + continuity",
+            "source": "Rudin Thm 4.16",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "For Lipschitz f on [a,b], sup_process (grid refinement argmax) is Cauchy and stays in [a,b]",
+        "classical": {
+          "statement": "f continuous on compact [a,b] => exists x in [a,b]: f(x) = sup f([a,b])",
+          "framework": "ZFC",
+          "axioms_used": ["Axiom of Infinity", "Heine-Borel"],
+          "standard_proof": "Compactness of [a,b] + continuity => f([a,b]) compact => sup attained",
+          "reference": "Rudin, Principles, Thm 4.16"
+        },
+        "comparison": {
+          "what_we_share": "Maximum is attained on bounded closed interval",
+          "ontological_diff": "We compute argmax as limit of grid refinements (process), not by invoking compactness",
+          "axiom_diff": {
+            "we_use": ["classic (L3)", "L4_witness"],
+            "they_use": ["Axiom of Infinity", "Heine-Borel (from completeness)"],
+            "we_avoid": ["Heine-Borel", "Axiom of Infinity"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "L5-Resolution selects leftmost maximum on each grid; Lipschitz bound controls grid error",
+          "strength_comparison": "ours_stronger",
+          "strength_detail": "Constructive algorithm: given f and [a,b], we COMPUTE the argmax process. Classical only asserts existence.",
+          "gaps_vs_classical": ["Requires Lipschitz, not just continuity"],
+          "advantages_vs_classical": ["Constructive argmax algorithm", "No Heine-Borel needed", "Deterministic (L5 tie-breaking)"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Constructive extreme value theorem — finds maximum by grid refinement, not by compactness argument",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Index-based argmax avoids Qeq vs Leibniz equality issues; L5 provides deterministic tie-breaking"
+      }
+    },
+
+    {
+      "id": "ivt_cauchy_real",
+      "file": "src/IVT_CauchyReal.v",
+      "line": 309,
+      "status": "Qed",
+      "level": "10.3",
+      "level_major": 10,
+      "domains": ["analysis", "foundation"],
+      "philo_role": "Intermediate Value Theorem: epsilon-IVT over Q. Cannot find exact zero (impossible over Q), but finds root process converging to zero.",
+      "publications": ["Bolzano 1817; Rudin, Principles, Thm 4.23"],
+      "external_validation": {
+        "classical_name": "Intermediate Value Theorem",
+        "classical_ref": "Bolzano 1817; Rudin, Principles, Thm 4.23",
+        "match_type": "weaker",
+        "checkpoints": [
+          {
+            "what": "Continuous f with f(a)<0<f(b) has root in (a,b)",
+            "our_value": "For all eps>0, exists x in [a,b]: |f(x)| < eps. Root converges as Cauchy process.",
+            "reference_value": "exists c in (a,b): f(c) = 0 (exact zero)",
+            "source": "Rudin Thm 4.23",
+            "match": true
+          }
+        ],
+        "discrepancies": ["We find epsilon-approximate roots, not exact zero (impossible over Q)"],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "forall eps > 0, exists x in [a,b]: |f(x)| < eps (Cauchy process of approximate roots)",
+        "classical": {
+          "statement": "f continuous, f(a) < 0 < f(b) => exists c in (a,b): f(c) = 0",
+          "framework": "ZFC",
+          "axioms_used": ["Completeness of R (LUB)"],
+          "standard_proof": "Bisection + completeness of R => limit point is exact zero",
+          "reference": "Rudin, Principles, Thm 4.23"
+        },
+        "comparison": {
+          "what_we_share": "Bisection algorithm converges to root",
+          "ontological_diff": "Over Q, f may never be exactly 0. Our root is a process (nat->Q) approaching zero.",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["Completeness of R"],
+            "we_avoid": ["Axiom of Infinity", "Completeness"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Same bisection; we stop at epsilon-approximation, they take the limit",
+          "strength_comparison": "ours_weaker",
+          "strength_detail": "We guarantee |f(x)| < eps for any eps, not f(x) = 0. This is inherent to working over Q.",
+          "gaps_vs_classical": ["No exact zero", "Requires Lipschitz continuity"],
+          "advantages_vs_classical": ["No completeness axiom", "Constructive algorithm", "Works over Q directly"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Epsilon-IVT: constructive root-finding over Q via bisection process",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Exact zero impossible over Q; epsilon-IVT is the strongest achievable statement without R completeness"
+      }
+    },
+
+    {
+      "id": "Q_positive_countable",
+      "file": "src/Countability_Q.v",
+      "line": 470,
+      "status": "Qed",
+      "level": "10.4",
+      "level_major": 10,
+      "domains": ["set-theory", "arithmetic"],
+      "philo_role": "Constructive proof that positive rationals are countable: explicit bijection N->Q+.",
+      "publications": ["Cantor 1874 (diagonal enumeration)"],
+      "external_validation": {
+        "classical_name": "Countability of Q",
+        "classical_ref": "Cantor 1874; Enderton, Elements of Set Theory, Ch 6",
+        "match_type": "ours_stronger",
+        "checkpoints": [
+          {
+            "what": "Q is countable",
+            "our_value": "Explicit computable bijection N -> Q+, no Axiom of Choice",
+            "reference_value": "Existence of bijection via diagonal argument, typically uses AC for well-ordering",
+            "source": "Cantor 1874",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Explicit injective enumeration of positive rationals with computable inverse",
+        "classical": {
+          "statement": "|Q| = aleph_0 (Q is countably infinite)",
+          "framework": "ZFC",
+          "axioms_used": ["Axiom of Infinity"],
+          "standard_proof": "Cantor's diagonal pairing or Stern-Brocot tree",
+          "reference": "Enderton, Elements of Set Theory, Ch 6"
+        },
+        "comparison": {
+          "what_we_share": "Q is countable",
+          "ontological_diff": "We construct the bijection explicitly; classical asserts existence",
+          "axiom_diff": {
+            "we_use": [],
+            "they_use": ["Axiom of Infinity"],
+            "we_avoid": ["AC", "Axiom of Infinity"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Explicit pairing function on coprime pairs",
+          "strength_comparison": "ours_stronger",
+          "strength_detail": "Fully constructive: no AC, computable bijection",
+          "gaps_vs_classical": [],
+          "advantages_vs_classical": ["No AC", "Computable", "Explicit inverse"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Establishes Q is countable — needed for uncountability contrast and PCH",
+        "used_by_chain": ["ProcessContinuumHypothesis"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Direct bijection avoids AC; positive rationals suffice for contrast with uncountable [0,1]"
+      }
+    },
+
+    {
+      "id": "Schroeder_Bernstein",
+      "file": "src/SchroederBernstein_ERR.v",
+      "line": 357,
+      "status": "Qed",
+      "level": "10.5",
+      "level_major": 10,
+      "domains": ["set-theory", "foundation"],
+      "philo_role": "Cantor-Schroeder-Bernstein theorem: injections both ways implies bijection. Key structural result for cardinality theory.",
+      "publications": ["Schroeder 1898, Bernstein 1898; Halmos, Naive Set Theory"],
+      "external_validation": {
+        "classical_name": "Cantor-Schroeder-Bernstein Theorem",
+        "classical_ref": "Schroeder 1898, Bernstein 1898; Halmos, Naive Set Theory, Sec 22",
+        "match_type": "exact",
+        "checkpoints": [
+          {
+            "what": "Injections A->B and B->A imply bijection A<->B",
+            "our_value": "Same statement, proved using classic (L3) for orbit classification",
+            "reference_value": "Same, using LEM for orbit classification",
+            "source": "Halmos, Sec 22",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Injections f:A->B and g:B->A imply exists bijection h:A->B",
+        "classical": {
+          "statement": "Same",
+          "framework": "ZFC",
+          "axioms_used": ["LEM (for orbit classification)"],
+          "standard_proof": "Partition A into orbits under g(f(-)); each orbit contributes to bijection",
+          "reference": "Halmos, Naive Set Theory, Sec 22"
+        },
+        "comparison": {
+          "what_we_share": "Identical statement and proof structure",
+          "ontological_diff": "Minimal — uses classic (L3) which is our LEM",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["LEM"],
+            "we_avoid": [],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Same orbit-based proof",
+          "strength_comparison": "equivalent",
+          "strength_detail": "Formulations are equivalent; both use LEM",
+          "gaps_vs_classical": [],
+          "advantages_vs_classical": ["Machine-checked"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Foundational set-theoretic tool for cardinality comparisons",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Standard CSB; uses classic for orbit classification (unavoidable)"
+      }
+    },
+
+    {
+      "id": "Heine_Borel",
+      "file": "src/HeineBorel_ERR.v",
+      "line": 536,
+      "status": "Qed",
+      "level": "10.6",
+      "level_major": 10,
+      "domains": ["topology", "analysis"],
+      "philo_role": "Heine-Borel compactness: open cover of [a,b] has finite subcover. Proved with Lebesgue number assumption.",
+      "publications": ["Heine 1872, Borel 1895; Munkres, Topology, Thm 27.1"],
+      "external_validation": {
+        "classical_name": "Heine-Borel Theorem",
+        "classical_ref": "Heine 1872, Borel 1895; Munkres, Topology, Thm 27.1",
+        "match_type": "weaker",
+        "checkpoints": [
+          {
+            "what": "Closed bounded interval is compact",
+            "our_value": "Open cover with Lebesgue number assumption has finite subcover",
+            "reference_value": "Every open cover of [a,b] in R has finite subcover (no extra assumptions)",
+            "source": "Munkres Thm 27.1",
+            "match": true
+          }
+        ],
+        "discrepancies": ["Our version requires Lebesgue number as hypothesis (cannot derive it over Q)"],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Open cover with Lebesgue number lambda > 0 has finite subcover of size ceil((b-a)/lambda)",
+        "classical": {
+          "statement": "Every open cover of [a,b] in R has finite subcover",
+          "framework": "ZFC",
+          "axioms_used": ["Completeness of R"],
+          "standard_proof": "Bisection + completeness => Lebesgue number exists => finite subcover",
+          "reference": "Munkres, Topology, Thm 27.1"
+        },
+        "comparison": {
+          "what_we_share": "Finite subcover extraction from open cover",
+          "ontological_diff": "Classical derives Lebesgue number from completeness; we assume it",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["Completeness of R"],
+            "we_avoid": ["Completeness"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Given Lebesgue number, finite cover is straightforward grid argument",
+          "strength_comparison": "ours_weaker",
+          "strength_detail": "We need Lebesgue number as hypothesis; classical derives it from completeness. [0,1] over Q is not compact.",
+          "gaps_vs_classical": ["Cannot derive Lebesgue number without R completeness"],
+          "advantages_vs_classical": ["Explicit finite cover size bound: ceil((b-a)/lambda)"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Compactness with Lebesgue number — strongest Heine-Borel achievable over Q",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "[0,1] over Q is genuinely not compact; Lebesgue number assumption is the honest bridge"
+      }
+    },
+
+    {
+      "id": "P1_no_self_membership",
+      "file": "src/TheoryOfSystems_Core_ERR.v",
+      "line": 126,
+      "status": "Qed",
+      "level": "4.1",
+      "level_major": 4,
+      "domains": ["foundation"],
+      "philo_role": "Principle 1 (Everything is a system): no level contains itself. Structural resolution of Russell's paradox — self-membership is impossible by construction.",
+      "publications": ["ToS v5 Section 1.1"],
+      "external_validation": {
+        "classical_name": "Axiom of Regularity / Foundation",
+        "classical_ref": "Zermelo 1930; Kunen, Set Theory, Ch I.6",
+        "match_type": "ours_stronger",
+        "checkpoints": [
+          {
+            "what": "No set contains itself",
+            "our_value": "Derived from Level hierarchy: level_lt is irreflexive by induction",
+            "reference_value": "Axiom of Regularity: every non-empty set has element disjoint from itself",
+            "source": "Kunen Ch I.6",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "forall L, ~ (L << L) — no level is strictly below itself",
+        "classical": {
+          "statement": "Axiom of Regularity: forall S, S != {} => exists x in S, x cap S = {}",
+          "framework": "ZFC",
+          "axioms_used": ["Axiom of Regularity (postulated)"],
+          "standard_proof": "Postulated as axiom",
+          "reference": "Kunen, Set Theory, Ch I.6"
+        },
+        "comparison": {
+          "what_we_share": "No self-containment",
+          "ontological_diff": "We DERIVE it from Level induction; ZFC POSTULATES it as axiom",
+          "axiom_diff": {
+            "we_use": [],
+            "they_use": ["Axiom of Regularity"],
+            "we_avoid": ["Axiom of Regularity"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Induction on Level type (well-founded by construction)",
+          "strength_comparison": "ours_stronger",
+          "strength_detail": "Derived theorem vs postulated axiom. Our hierarchy makes self-membership structurally impossible.",
+          "gaps_vs_classical": [],
+          "advantages_vs_classical": ["Derived, not axiom", "Structural impossibility, not prohibition"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Foundation of ToS hierarchy — levels cannot self-contain, blocking Russell's paradox",
+        "used_by_chain": ["russell_paradox_blocked"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Level is inductive (L1, LS L) so irreflexivity follows by structural induction"
+      }
+    },
+
+    {
+      "id": "russell_paradox_blocked",
+      "file": "src/TheoryOfSystems_Core_ERR.v",
+      "line": 248,
+      "status": "Qed",
+      "level": "4.2",
+      "level_major": 4,
+      "domains": ["foundation"],
+      "philo_role": "Demonstration that Russell's paradox is structurally impossible: cannot construct a criterion whose domain equals its codomain level.",
+      "publications": ["Russell 1901; ToS v5 Section 1.2"],
+      "external_validation": {
+        "classical_name": "Russell's Paradox Resolution",
+        "classical_ref": "Russell 1901; ZFC resolves via Comprehension restriction",
+        "match_type": "ours_stronger",
+        "checkpoints": [
+          {
+            "what": "Russell's set {x : x not in x} cannot be formed",
+            "our_value": "Structurally impossible: criterion domain and codomain must be at different levels",
+            "reference_value": "ZFC restricts Comprehension to subsets of existing sets",
+            "source": "Kunen Ch I.3",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Cannot construct criterion C at level L that examines level L elements (type error)",
+        "classical": {
+          "statement": "Axiom of Comprehension restricted: {x in A : phi(x)} for existing A",
+          "framework": "ZFC",
+          "axioms_used": ["Restricted Comprehension"],
+          "standard_proof": "Type restriction on set formation",
+          "reference": "Kunen, Set Theory"
+        },
+        "comparison": {
+          "what_we_share": "Self-referential set formation is blocked",
+          "ontological_diff": "ZFC restricts formation rules; ToS makes self-reference impossible by level structure",
+          "axiom_diff": {
+            "we_use": [],
+            "they_use": ["Restricted Comprehension"],
+            "we_avoid": ["Comprehension"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Level hierarchy prevents domain=codomain; ZFC prevents unrestricted comprehension",
+          "strength_comparison": "ours_stronger",
+          "strength_detail": "Structural impossibility vs syntactic restriction. Our levels make the paradox untypeable.",
+          "gaps_vs_classical": [],
+          "advantages_vs_classical": ["Structural, not syntactic", "No separate axiom needed"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Demonstrates that ToS hierarchy structurally prevents Russell-type paradoxes",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Direct proof that self-referential criterion construction fails at type level"
+      }
+    },
+
+    {
+      "id": "iterate_is_cauchy",
+      "file": "src/FixedPoint.v",
+      "line": 263,
+      "status": "Qed",
+      "level": "10.7",
+      "level_major": 10,
+      "domains": ["analysis", "topology", "ai-ml"],
+      "philo_role": "Banach fixed-point theorem: iteration of contraction mapping produces Cauchy sequence converging to unique fixed point.",
+      "publications": ["Banach 1922; Rudin, Principles, Thm 9.23"],
+      "external_validation": {
+        "classical_name": "Banach Fixed-Point Theorem",
+        "classical_ref": "Banach 1922; Rudin, Functional Analysis, Thm 9.23",
+        "match_type": "equivalent",
+        "checkpoints": [
+          {
+            "what": "Contraction on complete metric space has unique fixed point",
+            "our_value": "Iteration of contraction (rate < 1) on Q produces Cauchy sequence; convergence rate is geometric",
+            "reference_value": "Same with convergence to actual fixed point in complete space",
+            "source": "Banach 1922",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "is_contraction f r, 0 < r < 1 => iterate f x0 is Cauchy (convergence rate r^n)",
+        "classical": {
+          "statement": "T contraction on complete (X,d) => exists unique x*: T(x*) = x*, and T^n(x0) -> x*",
+          "framework": "ZFC",
+          "axioms_used": ["Completeness of metric space"],
+          "standard_proof": "Geometric series bound on d(x_n, x_{n+1})",
+          "reference": "Rudin, Functional Analysis, Thm 9.23"
+        },
+        "comparison": {
+          "what_we_share": "Geometric convergence of iterates",
+          "ontological_diff": "We prove Cauchy property; classical proves convergence to fixed point in complete space",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["Completeness"],
+            "we_avoid": ["Completeness axiom"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Same geometric bound; we stop at Cauchy, they invoke completeness for limit",
+          "strength_comparison": "equivalent",
+          "strength_detail": "Equivalent modulo completeness — our Cauchy IS their convergence in our framework",
+          "gaps_vs_classical": ["No explicit fixed point (only Cauchy sequence)"],
+          "advantages_vs_classical": ["Works over Q", "Used by ReasoningConvergence.v for AI pipeline"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Banach fixed-point — foundation for convergence analysis, used by ReasoningConvergence and GradientDescent",
+        "used_by_chain": ["ReasoningConvergence.pipeline_converges", "GradientDescent"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Contraction rate as Q parameter; Cauchy is the natural completeness-free convergence notion"
+      }
+    },
+
+    {
+      "id": "bolzano_weierstrass",
+      "file": "src/analysis/BolzanoWeierstrass.v",
+      "line": 444,
+      "status": "Qed",
+      "level": "10.3",
+      "level_major": 10,
+      "domains": ["analysis", "topology"],
+      "philo_role": "Bolzano-Weierstrass: bounded sequence has convergent (Cauchy) subsequence.",
+      "publications": ["Bolzano 1817, Weierstrass; Rudin, Principles, Thm 3.6"],
+      "external_validation": {
+        "classical_name": "Bolzano-Weierstrass Theorem",
+        "classical_ref": "Bolzano 1817, Weierstrass; Rudin, Principles, Thm 3.6",
+        "match_type": "equivalent",
+        "checkpoints": [
+          {
+            "what": "Every bounded sequence in R has convergent subsequence",
+            "our_value": "Bounded Q-process has Cauchy subsequential process (bisection extraction)",
+            "reference_value": "Every bounded real sequence has convergent subsequence",
+            "source": "Rudin Thm 3.6",
+            "match": true
+          }
+        ],
+        "discrepancies": [],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Bounded process has Cauchy cluster point process",
+        "classical": {
+          "statement": "Every bounded sequence in R has convergent subsequence",
+          "framework": "ZFC",
+          "axioms_used": ["Completeness of R"],
+          "standard_proof": "Bisection of interval + completeness",
+          "reference": "Rudin, Principles, Thm 3.6"
+        },
+        "comparison": {
+          "what_we_share": "Bisection extraction of convergent subsequence",
+          "ontological_diff": "Cauchy cluster point vs actual limit",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["Completeness"],
+            "we_avoid": ["Completeness"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Same bisection; we prove Cauchy, they prove convergence",
+          "strength_comparison": "equivalent",
+          "strength_detail": "Equivalent modulo completeness identification",
+          "gaps_vs_classical": [],
+          "advantages_vs_classical": ["Machine-checked", "Works over Q processes"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Sequential compactness for bounded processes — key analysis tool",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Bisection interval halving extracts cluster point as Cauchy process"
+      }
+    },
+
+    {
+      "id": "ftc_grid",
+      "file": "src/RiemannIntegration.v",
+      "line": 314,
+      "status": "Qed",
+      "level": "8.5",
+      "level_major": 8,
+      "domains": ["analysis"],
+      "philo_role": "Fundamental Theorem of Calculus on grid: integral of derivative recovers function increment up to grid error.",
+      "publications": ["Newton 1687, Leibniz 1675; Rudin, Principles, Thm 6.21"],
+      "external_validation": {
+        "classical_name": "Fundamental Theorem of Calculus",
+        "classical_ref": "Newton/Leibniz; Rudin, Principles, Thm 6.21",
+        "match_type": "equivalent",
+        "checkpoints": [
+          {
+            "what": "Integral of f' on [a,b] equals f(b) - f(a)",
+            "our_value": "Grid Riemann sum of f' approximates f(b)-f(a) with error controlled by grid size and Lipschitz constant",
+            "reference_value": "int_a^b f'(x)dx = f(b) - f(a) (exact)",
+            "source": "Rudin Thm 6.21",
+            "match": true
+          }
+        ],
+        "discrepancies": ["Our version is approximate (grid-based); classical is exact limit"],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Riemann sum of f' on N-grid approximates f(b)-f(a) with error O(1/N)",
+        "classical": {
+          "statement": "If F' = f continuous on [a,b], then int_a^b f = F(b) - F(a)",
+          "framework": "ZFC",
+          "axioms_used": ["Completeness of R", "Riemann integral as limit"],
+          "standard_proof": "Mean Value Theorem + limit of Riemann sums",
+          "reference": "Rudin, Principles, Thm 6.21"
+        },
+        "comparison": {
+          "what_we_share": "FTC relates differentiation and integration",
+          "ontological_diff": "We use finite grid sums; classical uses limit of Riemann sums",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["Completeness"],
+            "we_avoid": ["Riemann integral as limit"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Telescoping sum + Lipschitz error control",
+          "strength_comparison": "equivalent",
+          "strength_detail": "As grid refines (N->inf), our error -> 0, recovering classical FTC",
+          "gaps_vs_classical": ["Approximate, not exact"],
+          "advantages_vs_classical": ["Explicit error bound", "Computable"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Fundamental Theorem of Calculus — connects Riemann sums to antiderivatives with explicit error",
+        "used_by_chain": ["ftc_monotone", "ftc_strict_monotone", "TaylorSeries"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Grid-based avoids limits; error bound is explicit and computable"
+      }
+    },
+
+    {
+      "id": "process_continuum_hypothesis",
+      "file": "src/ProcessContinuumHypothesis.v",
+      "line": 619,
+      "status": "Qed",
+      "level": "10.7",
+      "level_major": 10,
+      "domains": ["set-theory", "foundation", "physics"],
+      "philo_role": "Process Continuum Hypothesis: every closed binary collection is either enumerable or contains a perfect subset. The classical CH 'dissolves' — the question transforms into a structural classification.",
+      "publications": ["Godel 1940, Cohen 1963; ToS v5 Section 3.4"],
+      "external_validation": {
+        "classical_name": "Continuum Hypothesis",
+        "classical_ref": "Cantor 1878; Godel 1940 (consistency), Cohen 1963 (independence)",
+        "match_type": "novel",
+        "checkpoints": [
+          {
+            "what": "Is there a set S with aleph_0 < |S| < 2^aleph_0?",
+            "our_value": "Question dissolves: every closed collection is enumerable OR has perfect subset (no intermediate)",
+            "reference_value": "Independent of ZFC (Godel-Cohen)",
+            "source": "Godel 1940, Cohen 1963",
+            "match": false
+          }
+        ],
+        "discrepancies": ["Classical CH is about cardinality; PCH reframes as structural classification"],
+        "validation_status": "novel_no_ref"
+      },
+      "classical_counterpart": {
+        "our_statement": "Every closed binary collection is either enumerable or contains a perfect subset",
+        "classical": {
+          "statement": "There is no set S with aleph_0 < |S| < 2^aleph_0 (CH); independent of ZFC",
+          "framework": "ZFC",
+          "axioms_used": ["ZFC (but independent)"],
+          "standard_proof": "Godel: L model satisfies CH. Cohen: forcing produces ~CH model.",
+          "reference": "Kunen, Set Theory, Ch VII"
+        },
+        "comparison": {
+          "what_we_share": "Address the continuum problem",
+          "ontological_diff": "Classical CH is about cardinal numbers; PCH is about structural classification of process collections",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["ZFC (but CH is independent)"],
+            "we_avoid": ["Axiom of Infinity", "Power Set"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "We prove a dichotomy theorem; they show independence",
+          "strength_comparison": "novel",
+          "strength_detail": "PCH is a different question than CH. It dissolves rather than resolves the continuum problem.",
+          "gaps_vs_classical": ["Not directly comparable to CH"],
+          "advantages_vs_classical": ["Decidable (proved, not independent)", "Structural insight", "Connects to physics via SpectralDichotomy"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Dissolution of the continuum hypothesis — reframes cardinality question as structural dichotomy",
+        "used_by_chain": ["SpectralDichotomy.spectral_dichotomy"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Binary processes give natural countable/uncountable classification without cardinal arithmetic"
+      }
+    },
+
+    {
+      "id": "spectral_dichotomy",
+      "file": "src/physics/SpectralDichotomy.v",
+      "line": 106,
+      "status": "Qed",
+      "level": "11.1",
+      "level_major": 11,
+      "domains": ["physics", "foundation"],
+      "philo_role": "Novel result: eigenspace spectrum is either discrete (enumerable) or continuous (perfect subset). Connects PCH to quantum mechanics — observable = process, measurement = approximation.",
+      "publications": ["ToS v5 Section 4.2 (novel)"],
+      "external_validation": {
+        "classical_name": "N/A (novel)",
+        "classical_ref": "Novel — no direct classical counterpart",
+        "match_type": "novel",
+        "checkpoints": [
+          {
+            "what": "Spectrum classification",
+            "our_value": "Every spectrum is either discrete (enumerable eigenvalues) or continuous (has perfect subset)",
+            "reference_value": "In functional analysis: spectrum = point + continuous + residual (Dunford-Schwartz)",
+            "source": "Dunford-Schwartz, Thm VII.3.13",
+            "match": false
+          }
+        ],
+        "discrepancies": ["Classical spectral theory has 3-part decomposition; ours is 2-part (from PCH)"],
+        "validation_status": "novel_no_ref"
+      },
+      "classical_counterpart": {
+        "our_statement": "Eigenspace collection is either enumerable or contains perfect subset (dichotomy from PCH)",
+        "classical": {
+          "statement": "Spectrum of operator = point spectrum + continuous spectrum + residual spectrum",
+          "framework": "Hilbert space / ZFC",
+          "axioms_used": ["Completeness of Hilbert space", "Axiom of Choice"],
+          "standard_proof": "Spectral theorem for self-adjoint operators",
+          "reference": "Reed-Simon, Methods of Mathematical Physics, Vol I"
+        },
+        "comparison": {
+          "what_we_share": "Classification of spectral types",
+          "ontological_diff": "We classify by cardinality structure (PCH dichotomy); classical classifies by operator properties",
+          "axiom_diff": {
+            "we_use": ["classic (L3)"],
+            "they_use": ["AC", "Completeness", "Axiom of Infinity"],
+            "we_avoid": ["AC", "Completeness", "Axiom of Infinity"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "PCH dichotomy applied to eigenspace collection",
+          "strength_comparison": "novel",
+          "strength_detail": "Different framework — our dichotomy is structural, theirs is analytic",
+          "gaps_vs_classical": ["No residual spectrum", "No spectral theorem for operators"],
+          "advantages_vs_classical": ["Derives from PCH (no operator theory needed)", "Connects set theory to physics"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Bridge from PCH to physics: spectrum classification follows from process continuum hypothesis",
+        "used_by_chain": [],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Direct consequence of PCH applied to eigenspace collection"
+      }
+    },
+
+    {
+      "id": "type_safety",
+      "file": "src/TypeSafety.v",
+      "line": 27,
+      "status": "Qed",
+      "level": "11.2",
+      "level_major": 11,
+      "domains": ["type-theory"],
+      "philo_role": "Type Safety (Progress + Preservation) for ToS-Lang: well-typed expressions don't get stuck. Foundation for verified compilation.",
+      "publications": ["Wright-Felleisen 1994; Pierce, TAPL, Ch 8"],
+      "external_validation": {
+        "classical_name": "Type Safety (Progress + Preservation)",
+        "classical_ref": "Wright-Felleisen 1994; Pierce, Types and Programming Languages, Ch 8",
+        "match_type": "equivalent",
+        "checkpoints": [
+          {
+            "what": "Well-typed programs don't get stuck",
+            "our_value": "type_safety: well-typed expression either is value, steps, or is benign-stuck (EResolve on non-const)",
+            "reference_value": "Well-typed term is value or steps (2-way progress)",
+            "source": "Pierce TAPL Ch 8",
+            "match": true
+          }
+        ],
+        "discrepancies": ["Our progress is 3-way (value/step/benign_stuck) due to L5-Resolution semantics"],
+        "validation_status": "confirmed"
+      },
+      "classical_counterpart": {
+        "our_statement": "Well-typed expression: value OR steps OR benign_stuck (EResolve on non-const); type preserved under steps",
+        "classical": {
+          "statement": "Progress: well-typed closed term is value or steps. Preservation: step preserves type.",
+          "framework": "STLC / System F",
+          "axioms_used": [],
+          "standard_proof": "Structural induction on typing derivation",
+          "reference": "Pierce, TAPL, Ch 8"
+        },
+        "comparison": {
+          "what_we_share": "Induction on typing derivation for both progress and preservation",
+          "ontological_diff": "ToS-Lang includes L5-Resolution operator (EResolve) which creates benign_stuck states",
+          "axiom_diff": {
+            "we_use": [],
+            "they_use": [],
+            "we_avoid": [],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Same structural induction; extra case for EResolve/EObserve",
+          "strength_comparison": "equivalent",
+          "strength_detail": "Standard type safety with ToS-specific extension for L5-Resolution",
+          "gaps_vs_classical": [],
+          "advantages_vs_classical": ["Handles L5-Resolution natively", "Connects to E/R/R framework"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "Type Safety for ToS-Lang: ensures well-typed programs are safe (don't get stuck)",
+        "used_by_chain": ["AIInterface.ai_generation_safe"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "3-way progress (value/step/benign_stuck) handles L5-Resolution gracefully"
+      }
+    },
+
+    {
+      "id": "l5_resolve_gen_some",
+      "file": "src/L5Resolution.v",
+      "line": 156,
+      "status": "Qed",
+      "level": "3.5",
+      "level_major": 3,
+      "domains": ["foundation"],
+      "philo_role": "L5 Resolution (Law of Order): non-empty list with total order always has unique minimum. Core mechanism for deterministic selection in ToS.",
+      "publications": ["ToS v5 Section 1.3 (novel)"],
+      "external_validation": {
+        "classical_name": "N/A (novel — L5 principle)",
+        "classical_ref": "Novel — closest is well-ordering principle (Zermelo 1904)",
+        "match_type": "novel",
+        "checkpoints": [
+          {
+            "what": "Deterministic selection from non-empty set",
+            "our_value": "l5_resolve_gen on non-empty list with DecTotalOrder returns Some (minimum element)",
+            "reference_value": "Well-ordering: every set can be well-ordered (but uses AC)",
+            "source": "Zermelo 1904",
+            "match": false
+          }
+        ],
+        "discrepancies": ["L5 is constructive and deterministic; well-ordering uses AC"],
+        "validation_status": "novel_no_ref"
+      },
+      "classical_counterpart": {
+        "our_statement": "l5_resolve_gen returns Some for non-empty list over DecTotalOrder",
+        "classical": {
+          "statement": "Every set can be well-ordered (Zermelo); every finite set has minimum under total order",
+          "framework": "ZFC",
+          "axioms_used": ["AC (for infinite case)"],
+          "standard_proof": "Zermelo well-ordering uses AC; finite case by induction",
+          "reference": "Zermelo 1904"
+        },
+        "comparison": {
+          "what_we_share": "Selection of minimum from ordered collection",
+          "ontological_diff": "L5 is a PRINCIPLE (not derived from AC); operates on finite lists only",
+          "axiom_diff": {
+            "we_use": [],
+            "they_use": ["AC (infinite case)"],
+            "we_avoid": ["AC"],
+            "they_avoid": []
+          },
+          "proof_method_diff": "Structural induction on list; comparison-based selection",
+          "strength_comparison": "novel",
+          "strength_detail": "L5 is a foundational principle of ToS, not a theorem. It grounds determinism.",
+          "gaps_vs_classical": ["Only finite lists (no infinite well-ordering)"],
+          "advantages_vs_classical": ["No AC needed", "Deterministic", "Constructive algorithm"]
+        }
+      },
+      "semantic_intent": {
+        "purpose": "L5 Resolution: deterministic minimum selection — foundation for all 'choice' in ToS",
+        "used_by_chain": ["EVT_idx (argmax)", "StatusMachine (PrimaryMax selection)", "TypeChecker"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "DecTotalOrder + list = minimal interface for deterministic selection without AC"
+      }
+    }
+  ],
+
+  "bottlenecks": [
+    {
+      "id": "is_Cauchy",
+      "file": "src/process/ProcessCore.v",
+      "line": 68,
+      "type": "Definition",
+      "fan_out": 333,
+      "semantic_intent": {
+        "purpose": "Process convergence predicate: stages eventually differ by < eps for all eps > 0. THE central concept of P4 mathematics.",
+        "used_by_chain": ["Every real-analysis theorem", "All process physics", "ReasoningConvergence"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "nat->Q process model; Cauchy = convergence without completeness axiom"
+      }
+    },
+    {
+      "id": "RealProcess",
+      "file": "src/process/ProcessCore.v",
+      "line": 34,
+      "type": "Definition",
+      "fan_out": 333,
+      "semantic_intent": {
+        "purpose": "Type alias nat -> Q: a real number is a process of rational approximations. Foundation of P4 mathematics.",
+        "used_by_chain": ["is_Cauchy", "const_process", "All analysis"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "P4 (Finite Actuality): no completed infinity. A real is a process, not a point."
+      }
+    },
+    {
+      "id": "const_process",
+      "file": "src/process/ProcessCore.v",
+      "line": 37,
+      "type": "Definition",
+      "fan_out": 333,
+      "semantic_intent": {
+        "purpose": "Constant process: fun _ => q. Embeds Q into RealProcess. Trivially Cauchy.",
+        "used_by_chain": ["const_is_Cauchy", "All Q-to-process embeddings"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Simplest embedding of rationals into process framework"
+      }
+    },
+    {
+      "id": "classic",
+      "file": "src/foundation/Distinction.v",
+      "line": 16,
+      "type": "Axiom",
+      "fan_out": 41,
+      "semantic_intent": {
+        "purpose": "Law of Excluded Middle (L3): forall P, P \\/ ~P. Core axiom of classical logic in ToS.",
+        "used_by_chain": ["SchroederBernstein", "BolzanoWeierstrass", "ShrinkingIntervals", "Many proofs requiring case analysis"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "L3 of ToS = classical logic. Declared as Axiom in Coq (not provable constructively)."
+      }
+    },
+    {
+      "id": "L4_witness",
+      "file": "src/ToS_Axioms.v",
+      "line": 86,
+      "type": "Axiom",
+      "fan_out": 33,
+      "semantic_intent": {
+        "purpose": "Dependent choice: converts existential to sigma type {x : A | P x}. P4 constructive witness extraction.",
+        "used_by_chain": ["Grid constructions", "EVT argmax", "Interval bisections"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Bridges Prop and Type universes; P4 says every existence claim must have a witness"
+      }
+    },
+    {
+      "id": "Level",
+      "file": "src/TheoryOfSystems_Core_ERR.v",
+      "line": 59,
+      "type": "Inductive",
+      "fan_out": 53,
+      "semantic_intent": {
+        "purpose": "Hierarchical level type: L1 (foundation) and LS L (successor). Grounds the ToS hierarchy.",
+        "used_by_chain": ["System", "level_lt", "P1_no_self_membership", "russell_paradox_blocked"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Inductive type makes structural induction available; irreflexivity is automatic"
+      }
+    },
+    {
+      "id": "level_lt",
+      "file": "src/TheoryOfSystems_Core_ERR.v",
+      "line": 68,
+      "type": "Fixpoint",
+      "fan_out": 53,
+      "semantic_intent": {
+        "purpose": "Strict order on Levels: l1 << l2 means l1 is closer to foundation than l2.",
+        "used_by_chain": ["P1_no_self_membership", "System formation", "All level-dependent definitions"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Fixpoint on Level inductive type; decidable and well-founded by construction"
+      }
+    },
+    {
+      "id": "grid_point",
+      "file": "src/EVT_idx.v",
+      "line": 40,
+      "type": "Definition",
+      "fan_out": 5,
+      "semantic_intent": {
+        "purpose": "Grid point k in [a,b] with n subdivisions: a + (k/n) * (b-a). Foundation for grid-based analysis.",
+        "used_by_chain": ["grid_list", "EVT_strong_process", "IVT bisection"],
+        "removable": false,
+        "refactorable": true,
+        "why_this_formulation": "Q arithmetic: k and n are nat, division is exact in Q"
+      }
+    },
+    {
+      "id": "CriterionOver",
+      "file": "src/IntensionalIdentity.v",
+      "line": 44,
+      "type": "Record",
+      "fan_out": 7,
+      "semantic_intent": {
+        "purpose": "Criterion with domain, predicate, and level witness. Core E/R/R component for system specification.",
+        "used_by_chain": ["ext_equiv", "int_equiv", "System formation"],
+        "removable": false,
+        "refactorable": false,
+        "why_this_formulation": "Record encapsulates predicate + level metadata for intensional/extensional distinction"
+      }
+    }
+  ]
+}
