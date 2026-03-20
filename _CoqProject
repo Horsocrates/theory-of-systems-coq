@@ -800,3 +800,21 @@ src/foundation/AnomalySystematic.v
 src/foundation/VacuumFromTransfer.v
 src/foundation/BornRuleFromProcess.v
 src/stdlib/GravitonSelfEnergy.v
+# Dir 1: Lyapunov
+src/stdlib/LyapunovProcess.v
+src/stdlib/LyapunovSynthesis.v
+# Dir 2: Spectral Graph
+src/stdlib/GraphLaplacian.v
+src/stdlib/SpectralGraphSynthesis.v
+# Dir 3: Li-Yorke
+src/stdlib/LiYorkeSensitivity.v
+src/stdlib/LiYorkeSynthesis.v
+# Dir 4: Hausdorff
+src/stdlib/HausdorffDimension.v
+src/stdlib/FractalSynthesis.v
+# Dir 5: Topological Entropy
+src/stdlib/TopologicalEntropy.v
+src/stdlib/EntropySynthesis.v
+# Dir 6: Symbolic Dynamics
+src/stdlib/SymbolicDynamics.v
+src/stdlib/SymbolicSynthesis.v
