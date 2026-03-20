@@ -761,3 +761,7 @@ src/foundation/DepthThreeNecessity.v
 src/foundation/IndivisibleDistinction.v
 src/foundation/LogicalAtom.v
 src/foundation/QuantizationSynthesis.v
+# Process Optimal Transport
+src/stdlib/ProcessOptimalTransport.v
+src/stdlib/WassersteinProcess.v
+src/stdlib/OTSynthesis.v
