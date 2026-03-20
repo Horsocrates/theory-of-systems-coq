@@ -849,3 +849,15 @@ src/stdlib/PerronFrobeniusSynthesis.v
 src/stdlib/SFTEntropyGeneral.v
 src/stdlib/SFTClassification.v
 src/stdlib/SFTClassificationSynthesis.v
+# SFT Phase 3: CF-SFT Bridge
+src/stdlib/CFMatrixProduct.v
+src/stdlib/LagrangeTheorem.v
+src/stdlib/CFSFTBridge.v
+# SFT Phase 4: Zeta Functions
+src/stdlib/DynamicalZeta.v
+src/stdlib/ZetaPeriodicOrbits.v
+src/stdlib/ZetaSynthesis.v
+# SFT Phase 5: Classification Theorem
+src/stdlib/ProcessClassification.v
+src/stdlib/StrictlyFiner.v
+src/stdlib/ClassificationSynthesis.v
