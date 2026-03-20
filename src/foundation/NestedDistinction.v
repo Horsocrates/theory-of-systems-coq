@@ -31,7 +31,10 @@ Local Close Scope Q_scope.
   Level 3: Self-distinction: N = 1 (reflexive, phase) → U(1)
 
   RESULT: [3, 2, 1] = depths of nested distinction.
-  Not CHOSEN. DERIVED from: L1 (no repetition) + L4 (minimal sufficient). *)
+  The unique solution under the constraints: no repetition (L1),
+  minimal (L4), nontrivial (argued), terminal at depth 3 (argued).
+  [2,3,1] is the ONLY assignment satisfying these constraints.
+  The constraints themselves are reasonable but partially interpretive. *)
 
 (* ================================================================== *)
 (*  ITERATED DISTINCTION                                               *)

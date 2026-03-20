@@ -23,7 +23,15 @@ Open Scope Q_scope.
     Z(1) = 7/8 + 3*(47/384) = 336/384 + 141/384 = 477/384 = 159/128
 
     t0_M0(2) = 4/3, t1_M0(2) = 1/6
-    Z(2) = 4/3 + 3*(1/6) = 4/3 + 1/2 = 11/6 *)
+    Z(2) = 4/3 + 3*(1/6) = 4/3 + 1/2 = 11/6
+
+    WARNING: Z_exact uses partition_approx = t0(M=0) + 3*t1(M=0),
+    a 2-TERM TRUNCATION. True Z(beta=1) is approx 2.96 (from exact Bessel functions).
+    Our 159/128 is approx 1.24, which is 58% off. This is expected at M=0.
+    For reliable thermodynamics, use M >= 3 (see PartitionHigherM.v).
+
+    Observables like plaquette and gap are MORE accurate because they are
+    RATIOS of eigenvalues where truncation errors partially cancel. *)
 
 Definition Z_b1 : Q := 159 # 128.
 Definition Z_b2 : Q := 11 # 6.

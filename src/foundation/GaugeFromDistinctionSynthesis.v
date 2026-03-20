@@ -24,7 +24,9 @@ From ToS Require Import foundation.ERRFromDistinction.
     → [3, 2, 1] = SU(3) x SU(2) x U(1) = SM!
 
   ZERO free parameters in gauge sector.
-  SM gauge group: DERIVED, not chosen. *)
+  SM gauge group: CONSISTENT with nested distinction [3,2,1].
+  The derivation depends on constraints (no repetition, minimality)
+  that are argued from L1 and L4 but not purely mechanical. *)
 
 (* ================================================================== *)
 (*  SM GAUGE GROUP — THE COMPLETE DERIVATION                           *)

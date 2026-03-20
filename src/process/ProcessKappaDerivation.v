@@ -73,8 +73,13 @@ Proof.
   unfold kappa_approx. reflexivity.
 Qed.
 
-(** κ was not CHOSEN. It was WAITING to be derived. *)
-(** κ_approx = 1/10 = 1/[D(D+1)/2] for D=4 spacetime *)
+(** kappa was not CHOSEN. It was WAITING to be derived. *)
+(** kappa_approx = 1/10 = 1/[D(D+1)/2] for D=4 spacetime *)
+(** NOTE: D_spacetime = 4 is an INPUT in the current formalization,
+    motivated by dim(SU(2)) = 3 = D_spatial. The identification of
+    gauge generator count with spatial dimension is an interpretive step.
+    A formal derivation of D=4 from stability/anomaly arguments
+    is in StableDimension.v. *)
 
 (** Normalization check: κ · n = 1 *)
 Theorem kappa_normalization :

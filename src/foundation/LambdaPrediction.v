@@ -17,11 +17,15 @@ From ToS Require Import foundation.VacuumNecessity.
 
 Open Scope Q_scope.
 
-(** ★★★ COSMOLOGICAL CONSTANT PREDICTION ★★★
+(** ★★★ COSMOLOGICAL CONSTANT ★★★
 
-  E_vac(K) = 1/(1+K) (from VacuumNecessity)
+  NOTE: Lambda > 0 is a genuine consequence of E_vac > 0 (necessity of
+  vacuum distinction). The specific values Lambda(K) inherit the qualitative
+  nature of the E_vac model. kappa = 1/10 IS derived.
+
+  E_vac(K) = 1/(1+K) (from VacuumNecessity, qualitative model)
   Physical K = 10^19 (from kappa derivation)
-  Λ = E_vac × κ² (CC in natural units)
+  Lambda = E_vac * kappa^2 (CC in natural units)
 
   With κ = 1/10:
   Λ(K) = (1/(1+K)) × (1/100)

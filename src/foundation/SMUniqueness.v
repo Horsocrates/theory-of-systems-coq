@@ -29,7 +29,9 @@ Lemma kappa_equals_1_10 : kappa_derived == 1 # 10.
 Proof. unfold kappa_derived, n_metric_components. vm_compute. reflexivity. Qed.
 
 (* ================================================================== *)
-(*  ★★★ THE STANDARD MODEL IS DERIVED ★★★                              *)
+(*  ★★★ THE STANDARD MODEL IS THE UNIQUE ANOMALY-FREE CHIRAL THEORY    *)
+(*  consistent with the nested distinction structure [3,2,1].          *)
+(*  The structure [3,2,1] itself is derived under specific constraints. *)
 (* ================================================================== *)
 
 (** CHAIN:

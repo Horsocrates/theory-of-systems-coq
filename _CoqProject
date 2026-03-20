@@ -784,3 +784,12 @@ src/stdlib/ThermodynamicSynthesis.v
 src/stdlib/WassersteinConvergence.v
 src/stdlib/WassersteinRefinement.v
 src/stdlib/ConvergenceSynthesis.v
+# Audit: better log + partition convergence
+src/stdlib/BetterLogarithm.v
+src/stdlib/PartitionHigherM.v
+# Audit: anomaly exhaustive, dimension, eta, pi, synthesis
+src/foundation/AnomalyExhaustive.v
+src/foundation/StableDimension.v
+src/foundation/EtaFromLattice.v
+src/foundation/PiRational.v
+src/foundation/StabilityDimensionSynthesis.v

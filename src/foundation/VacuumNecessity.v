@@ -38,7 +38,12 @@ Open Scope Q_scope.
 (* ================================================================== *)
 
 (** The vacuum energy at scale K.
-    Model: E_vac(K) = 1 / (1 + K) — positive, decreasing, never zero. *)
+    Model: E_vac(K) = 1 / (1 + K) -- positive, decreasing, never zero.
+    NOTE: This is a qualitative model. The property E_vac > 0 follows
+    from vacuum = minimum 1 distinction (IndivisibleDistinction.v).
+    The specific form 1/(1+K) is a placeholder capturing positivity
+    and decrease with scale. A first-principles derivation requires
+    computing the lattice effective potential. *)
 Definition vacuum_energy (K : nat) : Q :=
   1 / (1 + inject_Z (Z.of_nat K)).
 

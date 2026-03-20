@@ -1,7 +1,7 @@
 (** * CTheoremSynthesis.v — Lattice c-theorem synthesis
     Elements: c_theorem_synthesis
     Roles:    C(K) monotone = Zamolodchikov on lattice
-    Rules:    C(2) = 1 matches free boson central charge
+    Rules:    C(K) monotone, Pade log approximation artifact at C(2)=1
     Status:   Stdlib
     STATUS: 3 Qed, 0 Admitted, 0 new axioms
     Author: Horsocrates | Date: March 2026
@@ -25,7 +25,11 @@ Open Scope Q_scope.
     VERIFICATION against 2D CFT:
     For free boson: c = 1.
     For Ising model: c = 1/2.
-    Our C(2) = 1 matches c(free boson). Suggestive.
+    C(2) = 1 under Pade approximation for log. The true entropy
+    of uniform(3) is log2(3) which is approx 1.585. The match
+    C(2) = 1 = c(free boson) is a coincidence of the Pade error,
+    not a meaningful identification.
+    See BetterLogarithm.v for improved logarithm approximation.
 
     PROVED EXACTLY over Q. Machine-checked. *)
 

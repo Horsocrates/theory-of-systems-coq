@@ -27,17 +27,23 @@ Open Scope Q_scope.
   - A distinction with zero net effect = no effective distinction
   - Therefore: η > 0 is NECESSARY (the distinction must have content)
 
-  The baryon asymmetry η ≈ 6×10⁻¹⁰ is not fine-tuned —
-  it's a consequence of distinction requiring nonzero net content.
-  The question is not "why η > 0?" but "what determines η?" *)
+  eta > 0 is a philosophical consequence of distinction asymmetry.
+  The specific functional form eta(K) = 1/(1+K^2) is a QUALITATIVE MODEL
+  capturing the required properties (positive, decreasing, never zero).
+  Deriving the exact form of eta from the lattice action is future work. *)
 
 (* ================================================================== *)
 (*  ASYMMETRY PARAMETER                                               *)
 (* ================================================================== *)
 
-(** The asymmetry parameter η at scale K.
-    Model: η(K) = 1 / (1 + K²) — always positive, decreasing.
-    At large K, η is small but never zero. *)
+(** The asymmetry parameter eta at scale K.
+    Model: eta(K) = 1 / (1 + K^2) -- always positive, decreasing.
+    At large K, eta is small but never zero.
+    NOTE: This is a placeholder model, not a derived quantity.
+    The properties (eta > 0, eta decreasing) are consequences of
+    distinction asymmetry. The specific form 1/(1+K^2) is chosen
+    for these properties. A first-principles derivation of eta
+    requires the full lattice action with CP violation. *)
 Definition eta (K : nat) : Q :=
   1 / (1 + inject_Z (Z.of_nat (K * K))).
 

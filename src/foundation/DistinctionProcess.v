@@ -173,12 +173,17 @@ Theorem complementary_weights : forall p : Q,
   valid_weight p -> p + (1 - p) == 1.
 Proof. intros p _. ring. Qed.
 
-(** The Born rule IS the weight of distinction *)
+(** The Born rule IS the weight of distinction.
+    NOTE: The identification of Born rule with distinction weight
+    is a philosophical interpretation, not a formal derivation.
+    sharpness(K) = K/(K+1) is a model with the correct qualitative
+    behavior (0 -> 1). Deriving the actual Born rule p = |psi|^2
+    requires connecting to the transfer matrix inner product. *)
 Theorem born_rule_is_distinction_weight :
   forall p, valid_weight p ->
   (* The "probability of A" = p means: *)
   (* distinction process assigns weight p to A *)
-  (* and weight (1-p) to ¬A *)
+  (* and weight (1-p) to not-A *)
   p + (1 - p) == 1.
 Proof. intros p _. ring. Qed.
 
