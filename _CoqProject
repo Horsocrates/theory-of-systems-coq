@@ -793,3 +793,10 @@ src/foundation/StableDimension.v
 src/foundation/EtaFromLattice.v
 src/foundation/PiRational.v
 src/foundation/StabilityDimensionSynthesis.v
+# Final 6 weak spots
+src/gauge/Transfer3x3.v
+src/foundation/NontrivialDepth.v
+src/foundation/AnomalySystematic.v
+src/foundation/VacuumFromTransfer.v
+src/foundation/BornRuleFromProcess.v
+src/stdlib/GravitonSelfEnergy.v
