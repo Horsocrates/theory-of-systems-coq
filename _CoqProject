@@ -841,3 +841,7 @@ src/stdlib/EntropyProcess.v
 src/stdlib/EntropyConvergenceRate.v
 src/stdlib/EntropyTransferConnection.v
 src/stdlib/EntropyProcessSynthesis.v
+# Perron-Frobenius over Q
+src/stdlib/PerronFrobenius.v
+src/stdlib/CharacteristicPolynomial.v
+src/stdlib/PerronFrobeniusSynthesis.v
