@@ -836,3 +836,8 @@ src/gauge/SU3ObservablesSynthesis.v
 src/gauge/SU3AsymptoticFreedom.v
 src/gauge/SU3ContinuumLimit.v
 src/gauge/SU3GrandSynthesis.v
+# Entropy as Process
+src/stdlib/EntropyProcess.v
+src/stdlib/EntropyConvergenceRate.v
+src/stdlib/EntropyTransferConnection.v
+src/stdlib/EntropyProcessSynthesis.v
