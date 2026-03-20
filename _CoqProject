@@ -757,3 +757,7 @@ src/stdlib/QGCompleteSynthesis.v
 # Gap A: [3,2,1] uniqueness
 src/foundation/DistinctionRepetition.v
 src/foundation/DepthThreeNecessity.v
+# Indivisible Distinction (logical quantization)
+src/foundation/IndivisibleDistinction.v
+src/foundation/LogicalAtom.v
+src/foundation/QuantizationSynthesis.v
