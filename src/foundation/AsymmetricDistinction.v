@@ -1,7 +1,7 @@
-(** * AsymmetricDistinction.v — Primary Distinction is inherently asymmetric
-    Elements: ADistinction record, asymmetry, primality of "marked"
-    Roles:    A is distinguished FIRST, ¬A is derivative
-    Rules:    asymmetry_of_distinction, one_precedes_zero
+(** * AsymmetricDistinction.v — Distinction is structurally asymmetric
+    Elements: swap_distinction, mark/unmark, distinction_direction
+    Roles:    co-constitution with structural asymmetry
+    Rules:    distinction_asymmetric (D ≠ swap D), direction_stable
     Status:   Foundation File 5 of 9
     STATUS: 25 Qed, 0 Admitted, 0 new axioms
     Author: Horsocrates | Date: March 2026
@@ -15,18 +15,24 @@ Import ListNotations.
 
 From ToS Require Import foundation.Distinction.
 
-(** ★★★ THE ASYMMETRY OF DISTINCTION ★★★
+(** ★★★ CO-CONSTITUTION AND STRUCTURAL ASYMMETRY ★★★
 
-  The act A|¬A is NOT symmetric:
-  - A is DISTINGUISHED (marked, primary, figure)
-  - ¬A is the BACKGROUND (unmarked, secondary, ground)
+  A and ¬A are CO-CONSTITUTED by the act of distinction.
+  Neither exists without the other:
+  - A without ¬A = undetermined (indistinguishable from nothing)
+  - ¬A without A = undefined (nothing to negate)
 
-  This asymmetry is not a choice — it IS the act of distinction.
-  To distinguish = to mark one side. The unmarked side is defined
-  only as "not the marked side".
+  The asymmetry is STRUCTURAL, not temporal:
+  - ¬A is DEFINED as "not-A" (logical operation on A)
+  - A depends on ¬A for determination, not definition
+  - Definition-dependency > determination-dependency
+  - Therefore: D ≠ swap(D) (the roles are not interchangeable)
 
-  Consequence: 1 precedes 0 (marked before unmarked),
-  matter precedes antimatter, time has an arrow. *)
+  The "mark" (1 vs 0) reflects this structural precedence:
+  the marked side is the one through which the other is defined.
+
+  Consequence: structural asymmetry propagates to
+  matter/antimatter (η > 0), time (arrow), counting (1 before 0). *)
 
 (* ================================================================== *)
 (*  ASYMMETRIC DISTINCTION                                            *)
@@ -46,7 +52,10 @@ Theorem positive_is_given : forall P : Prop,
   positive (distinction_of P) = P.
 Proof. reflexivity. Qed.
 
-(** The positive side is logically prior: ¬A presupposes A *)
+(** Logical dependency: ¬A is defined through A (not vice versa).
+    This is structural precedence, not temporal priority.
+    Both A and ¬A arise simultaneously in the act of distinction,
+    but ¬A's definition refers to A while A's definition is direct. *)
 Theorem negation_presupposes_affirmation : forall (A : Prop),
   (~A -> exists B, B = A).
 Proof. intros A _. exists A. reflexivity. Qed.
@@ -174,7 +183,7 @@ Proof. intro D. repeat split; reflexivity. Qed.
 
 (** ★ SUMMARY: The five consequences of asymmetric distinction *)
 Theorem asymmetric_distinction_summary :
-  (* 1. Positive is given, negative derived *)
+  (* 1. Structural asymmetry: negative defined through positive *)
   (forall P, positive (distinction_of P) = P /\
              negative (distinction_of P) = ~P) /\
   (* 2. Distinction is asymmetric *)

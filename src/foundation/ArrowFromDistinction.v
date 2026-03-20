@@ -35,6 +35,12 @@ Open Scope Q_scope.
   Time IS the sequence of distinctions. Asking why it has
   a direction is like asking why distinction distinguishes. *)
 
+(** NOTE: The arrow arises from STRUCTURAL asymmetry (¬A defined through A),
+    not from temporal priority of A over ¬A. Both arise simultaneously.
+    The irreversibility is: once a distinction is made, its structure
+    (the definition-dependency) cannot be reversed without destroying
+    both sides — the entire structure collapses rather than reverting. *)
+
 (* ================================================================== *)
 (*  TIME AS SEQUENCE OF DISTINCTIONS                                  *)
 (* ================================================================== *)

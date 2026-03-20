@@ -20,7 +20,7 @@ From ToS Require Import foundation.GenerationsFromL4.
 Open Scope Q_scope.
 
 (** ★★★ BARYON ASYMMETRY CHAIN ★★★
-    1. Distinction asymmetric: A ≠ ¬A in status
+    1. Distinction structurally asymmetric: ¬A defined through A
     2. → Matter ≠ antimatter (physical realization)
     3. → CP violation needed (3 generations, Dir B)
     4. → n_cp_phases(3) = 1 → Jarlskog invariant J ≠ 0

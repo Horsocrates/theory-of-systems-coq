@@ -19,14 +19,16 @@ Open Scope Q_scope.
 
 (** ★★★ MATTER-ANTIMATTER ASYMMETRY ★★★
 
-  From the asymmetry of distinction:
-  - The positive side (matter) is MARKED, primary
-  - The negative side (antimatter) is UNMARKED, secondary
-  - Perfect balance (equal amounts) would erase the distinction
-  - Therefore: matter > antimatter is NECESSARY
+  From the structural asymmetry of distinction:
+  - Matter and antimatter are co-constituted (like A and ¬A)
+  - Antimatter = "not-matter" (defined through matter, CP conjugate)
+  - Perfect balance (η = 0) would mean the distinction carries
+    zero net content — all creation cancelled by annihilation
+  - A distinction with zero net effect = no effective distinction
+  - Therefore: η > 0 is NECESSARY (the distinction must have content)
 
   The baryon asymmetry η ≈ 6×10⁻¹⁰ is not fine-tuned —
-  it's a consequence of distinction being asymmetric.
+  it's a consequence of distinction requiring nonzero net content.
   The question is not "why η > 0?" but "what determines η?" *)
 
 (* ================================================================== *)

@@ -34,6 +34,19 @@ From ToS Require Import TheoryOfSystems_Core_ERR.
     Roles = the positions in the distinction (distinguished vs background)
     Rules = the constraints (exclusive, exhaustive) *)
 
+(** ★ NOTE ON THE THIRD ASPECT (Rules):
+    Rules are not merely constraints on the pair (A, ¬A).
+    They are what makes the distinction a RECOGNIZED distinction:
+    exclusive = the two sides are genuinely different,
+    exhaustive = the distinction is complete (nothing escapes).
+    Without Rules, Elements and Roles are two unrelated propositions.
+    Rules make A|¬A a DISTINCTION rather than merely two Props.
+
+    The E/R/R of distinction is thus:
+    E = {A, ¬A} — what is co-constituted
+    R = {positive, negative} — how organized (structurally asymmetric)
+    R = {exclusive, exhaustive} — why this IS a distinction *)
+
 (** Number of elements in a primary distinction *)
 Definition err_element_count (D : Distinction) : nat := 2.
 
