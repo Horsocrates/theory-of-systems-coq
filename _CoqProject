@@ -818,3 +818,21 @@ src/stdlib/EntropySynthesis.v
 # Dir 6: Symbolic Dynamics
 src/stdlib/SymbolicDynamics.v
 src/stdlib/SymbolicSynthesis.v
+# SU(3) Lattice Gauge Theory 3+1D
+# Phase 1: Representations + Characters + Transfer
+src/gauge/SU3Representations.v
+src/gauge/SU3Characters.v
+src/gauge/SU3Transfer.v
+src/gauge/SU3Synthesis.v
+# Phase 2: 3D Lattice
+src/gauge/Lattice3D.v
+src/gauge/SU3Lattice3D.v
+src/gauge/Lattice3DSynthesis.v
+# Phase 3: Observables
+src/gauge/SU3StringTension.v
+src/gauge/SU3Glueball.v
+src/gauge/SU3ObservablesSynthesis.v
+# Phase 4: AF + Continuum + Grand
+src/gauge/SU3AsymptoticFreedom.v
+src/gauge/SU3ContinuumLimit.v
+src/gauge/SU3GrandSynthesis.v
