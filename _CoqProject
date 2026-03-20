@@ -772,3 +772,15 @@ src/stdlib/GradientFlowSynthesis.v
 src/stdlib/RGOptimalTransport.v
 src/stdlib/RGTransportProcess.v
 src/stdlib/RGOTSynthesis.v
+# C-theorem
+src/stdlib/CFunction.v
+src/stdlib/CTheoremRG.v
+src/stdlib/CTheoremSynthesis.v
+# Exact thermodynamics
+src/stdlib/ExactPartitionFunction.v
+src/stdlib/ThermodynamicComparison.v
+src/stdlib/ThermodynamicSynthesis.v
+# W1 convergence
+src/stdlib/WassersteinConvergence.v
+src/stdlib/WassersteinRefinement.v
+src/stdlib/ConvergenceSynthesis.v
