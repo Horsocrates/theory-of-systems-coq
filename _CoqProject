@@ -765,3 +765,10 @@ src/foundation/QuantizationSynthesis.v
 src/stdlib/ProcessOptimalTransport.v
 src/stdlib/WassersteinProcess.v
 src/stdlib/OTSynthesis.v
+# Gradient Flow + RG as Optimal Transport
+src/stdlib/DiscreteEntropy.v
+src/stdlib/DiscreteGradientFlow.v
+src/stdlib/GradientFlowSynthesis.v
+src/stdlib/RGOptimalTransport.v
+src/stdlib/RGTransportProcess.v
+src/stdlib/RGOTSynthesis.v
