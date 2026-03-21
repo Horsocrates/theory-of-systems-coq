@@ -890,3 +890,8 @@ src/stdlib/FiniteSizeScaling.v
 src/stdlib/PhaseTransitionSynthesis.v
 src/stdlib/InvariantMeasureProcess.v
 src/stdlib/VariationalProcess.v
+# Horizons completion
+src/stdlib/ClockSynthesis.v
+src/stdlib/SpectralGapBound.v
+src/stdlib/MeasureEntropy.v
+src/stdlib/VariationalSynthesis.v
