@@ -868,3 +868,12 @@ src/stdlib/InverseProblem.v
 src/stdlib/HeatKernelLattice.v
 src/stdlib/KacOnLattice.v
 src/stdlib/GreenSynthesis.v
+# Verifiable Calculations
+src/stdlib/Ising1D.v
+src/stdlib/Ising1DVerify.v
+src/stdlib/RandomWalkCycle.v
+src/stdlib/RandomWalkLine.v
+src/stdlib/FibonacciGreen.v
+src/stdlib/FibonacciVerify.v
+src/stdlib/VerificationTable.v
+src/stdlib/GrandVerification.v
