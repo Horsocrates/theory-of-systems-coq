@@ -861,3 +861,10 @@ src/stdlib/ZetaSynthesis.v
 src/stdlib/ProcessClassification.v
 src/stdlib/StrictlyFiner.v
 src/stdlib/ClassificationSynthesis.v
+# Green's Functions as Processes
+src/stdlib/GreenFunction.v
+src/stdlib/GreenGauge.v
+src/stdlib/InverseProblem.v
+src/stdlib/HeatKernelLattice.v
+src/stdlib/KacOnLattice.v
+src/stdlib/GreenSynthesis.v
