@@ -895,3 +895,13 @@ src/stdlib/ClockSynthesis.v
 src/stdlib/SpectralGapBound.v
 src/stdlib/MeasureEntropy.v
 src/stdlib/VariationalSynthesis.v
+# Path A: Symmetry reduction
+src/stdlib/SymmetryReduction.v
+src/stdlib/Ising2DWidth3Reduced.v
+src/stdlib/Ising2DWidth3Onsager.v
+src/stdlib/SymmetryReductionSynthesis.v
+# Path B: Abstract theory
+src/stdlib/TransferAlgebra.v
+src/stdlib/AbstractGap.v
+src/stdlib/OperatorProcess.v
+src/stdlib/AbstractSynthesis.v
