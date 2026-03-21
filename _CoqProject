@@ -877,3 +877,8 @@ src/stdlib/FibonacciGreen.v
 src/stdlib/FibonacciVerify.v
 src/stdlib/VerificationTable.v
 src/stdlib/GrandVerification.v
+# 2D Ising / Onsager
+src/stdlib/Ising2DTransfer.v
+src/stdlib/OnsagerCondition.v
+src/stdlib/Ising2DThermodynamics.v
+src/stdlib/Ising2DSynthesis.v
