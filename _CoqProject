@@ -905,3 +905,11 @@ src/stdlib/TransferAlgebra.v
 src/stdlib/AbstractGap.v
 src/stdlib/OperatorProcess.v
 src/stdlib/AbstractSynthesis.v
+# Pi as process
+src/stdlib/PiLeibniz.v
+src/stdlib/PiMachin.v
+src/stdlib/PiBBP.v
+src/stdlib/PiBasel.v
+src/stdlib/PiConvergenceRate.v
+src/stdlib/PiConnections.v
+src/stdlib/PiSynthesis.v
