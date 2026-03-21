@@ -927,3 +927,8 @@ src/stdlib/PiLp.v
 src/stdlib/PiFromDistinction.v
 src/stdlib/PiRandomWalk.v
 src/stdlib/PiOriginsSynthesis.v
+src/stdlib/GraphCuts.v
+src/stdlib/CutDistinction.v
+src/stdlib/BekensteinLattice.v
+src/stdlib/EntanglementFromGreen.v
+src/stdlib/CutHolographySynthesis.v
