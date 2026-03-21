@@ -913,3 +913,17 @@ src/stdlib/PiBasel.v
 src/stdlib/PiConvergenceRate.v
 src/stdlib/PiConnections.v
 src/stdlib/PiSynthesis.v
+# Holographic principle
+src/stdlib/DistinctionAsBoundary.v
+src/stdlib/HolographicEntropy.v
+src/stdlib/HolographicBound.v
+src/stdlib/HolographicKac.v
+src/stdlib/HolographicSynthesis.v
+# Pi from three origins
+src/stdlib/PiArchimedes.v
+src/stdlib/PiGaussCircle.v
+src/stdlib/PiGaussian.v
+src/stdlib/PiLp.v
+src/stdlib/PiFromDistinction.v
+src/stdlib/PiRandomWalk.v
+src/stdlib/PiOriginsSynthesis.v
