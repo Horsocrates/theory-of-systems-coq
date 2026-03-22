@@ -978,6 +978,11 @@ src/stdlib/ProcessHilbert.v
 src/stdlib/ProcessOperatorH.v
 src/stdlib/ProcessUncertainty.v
 src/stdlib/SpectralFlow.v
+src/stdlib/SpectralFlowTraces.v
+src/stdlib/SpectralFlowNewton.v
+src/stdlib/SpectralFlowGround.v
+src/stdlib/SpectralFlowPhiPi.v
+src/stdlib/SpectralFlowSynthesis.v
 src/stdlib/ProcessMeasurementH.v
 src/stdlib/ProcessEntanglementH.v
 src/stdlib/ProcessQMConcrete.v
