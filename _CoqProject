@@ -973,3 +973,12 @@ src/stdlib/DiscreteCircle.v
 src/stdlib/PiFromArea.v
 src/stdlib/PiDimensional.v
 src/stdlib/PiWalkAreaSynthesis.v
+# Process Hilbert Space
+src/stdlib/ProcessHilbert.v
+src/stdlib/ProcessOperatorH.v
+src/stdlib/ProcessUncertainty.v
+src/stdlib/SpectralFlow.v
+src/stdlib/ProcessMeasurementH.v
+src/stdlib/ProcessEntanglementH.v
+src/stdlib/ProcessQMConcrete.v
+src/stdlib/ProcessHilbertSynthesis.v
