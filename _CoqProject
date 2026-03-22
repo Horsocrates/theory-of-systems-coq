@@ -950,6 +950,12 @@ src/stdlib/GreenPathIntegral.v
 src/stdlib/ChapmanKolmogorov.v
 src/stdlib/GreenDeterminant.v
 src/stdlib/GreenDeepSynthesis.v
+# Classical-Quantum Transition
+src/stdlib/TransitionFamily.v
+src/stdlib/TransitionPhases.v
+src/stdlib/GoldenCritical.v
+src/stdlib/TransitionConcrete.v
+src/stdlib/TransitionSynthesis.v
 # Quantum Walk
 src/stdlib/QuantumWalkDef.v
 src/stdlib/QuantumWalkSpreading.v
