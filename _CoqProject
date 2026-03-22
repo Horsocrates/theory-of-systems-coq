@@ -1007,3 +1007,11 @@ src/stdlib/OscillatorRational.v
 src/stdlib/OscillatorComparison.v
 src/stdlib/HeisenbergUncertainty.v
 src/stdlib/HeisenbergSynthesis.v
+# Uncertainty + Oscillator Combined
+src/stdlib/UncertaintyBounds.v
+src/stdlib/UncertaintyTable.v
+src/stdlib/UncertaintySynthesis.v
+src/stdlib/OscillatorTraces.v
+src/stdlib/OscillatorCharPoly.v
+src/stdlib/OscillatorFiniteSize.v
+src/stdlib/OscillatorSynthesis.v
