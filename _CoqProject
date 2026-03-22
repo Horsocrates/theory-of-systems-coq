@@ -1015,3 +1015,8 @@ src/stdlib/OscillatorTraces.v
 src/stdlib/OscillatorCharPoly.v
 src/stdlib/OscillatorFiniteSize.v
 src/stdlib/OscillatorSynthesis.v
+src/stdlib/OscillatorCorrection.v
+src/stdlib/ComplexOverQ.v
+src/stdlib/ComplexOscillator.v
+src/stdlib/ComplexQuantumGate.v
+src/stdlib/ComplexCorrectionSynthesis.v
