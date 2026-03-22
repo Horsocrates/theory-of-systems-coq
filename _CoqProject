@@ -950,3 +950,10 @@ src/stdlib/GreenPathIntegral.v
 src/stdlib/ChapmanKolmogorov.v
 src/stdlib/GreenDeterminant.v
 src/stdlib/GreenDeepSynthesis.v
+# Quantum Walk
+src/stdlib/QuantumWalkDef.v
+src/stdlib/QuantumWalkSpreading.v
+src/stdlib/QuantumInterference.v
+src/stdlib/QuantumWalkExact.v
+src/stdlib/QuantumClassicalComparison.v
+src/stdlib/QuantumWalkSynthesis.v
