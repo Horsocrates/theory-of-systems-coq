@@ -1000,3 +1000,10 @@ src/stdlib/FiniteSizeWalk.v
 src/stdlib/FiniteSizeSpacing.v
 src/stdlib/FiniteSizeProcessRefinement.v
 src/stdlib/FiniteSizeSynthesis.v
+# Heisenberg Matrices
+src/stdlib/HeisenbergReturn.v
+src/stdlib/HeisenbergFiniteSize.v
+src/stdlib/OscillatorRational.v
+src/stdlib/OscillatorComparison.v
+src/stdlib/HeisenbergUncertainty.v
+src/stdlib/HeisenbergSynthesis.v
