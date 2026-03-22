@@ -963,3 +963,8 @@ src/stdlib/QuantumInterference.v
 src/stdlib/QuantumWalkExact.v
 src/stdlib/QuantumClassicalComparison.v
 src/stdlib/QuantumWalkSynthesis.v
+# Fibonacci Spiral
+src/stdlib/SpiralProcess.v
+src/stdlib/SpiralGoldenRatio.v
+src/stdlib/SpiralFibonacciConnection.v
+src/stdlib/SpiralSynthesis.v
