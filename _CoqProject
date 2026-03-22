@@ -932,3 +932,12 @@ src/stdlib/CutDistinction.v
 src/stdlib/BekensteinLattice.v
 src/stdlib/EntanglementFromGreen.v
 src/stdlib/CutHolographySynthesis.v
+# Process Refinement Principle
+src/stdlib/ProcessRefinement.v
+src/stdlib/RefinementEntropy.v
+src/stdlib/RefinementEigenvalue.v
+src/stdlib/RefinementPi.v
+src/stdlib/RefinementSqrt.v
+src/stdlib/RefinementIntegral.v
+src/stdlib/RefinementHierarchy.v
+src/stdlib/ProcessRefinementSynthesis.v
