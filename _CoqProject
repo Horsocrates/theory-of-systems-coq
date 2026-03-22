@@ -994,3 +994,9 @@ src/stdlib/SpectrumConstants.v
 src/stdlib/SpectrumReappearance.v
 src/stdlib/LaplacianPiDerivation.v
 src/stdlib/LaplacianAllConstantsSynthesis.v
+src/stdlib/FiniteSizeBox.v
+src/stdlib/FiniteSizeIsing.v
+src/stdlib/FiniteSizeWalk.v
+src/stdlib/FiniteSizeSpacing.v
+src/stdlib/FiniteSizeProcessRefinement.v
+src/stdlib/FiniteSizeSynthesis.v
