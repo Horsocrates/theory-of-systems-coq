@@ -941,3 +941,12 @@ src/stdlib/RefinementSqrt.v
 src/stdlib/RefinementIntegral.v
 src/stdlib/RefinementHierarchy.v
 src/stdlib/ProcessRefinementSynthesis.v
+# Deep Green: Four Representations
+src/stdlib/GreenSpectral.v
+src/stdlib/GreenSpectralSynthesis.v
+src/stdlib/GreenResolvent.v
+src/stdlib/ResolventSynthesis.v
+src/stdlib/GreenPathIntegral.v
+src/stdlib/ChapmanKolmogorov.v
+src/stdlib/GreenDeterminant.v
+src/stdlib/GreenDeepSynthesis.v
