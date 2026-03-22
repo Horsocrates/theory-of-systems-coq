@@ -987,3 +987,10 @@ src/stdlib/ProcessMeasurementH.v
 src/stdlib/ProcessEntanglementH.v
 src/stdlib/ProcessQMConcrete.v
 src/stdlib/ProcessHilbertSynthesis.v
+# Laplacian All Constants
+src/stdlib/ChebyshevConnection.v
+src/stdlib/LaplacianDistinction.v
+src/stdlib/SpectrumConstants.v
+src/stdlib/SpectrumReappearance.v
+src/stdlib/LaplacianPiDerivation.v
+src/stdlib/LaplacianAllConstantsSynthesis.v
