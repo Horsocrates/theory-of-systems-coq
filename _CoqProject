@@ -1068,3 +1068,13 @@ src/stdlib/trading/FiniteSizePortfolio.v
 src/stdlib/trading/VolatilitySpectral.v
 src/stdlib/trading/CauchyCriterion.v
 src/stdlib/trading/ControlStability.v
+# Trading Tier 4
+src/stdlib/trading/OrderBookModel.v
+src/stdlib/trading/FundingMeanReversion.v
+src/stdlib/trading/MarchenkoPasturFilter.v
+src/stdlib/trading/TransferMatrixPrice.v
+# Trading Tier 5
+src/stdlib/trading/GameTheoryTrading.v
+src/stdlib/trading/TokenGraph.v
+src/stdlib/trading/OrderBookAutomata.v
+src/stdlib/trading/PriceDynamicsODE.v
