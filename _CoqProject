@@ -1078,3 +1078,13 @@ src/stdlib/trading/GameTheoryTrading.v
 src/stdlib/trading/TokenGraph.v
 src/stdlib/trading/OrderBookAutomata.v
 src/stdlib/trading/PriceDynamicsODE.v
+# Trading Three Insights
+src/stdlib/trading/IsingMarketMap.v
+src/stdlib/trading/MarketPartitionFunction.v
+src/stdlib/trading/IsingMarketSynthesis.v
+src/stdlib/trading/AlphaFiniteSize.v
+src/stdlib/trading/AlphaClassification.v
+src/stdlib/trading/AlphaSynthesis.v
+src/stdlib/trading/MarketUncertainty.v
+src/stdlib/trading/MarketHeisenberg.v
+src/stdlib/trading/MarketUncertaintySynthesis.v
