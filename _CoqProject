@@ -1051,3 +1051,9 @@ src/stdlib/TopologySynthesis.v
 src/stdlib/PeriodicTridiag.v
 src/stdlib/BandGap.v
 src/stdlib/BandSynthesis.v
+# Trading Tier 1
+src/stdlib/trading/CorrMatrix.v
+src/stdlib/trading/EigenvalueProcess.v
+src/stdlib/trading/TimeSeriesQ.v
+src/stdlib/trading/EntropyMarket.v
+src/stdlib/trading/SpectralFlowMarket.v
