@@ -1061,3 +1061,10 @@ src/stdlib/trading/SpectralFlowMarket.v
 src/stdlib/trading/ZeroGateTrading.v
 src/stdlib/trading/InterferenceSignals.v
 src/stdlib/trading/PhaseDetector.v
+# Trading Tier 3
+src/stdlib/trading/KellyOptimal.v
+src/stdlib/trading/ConvexRisk.v
+src/stdlib/trading/FiniteSizePortfolio.v
+src/stdlib/trading/VolatilitySpectral.v
+src/stdlib/trading/CauchyCriterion.v
+src/stdlib/trading/ControlStability.v
