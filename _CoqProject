@@ -1025,3 +1025,11 @@ src/stdlib/GaussianSpiral.v
 src/stdlib/CommutatorComplex.v
 src/stdlib/ConnectionCircle.v
 src/stdlib/ConnectionSynthesis.v
+src/stdlib/QuaternionFromDistinction.v
+src/stdlib/QuaternionSynthesis.v
+src/stdlib/PhaseCircuit.v
+src/stdlib/GroverPhase.v
+src/stdlib/GaussianPrimes.v
+src/stdlib/GaussianZetaPi.v
+src/stdlib/BerryPhase.v
+src/stdlib/BerrySynthesis.v
