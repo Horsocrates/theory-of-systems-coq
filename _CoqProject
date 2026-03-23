@@ -1057,3 +1057,7 @@ src/stdlib/trading/EigenvalueProcess.v
 src/stdlib/trading/TimeSeriesQ.v
 src/stdlib/trading/EntropyMarket.v
 src/stdlib/trading/SpectralFlowMarket.v
+# Trading Tier 2
+src/stdlib/trading/ZeroGateTrading.v
+src/stdlib/trading/InterferenceSignals.v
+src/stdlib/trading/PhaseDetector.v
