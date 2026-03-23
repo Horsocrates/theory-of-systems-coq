@@ -1088,3 +1088,42 @@ src/stdlib/trading/AlphaSynthesis.v
 src/stdlib/trading/MarketUncertainty.v
 src/stdlib/trading/MarketHeisenberg.v
 src/stdlib/trading/MarketUncertaintySynthesis.v
+src/stdlib/BernsteinVazirani.v
+src/stdlib/QFT8Process.v
+src/stdlib/ShorFactor15.v
+src/stdlib/QuantumAlgSynthesis2.v
+src/stdlib/GellMannExplicit.v
+src/stdlib/GaugeFromPlanes.v
+src/stdlib/StandardModelCount.v
+src/stdlib/GaugeSynthesis2.v
+# Six Directions Phase 2 — A: Finite-size
+src/stdlib/FiniteSizeClassification.v
+src/stdlib/FiniteSizeCritical.v
+src/stdlib/FiniteSizeHydrogen.v
+src/stdlib/FiniteSizeScalingV2.v
+# Six Directions Phase 2 — B: Euler products
+src/stdlib/EulerProductQ.v
+src/stdlib/LFunctionQ.v
+src/stdlib/GaussianZetaProduct.v
+src/stdlib/IsingAsZeta.v
+src/stdlib/PiFromPrimes.v
+# Six Directions Phase 2 — C: Quantum algorithms
+src/stdlib/BernsteinVazirani.v
+src/stdlib/QFT8Process.v
+src/stdlib/ShorFactor15.v
+src/stdlib/QuantumAlgSynthesis2.v
+# Six Directions Phase 2 — D: Gauge groups
+src/stdlib/GellMannExplicit.v
+src/stdlib/GaugeFromPlanes.v
+src/stdlib/StandardModelCount.v
+src/stdlib/GaugeSynthesis2.v
+# Six Directions Phase 2 — E: Topology
+src/stdlib/LatticeChernFull.v
+src/stdlib/EdgeStates.v
+src/stdlib/TopologicalProcessRefinement.v
+src/stdlib/Z2Invariant.v
+src/stdlib/TopologySynthesis2.v
+# Six Directions Phase 2 — F: Band theory
+src/stdlib/BlochTheorem.v
+src/stdlib/ConductivityDecidable.v
+src/stdlib/SSHModel.v
