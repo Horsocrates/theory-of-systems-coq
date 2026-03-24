@@ -1138,3 +1138,7 @@ src/stdlib/SharkovskiiContinuous.v
 src/stdlib/SharkovskiiComposition.v
 src/stdlib/SharkovskiiGeneral.v
 src/stdlib/SharkovskiiGeneralSynthesis.v
+src/stdlib/SharkovskiiCircle.v
+src/stdlib/SharkovskiiHigherDim.v
+src/stdlib/SharkovskiiEntropy.v
+src/stdlib/SharkovskiiExtensionsSynthesis.v
