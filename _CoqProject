@@ -1157,3 +1157,15 @@ src/stdlib/complexity/InformativenessSynthesis.v
 src/stdlib/complexity/SharkComplexity.v
 src/stdlib/complexity/IsingComplexity.v
 src/stdlib/complexity/ComplexitySynthesis.v
+src/stdlib/HydrogenRadial.v
+src/stdlib/HydrogenProcess.v
+src/stdlib/HydrogenTraces.v
+src/stdlib/HydrogenCorrection.v
+src/stdlib/HydrogenRadialSynthesis.v
+src/stdlib/HydrogenSO4.v
+src/stdlib/HydrogenTwoMatrices.v
+src/stdlib/HydrogenRungeLenz.v
+src/stdlib/HydrogenSymmetrySynthesis.v
+src/stdlib/HydrogenClassification.v
+src/stdlib/HydrogenBalmer.v
+src/stdlib/HydrogenGrandSynthesis.v
