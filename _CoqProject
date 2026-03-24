@@ -1134,3 +1134,7 @@ src/stdlib/SharkovskiiForcing.v
 src/stdlib/SharkovskiiGolden.v
 src/stdlib/SharkovskiiConcrete.v
 src/stdlib/SharkovskiiSynthesis.v
+src/stdlib/SharkovskiiContinuous.v
+src/stdlib/SharkovskiiComposition.v
+src/stdlib/SharkovskiiGeneral.v
+src/stdlib/SharkovskiiGeneralSynthesis.v
