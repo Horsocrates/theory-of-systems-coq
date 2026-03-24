@@ -1127,3 +1127,10 @@ src/stdlib/TopologySynthesis2.v
 src/stdlib/BlochTheorem.v
 src/stdlib/ConductivityDecidable.v
 src/stdlib/SSHModel.v
+# Sharkovskii theorem
+src/stdlib/SharkovskiiMarkov.v
+src/stdlib/SharkovskiiCovering.v
+src/stdlib/SharkovskiiForcing.v
+src/stdlib/SharkovskiiGolden.v
+src/stdlib/SharkovskiiConcrete.v
+src/stdlib/SharkovskiiSynthesis.v
