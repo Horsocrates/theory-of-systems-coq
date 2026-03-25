@@ -1268,3 +1268,11 @@ src/stdlib/heisenberg/CommutatorBits.v
 src/stdlib/heisenberg/DistinctionCost.v
 src/stdlib/heisenberg/InformationUncertainty.v
 src/stdlib/heisenberg/BinaryHeisenbergSynthesis.v
+src/stdlib/molecule/TwoCenterIntegrals.v
+src/stdlib/molecule/TwoCenterVerify.v
+src/stdlib/molecule/H2Plus.v
+src/stdlib/molecule/H2PlusCurve.v
+src/stdlib/molecule/H2Molecule.v
+src/stdlib/molecule/H2Comparison.v
+src/stdlib/molecule/BindingProcess.v
+src/stdlib/molecule/MoleculeSynthesis.v
