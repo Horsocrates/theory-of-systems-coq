@@ -1263,3 +1263,8 @@ src/stdlib/heisenberg/BlockMeasurement.v
 src/stdlib/heisenberg/ResolutionUncertainty.v
 src/stdlib/heisenberg/RGUncertaintyFlow.v
 src/stdlib/heisenberg/ClassicalLimit.v
+src/stdlib/heisenberg/BitOperators.v
+src/stdlib/heisenberg/CommutatorBits.v
+src/stdlib/heisenberg/DistinctionCost.v
+src/stdlib/heisenberg/InformationUncertainty.v
+src/stdlib/heisenberg/BinaryHeisenbergSynthesis.v
