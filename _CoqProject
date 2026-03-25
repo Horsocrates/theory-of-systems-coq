@@ -1201,3 +1201,13 @@ src/stdlib/HartreeProcess.v
 src/stdlib/CoulombKernel.v
 src/stdlib/HartreeConvergence.v
 src/stdlib/HartreeSynthesis.v
+src/stdlib/SlaterBasis.v
+src/stdlib/SlaterOverlap.v
+src/stdlib/SlaterKinetic.v
+src/stdlib/SlaterNuclear.v
+src/stdlib/SlaterMatrix.v
+src/stdlib/SlaterEigenvalue.v
+src/stdlib/SlaterConvergence.v
+src/stdlib/SlaterHelium.v
+src/stdlib/SlaterLithium.v
+src/stdlib/SlaterSynthesis.v
