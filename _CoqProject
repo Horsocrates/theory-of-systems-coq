@@ -1276,3 +1276,13 @@ src/stdlib/molecule/H2Molecule.v
 src/stdlib/molecule/H2Comparison.v
 src/stdlib/molecule/BindingProcess.v
 src/stdlib/molecule/MoleculeSynthesis.v
+src/stdlib/qchem/JIntegralExact.v
+src/stdlib/qchem/JCrossTerms.v
+src/stdlib/qchem/HeMultiSlater.v
+src/stdlib/qchem/HeEnergyLadder.v
+src/stdlib/qchem/HeJSynthesis.v
+src/stdlib/qchem/HeCISynthesisQ.v
+src/stdlib/qchem/HeteronuclearIntegrals.v
+src/stdlib/qchem/HFMolecule.v
+src/stdlib/qchem/PolarBond.v
+src/stdlib/qchem/HFSynthesis.v
