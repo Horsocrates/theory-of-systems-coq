@@ -1259,3 +1259,7 @@ src/stdlib/heisenberg/GraphUncertaintySynthesis.v
 src/stdlib/heisenberg/BandwidthUncertainty.v
 src/stdlib/heisenberg/DimensionIndependence.v
 src/stdlib/heisenberg/HeisenbergGrandSynthesis.v
+src/stdlib/heisenberg/BlockMeasurement.v
+src/stdlib/heisenberg/ResolutionUncertainty.v
+src/stdlib/heisenberg/RGUncertaintyFlow.v
+src/stdlib/heisenberg/ClassicalLimit.v
