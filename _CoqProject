@@ -1211,3 +1211,41 @@ src/stdlib/SlaterConvergence.v
 src/stdlib/SlaterHelium.v
 src/stdlib/SlaterLithium.v
 src/stdlib/SlaterSynthesis.v
+src/stdlib/qphysics/FundamentalIntegral.v
+src/stdlib/qphysics/QMatrixElements.v
+src/stdlib/qphysics/HeSlaterBasis.v
+src/stdlib/qphysics/HeHartreeFock.v
+src/stdlib/qphysics/HeCoulombIntegral.v
+src/stdlib/qphysics/HeCIMatrix.v
+src/stdlib/qphysics/HeCIEigenvalue.v
+src/stdlib/qphysics/HeCorrelationEnergy.v
+src/stdlib/qphysics/HeConvergenceRate.v
+src/stdlib/qphysics/HeCISynthesis.v
+# Q-Physics Theorem
+src/stdlib/qphysics/FundamentalIntegral.v
+src/stdlib/qphysics/QMatrixElements.v
+src/stdlib/qphysics/IrrationalsClassification.v
+src/stdlib/qphysics/GaussianVsSlater.v
+src/stdlib/qphysics/CyclotomicQ.v
+src/stdlib/qphysics/QEigenvalueTheorem.v
+src/stdlib/qphysics/AngularMomentum.v
+src/stdlib/qphysics/ClebschGordanQ.v
+src/stdlib/qphysics/QPhysicsProcesses.v
+src/stdlib/qphysics/QPhysicsTheoremSynthesis.v
+# He CI
+src/stdlib/qphysics/HeSlaterBasis.v
+src/stdlib/qphysics/HeHartreeFock.v
+src/stdlib/qphysics/HeCoulombIntegral.v
+src/stdlib/qphysics/HeCIMatrix.v
+src/stdlib/qphysics/HeCIEigenvalue.v
+src/stdlib/qphysics/HeCorrelationEnergy.v
+src/stdlib/qphysics/HeConvergenceRate.v
+src/stdlib/qphysics/HeCISynthesis.v
+# Number Table
+src/stdlib/qphysics/HydrogenNumbers.v
+src/stdlib/qphysics/HeliumNumbers.v
+src/stdlib/qphysics/LithiumNumbers.v
+src/stdlib/qphysics/BohrModel.v
+src/stdlib/qphysics/FineStructure.v
+src/stdlib/qphysics/ComparisonTable.v
+src/stdlib/qphysics/QPhysicsGrandSynthesis.v
