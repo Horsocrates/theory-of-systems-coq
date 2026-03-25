@@ -1181,3 +1181,13 @@ src/stdlib/RydbergSynthesis.v
 src/stdlib/PeriodicTableTridiag.v
 src/stdlib/AtomicClassification.v
 src/stdlib/PeriodicTableSynthesis.v
+src/stdlib/CornellPotential.v
+src/stdlib/ConfinementGapping.v
+src/stdlib/ConfinementConnection.v
+src/stdlib/ConfinementSynthesis.v
+src/stdlib/NIST_Splitting.v
+src/stdlib/ScreeningFit.v
+src/stdlib/NISTSynthesis.v
+src/stdlib/LocalityTridiag.v
+src/stdlib/NonLocalSpectrum.v
+src/stdlib/LocalitySynthesis.v
