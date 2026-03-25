@@ -1169,3 +1169,15 @@ src/stdlib/HydrogenSymmetrySynthesis.v
 src/stdlib/HydrogenClassification.v
 src/stdlib/HydrogenBalmer.v
 src/stdlib/HydrogenGrandSynthesis.v
+src/stdlib/HydrogenLikeAtoms.v
+src/stdlib/HydrogenUniversalRatio.v
+src/stdlib/HydrogenLikeSynthesis.v
+src/stdlib/HydrogenScreening.v
+src/stdlib/HydrogenSymmetryBreaking.v
+src/stdlib/HydrogenPhaseTransition.v
+src/stdlib/HydrogenScreeningSynthesis.v
+src/stdlib/RydbergProcess.v
+src/stdlib/RydbergSynthesis.v
+src/stdlib/PeriodicTableTridiag.v
+src/stdlib/AtomicClassification.v
+src/stdlib/PeriodicTableSynthesis.v
