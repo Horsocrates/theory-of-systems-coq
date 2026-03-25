@@ -1191,3 +1191,13 @@ src/stdlib/NISTSynthesis.v
 src/stdlib/LocalityTridiag.v
 src/stdlib/NonLocalSpectrum.v
 src/stdlib/LocalitySynthesis.v
+src/stdlib/PadeApprox.v
+src/stdlib/HydrogenPadeScreening.v
+src/stdlib/PadeScreeningSynthesis.v
+src/stdlib/TwoParameterScreening.v
+src/stdlib/VariationalFit.v
+src/stdlib/TwoParameterSynthesis.v
+src/stdlib/HartreeProcess.v
+src/stdlib/CoulombKernel.v
+src/stdlib/HartreeConvergence.v
+src/stdlib/HartreeSynthesis.v
