@@ -744,6 +744,13 @@ src/zeta/ZeroMigration.v
 src/zeta/ZeroStructure.v
 src/zeta/ZetaProcess.v
 src/zeta/ZetaZeros.v
+# Arithmetic Heisenberg
+src/zeta/DivisibilityGraph.v
+src/zeta/ArithmeticCommutator.v
+src/zeta/MobiusSpin.v
+src/zeta/LeeYangAnalogy.v
+src/zeta/PrimeCountingCritical.v
+src/zeta/ArithmeticHeisenbergSynthesis.v
 # Gap B: ERR → Wilson bridge
 src/foundation/ERRWilsonBridge.v
 src/foundation/ERRComputationBridge.v
