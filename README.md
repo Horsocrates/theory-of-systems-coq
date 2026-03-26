@@ -1,14 +1,14 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-12728_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-18687_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Free_Params](https://img.shields.io/badge/Free_Parameters-~0.3-orange.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" —
-> 12,728 machine-verified theorems, 0 Admitted, 746 files, ~0.3 free parameters.
+> 18,687 machine-verified theorems, 0 Admitted, 1,248 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > κ = 1/10 DERIVED from D(D+1)/2. sin²θ_W = 3/13 DERIVED from dim(SU(2))/metric_comp.
@@ -20,6 +20,8 @@
 > P4 process mathematics, verified programming language (ToS-Lang),
 > Standard Model from anomaly cancellation, quantum mechanics from logic,
 > GR from Regge calculus (14 observables), hierarchy problem DISSOLVED (κ ∝ 1/K²),
+> Q-chemistry (H, He, H₂, HF molecules), topological phases (SSH, Chern, Hall),
+> quantum computing (Grover, error correction), Sharkovskii forcing theorem,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -62,16 +64,20 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | **12,728** |
-| Coq files | **746** |
+| Proven theorems (Qed) | **18,687** |
+| Coq files | **1,248** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Free parameters | **~0.3** — gauge group, generations, κ, r, Λ scaling, η all DERIVED |
 | Verified observables | **30+** |
-| Foundation (formal) | 22 files, 229 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → SM |
-| P4 process mathematics | 300+ files, 5000+ Qed |
-| Gauge theory (Yang-Mills) | 100+ files, 2000+ Qed |
+| Foundation (formal) | 37 files, 508 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → SM |
+| P4 process mathematics | 297 files, 4,190 Qed |
+| Gauge theory (Yang-Mills) | 114 files, 2,176 Qed |
+| Standard library (stdlib) | 465 files, 5,461 Qed |
+| Q-chemistry | 25 files, 281 Qed — H, He, H₂, HF, BCS, Graphene |
 | Navier-Stokes | 34 files, 869 Qed |
+| Riemann zeta | 30 files, 683 Qed |
+| Sharkovskii + dynamical systems | 14 files, 168 Qed |
 | Four principles complete | proven (`four_principles_complete`) |
 | Yang-Mills mass gap | proven (`yang_mills_mass_gap`, Δ = 289/384) |
 | κ derived | proven (`kappa_derived == 1 # 10`) |
@@ -125,22 +131,33 @@ src/
   Applied Math (8 files)      CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
   Physics (14 files)          Quantum: InnerProduct, Born Rule, Spectral Dichotomy,
                               Entanglement, Decoherence, Qubit, Oscillator, SpinChain...
-  process/ (221 files, 3524 Qed) P4 process mathematics: classical theorems, calculus,
+  process/ (297 files, 4190 Qed) P4 process mathematics: classical theorems, calculus,
                               measure theory, ODE, functional analysis, algebra, topology,
                               category theory, Geom⊣Gauge adjunction, physical interpretation,
                               Standard Model derivation, quantum mechanics from logic (Step 10),
                               holographic bound, Planck length, inflation, decoherence, Zeno,
                               superposition, continuum limit, accuracy table, gauge connections
                               — crowned by `four_principles_complete` and `quantum_from_logic`
-  gauge/ (100 files, 2031 Qed) Yang-Mills mass gap: complete proof chain from lattice
+  gauge/ (114 files, 2176 Qed) Yang-Mills mass gap: complete proof chain from lattice
                               to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`),
                               P4 process mass gap (`su2_has_process_mass_gap`),
                               fully connected to process/ via 8 connection files
   navier_stokes/ (34 files, 869 Qed)  Galerkin, energy estimates, triadic interaction,
                               invariant region, Fatou regularity, honest assessment
-  stdlib/ (53 files)          Data structures, algorithms, number theory, graphs, algebra,
-                              categories, lattices, distributions, statistics, estimation,
-                              vector spaces, tensors, ODEs, convex analysis, game theory...
+  zeta/ (30 files, 683 Qed)   ζ as process, Euler product, zero structure, explicit formula,
+                              divisibility graph, arithmetic Heisenberg ([A,M]≠0),
+                              Möbius as spin, Lee-Yang analogy, prime counting critical
+  stdlib/ (465 files, 5461 Qed)  Transfer matrix universality, SFT entropy/zeta/classification,
+                              Sharkovskii (14 files), Green functions, Ising 1D/2D, Potts/Clock,
+                              hydrogen atom (54 files), Slater basis, Padé approximants,
+                              Q-chemistry, BCS superconductivity, graphene, topology (SSH/Chern/Hall),
+                              quantum computing (Grover/error codes), graph foundation (7 graphs),
+                              Anderson localization, π processes, continued fractions, complexity,
+                              data structures, number theory, game theory, convex analysis...
+    qchem/ (25 files, 281 Qed)   — quantum chemistry: J-integrals, He CI, H₂, HF, G2 test set
+    topology/ (6 files, 77 Qed)  — SSH model, edge states, Chern number, Hall conductance
+    quantum/ (6 files, 67 Qed)   — qubits over Q, Grover spectral, error correction, simulation
+    graph/ (9 files, 96 Qed)     — graph zoo (7 types), Anderson, propagator, spectral entropy
 
 Architecture_of_Reasoning/ (6 files)
   156 Fallacies, 46 Paradoxes, AI Fallacy Detection, Domain Violations
@@ -438,7 +455,20 @@ Complete chain from first principles to:
 - **Quantum Physics**: Born rule, spectral dichotomy, measurement, entanglement, decoherence,
   qubit (Pauli-X/Z), harmonic oscillator, spin chains (Ising), quantum dynamics
 - **Number Theory (Zeta)**: ζ as process, Euler product, zero structure, functional equation,
-  contraction zeros, approximate zeros (211 Qed, exploratory)
+  contraction zeros, approximate zeros, arithmetic Heisenberg ([A,M]≠0),
+  Möbius as spin, Mertens function, Lee-Yang analogy, prime counting critical (683 Qed)
+- **Dynamical Systems**: Sharkovskii forcing theorem (period-3 → all), SFT entropy via
+  transfer matrix, zeta functions, orbit classification, CF↔SFT bridge, circle/2D extensions (168 Qed)
+- **Q-Chemistry**: Slater basis on lattice (Padé exp), hydrogen (E→-1/2), helium CI (J=5α/8),
+  H₂ molecule (R_eq=7/5), HF molecule (first heteronuclear), G2 test set,
+  BCS superconductivity, graphene on honeycomb lattice (281 Qed)
+- **Topological Phases**: SSH model (t₁<t₂ → topological), edge states, Chern number,
+  Hall conductance σ_xy=C·e²/h ∈ Z (exactly quantized), Berry/Zak phase (77 Qed)
+- **Quantum Computing**: Pauli gates over Q, Grover = spectral gap, error correction
+  (surface code > chain), simulation classification (gapped → classical) (67 Qed)
+- **Graph Foundation**: 7 graph types with physics (chain richest spectrum 0.935),
+  Anderson localization (5th gap mechanism), propagator = Catalan numbers,
+  spectral entropy ordering (96 Qed)
 - **Category of Systems**: Sys(L) as Category, embed/forget functors, level adjunction, E/R/R functorial decomposition
 - **P4 Process Mathematics**: IVT/EVT/BW/HB as processes, process calculus (derivative, integral, FTC, Taylor),
   process measure theory (Lebesgue, Fatou), process ODE (Picard, Gronwall), process functional analysis
@@ -476,15 +506,19 @@ Complete chain from first principles to:
 | Projective Systems | 6 | 197 |
 | Experimental (Casimir, Coulomb, Lamb) | 8 | 300 |
 | Eigenvalue + Ionization | 6 | 130 |
-| P4 Process Mathematics | 300+ | 5000+ |
-| Gauge Theory (Yang-Mills) | 100+ | 2100+ |
+| P4 Process Mathematics | 297 | 4,190 |
+| Gauge Theory (Yang-Mills) | 114 | 2,176 |
 | Navier-Stokes | 34 | 869 |
-| Stdlib | 60+ | 1200+ |
+| Riemann Zeta | 30 | 683 |
+| Stdlib (core) | 419 | 5,217 |
+| Stdlib: Q-chemistry | 25 | 281 |
+| Stdlib: Topology | 6 | 77 |
+| Stdlib: Quantum Computing | 6 | 67 |
+| Stdlib: Graph Foundation | 9 | 96 |
 | Architecture of Reasoning | 6 | 117 |
-| Integration + Extraction | 2 | 11 |
-| **TOTAL** | **746** | **12,728** |
+| **TOTAL** | **1,248** | **18,687** |
 
-### Admitted: **0**
+### Admitted: **0** (across 1,248 files)
 
 All previously Admitted theorems have been resolved:
 - Core_ERR.v: statements weakened to provable versions

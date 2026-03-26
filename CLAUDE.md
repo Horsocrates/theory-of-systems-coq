@@ -1,9 +1,9 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
-## Stats (as of 2026-03-20)
-- **Qed:** 18687
+## Stats (as of 2026-03-26)
+- **Qed:** 18,687
 - **Admitted:** 0
-- **Files:** 1248
+- **Files:** 1,248
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
@@ -121,9 +121,19 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 ## File Organization
 
 ```
-src/                    — core files (75 .v files)
-src/foundation/        — formal foundation (18 .v files): Distinction → SM
-src/stdlib/             — standard library (53 .v files)
+src/                    — core files (76 .v files): axioms, types, analysis, compiler
+src/foundation/        — formal foundation (37 .v files): Distinction → SM → particles
+src/process/           — P4 process mathematics (297 .v files, 4190 Qed)
+src/gauge/             — Yang-Mills mass gap (114 .v files, 2176 Qed)
+src/stdlib/            — standard library (465 .v files, 5461 Qed)
+  src/stdlib/qchem/    — quantum chemistry (25 files, 281 Qed): H, He, H₂, HF, BCS, graphene
+  src/stdlib/topology/ — topological phases (6 files, 77 Qed): SSH, Chern, Hall
+  src/stdlib/quantum/  — quantum computing (6 files, 67 Qed): Grover, error codes
+  src/stdlib/graph/    — graph foundation (9 files, 96 Qed): 7 graphs, Anderson, propagator
+src/zeta/              — Riemann zeta (30 .v files, 683 Qed): arithmetic Heisenberg
+src/physics/           — quantum physics (14 .v files, 356 Qed)
+src/linalg/            — linear algebra (6 .v files, 130 Qed)
+src/navier_stokes/     — Navier-Stokes (34 .v files, 869 Qed)
 Architecture_of_Reasoning/ — fallacy/paradox taxonomy (6 .v files)
 tos_lang/               — OCaml extraction + parser + CLI
 extraction/             — extracted OCaml modules
@@ -418,7 +428,7 @@ IMPACT: annotations.json with 15 landmark + 9 bottleneck annotations. CLAUDE.md 
 
 ## Admitted — Priority List
 
-All Admitted have been closed as of 2026-03-19. The project has **0 Admitted** across 776 files.
+All Admitted have been closed as of 2026-03-19. The project has **0 Admitted** across 1,248 files.
 
 Previously existed (all resolved):
 - HeineBorel_ERR: proved with Lebesgue number assumption
