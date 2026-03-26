@@ -1329,3 +1329,13 @@ src/stdlib/graph/GraphPropagator.v
 src/stdlib/graph/PropagatorSynthesis.v
 src/stdlib/graph/SpectralEntropy.v
 src/stdlib/graph/GraphFoundationSynthesis.v
+src/stdlib/foundations/BoltzmannProcess.v
+src/stdlib/foundations/NailedSets.v
+src/stdlib/foundations/NailedSetsSynthesis.v
+src/stdlib/foundations/DistinctionPrior.v
+src/stdlib/foundations/CircleOpened.v
+src/stdlib/foundations/CircleOpenedSynthesis.v
+src/stdlib/foundations/DoublyStochastic.v
+src/stdlib/foundations/MajorizationSchur.v
+src/stdlib/foundations/SecondLaw.v
+src/stdlib/foundations/SecondLawGrandSynthesis.v
