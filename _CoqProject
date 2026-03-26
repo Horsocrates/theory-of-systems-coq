@@ -1301,3 +1301,15 @@ src/stdlib/qchem/GrapheneTransfer.v
 src/stdlib/qchem/GrapheneDOS.v
 src/stdlib/qchem/GrapheneTopology.v
 src/stdlib/qchem/GrapheneSynthesis.v
+src/stdlib/topology/SSHModelT.v
+src/stdlib/topology/EdgeStatesT.v
+src/stdlib/topology/ChernNumberT.v
+src/stdlib/topology/HallConductanceT.v
+src/stdlib/topology/BerryPhaseT.v
+src/stdlib/topology/TopologySynthesisT.v
+src/stdlib/quantum/QubitQ.v
+src/stdlib/quantum/GroverSpectralQ.v
+src/stdlib/quantum/ErrorCorrectionQ.v
+src/stdlib/quantum/SimulationClassQ.v
+src/stdlib/quantum/QuantumClassicalMapQ.v
+src/stdlib/quantum/QuantumSynthesisQ.v
