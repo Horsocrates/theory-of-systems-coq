@@ -1320,3 +1320,12 @@ src/stdlib/quantum/ErrorCorrectionQ.v
 src/stdlib/quantum/SimulationClassQ.v
 src/stdlib/quantum/QuantumClassicalMapQ.v
 src/stdlib/quantum/QuantumSynthesisQ.v
+src/stdlib/graph/GraphZoo.v
+src/stdlib/graph/GraphClassification.v
+src/stdlib/graph/GraphPhysicsSynthesis.v
+src/stdlib/graph/AndersonModel.v
+src/stdlib/graph/AndersonSynthesis.v
+src/stdlib/graph/GraphPropagator.v
+src/stdlib/graph/PropagatorSynthesis.v
+src/stdlib/graph/SpectralEntropy.v
+src/stdlib/graph/GraphFoundationSynthesis.v
