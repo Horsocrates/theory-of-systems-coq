@@ -1345,3 +1345,13 @@ src/foundation/L5_CoreSynthesis.v
 src/foundation/ObserverFoundation.v
 src/foundation/TimeFromObservation.v
 src/foundation/ObserverSynthesis.v
+src/foundation/VoidLogicDuality.v
+src/foundation/VoidLogicSynthesis.v
+src/foundation/L5_Conservation.v
+src/foundation/L5_NatFromHierarchy.v
+src/foundation/L5_RGConnection.v
+src/foundation/EnergyFromContent.v
+src/foundation/EnergySynthesis.v
+src/foundation/L5_StructurePreservation.v
+src/foundation/L5_ResolutionGeneral.v
+src/foundation/L5_PhasesSynthesis.v
