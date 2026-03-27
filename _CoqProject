@@ -1342,3 +1342,6 @@ src/stdlib/foundations/SecondLawGrandSynthesis.v
 src/foundation/L5_Preservation.v
 src/foundation/L5_Arrow.v
 src/foundation/L5_CoreSynthesis.v
+src/foundation/ObserverFoundation.v
+src/foundation/TimeFromObservation.v
+src/foundation/ObserverSynthesis.v
