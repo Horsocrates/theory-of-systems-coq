@@ -1339,3 +1339,6 @@ src/stdlib/foundations/DoublyStochastic.v
 src/stdlib/foundations/MajorizationSchur.v
 src/stdlib/foundations/SecondLaw.v
 src/stdlib/foundations/SecondLawGrandSynthesis.v
+src/foundation/L5_Preservation.v
+src/foundation/L5_Arrow.v
+src/foundation/L5_CoreSynthesis.v
