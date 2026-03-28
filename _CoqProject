@@ -1355,3 +1355,8 @@ src/foundation/EnergySynthesis.v
 src/foundation/L5_StructurePreservation.v
 src/foundation/L5_ResolutionGeneral.v
 src/foundation/L5_PhasesSynthesis.v
+src/foundation/Binarity.v
+src/foundation/EntropyExact.v
+src/foundation/RelativityFoundation.v
+src/foundation/CausalCone.v
+src/foundation/BinarityRelativitySynthesis.v
