@@ -1360,3 +1360,7 @@ src/foundation/EntropyExact.v
 src/foundation/RelativityFoundation.v
 src/foundation/CausalCone.v
 src/foundation/BinarityRelativitySynthesis.v
+src/foundation/TwoMechanisms.v
+src/foundation/CombinatorialGrowth.v
+src/foundation/VoidInexhaustible.v
+src/foundation/CreationSynthesis.v
