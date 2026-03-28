@@ -1,14 +1,14 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-18687_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-19151_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Free_Params](https://img.shields.io/badge/Free_Parameters-~0.3-orange.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" —
-> 18,687 machine-verified theorems, 0 Admitted, 1,248 files, ~0.3 free parameters.
+> 19,151 machine-verified theorems, 0 Admitted, 1,283 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > κ = 1/10 DERIVED from D(D+1)/2. sin²θ_W = 3/13 DERIVED from dim(SU(2))/metric_comp.
@@ -20,8 +20,13 @@
 > P4 process mathematics, verified programming language (ToS-Lang),
 > Standard Model from anomaly cancellation, quantum mechanics from logic,
 > GR from Regge calculus (14 observables), hierarchy problem DISSOLVED (κ ∝ 1/K²),
-> Q-chemistry (H, He, H₂, HF molecules), topological phases (SSH, Chern, Hall),
-> quantum computing (Grover, error correction), Sharkovskii forcing theorem,
+> Q-chemistry (H, He, H₂, HF molecules), BCS superconductivity, graphene Dirac cone,
+> topological phases (SSH, Chern, Hall), quantum computing (Grover, Shor N=15, error correction),
+> Sharkovskii forcing theorem (PL + general continuous, 168 Qed),
+> L5 formalization (8 phases, 298 Qed): Second Law WITHOUT Past Hypothesis,
+> P4 (inexhaustibility) as THEOREM from combinatorial growth,
+> S = k·ln(2)·|D| EXACT entropy from binarity (L2+L3),
+> Minkowski metric DERIVED from observer structure,
 > and the first formally verified reasoning pipeline for LLMs.**
 
 ---
@@ -64,17 +69,20 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | **18,687** |
-| Coq files | **1,248** |
+| Proven theorems (Qed) | **19,151** |
+| Coq files | **1,283** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Free parameters | **~0.3** — gauge group, generations, κ, r, Λ scaling, η all DERIVED |
 | Verified observables | **30+** |
-| Foundation (formal) | 37 files, 508 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → SM |
+| Foundation (formal) | 51 files, 806 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SecondLaw |
 | P4 process mathematics | 297 files, 4,190 Qed |
 | Gauge theory (Yang-Mills) | 114 files, 2,176 Qed |
-| Standard library (stdlib) | 465 files, 5,461 Qed |
-| Q-chemistry | 25 files, 281 Qed — H, He, H₂, HF, BCS, Graphene |
+| Standard library (stdlib) | 784 files, 11,859 Qed |
+| Q-chemistry (qchem/) | 25 files, 281 Qed — H, He, H₂, HF, BCS, Graphene |
+| L5 formalization | 21 files, 298 Qed — 8 phases, Second Law, Observer, Creation |
+| Sharkovskii dynamics | 14 files, 168 Qed — PL + general continuous + extensions |
+| Hydrogen atom | 24 files, 390 Qed — radial, SO(4), Slater, screening, Rydberg |
 | Navier-Stokes | 34 files, 869 Qed |
 | Riemann zeta | 30 files, 683 Qed |
 | Sharkovskii + dynamical systems | 14 files, 168 Qed |

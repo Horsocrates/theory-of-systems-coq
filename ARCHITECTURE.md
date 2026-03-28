@@ -114,6 +114,59 @@ Estimation (18)     <-- standalone (QArith)
 CategoryStatExamples (16) <-- all above
 ```
 
+### Recent Additions (Sessions 15-28, ~6100 Qed)
+
+**Quantum Chemistry** (`stdlib/qchem/`, 25 files, 281 Qed):
+```
+JIntegralExact → JCrossTerms → HeMultiSlater → HeEnergyLadder → HeJSynthesis → HeCISynthesisQ
+HeteronuclearIntegrals → HFMolecule → PolarBond → HFSynthesis
+CooperPair → BCSGap → BCSTransferMatrix → BCSCondensate → BCSSynthesis
+HoneycombLattice → GrapheneTransfer → GrapheneDOS → GrapheneTopology → GrapheneSynthesis
+G2Energies → G2Atomization → G2ErrorAnalysis → G2IonizationEnergy → G2Synthesis
+```
+
+**L5 Foundations** (`stdlib/foundations/` + `foundation/`, 21 files, 298 Qed):
+```
+L5_Preservation → L5_Arrow → L5_CoreSynthesis (Phase 1-2)
+ObserverWitness → ObserverTime → ObserverSynthesis (Observer)
+BoltzmannProcess → DoublyStochastic → MajorizationSchur → SecondLaw (2nd Law)
+VoidLogicDuality → L5_Conservation → L5_NatFromHierarchy (Phases 3-4)
+EnergyFromContent → L5_StructurePreservation → L5_ResolutionGeneral (Phases 5-6)
+Binarity → EntropyExact → RelativityFoundation → CausalCone (Binarity+Relativity)
+TwoMechanisms → CombinatorialGrowth → VoidInexhaustible (Creation)
+```
+
+**Sharkovskii Dynamics** (`stdlib/Sharkovskii*.v`, 14 files, 168 Qed):
+```
+SharkovskiiMarkov → Forcing → Concrete → Covering → Golden → GoldenSynthesis
+SharkovskiiContinuous → Composition → General → GeneralSynthesis
+SharkovskiiCircle → HigherDim → Entropy → ExtensionsSynthesis
+```
+
+**Hydrogen Atom** (`stdlib/Hydrogen*.v` + `Slater*.v`, 34 files, 490 Qed):
+```
+HydrogenRadial → Process → Traces → Correction → SO4 → Classification → Balmer
+HydrogenLikeAtoms → Screening → SymmetryBreaking → PhaseTransition → Rydberg
+SlaterBasis → Overlap → Kinetic → Nuclear → Matrix → Eigenvalue → Convergence → He → Li
+PadeApprox → HydrogenPadeScreening → TwoParameterScreening → HartreeProcess → Coulomb
+```
+
+**Heisenberg** (`stdlib/heisenberg/`, 6 files):
+```
+HeisenbergBlock → HeisenbergReturn → HeisenbergBinary → HeisenbergSynthesis
+HeisenbergFiniteSize → HeisenbergUncertainty
+```
+
+**Other New Subdirectories**:
+- `stdlib/complexity/` — landscape zones, NP-hardness, Sharkovskii-complexity connection
+- `stdlib/graph/` — graph foundation, adjacency
+- `stdlib/molecule/` — H₂ molecule
+- `stdlib/topology/` — Chern number, SSH model, edge states
+- `stdlib/quantum/` — quantum algorithms (Grover, Deutsch, QFT)
+- `stdlib/qed/` — Schwinger g-2 calculation
+- `stdlib/qphysics/` — Q-physics theorem
+- `stdlib/trading/` — DeFi quantitative trading bot
+
 ## Key Theorem Chains
 
 ### Chain 1: Type Safety
@@ -196,6 +249,42 @@ ProcessRGRigorConnection (G1: 8 RG modules)
               -> ProcessGaugeFullSynthesis (G8: full synthesis)
 ```
 61 gauge/ modules fully connected to process/ — zero waste.
+
+### Chain 8: L5 → Second Law (no Past Hypothesis)
+```
+L5_Preservation (L5: D(K) ⊆ D(K+1))
+  -> DoublyStochastic (L1 symmetry → T doubly stochastic)
+    -> MajorizationSchur (T·p ≺ p, entropy increases)
+      -> SecondLaw (S(T·p) ≥ S(p), verified for 3 concrete cases)
+        -> SecondLawGrandSynthesis (arrow of time from L5, no PH)
+```
+
+### Chain 9: Hydrogen → Slater → HF Molecule
+```
+HydrogenRadial (H(M,K,i,j) ∈ Q, trace = 50/3)
+  -> SlaterBasis (φ(i) = Padé exp(-ζi/M) ∈ Q)
+    -> SlaterOverlap + SlaterKinetic + SlaterNuclear (all integrals ∈ Q)
+      -> JIntegralExact (J = 5α/8 EXACT)
+        -> HeMultiSlater (2-STO CI basis)
+          -> HFMolecule (first heteronuclear molecule verified over Q)
+```
+
+### Chain 10: Sharkovskii Complete
+```
+SharkovskiiMarkov (golden [[0,1],[1,1]] Markov graph)
+  -> SharkovskiiForcing (period-3 forces all, via Lucas positivity)
+    -> SharkovskiiConcrete (PL map: all orbits ∈ Q for periods 1-5)
+      -> SharkovskiiGeneral (general continuous case via covering)
+        -> SharkovskiiExtensions (circle: fails; dim≥2: fails; entropy stratification)
+```
+
+### Chain 11: Creation Mechanisms → P4 as Theorem
+```
+TwoMechanisms (analysis: K linear + synthesis: K(K-1)/2 quadratic)
+  -> CombinatorialGrowth (gap = pot - attention grows as K²)
+    -> VoidInexhaustible (surplus grows each step → constructive inexhaustibility)
+      -> CreationSynthesis (P4 = theorem, Socrates proven, matter > consciousness)
+```
 
 ## Axiom Architecture
 

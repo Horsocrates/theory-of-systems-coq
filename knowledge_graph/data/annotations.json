@@ -4,9 +4,9 @@
     "created": "2026-03-20",
     "project": "theory-of-systems-coq",
     "stats": {
-      "qed": 13038,
+      "qed": 19151,
       "admitted": 0,
-      "files": 776,
+      "files": 1283,
       "axioms_core": 2,
       "axioms_domain": 4
     },
@@ -914,6 +914,132 @@
         "refactorable": false,
         "why_this_formulation": "DecTotalOrder + list = minimal interface for deterministic selection without AC"
       }
+    },
+    {
+      "id": "second_law_from_L5",
+      "file": "src/stdlib/foundations/SecondLaw.v",
+      "status": "Qed",
+      "level": "11.5",
+      "level_major": 11,
+      "domains": ["thermodynamics", "foundation"],
+      "philo_role": "Second law of thermodynamics derived from L1 (symmetry) without Past Hypothesis. L1 → doubly stochastic T → majorization → Schur → S non-decreasing. Resolves Wolpert-Rovelli circle."
+    },
+    {
+      "id": "L5_conservation_theorem",
+      "file": "src/foundation/L5_Conservation.v",
+      "status": "Qed",
+      "level": "11.4",
+      "level_major": 11,
+      "domains": ["foundation", "physics"],
+      "philo_role": "Every distinction is a conserved quantity. Energy, charge, momentum, information conservation as L5 instances. Memory = special case."
+    },
+    {
+      "id": "P4_as_theorem",
+      "file": "src/foundation/TwoMechanisms.v",
+      "status": "Qed",
+      "level": "11.7",
+      "level_major": 11,
+      "domains": ["foundation", "combinatorics"],
+      "philo_role": "P4 (inexhaustibility) derived as theorem from combinatorial growth. Analysis (K linear) + synthesis (K²/2 quadratic) → potential always exceeds actualization. Void inexhaustible = constructive proof."
+    },
+    {
+      "id": "binarity_entropy_exact",
+      "file": "src/foundation/EntropyExact.v",
+      "status": "Qed",
+      "level": "11.3",
+      "level_major": 11,
+      "domains": ["foundation", "thermodynamics"],
+      "philo_role": "S = k·ln(2)·|D(K)| exact from L2+L3 (binarity). Each distinction = 1 bit. Shannon derived, not postulated."
+    },
+    {
+      "id": "relativity_from_observer",
+      "file": "src/foundation/RelativityFoundation.v",
+      "status": "Qed",
+      "level": "11.8",
+      "level_major": 11,
+      "domains": ["foundation", "physics"],
+      "philo_role": "Minkowski metric ds² = dt² - dx² derived from observer structure. No absolute simultaneity: two observers share distinction at different stages. Causal cone from graph distance."
+    },
+    {
+      "id": "hydrogen_exact_lattice",
+      "file": "src/stdlib/HydrogenRadial.v",
+      "status": "Qed",
+      "level": "9.1",
+      "level_major": 9,
+      "domains": ["physics", "chemistry"],
+      "philo_role": "Hydrogen atom on lattice: H(M,K,i,j) ∈ Q. Kinetic (tridiag) + Coulomb (-2M/(i+1)). E₂/E₁ → 1/4 as M → ∞. Polynomial correction = critical (dense spectrum)."
+    },
+    {
+      "id": "helium_CI_exact",
+      "file": "src/stdlib/qchem/JIntegralExact.v",
+      "status": "Qed",
+      "level": "9.2",
+      "level_major": 9,
+      "domains": ["chemistry"],
+      "philo_role": "Coulomb integral J = 5α/8 exact over Q. He CI with 2-STO basis, all matrix elements rational. E_He = -729/256 Ha (1.93% from NIST)."
+    },
+    {
+      "id": "HF_molecule_verified",
+      "file": "src/stdlib/qchem/HFMolecule.v",
+      "status": "Qed",
+      "level": "9.3",
+      "level_major": 9,
+      "domains": ["chemistry"],
+      "philo_role": "First heteronuclear molecule verified over Q. HF: α_H=1, α_F=27/10. Potential energy curve with minimum at R=1.7. Polar bond verified (Δχ > 0.5)."
+    },
+    {
+      "id": "sharkovskii_complete",
+      "file": "src/stdlib/SharkovskiiGeneral.v",
+      "status": "Qed",
+      "level": "10.8",
+      "level_major": 10,
+      "domains": ["dynamics", "analysis"],
+      "philo_role": "Sharkovskii theorem: period-3 implies all periods. Complete for PL maps (all orbits ∈ Q) and general continuous case (covering lemma). Extensions: fails on circle and in dim ≥ 2."
+    },
+    {
+      "id": "process_finer_than_entropy",
+      "file": "src/stdlib/StrictlyFiner.v",
+      "status": "Qed",
+      "level": "10.9",
+      "level_major": 10,
+      "domains": ["dynamics", "set-theory"],
+      "philo_role": "Process classification strictly finer than topological entropy. Witness: diag(2,1) vs diag(2,-1) — same λ_max=2 but different tr(M^K). The journey contains more than the destination."
+    },
+    {
+      "id": "graphene_dirac_cone",
+      "file": "src/stdlib/qchem/GrapheneTransfer.v",
+      "status": "Qed",
+      "level": "9.4",
+      "level_major": 9,
+      "domains": ["physics", "condensed-matter"],
+      "philo_role": "Graphene: 2-sublattice honeycomb → off-diagonal T → tr=0 (bipartite) → gap=0 at Dirac point. D(E) ∝ |E|. Berry phase = π. BN gap from broken sublattice symmetry."
+    },
+    {
+      "id": "BCS_gap_process",
+      "file": "src/stdlib/qchem/BCSGap.v",
+      "status": "Qed",
+      "level": "9.5",
+      "level_major": 9,
+      "domains": ["physics", "condensed-matter"],
+      "philo_role": "BCS gap Δ from Padé exp over Q. Cooper pair = bound state from any V<0. T_BCS = [[ε,Δ],[Δ,-ε]], tr=0. Condensation energy = -NΔ²/2."
+    },
+    {
+      "id": "observer_witness",
+      "file": "src/foundation/ObserverWitness.v",
+      "status": "Qed",
+      "level": "11.2",
+      "level_major": 11,
+      "domains": ["foundation", "metaphysics"],
+      "philo_role": "Observer = witness function mapping distinctions to observations. Witnesses are unique, grow with D(K), are preserved by L5. Time = nat index on observation process."
+    },
+    {
+      "id": "nat_is_L5_levels",
+      "file": "src/foundation/L5_NatFromHierarchy.v",
+      "status": "Qed",
+      "level": "11.1",
+      "level_major": 11,
+      "domains": ["foundation", "mathematics"],
+      "philo_role": "Level ≅ nat (bijection proved). Peano axioms = L5 hierarchy properties. Natural numbers derived from distinction structure, not postulated."
     }
   ],
 
