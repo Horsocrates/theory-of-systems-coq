@@ -1351,6 +1351,7 @@ src/stdlib/foundations/MajorizationSchur.v
 src/stdlib/foundations/SecondLaw.v
 src/stdlib/foundations/SecondLawGrandSynthesis.v
 src/foundation/BlockCayleyUnistochastic.v
+src/foundation/GeneralHermitianCayley.v
 src/foundation/ConnectionClosesGap.v
 src/foundation/GraphUnitary.v
 src/foundation/L1_DoublyStochastic.v
