@@ -5,7 +5,7 @@
 (*                                                                          *)
 (*  PURPOSE: Formalize the reflection s -> 1-s and its consequences for     *)
 (*    the structure of zeta zeros. The functional equation is taken as      *)
-(*    ONE mathematical axiom (Admitted) -- the only Admitted in the branch. *)
+(*    ONE domain axiom (functional_equation_structure) in this branch.      *)
 (*                                                                          *)
 (*  KEY RESULTS:                                                            *)
 (*    - reflect: s -> 1-s on TComplex                                      *)
@@ -124,7 +124,7 @@ Qed.
 (*                                                                           *)
 (* The functional equation of zeta implies: if rho is a nontrivial zero,   *)
 (* then reflect(rho) is also a nontrivial zero.                            *)
-(* This is the ONE Admitted axiom in the entire zeta branch.               *)
+(* This is the ONE domain Axiom in the entire zeta branch (not Admitted).  *)
 (* ========================================================================= *)
 
 (** Reflection preserves Cauchy complex property *)

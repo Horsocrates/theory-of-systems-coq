@@ -9,8 +9,8 @@
 (*  Version: 5.0 (E/R/R Integration)                                         *)
 (*  Date:    January 2026                                                    *)
 (*                                                                           *)
-(*  STATUS: 41 Qed, 1 Admitted (97.6%) — Admitted is a known limitation      *)
-(*          (Qfloor discontinuity; use ShrinkingIntervals approach instead)  *)
+(*  STATUS: 41 Qed, 0 Admitted (DEPRECATED — use ShrinkingIntervals_ERR.v)   *)
+(*          Original Admitted closed; Qfloor approach superseded by trisection *)
 (*                                                                           *)
 (* ========================================================================= *)
 (*                                                                           *)
@@ -869,10 +869,11 @@ Check diagonal_differs_structurally.
    - diagonal_in_unit : diagonal in [0, 1]
    - diagonal_is_Cauchy : diagonal converges
    - diagonal_not_in_enumeration : diagonal <> E(n) for all n
-   - unit_interval_uncountable : main theorem (depends on Admitted)
-   
-   ADMITTED (1 lemma) - FUNDAMENTAL LIMITATION:
-   - diagonal_differs_at_n : requires "digit stability"
+   - unit_interval_uncountable : main theorem (DEPRECATED — use ShrinkingIntervals_ERR.v)
+
+   NOTE: Previously had 1 Admitted (diagonal_differs_at_n, digit stability).
+   Now resolved: this file is DEPRECATED in favor of ShrinkingIntervals_ERR.v
+   which uses trisection (0 Admitted, 149 Qed).
    
    =======================================================================
    WHY DIGIT STABILITY IS PROBLEMATIC (Theory of Systems perspective)

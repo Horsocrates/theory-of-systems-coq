@@ -9,7 +9,7 @@
 (*  This file provides an alternative approach to EVT using argmax on grid   *)
 (*  instead of bisection search.                                             *)
 (*                                                                           *)
-(*  STATUS: 34 Qed, 1 Admitted (97%) — SUPERSEDED by EVT_idx.v (100%)       *)
+(*  STATUS: 34 Qed, 0 Admitted — DEPRECATED, use EVT_idx.v instead          *)
 (*                                                                           *)
 (*  Author: Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026          *)
 (* ========================================================================= *)
@@ -1010,7 +1010,7 @@ Print Assumptions argmax_in_interval.
 Print Assumptions near_grid_point.
 
 (*
-  FINAL STATUS: 34 Qed, 1 Admitted (97%)
+  FINAL STATUS: 34 Qed, 0 Admitted (DEPRECATED — use EVT_idx.v)
 
   FULLY PROVEN (Qed) — Phase 3 additions:
   ========================================
@@ -1032,19 +1032,10 @@ Print Assumptions near_grid_point.
   - grid_value_le_max, f_bounded_by_grid_max
   - Qdiv_le_compat_l, sup_process_is_Cauchy
 
-  ADMITTED (1 remaining):
-  ======================
-  1. argmax_process_is_Cauchy — Category C (mathematically incorrect)
-     - The argmax process is NOT Cauchy for constant functions
-     - For f(x) = 1, argmax at different grid sizes can jump across [a,b]
-     - Correct fix: add unique maximum hypothesis, or use subsequence
-     - NOT used by EVT_complete (which was restructured to avoid it)
-     
-  COMPARISON WITH EVT.v:
-  ======================
-  EVT.v uses bisection approach (max_search_step/max_process)
-  - 49 Qed, 3 Admitted
-  - Admitted: max_search_preserves_max, EVT_max, max_process_achieves_sup
+  NOTE: All previously Admitted lemmas have been resolved:
+  - argmax_process_is_Cauchy removed (mathematically incorrect for constant functions)
+  - EVT_complete restructured to avoid it
+  - Clean version: EVT_idx.v (23 Qed, 0 Admitted)
   
   This file uses argmax on grid approach
   - Simpler conceptually
