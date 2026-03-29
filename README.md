@@ -75,10 +75,10 @@ A = exists
 | Admitted | **0** |
 | Free parameters | **~0.3** — gauge group, generations, κ, r, Λ scaling, η all DERIVED |
 | Verified observables | **30+** |
-| Foundation (formal) | 51 files, 806 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SecondLaw |
+| Foundation (formal) | 62 files, 859 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SecondLaw |
 | P4 process mathematics | 297 files, 4,190 Qed |
 | Gauge theory (Yang-Mills) | 114 files, 2,176 Qed |
-| Standard library (stdlib) | 784 files, 11,859 Qed |
+| Standard library (stdlib) | 465 files, 7,436 Qed |
 | Q-chemistry (qchem/) | 25 files, 281 Qed — H, He, H₂, HF, BCS, Graphene |
 | L5 formalization | 21 files, 298 Qed — 8 phases, Second Law, Observer, Creation |
 | Sharkovskii dynamics | 14 files, 168 Qed — PL + general continuous + extensions |
@@ -124,9 +124,10 @@ coqc -Q src ToS src/Demo.v
 ```
 src/
   ToS_Axioms.v               L3 (classic) + L4 (L4_witness) — the ONLY axioms
-  foundation/ (22 files)      Distinction, L1-L5 as theorems, P1-P4 derived, E/R/R,
+  foundation/ (62 files, 859 Qed)
+                              Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SM derivation.
                               Asymmetric distinction, nested distinction → SM gauge group,
-                              3 generations from L4, measurement, Λ, η
+                              3 generations from L4, measurement, Λ, η, consciousness, time
   Core (18 files)             L1-L5, P1-P4, E/R/R, Systems, Levels, Morphisms,
                               Category of Systems, Level Functors, Adjunction
   Type Theory (7 files)       Pi, Sigma, Inductive, Coinductive, Constitution, Erasure, Universes
@@ -134,11 +135,15 @@ src/
   Semantics (6 files)         Expressions, Reduction, Typing, SubjectReduction, Progress, TypeSafety
   Compiler (4 files)          TypeChecker, Evaluator, AIInterface, Extraction
   Pipeline (4 files)          DomainTypes, Validation, PipelineSemantics, Extraction
-  Analysis (22 files)         CauchyReal, Calculus chain, Series, IVT, EVT, FixedPoint...
+  analysis/ (4 files, 102 Qed) Extended analysis (main calculus chain is in src/ root)
+  Analysis in root (22 files) CauchyReal, Calculus chain, Series, IVT, EVT, FixedPoint...
   Set Theory (3 files)        ProcessTypes, ProcessDiagonal, ProcessContinuumHypothesis
   Applied Math (8 files)      CROWN, GradientDescent, LinearAlgebra, Probability, Measure...
-  Physics (14 files)          Quantum: InnerProduct, Born Rule, Spectral Dichotomy,
-                              Entanglement, Decoherence, Qubit, Oscillator, SpinChain...
+  linalg/ (6 files, 130 Qed)  Matrix operations, eigenvalues, Gershgorin, power method
+  physics/ (14 files, 356 Qed) Quantum: Qubit, Oscillator, SpinChain, QuantumDynamics...
+  projective/ (6 files, 197 Qed) Projective limits, quantum towers, process operators
+  experimental/ (12 files, 337 Qed) Casimir, Coulomb, Lamb shift, vacuum energy
+  extraction/ (3 files, 47 Qed)  Gap calculator: GapCompute, GapCertificate, GapExtraction
   process/ (297 files, 4190 Qed) P4 process mathematics: classical theorems, calculus,
                               measure theory, ODE, functional analysis, algebra, topology,
                               category theory, Geom⊣Gauge adjunction, physical interpretation,
@@ -150,28 +155,37 @@ src/
                               to Wightman QFT with Δ > 0 (`yang_mills_mass_gap`),
                               P4 process mass gap (`su2_has_process_mass_gap`),
                               fully connected to process/ via 8 connection files
-  navier_stokes/ (34 files, 869 Qed)  Galerkin, energy estimates, triadic interaction,
+  navier_stokes/ (34 files, 869 Qed) Galerkin, energy estimates, triadic interaction,
                               invariant region, Fatou regularity, honest assessment
   zeta/ (30 files, 683 Qed)   ζ as process, Euler product, zero structure, explicit formula,
                               divisibility graph, arithmetic Heisenberg ([A,M]≠0),
                               Möbius as spin, Lee-Yang analogy, prime counting critical
-  stdlib/ (465 files, 5461 Qed)  Transfer matrix universality, SFT entropy/zeta/classification,
+  stdlib/ (465 files, 7436 Qed) Transfer matrix universality, SFT entropy/zeta/classification,
                               Sharkovskii (14 files), Green functions, Ising 1D/2D, Potts/Clock,
-                              hydrogen atom (54 files), Slater basis, Padé approximants,
-                              Q-chemistry, BCS superconductivity, graphene, topology (SSH/Chern/Hall),
-                              quantum computing (Grover/error codes), graph foundation (7 graphs),
-                              Anderson localization, π processes, continued fractions, complexity,
+                              hydrogen atom (24 files), Slater basis, Padé approximants,
+                              Q-chemistry, BCS, graphene, topology, quantum computing, complexity,
                               data structures, number theory, game theory, convex analysis...
-    qchem/ (25 files, 281 Qed)   — quantum chemistry: J-integrals, He CI, H₂, HF, G2 test set
-    topology/ (6 files, 77 Qed)  — SSH model, edge states, Chern number, Hall conductance
-    quantum/ (6 files, 67 Qed)   — qubits over Q, Grover spectral, error correction, simulation
-    graph/ (9 files, 96 Qed)     — graph zoo (7 types), Anderson, propagator, spectral entropy
+    qchem/ (25 files, 281 Qed)      — quantum chemistry: H, He, H₂, HF, BCS, graphene
+    topology/ (6 files, 77 Qed)     — SSH, edge states, Chern number, Hall conductance
+    quantum/ (6 files, 67 Qed)      — Grover, Shor(15), BV, QFT8, error correction
+    graph/ (9 files, 96 Qed)        — graph zoo (7 types), Anderson, propagator
+    heisenberg/ (18 files, 220 Qed) — binary & arithmetic Heisenberg uncertainty
+    qphysics/ (25 files, 287 Qed)   — Born rule, entanglement, no-cloning, measurement
+    complexity/ (15 files, 185 Qed) — P vs NP landscape, forward/backward asymmetry
+    foundations/ (10 files, 113 Qed) — Second law from L5, majorization, Schur
+    molecule/ (8 files, 87 Qed)     — molecular structure and bonding
+    trading/ (31 files, 551 Qed)    — information-theoretic trading models
+    qed/ (1 file, 11 Qed)           — QED corrections
 
 Architecture_of_Reasoning/ (6 files)
   156 Fallacies, 46 Paradoxes, AI Fallacy Detection, Domain Violations
 
+knowledge_graph/             AI reasoning annotations (dependency graph, landmark/bottleneck data)
 tos_lang/                    OCaml extraction + parser + CLI
+extraction/                  Extracted OCaml modules
+extracted/                   Compiled extracted code
 examples/                    .tos example files
+docs/                        Documentation, papers, auto-generated references
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for full dependency graph.
@@ -181,7 +195,7 @@ See [docs/FILE_MAP.md](docs/FILE_MAP.md) for every file with Qed count.
 
 ## Highlights
 
-### Foundation Formalization (22 files, 229 Qed)
+### Foundation Formalization (62 files, 859 Qed)
 
 The philosophical-formal gap is now **closed**: L1-L5 are theorems about Distinction,
 P1-P4 are derived from L1-L5, and the SM gauge group, generations, Λ, and η all

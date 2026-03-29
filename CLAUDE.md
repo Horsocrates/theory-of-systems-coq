@@ -122,14 +122,21 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 
 ```
 src/                    — core files (76 .v files): axioms, types, analysis, compiler
-src/foundation/        — formal foundation (37 .v files): Distinction → SM → particles
+src/foundation/        — formal foundation (62 .v files): Distinction → SM → particles
 src/process/           — P4 process mathematics (297 .v files, 4190 Qed)
 src/gauge/             — Yang-Mills mass gap (114 .v files, 2176 Qed)
-src/stdlib/            — standard library (465 .v files, 5461 Qed)
+src/stdlib/            — standard library (465 .v files, 7436 Qed)
   src/stdlib/qchem/    — quantum chemistry (25 files, 281 Qed): H, He, H₂, HF, BCS, graphene
   src/stdlib/topology/ — topological phases (6 files, 77 Qed): SSH, Chern, Hall
   src/stdlib/quantum/  — quantum computing (6 files, 67 Qed): Grover, error codes
   src/stdlib/graph/    — graph foundation (9 files, 96 Qed): 7 graphs, Anderson, propagator
+  src/stdlib/heisenberg/ — Heisenberg uncertainty (18 files, 220 Qed)
+  src/stdlib/qphysics/ — quantum physics (25 files, 287 Qed): Born rule, entanglement
+  src/stdlib/complexity/ — P vs NP (15 files, 185 Qed)
+  src/stdlib/foundations/ — thermodynamics (10 files, 113 Qed): Second law, majorization
+  src/stdlib/molecule/ — molecular structure (8 files, 87 Qed)
+  src/stdlib/trading/  — information-theoretic trading (31 files, 551 Qed)
+  src/stdlib/qed/      — QED corrections (1 file, 11 Qed)
 src/zeta/              — Riemann zeta (30 .v files, 683 Qed): arithmetic Heisenberg
 src/physics/           — quantum physics (14 .v files, 356 Qed)
 src/linalg/            — linear algebra (6 .v files, 130 Qed)
