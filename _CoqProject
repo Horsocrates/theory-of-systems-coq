@@ -1359,7 +1359,10 @@ src/foundation/L5_Indivisible.v
 src/foundation/L5_Preservation.v
 src/foundation/Ordinal.v
 src/foundation/TransfiniteInduction.v
+src/foundation/LevelComparison.v
 src/foundation/UnistochasticFromGraph.v
+src/settheory/BorelDeterminacy.v
+src/settheory/CantorBendixsonFull.v
 src/foundation/L5_Arrow.v
 src/foundation/L5_CoreSynthesis.v
 src/foundation/ObserverFoundation.v
