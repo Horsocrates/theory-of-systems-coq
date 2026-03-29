@@ -57,33 +57,30 @@ Definition grid_list (a b : Q) (n : nat) : list Q :=
 (* ========================================================================= *)
 
 (**
-  L5 DERIVATION OF LEFTMOST TIE-BREAKING
-  ======================================
-  
-  Problem: When f has a plateau (multiple points with same max value),
-  which point is "the argmax"? Without a rule, argmax_process fails Cauchy.
-  
-  L5 (Law of Order): Each Role must have a UNIQUE Position.
-  
-  Deduction:
-  1. "Maximum point" is a Role
-  2. Plateau gives multiple candidates for this Role
-  3. L5 requires selecting exactly ONE Position
-  4. Natural L5-compliant choice: MINIMAL index (leftmost)
-  
-  Why leftmost?
-  - Uses only the inherent Position structure (indices in ℕ)
-  - min is unique by well-ordering
-  - Adds no external information
-  
+  L5 STATUS ASSIGNMENT FOR ARGMAX
+  ================================
+
+  L5 (Law of Order) constitutes the sequential order of positions.
+  Within that order, "argmax" is DEFINED as "first position achieving
+  the maximum value." L5 does not "break ties" — it provides the order
+  that DEFINES what "first" means.
+
+  On a plateau f(x₁) = f(x₂) = f(x₃) = M:
+  - The ROLE "argmax" is assigned by L5 to the FIRST qualifying position
+  - Not because we "break a tie" — but because L5's order defines
+    "argmax" as "first position achieving the maximum"
+  - The sequence converges because the role has a determinate position
+
+  Why first in L5 order?
+  - L5 constitutes the order; "first" is defined by that order
+  - Well-ordering of nat guarantees uniqueness
+  - No external information added — L5 itself provides structure
+
   The Qle_bool with <= (not <) means: when f(x) = best_val, update to current.
-  Since we traverse left-to-right, FIRST occurrence wins = LEFTMOST.
-  
-  "Leftmost tie-breaking is not a hack—it is the unique L5-compliant
-   resolution of Role ambiguity."
+  Since we traverse in L5 order, FIRST occurrence carries argmax status.
 *)
 
-(* Accumulator-based argmax returning INDEX with leftmost tie-breaking *)
+(* Accumulator-based argmax returning INDEX with L5 status assignment *)
 Fixpoint find_max_idx_acc (f : Q -> Q) (l : list Q) (curr_idx best_idx : nat) (best_val : Q) : nat :=
   match l with
   | [] => best_idx

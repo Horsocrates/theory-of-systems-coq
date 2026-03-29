@@ -28,7 +28,7 @@ Layer 2: ToS Core
   -> Roles (ERR, WellFormed, Status, Dependencies)
   -> IntensionalIdentity (P3, ext/int equivalence)
   -> ProcessGeneral (P4, Cauchy process)
-  -> L5Resolution (generalized tie-breaking)
+  -> L5Resolution (generalized L5 status assignment)
   -> SystemMorphism (iso, embedding, compose)
   -> InfoLayer (information layers)
 

@@ -206,7 +206,7 @@ Definition interval_converges (f : nat -> Q * Q) :=
     exists N : nat, forall n : nat, (n >= N)%nat ->
       let (a, b) := f n in b - a < eps.
 
-(* Trisection with leftmost tie-breaking *)
+(* Trisection with L5 status assignment: first valid subinterval *)
 Definition avoid (p a b : Q) : Q * Q :=
   let third := (b - a) / 3 in
   let m1 := a + third in
@@ -218,7 +218,7 @@ Definition avoid (p a b : Q) : Q * Q :=
 
 **Leftmost selection principle.** When the point p lies in the middle third, both [a, m1] and [m2, b] exclude p. We choose [a, m1] (left subinterval). This is not arbitrary: it ensures the sequence of left endpoints (aₙ) is monotonically increasing—essential for proving convergence. The same principle governs `argmax_idx`: when multiple list elements achieve the maximum value, we select the leftmost, giving deterministic witnesses with Leibniz equality.
 
-This specification distinguishes our approach from both ZFC (which postulates infinite sets) and intuitionism (which rejects LEM). We postulate LEM; we *derive* decidability; we *enforce* finitude through type structure; we *resolve* ambiguity through leftmost selection.
+This specification distinguishes our approach from both ZFC (which postulates infinite sets) and intuitionism (which rejects LEM). We postulate LEM; we *derive* decidability; we *enforce* finitude through type structure; we *assign status* through L5's constitutive order.
 
 ---
 
@@ -447,7 +447,7 @@ Proof.
 Qed.
 ```
 
-This exemplifies the **leftmost selection principle**: seek position, not value. When multiple list elements achieve the maximum, `argmax_idx` returns the leftmost index—a deterministic, order-preserving choice. Index-based witnesses yield definitional equality; value-based witnesses require propositional reasoning about Qeq. This ensures our constructions produce unique, reproducible witnesses rather than arbitrary selections.
+This exemplifies **L5 status assignment**: seek position, not value. When multiple list elements achieve the maximum, `argmax_idx` returns the first index in L5 order — not by "choosing" but because L5 defines "argmax" as "first position with max value." Index-based witnesses yield definitional equality; value-based witnesses require propositional reasoning about Qeq. This ensures our constructions produce unique, reproducible witnesses.
 
 The formalization comprises 23 lemmas (0 Admitted).
 
@@ -753,7 +753,7 @@ Record BisectionState := mkBisection {
   bis_right : Q
 }.
 
-(* Trisection step — deterministic leftmost selection *)
+(* Trisection step — L5 status assignment to first valid subinterval *)
 Definition trisect_left (s : BisectionState) : BisectionState :=
   let width := bis_right s - bis_left s in
   mkBisection (bis_left s) (bis_left s + width / 3).

@@ -183,8 +183,10 @@ Qed.
   ROLE DETERMINACY UNDER L5
   ==========================
 
-  When multiple elements qualify for one role, L5 resolves:
-  select the element at the MINIMUM position.
+  L5's constitutive order assigns each role to a determinate position:
+  the first qualifying element in L5's sequential order.
+  L5 does not "resolve" an ambiguity — it defines the structure
+  in which each role has exactly one position-bearer.
 
   This uses L5_resolve from Core_ERR.v.
 *)
@@ -200,7 +202,7 @@ Definition role_candidates (S : StructuredSystem L)
     | None => false
     end).
 
-(** L5 resolution picks the minimum position among candidates *)
+(** L5 order assigns the role to the first qualifying position *)
 Definition resolve_role (S : StructuredSystem L)
     (decide : crit_domain L (sys_criterion L (ss_base L S)) -> bool)
     (positions : list Position) (default : Position) : Position :=

@@ -594,36 +594,42 @@ End L5_Positionality.
 (* ========================================================================= *)
 
 (**
-  L5-RESOLUTION PRINCIPLE
-  =======================
-  
-  When a Role applies to multiple Positions, L5 demands selecting exactly one.
-  
-  PROBLEM (Role Ambiguity):
-    A Role R applies to positions {p1, p2, ...} with p1 < p2 < ...
-    L5 requires: One Role → One Position
-    This is violated when |{pi : R applies to pi}| > 1
-  
-  RESOLUTION:
-    The L5-CANONICAL choice is min{pi : R applies to pi}
-  
-  WHY MINIMUM?
-    1. Well-ordering of nat guarantees min exists and is unique
-    2. Uses only the inherent Position structure (no external information)
-    3. Respects the Order that L5 expresses
-  
+  L5 STATUS ASSIGNMENT
+  ====================
+
+  L5 does not "resolve ambiguity" — it CONSTITUTES the order that assigns
+  each role to a determinate position. Without L5, there is no "first" or "last."
+
+  PRINCIPLE:
+    L5's sequential order assigns each Role to the FIRST qualifying Position.
+    This is not a tie-breaking mechanism applied after ambiguity arises —
+    it is the foundational order that DEFINES what "first" means.
+
+  WHY FIRST IN L5 ORDER?
+    1. L5 constitutes order; min = first position in that order
+    2. Well-ordering of nat guarantees the first position exists and is unique
+    3. No external information needed — L5 itself provides the structure
+
   APPLICATIONS:
-    - argmax tie-breaking (EVT): leftmost maximal grid point
-    - trisection choice (Diagonal): leftmost valid subinterval  
-    - Any selection from finite Position set
-  
+    - argmax (EVT): L5 assigns argmax status to first position with max value
+    - trisection (Uncountability): L5 assigns witness status to first valid subinterval
+    - Role assignment (E/R/R): L5 assigns each role to its determinate position
+
   FORMAL STATEMENT:
-    For any finite non-empty set S of Positions, the L5-canonical choice is min(S).
+    For any finite non-empty set S of Positions, L5 assigns the role
+    to min(S) — the first position in L5's constitutive order.
+
+  CONTRAST WITH AC:
+    AC asserts existence of a choice function on UNORDERED sets.
+    L5 does not choose — L5 defines what "first" means.
+    The two are categorically different:
+      AC = existence assertion on unordered collections.
+      L5 = constitution of order itself.
 *)
 
 Section L5_Resolution.
 
-(** L5-resolution: select minimum position from a list *)
+(** L5 status assignment: the role belongs to the first position in L5 order *)
 Definition L5_resolve (candidates : list Position) (default : Position) : Position :=
   fold_right Nat.min default candidates.
 

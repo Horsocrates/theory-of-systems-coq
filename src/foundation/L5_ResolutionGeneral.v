@@ -1,5 +1,5 @@
 (* L5_ResolutionGeneral.v *)
-(* E/R/R: Elements = candidate lists, Roles = L5 resolution, Rules = totality + determinism *)
+(* E/R/R: Elements = candidate lists, Roles = L5 status assignment, Rules = totality + determinism *)
 (* Standalone — only Stdlib imports *)
 (* STATUS: 12 Qed, 0 Admitted, 0 axioms *)
 (* Author: Horsocrates | Date: March 2026 *)
@@ -10,7 +10,9 @@ From Stdlib Require Import Arith.
 From Stdlib Require Import Lia.
 Import ListNotations.
 
-(** * L5 Resolution = head of list (leftmost maximum) *)
+(** * L5 Status Assignment: L5 order defines which position carries each role.
+      The first position in L5 sequence is not "chosen" — it IS the role-bearer
+      by virtue of L5 constituting the order. *)
 
 Definition L5_resolve (candidates : list nat) : option nat :=
   match candidates with

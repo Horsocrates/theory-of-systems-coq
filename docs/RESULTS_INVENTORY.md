@@ -53,9 +53,10 @@
      FILES: src/foundation/L5_StructurePreservation.v (15 Qed)
 ★★★ L5 as META-LAW (sustains L1-L4)
 ★★★ Self-grounding: primitive vs derived (answers "proves too much")
-★★★ L5-Resolution: constructive canonical choice (min)
+★★★ L5 constitutive order: assigns roles to determinate positions
+     L5 does not "choose" — it defines what "first" means.
      FILES: src/foundation/L5_ResolutionGeneral.v (12 Qed)
-★★  L5-Resolution vs AC (within P4 framework)
+★★  L5 vs AC: constitutive order vs existence assertion on unordered sets
 ★★  Binarity from L2+L3: each distinction = 1 bit (DERIVED)
      FILES: src/foundation/Binarity.v (17 Qed), EntropyExact.v (14 Qed)
 ★★  P1-P4 derived from L1-L5 (not postulated)
@@ -91,7 +92,7 @@
      FILES: src/process/ProcessKappaDerivation.v (18 Qed)
      WHAT: metric_components(4)=10, κ=1/10 DERIVED, sin²θ_W=3/13
      ZERO free parameters. THE KEY RESULT.
-★★  EVT via L5-Resolution (argmax convergence on plateaux)
+★★  EVT via L5 status assignment (argmax = first position with max value)
      FILES: src/EVT_idx.v
 ★★  IVT constructive proof
      FILES: src/IVT_CauchyReal.v
@@ -359,7 +360,7 @@ PART II: LOGIC (~150 pages, 10 ★★★)
   Ch 4: E/R/R Framework
   Ch 5: L5 as Meta-Law
   Ch 6: Paradoxes Dissolved
-  Ch 7: L5-Resolution vs AC
+  Ch 7: L5 Constitutive Order vs AC
   Ch 8: Binarity (S = k·ln2·|D|)
 
 PART III: MATHEMATICS (~200 pages, 5 ★★★)

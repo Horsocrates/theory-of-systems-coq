@@ -206,7 +206,7 @@ DO NOT:
 ### EVT_idx.v
 INVARIANTS:
 - Argmax by INDEX (nat), not by value (Q). This is a deliberate design choice.
-- L5-Resolution (leftmost maximum) provides deterministic tie-breaking.
+- L5 constitutive order assigns argmax status to first position with max value.
 - `grid_point` and `grid_list` are bottleneck definitions (used by 5+ files).
 
 STYLE:

@@ -39,7 +39,7 @@ stdlib/: Verified data structures (depends on foundation files)
 |------|-----|-------------|
 | **TheoryOfSystems_Core_ERR.v** | 34 | Laws L1-L5, `System`, `Criterion`, `Generator`, paradox blocking |
 | **Roles.v** | 30 | E/R/R categories, `MathStatus`, `EpistemicStatus`, `Dependency`, paradox diagnosis |
-| **L5Resolution.v** | 18 | `DecTotalOrder` typeclass, generalized L5 tie-breaking, nat/Q/Z instances |
+| **L5Resolution.v** | 18 | `DecTotalOrder` typeclass, generalized L5 status assignment, nat/Q/Z instances |
 | **SystemMorphism.v** | 17 | Structure-preserving maps, isomorphisms, composition |
 | **InfoLayer.v** | 17 | Information flow between levels, channel capacity, composition |
 | **IntensionalIdentity.v** | 11 | P3: extensional equivalence != intensional identity |

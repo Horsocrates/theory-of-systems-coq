@@ -1,19 +1,23 @@
 (**
-  L5Resolution.v — Generalized Deterministic Tie-Breaking
-  =========================================================
+  L5Resolution.v — Generalized L5 Status Assignment
+  ====================================================
 
   Phase 3, Task 1.
 
   Generalizes L5_resolve from Core_ERR.v (nat-specific) to any type
   with a DecTotalOrder. Provides:
   - DecTotalOrder typeclass (decidable total order)
-  - l5_resolve_gen : generalized minimum selection (option-returning)
+  - l5_resolve_gen : generalized status assignment (option-returning)
   - nat instance with specialization to existing L5_resolve
 
   E/R/R Analysis:
-  - Element: The "winner" selected by resolution
-  - Role: Minimum element in the candidate set
+  - Element: The position that carries the role
+  - Role: Status assigned to the first position in L5 order
   - Rule: DecTotalOrder axioms (total, antisymmetric, transitive)
+
+  L5 does not "break ties" — it constitutes the order that defines
+  which position carries each role. The first position in L5 order
+  is not "chosen" — it IS the role-bearer by definition.
 
   Depends on: TheoryOfSystems_Core_ERR.v
   Qed: 18, Admitted: 0
@@ -34,8 +38,8 @@ Generalizable Variables A.
   - A binary relation dto_le that is total, antisymmetric, transitive
   - A decision procedure dto_le_dec (sumbool)
 
-  This is the minimal structure needed for deterministic L5-resolution:
-  given any finite nonempty set, select the UNIQUE minimum.
+  This is the minimal structure needed for L5 status assignment:
+  L5 order assigns each role to the first (minimum) qualifying position.
 *)
 Class DecTotalOrder (A : Type) := {
   dto_le : A -> A -> Prop;
@@ -52,7 +56,7 @@ Proof.
 Qed.
 
 (* ================================================================= *)
-(** * Generalized L5 Resolution                                     *)
+(** * Generalized L5 Status Assignment                               *)
 (* ================================================================= *)
 
 Section L5_General.
@@ -63,12 +67,12 @@ Section L5_General.
   Definition l5_min_step (acc y : A) : A :=
     if dto_le_dec y acc then y else acc.
 
-  (** Generalized L5 resolution: select minimum from a list.
+  (** Generalized L5 status assignment: identifies the first position in L5 order.
       Returns None for empty list, Some(min) otherwise.
 
-      Design choice: fold_left (left-to-right scan) with the head
-      element as initial accumulator. This mirrors the linear scan
-      pattern used in L5_resolve but generalizes to any ordered type. *)
+      Design: fold_left (left-to-right scan) with the head element as
+      initial accumulator. L5 order assigns the role to the minimum —
+      not by "choosing" but because "first" IS defined by L5's order. *)
   Definition l5_resolve_gen (l : list A) : option A :=
     match l with
     | [] => None
@@ -179,8 +183,8 @@ Section L5_General.
   Qed.
 
   (** Theorem 3: Result is minimal — dto_le to every element.
-      This is the central property of L5-resolution: the selected
-      element is a lower bound for all candidates. *)
+      This is the central property of L5 status assignment: the position
+      that carries the role precedes all other qualifying positions. *)
   Theorem l5_resolve_gen_minimal : forall (l : list A) (v : A),
     l5_resolve_gen l = Some v ->
     forall p, In p l -> dto_le v p.
@@ -199,8 +203,8 @@ Section L5_General.
       a is minimal in l1, b is in l1 (via set-equality) ⟹ a ≤ b.
       Symmetrically b ≤ a. By antisymmetry: a = b.
 
-      This is the L5 DETERMINISM guarantee: the resolution outcome
-      depends only on WHICH elements are present, not their ordering. *)
+      This is the L5 DETERMINISM guarantee: the status assignment
+      depends only on WHICH positions qualify, not their listing order. *)
   Theorem l5_resolve_gen_deterministic :
     forall (l1 l2 : list A) (a b : A),
     l5_resolve_gen l1 = Some a ->

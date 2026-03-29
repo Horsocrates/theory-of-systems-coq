@@ -141,7 +141,7 @@ Our philosophical commitments translate into precise Coq structures. The followi
 | Principle | Informal Statement | Coq Implementation |
 |-----------|-------------------|-------------------|
 | **LEM (L3)** | Every proposition is true or false | `Axiom classic : forall P : Prop, P \/ ~P` |
-| **Order (L5)** | Ambiguity requires deterministic resolution | Leftmost selection in `argmax_idx`, `avoid` |
+| **Order (L5)** | L5 constitutes order, assigning roles to positions | Status assignment in `argmax_idx`, `avoid` |
 | **Finite Actuality** | No completed infinities | No `Axiom of Infinity`; `nat` is inductive, not a set |
 | **Determinacy** | Objects have definite properties | Decidability: `forall x y : Q, {x < y} + {x >= y}` |
 | **Process as Limit** | Limits are convergence conditions | `Definition converges := forall eps, exists N, ...` |
@@ -159,8 +159,8 @@ Definition interval_converges (f : nat -> Q * Q) :=
     exists N : nat, forall n : nat, (n >= N)%nat ->
       let (a, b) := f n in b - a < eps.
 
-(* L5-Resolution: when multiple choices exist, select leftmost *)
-(* This is not arbitrary — it is the unique order-preserving choice *)
+(* L5 status assignment: L5 order assigns the role to the first position *)
+(* L5 defines what "first" means — this is constitutive, not a choice *)
 Definition avoid (p a b : Q) : Q * Q :=
   let third := (b - a) / 3 in
   let m1 := a + third in
@@ -173,9 +173,9 @@ Definition avoid (p a b : Q) : Q * Q :=
 (* Type_0 : Type_1 prevents Set : Set paradoxes *)
 ```
 
-**L5-Resolution.** When the point p lies in the middle third, both [a, m1] and [m2, b] exclude p. The choice of [a, m1] (leftmost) is not arbitrary but follows from L5: given equivalent options, the order-preserving selection is the one that maintains the lower bound. This ensures the sequence (aₙ) is monotonically increasing—a property essential for the uncountability proof. The same principle governs `argmax_idx`: when multiple elements achieve the maximum, the leftmost index is selected, guaranteeing deterministic witnesses.
+**L5 Status Assignment.** When the point p lies in the middle third, both [a, m1] and [m2, b] exclude p. L5's constitutive order assigns the witness role to [a, m1] — the first valid subinterval. This is not a "choice" among equivalent options but the definition of "first" within L5's order. The result: (aₙ) is monotonically increasing, essential for the uncountability proof. The same principle governs `argmax_idx`: L5 defines argmax as "first position with max value," giving each role a determinate position.
 
-This specification distinguishes our approach from both ZFC (which postulates infinite sets) and intuitionism (which rejects LEM). We postulate LEM; we *derive* decidability; we *enforce* finitude through type structure; we *resolve* ambiguity through L5.
+This specification distinguishes our approach from both ZFC (which postulates infinite sets) and intuitionism (which rejects LEM). We postulate LEM; we *derive* decidability; we *enforce* finitude through type structure; we *assign status* through L5's constitutive order.
 
 ---
 
