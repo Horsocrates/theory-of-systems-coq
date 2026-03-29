@@ -1363,6 +1363,9 @@ src/foundation/LevelComparison.v
 src/foundation/UnistochasticFromGraph.v
 src/settheory/BorelDeterminacy.v
 src/settheory/CantorBendixsonFull.v
+src/settheory/FiniteTreeEmbedding.v
+src/settheory/KruskalTree.v
+src/foundation/L5_as_Theorem.v
 src/foundation/L5_Arrow.v
 src/foundation/L5_CoreSynthesis.v
 src/foundation/ObserverFoundation.v
