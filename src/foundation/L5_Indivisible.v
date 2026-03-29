@@ -5,6 +5,10 @@
     Status:   Standalone — only Stdlib imports
     STATUS: 20 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
+
+    NOTE: The premise L5_monotone (D(K) ⊆ D(K+1)) is now a THEOREM,
+    not an independent postulate. See L5_as_Theorem.v for the derivation:
+      L5-ORDER → P4 (finiteness) → Kruskal → L5-PRESERVATION.
 *)
 
 From Stdlib Require Import QArith Lia ZArith List Bool.

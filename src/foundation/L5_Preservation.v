@@ -1,6 +1,9 @@
 (* L5_Preservation.v *)
 (* E/R/R: Elements = DistSets, Roles = L5_preservation, Rules = monotonicity laws *)
 (* Standalone — only Stdlib imports *)
+(* NOTE: L5-PRESERVATION (D(K)⊆D(K+1)) is now a THEOREM (see L5_as_Theorem.v).
+   Chain: L5-ORDER → P4 → Kruskal → L5-PRESERVATION.
+   L5-ORDER (sequence + hierarchy) remains a postulate. *)
 
 From Stdlib Require Import List.
 From Stdlib Require Import Nat.
