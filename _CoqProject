@@ -1350,9 +1350,12 @@ src/stdlib/foundations/DoublyStochastic.v
 src/stdlib/foundations/MajorizationSchur.v
 src/stdlib/foundations/SecondLaw.v
 src/stdlib/foundations/SecondLawGrandSynthesis.v
+src/foundation/ConnectionClosesGap.v
+src/foundation/GraphUnitary.v
 src/foundation/L1_DoublyStochastic.v
 src/foundation/L5_Indivisible.v
 src/foundation/L5_Preservation.v
+src/foundation/UnistochasticFromGraph.v
 src/foundation/L5_Arrow.v
 src/foundation/L5_CoreSynthesis.v
 src/foundation/ObserverFoundation.v
