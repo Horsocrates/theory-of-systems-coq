@@ -1407,3 +1407,8 @@ src/analysis/FourierCoefficients.v
 src/analysis/FourierTransform.v
 src/analysis/FourierSynthesis.v
 src/settheory/KruskalFull.v
+# P4 Eliminates Axiom Hierarchy
+src/foundation/P4_Eliminates_ATR.v
+src/foundation/P4_Eliminates_Pi11.v
+src/foundation/P4_Eliminates_AC.v
+src/foundation/P4_Eliminates_Infinity.v
