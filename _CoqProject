@@ -1421,3 +1421,8 @@ src/physics/TimeDilation.v
 src/physics/GraphCurvature.v
 src/physics/EnergyDeterminesGraph.v
 src/physics/NewtonFromGraph.v
+# Fine Structure Constant
+src/physics/FineStructureProcess.v
+src/physics/RunningCouplings.v
+src/physics/WeinbergAngleRunning.v
+src/physics/FineStructureSynthesis.v
