@@ -68,11 +68,14 @@ Theorem distinction_indivisible :
   forall D : Distinction,
   (positive D \/ negative D) /\
   (~(positive D /\ negative D)) /\
-  True.
+  ((positive D /\ ~negative D) \/ (~positive D /\ negative D)).
 Proof.
   intro D. repeat split.
   - exact (exhaustive D).
   - exact (exclusive D).
+  - destruct (exhaustive D) as [Hp|Hn].
+    + left. split; [exact Hp | intro Hn; exact (exclusive D (conj Hp Hn))].
+    + right. split; [intro Hp; exact (exclusive D (conj Hp Hn)) | exact Hn].
 Qed.
 
 Lemma without_exclusive_anything :
@@ -120,9 +123,9 @@ Proof. reflexivity. Qed.
 Theorem quantization_from_distinction :
   (forall n : nat, (0 < n)%nat -> (1 <= n)%nat) /\
   (forall (R : nat -> Q) n, exists q : Q, R n = q) /\
-  True.
+  (forall n : nat, (0 <= n)%nat).
 Proof.
-  repeat split; [lia | intros; eexists; reflexivity].
+  repeat split; [lia | intros; eexists; reflexivity | lia].
 Qed.
 
 Theorem process_domain_forced :

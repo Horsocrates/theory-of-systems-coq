@@ -55,10 +55,13 @@ Definition pi_from_distinction_chain : Prop :=
   (* L₂ is the natural metric for binary distinction *)
   (* SO(2) preserves L₂ *)
   (* SO(2) period = 2π, hence π *)
-  True.
+  (forall D : Distinction, ~ (positive D /\ negative D)).
 
 Lemma chain_holds : pi_from_distinction_chain.
-Proof. unfold pi_from_distinction_chain. auto. Qed.
+Proof.
+  unfold pi_from_distinction_chain. repeat split.
+  intro D. exact (exclusive D).
+Qed.
 
 (** Exclusivity is what makes the sides orthogonal *)
 Lemma exclusivity_gives_orthogonality :
@@ -73,7 +76,7 @@ Lemma orthogonal_l2_gives_circle :
 Proof.
   intros H1 H2.
   unfold pi_from_distinction_chain.
-  auto.
+  split; [exact H1 | split; [exact H2 | intro D; exact (exclusive D)]].
 Qed.
 
 (** SYNTHESIS *)

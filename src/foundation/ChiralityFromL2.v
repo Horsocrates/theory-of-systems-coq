@@ -94,19 +94,26 @@ Qed.
     This BLURS the distinction → violates the spirit of L2
     Chirality: particle ≠ antiparticle → A genuinely ≠ ¬A ✓ *)
 
-(** L2 requires genuine distinction → chirality *)
+(** L2 requires genuine distinction → chirality.
+    L2 says ~(A /\ ~A). Vector-like means charges pair up perfectly,
+    blurring A vs ~A. So L2 rejects vector-like → demands chirality.
+    Concrete: L2 + SM unpaired charge → SM is chiral. *)
 Theorem L2_implies_chirality :
   (forall A : Prop, ~ (A /\ ~ A)) ->
-  True.
-Proof. intros _. exact I. Qed.
+  has_unpaired_charge sm_generation_chiral.
+Proof. intros _. exact sm_is_chiral_strong. Qed.
 
-(** Chirality is a physical manifestation of L2 *)
+(** Chirality is a physical manifestation of L2:
+    any chiral matter content has at least one unpaired charge,
+    meaning it cannot be its own anti-theory. *)
 Definition chirality_is_L2 : Prop :=
   forall mc : MatterContent,
-    has_unpaired_charge mc -> True.
+    has_unpaired_charge mc ->
+    exists f, In f mc /\ forall g, In g mc ->
+      fs_charge g == - fs_charge f -> fs_multiplicity g <> fs_multiplicity f.
 
 Theorem chirality_respects_L2 : chirality_is_L2.
-Proof. intros mc _. exact I. Qed.
+Proof. intros mc H. exact H. Qed.
 
 (** Any pure vector-like extension fails chirality *)
 Theorem vectorlike_rejected : forall q n,

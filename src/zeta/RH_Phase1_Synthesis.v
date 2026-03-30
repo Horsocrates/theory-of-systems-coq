@@ -199,16 +199,12 @@ Proof.
   intros k N. apply zeta_partial_increasing.
 Qed.
 
-(** P4 RH in constructive form *)
-(** Under P4: RH is equivalent to:
-    For each zero process {ρ_N}:
-    |Re(ρ_N) - 1/2| → 0 with computable rate *)
-Definition p4_rh_constructive : Prop :=
-  forall eps, 0 < eps ->
-    exists N0, forall N, (N0 <= N)%nat ->
-      (* All zeros of ζ_N with |Im| ≤ T satisfy |Re - 1/2| < eps *)
-      (* This is stronger than classical RH: gives convergence RATE *)
-      True.
+(* P4 RH in constructive form (ACKNOWLEDGED GAP):
+   Under P4: RH is equivalent to:
+   For each zero process {ρ_N}:
+   |Re(ρ_N) - 1/2| → 0 with computable rate.
+   This is stronger than classical RH: gives convergence RATE.
+   Not yet formalized — requires complex analysis over Q-Cauchy processes. *)
 
 (* ================================================================== *)
 (*  Part IV: Three Millennium Problems  (~5 lemmas)                   *)
@@ -295,7 +291,7 @@ Check rh_requires_gap_to_zero.
 Check p4_computability.
 Check p4_deterministic.
 Check p4_monotone.
-Check p4_rh_constructive.
+(* p4_rh_constructive: converted to comment — acknowledged gap *)
 Check ym_elementary_inequality.
 Check ns_uses_mertens.
 Check rh_uses_mertens.

@@ -268,17 +268,16 @@ Definition rh_holds : Prop :=
     (* Non-trivial zero at σ → σ = 1/2 *)
     sigma == critical_line.
 
-(** PNT-optimal condition: error is bounded by √x-type *)
+(** PNT-optimal condition: error is bounded by |x| (proxy for √x-type) *)
 Definition pnt_optimal : Prop :=
   forall x : Q, 1 <= Qabs x ->
-    (* The error term is at most |x| (proxy for √x) *)
-    True.
+    pnt_rh_error x <= dvp_pnt_error x.
 
 (** RH implies PNT-optimal (the forward direction) *)
 Theorem rh_implies_pnt_optimal :
   rh_holds -> pnt_optimal.
 Proof.
-  intros _Hrh x _Hx. exact I.
+  intros _Hrh x Hx. apply rh_better_than_dvp. exact Hx.
 Qed.
 
 (** PNT-optimal implies all zero contributions are √x-type *)
@@ -287,7 +286,7 @@ Theorem pnt_optimal_implies_half_line :
   forall x, 1 <= Qabs x ->
     pnt_rh_error x <= dvp_pnt_error x.
 Proof.
-  intros _Hpnt x Hx. apply rh_better_than_dvp. exact Hx.
+  intros Hpnt x Hx. exact (Hpnt x Hx).
 Qed.
 
 (** The critical line is the optimal real part for zeros *)

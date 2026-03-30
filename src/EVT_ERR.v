@@ -522,16 +522,10 @@ Proof. intros. unfold Qlt, Qminus, Qplus, Qopp in *. simpl in *. lia. Qed.
    This is consistent with P4: the value-process is fundamental, while the
    position-process requires additional constraints.
 *)
-(** DEPRECATED: argmax POSITION may not converge without isolation condition.
-    The argmax position can oscillate between two equally-high maxima.
-    The argmax VALUE convergence IS correct — proved in sup_process_is_Cauchy.
-    Full clean proof: EVT_idx.v (0 Admitted). *)
-Theorem argmax_process_is_Cauchy_DEPRECATED : forall f a b,
-  a < b ->
-  uniformly_continuous_on f a b ->
-  (* argmax position Cauchy requires isolation — not provable in general *)
-  True.
-Proof. intros. exact I. Qed.
+(* DEPRECATED: argmax POSITION may not converge without isolation condition.
+   The argmax position can oscillate between two equally-high maxima.
+   The argmax VALUE convergence IS correct — proved in sup_process_is_Cauchy.
+   Full clean proof: EVT_idx.v (0 Admitted). *)
 
 (* ========================================================================= *)
 (*                     SECTION 10: SUP PROCESS IS CAUCHY                    *)

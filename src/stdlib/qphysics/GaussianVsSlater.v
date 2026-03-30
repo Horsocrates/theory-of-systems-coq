@@ -50,16 +50,12 @@ Lemma slater_computable_2_1 :
   slater_integral_local (S (S O)) 1 == 2.
 Proof. vm_compute. reflexivity. Qed.
 
-(** Gaussian integral needs sqrt(pi):
-    int_0^inf exp(-alpha*r^2) dr = sqrt(pi)/(2*sqrt(alpha))
-    This is NOT in Q. We state this as a structural fact. *)
-Definition gaussian_needs_sqrt_pi : Prop :=
-  (* The Gaussian integral is not a rational function of alpha.
-     It fundamentally requires sqrt(pi), which is transcendental. *)
-  True.
-
-Lemma gaussian_marker : gaussian_needs_sqrt_pi.
-Proof. exact I. Qed.
+(* STRUCTURAL FACT: Gaussian integral needs sqrt(pi):
+   int_0^inf exp(-alpha*r^2) dr = sqrt(pi)/(2*sqrt(alpha))
+   This is NOT in Q. The Gaussian integral is not a rational function
+   of alpha — it fundamentally requires sqrt(pi), which is transcendental.
+   This is why the Slater basis (which stays in Q) is preferred for
+   process-based quantum chemistry. *)
 
 (* ================================================================== *)
 (*  Part III: Overlap ratios are exact Q                               *)
@@ -91,9 +87,9 @@ Proof. vm_compute. reflexivity. Qed.
 Lemma slater_positive_4_1 : (0 < slater_integral_local (S (S (S (S O)))) 1)%Q.
 Proof. vm_compute. reflexivity. Qed.
 
-(** Summary: Slater basis is Q-complete, Gaussian is not *)
+(** Summary: Slater basis is Q-complete (Gaussian needs sqrt(pi), not in Q) *)
 Lemma slater_vs_gaussian_summary :
   slater_integral_local (S (S O)) 1 == 2 /\
-  gaussian_needs_sqrt_pi.
-Proof. split. vm_compute; reflexivity. exact I. Qed.
+  slater_integral_local (S (S (S O))) 2 == (3#8).
+Proof. split; vm_compute; reflexivity. Qed.
 

@@ -835,14 +835,11 @@ Proof.
   apply Qinv_pow3_pos.
 Qed.
 
-(** Pedagogical summary: what IS and ISN'T proved here *)
-Theorem diagonal_pedagogy :
-  (* PROVED: structural digit difference at Z level *)
-  (* PROVED: digit contribution bound at Q level *)
-  (* NOT PROVED HERE: digit stability under Cauchy convergence *)
-  (* PROVED IN: ShrinkingIntervals_uncountable_CLEAN.v (interval approach) *)
-  True.
-Proof. exact I. Qed.
+(* PEDAGOGY: This file demonstrates the Qfloor digit stability issue.
+   PROVED: structural digit difference at Z level.
+   PROVED: digit contribution bound at Q level.
+   NOT PROVED HERE: digit stability under Cauchy convergence.
+   Use ShrinkingIntervals_ERR.v for the actual uncountability proof. *)
 
 (* ========================================================================= *)
 (*                     VERIFICATION & STATUS                                 *)

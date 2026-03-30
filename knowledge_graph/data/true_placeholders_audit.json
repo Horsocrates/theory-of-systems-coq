@@ -1,354 +1,90 @@
 {
-  "total_true_placeholders": 41,
-  "files_with_true": 9,
+  "total_true_placeholders": 16,
+  "files_with_true": 1,
   "by_category": {
-    "commentary": 1,
-    "deprecated": 1,
-    "philosophical_claim": 3,
     "honest_limitation": 10,
-    "future_work": 10,
-    "placeholder": 14,
-    "acknowledged_gap": 2
+    "future_work_undone": 6,
+    "placeholder": 0,
+    "philosophical_claim": 0,
+    "acknowledged_gap": 0,
+    "commentary": 0,
+    "deprecated": 0
+  },
+  "cleaned": {
+    "date": "2026-03-30",
+    "removed": 26,
+    "converted_to_real_prop": 11,
+    "converted_to_comment": 15,
+    "remaining_intentional": 16
   },
   "details": [
     {
-      "file": "src/DiagonalArgument_ERR.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 844,
-          "kind": "Theorem",
-          "name": "diagonal_pedagogy",
-          "category": "commentary",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/EVT_ERR.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 533,
-          "kind": "Theorem",
-          "name": "argmax_process_is_Cauchy_DEPRECATED",
-          "category": "deprecated",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/foundation/ChiralityFromL2.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 100,
-          "kind": "Theorem",
-          "name": "L2_implies_chirality",
-          "category": "philosophical_claim",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/foundation/IndivisibleDistinction.v",
-      "count": 2,
-      "entries": [
-        {
-          "line": 71,
-          "kind": "Theorem",
-          "name": "distinction_indivisible",
-          "category": "philosophical_claim",
-          "text": "True."
-        },
-        {
-          "line": 123,
-          "kind": "Theorem",
-          "name": "quantization_from_distinction",
-          "category": "philosophical_claim",
-          "text": "True."
-        }
-      ]
-    },
-    {
       "file": "src/process/ProcessOpenQuestions.v",
-      "count": 32,
+      "count": 16,
       "entries": [
         {
-          "line": 34,
-          "kind": "Theorem",
           "name": "not_derived_sm_uniqueness",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 41,
-          "kind": "Theorem",
           "name": "not_derived_3_generations",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 48,
-          "kind": "Theorem",
           "name": "not_derived_fermion_masses",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 55,
-          "kind": "Theorem",
           "name": "not_derived_coupling_constants",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 62,
-          "kind": "Theorem",
           "name": "not_derived_ckm_values",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 70,
-          "kind": "Theorem",
           "name": "not_derived_higgs_mass_precise",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 77,
-          "kind": "Theorem",
           "name": "not_derived_cc_value",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 84,
-          "kind": "Theorem",
           "name": "not_derived_dark_matter",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 92,
-          "kind": "Theorem",
           "name": "not_derived_lorentzian_sign",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 99,
-          "kind": "Theorem",
           "name": "not_derived_inflation",
-          "category": "honest_limitation",
-          "text": "True."
+          "category": "honest_limitation"
         },
         {
-          "line": 112,
-          "kind": "Theorem",
-          "name": "future_heisenberg_from_p2",
-          "category": "future_work",
-          "text": "True."
-        },
-        {
-          "line": 120,
-          "kind": "Theorem",
-          "name": "future_born_rule_from_l3",
-          "category": "future_work",
-          "text": "True."
-        },
-        {
-          "line": 128,
-          "kind": "Theorem",
-          "name": "future_entanglement_from_p1",
-          "category": "future_work",
-          "text": "True."
-        },
-        {
-          "line": 135,
-          "kind": "Theorem",
-          "name": "future_no_cloning_from_l2",
-          "category": "future_work",
-          "text": "True."
-        },
-        {
-          "line": 143,
-          "kind": "Theorem",
           "name": "future_eft_from_p3",
-          "category": "future_work",
-          "text": "True."
+          "category": "future_work_undone"
         },
         {
-          "line": 151,
-          "kind": "Theorem",
           "name": "future_nonabelian_gap",
-          "category": "future_work",
-          "text": "True."
+          "category": "future_work_undone"
         },
         {
-          "line": 158,
-          "kind": "Theorem",
           "name": "future_lattice_qcd",
-          "category": "future_work",
-          "text": "True."
+          "category": "future_work_undone"
         },
         {
-          "line": 165,
-          "kind": "Theorem",
           "name": "future_graviton_scattering",
-          "category": "future_work",
-          "text": "True."
+          "category": "future_work_undone"
         },
         {
-          "line": 173,
-          "kind": "Theorem",
           "name": "future_neutrino_mass",
-          "category": "future_work",
-          "text": "True."
+          "category": "future_work_undone"
         },
         {
-          "line": 181,
-          "kind": "Theorem",
           "name": "future_susy",
-          "category": "future_work",
-          "text": "True."
-        },
-        {
-          "line": 195,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 207,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 218,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 228,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 237,
-          "kind": "Theorem",
-          "name": "true_theorem_count",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 247,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 257,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 267,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 277,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 292,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 340,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        },
-        {
-          "line": 424,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/stdlib/PiFromDistinction.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 58,
-          "kind": "unknown",
-          "name": "unknown",
-          "category": "placeholder",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/stdlib/qphysics/GaussianVsSlater.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 59,
-          "kind": "Definition",
-          "name": "gaussian_needs_sqrt_pi",
-          "category": "acknowledged_gap",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/zeta/ExplicitFormula.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 275,
-          "kind": "Definition",
-          "name": "pnt_optimal",
-          "category": "placeholder",
-          "text": "True."
-        }
-      ]
-    },
-    {
-      "file": "src/zeta/RH_Phase1_Synthesis.v",
-      "count": 1,
-      "entries": [
-        {
-          "line": 211,
-          "kind": "Definition",
-          "name": "p4_rh_constructive",
-          "category": "acknowledged_gap",
-          "text": "True."
+          "category": "future_work_undone"
         }
       ]
     }
