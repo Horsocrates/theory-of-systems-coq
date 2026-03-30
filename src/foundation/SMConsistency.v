@@ -1,10 +1,16 @@
-(** * SMUniqueness.v — Complete SM derivation from nested distinction
+(** * SMConsistency.v — SM is CONSISTENT with nested distinction
     Elements: standard_model_derived, sm_parameter_reduction, sm_what_remains
     Roles:    Distinction → gauge [3,2,1] → chirality → anomaly → 3 gen → κ
-    Rules:    SM = unique minimal chiral anomaly-free nested distinction
-    Status:   Foundation File 22 of 22 (CROWN THEOREM)
-    STATUS: 18 Qed, 0 Admitted, 0 new axioms
+    Rules:    SM = minimal chiral anomaly-free theory consistent with [3,2,1]
+    Status:   Foundation (CROWN THEOREM)
+    STATUS: 10 Qed, 0 Admitted, 0 new axioms
     Author: Horsocrates | Date: March 2026
+
+    NOTE: Previously named SMUniqueness.v. Renamed because:
+    - SM is CONSISTENT with distinction (proved: anomaly-free, chiral, AF)
+    - SM is NOT proven to be the ONLY possibility (other anomaly-free exist)
+    - "Uniqueness" overstates what's proved. "Consistency" is precise.
+    - See honest_assessment theorem below for exact claims.
 *)
 
 From Stdlib Require Import QArith.
@@ -29,9 +35,9 @@ Lemma kappa_equals_1_10 : kappa_derived == 1 # 10.
 Proof. unfold kappa_derived, n_metric_components. vm_compute. reflexivity. Qed.
 
 (* ================================================================== *)
-(*  ★★★ THE STANDARD MODEL IS THE UNIQUE ANOMALY-FREE CHIRAL THEORY    *)
-(*  consistent with the nested distinction structure [3,2,1].          *)
-(*  The structure [3,2,1] itself is derived under specific constraints. *)
+(*  ★★★ THE STANDARD MODEL IS CONSISTENT WITH NESTED DISTINCTION       *)
+(*  [3,2,1] → anomaly-free + chiral + AF → SM fermion content.        *)
+(*  NOT proved to be the ONLY solution (other anomaly-free may exist). *)
 (* ================================================================== *)
 
 (** CHAIN:
@@ -267,7 +273,7 @@ Qed.
     16. ChiralityFromL2.v      — chirality from L2
     17. AsymptoticFreedomBound.v — AF constrains N
     18. ChiralAnomalyUniqueness.v — SM fermion content unique
-    19. SMUniqueness.v         — THIS FILE: crown theorem *)
+    19. SMConsistency.v        — THIS FILE: crown theorem *)
 
 Theorem foundation_complete :
   (* Gauge group derived *)

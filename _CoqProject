@@ -130,7 +130,7 @@ src/foundation/BaryonFromFoundation.v
 src/foundation/ChiralityFromL2.v
 src/foundation/AsymptoticFreedomBound.v
 src/foundation/ChiralAnomalyUniqueness.v
-src/foundation/SMUniqueness.v
+src/foundation/SMConsistency.v
 src/gauge/Block3D.v
 src/gauge/BlockDiagonal2D.v
 src/gauge/CharacterTransfer.v
