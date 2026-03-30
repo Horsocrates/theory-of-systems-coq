@@ -1416,3 +1416,8 @@ src/foundation/P4_Eliminates_Infinity.v
 src/physics/ObserverStructure.v
 src/physics/CausalStructure.v
 src/physics/MinkowskiFromDistinction.v
+# Gravity from Graphs
+src/physics/TimeDilation.v
+src/physics/GraphCurvature.v
+src/physics/EnergyDeterminesGraph.v
+src/physics/NewtonFromGraph.v
