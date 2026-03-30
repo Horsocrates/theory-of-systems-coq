@@ -1403,3 +1403,7 @@ src/analysis/SpectralTheoremCompact.v
 src/algebra/FieldExtension.v
 src/algebra/GaloisGroup.v
 src/algebra/GaloisCorrespondence.v
+src/analysis/FourierCoefficients.v
+src/analysis/FourierTransform.v
+src/analysis/FourierSynthesis.v
+src/settheory/KruskalFull.v
