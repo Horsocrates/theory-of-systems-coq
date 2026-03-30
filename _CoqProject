@@ -95,6 +95,9 @@ src/analysis/MeasureSynthesis.v
 src/analysis/Sqrt2Irrational.v
 src/analysis/StepIntegral.v
 src/analysis/StoneWeierstrass.v
+src/analysis/L2Space.v
+src/analysis/CompactOperator.v
+src/analysis/SpectralTheoremCompact.v
 src/experimental/AbelRegularization.v
 src/experimental/AtomicSynthesis.v
 src/experimental/BernoulliNumbers.v
@@ -1390,3 +1393,13 @@ src/foundation/TwoMechanisms.v
 src/foundation/CombinatorialGrowth.v
 src/foundation/VoidInexhaustible.v
 src/foundation/CreationSynthesis.v
+# Math Strengthening
+src/settheory/HigmanLemma.v
+src/analysis/PicardLindelof.v
+src/analysis/PeanoExistence.v
+src/analysis/L2Space.v
+src/analysis/CompactOperator.v
+src/analysis/SpectralTheoremCompact.v
+src/algebra/FieldExtension.v
+src/algebra/GaloisGroup.v
+src/algebra/GaloisCorrespondence.v
