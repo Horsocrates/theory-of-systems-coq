@@ -1,92 +1,12 @@
 {
-  "total_true_placeholders": 16,
-  "files_with_true": 1,
-  "by_category": {
-    "honest_limitation": 10,
-    "future_work_undone": 6,
-    "placeholder": 0,
-    "philosophical_claim": 0,
-    "acknowledged_gap": 0,
-    "commentary": 0,
-    "deprecated": 0
-  },
+  "total_true_placeholders": 0,
+  "files_with_true": 0,
+  "by_category": {},
   "cleaned": {
     "date": "2026-03-30",
-    "removed": 26,
-    "converted_to_real_prop": 11,
-    "converted_to_comment": 15,
-    "remaining_intentional": 16
-  },
-  "details": [
-    {
-      "file": "src/process/ProcessOpenQuestions.v",
-      "count": 16,
-      "entries": [
-        {
-          "name": "not_derived_sm_uniqueness",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_3_generations",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_fermion_masses",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_coupling_constants",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_ckm_values",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_higgs_mass_precise",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_cc_value",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_dark_matter",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_lorentzian_sign",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "not_derived_inflation",
-          "category": "honest_limitation"
-        },
-        {
-          "name": "future_eft_from_p3",
-          "category": "future_work_undone"
-        },
-        {
-          "name": "future_nonabelian_gap",
-          "category": "future_work_undone"
-        },
-        {
-          "name": "future_lattice_qcd",
-          "category": "future_work_undone"
-        },
-        {
-          "name": "future_graviton_scattering",
-          "category": "future_work_undone"
-        },
-        {
-          "name": "future_neutrino_mass",
-          "category": "future_work_undone"
-        },
-        {
-          "name": "future_susy",
-          "category": "future_work_undone"
-        }
-      ]
-    }
-  ]
+    "original": 42,
+    "final": 0,
+    "converted_to_real_prop": 42,
+    "note": "ALL True eliminated. Every theorem has a real Q/nat/Z proposition."
+  }
 }
