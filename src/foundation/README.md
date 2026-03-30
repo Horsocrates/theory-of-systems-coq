@@ -1,6 +1,6 @@
 # src/foundation/ — Formal Foundation
 
-**62 files, 859 Qed, 0 Admitted**
+**73 files, 1,075 Qed, 0 Admitted, 0 True**
 
 Derives the complete chain from "something exists" (A=exists) to Standard Model physics.
 

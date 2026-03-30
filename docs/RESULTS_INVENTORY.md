@@ -1,6 +1,6 @@
 # COMPLETE RESULTS INVENTORY — VERIFIED AUDIT
-# Last updated: 2026-03-28
-# Stats: 19,151 Qed | 0 Admitted | 1,283 files | 41 True (classified)
+# Last updated: 2026-03-30
+# Stats: 19,645 Qed | 0 Admitted | 0 True | 1,309 files | 2 axioms
 
 ---
 
@@ -283,21 +283,19 @@ Status: ★★ — all axioms verified on lattice with rational arithmetic.
 
 ---
 
-## TRUE PLACEHOLDERS — Complete Classification
+## TRUE PLACEHOLDERS — ALL ELIMINATED (2026-03-30)
 
 ```
-Total: 41 True across 9 files
+Total: 0 True (was 42, all eliminated)
 
-honest_limitation:    10  (not_derived_X — intentional, keep)
-future_work:          10  (future_X — 6/10 already done elsewhere)
-placeholder:          14  (ProcessOpenQuestions.v — need cleanup)
-philosophical_claim:   3  (distinction_indivisible, chirality, quantization)
-acknowledged_gap:      2  (gaussian_needs_sqrt_pi, p4_rh_constructive)
-commentary:            1  (diagonal_pedagogy)
-deprecated:            1  (argmax_Cauchy_DEPRECATED)
+Process: 42 → 16 → 13 → 0
+  - 11 converted to real propositions with Qed proofs
+  - 15 converted to plain comments (removed as theorems)
+  - 13 honest limitations: each now proves WHAT IS derived
+  - 3 future work: each now has concrete nat/Q verification
 
-32/41 in ProcessOpenQuestions.v (by design: open problem markers).
-No True placeholders DISGUISED as results.
+Every theorem in the repository has a REAL proposition.
+No `: True.` anywhere in 1,309 .v files.
 ```
 
 ---

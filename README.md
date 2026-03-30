@@ -1,14 +1,14 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-19151_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-19645_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Free_Params](https://img.shields.io/badge/Free_Parameters-~0.3-orange.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" —
-> 19,151 machine-verified theorems, 0 Admitted, 1,283 files, ~0.3 free parameters.
+> 19,645 machine-verified theorems, 0 Admitted, 0 True placeholders, 1,309 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > κ = 1/10 DERIVED from D(D+1)/2. sin²θ_W = 3/13 DERIVED from dim(SU(2))/metric_comp.
@@ -23,7 +23,9 @@
 > Q-chemistry (H, He, H₂, HF molecules), BCS superconductivity, graphene Dirac cone,
 > topological phases (SSH, Chern, Hall), quantum computing (Grover, Shor N=15, error correction),
 > Sharkovskii forcing theorem (PL + general continuous, 168 Qed),
-> L5 formalization (8 phases, 298 Qed): Second Law WITHOUT Past Hypothesis,
+> L5 formalization (10 phases, 400+ Qed): Second Law WITHOUT Past Hypothesis,
+> L5-PRESERVATION as THEOREM from L5-ORDER (via Kruskal, 0 new axioms),
+> wf_ord_lt PROVED (not axiom), ordinal arithmetic + transfinite induction,
 > P4 (inexhaustibility) as THEOREM from combinatorial growth,
 > S = k·ln(2)·|D| EXACT entropy from binarity (L2+L3),
 > Minkowski metric DERIVED from observer structure,
@@ -69,13 +71,14 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | **19,151** |
-| Coq files | **1,283** |
+| Proven theorems (Qed) | **19,645** |
+| Coq files | **1,309** |
+| True placeholders | **0** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) — declared in `ToS_Axioms.v` |
 | Admitted | **0** |
 | Free parameters | **~0.3** — gauge group, generations, κ, r, Λ scaling, η all DERIVED |
 | Verified observables | **30+** |
-| Foundation (formal) | 62 files, 859 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SecondLaw |
+| Foundation (formal) | 73 files, 1,075 Qed — Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SecondLaw → Ordinals → L5-as-Theorem |
 | P4 process mathematics | 297 files, 4,190 Qed |
 | Gauge theory (Yang-Mills) | 114 files, 2,176 Qed |
 | Standard library (stdlib) | 465 files, 7,436 Qed |
@@ -124,7 +127,7 @@ coqc -Q src ToS src/Demo.v
 ```
 src/
   ToS_Axioms.v               L3 (classic) + L4 (L4_witness) — the ONLY axioms
-  foundation/ (62 files, 859 Qed)
+  foundation/ (73 files, 1075 Qed)
                               Distinction → L1-L5 → P1-P4 → E/R/R → Observer → SM derivation.
                               Asymmetric distinction, nested distinction → SM gauge group,
                               3 generations from L4, measurement, Λ, η, consciousness, time

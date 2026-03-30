@@ -1,9 +1,10 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
-## Stats (as of 2026-03-26)
-- **Qed:** 19,151
+## Stats (as of 2026-03-30)
+- **Qed:** 19,645
 - **Admitted:** 0
-- **Files:** 1,283
+- **True placeholders:** 0
+- **Files:** 1,309
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
@@ -122,7 +123,7 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 
 ```
 src/                    — core files (76 .v files): axioms, types, analysis, compiler
-src/foundation/        — formal foundation (62 .v files): Distinction → SM → particles
+src/foundation/        — formal foundation (73 .v files): Distinction → SM → L5 → Ordinals → Cayley
 src/process/           — P4 process mathematics (297 .v files, 4190 Qed)
 src/gauge/             — Yang-Mills mass gap (114 .v files, 2176 Qed)
 src/stdlib/            — standard library (465 .v files, 7436 Qed)
@@ -433,11 +434,18 @@ IMPACT: annotations.json with 15 landmark + 9 bottleneck annotations. CLAUDE.md 
 
 ---
 
-## Admitted — Priority List
+## Admitted & True — Priority List
 
-All Admitted have been closed as of 2026-03-19. The project has **0 Admitted** across 1,248 files.
+**0 Admitted** across 1,309 files (closed 2026-03-19).
+**0 True placeholders** across 1,309 files (closed 2026-03-30).
 
-Previously existed (all resolved):
+Previously existed Admitted (all resolved):
 - HeineBorel_ERR: proved with Lebesgue number assumption
 - Core_ERR (3): weakened statements to be provable within Coq's type system
 - EVT_ERR: deprecated in favor of EVT_idx
+
+Previously existed True (42 total, all resolved 2026-03-30):
+- 11 converted to real propositions (Weinberg sum, Born, Bell, chirality, etc.)
+- 15 converted to plain comments (pedagogy, deprecated, commentary)
+- 13 honest limitations: each now proves WHAT IS derived (not just `True`)
+- 3 future work: each now has concrete nat/Q verification
