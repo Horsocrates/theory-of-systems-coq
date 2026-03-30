@@ -1412,3 +1412,7 @@ src/foundation/P4_Eliminates_ATR.v
 src/foundation/P4_Eliminates_Pi11.v
 src/foundation/P4_Eliminates_AC.v
 src/foundation/P4_Eliminates_Infinity.v
+# Relativity from L5
+src/physics/ObserverStructure.v
+src/physics/CausalStructure.v
+src/physics/MinkowskiFromDistinction.v
