@@ -149,36 +149,47 @@ Definition r_weinberg : Q :=
 Lemma r_is_3_over_10 : r_weinberg == 3 # 10.
 Proof. unfold r_weinberg, dim_SU2, n_metric, D_spacetime. vm_compute. reflexivity. Qed.
 
-(** Standard formula: sin²θ = g'²/(g² + g'²) = r/(1+r) *)
+(** ToS DEFINITION of mixing angle:
+    sin²θ = (intrinsic gauge DOF) / (intrinsic gauge DOF + ambient DOF)
+           = dim(SU(2)) / (dim(SU(2)) + n_metric)
+           = 3 / (3 + 10)
+           = 3/13.
+
+    This is NOT the same as "standard sin²θ_W = g'²/(g²+g'²)."
+    It has the same MATHEMATICAL FORM r/(1+r), but the CONTENT of r differs:
+    — Standard: r = g'²/g² (ratio of two independent couplings)
+    — ToS: r = dim(SU(2))/n_metric (ratio of gauge to geometric DOF)
+
+    The BRIDGE between the two:
+    IF g² ∝ 1/dim(SU(2)) and g'² ∝ 1/n_metric (from P1 equal-weight),
+    THEN r_standard = g'²/g² = dim(SU(2))/n_metric = r_ToS.
+    The P1 identification g² ∝ 1/dim(G) is a structural claim from E/R/R,
+    not a reference to standard electroweak theory. *)
+
 Definition sin2_weinberg : Q := r_weinberg / (1 + r_weinberg).
 
 Lemma sin2_is_3_over_13 : sin2_weinberg == 3 # 13.
 Proof. unfold sin2_weinberg, r_weinberg, dim_SU2, n_metric, D_spacetime.
   vm_compute. reflexivity. Qed.
 
-(** WHY r/(1+r) IS the standard formula:
-    sin²θ = g'²/(g² + g'²).
-    Divide numerator and denominator by g²:
-    = (g'²/g²) / (1 + g'²/g²)
-    = r / (1 + r).  ✓ *)
-
 (* ================================================================== *)
-(*  BRIDGE TO STANDARD ELECTROWEAK THEORY                              *)
+(*  HONEST BRIDGE TO STANDARD THEORY                                   *)
 (* ================================================================== *)
 
-(** In standard EW: sin²θ = g'²/(g² + g'²) with g, g' independent.
-    In ToS: g² = C/dim_SU2, g'² = C/n_metric (same C from θ=1).
-    → r = g'²/g² = dim_SU2/n_metric = 3/10.
+(** The ToS formula and the standard formula AGREE numerically because:
+    1. Both have form r/(1+r)
+    2. ToS: r = dim(SU(2))/n_metric = 3/10
+    3. Standard: r = g'²/g² (measured ≈ 0.3)
 
-    The identification g'² ∝ 1/n_metric follows from:
-    1. U(1)_Y is geometric (Step 1)
-    2. Geometric coupling distributes over metric DOF (P1)
-    3. Each metric component carries 1/n_metric of the total
+    The AGREEMENT is a PREDICTION, not a tautology:
+    — We DERIVE r = 3/10 from DOF counting (no free parameters)
+    — Experiment MEASURES r ≈ 0.3
+    — They match to 0.2%
 
-    The identification g² ∝ 1/dim_SU2 follows from:
-    1. SU(2) is intrinsic gauge (Step 1)
-    2. Gauge coupling distributes over generators (P1)
-    3. Each generator carries 1/dim_SU2 of the total *)
+    The structural identifications (from E/R/R, not standard theory):
+    a. g² ∝ 1/dim(SU(2)):  P1 → coupling distributes over generators
+    b. g'² ∝ 1/n_metric:   P1 + U(1)_Y geometric → coupling distributes over metric DOF
+    c. SU(3) absent:        confinement → doesn't participate in EW mixing *)
 
 (** Complement: cos²θ = 1 - sin²θ = 10/13 *)
 Definition cos2_weinberg : Q := 1 - sin2_weinberg.
