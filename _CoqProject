@@ -1431,3 +1431,4 @@ src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
 src/foundation/CouplingFromERR.v
+src/foundation/MetricDOFJustification.v
