@@ -1435,3 +1435,5 @@ src/foundation/MetricDOFJustification.v
 src/physics/BornRuleFromUnitarity.v
 src/physics/BetaFunctionLattice.v
 src/physics/RGConsistency.v
+src/foundation/GaugeGroupMinimality.v
+src/foundation/SingleSourcePrinciple.v
