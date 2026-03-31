@@ -1437,3 +1437,6 @@ src/physics/BetaFunctionLattice.v
 src/physics/RGConsistency.v
 src/foundation/GaugeGroupMinimality.v
 src/foundation/SingleSourcePrinciple.v
+src/foundation/DOFCounting.v
+src/foundation/LevelStructure.v
+src/foundation/SU3Minimality.v
