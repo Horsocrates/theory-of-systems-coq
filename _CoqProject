@@ -1449,3 +1449,7 @@ src/lattice/ScalarField.v
 src/lattice/GaugeFieldFromConnection.v
 src/lattice/ActionFromTransfer.v
 src/lattice/LatticeFieldEquations.v
+src/lattice/PartitionFunction.v
+src/lattice/Propagator.v
+src/lattice/CorrelationFunctions.v
+src/lattice/FreeEnergy.v
