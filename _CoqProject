@@ -1475,3 +1475,7 @@ src/analysis/FourierApplications.v
 src/stdlib/FiniteSizeMagnetization.v
 src/stdlib/HalfDistinction.v
 src/stdlib/qed/SchwingerFirstOrder.v
+src/lattice/MassFromSpectrum.v
+src/lattice/WZMassRatio.v
+src/lattice/HiggsMechanism.v
+src/lattice/MassSpectrumSynthesis.v
