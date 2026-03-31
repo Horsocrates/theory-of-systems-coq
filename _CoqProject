@@ -1432,3 +1432,6 @@ src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
 src/foundation/CouplingFromERR.v
 src/foundation/MetricDOFJustification.v
+src/physics/BornRuleFromUnitarity.v
+src/physics/BetaFunctionLattice.v
+src/physics/RGConsistency.v
