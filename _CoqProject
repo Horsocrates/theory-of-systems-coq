@@ -1465,3 +1465,4 @@ src/lattice/Lattice3DPropagator.v
 src/lattice/OneLoop3D.v
 src/lattice/BlockDecimation3D.v
 src/lattice/WeinbergCorrection.v
+src/lattice/WeinbergCorrectionFixed.v
