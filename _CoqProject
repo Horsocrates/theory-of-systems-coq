@@ -1466,3 +1466,12 @@ src/lattice/OneLoop3D.v
 src/lattice/BlockDecimation3D.v
 src/lattice/WeinbergCorrection.v
 src/lattice/WeinbergCorrectionFixed.v
+src/lattice/LoopNormalization.v
+src/lattice/LoopRefinementN4.v
+src/lattice/DeltaSynthesis.v
+src/analysis/FourierBasis.v
+src/analysis/FourierConvergence.v
+src/analysis/FourierApplications.v
+src/stdlib/FiniteSizeMagnetization.v
+src/stdlib/HalfDistinction.v
+src/stdlib/qed/SchwingerFirstOrder.v

@@ -1,10 +1,10 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
-## Stats (as of 2026-03-30)
-- **Qed:** 19,645
+## Stats (as of 2026-03-31)
+- **Qed:** 20,575
 - **Admitted:** 0
 - **True placeholders:** 0
-- **Files:** 1,309
+- **Files:** 1,382
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
@@ -138,6 +138,7 @@ src/stdlib/            — standard library (465 .v files, 7436 Qed)
   src/stdlib/molecule/ — molecular structure (8 files, 87 Qed)
   src/stdlib/trading/  — information-theoretic trading (31 files, 551 Qed)
   src/stdlib/qed/      — QED corrections (1 file, 11 Qed)
+src/lattice/           — lattice QFT from distinction (25 .v files, 247 Qed): Weinberg angle, β function, one-loop
 src/zeta/              — Riemann zeta (30 .v files, 683 Qed): arithmetic Heisenberg
 src/physics/           — quantum physics (14 .v files, 356 Qed)
 src/linalg/            — linear algebra (6 .v files, 130 Qed)
