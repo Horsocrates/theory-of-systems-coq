@@ -1428,3 +1428,6 @@ src/physics/WeinbergAngleRunning.v
 src/physics/FineStructureSynthesis.v
 src/foundation/ThetaFromL2L3.v
 src/foundation/WeinbergAngleDerivation.v
+src/physics/AlphaBareLattice.v
+src/foundation/GaugeLevelSeparation.v
+src/foundation/CouplingFromERR.v
