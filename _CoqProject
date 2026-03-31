@@ -1443,3 +1443,9 @@ src/foundation/SU3Minimality.v
 src/foundation/DepthFixpoint.v
 src/foundation/DimensionFromSpin.v
 src/foundation/SpectralSectors.v
+
+src/lattice/DistinctionLattice.v
+src/lattice/ScalarField.v
+src/lattice/GaugeFieldFromConnection.v
+src/lattice/ActionFromTransfer.v
+src/lattice/LatticeFieldEquations.v
