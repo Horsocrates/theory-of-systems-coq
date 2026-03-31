@@ -1461,3 +1461,7 @@ src/lattice/BlockDecimation1D.v
 src/lattice/BetaFromDecimation.v
 src/lattice/RGFlowProcess.v
 src/lattice/CouplingRunning.v
+src/lattice/Lattice3DPropagator.v
+src/lattice/OneLoop3D.v
+src/lattice/BlockDecimation3D.v
+src/lattice/WeinbergCorrection.v
