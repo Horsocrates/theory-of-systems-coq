@@ -1453,3 +1453,7 @@ src/lattice/PartitionFunction.v
 src/lattice/Propagator.v
 src/lattice/CorrelationFunctions.v
 src/lattice/FreeEnergy.v
+src/lattice/InteractionFromGraph.v
+src/lattice/PerturbationExpansion.v
+src/lattice/FeynmanRules.v
+src/lattice/OneLoopScalar.v
