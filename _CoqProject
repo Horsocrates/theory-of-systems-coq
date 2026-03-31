@@ -1457,3 +1457,7 @@ src/lattice/InteractionFromGraph.v
 src/lattice/PerturbationExpansion.v
 src/lattice/FeynmanRules.v
 src/lattice/OneLoopScalar.v
+src/lattice/BlockDecimation1D.v
+src/lattice/BetaFromDecimation.v
+src/lattice/RGFlowProcess.v
+src/lattice/CouplingRunning.v
