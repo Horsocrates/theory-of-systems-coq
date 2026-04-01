@@ -1496,3 +1496,6 @@ src/foundation/P4ProhibitionSynthesis.v
 src/foundation/ProcessMetricComplete.v
 src/foundation/ProcessP4Synthesis.v
 src/projective/ProjectiveStrengthened.v
+src/analysis/FourierGeneralN.v
+src/analysis/FourierProcess.v
+src/analysis/FourierCayleyConnection.v
