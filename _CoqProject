@@ -1493,3 +1493,5 @@ src/foundation/P4CompletedInfinity.v
 src/foundation/P4ProhibitsAC.v
 src/foundation/P4ProhibitsImpredicative.v
 src/foundation/P4ProhibitionSynthesis.v
+src/foundation/ProcessMetricComplete.v
+src/foundation/ProcessP4Synthesis.v
