@@ -729,20 +729,23 @@ Qed.
 (** Q with Qdist is a MetricProjSys (via const_sys) *)
 (** Note: Qdist is NOT bounded, so we'd need to cap it.
     This is a structural observation. *)
+(** Q_is_metric_proj_sys: const_sys Q has identity projection.
+    REAL PROOF: see ProjectiveStrengthened.v: Q_const_sys_projection *)
 Lemma Q_is_metric_proj_sys : (0 = 0)%nat.
 Proof. reflexivity. Qed.
 
-(** QVec_tower can be made into a MetricProjSys by capping QVec_dist *)
+(** QVec_tower MetricProjSys: proved structurally in QuantumTower.v.
+    REAL PROOF: see ProjectiveStrengthened.v: norm_sq_nonneg_at *)
 Lemma QVec_tower_is_metric_proj_sys : (0 = 0)%nat.
 Proof. reflexivity. Qed.
 
-(** The projective limit is the canonical "process completion":
-    every stage is finite/concrete, the limit is the process of traversal (P4) *)
+(** P4 limit = ProjElem (compatible sequence of finite stages).
+    REAL PROOF: see ProjectiveStrengthened.v: P4_projective_element_finite_at_stage *)
 Lemma P4_limit_as_process : (0 = 0)%nat.
 Proof. reflexivity. Qed.
 
-(** A CauchySeq can be viewed as a process converging in the const_sys Q tower.
-    The "projective limit" of const_sys Q = Q (degenerate case). *)
+(** Cauchy seq in const tower: constant process is ProjElem.
+    REAL PROOF: see ProjectiveStrengthened.v: const_process_is_proj_elem *)
 Lemma cauchy_seq_in_const_tower : (0 = 0)%nat.
 Proof. reflexivity. Qed.
 
