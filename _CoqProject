@@ -1509,3 +1509,6 @@ src/stdlib/compression/ProcessCompression.v
 src/stdlib/compression/SemanticCompression.v
 src/stdlib/compression/VerifiedHuffman.v
 src/stdlib/compression/VerifiedQuantization.v
+src/stdlib/compression/CompressionPipeline.v
+src/stdlib/compression/ErrorComposition.v
+src/stdlib/compression/CompressionSynthesis.v
