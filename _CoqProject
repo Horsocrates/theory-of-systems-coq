@@ -1479,3 +1479,17 @@ src/lattice/MassFromSpectrum.v
 src/lattice/WZMassRatio.v
 src/lattice/HiggsMechanism.v
 src/lattice/MassSpectrumSynthesis.v
+src/foundation/ERRCategory.v
+src/foundation/ERRAutomorphism.v
+src/foundation/ERRGaugeFunctorSynthesis.v
+src/foundation/L5CausalOrder.v
+src/foundation/CausalSignature.v
+src/foundation/CausalStructureSynthesis.v
+src/foundation/SpinFromChirality.v
+src/foundation/DiracFromSpin.v
+src/foundation/DiracOnLattice.v
+src/foundation/L2DiracSynthesis.v
+src/foundation/P4CompletedInfinity.v
+src/foundation/P4ProhibitsAC.v
+src/foundation/P4ProhibitsImpredicative.v
+src/foundation/P4ProhibitionSynthesis.v
