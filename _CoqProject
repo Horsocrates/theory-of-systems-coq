@@ -1499,3 +1499,8 @@ src/projective/ProjectiveStrengthened.v
 src/analysis/FourierGeneralN.v
 src/analysis/FourierProcess.v
 src/analysis/FourierCayleyConnection.v
+src/analysis/FourierLaplacian.v
+src/analysis/FourierDispersion.v
+src/analysis/FourierVacuumEnergy.v
+src/analysis/FourierSpectralDecomp.v
+src/analysis/FourierBranchSynthesis.v
