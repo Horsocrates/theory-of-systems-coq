@@ -1512,3 +1512,9 @@ src/stdlib/compression/VerifiedQuantization.v
 src/stdlib/compression/CompressionPipeline.v
 src/stdlib/compression/ErrorComposition.v
 src/stdlib/compression/CompressionSynthesis.v
+src/acoustics/Oscillation.v
+src/acoustics/WavePropagation.v
+src/acoustics/SoundSpectrum.v
+src/acoustics/Harmony.v
+src/acoustics/Loudness.v
+src/acoustics/AcousticsSynthesis.v
