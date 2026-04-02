@@ -1518,3 +1518,7 @@ src/acoustics/SoundSpectrum.v
 src/acoustics/Harmony.v
 src/acoustics/Loudness.v
 src/acoustics/AcousticsSynthesis.v
+src/acoustics/VibrationCore.v
+src/acoustics/DampingAndDissipation.v
+src/acoustics/HierarchyTheorem.v
+src/acoustics/VibrationSynthesis.v
