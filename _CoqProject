@@ -1522,3 +1522,12 @@ src/acoustics/VibrationCore.v
 src/acoustics/DampingAndDissipation.v
 src/acoustics/HierarchyTheorem.v
 src/acoustics/VibrationSynthesis.v
+src/thermal/ThermalFromModes.v
+src/thermal/SecondLaw.v
+src/thermal/ThermalSynthesis.v
+src/casimir_branch/CasimirFromGraph.v
+src/casimir_branch/CasimirConvergence.v
+src/process_qm/QuantumFromVibration.v
+src/process_qm/MeasurementProcess.v
+src/process_qm/HilbertAsProcess.v
+src/process_qm/ProcessQMSynthesis.v
