@@ -1531,3 +1531,12 @@ src/process_qm/QuantumFromVibration.v
 src/process_qm/MeasurementProcess.v
 src/process_qm/HilbertAsProcess.v
 src/process_qm/ProcessQMSynthesis.v
+src/decoherence/DecoherenceFromModes.v
+src/decoherence/DecoherenceSynthesis.v
+src/cosmological/LambdaFromGraph.v
+src/arrow/ArrowFromModes.v
+src/entanglement/EntanglementFromModes.v
+src/entanglement/EntanglementSynthesis.v
+src/information/InformationFromModes.v
+src/information/LandauerConnection.v
+src/synthesis/PhysicsInformationSynthesis.v
