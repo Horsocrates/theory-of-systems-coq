@@ -1540,3 +1540,13 @@ src/entanglement/EntanglementSynthesis.v
 src/information/InformationFromModes.v
 src/information/LandauerConnection.v
 src/synthesis/PhysicsInformationSynthesis.v
+src/error_correction/ModeProtection.v
+src/error_correction/CodeFromGraph.v
+src/ionization/CoulombOnGraph.v
+src/ionization/IonizationThreshold.v
+src/gravity/CurvatureFromGraph.v
+src/gravity/GeodesicDeviation.v
+src/cosmology_ext/ExpandingGraph.v
+src/cosmology_ext/DarkEnergy.v
+src/cosmology_ext/BigBangProcess.v
+src/synthesis/DeeperPhysicsSynthesis.v
