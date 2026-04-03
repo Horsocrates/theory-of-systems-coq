@@ -1550,3 +1550,11 @@ src/cosmology_ext/ExpandingGraph.v
 src/cosmology_ext/DarkEnergy.v
 src/cosmology_ext/BigBangProcess.v
 src/synthesis/DeeperPhysicsSynthesis.v
+src/light/EdgeField.v
+src/light/Polarization.v
+src/light/SpeedOfLight.v
+src/light/ColorSpectrum.v
+src/light/MaxwellFromGraph.v
+src/light/LightGravityConnection.v
+src/light/RefractionDiffraction.v
+src/light/LightSynthesis.v
