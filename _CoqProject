@@ -1558,3 +1558,8 @@ src/light/MaxwellFromGraph.v
 src/light/LightGravityConnection.v
 src/light/RefractionDiffraction.v
 src/light/LightSynthesis.v
+src/fermions/DiracOnGraph.v
+src/fermions/YukawaCoupling.v
+src/fermions/TopLoop.v
+src/fermions/GaugeLoops.v
+src/fermions/HiggsDiagnostic.v
