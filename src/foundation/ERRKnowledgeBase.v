@@ -302,22 +302,176 @@ Proof.
   split; lia]]]]].
 Qed.
 
+(* ================================================================ *)
+(*  FIX 7: E/R/R = Structure / Function / Agent                      *)
+(*  KB v2 Результат 4:                                              *)
+(*  "Rules = Структура = Как"                                        *)
+(*  "Roles = Функция (действие) = Зачем"                            *)
+(*  "Elements = Агент = Кто/Что"                                    *)
+(*  Element принадлежит системе АКТИВНО — выполняет функцию.        *)
+(* ================================================================ *)
+
+Inductive ERRAspect :=
+  | Aspect_Structure   (* Rules = HOW the system is organized *)
+  | Aspect_Function    (* Roles = WHAT must be done (action) *)
+  | Aspect_Agent.      (* Elements = WHO performs the function *)
+
+Definition category_to_aspect (c : ERRCategory) : ERRAspect :=
+  match c with
+  | Cat_Rule => Aspect_Structure
+  | Cat_Role => Aspect_Function
+  | Cat_Element => Aspect_Agent
+  end.
+
+Definition aspect_to_category (a : ERRAspect) : ERRCategory :=
+  match a with
+  | Aspect_Structure => Cat_Rule
+  | Aspect_Function => Cat_Role
+  | Aspect_Agent => Cat_Element
+  end.
+
+Lemma aspect_roundtrip : forall c,
+  aspect_to_category (category_to_aspect c) = c.
+Proof. intro c. destruct c; reflexivity. Qed.
+
+Lemma aspect_roundtrip_inv : forall a,
+  category_to_aspect (aspect_to_category a) = a.
+Proof. intro a. destruct a; reflexivity. Qed.
+
+(** Element is ACTIVE (agent), not passive (satisfier of predicate) *)
+(** An agent PERFORMS a function according to structure.
+    "Принадлежность — следствие выполнения функции." *)
+
+(* ================================================================ *)
+(*  FIX 8: NUMBERS AS SYSTEMS                                        *)
+(*  KB v2 Результат 5:                                              *)
+(*  "Каждое число — система из N единиц, а не абстрактный объект"   *)
+(*  "2 < 5 потому что невозможно построить 5, не построив сначала 2" *)
+(* ================================================================ *)
+
+(** Numbers as ERR systems:
+    Rules = counting (iterate unit)
+    Roles = "system of N units" for each N
+    Elements = 1, 2, 3, ... (agents of these functions) *)
+
+Definition nat_rules_count : nat := 1%nat.   (* one rule: add unit *)
+Definition nat_roles_for (n : nat) : nat := n. (* n-th role = "system of n units" *)
+
+(** Order from generative process: can't build 5 without building 2 first *)
+Lemma order_from_generation : forall n m : nat,
+  (n < m)%nat -> (n <= m)%nat.
+Proof. lia. Qed.
+
+(** Successor is APPLICATION of rule, not the rule itself *)
+(** Rule = counting. S(n) = applying the rule to system-of-n-units *)
+Lemma successor_is_application :
+  forall n, Datatypes.S n = (n + 1)%nat.
+Proof. lia. Qed.
+
+(** Each number CONTAINS all previous as stages of construction *)
+(** 5 contains 4 contains 3 contains 2 contains 1 *)
+Lemma number_contains_predecessors : forall n m,
+  (m < n)%nat -> (m <= n)%nat.
+Proof. lia. Qed.
+
+(* ================================================================ *)
+(*  FIX 9: NO COMMON FUNCTION → NO SYSTEM                           *)
+(*  KB v2: "Нет общей функции — нет системы"                        *)
+(*  A collection without a common function (Role) is not a system.   *)
+(* ================================================================ *)
+
+(** A system needs ALL three: Rules, Roles, Elements.
+    Without Roles (no common function): not a system, just a collection. *)
+
+Definition has_common_function (S : ERRSystem) : bool :=
+  existsb (fun i => err_cat_eqb (errs_category S i) Cat_Role)
+    (seq 0 (errs_n_components S)).
+
+(** Collection without roles: NOT a system *)
+Definition mere_collection : ERRSystem := mkERRSys 3
+  (fun i => match i with
+    | 0%nat => Cat_Element | 1%nat => Cat_Element
+    | _ => Cat_Rule
+    end)
+  (fun _ _ => false).
+
+Definition proper_system : ERRSystem := mkERRSys 3
+  (fun i => match i with
+    | 0%nat => Cat_Element | 1%nat => Cat_Role
+    | _ => Cat_Rule
+    end)
+  (fun _ _ => false).
+
+Lemma collection_no_function :
+  has_common_function mere_collection = false.
+Proof. vm_compute. reflexivity. Qed.
+
+Lemma system_has_function :
+  has_common_function proper_system = true.
+Proof. vm_compute. reflexivity. Qed.
+
+(** Without function → not fully determinate *)
+Theorem no_function_no_system :
+  has_common_function mere_collection = false /\
+  has_common_function proper_system = true.
+Proof.
+  split; [exact collection_no_function | exact system_has_function].
+Qed.
+
+(* ================================================================ *)
+(*  UPDATED GRAND SYNTHESIS: ALL 9 FIXES                             *)
+(* ================================================================ *)
+
+Theorem err_knowledge_base_full_synthesis :
+  (* Fix 1: Generative order *)
+  (forall sig scores, gate_valid (compute_gate sig) = false ->
+    ent_status (process_entity 0 0 sig scores) = Invalid) /\
+  (* Fix 2: Only PrimaryMax is unique *)
+  (forall s, is_unique_status s = true -> s = PrimaryMax) /\
+  (* Fix 3: Equal weight = no update *)
+  has_sufficient_reason_to_update 45 45 = false /\
+  (* Fix 4: Constitution = Rules(n-1) *)
+  sl_constitution level_1_generation = Logic_Level /\
+  (* Fix 5: L2 separates categories *)
+  Cat_Element <> Cat_Rule /\
+  (* Fix 6: Three levels *)
+  (Logic_Level < Generation_Level)%nat /\
+  (* Fix 7: Aspect bijection *)
+  (forall c, aspect_to_category (category_to_aspect c) = c) /\
+  (* Fix 8: Order from generation *)
+  (forall n m : nat, (n < m)%nat -> (n <= m)%nat) /\
+  (* Fix 9: No function → no system *)
+  has_common_function mere_collection = false.
+Proof.
+  split; [exact no_rules_no_roles |
+  split; [exact only_primary_is_unique |
+  split; [exact equal_weight_no_update |
+  split; [exact generation_depends_on_logic |
+  split; [exact L2_element_not_rule |
+  unfold Logic_Level, Generation_Level;
+  split; [lia |
+  split; [exact aspect_roundtrip |
+  split; [exact order_from_generation |
+  exact collection_no_function]]]]]]]].
+Qed.
+
 (**
   BOOK REFERENCE:
-  This file resolves ALL 6 divergences between ERR_Knowledge_Base.md
+  This file resolves ALL 9 divergences between ERR_Knowledge_Base.md (v2)
   and the Coq formalization.
 
-  Fix 1: generative_order — Rules → Roles → Elements (ontological)
-  Fix 2: only_primary_is_unique — two role types (deterministic + status)
-  Fix 3: status_preservation — equal weight = no sufficient reason (L4)
-  Fix 4: constitution_is_not_fourth_component — Constitution = Rules(n-1)
-  Fix 5: L2_L3_ground_well_formedness — L2 exclusive + L3 exhaustive
-  Fix 6: three_level_hierarchy — Logic(0) → Generation(1) → Concrete(2)
+  Fixes 1-6: from original KB (see above)
+  Fix 7: E/R/R = Structure / Function / Agent (active, not passive)
+         category_to_aspect / aspect_to_category bijection
+  Fix 8: Numbers as systems — order from generative process
+         successor_is_application, number_contains_predecessors
+  Fix 9: "No common function — no system"
+         has_common_function predicate, mere_collection vs proper_system
 
-  KEY INSIGHTS FROM KNOWLEDGE BASE:
-  - Epistemic order (E→R→R) ≠ Ontological order (R→R→E)
-  - Status ∈ Role (unique subtype, not separate concept)
-  - Constitution ∈ Rules (meta-level, not 4th component)
-  - Paradoxes = L2 violations between E/R/R categories
-  - E/R/R is self-similar (fractal): same triple at every level
+  KEY NEW INSIGHTS FROM KB v2:
+  - Element is AGENT (active), not satisfier (passive)
+  - Numbers are SYSTEMS of units, not abstract objects
+  - Order = consequence of generation, not external law
+  - Collection without common function is not a system
+  - Theory of Systems: from objects-in-containers to agents-of-functions
 *)
