@@ -419,7 +419,59 @@ Proof.
 Qed.
 
 (* ================================================================ *)
-(*  UPDATED GRAND SYNTHESIS: ALL 9 FIXES                             *)
+(*  FIX 10: MATHEMATICS, PHYSICS, AND E/R/R                          *)
+(*  KB v3 Результат 6:                                              *)
+(*  "Математика — язык логических правил. Выводится из логики."     *)
+(*  "Физика — вложенная система, Constitution = математика."        *)
+(*  "E/R/R — механизм вывода математики из логики."                 *)
+(*  Hierarchy: L1-L5 → Mathematics → Physics                        *)
+(* ================================================================ *)
+
+(** Three-level interpretation with KB v3 names:
+    Level 0 = Logic (L1-L5), self-grounding
+    Level 1 = Mathematics (language of logical rules)
+    Level 2 = Physics (embedded system, form = external appearance) *)
+
+Definition Mathematics_Level := Generation_Level.  (* = 1 *)
+Definition Physics_Level := Concrete_Level.        (* = 2 *)
+
+(** Mathematics: Constitution = Logic *)
+Lemma math_constitution_is_logic :
+  sl_constitution level_1_generation = Logic_Level.
+Proof. exact generation_depends_on_logic. Qed.
+
+(** Physics: Constitution = Mathematics *)
+Lemma physics_constitution_is_math :
+  sl_constitution level_2_concrete = Mathematics_Level.
+Proof. exact concrete_depends_on_generation. Qed.
+
+(** The chain: Logic → Mathematics → Physics *)
+Theorem logic_math_physics_chain :
+  sl_constitution level_1_generation = Logic_Level /\
+  sl_constitution level_2_concrete = Mathematics_Level /\
+  (Logic_Level < Mathematics_Level)%nat /\
+  (Mathematics_Level < Physics_Level)%nat.
+Proof.
+  unfold Logic_Level, Mathematics_Level, Physics_Level,
+    Generation_Level, Concrete_Level.
+  split. { reflexivity. }
+  split. { reflexivity. }
+  split; lia.
+Qed.
+
+(** E/R/R is the MECHANISM by which logic generates mathematics:
+    L1-L5 → Rules → Roles → Elements = mathematical structures *)
+
+(** Physics is EMBEDDED in mathematics:
+    Physical laws are written in mathematics not by choice
+    but because physics IS an embedded system within its Constitution. *)
+
+(** Form = external appearance of system for observer.
+    Physics describes form. Mathematics describes rules (internal structure).
+    Two views of one system: inside (structure) and outside (form). *)
+
+(* ================================================================ *)
+(*  UPDATED GRAND SYNTHESIS: ALL 10 FIXES                            *)
 (* ================================================================ *)
 
 Theorem err_knowledge_base_full_synthesis :
@@ -440,8 +492,11 @@ Theorem err_knowledge_base_full_synthesis :
   (forall c, aspect_to_category (category_to_aspect c) = c) /\
   (* Fix 8: Order from generation *)
   (forall n m : nat, (n < m)%nat -> (n <= m)%nat) /\
-  (* Fix 9: No function → no system *)
-  has_common_function mere_collection = false.
+  (* Fix 9: No function -> no system *)
+  has_common_function mere_collection = false /\
+  (* Fix 10: Logic -> Mathematics -> Physics *)
+  sl_constitution level_1_generation = Logic_Level /\
+  sl_constitution level_2_concrete = Mathematics_Level.
 Proof.
   split; [exact no_rules_no_roles |
   split; [exact only_primary_is_unique |
@@ -452,26 +507,28 @@ Proof.
   split; [lia |
   split; [exact aspect_roundtrip |
   split; [exact order_from_generation |
-  exact collection_no_function]]]]]]]].
+  split; [exact collection_no_function |
+  split; [exact math_constitution_is_logic |
+  exact physics_constitution_is_math]]]]]]]]]].
 Qed.
 
 (**
   BOOK REFERENCE:
-  This file resolves ALL 9 divergences between ERR_Knowledge_Base.md (v2)
+  This file resolves ALL 10 divergences between ERR_Knowledge_Base.md (v3)
   and the Coq formalization.
 
-  Fixes 1-6: from original KB (see above)
+  Fixes 1-6: from original KB
   Fix 7: E/R/R = Structure / Function / Agent (active, not passive)
-         category_to_aspect / aspect_to_category bijection
-  Fix 8: Numbers as systems — order from generative process
-         successor_is_application, number_contains_predecessors
-  Fix 9: "No common function — no system"
-         has_common_function predicate, mere_collection vs proper_system
+  Fix 8: Numbers as systems -- order from generative process
+  Fix 9: "No common function -- no system"
+  Fix 10: Logic -> Mathematics -> Physics hierarchy (KB v3)
+          Mathematics = language of logical rules (Level 1)
+          Physics = embedded system, Constitution = mathematics (Level 2)
+          E/R/R = mechanism by which logic generates mathematics
 
-  KEY NEW INSIGHTS FROM KB v2:
-  - Element is AGENT (active), not satisfier (passive)
-  - Numbers are SYSTEMS of units, not abstract objects
-  - Order = consequence of generation, not external law
-  - Collection without common function is not a system
-  - Theory of Systems: from objects-in-containers to agents-of-functions
+  COMPLETE HIERARCHY:
+    L1-L5 (Logic, self-grounding)
+      -> Mathematics (language of logical rules, Constitution = L1-L5)
+        -> Physics (embedded system, Constitution = Mathematics)
+          -> Form (external appearance for observer)
 *)
