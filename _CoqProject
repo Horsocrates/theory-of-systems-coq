@@ -1573,3 +1573,5 @@ src/foundation/ERRKnowledgeBase.v
 src/foundation/ERRBijections.v
 src/foundation/ObserverCompressor.v
 src/foundation/GammaUnification.v
+src/crown/BornIsParseval.v
+src/crown/CompressionIsPhysics.v
