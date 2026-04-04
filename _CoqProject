@@ -1563,3 +1563,6 @@ src/fermions/YukawaCoupling.v
 src/fermions/TopLoop.v
 src/fermions/GaugeLoops.v
 src/fermions/HiggsDiagnostic.v
+src/foundation/ERRWellFormedness.v
+src/foundation/ParadoxDiagnosis.v
+src/foundation/ERRLawsCorrespondence.v
