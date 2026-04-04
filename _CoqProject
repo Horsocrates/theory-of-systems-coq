@@ -1570,3 +1570,6 @@ src/foundation/ERRProcess.v
 src/foundation/StatusFromERR.v
 src/foundation/PhysicsERR.v
 src/foundation/ERRKnowledgeBase.v
+src/foundation/ERRBijections.v
+src/foundation/ObserverCompressor.v
+src/foundation/GammaUnification.v
