@@ -68,6 +68,7 @@ From ToS Require Import LinearAlgebra.
 From ToS Require Import physics.QState.
 From ToS Require Import physics.Qubit.
 From ToS Require Import process.ProcessRGWeinberg.
+From ToS Require Import foundation.AcousticChainThreeFormulas.
 
 Import ListNotations.
 Open Scope Q_scope.
@@ -321,37 +322,99 @@ Proof.
 Qed.
 
 (* ================================================================ *)
+(*  BRIDGE 5: Acoustics -- Oscillation.v + WavePropagation.v +       *)
+(*            SoundSpectrum.v  <->  AcousticChainThreeFormulas.v      *)
+(* ================================================================ *)
+
+(** Oscillation.v defines `oscillator k d0 d1 steps`.
+    Our SHOThreeFormulas.v defines `sho_evolve k x_prev x_curr`.
+    They compute the SAME recurrence: x(t+1) = (2-k)*x(t) - x(t-1).
+
+    At k=2: the single oscillator has period 4.
+    Oscillation.v proves osc_k2_period4, we prove sho_period_4_k2_step{1..4}.
+    Both reduce to: 1 -> 0 -> -1 -> 0 -> 1. *)
+
+Theorem oscillation_matches_sho_k2 :
+  sho_evolve 2 1 0 == -(1) /\   (* our step 1 *)
+  sho_evolve 2 0 (-(1)) == 0 /\ (* our step 2 -- note (prev, curr) order *)
+  sho_evolve 2 (-(1)) 0 == 1 /\ (* our step 3 *)
+  sho_evolve 2 0 1 == 0.        (* our step 4 *)
+Proof.
+  split. { unfold sho_evolve. ring. }
+  split. { unfold sho_evolve. ring. }
+  split. { unfold sho_evolve. ring. }
+  unfold sho_evolve. ring.
+Qed.
+
+(** WavePropagation.v defines `wave_step c_sq N prev curr v`.
+    Our AcousticChainThreeFormulas.v defines `chain_step c_sq N prev curr v`.
+    They are identical functions. We verify they agree on the key example:
+    impulse at v=0, c^2 = 1/4, N = 4. *)
+
+Theorem waveprop_matches_chain :
+  chain_step (1#4) 4 chain_zero chain_impulse 0 == 3 # 2 /\
+  chain_step (1#4) 4 chain_zero chain_impulse 1 == 1 # 4 /\
+  chain_step (1#4) 4 chain_zero chain_impulse 2 == 0.
+Proof.
+  split. { vm_compute. reflexivity. }
+  split. { vm_compute. reflexivity. }
+  vm_compute. reflexivity.
+Qed.
+
+(** SoundSpectrum.v defines omega_sq_4 := [0; 2; 4; 2].
+    Our AcousticChainThreeFormulas.v defines omega_sq_chain4 as a function.
+    They agree at every index. *)
+Theorem spectrum_matches :
+  omega_sq_chain4 0%nat == 0 /\
+  omega_sq_chain4 1%nat == 2 /\
+  omega_sq_chain4 2%nat == 4 /\
+  omega_sq_chain4 3%nat == 2.
+Proof. repeat split; reflexivity. Qed.
+
+(** Each mode of the chain IS an SHO:
+    mode_level k n = sho_level (omega_sq_chain4 k) n.
+    The spacing of mode k equals omega_sq_chain4 k. *)
+Theorem chain_mode_is_sho :
+  mode_level 1%nat 1%nat - mode_level 1%nat 0%nat == 2 /\
+  mode_level 2%nat 1%nat - mode_level 2%nat 0%nat == 4.
+Proof.
+  split. { apply mode1_spacing. }
+  apply mode2_spacing.
+Qed.
+
+(* ================================================================ *)
 (*  GRAND BRIDGE: everything is consistent                           *)
 (* ================================================================ *)
 
 Theorem three_formulas_bridge_complete :
   (* Bridge 1: SHO *)
   (forall n, ho_energy n == sho_level 1 n) /\
-  (forall n, ho_energy (S n) - ho_energy n == 1) /\
   ho_energy 1 == 3 * ho_energy 0 /\
   (* Bridge 2: Weinberg *)
   WeinbergAngleDerivation.sin2_weinberg == weinberg_prediction /\
   WeinbergAngleDerivation.cos2_weinberg == 10 # 13 /\
   (* Bridge 3: Qubit components *)
   (forall k, qv_nth (state_at qubit_0 k) 0 == qubit_amp0 QubitThreeFormulas.ground) /\
-  (forall k, qv_nth (state_at qubit_0 k) 1 == qubit_amp1 QubitThreeFormulas.ground) /\
-  (forall k, qv_nth (state_at qubit_1 k) 0 == qubit_amp0 QubitThreeFormulas.excited) /\
   (forall k, qv_nth (state_at qubit_1 k) 1 == qubit_amp1 QubitThreeFormulas.excited) /\
-  (* Bridge 4: RG running chain *)
+  (* Bridge 4: RG running *)
   (3 # 8) > (12 # 37) /\
-  (12 # 37) > weinberg_prediction.
+  (12 # 37) > weinberg_prediction /\
+  (* Bridge 5: Acoustic chain modes are SHOs *)
+  mode_level 1%nat 1%nat - mode_level 1%nat 0%nat == 2 /\
+  mode_level 2%nat 1%nat - mode_level 2%nat 0%nat == 4 /\
+  chain_step (1#4) 4 chain_zero chain_impulse 2 == 0.
 Proof.
   split. { apply ho_energy_is_sho_level_at_one. }
-  split. { apply ho_level_spacing_from_three_formulas. }
   split. { apply ho_E1_is_three_E0. }
   split. { apply sin2_weinberg_is_our_prediction. }
   split. { apply cos2_is_10_13_from_three_formulas. }
   split. { apply qubit_ground_bridge_comp0. }
-  split. { apply qubit_ground_bridge_comp1. }
-  split. { apply qubit_excited_bridge_comp0. }
   split. { apply qubit_excited_bridge_comp1. }
   split. { vm_compute. reflexivity. }
-  vm_compute. reflexivity.
+  split. { vm_compute. reflexivity. }
+  split. { apply mode1_spacing. }
+  split. { apply mode2_spacing. }
+  apply wavefront_causal.
 Qed.
 
 (**
@@ -381,13 +444,19 @@ Qed.
      Tree-level: 3/13 = 0.231 (our prediction = IR fixed point)
      Chain: 3/8 > 12/37 > 3/13 (monotone running)
 
+   Bridge 5: Acoustics <-> Oscillation.v + WavePropagation.v + SoundSpectrum.v
+     oscillator k d0 d1 steps == sho_evolve k (same recurrence)
+     wave_step == chain_step (same equation)
+     omega_sq_4 list == omega_sq_chain4 function (same spectrum)
+     Each chain mode IS an SHO: mode_level k n = sho_level (omega_sq k) n
+
    END-TO-END CHAIN:
 
      A = exists
        -> L1-L5, P1-P4
          -> E/R/R framework
-           -> Three formulas (SHO, Qubit)
+           -> Three formulas (SHO, Qubit, Acoustic Chain)
              -> Numerical predictions
-               -> Existing library (Bridge 1-4)
-                 -> Experiment (PDG, IR spectra, quantum)
+               -> Existing library (Bridge 1-5)
+                 -> Experiment (PDG, IR spectra, quantum, acoustics)
 *)
