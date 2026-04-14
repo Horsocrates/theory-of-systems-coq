@@ -69,6 +69,8 @@ From ToS Require Import physics.QState.
 From ToS Require Import physics.Qubit.
 From ToS Require Import process.ProcessRGWeinberg.
 From ToS Require Import foundation.AcousticChainThreeFormulas.
+From ToS Require Import foundation.PhotonThreeFormulas.
+From ToS Require Import light.EdgeField.
 
 Import ListNotations.
 Open Scope Q_scope.
@@ -383,6 +385,36 @@ Proof.
 Qed.
 
 (* ================================================================ *)
+(*  BRIDGE 6: Light -- EdgeField.v + SpeedOfLight.v                  *)
+(*            <-> PhotonThreeFormulas.v                               *)
+(* ================================================================ *)
+
+(** EdgeField.v defines `edge_oscillator k eps_prev eps_curr`.
+    Our `edge_step c_sq N prev curr e` is the same recurrence on a chain.
+    At c^2 = 1 (causal limit), they both give full transfer. *)
+
+(** EdgeField.v `edge_oscillator` = our `sho_evolve` (same recurrence). *)
+Theorem edge_oscillator_is_sho_evolve : forall k p c,
+  edge_oscillator k p c == sho_evolve k p c.
+Proof. intros. unfold edge_oscillator, sho_evolve. ring. Qed.
+
+(** SpeedOfLight.v states causal_limit = 1 and edge_wave_speed = 1.
+    Our photon uses c^2 = 1. Bridge: at c^2 = 1, source empties. *)
+Theorem causal_limit_empties_source :
+  edge_step 1 4 photon_zero photon_impulse 0 == 0.
+Proof. apply photon_leaves_source. Qed.
+
+(** Sound retains source amplitude (c^2 < 1). *)
+Theorem subluminal_retains_source :
+  chain_step (1 # 4) 4 chain_zero chain_impulse 0 == 3 # 2.
+Proof. apply sound_stays_at_source. Qed.
+
+(** Photon level spectrum has no zero-point (edge_oscillator at k=0 is static). *)
+Theorem photon_spectrum_starts_at_zero : forall omega,
+  photon_level omega 0 == 0.
+Proof. apply photon_level_0. Qed.
+
+(* ================================================================ *)
 (*  GRAND BRIDGE: everything is consistent                           *)
 (* ================================================================ *)
 
@@ -402,7 +434,11 @@ Theorem three_formulas_bridge_complete :
   (* Bridge 5: Acoustic chain modes are SHOs *)
   mode_level 1%nat 1%nat - mode_level 1%nat 0%nat == 2 /\
   mode_level 2%nat 1%nat - mode_level 2%nat 0%nat == 4 /\
-  chain_step (1#4) 4 chain_zero chain_impulse 2 == 0.
+  chain_step (1#4) 4 chain_zero chain_impulse 2 == 0 /\
+  (* Bridge 6: Photon = edge field at c^2 = 1 *)
+  photon_rest_energy == 0 /\
+  edge_step 1 4 photon_zero photon_impulse 0 == 0 /\
+  edge_step 1 4 photon_zero photon_impulse 1 == 1.
 Proof.
   split. { apply ho_energy_is_sho_level_at_one. }
   split. { apply ho_E1_is_three_E0. }
@@ -414,7 +450,10 @@ Proof.
   split. { vm_compute. reflexivity. }
   split. { apply mode1_spacing. }
   split. { apply mode2_spacing. }
-  apply wavefront_causal.
+  split. { apply wavefront_causal. }
+  split. { reflexivity. }
+  split. { vm_compute. reflexivity. }
+  vm_compute. reflexivity.
 Qed.
 
 (**
@@ -450,13 +489,19 @@ Qed.
      omega_sq_4 list == omega_sq_chain4 function (same spectrum)
      Each chain mode IS an SHO: mode_level k n = sho_level (omega_sq k) n
 
+   Bridge 6: Photon <-> EdgeField.v + SpeedOfLight.v
+     edge_oscillator == sho_evolve (same recurrence)
+     At c^2 = 1: source empties (photon leaves), transfer = 1
+     Photon spectrum starts at 0 (no zero-point, unlike SHO)
+     Same equation, different carrier (edge vs vertex)
+
    END-TO-END CHAIN:
 
      A = exists
        -> L1-L5, P1-P4
          -> E/R/R framework
-           -> Three formulas (SHO, Qubit, Acoustic Chain)
+           -> Three formulas (SHO, Qubit, Acoustic Chain, Photon)
              -> Numerical predictions
-               -> Existing library (Bridge 1-5)
-                 -> Experiment (PDG, IR spectra, quantum, acoustics)
+               -> Existing library (Bridge 1-6)
+                 -> Experiment (PDG, IR spectra, quantum, acoustics, optics)
 *)
