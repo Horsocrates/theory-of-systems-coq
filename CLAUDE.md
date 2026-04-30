@@ -1,12 +1,28 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
-## Stats (as of 2026-03-31)
-- **Qed:** 20,575
+## Stats (as of 2026-04-12)
+- **Qed:** 21,901
 - **Admitted:** 0
 - **True placeholders:** 0
-- **Files:** 1,382
+- **Files:** 1,497
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
+
+## Latest: E/R/R Three Formulas Re-derivation (April 2026)
+
+14 new files in `src/foundation/` totaling 304 Qed, re-deriving physics
+in pure E/R/R three-formula form:
+
+  Single systems: SHO, Qubit, Photon, Acoustic chain (4 files, 85 Qed)
+  Atomic composition: H, H structure, He, Li, C (5 files, 120 Qed)
+  Numerical predictions: sin^2(theta_W)=3/13, Morse, Planck/Balmer,
+                          Apéry zeta(3) (4 files, 66 Qed)
+  Cross-bridge: 6 bridges to existing library (1 file, 33 Qed)
+
+Key verifiable: sin^2(theta_W) = 3/13 (0.19% from PDG), H2 fundamental
+4159 cm^-1 (0.05%), Lyman/Balmer ratio = 27/5 (exact), zeta(3) bracket
+1202/1000 < a_3 < 1203/1000 (machine-verified), periodic table row
+lengths 2, 8, 18, 32 = 2n^2.
 
 ## Build Commands
 
