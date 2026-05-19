@@ -78,6 +78,28 @@ Require Export Coq.Logic.Classical_Prop.
   The difference is foundational: L4w says existence is determinate;
   AC says arbitrary collections can be simultaneously selected from.
 
+   NOTE ON COMPARISON WITH OTHER FRAMEWORKS:
+==========================================
+classic and L4_witness are NOT additional postulates in the sense of
+ZFC's Axiom of Choice or Dependent Choice. They are TECHNICAL DECLARATIONS
+that register laws L3 and L4 (derived in ToS from the act of distinction)
+in the CIC type system, which by default is constructive and does not
+have them.
+
+The substantive difference between L4_witness and AC is structural,
+not a matter of strength on a single scale:
+  - L4_witness extracts a witness from a SINGLE existential.
+    The witness is already determined by the structure of existence;
+    the axiom merely gives constructive access to what is structurally
+    already determinate (Law L4: Sufficient Reason).
+  - AC asserts a CHOICE FUNCTION for a family of existentials.
+    Such a function requires a completed infinite collection of
+    simultaneous choices, which is structurally incompatible with P4
+    (see foundation/P4ProhibitsAC.v).
+
+L4_witness and AC are objects of different ontological category;
+comparing them on a single "strength hierarchy" obscures this fact.
+
 *)
 
 Axiom L4_witness : forall (A : Type) (P : A -> Prop),
