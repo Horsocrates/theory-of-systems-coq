@@ -78,9 +78,6 @@ Require Export Coq.Logic.Classical_Prop.
   The difference is foundational: L4w says existence is determinate;
   AC says arbitrary collections can be simultaneously selected from.
 
-  In the proof-theoretic hierarchy:
-    classic (L3)  <  classic + L4w  <  classic + DC  <<  AC
-  where DC = Dependent Choice (used by Bishop's constructive analysis).
 *)
 
 Axiom L4_witness : forall (A : Type) (P : A -> Prop),
