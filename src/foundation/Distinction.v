@@ -1,10 +1,30 @@
 (** * Distinction.v — Primary Distinction: the foundation of everything
-    Elements: Distinction record, positive/negative, boundary
-    Roles:    exclusive (L2), exhaustive (L3), self-grounding (L4)
-    Rules:    every Prop gives a Distinction; L1-L5 as structural properties
-    Status:   Foundation File 1 of 4
-    STATUS: Qed, 0 Admitted, 1 axiom (classic = L3)
-    Author: Horsocrates | Date: March 2026
+
+E/R/R structure of the Distinction record (per Chapter 4 of Volume II):
+
+  Roles (positions in the act of distinction):
+    - positive  : the role of the distinguished side
+    - negative  : the role of the background side
+    - input position (parameter P in distinction_of)
+    - output position (the constructed Distinction instance)
+
+  Rules (concrete-layer rules; L1-L5 form the universal layer):
+    - exclusive   : non-overlap rule for the two sides (L2)
+    - exhaustive  : exhaustion rule for the two sides (L3, via classic)
+    - mkDistinction          : rule of constructor application
+    - constructive exclusive : rule realizing L2 without axioms
+    - use of classic         : rule realizing L3 (requires the axiom)
+
+  Elements (actual carriers, appearing only upon actualization):
+    - the proposition placed into 'positive' (e.g. P in distinction_of)
+    - the proposition placed into 'negative' (e.g. ~P in distinction_of)
+    - the constructed Distinction instance as a whole
+
+  Universal layer: L1-L5 as structural properties traceable in the record;
+  derivation chain A = ∃ → Distinction → L1-L5 → P1-P4 → E/R/R.
+
+Status: Qed, 0 Admitted, 1 axiom (classic = L3)
+Author: Horsocrates | Date: March 2026
 *)
 
 From Stdlib Require Import QArith.
@@ -19,12 +39,20 @@ Axiom classic : forall P : Prop, P \/ ~P.
 (*  FIRST PRINCIPLE: A = exists                                              *)
 (* ========================================================================= *)
 
-(** "Something exists" cannot be a Coq axiom without circularity:
-    to state it, Coq's type system must already exist.
-    This is philosophically CORRECT: the first principle is PRE-FORMAL.
-    It grounds the formal system from outside.
+(** ★ STRUCTURE OF DISTINCTION
 
-    We formalize its CONSEQUENCE: distinction. *)
+To exist = to exist determinately = to be distinguished from ¬A.
+
+The record encodes two roles (positive, negative) and two rules
+of the concrete layer (exclusive, exhaustive):
+
+  - positive, negative : roles — names of the two sides
+  - exclusive  (L2)    : rule — the two sides do not overlap
+  - exhaustive (L3)    : rule — the two sides cover everything
+
+Elements appear only at actualization: the propositions placed
+into 'positive' and 'negative' by a concrete instance.
+*)
 
 (* ========================================================================= *)
 (*  THE ACT OF DISTINCTION: A | ¬A                                          *)
@@ -37,10 +65,10 @@ Axiom classic : forall P : Prop, P \/ ~P.
     - exhaustive (L3): A or ¬A, nothing else *)
 
 Record Distinction := mkDistinction {
-  positive : Prop;      (** A: the distinguished *)
-  negative : Prop;      (** ¬A: the background *)
-  exclusive : ~ (positive /\ negative);   (** L2: don't overlap *)
-  exhaustive : positive \/ negative;       (** L3: cover everything *)
+positive   : Prop;  (** role: the distinguished side *)
+negative   : Prop;  (** role: the background side *)
+exclusive  : ~ (positive /\ negative);  (** rule: non-overlap (L2) *)
+exhaustive : positive \/ negative;      (** rule: exhaustion (L3) *)
 }.
 
 (** Any Prop gives a Distinction (using classic = L3) *)
@@ -159,6 +187,13 @@ Qed.
 (* ========================================================================= *)
 
 (** Neither side of a distinction is meaningful without the other *)
+
+(* CO-DEFINITION: A and ¬A obtain their definiteness together *)
+(** Neither side of a distinction is determinate without the other.
+    See Chapter 5 of Volume II for the full discussion of co-definition
+    as structural simultaneity (distinct from mutual dependence, 
+    equivalence, and mutual derivability). *)
+  
 Lemma co_constitution : forall P : Prop,
   (P -> exists Q, Q = ~P) /\ (~P -> exists Q, Q = P).
 Proof. intro P. split; intro H; eexists; reflexivity. Qed.
@@ -206,4 +241,5 @@ Proof.
   - intros p n. apply (exclusive D). split; [exact p | exact n].
 Qed.
 
+(** Total exported theorems/lemmas in this file (excluding internal helpers) *)
 Definition distinction_theorem_count := 22%nat.
