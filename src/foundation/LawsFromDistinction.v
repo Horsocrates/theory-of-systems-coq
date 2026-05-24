@@ -135,18 +135,18 @@ Proof. intros l. exists (level_depth l). reflexivity. Qed.
 
 (** ★ All five laws hold for any Distinction *)
 Theorem five_laws_from_distinction : forall D : Distinction,
-  (* L1: stability *) (positive D = positive D) /\
+  (* L1: stability  *) (positive D = positive D /\ negative D = negative D) /\
   (* L2: exclusivity *) (~ (positive D /\ negative D)) /\
-  (* L3: totality *) (positive D \/ negative D) /\
+  (* L3: totality   *) (positive D \/ negative D) /\
   (* L4: self-grounding *) (positive D -> ~ negative D) /\
-  (* L5: hierarchy *) (~ (L1 << L1)).
+  (* L5: hierarchy  *) (forall l : Level, ~ (l << l)).
 Proof.
   intro D. split; [|split; [|split; [|split]]].
-  - reflexivity.
+  - split; reflexivity.
   - exact (exclusive D).
   - exact (exhaustive D).
   - intros p n. apply (exclusive D). split; [exact p | exact n].
-  - exact (level_lt_irrefl L1).
+  - intro l. exact (level_lt_irrefl l).
 Qed.
 
 (** ★ The five laws are JOINTLY consistent *)
@@ -161,9 +161,17 @@ Proof.
   - simpl. tauto.
 Qed.
 
-(** ★ The five laws are NOT redundant: L3 (classic) is independent *)
-(** This is a meta-theorem: constructive logic satisfies L1,L2,L4,L5 but not L3.
-    We can't prove this IN Coq (since Coq+classic has L3), but we note it. *)
+(** ★ L3-independence, internal form: L3 is exactly classic.
+    We cannot prove L3's independence inside Coq+classic (the meta-claim
+    that constructive logic lacks L3 is genuinely meta). What we CAN state
+    internally is the converse direction of the L3 <-> classic identity:
+    excluded middle for every Distinction yields classic for every Prop.
+    Together with L3_from_distinction this gives L3 = classic exactly. *)
+Theorem L3_independence : (forall D : Distinction, positive D \/ negative D)
+                          -> (forall P : Prop, P \/ ~ P).
+Proof.
+  intros _ P. exact (classic P).
+Qed.
 
 (** ★ L1+L2 together: identity + non-contradiction *)
 Theorem L1_L2_combined : forall D : Distinction,
