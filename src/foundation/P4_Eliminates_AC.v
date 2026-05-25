@@ -2,7 +2,7 @@
     Elements: Finite lists, choice functions, maximal elements
     Roles:    L5 status assignment provides canonical choice
     Rules:    Head-of-list = constructive choice, no axiom needed
-    STATUS:   15 Qed, 0 Admitted, 0 new axioms
+    STATUS:   16 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY INSIGHT: The Axiom of Choice asserts that for any family of
@@ -188,6 +188,12 @@ Proof. intros. reflexivity. Qed.
 (* SYNTHESIS                                                          *)
 (* ================================================================= *)
 
+(* NOTE: P4_eliminates_AC below quantifies over ALL nat indices.
+      Read as a process RULE (choice on demand for any index) it is
+      P4-compatible. Read as a completed GRAPH {(i,f i)} it falls under
+      P4ProhibitsAC.v. The stage-wise theorem P4_eliminates_AC_finite
+      above is the unambiguous finite-front version. *)
+
 (* THEOREM: P4 eliminates AC as an axiom.
    Under P4, every "set" is a finite list (process at stage N).
    L5 resolution provides a canonical choice function: the first element.
@@ -197,3 +203,23 @@ Theorem P4_eliminates_AC :
   (forall i, family i <> nil) ->
   exists f, forall i, In (f i) (family i).
 Proof. exact AC_is_L5. Qed.
+
+(* ================================================================= *)
+(* FINITE (STAGE-WISE) CHOICE — explicit bounded-front version        *)
+(* ================================================================= *)
+ 
+(* THEOREM: P4 eliminates AC for any finite front {0,...,N-1}.
+   For a finite stage N, choice over nonempty lists is explicit:
+   the choice function is finite_choice_fn (head of list, L5 order).
+   This is the stage-wise reading of choice: a rule producing the
+   choice for any requested index below the current front N.
+   No axiom, no completed graph — the front N is finite. *)
+Theorem P4_eliminates_AC_finite :
+  forall (family : nat -> list nat) (N : nat),
+    (forall i, (i < N)%nat -> family i <> nil) ->
+    forall i, (i < N)%nat -> In (finite_choice_fn family i) (family i).
+Proof.
+  intros family N Hne i Hi.
+  apply finite_choice.
+  apply Hne. exact Hi.
+Qed.
