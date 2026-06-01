@@ -468,6 +468,11 @@ src/process/ProcessNeutrinoMass.v
 src/process/ProcessNeutrinoRatio.v
 src/process/ProcessNielsenNinomiya.v
 src/process/ProcessNinePoint.v
+src/process/ProcessCantorMeasure.v
+src/process/ProcessRationalsNull.v
+src/process/ProcessMCT.v
+src/process/ProcessDCT.v
+src/process/ProcessSigmaAdditive.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v

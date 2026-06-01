@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" --
-> 22,000+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,509 files, ~0.3 free parameters.
+> 22,000+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,514 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > sin^2(theta_W) = 3/13 DERIVED from dim(SU(2))/metric_comp (0.04% from observation).
@@ -67,7 +67,7 @@ A = exists
 | Metric | Count |
 |--------|-------|
 | Proven theorems (Qed) | **22,000+** |
-| Coq files | **1,509** |
+| Coq files | **1,514** |
 | True placeholders | **0** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) -- declared in `ToS_Axioms.v` |
 | Admitted | **0** |
@@ -146,7 +146,7 @@ src/
   projective/ (6 files, 197 Qed) Projective limits, quantum towers, process operators
   experimental/ (12 files, 337 Qed) Casimir, Coulomb, Lamb shift, vacuum energy
   extraction/ (3 files, 47 Qed)  Gap calculator: GapCompute, GapCertificate, GapExtraction
-  process/ (297 files, 4190 Qed) P4 process mathematics: classical theorems, calculus,
+  process/ (302 files, 4225 Qed) P4 process mathematics: classical theorems, calculus,
                               measure theory, ODE, functional analysis, algebra, topology,
                               category theory, Geom⊣Gauge adjunction, physical interpretation,
                               Standard Model derivation, quantum mechanics from logic (Step 10),
@@ -589,7 +589,7 @@ Complete chain from first principles to:
 | Stdlib: Graph Foundation | 9 | 96 |
 | Architecture of Reasoning | 6 | 117 |
 | E/R/R Three Formulas (April 2026) | 14 | 304 |
-| **TOTAL (May 2026)** | **1,509** | **22,076** |
+| **TOTAL (June 2026)** | **1,514** | **22,111** |
 
 > **May 2026 (1,497→1,509 files, 21,901→22,076 Qed, still 0 Admitted):** formalization-backlog
 > files strengthening the companion book's claims — coordinate integers, ℕ↔ℚ bijection
@@ -598,7 +598,13 @@ Complete chain from first principles to:
 > self-application (`err_self_well_formed`), the 2^ℕ→[0,1] bridge (`bin_to_real`), and a canonical
 > continuity head (`analysis/Continuity.v`) — plus the V.7 Fubini and IV.6 audit anchors.
 
-### Admitted: **0** (across 1,509 files)
+> **June 2026 (1,509→1,514 files, 22,076→22,111 Qed, still 0 Admitted):** Part VI
+> (measure & integration) formalization kickoff — the Cantor set and ℚ∩[0,1] have measure
+> zero as process theorems (`cantor_measure_zero`, `rationals_cover_to_zero`), and the
+> convergence trinity in process form: Monotone Convergence (`process_mct`), Dominated
+> Convergence reduction (`process_dct`, 0 axioms), and σ-additivity (`sigma_additive_converges`).
+
+### Admitted: **0** (across 1,514 files)
 
 All previously Admitted theorems have been resolved:
 - Core_ERR.v: statements weakened to provable versions
