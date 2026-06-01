@@ -482,6 +482,7 @@ src/process/ProcessL2Bessel.v
 src/process/ProcessL2BesselGeneral.v
 src/process/ProcessL2Parseval.v
 src/process/ProcessL2RieszFischer.v
+src/process/ProcessSelfAdjointSpectral.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v

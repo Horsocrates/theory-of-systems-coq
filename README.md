@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" --
-> 22,000+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,523 files, ~0.3 free parameters.
+> 22,000+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,524 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > sin^2(theta_W) = 3/13 DERIVED from dim(SU(2))/metric_comp (0.04% from observation).
@@ -67,7 +67,7 @@ A = exists
 | Metric | Count |
 |--------|-------|
 | Proven theorems (Qed) | **22,000+** |
-| Coq files | **1,523** |
+| Coq files | **1,524** |
 | True placeholders | **0** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) -- declared in `ToS_Axioms.v` |
 | Admitted | **0** |
