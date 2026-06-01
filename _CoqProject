@@ -480,6 +480,7 @@ src/process/ProcessL2Triangle.v
 src/process/ProcessCompactSpectral.v
 src/process/ProcessL2Bessel.v
 src/process/ProcessL2BesselGeneral.v
+src/process/ProcessL2Parseval.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v
