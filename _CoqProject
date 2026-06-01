@@ -473,6 +473,8 @@ src/process/ProcessRationalsNull.v
 src/process/ProcessMCT.v
 src/process/ProcessDCT.v
 src/process/ProcessSigmaAdditive.v
+src/process/ProcessL2CauchySchwarz.v
+src/process/ProcessFubiniGeneral.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v
