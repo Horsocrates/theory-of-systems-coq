@@ -1,14 +1,14 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-21900+_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-22000+_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Free_Params](https://img.shields.io/badge/Free_Parameters-~0.3-orange.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" --
-> 21,900+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,497 files, ~0.3 free parameters.
+> 22,000+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,509 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > sin^2(theta_W) = 3/13 DERIVED from dim(SU(2))/metric_comp (0.04% from observation).
@@ -66,8 +66,8 @@ A = exists
 
 | Metric | Count |
 |--------|-------|
-| Proven theorems (Qed) | **21,900+** |
-| Coq files | **1,497** |
+| Proven theorems (Qed) | **22,000+** |
+| Coq files | **1,509** |
 | True placeholders | **0** |
 | Axioms | 2: `classic` (L3), `L4_witness` (L4) -- declared in `ToS_Axioms.v` |
 | Admitted | **0** |
@@ -589,9 +589,16 @@ Complete chain from first principles to:
 | Stdlib: Graph Foundation | 9 | 96 |
 | Architecture of Reasoning | 6 | 117 |
 | E/R/R Three Formulas (April 2026) | 14 | 304 |
-| **TOTAL (April 2026)** | **1,497** | **21,901** |
+| **TOTAL (May 2026)** | **1,509** | **22,076** |
 
-### Admitted: **0** (across 1,497 files)
+> **May 2026 (1,497→1,509 files, 21,901→22,076 Qed, still 0 Admitted):** formalization-backlog
+> files strengthening the companion book's claims — coordinate integers, ℕ↔ℚ bijection
+> (`Q_bijection`), the bridge between the two Cauchy lines (`is_Cauchy_iff_is_cauchy`), the
+> real-point setoid/metric/topology stack (`rp_dist`, `rp_in_ball`), bit-strings, E/R/R
+> self-application (`err_self_well_formed`), the 2^ℕ→[0,1] bridge (`bin_to_real`), and a canonical
+> continuity head (`analysis/Continuity.v`) — plus the V.7 Fubini and IV.6 audit anchors.
+
+### Admitted: **0** (across 1,509 files)
 
 All previously Admitted theorems have been resolved:
 - Core_ERR.v: statements weakened to provable versions

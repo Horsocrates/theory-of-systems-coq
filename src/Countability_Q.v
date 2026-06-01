@@ -18,6 +18,7 @@
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith.
+From Stdlib Require Qcanon.
 From Stdlib Require Import ZArith.
 From Stdlib Require Import PArith.Pnat.
 From Stdlib Require Import PeanoNat.
@@ -528,3 +529,248 @@ Print Assumptions enum_coprime.
   capturing all infinite processes.
   ============================================================================
 *)
+
+(* ========================================================================= *)
+(* SECTION 11: FULL ℚ — SIGN AND ZERO (F-17)                                 *)
+(* ========================================================================= *)
+
+(**
+  enum_QPos enumerates the coprime POSITIVE pairs. We wrap it with sign and
+  zero to enumerate ALL rationals:
+
+     enum_Q 0              = 0
+     enum_Q (S (2k))       = + qpos_to_Q (enum_QPos k)     (positives)
+     enum_Q (S (S (2k)))   = - qpos_to_Q (enum_QPos k)     (negatives)
+
+  MAIN RESULT  Q_countable :  forall q : Q, exists n : nat, enum_Q n == q.
+  This is the constructive content of "ℚ is countable": a surjection ℕ ↠ ℚ.
+  An arbitrary q is first reduced to lowest terms (Qred q == q); coprimality of
+  the reduced form is free (Qcanon.Qred_identity2 + Qred_involutive) — exactly
+  the coprime pair enum_surjective consumes. Still 0 axioms (no classic).
+
+  === E/R/R разбор (генеративно Rules -> Roles -> Elements) ===
+    Rules    : правило ОБХОДА (enum_Q даёт номер каждому рациональному: 0 / +чёт /
+               -нечёт поверх дерева Калкина-Уилфа); приведение к несократимому виду
+               (Qred); Qeq — когда две дроби именуют одно число.
+    Roles    : «номер обхода» рационального; «рациональное как класс» (по Qeq);
+               «счётность» = роль-свойство «перечислимо правилом».
+    Elements : рациональные (КОНЕЧНЫЕ данные — пары/несократимые дроби);
+               натуральные индексы (L1+P4).
+    ДИАГНОСТИКА: «ℚ счётно» — это ПРАВИЛО (сюръекция ℕ↠ℚ, обход), а НЕ «множество
+    мощности ℵ₀». Принять счётность за завершённый размер-объект = смешать правило
+    (обход) с элементом (множество как вещь) — частный случай корневой ошибки P4.
+    Доказана именно СЮРЪЕКЦИЯ (роль-правило), не реифицированная биекция-объект
+    (ср. F-10: точка-класс — тоже режим, не объект).
+*)
+
+Local Open Scope Q_scope.
+
+Lemma even_double : forall k, Nat.even (2 * k) = true.
+Proof.
+  induction k as [|k IH]; [reflexivity|].
+  replace (2 * S k)%nat with (S (S (2 * k)))%nat by lia.
+  rewrite Nat.even_succ, Nat.odd_succ. exact IH.
+Qed.
+
+Lemma odd_double : forall k, Nat.odd (2 * k) = false.
+Proof.
+  induction k as [|k IH]; [reflexivity|].
+  replace (2 * S k)%nat with (S (S (2 * k)))%nat by lia.
+  rewrite Nat.odd_succ, Nat.even_succ. exact IH.
+Qed.
+
+Definition enum_Q (n : nat) : Q :=
+  match n with
+  | O => 0
+  | S m =>
+      let r := qpos_to_Q (enum_QPos (Nat.div2 m)) in
+      if Nat.even m then r else - r
+  end.
+
+Lemma enum_Q_hit_pos : forall k,
+  enum_Q (S (2 * k)) = qpos_to_Q (enum_QPos k).
+Proof.
+  intros k. cbn [enum_Q].
+  rewrite Nat.div2_double, even_double. reflexivity.
+Qed.
+
+Lemma enum_Q_hit_neg : forall k,
+  enum_Q (S (S (2 * k))) = - qpos_to_Q (enum_QPos k).
+Proof.
+  intros k. cbn [enum_Q].
+  rewrite Nat.div2_succ_double, Nat.even_succ, odd_double. reflexivity.
+Qed.
+
+Lemma Qred_coprime : forall q : Q,
+  Z.gcd (Qnum (Qred q)) (QDen (Qred q)) = 1%Z.
+Proof.
+  intros q. apply Qcanon.Qred_identity2. apply Qcanon.Qred_involutive.
+Qed.
+
+Theorem Q_countable : forall q : Q, exists n : nat, enum_Q n == q.
+Proof.
+  intros q.
+  pose proof (Qred_correct q) as Hq.    (* Qred q == q *)
+  pose proof (Qred_coprime q) as Hcop.   (* gcd (Qnum (Qred q)) (QDen (Qred q)) = 1 *)
+  destruct (Qnum (Qred q)) as [ | a | a ] eqn:Hnum.
+  - (* Qred q = 0 -> q == 0 *)
+    exists O. cbn [enum_Q].
+    assert (Hz : Qred q == 0).
+    { unfold Qeq; simpl; rewrite Hnum; ring. }
+    rewrite <- Hq, Hz. reflexivity.
+  - (* Qnum (Qred q) = Z.pos a : positive *)
+    assert (Hgcd : Z.gcd (Z.pos a) (Z.pos (Qden (Qred q))) = 1%Z).
+    { exact Hcop. }
+    destruct (enum_surjective a (Qden (Qred q)) Hgcd) as [k Hk].
+    exists (S (2 * k)).
+    rewrite enum_Q_hit_pos, Hk.
+    transitivity (Qred q); [ | exact Hq ].
+    unfold Qeq; cbn [qpos_to_Q Qnum Qden]; rewrite Hnum; ring.
+  - (* Qnum (Qred q) = Z.neg a : negative *)
+    assert (Hgcd : Z.gcd (Z.pos a) (Z.pos (Qden (Qred q))) = 1%Z).
+    { replace (Z.neg a) with (- Z.pos a)%Z in Hcop by reflexivity.
+      rewrite Z.gcd_opp_l in Hcop. exact Hcop. }
+    destruct (enum_surjective a (Qden (Qred q)) Hgcd) as [k Hk].
+    exists (S (S (2 * k))).
+    rewrite enum_Q_hit_neg, Hk.
+    transitivity (Qred q); [ | exact Hq ].
+    unfold Qeq; cbn [qpos_to_Q Qnum Qden Qopp]; rewrite Hnum;
+    change (Z.neg a) with (- Z.pos a)%Z; ring.
+Qed.
+
+(* ========================================================================= *)
+(* SECTION 10: THE INVERSE MAP — FULL BIJECTION ℕ ↔ ℚ                        *)
+(* ========================================================================= *)
+(**
+   Q_countable closes the FORWARD half (surjection): every rational is hit.
+   Here we close the REVERSE half for sign and zero — an explicit inverse
+   index_of_Q : Q -> nat — and prove the two round-trips that make enum_Q
+   and index_of_Q mutually inverse.  Together they are a computable bijection
+   ℕ ↔ ℚ (ℚ taken up to Qeq — the only sensible notion, since 2#4 == 1#2).
+
+     Elements : натуральные номера и рациональные значения (несократимые
+                представители — образ Qred).
+     Roles    : index_of_Q присваивает каждому рациональному его НОМЕР —
+                обратный ход к enum_Q для нуля, плюса и минуса.
+     Rules    : взаимная обратность enum_Q и index_of_Q (две круговые
+                теоремы) — правило биекции, теперь на ВСЁМ ℚ.
+*)
+
+(* Positive round-trips, in functional form. *)
+Lemma enum_QPos_index : forall a b : positive,
+  Z.gcd (Z.pos a) (Z.pos b) = 1%Z ->
+  enum_QPos (index_of_QPos (a, b)) = (a, b).
+Proof.
+  intros a b Hgcd.
+  unfold enum_QPos, index_of_QPos.
+  assert (Hpos : (Pos.to_nat (path_to_node (a, b)) >= 1)%nat) by apply Pos2Nat.is_pos.
+  replace (S (Pos.to_nat (path_to_node (a, b)) - 1))
+    with (Pos.to_nat (path_to_node (a, b))) by lia.
+  rewrite Pos2Nat.id.
+  apply cw_node_path_roundtrip. exact Hgcd.
+Qed.
+
+Lemma index_of_QPos_enum : forall n : nat,
+  index_of_QPos (enum_QPos n) = n.
+Proof.
+  intros n. unfold index_of_QPos, enum_QPos.
+  rewrite path_cw_node_roundtrip.
+  rewrite Nat2Pos.id by discriminate.
+  lia.
+Qed.
+
+(* The inverse map: a rational -> its index in the walk (zero / +odd / -even). *)
+Definition index_of_Q (q : Q) : nat :=
+  match Qnum (Qred q) with
+  | Z0      => O
+  | Zpos a  => S (2 * index_of_QPos (a, Qden (Qred q)))
+  | Zneg a  => S (S (2 * index_of_QPos (a, Qden (Qred q))))
+  end.
+
+(* Coprime fractions are Qred-fixed. *)
+Lemma Qred_id_pos : forall a b : positive,
+  Z.gcd (Z.pos a) (Z.pos b) = 1%Z -> Qred (Z.pos a # b) = (Z.pos a # b).
+Proof. intros a b H. apply Qcanon.Qred_identity. exact H. Qed.
+
+Lemma Qred_id_neg : forall a b : positive,
+  Z.gcd (Z.pos a) (Z.pos b) = 1%Z -> Qred (Z.neg a # b) = (Z.neg a # b).
+Proof.
+  intros a b H. apply Qcanon.Qred_identity. cbn [Qnum Qden].
+  change (Z.neg a) with (- Z.pos a)%Z. rewrite Z.gcd_opp_l. exact H.
+Qed.
+
+(* Round-trip A (LEFT inverse, up to Qeq): the computed index re-enumerates q. *)
+Theorem enum_Q_index_id : forall q : Q, enum_Q (index_of_Q q) == q.
+Proof.
+  intros q.
+  pose proof (Qred_correct q) as Hq.
+  pose proof (Qred_coprime q) as Hcop.
+  unfold index_of_Q.
+  destruct (Qnum (Qred q)) as [ | a | a ] eqn:Hnum.
+  - cbn [enum_Q].
+    assert (Hz : Qred q == 0) by (unfold Qeq; simpl; rewrite Hnum; ring).
+    rewrite <- Hq, Hz. reflexivity.
+  - assert (Hgcd : Z.gcd (Z.pos a) (Z.pos (Qden (Qred q))) = 1%Z) by exact Hcop.
+    rewrite enum_Q_hit_pos, (enum_QPos_index a (Qden (Qred q)) Hgcd).
+    transitivity (Qred q); [ | exact Hq ].
+    unfold Qeq; cbn [qpos_to_Q Qnum Qden]; rewrite Hnum; ring.
+  - assert (Hgcd : Z.gcd (Z.pos a) (Z.pos (Qden (Qred q))) = 1%Z).
+    { replace (Z.neg a) with (- Z.pos a)%Z in Hcop by reflexivity.
+      rewrite Z.gcd_opp_l in Hcop. exact Hcop. }
+    rewrite enum_Q_hit_neg, (enum_QPos_index a (Qden (Qred q)) Hgcd).
+    transitivity (Qred q); [ | exact Hq ].
+    unfold Qeq; cbn [qpos_to_Q Qnum Qden Qopp]; rewrite Hnum;
+    change (Z.neg a) with (- Z.pos a)%Z; ring.
+Qed.
+
+(* Round-trip B (RIGHT inverse, exact on ℕ): index_of_Q undoes enum_Q. *)
+Theorem index_of_Q_enum_id : forall n : nat, index_of_Q (enum_Q n) = n.
+Proof.
+  intros n. destruct n as [|m].
+  - reflexivity.
+  - destruct (enum_QPos (Nat.div2 m)) as [a b] eqn:Hab.
+    assert (Hco : Z.gcd (Z.pos a) (Z.pos b) = 1%Z).
+    { pose proof (enum_coprime (Nat.div2 m)) as H. rewrite Hab in H. exact H. }
+    pose proof (Nat.div2_odd m) as Hdo.
+    destruct (Nat.even m) eqn:Hm.
+    + (* m even  ->  S m = S (2 * div2 m) : positive node *)
+      assert (Hodd : Nat.odd m = false)
+        by (rewrite <- Nat.negb_even, Hm; reflexivity).
+      rewrite Hodd in Hdo; cbn [Nat.b2n] in Hdo; rewrite Nat.add_0_r in Hdo.
+      replace (S m) with (S (2 * Nat.div2 m)) by lia.
+      rewrite enum_Q_hit_pos, Hab.
+      unfold index_of_Q. cbn [qpos_to_Q].
+      rewrite (Qred_id_pos a b Hco). cbn [Qnum Qden].
+      rewrite <- Hab, index_of_QPos_enum. reflexivity.
+    + (* m odd  ->  S m = S (S (2 * div2 m)) : negative node *)
+      assert (Hodd : Nat.odd m = true)
+        by (rewrite <- Nat.negb_even, Hm; reflexivity).
+      rewrite Hodd in Hdo; cbn [Nat.b2n] in Hdo.
+      replace (S m) with (S (S (2 * Nat.div2 m))) by lia.
+      rewrite enum_Q_hit_neg, Hab.
+      replace (- qpos_to_Q (a, b)) with (Z.neg a # b)
+        by (cbn [qpos_to_Q]; reflexivity).
+      unfold index_of_Q.
+      rewrite (Qred_id_neg a b Hco). cbn [Qnum Qden].
+      rewrite <- Hab, index_of_QPos_enum. reflexivity.
+Qed.
+
+(* The explicit, computable bijection ℕ ↔ ℚ (both directions verified). *)
+Theorem Q_bijection :
+  (forall n : nat, index_of_Q (enum_Q n) = n) /\
+  (forall q : Q, enum_Q (index_of_Q q) == q).
+Proof. split; [ exact index_of_Q_enum_id | exact enum_Q_index_id ]. Qed.
+
+Print Assumptions Q_bijection.
+
+(* Computational sanity checks *)
+Example enum_Q_0 : enum_Q 0 = 0.
+Proof. reflexivity. Qed.
+
+Example enum_Q_1 : enum_Q 1 == 1.
+Proof. reflexivity. Qed.
+
+Example enum_Q_2 : enum_Q 2 == - (1).
+Proof. reflexivity. Qed.
+
+Print Assumptions Q_countable.

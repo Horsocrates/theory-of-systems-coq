@@ -1,6 +1,6 @@
 # src/ — Core Coq Formalization
 
-**377 files | 8168 Qed | 0 Admitted** (including gauge/, navier_stokes/, process/, and all subdirectories)
+**1,503 files | 21,959 Qed | 0 Admitted** (including gauge/, navier_stokes/, process/, stdlib/, and all subdirectories; as of 2026-05-31)
 
 This directory contains the core formalization of the Theory of Systems in Coq/Rocq 9.0.
 

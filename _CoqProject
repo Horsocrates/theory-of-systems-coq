@@ -8,11 +8,13 @@ Architecture_of_Reasoning/ERR_Fallacies.v
 Architecture_of_Reasoning/ParadoxDissolution.v
 src/AIInterface.v
 src/Archimedean_ERR.v
+src/CauchyProcessBridge.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v
 src/ConstitutionChecking.v
 src/Conversion.v
+src/CoordinateIntegers.v
 src/Countability_Q.v
 src/DependentSystems.v
 src/DiagonalArgument_ERR.v
@@ -56,6 +58,9 @@ src/ProcessGeneral.v
 src/ProcessTypes.v
 src/Progress.v
 src/RealField.v
+src/RealPointMetric.v
+src/RealPointSetoid.v
+src/RealPointTopology.v
 src/ReasoningConvergence.v
 src/Reduction.v
 src/RiemannIntegration.v
@@ -82,6 +87,7 @@ src/UniformConvergence.v
 src/UniversePolymorphism.v
 src/analysis/BolzanoWeierstrass.v
 src/analysis/CauchySchwarz.v
+src/analysis/Continuity.v
 src/analysis/DominatedConvergence.v
 src/analysis/FTC.v
 src/analysis/FubiniProcess.v
@@ -117,6 +123,7 @@ src/foundation/Distinction.v
 src/foundation/ERRFromDistinction.v
 src/foundation/LawsFromDistinction.v
 src/foundation/PrinciplesFromLaws.v
+src/foundation/PrinciplesToERR.v
 src/foundation/AsymmetricDistinction.v
 src/foundation/PrimalityOfOne.v
 src/foundation/VacuumNecessity.v
@@ -309,6 +316,7 @@ src/process/ProcessBW.v
 src/process/ProcessBackReaction.v
 src/process/ProcessBellInequality.v
 src/process/ProcessBeta4.v
+src/process/ProcessBinReal.v
 src/process/ProcessBlackHole.v
 src/process/ProcessBlocking.v
 src/process/ProcessBornCrossValidation.v
@@ -459,6 +467,7 @@ src/process/ProcessNavierStokesConnection.v
 src/process/ProcessNeutrinoMass.v
 src/process/ProcessNeutrinoRatio.v
 src/process/ProcessNielsenNinomiya.v
+src/process/ProcessNinePoint.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v
@@ -1385,6 +1394,7 @@ src/foundation/L5_StructurePreservation.v
 src/foundation/L5_ResolutionGeneral.v
 src/foundation/L5_PhasesSynthesis.v
 src/foundation/Binarity.v
+src/foundation/BitString.v
 src/foundation/EntropyExact.v
 src/foundation/RelativityFoundation.v
 src/foundation/CausalCone.v
