@@ -1,10 +1,10 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
 ## Stats (as of 2026-06-01)
-- **Qed:** 22,201
+- **Qed:** 22,206
 - **Admitted:** 0
 - **True placeholders:** 0
-- **Files:** 1,526
+- **Files:** 1,527
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
@@ -140,7 +140,7 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 ```
 src/                    — core files (76 .v files): axioms, types, analysis, compiler
 src/foundation/        — formal foundation (73 .v files): Distinction → SM → L5 → Ordinals → Cayley
-src/process/           — P4 process mathematics (316 .v files, 4325 Qed)
+src/process/           — P4 process mathematics (317 .v files, 4330 Qed)
 src/gauge/             — Yang-Mills mass gap (114 .v files, 2176 Qed)
 src/stdlib/            — standard library (465 .v files, 7436 Qed)
   src/stdlib/qchem/    — quantum chemistry (25 files, 281 Qed): H, He, H₂, HF, BCS, graphene
