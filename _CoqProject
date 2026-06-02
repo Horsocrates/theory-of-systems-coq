@@ -484,6 +484,7 @@ src/process/ProcessL2Parseval.v
 src/process/ProcessL2RieszFischer.v
 src/process/ProcessSelfAdjointSpectral.v
 src/process/ProcessCanonicalCommutator.v
+src/process/ProcessPositionMomentum.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v
