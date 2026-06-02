@@ -487,6 +487,7 @@ src/process/ProcessCanonicalCommutator.v
 src/process/ProcessPositionMomentum.v
 src/process/ProcessSchrodingerEvolution.v
 src/process/ProcessEnergyConservation.v
+src/process/ProcessL2HilbertSynthesis.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v
