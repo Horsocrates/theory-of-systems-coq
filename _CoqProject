@@ -488,6 +488,12 @@ src/process/ProcessPositionMomentum.v
 src/process/ProcessSchrodingerEvolution.v
 src/process/ProcessEnergyConservation.v
 src/process/ProcessL2HilbertSynthesis.v
+src/process/ProcessWalshHadamard.v
+src/process/ProcessFourierON.v
+src/process/ProcessFourierCompression.v
+src/process/ProcessFourierSynthesis.v
+src/process/ProcessFastWalsh.v
+src/process/ProcessWalshConvolution.v
 src/process/ProcessNoCloning.v
 src/process/ProcessNoetherian.v
 src/process/ProcessNonAbelianERR.v
