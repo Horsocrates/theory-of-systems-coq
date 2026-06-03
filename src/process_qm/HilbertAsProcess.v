@@ -8,6 +8,9 @@
     Standard QM: Hilbert space H = complete inner product space (AXIOM).
     Process QM: H = process {Q^N}_{N=1,2,...}. No axiom of completeness.
     At each N: everything is finite linear algebra over Q.
+
+    NOTE: the vector [3,4] (norm 5) used below is the 3-4-5 triple, now
+    systematically DERIVED as param(1/2) in stdlib/PythagoreanTriples.v.
 *)
 
 From Stdlib Require Import QArith Lia ZArith List PeanoNat.

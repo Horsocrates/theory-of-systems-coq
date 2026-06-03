@@ -3,6 +3,10 @@
     STATUS: 28 Qed, 0 Admitted, 0 new axioms
     Author: Horsocrates | Date: April 2026
 
+    NOTE: the rational superposition (3/5,4/5) used below is a Pythagorean
+    triple, now systematically DERIVED (not ad hoc) as param(1/2) in
+    stdlib/PythagoreanTriples.v.
+
     ===================================================================
     THE QUBIT AS THE COMPLEMENT OF THE SHO
     ===================================================================

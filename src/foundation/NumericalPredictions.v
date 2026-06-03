@@ -13,6 +13,10 @@
     is machine-verified rational arithmetic; the comparison with
     experiment is in the comments.
 
+    NOTE: the Born predictions on Pythagorean superpositions (3/5,4/5) and
+    (5/13,12/13) below use triples now systematically DERIVED in
+    stdlib/PythagoreanTriples.v ((3,4,5)=param(1/2), (5,12,13)=param(1/5)).
+
     -------------------------------------------------------------------
     PREDICTION 1: SHO level ratios are ODD INTEGERS
     -------------------------------------------------------------------

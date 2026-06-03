@@ -61,3 +61,9 @@ Desktop.ini
 # Personal notes (if you want to keep them local)
 PRIVATE_NOTES.md
 TODO_LOCAL.md
+
+# Build / tooling artifacts
+$out
+.nra.cache
+.claude/
+Architecture_of_Reasoning/tos-eval/

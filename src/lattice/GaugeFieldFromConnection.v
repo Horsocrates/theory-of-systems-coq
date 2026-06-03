@@ -23,6 +23,9 @@
 (*    The Pythagorean triple (3,4,5) gives an EXACT rational rotation.     *)
 (*    This is key: gauge fields over Q require rational group elements.     *)
 (*    The 3-4-5 right triangle gives cos=3/5, sin=4/5, det=1 exactly.     *)
+(*    SYSTEMATIC: this (cos=3/5, sin=4/5) rotation is now DERIVED as       *)
+(*    param(1/2) in stdlib/PythagoreanTriples.v (three_four_five_is_       *)
+(*    param_half) — no longer an ad hoc constant.                         *)
 (*                                                                          *)
 (* ========================================================================= *)
 

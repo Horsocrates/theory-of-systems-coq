@@ -8,6 +8,21 @@ Verified data structures, algorithms, and mathematical libraries for Theory of S
 > Batch 4 (categories + statistics), Batch 5 (advanced algebra + game theory + control),
 > Batch 6 (domain-specific: credit scoring, neural nets, text analysis, time series, formal verification).
 
+> **ℚ-Kinematics / Finitization Boundary cluster (54 files, 427 Qed, 0 axioms — June 2026):**
+> a self-contained body demonstrating *finitization boundary = constructivity boundary*
+> (Element = terminating process / rational; role-limit = non-terminating process /
+> irrational). Surds as processes (`Sqrt3/5Irrational`, `GoldenFibonacci`, `LucasFibonacci`,
+> `Sqrt3Pell`), degree tiers (`CubicRoleLimit`, `AngleTrisection`, `ConstructiblePolygons`),
+> crystallographic restriction & lattices (`CrystallographicRestriction/Trace`,
+> `LatticeEquilateral/Polygons`, `FibonacciWord` quasicrystal), Element-side trees
+> (`SternBrocot`, `PythagoreanTree`, `MarkovTree`, `ContinuedFractions`, `BaseExpansion`),
+> norm-form groups (`RationalRotationGroup`, `RationalQuaternions`, `HurwitzTower`,
+> `ConicDuality`, `RationalLorentz`, `EisensteinTriples`, `RationalSphere`), and rational-ℚ
+> quantum (`CliffordCeiling/Field`, `GaussianMUB`, `EisensteinMUB`, `BellTsirelson`,
+> `GHZParadox`, `MerminSquare`, `SuperdenseCoding`, `QuantumErrorCorrection`,
+> `DyadicBits`, `MusicTemperament`, `MetallicRatios`), with grand syntheses
+> `FinitizationBoundary` / `FinitizationPrinciple` / `FinitistQM`. See `Книги/HIGHLIGHTS.md`.
+
 ---
 
 ## Design Principles

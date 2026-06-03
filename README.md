@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" --
-> 22,000+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,535 files, ~0.3 free parameters.
+> 22,800+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,609 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > sin^2(theta_W) = 3/13 DERIVED from dim(SU(2))/metric_comp (0.04% from observation).
@@ -196,6 +196,45 @@ See [docs/FILE_MAP.md](docs/FILE_MAP.md) for every file with Qed count.
 ---
 
 ## Highlights
+
+### Finitization Boundary — ℚ-Kinematics Cluster (54 files, 427 Qed, June 2026)
+
+A self-contained cluster (all Qed, 0 Admitted, **0 axioms** — every file `Closed under the
+global context`) demonstrating one organizing principle across many arenas of mathematics
+and physics: **the finitization boundary = the constructivity boundary**. The recurring
+distinction is **Element** (a terminating process / finite-actual, rational) vs **role-limit**
+(a non-terminating process, irrational/continuum). The flagship reading (H1): 0-axiom
+results sit on the Element side; the PCH-based continuum results (spectral dichotomy,
+uncountability) use exactly `classic` + `L4_witness` — the role-limit side.
+
+```
+Surds as non-terminating processes (role-limits):
+  Sqrt3Irrational, Sqrt5Irrational, GoldenFibonacci (φ↔√5, Cassini),
+  Sqrt3Pell, LucasFibonacci (L²−5F²=4(−1)ⁿ) — the surd↔Pell/norm-form triad √2/√3/√5
+Degree tiers (H8): CubicRoleLimit (∛2), AngleTrisection (Delian/trisection/heptagon),
+  ConstructiblePolygons (pentagon deg 2 vs heptagon deg 3)
+Symmetry & lattices (④): CrystallographicRestriction (SO(3,ℚ) → {1,2,3,4,6}),
+  LatticeEquilateral, LatticePolygons (only the square on ℤ²), CrystallographicTrace,
+  FibonacciWord (1D quasicrystal — forbidden 5-fold achieved aperiodically)
+Element-side trees & enumerations (H1): SternBrocot (ℚ⁺), PythagoreanTree (Barning–Hall),
+  MarkovTree (Lagrange spectrum cross-links √5↔φ and 2√2↔Tsirelson),
+  ContinuedFractions, BaseExpansion (terminating/periodic ⟺ rational)
+Norm-form groups: RationalRotationGroup (SO(2,ℚ)), RationalQuaternions (Spin(3,ℚ)),
+  HurwitzTower ({1,2,4,8}), ConicDuality, RationalLorentz, EisensteinTriples (60°/ℤ[ω]),
+  RationalSphere (Pythagorean quadruples)
+Quantum (E/R/R-Gottesman–Knill): CliffordCeiling/CliffordField (Pauli ℚ[i] Element,
+  Hadamard √2 wall), GaussianMUB/EisensteinMUB, BellTsirelson, GHZParadox, MerminSquare,
+  SuperdenseCoding, QuantumErrorCorrection
+Information & shapes (H10/H2): DyadicBits (trit = log₂3), MusicTemperament (Pythagorean
+  comma), MetallicRatios (self-similar ⟺ role-limit ratio)
+Grand syntheses: FinitizationBoundary, FinitizationPrinciple, FinitistQM
+```
+
+Headline machine-checked facts: SO(3,ℚ) finite-order ⟹ order ∈ {1,2,3,4,6} (√5 excludes the
+icosahedron); the only regular polygon on ℤ² is the square; the surd–Pell triad
+√2↔(x²−2y²=±1) / √3↔(x²−3y²=1) / √5↔(L²−5F²=±4); the Markov–Lagrange spectrum ties √5 (golden)
+and 2√2 (Tsirelson); stabilizer QM protocols are Element-side over ℤ with √2 only in the
+normalization. See `Книги/HIGHLIGHTS.md` for the honest novelty bar per result (H1–H10).
 
 ### E/R/R Three Formulas Re-derivation (14 files, 304 Qed, April 2026)
 
@@ -589,7 +628,8 @@ Complete chain from first principles to:
 | Stdlib: Graph Foundation | 9 | 96 |
 | Architecture of Reasoning | 6 | 117 |
 | E/R/R Three Formulas (April 2026) | 14 | 304 |
-| **TOTAL (June 2026)** | **1,516** | **22,130** |
+| ℚ-Kinematics / Finitization Boundary (June 2026) | 54 | 427 |
+| **TOTAL (June 2026)** | **1,609** | **22,811** |
 
 > **May 2026 (1,497→1,509 files, 21,901→22,076 Qed, still 0 Admitted):** formalization-backlog
 > files strengthening the companion book's claims — coordinate integers, ℕ↔ℚ bijection

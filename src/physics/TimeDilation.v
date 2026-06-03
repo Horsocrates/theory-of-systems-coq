@@ -13,6 +13,10 @@
     → Pythagorean triples give exact integer proper times
     → Newton's method converges to √(τ²)
 
+    NOTE: the triples below ((5,3,4), (5,4,3), (13,5,12)) are the 3-4-5 and
+    5-12-13 families, now systematically DERIVED in stdlib/PythagoreanTriples.v
+    (3-4-5 = param(1/2), 5-12-13 = param(1/5)) — no longer ad hoc constants.
+
     NOT DERIVED: continuous Lorentz transformations, exact c.
     DERIVED: discrete time dilation structure from counting.
 *)
