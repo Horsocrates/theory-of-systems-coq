@@ -735,6 +735,16 @@ src/stdlib/EisensteinTriples.v
 src/stdlib/BaseExpansion.v
 src/stdlib/LucasFibonacci.v
 src/stdlib/FibonacciWord.v
+src/stdlib/PellDichotomy.v
+src/stdlib/QuadraticDiscriminant.v
+src/stdlib/PythagoreanMeans.v
+src/stdlib/CircleRotation.v
+src/stdlib/DescartesCircles.v
+src/stdlib/FordCircles.v
+src/stdlib/CalkinWilf.v
+src/stdlib/PickTheorem.v
+src/stdlib/Zeckendorf.v
+src/stdlib/GeneralSqrt.v
 src/stdlib/MetricSpace.v
 src/stdlib/ModularArith.v
 src/stdlib/Monad.v

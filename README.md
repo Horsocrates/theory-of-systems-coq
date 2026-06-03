@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" --
-> 22,800+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,609 files, ~0.3 free parameters.
+> 22,800+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,619 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > sin^2(theta_W) = 3/13 DERIVED from dim(SU(2))/metric_comp (0.04% from observation).
@@ -197,7 +197,7 @@ See [docs/FILE_MAP.md](docs/FILE_MAP.md) for every file with Qed count.
 
 ## Highlights
 
-### Finitization Boundary — ℚ-Kinematics Cluster (54 files, 427 Qed, June 2026)
+### Finitization Boundary — ℚ-Kinematics Cluster (64 files, 509 Qed, June 2026)
 
 A self-contained cluster (all Qed, 0 Admitted, **0 axioms** — every file `Closed under the
 global context`) demonstrating one organizing principle across many arenas of mathematics
@@ -216,9 +216,14 @@ Degree tiers (H8): CubicRoleLimit (∛2), AngleTrisection (Delian/trisection/hep
 Symmetry & lattices (④): CrystallographicRestriction (SO(3,ℚ) → {1,2,3,4,6}),
   LatticeEquilateral, LatticePolygons (only the square on ℤ²), CrystallographicTrace,
   FibonacciWord (1D quasicrystal — forbidden 5-fold achieved aperiodically)
-Element-side trees & enumerations (H1): SternBrocot (ℚ⁺), PythagoreanTree (Barning–Hall),
-  MarkovTree (Lagrange spectrum cross-links √5↔φ and 2√2↔Tsirelson),
-  ContinuedFractions, BaseExpansion (terminating/periodic ⟺ rational)
+Element-side trees & enumerations (H1): SternBrocot (ℚ⁺), CalkinWilf (bijection ℕ⁺↔ℚ⁺),
+  PythagoreanTree (Barning–Hall), MarkovTree (Lagrange spectrum cross-links √5↔φ and 2√2↔Tsirelson),
+  ContinuedFractions, BaseExpansion (terminating/periodic ⟺ rational),
+  Zeckendorf (Fibonacci/φ base — unique representation), CircleRotation (orbit closes ⟺ rational)
+Tangent circles & lattice area (H2): DescartesCircles (Apollonian, 3 unit circles ⟹ 3+2√3),
+  FordCircles (tangency ⟺ unimodular det), PickTheorem (lattice area rational; primitive triangle ½)
+General surd & discriminant (H2): GeneralSqrt (√n rational ⟺ n a perfect square — new √6/√7/√8/√10),
+  PellDichotomy, QuadraticDiscriminant, PythagoreanMeans (AM/HM Element, GM=√ab role-limit)
 Norm-form groups: RationalRotationGroup (SO(2,ℚ)), RationalQuaternions (Spin(3,ℚ)),
   HurwitzTower ({1,2,4,8}), ConicDuality, RationalLorentz, EisensteinTriples (60°/ℤ[ω]),
   RationalSphere (Pythagorean quadruples)
@@ -234,7 +239,10 @@ Headline machine-checked facts: SO(3,ℚ) finite-order ⟹ order ∈ {1,2,3,4,6}
 icosahedron); the only regular polygon on ℤ² is the square; the surd–Pell triad
 √2↔(x²−2y²=±1) / √3↔(x²−3y²=1) / √5↔(L²−5F²=±4); the Markov–Lagrange spectrum ties √5 (golden)
 and 2√2 (Tsirelson); stabilizer QM protocols are Element-side over ℤ with √2 only in the
-normalization. See `Книги/HIGHLIGHTS.md` for the honest novelty bar per result (H1–H10).
+normalization; √n is rational ⟺ n is a perfect square (one engine subsuming √2/√3/√5, new √6/√7/√8/√10);
+the Calkin–Wilf tree is an explicit bijection ℕ⁺↔ℚ⁺ and Zeckendorf's theorem makes the golden ratio φ
+the base in which every integer has a unique finite representation. See `Книги/HIGHLIGHTS.md` for the
+honest novelty bar per result (H1–H10).
 
 ### E/R/R Three Formulas Re-derivation (14 files, 304 Qed, April 2026)
 
@@ -628,8 +636,8 @@ Complete chain from first principles to:
 | Stdlib: Graph Foundation | 9 | 96 |
 | Architecture of Reasoning | 6 | 117 |
 | E/R/R Three Formulas (April 2026) | 14 | 304 |
-| ℚ-Kinematics / Finitization Boundary (June 2026) | 54 | 427 |
-| **TOTAL (June 2026)** | **1,609** | **22,811** |
+| ℚ-Kinematics / Finitization Boundary (June 2026) | 64 | 509 |
+| **TOTAL (June 2026)** | **1,619** | **22,893** |
 
 > **May 2026 (1,497→1,509 files, 21,901→22,076 Qed, still 0 Admitted):** formalization-backlog
 > files strengthening the companion book's claims — coordinate integers, ℕ↔ℚ bijection

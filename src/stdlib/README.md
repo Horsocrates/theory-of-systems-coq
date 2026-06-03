@@ -8,7 +8,7 @@ Verified data structures, algorithms, and mathematical libraries for Theory of S
 > Batch 4 (categories + statistics), Batch 5 (advanced algebra + game theory + control),
 > Batch 6 (domain-specific: credit scoring, neural nets, text analysis, time series, formal verification).
 
-> **ℚ-Kinematics / Finitization Boundary cluster (54 files, 427 Qed, 0 axioms — June 2026):**
+> **ℚ-Kinematics / Finitization Boundary cluster (64 files, 509 Qed, 0 axioms — June 2026):**
 > a self-contained body demonstrating *finitization boundary = constructivity boundary*
 > (Element = terminating process / rational; role-limit = non-terminating process /
 > irrational). Surds as processes (`Sqrt3/5Irrational`, `GoldenFibonacci`, `LucasFibonacci`,
@@ -17,7 +17,11 @@ Verified data structures, algorithms, and mathematical libraries for Theory of S
 > `LatticeEquilateral/Polygons`, `FibonacciWord` quasicrystal), Element-side trees
 > (`SternBrocot`, `PythagoreanTree`, `MarkovTree`, `ContinuedFractions`, `BaseExpansion`),
 > norm-form groups (`RationalRotationGroup`, `RationalQuaternions`, `HurwitzTower`,
-> `ConicDuality`, `RationalLorentz`, `EisensteinTriples`, `RationalSphere`), and rational-ℚ
+> `ConicDuality`, `RationalLorentz`, `EisensteinTriples`, `RationalSphere`), Element-side
+> enumerations & representations (`CalkinWilf` bijection ℕ⁺↔ℚ⁺, `Zeckendorf` Fibonacci/φ base,
+> `CircleRotation`), tangent circles & lattice area (`DescartesCircles`, `FordCircles`,
+> `PickTheorem`), the general surd theorem (`GeneralSqrt`: √n rational ⟺ n a perfect square,
+> with `PellDichotomy`, `QuadraticDiscriminant`, `PythagoreanMeans`), and rational-ℚ
 > quantum (`CliffordCeiling/Field`, `GaussianMUB`, `EisensteinMUB`, `BellTsirelson`,
 > `GHZParadox`, `MerminSquare`, `SuperdenseCoding`, `QuantumErrorCorrection`,
 > `DyadicBits`, `MusicTemperament`, `MetallicRatios`), with grand syntheses
