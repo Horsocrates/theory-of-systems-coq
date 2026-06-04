@@ -1522,6 +1522,15 @@ src/analysis/SpectralTheoremCompact.v
 src/algebra/FieldExtension.v
 src/algebra/GaloisGroup.v
 src/algebra/GaloisCorrespondence.v
+# Part XI: E/R/R algebra strengthening (Galois Q[sqrt2,sqrt3], F_p, Gauss, solvability, Q-bar tower)
+src/algebra/GaloisQ23.v
+src/algebra/SplittingFieldQ23.v
+src/algebra/GaloisDegreeQ23.v
+src/algebra/IndependenceQ23.v
+src/algebra/RationalRootTest.v
+src/algebra/FiniteFieldFp.v
+src/algebra/SolvableGroup.v
+src/algebra/AlgebraicClosureProcess.v
 src/analysis/FourierCoefficients.v
 src/analysis/FourierTransform.v
 src/analysis/FourierSynthesis.v
