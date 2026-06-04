@@ -745,6 +745,13 @@ src/stdlib/CalkinWilf.v
 src/stdlib/PickTheorem.v
 src/stdlib/Zeckendorf.v
 src/stdlib/GeneralSqrt.v
+src/stdlib/GeneralCbrt.v
+src/stdlib/GeneralRoot.v
+src/stdlib/FinitizationNoCutoff.v
+src/stdlib/GranularFloor.v
+src/stdlib/QubitCeiling.v
+src/stdlib/FinitizationVerdict.v
+src/stdlib/ReductionAtlasSurd.v
 src/stdlib/MetricSpace.v
 src/stdlib/ModularArith.v
 src/stdlib/Monad.v
