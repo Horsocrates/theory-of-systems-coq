@@ -1708,3 +1708,10 @@ src/foundation/ObserverCompressor.v
 src/foundation/GammaUnification.v
 src/crown/BornIsParseval.v
 src/crown/CompressionIsPhysics.v
+src/geometry/CayleySO3.v
+src/geometry/DiscreteGaussBonnet.v
+src/geometry/DiscreteGeodesic.v
+src/geometry/LieAlgebraSO3.v
+src/geometry/ManifoldAsLimit.v
+src/geometry/QuaternionRotation.v
+src/geometry/RationalSO3.v
