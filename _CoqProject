@@ -752,6 +752,11 @@ src/stdlib/GranularFloor.v
 src/stdlib/QubitCeiling.v
 src/stdlib/FinitizationVerdict.v
 src/stdlib/ReductionAtlasSurd.v
+src/stdlib/ReductionAtlasUnimodular.v
+src/stdlib/ReductionAtlasPell.v
+src/stdlib/ReductionAtlasNiven.v
+src/stdlib/ReductionAtlasParity.v
+src/stdlib/ReductionAtlasSynthesis.v
 src/stdlib/MetricSpace.v
 src/stdlib/ModularArith.v
 src/stdlib/Monad.v
