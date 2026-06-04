@@ -22,6 +22,13 @@
 (*  AXIOMS: none                                                              *)
 (* ========================================================================= *)
 
+(** HONEST NOTE (June 2026; cross-ref foundation/MillenniumHonesty.v):
+    The names "FINAL" / "THE Yang-Mills mass gap theorem" denote READING 2 — the LATTICE / process mass
+    gap (Element side; this file's own axiom claim is 0).  READING 1 — the classical Clay Millennium
+    statement (a continuum 4D Wightman/OS quantum field theory with a mass gap) — is NOT proved here:
+    the continuum limit is open.  The gap Reading-2 -> Reading-1 is the finitization boundary; no
+    continuum-level overclaim is intended. *)
+
 From Stdlib Require Import QArith QArith.Qabs Lia ZArith.
 From Stdlib Require Import Lqa.
 Open Scope Q_scope.

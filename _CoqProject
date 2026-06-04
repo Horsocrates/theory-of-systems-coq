@@ -1593,6 +1593,7 @@ src/foundation/SphaleronRateDescent.v
 src/foundation/DepartureDescent.v
 src/foundation/BaryogenesisBoundaryConvergence.v
 src/foundation/FrameworkConvergence.v
+src/foundation/MillenniumHonesty.v
 src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
@@ -1755,3 +1756,5 @@ src/numbertheory/EuclidInfinitude.v
 src/numbertheory/ArithmeticFunctions.v
 src/numbertheory/PrimeCounting.v
 src/numbertheory/VonMangoldt.v
+src/numbertheory/MobiusDirichlet.v
+src/numbertheory/EulerFermat.v

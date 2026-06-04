@@ -16,6 +16,13 @@
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
+(** HONEST NOTE (June 2026; cross-ref foundation/MillenniumHonesty.v):
+    "MILLENNIUM COMPLETE" / "Unconditional" denote READING 2 — Galerkin / process regularity — and it is
+    CONDITIONAL on the axioms listed above (classic, L4_witness, B_antisym, C_B_positive, B_coeff_bounded;
+    this file is NOT axiom-free, so "Unconditional" is not literal).  READING 1 — the classical Clay
+    Millennium statement (global smoothness of continuum 3D Navier-Stokes, unconditionally) — is NOT
+    proved here.  The gap Reading-2 -> Reading-1 is the finitization boundary. *)
+
 From Stdlib Require Import QArith QArith.Qabs Lia ZArith.
 From Stdlib Require Import Lqa.
 From ToS Require Import navier_stokes.GridFunction.
