@@ -1594,6 +1594,15 @@ src/foundation/DepartureDescent.v
 src/foundation/BaryogenesisBoundaryConvergence.v
 src/foundation/FrameworkConvergence.v
 src/foundation/MillenniumHonesty.v
+src/foundation/PredictionHonesty.v
+src/foundation/GravityFinitization.v
+src/foundation/GravityH1Decision.v
+src/foundation/MinimalLengthDispersion.v
+src/foundation/NatureBoundaryLedger.v
+src/foundation/FrameFreeFinitization.v
+src/foundation/CausalOrderGeometry.v
+src/foundation/NumberIsVolume.v
+src/foundation/DiscreteGeometrySynthesis.v
 src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
@@ -1758,3 +1767,5 @@ src/numbertheory/PrimeCounting.v
 src/numbertheory/VonMangoldt.v
 src/numbertheory/MobiusDirichlet.v
 src/numbertheory/EulerFermat.v
+src/numbertheory/EulerTheorem.v
+src/numbertheory/ChineseRemainder.v
