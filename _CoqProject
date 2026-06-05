@@ -1603,6 +1603,16 @@ src/foundation/FrameFreeFinitization.v
 src/foundation/CausalOrderGeometry.v
 src/foundation/NumberIsVolume.v
 src/foundation/DiscreteGeometrySynthesis.v
+src/foundation/ContinuumLimitProcess.v
+src/foundation/ContinuumLimitRoleLimit.v
+src/foundation/ContinuumLimitIsReal.v
+src/foundation/MinimalLengthDerivation.v
+src/foundation/MinimalLengthIsUnit.v
+src/foundation/MinimalLengthNoPosit.v
+src/foundation/VolumeDimension.v
+src/foundation/DimensionRoleLimit.v
+src/foundation/SortDecidable.v
+src/foundation/OpenFrontierLedger.v
 src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
