@@ -1623,6 +1623,11 @@ src/foundation/NSBoundDescent.v
 src/foundation/DepartureWallDescent.v
 src/foundation/JFactorDescent.v
 src/foundation/WallTaxonomySynthesis.v
+src/foundation/WallTaxonomyReflexive.v
+src/foundation/DegreeTwoSpecial.v
+src/foundation/AnomalyChargeQuantization.v
+src/foundation/BMinusLNeutrino.v
+src/foundation/CasimirBernoulli.v
 src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
