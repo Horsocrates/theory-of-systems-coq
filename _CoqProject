@@ -1613,6 +1613,7 @@ src/foundation/VolumeDimension.v
 src/foundation/DimensionRoleLimit.v
 src/foundation/SortDecidable.v
 src/foundation/OpenFrontierLedger.v
+src/foundation/HeavyWallAudit.v
 src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v

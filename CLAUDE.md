@@ -181,7 +181,10 @@ docs/                   — auto-generated documentation
 
 ### ToS_Axioms.v
 INVARIANTS:
-- Sole source of `classic` (re-exported from Distinction.v) and `L4_witness`
+- Declares `L4_witness` (here, ToS_Axioms.v:105) and re-exports `classic` from Distinction.v.
+  NOTE (2026-06-05): `classic` is NOT globally sole-sourced — it is also independently
+  re-declared (same statement) in EVT_idx.v:338, settheory/BorelDeterminacy.v:21,
+  settheory/HigmanLemma.v:13 (4 declarations of one axiom total).
 - Exactly 2 core axioms. Do NOT add new axioms without discussion.
 - All files that need LEM or constructive witnesses import from here.
 
@@ -438,16 +441,37 @@ IMPACT: annotations.json with 15 landmark + 9 bottleneck annotations. CLAUDE.md 
 ### Core (2)
 | Axiom | File | ToS Law | Purpose |
 |-------|------|---------|---------|
-| `classic` | foundation/Distinction.v:16 | L3 (Excluded Middle) | forall P, P \/ ~P |
-| `L4_witness` | ToS_Axioms.v:86 | P4 (Finite Actuality) | ex -> sig (constructive witness) |
+| `classic` | foundation/Distinction.v:36 | L3 (Excluded Middle) | forall P, P \/ ~P |
+| `L4_witness` | ToS_Axioms.v:105 | P4 (Finite Actuality) | ex -> sig (constructive witness) |
+
+NOTE (verified 2026-06-05): `classic` is textually RE-DECLARED (same statement) in 3
+more files — EVT_idx.v:338, settheory/BorelDeterminacy.v:21, settheory/HigmanLemma.v:13
+— so there are 4 declarations of one axiom, not a single re-exported source.
 
 ### Domain-specific (4)
-| Axiom | File | Purpose |
-|-------|------|---------|
-| `ns_viscosity_axiom` | stdlib/GalerkinSystem.v | Navier-Stokes viscosity positivity |
-| `ns_forcing_axiom` | stdlib/GalerkinSystem.v | NS external forcing boundedness |
-| `zeta_euler_product` | stdlib/ComplexZeta.v | Euler product for zeta function |
-| `zeta_log_derivative` | stdlib/LogZeta.v | Log-derivative of zeta function |
+CORRECTED 2026-06-05 (audit: foundation/HeavyWallAudit.v). The HEAVY WALLS
+(Navier-Stokes, zeta) are NOT 0-axiom; the foundation layer IS. The four real domain
+axioms below were verified by grep — they are NOT the stale phantom names that used to
+sit here (see REMOVED note). "0 axioms" honestly scopes to the foundation, not the walls.
+
+| Axiom | File | Wall | Kind | Statement |
+|-------|------|------|------|-----------|
+| `B_antisym` | navier_stokes/GalerkinSystem.v:185 | NS | ProvableStructure (eliminable) | B(k,l,m) == -B(k,m,l): advection antisymmetry = energy conservation |
+| `C_B_positive` | navier_stokes/TriadicInteraction.v:120 | NS | HarmlessInput | 0 < C_B (coupling constant positive; normalization) |
+| `B_coeff_bounded` | navier_stokes/TriadicInteraction.v:122 | NS | **LOAD-BEARING** | Qabs(B k l m) <= C_B*max(k,l,m): NS regularity is CONDITIONAL on this |
+| `functional_equation_structure` | zeta/FunctionalEquation.v:170 | zeta | ProvableStructure (eliminable) | nontrivial zero rho -> nontrivial zero (1-rho): Riemann FE; RH treatment conditional on it |
+
+Sort: 2 eliminable (provable structures — energy conservation, Riemann's FE), 1 harmless
+input, 1 genuinely LOAD-BEARING (`B_coeff_bounded` — the whole NS regularity rests on it).
+
+Abstract `Parameter`s — conservative (inhabited types, cannot cause inconsistency) but
+they DO appear in `Print Assumptions`, so the honest count names them:
+`B_coeff` (navier_stokes/GalerkinSystem.v:181), `C_B` (navier_stokes/TriadicInteraction.v:119),
+`eval_program` (foundation/P4_Eliminates_Pi11.v:28).
+
+REMOVED 2026-06-05 — these names NEVER existed in src/ (documentation drift, now fixed):
+`ns_viscosity_axiom`, `ns_forcing_axiom` (claimed stdlib/GalerkinSystem.v); `zeta_euler_product`
+(claimed stdlib/ComplexZeta.v); `zeta_log_derivative` (claimed stdlib/LogZeta.v).
 
 ---
 
