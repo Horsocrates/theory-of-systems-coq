@@ -1614,6 +1614,15 @@ src/foundation/DimensionRoleLimit.v
 src/foundation/SortDecidable.v
 src/foundation/OpenFrontierLedger.v
 src/foundation/HeavyWallAudit.v
+src/foundation/ThermoArrowAudit.v
+src/foundation/ApplicationsAudit.v
+src/foundation/ArrowGroundingDescent.v
+src/foundation/BornRuleDescent.v
+src/foundation/LambdaSmallnessDescent.v
+src/foundation/NSBoundDescent.v
+src/foundation/DepartureWallDescent.v
+src/foundation/JFactorDescent.v
+src/foundation/WallTaxonomySynthesis.v
 src/foundation/WeinbergAngleDerivation.v
 src/physics/AlphaBareLattice.v
 src/foundation/GaugeLevelSeparation.v
