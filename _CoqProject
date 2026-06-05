@@ -1780,3 +1780,16 @@ src/numbertheory/MobiusDirichlet.v
 src/numbertheory/EulerFermat.v
 src/numbertheory/EulerTheorem.v
 src/numbertheory/ChineseRemainder.v
+src/category/SetoidCategory.v
+src/category/FunctorCategory.v
+src/category/NaturalIsomorphism.v
+src/category/EquivalenceOfCategories.v
+src/category/IdentityEquivalence.v
+src/category/RightAdjointPreservesLimits.v
+src/category/YonedaLemma.v
+src/category/YonedaEmbedding.v
+src/category/SetoidProducts.v
+src/category/SetoidEqualizers.v
+src/category/SetoidCoproducts.v
+src/category/SetoidExponential.v
+src/category/SetoidClassifier.v
