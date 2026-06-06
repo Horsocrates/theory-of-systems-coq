@@ -1832,3 +1832,4 @@ src/cs/RussellViaLawvere.v
 src/cs/ScaleFlowUndecidable.v
 src/cs/SemanticRecursion.v
 src/cs/TarskiUndefinability.v
+src/cs/KolmogorovRoleLimit.v
