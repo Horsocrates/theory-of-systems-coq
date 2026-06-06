@@ -1862,6 +1862,7 @@ src/foundation/PiAngleRoleLimit.v
 src/foundation/PiAngleAllTriples.v
 src/foundation/PiAngleScaleInvariant.v
 src/foundation/PrimitiveTripleNT.v
+src/foundation/RoleLimitTaxonomy.v
 src/category/RightAdjointPreservesLimits.v
 src/category/IdentityEquivalence.v
 src/category/SetoidCategory.v
