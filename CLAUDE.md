@@ -1,14 +1,33 @@
 # CLAUDE.md — Theory of Systems Coq Project
 
-## Stats (as of 2026-06-01)
-- **Qed:** 22,243
+## Stats (as of 2026-06-04)
+- **Qed:** 23,103 (tracked, = origin/main)
 - **Admitted:** 0
 - **True placeholders:** 0
-- **Files:** 1,535
+- **Files:** 1,639
 - **Compiler:** Rocq 9.0.1 (Coq rebrand)
 - **Build:** `make` (uses `_CoqProject`)
 
-## Latest: E/R/R Three Formulas Re-derivation (April 2026)
+## Latest: Том II Parts X & XI — Set Theory w/o AC + Algebra/Galois (June 2026)
+
+Book Том II «Математика» prose advanced through Part XI; each part backed by new
+src/ formalization (all 0 axioms):
+
+  Part X «Set theory without AC» (committed 9a1a4fd): 5 files, 36 Qed in
+    src/settheory/ + src/foundation/ — general Cantor, cardinality without choice,
+    transfinite induction on levels, structural well-orders, choice-price map.
+
+  Part XI «Algebra, fields, Galois» (committed bd5515c): 8 files, 94 Qed in
+    src/algebra/ — real V4 Galois correspondence for Q[sqrt2,sqrt3] (GaloisQ23),
+    splitting field, degree [E:Q]=|Gal|=4 with genuine independence sqrt3 not-in
+    Q[sqrt2], F_p (F5/F7+Fermat), general Gauss / rational-root test, solvability
+    engine (perfect nontrivial => not solvable; Abel-Ruffini group core), and the
+    algebraic closure of Q AS A PROCESS (ascending tower, no maximal rung).
+
+  Prose: Part X (6 ch) + Part XI (6 ch) written, all GPT-reviewed, compile clean.
+  Flagship reframing: Q-bar is a process, not a completed-object wall.
+
+## Earlier: E/R/R Three Formulas Re-derivation (April 2026)
 
 14 new files in `src/foundation/` totaling 304 Qed, re-deriving physics
 in pure E/R/R three-formula form:

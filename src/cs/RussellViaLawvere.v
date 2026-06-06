@@ -35,9 +35,11 @@ From ToS Require Import cs.LawvereFixedPoint.
 From ToS Require Import cs.TarskiUndefinability.
 
 (** Negation is fixpoint-free on Prop: ¬P ≠ P (else P ↔ ¬P, absurd). The Prop seed of Lawvere. *)
-Lemma not_no_fixpoint : forall P : Prop, ~ P <> P.
+Lemma not_no_fixpoint : forall P : Prop, (~ P) <> P.
 Proof.
-  intros P H. apply (iff_not_self_absurd P). rewrite H. tauto.
+  intros P H. apply (iff_not_self_absurd P). split; intro x.
+  - exact (eq_rect P (fun T : Prop => T) x (~ P) (eq_sym H)).
+  - exact (eq_rect (~ P) (fun T : Prop => T) x P H).
 Qed.
 
 (** Cantor for the powerset: no point-surjection A → (A → Prop) — Lawvere at B := Prop, f := not. *)
@@ -68,7 +70,7 @@ Proof. intros W app_self [h Hh]. exact (iff_not_self_absurd (app_self h) Hh). Qe
 
 (** ★ ONE DIAGONAL on Prop: the seed (¬ fixpoint-free), Cantor-for-Prop, Russell, the Liar. *)
 Theorem paradoxes_one_diagonal :
-  (forall P : Prop, ~ P <> P)
+  (forall P : Prop, (~ P) <> P)
   /\ (forall (A : Type) (phi : A -> (A -> Prop)), ~ point_surjective phi)
   /\ (forall (A : Type) (mem : A -> A -> Prop), ~ exists R, forall x, mem R x <-> ~ mem x x)
   /\ (~ exists p : Prop, p <-> ~ p).
