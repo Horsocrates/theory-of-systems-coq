@@ -1774,6 +1774,15 @@ src/foundation/ERRKnowledgeBase.v
 src/foundation/ERRBijections.v
 src/foundation/ObserverCompressor.v
 src/foundation/GammaUnification.v
+src/foundation/ScaleHierarchyTransfer.v
+src/foundation/ShellCascadeNS.v
+src/foundation/CascadeBoundary.v
+src/foundation/RGCascadeReal.v
+src/foundation/ScaleHierarchySynthesis.v
+src/foundation/NestedHierarchyConservation.v
+src/foundation/HierarchyLaplacian.v
+src/foundation/InterLevelCalculus.v
+src/navier_stokes/AdvectionEnergyConservation.v
 src/crown/BornIsParseval.v
 src/crown/CompressionIsPhysics.v
 
