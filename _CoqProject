@@ -1876,6 +1876,9 @@ src/category/SetoidClassifier.v
 src/cs/BoundaryDecidability.v
 src/cs/ChomskyHierarchy.v
 src/cs/ComputationModel.v
+src/cs/CountableDependentChoiceFree.v
+src/cs/CountableSelectionFree.v
+src/cs/DecidableKonig.v
 src/cs/DecidableSelection.v
 src/cs/HaltingRoleLimit.v
 src/cs/KolmogorovRoleLimit.v
