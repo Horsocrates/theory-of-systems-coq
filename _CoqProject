@@ -1875,8 +1875,10 @@ src/category/SetoidExponential.v
 src/category/SetoidClassifier.v
 src/cs/BoundaryDecidability.v
 src/cs/ChomskyHierarchy.v
+src/cs/ComputationModel.v
 src/cs/DecidableSelection.v
 src/cs/HaltingRoleLimit.v
+src/cs/KolmogorovRoleLimit.v
 src/cs/LambdaGrounding.v
 src/cs/LambdaRecursion.v
 src/cs/LawvereFixedPoint.v
