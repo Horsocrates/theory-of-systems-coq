@@ -1893,5 +1893,6 @@ src/cs/RegularElementFloor.v
 src/cs/RiceRoleLimit.v
 src/cs/RussellViaLawvere.v
 src/cs/ScaleFlowUndecidable.v
+src/cs/SelectionWithoutChoiceSynthesis.v
 src/cs/SemanticRecursion.v
 src/cs/TarskiUndefinability.v
