@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**5 files / 72 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=3 / s1=0 / s0=0
+**5 files / 75 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -164,13 +164,13 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 - **Topic.** exp_R P := diagonal_limit (fun n => exp_limit (P n)) (exp_meta_cauchy P). The crux exp_meta_cauchy proves the sequence of processes is meta-Cauchy via two uniform pillars (P bounded by B = cauchy_bounded): equi-Cauchy = uniform exp-tail (exp_partial_tail_bound[_sym]: |Σexp_term x m − Σexp_term x n| ≤ |Σexp_term B m − Σexp_term B n| for |x|≤B, from exp_term_abs + Qpow_le_mono_base + partial_sum_block_abs/mono) + the exp-series Cauchy modulus at B; cross-closeness = argument-Lipschitz (exp_partial_lipschitz: |Σexp_term a − Σexp_term b| ≤ |a−b|·Σexp_term B(pred k), bounded by C=exp_term B 0+MB via exp_pred_sum_bound) + P's Cauchy modulus at eps/C. Analytic kernel: Qpow_diff_bound (|a^(Sk)−b^(Sk)| ≤ (k+1)B^k|a−b|, telescope) and exp_term_diff_bound (÷ factorial), both AXIOM-FREE.
 - **Role.** The major missing construction for the ln_mul horizon: E(L(x)) requires exp of the PROCESS L(x), which exp_limit (rational-arg) cannot express. exp_R supplies it, AND exp_R_add proves it is a homomorphism exp_R(P+R)~~exp_R(P)*exp_R(R) (the addition theorem). First real consumer of Completeness.diagonal_limit/meta_cauchy and of CauchyProduct.mertens_error_bound at the diagonal. Vein C (real = process). Builds on PowerSeries (exp_limit/exp_term) + ExpFunctionalEquation (exp_term_0/partial_sum_head/exp_abs_partial_bounded/exp_term_nonneg/exp_conv_id) + CauchyProduct (partial_sum_block_abs/mertens_error_bound) + Completeness. Remaining for ln_mul: E∘L=1/(1−x), injectivity of exp_R.
-- **Counts.** Qed 15 / Admitted 0 / axioms 0
+- **Counts.** Qed 18 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; RealField; SeriesConvergence; PowerSeries; CauchyProduct; ExpFunctionalEquation; Completeness
 - **E/R/R.** _Elements:_ рациональные приближения P n; exp_term (P n) k; диагональ exp_limit (P n) — каждая стадия точна над Q. _Roles:_ exp_R = роль-функция (вещественная экспонента); диагональ = роль-предел ПОСЛЕДОВАТЕЛЬНОСТИ процессов (completeness); ограниченность P = роль-граница B. _Rules:_ meta_cauchy = (равномерный хвост exp над \|·\|≤B: exp_partial_tail_bound) ∧ (Липшиц \|a^k−b^k\|≤k·B^{k-1}\|a−b\|: Qpow_diff_bound→exp_partial_lipschitz); diagonal_limit/diagonal_converges. _P4:_ exp_R(P) — role-limit ПОСЛЕДОВАТЕЛЬНОСТИ role-limit'ов (процесс процессов), но diagonal_limit делает один Cauchy-процесс. Аналитическое ядро 0-аксиомно; вся конструкция — только classic.
 - **Classical counterpart.** The real exponential exp : R -> R, here built CONSTRUCTIVELY over Q-Cauchy processes: exp_R : CauchySeq -> CauchySeq (exp of a real number represented as a process), via the diagonal/completeness construction (Completeness.diagonal_limit) of the meta-Cauchy sequence n \|-> exp_limit (P n). The analytic core (power Lipschitz, uniform exp-tail) is axiom-FREE; the whole construction uses only the global L3 `classic`. No real exp existed in the repo (exp_limit was rational-argument only).
 - **Tags.** process-exp, real-exponential, process, vein-C, constructive-over-Q, methods, completeness, diagonal-limit
 
-**Lemmas (12):**
+**Lemmas (14):**
 
 | name | kind | role |
 |---|---|---|
@@ -186,6 +186,8 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `exp_term_abs_bound/exp_abs_partial_le_B` | Lemma | равномерная мажоризация \|exp_term x\|≤exp_term B, Σ\|exp_term x\|≤Σexp_term B |
 | `exp_R_diag_mertens_bound` | Lemma | ★ диагональный Мертенс: per-n разностная оценка с равномерн. мажорантами (АКСИОМО-СВОБОДНА) |
 | `exp_R_add` | Theorem | ★★★ ТЕОРЕМА СЛОЖЕНИЯ: exp_R(P+R) ~~ exp_R(P)·exp_R(R) (гомоморфизм) |
+| `exp_R_wd` | Lemma | ★ корректность на реалах: P~~R ⟹ exp_R P ~~ exp_R R (setoid-морфизм) |
+| `exp_R_zero/exp_R_neg` | Theorem | ★ единица E(0)~~1 + обратимость E(P)·E(−P)~~1 → ПОЛНЫЙ гомоморфизм групп |
 
 **Key lemmas (deep):**
 

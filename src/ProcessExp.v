@@ -25,14 +25,14 @@
       P4: exp_R(P) — role-limit ПОСЛЕДОВАТЕЛЬНОСТИ role-limit'ов (процесс процессов), но
           diagonal_limit делает из него один Cauchy-процесс.  0-аксиомно (только classic).
 
-    STATUS: 15 Qed, 0 Admitted, 0 axioms (все оценки аксиомо-СВОБОДНЫ; exp_R/exp_meta_cauchy/exp_R_add — classic).
-            ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА ПОСТРОЕНА + ГОМОМОРФИЗМ: exp_R : CauchySeq → CauchySeq (exp от ПРОЦЕССА,
-            через diagonal_limit) И exp_R_add : exp_R(P+R) ~~ exp_R(P)·exp_R(R) — ТЕОРЕМА СЛОЖЕНИЯ.
+    STATUS: 18 Qed, 0 Admitted, 0 axioms (оценки аксиомо-СВОБОДНЫ; exp_R/_add/_neg/_wd/_zero — только classic).
+            ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА ПОСТРОЕНА + ПОЛНЫЙ ГОМОМОРФИЗМ ГРУПП (ℝ,+,0,−)→(ℝ,·,1,⁻¹) на Q-Cauchy:
+            exp_R : CauchySeq → CauchySeq (exp от ПРОЦЕССА, diagonal_limit); exp_R_add (E(P+R)~~E(P)·E(R), ★),
+            exp_R_zero (E(0)~~1), exp_R_neg (E(P)·E(−P)~~1, обратимость), exp_R_wd (P~~R⟹E(P)~~E(R), корректность).
             Пилоны meta_cauchy: equi-Cauchy (exp_partial_tail_bound[_sym]) + cross-closeness (exp_partial_lipschitz
-            + exp_pred_sum_bound).  Теорема сложения — ДИАГОНАЛЬНЫЙ Мертенс: exp_R_diag_mertens_bound (per-n
-            разностная оценка с равномерными мажорантами exp_term BP/BR, через exp_conv_id + mertens_error_bound,
-            АКСИОМО-СВОБОДНА) + капстоун ε/2 на Cauchy-модулях exp-рядов от BP, BR.
-            ОСТАЁТСЯ для ln_mul: E∘L=1/(1−x) (exp_R(L(x))~~геометрический предел) и инъективность exp_R.
+            + exp_pred_sum_bound).  Теорема сложения — ДИАГОНАЛЬНЫЙ Мертенс (exp_R_diag_mertens_bound, аксиомо-своб.,
+            via exp_conv_id + mertens_error_bound + равномерные мажоранты) + капстоун ε/2.
+            ОСТАЁТСЯ для ln_mul: инъективность exp_R (ядро E(d)~~1⟹d~~0) и E∘L=1/(1−x).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -531,6 +531,88 @@ Proof.
   - lra.
 Qed.
 
+(* ================================================================== *)
+(*  exp_R как функция на реалах: корректность (~~) + E(0)=1            *)
+(*  (к инъективности exp_R для замыкания ln_mul)                        *)
+(* ================================================================== *)
+
+(** ★ exp_R УВАЖАЕТ ~~ (корректно определена на реалах = setoid-морфизм).
+    Диагональ |Σexp_term(Pn) − Σexp_term(Rn)| ≤ |Pn−Rn|·C (cross-closeness Липшиц),
+    и |Pn−Rn| → 0 (P ~~ R — поточечная разность на диагонали → 0). *)
+Lemma exp_R_wd : forall P R : CauchySeq, P ~~ R -> exp_R P ~~ exp_R R.
+Proof.
+  intros P R HPR.
+  destruct (cauchy_bounded P) as [BP [HBPpos HBP]].
+  destruct (cauchy_bounded R) as [BR [HBRpos HBR]].
+  assert (HBPB : forall m, Qabs (cs_seq P m) <= BP + BR)
+    by (intro m; assert (Hb := HBP m); lra).
+  assert (HBRB : forall m, Qabs (cs_seq R m) <= BP + BR)
+    by (intro m; assert (Hb := HBR m); lra).
+  assert (HBPR0 : 0 <= BP + BR) by lra.
+  destruct (cauchy_bounded (exp_limit (BP + BR))) as [MB [HMBpos HMB']].
+  assert (HMB : forall N, partial_sum (exp_term (BP + BR)) N <= MB).
+  { intro N. assert (Hb := HMB' N).
+    change (cs_seq (exp_limit (BP + BR)) N) with (partial_sum (exp_term (BP + BR)) N) in Hb.
+    assert (Hnn : 0 <= partial_sum (exp_term (BP + BR)) N)
+      by (apply partial_sum_nonneg; intro; apply exp_term_nonneg; exact HBPR0).
+    rewrite (Qabs_pos _ Hnn) in Hb. exact Hb. }
+  assert (HC : 0 < exp_term (BP + BR) 0 + MB).
+  { assert (Hone : exp_term (BP + BR) 0 == 1) by apply exp_term_0.
+    assert (HMB0 : 0 <= MB).
+    { eapply Qle_trans; [ | apply (HMB 0%nat) ].
+      change (partial_sum (exp_term (BP + BR)) 0%nat) with (exp_term (BP + BR) 0%nat).
+      apply exp_term_nonneg; exact HBPR0. }
+    lra. }
+  unfold cauchy_equiv. intros eps Heps.
+  assert (HepsC : 0 < eps * / (exp_term (BP + BR) 0 + MB))
+    by (apply Qmult_lt_0_compat; [ exact Heps | apply Qinv_lt_0_compat; exact HC ]).
+  destruct (HPR (eps * / (exp_term (BP + BR) 0 + MB)) HepsC) as [N HN].
+  exists N. intros n Hn.
+  change (cs_seq (exp_R P) n) with (partial_sum (exp_term (cs_seq P n)) n).
+  change (cs_seq (exp_R R) n) with (partial_sum (exp_term (cs_seq R n)) n).
+  eapply Qle_lt_trans.
+  - exact (exp_partial_lipschitz (cs_seq P n) (cs_seq R n) (BP + BR) n (HBPB n) (HBRB n)).
+  - eapply Qle_lt_trans with
+      (Qabs (cs_seq P n - cs_seq R n) * (exp_term (BP + BR) 0 + MB)).
+    + rewrite (Qmult_comm (Qabs (cs_seq P n - cs_seq R n))
+                (partial_sum (fun j => exp_term (BP + BR) (pred j)) n)).
+      rewrite (Qmult_comm (Qabs (cs_seq P n - cs_seq R n)) (exp_term (BP + BR) 0 + MB)).
+      apply Qmult_le_compat_r;
+        [ apply exp_pred_sum_bound; [ exact HBPR0 | exact HMB ] | apply Qabs_nonneg ].
+    + assert (Hlt : Qabs (cs_seq P n - cs_seq R n) < eps * / (exp_term (BP + BR) 0 + MB))
+        by (apply HN; lia).
+      assert (Hstep : Qabs (cs_seq P n - cs_seq R n) * (exp_term (BP + BR) 0 + MB)
+                      < (eps * / (exp_term (BP + BR) 0 + MB)) * (exp_term (BP + BR) 0 + MB))
+        by (apply Qmult_lt_compat_r; [ exact HC | exact Hlt ]).
+      assert (Hceq : (eps * / (exp_term (BP + BR) 0 + MB)) * (exp_term (BP + BR) 0 + MB) == eps)
+        by (field; lra).
+      rewrite Hceq in Hstep. exact Hstep.
+Qed.
+
+(** ★ Единица: E(0) ~~ 1 (диагональ Σexp_term 0 = 1). *)
+Lemma exp_R_zero : exp_R (cauchy_const 0) ~~ cauchy_one.
+Proof.
+  unfold cauchy_equiv. intros eps Heps. exists 0%nat. intros n _.
+  change (cs_seq (exp_R (cauchy_const 0)) n) with (partial_sum (exp_term 0) n).
+  change (cs_seq cauchy_one n) with (1 : Q).
+  assert (Hz : partial_sum (exp_term 0) n - 1 == 0) by (rewrite exp_partial_zero; ring).
+  rewrite Hz. assert (Q0 : Qabs 0 == 0) by reflexivity. rewrite Q0. exact Heps.
+Qed.
+
+(** ★ Обратимость: E(P)·E(−P) ~~ 1, т.е. E(−P) = E(P)⁻¹.
+    Следствие теоремы сложения exp_R_add + корректности exp_R_wd + единицы exp_R_zero
+    (P + (−P) ~~ 0).  Вместе с exp_R_add даёт ГОМОМОРФИЗМ ГРУПП на реалах. *)
+Theorem exp_R_neg : forall P : CauchySeq,
+  cauchy_mul (exp_R P) (exp_R (cauchy_neg P)) ~~ cauchy_one.
+Proof.
+  intro P.
+  eapply cauchy_equiv_trans.
+  - apply cauchy_equiv_sym. apply exp_R_add.
+  - eapply cauchy_equiv_trans.
+    + apply exp_R_wd. apply cauchy_add_neg_r.
+    + apply exp_R_zero.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions Qpow_diff_bound.
 Print Assumptions exp_term_diff_bound.
@@ -539,3 +621,4 @@ Print Assumptions exp_partial_tail_bound.
 Print Assumptions exp_meta_cauchy.
 Print Assumptions exp_R_diag_mertens_bound.
 Print Assumptions exp_R_add.
+Print Assumptions exp_R_wd.
