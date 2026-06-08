@@ -10,6 +10,7 @@ src/AIInterface.v
 src/Archimedean_ERR.v
 src/CauchyProcessBridge.v
 src/CauchyProduct.v
+src/ExpFunctionalEquation.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v

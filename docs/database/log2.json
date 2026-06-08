@@ -119,5 +119,45 @@
       "caveat": "Сама теорема Мертенса классична (1875). Уникальность — в конструктивно-над-Q аксиомо-свободной формулировке как process-equality и в том, что движок заполняет реальный пробел репо (брошенный partial_sum_tail, документированный горизонт ln_mul), а НЕ новый матфакт."
     },
     "tags": ["mertens", "cauchy-product", "process", "vein-C", "constructive-over-Q", "methods", "resurrected-abort"]
+  },
+  {
+    "num": 1833,
+    "path": "src/ExpFunctionalEquation.v",
+    "cluster": "log2",
+    "classical_counterpart": "The exponential addition theorem exp(u+v)=exp(u)exp(v) (equivalently the binomial theorem (u+v)^n = sum C(n,i) u^i v^(n-i) inside the Cauchy product of exp-series). Here proved CONSTRUCTIVELY over Q-Cauchy processes (no R), axiom-free except global L3 `classic`, recast as a process-equality (~~), as the FIRST full application of mertens_cauchy_product. The convolution identity is proved via the factorial recurrence (n+1)c_{n+1}=(u+v)c_n (Vandermonde/Pascal) WITHOUT binomial coefficients.",
+    "title": "Exponential addition theorem E(u+v) ~~ E(u)·E(v) over Q via Mertens (central domino of ln_mul)",
+    "topic": "exp_add_from_conv wires mertens_cauchy_product to exp: it closes ALL analysis (abs-bounds via cauchy_bounded+exp_term_abs, conv-Cauchy via is_cauchy_ext, limit via Mertens) and reduces the exp homomorphism to the pure-algebra identity conv(exp_term u)(exp_term v) n == exp_term(u+v) n. That identity (exp_conv_id) is proved by induction on n: base exp_conv_zero, step via exp_conv_rec — the convolution recurrence inject_Z(S n)*c_{S n} == (u+v)*c_n — from exp_term_ratio (u*A_i=(i+1)A_{i+1}, v*B_j=(j+1)B_{j+1}) plus a head/tail sum reindex (partial_sum_head) collecting the coefficient i+(n+1-i)=n+1. Cancel (n+1)>0 to finish. Capstone exp_add : exp_limit(u+v) ~~ cauchy_mul(exp_limit u)(exp_limit v).",
+    "role": "Central domino of the ln_mul route (see E/R/R разбор): L(x)+L(y)~~L(x⊕y) is additive ⟹ routes through exp, and exp(u+v)=exp(u)exp(v) is exactly Mertens. First real consumer of CauchyProduct.mertens_cauchy_product. Vein C. Builds on PowerSeries (exp_term/exp_limit/exp_series_cauchy) + CauchyProduct (conv/mertens). Remaining ln_mul horizon: E∘L=1/(1−x) + injectivity of E.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "Qabs", "Lqa", "Lia", "ZArith", "ToS: CauchyReal", "RealField", "SeriesConvergence", "PowerSeries", "CauchyProduct"],
+    "err": {
+      "elements": "exp_term x n = xⁿ/n! — каждая стадия точна над Q; свёртка conv.",
+      "roles": "E = роль-обратная к ln; теорема сложения = роль-гомоморфизм (+ → ·); Мертенс — движок, переносящий покоэффициентное conv в предельное равенство.",
+      "rules": "exp_term_ratio (u·Aᵢ=(i+1)Aᵢ₊₁); рекуррентность (n+1)cₙ₊₁=(u+v)cₙ; переиндексация сумм (голова/хвост); сокращение (n+1)>0; абс-границы из cauchy_bounded; is_cauchy по поточечному Qeq.",
+      "p4": "E(u+v)~~E(u)E(v) — роль-предел (Мертенс), процесс, не завершённый объект; сведён к конечной покоэффициентной алгебре. 0-аксиомно (только classic)."
+    },
+    "lemmas": [
+      {"name": "is_cauchy_ext", "kind": "Lemma", "role": "перенос is_cauchy по поточечному Qeq"},
+      {"name": "exp_term_abs/exp_term_nonneg/exp_abs_partial_bounded", "kind": "Lemma", "role": "|exp_term x k|=exp_term|x|k; неотрицательность; абс-границы (cauchy_bounded)"},
+      {"name": "exp_add_from_conv", "kind": "Lemma", "role": "★ проводка Мертенса к exp: conv-тождество ⟹ exp-гомоморфизм (весь анализ закрыт)"},
+      {"name": "partial_sum_head", "kind": "Lemma", "role": "расщепление суммы с головы Σ_{≤S n}=f 0+Σ_{≤n}f(S i)"},
+      {"name": "exp_term_0", "kind": "Lemma", "role": "exp_term x 0 = 1"},
+      {"name": "exp_conv_zero", "kind": "Lemma", "role": "база свёртки c₀=1"},
+      {"name": "exp_conv_rec", "kind": "Lemma", "role": "★ рекуррентность свёртки (n+1)cₙ₊₁=(u+v)cₙ (Vandermonde без C(n,i))"},
+      {"name": "exp_conv_id", "kind": "Lemma", "role": "★ биномиальное тождество conv(Eᵤ)(Eᵥ)n==E_{u+v}n (индукция+сокращение)"},
+      {"name": "exp_add", "kind": "Theorem", "role": "★★★ E(u+v) ~~ E(u)·E(v) — безусловная теорема сложения экспоненты"}
+    ],
+    "key_lemmas": [
+      {"name": "exp_add", "analysis": "Теорема сложения экспоненты как РАВЕНСТВО ПРОЦЕССОВ (~~) над Q: E(u+v)~~E(u)·E(v). ПЕРВОЕ полное применение mertens_cauchy_product — демонстрирует, что движок произведения Коши работает end-to-end. Зависит ТОЛЬКО от classic. Центральное домино маршрута к ln_mul: поскольку L(x)+L(y)~~L(x⊕y) аддитивно, оно идёт через exp, а exp(u+v)=exp(u)exp(v) — ровно Мертенс.", "tags": ["exp-addition", "mertens-application", "process-equality", "vein-C", "central-domino", "constructive-over-Q"]},
+      {"name": "exp_conv_rec", "analysis": "Сердце: рекуррентность свёртки (n+1)·cₙ₊₁ == (u+v)·cₙ — доказательство теоремы сложения БЕЗ биномиальных коэффициентов. (u+v)cₙ распадается на u·cₙ+v·cₙ; exp_term_ratio даёт u·Aᵢ=(i+1)Aᵢ₊₁ и v·Bⱼ=(j+1)Bⱼ₊₁; голова/хвост-переиндексация (partial_sum_head) собирает у каждого члена коэффициент i+(n+1−i)=n+1. Чистая конечная алгебра над Q (Vandermonde/Pascal в факториальной форме), аксиомо-чисто.", "tags": ["convolution-recurrence", "vandermonde", "factorial", "reindex", "finite-algebra"]},
+      {"name": "exp_add_from_conv", "analysis": "Проводка Мертенса к exp: сводит ВЕСЬ анализ exp-гомоморфизма (сходимость, абс-границы, предел) к одному покоэффициентному тождеству. abs-границы — |exp_term u k|=exp_term|u|k + cauchy_bounded(exp_limit|u|); conv-Cauchy — is_cauchy_ext (перенос по поточечному Qeq на exp-ряд от u+v); предел — mertens_cauchy_product. Образец разделения анализ/алгебра: после этой леммы остаётся чистая комбинаторика.", "tags": ["mertens-wiring", "analysis-closed", "reduction", "cauchy-bounded"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Теорема сложения экспоненты E(u+v)~~E(u)·E(v) КОНСТРУКТИВНО над Q-Cauchy-процессами (без вещественных Coq), 0-аксиомно (только classic), как равенство ПРОЦЕССОВ — первое полное применение mertens_cauchy_product; conv-тождество доказано факториальной рекуррентностью (n+1)cₙ₊₁=(u+v)cₙ без биномиальных коэффициентов.",
+      "caveat": "Сама теорема сложения экспоненты (и биномиальное тождество) классична. Уникальность — в конструктивно-над-Q аксиомо-свободной формулировке как process-equality и в роли центрального домино маршрута к ln_mul (демонстрация движка Мертенса end-to-end), а НЕ новый матфакт. Горизонт ln_mul (E∘L, инъективность E) ещё открыт."
+    },
+    "tags": ["exp-addition", "mertens-application", "process", "vein-C", "constructive-over-Q", "methods", "central-domino"]
   }
 ]
