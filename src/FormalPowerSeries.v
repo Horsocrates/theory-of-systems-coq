@@ -22,10 +22,13 @@
     ДИАГНОСТИКА (P4): функция-как-коэффициент-процесс — Element (многочлен) ⟺ терминирует,
       role-limit (трансцендентная) ⟺ не терминирует.  То же H1, на уровень выше.  0-аксиомно.
 
-    STATUS: 6 Qed, 0 Admitted, 0 axioms (geom_inverse_fps, geom_not_polynomial аксиомо-СВОБОДНЫ).
-            Следующая веха: композиция FPS (подстановка) + `compose exp_fps log1m_fps = geom_fps`
-            (cₙ=1, рекуррентность как exp_conv_id) → формальное сердце E∘L; затем аналитический
-            мост eval(f∘g) → снятие горизонта ln_mul.
+    STATUS: 12 Qed, 0 Admitted, 0 axioms (все ключевые — geom_inverse_fps, *_deriv, ode_geom_unique — аксиомо-своб.).
+            ГОТОВО: (1) FPS-реификация + граница Element/role-limit на уровне функций; (2) FPS-исчисление —
+            exp'=exp (exp_fps_deriv), (−ln(1−x))'=1/(1−x) (log1m_deriv); (3) СТРУКТУРНОЕ СЕРДЦЕ — ode_geom_unique:
+            ОДУ h'=h·geom с h(0)=1 имеет ЕДИНСТВЕННОЕ решение geom (чистый маршрут conv·geom=Σ, без sparse-свёртки;
+            использует geom_inverse_fps).  geom_satisfies_ode — проверка.
+            ОСТАЁТСЯ: цепное правило (compose exp_fps log1m_fps удовлетворяет h'=h·geom) ⟹ безусловно
+            compose=geom (cₙ=1) — формальное сердце E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -140,9 +143,112 @@ Proof.
   - rewrite oneminusX_tail_zero. cbn [fps_one]. reflexivity.
 Qed.
 
+(* ================================================================== *)
+(*  FPS-ИСЧИСЛЕНИЕ: производные реифицированных функций                 *)
+(*  (реифицированные функции удовлетворяют своим определяющим ОДУ)      *)
+(* ================================================================== *)
+
+(** ★ exp' = exp на уровне коэффициентов: (n+1)·exp(n+1) = (n+1)/(n+1)! = 1/n! = exp(n). *)
+Lemma exp_fps_deriv : fps_eq (fps_deriv exp_fps) exp_fps.
+Proof.
+  intro n. unfold fps_deriv, exp_fps.
+  assert (HSn : ~ inject_Z (Z.of_nat (S n)) == 0)
+    by (assert (0 < inject_Z (Z.of_nat (S n))) by (unfold Qlt; simpl; lia); lra).
+  change (Qfact (S n)) with (inject_Z (Z.of_nat (S n)) * Qfact n).
+  rewrite Qinv_mult_distr, Qmult_assoc, Qmult_inv_r by exact HSn.
+  rewrite Qmult_1_l. reflexivity.
+Qed.
+
+(** ★ (−ln(1−x))' = 1/(1−x): (n+1)·log1m(n+1) = (n+1)·1/(n+1) = 1 = geom(n).
+    Реифицированный логарифм имеет производной реифицированную геометрическую. *)
+Lemma log1m_deriv : fps_eq (fps_deriv log1m_fps) geom_fps.
+Proof.
+  intro n. unfold fps_deriv, geom_fps.
+  change (log1m_fps (S n)) with (/ inject_Z (Z.of_nat (S n))).
+  assert (HSn : ~ inject_Z (Z.of_nat (S n)) == 0)
+    by (assert (0 < inject_Z (Z.of_nat (S n))) by (unfold Qlt; simpl; lia); lra).
+  apply Qmult_inv_r. exact HSn.
+Qed.
+
+(* ================================================================== *)
+(*  ★ ОДУ-ХАРАКТЕРИЗАЦИЯ: единственность решения h' = h·geom            *)
+(*    (структурное сердце E∘L; чистый маршрут через conv·ones=Σ)        *)
+(* ================================================================== *)
+
+(** Свёртка с геометрической (=всеединичной) есть частичная сумма: conv a geom = Σa. *)
+Lemma conv_ones : forall (a : FPS) (n : nat),
+  conv a geom_fps n == partial_sum a n.
+Proof.
+  intros a n. unfold conv. apply partial_sum_ext_le. intros i _. unfold geom_fps. ring.
+Qed.
+
+(** Сокращение: a·x = a, a≠0 ⟹ x = 1. *)
+Lemma qcancel : forall a x : Q, ~ a == 0 -> a * x == a -> x == 1.
+Proof.
+  intros a x Ha H.
+  transitivity (/ a * (a * x)).
+  - symmetry. rewrite Qmult_assoc, (Qmult_comm (/ a) a), (Qmult_inv_r a Ha).
+    apply Qmult_1_l.
+  - rewrite H, (Qmult_comm (/ a) a). apply (Qmult_inv_r a Ha).
+Qed.
+
+(** ★★ СТРУКТУРНОЕ СЕРДЦЕ: ОДУ h' = h·geom (т.е. (1−x)h'=h) с h(0)=1 имеет
+    ЕДИНСТВЕННОЕ решение geom = 1/(1−x).  Из h'=h·geom: (n+1)h(n+1)=Σ_{≤n}h
+    (conv·geom=Σ); индукцией Σ_{≤n}h = n+1, откуда h(n)=1.  Это conditional-сердце
+    E∘L: остаётся показать, что exp∘log1m удовлетворяет ОДУ (цепное правило). *)
+Lemma ode_geom_unique : forall h : FPS,
+  (forall n, fps_deriv h n == fps_mul h geom_fps n) ->
+  h 0%nat == 1 ->
+  fps_eq h geom_fps.
+Proof.
+  intros h Hode H0.
+  assert (Hrec : forall n, inject_Z (Z.of_nat (S n)) * h (S n) == partial_sum h n).
+  { intro n. assert (Hh := Hode n). unfold fps_deriv, fps_mul in Hh.
+    rewrite conv_ones in Hh. exact Hh. }
+  assert (Hnz : forall n, ~ inject_Z (Z.of_nat (S n)) == 0).
+  { intro n. assert (0 < inject_Z (Z.of_nat (S n))) by (unfold Qlt; simpl; lia). lra. }
+  assert (Hps : forall n, partial_sum h n == inject_Z (Z.of_nat (S n))).
+  { induction n as [|m IH].
+    - change (partial_sum h 0%nat) with (h 0%nat). rewrite H0. reflexivity.
+    - change (partial_sum h (S m)) with (partial_sum h m + h (S m)).
+      assert (HhSm : h (S m) == 1).
+      { apply (qcancel (inject_Z (Z.of_nat (S m)))); [ apply Hnz | ].
+        rewrite (Hrec m). exact IH. }
+      rewrite IH, HhSm.
+      assert (Hinj : inject_Z (Z.of_nat (S (S m))) == inject_Z (Z.of_nat (S m)) + 1).
+      { replace (Z.of_nat (S (S m))) with (Z.of_nat (S m) + 1)%Z by lia.
+        rewrite inject_Z_plus. reflexivity. }
+      rewrite Hinj. ring. }
+  intro n. unfold geom_fps. destruct n as [|m].
+  - exact H0.
+  - apply (qcancel (inject_Z (Z.of_nat (S m)))); [ apply Hnz | ].
+    rewrite (Hrec m). exact (Hps m).
+Qed.
+
+(** Проверка-следствие: сама geom удовлетворяет ОДУ h'=h·geom (geom'=geom·geom). *)
+Lemma geom_satisfies_ode : forall n,
+  fps_deriv geom_fps n == fps_mul geom_fps geom_fps n.
+Proof.
+  intro n. unfold fps_deriv, fps_mul. rewrite conv_ones.
+  (* inject_Z(S n) * geom(S n) == partial_sum geom n;  geom≡1 ⟹ (n+1)·1 == Σ 1 = n+1 *)
+  unfold geom_fps.
+  assert (Hsum : partial_sum (fun _ : nat => (1:Q)) n == inject_Z (Z.of_nat (S n))).
+  { induction n as [|m IH].
+    - reflexivity.
+    - change (partial_sum (fun _ : nat => (1:Q)) (S m))
+        with (partial_sum (fun _ : nat => (1:Q)) m + 1).
+      rewrite IH.
+      replace (Z.of_nat (S (S m))) with (Z.of_nat (S m) + 1)%Z by lia.
+      rewrite inject_Z_plus. reflexivity. }
+  rewrite Hsum. ring.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions geom_inverse_fps.
 Print Assumptions geom_not_polynomial.
+Print Assumptions exp_fps_deriv.
+Print Assumptions log1m_deriv.
+Print Assumptions ode_geom_unique.
 
 (* ================================================================== *)
 (*  СВОДКА (веха 1 слоя «функция-как-процесс»): FPS = коэффициент-      *)

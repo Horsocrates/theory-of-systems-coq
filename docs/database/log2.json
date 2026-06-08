@@ -221,7 +221,7 @@
     "title": "Function-as-process: formal power series = coefficient-process; H1 lifted to the function level",
     "topic": "FPS := nat->Q reifies an analytic function f(x)=Sum c_n x^n as its Taylor-coefficient process. FPS algebra (fps_add/neg/sub/scale, fps_mul := conv [Cauchy product], fps_deriv); reified functions geom_fps (=1/(1-x), all c_n=1), exp_fps (=1/n!), log1m_fps (=-ln(1-x), c_{Sk}=1/(k+1)). The Element/role-limit boundary at the FUNCTION level via is_polynomial: fps_one/fps_X are polynomials (Element, terminating coefficient-process); geom_fps/exp_fps are NOT (role-limit, non-terminating) — direct H1-at-function-level witnesses. Flagship: geom_inverse_fps — the geometric's defining identity (1-X)*geom == fps_one proved FORMALLY at the coefficient level (convolution of (1,-1,0,..) with (1,1,1,..) = (1,0,0,..)). All axiom-free.",
     "role": "First deliverable of the function-reification layer (H59 roadmap step 1). Demonstrates 'function = process' concretely + the lifted H1 boundary. Self-contained on CauchyProduct (conv, partial_sum_ext_le) + PowerSeries (Qfact). NEXT: FPS composition + compose exp_fps log1m_fps = geom_fps (c_n=1 recurrence like exp_conv_id) = the formal heart of E∘L; then the analytic eval-bridge → ln_mul horizon.",
-    "qed": 6, "admitted": 0, "axioms": 0,
+    "qed": 12, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith", "Qabs", "Lqa", "Lia", "ZArith", "ToS: CauchyReal", "SeriesConvergence", "CauchyProduct", "PowerSeries"],
     "err": {
       "elements": "коэффициенты cₙ∈Q — конечные данные на каждой стадии n.",
@@ -236,9 +236,14 @@
       {"name": "fps_one_polynomial/fps_X_polynomial", "kind": "Lemma", "role": "Element-сторона: многочлены"},
       {"name": "geom_not_polynomial/exp_fps_not_polynomial", "kind": "Lemma", "role": "★ role-limit: геометрическая/exp НЕ многочлены (H1 на уровне функций)"},
       {"name": "oneminusX_tail_zero", "kind": "Lemma", "role": "хвост Σ(1,−1,0,…) с индекса 1 = 0"},
-      {"name": "geom_inverse_fps", "kind": "Lemma", "role": "★★ (1−X)·(1/(1−x))=1 ФОРМАЛЬНО (коэффициент-уровень, аксиомо-своб.)"}
+      {"name": "geom_inverse_fps", "kind": "Lemma", "role": "★★ (1−X)·(1/(1−x))=1 ФОРМАЛЬНО (коэффициент-уровень, аксиомо-своб.)"},
+      {"name": "exp_fps_deriv/log1m_deriv", "kind": "Lemma", "role": "★ FPS-исчисление: exp'=exp, (−ln(1−x))'=1/(1−x) (реиф. функции уд. своим ОДУ)"},
+      {"name": "conv_ones/qcancel", "kind": "Lemma", "role": "conv·geom=Σ (умн. на 1); сокращение a·x=a⟹x=1"},
+      {"name": "ode_geom_unique", "kind": "Lemma", "role": "★★★ ОДУ h'=h·geom, h(0)=1 ⟹ h=geom (структурное сердце E∘L)"},
+      {"name": "geom_satisfies_ode", "kind": "Lemma", "role": "проверка: geom удовлетворяет h'=h·geom"}
     ],
     "key_lemmas": [
+      {"name": "ode_geom_unique", "analysis": "Структурное сердце E∘L: ОДУ h'=h·geom (= (1−x)h'=h) с h(0)=1 имеет ЕДИНСТВЕННОЕ FPS-решение geom=1/(1−x). Чистый маршрут БЕЗ sparse-свёртки: since geom=ones, conv h geom = partial_sum h (conv_ones), поэтому h'=h·geom даёт рекуррентность (n+1)h(n+1)=Σ_{≤n}h; индукцией Σ_{≤n}h=n+1 ⟹ h(n)=1. Использует qcancel (сокращение). Это conditional-сердце: остаётся показать, что exp∘log1m удовлетворяет ОДУ (цепное правило FPS) ⟹ безусловно compose=geom. Аксиомо-свободно. Реализует растворение E∘L из H58/H59: обструкция была недостроенным объектом (функция-процесс), не стеной.", "tags": ["ode-uniqueness", "formal-heart", "function-as-process", "H59", "E-circ-L", "conv-ones"]},
       {"name": "geom_inverse_fps", "analysis": "Определяющее уравнение геометрической функции `(1−X)·(1/(1−x))=1`, доказанное на уровне КОЭФФИЦИЕНТ-ПРОЦЕССОВ: свёртка Коши (1,−1,0,…)*(1,1,1,…)=(1,0,0,…)=fps_one. Это «1/(1−x) реифицирована как процесс и её уравнение верифицировано формально» — первая конкретная демонстрация H59 (функция-как-процесс). Аксиомо-свободно. На этом же fps_mul=conv позже строится compose exp_fps log1m_fps=geom (cₙ=1) — формальное сердце E∘L.", "tags": ["function-as-process", "geometric", "coefficient-process", "vein-C", "H59", "formal-identity"]},
       {"name": "geom_not_polynomial", "analysis": "Прямой свидетель границы H1 НА УРОВНЕ ФУНКЦИЙ: геометрическая 1/(1−x) — НЕ многочлен (все cₙ=1≠0), т.е. функция-коэффициент-процесс НЕ терминирует ⟹ role-limit. Многочлен (fps_one/fps_X) терминирует ⟹ Element. Та же Element/role-limit граница, что рациональное/иррациональное у чисел, поднятая на уровень функций иерархии число→функция→функционал. Аксиомо-свободно.", "tags": ["element-role-limit", "function-level", "H1-lifted", "polynomial-vs-transcendental"]}
     ],
