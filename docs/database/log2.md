@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**2 files / 21 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=0 / s1=0 / s0=0
+**3 files / 40 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=1 / s1=0 / s0=0
 
 ---
 
@@ -75,4 +75,44 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Uniqueness - score 3 (new-framing).** log2 в битах как Cauchy-ПРОЦЕСС над Q (ln-серия), переобрамляющий DyadicBits: иррациональность log2(нечёт) = процесс (вена C) + диагностика, а не стена-несуществование; log2(2)~~1 базой креста. 0-аксиомно.
 > _Caveat:_ Иррациональность log2(нечёт) и сходимость ln-ряда классичны; уникальность — в P4-объекте (процесс вместо стены) и связке вена-A (точная граница диадического) ∩ вена-C (предел=процесс), не новый матфакт.
+
+---
+
+## #1832 - `src/CauchyProduct.v` - score 2 (methods)
+
+**Mertens' theorem: Cauchy product of series ~~ product of limits, constructively over Q (the ln_mul engine)**
+
+- **Topic.** conv a b n := Sum_{i<=n} a_i b_{n-i}; partial_sum_conv_swap (finite Fubini on the triangle, axiom-free); conv_cauchy (triangle-in-square => the Cauchy product of nonneg abs-bounded series converges); mertens_diff_eq (the difference identity A_n B_n - C_n == Sum a_i (B_n - B_{n-i}), axiom-free) turning the off-diagonal into a controllable block sum; partial_sum_split (the resurrected partial_sum_tail) splitting the off-diagonal at cutoff K; mertens_error_bound (block estimate: head i<=K bounded by small b-blocks at the end, tail i>K majorized by Mb*|a|-tail); and the capstone mertens_cauchy_product : series_limit (conv a b) ~~ cauchy_mul (series_limit a) (series_limit b) via the eps/2 argument.
+- **Role.** The missing real-analysis engine the repo lacked (author Abort-ed partial_sum_tail). Grounds the ln_mul_functional_equation horizon documented in Log2FunctionalEq.v (ln of a product via the Cauchy product). Vein C support. Self-contained on CauchyReal/RealField/SeriesConvergence.
+- **Counts.** Qed 19 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; RealField; SeriesConvergence
+- **E/R/R.** _Elements:_ частичные суммы над Q; член свёртки conv a b n — каждая стадия N конечна и точна. _Roles:_ произведение Коши = роль-перемножение рядов; Fubini = перестановка ролей сумм; предел произведения = роль-предел (Мертенс). _Rules:_ partial_sum-рекуррентность; линейность; Nat.sub_succ_l; расщепление Σ по порогу K; Cauchy-хвосты Σ\|a\|, Σ\|b\| → 0; разностное тождество A_nB_n−C_n = Σ a_i(B_n−B_{n−i}). _P4:_ всё конечно на каждой стадии N (Element); предел произведения — role-limit (Мертенс), строится КАК ПРОЦЕСС, не завершённый объект. 0-аксиомно (только classic; swap и mertens_diff_eq аксиомо-СВОБОДНЫ).
+- **Classical counterpart.** Mertens' theorem (1875): the Cauchy product of two convergent series, one absolutely convergent, converges to the product of the limits. Here proved CONSTRUCTIVELY over Q-Cauchy processes (no R, RealProcess := nat->Q), axiom-free except the global L3 `classic`, and recast as a process-equality (~~). It also RESURRECTS partial_sum_tail, which the repo author explicitly Abort-ed in SeriesConvergence.v:320.
+- **Tags.** mertens, cauchy-product, process, vein-C, constructive-over-Q, methods, resurrected-abort
+
+**Lemmas (12):**
+
+| name | kind | role |
+|---|---|---|
+| `partial_sum_ext_le/partial_sum_plus/partial_sum_minus/partial_sum_scale_r` | Lemma | экстенсиональность + линейность частичной суммы |
+| `partial_sum_conv_swap` | Lemma | ★ конечный Fubini: Σ_n Σ_i = Σ_i по столбцам (аксиомо-СВОБОДНА) |
+| `conv` | Definition | член произведения Коши c_n = Σ_{i≤n} a_i b_{n−i} |
+| `partial_sum_nonneg/partial_sum_le_upper/conv_nonneg` | Lemma | неотрицательность/монотонность |
+| `conv_le_square` | Lemma | ★ треугольник ⊆ квадрат: Σconv ≤ (Σg)(Σh) |
+| `conv_cauchy` | Lemma | ★ сходимость произведения Коши (неотр. абс-огранич. ряды) |
+| `partial_sum_abs_le/partial_sum_block_abs/partial_sum_abs_cauchy` | Lemma | треугольные/блочные оценки модуля + abs-Cauchy |
+| `mertens_diff_eq` | Lemma | ★ разностное тождество A_nB_n−C_n = Σ a_i(B_n−B_{n−i}) (аксиомо-СВОБОДНА) |
+| `partial_sum_S/partial_sum_le_ext` | Lemma | одношаговое разворачивание + поточечная монотонность до N |
+| `partial_sum_split` | Lemma | ★ ВОСКРЕШЁННЫЙ partial_sum_tail: Σ_{i≤n} = Σ_{≤K} + хвост за K |
+| `mertens_error_bound` | Lemma | ★ блочная оценка: голова(≤K)·b-блок + Mb·\|a\|-хвост(>K) |
+| `mertens_cauchy_product` | Theorem | ★★★ МЕРТЕНС: series_limit(conv a b) ~~ (s_l a)·(s_l b) |
+
+**Key lemmas (deep):**
+
+- **`mertens_cauchy_product`** - Теорема Мертенса как РАВЕНСТВО ПРОЦЕССОВ (~~) над Q: предел произведения Коши совпадает с произведением пределов. Капстоун ε/2 на mertens_error_bound: порог K (Коши для Σ\|a\|, хвост за K) и Nb (Коши для Σ\|b\|, блок у конца); при n≥SK+Nb+K обе части < ε/2. Зависит ТОЛЬКО от classic (L3) — конструктивно над Q, без вещественных чисел Coq. Это движок, отсутствовавший в репо: автор репо Abort-нул partial_sum_tail (SeriesConvergence:320), здесь он воскрешён (partial_sum_split) и доведён до полной теоремы. _(mertens, cauchy-product, process-equality, vein-C, constructive-over-Q, epsilon-half)_
+- **`mertens_diff_eq`** - Разностное тождество A_nB_n − C_n == Σ_{i≤n} a_i·(B_n − B_{n−i}) — содержательный поворот, превращающий неуправляемую вне-диагональ Σ_{i+j>n} в БЛОЧНУЮ сумму (хвост B на (n−i,n]). Аксиомо-СВОБОДНА: из partial_sum_conv_swap (Fubini) + выноса множителя + линейности, чистая алгебра над Q. Именно эта переформулировка делает оценку Мертенса конечно-контролируемой. _(difference-identity, axiom-free, off-diagonal, fubini)_
+- **`partial_sum_split`** - Воскрешённый partial_sum_tail: Σ_{i≤n} f == Σ_{i≤K} f + Σ_j f(S(K+j)) (хвост за K), при S K ≤ n. Автор репо явно Abort-нул его («tricky to state cleanly»), обойдя прямой оценкой Cauchy; здесь доказан индукцией по n с ключами Nat.sub_succ_l (S n−S K = S(n−S K)) и K+S(n−S K)=n. Структурный инструмент, без которого вне-диагональ не расщепить на голову/хвост. _(partial-sum-split, resurrected-abort, structural, induction)_
+
+**Uniqueness - score 2 (methods).** Теорема Мертенса (произведение Коши = произведение пределов) КОНСТРУКТИВНО над Q-Cauchy-процессами (без вещественных чисел Coq), 0-аксиомно (только classic), как равенство ПРОЦЕССОВ (~~); воскрешает Abort-нутый автором partial_sum_tail и закрывает горизонт ln_mul.
+> _Caveat:_ Сама теорема Мертенса классична (1875). Уникальность — в конструктивно-над-Q аксиомо-свободной формулировке как process-equality и в том, что движок заполняет реальный пробел репо (брошенный partial_sum_tail, документированный горизонт ln_mul), а НЕ новый матфакт.
 

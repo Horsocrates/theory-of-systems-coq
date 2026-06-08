@@ -1830,3 +1830,4 @@ num	path
 1829	src/zeta/ZetaZeros.v
 1830	src/Log2FunctionalEq.v
 1831	src/Log2Process.v
+1832	src/CauchyProduct.v

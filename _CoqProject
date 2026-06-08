@@ -9,6 +9,7 @@ Architecture_of_Reasoning/ParadoxDissolution.v
 src/AIInterface.v
 src/Archimedean_ERR.v
 src/CauchyProcessBridge.v
+src/CauchyProduct.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v
