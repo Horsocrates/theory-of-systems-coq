@@ -22,12 +22,14 @@
     ДИАГНОСТИКА (P4): функция-как-коэффициент-процесс — Element (многочлен) ⟺ терминирует,
       role-limit (трансцендентная) ⟺ не терминирует.  То же H1, на уровень выше.  0-аксиомно.
 
-    STATUS: 13 Qed, 0 Admitted, 0 axioms (все ключевые аксиомо-СВОБОДНЫ, вкл. fps_deriv_mul).
+    STATUS: 24 Qed, 0 Admitted, 0 axioms (все ключевые аксиомо-СВОБОДНЫ, вкл. fps_deriv_mul, conv_assoc).
             ГОТОВО: (1) FPS-реификация + граница Element/role-limit на уровне функций; (2) FPS-исчисление —
             exp'=exp, (−ln(1−x))'=1/(1−x); (3) СТРУКТУРНОЕ СЕРДЦЕ ode_geom_unique (ОДУ h'=h·geom, h(0)=1 ⟹ h=geom);
             (4) ★ ПРАВИЛО ЛЕЙБНИЦА fps_deriv_mul: (a·b)'=a'·b+a·b' — фундамент цепного правила, тот же Vandermonde-
-            переиндекс, что в exp_conv_rec, аксиомо-СВОБОДЕН.
-            ОСТАЁТСЯ: fps_pow + power rule (g^k)'=k·g^{k-1}·g' (индукция на fps_deriv_mul) → compose + цепное
+            переиндекс, что в exp_conv_rec; (5) ★ КОЛЬЦЕВАЯ СТРУКТУРА: свёртка КОММУТАТИВНА (conv_comm), АССОЦИАТИВНА
+            (conv_assoc — тройная сумма Коши через треугольный Fubini-своп partial_sum_triangle_swap), с единицей
+            fps_one (conv_one_l/r) — FPS есть коммутативное кольцо.  Всё аксиомо-СВОБОДНО.
+            ОСТАЁТСЯ: fps_pow + power rule (g^k)'=k·g^{k-1}·g' (индукция на fps_deriv_mul + кольцо) → compose + цепное
             правило (compose exp_fps log1m_fps уд. h'=h·geom) ⟹ compose=geom (через ode_geom_unique) — формальное
             сердце E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
     Author: Horsocrates | Date: June 2026
@@ -295,6 +297,145 @@ Proof.
   rewrite HA, HB. reflexivity.
 Qed.
 
+(* ================================================================== *)
+(*  ★ КОЛЬЦЕВАЯ СТРУКТУРА FPS: свёртка коммутативна, ассоциативна,      *)
+(*    с единицей fps_one.  (FPS — коммутативное кольцо; фундамент power  *)
+(*    rule и цепного правила.)  Всё аксиомо-СВОБОДНО.                    *)
+(* ================================================================== *)
+
+(** Разворот конечной суммы: Σ_{i≤n} f(n−i) = Σ_{i≤n} f(i).  Голову LHS снимаем
+    через partial_sum_head, хвост переиндексируем (S n − S i = n − i), IH. *)
+Lemma partial_sum_rev : forall (f : nat -> Q) (n : nat),
+  partial_sum (fun i => f (n - i)%nat) n == partial_sum f n.
+Proof.
+  intros f. induction n as [|n IH].
+  - reflexivity.
+  - rewrite partial_sum_head. cbv beta.
+    replace (S n - 0)%nat with (S n) by lia.
+    rewrite (partial_sum_ext_le (fun i => f (S n - S i)%nat) (fun i => f (n - i)%nat) n).
+    + rewrite IH, partial_sum_S. ring.
+    + intros i Hi. replace (S n - S i)%nat with (n - i)%nat by lia. reflexivity.
+Qed.
+
+(** ★ КОММУТАТИВНОСТЬ свёртки: conv a b = conv b a (переиндекс i ↦ n−i). *)
+Lemma conv_comm : forall (a b : FPS) (n : nat), conv a b n == conv b a n.
+Proof.
+  intros a b n. unfold conv.
+  transitivity (partial_sum (fun i => a (n - i)%nat * b (n - (n - i))%nat) n).
+  - symmetry. apply (partial_sum_rev (fun j => a j * b (n - j)%nat) n).
+  - apply partial_sum_ext_le. intros i Hi.
+    replace (n - (n - i))%nat with i by lia. ring.
+Qed.
+
+(** Частичная сумма нулей = 0. *)
+Lemma partial_sum_zero : forall n, partial_sum (fun _ : nat => (0:Q)) n == 0.
+Proof.
+  induction n as [|n IH].
+  - reflexivity.
+  - change (partial_sum (fun _ : nat => (0:Q)) (S n))
+      with (partial_sum (fun _ : nat => (0:Q)) n + 0).
+    rewrite IH. ring.
+Qed.
+
+(** ★ ЛЕВАЯ ЕДИНИЦА: conv fps_one f = f (выживает только член i=0). *)
+Lemma conv_one_l : forall (f : FPS) (n : nat), conv fps_one f n == f n.
+Proof.
+  intros f n. unfold conv. destruct n as [|m].
+  - cbn [partial_sum fps_one]. replace (0 - 0)%nat with 0%nat by lia. ring.
+  - rewrite partial_sum_head. cbv beta.
+    change (fps_one 0%nat) with (1:Q).
+    replace (S m - 0)%nat with (S m) by lia.
+    rewrite (partial_sum_ext_le
+              (fun i => fps_one (S i) * f (S m - S i)%nat) (fun _ => 0) m).
+    + rewrite partial_sum_zero. ring.
+    + intros i Hi. cbn [fps_one]. ring.
+Qed.
+
+(** ★ ПРАВАЯ ЕДИНИЦА (из коммутативности). *)
+Lemma conv_one_r : forall (f : FPS) (n : nat), conv f fps_one n == f n.
+Proof. intros f n. rewrite conv_comm. apply conv_one_l. Qed.
+
+(** ★ Треугольный Fubini-своп: Σ_{i≤n} Σ_{j≤i} F i j == Σ_{j≤n} Σ_{t≤n−j} F (j+t) j.
+    Перегруппировка треугольника {(i,j): j≤i≤n} по столбцу j (i=j+t).  Индукция по n:
+    при шаге верхний предел внутренней суммы S n − j = S(n − j) добавляет ровно F (S n) j. *)
+Lemma partial_sum_triangle_swap : forall (F : nat -> nat -> Q) (n : nat),
+  partial_sum (fun i => partial_sum (fun j => F i j) i) n ==
+  partial_sum (fun j => partial_sum (fun t => F (j + t)%nat j) (n - j)%nat) n.
+Proof.
+  intros F. induction n as [|n IH].
+  - cbn [partial_sum]. replace (0 - 0)%nat with 0%nat by lia.
+    cbn [partial_sum]. replace (0 + 0)%nat with 0%nat by lia. reflexivity.
+  - change (partial_sum (fun i => partial_sum (fun j => F i j) i) (S n))
+      with (partial_sum (fun i => partial_sum (fun j => F i j) i) n
+            + partial_sum (fun j => F (S n) j) (S n)).
+    change (partial_sum (fun j => partial_sum (fun t => F (j + t)%nat j) (S n - j)%nat) (S n))
+      with (partial_sum (fun j => partial_sum (fun t => F (j + t)%nat j) (S n - j)%nat) n
+            + partial_sum (fun t => F (S n + t)%nat (S n)) (S n - S n)%nat).
+    replace (S n - S n)%nat with 0%nat by lia.
+    change (partial_sum (fun t => F (S n + t)%nat (S n)) 0%nat)
+      with (F (S n + 0)%nat (S n)).
+    replace (S n + 0)%nat with (S n) by lia.
+    rewrite (partial_sum_ext_le
+              (fun j => partial_sum (fun t => F (j + t)%nat j) (S n - j)%nat)
+              (fun j => partial_sum (fun t => F (j + t)%nat j) (n - j)%nat + F (S n) j) n).
+    2:{ intros j Hj.
+        replace (S n - j)%nat with (S (n - j)) by lia.
+        change (partial_sum (fun t => F (j + t)%nat j) (S (n - j)))
+          with (partial_sum (fun t => F (j + t)%nat j) (n - j)%nat + F (j + S (n - j))%nat j).
+        replace (j + S (n - j))%nat with (S n) by lia. reflexivity. }
+    rewrite partial_sum_plus.
+    rewrite <- IH.
+    change (partial_sum (fun j => F (S n) j) (S n))
+      with (partial_sum (F (S n)) n + F (S n) (S n)).
+    ring.
+Qed.
+
+(** ★★ АССОЦИАТИВНОСТЬ свёртки: conv (conv a b) c = conv a (conv b c).
+    Обе стороны равны канонической Σ_{j+t≤n} a_j b_t c_{n−j−t}.  Правая — простым
+    выносом a_j (partial_sum_scale); левая — выносом c_{n−i} (partial_sum_scale_r)
+    плюс треугольный своп (i↦(j,t)=(j,i−j)).  Тройная сумма Коши, аксиомо-СВОБОДНО. *)
+Lemma conv_assoc : forall (a b c : FPS) (n : nat),
+  conv (conv a b) c n == conv a (conv b c) n.
+Proof.
+  intros a b c n.
+  transitivity (partial_sum
+    (fun j => partial_sum (fun t => a j * b t * c (n - j - t)%nat) (n - j)%nat) n).
+  - (* conv (conv a b) c n == каноническая *)
+    unfold conv at 1.
+    assert (Hstep : forall i, (i <= n)%nat ->
+              conv a b i * c (n - i)%nat
+              == partial_sum (fun j => a j * b (i - j)%nat * c (n - i)%nat) i).
+    { intros i Hi. unfold conv. symmetry.
+      apply (partial_sum_scale_r (fun j => a j * b (i - j)%nat) (c (n - i)%nat) i). }
+    rewrite (partial_sum_ext_le _ _ n Hstep).
+    rewrite (partial_sum_triangle_swap (fun i j => a j * b (i - j)%nat * c (n - i)%nat) n).
+    apply partial_sum_ext_le. intros j Hj. cbv beta.
+    apply partial_sum_ext_le. intros t Ht. cbv beta.
+    replace ((j + t) - j)%nat with t by lia.
+    replace (n - (j + t))%nat with (n - j - t)%nat by lia. reflexivity.
+  - (* каноническая == conv a (conv b c) n *)
+    symmetry. unfold conv at 1.
+    apply partial_sum_ext_le. intros j Hj. cbv beta. unfold conv.
+    rewrite <- (partial_sum_scale (a j) (fun t => b t * c (n - j - t)%nat) (n - j)%nat).
+    apply partial_sum_ext_le. intros t Ht. cbv beta.
+    rewrite Qmult_assoc. reflexivity.
+Qed.
+
+(* ---- fps_eq-обёртки: FPS — коммутативное кольцо с единицей fps_one ---- *)
+
+Lemma fps_mul_comm : forall a b, fps_eq (fps_mul a b) (fps_mul b a).
+Proof. intros a b n. apply conv_comm. Qed.
+
+Lemma fps_mul_one_l : forall f, fps_eq (fps_mul fps_one f) f.
+Proof. intros f n. apply conv_one_l. Qed.
+
+Lemma fps_mul_one_r : forall f, fps_eq (fps_mul f fps_one) f.
+Proof. intros f n. apply conv_one_r. Qed.
+
+Lemma fps_mul_assoc : forall a b c,
+  fps_eq (fps_mul (fps_mul a b) c) (fps_mul a (fps_mul b c)).
+Proof. intros a b c n. unfold fps_mul. apply conv_assoc. Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions geom_inverse_fps.
 Print Assumptions geom_not_polynomial.
@@ -302,6 +443,8 @@ Print Assumptions exp_fps_deriv.
 Print Assumptions log1m_deriv.
 Print Assumptions ode_geom_unique.
 Print Assumptions fps_deriv_mul.
+Print Assumptions conv_comm.
+Print Assumptions conv_assoc.
 
 (* ================================================================== *)
 (*  СВОДКА (веха 1 слоя «функция-как-процесс»): FPS = коэффициент-      *)

@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**6 files / 91 Qed.** Score distribution: s5=0 / s4=0 / s3=3 / s2=3 / s1=0 / s0=0
+**6 files / 102 Qed.** Score distribution: s5=0 / s4=0 / s3=3 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -210,14 +210,14 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Function-as-process: formal power series = coefficient-process; H1 lifted to the function level**
 
 - **Topic.** FPS := nat->Q reifies an analytic function f(x)=Sum c_n x^n as its Taylor-coefficient process. FPS algebra (fps_add/neg/sub/scale, fps_mul := conv [Cauchy product], fps_deriv); reified functions geom_fps (=1/(1-x), all c_n=1), exp_fps (=1/n!), log1m_fps (=-ln(1-x), c_{Sk}=1/(k+1)). The Element/role-limit boundary at the FUNCTION level via is_polynomial: fps_one/fps_X are polynomials (Element, terminating coefficient-process); geom_fps/exp_fps are NOT (role-limit, non-terminating) — direct H1-at-function-level witnesses. Flagship: geom_inverse_fps — the geometric's defining identity (1-X)*geom == fps_one proved FORMALLY at the coefficient level (convolution of (1,-1,0,..) with (1,1,1,..) = (1,0,0,..)). All axiom-free.
-- **Role.** First deliverable of the function-reification layer (H59 roadmap step 1). Demonstrates 'function = process' concretely + the lifted H1 boundary. Self-contained on CauchyProduct (conv, partial_sum_ext_le) + PowerSeries (Qfact). NEXT: FPS composition + compose exp_fps log1m_fps = geom_fps (c_n=1 recurrence like exp_conv_id) = the formal heart of E∘L; then the analytic eval-bridge → ln_mul horizon.
-- **Counts.** Qed 13 / Admitted 0 / axioms 0
+- **Role.** Function-reification layer (H59 roadmap). Demonstrates 'function = process' concretely + the lifted H1 boundary + FPS calculus (exp'=exp, log1m'=geom), the ODE-uniqueness structural heart (ode_geom_unique), the Leibniz product rule (fps_deriv_mul), and the FPS COMMUTATIVE-RING structure: convolution is commutative (conv_comm), associative (conv_assoc — Cauchy-product associativity, the triple sum Σ_{j+t≤n} a·b·c, via a triangular Fubini swap partial_sum_triangle_swap the repo did not previously have), with unit fps_one (conv_one_l/r). All axiom-free. NEXT: fps_pow + the power rule (g^k)'=k·g^{k-1}·g' (induction on fps_deriv_mul + ring) → FPS composition + chain rule → compose exp_fps log1m_fps = geom_fps = the formal heart of E∘L; then the analytic eval-bridge → ln_mul horizon.
+- **Counts.** Qed 24 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; SeriesConvergence; CauchyProduct; ExpFunctionalEquation; PowerSeries
 - **E/R/R.** _Elements:_ коэффициенты cₙ∈Q — конечные данные на каждой стадии n. _Roles:_ FPS = роль-ФУНКЦИЯ (реифицированная как коэффициент-процесс); fps_mul = роль-свёртка; (1−X)·geom=1 = определяющая роль обратной геометрической. _Rules:_ свёртка Коши (conv); многочлен ⟺ хвост коэф.≡0 (Element); role-limit ⟺ нет такого хвоста. _P4:_ функция-как-коэффициент-процесс: Element (многочлен) ⟺ терминирует, role-limit (трансцендентная) ⟺ не терминирует. То же H1, на уровень выше. 0-аксиомно.
 - **Classical counterpart.** Formal power series and the identity (1-x)*(1/(1-x))=1 are classical. NEW: their use to REIFY an analytic function as a coefficient-PROCESS (nat->Q) inside the ToS process-ontology — the first step of H59's program (functions = the next finitization frontier), lifting the H1 Element/role-limit boundary one level up the object hierarchy number->function->functional (polynomial=Element, transcendental=role-limit).
 - **Tags.** function-as-process, formal-power-series, coefficient-process, H59, vein-C, new-framing, element-role-limit
 
-**Lemmas (12):**
+**Lemmas (18):**
 
 | name | kind | role |
 |---|---|---|
@@ -233,12 +233,19 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `ode_geom_unique` | Lemma | ★★★ ОДУ h'=h·geom, h(0)=1 ⟹ h=geom (структурное сердце E∘L) |
 | `geom_satisfies_ode` | Lemma | проверка: geom удовлетворяет h'=h·geom |
 | `fps_deriv_mul` | Lemma | ★ ПРАВИЛО ЛЕЙБНИЦА (a·b)'=a'·b+a·b' (фундамент цепного правила; Vandermonde как exp_conv_rec; аксиомо-своб.) |
+| `partial_sum_rev` | Lemma | разворот конечной суммы Σf(n−i)=Σf(i) (через partial_sum_head) |
+| `conv_comm` | Lemma | ★ КОММУТАТИВНОСТЬ свёртки conv a b=conv b a (переиндекс i↦n−i); аксиомо-своб. |
+| `conv_one_l/conv_one_r` | Lemma | ★ ЕДИНИЦА: conv fps_one f=f (fps_one — мультипликативная единица FPS) |
+| `partial_sum_triangle_swap` | Lemma | ★ треугольный Fubini-своп ΣᵢΣⱼ≤ᵢ=ΣⱼΣₜ≤ₙ₋ⱼ (i=j+t); ядро ассоциативности |
+| `conv_assoc` | Lemma | ★★ АССОЦИАТИВНОСТЬ свёртки (тройная сумма Коши Σ_{j+t≤n} a·b·c через triangle_swap); аксиомо-своб. |
+| `fps_mul_comm/fps_mul_one_l/fps_mul_one_r/fps_mul_assoc` | Lemma | ★ FPS = коммутативное кольцо с единицей fps_one (обёртки conv_*) |
 
 **Key lemmas (deep):**
 
 - **`ode_geom_unique`** - Структурное сердце E∘L: ОДУ h'=h·geom (= (1−x)h'=h) с h(0)=1 имеет ЕДИНСТВЕННОЕ FPS-решение geom=1/(1−x). Чистый маршрут БЕЗ sparse-свёртки: since geom=ones, conv h geom = partial_sum h (conv_ones), поэтому h'=h·geom даёт рекуррентность (n+1)h(n+1)=Σ_{≤n}h; индукцией Σ_{≤n}h=n+1 ⟹ h(n)=1. Использует qcancel (сокращение). Это conditional-сердце: остаётся показать, что exp∘log1m удовлетворяет ОДУ (цепное правило FPS) ⟹ безусловно compose=geom. Аксиомо-свободно. Реализует растворение E∘L из H58/H59: обструкция была недостроенным объектом (функция-процесс), не стеной. _(ode-uniqueness, formal-heart, function-as-process, H59, E-circ-L, conv-ones)_
 - **`geom_inverse_fps`** - Определяющее уравнение геометрической функции `(1−X)·(1/(1−x))=1`, доказанное на уровне КОЭФФИЦИЕНТ-ПРОЦЕССОВ: свёртка Коши (1,−1,0,…)*(1,1,1,…)=(1,0,0,…)=fps_one. Это «1/(1−x) реифицирована как процесс и её уравнение верифицировано формально» — первая конкретная демонстрация H59 (функция-как-процесс). Аксиомо-свободно. На этом же fps_mul=conv позже строится compose exp_fps log1m_fps=geom (cₙ=1) — формальное сердце E∘L. _(function-as-process, geometric, coefficient-process, vein-C, H59, formal-identity)_
 - **`geom_not_polynomial`** - Прямой свидетель границы H1 НА УРОВНЕ ФУНКЦИЙ: геометрическая 1/(1−x) — НЕ многочлен (все cₙ=1≠0), т.е. функция-коэффициент-процесс НЕ терминирует ⟹ role-limit. Многочлен (fps_one/fps_X) терминирует ⟹ Element. Та же Element/role-limit граница, что рациональное/иррациональное у чисел, поднятая на уровень функций иерархии число→функция→функционал. Аксиомо-свободно. _(element-role-limit, function-level, H1-lifted, polynomial-vs-transcendental)_
+- **`conv_assoc`** - Ассоциативность свёртки Коши conv(conv a b)c=conv a(conv b c) — обе стороны равны канонической тройной сумме Σ_{j+t≤n} a_j·b_t·c_{n−j−t}. Правая сторона — простым выносом a_j (partial_sum_scale); левая — выносом c_{n−i} (partial_sum_scale_r) плюс ТРЕУГОЛЬНЫЙ Fubini-своп partial_sum_triangle_swap (перегруппировка треугольника {(i,j):j≤i≤n} по столбцу j через i=j+t, индукция по n). Вместе с conv_comm и conv_one_l/r даёт: FPS — КОММУТАТИВНОЕ КОЛЬЦО с единицей fps_one. Этого в репозитории не было (была только Дирихле-свёртка). Фундамент power rule и цепного правила (нужна одна инстанция ассоциативности g·(gᵏ·g')=(g·gᵏ)·g'=gᵏ⁺¹·g'). Аксиомо-свободно. _(cauchy-product, associativity, commutative-ring, fubini-triangle, function-as-process, H59, E-circ-L)_
 
 **Uniqueness - score 3 (new-framing).** Реификация аналитической функции как коэффициент-ПРОЦЕССА (nat→Q) в процессной онтологии ToS — первый шаг программы H59 (функции = следующий фронтир финитизации), с подъёмом границы Element/role-limit на уровень функций (многочлен/трансцендентная) и формальным доказательством определяющего уравнения геометрической. 0-аксиомно.
 > _Caveat:_ Формальные ряды и тождество (1−x)·1/(1−x)=1 классичны. Уникальность — в ToS-обрамлении (функция=процесс, H1 на уровень выше, машинный свидетель границы на уровне функций), а НЕ новый матфакт. Формальное сердце E∘L (composition, cₙ=1) и аналитический мост — ещё впереди.
