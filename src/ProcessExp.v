@@ -25,14 +25,14 @@
       P4: exp_R(P) — role-limit ПОСЛЕДОВАТЕЛЬНОСТИ role-limit'ов (процесс процессов), но
           diagonal_limit делает из него один Cauchy-процесс.  0-аксиомно (только classic).
 
-    STATUS: 11 Qed, 0 Admitted, 0 axioms (все оценки аксиомо-СВОБОДНЫ; exp_R/exp_meta_cauchy — только classic).
-            ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА ПОСТРОЕНА: exp_R : CauchySeq → CauchySeq — exp от ПРОЦЕССА,
-            корректно определена через diagonal_limit (Completeness).  Оба пилона meta_cauchy готовы:
-            equi-Cauchy (exp_partial_tail_bound[_sym] — равномерный хвост exp над |·|≤B) и cross-closeness
-            (exp_partial_lipschitz + exp_pred_sum_bound — Липшиц по аргументу с мажорантой C=exp_term B 0+MB).
-            Аналитический сердечник (Qpow_diff_bound, exp_term_diff_bound) аксиомо-СВОБОДЕН.
-            ОСТАЁТСЯ для ln_mul: теорема сложения exp_R(P+Q)~~exp_R(P)·exp_R(Q) (поднять рациональный
-            exp_add через непрерывность/diagonal_converges), E∘L=1/(1−x), инъективность exp_R.
+    STATUS: 15 Qed, 0 Admitted, 0 axioms (все оценки аксиомо-СВОБОДНЫ; exp_R/exp_meta_cauchy/exp_R_add — classic).
+            ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА ПОСТРОЕНА + ГОМОМОРФИЗМ: exp_R : CauchySeq → CauchySeq (exp от ПРОЦЕССА,
+            через diagonal_limit) И exp_R_add : exp_R(P+R) ~~ exp_R(P)·exp_R(R) — ТЕОРЕМА СЛОЖЕНИЯ.
+            Пилоны meta_cauchy: equi-Cauchy (exp_partial_tail_bound[_sym]) + cross-closeness (exp_partial_lipschitz
+            + exp_pred_sum_bound).  Теорема сложения — ДИАГОНАЛЬНЫЙ Мертенс: exp_R_diag_mertens_bound (per-n
+            разностная оценка с равномерными мажорантами exp_term BP/BR, через exp_conv_id + mertens_error_bound,
+            АКСИОМО-СВОБОДНА) + капстоун ε/2 на Cauchy-модулях exp-рядов от BP, BR.
+            ОСТАЁТСЯ для ln_mul: E∘L=1/(1−x) (exp_R(L(x))~~геометрический предел) и инъективность exp_R.
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -348,9 +348,194 @@ Qed.
 Definition exp_R (P : CauchySeq) : CauchySeq :=
   diagonal_limit (fun n => exp_limit (P n)) (exp_meta_cauchy P).
 
+(* ================================================================== *)
+(*  К теореме сложения exp_R: равномерная мажоризация + диагональный     *)
+(*  Мертенс (per-n разностная оценка с равномерными константами).        *)
+(* ================================================================== *)
+
+(** |exp_term x k| ≤ exp_term B k при |x| ≤ B. *)
+Lemma exp_term_abs_bound : forall (x B : Q) (k : nat),
+  Qabs x <= B -> Qabs (exp_term x k) <= exp_term B k.
+Proof.
+  intros x B k Hx. rewrite exp_term_abs. unfold exp_term.
+  apply Qmult_le_compat_r.
+  - apply Qpow_le_mono_base; [ apply Qabs_nonneg | exact Hx ].
+  - apply Qlt_le_weak; apply Qinv_lt_0_compat; apply Qfact_pos.
+Qed.
+
+(** Σ|exp_term x| ≤ Σ exp_term B (равномерно по аргументу |x| ≤ B). *)
+Lemma exp_abs_partial_le_B : forall (x B : Q) (N : nat),
+  Qabs x <= B ->
+  partial_sum (fun k => Qabs (exp_term x k)) N <= partial_sum (exp_term B) N.
+Proof.
+  intros x B N Hx. apply partial_sum_le_ext. intros i _.
+  apply exp_term_abs_bound; exact Hx.
+Qed.
+
+(** ★ ДИАГОНАЛЬНЫЙ МЕРТЕНС (аналитическое ядро теоремы сложения exp_R):
+    per-n разностная оценка с РАВНОМЕРНЫМИ мажорантами exp_term BP, exp_term BQ.
+    |Σexp_term(aₙ) n · Σexp_term(bₙ) n − Σexp_term(aₙ+bₙ) n|
+      ≤ MP·(Σexp_term BQ на (n−K,n])  +  MQ·(Σexp_term BP на (K,n]),
+    aₙ=P n, bₙ=Q n.  Через exp_conv_id (Σexp_term(a+b)=Σconv) + mertens_error_bound
+    + поточечную мажоризацию |exp_term(P n)|≤exp_term BP и блочную монотонность. *)
+Lemma exp_R_diag_mertens_bound :
+  forall (P R : CauchySeq) (BP BR MP MR : Q) (K n : nat),
+  (forall m, Qabs (cs_seq P m) <= BP) -> (forall m, Qabs (cs_seq R m) <= BR) ->
+  (forall N, partial_sum (exp_term BP) N <= MP) ->
+  (forall N, partial_sum (exp_term BR) N <= MR) ->
+  (S K <= n)%nat ->
+  Qabs (partial_sum (exp_term (cs_seq P n)) n * partial_sum (exp_term (cs_seq R n)) n
+        - partial_sum (exp_term (cs_seq P n + cs_seq R n)) n)
+  <= MP * (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat)
+   + MR * (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K).
+Proof.
+  intros P R BP BR MP MR K n HBP HBR HMP HMR HKn.
+  assert (HBP0 : 0 <= BP) by (eapply Qle_trans; [ apply Qabs_nonneg | apply (HBP n) ]).
+  assert (HBR0 : 0 <= BR) by (eapply Qle_trans; [ apply Qabs_nonneg | apply (HBR n) ]).
+  assert (HMP0 : 0 <= MP).
+  { eapply Qle_trans; [ | apply (HMP 0%nat) ].
+    change (partial_sum (exp_term BP) 0%nat) with (exp_term BP 0%nat).
+    apply exp_term_nonneg; exact HBP0. }
+  assert (HMR0 : 0 <= MR).
+  { eapply Qle_trans; [ | apply (HMR 0%nat) ].
+    change (partial_sum (exp_term BR) 0%nat) with (exp_term BR 0%nat).
+    apply exp_term_nonneg; exact HBR0. }
+  (* Σexp_term(a+b) n = Σ conv n *)
+  assert (Hconv : partial_sum (exp_term (cs_seq P n + cs_seq R n)) n
+                  == partial_sum (conv (exp_term (cs_seq P n)) (exp_term (cs_seq R n))) n).
+  { apply partial_sum_ext_le. intros i _. symmetry. apply exp_conv_id. }
+  rewrite Hconv.
+  assert (HMbR : forall N, partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) N <= MR).
+  { intro N. eapply Qle_trans; [ apply exp_abs_partial_le_B; apply HBR | apply HMR ]. }
+  eapply Qle_trans.
+  { exact (mertens_error_bound (exp_term (cs_seq P n)) (exp_term (cs_seq R n)) K n MR HKn HMbR). }
+  apply Qplus_le_compat.
+  - (* Part1: Σ|exp_term P n| K · Rблок ≤ MP · BRблок *)
+    assert (HX : partial_sum (fun k => Qabs (exp_term (cs_seq P n) k)) K <= MP)
+      by (eapply Qle_trans; [ apply exp_abs_partial_le_B; apply HBP | apply HMP ]).
+    assert (HYnn : 0 <= partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) n
+                        - partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) (n - K)%nat).
+    { assert (partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) (n - K)%nat
+              <= partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) n)
+        by (apply partial_sum_le_upper; [ intro; apply Qabs_nonneg | lia ]). lra. }
+    assert (HYle : partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) n
+                   - partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) (n - K)%nat
+                   <= partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat)
+      by (apply partial_sum_block_mono; [ lia | intro k; apply exp_term_abs_bound; apply HBR ]).
+    eapply Qle_trans with
+      (MP * (partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) n
+             - partial_sum (fun k => Qabs (exp_term (cs_seq R n) k)) (n - K)%nat)).
+    + apply Qmult_le_compat_r; [ exact HX | exact HYnn ].
+    + rewrite (Qmult_comm MP _), (Qmult_comm MP
+                (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat)).
+      apply Qmult_le_compat_r; [ exact HYle | exact HMP0 ].
+  - (* Part2: MR · Pхвост ≤ MR · BPблок *)
+    rewrite (Qmult_comm MR _), (Qmult_comm MR
+              (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K)).
+    apply Qmult_le_compat_r; [ | exact HMR0 ].
+    apply partial_sum_block_mono; [ lia | intro k; apply exp_term_abs_bound; apply HBP ].
+Qed.
+
+(** ★★★ ТЕОРЕМА СЛОЖЕНИЯ ВЕЩЕСТВЕННОЙ ЭКСПОНЕНТЫ: exp_R(P+R) ~~ exp_R(P)·exp_R(R).
+    Диагональный Мертенс: разность на диагонали ограничена exp_R_diag_mertens_bound
+    с равномерными мажорантами; капстоун ε/2 на Cauchy-модулях exp-рядов от BP, BR. *)
+Theorem exp_R_add : forall (P R : CauchySeq),
+  exp_R (cauchy_add P R) ~~ cauchy_mul (exp_R P) (exp_R R).
+Proof.
+  intros P R.
+  destruct (cauchy_bounded P) as [BP [HBPpos HBP]].
+  destruct (cauchy_bounded R) as [BR [HBRpos HBR]].
+  assert (HBP0 : 0 <= BP) by lra.
+  assert (HBR0 : 0 <= BR) by lra.
+  destruct (cauchy_bounded (exp_limit BP)) as [MP [HMPpos HMP']].
+  destruct (cauchy_bounded (exp_limit BR)) as [MR [HMRpos HMR']].
+  assert (HMP : forall N, partial_sum (exp_term BP) N <= MP).
+  { intro N. assert (Hb := HMP' N).
+    change (cs_seq (exp_limit BP) N) with (partial_sum (exp_term BP) N) in Hb.
+    assert (Hnn : 0 <= partial_sum (exp_term BP) N)
+      by (apply partial_sum_nonneg; intro; apply exp_term_nonneg; exact HBP0).
+    rewrite (Qabs_pos _ Hnn) in Hb. exact Hb. }
+  assert (HMR : forall N, partial_sum (exp_term BR) N <= MR).
+  { intro N. assert (Hb := HMR' N).
+    change (cs_seq (exp_limit BR) N) with (partial_sum (exp_term BR) N) in Hb.
+    assert (Hnn : 0 <= partial_sum (exp_term BR) N)
+      by (apply partial_sum_nonneg; intro; apply exp_term_nonneg; exact HBR0).
+    rewrite (Qabs_pos _ Hnn) in Hb. exact Hb. }
+  assert (HMP0 : 0 <= MP).
+  { eapply Qle_trans; [ | apply (HMP 0%nat) ].
+    change (partial_sum (exp_term BP) 0%nat) with (exp_term BP 0%nat).
+    apply exp_term_nonneg; exact HBP0. }
+  assert (HMR0 : 0 <= MR).
+  { eapply Qle_trans; [ | apply (HMR 0%nat) ].
+    change (partial_sum (exp_term BR) 0%nat) with (exp_term BR 0%nat).
+    apply exp_term_nonneg; exact HBR0. }
+  unfold cauchy_equiv. intros eps Heps.
+  assert (HdP : 0 < eps * (1#2) * / (MR + 1))
+    by (apply Qmult_lt_0_compat; [ apply Qmult_lt_0_compat; lra | apply Qinv_lt_0_compat; lra ]).
+  assert (HdR : 0 < eps * (1#2) * / (MP + 1))
+    by (apply Qmult_lt_0_compat; [ apply Qmult_lt_0_compat; lra | apply Qinv_lt_0_compat; lra ]).
+  destruct (exp_series_cauchy BP (eps * (1#2) * / (MR + 1)) HdP) as [K HK].
+  destruct (exp_series_cauchy BR (eps * (1#2) * / (MP + 1)) HdR) as [NR HNR].
+  exists (S K + NR + K)%nat. intros n Hn.
+  assert (HKn : (S K <= n)%nat) by lia.
+  change (cs_seq (exp_R (cauchy_add P R)) n)
+    with (partial_sum (exp_term (cs_seq P n + cs_seq R n)) n).
+  change (cs_seq (cauchy_mul (exp_R P) (exp_R R)) n)
+    with (partial_sum (exp_term (cs_seq P n)) n * partial_sum (exp_term (cs_seq R n)) n).
+  rewrite Qabs_Qminus.
+  (* ГОЛОВА (R-блок) < ε/2 *)
+  assert (HP1 : MP * (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat)
+                < eps * (1#2)).
+  { assert (Hnn : 0 <= partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat).
+    { assert (partial_sum (exp_term BR) (n - K)%nat <= partial_sum (exp_term BR) n)
+        by (apply partial_sum_le_upper; [ intro; apply exp_term_nonneg; exact HBR0 | lia ]). lra. }
+    assert (Hlt : partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat
+                  < eps * (1#2) * / (MP + 1)).
+    { assert (Hc := HNR n (n - K)%nat ltac:(lia) ltac:(lia)).
+      rewrite (Qabs_pos _ Hnn) in Hc. exact Hc. }
+    assert (Hs1 : MP * (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat)
+                  <= (MP + 1) * (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat))
+      by (apply Qmult_le_compat_r; [ lra | exact Hnn ]).
+    assert (Hs2 : (MP + 1) * (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat)
+                  < (MP + 1) * (eps * (1#2) * / (MP + 1))).
+    { setoid_replace ((MP + 1) * (partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat))
+        with ((partial_sum (exp_term BR) n - partial_sum (exp_term BR) (n - K)%nat) * (MP + 1)) by ring.
+      setoid_replace ((MP + 1) * (eps * (1#2) * / (MP + 1)))
+        with ((eps * (1#2) * / (MP + 1)) * (MP + 1)) by ring.
+      apply Qmult_lt_compat_r; [ lra | exact Hlt ]. }
+    assert (Hs3 : (MP + 1) * (eps * (1#2) * / (MP + 1)) == eps * (1#2)) by (field; lra).
+    lra. }
+  (* ХВОСТ (P-хвост) < ε/2 *)
+  assert (HP2 : MR * (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K) < eps * (1#2)).
+  { assert (Hnn : 0 <= partial_sum (exp_term BP) n - partial_sum (exp_term BP) K).
+    { assert (partial_sum (exp_term BP) K <= partial_sum (exp_term BP) n)
+        by (apply partial_sum_le_upper; [ intro; apply exp_term_nonneg; exact HBP0 | lia ]). lra. }
+    assert (Hlt : partial_sum (exp_term BP) n - partial_sum (exp_term BP) K
+                  < eps * (1#2) * / (MR + 1)).
+    { assert (Hc := HK n K ltac:(lia) ltac:(lia)).
+      rewrite (Qabs_pos _ Hnn) in Hc. exact Hc. }
+    assert (Hs1 : MR * (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K)
+                  <= (MR + 1) * (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K))
+      by (apply Qmult_le_compat_r; [ lra | exact Hnn ]).
+    assert (Hs2 : (MR + 1) * (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K)
+                  < (MR + 1) * (eps * (1#2) * / (MR + 1))).
+    { setoid_replace ((MR + 1) * (partial_sum (exp_term BP) n - partial_sum (exp_term BP) K))
+        with ((partial_sum (exp_term BP) n - partial_sum (exp_term BP) K) * (MR + 1)) by ring.
+      setoid_replace ((MR + 1) * (eps * (1#2) * / (MR + 1)))
+        with ((eps * (1#2) * / (MR + 1)) * (MR + 1)) by ring.
+      apply Qmult_lt_compat_r; [ lra | exact Hlt ]. }
+    assert (Hs3 : (MR + 1) * (eps * (1#2) * / (MR + 1)) == eps * (1#2)) by (field; lra).
+    lra. }
+  eapply Qle_lt_trans.
+  - exact (exp_R_diag_mertens_bound P R BP BR MP MR K n HBP HBR HMP HMR HKn).
+  - lra.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions Qpow_diff_bound.
 Print Assumptions exp_term_diff_bound.
 Print Assumptions exp_partial_lipschitz.
 Print Assumptions exp_partial_tail_bound.
 Print Assumptions exp_meta_cauchy.
+Print Assumptions exp_R_diag_mertens_bound.
+Print Assumptions exp_R_add.

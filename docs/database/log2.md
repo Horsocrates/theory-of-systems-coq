@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**5 files / 68 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=3 / s1=0 / s0=0
+**5 files / 72 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -163,14 +163,14 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Real (process) exponential exp_R : CauchySeq -> CauchySeq, constructively over Q via completeness**
 
 - **Topic.** exp_R P := diagonal_limit (fun n => exp_limit (P n)) (exp_meta_cauchy P). The crux exp_meta_cauchy proves the sequence of processes is meta-Cauchy via two uniform pillars (P bounded by B = cauchy_bounded): equi-Cauchy = uniform exp-tail (exp_partial_tail_bound[_sym]: |Σexp_term x m − Σexp_term x n| ≤ |Σexp_term B m − Σexp_term B n| for |x|≤B, from exp_term_abs + Qpow_le_mono_base + partial_sum_block_abs/mono) + the exp-series Cauchy modulus at B; cross-closeness = argument-Lipschitz (exp_partial_lipschitz: |Σexp_term a − Σexp_term b| ≤ |a−b|·Σexp_term B(pred k), bounded by C=exp_term B 0+MB via exp_pred_sum_bound) + P's Cauchy modulus at eps/C. Analytic kernel: Qpow_diff_bound (|a^(Sk)−b^(Sk)| ≤ (k+1)B^k|a−b|, telescope) and exp_term_diff_bound (÷ factorial), both AXIOM-FREE.
-- **Role.** The major missing construction for the ln_mul horizon: E(L(x)) requires exp of the PROCESS L(x), which exp_limit (rational-arg) cannot express. exp_R supplies it. First real consumer of Completeness.diagonal_limit/meta_cauchy. Vein C (real = process). Builds on PowerSeries (exp_limit/exp_term) + ExpFunctionalEquation (exp_term_0/partial_sum_head/exp_abs_partial_bounded/exp_term_nonneg) + CauchyProduct (partial_sum_block_abs) + Completeness. Remaining: exp_R addition theorem, E∘L=1/(1−x), injectivity.
-- **Counts.** Qed 11 / Admitted 0 / axioms 0
+- **Role.** The major missing construction for the ln_mul horizon: E(L(x)) requires exp of the PROCESS L(x), which exp_limit (rational-arg) cannot express. exp_R supplies it, AND exp_R_add proves it is a homomorphism exp_R(P+R)~~exp_R(P)*exp_R(R) (the addition theorem). First real consumer of Completeness.diagonal_limit/meta_cauchy and of CauchyProduct.mertens_error_bound at the diagonal. Vein C (real = process). Builds on PowerSeries (exp_limit/exp_term) + ExpFunctionalEquation (exp_term_0/partial_sum_head/exp_abs_partial_bounded/exp_term_nonneg/exp_conv_id) + CauchyProduct (partial_sum_block_abs/mertens_error_bound) + Completeness. Remaining for ln_mul: E∘L=1/(1−x), injectivity of exp_R.
+- **Counts.** Qed 15 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; RealField; SeriesConvergence; PowerSeries; CauchyProduct; ExpFunctionalEquation; Completeness
 - **E/R/R.** _Elements:_ рациональные приближения P n; exp_term (P n) k; диагональ exp_limit (P n) — каждая стадия точна над Q. _Roles:_ exp_R = роль-функция (вещественная экспонента); диагональ = роль-предел ПОСЛЕДОВАТЕЛЬНОСТИ процессов (completeness); ограниченность P = роль-граница B. _Rules:_ meta_cauchy = (равномерный хвост exp над \|·\|≤B: exp_partial_tail_bound) ∧ (Липшиц \|a^k−b^k\|≤k·B^{k-1}\|a−b\|: Qpow_diff_bound→exp_partial_lipschitz); diagonal_limit/diagonal_converges. _P4:_ exp_R(P) — role-limit ПОСЛЕДОВАТЕЛЬНОСТИ role-limit'ов (процесс процессов), но diagonal_limit делает один Cauchy-процесс. Аналитическое ядро 0-аксиомно; вся конструкция — только classic.
 - **Classical counterpart.** The real exponential exp : R -> R, here built CONSTRUCTIVELY over Q-Cauchy processes: exp_R : CauchySeq -> CauchySeq (exp of a real number represented as a process), via the diagonal/completeness construction (Completeness.diagonal_limit) of the meta-Cauchy sequence n \|-> exp_limit (P n). The analytic core (power Lipschitz, uniform exp-tail) is axiom-FREE; the whole construction uses only the global L3 `classic`. No real exp existed in the repo (exp_limit was rational-argument only).
 - **Tags.** process-exp, real-exponential, process, vein-C, constructive-over-Q, methods, completeness, diagonal-limit
 
-**Lemmas (9):**
+**Lemmas (12):**
 
 | name | kind | role |
 |---|---|---|
@@ -183,13 +183,17 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `exp_partial_tail_bound[_sym]` | Lemma | ★ ПИЛОН equi-Cauchy: равномерный хвост exp над \|·\|≤B (АКСИОМО-СВОБОДНА) |
 | `exp_meta_cauchy` | Lemma | ★★ СБОРКА: (fun n => exp_limit (P n)) — meta-Cauchy (оба пилона + Cauchy-модули) |
 | `exp_R` | Definition | ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА: exp_R P := diagonal_limit (fun n => exp_limit (P n)) |
+| `exp_term_abs_bound/exp_abs_partial_le_B` | Lemma | равномерная мажоризация \|exp_term x\|≤exp_term B, Σ\|exp_term x\|≤Σexp_term B |
+| `exp_R_diag_mertens_bound` | Lemma | ★ диагональный Мертенс: per-n разностная оценка с равномерн. мажорантами (АКСИОМО-СВОБОДНА) |
+| `exp_R_add` | Theorem | ★★★ ТЕОРЕМА СЛОЖЕНИЯ: exp_R(P+R) ~~ exp_R(P)·exp_R(R) (гомоморфизм) |
 
 **Key lemmas (deep):**
 
+- **`exp_R_add`** - Теорема сложения вещественной экспоненты: exp_R(P+R) ~~ exp_R(P)·exp_R(R) — exp от ПРОЦЕССА является ГОМОМОРФИЗМОМ (Q-Cauchy реалы, +)→(·). Доказательство — ДИАГОНАЛЬНЫЙ Мертенс: на диагонали n разность Σexp_term(Pn)·Σexp_term(Rn) − Σexp_term(Pn+Rn) ЕСТЬ Мертенс-блок (через exp_conv_id: Σexp_term(a+b)=Σconv) и ограничена exp_R_diag_mertens_bound с РАВНОМЕРНЫМИ мажорантами exp_term BP/BR (\|Pn\|≤BP,\|Rn\|≤BR); капстоун ε/2 на Cauchy-модулях exp-рядов от BP,BR. Зависит только от classic. Это ключевое свойство для маршрута ln_mul (E(L(x)+L(y))=E(L(x))E(L(y))). _(addition-theorem, homomorphism, diagonal-mertens, process-exp, vein-C)_
 - **`exp_R`** - Вещественная (процессная) экспонента exp от ПРОЦЕССА P : CauchySeq → CauchySeq — конструкция, отсутствовавшая в репо (был только exp_limit рационального аргумента). Определена как diagonal_limit последовательности exp_limit(P n) — exp от рациональных приближений. Это то, что нужно для E(L(x)) в маршруте ln_mul (L(x) — процесс). Зависит только от classic; аналитическое ядро аксиомо-свободно. Образец P4: вещественное = процесс, exp вещественного = role-limit последовательности процессов, сведённый completeness'ом к одному Cauchy-процессу. _(process-exp, real-exponential, diagonal-limit, completeness, vein-C, constructive-over-Q)_
 - **`exp_meta_cauchy`** - Сборочный крест: доказывает meta_cauchy для (fun n => exp_limit (P n)) — два РАВНОМЕРНЫХ пилона. equi-Cauchy: хвост exp-ряда равномерно мал для всех аргументов \|P k\|≤B (exp_partial_tail_bound_sym мажорирует хвостом exp_term B, чей Cauchy-модуль даёт N1). cross-closeness: близкие аргументы → близкие суммы (exp_partial_lipschitz, мажоранта C=exp_term B 0+MB), P's Cauchy-модуль при ε/C даёт N2. N=N1+N2. Демонстрирует, что completeness-машина diagonal_limit реально применима. _(meta-cauchy, equi-cauchy, cross-closeness, uniform-bounds, assembly)_
 - **`Qpow_diff_bound`** - Аналитический сердечник, АКСИОМО-СВОБОДНЫЙ: \|a^(k+1)−b^(k+1)\| ≤ (k+1)·B^k·\|a−b\| при \|a\|,\|b\|≤B. Телескоп степеней a^(k+2)−b^(k+2)=a(a^(k+1)−b^(k+1))+(a−b)b^(k+1), индукция по k. Это Липшиц-константа полинома-частичной-суммы exp по аргументу — фундамент пилона cross-closeness. Чистая алгебра над Q, без аксиом. _(power-difference, lipschitz-kernel, telescope, axiom-free)_
 
 **Uniqueness - score 2 (methods).** Вещественная экспонента exp_R : CauchySeq→CauchySeq построена КОНСТРУКТИВНО над Q-Cauchy-процессами (exp вещественного=процесса) через diagonal_limit/completeness, 0-аксиомно (аналитическое ядро аксиомо-свободно, вся конструкция — только classic); снабжает маршрут ln_mul недостающим объектом E(L(x)).
-> _Caveat:_ Вещественная экспонента и её сходимость классичны. Уникальность — в конструктивно-над-Q аксиомо-свободной формулировке (P4: вещественное=процесс, exp=role-limit процессов через completeness) и в роли недостающего движка маршрута ln_mul, а НЕ новый матфакт. Теорема сложения exp_R, E∘L, инъективность — ещё открыты.
+> _Caveat:_ Вещественная экспонента, её сходимость и теорема сложения классичны. Уникальность — в конструктивно-над-Q аксиомо-свободной формулировке (P4: вещественное=процесс, exp=role-limit процессов через completeness; теорема сложения — диагональный Мертенс) и в роли недостающего движка маршрута ln_mul, а НЕ новый матфакт. ГОТОВО: exp_R + теорема сложения. Остаются E∘L=1/(1−x) и инъективность exp_R.
 
