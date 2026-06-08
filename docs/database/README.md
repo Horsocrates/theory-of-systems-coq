@@ -82,7 +82,9 @@ Done: `cs`, `algebra`, `settheory`, `geometry`, `numbertheory`, `category`, `ana
 (root), `lattice`, `zeta`, `physics`, `navier_stokes`, `experimental`, `projective`, `light`,
 `linalg`, `fermions`, `process_qm`, `Architecture_of_Reasoning`, `smalldirs` (14 tiny dirs),
 `foundation` (F-1..F-3, files #161–310 of 266), and `log2` (5 files #1830–1834: the
-log2-as-process pair + the Mertens→exp_R→injectivity tower; see HIGHLIGHTS H58).
+log2-as-process pair + the Mertens→exp_R→injectivity tower; see HIGHLIGHTS **H58**, whose
+addendum carries the E/R/R разбор of the one open piece `E∘L=1/(1−x)` as a **second-order
+finitization boundary** — numbers are reified as processes, functions are not yet).
 
 In progress / pending: `foundation` F-4..F-5 (#311–425), then the giants `process` (340),
 `gauge` (114), `stdlib` (709+); final reconcile of `_files.tsv` numbering. See
