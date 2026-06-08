@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**4 files / 51 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=2 / s1=0 / s0=0
+**4 files / 57 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=2 / s1=0 / s0=0
 
 ---
 
@@ -123,14 +123,14 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Exponential addition theorem E(u+v) ~~ E(u)·E(v) over Q via Mertens (central domino of ln_mul)**
 
 - **Topic.** exp_add_from_conv wires mertens_cauchy_product to exp: it closes ALL analysis (abs-bounds via cauchy_bounded+exp_term_abs, conv-Cauchy via is_cauchy_ext, limit via Mertens) and reduces the exp homomorphism to the pure-algebra identity conv(exp_term u)(exp_term v) n == exp_term(u+v) n. That identity (exp_conv_id) is proved by induction on n: base exp_conv_zero, step via exp_conv_rec — the convolution recurrence inject_Z(S n)*c_{S n} == (u+v)*c_n — from exp_term_ratio (u*A_i=(i+1)A_{i+1}, v*B_j=(j+1)B_{j+1}) plus a head/tail sum reindex (partial_sum_head) collecting the coefficient i+(n+1-i)=n+1. Cancel (n+1)>0 to finish. Capstone exp_add : exp_limit(u+v) ~~ cauchy_mul(exp_limit u)(exp_limit v).
-- **Role.** Central domino of the ln_mul route (see E/R/R разбор): L(x)+L(y)~~L(x⊕y) is additive ⟹ routes through exp, and exp(u+v)=exp(u)exp(v) is exactly Mertens. First real consumer of CauchyProduct.mertens_cauchy_product. Vein C. Builds on PowerSeries (exp_term/exp_limit/exp_series_cauchy) + CauchyProduct (conv/mertens). Remaining ln_mul horizon: E∘L=1/(1−x) + injectivity of E.
-- **Counts.** Qed 11 / Admitted 0 / axioms 0
+- **Role.** Central domino of the ln_mul route (see E/R/R разбор): L(x)+L(y)~~L(x⊕y) is additive ⟹ routes through exp, and exp(u+v)=exp(u)exp(v) is exactly Mertens. First real consumer of CauchyProduct.mertens_cauchy_product. Also completes the RATIONAL exponential as a group homomorphism (Q,+,0,−)→(R,*,1,inv): exp_add (law) + exp_limit_zero (unit E(0)~~1) + exp_neg (inverses E(−u)*E(u)~~1) + exp_limit_wd (Qeq-respect). Vein C. Builds on PowerSeries (exp_term/exp_limit/exp_series_cauchy) + CauchyProduct (conv/mertens). Remaining ln_mul horizon needs REAL (process) exponential exp_R : CauchySeq→CauchySeq (ABSENT from repo — a major construction), its addition theorem, E∘L=1/(1−x), injectivity.
+- **Counts.** Qed 17 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; RealField; SeriesConvergence; PowerSeries; CauchyProduct
 - **E/R/R.** _Elements:_ exp_term x n = xⁿ/n! — каждая стадия точна над Q; свёртка conv. _Roles:_ E = роль-обратная к ln; теорема сложения = роль-гомоморфизм (+ → ·); Мертенс — движок, переносящий покоэффициентное conv в предельное равенство. _Rules:_ exp_term_ratio (u·Aᵢ=(i+1)Aᵢ₊₁); рекуррентность (n+1)cₙ₊₁=(u+v)cₙ; переиндексация сумм (голова/хвост); сокращение (n+1)>0; абс-границы из cauchy_bounded; is_cauchy по поточечному Qeq. _P4:_ E(u+v)~~E(u)E(v) — роль-предел (Мертенс), процесс, не завершённый объект; сведён к конечной покоэффициентной алгебре. 0-аксиомно (только classic).
 - **Classical counterpart.** The exponential addition theorem exp(u+v)=exp(u)exp(v) (equivalently the binomial theorem (u+v)^n = sum C(n,i) u^i v^(n-i) inside the Cauchy product of exp-series). Here proved CONSTRUCTIVELY over Q-Cauchy processes (no R), axiom-free except global L3 `classic`, recast as a process-equality (~~), as the FIRST full application of mertens_cauchy_product. The convolution identity is proved via the factorial recurrence (n+1)c_{n+1}=(u+v)c_n (Vandermonde/Pascal) WITHOUT binomial coefficients.
 - **Tags.** exp-addition, mertens-application, process, vein-C, constructive-over-Q, methods, central-domino
 
-**Lemmas (9):**
+**Lemmas (12):**
 
 | name | kind | role |
 |---|---|---|
@@ -143,6 +143,9 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `exp_conv_rec` | Lemma | ★ рекуррентность свёртки (n+1)cₙ₊₁=(u+v)cₙ (Vandermonde без C(n,i)) |
 | `exp_conv_id` | Lemma | ★ биномиальное тождество conv(Eᵤ)(Eᵥ)n==E_{u+v}n (индукция+сокращение) |
 | `exp_add` | Theorem | ★★★ E(u+v) ~~ E(u)·E(v) — безусловная теорема сложения экспоненты |
+| `Qpow_wd/exp_term_wd/exp_limit_wd` | Lemma | корректность exp над Qeq (роль над классом Qeq) |
+| `exp_partial_zero/exp_limit_zero` | Lemma | ★ единица гомоморфизма: E(0) ~~ 1 |
+| `exp_neg` | Theorem | ★ обратимость: E(−u)·E(u) ~~ 1 (E(−u)=E(u)⁻¹) |
 
 **Key lemmas (deep):**
 

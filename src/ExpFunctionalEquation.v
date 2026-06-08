@@ -23,12 +23,14 @@
     ДИАГНОСТИКА (P4): E(u+v)~~E(u)E(v) — роль-предел (Мертенс), процесс, не объект; здесь
       сведён к конечной покоэффициентной алгебре.  0-аксиомно (только classic).
 
-    STATUS: 11 Qed, 0 Admitted, 0 axioms (только classic; exp_add — изолированно только classic).
-            ГОТОВО: БЕЗУСЛОВНАЯ теорема сложения экспоненты exp_add : E(u+v) ~~ E(u)·E(v) над Q,
-            как равенство процессов — первое полное применение mertens_cauchy_product.  Цепочка:
-            проводка к exp (exp_add_from_conv) + биномиальное тождество свёртки exp_conv_id
-            (рекуррентность (n+1)cₙ₊₁=(u+v)cₙ из exp_term_ratio + переиндексация Vandermonde).
-            ОСТАЁТСЯ (горизонт ln_mul): E∘L=1/(1−x) (композиция рядов) и инъективность E.
+    STATUS: 17 Qed, 0 Admitted, 0 axioms (только classic; exp_add, exp_neg — изолированно только classic).
+            ГОТОВО: (1) БЕЗУСЛОВНАЯ теорема сложения exp_add : E(u+v) ~~ E(u)·E(v) над Q как равенство
+            процессов — первое полное применение mertens_cauchy_product (проводка exp_add_from_conv +
+            биномиальное тождество свёртки exp_conv_id, рекуррентность (n+1)cₙ₊₁=(u+v)cₙ Vandermonde);
+            (2) РАЦИОНАЛЬНЫЙ exp как ГОМОМОРФИЗМ ГРУПП (Q,+,0,−)→(ℝ,·,1,⁻¹): exp_limit_zero (E(0)~~1,
+            единица) + exp_neg (E(−u)·E(u)~~1, обратимость) + exp_limit_wd (корректность над Qeq).
+            ОСТАЁТСЯ для горизонта ln_mul: ВЕЩЕСТВЕННАЯ (процессная) экспонента exp_R : CauchySeq→CauchySeq
+            (в репо ОТСУТСТВУЕТ — крупная конструкция), её теорема сложения, E∘L=1/(1−x), инъективность.
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -273,9 +275,76 @@ Proof.
   intros u v. apply exp_add_from_conv. intro n. apply exp_conv_id.
 Qed.
 
+(* ================================================================== *)
+(*  СЛЕДСТВИЯ: exp_limit как ГОМОМОРФИЗМ ГРУПП (Q,+,0,−) → (ℝ,·,1,⁻¹)    *)
+(*  (рациональный уровень; вместе с exp_add — полный гомоморфизм)        *)
+(* ================================================================== *)
+
+(** Qpow уважает Qeq. *)
+Lemma Qpow_wd : forall (a b : Q) (k : nat), a == b -> Qpow a k == Qpow b k.
+Proof.
+  intros a b k Hab. induction k as [|k IH]; simpl.
+  - reflexivity.
+  - apply Qmult_comp; [ exact Hab | exact IH ].
+Qed.
+
+(** exp_term уважает Qeq по аргументу. *)
+Lemma exp_term_wd : forall (a b : Q) (k : nat), a == b -> exp_term a k == exp_term b k.
+Proof.
+  intros a b k Hab. unfold exp_term.
+  apply Qmult_comp; [ apply Qpow_wd; exact Hab | reflexivity ].
+Qed.
+
+(** exp_limit уважает Qeq (корректно определён как роль над классом Qeq). *)
+Lemma exp_limit_wd : forall a b : Q, a == b -> exp_limit a ~~ exp_limit b.
+Proof.
+  intros a b Hab. unfold cauchy_equiv. intros eps Heps. exists 0%nat. intros n _.
+  change (cs_seq (exp_limit a) n) with (partial_sum (exp_term a) n).
+  change (cs_seq (exp_limit b) n) with (partial_sum (exp_term b) n).
+  assert (Heq : partial_sum (exp_term a) n == partial_sum (exp_term b) n).
+  { apply partial_sum_ext_le. intros i _. apply exp_term_wd. exact Hab. }
+  rewrite Heq.
+  assert (H0 : partial_sum (exp_term b) n - partial_sum (exp_term b) n == 0) by ring.
+  rewrite H0. assert (Q0 : Qabs 0 == 0) by reflexivity. rewrite Q0. exact Heps.
+Qed.
+
+(** Частичные суммы exp-ряда в 0 равны 1. *)
+Lemma exp_partial_zero : forall N, partial_sum (exp_term 0) N == 1.
+Proof.
+  induction N as [|N IH].
+  - change (partial_sum (exp_term 0) 0%nat) with (exp_term 0 0%nat). apply exp_term_0.
+  - change (partial_sum (exp_term 0) (S N))
+      with (partial_sum (exp_term 0) N + exp_term 0 (S N)).
+    rewrite IH, exp_term_zero. ring.
+Qed.
+
+(** ★ Единица гомоморфизма: E(0) ~~ 1. *)
+Lemma exp_limit_zero : exp_limit 0 ~~ cauchy_one.
+Proof.
+  unfold cauchy_equiv. intros eps Heps. exists 0%nat. intros n _.
+  change (cs_seq (exp_limit 0) n) with (partial_sum (exp_term 0) n).
+  change (cs_seq cauchy_one n) with 1.
+  assert (Hz : partial_sum (exp_term 0) n - 1 == 0) by (rewrite exp_partial_zero; ring).
+  rewrite Hz. assert (Q0 : Qabs 0 == 0) by reflexivity. rewrite Q0. exact Heps.
+Qed.
+
+(** ★ Обратные элементы: E(−u)·E(u) даёт 1, т.е. E(u) обратима, E(−u) = E(u)⁻¹.
+    (Следствие exp_add + exp_limit_zero — exp_limit НЕ обращается в 0.) *)
+Theorem exp_neg : forall u : Q,
+  cauchy_mul (exp_limit u) (exp_limit (- u)) ~~ cauchy_one.
+Proof.
+  intro u.
+  eapply cauchy_equiv_trans.
+  - apply cauchy_equiv_sym. apply exp_add.
+  - eapply cauchy_equiv_trans.
+    + apply exp_limit_wd with (b := 0). ring.
+    + apply exp_limit_zero.
+Qed.
+
 (** Аудит аксиом: должно быть ТОЛЬКО classic. *)
 Print Assumptions exp_add_from_conv.
 Print Assumptions exp_add.
+Print Assumptions exp_neg.
 
 (* ================================================================== *)
 (*  СВОДКА: БЕЗУСЛОВНАЯ теорема сложения экспоненты exp_add ГОТОВА        *)
