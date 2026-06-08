@@ -22,16 +22,17 @@
     ДИАГНОСТИКА (P4): функция-как-коэффициент-процесс — Element (многочлен) ⟺ терминирует,
       role-limit (трансцендентная) ⟺ не терминирует.  То же H1, на уровень выше.  0-аксиомно.
 
-    STATUS: 24 Qed, 0 Admitted, 0 axioms (все ключевые аксиомо-СВОБОДНЫ, вкл. fps_deriv_mul, conv_assoc).
+    STATUS: 26 Qed, 0 Admitted, 0 axioms (все ключевые аксиомо-СВОБОДНЫ, вкл. fps_deriv_mul, conv_assoc, fps_pow_deriv).
             ГОТОВО: (1) FPS-реификация + граница Element/role-limit на уровне функций; (2) FPS-исчисление —
             exp'=exp, (−ln(1−x))'=1/(1−x); (3) СТРУКТУРНОЕ СЕРДЦЕ ode_geom_unique (ОДУ h'=h·geom, h(0)=1 ⟹ h=geom);
-            (4) ★ ПРАВИЛО ЛЕЙБНИЦА fps_deriv_mul: (a·b)'=a'·b+a·b' — фундамент цепного правила, тот же Vandermonde-
-            переиндекс, что в exp_conv_rec; (5) ★ КОЛЬЦЕВАЯ СТРУКТУРА: свёртка КОММУТАТИВНА (conv_comm), АССОЦИАТИВНА
-            (conv_assoc — тройная сумма Коши через треугольный Fubini-своп partial_sum_triangle_swap), с единицей
-            fps_one (conv_one_l/r) — FPS есть коммутативное кольцо.  Всё аксиомо-СВОБОДНО.
-            ОСТАЁТСЯ: fps_pow + power rule (g^k)'=k·g^{k-1}·g' (индукция на fps_deriv_mul + кольцо) → compose + цепное
-            правило (compose exp_fps log1m_fps уд. h'=h·geom) ⟹ compose=geom (через ode_geom_unique) — формальное
-            сердце E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
+            (4) ★ ПРАВИЛО ЛЕЙБНИЦА fps_deriv_mul: (a·b)'=a'·b+a·b' — тот же Vandermonde-переиндекс, что в exp_conv_rec;
+            (5) ★ КОЛЬЦЕВАЯ СТРУКТУРА: свёртка КОММУТАТИВНА (conv_comm), АССОЦИАТИВНА (conv_assoc — тройная сумма Коши
+            через треугольный Fubini-своп partial_sum_triangle_swap), с единицей fps_one (conv_one_l/r) — FPS есть
+            коммутативное кольцо; (6) ★★ ПРАВИЛО СТЕПЕНИ fps_pow_deriv: (gᵏ⁺¹)'=(k+1)·gᵏ·g' (индукция поверх Лейбница +
+            кольцо).  Всё аксиомо-СВОБОДНО.  Исчисление FPS завершено.
+            ОСТАЁТСЯ: compose (f∘g при g(0)=0, конечная усечённость) + цепное правило (f∘g)'=(f'∘g)·g' → compose exp_fps
+            log1m_fps уд. h'=h·geom (exp'=exp, log1m'=geom) ⟹ compose=geom (через ode_geom_unique) — формальное сердце
+            E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -436,6 +437,68 @@ Lemma fps_mul_assoc : forall a b c,
   fps_eq (fps_mul (fps_mul a b) c) (fps_mul a (fps_mul b c)).
 Proof. intros a b c n. unfold fps_mul. apply conv_assoc. Qed.
 
+(* ================================================================== *)
+(*  ★ СТЕПЕНЬ FPS и ПРАВИЛО СТЕПЕНИ: (gᵏ⁺¹)' = (k+1)·gᵏ·g'             *)
+(*    Индукция по k поверх правила Лейбница fps_deriv_mul + кольцо.      *)
+(* ================================================================== *)
+
+(** k-я степень ряда: g⁰ = 1, gᵏ⁺¹ = g·gᵏ. *)
+Fixpoint fps_pow (g : FPS) (k : nat) : FPS :=
+  match k with
+  | O => fps_one
+  | S k' => fps_mul g (fps_pow g k')
+  end.
+
+(** ★★ ПРАВИЛО СТЕПЕНИ (coefficient-уровень): (gᵏ⁺¹)' = (k+1)·gᵏ·g'.
+    Индукция по k.  Шаг: (g·gᵏ⁺¹)' = g'·gᵏ⁺¹ + g·(gᵏ⁺¹)' [Лейбниц]; по IH второй член
+    = g·((k+1)·gᵏ·g') = (k+1)·(g·gᵏ)·g' = (k+1)·gᵏ⁺¹·g' [вынос скаляра + АССОЦИАТИВНОСТЬ];
+    первый член = gᵏ⁺¹·g' [КОММУТАТИВНОСТЬ]; сумма (1+(k+1))·gᵏ⁺¹·g' = (k+2)·gᵏ⁺¹·g'. *)
+Lemma fps_pow_deriv : forall (g : FPS) (k : nat) (n : nat),
+  fps_deriv (fps_pow g (S k)) n
+  == inject_Z (Z.of_nat (S k)) * conv (fps_pow g k) (fps_deriv g) n.
+Proof.
+  intros g k. induction k as [|k IH].
+  - (* база k=0: (g¹)' = 1·g⁰·g' = g' *)
+    intros n.
+    change (fps_deriv (fps_pow g (S 0)) n)
+      with (inject_Z (Z.of_nat (S n)) * conv g fps_one (S n)).
+    rewrite (conv_one_r g (S n)).
+    change (conv (fps_pow g 0) (fps_deriv g) n)
+      with (conv fps_one (fps_deriv g) n).
+    rewrite (conv_one_l (fps_deriv g) n).
+    assert (H1 : inject_Z (Z.of_nat (S 0)) == 1) by reflexivity.
+    rewrite H1. unfold fps_deriv. ring.
+  - (* шаг *)
+    intros n.
+    change (fps_deriv (fps_pow g (S (S k))) n)
+      with (inject_Z (Z.of_nat (S n)) * conv g (fps_pow g (S k)) (S n)).
+    rewrite (fps_deriv_mul g (fps_pow g (S k)) n).
+    assert (Hconv_g : conv g (fps_deriv (fps_pow g (S k))) n
+                      == inject_Z (Z.of_nat (S k))
+                         * conv g (conv (fps_pow g k) (fps_deriv g)) n).
+    { unfold conv at 1 2.
+      rewrite <- (partial_sum_scale (inject_Z (Z.of_nat (S k)))
+                   (fun i => g i * conv (fps_pow g k) (fps_deriv g) (n - i)%nat) n).
+      apply partial_sum_ext_le. intros i Hi.
+      rewrite (IH (n - i)%nat). ring. }
+    rewrite Hconv_g.
+    rewrite <- (conv_assoc g (fps_pow g k) (fps_deriv g) n).
+    change (conv (conv g (fps_pow g k)) (fps_deriv g) n)
+      with (conv (fps_pow g (S k)) (fps_deriv g) n).
+    rewrite (conv_comm (fps_deriv g) (fps_pow g (S k)) n).
+    assert (Hinj : inject_Z (Z.of_nat (S (S k)))
+                   == inject_Z (Z.of_nat (S k)) + 1).
+    { replace (Z.of_nat (S (S k))) with (Z.of_nat (S k) + 1)%Z by lia.
+      rewrite inject_Z_plus. reflexivity. }
+    rewrite Hinj. ring.
+Qed.
+
+(** ★ Правило степени как fps_eq-равенство рядов. *)
+Lemma fps_pow_deriv_eq : forall g k,
+  fps_eq (fps_deriv (fps_pow g (S k)))
+         (fps_scale (inject_Z (Z.of_nat (S k))) (fps_mul (fps_pow g k) (fps_deriv g))).
+Proof. intros g k n. unfold fps_scale, fps_mul. apply fps_pow_deriv. Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions geom_inverse_fps.
 Print Assumptions geom_not_polynomial.
@@ -445,6 +508,7 @@ Print Assumptions ode_geom_unique.
 Print Assumptions fps_deriv_mul.
 Print Assumptions conv_comm.
 Print Assumptions conv_assoc.
+Print Assumptions fps_pow_deriv.
 
 (* ================================================================== *)
 (*  СВОДКА (веха 1 слоя «функция-как-процесс»): FPS = коэффициент-      *)
