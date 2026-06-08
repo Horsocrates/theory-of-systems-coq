@@ -75,13 +75,14 @@ index stays complete.
 
 ## Status
 
-Built incrementally, cluster by cluster. **543 files / 7,360 Qed catalogued so far** across
-22 shards (see `INDEX.md` and `_uniqueness_ranked.md`).
+Built incrementally, cluster by cluster. **546 files / 7,417 Qed catalogued so far** across
+23 shards (see `INDEX.md` and `_uniqueness_ranked.md`).
 
 Done: `cs`, `algebra`, `settheory`, `geometry`, `numbertheory`, `category`, `analysis`, `src`
 (root), `lattice`, `zeta`, `physics`, `navier_stokes`, `experimental`, `projective`, `light`,
 `linalg`, `fermions`, `process_qm`, `Architecture_of_Reasoning`, `smalldirs` (14 tiny dirs),
-`foundation` (F-1..F-3, files #161–310 of 266), and `log2` (the log2-as-process pair).
+`foundation` (F-1..F-3, files #161–310 of 266), and `log2` (5 files #1830–1834: the
+log2-as-process pair + the Mertens→exp_R→injectivity tower; see HIGHLIGHTS H58).
 
 In progress / pending: `foundation` F-4..F-5 (#311–425), then the giants `process` (340),
 `gauge` (114), `stdlib` (709+); final reconcile of `_files.tsv` numbering. See
