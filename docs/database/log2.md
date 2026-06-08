@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**5 files / 78 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=3 / s1=0 / s0=0
+**6 files / 84 Qed.** Score distribution: s5=0 / s4=0 / s3=3 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -202,4 +202,38 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Uniqueness - score 2 (methods).** Вещественная экспонента exp_R : CauchySeq→CauchySeq построена КОНСТРУКТИВНО над Q-Cauchy-процессами (exp вещественного=процесса) через diagonal_limit/completeness, 0-аксиомно (аналитическое ядро аксиомо-свободно, вся конструкция — только classic); снабжает маршрут ln_mul недостающим объектом E(L(x)).
 > _Caveat:_ Вещественная экспонента, её сходимость и теорема сложения классичны. Уникальность — в конструктивно-над-Q аксиомо-свободной формулировке (P4: вещественное=процесс, exp=role-limit процессов через completeness; теорема сложения — диагональный Мертенс) и в роли недостающего движка маршрута ln_mul, а НЕ новый матфакт. ГОТОВО: exp_R + теорема сложения + гомоморфизм групп + ИНЪЕКТИВНОСТЬ. Остаётся ТОЛЬКО E∘L=1/(1−x) для замыкания ln_mul.
+
+---
+
+## #1835 - `src/FormalPowerSeries.v` - score 3 (new-framing)
+
+**Function-as-process: formal power series = coefficient-process; H1 lifted to the function level**
+
+- **Topic.** FPS := nat->Q reifies an analytic function f(x)=Sum c_n x^n as its Taylor-coefficient process. FPS algebra (fps_add/neg/sub/scale, fps_mul := conv [Cauchy product], fps_deriv); reified functions geom_fps (=1/(1-x), all c_n=1), exp_fps (=1/n!), log1m_fps (=-ln(1-x), c_{Sk}=1/(k+1)). The Element/role-limit boundary at the FUNCTION level via is_polynomial: fps_one/fps_X are polynomials (Element, terminating coefficient-process); geom_fps/exp_fps are NOT (role-limit, non-terminating) — direct H1-at-function-level witnesses. Flagship: geom_inverse_fps — the geometric's defining identity (1-X)*geom == fps_one proved FORMALLY at the coefficient level (convolution of (1,-1,0,..) with (1,1,1,..) = (1,0,0,..)). All axiom-free.
+- **Role.** First deliverable of the function-reification layer (H59 roadmap step 1). Demonstrates 'function = process' concretely + the lifted H1 boundary. Self-contained on CauchyProduct (conv, partial_sum_ext_le) + PowerSeries (Qfact). NEXT: FPS composition + compose exp_fps log1m_fps = geom_fps (c_n=1 recurrence like exp_conv_id) = the formal heart of E∘L; then the analytic eval-bridge → ln_mul horizon.
+- **Counts.** Qed 6 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; SeriesConvergence; CauchyProduct; PowerSeries
+- **E/R/R.** _Elements:_ коэффициенты cₙ∈Q — конечные данные на каждой стадии n. _Roles:_ FPS = роль-ФУНКЦИЯ (реифицированная как коэффициент-процесс); fps_mul = роль-свёртка; (1−X)·geom=1 = определяющая роль обратной геометрической. _Rules:_ свёртка Коши (conv); многочлен ⟺ хвост коэф.≡0 (Element); role-limit ⟺ нет такого хвоста. _P4:_ функция-как-коэффициент-процесс: Element (многочлен) ⟺ терминирует, role-limit (трансцендентная) ⟺ не терминирует. То же H1, на уровень выше. 0-аксиомно.
+- **Classical counterpart.** Formal power series and the identity (1-x)*(1/(1-x))=1 are classical. NEW: their use to REIFY an analytic function as a coefficient-PROCESS (nat->Q) inside the ToS process-ontology — the first step of H59's program (functions = the next finitization frontier), lifting the H1 Element/role-limit boundary one level up the object hierarchy number->function->functional (polynomial=Element, transcendental=role-limit).
+- **Tags.** function-as-process, formal-power-series, coefficient-process, H59, vein-C, new-framing, element-role-limit
+
+**Lemmas (7):**
+
+| name | kind | role |
+|---|---|---|
+| `FPS/fps_eq/fps_zero/one/X/add/neg/sub/scale/mul/deriv` | Definition | реификация функции + FPS-алгебра (mul=conv) |
+| `geom_fps/exp_fps/log1m_fps` | Definition | реифицированные функции 1/(1−x), exp, −ln(1−x) |
+| `is_polynomial` | Definition | функция-процесс терминирует ⟺ многочлен (Element) |
+| `fps_one_polynomial/fps_X_polynomial` | Lemma | Element-сторона: многочлены |
+| `geom_not_polynomial/exp_fps_not_polynomial` | Lemma | ★ role-limit: геометрическая/exp НЕ многочлены (H1 на уровне функций) |
+| `oneminusX_tail_zero` | Lemma | хвост Σ(1,−1,0,…) с индекса 1 = 0 |
+| `geom_inverse_fps` | Lemma | ★★ (1−X)·(1/(1−x))=1 ФОРМАЛЬНО (коэффициент-уровень, аксиомо-своб.) |
+
+**Key lemmas (deep):**
+
+- **`geom_inverse_fps`** - Определяющее уравнение геометрической функции `(1−X)·(1/(1−x))=1`, доказанное на уровне КОЭФФИЦИЕНТ-ПРОЦЕССОВ: свёртка Коши (1,−1,0,…)*(1,1,1,…)=(1,0,0,…)=fps_one. Это «1/(1−x) реифицирована как процесс и её уравнение верифицировано формально» — первая конкретная демонстрация H59 (функция-как-процесс). Аксиомо-свободно. На этом же fps_mul=conv позже строится compose exp_fps log1m_fps=geom (cₙ=1) — формальное сердце E∘L. _(function-as-process, geometric, coefficient-process, vein-C, H59, formal-identity)_
+- **`geom_not_polynomial`** - Прямой свидетель границы H1 НА УРОВНЕ ФУНКЦИЙ: геометрическая 1/(1−x) — НЕ многочлен (все cₙ=1≠0), т.е. функция-коэффициент-процесс НЕ терминирует ⟹ role-limit. Многочлен (fps_one/fps_X) терминирует ⟹ Element. Та же Element/role-limit граница, что рациональное/иррациональное у чисел, поднятая на уровень функций иерархии число→функция→функционал. Аксиомо-свободно. _(element-role-limit, function-level, H1-lifted, polynomial-vs-transcendental)_
+
+**Uniqueness - score 3 (new-framing).** Реификация аналитической функции как коэффициент-ПРОЦЕССА (nat→Q) в процессной онтологии ToS — первый шаг программы H59 (функции = следующий фронтир финитизации), с подъёмом границы Element/role-limit на уровень функций (многочлен/трансцендентная) и формальным доказательством определяющего уравнения геометрической. 0-аксиомно.
+> _Caveat:_ Формальные ряды и тождество (1−x)·1/(1−x)=1 классичны. Уникальность — в ToS-обрамлении (функция=процесс, H1 на уровень выше, машинный свидетель границы на уровне функций), а НЕ новый матфакт. Формальное сердце E∘L (composition, cₙ=1) и аналитический мост — ещё впереди.
 

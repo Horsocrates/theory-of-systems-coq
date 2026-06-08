@@ -1833,3 +1833,4 @@ num	path
 1832	src/CauchyProduct.v
 1833	src/ExpFunctionalEquation.v
 1834	src/ProcessExp.v
+1835	src/FormalPowerSeries.v

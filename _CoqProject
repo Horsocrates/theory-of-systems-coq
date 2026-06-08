@@ -12,6 +12,7 @@ src/CauchyProcessBridge.v
 src/CauchyProduct.v
 src/ExpFunctionalEquation.v
 src/ProcessExp.v
+src/FormalPowerSeries.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v
