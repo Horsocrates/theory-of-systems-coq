@@ -25,14 +25,14 @@
       P4: exp_R(P) — role-limit ПОСЛЕДОВАТЕЛЬНОСТИ role-limit'ов (процесс процессов), но
           diagonal_limit делает из него один Cauchy-процесс.  0-аксиомно (только classic).
 
-    STATUS: 18 Qed, 0 Admitted, 0 axioms (оценки аксиомо-СВОБОДНЫ; exp_R/_add/_neg/_wd/_zero — только classic).
-            ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА ПОСТРОЕНА + ПОЛНЫЙ ГОМОМОРФИЗМ ГРУПП (ℝ,+,0,−)→(ℝ,·,1,⁻¹) на Q-Cauchy:
-            exp_R : CauchySeq → CauchySeq (exp от ПРОЦЕССА, diagonal_limit); exp_R_add (E(P+R)~~E(P)·E(R), ★),
-            exp_R_zero (E(0)~~1), exp_R_neg (E(P)·E(−P)~~1, обратимость), exp_R_wd (P~~R⟹E(P)~~E(R), корректность).
-            Пилоны meta_cauchy: equi-Cauchy (exp_partial_tail_bound[_sym]) + cross-closeness (exp_partial_lipschitz
-            + exp_pred_sum_bound).  Теорема сложения — ДИАГОНАЛЬНЫЙ Мертенс (exp_R_diag_mertens_bound, аксиомо-своб.,
-            via exp_conv_id + mertens_error_bound + равномерные мажоранты) + капстоун ε/2.
-            ОСТАЁТСЯ для ln_mul: инъективность exp_R (ядро E(d)~~1⟹d~~0) и E∘L=1/(1−x).
+    STATUS: 21 Qed, 0 Admitted, 0 axioms (оценки аксиомо-СВОБОДНЫ; exp_R-семейство — только classic).
+            ★★★ ВЕЩЕСТВЕННАЯ ЭКСПОНЕНТА: ПОСТРОЕНА + ГОМОМОРФИЗМ ГРУПП + ИНЪЕКТИВНА на Q-Cauchy:
+            exp_R : CauchySeq → CauchySeq (exp от ПРОЦЕССА, diagonal_limit); exp_R_add (E(P+R)~~E(P)·E(R)),
+            exp_R_zero/_neg/_wd (единица/обратимость/корректность); exp_R_inj (E(A)~~E(B)⟹A~~B, ★★★).
+            Инъективность — ядро exp_R_inj_kernel (E(D)~~1⟹D~~0): из E(D)~~1 ⟹ E(−D)~~1 (exp_R_neg+сокращ.),
+            знаковое расщепление + монотонная нижняя оценка exp_lower_bound (Σexp_term t≥1+t, t≥0) — ОБХОДИТ
+            режимную проблему без квадратичного хвоста.  Теорема сложения — ДИАГОНАЛЬНЫЙ Мертенс.
+            ОСТАЁТСЯ для ln_mul: ТОЛЬКО E∘L=1/(1−x) (exp_R(ln_proc x)~~geometric_limit x, композиция рядов).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -613,6 +613,96 @@ Proof.
     + apply exp_R_zero.
 Qed.
 
+(* ================================================================== *)
+(*  ИНЪЕКТИВНОСТЬ exp_R (последний рычаг к ln_mul)                       *)
+(* ================================================================== *)
+
+(** Монотонная нижняя оценка: Σ_{k≤n} exp_term t k ≥ 1 + t при t ≥ 0, n ≥ 1
+    (первые два члена 1 и t, остальные ≥ 0). *)
+Lemma exp_lower_bound : forall (t : Q) (n : nat),
+  0 <= t -> (1 <= n)%nat -> 1 + t <= partial_sum (exp_term t) n.
+Proof.
+  intros t n Ht Hn.
+  assert (Het1 : exp_term t 1%nat == t).
+  { unfold exp_term.
+    assert (H1 : Qpow t 1 == t) by (simpl; ring).
+    assert (H2 : Qfact 1 == 1) by (vm_compute; reflexivity).
+    rewrite H1, H2. field. }
+  assert (Hps1 : partial_sum (exp_term t) 1%nat == 1 + t).
+  { change (partial_sum (exp_term t) 1%nat) with (exp_term t 0%nat + exp_term t 1%nat).
+    rewrite (exp_term_0 t), Het1. reflexivity. }
+  rewrite <- Hps1.
+  apply partial_sum_le_upper; [ intro; apply exp_term_nonneg; exact Ht | exact Hn ].
+Qed.
+
+(** ★ ЯДРО ИНЪЕКТИВНОСТИ: E(D) ~~ 1 ⟹ D ~~ 0.
+    Из E(D)~~1 получаем E(−D)~~1 (exp_R_neg + сокращение).  Знаковое расщепление:
+    при D n ≥ 0 нижняя оценка даёт 1+D n ≤ диаг < 1+ε ⟹ D n < ε; при D n < 0 — то же
+    для −D n через диагональ E(−D).  Обходит «режимную» проблему (без квадратичного хвоста). *)
+Theorem exp_R_inj_kernel : forall D : CauchySeq,
+  exp_R D ~~ cauchy_one -> D ~~ cauchy_const 0.
+Proof.
+  intros D HD.
+  assert (HnegD : exp_R (cauchy_neg D) ~~ cauchy_one).
+  { assert (Hmul := exp_R_neg D).
+    assert (Hstep : cauchy_mul (exp_R D) (exp_R (cauchy_neg D)) ~~ exp_R (cauchy_neg D)).
+    { eapply cauchy_equiv_trans.
+      - apply cauchy_mul_compat; [ exact HD | apply cauchy_equiv_refl ].
+      - apply cauchy_mul_one_l. }
+    eapply cauchy_equiv_trans; [ apply cauchy_equiv_sym; exact Hstep | exact Hmul ]. }
+  unfold cauchy_equiv. intros eps Heps.
+  destruct (HD eps Heps) as [N1 HN1].
+  destruct (HnegD eps Heps) as [N2 HN2].
+  exists (S (N1 + N2))%nat. intros n Hn.
+  assert (Hn1 : (1 <= n)%nat) by lia.
+  change (cs_seq (cauchy_const 0) n) with (0 : Q).
+  assert (Hz : cs_seq D n - 0 == cs_seq D n) by ring. rewrite Hz.
+  assert (HD_diag : Qabs (partial_sum (exp_term (cs_seq D n)) n - 1) < eps).
+  { assert (Hc := HN1 n ltac:(lia)).
+    change (cs_seq (exp_R D) n) with (partial_sum (exp_term (cs_seq D n)) n) in Hc.
+    change (cs_seq cauchy_one n) with (1 : Q) in Hc. exact Hc. }
+  assert (HnegD_diag : Qabs (partial_sum (exp_term (- cs_seq D n)) n - 1) < eps).
+  { assert (Hc := HN2 n ltac:(lia)).
+    change (cs_seq (exp_R (cauchy_neg D)) n) with (partial_sum (exp_term (- cs_seq D n)) n) in Hc.
+    change (cs_seq cauchy_one n) with (1 : Q) in Hc. exact Hc. }
+  destruct (Qlt_le_dec (cs_seq D n) 0) as [Hsign | Hsign].
+  - (* D n < 0 : через −D *)
+    assert (Hlow : 1 + (- cs_seq D n) <= partial_sum (exp_term (- cs_seq D n)) n)
+      by (apply exp_lower_bound; [ lra | exact Hn1 ]).
+    assert (Hub : partial_sum (exp_term (- cs_seq D n)) n - 1
+                  <= Qabs (partial_sum (exp_term (- cs_seq D n)) n - 1)) by apply Qle_Qabs.
+    rewrite (Qabs_neg (cs_seq D n)) by lra. lra.
+  - (* D n ≥ 0 *)
+    assert (Hlow : 1 + cs_seq D n <= partial_sum (exp_term (cs_seq D n)) n)
+      by (apply exp_lower_bound; [ exact Hsign | exact Hn1 ]).
+    assert (Hub : partial_sum (exp_term (cs_seq D n)) n - 1
+                  <= Qabs (partial_sum (exp_term (cs_seq D n)) n - 1)) by apply Qle_Qabs.
+    rewrite (Qabs_pos (cs_seq D n)) by exact Hsign. lra.
+Qed.
+
+(** ★★★ ИНЪЕКТИВНОСТЬ exp_R: exp_R A ~~ exp_R B ⟹ A ~~ B.
+    D := A−B; E(D) ~~ E(A)·E(−B) ~~ E(B)·E(−B) ~~ 1 (exp_R_add + Hexp + exp_R_neg),
+    ядро даёт D ~~ 0, т.е. A ~~ B. *)
+Theorem exp_R_inj : forall A B : CauchySeq, exp_R A ~~ exp_R B -> A ~~ B.
+Proof.
+  intros A B Hexp.
+  assert (Hker : exp_R (cauchy_add A (cauchy_neg B)) ~~ cauchy_one).
+  { eapply cauchy_equiv_trans; [ apply exp_R_add | ].
+    (* cauchy_mul (exp_R A) (exp_R (cauchy_neg B)) ~~ cauchy_one *)
+    eapply cauchy_equiv_trans.
+    - apply cauchy_mul_compat; [ exact Hexp | apply cauchy_equiv_refl ].
+    - apply exp_R_neg. }
+  assert (Hsub := exp_R_inj_kernel _ Hker).
+  (* cauchy_add A (cauchy_neg B) ~~ cauchy_const 0 ⟹ A ~~ B *)
+  unfold cauchy_equiv. intros eps Heps.
+  destruct (Hsub eps Heps) as [N HN]. exists N. intros n Hn.
+  assert (Hc := HN n Hn).
+  change (cs_seq (cauchy_add A (cauchy_neg B)) n) with (cs_seq A n + - cs_seq B n) in Hc.
+  change (cs_seq (cauchy_const 0) n) with (0 : Q) in Hc.
+  assert (Heq : cs_seq A n + - cs_seq B n - 0 == cs_seq A n - cs_seq B n) by ring.
+  rewrite Heq in Hc. exact Hc.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions Qpow_diff_bound.
 Print Assumptions exp_term_diff_bound.
@@ -622,3 +712,4 @@ Print Assumptions exp_meta_cauchy.
 Print Assumptions exp_R_diag_mertens_bound.
 Print Assumptions exp_R_add.
 Print Assumptions exp_R_wd.
+Print Assumptions exp_R_inj.
