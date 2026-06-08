@@ -1793,6 +1793,11 @@ src/foundation/DecidableBoundary.v
 src/foundation/DecidableBoundaryQ.v
 src/foundation/SpectralSolvability.v
 src/foundation/UniversalDiagonal.v
+# dynamic finitization boundary N1/N1+/N1++ + role-limit ladder N2 (commit 1fabcf0)
+src/foundation/DynamicBoundaryDecidable.v
+src/foundation/DynamicBoundaryFrontier.v
+src/foundation/DynamicBoundaryLPO.v
+src/foundation/RoleLimitLadder.v
 src/navier_stokes/AdvectionEnergyConservation.v
 src/crown/BornIsParseval.v
 src/crown/CompressionIsPhysics.v
