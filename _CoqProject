@@ -32,6 +32,9 @@ src/FixedPoint.v
 src/FormationRules.v
 src/GradientDescent.v
 src/HeineBorel_ERR.v
+src/Sqrt2Approx.v
+src/QIntervalNotCompact.v
+src/CantorHeineQ.v
 src/IVT_CauchyReal.v
 src/IVT_ERR.v
 src/InductiveSystems.v
@@ -58,6 +61,7 @@ src/ProcessGeneral.v
 src/ProcessTypes.v
 src/Progress.v
 src/RealField.v
+src/RealFieldApart.v
 src/RealPointMetric.v
 src/RealPointSetoid.v
 src/RealPointTopology.v
@@ -1136,6 +1140,7 @@ src/stdlib/ProcessQMConcrete.v
 src/stdlib/ProcessHilbertSynthesis.v
 # Laplacian All Constants
 src/stdlib/ChebyshevConnection.v
+src/stdlib/ChebyshevLLN.v
 src/stdlib/LaplacianDistinction.v
 src/stdlib/SpectrumConstants.v
 src/stdlib/SpectrumReappearance.v
@@ -1543,6 +1548,7 @@ src/algebra/IndependenceQ23.v
 src/algebra/RationalRootTest.v
 src/algebra/FiniteFieldFp.v
 src/algebra/SolvableGroup.v
+src/algebra/QuinticUnsolvable.v
 src/algebra/AlgebraicClosureProcess.v
 src/analysis/FourierCoefficients.v
 src/analysis/FourierTransform.v
@@ -1893,6 +1899,7 @@ src/cs/LawvereFixedPoint.v
 src/cs/PumpingPigeonhole.v
 src/cs/PumpingRoleLimit.v
 src/cs/PvsNP_Framing.v
+src/cs/RamseyBoundary.v
 src/cs/RecursionTheorem.v
 src/cs/RegularElementFloor.v
 src/cs/RiceRoleLimit.v
