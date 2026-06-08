@@ -1,0 +1,921 @@
+[
+  {
+    "num": 91,
+    "path": "src/cosmology_ext/BigBangProcess.v",
+    "cluster": "cosmology_ext",
+    "classical_counterpart": "Big-Bang cosmology with finite initial conditions and increasing entropy is standard; NEW only as the P4 framing 'no singularity' — the big bang is the first distinction, the initial energy/density finite (a process, not a singular point).",
+    "title": "Big Bang as a process over Q: no singularity, first distinction",
+    "topic": "Initial graph size/energy/density (all finite), density over time, an entropy proxy, no singularity, the big bang as the first distinction, density decreasing, entropy increasing, and the arrow from growth.",
+    "role": "Leaf of the cosmology extension (vein-C-adjacent: no singular initial object). Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "начальный граф (конечный размер/энергия/плотность).",
+      "roles": "Большой взрыв = первое различение (роль); рост графа как стрела времени.",
+      "rules": "no_singularity; initial_energy_finite; entropy_increases; arrow_from_growth.",
+      "p4": "начальное состояние КОНЕЧНО (Element), не сингулярная точка; космология как процесс роста (role-limit)."
+    },
+    "lemmas": [
+      {"name": "initial_graph_size/initial_energy/initial_density/density_at/entropy_proxy", "kind": "Definition", "role": "начальные величины, плотность, энтропия"},
+      {"name": "no_singularity/big_bang_is_first_distinction/initial_density_positive/initial_energy_finite", "kind": "Theorem", "role": "★ нет сингулярности; взрыв = первое различение"},
+      {"name": "density_decreases/entropy_increases/arrow_from_growth/big_bang_process_synthesis", "kind": "Theorem", "role": "плотность падает, энтропия растёт"}
+    ],
+    "key_lemmas": [
+      {"name": "no_singularity", "analysis": "«Нет сингулярности»: начальная энергия/плотность КОНЕЧНЫ (initial_energy_finite), Большой взрыв = первое различение, а не сингулярная точка. Вена-C-смежно: космология как процесс роста графа, без расходящегося начального объекта.", "tags": ["no-singularity", "big-bang", "process", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "new-framing",
+      "claim": "Большой взрыв как процесс над Q: нет сингулярности (конечные начальные величины), взрыв = первое различение, стрела времени из роста графа.",
+      "caveat": "Конечные начальные условия и рост энтропии — стандартная космология; вклад — P4-формулировка «нет сингулярности», не новая космологическая модель."
+    },
+    "tags": ["cosmology", "big-bang", "no-singularity", "process", "new-framing"]
+  },
+  {
+    "num": 92,
+    "path": "src/cosmology_ext/DarkEnergy.v",
+    "cluster": "cosmology_ext",
+    "classical_counterpart": "A cosmological constant from vacuum energy driving expansion is standard cosmology; here only a small Q instance ('no fine tuning', lambda positive, vacuum dominates at large N).",
+    "title": "Dark energy over Q: cosmological constant from vacuum, no fine tuning",
+    "topic": "Vacuum density, lambda from vacuum, matter density, total energy, expansion rate, lambda positive, inflation from a small graph, no fine tuning, vacuum dominates at large N.",
+    "role": "Leaf of the cosmology extension. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "плотности вакуума/материи; Lambda.",
+      "roles": "Lambda = роль (тёмная энергия); вакуум доминирует при большом N.",
+      "rules": "lambda_positive; no_fine_tuning; vacuum_dominates_large_N.",
+      "p4": "конечные плотности над Q (Element); расширение как роль-следствие."
+    },
+    "lemmas": [
+      {"name": "vacuum_density/lambda_from_vacuum/matter_density/total_energy/expansion_rate", "kind": "Definition", "role": "плотности, Lambda, расширение"},
+      {"name": "lambda_positive/lambda_value/inflation_from_small_graph/no_fine_tuning", "kind": "Theorem", "role": "★ Lambda>0, без тонкой настройки"},
+      {"name": "lambda_monotone/expansion_rate_positive/vacuum_dominates_large_N/total_geq_vacuum/lambda_linear/dark_energy_synthesis", "kind": "Theorem", "role": "вакуум доминирует, расширение"}
+    ],
+    "key_lemmas": [
+      {"name": "no_fine_tuning", "analysis": "Lambda положительна без тонкой настройки в этой графовой модели — модельное утверждение над Q, не разрешение реальной проблемы космологической постоянной (ср. cosmological/LambdaFromGraph). Иллюстративно.", "tags": ["dark-energy", "lambda", "no-fine-tuning"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Тёмная энергия над Q: положительная Lambda из вакуума, без тонкой настройки, вакуум доминирует при большом N.",
+      "caveat": "Космологическая постоянная из вакуума стандартна; графовый Q-инстанс иллюстративен, не разрешение проблемы Lambda."
+    },
+    "tags": ["cosmology", "dark-energy", "lambda", "exposition"]
+  },
+  {
+    "num": 93,
+    "path": "src/cosmology_ext/ExpandingGraph.v",
+    "cluster": "cosmology_ext",
+    "classical_counterpart": "An expanding universe with matter diluting and vacuum/dark energy dominating late is standard FRW cosmology; here only a small Q instance with a Hubble proxy.",
+    "title": "Expanding graph over Q: Hubble proxy, matter dilutes, vacuum dominates late",
+    "topic": "A Hubble proxy, cosmological matter/vacuum/total densities, positive expansion, matter dilutes, vacuum constant, dark energy dominates late while matter dominates early, and vacuum fraction grows.",
+    "role": "Leaf of the cosmology extension. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "плотности материи/вакуума; параметр Хаббла.",
+      "roles": "расширение = роль; материя разбавляется, вакуум постоянен.",
+      "rules": "matter_dilutes; vacuum_constant; dark_energy_dominates_late.",
+      "p4": "конечные плотности над Q (Element); расширение как процесс."
+    },
+    "lemmas": [
+      {"name": "hubble/matter_density_cosm/vacuum_density_cosm/total_density_cosm", "kind": "Definition", "role": "Хаббл, плотности"},
+      {"name": "expansion_positive/matter_dilutes/vacuum_constant/dark_energy_dominates_late/matter_dominates_early", "kind": "Theorem", "role": "★ материя разбавляется, вакуум доминирует поздно"},
+      {"name": "hubble_concrete/total_density_100/_2/vacuum_fraction_grows/expanding_graph_synthesis", "kind": "Theorem", "role": "доля вакуума растёт"}
+    ],
+    "key_lemmas": [
+      {"name": "dark_energy_dominates_late", "analysis": "Материя разбавляется, вакуум постоянен → тёмная энергия доминирует на поздних временах — корректная FRW-картина над Q. Стандартная космология, без нового результата.", "tags": ["expansion", "dark-energy", "dilution"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Расширяющийся граф над Q: Хаббл, материя разбавляется, вакуум доминирует поздно, доля вакуума растёт.",
+      "caveat": "Разбавление материи и позднее доминирование тёмной энергии — стандартная FRW-космология; Q-инстанс без нового содержания."
+    },
+    "tags": ["cosmology", "expansion", "hubble", "exposition"]
+  },
+  {
+    "num": 1790,
+    "path": "src/thermal/SecondLaw.v",
+    "cluster": "thermal",
+    "classical_counterpart": "The second law (entropy increases under coupling toward equilibrium, zero flow at equilibrium) is classical thermodynamics; here only a small coupled-mode Q instance.",
+    "title": "Second law over Q: entropy increases under coupling, equilibrium has zero flow",
+    "topic": "A coupled step vs no flow when uncoupled, energy flow under coupling, the gap decreasing, entropy before/after coupling, entropy increasing, and equilibrium with zero variance and no flow.",
+    "role": "Leaf of the thermal branch (parallels physics/ThermodynamicArrow). Self-contained.",
+    "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "связанные моды; энергетический поток; энтропия.",
+      "roles": "второй закон = роль-монотонность энтропии; равновесие как роль-фикс.",
+      "rules": "coupled_flow; entropy_increases; equilibrium_no_flow.",
+      "p4": "конечные шаги над Q (Element); энтропия монотонна; равновесие — нулевой поток."
+    },
+    "lemmas": [
+      {"name": "coupled_step/uncoupled_no_flow/coupled_flow/gap_decreases", "kind": "Definition/Theorem", "role": "связанный шаг, поток, зазор падает"},
+      {"name": "before_coupling_entropy/after_coupling_entropy/entropy_increases", "kind": "Theorem", "role": "★ энтропия растёт при связывании"},
+      {"name": "equilibrium_zero_variance/equilibrium_no_flow/second_law_synthesis", "kind": "Theorem", "role": "равновесие: нулевой поток"}
+    ],
+    "key_lemmas": [
+      {"name": "entropy_increases", "analysis": "Энтропия растёт при связывании мод, равновесие = нулевой поток/дисперсия — корректная Q-формализация второго начала на малой модели. Стандартная термодинамика.", "tags": ["second-law", "entropy", "equilibrium"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Второе начало над Q: энтропия растёт при связывании мод, равновесие = нулевой поток и нулевая дисперсия.",
+      "caveat": "Второе начало термодинамики классично; вклад — Q-формализация на связанных модах, не новый результат."
+    },
+    "tags": ["thermal", "second-law", "entropy", "methods"]
+  },
+  {
+    "num": 1791,
+    "path": "src/thermal/ThermalFromModes.v",
+    "cluster": "thermal",
+    "classical_counterpart": "Temperature as average mode energy, entropy from mode occupation and energy variance is standard statistical mechanics; here only a small Q instance (pure tone vs thermal).",
+    "title": "Thermal from modes over Q: temperature, entropy, variance",
+    "topic": "Total mode energy, temperature, a pure tone vs a thermal spread, active-mode counting, more active modes = more entropy, energy variance, low (thermal) vs high (pure tone) variance, temperature from energy, and same energy / different distribution.",
+    "role": "Leaf of the thermal branch. Self-contained.",
+    "qed": 12, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "энергии мод; температура; занятость мод.",
+      "roles": "температура = роль (средняя энергия); энтропия из числа активных мод.",
+      "rules": "more_active_more_entropy; thermal_low_variance; pure_tone_high_variance.",
+      "p4": "конечные распределения мод над Q (Element); температура/энтропия как роли."
+    },
+    "lemmas": [
+      {"name": "total_energy_modes/temperature/pure_tone_4/thermal_4/omega_4/active_modes_aux/active_modes/sum_sq/sum_list/energy_variance_simple", "kind": "Definition", "role": "энергия, температура, занятость, дисперсия"},
+      {"name": "pure_tone_one_active/thermal_all_active/more_active_more_entropy", "kind": "Theorem", "role": "★ больше активных мод — больше энтропии"},
+      {"name": "thermal_low_variance/pure_tone_high_variance/variance_ordering/temperature_from_energy/temperature_zero/pure_tone_energy/thermal_energy/same_energy_different_distribution/thermal_from_modes_synthesis", "kind": "Theorem", "role": "дисперсия, температура, одна энергия — разные распределения"}
+    ],
+    "key_lemmas": [
+      {"name": "same_energy_different_distribution", "analysis": "Одна и та же энергия может иметь разное распределение по модам (чистый тон vs термальное) → разная энтропия — корректная стат-мех картина над Q. Иллюстративно.", "tags": ["temperature", "entropy", "distribution"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Термальность из мод над Q: температура=средняя энергия, энтропия из числа активных мод, чистый тон vs термальное при равной энергии.",
+      "caveat": "Температура и энтропия из мод — стандартная стат-механика; Q-инстанс без нового содержания."
+    },
+    "tags": ["thermal", "temperature", "entropy", "exposition"]
+  },
+  {
+    "num": 1792,
+    "path": "src/thermal/ThermalSynthesis.v",
+    "cluster": "thermal",
+    "classical_counterpart": "A 3-lemma summary node: heat is equilibrium sound, zero-point energy positive; no new content.",
+    "title": "Thermal synthesis: heat is equilibrium sound (summary node)",
+    "topic": "A tiny grand synthesis: heat is equilibrium sound, zero-point energy is positive.",
+    "role": "Summary node of the thermal branch. Self-contained.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "результаты термальной ветви.",
+      "roles": "узел-синтез: тепло = равновесный звук.",
+      "rules": "heat_is_equilibrium_sound; zero_point_positive.",
+      "p4": "агрегатор (Element); собственного содержания нет."
+    },
+    "lemmas": [
+      {"name": "thermal_grand_synthesis/zero_point_4/zero_point_positive/heat_is_equilibrium_sound", "kind": "Theorem", "role": "★ тепло = равновесный звук"}
+    ],
+    "key_lemmas": [
+      {"name": "heat_is_equilibrium_sound", "analysis": "Узел-агрегатор: тепло отождествлено с равновесным звуком (модами). Собственной уникальности нет.", "tags": ["summary", "thermal"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка термальной ветви: тепло = равновесный звук, нулевая энергия положительна.",
+      "caveat": "Чистый узел-агрегатор; собственного результата нет."
+    },
+    "tags": ["thermal", "summary", "exposition"]
+  },
+  {
+    "num": 151,
+    "path": "src/extraction/GapCertificate.v",
+    "cluster": "extraction",
+    "classical_counterpart": "A computable certificate with a strictly-decreasing error bound guaranteeing a positive limit is a standard interval-arithmetic / certified-numerics device; here applied over Q to the Yang-Mills mass gap.",
+    "title": "Gap certificate over Q: certified-positive mass gap with decreasing error",
+    "topic": "A certificate guaranteeing the gap is positive and improves, a strictly decreasing error bound (3-step example), universality over beta, the gap always above epsilon, multi-beta positivity, convergence, and an interval bracket.",
+    "role": "Certified-numerics leaf bridging the gauge mass-gap to OCaml extraction (with GapCompute/GapExtraction). Self-contained.",
+    "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "сертификат зазора; убывающая граница ошибки.",
+      "roles": "сертификат = роль-гарантия положительности зазора.",
+      "rules": "cert_guarantees_positive; error_bound_strict_decrease; gap_always_above_eps.",
+      "p4": "конечный вычислимый сертификат над Q (Element); зазор как role-limit с гарантированной нижней границей."
+    },
+    "lemmas": [
+      {"name": "cert_guarantees_positive/cert_improves/error_bound_strict_decrease/error_bound_3steps", "kind": "Theorem", "role": "★ сертификат гарантирует положительность"},
+      {"name": "cert_pmg_universal/gap_always_above_eps/multi_beta_gap_pos/gap_converges", "kind": "Theorem", "role": "универсальность по beta, зазор > eps"},
+      {"name": "gap_upper_bound/gap_in_interval/error_at_0/_5/_10", "kind": "Theorem", "role": "интервальная скобка зазора"}
+    ],
+    "key_lemmas": [
+      {"name": "gap_always_above_eps", "analysis": "Сертификат гарантирует, что масс-зазор всегда выше epsilon с убывающей границей ошибки — сертифицированная нижняя оценка зазора (role-limit) над Q, готовая к извлечению. Привязка к gauge/ массовому зазору.", "tags": ["mass-gap", "certificate", "positive"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Сертификат масс-зазора над Q: гарантированная положительность с убывающей границей ошибки, универсальность по beta, интервальная скобка.",
+      "caveat": "Сертифицированные интервальные оценки — стандартная техника; вклад — применение к YM масс-зазору с извлечением, не новый численный метод."
+    },
+    "tags": ["extraction", "mass-gap", "certificate", "methods"]
+  },
+  {
+    "num": 152,
+    "path": "src/extraction/GapCompute.v",
+    "cluster": "extraction",
+    "classical_counterpart": "Computing a Cauchy-convergent quantity with a telescoping/geometric (quarter-power) error bound is standard certified numerics; here applied over Q to the mass gap.",
+    "title": "Gap compute over Q: the mass gap as a certified Cauchy computation",
+    "topic": "A compute_gap function (nonneg, equals the process, positive at beta=1), a quarter-power error bound (nonneg, telescoping, strong/valid/abs), Cauchy step, lower bound, monotonicity, and a gap certificate from the process.",
+    "role": "Computational core of the extraction branch (mass gap). Self-contained.",
+    "qed": 25, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "compute_gap; граница ошибки (степени 1/4).",
+      "roles": "вычисление зазора = роль-процесс; граница ошибки как роль-контроль.",
+      "rules": "compute_gap_eq_process; error_bound_quarter; compute_gap_cauchy_step.",
+      "p4": "каждый шаг вычисления конечен над Q (Element); зазор = Cauchy-процесс с телескопической границей."
+    },
+    "lemmas": [
+      {"name": "compute_gap/_beta1_M0/_nonneg/_eq_process/_pos/_beta1_M1/_beta1_M2", "kind": "Definition/Theorem", "role": "★ compute_gap = процесс, положителен"},
+      {"name": "error_bound/_nonneg/_quarter/_0/_1/_2/step_le_error_bound/compute_gap_cauchy_step/_lower_bound/_monotone/qpow_quarter_le/_telescoping/_diff_nonneg/step_eq_error_diff/error_bound_strong/_valid/_abs", "kind": "Theorem", "role": "★ граница ошибки (1/4), Cauchy-шаг"},
+      {"name": "GapCertificate/cert_value_positive/try_certify/cert_from_pmg/cert_pmg_valid/gap_minus_small_error/cert_beta1_pmg", "kind": "Definition/Theorem", "role": "сертификат из процесса"}
+    ],
+    "key_lemmas": [
+      {"name": "compute_gap_eq_process", "analysis": "Вычислимая функция compute_gap СОВПАДАЕТ с процессом масс-зазора и Cauchy-сходится с телескопической границей ошибки (степени 1/4) — делает зазор исполнимо вычислимым над Q с гарантией. Питает извлечение в OCaml.", "tags": ["mass-gap", "compute", "cauchy", "error-bound"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Вычисление масс-зазора над Q: compute_gap = процесс, Cauchy-сходимость с телескопической границей ошибки (1/4), сертификат из процесса.",
+      "caveat": "Cauchy-вычисление с геометрической границей ошибки стандартно; вклад — применение к YM масс-зазору с извлечением, не новый метод."
+    },
+    "tags": ["extraction", "mass-gap", "compute", "methods"]
+  },
+  {
+    "num": 153,
+    "path": "src/extraction/GapExtraction.v",
+    "cluster": "extraction",
+    "classical_counterpart": "Wrapping a certified computation as an extractable calculator with exact rational arithmetic is standard program extraction; here for the mass gap.",
+    "title": "Gap extraction over Q: an OCaml-ready certified gap calculator",
+    "topic": "A gap calculator and certified gap, calculator values/error/nonneg/positive/consistency at beta=1, and extraction-ready compute/error/calc with exact arithmetic.",
+    "role": "Extraction wrapper of the mass-gap branch (OCaml-ready). Self-contained.",
+    "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "калькулятор зазора; сертифицированный зазор.",
+      "roles": "извлекаемая обёртка = роль (OCaml); точная Q-арифметика.",
+      "rules": "gap_calculator_consistent; extraction_ready_compute; exact_arithmetic.",
+      "p4": "конечный извлекаемый калькулятор над Q (Element); точная арифметика без вещественных чисел."
+    },
+    "lemmas": [
+      {"name": "gap_calculator/certified_gap/gap_calculator_beta1_M0/_error/_nonneg/_pos/_consistent/_beta1_error", "kind": "Definition/Theorem", "role": "★ калькулятор зазора, согласованность"},
+      {"name": "extraction_ready_compute/_error/_calc/exact_arithmetic", "kind": "Theorem", "role": "★ готово к извлечению, точная арифметика"}
+    ],
+    "key_lemmas": [
+      {"name": "extraction_ready_calc", "analysis": "Калькулятор масс-зазора готов к извлечению в OCaml с точной рациональной арифметикой — делает сертифицированный зазор исполнимой программой. Чисто инфраструктурная обёртка над GapCompute.", "tags": ["extraction", "mass-gap", "ocaml", "exact"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Извлекаемый калькулятор масс-зазора над Q: готов к экспорту в OCaml с точной рациональной арифметикой.",
+      "caveat": "Извлечение сертифицированных вычислений стандартно; вклад — обёртка для YM масс-зазора, не новый метод."
+    },
+    "tags": ["extraction", "mass-gap", "ocaml", "methods"]
+  },
+  {
+    "num": 1782,
+    "path": "src/synthesis/DeeperPhysicsSynthesis.v",
+    "cluster": "synthesis",
+    "classical_counterpart": "A summary node connecting four physics directions (error correction, ionization, GR, cosmology) to one tree; no new content.",
+    "title": "Deeper physics synthesis: four directions, one tree (summary node)",
+    "topic": "An 8-lemma synthesis tying error-correction, ionization, general-relativity and cosmology branches into one full-physics tree.",
+    "role": "Summary node connecting physics sub-branches. Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "ветви физики (4 направления).",
+      "roles": "узел-синтез: четыре направления — одно дерево.",
+      "rules": "four_directions_connected; full_physics_tree.",
+      "p4": "агрегатор (Element); собственного содержания нет."
+    },
+    "lemmas": [
+      {"name": "branch1_error_correction/branch2_ionization/branch3_general_relativity/branch4_cosmology", "kind": "Theorem", "role": "четыре направления"},
+      {"name": "four_directions_connected/full_physics_tree/project_total/deeper_physics_grand_synthesis", "kind": "Theorem", "role": "★ единое дерево физики"}
+    ],
+    "key_lemmas": [
+      {"name": "full_physics_tree", "analysis": "Узел-агрегатор четырёх физических направлений в одно дерево. Собственной уникальности нет.", "tags": ["summary", "physics"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка: коррекция ошибок, ионизация, ОТО и космология — одно дерево физики.",
+      "caveat": "Чистый узел-агрегатор; собственного результата нет."
+    },
+    "tags": ["synthesis", "summary", "exposition"]
+  },
+  {
+    "num": 1783,
+    "path": "src/synthesis/PhysicsInformationSynthesis.v",
+    "cluster": "synthesis",
+    "classical_counterpart": "A summary node tying five extensions (decoherence, cosmological, arrow, entanglement, information) to one root; no new content.",
+    "title": "Physics-information synthesis: five extensions, one root (summary node)",
+    "topic": "A 7-lemma synthesis tying decoherence, cosmological, arrow-of-time, entanglement and information branches to one physics-information root.",
+    "role": "Summary node connecting physics/information sub-branches. Self-contained.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "пять расширений (декогеренция, космология, стрела, запутанность, информация).",
+      "roles": "узел-синтез: пять расширений — один корень.",
+      "rules": "five_extensions_from_one_root.",
+      "p4": "агрегатор (Element); собственного содержания нет."
+    },
+    "lemmas": [
+      {"name": "ext1_decoherence/ext2_cosmological/ext3_arrow/ext4_entanglement/ext5_information", "kind": "Theorem", "role": "пять расширений"},
+      {"name": "physics_information_grand_synthesis/five_extensions_from_one_root", "kind": "Theorem", "role": "★ один корень пяти расширений"}
+    ],
+    "key_lemmas": [
+      {"name": "five_extensions_from_one_root", "analysis": "Узел-агрегатор пяти физико-информационных расширений. Собственной уникальности нет.", "tags": ["summary", "information"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка: декогеренция/космология/стрела/запутанность/информация из одного корня.",
+      "caveat": "Чистый узел-агрегатор; собственного результата нет."
+    },
+    "tags": ["synthesis", "summary", "exposition"]
+  },
+  {
+    "num": 132,
+    "path": "src/error_correction/CodeFromGraph.v",
+    "cluster": "error_correction",
+    "classical_counterpart": "Repetition/Hamming codes, code rate/distance, the Singleton bound and a compression-duality are standard coding theory; here a small Q instance ('codes from a graph').",
+    "title": "Codes from a graph over Q: repetition/Hamming, rate, distance, Singleton",
+    "topic": "Repetition and Hamming code sizes/data/rate, Hamming distance, a general code distance, repetition detects 1 error, Hamming has a better rate, bounded rates, positive distance, a compression-error-correction duality, redundancy, and the Singleton bound.",
+    "role": "Leaf of the error-correction branch. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "коды (повторения/Хэмминга); скорость/расстояние.",
+      "roles": "код = роль-защита; расстояние/скорость как роли-параметры.",
+      "rules": "hamming_better_rate; singleton_bound_hamming; compression_ec_duality.",
+      "p4": "конечные коды над Q (Element); скорость/расстояние вычислимы."
+    },
+    "lemmas": [
+      {"name": "repetition_code_size/_data/_rate/hamming_code_size/_data/_rate/hamming_distance/code_distance_gen", "kind": "Definition", "role": "коды, скорость, расстояние"},
+      {"name": "repetition_detects_1/hamming_better_rate/rate_bounded/distance_positive", "kind": "Theorem", "role": "★ Хэмминг лучше по скорости"},
+      {"name": "compression_ec_duality/rates_positive/hamming_redundancy/singleton_bound_hamming/rate_ordering/code_from_graph_synthesis", "kind": "Theorem", "role": "★ дуальность сжатие/ECC, граница Синглтона"}
+    ],
+    "key_lemmas": [
+      {"name": "compression_ec_duality", "analysis": "Дуальность сжатия и коррекции ошибок (rate vs distance) над Q + граница Синглтона — корректная картина теории кодирования. Связь с crown/CompressionIsPhysics. Стандартное содержание.", "tags": ["coding", "singleton", "compression-duality"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Коды из графа над Q: повторение/Хэмминг, скорость/расстояние, дуальность сжатие↔коррекция, граница Синглтона.",
+      "caveat": "Коды Хэмминга и граница Синглтона — учебная теория кодирования; вклад — Q-инстанс, не новый результат."
+    },
+    "tags": ["error-correction", "coding", "singleton", "methods"]
+  },
+  {
+    "num": 133,
+    "path": "src/error_correction/ModeProtection.v",
+    "cluster": "error_correction",
+    "classical_counterpart": "The code rate-distance tradeoff (more redundancy = more protection) is standard coding theory; here a small Q instance about protecting low modes.",
+    "title": "Mode protection over Q: rate-distance tradeoff",
+    "topic": "Boundary overlap, code distance/rate, distance as a rational, low modes protected, more redundancy = more protection, the rate-distance tradeoff, protection monotone, bounded overlap, and positive distance.",
+    "role": "Leaf of the error-correction branch. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "перекрытие границы; расстояние/скорость кода.",
+      "roles": "защита мод = роль; компромисс скорость-расстояние.",
+      "rules": "more_redundancy_more_protection; rate_distance_tradeoff; protection_monotone.",
+      "p4": "конечные параметры кода над Q (Element); защита растёт с избыточностью."
+    },
+    "lemmas": [
+      {"name": "boundary_overlap/code_distance/code_rate/distance_as_Q", "kind": "Definition", "role": "перекрытие, расстояние, скорость"},
+      {"name": "low_modes_protected/more_redundancy_more_protection/rate_distance_tradeoff/protection_monotone", "kind": "Theorem", "role": "★ компромисс скорость-расстояние"},
+      {"name": "overlap_bounded/zero_overlap/full_overlap/rate_bounded/distance_positive_3_8/mode_protection_synthesis", "kind": "Theorem", "role": "ограниченность перекрытия"}
+    ],
+    "key_lemmas": [
+      {"name": "rate_distance_tradeoff", "analysis": "Компромисс между скоростью кода и расстоянием (больше избыточности → больше защиты) над Q — стандартная картина ECC. Уникальности нет.", "tags": ["rate-distance", "protection"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Защита мод над Q: компромисс скорость-расстояние, больше избыточности — больше защиты.",
+      "caveat": "Компромисс скорость-расстояние — учебная теория кодирования; Q-инстанс без нового содержания."
+    },
+    "tags": ["error-correction", "rate-distance", "exposition"]
+  },
+  {
+    "num": 95,
+    "path": "src/crown/BornIsParseval.v",
+    "cluster": "crown",
+    "classical_counterpart": "That the Born rule equals Parseval's identity (probabilities = squared amplitudes summing to the norm) is a known observation in QM/signal processing; here an exact Q instance making 'Born = Parseval = normalization' explicit, with measurement-miss = compression-error.",
+    "title": "Born is Parseval over Q: probability = spectral fraction = normalization",
+    "topic": "Sum of squares, a normalized state, Born probability at a mode, the Born total, a spectral fraction, energy above a cutoff, compression error, measurement miss, a normalized example, Born = spectral fraction, Born sums to one, Parseval is normalization, and compression-error = measurement-miss.",
+    "role": "Leaf of the crown branch (the Born<->Parseval identity). Self-contained.",
+    "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "нормированное состояние; вероятности Борна; спектральная доля.",
+      "roles": "правило Борна = роль = равенство Парсеваля = нормировка.",
+      "rules": "born_equals_spectral; parseval_is_normalization; error_equals_miss.",
+      "p4": "конечные суммы квадратов над Q (Element); Борн ≡ Парсеваль ≡ нормировка — точное тождество."
+    },
+    "lemmas": [
+      {"name": "sum_sq/normalized_state/born_prob_at/born_total/spectral_fraction/energy_above/compression_error/measurement_miss", "kind": "Definition", "role": "квадраты, Борн, спектральная доля"},
+      {"name": "psi_35_45/psi_normalized/psi_is_normalized/born_mode0/born_mode1/spectral_mode0/spectral_mode1", "kind": "Theorem", "role": "пример, значения Борна/спектра"},
+      {"name": "born_equals_spectral/born_sums_to_one/parseval_is_normalization/comp_error_M1/meas_miss_M1/error_equals_miss/born_is_parseval_synthesis", "kind": "Theorem", "role": "★ Борн=Парсеваль=нормировка; ошибка=промах"}
+    ],
+    "key_lemmas": [
+      {"name": "parseval_is_normalization", "analysis": "Правило Борна ≡ тождество Парсеваля ≡ нормировка состояния — одно равенство квадратов амплитуд, точно над Q. Плюс compression_error = measurement_miss: спектральная доля выше отсечки = вероятность «промаха» измерения. Аккуратное тождество-наблюдение (вена-C-смежно: измерение=сжатие), не новый результат.", "tags": ["born-parseval", "normalization", "identity"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "new-framing",
+      "claim": "Борн = Парсеваль = нормировка над Q (одно тождество квадратов амплитуд); ошибка сжатия = промах измерения.",
+      "caveat": "Связь Борна и Парсеваля известна в КМ/обработке сигналов; вклад — явное Q-тождество и отождествление ошибка-сжатия=промах, не новый результат."
+    },
+    "tags": ["crown", "born-rule", "parseval", "new-framing"]
+  },
+  {
+    "num": 96,
+    "path": "src/crown/CompressionIsPhysics.v",
+    "cluster": "crown",
+    "classical_counterpart": "The analogy between data compression and physical mode truncation (same energy/spectrum) is a framing; here a small Q 'dictionary' tying compression to physics.",
+    "title": "Compression is physics over Q: a dictionary (framing)",
+    "topic": "A compression-physics dictionary, the dictionary complete, compression as a process, compression = physical process, physics energy = compression energy, physics spectrum = compression spectrum, sound and light same type, all four same N, and resolution levels.",
+    "role": "Leaf of the crown branch (the compression<->physics framing). Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "словарь сжатие↔физика; энергия/спектр.",
+      "roles": "сжатие = роль-процесс = физический процесс (отождествление).",
+      "rules": "compression_is_pp; energy_is_energy; physics_spectrum=compression_spectrum.",
+      "p4": "конечные словарные соответствия над Q (Element); отождествление-переобрамление."
+    },
+    "lemmas": [
+      {"name": "CPDictionary/the_dictionary/dictionary_complete/compression_process/compression_is_pp", "kind": "Definition/Theorem", "role": "★ словарь сжатие↔физика"},
+      {"name": "physics_energy/compression_energy/energy_is_energy/physics_spectrum/compression_spectrum/sound_and_light_same_type", "kind": "Theorem", "role": "энергия=энергия, спектр=спектр"},
+      {"name": "all_four_same_N/resolution/half_resolution/full_resolution/compression_is_physics_synthesis", "kind": "Theorem", "role": "уровни разрешения"}
+    ],
+    "key_lemmas": [
+      {"name": "compression_is_pp", "analysis": "Сжатие отождествлено с физическим процессом через словарь (энергия=энергия, спектр=спектр) — переобрамление-аналогия над Q, не вывод. Иллюстративно (связь с crown/BornIsParseval).", "tags": ["compression", "physics", "framing"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Словарь «сжатие = физика» над Q: энергия/спектр совпадают, звук и свет одного типа.",
+      "caveat": "Аналогия сжатие↔усечение мод — переобрамление, не вывод; иллюстративный словарь."
+    },
+    "tags": ["crown", "compression", "framing", "exposition"]
+  },
+  {
+    "num": 120,
+    "path": "src/decoherence/DecoherenceFromModes.v",
+    "cluster": "decoherence",
+    "classical_counterpart": "Decoherence as exponential decay of off-diagonal density-matrix elements (diagonal preserved, rate from coupling) is standard open-quantum-systems theory; here a small Q instance.",
+    "title": "Decoherence from modes over Q: off-diagonal decay, diagonal preserved",
+    "topic": "A power helper, a decohere step, coherence after steps, no decoherence without coupling, full coupling instant, partial decoherence monotone, the diagonal element preserved, and n-step decay.",
+    "role": "Leaf of the decoherence branch (parallels physics/Decoherence). Self-contained.",
+    "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "когерентность; вне-диагональные элементы; связь.",
+      "roles": "декогеренция = роль-затухание вне-диагонали; диагональ сохраняется.",
+      "rules": "no_coupling_no_decoherence; full_coupling_instant; diagonal_preserved.",
+      "p4": "конечные шаги затухания над Q (Element); декогеренция как процесс затухания вне-диагонали."
+    },
+    "lemmas": [
+      {"name": "qpow/_0/_1/decohere_step/coherence_after", "kind": "Definition", "role": "шаг декогеренции, когерентность"},
+      {"name": "no_coupling_no_decoherence/no_coupling_after_3/_preserves/full_coupling_instant/_after_1/partial_step1/_step2/partial_monotone", "kind": "Theorem", "role": "★ нет связи — нет декогеренции; полная — мгновенно"},
+      {"name": "diagonal_element/diagonal_preserved/n_step_decay/decoherence_from_modes_synthesis", "kind": "Theorem", "role": "★ диагональ сохраняется, n-шаговое затухание"}
+    ],
+    "key_lemmas": [
+      {"name": "diagonal_preserved", "analysis": "Декогеренция гасит вне-диагональные элементы (n_step_decay), сохраняя диагональ — корректная картина открытой квантовой системы над Q. Стандартное содержание.", "tags": ["decoherence", "off-diagonal", "diagonal-preserved"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Декогеренция из мод над Q: затухание вне-диагонали, диагональ сохраняется, скорость из связи.",
+      "caveat": "Декогеренция как затухание вне-диагонали — стандартная теория открытых систем; Q-инстанс без нового содержания."
+    },
+    "tags": ["decoherence", "open-system", "exposition"]
+  },
+  {
+    "num": 121,
+    "path": "src/decoherence/DecoherenceSynthesis.v",
+    "cluster": "decoherence",
+    "classical_counterpart": "That decoherence is irreversible, trace-preserving and identifiable with damping (rate from coupling) is standard; here a 7-lemma summary.",
+    "title": "Decoherence synthesis over Q: decoherence is damping (summary)",
+    "topic": "Decoherence rate from coupling, stronger coupling = faster decay, trace preserved, irreversible, decoherence connects to damping, and decoherence is damping.",
+    "role": "Summary node of the decoherence branch. Self-contained.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "скорость декогеренции; связь; затухание.",
+      "roles": "узел-синтез: декогеренция = затухание.",
+      "rules": "decoherence_irreversible; decoherence_preserves_trace; decoherence_is_damping.",
+      "p4": "агрегатор (Element); декогеренция отождествлена с затуханием."
+    },
+    "lemmas": [
+      {"name": "decoherence_rate_from_coupling/stronger_coupling_faster_decay/decoherence_preserves_trace", "kind": "Theorem", "role": "скорость из связи, след сохраняется"},
+      {"name": "decoherence_irreversible/decoherence_connects_to_damping/decoherence_grand_synthesis/decoherence_is_damping", "kind": "Theorem", "role": "★ декогеренция = затухание, необратима"}
+    ],
+    "key_lemmas": [
+      {"name": "decoherence_is_damping", "analysis": "Узел-синтез: декогеренция отождествлена с затуханием (необратима, сохраняет след). Собственной уникальности нет — агрегатор.", "tags": ["summary", "decoherence", "damping"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка декогеренции над Q: декогеренция = затухание, необратима, сохраняет след.",
+      "caveat": "Узел-агрегатор; стандартные свойства декогеренции без нового результата."
+    },
+    "tags": ["decoherence", "summary", "exposition"]
+  },
+  {
+    "num": 128,
+    "path": "src/entanglement/EntanglementFromModes.v",
+    "cluster": "entanglement",
+    "classical_counterpart": "Entanglement as non-factorizability (a Bell state is rank-2 / not a product, Schmidt rank), with the 2x2 determinant as a separability witness, is standard QM; here an exact Q instance.",
+    "title": "Entanglement from modes over Q: Bell is rank-2, determinant witness",
+    "topic": "Product states, a matrix element, the 2x2 determinant, rank-1 vs entangled, a Bell state, product states have zero determinant (separable), the Bell determinant nonzero (entangled), Schmidt rank 2x2, and product = rank 1, Bell = rank 2.",
+    "role": "Leaf of the entanglement branch (parallels physics/Entanglement). Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "состояния (произведение/Белл); 2x2 определитель.",
+      "roles": "запутанность = роль-нефакторизуемость; det как роль-свидетель сепарабельности.",
+      "rules": "product_separable; bell_entangled; schmidt_rank_bell=2.",
+      "p4": "конечные 2x2 состояния над Q (Element); запутанность = ненулевой определитель."
+    },
+    "lemmas": [
+      {"name": "ProductState/mat_elem/det2/is_rank1/is_entangled/bell_state/product_00/product_plus", "kind": "Definition", "role": "состояния, определитель, ранг"},
+      {"name": "bell_det/bell_not_rank1/bell_entangled/product_00_det/product_separable/product_plus_det/product_plus_separable", "kind": "Theorem", "role": "★ Белл запутан (det≠0), произведение сепарабельно"},
+      {"name": "schmidt_rank_2x2/schmidt_rank_product/schmidt_rank_bell/entanglement_from_modes_synthesis", "kind": "Theorem", "role": "★ ранг Шмидта: произведение=1, Белл=2"}
+    ],
+    "key_lemmas": [
+      {"name": "bell_entangled", "analysis": "Состояние Белла имеет ненулевой 2x2 определитель (ранг Шмидта 2) → запутано, тогда как произведение сепарабельно (det=0) — точный определительный критерий запутанности над Q. Стандартная картина.", "tags": ["entanglement", "bell", "schmidt-rank", "determinant"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Запутанность из мод над Q: Белл = ранг 2 (det≠0), произведение сепарабельно (det=0), определитель как свидетель.",
+      "caveat": "Запутанность как нефакторизуемость/ранг Шмидта классична; вклад — точный 2x2 Q-критерий, не новый результат."
+    },
+    "tags": ["entanglement", "bell", "schmidt-rank", "methods"]
+  },
+  {
+    "num": 129,
+    "path": "src/entanglement/EntanglementSynthesis.v",
+    "cluster": "entanglement",
+    "classical_counterpart": "That the determinant witnesses entanglement (partial entanglement, nearly-separable states, observation collapses) is standard; here a 7-lemma summary.",
+    "title": "Entanglement synthesis over Q: determinant is a witness (summary)",
+    "topic": "Partial entanglement (determinant, entangled), nearly-separable states (small determinant, separable), observation collapses, and the determinant as a witness.",
+    "role": "Summary node of the entanglement branch. Self-contained.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "частично запутанные/почти сепарабельные состояния; определитель.",
+      "roles": "узел-синтез: det = свидетель запутанности.",
+      "rules": "partial_ent_entangled; nearly_sep_separable; det_is_witness.",
+      "p4": "агрегатор (Element); определитель как непрерывный свидетель."
+    },
+    "lemmas": [
+      {"name": "partial_ent/_det/_entangled/nearly_sep/_det/_separable", "kind": "Theorem", "role": "частичная запутанность, почти сепарабельность"},
+      {"name": "observation_collapses/det_is_witness/entanglement_grand_synthesis", "kind": "Theorem", "role": "★ det = свидетель; наблюдение коллапсирует"}
+    ],
+    "key_lemmas": [
+      {"name": "det_is_witness", "analysis": "Узел-синтез: определитель — непрерывный свидетель запутанности (от почти-сепарабельных до сильно запутанных). Собственной уникальности нет — агрегатор EntanglementFromModes.", "tags": ["summary", "entanglement", "witness"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка запутанности над Q: определитель как свидетель, наблюдение коллапсирует.",
+      "caveat": "Узел-агрегатор; определитель-свидетель уже доказан в EntanglementFromModes."
+    },
+    "tags": ["entanglement", "summary", "exposition"]
+  },
+  {
+    "num": 557,
+    "path": "src/ionization/CoulombOnGraph.v",
+    "cluster": "ionization",
+    "classical_counterpart": "Bound (negative) vs free (positive) energy levels for a Coulomb potential and counting bound states is standard; here a small graph instance.",
+    "title": "Coulomb on a graph over Q: bound vs free levels, ionization",
+    "topic": "Four effective energies, the nth energy, counting negatives, a bound count, ionization energy, the ground state negative, excited positive, a Coulomb potential whose magnitude decreases, ordered energies, and positive ionization.",
+    "role": "Leaf of the ionization branch (parallels linalg/IonizationThreshold). Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "эффективные энергии; кулоновский потенциал.",
+      "roles": "связанное (E<0) / свободное (E>0) = роли; ионизация как роль-порог.",
+      "rules": "ground_state_negative; excited_positive; ionization_positive.",
+      "p4": "конечные уровни над Q (Element); связанность = отрицательная энергия."
+    },
+    "lemmas": [
+      {"name": "effective_energies_4/nth_energy/count_negatives/n_bound/ionization_energy/coulomb_potential", "kind": "Definition", "role": "энергии, счёт связанных, потенциал"},
+      {"name": "ground_state_negative/excited_positive/potential_magnitude_decreases/potential_at_origin/n_bound_is_1/ionization_energy_half", "kind": "Theorem", "role": "★ основное E<0, возбуждённое E>0"},
+      {"name": "energies_ordered/second_excited_positive/ionization_positive/coulomb_on_graph_synthesis", "kind": "Theorem", "role": "упорядочение, ионизация>0"}
+    ],
+    "key_lemmas": [
+      {"name": "ground_state_negative", "analysis": "Основное состояние связано (E<0), возбуждённые свободны (E>0); счёт связанных состояний над Q — корректная кулоновская картина. Стандартное содержание.", "tags": ["coulomb", "bound-free", "ionization"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Кулон на графе над Q: связанное (E<0) vs свободное (E>0), счёт связанных, положительная ионизация.",
+      "caveat": "Дихотомия связанное/свободное стандартна; графовый Q-инстанс без нового содержания."
+    },
+    "tags": ["ionization", "coulomb", "bound-free", "exposition"]
+  },
+  {
+    "num": 558,
+    "path": "src/ionization/IonizationThreshold.v",
+    "cluster": "ionization",
+    "classical_counterpart": "The bound/free threshold with a decidable test and ionization cost is standard; NEW only as a small Q instance with a DECIDABLE bound-state test (vein-A-flavoured: a decidable boundary).",
+    "title": "Ionization threshold over Q: a decidable bound/free test",
+    "topic": "A threshold, is_bound/is_free, a decidable bound test, ionization cost, the threshold separating bound from free, bound needs energy, a concrete ionization, free already ionized, bound/free complementary and exclusive, and deeper = more energy.",
+    "role": "Leaf of the ionization branch with a decidable boundary. Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "порог; связанное/свободное; стоимость ионизации.",
+      "roles": "порог = роль-граница; РАЗРЕШИМЫЙ тест связанности.",
+      "rules": "is_bound_dec; threshold_separates; bound_free_exclusive.",
+      "p4": "конечный разрешимый тест над Q (Element); граница bound/free вычислима (вена A-смежно)."
+    },
+    "lemmas": [
+      {"name": "threshold/is_bound/is_free/is_bound_dec/ionization_cost", "kind": "Definition", "role": "★ разрешимый тест связанности"},
+      {"name": "threshold_separates/bound_needs_energy/concrete_ionization/free_already_ionized", "kind": "Theorem", "role": "★ порог разделяет bound/free"},
+      {"name": "bound_free_complement/bound_free_exclusive/deeper_more_energy/ionization_threshold_synthesis", "kind": "Theorem", "role": "комплементарность, глубже=больше энергии"}
+    ],
+    "key_lemmas": [
+      {"name": "is_bound_dec", "analysis": "РАЗРЕШИМЫЙ тест связанности состояния (is_bound_dec) над Q: граница bound/free вычислима, состояния комплементарны и взаимоисключающи. Слабый отголосок вены A (разрешимая граница финитизации), но на стандартном содержании.", "tags": ["decidable", "bound-free", "vein-A-adjacent"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Порог ионизации над Q с РАЗРЕШИМЫМ тестом связанности: граница bound/free вычислима, состояния комплементарны/взаимоисключающи.",
+      "caveat": "Порог связанное/свободное стандартен; вклад — разрешимый Q-тест (вена-A-смежно), не новый результат."
+    },
+    "tags": ["ionization", "decidable", "bound-free", "methods"]
+  },
+  {
+    "num": 68,
+    "path": "src/casimir_branch/CasimirConvergence.v",
+    "cluster": "casimir_branch",
+    "classical_counterpart": "The Casimir energy density converging as the mode count grows is standard; here a small Q instance (densities at C2/C4/C8 converging).",
+    "title": "Casimir convergence over Q: energy density converges with mode count",
+    "topic": "Energy density, densities at C2/C4/C8, the density converging, the process at N=2/4/8, linear growth, and the Casimir coefficient.",
+    "role": "Leaf of the casimir_branch (parallels experimental/CasimirProcess). Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "плотность энергии; число мод.",
+      "roles": "плотность Казимира = роль-предел процесса по числу мод.",
+      "rules": "density_converges; linear_growth; casimir_coefficient.",
+      "p4": "конечные плотности над Q (Element); плотность как сходящийся процесс."
+    },
+    "lemmas": [
+      {"name": "energy_density/density_C2/_C4/_C8/process_N2/_N4/_N8/casimir_coefficient", "kind": "Definition", "role": "плотности, процесс, коэффициент"},
+      {"name": "density_converges/linear_growth/casimir_convergence_synthesis", "kind": "Theorem", "role": "★ плотность сходится"}
+    ],
+    "key_lemmas": [
+      {"name": "density_converges", "analysis": "Плотность энергии Казимира сходится с ростом числа мод (C2→C4→C8) над Q — корректный сходящийся процесс. Стандартное содержание (ср. experimental/CasimirProcess).", "tags": ["casimir", "convergence", "density"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сходимость Казимира над Q: плотность энергии сходится с числом мод.",
+      "caveat": "Сходимость плотности Казимира стандартна; Q-инстанс без нового содержания (см. experimental/CasimirProcess)."
+    },
+    "tags": ["casimir", "convergence", "exposition"]
+  },
+  {
+    "num": 69,
+    "path": "src/casimir_branch/CasimirFromGraph.v",
+    "cluster": "casimir_branch",
+    "classical_counterpart": "Casimir energy from vacuum modes (finite after regularization, force from energy difference) is standard; NEW only as the P4 framing 'vacuum always finite' over a graph.",
+    "title": "Casimir from a graph over Q: vacuum always finite, force from energy",
+    "topic": "Vacuum energy squared, squared frequencies at C2/C4/C8, vacuum energies, positivity, vacuum grows, the Casimir energy and force approximation, the C4-C2 and C8-C4 differences, and vacuum always finite.",
+    "role": "Leaf of the casimir_branch (vacuum-finiteness framing). Self-contained.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "вакуумная энергия (квадраты частот); моды графа.",
+      "roles": "Казимир = роль-разность энергий; вакуум всегда конечен.",
+      "rules": "vacuum_always_finite; casimir_force_approx; vacuum_grows.",
+      "p4": "конечные вакуумные энергии над Q (Element); «вакуум всегда конечен» — нет расходимости на графе."
+    },
+    "lemmas": [
+      {"name": "vacuum_energy_sq/omega_sq_C4/_C2/_C8_approx/E_vac_C2/_C4/_C8", "kind": "Definition", "role": "вакуумная энергия, частоты"},
+      {"name": "vacuum_positive_C4/vacuum_grows/vacuum_grows_more/casimir_energy/casimir_force_approx", "kind": "Theorem", "role": "вакуум растёт, сила Казимира"},
+      {"name": "casimir_C4_C2/_C8_C4/vacuum_always_finite/_C8/casimir_from_graph_synthesis", "kind": "Theorem", "role": "★ вакуум всегда конечен"}
+    ],
+    "key_lemmas": [
+      {"name": "vacuum_always_finite", "analysis": "Вакуумная энергия на графе ВСЕГДА конечна (vacuum_always_finite_C8) — нет расходимости, сила Казимира из разности энергий. Перекликается с experimental/VacuumEnergy (там расходимость снимается регуляризацией; здесь граф конечен по построению). Вена-C-смежно.", "tags": ["casimir", "vacuum-finite", "force"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "new-framing",
+      "claim": "Казимир из графа над Q: вакуумная энергия всегда конечна, сила Казимира из разности энергий мод.",
+      "caveat": "Энергия Казимира из вакуумных мод стандартна; вклад — графовая формулировка «вакуум всегда конечен», не новая физика."
+    },
+    "tags": ["casimir", "vacuum-finite", "new-framing"]
+  },
+  {
+    "num": 548,
+    "path": "src/gravity/CurvatureFromGraph.v",
+    "cluster": "gravity",
+    "classical_counterpart": "Discrete (Forman/combinatorial) curvature from degrees, the handshaking lemma and curvature detecting inhomogeneity are standard discrete differential geometry; here a small Q instance ('mass creates curvature').",
+    "title": "Curvature from a graph over Q: Forman curvature, handshaking, mass creates curvature",
+    "topic": "Average degree, curvature at a vertex, scalar curvature, cycle-4 vs dense degrees, regular = flat, mass creates curvature, total curvature zero on a 4-cycle, denser = more curved, deficit = negative curvature, curvature detects inhomogeneity, and the handshaking lemma.",
+    "role": "Leaf of the gravity branch (discrete curvature). Self-contained.",
+    "qed": 15, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "степени вершин; кривизна; скалярная кривизна.",
+      "roles": "кривизна = роль из степеней; масса как роль-источник кривизны.",
+      "rules": "regular_flat; mass_creates_curvature; handshaking_cycle4.",
+      "p4": "конечный граф над Q (Element); кривизна = дискретная функция степеней."
+    },
+    "lemmas": [
+      {"name": "sum_Q/avg_degree/curvature_at/curvatures/scalar_curvature/cycle4_degrees/dense_degrees/fold_left_Qplus_shift/_acc/sum_Q_cons", "kind": "Definition/Lemma", "role": "степени, кривизна, скаляр"},
+      {"name": "regular_flat/mass_creates_curvature/total_curvature_zero_cycle4/_dense/denser_more_curved", "kind": "Theorem", "role": "★ регулярный=плоский; масса создаёт кривизну"},
+      {"name": "avg_degree_regular/_dense_gt_2/deficit_negative_curvature/curvature_detects_inhomogeneity/handshaking_cycle4/_dense/curvature_from_graph_synthesis", "kind": "Theorem", "role": "★ дефицит=отрицательная кривизна; handshaking"}
+    ],
+    "key_lemmas": [
+      {"name": "mass_creates_curvature", "analysis": "Регулярный граф плоский, неоднородность степеней (масса) создаёт кривизну (Forman/комбинаторную) над Q; total_curvature_zero на 4-цикле = дискретный Гаусс-Бонне-отголосок, handshaking как сумма степеней. Корректная дискретная геометрия, переобрамляющая «массу→кривизну».", "tags": ["curvature", "forman", "handshaking", "gravity"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Кривизна из графа над Q: Forman-кривизна из степеней, регулярный=плоский, масса создаёт кривизну, handshaking, дефицит=отрицательная кривизна.",
+      "caveat": "Дискретная кривизна (Forman) и handshaking — стандартная дискретная геометрия; вклад — Q-инстанс «масса→кривизна», не новый результат."
+    },
+    "tags": ["gravity", "curvature", "forman", "methods"]
+  },
+  {
+    "num": 549,
+    "path": "src/gravity/GeodesicDeviation.v",
+    "cluster": "gravity",
+    "classical_counterpart": "Geodesic deviation, gravitational redshift and the local equivalence principle are GR; here only a small graph analogy (curvature shortens, redshift, no shift at equal curvature).",
+    "title": "Geodesic deviation over Q: curvature shortens, gravitational redshift (analogy)",
+    "topic": "Geodesic length along a path vs a cycle, metric deviation, a frequency ratio, flat geodesic, the cycle shorter, zero deviation when flat, curvature shortens, the local equivalence principle, gravitational redshift, and no shift at equal curvature.",
+    "role": "Leaf of the gravity branch (geodesics/redshift analogy). Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "длины геодезических; метрическое отклонение; частотное отношение.",
+      "roles": "кривизна = роль-укорачиватель; красное смещение как роль.",
+      "rules": "curvature_shortens; gravitational_redshift; equivalence_principle_local.",
+      "p4": "конечные длины путей над Q (Element); геодезическая аналогия, не вывод ОТО."
+    },
+    "lemmas": [
+      {"name": "geodesic_length_path/_cycle/metric_deviation/freq_ratio", "kind": "Definition", "role": "длины, отклонение, частота"},
+      {"name": "flat_geodesic/cycle_shorter/zero_deviation_flat/curvature_shortens", "kind": "Theorem", "role": "★ кривизна укорачивает геодезическую"},
+      {"name": "equivalence_principle_local/gravitational_redshift/no_shift_equal_curvature/geodesic_deviation_synthesis", "kind": "Theorem", "role": "красное смещение, эквивалентность"}
+    ],
+    "key_lemmas": [
+      {"name": "curvature_shortens", "analysis": "Кривизна укорачивает геодезическую, даёт красное смещение; нет смещения при равной кривизне — графовая аналогия ОТО над Q, не вывод. Иллюстративно.", "tags": ["geodesic", "redshift", "curvature", "analogy"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Геодезическое отклонение над Q: кривизна укорачивает геодезическую, красное смещение, локальный принцип эквивалентности.",
+      "caveat": "Геодезическое отклонение и красное смещение — ОТО; графовая Q-аналогия иллюстративна, не вывод."
+    },
+    "tags": ["gravity", "geodesic", "redshift", "exposition"]
+  },
+  {
+    "num": 553,
+    "path": "src/information/InformationFromModes.v",
+    "cluster": "information",
+    "classical_counterpart": "Purity, linear entropy and the entropy ordering (pure < partial < uniform/maximal) are standard quantum information; here an exact Q instance.",
+    "title": "Information from modes over Q: purity, linear entropy, entropy ordering",
+    "topic": "Sum of squared probabilities, sum of probabilities, purity, linear entropy, a pure state (purity 1, zero entropy), a uniform state (max entropy), a partial state, mixed = higher entropy, uniform = max entropy, the entropy ordering, and purity one for pure.",
+    "role": "Leaf of the information branch. Self-contained.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "вероятности; чистота; линейная энтропия.",
+      "roles": "энтропия = роль-мера смешанности; чистота как роль.",
+      "rules": "pure_zero_entropy; uniform_max_entropy; entropy_ordering.",
+      "p4": "конечные распределения над Q (Element); энтропия/чистота вычислимы точно."
+    },
+    "lemmas": [
+      {"name": "sum_sq_probs/sum_probs/purity/linear_entropy", "kind": "Definition", "role": "чистота, линейная энтропия"},
+      {"name": "pure_state_4/pure_purity/pure_zero_entropy/uniform_state_4/uniform_purity/uniform_entropy/partial_state_4/partial_purity/partial_entropy", "kind": "Theorem", "role": "чистое/равномерное/частичное состояния"},
+      {"name": "mixed_higher_entropy/uniform_max_entropy/entropy_ordering/purity_one_for_pure/information_from_modes_synthesis", "kind": "Theorem", "role": "★ упорядочение энтропии, чистота=1 для чистого"}
+    ],
+    "key_lemmas": [
+      {"name": "entropy_ordering", "analysis": "Упорядочение энтропии (чистое < частичное < равномерное/максимальное) и purity=1 для чистого состояния над Q — корректная квантово-информационная картина. Стандартное содержание.", "tags": ["entropy", "purity", "ordering"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Информация из мод над Q: чистота, линейная энтропия, упорядочение чистое<частичное<равномерное, purity=1 для чистого.",
+      "caveat": "Чистота и линейная энтропия — стандартная квантовая информация; вклад — точный Q-инстанс, не новый результат."
+    },
+    "tags": ["information", "entropy", "purity", "methods"]
+  },
+  {
+    "num": 554,
+    "path": "src/information/LandauerConnection.v",
+    "cluster": "information",
+    "classical_counterpart": "Landauer's principle (erasure has a thermodynamic cost proportional to temperature, zero at zero temperature) is standard; here a small Q instance tying erasure to the thermal branch.",
+    "title": "Landauer connection over Q: erasure cost proportional to temperature",
+    "topic": "A Landauer cost, erasure energy (positive), erasure scales, cost proportional to temperature, zero cost at zero temperature, erasure uniform->pure and partial->pure.",
+    "role": "Leaf of the information branch bridging to thermodynamics. Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "стоимость Ландауэра; энергия стирания; температура.",
+      "roles": "стирание = роль-затрата (∝ T); связь информации и термодинамики.",
+      "rules": "cost_proportional_to_T; zero_temp_zero_cost; erasure_uniform_to_pure.",
+      "p4": "конечная стоимость над Q (Element); стирание = термодинамическая затрата."
+    },
+    "lemmas": [
+      {"name": "landauer_cost/erasure_energy/erasure_positive/_concrete/erasure_scales", "kind": "Definition/Theorem", "role": "стоимость, энергия стирания"},
+      {"name": "cost_proportional_to_T/zero_temp_zero_cost/erasure_uniform_to_pure/erasure_partial_to_pure/landauer_connection_synthesis", "kind": "Theorem", "role": "★ стоимость ∝ T, ноль при T=0"}
+    ],
+    "key_lemmas": [
+      {"name": "cost_proportional_to_T", "analysis": "Стоимость стирания пропорциональна температуре (ноль при T=0) — принцип Ландауэра над Q, связывающий информацию с термодинамикой. Стандартное содержание.", "tags": ["landauer", "erasure", "thermodynamics"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Связь Ландауэра над Q: стоимость стирания ∝ температуре, ноль при T=0, стирание переводит распределение в чистое.",
+      "caveat": "Принцип Ландауэра стандартен; вклад — Q-инстанс, связывающий стирание с термальной ветвью, не новый результат."
+    },
+    "tags": ["information", "landauer", "thermodynamics", "methods"]
+  },
+  {
+    "num": 90,
+    "path": "src/cosmological/LambdaFromGraph.v",
+    "cluster": "cosmological",
+    "classical_counterpart": "The cosmological-constant (vacuum-catastrophe) problem is the huge mismatch between predicted and observed vacuum energy; NEW only as the P4 framing 'no vacuum catastrophe' over a graph — the vacuum density is bounded and converges (a process), so P4 dissolves the divergence.",
+    "title": "Lambda from a graph over Q: no vacuum catastrophe (P4 resolves)",
+    "topic": "A vacuum density, densities at N=2/4/8 (all bounded), the density converging, no vacuum catastrophe, and 'P4 resolves'.",
+    "role": "Leaf of the cosmological branch (vacuum-catastrophe dissolution, vein-C-adjacent). Self-contained.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "плотность вакуума; число мод графа.",
+      "roles": "Lambda = роль-плотность вакуума; P4 как роль-разрешитель катастрофы.",
+      "rules": "density_bounded; density_converges; no_vacuum_catastrophe; P4_resolves.",
+      "p4": "плотность вакуума ОГРАНИЧЕНА и сходится над Q (Element); катастрофа вакуума РАСТВОРЕНА — расходимости нет (вена C)."
+    },
+    "lemmas": [
+      {"name": "vacuum_density/density_2/_4/_8", "kind": "Definition/Theorem", "role": "плотность вакуума по N"},
+      {"name": "density_positive_concrete/density_bounded_2/_4/_8/density_converges", "kind": "Theorem", "role": "★ плотность ограничена и сходится"},
+      {"name": "no_vacuum_catastrophe/P4_resolves/lambda_from_graph_synthesis", "kind": "Theorem", "role": "★ нет катастрофы вакуума; P4 разрешает"}
+    ],
+    "key_lemmas": [
+      {"name": "no_vacuum_catastrophe", "analysis": "«Нет катастрофы вакуума»: плотность вакуума на графе ограничена и сходится (density_bounded, density_converges) → P4_resolves растворяет расходимость космологической постоянной. Вена-C-смежно: вакуум как конечный сходящийся процесс, не расходящийся объект. Модельное, но честно сформулированное растворение.", "tags": ["vacuum-catastrophe", "lambda", "P4-resolves", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "new-framing",
+      "claim": "Lambda из графа над Q: плотность вакуума ограничена/сходится, «нет катастрофы вакуума» (P4 разрешает) — вена-C-смежное растворение расходимости.",
+      "caveat": "Проблема космологической постоянной реальна; здесь графовая модель с конечной сходящейся плотностью — P4-переобрамление, не разрешение физической проблемы Lambda."
+    },
+    "tags": ["cosmological", "vacuum-catastrophe", "P4", "new-framing"]
+  },
+  {
+    "num": 67,
+    "path": "src/arrow/ArrowFromModes.v",
+    "cluster": "arrow",
+    "classical_counterpart": "The thermodynamic arrow of time as monotone entropy from information loss / coarse-graining (tracking fewer modes) is standard; NEW only as the framing 'arrow = compression' over Q.",
+    "title": "Arrow from modes over Q: arrow of time = compression",
+    "topic": "Counting modes above a cutoff, total modes, information loss, tracked entropy, a full state, all modes tracked = reversible, partial tracking = irreversible, minimal tracking loss, the arrow as compression, and entropy monotone.",
+    "role": "Leaf of the arrow-of-time branch (parallels physics/ThermodynamicArrow). Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "моды выше отсечки; отслеживаемая энтропия; потеря информации.",
+      "roles": "стрела времени = роль из потери информации (сжатия); полное отслеживание обратимо.",
+      "rules": "all_tracked_reversible; partial_tracked_irreversible; arrow_is_compression; entropy_monotone.",
+      "p4": "конечное число мод над Q (Element); стрела времени = необратимость огрубления (сжатия)."
+    },
+    "lemmas": [
+      {"name": "count_above/total_modes/info_loss/tracked_entropy/full_state", "kind": "Definition", "role": "счёт мод, потеря информации, энтропия"},
+      {"name": "all_modes_tracked/total_modes_full/all_tracked_reversible/partial_tracked_irreversible/minimal_tracking_loss", "kind": "Theorem", "role": "★ полное=обратимо, частичное=необратимо"},
+      {"name": "arrow_is_compression/entropy_monotone/arrow_from_modes_synthesis", "kind": "Theorem", "role": "★ стрела = сжатие; энтропия монотонна"}
+    ],
+    "key_lemmas": [
+      {"name": "arrow_is_compression", "analysis": "Стрела времени отождествлена со сжатием/огрублением: полное отслеживание мод обратимо, частичное (потеря информации) необратимо → монотонная энтропия. Содержательное переобрамление «стрела=сжатие» над Q (связь с crown/CompressionIsPhysics), не вывод.", "tags": ["arrow-of-time", "compression", "irreversible", "entropy"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "new-framing",
+      "claim": "Стрела времени из мод над Q: полное отслеживание обратимо, частичное (потеря информации) необратимо, стрела = сжатие, энтропия монотонна.",
+      "caveat": "Термодинамическая стрела из огрубления/потери информации стандартна; вклад — переобрамление «стрела=сжатие», не новый результат."
+    },
+    "tags": ["arrow-of-time", "compression", "entropy", "new-framing"]
+  }
+]

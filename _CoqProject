@@ -46,6 +46,8 @@ src/L5Resolution.v
 src/LevelAdjunction.v
 src/LevelFunctors.v
 src/LinearAlgebra.v
+src/Log2FunctionalEq.v
+src/Log2Process.v
 src/MeanValueTheorem.v
 src/Measure.v
 src/MonotoneConvergence.v

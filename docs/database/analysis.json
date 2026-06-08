@@ -1,0 +1,715 @@
+[
+  {
+    "num": 29, "path": "src/analysis/BolzanoWeierstrass.v", "cluster": "analysis",
+    "classical_counterpart": "Bolzano-Weierstrass (every bounded sequence has a convergent subsequence) classically uses Dependent Choice to pick the subsequence; NEW is replacing DC by a DETERMINISTIC bisection rule ('go left if the left half holds infinitely many terms') -- one Fixpoint bw_iter, not a choice-extracted subsequence. Honest cost: classic for the undecidable 'infinitely-many-in' pigeonhole.",
+    "title": "Bolzano-Weierstrass without Dependent Choice: deterministic bisection (vein B)",
+    "topic": "A bounded sequence's cluster point is built by a deterministic bisection state machine (bw_step/bw_iter: always take the half with infinitely many terms), giving nested intervals whose endpoints are Cauchy; the limit is a cluster point. Monotone-bounded and decreasing-bounded Cauchy as corollaries.",
+    "role": "Vein B FLAGSHIP (no-DC selection). The strongest no-AC result in the repo (per uniqueness-map). Uses classic only for the pigeonhole (infinitely_many_in), NOT for the subsequence.",
+    "qed": 26, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "CauchySeq (CauchyReal)"],
+    "err": {
+      "elements": "ограниченная последовательность s; интервалы-состояния BWState (lo,hi).",
+      "roles": "точка сгущения как role-limit; выбор половины = роль ПРАВИЛА (а не DC-оракула).",
+      "rules": "bw_step: брать половину с бесконечно многими членами; bw_iter итерирует; ширина →0.",
+      "p4": "подпоследовательность заменена ДЕТЕРМИНИРОВАННЫМ правилом (одна Fixpoint bw_iter), не выбором; честно: classic нужен для НЕРАЗРЕШИМОГО критерия «бесконечно много в [lo,hi]» (pigeonhole) — вена B локализует цену."
+    },
+    "lemmas": [
+      {"name": "bounded_seq/infinitely_many_in", "kind": "Definition", "role": "ограниченность; бесконечно много членов в интервале"},
+      {"name": "infinite_pigeonhole", "kind": "Lemma", "role": "бесконечно много в [a,b] ⟹ в одной из половин (использует classic)"},
+      {"name": "BWState/bw_mid/bw_step_left/bw_step/bw_iter", "kind": "Record/Definition/Fixpoint", "role": "★ детерминированная машина бисекции"},
+      {"name": "bw_step_valid/width/nested_left/nested_right/preserves_infinite", "kind": "Lemma", "role": "шаг корректен, делит ширину, вложен, сохраняет бесконечность"},
+      {"name": "bw_iter_valid/left_inc/right_dec/preserves_infinite", "kind": "Lemma", "role": "итерация: валидна, монотонна, сохраняет бесконечность"},
+      {"name": "bw_left_mono/right_mono/width_bound/width_to_zero", "kind": "Lemma", "role": "концы монотонны, ширина →0"},
+      {"name": "bw_left_cauchy/right_cauchy/trapped_seq_cauchy/endpoints_equiv", "kind": "Lemma", "role": "★ концы — последовательности Коши, эквивалентны"},
+      {"name": "bw_infinitely_many/bw_term_exists", "kind": "Lemma", "role": "в каждом интервале есть член последовательности"},
+      {"name": "is_cluster_point", "kind": "Definition", "role": "точка сгущения как CauchySeq"},
+      {"name": "bolzano_weierstrass", "kind": "Theorem", "role": "★ всякая ограниченная последовательность имеет точку сгущения (без DC)"},
+      {"name": "monotone_bounded_cauchy/decreasing_bounded_cauchy", "kind": "Theorem", "role": "монотонная ограниченная — Коши"},
+      {"name": "bw_left_bounded/right_bounded", "kind": "Lemma", "role": "концы ограничены"}
+    ],
+    "key_lemmas": [
+      {"name": "bolzano_weierstrass", "analysis": "Bolzano-Weierstrass БЕЗ Dependent Choice: вместо извлечения подпоследовательности оракулом — ОДНА детерминированная Fixpoint bw_iter, которая на каждом шаге берёт половину с бесконечно многими членами. Точка сгущения = предел концов вложенных интервалов (Cauchy). Сильнейший no-AC результат репо: DC заменён правилом, цена (classic) локализована РОВНО в неразрешимом pigeonhole-критерии.", "tags": ["bolzano-weierstrass", "no-DC", "vein-B", "deterministic-bisection"]},
+      {"name": "infinite_pigeonhole", "analysis": "Бесконечно много членов в [a,b] ⟹ бесконечно много в одной из половин — единственное место, где нужен classic (критерий «infinitely-many-in» неразрешим, Π-предикат). Честная граница: всё ОСТАЛЬНОЕ (само правило, цепи Коши) аксиомо-свободно.", "tags": ["pigeonhole", "classic", "honest-cost"]}
+    ],
+    "uniqueness": {
+      "score": 4, "level": "synthesis+observation",
+      "claim": "Bolzano-Weierstrass с заменой Dependent Choice ДЕТЕРМИНИРОВАННЫМ правилом бисекции (одна Fixpoint, не выбор подпоследовательности); цена classic локализована в неразрешимом pigeonhole — сильнейший no-AC результат репо (вена B).",
+      "caveat": "Бисекционное доказательство BW стандартно (Bishop); уникальность — в систематической замене DC правилом + честной локализации цены, не в теореме."
+    },
+    "tags": ["bolzano-weierstrass", "no-DC", "no-AC", "vein-B", "bisection", "deterministic", "P4"]
+  },
+  {
+    "num": 30, "path": "src/analysis/CauchySchwarz.v", "cluster": "analysis",
+    "classical_counterpart": "The Cauchy-Schwarz inequality is classical; NEW: nothing -- an explicit Q-vector (list Q) proof via the discriminant of |u - t v|^2 >= 0, with concrete examples.",
+    "title": "Cauchy-Schwarz over rational vectors", "topic": "Dot product and squared norm on list Q, the Cauchy-Schwarz inequality via the nonnegative quadratic norm_sq(t u - v), and concrete 2D/3D examples.",
+    "role": "Analysis foundation (inner-product inequality over Q). Self-contained.", "qed": 17, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "рациональные векторы list Q; скалярное произведение dot.", "roles": "норма/скалярное произведение как роли; CS-неравенство.", "rules": "|u−t·v|²≥0 ⟹ дискриминантное CS-неравенство.", "p4": "конечномерные Q-векторы, всё вычислимо (Element); CS через неотрицательность квадрата."},
+    "lemmas": [
+      {"name": "dot/norm_sq/scalar_mult/vec_sub/vec_add", "kind": "Fixpoint/Definition", "role": "операции над Q-векторами"},
+      {"name": "sq_nonneg/norm_sq_nonneg/dot_nil_l/r/dot_comm", "kind": "Lemma", "role": "квадраты неотрицательны, dot коммутативен"},
+      {"name": "length_scalar_mult/vec_sub/dot_scale/dot_sub_l/norm_sq_sub_expand", "kind": "Lemma", "role": "линейность и раскрытие нормы разности"},
+      {"name": "norm_sq_zero_dot_zero/Qmult_Qdiv_nonneg_helper", "kind": "Lemma", "role": "вспомогательные"},
+      {"name": "cauchy_schwarz", "kind": "Theorem", "role": "★ неравенство Коши-Шварца (через дискриминант)"},
+      {"name": "cs_concrete_34_10/11_11/12_34/3d", "kind": "Lemma", "role": "конкретные примеры (включая 3-4-5)"}
+    ],
+    "key_lemmas": [
+      {"name": "cauchy_schwarz", "analysis": "Коши-Шварц над Q-векторами через неотрицательность квадрата нормы |u−t·v|²≥0 (дискриминантный аргумент). Element-сторона: конечномерное, точная Q-арифметика. Та же дискриминантная идея, что в вене A (квадрат ⟺ свойство).", "tags": ["cauchy-schwarz", "discriminant", "Q-vectors"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Коши-Шварц над рациональными векторами через дискриминант нормы разности + конкретные примеры.", "caveat": "CS — фундаментальная классика; вклад — явная Q-формализация, не новый результат."},
+    "tags": ["cauchy-schwarz", "inner-product", "Q-vectors", "methods"]
+  },
+  {
+    "num": 31, "path": "src/analysis/CompactOperator.v", "cluster": "analysis",
+    "classical_counterpart": "Self-adjoint operators, real eigenvalues, orthogonal eigenvectors, and trace=sum/det=product of eigenvalues are classical; NEW: nothing -- explicit 2x2 Q-matrix eigenpairs (diagonal and symmetric) with computed orthogonality.",
+    "title": "Self-adjoint 2x2 operators over Q: eigenpairs, orthogonality, trace/det", "topic": "Linear operators as list-of-lists over Q, trace/det, self-adjointness, eigenpairs of diagonal and symmetric 2x2 matrices, orthogonal eigenvectors, and trace=sum/det=product of eigenvalues.",
+    "role": "Finite-dim spectral theory over Q (toward SpectralTheoremCompact). Self-contained.", "qed": 20, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "операторы list(list Q); 2x2 матрицы; собственные пары.", "roles": "самосопряжённость как роль; собственное значение/вектор как роли спектра.", "rules": "trace=сумма, det=произведение собственных значений; ортогональность собственных векторов.", "p4": "конечномерный спектр над Q вычислим точно (Element); связь дискриминанта 2x2 с рациональностью собственных значений (вена A)."},
+    "lemmas": [
+      {"name": "l2_inner/l2_norm_sq/vec_scale/vec_add", "kind": "Fixpoint/Definition", "role": "L2 скалярное произведение над Q"},
+      {"name": "LinOp/apply_op/mat_entry/mat_trace/det_2x2", "kind": "Definition", "role": "операторы, след, определитель 2x2"},
+      {"name": "is_self_adjoint/is_eigenpair_q", "kind": "Definition", "role": "самосопряжённость, собственная пара"},
+      {"name": "trace_2x2/det_2x2_compute", "kind": "Lemma", "role": "вычисление следа/определителя"},
+      {"name": "diagonal_self_adjoint/symmetric_self_adjoint", "kind": "Lemma", "role": "диагональные/симметричные самосопряжены"},
+      {"name": "eigenvalue_diagonal_1/2/eigenvectors_orthogonal_diagonal", "kind": "Lemma", "role": "собственные пары диагональной + ортогональность"},
+      {"name": "eigenvalue_sum_trace/eigenvalue_prod_det", "kind": "Lemma", "role": "★ след=сумма, det=произведение собственных значений"},
+      {"name": "eigenpair_symmetric_3/1/eigenvectors_orthogonal_symmetric/trace_det_eigenvalues", "kind": "Lemma", "role": "собственные пары симметричной 2x2"},
+      {"name": "rotation_90_apply/projection_x_apply/eigenpair_tail_q", "kind": "Lemma", "role": "конкретные операторы"}
+    ],
+    "key_lemmas": [
+      {"name": "eigenvalue_sum_trace", "analysis": "След = сумма собственных значений (и det=произведение) для 2x2 над Q — конечномерное ядро спектральной теории, точно вычислимое. Дискриминант tr²−4det решает рациональность собственных значений (прямая связь с веной A / BoundaryDecidability).", "tags": ["spectral", "trace", "discriminant-link"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Самосопряжённые 2x2 операторы над Q: собственные пары, ортогональность, след=сумма/det=произведение — конечномерный спектр точно.", "caveat": "Спектральные факты 2x2 классичны; вклад — явная Q-формализация, связь дискриминанта с веной A."},
+    "tags": ["spectral", "self-adjoint", "eigenvalue", "2x2", "methods"]
+  },
+  {
+    "num": 32, "path": "src/analysis/Continuity.v", "cluster": "analysis",
+    "classical_counterpart": "Continuity, uniform continuity, the Lipschitz condition and Lipschitz=>uniform continuity are classical; NEW: nothing -- Q-formalized definitions and basic closure (sum, identity, constants).",
+    "title": "Continuity, uniform continuity, Lipschitz over Q", "topic": "Pointwise/uniform continuity and Lipschitz on an interval over Q; Lipschitz implies uniform continuity, identity is Lipschitz, constants/sums uniformly continuous.",
+    "role": "Analysis foundation (continuity over Q). Self-contained.", "qed": 6, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "функции Q→Q на интервале [a,b]; константы Липшица.", "roles": "непрерывность/равномерная/Липшиц как роли регулярности.", "rules": "Lipschitz_on K ⟹ uniformly_continuous; замкнутость по сумме.", "p4": "регулярность определена эпсилон-дельта над Q (Element); Липшиц даёт явный модуль."},
+    "lemmas": [
+      {"name": "continuous_on/uniformly_continuous_on/Lipschitz_on", "kind": "Definition", "role": "непрерывность, равномерная, Липшиц над Q"},
+      {"name": "lipschitz_uniform/uniformly_continuous_pointwise", "kind": "Theorem", "role": "★ Липшиц ⟹ равномерная ⟹ точечная"},
+      {"name": "uniformly_continuous_const/identity_lipschitz/identity_uniformly_continuous/uniformly_continuous_sum", "kind": "Theorem", "role": "константы/тождество/сумма"}
+    ],
+    "key_lemmas": [
+      {"name": "lipschitz_uniform", "analysis": "Липшицевость даёт равномерную непрерывность с ЯВНЫМ модулем (delta = eps/K) над Q — Element-сторона: регулярность с вычислимым свидетелем, основа всех оценок ошибок в calculus-цепочке (FTC/Picard).", "tags": ["lipschitz", "uniform-continuity", "explicit-modulus"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Непрерывность/равномерная/Липшиц над Q + базовая замкнутость; Липшиц ⟹ равномерная с явным модулем.", "caveat": "Стандартные определения; ценность инфраструктурная (под calculus-цепочку)."},
+    "tags": ["continuity", "lipschitz", "uniform-continuity", "exposition"]
+  },
+  {
+    "num": 33, "path": "src/analysis/DominatedConvergence.v", "cluster": "analysis",
+    "classical_counterpart": "Lebesgue's dominated convergence theorem is classical and measure-theoretic; NEW: only a step-function (constructive) version over Q with L1 convergence and a worked DCT instance.",
+    "title": "Dominated convergence for step functions over Q", "topic": "Step functions over Q, their L1 integral/norm, boundedness and domination, L1 convergence/Cauchy, a dominated-convergence theorem for step functions, monotone-bounded L1-Cauchy, and a worked DCT example.",
+    "role": "Constructive integration over Q (DCT, step-function side). Self-contained.", "qed": 20, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "ступенчатые функции StepFun (list Step); их L1-интеграл/норма.", "roles": "доминирование как роль-мажоранта; L1-сходимость как роль предела.", "rules": "dominated M; l1_converges/l1_cauchy; DCT для ступенчатых.", "p4": "DCT на ступенчатых функциях конструктивен (Element); полный DCT для измеримых — role-limit."},
+    "lemmas": [
+      {"name": "Step/StepFun/step_integral/step_fun_integral/abs/norm/diff/bounded", "kind": "Record/Definition/Fixpoint", "role": "ступенчатые функции и L1-операции"},
+      {"name": "dominated/l1_converges/l1_cauchy/integral_converges/integral_cauchy", "kind": "Definition", "role": "доминирование и сходимость"},
+      {"name": "bounded_nil/singleton/step_integral/total_width/norm_bounded_by_width/norm_nonneg", "kind": "Lemma", "role": "оценки интеграла через ширину"},
+      {"name": "constant_integral_converges/cauchy/constant_converges/dominated", "kind": "Lemma", "role": "константный случай сходится/доминирован"},
+      {"name": "dominated_convergence_step", "kind": "Theorem", "role": "★ DCT для ступенчатых функций"},
+      {"name": "monotone_increasing/monotone_bounded_cauchy", "kind": "Definition/Lemma", "role": "монотонная ограниченная — L1-Коши"},
+      {"name": "example_constant_convergence/dominated/integral_stable/example_dct/zero_fun_integral/bounded_zero_norm/integral_converges_refl", "kind": "Lemma", "role": "проработанные примеры"}
+    ],
+    "key_lemmas": [
+      {"name": "dominated_convergence_step", "analysis": "DCT в конструктивной форме для ступенчатых функций над Q: при общей мажоранте M L1-сходимость функций даёт сходимость интегралов. Element-сторона теории интеграла; полный DCT для измеримых — role-limit.", "tags": ["DCT", "step-functions", "L1", "constructive"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Доминированная сходимость для ступенчатых функций над Q (L1-сходимость ⟹ сходимость интегралов) + проработанный пример.", "caveat": "DCT классична (Лебег); вклад — конструктивная ступенчатая версия над Q, не полный DCT."},
+    "tags": ["DCT", "integration", "step-functions", "L1", "methods"]
+  },
+  {
+    "num": 34, "path": "src/analysis/FourierApplications.v", "cluster": "analysis",
+    "classical_counterpart": "The discrete Fourier transform on Z/4, the heat-kernel eigenvalues, convolution-as-multiplication and the impulse identity are classical signal processing; NEW: nothing -- exact Q computations on the 4-cycle.",
+    "title": "DFT applications on the 4-cycle over Q: heat kernel, convolution", "topic": "DFT-4 basis, heat-kernel eigenvalues per mode, the convolution-impulse identity, adjacency-squared eigenvalues, normalized heat kernel and the zero-mode spectral gap -- all exact over Q.",
+    "role": "Fourier sub-thread (DFT on Z/4 applications). Self-contained.", "qed": 14, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "сигналы nat→Q на 4-цикле; ДПФ-базис phi_k.", "roles": "собственные значения теплового ядра/смежности как роли мод.", "rules": "dft_4; heat_eigenvalue; свёртка = умножение в частотной области.", "p4": "ДПФ на Z/4 — конечное точное вычисление над Q (Element)."},
+    "lemmas": [
+      {"name": "cycle_eigenvalue_4/heat_eigenvalue_4/phi_0..3/inner4/dft_4/cycle_adj_4/adj_action_4", "kind": "Definition", "role": "ДПФ-4 базис, тепловое ядро, смежность"},
+      {"name": "heat_eigen0_step1/2/eigen1_vanishes/eigen3_vanishes/eigen2_step1/2", "kind": "Lemma", "role": "собственные значения теплового ядра по модам"},
+      {"name": "heat_impulse_4/heat_K0_is_impulse/K1_is_adj", "kind": "Definition/Lemma", "role": "тепловое ядро как импульс/смежность при малом K"},
+      {"name": "conv_4/conv_impulse_identity", "kind": "Definition/Lemma", "role": "★ свёртка с импульсом = тождество"},
+      {"name": "adj2_action_4/adj_squared_eigen0/2/heat_K2_via_adj2", "kind": "Definition/Lemma", "role": "квадрат смежности"},
+      {"name": "normalized_heat_4/normalized_heat_even_j0/spectral_gap_zero_modes", "kind": "Definition/Lemma", "role": "нормированное ядро, нулевая мода"}
+    ],
+    "key_lemmas": [
+      {"name": "conv_impulse_identity", "analysis": "Свёртка с импульсом = тождество — конкретная проверка теоремы о свёртке на Z/4 над Q (свёртка во времени = умножение в частоте). Element-сторона ДПФ: всё точно, конечно.", "tags": ["DFT", "convolution", "exact"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Приложения ДПФ на 4-цикле над Q (тепловое ядро, свёртка-импульс) — точные конечные вычисления.", "caveat": "ДПФ и свёртка классичны; ценность — точная Q-формализация подветки, не новый результат."},
+    "tags": ["fourier", "DFT", "heat-kernel", "convolution", "exposition"]
+  },
+  {
+    "num": 35, "path": "src/analysis/FourierBasis.v", "cluster": "analysis",
+    "classical_counterpart": "The DFT eigenbasis of a circulant (adjacency) operator, orthogonality, Parseval and trace=sum-of-eigenvalues are classical; NEW: nothing -- exact Q verification on Z/4.",
+    "title": "The DFT eigenbasis on Z/4 over Q: orthogonality and the adjacency spectrum", "topic": "The four DFT modes phi_0..3, the adjacency eigenvalues per mode, pairwise orthogonality, norms, DFT of test signals, IDFT inverts DFT, adjacency symmetric, trace = sum of eigenvalues.",
+    "role": "Fourier sub-thread (the eigenbasis). Self-contained.", "qed": 19, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "ДПФ-моды phi_0..3 на Z/4; оператор смежности.", "roles": "ДПФ-базис как собственный базис циркулянта; ортогональность.", "rules": "adj_action; eigenvalue per mode; inner4 ортогональность.", "p4": "собственный базис конечен и точен над Q (Element)."},
+    "lemmas": [
+      {"name": "cycle_adj_4/adj_action_4/cycle_eigenvalue_4/phi_0..3/inner4/dft_4/idft_4", "kind": "Definition", "role": "смежность, ДПФ-базис, прямое/обратное ДПФ"},
+      {"name": "eigenvalue_0_site0/1/all/eigenvalue_2/1/3_all", "kind": "Lemma", "role": "★ phi_k — собственные векторы смежности"},
+      {"name": "ortho_01..23/norm_phi0/1", "kind": "Lemma", "role": "★ попарная ортогональность и нормы"},
+      {"name": "dft_constant_3/alternating_1/idft_inverts_dft_concrete", "kind": "Lemma", "role": "ДПФ тестовых сигналов; обратимость"},
+      {"name": "adj_symmetric/trace_equals_eigensum", "kind": "Lemma", "role": "смежность симметрична; след = сумма с.з."}
+    ],
+    "key_lemmas": [
+      {"name": "eigenvalue_0_all", "analysis": "ДПФ-моды phi_k — собственные векторы оператора смежности (циркулянта) над Q, точно. Element-сторона спектральной теории на конечном цикле: диагонализация циркулянта ДПФ-базисом проверена вычислением.", "tags": ["DFT", "eigenbasis", "circulant"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "ДПФ-собственный базис циркулянта на Z/4 над Q: ортогональность, спектр смежности, обратимость ДПФ.", "caveat": "Диагонализация циркулянтов ДПФ классична; ценность — точная Q-проверка."},
+    "tags": ["fourier", "DFT", "eigenbasis", "orthogonality", "exposition"]
+  },
+  {
+    "num": 36, "path": "src/analysis/FourierBranchSynthesis.v", "cluster": "analysis",
+    "classical_counterpart": "Assembling DFT diagonalization + dispersion + vacuum energy + reconstruction into one chain is exposition; NEW: nothing -- a synthesis theorem over the Fourier sub-branch results.",
+    "title": "Fourier branch grand synthesis", "topic": "A six-step synthesis (eigenvalues, Laplacian diagonalized, dispersion, vacuum, reconstruction, transfer) culminating in a grand synthesis theorem over the Fourier sub-branch.",
+    "role": "Fourier sub-thread synthesis (cites the other Fourier files). Self-contained.", "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["ToS analysis.Fourier* files"],
+    "err": {"elements": "результаты Fourier-подветки.", "roles": "синтез-цепочка как роль-сборка.", "rules": "six steps собраны в grand synthesis.", "p4": "сборка уже доказанных конечных результатов (Element)."},
+    "lemmas": [
+      {"name": "step1_eigenvalues/step2_laplacian_diagonalized/step3_dispersion/step4_vacuum/step5_reconstruction/step6_transfer", "kind": "Theorem", "role": "шесть шагов Fourier-подветки"},
+      {"name": "fourier_branch_grand_synthesis", "kind": "Theorem", "role": "★ гранд-синтез подветки"}
+    ],
+    "key_lemmas": [
+      {"name": "fourier_branch_grand_synthesis", "analysis": "Сборка всей Fourier-подветки в одну цепочку (собственные значения → диагонализация лапласиана → дисперсия → вакуум → реконструкция → передача). Чисто синтез уже доказанных конечных результатов.", "tags": ["synthesis", "fourier"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Гранд-синтез Fourier-подветки (6 шагов в одну цепочку).", "caveat": "Чистая сборка экспозиции; 0 нового содержания."},
+    "tags": ["fourier", "synthesis", "exposition"]
+  },
+  {
+    "num": 37, "path": "src/analysis/FourierCayleyConnection.v", "cluster": "analysis",
+    "classical_counterpart": "The Cayley transform of an eigenvalue (lambda -> (1-lambda/...)) relating Laplacian and transfer/Green spectra is standard; NEW: only exact Q values linking the Fourier branch to the Cayley/SO transform.",
+    "title": "Cayley transform linking Fourier eigenvalues to transfer/Green spectra over Q", "topic": "The Cayley eigenvalue map, its values (rational, e.g. 3/5, -5/13), the 4-cycle relation, the transfer eigenvalue, a 2-circulant trace/det, the Green spectral function, and a synthesis.",
+    "role": "Fourier sub-thread bridge to Cayley (rational spectra). Self-contained.", "qed": 16, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "собственные значения; Cayley-отображение лямбда.", "roles": "Cayley-преобразование как мост лапласиан↔передача/Грин.", "rules": "cayley_eigenvalue; transfer/green spectral.", "p4": "Cayley-образы РАЦИОНАЛЬНЫ (3/5, −5/13 — пифагоровы!) — Element; связь с RationalSO3/3-4-5."},
+    "lemmas": [
+      {"name": "cayley_eigenvalue/qpow_conn/transfer_eigenvalue/circ2_ev_plus/minus/green_spectral", "kind": "Definition", "role": "Cayley, передача, Грин-спектр"},
+      {"name": "cayley_zero/two/at_0_is_1/at_1/at_1_le_1/at_3/cycle4_0/1/2", "kind": "Lemma", "role": "★ значения Cayley (3/5, −5/13 — рациональны)"},
+      {"name": "transfer_K0/K1/circ2_trace/det/green_K0/K1", "kind": "Lemma", "role": "передача и Грин при малом K"},
+      {"name": "fourier_cayley_synthesis", "kind": "Theorem", "role": "синтез связи"}
+    ],
+    "key_lemmas": [
+      {"name": "cayley_at_3", "analysis": "Cayley-образ собственного значения = −5/13 (и 3/5 при lambda=1) — РАЦИОНАЛЬНЫЕ значения, причём пифагоровы (3/5, 5/13). Связывает Fourier-спектр с рациональными SO-вращениями (RationalSO3/3-4-5): Element-сторона.", "tags": ["cayley", "rational-spectrum", "pythagorean"]}
+    ],
+    "uniqueness": {"score": 2, "level": "new-framing", "claim": "Cayley-преобразование связывает Fourier-собственные значения с передаточным/Грин-спектром РАЦИОНАЛЬНЫМИ (пифагоровыми) значениями — мост к RationalSO3.", "caveat": "Cayley-преобразование спектра стандартно; интересна лишь рациональность/пифагоровость значений."},
+    "tags": ["fourier", "cayley", "rational-spectrum", "new-framing"]
+  },
+  {
+    "num": 38, "path": "src/analysis/FourierCoefficients.v", "cluster": "analysis",
+    "classical_counterpart": "DFT-2 coefficients, Parseval, and the powers of i (period 4) are classical; NEW: nothing -- exact Q/integer computations on Z/2 and the i-power cycle.",
+    "title": "DFT-2 coefficients, Parseval, and the i-power cycle over Q", "topic": "DFT-2 of delta/const/oscillating signals, DFT-2 squared, Parseval on Z/2, and the real/imag parts of i^n with period 4.",
+    "role": "Fourier sub-thread (smallest DFT + i-powers). Self-contained.", "qed": 16, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "ДПФ-2 коэффициенты; степени i (re/im).", "roles": "коэффициенты ДПФ; периодичность i^n.", "rules": "dft2_apply; parseval_dft2; i_power period 4.", "p4": "ДПФ-2 и цикл i^n — конечные точные вычисления над Q (Element)."},
+    "lemmas": [
+      {"name": "dft2/dft2_apply", "kind": "Definition", "role": "ДПФ на Z/2"},
+      {"name": "dft2_delta_0/1/const_0/1/osc_0/1/sq_00/01/11", "kind": "Lemma", "role": "ДПФ-2 конкретных сигналов и квадратов"},
+      {"name": "parseval_dft2", "kind": "Lemma", "role": "★ Парсеваль на Z/2"},
+      {"name": "i_power_re/im/i_pow_0/1/2/3/period", "kind": "Definition/Lemma", "role": "степени i, период 4"},
+      {"name": "fourier_coefficients_synthesis", "kind": "Theorem", "role": "синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "parseval_dft2", "analysis": "Тождество Парсеваля на Z/2 (энергия во времени = энергия в частоте) — точно над Q. Простейший случай сохранения энергии ДПФ, Element-сторона.", "tags": ["parseval", "DFT-2"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "ДПФ-2 коэффициенты, Парсеваль на Z/2 и цикл i^n (период 4) — точные конечные вычисления.", "caveat": "Классика ДПФ; ценность — точная Q-формализация."},
+    "tags": ["fourier", "DFT-2", "parseval", "exposition"]
+  },
+  {
+    "num": 39, "path": "src/analysis/FourierConvergence.v", "cluster": "analysis",
+    "classical_counterpart": "Parseval, Bessel's inequality and Fourier reconstruction are classical; NEW: nothing -- exact Q verification on Z/4 for several test signals.",
+    "title": "Parseval, Bessel and reconstruction on Z/4 over Q", "topic": "DFT-4 of test signals, Parseval for each, Bessel's inequality for partial frequency energy, exact DFT coefficients, time-energy nonnegativity, reconstruction, and DFT linearity.",
+    "role": "Fourier sub-thread (convergence/energy). Self-contained.", "qed": 16, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "сигналы на Z/4; энергии во времени/частоте.", "roles": "Парсеваль/Бессель как роли сохранения/оценки энергии.", "rules": "time_energy=freq_energy (Парсеваль); partial ≤ total (Бессель).", "p4": "энергетические тождества точны над Q на конечном цикле (Element)."},
+    "lemmas": [
+      {"name": "phi_0..3/inner4/dft_4/time_energy_4/freq_energy_4", "kind": "Definition", "role": "ДПФ-4 и энергии"},
+      {"name": "f_const/impulse/alt/ramp/mixed", "kind": "Definition", "role": "тестовые сигналы"},
+      {"name": "parseval_constant/impulse/alternating/ramp/mixed", "kind": "Lemma", "role": "★ Парсеваль для каждого сигнала"},
+      {"name": "partial_freq_1/2/bessel_impulse_1/ramp_2", "kind": "Definition/Lemma", "role": "★ неравенство Бесселя (частичная ≤ полная)"},
+      {"name": "dft_impulse_0/1/ramp_0/time_energy_nonneg_const/impulse", "kind": "Lemma", "role": "коэффициенты и неотрицательность энергии"},
+      {"name": "reconstruct_4/impulse/ramp/mixed/f_sum/dft_linearity_mode0", "kind": "Definition/Lemma", "role": "реконструкция и линейность"}
+    ],
+    "key_lemmas": [
+      {"name": "bessel_ramp_2", "analysis": "Неравенство Бесселя: частичная частотная энергия ≤ полной — проверено над Q для конкретных сигналов. Element-сторона сходимости Фурье: монотонный рост частичных сумм к полной энергии.", "tags": ["bessel", "energy", "DFT"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Парсеваль, Бессель и реконструкция на Z/4 над Q для нескольких сигналов — точные вычисления.", "caveat": "Классика Фурье; ценность — точная Q-проверка."},
+    "tags": ["fourier", "parseval", "bessel", "exposition"]
+  },
+  {
+    "num": 40, "path": "src/analysis/FourierDispersion.v", "cluster": "analysis",
+    "classical_counterpart": "The lattice dispersion relation omega^2(k) from the Laplacian spectrum, the massless zero mode and the Brillouin cutoff are classical lattice physics; NEW: nothing -- exact Q values on Z/4.",
+    "title": "Lattice dispersion omega^2(k) on Z/4 over Q: massless zero mode", "topic": "omega^2 per mode = Laplacian eigenvalue, the zero mode is massless, the Brillouin cutoff value, nonnegativity, a speed-squared proxy, and a zero mass gap.",
+    "role": "Fourier sub-thread (dispersion/physics). Builds on FourierLaplacian.", "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "ToS analysis.FourierLaplacian"],
+    "err": {"elements": "моды k на Z/4; omega²(k).", "roles": "дисперсия как роль частота↔мода; нулевая мода = безмассовая.", "rules": "omega²=лапласиан-собственное значение; mass_gap=omega²(0)=0.", "p4": "дисперсия точна над Q (Element); нулевая мода безмассова."},
+    "lemmas": [
+      {"name": "omega_sq_4/mode0/1/2/3", "kind": "Definition/Lemma", "role": "дисперсия по модам"},
+      {"name": "zero_mode_massless/brillouin_cutoff/omega_sq_nonneg", "kind": "Theorem/Lemma", "role": "★ нулевая мода безмассова; Бриллюэн-обрезание"},
+      {"name": "speed_sq_proxy/speed_sq_value/mass_gap_4/massless_particle", "kind": "Definition/Lemma", "role": "скорость²; нулевой mass gap"},
+      {"name": "fourier_dispersion_synthesis", "kind": "Theorem", "role": "синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "zero_mode_massless", "analysis": "omega²(0)=0 — нулевая мода безмассова (Goldstone-подобная) на решёточной дисперсии Z/4 над Q. Element-сторона решёточной физики: дисперсия = спектр лапласиана, точно.", "tags": ["dispersion", "massless", "lattice"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Решёточная дисперсия omega²(k) на Z/4 над Q: безмассовая нулевая мода, Бриллюэн-обрезание.", "caveat": "Решёточная дисперсия классична; ценность — точная Q-формализация."},
+    "tags": ["fourier", "dispersion", "lattice", "massless", "exposition"]
+  },
+  {
+    "num": 41, "path": "src/analysis/FourierGeneralN.v", "cluster": "analysis",
+    "classical_counterpart": "The general-N DFT, the Hadamard/Walsh basis orthogonality, Parseval and circulant eigenvalues are classical; NEW: nothing -- a general-N signal type with N=2 Hadamard worked out exactly over Q.",
+    "title": "General-N DFT over Q: Hadamard basis, Parseval", "topic": "A general-N Signal type, inner product, DFT/IDFT, time/freq energy, the Hadamard basis with orthogonality, Parseval for N=2, adjacency-squared eigenvalues, and the cycle-4 eigenvalue list.",
+    "role": "Fourier sub-thread (general N). Self-contained.", "qed": 12, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "сигналы nat→Q общей длины N; базис Адамара.", "roles": "ДПФ/Адамар-базис общего N; ортогональность.", "rules": "inner_N; had_basis ортогонален; Парсеваль N=2.", "p4": "общий N параметризует, но каждый конкретный N — конечное точное вычисление (Element)."},
+    "lemmas": [
+      {"name": "Signal/inner_N/dft_N/idft_N/time_energy/freq_energy", "kind": "Definition", "role": "общий-N ДПФ и энергии"},
+      {"name": "had_basis/had_norm_sq", "kind": "Definition", "role": "базис Адамара"},
+      {"name": "had_inner_00/11/01/10/had_orthogonal/parseval_N2", "kind": "Lemma", "role": "★ ортогональность Адамара; Парсеваль N=2"},
+      {"name": "adj2/adj2_dft_eigenvalue/_1/cycle4_eigenvalues/ev_count/sum/sq_sum", "kind": "Definition/Lemma", "role": "квадрат смежности; список собственных значений Z/4"},
+      {"name": "fourier_general_synthesis", "kind": "Theorem", "role": "синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "had_orthogonal", "analysis": "Ортогональность базиса Адамара (общий N) над Q — связь с Walsh-Hadamard нитью q-kinematics (n-кубитный Element-базис). Element-сторона: ортогональность точна, без √2 (норма²=2, не норма).", "tags": ["hadamard", "orthogonality", "walsh"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Общий-N ДПФ над Q + базис Адамара (ортогональность, Парсеваль N=2), связь с Walsh-Hadamard нитью.", "caveat": "Общий ДПФ и Адамар классичны; вклад — параметризация по N + Q-точность."},
+    "tags": ["fourier", "DFT", "hadamard", "general-N", "methods"]
+  },
+  {
+    "num": 42, "path": "src/analysis/FourierLaplacian.v", "cluster": "analysis",
+    "classical_counterpart": "The discrete Laplacian on a cycle, its eigenvalues 2-2cos(2pi k/N), row sums zero and trace=2N are classical; NEW: nothing -- exact Q values on Z/4.",
+    "title": "The discrete Laplacian on Z/4 over Q: eigenvalues, trace=2N", "topic": "The Z/4 Laplacian action and eigenvalues (0,2,4,2), the DFT modes as eigenvectors, row sums zero, eigenvalue sum, and trace = 2N.",
+    "role": "Fourier sub-thread (the Laplacian; feeds dispersion). Self-contained.", "qed": 12, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "лапласиан на Z/4; моды phi_k.", "roles": "собственные значения лапласиана по модам; phi_k собственные.", "rules": "laplacian_eigenvalue; row_sum_zero; trace=2N.", "p4": "лапласиан-спектр точен над Q (Element)."},
+    "lemmas": [
+      {"name": "laplacian_action_4/laplacian_eigenvalue_4", "kind": "Definition", "role": "лапласиан и его собственные значения"},
+      {"name": "lap_ev_0/1/2/3", "kind": "Lemma", "role": "★ собственные значения (0,2,4,2)"},
+      {"name": "laplacian_phi0/1/2/3/row_sum_zero", "kind": "Lemma", "role": "phi_k собственные; сумма строки = 0"},
+      {"name": "lap_eigenvalue_sum/trace_eq_2N", "kind": "Lemma", "role": "сумма с.з. = след = 2N"},
+      {"name": "fourier_laplacian_synthesis", "kind": "Theorem", "role": "синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "lap_ev_2", "analysis": "Собственные значения лапласиана Z/4 = (0,2,4,2) — точно над Q, диагонализованы ДПФ-модами. Element-сторона: дискретный лапласиан = циркулянт, спектр вычислен. Питает дисперсию (omega²=lap-eigenvalue).", "tags": ["laplacian", "spectrum", "circulant"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Дискретный лапласиан на Z/4 над Q: собственные значения (0,2,4,2), след=2N, диагонализация ДПФ.", "caveat": "Дискретный лапласиан классичен; ценность — точная Q-проверка."},
+    "tags": ["fourier", "laplacian", "spectrum", "exposition"]
+  },
+  {
+    "num": 43, "path": "src/analysis/FourierProcess.v", "cluster": "analysis",
+    "classical_counterpart": "The DFT as a finite computation (no infinite sums) is the constructive view; NEW is only the explicit P4 framing: the DFT is a finite staged process, contrasting classical-vs-P4.",
+    "title": "The DFT as a finite P4 process (staged, no infinite sums)", "topic": "Staged signals, staged inner products and DFT coefficients shown finite, energy monotonicity, the DFT as a finite computation, P4 compatibility, and classical-vs-P4 contrast.",
+    "role": "Fourier sub-thread with explicit P4 framing. Self-contained.", "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "поэтапные сигналы StagedSignal N; конечные суммы.", "roles": "ДПФ как конечный поэтапный процесс (P4).", "rules": "dft_process финитен; энергия монотонна; classical_vs_p4.", "p4": "★ ДПФ — КОНЕЧНОЕ поэтапное вычисление, не бесконечная сумма (Element); явный P4-контраст с классикой."},
+    "lemmas": [
+      {"name": "StagedSignal/inner_stage/dft_coeff/dft_process", "kind": "Definition/Fixpoint", "role": "поэтапный ДПФ"},
+      {"name": "dft_process_finite/inner_stage_self_nonneg/comm/zero", "kind": "Lemma", "role": "финитность и свойства скалярного произведения"},
+      {"name": "time_energy_N/nonneg/zero/monotone", "kind": "Definition/Lemma", "role": "энергия монотонна по стадии"},
+      {"name": "dft_is_finite_computation/dft_p4_compatible/classical_vs_p4", "kind": "Lemma/Theorem", "role": "★ ДПФ конечен, P4-совместим"},
+      {"name": "fourier_process_synthesis", "kind": "Theorem", "role": "синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "dft_p4_compatible", "analysis": "ДПФ — конечное поэтапное вычисление (StagedSignal), не бесконечная сумма: явная P4-формулировка, отделяющая Element-вычислимое от классического предельного. Связь с процесс-онтологией (вена C) в анализе.", "tags": ["P4", "finite-computation", "DFT"]}
+    ],
+    "uniqueness": {"score": 2, "level": "new-framing", "claim": "ДПФ как конечный поэтапный P4-процесс (не бесконечная сумма), с явным classical-vs-P4 контрастом.", "caveat": "Конечность ДПФ очевидна; ново лишь явное P4-обрамление подветки."},
+    "tags": ["fourier", "DFT", "P4", "process", "new-framing"]
+  },
+  {
+    "num": 44, "path": "src/analysis/FourierSpectralDecomp.v", "cluster": "analysis",
+    "classical_counterpart": "Spectral decomposition / reconstruction and the resolvent (Green function) of a circulant are classical; NEW: nothing -- exact Q reconstruction and transfer/Green values on Z/4.",
+    "title": "Spectral decomposition and Green function on Z/4 over Q", "topic": "Spectral components, reconstruction (identity), transfer spectral diagonal/offdiagonal, the Green spectral function, and a synthesis.",
+    "role": "Fourier sub-thread (spectral decomposition/resolvent). Self-contained.", "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "спектральные компоненты; передаточная/Грин функции.", "roles": "спектральное разложение/реконструкция; резольвента (Грин).", "rules": "spectral_recon = тождество; transfer/green spectral.", "p4": "спектральное разложение точно над Q на конечном цикле (Element)."},
+    "lemmas": [
+      {"name": "spectral_comp/spectral_recon/test_sig", "kind": "Definition", "role": "спектральные компоненты и реконструкция"},
+      {"name": "recon_test_0/1/2/3/reconstruction_identity", "kind": "Lemma/Theorem", "role": "★ реконструкция = тождество"},
+      {"name": "transfer_spectral/K0_diag/offdiag/green_spectral_4/green_K1_j0", "kind": "Definition/Lemma", "role": "передаточная и Грин функции"},
+      {"name": "fourier_spectral_synthesis", "kind": "Theorem", "role": "синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "reconstruction_identity", "analysis": "Спектральная реконструкция = тождество (сигнал восстанавливается из спектральных компонент) над Q. Element-сторона: разложение по собственному базису полно и точно на конечном цикле.", "tags": ["spectral-decomposition", "reconstruction"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "Спектральное разложение и Грин-функция на Z/4 над Q: реконструкция-тождество, резольвента.", "caveat": "Спектральное разложение классично; ценность — точная Q-проверка."},
+    "tags": ["fourier", "spectral-decomposition", "green-function", "exposition"]
+  },
+  {
+    "num": 45, "path": "src/analysis/FourierSynthesis.v", "cluster": "analysis",
+    "classical_counterpart": "Circulant eigenvalues, the resolvent/Green function and the Ising transfer matrix are classical; NEW: nothing -- exact Q values tying a 2-circulant to an Ising-like transfer eigenvalue.",
+    "title": "Fourier grand synthesis: 2-circulant eigenvalues, Ising transfer over Q", "topic": "A 2-circulant, its eigenvalues, the Green function and its growth, an Ising-circulant with concrete plus/minus eigenvalues, and a grand synthesis.",
+    "role": "Fourier sub-thread synthesis (2-circulant + Ising). Self-contained.", "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "2-циркулянт; Грин-функция; Изинг-передача.", "roles": "собственные значения циркулянта; передаточная матрица Изинга.", "rules": "circ2_eigenvalue; green_circ2 растёт; ising eigenvalue.", "p4": "циркулянт-спектр и Грин точны над Q (Element)."},
+    "lemmas": [
+      {"name": "circ2/circ2_eigenvalue_0/1/qpow/green_circ2", "kind": "Definition/Lemma", "role": "2-циркулянт, собственные значения, Грин"},
+      {"name": "green_circ2_K0/K1/K2/grows", "kind": "Lemma", "role": "Грин растёт с K"},
+      {"name": "ising_circ_a/b/ising_eigenvalue_plus/minus", "kind": "Definition/Lemma", "role": "Изинг-циркулянт собственные значения"},
+      {"name": "fourier_grand_synthesis", "kind": "Theorem", "role": "★ гранд-синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "ising_eigenvalue_plus", "analysis": "Собственные значения Изинг-подобного 2-циркулянта точно над Q — связь Фурье-диагонализации с передаточной матрицей статфизики. Element-сторона: конечный спектр.", "tags": ["circulant", "ising", "transfer-matrix"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "2-циркулянт, Грин-функция и Изинг-передача над Q — точные конечные вычисления.", "caveat": "Циркулянты и передаточные матрицы классичны; ценность — Q-формализация."},
+    "tags": ["fourier", "circulant", "ising", "exposition"]
+  },
+  {
+    "num": 46, "path": "src/analysis/FourierTransform.v", "cluster": "analysis",
+    "classical_counterpart": "Cyclic convolution and its DFT diagonalization are classical; NEW: nothing -- a tiny 2-point convolution with concrete cases.",
+    "title": "2-point cyclic convolution over Q", "topic": "The 2-point convolution conv2 with delta/const/oscillating cases.",
+    "role": "Fourier sub-thread (smallest convolution). Self-contained.", "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "2-точечная свёртка conv2.", "roles": "свёртка как роль; конкретные случаи.", "rules": "conv2 на дельте/константе/осцилляции.", "p4": "2-точечная свёртка — конечное точное вычисление (Element)."},
+    "lemmas": [
+      {"name": "conv2", "kind": "Definition", "role": "2-точечная циклическая свёртка"},
+      {"name": "conv2_delta/const/osc", "kind": "Lemma", "role": "★ конкретные свёртки"}
+    ],
+    "key_lemmas": [
+      {"name": "conv2_delta", "analysis": "Свёртка с дельтой = тождество (2-точечный случай) над Q — простейшая проверка теоремы о свёртке. Element-сторона: конечно, точно.", "tags": ["convolution", "delta"]}
+    ],
+    "uniqueness": {"score": 1, "level": "exposition", "claim": "2-точечная циклическая свёртка над Q с конкретными случаями.", "caveat": "Тривиальный случай свёртки; ценность минимальна (часть подветки)."},
+    "tags": ["fourier", "convolution", "exposition"]
+  },
+  {
+    "num": 47, "path": "src/analysis/FourierVacuumEnergy.v", "cluster": "analysis",
+    "classical_counterpart": "Zero-point (vacuum) energy as a sum of mode frequencies and energy density are classical; NEW is only the P4 framing: the vacuum energy is a finite staged process (partial sums), not a completed divergent sum, contrasted with 1D Casimir.",
+    "title": "Vacuum energy on Z/4 as a finite P4 process over Q", "topic": "The summed mode omega^2 (=2), nonzero mode count, average omega^2, the vacuum energy as a RealProcess of partial sums (monotone, finite at each stage), energy density, contrast with 1D Casimir, and P4 framing.",
+    "role": "Fourier sub-thread with P4 vacuum-energy framing. Self-contained.", "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "RealProcess (ProcessCore-style)"],
+    "err": {"elements": "моды omega²; частичные суммы вакуумной энергии.", "roles": "вакуумная энергия как RealProcess частичных сумм (P4).", "rules": "partial_omega_sq_sum монотонна; vacuum_process финитен на стадии.", "p4": "★ вакуумная энергия — КОНЕЧНЫЙ поэтапный процесс (Element), не завершённая расходящаяся сумма; контраст с 1D Casimir."},
+    "lemmas": [
+      {"name": "vacuum_energy_sq_4/value/nonzero_modes_count/avg_omega_sq_4/value", "kind": "Definition/Lemma", "role": "суммарное omega², число мод, среднее"},
+      {"name": "partial_omega_sq_sum/vacuum_process/finite/partial_sum_monotone", "kind": "Fixpoint/Definition/Lemma", "role": "★ вакуумная энергия как монотонный конечный процесс"},
+      {"name": "energy_density_4/value/density_not_casimir_1d", "kind": "Definition/Lemma", "role": "плотность энергии; контраст с Casimir"},
+      {"name": "vacuum_energy_p4/fourier_vacuum_synthesis", "kind": "Theorem", "role": "★ P4-формулировка вакуумной энергии"}
+    ],
+    "key_lemmas": [
+      {"name": "vacuum_energy_p4", "analysis": "Вакуумная энергия как КОНЕЧНЫЙ поэтапный процесс частичных сумм (RealProcess), монотонный и финитный на каждой стадии — P4-разрешение «расходящейся суммы нулевых колебаний». Вена C в физике анализа: энергия = процесс, не завершённый расходящийся объект.", "tags": ["vacuum-energy", "P4", "process", "finite"]}
+    ],
+    "uniqueness": {"score": 2, "level": "new-framing", "claim": "Вакуумная энергия как конечный поэтапный P4-процесс (монотонные частичные суммы), не завершённая расходящаяся сумма — вена C в физике.", "caveat": "Нулевая энергия мод классична; ново лишь P4/процесс-обрамление + контраст с Casimir."},
+    "tags": ["fourier", "vacuum-energy", "P4", "process", "new-framing"]
+  },
+  {
+    "num": 48, "path": "src/analysis/FTC.v", "cluster": "analysis",
+    "classical_counterpart": "The Fundamental Theorem of Calculus and the differentiation rules (sum, scale, chain, u-substitution) are classical; NEW is only the constructive Q form: FTC via Lipschitz increment bounds and Riemann sums with explicit epsilon error control, no real analysis.",
+    "title": "Fundamental theorem of calculus over Q via Lipschitz bounds", "topic": "Lipschitz calculus (const/identity/scale/add/sub/compose), FTC increment bound, monotonicity from a nonnegative derivative, u-substitution (affine), and Riemann-sum manipulation -- all with explicit epsilon control over Q.",
+    "role": "Calculus chain core (FTC over Q). Self-contained.", "qed": 28, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "функции Q→Q и их производные f'; константы Липшица; Риман-суммы.", "roles": "ФТА как роль связи производной и приращения; Липшиц как роль регулярности.", "rules": "ftc_increment_bound; монотонность из f'≥0; u-подстановка; epsilon-контроль.", "p4": "ФТА в эпсилон-форме над Q (Element): приближённое приращение с явной ошибкой, не точный интеграл."},
+    "lemmas": [
+      {"name": "Lipschitz_on/uniformly_continuous_on", "kind": "Definition", "role": "Липшиц и равномерная непрерывность"},
+      {"name": "lipschitz_const/identity/scale/add/sub/negate/compose/uniform_cont/bounded/affine", "kind": "Lemma", "role": "алгебра Липшица (замкнутость)"},
+      {"name": "ftc_increment_bound/monotone/strict_monotone/difference/absolute_value_bound", "kind": "Lemma", "role": "★ ФТА-оценки приращения и монотонность"},
+      {"name": "ftc_sum_rule/constant_function/scale_rule", "kind": "Lemma", "role": "правила интегрирования"},
+      {"name": "udiff_chain_affine/neg/ftc_u_substitution_affine/sub_interval", "kind": "Lemma", "role": "★ u-подстановка (аффинная)"},
+      {"name": "riemann_sum_negate_fn/sub/sandwich/bound_below", "kind": "Lemma", "role": "манипуляции Риман-сумм"},
+      {"name": "udiff_approx_lipschitz/implies_bounded", "kind": "Lemma", "role": "связь равномерной дифференцируемости и Липшица"}
+    ],
+    "key_lemmas": [
+      {"name": "ftc_increment_bound", "analysis": "ФТА в конструктивной форме: приращение f(b)−f(a) оценивается интегралом f' с явной epsilon-ошибкой через Липшиц. Element-сторона исчисления над Q: вместо точного равенства (требующего R) — приближение с вычислимым контролем ошибки. Ядро calculus-цепочки.", "tags": ["FTC", "lipschitz", "epsilon-control"]},
+      {"name": "ftc_u_substitution_affine", "analysis": "Замена переменной (аффинная) с контролем ошибки — нетривиальное правило исчисления, доказанное над Q без вещественных. Демонстрирует, что вся машина дифференцирования работает в эпсилон-форме.", "tags": ["u-substitution", "calculus"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "ФТА и правила дифференцирования над Q через Липшиц-оценки и Риман-суммы с явным epsilon-контролем (без вещественного анализа) — конструктивное исчисление.", "caveat": "ФТА и правила классичны; ново — систематическое эпсилон-конструктивное исполнение над Q (как вся calculus-цепочка), не новая теорема."},
+    "tags": ["FTC", "calculus", "lipschitz", "riemann-sum", "new-framing"]
+  },
+  {
+    "num": 49, "path": "src/analysis/FubiniProcess.v", "cluster": "analysis",
+    "classical_counterpart": "Fubini's theorem (iterated = double integral) is classical and measure-theoretic; NEW: only a step-function (2D rectangle) version over Q where iterated xy = iterated yx = double, exactly.",
+    "title": "Fubini for 2D step functions over Q", "topic": "1D and 2D step-function integrals over rectangles, iterated xy/yx integrals, Fubini on a single rectangle and on lists (iterated xy = yx = double), with concrete examples, plus a trace-commute synthesis.",
+    "role": "Constructive integration over Q (Fubini, step-function side). Self-contained.", "qed": 20, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "2D ступенчатые функции (списки прямоугольников); итерированные интегралы.", "roles": "Фубини как роль перестановки порядка интегрирования.", "rules": "iterated_xy = iterated_yx = double для прямоугольников и списков.", "p4": "Фубини на ступенчатых функциях точен над Q (Element); полный Фубини для измеримых — role-limit."},
+    "lemmas": [
+      {"name": "Step/StepFun/step_integral/Rectangle/StepFun2D/rect_integral/integral_2d", "kind": "Record/Definition/Fixpoint", "role": "1D/2D ступенчатые интегралы"},
+      {"name": "iterated_xy/yx/_list", "kind": "Definition/Fixpoint", "role": "итерированные интегралы"},
+      {"name": "fubini_rectangle/iterated_eq_double/yx_eq_double", "kind": "Lemma", "role": "★ Фубини на прямоугольнике"},
+      {"name": "fubini_step/iterated_xy_eq_2d/yx_eq_2d", "kind": "Theorem/Lemma", "role": "★ Фубини на списках прямоугольников"},
+      {"name": "example_rect_integral/fubini_concrete/two_rects/fubini_two", "kind": "Lemma", "role": "конкретные примеры"},
+      {"name": "integral_2d_nil/app/rect_integral_zero_val/width/trace_commute_scalar/fubini_and_trace", "kind": "Lemma/Theorem", "role": "аддитивность, вырожденные случаи, синтез"}
+    ],
+    "key_lemmas": [
+      {"name": "fubini_step", "analysis": "Фубини для 2D ступенчатых функций над Q: итерированный интеграл xy = yx = двойной, точно. Element-сторона: для конечных списков прямоугольников перестановка порядка интегрирования — вычислимое тождество, без условий измеримости.", "tags": ["fubini", "step-functions", "2D"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Фубини для 2D ступенчатых функций над Q (итерированный = двойной интеграл, оба порядка) точно.", "caveat": "Фубини классична; вклад — конструктивная ступенчатая версия над Q, не полный Фубини."},
+    "tags": ["fubini", "integration", "step-functions", "2D", "methods"]
+  },
+  {
+    "num": 50, "path": "src/analysis/HarmonicDiverges.v", "cluster": "analysis",
+    "classical_counterpart": "The divergence of the harmonic series (Oresme's 2^k-block argument) is classical; NEW: nothing -- an exact nat/Q formalization of the block lower bound, divergence as unboundedness.",
+    "title": "The harmonic series diverges (Oresme blocks) over Q", "topic": "Partial sums of 1/n, the 2^k-block lower bound (each block >= 1/2), and divergence as the partial sums exceeding every bound.",
+    "role": "Series analysis over Q (a canonical divergence). Self-contained.", "qed": 21, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "частичные суммы 1/n; 2^k-блоки.", "roles": "расходимость как role-limit (нет конечной границы).", "rules": "каждый блок [2^k,2^{k+1}) ≥ 1/2 ⟹ суммы неограничены.", "p4": "расходимость = role-limit-правило (превосходит любую границу); каждая частичная сумма актуальна (Element)."},
+    "lemmas": [
+      {"name": "harmonic partial sums / block bounds", "kind": "Definition/Lemma", "role": "частичные суммы и блочные оценки (1/2 на блок)"},
+      {"name": "harmonic_diverges", "kind": "Theorem", "role": "★ гармонический ряд расходится (превосходит любую границу)"}
+    ],
+    "key_lemmas": [
+      {"name": "harmonic_diverges", "analysis": "Расходимость гармонического ряда (аргумент Орема: блок [2^k,2^{k+1}) суммирует ≥1/2, значит частичные суммы превосходят любую границу). Role-limit-узор: расходимость = отсутствие конечной границы, каждая частичная сумма — актуальный Element.", "tags": ["harmonic-series", "divergence", "role-limit"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Расходимость гармонического ряда (блоки Орема) точно над Q: каждый 2^k-блок ≥1/2, суммы неограничены.", "caveat": "Аргумент Орема — классика XIV века; вклад — точная Q/nat-формализация, не новый результат."},
+    "tags": ["harmonic-series", "divergence", "series", "role-limit", "methods"]
+  },
+  {
+    "num": 51, "path": "src/analysis/HeineBorelComplete.v", "cluster": "analysis",
+    "classical_counterpart": "Heine-Borel (every open cover of a compact set has a finite subcover) is classical and FAILS for [0,1] over Q (not complete); NEW is only the honest formalization: finite subcover EXTRACTED given a Lebesgue number, with the Q-non-compactness acknowledged.",
+    "title": "Heine-Borel over Q via a Lebesgue number (honest non-compactness)", "topic": "Epsilon-nets, open covers and intervals over Q; extracting a finite subcover from a grid given a Lebesgue-number hypothesis, with the genuine non-compactness of [0,1] cap Q acknowledged as the reason the hypothesis is needed.",
+    "role": "Analysis (Heine-Borel, honest Q version). Self-contained.", "qed": 28, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "эпсилон-сети; открытые покрытия интервалами над Q; число Лебега.", "roles": "компактность как role-limit ([0,1]∩Q НЕ компактно); число Лебега как честная гипотеза.", "rules": "при заданном числе Лебега из сетки извлекается конечное подпокрытие.", "p4": "[0,1]∩Q ГЕНУИННО не компактно (role-limit); конечное подпокрытие — Element ТОЛЬКО при числе Лебега (честная гипотеза, не хак)."},
+    "lemmas": [
+      {"name": "epsilon-nets / open covers / Lebesgue number", "kind": "Definition", "role": "сети, покрытия, число Лебега над Q"},
+      {"name": "finite subcover extraction (grid-based)", "kind": "Lemma", "role": "★ извлечение конечного подпокрытия по сетке"},
+      {"name": "heine_borel (with Lebesgue number)", "kind": "Theorem", "role": "★ Гейне-Борель при гипотезе числа Лебега"}
+    ],
+    "key_lemmas": [
+      {"name": "heine_borel (with Lebesgue number)", "analysis": "Гейне-Борель над Q ЧЕСТНО: конечное подпокрытие извлекается из сетки при гипотезе числа Лебега — потому что [0,1]∩Q genuinely НЕ компактно (нет R-полноты). Гипотеза не хак, а точная локализация недостающей полноты (role-limit). Образец честности проекта (CLAUDE.md invariant).", "tags": ["heine-borel", "lebesgue-number", "honest-non-compactness"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "Гейне-Борель над Q с честной гипотезой числа Лебега: [0,1]∩Q НЕ компактно (role-limit), конечное подпокрытие извлекается лишь при явной локализации недостающей R-полноты.", "caveat": "Гейне-Борель классичен; вклад — честное признание Q-некомпактности + локализация цены (число Лебега), не доказательство полного Гейне-Бореля."},
+    "tags": ["heine-borel", "compactness", "lebesgue-number", "honest-limitation", "new-framing"]
+  },
+  {
+    "num": 52, "path": "src/analysis/ImplicitFunction.v", "cluster": "analysis",
+    "classical_counterpart": "The implicit function theorem is classical; NEW is only a constructive contraction-mapping (damped iteration) version over Q producing the implicit solution as a process.",
+    "title": "Implicit function theorem via damped contraction over Q", "topic": "A function f, damping lambda, the contraction iterates solving f=0 implicitly, and the convergence of the implicit solution as a process.",
+    "role": "Analysis (implicit function via fixed point). Self-contained.", "qed": 20, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "функция f; демпфирование lambda; итераты.", "roles": "неявное решение как роль-неподвижная точка; демпфирование как роль сходимости.", "rules": "демпфированная итерация — сжатие ⟹ сходится к неявному решению.", "p4": "неявное решение = ПРОЦЕСС итераций (Element-стадии), предел — role-limit."},
+    "lemmas": [
+      {"name": "f / damping lambda / iterates", "kind": "Definition", "role": "функция, демпфирование, итераты"},
+      {"name": "contraction / convergence of implicit solution", "kind": "Lemma/Theorem", "role": "★ демпфированная итерация сжимает и сходится"}
+    ],
+    "key_lemmas": [
+      {"name": "convergence of implicit solution", "analysis": "Неявная функция через демпфированное сжатие: итерация f(x)=0 с демпфированием lambda — сжимающее отображение, сходящееся к неявному решению. Element-сторона: решение строится КАК ПРОЦЕСС итераций (Banach), не как готовый объект.", "tags": ["implicit-function", "contraction", "process"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Теорема о неявной функции через демпфированное сжатие над Q: неявное решение как сходящийся процесс итераций.", "caveat": "ТНФ и метод сжатий классичны; вклад — конструктивная Q-версия как процесс."},
+    "tags": ["implicit-function", "contraction", "fixed-point", "process", "methods"]
+  },
+  {
+    "num": 53, "path": "src/analysis/L1Space.v", "cluster": "analysis",
+    "classical_counterpart": "The L1 space (integrable step functions, L1 norm, triangle inequality, completeness-as-Cauchy) is classical functional analysis; NEW: nothing -- a constructive step-function L1 over Q.",
+    "title": "The L1 space of step functions over Q", "topic": "Step functions, the L1 norm, the triangle inequality, L1 Cauchy/convergence, and basic L1 structure over Q.",
+    "role": "Functional analysis over Q (L1). Self-contained.", "qed": 16, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "ступенчатые функции; L1-норма.", "roles": "L1-пространство как роль; норма/сходимость как роли.", "rules": "L1-норма, треугольное неравенство, L1-Коши.", "p4": "L1 на ступенчатых функциях конструктивен над Q (Element); полнота — процесс Коши."},
+    "lemmas": [
+      {"name": "step functions / L1 norm", "kind": "Definition", "role": "ступенчатые функции и L1-норма"},
+      {"name": "L1 triangle inequality / L1 Cauchy / convergence", "kind": "Lemma", "role": "★ норма-аксиомы, Коши/сходимость"}
+    ],
+    "key_lemmas": [
+      {"name": "L1 triangle inequality", "analysis": "Треугольное неравенство L1-нормы на ступенчатых функциях над Q — делает L1 настоящим нормированным пространством. Element-сторона: конструктивная функциональная аналитика без вещественной меры.", "tags": ["L1", "norm", "triangle-inequality"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "L1-пространство ступенчатых функций над Q: норма, треугольное неравенство, L1-Коши.", "caveat": "L1 классичен; вклад — конструктивная ступенчатая версия над Q."},
+    "tags": ["L1", "functional-analysis", "step-functions", "methods"]
+  },
+  {
+    "num": 54, "path": "src/analysis/L2Space.v", "cluster": "analysis",
+    "classical_counterpart": "The L2 Hilbert space (inner product, L2 norm, Cauchy-Schwarz, completeness-as-Cauchy) is classical; NEW: nothing -- a constructive step-function L2 over Q.",
+    "title": "The L2 space of step functions over Q", "topic": "Step functions with an L2 inner product, the L2 norm, Cauchy-Schwarz, the triangle inequality, and L2 Cauchy structure over Q.",
+    "role": "Functional analysis over Q (L2/Hilbert). Self-contained.", "qed": 19, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "ступенчатые функции; L2-скалярное произведение/норма.", "roles": "L2-гильбертово пространство как роль; скалярное произведение.", "rules": "L2-норма, Коши-Шварц, треугольное неравенство.", "p4": "L2 на ступенчатых функциях конструктивен над Q (Element); полнота — процесс."},
+    "lemmas": [
+      {"name": "step functions / L2 inner product / norm", "kind": "Definition", "role": "ступенчатые функции, скалярное произведение, норма"},
+      {"name": "L2 Cauchy-Schwarz / triangle inequality / Cauchy", "kind": "Lemma", "role": "★ CS, треугольное неравенство, Коши"}
+    ],
+    "key_lemmas": [
+      {"name": "L2 Cauchy-Schwarz", "analysis": "Коши-Шварц в L2 на ступенчатых функциях над Q — даёт треугольное неравенство и делает L2 пред-гильбертовым пространством. Element-сторона: конструктивная гильбертова структура без вещественной меры.", "tags": ["L2", "cauchy-schwarz", "hilbert"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "L2-пространство ступенчатых функций над Q: скалярное произведение, Коши-Шварц, треугольное неравенство.", "caveat": "L2/гильбертово пространство классично; вклад — конструктивная ступенчатая версия над Q."},
+    "tags": ["L2", "hilbert", "functional-analysis", "step-functions", "methods"]
+  },
+  {
+    "num": 55, "path": "src/analysis/LebesgueMeasure.v", "cluster": "analysis",
+    "classical_counterpart": "Lebesgue measure is classically built first (sigma-algebra, outer measure) then integration on top; NEW is the inversion: measure is DERIVED from the step-function integral (measure of a set = integral of its indicator), a constructive measure-from-integral over Q.",
+    "title": "Measure FROM the integral: Lebesgue measure as integral of indicators over Q", "topic": "Step-function integrals, indicators of intervals, the measure of a set defined as the integral of its indicator, additivity, monotonicity, and the measure of concrete sets -- measure derived from integral, not prior to it.",
+    "role": "Vein C-flavour: measure-from-integral (uniqueness-map cites LebesgueMeasure). Self-contained.", "qed": 22, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "ступенчатые интегралы; индикаторы интервалов; множества.", "roles": "мера как роль, ПРОИЗВОДНАЯ от интеграла (мера = интеграл индикатора).", "rules": "measure(S)=integral(indicator S); аддитивность, монотонность.", "p4": "мера ВЫВЕДЕНА из интеграла (Element), а не построена до него; конструктивно над Q — переворачивает классический порядок."},
+    "lemmas": [
+      {"name": "step integrals / indicators / measure", "kind": "Definition", "role": "интеграл, индикаторы, мера=интеграл индикатора"},
+      {"name": "measure additivity / monotonicity", "kind": "Lemma", "role": "★ аддитивность и монотонность меры"},
+      {"name": "measure of concrete sets", "kind": "Lemma", "role": "мера конкретных интервалов/объединений"}
+    ],
+    "key_lemmas": [
+      {"name": "measure additivity", "analysis": "Мера множества ОПРЕДЕЛЕНА как интеграл его индикатора (а не наоборот); аддитивность меры следует из аддитивности интеграла. Переворачивает классический порядок (сначала мера, потом интеграл) — конструктивный measure-from-integral над Q. Вена C-аромат: мера как производное правило, не первичный объект.", "tags": ["measure-from-integral", "additivity", "vein-C"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "Мера ВЫВЕДЕНА из интеграла (мера множества = интеграл индикатора), переворачивая классический порядок «сначала мера» — конструктивно над Q.", "caveat": "Конструктивная мера ≈ Бишоп; ново — явный measure-from-integral порядок + Q-исполнение, не новая теория меры."},
+    "tags": ["measure", "measure-from-integral", "lebesgue", "vein-C", "new-framing"]
+  },
+  {
+    "num": 56, "path": "src/analysis/LHopital.v", "cluster": "analysis",
+    "classical_counterpart": "L'Hopital's rule for 0/0 limits is classical; NEW is only a constructive Q form via Lipschitz/linear-approximation ratio bounds with explicit epsilon control.",
+    "title": "L'Hopital's rule over Q via ratio bounds", "topic": "The 0/0 ratio f/g near a point bounded by f'/g' via linear approximation, with explicit epsilon control over Q.",
+    "role": "Calculus over Q (L'Hopital). Self-contained.", "qed": 24, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "функции f,g и производные; отношение f/g у точки.", "roles": "правило Лопиталя как роль связи отношений.", "rules": "f/g ≈ f'/g' через линейное приближение + epsilon-контроль.", "p4": "Лопиталь в эпсилон-форме над Q (Element): отношение оценено с явной ошибкой."},
+    "lemmas": [
+      {"name": "ratio f/g / linear approximation", "kind": "Definition", "role": "отношение и линейное приближение"},
+      {"name": "lhopital ratio bound (epsilon)", "kind": "Lemma/Theorem", "role": "★ f/g оценено через f'/g' с epsilon"}
+    ],
+    "key_lemmas": [
+      {"name": "lhopital ratio bound (epsilon)", "analysis": "Правило Лопиталя над Q: отношение f/g (0/0) оценено отношением производных f'/g' через линейное приближение с явным epsilon-контролем. Element-сторона: вместо точного предела (R) — приближение с вычислимой ошибкой.", "tags": ["lhopital", "ratio-bound", "epsilon-control"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Правило Лопиталя над Q через оценки отношения производных с epsilon-контролем (без вещественного предела).", "caveat": "Лопиталь классичен; вклад — конструктивная эпсилон-Q-версия."},
+    "tags": ["lhopital", "calculus", "epsilon-control", "methods"]
+  },
+  {
+    "num": 57, "path": "src/analysis/MeasureSynthesis.v", "cluster": "analysis",
+    "classical_counterpart": "Assembling step-integral, measure-from-integral, Fubini, DCT into one measure-theory chain is exposition; NEW: nothing -- a synthesis over the constructive measure files.",
+    "title": "Measure theory synthesis over Q", "topic": "A synthesis tying together the step integral, measure-from-integral, Fubini and dominated convergence into one constructive measure-theory chain over Q.",
+    "role": "Analysis synthesis (measure thread). Cites StepIntegral/LebesgueMeasure/Fubini/DCT.", "qed": 18, "admitted": 0, "axioms": 0,
+    "imports": ["ToS analysis measure files"],
+    "err": {"elements": "результаты конструктивной теории меры над Q.", "roles": "синтез-цепочка теории меры.", "rules": "интеграл → мера → Фубини → DCT собраны.", "p4": "сборка конструктивных конечных результатов (Element)."},
+    "lemmas": [
+      {"name": "measure theory chain synthesis", "kind": "Theorem", "role": "★ синтез цепочки теории меры над Q"}
+    ],
+    "key_lemmas": [
+      {"name": "measure theory chain synthesis", "analysis": "Сборка конструктивной теории меры над Q: ступенчатый интеграл → мера-из-интеграла → Фубини → DCT в одну цепочку. Синтез уже доказанных результатов, демонстрирующий когерентность Q-подхода к мере.", "tags": ["synthesis", "measure-theory"]}
+    ],
+    "uniqueness": {"score": 2, "level": "synthesis+observation", "claim": "Синтез конструктивной теории меры над Q (интеграл→мера→Фубини→DCT) в одну когерентную цепочку.", "caveat": "Сборка уже доказанного; ценность — демонстрация когерентности measure-from-integral подхода, не новый результат."},
+    "tags": ["measure-theory", "synthesis", "Q"]
+  },
+  {
+    "num": 58, "path": "src/analysis/PeanoExistence.v", "cluster": "analysis",
+    "classical_counterpart": "Peano's existence theorem (a continuous ODE has a solution, no uniqueness without Lipschitz) is classical and uses compactness/Arzela-Ascoli; NEW is only a constructive Euler-polygon existence over Q.",
+    "title": "Peano existence for ODEs via Euler polygons over Q", "topic": "Euler-polygon approximate solutions of y'=f(y), their equicontinuity/boundedness, and the existence of a solution as the limit process -- existence without uniqueness (no Lipschitz).",
+    "role": "ODE analysis over Q (Peano existence). Self-contained.", "qed": 22, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "Эйлеровы ломаные приближения решения ОДУ.", "roles": "существование решения как role-limit ломаных; без единственности (нет Липшица).", "rules": "Эйлеровы ломаные равностепенно непрерывны/ограничены ⟹ предел-решение.", "p4": "решение существует как ПРОЦЕСС ломаных (Element-стадии); предел — role-limit; без Липшица — без единственности."},
+    "lemmas": [
+      {"name": "Euler polygons / equicontinuity / boundedness", "kind": "Definition/Lemma", "role": "Эйлеровы ломаные и их компактность"},
+      {"name": "peano_existence", "kind": "Theorem", "role": "★ существование решения ОДУ (без единственности)"}
+    ],
+    "key_lemmas": [
+      {"name": "peano_existence", "analysis": "Существование решения ОДУ y'=f(y) для НЕПРЕРЫВНОГО f через Эйлеровы ломаные над Q — без Липшица, потому без единственности (контраст с PicardLindelof). Element-сторона: решение строится как процесс ломаных приближений; предел — role-limit.", "tags": ["peano", "ODE", "euler-polygons", "existence-no-uniqueness"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "Существование Пеано для ОДУ через Эйлеровы ломаные над Q — существование БЕЗ единственности (нет Липшица), решение как процесс приближений.", "caveat": "Теорема Пеано классична (Арцела-Асколи); вклад — конструктивная Q-версия через ломаные + явный контраст с Пикаром (единственность)."},
+    "tags": ["peano", "ODE", "euler-polygons", "existence", "new-framing"]
+  },
+  {
+    "num": 59, "path": "src/analysis/PicardLindelof.v", "cluster": "analysis",
+    "classical_counterpart": "The Picard-Lindelof theorem (Lipschitz ODE has a unique solution) via Banach fixed point is classical; NEW is only the constructive Q form: Picard iteration as an explicit contraction process.",
+    "title": "Picard-Lindelof for Lipschitz ODEs via contraction over Q", "topic": "Picard iterates of a Lipschitz ODE, the contraction property, convergence to the unique solution, and the solution as a fixed-point process.",
+    "role": "ODE analysis over Q (Picard, unique solution). Self-contained.", "qed": 23, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "Пикаровы итераты Lipschitz-ОДУ.", "roles": "единственное решение как роль-неподвижная точка; Липшиц даёт сжатие.", "rules": "Пикарова итерация — сжатие ⟹ единственное решение (Банах).", "p4": "решение = ПРОЦЕСС Пикаровых итераций (Element-стадии), предел — role-limit; Липшиц ⟹ единственность."},
+    "lemmas": [
+      {"name": "Picard iterates / contraction", "kind": "Definition/Lemma", "role": "Пикаровы итераты и сжатие"},
+      {"name": "picard_lindelof (existence + uniqueness)", "kind": "Theorem", "role": "★ единственное решение Lipschitz-ОДУ"}
+    ],
+    "key_lemmas": [
+      {"name": "picard_lindelof (existence + uniqueness)", "analysis": "Пикар-Линделёф для Lipschitz-ОДУ через сжатие (Банах) над Q: итерация Пикара сжимает ⟹ ЕДИНСТВЕННОЕ решение. Element-сторона: решение строится как процесс итераций; контраст с Пеано (без Липшица — без единственности).", "tags": ["picard-lindelof", "ODE", "contraction", "uniqueness"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "Пикар-Линделёф для Lipschitz-ОДУ через явное сжатие над Q: единственное решение как процесс Пикаровых итераций; контраст с Пеано (существование без единственности).", "caveat": "Пикар-Линделёф и Банах классичны; вклад — конструктивная Q-версия как процесс + Lipschitz/no-Lipschitz дихотомия с Пеано."},
+    "tags": ["picard-lindelof", "ODE", "contraction", "uniqueness", "new-framing"]
+  },
+  {
+    "num": 60, "path": "src/analysis/SpectralTheoremCompact.v", "cluster": "analysis",
+    "classical_counterpart": "The spectral theorem for compact self-adjoint operators (orthonormal eigenbasis, real eigenvalues) is classical and infinite-dimensional; NEW is only the finite-dimensional Q instance (symmetric matrices diagonalized with rational/real eigenvalues).",
+    "title": "Spectral theorem for compact self-adjoint operators (finite-dim over Q)", "topic": "Self-adjoint finite-dim operators over Q, real eigenvalues, an orthogonal eigenbasis, and diagonalization -- the finite-dimensional core of the spectral theorem.",
+    "role": "Functional analysis over Q (spectral theorem, finite-dim). Builds on CompactOperator. Self-contained.", "qed": 18, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "ToS analysis.CompactOperator"],
+    "err": {"elements": "конечномерные самосопряжённые операторы над Q; собственные пары.", "roles": "спектральная теорема как роль-диагонализация; ортонормальный собственный базис.", "rules": "самосопряжённый ⟹ вещественные с.з. + ортогональный собственный базис.", "p4": "конечномерная спектральная теорема точна над Q (Element); бесконечномерный компактный случай — role-limit."},
+    "lemmas": [
+      {"name": "self-adjoint / eigenpairs / orthogonal eigenbasis", "kind": "Definition/Lemma", "role": "самосопряжённость, собственные пары, ортогональный базис"},
+      {"name": "spectral_theorem (finite-dim)", "kind": "Theorem", "role": "★ диагонализация самосопряжённого оператора"}
+    ],
+    "key_lemmas": [
+      {"name": "spectral_theorem (finite-dim)", "analysis": "Спектральная теорема в конечной размерности над Q: самосопряжённый оператор диагонализуется ортогональным собственным базисом с вещественными собственными значениями. Element-сторона: для конечной размерности — точное вычисление; бесконечномерный компактный случай (предельный) — role-limit.", "tags": ["spectral-theorem", "self-adjoint", "finite-dim"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "Спектральная теорема для самосопряжённых операторов в конечной размерности над Q (диагонализация, ортогональный собственный базис) — Element-ядро; бесконечномерный случай — role-limit.", "caveat": "Спектральная теорема классична; вклад — конечномерный Q-инстанс + честная граница с бесконечномерным."},
+    "tags": ["spectral-theorem", "self-adjoint", "finite-dim", "new-framing"]
+  },
+  {
+    "num": 61, "path": "src/analysis/Sqrt2Irrational.v", "cluster": "analysis",
+    "classical_counterpart": "The irrationality of sqrt2 is classical (Pythagoreans); NEW: nothing -- a clean infinite-descent Q proof, REUSED across the q-kinematics surd thread (T-gate/45-degree role-limit).",
+    "title": "sqrt2 is irrational (infinite descent over Q)", "topic": "no rational r with r^2=2, by infinite descent; the reusable sqrt2 role-limit witness for the q-kinematics surd thread (Pell process, T-gate, 45-degree).",
+    "role": "Irrationality core (reused by q-kinematics: MetallicRatios, MusicTemperament, BellTsirelson, etc.). Self-contained.", "qed": 14, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith ZArith"],
+    "err": {"elements": "рациональные кандидаты r с r²=2.", "roles": "√2 как role-limit (нетерминирующий процесс), не Element.", "rules": "бесконечный спуск: r²=2 невозможно над Q.", "p4": "√2 — role-limit (иррационален), его конечные приближения (Пелля) — Element-стадии; «√2 рационально?» — не-вопрос (P4)."},
+    "lemmas": [
+      {"name": "even/parity helpers", "kind": "Lemma", "role": "чётность для спуска"},
+      {"name": "no_rational_sqrt2 / sqrt2_irrational", "kind": "Theorem", "role": "★ нет r∈Q с r²=2 (бесконечный спуск)"},
+      {"name": "sqrt2_not_in_Q (Z form)", "kind": "Lemma", "role": "целочисленная форма для downstream"}
+    ],
+    "key_lemmas": [
+      {"name": "no_rational_sqrt2", "analysis": "√2 иррационален бесконечным спуском над Q — фундаментальный role-limit, ПЕРЕИСПОЛЬЗУЕМЫЙ по всей нити q-kinematics (T-gate, 45°-точка, серебряное сечение, музыкальный темперамент, Цирельсон). √2 = канонический квадратичный role-limit с процессом Пелля.", "tags": ["sqrt2", "irrationality", "infinite-descent", "role-limit"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "√2 иррационален (бесконечный спуск над Q) — переиспользуемый role-limit-свидетель, заземляющий нить запрещённых симметрий q-kinematics (T-gate/45°).", "caveat": "Иррациональность √2 — древнейшая классика; уникальность — в роли переиспользуемого role-limit-якоря (H2), не в доказательстве."},
+    "tags": ["sqrt2", "irrationality", "role-limit", "q-kinematics", "new-framing"]
+  },
+  {
+    "num": 62, "path": "src/analysis/Sqrt3Irrational.v", "cluster": "analysis",
+    "classical_counterpart": "The irrationality of sqrt3 is classical; NEW: nothing -- a descent Q proof, REUSED for the 60-degree / crystallographic-restriction role-limit in q-kinematics.",
+    "title": "sqrt3 is irrational", "topic": "no rational r with r^2=3, by descent; the sqrt3 role-limit witness for the 60-degree point, Eisenstein/hexagonal thread and IndependenceQ23.",
+    "role": "Irrationality core (reused by IndependenceQ23, q-kinematics 60-degree/Eisenstein, RationalLorentz). Self-contained.", "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith ZArith"],
+    "err": {"elements": "рациональные кандидаты r с r²=3.", "roles": "√3 как role-limit (60°-точка запрещена для рациональных).", "rules": "спуск: r²=3 невозможно над Q.", "p4": "√3 — role-limit; запрещает рациональную 60°-точку (④), Пелля-процесс x²−3y²=1 — Element-стадии."},
+    "lemmas": [
+      {"name": "mod-3 / parity helpers", "kind": "Lemma", "role": "вспомогательные для спуска"},
+      {"name": "no_rational_sqrt3 / sqrt3_irrational / sqrt3_irrational_Z", "kind": "Theorem", "role": "★ нет r∈Q с r²=3"}
+    ],
+    "key_lemmas": [
+      {"name": "no_rational_sqrt3", "analysis": "√3 иррационален спуском над Q — role-limit, запрещающий рациональную 60°-точку (кристаллографическое ограничение ④) и используемый в IndependenceQ23 (√3∉Q[√2]), Эйзенштейновых тройках, RationalLorentz. Канонический квадратичный role-limit с Пелля-процессом x²−3y²=1.", "tags": ["sqrt3", "irrationality", "role-limit", "60-degree"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "√3 иррационален — переиспользуемый role-limit, запрещающий рациональную 60°-точку (④) и несущий IndependenceQ23/Эйзенштейн/Лоренц.", "caveat": "Иррациональность √3 классична; уникальность — в роли переиспользуемого role-limit-якоря, не в доказательстве."},
+    "tags": ["sqrt3", "irrationality", "role-limit", "q-kinematics", "new-framing"]
+  },
+  {
+    "num": 63, "path": "src/analysis/Sqrt5Irrational.v", "cluster": "analysis",
+    "classical_counterpart": "The irrationality of sqrt5 is classical; NEW: nothing -- a descent Q proof, REUSED for the golden ratio / icosahedron / pentagon role-limit in q-kinematics.",
+    "title": "sqrt5 is irrational", "topic": "no rational r with r^2=5, by descent; the sqrt5 role-limit witness for phi/Fibonacci, the icosahedron (forbidden order-5), and the pentagon thread.",
+    "role": "Irrationality core (reused by GoldenFibonacci, CrystallographicRestriction order-5, ConstructiblePolygons pentagon, MarkovTree). Self-contained.", "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith ZArith"],
+    "err": {"elements": "рациональные кандидаты r с r²=5.", "roles": "√5 как role-limit (порядок-5/икосаэдр запрещён для рациональных).", "rules": "спуск: r²=5 невозможно над Q.", "p4": "√5 — role-limit; запрещает рациональный порядок 5/икосаэдр (④), φ/Фибоначчи-процесс — Element-стадии."},
+    "lemmas": [
+      {"name": "mod-5 / parity helpers", "kind": "Lemma", "role": "вспомогательные для спуска"},
+      {"name": "no_rational_sqrt5 / sqrt5_irrational", "kind": "Theorem", "role": "★ нет r∈Q с r²=5"}
+    ],
+    "key_lemmas": [
+      {"name": "no_rational_sqrt5", "analysis": "√5 иррационален спуском над Q — role-limit, запрещающий рациональный порядок-5/икосаэдр (④) и несущий золотое сечение φ (GoldenFibonacci), пентагон (ConstructiblePolygons), дерево Маркова. Канонический квадратичный role-limit с процессом Фибоначчи.", "tags": ["sqrt5", "irrationality", "role-limit", "golden-ratio"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "√5 иррационален — переиспользуемый role-limit, запрещающий рациональный порядок-5/икосаэдр (④) и несущий φ/Фибоначчи/пентагон/Марков.", "caveat": "Иррациональность √5 классична; уникальность — в роли переиспользуемого role-limit-якоря, не в доказательстве."},
+    "tags": ["sqrt5", "irrationality", "role-limit", "q-kinematics", "golden-ratio", "new-framing"]
+  },
+  {
+    "num": 64, "path": "src/analysis/StepIntegral.v", "cluster": "analysis",
+    "classical_counterpart": "The integral of step (simple) functions, additivity, monotonicity and linearity are the classical starting point of integration theory; NEW: nothing -- the constructive Q step integral the measure thread builds on.",
+    "title": "The step-function integral over Q", "topic": "Step functions, their integral, additivity over concatenation, monotonicity, linearity and basic bounds -- the foundation of the constructive measure thread.",
+    "role": "Foundation of the constructive integration/measure thread over Q (feeds Lebesgue/Fubini/DCT). Self-contained.", "qed": 17, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List"],
+    "err": {"elements": "ступенчатые функции; их интеграл.", "roles": "интеграл ступенчатых как первичная роль (мера выводится из него).", "rules": "аддитивность, монотонность, линейность интеграла.", "p4": "ступенчатый интеграл конечен и точен над Q (Element); фундамент measure-from-integral."},
+    "lemmas": [
+      {"name": "step functions / step integral", "kind": "Definition", "role": "ступенчатые функции и интеграл"},
+      {"name": "integral additivity / monotonicity / linearity / bounds", "kind": "Lemma", "role": "★ аддитивность, монотонность, линейность"}
+    ],
+    "key_lemmas": [
+      {"name": "integral additivity / monotonicity / linearity", "analysis": "Интеграл ступенчатых функций над Q с аддитивностью/монотонностью/линейностью — ПЕРВИЧНЫЙ объект, из которого LebesgueMeasure выводит меру (мера = интеграл индикатора). Element-сторона: точный конечный интеграл, фундамент всей конструктивной теории меры.", "tags": ["step-integral", "additivity", "foundation"]}
+    ],
+    "uniqueness": {"score": 2, "level": "methods", "claim": "Ступенчатый интеграл над Q (аддитивность/монотонность/линейность) — первичный фундамент measure-from-integral подхода.", "caveat": "Интеграл простых функций — классическое начало теории интеграла; вклад — конструктивная Q-база, не новый результат."},
+    "tags": ["step-integral", "integration", "foundation", "methods"]
+  },
+  {
+    "num": 65, "path": "src/analysis/StoneWeierstrass.v", "cluster": "analysis",
+    "classical_counterpart": "The Stone-Weierstrass theorem (polynomials/subalgebras dense in continuous functions) is classical; NEW is only a constructive Q form: explicit polynomial approximation with epsilon bounds on a rational grid.",
+    "title": "Stone-Weierstrass: polynomial approximation over Q", "topic": "Polynomial approximation of continuous functions on a rational grid with explicit epsilon error bounds, the algebra of approximants, and density.",
+    "role": "Approximation theory over Q (Stone-Weierstrass). Self-contained.", "qed": 24, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {"elements": "непрерывные функции; полиномиальные приближения на Q-сетке.", "roles": "полиномы как плотная подалгебра (роль приближения).", "rules": "приближение с epsilon-границей; алгебра приближений.", "p4": "приближение — ПРОЦЕСС с явной epsilon-ошибкой (Element-стадии), плотность — role-limit."},
+    "lemmas": [
+      {"name": "polynomial approximation / epsilon bounds", "kind": "Definition/Lemma", "role": "полиномиальное приближение с epsilon"},
+      {"name": "stone_weierstrass (density)", "kind": "Theorem", "role": "★ полиномы плотны (приближают с любой epsilon)"}
+    ],
+    "key_lemmas": [
+      {"name": "stone_weierstrass (density)", "analysis": "Стоун-Вейерштрасс над Q: непрерывная функция приближается полиномом с любой заданной epsilon на Q-сетке. Element-сторона: приближение — конструктивный процесс с явной ошибкой; плотность (предел) — role-limit.", "tags": ["stone-weierstrass", "polynomial-approximation", "density"]}
+    ],
+    "uniqueness": {"score": 3, "level": "new-framing", "claim": "Стоун-Вейерштрасс над Q: явное полиномиальное приближение непрерывных функций с epsilon-границами на рациональной сетке — приближение как конструктивный процесс.", "caveat": "Стоун-Вейерштрасс классичен; вклад — конструктивная эпсилон-Q-версия, не новый результат."},
+    "tags": ["stone-weierstrass", "approximation", "polynomial", "new-framing"]
+  }
+]

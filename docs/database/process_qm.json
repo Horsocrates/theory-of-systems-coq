@@ -1,0 +1,129 @@
+[
+  {
+    "num": 1031,
+    "path": "src/process_qm/HilbertAsProcess.v",
+    "cluster": "process_qm",
+    "classical_counterpart": "Finite-dimensional Hilbert space, the inner-product axioms, trace = sum of eigenvalues and a growing spectrum are standard QM; NEW only as the P4 framing (the state is finite at each stage, the spectrum grows as a process).",
+    "title": "Hilbert space as a process over Q: finite states, growing spectrum",
+    "topic": "A state with N components is finite, inner-product commutativity and Pythagoras, non-negative self inner product, an eigenvalue count, trace = eigensum, the N=2/N=4 spectrum and that the spectrum grows.",
+    "role": "Leaf of the process-QM branch (parallels projective/QuantumTower, physics/QState). Self-contained (QArith).",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "состояния с N компонентами (конечны); спектр.",
+      "roles": "гильбертово пространство = роль-процесс; спектр растёт со стадией.",
+      "rules": "state_is_finite; trace_equals_eigensum; spectrum_grows.",
+      "p4": "состояние конечно на каждой стадии (Element); гильбертово пространство — процесс (role-limit)."
+    },
+    "lemmas": [
+      {"name": "state_has_N_components/state_is_finite", "kind": "Theorem", "role": "★ состояние конечно"},
+      {"name": "ip_commutativity/ip_pythagoras/ip_nonneg_self_concrete", "kind": "Theorem", "role": "аксиомы скалярного произведения"},
+      {"name": "eigenvalue_count_4/trace_equals_eigensum/spectrum_N2/spectrum_N4/spectrum_grows/hilbert_as_process_synthesis", "kind": "Theorem", "role": "★ trace=сумма с.з., спектр растёт"}
+    ],
+    "key_lemmas": [
+      {"name": "state_is_finite", "analysis": "Квантовое состояние конечно на каждой стадии, гильбертово пространство = процесс (spectrum_grows) — вена C для КМ. Бесконечномерность не актуальна, а предельна.", "tags": ["hilbert", "process", "finite", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Гильбертово пространство как процесс над Q: конечные состояния, trace=сумма собственных значений, растущий спектр.",
+      "caveat": "Конечномерное гильбертово пространство и trace=eigensum стандартны; вклад — P4-переобрамление как процесс, не новая КМ."
+    },
+    "tags": ["process-qm", "hilbert", "process", "methods"]
+  },
+  {
+    "num": 1032,
+    "path": "src/process_qm/MeasurementProcess.v",
+    "cluster": "process_qm",
+    "classical_counterpart": "Projective measurement (collapse to an eigenstate, Born certainty on eigenstates, the minimum-uncertainty relation) is standard QM; NEW only as the P4 framing where finer resolution gives less uncertainty (a process).",
+    "title": "Measurement as a process over Q: collapse, uncertainty shrinks with resolution",
+    "topic": "Post-measurement state (collapse, normalized, certain, zero on others), exact inner products (ground/orthogonal), a minimum uncertainty, uncertainty at N=4/N=8, and that finer resolution gives less uncertainty.",
+    "role": "Leaf of the process-QM branch (parallels physics/MeasurementProcess). Self-contained (QArith).",
+    "qed": 12, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "пост-измерительное состояние; неопределённость.",
+      "roles": "измерение = роль-коллапс; разрешение как роль-параметр.",
+      "rules": "post_meas_certain; min_uncertainty; finer_less_uncertainty.",
+      "p4": "коллапс на конечной стадии (Element); уменьшение неопределённости с разрешением — процесс (role-limit)."
+    },
+    "lemmas": [
+      {"name": "post_measurement/post_meas_0/_2/_normalized/_certain/_zero_other", "kind": "Definition/Theorem", "role": "★ коллапс, определённость"},
+      {"name": "inner_product/ip_self_ground/_orthogonal/_exact", "kind": "Theorem", "role": "точные скалярные произведения"},
+      {"name": "min_uncertainty/uncertainty_N4/_N8/finer_less_uncertainty/measurement_synthesis", "kind": "Theorem", "role": "★ неопределённость убывает с разрешением"}
+    ],
+    "key_lemmas": [
+      {"name": "finer_less_uncertainty", "analysis": "Более тонкое разрешение даёт меньшую неопределённость (uncertainty_N4 > N8) — измерение как процесс приближения, вена C. Коллапс корректен на каждой конечной стадии.", "tags": ["measurement", "uncertainty", "process", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Измерение как процесс над Q: коллапс на собственное состояние, определённость по Борну, неопределённость убывает с разрешением.",
+      "caveat": "Проективное измерение и минимальная неопределённость стандартны; вклад — P4-формулировка как процесс, не новая КМ."
+    },
+    "tags": ["process-qm", "measurement", "uncertainty", "methods"]
+  },
+  {
+    "num": 1033,
+    "path": "src/process_qm/ProcessQMSynthesis.v",
+    "cluster": "process_qm",
+    "classical_counterpart": "A summary node tying the thermal/Casimir/quantum branches to one process root; no new content.",
+    "title": "Process-QM synthesis: three branches, one root (summary node)",
+    "topic": "A 4-lemma synthesis: thermal, Casimir and quantum branches all stem from one process root.",
+    "role": "Summary node of the process-QM branch. Self-contained.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "ветви thermal/casimir/quantum.",
+      "roles": "узел-синтез: один процессный корень трёх ветвей.",
+      "rules": "three_branches_one_root.",
+      "p4": "агрегатор (Element); собственного содержания нет."
+    },
+    "lemmas": [
+      {"name": "branch_thermal/branch_casimir/branch_quantum/three_branches_one_root", "kind": "Theorem", "role": "★ три ветви — один процессный корень"}
+    ],
+    "key_lemmas": [
+      {"name": "three_branches_one_root", "analysis": "Узел-агрегатор: thermal, Casimir и quantum ветви сходятся к одному процессному корню. Собственной уникальности нет.", "tags": ["summary", "process"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка: thermal/Casimir/quantum ветви из одного процессного корня.",
+      "caveat": "Чистый узел-агрегатор; собственного результата нет."
+    },
+    "tags": ["process-qm", "summary", "exposition"]
+  },
+  {
+    "num": 1034,
+    "path": "src/process_qm/QuantumFromVibration.v",
+    "cluster": "process_qm",
+    "classical_counterpart": "The Born rule, normalization, expectation values and Laplacian eigenvalues for a vibrating-mode model are standard QM; NEW only as the framing that quantum amplitudes emerge from vibration modes over Q.",
+    "title": "Quantum from vibration over Q: Born rule from modes",
+    "topic": "A QState with norm and normalization, measurement probability, expected value, ground/mode-1/superposition states (all normalized), Born probabilities for ground/superposition summing to one, Laplacian eigenvalues, and expected values.",
+    "role": "Root leaf of the process-QM branch ('quantum from vibration'). Self-contained (QArith).",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "QState (моды вибрации); вероятности Борна.",
+      "roles": "квантовая амплитуда = роль из вибрационной моды; Лапласиан как роль-гамильтониан.",
+      "rules": "born_probabilities_sum; superposition_norm; laplacian_eigenvalues.",
+      "p4": "конечные моды над Q (Element); квантовые амплитуды из вибраций — модельное переобрамление."
+    },
+    "lemmas": [
+      {"name": "QState/norm_sq/is_normalized/measurement_probability/expected_value_aux/expected_value", "kind": "Definition", "role": "состояние, норма, ожидание"},
+      {"name": "ground_state/mode1_state/superposition_01/ground_normalized/mode1_normalized/superposition_norm", "kind": "Definition/Theorem", "role": "состояния нормированы"},
+      {"name": "born_ground_mode0/_mode1/born_superposition_mode0/_mode1/born_probabilities_sum", "kind": "Theorem", "role": "★ вероятности Борна суммируются в 1"},
+      {"name": "laplacian_eigenvalues/expected_ground/expected_mode1/quantum_from_vibration_synthesis", "kind": "Theorem", "role": "собственные значения Лапласиана, ожидания"}
+    ],
+    "key_lemmas": [
+      {"name": "born_probabilities_sum", "analysis": "Вероятности Борна суммируются в 1 для вибрационных состояний над Q — корректная нормировка. Модельная связь «квант из вибрации», не вывод правила Борна (ср. physics/BornRuleFromUnitarity).", "tags": ["born-rule", "vibration", "normalization"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Квант из вибрации над Q: правило Борна и нормировка для вибрационных мод, собственные значения Лапласиана.",
+      "caveat": "Правило Борна и нормировка стандартны; вклад — модельное переобрамление «квант из вибрации», не вывод."
+    },
+    "tags": ["process-qm", "born-rule", "vibration", "methods"]
+  }
+]

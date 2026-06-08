@@ -1,0 +1,430 @@
+[
+  {
+    "num": 137,
+    "path": "src/experimental/AbelRegularization.v",
+    "cluster": "experimental",
+    "classical_counterpart": "Abel summation and zeta/Bernoulli regularization of divergent series are classical; NEW only as an exact Q-arithmetic instance showing Abel and Bernoulli regularizers AGREE and match the Casimir coefficient.",
+    "title": "Abel regularization over Q: Abel = Bernoulli, consistent with Casimir",
+    "topic": "Abel-damped partial sums, geometric closed forms (half/third powers), and the consistency check that Abel regularization agrees with the Bernoulli/Casimir value in 1D and 3D.",
+    "role": "Regularization-consistency leaf of the experimental (Casimir) branch. Self-contained (QArith).",
+    "qed": 23, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "Abel-демпфированные частичные суммы; геометрические хвосты.",
+      "roles": "регуляризатор = роль, превращающая расходящуюся сумму в конечное Q-число.",
+      "rules": "abel_energy/geometric_partial; abel_and_bernoulli_agree (1D и 3D).",
+      "p4": "расходящийся ряд не Element; РЕГУЛЯРИЗОВАННОЕ значение рационально и вычислимо (Element); согласие двух регуляризаторов = свидетельство корректности."
+    },
+    "lemmas": [
+      {"name": "abel_partial/abel_energy/geometric_partial", "kind": "Definition", "role": "Abel-сумма, энергия, геометрический ряд"},
+      {"name": "geometric_half_3/third_2/qpow_abs_step/half_pow_4/half_pow_8/third_pow_4", "kind": "Lemma", "role": "значения степеней 1/2, 1/3"},
+      {"name": "abel_energy_1_half/_at_3/_0_is_geometric_tail", "kind": "Lemma", "role": "Abel-энергия при beta=1"},
+      {"name": "geometric_half_at_5/_10/_below_2_at_5/_below_2_at_10/third_at_5", "kind": "Lemma", "role": "оценки геометрических хвостов"},
+      {"name": "abel_k1_half_10/_20/closed_form_half/closed_form_third", "kind": "Lemma", "role": "замкнутые формы Abel"},
+      {"name": "abel_and_bernoulli_agree_1d/_3d", "kind": "Theorem", "role": "★ Abel = Bernoulli (1D, 3D)"},
+      {"name": "regularization_consistency/casimir_framework_complete/casimir_matches_experiment", "kind": "Theorem", "role": "согласованность регуляризаций, рамка Казимира"}
+    ],
+    "key_lemmas": [
+      {"name": "abel_and_bernoulli_agree_3d", "analysis": "Два разных регуляризатора (Abel-демпфирование и Bernoulli/zeta) дают ОДНО рациональное значение в 3D — свидетельство, что конечный ответ не артефакт схемы. P4: расходимость снимается правилом, результат — Element.", "tags": ["regularization", "abel", "bernoulli", "consistency"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Abel-регуляризация над Q совпадает с Bernoulli/Casimir-значением (1D и 3D) — точная Q-проверка согласованности регуляризаторов.",
+      "caveat": "Abel-суммирование и регуляризация расходящихся рядов классичны; вклад — лишь точная Q-проверка согласия, не новый результат."
+    },
+    "tags": ["regularization", "abel", "casimir", "methods"]
+  },
+  {
+    "num": 138,
+    "path": "src/experimental/AtomicSynthesis.v",
+    "cluster": "experimental",
+    "classical_counterpart": "That atoms are bound systems with a positive ionization energy is textbook QM; here only a 5-lemma Q-summary node, no new content.",
+    "title": "Atomic synthesis: atoms are bound, have ionization energy (summary node)",
+    "topic": "A tiny synthesis tying the atomic-physics leaves together: hydrogen is bound, atoms have ionization energy, repulsion at the nucleus.",
+    "role": "Summary leaf of the atomic sub-branch. Self-contained.",
+    "qed": 5, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "связанные состояния атомов; энергия ионизации.",
+      "roles": "узел-синтез, собирающий результаты атомной ветви.",
+      "rules": "hydrogen_bound; atoms_have_ionization; repulsion_at_nucleus.",
+      "p4": "конечные оценки энергий (Element); чисто резюмирующий файл."
+    },
+    "lemmas": [
+      {"name": "hydrogen_bound/atoms_are_bound/atoms_have_ionization", "kind": "Theorem", "role": "атомы связаны, есть ионизация"},
+      {"name": "repulsion_at_nucleus/atomic_physics_summary", "kind": "Theorem", "role": "отталкивание у ядра; итог"}
+    ],
+    "key_lemmas": [
+      {"name": "atomic_physics_summary", "analysis": "Резюмирующий узел: атомы связаны и имеют положительную энергию ионизации. Содержательной уникальности нет — агрегатор результатов соседних файлов.", "tags": ["summary", "atomic"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка атомной ветви: связанность атомов и энергия ионизации над Q.",
+      "caveat": "Полностью учебное содержание; узел-агрегатор без собственного результата."
+    },
+    "tags": ["atomic", "summary", "exposition"]
+  },
+  {
+    "num": 139,
+    "path": "src/experimental/BernoulliNumbers.v",
+    "cluster": "experimental",
+    "classical_counterpart": "Bernoulli numbers, the recursion, Faulhaber power-sum formulas and zeta(-n) = -B_{n+1}/(n+1) are classical; NEW only as an exact rational Coq instance (B0..B8, odd-vanishing, Faulhaber, zeta_neg values).",
+    "title": "Bernoulli numbers over Q: recursion, Faulhaber, zeta(-n)",
+    "topic": "Rational Bernoulli numbers B0..B8 via the binomial recursion, odd Bernoulli vanish (B3=B5=B7=0), sign pattern, Faulhaber power sums, and negative-argument zeta values zeta(-0..-3).",
+    "role": "Arithmetic engine of the Casimir/zeta-regularization branch (feeds CasimirProcess, ZetaNegative, VacuumEnergy). Self-contained (QArith).",
+    "qed": 34, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "рациональные числа Бернулли B_n; биномы/факториалы.",
+      "roles": "B_n как коэффициенты-роли в Фаульхабере и zeta(-n).",
+      "rules": "биномиальная рекурсия Бернулли; нечётные B=0; zeta_neg n = −B_{n+1}/(n+1).",
+      "p4": "каждое B_n — точное Q-число (Element); расходящиеся степенные суммы — role-limit, регуляризованные через B_n."
+    },
+    "lemmas": [
+      {"name": "qbinom/qfact/qfact_pos/qbinom_0_r/_n_n/_gt", "kind": "Definition/Lemma", "role": "рациональные биномы и факториалы"},
+      {"name": "bernoulli_list/bernoulli/bernoulli_list_length", "kind": "Definition", "role": "список чисел Бернулли"},
+      {"name": "B0_value..B8_value", "kind": "Theorem", "role": "значения B0..B8"},
+      {"name": "B_odd_3/_5/_7", "kind": "Theorem", "role": "★ нечётные числа Бернулли = 0"},
+      {"name": "B2_pos/B4_neg/B6_pos", "kind": "Theorem", "role": "знаковый паттерн"},
+      {"name": "bernoulli_recursion_1..4", "kind": "Theorem", "role": "рекурсия Бернулли"},
+      {"name": "power_sum/power_sum_1_example/faulhaber_1/power_sum_grows_1/_3/qpow_ge_1/power_sum_diverges", "kind": "Definition/Theorem", "role": "степенные суммы Фаульхабера, расходимость"},
+      {"name": "zeta_neg/zeta_neg_0/_1/_2/_3", "kind": "Definition/Theorem", "role": "★ zeta(-n) через Бернулли"}
+    ],
+    "key_lemmas": [
+      {"name": "zeta_neg_1", "analysis": "zeta(-1) = -B2/2 = -1/12 как ТОЧНОЕ Q-число через числа Бернулли — расходящаяся сумма 1+2+3+... регуляризуется в рациональное значение. Питает Casimir/Vacuum-ветвь. P4: правило (Бернулли) даёт Element там, где наивная сумма — role-limit.", "tags": ["zeta-negative", "bernoulli", "-1/12"]},
+      {"name": "B_odd_3", "analysis": "Нечётные числа Бернулли зануляются (B3=B5=B7=0) — отвечает за тривиальные нули zeta при отрицательных чётных аргументах (см. ZetaNegative). Структурный факт, доказанный над Q.", "tags": ["odd-vanishing", "trivial-zeros"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Числа Бернулли над Q (рекурсия, нечётные=0, Фаульхабер) и zeta(-n)=−B_{n+1}/(n+1) точно — арифметический движок ветви регуляризации.",
+      "caveat": "Числа Бернулли, Фаульхабер и zeta(-n) — классика анализа; вклад — точная рациональная формализация, не новый результат."
+    },
+    "tags": ["bernoulli", "faulhaber", "zeta-negative", "methods"]
+  },
+  {
+    "num": 140,
+    "path": "src/experimental/CasimirProcess.v",
+    "cluster": "experimental",
+    "classical_counterpart": "The Casimir energy via zeta-regularization (E ~ -zeta(-3), the 1/240 and 1/720 factors, attractive force) is classical; NEW is the P4 framing: the raw mode sum is an honestly-divergent role-limit and the finite Casimir value is the Bernoulli-regularized Element, exactly over Q.",
+    "title": "Casimir energy as a Bernoulli/zeta process: raw sum diverges, regularized value is rational",
+    "topic": "Casimir energies in 1D/3D as rational multiples of zeta(-3); the raw vacuum sum diverges (exceeds 1000), the regularized Casimir value is exactly rational; sign/force (1D negative, 3D positive, attractive), the 240/720 factors, and dimensional vanishing at d=5,9.",
+    "role": "Flagship of the experimental Casimir branch; consumes BernoulliNumbers, parallels VacuumEnergy. Self-contained (QArith).",
+    "qed": 33, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "моды вакуума; сырая энергия (расходящаяся); регуляризованная энергия Казимира.",
+      "roles": "регуляризация = роль; zeta(-3)/Бернулли как источник конечного значения.",
+      "rules": "casimir = рацио·zeta(-3); raw_energy diverges; casimir_is_bernoulli; force attractive.",
+      "p4": "сырая сумма мод — role-limit (расходится, >1000); значение Казимира — РАЦИОНАЛЬНЫЙ Element через Бернулли; дивергенция дисциплинирована правилом."
+    },
+    "lemmas": [
+      {"name": "casimir_1d/casimir_3d/casimir_rational_factor", "kind": "Definition", "role": "энергии Казимира и рациональный множитель"},
+      {"name": "casimir_1d_verified/_3d_verified/six_times_zeta_neg_3/casimir_720_factor/_rational_factor_verified", "kind": "Theorem", "role": "значения через zeta(-3), факторы 240/720"},
+      {"name": "raw_energy_1d/_3d/_diverges/_3d_diverges/raw_1d_exceeds_1000/_at_3/_3d_at_3/_1d_at_9", "kind": "Definition/Theorem", "role": "★ сырая энергия расходится"},
+      {"name": "casimir_process_1d/_3d/casimir_is_bernoulli_1d/_3d/casimir_1d_is_rational/_3d_is_rational", "kind": "Definition/Theorem", "role": "★ Казимир как процесс = Бернулли, рационален"},
+      {"name": "linear_damping/damping_nonneg/_at_0/damped_energy_1d/damped_1d_example", "kind": "Definition/Theorem", "role": "демпфирование"},
+      {"name": "casimir_ratio_3d_1d/_1d_negative/_3d_positive/casimir_force_attractive/casimir_240_from_zeta", "kind": "Theorem", "role": "знаки, притягивающая сила"},
+      {"name": "energy_vanishes_d5/_d9/energy_nonzero_d3/_d7/zeta_neg_1_sign/_3_sign/_5_sign", "kind": "Theorem", "role": "зануление по размерности; знаки zeta(-n)"},
+      {"name": "casimir_main_theorem", "kind": "Theorem", "role": "★ итог ветви Казимира"}
+    ],
+    "key_lemmas": [
+      {"name": "casimir_is_bernoulli_3d", "analysis": "Энергия Казимира в 3D = рациональное кратное zeta(-3) = выражается через число Бернулли B4 — конечный Element там, где raw_energy_3d_diverges (role-limit). Классическая zeta-регуляризация переобрамлена как P4-процесс: сумма-правило вместо завершённой расходящейся суммы.", "tags": ["casimir", "zeta-regularization", "bernoulli", "vein-C-adjacent"]},
+      {"name": "casimir_force_attractive", "analysis": "Сила Казимира притягивающая (знак из zeta(-3)) — содержательное физическое следствие, полученное точной Q-арифметикой. casimir_matches_experiment в AbelRegularization подтверждает значение.", "tags": ["attractive", "force", "physical"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Энергия Казимира как Bernoulli/zeta-процесс над Q: сырая сумма мод честно расходится (role-limit), регуляризованное значение рационально (Element), сила притягивающая — P4-переобрамление zeta-регуляризации.",
+      "caveat": "Casimir-эффект и zeta-регуляризация классичны (zeta(-3), 1/240); уникальность — в честном P4-разделении расходящегося правила и конечного значения, не в новой физике."
+    },
+    "tags": ["casimir", "zeta-regularization", "bernoulli", "vein-C", "new-framing"]
+  },
+  {
+    "num": 141,
+    "path": "src/experimental/CoulombFull3D.v",
+    "cluster": "experimental",
+    "classical_counterpart": "The hydrogen 3D Coulomb spectrum E_n ~ -1/n^2, the n^2 degeneracy and centrifugal l(l+1) term are textbook; NEW only as a finite Q-lattice approximation that recovers the spectrum as a convergent PROCESS and is HONEST that full (accidental) degeneracy is not reproduced on the lattice.",
+    "title": "3D Coulomb on a lattice: hydrogen spectrum as a process, honest about degeneracy",
+    "topic": "Scaled 3D Coulomb energies with a centrifugal term, the hydrogen limit, the n^2 degeneracy as a sum, energy ordering by angular momentum, convergence of the s-wave, ionization, and an explicit honest limitation that accidental degeneracy is only partial on the lattice.",
+    "role": "Atomic leaf (3D Coulomb) of the experimental branch; parallels CoulombTower. Self-contained (QArith).",
+    "qed": 50, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "масштабированные энергии 3D-Кулона; центробежный член l(l+1).",
+      "roles": "предел сетки = роль (водородный спектр); вырождение n² как роль-кратность.",
+      "rules": "scaled_energy_3d; hydrogen_limit_3d; degeneracy_sum = n²; energy_ordering по l.",
+      "p4": "конечная сетка точна (Element); водородный спектр — role-limit процесса (degeneracy_is_cauchy → 0); ПОЛНОЕ (случайное) вырождение НЕ воспроизводится — честное ограничение."
+    },
+    "lemmas": [
+      {"name": "centrifugal_scaled/scaled_energy_3d/hydrogen_limit_3d/principal_n/degeneracy_process/sum_nat", "kind": "Definition", "role": "энергии, центробежный член, кратность"},
+      {"name": "centrifugal_scaled_l0/_nonneg/_positive/_at_l1/_at_l2", "kind": "Theorem", "role": "свойства центробежного члена"},
+      {"name": "degeneracy_sum_1/_2/_3/_general", "kind": "Theorem", "role": "★ кратность уровня = n²"},
+      {"name": "energy_3d_3_0_0/_3_0_1/_3_1_0/_9_0_1/hydrogen_limit_3d_ground/_eq_1d", "kind": "Theorem", "role": "значения энергий, предел = 1D"},
+      {"name": "partial_degeneracy/no_false_degeneracy/limit_3d_negative/s_wave_ratios/angular_momentum_raises/energy_ordering_s_wave/ground_state_minimum/ground_negative_3d", "kind": "Theorem", "role": "вырождение, упорядочение по l"},
+      {"name": "p4_finiteness_3d/finite_splitting/principal_n_examples/energy_at_principal/deviation_3d_formula/_positive", "kind": "Theorem", "role": "конечность, расщепление, отклонение"},
+      {"name": "degeneracy_process_formula/_l0/_positive/centrifugal_upper_bound/Q_bound_over_K/convergence_3d/splitting_vanishes/splitting_rate/degeneracy_is_cauchy/degeneracy_limit_zero/convergence_3d_s_wave", "kind": "Theorem", "role": "★ сходимость спектра как процесс"},
+      {"name": "ionization_3d/coulomb_3d_summary/coulomb_3d_honest_limitation/principal_energy_ratio/no_accidental_degeneracy/partial_vs_full_degeneracy/coulomb_3d_complete/process_view_degeneracy/coulomb_3d_main_theorem", "kind": "Theorem", "role": "★ ионизация, ЧЕСТНОЕ ограничение про вырождение"}
+    ],
+    "key_lemmas": [
+      {"name": "coulomb_3d_honest_limitation", "analysis": "ЧЕСТНОЕ ограничение: диагональная сетка воспроизводит главный спектр −1/n² и n²-кратность, но НЕ полное «случайное» вырождение водорода (no_accidental_degeneracy). Файл явно фиксирует, что именно НЕ доказано — образец калибровки, а не over-claim.", "tags": ["honest-limitation", "degeneracy", "hydrogen"]},
+      {"name": "degeneracy_is_cauchy", "analysis": "Водородный спектр восстанавливается как СХОДЯЩИЙСЯ процесс (splitting → 0, degeneracy_limit_zero) на измельчающейся сетке — вена C: спектр есть role-limit правила, а не завершённый объект.", "tags": ["process", "convergence", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "3D-Кулон на конечной Q-сетке: спектр −1/n² и n²-кратность как сходящийся процесс, с ЯВНЫМ честным ограничением о невоспроизведении полного вырождения.",
+      "caveat": "Водородный спектр — учебная классика; вклад — конечная Q-аппроксимация-процесс + честная фиксация того, что не доказано, не новая спектроскопия."
+    },
+    "tags": ["coulomb", "hydrogen", "honest-limitation", "process", "methods"]
+  },
+  {
+    "num": 142,
+    "path": "src/experimental/CoulombTower.v",
+    "cluster": "experimental",
+    "classical_counterpart": "The 1D hydrogen-like spectrum and variational diagonalization are standard; NEW only as a finite Q 'tower' that recovers the textbook spectrum as a convergent process, honest about diagonal-approximation error.",
+    "title": "Coulomb tower over Q: hydrogen spectrum as a convergent diagonalization process",
+    "topic": "A grid Coulomb Hamiltonian with kinetic/Coulomb coefficients, optimal grid length, scaled energies, the hydrogen limit matching textbook -1/n^2 with positive but decreasing deviation, ionization, and explicit diagonal-limitation honesty.",
+    "role": "Atomic leaf (1D Coulomb tower); parallels CoulombFull3D. Self-contained (QArith).",
+    "qed": 42, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "сеточный гамильтониан Кулона; диагональные энергии.",
+      "roles": "башня сеток = роль (водородный предел); оптимальная длина сетки.",
+      "rules": "diag_energy; scaled_energy; hydrogen_limit; deviation_decreases.",
+      "p4": "каждая сетка конечна и точна (Element); водородный спектр — role-limit (convergence_uniform); диагональная аппроксимация имеет честную ошибку."
+    },
+    "lemmas": [
+      {"name": "inject_Z_S_pos/_neq_0/pos_Q_mul_nonzero/four_n_neq_0/Q_div_swap", "kind": "Lemma", "role": "Q-арифметические леммы"},
+      {"name": "grid_dx/kinetic_coeff/coulomb_coeff/diag_energy/optimal_L/energy_at_opt/scaled_energy/hydrogen_limit/textbook_hydrogen", "kind": "Definition", "role": "сетка, коэффициенты, энергии"},
+      {"name": "grid_dx_example/diag_energy_2_9_0/optimal_L_2/energy_at_opt_2_0/scaled_energy_1_0/_3_0/_9_0/_3_1/_formula", "kind": "Theorem", "role": "конкретные значения"},
+      {"name": "ground_scaled/_negative/excited_scaled/energy_increases_with_n/_closer_with_N", "kind": "Theorem", "role": "основное/возбуждённые, монотонность"},
+      {"name": "deviation_formula/_positive/_decreases/convergence_general/_uniform", "kind": "Theorem", "role": "★ отклонение убывает, равномерная сходимость"},
+      {"name": "hydrogen_limit_ground/_excited/_n2/limit_negative/_increases/ionization/limit_ratio/textbook_ground/_excited/_ratio", "kind": "Theorem", "role": "★ водородный предел = учебный −1/n²"},
+      {"name": "diagonal_honest/both_ground_negative/p4_finiteness/hydrogen_convergence_theorem/diagonal_limitation_theorem/hydrogen_summary/coulomb_tower_complete/process_well_defined", "kind": "Theorem", "role": "★ честность диагональной аппроксимации"}
+    ],
+    "key_lemmas": [
+      {"name": "hydrogen_convergence_theorem", "analysis": "Водородный спектр −1/n² восстанавливается как РАВНОМЕРНО СХОДЯЩИЙСЯ процесс измельчения сетки (deviation_decreases, convergence_uniform) — вена C. Спектр — role-limit правила-диагонализации, не платонистский объект.", "tags": ["process", "convergence", "hydrogen", "vein-C"]},
+      {"name": "diagonal_limitation_theorem", "analysis": "Честно фиксирует, что диагональная (без вне-диагональных членов) аппроксимация имеет систематическое отклонение — diagonal_honest. Образец калибровки: что воспроизводится (отношения уровней) и что нет.", "tags": ["honest-limitation", "diagonal"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Кулоновская башня над Q: водородный спектр −1/n² как равномерно сходящийся процесс диагонализации сеток, с честной фиксацией ошибки диагонального приближения.",
+      "caveat": "1D-водородный спектр и вариационная диагонализация стандартны; вклад — конечная Q-башня-процесс + честность, не новая модель."
+    },
+    "tags": ["coulomb", "hydrogen", "process", "honest-limitation", "methods"]
+  },
+  {
+    "num": 143,
+    "path": "src/experimental/HeliumLattice.v",
+    "cluster": "experimental",
+    "classical_counterpart": "Helium ground-state estimation and the role of electron repulsion are textbook; here only a tiny Q-lattice estimate with positive ionization.",
+    "title": "Helium on a lattice: ground-state estimate and ionization over Q",
+    "topic": "A Z=2 diagonal Coulomb estimate for helium: ground-state energy at small grids, ionization energy, and that adding repulsion raises the energy.",
+    "role": "Atomic leaf (helium). Self-contained (QArith).",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "Z=2 диагональные энергии гелия; отталкивание электронов.",
+      "roles": "оценка основного состояния как роль; ионизация.",
+      "rules": "he_diagonal; he_ground_estimate; repulsion_raises_energy.",
+      "p4": "конечные оценки на малых сетках (Element); без вне-диагональных членов."
+    },
+    "lemmas": [
+      {"name": "Z_He/he_diagonal", "kind": "Definition", "role": "заряд, диагональ гамильтониана"},
+      {"name": "he_diag_K3_00/_11/_02", "kind": "Theorem", "role": "элементы диагонали"},
+      {"name": "he_ground_estimate/he_ground_K3/_K4", "kind": "Definition/Theorem", "role": "оценка основного состояния"},
+      {"name": "he_ionization/_K3/_positive_K3/he_ground_below_ion", "kind": "Theorem", "role": "ионизация положительна"},
+      {"name": "he_no_repulsion/_K3/repulsion_raises_energy/he_first_verified", "kind": "Theorem", "role": "★ отталкивание повышает энергию"}
+    ],
+    "key_lemmas": [
+      {"name": "repulsion_raises_energy", "analysis": "Электрон-электронное отталкивание повышает энергию гелия (he_no_repulsion vs с отталкиванием) — простое, но корректное следствие на конечной сетке. Содержательной уникальности нет.", "tags": ["helium", "repulsion"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Оценка основного состояния гелия и положительная ионизация на Q-сетке; отталкивание повышает энергию.",
+      "caveat": "Учебная оценка гелия; конечная диагональная аппроксимация без нового содержания."
+    },
+    "tags": ["helium", "atomic", "exposition"]
+  },
+  {
+    "num": 144,
+    "path": "src/experimental/LambShiftTower.v",
+    "cluster": "experimental",
+    "classical_counterpart": "The Lamb shift is a genuine QED effect splitting the (accidentally degenerate) 2S/2P levels; this file is HONEST that its diagonal lattice splitting is an ARTIFACT of breaking accidental degeneracy, NOT the physical Lamb shift (off-diagonal coupling is zero here).",
+    "title": "Lamb-shift tower over Q: honest that the splitting is a lattice artifact, not QED",
+    "topic": "2S/2P energies and their splitting as a convergent process; the splitting is order-one and nonzero, but the file explicitly argues it is an artifact of breaking accidental degeneracy on the diagonal lattice — the off-diagonal coupling that would give the real Lamb shift is zero.",
+    "role": "Atomic leaf (Lamb shift) with an explicit honest-assessment; phase-3 experimental. Self-contained (QArith).",
+    "qed": 42, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "энергии 2S/2P; расщепление как процесс.",
+      "roles": "расщепление = роль; но здесь — АРТЕФАКТ снятия случайного вырождения, не физический сдвиг Лэмба.",
+      "rules": "energy_2S/2P; lamb_splitting; off_diagonal_is_zero; splitting_artifact_not_lamb_shift.",
+      "p4": "конечные энергии (Element); расщепление сходится, но честно помечено как артефакт — нужен вне-диагональный член (full_hamiltonian_needed)."
+    },
+    "lemmas": [
+      {"name": "energy_2S/energy_2P/lamb_splitting/splitting_limit/off_diagonal_coupling", "kind": "Definition", "role": "энергии, расщепление, вне-диагональный член"},
+      {"name": "energy_2S_at_3/2P_at_3/splitting_at_1/_3/_9/_19/_0/_computable/_limit_value", "kind": "Theorem", "role": "значения расщепления"},
+      {"name": "centrifugal_01/splitting_formula/_deviation/_converges/_is_cauchy/_nonzero/_monotone", "kind": "Theorem", "role": "★ сходимость расщепления"},
+      {"name": "energy_2S_converges/2P_converges/limits_differ/2S_nonpositive/splitting_deviation_abs/_rate_bound/our_splitting_is_order_one", "kind": "Theorem", "role": "сходимость энергий, порядок величины"},
+      {"name": "textbook_2S_2P_degenerate/diagonal_breaks_accidental/splitting_artifact_not_lamb_shift/off_diagonal_is_zero/full_hamiltonian_needed", "kind": "Theorem", "role": "★ ЧЕСТНО: расщепление = артефакт, не сдвиг Лэмба"},
+      {"name": "p4_splitting_computable/energy_gap_shrinks/splitting_crosses_zero/framework_established/lamb_shift_convergence_theorem/_honest_assessment/_process_view/_framework_theorem", "kind": "Theorem", "role": "★ честная оценка, рамка"},
+      {"name": "phase3_verified_results/phase3_open_questions/lamb_shift_complete/experimental_phase3_main/verification_table_entry_partial_degeneracy/_centrifugal_splitting", "kind": "Theorem", "role": "верифицированное vs открытое"}
+    ],
+    "key_lemmas": [
+      {"name": "splitting_artifact_not_lamb_shift", "analysis": "ЯРКИЙ образец честности: файл доказывает, что наблюдаемое расщепление 2S/2P — артефакт снятия случайного вырождения диагональной сеткой, а НЕ физический сдвиг Лэмба (off_diagonal_is_zero, full_hamiltonian_needed). Отрицательный результат с явной формулировкой того, чего не хватает.", "tags": ["honest", "negative-result", "lamb-shift", "artifact"]},
+      {"name": "phase3_open_questions", "analysis": "Явно перечисляет открытые вопросы фазы 3 рядом с verified-результатами — встроенная калибровка над-claim против реально доказанного.", "tags": ["honest", "open-questions"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Башня сдвига Лэмба над Q со СХОДЯЩИМСЯ расщеплением 2S/2P, но с явным доказательством, что оно — артефакт диагональной сетки, не физический сдвиг Лэмба (нужен вне-диагональный член).",
+      "caveat": "Сдвиг Лэмба — настоящий КЭД-эффект; здесь его НЕТ — ценность файла в честной фиксации артефакта и открытых вопросов, а не в воспроизведении физики."
+    },
+    "tags": ["lamb-shift", "honest", "negative-result", "atomic", "methods"]
+  },
+  {
+    "num": 145,
+    "path": "src/experimental/LithiumLattice.v",
+    "cluster": "experimental",
+    "classical_counterpart": "Lithium via Slater screening and an effective nuclear charge Z_eff is textbook atomic physics; here only a tiny Q instance.",
+    "title": "Lithium on a lattice: Slater screening and effective charge over Q",
+    "topic": "Z=3 lithium with Slater 1s screening, an inner-electron count, effective charge Z_eff, outer/inner/total energies (all negative) and a positive ionization energy.",
+    "role": "Atomic leaf (lithium). Self-contained (QArith).",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "Z=3; экранирование Слейтера; эффективный заряд Z_eff.",
+      "roles": "экранирование = роль (уменьшает эффективный заряд внешнего электрона).",
+      "rules": "Z_effective_Li = Z − sigma; энергии отрицательны; ионизация положительна.",
+      "p4": "конечные оценки (Element); экранирование как простое правило."
+    },
+    "lemmas": [
+      {"name": "Z_Li/slater_1s_screen/n_inner_Li/sigma_Li/Z_effective_Li", "kind": "Definition", "role": "заряд, экранирование, Z_eff"},
+      {"name": "Z_eff_Li_value/_positive", "kind": "Theorem", "role": "значение Z_eff"},
+      {"name": "li_outer_energy/_value/li_inner_energy/_value/li_total_energy", "kind": "Definition/Theorem", "role": "энергии внешнего/внутреннего/всего"},
+      {"name": "li_inner_negative/li_outer_negative/li_ionization/_positive", "kind": "Theorem", "role": "знаки энергий, ионизация"}
+    ],
+    "key_lemmas": [
+      {"name": "Z_eff_Li_value", "analysis": "Эффективный заряд лития Z_eff = Z − sigma по Слейтеру — стандартная оценка экранирования над Q. Уникальности нет.", "tags": ["lithium", "screening", "z-eff"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Литий на Q-сетке: экранирование Слейтера, эффективный заряд, отрицательные энергии, положительная ионизация.",
+      "caveat": "Учебная модель экранирования; конечный Q-инстанс без нового содержания."
+    },
+    "tags": ["lithium", "screening", "atomic", "exposition"]
+  },
+  {
+    "num": 146,
+    "path": "src/experimental/TwoParticleLattice.v",
+    "cluster": "experimental",
+    "classical_counterpart": "Two-particle Hilbert space as a tensor product with nuclear attraction + electron repulsion is standard; here only a small Q-lattice with an explicit flatten index.",
+    "title": "Two-particle lattice over Q: tensor index, nuclear attraction, electron repulsion",
+    "topic": "A two-particle Coulomb lattice: the product dimension (quadratic in grid), an injective flatten index, nuclear potential at center, electron repulsion (same-site/adjacent), and per-particle kinetic energy.",
+    "role": "Atomic-composition infrastructure (two-electron). Self-contained (QArith).",
+    "qed": 14, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "двухчастичное пространство (тензор); индекс flatten.",
+      "roles": "flatten = роль-кодирование пары в один индекс; потенциалы как роли.",
+      "rules": "two_particle_dim = K²; flatten_injective; nuclear/repulsion потенциалы.",
+      "p4": "конечная двухчастичная сетка (Element); размерность растёт квадратично."
+    },
+    "lemmas": [
+      {"name": "two_particle_dim/flatten/nat_dist/nuclear_potential/electron_repulsion/kinetic_per_particle/two_particle_diag", "kind": "Definition", "role": "размерность, индекс, потенциалы"},
+      {"name": "dim_K3/_K4/_K5/dim_quadratic", "kind": "Theorem", "role": "размерность = K²"},
+      {"name": "flatten_bound/_injective/_origin", "kind": "Theorem", "role": "★ flatten инъективен"},
+      {"name": "nuclear_He_at_center/repulsion_same/_adjacent/_same_site/_symmetric/kinetic_at_K3/nat_dist_sym", "kind": "Theorem", "role": "потенциалы, симметрия"}
+    ],
+    "key_lemmas": [
+      {"name": "flatten_injective", "analysis": "Инъективное кодирование пары частиц в один индекс (flatten) — корректная тензорная индексация над конечной сеткой. Инфраструктура для двухэлектронных оценок.", "tags": ["tensor", "flatten", "injective"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Двухчастичная Q-сетка: квадратичная размерность, инъективный flatten-индекс, ядерное притяжение и электронное отталкивание.",
+      "caveat": "Стандартная тензорная конструкция двухчастичного пространства; инфраструктура без нового результата."
+    },
+    "tags": ["two-particle", "tensor", "atomic", "exposition"]
+  },
+  {
+    "num": 147,
+    "path": "src/experimental/VacuumEnergy.v",
+    "cluster": "experimental",
+    "classical_counterpart": "Zero-point/vacuum energy and its zeta-regularization to a finite Casimir value are classical; NEW is the P4 framing: the divergence is DISSOLVED — the raw ZPE sum is honestly not Cauchy (role-limit), the regularized value is a rational Element, so 'no infinity' is a theorem.",
+    "title": "Vacuum energy dissolved over Q: raw ZPE diverges, regularized value is rational (no infinity)",
+    "topic": "Zero-point energy in 1D/3D as half a power sum: the raw vacuum energy is increasing and NOT Cauchy (diverges), but it equals the Casimir/Bernoulli rational value after regularization; 'the vacuum-energy problem is dissolved' and 'no infinity' are proven.",
+    "role": "Companion to CasimirProcess; the 'problem dissolution' statement of the vacuum branch. Self-contained (QArith).",
+    "qed": 44, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "нулевая энергия (ZPE) 1D/3D; половина степенной суммы.",
+      "roles": "регуляризация = роль; Казимир/Бернулли как конечное значение.",
+      "rules": "zpe = ½·power_sum; vacuum_not_cauchy (расходится); vacuum_casimir; no_infinity.",
+      "p4": "сырая ZPE — role-limit (НЕ Коши, расходится); регуляризованное значение — РАЦИОНАЛЬНЫЙ Element; «проблема вакуумной энергии РАСТВОРЕНА» — теорема (vein C)."
+    },
+    "lemmas": [
+      {"name": "Qpow_exp_1/partial_sum_scale_local/_ext/Qle_Qabs", "kind": "Lemma", "role": "Q-арифметические леммы"},
+      {"name": "zpe_1d/vacuum_energy_1d/zpe_3d/vacuum_energy_3d/find_stage_1d", "kind": "Definition", "role": "ZPE и вакуумная энергия"},
+      {"name": "vacuum_1d_at_0/_1/_2/_9/3d_at_0/_3/zpe_1d_pos/3d_nonneg/_pos", "kind": "Theorem", "role": "значения, положительность"},
+      {"name": "vacuum_1d_is_half_power_sum/3d_is_half_power_sum/_increasing/_nonneg/_diverges/3d_diverges/1d_faulhaber", "kind": "Theorem", "role": "★ ½ степенной суммы; расходится"},
+      {"name": "vacuum_1d_not_cauchy/3d_not_cauchy", "kind": "Theorem", "role": "★ сырая ZPE НЕ Коши"},
+      {"name": "vacuum_casimir_1d/3d/vacuum_finite_1d/3d/vacuum_step_zpe_1d/3d/vacuum_three_level_1d/3d/vacuum_casimir_bridge/1d_positive/3d_positive", "kind": "Theorem", "role": "★ регуляризованное = Казимир, конечно"},
+      {"name": "vacuum_problem_dissolved/_proof/dissolution_1d/3d/no_infinity_1d/3d/vacuum_energy_summary_1d/3d/vacuum_main_theorem", "kind": "Theorem", "role": "★ ПРОБЛЕМА РАСТВОРЕНА, нет бесконечности"}
+    ],
+    "key_lemmas": [
+      {"name": "vacuum_problem_dissolved", "analysis": "Флагман: «проблема вакуумной энергии растворена» как ТЕОРЕМА. Связка vacuum_1d_not_cauchy (сырая ZPE расходится = role-limit) + vacuum_casimir (регуляризованное значение рационально = Element) делает «нет бесконечности» доказанным фактом, а не риторикой. Чистая вена C: правило-сумма заменяет завершённый расходящийся объект.", "tags": ["vacuum-dissolved", "no-infinity", "vein-C"]},
+      {"name": "vacuum_1d_not_cauchy", "analysis": "Сырая нулевая энергия ЧЕСТНО не Коши (расходится) — файл не прячет расходимость, а доказывает её, затем дисциплинирует регуляризацией. Образец честного P4-разделения.", "tags": ["divergence", "not-cauchy", "honest"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Вакуумная энергия над Q: сырая ZPE доказуемо расходится (role-limit), регуляризованное значение рационально (Element=Казимир), «нет бесконечности / проблема растворена» — теоремы. Вена C.",
+      "caveat": "Нулевая энергия и её zeta-регуляризация классичны; уникальность — в P4-формулировке «растворения» как теоремы (расходимость + конечное значение раздельно), не в новой физике вакуума."
+    },
+    "tags": ["vacuum-energy", "zeta-regularization", "no-infinity", "vein-C", "new-framing"]
+  },
+  {
+    "num": 148,
+    "path": "src/experimental/ZetaNegative.v",
+    "cluster": "experimental",
+    "classical_counterpart": "zeta(-n) = -B_{n+1}/(n+1), the trivial zeros at negative even integers, and Faulhaber sums are classical; NEW only as exact rational Coq values plus the honest contrast that naive sums diverge while regularized zeta(-n) is finite.",
+    "title": "Negative-argument zeta over Q: zeta(-n) via Bernoulli, trivial zeros, finite vs divergent",
+    "topic": "zeta(-4..-8) via Bernoulli, the trivial zeros at -2,-4,-6,-8 (from odd Bernoulli vanishing), Faulhaber power sums, the contrast that naive natural/cube sums diverge while zeta(-1),zeta(-3) are finite, and that zeta(-1),zeta(-3) are nonzero.",
+    "role": "Companion to BernoulliNumbers; the trivial-zeros leaf. Self-contained (QArith).",
+    "qed": 32, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "значения zeta(-n); числа Бернулли B_{n+1}.",
+      "roles": "тривиальный нуль = роль (zeta(-2k)=0 из B_odd=0); регуляризованное конечное значение.",
+      "rules": "zeta_neg n = −B_{n+1}/(n+1); trivial_zero_at_2/4/6/8; naive_sum_diverges vs zeta_neg_finite.",
+      "p4": "наивные суммы — role-limit (расходятся); zeta(-n) — конечный Element через Бернулли; тривиальные нули — точные рациональные нули."
+    },
+    "lemmas": [
+      {"name": "zeta_neg_4/_5/_6/_7/_8/B9_odd_zero", "kind": "Theorem", "role": "значения zeta(-4..-8)"},
+      {"name": "trivial_zero_at_2/_4/_6/_8/_via_bernoulli_3/_5/_7", "kind": "Theorem", "role": "★ тривиальные нули из B_odd=0"},
+      {"name": "power_sum_2_example/faulhaber_2_at_3/3_at_2/3_square/3_square_5", "kind": "Theorem", "role": "суммы Фаульхабера"},
+      {"name": "harmonic_diverges/sum_of_naturals_diverges/sum_of_cubes_diverges/naive_sum_exceeds_100", "kind": "Theorem", "role": "★ наивные суммы расходятся"},
+      {"name": "zeta_neg_1_is_finite/_3_is_finite/zeta_2_converges/_3_converges/_neg_1_uses_B2/_neg_3_uses_B4/zeta_2_bounded", "kind": "Theorem", "role": "★ регуляризованные конечны"},
+      {"name": "zeta_neg_1_nonzero/_neg_3_nonzero/_neg_5_nonzero", "kind": "Theorem", "role": "zeta(-1),(-3),(-5) ≠ 0"}
+    ],
+    "key_lemmas": [
+      {"name": "trivial_zero_at_2", "analysis": "Тривиальный нуль zeta(-2)=0 выводится из зануления нечётных чисел Бернулли (B3=0) — точный рациональный нуль, а не приближение. Связывает арифметику Бернулли с нулями дзеты (ср. zeta/ кластер).", "tags": ["trivial-zero", "bernoulli", "zeta"]},
+      {"name": "sum_of_cubes_diverges", "analysis": "Наивная сумма кубов расходится (role-limit), тогда как zeta(-3) конечна через B4 — честный контраст «расходящееся правило vs регуляризованный Element». Питает Casimir/Vacuum.", "tags": ["divergence", "honest", "regularization"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "zeta(-n) над Q через Бернулли: тривиальные нули из B_odd=0, точные конечные значения против расходящихся наивных сумм.",
+      "caveat": "zeta(-n)=−B_{n+1}/(n+1) и тривиальные нули — классика; вклад — точные Q-значения + честный контраст конечного и расходящегося, не новый результат."
+    },
+    "tags": ["zeta-negative", "bernoulli", "trivial-zeros", "methods"]
+  }
+]

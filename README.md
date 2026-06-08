@@ -1,14 +1,14 @@
 # Theory of Systems — Formal Verification
 
 [![Rocq](https://img.shields.io/badge/Rocq-9.0.1-blue.svg)](https://rocq-prover.org/)
-[![Theorems](https://img.shields.io/badge/Theorems-23000+_Proven-brightgreen.svg)]()
+[![Theorems](https://img.shields.io/badge/Theorems-24900+_Proven-brightgreen.svg)]()
 [![Admitted](https://img.shields.io/badge/Admitted-0-brightgreen.svg)]()
 [![Free_Params](https://img.shields.io/badge/Free_Parameters-~0.3-orange.svg)]()
 [![Axioms](https://img.shields.io/badge/Axioms-2_(L3+L4)-green.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **A complete deductive derivation of mathematics and physics from "something exists" --
-> 23,100+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,639 files, ~0.3 free parameters.
+> 24,900+ machine-verified theorems, 0 Admitted, 0 True placeholders, 1,841 files, ~0.3 free parameters.
 > SM gauge group SU(3)xSU(2)xU(1) DERIVED from nested distinction.
 > 3 fermion generations DERIVED from L4 + CP violation minimum.
 > sin^2(theta_W) = 3/13 DERIVED from dim(SU(2))/metric_comp (0.04% from observation).

@@ -1,0 +1,488 @@
+[
+  {
+    "num": 18,
+    "path": "src/algebra/AlgebraicClosureProcess.v",
+    "cluster": "algebra",
+    "classical_counterpart": "The algebraic closure of Q and its construction as a direct limit of finite extensions are classical; NEW is only the P4 'process not completed object' reframing (keep the rule 'the roots of any rational polynomial lie in SOME finite extension', drop the platonist surplus of one object holding all roots), executed axiom-free incl. no UIP.",
+    "title": "Q-bar as a PROCESS, not a completed object: the ascending tower of finite extensions",
+    "topic": "The algebraic closure of Q recast as an ascending tower (rungs = finite extensions) with strictly increasing dimensions: no maximal rung, every closure element sited at a finite rung (direct limit). Concrete multiquadratic skeleton (dims 2^n) whose rung 2 IS the GaloisQ23 field.",
+    "role": "Vein C (X = process) applied to the algebraic closure. Self-contained (QArith/List/Eqdep_dec). Concrete rung 2 ties to GaloisDegreeQ23.ext_degree = 4.",
+    "qed": 14, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith List PeanoNat Lia Eqdep_dec"],
+    "err": {
+      "elements": "конечные расширения (rungs) и элементы, сидящие на конечном rung; germ = пара (n, элемент rung n).",
+      "roles": "алгебраическое замыкание = role-limit восходящей башни; multiquadratic = конкретный непустой скелет.",
+      "rules": "вложения rung_n ↪ rung_{n+1}; размерности строго растут; germ_of сшивает rung'и в colimit.",
+      "p4": "Q-bar — ПРОЦЕСС, не завершённый объект: каждое алгебраическое число = конечные данные на каком-то rung; «единый объект со всеми корнями» = платонистский излишек, отброшен; Q-bar P4-актуальнее R."
+    },
+    "lemmas": [
+      {"name": "AlgTower", "kind": "Record", "role": "абстрактная башня: rungs, размерности cdim, вложения"},
+      {"name": "tower_height_le_dim", "kind": "Lemma", "role": "n ≤ cdim T n (высота ограничена размерностью)"},
+      {"name": "no_maximal_rung", "kind": "Theorem", "role": "★ ни один конечный rung не есть всё замыкание"},
+      {"name": "tower_unbounded", "kind": "Theorem", "role": "размерности превосходят любую конечную границу"},
+      {"name": "rung_embeds_faithfully", "kind": "Lemma", "role": "вложения — настоящие инъекции (decidable eq на ℕ, без UIP)"},
+      {"name": "Germ", "kind": "Definition", "role": "элемент colimit'а: { n & carrier T n }"},
+      {"name": "germ_of", "kind": "Definition", "role": "вложение элемента rung n в Germ"},
+      {"name": "germ_finitely_sited", "kind": "Theorem", "role": "★ каждый элемент замыкания живёт на КОНЕЧНОМ rung (direct limit)"},
+      {"name": "germ_of_inj", "kind": "Lemma", "role": "germ_of инъективно"},
+      {"name": "closure_is_a_process", "kind": "Theorem", "role": "★ замыкание = процесс над конечными элементами, не завершённая тотальность"},
+      {"name": "pad", "kind": "Definition", "role": "zero-padding вложение list Q (скелет удвоения размерности)"},
+      {"name": "pad_length", "kind": "Lemma", "role": "length (pad l) = 2·length l"},
+      {"name": "pad_firstn", "kind": "Lemma", "role": "pad сохраняет исходный префикс"},
+      {"name": "pad_inj", "kind": "Lemma", "role": "pad инъективно"},
+      {"name": "two_pow_grows", "kind": "Lemma", "role": "2^n < 2^(S n)"},
+      {"name": "multiquadratic", "kind": "Definition", "role": "конкретная башня dims 2^n (1,2,4,8,…)"},
+      {"name": "rung0_dim", "kind": "Example", "role": "cdim 0 = 1 (Q)"},
+      {"name": "rung1_dim", "kind": "Example", "role": "cdim 1 = 2 (Q[√2])"},
+      {"name": "rung2_dim", "kind": "Example", "role": "cdim 2 = 4 (= [Q[√2,√3]:Q] = GaloisQ23)"}
+    ],
+    "key_lemmas": [
+      {"name": "germ_finitely_sited", "analysis": "Онтологический payload: каждый элемент замыкания (colimit'а) живёт на НЕКОТОРОМ конечном rung — замыкание есть прямой предел, процесс над конечными элементами, никогда не актуально завершённая тотальность. Это формальное ядро тезиса «Q-bar = процесс»: то, что классика называет «построением замыкания как объекта», расщепляется на конструктивное правило + платонистский излишек.", "tags": ["direct-limit", "process-ontology", "P4"]},
+      {"name": "no_maximal_rung", "analysis": "Ни один конечный rung не исчерпывает замыкание (размерности строго растут) — role-limit-сторона: башня не имеет максимума. Вместе с germ_finitely_sited даёт точную картину «бесконечность = свойство восходящего правила, не объекта».", "tags": ["role-limit", "tower", "unbounded"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Вена C на алгебраическом замыкании: Q-bar как аксиомо-свободный процесс-башня (no maximal rung, germ finitely sited) с конкретным multiquadratic-скелетом, rung 2 которого ЕСТЬ поле GaloisQ23. Замыкание = direct limit, не стена-объект.",
+      "caveat": "Конструкция прямого предела стандартна (Bishop/конструктивизм); вклад — онтологическое переобрамление P4 + аксиомо-свободное (без UIP) исполнение, не новая алгебра."
+    },
+    "tags": ["process-ontology", "algebraic-closure", "vein-C", "direct-limit", "tower", "P4"]
+  },
+  {
+    "num": 19,
+    "path": "src/algebra/FieldExtension.v",
+    "cluster": "algebra",
+    "classical_counterpart": "Polynomial evaluation, minimal polynomials (x^2-2 of degree 2, x^3-2 of degree 3) and the tower law are standard field theory; NEW: nothing — foundational polynomial machinery supporting the Galois files.",
+    "title": "Polynomial machinery over Q: minimal polynomials and extension degree",
+    "topic": "eval_poly / poly_degree / poly_add / poly_scale over Q-coefficient lists; the minimal polynomials x^2-2 (degree 2) and x^3-2 (degree 3), non-root checks at rationals, and the concrete tower law 3*2=6.",
+    "role": "Foundational polynomial layer beneath the Galois cluster. Self-contained (QArith).",
+    "qed": 20, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "полиномы над Q (списки коэффициентов); рациональные точки.",
+      "roles": "степень расширения = степень минимального полинома; корень = роль обнуления.",
+      "rules": "eval_poly (Горнер), poly_add/scale, poly_degree = pred(length); is_root = eval ≡ 0.",
+      "p4": "степень = конечные данные расширения; минимальный полином — конечный сертификат алгебраичности элемента."
+    },
+    "lemmas": [
+      {"name": "eval_poly", "kind": "Fixpoint", "role": "вычисление полинома в точке (схема Горнера)"},
+      {"name": "poly_degree", "kind": "Definition", "role": "степень = pred(length коэффициентов)"},
+      {"name": "is_root", "kind": "Definition", "role": "eval_poly p x ≡ 0"},
+      {"name": "poly_add", "kind": "Fixpoint", "role": "сложение полиномов"},
+      {"name": "poly_scale", "kind": "Fixpoint", "role": "умножение на скаляр"},
+      {"name": "eval_poly_nil/const/linear/quadratic", "kind": "Lemma", "role": "вычисление для пустого/константы/линейного/квадратичного"},
+      {"name": "degree_of_x2_minus_2", "kind": "Lemma", "role": "deg[x²−2]=2"},
+      {"name": "degree_of_x3_minus_2", "kind": "Lemma", "role": "deg[x³−2]=3"},
+      {"name": "degree_of_linear/constant", "kind": "Lemma", "role": "deg линейного=1, константы=0"},
+      {"name": "sqrt2_poly", "kind": "Definition", "role": "минимальный полином √2 = [−2;0;1]"},
+      {"name": "sqrt2_poly_at_x", "kind": "Lemma", "role": "значение x²−2"},
+      {"name": "sqrt2_root_approx", "kind": "Lemma", "role": "приближённый корень √2"},
+      {"name": "one_not_root_sqrt2", "kind": "Lemma", "role": "1 не корень x²−2"},
+      {"name": "three_halves_not_root_sqrt2", "kind": "Lemma", "role": "3/2 не корень"},
+      {"name": "seven_fifths_not_root_sqrt2", "kind": "Lemma", "role": "7/5 не корень"},
+      {"name": "cbrt2_poly", "kind": "Definition", "role": "минимальный полином ∛2 = [−2;0;0;1]"},
+      {"name": "cbrt2_poly_at_x", "kind": "Lemma", "role": "значение x³−2"},
+      {"name": "five_fourths_not_root_cbrt2", "kind": "Lemma", "role": "5/4 не корень x³−2"},
+      {"name": "ext_degree_sqrt2_is_2", "kind": "Lemma", "role": "[Q[√2]:Q]=2"},
+      {"name": "ext_degree_cbrt2_is_3", "kind": "Lemma", "role": "[Q[∛2]:Q]=3"},
+      {"name": "tower_law_concrete", "kind": "Lemma", "role": "конкретный tower law 3·2=6"},
+      {"name": "eval_poly_add/scale", "kind": "Lemma", "role": "eval гомоморфно по add/scale"}
+    ],
+    "key_lemmas": [
+      {"name": "ext_degree_cbrt2_is_3", "analysis": "Степень расширения как степень минимального полинома: [Q[∛2]:Q]=3 (x³−2). Вместе с ext_degree_sqrt2_is_2 даёт конечно-данную интерпретацию степени; ∛2 — degree-3 role-limit (связь с CubicRoleLimit / Делийская задача в q-kinematics).", "tags": ["extension-degree", "minimal-polynomial", "cubic"]},
+      {"name": "tower_law_concrete", "analysis": "Конкретная мультипликативность степеней 3·2=6 — арифметический скелет tower law, на котором стоят GaloisDegreeQ23 (2·2=4) и общая башня.", "tags": ["tower-law", "degree"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Базовая полиномиальная машина над Q (eval/degree/add/scale) + минимальные полиномы √2,∛2 и конкретный tower law — фундамент под Галуа-кластер.",
+      "caveat": "Полностью стандартная теория полей; ценность чисто инфраструктурная (опора для GaloisQ23/Degree)."
+    },
+    "tags": ["polynomials", "field-extension", "minimal-polynomial", "tower-law", "infrastructure"]
+  },
+  {
+    "num": 20,
+    "path": "src/algebra/FiniteFieldFp.v",
+    "cluster": "algebra",
+    "classical_counterpart": "Finite fields F_p = Z/pZ and Fermat's little theorem are classical; NEW: nothing — concrete F5/F7 by computation closing a 'no finite fields' gap; honest gap: general 'p prime => F_p a field' needs Bezout/modular inverse.",
+    "title": "Finite fields F_5, F_7 by computation + Fermat's little theorem",
+    "topic": "Concrete finite fields F_5 and F_7: explicit inverse tables (every nonzero residue invertible), Fermat's little theorem a^(p-1) = 1 mod p for these primes, and 0 has no inverse.",
+    "role": "Closes a 'no finite fields' gap with concrete instances. Self-contained (Arith/Lia).",
+    "qed": 6, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: Arith Lia"],
+    "err": {
+      "elements": "вычеты 0..p-1; операции mod p.",
+      "roles": "ненулевой вычет = единица (обратимый); 0 = не-единица.",
+      "rules": "для простого p всякий ненулевой вычет обратим ⟹ F_p поле; Ферма a^(p−1)≡1.",
+      "p4": "конкретные поля F5/F7 проверены вычислением (Element); общий случай «p просто ⟹ F_p поле» = role-limit (нужен Безу)."
+    },
+    "lemmas": [
+      {"name": "fp_add/fp_mul", "kind": "Definition", "role": "сложение/умножение mod p"},
+      {"name": "has_inverses", "kind": "Definition", "role": "у каждого ненулевого вычета есть обратный"},
+      {"name": "inv5", "kind": "Definition", "role": "таблица обратных в F5"},
+      {"name": "F5_field", "kind": "Theorem", "role": "★ F5 — поле (все ненулевые обратимы)"},
+      {"name": "inv7", "kind": "Definition", "role": "таблица обратных в F7"},
+      {"name": "F7_field", "kind": "Theorem", "role": "★ F7 — поле"},
+      {"name": "fermat5", "kind": "Theorem", "role": "a⁴ ≡ 1 mod 5 (1≤a≤4)"},
+      {"name": "fermat7", "kind": "Theorem", "role": "a⁶ ≡ 1 mod 7 (1≤a≤6)"},
+      {"name": "zero_no_inverse_F7", "kind": "Theorem", "role": "0 не имеет обратного в F7"},
+      {"name": "inv7_in_range", "kind": "Theorem", "role": "inv7 остаётся в 1..6"}
+    ],
+    "key_lemmas": [
+      {"name": "F5_field", "analysis": "Конкретное поле: явная таблица обратных inv5 проверяет, что каждый ненулевой вычет F5 обратим — вычислительное свидетельство «F_p поле» для p=5. Закрывает gap честно (по вычислению), не претендуя на общий случай.", "tags": ["finite-field", "computation", "concrete"]},
+      {"name": "fermat7", "analysis": "Малая теорема Ферма для p=7: a⁶≡1 mod 7 для всех ненулевых a — проверена перебором 1..6. Конечно-актуальная форма (P4) теоретико-числового факта.", "tags": ["fermat", "concrete"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Конкретные F5/F7 как поля (явные таблицы обратных) + Ферма по вычислению — закрытие gap «нет конечных полей».",
+      "caveat": "Конечные поля и Ферма классичны; вклад — конкретные инстансы по вычислению; общий «p просто ⟹ поле» оставлен фронтиром (нужен Безу). Заголовок STATUS пишет 7 Qed, фактически 6."
+    },
+    "tags": ["finite-field", "fermat", "computation", "concrete", "methods"],
+    "notes": "Header STATUS says 7 Qed; actual Qed count = 6. Drift flagged."
+  },
+  {
+    "num": 21,
+    "path": "src/algebra/GaloisCorrespondence.v",
+    "cluster": "algebra",
+    "classical_counterpart": "The Galois correspondence and Abel-Ruffini (quintic unsolvable; S5 with simple A5) are classical; HERE they appear only as NUMERIC coincidences (subgroup counts = field counts, |Gal|=degree, A5 simple => quintic unsolvable) — UPGRADED to the real automorphism action by GaloisQ23.v. NEW: only the count-level skeleton.",
+    "title": "Galois correspondence as numeric coincidences; quintic unsolvable (count level)",
+    "topic": "Subgroup-count = field-count matches for Z/2 (2) and V4 (5), order=degree, V4 abelian, and the Abel-Ruffini chain at the count level: S5 order 120, A5 order 60 simple, quintic group = S5 not solvable by radicals.",
+    "role": "The numeric-coincidence version that GaloisQ23.v upgrades to a genuine concrete correspondence. Self-contained (QArith).",
+    "qed": 21, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith Qabs Lia ZArith List Bool Lqa PeanoNat"],
+    "err": {
+      "elements": "подгруппы, промежуточные поля, степени расширений (как nat-счётчики).",
+      "roles": "соответствие Галуа (биекция), разрешимость (цепь); A5 как простая.",
+      "rules": "subgroup count = field count, normal ↔ Galois, A5 проста ⟹ квинтика неразрешима.",
+      "p4": "настоящее соответствие здесь — role-limit (только счётчики совпадают); конкретные автоморфизмы строятся в GaloisQ23 (Element-сторона)."
+    },
+    "lemmas": [
+      {"name": "z2_subgroups", "kind": "Lemma", "role": "Z/2 имеет 2 подгруппы"},
+      {"name": "quadratic_intermediate_fields", "kind": "Lemma", "role": "2 промежуточных поля квадратичного"},
+      {"name": "correspondence_quadratic", "kind": "Lemma", "role": "счёт подгрупп = счёт полей (Z/2)"},
+      {"name": "klein_four_subgroups", "kind": "Lemma", "role": "V4 имеет 5 подгрупп"},
+      {"name": "v4_order_is_4", "kind": "Lemma", "role": "|V4|=4"},
+      {"name": "biquadratic_fields", "kind": "Lemma", "role": "5 промежуточных полей бикватичного"},
+      {"name": "correspondence_biquadratic", "kind": "Lemma", "role": "★ счёт подгрупп = счёт полей (V4=5)"},
+      {"name": "order_equals_degree_quadratic/biquadratic", "kind": "Lemma", "role": "|Gal| = степень"},
+      {"name": "v4_is_abelian", "kind": "Lemma", "role": "2·2=|V4| (абелевость через счёт)"},
+      {"name": "normal_subgroup_galois_abelian", "kind": "Lemma", "role": "нормальность ↔ Галуа (абелев случай)"},
+      {"name": "s5_order_is_120", "kind": "Lemma", "role": "|S5|=120"},
+      {"name": "a5_order_is_60", "kind": "Lemma", "role": "|A5|=60"},
+      {"name": "a5_is_simple", "kind": "Lemma", "role": "A5 проста (как счётчик нормальных подгрупп=2)"},
+      {"name": "s5_not_solvable", "kind": "Lemma", "role": "S5 неразрешима (флаг)"},
+      {"name": "quintic_group_is_s5", "kind": "Lemma", "role": "группа квинтики = S5"},
+      {"name": "quintic_not_solvable_by_radicals", "kind": "Lemma", "role": "★ квинтика неразрешима в радикалах (вывод Абеля-Руффини на счётном уровне)"},
+      {"name": "lagrange_v4_trivial/z2/full", "kind": "Lemma", "role": "Лагранж: делимость порядков подгрупп V4"},
+      {"name": "index_v4_z2", "kind": "Lemma", "role": "индекс [V4:Z2]=2"}
+    ],
+    "key_lemmas": [
+      {"name": "correspondence_biquadratic", "analysis": "Сердце count-level соответствия: V4 имеет 5 подгрупп и расширение Q[√2,√3] — 5 промежуточных полей, числа совпадают. Это «численное совпадение», которое GaloisQ23.v честно ПОВЫШАЕТ до настоящей биекции с реальным действием автоморфизмов — здесь же только счётчики.", "tags": ["correspondence", "count", "V4"]},
+      {"name": "quintic_not_solvable_by_radicals", "analysis": "Вывод Абеля-Руффини на счётном уровне: группа квинтики = S5, её коммутант A5 прост (счётчик нормальных подгрупп = 2), значит неразрешима в радикалах. Настоящая (не-счётная) простота A5 и эквивалентность радикалы⟺разрешимая-группа остаются role-limit (SolvableGroup даёт абстрактный движок).", "tags": ["abel-ruffini", "quintic", "count"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Соответствие Галуа и Абель-Руффини как численные совпадения (счёт подгрупп = счёт полей, |Gal|=степень, A5 проста ⟹ квинтика неразрешима) — счётный скелет, повышаемый до настоящего действия в GaloisQ23.",
+      "caveat": "Совпадают только ЧИСЛА; файл НЕ строит автоморфизмы (это флагман GaloisQ23) и принимает простоту A5 как счётчик. Честно как численный каркас. Заголовок STATUS пишет 20 Qed, фактически 21."
+    },
+    "tags": ["galois", "correspondence", "abel-ruffini", "quintic", "count", "new-framing"],
+    "notes": "Header STATUS says 20 Qed; actual Qed count = 21. Drift flagged."
+  },
+  {
+    "num": 22,
+    "path": "src/algebra/GaloisDegreeQ23.v",
+    "cluster": "algebra",
+    "classical_counterpart": "The degree=order theorem ([E:Q]=|Gal(E/Q)|) and the tower law are classical FTGT; NEW is the fully explicit concrete instance for Q[sqrt2,sqrt3], with the four automorphisms witnessed PAIRWISE DISTINCT by their action on the basis surds. Caveat: faithfulness to the real field rests on irrationality results (frontier).",
+    "title": "[E:Q] = |Gal(E/Q)| = 4 for E = Q[sqrt2, sqrt3], with tower law 2*2=4",
+    "topic": "The four automorphisms id, sigma, tau, sigma*tau are pairwise distinct (witnessed on sqrt2, sqrt3), so |Gal| = 4; the basis {1,sqrt2,sqrt3,sqrt6} gives degree 4; the tower law [E:Q]=[E:Q[sqrt2]]*[Q[sqrt2]:Q]=2*2=4 holds.",
+    "role": "Vein D flagship component. Builds on GaloisQ23.v. Degree-order match for the concrete model.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["ToS: algebra.GaloisQ23", "Stdlib: QArith Lqa Arith"],
+    "err": {
+      "elements": "четыре автоморфизма, действующие различно на базисные сурды.",
+      "roles": "порядок Галуа как счёт ролей; степень расширения как размерность базиса.",
+      "rules": "4 попарно различных автоморфизма ⟹ |Gal|=4=[E:Q]; башня 2·2=4.",
+      "p4": "степень = |Gal| на конкретной модели (Element); верность реальному полю (Q-линейная независимость сурдов) = фронтир/role-limit."
+    },
+    "lemmas": [
+      {"name": "st_neq_id", "kind": "Lemma", "role": "στ ≠ id (на √2)"},
+      {"name": "sig_neq_tau", "kind": "Lemma", "role": "σ ≠ τ (на √2)"},
+      {"name": "sig_neq_st", "kind": "Lemma", "role": "σ ≠ στ (на √3)"},
+      {"name": "tau_neq_st", "kind": "Lemma", "role": "τ ≠ στ (на √2)"},
+      {"name": "galois_group_four_distinct", "kind": "Theorem", "role": "★ четыре автоморфизма попарно различны ⟹ |Gal|=4"},
+      {"name": "ext_degree/galois_order/sub_degree_sqrt2/rel_degree", "kind": "Definition", "role": "степени и порядок как nat (4,4,2,2)"},
+      {"name": "degree_equals_galois_order", "kind": "Theorem", "role": "ext_degree = galois_order (4=4)"},
+      {"name": "tower_law", "kind": "Theorem", "role": "★ 2·2 = 4 (мультипликативность степеней)"}
+    ],
+    "key_lemmas": [
+      {"name": "galois_group_four_distinct", "analysis": "Ядро degree-order совпадения: четыре автоморфизма id/σ/τ/στ ПОПАРНО различны, засвидетельствовано их действием на √2 и √3 — значит V4 имеет порядок ровно 4. Делает |Gal|=4 не постулатом, а следствием конкретного различения ролей.", "tags": ["galois-order", "distinctness", "V4"]},
+      {"name": "tower_law", "analysis": "Мультипликативность степеней 2·2=4 на конкретной башне Q⊂Q[√2]⊂E. Вместе с IndependenceQ23 (√3∉Q[√2]) делает обе ступени настоящими degree-2 расширениями.", "tags": ["tower-law", "degree"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Полностью явное degree=order совпадение [E:Q]=|Gal|=4 для конкретного Q[√2,√3]: четыре автоморфизма засвидетельствованы попарно различными действием на базисные сурды + tower law 2·2.",
+      "caveat": "Теорема degree=order и tower law классичны (FTGT); вклад — явный конкретный инстанс; верность реальному полю опирается на иррациональности (фронтир, не пере-доказано). Заголовок STATUS пишет 8 Qed, фактически 7."
+    },
+    "tags": ["galois", "degree", "vein-D", "tower-law", "V4", "concrete"],
+    "notes": "Header STATUS says 8 Qed; actual Qed count = 7. Drift flagged."
+  },
+  {
+    "num": 23,
+    "path": "src/algebra/GaloisGroup.v",
+    "cluster": "algebra",
+    "classical_counterpart": "The symmetric group S3 (transpositions, 3-cycles, non-commutativity) and the quadratic discriminant b^2-4c are textbook; NEW: nothing — concrete permutation-group computations supporting the Galois files.",
+    "title": "Concrete permutation groups S3 / Z2 and the quadratic discriminant",
+    "topic": "Permutations as nat->nat: transpositions and 3-cycles of S3, S3 non-commutative, orders (|S3|=6, |Z2|=2), and the quadratic discriminant (disc[x^2-2], disc[x^2-3]).",
+    "role": "Concrete group-theory support beneath the Galois cluster. Self-contained.",
+    "qed": 18, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib"],
+    "err": {
+      "elements": "перестановки nat→nat; транспозиции, 3-циклы.",
+      "roles": "элементы группы и их порядки; дискриминант как роль типа корней.",
+      "rules": "perm_compose, transpose; дискриминант b²−4c; орбиты-инволюции.",
+      "p4": "конкретные конечные группы, всё вычислимо (Element); S3 неабелева = источник неразрешимости (связь с SolvableGroup)."
+    },
+    "lemmas": [
+      {"name": "Perm/perm_id/perm_compose/transpose", "kind": "Definition", "role": "перестановки и операции"},
+      {"name": "s3_*", "kind": "Definition", "role": "элементы S3 (id, транспозиции, 3-циклы)"},
+      {"name": "perm_id_left/right", "kind": "Lemma", "role": "id — нейтраль композиции"},
+      {"name": "transpose_self", "kind": "Lemma", "role": "транспозиция инволютивна"},
+      {"name": "transpose_involution_concrete_12/13/23", "kind": "Lemma", "role": "конкретные инволюции"},
+      {"name": "s3_non_commutative", "kind": "Lemma", "role": "★ S3 неабелева"},
+      {"name": "s3_12_23_at_1 / s3_23_12_at_1", "kind": "Lemma", "role": "свидетели некоммутативности (2 ≠ 3)"},
+      {"name": "s3_order_is_factorial", "kind": "Lemma", "role": "|S3|=3·2·1=6"},
+      {"name": "gal_quadratic_order", "kind": "Lemma", "role": "|Gal квадратичного|=2"},
+      {"name": "gal_cubic_max_order", "kind": "Lemma", "role": "порядок кубической ≤ 6"},
+      {"name": "discriminant_quadratic", "kind": "Definition", "role": "b²−4c"},
+      {"name": "discriminant_x2_minus_2/3", "kind": "Lemma", "role": "дискриминанты x²−2, x²−3"},
+      {"name": "three_cycle_order/132_order", "kind": "Lemma", "role": "3-циклы имеют порядок 3"},
+      {"name": "three_cycles_inverse", "kind": "Lemma", "role": "3-циклы взаимно обратны"},
+      {"name": "z2_is_abelian", "kind": "Lemma", "role": "Z2 абелева"}
+    ],
+    "key_lemmas": [
+      {"name": "s3_non_commutative", "analysis": "S3 неабелева (свидетели s3_12_23_at_1=2 vs s3_23_12_at_1=3) — корень неразрешимости кубики/квинтики на уровне групп: некоммутативность = нетривиальный коммутант. Стыкуется с SolvableGroup (perfect⇒не-solvable).", "tags": ["S3", "non-commutative", "unsolvability"]},
+      {"name": "discriminant_x2_minus_2", "analysis": "Дискриминант b²−4c квадратичного минимального полинома — та же дискриминантная ручка, что в BoundaryDecidability (вена A): квадрат ⟺ рациональный корень. Здесь — вход в группу Галуа квадратичного.", "tags": ["discriminant", "vein-A-link"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Конкретные перестановочные группы S3/Z2 (некоммутативность, порядки, 3-циклы) + квадратичный дискриминант — групповая опора Галуа-кластера.",
+      "caveat": "Полностью стандартная теория групп; ценность инфраструктурная. Дискриминант перекликается с веной A, но здесь без второпорядковой рамки."
+    },
+    "tags": ["group-theory", "S3", "permutations", "discriminant", "methods"]
+  },
+  {
+    "num": 24,
+    "path": "src/algebra/GaloisQ23.v",
+    "cluster": "algebra",
+    "classical_counterpart": "The Fundamental Theorem of Galois Theory is classical; NEW is the unusually COMPLETE explicit formalization of one nontrivial instance (Q[sqrt2,sqrt3]) with the actual automorphisms as ring homomorphisms and the inclusion-reversing subgroup<->subfield bijection exhibited — versus the abstract-theory approach standard in proof libraries. Caveat: a concrete instance, not the abstract functor Aut(L/K).",
+    "title": "The REAL concrete Galois correspondence Q[sqrt2,sqrt3] = V4, with genuine automorphism action",
+    "topic": "Builds the field Q[sqrt2,sqrt3] as 4-tuples, the four automorphisms id/sigma/tau/sigma*tau as ring homomorphisms fixing Q, proves the group is the Klein four-group V4, and exhibits the subgroup<->intermediate-field bijection explicitly, inclusion-reversing.",
+    "role": "FLAGSHIP of vein D (unusually-complete concrete formalization). Foundation for GaloisDegreeQ23, IndependenceQ23, SplittingFieldQ23. Self-contained (QArith/Lqa).",
+    "qed": 26, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith Lqa"],
+    "err": {
+      "elements": "a + b√2 + c√3 + d√6 (4-мерное Q-векторное пространство).",
+      "roles": "четыре автоморфизма id/σ/τ/στ как полевые отображения, фиксирующие Q; подгруппы V4 как роли симметрии.",
+      "rules": "σ:√2↦−√2, τ:√3↦−√3; каждое — кольцевой гомоморфизм, фиксирующий Q; фиксированные подполя ↔ подгруппы, обращая включение.",
+      "p4": "конкретные конечные данные Галуа полностью актуальны (Element); абстрактный Aut(L/K) для произвольного L/K остаётся role-limit."
+    },
+    "lemmas": [
+      {"name": "E", "kind": "Record", "role": "элемент поля: {c0;c1;c2;c3} = a+b√2+c√3+d√6"},
+      {"name": "Eeq/Eadd/Emul/Eofq", "kind": "Definition", "role": "равенство, кольцо, вложение Q"},
+      {"name": "a_id/a_sig/a_tau/a_st", "kind": "Definition", "role": "четыре автоморфизма"},
+      {"name": "Eeq_refl/sym/trans", "kind": "Lemma", "role": "Eeq — отношение эквивалентности"},
+      {"name": "sig_add/tau_add/st_add", "kind": "Lemma", "role": "автоморфизмы аддитивны"},
+      {"name": "sig_mul/tau_mul/st_mul", "kind": "Lemma", "role": "★ автоморфизмы мультипликативны (кольцевые гомоморфизмы)"},
+      {"name": "sig_fixes_base/tau/st", "kind": "Lemma", "role": "фиксируют Q"},
+      {"name": "sig_invol/tau/st", "kind": "Lemma", "role": "инволютивны (порядок 2)"},
+      {"name": "sig_tau_eq_st / tau_sig_eq_st", "kind": "Lemma", "role": "σ∘τ=στ=τ∘σ (структура V4)"},
+      {"name": "V4_abelian", "kind": "Lemma", "role": "★ группа абелева = Клейнова четверная V4"},
+      {"name": "fixed_by", "kind": "Definition", "role": "φ фиксирует u"},
+      {"name": "fix_sig_iff/tau/st", "kind": "Lemma", "role": "характеризация фиксированных подполей каждого σ/τ/στ"},
+      {"name": "fix_V4_iff", "kind": "Lemma", "role": "фиксированное поле всей V4 = Q"},
+      {"name": "base_fixed_by_all", "kind": "Theorem", "role": "Q фиксируется всеми"},
+      {"name": "correspondence_inclusion_reversing", "kind": "Theorem", "role": "★ подгруппа↔подполе, обращая включение"},
+      {"name": "r2/r3", "kind": "Definition", "role": "√2, √3 как элементы"},
+      {"name": "sig_neq_id / tau_neq_id", "kind": "Theorem", "role": "σ,τ нетривиальны (двигают √2,√3)"}
+    ],
+    "key_lemmas": [
+      {"name": "correspondence_inclusion_reversing", "analysis": "Сердце флагмана: явная биекция { подгруппы V4 } ↔ { промежуточные поля }, обращающая включение — настоящее Фундаментальное соответствие Галуа для конкретного degree-4 расширения, а не совпадение счётчиков (как в GaloisCorrespondence). Редко встречается полностью формализованным (библиотеки используют абстрактную теорию).", "tags": ["FTGT", "bijection", "vein-D", "inclusion-reversing"]},
+      {"name": "V4_abelian", "analysis": "Группа автоморфизмов ЕСТЬ Клейнова четверная V4: σ,τ инволютивны и коммутируют, σ∘τ=στ. Не постулат, а вычисленная структура реального действия на 4-кортежах — основа всего соответствия.", "tags": ["V4", "klein-four", "automorphism-group"]},
+      {"name": "sig_mul", "analysis": "Каждый автоморфизм — настоящий КОЛЬЦЕВОЙ гомоморфизм (σ(uv)=σu·σv), не просто перестановка координат. Именно это делает соответствие реальным (а не численным): σ,τ уважают полевую структуру.", "tags": ["ring-homomorphism", "automorphism"]}
+    ],
+    "uniqueness": {
+      "score": 5,
+      "level": "synthesis+observation",
+      "claim": "Полностью явное конкретное соответствие Галуа Q[√2,√3]≅V4: реальное действие автоморфизмов (кольцевые гомоморфизмы σ,τ,στ), биекция фикс-подполе↔подгруппа выписана и обращает включение, |Gal|=[E:Q]=4. Редкость в полностью формализованном виде.",
+      "caveat": "FTGT классична; уникальность — в НЕОБЫЧНОЙ ПОЛНОТЕ явной формализации одного нетривиального инстанса (vs абстрактная теория в библиотеках), не в новой теореме. Абстрактный Aut(L/K) остаётся role-limit."
+    },
+    "tags": ["galois", "vein-D", "V4", "concrete", "FTGT", "ring-homomorphism", "flagship"]
+  },
+  {
+    "num": 25,
+    "path": "src/algebra/IndependenceQ23.v",
+    "cluster": "algebra",
+    "classical_counterpart": "That sqrt3 is not in Q[sqrt2] (linear disjointness of Q[sqrt2] and Q[sqrt3]) is standard; NEW is supplying it as the explicit axiom-free LOAD-BEARING step behind the concrete GaloisQ23 degree-4, purely over Q (no real embedding).",
+    "title": "sqrt3 not in Q[sqrt2]: the degree-4 tower is GENUINE",
+    "topic": "Proves sqrt3 not in Q[sqrt2] purely algebraically over Q: if sqrt3 = a + b*sqrt2 then squaring forces 2ab=0 and a^2+2b^2=3, impossible — using only irrationality of sqrt3 and sqrt6. Makes the tower Q < Q[sqrt2] < Q[sqrt2,sqrt3] non-degenerate.",
+    "role": "Vein D flagship: the load-bearing independence behind [E:Q]=4. Imports GaloisQ23, Sqrt3Irrational, GeneralSqrt.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["ToS: algebra.GaloisQ23, analysis.Sqrt3Irrational, stdlib.GeneralSqrt", "Stdlib: QArith Lqa"],
+    "err": {
+      "elements": "кандидаты-представления a+b√2 для √3 внутри Q[√2].",
+      "roles": "Q[√2] как собственное подрасширение; √3 как подлинно новый генератор.",
+      "rules": "a+b√2 в квадрате = 3 ⟹ 2ab=0 ∧ a²+2b²=3, невозможно над Q.",
+      "p4": "genuine степень-2 ступени делают башню невырожденной (Element-данные); верность реальному полю — фронтир."
+    },
+    "lemmas": [
+      {"name": "no_sq_6", "kind": "Lemma", "role": "6 не рациональный квадрат (Q-литеральная форма)"},
+      {"name": "sqrt3_not_in_Qsqrt2", "kind": "Theorem", "role": "★ √3 ∉ Q[√2] (подлинная независимость)"},
+      {"name": "tower_nondegenerate", "kind": "Corollary", "role": "башня Q⊊Q[√2]⊊E невырождена"}
+    ],
+    "key_lemmas": [
+      {"name": "sqrt3_not_in_Qsqrt2", "analysis": "Несущая независимость: √3∉Q[√2], чисто алгебраически над Q (без вещественного вложения) — если √3=a+b√2, то 2ab·√2=3−a²−2b²∈Q ⟹ ab=0; b=0⟹a²=3 (√3 ирр.), a=0⟹(2b)²=6 (√6 ирр.). Именно это делает degree-4 НАСТОЯЩИМ, а не размерностью формального модуля. project-uniqueness-map выделяет эту лемму отдельно.", "tags": ["independence", "vein-D", "load-bearing"]},
+      {"name": "tower_nondegenerate", "analysis": "Следствие: каждая ступень башни Q⊊Q[√2]⊊E — genuine degree-2 расширение. Закрывает gap верности за degree-4 совпадением GaloisDegreeQ23.", "tags": ["tower", "non-degenerate"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Несущая независимость √3∉Q[√2] чисто над Q (без вещественного вложения), делающая [E:Q]=4 ПОДЛИННЫМ, а не формальной размерностью модуля — load-bearing шаг за флагманом.",
+      "caveat": "Линейная дизъюнктность Q[√2],Q[√3] стандартна; ценность — её поставка как явного аксиомо-свободного шага верности за конкретным GaloisQ23."
+    },
+    "tags": ["independence", "vein-D", "load-bearing", "surds", "tower"]
+  },
+  {
+    "num": 26,
+    "path": "src/algebra/RationalRootTest.v",
+    "cluster": "algebra",
+    "classical_counterpart": "Gauss's lemma and the rational root theorem (pure-power case) are classical; NEW is generalizing the repo's cube-specific coprime_div_cube_unit to EVERY degree via Znumtheory, unifying sqrt2, sqrt3, sqrt5, cbrt2 under one criterion. Caveat: pure-root/power criterion only; full RRT for arbitrary integer polynomials not yet assembled.",
+    "title": "General Gauss lemma and the rational root test (any degree)",
+    "topic": "Gauss's lemma generalized to every degree: coprime x and x | y^n => x = +-1 (via Euclid/rel_prime); hence the n-th root of an integer is an integer or irrational. Subsumes sqrt2/sqrt3/sqrt5 (n=2) and cbrt2 (n=3).",
+    "role": "Generalizes the cube-specific coprime_div_cube_unit (AngleTrisection, q-kinematics) to all degrees. Self-contained (ZArith/Znumtheory).",
+    "qed": 6, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: ZArith Znumtheory Lia"],
+    "err": {
+      "elements": "целые числа, взаимная простота (rel_prime), делимость.",
+      "roles": "лемма Гаусса как правило «coprime делит степень ⟹ единица».",
+      "rules": "rel_prime x y, x | y^n ⟹ x=±1 (любая степень n).",
+      "p4": "разрешимый целочисленный критерий «корень целый или иррационален» = Element/role-limit-ручка для чистых корней."
+    },
+    "lemmas": [
+      {"name": "zpow", "kind": "Fixpoint", "role": "степень над Z (zpow y (S k) = y·zpow y k)"},
+      {"name": "rel_prime_x_1", "kind": "Lemma", "role": "x взаимно просто с 1"},
+      {"name": "rel_prime_zpow", "kind": "Lemma", "role": "взаимная простота сохраняется при степени"},
+      {"name": "coprime_div_pow_unit", "kind": "Theorem", "role": "★ Гаусс: coprime x, x|y^n ⟹ x=±1 (любая степень)"},
+      {"name": "nth_root_integer_or_irrational", "kind": "Theorem", "role": "★ n-й корень целого = целый или иррационален"},
+      {"name": "gauss_square", "kind": "Corollary", "role": "случай n=2 (квадратный корень)"},
+      {"name": "gauss_cube", "kind": "Corollary", "role": "случай n=3 (кубический корень)"}
+    ],
+    "key_lemmas": [
+      {"name": "coprime_div_pow_unit", "analysis": "Лемма Гаусса в общей степени: если x взаимно просто с y и x делит y^n, то x=±1 (через Евклида/rel_prime). Обобщает кубо-специфичный coprime_div_cube_unit на ЛЮБУЮ степень — один критерий вместо россыпи по n.", "tags": ["gauss-lemma", "general-degree", "coprime"]},
+      {"name": "nth_root_integer_or_irrational", "analysis": "Тест рационального корня (чистый случай): n-й корень целого либо целый, либо иррационален (q=1 в несократимой записи). Подводит √2,√3,√5 (n=2) и ∛2 (n=3) под ОДИН критерий — связь с Greek-impossibilities нитью q-kinematics.", "tags": ["rational-root-test", "irrationality", "unification"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "synthesis+observation",
+      "claim": "Лемма Гаусса и тест рационального корня обобщены на ВСЕ степени, унифицируя √2/√3/√5/∛2 под одним критерием (n-й корень целого = целый или иррационален).",
+      "caveat": "Лемма Гаусса и RRT классичны; вклад — обобщение репозиторного кубо-специфичного результата на любую степень. Только чистый степенной случай; полный RRT для произвольных полиномов не собран."
+    },
+    "tags": ["gauss-lemma", "rational-root-test", "irrationality", "number-theory", "synthesis"]
+  },
+  {
+    "num": 27,
+    "path": "src/algebra/SolvableGroup.v",
+    "cluster": "algebra",
+    "classical_counterpart": "Abel-Ruffini and the solvable-series theory are classical; NEW is the 0-axiom ABSTRACT formalization of the perfect=>not-solvable engine over an abstract GroupStr (no classic, no funext), honestly localizing the heavy A5-simplicity to an explicit premise rather than a global axiom.",
+    "title": "The Abel-Ruffini engine: perfect => not solvable (0 axioms, abstract)",
+    "topic": "The group-theoretic half of Abel-Ruffini over an abstract GroupStr with Leibniz equality: derived series, Solvable = series reaches {e}, Perfect = own derived subgroup; the engine 'perfect non-trivial => not solvable', applied to the quintic given Perfect Quintic as a premise.",
+    "role": "Abstract Abel-Ruffini engine, 0 axioms. Companion to GaloisCorrespondence (which gives the count-level quintic). Self-contained (Bool).",
+    "qed": 18, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: Bool"],
+    "err": {
+      "elements": "абстрактная группа, её подгруппы, коммутаторы.",
+      "roles": "разрешимость как role-limit «производный ряд достигает {e}»; perfect = сам себе коммутант.",
+      "rules": "производная подгруппа = минимальная, содержащая все коммутаторы; perfect нетривиальная никогда не достигает {e}.",
+      "p4": "solvable = процесс, ТЕРМИНИРУЮЩИЙ в {e} (Element-сторона); perfect = процесс, который НИКОГДА не закрывается (role-limit); A5-простота локализована в посылке."
+    },
+    "lemmas": [
+      {"name": "GroupStr", "kind": "Record", "role": "абстрактная группа (Leibniz-равенство)"},
+      {"name": "inv_id/inv_unique/inv_op", "kind": "Lemma", "role": "свойства обратного"},
+      {"name": "comm", "kind": "Definition", "role": "коммутатор aba⁻¹b⁻¹"},
+      {"name": "comm_eq_id", "kind": "Lemma", "role": "коммутирующие ⟹ коммутатор = e"},
+      {"name": "SubGrp", "kind": "Record", "role": "подгруппа"},
+      {"name": "fullS/trivialS", "kind": "Definition", "role": "вся группа / {e}"},
+      {"name": "IsDerived", "kind": "Definition", "role": "D = производная подгруппа H"},
+      {"name": "AbelianS", "kind": "Definition", "role": "подгруппа абелева"},
+      {"name": "abelian_IsDerived_trivial", "kind": "Lemma", "role": "абелева ⟹ производная = {e}"},
+      {"name": "SolvableFrom", "kind": "Inductive", "role": "разрешимость от подгруппы (ряд до {e})"},
+      {"name": "Solvable", "kind": "Definition", "role": "SolvableFrom fullS"},
+      {"name": "trivialS_solvable/abelian_solvable", "kind": "Lemma", "role": "{e} и абелевы разрешимы"},
+      {"name": "derived_unique", "kind": "Lemma", "role": "производная подгруппа единственна (до mem_equiv)"},
+      {"name": "IsDerived_transport_l/r / SolvableFrom_transport", "kind": "Lemma", "role": "перенос по эквивалентности подгрупп"},
+      {"name": "perfect_solvable_trivial", "kind": "Lemma", "role": "perfect + solvable ⟹ тривиальна"},
+      {"name": "perfect_nontrivial_not_solvable", "kind": "Theorem", "role": "★ perfect нетривиальная НЕ разрешима (движок)"},
+      {"name": "Perfect/NonAbelianFull", "kind": "Definition", "role": "perfect; неабелева полная"},
+      {"name": "nonabelian_has_nontrivial", "kind": "Lemma", "role": "неабелева ⟹ есть нетривиальный элемент"},
+      {"name": "perfect_nonabelian_not_solvable", "kind": "Theorem", "role": "★ perfect+неабелева ⟹ не разрешима"},
+      {"name": "quintic_galois_group_not_solvable", "kind": "Theorem", "role": "★ группа квинтики не разрешима (дано Perfect Quintic)"},
+      {"name": "boolGroup", "kind": "Definition", "role": "конкретная Z/2"},
+      {"name": "boolGroup_abelian/solvable", "kind": "Lemma", "role": "Z/2 абелева ⟹ разрешима"}
+    ],
+    "key_lemmas": [
+      {"name": "perfect_nontrivial_not_solvable", "analysis": "Движок Абеля-Руффини: perfect-группа ([G,G]=G) с неединичным элементом НЕ разрешима — её производный ряд застывает на G, не достигая {e}. Доказано абстрактно над GroupStr с 0 аксиомами (без classic/funext). Чисто P4: solvable ⟺ процесс терминирует в {e}.", "tags": ["abel-ruffini", "perfect", "not-solvable", "engine"]},
+      {"name": "quintic_galois_group_not_solvable", "analysis": "Применение к квинтике: её группа Галуа неразрешима, ПОТОМУ ЧТО содержит perfect A5 — и это подаётся как явная ПОСЫЛКА Perfect Quintic, а не глобальная аксиома (файл остаётся 0-ax). Честная локализация тяжёлой 60-элементной простоты A5.", "tags": ["quintic", "abel-ruffini", "honest-premise"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Групповая половина Абеля-Руффини абстрактно с 0 аксиомами (без classic/funext) над GroupStr: производный ряд, perfect⇒не-solvable, применено к квинтике; разрешимость как терминирующий процесс (P4).",
+      "caveat": "Абель-Руффини и теория разрешимых рядов классичны; вклад — 0-аксиомное абстрактное исполнение + честная локализация простоты A5 в явную посылку (не аксиому). A5-простота в-движке + радикалы⟺solvable остаются role-limit."
+    },
+    "tags": ["abel-ruffini", "solvable-group", "perfect", "derived-series", "0-axiom", "P4"]
+  },
+  {
+    "num": 28,
+    "path": "src/algebra/SplittingFieldQ23.v",
+    "cluster": "algebra",
+    "classical_counterpart": "Splitting fields are standard; NEW is the explicit construction for (x^2-2)(x^2-3) over Q with all roots +-sqrt2, +-sqrt3, sqrt6 named, the generation theorem, and basis dimension 4 — the concrete companion to GaloisQ23.",
+    "title": "The concrete splitting field of (x^2-2)(x^2-3): roots, generation, basis dimension 4",
+    "topic": "All roots +-sqrt2, +-sqrt3, sqrt6 as elements of E; sqrt2*sqrt3=sqrt6 closure; root sums/products; the generation theorem (every element = combo of basis {1,sqrt2,sqrt3,sqrt6}); basis dimension 4.",
+    "role": "Concrete splitting field, companion to GaloisQ23. Self-contained.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith (E from GaloisQ23-style 4-tuples)"],
+    "err": {
+      "elements": "корни ±√2,±√3,√6 в E; комбинации combo a b c d.",
+      "roles": "E как поле разложения; базис {1,√2,√3,√6}.",
+      "rules": "корневые уравнения, √2·√3=√6, generation; basis_dimension=4.",
+      "p4": "конкретное конечное поле разложения, полностью актуально (Element)."
+    },
+    "lemmas": [
+      {"name": "pos2/neg2/pos3/neg3/sqrt6", "kind": "Definition", "role": "корни ±√2,±√3 и √6 как элементы"},
+      {"name": "pos2_root/neg2_root/pos3_root/neg3_root", "kind": "Lemma", "role": "корни x²−2, x²−3"},
+      {"name": "sqrt2_mul_sqrt3", "kind": "Lemma", "role": "★ √2·√3=√6 (замкнутость)"},
+      {"name": "sqrt6_squared", "kind": "Lemma", "role": "√6²=6"},
+      {"name": "roots2_distinct", "kind": "Lemma", "role": "√2≠−√2"},
+      {"name": "roots2_sum_zero", "kind": "Lemma", "role": "√2+(−√2)=0"},
+      {"name": "roots2_product", "kind": "Lemma", "role": "√2·(−√2)=−2"},
+      {"name": "combo", "kind": "Definition", "role": "линейная комбинация базиса"},
+      {"name": "generation", "kind": "Theorem", "role": "★ каждый элемент = combo базиса {1,√2,√3,√6}"},
+      {"name": "basis_dimension", "kind": "Definition", "role": "=4"},
+      {"name": "degree_equals_galois_order", "kind": "Theorem", "role": "basis_dimension = 4"}
+    ],
+    "key_lemmas": [
+      {"name": "generation", "analysis": "Поле разложения порождается корнями: всякий элемент E = combo базиса {1,√2,√3,√6}. Это конкретное свидетельство, что E — поле разложения (x²−2)(x²−3), на котором стоит размерность 4 и всё соответствие GaloisQ23.", "tags": ["splitting-field", "generation", "basis"]},
+      {"name": "sqrt2_mul_sqrt3", "analysis": "Замкнутость: √2·√3=√6 — почему четвёртый базисный элемент √6 необходим и достаточен (произведение генераторов остаётся в поле). Делает {1,√2,√3,√6} настоящим базисом, а не списком.", "tags": ["closure", "sqrt6", "basis"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "synthesis+observation",
+      "claim": "Конкретное поле разложения (x²−2)(x²−3): все корни ±√2,±√3,√6 названы, теорема порождения, размерность базиса 4 — конкретный спутник GaloisQ23.",
+      "caveat": "Поля разложения стандартны; вклад — явная конкретная конструкция для данного бикватичного расширения, опора под флагман."
+    },
+    "tags": ["splitting-field", "galois", "vein-D", "basis", "concrete"]
+  }
+]

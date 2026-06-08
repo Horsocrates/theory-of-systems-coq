@@ -1,0 +1,199 @@
+[
+  {
+    "num": 602,
+    "path": "src/linalg/EigenvalueSynthesis.v",
+    "cluster": "linalg",
+    "classical_counterpart": "Eigenvalue localization (Gershgorin, Rayleigh, power method) is standard numerical linear algebra; NEW only as a synthesis tying eigenvalue accumulation to the atomic ionization threshold over Q.",
+    "title": "Eigenvalue synthesis over Q: localization tied to ionization",
+    "topic": "Localized diagonal eigenvalues, the power method finding eigenvalues, hydrogen eigenvalue bounds, the ground-state spectral gap, eigenvalue<->ionization connection, Rayleigh variational bound, Gershgorin for hydrogen, 2x2 verifications, and a verified/open list.",
+    "role": "Synthesis node of the linalg branch, bridging to atomic ionization. Self-contained (QArith).",
+    "qed": 15, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "собственные значения; диагональные матрицы; спектральный зазор.",
+      "roles": "локализация = роль (Гершгорин/Рэлей); ионизация как роль-накопление спектра.",
+      "rules": "power_method_finds_eigenvalue; rayleigh_variational_bound; ionization_from_accumulation.",
+      "p4": "конечные собственные значения над Q (Element); ионизация = точка накопления спектра (role-limit)."
+    },
+    "lemmas": [
+      {"name": "eigenvalue_localized_diag/power_method_finds_eigenvalue/hydrogen_eigenvalues_bound/spectral_gap_ground", "kind": "Theorem", "role": "локализация, степенной метод, зазор"},
+      {"name": "process_eigenvalue_connection/rayleigh_variational_bound/rayleigh_extracts_diagonal/ionization_from_accumulation/gershgorin_hydrogen_diag", "kind": "Theorem", "role": "★ ионизация из накопления спектра"},
+      {"name": "verification_2x2_diag/_2x2_symmetric/verified_results/open_questions/eigenvalue_ionization_main/total_count", "kind": "Theorem", "role": "верификации, итог"}
+    ],
+    "key_lemmas": [
+      {"name": "ionization_from_accumulation", "analysis": "Связывает накопление собственных значений с порогом ионизации — спектральная точка накопления как граница связанных/свободных состояний (role-limit). Содержательная привязка линалгебры к атомной ветви, но на стандартных методах.", "tags": ["eigenvalue", "ionization", "accumulation"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Синтез собственных значений над Q: локализация (Гершгорин/Рэлей) + связь накопления спектра с порогом ионизации.",
+      "caveat": "Локализация собственных значений — стандартная числ. линалгебра; вклад — привязка к ионизации, не новый спектральный результат."
+    },
+    "tags": ["eigenvalue", "ionization", "synthesis", "methods"]
+  },
+  {
+    "num": 603,
+    "path": "src/linalg/EigenvalueTheory.v",
+    "cluster": "linalg",
+    "classical_counterpart": "Eigenvectors/eigenvalues, the 2x2 characteristic polynomial and discriminant, eigenvalues of diagonal/identity/zero matrices and Pauli matrices are textbook linear algebra; here an exact Q formalization.",
+    "title": "Eigenvalue theory over Q: char poly, discriminant, Pauli eigenvalues",
+    "topic": "Matrix-vector linearity, eigenvector/eigenvalue definitions, eigenvalues of diagonal/identity/zero/scaled/shifted matrices, the 2x2 determinant, characteristic polynomial and discriminant, symmetric 2x2 has real discriminant, and Pauli sigma_z/sigma_x eigenvalues.",
+    "role": "Core eigenvalue definitions of the linalg branch. Self-contained (QArith).",
+    "qed": 24, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "матрицы над Q; собственные векторы/значения.",
+      "roles": "собственное значение = роль-инвариант действия; характеристический многочлен.",
+      "rules": "char_poly_2x2; discriminant_2x2; symmetric_2x2_disc_nonneg.",
+      "p4": "конечные 2x2-матрицы над Q, всё вычислимо (Element); симметрия → неотрицательный дискриминант."
+    },
+    "lemmas": [
+      {"name": "mat_vec_mul_add/_scale/is_eigenvector/is_eigenvalue/eigenvector_nonzero", "kind": "Definition/Lemma", "role": "линейность, собственные векторы"},
+      {"name": "eigenvalue_of_diag/_of_id/eigenvectors_scale/eigenvalue_shift/_scale_mat/_of_zero_mat/zero_eigenvalue_kernel/eigenvectors_add_same", "kind": "Theorem", "role": "собственные значения базовых матриц"},
+      {"name": "det_2x2/char_poly_2x2/discriminant_2x2/det_2x2_id/_diag/_symmetric/symmetric_2x2_disc_nonneg", "kind": "Definition/Theorem", "role": "★ det, char poly, дискриминант"},
+      {"name": "qvec2/_nth_0/_nth_1/qmat2x2/eigenvalue_sigma_z_plus/_z_minus/_x_plus/_x_minus/eigenvalue_2x2_example_3/_1/diag_eigenstate_eigenvalue", "kind": "Definition/Theorem", "role": "Pauli-собственные значения"}
+    ],
+    "key_lemmas": [
+      {"name": "symmetric_2x2_disc_nonneg", "analysis": "Симметричная 2x2-матрица имеет неотрицательный дискриминант → вещественные собственные значения — точная Q-формализация спектральной теоремы в размерности 2. Связь дискриминанта (вена A) с симметрией.", "tags": ["discriminant", "symmetric", "spectral"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Теория собственных значений над Q: char poly/дискриминант 2x2, неотрицательный дискриминант симметричной матрицы, Pauli-собственные значения.",
+      "caveat": "2x2 спектральная теория — учебная линалгебра; вклад — точная Q-формализация, не новый результат."
+    },
+    "tags": ["eigenvalue", "discriminant", "pauli", "methods"]
+  },
+  {
+    "num": 604,
+    "path": "src/linalg/GershgorinDiscs.v",
+    "cluster": "linalg",
+    "classical_counterpart": "The Gershgorin disc theorem (eigenvalues lie in discs centered at diagonal entries) and the spectral-radius / diagonal-dominance corollaries are classical; here a 2x2 Q instance.",
+    "title": "Gershgorin discs over Q: 2x2 eigenvalue localization",
+    "topic": "Existence of a nonzero eigenvector component, eigenvalue 2x2 equations, the Gershgorin disc containing the diagonal center, Gershgorin for identity/diagonal, a max helper, spectral-radius bound, strict diagonal dominance excludes zero eigenvalue, and eigenvalues in an interval.",
+    "role": "Eigenvalue-localization leaf of the linalg branch (feeds EigenvalueSynthesis). Self-contained (QArith).",
+    "qed": 19, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "2x2-матрицы; диски Гершгорина (центр+радиус).",
+      "roles": "диск Гершгорина = роль-локализатор собственных значений.",
+      "rules": "gershgorin_2x2; spectral_radius_bound_2x2; strictly_diag_dominant_no_zero_ev.",
+      "p4": "конечные диски над Q (Element); локализация спектра без решения характеристического уравнения."
+    },
+    "lemmas": [
+      {"name": "nonzero_component_exists/_positive_abs/eigenvalue_component/dot_product_2/eigenvalue_2x2_equations", "kind": "Lemma", "role": "компонента собственного вектора"},
+      {"name": "gershgorin_2x2/gershgorin_disc_contains_center/gershgorin_id/gershgorin_diag", "kind": "Theorem", "role": "★ диск Гершгорина содержит спектр"},
+      {"name": "Qmax2/_le_l/_le_r/spectral_radius_bound_2x2/_correct/is_strictly_diag_dominant_2x2/strictly_diag_dominant_no_zero_ev", "kind": "Definition/Theorem", "role": "★ спектральный радиус, диаг. доминирование"},
+      {"name": "eigenvalue_in_interval_2x2/gershgorin_2x2_example/gershgorin_shift_2x2/col_sum_equals_row_sum_symmetric/diag_dominant_positive_eigenvalues_2x2/gershgorin_summary", "kind": "Theorem", "role": "интервал собственных значений, итог"}
+    ],
+    "key_lemmas": [
+      {"name": "strictly_diag_dominant_no_zero_ev", "analysis": "Строгая диагональная доминантность исключает нулевое собственное значение (матрица обратима) — классическое следствие Гершгорина, точно над Q. Локализация спектра без решения характеристического уравнения.", "tags": ["gershgorin", "diagonal-dominance", "invertible"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Диски Гершгорина над Q (2x2): локализация спектра, оценка спектрального радиуса, диагональное доминирование исключает нулевое собственное значение.",
+      "caveat": "Теорема Гершгорина классична; вклад — точный 2x2 Q-инстанс, не новый результат локализации."
+    },
+    "tags": ["gershgorin", "spectral-radius", "localization", "methods"]
+  },
+  {
+    "num": 605,
+    "path": "src/linalg/IonizationThreshold.v",
+    "cluster": "linalg",
+    "classical_counterpart": "The bound/free dichotomy at the ionization threshold, the spectrum accumulating at the continuum, and ionization as a supremum are standard spectral theory; here a Q formalization with an honest limitation about the continuum accumulation.",
+    "title": "Ionization threshold over Q: bound/free dichotomy, ionization as supremum",
+    "topic": "Ionization energy, bound vs free states, energy levels, all states bound below threshold, increasing energies, the ground-state minimum and gaps, decreasing spacing, ionization as a supremum, finitely many bound states, infinite accumulation, and an honest limitation.",
+    "role": "Spectral leaf bridging linalg to atomic ionization. Self-contained (QArith).",
+    "qed": 22, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "уровни энергии; связанные/свободные состояния.",
+      "roles": "порог ионизации = роль-граница (bound/free); ионизация как супремум.",
+      "rules": "is_bound_state/is_free_state; ionization_is_supremum; finite_bound_states_below.",
+      "p4": "конечное число связанных состояний (Element); точка накопления спектра (континуум) — role-limit; honest_limitation фиксирует границу."
+    },
+    "lemmas": [
+      {"name": "ionization_energy/is_bound_state/is_free_state/energy_level/ionization_energy_value", "kind": "Definition/Theorem", "role": "энергия ионизации, дихотомия"},
+      {"name": "ground_state_energy/first_excited_energy/second_excited_energy/all_states_bound/ground_state_bound/energy_increasing/ground_state_minimum", "kind": "Theorem", "role": "уровни, минимум, монотонность"},
+      {"name": "energy_spacing_positive/ground_state_gap/first_excited_gap/energy_spacing_decreases/ionization_at_zero", "kind": "Theorem", "role": "зазоры убывают"},
+      {"name": "ionization_is_supremum/finite_bound_states_below/infinite_accumulation/energy_3d_converges/centrifugal_vanishes/energy_ratio/spectral_transition/honest_limitation/ionization_main_theorem", "kind": "Theorem", "role": "★ ионизация=супремум; honest_limitation"}
+    ],
+    "key_lemmas": [
+      {"name": "ionization_is_supremum", "analysis": "Энергия ионизации = супремум связанных уровней (точка накопления спектра): конечно много состояний ниже порога (finite_bound_states_below), бесконечное накопление к континууму (role-limit). honest_limitation честно фиксирует, что континуум — предельный, не актуальный объект.", "tags": ["ionization", "supremum", "accumulation", "honest"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Порог ионизации над Q: дихотомия bound/free, ионизация как супремум уровней, конечно связанных состояний с накоплением к континууму + honest_limitation.",
+      "caveat": "Спектральная дихотомия и порог ионизации стандартны; вклад — Q-формализация-процесс с честной фиксацией предельного континуума, не новая спектральная теория."
+    },
+    "tags": ["ionization", "spectrum", "bound-free", "honest-limitation", "methods"]
+  },
+  {
+    "num": 606,
+    "path": "src/linalg/MatrixOps.v",
+    "cluster": "linalg",
+    "classical_counterpart": "Matrix addition/scaling/transpose/multiplication, trace, identity/zero laws over a field are textbook; here a clean Q formalization (infrastructure).",
+    "title": "Matrix operations over Q: algebra, transpose, multiplication, trace",
+    "topic": "Zero matrix, columns, add/scale/sub (entrywise), commutativity/associativity, transpose (involutive, symmetric), matrix multiplication (id/zero/scale/distribute laws), trace (additive, scaling, of identity/diagonal), and a shift matrix.",
+    "role": "Infrastructure of the linalg branch (matrix algebra). Self-contained (QArith).",
+    "qed": 32, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "матрицы над Q; строки/столбцы; след.",
+      "roles": "операции-матрицы как роли-преобразования; транспонирование/умножение.",
+      "rules": "mat_mul_id_l/r; mat_transpose_involutive; mat_trace_add/scale.",
+      "p4": "конечные матрицы над Q, все законы алгебры (Element); чистая инфраструктура."
+    },
+    "lemmas": [
+      {"name": "zero_mat/_entry/mat_col/_nth/mat_add/_scale/_sub/_add_entry/_scale_entry/_sub_entry", "kind": "Definition/Theorem", "role": "нулевая матрица, поэлементные операции"},
+      {"name": "mat_add_comm/_assoc/mat_scale_one/_assoc/_distrib_add/mat_transpose/_entry/_involutive/_symmetric", "kind": "Theorem", "role": "★ законы сложения, транспонирование инволютивно"},
+      {"name": "mat_mul_row_vec/_nth/mat_mul/_entry/dot_product_ext/_r/mat_mul_id_l/_id_r/_zero_l/_zero_r/_scale_l/_distrib_r", "kind": "Definition/Theorem", "role": "★ умножение: id/zero/scale/распределение"},
+      {"name": "sum_Q/mat_trace/sum_Q_ext/_plus/_scale/mat_trace_add/_scale/_id/_diag/mat_shift/_entry/_symmetric", "kind": "Definition/Theorem", "role": "след: аддитивность, масштаб"}
+    ],
+    "key_lemmas": [
+      {"name": "mat_mul_id_l", "analysis": "Единичная матрица — нейтраль умножения (id_l/id_r) с полным набором законов (zero/scale/distribute) — корректная Q-формализация матричной алгебры. Инфраструктура для остальной линалгебры.", "tags": ["matrix-algebra", "identity", "infrastructure"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "infrastructure",
+      "claim": "Матричная алгебра над Q: сложение/масштаб/транспонирование/умножение/след со всеми законами.",
+      "caveat": "Учебная матричная алгебра; чистая инфраструктура без собственного результата."
+    },
+    "tags": ["matrix", "algebra", "trace", "infrastructure"]
+  },
+  {
+    "num": 607,
+    "path": "src/linalg/PowerMethod.v",
+    "cluster": "linalg",
+    "classical_counterpart": "The power iteration and the Rayleigh quotient (scale-invariant, extracts the dominant eigenvalue, self-adjoint) are standard numerical linear algebra; here a Q formalization with a diagonal convergence-rate bound.",
+    "title": "Power method over Q: Rayleigh quotient and convergence rate",
+    "topic": "The Rayleigh quotient (scale-invariant, of identity/diagonal basis), power iteration (zero/step/identity/diagonal/scale/add), the Rayleigh quotient constant on a diagonal basis, self-adjoint Rayleigh, a diagonal convergence-rate bound, and decreasing power ratios.",
+    "role": "Iterative-eigenvalue leaf of the linalg branch. Self-contained (QArith).",
+    "qed": 18, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "степенные итерации; отношение Рэлея.",
+      "roles": "степенной метод = роль-процесс приближения доминирующего собственного значения.",
+      "rules": "rayleigh_scale_invariant; power_iterate_diag_basis; convergence_rate_diag_bound.",
+      "p4": "каждая итерация конечна над Q (Element); сходимость к собственному значению — role-limit процесса."
+    },
+    "lemmas": [
+      {"name": "rayleigh_quotient/_eigenvalue/_scale_invariant/_of_id/_of_diag_basis", "kind": "Definition/Theorem", "role": "★ отношение Рэлея, масштаб-инвариантность"},
+      {"name": "power_iterate/_zero/_step/_id/diag_row_dot_basis/_diag_basis/Qpow_nonzero", "kind": "Definition/Theorem", "role": "степенная итерация"},
+      {"name": "rayleigh_diag_basis_constant/power_iterate_scale/_add/rayleigh_symmetric_selfadjoint/_nonneg_diag_basis", "kind": "Theorem", "role": "Рэлей постоянен на базисе, self-adjoint"},
+      {"name": "convergence_rate_diag_bound/power_ratio_decreasing/power_method_summary", "kind": "Theorem", "role": "★ скорость сходимости"}
+    ],
+    "key_lemmas": [
+      {"name": "convergence_rate_diag_bound", "analysis": "Степенной метод сходится к доминирующему собственному значению с оценённой скоростью (power_ratio_decreasing) — собственное значение как role-limit итерационного процесса. Стандартный численный метод, формализованный над Q.", "tags": ["power-method", "convergence", "rayleigh"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Степенной метод над Q: отношение Рэлея (масштаб-инвариантно, self-adjoint) + оценка скорости сходимости к доминирующему собственному значению.",
+      "caveat": "Степенной метод и отношение Рэлея — стандартная числ. линалгебра; вклад — Q-формализация-процесс, не новый алгоритм."
+    },
+    "tags": ["power-method", "rayleigh", "convergence", "methods"]
+  }
+]

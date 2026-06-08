@@ -1,0 +1,921 @@
+[
+  {
+    "num": 97,
+    "path": "src/cs/BoundaryDecidability.v",
+    "cluster": "cs",
+    "classical_counterpart": "Cantor's theorem / Lawvere's diagonal (the role-limit engine) and the decidability of perfect-square testing (the Element side) are both classical; NEW is bundling them as a SECOND-ORDER Element/role-limit classification of decision-criteria, with the discriminant as the Element coordinate.",
+    "title": "Element-drawn vs role-limit-drawn: the decidable finitization boundary; one diagonal, three faces",
+    "topic": "Defines the second-order predicates ElementDrawn (a decision-criterion IS decidable) and RoleLimitDrawn (no total decider — a self-negating diagonal exists), then instantiates them on the discriminant-perfect-square test (number), halting (program) and Cantor (set).",
+    "role": "FLAGSHIP of vein A (decidable finitization boundary) + vein E (one diagonal). Imports cs.HaltingRoleLimit; reused by KolmogorovRoleLimit, ScaleFlowUndecidable, RecursionTheorem, ComputationModel.",
+    "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool Arith", "cs.HaltingRoleLimit"],
+    "err": {
+      "elements": "конкретные критерии-разрезы (дискриминант Δ, halts, surjection-флаг); решатели dec: Dom->bool.",
+      "roles": "ElementDrawn / RoleLimitDrawn — роли ВТОРОГО порядка: классифицируют сами критерии; решатель = роль-оракул.",
+      "rules": "Side d <-> dec d = true (Element) против forall dec, exists d, Side d <-> dec d = false (диагональ).",
+      "p4": "ОДНА граница, две стороны: разрешимое = Element (терминирует), самоотрицающая диагональ = role-limit; реифицировать role-limit в тотальный решатель = категориальная ошибка, запрещённая negb-диагональю."
+    },
+    "lemmas": [
+      {"name": "ElementDrawn", "kind": "Definition", "role": "критерий Side разрешим: exists dec, forall d, Side d <-> dec d = true"},
+      {"name": "RoleLimitDrawn", "kind": "Definition", "role": "против каждого dec есть самоотрицающий свидетель: Side d <-> dec d = false"},
+      {"name": "element_drawn_implies_decidable", "kind": "Lemma", "role": "ElementDrawn даёт булеву разрешимость членства"},
+      {"name": "diagonal_defeats_decider", "kind": "Theorem", "role": "★ универсальный движок: самоотрицающий свидетель ⟹ RoleLimitDrawn"},
+      {"name": "is_square", "kind": "Definition", "role": "булев тест полного квадрата через Nat.sqrt"},
+      {"name": "is_square_iff", "kind": "Lemma", "role": "is_square n = true <-> exists r, r*r = n (корректность теста)"},
+      {"name": "rational_split", "kind": "Definition", "role": "дискриминант d = полный квадрат (Element-сторона собственного значения)"},
+      {"name": "discriminant_element_drawn", "kind": "Theorem", "role": "★ ElementDrawn rational_split — Δ-perfect-square РАЗРЕШИМ (вена A)"},
+      {"name": "disc_hadamard_role_limit", "kind": "Example", "role": "is_square 8 = false (иррациональный корень)"},
+      {"name": "disc_pell_role_limit", "kind": "Example", "role": "is_square 32 = false"},
+      {"name": "disc_rational_element", "kind": "Example", "role": "is_square 9 = true (рациональный корень)"},
+      {"name": "halting_role_limit_drawn", "kind": "Theorem", "role": "самоприменение ⟹ self-halting есть RoleLimitDrawn"},
+      {"name": "one_boundary_three_faces", "kind": "Theorem", "role": "★ число (Element) / программа / множество — одна граница, один negb-движок"}
+    ],
+    "key_lemmas": [
+      {"name": "diagonal_defeats_decider", "analysis": "Универсальная форма канторовской/халтинговой диагонали: если для всякого кандидата-решателя dec существует свидетель d с Side d <-> dec d = false, то Side не разрешим. Это извлечённый общий двигатель — все role-limit-грани (halting, Райс, Колмогоров, Тарский) доказываются как его инстансы, а не повторно. Сводит «несчётность/неразрешимость» к одному факту b <> negb b.", "tags": ["diagonal", "role-limit", "engine"]},
+      {"name": "discriminant_element_drawn", "analysis": "Вена A в одной теореме: вопрос «рационально ли собственное значение 2x2-матрицы» = «дискриминант Δ полный квадрат» РАЗРЕШИМ булевым тестом is_square. Это Element-сторона границы финитизации, наблюдаемо контрастирующая с role-limit-сторонами того же файла. Честно: разрешимость perfect-square тривиальна; ценность — постановка её как ОДНОЙ координаты с halting/Cantor.", "tags": ["discriminant", "decidable", "vein-A", "eigenvalue"]},
+      {"name": "one_boundary_three_faces", "analysis": "Капстоун-наблюдение: число (Δ, Element), программа (halting, role-limit) и множество (Cantor, role-limit) — три грани ОДНОЙ границы Element/role-limit, и все role-limit-грани движимы единственной negb-диагональю. KolmogorovRoleLimit расширяет до четырёх граней. Уровень — синтез+наблюдение: каждая грань классична, ново их сведение в одну ось.", "tags": ["synthesis", "three-faces", "unification"]}
+    ],
+    "uniqueness": {
+      "score": 5,
+      "level": "synthesis+observation",
+      "claim": "Второпорядковая классификация самих критериев-разрезов (ElementDrawn/RoleLimitDrawn) + разрешимый дискриминантный тест как Element-сторона + извлечённый универсальный диагональный движок, сводящий число/программу/множество к одной границе.",
+      "caveat": "Каждый кирпич классичен (разрешимость perfect-square, диагональ Кантора, неразрешимость halting). Ново — сведение в одну ось и второпорядковая рамка; универсальность эмпирична (≈68 инстансов в репо), НЕ мета-теорема."
+    },
+    "tags": ["diagonal", "decidable", "role-limit", "vein-A", "vein-E", "P4", "synthesis"]
+  },
+  {
+    "num": 98,
+    "path": "src/cs/ChomskyHierarchy.v",
+    "cluster": "cs",
+    "classical_counterpart": "The Chomsky hierarchy and the pumping lemma (a^n b^n not regular) are standard automata theory; NEW is only the Element/role-limit 'memory ladder' framing.",
+    "title": "Chomsky hierarchy as a graded role-limit ladder; regular ⊊ context-free, proven",
+    "topic": "Casts the language classes as a finitization ladder (finite memory → stack → tape → full computation) and PROVES the bottom rung strictly: {a^n b^n} is context-free (CFG S→ε|aSb) but not regular.",
+    "role": "Extends the Phase-3 regular-floor upward. Imports RegularElementFloor, PumpingRoleLimit, PumpingPigeonhole. Orthogonal to the diagonal vertical (no overlap with the concurrent capstones).",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List", "cs.RegularElementFloor", "cs.PumpingRoleLimit", "cs.PumpingPigeonhole"],
+    "err": {
+      "elements": "слова; грамматика CFG_anbn (правила S→ε|aSb); DFA.",
+      "roles": "класс языка (регулярный/контекстно-свободный) = роль-ярус иерархии; «память» (конечная/стек/лента) = роль.",
+      "rules": "порождение грамматикой (cfg_eps/cfg_wrap); распознавание DFA; pumping-стена.",
+      "p4": "иерархия = лестница role-limit'ов: регулярные = Element-пол (разрешимо), каждый ярус добавляет память = поднимается по role-limit-градиенту; верх (RE) = halting role-limit."
+    },
+    "lemmas": [
+      {"name": "CFG_anbn", "kind": "Inductive", "role": "грамматика S→ε|aSb как индуктивный предикат над list bool"},
+      {"name": "repeat_snoc", "kind": "Lemma", "role": "repeat a n ++ [a] = repeat a (S n)"},
+      {"name": "anbn_succ", "kind": "Lemma", "role": "разворот a^(n+1) b^(n+1) = a·(a^n b^n)·b"},
+      {"name": "CFG_anbn_to_InL", "kind": "Lemma", "role": "грамматика ⟹ принадлежность {a^n b^n}"},
+      {"name": "InL_to_CFG_anbn", "kind": "Lemma", "role": "принадлежность ⟹ грамматика (обратное)"},
+      {"name": "CFG_anbn_iff_In_L", "kind": "Lemma", "role": "грамматика порождает РОВНО {a^n b^n}"},
+      {"name": "anbn_2", "kind": "Example", "role": "[a b] порождается"},
+      {"name": "anbn_4", "kind": "Example", "role": "[a a b b] порождается"},
+      {"name": "regular_recognized", "kind": "Definition", "role": "L регулярен = некоторый конечный DFA его распознаёт"},
+      {"name": "regular_subsetneq_context_free", "kind": "Theorem", "role": "★ {a^n b^n} контекстно-свободен, но НЕ регулярен (строгое включение)"}
+    ],
+    "key_lemmas": [
+      {"name": "regular_subsetneq_context_free", "analysis": "Строгое включение нижнего яруса лестницы: язык порождается КС-грамматикой, но никакой DFA его не распознаёт (через no_dfa_for_anbn_unconditional). Конкретное доказательство «память=стек строго мощнее конечной памяти» = строго первый шаг role-limit-градиента над Element-полом.", "tags": ["separation", "context-free", "ladder"]},
+      {"name": "CFG_anbn_iff_In_L", "analysis": "Точная характеризация: индуктивная грамматика и арифметическое описание {a^n b^n} совпадают. Мост между порождающей (грамматика) и счётной (cF/cT-баланс) формами — нужен, чтобы перенести pumping-несрегулярность на грамматический класс.", "tags": ["grammar", "characterization"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Иерархия Хомского переосмыслена как градуированная лестница Element/role-limit (память = роль), с машинно-проверенным строгим нижним ярусом.",
+      "caveat": "Стандартная теория автоматов; pumping/КС-грамматики классичны. Ново только обрамление-лестница. Честные пробелы: верх RE=halting лишь цитируется, LBA и regex↔DFA не формализованы."
+    },
+    "tags": ["formal-languages", "chomsky", "ladder", "role-limit", "separation"]
+  },
+  {
+    "num": 99,
+    "path": "src/cs/ComputationModel.v",
+    "cluster": "cs",
+    "classical_counterpart": "Church-Turing computation models and Rice/Cantor/halting are classical; NEW is only the one-object CompModel bundling and the four-faces+Lawvere consolidation (no new content).",
+    "title": "The computation arena as one object; capstone: computation = the finitization boundary",
+    "topic": "Bundles a computation model into one Record CompModel, restates bounded-halting decidability on that object, and gathers the whole picture into one capstone: Element side decidable + one diagonal four faces + Lawvere root.",
+    "role": "Synthesis/capstone of the diagonal vertical. Pure consolidation (0 new content). Imports HaltingRoleLimit, BoundaryDecidability, KolmogorovRoleLimit, LawvereFixedPoint. Concurrent-workstream file.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool", "cs.HaltingRoleLimit", "cs.BoundaryDecidability", "cs.KolmogorovRoleLimit", "cs.LawvereFixedPoint"],
+    "err": {
+      "elements": "конкретные машины (countdown); ограниченные прогоны run n.",
+      "roles": "CompModel — арена (объект); Element/role-limit — роли критерия-решения; решатель — роль-оракул; корень — неподвижная точка Ловера.",
+      "rules": "модель связывает step (L5-порядок) + halted (статус); граница «терминирует ⟺ Element» как одно правило.",
+      "p4": "ОДНА арена несёт ОБЕ стороны: ограниченная остановка разрешима (Element), безграничная/сложность/несчётность — role-limit (одна диагональ, four faces), корень — Ловер."
+    },
+    "lemmas": [
+      {"name": "CompModel", "kind": "Record", "role": "арена вычисления: {cm_config; cm_step; cm_halted}"},
+      {"name": "cm_halts_in", "kind": "Definition", "role": "остановка в бюджете n на арене"},
+      {"name": "cm_halts", "kind": "Definition", "role": "полная (безграничная) остановка — role-limit-завершение"},
+      {"name": "cm_bounded_decidable", "kind": "Theorem", "role": "★ Element-сторона на арене: ограниченная остановка разрешима для любой машины/бюджета"},
+      {"name": "countdown", "kind": "Definition", "role": "конкретный обитатель арены: счётчик-машина (pred, =0)"},
+      {"name": "countdown_halts_cm", "kind": "Example", "role": "countdown 3 останавливается (vm_compute)"},
+      {"name": "computation_is_finitization_boundary", "kind": "Theorem", "role": "★ КАПСТОУН: Element разрешим + four faces + корень Ловера в одной теореме"}
+    ],
+    "key_lemmas": [
+      {"name": "computation_is_finitization_boundary", "analysis": "Гранд-капстоун всей вертикали: (1) на ЛЮБОЙ машине ограниченная остановка разрешима (Element/P4); (2) role-limit-сторона = одна диагональ в ЧЕТЫРЁХ гранях (число/программа/множество/сложность); (3) корень — теорема Ловера о неподвижной точке, инстансом которой является каждая грань. Чистая консолидация HaltingRoleLimit+BoundaryDecidability+Kolmogorov+Lawvere — спина Части XV книги.", "tags": ["capstone", "four-faces", "lawvere", "synthesis"]},
+      {"name": "cm_bounded_decidable", "analysis": "Element-сторона, поднятая с Section-машин на бандл-объект CompModel: для любой записи-арены и любого бюджета ограниченная остановка разрешима. Делегирует bounded_halting_decidable — показывает, что объектная упаковка не теряет разрешимости.", "tags": ["element", "decidable", "bundling"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Единый объект-арена CompModel несёт обе стороны границы финитизации; капстоун собирает Element-разрешимость + четыре грани + корень Ловера в одну теорему — спина книжной Части XV.",
+      "caveat": "Чистая консолидация, 0 нового содержания; ценность — унификация, не теорема. Параллельный поток (не мой)."
+    },
+    "tags": ["capstone", "computation-model", "four-faces", "lawvere", "synthesis", "P4"]
+  },
+  {
+    "num": 100,
+    "path": "src/cs/CountableDependentChoiceFree.v",
+    "cluster": "cs",
+    "classical_counterpart": "Dependent Choice (DC) and its constructive elimination for decidable relations are known (Bishop / constructive epsilon); NEW is the least-successor packaging with uniqueness, framed as vein-B determinism.",
+    "title": "Dependent choice over ℕ without DC: the least-successor chain of a decidable total relation",
+    "topic": "Builds an infinite R-chain with NO Dependent-Choice axiom: for a decidable total relation on ℕ, the least valid successor (nat_least) makes each step deterministic, so the trajectory is canonical and unique.",
+    "role": "Vein B (deterministic selection without AC), countable-dependent level. Builds on CountableSelectionFree; bundled by SelectionWithoutChoiceSynthesis. Concurrent-workstream file (H50).",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Arith Lia", "cs.CountableSelectionFree"],
+    "err": {
+      "elements": "ℕ — счётный носитель; разрешимое тотальное отношение R.",
+      "roles": "преемник next x = роль по правилу «наименьший допустимый»; цепь = детерминированная траектория.",
+      "rules": "nat_least выбирает наименьший преемник ⟹ детерминированный шаг ⟹ R-цепь без DC.",
+      "p4": "зависимый выбор — Element-сторона при разрешимом+тотальном R на ℕ (наименьший-преемник, 0 акс); неразрешимое ⟹ DC = role-limit (BolzanoWeierstrass платит classic за неразрешимость критерия половины)."
+    },
+    "lemmas": [
+      {"name": "next", "kind": "Definition", "role": "детерминированный преемник = наименьший y с R x y (через nat_least)"},
+      {"name": "next_sound", "kind": "Lemma", "role": "преемник валиден: R x (next x) = true"},
+      {"name": "next_least", "kind": "Lemma", "role": "next x — наименьший: любой валидный y ≥ next x"},
+      {"name": "dc_chain", "kind": "Fixpoint", "role": "траектория next от x0 (цепь зависимого выбора)"},
+      {"name": "dc_chain_step", "kind": "Theorem", "role": "★ цепь ЕСТЬ R-цепь: зависимый выбор без аксиомы DC"},
+      {"name": "dc_chain_unique", "kind": "Lemma", "role": "правило фиксирует ТУ цепь — нет выбора среди преемников"},
+      {"name": "lt_total", "kind": "Lemma", "role": "отношение x<y тотально (S x — преемник)"},
+      {"name": "lt_chain_increasing", "kind": "Example", "role": "детерминированная цепь от 0 строго возрастает на каждом шаге"},
+      {"name": "countable_dependent_choice_free", "kind": "Theorem", "role": "капстоун: R-цепь + каноничность + единственность"}
+    ],
+    "key_lemmas": [
+      {"name": "dc_chain_step", "analysis": "Зависимый выбор без DC: для разрешимого тотального R на ℕ бесконечная R-цепь строится наименьшим-преемником (nat_least) на каждом шаге — никакой аксиомы Dependent Choice. Это вена B на уровне зависимого выбора: порядок ℕ + разрешимый тест ВЫБИРАЮТ за оракула.", "tags": ["no-DC", "vein-B", "deterministic"]},
+      {"name": "dc_chain_unique", "analysis": "Каноничность-как-детерминизм: любая функция f с f0=x0 и шагом next совпадает с dc_chain. Правило ПРИШПИЛИВАЕТ единственную цепь — нет свободного выбора среди преемников, потому и нет нужды в DC. Это ядро тезиса «выбор свободен ⟺ разрешим».", "tags": ["uniqueness", "determinism", "no-DC"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Зависимый выбор над ℕ для разрешимых тотальных отношений АКСИОМО-СВОБОДЕН через наименьший-преемник; цепь детерминирована и единственна — аналог H49 на уровне зависимого выбора.",
+      "caveat": "Наименьший-преемник-спуск стандартен при наличии nat_least; вклад — упаковка decidable-DC, её детерминизм и параллель к счётному выбору. Параллельный поток (не мой)."
+    },
+    "tags": ["no-AC", "no-DC", "vein-B", "selection", "deterministic", "P4"]
+  },
+  {
+    "num": 101,
+    "path": "src/cs/CountableSelectionFree.v",
+    "cluster": "cs",
+    "classical_counterpart": "Countable Choice (AC-omega) and constructive epsilon (Bishop; ConstructiveEpsilon.epsilon_smallest) are classical; NEW is the decidable-countable-choice packaging, canonicity (minimal valid choice), and the finite->countable bridge.",
+    "title": "Countable choice without AC: ℕ's canonical least-witness selector for decidable families",
+    "topic": "For a decidable P:ℕ→bool the LEAST witness is a canonical axiom-free selector (nat_least); hence countable choice for decidably-nonempty families is free, and the choice is the MINIMAL valid one (canonicity = determinism).",
+    "role": "Vein B, countable level — bridges DecidableSelection.first_witness (finite) off finite carriers. Self-contained (ConstructiveEpsilon). Foundation for CountableDependentChoiceFree. Concurrent (H49).",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: ConstructiveEpsilon PeanoNat Bool Arith Lia"],
+    "err": {
+      "elements": "ℕ — счётный носитель; разрешимый предикат P / семейство Q.",
+      "roles": "наименьший свидетель / функция выбора — роль, назначаемая правилом; «наименьший» = канонично (одна селекция, не свобода).",
+      "rules": "разрешимый тест + порядок ℕ РАЗРЕШАЮТ выбор: наименьший = первый прошедший (L5).",
+      "p4": "счётный РАЗРЕШИМЫЙ выбор — Element-сторона: детерминирован, канонический наименьший, 0 акс; неразрешимое семейство ⟹ AC = role-limit (завершённый choice-граф, P4-запрещён)."
+    },
+    "lemmas": [
+      {"name": "nat_least", "kind": "Lemma", "role": "★ разрешимый P над ℕ с свидетелем имеет НАИМЕНЬШИЙ свидетель (канонич. ε для ℕ, 0 акс)"},
+      {"name": "dec_family_choice", "kind": "Definition", "role": "функция выбора: i ↦ наименьший n с Q i n"},
+      {"name": "dec_family_choice_correct", "kind": "Lemma", "role": "★★ функция выбора попадает в каждое множество — счётный выбор без аксиомы"},
+      {"name": "dec_family_choice_least", "kind": "Lemma", "role": "каждое значение — наименьший свидетель своего множества"},
+      {"name": "dec_family_choice_canonical", "kind": "Lemma", "role": "★★ выбор правила = МИНИМАЛЬНЫЙ валидный: для любого g, choice i ≤ g i"},
+      {"name": "geq_family_nonempty", "kind": "Lemma", "role": "семейство {n: i≤n} разрешимо непусто"},
+      {"name": "geq_family_choice_correct", "kind": "Example", "role": "его выбор попадает в каждое множество (наименьший n≥i)"},
+      {"name": "countable_selection_free", "kind": "Theorem", "role": "капстоун: селектор + счётный выбор + каноничность"}
+    ],
+    "key_lemmas": [
+      {"name": "nat_least", "analysis": "Канонический селектор ℕ: разрешимый предикат с хоть одним свидетелем имеет НАИМЕНЬШИЙ (через epsilon_smallest). Порядок + разрешимый тест разрешают выбор без оракула — это конструктивный ε и ядро всей вены B на счётном уровне (first_witness расширен с конечных списков на ℕ).", "tags": ["least-witness", "constructive-epsilon", "vein-B"]},
+      {"name": "dec_family_choice_canonical", "analysis": "Удар «без свободного выбора»: выбор правила — МИНИМАЛЬНЫЙ валидный (choice i ≤ g i для любой валидной g). Значит селекция ОПРЕДЕЛЕНА правилом (наименьший), а не выбрана свободно — ровно одна правило-селекция. Превращает «счётный выбор» из аксиомы в теорему о детерминированной функции.", "tags": ["canonicity", "determinism", "no-AC"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Счётный выбор для разрешимых семейств СВОБОДЕН (0 акс) через канонический наименьший свидетель; каноничность = детерминизм (минимальный валидный выбор). Мост finite→countable вены B.",
+      "caveat": "Конструктивный ε стандартен; вклад — упаковка decidable-countable-choice, её каноничность и мост. Параллельный поток (не мой). Заголовок указывает 6 Qed, фактически 7."
+    },
+    "tags": ["no-AC", "countable-choice", "vein-B", "least-witness", "deterministic", "P4"],
+    "notes": "Header STATUS says 6 Qed; actual Qed count = 7 (geq_family_nonempty added). Drift flagged."
+  },
+  {
+    "num": 102,
+    "path": "src/cs/DecidableKonig.v",
+    "cluster": "cs",
+    "classical_counterpart": "Koenig's lemma and Weak Koenig's Lemma (WKL, reverse mathematics) are classical; NEW is the explicit decidable-side path extraction localizing the AC-content to the pigeonhole step (0 axioms).",
+    "title": "König's lemma without choice on the decidable side: deterministic infinite path",
+    "topic": "Localizes the choice-content of König's lemma: given a DECIDABLE infiniteness test + the finitely-branching pigeonhole step, the infinite path is built deterministically (always the first infinite child, via first_witness) — 0 axioms, no AC/DC/WKL.",
+    "role": "Vein B, König/WKL level. Builds on cs.DecidableSelection (first_witness). Bundled by SelectionWithoutChoiceSynthesis. Concurrent (H51). Self-claims a decidable König as new-in-repo.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List PeanoNat", "cs.DecidableSelection"],
+    "err": {
+      "elements": "конечно-ветвящееся дерево children; разрешимый флаг inf_b; узлы-ℕ; каждая конечная стадия пути актуальна.",
+      "roles": "путь = role-limit (незавершённая ветвь); next = наименьший бесконечный ребёнок (роль по правилу «первый»).",
+      "rules": "konig_step + разрешимый inf_b ⟹ first_witness детерминированно берёт ребёнка ⟹ путь без выбора.",
+      "p4": "König Element-сторона при РАЗРЕШИМОМ inf (детерминир. путь, 0 акс); классическое содержание (pigeonhole) локализовано в гипотезе konig_step; без разрешимости — WKL/выбор (role-limit)."
+    },
+    "lemmas": [
+      {"name": "next", "kind": "Definition", "role": "детерминированный преемник: первый бесконечный ребёнок (first_witness)"},
+      {"name": "next_spec", "kind": "Lemma", "role": "под konig_step next берёт настоящего бесконечного ребёнка"},
+      {"name": "path", "kind": "Fixpoint", "role": "траектория next от корня"},
+      {"name": "path_inf", "kind": "Lemma", "role": "каждый узел пути бесконечен (индукция через konig_step)"},
+      {"name": "path_edge", "kind": "Theorem", "role": "★★ König: из бесконечного корня — бесконечный путь из настоящих рёбер, без AC/DC/WKL"},
+      {"name": "path_unique", "kind": "Lemma", "role": "★ путь единствен/детерминирован: правило пришпиливает ТУ ветвь"},
+      {"name": "bin_children", "kind": "Definition", "role": "полное бинарное дерево (2x+1, 2x+2)"},
+      {"name": "bin_konig_step", "kind": "Lemma", "role": "каждый узел бесконечен, шаг König = первый ребёнок"},
+      {"name": "bin_path_values", "kind": "Example", "role": "путь от корня по левым детям: 1, 3, 7 (vm_compute)"},
+      {"name": "bin_path_edge", "kind": "Example", "role": "каждый шаг — настоящее ребро (König инстанцирован, 0 акс)"},
+      {"name": "decidable_konig", "kind": "Theorem", "role": "капстоун: путь-рёбра + единственность"}
+    ],
+    "key_lemmas": [
+      {"name": "path_edge", "analysis": "König без выбора: из бесконечного корня строится бесконечный путь, каждый шаг — настоящее ребро дочернего списка, БЕЗ AC/DC/WKL. Локализация: всё choice-содержание König'а — в гипотезе konig_step (pigeonhole) и в РАЗРЕШИМОСТИ inf, а не в извлечении пути. Это вершина вены B (König = «слабый выбор» в обратной математике).", "tags": ["konig", "no-WKL", "vein-B", "AC-localization"]},
+      {"name": "path_unique", "analysis": "Та же подпись детерминизма, что у dc_chain_unique/path_unique: правило (first-infinite-child) задаёт ЕДИНСТВЕННУЮ ветвь — нет выбора среди детей. Делает «König-путь» теоремой о функции, а не результатом выбора.", "tags": ["uniqueness", "determinism"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Извлечение пути канонической теоремы слабого выбора (König/WKL) — Element-сторона, как только бесконечность РАЗРЕШИМА; AC-содержание локализовано в pigeonhole-шаге. Вершина вены B.",
+      "caveat": "WKL/обратная математика хорошо изучены; угол — явная формализация разрешимой стороны + локализация цены AC. Заголовок сам помечает «новая теорема (decidable König)» + синтез. Параллельный поток (не мой)."
+    },
+    "tags": ["no-AC", "konig", "WKL", "vein-B", "deterministic", "tree", "P4"]
+  },
+  {
+    "num": 103,
+    "path": "src/cs/DecidableSelection.v",
+    "cluster": "cs",
+    "classical_counterpart": "Constructive choice over finite sets is standard; NEW is first_witness as the leftmost-canonical finite selector (generalizing EVT_idx argmax-by-index) - the axiom-free root of the no-AC ladder.",
+    "title": "Finite selection without AC: first_witness — a decidable existential yields a computable witness",
+    "topic": "The finite base of vein B: a decidable existential over a list returns the FIRST witness (sound, complete, leftmost), giving decidable_list_choice; plus deterministic trajectories of a step function (unique, an R-chain).",
+    "role": "Vein B foundation (finite level). Reused by CountableSelectionFree, DecidableKonig, SelectionWithoutChoiceSynthesis. Generalises the EVT_idx argmax-by-index idea.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List PeanoNat Bool"],
+    "err": {
+      "elements": "конечный список-носитель; разрешимый предикат P; шаг-функция.",
+      "roles": "первый свидетель = роль по правилу (первый прошедший); траектория = детерминированная роль-цепь.",
+      "rules": "разрешимый ∃ над списком ⟹ вычислимый свидетель; порядок списка делает выбор «первым».",
+      "p4": "конечный выбор — Element-сторона: детерминированный first_witness, 0 акс; основа лестницы, на которую опираются счётный/зависимый/König уровни."
+    },
+    "lemmas": [
+      {"name": "first_witness", "kind": "Fixpoint", "role": "первый элемент списка, проходящий P (option)"},
+      {"name": "first_witness_sound", "kind": "Lemma", "role": "если вернул x, то x в списке и P x"},
+      {"name": "first_witness_complete", "kind": "Lemma", "role": "если свидетель есть, вернёт Some (не None)"},
+      {"name": "first_witness_first", "kind": "Lemma", "role": "возвращает ЛЕВЫЙ свидетель (все до него — не-P)"},
+      {"name": "decidable_list_choice", "kind": "Lemma", "role": "★ разрешимый выбор над списком: {x|In x l/\\P x} + {все не-P}"},
+      {"name": "first_gt5", "kind": "Example", "role": "первый элемент >5 в конкретном списке"},
+      {"name": "trajectory", "kind": "Fixpoint", "role": "итерация шаг-функции от состояния"},
+      {"name": "trajectory_unique", "kind": "Lemma", "role": "детерминированная траектория единственна"},
+      {"name": "trajectory_is_R_chain", "kind": "Lemma", "role": "соседние состояния связаны шаг-отношением"}
+    ],
+    "key_lemmas": [
+      {"name": "decidable_list_choice", "analysis": "Конечная база вены B: разрешимый экзистенциал над списком ДАЁТ вычислимого свидетеля (или доказательство, что все не подходят) — сумма-тип {x|...}+{...}, не голое ∃. Это обобщение argmax-by-index из EVT_idx: «ищи позицию, не значение» делает выбор детерминированным и Leibniz-разрешимым. Корень, который CountableSelectionFree/DecidableKonig поднимают на бесконечные носители.", "tags": ["finite-choice", "vein-B", "computable-witness"]},
+      {"name": "first_witness_first", "analysis": "Леммa о ЛЕВИЗНЕ: выбранный свидетель — первый по порядку списка (все предшествующие не-P). Это конституирующий L5-порядок, делающий выбор каноническим, а не произвольным — та же идея, что «наименьший» у nat_least.", "tags": ["leftmost", "L5-order", "canonical"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Конечный детерминированный выбор-как-теорема (first_witness, левый свидетель), обобщающий argmax-by-index; аксиомо-свободный корень всей лестницы выбора без AC.",
+      "caveat": "Линейный поиск свидетеля тривиален; распознаётся как корень, на котором держится систематическая безаксиомная замена выбора по всей вене B."
+    },
+    "tags": ["no-AC", "finite-choice", "vein-B", "leftmost", "argmax-by-index", "P4"]
+  },
+  {
+    "num": 104,
+    "path": "src/cs/HaltingRoleLimit.v",
+    "cluster": "cs",
+    "classical_counterpart": "Turing's halting theorem and Cantor's diagonal (negb has no fixpoint) are classical; NEW is the bounded(Element)/unbounded(role-limit) split and the negb-seed as the repo's single shared diagonal root.",
+    "title": "Halting as Element (bounded, decidable) vs role-limit (unbounded); the negb diagonal seed",
+    "topic": "The branch foundation: an abstract machine (run/halts_in/halts/diverges), bounded halting DECIDABLE (Element/P4), the negb-no-fixpoint diagonal, Cantor-no-surjection, and no_halting_decider (the role-limit).",
+    "role": "FOUNDATION reused by ~all cs files (negb_no_fixpoint, bounded_halting_decidable, run/halts). The Element/role-limit split made concrete.",
+    "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool"],
+    "err": {
+      "elements": "конфигурации Config; ограниченные прогоны run n c; конкретные машины (countdown, incr).",
+      "roles": "halts_in = роль-в-бюджете (P4); halts/diverges = role-limit-завершения; решатель D = роль-оракул.",
+      "rules": "run = «прогон k шагов, затем, может, ещё шаг»; halted-статус; negb b ≠ b — семя диагонали.",
+      "p4": "ОГРАНИЧЕННАЯ остановка РАЗРЕШИМА (Element); безграничная — role-limit; тотальный halting-решатель = реификация role-limit в Element = категориальная ошибка (no_halting_decider)."
+    },
+    "lemmas": [
+      {"name": "run", "kind": "Fixpoint", "role": "прогон n шагов машины от конфигурации"},
+      {"name": "halts_in", "kind": "Definition", "role": "halted (run n c) = true — остановка в бюджете n"},
+      {"name": "halts", "kind": "Definition", "role": "exists n, halts_in n c — role-limit-завершение"},
+      {"name": "diverges", "kind": "Definition", "role": "forall n, не остановилась"},
+      {"name": "run_S", "kind": "Lemma", "role": "разворот рекурсии run (S n)"},
+      {"name": "run_absorb", "kind": "Lemma", "role": "после остановки прогон стабилен"},
+      {"name": "halts_in_S", "kind": "Lemma", "role": "остановка в n ⟹ в (S n)"},
+      {"name": "halts_in_mono", "kind": "Lemma", "role": "монотонность остановки по бюджету"},
+      {"name": "bounded_halting_decidable", "kind": "Lemma", "role": "★ Element: ограниченная остановка РАЗРЕШИМА (любой n, c)"},
+      {"name": "halts_not_diverges", "kind": "Lemma", "role": "halts и diverges несовместны"},
+      {"name": "countdown_halts", "kind": "Example", "role": "счётчик останавливается"},
+      {"name": "incr_diverges", "kind": "Example", "role": "инкремент расходится"},
+      {"name": "negb_no_fixpoint", "kind": "Lemma", "role": "★ b ≠ negb b — СЕМЯ всех диагоналей репо"},
+      {"name": "cantor_no_surjection", "kind": "Theorem", "role": "★ нет сюръекции A→(A→bool) (Кантор из negb)"},
+      {"name": "Decides", "kind": "Definition", "role": "D решает halting на самоприменении"},
+      {"name": "SelfProgrammable", "kind": "Definition", "role": "домен допускает диагональную программу"},
+      {"name": "no_halting_decider", "kind": "Theorem", "role": "★ нет тотального halting-решателя (role-limit)"},
+      {"name": "no_total_halting_oracle", "kind": "Corollary", "role": "следствие: тотальный оракул невозможен"},
+      {"name": "decidable_implies_not_self_programmable", "kind": "Corollary", "role": "разрешимость ⟹ нет диагонали (контрапозиция)"}
+    ],
+    "key_lemmas": [
+      {"name": "bounded_halting_decidable", "analysis": "Element-сторона границы: для любого бюджета n и конфигурации c вопрос «остановилась ли за n шагов» РАЗРЕШИМ (булев halted после run n). P4 в чистом виде: бесконечность — свойство процесса перебора, не объекта; каждое конечное наблюдение актуально и разрешимо. Переиспользуется как cm_bounded_decidable и в ScaleFlow.", "tags": ["element", "decidable", "P4", "foundation"]},
+      {"name": "negb_no_fixpoint", "analysis": "Семя: булево отрицание не имеет неподвижной точки (b ≠ negb b), доказывается разбором случаев. Это ЕДИНСТВЕННЫЙ диагональный факт, к которому сводятся Кантор, halting, Райс, Колмогоров, Тарский, Рассел — позже все опознаны как инстансы Ловера. Минимальный корень вены E.", "tags": ["diagonal", "seed", "vein-E"]},
+      {"name": "no_halting_decider", "analysis": "Role-limit-сторона: при наличии диагональной программы (SelfProgrammable) ни один тотальный D не решает self-halting. Категориальная ошибка реификации role-limit в Element-решатель, запрещённая той же negb-диагональю. Контрапозиция (decidable_implies_not_self_programmable) связывает с Element-стороной.", "tags": ["halting", "role-limit", "diagonal"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Halting расщеплён на Element (ограниченное, разрешимое, P4) и role-limit (безграничное); negb-семя как единый корень всех диагоналей репо; хаб переиспользования всей ветки.",
+      "caveat": "Неразрешимость halting и диагональ Кантора классичны (Тьюринг/Кантор). Вклад — E/R/R/P4-обрамление + роль корня-хаба, а не сами факты."
+    },
+    "tags": ["halting", "diagonal", "decidable", "role-limit", "P4", "foundation", "vein-E"]
+  },
+  {
+    "num": 105,
+    "path": "src/cs/KolmogorovRoleLimit.v",
+    "cluster": "cs",
+    "classical_counterpart": "Kolmogorov complexity, incompressibility-by-counting, and Berry/Chaitin uncomputability are classical; NEW is K as the fourth face = an instance of the shared diagonal, with honest model-relativity (no invariance theorem claimed).",
+    "title": "Kolmogorov complexity as the FOURTH face: incompressibility (Element) + uncomputable complexity (role-limit)",
+    "topic": "Two views of the same E/R/R act: budget-describability with incompressibility by pure counting (Element), and the complexity boundary as RoleLimitDrawn — an instance of diagonal_defeats_decider (Berry/Chaitin). The fourth face of the boundary.",
+    "role": "Bridge toward information (Part XVI). Imports HaltingRoleLimit, BoundaryDecidability; extends one_boundary_three_faces → one_boundary_four_faces. Concurrent-workstream file.",
+    "qed": 5, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool Lia", "cs.HaltingRoleLimit", "cs.BoundaryDecidability"],
+    "err": {
+      "elements": "программы-коды (nat) и объекты (nat); декомпрессор decode.",
+      "roles": "desc_within = бюджет-роль (P4); Complex = роль-ПРЕДЕЛ (K = минимум по ВСЕМ программам, не Element-объект); решатель = роль-оракул.",
+      "rules": "desc_within x n — описуемость в бюджете n; диагональ Берри/Чейтина = та же b ≠ negb b.",
+      "p4": "ограниченная описуемость — Element (коротких программ конечно, потому incompressible_exists); невычислимость сложности — role-limit (та же диагональ, что halting/Cantor); K модель-относительна."
+    },
+    "lemmas": [
+      {"name": "desc_within", "kind": "Definition", "role": "x описуем в бюджете n: ∃ программа ≤ n, decode = x"},
+      {"name": "maxd", "kind": "Fixpoint", "role": "наибольший объект от программ ≤ n (конечный скан)"},
+      {"name": "decode_le_maxd", "kind": "Lemma", "role": "образ [0..n] ограничен maxd n"},
+      {"name": "incompressible_exists", "kind": "Theorem", "role": "★ Element/счёт: при каждом бюджете НЕКОТОРЫЙ объект несжимаем"},
+      {"name": "kolmogorov_role_limit_drawn", "kind": "Theorem", "role": "★ Complex с диагональю ⟹ RoleLimitDrawn (инстанс diagonal_defeats_decider)"},
+      {"name": "complexity_decidable_no_diagonal", "kind": "Corollary", "role": "контрапозиция: ElementDrawn Complex ⟹ нет диагонали"},
+      {"name": "one_boundary_four_faces", "kind": "Theorem", "role": "★ число/программа/множество/СЛОЖНОСТЬ — четыре грани, один движок"}
+    ],
+    "key_lemmas": [
+      {"name": "incompressible_exists", "analysis": "Element-сторона чистым счётом: при бюджете n коротких программ КОНЕЧНО (образ [0..n]), поэтому объект S(maxd n) не описуем в n — несжимаем. 0 аксиом, pigeonhole. Честно: машинная инвариантность K НЕ заявляется — K модель-относительна, что и есть честный охват.", "tags": ["incompressibility", "counting", "element"]},
+      {"name": "one_boundary_four_faces", "analysis": "Расширяет one_boundary_three_faces четвёртой гранью: сложность (Колмогоров) присоединяется к числу/программе/множеству, все role-limit-грани движимы единственной negb-диагональю (корень — Ловер). Колмогоров опознан как ИНСТАНС diagonal_defeats_decider — то же ядро, что halting и Кантор, а не отдельный результат.", "tags": ["four-faces", "synthesis", "unification"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Колмогоров — ЧЕТВЁРТАЯ грань одной границы: несжимаемость = Element (счёт), невычислимость сложности = role-limit как ИНСТАНС универсального движка diagonal_defeats_decider; мост к теории информации.",
+      "caveat": "Несжимаемость (счёт) и Берри/Чейтин классичны; K здесь модель-относительна (инвариантность к машине НЕ заявлена) — честно помечено. Параллельный поток (не мой)."
+    },
+    "tags": ["kolmogorov", "incompressibility", "diagonal", "role-limit", "four-faces", "information", "P4"]
+  },
+  {
+    "num": 106,
+    "path": "src/cs/LambdaGrounding.v",
+    "cluster": "cs",
+    "classical_counterpart": "Church's untyped lambda-calculus and Omega=(\\x.xx)(\\x.xx) divergence are textbook; NEW is only grounding the abstract halting machine in a concrete de Bruijn reducer.",
+    "title": "Grounding halting in a real de Bruijn λ-machine: Ω diverges, (λx.x)(λx.x) halts",
+    "topic": "A concrete untyped λ-calculus (de Bruijn lift/subst/call-by-name step) instantiating the abstract halting machine: Ω=(λx.xx)(λx.xx) genuinely steps to itself and diverges; a real halting term; bounded halting decidable.",
+    "role": "Makes the abstract Section-machines of HaltingRoleLimit concrete in an actual computation model. Imported by LambdaRecursion, SemanticRecursion.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat", "cs.HaltingRoleLimit (run/halts/diverges)"],
+    "err": {
+      "elements": "термы Term (Var/Lam/App де Брёйна); конкретные omega/Omega/id_term/halt_term.",
+      "roles": "step = L5-правило редукции; haltedT = статус-роль; Omega = role-limit-обитатель (расходится).",
+      "rules": "lift/subst/step (call-by-name); haltedT через отсутствие шага.",
+      "p4": "настоящая машина несёт обе стороны: halt_term останавливается (Element), Omega расходится (role-limit) — абстрактный halting заземлён в реальном λ."
+    },
+    "lemmas": [
+      {"name": "Term", "kind": "Inductive", "role": "untyped λ де Брёйна: Var/Lam/App"},
+      {"name": "lift", "kind": "Fixpoint", "role": "сдвиг индексов де Брёйна"},
+      {"name": "subst", "kind": "Fixpoint", "role": "подстановка по индексу"},
+      {"name": "step", "kind": "Fixpoint", "role": "одношаговая call-by-name редукция (option Term)"},
+      {"name": "stepT", "kind": "Definition", "role": "тотализованный шаг (id при остановке)"},
+      {"name": "haltedT", "kind": "Definition", "role": "статус: нет шага = halted"},
+      {"name": "omega", "kind": "Definition", "role": "λx. x x"},
+      {"name": "Omega", "kind": "Definition", "role": "(λx.xx)(λx.xx) — расходящийся комбинатор"},
+      {"name": "step_Omega", "kind": "Lemma", "role": "★ step Omega = Some Omega (vm_compute)"},
+      {"name": "haltedT_Omega", "kind": "Lemma", "role": "Omega не остановлена"},
+      {"name": "stepT_Omega", "kind": "Lemma", "role": "stepT Omega = Omega"},
+      {"name": "run_Omega", "kind": "Lemma", "role": "любой прогон Omega = Omega"},
+      {"name": "diverges_Omega", "kind": "Lemma", "role": "★ Omega расходится в смысле HaltingRoleLimit.diverges"},
+      {"name": "id_term", "kind": "Definition", "role": "λx. x"},
+      {"name": "halt_term", "kind": "Definition", "role": "(λx.x)(λx.x) → λx.x"},
+      {"name": "halt_term_halts", "kind": "Lemma", "role": "halt_term останавливается"},
+      {"name": "halting_within_decidable", "kind": "Lemma", "role": "ограниченная остановка λ-терма разрешима"}
+    ],
+    "key_lemmas": [
+      {"name": "diverges_Omega", "analysis": "Заземление role-limit-стороны: Omega РЕАЛЬНО расходится в конкретной λ-машине — step Omega = Some Omega (vm_compute), значит run n Omega = Omega для всех n, значит diverges по определению HaltingRoleLimit. Не абстрактная Section-машина, а настоящая редукция: даёт онтологическую опору всей ветке.", "tags": ["divergence", "lambda", "grounding", "role-limit"]},
+      {"name": "halting_within_decidable", "analysis": "Element-сторона на реальном λ: ограниченная остановка терма разрешима — переносит bounded_halting_decidable на конкретный stepT/haltedT. Подтверждает, что заземление сохраняет Element-разрешимость.", "tags": ["element", "decidable", "lambda"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "methods",
+      "claim": "Абстрактный halting заземлён в РЕАЛЬНОЙ de-Bruijn λ-машине: Ω вычислимо расходится, halt_term останавливается — обе стороны границы в настоящей редукции, не в Section-абстракции.",
+      "caveat": "Бестиповое λ-исчисление и Ω/Y стандартны; ценность — онтологическое заземление cs-абстракций, а не новая теория."
+    },
+    "tags": ["lambda-calculus", "de-bruijn", "divergence", "grounding", "halting"]
+  },
+  {
+    "num": 107,
+    "path": "src/cs/LambdaRecursion.v",
+    "cluster": "cs",
+    "classical_counterpart": "Curry's Y / fixed-point combinator is textbook; NEW is only its operational verification in the grounded machine, linking to the categorical recursion theorem.",
+    "title": "The Y-combinator in the real machine: step (fixpoint f) = Some (App f (fixpoint f))",
+    "topic": "Constructs the Y/Curry fixpoint combinator in the grounded λ-machine and proves it actually unfolds: for closed f, fixpoint f steps to f (fixpoint f). Supporting well-scopedness lemmas (wf/closed, lift/subst invariance).",
+    "role": "Vein-E/grounding: realises recursion in the actual machine (the constructive counterpart to Kleene/Lawvere recursion). Imports cs.LambdaGrounding.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib", "cs.LambdaGrounding (Term/step/lift/subst)"],
+    "err": {
+      "elements": "термы; well-scoped предикат wf k t; Wf/fixpoint-конструкции.",
+      "roles": "fixpoint = роль-самопорождение (рекурсия как процесс); wf = роль-корректность области индексов.",
+      "rules": "Wf f = λx. f (x x); fixpoint f = (Wf f)(Wf f); шаг разворачивает рекурсию.",
+      "p4": "рекурсия — процесс саморазворачивания, не завершённый объект: Y_step2 показывает ОДИН разворот, бесконечность — в итерации шага."
+    },
+    "lemmas": [
+      {"name": "wf", "kind": "Fixpoint", "role": "well-scoped: все индексы < k"},
+      {"name": "closed", "kind": "Definition", "role": "wf 0 t — замкнутый терм"},
+      {"name": "wf_mono", "kind": "Lemma", "role": "монотонность wf по границе"},
+      {"name": "lift_wf", "kind": "Lemma", "role": "lift не меняет well-scoped терм"},
+      {"name": "subst_wf", "kind": "Lemma", "role": "subst не меняет well-scoped терм"},
+      {"name": "lift_closed", "kind": "Lemma", "role": "lift 0 замкнутого = он сам"},
+      {"name": "subst_closed", "kind": "Lemma", "role": "подстановка в замкнутый = он сам"},
+      {"name": "Wf", "kind": "Definition", "role": "λx. f (x x) — половина Y"},
+      {"name": "fixpoint", "kind": "Definition", "role": "(Wf f)(Wf f) — неподвижная точка f"},
+      {"name": "Y_step2", "kind": "Lemma", "role": "★ для closed f: step (fixpoint f) = Some (App f (fixpoint f))"},
+      {"name": "Yc", "kind": "Definition", "role": "замкнутый Y-комбинатор как терм"},
+      {"name": "Y_step1", "kind": "Lemma", "role": "step (App Yc f) = Some (fixpoint f)"}
+    ],
+    "key_lemmas": [
+      {"name": "Y_step2", "analysis": "Y-комбинатор РАЗВОРАЧИВАЕТСЯ в настоящей машине: для замкнутого f шаг от fixpoint f даёт App f (fixpoint f) — то есть f применяется к собственной неподвижной точке. Конструктивный двойник теоремы рекурсии Клини (которая в RecursionTheorem.v выводится как инстанс Ловера): здесь та же рекурсия реализована операционно, а не аксиоматически.", "tags": ["Y-combinator", "fixpoint", "recursion", "lambda"]},
+      {"name": "subst_wf", "analysis": "Несущая лемма гигиены де Брёйна: подстановка в well-scoped терм его не меняет за границей — без неё Y_step1/Y_step2 не считаются. Типичный «скучный, но load-bearing» хелпер, который база честно отмечает как scaffolding.", "tags": ["well-scoped", "de-bruijn", "scaffolding"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "methods",
+      "claim": "Y-комбинатор построен и ОПЕРАЦИОННО проверен в заземлённой λ-машине (разворачивается в f(Yf)) — конструктивная реализация рекурсии, двойник Kleene/Lawvere-вывода.",
+      "caveat": "Y-комбинатор и его разворот — учебная классика; ценность — операционное заземление и стыковка с RecursionTheorem."
+    },
+    "tags": ["Y-combinator", "lambda-calculus", "recursion", "fixpoint", "de-bruijn"]
+  },
+  {
+    "num": 108,
+    "path": "src/cs/LawvereFixedPoint.v",
+    "cluster": "cs",
+    "classical_counterpart": "Lawvere's fixed-point theorem (1969) is classical; NEW is nothing in the theorem itself but the systematic identification of THIS repo's diagonals (Cantor/halting/Rice/Tarski/Russell) as its instances.",
+    "title": "Lawvere's fixed-point theorem — the categorical ROOT of every diagonal in the repo",
+    "topic": "Proves Lawvere's fixed-point theorem (a point-surjection forces every endo a fixed point) and shows the cs diagonals (Cantor, ℕ→ℕ non-enumerable) are its instances — identifying the single root under all role-limits.",
+    "role": "ROOT of vein E. Imports cs.HaltingRoleLimit. Feeds RecursionTheorem (Kleene=Lawvere), TarskiUndefinability, RussellViaLawvere.",
+    "qed": 5, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib", "cs.HaltingRoleLimit (negb_no_fixpoint)"],
+    "err": {
+      "elements": "типы A, B; точка-сюръекция φ: A→(A→B); эндо-функции f: B→B.",
+      "roles": "point_surjective = роль-универсальность (всё представимо); неподвижная точка = вынужденная роль.",
+      "rules": "если φ точка-сюръективна, то любой f имеет неподвижную точку f b = b — диагональная конструкция.",
+      "p4": "корень всех role-limit-граней: реификация role-limit (тотальный решатель/сюръекция) сталкивается с диагональю Ловера; negb — частный случай при B=bool, f=negb."
+    },
+    "lemmas": [
+      {"name": "point_surjective", "kind": "Definition", "role": "φ: A→(A→B) точечно покрывает все f: A→B"},
+      {"name": "lawvere_fixed_point", "kind": "Theorem", "role": "★ точка-сюръекция ⟹ всякий f: B→B имеет неподвижную точку"},
+      {"name": "lawvere_no_point_surjection", "kind": "Corollary", "role": "если у f нет неподвижной точки, нет точка-сюръекции"},
+      {"name": "cantor_via_lawvere", "kind": "Corollary", "role": "Кантор как инстанс (B=bool, f=negb)"},
+      {"name": "nat_fun_not_enumerable", "kind": "Corollary", "role": "ℕ→ℕ не перечислимо (инстанс с f=succ)"},
+      {"name": "cs_diagonals_are_lawvere", "kind": "Theorem", "role": "★ диагонали ветки опознаны как инстансы Ловера"}
+    ],
+    "key_lemmas": [
+      {"name": "lawvere_fixed_point", "analysis": "Корень: точка-сюръекция φ: A→(A→B) заставляет любой эндо f: B→B иметь неподвижную точку (диагональ a₀ с φ a₀ = λa. f(φ a a)). Доказательство в одну строку через f_equal. Контрапозиция (f без неподвижной точки, напр. negb) даёт ВСЕ диагонали — Кантор, halting, Райс, Тарский, Рассел становятся следствиями одной теоремы 1969 года.", "tags": ["lawvere", "fixpoint", "root", "vein-E"]},
+      {"name": "cs_diagonals_are_lawvere", "analysis": "Явное опознание: диагонали ветки (negb_no_fixpoint, cantor_no_surjection) — инстансы Ловера, а не независимые трюки. Это и есть унификация вены E: «одна диагональ» получает категориальный корень, превращая россыпь несвязанных невозможностей в одну структуру.", "tags": ["unification", "diagonal", "synthesis"]}
+    ],
+    "uniqueness": {
+      "score": 5,
+      "level": "synthesis+observation",
+      "claim": "Единый категориальный КОРЕНЬ (Ловер) всех диагоналей репо: Кантор/halting/Райс/Тарский/Рассел опознаны как инстансы одной теоремы о неподвижной точке.",
+      "caveat": "Теорема Ловера классична (1969), доказательство тривиально. Уникальность — в систематической унификации ИМЕННО диагоналей этого репо под ней (вена E), а не в самой теореме."
+    },
+    "tags": ["lawvere", "fixpoint", "diagonal", "root", "vein-E", "unification"]
+  },
+  {
+    "num": 109,
+    "path": "src/cs/PumpingPigeonhole.v",
+    "cluster": "cs",
+    "classical_counterpart": "The pigeonhole principle and the pumping lemma are classical; NEW is only discharging the pumping hypothesis to make a^n b^n unconditional.",
+    "title": "Discharging the pumping hypothesis via pigeonhole: a^n b^n needs no assumption",
+    "topic": "Proves the DFA-prefix collision (two distinct a^i, a^j reach the same state) by pigeonhole over the finite state set, turning no_dfa_for_anbn into the unconditional no_dfa_for_anbn_unconditional.",
+    "role": "Tightening of PumpingRoleLimit (removes its collision hypothesis). Used by ChomskyHierarchy. Reuses RegularElementFloor.run.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List PeanoNat", "cs.RegularElementFloor", "cs.PumpingRoleLimit"],
+    "err": {
+      "elements": "конечное множество состояний; префиксы word_a n; их образы под run.",
+      "roles": "коллизия состояний = вынужденная роль (голубятня); состояние = конечная память-роль.",
+      "rules": "среди |Q|+1 префиксов два дают одно состояние (pigeonhole) ⟹ pump.",
+      "p4": "конечность памяти (Element-пол) ВЫНУЖДАЕТ коллизию — несрегулярность a^n b^n получается без гипотез, прямо из конечности."
+    },
+    "lemmas": [
+      {"name": "gpref", "kind": "Definition", "role": "состояние после прочтения word_a n"},
+      {"name": "seq_nodup_local", "kind": "Lemma", "role": "seq не содержит дубликатов"},
+      {"name": "map_collision", "kind": "Lemma", "role": "отображение длинного списка в конечный ⟹ коллизия"},
+      {"name": "gpref_collision", "kind": "Lemma", "role": "∃ i≠j с одинаковым состоянием-префиксом"},
+      {"name": "no_dfa_for_anbn_unconditional", "kind": "Theorem", "role": "★ {a^n b^n} не распознаётся DFA — БЕЗ гипотез"}
+    ],
+    "key_lemmas": [
+      {"name": "no_dfa_for_anbn_unconditional", "analysis": "Снимает гипотезу коллизии из PumpingRoleLimit: по голубятне над конечным Q два различных префикса a^i, a^j (i≠j) приводят в одно состояние, дальше pump_preserves даёт противоречие с балансом. Безусловная несрегулярность — финальный кирпич строгого включения regular ⊊ context-free.", "tags": ["pigeonhole", "pumping", "unconditional"]},
+      {"name": "map_collision", "analysis": "Чистая комбинаторная голубятня: отображение списка длиннее |codomain| в конечный тип даёт два индекса с равными образами. Переиспользуемый хелпер, локализующий «конечность памяти ⟹ коллизия».", "tags": ["pigeonhole", "finite", "helper"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Безусловная несрегулярность a^n b^n: pumping-гипотеза разряжена голубятней над конечным множеством состояний.",
+      "caveat": "Классическая голубятня/pumping; ценность — аккуратное снятие гипотезы для строгого включения в ChomskyHierarchy."
+    },
+    "tags": ["pigeonhole", "pumping", "regular", "automata", "unconditional"]
+  },
+  {
+    "num": 110,
+    "path": "src/cs/PumpingRoleLimit.v",
+    "cluster": "cs",
+    "classical_counterpart": "The pumping lemma for regular languages (a^n b^n not regular) is classical; NEW is only the 'first role-limit above the Element floor' framing.",
+    "title": "a^n b^n is not regular: the role-limit just above the Element floor",
+    "topic": "The pumping argument via letter-counting (cF/cT): pumping a loop preserves DFA acceptance but breaks the a/b balance, so {a^n b^n} escapes any finite-memory DFA — the first role-limit above the regular Element floor.",
+    "role": "Phase-3 role-limit step. Provides word_a/word_b/In_L reused by PumpingPigeonhole and ChomskyHierarchy. Reuses RegularElementFloor.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List PeanoNat", "cs.RegularElementFloor"],
+    "err": {
+      "elements": "слова над {a,b}; word_a/word_b; счётчики cF/cT.",
+      "roles": "язык {a^n b^n} = role-limit (требует неограниченной памяти-счёта); петля-pump = роль повторения.",
+      "rules": "repeat петли сохраняет принятие DFA; cF/cT считают буквы; баланс i=j.",
+      "p4": "конечная память (Element) НЕ держит баланс a^n b^n — это role-limit над полом: бесконечность счёта не реифицируется в конечное состояние."
+    },
+    "lemmas": [
+      {"name": "repeat_word", "kind": "Fixpoint", "role": "k-кратное повторение слова"},
+      {"name": "loop_pump", "kind": "Lemma", "role": "петля состояния повторяется при pump"},
+      {"name": "pump_preserves", "kind": "Lemma", "role": "★ pump сохраняет принятие/отвержение DFA"},
+      {"name": "word_a", "kind": "Definition", "role": "a^n = repeat false n"},
+      {"name": "word_b", "kind": "Definition", "role": "b^n = repeat true n"},
+      {"name": "In_L", "kind": "Definition", "role": "{w : ∃n, w = a^n b^n}"},
+      {"name": "cF", "kind": "Definition", "role": "число a (false) в слове"},
+      {"name": "cT", "kind": "Definition", "role": "число b (true) в слове"},
+      {"name": "cF_app", "kind": "Lemma", "role": "cF аддитивен по конкатенации"},
+      {"name": "cF_a", "kind": "Lemma", "role": "cF(a^n)=n"},
+      {"name": "cF_b", "kind": "Lemma", "role": "cF(b^n)=0"},
+      {"name": "cT_app", "kind": "Lemma", "role": "cT аддитивен"},
+      {"name": "cT_a", "kind": "Lemma", "role": "cT(a^n)=0"},
+      {"name": "cT_b", "kind": "Lemma", "role": "cT(b^n)=n"},
+      {"name": "anbn_balanced", "kind": "Lemma", "role": "In_L(a^j b^i) ⟹ i=j (баланс)"},
+      {"name": "collision_contradicts", "kind": "Theorem", "role": "коллизия состояний ⟹ противоречие с балансом"},
+      {"name": "no_dfa_for_anbn", "kind": "Theorem", "role": "★ нет DFA для {a^n b^n} (при гипотезе коллизии)"}
+    ],
+    "key_lemmas": [
+      {"name": "pump_preserves", "analysis": "Сердце pumping-леммы: если чтение петли возвращает DFA в то же состояние, то вставка любого числа копий петли не меняет принятие. Формализует «конечная память не различает число прокруток» — операционная причина, почему счётный баланс a^n b^n недостижим конечным автоматом.", "tags": ["pumping", "invariance", "role-limit"]},
+      {"name": "no_dfa_for_anbn", "analysis": "Role-limit над Element-полом: при коллизии состояний (later безусловной в PumpingPigeonhole) pump ломает баланс i=j, противореча anbn_balanced. Первый строгий шаг лестницы Хомского: конечная память (регулярный Element) строго слабее стека.", "tags": ["non-regular", "role-limit", "separation"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Несрегулярность a^n b^n переосмыслена как первый role-limit над регулярным Element-полом (счётный баланс не реифицируется в конечную память).",
+      "caveat": "Pumping-лемма и счёт букв — стандарт теории автоматов; ново только обрамление Element/role-limit."
+    },
+    "tags": ["pumping", "non-regular", "automata", "role-limit", "counting"]
+  },
+  {
+    "num": 111,
+    "path": "src/cs/PvsNP_Framing.v",
+    "cluster": "cs",
+    "classical_counterpart": "P vs NP and the verifier-based NP definition are classical; NEW is NONE as a result - explicitly a framing exercise (bounded search decidable is trivial).",
+    "title": "P vs NP as an Element/role-limit framing (NOT a proof): bounded NP-search is decidable",
+    "topic": "Frames verification as Element (a decidable check) and NP as bounded search: bounded NP-search is decidable, P⊆NP. Explicitly a framing exercise — the barriers (relativization etc.) are in comments, no resolution claimed.",
+    "role": "Honest framing file. Self-contained. Marks the limit of the Element/role-limit angle: it organises P/NP, does not decide it.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib"],
+    "err": {
+      "elements": "входы Input; сертификаты Cert; верификатор v; решатель dec.",
+      "roles": "verifies = роль-проверка (Element); in_NP/in_P = роли-классы; поиск = роль-перебор.",
+      "rules": "verifies v; in_NP = ∃ верификатор; in_P = ∃ решатель; ограниченный поиск разрешим.",
+      "p4": "проверка сертификата — Element (разрешима); НЕОГРАНИЧЕННЫЙ поиск сертификата — role-limit; ограниченный — снова Element (NP_bounded_search_decidable). P vs NP = где именно проходит граница, НЕ решается здесь."
+    },
+    "lemmas": [
+      {"name": "verifies", "kind": "Definition", "role": "v корректно проверяет сертификаты"},
+      {"name": "Decider", "kind": "Definition", "role": "dec решает язык"},
+      {"name": "in_NP", "kind": "Definition", "role": "∃ верификатор (Element-проверка + перебор)"},
+      {"name": "in_P", "kind": "Definition", "role": "∃ прямой решатель"},
+      {"name": "verification_is_element", "kind": "Lemma", "role": "проверка сертификата — Element-сторона"},
+      {"name": "P_subset_NP", "kind": "Lemma", "role": "решатель даёт верификатор: P⊆NP"},
+      {"name": "NP_search_decides", "kind": "Lemma", "role": "перебор сертификатов решает NP-член при разрешимой области"},
+      {"name": "NP_bounded_search_decidable", "kind": "Lemma", "role": "★ ОГРАНИЧЕННЫЙ NP-поиск разрешим (Element)"},
+      {"name": "P_collapses_NP", "kind": "Definition", "role": "in_NP→in_P как формулируемое утверждение (не доказывается)"}
+    ],
+    "key_lemmas": [
+      {"name": "NP_bounded_search_decidable", "analysis": "Точная Element-локализация: ОГРАНИЧЕННЫЙ поиск сертификата (по конечной области) разрешим — verification всегда Element, role-limit входит лишь с НЕОГРАНИЧЕННЫМ перебором. Это весь честный вклад файла: показывает, ГДЕ граница, не сдвигая её.", "tags": ["bounded-search", "element", "decidable"]},
+      {"name": "P_subset_NP", "analysis": "Тривиальное P⊆NP (решатель = верификатор, игнорирующий сертификат) — включено как каркас рамки, а не результат. Честность файла: он организует P/NP в язык Element/role-limit, явно НЕ претендуя на разрешение.", "tags": ["P-subset-NP", "framing"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "new-framing",
+      "claim": "P vs NP уложен в язык Element/role-limit (проверка=Element, неограниченный поиск=role-limit), с разрешимостью ограниченного поиска как точкой границы.",
+      "caveat": "ЯВНО не доказательство и не сдвиг барьеров (релятивизация и пр. — в комментариях). Чистое обрамление; над-брендировать нельзя."
+    },
+    "tags": ["P-vs-NP", "framing", "bounded-search", "element", "role-limit", "honest-scope"]
+  },
+  {
+    "num": 112,
+    "path": "src/cs/RecursionTheorem.v",
+    "cluster": "cs",
+    "classical_counterpart": "Kleene's recursion theorem and its known equivalence to Lawvere are classical; NEW is the explicit in-repo derivation of Kleene as a Lawvere instance and the chain to Rice.",
+    "title": "Kleene's recursion theorem as a Lawvere instance; Rice from recursion",
+    "topic": "Derives Kleene's recursion theorem as a direct instance of lawvere_fixed_point (A=B=Prog), then chains it to Rice — exhibiting recursion and Rice as faces of the same fixed-point root.",
+    "role": "Vein-E linkage. Imports LawvereFixedPoint, BoundaryDecidability, RiceRoleLimit. Connects the operational Y (LambdaRecursion) to the categorical root.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["cs.LawvereFixedPoint", "cs.BoundaryDecidability", "cs.RiceRoleLimit"],
+    "err": {
+      "elements": "программы Prog; самоприменение; неподвижные точки преобразований программ.",
+      "roles": "теорема рекурсии = роль-самопорождение; Rice-диагональ = роль-предел семантики.",
+      "rules": "Kleene = Ловер при A=B=Prog; рекурсия ⟹ Rice-диагональ.",
+      "p4": "рекурсия и Rice — грани ОДНОГО корня неподвижной точки; реификация семантики в тотальный решатель запрещена тем же Ловером."
+    },
+    "lemmas": [
+      {"name": "kleene_recursion_from_lawvere", "kind": "Theorem", "role": "★ теорема рекурсии Клини = инстанс Ловера (A=B=Prog)"},
+      {"name": "rice_diagonal_from_recursion", "kind": "Theorem", "role": "из рекурсии — самоотрицающая Rice-диагональ"},
+      {"name": "rice_from_lawvere", "kind": "Theorem", "role": "★ Rice выведен по цепочке от Ловера"}
+    ],
+    "key_lemmas": [
+      {"name": "kleene_recursion_from_lawvere", "analysis": "Теорема рекурсии Клини получена НЕ отдельным трюком, а как прямой инстанс lawvere_fixed_point при A=B=Prog. Превращает «Kleene ≡ Lawvere» (известный факт) в машинно-проверенную внутрирепозиторную цепочку, стыкуя операционный Y (LambdaRecursion) с категориальным корнем (вена E).", "tags": ["kleene", "lawvere", "recursion", "instance"]},
+      {"name": "rice_from_lawvere", "analysis": "Замыкает грань: Rice выводится по цепочке рекурсия→диагональ от того же корня Ловера. Демонстрирует, что неразрешимость семантических свойств — не новый принцип, а следствие единой неподвижной точки.", "tags": ["rice", "lawvere", "chain"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Теорема рекурсии Клини и Rice выведены как инстансы ОДНОГО корня Ловера — машинная стыковка операционной (Y) и категориальной рекурсии.",
+      "caveat": "Эквивалентность Kleene≡Lawvere известна; вклад — явная внутрирепозиторная цепочка от корня к Rice, а не новый результат."
+    },
+    "tags": ["kleene", "recursion-theorem", "lawvere", "rice", "vein-E", "synthesis"]
+  },
+  {
+    "num": 113,
+    "path": "src/cs/RegularElementFloor.v",
+    "cluster": "cs",
+    "classical_counterpart": "DFA theory - decidable membership, product-automaton closure under intersection/union, complement - is classical; NEW is only the 'decidable Element floor' framing.",
+    "title": "Regular languages = the decidable Element floor; DFA membership + Boolean closure",
+    "topic": "DFAs as the Element floor: membership is decidable, complement flips acceptance, and the product DFA gives intersection/union closure. The bottom (decidable) rung of the role-limit ladder.",
+    "role": "Phase-3 Element floor. Provides run/accepts reused by PumpingRoleLimit, PumpingPigeonhole, ChomskyHierarchy.",
+    "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List Bool"],
+    "err": {
+      "elements": "состояния Q; алфавит Sigma; слова; функция перехода delta.",
+      "roles": "язык-регулярный = Element-роль (конечная память); accept-предикат = статус-роль.",
+      "rules": "run = fold_left delta; accepts; произведение автоматов для ∩/∪.",
+      "p4": "регулярные языки — Element-пол: членство РАЗРЕШИМО (конечная память актуальна), булевы операции замкнуты — низшая разрешимая ступень лестницы."
+    },
+    "lemmas": [
+      {"name": "run", "kind": "Definition", "role": "прогон DFA по слову (fold_left delta)"},
+      {"name": "run_app", "kind": "Lemma", "role": "run по конкатенации = композиция прогонов"},
+      {"name": "accepts", "kind": "Definition", "role": "слово принято: acc(run ...) = true"},
+      {"name": "membership_decidable", "kind": "Lemma", "role": "★ членство в регулярном языке РАЗРЕШИМО (Element)"},
+      {"name": "complement_spec", "kind": "Lemma", "role": "дополнение-DFA принимает ⟺ исходный отвергает"},
+      {"name": "dprod", "kind": "Definition", "role": "переход произведения (Q1×Q2)"},
+      {"name": "run_prod", "kind": "Lemma", "role": "прогон произведения = пара прогонов"},
+      {"name": "intersection_spec", "kind": "Lemma", "role": "произведение-DFA даёт пересечение"},
+      {"name": "union_spec", "kind": "Lemma", "role": "произведение-DFA даёт объединение"},
+      {"name": "parity_delta", "kind": "Definition", "role": "пример: автомат чётности (xor)"},
+      {"name": "parity_accepts_empty", "kind": "Example", "role": "пустое слово принято (чётно)"},
+      {"name": "parity_rejects_one", "kind": "Example", "role": "одна буква отвергнута"},
+      {"name": "parity_accepts_two", "kind": "Example", "role": "две буквы приняты"}
+    ],
+    "key_lemmas": [
+      {"name": "membership_decidable", "analysis": "Определяет Element-пол: членство в регулярном языке разрешимо булевым прогоном DFA — конечная память актуальна и наблюдаема (P4). Контраст с role-limit-ярусами выше (a^n b^n, halting) задаёт всю лестницу Element/role-limit.", "tags": ["element", "decidable", "floor"]},
+      {"name": "intersection_spec", "analysis": "Замкнутость регулярного класса под ∩ через произведение автоматов (run_prod). Показывает, что Element-пол — настоящий булев класс, а не отдельные примеры; конструктивный продукт-DFA вычислим.", "tags": ["closure", "product-automaton"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Регулярные языки представлены как разрешимый Element-ПОЛ лестницы role-limit'ов (членство разрешимо, булевы операции замкнуты конструктивно).",
+      "caveat": "DFA, произведение автоматов, замкнутость — стандарт; ново обрамление как «Element-пол» под ролевой лестницей."
+    },
+    "tags": ["automata", "regular", "decidable", "element", "floor", "boolean-closure"]
+  },
+  {
+    "num": 114,
+    "path": "src/cs/RiceRoleLimit.v",
+    "cluster": "cs",
+    "classical_counterpart": "Rice's theorem is classical; NEW is casting it as a precise Element(trivial)/role-limit(nontrivial-semantic) dichotomy with the diagonal as an instance of the shared engine.",
+    "title": "Rice's theorem as Element/role-limit dichotomy: trivial properties decidable, semantic ones not",
+    "topic": "Splits program properties: trivial ones are ElementDrawn (decidable), while a nontrivial SEMANTIC property admits the Rice diagonal against every decider — hence role-limit. No semantic decider.",
+    "role": "Vein-E face. Used by RecursionTheorem, SemanticRecursion. Reuses the BoundaryDecidability machinery.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib", "cs.BoundaryDecidability (Element/RoleLimit)"],
+    "err": {
+      "elements": "программы Prog; семантическое свойство P; решатели dec.",
+      "roles": "тривиальное свойство = Element-роль (разрешимо); нетривиальное семантическое = роль-ПРЕДЕЛ.",
+      "rules": "P_extensional; против каждого dec есть Rice-диагональ ⟹ RoleLimitDrawn.",
+      "p4": "семантика программы — role-limit (зависит от поведения, не текста); тотальный семантический решатель = реификация = категориальная ошибка."
+    },
+    "lemmas": [
+      {"name": "trivial_property_element_drawn", "kind": "Lemma", "role": "тривиальное (константное) свойство разрешимо (Element)"},
+      {"name": "RiceDiagonal", "kind": "Definition", "role": "самоотрицающий свидетель против решателя dec"},
+      {"name": "rice_diagonal_exists", "kind": "Lemma", "role": "для нетривиального семантического P диагональ существует"},
+      {"name": "rice_role_limit", "kind": "Theorem", "role": "★ нетривиальное семантическое свойство — RoleLimitDrawn"},
+      {"name": "rice_no_semantic_decider", "kind": "Corollary", "role": "нет тотального решателя семантического свойства"}
+    ],
+    "key_lemmas": [
+      {"name": "rice_role_limit", "analysis": "Теорема Райса в дихотомии Element/role-limit: нетривиальное СЕМАНТИЧЕСКОЕ (экстенсиональное) свойство против каждого решателя имеет самоотрицающего свидетеля ⟹ RoleLimitDrawn (инстанс diagonal_defeats_decider). Семантика — про поведение, не про текст; её разрешение реифицирует role-limit в Element.", "tags": ["rice", "role-limit", "semantic", "diagonal"]},
+      {"name": "trivial_property_element_drawn", "analysis": "Другая сторона дихотомии Райса: ТРИВИАЛЬНОЕ (константное) свойство разрешимо — Element. Делает теорему точной границей: ровно нетривиальность+семантичность толкает свойство в role-limit.", "tags": ["trivial", "element", "decidable"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Теорема Райса как точная дихотомия Element/role-limit: тривиальное свойство разрешимо, нетривиальное семантическое — role-limit (инстанс универсального движка).",
+      "caveat": "Райс классичен; ново — постановка как Element/role-limit-граница и вывод диагонали как инстанса BoundaryDecidability, а не отдельно."
+    },
+    "tags": ["rice", "semantic", "role-limit", "decidable", "diagonal", "vein-E"]
+  },
+  {
+    "num": 115,
+    "path": "src/cs/RussellViaLawvere.v",
+    "cluster": "cs",
+    "classical_counterpart": "Russell's paradox, the Liar, Grelling, and Cantor are all known as Lawvere/diagonal phenomena; NEW is their systematic in-repo unification as ONE diagonal and the tie to the computational faces.",
+    "title": "Russell / Liar / Grelling / Cantor-Prop as ONE diagonal under Lawvere",
+    "topic": "Proves (~P)<>P (no Prop fixpoint), then derives Russell (no universal set), the Liar, Grelling, and Cantor-on-Prop — capped by paradoxes_one_diagonal: all four paradoxes are the single negb/Lawvere diagonal.",
+    "role": "Vein-E breadth (paradox unification). Imports LawvereFixedPoint, TarskiUndefinability. The Prop-side mirror of the bool-side faces.",
+    "qed": 6, "admitted": 0, "axioms": 0,
+    "imports": ["cs.LawvereFixedPoint", "cs.TarskiUndefinability"],
+    "err": {
+      "elements": "пропозиции P: Prop; предикаты членства/истинности/гетерологичности.",
+      "roles": "парадокс = роль-самоотрицание (s=f(s)); универсальное множество/истинность = реифицированный role-limit.",
+      "rules": "(~P)<>P — нет неподвижной точки отрицания на Prop; отсюда Рассел/Лжец/Греллинг.",
+      "p4": "каждый парадокс = попытка реифицировать самоотрицающую роль в Element-объект; блокируется одной диагональю (Ловер) на типовом уровне."
+    },
+    "lemmas": [
+      {"name": "not_no_fixpoint", "kind": "Lemma", "role": "(~P)<>P — отрицание не имеет неподвижной точки на Prop (через eq_rect)"},
+      {"name": "cantor_prop", "kind": "Corollary", "role": "Кантор на Prop как инстанс"},
+      {"name": "russell_no_universal_set", "kind": "Theorem", "role": "★ нет универсального множества (Рассел)"},
+      {"name": "liar", "kind": "Corollary", "role": "нет p с p<->~p (Лжец)"},
+      {"name": "grelling", "kind": "Corollary", "role": "гетерологичность противоречива (Греллинг)"},
+      {"name": "paradoxes_one_diagonal", "kind": "Theorem", "role": "★ Рассел/Лжец/Греллинг/Кантор — ОДНА диагональ"}
+    ],
+    "key_lemmas": [
+      {"name": "paradoxes_one_diagonal", "analysis": "Капстоун широты вены E: Рассел, Лжец, Греллинг и Кантор-на-Prop собраны как ОДНА диагональ (через (~P)<>P, инстанс Ловера). Превращает четыре «разных» парадокса в одну структуру самоотрицания — Prop-зеркало bool-граней (число/программа/множество/сложность).", "tags": ["paradox", "one-diagonal", "unification", "vein-E"]},
+      {"name": "not_no_fixpoint", "analysis": "Технически тонкий корень: (~P)<>P доказан транспортом eq_rect (а не rewrite, который не прогрессирует на голом Prop). Важна и скобочная ловушка: ~P<>P парсится как ~(P<>P), поэтому всюду явные (~P)<>P. Prop-аналог negb_no_fixpoint.", "tags": ["prop-fixpoint", "eq_rect", "diagonal"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Четыре семантических парадокса (Рассел/Лжец/Греллинг/Кантор-Prop) унифицированы как ОДНА диагональ под Ловером — Prop-зеркало вычислительных граней.",
+      "caveat": "Парадокс-как-неподвижная-точка известен со времён Тарского/Ловера (доказательства коротки). Уникальность — в систематической унификации именно этих парадоксов с вычислительными гранями репо."
+    },
+    "tags": ["paradox", "russell", "liar", "grelling", "diagonal", "lawvere", "vein-E", "unification"]
+  },
+  {
+    "num": 116,
+    "path": "src/cs/ScaleFlowUndecidable.v",
+    "cluster": "cs",
+    "classical_counterpart": "Undecidability of boundedness of a computable monotone sequence (reducible to halting) is classical; NEW is the cross-branch bridge identifying it with the InterLevelCalculus scale-flow Element/role-limit boundary.",
+    "title": "Bridge halting ↔ hierarchy: a bounded/unbounded scale-flow distinction is undecidable",
+    "topic": "Builds a monotone scale-flow g(c) counting non-halting steps; it is bounded (flow_element) iff the machine halts, unbounded (flow_role_limit) iff it diverges — so the Element/role-limit flow split is undecidable, linking the halting boundary to the InterLevelCalculus hierarchy branch.",
+    "role": "Cross-branch BRIDGE to «Иерархии и Каскады» (InterLevelCalculus). Replicates flow predicates locally (stale-vo avoidance). Reuses HaltingRoleLimit + BoundaryDecidability.",
+    "qed": 17, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "cs.HaltingRoleLimit", "cs.BoundaryDecidability (replicated flow predicates)"],
+    "err": {
+      "elements": "масштаб-поток ScaleFlow=nat→Q; счётчик не-остановленных шагов nh_count.",
+      "roles": "flow_element = ограниченный монотонный поток (Element); flow_role_limit = неограниченный (role-limit).",
+      "rules": "g(c) считает не-halted шаги; ограничен ⟺ останавливается, неограничен ⟺ расходится.",
+      "p4": "та же граница Element/role-limit, что и halting, но в форме ограниченности масштаб-потока иерархии: bounded/unbounded НЕразрешимо, ибо эквивалентно halting."
+    },
+    "lemmas": [
+      {"name": "ScaleFlow", "kind": "Definition", "role": "поток масштаба nat→Q"},
+      {"name": "nondecreasing/bounded_above/unbounded", "kind": "Definition", "role": "монотонность и (не)ограниченность потока"},
+      {"name": "flow_element", "kind": "Definition", "role": "монотонный + ограниченный = Element"},
+      {"name": "flow_role_limit", "kind": "Definition", "role": "монотонный + неограниченный = role-limit"},
+      {"name": "arch_nat", "kind": "Lemma", "role": "архимедовость: любой Q превзойдён inject_Z натурального"},
+      {"name": "Qle_of_nat_le", "kind": "Lemma", "role": "перенос ≤ с nat на Q (через Zle_Qle)"},
+      {"name": "RoleLimitDrawn_iff", "kind": "Lemma", "role": "перенос RoleLimitDrawn по эквивалентности предикатов"},
+      {"name": "nh_count", "kind": "Fixpoint", "role": "число не-остановленных шагов до n"},
+      {"name": "g", "kind": "Definition", "role": "масштаб-поток-счётчик inject_Z(nh_count)"},
+      {"name": "nh_count_step/mono", "kind": "Lemma", "role": "монотонность счётчика"},
+      {"name": "g_nondecreasing", "kind": "Lemma", "role": "поток g не убывает"},
+      {"name": "nh_count_diverges", "kind": "Lemma", "role": "при расходимости счётчик растёт неограниченно"},
+      {"name": "g_diverges_unbounded", "kind": "Lemma", "role": "расходимость ⟹ g неограничен"},
+      {"name": "not_halts_diverges/diverges_iff_not_halts", "kind": "Lemma", "role": "связь halts/diverges"},
+      {"name": "nh_count_const_after/le_N", "kind": "Lemma", "role": "после остановки счётчик постоянен/ограничен N"},
+      {"name": "g_halts_bounded", "kind": "Lemma", "role": "остановка ⟹ g ограничен"},
+      {"name": "flow_element_of_halts", "kind": "Lemma", "role": "остановка ⟹ flow_element g"},
+      {"name": "flow_role_limit_iff_diverges", "kind": "Lemma", "role": "★ flow_role_limit g ⟺ расходимость"},
+      {"name": "scale_flow_role_limit_undecidable", "kind": "Theorem", "role": "★ Element/role-limit разрез масштаб-потока НЕразрешим (= halting)"}
+    ],
+    "key_lemmas": [
+      {"name": "scale_flow_role_limit_undecidable", "analysis": "Мост между ветками: вопрос «ограничен ли масштаб-поток g(c)» (Element против role-limit в терминах InterLevelCalculus) НЕразрешим, потому что эквивалентен halting. Показывает, что граница Element/role-limit ветки CS — ТА ЖЕ линия, что bounded/unbounded в иерархии масштабов «Иерархии и Каскады». Синергия двух направлений в одной теореме.", "tags": ["bridge", "undecidable", "scale-flow", "hierarchy"]},
+      {"name": "flow_role_limit_iff_diverges", "analysis": "Несущая эквивалентность: монотонный счётчик не-остановленных шагов неограничен ТОЧНО когда машина расходится. Аккуратная Q-арифметика (arch_nat, Qle_of_nat_le обходят Zle_Qle-как-равенство) превращает halting в свойство ограниченности потока.", "tags": ["equivalence", "divergence", "Q-arithmetic"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Кросс-веточный мост: граница Element/role-limit ветки CS отождествлена с границей bounded/unbounded масштаб-потока ветки иерархий — одна неразрешимая линия, увиденная с двух сторон.",
+      "caveat": "Неразрешимость ограниченности монотонного потока следует из halting; ценность — именно мост-обрамление между двумя ветками репо, а не новая неразрешимость."
+    },
+    "tags": ["bridge", "undecidable", "scale-flow", "hierarchy", "halting", "InterLevelCalculus", "P4"]
+  },
+  {
+    "num": 117,
+    "path": "src/cs/SelectionWithoutChoiceSynthesis.v",
+    "cluster": "cs",
+    "classical_counterpart": "AC/DC/WKL and their constructive eliminability under decidability (reverse mathematics, Bishop constructivism) are known; NEW is the bundled ladder plus the explicit thesis 'selection-freedom <-> decidability' tying vein B to the finitization boundary.",
+    "title": "The choice ladder: selection is axiom-free EXACTLY when a decidable test + an order resolve it",
+    "topic": "Bundles vein B's four free levels (finite / countable / dependent / König) and states the unifying thesis: all reduce to iterating the canonical least selector; AC/DC/WKL is the price ONLY at the undecidable/unordered boundary — selection-freedom ⟺ decidability.",
+    "role": "FLAGSHIP synthesis of vein B. Imports DecidableSelection + CountableSelectionFree + CountableDependentChoiceFree + DecidableKonig. Ties vein B to H1/H48 (finitization boundary). Concurrent (H52).",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: List PeanoNat Bool", "cs.DecidableSelection", "cs.CountableSelectionFree", "cs.CountableDependentChoiceFree", "cs.DecidableKonig"],
+    "err": {
+      "elements": "уровни выбора (конечный/счётный/зависимый/König/граница); флаг axiom_free.",
+      "roles": "свободный уровень = выбор, разрешённый ПРАВИЛОМ (тест+порядок); граница = AC/DC/WKL (role-limit).",
+      "rules": "разрешимый тест + порядок ⟹ 0 акс (наименьший = первый); неразрешимое/неупорядоченное ⟹ цена.",
+      "p4": "свобода выбора ⟺ РАЗРЕШИМОСТЬ — та же линия, что H48/H1; четыре уровня = итерации наименьшего селектора; AC — цена структурного дефицита."
+    },
+    "lemmas": [
+      {"name": "SelectionLevel", "kind": "Inductive", "role": "уровни: Finite/CountableChoice/CountableDC/KonigPath/UnstructuredBoundary"},
+      {"name": "axiom_free", "kind": "Definition", "role": "true на всех структурных уровнях, false на границе"},
+      {"name": "all_levels", "kind": "Definition", "role": "список всех пяти уровней"},
+      {"name": "count_free/count_priced", "kind": "Definition", "role": "счётчики свободных/платных уровней"},
+      {"name": "count_free_4", "kind": "Lemma", "role": "★ ЧЕТЫРЕ структурных уровня аксиомо-свободны"},
+      {"name": "count_priced_1", "kind": "Lemma", "role": "ОДИН (неструктурированный) — граница AC/DC/WKL"},
+      {"name": "ladder_total", "kind": "Lemma", "role": "free+priced = длина лестницы"},
+      {"name": "level_finite", "kind": "Lemma", "role": "конечный уровень обитаем (decidable_list_choice)"},
+      {"name": "level_countable_choice", "kind": "Lemma", "role": "счётный уровень обитаем (nat_least)"},
+      {"name": "level_countable_dc", "kind": "Lemma", "role": "зависимый уровень обитаем (dc_chain_step)"},
+      {"name": "level_konig", "kind": "Lemma", "role": "König-уровень обитаем (path_edge)"},
+      {"name": "selection_without_choice_synthesis", "kind": "Theorem", "role": "★ КАПСТОУН: 4 свободных уровня + 1 платная граница + тезис"}
+    ],
+    "key_lemmas": [
+      {"name": "selection_without_choice_synthesis", "analysis": "Флагман вены B: собирает четыре машинно-проверенных свободных уровня (finite/countable/dependent/König) в одну теорему и формулирует объединяющий тезис — выбор аксиомо-свободен ТОЧНО когда разрешимый тест + порядок (Rule, L5) его разрешают, а AC/DC/WKL — цена ровно структурного дефицита (неразрешимый тест/неупорядоченный носитель). Все уровни — итерации канонического наименьшего селектора (nat_least/first_witness).", "tags": ["choice-ladder", "synthesis", "vein-B", "thesis"]},
+      {"name": "count_free_4", "analysis": "Численный костяк тезиса: из пяти уровней лестницы 4 структурных — аксиомо-свободны, ровно 1 (неструктурированная граница) платный. reflexivity-факт, но он КОНКРЕТИЗИРУЕТ «где именно проходит цена выбора» в виде конечного перечня.", "tags": ["count", "ladder", "boundary"]}
+    ],
+    "uniqueness": {
+      "score": 5,
+      "level": "synthesis+observation",
+      "claim": "Объединяющий тезис вены B: выбор аксиомо-свободен ⟺ разрешимый тест + порядок его разрешают; AC = цена структурного дефицита. Четыре уровня = итерации наименьшего селектора; selection-freedom ⟺ decidability = та же граница, что финитизация (H1/H48), с двух сторон.",
+      "caveat": "Никакой новой математики — связка результатов нити под тезисом. Сила — в синтезе/наблюдении (selection-freedom ⟺ decidability), не в новой теореме. Параллельный поток (не мой)."
+    },
+    "tags": ["no-AC", "choice-ladder", "vein-B", "synthesis", "decidability", "selection", "P4"]
+  },
+  {
+    "num": 118,
+    "path": "src/cs/SemanticRecursion.v",
+    "cluster": "cs",
+    "classical_counterpart": "Kleene's recursion theorem and the Leibniz-vs-reduction notions of recursion are classical; NEW is the explicit reconciliation and a second (operational) derivation of Rice.",
+    "title": "Reconciling Leibniz-recursion with reduction-recursion; Rice from semantic recursion",
+    "topic": "Reconciles the two recursion notions (Leibniz-equality vs reduction) — leibniz_recursion_is_semantic — and re-derives the Rice diagonal from a semantic (reduction-grounded) recursion, grounded in the λ-machine.",
+    "role": "The «примирение» (reconciliation) file. Imports BoundaryDecidability + RiceRoleLimit + LambdaGrounding + LambdaRecursion (explicit, since LambdaRecursion does not re-export Term/step).",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["cs.BoundaryDecidability", "cs.RiceRoleLimit", "cs.LambdaGrounding", "cs.LambdaRecursion"],
+    "err": {
+      "elements": "программы/термы; отношение редукции reduces; Rice-диагональ.",
+      "roles": "семантическая рекурсия = роль-самопорождение через поведение; Leibniz-рекурсия = роль через равенство.",
+      "rules": "leibniz_recursion_is_semantic мостит две формы; reduces — индуктивная редукция.",
+      "p4": "рекурсия как процесс (reduction) против рекурсии как завершённого равенства (Leibniz): примирение показывает, что Element-сторона (operational) согласована с role-limit-выводом Rice."
+    },
+    "lemmas": [
+      {"name": "rice_diagonal_from_sem_recursion", "kind": "Theorem", "role": "★ Rice-диагональ из семантической рекурсии"},
+      {"name": "leibniz_recursion_is_semantic", "kind": "Lemma", "role": "★ Leibniz-рекурсия = семантическая (примирение двух форм)"},
+      {"name": "rice_from_sem_recursion", "kind": "Theorem", "role": "Rice выведен от семантической рекурсии"},
+      {"name": "reduces", "kind": "Inductive", "role": "отношение многошаговой редукции (заземление)"},
+      {"name": "recursion_grounded", "kind": "Lemma", "role": "рекурсия заземлена в reduces (λ-машина)"}
+    ],
+    "key_lemmas": [
+      {"name": "leibniz_recursion_is_semantic", "analysis": "Ядро «примирения»: показывает, что рекурсия в смысле Leibniz-равенства совпадает с семантической (поведенческой, reduction-grounded) рекурсией. Снимает кажущееся противоречие между двумя способами говорить о рекурсии в репо — операционным (Y, reduces) и пропозициональным (равенство), стыкуя Element- и role-limit-стороны.", "tags": ["reconciliation", "recursion", "leibniz", "semantic"]},
+      {"name": "rice_from_sem_recursion", "analysis": "Замыкает: Rice получается и из СЕМАНТИЧЕСКОЙ рекурсии, заземлённой в reduces/λ — то есть неразрешимость семантики выводится в операционной форме, а не только категориально (RecursionTheorem). Две дороги к Rice сходятся.", "tags": ["rice", "semantic", "grounded"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "synthesis+observation",
+      "claim": "Примирение двух понятий рекурсии (Leibniz-равенство vs редукция) и вывод Rice из семантической, заземлённой в λ рекурсии — стыковка операционной и пропозициональной сторон.",
+      "caveat": "Эквивалентность форм рекурсии концептуально известна; вклад — явное внутрирепозиторное примирение и второй (операционный) путь к Rice."
+    },
+    "tags": ["recursion", "reconciliation", "rice", "semantic", "lambda", "grounded"]
+  },
+  {
+    "num": 119,
+    "path": "src/cs/TarskiUndefinability.v",
+    "cluster": "cs",
+    "classical_counterpart": "Tarski's undefinability of truth (1936) is classical; NEW is its identification as a face of the one Lawvere diagonal, tied to the other repo faces.",
+    "title": "Tarski's undefinability of truth as a face of the one diagonal (via Lawvere)",
+    "topic": "Proves no truth predicate can exist: the self-referential diagonal (from recursion) forces P<->~P, which is absurd (iff_not_self_absurd). Packaged both from recursion and directly from Lawvere.",
+    "role": "Vein-E face (truth). Feeds RussellViaLawvere. Connects to RecursionTheorem's diagonal.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib", "cs.LawvereFixedPoint / recursion diagonal"],
+    "err": {
+      "elements": "пропозиции; предикат истинности True_pred; диагональное предложение.",
+      "roles": "истинностный предикат = реифицированный role-limit (хочет решать всю семантику); диагональ = роль-самоотрицание.",
+      "rules": "диагональ ⟹ P<->~P; iff_not_self_absurd: P<->~P ложно.",
+      "p4": "тотальный предикат истины = реификация role-limit-семантики в Element = категориальная ошибка; запрещена одной диагональю (Ловер)."
+    },
+    "lemmas": [
+      {"name": "iff_not_self_absurd", "kind": "Lemma", "role": "(P<->~P)→False — самоотрицание абсурдно"},
+      {"name": "diag_from_recursion", "kind": "Lemma", "role": "диагональное предложение из рекурсии"},
+      {"name": "tarski_no_truth_predicate", "kind": "Theorem", "role": "★ нет тотального предиката истинности (Тарский)"},
+      {"name": "tarski_from_lawvere", "kind": "Theorem", "role": "★ Тарский напрямую из Ловера"}
+    ],
+    "key_lemmas": [
+      {"name": "tarski_no_truth_predicate", "analysis": "Неопределимость истины как грань одной диагонали: предполагаемый тотальный предикат истинности порождает (через диагональ из рекурсии) самоотрицающее предложение P<->~P, абсурдное по iff_not_self_absurd. Семантика истины не реифицируется в Element-предикат — тот же запрет, что у halting/Rice.", "tags": ["tarski", "truth", "diagonal", "role-limit"]},
+      {"name": "tarski_from_lawvere", "analysis": "Двойная упаковка: Тарский выведен и от рекурсии, и НАПРЯМУЮ от Ловера — явно помещая неопределимость истины в тот же корень, что Кантор/halting/Рассел. Делает вену E замкнутой: все «невозможности» — инстансы одной неподвижной точки.", "tags": ["tarski", "lawvere", "unification"]}
+    ],
+    "uniqueness": {
+      "score": 4,
+      "level": "synthesis+observation",
+      "claim": "Неопределимость истины Тарского встроена как грань ОДНОЙ диагонали (Ловер), стыкуясь с Кантор/halting/Рассел — Prop-сторона унификации вены E.",
+      "caveat": "Теорема Тарского классична; вклад — её опознание как инстанса Ловера и стыковка с остальными гранями репо, не новый результат."
+    },
+    "tags": ["tarski", "truth", "diagonal", "lawvere", "vein-E", "unification"]
+  }
+]

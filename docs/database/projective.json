@@ -1,0 +1,255 @@
+[
+  {
+    "num": 1040,
+    "path": "src/projective/ConnectionTheorems.v",
+    "cluster": "projective",
+    "classical_counterpart": "Inverse/projective limits in topology and category theory are classical; NEW is the unifying observation that ToS's Cauchy reals, quantum states, level hierarchy, intervals AND Banach iterations are ALL instances of one projective (P4) system — and that this is why P4 avoids the actual-infinity paradoxes.",
+    "title": "Everything is a projective system: Cauchy reals, Q-states, levels, intervals, Banach — one P4 framing",
+    "topic": "Connection theorems showing the major ToS process-constructions are projective: Cauchy sequences are projective-compatible, the Q-tower is complete, quantum states/normalization are projective observables, the level hierarchy and nested intervals are projective systems, Banach iterations are projective-Cauchy, and P4_is_projective / projective_avoids_paradoxes.",
+    "role": "Synthesis hub of the projective branch (vein C): unifies CauchyReal, QState, Level, Banach under one projective umbrella. Self-contained.",
+    "qed": 22, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "ToS: projective modules (local)"],
+    "err": {
+      "elements": "проективные системы; совместимые семейства (Cauchy, состояния, уровни, интервалы).",
+      "roles": "проективный предел = роль (X как процесс); проекции связывают стадии.",
+      "rules": "cauchy_as_projective; levels_as_projective; banach_as_projective; P4_is_projective.",
+      "p4": "P4 ЕСТЬ проективная система: каждая стадия конечна/актуальна (Element), объект — совместимый процесс (role-limit); projective_avoids_paradoxes — почему нет актуальной бесконечности."
+    },
+    "lemmas": [
+      {"name": "cauchy_is_proj_compatible/Q_tower_id_proj/cauchy_as_projective/Q_tower_complete/cauchy_equivuiv_is_proj_equiv", "kind": "Theorem", "role": "★ числа Коши как проективная система"},
+      {"name": "qstate_as_projective_obs/ip_agrees_at_dim/qstate_normalization_obs", "kind": "Theorem", "role": "квантовые состояния как проективные наблюдаемые"},
+      {"name": "level_projection_obs/levels_as_finite_proj_sys/levels_as_projective", "kind": "Theorem", "role": "иерархия уровней как проективная система"},
+      {"name": "intervals_as_projective/interval_arithmetic_consistent/nested_interval_inc_cauchy/dec_cauchy", "kind": "Theorem", "role": "вложенные интервалы как проективные"},
+      {"name": "banach_iterations_cauchy_obs/_cauchy/banach_as_projective/fixed_point_uniqueness_projective", "kind": "Theorem", "role": "итерации Банаха как проективные"},
+      {"name": "P4_is_projective/projective_avoids_paradoxes/projective_framework_summary", "kind": "Theorem", "role": "★ P4=проективно; избегает парадоксов"}
+    ],
+    "key_lemmas": [
+      {"name": "P4_is_projective", "analysis": "Центральное наблюдение: принцип P4 (конечная актуальность) ЕСТЬ проективная система — конечные стадии + совместимые проекции, объект существует как процесс, не как завершённый предел. Объединяет вену C (ℝ/состояние/уровень/интервал = процесс) под одной категорной структурой.", "tags": ["P4", "projective", "vein-C", "synthesis"]},
+      {"name": "projective_avoids_paradoxes", "analysis": "Проективная формулировка ОБЪЯСНЯЕТ, почему P4 избегает парадоксов актуальной бесконечности: ни одна стадия не содержит завершённого бесконечного объекта (ср. вена E, no_banach_tarski в ProcessMeasure). Связывает онтологию процесса с разрешением парадоксов.", "tags": ["paradox", "no-actual-infinity", "vein-E-adjacent"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Cauchy-реалы, квантовые состояния, иерархия уровней, интервалы и итерации Банаха — ВСЕ суть один проективный (P4) объект; projective_avoids_paradoxes объясняет отсутствие актуальной бесконечности. Вена C, узел-синтез.",
+      "caveat": "Проективные/обратные пределы — классика топологии и теории категорий; вклад — наблюдение, что разрозненные ToS-конструкции суть одна проективная система, не новая математика пределов."
+    },
+    "tags": ["projective", "P4", "vein-C", "cauchy", "synthesis", "new-framing"]
+  },
+  {
+    "num": 1041,
+    "path": "src/projective/ProcessMeasure.v",
+    "cluster": "projective",
+    "classical_counterpart": "Finitely-additive measures, refinement of partitions, and integration as a limit of step functions are classical; NEW is the P4/projective framing of measure as a refinement PROCESS with consistent totals — explicitly excluding Banach-Tarski (no non-measurable choice paradoxes).",
+    "title": "Measure as a process over Q: refinement system, consistent totals, no Banach-Tarski",
+    "topic": "Finite measures with cells and totals, uniform/point measures, pair-summing under dyadic refinement preserving the total, a compatible ProcessMeasure with constant total, stage integrals (monotone, scale, Lipschitz, Cauchy), finite additivity, and an explicit no_banach_tarski.",
+    "role": "Measure/integration leaf of the projective branch (vein C). Self-contained (QArith).",
+    "qed": 32, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "конечные меры (ячейки+тотал); дискретные веса; рефайнмент-разбиения.",
+      "roles": "мера = роль-предел процесса рефайнмента; интеграл как предел ступенчатых.",
+      "rules": "refine_preserves_total; pm_total_constant; stage_integral_cauchy; finite_additivity.",
+      "p4": "каждая стадия меры конечна и точна (Element); мера — совместимый процесс рефайнмента (role-limit); no_banach_tarski — нет неизмеримых множеств/парадоксов выбора."
+    },
+    "lemmas": [
+      {"name": "pow2/_pos/_S/FiniteMeasure/fm_total/fm_cell/_nonneg", "kind": "Definition/Lemma", "role": "конечная мера, ячейки"},
+      {"name": "uniform_weights/_length/_nonneg/uniform_measure/point_weights/_length/_nonneg/point_measure", "kind": "Definition/Theorem", "role": "равномерная и точечная меры"},
+      {"name": "sum_pairs/_nonneg/_half_length/_pow2_length/refine_proj/fold_left_Qplus_app/_cons/sum_pairs_total/refine_preserves_total", "kind": "Definition/Theorem", "role": "★ рефайнмент сохраняет тотал"},
+      {"name": "fm_compatible/ProcessMeasure/pm_total_consistent/_constant", "kind": "Definition/Theorem", "role": "★ совместимая мера-процесс, тотал постоянен"},
+      {"name": "sample_values/_length/stage_integral/_scale/_const_obs/_mono_obs/is_lipschitz/integral_diff_bound_obs/process_integral_cauchy_obs/_nonneg_obs", "kind": "Definition/Theorem", "role": "интеграл как процесс (Коши)"},
+      {"name": "no_banach_tarski/refine_monotone/fm_to_step/_widths_nonneg/fm_step_integral_obs/uniform_compatible_obs/uniform_pm_exists_obs/P4_measure_as_process/finite_additivity/pm_convex_obs", "kind": "Theorem", "role": "★ нет Банаха-Тарского; мера=процесс; конечная аддитивность"}
+    ],
+    "key_lemmas": [
+      {"name": "P4_measure_as_process", "analysis": "Мера ЕСТЬ процесс рефайнмента с совместимыми (сохраняющими тотал) стадиями — вена C. Интеграл — Cauchy-процесс ступенчатых функций. Никаких сигма-алгебр/полной аддитивности как завершённых объектов: только конечная аддитивность на актуальных стадиях.", "tags": ["measure", "process", "vein-C", "refinement"]},
+      {"name": "no_banach_tarski", "analysis": "Явно исключает парадокс Банаха-Тарского: процессная мера не допускает неизмеримых множеств (нет AC-выбора неизмеримых кусков). Связь вены C (мера=процесс) с веной E (нет парадоксов) и с settheory/ChoicePriceMap.", "tags": ["banach-tarski", "no-AC", "vein-E-adjacent"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Мера над Q как процесс рефайнмента с сохранением тотала + интеграл-Коши + конечная аддитивность, явно БЕЗ Банаха-Тарского — вена C (мера=процесс) на стыке с веной E (нет парадоксов выбора).",
+      "caveat": "Конечно-аддитивные меры и интеграл ступенчатыми функциями классичны; вклад — P4/проективное переобрамление меры как процесса и явное исключение неизмеримых множеств, не новая теория меры."
+    },
+    "tags": ["measure", "process", "no-banach-tarski", "vein-C", "new-framing"]
+  },
+  {
+    "num": 1042,
+    "path": "src/projective/ProcessOperator.v",
+    "cluster": "projective",
+    "classical_counterpart": "Linear operators on Hilbert space, the CCR [x,p]=i, unbounded position/momentum, and the operator algebra are standard QM; NEW only as a projective/process formalization over Q where operators act stagewise and unboundedness is a role-limit.",
+    "title": "Operators as processes over Q: CCR, unbounded position/momentum, operator algebra",
+    "topic": "Process operators with apply/eq/zero/id/scale/add, observables as process operators, position (unbounded, symmetric) and momentum (unbounded) operators, the commutator (antisymmetric, linear, Jacobi), CCR structure, position-momentum non-commutation, bounded operators, and P4_operators_are_processes.",
+    "role": "Operator-theory leaf of the projective branch; parallels physics/QObservable. Self-contained (QArith).",
+    "qed": 29, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "процессные операторы (действуют постадийно); наблюдаемые.",
+      "roles": "оператор = роль-преобразование процесса; коммутатор как роль-некоммутативность.",
+      "rules": "po_apply/po_add/po_scale; commutator_antisym; ccr_structural; position_unbounded.",
+      "p4": "ограниченные операторы — Element (действуют на каждой стадии); неограниченность позиции/импульса — role-limit (растёт со стадией); CCR постадийно."
+    },
+    "lemmas": [
+      {"name": "ProcessOp/po_apply/po_eq/_refl/_sym/_trans/po_zero/po_id/po_scale/po_add", "kind": "Definition/Lemma", "role": "процессные операторы и операции"},
+      {"name": "po_id_action/_zero_action/_scale_zero/_scale_one/_add_comm/_scale_distrib", "kind": "Theorem", "role": "алгебра операторов"},
+      {"name": "obs_to_po/diag_po/obs_to_po_action", "kind": "Definition/Theorem", "role": "наблюдаемые как операторы"},
+      {"name": "pos_eigenval/pos_eigenvec/position_op/pos_eigenval_nonneg/position_unbounded/_symmetric", "kind": "Definition/Theorem", "role": "★ позиция: неограничена, симметрична"},
+      {"name": "momentum_scale/_nonneg/momentum_unbounded", "kind": "Definition/Theorem", "role": "★ импульс неограничен"},
+      {"name": "commutator/_antisym_obs/map2_plus_neg_zero/_self_zero/_linear_obs/jacobi_identity_observation/ccr_structural/position_momentum_noncommuting", "kind": "Definition/Theorem", "role": "★ коммутатор, CCR, некоммутативность x,p"},
+      {"name": "is_bounded_op/zero_bounded/id_bounded/scale_bounded/tobs_is_process_op/bounded_preserves_normalizable/P4_operators_are_processes/process_op_algebra", "kind": "Definition/Theorem", "role": "★ операторы=процессы"}
+    ],
+    "key_lemmas": [
+      {"name": "P4_operators_are_processes", "analysis": "Операторы действуют ПОСТАДИЙНО на процессных состояниях — ограниченные операторы суть Element, тогда как неограниченные (позиция/импульс) корректно живут как role-limit (растущая норма). CCR [x,p] выражается структурно без завершённого бесконечномерного гильбертова пространства.", "tags": ["operator", "process", "P4", "CCR"]},
+      {"name": "position_momentum_noncommuting", "analysis": "Позиция и импульс не коммутируют (ccr_structural) — источник принципа неопределённости, формализованный над Q постадийно. Перекликается с heisenberg/ кластером и physics/InnerProductSpace.", "tags": ["non-commuting", "uncertainty", "CCR"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Квантовые операторы как процессы над Q: CCR и некоммутативность x,p постадийно, неограниченность как role-limit, ограниченные операторы как Element.",
+      "caveat": "Операторы, CCR и неограниченность x,p — стандартная КМ; вклад — проективно-процессная Q-формализация, не новая операторная теория."
+    },
+    "tags": ["operator", "CCR", "process", "quantum", "methods"]
+  },
+  {
+    "num": 1043,
+    "path": "src/projective/ProjectiveLimit.v",
+    "cluster": "projective",
+    "classical_counterpart": "The projective (inverse) limit of a metric/Frechet system and the Banach fixed-point principle on it are classical; NEW is the explicit Q construction where the Frechet partial distances are Cauchy, the limit element converges stagewise, and the Banach principle is proven on the projective system itself.",
+    "title": "Projective limit over Q: Frechet metric system, stagewise convergence, Banach on the limit",
+    "topic": "Metric projective systems with non-expanding projections, a per-stage and Frechet (weighted-sum) distance proven to be a metric, Cauchy/convergence in the projective sense, the limit element converging downward, projective contractions with a Banach principle and unique fixed point, and Q/QVec towers as instances.",
+    "role": "Core construction of the projective branch; consumed by ConnectionTheorems, QuantumTower. Self-contained (QArith).",
+    "qed": 38, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "метрические проективные системы; стадии с неэкспансивными проекциями.",
+      "roles": "проективный предел = роль-объект; Fréchet-метрика как роль-расстояние.",
+      "rules": "proj_dist_partial_triangle; frechet_controls_stage; proj_banach_principle; proj_fixed_unique.",
+      "p4": "каждая стадия конечна (Element); предел — Cauchy-процесс совместимых элементов (role-limit); Банах на самой проективной системе."
+    },
+    "lemmas": [
+      {"name": "MetricProjSys/mps_proj_nonexpand_iter/mps_dist_eq_zero/mps_elem_dist_zero", "kind": "Definition/Lemma", "role": "метрическая проективная система"},
+      {"name": "proj_dist_term/_partial/_nonneg/_bounded/_sym/_triangle/_zero/_compat", "kind": "Definition/Theorem", "role": "★ Fréchет-метрика на системе"},
+      {"name": "proj_dist_partial_nonneg/_inc/_bounded/_sym/partial_sum_plus/_triangle/_zero", "kind": "Theorem", "role": "свойства частичной метрики"},
+      {"name": "is_cauchy_proj/converges_proj/convergent_is_cauchy_proj/frechet_partials_cauchy/stage_dist_le_frechet/frechet_controls_stage", "kind": "Definition/Theorem", "role": "★ Cauchy/сходимость в проективном смысле"},
+      {"name": "proj_limit_elem/_converges/stage_convergence_downward/compat_limit_from_above/proj_shrinks_distance/frechet_bounds_stages/_tail_vanishes/agree_term_zero/agree_up_to_N_close", "kind": "Theorem", "role": "★ предельный элемент сходится постадийно"},
+      {"name": "ProjContraction/pc_iterate/_contract/_compat/_commute/_elem/_stagewise_cauchy/proj_banach_principle/proj_fixed_unique", "kind": "Definition/Theorem", "role": "★ Банах на проективной системе"},
+      {"name": "Q_is_metric_proj_sys/QVec_tower_is_metric_proj_sys/P4_limit_as_process/cauchy_seq_in_const_tower", "kind": "Theorem", "role": "Q/QVec как инстансы; P4-предел=процесс"}
+    ],
+    "key_lemmas": [
+      {"name": "proj_banach_principle", "analysis": "Принцип Банаха ДОКАЗАН на проективной системе: проективное сжатие имеет единственную неподвижную точку, построенную как Cauchy-процесс совместимых стадий. Переносит теорию неподвижной точки в процессную онтологию (ср. FixedPoint.v, RH=fixed-point в zeta/).", "tags": ["banach", "fixed-point", "projective", "process"]},
+      {"name": "P4_limit_as_process", "analysis": "Проективный предел ЕСТЬ процесс: Fréchet-метрика контролирует стадии (frechet_controls_stage), предельный элемент сходится сверху без завершённого предела. Математическое ядро вены C — формальная замена «предел-объект» на «совместимый процесс».", "tags": ["projective-limit", "process", "frechet", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Проективный предел над Q: Fréchet-метрика как настоящая метрика, постадийная сходимость, принцип Банаха на самой проективной системе — формальное ядро вены C (предел=процесс).",
+      "caveat": "Обратные пределы метрических/фреше-систем и Банах на них классичны; вклад — явное Q-построение как процессная онтология, не новая теория пределов."
+    },
+    "tags": ["projective-limit", "frechet", "banach", "process", "vein-C", "new-framing"]
+  },
+  {
+    "num": 1044,
+    "path": "src/projective/ProjectiveStrengthened.v",
+    "cluster": "projective",
+    "classical_counterpart": "Strengthened/auxiliary projective-system lemmas; standard once ProjectiveSystem/ProjectiveLimit are in place.",
+    "title": "Projective system, strengthened: finite-stage elements, commutators, unbounded spectra",
+    "topic": "Strengthening lemmas: the constant Q-system projection is identity, P4 projective elements are finite at each stage and compatible, constant processes are projective elements, the self-commutator is zero, position spectrum is unbounded with growing eigenvalues, and norm-boundedness at stages.",
+    "role": "Auxiliary strengthening leaf for the projective branch. Self-contained (QArith).",
+    "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "проективные элементы (конечны на стадии); постоянные процессы.",
+      "roles": "усиливающие леммы — роль-поддержка системы.",
+      "rules": "P4_projective_element_finite_at_stage; commutator_self_is_zero; position_spectrum_unbounded.",
+      "p4": "проективный элемент конечен на каждой стадии (Element); неограниченный спектр позиции — role-limit."
+    },
+    "lemmas": [
+      {"name": "Q_const_sys_projection/const_sys_proj_id", "kind": "Definition/Theorem", "role": "проекция постоянной системы = id"},
+      {"name": "P4_projective_element_finite_at_stage/_compatibility/const_process_is_proj_elem", "kind": "Theorem", "role": "★ проективный элемент конечен на стадии"},
+      {"name": "commutator_self_is_zero/_structural", "kind": "Theorem", "role": "[a,a]=0, структура"},
+      {"name": "position_spectrum_unbounded/position_eigenvalues_grow", "kind": "Theorem", "role": "★ спектр позиции неограничен"},
+      {"name": "is_norm_bounded/norm_sq_nonneg_at/zero_norm_at/eigenstate_at_stage/projective_strengthened_synthesis", "kind": "Definition/Theorem", "role": "ограниченность нормы, итог"}
+    ],
+    "key_lemmas": [
+      {"name": "P4_projective_element_finite_at_stage", "analysis": "Усиление: каждый проективный (P4) элемент конечен на любой стадии и совместим между стадиями — формальная гарантия, что вена C никогда не требует завершённого бесконечного объекта.", "tags": ["P4", "finite-stage", "projective"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Усиливающие леммы проективной системы: конечность элементов на стадии, [a,a]=0, неограниченный спектр позиции как role-limit.",
+      "caveat": "Вспомогательные леммы поверх ProjectiveSystem/ProjectiveLimit; стандартны при наличии базовой конструкции."
+    },
+    "tags": ["projective", "P4", "strengthening", "methods"]
+  },
+  {
+    "num": 1045,
+    "path": "src/projective/ProjectiveSystem.v",
+    "cluster": "projective",
+    "classical_counterpart": "The category of projective (inverse) systems with objects, morphisms, identity/composition/associativity, products, and the inverse limit is classical category theory; NEW is the explicit Q/QVec instantiation casting CauchyReal, the level tower, intervals and fixed points as projective elements (the P4 projective principle).",
+    "title": "The projective system as a category over Q: objects, morphisms, products, towers; P4 principle",
+    "topic": "Projective systems and elements with a setoid equality, observe_at, projective morphisms with identity/composition/associativity, constant/trivial/product/shift systems, the Q-tower and Cauchy-as-projective-element, truncations, an InfVec type with stable nth, interval/level towers as projective, fixed points as projective elements, and the P4_projective_principle.",
+    "role": "Root/definitional file of the projective branch (vein C); every other projective file builds on it. Self-contained (QArith).",
+    "qed": 41, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "проективные системы ProjSys; элементы ProjElem; морфизмы ProjMor.",
+      "roles": "категория проективных систем — роль-каркас; observe_at = наблюдение стадии.",
+      "rules": "proj_compose_assoc; product/shift системы; cauchy_is_proj_elem; P4_projective_principle.",
+      "p4": "проективный элемент = совместимое семейство конечных стадий (Element-процесс); P4_projective_principle — формальное ядро онтологии процесса (вена C)."
+    },
+    "lemmas": [
+      {"name": "ProjSys/ProjElem/proj_elem_eq/_refl/_sym/_trans/observe_at/ps_proj_iter/_compat/pe_compat_iter", "kind": "Definition/Lemma", "role": "проективные системы и элементы (сетоид)"},
+      {"name": "ProjMor/proj_id/proj_compose/proj_mor_eq/_refl/_sym/_trans/_compose_id_l/_id_r/_assoc/proj_mor_apply/_elem_compat/_compose_apply/_id_apply", "kind": "Definition/Theorem", "role": "★ морфизмы: категориальные законы"},
+      {"name": "const_sys/const_elem/_all_eq/_eq/trivial_sys/trivial_elem/process_is_trivial_elem", "kind": "Definition/Theorem", "role": "постоянная/тривиальная системы"},
+      {"name": "prod_sys/prod_elem/prod_fst/_snd/_fst_elem/_snd_elem/shift_sys/shift_elem_observation", "kind": "Definition/Theorem", "role": "произведение и сдвиг систем"},
+      {"name": "Q_tower/Q_const_elem/cauchy_is_proj_elem/cauchy_first_term_elem/firstn_length_eq/nth_firstn_eq/qvec_truncate/_nth/_compat/nth_map2_Qplus/qv_add_nth_eq", "kind": "Definition/Theorem", "role": "★ Q-башня, Cauchy как проективный элемент"},
+      {"name": "QVec_tower/InfVec/infvec_nth/_stable/_eq_iff_nth/_zero/_zero_nth/_add/_add_nth/qv_scale_nth_eq/infvec_scale/_scale_nth", "kind": "Definition/Theorem", "role": "башня QVec, бесконечные векторы"},
+      {"name": "interval_sys/level_tower_is_projective/intervals_are_projective/endo_sys/fixed_point_is_proj_elem/observation_coherent/mor_observation_commute/prod_observe/P4_projective_principle", "kind": "Definition/Theorem", "role": "★ уровни/интервалы/неподвижные точки как проективные; P4-принцип"}
+    ],
+    "key_lemmas": [
+      {"name": "P4_projective_principle", "analysis": "Корневой принцип ветви: P4-объект = проективный элемент = совместимое семейство конечных наблюдений observe_at. Даёт ToS-онтологии процесса формальную категориальную опору — обратный предел. Все остальные projective-файлы и связь с CauchyReal/Level/интервалами идут отсюда.", "tags": ["P4", "projective-principle", "vein-C", "root"]},
+      {"name": "cauchy_is_proj_elem", "analysis": "Cauchy-последовательность (= вещественное число в ToS) ЕСТЬ проективный элемент Q-башни — конкретная привязка вены C (ℝ=процесс) к категории проективных систем. observe_at извлекает конечную стадию.", "tags": ["cauchy", "real", "projective-element"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "Категория проективных систем над Q (объекты/морфизмы/произведения/башни) с P4_projective_principle: P4-объект = проективный элемент. Корень вены C, формальная опора онтологии процесса.",
+      "caveat": "Категория обратных систем и обратный предел — классика теории категорий; вклад — Q-инстанцирование, кладущее CauchyReal/уровни/интервалы/неподвижные точки в одну проективную рамку, не новая категорная теория."
+    },
+    "tags": ["projective-system", "category", "P4", "vein-C", "root", "new-framing"]
+  },
+  {
+    "num": 1046,
+    "path": "src/projective/QuantumTower.v",
+    "cluster": "projective",
+    "classical_counterpart": "Hilbert space as a completion/inverse limit of finite-dimensional spaces, with Cauchy-Schwarz and self-adjoint observables, is standard; NEW only as the explicit Q 'tower' with a capped truncation metric making the QM Hilbert space a projective process.",
+    "title": "Quantum tower over Q: Hilbert space as a projective process with a capped metric",
+    "topic": "A capped truncation distance on QVec (a metric: nonneg, sym, triangle, bounded), infinite vectors with stable nth, tower inner products and norms, normalizability, tower Cauchy-Schwarz, tower quantum states and observables (self-adjoint), eigenstates, and that the QVec tower is a projective system.",
+    "role": "Quantum-Hilbert leaf of the projective branch; uses ProjectiveSystem/Limit. Self-contained (QArith).",
+    "qed": 35, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "QVec-башня; бесконечные векторы; усечения.",
+      "roles": "гильбертово пространство = роль-предел башни; наблюдаемая как self-adjoint роль.",
+      "rules": "capped_QVec_dist (метрика); tower_cauchy_schwarz; qvec_tower_is_proj_sys.",
+      "p4": "каждое усечение конечномерно (Element); гильбертово пространство — проективный процесс (role-limit); нормируемость постадийно."
+    },
+    "lemmas": [
+      {"name": "firstn_length_le/qvec_trunc/_nth/capped_QVec_dist/_nonneg/_sym/_bounded/_zero_refl/qmin1_triangle/_triangle/list_max_dist_firstn_le/trunc_nonexpand/_compat_eq", "kind": "Definition/Theorem", "role": "★ усечённая метрика (метрические аксиомы)"},
+      {"name": "InfVec/iv_nth/_stable/iv_zero/iv_eq/_refl/_sym/_trans", "kind": "Definition/Lemma", "role": "бесконечные векторы (сетоид)"},
+      {"name": "tower_ip_at/tower_norm_sq_at/_sym/_nonneg/_zero/is_normalizable/zero_is_normalizable/norm_sq_seq_nonneg", "kind": "Definition/Theorem", "role": "скалярное произведение и норма башни"},
+      {"name": "tower_cauchy_schwarz/Qsq_abs/Qabs_le_sq_plus_1/tower_ip_bounded", "kind": "Theorem", "role": "★ Коши-Шварц башни"},
+      {"name": "TowerQState/tqs_ip_at/_bounded/tqs_equiv/_refl/_sym/_trans", "kind": "Definition/Lemma", "role": "состояния башни"},
+      {"name": "TowerObservable/tobs_action_at/is_tower_eigenstate/tobs_self_adjoint_observation/qvec_tower_is_proj_sys/normalizable_sub_system/dim1_tower_is_cauchy/tqs_zero/_zero_ip/zero_eigenstate_observation/eigen_norm_sq_observation", "kind": "Definition/Theorem", "role": "★ наблюдаемые, башня=проективная система"}
+    ],
+    "key_lemmas": [
+      {"name": "qvec_tower_is_proj_sys", "analysis": "Гильбертово пространство КМ построено как проективная башня конечномерных Q-пространств — capped_QVec_dist даёт метрику, tower_cauchy_schwarz и self-adjoint наблюдаемые живут постадийно. Конкретизация вены C для квантовой механики: бесконечномерность — role-limit, не завершённый объект.", "tags": ["hilbert", "tower", "projective", "vein-C"]},
+      {"name": "tower_cauchy_schwarz", "analysis": "Неравенство Коши-Шварца доказано на башне (для нормируемых элементов) — обеспечивает корректность скалярного произведения в проективном пределе без обращения к завершённому бесконечномерному пространству.", "tags": ["cauchy-schwarz", "inner-product", "tower"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Гильбертово пространство КМ как проективная Q-башня: усечённая метрика, Коши-Шварц и self-adjoint наблюдаемые постадийно, башня — проективная система.",
+      "caveat": "Гильбертово пространство как пополнение/предел конечномерных стандартно; вклад — явная Q-башня с усечённой метрикой как процесс, не новая функан-конструкция."
+    },
+    "tags": ["hilbert", "tower", "projective", "quantum", "methods"]
+  }
+]

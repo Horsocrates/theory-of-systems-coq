@@ -1,0 +1,80 @@
+[
+  {
+    "num": 1830,
+    "path": "src/Log2FunctionalEq.v",
+    "cluster": "log2",
+    "classical_counterpart": "log(ab)=log a+log b and log2(2^k)=k are elementary; NEW is their formulation as Cauchy-PROCESS equalities over Q (~~): the Element-collapse (k*ln2)/ln2 ~~ k is PROVEN, while the deep series-additivity (Cauchy product / Mertens) is honestly written as a Prop (ln_mul_functional_equation), NOT faked with Admitted.",
+    "title": "The crest: log2(2^k)=k as a process-equality, H(1/2)=1 bit, functional-equation groundwork",
+    "topic": "ln_pow2 k := k*ln2 and log2_pow2 := (k*ln2)/ln2; the flagship log2_pow2_eq : log2(2^k) ~~ k (Element-collapse via assoc + self-cancellation ln2/ln2 + unit); corollaries k=0,1,3; H2_fair_one : H(1/2) ~~ 1 (fair-coin entropy = exactly one bit, via double negation); the +-algebra (1-(x(+)y)=(1-x)(1-y)), L(0) ~~ 0 (additive identity); and the deep functional equation written as a Prop horizon.",
+    "role": "Crest of the log2-as-process pair (builds on Log2Process). Vein C. Self-contained on CauchyReal/RealField/SeriesConvergence/LogZeta.",
+    "qed": 13, "admitted": 0, "axioms": 0,
+    "imports": ["ToS: CauchyReal", "RealField", "SeriesConvergence", "zeta.LogZeta", "Log2Process"],
+    "err": {
+      "elements": "процессы k·ln2, ln2, 1/ln2 — каждый Cauchy над Q, конечно-актуален на каждой стадии.",
+      "roles": "log2 как роль ln/ln2; на диадическом 2ᵏ роль СХЛОПЫВАЕТСЯ в целое k (Element).",
+      "rules": "ассоц. ·; самосокращение a·a⁻¹~~1; единица a·1~~a; функц. уравнение ln(ab)~~ln a+ln b (горизонт); 1−(x⊕y)=(1−x)(1−y).",
+      "p4": "log2(2ᵏ)=k — Element-сторона границы финитизации: процесс-частное сходится к ЦЕЛОМУ, т.к. ln2 точно сокращается. 0-аксиомно (только classic)."
+    },
+    "lemmas": [
+      {"name": "ln_pow2/log2_pow2", "kind": "Definition", "role": "ln(2ᵏ):=k·ln2; log2(2ᵏ):=(k·ln2)/ln2"},
+      {"name": "log2_pow2_eq", "kind": "Theorem", "role": "★ КРЕСТ: log2(2ᵏ) ~~ k для всех k (Element-схлопывание)"},
+      {"name": "log2_pow2_zero/one/three", "kind": "Corollary", "role": "конкретные k=0,1,3"},
+      {"name": "oplus/oplus_comm/oplus_zero_l/one_minus_oplus", "kind": "Definition/Lemma", "role": "★ алгебра ⊕: 1−(x⊕y)=(1−x)(1−y)"},
+      {"name": "log_series_term_zero/log_series_partial_zero/ln_proc_zero", "kind": "Lemma", "role": "★ L(0) ~~ 0 (аддитивная единица функц. уравнения)"},
+      {"name": "cauchy_neg_neg", "kind": "Lemma", "role": "двойное отрицание процесса −(−a)~~a"},
+      {"name": "H2_fair/H2_fair_one", "kind": "Definition/Theorem", "role": "★ H(½) ~~ 1 (энтропия честной монеты = 1 бит)"},
+      {"name": "ln_mul_functional_equation", "kind": "Definition (Prop)", "role": "★ глубокая половина креста как ДОКУМЕНТ (горизонт, не Admitted)"},
+      {"name": "log2_functional_synthesis", "kind": "Theorem", "role": "капстоун: log2(2ᵏ)=k ∀k + k=0,3 + H(½)=1"}
+    ],
+    "key_lemmas": [
+      {"name": "log2_pow2_eq", "analysis": "КРЕСТ задачи: log2(2ᵏ) ~~ k как РАВЕНСТВО ПРОЦЕССОВ (~~), не численный факт (2ᵏ вне радиуса сходимости ряда). Доказано Element-схлопывание (k·ln2)/ln2 ~~ k через ассоциативность + самосокращение ln2/ln2 (log2_two) + единицу. На диадическом ln2 ТОЧНО сокращается → процесс схлопывается в целое; на не-диадическом (3) сокращения нет → role-limit. Один механизм объясняет оба полюса границы финитизации. Честно: ln(2ᵏ) здесь ОПРЕДЕЛЁН как k·ln2 (аддитивность взята как структура); вывод этого из ряда — горизонт.", "tags": ["crest", "log2-pow", "process-equality", "vein-C", "element-collapse"]},
+      {"name": "ln_mul_functional_equation", "analysis": "Глубокая половина креста, выписанная как Prop (документ, НЕ Admitted): аддитивность ln из РЯДА L(x)+L(y)~~L(x+y−xy) — теорема о произведении Коши/Мертенса (настоящий вещ. анализ над Q, в репо отсутствует). Образец честности: точная формулировка недоказанного рядом с доказанным, без фальсификации.", "tags": ["functional-equation", "horizon", "cauchy-product", "honest"]},
+      {"name": "H2_fair_one", "analysis": "Энтропия честной монеты H(½) ~~ 1 — РОВНО один бит как process-equality (максимум бинарной энтропии по значению = log₂2). При p=1−p=½ оба ½-веса дают log₂½, поэтому H(½)=−log₂½ = −(−ln2/ln2) ~~ 1 через двойное отрицание. Общий H(p)≤H(½) (вогнутость) — горизонт.", "tags": ["entropy", "fair-coin", "one-bit", "process-equality"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "log2(2ᵏ)=k как process-equality (Element-схлопывание (k·ln2)/ln2~~k) + H(½)=1 бит + алгебра функц. уравнения, 0-аксиомно; глубокая series-аддитивность честно выписана как Prop-горизонт.",
+      "caveat": "Сами тождества (log аддитивность, log2(2ᵏ)=k, H(½)=1) элементарны; уникальность — в P4-формулировке как равенств ПРОЦЕССОВ над Q и в честном разрезе доказано/горизонт (Коши-произведение не фейкается Admitted), не новый матфакт."
+    },
+    "tags": ["log2", "process", "functional-equation", "entropy", "vein-C", "new-framing"]
+  },
+  {
+    "num": 1831,
+    "path": "src/Log2Process.v",
+    "cluster": "log2",
+    "classical_counterpart": "That log2(odd) is irrational (no a/b with 2^a=n^b) is classical (DyadicBits.v states it negatively, as a wall); NEW is supplying the POSITIVE object — log2 as a Cauchy PROCESS over Q (ln-series), so the irrationality becomes a role-limit DIAGNOSTIC of an actual process, not a non-existence statement. Vein C.",
+    "title": "log2 in bits as a PROCESS (Cauchy over Q), not a wall: ln-series core, log2(2)=1, log2(3) is a process",
+    "topic": "ln_series_cauchy (the ln-series L(x)=Sum x^m/m is Cauchy over Q for 0<=x<1, via comparison with the geometric series + LogZeta domination, replaying exp_series_cauchy); ln_proc, ln2_process := L(1/2), ln3_process := L(2/3); a 1/2 lower bound (monotone); log2_of := /ln2; the flagship log2_two : log2(2) ~~ 1 (self-cancellation, k=1 base of the crest); and log2_3_process_not_wall — log2(3) IS a Cauchy process + the DyadicBits irrationality diagnostic.",
+    "role": "Root of the log2-as-process pair. Reframes DyadicBits.v negatively-stated irrationality into a positive process object (vein C). Self-contained on CauchyReal/SeriesConvergence/RealField/LogZeta/DyadicBits.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["ToS: CauchyReal", "SeriesConvergence", "RealField", "zeta.LogZeta", "stdlib.DyadicBits"],
+    "err": {
+      "elements": "частичные суммы log_series_partial x M = Σ_{m=1}^M xᵐ/m — каждая стадия точна над Q; степени 2ᵏ; диадические аргументы.",
+      "roles": "ln-процесс = роль-величина (−ln(1−x) как Cauchy-объект); log2 = роль ln/ln2. Element=диадическое (схлопывается), role-limit=не-диадическое (предел иррационален).",
+      "rules": "ряд L(x)=Σxᵐ/m; доминирование log_series_term ≤ Qpow → сравнение → Cauchy; монотонность; рациональные границы.",
+      "p4": "бит-мера ТОЧНА ⟺ диадическая (вена A), но не-диадическая сторона — именованный ПРОЦЕСС (вена C), не дыра. 0-аксиомно (только classic через SeriesConvergence)."
+    },
+    "lemmas": [
+      {"name": "ln_series_cauchy", "kind": "Theorem", "role": "★ ЯДРО: ln-серия Cauchy над Q для 0≤x<1 (сравнение с геометрическим)"},
+      {"name": "ln_proc/ln2_process/ln3_process", "kind": "Definition", "role": "ln-процесс; ln2=L(½); ln3=L(⅔)"},
+      {"name": "cs_seq_ln2/log2_half_partial_lower/ln2_partial_increasing/ln2_inv_lb", "kind": "Lemma", "role": "стадии ln2, нижняя граница ½, монотонность"},
+      {"name": "ln2_inv/log2_of", "kind": "Definition", "role": "1/ln2; log2 := ln/ln2"},
+      {"name": "log2_two", "kind": "Theorem", "role": "★ log2(2) ~~ 1 (база креста k=1, самосокращение)"},
+      {"name": "log2_3_process_not_wall", "kind": "Theorem", "role": "★ log2(3) = процесс (Cauchy) + role-limit-диагностика (не стена)"},
+      {"name": "log2_process_synthesis", "kind": "Theorem", "role": "капстоун трёх граней"}
+    ],
+    "key_lemmas": [
+      {"name": "log2_3_process_not_wall", "analysis": "ПЕРЕОБРАМЛЕНИЕ DyadicBits и ответ на вопрос «иррациональность даёт процесс?» — ДА. Левое: ОБЪЕКТ существует (ln3-серия Cauchy над Q, доказано ядром), которого у DyadicBits не было. Правое: role-limit-ДИАГНОСТИКА сохранена (нет конечной битовой записи, log2_3_irrational). Вместе: иррациональность = процесс (вена C) + диагностика, а НЕ несуществование/стена. Завершает то, что DyadicBits оставил негативом.", "tags": ["irrationality-as-process", "vein-C", "dyadicbits-reframe", "role-limit"]},
+      {"name": "ln_series_cauchy", "analysis": "Ядро: ряд L(x)=Σxᵐ/m сходится (Cauchy над Q) для 0≤x<1 — даёт сам ОБЪЕКТ-процесс log2. Доказательство — сравнение с геометрическим Σxᵐ через доминирование log_series_term ≤ Qpow (уже в LogZeta), реплея паттерна exp_series_cauchy. Это «процесс» из переобрамления: объект, которого у DyadicBits не было.", "tags": ["ln-series", "cauchy", "comparison-test", "core"]},
+      {"name": "log2_two", "analysis": "log2(2) ~~ 1 как process-equality через самосокращение ln2/ln2 (cauchy_mul_inv_r_pos) — база креста (k=1 случай log2(2ᵏ)=k), без функц. уравнения. Поскольку ln(2)=ln2_process, log2(2)=ln2/ln2 ~~ 1.", "tags": ["log2-2", "self-cancellation", "crest-base"]}
+    ],
+    "uniqueness": {
+      "score": 3,
+      "level": "new-framing",
+      "claim": "log2 в битах как Cauchy-ПРОЦЕСС над Q (ln-серия), переобрамляющий DyadicBits: иррациональность log2(нечёт) = процесс (вена C) + диагностика, а не стена-несуществование; log2(2)~~1 базой креста. 0-аксиомно.",
+      "caveat": "Иррациональность log2(нечёт) и сходимость ln-ряда классичны; уникальность — в P4-объекте (процесс вместо стены) и связке вена-A (точная граница диадического) ∩ вена-C (предел=процесс), не новый матфакт."
+    },
+    "tags": ["log2", "process", "irrationality-as-process", "vein-C", "dyadicbits", "new-framing"]
+  }
+]

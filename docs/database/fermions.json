@@ -1,0 +1,161 @@
+[
+  {
+    "num": 154,
+    "path": "src/fermions/DiracOnGraph.v",
+    "cluster": "fermions",
+    "classical_counterpart": "The lattice Dirac operator, fermion doubling, the massless zero mode and chirality are standard lattice gauge theory; here only a small Q instance — NOT a derivation of the physical Dirac equation.",
+    "title": "Dirac operator on a graph over Q: zero mode, mass gap, doublers",
+    "topic": "Squared Dirac eigenvalue and fermion propagator on a graph, the massless zero mode, a massive gap, heavy doublers, chirality from L2, Dirac antisymmetry, and an N=4 spectrum check.",
+    "role": "Leaf of the fermions (SM-from-graph) branch. Self-contained (QArith). SM-from-distinction is OVER-BRANDED.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "решёточный оператор Дирака; собственные значения; пропагатор.",
+      "roles": "нулевая мода = безмассовый фермион (роль); киральность из L2.",
+      "rules": "massless_zero_mode; massive_gap; doubler_heavy; chirality_from_L2.",
+      "p4": "конечный решёточный спектр над Q (Element); НЕ вывод физического Дирака — over-branded ветвь."
+    },
+    "lemmas": [
+      {"name": "dirac_eigenvalue_sq/fermion_propagator_sq/massless_zero_mode/massive_gap/doubler_heavy", "kind": "Definition/Theorem", "role": "★ спектр Дирака, нулевая мода, дублёры"},
+      {"name": "eigenvalue_k1_N4/propagator_value/eigenvalue_grows_with_k/_with_mass/chirality_from_L2", "kind": "Theorem", "role": "рост собственных значений, киральность"},
+      {"name": "dirac_antisymmetric/n4_spectrum_check/dirac_on_graph_synthesis", "kind": "Theorem", "role": "антисимметрия, проверка спектра"}
+    ],
+    "key_lemmas": [
+      {"name": "massless_zero_mode", "analysis": "Безмассовая нулевая мода и тяжёлые дублёры — корректная решёточная картина фермионного удвоения над Q. Но это стандартная решёточная конструкция, не вывод физического Дирака; SM-from-graph здесь OVER-BRANDED.", "tags": ["dirac", "zero-mode", "doubling", "over-branded"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Оператор Дирака на графе над Q: нулевая мода, массовый зазор, тяжёлые дублёры, киральность из L2.",
+      "caveat": "Решёточный Дирак и удвоение фермионов классичны; вклад — Q-инстанс; формулировка SM-из-графа OVER-BRANDED."
+    },
+    "tags": ["fermions", "dirac", "lattice", "over-branded", "methods"]
+  },
+  {
+    "num": 155,
+    "path": "src/fermions/GaugeLoops.v",
+    "cluster": "fermions",
+    "classical_counterpart": "Gauge and self-energy loop corrections to the Higgs mass (positive gauge, sign structure) are standard radiative-correction bookkeeping; here only small Q sign computations.",
+    "title": "Gauge loops over Q: Higgs mass corrections (signs)",
+    "topic": "A 4-mode gauge loop sum, gauge and self-energy contributions to the Higgs mass, the total correction and its sign, with gauge positive and top negative.",
+    "role": "Leaf of the fermions/Higgs-correction branch (with TopLoop, HiggsDiagnostic). Self-contained.",
+    "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "петлевые вклады в массу Хиггса (gauge/self/top).",
+      "roles": "петля = роль-поправка; знак вклада как роль.",
+      "rules": "gauge_positive; self_positive; top_negative; total_sign.",
+      "p4": "конечные петлевые суммы над Q (Element); знаковая бухгалтерия поправок."
+    },
+    "lemmas": [
+      {"name": "gauge_loop_sum_4/delta_mH_gauge/delta_mH_self/our_delta_total", "kind": "Definition", "role": "петлевые суммы и вклады"},
+      {"name": "gauge_loop_value/gauge_positive/gauge_correction_value/self_positive/self_correction_value", "kind": "Theorem", "role": "★ gauge-вклад положителен"},
+      {"name": "top_negative/total_sign/total_correction_value/gauge_loops_synthesis", "kind": "Theorem", "role": "top отрицателен, суммарный знак"}
+    ],
+    "key_lemmas": [
+      {"name": "gauge_positive", "analysis": "Gauge-петля даёт положительный вклад в массу Хиггса, top — отрицательный — простая знаковая бухгалтерия радиационных поправок над Q. Содержательной уникальности нет.", "tags": ["gauge-loop", "higgs", "sign"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Gauge-петли над Q: знаки вкладов в массу Хиггса (gauge+, top−).",
+      "caveat": "Знаковая структура радиационных поправок стандартна; Q-вычисление без нового содержания."
+    },
+    "tags": ["fermions", "gauge-loop", "higgs", "exposition"]
+  },
+  {
+    "num": 156,
+    "path": "src/fermions/HiggsDiagnostic.v",
+    "cluster": "fermions",
+    "classical_counterpart": "That the top loop drives the Higgs mass-squared negative (hierarchy/naturalness bookkeeping) and gauge loops drive it positive is standard; here a small Q diagnostic.",
+    "title": "Higgs diagnostic over Q: top drives negative, gauge positive",
+    "topic": "The top loop drives the Higgs mass-squared negative, gauge drives positive, the total correction positive, a finite propagator, the mass hierarchy, Dirac spectrum from the graph, and Yukawa from L2.",
+    "role": "Diagnostic leaf of the fermions/Higgs branch. Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "вклады top/gauge в массу Хиггса; пропагатор.",
+      "roles": "диагностика знака массы² Хиггса как роль.",
+      "rules": "top_drives_negative; gauge_drives_positive; total_correction_positive.",
+      "p4": "конечные оценки над Q (Element); диагностический узел."
+    },
+    "lemmas": [
+      {"name": "top_drives_negative/gauge_drives_positive/total_correction_positive/propagator_finite", "kind": "Theorem", "role": "★ top−, gauge+, итог положителен"},
+      {"name": "mass_hierarchy/dirac_spectrum_from_graph/yukawa_from_L2/higgs_diagnostic_synthesis", "kind": "Theorem", "role": "иерархия масс, Юкава из L2"}
+    ],
+    "key_lemmas": [
+      {"name": "top_drives_negative", "analysis": "Top-петля тянет массу² Хиггса вниз, gauge — вверх (диагностика натуральности) — стандартная бухгалтерия над Q, без нового результата.", "tags": ["higgs", "top", "naturalness"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Диагностика Хиггса над Q: top тянет массу² вниз, gauge вверх, суммарная поправка положительна.",
+      "caveat": "Бухгалтерия натуральности Хиггса стандартна; диагностический Q-узел без нового содержания."
+    },
+    "tags": ["fermions", "higgs", "diagnostic", "exposition"]
+  },
+  {
+    "num": 157,
+    "path": "src/fermions/TopLoop.v",
+    "cluster": "fermions",
+    "classical_counterpart": "The top-quark loop correction to the Higgs mass (proportional to N_c colors, negative) is a standard one-loop result; here only a small Q instance.",
+    "title": "Top loop over Q: color-factor correction to the Higgs mass",
+    "topic": "The number of colors N_c, a 4-mode top loop sum, the Higgs mass-squared correction, tree mass, the loop positive then the correction negative, growth with N_c, and the need for gauge loops.",
+    "role": "Leaf of the fermions/Higgs-correction branch. Self-contained.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "цветовой фактор N_c; петлевая сумма top.",
+      "roles": "top-петля = роль-поправка (∝ N_c); древесная масса.",
+      "rules": "top_loop_sum_4; top_correction negative; grows_with_N.",
+      "p4": "конечная петлевая сумма над Q (Element); поправка растёт с N_c."
+    },
+    "lemmas": [
+      {"name": "N_c/top_loop_sum_4/delta_mH_sq/mH_sq_tree", "kind": "Definition", "role": "цвета, петлевая сумма, древесная масса"},
+      {"name": "top_loop_positive/top_loop_value/top_loop_negative/top_correction_value/tree_plus_top", "kind": "Theorem", "role": "★ значение и знак top-поправки"},
+      {"name": "top_loop_at_m1/top_correction_at_m1/top_loop_positive_m1/grows_with_N/need_gauge/top_loop_synthesis", "kind": "Theorem", "role": "рост с N_c, нужны gauge-петли"}
+    ],
+    "key_lemmas": [
+      {"name": "grows_with_N", "analysis": "Top-поправка растёт с числом цветов N_c — корректный цветовой фактор одной петли над Q. Стандартный результат, не новый.", "tags": ["top-loop", "color-factor", "higgs"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Top-петля над Q: поправка к массе Хиггса ∝ N_c, растёт с числом цветов.",
+      "caveat": "Одно-петлевая top-поправка стандартна; Q-инстанс без нового содержания."
+    },
+    "tags": ["fermions", "top-loop", "higgs", "exposition"]
+  },
+  {
+    "num": 158,
+    "path": "src/fermions/YukawaCoupling.v",
+    "cluster": "fermions",
+    "classical_counterpart": "That the top Yukawa coupling is ~1 and dominates the fermion mass spectrum (bottom negligible) is standard SM phenomenology; here a small Q instance with 'Yukawa from L2'.",
+    "title": "Yukawa coupling over Q: top dominance",
+    "topic": "The observed top and bottom Yukawa couplings, top dominance, fermion mass from Yukawa, top Yukawa ~1, bottom negligible, the mass ratio, and 'Yukawa is L2'.",
+    "role": "Leaf of the fermions branch (mass generation). Self-contained.",
+    "qed": 9, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "Юкава-константы (top/bottom); массы фермионов.",
+      "roles": "Юкава = роль-связь массы (из L2); top доминирует.",
+      "rules": "top_yukawa_one; bottom_negligible; mass_from_yukawa.",
+      "p4": "конечные Q-значения констант (Element); Юкава как L2-роль."
+    },
+    "lemmas": [
+      {"name": "y_top_observed/y_bottom/top_dominance/fermion_mass", "kind": "Definition", "role": "Юкава-константы, масса"},
+      {"name": "top_yukawa_one/bottom_negligible/top_dominates/mass_from_yukawa", "kind": "Theorem", "role": "★ top Юкава ~1, доминирует"},
+      {"name": "bottom_mass_small/mass_ratio/top_dominance_positive/yukawa_is_L2/yukawa_coupling_synthesis", "kind": "Theorem", "role": "малость bottom, Юкава=L2"}
+    ],
+    "key_lemmas": [
+      {"name": "top_dominates", "analysis": "Top-Юкава ~1 доминирует над bottom — стандартная феноменология масс СМ над Q. Привязка «Юкава=L2» — модельная, не вывод.", "tags": ["yukawa", "top-dominance"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Юкава над Q: top-связь ~1 доминирует, bottom пренебрежимо мала, Юкава=L2-роль.",
+      "caveat": "Доминирование top-Юкавы — стандартная феноменология СМ; Q-инстанс без нового содержания."
+    },
+    "tags": ["fermions", "yukawa", "top", "exposition"]
+  }
+]

@@ -1,0 +1,450 @@
+[
+  {
+    "num": 70,
+    "path": "src/category/EquivalenceOfCategories.v",
+    "cluster": "category",
+    "classical_counterpart": "Equivalence of categories and its characterization (fully faithful + essentially surjective) are classical; NEW: nothing — a setoid-based constructive formalization (CatEquiv record, unit/counit natural isos, F essentially surjective).",
+    "title": "Equivalence of categories: CatEquiv, fully-faithful + essentially-surjective",
+    "topic": "The CatEquiv record (functors both ways with natural-iso unit/counit), components are isos, F and G essentially surjective, F preserves isos, and equivalence is symmetric.",
+    "role": "Constructive (setoid) category theory: equivalence. Builds on the setoid category core. ",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core (Category/Functor/NaturalIso)"],
+    "err": {
+      "elements": "категории C,D; функторы F,G; естественные изоморфизмы unit/counit.",
+      "roles": "эквивалентность как роль-двусторонняя-обратимость; ess-surjective/full/faithful как роли функтора.",
+      "rules": "CatEquiv = F,G + natural iso unit/counit; компоненты — изо.",
+      "p4": "эквивалентность конструктивна (setoid-равенство), без классических аксиом."
+    },
+    "lemmas": [
+      {"name": "CatEquiv", "kind": "Record", "role": "эквивалентность: функторы обе стороны + natural iso unit/counit"},
+      {"name": "ce_unit_is_nat_iso/ce_counit_is_nat_iso", "kind": "Lemma", "role": "unit/counit — естественные изоморфизмы"},
+      {"name": "is_ess_surjective/is_faithful/is_full", "kind": "Definition", "role": "существенно сюръективный/верный/полный функтор"},
+      {"name": "equiv_counit_components_iso/equiv_unit_components_iso", "kind": "Lemma", "role": "компоненты — изоморфизмы"},
+      {"name": "equiv_F_ess_surjective/equiv_G_ess_surjective", "kind": "Lemma", "role": "★ F,G существенно сюръективны"},
+      {"name": "equiv_sym", "kind": "Definition", "role": "симметрия эквивалентности"},
+      {"name": "equiv_F_preserves_iso", "kind": "Lemma", "role": "F сохраняет изоморфизмы"}
+    ],
+    "key_lemmas": [
+      {"name": "equiv_F_ess_surjective", "analysis": "Из эквивалентности следует существенная сюръективность F — половина характеризации «эквивалентность ⟺ fully faithful + ess. surjective». Конструктивно над setoid-категориями, без выбора/классики.", "tags": ["equivalence", "essentially-surjective"]},
+      {"name": "equiv_sym", "analysis": "Эквивалентность симметрична (меняем F↔G, unit↔counit) — делает её отношением эквивалентности на категориях. Структурная аккуратность setoid-подхода.", "tags": ["symmetry", "equivalence"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Эквивалентность категорий конструктивно над setoid-категориями: CatEquiv, естественные изо unit/counit, существенная сюръективность.",
+      "caveat": "Эквивалентность категорий — стандартная теория; вклад — setoid/конструктивное исполнение, не новый результат."
+    },
+    "tags": ["category-theory", "equivalence", "setoid", "constructive", "methods"]
+  },
+  {
+    "num": 71,
+    "path": "src/category/FunctorCategory.v",
+    "cluster": "category",
+    "classical_counterpart": "The functor category [C,D] (functors as objects, natural transformations as morphisms) is classical; NEW: nothing — its setoid-based construction with componentwise iso characterization.",
+    "title": "The functor category [C,D]",
+    "topic": "Natural-transformation equality, the functor category FunctorCat C D as a Category, morphism-equality iff componentwise, identity/composition components, and componentwise iso characterization.",
+    "role": "Constructive category theory: functor categories. Setoid-based.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core"],
+    "err": {
+      "elements": "функторы C→D (объекты); естественные преобразования (морфизмы).",
+      "roles": "[C,D] как категория функторов; компонентное равенство как роль.",
+      "rules": "nt_eq покомпонентно; FunctorCat — категория; изо покомпонентно.",
+      "p4": "функторная категория конструктивна (setoid-равенство преобразований)."
+    },
+    "lemmas": [
+      {"name": "nt_eq", "kind": "Definition", "role": "равенство естественных преобразований (покомпонентно)"},
+      {"name": "FunctorCat", "kind": "Definition", "role": "★ категория функторов [C,D]"},
+      {"name": "FunctorCat_mor_eq_iff", "kind": "Lemma", "role": "равенство морфизмов ⟺ покомпонентно"},
+      {"name": "FunctorCat_id_component/comp_component", "kind": "Lemma", "role": "компоненты id и композиции"},
+      {"name": "FunctorCat_iso_componentwise", "kind": "Lemma", "role": "★ изо в [C,D] ⟺ покомпонентно изо"}
+    ],
+    "key_lemmas": [
+      {"name": "FunctorCat", "analysis": "[C,D] как настоящая Category (функторы-объекты, естественные преобразования-морфизмы) над setoid-равенством — фундамент для Йонеды и пределов в функторных категориях.", "tags": ["functor-category", "construction"]},
+      {"name": "FunctorCat_iso_componentwise", "analysis": "Изоморфизм в [C,D] ⟺ покомпонентный изоморфизм (естественный изо) — ключевая характеризация, используемая в эквивалентностях/Йонеде.", "tags": ["iso", "componentwise"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Функторная категория [C,D] конструктивно над setoid: построение + покомпонентная характеризация изоморфизмов.",
+      "caveat": "Стандартная конструкция; ценность инфраструктурная (под Йонеду/пределы)."
+    },
+    "tags": ["category-theory", "functor-category", "setoid", "exposition"]
+  },
+  {
+    "num": 72,
+    "path": "src/category/IdentityEquivalence.v",
+    "cluster": "category",
+    "classical_counterpart": "That a category is equivalent to itself (the identity equivalence) is trivial classical category theory; NEW: nothing — the explicit setoid construction of id_equiv as a CatEquiv.",
+    "title": "The identity equivalence C ~ C",
+    "topic": "Natural transformations between the identity functor and its self-composition, the identity equivalence id_equiv as a CatEquiv, its unit components, and its essential surjectivity.",
+    "role": "Constructive category theory: a base CatEquiv instance. Setoid-based.",
+    "qed": 2, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core, EquivalenceOfCategories"],
+    "err": {
+      "elements": "тождественный функтор и его самокомпозиция; естественные преобразования между ними.",
+      "roles": "id_equiv как базовая эквивалентность C~C.",
+      "rules": "nt между Id и Id∘Id; id_equiv — CatEquiv.",
+      "p4": "тождественная эквивалентность конструктивна (базовый инстанс)."
+    },
+    "lemmas": [
+      {"name": "nt_id_to_comp/nt_comp_to_id", "kind": "Definition", "role": "преобразования Id ↔ Id∘Id"},
+      {"name": "id_equiv", "kind": "Definition", "role": "★ тождественная эквивалентность C~C"},
+      {"name": "id_equiv_unit_components", "kind": "Lemma", "role": "компоненты unit тождественны"},
+      {"name": "id_equiv_ess_surjective", "kind": "Lemma", "role": "тождественный функтор существенно сюръективен"}
+    ],
+    "key_lemmas": [
+      {"name": "id_equiv", "analysis": "Тождественная эквивалентность C~C как явный CatEquiv — база рефлексивности отношения эквивалентности категорий (с equiv_sym/трансзитивностью даёт setoid на категориях).", "tags": ["identity", "equivalence", "base-case"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Тождественная эквивалентность C~C как явный CatEquiv — база рефлексивности эквивалентности категорий.",
+      "caveat": "Тривиальная классика; ценность — базовый конструктивный инстанс."
+    },
+    "tags": ["category-theory", "equivalence", "identity", "setoid", "exposition"]
+  },
+  {
+    "num": 73,
+    "path": "src/category/NaturalIsomorphism.v",
+    "cluster": "category",
+    "classical_counterpart": "Natural isomorphisms (componentwise-iso natural transformations) and their groupoid structure are classical; NEW: nothing — a setoid formalization (refl/sym/trans, mono/epi components, natural inverse is natural).",
+    "title": "Natural isomorphisms: the groupoid of functors",
+    "topic": "NaturalIso between functors, identity/symmetry/transitivity, component characterization, components mono and epi, and that the componentwise inverse is itself natural.",
+    "role": "Constructive category theory: natural isos. Setoid-based. Used by equivalence/Yoneda.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core"],
+    "err": {
+      "elements": "функторы F,G,H; естественные преобразования и их компоненты.",
+      "roles": "естественный изоморфизм как роль-обратимость в [C,D]; группоид функторов.",
+      "rules": "NaturalIso рефлексивен/симметричен/транзитивен; обратное естественно.",
+      "p4": "естественные изо образуют группоид конструктивно (setoid)."
+    },
+    "lemmas": [
+      {"name": "NaturalIso", "kind": "Definition", "role": "естественный изоморфизм функторов"},
+      {"name": "nat_iso_id/sym/trans", "kind": "Lemma", "role": "★ группоидная структура (refl/sym/trans)"},
+      {"name": "nat_iso_components", "kind": "Lemma", "role": "характеризация через компоненты"},
+      {"name": "nat_iso_component_mono/epi", "kind": "Lemma", "role": "компоненты — моно и эпи"},
+      {"name": "natural_inverse_is_natural", "kind": "Lemma", "role": "★ покомпонентное обратное естественно"}
+    ],
+    "key_lemmas": [
+      {"name": "natural_inverse_is_natural", "analysis": "Покомпонентное обратное естественного изоморфизма само естественно — нетривиальный факт, делающий NaturalIso настоящей обратимостью в [C,D] (а не просто покомпонентной). Несущий для эквивалентностей.", "tags": ["natural-inverse", "naturality"]},
+      {"name": "nat_iso_trans", "analysis": "Транзитивность естественных изо — вместе с refl/sym даёт группоид функторов, на котором стоит понятие эквивалентности категорий.", "tags": ["groupoid", "transitivity"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Естественные изоморфизмы как группоид функторов конструктивно (refl/sym/trans, естественность обратного).",
+      "caveat": "Стандартная классика; ценность инфраструктурная (под эквивалентность/Йонеду)."
+    },
+    "tags": ["category-theory", "natural-isomorphism", "groupoid", "setoid", "exposition"]
+  },
+  {
+    "num": 74,
+    "path": "src/category/RightAdjointPreservesLimits.v",
+    "cluster": "category",
+    "classical_counterpart": "RAPL (right adjoints preserve limits) is classical; NEW: only a fragment — right adjoint preserves the terminal object, via adjunction transpose roundtrip, setoid-based.",
+    "title": "Right adjoint preserves limits (terminal-object fragment)",
+    "topic": "Adjunction unit naturality, the transpose roundtrip, and the proven fragment: a right adjoint preserves the terminal object.",
+    "role": "Constructive category theory: an RAPL fragment. Setoid-based. ",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core (Adjunction)"],
+    "err": {
+      "elements": "сопряжение C⊣D; unit/transpose; терминальный объект.",
+      "roles": "правый сопряжённый как сохраняющий пределы (здесь — терминал).",
+      "rules": "unit_natural; transpose roundtrip; правый сопряжённый сохраняет терминал.",
+      "p4": "доказан фрагмент RAPL (терминал); общий RAPL для всех пределов — role-limit, не здесь."
+    },
+    "lemmas": [
+      {"name": "unit_natural", "kind": "Definition", "role": "естественность unit сопряжения"},
+      {"name": "id_adjunction_unit_natural", "kind": "Lemma", "role": "unit тождественного сопряжения естественен"},
+      {"name": "right_adjoint_transpose_roundtrip", "kind": "Lemma", "role": "транспонирование туда-обратно = id"},
+      {"name": "right_adjoint_preserves_terminal", "kind": "Theorem", "role": "★ правый сопряжённый сохраняет терминал"}
+    ],
+    "key_lemmas": [
+      {"name": "right_adjoint_preserves_terminal", "analysis": "Фрагмент RAPL: правый сопряжённый сохраняет терминальный объект — доказано через roundtrip транспонирования сопряжения. Element-сторона теоремы RAPL; общий случай (все пределы) остаётся role-limit.", "tags": ["RAPL", "terminal", "adjunction"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Фрагмент RAPL (правый сопряжённый сохраняет терминал) через roundtrip транспонирования, конструктивно.",
+      "caveat": "RAPL классична; доказан лишь терминальный фрагмент, общий случай не собран."
+    },
+    "tags": ["category-theory", "adjunction", "RAPL", "terminal", "methods"]
+  },
+  {
+    "num": 75,
+    "path": "src/category/SetoidCategory.v",
+    "cluster": "category",
+    "classical_counterpart": "The category of setoids (sets-with-equivalence and equality-respecting maps) is classical constructive mathematics; NEW: nothing — the base SetoidCat construction the whole cluster builds on.",
+    "title": "The category of setoids (the cluster's base category)",
+    "topic": "Setoid (carrier + equivalence), SetoidMor (equality-respecting maps), identity/composition, morphism equality, SetoidCat as a Category, and the discrete-setoid embedding of types.",
+    "role": "Foundational base of the whole category cluster (a constructive set-like topos). Self-contained.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib"],
+    "err": {
+      "elements": "сетоиды (носитель + эквивалентность); сетоид-морфизмы.",
+      "roles": "SetoidCat как базовая категория множеств-с-равенством; дискретный сетоид как роль-вложение типов.",
+      "rules": "setoid_id/comp; SetoidMorEq покомпонентно; SetoidCat — категория.",
+      "p4": "сетоид-равенство = конструктивная интенсиональная идентичность (ToS); основа без классики."
+    },
+    "lemmas": [
+      {"name": "Setoid", "kind": "Record", "role": "носитель + отношение эквивалентности"},
+      {"name": "SetoidMor", "kind": "Record", "role": "отображение, уважающее равенство"},
+      {"name": "setoid_id/setoid_comp/SetoidMorEq", "kind": "Definition", "role": "тождество, композиция, равенство морфизмов"},
+      {"name": "SetoidCat", "kind": "Definition", "role": "★ категория сетоидов"},
+      {"name": "SetoidCat_mor_eq_iff/comp_map/id_map", "kind": "Lemma", "role": "свойства равенства/композиции/тождества"},
+      {"name": "discrete_setoid/discrete_mor", "kind": "Definition", "role": "дискретный сетоид типа и его морфизм"}
+    ],
+    "key_lemmas": [
+      {"name": "SetoidCat", "analysis": "Категория сетоидов SetoidCat — базовый «конструктивный аналог Set», на котором строится весь кластер (классификатор, ДКЗ, (ко)пределы, Йонеда). Сетоид-равенство = интенсиональная идентичность ToS, без классических аксиом.", "tags": ["setoid-category", "base", "constructive-set"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Категория сетоидов SetoidCat как конструктивная база-«Set» всего кластера (равенство = интенсиональная идентичность ToS).",
+      "caveat": "Сетоиды и их категория — стандартный конструктивизм; ценность — база топос-структуры, не новый результат."
+    },
+    "tags": ["category-theory", "setoid", "base-category", "constructive", "methods"]
+  },
+  {
+    "num": 76,
+    "path": "src/category/SetoidClassifier.v",
+    "cluster": "category",
+    "classical_counterpart": "The subobject classifier Omega and the subobject pullback square in a topos are classical; NEW: only its explicit setoid construction (Omega as a Prop-setoid, char map, subobject universal property), one ingredient of a constructive Setoid topos.",
+    "title": "The subobject classifier Omega in the setoid topos",
+    "topic": "The Prop-valued omega_setoid, the true arrow, the characteristic map char of a predicate, the sub-setoid and inclusion, the classifier commuting square and the subobject universal property (mediator unique).",
+    "role": "Constructive topos ingredient (classifier). Builds on SetoidCategory.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["ToS SetoidCategory"],
+    "err": {
+      "elements": "omega-сетоид (Prop); предикаты на сетоиде; подсетоиды.",
+      "roles": "Omega как классификатор подобъектов; характеристическая функция char как роль.",
+      "rules": "char P; подсетоид + включение; квадрат классификатора коммутирует; медиатор единствен.",
+      "p4": "субобъект-классификатор Omega конструктивен (Prop-сетоид) — ингредиент setoid-топоса без классики."
+    },
+    "lemmas": [
+      {"name": "omega_setoid/setoid_true", "kind": "Definition", "role": "Omega=Prop-сетоид; стрелка true"},
+      {"name": "char", "kind": "Definition", "role": "характеристическая функция предиката"},
+      {"name": "char_self", "kind": "Lemma", "role": "char согласован с самим классификатором"},
+      {"name": "sub_setoid/sub_incl", "kind": "Definition", "role": "подсетоид по предикату и включение"},
+      {"name": "subobject_commute", "kind": "Lemma", "role": "★ квадрат классификатора коммутирует"},
+      {"name": "subobject_mediator/subobject_univ/subobject_unique", "kind": "Definition/Lemma", "role": "★ универсальное свойство (медиатор единствен)"}
+    ],
+    "key_lemmas": [
+      {"name": "subobject_univ", "analysis": "Универсальное свойство классификатора подобъектов: всякий подобъект однозначно классифицируется характеристической стрелкой в Omega (медиатор существует и единствен). Ключевой ингредиент конструктивного setoid-ТОПОСА (вместе с CCC и (ко)пределами кластера).", "tags": ["subobject-classifier", "universal-property", "topos"]},
+      {"name": "subobject_commute", "analysis": "Квадрат классификатора коммутирует (подобъект = pullback true вдоль char) — определяющее свойство Omega, конструктивно над Prop-сетоидом.", "tags": ["pullback", "classifier"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Субобъект-классификатор Omega в setoid-топосе конструктивно (Prop-сетоид, char, универсальное свойство) — один ингредиент конструктивного топоса.",
+      "caveat": "Классификатор подобъектов — стандартная топос-теория; вклад — явная setoid-конструкция, не новый результат."
+    },
+    "tags": ["category-theory", "topos", "subobject-classifier", "setoid", "methods"]
+  },
+  {
+    "num": 77,
+    "path": "src/category/SetoidCoproducts.v",
+    "cluster": "category",
+    "classical_counterpart": "Coproducts and the initial object in the category of setoids are classical; NEW: nothing — explicit setoid coproduct (sum), initial (empty), injections and the copairing universal property.",
+    "title": "Coproducts and initial object in the setoid topos",
+    "topic": "The empty setoid (initial), the sum setoid with its relation, the two injections, the copairing mediator, and the coproduct universal property (beta laws + uniqueness).",
+    "role": "Constructive topos ingredient (coproducts/initial). Builds on SetoidCategory.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["ToS SetoidCategory"],
+    "err": {
+      "elements": "пустой сетоид; сумма сетоидов; инъекции.",
+      "roles": "копроизведение/инициальный объект как универсальные роли.",
+      "rules": "inl/inr; copair-медиатор; beta-законы + единственность.",
+      "p4": "копроизведения и инициальный объект конструктивны (setoid)."
+    },
+    "lemmas": [
+      {"name": "empty_setoid/setoid_initial", "kind": "Definition/Lemma", "role": "★ пустой сетоид инициален"},
+      {"name": "sum_rel/sum_setoid", "kind": "Definition", "role": "отношение и сетоид суммы"},
+      {"name": "inl_mor/inr_mor", "kind": "Definition", "role": "инъекции в сумму"},
+      {"name": "sum_copair", "kind": "Definition", "role": "копарный медиатор"},
+      {"name": "coprod_beta1/beta2/coprod_unique", "kind": "Lemma", "role": "★ универсальное свойство копроизведения"}
+    ],
+    "key_lemmas": [
+      {"name": "coprod_unique", "analysis": "Универсальное свойство копроизведения: медиатор из суммы единствен (beta1/beta2 + uniqueness). Конструктивный ингредиент (ко)полноты setoid-топоса.", "tags": ["coproduct", "universal-property"]},
+      {"name": "setoid_initial", "analysis": "Пустой сетоид инициален (единственный морфизм из него куда угодно) — нижний (ко)предел, дополняющий терминал из SetoidProducts.", "tags": ["initial", "colimit"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Копроизведения (сумма) и инициальный объект (пустой) в setoid-топосе с универсальным свойством.",
+      "caveat": "Стандартная конструкция; ингредиент (ко)полноты топоса."
+    },
+    "tags": ["category-theory", "coproduct", "initial", "setoid", "exposition"]
+  },
+  {
+    "num": 78,
+    "path": "src/category/SetoidEqualizers.v",
+    "cluster": "category",
+    "classical_counterpart": "Equalizers in the category of setoids are classical; NEW: nothing — the explicit setoid equalizer (sub-setoid where f=g), inclusion, mediator and universal property.",
+    "title": "Equalizers in the setoid topos",
+    "topic": "The equalizer setoid (points where f=g), its inclusion, the mediator from any equalizing map, that it equalizes, and the universal property (uniqueness).",
+    "role": "Constructive topos ingredient (equalizers => limits). Builds on SetoidCategory.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["ToS SetoidCategory"],
+    "err": {
+      "elements": "сетоиды A,B; пара морфизмов f,g; уравнитель (где f=g).",
+      "roles": "уравнитель как универсальный предел пары стрелок.",
+      "rules": "eq_setoid = {x: f x = g x}; включение; медиатор; единственность.",
+      "p4": "уравнители конструктивны (подсетоид), дают конечные пределы топоса."
+    },
+    "lemmas": [
+      {"name": "eq_setoid/eq_incl", "kind": "Definition", "role": "сетоид-уравнитель и его включение"},
+      {"name": "eq_mediator", "kind": "Definition", "role": "медиатор из уравнивающего морфизма"},
+      {"name": "eq_equalizes", "kind": "Lemma", "role": "включение уравнивает f,g"},
+      {"name": "eq_univ/eq_unique", "kind": "Lemma", "role": "★ универсальное свойство (единственность)"}
+    ],
+    "key_lemmas": [
+      {"name": "eq_univ", "analysis": "Универсальное свойство уравнителя: любой уравнивающий морфизм пропускается единственно через включение. Вместе с произведениями (SetoidProducts) даёт ВСЕ конечные пределы setoid-топоса.", "tags": ["equalizer", "limit", "universal-property"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Уравнители в setoid-топосе (подсетоид f=g) с универсальным свойством — с произведениями дают конечные пределы.",
+      "caveat": "Стандартная конструкция; ингредиент полноты топоса."
+    },
+    "tags": ["category-theory", "equalizer", "limit", "setoid", "exposition"]
+  },
+  {
+    "num": 79,
+    "path": "src/category/SetoidExponential.v",
+    "cluster": "category",
+    "classical_counterpart": "Exponential objects (cartesian closure) in the category of setoids are classical; NEW: nothing — the explicit exponential setoid B^A, evaluation, currying and the beta/uniqueness laws.",
+    "title": "Exponentials in the setoid topos (cartesian closure)",
+    "topic": "The exponential setoid of morphisms A->B, evaluation, currying of a map from C*A, and the exponential beta law and uniqueness (the CCC structure).",
+    "role": "Constructive topos ingredient (cartesian closure). Builds on SetoidProducts.",
+    "qed": 2, "admitted": 0, "axioms": 0,
+    "imports": ["ToS SetoidCategory, SetoidProducts"],
+    "err": {
+      "elements": "сетоид экспоненты B^A; вычисление eval; каррирование.",
+      "roles": "экспонента как роль-внутренний-hom; CCC-структура.",
+      "rules": "setoid_eval; setoid_curry; beta + единственность.",
+      "p4": "декартова замкнутость конструктивна (setoid-экспонента)."
+    },
+    "lemmas": [
+      {"name": "exp_setoid", "kind": "Definition", "role": "сетоид морфизмов A→B (экспонента)"},
+      {"name": "setoid_eval", "kind": "Definition", "role": "вычисление eval: B^A × A → B"},
+      {"name": "curry_app/setoid_curry", "kind": "Definition", "role": "каррирование морфизма из C×A"},
+      {"name": "exp_beta", "kind": "Lemma", "role": "★ beta-закон экспоненты"},
+      {"name": "exp_unique", "kind": "Lemma", "role": "★ единственность каррирования (CCC)"}
+    ],
+    "key_lemmas": [
+      {"name": "exp_unique", "analysis": "Единственность каррирования (вместе с beta) — определяющее свойство экспоненциального объекта, делающее setoid-топос ДЕКАРТОВО ЗАМКНУТЫМ (CCC). Внутренний hom для интерпретации функциональных типов конструктивно.", "tags": ["exponential", "CCC", "universal-property"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Экспоненты B^A в setoid-топосе (eval, curry, beta, единственность) — декартова замкнутость конструктивно.",
+      "caveat": "CCC-структура сетоидов стандартна; вклад — явная конструкция, ингредиент топоса."
+    },
+    "tags": ["category-theory", "exponential", "CCC", "setoid", "methods"]
+  },
+  {
+    "num": 80,
+    "path": "src/category/SetoidProducts.v",
+    "cluster": "category",
+    "classical_counterpart": "Products and the terminal object in the category of setoids are classical; NEW: nothing — explicit product setoid, terminal (unit), projections and the pairing universal property.",
+    "title": "Products and terminal object in the setoid topos",
+    "topic": "The unit setoid (terminal), the product setoid, the two projections, the pairing mediator, and the product universal property (beta laws + uniqueness).",
+    "role": "Constructive topos ingredient (products/terminal => with equalizers, all finite limits). Builds on SetoidCategory.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["ToS SetoidCategory"],
+    "err": {
+      "elements": "unit-сетоид; произведение сетоидов; проекции.",
+      "roles": "произведение/терминальный объект как универсальные роли.",
+      "rules": "fst/snd; pair-медиатор; beta-законы + единственность.",
+      "p4": "произведения и терминал конструктивны; с уравнителями — все конечные пределы."
+    },
+    "lemmas": [
+      {"name": "unit_setoid/setoid_terminal", "kind": "Definition/Lemma", "role": "★ unit-сетоид терминален"},
+      {"name": "prod_setoid", "kind": "Definition", "role": "произведение сетоидов"},
+      {"name": "setoid_fst/setoid_snd", "kind": "Definition", "role": "проекции"},
+      {"name": "setoid_pair", "kind": "Definition", "role": "парный медиатор"},
+      {"name": "setoid_prod_beta1/beta2/prod_unique", "kind": "Lemma", "role": "★ универсальное свойство произведения"}
+    ],
+    "key_lemmas": [
+      {"name": "setoid_prod_unique", "analysis": "Универсальное свойство произведения: медиатор в произведение единствен (beta1/beta2 + uniqueness). С уравнителями (SetoidEqualizers) даёт ВСЕ конечные пределы setoid-топоса.", "tags": ["product", "limit", "universal-property"]},
+      {"name": "setoid_terminal", "analysis": "Unit-сетоид терминален — вершина конечных пределов, дополняющая инициальный из SetoidCoproducts.", "tags": ["terminal", "limit"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Произведения и терминал в setoid-топосе с универсальным свойством — с уравнителями дают все конечные пределы.",
+      "caveat": "Стандартная конструкция; ингредиент полноты топоса."
+    },
+    "tags": ["category-theory", "product", "terminal", "setoid", "exposition"]
+  },
+  {
+    "num": 81,
+    "path": "src/category/YonedaEmbedding.v",
+    "cluster": "category",
+    "classical_counterpart": "The Yoneda embedding and its full faithfulness are classical; NEW: nothing — the setoid formalization (the embedding on morphisms, faithful and full).",
+    "title": "The Yoneda embedding is fully faithful",
+    "topic": "The Yoneda embedding on morphisms, its component description, and that it is faithful and full.",
+    "role": "Constructive category theory: Yoneda embedding. Builds on YonedaLemma/representables.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core, YonedaLemma"],
+    "err": {
+      "elements": "объекты категории; представимые функторы; морфизмы.",
+      "roles": "вложение Йонеды как полно-верный функтор C↪[C^op,Set].",
+      "rules": "yoneda_embed_mor; верность и полнота.",
+      "p4": "вложение Йонеды конструктивно полно-верно (setoid)."
+    },
+    "lemmas": [
+      {"name": "yoneda_embed_mor", "kind": "Definition", "role": "вложение Йонеды на морфизмах"},
+      {"name": "yoneda_embed_mor_component", "kind": "Lemma", "role": "компонентное описание вложения"},
+      {"name": "yoneda_faithful", "kind": "Lemma", "role": "★ вложение Йонеды верно"},
+      {"name": "yoneda_full", "kind": "Lemma", "role": "★ вложение Йонеды полно"}
+    ],
+    "key_lemmas": [
+      {"name": "yoneda_full", "analysis": "Вложение Йонеды полно (всякое естественное преобразование представимых = образ морфизма) — вместе с верностью даёт полно-верность C↪[C^op,Set], конструктивно над сетоидами. Структурное ядро «объекты познаются по морфизмам в них».", "tags": ["yoneda", "full", "embedding"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Вложение Йонеды полно-верно конструктивно над сетоидами (верность + полнота).",
+      "caveat": "Полно-верность Йонеды — фундаментальная классика; вклад — setoid-формализация, не новый результат."
+    },
+    "tags": ["category-theory", "yoneda", "embedding", "fully-faithful", "setoid", "methods"]
+  },
+  {
+    "num": 82,
+    "path": "src/category/YonedaLemma.v",
+    "cluster": "category",
+    "classical_counterpart": "The Yoneda lemma (Nat(Hom(x,-),F) ~ F x) is classical; NEW: nothing — the setoid formalization (representable functor, the two transposes, roundtrips and uniqueness).",
+    "title": "The Yoneda lemma over setoids",
+    "topic": "The hom-setoid, the representable functor, the two Yoneda transposes (to/from F x), the roundtrip isomorphisms and uniqueness.",
+    "role": "Constructive category theory: the Yoneda lemma. Builds on FunctorCategory/SetoidCategory.",
+    "qed": 3, "admitted": 0, "axioms": 0,
+    "imports": ["ToS category core, FunctorCategory"],
+    "err": {
+      "elements": "hom-сетоид Hom(x,a); представимый функтор; элементы F x.",
+      "roles": "лемма Йонеды как естественный изоморфизм Nat(Hom(x,−),F) ≅ F x.",
+      "rules": "yoneda_to/from; roundtrip = id; единственность.",
+      "p4": "лемма Йонеды конструктивна (setoid), естественный изоморфизм без классики."
+    },
+    "lemmas": [
+      {"name": "hom_setoid", "kind": "Definition", "role": "сетоид морфизмов Hom(x,a)"},
+      {"name": "representable", "kind": "Definition", "role": "представимый функтор Hom(x,−)"},
+      {"name": "yoneda_to/yoneda_from", "kind": "Definition", "role": "две стороны изоморфизма Йонеды"},
+      {"name": "yoneda_to_from/yoneda_from_to", "kind": "Lemma", "role": "★ roundtrip = id (изоморфизм)"},
+      {"name": "yoneda_unique", "kind": "Lemma", "role": "единственность"}
+    ],
+    "key_lemmas": [
+      {"name": "yoneda_to_from", "analysis": "Roundtrip yoneda_to∘yoneda_from=id (и обратно) — устанавливает естественный изоморфизм Nat(Hom(x,−),F)≅F x, сердце леммы Йонеды, конструктивно над сетоидами. Фундамент представимости и вложения Йонеды.", "tags": ["yoneda-lemma", "isomorphism", "representable"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Лемма Йонеды (Nat(Hom(x,−),F)≅F x) конструктивно над сетоидами через два транспонирования и roundtrip.",
+      "caveat": "Лемма Йонеды — фундаментальная классика; вклад — setoid-формализация, не новый результат."
+    },
+    "tags": ["category-theory", "yoneda", "representable", "setoid", "methods"]
+  }
+]

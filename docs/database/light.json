@@ -1,0 +1,258 @@
+[
+  {
+    "num": 594,
+    "path": "src/light/ColorSpectrum.v",
+    "cluster": "light",
+    "classical_counterpart": "That color corresponds to frequency and white light is a superposition of modes is elementary optics; here only a tiny graph-mode instance (more vertices -> more colors).",
+    "title": "Color as frequency: edge-mode count over Q",
+    "topic": "Edge-mode counts and frequencies on small graphs, color identified with frequency, white as all modes, blackbody and 'vision as graph Fourier transform'.",
+    "role": "Leaf of the light-from-graph branch. Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "рёберные моды графа; частоты.",
+      "roles": "цвет = частота (роль); белый = все моды.",
+      "rules": "more_vertices_more_colors; color_is_frequency; white_is_all_modes.",
+      "p4": "конечный набор мод графа (Element); цвет как частотная роль."
+    },
+    "lemmas": [
+      {"name": "n_edge_modes/mode_frequency/blackbody/vision_as_GFT", "kind": "Definition", "role": "моды, частоты, вид как GFT"},
+      {"name": "five_vertices_four_colors/eight_vertices_seven_colors/more_vertices_more_colors", "kind": "Theorem", "role": "★ больше вершин — больше цветов"},
+      {"name": "color_is_frequency/white_is_all_modes/color_spectrum_synthesis", "kind": "Theorem", "role": "цвет=частота; белый=все моды"}
+    ],
+    "key_lemmas": [
+      {"name": "color_is_frequency", "analysis": "Цвет отождествлён с частотой рёберной моды графа — простая модельная связь, не вывод физической оптики. Уникальности нет.", "tags": ["color", "frequency", "graph-mode"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Цвет как частота рёберной моды графа; больше вершин — больше цветов.",
+      "caveat": "Цвет=частота — элементарная оптика; графовая модель иллюстративна, не вывод физики."
+    },
+    "tags": ["light", "color", "graph-mode", "exposition"]
+  },
+  {
+    "num": 595,
+    "path": "src/light/EdgeField.v",
+    "cluster": "light",
+    "classical_counterpart": "A discrete wave/oscillator on edges with finite propagation speed is a standard lattice model; here only a small Q instance ('light is an edge field', period-4 oscillation, darkness = zero field).",
+    "title": "Light as an edge field over Q: oscillation, causal propagation, darkness",
+    "topic": "Edge oscillators on a chain, an impulse, a zero (dark) field, a wave step, edge counts, period-4 oscillation, causal propagation, and that more vertices give more edges.",
+    "role": "Leaf of the light-from-graph branch (the field carrier). Self-contained.",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "рёберные осцилляторы; импульс; нулевое поле.",
+      "roles": "свет = рёберное поле (роль); тьма = нулевое поле.",
+      "rules": "edge_wave_step; edge_period4; edge_propagates; edge_causal.",
+      "p4": "конечная цепочка рёбер (Element); распространение причинно (конечная скорость)."
+    },
+    "lemmas": [
+      {"name": "n_edges_chain/edge_oscillator/edge_impulse/edge_zero_field/edge_wave_step/darkness", "kind": "Definition", "role": "рёберное поле, импульс, тьма"},
+      {"name": "edge_count/edge_oscillates/edge_period4/edge_propagates/edge_causal", "kind": "Theorem", "role": "★ осцилляция (период 4), причинность"},
+      {"name": "impulse_at_zero/impulse_away/zero_field_is_zero/more_vertices_more_edges/edge_field_synthesis", "kind": "Theorem", "role": "импульс, нулевое поле, итог"}
+    ],
+    "key_lemmas": [
+      {"name": "edge_causal", "analysis": "Распространение рёберной волны причинно (конечная скорость, edge_propagates) — корректное свойство дискретной волны, но это модель, не вывод электродинамики.", "tags": ["edge-field", "causal", "wave"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Свет как рёберное осциллирующее поле над Q: период-4 осцилляция, причинное распространение, тьма=нулевое поле.",
+      "caveat": "Дискретная волна на рёбрах — стандартная решёточная модель; иллюстрация, не физика."
+    },
+    "tags": ["light", "edge-field", "wave", "exposition"]
+  },
+  {
+    "num": 596,
+    "path": "src/light/LightGravityConnection.v",
+    "cluster": "light",
+    "classical_counterpart": "Light is spin-1 and the graviton spin-2, both massless propagating at c with two polarizations; here only a tiny graph-mode analogy (transverse=light, longitudinal=metric, a Kaluza-Klein hint).",
+    "title": "Light/gravity over Q: spin-1 vs spin-2, both massless at c",
+    "topic": "Transverse modes in 3D, light spin-1 vs gravity spin-2, edge wave speed, the causal limit, graviton speed, two polarizations, both massless at c, and a Kaluza-Klein hint.",
+    "role": "Leaf relating the light and gravity sub-branches. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "поперечные моды; спины 1 и 2.",
+      "roles": "свет = поперечная роль (spin-1); гравитация = метрическая роль (spin-2).",
+      "rules": "light_spin_one; gravity_spin_two; both_massless; both_at_c.",
+      "p4": "конечные моды (Element); безмассовость = распространение на причинном пределе."
+    },
+    "lemmas": [
+      {"name": "n_transverse_3d/light_spin/gravity_spin/edge_wave_speed_low_k/causal_limit/graviton_speed/two_polarizations", "kind": "Definition", "role": "поперечные моды, спины, скорости"},
+      {"name": "light_spin_one/gravity_spin_two/both_massless/graviton_at_c/spin_difference", "kind": "Theorem", "role": "★ спин-1 vs спин-2, оба безмассовы"},
+      {"name": "transverse_is_light/longitudinal_is_metric/kaluza_klein_hint/light_gravity_synthesis", "kind": "Theorem", "role": "поперечное=свет; продольное=метрика"}
+    ],
+    "key_lemmas": [
+      {"name": "both_massless", "analysis": "Свет и гравитон оба безмассовы и движутся на причинном пределе c — модельная аналогия спинов 1/2, не вывод. Иллюстративна.", "tags": ["spin", "massless", "graviton"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Свет (spin-1) и гравитон (spin-2) над Q: оба безмассовы на причинном пределе, поперечное=свет / продольное=метрика.",
+      "caveat": "Спины и безмассовость света/гравитона — известная физика; графовая аналогия иллюстративна, не вывод."
+    },
+    "tags": ["light", "gravity", "spin", "exposition"]
+  },
+  {
+    "num": 597,
+    "path": "src/light/LightSynthesis.v",
+    "cluster": "light",
+    "classical_counterpart": "A summary node asserting light is an edge field obeying Maxwell, with polarization, causal speed and energy conservation — all proven in the sibling leaves.",
+    "title": "Light synthesis: edge field, polarization, Maxwell, causal speed (summary node)",
+    "topic": "An 8-lemma grand synthesis tying the light leaves: light is an edge field, has polarization, propagates at the causal speed, obeys Maxwell, conserves energy, darkness is zero.",
+    "role": "Summary node of the light branch. Self-contained.",
+    "qed": 8, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "сводимые результаты ветви света.",
+      "roles": "узел-синтез ветви света.",
+      "rules": "light_is_edge_field; light_obeys_maxwell; light_speed_is_causal.",
+      "p4": "агрегатор конечных результатов соседних файлов (Element)."
+    },
+    "lemmas": [
+      {"name": "light_is_edge_field/light_has_polarization/light_speed_is_causal/light_obeys_maxwell", "kind": "Theorem", "role": "свет=поле, поляризация, скорость, Максвелл"},
+      {"name": "light_propagates_causally/light_energy_conserved/light_darkness_is_zero/light_grand_synthesis", "kind": "Theorem", "role": "причинность, сохранение энергии, итог"}
+    ],
+    "key_lemmas": [
+      {"name": "light_grand_synthesis", "analysis": "Узел-агрегатор ветви света; собственного содержания не несёт — собирает результаты EdgeField/MaxwellFromGraph/Polarization.", "tags": ["summary", "light"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Сводка ветви света: рёберное поле, поляризация, причинная скорость, Максвелл, сохранение энергии.",
+      "caveat": "Чистый узел-агрегатор; собственного результата нет."
+    },
+    "tags": ["light", "summary", "exposition"]
+  },
+  {
+    "num": 598,
+    "path": "src/light/MaxwellFromGraph.v",
+    "cluster": "light",
+    "classical_counterpart": "Maxwell's equations as discrete vector calculus (graph div/curl, Gauss, Faraday, wave equation) is the standard discrete-exterior-calculus picture; the framing 'Maxwell not postulated but derived from a graph' is a re-casting, not a new physical derivation.",
+    "title": "Maxwell from a graph over Q: discrete Gauss/Faraday/wave (a framing)",
+    "topic": "Magnetic field from electric, a discrete Gauss law (zero/positive charge), discrete magnetic divergence, antisymmetric curl, Faraday's law, the wave equation from Maxwell, charge as source, and 'Maxwell not postulated'.",
+    "role": "Central leaf of the light-from-graph branch; the 'derivation' claim. Self-contained.",
+    "qed": 12, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "поля E,B на графе; заряд как источник.",
+      "roles": "уравнения Максвелла = роли (Гаусс, Фарадей, волна) на графе.",
+      "rules": "gauss_electric_sum; curl_antisymmetric; faraday; wave_from_maxwell.",
+      "p4": "дискретный векторный анализ на конечном графе (Element); «Максвелл не постулируется» = переобрамление, не физический вывод."
+    },
+    "lemmas": [
+      {"name": "magnetic_from_electric/gauss_electric_sum/gauss_zero_no_charge/gauss_positive_charge", "kind": "Definition/Theorem", "role": "закон Гаусса на графе"},
+      {"name": "magnetic_zero_uniform/magnetic_nonzero_curl/curl_antisymmetric_concrete/_concrete2/gauss_three_edges", "kind": "Theorem", "role": "★ антисимметричный curl, магнитная дивергенция"},
+      {"name": "faraday/wave_from_maxwell/maxwell_not_postulated/charge_as_source/maxwell_from_graph_synthesis", "kind": "Theorem", "role": "★ Фарадей, волна, заряд-источник"}
+    ],
+    "key_lemmas": [
+      {"name": "wave_from_maxwell", "analysis": "Волновое уравнение получается из дискретных Максвелла на графе — корректная дискретно-векторная конструкция (DEC). Но это переобрамление известного, а не вывод физической электродинамики; caveat честно это фиксирует.", "tags": ["maxwell", "wave", "discrete-calculus", "framing"]},
+      {"name": "maxwell_not_postulated", "analysis": "Заявка «Максвелл не постулируется, а следует из графа» — на деле дискретный векторный анализ (div/curl на рёбрах). Это OVER-BRANDED формулировка; реально доказано лишь дискретное тождество, не физическая необходимость уравнений.", "tags": ["over-branded", "framing", "honest-caveat"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "methods",
+      "claim": "Уравнения Максвелла как дискретный векторный анализ на графе над Q: Гаусс, антисимметричный curl, Фарадей, волновое уравнение.",
+      "caveat": "Это стандартная дискретная экстерьерная алгебра; формулировка «Максвелл выведен из графа» OVER-BRANDED — доказаны дискретные тождества, не физическая необходимость."
+    },
+    "tags": ["light", "maxwell", "discrete-calculus", "over-branded", "methods"]
+  },
+  {
+    "num": 599,
+    "path": "src/light/Polarization.v",
+    "cluster": "light",
+    "classical_counterpart": "Polarization states and Malus's law (I = I0 cos^2 theta) are elementary optics; here only a small Q instance (polarizer halves unpolarized, crossed blocks, Malus at 0/45/90).",
+    "title": "Polarization and Malus's law over Q",
+    "topic": "Polarized energy, horizontal/vertical polarization, Malus's law, polarizer halves unpolarized light, crossed polarizers block, Malus at aligned/crossed/45 degrees, orthogonal polarizations.",
+    "role": "Leaf of the light branch. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "поляризованные состояния; энергия.",
+      "roles": "поляризатор = роль-проектор; закон Малюса как роль-затухание.",
+      "rules": "polarizer_halves; crossed_block; malus_aligned/crossed/45.",
+      "p4": "конечные значения над Q (Element); Малюс как cos²-правило."
+    },
+    "lemmas": [
+      {"name": "polarized_energy/h_polarize/v_polarize/malus", "kind": "Definition", "role": "поляризация, Малюс"},
+      {"name": "h_polarized_energy/v_polarized_energy/unpolarized_energy/polarizer_halves/crossed_block", "kind": "Theorem", "role": "★ поляризатор делит, скрещённые блокируют"},
+      {"name": "malus_aligned/malus_crossed/malus_45_approx/orthogonal_polarizations/polarization_synthesis", "kind": "Theorem", "role": "закон Малюса при разных углах"}
+    ],
+    "key_lemmas": [
+      {"name": "polarizer_halves", "analysis": "Поляризатор пропускает половину неполяризованного света (crossed_block при скрещивании) — корректная Q-формализация закона Малюса. Учебная оптика.", "tags": ["polarization", "malus"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Поляризация и закон Малюса над Q: поляризатор делит пополам, скрещённые блокируют, cos²-зависимость.",
+      "caveat": "Закон Малюса — элементарная оптика; Q-инстанс без нового содержания."
+    },
+    "tags": ["light", "polarization", "malus", "exposition"]
+  },
+  {
+    "num": 600,
+    "path": "src/light/RefractionDiffraction.v",
+    "cluster": "light",
+    "classical_counterpart": "Fresnel reflection/transmission coefficients, energy conservation R+T=1, total internal reflection and diffraction are standard wave optics; here only a small Q instance.",
+    "title": "Refraction and diffraction over Q: Fresnel coefficients, R+T=1",
+    "topic": "Reflection/transmission coefficients, no reflection at matched impedance, concrete reflection values, full reflection at large mismatch, R+T energy conservation, total internal reflection, diffraction.",
+    "role": "Leaf of the light branch. Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "коэффициенты отражения/прохождения; импедансы.",
+      "roles": "граница раздела = роль; R,T как роли-доли энергии.",
+      "rules": "reflection_coeff/transmission_coeff; energy_conserved (R+T=1); total_internal_reflection.",
+      "p4": "конечные коэффициенты над Q (Element); R+T=1 как точное тождество."
+    },
+    "lemmas": [
+      {"name": "reflection_coeff/transmission_coeff/no_reflection_matched", "kind": "Definition/Theorem", "role": "коэффициенты Френеля"},
+      {"name": "reflection_1_2/_1_3/full_reflection_large_mismatch/transmission_complement", "kind": "Theorem", "role": "значения, полное отражение"},
+      {"name": "energy_conserved/reflection_symmetric/total_internal_reflection/diffraction/refraction_diffraction_synthesis", "kind": "Theorem", "role": "★ R+T=1, полное внутреннее отражение"}
+    ],
+    "key_lemmas": [
+      {"name": "energy_conserved", "analysis": "Сохранение энергии R+T=1 на границе раздела как точное Q-тождество — корректная формализация Френеля. Учебная волновая оптика.", "tags": ["fresnel", "energy-conservation"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "Преломление/дифракция над Q: коэффициенты Френеля, R+T=1, полное внутреннее отражение.",
+      "caveat": "Коэффициенты Френеля — стандартная волновая оптика; Q-инстанс без нового содержания."
+    },
+    "tags": ["light", "refraction", "fresnel", "exposition"]
+  },
+  {
+    "num": 601,
+    "path": "src/light/SpeedOfLight.v",
+    "cluster": "light",
+    "classical_counterpart": "A dispersion relation with a maximal propagation speed (massless linear, massive slower) is a standard lattice picture; here the framing 'c is a graph property / why nothing is faster' is a re-casting.",
+    "title": "Speed of light over Q: c as a graph property, dispersion",
+    "topic": "The causal limit, edge/vertex wave speeds, massless (linear) vs massive (sub-c) dispersion, heavier is slower, c as a graph property, and 'why nothing is faster'.",
+    "role": "Leaf of the light branch (kinematics). Self-contained.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith"],
+    "err": {
+      "elements": "дисперсионные соотношения; скорости волн.",
+      "roles": "c = причинный предел графа (роль); масса как роль-замедление.",
+      "rules": "dispersion_massless (линейная); massive_slower; c_is_graph_property.",
+      "p4": "конечные скорости над Q (Element); c как структурный предел графа."
+    },
+    "lemmas": [
+      {"name": "causal_limit/edge_wave_speed_low_k/vertex_wave_speed_approx/dispersion_massless/dispersion_massive_sq", "kind": "Definition", "role": "дисперсия, причинный предел"},
+      {"name": "edge_at_c/massive_slower/massless_at_c/speed_ratio/heavier_is_slower", "kind": "Theorem", "role": "★ безмассовое на c, массивное медленнее"},
+      {"name": "massless_dispersion_linear/massive_dispersion_bigger/c_is_graph_property/why_nothing_faster/speed_of_light_synthesis", "kind": "Theorem", "role": "c как свойство графа"}
+    ],
+    "key_lemmas": [
+      {"name": "c_is_graph_property", "analysis": "Скорость света отождествлена с причинным пределом графа; безмассовые моды движутся на c, массивные медленнее (heavier_is_slower) — корректная дисперсия дискретной модели. Формулировка «почему ничего не быстрее» — переобрамление, не вывод СТО.", "tags": ["speed-of-light", "dispersion", "framing"]}
+    ],
+    "uniqueness": {
+      "score": 1,
+      "level": "exposition",
+      "claim": "c как причинный предел графа над Q: безмассовая линейная дисперсия на c, массивные моды медленнее.",
+      "caveat": "Дисперсия с максимальной скоростью — стандартная решётка; формулировка «c из графа» иллюстративна, не вывод СТО."
+    },
+    "tags": ["light", "speed-of-light", "dispersion", "exposition"]
+  }
+]
