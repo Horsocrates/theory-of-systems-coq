@@ -22,13 +22,14 @@
     ДИАГНОСТИКА (P4): функция-как-коэффициент-процесс — Element (многочлен) ⟺ терминирует,
       role-limit (трансцендентная) ⟺ не терминирует.  То же H1, на уровень выше.  0-аксиомно.
 
-    STATUS: 12 Qed, 0 Admitted, 0 axioms (все ключевые — geom_inverse_fps, *_deriv, ode_geom_unique — аксиомо-своб.).
+    STATUS: 13 Qed, 0 Admitted, 0 axioms (все ключевые аксиомо-СВОБОДНЫ, вкл. fps_deriv_mul).
             ГОТОВО: (1) FPS-реификация + граница Element/role-limit на уровне функций; (2) FPS-исчисление —
-            exp'=exp (exp_fps_deriv), (−ln(1−x))'=1/(1−x) (log1m_deriv); (3) СТРУКТУРНОЕ СЕРДЦЕ — ode_geom_unique:
-            ОДУ h'=h·geom с h(0)=1 имеет ЕДИНСТВЕННОЕ решение geom (чистый маршрут conv·geom=Σ, без sparse-свёртки;
-            использует geom_inverse_fps).  geom_satisfies_ode — проверка.
-            ОСТАЁТСЯ: цепное правило (compose exp_fps log1m_fps удовлетворяет h'=h·geom) ⟹ безусловно
-            compose=geom (cₙ=1) — формальное сердце E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
+            exp'=exp, (−ln(1−x))'=1/(1−x); (3) СТРУКТУРНОЕ СЕРДЦЕ ode_geom_unique (ОДУ h'=h·geom, h(0)=1 ⟹ h=geom);
+            (4) ★ ПРАВИЛО ЛЕЙБНИЦА fps_deriv_mul: (a·b)'=a'·b+a·b' — фундамент цепного правила, тот же Vandermonde-
+            переиндекс, что в exp_conv_rec, аксиомо-СВОБОДЕН.
+            ОСТАЁТСЯ: fps_pow + power rule (g^k)'=k·g^{k-1}·g' (индукция на fps_deriv_mul) → compose + цепное
+            правило (compose exp_fps log1m_fps уд. h'=h·geom) ⟹ compose=geom (через ode_geom_unique) — формальное
+            сердце E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -36,6 +37,7 @@ From Stdlib Require Import QArith Qabs Lqa Lia ZArith.
 From ToS Require Import CauchyReal.
 From ToS Require Import SeriesConvergence.
 From ToS Require Import CauchyProduct.
+From ToS Require Import ExpFunctionalEquation.
 From ToS Require Import PowerSeries.
 
 Open Scope Q_scope.
@@ -243,12 +245,63 @@ Proof.
   rewrite Hsum. ring.
 Qed.
 
+(* ================================================================== *)
+(*  ★ ПРАВИЛО ЛЕЙБНИЦА (производная произведения) — фундамент цепного   *)
+(*    правила.  Тот же Vandermonde-переиндекс, что в exp_conv_rec.       *)
+(* ================================================================== *)
+
+(** ★ (a·b)' = a'·b + a·b' на уровне коэффициентов:
+        (n+1)·conv a b (n+1) == conv a' b n + conv a b' n  (a'=fps_deriv a).
+    Расщепление коэффициента n+1 = i + (n+1−i); голова→a'·b, хвост→a·b'. *)
+Lemma fps_deriv_mul : forall (a b : FPS) (n : nat),
+  inject_Z (Z.of_nat (S n)) * conv a b (S n)
+  == conv (fps_deriv a) b n + conv a (fps_deriv b) n.
+Proof.
+  intros a b n.
+  assert (HLHS :
+    inject_Z (Z.of_nat (S n)) * conv a b (S n)
+    == partial_sum (fun i => inject_Z (Z.of_nat i) * (a i * b (S n - i)%nat)) (S n)
+     + partial_sum (fun i => inject_Z (Z.of_nat (S n - i)) * (a i * b (S n - i)%nat)) (S n)).
+  { unfold conv. rewrite <- partial_sum_plus. rewrite <- partial_sum_scale.
+    apply partial_sum_ext_le. intros i Hi. cbv beta.
+    assert (Hadd : inject_Z (Z.of_nat (S n))
+                   == inject_Z (Z.of_nat i) + inject_Z (Z.of_nat (S n - i))).
+    { rewrite <- inject_Z_plus.
+      assert (HZ : Z.of_nat (S n) = (Z.of_nat i + Z.of_nat (S n - i))%Z)
+        by (rewrite <- Nat2Z.inj_add; f_equal; lia).
+      rewrite HZ. reflexivity. }
+    rewrite Hadd. ring. }
+  rewrite HLHS.
+  assert (HA :
+    partial_sum (fun i => inject_Z (Z.of_nat i) * (a i * b (S n - i)%nat)) (S n)
+    == conv (fps_deriv a) b n).
+  { unfold conv. rewrite partial_sum_head. cbv beta.
+    assert (Hz : inject_Z (Z.of_nat 0%nat) * (a 0%nat * b (S n - 0)%nat) == 0)
+      by (change (inject_Z (Z.of_nat 0%nat)) with 0; ring).
+    rewrite Hz. rewrite Qplus_0_l.
+    apply partial_sum_ext_le. intros i Hi. cbv beta. unfold fps_deriv.
+    replace (S n - S i)%nat with (n - i)%nat by lia. ring. }
+  assert (HB :
+    partial_sum (fun i => inject_Z (Z.of_nat (S n - i)) * (a i * b (S n - i)%nat)) (S n)
+    == conv a (fps_deriv b) n).
+  { unfold conv. rewrite partial_sum_S. cbv beta.
+    assert (Htail : inject_Z (Z.of_nat (S n - S n))
+                    * (a (S n) * b (S n - S n)%nat) == 0)
+      by (replace (S n - S n)%nat with 0%nat by lia;
+          change (inject_Z (Z.of_nat 0%nat)) with 0; ring).
+    rewrite Htail. rewrite Qplus_0_r.
+    apply partial_sum_ext_le. intros i Hi. cbv beta. unfold fps_deriv.
+    replace (S n - i)%nat with (S (n - i))%nat by lia. ring. }
+  rewrite HA, HB. reflexivity.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions geom_inverse_fps.
 Print Assumptions geom_not_polynomial.
 Print Assumptions exp_fps_deriv.
 Print Assumptions log1m_deriv.
 Print Assumptions ode_geom_unique.
+Print Assumptions fps_deriv_mul.
 
 (* ================================================================== *)
 (*  СВОДКА (веха 1 слоя «функция-как-процесс»): FPS = коэффициент-      *)

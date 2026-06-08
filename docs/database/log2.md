@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**6 files / 90 Qed.** Score distribution: s5=0 / s4=0 / s3=3 / s2=3 / s1=0 / s0=0
+**6 files / 91 Qed.** Score distribution: s5=0 / s4=0 / s3=3 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -211,13 +211,13 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 - **Topic.** FPS := nat->Q reifies an analytic function f(x)=Sum c_n x^n as its Taylor-coefficient process. FPS algebra (fps_add/neg/sub/scale, fps_mul := conv [Cauchy product], fps_deriv); reified functions geom_fps (=1/(1-x), all c_n=1), exp_fps (=1/n!), log1m_fps (=-ln(1-x), c_{Sk}=1/(k+1)). The Element/role-limit boundary at the FUNCTION level via is_polynomial: fps_one/fps_X are polynomials (Element, terminating coefficient-process); geom_fps/exp_fps are NOT (role-limit, non-terminating) — direct H1-at-function-level witnesses. Flagship: geom_inverse_fps — the geometric's defining identity (1-X)*geom == fps_one proved FORMALLY at the coefficient level (convolution of (1,-1,0,..) with (1,1,1,..) = (1,0,0,..)). All axiom-free.
 - **Role.** First deliverable of the function-reification layer (H59 roadmap step 1). Demonstrates 'function = process' concretely + the lifted H1 boundary. Self-contained on CauchyProduct (conv, partial_sum_ext_le) + PowerSeries (Qfact). NEXT: FPS composition + compose exp_fps log1m_fps = geom_fps (c_n=1 recurrence like exp_conv_id) = the formal heart of E∘L; then the analytic eval-bridge → ln_mul horizon.
-- **Counts.** Qed 12 / Admitted 0 / axioms 0
-- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; SeriesConvergence; CauchyProduct; PowerSeries
+- **Counts.** Qed 13 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; SeriesConvergence; CauchyProduct; ExpFunctionalEquation; PowerSeries
 - **E/R/R.** _Elements:_ коэффициенты cₙ∈Q — конечные данные на каждой стадии n. _Roles:_ FPS = роль-ФУНКЦИЯ (реифицированная как коэффициент-процесс); fps_mul = роль-свёртка; (1−X)·geom=1 = определяющая роль обратной геометрической. _Rules:_ свёртка Коши (conv); многочлен ⟺ хвост коэф.≡0 (Element); role-limit ⟺ нет такого хвоста. _P4:_ функция-как-коэффициент-процесс: Element (многочлен) ⟺ терминирует, role-limit (трансцендентная) ⟺ не терминирует. То же H1, на уровень выше. 0-аксиомно.
 - **Classical counterpart.** Formal power series and the identity (1-x)*(1/(1-x))=1 are classical. NEW: their use to REIFY an analytic function as a coefficient-PROCESS (nat->Q) inside the ToS process-ontology — the first step of H59's program (functions = the next finitization frontier), lifting the H1 Element/role-limit boundary one level up the object hierarchy number->function->functional (polynomial=Element, transcendental=role-limit).
 - **Tags.** function-as-process, formal-power-series, coefficient-process, H59, vein-C, new-framing, element-role-limit
 
-**Lemmas (11):**
+**Lemmas (12):**
 
 | name | kind | role |
 |---|---|---|
@@ -232,6 +232,7 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `conv_ones/qcancel` | Lemma | conv·geom=Σ (умн. на 1); сокращение a·x=a⟹x=1 |
 | `ode_geom_unique` | Lemma | ★★★ ОДУ h'=h·geom, h(0)=1 ⟹ h=geom (структурное сердце E∘L) |
 | `geom_satisfies_ode` | Lemma | проверка: geom удовлетворяет h'=h·geom |
+| `fps_deriv_mul` | Lemma | ★ ПРАВИЛО ЛЕЙБНИЦА (a·b)'=a'·b+a·b' (фундамент цепного правила; Vandermonde как exp_conv_rec; аксиомо-своб.) |
 
 **Key lemmas (deep):**
 
