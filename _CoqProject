@@ -1943,3 +1943,17 @@ src/cs/ScaleFlowUndecidable.v
 src/cs/SelectionWithoutChoiceSynthesis.v
 src/cs/SemanticRecursion.v
 src/cs/TarskiUndefinability.v
+src/nonstandard/BoundaryIsInvertibility.v
+src/nonstandard/DerivativeViaInfinitesimal.v
+src/nonstandard/FinitizationBoundaryGeneratingStructure.v
+src/nonstandard/GermInfinitesimal.v
+src/nonstandard/HyperfiniteSum.v
+src/nonstandard/IllusoryConstructions.v
+src/nonstandard/NonstandardOverProcessesSynthesis.v
+src/nonstandard/RoleLimitIsP1Shadow.v
+src/nonstandard/SeedDiagonalBridge.v
+src/nonstandard/SeedMeasureBridge.v
+src/nonstandard/StandardPart.v
+src/nonstandard/UltrafilterRoleLimit.v
+src/nonstandard/UndecidedHierarchy.v
+src/nonstandard/UnitZeroDivisorBoundary.v
