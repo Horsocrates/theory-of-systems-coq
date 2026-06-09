@@ -21,16 +21,18 @@
     ДИАГНОСТИКА (P4): eval переводит формальную функцию-процесс (коэффициенты) в число-процесс
       (частичные суммы) — оба «конечно-актуальны» на каждой стадии; мост двух процессных слоёв. 0-аксиомно.
 
-    STATUS: 15 Qed, 0 Admitted, 0 axioms (наследует только classic через SeriesConvergence).
+    STATUS: 17 Qed, 0 Admitted, 0 axioms (наследует только classic через SeriesConvergence).
             ГОТОВО: eval (ограниченные коэф.) + сходимость через absolute_convergence; eval_congr;
             ★ eval_geom (eval geom_fps = geometric_limit); ★★ eval_compose_exp_log1m_geom (формальное сердце
             E∘L, вычисленное = 1/(1−x)); ★★ eval_mul (eval МУЛЬТИПЛИКАТИВЕН: eval(a·b) ~~ eval a · eval b —
-            через mertens_cauchy_product + тождество (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ [eval_terms_mul]; с
-            Qpow_add, геом. оценкой Σxᵏ≤1/(1−x), абс-границами eval_abs_bound, conv_eval_cauchy для Hconv).
+            через mertens_cauchy_product + тождество (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ [eval_terms_mul]);
+            ★ АНКЕРЫ exp/log: eval_exp (eval exp_fps t ~~ exp_limit t — члены совпадают по Qmult_comm) и
+            eval_log1m (eval log1m_fps x ~~ ln_proc x — СДВИГ индекса: лишний 0 в начале, partial_sum (S n)=
+            log_series_partial n, эквивалентность Cauchy-сдвигов).  Формальные базис-объекты привязаны к
+            существующим процессам exp_limit/ln_proc.
             ОСТАЁТСЯ (трудная половина моста): eval-аддитивность (тривиально) + закон композиции
-            eval(f∘g) x ~~ eval f (eval g x) (Fubini двойного ряда); анкеры exp/log
-            (eval exp_fps t ~~ exp_limit t, eval log1m_fps x ~~ ln_proc x — сдвиг индекса) → exp_R(L(x))~~1/(1−x)
-            → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
+            eval(f∘g) x ~~ Σ fₖ(eval g x)ᵏ (Fubini двойного ряда; внутр. сумма конечна по занулению) →
+            exp_R(L(x))~~1/(1−x) → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -39,7 +41,10 @@ From ToS Require Import CauchyReal.
 From ToS Require Import RealField.
 From ToS Require Import SeriesConvergence.
 From ToS Require Import CauchyProduct.
+From ToS Require Import ExpFunctionalEquation.
 From ToS Require Import PowerSeries.
+From ToS Require Import zeta.LogZeta.
+From ToS Require Import Log2Process.
 From ToS Require Import FormalPowerSeries.
 
 Open Scope Q_scope.
@@ -256,10 +261,53 @@ Proof.
              Ha Hb Hconv).
 Qed.
 
+(* ================================================================== *)
+(*  ★ АНКЕРЫ exp/log: формальные базис-объекты ↔ существующие процессы   *)
+(* ================================================================== *)
+
+(** ★ eval exp_fps t ~~ exp_limit t: вычисленный формальный exp = рациональная
+    экспонента-процесс.  Члены совпадают: (1/n!)·tⁿ = tⁿ·(1/n!) [Qmult_comm].
+    Без ограничения на t — exp_limit сходится для всех t. *)
+Lemma eval_exp : forall (t : Q) (H : is_cauchy (partial_sum (eval_terms exp_fps t))),
+  eval exp_fps t H ~~ exp_limit t.
+Proof.
+  intros t H. unfold eval, exp_limit. apply series_limit_wd.
+  intro n. unfold eval_terms, exp_fps, exp_term. ring.
+Qed.
+
+(** ★ eval log1m_fps x ~~ ln_proc x: вычисленный формальный −ln(1−x) = лог-процесс L(x).
+    eval_terms log1m имеет ЛИШНИЙ нуль в индексе 0, далее — те же члены, что у ln_proc;
+    поэтому partial_sum (eval_terms log1m x) (S n) == log_series_partial x n (СДВИГ на 1).
+    Две Cauchy-последовательности-сдвиги эквивалентны (тот же предел). *)
+Lemma eval_log1m : forall (x : Q) (Hx : 0 <= x) (Hx1 : x < 1)
+    (H : is_cauchy (partial_sum (eval_terms log1m_fps x))),
+  eval log1m_fps x H ~~ ln_proc x Hx Hx1.
+Proof.
+  intros x Hx Hx1 H.
+  assert (Hshift : forall n,
+    partial_sum (eval_terms log1m_fps x) (S n) == log_series_partial x n).
+  { intro n. unfold log_series_partial. rewrite partial_sum_head.
+    assert (H0 : eval_terms log1m_fps x 0%nat == 0).
+    { unfold eval_terms. cbn [log1m_fps Qpow]. ring. }
+    rewrite H0, Qplus_0_l.
+    apply partial_sum_ext_le. intros k Hk.
+    unfold eval_terms. cbn [log1m_fps log_series_term]. unfold Qdiv. ring. }
+  intros eps Heps.
+  destruct (ln_series_cauchy x Hx Hx1 eps Heps) as [N HN].
+  exists (S N). intros n Hn. destruct n as [|m]; [ lia | ].
+  change (cs_seq (eval log1m_fps x H) (S m))
+    with (partial_sum (eval_terms log1m_fps x) (S m)).
+  change (cs_seq (ln_proc x Hx Hx1) (S m)) with (log_series_partial x (S m)).
+  rewrite (Hshift m).
+  apply HN; lia.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions eval_geom.
 Print Assumptions eval_compose_exp_log1m_geom.
 Print Assumptions eval_mul.
+Print Assumptions eval_exp.
+Print Assumptions eval_log1m.
 
 (* ================================================================== *)
 (*  СВОДКА: eval — первый анкер аналитического моста.  Формальное сердце *)
