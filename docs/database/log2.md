@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**7 files / 124 Qed.** Score distribution: s5=0 / s4=0 / s3=4 / s2=3 / s1=0 / s0=0
+**7 files / 130 Qed.** Score distribution: s5=0 / s4=0 / s3=4 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -270,14 +270,14 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Analytic bridge: eval(formal series) -> number-process; the formal heart of E.L evaluated = 1/(1-x)**
 
 - **Topic.** eval a x := series_limit (fun n => a_n * x^n) — evaluation of a formal power series (object-in-theory) as a Cauchy number-process. Convergence for |a_n|<=1, 0<=x<1 by absolute majorization with the geometric series (absolute_convergence + geometric_series_cauchy). eval_congr (equal coefficients => ~~ equal eval, via series_limit_wd). Anchor eval_geom: eval geom_fps x ~~ geometric_limit x (Sum 1*x^n = Sum x^n = 1/(1-x)). Flagship eval_compose_exp_log1m_geom: the FORMAL composition exp.log1m — whose coefficients we proved 0-axiom to be all 1 (compose_exp_log1m_is_geom) — EVALUATED as a real number-process IS the geometric series 1/(1-x). First analytic consequence of the formal heart.
-- **Role.** First anchor of the analytic eval-bridge (the second, hard half of the ln_mul program). Crosses from the purely formal 0-axiom world (FormalPowerSeries) into the L3 Cauchy-real analysis world (hence inherits classic, like the rest of the analysis library — the FIRST file in this FPS chain to do so). NEXT (hard): eval as a ring homomorphism via Mertens (eval(a*b)=eval a * eval b, using mertens_cauchy_product + the identity (a*b)_n x^n = conv(a_i x^i)(b_j x^j)_n); the composition law eval(f.g) x ~~ eval f (eval g x) (double-series Fubini); the exp/log anchors (eval exp_fps t ~~ exp_limit t; eval log1m_fps x ~~ ln_proc x via an index shift) -> exp_R(L(x)) ~~ 1/(1-x) -> ln_mul horizon L(x)+L(y)~~L(x+y-xy).
-- **Counts.** Qed 9 / Admitted 0 / axioms 1
-- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; SeriesConvergence; CauchyProduct; PowerSeries; FormalPowerSeries
+- **Role.** Anchor + ring-homomorphism core of the analytic eval-bridge (the second, hard half of the ln_mul program). Crosses from the purely formal 0-axiom world (FormalPowerSeries) into the L3 Cauchy-real analysis world (hence inherits classic, like the rest of the analysis library — the FIRST file in this FPS chain to do so). DONE: eval + convergence; eval_geom + the formal heart evaluated = 1/(1-x); eval MULTIPLICATIVE (eval_mul: eval(a*b)=eval a * eval b) via mertens_cauchy_product + the identity (a*b)_n x^n = conv(a_i x^i)(b_j x^j)_n (eval_terms_mul) — the reusable ring-hom brick, giving eval(g^k)=(eval g)^k. NEXT (hard): eval-additivity (trivial) + the composition law eval(f.g) x ~~ eval f (eval g x) (double-series Fubini: Sum_k f_k (eval g x)^k = eval(f.g) x, finite inner sum by low-order vanishing); the exp/log anchors (eval exp_fps t ~~ exp_limit t; eval log1m_fps x ~~ ln_proc x via an index shift) -> exp_R(L(x)) ~~ 1/(1-x) -> ln_mul horizon L(x)+L(y)~~L(x+y-xy).
+- **Counts.** Qed 15 / Admitted 0 / axioms 1
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; RealField; SeriesConvergence; CauchyProduct; PowerSeries; FormalPowerSeries
 - **E/R/R.** _Elements:_ коэффициенты aₙ∈Q и значение x∈Q; на каждой стадии — конечная Q-сумма Σ_{k≤n} aₖxᵏ. _Roles:_ eval = роль-ВЫЧИСЛЕНИЕ формального ряда (объект-в-теории) в число-процесс (CauchySeq); мост двух процессных слоёв (формальный↔аналитический). _Rules:_ eval a x := series_limit (λn. aₙ·xⁿ); сходимость при \|aₙ\|≤1,0≤x<1 — абсолютная мажорация геометрическим (absolute_convergence). _P4:_ eval переводит формальную функцию-процесс (коэффициенты) в число-процесс (частичные суммы) — оба конечно-актуальны на каждой стадии. Унаследует classic (L3) — мост ВПЕРВЫЕ входит в L3-анализ Коши-вещественных (формальный слой был 0-аксиомен).
 - **Classical counterpart.** Evaluating a formal power series at a point (Sum a_n x^n) and absolute convergence by geometric majorization are classical. NEW: eval as the explicit BRIDGE between the two process layers of ToS — the formal function-process (FPS coefficient-process, FormalPowerSeries.v) and the analytic number-process (CauchyReal series_limit) — transporting the 0-axiom formal heart of E.L into a real number-process identity.
 - **Tags.** eval-bridge, formal-to-analytic, E-circ-L, function-as-process, H59, vein-C, new-framing, cauchy-real
 
-**Lemmas (8):**
+**Lemmas (13):**
 
 | name | kind | role |
 |---|---|---|
@@ -289,10 +289,16 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `eval_geom` | Lemma | ★ АНКЕР: eval geom_fps x ~~ geometric_limit x (Σ1·xⁿ=Σxⁿ=1/(1−x)) |
 | `compose_coeff_le1` | Lemma | коэф. формальной композиции exp∘log1m ограничены 1 (они ≡1 по сердцу) |
 | `eval_compose_exp_log1m_geom` | Theorem | ★★ формальное сердце E∘L, ВЫЧИСЛЕННОЕ: eval(exp∘log1m) x ~~ 1/(1−x) |
+| `Qpow_add` | Lemma | x^{i+j}=x^i·x^j (аддитивность степени) |
+| `eval_terms_mul` | Lemma | ★ тождество (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ — мост к Мертенсу |
+| `geom_partial_bound/eval_abs_bound` | Lemma | Σxᵏ≤1/(1−x); Σ\|aₖ\|xᵏ≤B/(1−x) (абс-границы для Мертенса) |
+| `conv_eval_cauchy` | Lemma | сходимость свёртки eval-рядов (Hconv): \|conv\|≤conv\|·\| + conv_cauchy |
+| `eval_mul` | Theorem | ★★ eval МУЛЬТИПЛИКАТИВЕН: eval(a·b) ~~ eval a · eval b (через mertens_cauchy_product) |
 
 **Key lemmas (deep):**
 
 - **`eval_compose_exp_log1m_geom`** - Первое АНАЛИТИЧЕСКОЕ следствие 0-аксиомного формального сердца E∘L. Формальная композиция fps_compose exp_fps log1m_fps (которой мы машинно доказали коэффициенты ≡1 = compose_exp_log1m_is_geom, БЕЗ аксиом) ВЫЧИСЛЯЕТСЯ как число-процесс eval: eval(exp∘log1m) x ~~ eval geom_fps x (равные коэф., eval_congr) ~~ geometric_limit x (eval_geom) = Σxⁿ = 1/(1−x). Это перенос тождества коэффициентов в реальное равенство чисел-процессов для геометрической стороны. ЧЕСТНАЯ ГРАНИЦА: это ещё НЕ exp_R(ln_proc x)~~1/(1−x) — для этого нужен закон композиции (eval f∘g = eval f ∘ eval g, Fubini двойного ряда) + анкеры exp/log к exp_R/ln_proc; это трудная половина. Но мост от формального мира в число-процессы открыт и анкер geom доказан. Унаследует classic (L3-анализ). _(eval-bridge, E-circ-L, formal-to-analytic, geometric, function-as-process, H59, honest-boundary)_
+- **`eval_mul`** - eval — КОЛЬЦЕВОЙ ГОМОМОРФИЗМ по умножению: eval(a·b) x ~~ cauchy_mul (eval a x)(eval b x). Доказано через ранее построенный mertens_cauchy_product (Cauchy-произведение) + КЛЮЧЕВОЕ тождество eval_terms_mul: (a·b)ₙ·xⁿ = conv(λi.aᵢxⁱ)(λj.bⱼxʲ)ₙ (т.к. xⁱ·x^{n−i}=xⁿ, Qpow_add) — т.е. члены произведения-ряда суть свёртка Коши взвешенных рядов. Для гипотез Мертенса: абс-границы Σ\|aₖ\|xᵏ≤B/(1−x) (eval_abs_bound через геом. оценку Σxᵏ≤1/(1−x)) и сходимость свёртки conv_eval_cauchy (\|conv â b̂\|≤conv\|â\|\|b̂\|, неотриц.+огранич. ⟹ conv_cauchy). Это самый переиспользуемый кирпич трудной половины моста: имея eval(a·b)=eval a·eval b, получаем eval(gᵏ)=（eval g)ᵏ — основу закона композиции eval(f∘g)=Σ fₖ(eval g)ᵏ. Унаследует classic (L3). _(eval-bridge, ring-homomorphism, mertens, cauchy-product, formal-to-analytic, H59, function-as-process)_
 
 **Uniqueness - score 3 (new-framing).** eval как явный МОСТ между двумя процессными слоями ToS (формальный коэффициент-процесс ↔ аналитический число-процесс), переносящий 0-аксиомное формальное сердце E∘L в реальное равенство чисел-процессов: вычисленная формальная композиция exp∘(−ln(1−x)) = геометрический ряд 1/(1−x).
 > _Caveat:_ Вычисление степенного ряда и абсолютная сходимость классичны. Уникальность — в ToS-обрамлении (два процессных слоя и явный мост между ними) и в переносе именно нашего 0-аксиомного формального результата. Это первый анкер; полный мост (eval-гомоморфизм через Мертенса + закон композиции → exp_R(L(x))~~1/(1−x)) — впереди. Файл ВПЕРВЫЕ в цепи наследует classic (вход в L3-анализ).

@@ -21,12 +21,14 @@
     ДИАГНОСТИКА (P4): eval переводит формальную функцию-процесс (коэффициенты) в число-процесс
       (частичные суммы) — оба «конечно-актуальны» на каждой стадии; мост двух процессных слоёв. 0-аксиомно.
 
-    STATUS: 9 Qed, 0 Admitted, 0 axioms (наследует только classic через SeriesConvergence).
-            ГОТОВО: eval (ограниченные коэф., |aₙ|≤1) + сходимость через absolute_convergence; eval_congr;
+    STATUS: 15 Qed, 0 Admitted, 0 axioms (наследует только classic через SeriesConvergence).
+            ГОТОВО: eval (ограниченные коэф.) + сходимость через absolute_convergence; eval_congr;
             ★ eval_geom (eval geom_fps = geometric_limit); ★★ eval_compose_exp_log1m_geom (формальное сердце
-            E∘L, вычисленное = 1/(1−x)).
-            ОСТАЁТСЯ (трудная половина моста): eval-мультипликативность через Мертенса (eval(a·b)=eval a·eval b);
-            закон композиции eval(f∘g) x ~~ eval f (eval g x) (Fubini двойного ряда); анкеры exp/log
+            E∘L, вычисленное = 1/(1−x)); ★★ eval_mul (eval МУЛЬТИПЛИКАТИВЕН: eval(a·b) ~~ eval a · eval b —
+            через mertens_cauchy_product + тождество (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ [eval_terms_mul]; с
+            Qpow_add, геом. оценкой Σxᵏ≤1/(1−x), абс-границами eval_abs_bound, conv_eval_cauchy для Hconv).
+            ОСТАЁТСЯ (трудная половина моста): eval-аддитивность (тривиально) + закон композиции
+            eval(f∘g) x ~~ eval f (eval g x) (Fubini двойного ряда); анкеры exp/log
             (eval exp_fps t ~~ exp_limit t, eval log1m_fps x ~~ ln_proc x — сдвиг индекса) → exp_R(L(x))~~1/(1−x)
             → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
     Author: Horsocrates | Date: June 2026
@@ -34,6 +36,7 @@
 
 From Stdlib Require Import QArith Qabs Lqa Lia ZArith.
 From ToS Require Import CauchyReal.
+From ToS Require Import RealField.
 From ToS Require Import SeriesConvergence.
 From ToS Require Import CauchyProduct.
 From ToS Require Import PowerSeries.
@@ -151,9 +154,112 @@ Proof.
   - apply eval_geom.
 Qed.
 
+(* ================================================================== *)
+(*  ★★ eval — КОЛЬЦЕВОЙ ГОМОМОРФИЗМ (мультипликативность через Мертенса) *)
+(* ================================================================== *)
+
+(** Аддитивность степени: x^{i+j} = x^i·x^j. *)
+Lemma Qpow_add : forall (x : Q) (i j : nat), Qpow x (i + j) == Qpow x i * Qpow x j.
+Proof.
+  intros x i j. induction i as [|i IH]; simpl.
+  - ring.
+  - rewrite IH. ring.
+Qed.
+
+(** ★ Ключевое тождество: (a·b)ₙ·xⁿ = свёртка взвешенных рядов.
+    eval_terms (a·b) = conv (eval_terms a) (eval_terms b), т.к. x^i·x^{n−i}=x^n. *)
+Lemma eval_terms_mul : forall (a b : FPS) (x : Q) (n : nat),
+  eval_terms (fps_mul a b) x n == conv (eval_terms a x) (eval_terms b x) n.
+Proof.
+  intros a b x n. unfold eval_terms, fps_mul, conv.
+  rewrite <- (partial_sum_scale_r (fun i => a i * b (n - i)%nat) (Qpow x n) n).
+  apply partial_sum_ext_le. intros i Hi.
+  assert (Hpow : Qpow x n == Qpow x i * Qpow x (n - i)%nat).
+  { rewrite <- Qpow_add. replace (i + (n - i))%nat with n by lia. reflexivity. }
+  rewrite Hpow. ring.
+Qed.
+
+(** Геометрическая оценка частичной суммы: Σ_{k≤N} xᵏ ≤ 1/(1−x). *)
+Lemma geom_partial_bound : forall (x : Q) (N : nat), 0 <= x -> x < 1 ->
+  partial_sum (fun k => Qpow x k) N <= / (1 - x).
+Proof.
+  intros x N Hx Hx1.
+  assert (H1x : 0 < 1 - x) by lra.
+  assert (Hr : (1 - x) * partial_sum (fun k => Qpow x k) N <= (1 - x) * / (1 - x)).
+  { rewrite geometric_sum_identity, Qmult_inv_r by lra.
+    assert (0 <= Qpow x (S N)) by (apply Qpow_nonneg; exact Hx). lra. }
+  apply (Qmult_le_l _ _ (1 - x) H1x). exact Hr.
+Qed.
+
+(** Абсолютная оценка eval-членов: Σ_{k≤N} |aₖ|xᵏ ≤ B/(1−x) при |aₖ|≤B. *)
+Lemma eval_abs_bound : forall (a : FPS) (x B : Q) (N : nat),
+  0 <= x -> x < 1 -> (forall n, Qabs (a n) <= B) ->
+  partial_sum (fun k => Qabs (eval_terms a x k)) N <= B * / (1 - x).
+Proof.
+  intros a x B N Hx Hx1 Hb.
+  assert (HB0 : 0 <= B).
+  { apply Qle_trans with (Qabs (a 0%nat)); [ apply Qabs_nonneg | apply Hb ]. }
+  eapply Qle_trans.
+  - apply (partial_sum_monotone (fun k => Qabs (eval_terms a x k)) (fun k => B * Qpow x k)).
+    intro k. unfold eval_terms.
+    rewrite Qabs_Qmult, (Qabs_pos (Qpow x k) (Qpow_nonneg x k Hx)).
+    apply Qmult_le_compat_r; [ apply Hb | apply Qpow_nonneg; exact Hx ].
+  - rewrite (partial_sum_scale B (fun k => Qpow x k) N).
+    rewrite (Qmult_comm B (partial_sum (fun k => Qpow x k) N)), (Qmult_comm B (/ (1 - x))).
+    apply Qmult_le_compat_r; [ apply geom_partial_bound; assumption | exact HB0 ].
+Qed.
+
+(** Сходимость свёртки eval-рядов (для гипотезы Hconv Мертенса): |conv â b̂|≤conv|â||b̂|,
+    а conv|â||b̂| неотрицателен и ограничен ⟹ Cauchy (conv_cauchy). *)
+Lemma conv_eval_cauchy : forall (a b : FPS) (x Ba Bb : Q),
+  0 <= x -> x < 1 -> (forall n, Qabs (a n) <= Ba) -> (forall n, Qabs (b n) <= Bb) ->
+  is_cauchy (partial_sum (conv (eval_terms a x) (eval_terms b x))).
+Proof.
+  intros a b x Ba Bb Hx Hx1 Ha Hb.
+  apply (absolute_convergence
+           (conv (eval_terms a x) (eval_terms b x))
+           (conv (fun k => Qabs (eval_terms a x k)) (fun k => Qabs (eval_terms b x k)))).
+  - intro n. unfold conv.
+    eapply Qle_trans; [ apply partial_sum_abs_le | ].
+    apply partial_sum_monotone. intro i. rewrite Qabs_Qmult. apply Qle_refl.
+  - apply (conv_cauchy (fun k => Qabs (eval_terms a x k))
+                       (fun k => Qabs (eval_terms b x k))
+                       (Ba * / (1 - x)) (Bb * / (1 - x))).
+    + intro n. apply Qabs_nonneg.
+    + intro n. apply Qabs_nonneg.
+    + intro M. apply eval_abs_bound; assumption.
+    + intro M. apply eval_abs_bound; assumption.
+Qed.
+
+(** ★★ eval МУЛЬТИПЛИКАТИВЕН: eval(a·b) ~~ eval a · eval b  (через Мертенса).
+    eval(a·b) = series_limit (eval_terms(a·b)) ~~ series_limit (conv â b̂) [eval_terms_mul]
+    ~~ cauchy_mul (series_limit â)(series_limit b̂) [mertens_cauchy_product] = eval a · eval b. *)
+Theorem eval_mul : forall (a b : FPS) (x Ba Bb : Q)
+    (Hx : 0 <= x) (Hx1 : x < 1)
+    (HBa : forall n, Qabs (a n) <= Ba) (HBb : forall n, Qabs (b n) <= Bb)
+    (H : is_cauchy (partial_sum (eval_terms (fps_mul a b) x)))
+    (Ha : is_cauchy (partial_sum (eval_terms a x)))
+    (Hb : is_cauchy (partial_sum (eval_terms b x))),
+  eval (fps_mul a b) x H ~~ cauchy_mul (eval a x Ha) (eval b x Hb).
+Proof.
+  intros a b x Ba Bb Hx Hx1 HBa HBb H Ha Hb.
+  unfold eval.
+  set (Hconv := conv_eval_cauchy a b x Ba Bb Hx Hx1 HBa HBb).
+  eapply cauchy_equiv_trans.
+  - apply (series_limit_wd (eval_terms (fps_mul a b) x)
+             (conv (eval_terms a x) (eval_terms b x)) H Hconv).
+    intro n. apply eval_terms_mul.
+  - apply (mertens_cauchy_product (eval_terms a x) (eval_terms b x)
+             (Ba * / (1 - x)) (Bb * / (1 - x))
+             (fun N => eval_abs_bound a x Ba N Hx Hx1 HBa)
+             (fun N => eval_abs_bound b x Bb N Hx Hx1 HBb)
+             Ha Hb Hconv).
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions eval_geom.
 Print Assumptions eval_compose_exp_log1m_geom.
+Print Assumptions eval_mul.
 
 (* ================================================================== *)
 (*  СВОДКА: eval — первый анкер аналитического моста.  Формальное сердце *)
