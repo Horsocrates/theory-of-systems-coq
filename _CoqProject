@@ -18,6 +18,7 @@ src/LnMulReduction.v
 src/PolyTimesGeom.v
 src/Tannery.v
 src/LnMulComposition.v
+src/LnMulClosed.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v
@@ -1636,6 +1637,12 @@ src/foundation/ApplicationsAudit.v
 src/foundation/ArrowGroundingDescent.v
 src/foundation/BornRuleDescent.v
 src/foundation/LambdaSmallnessDescent.v
+src/foundation/LambdaSmallnessExponent.v
+src/foundation/LambdaStageBridge.v
+src/foundation/LambdaRunningVacuumBound.v
+src/foundation/LambdaLevelInversionError.v
+src/foundation/ObserverSystemTime.v
+src/foundation/PolarizableVacuumIndex.v
 src/foundation/NSBoundDescent.v
 src/foundation/DepartureWallDescent.v
 src/foundation/JFactorDescent.v
@@ -1868,6 +1875,13 @@ src/foundation/H1GeneralDegreeConstructivity.v
 src/foundation/DiscriminantCompleteEigenvalue.v
 src/foundation/GapPythagoreanBoundary.v
 src/foundation/CayleyFourierMassBridge.v
+src/foundation/ThreeFifthsUnification.v
+src/foundation/PhysicsEigenvalueVeinA.v
+src/foundation/CayleyGeometrySpectralBridge.v
+src/foundation/DoublyStochasticForkBridge.v
+src/foundation/NormFormTowerBridge.v
+src/foundation/EulerCharProtectedInteger.v
+src/foundation/FixedPointTaxonomy.v
 src/foundation/H1RationalDegreeUniform.v
 src/foundation/RationalRootEigenvalue.v
 src/foundation/MonicRationalRoot.v
