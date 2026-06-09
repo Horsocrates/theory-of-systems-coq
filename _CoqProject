@@ -21,6 +21,38 @@ src/RoundingSafety.v
 src/IVT_CauchyReal.v
 src/Measure.v
 src/SoftmaxProbability.v
+src/Catalan.v
+src/Andre_reflection.v
+src/Catalan_recurrence.v
+src/Motzkin.v
+
+# CS branch (μ-recursion as L5 operator; bridge to computability)
+src/cs/MuRecursion.v
+src/cs/BoundedHalting.v
+src/cs/KleeneNF.v
+
+# Combinatorics via L5
+src/combinatorics/ErdosSzekeres.v
+src/combinatorics/HallsMarriage.v
+src/combinatorics/GreedyColoring.v
+src/combinatorics/CycleInPermutation.v
+src/combinatorics/CycleDecomposition.v
+src/combinatorics/PermutationOrder.v
+src/combinatorics/PermutationFixedPoints.v
+src/combinatorics/PermutationInvolution.v
+src/combinatorics/OrbitMin.v
+
+# Number theory via L5
+src/numbertheory/FTA.v
+src/numbertheory/Bezout.v
+
+# Analysis via L5
+src/analysis/BolzanoWeierstrass.v
+src/analysis/SignChange.v
+src/analysis/KnasterTarski.v
+
+# Foundation: diagonal unification (where L5/μ breaks)
+src/foundation/DiagonalUnification.v
 
 # Architecture of Reasoning (0 axioms, self-contained)
 Architecture_of_Reasoning/Architecture_of_Reasoning.v
