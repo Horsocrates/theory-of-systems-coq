@@ -21,7 +21,8 @@
     ДИАГНОСТИКА (P4): eval переводит формальную функцию-процесс (коэффициенты) в число-процесс
       (частичные суммы) — оба «конечно-актуальны» на каждой стадии; мост двух процессных слоёв. 0-аксиомно.
 
-    STATUS: 33 Qed, 0 Admitted, 0 axioms (convergence-леммы наследуют classic; АЛГЕБРАИЧЕСКИЕ hom-леммы 0-аксиомны).
+    STATUS: 34 Qed, 0 Admitted, 0 axioms (convergence-леммы наследуют classic; АЛГЕБРАИЧЕСКИЕ леммы 0-аксиомны,
+            вкл. eval_compose_swap — конечный Fubini композиции, Closed).
             ГОТОВО: eval + сходимость; eval_congr; ★ eval_geom; ★★ eval_compose_exp_log1m_geom (формальное сердце
             E∘L, вычисленное = 1/(1−x)); ★★ eval_mul; ★ АНКЕРЫ eval_exp (↔exp_limit), eval_log1m (↔ln_proc);
             ★ ℚ-АЛГЕБРА-ГОМОМОРФИЗМ eval_add/zero/one/neg/sub/scale (алгебра 0-аксиомна, eval_add=Closed);
@@ -29,8 +30,11 @@
             извлечены из abs_conv_bounded [монотон.+Cauchy⟹огранич.]); ★★ POWER LAW eval_pow: eval(gᵏ)~~(eval g)ᵏ
             (cauchy_pow = итерир. cauchy_mul; индукция по k через eval_mul_abs + abs_conv_pow [замкнутость абс-
             сходимости относительно умножения — ИМЕННО это разблокировало power law, коэф. gᵏ растут].
-            ОСТАЁТСЯ (БОСС): закон композиции eval(f∘g) x ~~ Σ fₖ(eval g x)ᵏ (Fubini двойного ряда: Σₙ Σ_{k≤n}
-            fₖ(gᵏ)ₙxⁿ = Σₖ fₖ Σₙ(gᵏ)ₙxⁿ, внутр. конечна по занулению) → exp_R(L(x))~~1/(1−x) → ln_mul.
+            ★ eval_compose_swap (КОНЕЧНЫЙ Fubini композиции, 0-аксиомен): n-я стадия eval(f∘g) z =
+            Σ_{k≤n} fₖ·(n-я стадия eval(gᵏ) z) — внутренняя половина босса (квадрат⟷треугольник + зануление).
+            ОСТАЁТСЯ (БОСС, оставшаяся половина): ДИАГОНАЛЬНЫЙ переход к пределу n→∞ (partial_sum(eval_terms gᵏ z) n
+            → (eval g z)ᵏ [eval_pow] + внешняя Σ_{k≤n} → ∞ равномерно, Tannery-тип) + связь Σ(1/k!)vᵏ с exp_R(v)
+            [диагональ exp_R] ⟹ eval(exp∘log1m) z ~~ exp_R(ln_proc z) ⟹ exp_R(L(z))~~1/(1−z) ⟹ ln_mul (LnMulReduction).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -593,12 +597,47 @@ Proof.
     + apply cauchy_mul_compat; [ apply cauchy_equiv_refl | apply (IH Hk') ].
 Qed.
 
+(* ================================================================== *)
+(*  ★★ ВНУТРЕННЯЯ ПОЛОВИНА БОССА: конечный внешний Fubini композиции     *)
+(*    n-я стадия eval(f∘g) = Σ_{k≤n} fₖ·(n-я стадия eval(gᵏ)).           *)
+(*    (Треугольник→квадрат через зануление + partial_sum_swap.)          *)
+(* ================================================================== *)
+
+(** ★ Конечный Fubini для eval-композиции (при g(0)=0).  Та же геометрия квадрат⟷
+    треугольник, что в conv_compose_swap, но с весами zⁿ.  Сводит композиционную
+    теорему к ДИАГОНАЛЬНОМУ переходу к пределу (n→∞): partial_sum (eval_terms (gᵏ) z) n
+    → (eval g z)ᵏ [eval_pow], а внешняя сумма Σ_{k≤n} расширяется до ∞. *)
+Lemma eval_compose_swap : forall (f g : FPS) (z : Q) (n : nat),
+  g 0%nat == 0 ->
+  partial_sum (eval_terms (fps_compose f g) z) n
+  == partial_sum (fun k => f k * partial_sum (eval_terms (fps_pow g k) z) n) n.
+Proof.
+  intros f g z n Hg0.
+  rewrite (partial_sum_ext_le (eval_terms (fps_compose f g) z)
+            (fun m => partial_sum (fun k => f k * fps_pow g k m * Qpow z m) m) n).
+  2:{ intros m Hm. unfold eval_terms, fps_compose. symmetry.
+      apply (partial_sum_scale_r (fun k => f k * fps_pow g k m) (Qpow z m) m). }
+  rewrite (partial_sum_ext_le
+            (fun m => partial_sum (fun k => f k * fps_pow g k m * Qpow z m) m)
+            (fun m => partial_sum (fun k => f k * fps_pow g k m * Qpow z m) n) n).
+  2:{ intros m Hm.
+      apply (partial_sum_extend_zero (fun k => f k * fps_pow g k m * Qpow z m) n m Hm).
+      intros k Hk1 Hk2.
+      assert (Hz : fps_pow g k m == 0) by (apply fps_pow_low_order; [ exact Hg0 | lia ]).
+      rewrite Hz. ring. }
+  rewrite (partial_sum_swap (fun m k => f k * fps_pow g k m * Qpow z m) n n).
+  apply partial_sum_ext_le. intros k Hk. unfold eval_terms.
+  rewrite <- (partial_sum_scale (f k) (fun m => fps_pow g k m * Qpow z m) n).
+  apply partial_sum_ext_le. intros m Hm. ring.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions eval_geom.
 Print Assumptions eval_compose_exp_log1m_geom.
 Print Assumptions eval_mul.
 Print Assumptions eval_mul_abs.
 Print Assumptions eval_pow.
+Print Assumptions eval_compose_swap.
 Print Assumptions eval_exp.
 Print Assumptions eval_log1m.
 Print Assumptions eval_add.
