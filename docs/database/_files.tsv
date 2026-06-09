@@ -1838,3 +1838,4 @@ num	path
 1837	src/LnMulReduction.v
 1838	src/PolyTimesGeom.v
 1839	src/Tannery.v
+1840	src/LnMulComposition.v

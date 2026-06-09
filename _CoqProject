@@ -17,6 +17,7 @@ src/FPSEval.v
 src/LnMulReduction.v
 src/PolyTimesGeom.v
 src/Tannery.v
+src/LnMulComposition.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v
@@ -1866,6 +1867,7 @@ src/foundation/H1CubicConstructivity.v
 src/foundation/H1GeneralDegreeConstructivity.v
 src/foundation/DiscriminantCompleteEigenvalue.v
 src/foundation/GapPythagoreanBoundary.v
+src/foundation/CayleyFourierMassBridge.v
 src/foundation/H1RationalDegreeUniform.v
 src/foundation/RationalRootEigenvalue.v
 src/foundation/MonicRationalRoot.v

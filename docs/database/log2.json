@@ -432,5 +432,37 @@
       "caveat": "Сама теорема Таннери — классика анализа. Ценность: машинная 0-аксиомная Q-формализация + центральная роль в замыкании ln_mul. Не новый матфакт."
     },
     "tags": ["tannery", "dominated-convergence", "0-axiom", "ln-mul", "analysis", "reusable", "vein-C"]
+  },
+  {
+    "num": 1840,
+    "path": "src/LnMulComposition.v",
+    "cluster": "log2",
+    "classical_counterpart": "The fact that the n-th partial sum of a power series raised to k is dominated by the k-th power of the partial sum (for nonneg coefficients) is a standard convolution inequality. NEW: machine-checked over Q as the DOMINATION (brick #3) of the ln_mul Tannery argument, supplying the summable majorant.",
+    "title": "Domination P_{k,n} <= sigma_n^k + sigma_n <= 1/(1-z) (ln_mul Tannery brick #3, 0-axiom)",
+    "topic": "P_le_sigma_pow: for g with nonneg coefficients and z>=0, partial_sum (eval_terms (fps_pow g k) z) n <= Qpow (partial_sum (eval_terms g z) n) k -- the n-th stage of eval(g^k) is dominated by the k-th power of the n-th stage of eval(g). Proof by induction on k: P_{S k} = partial_sum(conv(eval_terms g)(eval_terms g^k)) n (eval_terms_mul) <= sigma_n * P_{k,n} (conv_le_square, both nonneg) <= sigma_n * sigma_n^k (IH). sigma_bound: partial_sum(eval_terms log1m_fps z) n <= 1/(1-z) (term <= Qpow z m since 1/m <= 1, then geom_partial_bound). Helpers: log1m_nonneg, eval_terms_nonneg, fps_pow_nonneg (conv_nonneg). 0-AXIOM (Print Assumptions = Closed).",
+    "role": "Brick #3 (the DOMINATION) of the outer half of the ln_mul composition theorem. Supplies the summable majorant for Tannery: with B = 1/(1-z), P_{k,n} <= sigma_n^k <= B^k, so the bracket |(sigma_n)^k - P_{k,n}| <= B^k and M_k := (1/k!)*2*B^k has Sum M = 2*exp(B) < inf. Combined with tannery (Tannery.v) and the per-k convergence from eval_pow, the final assembly (brick #4) gives eval(exp.log1m) z ~~ exp_R(ln_proc z) => the ln_mul key fact.",
+    "qed": 5, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "Qabs", "Lqa", "Lia", "ZArith", "ToS: CauchyReal", "RealField", "SeriesConvergence", "CauchyProduct", "FormalPowerSeries", "FPSEval"],
+    "err": {
+      "elements": "коэф. log1m/gᵏ ≥0; частичные суммы Pₖₙ=Σ_{m≤n}(gᵏ)_m zᵐ; σₙ=Σ_{m≤n} g_m zᵐ.",
+      "roles": "домината Pₖₙ≤σₙᵏ — мажоранта Bᵏ для Таннери; σₙ≤1/(1−z) — рациональная граница.",
+      "rules": "Pₖₙ≤σₙᵏ индукцией по k: P_{S k}=Σ conv(ĝ)(ĝᵏ)≤σₙ·Pₖₙ (conv_le_square)≤σₙ·σₙᵏ (IH).",
+      "p4": "стадии eval(gᵏ) ограничены стадиями (eval g)ᵏ — конечная мажорация на каждом n. 0-аксиомно."
+    },
+    "lemmas": [
+      {"name": "log1m_nonneg/eval_terms_nonneg/fps_pow_nonneg", "kind": "Lemma", "role": "неотрицательности: log1m≥0; eval-члены≥0; gᵏ≥0 (conv_nonneg)"},
+      {"name": "sigma_bound", "kind": "Lemma", "role": "★ σₙ=Σ_{m≤n} z^m/m ≤ 1/(1−z) (term≤z^m + geom_partial_bound)"},
+      {"name": "P_le_sigma_pow", "kind": "Lemma", "role": "★★ ДОМИНАТА: partial_sum(eval_terms(gᵏ)z)n ≤ (partial_sum(eval_terms g z)n)ᵏ (индукция + conv_le_square + eval_terms_mul)"}
+    ],
+    "key_lemmas": [
+      {"name": "P_le_sigma_pow", "analysis": "ДОМИНАТА (Tannery-кирпич #3), 0-АКСИОМНО: n-я стадия eval(gᵏ) ≤ (n-я стадия eval g)ᵏ для неотрицательных коэф. g. Индукция по k: P_{S k,n}=partial_sum(conv(eval_terms g z)(eval_terms(gᵏ)z))n (через eval_terms_mul: члены произведения-ряда = свёртка взвешенных) ≤ σₙ·Pₖₙ (conv_le_square — Σ conv ≤ (Σ)(Σ) для неотрицательных) ≤ σₙ·σₙᵏ (IH, σₙ≥0). Это даёт суммируемую мажоранту для теоремы Таннери: с B=1/(1−z) (sigma_bound: σₙ≤1/(1−z)), Pₖₙ≤σₙᵏ≤Bᵏ, поэтому |bracketₖₙ|=|σₙᵏ−Pₖₙ|≤Bᵏ и Mₖ=(1/k!)·2Bᵏ суммируется к 2exp(B)<∞. Вместе с tannery (Tannery.v) и per-k сходимостью bracket→0 из eval_pow финальная сборка (#4) даёт eval(exp∘log1m)z ~~ exp_R(ln_proc z) ⟹ ключевой факт ln_mul. Маршрут обошёл и гармоническую оценку, и точное совпадение коэффициентов.", "tags": ["domination", "convolution-inequality", "conv-le-square", "tannery", "0-axiom", "ln-mul", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "synthesis",
+      "claim": "Машинно 0-аксиомная домината (n-я стадия eval(gᵏ) ≤ (n-я стадия eval g)ᵏ) + σₙ≤1/(1−z) — стандартное свёрточное неравенство, дающее суммируемую мажоранту для Tannery-замыкания композиционной теоремы ln_mul.",
+      "caveat": "Само неравенство Σconv≤(Σ)(Σ) для неотрицательных — классика (уже было conv_le_square). Ценность: применение к eval-степеням как домината для Таннери. Не новый матфакт."
+    },
+    "tags": ["domination", "convolution-inequality", "tannery", "0-axiom", "ln-mul", "vein-C"]
   }
 ]
