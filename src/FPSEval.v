@@ -21,18 +21,19 @@
     ДИАГНОСТИКА (P4): eval переводит формальную функцию-процесс (коэффициенты) в число-процесс
       (частичные суммы) — оба «конечно-актуальны» на каждой стадии; мост двух процессных слоёв. 0-аксиомно.
 
-    STATUS: 17 Qed, 0 Admitted, 0 axioms (наследует только classic через SeriesConvergence).
-            ГОТОВО: eval (ограниченные коэф.) + сходимость через absolute_convergence; eval_congr;
+    STATUS: 25 Qed, 0 Admitted, 0 axioms (convergence-леммы наследуют classic; АЛГЕБРАИЧЕСКИЕ hom-леммы 0-аксиомны).
+            ГОТОВО: eval + сходимость (absolute_convergence); eval_congr;
             ★ eval_geom (eval geom_fps = geometric_limit); ★★ eval_compose_exp_log1m_geom (формальное сердце
             E∘L, вычисленное = 1/(1−x)); ★★ eval_mul (eval МУЛЬТИПЛИКАТИВЕН: eval(a·b) ~~ eval a · eval b —
-            через mertens_cauchy_product + тождество (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ [eval_terms_mul]);
-            ★ АНКЕРЫ exp/log: eval_exp (eval exp_fps t ~~ exp_limit t — члены совпадают по Qmult_comm) и
-            eval_log1m (eval log1m_fps x ~~ ln_proc x — СДВИГ индекса: лишний 0 в начале, partial_sum (S n)=
-            log_series_partial n, эквивалентность Cauchy-сдвигов).  Формальные базис-объекты привязаны к
-            существующим процессам exp_limit/ln_proc.
-            ОСТАЁТСЯ (трудная половина моста): eval-аддитивность (тривиально) + закон композиции
-            eval(f∘g) x ~~ Σ fₖ(eval g x)ᵏ (Fubini двойного ряда; внутр. сумма конечна по занулению) →
-            exp_R(L(x))~~1/(1−x) → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
+            mertens_cauchy_product + (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ); ★ АНКЕРЫ eval_exp (↔exp_limit), eval_log1m
+            (↔ln_proc, сдвиг индекса); ★ ℚ-АЛГЕБРА-ГОМОМОРФИЗМ: eval_add/zero/one/neg/sub/scale (сохраняет
+            +,0,1,−,скаляр — эти АКСИОМО-СВОБОДНЫ, чистая алгебра частичных сумм; Print Assumptions eval_add =
+            Closed).  eval : FPS → ℝ_proc есть гомоморфизм ℚ-алгебр.
+            ОСТАЁТСЯ (трудная половина — БОСС): закон композиции eval(f∘g) x ~~ Σ fₖ(eval g x)ᵏ (Fubini двойного
+            ряда).  КЛЮЧЕВОЙ НЮАНС: для power law eval(gᵏ)=(eval g)ᵏ нужна ВЕРСИЯ eval_mul с гипотезой
+            АБСОЛЮТНОЙ СХОДИМОСТИ (а не равномерной границей |aₙ|≤B), т.к. коэффициенты gᵏ РАСТУТ полиномиально
+            (число композиций n на k частей) — равномерной границы нет, но Σ|gᵏ_n|xⁿ всё равно сходится.
+            Затем → exp_R(L(x))~~1/(1−x) → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -302,12 +303,132 @@ Proof.
   apply HN; lia.
 Qed.
 
+(* ================================================================== *)
+(*  ★ eval — ℚ-АЛГЕБРА-ГОМОМОРФИЗМ: сохраняет +, 0, 1, −, скаляр         *)
+(*    (мультипликативность eval_mul уже доказана выше).                  *)
+(* ================================================================== *)
+
+(** Поточечное равенство стадий ⟹ ~~ (общий хелпер). *)
+Lemma cauchy_equiv_from_cs_eq : forall (P R : CauchySeq),
+  (forall n, cs_seq P n == cs_seq R n) -> P ~~ R.
+Proof.
+  intros P R HPR eps Heps. exists 0%nat. intros n _.
+  rewrite (HPR n).
+  assert (Hz : cs_seq R n - cs_seq R n == 0) by ring.
+  rewrite Hz. change (Qabs 0) with (0:Q). exact Heps.
+Qed.
+
+(** Частичная сумma отрицаний. *)
+Lemma partial_sum_neg : forall (f : nat -> Q) (n : nat),
+  partial_sum (fun i => - f i) n == - partial_sum f n.
+Proof.
+  intros f n. induction n as [|n IH].
+  - reflexivity.
+  - rewrite (partial_sum_S (fun i => - f i) n), (partial_sum_S f n), IH.
+    cbv beta. ring.
+Qed.
+
+(** ★ eval аддитивен: eval(a+b) ~~ eval a + eval b. *)
+Lemma eval_add : forall (a b : FPS) (x : Q)
+    (H : is_cauchy (partial_sum (eval_terms (fps_add a b) x)))
+    (Ha : is_cauchy (partial_sum (eval_terms a x)))
+    (Hb : is_cauchy (partial_sum (eval_terms b x))),
+  eval (fps_add a b) x H ~~ cauchy_add (eval a x Ha) (eval b x Hb).
+Proof.
+  intros a b x H Ha Hb. apply cauchy_equiv_from_cs_eq. intro n.
+  change (cs_seq (cauchy_add (eval a x Ha) (eval b x Hb)) n)
+    with (partial_sum (eval_terms a x) n + partial_sum (eval_terms b x) n).
+  change (cs_seq (eval (fps_add a b) x H) n)
+    with (partial_sum (eval_terms (fps_add a b) x) n).
+  rewrite <- partial_sum_plus.
+  apply partial_sum_ext_le. intros k Hk. unfold eval_terms, fps_add. ring.
+Qed.
+
+(** ★ eval(0) ~~ 0. *)
+Lemma eval_zero : forall (x : Q)
+    (H : is_cauchy (partial_sum (eval_terms fps_zero x))),
+  eval fps_zero x H ~~ cauchy_const 0.
+Proof.
+  intros x H. apply cauchy_equiv_from_cs_eq. intro n.
+  change (cs_seq (cauchy_const 0) n) with (0:Q).
+  change (cs_seq (eval fps_zero x H) n) with (partial_sum (eval_terms fps_zero x) n).
+  rewrite (partial_sum_ext_le (eval_terms fps_zero x) (fun _ => 0) n).
+  - apply partial_sum_zero.
+  - intros k Hk. unfold eval_terms, fps_zero. ring.
+Qed.
+
+(** ★ eval(1) ~~ 1. *)
+Lemma eval_one : forall (x : Q)
+    (H : is_cauchy (partial_sum (eval_terms fps_one x))),
+  eval fps_one x H ~~ cauchy_one.
+Proof.
+  intros x H. apply cauchy_equiv_from_cs_eq. intro n.
+  change (cs_seq cauchy_one n) with (1:Q).
+  change (cs_seq (eval fps_one x H) n) with (partial_sum (eval_terms fps_one x) n).
+  induction n as [|m IH].
+  - cbn [partial_sum]. unfold eval_terms. cbn [fps_one Qpow]. ring.
+  - rewrite partial_sum_S.
+    assert (Hz : eval_terms fps_one x (S m) == 0)
+      by (unfold eval_terms; cbn [fps_one]; ring).
+    rewrite Hz, IH. ring.
+Qed.
+
+(** ★ eval(−a) ~~ − eval a. *)
+Lemma eval_neg : forall (a : FPS) (x : Q)
+    (H : is_cauchy (partial_sum (eval_terms (fps_neg a) x)))
+    (Ha : is_cauchy (partial_sum (eval_terms a x))),
+  eval (fps_neg a) x H ~~ cauchy_neg (eval a x Ha).
+Proof.
+  intros a x H Ha. apply cauchy_equiv_from_cs_eq. intro n.
+  change (cs_seq (cauchy_neg (eval a x Ha)) n)
+    with (- partial_sum (eval_terms a x) n).
+  change (cs_seq (eval (fps_neg a) x H) n)
+    with (partial_sum (eval_terms (fps_neg a) x) n).
+  rewrite <- partial_sum_neg.
+  apply partial_sum_ext_le. intros k Hk. unfold eval_terms, fps_neg. ring.
+Qed.
+
+(** ★ eval(a−b) ~~ eval a − eval b. *)
+Lemma eval_sub : forall (a b : FPS) (x : Q)
+    (H : is_cauchy (partial_sum (eval_terms (fps_sub a b) x)))
+    (Ha : is_cauchy (partial_sum (eval_terms a x)))
+    (Hb : is_cauchy (partial_sum (eval_terms b x))),
+  eval (fps_sub a b) x H ~~ cauchy_sub (eval a x Ha) (eval b x Hb).
+Proof.
+  intros a b x H Ha Hb. apply cauchy_equiv_from_cs_eq. intro n.
+  change (cs_seq (cauchy_sub (eval a x Ha) (eval b x Hb)) n)
+    with (partial_sum (eval_terms a x) n + - partial_sum (eval_terms b x) n).
+  change (cs_seq (eval (fps_sub a b) x H) n)
+    with (partial_sum (eval_terms (fps_sub a b) x) n).
+  assert (Hps : partial_sum (eval_terms (fps_sub a b) x) n
+                == partial_sum (eval_terms a x) n - partial_sum (eval_terms b x) n).
+  { rewrite <- partial_sum_minus. apply partial_sum_ext_le.
+    intros k Hk. unfold eval_terms, fps_sub. ring. }
+  rewrite Hps. ring.
+Qed.
+
+(** ★ eval(c·a) ~~ c · eval a (умножение на скаляр-константу). *)
+Lemma eval_scale : forall (c : Q) (a : FPS) (x : Q)
+    (H : is_cauchy (partial_sum (eval_terms (fps_scale c a) x)))
+    (Ha : is_cauchy (partial_sum (eval_terms a x))),
+  eval (fps_scale c a) x H ~~ cauchy_mul (cauchy_const c) (eval a x Ha).
+Proof.
+  intros c a x H Ha. apply cauchy_equiv_from_cs_eq. intro n.
+  change (cs_seq (cauchy_mul (cauchy_const c) (eval a x Ha)) n)
+    with (c * partial_sum (eval_terms a x) n).
+  change (cs_seq (eval (fps_scale c a) x H) n)
+    with (partial_sum (eval_terms (fps_scale c a) x) n).
+  rewrite <- (partial_sum_scale c (eval_terms a x) n).
+  apply partial_sum_ext_le. intros k Hk. unfold eval_terms, fps_scale. ring.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions eval_geom.
 Print Assumptions eval_compose_exp_log1m_geom.
 Print Assumptions eval_mul.
 Print Assumptions eval_exp.
 Print Assumptions eval_log1m.
+Print Assumptions eval_add.
 
 (* ================================================================== *)
 (*  СВОДКА: eval — первый анкер аналитического моста.  Формальное сердце *)
