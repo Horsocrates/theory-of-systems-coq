@@ -22,17 +22,19 @@
     ДИАГНОСТИКА (P4): функция-как-коэффициент-процесс — Element (многочлен) ⟺ терминирует,
       role-limit (трансцендентная) ⟺ не терминирует.  То же H1, на уровень выше.  0-аксиомно.
 
-    STATUS: 26 Qed, 0 Admitted, 0 axioms (все ключевые аксиомо-СВОБОДНЫ, вкл. fps_deriv_mul, conv_assoc, fps_pow_deriv).
+    STATUS: 37 Qed, 0 Admitted, 0 axioms (ВСЕ ключевые аксиомо-СВОБОДНЫ, вкл. fps_chain_rule, compose_exp_log1m_is_geom).
             ГОТОВО: (1) FPS-реификация + граница Element/role-limit на уровне функций; (2) FPS-исчисление —
             exp'=exp, (−ln(1−x))'=1/(1−x); (3) СТРУКТУРНОЕ СЕРДЦЕ ode_geom_unique (ОДУ h'=h·geom, h(0)=1 ⟹ h=geom);
-            (4) ★ ПРАВИЛО ЛЕЙБНИЦА fps_deriv_mul: (a·b)'=a'·b+a·b' — тот же Vandermonde-переиндекс, что в exp_conv_rec;
-            (5) ★ КОЛЬЦЕВАЯ СТРУКТУРА: свёртка КОММУТАТИВНА (conv_comm), АССОЦИАТИВНА (conv_assoc — тройная сумма Коши
-            через треугольный Fubini-своп partial_sum_triangle_swap), с единицей fps_one (conv_one_l/r) — FPS есть
-            коммутативное кольцо; (6) ★★ ПРАВИЛО СТЕПЕНИ fps_pow_deriv: (gᵏ⁺¹)'=(k+1)·gᵏ·g' (индукция поверх Лейбница +
-            кольцо).  Всё аксиомо-СВОБОДНО.  Исчисление FPS завершено.
-            ОСТАЁТСЯ: compose (f∘g при g(0)=0, конечная усечённость) + цепное правило (f∘g)'=(f'∘g)·g' → compose exp_fps
-            log1m_fps уд. h'=h·geom (exp'=exp, log1m'=geom) ⟹ compose=geom (через ode_geom_unique) — формальное сердце
-            E∘L; затем аналитический мост eval(f∘g) → горизонт ln_mul.
+            (4) ★ ПРАВИЛО ЛЕЙБНИЦА fps_deriv_mul: (a·b)'=a'·b+a·b'; (5) ★ КОЛЬЦЕВАЯ СТРУКТУРА: свёртка КОММУТАТИВНА
+            (conv_comm), АССОЦИАТИВНА (conv_assoc — тройная сумма Коши через треугольный Fubini-своп
+            partial_sum_triangle_swap), с единицей fps_one — FPS коммутативное кольцо; (6) ★★ ПРАВИЛО СТЕПЕНИ
+            fps_pow_deriv: (gᵏ⁺¹)'=(k+1)·gᵏ·g'; (7) ★★ КОМПОЗИЦИЯ fps_compose (f∘g при g(0)=0, усечена т.к. (gᵏ)ₙ=0 при
+            k>n — fps_pow_low_order) + ★★★ ЦЕПНОЕ ПРАВИЛО fps_chain_rule (f∘g)'=(f'∘g)·g' (через conv_compose_swap:
+            квадрат⟷треугольник partial_sum_swap + зануление); (8) ★★★★ ФОРМАЛЬНОЕ СЕРДЦЕ E∘L:
+            compose_exp_log1m_is_geom — exp(−ln(1−x))=1/(1−x) на уровне коэффициент-процессов (h'=h·geom + ode_geom_unique).
+            E∘L ЗАКРЫТ ФОРМАЛЬНО.  Всё аксиомо-СВОБОДНО.
+            ОСТАЁТСЯ: аналитический мост eval(f∘g) x ~~ exp_R(ln_proc x) ~~ geometric_limit x (от формальных рядов к
+            процессам-числам CauchyReal) → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -499,6 +501,186 @@ Lemma fps_pow_deriv_eq : forall g k,
          (fps_scale (inject_Z (Z.of_nat (S k))) (fps_mul (fps_pow g k) (fps_deriv g))).
 Proof. intros g k n. unfold fps_scale, fps_mul. apply fps_pow_deriv. Qed.
 
+(* ================================================================== *)
+(*  ★ КОМПОЗИЦИЯ FPS и ЦЕПНОЕ ПРАВИЛО — формальное сердце E∘L.          *)
+(*    f∘g при g(0)=0: коэффициент усечён (Σ_{k≤n} fₖ·(gᵏ)ₙ, т.к. при     *)
+(*    g(0)=0 ряд gᵏ имеет порядок ≥ k ⟹ (gᵏ)ₙ=0 при k>n).               *)
+(* ================================================================== *)
+
+(** ★ Зануление младших порядков: g(0)=0 ⟹ (gᵏ)ᵢ=0 при i<k.  (gᵏ имеет
+    порядок ≥ k.)  Индукция по k: член j=0 убивает g(0)=0, член j≥1 — IH. *)
+Lemma fps_pow_low_order : forall (g : FPS), g 0%nat == 0 ->
+  forall k i, (i < k)%nat -> fps_pow g k i == 0.
+Proof.
+  intros g Hg0. induction k as [|k IH]; intros i Hi.
+  - lia.
+  - change (fps_pow g (S k) i) with (conv g (fps_pow g k) i).
+    unfold conv.
+    rewrite (partial_sum_ext_le (fun j => g j * fps_pow g k (i - j)%nat) (fun _ => 0) i).
+    + apply partial_sum_zero.
+    + intros j Hj. destruct j as [|j'].
+      * rewrite Hg0. ring.
+      * assert (Hz : fps_pow g k (i - S j')%nat == 0) by (apply IH; lia).
+        rewrite Hz. ring.
+Qed.
+
+(** Удлинение частичной суммы нулевым хвостом: если a k=0 при i<k≤n, то
+    Σ_{≤i} a = Σ_{≤n} a. *)
+Lemma partial_sum_extend_zero : forall (a : nat -> Q) (n i : nat),
+  (i <= n)%nat -> (forall k, (i < k)%nat -> (k <= n)%nat -> a k == 0) ->
+  partial_sum a i == partial_sum a n.
+Proof.
+  intros a n. induction n as [|n IH]; intros i Hi Hz.
+  - assert (i = 0)%nat by lia. subst i. reflexivity.
+  - assert (i <= n \/ i = S n)%nat as [Hle | Heq] by lia.
+    + assert (Hz' : forall k, (i < k)%nat -> (k <= n)%nat -> a k == 0)
+        by (intros; apply Hz; lia).
+      assert (Ha : a (S n) == 0) by (apply Hz; lia).
+      rewrite partial_sum_S, Ha, (IH i Hle Hz'). ring.
+    + subst i. reflexivity.
+Qed.
+
+(** ★ Квадратный Fubini: Σ_{i≤n} Σ_{k≤m} T i k == Σ_{k≤m} Σ_{i≤n} T i k.
+    Перестановка двойной суммы по прямоугольнику (индексы независимы). *)
+Lemma partial_sum_swap : forall (T : nat -> nat -> Q) (m n : nat),
+  partial_sum (fun i => partial_sum (fun k => T i k) m) n
+  == partial_sum (fun k => partial_sum (fun i => T i k) n) m.
+Proof.
+  intros T m. induction n as [|n IH].
+  - change (partial_sum (fun i => partial_sum (fun k => T i k) m) 0%nat)
+      with (partial_sum (fun k => T 0%nat k) m).
+    apply partial_sum_ext_le. intros k Hk. cbn [partial_sum]. reflexivity.
+  - rewrite (partial_sum_S (fun i => partial_sum (fun k => T i k) m) n). cbv beta.
+    rewrite IH, <- partial_sum_plus.
+    apply partial_sum_ext_le. intros k Hk.
+    rewrite (partial_sum_S (fun i => T i k) n). cbv beta. reflexivity.
+Qed.
+
+(** Композиция рядов f∘g (корректна при g(0)=0): (f∘g)ₙ = Σ_{k≤n} fₖ·(gᵏ)ₙ. *)
+Definition fps_compose (f g : FPS) : FPS :=
+  fun n => partial_sum (fun k => f k * fps_pow g k n) n.
+
+(** (f∘g)(0) = f(0). *)
+Lemma fps_compose_zero : forall f g, fps_compose f g 0%nat == f 0%nat.
+Proof.
+  intros f g. unfold fps_compose. cbn [partial_sum fps_pow fps_one]. ring.
+Qed.
+
+(** Производная композиции (сырая форма): (f∘g)'ₙ = Σ_{k≤n+1} fₖ·(gᵏ)'ₙ. *)
+Lemma fps_deriv_compose_raw : forall f g n,
+  fps_deriv (fps_compose f g) n
+  == partial_sum (fun k => f k * fps_deriv (fps_pow g k) n) (S n).
+Proof.
+  intros f g n. unfold fps_deriv, fps_compose.
+  rewrite <- (partial_sum_scale (inject_Z (Z.of_nat (S n)))
+               (fun k => f k * fps_pow g k (S n)) (S n)).
+  apply partial_sum_ext_le. intros k Hk. ring.
+Qed.
+
+(* ---- конгруэнции свёртки/композиции по fps_eq ---- *)
+
+Lemma conv_congr_l : forall a a' b n, fps_eq a a' -> conv a b n == conv a' b n.
+Proof.
+  intros a a' b n Ha. unfold conv. apply partial_sum_ext_le.
+  intros i Hi. rewrite (Ha i). reflexivity.
+Qed.
+
+Lemma conv_congr_r : forall a b b' n, fps_eq b b' -> conv a b n == conv a b' n.
+Proof.
+  intros a b b' n Hb. unfold conv. apply partial_sum_ext_le.
+  intros i Hi. rewrite (Hb (n - i)%nat). reflexivity.
+Qed.
+
+Lemma fps_compose_congr_l : forall F F' g n,
+  fps_eq F F' -> fps_compose F g n == fps_compose F' g n.
+Proof.
+  intros F F' g n HF. unfold fps_compose. apply partial_sum_ext_le.
+  intros k Hk. rewrite (HF k). reflexivity.
+Qed.
+
+(** ★★ КЛЮЧЕВОЕ ТОЖДЕСТВО: conv (f∘g) h = Σ_{k≤n} fₖ·conv (gᵏ) h  (при g(0)=0).
+    conv(f∘g)h = Σ_{i≤n}(Σ_{k≤i} fₖ(gᵏ)ᵢ)h_{n−i} [треугольник]; удлиняем внутр. сумму
+    i→n (нули при k>i, fps_pow_low_order) до КВАДРАТА; меняем порядок (partial_sum_swap);
+    выносим fₖ — получаем Σ_{k≤n} fₖ·conv(gᵏ)h.  Это база цепного правила. *)
+Lemma conv_compose_swap : forall (F g h : FPS) (n : nat),
+  g 0%nat == 0 ->
+  conv (fps_compose F g) h n
+  == partial_sum (fun k => F k * conv (fps_pow g k) h n) n.
+Proof.
+  intros F g h n Hg0.
+  unfold conv at 1. unfold fps_compose.
+  (* вынос h(n−i) внутрь треугольной суммы *)
+  rewrite (partial_sum_ext_le
+    (fun i => partial_sum (fun k => F k * fps_pow g k i) i * h (n - i)%nat)
+    (fun i => partial_sum (fun k => F k * fps_pow g k i * h (n - i)%nat) i) n).
+  2:{ intros i Hi. symmetry.
+      apply (partial_sum_scale_r (fun k => F k * fps_pow g k i) (h (n - i)%nat) i). }
+  (* удлинение внутренней суммы i→n (нули при k>i) *)
+  rewrite (partial_sum_ext_le
+    (fun i => partial_sum (fun k => F k * fps_pow g k i * h (n - i)%nat) i)
+    (fun i => partial_sum (fun k => F k * fps_pow g k i * h (n - i)%nat) n) n).
+  2:{ intros i Hi.
+      apply (partial_sum_extend_zero
+               (fun k => F k * fps_pow g k i * h (n - i)%nat) n i Hi).
+      intros k Hk1 Hk2.
+      assert (Hz : fps_pow g k i == 0)
+        by (apply fps_pow_low_order; [ exact Hg0 | lia ]).
+      rewrite Hz. ring. }
+  (* квадрат: перестановка порядка суммирования *)
+  rewrite (partial_sum_swap (fun i k => F k * fps_pow g k i * h (n - i)%nat) n n).
+  (* вынос Fₖ + свёртка обратно *)
+  apply partial_sum_ext_le. intros k Hk. unfold conv.
+  rewrite <- (partial_sum_scale (F k) (fun i => fps_pow g k i * h (n - i)%nat) n).
+  apply partial_sum_ext_le. intros i Hi. ring.
+Qed.
+
+(** ★★★ ЦЕПНОЕ ПРАВИЛО FPS: (f∘g)' = (f'∘g)·g'  (при g(0)=0).
+    (f∘g)'ₙ = Σ_{k≤n+1} fₖ·(gᵏ)'ₙ [fps_deriv_compose_raw]; член k=0 зануляется ((g⁰)'=0),
+    переиндекс k=k'+1 + ПРАВИЛО СТЕПЕНИ даёт Σ_{k'≤n} f'_{k'}·conv(gᵏ')g'; по conv_compose_swap
+    это есть conv(f'∘g)g'.  Аксиомо-СВОБОДНО. *)
+Lemma fps_chain_rule : forall f g n,
+  g 0%nat == 0 ->
+  fps_deriv (fps_compose f g) n
+  == conv (fps_compose (fps_deriv f) g) (fps_deriv g) n.
+Proof.
+  intros f g n Hg0.
+  rewrite fps_deriv_compose_raw.
+  rewrite partial_sum_head. cbv beta.
+  assert (Hhead : f 0%nat * fps_deriv (fps_pow g 0) n == 0).
+  { assert (Hd0 : fps_deriv (fps_pow g 0) n == 0).
+    { change (fps_pow g 0) with fps_one. unfold fps_deriv. cbn [fps_one]. ring. }
+    rewrite Hd0. ring. }
+  rewrite Hhead, Qplus_0_l.
+  rewrite (partial_sum_ext_le
+    (fun k => f (S k) * fps_deriv (fps_pow g (S k)) n)
+    (fun k => fps_deriv f k * conv (fps_pow g k) (fps_deriv g) n) n).
+  2:{ intros k Hk. rewrite (fps_pow_deriv g k n). unfold fps_deriv. ring. }
+  rewrite (conv_compose_swap (fps_deriv f) g (fps_deriv g) n Hg0). reflexivity.
+Qed.
+
+(** ★★★★ ФОРМАЛЬНОЕ СЕРДЦЕ E∘L: exp(−ln(1−x)) = 1/(1−x).
+    h := exp_fps ∘ log1m_fps удовлетворяет ОДУ h'=h·geom: цепное правило даёт
+    h' = (exp'∘log1m)·log1m' = (exp∘log1m)·geom = h·geom (exp'=exp, log1m'=geom);
+    h(0)=exp(0)=1.  По ode_geom_unique ⟹ h = geom = 1/(1−x).  E∘L закрыт ФОРМАЛЬНО
+    (на уровне коэффициент-процессов).  Аксиомо-СВОБОДНО. *)
+Lemma compose_exp_log1m_is_geom :
+  fps_eq (fps_compose exp_fps log1m_fps) geom_fps.
+Proof.
+  assert (Hlog0 : log1m_fps 0%nat == 0) by reflexivity.
+  apply ode_geom_unique.
+  - intro n.
+    rewrite (fps_chain_rule exp_fps log1m_fps n Hlog0).
+    unfold fps_mul.
+    rewrite (conv_congr_r (fps_compose (fps_deriv exp_fps) log1m_fps)
+                          (fps_deriv log1m_fps) geom_fps n log1m_deriv).
+    rewrite (conv_congr_l (fps_compose (fps_deriv exp_fps) log1m_fps)
+                          (fps_compose exp_fps log1m_fps) geom_fps n
+              (fun m => fps_compose_congr_l (fps_deriv exp_fps) exp_fps log1m_fps m
+                          exp_fps_deriv)).
+    reflexivity.
+  - rewrite fps_compose_zero. unfold exp_fps. reflexivity.
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions geom_inverse_fps.
 Print Assumptions geom_not_polynomial.
@@ -509,6 +691,8 @@ Print Assumptions fps_deriv_mul.
 Print Assumptions conv_comm.
 Print Assumptions conv_assoc.
 Print Assumptions fps_pow_deriv.
+Print Assumptions fps_chain_rule.
+Print Assumptions compose_exp_log1m_is_geom.
 
 (* ================================================================== *)
 (*  СВОДКА (веха 1 слоя «функция-как-процесс»): FPS = коэффициент-      *)
