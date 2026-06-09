@@ -21,19 +21,16 @@
     ДИАГНОСТИКА (P4): eval переводит формальную функцию-процесс (коэффициенты) в число-процесс
       (частичные суммы) — оба «конечно-актуальны» на каждой стадии; мост двух процессных слоёв. 0-аксиомно.
 
-    STATUS: 25 Qed, 0 Admitted, 0 axioms (convergence-леммы наследуют classic; АЛГЕБРАИЧЕСКИЕ hom-леммы 0-аксиомны).
-            ГОТОВО: eval + сходимость (absolute_convergence); eval_congr;
-            ★ eval_geom (eval geom_fps = geometric_limit); ★★ eval_compose_exp_log1m_geom (формальное сердце
-            E∘L, вычисленное = 1/(1−x)); ★★ eval_mul (eval МУЛЬТИПЛИКАТИВЕН: eval(a·b) ~~ eval a · eval b —
-            mertens_cauchy_product + (a·b)ₙxⁿ = conv(aᵢxⁱ)(bⱼxʲ)ₙ); ★ АНКЕРЫ eval_exp (↔exp_limit), eval_log1m
-            (↔ln_proc, сдвиг индекса); ★ ℚ-АЛГЕБРА-ГОМОМОРФИЗМ: eval_add/zero/one/neg/sub/scale (сохраняет
-            +,0,1,−,скаляр — эти АКСИОМО-СВОБОДНЫ, чистая алгебра частичных сумм; Print Assumptions eval_add =
-            Closed).  eval : FPS → ℝ_proc есть гомоморфизм ℚ-алгебр.
-            ОСТАЁТСЯ (трудная половина — БОСС): закон композиции eval(f∘g) x ~~ Σ fₖ(eval g x)ᵏ (Fubini двойного
-            ряда).  КЛЮЧЕВОЙ НЮАНС: для power law eval(gᵏ)=(eval g)ᵏ нужна ВЕРСИЯ eval_mul с гипотезой
-            АБСОЛЮТНОЙ СХОДИМОСТИ (а не равномерной границей |aₙ|≤B), т.к. коэффициенты gᵏ РАСТУТ полиномиально
-            (число композиций n на k частей) — равномерной границы нет, но Σ|gᵏ_n|xⁿ всё равно сходится.
-            Затем → exp_R(L(x))~~1/(1−x) → горизонт ln_mul L(x)+L(y)~~L(x⊕y).
+    STATUS: 33 Qed, 0 Admitted, 0 axioms (convergence-леммы наследуют classic; АЛГЕБРАИЧЕСКИЕ hom-леммы 0-аксиомны).
+            ГОТОВО: eval + сходимость; eval_congr; ★ eval_geom; ★★ eval_compose_exp_log1m_geom (формальное сердце
+            E∘L, вычисленное = 1/(1−x)); ★★ eval_mul; ★ АНКЕРЫ eval_exp (↔exp_limit), eval_log1m (↔ln_proc);
+            ★ ℚ-АЛГЕБРА-ГОМОМОРФИЗМ eval_add/zero/one/neg/sub/scale (алгебра 0-аксиомна, eval_add=Closed);
+            ★★ eval_mul_abs (eval МУЛЬТИПЛИКАТИВЕН под АБСОЛЮТНОЙ сходимостью — ИТЕРИРУЕМАЯ версия, границы Ma/Mb
+            извлечены из abs_conv_bounded [монотон.+Cauchy⟹огранич.]); ★★ POWER LAW eval_pow: eval(gᵏ)~~(eval g)ᵏ
+            (cauchy_pow = итерир. cauchy_mul; индукция по k через eval_mul_abs + abs_conv_pow [замкнутость абс-
+            сходимости относительно умножения — ИМЕННО это разблокировало power law, коэф. gᵏ растут].
+            ОСТАЁТСЯ (БОСС): закон композиции eval(f∘g) x ~~ Σ fₖ(eval g x)ᵏ (Fubini двойного ряда: Σₙ Σ_{k≤n}
+            fₖ(gᵏ)ₙxⁿ = Σₖ fₖ Σₙ(gᵏ)ₙxⁿ, внутр. конечна по занулению) → exp_R(L(x))~~1/(1−x) → ln_mul.
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -422,18 +419,196 @@ Proof.
   apply partial_sum_ext_le. intros k Hk. unfold eval_terms, fps_scale. ring.
 Qed.
 
+(* ================================================================== *)
+(*  ★★ eval_mul под АБСОЛЮТНОЙ СХОДИМОСТЬЮ (итерируемая версия)          *)
+(*    — разблокирует power law eval(gᵏ)=(eval g)ᵏ (коэф. gᵏ растут,      *)
+(*    равномерной границы нет, но Σ|gᵏ_n|xⁿ сходится).                   *)
+(* ================================================================== *)
+
+(** Абсолютная сходимость eval-ряда: Σ |aₙ|·xⁿ сходится (Cauchy). *)
+Definition abs_conv (a : FPS) (x : Q) : Prop :=
+  is_cauchy (partial_sum (fun n => Qabs (a n) * Qpow x n)).
+
+(** |aₙxⁿ| = |aₙ|·xⁿ (для x≥0). *)
+Lemma abs_eval_terms : forall (a : FPS) (x : Q) (k : nat), 0 <= x ->
+  Qabs (eval_terms a x k) == Qabs (a k) * Qpow x k.
+Proof.
+  intros a x k Hx. unfold eval_terms. rewrite Qabs_Qmult.
+  rewrite (Qabs_pos (Qpow x k) (Qpow_nonneg x k Hx)). reflexivity.
+Qed.
+
+(** Абсолютная сходимость ⟹ обычная сходимость eval (мажорация собой). *)
+Lemma abs_conv_eval_cauchy : forall (a : FPS) (x : Q), 0 <= x ->
+  abs_conv a x -> is_cauchy (partial_sum (eval_terms a x)).
+Proof.
+  intros a x Hx Hac.
+  apply (absolute_convergence (eval_terms a x) (fun n => Qabs (a n) * Qpow x n)).
+  - intro n. rewrite (abs_eval_terms a x n Hx). apply Qle_refl.
+  - exact Hac.
+Qed.
+
+(** Монотонные абс-частичные суммы Cauchy ⟹ ограничены сверху (извлекаем Ma). *)
+Lemma abs_conv_bounded : forall (a : FPS) (x : Q), 0 <= x -> abs_conv a x ->
+  exists B, forall N, partial_sum (fun n => Qabs (a n) * Qpow x n) N <= B.
+Proof.
+  intros a x Hx Hac.
+  destruct (Hac 1 ltac:(lra)) as [N HN].
+  exists (partial_sum (fun n => Qabs (a n) * Qpow x n) N + 1).
+  intro M.
+  assert (Hnn : forall k, 0 <= Qabs (a k) * Qpow x k)
+    by (intro k; apply Qmult_le_0_compat; [ apply Qabs_nonneg | apply Qpow_nonneg; exact Hx ]).
+  assert (N <= M \/ M <= N)%nat as [Hle | Hle] by lia.
+  - assert (Hc := HN M N Hle (le_n N)). apply Qabs_Qlt_condition in Hc. lra.
+  - assert (Hmono : partial_sum (fun n => Qabs (a n) * Qpow x n) M
+                    <= partial_sum (fun n => Qabs (a n) * Qpow x n) N)
+      by (apply partial_sum_le_upper; [ exact Hnn | exact Hle ]). lra.
+Qed.
+
+(** ★★ eval МУЛЬТИПЛИКАТИВЕН под абсолютной сходимостью (ИТЕРИРУЕМАЯ версия).
+    Гипотезы — abs_conv a / abs_conv b (а НЕ равномерные границы |aₙ|≤B), поэтому
+    применима к gᵏ.  Границы Ma/Mb для Мертенса извлечены из abs_conv_bounded. *)
+Theorem eval_mul_abs : forall (a b : FPS) (x : Q)
+    (Hx : 0 <= x) (Hx1 : x < 1)
+    (HAa : abs_conv a x) (HAb : abs_conv b x)
+    (H : is_cauchy (partial_sum (eval_terms (fps_mul a b) x)))
+    (Ha : is_cauchy (partial_sum (eval_terms a x)))
+    (Hb : is_cauchy (partial_sum (eval_terms b x))),
+  eval (fps_mul a b) x H ~~ cauchy_mul (eval a x Ha) (eval b x Hb).
+Proof.
+  intros a b x Hx Hx1 HAa HAb H Ha Hb.
+  destruct (abs_conv_bounded a x Hx HAa) as [Ma HMa].
+  destruct (abs_conv_bounded b x Hx HAb) as [Mb HMb].
+  assert (HMa' : forall N, partial_sum (fun k => Qabs (eval_terms a x k)) N <= Ma).
+  { intro N. rewrite (partial_sum_ext_le (fun k => Qabs (eval_terms a x k))
+                       (fun n => Qabs (a n) * Qpow x n) N).
+    - apply HMa.
+    - intros k Hk. apply abs_eval_terms; exact Hx. }
+  assert (HMb' : forall N, partial_sum (fun k => Qabs (eval_terms b x k)) N <= Mb).
+  { intro N. rewrite (partial_sum_ext_le (fun k => Qabs (eval_terms b x k))
+                       (fun n => Qabs (b n) * Qpow x n) N).
+    - apply HMb.
+    - intros k Hk. apply abs_eval_terms; exact Hx. }
+  assert (Hconv : is_cauchy (partial_sum (conv (eval_terms a x) (eval_terms b x)))).
+  { apply (absolute_convergence
+             (conv (eval_terms a x) (eval_terms b x))
+             (conv (fun k => Qabs (eval_terms a x k)) (fun k => Qabs (eval_terms b x k)))).
+    - intro n. unfold conv. eapply Qle_trans; [ apply partial_sum_abs_le | ].
+      apply partial_sum_monotone. intro i. rewrite Qabs_Qmult. apply Qle_refl.
+    - apply (conv_cauchy (fun k => Qabs (eval_terms a x k))
+                         (fun k => Qabs (eval_terms b x k)) Ma Mb).
+      + intro n. apply Qabs_nonneg.
+      + intro n. apply Qabs_nonneg.
+      + exact HMa'.
+      + exact HMb'. }
+  unfold eval.
+  eapply cauchy_equiv_trans.
+  - apply (series_limit_wd (eval_terms (fps_mul a b) x)
+             (conv (eval_terms a x) (eval_terms b x)) H Hconv).
+    intro n. apply eval_terms_mul.
+  - apply (mertens_cauchy_product (eval_terms a x) (eval_terms b x) Ma Mb
+             HMa' HMb' Ha Hb Hconv).
+Qed.
+
+(* ================================================================== *)
+(*  ★★ POWER LAW: eval(gᵏ) ~~ (eval g)ᵏ  (через абс-сходимость + индукцию)*)
+(* ================================================================== *)
+
+(** k-я степень числа-процесса (итерированное cauchy_mul). *)
+Fixpoint cauchy_pow (P : CauchySeq) (k : nat) : CauchySeq :=
+  match k with
+  | O => cauchy_one
+  | S k' => cauchy_mul P (cauchy_pow P k')
+  end.
+
+(** Абсолютная сходимость единицы (члены = (n=0?1:0), сумма ≡ 1). *)
+Lemma abs_conv_one : forall x, 0 <= x -> abs_conv fps_one x.
+Proof.
+  intros x Hx. unfold abs_conv.
+  apply (is_cauchy_ext (fun _ => 1)).
+  - intro n. induction n as [|m IH].
+    + cbn [partial_sum fps_one Qpow]. rewrite (Qabs_pos 1) by lra. ring.
+    + rewrite partial_sum_S.
+      assert (Hz : Qabs (fps_one (S m)) * Qpow x (S m) == 0)
+        by (cbn [fps_one]; change (Qabs 0) with (0:Q); ring).
+      rewrite <- IH, Hz. ring.
+  - apply cauchy_const_is_cauchy.
+Qed.
+
+(** ★ Замкнутость абс-сходимости относительно умножения: abs_conv a, abs_conv b ⟹
+    abs_conv (a·b).  |（a·b)ₙ|xⁿ ≤ (conv|a||b|)ₙxⁿ = conv(|a|x^•)(|b|x^•)ₙ [eval_terms_mul
+    для |a|,|b|], а это сходится по conv_cauchy.  ИМЕННО это делает power law итерируемым. *)
+Lemma abs_conv_mul : forall (a b : FPS) (x : Q), 0 <= x -> x < 1 ->
+  abs_conv a x -> abs_conv b x -> abs_conv (fps_mul a b) x.
+Proof.
+  intros a b x Hx Hx1 HAa HAb.
+  destruct (abs_conv_bounded a x Hx HAa) as [Ma HMa].
+  destruct (abs_conv_bounded b x Hx HAb) as [Mb HMb].
+  unfold abs_conv.
+  apply (absolute_convergence
+           (fun n => Qabs (fps_mul a b n) * Qpow x n)
+           (conv (fun i => Qabs (a i) * Qpow x i) (fun j => Qabs (b j) * Qpow x j))).
+  - intro n.
+    rewrite (Qabs_pos (Qabs (fps_mul a b n) * Qpow x n))
+      by (apply Qmult_le_0_compat; [ apply Qabs_nonneg | apply Qpow_nonneg; exact Hx ]).
+    assert (Hid : conv (fun i => Qabs (a i) * Qpow x i) (fun j => Qabs (b j) * Qpow x j) n
+                  == conv (fun i => Qabs (a i)) (fun j => Qabs (b j)) n * Qpow x n).
+    { symmetry. apply (eval_terms_mul (fun i => Qabs (a i)) (fun j => Qabs (b j)) x n). }
+    rewrite Hid.
+    apply Qmult_le_compat_r; [ | apply Qpow_nonneg; exact Hx ].
+    unfold fps_mul, conv.
+    eapply Qle_trans; [ apply partial_sum_abs_le | ].
+    apply partial_sum_monotone. intro i. rewrite Qabs_Qmult. apply Qle_refl.
+  - apply (conv_cauchy (fun i => Qabs (a i) * Qpow x i) (fun j => Qabs (b j) * Qpow x j) Ma Mb).
+    + intro n. apply Qmult_le_0_compat; [ apply Qabs_nonneg | apply Qpow_nonneg; exact Hx ].
+    + intro n. apply Qmult_le_0_compat; [ apply Qabs_nonneg | apply Qpow_nonneg; exact Hx ].
+    + exact HMa.
+    + exact HMb.
+Qed.
+
+(** ★ Абсолютная сходимость степени gᵏ (индукция: g⁰=1 база, g·gᵏ шаг). *)
+Lemma abs_conv_pow : forall (g : FPS) (x : Q), 0 <= x -> x < 1 ->
+  abs_conv g x -> forall k, abs_conv (fps_pow g k) x.
+Proof.
+  intros g x Hx Hx1 HAg k. induction k as [|k IH].
+  - apply abs_conv_one; exact Hx.
+  - change (fps_pow g (S k)) with (fps_mul g (fps_pow g k)).
+    apply abs_conv_mul; [ exact Hx | exact Hx1 | exact HAg | exact IH ].
+Qed.
+
+(** ★★ POWER LAW: eval(gᵏ) ~~ (eval g)ᵏ.  Индукция по k: g⁰=1 ⟹ eval_one;
+    g·gᵏ ⟹ eval_mul_abs (с abs_conv g и abs_conv_pow) + IH.  Свидетели сходимости
+    извлекаются из абсолютной (abs_conv_eval_cauchy). *)
+Lemma eval_pow : forall (g : FPS) (x : Q) (Hx : 0 <= x) (Hx1 : x < 1)
+    (HAg : abs_conv g x) (Hg : is_cauchy (partial_sum (eval_terms g x)))
+    (k : nat) (Hk : is_cauchy (partial_sum (eval_terms (fps_pow g k) x))),
+  eval (fps_pow g k) x Hk ~~ cauchy_pow (eval g x Hg) k.
+Proof.
+  intros g x Hx Hx1 HAg Hg k. induction k as [|k IH]; intro Hk.
+  - apply eval_one.
+  - assert (HAk : abs_conv (fps_pow g k) x) by (apply abs_conv_pow; assumption).
+    assert (Hk' : is_cauchy (partial_sum (eval_terms (fps_pow g k) x)))
+      by (apply abs_conv_eval_cauchy; assumption).
+    eapply cauchy_equiv_trans.
+    + apply (eval_mul_abs g (fps_pow g k) x Hx Hx1 HAg HAk Hk Hg Hk').
+    + apply cauchy_mul_compat; [ apply cauchy_equiv_refl | apply (IH Hk') ].
+Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions eval_geom.
 Print Assumptions eval_compose_exp_log1m_geom.
 Print Assumptions eval_mul.
+Print Assumptions eval_mul_abs.
+Print Assumptions eval_pow.
 Print Assumptions eval_exp.
 Print Assumptions eval_log1m.
 Print Assumptions eval_add.
 
 (* ================================================================== *)
-(*  СВОДКА: eval — первый анкер аналитического моста.  Формальное сердце *)
-(*  E∘L (compose_exp_log1m_is_geom, 0-аксиомно) перенесено в число-      *)
-(*  процесс: вычисленная композиция = 1/(1−x).  ДАЛЕЕ: eval как кольцевой *)
-(*  гомоморфизм (через Мертенса) + закон композиции → exp_R(L(x))~~1/(1−x)*)
-(*  → горизонт ln_mul.                                                    *)
+(*  СВОДКА: eval — аналитический МОСТ FPS → число-процесс.  Готово:      *)
+(*  eval + сходимость; eval_geom + ВЫЧИСЛЕННОЕ формальное сердце E∘L     *)
+(*  (=1/(1−x)); eval = ℚ-алгебра-гомоморфизм (+,0,1,−,·,скаляр; алгебра  *)
+(*  0-аксиомна); анкеры exp/log; eval_mul_abs (итерируемая мультипл.) +  *)
+(*  POWER LAW eval(gᵏ)~~(eval g)ᵏ (через абс-сходимость).  ДАЛЕЕ (босс): *)
+(*  закон композиции eval(f∘g)x ~~ Σ fₖ(eval g x)ᵏ (двойной Fubini) →    *)
+(*  exp_R(L(x))~~1/(1−x) → горизонт ln_mul.                              *)
 (* ================================================================== *)
