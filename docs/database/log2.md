@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**7 files / 148 Qed.** Score distribution: s5=0 / s4=0 / s3=4 / s2=3 / s1=0 / s0=0
+**8 files / 156 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -314,4 +314,36 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Uniqueness - score 3 (new-framing).** eval как явный МОСТ между двумя процессными слоями ToS (формальный коэффициент-процесс ↔ аналитический число-процесс), переносящий 0-аксиомное формальное сердце E∘L в реальное равенство чисел-процессов: вычисленная формальная композиция exp∘(−ln(1−x)) = геометрический ряд 1/(1−x).
 > _Caveat:_ Вычисление степенного ряда и абсолютная сходимость классичны. Уникальность — в ToS-обрамлении (два процессных слоя и явный мост между ними) и в переносе именно нашего 0-аксиомного формального результата. Это первый анкер; полный мост (eval-гомоморфизм через Мертенса + закон композиции → exp_R(L(x))~~1/(1−x)) — впереди. Файл ВПЕРВЫЕ в цепи наследует classic (вход в L3-анализ).
+
+---
+
+## #1837 - `src/LnMulReduction.v` - score 3 (new-framing)
+
+**Endgame: the ln_mul horizon reduced to one key fact (exp_R o ln_proc = 1/(1-z))**
+
+- **Topic.** Conditional theorem ln_mul_from_key: IF exp_R(ln_proc z) ~~ geometric_limit z (=1/(1-z)) for all z in [0,1), THEN the horizon ln_mul_functional_equation (Log2FunctionalEq) is proved. Built from: geom_inv ((1-z)*(1/(1-z)) ~~ 1, via geometric_sum_identity + Qpow_limit_zero), geom_mul (1/(1-x)*1/(1-y) ~~ 1/(1-(x+y-xy)), via (1-x)(1-y)=1-(x+y-xy) + cancellation cauchy_const_cancel + 4-factor swap cmul4_swap), and the assembly through exp_R_add (exp_R linearizes the log: exp_R(L(x)+L(y))=exp_R L(x)*exp_R L(y)) + exp_R_inj. NOT an Admit -- a genuine conditional theorem that honestly separates the finished endgame assembly from the one remaining boss (the composition theorem, built in FPSEval).
+- **Role.** Endgame assembly of the ln_mul program. Independent of the FPS bridge file (uses only exp_R/ln_proc/geometric_limit), it proves everything EXCEPT the single key fact exp_R(ln_proc z)~~1/(1-z). That key fact is exactly the meeting point: FPSEval proves eval(exp.log1m) z ~~ geometric_limit z (done) and aims for eval(exp.log1m) z ~~ exp_R(ln_proc z) (the composition theorem, the boss); together they give the key fact, and ln_mul_from_key then closes the horizon. So the WHOLE ln_mul program now reduces to one lemma. Inherits classic (exp_R/analysis).
+- **Counts.** Qed 8 / Admitted 0 / axioms 1
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ToS: CauchyReal; RealField; SeriesConvergence; ProcessExp; Log2Process; Log2FunctionalEq
+- **E/R/R.** _Elements:_ частичные суммы геометрического/лог-ряда и их произведения — конечные Q на стадии n. _Roles:_ geom_inv = роль-обратная (1−z); geom_mul = роль-мультипликативность геометрической; ln_mul_from_key = роль-редукция горизонта к ключу. _Rules:_ geometric_sum_identity ((1−r)Σ=1−rⁿ⁺¹) + zⁿ→0; сокращение на cauchy_const≠0; exp_R_add/exp_R_inj. _P4:_ exp_R линеаризует логарифм-процесс: аддитивность L(x)+L(y) сводится к мультипликативности exp_R(L(x))·exp_R(L(y)), замкнутой на геометрической стороне. Унаследует classic.
+- **Classical counterpart.** The logarithm functional equation ln(ab)=ln a+ln b and 1/(1-x)*1/(1-y)=1/(1-(x+y-xy)) are classical. NEW: the explicit machine-checked REDUCTION showing the ToS process-level horizon ln_mul_functional_equation (L(x)+L(y)~~L(x+y-xy) over the Cauchy-real processes ln_proc) follows from a SINGLE fact exp_R(ln_proc z)~~1/(1-z) -- isolating exactly the remaining work (the composition theorem) without any Admit.
+- **Tags.** ln-mul, endgame, reduction, exp-R, process-ontology, H59, new-framing, conditional-theorem
+
+**Lemmas (5):**
+
+| name | kind | role |
+|---|---|---|
+| `cs_eq_equiv/cauchy_const_wd/cauchy_const_mul` | Lemma | хелперы: равные стадии ⟹ ~~; cauchy_const уважает Qeq и умножение |
+| `geom_inv` | Lemma | ★ (1−z)·(1/(1−z)) ~~ 1 (процессная обратная геометрической; geometric_sum_identity + zⁿ→0) |
+| `cauchy_const_cancel/cmul4_swap` | Lemma | сокращение на cauchy_const≠0 (единственность обратного); перестановка 4 множителей |
+| `geom_mul` | Lemma | ★ 1/(1−x)·1/(1−y) ~~ 1/(1−(x⊕y)) (через (1−x)(1−y)=1−(x⊕y) + geom_inv + сокращение) |
+| `ln_mul_from_key` | Theorem | ★★ ГОРИЗОНТ ln_mul_functional_equation ⟸ exp_R(ln_proc z)~~1/(1−z) (через exp_R_add + exp_R_inj + geom_mul) |
+
+**Key lemmas (deep):**
+
+- **`ln_mul_from_key`** - ★★ ЭНДШПИЛЬ ИЗОЛИРОВАН: весь горизонт ln_mul_functional_equation (L(x)+L(y)~~L(x⊕y) над процессами ln_proc) ДОКАЗУЕМО следует из ЕДИНСТВЕННОГО факта exp_R(ln_proc z)~~geometric_limit z (=1/(1−z)). Доказательство: exp_R_inj сводит L(x)+L(y)~~L(x⊕y) к exp-уровню; exp_R_add даёт exp_R(L(x))·exp_R(L(y)); KEY превращает каждый множитель в 1/(1−·); geom_mul даёт 1/(1−x)·1/(1−y)=1/(1−x⊕y) (через ключевое (1−x)(1−y)=1−(x⊕y) + сокращение на cauchy_const + перестановку 4 множителей); KEY обратно к exp_R(L(x⊕y)). ЭТО НЕ ADMIT — честная conditional-теорема, отделяющая СДЕЛАННУЮ сборку от оставшегося босса (закон композиции eval(exp∘log1m)=exp_R∘ln_proc, внешний Fubini, строится в FPSEval). Уникальность — машинно-проверяемая редукция конкретного функц. уравнения логарифма к одному мостовому факту в процессной онтологии; математика классична, изоляция/обрамление — нет. Унаследует classic. _(ln-mul, endgame, reduction, isolation, exp-R, log-functional-equation, H59, conditional-theorem)_
+- **`geom_inv`** - Процессная версия определяющего уравнения геометрической: (1−z)·(1/(1−z)) ~~ 1. cs_seq(cauchy_mul (const(1−z))(geom z)) n = (1−z)·Σ_{≤n}zᵏ = 1−z^{n+1} (geometric_sum_identity); разность с cauchy_one = −z^{n+1} → 0 (Qpow_limit_zero). Аналитический аналог формального geom_inverse_fps ((1−X)·geom=1 на коэффициентах) — то же тождество, но на уровне ЧИСЕЛ-процессов. Основа geom_mul (через единственность обратного). Унаследует classic. _(geometric, inverse, process-level, geometric-sum-identity, ln-mul)_
+
+**Uniqueness - score 3 (new-framing).** Машинно-проверяемая РЕДУКЦИЯ: процессный горизонт ln_mul (функц. уравнение логарифма над Коши-вещественными ln_proc) сведён к ЕДИНСТВЕННОМУ мостовому факту exp_R(ln_proc z)~~1/(1−z), с полной сборкой эндшпиля (geom_inv, geom_mul, exp_R_add/inj) — БЕЗ Admit. Изолирует оставшийся босс (закон композиции).
+> _Caveat:_ Функц. уравнение логарифма и геометрическая алгебра классичны. Уникальность — НЕ матфакт, а: (1) честная conditional-структура, изолирующая ровно один недостающий мост (диагностический приём в духе E/R/R); (2) процессная онтология (всё над ln_proc/exp_R/geometric_limit как процессами-числами). Ключевой факт exp_R∘ln_proc=1/(1−z) — впереди (FPSEval, внешний Fubini).
 
