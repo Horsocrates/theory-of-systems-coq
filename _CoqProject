@@ -1935,3 +1935,12 @@ src/cs/ScaleFlowUndecidable.v
 src/cs/SelectionWithoutChoiceSynthesis.v
 src/cs/SemanticRecursion.v
 src/cs/TarskiUndefinability.v
+src/information/ChannelCapacity.v
+src/stdlib/InclusionExclusionFib.v
+src/foundation/ZFCAxiomLedger.v
+src/nonstandard/GermInfinitesimal.v
+src/nonstandard/StandardPart.v
+src/nonstandard/UltrafilterRoleLimit.v
+src/nonstandard/DerivativeViaInfinitesimal.v
+src/nonstandard/HyperfiniteSum.v
+src/nonstandard/IllusoryConstructions.v
