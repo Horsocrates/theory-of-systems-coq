@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**8 files / 158 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=3 / s1=0 / s0=0
+**9 files / 160 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=4 / s1=0 / s0=0
 
 ---
 
@@ -349,4 +349,32 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Uniqueness - score 3 (new-framing).** Машинно-проверяемая РЕДУКЦИЯ: процессный горизонт ln_mul (функц. уравнение логарифма над Коши-вещественными ln_proc) сведён к ЕДИНСТВЕННОМУ мостовому факту exp_R(ln_proc z)~~1/(1−z), с полной сборкой эндшпиля (geom_inv, geom_mul, exp_R_add/inj) — БЕЗ Admit. Изолирует оставшийся босс (закон композиции).
 > _Caveat:_ Функц. уравнение логарифма и геометрическая алгебра классичны. Уникальность — НЕ матфакт, а: (1) честная conditional-структура, изолирующая ровно один недостающий мост (диагностический приём в духе E/R/R); (2) процессная онтология (всё над ln_proc/exp_R/geometric_limit как процессами-числами). Ключевой факт exp_R∘ln_proc=1/(1−z) — впереди (FPSEval, внешний Fubini).
+
+---
+
+## #1838 - `src/PolyTimesGeom.v` - score 2 (synthesis)
+
+**n*z^n -> 0: polynomial times geometric (first Tannery brick, 0-axiom)**
+
+- **Topic.** n_times_pow_limit: for 0<=z<1, forall eps>0, exists N, forall n>=N, inject_Z n * Qpow z n < eps. Proved via the ratio route (avoids the nonlinear binomial): for n >= N0 (archimedean threshold ~2z/(1-z), via Qarchimedean) the ratio a(S n)/a n = (n+1)/n * z <= r = (1+z)/2 < 1, so geom_decay gives a n <= a N0 * r^(n-N0) -> 0 (Qpow_limit_zero). The final step of the ln_mul Tannery bound D_n <= z^{n+1}*exp(H_n) <= e*n*z^{n+1} -> 0. A reusable analysis lemma the repo lacked; 0-AXIOM (Print Assumptions = Closed).
+- **Role.** First concrete brick of the OUTER half (Tannery interchange) of the ln_mul composition theorem. Standalone reusable: n*z^n->0. NEXT bricks: exp(H_n) <= e*n (harmonic-exp bound), the high-degree-tail coefficient bound bracket_{k,n} <= z^{n+1}*H_n^k (truncated-log-poly machinery), then assembly D_n -> 0 giving eval(exp.log1m) z ~~ exp_R(ln_proc z) => KEY => ln_mul.
+- **Counts.** Qed 2 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: SeriesConvergence
+- **E/R/R.** _Elements:_ рациональные стадии aₙ=n·zⁿ — конечные Q на каждом n. _Roles:_ отношение-роль (n+1)/n·z; порог-роль N₀ (архимедов); затухание-роль (геометрическое после N₀). _Rules:_ при n≥N₀ отношение ≤ r=(1+z)/2<1 ⟹ aₙ ≤ a_{N₀}·rⁿ⁻ᴺ⁰ → 0 (geom_decay + Qpow_limit_zero). _P4:_ aₙ — процесс-стадии; «→0» = role-limit (терминирует в 0), доказан конечными оценками отношения. 0-аксиомно.
+- **Classical counterpart.** n*z^n -> 0 (polynomial times geometric decays) is a classical analysis fact. NEW: machine-checked over Q (Cauchy reals), 0-axiom, as the first concrete brick of the Tannery interchange that closes the ln_mul composition theorem.
+- **Tags.** poly-times-geom, tannery, 0-axiom, ln-mul, analysis, reusable, vein-C
+
+**Lemmas (2):**
+
+| name | kind | role |
+|---|---|---|
+| `geom_decay` | Lemma | отношение aₙ₊₁≤r·aₙ (n≥N₀) ⟹ a(N₀+d) ≤ a N₀·rᵈ (индукция по d) |
+| `n_times_pow_limit` | Theorem | ★★ n·zⁿ → 0 для 0≤z<1 (0-АКСИОМНО) — финальный шаг Tannery-оценки |
+
+**Key lemmas (deep):**
+
+- **`n_times_pow_limit`** - Машинно (0-АКСИОМНО) n·zⁿ→0 для 0≤z<1 — классический факт анализа, которого в репозитории не было, доказанный ОТНОШЕННЫМ маршрутом (без нелинейного бинома): порог N₀ из архимедовости (Qarchimedean при 2z/(1−z)), при n≥N₀ отношение (n+1)/n·z ≤ r=(1+z)/2<1 (линейно, после очистки деления — Lqa не любит Qinv, потому r=(1+z)·(1#2) а не /2), затем geom_decay даёт aₙ≤a_{N₀}·rⁿ⁻ᴺ⁰ и Qpow_limit_zero добивает. Это ПЕРВЫЙ конкретный кирпич внешней половины (Tannery) композиционной теоремы ln_mul: финал оценки D_n ≤ z^{n+1}·exp(Hₙ) ≤ e·n·z^{n+1}→0 (гармонический рост vs геометрия). Самостоятельный переиспользуемый. ОСТАЁТСЯ: гармоническая оценка exp(Hₙ)≤e·n + хвостовая оценка коэффициентов + сборка. _(poly-times-geom, tannery, 0-axiom, ratio-test, archimedean, ln-mul, reusable-analysis)_
+
+**Uniqueness - score 2 (synthesis).** Машинно-проверяемый 0-аксиомный n·zⁿ→0 над Q — стандартный факт анализа, отсутствовавший в репозитории, построенный отношенным маршрутом как первый кирпич Tannery-перестановки, замыкающей композиционную теорему ln_mul.
+> _Caveat:_ Сам факт n·zⁿ→0 — классика (любой учебник анализа). Ценность: машинная 0-аксиомная Q-формализация + роль в Tannery-ядре ln_mul. Не новый матфакт.
 

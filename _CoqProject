@@ -15,6 +15,7 @@ src/ProcessExp.v
 src/FormalPowerSeries.v
 src/FPSEval.v
 src/LnMulReduction.v
+src/PolyTimesGeom.v
 src/CauchyReal.v
 src/CoinductiveSystems.v
 src/Completeness.v

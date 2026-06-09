@@ -1836,3 +1836,4 @@ num	path
 1835	src/FormalPowerSeries.v
 1836	src/FPSEval.v
 1837	src/LnMulReduction.v
+1838	src/PolyTimesGeom.v

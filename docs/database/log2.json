@@ -368,5 +368,36 @@
       "caveat": "Функц. уравнение логарифма и геометрическая алгебра классичны. Уникальность — НЕ матфакт, а: (1) честная conditional-структура, изолирующая ровно один недостающий мост (диагностический приём в духе E/R/R); (2) процессная онтология (всё над ln_proc/exp_R/geometric_limit как процессами-числами). Ключевой факт exp_R∘ln_proc=1/(1−z) — впереди (FPSEval, внешний Fubini)."
     },
     "tags": ["ln-mul", "endgame", "reduction", "exp-R", "process-ontology", "H59", "new-framing", "conditional-theorem"]
+  },
+  {
+    "num": 1838,
+    "path": "src/PolyTimesGeom.v",
+    "cluster": "log2",
+    "classical_counterpart": "n*z^n -> 0 (polynomial times geometric decays) is a classical analysis fact. NEW: machine-checked over Q (Cauchy reals), 0-axiom, as the first concrete brick of the Tannery interchange that closes the ln_mul composition theorem.",
+    "title": "n*z^n -> 0: polynomial times geometric (first Tannery brick, 0-axiom)",
+    "topic": "n_times_pow_limit: for 0<=z<1, forall eps>0, exists N, forall n>=N, inject_Z n * Qpow z n < eps. Proved via the ratio route (avoids the nonlinear binomial): for n >= N0 (archimedean threshold ~2z/(1-z), via Qarchimedean) the ratio a(S n)/a n = (n+1)/n * z <= r = (1+z)/2 < 1, so geom_decay gives a n <= a N0 * r^(n-N0) -> 0 (Qpow_limit_zero). The final step of the ln_mul Tannery bound D_n <= z^{n+1}*exp(H_n) <= e*n*z^{n+1} -> 0. A reusable analysis lemma the repo lacked; 0-AXIOM (Print Assumptions = Closed).",
+    "role": "First concrete brick of the OUTER half (Tannery interchange) of the ln_mul composition theorem. Standalone reusable: n*z^n->0. NEXT bricks: exp(H_n) <= e*n (harmonic-exp bound), the high-degree-tail coefficient bound bracket_{k,n} <= z^{n+1}*H_n^k (truncated-log-poly machinery), then assembly D_n -> 0 giving eval(exp.log1m) z ~~ exp_R(ln_proc z) => KEY => ln_mul.",
+    "qed": 2, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "Qabs", "Lqa", "Lia", "ZArith", "ToS: SeriesConvergence"],
+    "err": {
+      "elements": "рациональные стадии aₙ=n·zⁿ — конечные Q на каждом n.",
+      "roles": "отношение-роль (n+1)/n·z; порог-роль N₀ (архимедов); затухание-роль (геометрическое после N₀).",
+      "rules": "при n≥N₀ отношение ≤ r=(1+z)/2<1 ⟹ aₙ ≤ a_{N₀}·rⁿ⁻ᴺ⁰ → 0 (geom_decay + Qpow_limit_zero).",
+      "p4": "aₙ — процесс-стадии; «→0» = role-limit (терминирует в 0), доказан конечными оценками отношения. 0-аксиомно."
+    },
+    "lemmas": [
+      {"name": "geom_decay", "kind": "Lemma", "role": "отношение aₙ₊₁≤r·aₙ (n≥N₀) ⟹ a(N₀+d) ≤ a N₀·rᵈ (индукция по d)"},
+      {"name": "n_times_pow_limit", "kind": "Theorem", "role": "★★ n·zⁿ → 0 для 0≤z<1 (0-АКСИОМНО) — финальный шаг Tannery-оценки"}
+    ],
+    "key_lemmas": [
+      {"name": "n_times_pow_limit", "analysis": "Машинно (0-АКСИОМНО) n·zⁿ→0 для 0≤z<1 — классический факт анализа, которого в репозитории не было, доказанный ОТНОШЕННЫМ маршрутом (без нелинейного бинома): порог N₀ из архимедовости (Qarchimedean при 2z/(1−z)), при n≥N₀ отношение (n+1)/n·z ≤ r=(1+z)/2<1 (линейно, после очистки деления — Lqa не любит Qinv, потому r=(1+z)·(1#2) а не /2), затем geom_decay даёт aₙ≤a_{N₀}·rⁿ⁻ᴺ⁰ и Qpow_limit_zero добивает. Это ПЕРВЫЙ конкретный кирпич внешней половины (Tannery) композиционной теоремы ln_mul: финал оценки D_n ≤ z^{n+1}·exp(Hₙ) ≤ e·n·z^{n+1}→0 (гармонический рост vs геометрия). Самостоятельный переиспользуемый. ОСТАЁТСЯ: гармоническая оценка exp(Hₙ)≤e·n + хвостовая оценка коэффициентов + сборка.", "tags": ["poly-times-geom", "tannery", "0-axiom", "ratio-test", "archimedean", "ln-mul", "reusable-analysis"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "synthesis",
+      "claim": "Машинно-проверяемый 0-аксиомный n·zⁿ→0 над Q — стандартный факт анализа, отсутствовавший в репозитории, построенный отношенным маршрутом как первый кирпич Tannery-перестановки, замыкающей композиционную теорему ln_mul.",
+      "caveat": "Сам факт n·zⁿ→0 — классика (любой учебник анализа). Ценность: машинная 0-аксиомная Q-формализация + роль в Tannery-ядре ln_mul. Не новый матфакт."
+    },
+    "tags": ["poly-times-geom", "tannery", "0-axiom", "ln-mul", "analysis", "reusable", "vein-C"]
   }
 ]
