@@ -21,10 +21,13 @@
     ДИАГНОСТИКА (P4): exp_R линеаризует логарифм-процесс (L(x)+L(y) ↦ exp_R(L(x))·exp_R(L(y))),
       сводя аддитивность к мультипликативности, замкнутой на геометрической стороне.  Унаследует classic.
 
-    STATUS: 8 Qed, 0 Admitted, 0 axioms (наследует classic через ProcessExp/анализ).
-            ГОТОВО: ВЕСЬ эндшпиль — geom_inv, geom_mul, и ln_mul_from_key (горизонт ⟸ ключевой факт).
+    STATUS: 9 Qed, 0 Admitted, 0 axioms (наследует classic через ProcessExp/анализ).
+            ГОТОВО: ВЕСЬ эндшпиль — geom_inv, geom_mul, ln_mul_from_key (горизонт ⟸ ключевой факт);
+            + exp_R_stage (конкретная диагональная ручка: cs_seq(exp_R P) n = Σ_{k≤n}(cs_seq P n)ᵏ/k!).
             ОСТАЁТСЯ (единственный босс): exp_R(ln_proc z) ~~ geometric_limit z — закон композиции
-            eval(exp∘log1m)=exp_R∘ln_proc (внешний Fubini), строится в FPSEval.
+            eval(exp∘log1m)=exp_R∘ln_proc; конкретно — Tannery-перестановка cs_seq(eval(compose) z) n =
+            Σ_{k≤n}(1/k!)partial_sum(eval_terms(log1m^k) z) n vs cs_seq(exp_R(ln_proc z)) n = Σ_{k≤n}(sₙ)ᵏ/k!,
+            разность = Σ_{k≤n}(1/k!)·хвост_{k,n} ≤ z^{n+1}·exp(Hₙ) → 0 (гармонич. рост vs геом. затухание).
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -32,6 +35,7 @@ From Stdlib Require Import QArith Qabs Lqa Lia.
 From ToS Require Import CauchyReal.
 From ToS Require Import RealField.
 From ToS Require Import SeriesConvergence.
+From ToS Require Import PowerSeries.
 From ToS Require Import ProcessExp.
 From ToS Require Import Log2Process.
 From ToS Require Import Log2FunctionalEq.
@@ -165,10 +169,24 @@ Proof.
   apply cauchy_equiv_sym. apply KEY.
 Qed.
 
+(* ================================================================== *)
+(*  ★ КОНКРЕТНАЯ РУЧКА на LHS босса: диагональ exp_R                     *)
+(* ================================================================== *)
+
+(** ★ n-я стадия exp_R(P) = частичная сумма exp-ряда в точке (n-я стадия P).
+    Это диагональ: exp_R P = diagonal_limit(λn. exp_limit(P n)), cs_seq диагонали = диагональ.
+    Конкретная ручка для оставшегося босса: cs_seq(exp_R(ln_proc z)) n = Σ_{k≤n}(sₙ)ᵏ/k!,
+    где sₙ = cs_seq(ln_proc z) n = log_series_partial z n — то, с чем сравнивается
+    cs_seq(eval(exp∘log1m) z) n = Σ_{k≤n}(1/k!)·partial_sum(eval_terms(log1m^k) z) n. *)
+Lemma exp_R_stage : forall (P : CauchySeq) (n : nat),
+  cs_seq (exp_R P) n == partial_sum (exp_term (cs_seq P n)) n.
+Proof. intros P n. reflexivity. Qed.
+
 (** Аудит аксиом. *)
 Print Assumptions geom_inv.
 Print Assumptions geom_mul.
 Print Assumptions ln_mul_from_key.
+Print Assumptions exp_R_stage.
 
 (* ================================================================== *)
 (*  СВОДКА: эндшпиль ln_mul СОБРАН.  Горизонт L(x)+L(y)~~L(x⊕y) сведён  *)

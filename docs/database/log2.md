@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**8 files / 157 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=3 / s1=0 / s0=0
+**8 files / 158 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -325,13 +325,13 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 - **Topic.** Conditional theorem ln_mul_from_key: IF exp_R(ln_proc z) ~~ geometric_limit z (=1/(1-z)) for all z in [0,1), THEN the horizon ln_mul_functional_equation (Log2FunctionalEq) is proved. Built from: geom_inv ((1-z)*(1/(1-z)) ~~ 1, via geometric_sum_identity + Qpow_limit_zero), geom_mul (1/(1-x)*1/(1-y) ~~ 1/(1-(x+y-xy)), via (1-x)(1-y)=1-(x+y-xy) + cancellation cauchy_const_cancel + 4-factor swap cmul4_swap), and the assembly through exp_R_add (exp_R linearizes the log: exp_R(L(x)+L(y))=exp_R L(x)*exp_R L(y)) + exp_R_inj. NOT an Admit -- a genuine conditional theorem that honestly separates the finished endgame assembly from the one remaining boss (the composition theorem, built in FPSEval).
 - **Role.** Endgame assembly of the ln_mul program. Independent of the FPS bridge file (uses only exp_R/ln_proc/geometric_limit), it proves everything EXCEPT the single key fact exp_R(ln_proc z)~~1/(1-z). That key fact is exactly the meeting point: FPSEval proves eval(exp.log1m) z ~~ geometric_limit z (done) and aims for eval(exp.log1m) z ~~ exp_R(ln_proc z) (the composition theorem, the boss); together they give the key fact, and ln_mul_from_key then closes the horizon. So the WHOLE ln_mul program now reduces to one lemma. Inherits classic (exp_R/analysis).
-- **Counts.** Qed 8 / Admitted 0 / axioms 1
-- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ToS: CauchyReal; RealField; SeriesConvergence; ProcessExp; Log2Process; Log2FunctionalEq
+- **Counts.** Qed 9 / Admitted 0 / axioms 1
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ToS: CauchyReal; RealField; SeriesConvergence; PowerSeries; ProcessExp; Log2Process; Log2FunctionalEq
 - **E/R/R.** _Elements:_ частичные суммы геометрического/лог-ряда и их произведения — конечные Q на стадии n. _Roles:_ geom_inv = роль-обратная (1−z); geom_mul = роль-мультипликативность геометрической; ln_mul_from_key = роль-редукция горизонта к ключу. _Rules:_ geometric_sum_identity ((1−r)Σ=1−rⁿ⁺¹) + zⁿ→0; сокращение на cauchy_const≠0; exp_R_add/exp_R_inj. _P4:_ exp_R линеаризует логарифм-процесс: аддитивность L(x)+L(y) сводится к мультипликативности exp_R(L(x))·exp_R(L(y)), замкнутой на геометрической стороне. Унаследует classic.
 - **Classical counterpart.** The logarithm functional equation ln(ab)=ln a+ln b and 1/(1-x)*1/(1-y)=1/(1-(x+y-xy)) are classical. NEW: the explicit machine-checked REDUCTION showing the ToS process-level horizon ln_mul_functional_equation (L(x)+L(y)~~L(x+y-xy) over the Cauchy-real processes ln_proc) follows from a SINGLE fact exp_R(ln_proc z)~~1/(1-z) -- isolating exactly the remaining work (the composition theorem) without any Admit.
 - **Tags.** ln-mul, endgame, reduction, exp-R, process-ontology, H59, new-framing, conditional-theorem
 
-**Lemmas (5):**
+**Lemmas (6):**
 
 | name | kind | role |
 |---|---|---|
@@ -340,6 +340,7 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 | `cauchy_const_cancel/cmul4_swap` | Lemma | сокращение на cauchy_const≠0 (единственность обратного); перестановка 4 множителей |
 | `geom_mul` | Lemma | ★ 1/(1−x)·1/(1−y) ~~ 1/(1−(x⊕y)) (через (1−x)(1−y)=1−(x⊕y) + geom_inv + сокращение) |
 | `ln_mul_from_key` | Theorem | ★★ ГОРИЗОНТ ln_mul_functional_equation ⟸ exp_R(ln_proc z)~~1/(1−z) (через exp_R_add + exp_R_inj + geom_mul) |
+| `exp_R_stage` | Lemma | ★ диагональная ручка: cs_seq(exp_R P) n = partial_sum(exp_term(cs_seq P n)) n = Σ_{k≤n}(cs_seq P n)ᵏ/k! (reflexivity; конкретный LHS босса) |
 
 **Key lemmas (deep):**
 
