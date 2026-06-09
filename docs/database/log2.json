@@ -399,5 +399,38 @@
       "caveat": "Сам факт n·zⁿ→0 — классика (любой учебник анализа). Ценность: машинная 0-аксиомная Q-формализация + роль в Tannery-ядре ln_mul. Не новый матфакт."
     },
     "tags": ["poly-times-geom", "tannery", "0-axiom", "ln-mul", "analysis", "reusable", "vein-C"]
+  },
+  {
+    "num": 1839,
+    "path": "src/Tannery.v",
+    "cluster": "log2",
+    "classical_counterpart": "Tannery's theorem (dominated convergence for series / interchange of limit and infinite sum under a summable majorant) is classical. NEW: machine-checked over Q (Cauchy reals), 0-axiom, as the conceptual HEART of the outer half of the ln_mul composition theorem -- and a reusable analysis theorem the repo lacked.",
+    "title": "Tannery's theorem (diagonal dominated convergence for series), 0-axiom",
+    "topic": "tannery: if 0 <= a k n <= M k, Sum M converges (is_cauchy (partial_sum M)), and a k n -> 0 as n->inf for each k, then the DIAGONAL sum partial_sum (fun k => a k n) n -> 0. Proof: a small eps; take K with the tail Sum_{k>K} M_k < eps/2 (Cauchy); uniform threshold N1 for the first K+1 sequences at delta = eps/(2(K+1)) (finite_uniform_N, induction + max); split Sum_{k<=n} = Sum_{k<=K} + Sum_{K<k<=n} (partial_sum_split): first <= (K+1)*delta = eps/2 (partial_sum_mono_le + partial_sum_const), second <= the M-tail < eps/2. Helpers: partial_sum_const (Sum const = (K+1)c), partial_sum_mono_le (monotone up to N), finite_uniform_N. 0-AXIOM (Print Assumptions = Closed).",
+    "role": "The HEART (brick #2) of the outer half of the ln_mul composition theorem. This route AVOIDS the harmonic-exp bound AND the exact coefficient agreement: with a k n := (1/k!)|bracket_{k,n}|, M k := (1/k!)*2*B^k (B=z/(1-z), Sum M = 2*exp(B) converges), the per-k convergence bracket_{k,n}->0 comes free from eval_pow, and the domination bracket_{k,n} <= B^k from sigma_n <= B and P_{k,n} <= sigma_n^k (induction + conv_le_square). NEXT bricks: (3) the domination setup (P_{k,n} <= sigma_n^k via conv_le_square + eval_terms_mul; sigma_n <= z/(1-z)); (4) assembly via tannery => eval(exp.log1m) z ~~ exp_R(ln_proc z) => the ln_mul key fact. Standalone reusable.",
+    "qed": 4, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: QArith", "Qabs", "Lqa", "Lia", "ZArith", "ToS: CauchyReal", "SeriesConvergence", "CauchyProduct"],
+    "err": {
+      "elements": "двойная Q-таблица a k n; мажоранта M k; конечные суммы на каждой стадии.",
+      "roles": "Tannery = роль-перестановка предела и суммы; K = роль-хвост; N1 = роль-равномерный порог; разбиение-роль.",
+      "rules": "хвост ΣM мал (Cauchy) + поточечно aₖₙ→0 + разбиение Σ_{k≤n}=Σ_{k≤K}+Σ_{K<k≤n} ⟹ диагональ → 0.",
+      "p4": "диагональная Σ — процесс-стадии; «→0» = role-limit, доказан конечными разбиениями. 0-аксиомно."
+    },
+    "lemmas": [
+      {"name": "partial_sum_const", "kind": "Lemma", "role": "Σ_{k≤K} c = (K+1)·c"},
+      {"name": "partial_sum_mono_le", "kind": "Lemma", "role": "монотонность Σ при ограничении k≤N (а не все k)"},
+      {"name": "finite_uniform_N", "kind": "Lemma", "role": "равномерный порог N для конечного семейства сходящихся (индукция + Nat.max)"},
+      {"name": "tannery", "kind": "Theorem", "role": "★★ ТЕОРЕМА ТАННЕРИ (0-АКСИОМНО): 0≤aₖₙ≤Mₖ, ΣM сход., aₖₙ→0 ⟹ диагональ Σ_{k≤n} aₖₙ → 0"}
+    ],
+    "key_lemmas": [
+      {"name": "tannery", "analysis": "Машинно (0-АКСИОМНО) теорема Таннери — доминированная сходимость для ДИАГОНАЛЬНОГО ряда: 0≤aₖₙ≤Mₖ, ΣM сходится, aₖₙ→0 (поточечно по k) ⟹ Σ_{k≤n} aₖₙ → 0. КОНЦЕПТУАЛЬНОЕ СЕРДЦЕ внешней половины композиционной теоремы ln_mul. Доказательство: хвост ΣMₖ мал (из Cauchy partial_sum M); равномерный порог N1 для первых K+1 членов при delta=eps/(2(K+1)) (finite_uniform_N — индукция + Nat.max по конечному семейству, БЕЗ choice, т.к. конечно); разбиение partial_sum_split: Σ_{k≤K}≤(K+1)delta=eps/2 (partial_sum_mono_le+partial_sum_const), Σ_{K<k≤n}≤хвост ΣM<eps/2. Этот маршрут ОБХОДИТ И гармоническую оценку exp(Hₙ)≤e·n, И точное совпадение коэффициентов: с aₖₙ=(1/k!)|bracketₖₙ| доминанта (1/k!)·2Bᵏ (B=z/(1−z), ΣM=2exp(B)<∞), per-k bracket→0 даётся eval_pow, домината bracket≤Bᵏ — из σₙ≤B и Pₖₙ≤σₙᵏ (индукция+conv_le_square). Самостоятельный переиспользуемый результат анализа, которого в репозитории не было.", "tags": ["tannery", "dominated-convergence", "0-axiom", "diagonal", "ln-mul", "reusable-analysis", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2,
+      "level": "synthesis",
+      "claim": "Машинно-проверяемая 0-аксиомная теорема Таннери (диагональная доминированная сходимость) над Q — классический инструмент анализа, отсутствовавший в репозитории, как концептуальное сердце внешней половины композиционной теоремы ln_mul (обходит гармоническую оценку и точное совпадение коэффициентов).",
+      "caveat": "Сама теорема Таннери — классика анализа. Ценность: машинная 0-аксиомная Q-формализация + центральная роль в замыкании ln_mul. Не новый матфакт."
+    },
+    "tags": ["tannery", "dominated-convergence", "0-axiom", "ln-mul", "analysis", "reusable", "vein-C"]
   }
 ]
