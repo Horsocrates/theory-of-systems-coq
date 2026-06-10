@@ -951,6 +951,7 @@ src/foundation/StabilityDimensionSynthesis.v
 src/gauge/Transfer3x3.v
 src/foundation/NontrivialDepth.v
 src/foundation/AnomalySystematic.v
+src/foundation/AnomalyLatticeDial.v
 src/foundation/VacuumFromTransfer.v
 src/foundation/BornRuleFromProcess.v
 src/stdlib/GravitonSelfEnergy.v
@@ -1650,6 +1651,11 @@ src/foundation/ArrowSignFromOrigin.v
 src/foundation/EntropyMagnitudeLandauer.v
 src/foundation/LandauerFromP4.v
 src/foundation/RecordingVsDeterminacy.v
+src/foundation/RecordingIsBedrock.v
+src/foundation/RecordingFromP4.v
+src/foundation/EntropyCountDefinitional.v
+src/foundation/EnergyAsActualizationRate.v
+src/foundation/EquipartitionFromL4.v
 src/foundation/NSBoundDescent.v
 src/foundation/DepartureWallDescent.v
 src/foundation/JFactorDescent.v
@@ -1807,6 +1813,7 @@ src/foundation/ObserverCompressor.v
 src/foundation/GammaUnification.v
 src/foundation/ScaleHierarchyTransfer.v
 src/foundation/ShellCascadeNS.v
+src/foundation/ShellCapacityCounting.v
 src/foundation/CascadeBoundary.v
 src/foundation/RGCascadeReal.v
 src/foundation/ScaleHierarchySynthesis.v
@@ -1920,6 +1927,7 @@ src/category/SetoidCoproducts.v
 src/category/SetoidExponential.v
 src/category/SetoidClassifier.v
 src/cs/BoundaryDecidability.v
+src/cs/BoundaryDichotomy.v
 src/cs/ChomskyHierarchy.v
 src/cs/ComputationModel.v
 src/cs/CountableDependentChoiceFree.v
@@ -1936,6 +1944,7 @@ src/cs/PumpingRoleLimit.v
 src/cs/PvsNP_Framing.v
 src/cs/RamseyBoundary.v
 src/cs/RecursionTheorem.v
+src/cs/ReflectionLadder.v
 src/cs/RegularElementFloor.v
 src/cs/RiceRoleLimit.v
 src/cs/RussellViaLawvere.v
@@ -1943,17 +1952,3 @@ src/cs/ScaleFlowUndecidable.v
 src/cs/SelectionWithoutChoiceSynthesis.v
 src/cs/SemanticRecursion.v
 src/cs/TarskiUndefinability.v
-src/nonstandard/BoundaryIsInvertibility.v
-src/nonstandard/DerivativeViaInfinitesimal.v
-src/nonstandard/FinitizationBoundaryGeneratingStructure.v
-src/nonstandard/GermInfinitesimal.v
-src/nonstandard/HyperfiniteSum.v
-src/nonstandard/IllusoryConstructions.v
-src/nonstandard/NonstandardOverProcessesSynthesis.v
-src/nonstandard/RoleLimitIsP1Shadow.v
-src/nonstandard/SeedDiagonalBridge.v
-src/nonstandard/SeedMeasureBridge.v
-src/nonstandard/StandardPart.v
-src/nonstandard/UltrafilterRoleLimit.v
-src/nonstandard/UndecidedHierarchy.v
-src/nonstandard/UnitZeroDivisorBoundary.v
