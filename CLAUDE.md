@@ -79,6 +79,15 @@ bash generate_docs.sh
    ```
 4. Stdlib files go in `src/stdlib/`
 5. After creating file: compile, count Qed, update `_CoqProject`
+   WARNING: `_CoqProject` is a LOST-UPDATE HOTSPOT (verified 2026-06-10:
+   parallel sessions + OneDrive sync twice committed it from a stale base,
+   silently wiping other sessions' fresh registrations — commits 20712aa
+   and e2c0cd9 each deleted the src/nonstandard block; there is NO
+   regenerator script, the old "regeneration dropped them" guess was wrong).
+   Rules: only APPEND your own lines, never rebuild the file from an old
+   copy; run `powershell -File tools/check_coqproject.ps1` before any commit
+   touching .v files (exit 0 = registry matches disk); on mismatch restore
+   with `tools/regen_coqproject.ps1` (deterministic, idempotent).
 6. Use `From ToS Require Import ...` (not bare `Require Import`)
 
 ## Rocq 9.0.1 Quirks
