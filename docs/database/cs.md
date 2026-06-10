@@ -2,7 +2,7 @@
 
 _Generated from `cs.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**23 files / 160 Qed.** Score distribution: s5=3 / s4=11 / s3=7 / s2=2 / s1=0 / s0=0
+**25 files / 188 Qed.** Score distribution: s5=3 / s4=12 / s3=8 / s2=2 / s1=0 / s0=0
 
 ---
 
@@ -853,4 +853,89 @@ _Generated from `cs.json` by `generate.ps1` - do not edit by hand; edit the JSON
 
 **Uniqueness - score 4 (synthesis+observation).** Неопределимость истины Тарского встроена как грань ОДНОЙ диагонали (Ловер), стыкуясь с Кантор/halting/Рассел — Prop-сторона унификации вены E.
 > _Caveat:_ Теорема Тарского классична; вклад — её опознание как инстанса Ловера и стыковка с остальными гранями репо, не новый результат.
+
+---
+
+## #1858 - `src/cs/BoundaryDichotomy.v` - score 4 (synthesis+observation)
+
+**Дихотомия границы: критерий-снизу vs само-отражение — ПОЧЕМУ три грани расщепляются**
+
+- **Topic.** Вводит SelfReflective (общая форма PROGRAM/SET граней: домен отражает любой свой решатель с отрицанием), доказывает несовместимость с ElementDrawn (одно negb-семя), выводит Кантора как КОЛЛИЗИЮ двух форм, заземляет числовую грань в M2(Z): integer_eigenvalue <-> дискриминант — полный квадрат (чётностный аргумент), решатель is_squareZ∘m_disc.
+- **Role.** Capstone Фазы 2 над BoundaryDecidability.one_boundary_three_faces (#97): асимметрия трёх граней — теперь ТЕОРЕМА (водораздел: P2-согласный критерий-снизу vs расселовский критерий-на-своём-уровне). Импортирует cs.HaltingRoleLimit, cs.BoundaryDecidability, cs.LawvereFixedPoint.
+- **Counts.** Qed 17 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: ZArith Bool Lia; cs.HaltingRoleLimit; cs.BoundaryDecidability; cs.LawvereFixedPoint
+- **E/R/R.** _Elements:_ конкретные матрицы M2(Z): золотая [[1,1],[1,0]] Δ=5, буст-345 [[5,4],[4,5]] Δ=64, адамарова [[1,1],[1,-1]] Δ=8; программы (Prog); булевы предикаты A->bool. _Roles:_ ElementDrawn / RoleLimitDrawn — статусы границы (из #97); SelfReflective — НОВАЯ роль-форма критерия, живущего на СВОЁМ уровне (расселовская); решатель — роль-оракул; диагональный свидетель d — роль само-применения. _Rules:_ element_drawn_excludes_self_reflective — negb-семя несовместимости; is_squareZ∘m_disc — терминирующее правило-снизу (P2 в действии); чётностный шаг (s и t одной чётности ⟹ λ=(t+s)/2 ∈ Z). _P4:_ Асимметрия граней — теорема, не наблюдение: разрешимость = критерий-снизу (терминирует, не квантифицирует по решателям своего домена); неразрешимость = критерий-на-своём-уровне (само-отражение). Кантор = коллизия форм на диагональной границе. ∃-форма SelfReflective (не code-функция) вынуждена дисциплиной вены B (функция-кодировщик потребовала бы выбора).
+- **Classical counterpart.** Cantor 1891 / Lawvere 1969 (diagonal), Turing halting and the parity step of the quadratic formula are classical; NEW is naming the common SHAPE of the negative faces (SelfReflective), proving the two shapes incompatible from the one negb seed, re-deriving Cantor as the COLLISION of the shapes, and grounding the number face in real 2x2 integer matrices (integer eigenvalue <-> disc square, cs-local).
+- **Tags.** dichotomy, vein-A, vein-E, P2, cantor, halting, discriminant, capstone
+
+**Lemmas (17):**
+
+| name | kind | role |
+|---|---|---|
+| `M2 / m_tr / m_det / m_disc` | Definition | 2x2 целочисленная матрица; след, определитель, дискриминант Δ=tr²−4·det |
+| `integer_eigenvalue` | Definition | граница: есть ли ЦЕЛОЕ собственное значение (корень хар. полинома; по моничности = рациональное) |
+| `eigenvalue_gives_square` | Lemma | λ ⟹ (2λ−tr)² = Δ — прямое направление |
+| `square_gives_eigenvalue` | Lemma | Δ=s² ⟹ λ=(t+s)/2 ∈ Z — чётностный аргумент (s≡t mod 2 автоматически) |
+| `integer_eigenvalue_iff_disc_square_Z` | Theorem | ★ целочисленная eigenvalue-эквивалентность (Z-сестра Q-теоремы foundation/DiscriminantCompleteEigenvalue) |
+| `is_squareZ / is_squareZ_iff` | Definition | Z-тест полного квадрата поверх nat-решателя is_square (#97); отрицательные — никогда не квадраты |
+| `matrix_boundary_element_drawn` | Theorem | ★ числовая грань на НАСТОЯЩЕМ объекте: ElementDrawn integer_eigenvalue |
+| `golden_role_limit / boost345_element / boost345_eigenvalue_nine / hadamard_role_limit` | Example | атлас: Δ=5 (φ) и Δ=8 (√2) — role-limit; Δ=64 — Element (собственные 9 и 1, ось 3-4-5) |
+| `SelfReflective` | Definition | Форма-2: для каждого dec есть d с Side d <-> dec d = false (расселовская форма) |
+| `self_reflective_role_limit` | Theorem | Форма-2 ⟹ RoleLimitDrawn (наименование гипотезы движка #97) |
+| `element_drawn_excludes_self_reflective` | Theorem | ★★ ДИХОТОМИЯ: две формы несовместимы (одно negb-семя) |
+| `diagonal_side / diagonal_boundary_element_drawn` | Lemma | диагональная граница ВСЕГДА Element-drawn (negb∘diag — её решатель) |
+| `surjective_diagonal_self_reflective` | Lemma | точечная сюръективность ⟹ та же граница само-отражённая |
+| `cantor_via_dichotomy` | Theorem | ★★ Кантор = коллизия двух форм (третий, ОБЪЯСНЯЮЩИЙ вывод в ветке) |
+| `self_programmable_gives_self_reflective` | Theorem | мост: SelfProgrammable (HaltingRoleLimit) ⟹ SelfReflective самоостановки |
+| `halting_role_limit_via_dichotomy` | Corollary | PROGRAM-грань role-limit ЧЕРЕЗ дихотомию |
+| `boundary_dichotomy_three_faces` | Theorem | ★ capstone: корень-несовместимость + NUMBER/PROGRAM/SET как следствия |
+
+**Key lemmas (deep):**
+
+- **`element_drawn_excludes_self_reflective`** - Водораздел трёх граней, сделанный теоремой: граница не может быть одновременно нарисована-снизу (ElementDrawn) и само-отражённой (SelfReflective). Доказательство — одно negb-семя: решатель на своём диагональном свидетеле даёт dec d = negb (dec d). Формальная версия P2: критерий с уровня НИЖЕ против расселовского критерия на своём уровне (Core_ERR блокирует второй типами, russell_paradox_blocked). _(dichotomy, P2, negb-seed, vein-A, vein-E)_
+- **`cantor_via_dichotomy`** - Третий и объясняющий вывод Кантора в ветке (после прямого negb в HaltingRoleLimit и Ловера в LawvereFixedPoint): диагональная граница само-перечисляющего домена была бы Element-drawn (negb∘diag — решатель) И само-отражённой (из сюръективности) — коллизия форм опровергает сюръекцию. Кантор перестаёт быть третьим фактом рядом с двумя другими и становится СЛЕДСТВИЕМ водораздела. _(cantor, collision, explanation, vein-E)_
+- **`integer_eigenvalue_iff_disc_square_Z`** - Числовая грань впервые на настоящем объекте: целочисленная 2x2 матрица имеет целое собственное значение ⟺ её дискриминант — полный квадрат. Обратное направление — чётностный аргумент: s и t всегда одной чётности (иначе (t+s)(t−s)=4d даёт нечётное=чётное), значит λ=(t+s)/2 ∈ Z. Дополняет Q-версию foundation/DiscriminantCompleteEigenvalue, не дублируя её: cs-локально, и по моничности целое=рациональное (MonicRationalRoot). _(vein-A, discriminant, parity, matrices)_
+
+**Uniqueness - score 4 (synthesis+observation).** Асимметрия трёх обличий границы (#97) превращена из наблюдения в ТЕОРЕМУ: водораздел «критерий-снизу (P2) vs само-отражение (расселовская форма)», несовместимость от одного negb-семени, Кантор как коллизия форм; числовая грань заземлена в M2(Z) целочисленной eigenvalue-эквивалентностью.
+> _Caveat:_ Кантор/Ловер/Тьюринг и чётность квадратичной формулы классичны; SelfReflective в ∃-форме — наименование гипотезы движка #97, не новая математика; НЕ мета-теорема о всех границах — универсальность остаётся поинстансной.
+
+---
+
+## #1859 - `src/cs/ReflectionLadder.v` - score 3 (new-framing)
+
+**Лестница отражения: дихотомия (H77) и Ловер — одна структура на произвольном носителе статусов B**
+
+- **Topic.** Раскладывает Ловера и дихотомию в лестницу: (1) ОДНО попадание φ в f-твист классификатора даёт точку отражения (слабее сюръективности); (2) отражение на самом диагональном классификаторе — неподвижная точка f (механизм Ловера, изолированный); (3) бесфиксточечный твист ИМЕНУЕТ беглеца — f-твист диагонали вне образа φ. Мост reflection_point_bool: Prop-уровневый SelfReflective = negb-отражение bool-статуса решателя; несовместимость H77 передоказана как срез B=bool, f=negb, c:=dec.
+- **Role.** Слой 3 нити границы: HaltingRoleLimit → BoundaryDecidability (#97) → BoundaryDichotomy (#1858/H77) → здесь (взаимовыведение с Ловером #108, обобщение bool→B). Импортирует все четыре cs-предшественника.
+- **Counts.** Qed 11 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: Bool Lia; cs.HaltingRoleLimit; cs.LawvereFixedPoint; cs.BoundaryDecidability; cs.BoundaryDichotomy
+- **E/R/R.** _Elements:_ носители статусов B (bool с negb; nat с S); перечислители φ : A -> (A -> B); классификаторы c : A -> B. _Roles:_ hit — роль «названности изнутри» (point_surjective = «всё названо»); точка отражения d — роль само-применения; твист f — роль обструкции (его неподвижные точки = где отражение безвредно); B — обобщённый носитель статусов границы. _Rules:_ ступень 1: hit твиста ⟹ точка отражения; ступень 2: отражение на диагонали ⟹ фикспойнт f; ступень 3: бесфиксточечный f ⟹ именованный беглец (f-твист диагонали). _P4:_ Лестница локализует, ГДЕ живёт невозможность: не в мощности и не в бесконечности B, а в ОДНОЙ точке — f-твист диагонали, предъявленный классификатор вне образа (конструктивно: не ¬∀, а именованный беглец). Невынужденность: Leibniz-форма hit вынуждена совместимостью с point_surjective (#108), иначе funext; ослабление до одного hit вынуждено содержанием доказательства; твист через f, не f⁻¹ — f не обязан быть инъективным.
+- **Classical counterpart.** Lawvere 1969 (fixed-point theorem) and the explicit escapee of Cantor's proof are classical; NEW is the LADDER decomposition (one hit of the twist => reflection point => fixed point at the diagonal / named escapee), the machine inter-derivation with the Prop-level dichotomy (H77) via the pointwise bridge, and the bool/negb + nat/S instances in one frame.
+- **Tags.** lawvere, ladder, vein-E, H77, escape-witness, bridge, generalization
+
+**Lemmas (12):**
+
+| name | kind | role |
+|---|---|---|
+| `hit / diagB` | Definition | φ именует классификатор c (exists a, φ a = c); диагональный B-статус |
+| `twist_hit_reflects` | Lemma | ★ ступень 1: одно попадание в f-твист ⟹ точка отражения (обобщает surjective_diagonal_self_reflective с bool/negb на B/f, ослабляет сюръективность до hit) |
+| `reflection_at_diagonal_fixed_point` | Lemma | ★ ступень 2: отражение на диагональном классификаторе = неподвижная точка f (механизм Ловера) |
+| `lawvere_via_ladder` | Theorem | Ловер (#108) ВОССТАНОВЛЕН через лестницу: сюръективность даёт hit для каждого твиста |
+| `twisted_diagonal_escapes` | Theorem | ★ ступень 3: бесфиксточечный твист именует беглеца — f-твист диагонали вне образа φ |
+| `no_surjection_via_escape` | Corollary | ¬сюръективность через именованного беглеца |
+| `cantor_escape` | Corollary | B=bool, f=negb: Кантор с предъявленным беглецом |
+| `nat_escape` | Corollary | B=nat, f=S: нет перечисления A→nat (лестничная форма nat_fun_not_enumerable) |
+| `reflection_point_bool` | Lemma | поточечный мост: (P <-> c=false) <-> b = negb c при корректном бите b |
+| `self_reflective_is_negb_reflection` | Theorem | ★ SelfReflective (H77) = ровно negb-отражение bool-статуса решателя |
+| `prop_incompatibility_via_ladder` | Theorem | несовместимость H77 передоказана как срез лестницы (c := dec) |
+| `reflection_ladder` | Theorem | ★ capstone: Ловер + беглец + Кантор + Prop-дихотомия — одна структура |
+
+**Key lemmas (deep):**
+
+- **`twisted_diagonal_escapes`** - Конструктивное усиление ¬сюръективности: не «не все классификаторы названы», а ПРЕДЪЯВЛЕН беглец — f-твист диагонали. Локализует невозможность в одной точке; Кантор и nat/S — инстансы. Вместе со ступенями 1–2 показывает, что весь негативный механизм ветки — три шага одной лестницы. _(escape, lawvere, constructive, vein-E)_
+- **`self_reflective_is_negb_reflection`** - Мост уровней: Prop-уровневая форма SelfReflective (H77, через iff и false) при корректном решателе в точности равна B-уровневому уравнению отражения dec d = negb (c d). Через него несовместимость H77 передоказывается как срез лестницы (prop_incompatibility_via_ladder, c:=dec) — машинное взаимовыведение дихотомии и Ловера. _(bridge, H77, negb, inter-derivation)_
+- **`twist_hit_reflects`** - Ослабление гипотезы — содержательный шаг: для точки отражения не нужна сюръективность, достаточно ОДНОГО попадания φ в f-твист классификатора. Именно поэтому ступень 2 (фикспойнт) и ступень 3 (беглец) — две стороны одного применения. _(weakening, reflection, vein-E)_
+
+**Uniqueness - score 3 (new-framing).** Ловер (#108) и дихотомия границы (#1858/H77) машинно взаимовыведены как одна трёхступенчатая лестница на произвольном носителе статусов B: hit твиста ⟹ отражение ⟹ фикспойнт/именованный беглец; Кантор и nat/S — срезы; Prop-дихотомия — срез B=bool, f=negb, c:=dec.
+> _Caveat:_ Ловер 1969 классика; именованный беглец — стандартное содержание канторовского доказательства; вклад — лестничная декомпозиция, мост уровней и взаимовыведение, не новые матфакты.
 

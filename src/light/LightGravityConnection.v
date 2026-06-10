@@ -1,9 +1,13 @@
 (* ================================================================== *)
 (*  LightGravityConnection.v                                           *)
-(*  Light and gravity as edge vs vertex excitations                    *)
-(*  STATUS: COMPLETE  (10 Qed, 0 Admitted)                            *)
-(*  Author: Horsocrates                                                *)
-(*  Date:   April 2026                                                 *)
+(*  Light and gravity as edge vs vertex excitations — June 2026        *)
+(*  honesty rollback: 3 True-stubs removed (transverse_is_light,       *)
+(*  longitudinal_is_metric — need a mode-decomposition layer;           *)
+(*  kaluza_klein_hint — needs a 5th dimension; all RETIRED).  Real      *)
+(*  replacement: same_speed_different_spin (the file's honest          *)
+(*  dichotomy on its own data).                                         *)
+(*  STATUS: 8 Qed, 0 Admitted, 0 axioms                                *)
+(*  Author: Horsocrates | Date: April 2026 (rollback: June 2026)       *)
 (* ================================================================== *)
 
 From Stdlib Require Import QArith Qabs Lia ZArith List PeanoNat.
@@ -62,17 +66,22 @@ Proof. vm_compute. reflexivity. Qed.
 Theorem spin_difference : (gravity_spin - light_spin = 1)%nat.
 Proof. reflexivity. Qed.
 
-(** Transverse excitations are light (conceptual) *)
-Theorem transverse_is_light : True.
-Proof. exact I. Qed.
+(* June 2026 honesty rollback: three True-stubs REMOVED (transverse_is_light,
+   longitudinal_is_metric, kaluza_klein_hint).  The transverse/longitudinal
+   identifications need a mode-decomposition layer absent here, and Kaluza-Klein
+   needs a 5th dimension — those claims are RETIRED.  The real available content:
+   the light/gravity DICHOTOMY on this file's own data — same causal speed,
+   DIFFERENT spin. *)
 
-(** Longitudinal/metric excitations are gravity (conceptual) *)
-Theorem longitudinal_is_metric : True.
-Proof. exact I. Qed.
-
-(** Kaluza-Klein hint: extra dimension unifies EM + gravity (conceptual) *)
-Theorem kaluza_klein_hint : True.
-Proof. exact I. Qed.
+(** ★ Same speed, different spin: the two massless excitations coincide in speed
+    (both at the causal limit) and differ in spin — the file's honest dichotomy. *)
+Theorem same_speed_different_spin :
+  graviton_speed == edge_wave_speed_low_k /\ light_spin <> gravity_spin.
+Proof.
+  split.
+  - vm_compute. reflexivity.
+  - unfold light_spin, gravity_spin. lia.
+Qed.
 
 (** === SYNTHESIS === *)
 Theorem light_gravity_synthesis :
@@ -80,11 +89,11 @@ Theorem light_gravity_synthesis :
   light_spin = 1%nat /\
   gravity_spin = 2%nat /\
   edge_wave_speed_low_k == causal_limit /\
-  True (* light and gravity from same graph *).
+  light_spin <> gravity_spin.
 Proof.
   split. { reflexivity. }
   split. { reflexivity. }
   split. { reflexivity. }
   split. { vm_compute. reflexivity. }
-  exact I.
+  unfold light_spin, gravity_spin. lia.
 Qed.

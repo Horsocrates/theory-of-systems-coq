@@ -61,7 +61,7 @@ Fixpoint pp_energy (field : nat -> Q) (N : nat) : Q :=
 
 (** A physical process is WELL-FORMED if ground state has finite energy *)
 Definition pp_well_formed (p : PhysicalProcess) : Prop :=
-  exists E : Q, pp_energy (pp_ground p) (pp_N p) == E.
+  exists (num : Z) (den : BinNums.positive), pp_energy (pp_ground p) (pp_N p) = num # den.
 
 (* ================================================================ *)
 (*  HELPERS                                                          *)
@@ -101,7 +101,11 @@ Lemma sound_ground_zero : pp_ground sound_process 0%nat == 0.
 Proof. reflexivity. Qed.
 
 Lemma sound_well_formed : pp_well_formed sound_process.
-Proof. exists 0. vm_compute. reflexivity. Qed.
+Proof.
+  unfold pp_well_formed.
+  destruct (pp_energy (pp_ground sound_process) (pp_N sound_process)) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 (* ================================================================ *)
 (*  INSTANCE 2: LIGHT (edge field, massless)                         *)

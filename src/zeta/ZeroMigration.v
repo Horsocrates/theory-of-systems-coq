@@ -358,7 +358,7 @@ Theorem zero_migration_summary :
   (* Conditional: unbiased → centered *)
   unbiased_migration /\
   (* Computability *)
-  (forall K, exists q : Q, perturbation_bound K == q).
+  (forall K, exists (num : Z) (den : BinNums.positive), perturbation_bound K = num # den).
 Proof.
   split; [|split; [|split; [|split; [|split; [|split; [|split]]]]]].
   - exact perturbation_bound_pos.
@@ -368,7 +368,7 @@ Proof.
   - exact cumulative_variance_nonneg.
   - exact cumulative_variance_bounded.
   - exact unbiased_holds.
-  - intros K. exists (perturbation_bound K). reflexivity.
+  - intros K. destruct (perturbation_bound K) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)

@@ -181,8 +181,7 @@ Definition v_q : vec4 := fun i =>
   match i with O => 0 | S O => 1 | S (S O) => -(1) | S (S (S O)) => 0 | _ => 0 end.
 
 (** End marker *)
-Theorem total_count : alpha_2d 0 == 1.
-Proof. exact alpha_at_0. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -194,5 +193,5 @@ Proof. exact alpha_at_0. Qed.
 (*  Part III: t4_00/01/02/03/11/12/22/33_at_8,                               *)
 (*            coupled_2d_diagonal_at_8 (9)                                    *)
 (*  Part IV: coupled_trace_correct, coupled_trace_at_8 (2)                    *)
-(*  Part V: total_count (1)                                                    *)
+(*  Part V: tail-stamp removed                                                    *)
 (* ========================================================================= *)

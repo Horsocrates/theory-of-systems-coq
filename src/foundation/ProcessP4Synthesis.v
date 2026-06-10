@@ -38,10 +38,13 @@ Open Scope Q_scope.
 (*  PROCESS IS P4-COMPATIBLE                                         *)
 (* ================================================================ *)
 
-(** Every stage of a RealProcess is a finite rational *)
+(** Every stage of a RealProcess is a finite rational — a ratio of a finite
+    integer and a finite positive, BY TYPE (June 2026: was `exists q, R n = q`,
+    vacuous; finiteness is enforced by the codomain Q, which contains no
+    infinite objects). *)
 Lemma process_finite_at_stage : forall (R : RealProcess) (n : nat),
-  exists q : Q, R n = q.
-Proof. intros R n. exists (R n). reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), R n = num # den.
+Proof. intros R n. destruct (R n) as [num den]. exists num, den. reflexivity. Qed.
 
 (** Constant processes are trivially P4-compatible *)
 Lemma const_process_compatible : forall q,

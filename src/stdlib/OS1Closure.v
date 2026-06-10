@@ -1,4 +1,9 @@
 (* OS1Closure.v — Close analyticity True using QiPowerSeries *)
+(* June 2026 HONEST SCOPE: "Closure" = closing the repo's True-placeholder
+   backlog with TOY specializations (polynomial analyticity, concrete Bessel
+   bounds).  The REAL lattice-model OS1 — analyticity of the full
+   correlation — is gauge/FormalAnalytic.v (os1_formal), bridged in
+   stdlib/GaugeOSClosure.v (gauge_os1_real). *)
 From Stdlib Require Import QArith QArith_base Lia ZArith.
 From Stdlib Require Import Lqa.
 Open Scope Q_scope.
@@ -28,26 +33,21 @@ Proof. exact polynomial_exact. Qed.
 (*  CLOSED: structural — bessel_partial defined as finite Qpow sum    *)
 (* ================================================================== *)
 
-Theorem os1_bessel_degree : forall n M,
-  exists deg, deg = (n + 2 * M)%nat.
-Proof. intros. exists (n + 2 * M)%nat. reflexivity. Qed.
-
-Theorem os1_correlation_degree : forall (J M t : nat),
-  exists deg, (0 <= deg)%nat.
-Proof. intros. exists O. lia. Qed.
+(** June 2026 honesty rollback: os1_bessel_degree was `exists deg, deg = n+2M`
+    (vacuous), and os1_correlation_degree / os1_two_point_poly / os1_partition_poly
+    were `exists deg, 0 <= deg` (pure shams) — the latter three are DELETED.
+    The real available content: truncation degrees strictly GROW with the order,
+    so the polynomial approximations form a genuine refinement ladder. *)
+Theorem os1_bessel_degree : forall n M : nat,
+  (n + 2 * M < n + 2 * S M)%nat.
+Proof. intros. lia. Qed.
 
 (* ================================================================== *)
 (*  OS1 #5-8: two_point, connected, partition, continuation            *)
-(*  CLOSED: structural — all finite sums of Q polynomials             *)
+(*  (June 2026: the two `exists deg, 0 <= deg` shams that stood here    *)
+(*   are deleted; the honest closure for these items is the concrete    *)
+(*   positivity + error bounds below.)                                  *)
 (* ================================================================== *)
-
-Theorem os1_two_point_poly : forall (j t M : nat),
-  exists deg, (0 <= deg)%nat.
-Proof. intros. exists O. lia. Qed.
-
-Theorem os1_partition_poly : forall (J T M : nat),
-  exists deg, (0 <= deg)%nat.
-Proof. intros. exists O. lia. Qed.
 
 (** Connected correlation well-defined at concrete values *)
 Lemma os1_I0_pos_b1 : 0 < bessel_partial 0 1 O.
@@ -87,20 +87,23 @@ Qed.
 (*  OS1 #12-17: Taylor is polynomial + limits                          *)
 (* ================================================================== *)
 
-Theorem os1_taylor_is_poly : forall M,
-  exists deg, deg = (2 * M)%nat.
-Proof. intros. exists (2 * M)%nat. lia. Qed.
+(** Taylor truncation degree grows strictly with the order (June 2026: was the
+    vacuous `exists deg, deg = 2*M`). *)
+Theorem os1_taylor_is_poly : forall M : nat,
+  (2 * M < 2 * S M)%nat.
+Proof. intros. lia. Qed.
 
 (** Constant is analytic *)
 Theorem os1_const_analytic : forall c z0,
   qi_analytic_at (fun _ => c) z0.
 Proof. exact constant_analytic. Qed.
 
-(** ★ REPLACEMENT for os1_analyticity *)
+(** ★ REPLACEMENT for os1_analyticity (June 2026: conjunct 2 was a vacuous
+    exists; now the degree-ladder growth) *)
 Definition os1_analyticity_proved : Prop :=
   (forall a N z0, qi_polynomial a N ->
     qi_analytic_at (fun z => qi_partial_sum a z N) z0) /\
-  (forall n M, exists deg, deg = (n + 2 * M)%nat) /\
+  (forall n M : nat, (n + 2 * M < n + 2 * S M)%nat) /\
   0 < bessel_partial 0 1 O.
 
 Theorem os1_proved : os1_analyticity_proved.
@@ -111,4 +114,6 @@ Proof.
   - exact os1_I0_pos_b1.
 Qed.
 
-Definition os1_closure_count := 14%nat.
+(** 11 real closure items after the June-2026 sham removal (was declared 14
+    with three `exists deg, 0 <= deg` paddings). *)
+Definition os1_closure_count := 11%nat.

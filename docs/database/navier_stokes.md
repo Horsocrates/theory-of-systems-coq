@@ -2,7 +2,7 @@
 
 _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**35 files / 876 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=12 / s1=21 / s0=0
+**35 files / 872 Qed.** Score distribution: s5=0 / s4=0 / s3=2 / s2=12 / s1=21 / s0=0
 
 ---
 
@@ -414,16 +414,16 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 ## #627 - `src/navier_stokes/GalerkinSystem.v` - score 2 (methods)
 
-**Galerkin system over Q: modal ODE (2 assumptions)**
+**Galerkin system over Q: modal ODE (1 Parameter; B_antisym axiom eliminated 06.2026)**
 
-- **Topic.** Modal state/coefficient, modal energy/enstrophy, viscous decay, the nonlinear energy rate zero (via antisymmetry), energy rate = dissipation, Galerkin smooth/global — with B_antisym as an axiom and B_coeff a parameter.
-- **Role.** NS (Galerkin ODE system). CARRIES 1 axiom (B_antisym) + 1 Parameter (B_coeff). Self-contained otherwise.
-- **Counts.** Qed 29 / Admitted 0 / axioms 2
+- **Topic.** Modal state/coefficient, modal energy/enstrophy, viscous decay, the nonlinear energy rate zero (via antisymmetry), energy rate = dissipation, Galerkin smooth/global — with B_antisym a Lemma (antisymmetrization, June 2026) and B_raw a parameter.
+- **Role.** NS (Galerkin ODE system). 0 axioms + 1 Parameter (B_raw) since June 2026: B_coeff := antisymmetrization of B_raw, B_antisym is a Lemma (ring). Self-contained otherwise.
+- **Counts.** Qed 30 / Admitted 0 / axioms 1
 - **Imports.** Stdlib: QArith
-- **E/R/R.** _Elements:_ модальное состояние; коэффициент mode. _Roles:_ галёркинская ODE как роль; антисимметрия B. _Rules:_ nonlinear_energy_zero (через B_antisym); energy_rate_equals_dissipation. _P4:_ ★ нелинейный член сохраняет энергию (через ПОСТУЛИРОВАННУЮ антисимметрию B_antisym — устранимую структуру) + B_coeff Parameter; 2 допущения.
-- **Classical counterpart.** The Galerkin ODE system for the modal coefficients (energy rate = dissipation, the advection antisymmetry conserving energy) is standard NS; the antisymmetry B(k,l,m)=-B(k,m,l) is here an AXIOM (provable energy-conservation structure) plus B_coeff as a Parameter — so this file carries 2 assumptions.
+- **E/R/R.** _Elements:_ модальное состояние; коэффициент mode. _Roles:_ галёркинская ODE как роль; антисимметрия B. _Rules:_ nonlinear_energy_zero (через B_antisym); energy_rate_equals_dissipation. _P4:_ ★ нелинейный член сохраняет энергию через антисимметрию ПО ПОСТРОЕНИЮ (June 2026: B_coeff = антисимметризация Parameter B_raw, B_antisym = Lemma); 1 допущение (Parameter B_raw).
+- **Classical counterpart.** The Galerkin ODE system for the modal coefficients (energy rate = dissipation, the advection antisymmetry conserving energy) is standard NS; the antisymmetry B(k,l,m)=-B(k,m,l) WAS an axiom until June 2026; now B_coeff := B_raw k l m - B_raw k m l (antisymmetrization of an abstract raw Parameter), so antisymmetry is a Lemma by ring — the file carries 1 assumption (Parameter B_raw).
 - **Tags.** navier-stokes, galerkin, axiom, methods
-- **Notes.** Declares axiom B_antisym (eliminable ProvableStructure per CLAUDE.md) + Parameter B_coeff. axioms counted as 2.
+- **Notes.** June 2026: axiom B_antisym ELIMINATED — B_coeff is now the antisymmetrization of Parameter B_raw, antisymmetry a Lemma (ring). Print Assumptions of NS millennium capstones: C_B_positive + Parameter C_B only. Remaining assumption here: Parameter B_raw. axioms=1.
 
 **Lemmas (1):**
 
@@ -433,10 +433,10 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 **Key lemmas (deep):**
 
-- **`energy_rate_equals_dissipation`** - Галёркинская энергия убывает со скоростью диссипации: нелинейный член НЕ производит энергию (nonlinear_energy_zero через антисимметрию B). КРИТИЧНО: антисимметрия B_antisym ПОСТУЛИРОВАНА (axiom, но устранимая — это сохранение энергии адвекции, см. AdvectionEnergyConservation) + B_coeff Parameter. _(galerkin, energy-conservation, antisymmetry, axiom)_
+- **`energy_rate_equals_dissipation`** - Галёркинская энергия убывает со скоростью диссипации: нелинейный член НЕ производит энергию (nonlinear_energy_zero через антисимметрию B). June 2026: антисимметрия более НЕ постулат — B_coeff определён как антисимметризация Parameter B_raw, B_antisym = Lemma (ring); грид-спуск содержания: AdvectionEnergyConservation. _(galerkin, energy-conservation, antisymmetry, axiom)_
 
 **Uniqueness - score 2 (methods).** Галёркинская ODE над Q (энергия=диссипация, нелинейный член сохраняет энергию через антисимметрию B).
-> _Caveat:_ ★ Несёт 2 допущения: axiom B_antisym (устранимая ProvableStructure = сохранение энергии адвекции) + Parameter B_coeff. axioms=2.
+> _Caveat:_ ★ Несёт 1 допущение: Parameter B_raw (сырое сопряжение). Axiom B_antisym УСТРАНЁН 2026-06-10 (Lemma по построению — антисимметризация). axioms=1.
 
 ---
 
@@ -579,11 +579,11 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 **Millennium complete over Q (NS+YM chain, CONDITIONAL, with axiom list)**
 
-- **Topic.** The phase/layer chain, navier_stokes_millennium, the key inequality / integer minimum, A=exists, regularity unconditional? (with an explicit axiom_list and file_count), the thirty-file chain.
+- **Topic.** The phase/layer chain, ns_galerkin_bound_chain, the key inequality / integer minimum, A=exists, regularity unconditional? (with an explicit axiom_list and file_count), the thirty-file chain.
 - **Role.** NS (Millennium assembly, conditional). Lists its own axioms. Self-contained.
-- **Counts.** Qed 37 / Admitted 0 / axioms 0
+- **Counts.** Qed 34 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; NS chain
-- **E/R/R.** _Elements:_ фазовая/слойная цепь NS+YM. _Roles:_ Millennium-сборка как роль (УСЛОВНАЯ). _Rules:_ navier_stokes_millennium; axiom_list; key_inequality. _P4:_ ★ Millennium-цепь собрана над Q с ЯВНЫМ axiom_list — NS-регулярность УСЛОВНА (зависит от B_coeff_bounded).
+- **E/R/R.** _Elements:_ фазовая/слойная цепь NS+YM. _Roles:_ Millennium-сборка как роль (УСЛОВНАЯ). _Rules:_ ns_galerkin_bound_chain; axiom_list; key_inequality. _P4:_ ★ Millennium-цепь собрана над Q с ЯВНЫМ axiom_list — NS-регулярность УСЛОВНА (зависит от B_coeff_bounded).
 - **Classical counterpart.** A complete NS+YM Millennium proof chain (phases, layers, key inequality, A=exists) is the target; NEW: only the assembled chain + the explicit axiom_list/file_count — but NS regularity is CONDITIONAL (the axiom list includes the load-bearing bound).
 - **Tags.** navier-stokes, millennium, conditional, honest, synthesis
 
@@ -591,11 +591,11 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 | name | kind | role |
 |---|---|---|
-| `chain_phase1..6 navier_stokes_millennium key_inequality key_integer_minimum a_equals_exists axiom_list file_count thirty_file_chain millennium_complete_final` | Definition/Lemma | Millennium-цепь, явный axiom_list |
+| `chain_phase1..6 ns_galerkin_bound_chain key_inequality key_integer_minimum a_equals_exists axiom_list file_count thirty_file_chain millennium_reading2_capstone` | Definition/Lemma | Millennium-цепь, явный axiom_list |
 
 **Key lemmas (deep):**
 
-- **`navier_stokes_millennium`** - NS+YM Millennium-цепь собрана над Q (фазы/слои, key inequality, A=exists) с ЯВНЫМ axiom_list и file_count. КРИТИЧНО: NS-регулярность УСЛОВНА — axiom_list честно включает load-bearing допущения (B_coeff_bounded). НЕ безусловное решение. _(millennium, conditional, axiom-list, honest)_
+- **`ns_galerkin_bound_chain`** - NS+YM Millennium-цепь собрана над Q (фазы/слои, key inequality, A=exists) с ЯВНЫМ axiom_list и file_count. КРИТИЧНО: NS-регулярность УСЛОВНА — axiom_list честно включает load-bearing допущения (B_coeff_bounded). НЕ безусловное решение. _(millennium, conditional, axiom-list, honest)_
 
 **Uniqueness - score 2 (synthesis+observation).** Millennium NS+YM цепь над Q с ЯВНЫМ axiom_list/file_count — собрана, но УСЛОВНА (NS зависит от B_coeff_bounded).
 > _Caveat:_ ★ НЕ безусловное решение Millennium; честно перечисляет свои аксиомы. NS-регулярность conditional на load-bearing bound.
@@ -607,8 +607,8 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 **NS complete over Q: unconditional vs conditional ledger**
 
 - **Topic.** Unconditional results (energy, 2D, integrated, Fatou, Galerkin, resolution), conditional results (invariant, bootstrap, Sobolev, Galerkin, smooth), the_wall, closing the gap, ns_axiom_count.
-- **Role.** NS (results ledger). Self-contained.
-- **Counts.** Qed 24 / Admitted 0 / axioms 0
+- **Role.** NS (results ledger). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
+- **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; NS files
 - **E/R/R.** _Elements:_ безусловные/условные NS-результаты. _Roles:_ реестр результатов как честная роль. _Rules:_ ns_unconditional; ns_conditional; the_wall; ns_axiom_count. _P4:_ ★ безусловные (u1-u6) отделены от условных (c1-c5) и the_wall; ns_axiom_count явно — честный реестр.
 - **Classical counterpart.** Stating the NS results (unconditional u1-u6, conditional c1-c5, the wall, publication framing) is meta; NEW is only the explicit unconditional/conditional ledger + ns_axiom_count.
@@ -618,7 +618,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 | name | kind | role |
 |---|---|---|
-| `ns_u1..u6 ns_unconditional ns_c1..c5 ns_conditional the_wall closing_the_gap ns_axiom_count ns_complete_main` | Definition/Lemma | ★ безусловное vs условное vs стена, счёт аксиом |
+| `ns_u1..u6 ns_unconditional ns_c1..c5 ns_conditional the_wall closing_the_gap ns_axiom_count ns_synthesis_main` | Definition/Lemma | ★ безусловное vs условное vs стена, счёт аксиом June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -634,7 +634,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 **NS process final over Q: the P4 view**
 
 - **Topic.** NS energy bounded/monotone as a process, 2D regular, 3D conditional, the quadratic bound, finite-K linear, attacks fail, finite-K well-behaved, K-limit difficulty, p4_process_is_physics.
-- **Role.** NS (P4 process view). Self-contained.
+- **Role.** NS (P4 process view). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ NS-результаты как процесс. _Roles:_ P4-взгляд на NS как роль. _Rules:_ ns_process_energy; finite_K_wellbehaved; k_limit_difficulty. _P4:_ ★ NS как процесс: конечный-K хорошо ведёт себя (Element), K→∞ предел = трудность (role-limit); p4_process_is_physics.
@@ -769,7 +769,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 **Resolution regularity over Q: exact rational DNS**
 
 - **Topic.** Euler step/evolve (rational solution), refinement energy monotone, resolution convergence, the physicist's criterion, p4 global existence/smoothness, DNS validation.
-- **Role.** NS (resolution/DNS). Self-contained.
+- **Role.** NS (resolution/DNS). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ Эйлер-эволюция; разрешение DNS. _Roles:_ разрешение как процесс (точное рациональное решение). _Rules:_ solution_is_rational; resolution_convergence; p4_exact_solution. _P4:_ ★ на каждом разрешении решение ТОЧНО РАЦИОНАЛЬНО (Element); уточнение сходится — DNS как P4-процесс.
@@ -780,7 +780,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 | name | kind | role |
 |---|---|---|
-| `euler_step/evolve solution_is_rational refinement_energy resolution_convergence p4_global_existence/smoothness p4_exact_solution dns_validation resolution_regularity_main` | Definition/Lemma | Эйлер-эволюция, точное рациональное решение, DNS |
+| `euler_step/evolve solution_is_rational refinement_energy resolution_convergence p4_global_existence/smoothness p4_exact_solution dns_validation resolution_regularity_main` | Definition/Lemma | Эйлер-эволюция, точное рациональное решение, DNS June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -796,7 +796,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 **Smooth initial data over Q**
 
 - **Topic.** Smooth/very-smooth initial data, finite energy/enstrophy, smooth in the region (high modes), rescaling puts in region, smooth stays smooth.
-- **Role.** NS (smooth initial data). Self-contained.
+- **Role.** NS (smooth initial data). Self-contained. June 2026 wave-4 vacuity rollback: smooth_stays_smooth carried a vacuous True-conjunct standing for unproven all-time regularity -> dropped; conclusion = entry into invariant region; all-time chain honestly deferred to ResolutionRegularity/NSComplete (conditional on NS-wall axioms).
 - **Counts.** Qed 19 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ гладкие начальные данные; область. _Roles:_ гладкие данные как роль (вход в область). _Rules:_ rescaling_puts_in_region; smooth_stays_smooth. _P4:_ гладкие данные конечно-энергичны, входят в область над Q (Element).
@@ -807,7 +807,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 
 | name | kind | role |
 |---|---|---|
-| `smooth_initial very_smooth_implies_smooth smooth_has_finite_energy/enstrophy rescaling_puts_in_region smooth_stays_smooth smooth_initial_data_main` | Definition/Lemma | гладкие данные, вход в область, рескейлинг |
+| `smooth_initial very_smooth_implies_smooth smooth_has_finite_energy/enstrophy rescaling_puts_in_region smooth_stays_smooth smooth_initial_data_main` | Definition/Lemma | гладкие данные, вход в область, рескейлинг June 2026 wave-4 vacuity rollback: smooth_stays_smooth carried a vacuous True-conjunct standing for unproven all-time regularity -> dropped; conclusion = entry into invariant region; all-time chain honestly deferred to ResolutionRegularity/NSComplete (conditional on NS-wall axioms). |
 
 **Key lemmas (deep):**
 
@@ -823,7 +823,7 @@ _Generated from `navier_stokes.json` by `generate.ps1` - do not edit by hand; ed
 **Transient closure over Q (the conditional chain)**
 
 - **Topic.** Steps 1-7 (smooth enters region, invariant, per-mode, bootstrap, enstrophy converges, higher regularity, smooth for all time), all Sobolev bounded, the regularity chain.
-- **Role.** NS (transient closure, conditional). Self-contained.
+- **Role.** NS (transient closure, conditional). Self-contained. June 2026 wave-4 vacuity rollback: smooth_stays_smooth carried a vacuous True-conjunct standing for unproven all-time regularity -> dropped; conclusion = entry into invariant region; all-time chain honestly deferred to ResolutionRegularity/NSComplete (conditional on NS-wall axioms).
 - **Counts.** Qed 19 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ 7-шаговая цепь регулярности. _Roles:_ замыкание переходного процесса как роль. _Rules:_ step7_smooth_for_all_time; regularity_chain. _P4:_ 7-шаговая цепь даёт гладкость на все времена над Q (УСЛОВНО).

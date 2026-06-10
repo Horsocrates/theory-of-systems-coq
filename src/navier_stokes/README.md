@@ -1,6 +1,6 @@
 # Navier-Stokes Regularity — Process-Based Approach
 
-**34 files | 654 Qed | 0 Admitted | 4 axioms (classic, B_antisym, C_B_positive, B_coeff_bounded)**
+**34 files | 654 Qed | 0 Admitted | 3 axioms (classic, C_B_positive, B_coeff_bounded); B_antisym eliminated June 2026 (now a Lemma: B_coeff = antisymmetrization of Parameter B_raw)**
 
 Process-based formalization of 3D incompressible Navier-Stokes regularity,
 targeting the Clay Millennium Prize Problem.
@@ -96,7 +96,7 @@ targeting the Clay Millennium Prize Problem.
 - `energy_dissipation_identity` — dE/dt = -2*nu*Omega
 - `blowup_measure_zero` — singular set has measure 0
 - `invariant_region_stable` — |a_k| <= A_inv/k is invariant for C0 <= nu/C_B
-- `ns_complete_main` — complete synthesis of all results
+- `ns_synthesis_main` — synthesis of all results (renamed June 2026 from ns_complete_main)
 - `resolution_regularity_main` — constructive solution at each K
 
 ## What We Did Not Achieve

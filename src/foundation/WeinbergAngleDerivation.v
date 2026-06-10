@@ -1,13 +1,50 @@
-(** * WeinbergAngleDerivation.v — sin²θ_W = 3/13 DERIVED from E/R/R
-    Elements: gauge DOF, metric DOF, mixing angle
-    Roles:    intrinsic (SU(2)) vs ambient (metric) Rules
-    Rules:    P1 (equal weight) + confinement + geometric U(1)
-    STATUS:   25 Qed, 0 Admitted, 0 new axioms
-    Author:   Horsocrates | Date: March 2026
+(** * WeinbergAngleDerivation.v — sin²θ_W = 3/13 is FORCED ARITHMETIC GIVEN three identifications
+       (U(1) geometric, SU(3) confined, denominator = symmetric metric rank) — NOT zero free parameters
+    Elements: gauge DOF (numerator a=3), metric DOF (denominator b=10), mixing angle
+    Roles:    intrinsic (SU(2)) numerator vs ambient (metric) denominator
+    Rules:    P1 (equal weight) fixes the FORM a/(a+b); it does NOT fix the sector or the rank
+    STATUS:   23 Qed, 0 Admitted, 0 new axioms
+    Author:   Horsocrates | Date: March 2026  (honesty rollback: June 2026)
 
-    ★★★★★ CLOSES THE LAST GAP IN sin²θ_W = 3/13 ★★★★★
+    +-- HONEST STATUS (rolled back from "★★★★★ ZERO free parameters") --------------------+
+    | sin²θ_W = a/(a+b) = 3/(3+10) = 3/13 is FORCED arithmetic GIVEN three identifications,  |
+    | each an ENCODED CHOICE (a definitional labeling or a data-selected dimension), none    |
+    | a theorem:                                                                             |
+    |   (i)   STEP 1 — U(1)_Y is "geometric" (depth-2 reflexive): a labeling (gauge_origin    |
+    |         Depth2 := Geometric, proven by reflexivity); it sets g'² ∝ 1/n_metric.         |
+    |   (ii)  STEP 2 — SU(3) is "confined"/excluded from the numerator: a labeling            |
+    |         (confinement Depth1 := Confined). Varying the numerator sector changes the      |
+    |         answer (wrong_su3/wrong_u1/wrong_su5); only SU(2) fits — DATA-selected          |
+    |         (SinThetaWDerivationStatus.only_su2_selected).                                  |
+    |   (iii) STEP 3 — the denominator = symmetric metric RANK (10). A 4D metric has three     |
+    |         geometric DOF counts {antisym 6, sym 10, Riemann 20} → {1/3, 3/13, 3/23}; the    |
+    |         rules admit all three, DATA picks 10 (denominator_rank_is_a_choice below;        |
+    |         home: MetricDOFJustification.rank_underdetermined).                              |
+    | So the chain rests on COUNTED POSITS, not zero — by JustificationRegress.v every grounded  |
+    | claim needs ≥1 posit (grounded_needs_posit) and "from nothing"/"zero parameters" is the     |
+    | role-limit error (from_nothing_ungrounded); by L4 (Law_of_SufficientReason) a posit is      |
+    | self-grounding, so these are POSITS, not free choices. Pushed deep the three reduce to      |
+    | P1 + the depth→gauge map (family ②); the rank reduces via locality. This REFINES            |
+    | SinThetaWDerivationStatus's "derived modulo one (bundled) identification" by unbundling     |
+    | the P1 bridge r = dim(SU(2))/n_metric into its numerator and denominator ends.              |
+    +--------------------------------------------------------------------------------------------+
 
-    Three steps, each formalized:
+    ============ E/R/R разбор ============
+      Elements : числитель a=3=dim SU(2); знаменатель b=10=сим. ранг 4D-метрики; форма a/(a+b).
+      Roles    : a — «внутренний калибровочный сектор»; b — «геометрический сектор смешивания»; U(1)/SU(3) — метки.
+      Rules    : P1 фиксирует ФОРМУ a/(a+b); НЕ фиксирует ни сектор (числитель), ни ранг (знаменатель).
+      ДИАГНОСТИКА (P4 + L4): «ноль свободных параметров» ложно — но и «три свободных выбора» неточно. По
+      L4 (Law_of_SufficientReason) основания само-обоснованы (ПОСТУЛАТЫ, не произвол); по JustificationRegress
+      обоснованное требует ≥1 постулат (grounded_needs_posit), «из ничего» — role-limit (from_nothing_ungrounded).
+      Протолкнув вглубь, (i)(ii)(iii) сводятся к P1 + карта depth→gauge (②); ранг сводится локальностью. Узел:
+      forced(форма) ⟂ posit(P1) ⟂ posit(карта depth→gauge). Уровень: `синтез+наблюдение`. Честная задача —
+      СЧИТАТЬ постулаты, не обнулять; дополняет SinThetaWDerivationStatus (числитель) и MetricDOFJustification (ранг).
+
+    The STEP 1/2/3 development below (names unchanged for downstream imports) sets up the
+    (numerator = SU(2), denominator = metric) assignment; the honest accounting is at the bottom.
+
+    Three steps, each ENCODING a posit (STEP 1, 2 = labelings of the depth→gauge map; STEP 3 = a
+    forced arithmetic given the inputs):
 
     STEP 1: U(1)_Y IS GEOMETRIC
       Depth 2 of nested distinction = reflexive = A looks at A.
@@ -176,20 +213,19 @@ Proof. unfold sin2_weinberg, r_weinberg, dim_SU2, n_metric, D_spacetime.
 (*  HONEST BRIDGE TO STANDARD THEORY                                   *)
 (* ================================================================== *)
 
-(** The ToS formula and the standard formula AGREE numerically because:
+(** The ToS formula and the standard formula have the same FORM r/(1+r); they agree numerically
+    GIVEN the identification r = dim(SU(2))/n_metric = 3/10:
     1. Both have form r/(1+r)
-    2. ToS: r = dim(SU(2))/n_metric = 3/10
+    2. ToS: r = dim(SU(2))/n_metric = 3/10  — GIVEN sector = SU(2) and rank = symmetric (both choices)
     3. Standard: r = g'²/g² (measured ≈ 0.3)
 
-    The AGREEMENT is a PREDICTION, not a tautology:
-    — We DERIVE r = 3/10 from DOF counting (no free parameters)
-    — Experiment MEASURES r ≈ 0.3
-    — They match to 0.2%
-
-    The structural identifications (from E/R/R, not standard theory):
+    The agreement is SYNTHETIC (3/13 ≠ the measured 0.2312, yet within 0.2% — cf.
+    PhysicsDemarcation.prediction_synthetic), so it is not a bare tautology.  But it is NOT
+    parameter-free: r = 3/10 is forced only AFTER the three identifications below, each a
+    data-consistent CHOICE, not a derivation (see sin2_forced_modulo_identifications):
     a. g² ∝ 1/dim(SU(2)):  P1 → coupling distributes over generators
-    b. g'² ∝ 1/n_metric:   P1 + U(1)_Y geometric → coupling distributes over metric DOF
-    c. SU(3) absent:        confinement → doesn't participate in EW mixing *)
+    b. g'² ∝ 1/n_metric:   P1 + U(1)_Y geometric → coupling distributes over metric DOF (RANK chosen)
+    c. SU(3) absent:        confinement → excluded from the numerator (SECTOR chosen) *)
 
 (** Complement: cos²θ = 1 - sin²θ = 10/13 *)
 Definition cos2_weinberg : Q := 1 - sin2_weinberg.
@@ -215,7 +251,8 @@ Lemma prediction_error_small :
 Proof. unfold Qlt. simpl. lia. Qed.
 
 (* ================================================================== *)
-(*  WHY OTHER FORMULAS DON'T WORK                                      *)
+(*  NUMERATOR-SECTOR ALTERNATIVES — DATA-excluded, not RULE-excluded    *)
+(*  (the rules admit these gauge sectors; only the datum selects SU(2)) *)
 (* ================================================================== *)
 
 (** If we used dim(SU(3))/n_metric = 8/10: *)
@@ -238,7 +275,8 @@ Lemma wrong_su5 : (3 # 8) > sin2_observed.
 Proof. unfold sin2_observed, Qlt. simpl. lia. Qed.
 (* 3/8 = 0.375. Off by 62%. *)
 
-(** ONLY dim(SU(2))/n_metric = 3/10 gives sin²θ ≈ 0.231 *)
+(** Among these rule-admissible numerator sectors, only SU(2) lands near 0.231 — a DATA
+    selection (SinThetaWDerivationStatus.only_su2_selected), NOT a rule-exclusion. *)
 
 (* ================================================================== *)
 (*  GRAND SYNTHESIS                                                    *)
@@ -267,30 +305,44 @@ Proof.
   exact sin2_cos2_sum]]]]]].
 Qed.
 
-(** ★★★★★ THE FULL DEDUCTIVE CHAIN ★★★★★
+(* ================================================================== *)
+(*  HONEST ACCOUNTING — counted POSITS, not zero (JustificationRegress) *)
+(*  ≥1 posit is honest; "from nothing" is the role-limit. Pushed deep,  *)
+(*  the posits are P1 + the depth→gauge map (②); the rank reduces.      *)
+(* ================================================================== *)
 
-    A = exists
-    → Distinction (L1-L5)
-    → L2+L3 → θ=1 (ThetaFromL2L3.v)
-    → Nested distinction → SU(3)×SU(2)×U(1) gauge group
-    → U(1)_Y = geometric (depth 2 = reflexive = phase)
-    → SU(3) confined (doesn't mix)
-    → P1 (equal weight) → g² ∝ 1/dim(G), g'² ∝ 1/n_metric
-    → r = dim(SU(2))/n_metric = 3/10
-    → sin²θ_W = r/(1+r) = 3/13 = 0.2308
-    → observation: 0.2312
-    → error: 0.2%
-    → ZERO free parameters in this chain
+(** sin²θ as a function of the geometric-sector RANK, numerator fixed at dim(SU(2)) = 3.
+    The three geometric DOF counts of a 4D metric (antisym 6 / sym 10 / Riemann 20) are all
+    rule-admissible; replicated locally — home of this point: MetricDOFJustification.v. *)
+Definition sin2_at_rank (b : nat) : Q :=
+  inject_Z (Z.of_nat dim_SU2) / inject_Z (Z.of_nat (dim_SU2 + b)).
 
-    Every step is either:
-    (a) a mathematical theorem (Qed), or
-    (b) a structural identification justified by E/R/R.
+(** ★ The denominator RANK is underdetermined by L1 ALONE: {6,10,20} → {1/3, 3/13, 3/23}, pairwise
+    distinct.  This is NOT a free parameter — given "U(1)_Y geometric" the rank reduces via locality
+    (6=isometries, 20=curvature are different objects); the datum confirms the symmetric rank 10. *)
+Lemma rank_underdetermined_by_L1 :
+  sin2_at_rank 6 == 1#3 /\ sin2_at_rank 10 == 3#13 /\ sin2_at_rank 20 == 3#23 /\
+  ~ (1#3 == 3#13) /\ ~ (3#13 == 3#23).
+Proof.
+  repeat split; try (vm_compute; reflexivity); intro H; vm_compute in H; discriminate H.
+Qed.
 
-    The structural identifications:
-    1. U(1)_Y = geometric (from reflexive = phase = metric subgroup)
-    2. Confined = doesn't mix (from E/R/R: Rules internal to subsystem)
-    3. P1 → equal-weight DOF counting (from Wholeness principle)
-
-    These are NOT ad hoc. They follow from the E/R/R framework
-    applied to the specific structure of nested distinction.
-*)
+(** ★ HONEST CAPSTONE: sin²θ_W = 3/13 is FORCED ARITHMETIC GIVEN a few acknowledged POSITS —
+    (i)  U(1)_Y geometric    [STEP 1, a definitional labeling of the depth→gauge map],
+    (ii) SU(3) confined / excluded from the numerator [STEP 2, same map],
+    (iii)denominator = symmetric metric rank 10        [rank: underdetermined by L1; reduces via locality],
+    none of which is a theorem.  By L4 (Law_of_SufficientReason) these are POSITS (self-grounding),
+    NOT free choices; by JustificationRegress.v every grounded claim needs ≥1 posit
+    (grounded_needs_posit) while "ZERO free parameters / from nothing" is the role-limit error
+    (from_nothing_ungrounded).  Pushed deep, (i)(ii)(iii) reduce to P1 + the depth→gauge map (②) —
+    a small COUNTED posit set, not zero.  This REFINES SinThetaWDerivationStatus's "derived modulo
+    one (bundled) identification" by unbundling the P1 bridge r = dim(SU(2))/n_metric. *)
+Theorem sin2_forced_modulo_identifications :
+  (r_weinberg == 3#10 /\ sin2_weinberg == 3#13)
+  /\ (gauge_origin Depth2 = Geometric /\ confinement Depth1 = Confined)
+  /\ (sin2_at_rank 6 == 1#3 /\ sin2_at_rank 20 == 3#23 /\ ~ (1#3 == 3#13)).
+Proof.
+  split; [ split; [exact r_is_3_over_10 | exact sin2_is_3_over_13] | ].
+  split; [ split; [exact U1_is_geometric | exact SU3_confined] | ].
+  repeat split; try (vm_compute; reflexivity); intro H; vm_compute in H; discriminate H.
+Qed.

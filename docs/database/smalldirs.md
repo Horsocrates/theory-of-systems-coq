@@ -68,7 +68,7 @@ _Generated from `smalldirs.json` by `generate.ps1` - do not edit by hand; edit t
 **Casimir from a graph over Q: vacuum always finite, force from energy**
 
 - **Topic.** Vacuum energy squared, squared frequencies at C2/C4/C8, vacuum energies, positivity, vacuum grows, the Casimir energy and force approximation, the C4-C2 and C8-C4 differences, and vacuum always finite.
-- **Role.** Leaf of the casimir_branch (vacuum-finiteness framing). Self-contained.
+- **Role.** Leaf of the casimir_branch (vacuum-finiteness framing). Self-contained. June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md.
 - **Counts.** Qed 11 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ вакуумная энергия (квадраты частот); моды графа. _Roles:_ Казимир = роль-разность энергий; вакуум всегда конечен. _Rules:_ vacuum_always_finite; casimir_force_approx; vacuum_grows. _P4:_ конечные вакуумные энергии над Q (Element); «вакуум всегда конечен» — нет расходимости на графе.
@@ -79,9 +79,9 @@ _Generated from `smalldirs.json` by `generate.ps1` - do not edit by hand; edit t
 
 | name | kind | role |
 |---|---|---|
-| `vacuum_energy_sq/omega_sq_C4/_C2/_C8_approx/E_vac_C2/_C4/_C8` | Definition | вакуумная энергия, частоты |
-| `vacuum_positive_C4/vacuum_grows/vacuum_grows_more/casimir_energy/casimir_force_approx` | Theorem | вакуум растёт, сила Казимира |
-| `casimir_C4_C2/_C8_C4/vacuum_always_finite/_C8/casimir_from_graph_synthesis` | Theorem | ★ вакуум всегда конечен |
+| `vacuum_energy_sq/omega_sq_C4/_C2/_C8_approx/E_vac_C2/_C4/_C8` | Definition | вакуумная энергия, частоты June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md. |
+| `vacuum_positive_C4/vacuum_grows/vacuum_grows_more/casimir_energy/casimir_force_approx` | Theorem | вакуум растёт, сила Казимира June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md. |
+| `casimir_C4_C2/_C8_C4/vacuum_always_finite/_C8/casimir_from_graph_synthesis` | Theorem | ★ вакуум всегда конечен June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 

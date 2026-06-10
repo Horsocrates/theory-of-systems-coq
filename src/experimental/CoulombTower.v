@@ -445,9 +445,9 @@ Proof.
 Qed.
 
 (** P4 finiteness: every stage has a well-defined finite energy *)
-Lemma p4_finiteness : forall N n, exists q : Q, scaled_energy N n == q.
+Lemma p4_finiteness : forall N n, exists (num : Z) (den : BinNums.positive), scaled_energy N n = num # den.
 Proof.
-  intros N n. exists (scaled_energy N n). reflexivity.
+  intros N n. destruct (scaled_energy N n) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ========================================================================= *)
@@ -536,7 +536,7 @@ Theorem coulomb_tower_complete :
   ~ (hydrogen_limit 1 / hydrogen_limit 0 ==
      textbook_hydrogen 1 / textbook_hydrogen 0) /\
   (* P4 finiteness *)
-  (forall N n, exists q, scaled_energy N n == q).
+  (forall N n, exists (num : Z) (den : BinNums.positive), scaled_energy N n = num # den).
 Proof.
   split; [exact scaled_energy_1_0|].
   split; [exact scaled_energy_9_0|].
@@ -549,7 +549,7 @@ Qed.
 
 (** Process well-defined: at every stage N, energy is finite *)
 Theorem process_well_defined :
-  forall N n, exists q : Q, scaled_energy N n == q.
+  forall N n, exists (num : Z) (den : BinNums.positive), scaled_energy N n = num # den.
 Proof. exact p4_finiteness. Qed.
 
 (** Summary:

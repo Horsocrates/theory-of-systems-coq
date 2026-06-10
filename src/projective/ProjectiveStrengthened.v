@@ -132,12 +132,14 @@ Proof.
   nia.
 Qed.
 
-(** Position has growing eigenvalues: for each n, eigenvalue n exists *)
+(** Position eigenvalues GROW: each stage strictly exceeds the previous
+    (June 2026: was the vacuous `exists lambda, lambda == inject_Z n`,
+    which never stated growth). *)
 Theorem position_eigenvalues_grow :
   forall n : nat,
-    exists lambda : Q, lambda == inject_Z (Z.of_nat n).
+    inject_Z (Z.of_nat n) < inject_Z (Z.of_nat (Datatypes.S n)).
 Proof.
-  intro n. exists (inject_Z (Z.of_nat n)). reflexivity.
+  intro n. rewrite <- Zlt_Qlt. lia.
 Qed.
 
 (* ================================================================ *)

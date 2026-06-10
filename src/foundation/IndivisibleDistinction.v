@@ -93,9 +93,12 @@ Proof. intro P. exact (exhaustive (distinction_of P)). Qed.
 Definition distinction_count_nat (Ds : list Distinction) : nat :=
   length Ds.
 
-Theorem count_is_natural : forall Ds : list Distinction,
-  exists n : nat, distinction_count_nat Ds = n.
-Proof. intro Ds. exists (length Ds). reflexivity. Qed.
+(** June 2026 honesty rollback: was `exists n, count Ds = n` — vacuous.  The real
+    counting structure: the count is ADDITIVE over concatenation. *)
+Theorem count_is_natural : forall Ds1 Ds2 : list Distinction,
+  distinction_count_nat (Ds1 ++ Ds2)
+  = (distinction_count_nat Ds1 + distinction_count_nat Ds2)%nat.
+Proof. intros Ds1 Ds2. unfold distinction_count_nat. apply length_app. Qed.
 
 Theorem count_always_nonneg : forall Ds : list Distinction,
   (0 <= distinction_count_nat Ds)%nat.
@@ -122,16 +125,23 @@ Proof. reflexivity. Qed.
 
 Theorem quantization_from_distinction :
   (forall n : nat, (0 < n)%nat -> (1 <= n)%nat) /\
-  (forall (R : nat -> Q) n, exists q : Q, R n = q) /\
+  (* values are finite ratios BY TYPE (June 2026: was the vacuous exists q, R n = q) *)
+  (forall (R : nat -> Q) n,
+     exists (num : Z) (den : BinNums.positive), R n = num # den) /\
   (forall n : nat, (0 <= n)%nat).
 Proof.
-  repeat split; [lia | intros; eexists; reflexivity | lia].
+  repeat split; [lia | | lia].
+  intros R n. destruct (R n) as [num den]. exists num, den. reflexivity.
 Qed.
 
+(** June 2026 honesty rollback: was `exists q, f (S n) = q` — vacuous.  The real
+    domain structure: the process domain is DISCRETE — every stage is the origin
+    or a successor. *)
 Theorem process_domain_forced :
-  forall (f : nat -> Q) (n : nat),
-  exists q, f (S n) = q.
-Proof. intros. eexists. reflexivity. Qed.
+  forall n : nat, n = 0%nat \/ exists m : nat, n = S m.
+Proof.
+  intro n. destruct n as [| m]; [left; reflexivity | right; exists m; reflexivity].
+Qed.
 
 (* ================================================================== *)
 (*  SUMMARY                                                            *)

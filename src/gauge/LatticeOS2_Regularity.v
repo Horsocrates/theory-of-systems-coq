@@ -86,7 +86,7 @@ Proof. intros. apply connected_bounded; assumption. Qed.
 (** Partition function is finite (a rational number) *)
 Theorem partition_finite : forall (J_trunc T_extent : nat) (beta : Q),
   (* partition_fn J T beta is a finite rational number *)
-  exists q : Q, transfer_eigenvalue J_trunc beta T_extent == q.
+  exists (num : Z) (den : BinNums.positive), transfer_eigenvalue J_trunc beta T_extent = num # den.
 Proof. intros. exact (eigenvalue_rational J_trunc beta T_extent). Qed.
 
 (* ================================================================== *)

@@ -210,8 +210,7 @@ Theorem the_final_number :
 Proof. lra. Qed.
 
 (** End marker *)
-Theorem total_count : 0 < 1#8.
-Proof. exact the_final_number. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -221,5 +220,5 @@ Proof. exact the_final_number. Qed.
 (*  Part II: continuum_mass_gap, mass_gap_along_rg (2)                       *)
 (*  Part III: from_existence_to_mass_gap (1)                                  *)
 (*  Part IV: what_we_proved, what_remains, methodology_summary,              *)
-(*            continuum_main, the_final_number, total_count (6)               *)
+(*            continuum_main, the_final_number               *)
 (* ========================================================================= *)

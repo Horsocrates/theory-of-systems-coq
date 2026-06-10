@@ -1,5 +1,24 @@
-(** DiracOnGraph.v — Dirac operator eigenvalues on distinction graph *)
-(** Fermion propagator from lattice Dirac spectrum *)
+(** * DiracOnGraph.v — lattice Dirac spectrum E² = (k/N)² + m²: real bounds, stubs removed
+    Elements: momenta k on a cyclic N-graph; masses m; eigenvalues E², propagators 1/E²
+    Roles:    E² — the spectrum role; m² — the gap role (lower bound at ALL momenta);
+              1/E² — the propagator role (finite when massive)
+    Rules:    E² ≥ 0 always; E² ≥ m² at every momentum (the gap, GENERAL); 0 < m² ⟹
+              propagator positive — forced Q-arithmetic given the posited spectrum formula
+    STATUS: 12 Qed, 0 Admitted, 0 axioms
+    Author: Horsocrates | Date: April 2026  (True-stub honesty rollback: June 2026)
+
+    HONEST STATUS: June 2026 — REMOVED `chirality_from_L2 : True` and
+    `dirac_antisymmetric : True` (stubs; chirality/antisymmetry need the OPERATOR with
+    spinor structure, absent here — only the scalar spectrum formula is posited).
+    REPLACED by real general bounds: eigenvalue_sq_nonneg (E² ≥ 0 ∀k,N,m),
+    eigenvalue_gap_general (m² ≤ E² at ALL momenta — the gap, generalizing the k=0
+    example), propagator_positive (massive ⟹ 1/E² > 0).  The spectrum formula
+    (k/N)² + m² itself is an INPUT (a model of the lattice Dirac eigenvalues), not derived.
+
+    E/R/R разбор: Rules — E²≥m²≥0 вынуждены арифметикой ПРИ постулированной формуле
+    спектра; Roles — m² играет роль щели на ВСЕХ импульсах (не только k=0); Elements —
+    конкретный спектр N=4 (0, 1/16, 1/4, 9/16). P4: формула спектра — вход (модель);
+    киральность/антисимметрия требуют оператора со спинорами — снято честно. *)
 
 From Stdlib Require Import QArith Qabs Lia ZArith List PeanoNat.
 From Stdlib Require Import Lqa.
@@ -78,18 +97,42 @@ Proof.
 Qed.
 
 (* ================================================================= *)
-(* Conceptual: chirality comes from L2 distinction                  *)
+(* June 2026 — general bounds (replace the removed True-stubs:       *)
+(* chirality_from_L2 / dirac_antisymmetric needed spinor structure)  *)
 (* ================================================================= *)
 
-Theorem chirality_from_L2 : True.
-Proof. exact I. Qed.
+(** E² is nonnegative for ALL momenta, sizes and masses. *)
+Theorem eigenvalue_sq_nonneg : forall (k N : nat) (m : Q),
+  0 <= dirac_eigenvalue_sq k N m.
+Proof.
+  intros k N m. unfold dirac_eigenvalue_sq.
+  set (t := inject_Z (Z.of_nat k) / inject_Z (Z.of_nat N)).
+  assert (Ht : 0 <= t * t) by nra.
+  assert (Hm : 0 <= m * m) by nra.
+  lra.
+Qed.
 
-(* ================================================================= *)
-(* Conceptual: Dirac operator is antisymmetric on graph              *)
-(* ================================================================= *)
+(** ★ THE GAP, GENERAL: E² ≥ m² at EVERY momentum (generalizes the k=0 example). *)
+Theorem eigenvalue_gap_general : forall (k N : nat) (m : Q),
+  m * m <= dirac_eigenvalue_sq k N m.
+Proof.
+  intros k N m. unfold dirac_eigenvalue_sq.
+  set (t := inject_Z (Z.of_nat k) / inject_Z (Z.of_nat N)).
+  assert (Ht : 0 <= t * t) by nra.
+  lra.
+Qed.
 
-Theorem dirac_antisymmetric : True.
-Proof. exact I. Qed.
+(** A massive fermion has a strictly positive propagator at every momentum. *)
+Theorem propagator_positive : forall (k N : nat) (m : Q),
+  0 < m * m -> 0 < fermion_propagator_sq k N m.
+Proof.
+  intros k N m Hm. unfold fermion_propagator_sq, dirac_eigenvalue_sq.
+  set (t := inject_Z (Z.of_nat k) / inject_Z (Z.of_nat N)).
+  assert (Ht : 0 <= t * t) by nra.
+  assert (HE : 0 < t * t + m * m) by lra.
+  unfold Qdiv. rewrite Qmult_1_l.
+  apply Qinv_lt_0_compat. exact HE.
+Qed.
 
 (* ================================================================= *)
 (* Theorem 10: N=4 has exactly the expected spectrum                *)

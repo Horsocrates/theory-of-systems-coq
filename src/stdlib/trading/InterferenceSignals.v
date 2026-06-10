@@ -195,9 +195,9 @@ Qed.
 (* ================================================================ *)
 
 Lemma interference_is_exact :
-  forall sigs tf, exists q : Q, group_sum tf sigs == q.
+  forall sigs tf, exists (num : Z) (den : BinNums.positive), group_sum tf sigs = num # den.
 Proof.
-  intros. exists (group_sum tf sigs). reflexivity.
+  intros. destruct (group_sum tf sigs) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================ *)

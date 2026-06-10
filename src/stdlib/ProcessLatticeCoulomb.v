@@ -23,10 +23,12 @@ Proof. unfold coulomb_potential_lattice, shell_radius. simpl. field. Qed.
 Lemma coulomb_weakens : coulomb_potential_lattice 1 1 99%nat > coulomb_potential_lattice 1 1 9%nat.
 Proof. rewrite coulomb_at_10, coulomb_at_100. lra. Qed.
 
-(** No singularity: V(r=ℓ) = −α/ℓ = finite *)
+(** No singularity: V at the innermost site is the FINITE value −α (June 2026:
+    was the vacuous `exists q, _ == q`; the witness −α was hiding in the proof —
+    the honest, STRONGER form is the identity itself). *)
 Lemma no_coulomb_singularity : forall alpha,
-  exists q, coulomb_potential_lattice alpha 1 0%nat == q.
-Proof. intros. exists (- alpha). exact (coulomb_finite_at_0 alpha). Qed.
+  coulomb_potential_lattice alpha 1 0%nat == - alpha.
+Proof. intros. exact (coulomb_finite_at_0 alpha). Qed.
 
 Definition coulomb_schrodinger_lattice (alpha ell : Q) : ProcessOp :=
   discrete_schrodinger (fun k => coulomb_potential_lattice alpha ell k).
@@ -42,7 +44,7 @@ Theorem lattice_coulomb_foundation :
   coulomb_potential_lattice 1 1 0%nat == -(1) /\
   coulomb_potential_lattice 1 1 9%nat == -(1 # 10) /\
   coulomb_potential_lattice 1 1 99%nat == -(1 # 100) /\
-  (forall alpha, exists q, coulomb_potential_lattice alpha 1 0%nat == q).
+  (forall alpha, coulomb_potential_lattice alpha 1 0%nat == - alpha).
 Proof.
   split; [|split; [|split]].
   - exact (coulomb_finite_at_0 1).

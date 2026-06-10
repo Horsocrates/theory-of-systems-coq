@@ -59,12 +59,18 @@ Proof. reflexivity. Qed.
     SU(N): N^2-1 generators. N = role count = natural number.
     Cannot have SU(2.5). Because: 2.5 roles = 2.5 distinctions = impossible. *)
 
-Theorem gauge_dimension_integer : forall N : nat,
-  exists d : nat, (N * N - 1 = d)%nat \/ (N = 0%nat).
+(** June 2026 honesty rollback: was `exists d, N*N-1 = d \/ N = 0` — vacuous.
+    The real content of "no SU(2.5)": N is a nat BY TYPE (role counts are
+    integers by construction), and the dimension map N ↦ N²−1 is INJECTIVE on
+    positives — no two distinct gauge ladders share a dimension. *)
+Theorem gauge_dimension_integer : forall N M : nat,
+  (0 < N)%nat -> (0 < M)%nat -> (N * N - 1 = M * M - 1)%nat -> N = M.
 Proof.
-  intro N. destruct N.
-  - exists 0%nat. right. reflexivity.
-  - exists (N*N + 2*N)%nat. left. lia.
+  intros N M HN HM H.
+  assert (HNN : (1 <= N * N)%nat) by nia.
+  assert (HMM : (1 <= M * M)%nat) by nia.
+  assert (Heq : (N * N = M * M)%nat) by lia.
+  nia.
 Qed.
 
 (** Concrete gauge dimensions *)
@@ -80,18 +86,25 @@ Lemma su5_dim : (5 * 5 - 1 = 24)%nat. Proof. lia. Qed.
     The 2 in "spin 1/2" = 2 sides of 1 distinction = SU(2).
     j = 0, 1/2, 1, 3/2, ... = 0, 1, 2, 3, ... sides / 2 *)
 
+(** June 2026 honesty rollback: was `exists j2, j2 = sides` — vacuous.  The real
+    available content: the integer/half-integer CLASSIFICATION is an exclusive
+    dichotomy (every doubled spin is even or odd, never both) — the boson/fermion
+    sorting structure, NOT the spin-statistics theorem. *)
 Theorem spin_quantization : forall sides : nat,
-  exists j_times_2 : nat, j_times_2 = sides.
-Proof. intro. exists sides. reflexivity. Qed.
+  (Nat.Even sides \/ Nat.Odd sides) /\ ~ (Nat.Even sides /\ Nat.Odd sides).
+Proof.
+  intro sides. split.
+  - apply Nat.Even_or_Odd.
+  - intros [HE HO]. exact (Nat.Even_Odd_False sides HE HO).
+Qed.
 
-(** Spin-statistics: integer sides = boson, odd sides = fermion *)
-Lemma boson_even_sides : forall n : nat,
-  exists j : nat, (2 * n = 2 * j)%nat.
+(** Spin-statistics SORTING (June 2026: were vacuous exists): even sides land in
+    the boson class, odd sides in the fermion class — the parity facts. *)
+Lemma boson_even_sides : forall n : nat, Nat.Even (2 * n).
 Proof. intro n. exists n. lia. Qed.
 
-Lemma fermion_odd_sides : forall n : nat,
-  exists j_times_2 : nat, (2 * n + 1 = j_times_2)%nat.
-Proof. intro n. exists (2 * n + 1)%nat. lia. Qed.
+Lemma fermion_odd_sides : forall n : nat, Nat.Odd (2 * n + 1).
+Proof. intro n. exists n. lia. Qed.
 
 (* ================================================================== *)
 (*  SUMMARY                                                            *)

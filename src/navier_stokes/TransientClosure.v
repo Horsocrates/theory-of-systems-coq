@@ -12,7 +12,7 @@
 (*  Roles:    invariance as regulator, bootstrap as amplifier              *)
 (*  Rules:    data∈R → R invariant → enstrophy → Sobolev → C^∞           *)
 (*  STATUS: target ~40 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, B_antisym, C_B_positive, B_coeff_bounded             *)
+(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 

@@ -44,14 +44,13 @@ Definition transfer_eigenvalue (j : nat) (beta : Q) (M : nat) : Q :=
 Definition lambda2 (beta : Q) (M : nat) : Q :=
   transfer_eigenvalue 2 beta M.
 
-(** Concrete: λ₂(β=1, M=0) *)
+(** Concrete: λ₂(β=1, M=0) is a definite finite ratio (June 2026: was the
+    semi-vacuous `exists v, _ == v /\ 0 < v` — the positivity half lives in
+    lambda2_positive_b1 below; here the by-type finiteness). *)
 Lemma lambda2_b1_M0_value :
-  exists v, lambda2 1 0 == v /\ 0 < v.
+  exists (num : Z) (den : BinNums.positive), lambda2 1 0 = num # den.
 Proof.
-  exists (lambda2 1 0). split; [reflexivity|].
-  unfold lambda2, transfer_eigenvalue, bessel_partial, bessel_term,
-         fact_prod, fact_Q.
-  unfold Qlt. rewrite <- Z.ltb_lt. vm_compute. reflexivity.
+  destruct (lambda2 1 0) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** λ₂ > 0 *)
@@ -145,15 +144,15 @@ Proof.
 Qed.
 
 (** P₁ at β=1, M=0 *)
-Lemma sector_plaq_j1_exists : exists p, sector_plaquette 1 1 0 == p.
+Lemma sector_plaq_j1_exists : exists (num : Z) (den : BinNums.positive), sector_plaquette 1 1 0 = num # den.
 Proof.
-  exists (sector_plaquette 1 1 0). reflexivity.
+  destruct (sector_plaquette 1 1 0) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** P₂ at β=1, M=0 *)
-Lemma sector_plaq_j2_exists : exists p, sector_plaquette 2 1 0 == p.
+Lemma sector_plaq_j2_exists : exists (num : Z) (den : BinNums.positive), sector_plaquette 2 1 0 = num # den.
 Proof.
-  exists (sector_plaquette 2 1 0). reflexivity.
+  destruct (sector_plaquette 2 1 0) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)
@@ -169,8 +168,8 @@ Definition plaquette_3x3 (beta : Q) (M : nat) : Q :=
 
 (** 3×3 plaquette exists at β=1, M=0 *)
 Lemma plaquette_3x3_exists :
-  exists p, plaquette_3x3 1 0 == p.
-Proof. exists (plaquette_3x3 1 0). reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), plaquette_3x3 1 0 = num # den.
+Proof. destruct (plaquette_3x3 1 0) as [num den]. exists num, den. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  3×3 MASS GAP                                                       *)

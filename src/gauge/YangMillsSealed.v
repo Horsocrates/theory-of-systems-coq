@@ -1,5 +1,5 @@
 (** * YangMillsSealed.v — Final Theorem with Formal OS1-3
-    Elements: yang_mills_SEALED, os1/2/3_verified
+    Elements: ym_lattice_os_bundle, os1/2/3_verified
     Roles:    capstone connecting formal OS1-3 definitions to mass gap
     Rules:    every OS axiom with formal definition, no True, no Admitted
     Status:   complete
@@ -76,8 +76,8 @@ Proof. exact gap_ratio_vanishes_1. Qed.
 (*  Part II: The Sealed Theorem  (~4 lemmas)                          *)
 (* ================================================================== *)
 
-(** ★★★ YANG-MILLS MASS GAP — SEALED ★★★ *)
-Theorem yang_mills_SEALED :
+(** ★★★ YM LATTICE MASS GAP + OS BUNDLE — Reading 2 (renamed June 2026 from ym_lattice_os_bundle; the LATTICE-model layer is closed, not the Clay continuum statement) ★★★ *)
+Theorem ym_lattice_os_bundle :
   (* For SU(2) lattice gauge theory at β = 1: *)
 
   (* Mass gap = 289/384 > 0 *)
@@ -143,15 +143,20 @@ Proof. intros. apply os3_formal. Qed.
 (*  Part IV: Final Status  (~2 lemmas)                                *)
 (* ================================================================== *)
 
-(** Final existence: mass gap = 289/384 > 0 *)
+(** Final status: the mass gap is the concrete positive rational 289/384
+    (June 2026: was `exists gap, gap == 289#384 /\ 0 < gap` — a pinned
+    existential about a fresh variable; the content is the value and
+    positivity of the ACTUAL matrix mass gap). *)
 Theorem final_status :
-  exists gap : Q, gap == 289 # 384 /\ 0 < gap.
+  matrix_mass_gap 1 1 0 == 289 # 384 /\ 0 < matrix_mass_gap 1 1 0.
 Proof.
-  exists (289 # 384). split; reflexivity.
+  split.
+  - exact lqft_gap_value_1.
+  - exact lqft_strict_gap_1.
 Qed.
 
 (** Sealed summary: all formal + all proofs *)
-Theorem sealed_summary :
+Theorem ym_lattice_os_summary :
   (* OS1 formal *) (forall J j t_sep,
     is_lattice_analytic (fun beta => full_correlation J t_sep j beta 0)) /\
   (* OS2 formal *) (forall J j, j = 0%nat \/ j = 1%nat ->
@@ -178,9 +183,9 @@ Qed.
 
 Check sealed_os1. Check sealed_os2. Check sealed_os3.
 Check sealed_os4. Check sealed_os5.
-Check yang_mills_SEALED.
+Check ym_lattice_os_bundle.
 Check os1_analytic_verified. Check os2_tempered_verified. Check os3_invariant_verified.
-Check final_status. Check sealed_summary.
+Check final_status. Check ym_lattice_os_summary.
 
-Print Assumptions yang_mills_SEALED.
-Print Assumptions sealed_summary.
+Print Assumptions ym_lattice_os_bundle.
+Print Assumptions ym_lattice_os_summary.

@@ -198,8 +198,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (20 = 20)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -211,5 +210,5 @@ Proof. reflexivity. Qed.
 (*  Part III: gauge_proj_identity, gauge_projsys_compat (2)                  *)
 (*  Part IV: continuum_limit_gap, strong_coupling_large_gap,                 *)
 (*           weak_coupling_small_gap (3)                                     *)
-(*  Part V: mass_gap_process_summary, total_count (2)                        *)
+(*  Part V: mass_gap_process_summary                        *)
 (* ========================================================================= *)

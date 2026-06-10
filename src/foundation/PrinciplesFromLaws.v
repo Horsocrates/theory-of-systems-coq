@@ -180,9 +180,22 @@ Qed.
     At each n : nat, the value R n is a SINGLE Q number (finite).
     The process IS the sequence — never "completed" to an infinite object. *)
 
+(** June 2026 honesty rollback: this stood as `exists q, R n = q` — VACUOUS (Coq
+    functions are total; any closed term equals itself).  The honest rendering of
+    P4 in this formalization: finite actuality holds BY TYPE-CONSTRUCTION — the
+    codomain Q contains no infinite objects (every value IS a ratio of a finite
+    integer and a finite positive), and the domain nat is discrete (every stage
+    is the origin or a successor).  P4 is enforced by the CHOICE of nat -> Q
+    (made in accordance with L5-sequentiality), not derived as a theorem; the
+    substantive CONSTRUCTIVE content of P4 lives in L4_witness (ToS_Axioms). *)
 Theorem P4_from_L5 : forall (R : nat -> Q) (n : nat),
-  exists q : Q, R n = q.
-Proof. intros. exists (R n). reflexivity. Qed.
+  (exists (num : Z) (den : BinNums.positive), R n = num # den) /\
+  (n = 0%nat \/ exists m : nat, n = S m).
+Proof.
+  intros R n. split.
+  - destruct (R n) as [num den]. exists num, den. reflexivity.
+  - destruct n as [| m]; [left; reflexivity | right; exists m; reflexivity].
+Qed.
 
 (** Every Q value is a ratio of finite integers — no infinities *)
 Theorem P4_no_completed_infinity :
@@ -192,10 +205,14 @@ Proof.
   exists n. exists d. reflexivity.
 Qed.
 
-(** P4 for processes: at each stage, the value is determinate *)
-Theorem P4_determinate_stages : forall (R : nat -> Q) (n : nat),
-  R n == R n.
-Proof. intros. reflexivity. Qed.
+(** P4 for processes: at each stage the value is DETERMINATE — equality of stage
+    values is DECIDABLE (June 2026: was `R n == R n`, a vacuous reflexivity;
+    determinacy made real as Qeq_dec — constructive, no classic needed). *)
+Theorem P4_determinate_stages : forall (R : nat -> Q) (n m : nat),
+  R n == R m \/ ~ R n == R m.
+Proof.
+  intros R n m. destruct (Qeq_dec (R n) (R m)); [left | right]; assumption.
+Qed.
 
 (** P4: no stage produces infinity *)
 Theorem P4_finite_at_each_stage : forall (R : nat -> Q) (n : nat),
@@ -206,10 +223,14 @@ Proof.
   exists num. exists den. reflexivity.
 Qed.
 
-(** P4 connection to nat: every natural number is finite *)
+(** P4 connection to nat: the stage domain is DISCRETE — every natural number is
+    the origin or a successor, i.e. built in finitely many steps (June 2026: was
+    `exists m, n = m`, vacuous). *)
 Theorem P4_nat_finite : forall n : nat,
-  exists m : nat, n = m.
-Proof. intro n. exists n. reflexivity. Qed.
+  n = 0%nat \/ exists m : nat, n = S m.
+Proof.
+  intro n. destruct n as [| m]; [left; reflexivity | right; exists m; reflexivity].
+Qed.
 
 (* ================================================================== *)
 (*  ALL FOUR PRINCIPLES — unified                                    *)
@@ -225,14 +246,16 @@ Theorem four_principles_from_five_laws :
   (forall L (C : Criterion L), P2_valid L C) /\
   (* P3: intensional identity — from L1 + L4 *)
   (forall L (S : System L), systems_intensionally_equal S S) /\
-  (* P4: finite actuality — from L5 *)
-  (forall (R : nat -> Q) n, exists q : Q, R n = q).
+  (* P4: finite actuality — by TYPE-construction (values are finite ratios);
+     June 2026: was the vacuous `exists q, R n = q` *)
+  (forall (R : nat -> Q) n,
+     exists (num : Z) (den : BinNums.positive), R n = num # den).
 Proof.
   split; [|split; [|split]].
   - exact level_lt_irrefl.
   - exact P2_always_holds.
   - intros L S. exact (P3_reflexivity L S).
-  - intros R n. exists (R n). reflexivity.
+  - exact P4_finite_at_each_stage.
 Qed.
 
 (** ★ Derivation chain: each P comes from specific L's *)
@@ -240,7 +263,9 @@ Theorem derivation_chain :
   (* L5 → P1 *) (forall l : Level, ~ (l << l)) /\
   (* L5 → P2 *) (forall (L : Level) (C : Criterion L), P2_valid L C) /\
   (* L1+L4 → P3 (reflexivity) *) (forall (L : Level) (S : System L), systems_intensionally_equal S S) /\
-  (* L5 → P4 *) (forall (R : nat -> Q) (n : nat), exists q : Q, R n = q).
+  (* L5 → P4 (by type-construction; June 2026 honest form) *)
+  (forall (R : nat -> Q) (n : nat),
+     exists (num : Z) (den : BinNums.positive), R n = num # den).
 Proof. exact four_principles_from_five_laws. Qed.
 
 Definition principles_theorem_count := 22%nat.

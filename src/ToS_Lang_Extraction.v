@@ -4,7 +4,7 @@
 (*  Extracts verified type checker + evaluator to OCaml.             *)
 (*  These OCaml functions are PROVEN CORRECT by Coq proofs.          *)
 (*                                                                    *)
-(*  Status: >=5 Qed, 0 Admitted | Author: Horsocrates | 2026-03-06   *)
+(*  Status: 6 Qed, 0 Admitted | Author: Horsocrates | 2026-03-06     *)
 (* ================================================================= *)
 
 From Stdlib Require Import Init.Nat.
@@ -82,44 +82,68 @@ Separate Extraction
 (** ** 4. Extraction Validation Lemmas                                 *)
 (** ================================================================= *)
 
-(** Computability: each core function always returns a result *)
+(** Computability rendered honestly (June 2026): the former lemmas here
+    were the vacuous `exists r, f x = r` — provable for ANY function by
+    `eexists; reflexivity`, hence stating nothing. What IS observable in
+    the object logic is the CONSTRUCTOR DICHOTOMY of each result type:
+    option lands in None-or-Some, EvalResult in one of its three
+    constructors, expression size in a successor, valuehood is decidable. *)
 Lemma extraction_typecheck_computable : forall Gamma e,
-  exists r, typecheck Gamma e = r.
-Proof. intros. eexists. reflexivity. Qed.
+  typecheck Gamma e = None \/ exists T, typecheck Gamma e = Some T.
+Proof.
+  intros Gamma e. destruct (typecheck Gamma e) as [T |].
+  - right. exists T. reflexivity.
+  - left. reflexivity.
+Qed.
 
 Lemma extraction_typecheck_ann_computable : forall Gamma ea,
-  exists r, typecheck_ann Gamma ea = r.
-Proof. intros. eexists. reflexivity. Qed.
+  typecheck_ann Gamma ea = None \/ exists T, typecheck_ann Gamma ea = Some T.
+Proof.
+  intros Gamma ea. destruct (typecheck_ann Gamma ea) as [T |].
+  - right. exists T. reflexivity.
+  - left. reflexivity.
+Qed.
 
 Lemma extraction_eval_computable : forall fuel e,
-  exists r, eval_fuel fuel e = r.
-Proof. intros. eexists. reflexivity. Qed.
+  is_value (eval_fuel fuel e) \/ ~ is_value (eval_fuel fuel e).
+Proof.
+  intros fuel e.
+  destruct (is_value_dec (eval_fuel fuel e)) as [Hv | Hnv].
+  - left. exact Hv.
+  - right. exact Hnv.
+Qed.
 
 Lemma extraction_classify_computable : forall fuel e,
-  exists r, classify_eval fuel e = r.
-Proof. intros. eexists. reflexivity. Qed.
+  (exists v T, classify_eval fuel e = ER_Value v T) \/
+  (exists v T, classify_eval fuel e = ER_Partial v T) \/
+  classify_eval fuel e = ER_TypeError.
+Proof.
+  intros fuel e. destruct (classify_eval fuel e) as [v T | v T |].
+  - left. exists v, T. reflexivity.
+  - right. left. exists v, T. reflexivity.
+  - right. right. reflexivity.
+Qed.
 
 Lemma extraction_safe_eval_computable : forall fuel e,
-  exists r, safe_eval fuel e = r.
-Proof. intros. eexists. reflexivity. Qed.
+  safe_eval fuel e = None \/ exists v, safe_eval fuel e = Some v.
+Proof.
+  intros fuel e. destruct (safe_eval fuel e) as [v |].
+  - right. exists v. reflexivity.
+  - left. reflexivity.
+Qed.
 
 Lemma extraction_erase_computable : forall ea,
-  exists r, erase_ann ea = r.
-Proof. intros. eexists. reflexivity. Qed.
+  exists n, expr_size (erase_ann ea) = S n.
+Proof.
+  intros ea. apply expr_finite.
+Qed.
 
 (** Structural recursion: all extracted functions are structurally
-    recursive and thus terminating. This is guaranteed by Coq's
-    termination checker — every Fixpoint has a structurally decreasing
-    argument. No additional proof is needed; these lemmas document
-    that the extraction is safe. *)
-
-Lemma extraction_typecheck_structurally_recursive :
-  forall Gamma e, exists T, typecheck Gamma e = T.
-Proof. intros. eexists. reflexivity. Qed.
-
-Lemma extraction_eval_structurally_recursive :
-  forall fuel e, exists v, eval_fuel fuel e = v.
-Proof. intros. eexists. reflexivity. Qed.
+    recursive; Coq's termination checker certifies this at Fixpoint
+    definition time and it needs no in-logic restatement.
+    (June 2026: the two former "documentation lemmas" restating this as
+    the vacuous `exists r, f x = r` were removed — vacuity documents
+    nothing.) *)
 
 (** ================================================================= *)
 (** ** 5. Extraction Notes                                             *)

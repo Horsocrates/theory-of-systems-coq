@@ -58,7 +58,7 @@ Open Scope Q_scope.
 
 (** Theorem 1: Li coefficients are computable *)
 Theorem proved_li_computable : forall n zeros,
-  exists q : Q, li_process n zeros == q.
+  exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den.
 Proof.
   exact li_process_rational.
 Qed.
@@ -143,7 +143,7 @@ Definition the_honest_gap : Prop :=
 Theorem p4_each_check_passes : forall n zeros,
   Forall (fun bg => fst bg == (1#2)) zeros ->
   0 <= li_process n zeros /\
-  (exists q, li_process n zeros == q) /\
+  (exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den) /\
   psd_diagonal zeros.
 Proof.
   intros n zeros Hall. split; [|split].
@@ -190,7 +190,10 @@ Definition millennium_check (problem : nat) (K : nat) : Prop :=
   match problem with
   | S O => 0 < zeta_partial 2 K  (* YM proxy *)
   | S (S O) => zeta_partial 2 K <= 2  (* NS proxy *)
-  | _ => exists q, zeta_partial 2 K == q  (* RH: computable *)
+  | _ => exists (num : Z) (den : BinNums.positive),
+           zeta_partial 2 K = num # den
+         (* RH proxy: finite ratio BY TYPE (June 2026: was the vacuous
+            `exists q, _ == q`) *)
   end.
 
 (** All checks pass *)
@@ -198,10 +201,16 @@ Theorem all_millennium_checks_pass : forall problem K,
   millennium_check problem K.
 Proof.
   intros problem K. destruct problem as [|[|[|p]]].
-  - (* problem = 0 *) exists (zeta_partial 2 K). reflexivity.
+  - (* problem = 0 *)
+    change (exists (num : Z) (den : BinNums.positive),
+              zeta_partial 2 K = num # den).
+    destruct (zeta_partial 2 K) as [num den]. exists num, den. reflexivity.
   - (* problem = 1 *) apply zeta_partial_positive.
   - (* problem = 2 *) apply zeta_partial_bounded. lia.
-  - (* problem >= 3 *) exists (zeta_partial 2 K). reflexivity.
+  - (* problem >= 3 *)
+    change (exists (num : Z) (den : BinNums.positive),
+              zeta_partial 2 K = num # den).
+    destruct (zeta_partial 2 K) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Three problems, one framework *)
@@ -211,7 +220,7 @@ Theorem three_problems_one_framework :
   (* NS: energy bounded at each K *)
   (forall K, zeta_partial 2 K <= 2) /\
   (* RH: Li computable at each K *)
-  (forall n zeros, exists q, li_process n zeros == q) /\
+  (forall n zeros, exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den) /\
   (* RH: on-line → nonneg *)
   (forall n zeros,
     Forall (fun bg => fst bg == (1#2)) zeros ->
@@ -235,8 +244,8 @@ Qed.
 
 (** ToS E/R/R for RH *)
 Definition tos_rh_elements : Prop :=
-  (forall n zeros, exists q, li_process n zeros == q) /\
-  (forall i j zeros, exists q, weil_entry i j zeros == q).
+  (forall n zeros, exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den) /\
+  (forall i j zeros, exists (num : Z) (den : BinNums.positive), weil_entry i j zeros = num # den).
 
 Definition tos_rh_roles : Prop :=
   (forall k, (2 <= k)%nat -> is_cauchy (zeta_process k)) /\
@@ -275,7 +284,7 @@ Theorem rh_grand_summary :
   (* Phase 2: zero analysis *)
   (forall x, 0 <= mertens_f x) /\
   (* Phase 3: Li criterion *)
-  (forall n zeros, exists q, li_process n zeros == q) /\
+  (forall n zeros, exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den) /\
   (forall n zeros,
     Forall (fun bg => fst bg == (1#2)) zeros ->
     0 <= li_process n zeros) /\

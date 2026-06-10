@@ -1,9 +1,10 @@
 (** * DepthThreeNecessity.v — Why exactly depth 3
     Elements: depth_sufficient_for_matter, depth_bounded_by_terminal
-    Roles:    Depth ≥ 3 for CP, depth ≤ 3 by terminality, gauge_group_unique
-    Rules:    Depth 3 is necessary and sufficient for stable matter
+    Roles:    Depth ≥ 3 for CP, depth ≤ 3 by terminality, gauge_structure_from_231 (COMPUTED, not unique)
+    Rules:    Depth 3 is necessary and sufficient for stable matter; [2,3,1] is COMPUTED from the
+              posited sm_distinction (consistency), NOT proven unique (gauge_group_not_forced)
     Status:   Foundation File (Gap A.2)
-    STATUS: 20 Qed, 0 Admitted, 0 new axioms
+    STATUS: 16 Qed, 0 Admitted, 0 new axioms  (honest reframe: June 2026; header was drift-20)
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -115,8 +116,11 @@ Qed.
 (*  PUTTING IT ALL TOGETHER                                            *)
 (* ================================================================== *)
 
-(** ★ THE GAUGE GROUP IS UNIQUE *)
-Theorem gauge_group_unique :
+(** ★ [2,3,1] STRUCTURE COMPUTED from the (posited) sm_distinction — a CONSISTENCY check, NOT a
+    uniqueness derivation: the same constraints admit [2,4,1] (gauge_group_not_forced below; root
+    NestedDistinction.constraints_do_not_force_231).  The theorem below COMPUTES depth/roles/
+    generators/total of the hardcoded [2,3,1] (all by reflexivity). *)
+Theorem gauge_structure_from_231 :
   (* Depth = 3 (necessary and sufficient for matter) *)
   nd_depth sm_distinction = 3%nat /\
   (* [2,3,1] is the unique minimal non-repeating assignment *)
@@ -130,6 +134,14 @@ Theorem gauge_group_unique :
 Proof.
   repeat split; reflexivity.
 Qed.
+
+(** ★ ...but the gauge group is NOT FORCED: [2,4,1] (alt_distinction) has a DIFFERENT decomposition,
+    yet passes the same role-count constraints — so gauge_structure_from_231 is a consistency
+    COMPUTATION, not a uniqueness proof.  (Root: NestedDistinction.constraints_do_not_force_231;
+    DistinctionRepetition.total_6_is_the_deciding_posit.) *)
+Theorem gauge_group_not_forced :
+  nd_decomposition alt_distinction <> nd_decomposition sm_distinction.
+Proof. intro H. vm_compute in H. discriminate H. Qed.
 
 (** Gauge group from any minimal 3-depth with 6 roles *)
 Theorem gauge_group_from_minimality :

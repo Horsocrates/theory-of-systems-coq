@@ -2,7 +2,7 @@
 
 _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**81 files / 1712 Qed.** Score distribution: s5=1 / s4=6 / s3=14 / s2=46 / s1=11 / s0=3
+**81 files / 1710 Qed.** Score distribution: s5=1 / s4=6 / s3=14 / s2=46 / s1=11 / s0=3
 
 ---
 
@@ -11,7 +11,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **AI interface: verified-safe generation (well-typed => safe result)**
 
 - **Topic.** An AIResult wrapping process/checking, ai_eval (and annotated), proofs that AI-verified outputs are well-typed and progress, errors mean ill-typed, end-to-end ai_generation_safe, and termination.
-- **Role.** Type-theory application (safe AI generation). Combines Evaluator. Imports it.
+- **Role.** Type-theory application (safe AI generation). Combines Evaluator. Imports it. June 2026 wave-4 tail: ai_pipeline_terminates was the vacuous exists r -> None-or-Some (T, v) option dichotomy.
 - **Counts.** Qed 10 / Admitted 0 / axioms 0
 - **Imports.** ToS Evaluator
 - **E/R/R.** _Elements:_ AI-генерация программ; результат AIResult. _Roles:_ интерфейс как роль безопасной генерации (принятое ⟹ type-safe). _Rules:_ ai_verified_well_typed; ai_error_means_ill_typed; ai_generation_safe. _P4:_ ★ всякая ПРИНЯТАЯ AI-программа type-safe end-to-end (Element): ошибка ⟺ ill-typed; безопасность гарантирована проверкой, не доверием.
@@ -527,7 +527,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **Safe evaluator: type-check then evaluate, verified end-to-end**
 
 - **Topic.** safe_eval (typecheck then eval), result classification (value/partial/error), soundness, safety, determinism, the verified_pipeline (typecheck => preservation + progress), and the annotated safe_eval_ann.
-- **Role.** Type-theory (verified evaluation pipeline). Combines TypeChecker + Reduction. Imports both.
+- **Role.** Type-theory (verified evaluation pipeline). Combines TypeChecker + Reduction. Imports both. June 2026 wave-4 tail: safe_eval_terminates -> None-or-Some dichotomy; verified_pipeline_terminates -> valuehood decidability (both were vacuous exists r, _ = r).
 - **Counts.** Qed 20 / Admitted 0 / axioms 0
 - **Imports.** ToS TypeChecker, Reduction
 - **E/R/R.** _Elements:_ safe_eval (проверка+вычисление); классификация результата. _Roles:_ верифицированный конвейер как роль (проверка ⟹ безопасное вычисление). _Rules:_ safe_eval_sound/safe; verified_pipeline; classify (value/partial/error). _P4:_ проверка типа ⟹ безопасное финитное вычисление (Element): verified_pipeline даёт preservation+progress end-to-end.
@@ -617,7 +617,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **The ToS language: expression syntax, values, shift/subst**
 
 - **Topic.** The Expr syntax (var/lam/app/pair/fst/snd/const/system/elem/observe/resolve), is_value, an expr_size with subterm-smaller lemmas, shift and subst, decidable equality, and size-based induction.
-- **Role.** Type-theory core (the language's syntax). Defines Expr/step prerequisites. Self-contained.
+- **Role.** Type-theory core (the language's syntax). Defines Expr/step prerequisites. Self-contained. June 2026 wave-4 tail: expr_finite was the vacuous exists n, expr_size e = n -> successor form expr_size e = S n (via expr_size_positive).
 - **Counts.** Qed 28 / Admitted 0 / axioms 0
 - **Imports.** Stdlib
 - **E/R/R.** _Elements:_ выражения Expr (var/lam/app/pair/system/elem/observe). _Roles:_ значения is_value; размер как фундированная мера. _Rules:_ shift/subst; expr_size; subterm strictly smaller. _P4:_ термы конечны (expr_finite); размер фундирован ⟹ индукция по подтермам; синтаксис ToS-языка.
@@ -788,7 +788,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **Inductive systems: finitely-generated with a well-founded depth**
 
 - **Topic.** FinitelyGenerated systems (nat/list/BTree) with a depth measure, depth = id/length, no infinite depth (well-founded), structural induction completeness, constructor disjointness, and base/step as elements.
-- **Role.** Type-theory/systems (inductive). Defines FinitelyGenerated. Imports Core_ERR.
+- **Role.** Type-theory/systems (inductive). Defines FinitelyGenerated. Imports Core_ERR. June 2026 wave-4 tail: nat_no_infinite_depth was the vacuous exists k, nat_depth n = k -> zero-or-successor constructor dichotomy (genuine well-foundedness lives in nat_depth_pred_lt + induction completeness).
 - **Counts.** Qed 26 / Admitted 0 / axioms 0
 - **Imports.** ToS Core_ERR
 - **E/R/R.** _Elements:_ индуктивные системы (nat/list/BTree); их глубина. _Roles:_ FinitelyGenerated как роль (конечно-порождённость); глубина как мера. _Rules:_ nat_no_infinite_depth (фундированность); induction_complete; constructors_disjoint. _P4:_ индуктивные системы конечно-порождены и фундированы (нет бесконечной глубины) — P4-актуальность; база/шаг = элементы.
@@ -959,7 +959,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **Judgments: HasType / HasElem / SystemEquiv with contexts**
 
 - **Topic.** Context entries and well-formedness, lookup (decidable), the HasType/HasElem/SystemEquiv judgments, has_type implies P1, has_elem satisfies criterion, weakening, type uniqueness, and P2.
-- **Role.** Type-theory infrastructure (judgments). Imports Core_ERR.
+- **Role.** Type-theory infrastructure (judgments). Imports Core_ERR. June 2026 wave-4 tail: ce_name_total was the vacuous exists n, ce_name e = n -> zero-or-successor dichotomy.
 - **Counts.** Qed 23 / Admitted 0 / axioms 0
 - **Imports.** ToS Core_ERR
 - **E/R/R.** _Elements:_ контексты CtxEntry; суждения HasType/HasElem/SystemEquiv. _Roles:_ суждения как роли типизации/членства; контекст well-formed. _Rules:_ ctx_lookup; weakening; has_type ⟹ P1; has_elem ⟹ criterion. _P4:_ суждения связывают типизацию с принципами P1/P2; контекст конечно-проверяем (Element).
@@ -1645,7 +1645,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **Operational semantics: deterministic small-step + fuel evaluation**
 
 - **Topic.** The step relation (beta, fst/snd of pairs, resolve), multi_step, a try_step fuel evaluator, eval_fuel terminating, step determinism, value-no-step, and multi-step congruences.
-- **Role.** Type-theory core (operational semantics). Defines step/eval_fuel. Imports Expressions.
+- **Role.** Type-theory core (operational semantics). Defines step/eval_fuel. Imports Expressions. June 2026 wave-4 tail: eval_fuel_terminates was the vacuous exists v, eval_fuel fuel e = v -> valuehood decidability at every fuel stage (via is_value_dec).
 - **Counts.** Qed 25 / Admitted 0 / axioms 0
 - **Imports.** ToS Expressions
 - **E/R/R.** _Elements:_ шаги редукции step; топливная оценка eval_fuel. _Roles:_ малый шаг как роль вычисления; детерминизм. _Rules:_ beta/fst/snd/resolve; step_deterministic; value_no_step. _P4:_ вычисление детерминировано и финитно (eval_fuel terminates); значение не шагает — нормальная форма (Element).
@@ -2172,11 +2172,11 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 
 **ToS language extraction: checker/evaluator computable, structurally recursive**
 
-- **Topic.** Computability of typecheck/typecheck_ann/eval/classify/safe_eval/erase, and that typecheck/eval are structurally recursive (extraction-ready).
-- **Role.** Type-theory (extraction readiness for the language). Imports TypeChecker/Evaluator.
-- **Counts.** Qed 8 / Admitted 0 / axioms 0
+- **Topic.** Constructor-dichotomy computability of typecheck/typecheck_ann/eval/classify/safe_eval/erase (option None-or-Some, EvalResult trichotomy, valuehood decidability, erased-size successor); structural recursion is certified by Coq's termination checker, not restated in-logic.
+- **Role.** Type-theory (extraction readiness for the language). Imports TypeChecker/Evaluator. June 2026 wave-4 tail: all 6 computable-lemmas were the vacuous exists r, f x = r -> constructor dichotomies; the 2 structurally_recursive duplicates DELETED (vacuity documents nothing) — 8 Qed -> 6.
+- **Counts.** Qed 6 / Admitted 0 / axioms 0
 - **Imports.** ToS TypeChecker, Evaluator
-- **E/R/R.** _Elements:_ проверяльщик/вычислитель ToS-языка. _Roles:_ вычислимость/структурная рекурсия как роль извлекаемости. _Rules:_ extraction_typecheck_computable; structurally_recursive. _P4:_ checker/evaluator вычислимы и структурно рекурсивны (Element) ⟹ извлекаемы в OCaml (tos_lang).
+- **E/R/R.** _Elements:_ проверяльщик/вычислитель ToS-языка. _Roles:_ вычислимость как конструкторная дихотомия результата (роль извлекаемости). _Rules:_ extraction_*_computable: option None-or-Some; EvalResult-трихотомия; разрешимость значения; размер стирания = successor. _P4:_ результат checker/evaluator инспектируем по конструкторам (Element) ⟹ извлекаемы в OCaml (tos_lang); структурная рекурсия сертифицируется при определении Fixpoint.
 - **Classical counterpart.** That a type checker/evaluator is computable and structurally recursive (hence extractable to OCaml) is routine; NEW: nothing -- the computability/structural-recursion witnesses for the ToS language checker/evaluator.
 - **Tags.** extraction, computable, type-checker, exposition
 
@@ -2184,11 +2184,11 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 
 | name | kind | role |
 |---|---|---|
-| `extraction_typecheck/ann/eval/classify/safe_eval/erase_computable/structurally_recursive` | Lemma | ★ checker/eval вычислимы и структурно рекурсивны |
+| `extraction_typecheck/ann/eval/classify/safe_eval/erase_computable` | Lemma | ★ конструкторные дихотомии результатов checker/eval |
 
 **Key lemmas (deep):**
 
-- **`extraction_typecheck_structurally_recursive`** - Проверяльщик и вычислитель ToS-языка вычислимы и СТРУКТУРНО рекурсивны ⟹ извлекаемы в OCaml (реальный tos_lang CLI). Element-сторона: верифицированный язык не только доказан безопасным, но и ИСПОЛНИМ — мост к extraction/tos_lang. _(extraction, computable, structurally-recursive)_
+- **`extraction_classify_computable`** - Результат classify_eval инспектируем: ER_Value/ER_Partial/ER_TypeError — настоящая трихотомия (June 2026: была вакуумная exists r, _ = r). Element-сторона: верифицированный язык не только доказан безопасным, но и ИСПОЛНИМ — мост к extraction/tos_lang. _(extraction, computable, constructor-dichotomy)_
 
 **Uniqueness - score 1 (exposition).** Вычислимость и структурная рекурсия checker/evaluator ToS-языка ⟹ извлекаемость в OCaml (tos_lang CLI).
 > _Caveat:_ Извлекаемость структурно-рекурсивных функций рутинна; ценность — исполнимость верифицированного языка.
@@ -2229,7 +2229,7 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 **Type safety: tos_lang_main_theorem (well-typed never stuck) + no paradox**
 
 - **Topic.** The combined type safety (preservation + progress), P4 evaluation terminates, no stuck state, determinism/confluence, multi-step safety, the main theorem tos_lang_main_theorem, and safety_implies_no_paradox.
-- **Role.** Type-theory capstone. Combines SubjectReduction + Progress. Imports both.
+- **Role.** Type-theory capstone. Combines SubjectReduction + Progress. Imports both. June 2026 wave-4 tail: P4_evaluation_terminates -> valuehood-decidability form, following the rewritten Reduction.eval_fuel_terminates.
 - **Counts.** Qed 13 / Admitted 0 / axioms 0
 - **Imports.** ToS SubjectReduction, Progress
 - **E/R/R.** _Elements:_ типизированные вычисления. _Roles:_ type-safety как роль (не застревает); безопасность ⟹ нет парадокса. _Rules:_ preservation + progress ⟹ safety; eval terminates; safety_implies_no_paradox. _P4:_ type-safe вычисление ФИНИТНО завершается без аварийного застревания (P4); безопасность ⟹ нет парадокса (стыковка с Soundness).

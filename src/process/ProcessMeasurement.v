@@ -202,15 +202,21 @@ Qed.
 (*  Part IV: Step 10 Synthesis  (~6 lemmas)                            *)
 (* ================================================================== *)
 
+(** June 2026 honesty rollback: this was `True /\ True /\ True /\ True /\ True`
+    with comments claiming Phases 44–48 — a vacuous bundle.  Phases 44–47
+    (Heisenberg / Born / entanglement / no-cloning) live in their OWN files and
+    are not re-proved here; what THIS file actually establishes is Phase 48: *)
 Theorem step10_complete :
-  (* Phase 44: Heisenberg from P2 (adjunction defect >= 1/2) *)
-  (* Phase 45: Born rule from L3 (|psi|^2 uniquely additive) *)
-  (* Phase 46: Entanglement from P1 (non-factorization) *)
-  (* Phase 47: No-cloning from L2 (linearity contradiction) *)
-  (* Phase 48: Measurement from L3+P4 (process step = collapse) *)
-  True /\ True /\ True /\ True /\ True.
+  (* Phase 48 (this file): states definite (L3), measurement = process step,
+     frequencies in [0,1] *)
+  (forall qp n, state_definite qp n) /\
+  (is_measurement_step measurement_process 0) /\
+  (forall s, in_interval 0 1 (frequency_process s)).
 Proof.
-  repeat split.
+  split; [| split].
+  - apply l3_definite_states.
+  - apply measurement_process_is_measurement.
+  - apply frequency_process_in_interval.
 Qed.
 
 (** ★★★ QUANTUM MECHANICS FROM LOGIC ★★★ *)
@@ -225,7 +231,10 @@ Theorem quantum_from_logic :
   (* P3 (Hierarchy): mass spectrum *)
   (* P4 (Process): discrete evolution, no measurement problem *)
   (*                                                    *)
-  (* ALL of quantum mechanics: derived from logic + ontology. *)
+  (* HONEST SCOPE (June 2026): the conjunction below states THIS file's
+     results (definite states, measurement-as-step, frequencies in [0,1]);
+     the listed law-to-phenomenon mappings are the BRANCH's claims, proved
+     (with their own honest caveats) in their respective files — not here. *)
   (forall qp n, state_definite qp n) /\
   (is_measurement_step measurement_process 0) /\
   (forall s, in_interval 0 1 (frequency_process s)).

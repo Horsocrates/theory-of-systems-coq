@@ -178,9 +178,9 @@ Definition rh_requires_gap_to_zero : Prop :=
 (** P4: the process is the object *)
 (** At each N: zeta_partial k N is computable *)
 Theorem p4_computability : forall k N,
-  exists q : Q, zeta_partial k N == q.
+  exists (num : Z) (den : BinNums.positive), zeta_partial k N = num # den.
 Proof.
-  intros k N. exists (zeta_partial k N). reflexivity.
+  intros k N. destruct (zeta_partial k N) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** P4: the process is deterministic *)

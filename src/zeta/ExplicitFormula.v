@@ -194,9 +194,9 @@ Definition explicit_formula_level (K : nat) (x : Q) : Q :=
 
 (** The explicit formula is computable at each level *)
 Lemma explicit_formula_computable : forall K x,
-  exists q : Q, explicit_formula_level K x == q.
+  exists (num : Z) (den : BinNums.positive), explicit_formula_level K x = num # den.
 Proof.
-  intros K x. exists (explicit_formula_level K x). reflexivity.
+  intros K x. destruct (explicit_formula_level K x) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** The correction term (pole contribution) at level K *)
@@ -324,7 +324,7 @@ Theorem explicit_formula_summary :
   (* 3. RH error ≤ DVP error for |x| ≥ 1 *)
   (forall x, 1 <= Qabs x -> pnt_rh_error x <= dvp_pnt_error x) /\
   (* 4. Explicit formula is computable at each level *)
-  (forall K x, exists q, explicit_formula_level K x == q) /\
+  (forall K x, exists (num : Z) (den : BinNums.positive), explicit_formula_level K x = num # den) /\
   (* 5. Pole correction grows without bound *)
   (forall M, 0 < M -> exists K, M < pole_correction K) /\
   (* 6. RH implies PNT-optimal *)

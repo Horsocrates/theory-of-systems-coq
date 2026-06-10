@@ -300,8 +300,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : no_compatible_gap = no_compatible_gap.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -316,5 +315,5 @@ Proof. reflexivity. Qed.
 (*  Part IV: tension_at_8, tension_positive_at_8, tension_gap_paradox,       *)
 (*           model_inconsistency (4)                                         *)
 (*  Part V: what_correction_proves, three_mechanisms_missing,                *)
-(*          confinement_main, total_count (4)                                *)
+(*          confinement_main                                *)
 (* ========================================================================= *)

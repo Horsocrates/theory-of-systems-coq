@@ -7,7 +7,7 @@
     "title": "Eigenvalue synthesis over Q: localization tied to ionization",
     "topic": "Localized diagonal eigenvalues, the power method finding eigenvalues, hydrogen eigenvalue bounds, the ground-state spectral gap, eigenvalue<->ionization connection, Rayleigh variational bound, Gershgorin for hydrogen, 2x2 verifications, and a verified/open list.",
     "role": "Synthesis node of the linalg branch, bridging to atomic ionization. Self-contained (QArith).",
-    "qed": 15, "admitted": 0, "axioms": 0,
+    "qed": 14, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {
       "elements": "собственные значения; диагональные матрицы; спектральный зазор.",

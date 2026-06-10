@@ -303,8 +303,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : forall K x, 0 < K -> wrap K x < K.
-Proof. exact wrap_lt. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -317,5 +316,5 @@ Proof. exact wrap_lt. Qed.
 (*  Part V: num_sites_pos, num_links_eq, num_plaquettes_eq, physical_dof (4) *)
 (*  Part VI: site_eq_dec, direction_eq_dec, link_eq_dec (3)                  *)
 (*  Part VII: plaquette_closed_loop, plaquette_source_l1, coarsen_valid (3)  *)
-(*  Part VIII: lattice_structure_summary, total_count (2)                     *)
+(*  Part VIII: lattice_structure_summary                     *)
 (* ========================================================================= *)

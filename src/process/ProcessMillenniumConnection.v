@@ -144,11 +144,11 @@ Definition yang_mills_complete_connected :=
 
 (* === YangMillsSealed connections === *)
 
-Definition yang_mills_SEALED_connected :=
-  YangMillsSealed.yang_mills_SEALED.
+Definition ym_lattice_os_bundle_connected :=
+  YangMillsSealed.ym_lattice_os_bundle.
 
-Definition sealed_summary_connected :=
-  YangMillsSealed.sealed_summary.
+Definition ym_lattice_os_summary_connected :=
+  YangMillsSealed.ym_lattice_os_summary.
 
 (* === YMWallBreach connections === *)
 
@@ -181,11 +181,10 @@ Definition yang_mills_3plus1D_complete_connected :=
 
 (* === Synthesis === *)
 
-Theorem millennium_fully_connected :
-  (* 13 Yang-Mills gauge modules connected *)
-  (* Complete 5-level argument, all OS axioms, all 9 gaps closed *)
-  (* Wall breached, process formulation, 3+1D complete *)
-  (13 > 0)%nat.
-Proof. lia. Qed.
+(* June 2026: the "millennium_fully_connected" doc-theorem was DELETED —
+   it proved the literal (13 > 0)%nat with the actual claims living in
+   comments (and used lia without importing Lia, so the file never
+   recompiled under Rocq 9 until now).  The real connection content is the
+   Definition aliases above, each re-exporting a named gauge result. *)
 
 Definition g3_theorem_count := 35%nat.

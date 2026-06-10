@@ -157,8 +157,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : lambda_0_is_root = lambda_0_is_root.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -172,5 +171,5 @@ Proof. reflexivity. Qed.
 (*             continuum_gap_ge_eighth (3)                                    *)
 (*  Part IV: discrete_gap_K3, continuum_gap,                                 *)
 (*            discrete_gap_positive_large_K, gap_positive_all_K (4)          *)
-(*  Part V: gap_bound_main, total_count (2)                                  *)
+(*  Part V: gap_bound_main                                  *)
 (* ========================================================================= *)

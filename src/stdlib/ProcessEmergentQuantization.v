@@ -30,7 +30,7 @@ Theorem dispersion_derived :
 Proof. exact energy_1_positive. Qed.
 
 Theorem coulomb_derived : forall alpha,
-  exists q, coulomb_potential_lattice alpha 1 0%nat == q.
+  coulomb_potential_lattice alpha 1 0%nat == - alpha.
 Proof. exact no_coulomb_singularity. Qed.
 
 Theorem spectrum_discrete : forall K, (0 < S K)%nat.
@@ -58,7 +58,7 @@ Qed.
 
 Theorem emergent_quantization_genuine :
   0 < lattice_energy 1 1 0%nat /\
-  (forall alpha, exists q, coulomb_potential_lattice alpha 1 0%nat == q) /\
+  (forall alpha, coulomb_potential_lattice alpha 1 0%nat == - alpha) /\
   transfer_eigenvalue 0 1 0%nat == 7 # 8.
 Proof.
   split; [|split].

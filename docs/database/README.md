@@ -75,18 +75,16 @@ index stays complete.
 
 ## Status
 
-Built incrementally, cluster by cluster. **546 files / 7,417 Qed catalogued so far** across
-23 shards (see `INDEX.md` and `_uniqueness_ranked.md`).
+Built incrementally, cluster by cluster. **685 files / 9,006 Qed catalogued so far** across
+23 shards (see `INDEX.md` and `_uniqueness_ranked.md`). **`UNIQUENESS.md` (deliverable 2) is BUILT**
+(veins A–J — `docs/database/UNIQUENESS.md`); to be rebuilt once the giants are catalogued.
 
 Done: `cs`, `algebra`, `settheory`, `geometry`, `numbertheory`, `category`, `analysis`, `src`
 (root), `lattice`, `zeta`, `physics`, `navier_stokes`, `experimental`, `projective`, `light`,
 `linalg`, `fermions`, `process_qm`, `Architecture_of_Reasoning`, `smalldirs` (14 tiny dirs),
-`foundation` (F-1..F-3, files #161–310 of 266), and `log2` (5 files #1830–1834: the
-log2-as-process pair + the Mertens→exp_R→injectivity tower; see HIGHLIGHTS **H58**, whose
-addendum carries the E/R/R разбор of the one open piece `E∘L=1/(1−x)` as a **second-order
-finitization boundary** — numbers are reified as processes, functions are not yet).
+**`foundation` (COMPLETE — all 282 files #161–425 + appends #1841–1857, via waves F-1..F-6,
+finished 2026-06-09; the F-4..F-6 catalog corrected widespread STATUS-header Qed drift)**, and
+`log2` (the log2-as-process pair + the Mertens→exp_R→injectivity tower; HIGHLIGHTS **H58/H59**).
 
-In progress / pending: `foundation` F-4..F-5 (#311–425), then the giants `process` (340),
-`gauge` (114), `stdlib` (709+); final reconcile of `_files.tsv` numbering. See
-`memory/file-database.md` for the running progress log. **`UNIQUENESS.md`** (deliverable 2) is
-built LAST from the `uniqueness` fields once cataloguing is complete.
+In progress / pending: the giants `process` (340), `gauge` (114), `stdlib` (709+); final reconcile
+of `_files.tsv` numbering. See `memory/file-database.md` for the running progress log.

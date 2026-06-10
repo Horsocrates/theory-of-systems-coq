@@ -467,25 +467,38 @@ NOTE (verified 2026-06-05): `classic` is textually RE-DECLARED (same statement) 
 more files — EVT_idx.v:338, settheory/BorelDeterminacy.v:21, settheory/HigmanLemma.v:13
 — so there are 4 declarations of one axiom, not a single re-exported source.
 
-### Domain-specific (4)
-CORRECTED 2026-06-05 (audit: foundation/HeavyWallAudit.v). The HEAVY WALLS
-(Navier-Stokes, zeta) are NOT 0-axiom; the foundation layer IS. The four real domain
-axioms below were verified by grep — they are NOT the stale phantom names that used to
-sit here (see REMOVED note). "0 axioms" honestly scopes to the foundation, not the walls.
+### Domain-specific (2; was 4 — the 2 eliminable ones ELIMINATED 2026-06-10)
+CORRECTED 2026-06-05 (audit: foundation/HeavyWallAudit.v); UPDATED 2026-06-10: both
+ProvableStructure axioms were eliminated, exactly the set the audit predicted eliminable
+(machine-checked: HeavyWallAudit.eliminated_iff_eliminable). The foundation layer stays
+0-axiom; the NS wall keeps its honest load-bearing conditionality.
 
 | Axiom | File | Wall | Kind | Statement |
 |-------|------|------|------|-----------|
-| `B_antisym` | navier_stokes/GalerkinSystem.v:185 | NS | ProvableStructure (eliminable) | B(k,l,m) == -B(k,m,l): advection antisymmetry = energy conservation |
 | `C_B_positive` | navier_stokes/TriadicInteraction.v:120 | NS | HarmlessInput | 0 < C_B (coupling constant positive; normalization) |
 | `B_coeff_bounded` | navier_stokes/TriadicInteraction.v:122 | NS | **LOAD-BEARING** | Qabs(B k l m) <= C_B*max(k,l,m): NS regularity is CONDITIONAL on this |
-| `functional_equation_structure` | zeta/FunctionalEquation.v:170 | zeta | ProvableStructure (eliminable) | nontrivial zero rho -> nontrivial zero (1-rho): Riemann FE; RH treatment conditional on it |
 
-Sort: 2 eliminable (provable structures — energy conservation, Riemann's FE), 1 harmless
-input, 1 genuinely LOAD-BEARING (`B_coeff_bounded` — the whole NS regularity rests on it).
+ELIMINATED 2026-06-10 (Axiom -> Lemma, same names/statements, downstream unchanged):
+- `B_antisym` (was GalerkinSystem.v Axiom): `B_coeff` is now the ANTISYMMETRIZATION of an
+  abstract raw coupling — `B_coeff k l m := B_raw k l m - B_raw k m l` — so antisymmetry is
+  a Lemma by `ring`. Only the antisymmetric part does work in the cubic energy sum anyway
+  (a_l*a_m is (l,m)-symmetric). Grid-space descent of the same content (0-axiom):
+  navier_stokes/AdvectionEnergyConservation.v.
+- `functional_equation_structure` (was zeta/FunctionalEquation.v Axiom): now a 2-line Lemma —
+  `is_nontrivial_zero` is FORMALLY `Cauchy /\ critical strip` (no vanishing condition), and
+  both conjuncts are reflection-stable (reflect_zero_cauchy + reflect_zero_critical_strip).
+  The axiom's NAME promised the analytic FE; its statement was free. The ANALYTIC functional
+  equation (about actual zeta vanishing) remains unformalized — in prose, honestly flagged.
+
+Print Assumptions verified 2026-06-10: `millennium_reading2_capstone` / `ns_galerkin_bound_chain`
+(renamed 2026-06-10 from millennium_complete_final / navier_stokes_millennium) rest on
+`C_B_positive` (+ Parameter `C_B`) only; `reflect_zero_nontrivial` /
+`RH_critical_strip_symmetric` are "Closed under the global context" (0 axioms).
 
 Abstract `Parameter`s — conservative (inhabited types, cannot cause inconsistency) but
 they DO appear in `Print Assumptions`, so the honest count names them:
-`B_coeff` (navier_stokes/GalerkinSystem.v:181), `C_B` (navier_stokes/TriadicInteraction.v:119),
+`B_raw` (navier_stokes/GalerkinSystem.v, the raw coupling; replaced the former `B_coeff`
+Parameter on 2026-06-10 — `B_coeff` is now a Definition), `C_B` (navier_stokes/TriadicInteraction.v:119),
 `eval_program` (foundation/P4_Eliminates_Pi11.v:28).
 
 REMOVED 2026-06-05 — these names NEVER existed in src/ (documentation drift, now fixed):

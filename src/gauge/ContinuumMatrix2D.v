@@ -192,8 +192,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : n_trace_value = n_trace_value.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -204,5 +203,5 @@ Proof. reflexivity. Qed.
 (*  Part IV: n_trace_row0/1/2_value (3)                                      *)
 (*  Part V: n_trace_value, trace_reduction (2)                               *)
 (*  Part VI: ground_state_enhanced, enhancement_ratio (2)                    *)
-(*  Part VII: continuum_matrix_2d_main, total_count (2)                      *)
+(*  Part VII: continuum_matrix_2d_main                      *)
 (* ========================================================================= *)

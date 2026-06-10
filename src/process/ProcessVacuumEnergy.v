@@ -93,9 +93,9 @@ Proof. unfold mode_energy. exact sigma_order_1. Qed.
 
 (** Mode energy is a finite Q for any order *)
 Lemma mode_energy_finite : forall beta order,
-  exists q : Q, mode_energy beta order == q.
+  exists (num : Z) (den : BinNums.positive), mode_energy beta order = num # den.
 Proof.
-  intros beta order. exists (mode_energy beta order). reflexivity.
+  intros beta order. destruct (mode_energy beta order) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Mode energy is nonneg *)
@@ -142,9 +142,9 @@ Proof. unfold total_fluctuation. vm_compute. reflexivity. Qed.
 
 (** Total is FINITE for any K (trivially: Q is closed under multiplication) *)
 Lemma total_finite : forall K e,
-  exists q : Q, total_fluctuation K e == q.
+  exists (num : Z) (den : BinNums.positive), total_fluctuation K e = num # den.
 Proof.
-  intros K e. exists (total_fluctuation K e). reflexivity.
+  intros K e. destruct (total_fluctuation K e) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Total is nonneg when energy is nonneg *)

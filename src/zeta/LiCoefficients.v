@@ -336,9 +336,9 @@ Qed.
 (** Li criterion is checkable: each λ_n is a specific rational *)
 Theorem li_criterion_computable : forall n,
   (1 <= n)%nat ->
-  exists q : Q, li_lower_bound n == q.
+  exists (num : Z) (den : BinNums.positive), li_lower_bound n = num # den.
 Proof.
-  intros n Hn. exists (li_lower_bound n). reflexivity.
+  intros n Hn. destruct (li_lower_bound n) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Connection to RH: if all zeros on line, contributions sum to ≥ 0 *)
@@ -363,13 +363,13 @@ Theorem li_rh_structural :
   (* Both directions rest on: critical line zeros ↔ modulus = 1 *)
   (forall gamma, li_modulus_sq (1#2) gamma == 1) /\
   (* Computability: each check is finite *)
-  (forall n, exists q, li_lower_bound n == q) /\
+  (forall n, exists (num : Z) (den : BinNums.positive), li_lower_bound n = num # den) /\
   (* Positivity of lower bound *)
   li_criterion.
 Proof.
   split; [|split].
   - exact li_modulus_sq_at_half.
-  - intros n. exists (li_lower_bound n). reflexivity.
+  - intros n. destruct (li_lower_bound n) as [num den]. exists num, den. reflexivity.
   - exact li_criterion_holds.
 Qed.
 
@@ -378,14 +378,14 @@ Qed.
 (** The process {λ_n^{(K)}}_{K} converges to λ_n *)
 Theorem li_p4_process :
   (* Computability at each level *)
-  (forall n K, exists q : Q, zeta_partial n K == q) /\
+  (forall n K, exists (num : Z) (den : BinNums.positive), zeta_partial n K = num # den) /\
   (* Monotonicity of partial sums *)
   (forall k N, zeta_partial k N <= zeta_partial k (S N)) /\
   (* Li lower bound non-negative *)
   (forall n, 0 <= li_lower_bound n).
 Proof.
   split; [|split].
-  - intros n K. exists (zeta_partial n K). reflexivity.
+  - intros n K. destruct (zeta_partial n K) as [num den]. exists num, den. reflexivity.
   - intros k N. apply zeta_partial_increasing.
   - exact li_lower_bound_nonneg.
 Qed.

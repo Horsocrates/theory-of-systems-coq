@@ -194,9 +194,17 @@ Proof. vm_compute. repeat split; reflexivity. Qed.
 (*       одной категории."                                          *)
 (* ================================================================ *)
 
-(** L2 (Non-contradiction): an entity CANNOT occupy two categories *)
+(** L2 (Non-contradiction): an entity CANNOT occupy two categories — its
+    category is UNIQUE (June 2026: was `cat1 <> cat2 -> True`, vacuous). *)
 Definition L2_exclusive (cat1 cat2 : ERRCategory) : Prop :=
-  cat1 <> cat2 -> True.  (* If different, no entity can be both *)
+  cat1 <> cat2 -> forall c : ERRCategory, ~ (c = cat1 /\ c = cat2).
+
+Lemma L2_exclusive_holds : forall cat1 cat2 : ERRCategory,
+  L2_exclusive cat1 cat2.
+Proof.
+  intros cat1 cat2 Hneq c [H1 H2]. apply Hneq.
+  rewrite <- H1, <- H2. reflexivity.
+Qed.
 
 (** L3 (Excluded middle): every entity belongs to EXACTLY ONE category *)
 Definition L3_exhaustive (c : ERRCategory) : Prop :=

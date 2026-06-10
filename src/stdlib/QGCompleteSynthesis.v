@@ -106,23 +106,26 @@ Qed.
 (*  FINITENESS                                                         *)
 (* ================================================================== *)
 
-(** Every QG observable is a concrete Q — NO infinities *)
+(** Every QG observable is a CONCRETE Q — no infinities.  (June 2026 honesty
+    rollback: the four conjuncts were vacuous `exists e, _ == e`; the proofs
+    already carried the concrete witnesses, so the honest and STRONGER form is
+    the four identities themselves.) *)
 Theorem qg_all_finite :
-  (* Energy: Q *)
-  (exists e, graviton_E_concrete == e) /\
-  (* Mass: Q *)
-  (exists m, graviton_mass_sq_at 0 == m) /\
-  (* G: Q *)
-  (exists g, newton_G == g) /\
-  (* Planck mass: Q *)
-  (exists p, planck_mass_sq == p).
+  (* Energy: the concrete value *)
+  graviton_E_concrete == 4763 # 10500 /\
+  (* Mass at 0: equals the energy *)
+  graviton_mass_sq_at 0 == graviton_E_concrete /\
+  (* G: the concrete value *)
+  newton_G == 7 # 1760 /\
+  (* Planck mass squared: the concrete value *)
+  planck_mass_sq == 10.
 Proof.
   split; [|split; [|split]].
-  - exists (4763 # 10500). exact graviton_E_value.
-  - exists graviton_E_concrete. unfold graviton_mass_sq_at. simpl.
+  - exact graviton_E_value.
+  - unfold graviton_mass_sq_at. simpl.
     unfold Qdiv. rewrite Qmult_1_r. reflexivity.
-  - exists (7 # 1760). exact newton_G_value.
-  - exists 10. exact planck_mass_sq_is_10.
+  - exact newton_G_value.
+  - exact planck_mass_sq_is_10.
 Qed.
 
 (* ================================================================== *)

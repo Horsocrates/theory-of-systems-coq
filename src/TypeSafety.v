@@ -36,8 +36,12 @@ Qed.
 (** ** 2. P4 Evaluation Terminates *)
 (* ================================================================= *)
 
+(** P4 rendering (June 2026): the former `exists v, eval_fuel fuel e = v`
+    was vacuous (any term equals itself). The contentful finite-stage
+    statement: at every fuel stage the outcome is inspectable —
+    valuehood of the result is decidable. *)
 Theorem P4_evaluation_terminates : forall e fuel,
-  exists v, eval_fuel fuel e = v.
+  is_value (eval_fuel fuel e) \/ ~ is_value (eval_fuel fuel e).
 Proof.
   intros e fuel.
   exact (eval_fuel_terminates e fuel).

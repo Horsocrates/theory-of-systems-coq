@@ -282,8 +282,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : 0 < su2_gap_at_fixed_point.
-Proof. exact su2_gap_at_fp_positive. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -299,5 +298,5 @@ Proof. exact su2_gap_at_fp_positive. Qed.
 (*          rg_iteration_1, rg_iteration_2 (5)                             *)
 (*  Part VI: rg_preserves_gap, rg_chain_complete,                           *)
 (*           rg_gap_to_millennium (3)                                      *)
-(*  Part VII: rg_flow_summary, rg_flow_main, total_count (3)               *)
+(*  Part VII: rg_flow_summary, rg_flow_main               *)
 (* ========================================================================= *)

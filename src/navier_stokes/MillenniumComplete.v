@@ -12,13 +12,13 @@
 (*  Roles:    process mathematics as unifier, A = exists as origin         *)
 (*  Rules:    elementary inequalities -> Millennium problems               *)
 (*  STATUS: target ~30 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, L4_witness, B_antisym, C_B_positive, B_coeff_bounded *)
+(*  AXIOMS: classic, L4_witness, C_B_positive, B_coeff_bounded (B_antisym: Lemma 06.2026) *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
 (** HONEST NOTE (June 2026; cross-ref foundation/MillenniumHonesty.v):
     "MILLENNIUM COMPLETE" / "Unconditional" denote READING 2 — Galerkin / process regularity — and it is
-    CONDITIONAL on the axioms listed above (classic, L4_witness, B_antisym, C_B_positive, B_coeff_bounded;
+    CONDITIONAL on the axioms listed above (classic, L4_witness, C_B_positive, B_coeff_bounded; B_antisym was ELIMINATED June 2026 (now a Lemma via antisymmetrization);
     this file is NOT axiom-free, so "Unconditional" is not literal).  READING 1 — the classical Clay
     Millennium statement (global smoothness of continuum 3D Navier-Stokes, unconditionally) — is NOT
     proved here.  The gap Reading-2 -> Reading-1 is the finitization boundary. *)
@@ -96,8 +96,10 @@ Proof.
   intro k. apply uniform_sobolev; assumption.
 Qed.
 
-(* ★ NAVIER-STOKES MILLENNIUM ★ *)
-Theorem navier_stokes_millennium : forall nu E0,
+(* ★ NS GALERKIN BOUND CHAIN (Reading 2; renamed June 2026 from
+   navier_stokes_millennium — the content is the positivity of the whole
+   bound chain, not the Clay statement) ★ *)
+Theorem ns_galerkin_bound_chain : forall nu E0,
   0 < nu -> 0 < E0 ->
   (* The complete chain: *)
   (* Energy *) 0 < E0 /\
@@ -184,13 +186,14 @@ Qed.
 (*  Part III: The Two Millennium Problems  (~10 lemmas)               *)
 (* ================================================================== *)
 
-(* Yang-Mills mass gap *)
-Theorem ym_gap_final :
+(* Yang-Mills LATTICE strip gap value (renamed June 2026 from ym_gap_final) *)
+Theorem ym_strip_gap_value :
   strip_gap_at_8 == 3 # 4.
 Proof. unfold strip_gap_at_8. lra. Qed.
 
-(* Navier-Stokes regularity *)
-Theorem ns_regularity_final :
+(* Navier-Stokes key harmonic bound (renamed June 2026 from
+   ns_regularity_final — the statement IS the harmonic inequality) *)
+Theorem ns_harmonic_bound_final :
   forall n, (1 <= n)%nat ->
   2 * harmonic_sum n <= inject_Z (Z.of_nat n) + 1.
 Proof. apply harmonic_linear_bound. Qed.
@@ -212,12 +215,12 @@ Proof.
   apply uniform_sobolev; assumption.
 Qed.
 
-(* Energy monotone *)
-Theorem energy_monotone : forall nu,
-  0 < nu ->
-  (* dE/dt = -2nu*Omega <= 0 *)
-  0 < nu.
-Proof. intros; assumption. Qed.
+(* Energy monotone — the REAL statement (June 2026: was the sham
+   `0 < nu -> 0 < nu` with the actual claim living in a comment):
+   the viscous energy rate is nonpositive, dE/dt = -2nu*Omega <= 0. *)
+Theorem energy_monotone : forall nu K (a : modal_state),
+  0 < nu -> viscous_energy_rate nu K a <= 0.
+Proof. intros nu K a Hnu. apply viscous_dissipation. exact Hnu. Qed.
 
 (* Enstrophy bounded *)
 Theorem enstrophy_bounded_final : forall nu E0,
@@ -252,8 +255,9 @@ Proof.
   - unfold Qle, Qmult, Qnum, Qden, harmonic_sum, inject_Z, Qdiv, Qinv, Qplus. simpl. lia.
 Qed.
 
-(* Two Millennium complete *)
-Theorem two_millennium_complete :
+(* The two walls: key verified facts (Reading 2; renamed June 2026 from
+   two_millennium_complete — content: lattice gap value + harmonic bound) *)
+Theorem two_walls_key_facts :
   (* YANG-MILLS MASS GAP *)
   strip_gap_at_8 == 3 # 4 /\
   (* NAVIER-STOKES REGULARITY *)
@@ -277,35 +281,14 @@ Theorem key_integer_minimum :
   1 - (1#4) == 3#4.
 Proof. lra. Qed.
 
-(* Total theorem count *)
-Theorem theorem_count :
-  (* Phase 1: 159 Qed (5 files) *)
-  (* Phase 2: 94 Qed (5 files) *)
-  (* Phase 3: 65 Qed (4 files) *)
-  (* Phase 4: 129 Qed (5 files) *)
-  (* Phase 5: 64 Qed (3 files) *)
-  (* Phase 6: ~180 Qed (5 files) *)
-  (* Gauge: ~500 Qed *)
-  (* Total: ~6000+ Qed *)
-  (159 + 94 + 65 + 129 + 64 <= 600)%Z.
-Proof. lia. Qed.
-
-(* Axiom transparency *)
-Theorem axiom_list :
-  (* 1. B_antisym: energy conservation by nonlinearity *)
-  (* 2. C_B_positive: interaction coefficient bounded *)
-  (* 3. B_coeff_bounded: triadic coefficients bounded *)
-  (* 4. L4_witness: sufficient reason principle *)
-  (* 5. classic: law of excluded middle *)
-  (* All 5 axioms are physically motivated *)
-  (5 <= 10)%Z.
-Proof. lia. Qed.
-
-(* File count *)
-Theorem file_count :
-  (* 30 NS files, 20+ gauge files, 200+ core files *)
-  (30 + 20 + 200 <= 300)%Z.
-Proof. lia. Qed.
+(* June 2026: three "documentation theorems" (theorem_count, axiom_list,
+   file_count) were DELETED here — they proved literal-number inequalities
+   like (5 <= 10)%Z with the actual claims living in comments, i.e. they
+   stated nothing.  The honest ledgers: CLAUDE.md axiom table (axioms),
+   foundation/HeavyWallAudit.v (machine-checked axiom audit),
+   docs/database/ (per-file Qed counts).  Current axioms of this chain
+   (Print Assumptions verified 2026-06-10): C_B_positive (+ Parameter C_B);
+   B_antisym is a Lemma; B_coeff_bounded is not on the capstone path. *)
 
 (* Process perspective *)
 Theorem process_perspective : forall nu E0,
@@ -332,8 +315,10 @@ Proof.
   - apply harmonic_linear_bound.
 Qed.
 
-(* Regularity is unconditional *)
-Theorem regularity_unconditional : forall nu E0,
+(* Regularity bounds positive for ALL nu, E0 — no smallness condition on
+   the data (renamed June 2026 from regularity_unconditional: the chain
+   itself remains conditional on C_B_positive, see Print Assumptions) *)
+Theorem regularity_bounds_positive : forall nu E0,
   0 < nu -> 0 < E0 ->
   (* No smallness condition on initial data *)
   (* No restriction on viscosity *)
@@ -346,8 +331,9 @@ Proof.
   apply compactness_const_positive; assumption.
 Qed.
 
-(* Uniqueness is unconditional *)
-Theorem uniqueness_unconditional : forall nu E0,
+(* Uniqueness-side Sobolev bound positive (renamed June 2026 from
+   uniqueness_unconditional) *)
+Theorem uniqueness_sobolev_positive : forall nu E0,
   0 < nu -> 0 < E0 ->
   0 < sobolev_bound nu E0 2.
 Proof.
@@ -406,8 +392,9 @@ Proof.
   lia.
 Qed.
 
-(* Both problems solved *)
-Theorem both_solved :
+(* Both walls: the bound constants are positive (Reading 2; renamed
+   June 2026 from both_solved) *)
+Theorem both_walls_positive_bounds :
   (* YM: positive gap *) 0 < strip_gap_at_8 /\
   (* NS: all Sobolev bounded *) (forall nu, 0 < nu -> 0 < A_inv nu) /\
   (* Bootstrap works *) (forall nu, 0 < nu -> 0 < self_consistent_amplitude nu).
@@ -417,8 +404,9 @@ Proof.
   apply step4_bootstrap.
 Qed.
 
-(* ★★★ THE FINAL STATEMENT ★★★ *)
-Theorem millennium_complete_final :
+(* ★★★ THE CAPSTONE — Reading 2 (Galerkin/process; see the honest note at
+   the top of this file; renamed June 2026 from millennium_complete_final) ★★★ *)
+Theorem millennium_reading2_capstone :
   (* Yang-Mills: gap = 3/4, positive *)
   strip_gap_at_8 == 3#4 /\
   0 < strip_gap_at_8 /\
@@ -431,9 +419,8 @@ Theorem millennium_complete_final :
   (forall nu E0, 0 < nu -> 0 < E0 -> 0 < compactness_const nu E0 1) /\
   (* C^inf for all s *)
   (forall nu E0 s, 0 < nu -> 0 < E0 -> 0 < sobolev_bound nu E0 s) /\
-  (* Key numbers *)
-  1 - (1#4) == 3#4 /\
-  (112 <= 135)%Z.
+  (* Key number (June 2026: the numerology conjunct (112 <= 135)%Z was dropped) *)
+  1 - (1#4) == 3#4.
 Proof.
   split; [unfold strip_gap_at_8; lra |].
   split; [unfold strip_gap_at_8; lra |].
@@ -443,12 +430,13 @@ Proof.
   split; [apply enstrophy_bound_positive |].
   split; [intros; apply compactness_const_positive; assumption |].
   split; [intros; apply uniform_sobolev; assumption |].
-  split; [lra | lia].
+  lra.
 Qed.
 
 (*
-  ~6,000 Qed. 270 files. 5 axioms.
-  One first principle. Two Millennium Problems.
+  (Counts as of March 2026; June 2026 axioms: classic, L4_witness,
+   C_B_positive + Parameters — see CLAUDE.md ledger and HeavyWallAudit.)
+  One first principle. Two Millennium Problems — READING 2 (see top note).
 
   Yang-Mills: gap = 3/4 because domain walls are integers.
   Navier-Stokes: smooth because harmonic sums grow sublinearly.

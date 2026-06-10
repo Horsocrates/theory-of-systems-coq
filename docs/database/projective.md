@@ -145,7 +145,7 @@ _Generated from `projective.json` by `generate.ps1` - do not edit by hand; edit 
 **Projective system, strengthened: finite-stage elements, commutators, unbounded spectra**
 
 - **Topic.** Strengthening lemmas: the constant Q-system projection is identity, P4 projective elements are finite at each stage and compatible, constant processes are projective elements, the self-commutator is zero, position spectrum is unbounded with growing eigenvalues, and norm-boundedness at stages.
-- **Role.** Auxiliary strengthening leaf for the projective branch. Self-contained (QArith).
+- **Role.** Auxiliary strengthening leaf for the projective branch. Self-contained (QArith). June 2026 wave-4 tail: position_eigenvalues_grow was the vacuous exists lambda == inject_Z n (never stated growth) -> strict monotone growth inject_Z n < inject_Z (S n).
 - **Counts.** Qed 13 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ проективные элементы (конечны на стадии); постоянные процессы. _Roles:_ усиливающие леммы — роль-поддержка системы. _Rules:_ P4_projective_element_finite_at_stage; commutator_self_is_zero; position_spectrum_unbounded. _P4:_ проективный элемент конечен на каждой стадии (Element); неограниченный спектр позиции — role-limit.

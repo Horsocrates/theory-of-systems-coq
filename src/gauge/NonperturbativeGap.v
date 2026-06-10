@@ -201,8 +201,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (15 = 15)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -213,5 +212,5 @@ Proof. reflexivity. Qed.
 (*          process_is_cauchy, pessimistic_gap_to_zero (6)                   *)
 (*  Part II: millennium_implies_gap, conditional_gap_from_contraction (2)    *)
 (*  Part III: proved_results, reformulation,                                  *)
-(*            nonperturbative_main, total_count (4)                          *)
+(*            nonperturbative_main                          *)
 (* ========================================================================= *)

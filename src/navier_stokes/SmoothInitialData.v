@@ -323,14 +323,15 @@ Theorem smooth_stays_smooth : forall nu K (a0 : modal_state) C0,
   0 < nu ->
   smooth_initial K a0 C0 ->
   C0 <= A_inv nu ->
-  (* REGULARITY: solution stays smooth for all time *)
-  (* Proof: a(0) ∈ R → R invariant → a(t) ∈ R → enstrophy bounded *)
-  in_region nu K a0 /\ True.
+  (* ENTRY into the invariant region R (June 2026: dropped a vacuous `/\ True`
+     that stood for "stays smooth for all time" without carrying it; the
+     invariance of R is InvariantRegion's theorem, and the all-time regularity
+     chain is assembled in ResolutionRegularity / NSComplete — conditional on
+     the NS-wall axioms, see HeavyWallAudit). *)
+  in_region nu K a0.
 Proof.
   intros nu K a0 C0 Hnu Hsmooth HC0A.
-  split.
-  - eapply smooth_data_in_region; eassumption.
-  - exact I.
+  eapply smooth_data_in_region; eassumption.
 Qed.
 
 (* General smooth data: split into low + high modes *)

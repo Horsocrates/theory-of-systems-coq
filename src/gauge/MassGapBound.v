@@ -216,8 +216,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : mass_gap_lower_bound == 9#4.
-Proof. exact the_number. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -229,5 +228,5 @@ Proof. exact the_number. Qed.
 (*           gap_quantitative (3)                                           *)
 (*  Part III: mass_gap_chain (1)                                            *)
 (*  Part IV: what_is_proved_step7, what_is_open_step7 (2)                  *)
-(*  Part V: step7_synthesis, the_number, total_count (3)                   *)
+(*  Part V: step7_synthesis, the_number                   *)
 (* ========================================================================= *)

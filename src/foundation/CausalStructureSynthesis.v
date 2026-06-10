@@ -153,7 +153,9 @@ Proof. exact time_interval_negative. Qed.
   — Exactly 1 time dimension (nat has 1 S constructor)
 
   WHAT THIS DOES NOT PROVE:
-  — d = 3 spatial dimensions (derived in DimensionFromSpin.v via stability argument)
+  — d = 3 spatial dimensions (DimensionFromSpin.v pins d=3 only as the INTERSECTION of two
+    posited bounds — the stability model gives d<=3, the spin-1 lower bound is a posit;
+    see its June-2026 honest header)
   — Continuous spacetime (only lattice causal structure shown here)
   — Diffeomorphism invariance (requires process limit framework)
 

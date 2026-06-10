@@ -2,7 +2,7 @@
 
 _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**11 files / 169 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=6 / s1=0 / s0=0
+**12 files / 180 Qed.** Score distribution: s5=0 / s4=0 / s3=5 / s2=7 / s1=0 / s0=0
 
 ---
 
@@ -436,4 +436,38 @@ _Generated from `log2.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Uniqueness - score 2 (synthesis).** Машинно 0-аксиомная домината (n-я стадия eval(gᵏ) ≤ (n-я стадия eval g)ᵏ) + σₙ≤1/(1−z) — стандартное свёрточное неравенство, дающее суммируемую мажоранту для Tannery-замыкания композиционной теоремы ln_mul.
 > _Caveat:_ Само неравенство Σconv≤(Σ)(Σ) для неотрицательных — классика (уже было conv_le_square). Ценность: применение к eval-степеням как домината для Таннери. Не новый матфакт.
+
+---
+
+## #1845 - `src/LnMulClosed.v` - score 2 (synthesis)
+
+**ln_mul HORIZON CLOSED: L(x)+L(y) ~~ L(x(+)y) over Q, 0 new axioms (H59 capstone)**
+
+- **Topic.** boss : exp_R(ln_proc z) ~~ eval(exp.log1m) z -- the composition theorem via Tannery. On stage n: cs_seq(exp_R(ln_proc z)) n = Sum_{k<=n}(s_n)^k/k! (exp_R diagonal, exp_R_stage) vs cs_seq(eval(exp.log1m) z) n = Sum_{k<=n}(1/k!)P_{k,n} (finite Fubini, eval_compose_swap); D_n = Sum_{k<=n}(1/k!)((s_n)^k - P_{k,n}); |D_n| <= Sum_{k<=n} a_{k,n} -> 0 by tannery with a_{k,n}=(1/k!)|(s_n)^k - P_{k,n}|, M_k=(1/k!)2B^k (B=1/(1-z); domination P_{k,n}<=sigma_n^k<=B^k from P_le_sigma_pow+sigma_bound+Qpow_le_compat; s_n<=B from eval_log1m_shift+sigma_bound), per-k a_{k,n}->0 from eval_pow (s_n^k=cs_seq(cauchy_pow(ln_proc z) k) n via cs_seq_cauchy_pow, P_{k,n}=cs_seq(eval(log1m^k) z) n, and cauchy_pow(ln_proc z) k ~~ eval(log1m^k) z via cauchy_pow_compat+eval_log1m+eval_pow). Then KEY exp_R_ln_proc_is_geom : exp_R(ln_proc z) ~~ 1/(1-z) (boss + eval_compose_exp_log1m_geom = formal heart E.L computed); and ln_mul_closed : ln_mul_functional_equation (ln_mul_from_key applied to KEY -- horizon DISCHARGED).
+- **Role.** CAPSTONE of the entire ln_mul / H59 function-as-process program (the closing brick #4). Consumes Tannery (tannery), the domination (LnMulComposition: P_le_sigma_pow/sigma_bound/log1m_nonneg/eval_terms_nonneg/fps_pow_nonneg), the analytic bridge (FPSEval: eval_pow/eval_log1m/eval_compose_swap/eval_compose_exp_log1m_geom/abs_conv_pow/abs_conv_eval_cauchy), the process exponential (ProcessExp: exp_R) and the endgame reduction (LnMulReduction: exp_R_stage/ln_mul_from_key). Closes the horizon documented as a Prop in Log2FunctionalEq (ln_mul_functional_equation) WITHOUT Admitted and WITHOUT any remaining hypothesis. Vein C. Inherits only classic (real analysis).
+- **Counts.** Qed 11 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith; Qabs; Lqa; Lia; ZArith; ToS: CauchyReal; RealField; SeriesConvergence; CauchyProduct; PowerSeries; ExpFunctionalEquation; zeta.LogZeta; Log2Process; FormalPowerSeries; FPSEval; LnMulComposition; Tannery; ProcessExp; Log2FunctionalEq; LnMulReduction
+- **E/R/R.** _Elements:_ на каждой стадии n — конечные Q-суммы Σ_{k≤n}; ни одного актуально-бесконечного объекта. _Roles:_ boss = роль-склейка диагонали exp_R и конечного Fubini композиции (доминированная перестановка предела и суммы, Таннери); exp_R_ln_proc_is_geom = роль-КЛЮЧ; ln_mul_closed = роль-ЗАМЫКАНИЕ горизонта. _Rules:_ домината aₖₙ≤Mₖ (Pₖₙ≤σₙᵏ + σₙ,sₙ≤B); ΣM=2exp(B) сходится; per-k aₖₙ→0 (eval_pow: степень числа-процесса=предел процесса степеней); треугольник+Таннери ⟹ \|Dₙ\|→0; ln_mul_from_key. _P4:_ exp_R∘ln_proc и eval(exp∘log1m) — потенциальные процессы, НЕ равные поэлементно при конечном n (диагональ vs Fubini), равны лишь как ПРЕДЕЛЫ; Таннери = легальная доминированная перестановка, не завершённая бесконечность. Наследует только classic (честный анализ, не 0-аксиомная алгебра).
+- **Classical counterpart.** The logarithm functional equation log(ab)=log a + log b (equivalently -ln(1-x) additivity under x(+)y=x+y-xy) is classical and elementary. NEW: its COMPLETE closure as a Cauchy-PROCESS equality over Q (~~), machine-checked, with NO remaining hypothesis and 0 axioms beyond the global L3 classic -- the capstone of the H59 function-as-process program. The composition theorem exp_R(ln_proc z) ~~ eval(exp.log1m) z is proved by Tannery DOMINATED diagonal convergence, reconciling the exp_R diagonal (powers of the n-th log partial sum) with the finite Fubini of the formal composition (n-th partial sums of the k-th power series) -- two processes that DIFFER at finite n and agree only in the limit.
+- **Tags.** ln-mul, horizon-closed, functional-equation, process, H59-capstone, tannery, 0-new-axioms, vein-C, synthesis
+
+**Lemmas (7):**
+
+| name | kind | role |
+|---|---|---|
+| `Qabs_sub_le/cs_seq_cauchy_pow/cauchy_pow_compat/Qpow_le_compat` | Lemma | аналитические хелперы: \|a−b\|≤\|a\|+\|b\|; cs_seq(Pᵏ)n=(cs_seq P n)ᵏ; конгруэнтность Pᵏ по ~~; монотонность aᵏ по основанию |
+| `log1m_coeff_le1/abs_conv_log1m` | Lemma | \|log1m_n\|≤1; абс-сходимость лог-ряда eval |
+| `eval_log1m_shift/s_bound` | Lemma | σ_{S n}=log_series_partial z n; 0≤sₙ≤1/(1−z) |
+| `lnmul_aT/lnmul_MT` | Definition | aₖₙ=(1/k!)\|(sₙ)ᵏ−Pₖₙ\|; Mₖ=(1/k!)2Bᵏ — данные Таннери |
+| `boss` | Lemma | ★★★ КОМПОЗИЦИОННАЯ ТЕОРЕМА: exp_R(ln_proc z) ~~ eval(exp∘log1m) z (доминированная диагональ Таннери) |
+| `exp_R_ln_proc_is_geom` | Theorem | ★★ КЛЮЧ: exp_R(ln_proc z) ~~ 1/(1−z) (boss + перенос формального сердца E∘L) |
+| `ln_mul_closed` | Theorem | ★★★ ГОРИЗОНТ ЗАМКНУТ: L(x)+L(y) ~~ L(x⊕y) (ln_mul_from_key к ключу, без гипотез) |
+
+**Key lemmas (deep):**
+
+- **`ln_mul_closed`** - ★★★ ЗАМЫКАНИЕ ГОРИЗОНТА ln_mul: L(x)+L(y) ~~ L(x⊕y) (x⊕y=x+y−xy) как РАВЕНСТВО ПРОЦЕССОВ над Q — БЕЗ единственной оставшейся гипотезы, 0 НОВЫХ аксиом (только classic). Капстоун многофайловой программы H59 «функция-как-процесс»: ln_mul_from_key (эндшпиль LnMulReduction) применён к доказанному ключу exp_R(ln_proc z)~~1/(1−z). Горизонт, выписанный как Prop-документ в Log2FunctionalEq (без Admitted), теперь ДОКАЗАН. Завершает цепочку: формальное сердце E∘L=1/(1−x) (0-аксиомно, FormalPowerSeries) → аналитический мост eval (FPSEval) → вещественная экспонента+инъективность (ProcessExp) → произведение Коши/Мертенс (CauchyProduct) → домината+Таннери (LnMulComposition+Tannery) → эта склейка. Образец честности P4: недоказанное было выписано точной Prop, затем закрыто без фальсификации. _(ln-mul, horizon-closed, functional-equation, process-equality, H59-capstone, 0-new-axioms, vein-C)_
+- **`boss`** - ★★★ КОМПОЗИЦИОННАЯ ТЕОРЕМА (boss): exp_R(ln_proc z) ~~ eval(exp∘log1m) z. Две стороны на стадии n РАЗЛИЧНЫ: cs_seq(exp_R(ln_proc z))n=Σ_{k≤n}(sₙ)ᵏ/k! (диагональ exp_R — степени n-й частичной суммы лог-ряда) vs cs_seq(eval(exp∘log1m)z)n=Σ_{k≤n}(1/k!)Pₖₙ (конечный Fubini композиции — n-е частичные суммы k-х степенных рядов); совпадают лишь в ПРЕДЕЛЕ. Доказательство — теорема Таннери: \|Dₙ\|=\|Σ_{k≤n}(1/k!)((sₙ)ᵏ−Pₖₙ)\| ≤ Σ aₖₙ→0, где домината aₖₙ≤Mₖ=(1/k!)2Bᵏ (B=1/(1−z), из Pₖₙ≤σₙᵏ≤Bᵏ и sₙ≤B), а per-k aₖₙ→0 БЕСПЛАТНО из eval_pow (степень числа-процесса (sₙ)ᵏ=cs_seq(cauchy_pow(ln_proc z)k)n совпадает с пределом процесса степеней коэффициентов Pₖₙ=cs_seq(eval(log1m^k)z)n, ибо cauchy_pow(ln_proc z)k ~~ eval(log1m^k)z). Маршрут ОБОШЁЛ и гармоническую оценку exp(Hₙ), и точное совпадение коэффициентов. Только classic. _(composition-theorem, tannery, dominated-convergence, diagonal-vs-fubini, process-equality, ln-mul, vein-C)_
+
+**Uniqueness - score 2 (synthesis).** Полное ЗАМЫКАНИЕ горизонта ln_mul (L(x)+L(y)~~L(x⊕y), функц. уравнение логарифма) как равенства ПРОЦЕССОВ над Q, машинно, 0 НОВЫХ аксиом (только classic), БЕЗ оставшихся гипотез — капстоун многофайловой программы H59 «функция-как-процесс». Композиционная теорема exp_R∘ln_proc=eval(exp∘log1m) доказана доминированной диагональной сходимостью (Таннери), примиряющей диагональ exp_R и конечный Fubini композиции.
+> _Caveat:_ Само функц. уравнение логарифма классично (элементарно). Уникальность — в ПОЛНОМ конструктивно-над-Q аксиомо-минимальном (только classic) замыкании как process-equality, в честном разрезе (горизонт-Prop → доказано без Admitted) и в синтезе многофайлового маршрута (формальное сердце→eval-мост→exp_R→Мертенс→Таннери), а НЕ новый матфакт.
 

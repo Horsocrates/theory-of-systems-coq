@@ -34,8 +34,8 @@ Proof. vm_compute. reflexivity. Qed.
 
 (** Z_grav is well-defined Q at each K *)
 Theorem qg_is_finite : forall valence K M beta_grav,
-  exists q, qg_boltzmann valence K M beta_grav == q.
-Proof. intros. exists (qg_boltzmann valence K M beta_grav). reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), qg_boltzmann valence K M beta_grav = num # den.
+Proof. intros. destruct (qg_boltzmann valence K M beta_grav) as [num den]. exists num, den. reflexivity. Qed.
 
 (** ★ Standard QG: Z = ∫ Dg exp(-S_EH) → UNDEFINED *)
 (** Regge QG: Z = Σ exp(-S_Regge) → FINITE Q at each K *)
@@ -45,7 +45,7 @@ Proof. intros. exists (qg_boltzmann valence K M beta_grav). reflexivity. Qed.
 Theorem qg_path_integral_foundation :
   qg_action 6 0%nat == 0 /\
   qg_boltzmann 6 0%nat 0%nat 1 == 1 /\
-  (forall v K M b, exists q, qg_boltzmann v K M b == q).
+  (forall v K M b, exists (num : Z) (den : BinNums.positive), qg_boltzmann v K M b = num # den).
 Proof.
   split; [|split].
   - exact (qg_action_flat 0%nat).

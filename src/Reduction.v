@@ -282,10 +282,15 @@ Proof.
   - simpl. rewrite try_step_value_none. reflexivity. exact Hv.
 Qed.
 
+(** At every fuel stage the result is INSPECTABLE: valuehood is decidable
+    (June 2026: was the vacuous `exists v, eval_fuel fuel e = v`). *)
 Lemma eval_fuel_terminates : forall e fuel,
-  exists v, eval_fuel fuel e = v.
+  is_value (eval_fuel fuel e) \/ ~ is_value (eval_fuel fuel e).
 Proof.
-  intros e fuel. exists (eval_fuel fuel e). reflexivity.
+  intros e fuel.
+  destruct (is_value_dec (eval_fuel fuel e)) as [Hv | Hnv].
+  - left. exact Hv.
+  - right. exact Hnv.
 Qed.
 
 (* Transparent definition for try_step on EFst (EPair ...) *)

@@ -1,9 +1,14 @@
 (* ================================================================== *)
 (*  SpeedOfLight.v                                                     *)
-(*  Speed of light from graph structure                                *)
-(*  STATUS: COMPLETE  (10 Qed, 0 Admitted)                            *)
-(*  Author: Horsocrates                                                *)
-(*  Date:   April 2026                                                 *)
+(*  Speed of light as the causal bound of the graph model — June 2026 *)
+(*  honesty rollback: 2 True-stubs removed (c_is_graph_property,       *)
+(*  why_nothing_faster) and 1 FAKE theorem fixed (the old              *)
+(*  massive_dispersion_bigger concluded `0 < 1`, hypothesis discarded).*)
+(*  Real general layer: massive_dispersion_bigger (actual statement),  *)
+(*  speed_bounded_by_c (v ≤ c ∀ m, ω>0), massive_strictly_slower —     *)
+(*  all WITHIN the posited v_g model (the model itself is an input).   *)
+(*  STATUS: 10 Qed, 0 Admitted, 0 axioms                               *)
+(*  Author: Horsocrates | Date: April 2026 (rollback: June 2026)       *)
 (* ================================================================== *)
 
 From Stdlib Require Import QArith Qabs Lia ZArith List PeanoNat.
@@ -63,29 +68,54 @@ Theorem massless_dispersion_linear :
   dispersion_massless 3 == 3.
 Proof. vm_compute. reflexivity. Qed.
 
-(** Massive dispersion: omega^2 > k^2 *)
-Theorem massive_dispersion_bigger : forall k : Q,
-  k * k < dispersion_massive_sq k 1 ->
-  0 < 1.
-Proof. intros k _. vm_compute. reflexivity. Qed.
+(* June 2026 honesty rollback: REMOVED two True-stubs (c_is_graph_property,
+   why_nothing_faster) and FIXED a fake theorem: the old massive_dispersion_bigger
+   had conclusion `0 < 1` with its hypothesis discarded — it proved nothing.
+   Real general layer below: the dispersion inequality as an actual statement, and
+   the causal bound v ≤ c for ALL masses/frequencies (strict for massive) — the
+   honest content of "c bounds everything" WITHIN this file's posited v_g model. *)
 
-(** c is a graph property (conceptual) *)
-Theorem c_is_graph_property : True.
-Proof. exact I. Qed.
+(** Massive dispersion, REAL statement: ω² = k² + m² > k² for positive mass. *)
+Theorem massive_dispersion_bigger : forall k m : Q,
+  0 < m -> k * k < dispersion_massive_sq k m.
+Proof. intros k m Hm. unfold dispersion_massive_sq. nra. Qed.
 
-(** Nothing faster because edges are discrete (conceptual) *)
-Theorem why_nothing_faster : True.
-Proof. exact I. Qed.
+(** ★ The causal limit BOUNDS the model's speeds: v ≤ c for all m, all ω > 0. *)
+Theorem speed_bounded_by_c : forall m omega : Q,
+  0 < omega -> vertex_wave_speed_approx m omega <= causal_limit.
+Proof.
+  intros m omega Hw. unfold vertex_wave_speed_approx, causal_limit.
+  assert (Hden : 0 < 2 * omega * omega) by nra.
+  assert (Hfrac : 0 <= m * m / (2 * omega * omega)).
+  { unfold Qdiv. apply Qmult_le_0_compat.
+    - nra.
+    - apply Qlt_le_weak, Qinv_lt_0_compat. exact Hden. }
+  lra.
+Qed.
+
+(** ★ Massive ⟹ STRICTLY slower than c (general; was only the m=1, ω=2 instance). *)
+Theorem massive_strictly_slower : forall m omega : Q,
+  0 < m -> 0 < omega -> vertex_wave_speed_approx m omega < causal_limit.
+Proof.
+  intros m omega Hm Hw. unfold vertex_wave_speed_approx, causal_limit.
+  assert (Hden : 0 < 2 * omega * omega) by nra.
+  assert (Hfrac : 0 < m * m / (2 * omega * omega)).
+  { unfold Qdiv. apply Qmult_lt_0_compat.
+    - nra.
+    - apply Qinv_lt_0_compat. exact Hden. }
+  lra.
+Qed.
 
 (** === SYNTHESIS === *)
 Theorem speed_of_light_synthesis :
   edge_wave_speed_low_k == causal_limit /\
   vertex_wave_speed_approx 0 2 == causal_limit /\
   vertex_wave_speed_approx 1 2 < causal_limit /\
-  True (* c is a structural property of the graph *).
+  (forall m omega : Q,
+     0 < omega -> vertex_wave_speed_approx m omega <= causal_limit).
 Proof.
   split. { vm_compute. reflexivity. }
   split. { vm_compute. reflexivity. }
   split. { vm_compute. reflexivity. }
-  exact I.
+  exact speed_bounded_by_c.
 Qed.

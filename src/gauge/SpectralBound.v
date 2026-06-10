@@ -263,8 +263,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : spectral_gap_lower 8 == 0.
-Proof. exact spectral_gap_at_8. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -278,5 +277,5 @@ Proof. exact spectral_gap_at_8. Qed.
 (*  Part III: tension_2nd_at_8, tension_2nd_positive_at_8,                   *)
 (*            correction_ratio_small, strong_coupling_diagnosis (4)          *)
 (*  Part IV: spectral_bound_result, tension_implies_larger_matrix,           *)
-(*           spectral_main, total_count (4)                                  *)
+(*           spectral_main                                  *)
 (* ========================================================================= *)

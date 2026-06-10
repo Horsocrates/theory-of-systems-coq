@@ -7,8 +7,10 @@
 (*  KEY PROPERTY: sum B_{klm} a_k a_l a_m = 0                               *)
 (*  (nonlinear term conserves energy via antisymmetry)                        *)
 (*                                                                            *)
-(*  STATUS: ~45 Qed, 0 Admitted                                              *)
-(*  AXIOM: B_antisym (advection antisymmetry)                                *)
+(*  STATUS: ~46 Qed, 0 Admitted                                              *)
+(*  AXIOMS: none (June 2026: B_antisym ELIMINATED — B_coeff is now the       *)
+(*    antisymmetrization of the abstract Parameter B_raw, so antisymmetry    *)
+(*    is a Lemma by construction; see PART IV)                               *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (* ========================================================================= *)
 
@@ -175,14 +177,46 @@ Qed.
 
 (* ========================================================================= *)
 (*  PART IV: Nonlinear Term and B Antisymmetry                                *)
+(*                                                                            *)
+(*  June 2026 — AXIOM ELIMINATED (was: Axiom B_antisym about an abstract     *)
+(*  Parameter B_coeff).  B_coeff is now the ANTISYMMETRIZATION of an          *)
+(*  abstract raw coupling, so antisymmetry is structure (a Lemma), not a      *)
+(*  postulate.  Downstream files are unchanged: same name, same statement.    *)
+(*                                                                            *)
+(*  ============ E/R/R разбор ============                                    *)
+(*    Elements: сырое модальное сопряжение B_raw k l m : Q (проекция          *)
+(*              адвекционного тензора на тройку мод; носитель без структуры). *)
+(*    Roles:    в кубической сумме энергии Σ B·a_k·a_l·a_m фактор a_l·a_m     *)
+(*              СИММЕТРИЧЕН по (l,m) — работу совершает только                *)
+(*              антисимметричная часть сопряжения; симметричная часть         *)
+(*              аннулируется в сумме тождественно.                            *)
+(*    Rules:    B_coeff := B_raw k l m − B_raw k m l — антисимметризация      *)
+(*              (выделение работающей части); антисимметрия по построению.    *)
+(*  ДИАГНОСТИКА (P4): постулировать антисимметрию у абстрактного B — значит   *)
+(*  приписать Элементу то, что следует из его Роли в Правиле энергобаланса.   *)
+(*  Не затронуто (честный обрыв): B_coeff_bounded (величина каскада, стена    *)
+(*  α=2, TriadicInteraction.v) — подлинно несущая гипотеза, остаётся          *)
+(*  аксиомой; C_B_positive — нормировка-вход.  Спуск того же содержания в     *)
+(*  grid-пространстве: AdvectionEnergyConservation.v (кубическое              *)
+(*  телескопирование, 0 аксиом).                                              *)
 (* ========================================================================= *)
 
-(** Abstract nonlinear coupling coefficient *)
-Parameter B_coeff : nat -> nat -> nat -> Q.
+(** Abstract RAW modal coupling (the un-symmetrized projection of the
+    advection tensor).  A conservative Parameter (inhabited: it could be
+    fun _ _ _ => 0); it shows in Print Assumptions as a Parameter, not an
+    Axiom — no propositional content is assumed about it. *)
+Parameter B_raw : nat -> nat -> nat -> Q.
 
-(** The key structural axiom: B(k,l,m) = -B(k,m,l)
-    This encodes antisymmetry of the advection operator *)
-Axiom B_antisym : forall k l m, B_coeff k l m == -(B_coeff k m l).
+(** The advection coefficient IS the antisymmetrization of the raw coupling
+    in its last two slots.  Only this part does work in the cubic energy
+    sum: a_l * a_m is (l,m)-symmetric, so the symmetric part of any
+    coupling cancels there identically. *)
+Definition B_coeff (k l m : nat) : Q := B_raw k l m - B_raw k m l.
+
+(** The former axiom, now a STRUCTURAL lemma: antisymmetry by construction
+    (June 2026: was `Axiom B_antisym` about an abstract Parameter B_coeff). *)
+Lemma B_antisym : forall k l m, B_coeff k l m == -(B_coeff k m l).
+Proof. intros k l m. unfold B_coeff. ring. Qed.
 
 (** Fubini theorem for finite sums: swap summation order *)
 Lemma sum_ns_swap : forall K1 K2 (f : nat -> nat -> Q),
@@ -461,5 +495,6 @@ Qed.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
-(*  ~45 Qed, 0 Admitted, 1 Axiom (B_antisym)                                 *)
+(*  ~46 Qed, 0 Admitted, 0 axioms (B_antisym eliminated June 2026:           *)
+(*  antisymmetrization of Parameter B_raw)                                   *)
 (* ========================================================================= *)

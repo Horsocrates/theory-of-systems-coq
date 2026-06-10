@@ -1,5 +1,17 @@
-(** HiggsDiagnostic.v — Grand synthesis: fermion physics on distinction graph *)
-(** Combines Dirac spectrum, Yukawa, top loop, gauge loops          *)
+(** * HiggsDiagnostic.v — fermion-branch synthesis: aggregates Dirac/Yukawa/loops
+    Elements: the concrete corrections (top −11/8, gauge +147/110, total +537/1760)
+    Roles:    aggregator — restates the branch's key facts in one place
+    Rules:    all content imported/recomputed from DiracOnGraph, YukawaCoupling,
+              TopLoop, GaugeLoops; nothing new is posited here
+    STATUS: 8 Qed, 0 Admitted, 0 axioms
+    Author: Horsocrates | Date: April 2026  (True-stub honesty rollback: June 2026)
+
+    HONEST STATUS: June 2026 — REMOVED `dirac_spectrum_from_graph : True` and
+    `yukawa_from_L2 : True` (stubs).  REPLACED by the real general facts the branch
+    now provides: the Dirac gap bound at ALL momenta (eigenvalue_gap_general, re-stated
+    here as dirac_gap_at_all_momenta) and the general Yukawa ratio law
+    (mass_ratio_is_yukawa_ratio, re-stated as yukawa_ratio_law) — the couplings
+    themselves are DATA inputs (see YukawaCoupling.v June-2026 header). *)
 
 From Stdlib Require Import QArith Qabs Lia ZArith List PeanoNat.
 From Stdlib Require Import Lqa.
@@ -66,14 +78,20 @@ Proof.
 Qed.
 
 (* ================================================================= *)
-(* Conceptual points                                                 *)
+(* June 2026 — the real general facts (replace the removed stubs)    *)
 (* ================================================================= *)
 
-Theorem dirac_spectrum_from_graph : True.
-Proof. exact I. Qed.
+(** The Dirac gap holds at ALL momenta (from DiracOnGraph.eigenvalue_gap_general). *)
+Theorem dirac_gap_at_all_momenta : forall (k N : nat) (m : Q),
+  m * m <= dirac_eigenvalue_sq k N m.
+Proof. exact eigenvalue_gap_general. Qed.
 
-Theorem yukawa_from_L2 : True.
-Proof. exact I. Qed.
+(** The Yukawa RATIO law, general (the scale v cancels) — from
+    YukawaCoupling.mass_ratio_is_yukawa_ratio; the VALUES stay data inputs. *)
+Theorem yukawa_ratio_law : forall y Y v : Q,
+  ~ Y == 0 -> ~ v == 0 ->
+  fermion_mass y v / fermion_mass Y v == y / Y.
+Proof. exact mass_ratio_is_yukawa_ratio. Qed.
 
 (* ================================================================= *)
 (* Grand Synthesis                                                   *)

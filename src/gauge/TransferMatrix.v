@@ -303,8 +303,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (25 = 25)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -322,5 +321,5 @@ Proof. reflexivity. Qed.
 (*  Part V: gap_monotone_beta, transfer_positive_entries,                    *)
 (*          rayleigh_ground_state, rayleigh_excited_state (4)               *)
 (*  Part VI: transfer_matrix_summary, transfer_matrix_main,                  *)
-(*           total_count (3)                                                *)
+(*           tail-stamp removed                                                *)
 (* ========================================================================= *)

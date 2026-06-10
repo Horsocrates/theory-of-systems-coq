@@ -202,8 +202,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : 0 < 2#15.
-Proof. exact cofactor_sum_positive. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -219,5 +218,5 @@ Proof. exact cofactor_sum_positive. Qed.
 (*            quadratic_at_2_3, quadratic_at_2_3_positive (4)                *)
 (*  Part VII: discriminant_value, discriminant_positive,                      *)
 (*             roots_opposite_sign, roots_sum (4)                             *)
-(*  Part VIII: eigenvalues_main, total_count (2)                              *)
+(*  Part VIII: eigenvalues_main                              *)
 (* ========================================================================= *)

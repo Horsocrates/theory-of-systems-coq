@@ -139,8 +139,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : anti_trace_value = anti_trace_value.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -150,5 +149,5 @@ Proof. reflexivity. Qed.
 (*  Part II: n_offdiag_10_01..12_21 (6)                                      *)
 (*  Part III: anti_diag_10/20/21, anti_trace_value,                          *)
 (*            sym_trace_value, anti_trace_positive (6)                       *)
-(*  Part IV: eigen_analysis_2d_main, total_count (2)                         *)
+(*  Part IV: eigen_analysis_2d_main                         *)
 (* ========================================================================= *)

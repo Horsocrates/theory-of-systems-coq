@@ -2,7 +2,7 @@
 
 _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**8 files / 79 Qed.** Score distribution: s5=0 / s4=0 / s3=0 / s2=1 / s1=7 / s0=0
+**8 files / 81 Qed.** Score distribution: s5=0 / s4=0 / s3=0 / s2=1 / s1=7 / s0=0
 
 ---
 
@@ -11,7 +11,7 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 **Color as frequency: edge-mode count over Q**
 
 - **Topic.** Edge-mode counts and frequencies on small graphs, color identified with frequency, white as all modes, blackbody and 'vision as graph Fourier transform'.
-- **Role.** Leaf of the light-from-graph branch. Self-contained.
+- **Role.** Leaf of the light-from-graph branch. Self-contained. June 2026 rollback: 4 True-stubs REMOVED (blackbody/vision_as_GFT RETIRED — no statistics/GFT layer); real layer: mode_frequency_increasing (color=frequency injective), literal mode_list + white_contains_every_mode, n_edge_modes_monotone (general).
 - **Counts.** Qed 8 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ рёберные моды графа; частоты. _Roles:_ цвет = частота (роль); белый = все моды. _Rules:_ more_vertices_more_colors; color_is_frequency; white_is_all_modes. _P4:_ конечный набор мод графа (Element); цвет как частотная роль.
@@ -22,9 +22,9 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 
 | name | kind | role |
 |---|---|---|
-| `n_edge_modes/mode_frequency/blackbody/vision_as_GFT` | Definition | моды, частоты, вид как GFT |
-| `five_vertices_four_colors/eight_vertices_seven_colors/more_vertices_more_colors` | Theorem | ★ больше вершин — больше цветов |
-| `color_is_frequency/white_is_all_modes/color_spectrum_synthesis` | Theorem | цвет=частота; белый=все моды |
+| `n_edge_modes/mode_frequency/blackbody/vision_as_GFT` | Definition | моды, частоты, вид как GFT June 2026 rollback: 4 True-stubs REMOVED (blackbody/vision_as_GFT RETIRED — no statistics/GFT layer); real layer: mode_frequency_increasing (color=frequency injective), literal mode_list + white_contains_every_mode, n_edge_modes_monotone (general). |
+| `five_vertices_four_colors/eight_vertices_seven_colors/more_vertices_more_colors` | Theorem | ★ больше вершин — больше цветов June 2026 rollback: 4 True-stubs REMOVED (blackbody/vision_as_GFT RETIRED — no statistics/GFT layer); real layer: mode_frequency_increasing (color=frequency injective), literal mode_list + white_contains_every_mode, n_edge_modes_monotone (general). |
+| `color_is_frequency/white_is_all_modes/color_spectrum_synthesis` | Theorem | цвет=частота; белый=все моды June 2026 rollback: 4 True-stubs REMOVED (blackbody/vision_as_GFT RETIRED — no statistics/GFT layer); real layer: mode_frequency_increasing (color=frequency injective), literal mode_list + white_contains_every_mode, n_edge_modes_monotone (general). |
 
 **Key lemmas (deep):**
 
@@ -69,8 +69,8 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 **Light/gravity over Q: spin-1 vs spin-2, both massless at c**
 
 - **Topic.** Transverse modes in 3D, light spin-1 vs gravity spin-2, edge wave speed, the causal limit, graviton speed, two polarizations, both massless at c, and a Kaluza-Klein hint.
-- **Role.** Leaf relating the light and gravity sub-branches. Self-contained.
-- **Counts.** Qed 10 / Admitted 0 / axioms 0
+- **Role.** Leaf relating the light and gravity sub-branches. Self-contained. June 2026 rollback: 3 True-stubs REMOVED (transverse/longitudinal need mode decomposition; kaluza_klein_hint needs a 5th dimension — RETIRED); real replacement: same_speed_different_spin.
+- **Counts.** Qed 8 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ поперечные моды; спины 1 и 2. _Roles:_ свет = поперечная роль (spin-1); гравитация = метрическая роль (spin-2). _Rules:_ light_spin_one; gravity_spin_two; both_massless; both_at_c. _P4:_ конечные моды (Element); безмассовость = распространение на причинном пределе.
 - **Classical counterpart.** Light is spin-1 and the graviton spin-2, both massless propagating at c with two polarizations; here only a tiny graph-mode analogy (transverse=light, longitudinal=metric, a Kaluza-Klein hint).
@@ -80,9 +80,9 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 
 | name | kind | role |
 |---|---|---|
-| `n_transverse_3d/light_spin/gravity_spin/edge_wave_speed_low_k/causal_limit/graviton_speed/two_polarizations` | Definition | поперечные моды, спины, скорости |
-| `light_spin_one/gravity_spin_two/both_massless/graviton_at_c/spin_difference` | Theorem | ★ спин-1 vs спин-2, оба безмассовы |
-| `transverse_is_light/longitudinal_is_metric/kaluza_klein_hint/light_gravity_synthesis` | Theorem | поперечное=свет; продольное=метрика |
+| `n_transverse_3d/light_spin/gravity_spin/edge_wave_speed_low_k/causal_limit/graviton_speed/two_polarizations` | Definition | поперечные моды, спины, скорости June 2026 rollback: 3 True-stubs REMOVED (transverse/longitudinal need mode decomposition; kaluza_klein_hint needs a 5th dimension — RETIRED); real replacement: same_speed_different_spin. |
+| `light_spin_one/gravity_spin_two/both_massless/graviton_at_c/spin_difference` | Theorem | ★ спин-1 vs спин-2, оба безмассовы June 2026 rollback: 3 True-stubs REMOVED (transverse/longitudinal need mode decomposition; kaluza_klein_hint needs a 5th dimension — RETIRED); real replacement: same_speed_different_spin. |
+| `transverse_is_light/longitudinal_is_metric/kaluza_klein_hint/light_gravity_synthesis` | Theorem | поперечное=свет; продольное=метрика June 2026 rollback: 3 True-stubs REMOVED (transverse/longitudinal need mode decomposition; kaluza_klein_hint needs a 5th dimension — RETIRED); real replacement: same_speed_different_spin. |
 
 **Key lemmas (deep):**
 
@@ -123,11 +123,11 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 
 ## #598 - `src/light/MaxwellFromGraph.v` - score 2 (methods)
 
-**Maxwell from a graph over Q: discrete Gauss/Faraday/wave (a framing)**
+**Maxwell-SHAPED discrete operators over Q: real identities (superposition, antisymmetry, d∘d=0); 4 True-stubs REMOVED (June 2026)**
 
-- **Topic.** Magnetic field from electric, a discrete Gauss law (zero/positive charge), discrete magnetic divergence, antisymmetric curl, Faraday's law, the wave equation from Maxwell, charge as source, and 'Maxwell not postulated'.
-- **Role.** Central leaf of the light-from-graph branch; the 'derivation' claim. Self-contained.
-- **Counts.** Qed 12 / Admitted 0 / axioms 0
+- **Topic.** Face-curl and vertex-sum operators; GENERAL identities: curl_uniform_zero, curl_antisymmetric, curl_superposition (linearity), curl_of_gradient_zero (d∘d=0 — gradient fields curl-free), gauss_additive, gauss_two_balanced_iff (charge = imbalance); concrete instances. June 2026: faraday / wave_from_maxwell / maxwell_not_postulated / charge_as_source True-stubs REMOVED (no time layer ⟹ no dynamics claims).
+- **Role.** Central leaf of the light-from-graph branch. June 2026 honesty rollback: the 'Maxwell not postulated / derived' claim RETIRED — four `True`-stubs removed (they violated the 0-True rule), replaced by real general identities incl. d∘d=0; honest scope = Maxwell-SHAPED statics, no dynamics. Self-contained.
+- **Counts.** Qed 15 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ поля E,B на графе; заряд как источник. _Roles:_ уравнения Максвелла = роли (Гаусс, Фарадей, волна) на графе. _Rules:_ gauss_electric_sum; curl_antisymmetric; faraday; wave_from_maxwell. _P4:_ дискретный векторный анализ на конечном графе (Element); «Максвелл не постулируется» = переобрамление, не физический вывод.
 - **Classical counterpart.** Maxwell's equations as discrete vector calculus (graph div/curl, Gauss, Faraday, wave equation) is the standard discrete-exterior-calculus picture; the framing 'Maxwell not postulated but derived from a graph' is a re-casting, not a new physical derivation.
@@ -185,8 +185,8 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 **Refraction and diffraction over Q: Fresnel coefficients, R+T=1**
 
 - **Topic.** Reflection/transmission coefficients, no reflection at matched impedance, concrete reflection values, full reflection at large mismatch, R+T energy conservation, total internal reflection, diffraction.
-- **Role.** Leaf of the light branch. Self-contained.
-- **Counts.** Qed 10 / Admitted 0 / axioms 0
+- **Role.** Leaf of the light branch. Self-contained. June 2026 rollback: 2 True-stubs REMOVED (TIR needs Snell, diffraction needs aperture — RETIRED); real general layer: energy_conserved_general (R+T=1 forall), reflection_symmetric_general, reflection_below_one.
+- **Counts.** Qed 11 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ коэффициенты отражения/прохождения; импедансы. _Roles:_ граница раздела = роль; R,T как роли-доли энергии. _Rules:_ reflection_coeff/transmission_coeff; energy_conserved (R+T=1); total_internal_reflection. _P4:_ конечные коэффициенты над Q (Element); R+T=1 как точное тождество.
 - **Classical counterpart.** Fresnel reflection/transmission coefficients, energy conservation R+T=1, total internal reflection and diffraction are standard wave optics; here only a small Q instance.
@@ -196,9 +196,9 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 
 | name | kind | role |
 |---|---|---|
-| `reflection_coeff/transmission_coeff/no_reflection_matched` | Definition/Theorem | коэффициенты Френеля |
-| `reflection_1_2/_1_3/full_reflection_large_mismatch/transmission_complement` | Theorem | значения, полное отражение |
-| `energy_conserved/reflection_symmetric/total_internal_reflection/diffraction/refraction_diffraction_synthesis` | Theorem | ★ R+T=1, полное внутреннее отражение |
+| `reflection_coeff/transmission_coeff/no_reflection_matched` | Definition/Theorem | коэффициенты Френеля June 2026 rollback: 2 True-stubs REMOVED (TIR needs Snell, diffraction needs aperture — RETIRED); real general layer: energy_conserved_general (R+T=1 forall), reflection_symmetric_general, reflection_below_one. |
+| `reflection_1_2/_1_3/full_reflection_large_mismatch/transmission_complement` | Theorem | значения, полное отражение June 2026 rollback: 2 True-stubs REMOVED (TIR needs Snell, diffraction needs aperture — RETIRED); real general layer: energy_conserved_general (R+T=1 forall), reflection_symmetric_general, reflection_below_one. |
+| `energy_conserved/reflection_symmetric/total_internal_reflection/diffraction/refraction_diffraction_synthesis` | Theorem | ★ R+T=1, полное внутреннее отражение June 2026 rollback: 2 True-stubs REMOVED (TIR needs Snell, diffraction needs aperture — RETIRED); real general layer: energy_conserved_general (R+T=1 forall), reflection_symmetric_general, reflection_below_one. |
 
 **Key lemmas (deep):**
 
@@ -214,7 +214,7 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 **Speed of light over Q: c as a graph property, dispersion**
 
 - **Topic.** The causal limit, edge/vertex wave speeds, massless (linear) vs massive (sub-c) dispersion, heavier is slower, c as a graph property, and 'why nothing is faster'.
-- **Role.** Leaf of the light branch (kinematics). Self-contained.
+- **Role.** Leaf of the light branch (kinematics). Self-contained. June 2026 rollback: 2 True-stubs REMOVED + 1 FAKE theorem fixed (old massive_dispersion_bigger concluded 0<1, hypothesis discarded); real general layer: massive_dispersion_bigger (actual statement), speed_bounded_by_c (v<=c forall m, omega>0), massive_strictly_slower.
 - **Counts.** Qed 10 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ дисперсионные соотношения; скорости волн. _Roles:_ c = причинный предел графа (роль); масса как роль-замедление. _Rules:_ dispersion_massless (линейная); massive_slower; c_is_graph_property. _P4:_ конечные скорости над Q (Element); c как структурный предел графа.
@@ -225,9 +225,9 @@ _Generated from `light.json` by `generate.ps1` - do not edit by hand; edit the J
 
 | name | kind | role |
 |---|---|---|
-| `causal_limit/edge_wave_speed_low_k/vertex_wave_speed_approx/dispersion_massless/dispersion_massive_sq` | Definition | дисперсия, причинный предел |
-| `edge_at_c/massive_slower/massless_at_c/speed_ratio/heavier_is_slower` | Theorem | ★ безмассовое на c, массивное медленнее |
-| `massless_dispersion_linear/massive_dispersion_bigger/c_is_graph_property/why_nothing_faster/speed_of_light_synthesis` | Theorem | c как свойство графа |
+| `causal_limit/edge_wave_speed_low_k/vertex_wave_speed_approx/dispersion_massless/dispersion_massive_sq` | Definition | дисперсия, причинный предел June 2026 rollback: 2 True-stubs REMOVED + 1 FAKE theorem fixed (old massive_dispersion_bigger concluded 0<1, hypothesis discarded); real general layer: massive_dispersion_bigger (actual statement), speed_bounded_by_c (v<=c forall m, omega>0), massive_strictly_slower. |
+| `edge_at_c/massive_slower/massless_at_c/speed_ratio/heavier_is_slower` | Theorem | ★ безмассовое на c, массивное медленнее June 2026 rollback: 2 True-stubs REMOVED + 1 FAKE theorem fixed (old massive_dispersion_bigger concluded 0<1, hypothesis discarded); real general layer: massive_dispersion_bigger (actual statement), speed_bounded_by_c (v<=c forall m, omega>0), massive_strictly_slower. |
+| `massless_dispersion_linear/massive_dispersion_bigger/c_is_graph_property/why_nothing_faster/speed_of_light_synthesis` | Theorem | c как свойство графа June 2026 rollback: 2 True-stubs REMOVED + 1 FAKE theorem fixed (old massive_dispersion_bigger concluded 0<1, hypothesis discarded); real general layer: massive_dispersion_bigger (actual statement), speed_bounded_by_c (v<=c forall m, omega>0), massive_strictly_slower. |
 
 **Key lemmas (deep):**
 

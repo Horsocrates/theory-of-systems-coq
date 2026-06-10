@@ -1,4 +1,9 @@
 (* OS3Closure.v — Close covariance True *)
+(* June 2026 HONEST SCOPE: "Closure" = closing the repo's True-placeholder
+   backlog with TOY specializations (translation/periodicity instances).
+   The REAL lattice-model OS3 — SO(4)-invariance of the full correlation —
+   is gauge/FormalSO4.v (os3_formal), bridged in stdlib/GaugeOSClosure.v
+   (gauge_os3_real). *)
 From Stdlib Require Import QArith QArith_base Lia ZArith.
 From Stdlib Require Import Lqa.
 Open Scope Q_scope.
@@ -13,9 +18,14 @@ From ToS Require Import gauge.CorrelationProof.
 (*  CLOSED: structural — our definition uses separation t directly    *)
 (* ================================================================== *)
 
+(* June 2026: was the vacuous `exists val, _ == val`; by-type finiteness. *)
 Theorem os3_translation : forall (j t : nat) (beta : Q) (M : nat),
-  exists val, full_correlation 1 t j beta M == val.
-Proof. intros. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive),
+    full_correlation 1 t j beta M = num # den.
+Proof.
+  intros. destruct (full_correlation 1 t j beta M) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 Theorem os3_no_position_dependence : forall (j t : nat) (beta : Q) (M : nat),
   full_correlation 1 t j beta M == full_correlation 1 t j beta M.
@@ -26,9 +36,14 @@ Proof. intros. reflexivity. Qed.
 (*  CLOSED: our eigenvalues are Q-valued = real                       *)
 (* ================================================================== *)
 
+(* June 2026: was the vacuous `exists q, _ == q`; by-type finiteness. *)
 Theorem os3_eigenvalues_real : forall (j : nat) (beta : Q) (M : nat),
-  exists q : Q, transfer_eigenvalue j beta M == q.
-Proof. intros. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive),
+    transfer_eigenvalue j beta M = num # den.
+Proof.
+  intros. destruct (transfer_eigenvalue j beta M) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 Theorem os3_abs_t : forall t, (0 <= t)%nat.
 Proof. intros. lia. Qed.
@@ -67,14 +82,14 @@ Proof. intros. ring. Qed.
 
 (** ★ REPLACEMENT *)
 Definition os3_covariance_proved : Prop :=
-  (forall (j : nat) (beta : Q) (M : nat), exists q, transfer_eigenvalue j beta M == q) /\
+  (forall (j : nat) (beta : Q) (M : nat), exists (num : Z) (den : BinNums.positive), transfer_eigenvalue j beta M = num # den) /\
   (Nat.pow 2 4 * fact 4 = 384)%nat /\
   0 < transfer_eigenvalue 0 1 O.
 
 Theorem os3_proved : os3_covariance_proved.
 Proof.
   split; [|split].
-  - intros. eexists. reflexivity.
+  - exact os3_eigenvalues_real.
   - exact B4_size.
   - exact os3_t0_pos_b1.
 Qed.

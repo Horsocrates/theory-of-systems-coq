@@ -91,9 +91,9 @@ Proof. rewrite self_energy_K2, self_energy_K3. lra. Qed.
 
 (** Self-energy is rational (always a concrete Q) *)
 Theorem self_energy_finite : forall K m,
-  exists sigma : Q, graviton_self_energy K m == sigma.
+  exists (num : Z) (den : BinNums.positive), graviton_self_energy K m = num # den.
 Proof.
-  intros K m. exists (graviton_self_energy K m). reflexivity.
+  intros K m. destruct (graviton_self_energy K m) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)

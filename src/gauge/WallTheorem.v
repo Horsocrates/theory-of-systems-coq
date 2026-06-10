@@ -153,9 +153,9 @@ Qed.
 
 (** RG process is well-defined *)
 Theorem rg_well_defined : forall K (k : nat) beta,
-  exists q, exact_rg K k beta == q.
+  exists (num : Z) (den : BinNums.positive), exact_rg K k beta = num # den.
 Proof.
-  intros K k beta. exists (exact_rg K k beta). lra.
+  intros K k beta. destruct (exact_rg K k beta) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Gap at every stage *)
@@ -192,8 +192,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (18 = 18)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -204,5 +203,5 @@ Proof. reflexivity. Qed.
 (*  Part III: p4_mass_gap, p4_interpretation, p4_vs_standard,                *)
 (*            wall_location, wall_not_yang_mills, our_contribution (6)       *)
 (*  Part IV: rg_well_defined, gap_at_every_stage, wall_main,                 *)
-(*           total_count (4)                                                 *)
+(*           tail-stamp removed                                                 *)
 (* ========================================================================= *)

@@ -145,9 +145,9 @@ Qed.
 
 (** Bessel is rational *)
 Lemma bessel_rational : forall n beta M,
-  exists q : Q, bessel_partial n beta M == q.
+  exists (num : Z) (den : BinNums.positive), bessel_partial n beta M = num # den.
 Proof.
-  intros n beta M. exists (bessel_partial n beta M). reflexivity.
+  intros n beta M. destruct (bessel_partial n beta M) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)
@@ -163,9 +163,9 @@ Definition transfer_eigenvalue (j : nat) (beta : Q) (M : nat) : Q :=
 
 (** Eigenvalue is rational *)
 Lemma eigenvalue_rational : forall j beta M,
-  exists q : Q, transfer_eigenvalue j beta M == q.
+  exists (num : Z) (den : BinNums.positive), transfer_eigenvalue j beta M = num # den.
 Proof.
-  intros j beta M. exists (transfer_eigenvalue j beta M). reflexivity.
+  intros j beta M. destruct (transfer_eigenvalue j beta M) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** t_0 > 0 for small β: I_0 > I_2 implies t_0 > 0 *)
@@ -194,7 +194,7 @@ Qed.
 
 (** Diagonal element = eigenvalue *)
 Theorem transfer_diagonal_formula : forall j beta M,
-  exists q : Q, transfer_eigenvalue j beta M == q.
+  exists (num : Z) (den : BinNums.positive), transfer_eigenvalue j beta M = num # den.
 Proof.
   exact eigenvalue_rational.
 Qed.
@@ -214,9 +214,9 @@ Qed.
 
 (** Gap is rational *)
 Lemma gap_rational : forall beta M,
-  exists q : Q, character_mass_gap beta M == q.
+  exists (num : Z) (den : BinNums.positive), character_mass_gap beta M = num # den.
 Proof.
-  intros j beta. exists (character_mass_gap j beta). reflexivity.
+  intros j beta. destruct (character_mass_gap j beta) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)
@@ -249,11 +249,11 @@ Theorem character_transfer_summary :
   (* Transfer is diagonal *)
   transfer_is_diagonal /\
   (* Eigenvalues are rational *)
-  (forall j beta M, exists q, transfer_eigenvalue j beta M == q) /\
+  (forall j beta M, exists (num : Z) (den : BinNums.positive), transfer_eigenvalue j beta M = num # den) /\
   (* t_0 nonneg for small β *)
   (forall beta, 0 <= beta -> beta <= 2 -> 0 <= transfer_eigenvalue 0 beta 0) /\
   (* Gap is rational *)
-  (forall beta M, exists q, character_mass_gap beta M == q) /\
+  (forall beta M, exists (num : Z) (den : BinNums.positive), character_mass_gap beta M = num # den) /\
   (* Bessel nonneg *)
   (forall n beta M, 0 <= beta -> 0 <= bessel_partial n beta M).
 Proof.

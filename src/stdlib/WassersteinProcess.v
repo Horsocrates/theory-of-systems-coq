@@ -73,10 +73,13 @@ Qed.
 Definition W1_at_K (plan_process : nat -> TransportPlan) (K : nat) : Q :=
   transport_cost (plan_process K) lattice_cost K.
 
-(** Process is well-defined: Q at each K *)
+(** Process is well-defined: a finite ratio BY TYPE at each K (June 2026:
+    was the vacuous `exists q, _ == q`). *)
 Theorem W1_process_defined : forall pp K,
-  exists q : Q, W1_at_K pp K == q.
-Proof. intros. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), W1_at_K pp K = num # den.
+Proof.
+  intros. destruct (W1_at_K pp K) as [num den]. exists num, den. reflexivity.
+Qed.
 
 (* ================================================================== *)
 (*  CONCRETE WASSERSTEIN VALUES                                        *)

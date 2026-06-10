@@ -281,9 +281,9 @@ Qed.
 
 (** At each N: ζ_N(k) is a computable rational *)
 (** This is trivially true by construction *)
-Lemma zeta_computable : forall k N, exists q : Q, zeta_partial k N == q.
+Lemma zeta_computable : forall k N, exists (num : Z) (den : BinNums.positive), zeta_partial k N = num # den.
 Proof.
-  intros k N. exists (zeta_partial k N). reflexivity.
+  intros k N. destruct (zeta_partial k N) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** The gap between ζ_N(1) and ζ_N(2) is nonneg *)

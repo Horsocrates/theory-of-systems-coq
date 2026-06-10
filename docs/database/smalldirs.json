@@ -702,7 +702,7 @@
     "classical_counterpart": "Casimir energy from vacuum modes (finite after regularization, force from energy difference) is standard; NEW only as the P4 framing 'vacuum always finite' over a graph.",
     "title": "Casimir from a graph over Q: vacuum always finite, force from energy",
     "topic": "Vacuum energy squared, squared frequencies at C2/C4/C8, vacuum energies, positivity, vacuum grows, the Casimir energy and force approximation, the C4-C2 and C8-C4 differences, and vacuum always finite.",
-    "role": "Leaf of the casimir_branch (vacuum-finiteness framing). Self-contained.",
+    "role": "Leaf of the casimir_branch (vacuum-finiteness framing). Self-contained. June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md.",
     "qed": 11, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {
@@ -712,9 +712,9 @@
       "p4": "конечные вакуумные энергии над Q (Element); «вакуум всегда конечен» — нет расходимости на графе."
     },
     "lemmas": [
-      {"name": "vacuum_energy_sq/omega_sq_C4/_C2/_C8_approx/E_vac_C2/_C4/_C8", "kind": "Definition", "role": "вакуумная энергия, частоты"},
-      {"name": "vacuum_positive_C4/vacuum_grows/vacuum_grows_more/casimir_energy/casimir_force_approx", "kind": "Theorem", "role": "вакуум растёт, сила Казимира"},
-      {"name": "casimir_C4_C2/_C8_C4/vacuum_always_finite/_C8/casimir_from_graph_synthesis", "kind": "Theorem", "role": "★ вакуум всегда конечен"}
+      {"name": "vacuum_energy_sq/omega_sq_C4/_C2/_C8_approx/E_vac_C2/_C4/_C8", "kind": "Definition", "role": "вакуумная энергия, частоты June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "vacuum_positive_C4/vacuum_grows/vacuum_grows_more/casimir_energy/casimir_force_approx", "kind": "Theorem", "role": "вакуум растёт, сила Казимира June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "casimir_C4_C2/_C8_C4/vacuum_always_finite/_C8/casimir_from_graph_synthesis", "kind": "Theorem", "role": "★ вакуум всегда конечен June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."}
     ],
     "key_lemmas": [
       {"name": "vacuum_always_finite", "analysis": "Вакуумная энергия на графе ВСЕГДА конечна (vacuum_always_finite_C8) — нет расходимости, сила Казимира из разности энергий. Перекликается с experimental/VacuumEnergy (там расходимость снимается регуляризацией; здесь граф конечен по построению). Вена-C-смежно.", "tags": ["casimir", "vacuum-finite", "force"]}

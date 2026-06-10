@@ -155,9 +155,9 @@ Qed.
 
 (** Physical gap is rational *)
 Lemma physical_gap_rational : forall beta,
-  exists q : Q, physical_gap beta == q.
+  exists (num : Z) (den : BinNums.positive), physical_gap beta = num # den.
 Proof.
-  intros beta. exists (physical_gap beta). reflexivity.
+  intros beta. destruct (physical_gap beta) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)
@@ -255,9 +255,9 @@ Qed.
 
 (** Gap is rational at every level *)
 Lemma gap_level_rational : forall K,
-  exists q : Q, gap_at_level K == q.
+  exists (num : Z) (den : BinNums.positive), gap_at_level K = num # den.
 Proof.
-  intros K. exists (gap_at_level K). reflexivity.
+  intros K. destruct (gap_at_level K) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** The wall breach is structural *)
@@ -290,7 +290,7 @@ Theorem continuum_character_summary :
   (forall d beta, (1 <= d)%nat -> 0 <= beta -> beta <= 2 ->
     0 <= enhanced_gap d beta) /\
   (* Gap rational at every level *)
-  (forall K, exists q, gap_at_level K == q) /\
+  (forall K, exists (num : Z) (den : BinNums.positive), gap_at_level K = num # den) /\
   (* Wall breach structural *)
   wall_breach_structural.
 Proof.

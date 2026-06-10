@@ -1,10 +1,20 @@
-(** * AnomalyExhaustive.v -- Exhaustive search for anomaly-free solutions
+(** * AnomalyExhaustive.v -- SM passes; a SAMPLE of alternatives fails -- NOT an exhaustive search
+       (honesty rollback June 2026: "exhaustive search" was an over-claim; the TRUE box-exhaustive
+        scan with per-rule counts lives in AnomalyLatticeDial.v: 1317 -> 11 -> exactly {SM, u<->d swap})
     Elements: check_anomaly, alt_test_*, sm_unique_among_tested
-    Roles:    Verify SM is the only nontrivial anomaly-free chiral solution
-    Rules:    Systematic testing of alternative charge assignments
-    Status:   Foundation
+    Roles:    Verify SM passes linear+cubic; a handful of natural alternatives fail
+    Rules:    linear+cubic with Y1=1/6 fixed; ~5 tested alternatives (a SAMPLE, not a scan)
     STATUS: 10 Qed, 0 Admitted, 0 new axioms
-    Author: Horsocrates | Date: March 2026
+    Author: Horsocrates | Date: March 2026  (exhaustiveness-honesty rollback: June 2026)
+
+    HONEST STATUS: this file proves (a) the SM charges satisfy the linear+cubic conditions and
+    (b) a SAMPLE of ~5 natural alternative assignments (Y1 fixed at 1/6) fails the cubic.  It
+    does NOT establish exhaustiveness or uniqueness: linear+cubic ALONE leave an 11-point
+    solution set even on the [-8..8]/6 lattice (AnomalyLatticeDial.dial_grav_cubic — incl.
+    exotics like (-1,-1,0,0)/6); the pinning to exactly {SM, u<->d swap} needs the NON-ABELIAN
+    conditions [SU(3)]^2 U(1) and [SU(2)]^2 U(1) — see AnomalyLatticeDial.dial_all_exact and
+    the algebraic forcing in ChargeLatticeTheory.v.  The theorem name sm_unique_among_tested
+    states the honest scope: among TESTED.
 *)
 
 From Stdlib Require Import QArith Lia ZArith.

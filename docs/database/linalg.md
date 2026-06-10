@@ -2,7 +2,7 @@
 
 _Generated from `linalg.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**6 files / 130 Qed.** Score distribution: s5=0 / s4=0 / s3=0 / s2=5 / s1=1 / s0=0
+**6 files / 129 Qed.** Score distribution: s5=0 / s4=0 / s3=0 / s2=5 / s1=1 / s0=0
 
 ---
 
@@ -12,7 +12,7 @@ _Generated from `linalg.json` by `generate.ps1` - do not edit by hand; edit the 
 
 - **Topic.** Localized diagonal eigenvalues, the power method finding eigenvalues, hydrogen eigenvalue bounds, the ground-state spectral gap, eigenvalue<->ionization connection, Rayleigh variational bound, Gershgorin for hydrogen, 2x2 verifications, and a verified/open list.
 - **Role.** Synthesis node of the linalg branch, bridging to atomic ionization. Self-contained (QArith).
-- **Counts.** Qed 15 / Admitted 0 / axioms 0
+- **Counts.** Qed 14 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ собственные значения; диагональные матрицы; спектральный зазор. _Roles:_ локализация = роль (Гершгорин/Рэлей); ионизация как роль-накопление спектра. _Rules:_ power_method_finds_eigenvalue; rayleigh_variational_bound; ionization_from_accumulation. _P4:_ конечные собственные значения над Q (Element); ионизация = точка накопления спектра (role-limit).
 - **Classical counterpart.** Eigenvalue localization (Gershgorin, Rayleigh, power method) is standard numerical linear algebra; NEW only as a synthesis tying eigenvalue accumulation to the atomic ionization threshold over Q.

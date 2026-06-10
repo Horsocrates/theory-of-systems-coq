@@ -451,8 +451,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : orbit_inc_below = orbit_inc_below.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -467,5 +466,5 @@ Proof. reflexivity. Qed.
 (*  Part IV: orbit_gap_positive, rg_prevents_deconfinement,                *)
 (*           confinement_via_rg, double_iterate (4)                        *)
 (*  Part V: mass_gap_all_beta, extended_main, what_step9_proves,           *)
-(*          total_count (4)                                                *)
+(*          tail-stamp removed                                                *)
 (* ========================================================================= *)

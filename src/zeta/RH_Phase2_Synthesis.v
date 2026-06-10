@@ -262,9 +262,9 @@ Qed.
 (** Under P4: each zero is a process — a sequence of approximations *)
 (** At each level N: zeros of zeta_N are computable *)
 Lemma p4_zeros_computable : forall k N,
-  exists q : Q, zeta_partial k N == q.
+  exists (num : Z) (den : BinNums.positive), zeta_partial k N = num # den.
 Proof.
-  intros k N. exists (zeta_partial k N). reflexivity.
+  intros k N. destruct (zeta_partial k N) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** P4: the zeta process is deterministic *)
@@ -308,7 +308,7 @@ Theorem rh_phase2_complete :
   the_wall /\
   ~ wall_breaker /\
   (* P4: computability + monotonicity *)
-  (forall k N, exists q : Q, zeta_partial k N == q) /\
+  (forall k N, exists (num : Z) (den : BinNums.positive), zeta_partial k N = num # den) /\
   (forall k N, zeta_partial k N <= zeta_partial k (S N)).
 Proof.
   split; [|split; [|split; [|split; [|split; [|split; [|split; [|split; [|split; [|split; [|split]]]]]]]]]].

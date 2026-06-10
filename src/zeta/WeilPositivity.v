@@ -64,9 +64,9 @@ Qed.
 
 (** Weil entry is rational *)
 Lemma weil_entry_rational : forall i j zeros,
-  exists q : Q, weil_entry i j zeros == q.
+  exists (num : Z) (den : BinNums.positive), weil_entry i j zeros = num # den.
 Proof.
-  intros i j zeros. exists (weil_entry i j zeros). reflexivity.
+  intros i j zeros. destruct (weil_entry i j zeros) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Weil entry at (0,j) = λ_j *)
@@ -135,7 +135,7 @@ Qed.
 
 (** PSD is computable at each level *)
 Lemma psd_computable : forall n zeros,
-  exists q : Q, li_process n zeros == q.
+  exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den.
 Proof.
   intros n zeros. exact (li_process_rational n zeros).
 Qed.
@@ -171,9 +171,9 @@ Qed.
 
 (** Trace is rational *)
 Lemma weil_trace_rational : forall n zeros,
-  exists q : Q, weil_trace n zeros == q.
+  exists (num : Z) (den : BinNums.positive), weil_trace n zeros = num # den.
 Proof.
-  intros n zeros. exists (weil_trace n zeros). reflexivity.
+  intros n zeros. destruct (weil_trace n zeros) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Helper: fold_left over seq preserves nonneg *)
@@ -229,7 +229,7 @@ Qed.
 
 (** P4 Weil check *)
 Definition p4_weil_check (n : nat) (zeros : list (Q * Q)) : Prop :=
-  psd_diagonal zeros /\ (forall i j, exists q, weil_entry i j zeros == q).
+  psd_diagonal zeros /\ (forall i j, exists (num : Z) (den : BinNums.positive), weil_entry i j zeros = num # den).
 
 (** P4 check holds for on-line zeros *)
 Theorem p4_weil_on_line : forall n zeros,
@@ -286,7 +286,7 @@ Theorem weil_positivity_summary :
   (* Symmetry *)
   (forall i j zeros, weil_entry i j zeros == weil_entry j i zeros) /\
   (* Computability *)
-  (forall i j zeros, exists q, weil_entry i j zeros == q) /\
+  (forall i j zeros, exists (num : Z) (den : BinNums.positive), weil_entry i j zeros = num # den) /\
   (* YM parallel *)
   (forall K zeros,
     Forall (fun bg => fst bg == (1#2)) zeros ->

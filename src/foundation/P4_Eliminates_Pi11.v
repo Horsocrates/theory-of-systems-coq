@@ -57,9 +57,10 @@ Lemma sigma11_to_arithmetic : forall phi n,
   P4_exists_function phi n <-> exists c : nat, phi (eval_program c) n.
 Proof. intros. unfold P4_exists_function, Program. split; auto. Qed.
 
-(* 4. Program codes exist (nat is nonempty) *)
-Lemma program_exists : exists c : Program, c = c.
-Proof. exists 0. reflexivity. Qed.
+(* 4. Program codes exist — nat is INHABITED (June 2026: was `exists c, c = c`,
+      vacuous; `inhabited` is the honest nonemptiness statement) *)
+Lemma program_exists : inhabited Program.
+Proof. exact (inhabits 0). Qed.
 
 (* 5. The function space is "countable" — indexed by nat *)
 Lemma function_space_indexed_by_nat :

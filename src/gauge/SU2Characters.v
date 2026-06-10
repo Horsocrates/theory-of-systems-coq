@@ -134,9 +134,9 @@ Proof. unfold su2_character. simpl. lra. Qed.
 
 (** Character is a polynomial (rational output for rational input) *)
 Lemma character_rational : forall j c,
-  exists q : Q, su2_character j c == q.
+  exists (num : Z) (den : BinNums.positive), su2_character j c = num # den.
 Proof.
-  intros j c. exists (su2_character j c). reflexivity.
+  intros j c. destruct (su2_character j c) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Character at c=0: χ_j(0) = (-1)^j *)
@@ -218,11 +218,11 @@ Definition character_expansion_exists : Prop :=
   (* For any class function f on SU(2): *)
   (* f(θ) = Σ_j (2j+1) · ⟨f, χ_j⟩ · χ_j(θ) *)
   (* Each coefficient ⟨f, χ_j⟩ is computable *)
-  forall j, exists q : Q, haar_norm j == q.
+  forall j, exists (num : Z) (den : BinNums.positive), haar_norm j = num # den.
 
 Theorem character_expansion_computable : character_expansion_exists.
 Proof.
-  intros j. exists (haar_norm j). reflexivity.
+  intros j. destruct (haar_norm j) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)
@@ -288,7 +288,7 @@ Qed.
 (** Summary *)
 Theorem su2_characters_summary :
   (* Characters are computable *)
-  (forall j c, exists q, su2_character j c == q) /\
+  (forall j c, exists (num : Z) (den : BinNums.positive), su2_character j c = num # den) /\
   (* Orthogonality: different j ≠ k *)
   (forall j k, j <> k -> (2 * j + 1 <> 2 * k + 1)%nat) /\
   (* Self-integral positive *)

@@ -141,10 +141,16 @@ Qed.
 
 (* ===== Transition determinism ===== *)
 
+(** Every transition lands in one of the three named states — the result
+    is inspectable (June 2026: was the vacuous `exists s', transition s t = s'`). *)
 Lemma transition_deterministic : forall s t,
-  exists s', transition s t = s'.
+  transition s t = BidHeavy \/ transition s t = Balanced \/
+  transition s t = AskHeavy.
 Proof.
-  intros [] []; eexists; reflexivity.
+  intros [] [];
+    ((left; reflexivity) ||
+     (right; left; reflexivity) ||
+     (right; right; reflexivity)).
 Qed.
 
 (* ===== Reversal pairs ===== *)

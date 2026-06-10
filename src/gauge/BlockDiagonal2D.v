@@ -229,8 +229,7 @@ Theorem eigenvalue_trace_check :
 Proof. unfold Qeq. simpl. lia. Qed.
 
 (** End marker *)
-Theorem total_count : 1 + (1#4) + (1#4) + 1 == 5#2.
-Proof. exact eigenvalue_trace_check. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -244,5 +243,5 @@ Proof. exact eigenvalue_trace_check. Qed.
 (*  Part IV: block_B_00/01/11_at_8, block_trace_at_8,                        *)
 (*           block_det_at_8, block_disc_at_8 (6)                              *)
 (*  Part V: block_eigen_sum_at_8, block_eigen_product_at_8,                  *)
-(*          four_eigenvalues_at_8, eigenvalue_trace_check, total_count (5)   *)
+(*          four_eigenvalues_at_8, eigenvalue_trace_check   *)
 (* ========================================================================= *)

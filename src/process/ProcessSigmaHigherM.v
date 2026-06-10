@@ -249,9 +249,9 @@ Qed.
 
 (** Each point of sigma(M) is a definite Q number *)
 Lemma sigma_M_is_Q : forall beta order M,
-  exists q : Q, sigma_M_process beta order M == q.
+  exists (num : Z) (den : BinNums.positive), sigma_M_process beta order M = num # den.
 Proof.
-  intros. exists (sigma_M_process beta order M). reflexivity.
+  intros. destruct (sigma_M_process beta order M) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** The sigma(M) process at beta=1 *)

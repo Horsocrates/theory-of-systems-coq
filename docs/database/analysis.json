@@ -304,15 +304,15 @@
     "num": 43, "path": "src/analysis/FourierProcess.v", "cluster": "analysis",
     "classical_counterpart": "The DFT as a finite computation (no infinite sums) is the constructive view; NEW is only the explicit P4 framing: the DFT is a finite staged process, contrasting classical-vs-P4.",
     "title": "The DFT as a finite P4 process (staged, no infinite sums)", "topic": "Staged signals, staged inner products and DFT coefficients shown finite, energy monotonicity, the DFT as a finite computation, P4 compatibility, and classical-vs-P4 contrast.",
-    "role": "Fourier sub-thread with explicit P4 framing. Self-contained.", "qed": 11, "admitted": 0, "axioms": 0,
+    "role": "Fourier sub-thread with explicit P4 framing. Self-contained. June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md.", "qed": 11, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {"elements": "поэтапные сигналы StagedSignal N; конечные суммы.", "roles": "ДПФ как конечный поэтапный процесс (P4).", "rules": "dft_process финитен; энергия монотонна; classical_vs_p4.", "p4": "★ ДПФ — КОНЕЧНОЕ поэтапное вычисление, не бесконечная сумма (Element); явный P4-контраст с классикой."},
     "lemmas": [
-      {"name": "StagedSignal/inner_stage/dft_coeff/dft_process", "kind": "Definition/Fixpoint", "role": "поэтапный ДПФ"},
-      {"name": "dft_process_finite/inner_stage_self_nonneg/comm/zero", "kind": "Lemma", "role": "финитность и свойства скалярного произведения"},
-      {"name": "time_energy_N/nonneg/zero/monotone", "kind": "Definition/Lemma", "role": "энергия монотонна по стадии"},
-      {"name": "dft_is_finite_computation/dft_p4_compatible/classical_vs_p4", "kind": "Lemma/Theorem", "role": "★ ДПФ конечен, P4-совместим"},
-      {"name": "fourier_process_synthesis", "kind": "Theorem", "role": "синтез"}
+      {"name": "StagedSignal/inner_stage/dft_coeff/dft_process", "kind": "Definition/Fixpoint", "role": "поэтапный ДПФ June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "dft_process_finite/inner_stage_self_nonneg/comm/zero", "kind": "Lemma", "role": "финитность и свойства скалярного произведения June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "time_energy_N/nonneg/zero/monotone", "kind": "Definition/Lemma", "role": "энергия монотонна по стадии June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "dft_is_finite_computation/dft_p4_compatible/classical_vs_p4", "kind": "Lemma/Theorem", "role": "★ ДПФ конечен, P4-совместим June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "fourier_process_synthesis", "kind": "Theorem", "role": "синтез June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."}
     ],
     "key_lemmas": [
       {"name": "dft_p4_compatible", "analysis": "ДПФ — конечное поэтапное вычисление (StagedSignal), не бесконечная сумма: явная P4-формулировка, отделяющая Element-вычислимое от классического предельного. Связь с процесс-онтологией (вена C) в анализе.", "tags": ["P4", "finite-computation", "DFT"]}
@@ -379,14 +379,14 @@
     "num": 47, "path": "src/analysis/FourierVacuumEnergy.v", "cluster": "analysis",
     "classical_counterpart": "Zero-point (vacuum) energy as a sum of mode frequencies and energy density are classical; NEW is only the P4 framing: the vacuum energy is a finite staged process (partial sums), not a completed divergent sum, contrasted with 1D Casimir.",
     "title": "Vacuum energy on Z/4 as a finite P4 process over Q", "topic": "The summed mode omega^2 (=2), nonzero mode count, average omega^2, the vacuum energy as a RealProcess of partial sums (monotone, finite at each stage), energy density, contrast with 1D Casimir, and P4 framing.",
-    "role": "Fourier sub-thread with P4 vacuum-energy framing. Self-contained.", "qed": 9, "admitted": 0, "axioms": 0,
+    "role": "Fourier sub-thread with P4 vacuum-energy framing. Self-contained. June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md.", "qed": 9, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith", "RealProcess (ProcessCore-style)"],
     "err": {"elements": "моды omega²; частичные суммы вакуумной энергии.", "roles": "вакуумная энергия как RealProcess частичных сумм (P4).", "rules": "partial_omega_sq_sum монотонна; vacuum_process финитен на стадии.", "p4": "★ вакуумная энергия — КОНЕЧНЫЙ поэтапный процесс (Element), не завершённая расходящаяся сумма; контраст с 1D Casimir."},
     "lemmas": [
-      {"name": "vacuum_energy_sq_4/value/nonzero_modes_count/avg_omega_sq_4/value", "kind": "Definition/Lemma", "role": "суммарное omega², число мод, среднее"},
-      {"name": "partial_omega_sq_sum/vacuum_process/finite/partial_sum_monotone", "kind": "Fixpoint/Definition/Lemma", "role": "★ вакуумная энергия как монотонный конечный процесс"},
-      {"name": "energy_density_4/value/density_not_casimir_1d", "kind": "Definition/Lemma", "role": "плотность энергии; контраст с Casimir"},
-      {"name": "vacuum_energy_p4/fourier_vacuum_synthesis", "kind": "Theorem", "role": "★ P4-формулировка вакуумной энергии"}
+      {"name": "vacuum_energy_sq_4/value/nonzero_modes_count/avg_omega_sq_4/value", "kind": "Definition/Lemma", "role": "суммарное omega², число мод, среднее June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "partial_omega_sq_sum/vacuum_process/finite/partial_sum_monotone", "kind": "Fixpoint/Definition/Lemma", "role": "★ вакуумная энергия как монотонный конечный процесс June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "energy_density_4/value/density_not_casimir_1d", "kind": "Definition/Lemma", "role": "плотность энергии; контраст с Casimir June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."},
+      {"name": "vacuum_energy_p4/fourier_vacuum_synthesis", "kind": "Theorem", "role": "★ P4-формулировка вакуумной энергии June 2026 wave-4 sweep: vacuous finiteness-shams (exists q, _ = q) replaced by the by-type finite-ratio form (num#den); see UNIQUENESS.md."}
     ],
     "key_lemmas": [
       {"name": "vacuum_energy_p4", "analysis": "Вакуумная энергия как КОНЕЧНЫЙ поэтапный процесс частичных сумм (RealProcess), монотонный и финитный на каждой стадии — P4-разрешение «расходящейся суммы нулевых колебаний». Вена C в физике анализа: энергия = процесс, не завершённый расходящийся объект.", "tags": ["vacuum-energy", "P4", "process", "finite"]}

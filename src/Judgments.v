@@ -108,10 +108,14 @@ Proof.
     + exact IH.
 Qed.
 
-(** Lemma 4: ce_name is total — every constructor yields a name *)
-Lemma ce_name_total : forall (e : CtxEntry), exists n, ce_name e = n.
+(** Lemma 4: ce_name lands in an inspectable nat — zero or a successor
+    (June 2026: was the vacuous `exists n, ce_name e = n`) *)
+Lemma ce_name_total : forall (e : CtxEntry),
+  ce_name e = 0 \/ exists m, ce_name e = S m.
 Proof.
-  intros e. exists (ce_name e). reflexivity.
+  intros e. destruct (ce_name e) as [| m].
+  - left. reflexivity.
+  - right. exists m. reflexivity.
 Qed.
 
 (* ========================================================================= *)
@@ -402,7 +406,7 @@ Qed.
     1.  ctx_wf_nil              — empty context is well-formed
     2.  ctx_wf_cons             — fresh extension preserves WF
     3.  ctx_lookup_dec          — lookup is decidable
-    4.  ce_name_total           — name extraction is total
+    4.  ce_name_total           — every name is zero or a successor (inspectable nat)
 
   Part IV — Judgment properties:
     5.  has_type_implies_P1     — HasType implies level hierarchy

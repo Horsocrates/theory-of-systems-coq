@@ -86,8 +86,8 @@ Lemma splitting_at_0 : lamb_splitting 0 == -(7#8).
 Proof. vm_compute. reflexivity. Qed.
 
 (** P4: splitting is computable at every stage *)
-Lemma splitting_computable : forall N, exists q : Q, lamb_splitting N == q.
-Proof. intros N. exists (lamb_splitting N). reflexivity. Qed.
+Lemma splitting_computable : forall N, exists (num : Z) (den : BinNums.positive), lamb_splitting N = num # den.
+Proof. intros N. destruct (lamb_splitting N) as [num den]. exists num, den. reflexivity. Qed.
 
 (** The splitting limit value *)
 Lemma splitting_limit_value : splitting_limit == (1#8).
@@ -347,7 +347,7 @@ Proof.
 Qed.
 
 (** P4 alias: splitting is computable *)
-Lemma p4_splitting_computable : forall N, exists q : Q, lamb_splitting N == q.
+Lemma p4_splitting_computable : forall N, exists (num : Z) (den : BinNums.positive), lamb_splitting N = num # den.
 Proof. exact splitting_computable. Qed.
 
 (** Deviation shrinks at each step *)
@@ -367,7 +367,7 @@ Proof. vm_compute. reflexivity. Qed.
 (** Framework established: process + Cauchy + limit + honest *)
 Theorem framework_established :
   (* Process is defined and computable *)
-  (forall N, exists q, lamb_splitting N == q) /\
+  (forall N, exists (num : Z) (den : BinNums.positive), lamb_splitting N = num # den) /\
   (* Cauchy sequence *)
   is_cauchy lamb_splitting /\
   (* Limit computed *)
@@ -420,7 +420,7 @@ Qed.
 (** Process view of splitting *)
 Theorem lamb_shift_process_view :
   (* P4: finite at every stage *)
-  (forall N, exists q, lamb_splitting N == q) /\
+  (forall N, exists (num : Z) (den : BinNums.positive), lamb_splitting N = num # den) /\
   (* Monotonically increasing *)
   (forall N, lamb_splitting N < lamb_splitting (S N)) /\
   (* Converges *)
@@ -440,7 +440,7 @@ Qed.
 (** Framework theorem *)
 Theorem lamb_shift_framework_theorem :
   (* Splitting defined *)
-  (forall N, exists q, lamb_splitting N == q) /\
+  (forall N, exists (num : Z) (den : BinNums.positive), lamb_splitting N = num # den) /\
   (* Cauchy *)
   is_cauchy lamb_splitting /\
   (* Limit computed *)

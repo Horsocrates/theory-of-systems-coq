@@ -150,11 +150,15 @@ Qed.
 (** ** 5. Termination and Determinism                                  *)
 (** ================================================================= *)
 
-(** safe_eval always returns (it's a total function) *)
+(** safe_eval lands in the option dichotomy: rejected/incomplete (None)
+    or an actual value (Some v)
+    (June 2026: was the vacuous `exists r, safe_eval fuel e = r`). *)
 Theorem safe_eval_terminates : forall fuel e,
-  exists r, safe_eval fuel e = r.
+  safe_eval fuel e = None \/ exists v, safe_eval fuel e = Some v.
 Proof.
-  intros fuel e. eexists. reflexivity.
+  intros fuel e. destruct (safe_eval fuel e) as [v |].
+  - right. exists v. reflexivity.
+  - left. reflexivity.
 Qed.
 
 (** safe_eval is deterministic *)
@@ -227,11 +231,15 @@ Proof.
   - apply typecheck_eval_progress with T. exact H.
 Qed.
 
-(** The verified pipeline always terminates (P4 principle). *)
+(** The pipeline result at every fuel stage is inspectable: valuehood is
+    decidable (June 2026: was the vacuous `exists v, eval_fuel fuel e = v`). *)
 Theorem verified_pipeline_terminates : forall e fuel,
-  exists v, eval_fuel fuel e = v.
+  is_value (eval_fuel fuel e) \/ ~ is_value (eval_fuel fuel e).
 Proof.
-  intros e fuel. eexists. reflexivity.
+  intros e fuel.
+  destruct (is_value_dec (eval_fuel fuel e)) as [Hv | Hnv].
+  - left. exact Hv.
+  - right. exact Hnv.
 Qed.
 
 (** The verified pipeline is deterministic. *)

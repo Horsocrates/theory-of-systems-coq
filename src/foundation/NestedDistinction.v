@@ -3,7 +3,7 @@
     Roles:    depth 1 = binary (SU(2)), depth 2 = ternary (SU(3)), depth 3 = reflexive (U(1))
     Rules:    sm_distinction, gauge_generators, sm_total = 6
     Status:   Foundation File 10 of 14
-    STATUS: 25 Qed, 0 Admitted, 0 new axioms
+    STATUS: 18 Qed, 0 Admitted, 0 new axioms  (honest grounding rollback: June 2026; header was drift-25)
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -19,22 +19,38 @@ From ToS Require Import foundation.LawsFromDistinction.
 
 Local Close Scope Q_scope.
 
-(** ★★★ SM GAUGE GROUP FROM NESTED DISTINCTION ★★★
+(** SM GAUGE GROUP FROM NESTED DISTINCTION — honest grounding status (L4 + JustificationRegress.v)
 
-  Primary distinction: A | ¬A → 2 sides → 2 Roles → SU(2).
-  But WHY SU(3)? WHY U(1)? WHY [3,2,1]?
+  Primary distinction: A | ¬A → 2 sides → 2 Roles → (posited) SU(2).
+  WHY SU(3)? WHY U(1)? WHY [3,2,1]?  This file CONSISTENCY-checks [2,3,1] against three
+  constraints (sm_satisfies_constraints); it does NOT uniquely force it.
 
-  ANSWER: Nested distinctions.
-  Level 1: A|¬A = 2 (PRIMARY, forced by distinction structure) → SU(2)
-  Level 2: WITHIN A, further distinguish. Can't repeat binary (L1).
-           Minimum genuinely different: 3 (first non-binary) → SU(3)
-  Level 3: Self-distinction: N = 1 (reflexive, phase) → U(1)
+  Level 1: A|¬A = 2 — FORCED by distinction structure (binary). ✓ grounded.
+  Level 2: can't repeat binary (L1) ⟹ ≥3 — grounded as a LOWER BOUND only;
+           "exactly 3 (minimal)" is a POSIT (L4-as-take-the-least; why not 4?).
+  Level 3: self-distinction N=1 (reflexive) — POSIT (interpretive).
+  Termination at depth 3 (why not 4?) — POSIT.  N roles → SU(N) (gauge_generators n = n²−1,
+           with U(1) SPECIAL-CASED to 1 since n²−1 = 0 at n=1, so the pattern breaks) — the
+           central physics POSIT, not derived.
 
-  RESULT: [3, 2, 1] = depths of nested distinction.
-  The unique solution under the constraints: no repetition (L1),
-  minimal (L4), nontrivial (argued), terminal at depth 3 (argued).
-  [2,3,1] is the ONLY assignment satisfying these constraints.
-  The constraints themselves are reasonable but partially interpretive. *)
+  ⚠ NON-UNIQUENESS (constraints_do_not_force_231 below): [2,4,1] satisfies ALL THREE formalized
+  constraints too, yet ≠ [2,3,1].  So "[2,3,1] is the ONLY assignment" is an OVERCLAIM — the
+  formalized constraints do NOT pin depth-2 to exactly 3; only the unformalized minimality posit
+  does.  sm_satisfies_constraints proves CONSISTENCY ([2,3,1] fits), NOT a derivation.
+
+  By L4 these inputs are POSITS (self-grounding), not free choices; by JustificationRegress every
+  grounded claim needs ≥1 posit while "derived from nothing" is the role-limit.  Honest status:
+  [2,3,1] rests on a COUNTED posit set (minimality + reflexivity + termination + role→SU(N) +
+  U(1)-special-case) atop two grounded facts (binary depth-1, no-repeat depth-2 ≥ 3).  Count them;
+  do not brand the consistency check as a unique derivation.
+
+  ============ E/R/R разбор ============
+    Elements : счёты ролей [2,3,1]; предикаты-ограничения; карта n ↦ n²−1.
+    Roles    : depth1=2 — основание (различие); ≥3 — основание (L1); =3 / refl / терминация / n→SU(N) — ПОСТУЛАТЫ.
+    Rules    : ограничения ДОПУСКАЮТ [2,4,1] (constraints_do_not_force_231) ⟹ не форсируют [2,3,1].
+    ДИАГНОСТИКА (P4+L4): «★ выведено / ЕДИНСТВЕННОЕ ★» ложно; sm_satisfies_constraints = СОГЛАСОВАННОСТЬ,
+    не вывод. Честно: [2,3,1] = счётный набор постулатов поверх 2 оснований; ≥1 постулат обязателен (JR),
+    «из ничего» — role-limit. Уровень: `новое-обрамление` (честный счёт постулатов SM-карты). *)
 
 (* ================================================================== *)
 (*  ITERATED DISTINCTION                                               *)
@@ -129,6 +145,31 @@ Proof.
 Qed.
 
 (* ================================================================== *)
+(*  NON-UNIQUENESS — the formalized constraints do NOT force [2,3,1]    *)
+(* ================================================================== *)
+
+(** An alternative nesting [2,4,1]: depth-2 carries 4 roles instead of 3. *)
+Definition alt_distinction : NestedDistinction := mkND 3
+  (fun d => match d with 0 => 2 | 1 => 4 | _ => 1 end).
+
+(** ★ [2,4,1] satisfies ALL THREE constraints, yet differs from [2,3,1].  So
+    sm_satisfies_constraints is a CONSISTENCY check, not a uniqueness proof — the constraints
+    (depth-1 = 2, depth-2 ≥ 3, depth-3 = 1) do not pin depth-2 to exactly 3.  "[2,3,1] is the ONLY
+    assignment" needs the EXTRA, unformalized minimality posit (L4-as-take-the-least). *)
+Theorem constraints_do_not_force_231 :
+  (depth1_is_binary alt_distinction /\ depth2_no_repeat alt_distinction
+   /\ depth3_is_reflexive alt_distinction)
+  /\ nd_decomposition alt_distinction <> nd_decomposition sm_distinction.
+Proof.
+  split.
+  - split; [| split].
+    + unfold depth1_is_binary. reflexivity.
+    + unfold depth2_no_repeat. intros _. simpl. lia.
+    + unfold depth3_is_reflexive. intros _. reflexivity.
+  - intro H. vm_compute in H. discriminate H.
+Qed.
+
+(* ================================================================== *)
 (*  WHY DEPTH = 3                                                      *)
 (* ================================================================== *)
 
@@ -200,4 +241,4 @@ Proof.
   repeat split; reflexivity.
 Qed.
 
-Definition nested_distinction_theorem_count := 25%nat.
+Definition nested_distinction_theorem_count := 18%nat.

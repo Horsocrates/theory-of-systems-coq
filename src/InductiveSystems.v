@@ -57,10 +57,15 @@ Proof. reflexivity. Qed.
 Lemma nat_succ_depth : forall n, nat_depth (S n) = S (nat_depth n).
 Proof. intros n. reflexivity. Qed.
 
-(** Lemma 5: nat has no infinite depth *)
+(** Lemma 5: every depth is an inspectable nat — zero or a successor
+    (June 2026: was the vacuous `exists k, nat_depth n = k`) *)
 Lemma nat_no_infinite_depth :
-  forall n, exists k, nat_depth n = k.
-Proof. intros n. exists n. reflexivity. Qed.
+  forall n, nat_depth n = 0 \/ exists m, nat_depth n = S m.
+Proof.
+  intros n. destruct n as [| m].
+  - left. reflexivity.
+  - right. exists m. reflexivity.
+Qed.
 
 (** Lemma 6: nat induction reaches all elements (Constitution = induction) *)
 Lemma nat_induction_complete :

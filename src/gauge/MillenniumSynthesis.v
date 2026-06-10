@@ -206,7 +206,7 @@ Qed.
 (** What ToS proves about the mass gap *)
 Theorem what_tos_proves :
   (* 1. Exact formulation of RG as process *)
-  (forall K k beta, exists q, exact_rg K k beta == q) /\
+  (forall K k beta, exists (num : Z) (den : BinNums.positive), exact_rg K k beta = num # den) /\
   (* 2. Process is Cauchy *)
   (forall K beta, 0 < beta -> beta < 8 ->
     is_cauchy (exact_rg_orbit K beta)) /\
@@ -289,8 +289,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (20 = 20)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -301,5 +300,5 @@ Proof. reflexivity. Qed.
 (*  Part II: the_complete_chain_v2 (1)                                       *)
 (*  Part III: distance_to_millennium, model_limitations_v2 (2)               *)
 (*  Part IV: what_tos_proves, what_remains, millennium_synthesis,             *)
-(*           global_summary_v2, total_count (5)                              *)
+(*           global_summary_v2                              *)
 (* ========================================================================= *)

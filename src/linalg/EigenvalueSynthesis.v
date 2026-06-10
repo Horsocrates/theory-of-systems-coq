@@ -221,8 +221,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (16 = 16)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -235,5 +234,5 @@ Proof. reflexivity. Qed.
 (*  Part III: ionization_from_accumulation, gershgorin_hydrogen_diag        *)
 (*  Part IV: verification_2x2_diag, verification_2x2_symmetric             *)
 (*  Part V: verified_results, open_questions,                               *)
-(*          eigenvalue_ionization_main, total_count                         *)
+(*          eigenvalue_ionization_main                         *)
 (* ========================================================================= *)

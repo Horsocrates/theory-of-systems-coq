@@ -255,8 +255,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : cont_matrix_trace = cont_matrix_trace.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -267,5 +266,5 @@ Proof. reflexivity. Qed.
 (*  Part III: kernel_coeff_symmetric (1)                                      *)
 (*  Part IV: cont_entry_00..22, cont_matrix_entries, cont_matrix_trace (11)  *)
 (*  Part V: operator_rank_le_3, operator_rank_eq_3,                          *)
-(*           continuum_operator_main, total_count (4)                          *)
+(*           continuum_operator_main                          *)
 (* ========================================================================= *)

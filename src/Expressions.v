@@ -271,9 +271,14 @@ Proof.
   intros k s f a. simpl. reflexivity.
 Qed.
 
-Lemma expr_finite : forall e, exists n, expr_size e = n.
+(** Size is always a successor — every expression has at least one node
+    (June 2026: was the vacuous `exists n, expr_size e = n`). *)
+Lemma expr_finite : forall e, exists n, expr_size e = S n.
 Proof.
-  intros e. exists (expr_size e). reflexivity.
+  intros e. pose proof (expr_size_positive e) as H.
+  destruct (expr_size e) as [| m] eqn:E.
+  - lia.
+  - exists m. reflexivity.
 Qed.
 
 Lemma expr_induction_size :

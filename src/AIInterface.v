@@ -175,9 +175,14 @@ Proof.
   - eapply progress. apply type_safety. apply typecheck_ann_sound. exact H.
 Qed.
 
-(** The AI pipeline always terminates (P4 principle) *)
+(** The AI pipeline lands in the option dichotomy: rejected (None) or a
+    typed result Some (T, v)
+    (June 2026: was the vacuous `exists r, ai_eval_ann fuel ea = r`). *)
 Theorem ai_pipeline_terminates : forall fuel ea,
-  exists r, ai_eval_ann fuel ea = r.
+  ai_eval_ann fuel ea = None \/
+  exists T v, ai_eval_ann fuel ea = Some (T, v).
 Proof.
-  intros fuel ea. eexists. reflexivity.
+  intros fuel ea. destruct (ai_eval_ann fuel ea) as [[T v] |].
+  - right. exists T, v. reflexivity.
+  - left. reflexivity.
 Qed.

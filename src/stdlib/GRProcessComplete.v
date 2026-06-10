@@ -71,9 +71,12 @@ Proof. unfold light_deflection_cc, shell_radius. vm_compute. reflexivity. Qed.
 Lemma gw_speed_is_c : gw_em_ratio_cc == 1.
 Proof. unfold gw_em_ratio_cc. reflexivity. Qed.
 
-(** No singularity: factor always a Q *)
-Lemma no_singularity : exists q, schwarzschild_factor 5 1 0 == q.
-Proof. exists (-9). unfold schwarzschild_factor, shell_radius. vm_compute. reflexivity. Qed.
+(** No singularity: at the INNERMOST shell (K=0, deep inside the horizon, where
+    continuum GR diverges as r → 0) the lattice factor is the definite FINITE
+    rational −9 (June 2026: was `exists q, factor == q` — vacuous; the honest and
+    STRONGER statement is the concrete finite value). *)
+Lemma no_singularity : schwarzschild_factor 5 1 0 == -9.
+Proof. unfold schwarzschild_factor, shell_radius. vm_compute. reflexivity. Qed.
 
 (* ================================================================== *)
 (*  CONVERGENCE (from ContinuumConvergence)                            *)
@@ -101,8 +104,8 @@ Theorem gr_process_complete :
   0 < light_deflection_cc 5 1 999 /\
   (* c_gw = c *)
   gw_em_ratio_cc == 1 /\
-  (* No singularity: factor finite at every shell *)
-  (exists q, schwarzschild_factor 5 1 0 == q) /\
+  (* No singularity: the innermost-shell factor is the FINITE value −9 *)
+  schwarzschild_factor 5 1 0 == -9 /\
   (* W9: convergence *)
   (forall K, convergence_at_K 1 (S K) < convergence_at_K 1 K).
 Proof.
@@ -136,7 +139,7 @@ Theorem gr_comparison_summary :
   deficit_angle 6 == 0 /\
   kappa_derived_cc == 1 # 10 /\
   schwarzschild_factor 5 1 14 == 1 # 3 /\
-  (exists q, schwarzschild_factor 5 1 0 == q).
+  schwarzschild_factor 5 1 0 == -9.
 Proof.
   split; [|split; [|split]].
   - exact deficit_flat.

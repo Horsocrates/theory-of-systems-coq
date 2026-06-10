@@ -254,8 +254,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (18 = 18)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -267,5 +266,5 @@ Proof. reflexivity. Qed.
 (*  Part III: rg_process_at_3, rg_process_cauchy, convergence_rate (3)      *)
 (*  Part IV: p4_process_interpretation (1)                                  *)
 (*  Part V: rg_convergence_main, convergence_what_is_proved,                *)
-(*          convergence_what_is_open, total_count (4)                       *)
+(*          convergence_what_is_open                       *)
 (* ========================================================================= *)

@@ -165,8 +165,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : 0 < su2_gap_at_fixed_point.
-Proof. exact su2_gap_at_fp_positive. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -178,5 +177,5 @@ Proof. exact su2_gap_at_fp_positive. Qed.
 (*          gap_at_fp_verified (7)                                          *)
 (*  Part II: yang_mills_progress, what_is_proved, millennium_gap,          *)
 (*           gauge_theory_structure (4)                                     *)
-(*  Part III: su2_synthesis_main, total_count (2)                           *)
+(*  Part III: su2_synthesis_main                           *)
 (* ========================================================================= *)

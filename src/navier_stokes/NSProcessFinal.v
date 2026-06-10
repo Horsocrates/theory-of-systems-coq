@@ -347,5 +347,5 @@ Qed.
 (*  The Millennium Problem IS the gap between α=1 (fixed K) and α=2 (uniform)*)
 (*  Process mathematics dissolves it: there is no K→∞ to take.               *)
 (*                                                                            *)
-(*  TOTAL NS formalization: 15 files, ~415 Qed, 1 Axiom (B_antisym)          *)
+(*  TOTAL NS formalization: 15 files, ~415 Qed; B_antisym is a Lemma since 06.2026          *)
 (* ========================================================================= *)

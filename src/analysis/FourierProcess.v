@@ -71,9 +71,10 @@ Definition dft_process (f : nat -> Q) (k : nat)
 
 (** Each stage of the DFT process is a finite Q value *)
 Lemma dft_process_finite : forall f k phi norm N,
-  exists q : Q, dft_process f k phi norm N = q.
+  exists (num : Z) (den : BinNums.positive), dft_process f k phi norm N = num # den.
 Proof.
-  intros. eexists. reflexivity.
+  intros. destruct (dft_process f k phi norm N) as [num den].
+  exists num, den. reflexivity.
 Qed.
 
 (* ================================================================ *)
@@ -153,13 +154,14 @@ Proof.
   intros. unfold dft_coeff. reflexivity.
 Qed.
 
-(** The DFT process satisfies P4: each stage is finite *)
+(** The DFT process satisfies P4: each stage is a finite ratio BY TYPE
+    (June 2026: was the vacuous `exists q, _ = q`). *)
 Theorem dft_p4_compatible :
   forall f k phi norm,
-  forall N : nat, exists q : Q,
-    dft_process f k phi norm N = q.
+  forall N : nat, exists (num : Z) (den : BinNums.positive),
+    dft_process f k phi norm N = num # den.
 Proof.
-  intros. eexists. reflexivity.
+  intros. apply dft_process_finite.
 Qed.
 
 (** No completed "infinite Fourier transform" exists.
@@ -178,14 +180,16 @@ Qed.
 
 Lemma classical_vs_p4 :
   (* P4 time energy exists at every stage *)
-  (forall N f, exists E : Q, time_energy_N N f = E) /\
+  (forall N f, exists (num : Z) (den : BinNums.positive), time_energy_N N f = num # den) /\
   (* P4 time energy is nonneg *)
   (forall N f, 0 <= time_energy_N N f) /\
   (* P4 time energy is monotone *)
   (forall N f, time_energy_N (Datatypes.S N) f ==
     time_energy_N N f + f N * f N).
 Proof.
-  split; [intros; eexists; reflexivity |
+  split;
+    [intros N f; destruct (time_energy_N N f) as [num den];
+     exists num, den; reflexivity |
   split; [exact time_energy_nonneg |
   exact time_energy_monotone]].
 Qed.
@@ -205,7 +209,7 @@ Theorem fourier_process_synthesis :
   (forall N f, time_energy_N (Datatypes.S N) f ==
     time_energy_N N f + f N * f N) /\
   (* DFT process is P4-compatible *)
-  (forall f k phi norm N, exists q, dft_process f k phi norm N = q).
+  (forall f k phi norm N, exists (num : Z) (den : BinNums.positive), dft_process f k phi norm N = num # den).
 Proof.
   split; [exact inner_stage_comm |
   split; [exact inner_stage_self_nonneg |

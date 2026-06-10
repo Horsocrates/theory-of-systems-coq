@@ -1,10 +1,17 @@
-(** * AnomalySystematic.v -- Systematic anomaly cancellation search
-    Elements: cubic_after_linear, systematic test of Z/6 charges
-    Roles:    SM is unique anomaly-free solution among Z/6 charges
-    Rules:    Fix Y₁=1/6, substitute Y₅ from linear, check cubic
-    Status:   Foundation
+(** * AnomalySystematic.v -- a 1-D SAMPLE scan of the cubic residual -- NOT a systematic search
+       (honesty rollback June 2026: scanned ~10 values of Y2 with Y3=Y4=0; the TRUE box-exhaustive
+        scan with per-rule counts is AnomalyLatticeDial.v: 1317 -> 11 -> exactly {SM, u<->d swap})
+    Elements: cubic_after_linear, sample tests of Z/6 charges
+    Roles:    SM satisfies the cubic residual; ~10 single-axis alternatives fail
+    Rules:    Fix Y1=1/6, substitute Y5 from linear, check cubic on a 1-D slice (Y3=Y4=0)
     STATUS: 17 Qed, 0 Admitted, 0 new axioms
-    Author: Horsocrates | Date: March 2026
+    Author: Horsocrates | Date: March 2026  (systematicity-honesty rollback: June 2026)
+
+    HONEST STATUS: the scan covers Y2 over ~10 rational points with Y3=Y4=0 — a 1-D slice of a
+    3-D space, not a systematic search; "unique among Z/6 charges" was an over-claim.  Linear +
+    cubic ALONE admit 11 lattice solutions in [-8..8]/6 (AnomalyLatticeDial.dial_grav_cubic);
+    the pinning to exactly {SM, u<->d swap} needs the non-abelian conditions
+    (AnomalyLatticeDial.dial_all_exact) or the algebraic route (ChargeLatticeTheory.v).
 *)
 
 From Stdlib Require Import QArith Lia ZArith.

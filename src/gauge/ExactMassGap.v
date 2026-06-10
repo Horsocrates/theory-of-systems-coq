@@ -245,9 +245,9 @@ Qed.
 
 (** Gap is rational *)
 Lemma gap_M0_rational : forall beta,
-  exists q : Q, gap_M0 beta == q.
+  exists (num : Z) (den : BinNums.positive), gap_M0 beta = num # den.
 Proof.
-  intros beta. exists (gap_M0 beta). reflexivity.
+  intros beta. destruct (gap_M0 beta) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* ================================================================== *)
@@ -364,9 +364,9 @@ Proof.
 Qed.
 
 Lemma eigenvalue_sum_rational : forall beta,
-  exists q : Q, eigenvalue_sum beta == q.
+  exists (num : Z) (den : BinNums.positive), eigenvalue_sum beta = num # den.
 Proof.
-  intros beta. exists (eigenvalue_sum beta). reflexivity.
+  intros beta. destruct (eigenvalue_sum beta) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** Connection to character expansion *)

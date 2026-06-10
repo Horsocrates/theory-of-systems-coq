@@ -13,7 +13,7 @@
 (*  Roles:    process mathematics as unifier                                *)
 (*  Rules:    A = exists → both Millennium Problems                         *)
 (*  STATUS: target ~30 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, L4_witness, B_antisym, C_B_positive, B_coeff_bounded *)
+(*  AXIOMS: classic, L4_witness, C_B_positive, B_coeff_bounded (B_antisym: Lemma 06.2026) *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 

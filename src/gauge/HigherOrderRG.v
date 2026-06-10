@@ -389,8 +389,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : forall beta, 0 < beta -> 0 < beta * beta.
-Proof. exact beta_sq_pos. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -407,5 +406,5 @@ Proof. exact beta_sq_pos. Qed.
 (*           correction_geometric_decay (3)                                  *)
 (*  Part V: higher_order_rg_summary, quartic_rg_main, sextic_rg_main,      *)
 (*          all_corrections_bounded, higher_order_structure,                *)
-(*          total_count (6)                                                  *)
+(*          tail-stamp removed                                                  *)
 (* ========================================================================= *)

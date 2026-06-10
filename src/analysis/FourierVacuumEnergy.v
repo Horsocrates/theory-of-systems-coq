@@ -68,8 +68,11 @@ Definition vacuum_process (ev : nat -> Q) : RealProcess :=
 
 (** Each stage is finite *)
 Lemma vacuum_process_finite : forall ev N,
-  exists q : Q, vacuum_process ev N = q.
-Proof. intros. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), vacuum_process ev N = num # den.
+Proof.
+  intros. destruct (vacuum_process ev N) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 (** Partial sums are monotone (for nonneg eigenvalues) *)
 Lemma partial_sum_monotone : forall ev N,
@@ -126,7 +129,7 @@ Theorem vacuum_energy_p4 :
   (* Energy density is 1/2 *)
   energy_density_4 == 1 # 2 /\
   (* Each process stage is finite *)
-  (forall ev N, exists q, vacuum_process ev N = q) /\
+  (forall ev N, exists (num : Z) (den : BinNums.positive), vacuum_process ev N = num # den) /\
   (* No subtraction of infinities needed *)
   0 < vacuum_energy_sq_4.
 Proof.
@@ -144,7 +147,7 @@ Theorem fourier_vacuum_synthesis :
   vacuum_energy_sq_4 == 2 /\
   energy_density_4 == 1 # 2 /\
   avg_omega_sq_4 == 8 # 3 /\
-  (forall ev N, exists q, vacuum_process ev N = q).
+  (forall ev N, exists (num : Z) (den : BinNums.positive), vacuum_process ev N = num # den).
 Proof.
   split; [exact vacuum_energy_sq_4_value |
   split; [exact energy_density_value |

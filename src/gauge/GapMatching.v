@@ -196,9 +196,9 @@ Qed.
 
 (** RG process well-defined at every stage *)
 Lemma rg_process_well_defined : forall K k beta,
-  exists q, exact_rg K k beta == q.
+  exists (num : Z) (den : BinNums.positive), exact_rg K k beta = num # den.
 Proof.
-  intros K k beta. exists (exact_rg K k beta). reflexivity.
+  intros K k beta. destruct (exact_rg K k beta) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** exact_rg differs from Gaussian rg_map_quadratic in general *)
@@ -243,7 +243,7 @@ Qed.
 (** What gap matching proves *)
 Theorem what_gap_matching_proves :
   (* Exact RG is well-defined as a process *)
-  (forall K k beta, exists q, exact_rg K k beta == q) /\
+  (forall K k beta, exists (num : Z) (den : BinNums.positive), exact_rg K k beta = num # den) /\
   (* It differs from Gaussian RG *)
   ~ (forall K k beta, exact_rg K k beta == rg_map_quadratic beta) /\
   (* It preserves gap information *)
@@ -256,8 +256,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : rg_process_well_defined = rg_process_well_defined.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -274,5 +273,5 @@ Proof. reflexivity. Qed.
 (*            rg_process_well_defined,                                        *)
 (*            gap_matching_vs_gaussian (4)                                   *)
 (*  Part IV: gap_matching_main, what_gap_matching_proves,                    *)
-(*           total_count (3)                                                 *)
+(*           tail-stamp removed                                                 *)
 (* ========================================================================= *)

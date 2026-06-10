@@ -178,8 +178,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (14 = 14)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -191,5 +190,5 @@ Proof. reflexivity. Qed.
 (*            hessian_eigenvalue_zero, hessian_eigenvalue_2beta,              *)
 (*            cos_approx_at_zero, vacuum_is_minimum,                          *)
 (*            hessian_eigvecs_orthogonal (8)                                  *)
-(*  Part IV: wilson_action_summary, total_count (2)                           *)
+(*  Part IV: wilson_action_summary                           *)
 (* ========================================================================= *)

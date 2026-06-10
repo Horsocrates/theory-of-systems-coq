@@ -251,10 +251,17 @@ Definition is_refining (op : OpenProcess) : Prop :=
   forall n x, covered_by_balls (op n) x ->
     covered_by_balls (op (S n)) x.
 
-(** Under P4: at every level, the cover is finite (trivially) *)
+(** Under P4: at every level the cover is a FINITE LIST — every cover is empty
+    or built by consing finitely many balls (June 2026: was the vacuous
+    `exists k, length (op n) = k`; the honest content is the constructor
+    structure of the list type). *)
 Lemma p4_cover_finite : forall (op : OpenProcess) n,
-  exists k, length (op n) = k.
-Proof. intros op n. exists (length (op n)). reflexivity. Qed.
+  op n = nil \/ exists b rest, op n = cons b rest.
+Proof.
+  intros op n. destruct (op n) as [| b rest].
+  - left. reflexivity.
+  - right. exists b, rest. reflexivity.
+Qed.
 
 (* ================================================================== *)
 (*  Checks                                                              *)

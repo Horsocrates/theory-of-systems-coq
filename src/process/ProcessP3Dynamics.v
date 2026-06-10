@@ -96,16 +96,6 @@ Proof.
   intros. unfold P3_geometry_process. apply order_geom_nvertices.
 Qed.
 
-(** ★ Gravity = geometry changing with process step *)
-Theorem geometry_change_is_gravity :
-  (* A refining GeometryProcess where: *)
-  (* - vertices increase (universe expands) *)
-  (* - edge lengths may change (curvature evolves) *)
-  (* - total length increases (expansion) *)
-  (* is the P4 version of gravitational dynamics *)
-  forall G n, geometry_change (constant_geometry G) n == 0.
-Proof. intros. apply constant_zero_change. Qed.
-
 (* ================================================================== *)
 (*  Part III: Metric Change  (~4 lemmas)                              *)
 (* ================================================================== *)
@@ -131,6 +121,18 @@ Proof.
   assert (Heq : geom_total_length G - geom_total_length G == 0) by ring.
   setoid_rewrite Heq. unfold Qabs. simpl. reflexivity.
 Qed.
+
+(** ★ Gravity = geometry changing with process step
+    (June 2026: this theorem stood ABOVE the definition of geometry_change —
+    the file could never have recompiled; moved below its dependencies.) *)
+Theorem geometry_change_is_gravity :
+  (* A refining GeometryProcess where: *)
+  (* - vertices increase (universe expands) *)
+  (* - edge lengths may change (curvature evolves) *)
+  (* - total length increases (expansion) *)
+  (* is the P4 version of gravitational dynamics *)
+  forall G n, geometry_change (constant_geometry G) n == 0.
+Proof. intros. apply constant_zero_change. Qed.
 
 (** Connection to Regge: *)
 Theorem regge_from_geometry_process :

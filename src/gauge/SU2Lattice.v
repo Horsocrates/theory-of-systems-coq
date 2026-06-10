@@ -274,8 +274,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (22 = 22)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -290,5 +289,5 @@ Proof. reflexivity. Qed.
 (*           q0_unit_bound, q0_unit_bound_neg, plaq_contribution_nonneg,   *)
 (*           su2_config_ext (8)                                             *)
 (*  Part V: su2_lattice_summary, su2_gauge_invariance_main,                *)
-(*          total_count (3)                                                 *)
+(*          tail-stamp removed                                                 *)
 (* ========================================================================= *)

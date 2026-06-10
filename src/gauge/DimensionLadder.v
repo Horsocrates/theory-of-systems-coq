@@ -191,8 +191,7 @@ Theorem what_remains : mass_gap_2d_at_8 < mass_gap_3d_at_8.
 Proof. exact gap_increases_with_dimension. Qed.
 
 (** End marker *)
-Theorem total_count : (13 = 13)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -203,5 +202,5 @@ Proof. reflexivity. Qed.
 (*  Part III: from_existence_to_3d_gap,                                       *)
 (*            gap_3d_exceeds_1d_continuum (2)                                 *)
 (*  Part IV: dimension_ladder_main, mass_gap_because_space_exists,            *)
-(*           what_remains, total_count (4)                                    *)
+(*           what_remains                                    *)
 (* ========================================================================= *)

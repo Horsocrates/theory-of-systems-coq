@@ -120,8 +120,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (12 = 12)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -132,5 +131,5 @@ Proof. reflexivity. Qed.
 (*  Part II: model_misses_asymptotic_freedom, model_misses_topology,         *)
 (*           model_misses_dim_transmutation, topologically_trivial,          *)
 (*           instanton_invisible (5)                                         *)
-(*  Part III: obstruction_summary, topological_main, total_count (3)         *)
+(*  Part III: obstruction_summary, topological_main         *)
 (* ========================================================================= *)

@@ -327,8 +327,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (30 = 30)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -343,5 +342,5 @@ Proof. reflexivity. Qed.
 (*  Part VI: trace_cyclic, qtrace_id, qtrace_conj, q0_id (4)              *)
 (*  Part VII: qadd_comm, qscale_zero, qscale_one, near_id_at_zero,        *)
 (*            near_id_norm_sq, q0_unit_sq_bound (6)                        *)
-(*  Part VIII: su2_group_summary, total_count (2)                           *)
+(*  Part VIII: su2_group_summary                           *)
 (* ========================================================================= *)

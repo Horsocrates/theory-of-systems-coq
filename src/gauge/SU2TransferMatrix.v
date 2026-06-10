@@ -283,8 +283,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (25 = 25)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -298,5 +297,5 @@ Proof. reflexivity. Qed.
 (*            su2_three_fold_enhancement, su2_strong_coupling_gap,          *)
 (*            su2_weak_coupling_gap (10)                                    *)
 (*  Part IV: su2_continuum_limit, su2_gap_at_beta_3 (2)                    *)
-(*  Part V: su2_transfer_summary, su2_transfer_main, total_count (3)       *)
+(*  Part V: su2_transfer_summary, su2_transfer_main       *)
 (* ========================================================================= *)

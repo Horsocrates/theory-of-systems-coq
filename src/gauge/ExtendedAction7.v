@@ -124,8 +124,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : col_integral_5_positive = col_integral_5_positive.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -134,5 +133,5 @@ Proof. reflexivity. Qed.
 (*  Part II: e_ext_05, e_ext_15, e_ext_25 (3)                               *)
 (*  Part III: e_ext_06, e_ext_16, e_ext_26 (3)                              *)
 (*  Part IV: col_integral_ext_5/6, col_integral_5/6_positive (4)            *)
-(*  Part V: extended_action_7_main, total_count (2)                          *)
+(*  Part V: extended_action_7_main                          *)
 (* ========================================================================= *)

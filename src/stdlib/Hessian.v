@@ -271,14 +271,18 @@ Proof.
   lra.
 Qed.
 
-(** L13: Newton step is well-defined when f'' is nonzero. *)
+(** L13: Newton step is well-defined when f'' is nonzero: it satisfies its
+    defining equation — the correction (x - N(x)) times f''(x) recovers
+    f'(x), i.e. the division genuinely inverts the multiplication
+    (June 2026: was the vacuous `exists y, y == newton_step f' f'' x`,
+    which never used the nonzero hypothesis). *)
 Lemma newton_step_well_defined :
   forall (f' f'' : Q -> Q) (x : Q),
   ~ f'' x == 0 ->
-  exists y, y == newton_step f' f'' x.
+  (x - newton_step f' f'' x) * f'' x == f' x.
 Proof.
   intros f' f'' x Hne.
-  exists (newton_step f' f'' x). reflexivity.
+  unfold newton_step. field. exact Hne.
 Qed.
 
 (** L14: Newton step moves left when f' > 0 and f'' > 0.

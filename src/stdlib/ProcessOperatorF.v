@@ -109,8 +109,8 @@ Qed.
 Theorem self_adjoint_real_eigenvalues :
   forall A N lambda f,
   is_self_adjoint A N -> is_eigenprocess A f lambda ->
-  exists q : Q, lambda == q.
-Proof. intros. exists lambda. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), lambda = num # den.
+Proof. intros. destruct lambda as [num den]. exists num, den. reflexivity. Qed.
 
 (** Zero operator *)
 Definition zero_op : ProcessOp := fun _ => const_process 0.

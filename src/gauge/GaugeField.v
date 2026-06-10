@@ -285,8 +285,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : plaquette_gauge_invariant = plaquette_gauge_invariant.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -300,5 +299,5 @@ Proof. reflexivity. Qed.
 (*  Part VII: action_zero_config, action_gauge_invariant,                     *)
 (*            gauge_transform_constant, zero_config_pure_gauge,              *)
 (*            gauge_orbit_action_constant, physical_dof_count (6)            *)
-(*  Part VIII: gauge_field_summary, gauge_invariance_main, total_count (3)   *)
+(*  Part VIII: gauge_field_summary, gauge_invariance_main   *)
 (* ========================================================================= *)

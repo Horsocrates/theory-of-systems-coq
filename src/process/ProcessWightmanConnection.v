@@ -35,7 +35,7 @@ From ToS Require Import gauge.LatticeCorrelations.
 
 (** W1: Hilbert space — every energy level indexed by nat *)
 Theorem w1_from_lattice :
-  forall j : nat, exists e : Q, physical_energy j 1 == e.
+  forall j : nat, exists (num : Z) (den : BinNums.positive), physical_energy j 1 = num # den.
 Proof. exact wightman_W1. Qed.
 
 (** W2: Translation invariance — Qpow multiplicative *)

@@ -14,7 +14,7 @@
 (*  Roles:    constructivity as foundation, resolution as ontology         *)
 (*  Rules:    finite ODE -> computable -> rational -> constructive         *)
 (*  STATUS: target ~35 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, B_antisym                                              *)
+(*  AXIOMS: classic (B_antisym: Lemma since 06.2026)                                              *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -72,9 +72,9 @@ Qed.
 Theorem solution_is_rational : forall nu K N n a0 k,
   (* euler_evolve produces a specific element of Q *)
   (* No limits, no approximations, no existential quantifiers *)
-  exists q : Q, euler_evolve nu K N n a0 k = q.
+  exists (num : Z) (den : BinNums.positive), euler_evolve nu K N n a0 k = num # den.
 Proof.
-  intros. exists (euler_evolve nu K N n a0 k). reflexivity.
+  intros. destruct (euler_evolve nu K N n a0 k) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* Zero initial data gives zero at all times *)
@@ -252,9 +252,9 @@ Qed.
 (* Constructive nature *)
 Theorem constructive_nature : forall nu K N n (a0 : modal_state) k,
   (* Euler evolve produces a concrete rational value *)
-  exists q : Q, euler_evolve nu K N n a0 k = q.
+  exists (num : Z) (den : BinNums.positive), euler_evolve nu K N n a0 k = num # den.
 Proof.
-  intros. exists (euler_evolve nu K N n a0 k). reflexivity.
+  intros. destruct (euler_evolve nu K N n a0 k) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* Process agrees with classical when both exist *)
@@ -270,7 +270,7 @@ Qed.
 (* ★ RESOLUTION REGULARITY MAIN THEOREM ★ *)
 Theorem resolution_regularity_main :
   (* 1. Constructive: solution computable at each K *)
-  (forall nu K N n a0 k, exists q : Q, euler_evolve nu K N n a0 k = q) /\
+  (forall nu K N n a0 k, exists (num : Z) (den : BinNums.positive), euler_evolve nu K N n a0 k = num # den) /\
   (* 2. Energy bounded at each K *)
   (forall p, process_energy_bounded p ->
     forall K n, process_energy p K n <= process_initial_energy p K) /\
@@ -278,7 +278,7 @@ Theorem resolution_regularity_main :
   (forall E0 nu, 0 < E0 -> 0 < nu -> 0 < integrated_enstrophy_bound E0 nu).
 Proof.
   split; [| split].
-  - intros. exists (euler_evolve nu K N n a0 k). reflexivity.
+  - intros. destruct (euler_evolve nu K N n a0 k) as [num den]. exists num, den. reflexivity.
   - intros p Hp K n. apply process_energy_le_initial. apply Hp.
   - intros. apply integrated_bound_positive; assumption.
 Qed.

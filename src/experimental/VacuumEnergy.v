@@ -296,11 +296,11 @@ Proof. unfold casimir_1d. reflexivity. Qed.
 Lemma vacuum_casimir_3d : casimir_3d == zeta_neg 3.
 Proof. unfold casimir_3d. reflexivity. Qed.
 
-Lemma vacuum_finite_1d : forall N, exists q : Q, vacuum_energy_1d N == q.
-Proof. intros N. exists (vacuum_energy_1d N). reflexivity. Qed.
+Lemma vacuum_finite_1d : forall N, exists (num : Z) (den : BinNums.positive), vacuum_energy_1d N = num # den.
+Proof. intros N. destruct (vacuum_energy_1d N) as [num den]. exists num, den. reflexivity. Qed.
 
-Lemma vacuum_finite_3d : forall N, exists q : Q, vacuum_energy_3d N == q.
-Proof. intros N. exists (vacuum_energy_3d N). reflexivity. Qed.
+Lemma vacuum_finite_3d : forall N, exists (num : Z) (den : BinNums.positive), vacuum_energy_3d N = num # den.
+Proof. intros N. destruct (vacuum_energy_3d N) as [num den]. exists num, den. reflexivity. Qed.
 
 Lemma vacuum_step_zpe_1d : forall N,
   vacuum_energy_1d (S N) - vacuum_energy_1d N == zpe_1d (S N).
@@ -321,7 +321,7 @@ Proof.
 Qed.
 
 Theorem vacuum_three_level_1d :
-  (forall N, exists q, vacuum_energy_1d N == q) /\
+  (forall N, exists (num : Z) (den : BinNums.positive), vacuum_energy_1d N = num # den) /\
   (forall N, vacuum_energy_1d (S N) - vacuum_energy_1d N == zpe_1d (S N)) /\
   casimir_1d == -(1#12).
 Proof.
@@ -331,7 +331,7 @@ Proof.
 Qed.
 
 Theorem vacuum_three_level_3d :
-  (forall N, exists q, vacuum_energy_3d N == q) /\
+  (forall N, exists (num : Z) (den : BinNums.positive), vacuum_energy_3d N = num # den) /\
   (forall N, vacuum_energy_3d (S N) - vacuum_energy_3d N == zpe_3d (S N)) /\
   casimir_3d == (1#120).
 Proof.
@@ -474,8 +474,8 @@ Theorem vacuum_main_theorem :
   casimir_3d == (1#120) /\
   (forall N, 4 * vacuum_energy_1d N == inject_Z (Z.of_nat (S N)) *
                                         inject_Z (Z.of_nat (S (S N)))) /\
-  (forall N, exists q, vacuum_energy_1d N == q) /\
-  (forall N, exists q, vacuum_energy_3d N == q).
+  (forall N, exists (num : Z) (den : BinNums.positive), vacuum_energy_1d N = num # den) /\
+  (forall N, exists (num : Z) (den : BinNums.positive), vacuum_energy_3d N = num # den).
 Proof.
   split; [exact vacuum_1d_diverges|].
   split; [exact vacuum_3d_diverges|].

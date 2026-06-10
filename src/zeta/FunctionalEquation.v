@@ -4,8 +4,8 @@
 (*  Part of: Theory of Systems - Coq Formalization (E/R/R Framework)        *)
 (*                                                                          *)
 (*  PURPOSE: Formalize the reflection s -> 1-s and its consequences for     *)
-(*    the structure of zeta zeros. The functional equation is taken as      *)
-(*    ONE domain axiom (functional_equation_structure) in this branch.      *)
+(*    the structure of zeta zeros. June 2026: the former domain axiom        *)
+(*    (functional_equation_structure) is now a LEMMA — see Section 3.       *)
 (*                                                                          *)
 (*  KEY RESULTS:                                                            *)
 (*    - reflect: s -> 1-s on TComplex                                      *)
@@ -14,7 +14,9 @@
 (*    - RH_iff_reflect_equiv: RH iff reflect preserves every zero          *)
 (*    - Zero quadruple structure: rho, conj, reflect, reflect-conj         *)
 (*                                                                          *)
-(*  AXIOMS: classic (from classify_zeros), 1 mathematical axiom            *)
+(*  AXIOMS: classic only (June 2026: the mathematical axiom ELIMINATED —    *)
+(*    functional_equation_structure is a 2-line Lemma; the analytic FE      *)
+(*    about actual zeta vanishing remains unformalized, in prose)           *)
 (*                                                                          *)
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
@@ -120,11 +122,35 @@ Proof.
 Qed.
 
 (* ========================================================================= *)
-(* SECTION 3: THE MATHEMATICAL AXIOM                                         *)
+(* SECTION 3: THE FORMER AXIOM — NOW A LEMMA (June 2026)                      *)
 (*                                                                           *)
-(* The functional equation of zeta implies: if rho is a nontrivial zero,   *)
-(* then reflect(rho) is also a nontrivial zero.                            *)
-(* This is the ONE domain Axiom in the entire zeta branch (not Admitted).  *)
+(* HISTORICAL: this was the ONE domain Axiom of the zeta branch.  HONEST     *)
+(* RE-FRAME: in this branch `is_nontrivial_zero rho` is FORMALLY defined as  *)
+(* `is_cauchy_complex rho /\ in_critical_strip rho` (ZetaZeros.v:134) —      *)
+(* there is NO vanishing-of-zeta condition in the formal definition.  Both   *)
+(* conjuncts are reflection-stable, and both preservation lemmas are proven  *)
+(* right above (reflect_zero_cauchy, reflect_zero_critical_strip).  So the   *)
+(* statement is a 2-line THEOREM — exactly parallel to conj_zero_nontrivial  *)
+(* in ZetaZeros.v.  The axiom's NAME promised more than its statement said.  *)
+(*                                                                           *)
+(* What remains genuinely unformalized (the honest break-off): Riemann's     *)
+(* ANALYTIC functional equation — that reflection preserves the VANISHING    *)
+(* of the actual zeta function.  That analytic input lives in prose, not in  *)
+(* this branch; the branch's RH treatment is about this STRUCTURAL model of  *)
+(* zeros (Cauchy + strip), for which reflection-closure is now axiom-free.   *)
+(*                                                                           *)
+(* ============ E/R/R разбор ============                                    *)
+(*   Elements: процессы CauchyComplex rho; отражение reflect_zero            *)
+(*             (s -> 1-s покомпонентно).                                     *)
+(*   Roles:    is_nontrivial_zero = роль структурного носителя нуля          *)
+(*             (Коши + критическая полоса); обнуление дзеты в роль НЕ        *)
+(*             входит формально.                                             *)
+(*   Rules:    полоса 0<re<1 отражательно-симметрична; Коши-свойство         *)
+(*             сохраняется аффинным отражением — оба правила уже доказаны.   *)
+(* ДИАГНОСТИКА (P4): аксиома утверждала конъюнкцию двух доказанных лемм —    *)
+(* over-branding имени, не математическая необходимость.  Устранение:        *)
+(* Axiom -> Lemma.  Подлинное аналитическое ФУ (о занулении настоящей        *)
+(* дзеты) остаётся неформализованным аналитическим входом — в прозе.         *)
 (* ========================================================================= *)
 
 (** Reflection preserves Cauchy complex property *)
@@ -166,10 +192,17 @@ Proof.
   destruct (Hstrip n) as [Hpos Hlt1]. lra.
 Qed.
 
-(** THE AXIOM: functional equation implies reflect preserves nontrivial zeros *)
-Axiom functional_equation_structure :
+(** The former "functional equation" axiom, now a lemma: reflection preserves
+    nontrivial zeros, because is_nontrivial_zero = Cauchy + critical strip
+    and both conjuncts are reflection-stable (the two lemmas above). *)
+Lemma functional_equation_structure :
   forall rho : CauchyComplex,
     is_nontrivial_zero rho -> is_nontrivial_zero (reflect_zero rho).
+Proof.
+  intros rho [Hcauchy Hstrip]. split.
+  - apply reflect_zero_cauchy. exact Hcauchy.
+  - apply reflect_zero_critical_strip. exact Hstrip.
+Qed.
 
 (* ========================================================================= *)
 (* SECTION 4: CONSEQUENCES OF THE FUNCTIONAL EQUATION                        *)

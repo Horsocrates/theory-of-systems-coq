@@ -315,8 +315,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : lattice_state_dim 2 1 = 2%nat.
-Proof. exact lattice_dim_2_1. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -336,5 +335,5 @@ Proof. exact lattice_dim_2_1. Qed.
 (*  Part IV: gap_process_decreasing, gap_process_nonneg,                     *)
 (*           gap_process_pos, gap_process_cauchy,                            *)
 (*           gap_process_at_0, gap_process_at_1 (6)                          *)
-(*  Part V: larger_lattice_main, total_count (2)                             *)
+(*  Part V: larger_lattice_main                             *)
 (* ========================================================================= *)

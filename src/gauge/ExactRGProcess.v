@@ -245,7 +245,7 @@ Qed.
 (** What exact RG proves *)
 Theorem what_exact_rg_proves :
   (* Process is well-defined *)
-  (forall K k beta, exists q, exact_rg K k beta == q) /\
+  (forall K k beta, exists (num : Z) (den : BinNums.positive), exact_rg K k beta = num # den) /\
   (* Process is Cauchy *)
   (forall K beta, 0 < beta -> beta < 8 ->
     is_cauchy (exact_rg_orbit K beta)) /\
@@ -259,8 +259,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : rg_process_well_defined = rg_process_well_defined.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -274,5 +273,5 @@ Proof. reflexivity. Qed.
 (*  Part III: rg_shift_from_gap, cauchy_from_telescoping (2)                 *)
 (*  Part IV: three_methods_cauchy, unconditional_cauchy,                      *)
 (*           unconditional_boundedness, unconditional_gap_positive,           *)
-(*           exact_rg_main, what_exact_rg_proves, total_count (7)           *)
+(*           exact_rg_main, what_exact_rg_proves           *)
 (* ========================================================================= *)

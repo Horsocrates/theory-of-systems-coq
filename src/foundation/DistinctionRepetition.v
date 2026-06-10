@@ -1,9 +1,11 @@
 (** * DistinctionRepetition.v — No repetition across levels
-    Elements: repeats_at, no_repetition, is_minimal_nd, uniqueness_321
+    Elements: repeats_at, no_repetition, is_minimal_nd, forced_321_given_total6
     Roles:    L1 forbids repetition, L4 requires minimality
-    Rules:    [2,3,1] is the unique minimal non-repeating 3-depth
+    Rules:    [2,3,1] is the minimal non-repeating 3-depth GIVEN total=6 (a POSIT) — NOT forced;
+              [2,4,1] passes the same role-count constraints (total_6_is_the_deciding_posit; root
+              NestedDistinction.constraints_do_not_force_231)
     Status:   Foundation File (Gap A.1)
-    STATUS: 30 Qed, 0 Admitted, 0 new axioms
+    STATUS: 21 Qed, 0 Admitted, 0 new axioms  (honest reframe: June 2026; header was drift-30)
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -175,8 +177,9 @@ Proof.
   intros nd [_ [_ [H _]]]. exact H.
 Qed.
 
-(** ★ UNIQUENESS: [2,3,1] — weak form (depth2 ≥ 3) *)
-Theorem uniqueness_321 :
+(** ★ [2,3,1] role-counts GIVEN depth=3 ∧ minimal — WEAK form (depth2 ≥ 3 only): NOT uniqueness,
+    [2,4,1] satisfies it too (total_6_is_the_deciding_posit). *)
+Theorem roles_given_minimal_weak :
   forall nd, nd_depth nd = 3%nat ->
   is_minimal_nd nd ->
   nd_roles_at nd 0 = 2%nat /\
@@ -187,8 +190,9 @@ Proof.
   split; [exact H0|split; [lia|exact H1]].
 Qed.
 
-(** ★ With total roles = 6 constraint, depth 2 is exactly 3 *)
-Theorem uniqueness_321_strong :
+(** ★ depth 2 = exactly 3 ONLY GIVEN the total-roles = 6 POSIT (total=6 is posited, not derived;
+    total_6_is_the_deciding_posit shows [2,4,1] passes everything except total=6). *)
+Theorem forced_321_given_total6 :
   forall nd, nd_depth nd = 3%nat ->
   is_minimal_nd nd ->
   nd_total_roles nd = 6%nat ->
@@ -210,8 +214,8 @@ Qed.
 Lemma sm_total_is_6 : nd_total_roles sm_distinction = 6%nat.
 Proof. reflexivity. Qed.
 
-(** SM is the unique minimal 3-depth with 6 roles *)
-Corollary sm_unique_minimal :
+(** SM role-counts recovered GIVEN the (depth=3, minimal, total=6) posits — CONDITIONAL, not unique. *)
+Corollary sm_roles_given_total6 :
   forall nd, nd_depth nd = 3%nat ->
   is_minimal_nd nd ->
   nd_total_roles nd = 6%nat ->
@@ -220,8 +224,30 @@ Corollary sm_unique_minimal :
   nd_roles_at nd 2 = nd_roles_at sm_distinction 2.
 Proof.
   intros nd Hd Hm Ht.
-  destruct (uniqueness_321_strong nd Hd Hm Ht) as [H0 [H1 H2]].
+  destruct (forced_321_given_total6 nd Hd Hm Ht) as [H0 [H1 H2]].
   simpl. auto.
+Qed.
+
+(* ================================================================== *)
+(*  NON-UNIQUENESS — total=6 is the deciding POSIT, not derived         *)
+(* ================================================================== *)
+
+(** ★ The role-count constraints (depth=3, roles_0=2, depth2 ≥ 3, roles_2=1) do NOT force [2,3,1]:
+    the alternative [2,4,1] (alt_distinction, NestedDistinction.v) satisfies ALL of them, with
+    roles_1 = 4 ≠ 3 and total = 7 ≠ 6.  So forced_321_given_total6 holds ONLY because of the EXTRA
+    total=6 posit — posited, not derived.  (Root: NestedDistinction.constraints_do_not_force_231.) *)
+Theorem total_6_is_the_deciding_posit :
+  nd_roles_at alt_distinction 0 = 2%nat
+  /\ (3 <= nd_roles_at alt_distinction 1)%nat
+  /\ nd_roles_at alt_distinction 2 = 1%nat
+  /\ nd_roles_at alt_distinction 1 <> 3%nat
+  /\ nd_total_roles alt_distinction <> 6%nat.
+Proof.
+  assert (H0 : nd_roles_at alt_distinction 0 = 2%nat) by (vm_compute; reflexivity).
+  assert (H1 : nd_roles_at alt_distinction 1 = 4%nat) by (vm_compute; reflexivity).
+  assert (H2 : nd_roles_at alt_distinction 2 = 1%nat) by (vm_compute; reflexivity).
+  assert (Ht : nd_total_roles alt_distinction = 7%nat) by (vm_compute; reflexivity).
+  rewrite H0, H1, H2, Ht. repeat split; lia.
 Qed.
 
 (* ================================================================== *)
@@ -255,7 +281,7 @@ Lemma uniqueness_gives_generators :
    u1_generators = 12)%nat.
 Proof.
   intros nd Hd Hm Ht.
-  destruct (uniqueness_321_strong nd Hd Hm Ht) as [H0 [H1 H2]].
+  destruct (forced_321_given_total6 nd Hd Hm Ht) as [H0 [H1 H2]].
   rewrite H0, H1. reflexivity.
 Qed.
 

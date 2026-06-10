@@ -233,8 +233,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : rg_map_quadratic 3 == 3.
-Proof. exact step8_fp_eq_3. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -248,5 +247,5 @@ Proof. exact step8_fp_eq_3. Qed.
 (*  Part IV: global_mass_gap, the_complete_chain,                           *)
 (*           what_is_proved_steps_8_9 (3)                                  *)
 (*  Part V: what_is_open_steps_8_9, model_limitations,                      *)
-(*          steps_8_9_synthesis, global_summary, total_count (5)           *)
+(*          steps_8_9_synthesis, global_summary           *)
 (* ========================================================================= *)

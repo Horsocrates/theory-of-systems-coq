@@ -196,8 +196,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : 0 < mass_gap_2d_at_8.
-Proof. exact gap_2d_positive. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -207,5 +206,5 @@ Proof. exact gap_2d_positive. Qed.
 (*  Part II: gap_anatomy_2d, tension_still_positive (2)                       *)
 (*  Part III: continuum_gap_2d, spatial_mechanism_universal (2)               *)
 (*  Part IV: the_2d_story, what_remains,                                      *)
-(*           synthesis_2d_main, total_count (4)                               *)
+(*           synthesis_2d_main                               *)
 (* ========================================================================= *)

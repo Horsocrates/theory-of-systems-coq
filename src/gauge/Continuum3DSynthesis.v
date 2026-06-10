@@ -165,8 +165,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : gap_3d_positive = gap_3d_positive.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -175,5 +174,5 @@ Proof. reflexivity. Qed.
 (*  Part I: continuum_1d_gap, continuum_2d_gap, continuum_3d_gap (3)        *)
 (*  Part II: all_gaps_positive, lattice_gap_hierarchy (2)                    *)
 (*  Part III: the_3d_continuum_story, what_we_proved,                        *)
-(*             continuum_3d_main, total_count (4)                            *)
+(*             continuum_3d_main                            *)
 (* ========================================================================= *)

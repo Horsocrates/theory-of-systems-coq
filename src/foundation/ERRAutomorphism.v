@@ -1,15 +1,32 @@
-(** * ERRAutomorphism.v — Automorphisms of ERR objects = gauge groups
+(** * ERRAutomorphism.v — Automorphisms of ERR objects: the DISCRETE symmetry is derived,
+       the continuous SU(N) is a POSIT (honest, matching ERRGaugeFunctorSynthesis's note)
     Elements: ERRAutomorphism (invertible bounded morphism), aut_generator_count
-    Roles:    automorphism group of N-role object = Lie group with N²-1 generators
-    Rules:    aut_compose_closed, aut_inverse, gauge = automorphism
-    STATUS:   14 Qed, 0 Admitted, 0 new axioms
+    Roles:    automorphism group of an N-role object = the DISCRETE permutation/relabel group (S_N)
+    Rules:    aut_compose_closed, aut_inverse; gauge = automorphism (discrete part only)
+    STATUS:   12 Qed, 0 Admitted, 0 new axioms  (honest reframe: June 2026; header was drift-14)
     Author:   Horsocrates | Date: April 2026
 
-    KEY CLAIM: Gauge groups ARE the automorphism groups of ERR objects.
-    N roles → Aut group has N²-1 infinitesimal generators.
-    This is not "correspondence" — it IS the definition.
-    SU(N) = connected component of Aut(ERR_N).
-*)
+    WHAT IS DERIVED: the automorphism group of an N-element ERRObject — invertible relabelings of the
+    N roles — with its group laws (identity, composition, associativity, inverse).  This is the
+    DISCRETE symmetry (the permutation group S_N), proven below.
+
+    WHAT IS POSITED (the irreducible physics input): that the gauge group is the CONTINUOUS special
+    unitary group SU(N), not merely the discrete S_N.  `aut_generator_count n := n²−1` is the
+    DIMENSION of the Lie group SU(N) — it ASSUMES SU(N); it is NOT computed from the (finite)
+    automorphism group, which has order N! and no "n²−1 generators".  And U(1) (1 role) does not come
+    from this route either: aut_generator_count 1 = 0, yet U(1) needs 1 (u1_not_from_automorphism).
+    The jump S_N (discrete) → SU(N) (continuous, unitary, det=1) imports continuity + an inner
+    product, absent from distinction.  ERRGaugeFunctorSynthesis.v states this honestly ("the Lie
+    group identification is stated as the conceptual bridge"); the old "SU(N) = connected component of
+    Aut(ERR_N) … IS the definition" here was an overclaim.  See also
+    GaugeFromDistinctionSynthesis.gauge_map_is_arithmetic_not_derivation.
+
+    ============ E/R/R разбор ============
+      Elements : N-ролевой ERRObject; группа автоморфизмов (перестановки, S_N); счёт n²−1.
+      Roles    : дискретная симметрия (S_N) — ВЫВЕДЕНА; SU(N) (непрерывная, унитарная) — ПОСТУЛАТ.
+      Rules    : групповые законы доказаны; n²−1 = dim SU(N), ПРЕДПОЛАГАЕТ группу Ли, не из Aut.
+      ДИАГНОСТИКА (P4+L4): «SU(N) = Aut … ЕСТЬ определение» — переоценка. Выведено дискретное; прыжок
+      S_N→SU(N) — неустранимый физ-постулат (непрерывность+унитарность). Уровень: `новое-обрамление`. *)
 
 From Stdlib Require Import List PeanoNat Lia Bool.
 Import ListNotations.
@@ -131,6 +148,17 @@ Proof. reflexivity. Qed.
 Lemma sm_aut_total :
   (aut_generator_count 3 + aut_generator_count 2 + u1_aut_generators = 12)%nat.
 Proof. reflexivity. Qed.
+
+(** ★ U(1) does NOT come from the automorphism route: aut_generator_count 1 = 0 (the n²−1 formula),
+    yet U(1) is asserted to have 1 generator — special-cased, i.e. posited, not derived from Aut.
+    (Mirrors GaugeFromDistinctionSynthesis.gauge_map_is_arithmetic_not_derivation.) *)
+Lemma u1_not_from_automorphism :
+  aut_generator_count 1 = 0%nat /\ u1_aut_generators = 1%nat
+  /\ aut_generator_count 1 <> u1_aut_generators.
+Proof.
+  repeat split; try reflexivity.
+  intro H. vm_compute in H. discriminate H.
+Qed.
 
 (* ================================================================ *)
 (*  SYNTHESIS                                                        *)

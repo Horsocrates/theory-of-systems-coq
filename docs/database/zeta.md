@@ -2,7 +2,7 @@
 
 _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**30 files / 683 Qed.** Score distribution: s5=0 / s4=0 / s3=4 / s2=15 / s1=11 / s0=0
+**30 files / 692 Qed.** Score distribution: s5=0 / s4=0 / s3=4 / s2=16 / s1=10 / s0=0
 
 ---
 
@@ -33,17 +33,17 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 ---
 
-## #1801 - `src/zeta/ArithmeticCommutator.v` - score 1 (exposition)
+## #1801 - `src/zeta/ArithmeticCommutator.v` - score 2 (methods)
 
-**Arithmetic commutator over Q (Heisenberg analogy)**
+**Arithmetic commutator over Q: derived from the real operators + general nonpositivity (June 2026)**
 
-- **Topic.** Trace of the squared arithmetic commutator, growth between indices, noncommutativity, negative commutators, monotonicity.
-- **Role.** Zeta (arithmetic Heisenberg toy). Self-contained.
-- **Counts.** Qed 15 / Admitted 0 / axioms 0
+- **Topic.** Finite matrix calculus on K-node truncations (sum_nodes/mat_mul_at), the commutator of mult_adj and add_adj, symmetry of both adjacencies, commutator antisymmetry, the general law Tr([M,A]^2) <= 0 for every K, and the concrete values -128/-268/-476 now DERIVED by vm_compute.
+- **Role.** Zeta (arithmetic commutator, derived). Imports DivisibilityGraph (the real operators). June 2026 forward-fix: the hardcoded value table replaced by the actual matrix computation — values matched; + general theorem tr_comm_sq_nonpos.
+- **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
-- **E/R/R.** _Elements:_ арифметический коммутатор. _Roles:_ некоммутативность как аналогия Гейзенберга. _Rules:_ comm_grows; noncomm; comm_monotone. _P4:_ коммутатор-аналог точен над Q (Element); эвристика, не теорема.
-- **Classical counterpart.** A noncommutative 'arithmetic commutator' analogy (trace of [A,B]^2 growing) is a heuristic; NEW: nothing — exact Q commutator growth as an arithmetic-Heisenberg toy.
-- **Tags.** zeta, commutator, heisenberg, exposition
+- **E/R/R.** _Elements:_ арифметический коммутатор. _Roles:_ некоммутативность как аналогия Гейзенберга. _Rules:_ comm_grows; noncomm; comm_monotone. _P4:_ след коммутатора ВЫЧИСЛЕН из настоящих операторов на конечном обрезе (P4); негативность — ОБЩАЯ теорема из антисимметрии; Гейзенберг-фрейминг остаётся аналогией (без неравенства неопределённости).
+- **Classical counterpart.** Tr([M,A]^2) <= 0 for symmetric real matrices is standard linear algebra; NEW: nothing mathematically — but since June 2026 the file is honest machinery: the trace is COMPUTED from the actual divisibility/successor adjacency operators (was a hardcoded lookup; values verified to match: -128/-268/-476), with the general nonpositivity law derived from commutator antisymmetry.
+- **Tags.** zeta, commutator, derived, methods
 
 **Lemmas (1):**
 
@@ -53,10 +53,10 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Key lemmas (deep):**
 
-- **`comm_monotone`** - След квадрата арифметического коммутатора монотонно растёт над Q — игрушечная аналогия Гейзенберга для дзеты (некоммутативность). Эвристика, честно не теорема. _(commutator, heisenberg-analogy, heuristic)_
+- **`tr_comm_sq_nonpos`** - Tr([M,A]^2) <= 0 на КАЖДОМ обрезе K — выведено из антисимметрии коммутатора симметричных операторов (делимость и соседство), а конкретные -128/-268/-476 — vm_compute из настоящих матриц (June 2026: была захардкоженная таблица; значения совпали). Некоммутативность мультипликативной и аддитивной структур N — теперь теорема с инстансами. _(commutator, antisymmetry, derived, nonpositivity)_
 
-**Uniqueness - score 1 (exposition).** Арифметический коммутатор над Q (рост, некоммутативность) — игрушечная Гейзенберг-аналогия.
-> _Caveat:_ Эвристическая аналогия, не результат; ценность — иллюстрация.
+**Uniqueness - score 2 (methods).** Коммутатор делимость×соседство ВЫЧИСЛЕН из операторов на Q-обрезах + общий закон Tr([M,A]^2)<=0 из антисимметрии; значения -128/-268/-476 выведены, не заявлены.
+> _Caveat:_ Линейная алгебра стандартна; Гейзенберг-имя остаётся ФРЕЙМИНГОМ (нет неравенства неопределённости и связи с нулями) — честно помечено в шапке.
 
 ---
 
@@ -65,8 +65,8 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Arithmetic Heisenberg synthesis**
 
 - **Topic.** A synthesis tying noncommutative arithmetic, commutator growth, Mobius spin types, the critical hierarchy, Ising structure, and Mertens oscillation.
-- **Role.** Zeta synthesis (Heisenberg analogies). Self-contained.
-- **Counts.** Qed 10 / Admitted 0 / axioms 0
+- **Role.** Zeta synthesis (Heisenberg analogies). Self-contained. June 2026 honest layering: commutator core DERIVED (real operators + general nonpositivity law, +commutator_trace_nonpositive), Mobius/Mertens real computations; Lee-Yang loci and critical exponents remain ANALOGY-DATA (enum labels + literature constants).
+- **Counts.** Qed 11 / Admitted 0 / axioms 0
 - **Imports.** ToS zeta files
 - **E/R/R.** _Elements:_ арифметические аналогии Гейзенберга. _Roles:_ синтез как роль сборки аналогий. _Rules:_ commutator_growth; mobius_spin; mertens_oscillation. _P4:_ сборка аналогий (Element); эвристика.
 - **Classical counterpart.** Bundling the arithmetic-Heisenberg analogies (Mobius spin, commutator growth, Mertens) is exposition; NEW: nothing — a synthesis of the zeta toy-analogies.
@@ -92,7 +92,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Complex zeta over Q: integer values, pole at 1**
 
 - **Topic.** TComplex, harmonic = zeta(1) (divergent), zeta at integers (real, bounded, in [1,2]), pole strength unbounded, the zeta dichotomy (bounded process vs divergent at 1).
-- **Role.** Zeta (complex values/pole). Self-contained.
+- **Role.** Zeta (complex values/pole). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 29 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ комплексная дзета TComplex; гармонический ряд. _Roles:_ дзета как процесс; полюс в 1 как role-limit. _Rules:_ harmonic_diverges; zeta_integer bounded; zeta_dichotomy. _P4:_ дзета — процесс частичных сумм; полюс в s=1 (harmonic_diverges) = role-limit; иначе ограничен (Element).
@@ -103,7 +103,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `TComplex harmonic_eq_zeta_1 harmonic_diverges zeta_complex_at_integer zeta_integer_real/bounded zeta_dichotomy zeta_process_bounded zeta_1_unbounded pole_strength complex_zeta_summary` | Definition/Lemma | комплексная дзета, полюс, дихотомия |
+| `TComplex harmonic_eq_zeta_1 harmonic_diverges zeta_complex_at_integer zeta_integer_real/bounded zeta_dichotomy zeta_process_bounded zeta_1_unbounded pole_strength complex_zeta_summary` | Definition/Lemma | комплексная дзета, полюс, дихотомия June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -119,7 +119,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Contraction & zeros: reflection is an isometry, NOT a contraction (the sharp RH obstruction)**
 
 - **Topic.** A Euclidean critical metric, reflect_isometry and reflect_not_contraction_euclidean, a weighted distance, a corrected reflect-iterate moving toward Re=1/2, and the critical line minimizing reflect-distance.
-- **Role.** Zeta/RH FLAGSHIP (vein C/E sharp observation). Book Part XIII flagship. Self-contained.
+- **Role.** Zeta/RH FLAGSHIP (vein C/E sharp observation). Book Part XIII flagship. Self-contained. June 2026: with the upstream FE axiom eliminated, reflect_zero_nontrivial / RH_critical_strip_symmetric are Closed under the global context (verified).
 - **Counts.** Qed 43 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ критическая метрика; отражение reflect (s↦1−s). _Roles:_ отражение как ИЗОМЕТРИЯ (не сжатие); критическая линия как ось симметрии. _Rules:_ reflect_isometry; reflect_not_contraction_euclidean; critical_line_minimizes_reflect_dist. _P4:_ ★ отражение — ИЗОМЕТРИЯ, НЕ сжатие ⟹ RH НЕ наивная задача неподвижной точки/Банаха; критическая линия минимизирует reflect-расстояние.
@@ -228,7 +228,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Explicit formula over Q: RH = optimal PNT error**
 
 - **Topic.** Zero contributions, RH vs de la Vallee-Poussin error (RH strictly better), pole correction, RH implies PNT-optimal implies half-line, zeros toward 1/2, and an axiom check.
-- **Role.** Zeta/RH (explicit formula). Self-contained.
+- **Role.** Zeta/RH (explicit formula). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 28 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ вклады нулей; ошибка ТРПЧ. _Roles:_ RH как критическая-линия-оптимальность. _Rules:_ rh_better_than_dvp; rh_implies_pnt_optimal; critical_line_optimal. _P4:_ RH ⟺ оптимальная ошибка ТРПЧ (критическая линия); explicit_formula_axiom_check — честный статус.
@@ -239,7 +239,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `zero_contribution rh_contribution pnt_rh_error dvp_pnt_error rh_better_than_dvp rh_implies_pnt_optimal critical_line_optimal explicit_formula_axiom_check` | Definition/Lemma | вклады нулей, RH=оптимальная ошибка |
+| `zero_contribution rh_contribution pnt_rh_error dvp_pnt_error rh_better_than_dvp rh_implies_pnt_optimal critical_line_optimal explicit_formula_axiom_check` | Definition/Lemma | вклады нулей, RH=оптимальная ошибка June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -252,16 +252,16 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 ## #1809 - `src/zeta/FunctionalEquation.v` - score 2 (new-framing)
 
-**Functional equation over Q: reflection involution, zero quadruple (1 axiom)**
+**Functional equation over Q: reflection involution, zero quadruple (axiom eliminated 06.2026)**
 
-- **Topic.** The reflection s -> 1-s (involutive), reflect on zeros, RH iff reflect-equiv, the zero quadruple {rho, 1-rho, conj} collapsing on the critical line — with the FE structure as a stated axiom.
-- **Role.** Zeta/RH (functional equation). CARRIES 1 axiom (functional_equation_structure, eliminable). Self-contained otherwise.
-- **Counts.** Qed 13 / Admitted 0 / axioms 1
+- **Topic.** The reflection s -> 1-s (involutive), reflect on zeros, RH iff reflect-equiv, the zero quadruple {rho, 1-rho, conj} collapsing on the critical line — FE structure a 2-line Lemma since June 2026 (was the branch's one axiom).
+- **Role.** Zeta/RH (functional equation). 0 axioms since June 2026: functional_equation_structure is a 2-line Lemma (is_nontrivial_zero = Cauchy + strip, both reflection-stable); the analytic FE stays in prose. Self-contained otherwise.
+- **Counts.** Qed 14 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
-- **E/R/R.** _Elements:_ отражение reflect (s↦1−s); нули. _Roles:_ функциональное уравнение как роль симметрии; четвёрка нулей. _Rules:_ reflect_involutive; RH_iff_reflect_equiv; RH_quadruple_collapses. _P4:_ ★ функц. уравнение ПОСТУЛИРОВАНО (functional_equation_structure — устранимо, это FE Римана, но заявлено как axiom); четвёрка нулей коллапсирует на критической линии.
-- **Classical counterpart.** The Riemann functional equation pairing a nontrivial zero rho with 1-rho (and the reflection involution) is classical; the structure here is ASSUMED as an axiom (functional_equation_structure) — eliminable in principle (it IS Riemann's FE) but stated as a Parameter; NEW: only the P4 reading (zero quadruple collapses on the critical line).
+- **E/R/R.** _Elements:_ отражение reflect (s↦1−s); нули. _Roles:_ функциональное уравнение как роль симметрии; четвёрка нулей. _Rules:_ reflect_involutive; RH_iff_reflect_equiv; RH_quadruple_collapses. _P4:_ ★ functional_equation_structure — ЛЕММА с June 2026 (is_nontrivial_zero = Коши∧полоса, оба отражательно-устойчивы; аналитическое ФУ о занулении — в прозе); четвёрка нулей коллапсирует на критической линии.
+- **Classical counterpart.** The Riemann functional equation pairing a nontrivial zero rho with 1-rho (and the reflection involution) is classical; the structure WAS an axiom until June 2026; now a 2-line LEMMA — is_nontrivial_zero is formally Cauchy + critical strip (no vanishing condition), both conjuncts reflection-stable; the ANALYTIC FE (about actual zeta vanishing) stays unformalized in prose; NEW: only the P4 reading (zero quadruple collapses on the critical line).
 - **Tags.** zeta, functional-equation, reflection, axiom, new-framing
-- **Notes.** Declares axiom functional_equation_structure (Riemann's FE, eliminable ProvableStructure per CLAUDE.md). axioms=1.
+- **Notes.** June 2026: axiom ELIMINATED — functional_equation_structure is a 2-line Lemma (Cauchy+strip both reflection-stable; the NAME promised the analytic FE, the statement was free). Print Assumptions of the reflection layer: Closed under the global context. axioms=0.
 
 **Lemmas (1):**
 
@@ -271,10 +271,10 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 **Key lemmas (deep):**
 
-- **`RH_quadruple_collapses`** - Нетривиальный ноль порождает четвёрку {ρ, 1−ρ, conj ρ, ...}, коллапсирующую в пару на критической линии (RH) над Q. Структура FE ПОСТУЛИРОВАНА (functional_equation_structure) — устранима (это FE Римана), но честно помечена как 1 аксиома. _(functional-equation, reflection, quadruple, axiom)_
+- **`RH_quadruple_collapses`** - Нетривиальный ноль порождает четвёрку {ρ, 1−ρ, conj ρ, ...}, коллапсирующую в пару на критической линии (RH) над Q. Структура FE ДОКАЗАНА (June 2026, 2 строки): формальное определение нуля не содержит зануления, оба конъюнкта отражательно-устойчивы — имя аксиомы обещало больше, чем говорило утверждение; аналитическое ФУ честно в прозе. _(functional-equation, reflection, quadruple, axiom)_
 
 **Uniqueness - score 2 (new-framing).** Функциональное уравнение над Q: отражение-инволюция, RH⟺reflect-equiv, коллапс четвёрки нулей на критической линии.
-> _Caveat:_ ★ Несёт 1 аксиому (functional_equation_structure) — устранимую структуру (FE Римана), честно помеченную (CLAUDE.md: ProvableStructure, eliminable). НЕ доказательство RH.
+> _Caveat:_ ★ 0 аксиом с 2026-06-10: бывшая аксиома = 2-строчная лемма (over-branding имени вскрыт: is_nontrivial_zero формально без зануления); аналитическое ФУ Римана неформализовано — в прозе. НЕ доказательство RH.
 
 ---
 
@@ -310,7 +310,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Li coefficients over Q: RH-equivalent criterion (computable)**
 
 - **Topic.** Binomials, Li modulus bounds, Li nonneg on the critical line, lambda lower bounds growing, the Li criterion (holds, computable), Li as a P4 process.
-- **Role.** Zeta/RH (Li criterion). Self-contained.
+- **Role.** Zeta/RH (Li criterion). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 35 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ коэффициенты Ли; биномы. _Roles:_ критерий Ли как RH-эквивалент. _Rules:_ li_on_line_nonneg; li_criterion_holds/computable. _P4:_ критерий Ли РАЗРЕШИМ (li_criterion_computable) над Q; Li-коэффициенты неотрицательны на линии (Element).
@@ -321,7 +321,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `binom li_modulus_sq li_contribution_bound li_bound_on_line lambda_lower li_growth_rate li_criterion li_criterion_holds/computable li_on_line_nonneg li_p4_process` | Definition/Lemma | ★ коэффициенты Ли, RH-критерий, разрешимость |
+| `binom li_modulus_sq li_contribution_bound li_bound_on_line lambda_lower li_growth_rate li_criterion li_criterion_holds/computable li_on_line_nonneg li_p4_process` | Definition/Lemma | ★ коэффициенты Ли, RH-критерий, разрешимость June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -337,7 +337,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Li process over Q: decidable RH/YM checks**
 
 - **Topic.** li_process (rational, nonneg on the line), YM/RH checks decidable, the process Cauchy, P4 Li computable/verified.
-- **Role.** Zeta/RH (Li as process). Self-contained.
+- **Role.** Zeta/RH (Li as process). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ li_process; RH/YM проверки. _Roles:_ Li как процесс; разрешимые проверки. _Rules:_ rh_decidable; ym_decidable; process_cauchy. _P4:_ Li как Cauchy-процесс с РАЗРЕШИМЫМИ RH/YM проверками (Element).
@@ -348,7 +348,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `li_process li_nonneg_if_on_line ym_check rh_check ym/rh_decidable process_cauchy p4_li_computable/verified li_process_summary` | Definition/Lemma | Li-процесс, разрешимые проверки, Cauchy |
+| `li_process li_nonneg_if_on_line ym_check rh_check ym/rh_decidable process_cauchy p4_li_computable/verified li_process_summary` | Definition/Lemma | Li-процесс, разрешимые проверки, Cauchy June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -364,7 +364,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Log zeta over Q: prime-power sum, Mertens**
 
 - **Topic.** Harmonic/log approximation, the log series, sum over primes / prime-power sum, the Euler-log leading term, the Mertens combination, log-zeta process.
-- **Role.** Zeta (log zeta). Self-contained.
+- **Role.** Zeta (log zeta). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 30 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ log zeta; сумма по простым. _Roles:_ log zeta как процесс; Мертенс. _Rules:_ euler_log_leading; mertens_via_primes; log_zeta_process. _P4:_ log zeta как процесс (Element); сумма по простым, тождество Мертенса.
@@ -499,7 +499,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **RH final assessment over Q: honest ledger of proved vs gap**
 
 - **Topic.** Proved items (Li computable/nonneg on line, Weil-Li equiv, variance bounded, zeta converges, Mertens nonneg), the conditional RH, the_honest_gap, and the three-problems-one-framework view.
-- **Role.** Zeta/RH (honest meta-assessment). Self-contained.
+- **Role.** Zeta/RH (honest meta-assessment). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 16 / Admitted 0 / axioms 0
 - **Imports.** ToS zeta files
 - **E/R/R.** _Elements:_ доказанные пункты к RH; честный пробел. _Roles:_ оценка как честная роль (что доказано/не доказано). _Rules:_ conditional_rh_proved; the_honest_gap. _P4:_ ★ честный реестр: доказано (Li-вычислимость, неотрицательность на линии), conditional RH, the_honest_gap явно назван.
@@ -510,7 +510,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `proved_li_computable/nonneg_on_line proved_weil_li_equiv proved_variance_bounded conditional_rh the_honest_gap three_problems_one_framework rh_grand_summary` | Definition/Lemma | ★ честный реестр доказанного и пробела |
+| `proved_li_computable/nonneg_on_line proved_weil_li_equiv proved_variance_bounded conditional_rh the_honest_gap three_problems_one_framework rh_grand_summary` | Definition/Lemma | ★ честный реестр доказанного и пробела June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -526,7 +526,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **RH phase-1 synthesis over Q: the squeeze toward 1/2**
 
 - **Topic.** Left/right walls, the squeeze, rh_gap approaching 1/2, rh_requires_gap_to_zero, P4 computability, three-millennium link.
-- **Role.** Zeta/RH (phase-1 squeeze). Self-contained.
+- **Role.** Zeta/RH (phase-1 squeeze). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 13 / Admitted 0 / axioms 0
 - **Imports.** ToS zeta files
 - **E/R/R.** _Elements:_ левая/правая стены; зазор к 1/2. _Roles:_ зажатие к критической линии как роль. _Rules:_ squeeze; rh_requires_gap_to_zero. _P4:_ зажатие как процесс; rh_requires_gap_to_zero честно — нужен предел зазора 0.
@@ -537,7 +537,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `left_wall right_wall squeeze rh_gap rh_gap_approaches_half rh_requires_gap_to_zero p4_computability three_millennium rh_phase1_complete` | Definition/Lemma | зажатие, зазор, честное требование |
+| `left_wall right_wall squeeze rh_gap rh_gap_approaches_half rh_requires_gap_to_zero p4_computability three_millennium rh_phase1_complete` | Definition/Lemma | зажатие, зазор, честное требование June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -553,7 +553,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **RH phase-2 synthesis over Q: unconditional results + the wall**
 
 - **Topic.** Three faces of RH (PNT error, critical value, reflection symmetry), unconditional results (zero-free Re=1, squeeze, Mertens, log-zeta nonneg), and the_wall / wall_holds.
-- **Role.** Zeta/RH (phase-2 unconditional + wall). Self-contained.
+- **Role.** Zeta/RH (phase-2 unconditional + wall). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** ToS zeta files
 - **E/R/R.** _Elements:_ безусловные результаты; стена. _Roles:_ три грани RH; безусловное vs стена. _Rules:_ unconditional_*; the_wall; wall_holds. _P4:_ ★ безусловные результаты (zero-free Re=1, Мертенс) отделены от the_wall (RH-остаток) — честно.
@@ -564,7 +564,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `rh_three_faces unconditional_zero_free_re1 unconditional_squeeze unconditional_mertens unconditional_log_zeta_nonneg the_wall wall_holds wall_breaker rh_phase2_complete` | Definition/Lemma | ★ три грани, безусловное, стена |
+| `rh_three_faces unconditional_zero_free_re1 unconditional_squeeze unconditional_mertens unconditional_log_zeta_nonneg the_wall wall_holds wall_breaker rh_phase2_complete` | Definition/Lemma | ★ три грани, безусловное, стена June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -580,7 +580,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **RH statement over Q: zeros <-> process <-> fixed-point**
 
 - **Topic.** RH_zeros / RH_process / RH_fixed, their equivalences (RH_all_equivalent), conjugate on the line, Re-Cauchy, the deviation bound, critical strip width.
-- **Role.** Zeta/RH (the statement, P4 form). Self-contained.
+- **Role.** Zeta/RH (the statement, P4 form). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 8 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ формулировки RH (нули/процесс/неподвижная точка). _Roles:_ RH как тройная эквивалентность. _Rules:_ RH_zeros_iff_process; RH_process_implies_fixed; RH_all_equivalent. _P4:_ ★ RH переформулирована как нули⟺процесс⟺неподвижная точка (RH_all_equivalent), аксиомо-свободно — вена C/E.
@@ -634,7 +634,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Weil positivity over Q: RH-equivalent PSD criterion**
 
 - **Topic.** Weil entries (symmetric, rational), 1x1/diagonal PSD, PSD on the line, Weil = Li, PSD computable, the three-criteria equivalence.
-- **Role.** Zeta/RH (Weil positivity = Li). Self-contained.
+- **Role.** Zeta/RH (Weil positivity = Li). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 22 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ Weil-форма; PSD-условие. _Roles:_ Weil-позитивность как RH-эквивалент (=Li). _Rules:_ weil_equals_li; psd_on_line; p4_weil_deterministic. _P4:_ Weil-критерий РАЗРЕШИМ (p4_weil_deterministic) над Q; PSD на линии; Weil=Li (три эквивалентных критерия).
@@ -645,7 +645,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `weil_entry weil_symmetric psd_diagonal psd_on_line weil_equals_li psd_computable three_criteria_equivalence p4_weil_on_line/deterministic weil_positivity_summary` | Definition/Lemma | ★ Weil-форма PSD, =Li, разрешимо |
+| `weil_entry weil_symmetric psd_diagonal psd_on_line weil_equals_li psd_computable three_criteria_equivalence p4_weil_on_line/deterministic weil_positivity_summary` | Definition/Lemma | ★ Weil-форма PSD, =Li, разрешимо June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -661,7 +661,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Zero counting process over Q: RH = zero variance**
 
 - **Topic.** Zero-count bounds (monotone, asymptotic, linear), density exponents, zero pairs averaging to 1/2, pair involution, RH = zero variance (no deviation), zero count computable.
-- **Role.** Zeta/RH (zero counting, P4). Self-contained.
+- **Role.** Zeta/RH (zero counting, P4). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 33 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ счёт нулей; пары нулей. _Roles:_ счёт нулей как процесс; RH = нулевая дисперсия. _Rules:_ pair_average_half; rh_zero_variance; zero_count_computable. _P4:_ ★ счёт нулей как процесс; RH ⟺ нулевая дисперсия отклонения пар от 1/2 (rh_zero_variance) над Q.
@@ -672,7 +672,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `zero_count_bound zero_count_asymptotic density_exponent zero_pair_re pair_average_half pair_involution rh_zero_variance rh_implies_no_deviation zero_count_process zero_count_computable` | Definition/Lemma | ★ счёт нулей-процесс, RH=нулевая дисперсия |
+| `zero_count_bound zero_count_asymptotic density_exponent zero_pair_re pair_average_half pair_involution rh_zero_variance rh_implies_no_deviation zero_count_process zero_count_computable` | Definition/Lemma | ★ счёт нулей-процесс, RH=нулевая дисперсия June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -688,7 +688,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Zero-free region over Q: pole repulsion**
 
 - **Topic.** Pole lower bound (unbounded), Mertens from trig, zeta cube unbounded, DVP width decreasing toward 1, pole drives repulsion, zeta positive on integers.
-- **Role.** Zeta/RH (zero-free region). Self-contained.
+- **Role.** Zeta/RH (zero-free region). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 21 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ полюс; DVP-ширина; отталкивание. _Roles:_ zero-free регион как роль (отталкивание полюсом). _Rules:_ pole_drives_repulsion; dvp_boundary_approaches_1. _P4:_ полюс отталкивает нули (zero-free) над Q (Element); три элементарных неравенства.
@@ -715,7 +715,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Zero migration over Q: unbiased, centered at 1/2**
 
 - **Topic.** Perturbation bounds (decreasing), cumulative perturbation, pair deviation antisymmetric, paired deviation zero, variance bounded, unbiased migration centered at 1/2.
-- **Role.** Zeta/RH (zero migration process). Self-contained.
+- **Role.** Zeta/RH (zero migration process). Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 28 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith
 - **E/R/R.** _Elements:_ миграция нулей; отклонение пар. _Roles:_ миграция как процесс; несмещённость к 1/2. _Rules:_ paired_deviation_zero; unbiased_migration; cumulative_variance_bounded. _P4:_ миграция нулей как процесс с НЕСМЕЩЁННЫМ (к 1/2) отклонением и ограниченной дисперсией над Q.
@@ -726,7 +726,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 
 | name | kind | role |
 |---|---|---|
-| `perturbation_bound cumulative_perturbation reflect_involution average_is_half deviation_antisymmetric paired_deviation_zero variance_term cumulative_variance_bounded unbiased_migration/holds/centered` | Definition/Lemma | миграция, несмещённость, ограниченная дисперсия |
+| `perturbation_bound cumulative_perturbation reflect_involution average_is_half deviation_antisymmetric paired_deviation_zero variance_term cumulative_variance_bounded unbiased_migration/holds/centered` | Definition/Lemma | миграция, несмещённость, ограниченная дисперсия June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md. |
 
 **Key lemmas (deep):**
 
@@ -742,7 +742,7 @@ _Generated from `zeta.json` by `generate.ps1` - do not edit by hand; edit the JS
 **Zero structure over Q: empty / discrete / continuum dichotomy**
 
 - **Topic.** A zero collection, its dichotomy (empty enumerable / singleton discrete / continuum has perfect subset), encoding, conjugate/bp-closed, zero classification.
-- **Role.** Zeta/RH (zero structure, vein C/E). Reuses ProcessTypes dichotomy. Self-contained.
+- **Role.** Zeta/RH (zero structure, vein C/E). Reuses ProcessTypes dichotomy. Self-contained. June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.
 - **Counts.** Qed 12 / Admitted 0 / axioms 0
 - **Imports.** Stdlib: QArith; ProcessTypes-style dichotomy
 - **E/R/R.** _Elements:_ коллекция нулей; её тип (пусто/дискретно/континуум). _Roles:_ структура нулей как дихотомия (как PCH). _Rules:_ zero_dichotomy; continuum_has_perfect; discrete_is_enumerable. _P4:_ структура нулей подчиняется ТОЙ ЖЕ дихотомии (счётно/совершенно), что ProcessContinuumHypothesis — связь RH с процессной несчётностью.

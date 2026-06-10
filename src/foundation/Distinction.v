@@ -194,9 +194,14 @@ Qed.
     as structural simultaneity (distinct from mutual dependence, 
     equivalence, and mutual derivability). *)
   
+(** June 2026: was `(P -> exists Q, Q = ~P) /\ (~P -> exists Q, Q = P)` —
+    vacuous (the existentials hold with Q := ~P / Q := P regardless of the
+    hypotheses, which were never used). The real content of co-definition:
+    BOTH sides issue from ONE act of distinction — positive and negative
+    of `distinction_of P` are simultaneously fixed by the single act. *)
 Lemma co_constitution : forall P : Prop,
-  (P -> exists Q, Q = ~P) /\ (~P -> exists Q, Q = P).
-Proof. intro P. split; intro H; eexists; reflexivity. Qed.
+  positive (distinction_of P) = P /\ negative (distinction_of P) = ~ P.
+Proof. intro P. split; reflexivity. Qed.
 
 (** A Distinction from True is non-trivial *)
 Lemma true_distinction_positive : positive (distinction_of True) = True.

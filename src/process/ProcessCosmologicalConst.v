@@ -120,16 +120,16 @@ Definition cc_process (D : nat) (energy_per_mode : Q) : RealProcess :=
 
 (** CC process at D=3 is a well-defined process *)
 Lemma cc_process_well_defined : forall K,
-  exists q : Q, cc_process 3%nat (289#336) K == q.
+  exists (num : Z) (den : BinNums.positive), cc_process 3%nat (289#336) K = num # den.
 Proof.
-  intros K. exists (cc_process 3%nat (289#336) K). reflexivity.
+  intros K. destruct (cc_process 3%nat (289#336) K) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** CC process gives finite Q at every step *)
 Lemma cc_finite_at_every_step : forall D e K,
-  exists q : Q, cc_process D e K == q.
+  exists (num : Z) (den : BinNums.positive), cc_process D e K = num # den.
 Proof.
-  intros D e K. exists (cc_process D e K). reflexivity.
+  intros D e K. destruct (cc_process D e K) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** CC density is nonneg *)

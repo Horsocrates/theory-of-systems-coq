@@ -188,8 +188,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : block_u_8_00 = block_u_8_00.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -199,5 +198,5 @@ Proof. reflexivity. Qed.
 (*  Part II: hamming_sum_symmetric, hamming_sum_offdiag_at_8 (2)            *)
 (*  Part III: block_u_symmetric, block_u_8_00..33,                           *)
 (*            block_u_offdiag_at_8 (6)                                       *)
-(*  Part IV: coupled_3d_main, total_count (2)                                *)
+(*  Part IV: coupled_3d_main                                *)
 (* ========================================================================= *)

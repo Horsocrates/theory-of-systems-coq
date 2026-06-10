@@ -248,8 +248,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (22 = 22)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -265,5 +264,5 @@ Proof. reflexivity. Qed.
 (*  Part IV: string_tension_vanishes, strong_coupling_limitation,           *)
 (*           gap_at_rg_fixed_point (3)                                     *)
 (*  Part V: strong_coupling_summary, strong_coupling_main,                  *)
-(*          total_count (3)                                                 *)
+(*          tail-stamp removed                                                 *)
 (* ========================================================================= *)

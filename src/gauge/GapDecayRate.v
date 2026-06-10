@@ -315,8 +315,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : forall beta, beta_k beta 0 == beta.
-Proof. exact beta_k_at_0. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -330,5 +329,5 @@ Proof. exact beta_k_at_0. Qed.
 (*            su2_gap_upper, su2_gap_le_epsilon (5)                          *)
 (*  Part IV: inv_pow2_eq_Qpow_half, epsilon_k_via_Qpow,                     *)
 (*           su2_gap_vanishes, u1_gap_vanishes (4)                           *)
-(*  Part V: gap_decay_main, our_model_vs_reality, total_count (3)            *)
+(*  Part V: gap_decay_main, our_model_vs_reality            *)
 (* ========================================================================= *)

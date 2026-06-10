@@ -220,8 +220,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : mass_gap_2x2 8 == 0.
-Proof. exact gap_vanishes_at_8. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -233,5 +232,5 @@ Proof. exact gap_vanishes_at_8. Qed.
 (*  Part III: wall_breach_complete, mass_gap_with_k3,                        *)
 (*            mass_gap_with_tension, millennium_reduction,                    *)
 (*            process_view, our_achievements, what_remains,                  *)
-(*            breach_main, total_count (9)                                    *)
+(*            breach_main                                    *)
 (* ========================================================================= *)

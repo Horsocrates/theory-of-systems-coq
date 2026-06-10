@@ -186,8 +186,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : anti_trace_positive = anti_trace_positive.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -198,5 +197,5 @@ Proof. reflexivity. Qed.
 (*           both_2d_gaps_positive (3)                                       *)
 (*  Part III: block_traces, anti_dominates_sym (2)                           *)
 (*  Part IV: the_2d_continuum_story, what_remains,                           *)
-(*           continuum_gap_2d_main, total_count (4)                          *)
+(*           continuum_gap_2d_main                          *)
 (* ========================================================================= *)

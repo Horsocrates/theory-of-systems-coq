@@ -196,8 +196,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : col_integral_positive = col_integral_positive.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -206,6 +205,6 @@ Proof. reflexivity. Qed.
 (*  Part II: e_entry_00..24 (15)                                             *)
 (*  Part III: e_matches_cont_col0/1/2 (3)                                    *)
 (*  Part IV: col_integral_0..4, col_integral_positive (6)                    *)
-(*  Part V: extended_action_main, total_count (2)                            *)
+(*  Part V: extended_action_main                            *)
 (*  Plus: Definitions e_entry, col_integral (2 defs, 5 non-Qed)             *)
 (* ========================================================================= *)

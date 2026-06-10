@@ -268,9 +268,9 @@ Qed.
 
 (** P4 finiteness: every state has a definite energy *)
 Lemma p4_finiteness_3d : forall N n_r l,
-  exists q : Q, scaled_energy_3d N n_r l == q.
+  exists (num : Z) (den : BinNums.positive), scaled_energy_3d N n_r l = num # den.
 Proof.
-  intros. exists (scaled_energy_3d N n_r l). reflexivity.
+  intros. destruct (scaled_energy_3d N n_r l) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** At finite N, different l gives different energy (centrifugal breaks degeneracy) *)
@@ -572,7 +572,7 @@ Qed.
 (** Summary of all 3D Coulomb results *)
 Theorem coulomb_3d_summary :
   (* 1. P4: finite energy at every stage *)
-  (forall N n_r l, exists q, scaled_energy_3d N n_r l == q) /\
+  (forall N n_r l, exists (num : Z) (den : BinNums.positive), scaled_energy_3d N n_r l = num # den) /\
   (* 2. Ground state is minimum *)
   (forall N n_r l, scaled_energy_3d N 0 0 <= scaled_energy_3d N n_r l) /\
   (* 3. Partial degeneracy: same n_r → same limit *)
@@ -678,7 +678,7 @@ Qed.
 (** ★ THE MAIN THEOREM ★ *)
 Theorem coulomb_3d_main_theorem :
   (* 1. P4: finite energy at every stage *)
-  (forall N n_r l, exists q, scaled_energy_3d N n_r l == q) /\
+  (forall N n_r l, exists (num : Z) (den : BinNums.positive), scaled_energy_3d N n_r l = num # den) /\
   (* 2. Convergence to hydrogen limit *)
   (forall n_r l eps, 0 < eps -> exists M, forall N, (M <= N)%nat ->
     Qabs (scaled_energy_3d N n_r l - hydrogen_limit_3d n_r l) < eps) /\

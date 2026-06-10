@@ -185,8 +185,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : gap_2d_positive_all_beta = gap_2d_positive_all_beta.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -200,5 +199,5 @@ Proof. reflexivity. Qed.
 (*  Part III: spatial_coupling_enhances_gap, gap_anatomy,                     *)
 (*            gap_anti_at_1, gap_anti_positive_at_1 (4)                      *)
 (*  Part IV: gap_2d_survives_rg, gap_continuity_at_8 (2)                     *)
-(*  Part V: gap_2d_main, total_count (2)                                      *)
+(*  Part V: gap_2d_main                                      *)
 (* ========================================================================= *)

@@ -245,8 +245,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : corrected_gap_bounded = corrected_gap_bounded.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -258,5 +257,5 @@ Proof. reflexivity. Qed.
 (*           tension_correction_positive, tension_correction_lower,          *)
 (*           tension_correction_sufficient, tension_provides_gap (6)         *)
 (*  Part III: attacks_converge, conditional_mass_gap, wall_is_artifact,      *)
-(*            instanton_main, what_we_need, total_count (6)                  *)
+(*            instanton_main, what_we_need                  *)
 (* ========================================================================= *)

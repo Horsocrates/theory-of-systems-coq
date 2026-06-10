@@ -158,8 +158,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : mass_gap_2x2_formula = mass_gap_2x2_formula.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -170,5 +169,5 @@ Proof. reflexivity. Qed.
 (*  Part II: confinement_regime, deconfinement_transition,                   *)
 (*           continuous_transition (3)                                       *)
 (*  Part III: lattice_gauge_main, mass_gap_eigenvector_theorem,              *)
-(*            total_count (3)                                                *)
+(*            tail-stamp removed                                                *)
 (* ========================================================================= *)

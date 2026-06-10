@@ -8,7 +8,7 @@
 (*  Roles:    synthesis as clarity, honesty as scientific value             *)
 (*  Rules:    proved -> conditional -> wall -> P4 -> summary               *)
 (*  STATUS: target ~35 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, B_antisym, C_B_positive, B_coeff_bounded             *)
+(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -80,9 +80,9 @@ Proof. intros; assumption. Qed.
 Theorem ns_u6_resolution :
   (* u_K exists, is smooth, computable for each K *)
   forall nu K N n (a0 : modal_state) k,
-  exists q : Q, euler_evolve nu K N n a0 k = q.
+  exists (num : Z) (den : BinNums.positive), euler_evolve nu K N n a0 k = num # den.
 Proof.
-  intros. exists (euler_evolve nu K N n a0 k). reflexivity.
+  intros. destruct (euler_evolve nu K N n a0 k) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (* All unconditional results collected *)
@@ -262,23 +262,13 @@ Theorem novelty :
   forall n, (1 <= n)%nat -> 2 * harmonic_sum n <= inject_Z (Z.of_nat n) + 1.
 Proof. apply harmonic_linear_bound. Qed.
 
-(* File count *)
-Theorem ns_file_count :
-  (* 34 NS files total *)
-  (* Phase 1: 5, Phase 2: 5, Phase 3: 4, Phase 4: 5 *)
-  (* Phase 5: 5, Phase 6: 5, Final: 4 *)
-  (5 + 5 + 4 + 5 + 5 + 5 + 4 = 33)%nat.
-Proof. reflexivity. Qed.
-
-(* Axiom count *)
-Theorem ns_axiom_count :
-  (* B_antisym, C_B_positive, B_coeff_bounded, classic *)
-  (* All physically motivated *)
-  (4 <= 10)%Z.
-Proof. lia. Qed.
+(* June 2026: two "documentation theorems" (ns_file_count, ns_axiom_count)
+   were DELETED here — literal-number trivia ((4 <= 10)%Z) with the actual
+   claims in comments.  The honest ledgers: CLAUDE.md axiom table,
+   foundation/HeavyWallAudit.v, docs/database/navier_stokes.json. *)
 
 (* ★ NS COMPLETE MAIN THEOREM ★ *)
-Theorem ns_complete_main : forall nu E0,
+Theorem ns_synthesis_main : forall nu E0,
   0 < nu -> 0 < E0 ->
   (* Unconditional *)
   0 < E0 /\

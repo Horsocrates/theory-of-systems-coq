@@ -422,8 +422,7 @@ Theorem what_step8_opens :
 Proof. exact rg_linear_neq_quadratic. Qed.
 
 (** End marker *)
-Theorem total_count : (33 = 33)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -441,5 +440,5 @@ Proof. reflexivity. Qed.
 (*  Part IV: both_agree_at_fp, rg_difference, rg_linear_ge_quadratic,     *)
 (*           rg_linear_neq_quadratic (4)                                    *)
 (*  Part V: iterate_from_2_1, iterate_from_2_2, nonlinear_rg_main,        *)
-(*          what_step8_proves, what_step8_opens, total_count (6)           *)
+(*          what_step8_proves, what_step8_opens           *)
 (* ========================================================================= *)

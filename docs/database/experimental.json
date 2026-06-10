@@ -149,7 +149,7 @@
     "classical_counterpart": "The hydrogen 3D Coulomb spectrum E_n ~ -1/n^2, the n^2 degeneracy and centrifugal l(l+1) term are textbook; NEW only as a finite Q-lattice approximation that recovers the spectrum as a convergent PROCESS and is HONEST that full (accidental) degeneracy is not reproduced on the lattice.",
     "title": "3D Coulomb on a lattice: hydrogen spectrum as a process, honest about degeneracy",
     "topic": "Scaled 3D Coulomb energies with a centrifugal term, the hydrogen limit, the n^2 degeneracy as a sum, energy ordering by angular momentum, convergence of the s-wave, ionization, and an explicit honest limitation that accidental degeneracy is only partial on the lattice.",
-    "role": "Atomic leaf (3D Coulomb) of the experimental branch; parallels CoulombTower. Self-contained (QArith).",
+    "role": "Atomic leaf (3D Coulomb) of the experimental branch; parallels CoulombTower. Self-contained (QArith). June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.",
     "qed": 50, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {
@@ -159,12 +159,12 @@
       "p4": "конечная сетка точна (Element); водородный спектр — role-limit процесса (degeneracy_is_cauchy → 0); ПОЛНОЕ (случайное) вырождение НЕ воспроизводится — честное ограничение."
     },
     "lemmas": [
-      {"name": "centrifugal_scaled/scaled_energy_3d/hydrogen_limit_3d/principal_n/degeneracy_process/sum_nat", "kind": "Definition", "role": "энергии, центробежный член, кратность"},
-      {"name": "centrifugal_scaled_l0/_nonneg/_positive/_at_l1/_at_l2", "kind": "Theorem", "role": "свойства центробежного члена"},
-      {"name": "degeneracy_sum_1/_2/_3/_general", "kind": "Theorem", "role": "★ кратность уровня = n²"},
-      {"name": "energy_3d_3_0_0/_3_0_1/_3_1_0/_9_0_1/hydrogen_limit_3d_ground/_eq_1d", "kind": "Theorem", "role": "значения энергий, предел = 1D"},
-      {"name": "partial_degeneracy/no_false_degeneracy/limit_3d_negative/s_wave_ratios/angular_momentum_raises/energy_ordering_s_wave/ground_state_minimum/ground_negative_3d", "kind": "Theorem", "role": "вырождение, упорядочение по l"},
-      {"name": "p4_finiteness_3d/finite_splitting/principal_n_examples/energy_at_principal/deviation_3d_formula/_positive", "kind": "Theorem", "role": "конечность, расщепление, отклонение"},
+      {"name": "centrifugal_scaled/scaled_energy_3d/hydrogen_limit_3d/principal_n/degeneracy_process/sum_nat", "kind": "Definition", "role": "энергии, центробежный член, кратность June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "centrifugal_scaled_l0/_nonneg/_positive/_at_l1/_at_l2", "kind": "Theorem", "role": "свойства центробежного члена June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "degeneracy_sum_1/_2/_3/_general", "kind": "Theorem", "role": "★ кратность уровня = n² June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "energy_3d_3_0_0/_3_0_1/_3_1_0/_9_0_1/hydrogen_limit_3d_ground/_eq_1d", "kind": "Theorem", "role": "значения энергий, предел = 1D June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "partial_degeneracy/no_false_degeneracy/limit_3d_negative/s_wave_ratios/angular_momentum_raises/energy_ordering_s_wave/ground_state_minimum/ground_negative_3d", "kind": "Theorem", "role": "вырождение, упорядочение по l June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "p4_finiteness_3d/finite_splitting/principal_n_examples/energy_at_principal/deviation_3d_formula/_positive", "kind": "Theorem", "role": "конечность, расщепление, отклонение June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
       {"name": "degeneracy_process_formula/_l0/_positive/centrifugal_upper_bound/Q_bound_over_K/convergence_3d/splitting_vanishes/splitting_rate/degeneracy_is_cauchy/degeneracy_limit_zero/convergence_3d_s_wave", "kind": "Theorem", "role": "★ сходимость спектра как процесс"},
       {"name": "ionization_3d/coulomb_3d_summary/coulomb_3d_honest_limitation/principal_energy_ratio/no_accidental_degeneracy/partial_vs_full_degeneracy/coulomb_3d_complete/process_view_degeneracy/coulomb_3d_main_theorem", "kind": "Theorem", "role": "★ ионизация, ЧЕСТНОЕ ограничение про вырождение"}
     ],
@@ -187,7 +187,7 @@
     "classical_counterpart": "The 1D hydrogen-like spectrum and variational diagonalization are standard; NEW only as a finite Q 'tower' that recovers the textbook spectrum as a convergent process, honest about diagonal-approximation error.",
     "title": "Coulomb tower over Q: hydrogen spectrum as a convergent diagonalization process",
     "topic": "A grid Coulomb Hamiltonian with kinetic/Coulomb coefficients, optimal grid length, scaled energies, the hydrogen limit matching textbook -1/n^2 with positive but decreasing deviation, ionization, and explicit diagonal-limitation honesty.",
-    "role": "Atomic leaf (1D Coulomb tower); parallels CoulombFull3D. Self-contained (QArith).",
+    "role": "Atomic leaf (1D Coulomb tower); parallels CoulombFull3D. Self-contained (QArith). June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.",
     "qed": 42, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {
@@ -197,13 +197,13 @@
       "p4": "каждая сетка конечна и точна (Element); водородный спектр — role-limit (convergence_uniform); диагональная аппроксимация имеет честную ошибку."
     },
     "lemmas": [
-      {"name": "inject_Z_S_pos/_neq_0/pos_Q_mul_nonzero/four_n_neq_0/Q_div_swap", "kind": "Lemma", "role": "Q-арифметические леммы"},
-      {"name": "grid_dx/kinetic_coeff/coulomb_coeff/diag_energy/optimal_L/energy_at_opt/scaled_energy/hydrogen_limit/textbook_hydrogen", "kind": "Definition", "role": "сетка, коэффициенты, энергии"},
-      {"name": "grid_dx_example/diag_energy_2_9_0/optimal_L_2/energy_at_opt_2_0/scaled_energy_1_0/_3_0/_9_0/_3_1/_formula", "kind": "Theorem", "role": "конкретные значения"},
-      {"name": "ground_scaled/_negative/excited_scaled/energy_increases_with_n/_closer_with_N", "kind": "Theorem", "role": "основное/возбуждённые, монотонность"},
-      {"name": "deviation_formula/_positive/_decreases/convergence_general/_uniform", "kind": "Theorem", "role": "★ отклонение убывает, равномерная сходимость"},
-      {"name": "hydrogen_limit_ground/_excited/_n2/limit_negative/_increases/ionization/limit_ratio/textbook_ground/_excited/_ratio", "kind": "Theorem", "role": "★ водородный предел = учебный −1/n²"},
-      {"name": "diagonal_honest/both_ground_negative/p4_finiteness/hydrogen_convergence_theorem/diagonal_limitation_theorem/hydrogen_summary/coulomb_tower_complete/process_well_defined", "kind": "Theorem", "role": "★ честность диагональной аппроксимации"}
+      {"name": "inject_Z_S_pos/_neq_0/pos_Q_mul_nonzero/four_n_neq_0/Q_div_swap", "kind": "Lemma", "role": "Q-арифметические леммы June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "grid_dx/kinetic_coeff/coulomb_coeff/diag_energy/optimal_L/energy_at_opt/scaled_energy/hydrogen_limit/textbook_hydrogen", "kind": "Definition", "role": "сетка, коэффициенты, энергии June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "grid_dx_example/diag_energy_2_9_0/optimal_L_2/energy_at_opt_2_0/scaled_energy_1_0/_3_0/_9_0/_3_1/_formula", "kind": "Theorem", "role": "конкретные значения June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "ground_scaled/_negative/excited_scaled/energy_increases_with_n/_closer_with_N", "kind": "Theorem", "role": "основное/возбуждённые, монотонность June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "deviation_formula/_positive/_decreases/convergence_general/_uniform", "kind": "Theorem", "role": "★ отклонение убывает, равномерная сходимость June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "hydrogen_limit_ground/_excited/_n2/limit_negative/_increases/ionization/limit_ratio/textbook_ground/_excited/_ratio", "kind": "Theorem", "role": "★ водородный предел = учебный −1/n² June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "diagonal_honest/both_ground_negative/p4_finiteness/hydrogen_convergence_theorem/diagonal_limitation_theorem/hydrogen_summary/coulomb_tower_complete/process_well_defined", "kind": "Theorem", "role": "★ честность диагональной аппроксимации June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."}
     ],
     "key_lemmas": [
       {"name": "hydrogen_convergence_theorem", "analysis": "Водородный спектр −1/n² восстанавливается как РАВНОМЕРНО СХОДЯЩИЙСЯ процесс измельчения сетки (deviation_decreases, convergence_uniform) — вена C. Спектр — role-limit правила-диагонализации, не платонистский объект.", "tags": ["process", "convergence", "hydrogen", "vein-C"]},
@@ -258,7 +258,7 @@
     "classical_counterpart": "The Lamb shift is a genuine QED effect splitting the (accidentally degenerate) 2S/2P levels; this file is HONEST that its diagonal lattice splitting is an ARTIFACT of breaking accidental degeneracy, NOT the physical Lamb shift (off-diagonal coupling is zero here).",
     "title": "Lamb-shift tower over Q: honest that the splitting is a lattice artifact, not QED",
     "topic": "2S/2P energies and their splitting as a convergent process; the splitting is order-one and nonzero, but the file explicitly argues it is an artifact of breaking accidental degeneracy on the diagonal lattice — the off-diagonal coupling that would give the real Lamb shift is zero.",
-    "role": "Atomic leaf (Lamb shift) with an explicit honest-assessment; phase-3 experimental. Self-contained (QArith).",
+    "role": "Atomic leaf (Lamb shift) with an explicit honest-assessment; phase-3 experimental. Self-contained (QArith). June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.",
     "qed": 42, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {
@@ -268,12 +268,12 @@
       "p4": "конечные энергии (Element); расщепление сходится, но честно помечено как артефакт — нужен вне-диагональный член (full_hamiltonian_needed)."
     },
     "lemmas": [
-      {"name": "energy_2S/energy_2P/lamb_splitting/splitting_limit/off_diagonal_coupling", "kind": "Definition", "role": "энергии, расщепление, вне-диагональный член"},
-      {"name": "energy_2S_at_3/2P_at_3/splitting_at_1/_3/_9/_19/_0/_computable/_limit_value", "kind": "Theorem", "role": "значения расщепления"},
-      {"name": "centrifugal_01/splitting_formula/_deviation/_converges/_is_cauchy/_nonzero/_monotone", "kind": "Theorem", "role": "★ сходимость расщепления"},
-      {"name": "energy_2S_converges/2P_converges/limits_differ/2S_nonpositive/splitting_deviation_abs/_rate_bound/our_splitting_is_order_one", "kind": "Theorem", "role": "сходимость энергий, порядок величины"},
-      {"name": "textbook_2S_2P_degenerate/diagonal_breaks_accidental/splitting_artifact_not_lamb_shift/off_diagonal_is_zero/full_hamiltonian_needed", "kind": "Theorem", "role": "★ ЧЕСТНО: расщепление = артефакт, не сдвиг Лэмба"},
-      {"name": "p4_splitting_computable/energy_gap_shrinks/splitting_crosses_zero/framework_established/lamb_shift_convergence_theorem/_honest_assessment/_process_view/_framework_theorem", "kind": "Theorem", "role": "★ честная оценка, рамка"},
+      {"name": "energy_2S/energy_2P/lamb_splitting/splitting_limit/off_diagonal_coupling", "kind": "Definition", "role": "энергии, расщепление, вне-диагональный член June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "energy_2S_at_3/2P_at_3/splitting_at_1/_3/_9/_19/_0/_computable/_limit_value", "kind": "Theorem", "role": "значения расщепления June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "centrifugal_01/splitting_formula/_deviation/_converges/_is_cauchy/_nonzero/_monotone", "kind": "Theorem", "role": "★ сходимость расщепления June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "energy_2S_converges/2P_converges/limits_differ/2S_nonpositive/splitting_deviation_abs/_rate_bound/our_splitting_is_order_one", "kind": "Theorem", "role": "сходимость энергий, порядок величины June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "textbook_2S_2P_degenerate/diagonal_breaks_accidental/splitting_artifact_not_lamb_shift/off_diagonal_is_zero/full_hamiltonian_needed", "kind": "Theorem", "role": "★ ЧЕСТНО: расщепление = артефакт, не сдвиг Лэмба June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "p4_splitting_computable/energy_gap_shrinks/splitting_crosses_zero/framework_established/lamb_shift_convergence_theorem/_honest_assessment/_process_view/_framework_theorem", "kind": "Theorem", "role": "★ честная оценка, рамка June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
       {"name": "phase3_verified_results/phase3_open_questions/lamb_shift_complete/experimental_phase3_main/verification_table_entry_partial_degeneracy/_centrifugal_splitting", "kind": "Theorem", "role": "верифицированное vs открытое"}
     ],
     "key_lemmas": [
@@ -361,7 +361,7 @@
     "classical_counterpart": "Zero-point/vacuum energy and its zeta-regularization to a finite Casimir value are classical; NEW is the P4 framing: the divergence is DISSOLVED — the raw ZPE sum is honestly not Cauchy (role-limit), the regularized value is a rational Element, so 'no infinity' is a theorem.",
     "title": "Vacuum energy dissolved over Q: raw ZPE diverges, regularized value is rational (no infinity)",
     "topic": "Zero-point energy in 1D/3D as half a power sum: the raw vacuum energy is increasing and NOT Cauchy (diverges), but it equals the Casimir/Bernoulli rational value after regularization; 'the vacuum-energy problem is dissolved' and 'no infinity' are proven.",
-    "role": "Companion to CasimirProcess; the 'problem dissolution' statement of the vacuum branch. Self-contained (QArith).",
+    "role": "Companion to CasimirProcess; the 'problem dissolution' statement of the vacuum branch. Self-contained (QArith). June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md.",
     "qed": 44, "admitted": 0, "axioms": 0,
     "imports": ["Stdlib: QArith"],
     "err": {
@@ -371,13 +371,13 @@
       "p4": "сырая ZPE — role-limit (НЕ Коши, расходится); регуляризованное значение — РАЦИОНАЛЬНЫЙ Element; «проблема вакуумной энергии РАСТВОРЕНА» — теорема (vein C)."
     },
     "lemmas": [
-      {"name": "Qpow_exp_1/partial_sum_scale_local/_ext/Qle_Qabs", "kind": "Lemma", "role": "Q-арифметические леммы"},
-      {"name": "zpe_1d/vacuum_energy_1d/zpe_3d/vacuum_energy_3d/find_stage_1d", "kind": "Definition", "role": "ZPE и вакуумная энергия"},
-      {"name": "vacuum_1d_at_0/_1/_2/_9/3d_at_0/_3/zpe_1d_pos/3d_nonneg/_pos", "kind": "Theorem", "role": "значения, положительность"},
-      {"name": "vacuum_1d_is_half_power_sum/3d_is_half_power_sum/_increasing/_nonneg/_diverges/3d_diverges/1d_faulhaber", "kind": "Theorem", "role": "★ ½ степенной суммы; расходится"},
-      {"name": "vacuum_1d_not_cauchy/3d_not_cauchy", "kind": "Theorem", "role": "★ сырая ZPE НЕ Коши"},
-      {"name": "vacuum_casimir_1d/3d/vacuum_finite_1d/3d/vacuum_step_zpe_1d/3d/vacuum_three_level_1d/3d/vacuum_casimir_bridge/1d_positive/3d_positive", "kind": "Theorem", "role": "★ регуляризованное = Казимир, конечно"},
-      {"name": "vacuum_problem_dissolved/_proof/dissolution_1d/3d/no_infinity_1d/3d/vacuum_energy_summary_1d/3d/vacuum_main_theorem", "kind": "Theorem", "role": "★ ПРОБЛЕМА РАСТВОРЕНА, нет бесконечности"}
+      {"name": "Qpow_exp_1/partial_sum_scale_local/_ext/Qle_Qabs", "kind": "Lemma", "role": "Q-арифметические леммы June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "zpe_1d/vacuum_energy_1d/zpe_3d/vacuum_energy_3d/find_stage_1d", "kind": "Definition", "role": "ZPE и вакуумная энергия June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "vacuum_1d_at_0/_1/_2/_9/3d_at_0/_3/zpe_1d_pos/3d_nonneg/_pos", "kind": "Theorem", "role": "значения, положительность June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "vacuum_1d_is_half_power_sum/3d_is_half_power_sum/_increasing/_nonneg/_diverges/3d_diverges/1d_faulhaber", "kind": "Theorem", "role": "★ ½ степенной суммы; расходится June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "vacuum_1d_not_cauchy/3d_not_cauchy", "kind": "Theorem", "role": "★ сырая ZPE НЕ Коши June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "vacuum_casimir_1d/3d/vacuum_finite_1d/3d/vacuum_step_zpe_1d/3d/vacuum_three_level_1d/3d/vacuum_casimir_bridge/1d_positive/3d_positive", "kind": "Theorem", "role": "★ регуляризованное = Казимир, конечно June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."},
+      {"name": "vacuum_problem_dissolved/_proof/dissolution_1d/3d/no_infinity_1d/3d/vacuum_energy_summary_1d/3d/vacuum_main_theorem", "kind": "Theorem", "role": "★ ПРОБЛЕМА РАСТВОРЕНА, нет бесконечности June 2026 wave-4 sweep: vacuous computability-shams (exists q, _ == q) replaced by the by-type finite-ratio form or real identities; see UNIQUENESS.md."}
     ],
     "key_lemmas": [
       {"name": "vacuum_problem_dissolved", "analysis": "Флагман: «проблема вакуумной энергии растворена» как ТЕОРЕМА. Связка vacuum_1d_not_cauchy (сырая ZPE расходится = role-limit) + vacuum_casimir (регуляризованное значение рационально = Element) делает «нет бесконечности» доказанным фактом, а не риторикой. Чистая вена C: правило-сумма заменяет завершённый расходящийся объект.", "tags": ["vacuum-dissolved", "no-infinity", "vein-C"]},

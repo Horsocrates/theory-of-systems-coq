@@ -86,11 +86,13 @@ Qed.
 (*  INDUCTIVE DEFINITIONS ARE COMPATIBLE WITH P4                     *)
 (* ================================================================ *)
 
-(** nat is inductive: each element is finite, no completed totality needed *)
+(** nat is inductive: every element is the origin or a successor — built in
+    finitely many steps, no completed totality needed (June 2026: was
+    `exists m, n = m`, vacuous). *)
 Lemma nat_is_inductive :
-  forall n : nat, exists m : nat, n = m.
+  forall n : nat, n = 0%nat \/ exists m : nat, n = S m.
 Proof.
-  intro n. exists n. reflexivity.
+  intro n. destruct n as [| m]; [left; reflexivity | right; exists m; reflexivity].
 Qed.
 
 (** Stage-bounded actuality for inductive nat *)

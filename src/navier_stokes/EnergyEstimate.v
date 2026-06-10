@@ -10,7 +10,7 @@
 (*  This is uniform in K: same bound at every Galerkin level.                *)
 (*                                                                            *)
 (*  STATUS: ~40 Qed, 0 Admitted                                              *)
-(*  AXIOMS: none (inherits B_antisym from GalerkinSystem)                    *)
+(*  AXIOMS: none (B_antisym is a Lemma in GalerkinSystem since June 2026)                    *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (* ========================================================================= *)
 

@@ -13,7 +13,7 @@
 (*  Roles:    embedding as bridge, uniqueness as full convergence          *)
 (*  Rules:    H^s bounded -> C^k -> C^inf -> unique -> Clay               *)
 (*  STATUS: target ~35 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, B_antisym, C_B_positive, B_coeff_bounded             *)
+(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 

@@ -202,8 +202,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : odd_eigenvalue_excited = odd_eigenvalue_excited.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -214,5 +213,5 @@ Proof. reflexivity. Qed.
 (*           even_eigenvalue_ground/excited (5)                               *)
 (*  Part III: odd_block_00/01/11_at_8,                                        *)
 (*            odd_eigenvalue_ground/excited (5)                               *)
-(*  Part IV: blocks_equal_at_8, block_3d_main, total_count (3)               *)
+(*  Part IV: blocks_equal_at_8, block_3d_main               *)
 (* ========================================================================= *)

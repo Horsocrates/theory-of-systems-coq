@@ -95,12 +95,18 @@ Proof. vm_compute. reflexivity. Qed.
 
 (** Every vacuum energy is FINITE — P4 guarantee *)
 Lemma vacuum_always_finite :
-  exists q : Q, vacuum_energy_sq omega_sq_C4 = q.
-Proof. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), vacuum_energy_sq omega_sq_C4 = num # den.
+Proof.
+  destruct (vacuum_energy_sq omega_sq_C4) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 Lemma vacuum_always_finite_C8 :
-  exists q : Q, vacuum_energy_sq omega_sq_C8_approx = q.
-Proof. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive), vacuum_energy_sq omega_sq_C8_approx = num # den.
+Proof.
+  destruct (vacuum_energy_sq omega_sq_C8_approx) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 (* ================================================================ *)
 (*  SYNTHESIS                                                        *)

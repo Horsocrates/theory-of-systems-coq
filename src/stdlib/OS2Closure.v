@@ -1,4 +1,9 @@
 (* OS2Closure.v — Close regularity True *)
+(* June 2026 HONEST SCOPE: "Closure" = closing the repo's True-placeholder
+   backlog with TOY specializations (zero-distribution temperedness, gap-ratio
+   bounds, concrete Qpow decay).  The REAL lattice-model OS2 — temperedness of
+   the full correlation — is gauge/FormalTempered.v (os2_formal_at_1), bridged
+   in stdlib/GaugeOSClosure.v (gauge_os2_real). *)
 From Stdlib Require Import QArith QArith_base QArith.Qabs Lia ZArith.
 From Stdlib Require Import Lqa.
 Open Scope Q_scope.
@@ -30,9 +35,15 @@ Proof. unfold Qpow. unfold Qlt; simpl; lia. Qed.
 (*  CLOSED: structural — finite sum of Q terms                        *)
 (* ================================================================== *)
 
+(** The partition eigenvalue is a finite ratio BY TYPE
+    (June 2026: was the vacuous `exists z, z == transfer_eigenvalue ...`). *)
 Theorem os2_partition_rational : forall (J T : nat) (beta : Q) (M : nat),
-  exists z : Q, z == transfer_eigenvalue 0 beta M.
-Proof. intros. eexists. reflexivity. Qed.
+  exists (num : Z) (den : BinNums.positive),
+    transfer_eigenvalue 0 beta M = num # den.
+Proof.
+  intros. destruct (transfer_eigenvalue 0 beta M) as [num den].
+  exists num, den. reflexivity.
+Qed.
 
 (* ================================================================== *)
 (*  OS2 #4-5: bounded → tempered + exponential → tempered              *)
@@ -53,9 +64,15 @@ Proof. apply exp_decay_le_1_1; lra. Qed.
 (*  CLOSED: correlations bounded by 1 → tempered                     *)
 (* ================================================================== *)
 
+(** The geometric correlator bound stays in [0,1] at EVERY separation K
+    (June 2026: was the vacuous `exists s : Q, s == 0` with K unused). *)
 Theorem os2_pairing_finite : forall (K : nat),
-  exists s : Q, s == 0.
-Proof. intros. exists 0. reflexivity. Qed.
+  0 <= Qpow (3 # 4) K /\ Qpow (3 # 4) K <= 1.
+Proof.
+  induction K as [| k IH].
+  - simpl. split; lra.
+  - destruct IH as [IH0 IH1]. simpl. split; lra.
+Qed.
 
 (* ================================================================== *)
 (*  OS2 #8-11: Schwartz seminorms + n-point                           *)

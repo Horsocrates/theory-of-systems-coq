@@ -217,8 +217,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : (20 = 20)%nat.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -232,5 +231,5 @@ Proof. reflexivity. Qed.
 (*  Part IV: quartic_orbit_in_interval, sextic_orbit_in_interval,           *)
 (*           quartic_orbit_gap_positive, sextic_orbit_gap_positive,         *)
 (*           gap_vs_perturbation, gap_robust (6)                            *)
-(*  Part V: perturbation_summary, perturbation_main, total_count (3)        *)
+(*  Part V: perturbation_summary, perturbation_main        *)
 (* ========================================================================= *)

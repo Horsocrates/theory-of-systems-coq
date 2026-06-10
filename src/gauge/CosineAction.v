@@ -257,8 +257,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : forall n, Qabs (alt_sign n) == 1.
-Proof. exact alt_sign_abs. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                  *)
@@ -271,5 +270,5 @@ Proof. exact alt_sign_abs. Qed.
 (*  Part IV: cos_term_at_zero, cos_approx_at_zero, cos_approx_1,           *)
 (*           cos_approx_nonneg, cos_term_abs_bound, cos_term_chained_bound (6)*)
 (*  Part V: cos_term_sign_alternates (1)                                    *)
-(*  Part VI: cos_action_main, cos_action_summary, total_count (3)           *)
+(*  Part VI: cos_action_main, cos_action_summary           *)
 (* ========================================================================= *)

@@ -301,8 +301,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : char_poly_at_3_2_positive = char_poly_at_3_2_positive.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -320,5 +319,5 @@ Proof. reflexivity. Qed.
 (*            k2_vs_k3_at_8, wall_is_k2_artifact (13)                        *)
 (*  Part IV: k3_gap_survives_orbit, k_dependence_main,                       *)
 (*           k3_mass_gap_conditional, large_K_gap_structural,                *)
-(*           k_dependence_result, total_count (6)                             *)
+(*           k_dependence_result                             *)
 (* ========================================================================= *)

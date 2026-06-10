@@ -50,7 +50,7 @@ Proof. exact (bessel_I0_M0 1). Qed.
 Theorem correlation_is_polynomial_at_J : forall (J_trunc : nat),
   (* At truncation J: correlation = Σ_{j=0}^{J} c_j · t_j^t *)
   (* This is a polynomial in the t_j *)
-  exists q : Q, transfer_eigenvalue J_trunc 1 0 == q.
+  exists (num : Z) (den : BinNums.positive), transfer_eigenvalue J_trunc 1 0 = num # den.
 Proof. intros. exact (eigenvalue_rational J_trunc 1 0). Qed.
 
 (** Each eigenvalue t_j(β) is analytic in β *)
@@ -88,7 +88,7 @@ Proof. intros. exact (partition_fn_0 T_extent 1). Qed.
 (** Analytic continuation is unique *)
 Theorem analytic_continuation_unique : forall (J_trunc T_extent : nat),
   (* Polynomial correlation has unique analytic continuation *)
-  exists q : Q, bessel_partial (2 * J_trunc) 1 T_extent == q.
+  exists (num : Z) (den : BinNums.positive), bessel_partial (2 * J_trunc) 1 T_extent = num # den.
 Proof. intros. exact (bessel_rational (2 * J_trunc) 1 T_extent). Qed.
 
 (* ================================================================== *)
@@ -141,7 +141,7 @@ Proof. intros. apply bessel_partial_nonneg. lra. Qed.
 (** Taylor approximation is polynomial *)
 Theorem taylor_is_polynomial : forall (M_order : nat),
   (* t_j^{(M)}(β) is a polynomial of degree M in β *)
-  exists q : Q, bessel_partial 0 1 M_order == q.
+  exists (num : Z) (den : BinNums.positive), bessel_partial 0 1 M_order = num # den.
 Proof. intros. exact (bessel_rational 0 1 M_order). Qed.
 
 (** Limit of polynomials converges *)

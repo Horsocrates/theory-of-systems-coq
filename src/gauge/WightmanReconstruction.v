@@ -100,10 +100,13 @@ Qed.
 (** Hilbert space is separable: every energy level indexed by nat *)
 Theorem hilbert_separable :
   (* H = span{|j⟩ : j = 0, 1, 2, ...} is countable basis *)
-  (* Separable = basis indexed by nat. physical_energy returns Q for each j. *)
-  forall j : nat, exists e : Q, physical_energy j 1 == e.
+  (* Separable = basis indexed by nat; each energy is a finite ratio BY TYPE
+     (June 2026: was the vacuous `exists e, _ == e`). *)
+  forall j : nat,
+    exists (num : Z) (den : BinNums.positive), physical_energy j 1 = num # den.
 Proof.
-  intro j. eexists. reflexivity.
+  intro j. destruct (physical_energy j 1) as [num den].
+  exists num, den. reflexivity.
 Qed.
 
 (** Hamiltonian is diagonal: each E_j depends only on j *)
@@ -199,7 +202,7 @@ Qed.
 
 (** W1: Hilbert space — every energy level indexed by nat *)
 Theorem wightman_W1 :
-  forall j : nat, exists e : Q, physical_energy j 1 == e.
+  forall j : nat, exists (num : Z) (den : BinNums.positive), physical_energy j 1 = num # den.
 Proof. exact hilbert_separable. Qed.
 
 (** W2: Poincaré covariance — lattice translation invariance *)
@@ -242,7 +245,7 @@ Proof. exact vacuum_unique. Qed.
 (** Wightman axioms: all five as real propositions *)
 Definition wightman_axioms_satisfied : Prop :=
   (* W1: Hilbert space — nat-indexed energy levels *)
-  (forall j : nat, exists e : Q, physical_energy j 1 == e) /\
+  (forall j : nat, exists (num : Z) (den : BinNums.positive), physical_energy j 1 = num # den) /\
   (* W2: Translation invariance — simplified: Q commutative *)
   (forall a b : Q, a * b == b * a) /\
   (* W3: Spectral condition — E₁ > 0 *)
@@ -256,7 +259,7 @@ Theorem wightman_from_os : wightman_axioms_satisfied.
 Proof.
   unfold wightman_axioms_satisfied.
   split; [|split; [|split; [|split]]].
-  - (* W1 *) intro j. eexists. reflexivity.
+  - (* W1 *) exact hilbert_separable.
   - (* W2 *) intros. ring.
   - (* W3 *) exact first_excited_positive_1.
   - (* W4 *) intros. ring.

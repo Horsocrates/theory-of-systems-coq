@@ -124,7 +124,7 @@ Qed.
 
 (** Gap is rational (computable) *)
 Theorem breach_gap_computable : forall beta,
-  exists q : Q, gap_M0 beta == q.
+  exists (num : Z) (den : BinNums.positive), gap_M0 beta = num # den.
 Proof. exact gap_M0_rational. Qed.
 
 (* ================================================================== *)
@@ -153,7 +153,7 @@ Definition ym_wall_status : Prop :=
   (* Gap positive *)
   0 < gap_M0 1 /\ 0 < gap_M0 2 /\
   (* Gap computable *)
-  (forall beta, exists q, gap_M0 beta == q).
+  (forall beta, exists (num : Z) (den : BinNums.positive), gap_M0 beta = num # den).
 
 Theorem ym_wall_broken : ym_wall_status.
 Proof.
@@ -210,7 +210,7 @@ Qed.
 (** Connection to character theory *)
 Theorem characters_provide_gap :
   (* Characters form orthogonal basis *)
-  (forall j c, exists q, su2_character j c == q) /\
+  (forall j c, exists (num : Z) (den : BinNums.positive), su2_character j c = num # den) /\
   (* Orthogonality under Haar *)
   (forall j k, j <> k -> (2 * j + 1 <> 2 * k + 1)%nat) /\
   (* Weighted moments nonneg *)
@@ -269,7 +269,7 @@ Qed.
 (** Grand total across all phases *)
 Theorem grand_total :
   (* SU(2) characters computable *)
-  (forall j c, exists q, su2_character j c == q) /\
+  (forall j c, exists (num : Z) (den : BinNums.positive), su2_character j c = num # den) /\
   (* Transfer diagonal *)
   transfer_is_diagonal /\
   (* Eigenvalue ordering *)

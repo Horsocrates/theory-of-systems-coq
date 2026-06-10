@@ -310,9 +310,9 @@ Proof. intros sigma H0 H1. unfold reflect_sigma. split; lra. Qed.
 
 (** Zero count is computable *)
 Lemma zero_count_computable : forall K T,
-  exists q : Q, zero_count_bound K T == q.
+  exists (num : Z) (den : BinNums.positive), zero_count_bound K T = num # den.
 Proof.
-  intros K T. exists (zero_count_bound K T). reflexivity.
+  intros K T. destruct (zero_count_bound K T) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** K=1 bound is T+1 *)

@@ -67,9 +67,9 @@ Qed.
 
 (** At each K: li_process is a specific rational number *)
 Lemma li_process_rational : forall n zeros,
-  exists q : Q, li_process n zeros == q.
+  exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den.
 Proof.
-  intros n zeros. exists (li_process n zeros). reflexivity.
+  intros n zeros. destruct (li_process n zeros) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** li_process at n=0 is always 0 (since each contribution is 0 at n=0) *)
@@ -167,17 +167,17 @@ Proof.
   intros n zeros Hall. unfold rh_check. apply li_nonneg_if_on_line. exact Hall.
 Qed.
 
-(** Both checks are decidable at each level (finite computation) *)
+(** Both checks are decidable at each level (June 2026: was the dressed-up
+    `exists q, _ == q /\ 0 < q`, which is just positivity wrapped in a vacuous
+    witness — unwrapped to the real statement). *)
 Lemma ym_decidable : forall K,
-  exists q : Q, zeta_partial 2 K == q /\ 0 < q.
+  0 < zeta_partial 2 K.
 Proof.
-  intros K. exists (zeta_partial 2 K). split.
-  - reflexivity.
-  - apply zeta_partial_positive.
+  intros K. apply zeta_partial_positive.
 Qed.
 
 Lemma rh_decidable : forall n zeros,
-  exists q : Q, li_process n zeros == q.
+  exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den.
 Proof.
   intros n zeros. exact (li_process_rational n zeros).
 Qed.
@@ -245,9 +245,9 @@ Qed.
 (** Each level check is computable *)
 Theorem p4_li_computable : forall n K,
   (1 <= n)%nat -> (1 <= K)%nat ->
-  exists q : Q, zeta_partial n K == q.
+  exists (num : Z) (den : BinNums.positive), zeta_partial n K = num # den.
 Proof.
-  intros n K _ _. exists (zeta_partial n K). reflexivity.
+  intros n K _ _. destruct (zeta_partial n K) as [num den]. exists num, den. reflexivity.
 Qed.
 
 (** P4 assertion: process-level Li criterion *)
@@ -275,7 +275,7 @@ Qed.
 (** Summary theorem *)
 Theorem li_process_summary :
   (* Process definition is computable *)
-  (forall n zeros, exists q, li_process n zeros == q) /\
+  (forall n zeros, exists (num : Z) (den : BinNums.positive), li_process n zeros = num # den) /\
   (* On-line zeros give nonneg Li *)
   (forall n zeros, Forall (fun bg => fst bg == (1#2)) zeros ->
     0 <= li_process n zeros) /\

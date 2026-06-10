@@ -123,11 +123,13 @@ Proof. exact L1_lt_L2. Qed.
 Theorem L5_chain : L1 << L2 /\ L2 << L3.
 Proof. split; [exact L1_lt_L2 | exact L2_lt_L3]. Qed.
 
-(** L5 well-founded: no infinite descending chains.
-    Since Level is an inductive type, it's well-founded by construction. *)
-Theorem L5_no_infinite_descent : forall l : Level,
-  exists n : nat, level_depth l = n.
-Proof. intros l. exists (level_depth l). reflexivity. Qed.
+(** L5 well-founded: no infinite descending chains — the depth measure STRICTLY
+    DECREASES along <<, which is the genuine well-foundedness content (June 2026:
+    was `exists n, level_depth l = n`, vacuous; the real theorem is Core_ERR's
+    level_lt_depth). *)
+Theorem L5_no_infinite_descent : forall l1 l2 : Level,
+  l1 << l2 -> (level_depth l1 < level_depth l2)%nat.
+Proof. exact level_lt_depth. Qed.
 
 (* ================================================================== *)
 (*  UNITY: five laws = five aspects of ONE structure                 *)

@@ -147,8 +147,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : gap_3d_positive = gap_3d_positive.
-Proof. reflexivity. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -159,5 +158,5 @@ Proof. reflexivity. Qed.
 (*           gap_3d_exceeds_all (3)                                           *)
 (*  Part III: gap_formula_0/1/2/3, gap_formula_matches,                      *)
 (*            confinement_weights (6)                                         *)
-(*  Part IV: gap_3d_main, total_count (2)                                    *)
+(*  Part IV: gap_3d_main                                    *)
 (* ========================================================================= *)

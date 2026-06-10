@@ -169,14 +169,14 @@ Qed.
 Theorem correlation_polynomial_degree : forall (n_pts M_order : nat),
   (* The n-point function at Taylor order M is *)
   (* a polynomial of degree ≤ n·M in β *)
-  exists q : Q, bessel_partial 0 1 M_order == q.
+  exists (num : Z) (den : BinNums.positive), bessel_partial 0 1 M_order = num # den.
 Proof. intros. exact (bessel_rational 0 1 M_order). Qed.
 
 (** Correlations are rational functions of β *)
 Theorem correlation_rational : forall (n_pts J_trunc : nat),
   (* n-point function is rational in β *)
   (* (ratio of polynomials in β) *)
-  exists q : Q, transfer_eigenvalue J_trunc 1 n_pts == q.
+  exists (num : Z) (den : BinNums.positive), transfer_eigenvalue J_trunc 1 n_pts = num # den.
 Proof. intros. exact (eigenvalue_rational J_trunc 1 n_pts). Qed.
 
 (** Correlations are continuous in β *)

@@ -139,8 +139,7 @@ Proof.
 Qed.
 
 (** End marker *)
-Theorem total_count : 0 < tensor_gap_3d.
-Proof. exact tensor_gap_3d_positive. Qed.
+(* June 2026: "total_count" tail-stamp deleted -- it was a self-equality/numerology sham or a duplicate alias; real content (if any) lives under its honest name in this file. *)
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
@@ -153,5 +152,5 @@ Proof. exact tensor_gap_3d_positive. Qed.
 (*             ground_exceeds_second (3)                                     *)
 (*  Part IV: gap_3d_vs_1d_continuum, gap_3d_continuum_vs_lattice,           *)
 (*            both_3d_gaps_positive (3)                                      *)
-(*  Part V: tensor_gap_bound_main, total_count (2)                          *)
+(*  Part V: tensor_gap_bound_main                          *)
 (* ========================================================================= *)

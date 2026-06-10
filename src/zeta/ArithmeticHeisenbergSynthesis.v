@@ -3,6 +3,16 @@
 (* E/R/R: Elements = all components (divisibility, commutator, Mobius, Lee-Yang, primes),
    Roles = structural parallels between arithmetic and physics,
    Rules = noncommutative arithmetic → spectral constraints → prime distribution *)
+(* June 2026 — HONEST LAYERING of what this synthesis actually is:
+   DERIVED (real theorems): the commutator core — tr_comm_sq_arith is now
+     COMPUTED from the actual mult_adj/add_adj operators (was a hardcoded
+     table; values verified to match), with the general law
+     Tr([M,A]^2) <= 0 for every K (antisymmetry of the commutator of
+     symmetric operators); Mobius/Mertens values are real computations.
+   ANALOGY-DATA (framing, not derivation): Lee-Yang vs RH loci are enum
+     labels (<> by discriminate), and the critical exponents
+     (prime/walk/hydrogen/box) are literature CONSTANTS compared as Q
+     literals — structural parallels, not derived spectral constraints. *)
 
 From Coq Require Import QArith.
 From Coq Require Import ZArith.
@@ -62,6 +72,14 @@ Proof.
   - exact noncomm_20.
   - exact noncomm_30.
 Qed.
+
+(* === June 2026: the general law behind the instances ===
+   The commutator trace-square is nonpositive at EVERY truncation K —
+   derived from the antisymmetry of [M,A] for symmetric M, A
+   (ArithmeticCommutator.tr_comm_sq_nonpos), not observed case-by-case. *)
+Theorem commutator_trace_nonpositive : forall K,
+  tr_comm_sq_arith K <= 0.
+Proof. exact tr_comm_sq_nonpos. Qed.
 
 (* === Commutator growth: larger graphs → larger noncommutativity === *)
 
