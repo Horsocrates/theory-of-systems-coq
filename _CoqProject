@@ -1949,6 +1949,8 @@ src/foundation/FeigenbaumERR.v
 src/foundation/HeliumStructure.v
 src/foundation/HierarchyDepthLadder.v
 src/foundation/DeterminacyAscent.v
+src/foundation/WqoProcessDecidable.v
+src/foundation/ProcessHierarchySynthesis.v
 src/foundation/HydrogenStructure.v
 src/foundation/HydrogenThreeFormulas.v
 src/foundation/LithiumStructure.v
