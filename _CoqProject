@@ -1896,6 +1896,10 @@ src/foundation/DoublyStochasticForkBridge.v
 src/foundation/NormFormTowerBridge.v
 src/foundation/EulerCharProtectedInteger.v
 src/foundation/FixedPointTaxonomy.v
+src/foundation/PowersetRoleType.v
+src/foundation/FiniteGameDeterminacy.v
+src/foundation/FiniteWqoPigeonhole.v
+src/foundation/FormerWallsLedger.v
 src/foundation/H1RationalDegreeUniform.v
 src/foundation/RationalRootEigenvalue.v
 src/foundation/MonicRationalRoot.v
