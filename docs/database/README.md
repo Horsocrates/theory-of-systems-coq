@@ -75,9 +75,9 @@ index stays complete.
 
 ## Status
 
-Built incrementally, cluster by cluster. **685 files / 9,006 Qed catalogued so far** across
-23 shards (see `INDEX.md` and `_uniqueness_ranked.md`). **`UNIQUENESS.md` (deliverable 2) is BUILT**
-(veins A–J — `docs/database/UNIQUENESS.md`); to be rebuilt once the giants are catalogued.
+Built incrementally, cluster by cluster. **1,852 files / 23,897 Qed catalogued — every cluster DONE**
+across 26 shards (see `INDEX.md` and `_uniqueness_ranked.md`). **`UNIQUENESS.md` (deliverable 2) is BUILT**
+(veins A–J — `docs/database/UNIQUENESS.md`); **to be rebuilt now the giants are in** (pending).
 
 Done: `cs`, `algebra`, `settheory`, `geometry`, `numbertheory`, `category`, `analysis`, `src`
 (root), `lattice`, `zeta`, `physics`, `navier_stokes`, `experimental`, `projective`, `light`,
@@ -86,5 +86,11 @@ Done: `cs`, `algebra`, `settheory`, `geometry`, `numbertheory`, `category`, `ana
 finished 2026-06-09; the F-4..F-6 catalog corrected widespread STATUS-header Qed drift)**, and
 `log2` (the log2-as-process pair + the Mertens→exp_R→injectivity tower; HIGHLIGHTS **H58/H59**).
 
-In progress / pending: the giants `process` (340), `gauge` (114), `stdlib` (709+); final reconcile
-of `_files.tsv` numbering. See `memory/file-database.md` for the running progress log.
+Giants DONE (2026-06-11, via multi-agent Workflow): **`gauge`** (114 files, 2,091 Qed),
+**`process`** (340, 4,472 Qed), **`stdlib`** (709, 8,224 Qed) — committed `c987b9e` / `a831167`.
+The catalogue surfaced systematic STATUS-header Qed drift (gauge headers inflated, e.g. ExactMassGap
+~40→28; process headers under-counted) and pervasive over-branding in applied gauge/physics files
+(Clay-problem names, sin^2 theta_W=3/13, etc. — each flagged in its `caveat`). Remaining reconcile:
+rebuild `UNIQUENESS.md`; catalogue 4 stdlib files absent from `_files.tsv` (ChebyshevLLN,
+CombinatoricsExt, InclusionExclusionFib, ShannonSynthesis); final `_files.tsv` renumber. See
+`memory/file-database.md` for the running progress log.
