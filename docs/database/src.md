@@ -2,7 +2,7 @@
 
 _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**81 files / 1710 Qed.** Score distribution: s5=1 / s4=6 / s3=14 / s2=46 / s1=11 / s0=3
+**89 files / 1937 Qed.** Score distribution: s5=1 / s4=6 / s3=17 / s2=51 / s1=11 / s0=3
 
 ---
 
@@ -2336,4 +2336,531 @@ _Generated from `src.json` by `generate.ps1` - do not edit by hand; edit the JSO
 
 **Uniqueness - score 2 (methods).** Арифметика уровней (сложение ассоц./монотонно, LS инъективен-не-сюръективен, трихотомия, L1 минимален) — иерархия растёт без верха.
 > _Caveat:_ Уровневая арифметика стандартна; вклад — ToS-инстанс + узор no-maximum.
+
+---
+
+## #1862 - `src/Andre_reflection.v` - score 2 (methods)
+
+**Andre's reflection form of the Catalan number: C_n = C(2n,n) - C(2n,n+1), with explicit reflection involution**
+
+- **Topic.** Derives the second classical closed form of the Catalan number, C_n = C(2n,n) - C(2n,n+1), algebraically equivalent to the cycle-lemma form C(2n,n)/(n+1) from Catalan.v, and exhibits the genuine reflection involution reflect_at (flip steps after an index) with its count-transfer lemmas.
+- **Role.** Companion to Catalan.v: imports num_dyck, binomial, catalan_explicit_formula, Path/Step and the count_* machinery from it; reused by Catalan_recurrence (Andre form is one of the two forms the recurrence is checked against). Standalone combinatorics, no downstream physics.
+- **Counts.** Qed 20 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: Init.Nat PeanoNat Factorial List Lia ZArith ArithRing Permutation; ToS.Catalan
+- **E/R/R.** _Elements:_ пути-списки шагов {U=true,D=false} (Path); 'плохие' сбалансированные пути (касаются y=-1); длины-2n пути с (n+1) D-шагами — все конечны (P4). _Roles:_ отражение reflect_at k = роль-операция L2 на L1-путях (хранит первые k шагов, инвертирует остаток); первый спуск ниже 0 = L5-каноническая позиция (наименьший индекс). _Rules:_ тождество (n+1)·C(2n,n+1) = n·C(2n,n) (замкнутый образ отражения); reflect_at — инволюция (flip_step∘flip_step=id); count_U/count_D переносятся через отражение. _P4:_ ОДНО значение C_n, ДВА L5-канонических разреза: cycle-lemma (орбита, argmin) против reflection (инволюция на плохих путях, первый спуск). Слабый инстанс L4 (достаточное основание): у замкнутой формы несколько комбинаторных ПРИЧИН.
+- **Classical counterpart.** Andre's reflection principle (1887) and the closed form C_n = C(2n,n) - C(2n,n+1) are textbook combinatorics (Catalan numbers, ballot problem); the identity (n+1)C(2n,n+1)=nC(2n,n) is elementary. NEW here is only the 0-axiom nat-level Coq formalization (involution reflect_at proved an involution, count-transfer lemmas) and the explicit machine-checked equivalence with the cycle-lemma form of Catalan.v; no new mathematics.
+- **Tags.** catalan, combinatorics, reflection, involution, binomial, nat, no-AC
+
+**Lemmas (25):**
+
+| name | kind | role |
+|---|---|---|
+| `binomial_andre_identity` | Lemma | ★ ключевое тождество (n+1)·C(2n,n+1) = n·C(2n,n) (через binomial_fact, отмена факториалов) |
+| `binomial_2n_n_ge_n1` | Lemma | C(2n,n+1) <= C(2n,n) (чтобы вычитание в nat не уходило в 0) |
+| `catalan_andre_formula` | Theorem | ★ Andre: num_dyck n = C(2n,n) - C(2n,n+1) |
+| `catalan_cycle_form` | Theorem | cycle-форма (n+1)·num_dyck n = C(2n,n) (= catalan_explicit_formula) |
+| `catalan_andre_form` | Theorem | Andre-форма без вычитания: num_dyck n + C(2n,n+1) = C(2n,n) |
+| `catalan_forms_consistent` | Theorem | взаимная согласованность cycle-формы и Andre-формы (Qed-проверка) |
+| `flip_step` | Definition | инверсия одного шага U<->D |
+| `reflect_at` | Definition | отражение в позиции k: firstn k ++ map flip_step (skipn k) |
+| `first_neg_idx_aux` | Fixpoint | наименьший индекс, где префиксная сумма впервые достигает -1 |
+| `first_neg_idx` | Definition | обёртка first_neg_idx_aux p 0 0 |
+| `flip_step_involution` | Lemma | flip_step — инволюция |
+| `map_flip_step_involution` | Lemma | map flip_step — инволюция на списках |
+| `reflect_at_length` | Lemma | reflect_at сохраняет длину пути |
+| `count_U_map_flip` | Lemma | count_U (map flip_step l) = count_D l |
+| `count_D_map_flip` | Lemma | count_D (map flip_step l) = count_U l |
+| `count_U_reflect_at` | Lemma | count_U после отражения = count_U(firstn) + count_D(skipn) |
+| `count_D_reflect_at` | Lemma | count_D после отражения = count_D(firstn) + count_U(skipn) |
+| `count_U_split` | Lemma | count_U p = count_U(firstn k) + count_U(skipn k) |
+| `count_D_split` | Lemma | count_D p = count_D(firstn k) + count_D(skipn k) |
+| `reflect_at_involution` | Lemma | ★ reflect_at k — инволюция (reflect_at k (reflect_at k p) = p) |
+| `is_balanced_b` | Definition | булев тест: count_U = n и count_D = n |
+| `num_balanced_binomial` | Lemma | число сбалансированных путей длины 2n = C(2n,n) |
+| `num_paths_n1_D_binomial` | Lemma | число путей длины 2n с (n+1) D-шагами = C(2n,n+1) |
+| `bad_balanced_count` | Theorem | #{плохих сбалансированных} = C(2n,n) - num_dyck n = C(2n,n+1) |
+| `reflection_bijection_cardinality` | Theorem | итог биекции-отражения = catalan_andre_form |
+
+**Key lemmas (deep):**
+
+- **`binomial_andre_identity`** - Алгебраическое сердце файла: (n+1)·C(2n,n+1) = n·C(2n,n). Доказано через binomial_fact (связь биномов с факториалами) и отмену общего множителя fact(Sn')·fact n'; это замкнутый образ комбинаторной биекции-отражения между 'плохими' путями и длины-2n путями с (n+1) D-шагами. Из него обе формы Каталана выводятся как Qed. Честно: само тождество классично и элементарно. _(binomial, andre, identity, catalan)_
+- **`reflect_at_involution`** - Настоящая (не только алгебраическая) инволюция Andre: отразить хвост пути после индекса k и отразить ещё раз = тождество. Это единственный геном-факт, дающий биективное, а не чисто счётное, обоснование формулы C(2n,n)-C(2n,n+1). В ToS-прочтении это L5-каноническая операция (первый спуск задаёт уникальный k). Тем не менее полная Permutation-биекция между множествами здесь НЕ собрана — кардинальность (bad_balanced_count) берётся из catalan_andre_formula, а инволюция стоит рядом как структурный свидетель. _(involution, reflection, bijection, L5)_
+- **`catalan_forms_consistent`** - Демонстрирует тезис файла: ОДНО C_n, ДВЕ L5-канонические биекции (орбита-цикл против инволюции-отражение), численно тождественные. Уровень — методический/экспозиционный: оба классических вывода Каталана сведены в один Coq-файл с машинной проверкой их эквивалентности; новизна только в 0-аксиомной формализации над nat, не в математике. _(consistency, dual-derivation, L4)_
+
+**Uniqueness - score 2 (methods).** Вторая (отражательная) замкнутая форма числа Каталана и настоящая инволюция reflect_at, машинно сведённые к cycle-форме Catalan.v; всё над nat, 0 аксиом, 0 AC.
+> _Caveat:_ Полностью классика (принцип отражения Andre, формула C(2n,n)-C(2n,n+1)). Ново только формализация. Честный пробел: полная Permutation-биекция между плохими путями и (n+1)-D путями НЕ собрана — кардинальность берётся алгебраически из catalan_andre_formula, инволюция стоит как структурный, не доведённый до счёта, свидетель.
+
+---
+
+## #1863 - `src/CantorHeineQ.v` - score 3 (new-framing)
+
+**Cantor-Heine FAILS over Q: f(x)=1/(x^2-2) on [1,2]∩Q is pointwise-continuous but not uniformly continuous**
+
+- **Topic.** Builds a concrete rational witness that the Cantor-Heine theorem (pointwise continuity on a compact => uniform continuity) genuinely fails over Q: at the absent √2-pole f=1/(x^2-2) is continuous at every rational point of [1,2]∩Q, yet Pell convergents make |f| blow up so that |f(x_k)-f(x_{k+1})|>=1 across arbitrarily small windows.
+- **Role.** Closes FORMALIZATION-BACKLOG F-21 against analysis/Continuity.v. Imports Sqrt2Approx (Pell witness sx/qq/pp), analysis.Sqrt2Irrational (no_rational_sqrt2), analysis.Continuity (continuous_on / uniformly_continuous_on). Sibling of QIntervalNotCompact (F-20, the compactness step that fails). No reuse downstream; honest-limitation content.
+- **Counts.** Qed 11 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Qabs Lqa ZArith Lia Qminmax; ToS.Sqrt2Approx; ToS.analysis.Sqrt2Irrational; ToS.analysis.Continuity
+- **E/R/R.** _Elements:_ рациональные точки [1,2]∩Q; Пелля-приближения x_k = sx k; значения f(x_k) = ±q_k^2 — все актуальны (P4). _Roles:_ √2-полюс = role-limit (отсутствующая особенность, недостижимая из Q); равномерность = роль-ТРЕБОВАНИЕ, не следствие непрерывности. _Rules:_ f непрерывна поточечно (знаменатель отделён от 0 у каждой точки, δ=min(\|A0\|/8, ε\|A0\|^2/16)); равномерность ломается у √2-зазора (соседние x_k 1/(q_k q_{k+1})-близки, но \|f x_k - f x_{k+1}\| >= q_{k+1}^2 - q_k^2 >= 1). _P4:_ непрерывное-но-не-равномерное = ДОКАЗАННЫЙ контрпример: Cantor-Heine над Q ложен, потому что шаг компактности проваливается у √2-зазора (F-20). ToS не нуждается в Cantor-Heine: равномерность = явное правило-роль (Липшиц-маршрут Continuity.lipschitz_uniform).
+- **Classical counterpart.** The Cantor-Heine theorem (continuous on a compact metric space => uniformly continuous) is classical, as is the fact that it requires completeness/compactness and fails on non-complete or non-compact domains (e.g. 1/x on (0,1)). NEW here is the explicit machine-checked rational witness over [1,2]∩Q built from Pell convergents (\|x_k^2-2\|=1/q_k^2 exactly), tying the failure precisely to the absent-√2 pole and the parallel Q-non-compactness (QIntervalNotCompact, F-20); the negative phenomenon is known, the concrete Q-only formalization is the contribution.
+- **Tags.** cantor-heine, uniform-continuity, Q-limitation, sqrt2, pell, no-completeness, finitization-boundary, F-21
+
+**Lemmas (12):**
+
+| name | kind | role |
+|---|---|---|
+| `f` | Definition | свидетель f(x) = / (x*x - 2) — полюс у отсутствующего √2 |
+| `Qabs_inv` | Lemma | Q-помощник: Qabs(/a) == /Qabs a |
+| `Qabs_div_loc` | Lemma | Q-помощник: Qabs(a/b) == Qabs a / Qabs b |
+| `div_lt` | Lemma | Q-помощник: num < e*den (den>0) => num/den < e |
+| `Qmid` | Lemma | division-free midpoint helper для lra над Q |
+| `cantor_heine_continuous` | Theorem | ★ f непрерывна на [1,2]∩Q в каждой точке (явная δ через \|x0^2-2\|) |
+| `f_abs_val` | Lemma | \|f(x_k)\| == q_k^2 (точно, из sx_abs_eq) |
+| `sx_consec_abs` | Lemma | \|x_k - x_{k+1}\| == 1/(q_k q_{k+1}) (детерминант Пелля ±1) |
+| `sx_consec_small` | Lemma | \|x_k - x_{k+1}\| <= 1/(k+1) (соседние convergent'ы близки) |
+| `nat_archimedean` | Lemma | архимедовость: для q есть n с q < n (через Qarchimedean) |
+| `cantor_heine_not_uniform` | Theorem | ★ f НЕ равномерно непрерывна (ε=1, магнитудный разрыв q_{k+1}^2-q_k^2>=1) |
+| `cantor_heine_fails_Q` | Theorem | ★ КАПСТОУН: непрерывна ∧ не-равномерно-непрерывна => Cantor-Heine над Q ложен |
+
+**Key lemmas (deep):**
+
+- **`cantor_heine_not_uniform`** - Ядро негативного результата: ε=1, и никакая δ не работает. Используя Пелля-тождество \|x_k^2-2\|=1/q_k^2 точно, имеем \|f(x_k)\|=q_k^2->∞, а соседние convergent'ы 1/(q_k q_{k+1})-близки; обратное неравенство треугольника даёт \|f x_k - f x_{k+1}\| >= q_{k+1}^2 - q_k^2 >= 1. Конструктивный рациональный свидетель провала равномерности — без какого-либо знака, только магнитудный зазор. Это и есть точка, где компактность [0,1]∩Q ломается (√2 отсутствует). _(uniform-continuity, pell, sqrt2, counterexample, Q-limitation)_
+- **`cantor_heine_continuous`** - Положительная половина: в каждой рациональной точке x0 знаменатель x0^2-2 отделён от 0 (т.к. √2∉Q), значит f липшицево-непрерывна локально с явной δ=min(\|A0\|/8, ε\|A0\|^2/16). Тяжёлая Q-арифметика (Qabs, division-free неравенства) — чтобы lra/nra над Q прошли. Показывает, что поточечная непрерывность держится ВЕЗДЕ, и именно глобальная (компактностная) равномерность — то единственное, что отказывает. _(pointwise-continuity, delta-epsilon, Q-arithmetic)_
+- **`cantor_heine_fails_Q`** - Капстоун F-21: одно утверждение, склеивающее обе половины — Cantor-Heine над Q опровергнут конкретным машинно-проверенным свидетелем. В ToS-прочтении: теорема Cantor-Heine = правило 'поточечно => равномерно' ЧЕРЕЗ завершённую компактность; над Q компактность проваливается у √2-зазора, поэтому правило надо заменить равномерностью-как-явным-требованием. Заголовок файла называет это 'новой теоремой'; честнее — известный негативный феномен (Cantor-Heine требует полноты/компактности), инстанцированный явным рациональным контрпримером. _(capstone, cantor-heine, finitization-boundary, synthesis)_
+
+**Uniqueness - score 3 (new-framing).** Конкретный 0-аксиомный рациональный контрпример к Cantor-Heine над Q (Пелля-свидетель: |f x_k - f x_{k+1}| >= 1 в сколь угодно малых окнах), локализующий провал у отсутствующего √2 и связывающий его с Q-некомпактностью; равномерность пересобрана как явное правило-роль ToS.
+> _Caveat:_ Сам негативный феномен классичен: Cantor-Heine требует полноты/компактности и заведомо ложен на неполных областях. Заголовок файла называет результат 'новой теоремой' — лёгкий оверклейм; ново не утверждение, а явный машинно-проверенный РАЦИОНАЛЬНЫЙ свидетель и его сведение к √2-зазору. Иррациональность √2 и Пелля-аппарат импортированы (Sqrt2Irrational/Sqrt2Approx).
+
+---
+
+## #1864 - `src/Catalan.v` - score 2 (methods)
+
+**Catalan numbers via the Dvoretzky-Motzkin cycle lemma: (n+1)*C_n = C(2n,n), fully constructive (0 AC)**
+
+- **Topic.** Derives the explicit Catalan formula C_n = C(2n,n)/(n+1) inside ToS by formalizing the cycle lemma end-to-end: cyclic rotations of augmented sequences (n+1 U's, n D's), the last-min-index selection of the unique 'good' rotation, a Phi-bijection giving (2n+1)*num_good = num_augmented = C(2n+1,n), and the algebraic step to (n+1)*num_dyck n = C(2n,n).
+- **Role.** Root of the small combinatorics cluster: defines Step/Path/count_U/count_D/height_at/is_dyck, binomial (Pascal), all_paths, num_dyck and the whole cycle-lemma apparatus reused by Andre_reflection, Catalan_recurrence and Motzkin. Self-contained (only Stdlib); no physics downstream.
+- **Counts.** Qed 84 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: Init.Nat PeanoNat Factorial List Lia ZArith ArithRing Permutation
+- **E/R/R.** _Elements:_ Step = bool (U=true/D=false) — примитивное двузначное различение A/не-A; Path = list Step; augmented-последовательности (n+1 U, n D, длина 2n+1) — всё структурно конечно (P4). _Roles:_ позиция pi: шаги->[1,2n] (L5 горизонтальная); высота height_at = #U-#D в префиксе; циклический сдвиг rotate_k = L2-операция на L1-объектах; last_min_idx (наибольший индекс минимума префикс-сумм) = L5-канонический выбор уникальной 'хорошей' ротации. _Rules:_ Constitution is_dyck = замыкание (count_U=count_D, L4) + неотрицательность высот (L4+L2); is_good = строго положительные высоты; aperiodicity gcd(n+1,n)=1 даёт 2n+1 различных ротаций. _P4:_ C_n считает КОНЕЧНЫЙ процесс: семейство {Dyck_n} порождает конечные системы по запросу — никакой аксиомы бесконечности, никакого AC, доказательство полностью конструктивно. L5-минимальный-индекс — движок цикл-леммы.
+- **Classical counterpart.** The Catalan number formula C_n = C(2n,n)/(n+1) and the Dvoretzky-Motzkin cycle lemma (1947) are textbook combinatorics; binomial-via-Pascal and the ballot/Dyck-path counting are standard. NEW here is only the fully constructive, 0-axiom, AC-free nat-level Coq formalization of the ENTIRE cycle-lemma pipeline (rotation invariants, last-min-index canonical selection, Phi-bijection as an explicit Permutation, num_dyck as a computable filter count proven equal to the closed form); the mathematics is classical, the end-to-end constructive mechanization is the contribution.
+- **Tags.** catalan, combinatorics, cycle-lemma, dyck-paths, binomial, no-AC, P4, L5, constructive, nat
+- **Notes.** Header STATUS говорит 'Cycle lemma core + aperiodicity stated with proof sketch' и финальный блок перечисляет 8 'REMAINING ADMITTED' (cycle_lemma_exists/unique, good_to_dyck, ...), но это УСТАРЕВШИЙ комментарий: фактически Admitted=0, все перечисленные доказаны Qed (cycle_lemma_exists/unique/count, good_to_dyck, dyck_to_good, num_augmented_binomial — все с Qed). build_catalan_system намеренно опущен (документирован как Record CatalanSystem). Qed actual = 84.
+
+**Lemmas (117):**
+
+| name | kind | role |
+|---|---|---|
+| `Step` | Definition | Elements: двузначное различение (bool) |
+| `U` | Definition | up-step = true |
+| `D` | Definition | down-step = false |
+| `Path` | Definition | конечная последовательность шагов = list Step |
+| `count_U` | Fixpoint | число U-шагов |
+| `count_D` | Fixpoint | число D-шагов |
+| `count_U_app` | Lemma | count_U аддитивен по ++ |
+| `count_D_app` | Lemma | count_D аддитивен по ++ |
+| `count_UD_length` | Lemma | count_U + count_D = length |
+| `length_app_nat` | Lemma | длина конкатенации = сумма длин |
+| `height_at` | Definition | знаковая высота префикса длины k (в Z) |
+| `total_height` | Definition | высота всего пути |
+| `firstn_all_eq` | Lemma | firstn (length p) p = p |
+| `total_height_eq` | Lemma | total_height = #U - #D |
+| `is_dyck` | Definition | Constitution: баланс + неотрицательные высоты |
+| `rotate_one` | Definition | сдвиг на одну позицию |
+| `rotate_k` | Fixpoint | сдвиг на k позиций |
+| `rotate_one_length` | Lemma | rotate_one сохраняет длину |
+| `rotate_k_length` | Lemma | rotate_k сохраняет длину |
+| `rotate_one_count_U` | Lemma | rotate_one сохраняет count_U |
+| `rotate_one_count_D` | Lemma | rotate_one сохраняет count_D |
+| `rotate_k_count_U` | Lemma | rotate_k сохраняет count_U |
+| `rotate_k_count_D` | Lemma | rotate_k сохраняет count_D |
+| `rotate_k_total_height` | Lemma | rotate_k сохраняет total_height |
+| `is_augmented` | Definition | augmented: n+1 U, n D, длина 2n+1 |
+| `augmented_total_height` | Lemma | augmented => total_height = 1 |
+| `is_good` | Definition | все непустые префиксы строго положительной высоты |
+| `rotate_k_augmented` | Lemma | ротация сохраняет augmented-ность |
+| `heightZ_at_bool` | Definition | обёртка высоты для булевой версии |
+| `forall_pos_heights` | Fixpoint | булева проверка всех высот >= 1 |
+| `is_good_b` | Definition | булева версия is_good |
+| `find_good_aux` | Fixpoint | поиск good-ротации (наименьший индекс) |
+| `find_good` | Definition | обёртка find_good_aux |
+| `rotate_k_compose` | Lemma | rotate_k k (rotate_k j p) = rotate_k (k+j) p |
+| `rotate_one_skipn` | Lemma | rotate_one (x::rest) = rest ++ [x] |
+| `height_at_rotate_one_le` | Lemma | сдвиг высот при rotate_one (явная форма) |
+| `height_at_rotate_one_le_gen` | Lemma | то же для любого непустого пути |
+| `height_at_rotate_one_top` | Lemma | формула высоты на верхушке ротации |
+| `height_at_0` | Lemma | height_at p 0 = 0 |
+| `height_at_rotate_k_no_wrap` | Lemma | формула высот ротации (без переноса) |
+| `augmented_length` | Lemma | augmented => length = 2n+1 |
+| `prefix_heights_from` | Fixpoint | список префиксных высот с аккумулятором |
+| `prefix_heights` | Definition | список префиксных высот |
+| `prefix_heights_from_length` | Lemma | длина списка высот = S (length p) |
+| `prefix_heights_length` | Lemma | то же для prefix_heights |
+| `nth_prefix_heights_from` | Lemma | nth списка высот = acc + height_at |
+| `nth_prefix_heights` | Lemma | nth prefix_heights = height_at |
+| `find_last_min` | Fixpoint | наибольший индекс минимума в списке |
+| `last_min_idx` | Definition | ★ L5-движок: наибольший индекс минимума префикс-сумм |
+| `find_last_min_lt` | Lemma | оценка выхода find_last_min |
+| `last_min_idx_le_length` | Lemma | last_min_idx <= length (свойство 1) |
+| `find_last_min_correct` | Lemma | инвариантная корректность find_last_min |
+| `last_min_idx_correct` | Lemma | корректность last_min_idx через nth |
+| `last_min_idx_is_min` | Lemma | свойство 2: это минимум высот |
+| `last_min_idx_strict_after` | Lemma | свойство 3: строго больше после индекса |
+| `height_at_rotate_k_wrap` | Lemma | формула высот ротации (с переносом) |
+| `cycle_lemma_exists` | Theorem | ★ цикл-лемма (существование): у augmented есть good-ротация |
+| `good_aug_no_nontrivial_good_rotation` | Lemma | у good-augmented нет нетривиальной good-ротации |
+| `cycle_lemma_unique` | Theorem | ★ цикл-лемма (единственность) good-ротации |
+| `strip_first` | Definition | удалить первый шаг (tl) |
+| `prepend_U` | Definition | дописать U в начало |
+| `good_augmented_starts_U` | Lemma | good-augmented начинается с U |
+| `height_at_cons_U` | Lemma | высоты при дописывании U сдвигаются на +1 |
+| `good_to_dyck` | Lemma | strip good-augmented => Dyck длины 2n |
+| `dyck_to_good` | Lemma | prepend_U Dyck => good-augmented (обратное) |
+| `binomial` | Fixpoint | биномиальный коэффициент через правило Паскаля (nat, без деления) |
+| `binomial_0_0` | Lemma | C(0,0)=1 |
+| `binomial_n_0` | Lemma | C(n,0)=1 |
+| `binomial_lt` | Lemma | n<k => C(n,k)=0 |
+| `binomial_n_n` | Lemma | C(n,n)=1 |
+| `fact_S_eq` | Lemma | fact(Sn) = Sn * fact n |
+| `binomial_S_S_eq` | Lemma | Паскаль: C(Sn,Sk)=C(n,k)+C(n,Sk) |
+| `binomial_fact` | Lemma | ★ связь бинома с факториалами: C(n,k)*(k!*(n-k)!)=n! |
+| `cycle_to_catalan_identity` | Theorem | ★ ключевой шаг: (n+1)*C(2n+1,n) = (2n+1)*C(2n,n) |
+| `all_paths` | Fixpoint | перечисление всех бинарных путей длины m |
+| `all_paths_length` | Lemma | всё в all_paths m имеет длину m |
+| `is_dyck_b_aux` | Fixpoint | булева проверка Dyck через отслеживание высоты |
+| `is_dyck_b` | Definition | булев тест Dyck |
+| `num_dyck` | Definition | ★ число Dyck-путей длины 2n (= C_n) |
+| `is_augmented_b` | Definition | булев тест augmented |
+| `num_augmented` | Definition | число augmented-последовательностей |
+| `filter_map_cons_length` | Lemma | filter по map(cons b) сводится к filter под cons |
+| `count_D_eq_binomial` | Lemma | ★ #{пути длины len, count_D=k} = C(len,k) |
+| `is_augmented_b_eq_count_D` | Lemma | is_augmented_b сводится к проверке count_D |
+| `num_augmented_binomial` | Theorem | num_augmented n = C(2n+1,n) |
+| `num_good` | Definition | число good augmented-последовательностей |
+| `forall_pos_heights_with_neg_first` | Lemma | ложь при первом отрицательном |
+| `is_good_b_false_cons` | Lemma | is_good_b (false::_) = false |
+| `forall_pos_heights_iff` | Lemma | рефлексия forall_pos_heights |
+| `is_good_b_iff` | Lemma | is_good_b отражает is_good |
+| `is_dyck_b_aux_iff` | Lemma | рефлексия is_dyck_b_aux |
+| `is_dyck_b_iff` | Lemma | is_dyck_b отражает Dyck-свойство |
+| `length_2n_count_U_iff_height_0` | Lemma | для длины 2n: count_U=n <=> высота в конце 0 |
+| `good_aug_true_iff_dyck_b` | Lemma | andb(aug_b,good_b)(U::p) = is_dyck_b p |
+| `num_good_eq_num_dyck` | Lemma | ★ num_good = num_dyck (биекция strip/prepend) |
+| `cycle_lemma_exists_b` | Lemma | булева версия существования good-ротации |
+| `cycle_lemma_unique_b` | Lemma | булева версия единственности |
+| `is_augmented_b_iff_pred` | Lemma | is_augmented_b <=> is_augmented при длине 2n+1 |
+| `rotate_one_injective` | Lemma | rotate_one инъективен на равной длине |
+| `rotate_k_injective` | Lemma | rotate_k инъективен на равной длине |
+| `firstn_S_split` | Lemma | firstn(Sj)=firstn j ++ [nth j] |
+| `skipn_cons_split` | Lemma | skipn j = nth j :: skipn(Sj) |
+| `rotate_k_skipn_firstn` | Lemma | rotate_k j p = skipn j p ++ firstn j p |
+| `rotate_k_full` | Lemma | ротация на длину = тождество |
+| `all_paths_complete` | Lemma | всякий путь длины \|p\| есть в all_paths |
+| `all_paths_complete_len` | Lemma | то же по заданной длине m |
+| `NoDup_map_cons_step` | Lemma | map(cons b) сохраняет NoDup |
+| `NoDup_app_disj` | Lemma | NoDup конкатенации непересекающихся NoDup |
+| `NoDup_all_paths` | Lemma | all_paths без повторов |
+| `NoDup_map_inj_on` | Lemma | инъективная f сохраняет NoDup map |
+| `list_prod_length_eq` | Lemma | длина list_prod = произведение длин |
+| `NoDup_list_prod` | Lemma | list_prod без повторов |
+| `rotation_count_relation` | Lemma | ★ Phi-биекция: (2n+1)*num_good = num_augmented |
+| `cycle_lemma_count` | Theorem | ★ (2n+1)*num_dyck n = C(2n+1,n) |
+| `catalan_explicit_formula` | Theorem | ★★ ГЛАВНОЕ: (n+1)*num_dyck n = C(2n,n) |
+| `catalan_factorial_formula` | Theorem | ★ факториальная форма: n!*(n+1)!*C_n = (2n)! |
+| `CatalanSystem` | Record | E/R/R-обёртка: пути(Elements)+Dyck(Rules)+позиция(Role)+формула(Theorem) |
+
+**Key lemmas (deep):**
+
+- **`catalan_explicit_formula`** - Капстоун всего файла: (n+1)*num_dyck n = C(2n,n), т.е. C_n = C(2n,n)/(n+1). Собирается из cycle_lemma_count (счётная цикл-лемма) и cycle_to_catalan_identity (алгебра биномов) через nia. Замечателен тем, что num_dyck — ВЫЧИСЛИМЫЙ счёт по конкретному filter (а не определение через формулу), так что это настоящая теорема, а не свёртка определения. Полностью конструктивно, 0 аксиом, 0 AC — что и есть ToS-тезис P4 (счёт конечного процесса без бесконечности/выбора). _(catalan, cycle-lemma, capstone, P4, no-AC)_
+- **`rotation_count_relation`** - Техническое сердце: (2n+1)*num_good = num_augmented доказано через явную Permutation между map phi (list_prod good_list (seq 0 m)) и aug_list, с инъективностью phi из good_aug_no_nontrivial_good_rotation (каждая орбита размера 2n+1 содержит ровно одну good-последовательность). Это и есть конструктивная цикл-лемма Дворецкого-Моцкина в виде равенства списков, без аксиомы выбора — нетривиальный кусок формализации (~150 строк). _(cycle-lemma, bijection, permutation, orbit)_
+- **`last_min_idx`** - L5-движок цикл-леммы: наибольший индекс, достигающий минимума префикс-сумм, выбирает УНИКАЛЬНУЮ good-ротацию (cycle_lemma_exists/unique). В ToS-прочтении это Закон Порядка L5, делающий канонический детерминированный выбор без AC — та же идея 'детерминированный выбор без выбора' (argmax/argmin по индексу), что в EVT_idx и теме определённости-без-AC. Свойства 1-3 (bound/min/strict-after) доказаны через nth-характеризацию prefix_heights. _(L5, argmin, no-AC, canonical-choice, engine)_
+- **`cycle_to_catalan_identity`** - Алгебраический мост: (n+1)*C(2n+1,n) = (2n+1)*C(2n,n), оба = (2n+1)!/(n!n!). Доказано через binomial_fact и отмену множителя fact n * fact n. Именно этот шаг переводит счётную цикл-лемму ((2n+1)*num_dyck=C(2n+1,n)) в стандартную форму Каталана. Классическое элементарное тождество, аккуратно проведённое над nat без деления. _(binomial, identity, factorial)_
+
+**Uniqueness - score 2 (methods).** Сквозная конструктивная (0 аксиом, 0 AC) формализация цикл-леммы Дворецкого-Моцкина над nat: ротационные инварианты, L5-канонический выбор last_min_idx, Phi-биекция как явная Permutation, и num_dyck как вычислимый filter-счёт, доказанно равный C(2n,n)/(n+1).
+> _Caveat:_ Математика полностью классическая (формула Каталана, цикл-лемма, биномы по Паскалю). Ново только мехнизация: безаксиомность, AC-free, num_dyck как настоящий счёт а не определение-формула. ER/RR-разметка (L1/L5/P4) — обрамление, не новый результат. Внутренний комментарий-эпилог называет ряд лемм 'REMAINING ADMITTED', но фактически Admitted=0 (все доказаны) — устаревший комментарий, см. notes.
+
+---
+
+## #1865 - `src/Catalan_recurrence.v` - score 2 (methods)
+
+**Catalan recurrence C_{n+1} = sum_{i} C_i C_{n-i}, full bijective proof via first-return decomposition (0 AC)**
+
+- **Topic.** Proves the classical Catalan recurrence num_dyck (S n) = sum_{i=0}^n num_dyck i * num_dyck (n-i) constructively, via the canonical first-return decomposition p = U a D b (k = first_return p) and its inverse dyck_compose, assembling a Permutation between dyck_list (S n) and the triple_list of (i, Dyck_i, Dyck_{n-i}).
+- **Role.** Builds directly on Catalan.v (imports num_dyck, Path, is_dyck, is_dyck_b, all_paths, height_at, count_*, rotation/NoDup helpers). Together with Andre_reflection it completes the Catalan trilogy: explicit formula (Catalan), reflection form (Andre), recurrence (this). No physics downstream.
+- **Counts.** Qed 51 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: Init.Nat PeanoNat List Permutation Lia ZArith; ToS.Catalan
+- **E/R/R.** _Elements:_ Dyck-пути длины 2(n+1); тройки (i, a, b) с a∈Dyck_i, b∈Dyck_{n-i}; склейка dyck_compose a b = U::a++[D]++b — конечные списки (P4). _Roles:_ first_return = L5-каноническая позиция (НАИМЕНЬШИЙ k>0 с h(k)=0, позиция парного D к стартовому U); decompose/compose = взаимно-обратные роли-операции на L1-путях. _Rules:_ compose сохраняет Dyck (dyck_compose_is_dyck), first_return∘compose = length a + 2 (first_return_compose), decompose∘compose = id, compose инъективен на Dyck-парах — даёт биекцию-Permutation. _P4:_ C_{n+1} считается по КОНЕЧНОМУ треугольнику num_dyck 0..n; биекция first-return полностью конструктивна, без AC. L5 (наименьший first-return) детерминирует разбор каждого пути единственным образом.
+- **Classical counterpart.** The Catalan recurrence C_{n+1} = sum_{i=0}^n C_i C_{n-i} and its first-return (Dyck arch) decomposition bijection are classical combinatorics (Stanley, Catalan numbers). NEW here is only the fully constructive, 0-axiom, AC-free Coq formalization: first_return as an L5-canonical smallest-index selector, dyck_compose/dyck_decompose proven mutually inverse and injective, and the bijection assembled as an explicit Permutation between dyck_list and triple_list, with num_dyck a computable count. Mathematics classical; constructive mechanization is the contribution.
+- **Tags.** catalan, recurrence, combinatorics, first-return, bijection, dyck-paths, no-AC, P4, L5, constructive
+
+**Lemmas (59):**
+
+| name | kind | role |
+|---|---|---|
+| `sum_to` | Definition | сумма f(i), i=0..n (через fold_right над seq) |
+| `sum_to_0` | Lemma | sum_to f 0 = f 0 |
+| `catalan_conv` | Definition | ★ свёртка Каталана: sum_{i=0}^n C_i*C_{n-i} |
+| `catalan_conv_0` | Lemma | catalan_conv 0 = C_0*C_0 |
+| `first_return_aux` | Fixpoint | поиск первого k>0, где высота возвращается в 0 |
+| `first_return` | Definition | ★ L5: позиция первого возврата (парный D) |
+| `dyck_compose` | Definition | ★ склейка двух Dyck: U::a++[D]++b |
+| `dyck_decompose` | Definition | ★ разбор пути в пару (a,b) по first_return |
+| `dyck_compose_length` | Lemma | длина склейки = S(S(\|a\|+\|b\|)) |
+| `dyck_compose_count_U` | Lemma | count_U склейки = S(count_U a + count_U b) |
+| `dyck_compose_count_D` | Lemma | count_D склейки = S(count_D a + count_D b) |
+| `dyck_compose_balanced` | Lemma | склейка сбалансированных сбалансирована |
+| `height_at_app_left` | Lemma | высота на левой части ++ (k<=\|p\|) |
+| `catalan_conv_0_explicit` | Lemma | граничный случай n=0 свёртки |
+| `height_at_app_right` | Lemma | высота на правой части ++ (сдвиг total_height p) |
+| `total_height_cons_U` | Lemma | total_height(U::p) = 1 + total_height p |
+| `height_at_cons_D` | Lemma | высоты при дописывании D (-1) |
+| `dyck_total_height_0` | Lemma | у Dyck total_height = 0 |
+| `dyck_compose_is_dyck` | Lemma | ★ краеугольная: склейка двух Dyck есть Dyck |
+| `dyck_starts_U` | Lemma | непустой Dyck начинается с U |
+| `dyck_length_even` | Lemma | длина Dyck чётна (= 2*count_U) |
+| `first_return_aux_le` | Lemma | оценка диапазона first_return_aux |
+| `first_return_aux_spec` | Lemma | ★ спецификация: наименьший возврат, до него высота != 0 |
+| `first_return_aux_find` | Lemma | если k — свидетель, то first_return_aux = idx+k |
+| `first_return_dyck` | Lemma | ★ для Dyck: 2<=k<=\|p\|, h(k)=0, до k высоты>=1 |
+| `height_at_parity_eq` | Lemma | h(k) = 2*count_U(firstn k) - k (чётность) |
+| `first_return_dyck_even` | Lemma | first_return Dyck всегда чётен |
+| `height_at_step` | Lemma | шаг высоты между соседними позициями ±1 |
+| `first_return_dyck_prev` | Lemma | высота перед first_return = 1 |
+| `first_return_dyck_step_D` | Lemma | шаг в позиции (first_return-1) есть D |
+| `dyck_decompose_recovers` | Lemma | ★ p = compose(decompose p) (восстановление) |
+| `dyck_decompose_a_length` | Lemma | длина внутренней части a = first_return-2 |
+| `dyck_decompose_b_length` | Lemma | длина внешней части b = \|p\|-first_return |
+| `firstn_split_at_one` | Lemma | firstn(Sj) p = firstn 1 ++ firstn j (skipn 1) |
+| `height_at_skipn_0` | Lemma | height_at (skipn n p) 0 = 0 |
+| `height_at_skipn` | Lemma | высота под skipn (сдвиг на h(n)) |
+| `height_at_firstn` | Lemma | высота под firstn (k<=n) |
+| `dyck_decompose_b_is_dyck` | Lemma | ★ внешняя часть b есть Dyck |
+| `dyck_decompose_a_is_dyck` | Lemma | ★ внутренняя часть a есть Dyck (h_a j = h_p(Sj)-1) |
+| `first_return_compose` | Lemma | ★ first_return(compose a b) = 2 + \|a\| |
+| `decompose_compose_a` | Lemma | decompose∘compose даёт a |
+| `decompose_compose_b` | Lemma | decompose∘compose даёт b |
+| `dyck_compose_length_split` | Lemma | \|a\|+2+\|b\| = \|compose a b\| |
+| `dyck_compose_injective` | Lemma | ★ compose инъективен на Dyck-парах |
+| `dyck_list` | Definition | список всех Dyck-путей длины 2n |
+| `dyck_list_length_eq` | Lemma | \|dyck_list n\| = num_dyck n |
+| `in_dyck_list` | Lemma | элементы dyck_list: длина 2n и Dyck |
+| `in_dyck_list_iff` | Lemma | характеризация принадлежности dyck_list |
+| `triple_list` | Definition | ★ flat_map склеек по (i, Dyck_i x Dyck_{n-i}) |
+| `length_flat_map_seq` | Lemma | длина flat_map = сумма длин |
+| `triple_list_length` | Lemma | ★ \|triple_list n\| = catalan_conv n |
+| `in_list_prod_dyck` | Lemma | элементы list_prod: a,b Dyck нужных длин |
+| `NoDup_flat_map_disj` | Lemma | NoDup flat_map при непересекающихся группах |
+| `NoDup_triple_list` | Lemma | ★ triple_list без повторов (инъективность compose) |
+| `compose_in_dyck_list` | Lemma | склейка попадает в dyck_list (S n) |
+| `triple_list_in_dyck_list` | Lemma | всякая тройка даёт элемент dyck_list |
+| `dyck_list_in_triple_list` | Lemma | ★ всякий Dyck-путь раскладывается в тройку |
+| `dyck_list_perm_triple_list` | Lemma | ★ Permutation dyck_list(S n) и triple_list n |
+| `catalan_recurrence` | Theorem | ★★ ГЛАВНОЕ: num_dyck(S n) = catalan_conv n |
+
+**Key lemmas (deep):**
+
+- **`catalan_recurrence`** - Капстоун: классическая рекуррентность Каталана C_{n+1} = sum C_i C_{n-i}, доказанная конструктивно через биекцию first-return (p = U a D b <-> (i, a, b), i=(k-2)/2). Сводится к Permutation_length биекции dyck_list(S n) <-> triple_list n + равенству длин. Поскольку num_dyck — вычислимый счёт (из Catalan.v), это настоящая теорема. 0 Admitted, 0 классических аксиом, 0 AC — повторяет ToS-тезис P4 (конечный треугольник num_dyck 0..n). _(catalan, recurrence, bijection, capstone, no-AC)_
+- **`first_return_dyck`** - L5-ядро разбора: для непустого Dyck первый возврат высоты в 0 находится в позиции k с 2<=k<=\|p\|, h(k)=0, и все промежуточные высоты >=1. Это НАИМЕНЬШИЙ такой индекс (Закон Порядка L5), делающий разбор каждого пути единственным и детерминированным — без AC. Доказано через first_return_aux_spec (тяжёлая индукция по структуре пути с отслеживанием Z-высоты). _(L5, first-return, canonical, no-AC)_
+- **`dyck_compose_injective`** - Инъективность склейки на Dyck-парах — то, что превращает счёт троек в биекцию (а не только сюръекцию). Доказывается через decompose_compose_a/b: разбор однозначно восстанавливает (a,b) из U a D b, опираясь на first_return_compose = 2+\|a\|. Вместе с dyck_decompose_recovers даёт обе стороны взаимной обратности compose/decompose. _(injective, compose, bijection)_
+- **`dyck_compose_is_dyck`** - Прямое направление биекции: склейка U::a++[D]++b двух Dyck-путей есть Dyck. Тонкость — проверка неотрицательности высот на стыке: на левом блоке (U::a) высоты сдвинуты на +1, на правом (после согласующего D) высота снова = высота b. Аккуратная работа с height_at_app_left/right и total_height. Структурно несёт всё содержание 'каждый Dyck-путь однозначно открывается стартовым U и его парным D'. _(compose, dyck-preservation, height)_
+
+**Uniqueness - score 2 (methods).** Полная биективная (0 аксиом, 0 AC) формализация рекуррентности Каталана через first-return разбор: first_return как L5-наименьший-индекс, compose/decompose взаимно обратны и инъективны, биекция как явная Permutation dyck_list<->triple_list.
+> _Caveat:_ Классическая комбинаторика (рекуррентность Каталана, разбор по первой арке). Ново лишь конструктивная мехнизация и ER/RR-обрамление (L5 first-return, P4 конечный треугольник). Conditional-формулировка в Part V (комментарий о 'IF num_dyck(S n)=catalan_conv n') — устаревшая преамбула; фактическая теорема catalan_recurrence доказана безусловно.
+
+---
+
+## #1866 - `src/Motzkin.v` - score 2 (methods)
+
+**Motzkin numbers over a ternary alphabet: num_motzkin n = sum_{k} C(n,2k) Cat_k, proved via binomial transform of the Dyck count**
+
+- **Topic.** Introduces the ternary step set {MU,MD,MF} (first non-binary Element) and proves the Motzkin closed form num_motzkin n = sum_{k=0}^{n/2} C(n,2k)*num_dyck k, by showing a ternary path is Motzkin iff its U/D-extraction (drop the flats) is Dyck, then expressing the count as the binomial transform of the Dyck count and collapsing odd terms.
+- **Role.** Third file of the combinatorics cluster, reuses Catalan.v as a factor: imports Path, all_paths, binomial, num_dyck, is_dyck_b/is_dyck_b_aux and the count machinery; the Catalan count num_dyck k appears as Cat_k inside the Motzkin closed form. Self-contained otherwise; no physics downstream.
+- **Counts.** Qed 36 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: Init.Nat PeanoNat List Lia ZArith Wf_nat; ToS.Catalan
+- **E/R/R.** _Elements:_ ТЕРНАРНЫЙ шаг MStep = {MU,MD,MF} — первое НЕбинарное различение в комбинаторной ветви; MPath = list MStep; флет MF не меняет высоту (нейтральный) — всё конечно (P4). _Roles:_ позиция (последовательностная семантика, L5); знаковая высота Mheight_at; Mextract = роль-проекция, стирающая F и оставляющая U/D-подслово; выбор позиций F (binomial) против Dyck-укладки U/D (Catalan). _Rules:_ is_motzkin = баланс (count_U=count_D) + неотрицательные высоты; ключ: is_motzkin_b p = is_dyck_b (Mextract p) (F прозрачен для высоты); биномиальное преобразование счёта Dyck, коллапс нечётных членов. _P4:_ M_n считается filter'ом по Mall_paths (3^n путей) — конечный процесс, без завершённой бесконечности. L5-канон: СНАЧАЛА позиции F (binomial), ПОТОМ Dyck-укладка U/D (Catalan) — два слоя одного конечного перечисления.
+- **Classical counterpart.** Motzkin numbers (1,1,2,4,9,21,...), the ternary-path model, and the closed form M_n = sum_k C(n,2k) C_k (Motzkin = binomial transform of Catalan, by inserting flat steps) are classical combinatorics. NEW here is only the 0-axiom Coq formalization: the exact reduction is_motzkin_b = is_dyck_b ∘ Mextract (flats transparent to height), the binomial-transform identity count_ext = binsum2 ∘ NP, and the even-index collapse — reusing Catalan.v's num_dyck as the factor; the full closed form num_motzkin = motzkin_closed is proved (NOT future work as the header still says). Mathematics classical; mechanization is the contribution.
+- **Tags.** motzkin, combinatorics, ternary, binomial-transform, catalan, no-AC, P4, constructive, nat
+- **Notes.** Header (Part VIII + Part 'CURRENT STATE') УСТАРЕЛ: называет 'num_motzkin n = motzkin_closed n' как 'FUTURE WORK' и состояние как 'closed-form definition', но теорема num_motzkin_closed фактически доказана Qed (Part IX-X), и файл оканчивается 'Print Assumptions num_motzkin_closed'. Qed actual = 36, 0 Admitted, 0 axioms (Print Assumptions подтверждает).
+
+**Lemmas (55):**
+
+| name | kind | role |
+|---|---|---|
+| `MStep` | Inductive | ★ тернарный шаг {MU,MD,MF} — первое небинарное Element |
+| `MPath` | Definition | путь = list MStep |
+| `Mcount_U` | Fixpoint | число MU-шагов |
+| `Mcount_D` | Fixpoint | число MD-шагов |
+| `Mcount_F` | Fixpoint | число MF-шагов |
+| `Mcount_partition` | Lemma | U+D+F = length |
+| `Mheight_at` | Definition | знаковая высота после k шагов (в Z) |
+| `Mheight_at_0` | Lemma | Mheight_at p 0 = 0 |
+| `is_motzkin` | Definition | Constitution: баланс + неотрицательные высоты |
+| `Mall_paths` | Fixpoint | перечисление всех тернарных путей длины n (3^n) |
+| `Mall_paths_length` | Lemma | всё в Mall_paths n имеет длину n |
+| `is_motzkin_b_aux` | Fixpoint | булева проверка Motzkin через высоту |
+| `is_motzkin_b` | Definition | булев тест Motzkin |
+| `num_motzkin` | Definition | ★ число Motzkin-путей длины n (= M_n) |
+| `msum_to` | Definition | сумма f(i), i=0..upper |
+| `motzkin_closed` | Definition | ★ замкнутая форма: sum_{k=0}^{n/2} C(n,2k)*num_dyck k |
+| `M_0` | Example | M_0 = 1 (reflexivity) |
+| `M_1` | Example | M_1 = 1 (vm_compute) |
+| `M_2` | Example | M_2 = 2 |
+| `M_3` | Example | M_3 = 4 |
+| `M_4` | Example | M_4 = 9 (последовательность 1,1,2,4,9,21,51,...) |
+| `Mextract` | Fixpoint | ★ проекция: U/D-подслово (стирает F) -> бинарный Path |
+| `is_motzkin_b_aux_extract` | Lemma | ★ Motzkin-тест = Dyck-тест экстракции (F прозрачен) |
+| `is_motzkin_b_extract` | Lemma | is_motzkin_b p = is_dyck_b (Mextract p) |
+| `NP` | Definition | #бинарных путей длины j, удовлетворяющих P |
+| `count_ext` | Definition | #тернарных путей длины n, чья экстракция удовлетворяет P |
+| `num_motzkin_count_ext` | Lemma | num_motzkin n = count_ext is_dyck_b n |
+| `Mfilter_map_cons_length` | Lemma | filter по map(cons s) для тернарных шагов |
+| `NP_S` | Lemma | рекуррентность NP по первому биту |
+| `count_ext_S` | Lemma | ★ рекуррентность count_ext (MU/MD дописывают бит, MF стирает) |
+| `binsum2` | Fixpoint | биномиальное преобразование с встроенным Паскалем |
+| `binsum2_ext` | Lemma | экстенсиональность binsum2 |
+| `binsum2_add` | Lemma | аддитивность binsum2 |
+| `count_ext_binsum2` | Lemma | ★ count_ext P n = binsum2 (NP P) n |
+| `num_motzkin_binsum2` | Corollary | num_motzkin = binsum2 (NP is_dyck_b) |
+| `gsum` | Fixpoint | сумма f по списку nat |
+| `gsum_app` | Lemma | gsum аддитивен по ++ |
+| `gsum_add` | Lemma | gsum суммы = сумма gsum |
+| `gsum_ext` | Lemma | экстенсиональность gsum |
+| `gsum_map_S` | Lemma | gsum f (map S l) = gsum (f∘S) l |
+| `seq_cons0` | Lemma | seq 0 (Sn) = 0 :: map S (seq 0 n) |
+| `fold_sum` | Definition | явная форма: sum_{j=0}^n C(n,j)*g j |
+| `fold_sum_head` | Lemma | выделение члена j=0 |
+| `gsum_seq_top_zero` | Lemma | сброс зануляющегося верхнего члена |
+| `fold_sum_S` | Lemma | ★ рекуррентность Паскаля для биномиально-взвешенной суммы |
+| `binsum2_fold` | Lemma | binsum2 g n = fold_sum g n (две формы совпадают) |
+| `NP_dyck_even` | Lemma | NP is_dyck_b (2k) = num_dyck k |
+| `gsum_fold_right` | Lemma | gsum = fold_right Nat.add 0 ∘ map |
+| `is_dyck_b_aux_balance` | Lemma | is_dyck_b_aux=true => высотный баланс |
+| `is_dyck_b_balanced` | Lemma | Dyck => count_U = count_D |
+| `length_filter_all_false` | Lemma | filter всё-ложно => длина 0 |
+| `NP_dyck_odd` | Lemma | ★ NP is_dyck_b (нечёт) = 0 (Dyck-слово чётной длины) |
+| `gsum_double_peel` | Lemma | выделение двух нижних членов суммы |
+| `even_collapse` | Lemma | ★ коллапс нечётно-зануляющейся суммы на чётные индексы |
+| `num_motzkin_closed` | Theorem | ★★ ГЛАВНОЕ: num_motzkin n = motzkin_closed n |
+
+**Key lemmas (deep):**
+
+- **`num_motzkin_closed`** - Капстоун: num_motzkin n = sum_{k=0}^{n/2} C(n,2k)*num_dyck k. Цепочка: num_motzkin = count_ext is_dyck_b (F прозрачен) = binsum2(NP is_dyck_b) (биномиальное преобразование) = fold_sum, затем even_collapse выбрасывает нечётные члены (NP_dyck_odd) и NP_dyck_even подставляет Cat_k. Делает формализацию Каталана ПЕРЕИСПОЛЬЗУЕМОЙ как множитель Motzkin. Файл завершается Print Assumptions num_motzkin_closed — публичный аудит 0 аксиом. _(motzkin, closed-form, binomial-transform, capstone)_
+- **`is_motzkin_b_aux_extract`** - Структурное ядро: булев Motzkin-тест на тернарном пути РАВЕН булеву Dyck-тесту на его U/D-экстракции, потому что флет MF не трогает Z-высоту (is_motzkin_b_aux p h = is_dyck_b_aux (Mextract p) h по индукции). Это и есть точная редукция тернарной задачи к бинарной — без неё нет ни биномиального преобразования, ни связи с Каталаном. В ER/RR: F = нейтральный шаг, его позиции выбираются отдельно (binomial), укладка U/D остаётся Dyck (Catalan). _(extraction, ternary-to-binary, flat-transparent)_
+- **`count_ext_binsum2`** - Комбинаторный мост: число тернарных путей длины n, чья экстракция удовлетворяет P, есть биномиальное преобразование binsum2(NP P) бинарного счёта NP P. Доказано индукцией через count_ext_S (MU/MD дописывают бит, MF стирает — три ветви Mall_paths) и NP_S. Это общий факт о 'вставке нейтрального символа', инстанцируемый затем на P=is_dyck_b. Аккуратная работа с двумя представлениями суммы (binsum2 Fixpoint vs fold_sum). _(binomial-transform, count, recurrence)_
+- **`even_collapse`** - Технический финал: сумма sum_{j=0}^n C(n,j)*g(j), где g зануляется на нечётных j, сворачивается на чётные индексы sum_{k=0}^{n/2} C(n,2k)*g(2k). Доказано сильной индукцией (well_founded_ind lt_wf) с двойным выделением членов (gsum_double_peel) и арифметикой деления n/2. Применяется к g=C(n,j)*NP is_dyck_b j (нечёт=0 по NP_dyck_odd, т.к. Dyck-слова чётной длины), давая ровно motzkin_closed. _(even-collapse, well-founded, parity)_
+
+**Uniqueness - score 2 (methods).** 0-аксиомная формализация чисел Моцкина над тернарным алфавитом с ДОКАЗАННОЙ замкнутой формой num_motzkin = sum C(n,2k)*Cat_k: точная редукция Motzkin->Dyck через Mextract (флет прозрачен), биномиальное преобразование count_ext=binsum2∘NP, коллапс на чётные индексы; Каталан переиспользован как множитель.
+> _Caveat:_ Полностью классическая комбинаторика (числа Моцкина, M_n = биномиальное преобразование Каталана). Ново только мехнизация + первое небинарное (тернарное) Element в ветви. Заголовок файла УСТАРЕЛ: называет полную биекцию/закрытую форму 'future work' и состояние 'closed-form definition', тогда как num_motzkin_closed фактически ДОКАЗАНА (Qed). См. notes.
+
+---
+
+## #1867 - `src/QIntervalNotCompact.v` - score 3 (new-framing)
+
+**ℚ∩[1,2] closed & bounded but NOT compact, as a proved theorem (√2-gap cover, no finite subcover)**
+
+- **Topic.** Builds an explicit open cover Uₖ = {x : |x²−2| > 1/(k+1)} of [1,2]∩ℚ (each open, union total since √2∉ℚ + Archimedes) and proves NO finite subfamily covers it: any largest index N is dodged by a Pell convergent xₙ with |xₙ²−2| ≤ 1/(k+1) for all k≤N. Compactness over ℚ genuinely fails.
+- **Role.** Honest 'ℚ не компактно' (V.2 §2.5 / FORMALIZATION-BACKLOG F-20) turned from stated limitation into a fact. Imports Sqrt2Approx (sqrt2_uncovered witness) and analysis.Sqrt2Irrational (no_rational_sqrt2). Companion to HeineBorel_ERR.v (Lebesgue-number replacement) and CantorHeineQ.v.
+- **Counts.** Qed 5 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Qabs Lqa ZArith Lia PeanoNat List; ToS.Sqrt2Approx; ToS.analysis.Sqrt2Irrational
+- **E/R/R.** _Elements:_ рациональные точки [1,2]∩ℚ; конечный список индексов L; приближения Пелля xₙ — все актуальны (P4). _Roles:_ √2 = role-limit (отсутствующая предельная точка); покрытия Uₖ = роль-окрестности; «компактность» = role-limit-свойство. _Rules:_ Uₖ покрывают (x²≠2 из иррациональности √2 + Архимед); конечного подпокрытия нет — xₙ у √2-зазора не попадает ни в один выбранный Uₖ. _P4:_ некомпактность ℚ — ДОКАЗАННЫЙ факт (свидетель xₙ), не дефект формализации; ToS-замена = число Лебега (операциональное измельчение, HeineBorel_ERR). Классическое «завершённое покрытие завершённого множества точек» реифицирует Element-тотальность = ошибка P4.
+- **Classical counterpart.** The fact that [a,b]∩ℚ is closed and bounded but not compact (and the Heine–Borel theorem it fails) is standard real analysis / constructive analysis folklore; NEW here is only the explicit Coq witness — a √2-dodging open cover whose finite-subcover failure is driven by a Pell convergent crowding the absent √2 — framed as the P4 'completed cover of a completed point-set' category error vs the Lebesgue-number replacement.
+- **Tags.** non-compactness, sqrt2, pell, heine-borel, lebesgue-number, P4, constructive-analysis
+
+**Lemmas (7):**
+
+| name | kind | role |
+|---|---|---|
+| `inC` | Definition | носитель [1,2]∩ℚ: 1 ≤ x ≤ 2 |
+| `U` | Definition | k-е множество покрытия \|x²−2\| > 1/(k+1), записано без обратной дроби (кросс-умножение) |
+| `in_le_max` | Lemma | элемент списка ≤ максимума списка (fold_right Nat.max) — helper для конечного N |
+| `nat_archimedean` | Lemma | над любым рациональным есть натуральное (Архимед, через Qarchimedean) |
+| `covers` | Theorem | ★ покрытие покрывает всё [1,2]∩ℚ: каждый x лежит в некотором Uₖ (x²≠2 + Архимед) |
+| `no_finite_subcover` | Theorem | ★ для любого конечного L есть x∈[1,2]∩ℚ, не покрытый ни одним Uₖ, k∈L (свидетель Пелля) |
+| `Q_interval_not_compact` | Theorem | ★ КАПСТОУН: покрытие тотально ∧ конечного подпокрытия нет — [1,2]∩ℚ не компактно |
+
+**Key lemmas (deep):**
+
+- **`no_finite_subcover`** - Сердце результата: всякое конечное подсемейство имеет наибольший индекс N, а sqrt2_uncovered N даёт рациональное приближение Пелля xₙ∈[1,2] с \|xₙ²−2\| ≤ 1/(k+1) для ВСЕХ k≤N — т.е. xₙ не лежит ни в одном выбранном Uₖ. Конкретно реализует «рациональные сгущаются у √2, а √2 отсутствует»: это и есть провал компактности над ℚ. Честно: сама теорема классична (ℚ не полно ⟹ не компактно), новизна — машинный свидетель и P4-обрамление. _(non-compactness, sqrt2-gap, pell-witness, no-finite-subcover)_
+- **`covers`** - Доказывает тотальность покрытия: для каждого рационального x∈[1,2] имеем x²≠2 (иррациональность √2, no_rational_sqrt2), значит \|x²−2\|>0, и Архимед помещает его за некоторое 1/(k+1). Element-сторона: каждая точка покрыта актуальной окрестностью. Контраст с no_finite_subcover делает дихотомию «тотально, но не конечно» наглядной. _(open-cover, archimedean, irrationality, total)_
+
+**Uniqueness - score 3 (new-framing).** Некомпактность [1,2]∩ℚ предъявлена как ДОКАЗАННАЯ теорема с явным √2-додж-покрытием и свидетелем Пелля, обрамлённая как P4-ошибка завершённого покрытия против числа Лебега (операциональная замена).
+> _Caveat:_ Классика: над ℚ замкнутое-ограниченное ≠ компактное, Гейне–Борель не выполняется — это стандарт конструктивного анализа. Ново только машинный свидетель + E/R/R-рамка; финитно/над-ℚ, 0 собственных аксиом.
+
+---
+
+## #1868 - `src/RealFieldApart.v` - score 3 (new-framing)
+
+**Cauchy reals as an APARTNESS (Heyting) FIELD: invertible exactly when a gap from 0 is exhibited**
+
+- **Topic.** Defines apart0 x = ∃q>0, eventually |xₙ|>q and proves: an apart real is eventually one-signed (apart0_sign), every apart real has a multiplicative inverse with x·y ~~ 1 (apart_has_inverse), and apartness is irreflexive at 0 (apart0_zero_absurd) — the witnessed replacement for '≠ 0'.
+- **Role.** Closes FORMALIZATION-BACKLOG F-25 (IV.3 §3.6.4 'деление частично'): upgrades the POSITIVE-only inverse of RealField.v to total invertibility on apart elements. Imports CauchyReal + RealField (cauchy_inv_pos, cauchy_mul_inv_r_pos, ring/ordered-field laws). Part of the calculus_chain.
+- **Counts.** Qed 6 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Qabs Lqa Lia; ToS.CauchyReal; ToS.RealField
+- **E/R/R.** _Elements:_ Коши-процессы nat→ℚ; свидетель-зазор q>0 с \|xₙ\|>q в конце концов — актуально предъявлен (P4). _Roles:_ апартность x#0 = роль-условие обратимости; обратный элемент = роль, назначаемая правилом ТОЛЬКО при наличии зазора; знак = роль (в конце концов один). _Rules:_ обратимость требует свидетеля-апартности (P4 ex→sig); Коши + \|xₙ\|>q ⟹ знак в конце концов один (скачок >q невозможен за модулем); x#0 ⟺ (−x)#0. _P4:_ классическое поле реифицирует завершённое множество обратимых (все ненулевые по голому ¬(x=0)); ToS — поле апартности: обратный там и только там, где зазор ПРЕДЪЯВЛЕН. ¬(x~~0) над конструктивным числом обратного не даёт — нужен свидетель. «Частичность деления» = честное содержание, не дефект.
+- **Classical counterpart.** Apartness fields / Heyting fields (an element invertible iff apart from 0, a # b := ∃ separating gap) are standard in Bishop-style constructive analysis (Bishop, Bridges, Troelstra–van Dalen); NEW here is only the ToS framing — 'partiality of division' recast as the P4 ex→sig demand to EXHIBIT a gap, on the repo's own Cauchy-process reals built on RealField.v.
+- **Tags.** apartness, heyting-field, constructive-reals, inverse, ex-to-sig, P4, calculus-chain
+
+**Lemmas (8):**
+
+| name | kind | role |
+|---|---|---|
+| `qabs_gt_pos` | Lemma | 0≤a ∧ q<\|a\| ⟹ q<a (извлечение знака из зазора, положительный случай) |
+| `qabs_gt_neg` | Lemma | a≤0 ∧ q<\|a\| ⟹ q<−a (извлечение знака, отрицательный случай) |
+| `apart0` | Definition | апартность от 0: ∃q>0 ∃N ∀n≥N, q<\|xₙ\| (зазор предъявлен) |
+| `cauchy_apart` | Definition | апартность двух реалов = апартность их разности x+(−y) |
+| `apart0_sign` | Lemma | ★ апартный реал в конце концов ОДНОЗНАЧНО знаков: apart0 x ⟹ cauchy_pos x ∨ cauchy_pos(−x) |
+| `apart_has_inverse` | Theorem | ★ всякий apart0 x обратим: ∃y, x·y ~~ 1 (положит. = cauchy_inv_pos; отриц. = −((−x)⁻¹)) |
+| `apart0_zero_absurd` | Lemma | ★ ¬ apart0 0 — нельзя быть апартным от 0, будучи 0 (замена «≠0») |
+| `apartness_field` | Theorem | ★ КАПСТОУН: знак-резолюция ∧ тотальный обратный на апартных ∧ иррефлексивность в 0 = поле апартности |
+
+**Key lemmas (deep):**
+
+- **`apart_has_inverse`** - Тотальная обратимость на апартных элементах: каждый apart0 x имеет y с cauchy_mul x y ~~ cauchy_one. Положительный случай делегирует существующий cauchy_inv_pos из RealField; отрицательный берёт y=−((−x)⁻¹) и сводит цепочкой equiv/коммутативности/neg_r. Это закрывает «открытую частичность» RealField (там был только односторонний положительный зазор). Содержательно стандартно (апартность ⟹ обратимость в конструктивном поле), ценность — полнота над собственными процесс-реалами, 0 аксиом. _(apartness, total-inverse, heyting-field, ex-to-sig)_
+- **`apart0_sign`** - Конструктивная резолюция апартности в знак: последовательность Коши с \|xₙ\|>q не может сменить знак, не совершив скачок >q, что невозможно за модулем Коши — поэтому apart0 x распадается в cauchy_pos x ∨ cauchy_pos(−x). Это аналог конструктивной co-transitivity апартности и мост, переносящий односторонний инверс на оба знака. Классический факт конструктивного анализа; здесь — на repo-процессах. _(sign-resolution, cauchy-modulus, constructive, apartness)_
+
+**Uniqueness - score 3 (new-framing).** Коши-реалы repo показаны как поле апартности (Гейтинга): обратимость = предъявленный зазор от 0 (P4 ex→sig), с тотальным обратным на апартных, знак-резолюцией и иррефлексивностью в 0 — поверх существующего RealField, 0 аксиом.
+> _Caveat:_ Поле апартности / условие «обратим ⟺ апартен от 0» — стандарт конструктивного анализа (Bishop, Bridges). Ново только ToS-обрамление «частичность деления = честное P4-содержание» и реализация над собственными процесс-реалами; финитно-конструктивно.
+
+---
+
+## #1869 - `src/Sqrt2Approx.v` - score 2 (methods)
+
+**Pell convergents of √2 as a PROCESS: exact error |xₖ²−2|=1/qₖ², reusable √2-uncovered brick**
+
+- **Topic.** Defines the integer Pell sequence (1,1)→(p+2q,p+q), proves the ring invariant pₖ²−2qₖ²=±1, growth qₖ≥k+1 and range 1≤pₖ/qₖ≤2, hence xₖ=pₖ/qₖ satisfies EXACTLY |xₖ²−2|=1/qₖ². Capstone sqrt2_uncovered N yields a rational in [1,2] with |x²−2|≤1/(k+1) for all k≤N.
+- **Role.** Reusable tool (the file self-labels уровень «инструмент»). Pure Stdlib QArith/ZArith. Consumed by QIntervalNotCompact.v (F-20, no finite subcover) and the Cantor–Heine-over-ℚ failure (F-21). Sibling of the surd↔Pell process files Sqrt3Pell / GoldenFibonacci / LucasFibonacci.
+- **Counts.** Qed 14 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Qabs Lqa ZArith Lia
+- **E/R/R.** _Elements:_ пары Пелля (pₖ,qₖ:ℤ); приближение xₖ=pₖ/qₖ∈ℚ — каждое актуально (P4). _Roles:_ √2 = role-limit (незавершённый процесс, никогда не достигается); xₖ = роль-приближение, точная ошибка \|xₖ²−2\|=1/qₖ² назначается правилом-инвариантом. _Rules:_ рекуррентность Пелля + ring-инвариант pₖ²−2qₖ²=±1 (один ring-шаг на индукцию) ⟹ точная ошибка 1/qₖ², qₖ↑→∞. _P4:_ xₖ — Element-сторона (рациональны, \|xₖ²−2\|>0 ВСЕГДА, ибо √2∉ℚ); √2 само = role-limit, к которому процесс сходится, но не доходит. Уровень файла: инструмент для F-20/F-21.
+- **Classical counterpart.** Pell's equation x²−2y²=±1, its recurrence pₖ₊₁=pₖ+2qₖ / qₖ₊₁=pₖ+qₖ, and the convergents pₖ/qₖ→√2 with error 1/qₖ² are classical number theory (continued fraction of √2 = [1;2,2,…]); NEW here is only packaging it as a reusable Coq brick whose output sqrt2_uncovered feeds the ℚ-non-compactness and Cantor–Heine-failure files, framed as √2 = role-limit process.
+- **Tags.** pell, sqrt2, convergents, role-limit, tool, number-theory, process, P4
+
+**Lemmas (18):**
+
+| name | kind | role |
+|---|---|---|
+| `injZ_lt` | Lemma | ℤ<ℤ ⟹ inject_Z< inject_Z (мост, ручное разворачивание) |
+| `injZ_le` | Lemma | ℤ≤ℤ ⟹ inject_Z ≤ inject_Z |
+| `injZ_pos` | Lemma | 0<z ⟹ 0< inject_Z z |
+| `injZ_neq0` | Lemma | z≠0 ⟹ inject_Z z ≠ 0 (как Qeq) |
+| `injZ_sub` | Lemma | inject_Z(a−b) = inject_Z a − inject_Z b |
+| `Qinv_antitone` | Lemma | обратная антитонна на положительных: 0<a≤b ⟹ /b ≤ /a |
+| `pell` | Fixpoint | целочисленное ядро Пелля: (1,1) → (p+2q, p+q) |
+| `pp` | Definition | pₖ = fst (pell k) |
+| `qq` | Definition | qₖ = snd (pell k) |
+| `pell_S` | Lemma | разворот шага: p(S k)=pₖ+2qₖ ∧ q(S k)=pₖ+qₖ |
+| `pell_inv` | Lemma | позитивность+диапазон: 0<qₖ ≤ pₖ ≤ 2qₖ (даёт 1≤p/q≤2) |
+| `qq_ge` | Lemma | рост знаменателя: qₖ ≥ k+1 |
+| `pell_pm` | Lemma | ★ инвариант Пелля: pₖ²−2qₖ²=±1 (один ring-шаг на индукцию) |
+| `sx` | Definition | рациональное приближение xₖ=pₖ/qₖ |
+| `sx_num_eq` | Lemma | inject_Z уважает числитель квадрат-отклонения |
+| `sx_range` | Lemma | 1 ≤ xₖ ≤ 2 |
+| `sx_abs_eq` | Lemma | ★ ТОЧНАЯ ошибка: \|xₖ²−2\| = 1/qₖ² |
+| `sqrt2_uncovered` | Theorem | ★ КАПСТОУН-инструмент: ∀N ∃x∈[1,2]∩ℚ, \|x²−2\|≤1/(k+1) ∀k≤N (x=xₙ Пелля) |
+
+**Key lemmas (deep):**
+
+- **`sx_abs_eq`** - Точная (не оценочная) формула ошибки \|xₖ²−2\|=1/qₖ²: выводится из ring-инварианта pₖ²−2qₖ²=±1 делением на qₖ². Именно равенство (а не ≤) делает кирпич сильным — приближение контролируется в обе стороны, и 1/qₖ²→0 при qₖ↑. Классика теории Пелля / цепной дроби √2=[1;2,2,…]; ценность файла — машинная упаковка для повторного использования. _(pell-invariant, exact-error, convergents, ring)_
+- **`sqrt2_uncovered`** - Капстоун-инструмент, ради которого файл существует: для любого N даёт рациональное xₙ∈[1,2] с \|xₙ²−2\|≤1/(k+1) для всех k≤N (через антитонность обратной + qₙ≥N+1). Это ровно свидетель, который QIntervalNotCompact.v использует, чтобы дожировать любое конечное подпокрытие, и аналогично для провала Кантора–Гейне над ℚ. √2 как role-limit-процесс, инстанцированный конкретными Element-приближениями. _(sqrt2-uncovered, role-limit, tool, F-20, F-21)_
+
+**Uniqueness - score 2 (methods).** Сходимость Пелля к √2 упакована как переиспользуемый процесс-кирпич с ТОЧНОЙ ошибкой 1/qₖ² и готовым свидетелем sqrt2_uncovered для F-20/F-21; √2 — role-limit, приближения — Element-сторона.
+> _Caveat:_ Уравнение Пелля, рекуррентность сходимостей и оценка ошибки 1/qₖ² — классическая теория чисел (цепная дробь √2). Новизна — 0-аксиомная Coq-формализация и роль reusable-инструмента; сам файл честно помечает уровень «инструмент». Финитно, над ℚ/ℤ.
 

@@ -1,0 +1,2323 @@
+[
+{
+    "num":  1895,
+    "path":  "src/nonstandard/BoundaryIsInvertibility.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "GL₂(ℤ) units ⟺ det=±1 (a matrix over a commutative ring is invertible iff its determinant is a unit), the adjugate formula M·adj(M)=det·I, and the units of a germ/Fréchet ring being the eventually-nonzero elements are all classical commutative-algebra facts. NEW is only the ToS re-packaging: identifying the Element side of the reduction atlas (det±1 unimodular core) and the germ-ring units (eventually-nonzero) as ONE notion — invertibility — so 'two atlases of the project' become two poles of one boundary.",
+    "title":  "two atlases = one invertibility: matrix unit (det±1) ⟺ germ unit (eventually-nonzero), the Element side of the boundary",
+    "topic":  "Closes the bridge between the reduction-atlas Element side (unimodular det±1, H73–H78) and the germ-ring units of A1 (UnitZeroDivisorBoundary): proves an integer 2×2 matrix is invertible ⟺ det=±1 (explicit adjugate inverse), and a constant germ gconst q (q≠0) is a germ-ring unit (inverse gconst(1/q)) — Element = units on both arenas.",
+    "role":  "nonstandard-analysis 'generating structure of the boundary' file, direction A2. Self-contained (ZArith/QArith/Lqa); cites A1 (UnitZeroDivisorBoundary), the reduction atlas (H73–78), and the Part-XVIII zero-divisor synthesis. Consolidation/bridge file.",
+    "err":  {
+                "elements":  "Mat2/det2/mul2/invertible2 (над ℤ); germ gconst/g_unit (над ℚ); анкеры fib_gen (det1), scale2 (det2).",
+                "roles":  "det±1 = роль-единица-матрицы; обратимость = Element-маркер на ОБЕИХ сторонах; не-единица = role-limit-маркер (делитель нуля).",
+                "rules":  "invertible2 M ⟺ det2 M=±1 (явный обратный adj/−adj); gconst q единица ⟺ q≠0; обе стороны Element = единицы кольца.",
+                "p4":  "конструктивно: det мультипликативна (ring); обратный матрицы выписан явно (adj при det=1, −adj при det=−1); germ-обратный явен (gconst(1/q)) ⟹ 0 аксиом, никакого classic. Граница = обратимость, на обеих сторонах. ★ Элемент-как-система: целочисл. матрица = 4 числа (Elements) / линейное преобразование (Roles) / обратима над ℤ ⟺ det=±1 (Rules)."
+            },
+    "qed":  7,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: ZArith QArith Arith Lia Lqa"
+                ],
+    "lemmas":  [
+                   {
+                       "name":  "Mat2",
+                       "kind":  "Record",
+                       "role":  "целочисленная 2×2 матрица {m11 m12 m21 m22}"
+                   },
+                   {
+                       "name":  "det2",
+                       "kind":  "Definition",
+                       "role":  "детерминант m11·m22−m12·m21"
+                   },
+                   {
+                       "name":  "mul2",
+                       "kind":  "Definition",
+                       "role":  "произведение матриц"
+                   },
+                   {
+                       "name":  "id2",
+                       "kind":  "Definition",
+                       "role":  "единичная матрица"
+                   },
+                   {
+                       "name":  "adj",
+                       "kind":  "Definition",
+                       "role":  "адъюгат (для det=1 обратной)"
+                   },
+                   {
+                       "name":  "negadj",
+                       "kind":  "Definition",
+                       "role":  "−адъюгат (для det=−1 обратной)"
+                   },
+                   {
+                       "name":  "invertible2",
+                       "kind":  "Definition",
+                       "role":  "обратимость над ℤ: exists N, M·N=N·M=I"
+                   },
+                   {
+                       "name":  "det_mult",
+                       "kind":  "Lemma",
+                       "role":  "det мультипликативна (ring) — ядро направления (⟹)"
+                   },
+                   {
+                       "name":  "mul2_M_adj",
+                       "kind":  "Lemma",
+                       "role":  "M·adj(M)=det·I"
+                   },
+                   {
+                       "name":  "mul2_adj_M",
+                       "kind":  "Lemma",
+                       "role":  "adj(M)·M=det·I"
+                   },
+                   {
+                       "name":  "mul2_M_negadj",
+                       "kind":  "Lemma",
+                       "role":  "M·negadj(M)=−det·I"
+                   },
+                   {
+                       "name":  "mul2_negadj_M",
+                       "kind":  "Lemma",
+                       "role":  "negadj(M)·M=−det·I"
+                   },
+                   {
+                       "name":  "Z_mul_one",
+                       "kind":  "Lemma",
+                       "role":  "целочисл. единицы: a·b=1 ⟹ a=±1 (через |a|·|b|=1, Nat.mul_eq_1)"
+                   },
+                   {
+                       "name":  "invertible_det_pm1",
+                       "kind":  "Lemma",
+                       "role":  "(⟹) обратима ⟹ det=±1 (det·det⁻¹=1 в ℤ)"
+                   },
+                   {
+                       "name":  "det_pm1_invertible",
+                       "kind":  "Lemma",
+                       "role":  "(⟸) det=±1 ⟹ обратима (явный обратный adj/−adj)"
+                   },
+                   {
+                       "name":  "det_pm1_iff_invertible",
+                       "kind":  "Lemma",
+                       "role":  "★ ЕДИНИЦА целочисл. матрицы ⟺ det±1"
+                   },
+                   {
+                       "name":  "fib_gen",
+                       "kind":  "Definition",
+                       "role":  "унимодулярный анкер (1 1;0 1), det 1"
+                   },
+                   {
+                       "name":  "scale2",
+                       "kind":  "Definition",
+                       "role":  "анкер-масштаб (2 0;0 1), det 2"
+                   },
+                   {
+                       "name":  "fib_gen_invertible",
+                       "kind":  "Lemma",
+                       "role":  "fib-генератор обратим (det 1)"
+                   },
+                   {
+                       "name":  "scale2_not_invertible",
+                       "kind":  "Lemma",
+                       "role":  "★ масштаб det-2 НЕОБРАТИМ (не-единица)"
+                   },
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "germ-процесс nat→Q"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "germ-равенство: в-конце совпадают"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное умножение germ'ов"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "константный germ"
+                   },
+                   {
+                       "name":  "g_unit",
+                       "kind":  "Definition",
+                       "role":  "germ-единица: exists y, gmul x y =germ= 1"
+                   },
+                   {
+                       "name":  "gconst_unit",
+                       "kind":  "Lemma",
+                       "role":  "★ мост к A1: gconst q (q≠0) — единица germ-кольца (обратный gconst(1/q))"
+                   },
+                   {
+                       "name":  "two_atlases_one_invertibility",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: матрица обратима⟺det±1 ∧ fib обратим ∧ scale2 нет ∧ germ-единица — одна обратимость"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "det_pm1_iff_invertible",
+                           "analysis":  "Главный мост: целочисленная 2×2 матрица обратима ⟺ det=±1. (⟹) det мультипликативна (det_mult, ring) ⟹ det·det⁻¹=1 в ℤ ⟹ det=±1 (Z_mul_one через Nat.mul_eq_1). (⟸) явный целочисленный обратный — adj при det=1, −adj при det=−1 (адъюгат-тождества). Это classic-факт о GL₂(ℤ), здесь переказанный как «Element-сторона редукционного атласа = единицы SL₂(ℤ)±». Анкеры: fib-генератор обратим, scale2 (det 2) нет.",
+                           "tags":  [
+                                        "gl2-z",
+                                        "det-pm1",
+                                        "unimodular",
+                                        "atlas",
+                                        "constructive"
+                                    ]
+                       },
+                       {
+                           "name":  "gconst_unit",
+                           "analysis":  "Мост к A1 (UnitZeroDivisorBoundary): константный germ gconst q при q≠0 есть ЕДИНИЦА germ-кольца с явным обратным gconst(1/q) (Qmult_inv_r от индекса 0). Это ставит обе арены — целочисленные матрицы det±1 И germ-процессы в-конце-ненулевые — под ОДНО понятие обратимости. role-limit = не-единицы (делители нуля, цитата к A1/синтезу XVIII). Содержательно тривиально, ценность — унификация двух «атласов» проекта.",
+                           "tags":  [
+                                        "germ-ring",
+                                        "unit",
+                                        "bridge-A1",
+                                        "invertibility"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Element-сторона редукционного атласа (унимодулярный det±1) и единицы germ-кольца A1 (в-конце-ненулевые) сведены к ОДНОМУ понятию — обратимости: целочисл. матрица обратима ⟺ det=±1 (явный adj/−adj-обратный), константный germ единица ⟺ q≠0; «два атласа проекта = одна обратимость».",
+                       "caveat":  "Всё классично: GL₂(ℤ) единицы ⟺ det=±1, адъюгат-формула M·adj(M)=det·I, единицы germ/Фреше-кольца = в-конце-ненулевые. Ново лишь E/R/R-переказ + сведение двух атласов в одну ось. Связь со ВСЕМИ 5 движками атласа (H78) — ЦИТАТА; здесь unit-ядро + germ-мост. role-limit=делители — цитата к A1. Header заявляет 13 Qed — фактически 7."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "germ-ring",
+                 "unit-zero-divisor",
+                 "gl2-z",
+                 "det-pm1",
+                 "reduction-atlas",
+                 "invertibility",
+                 "boundary",
+                 "vein-A"
+             ],
+    "notes":  "STATUS header says '13 Qed' but actual Qed. count is 7 (drift). cluster derived from path src/nonstandard/ → 'nonstandard'. A2 direction file in the 'generating structure of the boundary' arc. 0 own axioms (fully constructive, no classic)."
+},
+{
+    "num":  1896,
+    "path":  "src/nonstandard/DerivativeViaInfinitesimal.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "The nonstandard-analysis definition of the derivative f'(x)=st((f(x+δ)−f(x))/δ) and its resolution of Berkeley's 'ghosts of departed quantities' are due to Robinson (1960s); the polynomial difference-quotient identities (x² → 2x+δ etc.) are elementary algebra. NEW is only the ToS re-grounding: δ as a concrete process 1/(n+1) (nowhere zero, vanishing only in the shadow st via Archimedes), and the boundary observation that a polynomial derivative converges INSIDE the Element side (rational limit) — contrast with √2-processes that converge to role-limit.",
+    "title":  "derivative as the shadow of a difference quotient: Berkeley dissolved (δ≠0 nowhere), polynomial f' stays Element (0 axioms)",
+    "topic":  "Defines the derivative over processes as f'(x)=st((f(x+δ)−f(x))/δ) with δ=1/(n+1): proves exact difference-quotient identities (x²→2x+δ, x³→3x²+3xδ+δ², x→1, c→0) where δ≠0 makes division legal, then takes the shadow (st via δ→0 Archimedes) to get f'(x²)=2x, f'(x)=1, f'(c)=0 — with the limit rational, so polynomial differentiation stays inside the finitization boundary.",
+    "role":  "nonstandard-analysis file, climax of Part-XVIII Batch A. Self-contained (QArith/Lqa); replicates δ from GermInfinitesimal and converges from StandardPart (cited), uses QArith Archimedean. Application/capstone of the infinitesimal arc; the general smooth-process st-derivative is deferred to a future file (cited).",
+    "err":  {
+                "elements":  "GProc=nat→Q; delta=1/(n+1); diffquot; f_sq/f_cube/f_id/f_const; converges (двусторонняя, lra).",
+                "roles":  "δ = роль-приращение (∞-малое, ненулевое); diffquot = роль-наклон-секущей; st = роль-тень; f' = касательная.",
+                "rules":  "δ≠0 на каждом шаге ⟹ деление законно (нет 0/0); diffquot = производная + остаток·δ (точное тождество); st отбрасывает остаток (δ→0) ⟹ f' точна; f' полинома = Element.",
+                "p4":  "★ всё конечно-глубинно (Element); δ→0 = Архимед (процесс, не завершённая малость); предел 2x рационален ⟹ дифференцирование полинома НЕ выходит за границу финитизации (контраст с √2-процессами → role-limit). Призрак Беркли = δₙ: ненулев на шаге (делим), исчезает лишь в тени. ЧЕСТНО: для куба тождество доказано, st-шаг (тень 3xδ+δ²) опущен; x²/x/const доказаны полностью."
+            },
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Arith Lia Lqa"
+                ],
+    "lemmas":  [
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "germ-процесс nat→Q (реплика GermInfinitesimal)"
+                   },
+                   {
+                       "name":  "Qsn",
+                       "kind":  "Definition",
+                       "role":  "inject_Z (S n) — знаменатель приращения"
+                   },
+                   {
+                       "name":  "Qsn_pos",
+                       "kind":  "Lemma",
+                       "role":  "0<Qsn n"
+                   },
+                   {
+                       "name":  "delta",
+                       "kind":  "Definition",
+                       "role":  "бесконечно малое δ=1/(n+1)"
+                   },
+                   {
+                       "name":  "delta_pos",
+                       "kind":  "Lemma",
+                       "role":  "0<δ n (положительно на шаге)"
+                   },
+                   {
+                       "name":  "delta_nonzero",
+                       "kind":  "Lemma",
+                       "role":  "★ δ≠0 на КАЖДОМ шаге — деление на δ законно (нет 0/0)"
+                   },
+                   {
+                       "name":  "converges",
+                       "kind":  "Definition",
+                       "role":  "двусторонняя сходимость процесса к L (реплика StandardPart)"
+                   },
+                   {
+                       "name":  "delta_converges_0",
+                       "kind":  "Lemma",
+                       "role":  "★ δ→0: для любого eps хвост 1/(n+1)<eps (Архимед)"
+                   },
+                   {
+                       "name":  "diffquot",
+                       "kind":  "Definition",
+                       "role":  "разностное отношение (f(x+δ)−f(x))/δ как процесс"
+                   },
+                   {
+                       "name":  "f_sq",
+                       "kind":  "Definition",
+                       "role":  "f(x)=x²"
+                   },
+                   {
+                       "name":  "f_cube",
+                       "kind":  "Definition",
+                       "role":  "f(x)=x³"
+                   },
+                   {
+                       "name":  "f_id",
+                       "kind":  "Definition",
+                       "role":  "f(x)=x"
+                   },
+                   {
+                       "name":  "f_const",
+                       "kind":  "Definition",
+                       "role":  "f(x)=c"
+                   },
+                   {
+                       "name":  "dq_sq",
+                       "kind":  "Lemma",
+                       "role":  "★ (x²) разностное отношение = 2x+δ ТОЧНО (field, δ≠0)"
+                   },
+                   {
+                       "name":  "dq_cube",
+                       "kind":  "Lemma",
+                       "role":  "★ (x³) разностное отношение = 3x²+3xδ+δ² (точное тождество)"
+                   },
+                   {
+                       "name":  "dq_id",
+                       "kind":  "Lemma",
+                       "role":  "(x) разностное отношение = 1"
+                   },
+                   {
+                       "name":  "dq_const",
+                       "kind":  "Lemma",
+                       "role":  "(c) разностное отношение = 0"
+                   },
+                   {
+                       "name":  "deriv_sq",
+                       "kind":  "Lemma",
+                       "role":  "★★ ФЛАГМАН: f(x)=x² ⟹ f'(x)=2x (тень от 2x+δ)"
+                   },
+                   {
+                       "name":  "deriv_id",
+                       "kind":  "Lemma",
+                       "role":  "f(x)=x ⟹ f'(x)=1"
+                   },
+                   {
+                       "name":  "deriv_const",
+                       "kind":  "Lemma",
+                       "role":  "f(x)=c ⟹ f'(x)=0"
+                   },
+                   {
+                       "name":  "derivative_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: δ≠0 ∧ dq_sq ∧ f'(x²)=2x ∧ f'(x)=1 ∧ f'(c)=0"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "deriv_sq",
+                           "analysis":  "Флагман: f(x)=x² ⟹ f'(x)=2x как ТЕНЬ (st) разностного отношения dq_sq=2x+δ. δ нигде не нуль (delta_nonzero — делили законно), значение 2x достигается лишь в тени, через δ→0 (delta_converges_0, Архимед). Это NSA-определение производной Робинсона, но над КОНКРЕТНЫМ процессом δ=1/(n+1), 0-аксиомно. Граница: 2x рационален (при рациональном x) ⟹ процесс 2x+δₙ сходится ВНУТРЬ Element-стороны — дифференцирование полинома не выходит за границу финитизации.",
+                           "tags":  [
+                                        "derivative",
+                                        "shadow",
+                                        "nsa",
+                                        "element-side",
+                                        "flagship"
+                                    ]
+                       },
+                       {
+                           "name":  "dq_cube",
+                           "analysis":  "Разрешение парадокса Беркли в действии: для x³ доказано ТОЧНОЕ тождество (f(x+δ)−f(x))/δ=3x²+3xδ+δ² (field, опираясь на δ≠0) — никакого 0/0, ибо δ ненулев на каждом шаге. Честно помечено: полный st-шаг куба (тень от 3xδ+δ² = «ограниченное × бесконечно малое») здесь НЕ доказывается (потребовал бы Qabs-оценок) — опущено явно, не выдаётся за сделанное. Контраст с dq_sq/dq_id/dq_const, чьи converges доказаны полностью.",
+                           "tags":  [
+                                        "berkeley",
+                                        "exact-identity",
+                                        "honest-gap",
+                                        "cube"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Производная над процессами как тень разностного отношения f'(x)=st((f(x+δ)−f(x))/δ) с конкретным δ=1/(n+1): парадокс Беркли растворён (δ≠0 на каждом шаге, исчезает лишь в тени), а наблюдение «производная полинома = Element» (рациональный предел) ставит дифференцирование внутрь границы финитизации.",
+                       "caveat":  "NSA-определение производной и растворение «призраков исчезнувших величин» — Робинсон (1960-е); полиномиальные тождества разностного отношения элементарны. Ново лишь ToS-обоснование (δ как конкретный процесс, граница Element/role-limit). Для x³ st-шаг ОПУЩЕН (честно), доказано лишь точное тождество; converges есть только для x²/x/const. Общая st-производная гладких процессов — будущий файл (цитата). Header заявляет 12 Qed — фактически 6."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "infinitesimal",
+                 "derivative",
+                 "berkeley",
+                 "standard-part",
+                 "element-side",
+                 "finitization-boundary",
+                 "P4"
+             ],
+    "notes":  "STATUS header says '12 Qed' but actual Qed. count is 6 (drift). cluster derived from path src/nonstandard/ → 'nonstandard'. Cube st-step honestly omitted (only exact identity dq_cube proved). 0 own axioms; δ→0 via standard QArith Archimedean."
+},
+{
+    "num":  1897,
+    "path":  "src/nonstandard/FinitizationBoundaryGeneratingStructure.v",
+    "cluster":  "nonstandard",
+    "title":  "Порождающая структура границы финитизации: одно семя negb, два полюса (единица=Element ⊕ делитель нуля=role-limit)",
+    "topic":  "Великий синтез направления «порождающая структура границы»: граница финитизации = обратимость germ-кольца ℚ^ℕ/Фреше; ЕДИНИЦА (germ-константа) на Element-полюсе, ДЕЛИТЕЛЬ НУЛЯ (even_ind) на role-limit-полюсе; ОДНО семя negb (анти-неподвижная точка) порождает делитель И блокирует Element-тотализацию (Кантор/Рассел через Ловера); корень = P1.",
+    "role":  "КАПСТОУН-консолидация поднаправления E (порождающая структура границы): сводит genuine-результаты A1/A2/B1/B2/D в один файл + вердикт-карту полюсов. Импортирует только Stdlib (germ-кольцо и Ловер реплицированы локально); внешние H1/H71/H78/Core_ERR (P1) — цитаты в шапке, не импорты.",
+    "qed":  11,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Arith Lia Lqa"
+                ],
+    "err":  {
+                "elements":  "bool/negb; germ-процессы nat→ℚ (единица gconst(/q), делитель even_ind·odd_ind); point_surjective; перечисления Phenomenon/Pole.",
+                "roles":  "negb = семя (анти-неподвижная точка); единица = Element-полюс; делитель нуля = role-limit-полюс; pole_of = роль-вердикт, относящая явление к полюсу.",
+                "rules":  "negb b ≠ b (L5-семя); единица ⟺ в-конце-ненулева (обратимость, Element); делитель ⟺ нуль кофинально (role-limit); семя блокирует Element-тотализацию (нет сюръекции ℕ→2^ℕ; нет наивной компрегензии); только UnitPhen на Element-полюсе.",
+                "p4":  "конструктивно (0 акс): все представители выписаны явно (единица gconst(/q); делитель even_ind со свидетелем odd_ind; Ловер — явная диагональ; negb через destruct). Дальняя сторона границы = одно семя negb (тень P1-самочленства), преломлённое структурами; ближняя = единицы атласа."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "negb_no_fixpoint",
+                       "kind":  "Lemma",
+                       "role":  "★ семя: negb b ≠ b — анти-неподвижная точка (= тень P1)"
+                   },
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "тип germ-процесса nat→ℚ"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "germ-равенство по фильтру Фреше: совпадение при n≥N"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное умножение процессов"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "константный процесс"
+                   },
+                   {
+                       "name":  "g_unit",
+                       "kind":  "Definition",
+                       "role":  "обратимость germ: exists y, x·y ~ 1"
+                   },
+                   {
+                       "name":  "cofinal_nz",
+                       "kind":  "Definition",
+                       "role":  "процесс ненулев кофинально (бесконечно часто)"
+                   },
+                   {
+                       "name":  "g_zero_divisor",
+                       "kind":  "Definition",
+                       "role":  "делитель нуля: есть кофинально-ненулевой y с x·y ~ 0"
+                   },
+                   {
+                       "name":  "even_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор чётных (1 на чёт, 0 иначе)"
+                   },
+                   {
+                       "name":  "odd_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор нечётных"
+                   },
+                   {
+                       "name":  "gconst_unit",
+                       "kind":  "Lemma",
+                       "role":  "germ-константа q≠0 — единица (Element-полюс населён)"
+                   },
+                   {
+                       "name":  "one_is_unit",
+                       "kind":  "Lemma",
+                       "role":  "gconst 1 обратима"
+                   },
+                   {
+                       "name":  "odd_ind_cofinal_nz",
+                       "kind":  "Lemma",
+                       "role":  "odd_ind ненулев на нечётных кофинально"
+                   },
+                   {
+                       "name":  "even_odd_product_zero",
+                       "kind":  "Lemma",
+                       "role":  "even_ind·odd_ind = 0 поточечно (комплемент-дизъюнктность)"
+                   },
+                   {
+                       "name":  "even_ind_zero_divisor",
+                       "kind":  "Lemma",
+                       "role":  "★ even_ind — делитель нуля (role-limit-полюс населён)"
+                   },
+                   {
+                       "name":  "point_surjective",
+                       "kind":  "Definition",
+                       "role":  "точечная сюръективность g: X→(X→B)"
+                   },
+                   {
+                       "name":  "lawvere",
+                       "kind":  "Lemma",
+                       "role":  "★ теорема Ловера о неподвижной точке: point_surjective ⟹ всякая f:B→B имеет точку"
+                   },
+                   {
+                       "name":  "cantor",
+                       "kind":  "Lemma",
+                       "role":  "★ Кантор: нет сюръекции ℕ→2^ℕ (из Ловера+negb)"
+                   },
+                   {
+                       "name":  "russell",
+                       "kind":  "Lemma",
+                       "role":  "★ Рассел: нет наивной компрегензии (из Ловера+negb)"
+                   },
+                   {
+                       "name":  "Phenomenon",
+                       "kind":  "Inductive",
+                       "role":  "перечисление явлений: Unit/ZeroDiv/Cantor/Russell"
+                   },
+                   {
+                       "name":  "Pole",
+                       "kind":  "Inductive",
+                       "role":  "перечисление полюсов: Element/RoleLimit"
+                   },
+                   {
+                       "name":  "pole_of",
+                       "kind":  "Definition",
+                       "role":  "вердикт-карта: явление ↦ полюс"
+                   },
+                   {
+                       "name":  "only_unit_is_element",
+                       "kind":  "Lemma",
+                       "role":  "только UnitPhen на Element-полюсе; остальные — role-limit"
+                   },
+                   {
+                       "name":  "finitization_boundary_generating_structure",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: семя negb + единица + делитель + Кантор + Рассел + вердикт-карта в одной конъюнкции"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "finitization_boundary_generating_structure",
+                           "analysis":  "Гранд-капстоун поднаправления E: одна конъюнкция собирает (1) семя negb b≠b; (2) населённость Element-полюса (gconst 1 — единица); (3) населённость role-limit-полюса (even_ind — делитель нуля); (4) Кантор; (5) Рассел; (6) вердикт-карту полюсов. Тезис: дальняя сторона границы финитизации = ОДИН объект (семя negb = тень P1-самочленства), преломлённый алгеброй (делитель), счётом (несчётность), логикой (Рассел). Чистая консолидация — НЕ новая теорема; genuine-кирпичи лежат в A1/A2/B1/B2/D.",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "negb-seed",
+                                        "two-poles",
+                                        "vein-E"
+                                    ]
+                       },
+                       {
+                           "name":  "lawvere",
+                           "analysis":  "Извлечённый общий двигатель: point_surjective g ⟹ всякая f:B→B имеет неподвижную точку. Кантор и Рассел получаются как ДВА инстанса с f=negb (у которого точки нет — negb_no_fixpoint), а не передоказываются. Та же диагональ, что в cs/BoundaryDecidability (diagonal_defeats_decider) и cs/LawvereFixedPoint. Классика (Lawvere 1969); ново — её роль как ЕДИНОГО семени role-limit-полюса germ-кольца.",
+                           "tags":  [
+                                        "lawvere",
+                                        "diagonal",
+                                        "engine",
+                                        "cantor",
+                                        "russell"
+                                    ]
+                       },
+                       {
+                           "name":  "even_ind_zero_divisor",
+                           "analysis":  "Конкретный обитатель role-limit-полюса: even_ind·odd_ind ~ 0, но odd_ind ненулев кофинально, значит even_ind — делитель нуля (germ-кольцо ℚ^ℕ/Фреше — НЕ поле). Машинный след отсутствующего ультрафильтра: U решил бы «чётные ИЛИ нечётные велики», сделав ровно один обратимым. Element-полюс (единица) контрастирует с role-limit-полюсом (делитель) на одной обратимости. Классика — делители нуля факторкольца по неглавному фильтру; ново — рамка Element/role-limit.",
+                           "tags":  [
+                                        "zero-divisor",
+                                        "frechet",
+                                        "role-limit",
+                                        "not-a-field"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Теорема Ловера о неподвижной точке (Lawvere 1969) и её следствия — диагональ Кантора (несчётность 2^ℕ) и парадокс Рассела — классичны; германное кольцо ℚ^ℕ/Фреше с делителями нуля (фактор по неглавному фильтру) и обратимость как граница — стандартная алгебра. НОВО только обрамление: единица=Element-полюс ⊕ делитель=role-limit-полюс одной обратимости, и сведение Кантора/Рассела к ОДНОМУ семени negb как тени P1 ядра ToS (russell_paradox_blocked).",
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Капстоун-унификация: одна граница (обратимость germ-кольца), два населённых полюса (единица=Element ⊕ делитель нуля=role-limit), одно семя negb, порождающее role-limit-полюс И блокирующее Element-тотализацию (Кантор/Рассел через Ловера), с машинной вердикт-картой полюсов.",
+                       "caveat":  "Каждый кирпич классичен (Ловер, Кантор, Рассел, делители нуля кольца Фреше). Это ЯВНО помечено как СИНТЕЗ/КОНСОЛИДАЦИЯ, НЕ новые теоремы — genuine-результаты в A1/A2/B1/B2/D, здесь они лишь сведены; «единое семя» эмпирично (germ-инстанс), не мета-теорема. STATUS-шапка пишет 12 Qed — фактически 11 (drift)."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "frechet",
+                 "germ-ring",
+                 "lawvere",
+                 "diagonal",
+                 "negb-seed",
+                 "zero-divisor",
+                 "P1",
+                 "synthesis",
+                 "vein-E",
+                 "two-poles"
+             ],
+    "notes":  "Qed drift: STATUS-шапка указывает 12 Qed, фактический счёт 'Qed.' = 11. 0 Admitted, 0 собственных Axiom/Parameter. germ-кольцо и Ловер реплицированы локально (изоляция от stale .vo); H1/H71/H78/Core_ERR — цитаты в прозе, не импорты."
+},
+{
+    "num":  1898,
+    "path":  "src/nonstandard/GermInfinitesimal.v",
+    "cluster":  "nonstandard",
+    "title":  "Бесконечно малое как ПРОЦЕСС: germ-кольцо ℚ^ℕ/Фреше, δ=1/(n+1) (Element-ядро NSA, без ультрафильтра)",
+    "topic":  "Пилот Части XVIII: строит germ-кольцо процессов nat→ℚ по фильтру Фреше (конструктивен, в отличие от ультрафильтра). Бесконечно малое δ=1/(n+1) — НЕНУЛЕВО как germ, но ∞-мало как роль; ω=n+1 ∞-велико, ω·δ=1; ∞-малые образуют идеал. Делители нуля even·odd~0 = машинный след отсутствующего ультрафильтра.",
+    "role":  "Корневой Element-файл нестандартного анализа над процессами (традиция Шмиден–Лаугвиц 1958). Импортирует только Stdlib; служит якорем ElementCore в IllusoryConstructions и образующей в NonstandardOverProcessesSynthesis/HyperfiniteSum (δ, ∞-малость).",
+    "qed":  19,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lqa ZArith Lia Arith"
+                ],
+    "err":  {
+                "elements":  "процессы nat→ℚ; δₙ=1/(n+1); ωₙ=n+1; индикаторы even_ind/odd_ind; константы gconst.",
+                "roles":  "germ-класс (eventual-поведение); ∞-малое / конечное / ∞-большое = роли по поведению; δ — канон ∞-малого, ω=1/δ — канон ∞-большого; идеал ∞-малых.",
+                "rules":  "x~y ⟺ xₙ=yₙ при n≥N (Фреше); кольцо поточечно конгруэнтно (gadd_geq/gmul_geq); δ ненулево (элемент) ∧ ∞-мало (роль); ω·δ=1; ∞-малые замкнуты по + и при умножении на конечное.",
+                "p4":  "★ парадокс ∞-малого растворён: не завершённое число, а процесс — ненулевость есть факт об элементах, ∞-малость есть роль. ★★ делители нуля = след отсутствующего ультрафильтра (цена «кольцо, не поле» = LPO-зазор); поле *ℝ = role-limit. δ — полная E/R/R-система: правило-спуск n↦1/(n+1) + роль-∞-малость + рациональные элементы."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "arch_nat",
+                       "kind":  "Lemma",
+                       "role":  "архимедовость: для любого B∈ℚ есть nat-мажоранта"
+                   },
+                   {
+                       "name":  "Qle_of_nat_le",
+                       "kind":  "Lemma",
+                       "role":  "монотонность инъекции ℕ→ℚ"
+                   },
+                   {
+                       "name":  "Qinv_lt_swap",
+                       "kind":  "Lemma",
+                       "role":  "реципрокное переворачивание неравенства /a<b → /b<a"
+                   },
+                   {
+                       "name":  "Qdiv_pos",
+                       "kind":  "Lemma",
+                       "role":  "деление положительных положительно"
+                   },
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "тип процесса nat→ℚ"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "germ-равенство по фильтру Фреше"
+                   },
+                   {
+                       "name":  "gadd",
+                       "kind":  "Definition",
+                       "role":  "поточечное сложение"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное умножение"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "константный процесс"
+                   },
+                   {
+                       "name":  "geq_refl",
+                       "kind":  "Lemma",
+                       "role":  "рефлексивность germ-равенства"
+                   },
+                   {
+                       "name":  "geq_sym",
+                       "kind":  "Lemma",
+                       "role":  "симметричность"
+                   },
+                   {
+                       "name":  "geq_trans",
+                       "kind":  "Lemma",
+                       "role":  "транзитивность (через max N₁ N₂)"
+                   },
+                   {
+                       "name":  "gadd_geq",
+                       "kind":  "Lemma",
+                       "role":  "сложение конгруэнтно по germ-равенству"
+                   },
+                   {
+                       "name":  "gmul_geq",
+                       "kind":  "Lemma",
+                       "role":  "умножение конгруэнтно"
+                   },
+                   {
+                       "name":  "g_infinitesimal",
+                       "kind":  "Definition",
+                       "role":  "роль ∞-малого: < всякого ε eventually"
+                   },
+                   {
+                       "name":  "g_finite",
+                       "kind":  "Definition",
+                       "role":  "роль конечного: ограничено eventually"
+                   },
+                   {
+                       "name":  "g_infinite",
+                       "kind":  "Definition",
+                       "role":  "роль ∞-большого: > всякого B eventually"
+                   },
+                   {
+                       "name":  "Qsn",
+                       "kind":  "Definition",
+                       "role":  "инъекция S n → ℚ"
+                   },
+                   {
+                       "name":  "Qsn_pos",
+                       "kind":  "Lemma",
+                       "role":  "Qsn n > 0"
+                   },
+                   {
+                       "name":  "Qsn_nonzero",
+                       "kind":  "Lemma",
+                       "role":  "Qsn n ≠ 0"
+                   },
+                   {
+                       "name":  "delta",
+                       "kind":  "Definition",
+                       "role":  "канон ∞-малого δ=1/(n+1)"
+                   },
+                   {
+                       "name":  "omega",
+                       "kind":  "Definition",
+                       "role":  "канон ∞-большого ω=n+1"
+                   },
+                   {
+                       "name":  "delta_nonzero",
+                       "kind":  "Lemma",
+                       "role":  "★ δ ненулево как germ (факт об элементах)"
+                   },
+                   {
+                       "name":  "delta_infinitesimal",
+                       "kind":  "Lemma",
+                       "role":  "★ δ бесконечно мало (роль)"
+                   },
+                   {
+                       "name":  "omega_infinite",
+                       "kind":  "Lemma",
+                       "role":  "★ ω бесконечно велико"
+                   },
+                   {
+                       "name":  "omega_delta_one",
+                       "kind":  "Lemma",
+                       "role":  "★ ω·δ=1 (обратные друг другу)"
+                   },
+                   {
+                       "name":  "even_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор чётных"
+                   },
+                   {
+                       "name":  "odd_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор нечётных"
+                   },
+                   {
+                       "name":  "zero_divisors_exist",
+                       "kind":  "Lemma",
+                       "role":  "★★ even·odd~0, оба≠0 — делители нуля (след ультрафильтра)"
+                   },
+                   {
+                       "name":  "infinitesimal_add",
+                       "kind":  "Lemma",
+                       "role":  "сумма ∞-малых ∞-мала (идеал по +)"
+                   },
+                   {
+                       "name":  "finite_times_infinitesimal",
+                       "kind":  "Lemma",
+                       "role":  "конечное×∞-малое = ∞-малое (поглощение идеала)"
+                   },
+                   {
+                       "name":  "germ_ring_infinitesimal_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: δ ∞-мало+ненулево, ω ∞-велико, ω·δ=1, делители нуля"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "delta_infinitesimal",
+                           "analysis":  "Сердце файла: δ=1/(n+1) меньше всякого стандартного ε при достаточно больших n (через arch_nat и Qinv_lt_swap). В паре с delta_nonzero реализует флагманский тезис: бесконечно малое — это ПРОЦЕСС, а не завершённое число. «Парадокс» Беркли (ненулевое, но меньше любого положительного) растворён расщеплением на два уровня E/R/R: ненулевость = факт об ЭЛЕМЕНТАХ (каждое δₙ∈ℚ≠0), ∞-малость = РОЛЬ (eventual-поведение). Конструктивно, 0 аксиом. Содержание классично (Шмиден–Лаугвиц); ново — onтологическая рамка процесса.",
+                           "tags":  [
+                                        "infinitesimal",
+                                        "process",
+                                        "berkeley",
+                                        "element-vs-role"
+                                    ]
+                       },
+                       {
+                           "name":  "zero_divisors_exist",
+                           "analysis":  "★★ Машинный след ОТСУТСТВУЮЩЕГО ультрафильтра: even_ind и odd_ind оба ненулевы как germ (1 бесконечно часто), но их произведение ~0. Значит ℚ^ℕ/Фреше — кольцо С ДЕЛИТЕЛЯМИ НУЛЯ, не поле. Это и есть честная цена конструктивности: ультрафильтр (role-limit, завершённый выбор на 2^ℕ) решил бы «чётные ИЛИ нечётные велики», сделав ровно один множитель обратимым — без него остаётся LPO-зазор. Тот же делитель появляется в FinitizationBoundaryGeneratingStructure (полюс) и обобщается в NonstandardOverProcessesSynthesis (форма ×).",
+                           "tags":  [
+                                        "zero-divisor",
+                                        "ultrafilter-trace",
+                                        "LPO",
+                                        "not-a-field",
+                                        "frechet"
+                                    ]
+                       },
+                       {
+                           "name":  "omega_delta_one",
+                           "analysis":  "ω·δ=1 поточечно (Qmult_inv_r): ∞-большое и ∞-малое строго взаимно обратны как germ. Показывает, что δ обратимо (в отличие от even_ind), то есть конструктивная конечно-актуальная пара даёт законную единицу — Element-сторона обратимости germ-кольца. Тривиально по содержанию, но фиксирует, что не ВСЕ нестандартные элементы патологичны: патология (делитель) локализована в undecided-индикаторах.",
+                           "tags":  [
+                                        "infinite",
+                                        "reciprocal",
+                                        "unit",
+                                        "element"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Нестандартный анализ Робинсона строит *ℝ=ℚ^ℕ/U через неглавный ультрафильтр U (поле, полный перенос Лося). Конструктивный фактор по фильтру Фреше (germ-кольцо с делителями нуля) — это традиция Шмиден–Лаугвиц (1958) и smooth infinitesimal analysis. Архимедовость, идеал ∞-малых — стандартный QArith. НОВО: формализация над ПРОЦЕССАМИ nat→ℚ + расщепление ∞-малого на элемент/роль (растворение парадокса Беркли) + делители нуля как явный машинный СЛЕД отсутствующего ультрафильтра (= граница финитизации).",
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Element-ядро NSA как процессы: бесконечно малое δ — это ПРОЦЕСС (ненулевой элемент ∧ ∞-малая роль, парадокс Беркли растворён), а делители нуля germ-кольца Фреше — машинный след отсутствующего ультрафильтра (граница к полю *ℝ = role-limit).",
+                       "caveat":  "ПОЛЕ *ℝ, полный перенос Лося, насыщенность (всё, что требует ультрафильтра) — НЕ здесь и честно помечено как role-limit. Германное кольцо Фреше и его делители нуля классичны (Шмиден–Лаугвиц). Genuine-вклад — рамка процесса + расщепление элемент/роль, НЕ новая теорема анализа."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "infinitesimal",
+                 "germ-ring",
+                 "frechet",
+                 "berkeley",
+                 "zero-divisor",
+                 "ultrafilter-trace",
+                 "process",
+                 "element-vs-role",
+                 "schmieden-laugwitz"
+             ],
+    "notes":  "Qed соответствует STATUS-шапке (19). 0 Admitted, 0 собственных Axiom/Parameter. Корневой пилот Части XVIII; все определения локальны (Stdlib only)."
+},
+{
+    "num":  1899,
+    "path":  "src/nonstandard/HyperfiniteSum.v",
+    "cluster":  "nonstandard",
+    "title":  "Интеграл как стандартная часть гиперконечной римановой суммы: ∫₀¹ x = 1/2 через тень ∞-малой сетки",
+    "topic":  "Парный к производной (DerivativeViaInfinitesimal) файл: ∫₀¹f = st(Σₖ f(kδ)·δ) с δ=1/n. Доказывает ЗАКРЫТУЮ форму термwise римановой суммы (rsumlin = Qof(Σk)·h² через сумму Гаусса 2Σk=n(n−1)) и флагман ∫₀¹ x = 1/2 точно (риманова сумма (n−1)/(2n) → 1/2 по Архимеду).",
+    "role":  "Половина «исчисление = одна операция st» Части XVIII (вторая — производная). Импортирует только Stdlib; δ/converges/Архимед заимствованы по образцу DerivativeViaInfinitesimal (цитата в шапке), общий ∫ — арена RiemannIntegration (цитата). Цитируется в NonstandardOverProcessesSynthesis.",
+    "qed":  10,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith ZArith Arith Lia Lqa"
+                ],
+    "err":  {
+                "elements":  "GProc; rsumlin (термwise рим. сумма); sumk (Гаусс Σk над ℕ); Qof (ℕ→ℚ); delta; integral_x; converges.",
+                "roles":  "δ = роль-сетка (∞-малая); rsumlin = роль-аппроксимация площади; st (предел) = роль-тень/интеграл; sumk = Гаусс-счётчик.",
+                "rules":  "δ≠0 на каждом шаге ⟹ сумма законна; rsumlin = Qof(Σk)·h² (точно, не подставленная формула); 2·Σk=n(n−1) (Гаусс индукцией над ℕ); st убирает остаток 1/(2n) ⟹ ∫x=1/2.",
+                "p4":  "всё конечно-глубинно (Element): частичная сумма R(n)=(n−1)/(2n) рациональна, сетка δ нигде не нуль; тень 1/2 НЕ член последовательности (R(n)<1/2 всегда), но РАЦИОНАЛЬНА ⟹ сходимость ВНУТРЬ Element-стороны — интегрирование полинома не выходит за границу финитизации (парно к дифференцированию). δ→0 = Архимед."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "тип процесса nat→ℚ"
+                   },
+                   {
+                       "name":  "Qof",
+                       "kind":  "Definition",
+                       "role":  "инъекция ℕ→ℚ"
+                   },
+                   {
+                       "name":  "Qof_add",
+                       "kind":  "Lemma",
+                       "role":  "аддитивность Qof"
+                   },
+                   {
+                       "name":  "Qof_S",
+                       "kind":  "Lemma",
+                       "role":  "Qof(S m)=Qof m+1"
+                   },
+                   {
+                       "name":  "Qof_pos",
+                       "kind":  "Lemma",
+                       "role":  "Qof(S m)>0"
+                   },
+                   {
+                       "name":  "sumk",
+                       "kind":  "Fixpoint",
+                       "role":  "сумма Гаусса Σ_{j<n} j над ℕ"
+                   },
+                   {
+                       "name":  "sumk_closed_Q",
+                       "kind":  "Lemma",
+                       "role":  "★ Гаусс в ℚ: 2·Qof(Σk)=Qof n·(Qof n−1)"
+                   },
+                   {
+                       "name":  "rsumlin",
+                       "kind":  "Fixpoint",
+                       "role":  "термwise левая риманова сумма для f(x)=x"
+                   },
+                   {
+                       "name":  "rsumlin_closed",
+                       "kind":  "Lemma",
+                       "role":  "★ закрытая форма: rsumlin = Qof(Σk)·h² (настоящая сумма)"
+                   },
+                   {
+                       "name":  "integral_x",
+                       "kind":  "Definition",
+                       "role":  "интеграл-кандидат: рим. сумма n точек, сетка 1/n"
+                   },
+                   {
+                       "name":  "integral_x_closed",
+                       "kind":  "Lemma",
+                       "role":  "★ явный вид: ∫-сумма(S m)=1/2−(1/2)/n"
+                   },
+                   {
+                       "name":  "converges",
+                       "kind":  "Definition",
+                       "role":  "ε-N сходимость процесса к L"
+                   },
+                   {
+                       "name":  "delta",
+                       "kind":  "Definition",
+                       "role":  "∞-малая сетка δ=1/(n+1)"
+                   },
+                   {
+                       "name":  "delta_pos",
+                       "kind":  "Lemma",
+                       "role":  "δ>0 на каждом шаге"
+                   },
+                   {
+                       "name":  "delta_converges_0",
+                       "kind":  "Lemma",
+                       "role":  "δ→0 (Архимед)"
+                   },
+                   {
+                       "name":  "integral_x_converges",
+                       "kind":  "Lemma",
+                       "role":  "★ ФЛАГМАН: ∫₀¹ x = 1/2 через тень"
+                   },
+                   {
+                       "name":  "hyperfinite_sum_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: закрытая форма + явный вид + ∫x=1/2"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "integral_x_converges",
+                           "analysis":  "★ ФЛАГМАН (genuine-вычисление): ∫₀¹ x = 1/2 получается как тень (предел) римановой суммы (n−1)/(2n), без ε-δ-определения интеграла — через st ∞-малой сетки. Левая сумма с n точками законна (δ=1/n нигде не нуль), а 1/2 достигается лишь в тени (R(n)<1/2 всегда). Это конкретная реализация «интегрирование = операция st», парная к производной st(Δf/δ). Содержание (∫x=1/2) тривиально классично; ценность — что обе половины анализа суть одна теневая операция над ∞-малой δ.",
+                           "tags":  [
+                                        "integral",
+                                        "standard-part",
+                                        "flagship",
+                                        "riemann-sum"
+                                    ]
+                       },
+                       {
+                           "name":  "rsumlin_closed",
+                           "analysis":  "Честный фундамент флагмана: rsumlin — НАСТОЯЩАЯ термwise рекурсивная сумма Σ(k·h)·h, и доказано (индукцией + сумма Гаусса), что она РАВНА закрытой форме Qof(Σk)·h², а не подставленной формуле. Это отличает файл от «вписать ответ»: суммирование выполнено реально, замкнутая форма выведена. sumk_closed_Q (2Σk=n(n−1)) доказана над ℕ без ℕ-вычитания.",
+                           "tags":  [
+                                        "closed-form",
+                                        "gauss-sum",
+                                        "honest",
+                                        "induction"
+                                    ]
+                       },
+                       {
+                           "name":  "integral_x_closed",
+                           "analysis":  "Мост от закрытой формы к сходимости: ∫-сумма для n=S m точно равна 1/2 − (1/2)/n. Делает остаток 1/(2n) явным и рациональным, откуда сходимость к 1/2 — прямое следствие δ→0 (Архимед). Граница финитизации: предел 1/2 РАЦИОНАЛЕН, значит риманов процесс сходится ВНУТРЬ Element-стороны — интеграл полинома не порождает role-limit (в отличие, скажем, от ∫ с иррациональным пределом).",
+                           "tags":  [
+                                        "explicit-form",
+                                        "rational-limit",
+                                        "element-side",
+                                        "finitization-boundary"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Интеграл как стандартная часть гиперконечной римановой суммы — стандартный приём нестандартного анализа (Robinson; Keisler «Elementary Calculus»). ∫₀¹ x = 1/2 и сумма Гаусса Σk=n(n−1)/2 элементарны. НОВО только: формализация над ПРОЦЕССАМИ nat→ℚ без ультрафильтра (st = обычный предел/Архимед), доказанная закрытая форма реальной термwise суммы (не подстановка), и наблюдение «обе половины анализа = одна операция st» + рациональность предела как Element-граница. ⚠ ∫x²=1/3 (Σk²) и общий ∫ — цитаты, не доказаны здесь.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Гиперконечное интегрирование над процессами: ∫₀¹ x = 1/2 как тень st настоящей термwise римановой суммы (закрытая форма Qof(Σk)·h² доказана, не подставлена), парное к производной — обе половины анализа суть одна операция st над ∞-малой сеткой.",
+                       "caveat":  "Содержание классично (NSA-интеграл, ∫x=1/2, сумма Гаусса). Доказан ТОЛЬКО линейный флагман: ∫x²=1/3 (квадратичная Σk²) и общий ∫ гладкой функции явно НЕ доказаны — честно помечены как цитаты (RiemannIntegration). Новизна — необычная 0-аксиомная формализация над ℚ-процессами, не теорема."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "integral",
+                 "standard-part",
+                 "riemann-sum",
+                 "gauss-sum",
+                 "infinitesimal",
+                 "process",
+                 "calculus",
+                 "element-side",
+                 "finitization-boundary"
+             ],
+    "notes":  "Qed соответствует STATUS-шапке (10). 0 Admitted, 0 собственных Axiom/Parameter. δ/converges/Архимед — по образцу DerivativeViaInfinitesimal (парный файл, цитата); общий ∫ — RiemannIntegration (цитата)."
+},
+{
+    "num":  1900,
+    "path":  "src/nonstandard/IllusoryConstructions.v",
+    "cluster":  "nonstandard",
+    "title":  "Честный вердикт-реестр «за-границей» конструкций: {Element-ядро / role-limit-инструмент / ИЛЛЮЗОРНОЕ}; якорь Банах–Тарши",
+    "topic":  "Сердце честной миссии Части XVIII: перечисляет 9 «за-границей» конструкций и присваивает каждой трёхзначный онтологический вердикт. Illusory = нужен AC ∧ нет Element-свидетеля ∧ даже не устранимые леса (чистый ZFC-фантом: Банах–Тарши/Витали/Гамель/полный порядок ℝ). Якорная теорема: удвоение шара несовместимо с ненулевой Element-мерой (μ=2μ⟹μ=0).",
+    "role":  "Онтологический классификатор-реестр направления. Импортирует только Stdlib; вердикты подкреплены ссылками-цитатами на якорные файлы (UltrafilterRoleLimit для FreeUltrafilter; GermInfinitesimal/StandardPart/Derivative для ElementCore), сами якоря не импортируются. Капстоун честности перед синтезом.",
+    "qed":  7,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lqa"
+                ],
+    "err":  {
+                "elements":  "перечисление Construction (9 конструкций); булевы предикаты needs_AC/has_element_witness/is_conservative_scaffold; Q-мера (Банах–Тарши).",
+                "roles":  "конструкция = роль-кандидат; вердикт (ElementCore/RoleLimitTool/Illusory) = роль-статус; диагностики needs_AC/witness/scaffold = роли; мера = роль-сохранение (Element).",
+                "rules":  "трёхзначный вердикт; Illusory = AC ∧ ¬witness ∧ ¬scaffold (фантом); RoleLimitTool = scaffold ∧ AC (консервативно устранимо, Хенсон–Кейслер); ElementCore = ¬AC ∧ witness; Банах–Тарши: μ=p1+p2 ∧ p1=μ ∧ p2=μ ⟹ μ=0.",
+                "p4":  "ElementCore = 0 AC, актуализуемо (есть Coq-свидетель-процесс); RoleLimitTool = AC-леса, но продукт консервативен ⟹ устраним (не фантом); Illusory = AC-фантом без референта/вычислимого содержания, ничего Element не доставляет. Ключевое различение Illusory vs RoleLimitTool: леса УСТРАНИМЫ и что-то ДОСТАВЛЯЮТ через консервативность, фантом не доставляет ничего. «Куски» Банах–Тарши = ровно то, что P4 не актуализирует."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "Construction",
+                       "kind":  "Inductive",
+                       "role":  "перечисление 9 «за-границей» конструкций (БТ, Витали, Гамель, полный порядок ℝ, ультрафильтр, *ℝ-поле, germ-δ, тень, f' полинома)"
+                   },
+                   {
+                       "name":  "Verdict",
+                       "kind":  "Inductive",
+                       "role":  "трёхзначный статус: ElementCore/RoleLimitTool/Illusory"
+                   },
+                   {
+                       "name":  "verdict",
+                       "kind":  "Definition",
+                       "role":  "карта конструкция ↦ вердикт"
+                   },
+                   {
+                       "name":  "needs_AC",
+                       "kind":  "Definition",
+                       "role":  "диагностика: требует ли AC"
+                   },
+                   {
+                       "name":  "has_element_witness",
+                       "kind":  "Definition",
+                       "role":  "диагностика: есть ли Coq-свидетель"
+                   },
+                   {
+                       "name":  "is_conservative_scaffold",
+                       "kind":  "Definition",
+                       "role":  "диагностика: устранимые консервативные леса"
+                   },
+                   {
+                       "name":  "illusory_hallmark",
+                       "kind":  "Lemma",
+                       "role":  "★ сигнатура фантома: Illusory ⟹ AC ∧ ¬witness ∧ ¬scaffold"
+                   },
+                   {
+                       "name":  "element_core_props",
+                       "kind":  "Lemma",
+                       "role":  "ElementCore ⟹ ¬AC ∧ witness"
+                   },
+                   {
+                       "name":  "role_limit_scaffold",
+                       "kind":  "Lemma",
+                       "role":  "RoleLimitTool ⟹ scaffold ∧ AC"
+                   },
+                   {
+                       "name":  "verdict_total",
+                       "kind":  "Lemma",
+                       "role":  "классификация тотальна (каждая — в одном из трёх классов)"
+                   },
+                   {
+                       "name":  "element_not_illusory",
+                       "kind":  "Lemma",
+                       "role":  "классы взаимоисключающи (Element-ядро ≠ Illusory)"
+                   },
+                   {
+                       "name":  "banach_tarski_contradicts_measure",
+                       "kind":  "Lemma",
+                       "role":  "★ ЯКОРНЫЙ ФЛАГМАН: μ=2μ⟹μ=0 (БТ несовместим с Element-мерой)"
+                   },
+                   {
+                       "name":  "illusory_constructions_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: сигнатуры трёх классов + БТ + три якоря вердиктов"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "banach_tarski_contradicts_measure",
+                           "analysis":  "★ ЯКОРНЫЙ ФЛАГМАН (genuine-теорема, не классификация): если конечно-аддитивная движение-инвариантная Element-мера μ удовлетворяла бы заявлению Банах–Тарши (μ=p1+p2, каждая группа кусков собирается в целое: p1=μ, p2=μ), то μ=μ+μ ⟹ μ=0. Значит ненулевой Element-меры на кусках НЕ существует — куски неизмеримы, у них НЕТ Element-референта. Это машинное ПОЧЕМУ иллюзорности БТ: он несовместим с сохранением, которое несёт Element-мера. Сам парадокс (существование разбиения) НЕ ассертируется — лишь его несовместимость. Тривиальная lra-арифметика, но онтологически нагруженная.",
+                           "tags":  [
+                                        "banach-tarski",
+                                        "measure",
+                                        "flagship",
+                                        "no-AC",
+                                        "anchor"
+                                    ]
+                       },
+                       {
+                           "name":  "illusory_hallmark",
+                           "analysis":  "Машинная сигнатура ИЛЛЮЗОРНОГО: всякая Illusory-конструкция одновременно требует AC, не имеет Coq-свидетеля И не является устранимыми лесами. Это и есть формальная граница «фантом vs инструмент»: RoleLimitTool (свободный ультрафильтр, *ℝ-поле) — устранимые консервативные леса (что-то Element ДОСТАВЛЯЮТ через Хенсон–Кейслер), тогда как Illusory (БТ/Витали/Гамель/полный порядок ℝ) не доставляет ничего. Различение — genuine онтологический вклад ToS; сами AC-зависимости классичны и цитируются, не передоказываются.",
+                           "tags":  [
+                                        "illusory",
+                                        "classification",
+                                        "AC",
+                                        "conservativity",
+                                        "ontology"
+                                    ]
+                       },
+                       {
+                           "name":  "verdict_total",
+                           "analysis":  "Тотальность классификации: каждая из 9 конструкций попадает ровно в один класс (доказано destruct-перебором). В паре с element_not_illusory (взаимоисключаемость) даёт корректность трёхзначного реестра. Это плумбинг честной миссии: гарантирует, что вердикт-карта не оставляет «серых зон». Содержательно тривиально (конечный перебор), но нужно для целостности реестра.",
+                           "tags":  [
+                                        "totality",
+                                        "classification",
+                                        "well-formed"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Парадокс Банах–Тарши (1924), множество Витали, базис Гамеля, теорема Цермело о полном порядке ℝ — классические следствия аксиомы выбора; консервативность нестандартного расширения (свободный ультрафильтр, *ℝ) — Хенсон–Кейслер. НОВО: не математический результат, а ОНТОЛОГИЧЕСКИЙ трёхзначный реестр {ElementCore/RoleLimitTool/Illusory} с машинной сигнатурой фантома (AC∧¬witness∧¬scaffold) + якорная теорема μ=2μ⟹μ=0, дающая ПРИЧИНУ иллюзорности БТ (несовместимость с Element-мерой). AC-зависимости Витали/Гамеля/полного порядка цитируются, не передоказываются.",
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Онтологический трёхзначный вердикт-реестр конструкций {Element-ядро / устранимые role-limit-леса / ИЛЛЮЗОРНЫЙ ZFC-фантом} с машинной сигнатурой фантома и якорной теоремой Банах–Тарши (μ=2μ⟹μ=0), дающей причину иллюзорности через несовместимость с Element-мерой.",
+                       "caveat":  "Это РЕЕСТР/КЛАССИФИКАЦИЯ (синтез), НЕ новые теоремы — КРОМЕ одной якорной (БТ μ=2μ⟹μ=0, сама по себе элементарная lra-арифметика). Вердикты Витали/Гамель/полный-порядок лишь ЦИТИРУЮТ классическую AC-зависимость; различение Illusory/RoleLimitTool опирается на консервативность (Хенсон–Кейслер), не доказанную здесь. STATUS-шапка пишет 8 Qed — фактически 7 (drift)."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "banach-tarski",
+                 "axiom-of-choice",
+                 "no-AC",
+                 "measure",
+                 "ontology",
+                 "classification",
+                 "verdict-registry",
+                 "illusory",
+                 "conservativity",
+                 "honesty"
+             ],
+    "notes":  "Qed drift: STATUS-шапка указывает 8 Qed, фактический счёт 'Qed.' = 7. 0 Admitted, 0 собственных Axiom/Parameter. Никакая иллюзорная конструкция не ассертируется (существование БТ-разбиения не постулируется); якоря-файлы цитируются в прозе, не импортируются."
+},
+{
+    "num":  1901,
+    "path":  "src/nonstandard/NonstandardOverProcessesSynthesis.v",
+    "cluster":  "nonstandard",
+    "title":  "Капстоун Части XVIII: одно свойство undecided S порождает ТРИ алгебраические формы role-limit-зазора (делитель × / осциллятор + / необратимость кольцо)",
+    "topic":  "Финальный синтез нестандартного направления над процессами: извлекает ЕДИНЫЙ корень всех role-limit-явлений — неразрешённость Фреше «какое подмножество велико» (undecided S = S и not-S оба кофинальны, ПОЗИТИВНО, без classic). Доказывает, что одно это свойство влечёт делитель нуля (×), осциллятор-без-тени (+) и необратимость (кольцо). Evens — лишь частный undecided.",
+    "role":  "КАПСТОУН-унификация Части XVIII: абстрагирует Evens-результаты (UltrafilterRoleLimit/StandardPart) к общему undecided S. Импортирует только Stdlib (germ-операции реплицированы); исчисление=st (Derivative/HyperfiniteSum) и трёхзначный вердикт (IllusoryConstructions) — цитаты в шапке, не импорты.",
+    "qed":  11,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Arith Lia Lqa"
+                ],
+    "err":  {
+                "elements":  "GProc; cofinal/undecided (позитивные, конструктивные); ind/osc; evens; geq/gmul/gconst; g_invertible.",
+                "roles":  "undecided = роль-неразрешённое-различение (Фреше не решает «что велико»); ind = индикатор; osc = осциллятор ±1; делитель/тень/единица = три проявления зазора.",
+                "rules":  "undecided S = cofinal S ∧ cofinal not-S (позитивно); undecided S ⟹ (×) ind S·ind not-S~0 при обоих ≠0 — делитель; (+) osc S без константной тени — осциллятор; (кольцо) ind S необратим. Один корень — три формы.",
+                "p4":  "★ конструктивно (важно): undecided определён ПОЗИТИВНО (оба кофинальны), НЕ через двойное отрицание (~cofinite потребовало бы classic/DNE) — поэтому все три формы выводятся БЕЗ аксиомы classic, чистая Element-сторона. Единственный role-limit — РАЗРЕШЕНИЕ undecided (ультрафильтр), которое НЕ ассертируется. undecided S — полная E/R/R-система: ни одно конечное наблюдение не решает «что велико» ⟹ корень всех трёх форм."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "тип процесса nat→ℚ"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "germ-равенство по фильтру Фреше"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное умножение"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "константный процесс"
+                   },
+                   {
+                       "name":  "g_invertible",
+                       "kind":  "Definition",
+                       "role":  "обратимость germ: exists y, x·y~1"
+                   },
+                   {
+                       "name":  "cofinal",
+                       "kind":  "Definition",
+                       "role":  "S истинно бесконечно часто (позитивно, конструктивно)"
+                   },
+                   {
+                       "name":  "undecided",
+                       "kind":  "Definition",
+                       "role":  "★ неразрешённое различение: cofinal S ∧ cofinal not-S"
+                   },
+                   {
+                       "name":  "ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор подмножества (1/0)"
+                   },
+                   {
+                       "name":  "osc",
+                       "kind":  "Definition",
+                       "role":  "осциллятор (+1 / −1)"
+                   },
+                   {
+                       "name":  "evens",
+                       "kind":  "Definition",
+                       "role":  "каноническое подмножество чётных"
+                   },
+                   {
+                       "name":  "cofinal_evens",
+                       "kind":  "Lemma",
+                       "role":  "чётные кофинальны"
+                   },
+                   {
+                       "name":  "cofinal_odds",
+                       "kind":  "Lemma",
+                       "role":  "нечётные кофинальны"
+                   },
+                   {
+                       "name":  "undecided_evens",
+                       "kind":  "Lemma",
+                       "role":  "evens — каноническое неразрешённое различение"
+                   },
+                   {
+                       "name":  "ind_complement_product_zero",
+                       "kind":  "Lemma",
+                       "role":  "ind S·ind not-S=0 поточечно"
+                   },
+                   {
+                       "name":  "ind_not_zero",
+                       "kind":  "Lemma",
+                       "role":  "cofinal S ⟹ ind S ≁ 0"
+                   },
+                   {
+                       "name":  "undecided_zero_divisor",
+                       "kind":  "Theorem",
+                       "role":  "★ форма ×: undecided ⟹ делитель нуля (произведение~0, оба множителя≠0)"
+                   },
+                   {
+                       "name":  "osc_true",
+                       "kind":  "Lemma",
+                       "role":  "osc S n = 1 при S n=true"
+                   },
+                   {
+                       "name":  "osc_false",
+                       "kind":  "Lemma",
+                       "role":  "osc S n = −1 при S n=false"
+                   },
+                   {
+                       "name":  "undecided_no_shadow",
+                       "kind":  "Theorem",
+                       "role":  "★ форма +: undecided ⟹ осциллятор без константной тени"
+                   },
+                   {
+                       "name":  "undecided_non_unit",
+                       "kind":  "Theorem",
+                       "role":  "★ форма кольцо: undecided ⟹ ind S необратим"
+                   },
+                   {
+                       "name":  "nonstandard_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: один корень undecided ⟹ три формы (×/+/кольцо)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "nonstandard_synthesis",
+                           "analysis":  "★ ГРАНД-КАПСТОУН Части XVIII (genuine унифицирующая теорема): одна конъюнкция показывает, что ОДНО структурное свойство undecided S (и S, и not-S кофинальны — Фреше не различает «что велико») порождает ТРИ алгебраические формы role-limit-зазора: делитель нуля (мультипликативно), осциллятор-без-тени (аддитивно), необратимость (кольцо). Evens — лишь частный undecided. Это абстрагирование частных Evens-результатов (UltrafilterRoleLimit, StandardPart) к общему корню — настоящая унификация, не повтор. Спина капстоуна направления.",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "unification",
+                                        "one-root-three-forms",
+                                        "vein-E"
+                                    ]
+                       },
+                       {
+                           "name":  "undecided",
+                           "analysis":  "Конструктивное ядро всего файла: undecided определён ПОЗИТИВНО — cofinal S ∧ cofinal not-S («оба истинны бесконечно часто»), а НЕ через двойное отрицание ~cofinite (которое потребовало бы classic/DNE). Именно поэтому все три формы выводятся БЕЗ аксиомы classic — чистая Element-сторона, 0 аксиом. Это тонкий, но важный P4-ход: неразрешённость кодируется позитивно-конструктивно, не классически. Единственный role-limit (разрешение undecided через ультрафильтр) остаётся не-ассертированным.",
+                           "tags":  [
+                                        "positive-definition",
+                                        "constructive",
+                                        "no-classic",
+                                        "frechet",
+                                        "undecided"
+                                    ]
+                       },
+                       {
+                           "name":  "undecided_zero_divisor",
+                           "analysis":  "Форма × единого корня: undecided S ⟹ ind S·ind not-S~0, но ни ind S, ни ind not-S не ~0. Обобщает zero_divisors_exist из GermInfinitesimal (там частный случай even/odd) до ПРОИЗВОЛЬНОГО undecided S. Показывает, что делитель нуля germ-кольца — не случайность чётности, а необходимое следствие любого неразрешённого Фреше-различения. Параллельно undecided_non_unit (кольцо) и undecided_no_shadow (+) дают три грани одного факта.",
+                           "tags":  [
+                                        "zero-divisor",
+                                        "generalization",
+                                        "frechet",
+                                        "role-limit-form"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Делители нуля и необратимые элементы факторкольца ℚ^ℕ по неглавному фильтру Фреше, и отсутствие предела у осциллирующей (±1)-последовательности — классическая алгебра/анализ; неразрешимость «какое подмножество велико» без ультрафильтра — суть конструктивного провала (LPO/role-limit). НОВО: УНИФИКАЦИЯ — доказательство, что ОДНО позитивно-конструктивное свойство (undecided S) порождает все ТРИ алгебраические формы (×/+/кольцо) одного зазора, с абстрагированием от частного Evens к общему S, БЕЗ аксиомы classic.",
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Унифицирующий капстоун: ОДНО позитивно-конструктивное свойство undecided S (Фреше не решает «что велико») порождает ТРИ алгебраические формы role-limit-зазора — делитель нуля (×), осциллятор-без-тени (+), необратимость (кольцо) — БЕЗ аксиомы classic; Evens лишь частный случай.",
+                       "caveat":  "Это ЯВНО СИНТЕЗ/УНИФИКАЦИЯ — абстрагирование Evens-результатов (UltrafilterRoleLimit/StandardPart) к общему undecided, НЕ новые отдельные теоремы. Каждая из трёх форм по содержанию классична (делители нуля/необратимость кольца Фреше, осциллятор без предела). Genuine-вклад — что один корень даёт все три формы машинно; «исчисление=st» и трёхзначный вердикт — цитаты к файлам XVIII."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "synthesis",
+                 "capstone",
+                 "frechet",
+                 "zero-divisor",
+                 "oscillator",
+                 "non-unit",
+                 "undecided",
+                 "constructive",
+                 "no-classic",
+                 "one-root-three-forms",
+                 "vein-E"
+             ],
+    "notes":  "Qed drift: STATUS-шапка указывает 10 Qed, фактический счёт 'Qed.' = 11. 0 Admitted, 0 собственных Axiom/Parameter. germ-операции реплицированы локально (Stdlib only); Derivative/HyperfiniteSum/IllusoryConstructions — цитаты в шапке, не импорты."
+},
+{
+    "num":  1902,
+    "path":  "src/nonstandard/RoleLimitIsP1Shadow.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "Lawvere's fixed-point theorem and its corollaries Cantor (no surjection onto the powerset) and Russell (no naive comprehension) are all classical (Lawvere 1969); the concrete ToS P1 (no x in x in the Level hierarchy, russell_paradox_blocked) lives in Core_ERR and is only CITED here. NEW is only the framing observation: that role-limit's seed `negb` is the shadow of forbidden self-membership, so Cantor and Russell are two instances of ONE Lawvere/negb root that P1 constructively tames.",
+    "title":  "Root of the arc: the role-limit seed `negb` = shadow of P1 self-membership; one Lawvere theorem yields Cantor AND Russell",
+    "topic":  "Proves Lawvere's fixed-point theorem (point-surjective g forces every f:B->B to have a fixed point) and derives, from the single anti-fixed-point negb, both Cantor (no point-surjective nat -> (nat -> bool), i.e. 2^N uncountable) and Russell (no point-surjective membership, i.e. naive comprehension impossible = what P1 blocks).",
+    "role":  "Declared root (D) of the nonstandard arc's far side: one negb seed unifies counting (Cantor), membership (Russell/P1), measure (ultrafilter-prime, B1) and algebra (zero divisor, A1). Self-contained (no Require). Cites Core_ERR (russell_paradox_blocked), SeedDiagonalBridge (B2), ProcessDiagonal. Capstone-level framing file.",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "(none — self-contained in Coq prelude: bool/negb/nat/f_equal)"
+                ],
+    "err":  {
+                "elements":  "Type X/B; bool и negb; предикат point_surjective; mem (членство X -> (X -> bool)).",
+                "roles":  "negb = семя / анти-неподвижность; point_surjective = тотализация (сюръекция / компрегензия); Ловер = генератор no-go.",
+                "rules":  "Ловер: point_surjective g ⟹ всякая f имеет неподвижную точку; negb b ≠ b ⟹ нет сюръекции (Кантор) и нет компрегензии (Рассел=P1).",
+                "p4":  "конструктивно (Ловер = явная диагональ h=λy.f(g y y), f_equal по точке x; negb b ≠ b — destruct b) ⟹ 0 аксиом. role-limit-семя negb = тень запрещённого самочленства; P1 ядра (нет x∈x) = его конструктивное укрощение на уровне членства."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "negb_no_fixpoint",
+                       "kind":  "Lemma",
+                       "role":  "negb b ≠ b — семя/анти-неподвижная точка (destruct b)"
+                   },
+                   {
+                       "name":  "point_surjective",
+                       "kind":  "Definition",
+                       "role":  "g : X -> (X -> B) точечно-сюръективна: всякая h есть g x"
+                   },
+                   {
+                       "name":  "lawvere",
+                       "kind":  "Theorem",
+                       "role":  "★ Ловер: point_surjective g ⟹ всякая f:B->B имеет неподвижную точку (явная диагональ)"
+                   },
+                   {
+                       "name":  "no_fixpoint_no_pointsurjective",
+                       "kind":  "Lemma",
+                       "role":  "контрапозиция: f без неподвижной точки ⟹ нет точечно-сюръективной g"
+                   },
+                   {
+                       "name":  "cantor_uncountable",
+                       "kind":  "Corollary",
+                       "role":  "★ Кантор: нет точечно-сюръективной ℕ → (ℕ → bool); 2^ℕ несчётно"
+                   },
+                   {
+                       "name":  "russell_no_comprehension",
+                       "kind":  "Corollary",
+                       "role":  "★ Рассел: нет точечно-сюръективного mem; наивная компрегензия невозможна (= то, что укрощает P1)"
+                   },
+                   {
+                       "name":  "rolelimit_is_p1_shadow",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: Ловер ∧ negb≠ ∧ Кантор ∧ Рассел — один negb-корень"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "lawvere",
+                           "analysis":  "Подлинная теорема Ловера о неподвижной точке, машинно и без аксиом: диагональ h = λy.f(g y y) реализуется некоторым x (точечная сюръективность), и f_equal по точке x даёт g x x = f(g x x). Это извлечённый общий двигатель — Кантор и Рассел получаются как контрапозиции с f = negb, а не передоказываются. Классика (Lawvere 1969); ценность файла — что её корень = ОДНО семя negb.",
+                           "tags":  [
+                                        "lawvere",
+                                        "fixed-point",
+                                        "diagonal",
+                                        "engine"
+                                    ]
+                       },
+                       {
+                           "name":  "rolelimit_is_p1_shadow",
+                           "analysis":  "Капстоун-наблюдение всей дальней стороны границы: ОДНА теорема Ловера + negb порождает Кантор (счёт) И Рассел (членство), а тот же negb (по цитате) даёт ультрафильтр-prime (B1) и делитель нуля (A1). Рассел = ровно то, что блокирует P1 (нет x∈x), поэтому role-limit-семя = тень запрещённого самочленства, а P1 ядра ToS = его конструктивное укрощение. Уровень — new-framing: каждый кирпич классичен, ново сведение в одну ось + связь с ToS-P1.",
+                           "tags":  [
+                                        "synthesis",
+                                        "p1",
+                                        "negb",
+                                        "shadow",
+                                        "unification"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Role-limit-семя negb переосмыслено как тень запрещённого самочленства P1: одна теорема Ловера + negb даёт Кантор (счёт) и Рассел (членство), а P1 ядра ToS = его конструктивное укрощение; та же карта negb связывает меру (B1) и алгебру (A1).",
+                       "caveat":  "Ловер / Кантор / Рассел — КЛАССИКА (переинстанцированы, НЕ новые теоремы). ToS-конкретный P1 (нет x∈x) и russell_paradox_blocked — ЦИТАТА к Core_ERR (ядро не правится). Ультрафильтр-prime (B1) и делитель нуля (A1) — другие armы, лишь упомянуты. Genuine-новое = только обрамляющее наблюдение об одном negb-корне."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "lawvere",
+                 "diagonal",
+                 "cantor",
+                 "russell",
+                 "P1",
+                 "negb",
+                 "role-limit",
+                 "vein-E",
+                 "synthesis"
+             ]
+},
+{
+    "num":  1903,
+    "path":  "src/nonstandard/SeedDiagonalBridge.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "Cantor's diagonal (no surjection nat -> 2^N), the complement-respecting ('prime') property of a two-valued ultrafilter (Stone), and the indicator zero-divisor are each standard; NEW is only proving constructively that the single anti-fixed-point involution `negb` GENERATES all three (logic/count, measure, algebra), tying the H71 diagonal to B1 (measure) and A1 (algebra) through one map — explicitly REFUSING the false label 'undecided = diagonal'.",
+    "title":  "Bridge B2: `negb` as the common complement-structure generating three role-limit phenomena (Cantor / ultrafilter-prime / zero-divisor)",
+    "topic":  "Takes the anti-fixed-point involution negb (the engine of Lawvere's diagonal, H71) and machine-derives three role-limit phenomena from negb b <> b: Cantor's no-surjection (uncountability), the ultrafilter-prime distinctness m S <> m(not S), and the complement zero-divisor ind S * ind(not S) ~ 0 over the germ ring.",
+    "role":  "Bridge node (B2) of the nonstandard arc: declared seed-supplier whose negb feeds the root RoleLimitIsP1Shadow (D) and the measure bridge SeedMeasureBridge (B1). Imports QArith/Arith/Lqa only; cites H71 FixedPointTaxonomy and ProcessDiagonal. Honesty-anchored: rejects 'undecided = diagonal'.",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Arith Lqa"
+                ],
+    "err":  {
+                "elements":  "bool и negb; множества nat→bool; is_uf_measure; ind / germ GProc (nat→Q).",
+                "roles":  "negb = семя / анти-неподвижность; комплемент = flip; prime / zero-product / no-surjection = три проявления одного семени.",
+                "rules":  "negb b ≠ b; Кантор (нет сюръекции ℕ→2^ℕ); prime m S ≠ m ¬S (ВЫВЕДЕНО из negb); ind S · ind ¬S ~ 0 (из negb-дизъюнктности).",
+                "p4":  "конструктивно (negb destruct; диагональ выписана явно; prime и zero-product выведены из negb_no_fixpoint, без classic) ⟹ 0 аксиом. ЧЕСТНО: НЕ «undecided = диагональ» (разные объекты — отвергнуто); negb = общая комплемент-структура, доказано порождающая три."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "negb_no_fixpoint",
+                       "kind":  "Lemma",
+                       "role":  "negb b ≠ b — семя диагонали/Кантора/Рассела/halting (destruct b)"
+                   },
+                   {
+                       "name":  "negb_invol",
+                       "kind":  "Lemma",
+                       "role":  "negb (negb b) = b — инволюция (комплемент дважды = тождество)"
+                   },
+                   {
+                       "name":  "cantor_no_surjection",
+                       "kind":  "Lemma",
+                       "role":  "★ арм 1 (счёт): диагональ d=λk.negb(e k k) отличается от каждой строки ⟹ нет сюръекции ℕ→2^ℕ"
+                   },
+                   {
+                       "name":  "is_uf_measure",
+                       "kind":  "Definition",
+                       "role":  "ультрафильтр как 2-значная комплемент-уважающая мера (реплик. из B1)"
+                   },
+                   {
+                       "name":  "uf_complement_distinct",
+                       "kind":  "Lemma",
+                       "role":  "★ арм 2 (мера): m S ≠ m ¬S — ВЫВЕДЕНО из negb b ≠ b (prime ультрафильтра)"
+                   },
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "germ-процесс nat→Q (реплик.)"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "Фреше-эквивалентность: совпадение на коконечном хвосте"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное произведение germ-процессов"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "постоянный germ-процесс"
+                   },
+                   {
+                       "name":  "ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор множества S как germ-процесс (1/0)"
+                   },
+                   {
+                       "name":  "complement_product_zero",
+                       "kind":  "Lemma",
+                       "role":  "★ арм 3 (алгебра): ind S · ind ¬S ~ 0 — negb-дизъюнктность даёт делитель нуля"
+                   },
+                   {
+                       "name":  "seed_diagonal_bridge",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: одно семя negb — три role-limit-явления + инволюция"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "seed_diagonal_bridge",
+                           "analysis":  "Капстоун-мост: ОДНА анти-неподвижная карта negb машинно порождает ТРИ role-limit-явления — Кантор (нет сюръекции ℕ→2^ℕ), prime ультрафильтра (m S ≠ m ¬S), делитель нуля (ind S · ind ¬S ~ 0) — связывая H71 (диагональ) ↔ B1 (мера) ↔ A1 (алгебра) через одну карту. Genuine именно потому, что это ВЫВОД (три арма доказаны из negb_no_fixpoint), а НЕ ярлык: файл явно отвергает ложное «undecided = диагональ» (разные объекты).",
+                           "tags":  [
+                                        "negb",
+                                        "bridge",
+                                        "three-arms",
+                                        "synthesis",
+                                        "honesty"
+                                    ]
+                       },
+                       {
+                           "name":  "uf_complement_distinct",
+                           "analysis":  "Арм меры: prime-свойство ультрафильтра m S ≠ m ¬S выведено напрямую из negb b ≠ b через комплемент-уважение (m ¬S = negb (m S)). Показывает, что 2-значная мера наследует анти-неподвижность negb — множество и его дополнение никогда не имеют одну меру. Классический факт (Stone), но здесь подан как инстанс того же negb, что в Канторе.",
+                           "tags":  [
+                                        "measure",
+                                        "ultrafilter",
+                                        "prime",
+                                        "negb"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Машинно доказано, что одна анти-неподвижная инволюция negb порождает три role-limit-явления (Кантор-несчётность, prime ультрафильтра, делитель нуля), связывая логику/счёт ↔ меру ↔ алгебру через одну карту; честно отвергает ложное отождествление undecided=диагональ.",
+                       "caveat":  "Каждое из трёх явлений классично (диагональ Кантора, prime-ультрафильтр/Stone, индикатор-делитель). Ново — обрамление «одно семя negb» как ВЫВОД, а не ярлык. H71 и ProcessDiagonal лишь цитируются. STATUS-заголовок завышает: 7 Qed против фактических 6 (drift)."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "negb",
+                 "diagonal",
+                 "cantor",
+                 "ultrafilter",
+                 "zero-divisor",
+                 "bridge",
+                 "role-limit",
+                 "vein-E",
+                 "synthesis"
+             ],
+    "notes":  "DRIFT: STATUS header says '7 Qed', actual Qed. count = 6 (одна из 5 веток капстоуна — это Definition, не Qed). Catalogued with actual 6."
+},
+{
+    "num":  1904,
+    "path":  "src/nonstandard/SeedMeasureBridge.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "The identification 'ultrafilter = two-valued finitely-additive measure' (Stone) and the Frechet (cofinite/finite) premeasure are standard; NEW is only the framing that an undecided set is exactly what the canonical two-valued Frechet premeasure leaves undetermined, with the honest correction that the naive 'undecided <-> non-measurable' bridge is FALSE (Evens is density-1/2-measurable).",
+    "title":  "Bridge B1: undecided set = what the two-valued Frechet premeasure leaves undetermined; ultrafilter (= two-valued FA measure) resolves it",
+    "topic":  "Defines cofinite/finite/cofinal/undecided sets and proves (only the forward direction, constructively) that an undecided S is neither cofinite nor finite — so the canonical two-valued Frechet premeasure fixes neither 1 nor 0 — while any two-valued complement-respecting (ultrafilter) measure is prime and thus totalizes the open case. Evens is the canonical witness.",
+    "role":  "Measure node (B1) of the nonstandard arc: receives the negb seed from SeedDiagonalBridge (B2), supplies the measure face of the one-object filter=measure=algebra picture. Imports Arith/Lia only; cites A1 (UnitZeroDivisorBoundary), synthesis XVIII, Stone. Honesty-anchored: naive non-measurability bridge rejected.",
+    "qed":  10,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "множества nat→bool; cofinite / finite / cofinal / undecided; is_uf_measure; evens.",
+                "roles":  "undecided = неопределённость 2-знач. премеры; uf-мера = тотализация (ультрафильтр); cofinite / finite = определённые премерой.",
+                "rules":  "undecided S ⟹ ~cofinite S ∧ ~finite S; uf-мера прайм (m S = 1 ∨ m ¬S = 1); forced на cofinite/finite, free на undecided.",
+                "p4":  "конструктивно (undecided определён ПОЗИТИВНО как cofinal S ∧ cofinal ¬S, поэтому → направление без classic) ⟹ 0 аксиом. ЧЕСТНО: обратное (undetermined ⟹ undecided) нужен classic/DNE; density-1/2 = вещ. мера (Element); ровно 2-значная uf-мера = role-limit (AC, НЕ ассертим); наивный мост «undecided↔неизмеримое» отвергнут (Evens — контрпример)."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "cofinite",
+                       "kind":  "Definition",
+                       "role":  "S истинно на всём хвосте (Фреше-премера ↦ 1)"
+                   },
+                   {
+                       "name":  "finite",
+                       "kind":  "Definition",
+                       "role":  "S ложно на всём хвосте (Фреше-премера ↦ 0)"
+                   },
+                   {
+                       "name":  "cofinal",
+                       "kind":  "Definition",
+                       "role":  "S истинно бесконечно часто (позитивно, конструктивно)"
+                   },
+                   {
+                       "name":  "undecided",
+                       "kind":  "Definition",
+                       "role":  "★ и S, и ¬S истинны бесконечно часто (Фреше не решает)"
+                   },
+                   {
+                       "name":  "evens",
+                       "kind":  "Definition",
+                       "role":  "чётные — каноническое неразрешённое множество"
+                   },
+                   {
+                       "name":  "is_uf_measure",
+                       "kind":  "Definition",
+                       "role":  "ультрафильтр как 2-знач. мера: содержит ℕ, прайм, монотонна (Stone)"
+                   },
+                   {
+                       "name":  "cofinal_evens",
+                       "kind":  "Lemma",
+                       "role":  "чётные бесконечно часто (свидетель 2N)"
+                   },
+                   {
+                       "name":  "cofinal_odds",
+                       "kind":  "Lemma",
+                       "role":  "нечётные бесконечно часто (свидетель 2N+1)"
+                   },
+                   {
+                       "name":  "undecided_evens",
+                       "kind":  "Lemma",
+                       "role":  "Evens — undecided (семя)"
+                   },
+                   {
+                       "name":  "undecided_not_cofinite",
+                       "kind":  "Lemma",
+                       "role":  "undecided S ⟹ S не коконечно (премера не ↦ 1)"
+                   },
+                   {
+                       "name":  "undecided_not_finite",
+                       "kind":  "Lemma",
+                       "role":  "undecided S ⟹ S не конечно (премера не ↦ 0)"
+                   },
+                   {
+                       "name":  "undecided_premeasure_undetermined",
+                       "kind":  "Lemma",
+                       "role":  "★ undecided S ⟹ 2-знач. Фреше-премера оставляет S неопределённым (ни 1, ни 0)"
+                   },
+                   {
+                       "name":  "evens_premeasure_undetermined",
+                       "kind":  "Lemma",
+                       "role":  "анкер: премера не определяет Evens"
+                   },
+                   {
+                       "name":  "uf_measure_prime",
+                       "kind":  "Lemma",
+                       "role":  "★ 2-знач. uf-мера прайм: ровно одно из S, ¬S имеет меру 1"
+                   },
+                   {
+                       "name":  "uf_measure_resolves_undecided",
+                       "kind":  "Theorem",
+                       "role":  "★ uf-мера разрешает undecided S — выбор role-limit"
+                   },
+                   {
+                       "name":  "seed_measure_bridge",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: undecided → премера-undetermined; uf-мера resolves; один объект — фильтр/мера/алгебра"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "undecided_premeasure_undetermined",
+                           "analysis":  "Ядро моста, доказано конструктивно благодаря ПОЗИТИВНОМУ определению undecided (cofinal S ∧ cofinal ¬S): прямое противоречие cofinal с eventually-true/false даёт ~cofinite ∧ ~finite без classic. Это Element-сторона честности — только → направление; обратное undetermined ⟹ undecided требует classic/DNE и явно НЕ доказывается. Стандартное содержание (Фреше-фильтр), ценность — точная формулировка undecided как недоопределённости премеры.",
+                           "tags":  [
+                                        "undecided",
+                                        "premeasure",
+                                        "frechet",
+                                        "constructive",
+                                        "directional"
+                                    ]
+                       },
+                       {
+                           "name":  "uf_measure_resolves_undecided",
+                           "analysis":  "role-limit-сторона: любая 2-значная комплемент-уважающая мера (= ультрафильтр, Stone) прайм, поэтому тотализует то, что Фреше-премера оставила открытым — m S = 1 ∨ m ¬S = 1. Честно: СУЩЕСТВОВАНИЕ нетривиальной такой меры = фрагмент AC и НЕ ассертится (лемма условна на is_uf_measure m). Это даёт «один объект, три вида»: фильтр (undecided) / мера (ультрафильтр) / алгебра (делитель нуля A1).",
+                           "tags":  [
+                                        "ultrafilter",
+                                        "prime",
+                                        "resolve",
+                                        "AC",
+                                        "role-limit"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Undecided множество переосмыслено как ровно то, что каноническая 2-значная Фреше-премера оставляет неопределённым, а ультрафильтр (= 2-знач. FA-мера, Stone) его тотализует; объединяет фильтр/меру/алгебру в один объект.",
+                       "caveat":  "ultrafilter=2-значная мера (Stone) и Фреше-премера — КЛАССИКА; ново только обрамление undecided↔премера. Честные пробелы: обратное направление нужен classic; существование uf-меры = AC (не ассертим); наивный мост undecided↔неизмеримое ОТВЕРГНУТ (Evens density-1/2 — контрпример). A1/синтез XVIII — цитаты."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "ultrafilter",
+                 "measure",
+                 "frechet",
+                 "undecided",
+                 "stone",
+                 "no-AC",
+                 "role-limit",
+                 "new-framing"
+             ]
+},
+{
+    "num":  1905,
+    "path":  "src/nonstandard/StandardPart.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "The standard part (shadow) st of nonstandard analysis is total on finite hyperreals precisely BECAUSE an ultrafilter picks the subsequential limit (Robinson NSA); over Q-Cauchy the general st-into-RealProcess is CauchyReal.v's business (cited). NEW is only the framing: st is a PARTIAL function whose partiality (no shadow for the bounded-divergent oscillator alt) IS the finitization boundary H1 in 'shadow' form, plus the machine bridge alt = even_ind - odd_ind to the zero-divisor.",
+    "title":  "Standard part (shadow) as a PARTIAL function: total on convergent (Element), undefined on bounded-divergent (role-limit); witness alt=(-1)^n",
+    "topic":  "Defines convergence/Cauchy/bounded two-sidedly over germ processes nat->Q and proves the shadow is unique where it exists (L5 determinism) and total on constants, but the oscillator alt(n)=(-1)^n is bounded yet not Cauchy and has NO shadow — mod 'Evens big' its shadow is 1, mod 'Odds big' it is -1 (two incompatible values => ultrafilter/role-limit). Bridges alt = even_ind - odd_ind to the zero-divisor.",
+    "role":  "Part XVIII Batch A file (after GermInfinitesimal, UltrafilterRoleLimit): supplies the additive face (no shadow) of the same Evens/Odds split whose multiplicative face is the zero-divisor. Imports QArith/Arith/Lqa; cites UltrafilterRoleLimit, GermInfinitesimal, CauchyReal, RoleLimitLadder.",
+    "qed":  12,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Arith Lia Lqa"
+                ],
+    "err":  {
+                "elements":  "GProc = nat→Q; converges / is_cauchy / bounded (двусторонние, чисто линейные lra); alt = (−1)ⁿ; even_ind / odd_ind; gconst.",
+                "roles":  "germ = процесс; тень = роль-стандартное-значение; сходимость = роль-Коши; alt = роль-осциллятор / свидетель.",
+                "rules":  "st однозначна где есть (L5-детерминизм); тотальна на сходящихся (Element), нет на огранич.-расходящихся (role-limit); alt — два несовместимых значения тени ±1; alt = even_ind − odd_ind.",
+                "p4":  "всё конечно-глубинно по координате (Element); единственный role-limit — тень огранич.-расходящегося (выбор подпоследовательности / ультрафильтр), НЕ ассертим, ибо у alt два значения. Двусторонняя сходимость выбрана сознательно (линейна, lra, без Qabs). st в RealProcess для общего Коши-germ = цитата к CauchyReal."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "germ-процесс nat→Q"
+                   },
+                   {
+                       "name":  "converges",
+                       "kind":  "Definition",
+                       "role":  "сходимость к рац. L (двусторонне: −eps < xₙ−L < eps)"
+                   },
+                   {
+                       "name":  "has_shadow",
+                       "kind":  "Definition",
+                       "role":  "у x есть тень: ∃ L, converges x L"
+                   },
+                   {
+                       "name":  "is_cauchy",
+                       "kind":  "Definition",
+                       "role":  "свойство Коши (двусторонне)"
+                   },
+                   {
+                       "name":  "bounded",
+                       "kind":  "Definition",
+                       "role":  "ограниченность (двусторонне)"
+                   },
+                   {
+                       "name":  "alt",
+                       "kind":  "Definition",
+                       "role":  "★ осциллятор alt(n) = (−1)ⁿ — канонический свидетель"
+                   },
+                   {
+                       "name":  "even_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор чётных (1 на чётных)"
+                   },
+                   {
+                       "name":  "odd_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор нечётных (1 на нечётных)"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "постоянный процесс"
+                   },
+                   {
+                       "name":  "geq_on_evens",
+                       "kind":  "Definition",
+                       "role":  "равенство на хвосте ВНУТРИ чётных (= «Evens велико»)"
+                   },
+                   {
+                       "name":  "geq_on_odds",
+                       "kind":  "Definition",
+                       "role":  "равенство на хвосте ВНУТРИ нечётных (= «Odds велико»)"
+                   },
+                   {
+                       "name":  "small_two_sided",
+                       "kind":  "Lemma",
+                       "role":  "зажим: окрестность 0 для всех eps ⟹ значение нуль (lra)"
+                   },
+                   {
+                       "name":  "shadow_unique",
+                       "kind":  "Lemma",
+                       "role":  "★ тень единственна (стандартная часть корректно определена где есть, L5)"
+                   },
+                   {
+                       "name":  "const_has_shadow",
+                       "kind":  "Lemma",
+                       "role":  "Element: константы имеют тень"
+                   },
+                   {
+                       "name":  "alt_even",
+                       "kind":  "Lemma",
+                       "role":  "alt n = 1 на чётных"
+                   },
+                   {
+                       "name":  "alt_odd",
+                       "kind":  "Lemma",
+                       "role":  "alt n = −1 на нечётных"
+                   },
+                   {
+                       "name":  "alt_bounded",
+                       "kind":  "Lemma",
+                       "role":  "alt ограничен: −1 ≤ alt n ≤ 1"
+                   },
+                   {
+                       "name":  "alt_not_cauchy",
+                       "kind":  "Lemma",
+                       "role":  "alt НЕ Коши (соседние чёт/нечёт отличаются на 2)"
+                   },
+                   {
+                       "name":  "no_shadow_for_alt",
+                       "kind":  "Lemma",
+                       "role":  "★★ alt НЕ имеет тени (L должна лежать и в (0,2), и в (−2,0))"
+                   },
+                   {
+                       "name":  "alt_shadow_mod_evens",
+                       "kind":  "Lemma",
+                       "role":  "★ mod «Evens велико» тень alt = 1"
+                   },
+                   {
+                       "name":  "alt_shadow_mod_odds",
+                       "kind":  "Lemma",
+                       "role":  "★ mod «Odds велико» тень alt = −1"
+                   },
+                   {
+                       "name":  "alt_decomp",
+                       "kind":  "Lemma",
+                       "role":  "★ машинный мост: alt = even_ind − odd_ind (аддитивный след того же раскола, что делитель нуля)"
+                   },
+                   {
+                       "name":  "standard_part_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: единственность + тень констант + полная частичность на alt"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "no_shadow_for_alt",
+                           "analysis":  "Главный role-limit-результат: осциллятор alt = (−1)ⁿ ограничен, но не имеет тени — предполагаемое L при eps=1 обязано лежать одновременно в (0,2) (из чётных значений +1) и в (−2,0) (из нечётных −1), что противоречиво (lra). Это конкретный машинный свидетель того, что st ЧАСТИЧНА, а частичность = граница финитизации H1 в форме «тень»: bounded-divergent требует внешнего выбора подпоследовательности.",
+                           "tags":  [
+                                        "shadow",
+                                        "role-limit",
+                                        "oscillator",
+                                        "partiality",
+                                        "H1"
+                                    ]
+                       },
+                       {
+                           "name":  "alt_decomp",
+                           "analysis":  "Машинный мост к UltrafilterRoleLimit: alt = even_ind − odd_ind, т.е. осциллятор без тени = РАЗНОСТЬ тех же двух индикаторов, чьё ПРОИЗВЕДЕНИЕ — делитель нуля. Один и тот же неразрешённый раскол Evens/Odds проявляется дважды — аддитивно (нет тени) и мультипликативно (делитель нуля). Та же граница в двух алгебраических формах — это и есть genuine-связка файла.",
+                           "tags":  [
+                                        "bridge",
+                                        "decomposition",
+                                        "evens-odds",
+                                        "zero-divisor",
+                                        "synthesis"
+                                    ]
+                       },
+                       {
+                           "name":  "shadow_unique",
+                           "analysis":  "Element-сторона / L5-детерминизм: где тень существует, она единственна (два предела сходящегося процесса равны через зажим small_two_sided на L1−L2). Стандартная единственность предела, поданная как корректная определённость стандартной части на сходящихся; контраст к частичности на alt.",
+                           "tags":  [
+                                        "uniqueness",
+                                        "L5",
+                                        "convergence",
+                                        "element"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Стандартная часть (тень) подана как ЧАСТИЧНАЯ функция над germ-процессами: тотальна и единственна на сходящихся (Element), не определена на ограниченно-расходящемся alt (role-limit, два несовместимых значения ±1), с машинным мостом alt = even_ind − odd_ind к делителю нуля.",
+                       "caveat":  "st нонстандартного анализа и его тотальность через ультрафильтр — КЛАССИКА (Robinson); st-в-RealProcess для общего Коши-germ = ЦИТАТА к CauchyReal (не передоказывается). Ново только обрамление частичности как границы H1 + аддитивно-мультипликативный мост. Финитно/конкретно: один свидетель alt."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "standard-part",
+                 "shadow",
+                 "infinitesimal",
+                 "partial-function",
+                 "ultrafilter",
+                 "evens-odds",
+                 "role-limit",
+                 "H1",
+                 "new-framing"
+             ]
+},
+{
+    "num":  1906,
+    "path":  "src/nonstandard/UltrafilterRoleLimit.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "The germ ring Q^N/Frechet having zero divisors (so not a field), the ultrafilter completing it to a field, and the Henson-Keisler conservativity of the *R product are all classical NSA; NEW is only recasting the zero divisor as a MACHINE CERTIFICATE of the absent ultrafilter — proving the obstruction localizes to exactly one undecided set (Evens) whose two free resolutions (unit vs zero) are non-canonical => verdict 'ultrafilter = role-limit'.",
+    "title":  "Machine certificate: ultrafilter = role-limit, not Element-truth — germ ring not a field + localized non-canonical resolution",
+    "topic":  "Over the replicated Frechet germ ring Q^N/Frechet proves even_ind*odd_ind ~ 0, then the no-go (even_ind is non-zero but non-invertible, so the ring is NOT a field), then LOCALIZES the whole obstruction to one undecided set: declaring 'Evens big' makes even_ind a unit (its own inverse), declaring 'Odds big' makes it zero — one element, two opposite fates => non-canonical => role-limit.",
+    "role":  "Anchor file of the nonstandard arc (Part XVIII Batch A): extracts the ontological verdict from GermInfinitesimal's zero_divisors_exist. Feeds StandardPart (same Evens/Odds split) and the seed bridges. Imports QArith/Arith/Lqa; cites GermInfinitesimal, RoleLimitLadder, ZFCAxiomLedger, Henson-Keisler.",
+    "qed":  8,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Arith Lia Lqa"
+                ],
+    "err":  {
+                "elements":  "GProc = nat→Q; even_ind / odd_ind; geq (Фреше), geq_on_evens / geq_on_odds (уточн. фильтры); gmul / gconst.",
+                "roles":  "even_ind = роль-индикатор Evens; обратимость = роль-единица; фильтр = роль-решатель; ультрафильтр = тотальный решатель (role-limit); делитель нуля = роль-препятствие / след.",
+                "rules":  "germ-кольцо Фреше НЕ поле (∃ ненулевой необратимый); препятствие = Evens; mod Evens — единица, mod Odds — нуль.",
+                "p4":  "всё конечно-глубинно по координате ⟹ Element; единственный role-limit — тотальное решение (ультрафильтр), НЕ ассертим: предъявляем необходимость (no-go) и неканоничность (два разрешения). ЧЕСТНО: консервативность Хенсона–Кейслера и общий no-go = цитаты/экстраполяция; доказано для КАНОНИЧЕСКОЙ конструкции Фреше."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "germ-процесс nat→Q (реплик. из GermInfinitesimal)"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное произведение"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "постоянный germ-процесс"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "Фреше-эквивалентность (совпадение на коконечном хвосте)"
+                   },
+                   {
+                       "name":  "g_invertible",
+                       "kind":  "Definition",
+                       "role":  "обратимость mod Фреше: ∃ обратный"
+                   },
+                   {
+                       "name":  "even_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор чётных (тот же делитель нуля, что в GermInfinitesimal)"
+                   },
+                   {
+                       "name":  "odd_ind",
+                       "kind":  "Definition",
+                       "role":  "индикатор нечётных"
+                   },
+                   {
+                       "name":  "geq_on_evens",
+                       "kind":  "Definition",
+                       "role":  "равенство на хвосте ВНУТРИ чётных (= «Evens велико»)"
+                   },
+                   {
+                       "name":  "geq_on_odds",
+                       "kind":  "Definition",
+                       "role":  "равенство на хвосте ВНУТРИ нечётных (= «Odds велико»)"
+                   },
+                   {
+                       "name":  "even_times_odd_zero",
+                       "kind":  "Lemma",
+                       "role":  "анкер: even_ind · odd_ind ~ 0 (поточечно ноль)"
+                   },
+                   {
+                       "name":  "even_ind_not_zero",
+                       "kind":  "Lemma",
+                       "role":  "even_ind ≁ 0 mod Фреше (значение 1 на каждой чётной точке хвоста)"
+                   },
+                   {
+                       "name":  "even_ind_not_invertible",
+                       "kind":  "Lemma",
+                       "role":  "★★ NO-GO-ядро: even_ind необратим (обратный = 1/0 на нечётных)"
+                   },
+                   {
+                       "name":  "germ_ring_not_field",
+                       "kind":  "Theorem",
+                       "role":  "★ germ-кольцо Фреше НЕ поле: ∃ ненулевой необратимый"
+                   },
+                   {
+                       "name":  "even_ind_invertible_mod_evens",
+                       "kind":  "Lemma",
+                       "role":  "★ mod «Evens велико» even_ind = единица (сам себе обратный)"
+                   },
+                   {
+                       "name":  "even_ind_zero_mod_odds",
+                       "kind":  "Lemma",
+                       "role":  "★ mod «Odds велико» тот же even_ind = нуль"
+                   },
+                   {
+                       "name":  "ultrafilter_decision_required",
+                       "kind":  "Theorem",
+                       "role":  "★ неканоничность: один элемент — единица при Evens, нуль при Odds"
+                   },
+                   {
+                       "name":  "ultrafilter_role_limit_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун-вердикт: no-go + локализация + неканоничность = role-limit"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "germ_ring_not_field",
+                           "analysis":  "Машинное no-go: even_ind ненулевой mod Фреше (значение 1 на чётном хвосте), но необратим — обратный был бы 1/even_ind = 1/0 на нечётных индексах (свидетель n=2N+1 даёт 0·y=1, ложь). Значит germ-кольцо ℚ^ℕ/Фреше не поле. Классический факт (germ ring has zero divisors), но здесь подан как сертификат ОТСУТСТВУЮЩЕГО ультрафильтра, а не курьёз.",
+                           "tags":  [
+                                        "no-go",
+                                        "germ-ring",
+                                        "not-field",
+                                        "zero-divisor"
+                                    ]
+                       },
+                       {
+                           "name":  "ultrafilter_decision_required",
+                           "analysis":  "Сердце вердикта: ВСЁ препятствие локализуется в одно неразрешённое множество Evens. Объяви «Evens велико» — even_ind становится единицей (even_ind·even_ind=1 на чётных); объяви «Odds велико» — тот же even_ind становится нулём. Один элемент, две противоположные судьбы от свободного решения ⟹ канонического значения НЕТ ⟹ ультрафильтр лежит на role-limit-стороне (фрагмент AC, строго НАД лестницей LLPO⊏WLPO⊏LPO). Genuine-перевод концептуального вердикта в машинную локализацию.",
+                           "tags":  [
+                                        "localization",
+                                        "non-canonical",
+                                        "evens-odds",
+                                        "role-limit",
+                                        "AC"
+                                    ]
+                       },
+                       {
+                           "name":  "ultrafilter_role_limit_summary",
+                           "analysis":  "Капстоун, собирающий три кирпича: no-go (не поле) + локализация (препятствие = Evens) + неканоничность (Evens→единица, Odds→нуль). Делитель нуля = машинный СЛЕД отсутствующего ультрафильтра. Файл явно НЕ опровергает аксиому ультрафильтра (консистентна, независима в ZF) — он предъявляет ровно то препятствие, которое она латает, и доказывает неканоничность латания.",
+                           "tags":  [
+                                        "capstone",
+                                        "verdict",
+                                        "role-limit",
+                                        "honesty"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Делитель нуля germ-кольца Фреше переведён в машинное СВИДЕТЕЛЬСТВО того, что ультрафильтр = role-limit, а не Element-истина: no-go (не поле) + локализация всего препятствия в одно неразрешённое множество Evens + неканоничность его разрешения (единица mod Evens, нуль mod Odds).",
+                       "caveat":  "germ-кольцо с делителями нуля, ультрафильтр-как-поле-пополнение и консервативность *ℝ (Хенсон–Кейслер) — КЛАССИКА NSA. Консервативность и общий «никакой выбор-свободный фактор ℚ^ℕ не поле» = ЦИТАТЫ/честная экстраполяция (доказано лишь для канонической конструкции Фреше). СУЩЕСТВОВАНИЕ ультрафильтра (AC) НЕ ассертится и НЕ опровергается. Ново — машинная локализация + вердикт, не теорема NSA."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "ultrafilter",
+                 "germ-ring",
+                 "zero-divisor",
+                 "not-field",
+                 "evens-odds",
+                 "role-limit",
+                 "no-AC",
+                 "vein-C",
+                 "synthesis"
+             ]
+},
+{
+    "num":  1907,
+    "path":  "src/nonstandard/UndecidedHierarchy.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "The membership/value distinction is classical recursion theory: a decidable predicate (nat->bool) can still have an undecidable totalisation — the canonical instance is LPO (Limited Principle of Omniscience, Bishop), the constructively-unprovable 'is this sequence eventually 0 / infinitely often 1', distinct from Turing-undecidability of halting. NEW is only re-casting these two known frontiers as a STRATIFIED 'far side' of the ToS finitization boundary (membership=Turing axis vs magnitude=LPO axis) and the anchor observation that evens has decidable membership yet undecided magnitude.",
+    "title":  "The far side of the boundary is GRADED, not binary: membership (Turing) axis vs magnitude (LPO) axis",
+    "topic":  "Over nat->bool sets, separates two undecidability axes — membership (is n in S, Turing) and magnitude (is S 'large', LPO) — and proves every nat->bool set has decidable membership while evens is undecided-in-magnitude (cofinal both ways) and singleton {0} is finite; so role-limit-ness of evens lives in the TOTALISATION, not the set.",
+    "role":  "C-direction refinement of the nonstandard boundary arc: shows the role-limit (far) side is stratified into rungs Element (singleton) < LPO-rung (evens) < Turing-rung (halting). Imports only Stdlib (Arith/Lia); the Turing rung is CITED to cs/HaltingRoleLimit, not formalized here. Neighbour of H69 (LPO ladder).",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "множества nat->bool (cofinite/finite/cofinal/undecided); decidable_pred (sumbool в Type); конкретные evens=Nat.even, singleton=Nat.eqb 0.",
+                "roles":  "членство = axis-1 (Тьюринг-ось разрешимости); величина = axis-2 (LPO-ось, велико/мало); рунг = глубина role-limit на дальней стороне границы.",
+                "rules":  "nat->bool ⟹ разрешимое членство (destruct (S n)); evens = разрешимо поэлементно, но undecided величина (cofinal в обе стороны); singleton = разрешимо + конечно (величина решена).",
+                "p4":  "конструктивно (decidable_pred даётся явным destruct; singleton finite предъявлен явно) ⟹ 0 аксиом. ЧЕСТНО: Тьюринг-рунг (halting, неразрешимое членство) — ЦИТАТА, ибо non-computable nat->Prop нельзя предъявить в Coq; genuine = LPO-анкор (role-limit при разрешимом членстве) + наблюдение градации двух фронтиров."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "cofinite",
+                       "kind":  "Definition",
+                       "role":  "S кофинитно: ∃N, на хвосте S n = true"
+                   },
+                   {
+                       "name":  "finite",
+                       "kind":  "Definition",
+                       "role":  "S конечно = дополнение кофинитно"
+                   },
+                   {
+                       "name":  "cofinal",
+                       "kind":  "Definition",
+                       "role":  "S кофинально: ∀N ∃n≥N, S n = true (позитивно, бесконечно часто)"
+                   },
+                   {
+                       "name":  "undecided",
+                       "kind":  "Definition",
+                       "role":  "S undecided = S и дополнение оба кофинальны (величина не решена)"
+                   },
+                   {
+                       "name":  "decidable_pred",
+                       "kind":  "Definition",
+                       "role":  "axis-1: P : nat->Prop разрешим поэлементно (sumbool в Type)"
+                   },
+                   {
+                       "name":  "evens",
+                       "kind":  "Definition",
+                       "role":  "evens n = Nat.even n — LPO-анкор (разрешимое членство, undecided величина)"
+                   },
+                   {
+                       "name":  "singleton",
+                       "kind":  "Definition",
+                       "role":  "singleton n = Nat.eqb n 0 — Element-анкор (конечная величина)"
+                   },
+                   {
+                       "name":  "bool_pred_decidable",
+                       "kind":  "Lemma",
+                       "role":  "★ всякое nat->bool множество имеет разрешимое членство (axis-1 ниже границы)"
+                   },
+                   {
+                       "name":  "cofinal_evens",
+                       "kind":  "Lemma",
+                       "role":  "evens кофинально (свидетель 2N, Nat.even_add_mul_2)"
+                   },
+                   {
+                       "name":  "cofinal_odds",
+                       "kind":  "Lemma",
+                       "role":  "дополнение evens кофинально (свидетель 2N+1)"
+                   },
+                   {
+                       "name":  "undecided_evens",
+                       "kind":  "Lemma",
+                       "role":  "★ evens — undecided ВЕЛИЧИНА (LPO-рунг): обе стороны кофинальны"
+                   },
+                   {
+                       "name":  "singleton_finite",
+                       "kind":  "Lemma",
+                       "role":  "★ singleton {0} конечно — Element (величина решена: мало)"
+                   },
+                   {
+                       "name":  "undecided_hierarchy",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: undecided evens /\\ finite singleton — два фронтира LPO ⊏ Тьюринг"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "bool_pred_decidable",
+                           "analysis":  "Axis-1 фундамент: ЛЮБОЕ nat->bool множество разрешимо поэлементно (тривиальный destruct (S n) с reflexivity/discriminate). Конструктивно, 0 аксиом. Смысл не в трудности (её нет), а в том, что он фиксирует Тьюринг-ось НИЖЕ границы для всех bool-предикатов — тем самым изолируя, что вся role-limit-ность evens приходит со ВТОРОЙ оси (величина), а не с членства. Это разделяющий шаг для всего файла.",
+                           "tags":  [
+                                        "decidable",
+                                        "membership-axis",
+                                        "constructive"
+                                    ]
+                       },
+                       {
+                           "name":  "undecided_evens",
+                           "analysis":  "Генуинный анкер: evens имеет РАЗРЕШИМОЕ членство (Nat.even вычислима, bool_pred_decidable), НО undecided величину — и evens, и нечётные кофинальны, так что Фреше-мера «велико ли» не решается. Это и есть LPO-рунг: классически = LPO (Бишоп), конструктивно непровабельный принцип всеведения. Ключевое наблюдение: role-limit-ность НЕ в множестве (оно вычислимо), а в ТОТАЛИЗАЦИИ. Честно: LPO — известный конструктивный водораздел; ново лишь его размещение как промежуточного рунга между Element и Тьюрингом.",
+                           "tags":  [
+                                        "lpo",
+                                        "totalisation",
+                                        "role-limit",
+                                        "anchor"
+                                    ]
+                       },
+                       {
+                           "name":  "undecided_hierarchy",
+                           "analysis":  "Капстоун-наблюдение (0 аксиом): дальняя сторона границы финитизации НЕ бинарна, а стратифицирована — Element (singleton, конечная величина) ⊏ LPO-рунг (evens, разрешимое членство + undecided величина) ⊏ Тьюринг-рунг (halting, неразрешимое членство, цитата cs/HaltingRoleLimit). evens и singleton различает ВЕЛИЧИНА, не членство. Уровень — new-framing: оба фронтира (LPO и Тьюринг) классичны; ново их сведение в одну градуированную ось role-limit-глубины. Тьюринг-рунг здесь не формализован (non-computable предикат нельзя предъявить в Coq).",
+                           "tags":  [
+                                        "stratification",
+                                        "two-frontiers",
+                                        "capstone",
+                                        "new-framing"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Дальняя (role-limit) сторона границы финитизации стратифицирована по тому, ГДЕ живёт неразрешимость: членство (Тьюринг) vs величина (LPO); машинный анкор — evens разрешимо поэлементно, но undecided в величине, так что role-limit-ность в тотализации, а не в множестве.",
+                       "caveat":  "Оба фронтира классичны: LPO — известный конструктивный принцип (Бишоп), Тьюринг-неразрешимость halting стандартна. Ново только обрамление-градация. Тьюринг-рунг здесь НЕ доказан, а ЦИТИРУЕТСЯ (cs/HaltingRoleLimit; non-computable nat->Prop нельзя предъявить конструктивно в Coq). Genuine-вклад = LPO-анкор + наблюдение двух фронтиров; всё конечно/конструктивно над nat->bool."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "lpo",
+                 "role-limit",
+                 "membership-vs-magnitude",
+                 "stratification",
+                 "finitization-boundary",
+                 "P4",
+                 "constructive"
+             ]
+},
+{
+    "num":  1908,
+    "path":  "src/nonstandard/UnitZeroDivisorBoundary.v",
+    "cluster":  "nonstandard",
+    "classical_counterpart":  "The germ ring Q^N/Frechet (functions mod eventual agreement) is the classical reduced-power / Robinson-NSA construction; the fact that a unit <-> eventually non-zero and a zero-divisor <-> zero-set cofinal is standard ring theory of that ring. NEW is only mapping invertibility's two poles onto the ToS finitization boundary (unit=Element side / atlas det +-1, zero-divisor=role-limit/undecided side) and the constructive (classic-free) positive-cofinal proof of both characterizations.",
+    "title":  "The finitization boundary = INVERTIBILITY in the germ ring: unit <-> eventually-nonzero (Element), zero-divisor <-> zero-set cofinal (role-limit)",
+    "topic":  "In the germ ring Q^N/Frechet, characterizes both poles of invertibility constructively: x is a unit <-> eventually non-zero (inverse = 1/x on the tail), x is a zero-divisor <-> its zero-set is cofinal (witness = indicator of the zero-set); anchors with delta=1/(n+1) a unit and even_ind a zero-divisor.",
+    "role":  "A1-direction root of the nonstandard 'generating structure of the boundary' arc: extracts the algebraic floor that Element side = units, role-limit side = zero-divisors (undecided). Imports only Stdlib (QArith/ZArith/Arith/Lqa). The link 'Element = atlas units (det +-1 = unit of SL2(Z))' is a CITATION (bridge A2); 'deciding the pole = LPO/halting' is an OBSERVATION (cs/ScaleFlowUndecidable).",
+    "qed":  11,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith ZArith Arith Lia Lqa"
+                ],
+    "err":  {
+                "elements":  "germ-кольцо GProc=nat->Q (geq=в-конце-равны, gmul, gconst); полюса g_unit/g_zero_divisor; позитивные eventually_nonzero/cofinal_nz/cofinal_z; анкеры delta=1/(n+1), even_ind=индикатор чётных.",
+                "roles":  "обратимость = Element-маркер (терминирует, /x на хвосте); необратимость = role-limit-маркер; нуль-множество = носитель неразрешённости (его конечность/кофинальность решает полюс).",
+                "rules":  "L5: unit_iff (единица ⟺ в-конце-ненулев); zero_divisor_iff (делитель ⟺ нуль-множество кофинально); delta единица (всюду ненулева), even_ind делитель (нуль на нечётных, кофинально).",
+                "p4":  "конструктивно: единица строит ЯВНЫЙ обратный fun n => /x n; делитель использует ПОЗИТИВНЫЙ cofinal (бесконечно часто, не двойное отрицание) + Qmult_integral; индикатор нуль-множества предъявлен явно ⟹ 0 аксиом, classic не нужен. Единственный role-limit — undecided нуль-множество — НЕ ассертируется."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "GProc",
+                       "kind":  "Definition",
+                       "role":  "germ-носитель: nat->Q"
+                   },
+                   {
+                       "name":  "geq",
+                       "kind":  "Definition",
+                       "role":  "равенство germ'ов: ∃N, на хвосте x n == y n (по модулю Фреше)"
+                   },
+                   {
+                       "name":  "gmul",
+                       "kind":  "Definition",
+                       "role":  "поточечное умножение germ'ов"
+                   },
+                   {
+                       "name":  "gconst",
+                       "kind":  "Definition",
+                       "role":  "константный germ"
+                   },
+                   {
+                       "name":  "g_unit",
+                       "kind":  "Definition",
+                       "role":  "единица: ∃y, gmul x y ~ gconst 1 (обратим)"
+                   },
+                   {
+                       "name":  "eventually_nonzero",
+                       "kind":  "Definition",
+                       "role":  "∃N, на хвосте x n ≠ 0"
+                   },
+                   {
+                       "name":  "cofinal_nz",
+                       "kind":  "Definition",
+                       "role":  "позитивно: ∀N ∃n≥N, x n ≠ 0 (кофинально-ненулев)"
+                   },
+                   {
+                       "name":  "cofinal_z",
+                       "kind":  "Definition",
+                       "role":  "позитивно: ∀N ∃n≥N, x n = 0 (нуль-множество кофинально)"
+                   },
+                   {
+                       "name":  "g_zero_divisor",
+                       "kind":  "Definition",
+                       "role":  "делитель нуля: ∃y кофинально-ненулев с gmul x y ~ 0"
+                   },
+                   {
+                       "name":  "eventually_nonzero_unit",
+                       "kind":  "Lemma",
+                       "role":  "⟸: в-конце-ненулев ⟹ единица (обратный = /x на хвосте, Qmult_inv_r)"
+                   },
+                   {
+                       "name":  "unit_eventually_nonzero",
+                       "kind":  "Lemma",
+                       "role":  "⟹: единица ⟹ в-конце-ненулев (иначе 0=1 на нуле)"
+                   },
+                   {
+                       "name":  "unit_iff_eventually_nonzero",
+                       "kind":  "Lemma",
+                       "role":  "★ ЕДИНИЦА ⟺ в конце ненулевой"
+                   },
+                   {
+                       "name":  "cofinal_z_zero_divisor",
+                       "kind":  "Lemma",
+                       "role":  "⟸: нуль-множество кофинально ⟹ делитель (свидетель = индикатор нуль-множества)"
+                   },
+                   {
+                       "name":  "zero_divisor_cofinal_z",
+                       "kind":  "Lemma",
+                       "role":  "⟹: делитель ⟹ нуль-множество кофинально (Qmult_integral на y≠0)"
+                   },
+                   {
+                       "name":  "zero_divisor_iff_cofinal_z",
+                       "kind":  "Lemma",
+                       "role":  "★ ДЕЛИТЕЛЬ НУЛЯ ⟺ нуль-множество кофинально"
+                   },
+                   {
+                       "name":  "Qof",
+                       "kind":  "Definition",
+                       "role":  "вложение nat->Q через inject_Z"
+                   },
+                   {
+                       "name":  "Qof_pos",
+                       "kind":  "Lemma",
+                       "role":  "0 < Qof (S m) (положительность хвоста)"
+                   },
+                   {
+                       "name":  "delta",
+                       "kind":  "Definition",
+                       "role":  "delta m = 1/(m+1) — Element-инфинитезималь"
+                   },
+                   {
+                       "name":  "even_ind",
+                       "kind":  "Definition",
+                       "role":  "even_ind n = индикатор чётных (1 на чётных, 0 на нечётных)"
+                   },
+                   {
+                       "name":  "delta_is_unit",
+                       "kind":  "Lemma",
+                       "role":  "★ delta — ЕДИНИЦА (всюду ненулева, обратный = n+1)"
+                   },
+                   {
+                       "name":  "even_ind_cofinal_z",
+                       "kind":  "Lemma",
+                       "role":  "even_ind нулевой на нечётных — кофинально (свидетель 2N+1)"
+                   },
+                   {
+                       "name":  "even_ind_is_zero_divisor",
+                       "kind":  "Lemma",
+                       "role":  "★ even_ind — ДЕЛИТЕЛЬ НУЛЯ (undecided необратим)"
+                   },
+                   {
+                       "name":  "boundary_is_invertibility",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: оба ⟺ + delta единица + even_ind делитель = граница как обратимость"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "unit_iff_eventually_nonzero",
+                           "analysis":  "Element-полюс как точная характеризация: x обратим в germ-кольце ⟺ x в конце ненулев. ⟸ строит ЯВНЫЙ обратный fun n => /x n и Qmult_inv_r на хвосте (конструктивно, без classic); ⟹ — если на нуле, то 0=1 (Qmult_0_l + lra). Это алгебраическое ядро Element-стороны границы: обратимость = терминирующее свойство (/x вычислимо на хвосте). Связь к редукционному атласу (det +-1 = единица SL2(Z)) ЦИТИРУЕТСЯ (мост A2), здесь не доказывается.",
+                           "tags":  [
+                                        "unit",
+                                        "element-pole",
+                                        "constructive",
+                                        "germ-ring"
+                                    ]
+                       },
+                       {
+                           "name":  "zero_divisor_iff_cofinal_z",
+                           "analysis":  "Role-limit-полюс как точная характеризация: x — делитель нуля ⟺ его нуль-множество кофинально (нуль бесконечно часто). ⟸ предъявляет свидетеля = индикатор нуль-множества (if Qeq_bool (x n) 0 then 1 else 0), кофинально-ненулевой по построению; ⟹ из y≠0 кофинально + x·y~0 извлекает x=0 через Qmult_integral. Используется ПОЗИТИВНЫЙ cofinal (бесконечно часто), а не двойное отрицание — потому 0 аксиом. Это алгебраическое лицо role-limit/undecided стороны.",
+                           "tags":  [
+                                        "zero-divisor",
+                                        "role-limit-pole",
+                                        "positive-cofinal",
+                                        "Qmult_integral"
+                                    ]
+                       },
+                       {
+                           "name":  "boundary_is_invertibility",
+                           "analysis":  "Капстоун арки A1: ВСЯ граница финитизации = вопрос ОБРАТИМОСТИ в germ-кольце Q^N/Фреше. Конъюнкция (единица⟺в-конце-ненулев) /\\ (делитель⟺нуль-множество-кофинально) /\\ (delta единица) /\\ (even_ind делитель) фиксирует трихотомию 0 / единица / делитель = в-конце-ноль / в-конце-ненулев / undecided. Два атласа проекта (Element=атлас редукций, role-limit=синтез XVIII) суть два полюса инвертируемости. Уровень — new-framing: germ-кольцо и его теория единиц/делителей классичны (Robinson-NSA / reduced power); ново отождествление двух полюсов со сторонами границы. 'Разрешить полюс = конечно ли нуль-множество = LPO/halting' — наблюдение (цитата cs/ScaleFlowUndecidable).",
+                           "tags":  [
+                                        "capstone",
+                                        "invertibility",
+                                        "trichotomy",
+                                        "new-framing"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Граница финитизации отождествлена с ОБРАТИМОСТЬЮ в germ-кольце Q^N/Фреше: единица ⟺ в-конце-ненулев (Element-полюс), делитель нуля ⟺ нуль-множество кофинально (role-limit-полюс); обе характеризации доказаны конструктивно (0 аксиом, позитивный cofinal), с анкерами delta-единица и even_ind-делитель.",
+                       "caveat":  "Germ-кольцо Q^N/Фреше и его теория единиц/делителей нуля классичны (приведённая степень / NSA Робинсона). Ново только отождествление двух полюсов инвертируемости со сторонами границы финитизации. Связь 'Element = единицы редукционного атласа (det +-1)' — ЦИТАТА (мост A2), здесь не доказана; 'разрешить полюс = LPO/halting' — наблюдение (cs/ScaleFlowUndecidable), не передоказывается. Всё конструктивно над Q."
+                   },
+    "tags":  [
+                 "nonstandard",
+                 "germ-ring",
+                 "unit",
+                 "zero-divisor",
+                 "invertibility",
+                 "finitization-boundary",
+                 "infinitesimal",
+                 "constructive",
+                 "P4"
+             ]
+}
+]

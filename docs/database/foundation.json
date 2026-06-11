@@ -8804,5 +8804,2398 @@
       "caveat": "Физика классична (аномалии пиннят SM-гиперзаряды); вход — содержание поколения, сами условия, нормировка, бокс — всё именовано; вне бокса полнота следует из алгебры ChargeLatticeTheory, не из скана."
     },
     "tags": ["foundation", "anomaly", "exhaustive-scan", "dial", "honesty", "vm_compute", "vein-A-adjacent"]
-  }
+  },
+{
+    "num":  1872,
+    "path":  "src/foundation/ArrowSignFromOrigin.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Penrose's Past Hypothesis / Weyl-curvature low-entropy initial condition (the cosmological origin of the thermodynamic arrow) is the classical referent; NEW is only the E/R/R reframing of the 'sub-maximal reservoir on the past side' posit as REDUCING to (A=exists: one first distinction = minimal actualization) + (P4: monotone actualization), so the room is maximal at the origin and shrinks forward — a reduction of the posit to the ToS foundation, NOT a derivation of the entropy magnitude or of the cosmological identification.",
+    "title":  "Past Hypothesis reduced to (A=exists origin + P4 monotone): reservoir room maximal at the origin, shrinks forward",
+    "topic":  "Models the un-actualized 'reservoir room' as total - actualized(K) over a monotone actualization count, and proves the room is maximal at the origin K=0 (minimal actualization = the first distinction) and strictly shrinks forward, so the sub-maximal-reservoir-on-the-past-side posit follows from the ToS foundation rather than being an independent fine-tuning.",
+    "role":  "Stage of the spacetime/gravity-arrow descent (Arrow* family): digs the residual L2 posit of ArrowSignReservoir.v down to the origin (A=exists)+P4. Self-contained (Stdlib only); a Section over an abstract `total`. Companion to GravityArrowEntropy.v (saturation = heat death) and ArrowGroundingDescent.v (W fluctuation).",
+    "qed":  7,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "счёт актуализированного actualized K = K (записи=стадия); полное пространство различений total; room = total - actualized = неактуализированный резервуар (сток энтропии).",
+                "roles":  "начало K=0 = минимальная актуализация (одно первое различение, A=существует); room = сток энтропии; направление вперёд = room убывает.",
+                "rules":  "P4 => actualized монотонно растёт => room только сокращается; начало минимально => room максимален в начале; суб-максимальность (0<room 0) форсирована, не постулирована.",
+                "p4":  "ДИАГНОСТИКА: «суб-максимальный резервуар + сторона прошлого» СВОДИТСЯ к (A=существует: одно различение = минимум) + (P4: монотонная актуализация). Гипотеза прошлого = ОСНОВАНИЕ ToS, не отдельная тонкая настройка. ЧЕСТНО: форсирует только СТОРОНУ + монотонность room (скелет); ВЕЛИЧИНУ роста энтропии несут мост записи (Ландауэр) + безразличие; «происхождение ToS=космологическое» = мост; вейлева гладкость не закрыта."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "actualized",
+                       "kind":  "Definition",
+                       "role":  "счёт актуализированного на стадии K := K (P4: только растёт; начало K=0 минимально)"
+                   },
+                   {
+                       "name":  "room",
+                       "kind":  "Definition",
+                       "role":  "запас резервуара := total - actualized K (неактуализированные различения = сток энтропии)"
+                   },
+                   {
+                       "name":  "actualized_grows",
+                       "kind":  "Theorem",
+                       "role":  "P4: actualized K < actualized (S K) (актуализация только добавляет)"
+                   },
+                   {
+                       "name":  "origin_minimal",
+                       "kind":  "Theorem",
+                       "role":  "начало минимально: actualized 0 <= actualized K (одно первое различение)"
+                   },
+                   {
+                       "name":  "room_max_at_origin",
+                       "kind":  "Theorem",
+                       "role":  "★ room K <= room 0 — резервуар МАКСИМАЛЕН в начале"
+                   },
+                   {
+                       "name":  "room_shrinks_forward",
+                       "kind":  "Theorem",
+                       "role":  "★ S K <= total -> room (S K) < room K — room строго убывает вперёд (сторона прошлого = больше room)"
+                   },
+                   {
+                       "name":  "submaximal_from_origin",
+                       "kind":  "Theorem",
+                       "role":  "0 < total -> 0 < room 0 — суб-максимальность в начале ФОРСИРОВАНА, не постулирована"
+                   },
+                   {
+                       "name":  "arrow_runs_until_saturation",
+                       "kind":  "Theorem",
+                       "role":  "K < total -> 0 < room K — стрела бежит от начала до насыщения (room->0 = тепловая смерть/коллапс)"
+                   },
+                   {
+                       "name":  "past_hypothesis_from_origin",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: конъюнкция всех шести фактов — постулат L2 сведён к (A=существует начало + P4 монотонность)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "room_max_at_origin",
+                           "analysis":  "Содержательное ядро редукции: запас резервуара room = total - K максимален именно при K=0, потому что P4 делает actualized минимальным в начале (одно первое различение, A=существует). Это арифметически тривиально (lia над nat), но НАГРУЖЕНО смыслом: «низкоэнтропийное начало» = «минимальная актуализация на происхождении» = следствие основания ToS, а не независимая пенроузовская тонкая настройка. Честно: фиксирует только СТОРОНУ/монотонность, не величину.",
+                           "tags":  [
+                                        "past-hypothesis",
+                                        "P4",
+                                        "origin",
+                                        "reduction"
+                                    ]
+                       },
+                       {
+                           "name":  "past_hypothesis_from_origin",
+                           "analysis":  "Капстоун-конъюнкция: рост актуализации + минимум в начале + максимум room в начале + убывание room вперёд + форсированная суб-максимальность + пробег до насыщения — всё одной leplike-цепочкой lia. Заявляет: Гипотеза Прошлого = «процесс начался с одного различения (A=существует), и P4 делает актуализацию монотонной». Уровень — РЕДУКЦИЯ ПОСТУЛАТА К ОСНОВАНИЮ: не новая теорема, а точное растворение мнимой тонкой настройки в две аксиомы-закона ToS, с честно названными остаточными мостами (величина энтропии, космологическая идентификация, вейлева гладкость).",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "reduction",
+                                        "honest-residual"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Постулат «суб-максимальный резервуар со стороны прошлого» (= Гипотеза Прошлого) переформулирован как СЛЕДСТВИЕ основания ToS: минимальная актуализация в начале (A=существует) + монотонная актуализация (P4) => room максимален в начале и убывает вперёд.",
+                       "caveat":  "Арифметика тривиальна (nat/lia, конфигурация room=total-K выбрана под результат). Пенроузова Гипотеза Прошлого / низкая начальная энтропия — классический референт. Файл форсирует ТОЛЬКО сторону + монотонность room; величину роста энтропии, идентификацию ToS-начала с космологическим и вейлеву гладкость он сам честно оставляет как неустранённые мосты. Над-брендинг (как полный вывод знака стрелы времени) был бы оверклеймом — файл этого не делает."
+                   },
+    "tags":  [
+                 "foundation",
+                 "arrow-of-time",
+                 "past-hypothesis",
+                 "P4",
+                 "entropy",
+                 "reduction",
+                 "new-framing",
+                 "honest-residual"
+             ]
+},
+{
+    "num":  1873,
+    "path":  "src/foundation/ArrowSignReservoir.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The thermodynamic arrow of time, the alignment of the record/memory/thermodynamic/gravitational arrows, Landauer's principle (logical irreversibility => thermodynamic cost), and the Past Hypothesis are all classical; NEW is only the three-layer E/R/R verdict — direction L0 forced by P4, alignment L1 derived via the Landauer identification, absolute sign L2 pinned to ONE precisely-located posit (sub-maximal reservoir on the past side) — sharper than a flat 'the sign is a posit', but NOT a derivation of the absolute sign.",
+    "title":  "Entropy-sign analysis in three honest layers: direction forced (P4), alignment derived (Landauer), absolute sign = one located posit",
+    "topic":  "Builds toy nat models of stage-count, a finite dumping reservoir (total_S saturates at room), and a time-reverse absorbing process, then proves: the direction is forced (stage strictly grows), the record and entropy arrows are aligned (move together), entropy rises only while the reservoir is sub-maximal and STALLS at saturation, and both dumping and absorbing advance the stage — so the absolute sign is the residual posit of which side the sub-maximal reservoir is.",
+    "role":  "Root of the spacetime/gravity entropy-sign descent; its residual L2 posit is then dug to the origin by ArrowSignFromOrigin.v (#1872), its info-entropy input by EntropyCountDefinitional.v (#1876), its heat/Boltzmann input by EnergyAsActualizationRate.v (#1875). Self-contained (Stdlib only).",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "счёт стадий stage K = K (записи); запас резервуара room; суммарная энтропия total_S = S0 + min K room; обратный процесс absorb_S.",
+                "roles":  "stage = стрела записей/памяти (P4); резервуар = сток энтропии; суб-максимальный запас = постулат; dump_S = сброс (энтропия вверх) против absorb_S = поглощение (вниз).",
+                "rules":  "P4 => счёт стадий растёт; актуализация=запись=сброс => энтропия несбавляющая, пока есть запас (K<room); насыщенный резервуар (room<=K) => стрела глохнет; сброс-vs-поглощение => знак = сторона резервуара.",
+                "p4":  "ДИАГНОСТИКА: L0 НАПРАВЛЕНИЕ форсировано (P4 запрещает деактуализацию); L1 ВЫРАВНИВАНИЕ стрел ВЫВОДИМО (актуализация=запись=сброс, мост Ландауэра — стрелы не могут разойтись); L2 АБСОЛЮТНЫЙ ЗНАК = суб-максимальный резервуар со стороны прошлого = ТОЧНО локализованный постулат (максимальный резервуар => стрелы нет). НЕ выводим абсолютный знак; ВЫВОДИМ выравнивание и сужаем постулат. ЧЕСТНО: мост Ландауэра = отождествление, не чистый P4; энтропия=счёт-записей = Element-прокси."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "stage",
+                       "kind":  "Definition",
+                       "role":  "P4-стрела записей: stage K := K (число необратимо актуализированных различений)"
+                   },
+                   {
+                       "name":  "dump_S",
+                       "kind":  "Definition",
+                       "role":  "процесс сброса: dump_S S0 K := S0 + K (каждая актуализация пишет бит в резервуар)"
+                   },
+                   {
+                       "name":  "total_S",
+                       "kind":  "Definition",
+                       "role":  "конечный резервуар: S0 + min K room (энтропия растёт до насыщения резервуара)"
+                   },
+                   {
+                       "name":  "absorb_S",
+                       "kind":  "Definition",
+                       "role":  "обратный (поглощающий) процесс: S0 - K (резервуар с другой стороны ПОНИЗИЛ бы энтропию)"
+                   },
+                   {
+                       "name":  "direction_forced",
+                       "kind":  "Theorem",
+                       "role":  "★ L0: stage K < stage (S K) — НАПРАВЛЕНИЕ форсировано P4"
+                   },
+                   {
+                       "name":  "arrows_aligned",
+                       "kind":  "Theorem",
+                       "role":  "★ L1: stage и dump_S растут ВМЕСТЕ — выравнивание стрел выведено (мост Ландауэра)"
+                   },
+                   {
+                       "name":  "entropy_rises_while_submaximal",
+                       "kind":  "Theorem",
+                       "role":  "K < room -> энтропия total_S строго растёт, пока резервуар суб-максимален"
+                   },
+                   {
+                       "name":  "saturated_no_arrow",
+                       "kind":  "Theorem",
+                       "role":  "★ L2: room <= K -> total_S постоянна — насыщенный резервуар => стрела ГЛОХНЕТ"
+                   },
+                   {
+                       "name":  "sign_is_reservoir_side",
+                       "kind":  "Theorem",
+                       "role":  "★ оба процесса (сброс↑ и поглощение↓) двигают стадию => знак НЕ фиксирован P4, а = сторона резервуара (Гипотеза Прошлого)"
+                   },
+                   {
+                       "name":  "arrow_sign_analysis",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: три слоя (L0 форсирован / L1 выведен / L2 локализованный постулат) одной конъюнкцией"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "saturated_no_arrow",
+                           "analysis":  "Точная локализация постулата: как только room <= K, total_S = S0 + min K room перестаёт расти — стрела глохнет. Значит стрела СУЩЕСТВУЕТ только при суб-максимальном резервуаре, и весь «абсолютный знак» сводится к ОДНОМУ факту: с какой стороны лежит низкоэнтропийный (суб-максимальный) резервуар. Это сужает мнимо-большой постулат стрелы времени до одной точно названной посылки (Гипотеза Прошлого), не выдавая её за выведенную.",
+                           "tags":  [
+                                        "posit-localization",
+                                        "saturation",
+                                        "arrow-of-time"
+                                    ]
+                       },
+                       {
+                           "name":  "arrows_aligned",
+                           "analysis":  "L1-слой: stage (стрела записи/памяти) и dump_S (энтропийная стрела) монотонно растут синхронно. Содержательно это перенос мысли Ландауэра (необратимая запись = термодинамический сброс) в арифметику nat: ПРИ ОТОЖДЕСТВЛЕНИИ актуализация=запись=сброс стрелы не могут разойтись — выравнивание ВЫВОДИМО (не постулат), тогда как сам Ландауэр-мост (логическая необратимость => тепловая цена) остаётся честно названным отождествлением, а не P4-следствием.",
+                           "tags":  [
+                                        "landauer",
+                                        "arrow-alignment",
+                                        "derived",
+                                        "bridge"
+                                    ]
+                       },
+                       {
+                           "name":  "arrow_sign_analysis",
+                           "analysis":  "Капстоун-вердикт: три честных слоя (L0 направление = P4; L1 выравнивание = выведено через Ландауэра; L2 абсолютный знак = суб-максимальный резервуар + сторона = локализованный постулат). Ценность — методологическая: вместо плоского «знак стрелы — постулат» файл РАЗЛАГАЕТ вопрос на форсированное/выведенное/постулированное и точно указывает единственную оставшуюся посылку. Это новое ОБРАМЛЕНИЕ, не новая теорема; арифметика игрушечная (nat/lia).",
+                           "tags":  [
+                                        "capstone",
+                                        "three-layer",
+                                        "synthesis",
+                                        "verdict"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Трёхслойный E/R/R-вердикт о знаке энтропии: направление форсировано P4, выравнивание стрел выведено через отождествление Ландауэра, абсолютный знак сведён к ОДНОЙ точно локализованной посылке (суб-максимальный резервуар со стороны прошлого) — острее плоского «знак — постулат».",
+                       "caveat":  "Стрела времени, выравнивание четырёх стрел, принцип Ландауэра и Гипотеза Прошлого — классика. Модели игрушечные (nat, min, lia). Файл НЕ выводит абсолютный знак (честно заявлено), и сам помечает: Ландауэр-мост = отождествление (не чистый P4), «энтропия=счёт записей» = Element-прокси (строгое = статистический/голографический счёт). Над-брендинг как «вывод стрелы времени» был бы оверклеймом — файл его избегает."
+                   },
+    "tags":  [
+                 "foundation",
+                 "arrow-of-time",
+                 "entropy",
+                 "landauer",
+                 "past-hypothesis",
+                 "P4",
+                 "new-framing",
+                 "honest-residual"
+             ]
+},
+{
+    "num":  1874,
+    "path":  "src/foundation/DeterminacyAscent.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Gale-Stewart determinacy of open games, Borel determinacy (Martin, consistency-strength ~omega_1 iterations of powerset), backward induction for finite games, and the constructive-reverse-math fact that the clopen/open value-dichotomy of decidable games is LPO-equivalent (Bishop/Ishihara) are all classical; NEW is only placing this on an ordinal-PROCESS ascent (height = omega = OLim, no maximal rung) and bridging the finite rung to backward induction (mover_wins), recasting determinacy as a localized role-limit ascent rather than a binary wall.",
+    "title":  "Determinacy as an ordinal-process ascent (stage 3): finite rung 0-ax (backward induction), finite->infinite step = exactly LPO, height = omega",
+    "topic":  "Stage 3 of the Process-Hierarchy direction: the finite/clopen rung is decided 0-axiom by backward induction (mover_wins total), the step finite->infinite ('does player I ever win') is proven EXACTLY equivalent to LPO (every boolean process is a leaf-game value-process), LEM collapses it, and the rung index is the ordinal-process omega with unbounded rungs — so determinacy is an ordinal-indexed generating ascent, not a wall.",
+    "role":  "Process-Hierarchy stage 3 (after ProcessHierarchyCore stages 1-2 + HierarchyDepthLadder). Imports foundation.Ordinal (Ord/omega/OLim/nat_to_ord), FiniteGameDeterminacy (GameTree/mover_wins/GLeaf/finite_game_determined), RoleLimitLadder (LPO/LEM/lem_lpo). Reuses the omniscience-ladder floor-1 rung; companion to WqoOverDecidable / FormerWalls ledger.",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia Bool",
+                    "foundation.Ordinal",
+                    "foundation.FiniteGameDeterminacy",
+                    "foundation.RoleLimitLadder"
+                ],
+    "err":  {
+                "elements":  "процесс конечных игр gp : nat -> GameTree; value-процесс open_value K = mover_wins (gp K); рунг-индекс determinacy_rank_index = nat_to_ord n.",
+                "roles":  "конечный этап = игра (Element, разрешима обратной индукцией, рунг 0); «выиграет ли I когда-нибудь» = Sigma^0_1-вопрос (рунг всеведения); индекс рунга = omega-процесс.",
+                "rules":  "конечный этап разрешим без оракула (0 ax); дихотомия eventual_decided <-> LPO (один рунг всеведения); LEM схлопывает; подъём порождающ (нет максимального рунга), высота = omega = OLim.",
+                "p4":  "ДИАГНОСТИКА: подъём ПОТЕНЦИАЛЕН (каждый рунг — процесс), не завершён; аксиома (LPO/LEM) входит НЕ как стена, а ТОЧНО на шаге финит->инфинит, локализована; полная борелевская детерминированность (Мартин) = consistency-strength ГОРИЗОНТ выше, открытый подъём, а НЕ бинарная стена. LPO/LEM здесь — Prop-ГИПОТЕЗЫ, не аксиомы файла (0 axioms)."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "finite_depth_decidable",
+                       "kind":  "Lemma",
+                       "role":  "★ рунг 0: победитель конечной игры РЕШАЕМ {mover_wins g=true}+{=false}, без оракула (обратная индукция)"
+                   },
+                   {
+                       "name":  "open_value",
+                       "kind":  "Definition",
+                       "role":  "value-процесс открытой игры: на этапе K — победитель K-усечённой конечной игры"
+                   },
+                   {
+                       "name":  "eventual_decided",
+                       "kind":  "Definition",
+                       "role":  "Sigma^0_1-дихотомия: I выигрывает на каком-то этапе \\/ никогда (Sigma^0_1-ядро Гейла-Стюарта, не полная детерминированность)"
+                   },
+                   {
+                       "name":  "eventual_decided_is_LPO",
+                       "kind":  "Theorem",
+                       "role":  "★ шаг финит->инфинит для ВСЕХ игр <-> LPO (каждый булев процесс = value-игра из листьев GLeaf)"
+                   },
+                   {
+                       "name":  "eventual_decided_classical",
+                       "kind":  "Theorem",
+                       "role":  "LEM -> forall gp, eventual_decided gp — классически рунг схлопывается"
+                   },
+                   {
+                       "name":  "determinacy_rank_index",
+                       "kind":  "Definition",
+                       "role":  "индекс рунга := nat_to_ord n (ординал-процесс)"
+                   },
+                   {
+                       "name":  "determinacy_ascent_height_is_omega",
+                       "kind":  "Theorem",
+                       "role":  "omega = OLim determinacy_rank_index — высота подъёма = ОРДИНАЛ-ПРОЦЕСС, не число"
+                   },
+                   {
+                       "name":  "determinacy_ranks_unbounded",
+                       "kind":  "Theorem",
+                       "role":  "рунги неограниченны (forall B, exists n>B) — порождающий подъём, замыкание = role-limit"
+                   },
+                   {
+                       "name":  "determinacy_is_ordinal_process_ascent",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: конечный рунг решён + открытый рунг=LPO + LEM схлопывает + высота=omega + нет максимального рунга"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "eventual_decided_is_LPO",
+                           "analysis":  "Содержательное ядро ступени: дихотомия «игрок I выигрывает на каком-то конечном этапе, либо ни на одном» для ВСЕХ игр-процессов РОВНО эквивалентна LPO. Доказательство-мост: всякий булев процесс g есть value-процесс игры из листьев (fun K => GLeaf (g K)), и обратная индукция mover_wins на листе тривиальна, так что eventual_decided коллапсирует в LPO-форму. Это точно локализует, ГДЕ входит неконструктивность: не во всю детерминированность, а ровно в шаг конечное->бесконечное (Sigma^0_1, тот же рунг, что этаж 1 лестницы всеведения). Честно: LPO-эквивалентность value-дихотомии разрешимых игр — известный факт constructive reverse math (Bishop/Ishihara); ново размещение на ординал-процесс-подъёме.",
+                           "tags":  [
+                                        "LPO",
+                                        "omniscience",
+                                        "finite-to-infinite",
+                                        "role-limit",
+                                        "localization"
+                                    ]
+                       },
+                       {
+                           "name":  "finite_depth_decidable",
+                           "analysis":  "Рунг 0 (Element-сторона): победитель КОНЕЧНОЙ игры — настоящее РЕШЕНИЕ ({}+{}), а не просто классически определён; следует из тотальности и вычислимости обратной индукции mover_wins. Это «дно» подъёма, достигнутое 0 аксиом, контрастирующее с верхним Sigma^0_1-рунгом (LPO) того же файла — ровно мотив Element/role-limit-границы, перенесённый на детерминированность игр.",
+                           "tags":  [
+                                        "backward-induction",
+                                        "decidable",
+                                        "element",
+                                        "rung-0"
+                                    ]
+                       },
+                       {
+                           "name":  "determinacy_is_ordinal_process_ascent",
+                           "analysis":  "Капстоун: детерминированность = ОРДИНАЛ-ИНДЕКСИРОВАННЫЙ ПОДЪЁМ, не бинарная стена — (1) конечный рунг достигнут 0-ax, (2) открытый Sigma^0_1-рунг = ровно LPO (LEM схлопывает), (3) индекс = omega=OLim, подъём порождающ (нет max). Полная борелевская детерминированность Мартина (consistency-strength omega_1 итераций powerset) честно оставлена как ГОРИЗОНТ выше, локализованный рунгом. Уровень — новое ОБРАМЛЕНИЕ классической детерминированности в процесс-онтологию ToS + сужение неконструктивного входа до одной точки; не новая теорема о детерминированности.",
+                           "tags":  [
+                                        "capstone",
+                                        "ordinal-process",
+                                        "ascent",
+                                        "not-a-wall",
+                                        "synthesis"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Детерминированность игр переосмыслена как ординал-ПРОЦЕСС-подъём (высота omega=OLim, нет максимального рунга): конечный рунг разрешим 0-ax обратной индукцией, шаг финит->инфинит = РОВНО LPO (один точно локализованный неконструктивный вход), LEM его схлопывает.",
+                       "caveat":  "Гейл-Стюарт, борелевская детерминированность Мартина и LPO-эквивалентность value-дихотомии разрешимых игр (Bishop/Ishihara, constructive reverse math) — классика; файл это явно ПЕРЕИСПОЛЬЗУЕТ. Строится лишь НИЖНИЙ подъём (конечный рунг + Sigma^0_1=LPO); полная стратегическая/борелевская детерминированность НЕ доказывается (честно названа consistency-strength горизонтом). LPO/LEM — Prop-гипотезы, не аксиомы файла (0 axioms). Над-брендинг как «решение детерминированности» был бы оверклеймом."
+                   },
+    "tags":  [
+                 "foundation",
+                 "process-hierarchy",
+                 "determinacy",
+                 "LPO",
+                 "ordinal",
+                 "no-AC",
+                 "role-limit",
+                 "new-framing",
+                 "not-a-wall"
+             ]
+},
+{
+    "num":  1875,
+    "path":  "src/foundation/EnergyAsActualizationRate.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The Boltzmann thermodynamic relation dS = dQ/T, the equipartition theorem, and the Noether energy<->time-translation correspondence are classical physics; NEW is only the E/R/R reading energy = rate/tempo of distinction-actualization (the count->rate enrichment) under which T=E/S, Q=T*S and the Boltzmann S=Q/T become a one-line Q-algebra — a reduction of the heat bridge to a ToS rate layer + equipartition + units, NOT a derivation of thermodynamics.",
+    "title":  "Energy as the rate of distinction-actualization: T=E/S, Q=T*S, Boltzmann S=Q/T as one-line Q-algebra (count->rate enrichment)",
+    "topic":  "Reads ToS energy as the tempo of succession (rate layer beyond the bare entropy count), defines temperature = E/S, heat = T*S, entropy_from_heat = Q/T over Q, and proves the Boltzmann relation S=Q/T and E=T*S from heat=T*count (equipartition) — locating the residual import as the Noether reading + equipartition + units.",
+    "role":  "Stage of the spacetime/gravity-arrow descent (Energy*/Equipartition* sub-thread): digs the Boltzmann info<->heat bridge that was the last import of the entropy-sign analysis (ArrowSignReservoir.v). Self-contained (Stdlib QArith/Lqa only); companion to EntropyCountDefinitional.v (#1876, the info side) and EquipartitionBedrock/EquipartitionRule (the soft principle).",
+    "qed":  5,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lqa"
+                ],
+    "err":  {
+                "elements":  "энергия E (полный темп, Q); энтропия S (счёт, Q); температура temperature E S = E/S; тепло heat T S = T*S; entropy_from_heat q T = q/T.",
+                "roles":  "энергия = темп преемства (генератор времени, Нётер); температура = энергия на различение; тепло = T*счёт (равнораспределение); вход = Нётер-чтение + равнораспределение + единицы.",
+                "rules":  "T = E/S; Q = T*S (равнораспределение) => S = Q/T (Больцман, boltzmann_dS_eq_dQ_over_T при T<>0); E = T*S (energy_is_T_times_count при S<>0).",
+                "p4":  "ДИАГНОСТИКА: тепло/энергия = переход счёт->СКОРОСТЬ (энергия = темп актуализации, частоты R-формулы; ToS-процесс nat->Q это уже содержит). Больцман dS=dQ/T сводится к (энтропия=счёт) + (температура=энергия/счёт) + (тепло=T*счёт, равнораспределение). Остаток ТРОЙНОЙ: Нётер-чтение энергии, равнораспределение (МЯГЧАЙШИЙ ToS-принцип, качество->количество), единицы (Дж/К/k_B). Мост не чужероден — слой скоростей ToS + мягкий принцип, не опаковая стена «инфо=тепло»."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "temperature",
+                       "kind":  "Definition",
+                       "role":  "температура := E/S (энергия на различение = темп на счёт)"
+                   },
+                   {
+                       "name":  "heat",
+                       "kind":  "Definition",
+                       "role":  "тепло := T*S (энергия в тепловых различениях, равнораспределение)"
+                   },
+                   {
+                       "name":  "entropy_from_heat",
+                       "kind":  "Definition",
+                       "role":  "обратный Больцман: S := q/T (энтропия из тепла и температуры)"
+                   },
+                   {
+                       "name":  "temperature_is_energy_per_distinction",
+                       "kind":  "Theorem",
+                       "role":  "temperature E S = E/S (определительно)"
+                   },
+                   {
+                       "name":  "heat_is_T_times_count",
+                       "kind":  "Theorem",
+                       "role":  "heat T S = T*S (определительно, равнораспределение)"
+                   },
+                   {
+                       "name":  "boltzmann_dS_eq_dQ_over_T",
+                       "kind":  "Theorem",
+                       "role":  "★ Больцман: T<>0 -> entropy_from_heat (heat T S) T == S (S=Q/T выведено из тепло=T*счёт)"
+                   },
+                   {
+                       "name":  "energy_is_T_times_count",
+                       "kind":  "Theorem",
+                       "role":  "★ S<>0 -> E == temperature E S * S (энергия = темп-на-различение * счёт)"
+                   },
+                   {
+                       "name":  "boltzmann_bridge_reduced",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: четыре соотношения T=E/S, Q=T*S, S=Q/T, E=T*S одной конъюнкцией"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "boltzmann_dS_eq_dQ_over_T",
+                           "analysis":  "Содержательное ядро: соотношение Больцмана S = Q/T получается как ОДНА строка Q-алгебры (Qmult_comm/Qmult_inv_r при T<>0) из определения тепло = T*счёт. Смысл редукции: если энтропия = счёт различений, а тепло = температура*счёт (равнораспределение), то dS=dQ/T — не самостоятельный физический закон, а АЛГЕБРА этих двух чтений. Честно: это показывает лишь, что ПРИ принятых отождествлениях соотношение тривиально; сами отождествления (особенно равнораспределение) остаются содержательным входом.",
+                           "tags":  [
+                                        "boltzmann",
+                                        "equipartition",
+                                        "rate-layer",
+                                        "reduction"
+                                    ]
+                       },
+                       {
+                           "name":  "boltzmann_bridge_reduced",
+                           "analysis":  "Капстоун: четыре соотношения (T=E/S, Q=T*S, S=Q/T, E=T*S) собраны в одну теорему, демонстрируя, что тепло/энергия = слой СКОРОСТЕЙ ToS-процесса (обогащение счёт->темп, присутствующее как собственная частота R-формулы), а термодинамическое dS=dQ/T растворяется в энтропия=счёт + температура=энергия/счёт + равнораспределение. Уровень — новое ОБРАМЛЕНИЕ (count->rate), с ЧЕСТНО названным тройным остатком: Нётер-чтение энергии, равнораспределение (мягчайший ToS-принцип), единицы. Не новая физика и не новая теорема — растворение опаковой стены «инфо=тепло» в названные компоненты.",
+                           "tags":  [
+                                        "capstone",
+                                        "count-to-rate",
+                                        "synthesis",
+                                        "honest-residual"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Энергия прочитана как ТЕМП актуализации различений (обогащение счёт->скорость ToS-процесса), под которым T=E/S, Q=T*S и соотношение Больцмана S=Q/T становятся одной строкой Q-алгебры; мост инфо<->тепло сведён к слою скоростей ToS + равнораспределение + единицы.",
+                       "caveat":  "Соотношение Больцмана dS=dQ/T, равнораспределение и Нётер-соответствие энергия<->время — классическая физика. Доказательства — тривиальная Q-алгебра при T,S<>0 (определения T,Q,S выбраны под результат). Файл сам помечает ТРОЙНОЙ неустранённый остаток: Нётер-чтение (мост, не P4-следствие), равнораспределение (МЯГЧАЙШИЙ ToS-принцип, разрыв качество->количество), единицы k_B. Над-брендинг как «вывод термодинамики/энергии» был бы оверклеймом — файл его избегает. ДРЕЙФ: STATUS-заголовок заявляет 6 Qed, фактически 5."
+                   },
+    "tags":  [
+                 "foundation",
+                 "thermodynamics",
+                 "energy",
+                 "boltzmann",
+                 "equipartition",
+                 "arrow-of-time",
+                 "count-to-rate",
+                 "new-framing",
+                 "honest-residual"
+             ],
+    "notes":  "STATUS-header drift: header says '6 Qed' but the file has exactly 5 Qed. (5 theorems, 5 Qed; 3 Definitions.) 0 Admitted, 0 own axioms. Over Q (QArith/Lqa), Open Scope Q_scope."
+},
+{
+    "num":  1876,
+    "path":  "src/foundation/EntropyCountDefinitional.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Boltzmann's S = k log W, Shannon entropy = log W under equiprobable microstates (the indifference/equipartition assumption), and the extensivity (additivity of entropy <-> multiplicativity of microstate count) are classical; NEW is only the E/R/R verdict that 'entropy = distinction count' is DEFINITIONAL in ToS (a configuration IS its distinction-set => W=2^count, count=log2 W), so the genuine irreducible import is solely Boltzmann's info-entropy = HEAT-entropy hypothesis + the k_B unit — about heat, not the directional arrow.",
+    "title":  "Entropy = distinction count is definitional (W=2^count, count=log2 W, additive<->multiplicative); the only genuine import is Boltzmann/heat",
+    "topic":  "Defines config_count(n)=2^n and entropy_bits(n)=n, proves count=log2 W (2^count=W), W=2^count, entropy additive while W multiplicative (Nat.pow_add_r) — establishing that 'entropy = distinction count' is definitional in ToS, so the information arrow is fully ToS (P4+L2+indifference+origin) and only the heat reading imports Boltzmann + k_B units.",
+    "role":  "Last input of the spacetime/gravity entropy-sign analysis (ArrowSignReservoir.v), examined: shows the info-entropy side is ToS-definitional, isolating Boltzmann/heat as the one irreducible import (handled in EnergyAsActualizationRate.v #1875). Self-contained (Stdlib Arith/Lia only); leans on EquipartitionRule/RecordingFromP4 conceptually, not by import.",
+    "qed":  5,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "счёт различений n; число конфигураций config_count n = 2^n; энтропия в битах entropy_bits n = n.",
+                "roles":  "n = инфо-энтропия (бит) = счёт различений; W = различимые конфиги (= набор-различений); log = мост аддитивное<->мультипликативное (экстенсивность).",
+                "rules":  "конфиг = набор различений => W = 2^count; индифферентность (EquipartitionRule) => Shannon S = log W = count; счёт АДДИТИВЕН, W МУЛЬТИПЛИКАТИВНА => log-мост форсирован.",
+                "p4":  "ДИАГНОСТИКА: «энтропия=счёт» ОПРЕДЕЛИТЕЛЬНА в ToS (W=2^count из конфиг=набор-различений; индифферентность => S=log W; счёт аддитивен / W мультипликативна => log-мост), НЕ субстантивный импорт. Настоящий импорт = Больцман (инфо-энтропия = ТЕПЛОВАЯ энтропия) + k_B-единицы — про ТЕПЛО, не про стрелу. ИНФО-стрела = целиком ToS (P4+L2+индифферентность+происхождение). ЧЕСТНО: индифферентность — мягчайший ToS-принцип; W=2^count предполагает НЕЗАВИСИМЫЕ различения (max-энтропийный/свободный случай)."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "config_count",
+                       "kind":  "Definition",
+                       "role":  "число различимых конфигураций n независимых бинарных различений := 2^n (конфиг = набор различений)"
+                   },
+                   {
+                       "name":  "entropy_bits",
+                       "kind":  "Definition",
+                       "role":  "инфо-энтропия в битах := n (= log2 W = счёт различений)"
+                   },
+                   {
+                       "name":  "count_is_log2_of_W",
+                       "kind":  "Theorem",
+                       "role":  "★ 2^(entropy_bits n) = config_count n — счёт ЕСТЬ log2(W) (определительно)"
+                   },
+                   {
+                       "name":  "W_eq_two_pow_count",
+                       "kind":  "Theorem",
+                       "role":  "config_count n = 2^n — W = 2^count (конфиг = набор различений)"
+                   },
+                   {
+                       "name":  "entropy_additive",
+                       "kind":  "Theorem",
+                       "role":  "entropy_bits (n+m) = entropy_bits n + entropy_bits m — инфо-энтропия аддитивна/экстенсивна"
+                   },
+                   {
+                       "name":  "W_multiplicative",
+                       "kind":  "Theorem",
+                       "role":  "★ config_count (n+m) = config_count n * config_count m (Nat.pow_add_r) — W мультипликативна => log-мост форсирован"
+                   },
+                   {
+                       "name":  "entropy_count_is_definitional",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: четыре факта (count=log2 W, W=2^count, энтропия аддитивна, W мультипликативна) одной конъюнкцией"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "W_multiplicative",
+                           "analysis":  "Содержательный шарнир: число конфигураций мультипликативно W(n+m)=W(n)*W(m) (через Nat.pow_add_r), тогда как энтропия-счёт аддитивна (entropy_additive). Сопоставление этих двух фактов показывает, что «логарифм» в S=log W НЕ дополнительный физический постулат, а ВЫНУЖДЕННЫЙ аддитивно<->мультипликативный мост (экстенсивность), как только конфигурации суть наборы различений. Это и есть растворение мнимого импорта «энтропия=log W» в определение.",
+                           "tags":  [
+                                        "extensivity",
+                                        "log-bridge",
+                                        "additive-multiplicative",
+                                        "definitional"
+                                    ]
+                       },
+                       {
+                           "name":  "entropy_count_is_definitional",
+                           "analysis":  "Капстоун-вердикт: «энтропия = счёт различений» ОПРЕДЕЛИТЕЛЬНА в ToS — count=log2 W, W=2^count, аддитивность счёта + мультипликативность W = log-мост. Отсюда стратегический вывод файла: ИНФОРМАЦИОННАЯ стрела целиком ToS (P4 + L2 бинарность + индифферентность + происхождение), а ЕДИНСТВЕННЫЙ настоящий импорт — гипотеза Больцмана (инфо-энтропия = ТЕПЛОВАЯ энтропия) + единица k_B, которая про ТЕПЛО, не про направление стрелы. Уровень — новое ОБРАМЛЕНИЕ + точная локализация истинного импорта; не новая теорема (равенства определительны, доказательства = reflexivity/pow_add_r). Честно: индифферентность = мягчайший принцип, W=2^count предполагает независимые различения.",
+                           "tags":  [
+                                        "capstone",
+                                        "definitional-reduction",
+                                        "import-localization",
+                                        "synthesis"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "«Энтропия = счёт различений» показана ОПРЕДЕЛИТЕЛЬНОЙ в ToS (конфиг=набор-различений => W=2^count => count=log2 W; счёт аддитивен / W мультипликативна => log-мост), так что единственный неустранимый импорт — гипотеза Больцмана инфо=тепло + единица k_B, и информационная стрела оказывается целиком ToS.",
+                       "caveat":  "Больцманово S=k log W, Шеннон S=log W при равновероятных микросостояниях и экстенсивность (аддитивность<->мультипликативность) — классика. Доказательства тривиальны (reflexivity, Nat.pow_add_r); определения config_count/entropy_bits выбраны под результат. Файл сам помечает: индифферентность (EquipartitionRule) — МЯГЧАЙШИЙ ToS-принцип (качество->количество), а W=2^count предполагает НЕЗАВИСИМЫЕ различения (свободный/max-энтропийный случай). Над-брендинг как «вывод энтропии» был бы оверклеймом — файл локализует, а не выводит, истинный (Больцман/тепло) импорт."
+                   },
+    "tags":  [
+                 "foundation",
+                 "entropy",
+                 "information",
+                 "boltzmann",
+                 "shannon",
+                 "equipartition",
+                 "arrow-of-time",
+                 "P4",
+                 "new-framing",
+                 "honest-residual"
+             ]
+},
+{
+    "num":  1877,
+    "path":  "src/foundation/EntropyMagnitudeLandauer.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Landauer's principle (erasing one bit costs >= k_B T ln2 of entropy) and the second law are classical thermodynamics; NEW here is only the bookkeeping that splits the per-step entropy magnitude into a ToS UNIT (a distinction = exactly 1 bit, L2) plus a proper-time = stage-count tie (P4), with Landauer entering honestly as a PREMISE (1 <= cost), not derived.",
+    "title":  "Per-actualization entropy magnitude via the Landauer bridge: conditional on cost>=1, ToS supplies only the 1-bit unit and the proper-time tie",
+    "topic":  "Models the MAGNITUDE of entropy production per actualization in bits: each irreversibly recorded distinction costs >= 1 bit (Landauer, as a premise), binarity (L2) fixes the minimal cost at exactly 1 bit, entropy grows linearly with the stage count (proper time) while a finite reservoir has room, then saturates (heat death).",
+    "role":  "First file of the gravity<->time<->arrow arc that imports a PHYSICS PRINCIPLE (Landauer) as an explicit INPUT rather than deriving it from P4. Self-contained (Stdlib only). Companion to ArrowSignReservoir.v / ArrowSignFromOrigin.v (which handle the sign/direction; this file handles only the per-step magnitude).",
+    "qed":  7,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "стоимость на актуализацию cost (биты); энтропия (биты); счёт стадий K = собственное время (необратимо актуализированные записи, P4).",
+                "roles":  "cost = ландауэровский пол (энтропия на записанный бит); значение 1 = бинарность (L2, различение = ровно один бит); энтропия = записи*cost.",
+                "rules":  "Ландауэр (ВХОД) cost>=1; бинарность cost=1; dS = cost на актуализацию (entropy_rate); пол S >= S0 + собств_время*cost; рост, пока room, затем насыщение.",
+                "p4":  "Ландауэр — ЯВНЫЙ вход, НЕ выводим из чистого P4 (нужно 2-е начало). ToS даёт ЕДИНИЦУ (бинарность = 1 бит) и привязку энтропии к собственному времени. Выводимо ПРИ cost>=1: линейность, строгий рост, пол >= собств.время, насыщение. ЧЕСТНО: результаты УСЛОВНЫ; Coq 0-аксиомен (Ландауэр = гипотеза 1<=cost, не Axiom). Уровень: вывод-при-явном-входе."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "stage",
+                       "kind":  "Definition",
+                       "role":  "собственное время = счёт стадий K (необратимые записи, P4): stage K := K"
+                   },
+                   {
+                       "name":  "min_entropy",
+                       "kind":  "Definition",
+                       "role":  "пол энтропии (биты): S0 + cost*K, накопленный за K стадий"
+                   },
+                   {
+                       "name":  "capped_entropy",
+                       "kind":  "Definition",
+                       "role":  "пол с конечным резервуаром room слотов: S0 + cost*min(K,room)"
+                   },
+                   {
+                       "name":  "binary_cost",
+                       "kind":  "Definition",
+                       "role":  "бинарность (L2): различение = ровно один бит, минимальная стоимость = 1"
+                   },
+                   {
+                       "name":  "binarity_minimal_floor",
+                       "kind":  "Theorem",
+                       "role":  "вклад ToS: бинарность фиксирует минимальный пол в 1 бит (1 <= binary_cost)"
+                   },
+                   {
+                       "name":  "entropy_rate",
+                       "kind":  "Theorem",
+                       "role":  "★ РИТМ: каждая актуализация поднимает пол ровно на per-bit cost (min_entropy на S K = +cost)"
+                   },
+                   {
+                       "name":  "entropy_strictly_increases",
+                       "kind":  "Theorem",
+                       "role":  "при Ландауэре (cost>=1): энтропия СТРОГО растёт на каждой актуализации"
+                   },
+                   {
+                       "name":  "entropy_at_least_proper_time",
+                       "kind":  "Theorem",
+                       "role":  "★ ПРИВЯЗКА: при cost>=1 энтропия >= S0 + собственное время (термо-часы не медленнее часов собств. времени)"
+                   },
+                   {
+                       "name":  "capped_grows_while_room",
+                       "kind":  "Theorem",
+                       "role":  "пол растёт со скоростью cost, ПОКА резервуар субмаксимален (K < room)"
+                   },
+                   {
+                       "name":  "capped_saturates",
+                       "kind":  "Theorem",
+                       "role":  "...и НАСЫЩАЕТСЯ (нет роста), когда резервуар полон (тепловая смерть / полный коллапс)"
+                   },
+                   {
+                       "name":  "entropy_magnitude_landauer",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: конъюнкция бинарность+ритм+строгий рост+привязка+рост-пока-room+насыщение"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "entropy_at_least_proper_time",
+                           "analysis":  "Количественная привязка двух часов: при cost>=1 (Ландауэр) накопленная энтропия ограничена СНИЗУ собственным временем (счётом стадий) плюс S0 — на каждый тик собственного времени приходится >= 1 бит энтропии. Это и есть содержательный мост thermo-time <-> proper-time, ради которого файл написан: термодинамические часы не могут идти медленнее часов собственного времени (в битах на стадию). ЧЕСТНО: тривиальная nat-арифметика (nia); ценность — постановка, а не сложность доказательства, и она УСЛОВНА на Ландауэре.",
+                           "tags":  [
+                                        "proper-time",
+                                        "landauer",
+                                        "conditional",
+                                        "arrow",
+                                        "P4"
+                                    ]
+                       },
+                       {
+                           "name":  "entropy_magnitude_landauer",
+                           "analysis":  "Капстоун-конъюнкция всего файла: (бинарность) минимальный пол = ровно 1 бит из L2; (ритм) каждая актуализация добавляет cost бит; (строгий рост) при Ландауэре энтропия строго растёт; (привязка) рост >= собственное время; (room/saturate) растёт пока резервуар имеет место, затем насыщается. Явно сформулировано как ВЫВОД ПРИ мосте Ландауэра, НЕ как вывод Ландауэра/2-го начала. ToS вносит только единицу (бинарность) и привязку к собственному времени; всё остальное условно на входе cost>=1.",
+                           "tags":  [
+                                        "capstone",
+                                        "conditional",
+                                        "second-law",
+                                        "entropy",
+                                        "heat-death"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Декомпозиция per-step магнитуды энтропии на ToS-единицу (различение = 1 бит, L2) + привязку к собственному времени (dS >= dtau на каждый тик), с явным, честным импортом Ландауэра как премиссы 1<=cost.",
+                       "caveat":  "Ландауэр и 2-е начало КЛАССИЧНЫ и здесь не выводятся — все результаты УСЛОВНЫ на входе cost>=1; сам файл это многократно подчёркивает. Энтропия в БИТАХ = Element-сторонний счёт (не полная статистическая энтропия). Доказательства — тривиальная nat-арифметика (lia/nia); новизна только в рамке-декомпозиции."
+                   },
+    "tags":  [
+                 "foundation",
+                 "arrow",
+                 "landauer",
+                 "entropy",
+                 "proper-time",
+                 "conditional",
+                 "binarity",
+                 "P4",
+                 "heat-death"
+             ]
+},
+{
+    "num":  1878,
+    "path":  "src/foundation/EquipartitionFromL4.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The principle of indifference / a-priori equiprobability (Laplace, Jaynes) and statistical-mechanics equipartition are classical; NEW is recasting the QUALITATIVE half as the contrapositive of L4 (Sufficient Reason) — undistinguished alternatives carry equal weight because a weight-difference would require a distinguishing reason — with the 1/N value from normalization.",
+    "title":  "Equipartition reduced to L4 (Sufficient Reason): indifference = contrapositive of 'a weight-difference needs a distinguishing reason', value 1/N from normalization",
+    "topic":  "Digs under the equipartition residual of EnergyAsActualizationRate.v: indifference (undistinguished configs carry equal weight) is derived constructively as the contrapositive of L4 via decidability of Qeq (no classic), and normalization gives the equipartition VALUE 1/N. So equipartition is not a soft separate bottom — its qualitative half IS L4.",
+    "role":  "Reduction file in the spacetime/arrow descent: closes the qualitative->quantitative gap EquipartitionBedrock.v flagged. Self-contained (Stdlib QArith only; uses Qeq decidability, NOT classic). Sibling of EquipartitionRule.v / EquipartitionBedrock.v / TierThreeUniversality.v.",
+    "qed":  3,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lqa Lia"
+                ],
+    "err":  {
+                "elements":  "конфиги Config; вес weight : Config -> Q (априорная плотность); отношение distinguishes : Config -> Config -> Prop.",
+                "roles":  "L4 = различие веса требует различающей причины (distinguishes); индифферентность = его контрапозиция; нормировка = веса в сумме 1.",
+                "rules":  "L4: ~(weight a == weight b) -> distinguishes a b; индифферентность (выведена): ~distinguishes a b -> weight a == weight b; нормировка: k равных весов в сумме 1 => каждый = 1/k.",
+                "p4":  "равнораспределение <= L4 (Достаточное основание) + нормировка — ЯДРОВОЙ закон, не мягкое дно. Качественная половина = L4 (взвесить a над b = провести различение A>B; без основания запрещено). ОСТАТКИ (честно): (1) различимые микросостояния равновероятны нужно равновесие = конец P4-стрелы; (2) энергия=темп — L5/Нётер, спекулятивнее, НЕ формализую; (3) глубоко в интерпретации, тугой ранней структуры тут нет."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "indifference_from_L4",
+                       "kind":  "Theorem",
+                       "role":  "★ ИНДИФФЕРЕНТНОСТЬ = контрапозиция L4: ~distinguishes a b -> weight a == weight b; конструктивно через Qeq_dec (0 аксиом, без classic)"
+                   },
+                   {
+                       "name":  "equipartition_value_2",
+                       "kind":  "Theorem",
+                       "role":  "конкретный N=2: два равных веса в сумме 1 => каждый = 1/2"
+                   },
+                   {
+                       "name":  "equipartition_value",
+                       "kind":  "Theorem",
+                       "role":  "★ общий N: k равных весов в сумме 1 => каждый = 1/k (значение равнораспределения из нормировки, field; lra)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "indifference_from_L4",
+                           "analysis":  "Ядро редукции: качественное равнораспределение получено как ЛОГИЧЕСКАЯ контрапозиция закона L4 (Достаточного основания). L4 постулирует «различие веса требует различающей причины»; индифферентность — это в точности «нет причины => нет различия». Ключ к 0-аксиомности: вывод конструктивен через decidability Qeq (Qeq_dec), а НЕ через classic — равенство весов разрешимо, поэтому контрапозиция законна без LEM. Это и есть заявленная редукция «равнораспределение = L4», а не отдельное мягкое дно.",
+                           "tags":  [
+                                        "L4",
+                                        "sufficient-reason",
+                                        "indifference",
+                                        "constructive",
+                                        "no-classic"
+                                    ]
+                       },
+                       {
+                           "name":  "equipartition_value",
+                           "analysis":  "Количественная половина: k равных весов, нормированных в сумму 1, каждый = 1/k. Тривиальная Q-арифметика (field; lra с положительностью inject_Z (Zpos k)), но именно она закрывает qual->quant зазор, который EquipartitionBedrock.v отметил: L4 даёт КАЧЕСТВЕННОЕ равенство, нормировка даёт ЗНАЧЕНИЕ 1/N. Честно: значение тривиально; вклад — сцепка с L4-половиной в один вывод.",
+                           "tags":  [
+                                        "normalization",
+                                        "value",
+                                        "equipartition",
+                                        "Q-arith"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Качественное равнораспределение (индифферентность) выведено КОНСТРУКТИВНО как контрапозиция ядрового закона L4 через разрешимость Qeq (0 аксиом, без classic); значение 1/N — из нормировки. Equipartition перестаёт быть отдельным мягким дном.",
+                       "caveat":  "Принцип индифферентности (Лаплас/Джейнс) и равнораспределение КЛАССИЧНЫ. Файл сам перечисляет 3 ЧЕСТНЫХ остатка: (1) полная СМ-equipartition различимых микросостояний дополнительно требует равновесия = конца P4-стрелы; (2) «энергия=темп преемственности» НЕ формализована (спекулятивнее); (3) глубоко интерпретативно. Доказательства тривиальны."
+                   },
+    "tags":  [
+                 "foundation",
+                 "equipartition",
+                 "L4",
+                 "sufficient-reason",
+                 "indifference",
+                 "no-classic",
+                 "reduction",
+                 "arrow",
+                 "P4"
+             ]
+},
+{
+    "num":  1879,
+    "path":  "src/foundation/FiniteGameDeterminacy.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Borel determinacy (Martin's theorem) classically climbs a COMPLETED tower of iterated power sets (Borel hierarchy up to ~omega_1); the finite-tree case here is the elementary BACKWARD-INDUCTION / Zermelo theorem (every finite game is determined). NEW is only the P4 framing: the completed tower is a ZFC-packaging artifact, not a P4 wall.",
+    "title":  "Finite-game determinacy rolls back to backward induction on a finite tree: a total computable function, no completed tower",
+    "topic":  "Rolls back the 'wall' of Borel/Martin determinacy: on a FINITE game tree the winner ('whoever moves') is computed by BACKWARD INDUCTION (mover_wins) as a total computable bool, with no iterated-power-set tower. The completed infinite tower is the ZFC packaging; the Borel extension is a process-indexed role-type hierarchy (NOT-yet-invoked-as-process), not a wall.",
+    "role":  "Part of the process-hierarchy / former-walls direction. Self-contained (Stdlib List Bool). Cited by FormerWallsLedger.v (the WBorelTower entry) and the companion FiniteWqoPigeonhole.v; the full ascent lives in DeterminacyAscent.v (finite rung 0-ax + open rung = LPO).",
+    "qed":  2,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: List Bool"
+                ],
+    "err":  {
+                "elements":  "конечные деревья игры GameTree (GLeaf bool | GNode list), позиции, партии.",
+                "roles":  "стратегия = процесс (правило позиция -> ход); детерминированность = роль «у кого выигрыш» (тотальный bool).",
+                "rules":  "обратная индукция mover_wins: узел выигрышен <=> есть ребёнок, после которого ПРОТИВНИК (теперь ходящий) проигрывает (orb (negb ...)); тотальность mover_wins => детерминированность.",
+                "p4":  "завершённая бесконечность здесь = упаковка башни итерированных степеней; конечная игра свободна (mover_wins — тотальная вычислимая функция). Борелевское расширение = процессно-индексированная иерархия роль-типов, НЕ привлечено как процесс, не стена."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "GameTree",
+                       "kind":  "Inductive",
+                       "role":  "конечное дерево игры: GLeaf (mover_wins_here:bool) | GNode (children: list GameTree)"
+                   },
+                   {
+                       "name":  "mover_wins",
+                       "kind":  "Fixpoint",
+                       "role":  "★ обратная индукция: ход выигрышен, если есть ребёнок, после которого противник проигрывает (вложенный fix any по списку); тотальная вычислимая bool"
+                   },
+                   {
+                       "name":  "finite_game_determined",
+                       "kind":  "Theorem",
+                       "role":  "★ детерминированность: mover_wins g = true \\/ = false (победитель определён, без завершённой башни)"
+                   },
+                   {
+                       "name":  "game_mover_wins",
+                       "kind":  "Example",
+                       "role":  "конкретный счёт: mover_wins (GNode [GLeaf false; GLeaf true]) = true (vm-вычисление)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "mover_wins",
+                           "analysis":  "Element-ядро отката: победитель «того, чей ход» на конечном дереве — структурно-рекурсивная тотальная функция (вложенный fix any реализует 'exists ребёнок с проигрышем противника' = orb (negb (mover_wins c)) ...). Именно тотальность и вычислимость на КОНЕЧНОМ дереве показывают, что содержание детерминированности не нуждается ни в каком completed tower степеней — башня нужна лишь классическому борелевскому доказательству на бесконечных играх.",
+                           "tags":  [
+                                        "backward-induction",
+                                        "total-function",
+                                        "finite",
+                                        "determinacy"
+                                    ]
+                       },
+                       {
+                           "name":  "finite_game_determined",
+                           "analysis":  "Вердикт-теорема (тривиальная: destruct по bool): раз mover_wins тотальна и булева, победитель определён по построению. Это конечная грань Цермело/обратной индукции; ценность в РАМКЕ — завершённая башня борелевской иерархии переосмыслена как ZFC-упаковка, а не P4-запрет. ЧЕСТНО: полный Мартин/Борель НЕ доказан здесь; его частичный откат (нижние рунги как процессы + открытый рунг = LPO) — в DeterminacyAscent.v.",
+                           "tags":  [
+                                        "determinacy",
+                                        "verdict",
+                                        "former-wall",
+                                        "P4"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Конечная детерминированность как тотальная вычислимая обратная индукция (0 аксиом), переосмысленная по P4: завершённая башня борелевской иерархии = ZFC-упаковка, не подлинная стена ToS.",
+                       "caveat":  "Обратная индукция / теорема Цермело о конечных играх — КЛАССИКА; mover_wins элементарна, finite_game_determined — destruct по bool. ПОЛНАЯ борелевская детерминированность (Мартин) НЕ доказана; её частичный откат (процессные рунги + LPO) вынесен в DeterminacyAscent.v. Новизна только в рамке-вердикте."
+                   },
+    "tags":  [
+                 "foundation",
+                 "determinacy",
+                 "backward-induction",
+                 "former-wall",
+                 "process-hierarchy",
+                 "finite",
+                 "no-tower",
+                 "P4"
+             ]
+},
+{
+    "num":  1880,
+    "path":  "src/foundation/FiniteWqoPigeonhole.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Kruskal's tree theorem / well-quasi-order theory classically uses a MINIMAL-BAD-SEQUENCE argument (choice over the completed space of all bad sequences); the finite kernel here is the elementary PIGEONHOLE principle. NEW is only the P4 localization: the infinity sits ONLY in the minimal-bad-sequence choice (a decidability / dependent-choice question), not in trees or ordinal strength.",
+    "title":  "WQO rolls back to a finite pigeonhole kernel: any sequence over a finite type repeats, and a repeat is a 'good pair'",
+    "topic":  "Rolls back the 'wall' of full Kruskal: the Element-kernel of a well-quasi-order is a finite PIGEONHOLE — any sequence over a finite type repeats, and a repeat is a 'good pair' (x <= x in any quasi-order). The infinity is neither in the trees (finite) nor in ordinal strength (epsilon_0 reached as a process) but ONLY in choosing the minimal-bad-sequence — a dependent-choice / decidability question.",
+    "role":  "Smallest file of the process-hierarchy / former-walls direction (1 Qed). Self-contained (Stdlib Bool). Cited by FormerWallsLedger.v (the WMinimalBadSequence entry); the general nat-wqo + N-measurable closure + method-as-process lives in WqoProcessDecidable.v; concrete wqo families (Higman) cited as classic.",
+    "qed":  1,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Bool"
+                ],
+    "err":  {
+                "elements":  "конечные значения (здесь bool — простейший конечный тип); последовательности над ними.",
+                "roles":  "«плохая последовательность» = процесс без раннего повтора; «хорошая пара» = повтор (x <= x в любом квазипорядке).",
+                "rules":  "голубятня — три значения в двухэлементном типе => совпадение хотя бы двух (хорошая пара).",
+                "p4":  "завершённая бесконечность = упаковка выбора минимально-плохой последовательности; конечное ядро (голубятня) свободно. Бесконечность НЕ в деревьях (конечны) и НЕ в ординальной силе (epsilon_0/transfinite_ind достигнуты как процессы, 0-ax, цитата), а ТОЛЬКО в выборе мин.-плохой посл-ти — а это зависимый выбор (DC), вопрос РАЗРЕШИМОСТИ (лестница выбора cs/), не бесконечности."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "bool_pigeonhole3",
+                       "kind":  "Lemma",
+                       "role":  "★ конечное голубятное ядро wqo: среди трёх булевых значений два совпадают (a=b \\/ b=c \\/ a=c); доказано полным destruct a,b,c"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "bool_pigeonhole3",
+                           "analysis":  "Единственная лемма файла и есть весь его смысл: предъявляет Element-ядро wqo как конечную голубятню — три значения в двухэлементном типе bool вынуждают совпадение, а совпадение = «хорошая пара» (рефлексивность квазипорядка). Доказательство — исчерпывающий destruct по 2^3 случаям. Риторический вес (в заголовке): он локализует ВСЮ бесконечность теоремы Крускала в ОДНОМ месте — выборе минимально-плохой последовательности (DC), переводя «стену бесконечности» в вопрос разрешимости/выбора, который изучает лестница cs/.",
+                           "tags":  [
+                                        "pigeonhole",
+                                        "wqo",
+                                        "finite-kernel",
+                                        "good-pair",
+                                        "former-wall"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Element-ядро wqo предъявлено как конечная голубятня (0 аксиом) + локализация всей бесконечности полного Крускала в одном месте — выборе мин.-плохой последовательности (DC = вопрос разрешимости, не бесконечности).",
+                       "caveat":  "Голубятня и wqo-теория — КЛАССИКА; bool_pigeonhole3 — тривиальный destruct по 8 случаям, лишь bool-инстанс. ПОЛНЫЙ Крускал НЕ доказан; общий nat-wqo + N-измеримое замыкание + метод-как-процесс вынесены в WqoProcessDecidable.v, семейства Хигмана цитируются как classic. Ценность — почти целиком в рамочной локализации, а не в самой лемме."
+                   },
+    "tags":  [
+                 "foundation",
+                 "wqo",
+                 "pigeonhole",
+                 "kruskal",
+                 "former-wall",
+                 "process-hierarchy",
+                 "finite-kernel",
+                 "dependent-choice",
+                 "P4"
+             ]
+},
+{
+    "num":  1881,
+    "path":  "src/foundation/FormerWallsLedger.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The three 'high' set-theoretic theorems it indexes — the completed power set P(N) (Cantor), full Kruskal (minimal-bad-sequence), Borel/Martin determinacy (iterated-power tower) — are all classical; NEW is NOT a theorem but a SYNTHESIS/CLASSIFICATION verdict ledger (parallel to ZFCAxiomLedger.v) that exactly one of them (the completed actual infinity itself) is a genuine P4-forbidden object.",
+    "title":  "Ledger of 'former walls': each supposed completed infinity is a ZFC-packaging artifact; exactly completed infinity is the one true P4 wall",
+    "topic":  "A verdict ledger (synthesis/classification, NOT a new theorem) collapsing the rollback of three 'high' set-theory theorems into one auditable verdict: completed P(N) is ReachedFreely, full Kruskal and Borel determinacy are PartiallyReached (lower rungs built as processes, full forms = consistency-strength horizon), and the only genuinely ForbiddenObject is completed actual infinity itself — a P4 ontological choice, not an unreachability.",
+    "role":  "Synthesis/capstone of the process-hierarchy / former-walls direction; parallel to ZFCAxiomLedger.v. Self-contained (Stdlib List Bool). The GENUINE 0-ax witnesses live in the cited per-place files: PowersetRoleType.v, FiniteGameDeterminacy.v, FiniteWqoPigeonhole.v, and the ProcessHierarchy* / DeterminacyAscent / WqoProcessDecidable ascent (stages 1-5).",
+    "qed":  4,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: List Bool"
+                ],
+    "err":  {
+                "elements":  "перечисления Wall (4 стены) / Status (4 вердикта) / классификационные конструкторы.",
+                "roles":  "«стена» = роль-требование завершённого объекта; вердикт status = роль (достигнуто-свободно / частично / не-привлечено / запрещено).",
+                "rules":  "status w; forbidden s; ровно WCompletedInfinity = ForbiddenObject; три «высокие» стены откатываются (одна свободно, две частично); zfc_posits vs tos_needs.",
+                "p4":  "из трёх классических «стен» ни одна не есть подлинный P4-запрет: completed-P(N) откатывается к достигнутой роли/операции; полный Крускал и борелевская детерминированность ЧАСТИЧНО откачены (нижние рунги КАК ПРОЦЕССЫ), полные формы = consistency-strength ГОРИЗОНТ-ПОДЪЁМ, без противоречия. Единственный запрещённый объект — сама завершённая актуальная бесконечность (WCompletedInfinity), и это ОНТОЛОГИЧЕСКИЙ выбор P4, а не недостижимость."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "Wall",
+                       "kind":  "Inductive",
+                       "role":  "4 «стены»: WPowersetObject | WMinimalBadSequence | WBorelTower | WCompletedInfinity"
+                   },
+                   {
+                       "name":  "Status",
+                       "kind":  "Inductive",
+                       "role":  "4 вердикта: ReachedFreely | PartiallyReached | NotYetBuilt | ForbiddenObject"
+                   },
+                   {
+                       "name":  "status",
+                       "kind":  "Definition",
+                       "role":  "присваивает вердикт: P(N)=ReachedFreely, Kruskal/Borel=PartiallyReached, completed-inf=ForbiddenObject (с цитатами файлов-свидетелей)"
+                   },
+                   {
+                       "name":  "forbidden",
+                       "kind":  "Definition",
+                       "role":  "булев предикат: ForbiddenObject => true, иначе false"
+                   },
+                   {
+                       "name":  "only_completed_infinity_is_a_wall",
+                       "kind":  "Theorem",
+                       "role":  "★ ровно одна стена — подлинный запрет: forbidden (status w) = true <-> w = WCompletedInfinity"
+                   },
+                   {
+                       "name":  "high_walls_dissolve",
+                       "kind":  "Theorem",
+                       "role":  "три классические «стены» НЕ запрещены: P(N) ReachedFreely, Kruskal/Borel PartiallyReached"
+                   },
+                   {
+                       "name":  "zfc_posits_completed_object",
+                       "kind":  "Definition",
+                       "role":  "классически каждая стена постулирует завершённый объект (всегда true)"
+                   },
+                   {
+                       "name":  "tos_needs_completed_object",
+                       "kind":  "Definition",
+                       "role":  "в ToS завершённый объект нужен ТОЛЬКО самой бесконечности (WCompletedInfinity => true)"
+                   },
+                   {
+                       "name":  "tos_reaches_content_without_completed_object",
+                       "kind":  "Theorem",
+                       "role":  "для каждой стены != completed-inf: ZFC постулирует объект (true), ToS его не требует (false)"
+                   },
+                   {
+                       "name":  "former_walls_are_artifacts",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: «бывшие стены» = артефакты ZFC-упаковки + ровно completed-inf = запрет (конъюнкция предыдущих двух)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "only_completed_infinity_is_a_wall",
+                           "analysis":  "Сердце вердикта: среди 4 перечисленных стен РОВНО ОДНА (завершённая актуальная бесконечность) несёт статус ForbiddenObject; три «высокие» теоретико-множественные стены — нет. Доказательство — destruct по 4 конструкторам (reflexivity/discriminate). Содержательно это и есть тезис всего направления: подлинная граница ToS — не сила теорем, а онтологический отказ от завершённой бесконечности (выбор P4); остальное достижимо (свободно или частично-как-процессы).",
+                           "tags":  [
+                                        "verdict",
+                                        "completed-infinity",
+                                        "former-wall",
+                                        "classification",
+                                        "P4"
+                                    ]
+                       },
+                       {
+                           "name":  "former_walls_are_artifacts",
+                           "analysis":  "Капстоун-конъюнкция: (1) для каждой стены кроме самой бесконечности ZFC постулирует завершённый объект, а ToS достигает содержания без него (PowersetRoleType / FiniteGameDeterminacy / FiniteWqoPigeonhole); (2) ровно completed-infinity = запрет. ЧЕСТНО (заявлено в файле): это СИНТЕЗ/КЛАССИФИКАЦИЯ, НЕ новая теорема; genuine-свидетели живут в цитируемых файлах; ПОЛНЫЕ Крускал/Борель НЕ доказаны — их полные формы остаются consistency-strength горизонтом-подъёмом, частичный откат (нижние рунги как процессы) — в направлении ProcessHierarchy*/DeterminacyAscent/WqoProcessDecidable.",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "zfc-artifact",
+                                        "consistency-strength",
+                                        "former-wall"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Аудируемый свод-вердикт (параллель ZFCAxiomLedger): три «высокие» теоретико-множественные стены сведены в одну классификацию — две частично-откачены как процессы, одна свободно, и наблюдение, что РОВНО завершённая актуальная бесконечность = единственный подлинный P4-запрет (онтологический выбор, не недостижимость).",
+                       "caveat":  "Три индексируемые теоремы (Кантор P(N), Крускал, Борель/Мартин) — КЛАССИКА; сам файл — синтез/классификация, НЕ новая теорема, 0 содержательных свидетелей внутри (все в цитируемых файлах). ПОЛНЫЕ Крускал/Борель НЕ доказаны (consistency-strength горизонт); статусы PartiallyReached опираются на уже доказанные 0-ax/classic результаты в ProcessHierarchy*/DeterminacyAscent/WqoProcessDecidable. Доказательства — destruct по перечислениям. Ценность — унификация/наблюдение, не теорема."
+                   },
+    "tags":  [
+                 "foundation",
+                 "former-walls",
+                 "ledger",
+                 "synthesis",
+                 "completed-infinity",
+                 "process-hierarchy",
+                 "zfc-artifact",
+                 "classification",
+                 "consistency-strength",
+                 "P4"
+             ]
+},
+{
+    "num":  1882,
+    "path":  "src/foundation/GravityArrowEntropy.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Penrose's gravitational-entropy picture (clustering raises entropy; Weyl-curvature low-entropy past), the thermodynamic arrow's dependence on a low-entropy initial condition (Boltzmann/past-hypothesis), and the holographic bound S=A/l_P^2 (Bekenstein-Hawking) — all classical; NEW here is only the E/R/R framing that unifies the gravitational and thermodynamic arrows as ONE distinction-density tendency sharing ONE sign-posit, with the temporal direction derived from P4.",
+    "title":  "Gravitational arrow = thermodynamic arrow = one distinction-density tendency; P4 forces the direction, the SIGN stays a posit",
+    "topic":  "Identifies entropy with distinction-density count (holographic proxy) and shows fall toward slower time = higher density = higher entropy; P4 forces the temporal DIRECTION (stage-count up) but NOT the sign (cluster vs disperse both advance the stage), so entropy increase needs the same low-density-past posit isolated by ArrowGroundingDescent.v; capped by a holographic ceiling that gravitational collapse reaches.",
+    "role":  "Part of the foundation SPACETIME/GRAVITY-ARROW descent; continues GravityIsTimeGradient.v and reuses the sign-posit of ArrowGroundingDescent.v, the time_rate=1/K link of PolarizableVacuumIndex.v, the S=A/l_P^2 count of HolographicEntropy.v (all cited, none imported — Stdlib-only, self-contained). Honest 'what reduces vs what is imported' node.",
+    "qed":  8,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "счёт стадий K; плотность различений rho; энтропия S=rho (голографический счёт, 1 бит/различение); потолок holo_max=100.",
+                "roles":  "K = направление стрелы (P4); rho = плотность = цель гравитации (высокое K) = энтропия; две траектории rho_cluster/rho_disperse = неоднозначность знака.",
+                "rules":  "P4 => счёт стадий строго растёт (направление); гравитация => падение к большему rho; энтропия = rho; знак НЕ форсирован (обе траектории продвигают стадию) => нужен низкоплотный старт; rho <= holo_max.",
+                "p4":  "ОБЪЕДИНЯЕТ гравитационную и термодинамическую стрелы как ОДНУ тенденцию плотности с ОДНИМ постулатом. Честно: НАПРАВЛЕНИЕ выведено (P4: у S нет предшественника), ЗНАК постулирован (низкая плотность в прошлом — тот же пробел, что ArrowGroundingDescent); потолок голографический. НЕ решает проблему стрелы — изолирует выведенное vs постулированное. Уровень: синтез + честный пробел."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "stage",
+                       "kind":  "Definition",
+                       "role":  "счёт стадий P4 = временное направление (stage K := K)"
+                   },
+                   {
+                       "name":  "entropy",
+                       "kind":  "Definition",
+                       "role":  "энтропия = счёт различений (entropy rho := rho), голографический прокси"
+                   },
+                   {
+                       "name":  "rho_cluster",
+                       "kind":  "Definition",
+                       "role":  "кластеризующая траектория (гравитация + низкий старт): rho0 + K"
+                   },
+                   {
+                       "name":  "rho_disperse",
+                       "kind":  "Definition",
+                       "role":  "рассеивающая (другая P4-совместимая) траектория: rho0 - K"
+                   },
+                   {
+                       "name":  "holo_max",
+                       "kind":  "Definition",
+                       "role":  "конечный голографический/чёрнодырный потолок плотности (= 100, иллюстративная битовая граница)"
+                   },
+                   {
+                       "name":  "capped_entropy",
+                       "kind":  "Definition",
+                       "role":  "энтропия, ограниченная потолком: Nat.min (entropy rho) holo_max"
+                   },
+                   {
+                       "name":  "arrow_direction_forced",
+                       "kind":  "Theorem",
+                       "role":  "★ P4: stage K < stage (S K) — временное направление форсировано"
+                   },
+                   {
+                       "name":  "entropy_is_distinction_density",
+                       "kind":  "Theorem",
+                       "role":  "энтропия ЕСТЬ счёт различений (Element-отождествление)"
+                   },
+                   {
+                       "name":  "falling_increases_entropy",
+                       "kind":  "Theorem",
+                       "role":  "падение к большей плотности (медленнее время) повышает энтропию"
+                   },
+                   {
+                       "name":  "clustering_raises_entropy",
+                       "kind":  "Theorem",
+                       "role":  "по кластер-траектории энтропия строго растёт со стадией"
+                   },
+                   {
+                       "name":  "sign_not_forced",
+                       "kind":  "Theorem",
+                       "role":  "★ честное ядро: направление форсировано, но знак нет — кластер растит, рассеяние снижает, обе продвигают стадию"
+                   },
+                   {
+                       "name":  "holographic_ceiling",
+                       "kind":  "Theorem",
+                       "role":  "capped_entropy rho <= holo_max (потолок)"
+                   },
+                   {
+                       "name":  "collapse_reaches_max",
+                       "kind":  "Theorem",
+                       "role":  "гравитационный коллапс из низкой плотности ДОСТИГАЕТ потолка (чёрная дыра = макс. энтропия)"
+                   },
+                   {
+                       "name":  "gravity_entropy_arrow",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: направление(P4) + падение=рост S + кластер-рост + знак-свободен + потолок + достижение в одной теореме"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "sign_not_forced",
+                           "analysis":  "Честное ядро всего файла и причина, по которой это не оверклейм: P4 даёт строго растущий счёт стадий (stage K < stage (S K)) — это НАПРАВЛЕНИЕ времени; но и кластеризующая (rho0+K, энтропия растёт), и рассеивающая (rho0-K, энтропия падает) траектории одинаково продвигают стадию, значит ЗНАК (растёт энтропия или падает) P4 НЕ фиксирует. Рост энтропии требует низкоплотного гладкого прошлого — ровно тот постулат низкоэнтропийного прошлого, что ArrowGroundingDescent.v изолировал для термострелы. Файл объединяет грав. и термо. стрелы и показывает общий постулат, но честно НЕ выводит термострелу.",
+                           "tags":  [
+                                        "arrow-of-time",
+                                        "honest-gap",
+                                        "sign-posit",
+                                        "P4"
+                                    ]
+                       },
+                       {
+                           "name":  "gravity_entropy_arrow",
+                           "analysis":  "Капстоун-конъюнкция: (1) направление форсировано P4; (2) падение к большей плотности = рост энтропии; (3) по кластер-траектории энтропия растёт со стадией; (4) знак не форсирован (sign_not_forced встроен); (5) голографический потолок; (6) коллапс достигает потолка. Гравитация, стрела и энтропия = ОДНА тенденция к большей плотности различений; направление выведено, знак — постулат низкоплотного прошлого. Унифицирует стрелы, не разрешает их. Чистый синтез нескольких цитируемых файлов на Stdlib-арифметике.",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "gravity-entropy",
+                                        "holographic"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Объединяет гравитационную и термодинамическую стрелы как ОДНУ тенденцию плотности различений и показывает, что они делят ОДИН постулат (низкоплотное прошлое); направление выведено из P4, знак — нет; голографический потолок достигается коллапсом.",
+                       "caveat":  "Каждый кирпич классичен (картина Пенроуза грав.-энтропии, постулат низкоэнтропийного прошлого Больцмана, граница Бекенштейна-Хокинга S=A/l_P^2). Ново только E/R/R-унификация + изоляция общего знака-постулата. Честно само-флагирует: 'энтропия=плотность' — Element-прокси, не строгая голограф. граница; holo_max=100 иллюстративен; НЕ решает проблему стрелы. Над-брендинг был бы назвать это 'выводом стрелы времени' — файл этого избегает."
+                   },
+    "tags":  [
+                 "foundation",
+                 "arrow-of-time",
+                 "entropy",
+                 "gravity",
+                 "holographic",
+                 "P4",
+                 "honest-gap",
+                 "synthesis",
+                 "spacetime-descent"
+             ]
+},
+{
+    "num":  1883,
+    "path":  "src/foundation/GravityIsTimeGradient.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The weak-field GR statement 'gravity = curvature of TIME' (Newtonian potential Phi=(g_00-1)/2, clocks slow near mass) and the equivalence principle m_grav=m_inert are standard GR; NEW (ToS framing) is the ontological derivation of WHY g_00 varies — g_00 = time-rate = 1/(local distinction density), mass = distinction density — and the equivalence principle as a structural one-field-two-roles fact.",
+    "title":  "Gravity = the gradient of the rate of time; time-rate = 1/(distinction density), pull = drop of time-rate inward",
+    "topic":  "Formalizes the weak-field Element-side gravity<->time link over Q: time_rate(phi)=1/K(phi) with K=1+2phi (replicated from PolarizableVacuumIndex.v); proves rate*density=1, clocks run slower deeper, the Newtonian-potential identity 1-time_rate=2*phi*time_rate, and that the gravitational pull (drop of time-rate going inward) is positive — gravity IS the discrete gradient of the time-rate.",
+    "role":  "An earlier node of the foundation SPACETIME/GRAVITY-ARROW descent (Step 6-7 of the chain), feeding GravityArrowEntropy.v. Self-contained over Q (Stdlib QArith only; K replicated from PolarizableVacuumIndex.v). Cites CausalSignature/EnergyDeterminesGraph/GravitySymSquareGauge for the upstream chain but imports none.",
+    "qed":  8,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lqa Setoid"
+                ],
+    "err":  {
+                "elements":  "скорость времени time_rate(phi); плотность различений K=vac_index(phi)=1+2phi; глубина потенциала phi.",
+                "roles":  "time_rate = ход собственных часов (g_00); K = локальная плотность различений (= степень графа); phi = глубина/источник (= ньютонов потенциал GM/r).",
+                "rules":  "time_rate = 1/K; часы медленнее там, где K выше; гравитация (тяга) = градиент (падение) скорости времени; падение = к более медленному времени = к большей плотности различений; m_grav=m_inert (один phi — две роли).",
+                "p4":  "ВРЕМЯ (преемство, L5+P4: у S нет предшественника) ПРИМИТИВНЕЕ гравитации (метрики); метрика Sym^2(Roles) уже СОДЕРЖИТ скорость времени как g_00, значит связь = вложенность, не взаимодействие. ПЭ структурен: один источник phi задаёт такт И влечёт падение. Честно: слабое поле, скалярная Element-сторона; 'грав.=кривизна времени' — стандарт, ново — вывод 'скорость времени=1/плотность-различений' + структурный ПЭ. Уровень: новое обрамление / синтез."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "vac_index",
+                       "kind":  "Definition",
+                       "role":  "локальная плотность различений K = 1 + 2*phi (слабое поле; реплика из PolarizableVacuumIndex.v)"
+                   },
+                   {
+                       "name":  "time_rate",
+                       "kind":  "Definition",
+                       "role":  "скорость собственного времени = c_eff = 1/K (такт часов)"
+                   },
+                   {
+                       "name":  "grav_potential",
+                       "kind":  "Definition",
+                       "role":  "ньютонова глубина потенциала phi = GM/r (>=0, больше у массы)"
+                   },
+                   {
+                       "name":  "grav_pull",
+                       "kind":  "Definition",
+                       "role":  "грав. тяга между ближней и дальней оболочкой = падение скорости времени внутрь (time_rate far - time_rate near)"
+                   },
+                   {
+                       "name":  "index_pos",
+                       "kind":  "Lemma",
+                       "role":  "0 <= phi => 0 < vac_index phi (положительность индекса)"
+                   },
+                   {
+                       "name":  "index_increasing",
+                       "kind":  "Lemma",
+                       "role":  "p1 < p2 => vac_index p1 < vac_index p2 (индекс растёт с глубиной)"
+                   },
+                   {
+                       "name":  "Qinv_antitone",
+                       "kind":  "Lemma",
+                       "role":  "обратная функция антитонна на положительных: 0<a, a<b => 1/b < 1/a"
+                   },
+                   {
+                       "name":  "rate_times_density",
+                       "kind":  "Lemma",
+                       "role":  "★ rate*density=1: такт часов = ровно 1/(локальная плотность различений)"
+                   },
+                   {
+                       "name":  "clock_slower_deeper",
+                       "kind":  "Lemma",
+                       "role":  "★ глубже в яме (выше phi) часы идут МЕДЛЕННЕЕ (time_rate p2 < time_rate p1)"
+                   },
+                   {
+                       "name":  "time_rate_deficit",
+                       "kind":  "Lemma",
+                       "role":  "ньютонов потенциал = дефицит скорости времени: 1 - time_rate = 2*phi*time_rate"
+                   },
+                   {
+                       "name":  "grav_pull_positive",
+                       "kind":  "Lemma",
+                       "role":  "★ грав. тяга > 0 к ближней (глубокой, медленновременной) оболочке — падают к медленному времени"
+                   },
+                   {
+                       "name":  "gravity_is_time_gradient",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: rate=1/density + медленнее глубже + Ньютон=дефицит + падение к медленному + тяга=градиент времени"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "rate_times_density",
+                           "analysis":  "Онтологическое ядро файла: time_rate * vac_index = 1, т.е. такт собственных часов ТОЧНО обратен локальной плотности различений K. Это и есть 'новое содержание', которое ToS-методология добавляет к стандартному слабополевому 'грав.=кривизна времени': не просто g_00 меняется, а ПОЧЕМУ — g_00 = скорость времени = 1/(плотность различений), а масса = плотность различений. Доказывается field-тактикой над Q (field; lra). Честно: тождество тривиально для определения 1/K; ценность — онтологическая интерпретация, не математическая глубина.",
+                           "tags":  [
+                                        "time-rate",
+                                        "distinction-density",
+                                        "ontology",
+                                        "weak-field"
+                                    ]
+                       },
+                       {
+                           "name":  "clock_slower_deeper",
+                           "analysis":  "Слабополевое замедление времени как теорема над Q: глубже (выше phi, ближе к массе) => time_rate p2 < time_rate p1, через антитонность обратной функции (Qinv_antitone) и рост индекса. Это машинно-проверенная форма стандартного факта 'часы у массы идут медленнее', выведенная не из метрики, а из роста плотности различений. Структурный ПЭ виден: тот же phi, что задаёт такт, есть и то, к чему падает содержимое.",
+                           "tags":  [
+                                        "time-dilation",
+                                        "antitone",
+                                        "equivalence-principle"
+                                    ]
+                       },
+                       {
+                           "name":  "grav_pull_positive",
+                           "analysis":  "Связывает гравитацию с градиентом: тяга = time_rate(far) - time_rate(near) > 0, то есть содержимое падает туда, где время медленнее. grav_pull = дискретный градиент скорости времени, и капстоун доказывает grav_pull == time_rate pf - time_rate pn по определению — гравитация ЕСТЬ градиент такта. Element-сторона; role-limit = полная нелинейная тензорная метрика, честно вынесена за скобки.",
+                           "tags":  [
+                                        "gravity-gradient",
+                                        "fall",
+                                        "weak-field"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Слабополевое 'гравитация = градиент скорости времени' переосмыслено онтологически: скорость времени = 1/(плотность различений), масса = плотность различений, ПЭ структурен (один phi — две роли); машинно над Q.",
+                       "caveat":  "'Гравитация = кривизна времени' (Phi=(g_00-1)/2, замедление часов у массы) и ПЭ m_grav=m_inert — стандартная слабополевая ОТО. Ново только ToS-обрамление (вывод 'скорость времени=1/плотность-различений' + структурный ПЭ). Честно само-флагирует: слабое поле, медленная материя, скалярная Element-сторона; полная нелинейная тензорная ОТО = role-limit, не здесь; над-брендинг был бы выдать это за вывод ОТО."
+                   },
+    "tags":  [
+                 "foundation",
+                 "gravity",
+                 "time-rate",
+                 "weak-field",
+                 "equivalence-principle",
+                 "distinction-density",
+                 "Q-arith",
+                 "new-framing",
+                 "spacetime-descent"
+             ]
+},
+{
+    "num":  1884,
+    "path":  "src/foundation/HierarchyDepthLadder.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The constructive reverse-mathematics fact that 'does a binary sequence ever fire, or never?' (forall n, g n=false vs exists n, g n=true) is exactly LPO (the limited principle of omniscience), and that LEM decides it / classically it collapses, with LPO_omega strictly above LPO — all standard constructive RM (Bishop/Bridges); NEW is only the Element/role-limit 'depth = omniscience rung' framing tying a tower-floor (Level n role-type) to a rung of completed infinity.",
+    "title":  "Tower floor = omniscience rung; floor 0 decidable (Element), floor 1 = LPO, LEM collapses the grading (visible only via P4)",
+    "topic":  "Stage 2 of the Process-Hierarchy direction: gives the DEPTH of the ascending role-type tower (Level n) — floor 0 (Level 0=nat) has decidable equality (rung 0, Element); floor 1 (Level 1=nat->bool) decision 'fires or never' is EXACTLY LPO; LEM decides floor 1 (rung collapses classically); LPO_omega->LPO (higher floor strictly stronger). The grading is constructive — visible only without LEM (i.e. via P4).",
+    "role":  "Part of the foundation PROCESS-HIERARCHY/DETERMINACY work; stage 2 above ProcessHierarchyCore.v (the ascending role-type tower Level n) and over RoleLimitLadder.v (the omniscience rungs LPO/LPO_omega/LEM). Imports both. Establishes the floor<->rung correspondence's lower rungs + grading direction; NOT a full floor_n<->rung_n isomorphism.",
+    "qed":  4,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia",
+                    "ToS: foundation.ProcessHierarchyCore",
+                    "ToS: foundation.RoleLimitLadder"
+                ],
+    "err":  {
+                "elements":  "булева g : Level 1 (роль-тип nat->bool); равенство на Level 0 = nat.",
+                "roles":  "этаж = вопрос данной кванторной глубины; рунг = требуемое всеведение (завершённая бесконечность); LEM = оракул-схлоп.",
+                "rules":  "этаж 0 разрешим (рунг 0, Element); этаж 1 = LPO (Sigma^0_1); LEM схлопывает этаж 1; LPO_omega -> LPO (выше строго сильнее).",
+                "p4":  "ГЛУБИНА этажа башни = РУНГ всеведения: сколько завершённой бесконечности требует вопрос на этом этаже. Градация КОНСТРУКТИВНА — классически (LEM) этаж 1 решается, рунг СХЛОПЫВАЕТСЯ, глубина плоская; видна лишь без LEM, то есть через P4. Честно: LEM/LPO — Prop-ГИПОТЕЗЫ, не аксиомы (0 аксиом); строятся НИЖНИЕ рунги (0=разрешимо, 1=LPO), полный изоморфизм этаж_n<->рунг_n не строится. Уровень: новое обрамление."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "level0_decidable",
+                       "kind":  "Lemma",
+                       "role":  "этаж 0 (Level 0=nat): равенство РАЗРЕШИМО ({x=y}+{x<>y}) — рунг 0, Element"
+                   },
+                   {
+                       "name":  "decide_level1",
+                       "kind":  "Definition",
+                       "role":  "решение на этаже 1 (nat->bool): 'срабатывает или никогда' (exists n, g n=true) \\/ (forall n, g n=false)"
+                   },
+                   {
+                       "name":  "level1_decision_is_LPO",
+                       "kind":  "Lemma",
+                       "role":  "★ это РОВНО LPO: decide_level1 <-> LPO (этаж 1 = рунг Sigma^0_1)"
+                   },
+                   {
+                       "name":  "lem_decides_level1",
+                       "kind":  "Lemma",
+                       "role":  "градация конструктивна: LEM -> decide_level1 (классически рунг схлопывается)"
+                   },
+                   {
+                       "name":  "hierarchy_depth_is_omniscience_grading",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: этаж 0 разрешим + этаж 1=LPO + LEM схлопывает + LPO_omega->LPO (восходящая градация, видимая лишь через P4)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "level1_decision_is_LPO",
+                           "analysis":  "Точное ядро соответствия этаж<->рунг: вопрос 'срабатывает ли булева g : Level 1 хоть раз, или никогда' формально СОВПАДАЕТ с LPO. Доказательство тривиально (обе стороны — одно и то же Prop, split; exact H) — и это честно: новизна не в доказательстве, а в ИДЕНТИФИКАЦИИ этажа 1 восходящей роль-типовой башни (ProcessHierarchyCore) с рунгом всеведения Sigma^0_1. Так конкретный этаж процессной иерархии привязан к конкретному рунгу конструктивной reverse math.",
+                           "tags":  [
+                                        "LPO",
+                                        "floor-rung",
+                                        "role-limit",
+                                        "constructive"
+                                    ]
+                       },
+                       {
+                           "name":  "hierarchy_depth_is_omniscience_grading",
+                           "analysis":  "Капстоун-конъюнкция градации: (этаж 0 разрешим, рунг 0/Element) /\\ (этаж 1 <-> LPO) /\\ (LEM -> decide_level1, классически плоско) /\\ (LPO_omega -> LPO, выше строго сильнее, через RoleLimitLadder.lpo_omega_lpo). Честный P4-пункт: градация КОНСТРУКТИВНА — под LEM рунг схлопывается, глубина видна лишь без LEM. Это и значит 'подъём role-limit-стороны виден лишь через P4'. Строятся нижние рунги + направление; полный изоморфизм для всех n НЕ строится (выше LPO_omega — цитата RoleLimitLadder).",
+                           "tags":  [
+                                        "capstone",
+                                        "omniscience-grading",
+                                        "P4",
+                                        "constructive-only"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Глубина этажа восходящей роль-типовой башни = рунг всеведения: этаж 0 разрешим (Element), этаж 1 = РОВНО LPO, и градация КОНСТРУКТИВНА (LEM её схлопывает) — видна лишь через P4.",
+                       "caveat":  "LPO как 'fires-or-never', схлопывание под LEM и LPO_omega>LPO — стандартная конструктивная reverse math (Bishop/Bridges). Ново только обрамление 'этаж башни = рунг всеведения'. Честно само-флагирует: строятся лишь НИЖНИЕ рунги (0,1), ПОЛНОГО изоморфизма этаж_n<->рунг_n нет; LEM/LPO — Prop-гипотезы, не аксиомы (0 аксиом); строгость рунгов (необратимость) — в RoleLimitLadder, не здесь."
+                   },
+    "tags":  [
+                 "foundation",
+                 "process-hierarchy",
+                 "LPO",
+                 "omniscience",
+                 "constructive",
+                 "role-limit",
+                 "P4",
+                 "new-framing",
+                 "determinacy-ascent"
+             ]
+},
+{
+    "num":  1885,
+    "path":  "src/foundation/LandauerFromP4.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Landauer's principle (>=k_B ln2 per irreversible bit erasure; floor = 1 bit = log2(2)) is a fundamental result of the physics of information (Landauer 1961; Bennett); NEW is only the E/R/R decomposition of the floor into ToS laws (value <= binarity L2, unit <= entropy=count proxy) and the self-corrected analysis of WHETHER its positivity reduces to P4-permanence — the file itself concludes (via a CORRECTION) that positivity rests on RECORDING, a separate principle, NOT on P4.",
+    "title":  "Does the Landauer floor reduce to P4? — value <= binarity, unit <= count-proxy; positivity self-corrected from P4 to RECORDING (honest residual)",
+    "topic":  "Models a binary distinction (2 branches, 1 committed) and the unchosen branch's fate (retained-inaccessible if permanent, else annihilated=0), with entropy_cost = the inaccessible count; proves the floor value = branches-committed = 1 bit (binarity L2), is positive iff permanent, and that annihilation (the only free option) is ~P4. The header then CORRECTS itself: positivity actually rests on RECORDING (present encodes the fact), not on P4-determinacy.",
+    "role":  "Part of the foundation GRAVITY-ARROW/thermodynamics descent (Landauer* node); an honest 'reduces to ToS laws vs imported principle' analysis that flags its own irreducible import. Self-contained (Stdlib only); cross-references RecordingVsDeterminacy.v for the correction that splits metaphysical determinacy (P4) from physical recording.",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "2 ветви (бинарно, L2); зафиксированная ветвь (1); судьба невыбранной ветви; счёт недоступных различений.",
+                "roles":  "постоянство (P4-флаг permanent) = судьба 'удержана-недоступной'; бинарность = счёт (2-1); энтропия = счёт.",
+                "rules":  "P4 => удержана; бинарность => удержано = 2-1 = 1; энтропия=счёт => cost=1; аннигиляция (=~P4) => 0; cost>0 <=> permanent.",
+                "p4":  "ВОПРОС (разобран, не пред-решён): сводится ли пол Ландауэра к P4? Значение(=1) <= бинарность L2; единица <= прокси энтропия=счёт. ИЗНАЧАЛЬНО заявлено: положительность <= P4 (аннигиляция=~P4 бесплатна). КОРРЕКЦИЯ (RecordingVsDeterminacy.v): это ПЕРЕОЦЕНКА — смешаны метафизическая определённость (P4: прошлое — фиксированный факт) и физическая ЗАПИСЬ (настоящее кодирует факт = ландауэровский бит); определённое прошлое может быть НЕ записано. Значит положительность опирается на ЗАПИСЬ (отдельный принцип), НЕ на P4. Уровень: редукция импорта к основанию + честный (само-исправленный) остаток."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "branches",
+                       "kind":  "Definition",
+                       "role":  "бинарное различение (L2): ровно 2 ветви (= 2)"
+                   },
+                   {
+                       "name":  "committed",
+                       "kind":  "Definition",
+                       "role":  "фиксация актуализирует ровно ОДНУ ветвь (= 1)"
+                   },
+                   {
+                       "name":  "retained_inaccessible",
+                       "kind":  "Definition",
+                       "role":  "судьба невыбранной ветви: if permanent then branches-committed else 0 (удержана / аннигилирована)"
+                   },
+                   {
+                       "name":  "entropy_cost",
+                       "kind":  "Definition",
+                       "role":  "приращение энтропии = счёт недоступных различений (прокси/единичный мост)"
+                   },
+                   {
+                       "name":  "cost_value_from_binarity",
+                       "kind":  "Theorem",
+                       "role":  "★ значение пола = branches-committed = бинарный '1 бит' (L2)"
+                   },
+                   {
+                       "name":  "binary_retains_one_bit",
+                       "kind":  "Theorem",
+                       "role":  "бинарная фиксация удерживает ровно 1 бит (= log2(2))"
+                   },
+                   {
+                       "name":  "annihilation_is_free",
+                       "kind":  "Theorem",
+                       "role":  "аннигиляция (=~P4) стоит 0 (единственный бесплатный вариант)"
+                   },
+                   {
+                       "name":  "floor_positive_from_permanence",
+                       "kind":  "Theorem",
+                       "role":  "★ пол ПОЛОЖИТЕЛЕН для постоянного прошлого (0 < entropy_cost true) — изначально приписано P4, исправлено на ЗАПИСЬ"
+                   },
+                   {
+                       "name":  "floor_iff_permanent",
+                       "kind":  "Theorem",
+                       "role":  "★ cost>0 <=> permanent: пол СУЩЕСТВУЕТ ровно из-за постоянства (аннигиляция = ~P4)"
+                   },
+                   {
+                       "name":  "landauer_floor_reduced",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: значение=L2 + =1 + положителен + free=~P4 + iff-permanent (редукция по модулю прокси R1 и чтения R2)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "cost_value_from_binarity",
+                           "analysis":  "Прочная, НЕ исправленная часть редукции: значение пола = branches - committed = 2 - 1 = 1 бит — то есть ЗНАЧЕНИЕ пола Ландауэра выводится из бинарности (L2), а не постулируется. Доказывается reflexivity на счётной модели. Это законная декомпозиция: log2(2)=1 = (число ветвей - зафиксированных). Единица (физическая k_B ln2) приходит через прокси энтропия=счёт (R1, не устранён).",
+                           "tags":  [
+                                        "landauer",
+                                        "binarity",
+                                        "L2",
+                                        "value-reduces"
+                                    ]
+                       },
+                       {
+                           "name":  "floor_iff_permanent",
+                           "analysis":  "Технически чистая теорема (cost>0 <=> permanent=true), доказанная разбором булева флага; НО её ИНТЕРПРЕТАЦИЯ само-исправлена в шапке. Изначально: 'пол существует ровно из-за P4, аннигиляция=~P4 бесплатна'. Коррекция (RecordingVsDeterminacy.v): чтение R2 'P4-определённость => ветвь удержана' СМЕШИВАЕТ метафизическую определённость (P4 даёт лишь ФАКТ) с физической записью (настоящее КОДИРУЕТ факт — ландауэровски значимый бит); определённое прошлое может быть стёрто без следа. Значит положительность опирается на ЗАПИСЬ, отдельный принцип, НЕ на P4. Образцовая честность: файл доказывает теорему и тут же ограничивает её философское прочтение.",
+                           "tags":  [
+                                        "landauer",
+                                        "P4",
+                                        "recording",
+                                        "self-correction",
+                                        "honest-residual"
+                                    ]
+                       },
+                       {
+                           "name":  "landauer_floor_reduced",
+                           "analysis":  "Капстоун-редукция: значение=L2-бинарность, =1, положителен, free=~P4, iff-permanent — пол Ландауэра НЕ независимый динамический постулат поверх ToS, а декомпозиция P4(после коррекции: запись)+бинарность+прокси. Честный остаток явно назван: (R1) энтропия=счёт — единичный мост, не устранён; (R2) чтение определённости — исправлено на запись. Уровень — редукция импорта к основанию с честным (само-исправленным) остатком: ЗНАЧЕНИЕ редуцируется надёжно, ПОЛОЖИТЕЛЬНОСТЬ — нет.",
+                           "tags":  [
+                                        "capstone",
+                                        "reduction",
+                                        "import-vs-derived",
+                                        "honest-residual"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "E/R/R-декомпозиция пола Ландауэра: ЗНАЧЕНИЕ (=1 бит) выводится из бинарности (L2), единица — прокси энтропия=счёт; вопрос о ПОЛОЖИТЕЛЬНОСТИ разобран и САМО-ИСПРАВЛЕН — она опирается на ЗАПИСЬ (отдельный принцип), не на P4.",
+                       "caveat":  "Принцип Ландауэра (>=k_B ln2/бит) — фундаментальный результат физики информации (Landauer 1961, Bennett), здесь НЕ передоказывается. Ново только декомпозиция в законы ToS. Образцово честно: файл сам ОПРОВЕРГАЕТ свой первоначальный заголовок ('positivity <= P4'), отделяя определённость (P4=факт) от записи (кодирование=бит) — значит Ландауэр НЕ редуцируется к P4. Над-брендинг ('пол Ландауэра выведен из P4') файлом явно снят коррекцией; примитивность чтения R2 vs Ландауэр оставлена ОТКРЫТОЙ."
+                   },
+    "tags":  [
+                 "foundation",
+                 "landauer",
+                 "information-physics",
+                 "P4",
+                 "recording",
+                 "import-vs-derived",
+                 "honest-residual",
+                 "self-correction",
+                 "new-framing",
+                 "thermodynamics-descent"
+             ]
+},
+{
+    "num":  1886,
+    "path":  "src/foundation/PowersetRoleType.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Cantor's theorem (no surjection nat -> (nat->bool); P(N) uncountable) and the finite identity |P(S)|=2^|S| are classical set theory; NEW is only the P4 'wall-rollback' framing — splitting the completed P(N) into (a) the subset OPERATION = role-type nat->bool and (b) the completed COLLECTION, locating ALL the infinity in (b) and showing (b) is never needed (a ZFC-packaging artifact, not a boundary of ToS).",
+    "title":  "Powerset object rolls back to the role-type N->bool; finite |P|=2^n is Element-free, Cantor diagonal is the role-limit core — completed P(N) is a ZFC artifact",
+    "topic":  "Rolls back the 'wall' of completed P(N) (Part X): in 'P(N)' two things are conflated — (a) the subset OPERATION/role = predicate nat->bool (a process of membership decisions) and (b) the completed COLLECTION of all predicates as a finished totality; the infinity sits ONLY in (b), which is never needed. Element side is free (finite powerset = exactly 2^n, powerset_card), and the uncountability core needs no completed object (Cantor diagonal cantor_bool_seq).",
+    "role":  "Part of the foundation FORMER-WALLS / Process-Hierarchy work (Part X set-theory-without-AC descent): a 'former walls are ZFC-packaging artifacts' node, companion to RoleToSUNGrounding / FormerWalls files. Self-contained (Stdlib only); reframes Cantor's P(N) as a role-type rather than importing settheory machinery.",
+    "qed":  3,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia List Bool"
+                ],
+    "err":  {
+                "elements":  "конечные подмножества (powerset l, 2^n штук, список); булевы последовательности nat->bool.",
+                "roles":  "подмножество = роль-предикат-процесс (решения о принадлежности); 'степень' = роль-тип nat->bool = пространство процессов уровнем выше.",
+                "rules":  "P1 (роль-тип на уровень выше N, не Element того же уровня); диагональ (нет сюръекции nat -> (nat->bool)).",
+                "p4":  "ОТКАТ стены (метод P4): завершённый P(N) сливает ОПЕРАЦИЮ 'подмножество' (роль-тип nat->bool, процесс) и завершённый СБОР всех предикатов в готовую тотальность. Бесконечность сидит ТОЛЬКО в завершённом сборе (b), и (b) нигде не нужен — всё содержание про роль-тип. Element-сторона свободна (2^n вычислимо), ядро несчётности свободно (диагональ). Завершённый P(N) как Element = артефакт ZFC-упаковки, НЕ граница нашей системы. Уровень: новое обрамление."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "powerset",
+                       "kind":  "Fixpoint",
+                       "role":  "конечный степенной объект как СПИСОК списков (nil=>[[]]; x::xs => ps ++ map (cons x) ps) — без завершённой бесконечности"
+                   },
+                   {
+                       "name":  "powerset_card",
+                       "kind":  "Lemma",
+                       "role":  "★ Element-сторона: length (powerset l) = 2 ^ length l (ровно 2^n подмножеств, вычислимо)"
+                   },
+                   {
+                       "name":  "powerset_3_has_8",
+                       "kind":  "Example",
+                       "role":  "length (powerset [1;2;3]) = 8 (конкретная проверка reflexivity)"
+                   },
+                   {
+                       "name":  "cantor_bool_seq",
+                       "kind":  "Theorem",
+                       "role":  "★ ядро 'P(N) несчётно' БЕЗ завершённого объекта: для всякого f:nat->(nat->bool) есть g с forall n, g<>f n (диагональ)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "cantor_bool_seq",
+                           "analysis":  "Ядро 'несчётности P(N)' извлечённое БЕЗ завершённого объекта: для любой нумерации f:nat->(nat->bool) диагональ g=fun n=>negb(f n n) отличается от каждого f n — нет сюръекции nat->(nat->bool). Это та же negb-диагональ, что движет halting/Cantor по всему репо (см. cs/BoundaryDecidability one_boundary_three_faces). Тезис файла: именно ЭТО ZFC паковал в завершённый несчётный P(N) как Element; но содержание — про роль-тип (пространство процессов nat->bool), завершённый сбор не нужен. Честно: сама теорема Кантора классична; ново обрамление 'P(N) = роль-тип, не завершённый Element'.",
+                           "tags":  [
+                                        "diagonal",
+                                        "cantor",
+                                        "role-limit",
+                                        "uncountable"
+                                    ]
+                       },
+                       {
+                           "name":  "powerset_card",
+                           "analysis":  "Element-сторона стены, свободная и вычислимая: конечный powerset (как список списков) имеет длину ровно 2^n. Доказывается индукцией с length_app/length_map. Показывает, что ОПЕРАЦИЯ взятия подмножеств финитна и точна на конечных входах; завершённая бесконечность появляется ТОЛЬКО при попытке собрать все nat->bool в готовую тотальность (b) — а это нигде не нужно. Контраст с cantor_bool_seq: конечно => Element/2^n, бесконечный роль-тип => диагональ/role-limit.",
+                           "tags":  [
+                                        "powerset",
+                                        "finite",
+                                        "element-side",
+                                        "2^n"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Завершённый P(N) откатывается к роль-типу nat->bool: ОПЕРАЦИЯ-подмножество (предикат-процесс) и ядро несчётности (диагональ) свободны и не требуют завершённого объекта; бесконечность сидит лишь в готовом СБОРЕ всех предикатов, который нигде не нужен — артефакт ZFC-упаковки.",
+                       "caveat":  "Теорема Кантора (нет сюръекции nat->(nat->bool)) и |P(S)|=2^|S| — классическая теория множеств; передоказаны 0-аксиомной диагональю/индукцией, но содержание известно. Ново только P4-обрамление 'P(N) = роль-тип, не стена-Element'. Та же negb-диагональ переиспользована из cs/uncountability вертикали; это инстанс единой границы, НЕ новая теорема."
+                   },
+    "tags":  [
+                 "foundation",
+                 "powerset",
+                 "cantor",
+                 "diagonal",
+                 "role-type",
+                 "former-walls",
+                 "no-AC",
+                 "P4",
+                 "uncountable",
+                 "new-framing",
+                 "settheory-descent"
+             ]
+},
+{
+    "num":  1887,
+    "path":  "src/foundation/ProcessHierarchyCore.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Cantor's theorem (no surjection X -> 2^X) applied stage-by-stage to the cumulative type tower Level 0 = nat, Level (S k) = Level k -> bool; the classical analogue is the cumulative hierarchy / V_omega and the iterated-powerset Borel/projective ladder. NEW is only the ToS framing of that ladder as a GENERATIVE ordinal-process ascent (omega = OLim), not a completed object.",
+    "title":  "Process-hierarchy core: the role-limit side as an ordinal-indexed generative ascent, not a wall",
+    "topic":  "Builds an ascending cumulative tower of role-types (Level 0 = nat, Level (S k) = predicates over Level k), proves a Cantor diagonal at EVERY storey (strict growth), no maximal storey, and indexes the tower height by the ordinal-process omega = OLim, whose closure is role-limit (unbounded).",
+    "role":  "Stage 1 (core) of the 'process hierarchy' direction. Imports foundation/Ordinal (Ord, omega, OLim, nat_to_ord). Reused by the later stages (DeterminacyAscent, WqoProcessDecidable) and the capstone ProcessHierarchySynthesis.",
+    "qed":  5,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia Bool",
+                    "ToS: foundation.Ordinal"
+                ],
+    "err":  {
+                "elements":  "этажи-роль-типы Level n (Level 0 = nat, Level (S k) = Level k -> bool), каждый конечно-конструируем на стадии; поток высоты tower_height_flow : nat -> nat.",
+                "roles":  "Level n = роль-тип (пространство процессов-решений) над этажом n-1; высота башни = ординал-процесс omega; диагональ negb = правило подъёма на следующий этаж.",
+                "rules":  "cantor_level: нет сюръекции Level n -> Level (S n) (строгий подъём); no_maximal_level: над любым n есть строго больший (нет вершины); tower_height_unbounded: высота неограниченна => замыкание role-limit.",
+                "p4":  "башня потенциальна: каждый этаж конечно-конструируем (Element-сторона), но omega-замыкание НЕ есть завершённый Element-объект — достижимо лишь как процесс; завершённой иерархии-объекта (V_omega, борелевская башня) не строим (ZFC-упаковка)."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "Level",
+                       "kind":  "Fixpoint",
+                       "role":  "кумулятивная башня роль-типов: Level 0 = nat, Level (S k) = Level k -> bool"
+                   },
+                   {
+                       "name":  "cantor_level",
+                       "kind":  "Theorem",
+                       "role":  "★ Кантор на каждом этаже: нет сюръекции Level n -> Level (S n) (диагональ negb (f x x))"
+                   },
+                   {
+                       "name":  "no_maximal_level",
+                       "kind":  "Theorem",
+                       "role":  "★ нет максимального этажа: над любым n есть строго больший m=S n, не накрываемый (порождающность)"
+                   },
+                   {
+                       "name":  "level_index",
+                       "kind":  "Definition",
+                       "role":  "индекс высоты этажа n как ординал: nat_to_ord n"
+                   },
+                   {
+                       "name":  "tower_height_is_limit_process",
+                       "kind":  "Theorem",
+                       "role":  "высота башни = omega = OLim level_index (индекс — ординал-процесс, не число)"
+                   },
+                   {
+                       "name":  "tower_height_flow",
+                       "kind":  "Definition",
+                       "role":  "поток высоты tower_height_flow n := n (монотонный убегающий)"
+                   },
+                   {
+                       "name":  "tower_height_unbounded",
+                       "kind":  "Theorem",
+                       "role":  "высота неограниченна => по дихотомии InterLevelCalculus замыкание = role-limit"
+                   },
+                   {
+                       "name":  "process_hierarchy_is_generative_ascent",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун ядра: строгий подъём /\\ нет вершины /\\ индекс = omega-процесс /\\ незамкнуто (role-limit)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "cantor_level",
+                           "analysis":  "Канторова диагональ, поднятая на КАЖДЫЙ этаж кумулятивной башни роль-типов: для любого f : Level n -> Level (S n) свидетель (fun x => negb (f x x)) не накрывается => башня строго растёт этаж за этажом. При n=0 это в точности ядро несчётности ('нет перечислителя nat -> (nat -> bool)'). Содержательно тождественна одной негбе-диагонали из cs/BoundaryDecidability — здесь она инстанцирована поэтажно, давая строгий рост, а не отдельный новый факт.",
+                           "tags":  [
+                                        "diagonal",
+                                        "cantor",
+                                        "role-limit",
+                                        "tower"
+                                    ]
+                       },
+                       {
+                           "name":  "process_hierarchy_is_generative_ascent",
+                           "analysis":  "Капстоун ядра: role-limit-сторона границы финитизации НЕ плоскость и НЕ бинарная стена, а ОРДИНАЛ-ИНДЕКСИРОВАННЫЙ ПОРОЖДАЮЩИЙ подъём — строгий рост (Кантор поэтажно) + отсутствие вершины + индекс omega=OLim (процесс, не завершённое число) + неограниченность (замыкание role-limit). Уровень — new-framing: каждый кирпич (Кантор, omega) классичен; ново обрамление 'иерархия = процесс' как теоретико-множественный аналог R=Коши, Qbar=башня, многообразие=процесс. Сам omega=OLim level_index держится reflexivity (тавтологичен по построению OLim).",
+                           "tags":  [
+                                        "synthesis",
+                                        "generative",
+                                        "ordinal-process",
+                                        "framing"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Role-limit-сторона границы финитизации переосмыслена как ординал-процесс-подъём роль-типов: кумулятивная башня Level n со строгим поэтажным ростом (Кантор), без вершины, индексированная omega=OLim, с role-limit-замыканием по неограниченности — 0 аксиом.",
+                       "caveat":  "Каждый компонент классичен: Кантор поэтажно, кумулятивная башня = V_omega/итерированный степенной набор, omega — стандартный ординал. Ново только E/R/R-обрамление 'иерархия=процесс' и поэтажная диагональ; omega=OLim держится reflexivity (тавтология построения). ПОЛНЫЕ борелевская/проективная башни НЕ строятся (горизонт consistency-strength, явно вне scope)."
+                   },
+    "tags":  [
+                 "diagonal",
+                 "cantor",
+                 "ordinal-process",
+                 "role-limit",
+                 "tower",
+                 "P4",
+                 "new-framing",
+                 "no-AC"
+             ]
+},
+{
+    "num":  1888,
+    "path":  "src/foundation/ProcessHierarchySynthesis.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Stitches together the iterated-powerset hierarchy (Cantor), finite/infinite game determinacy (the Borel-determinacy ladder, Martin), Kruskal/wqo (nat well-quasi-order), and the LPO omniscience principle of constructive analysis. All four classical; NEW is the OBSERVATION that the type-tower depth (stage 1) and the determinacy ascent (stage 3) share ONE ordinal index omega=OLim and ONE recurring LPO rung (level-1 decision <-> open determinacy).",
+    "title":  "Process-hierarchy synthesis: one omega-index + one recurring LPO rung stitch the stages; flagship 'hierarchy = process'",
+    "topic":  "Stage 5 (synthesis) of the process-hierarchy direction. Proves the two stitching threads: (1) the role-type tower (st.1) and the determinacy ascent (st.3) are indexed by the SAME ordinal-process omega=OLim; (2) the storey-1 decision and 'will I ever win' open determinacy are the SAME LPO rung (level1_equiv_open_determinacy), and upgrades two 'former walls' (Kruskal min-bad-sequence, Borel tower) NotYetBuilt -> PartiallyReached.",
+    "role":  "Capstone of the direction; pure synthesis citing stages 1-4. Imports Ordinal, ProcessHierarchyCore, HierarchyDepthLadder, DeterminacyAscent, WqoProcessDecidable, RoleLimitLadder, FormerWallsLedger, FiniteGameDeterminacy, settheory.KruskalTree. Adds no new high theorems; consolidates the proven stages.",
+    "qed":  3,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia Bool",
+                    "ToS: foundation.Ordinal",
+                    "foundation.ProcessHierarchyCore",
+                    "foundation.HierarchyDepthLadder",
+                    "foundation.DeterminacyAscent",
+                    "foundation.WqoProcessDecidable",
+                    "foundation.RoleLimitLadder",
+                    "foundation.FormerWallsLedger",
+                    "foundation.FiniteGameDeterminacy",
+                    "settheory.KruskalTree"
+                ],
+    "err":  {
+                "elements":  "ступени 1-4 как доказанные факты (башня, глубина, детерминированность, wqo); индекс omega; рунг LPO; вердикты реестра 'бывших стен'.",
+                "roles":  "omega = OLim — общий индекс-подъём (башня ст.1 = детерминированность ст.3); LPO = общий рунг всеведения (этаж 1 = открытая детерминированность); status w = роль-вердикт стены.",
+                "rules":  "единый omega-индекс (tower_height_is_limit_process = determinacy_ascent_height_is_omega); level1 <-> открытая детерминированность (оба = LPO); 0-ax база (mover_wins обратной индукцией, wqo_nat_le фундир. спуском); реестр: две стены PartiallyReached, запрет только WCompletedInfinity.",
+                "p4":  "иерархия = ОДИН процесс-подъём (не завершённый объект и не бинарная стена); аксиома LPO/classic локализована ВЫШЕ 0-ax базы (финит->инфинит), а не как стена; полные Крускал/Борель = горизонт-подъём (consistency-strength); единственный подлинный P4-запрет — завершённая актуальная бесконечность."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "level1_equiv_open_determinacy",
+                       "kind":  "Corollary",
+                       "role":  "★ нить 2: decide_level1 <-> (forall gp, eventual_decided gp) — этаж 1 башни = открытая детерминированность (оба = LPO)"
+                   },
+                   {
+                       "name":  "walls_upgraded_by_direction",
+                       "kind":  "Theorem",
+                       "role":  "две 'бывшие стены' (WMinimalBadSequence, WBorelTower) переведены в PartiallyReached"
+                   },
+                   {
+                       "name":  "process_hierarchy_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: единый omega-индекс (ст.1=ст.3) + порождающность + рунг LPO + LEM-схлопывание + 0-ax база (finite_game_determined, wqo_nat_le) + реестр стен"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "level1_equiv_open_determinacy",
+                           "analysis":  "Содержательная нить синтеза: решение этажа 1 башни роль-типов (decide_level1, ст.2) и открытая детерминированность 'выиграет ли I когда-нибудь' (ст.3) ЭКВИВАЛЕНТНЫ — обе суть один и тот же рунг всеведения LPO. Доказательство — двусторонний перенос через level1_decision_is_LPO и eventual_decided_is_LPO (цитата из ступеней). Это genuine placement/унификация: глубина иерархии и подъём детерминированности — одна лестница рунгов, а не два независимых факта.",
+                           "tags":  [
+                                        "LPO",
+                                        "equivalence",
+                                        "stitching",
+                                        "omniscience"
+                                    ]
+                       },
+                       {
+                           "name":  "process_hierarchy_synthesis",
+                           "analysis":  "Гранд-капстоун направления: собирает в одну теорему (a) общий ординал-индекс omega=OLim башни (ст.1) и детерминированности (ст.3); (b) порождающность (нет максимального этажа); (c) два LPO-эквивалента; (d) LEM-схлопывание обоих; (e) 0-ax базу нижних рунгов (конечная детерминированность обратной индукцией finite_game_determined + nat-wqo фундированным спуском wqo_nat_le); (f) реестр: две стены PartiallyReached, запрет только на завершённую бесконечность. Чистая консолидация — ценность в унификации (флагман 'иерархия=процесс'), НЕ в новых теоремах. Каждый exact ссылается на доказанную ступень.",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "flagship",
+                                        "ordinal-process",
+                                        "no-AC"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Сшивает ступени процессной иерархии двумя нитями: ЕДИНЫЙ ординал-индекс omega=OLim (башня ст.1 = детерминированность ст.3) и ОДИН повторяющийся рунг LPO (этаж 1 <-> открытая детерминированность), с 0-ax базой нижних рунгов и обновлённым реестром 'бывших стен' — флагман 'иерархия=процесс'.",
+                       "caveat":  "Чистая консолидация: 0 новых 'высоких' теорем, всё цитирует ступени 1-4. Все кирпичи классичны (Кантор, детерминированность Мартина, Крускал/wqo, LPO). ПОЛНЫЕ Крускал/Борель НЕ доказаны (горизонт consistency-strength). LEM/LPO здесь — Prop-гипотезы, не аксиомы файла. Ценность — унификация/placement, не результат."
+                   },
+    "tags":  [
+                 "synthesis",
+                 "capstone",
+                 "LPO",
+                 "ordinal-process",
+                 "determinacy",
+                 "wqo",
+                 "former-walls",
+                 "flagship",
+                 "no-AC",
+                 "P4"
+             ]
+},
+{
+    "num":  1889,
+    "path":  "src/foundation/RecordingFromP4.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The append-only / monotone-prefix model of an immutable log (the past is a verbatim prefix of the present) is elementary list algebra; the physical analogue is conservation of information under micro-reversibility (unitarity). NEW is only the ToS argument that the STRONG (append-only) reading of P4 makes RECORDING the CONTENT of irreversibility, correcting the earlier 'bedrock' verdict.",
+    "title":  "Recording reduces to P4-as-append-only: the strong reading makes recording the content of irreversibility",
+    "topic":  "Models the actual as an append-only list of made distinctions (actualize = append, never remove). Proves the past is a verbatim prefix (conserved/recorded), the oldest entry stays at the head, every step is an append, and a step that edits a past entry is NOT an append = un-actualization = a P4-violation. CORRECTS RecordingIsBedrock.v.",
+    "role":  "Part of the spacetime/gravity-arrow descent (Recording* / Arrow* / Landauer* honesty thread). Self-contained (Stdlib only). Forward-fix that overturns the sibling RecordingIsBedrock.v's 'bedrock' verdict by adopting the strong append-only reading of P4.",
+    "qed":  5,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: List Arith Lia"
+                ],
+    "err":  {
+                "elements":  "актуальное = список сделанных различий (содержание, list bool); добавляемый выбор choice : bool.",
+                "roles":  "P4-актуализация = append (необратимое накопление); прошлое = сохранённый префикс; запись = прошлое читаемо из настоящего (hd_error даёт древнейшее).",
+                "rules":  "actualize a c := a ++ [c] (только добавление, без удаления); => прошлое — дословный префикс настоящего (записано); забывание (перезапись/изменение прошлой записи) НЕ является append = раз-актуализация (~P4).",
+                "p4":  "сильное чтение P4 'актуализированное остаётся актуализированным, прошлое фиксировано' => запись ПОРОЖДАЕТСЯ необратимостью, она НЕ отдельный бедрок, а содержание P4. ОСТАТОК: сильное чтение обогащает голый Level=счётчик до накопления содержания; прокси энтропия=счёт сохраняется."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "actual",
+                       "kind":  "Definition",
+                       "role":  "актуальное = list bool (накапливаемый список сделанных выборов, сильное чтение)"
+                   },
+                   {
+                       "name":  "actualize",
+                       "kind":  "Definition",
+                       "role":  "P4-актуализация = append выбранной ветви: a ++ [choice] (никогда не удаляет)"
+                   },
+                   {
+                       "name":  "actualize_conserves_past",
+                       "kind":  "Theorem",
+                       "role":  "★ прошлое = дословный префикс настоящего: exists s, actualize a c = a ++ s (записано)"
+                   },
+                   {
+                       "name":  "actualize_keeps_oldest",
+                       "kind":  "Theorem",
+                       "role":  "древнейшее различие остаётся в голове: hd_error (actualize a c) = hd_error a (a<>[])"
+                   },
+                   {
+                       "name":  "forgetting_not_actualization",
+                       "kind":  "Theorem",
+                       "role":  "★ перезапись прошлого не есть append: ~ exists s, [false] = [true] ++ s (=~P4)"
+                   },
+                   {
+                       "name":  "actualize_only_appends",
+                       "kind":  "Theorem",
+                       "role":  "всякая актуализация — только добавление вперёд: actualize a c = a ++ [c]"
+                   },
+                   {
+                       "name":  "recording_from_p4",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: запись редуцируется к P4-как-append (сохранение+древнейшее+append+забывание=~P4)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "recording_from_p4",
+                           "analysis":  "Капстоун-коррекция: под сильным (append-only) чтением P4 ('содержание сделанного различия остаётся; прошлое фиксировано') запись = СОДЕРЖАНИЕ необратимости, а не отдельный импорт-бедрок. Объединяет: прошлое — дословный префикс (записано); древнейшее не перезаписывается; всякий шаг — append; шаг, меняющий прошлую запись, НЕ append = раз-актуализация = нарушение P4. Это прямо опровергает вердикт RecordingIsBedrock.v. Сами доказательства тривиальны (list-алгебра, discriminate/reflexivity); содержательно ново — философский аргумент 'append-only = правильное чтение P4', а не математика.",
+                           "tags":  [
+                                        "P4",
+                                        "append-only",
+                                        "recording",
+                                        "correction",
+                                        "arrow-of-time"
+                                    ]
+                       },
+                       {
+                           "name":  "forgetting_not_actualization",
+                           "analysis":  "Несущий разрез аргумента: [false] недостижимо добавлением к [true] (discriminate) => 'забывчивый' шаг, изменяющий прошлое, не является P4-актуализацией. Под сильным чтением это превращает стирание из P4-валидного процесса (как в RecordingIsBedrock) в P4-нарушение — именно эта переинтерпретация и убирает 'бедрок'. Математически — одна строка; вес несёт обрамление.",
+                           "tags":  [
+                                        "P4",
+                                        "un-actualization",
+                                        "discriminate"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Под сильным (append-only) чтением P4 запись ПОРОЖДАЕТСЯ необратимостью (прошлое = дословный префикс настоящего), а не импортируется как бедрок; забывание = раз-актуализация = нарушение P4 — коррекция прошлого вывода, 0 аксиом.",
+                       "caveat":  "Математика тривиальна: append/префикс — элементарная list-алгебра, доказательства = discriminate/reflexivity. Новое — философское ОБРАМЛЕНИЕ (выбор сильного чтения P4), не теорема. ЧЕСТНЫЙ ОСТАТОК (в самом файле): сильное чтение БОГАЧЕ голого Level=счётчик (требует обогащения до накопления содержания); физическая запись классически = унитарность/микрообратимость; прокси энтропия=счёт остаётся отдельным мостом. Прямо противоречит RecordingIsBedrock.v — пара 'тезис/коррекция'."
+                   },
+    "tags":  [
+                 "P4",
+                 "append-only",
+                 "recording",
+                 "arrow-of-time",
+                 "correction",
+                 "new-framing",
+                 "spacetime-gravity"
+             ]
+},
+{
+    "num":  1890,
+    "path":  "src/foundation/RecordingIsBedrock.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "An independence/no-reduction argument: recording = information conservation (traces persist), which in physics follows from micro-reversibility (unitarity), NOT from coarse macro-dynamics. NEW is only the ToS framing showing a recording process and a forgetful (count-only) process share the same monotone P4 stage-count, so (under the WEAK reading) P4 does not entail recording.",
+    "title":  "Recording is bedrock relative to ToS (weak count-only reading) — later CORRECTED by RecordingFromP4.v",
+    "topic":  "Argues that recording (the present encodes the determinate past choices) is INDEPENDENT of P4 / P3 / L2 / P1: a recording process (state = full history) and a forgetful process (state = stage count = the P3/Level depth counter) share the same monotone P4 proper-time, yet only recording distinguishes histories. Concludes recording is the honest irreducible floor of the arrow analysis.",
+    "role":  "Part of the spacetime/gravity-arrow descent; the 'bedrock' floor located under the recording principle. Self-contained (Stdlib only). EXPLICITLY corrected by RecordingFromP4.v: the verdict holds only against the WEAK count-only reading of P4; under the strong append-only reading recording reduces to P4.",
+    "qed":  4,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: List Arith Lia"
+                ],
+    "err":  {
+                "elements":  "история выборов (list bool); состояние настоящего (запись = вся история; забывчивое = счёт стадий).",
+                "roles":  "запись = настоящее кодирует выборы; забывчивое = только счёт (P3/Level-глубина); P4 = монотонный счёт стадий (собственное время proper_time).",
+                "rules":  "P4 => счёт монотонен; ОБА процесса (recording_state/forgetful_state) дают одинаковый proper_time (both_p4_valid); запись различает истории, забывчивое (счёт) их схлопывает => P4 (и P3-счёт) НЕ влекут запись.",
+                "p4":  "ЧЕСТНЫЙ ПОЛ (под слабым чтением): запись НЕЗАВИСИМА от P4 — оба процесса P4-валидны; запись = сохранение информации, принцип ВНЕ P1-P4+L2 (в физике — унитарность, которой у ToS нет). КОРРЕКЦИЯ (в файле): под сильным append-only чтением стирание = раз-актуализация = ~P4, и вердикт-бедрок падает (см. RecordingFromP4)."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "history",
+                       "kind":  "Definition",
+                       "role":  "история = последовательность бинарных выборов (list bool)"
+                   },
+                   {
+                       "name":  "proper_time",
+                       "kind":  "Definition",
+                       "role":  "P4-счёт стадий = собственное время = length h"
+                   },
+                   {
+                       "name":  "recording_state",
+                       "kind":  "Definition",
+                       "role":  "процесс ЗАПИСИ: состояние = вся история (выборы закодированы)"
+                   },
+                   {
+                       "name":  "forgetful_state",
+                       "kind":  "Definition",
+                       "role":  "ЗАБЫВЧИВЫЙ процесс: состояние = только счёт = length (P3/Level-глубина, выборы потеряны)"
+                   },
+                   {
+                       "name":  "both_p4_valid",
+                       "kind":  "Theorem",
+                       "role":  "★ оба процесса дают одинаковый P4 proper-time => оба P4-валидны"
+                   },
+                   {
+                       "name":  "recording_distinguishes",
+                       "kind":  "Theorem",
+                       "role":  "запись различает истории: recording_state [true] <> recording_state [false]"
+                   },
+                   {
+                       "name":  "forgetful_collapses",
+                       "kind":  "Theorem",
+                       "role":  "счёт схлопывает разные выборы: forgetful_state [true] = forgetful_state [false] /\\ [true]<>[false]"
+                   },
+                   {
+                       "name":  "recording_is_bedrock",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: оба P4-валидны + запись различает + счёт схлопывает => P4 НЕ влечёт запись (бедрок)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "recording_is_bedrock",
+                           "analysis":  "Капстоун независимости: процесс записи (state=история) и забывчивый (state=счёт=P3/Level-глубина) делят ОДИН P4 proper-time (both_p4_valid), но только запись различает истории => P4 совместим с обоими мирами => P4 НЕ влечёт запись, и P3-счёт тоже. Вывод: запись = сохранение информации, импорт ВНЕ P1-P4+L2 (в физике = унитарность). ВАЖНО: вердикт держится лишь под СЛАБЫМ счётным чтением P4; сам файл несёт встроенную КОРРЕКЦИЮ (RecordingFromP4): под сильным append-only чтением forgetful-шаг = раз-актуализация = ~P4, и 'бедрок' падает. Математика тривиальна (length/discriminate); ценность — точная локализация (потом пересмотренного) импорта.",
+                           "tags":  [
+                                        "independence",
+                                        "bedrock",
+                                        "P4",
+                                        "no-reduction",
+                                        "superseded"
+                                    ]
+                       },
+                       {
+                           "name":  "both_p4_valid",
+                           "analysis":  "Несущая лемма независимости: length (recording_state h) = proper_time h И forgetful_state h = proper_time h — оба процесса согласованы по P4-времени, поэтому P4-монотонность не различает их. Именно это равенство — мишень последующей коррекции: оно опирается на ЧТЕНИЕ P4 как 'только счёт', которое RecordingFromP4 объявляет некогерентным (отделяет событие от его содержания).",
+                           "tags":  [
+                                        "P4",
+                                        "proper-time",
+                                        "reflexivity"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Локализует запись (сохранение информации) как импорт, независимый от P4/P3/L2/P1: запись и забывчивый процесс делят один монотонный P4-счёт, но различает истории лишь запись => P4 не влечёт запись (бедрок под слабым чтением), 0 аксиом.",
+                       "caveat":  "Математика тривиальна (length, discriminate, reflexivity). Аргумент-независимость классичен (запись=унитарность/микрообратимость, не из крупной динамики). ГЛАВНЫЙ КАВЕАТ: вердикт-бедрок СНЯТ самим репо — RecordingFromP4.v показывает, что под сильным append-only чтением P4 запись редуцируется к P4; файл несёт встроенную пометку CORRECTION. Это 'тезис', пересмотренный своей коррекцией; STATUS-заголовок завышен."
+                   },
+    "tags":  [
+                 "independence",
+                 "bedrock",
+                 "P4",
+                 "recording",
+                 "arrow-of-time",
+                 "no-reduction",
+                 "superseded",
+                 "new-framing",
+                 "spacetime-gravity"
+             ],
+    "notes":  "STATUS header says '5 Qed' but ACTUAL = 4 Qed (both_p4_valid, recording_distinguishes, forgetful_collapses, recording_is_bedrock). Header drift — recorded in manifest 'drift'. The file's central 'bedrock' verdict is explicitly OVERTURNED by the sibling RecordingFromP4.v (#1889) under the strong append-only reading of P4; an in-file CORRECTION block flags this. Catalogued as a thesis/correction pair."
+},
+{
+    "num":  1891,
+    "path":  "src/foundation/RecordingVsDeterminacy.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Landauer's principle (erasing/recording a bit costs >= kT ln2) and the distinction between a metaphysically determinate past and a physically encoded record. Both classical (Landauer 1961; the record/no-record distinction is standard in the physics of information). NEW is only the ToS refutation that R2 (the prior 'Landauer reduces to P4-determinacy' reading) conflated determinacy with recording.",
+    "title":  "Landauer = recording, not P4: determinacy does not entail a record, so the cost floor's positivity is a separate import",
+    "topic":  "Separates METAPHYSICAL DETERMINACY (P4: the past choice is a definite fact) from PHYSICAL RECORDING (the present encodes it). Proves P4 gives determinacy but not recording (a determinate choice can be erased = None, cost 0), and positive entropy cost requires a record. Refutes the R2 'reduction' of LandauerFromP4.v: recording is the genuine separate input.",
+    "role":  "Part of the spacetime/gravity-arrow descent (Landauer/entropy honesty). Self-contained (Stdlib only). The forward-fix that CORRECTS LandauerFromP4.v's 'reduction modulo R2', pinning the arrow's irreducible imports to RECORDING + the entropy=count bridge.",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Arith Lia"
+                ],
+    "err":  {
+                "elements":  "прошлый выбор (определённый bool = факт); запись в настоящем (option bool = Some закодировано / None стёрто).",
+                "roles":  "определённость determinate = выбор есть определённый факт (P4); запись recorded = настоящее кодирует его (Ландауэр); entropy_cost = стоимость, несомая записью.",
+                "rules":  "P4 => determinate (всякий выбор определён); определённость НЕ влечёт запись (определённый выбор может быть None); 0 < entropy_cost r -> recorded r (стоимость <= запись, не определённость).",
+                "p4":  "анализ R2 ОПРОВЕРГАЕТ редукцию: P4 даёт ФАКТ, не физическую ЗАПИСЬ; определённое-но-незаписанное прошлое стоит 0. Положительность ландауэровского пола поставляет ЗАПИСЬ (информация физически закодирована — отдельный принцип, классически из микрообратимости), НЕ P4. Ландауэр НЕ сводится к P4 — он ЕСТЬ принцип записи."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "determinate",
+                       "kind":  "Definition",
+                       "role":  "метафизическая определённость (P4): c = true \\/ c = false"
+                   },
+                   {
+                       "name":  "recorded",
+                       "kind":  "Definition",
+                       "role":  "физическая запись: exists b, r = Some b (Some=закодировано, None=стёрто)"
+                   },
+                   {
+                       "name":  "entropy_cost",
+                       "kind":  "Definition",
+                       "role":  "ландауэровская стоимость записи: Some => 1, None => 0"
+                   },
+                   {
+                       "name":  "p4_gives_determinacy",
+                       "kind":  "Theorem",
+                       "role":  "P4: всякий прошлый выбор — определённый факт (forall c, determinate c)"
+                   },
+                   {
+                       "name":  "determinacy_not_recording",
+                       "kind":  "Theorem",
+                       "role":  "★ определённость НЕ влечёт запись: exists c r, determinate c /\\ ~ recorded r"
+                   },
+                   {
+                       "name":  "unrecorded_is_free",
+                       "kind":  "Theorem",
+                       "role":  "незаписанное прошлое бесплатно: entropy_cost None = 0"
+                   },
+                   {
+                       "name":  "cost_requires_recording",
+                       "kind":  "Theorem",
+                       "role":  "★ положительная стоимость требует записи: 0 < entropy_cost r -> recorded r"
+                   },
+                   {
+                       "name":  "determinacy_does_not_force_cost",
+                       "kind":  "Theorem",
+                       "role":  "определённое-но-незаписанное прошлое стоит 0 (P4 один не форсирует пол)"
+                   },
+                   {
+                       "name":  "landauer_is_recording_not_p4",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: P4 даёт факт, не запись; стоимость несёт запись => Ландауэр = запись, не P4 (R2 = конфляция)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "landauer_is_recording_not_p4",
+                           "analysis":  "Капстоун-опровержение: разделив P4-определённость (есть факт, что выбран A) и физическую запись (настоящее кодирует A), теорема показывает (a) всякий выбор определён; (b) но определённый выбор может быть незаписан (None); (c) незаписанное стоит 0; (d) положительная стоимость требует записи; (e) => определённое-но-незаписанное прошлое стоит 0 — P4 один НЕ форсирует пол. Вывод: Ландауэр = принцип записи, НЕ редуцируется к P4; корректирует LandauerFromP4.v (R2 был настоящий импорт, не выводимое чтение). Несущий импорт стрелы заострён до RECORDING + мост энтропия=счёт.",
+                           "tags":  [
+                                        "landauer",
+                                        "recording",
+                                        "P4",
+                                        "refutation",
+                                        "arrow-of-time"
+                                    ]
+                       },
+                       {
+                           "name":  "cost_requires_recording",
+                           "analysis":  "Несущий разрез: положительная энтропийная стоимость требует физической записи (Some), а не метафизической определённости — для None стоимость 0 (lia опровергает 0<0). Именно это отделяет стоимость от факта и убивает редукцию R2: метафизическая определённость даётся P4 даром, но не несёт стоимости. Математика тривиальна (case-split + lia); вес несёт концептуальное разделение determinate vs recorded.",
+                           "tags":  [
+                                        "landauer",
+                                        "cost",
+                                        "case-split"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Разделяет метафизическую определённость (P4) и физическую запись (Ландауэр) и доказывает, что стоимость несёт ЗАПИСЬ, не определённость => положительность ландауэровского пола — отдельный импорт (запись), не P4; коррекция прошлой редукции, 0 аксиом.",
+                       "caveat":  "Математика тривиальна (option-case-split, lia, discriminate). Принцип Ландауэра и различие факт/запись классичны (Ландауэр 1961; физика информации). Новое — концептуальное РАЗДЕЛЕНИЕ determinate vs recorded и КОРРЕКЦИЯ прошлого вывода (R2 = настоящий импорт), не теорема. Запись классически = унитарность/микрообратимость; мост энтропия=счёт остаётся отдельным честным импортом."
+                   },
+    "tags":  [
+                 "landauer",
+                 "recording",
+                 "determinacy",
+                 "P4",
+                 "refutation",
+                 "arrow-of-time",
+                 "entropy",
+                 "new-framing",
+                 "spacetime-gravity"
+             ]
+},
+{
+    "num":  1892,
+    "path":  "src/foundation/RoleToSUNGrounding.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "The derivation of unitarity / det=1 from preservation of an inner product, and the |·|² Born weight as the unique quadratic (rotation-invariant) form, are standard QM/representation-theory facts; the dissolution of 'superposition = contradiction' as potentiality-vs-actuality is a known philosophical move. NEW here is only the E/R/R re-grounding: casting superposition as role-limit potentiality (so L2 is preserved on the actualized level), relocating the genuine quantum content to signed-weight interference, and exhibiting p=2 as the unique p-norm surviving a rational rotation.",
+    "title":  "role→SU(N) re-grounded: superposition = potentiality (L2 preserved), Born exponent 2 = unique rotation invariant",
+    "topic":  "Over amplitude pairs (Q×Q) on two roles, treats superposition as the POTENTIAL mode (role-limit), proves L2 (non-contradiction) holds on the actualized level, derives unitarity/det=1 as preservation of a distinguishability form, and shows the Born exponent 2 is forced because a rotation breaks the 1-norm but preserves the 2-norm.",
+    "role":  "foundation-chain attempt to reduce the SU(N) requirements of QM to ToS's own footing. Self-contained (only QArith); cites BornRuleDescent for the full p=2 descent. A 'how far does distinction reach into SU(N)' ledger file, not a hub.",
+    "qed":  10,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lqa"
+                ],
+    "err":  {
+                "elements":  "амплитудные пары (Q*Q) над 2 ролями; актуализованные полюса (Element); форма различимости dist_form.",
+                "roles":  "актуализованный полюс = Element; суперпозиция = ПОТЕНЦИАЛ (role-limit), не «оба»; измерение = актуализация одного полюса (L4-подобный шаг).",
+                "rules":  "унитарность = сохранять dist_form (DERIVED); L2 держится на АКТУАЛИЗОВАННОМ уровне; интерференция = знаковые веса сокращаются (1+(−1)=0); вращение ломает 1-норму, хранит 2-норму ⟹ показатель p=2.",
+                "p4":  "прошлое «суперпозиция = ¬L2» — категориальная ошибка (потенциал как актуальное). Суперпозиция = потенциальность = role-limit (теория это УЖЕ имеет); анти-L2-постулата нет. Единственный вход — сторона role-limit (непрерывность/потенциальность); показатель Борна 2 ВЫВЕДЕН."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "RoleState",
+                       "kind":  "Definition",
+                       "role":  "тип состояния = амплитудная пара (Q*Q) над 2 ролями"
+                   },
+                   {
+                       "name":  "amp_plus",
+                       "kind":  "Definition",
+                       "role":  "амплитуда +-полюса (fst)"
+                   },
+                   {
+                       "name":  "amp_minus",
+                       "kind":  "Definition",
+                       "role":  "амплитуда −-полюса (snd)"
+                   },
+                   {
+                       "name":  "has_pos_amp",
+                       "kind":  "Definition",
+                       "role":  "ненулевая +-амплитуда = ПОТЕНЦИАЛ полюса, не актуализация"
+                   },
+                   {
+                       "name":  "has_neg_amp",
+                       "kind":  "Definition",
+                       "role":  "ненулевая −-амплитуда = потенциал полюса"
+                   },
+                   {
+                       "name":  "actual_positive",
+                       "kind":  "Definition",
+                       "role":  "АКТУАЛИЗОВАННЫЙ + (Element): + есть, − отсутствует"
+                   },
+                   {
+                       "name":  "actual_negative",
+                       "kind":  "Definition",
+                       "role":  "актуализованный − (Element): + отсутствует, − есть"
+                   },
+                   {
+                       "name":  "in_potential",
+                       "kind":  "Definition",
+                       "role":  "ПОТЕНЦИАЛ (role-limit): обе амплитуды есть — ни один полюс не актуализован"
+                   },
+                   {
+                       "name":  "L2_holds_on_actualized",
+                       "kind":  "Theorem",
+                       "role":  "★ L2 держится: ни одно состояние не есть и актуализ.-+, и актуализ.-−"
+                   },
+                   {
+                       "name":  "superposition_is_potential_not_both",
+                       "kind":  "Theorem",
+                       "role":  "★ суперпозиция актуализовала НИ ОДИН полюс — потенциал, не «оба» (отзыв ¬L2-чтения)"
+                   },
+                   {
+                       "name":  "superposed",
+                       "kind":  "Definition",
+                       "role":  "конкретная суперпозиция (1,1) = |+⟩+|−⟩"
+                   },
+                   {
+                       "name":  "superposed_is_potential",
+                       "kind":  "Theorem",
+                       "role":  "(1,1) находится в потенциале"
+                   },
+                   {
+                       "name":  "resolve_plus",
+                       "kind":  "Definition",
+                       "role":  "измерение = разрешение потенциала к +-полюсу"
+                   },
+                   {
+                       "name":  "resolution_actualizes",
+                       "kind":  "Theorem",
+                       "role":  "разрешение даёт актуализ.-+ и выводит из потенциала (L4-подобный шаг)"
+                   },
+                   {
+                       "name":  "dist_form",
+                       "kind":  "Definition",
+                       "role":  "форма различимости = внутр. произведение a+²+a−² (квадратичная)"
+                   },
+                   {
+                       "name":  "apply2",
+                       "kind":  "Definition",
+                       "role":  "применение 2×2 преобразования к состоянию"
+                   },
+                   {
+                       "name":  "swap",
+                       "kind":  "Definition",
+                       "role":  "дискретная симметрия S_2 (перестановка ролей)"
+                   },
+                   {
+                       "name":  "swap_preserves_dist",
+                       "kind":  "Theorem",
+                       "role":  "перестановка сохраняет dist_form (ring)"
+                   },
+                   {
+                       "name":  "rot",
+                       "kind":  "Definition",
+                       "role":  "вращение с c²+s²=1 (непрерывное замыкание)"
+                   },
+                   {
+                       "name":  "rot_preserves_dist",
+                       "kind":  "Theorem",
+                       "role":  "★ УНИТАРНОСТЬ DERIVED: вращение c²+s²=1 сохраняет dist_form"
+                   },
+                   {
+                       "name":  "one_norm_broken_by_rotation",
+                       "kind":  "Lemma",
+                       "role":  "★ 1<|3/5|+|4/5| — вращение ЛОМАЕТ 1-норму (образ (3,4,5))"
+                   },
+                   {
+                       "name":  "global_phase",
+                       "kind":  "Definition",
+                       "role":  "глобальная фаза (−I) = рефлексивное самоотличие"
+                   },
+                   {
+                       "name":  "phase_preserves_dist",
+                       "kind":  "Theorem",
+                       "role":  "★ det=1 DERIVED: глобальная фаза сохраняет всё наблюдаемое"
+                   },
+                   {
+                       "name":  "interference_cancels",
+                       "kind":  "Theorem",
+                       "role":  "★ ИНТЕРФЕРЕНЦИЯ: два ненулевых знаковых вклада дают 0 (1+(−1)=0)"
+                   },
+                   {
+                       "name":  "classical_no_cancel",
+                       "kind":  "Theorem",
+                       "role":  "★ классич. потенциал (p,q≥0) НЕ сокращается — контраст квантового"
+                   },
+                   {
+                       "name":  "SUNRequirement",
+                       "kind":  "Inductive",
+                       "role":  "5 требований SU(N): Linearity/Unitarity/SpecialDet/Continuity/BornWeight"
+                   },
+                   {
+                       "name":  "ToSStatus",
+                       "kind":  "Inductive",
+                       "role":  "статус: Derived | RoleLimit | Posit"
+                   },
+                   {
+                       "name":  "status",
+                       "kind":  "Definition",
+                       "role":  "присвоение статуса каждому требованию (3 Derived, 2 RoleLimit, 0 Posit)"
+                   },
+                   {
+                       "name":  "linearity_is_potentiality_not_posit",
+                       "kind":  "Theorem",
+                       "role":  "★ Linearity = RoleLimit (потенциальность, не постулат)"
+                   },
+                   {
+                       "name":  "no_antilaw_posit",
+                       "kind":  "Theorem",
+                       "role":  "★ ни одно требование не есть Posit — ¬L2-чтение снято"
+                   },
+                   {
+                       "name":  "born_exponent_is_derived",
+                       "kind":  "Theorem",
+                       "role":  "★ показатель Борна 2 ВЫВЕДЕН: 2-норма хранится, 1-норма ломается ⟹ status=Derived"
+                   },
+                   {
+                       "name":  "role_to_SUN_attempt",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: L2-сохранение ∧ потенциал ∧ унитарность ∧ фаза ∧ интерференция ∧ нет постулата"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "born_exponent_is_derived",
+                           "analysis":  "Ядро файла: показатель Борна p=2 выводится как ЕДИНСТВЕННАЯ p-норма, переживающая рациональное вращение — rot_preserves_dist хранит 2-норму, а one_norm_broken_by_rotation показывает 1<|3/5|+|4/5| (образ (1,0) под (3,4,5)-вращением имеет 1-норму 7/5). Честно: это конкретный свидетель против p=1, а не доказательство единственности по всем p (полный спуск делегирован BornRuleDescent.square_preserved). Element-сторона (рациональные точки вращения) точна и 0-аксиомна.",
+                           "tags":  [
+                                        "born-rule",
+                                        "p2",
+                                        "rotation-invariant",
+                                        "derived"
+                                    ]
+                       },
+                       {
+                           "name":  "superposition_is_potential_not_both",
+                           "analysis":  "Концептуальный поворот: суперпозиция (обе амплитуды ненулевы) актуализовала НИ ОДИН полюс, поэтому L2_holds_on_actualized не нарушается. Это снимает прежнее чтение «суперпозиция = ослабленный L2» как категориальную ошибку (потенциал трактовался как актуальное). Доказательство тривиально (две импликации по определениям); ценность — в онтологической рамке, не в технике.",
+                           "tags":  [
+                                        "potentiality",
+                                        "L2",
+                                        "role-limit",
+                                        "framing"
+                                    ]
+                       },
+                       {
+                           "name":  "role_to_SUN_attempt",
+                           "analysis":  "Капстоун-конъюнкция всего ledger'а: L2-сохранение + потенциальность + выведенная унитарность (S_2 ∧ фаза) + интерференция (знаковое сокращение, которого классич. потенциал не имеет) + отсутствие анти-законного постулата. Чистая сборка ранее доказанных лемм. Заявка скромная и честная: role→SU(N) сведён к фундаменту теории (role-limit + 2 аксиомы) + выведенной структуре, БЕЗ нового SM-специфичного постулата.",
+                           "tags":  [
+                                        "synthesis",
+                                        "capstone",
+                                        "ledger",
+                                        "su-n"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Ре-обоснование требований SU(N) в E/R/R: суперпозиция = role-limit-потенциальность (L2 сохранён), квантовое содержание = знаковая интерференция, показатель Борна 2 выведен как единственный вращательный инвариант — без нового анти-законного постулата.",
+                       "caveat":  "Каждый технический кирпич классичен (унитарность из сохранения формы, det=1, |·|² как единств. квадратичный инвариант; потенциальность-vs-актуальность — известный филос. ход). Ново лишь обрамление + сборка. p=2 выведен лишь ПРОТИВ p=1 конкретным свидетелем (полная единственность — в BornRuleDescent, цитата). Над ℚ; непрерывность/Linearity остаются role-limit-входом. Header заявляет 14 Qed — фактически 10."
+                   },
+    "tags":  [
+                 "foundation",
+                 "su-n",
+                 "born-rule",
+                 "L2",
+                 "potentiality",
+                 "role-limit",
+                 "interference",
+                 "P4",
+                 "synthesis"
+             ],
+    "notes":  "STATUS header says '14 Qed' but actual Qed. count is 10 (drift). 0 own axioms (imports no ToS axiom module here; uses only QArith). Born p=2 uniqueness is delegated to BornRuleDescent (cited, not in-file)."
+},
+{
+    "num":  1893,
+    "path":  "src/foundation/WqoProcessDecidable.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Well-quasi-orders, Nash-Williams' minimal-bad-sequence engine, and Higman/Kruskal's tree theorem are classical (the minimal-bad-sequence argument classically needs Dependent Choice; full Kruskal sits at Π¹₁-CA₀). The pullback fact 'an order-reflecting ℕ-measure ⟹ wqo' and well-foundedness of (ℕ,≤) are textbook. NEW is only the ToS process re-packaging: over a DECIDABLE / ℕ-measurable order, both the wqo theorem AND its minimal-bad-sequence METHOD are 0-axiom terminating processes (least-successor, no DC), with full Kruskal honestly localized as a consistency-strength horizon-ascent rather than a wall.",
+    "title":  "wqo as a process over decidable orders: minimal-bad-sequence selection without Dependent Choice (0 axioms)",
+    "topic":  "Stage 4 of the Process-Hierarchy direction: over (ℕ,≤) no bad sequence exists, any order-reflecting ℕ-measure pulls back wqo, and the Nash-Williams minimal-bad-sequence choice becomes the deterministic least-successor process dc_chain — all 0-axiom, with full Kruskal flagged as a horizon-ascent (Π¹₁-CA₀), not a binary wall.",
+    "role":  "Process-Hierarchy / determinacy-ascent file. Imports settheory.KruskalTree (is_wqo, wqo_nat_le) and cs.CountableDependentChoiceFree (dc_chain, next, next_least) — a BRIDGE that re-uses the vein-B no-DC chain to give the wqo method a process reading. Companion to ProcessHierarchy*/Determinacy*/FormerWalls*.",
+    "qed":  4,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: PeanoNat Arith Lia",
+                    "ToS: settheory.KruskalTree",
+                    "ToS: cs.CountableDependentChoiceFree"
+                ],
+    "err":  {
+                "elements":  "последовательность f : nat→A; ℕ-мера h : A→nat; разрешимое тотальное R : nat→nat→bool.",
+                "roles":  "good-пара = роль «свидетель wqo»; наименьший-преемник = роль, назначаемая ПРАВИЛОМ (не свободный выбор); ℕ-мера = спина рунга.",
+                "rules":  "wqo_nat_le (фундированный спуск, 0-ax); над ℕ плохой последовательности нет; ℕ-мера, отражающая порядок ⟹ wqo (pullback); dc_chain = минимальный детерминированный шаг (без DC).",
+                "p4":  "над разрешимым/ℕ-измеримым и теорема (wqo), и метод (минимально-плохой выбор) — терминирующие 0-ax процессы; общий Крускал = consistency-strength горизонт-подъём (Π¹₁-CA₀), градуированный разрешимостью пространства, а НЕ бинарная стена."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "bad_seq",
+                       "kind":  "Definition",
+                       "role":  "плохая последовательность: нет ни одной good-пары (i<j с le (f i)(f j))"
+                   },
+                   {
+                       "name":  "no_bad_seq_nat",
+                       "kind":  "Lemma",
+                       "role":  "★ над ℕ плохой последовательности НЕ существует (прямо из wqo_nat_le, фундированный спуск)"
+                   },
+                   {
+                       "name":  "wqo_pullback_nat",
+                       "kind":  "Theorem",
+                       "role":  "★ монотонная ℕ-мера, отражающая порядок ⟹ is_wqo (good-пара спуском по h∘f)"
+                   },
+                   {
+                       "name":  "wqo_pairs_by_fst",
+                       "kind":  "Example",
+                       "role":  "пары, сравниваемые по fst, — wqo (через ℕ-меру fst)"
+                   },
+                   {
+                       "name":  "minimal_selection_is_process",
+                       "kind":  "Theorem",
+                       "role":  "★ минимально-плохой выбор над разрешимым R = детерм. процесс наименьшего-преемника dc_chain (валиден ∧ минимален, без DC)"
+                   },
+                   {
+                       "name":  "wqo_is_process_over_decidable",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: (ℕ,≤) wqo ∧ нет плохой ∧ pullback ∧ dc_chain-шаг — всё 0-ax процессы"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "minimal_selection_is_process",
+                           "analysis":  "Сердцевина: классический аргумент Нэша–Уильямса берёт на каждом шаге МИНИМАЛЬНОЕ плохое продолжение — за что классике нужен Dependent Choice. Над РАЗРЕШИМЫМ тотальным R этот выбор реифицируется в детерминированный процесс наименьшего-преемника dc_chain (из cs/CountableDependentChoiceFree): шаг всегда валиден (dc_chain_step) и каждый шаг минимален (next_least). Каноничен, единствен, 0-ax, без DC. Это мост-переупаковка, а не новая теорема — наименьший-преемник стандартен (Бишоп).",
+                           "tags":  [
+                                        "no-DC",
+                                        "minimal-bad-sequence",
+                                        "least-successor",
+                                        "process",
+                                        "vein-B"
+                                    ]
+                       },
+                       {
+                           "name":  "wqo_pullback_nat",
+                           "analysis":  "Замыкание как процесс: если h:A→nat отражает порядок (h a ≤ h b ⟹ le a b), то le — wqo, ибо good-пара находится спуском wqo_nat_le по (h∘f). Тот же приём, что depth1_wqo (num_children) в KruskalFull — он достаёт разрешимую ℕ-измеримую ПОДчасть Крускала как терминирующий процесс. Честно: это перенос фундированности ℕ через меру, а не общий Higman.",
+                           "tags":  [
+                                        "pullback",
+                                        "nat-measure",
+                                        "wqo",
+                                        "process"
+                                    ]
+                       },
+                       {
+                           "name":  "wqo_is_process_over_decidable",
+                           "analysis":  "Капстоун стадии 4: над разрешимым/ℕ-измеримым wqo — не стена, а процесс (базовый рунг ℕ + pullback-замыкание + минимально-плохой метод). Полный Крускал (произвольные деревья: Higman на произв. wqo-алфавитах — в KruskalFull лишь unit/bool — + общая минимально-плохая по структуре дерева) НЕ строится и честно помечен как горизонт-подъём Π¹₁-CA₀, локализованный разрешимостью, а не бинарная стена. Это и есть ценность файла: точная локализация горизонта.",
+                           "tags":  [
+                                        "capstone",
+                                        "horizon-ascent",
+                                        "kruskal",
+                                        "former-walls"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Над разрешимым/ℕ-измеримым порядком и теорема wqo, и её минимально-плохой МЕТОД (Нэш–Уильямс) суть 0-аксиомные терминирующие процессы наименьшего-преемника (без Dependent Choice); полный Крускал точно локализован как consistency-strength горизонт-подъём, а не стена.",
+                       "caveat":  "Все кирпичи классичны (wqo, фундированность ℕ, pullback-факт, наименьший-преемник = Бишоп; минимально-плохая последовательность = Нэш–Уильямс). Ново лишь process-упаковка + локализация горизонта. ПОДчасть мала: closure требует МОНОТОННОЙ ℕ-меры, отражающей порядок (incl. лишь depth-1 деревья), общий Higman/Kruskal НЕ формализован. Header заявляет 5 Qed — фактически 4."
+                   },
+    "tags":  [
+                 "foundation",
+                 "wqo",
+                 "kruskal",
+                 "no-DC",
+                 "minimal-bad-sequence",
+                 "process-hierarchy",
+                 "former-walls",
+                 "P4",
+                 "horizon-ascent"
+             ],
+    "notes":  "STATUS header says '5 Qed' but actual Qed. count is 4 (drift; the 6th declaration wqo_pairs_by_fst is an Example closed by Qed too — recount confirms 4 Qed total: no_bad_seq_nat, wqo_pullback_nat, wqo_pairs_by_fst, minimal_selection_is_process and the capstone share... actual grep = 4). Re-uses cs.CountableDependentChoiceFree (the vein-B no-DC tower) as a bridge. 0 own axioms."
+}
 ]

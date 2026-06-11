@@ -1695,5 +1695,2089 @@
     "uniqueness": {"score": 1, "level": "exposition", "claim": "Конкретные E/R/R-инстансы (nat-система, list-sigma, Cauchy-наблюдаемая, стирание) — демонстрация когерентности ядра.", "caveat": "Проработанные примеры — экспозиция; ценность — демонстрация сборки фреймворка. Слово 'Admitted' в комментарии (0 реальных)."},
     "tags": ["examples", "ERR", "exposition"],
     "notes": "PowerShell flagged Adm=1 but it is a comment mention; actual Admitted = 0."
-  }
+  },
+{
+    "num":  1862,
+    "path":  "src/Andre_reflection.v",
+    "cluster":  "src",
+    "title":  "Andre's reflection form of the Catalan number: C_n = C(2n,n) - C(2n,n+1), with explicit reflection involution",
+    "topic":  "Derives the second classical closed form of the Catalan number, C_n = C(2n,n) - C(2n,n+1), algebraically equivalent to the cycle-lemma form C(2n,n)/(n+1) from Catalan.v, and exhibits the genuine reflection involution reflect_at (flip steps after an index) with its count-transfer lemmas.",
+    "role":  "Companion to Catalan.v: imports num_dyck, binomial, catalan_explicit_formula, Path/Step and the count_* machinery from it; reused by Catalan_recurrence (Andre form is one of the two forms the recurrence is checked against). Standalone combinatorics, no downstream physics.",
+    "qed":  20,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Init.Nat PeanoNat Factorial List Lia ZArith ArithRing Permutation",
+                    "ToS.Catalan"
+                ],
+    "err":  {
+                "elements":  "пути-списки шагов {U=true,D=false} (Path); 'плохие' сбалансированные пути (касаются y=-1); длины-2n пути с (n+1) D-шагами — все конечны (P4).",
+                "roles":  "отражение reflect_at k = роль-операция L2 на L1-путях (хранит первые k шагов, инвертирует остаток); первый спуск ниже 0 = L5-каноническая позиция (наименьший индекс).",
+                "rules":  "тождество (n+1)·C(2n,n+1) = n·C(2n,n) (замкнутый образ отражения); reflect_at — инволюция (flip_step∘flip_step=id); count_U/count_D переносятся через отражение.",
+                "p4":  "ОДНО значение C_n, ДВА L5-канонических разреза: cycle-lemma (орбита, argmin) против reflection (инволюция на плохих путях, первый спуск). Слабый инстанс L4 (достаточное основание): у замкнутой формы несколько комбинаторных ПРИЧИН."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "binomial_andre_identity",
+                       "kind":  "Lemma",
+                       "role":  "★ ключевое тождество (n+1)·C(2n,n+1) = n·C(2n,n) (через binomial_fact, отмена факториалов)"
+                   },
+                   {
+                       "name":  "binomial_2n_n_ge_n1",
+                       "kind":  "Lemma",
+                       "role":  "C(2n,n+1) <= C(2n,n) (чтобы вычитание в nat не уходило в 0)"
+                   },
+                   {
+                       "name":  "catalan_andre_formula",
+                       "kind":  "Theorem",
+                       "role":  "★ Andre: num_dyck n = C(2n,n) - C(2n,n+1)"
+                   },
+                   {
+                       "name":  "catalan_cycle_form",
+                       "kind":  "Theorem",
+                       "role":  "cycle-форма (n+1)·num_dyck n = C(2n,n) (= catalan_explicit_formula)"
+                   },
+                   {
+                       "name":  "catalan_andre_form",
+                       "kind":  "Theorem",
+                       "role":  "Andre-форма без вычитания: num_dyck n + C(2n,n+1) = C(2n,n)"
+                   },
+                   {
+                       "name":  "catalan_forms_consistent",
+                       "kind":  "Theorem",
+                       "role":  "взаимная согласованность cycle-формы и Andre-формы (Qed-проверка)"
+                   },
+                   {
+                       "name":  "flip_step",
+                       "kind":  "Definition",
+                       "role":  "инверсия одного шага U<->D"
+                   },
+                   {
+                       "name":  "reflect_at",
+                       "kind":  "Definition",
+                       "role":  "отражение в позиции k: firstn k ++ map flip_step (skipn k)"
+                   },
+                   {
+                       "name":  "first_neg_idx_aux",
+                       "kind":  "Fixpoint",
+                       "role":  "наименьший индекс, где префиксная сумма впервые достигает -1"
+                   },
+                   {
+                       "name":  "first_neg_idx",
+                       "kind":  "Definition",
+                       "role":  "обёртка first_neg_idx_aux p 0 0"
+                   },
+                   {
+                       "name":  "flip_step_involution",
+                       "kind":  "Lemma",
+                       "role":  "flip_step — инволюция"
+                   },
+                   {
+                       "name":  "map_flip_step_involution",
+                       "kind":  "Lemma",
+                       "role":  "map flip_step — инволюция на списках"
+                   },
+                   {
+                       "name":  "reflect_at_length",
+                       "kind":  "Lemma",
+                       "role":  "reflect_at сохраняет длину пути"
+                   },
+                   {
+                       "name":  "count_U_map_flip",
+                       "kind":  "Lemma",
+                       "role":  "count_U (map flip_step l) = count_D l"
+                   },
+                   {
+                       "name":  "count_D_map_flip",
+                       "kind":  "Lemma",
+                       "role":  "count_D (map flip_step l) = count_U l"
+                   },
+                   {
+                       "name":  "count_U_reflect_at",
+                       "kind":  "Lemma",
+                       "role":  "count_U после отражения = count_U(firstn) + count_D(skipn)"
+                   },
+                   {
+                       "name":  "count_D_reflect_at",
+                       "kind":  "Lemma",
+                       "role":  "count_D после отражения = count_D(firstn) + count_U(skipn)"
+                   },
+                   {
+                       "name":  "count_U_split",
+                       "kind":  "Lemma",
+                       "role":  "count_U p = count_U(firstn k) + count_U(skipn k)"
+                   },
+                   {
+                       "name":  "count_D_split",
+                       "kind":  "Lemma",
+                       "role":  "count_D p = count_D(firstn k) + count_D(skipn k)"
+                   },
+                   {
+                       "name":  "reflect_at_involution",
+                       "kind":  "Lemma",
+                       "role":  "★ reflect_at k — инволюция (reflect_at k (reflect_at k p) = p)"
+                   },
+                   {
+                       "name":  "is_balanced_b",
+                       "kind":  "Definition",
+                       "role":  "булев тест: count_U = n и count_D = n"
+                   },
+                   {
+                       "name":  "num_balanced_binomial",
+                       "kind":  "Lemma",
+                       "role":  "число сбалансированных путей длины 2n = C(2n,n)"
+                   },
+                   {
+                       "name":  "num_paths_n1_D_binomial",
+                       "kind":  "Lemma",
+                       "role":  "число путей длины 2n с (n+1) D-шагами = C(2n,n+1)"
+                   },
+                   {
+                       "name":  "bad_balanced_count",
+                       "kind":  "Theorem",
+                       "role":  "#{плохих сбалансированных} = C(2n,n) - num_dyck n = C(2n,n+1)"
+                   },
+                   {
+                       "name":  "reflection_bijection_cardinality",
+                       "kind":  "Theorem",
+                       "role":  "итог биекции-отражения = catalan_andre_form"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "binomial_andre_identity",
+                           "analysis":  "Алгебраическое сердце файла: (n+1)·C(2n,n+1) = n·C(2n,n). Доказано через binomial_fact (связь биномов с факториалами) и отмену общего множителя fact(Sn')·fact n'; это замкнутый образ комбинаторной биекции-отражения между 'плохими' путями и длины-2n путями с (n+1) D-шагами. Из него обе формы Каталана выводятся как Qed. Честно: само тождество классично и элементарно.",
+                           "tags":  [
+                                        "binomial",
+                                        "andre",
+                                        "identity",
+                                        "catalan"
+                                    ]
+                       },
+                       {
+                           "name":  "reflect_at_involution",
+                           "analysis":  "Настоящая (не только алгебраическая) инволюция Andre: отразить хвост пути после индекса k и отразить ещё раз = тождество. Это единственный геном-факт, дающий биективное, а не чисто счётное, обоснование формулы C(2n,n)-C(2n,n+1). В ToS-прочтении это L5-каноническая операция (первый спуск задаёт уникальный k). Тем не менее полная Permutation-биекция между множествами здесь НЕ собрана — кардинальность (bad_balanced_count) берётся из catalan_andre_formula, а инволюция стоит рядом как структурный свидетель.",
+                           "tags":  [
+                                        "involution",
+                                        "reflection",
+                                        "bijection",
+                                        "L5"
+                                    ]
+                       },
+                       {
+                           "name":  "catalan_forms_consistent",
+                           "analysis":  "Демонстрирует тезис файла: ОДНО C_n, ДВЕ L5-канонические биекции (орбита-цикл против инволюции-отражение), численно тождественные. Уровень — методический/экспозиционный: оба классических вывода Каталана сведены в один Coq-файл с машинной проверкой их эквивалентности; новизна только в 0-аксиомной формализации над nat, не в математике.",
+                           "tags":  [
+                                        "consistency",
+                                        "dual-derivation",
+                                        "L4"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Andre's reflection principle (1887) and the closed form C_n = C(2n,n) - C(2n,n+1) are textbook combinatorics (Catalan numbers, ballot problem); the identity (n+1)C(2n,n+1)=nC(2n,n) is elementary. NEW here is only the 0-axiom nat-level Coq formalization (involution reflect_at proved an involution, count-transfer lemmas) and the explicit machine-checked equivalence with the cycle-lemma form of Catalan.v; no new mathematics.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Вторая (отражательная) замкнутая форма числа Каталана и настоящая инволюция reflect_at, машинно сведённые к cycle-форме Catalan.v; всё над nat, 0 аксиом, 0 AC.",
+                       "caveat":  "Полностью классика (принцип отражения Andre, формула C(2n,n)-C(2n,n+1)). Ново только формализация. Честный пробел: полная Permutation-биекция между плохими путями и (n+1)-D путями НЕ собрана — кардинальность берётся алгебраически из catalan_andre_formula, инволюция стоит как структурный, не доведённый до счёта, свидетель."
+                   },
+    "tags":  [
+                 "catalan",
+                 "combinatorics",
+                 "reflection",
+                 "involution",
+                 "binomial",
+                 "nat",
+                 "no-AC"
+             ]
+},
+{
+    "num":  1863,
+    "path":  "src/CantorHeineQ.v",
+    "cluster":  "src",
+    "title":  "Cantor-Heine FAILS over Q: f(x)=1/(x^2-2) on [1,2]∩Q is pointwise-continuous but not uniformly continuous",
+    "topic":  "Builds a concrete rational witness that the Cantor-Heine theorem (pointwise continuity on a compact => uniform continuity) genuinely fails over Q: at the absent √2-pole f=1/(x^2-2) is continuous at every rational point of [1,2]∩Q, yet Pell convergents make |f| blow up so that |f(x_k)-f(x_{k+1})|>=1 across arbitrarily small windows.",
+    "role":  "Closes FORMALIZATION-BACKLOG F-21 against analysis/Continuity.v. Imports Sqrt2Approx (Pell witness sx/qq/pp), analysis.Sqrt2Irrational (no_rational_sqrt2), analysis.Continuity (continuous_on / uniformly_continuous_on). Sibling of QIntervalNotCompact (F-20, the compactness step that fails). No reuse downstream; honest-limitation content.",
+    "qed":  11,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lqa ZArith Lia Qminmax",
+                    "ToS.Sqrt2Approx",
+                    "ToS.analysis.Sqrt2Irrational",
+                    "ToS.analysis.Continuity"
+                ],
+    "err":  {
+                "elements":  "рациональные точки [1,2]∩Q; Пелля-приближения x_k = sx k; значения f(x_k) = ±q_k^2 — все актуальны (P4).",
+                "roles":  "√2-полюс = role-limit (отсутствующая особенность, недостижимая из Q); равномерность = роль-ТРЕБОВАНИЕ, не следствие непрерывности.",
+                "rules":  "f непрерывна поточечно (знаменатель отделён от 0 у каждой точки, δ=min(|A0|/8, ε|A0|^2/16)); равномерность ломается у √2-зазора (соседние x_k 1/(q_k q_{k+1})-близки, но |f x_k - f x_{k+1}| >= q_{k+1}^2 - q_k^2 >= 1).",
+                "p4":  "непрерывное-но-не-равномерное = ДОКАЗАННЫЙ контрпример: Cantor-Heine над Q ложен, потому что шаг компактности проваливается у √2-зазора (F-20). ToS не нуждается в Cantor-Heine: равномерность = явное правило-роль (Липшиц-маршрут Continuity.lipschitz_uniform)."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "f",
+                       "kind":  "Definition",
+                       "role":  "свидетель f(x) = / (x*x - 2) — полюс у отсутствующего √2"
+                   },
+                   {
+                       "name":  "Qabs_inv",
+                       "kind":  "Lemma",
+                       "role":  "Q-помощник: Qabs(/a) == /Qabs a"
+                   },
+                   {
+                       "name":  "Qabs_div_loc",
+                       "kind":  "Lemma",
+                       "role":  "Q-помощник: Qabs(a/b) == Qabs a / Qabs b"
+                   },
+                   {
+                       "name":  "div_lt",
+                       "kind":  "Lemma",
+                       "role":  "Q-помощник: num < e*den (den>0) => num/den < e"
+                   },
+                   {
+                       "name":  "Qmid",
+                       "kind":  "Lemma",
+                       "role":  "division-free midpoint helper для lra над Q"
+                   },
+                   {
+                       "name":  "cantor_heine_continuous",
+                       "kind":  "Theorem",
+                       "role":  "★ f непрерывна на [1,2]∩Q в каждой точке (явная δ через |x0^2-2|)"
+                   },
+                   {
+                       "name":  "f_abs_val",
+                       "kind":  "Lemma",
+                       "role":  "|f(x_k)| == q_k^2 (точно, из sx_abs_eq)"
+                   },
+                   {
+                       "name":  "sx_consec_abs",
+                       "kind":  "Lemma",
+                       "role":  "|x_k - x_{k+1}| == 1/(q_k q_{k+1}) (детерминант Пелля ±1)"
+                   },
+                   {
+                       "name":  "sx_consec_small",
+                       "kind":  "Lemma",
+                       "role":  "|x_k - x_{k+1}| <= 1/(k+1) (соседние convergent'ы близки)"
+                   },
+                   {
+                       "name":  "nat_archimedean",
+                       "kind":  "Lemma",
+                       "role":  "архимедовость: для q есть n с q < n (через Qarchimedean)"
+                   },
+                   {
+                       "name":  "cantor_heine_not_uniform",
+                       "kind":  "Theorem",
+                       "role":  "★ f НЕ равномерно непрерывна (ε=1, магнитудный разрыв q_{k+1}^2-q_k^2>=1)"
+                   },
+                   {
+                       "name":  "cantor_heine_fails_Q",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: непрерывна ∧ не-равномерно-непрерывна => Cantor-Heine над Q ложен"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "cantor_heine_not_uniform",
+                           "analysis":  "Ядро негативного результата: ε=1, и никакая δ не работает. Используя Пелля-тождество |x_k^2-2|=1/q_k^2 точно, имеем |f(x_k)|=q_k^2->∞, а соседние convergent'ы 1/(q_k q_{k+1})-близки; обратное неравенство треугольника даёт |f x_k - f x_{k+1}| >= q_{k+1}^2 - q_k^2 >= 1. Конструктивный рациональный свидетель провала равномерности — без какого-либо знака, только магнитудный зазор. Это и есть точка, где компактность [0,1]∩Q ломается (√2 отсутствует).",
+                           "tags":  [
+                                        "uniform-continuity",
+                                        "pell",
+                                        "sqrt2",
+                                        "counterexample",
+                                        "Q-limitation"
+                                    ]
+                       },
+                       {
+                           "name":  "cantor_heine_continuous",
+                           "analysis":  "Положительная половина: в каждой рациональной точке x0 знаменатель x0^2-2 отделён от 0 (т.к. √2∉Q), значит f липшицево-непрерывна локально с явной δ=min(|A0|/8, ε|A0|^2/16). Тяжёлая Q-арифметика (Qabs, division-free неравенства) — чтобы lra/nra над Q прошли. Показывает, что поточечная непрерывность держится ВЕЗДЕ, и именно глобальная (компактностная) равномерность — то единственное, что отказывает.",
+                           "tags":  [
+                                        "pointwise-continuity",
+                                        "delta-epsilon",
+                                        "Q-arithmetic"
+                                    ]
+                       },
+                       {
+                           "name":  "cantor_heine_fails_Q",
+                           "analysis":  "Капстоун F-21: одно утверждение, склеивающее обе половины — Cantor-Heine над Q опровергнут конкретным машинно-проверенным свидетелем. В ToS-прочтении: теорема Cantor-Heine = правило 'поточечно => равномерно' ЧЕРЕЗ завершённую компактность; над Q компактность проваливается у √2-зазора, поэтому правило надо заменить равномерностью-как-явным-требованием. Заголовок файла называет это 'новой теоремой'; честнее — известный негативный феномен (Cantor-Heine требует полноты/компактности), инстанцированный явным рациональным контрпримером.",
+                           "tags":  [
+                                        "capstone",
+                                        "cantor-heine",
+                                        "finitization-boundary",
+                                        "synthesis"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "The Cantor-Heine theorem (continuous on a compact metric space => uniformly continuous) is classical, as is the fact that it requires completeness/compactness and fails on non-complete or non-compact domains (e.g. 1/x on (0,1)). NEW here is the explicit machine-checked rational witness over [1,2]∩Q built from Pell convergents (|x_k^2-2|=1/q_k^2 exactly), tying the failure precisely to the absent-√2 pole and the parallel Q-non-compactness (QIntervalNotCompact, F-20); the negative phenomenon is known, the concrete Q-only formalization is the contribution.",
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Конкретный 0-аксиомный рациональный контрпример к Cantor-Heine над Q (Пелля-свидетель: |f x_k - f x_{k+1}| >= 1 в сколь угодно малых окнах), локализующий провал у отсутствующего √2 и связывающий его с Q-некомпактностью; равномерность пересобрана как явное правило-роль ToS.",
+                       "caveat":  "Сам негативный феномен классичен: Cantor-Heine требует полноты/компактности и заведомо ложен на неполных областях. Заголовок файла называет результат 'новой теоремой' — лёгкий оверклейм; ново не утверждение, а явный машинно-проверенный РАЦИОНАЛЬНЫЙ свидетель и его сведение к √2-зазору. Иррациональность √2 и Пелля-аппарат импортированы (Sqrt2Irrational/Sqrt2Approx)."
+                   },
+    "tags":  [
+                 "cantor-heine",
+                 "uniform-continuity",
+                 "Q-limitation",
+                 "sqrt2",
+                 "pell",
+                 "no-completeness",
+                 "finitization-boundary",
+                 "F-21"
+             ]
+},
+{
+    "num":  1864,
+    "path":  "src/Catalan.v",
+    "cluster":  "src",
+    "title":  "Catalan numbers via the Dvoretzky-Motzkin cycle lemma: (n+1)*C_n = C(2n,n), fully constructive (0 AC)",
+    "topic":  "Derives the explicit Catalan formula C_n = C(2n,n)/(n+1) inside ToS by formalizing the cycle lemma end-to-end: cyclic rotations of augmented sequences (n+1 U's, n D's), the last-min-index selection of the unique 'good' rotation, a Phi-bijection giving (2n+1)*num_good = num_augmented = C(2n+1,n), and the algebraic step to (n+1)*num_dyck n = C(2n,n).",
+    "role":  "Root of the small combinatorics cluster: defines Step/Path/count_U/count_D/height_at/is_dyck, binomial (Pascal), all_paths, num_dyck and the whole cycle-lemma apparatus reused by Andre_reflection, Catalan_recurrence and Motzkin. Self-contained (only Stdlib); no physics downstream.",
+    "qed":  84,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Init.Nat PeanoNat Factorial List Lia ZArith ArithRing Permutation"
+                ],
+    "err":  {
+                "elements":  "Step = bool (U=true/D=false) — примитивное двузначное различение A/не-A; Path = list Step; augmented-последовательности (n+1 U, n D, длина 2n+1) — всё структурно конечно (P4).",
+                "roles":  "позиция pi: шаги->[1,2n] (L5 горизонтальная); высота height_at = #U-#D в префиксе; циклический сдвиг rotate_k = L2-операция на L1-объектах; last_min_idx (наибольший индекс минимума префикс-сумм) = L5-канонический выбор уникальной 'хорошей' ротации.",
+                "rules":  "Constitution is_dyck = замыкание (count_U=count_D, L4) + неотрицательность высот (L4+L2); is_good = строго положительные высоты; aperiodicity gcd(n+1,n)=1 даёт 2n+1 различных ротаций.",
+                "p4":  "C_n считает КОНЕЧНЫЙ процесс: семейство {Dyck_n} порождает конечные системы по запросу — никакой аксиомы бесконечности, никакого AC, доказательство полностью конструктивно. L5-минимальный-индекс — движок цикл-леммы."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "Step",
+                       "kind":  "Definition",
+                       "role":  "Elements: двузначное различение (bool)"
+                   },
+                   {
+                       "name":  "U",
+                       "kind":  "Definition",
+                       "role":  "up-step = true"
+                   },
+                   {
+                       "name":  "D",
+                       "kind":  "Definition",
+                       "role":  "down-step = false"
+                   },
+                   {
+                       "name":  "Path",
+                       "kind":  "Definition",
+                       "role":  "конечная последовательность шагов = list Step"
+                   },
+                   {
+                       "name":  "count_U",
+                       "kind":  "Fixpoint",
+                       "role":  "число U-шагов"
+                   },
+                   {
+                       "name":  "count_D",
+                       "kind":  "Fixpoint",
+                       "role":  "число D-шагов"
+                   },
+                   {
+                       "name":  "count_U_app",
+                       "kind":  "Lemma",
+                       "role":  "count_U аддитивен по ++"
+                   },
+                   {
+                       "name":  "count_D_app",
+                       "kind":  "Lemma",
+                       "role":  "count_D аддитивен по ++"
+                   },
+                   {
+                       "name":  "count_UD_length",
+                       "kind":  "Lemma",
+                       "role":  "count_U + count_D = length"
+                   },
+                   {
+                       "name":  "length_app_nat",
+                       "kind":  "Lemma",
+                       "role":  "длина конкатенации = сумма длин"
+                   },
+                   {
+                       "name":  "height_at",
+                       "kind":  "Definition",
+                       "role":  "знаковая высота префикса длины k (в Z)"
+                   },
+                   {
+                       "name":  "total_height",
+                       "kind":  "Definition",
+                       "role":  "высота всего пути"
+                   },
+                   {
+                       "name":  "firstn_all_eq",
+                       "kind":  "Lemma",
+                       "role":  "firstn (length p) p = p"
+                   },
+                   {
+                       "name":  "total_height_eq",
+                       "kind":  "Lemma",
+                       "role":  "total_height = #U - #D"
+                   },
+                   {
+                       "name":  "is_dyck",
+                       "kind":  "Definition",
+                       "role":  "Constitution: баланс + неотрицательные высоты"
+                   },
+                   {
+                       "name":  "rotate_one",
+                       "kind":  "Definition",
+                       "role":  "сдвиг на одну позицию"
+                   },
+                   {
+                       "name":  "rotate_k",
+                       "kind":  "Fixpoint",
+                       "role":  "сдвиг на k позиций"
+                   },
+                   {
+                       "name":  "rotate_one_length",
+                       "kind":  "Lemma",
+                       "role":  "rotate_one сохраняет длину"
+                   },
+                   {
+                       "name":  "rotate_k_length",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k сохраняет длину"
+                   },
+                   {
+                       "name":  "rotate_one_count_U",
+                       "kind":  "Lemma",
+                       "role":  "rotate_one сохраняет count_U"
+                   },
+                   {
+                       "name":  "rotate_one_count_D",
+                       "kind":  "Lemma",
+                       "role":  "rotate_one сохраняет count_D"
+                   },
+                   {
+                       "name":  "rotate_k_count_U",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k сохраняет count_U"
+                   },
+                   {
+                       "name":  "rotate_k_count_D",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k сохраняет count_D"
+                   },
+                   {
+                       "name":  "rotate_k_total_height",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k сохраняет total_height"
+                   },
+                   {
+                       "name":  "is_augmented",
+                       "kind":  "Definition",
+                       "role":  "augmented: n+1 U, n D, длина 2n+1"
+                   },
+                   {
+                       "name":  "augmented_total_height",
+                       "kind":  "Lemma",
+                       "role":  "augmented => total_height = 1"
+                   },
+                   {
+                       "name":  "is_good",
+                       "kind":  "Definition",
+                       "role":  "все непустые префиксы строго положительной высоты"
+                   },
+                   {
+                       "name":  "rotate_k_augmented",
+                       "kind":  "Lemma",
+                       "role":  "ротация сохраняет augmented-ность"
+                   },
+                   {
+                       "name":  "heightZ_at_bool",
+                       "kind":  "Definition",
+                       "role":  "обёртка высоты для булевой версии"
+                   },
+                   {
+                       "name":  "forall_pos_heights",
+                       "kind":  "Fixpoint",
+                       "role":  "булева проверка всех высот >= 1"
+                   },
+                   {
+                       "name":  "is_good_b",
+                       "kind":  "Definition",
+                       "role":  "булева версия is_good"
+                   },
+                   {
+                       "name":  "find_good_aux",
+                       "kind":  "Fixpoint",
+                       "role":  "поиск good-ротации (наименьший индекс)"
+                   },
+                   {
+                       "name":  "find_good",
+                       "kind":  "Definition",
+                       "role":  "обёртка find_good_aux"
+                   },
+                   {
+                       "name":  "rotate_k_compose",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k k (rotate_k j p) = rotate_k (k+j) p"
+                   },
+                   {
+                       "name":  "rotate_one_skipn",
+                       "kind":  "Lemma",
+                       "role":  "rotate_one (x::rest) = rest ++ [x]"
+                   },
+                   {
+                       "name":  "height_at_rotate_one_le",
+                       "kind":  "Lemma",
+                       "role":  "сдвиг высот при rotate_one (явная форма)"
+                   },
+                   {
+                       "name":  "height_at_rotate_one_le_gen",
+                       "kind":  "Lemma",
+                       "role":  "то же для любого непустого пути"
+                   },
+                   {
+                       "name":  "height_at_rotate_one_top",
+                       "kind":  "Lemma",
+                       "role":  "формула высоты на верхушке ротации"
+                   },
+                   {
+                       "name":  "height_at_0",
+                       "kind":  "Lemma",
+                       "role":  "height_at p 0 = 0"
+                   },
+                   {
+                       "name":  "height_at_rotate_k_no_wrap",
+                       "kind":  "Lemma",
+                       "role":  "формула высот ротации (без переноса)"
+                   },
+                   {
+                       "name":  "augmented_length",
+                       "kind":  "Lemma",
+                       "role":  "augmented => length = 2n+1"
+                   },
+                   {
+                       "name":  "prefix_heights_from",
+                       "kind":  "Fixpoint",
+                       "role":  "список префиксных высот с аккумулятором"
+                   },
+                   {
+                       "name":  "prefix_heights",
+                       "kind":  "Definition",
+                       "role":  "список префиксных высот"
+                   },
+                   {
+                       "name":  "prefix_heights_from_length",
+                       "kind":  "Lemma",
+                       "role":  "длина списка высот = S (length p)"
+                   },
+                   {
+                       "name":  "prefix_heights_length",
+                       "kind":  "Lemma",
+                       "role":  "то же для prefix_heights"
+                   },
+                   {
+                       "name":  "nth_prefix_heights_from",
+                       "kind":  "Lemma",
+                       "role":  "nth списка высот = acc + height_at"
+                   },
+                   {
+                       "name":  "nth_prefix_heights",
+                       "kind":  "Lemma",
+                       "role":  "nth prefix_heights = height_at"
+                   },
+                   {
+                       "name":  "find_last_min",
+                       "kind":  "Fixpoint",
+                       "role":  "наибольший индекс минимума в списке"
+                   },
+                   {
+                       "name":  "last_min_idx",
+                       "kind":  "Definition",
+                       "role":  "★ L5-движок: наибольший индекс минимума префикс-сумм"
+                   },
+                   {
+                       "name":  "find_last_min_lt",
+                       "kind":  "Lemma",
+                       "role":  "оценка выхода find_last_min"
+                   },
+                   {
+                       "name":  "last_min_idx_le_length",
+                       "kind":  "Lemma",
+                       "role":  "last_min_idx <= length (свойство 1)"
+                   },
+                   {
+                       "name":  "find_last_min_correct",
+                       "kind":  "Lemma",
+                       "role":  "инвариантная корректность find_last_min"
+                   },
+                   {
+                       "name":  "last_min_idx_correct",
+                       "kind":  "Lemma",
+                       "role":  "корректность last_min_idx через nth"
+                   },
+                   {
+                       "name":  "last_min_idx_is_min",
+                       "kind":  "Lemma",
+                       "role":  "свойство 2: это минимум высот"
+                   },
+                   {
+                       "name":  "last_min_idx_strict_after",
+                       "kind":  "Lemma",
+                       "role":  "свойство 3: строго больше после индекса"
+                   },
+                   {
+                       "name":  "height_at_rotate_k_wrap",
+                       "kind":  "Lemma",
+                       "role":  "формула высот ротации (с переносом)"
+                   },
+                   {
+                       "name":  "cycle_lemma_exists",
+                       "kind":  "Theorem",
+                       "role":  "★ цикл-лемма (существование): у augmented есть good-ротация"
+                   },
+                   {
+                       "name":  "good_aug_no_nontrivial_good_rotation",
+                       "kind":  "Lemma",
+                       "role":  "у good-augmented нет нетривиальной good-ротации"
+                   },
+                   {
+                       "name":  "cycle_lemma_unique",
+                       "kind":  "Theorem",
+                       "role":  "★ цикл-лемма (единственность) good-ротации"
+                   },
+                   {
+                       "name":  "strip_first",
+                       "kind":  "Definition",
+                       "role":  "удалить первый шаг (tl)"
+                   },
+                   {
+                       "name":  "prepend_U",
+                       "kind":  "Definition",
+                       "role":  "дописать U в начало"
+                   },
+                   {
+                       "name":  "good_augmented_starts_U",
+                       "kind":  "Lemma",
+                       "role":  "good-augmented начинается с U"
+                   },
+                   {
+                       "name":  "height_at_cons_U",
+                       "kind":  "Lemma",
+                       "role":  "высоты при дописывании U сдвигаются на +1"
+                   },
+                   {
+                       "name":  "good_to_dyck",
+                       "kind":  "Lemma",
+                       "role":  "strip good-augmented => Dyck длины 2n"
+                   },
+                   {
+                       "name":  "dyck_to_good",
+                       "kind":  "Lemma",
+                       "role":  "prepend_U Dyck => good-augmented (обратное)"
+                   },
+                   {
+                       "name":  "binomial",
+                       "kind":  "Fixpoint",
+                       "role":  "биномиальный коэффициент через правило Паскаля (nat, без деления)"
+                   },
+                   {
+                       "name":  "binomial_0_0",
+                       "kind":  "Lemma",
+                       "role":  "C(0,0)=1"
+                   },
+                   {
+                       "name":  "binomial_n_0",
+                       "kind":  "Lemma",
+                       "role":  "C(n,0)=1"
+                   },
+                   {
+                       "name":  "binomial_lt",
+                       "kind":  "Lemma",
+                       "role":  "n<k => C(n,k)=0"
+                   },
+                   {
+                       "name":  "binomial_n_n",
+                       "kind":  "Lemma",
+                       "role":  "C(n,n)=1"
+                   },
+                   {
+                       "name":  "fact_S_eq",
+                       "kind":  "Lemma",
+                       "role":  "fact(Sn) = Sn * fact n"
+                   },
+                   {
+                       "name":  "binomial_S_S_eq",
+                       "kind":  "Lemma",
+                       "role":  "Паскаль: C(Sn,Sk)=C(n,k)+C(n,Sk)"
+                   },
+                   {
+                       "name":  "binomial_fact",
+                       "kind":  "Lemma",
+                       "role":  "★ связь бинома с факториалами: C(n,k)*(k!*(n-k)!)=n!"
+                   },
+                   {
+                       "name":  "cycle_to_catalan_identity",
+                       "kind":  "Theorem",
+                       "role":  "★ ключевой шаг: (n+1)*C(2n+1,n) = (2n+1)*C(2n,n)"
+                   },
+                   {
+                       "name":  "all_paths",
+                       "kind":  "Fixpoint",
+                       "role":  "перечисление всех бинарных путей длины m"
+                   },
+                   {
+                       "name":  "all_paths_length",
+                       "kind":  "Lemma",
+                       "role":  "всё в all_paths m имеет длину m"
+                   },
+                   {
+                       "name":  "is_dyck_b_aux",
+                       "kind":  "Fixpoint",
+                       "role":  "булева проверка Dyck через отслеживание высоты"
+                   },
+                   {
+                       "name":  "is_dyck_b",
+                       "kind":  "Definition",
+                       "role":  "булев тест Dyck"
+                   },
+                   {
+                       "name":  "num_dyck",
+                       "kind":  "Definition",
+                       "role":  "★ число Dyck-путей длины 2n (= C_n)"
+                   },
+                   {
+                       "name":  "is_augmented_b",
+                       "kind":  "Definition",
+                       "role":  "булев тест augmented"
+                   },
+                   {
+                       "name":  "num_augmented",
+                       "kind":  "Definition",
+                       "role":  "число augmented-последовательностей"
+                   },
+                   {
+                       "name":  "filter_map_cons_length",
+                       "kind":  "Lemma",
+                       "role":  "filter по map(cons b) сводится к filter под cons"
+                   },
+                   {
+                       "name":  "count_D_eq_binomial",
+                       "kind":  "Lemma",
+                       "role":  "★ #{пути длины len, count_D=k} = C(len,k)"
+                   },
+                   {
+                       "name":  "is_augmented_b_eq_count_D",
+                       "kind":  "Lemma",
+                       "role":  "is_augmented_b сводится к проверке count_D"
+                   },
+                   {
+                       "name":  "num_augmented_binomial",
+                       "kind":  "Theorem",
+                       "role":  "num_augmented n = C(2n+1,n)"
+                   },
+                   {
+                       "name":  "num_good",
+                       "kind":  "Definition",
+                       "role":  "число good augmented-последовательностей"
+                   },
+                   {
+                       "name":  "forall_pos_heights_with_neg_first",
+                       "kind":  "Lemma",
+                       "role":  "ложь при первом отрицательном"
+                   },
+                   {
+                       "name":  "is_good_b_false_cons",
+                       "kind":  "Lemma",
+                       "role":  "is_good_b (false::_) = false"
+                   },
+                   {
+                       "name":  "forall_pos_heights_iff",
+                       "kind":  "Lemma",
+                       "role":  "рефлексия forall_pos_heights"
+                   },
+                   {
+                       "name":  "is_good_b_iff",
+                       "kind":  "Lemma",
+                       "role":  "is_good_b отражает is_good"
+                   },
+                   {
+                       "name":  "is_dyck_b_aux_iff",
+                       "kind":  "Lemma",
+                       "role":  "рефлексия is_dyck_b_aux"
+                   },
+                   {
+                       "name":  "is_dyck_b_iff",
+                       "kind":  "Lemma",
+                       "role":  "is_dyck_b отражает Dyck-свойство"
+                   },
+                   {
+                       "name":  "length_2n_count_U_iff_height_0",
+                       "kind":  "Lemma",
+                       "role":  "для длины 2n: count_U=n <=> высота в конце 0"
+                   },
+                   {
+                       "name":  "good_aug_true_iff_dyck_b",
+                       "kind":  "Lemma",
+                       "role":  "andb(aug_b,good_b)(U::p) = is_dyck_b p"
+                   },
+                   {
+                       "name":  "num_good_eq_num_dyck",
+                       "kind":  "Lemma",
+                       "role":  "★ num_good = num_dyck (биекция strip/prepend)"
+                   },
+                   {
+                       "name":  "cycle_lemma_exists_b",
+                       "kind":  "Lemma",
+                       "role":  "булева версия существования good-ротации"
+                   },
+                   {
+                       "name":  "cycle_lemma_unique_b",
+                       "kind":  "Lemma",
+                       "role":  "булева версия единственности"
+                   },
+                   {
+                       "name":  "is_augmented_b_iff_pred",
+                       "kind":  "Lemma",
+                       "role":  "is_augmented_b <=> is_augmented при длине 2n+1"
+                   },
+                   {
+                       "name":  "rotate_one_injective",
+                       "kind":  "Lemma",
+                       "role":  "rotate_one инъективен на равной длине"
+                   },
+                   {
+                       "name":  "rotate_k_injective",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k инъективен на равной длине"
+                   },
+                   {
+                       "name":  "firstn_S_split",
+                       "kind":  "Lemma",
+                       "role":  "firstn(Sj)=firstn j ++ [nth j]"
+                   },
+                   {
+                       "name":  "skipn_cons_split",
+                       "kind":  "Lemma",
+                       "role":  "skipn j = nth j :: skipn(Sj)"
+                   },
+                   {
+                       "name":  "rotate_k_skipn_firstn",
+                       "kind":  "Lemma",
+                       "role":  "rotate_k j p = skipn j p ++ firstn j p"
+                   },
+                   {
+                       "name":  "rotate_k_full",
+                       "kind":  "Lemma",
+                       "role":  "ротация на длину = тождество"
+                   },
+                   {
+                       "name":  "all_paths_complete",
+                       "kind":  "Lemma",
+                       "role":  "всякий путь длины |p| есть в all_paths"
+                   },
+                   {
+                       "name":  "all_paths_complete_len",
+                       "kind":  "Lemma",
+                       "role":  "то же по заданной длине m"
+                   },
+                   {
+                       "name":  "NoDup_map_cons_step",
+                       "kind":  "Lemma",
+                       "role":  "map(cons b) сохраняет NoDup"
+                   },
+                   {
+                       "name":  "NoDup_app_disj",
+                       "kind":  "Lemma",
+                       "role":  "NoDup конкатенации непересекающихся NoDup"
+                   },
+                   {
+                       "name":  "NoDup_all_paths",
+                       "kind":  "Lemma",
+                       "role":  "all_paths без повторов"
+                   },
+                   {
+                       "name":  "NoDup_map_inj_on",
+                       "kind":  "Lemma",
+                       "role":  "инъективная f сохраняет NoDup map"
+                   },
+                   {
+                       "name":  "list_prod_length_eq",
+                       "kind":  "Lemma",
+                       "role":  "длина list_prod = произведение длин"
+                   },
+                   {
+                       "name":  "NoDup_list_prod",
+                       "kind":  "Lemma",
+                       "role":  "list_prod без повторов"
+                   },
+                   {
+                       "name":  "rotation_count_relation",
+                       "kind":  "Lemma",
+                       "role":  "★ Phi-биекция: (2n+1)*num_good = num_augmented"
+                   },
+                   {
+                       "name":  "cycle_lemma_count",
+                       "kind":  "Theorem",
+                       "role":  "★ (2n+1)*num_dyck n = C(2n+1,n)"
+                   },
+                   {
+                       "name":  "catalan_explicit_formula",
+                       "kind":  "Theorem",
+                       "role":  "★★ ГЛАВНОЕ: (n+1)*num_dyck n = C(2n,n)"
+                   },
+                   {
+                       "name":  "catalan_factorial_formula",
+                       "kind":  "Theorem",
+                       "role":  "★ факториальная форма: n!*(n+1)!*C_n = (2n)!"
+                   },
+                   {
+                       "name":  "CatalanSystem",
+                       "kind":  "Record",
+                       "role":  "E/R/R-обёртка: пути(Elements)+Dyck(Rules)+позиция(Role)+формула(Theorem)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "catalan_explicit_formula",
+                           "analysis":  "Капстоун всего файла: (n+1)*num_dyck n = C(2n,n), т.е. C_n = C(2n,n)/(n+1). Собирается из cycle_lemma_count (счётная цикл-лемма) и cycle_to_catalan_identity (алгебра биномов) через nia. Замечателен тем, что num_dyck — ВЫЧИСЛИМЫЙ счёт по конкретному filter (а не определение через формулу), так что это настоящая теорема, а не свёртка определения. Полностью конструктивно, 0 аксиом, 0 AC — что и есть ToS-тезис P4 (счёт конечного процесса без бесконечности/выбора).",
+                           "tags":  [
+                                        "catalan",
+                                        "cycle-lemma",
+                                        "capstone",
+                                        "P4",
+                                        "no-AC"
+                                    ]
+                       },
+                       {
+                           "name":  "rotation_count_relation",
+                           "analysis":  "Техническое сердце: (2n+1)*num_good = num_augmented доказано через явную Permutation между map phi (list_prod good_list (seq 0 m)) и aug_list, с инъективностью phi из good_aug_no_nontrivial_good_rotation (каждая орбита размера 2n+1 содержит ровно одну good-последовательность). Это и есть конструктивная цикл-лемма Дворецкого-Моцкина в виде равенства списков, без аксиомы выбора — нетривиальный кусок формализации (~150 строк).",
+                           "tags":  [
+                                        "cycle-lemma",
+                                        "bijection",
+                                        "permutation",
+                                        "orbit"
+                                    ]
+                       },
+                       {
+                           "name":  "last_min_idx",
+                           "analysis":  "L5-движок цикл-леммы: наибольший индекс, достигающий минимума префикс-сумм, выбирает УНИКАЛЬНУЮ good-ротацию (cycle_lemma_exists/unique). В ToS-прочтении это Закон Порядка L5, делающий канонический детерминированный выбор без AC — та же идея 'детерминированный выбор без выбора' (argmax/argmin по индексу), что в EVT_idx и теме определённости-без-AC. Свойства 1-3 (bound/min/strict-after) доказаны через nth-характеризацию prefix_heights.",
+                           "tags":  [
+                                        "L5",
+                                        "argmin",
+                                        "no-AC",
+                                        "canonical-choice",
+                                        "engine"
+                                    ]
+                       },
+                       {
+                           "name":  "cycle_to_catalan_identity",
+                           "analysis":  "Алгебраический мост: (n+1)*C(2n+1,n) = (2n+1)*C(2n,n), оба = (2n+1)!/(n!n!). Доказано через binomial_fact и отмену множителя fact n * fact n. Именно этот шаг переводит счётную цикл-лемму ((2n+1)*num_dyck=C(2n+1,n)) в стандартную форму Каталана. Классическое элементарное тождество, аккуратно проведённое над nat без деления.",
+                           "tags":  [
+                                        "binomial",
+                                        "identity",
+                                        "factorial"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "The Catalan number formula C_n = C(2n,n)/(n+1) and the Dvoretzky-Motzkin cycle lemma (1947) are textbook combinatorics; binomial-via-Pascal and the ballot/Dyck-path counting are standard. NEW here is only the fully constructive, 0-axiom, AC-free nat-level Coq formalization of the ENTIRE cycle-lemma pipeline (rotation invariants, last-min-index canonical selection, Phi-bijection as an explicit Permutation, num_dyck as a computable filter count proven equal to the closed form); the mathematics is classical, the end-to-end constructive mechanization is the contribution.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Сквозная конструктивная (0 аксиом, 0 AC) формализация цикл-леммы Дворецкого-Моцкина над nat: ротационные инварианты, L5-канонический выбор last_min_idx, Phi-биекция как явная Permutation, и num_dyck как вычислимый filter-счёт, доказанно равный C(2n,n)/(n+1).",
+                       "caveat":  "Математика полностью классическая (формула Каталана, цикл-лемма, биномы по Паскалю). Ново только мехнизация: безаксиомность, AC-free, num_dyck как настоящий счёт а не определение-формула. ER/RR-разметка (L1/L5/P4) — обрамление, не новый результат. Внутренний комментарий-эпилог называет ряд лемм 'REMAINING ADMITTED', но фактически Admitted=0 (все доказаны) — устаревший комментарий, см. notes."
+                   },
+    "tags":  [
+                 "catalan",
+                 "combinatorics",
+                 "cycle-lemma",
+                 "dyck-paths",
+                 "binomial",
+                 "no-AC",
+                 "P4",
+                 "L5",
+                 "constructive",
+                 "nat"
+             ],
+    "notes":  "Header STATUS говорит 'Cycle lemma core + aperiodicity stated with proof sketch' и финальный блок перечисляет 8 'REMAINING ADMITTED' (cycle_lemma_exists/unique, good_to_dyck, ...), но это УСТАРЕВШИЙ комментарий: фактически Admitted=0, все перечисленные доказаны Qed (cycle_lemma_exists/unique/count, good_to_dyck, dyck_to_good, num_augmented_binomial — все с Qed). build_catalan_system намеренно опущен (документирован как Record CatalanSystem). Qed actual = 84."
+},
+{
+    "num":  1865,
+    "path":  "src/Catalan_recurrence.v",
+    "cluster":  "src",
+    "title":  "Catalan recurrence C_{n+1} = sum_{i} C_i C_{n-i}, full bijective proof via first-return decomposition (0 AC)",
+    "topic":  "Proves the classical Catalan recurrence num_dyck (S n) = sum_{i=0}^n num_dyck i * num_dyck (n-i) constructively, via the canonical first-return decomposition p = U a D b (k = first_return p) and its inverse dyck_compose, assembling a Permutation between dyck_list (S n) and the triple_list of (i, Dyck_i, Dyck_{n-i}).",
+    "role":  "Builds directly on Catalan.v (imports num_dyck, Path, is_dyck, is_dyck_b, all_paths, height_at, count_*, rotation/NoDup helpers). Together with Andre_reflection it completes the Catalan trilogy: explicit formula (Catalan), reflection form (Andre), recurrence (this). No physics downstream.",
+    "qed":  51,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Init.Nat PeanoNat List Permutation Lia ZArith",
+                    "ToS.Catalan"
+                ],
+    "err":  {
+                "elements":  "Dyck-пути длины 2(n+1); тройки (i, a, b) с a∈Dyck_i, b∈Dyck_{n-i}; склейка dyck_compose a b = U::a++[D]++b — конечные списки (P4).",
+                "roles":  "first_return = L5-каноническая позиция (НАИМЕНЬШИЙ k>0 с h(k)=0, позиция парного D к стартовому U); decompose/compose = взаимно-обратные роли-операции на L1-путях.",
+                "rules":  "compose сохраняет Dyck (dyck_compose_is_dyck), first_return∘compose = length a + 2 (first_return_compose), decompose∘compose = id, compose инъективен на Dyck-парах — даёт биекцию-Permutation.",
+                "p4":  "C_{n+1} считается по КОНЕЧНОМУ треугольнику num_dyck 0..n; биекция first-return полностью конструктивна, без AC. L5 (наименьший first-return) детерминирует разбор каждого пути единственным образом."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "sum_to",
+                       "kind":  "Definition",
+                       "role":  "сумма f(i), i=0..n (через fold_right над seq)"
+                   },
+                   {
+                       "name":  "sum_to_0",
+                       "kind":  "Lemma",
+                       "role":  "sum_to f 0 = f 0"
+                   },
+                   {
+                       "name":  "catalan_conv",
+                       "kind":  "Definition",
+                       "role":  "★ свёртка Каталана: sum_{i=0}^n C_i*C_{n-i}"
+                   },
+                   {
+                       "name":  "catalan_conv_0",
+                       "kind":  "Lemma",
+                       "role":  "catalan_conv 0 = C_0*C_0"
+                   },
+                   {
+                       "name":  "first_return_aux",
+                       "kind":  "Fixpoint",
+                       "role":  "поиск первого k>0, где высота возвращается в 0"
+                   },
+                   {
+                       "name":  "first_return",
+                       "kind":  "Definition",
+                       "role":  "★ L5: позиция первого возврата (парный D)"
+                   },
+                   {
+                       "name":  "dyck_compose",
+                       "kind":  "Definition",
+                       "role":  "★ склейка двух Dyck: U::a++[D]++b"
+                   },
+                   {
+                       "name":  "dyck_decompose",
+                       "kind":  "Definition",
+                       "role":  "★ разбор пути в пару (a,b) по first_return"
+                   },
+                   {
+                       "name":  "dyck_compose_length",
+                       "kind":  "Lemma",
+                       "role":  "длина склейки = S(S(|a|+|b|))"
+                   },
+                   {
+                       "name":  "dyck_compose_count_U",
+                       "kind":  "Lemma",
+                       "role":  "count_U склейки = S(count_U a + count_U b)"
+                   },
+                   {
+                       "name":  "dyck_compose_count_D",
+                       "kind":  "Lemma",
+                       "role":  "count_D склейки = S(count_D a + count_D b)"
+                   },
+                   {
+                       "name":  "dyck_compose_balanced",
+                       "kind":  "Lemma",
+                       "role":  "склейка сбалансированных сбалансирована"
+                   },
+                   {
+                       "name":  "height_at_app_left",
+                       "kind":  "Lemma",
+                       "role":  "высота на левой части ++ (k<=|p|)"
+                   },
+                   {
+                       "name":  "catalan_conv_0_explicit",
+                       "kind":  "Lemma",
+                       "role":  "граничный случай n=0 свёртки"
+                   },
+                   {
+                       "name":  "height_at_app_right",
+                       "kind":  "Lemma",
+                       "role":  "высота на правой части ++ (сдвиг total_height p)"
+                   },
+                   {
+                       "name":  "total_height_cons_U",
+                       "kind":  "Lemma",
+                       "role":  "total_height(U::p) = 1 + total_height p"
+                   },
+                   {
+                       "name":  "height_at_cons_D",
+                       "kind":  "Lemma",
+                       "role":  "высоты при дописывании D (-1)"
+                   },
+                   {
+                       "name":  "dyck_total_height_0",
+                       "kind":  "Lemma",
+                       "role":  "у Dyck total_height = 0"
+                   },
+                   {
+                       "name":  "dyck_compose_is_dyck",
+                       "kind":  "Lemma",
+                       "role":  "★ краеугольная: склейка двух Dyck есть Dyck"
+                   },
+                   {
+                       "name":  "dyck_starts_U",
+                       "kind":  "Lemma",
+                       "role":  "непустой Dyck начинается с U"
+                   },
+                   {
+                       "name":  "dyck_length_even",
+                       "kind":  "Lemma",
+                       "role":  "длина Dyck чётна (= 2*count_U)"
+                   },
+                   {
+                       "name":  "first_return_aux_le",
+                       "kind":  "Lemma",
+                       "role":  "оценка диапазона first_return_aux"
+                   },
+                   {
+                       "name":  "first_return_aux_spec",
+                       "kind":  "Lemma",
+                       "role":  "★ спецификация: наименьший возврат, до него высота != 0"
+                   },
+                   {
+                       "name":  "first_return_aux_find",
+                       "kind":  "Lemma",
+                       "role":  "если k — свидетель, то first_return_aux = idx+k"
+                   },
+                   {
+                       "name":  "first_return_dyck",
+                       "kind":  "Lemma",
+                       "role":  "★ для Dyck: 2<=k<=|p|, h(k)=0, до k высоты>=1"
+                   },
+                   {
+                       "name":  "height_at_parity_eq",
+                       "kind":  "Lemma",
+                       "role":  "h(k) = 2*count_U(firstn k) - k (чётность)"
+                   },
+                   {
+                       "name":  "first_return_dyck_even",
+                       "kind":  "Lemma",
+                       "role":  "first_return Dyck всегда чётен"
+                   },
+                   {
+                       "name":  "height_at_step",
+                       "kind":  "Lemma",
+                       "role":  "шаг высоты между соседними позициями ±1"
+                   },
+                   {
+                       "name":  "first_return_dyck_prev",
+                       "kind":  "Lemma",
+                       "role":  "высота перед first_return = 1"
+                   },
+                   {
+                       "name":  "first_return_dyck_step_D",
+                       "kind":  "Lemma",
+                       "role":  "шаг в позиции (first_return-1) есть D"
+                   },
+                   {
+                       "name":  "dyck_decompose_recovers",
+                       "kind":  "Lemma",
+                       "role":  "★ p = compose(decompose p) (восстановление)"
+                   },
+                   {
+                       "name":  "dyck_decompose_a_length",
+                       "kind":  "Lemma",
+                       "role":  "длина внутренней части a = first_return-2"
+                   },
+                   {
+                       "name":  "dyck_decompose_b_length",
+                       "kind":  "Lemma",
+                       "role":  "длина внешней части b = |p|-first_return"
+                   },
+                   {
+                       "name":  "firstn_split_at_one",
+                       "kind":  "Lemma",
+                       "role":  "firstn(Sj) p = firstn 1 ++ firstn j (skipn 1)"
+                   },
+                   {
+                       "name":  "height_at_skipn_0",
+                       "kind":  "Lemma",
+                       "role":  "height_at (skipn n p) 0 = 0"
+                   },
+                   {
+                       "name":  "height_at_skipn",
+                       "kind":  "Lemma",
+                       "role":  "высота под skipn (сдвиг на h(n))"
+                   },
+                   {
+                       "name":  "height_at_firstn",
+                       "kind":  "Lemma",
+                       "role":  "высота под firstn (k<=n)"
+                   },
+                   {
+                       "name":  "dyck_decompose_b_is_dyck",
+                       "kind":  "Lemma",
+                       "role":  "★ внешняя часть b есть Dyck"
+                   },
+                   {
+                       "name":  "dyck_decompose_a_is_dyck",
+                       "kind":  "Lemma",
+                       "role":  "★ внутренняя часть a есть Dyck (h_a j = h_p(Sj)-1)"
+                   },
+                   {
+                       "name":  "first_return_compose",
+                       "kind":  "Lemma",
+                       "role":  "★ first_return(compose a b) = 2 + |a|"
+                   },
+                   {
+                       "name":  "decompose_compose_a",
+                       "kind":  "Lemma",
+                       "role":  "decompose∘compose даёт a"
+                   },
+                   {
+                       "name":  "decompose_compose_b",
+                       "kind":  "Lemma",
+                       "role":  "decompose∘compose даёт b"
+                   },
+                   {
+                       "name":  "dyck_compose_length_split",
+                       "kind":  "Lemma",
+                       "role":  "|a|+2+|b| = |compose a b|"
+                   },
+                   {
+                       "name":  "dyck_compose_injective",
+                       "kind":  "Lemma",
+                       "role":  "★ compose инъективен на Dyck-парах"
+                   },
+                   {
+                       "name":  "dyck_list",
+                       "kind":  "Definition",
+                       "role":  "список всех Dyck-путей длины 2n"
+                   },
+                   {
+                       "name":  "dyck_list_length_eq",
+                       "kind":  "Lemma",
+                       "role":  "|dyck_list n| = num_dyck n"
+                   },
+                   {
+                       "name":  "in_dyck_list",
+                       "kind":  "Lemma",
+                       "role":  "элементы dyck_list: длина 2n и Dyck"
+                   },
+                   {
+                       "name":  "in_dyck_list_iff",
+                       "kind":  "Lemma",
+                       "role":  "характеризация принадлежности dyck_list"
+                   },
+                   {
+                       "name":  "triple_list",
+                       "kind":  "Definition",
+                       "role":  "★ flat_map склеек по (i, Dyck_i x Dyck_{n-i})"
+                   },
+                   {
+                       "name":  "length_flat_map_seq",
+                       "kind":  "Lemma",
+                       "role":  "длина flat_map = сумма длин"
+                   },
+                   {
+                       "name":  "triple_list_length",
+                       "kind":  "Lemma",
+                       "role":  "★ |triple_list n| = catalan_conv n"
+                   },
+                   {
+                       "name":  "in_list_prod_dyck",
+                       "kind":  "Lemma",
+                       "role":  "элементы list_prod: a,b Dyck нужных длин"
+                   },
+                   {
+                       "name":  "NoDup_flat_map_disj",
+                       "kind":  "Lemma",
+                       "role":  "NoDup flat_map при непересекающихся группах"
+                   },
+                   {
+                       "name":  "NoDup_triple_list",
+                       "kind":  "Lemma",
+                       "role":  "★ triple_list без повторов (инъективность compose)"
+                   },
+                   {
+                       "name":  "compose_in_dyck_list",
+                       "kind":  "Lemma",
+                       "role":  "склейка попадает в dyck_list (S n)"
+                   },
+                   {
+                       "name":  "triple_list_in_dyck_list",
+                       "kind":  "Lemma",
+                       "role":  "всякая тройка даёт элемент dyck_list"
+                   },
+                   {
+                       "name":  "dyck_list_in_triple_list",
+                       "kind":  "Lemma",
+                       "role":  "★ всякий Dyck-путь раскладывается в тройку"
+                   },
+                   {
+                       "name":  "dyck_list_perm_triple_list",
+                       "kind":  "Lemma",
+                       "role":  "★ Permutation dyck_list(S n) и triple_list n"
+                   },
+                   {
+                       "name":  "catalan_recurrence",
+                       "kind":  "Theorem",
+                       "role":  "★★ ГЛАВНОЕ: num_dyck(S n) = catalan_conv n"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "catalan_recurrence",
+                           "analysis":  "Капстоун: классическая рекуррентность Каталана C_{n+1} = sum C_i C_{n-i}, доказанная конструктивно через биекцию first-return (p = U a D b <-> (i, a, b), i=(k-2)/2). Сводится к Permutation_length биекции dyck_list(S n) <-> triple_list n + равенству длин. Поскольку num_dyck — вычислимый счёт (из Catalan.v), это настоящая теорема. 0 Admitted, 0 классических аксиом, 0 AC — повторяет ToS-тезис P4 (конечный треугольник num_dyck 0..n).",
+                           "tags":  [
+                                        "catalan",
+                                        "recurrence",
+                                        "bijection",
+                                        "capstone",
+                                        "no-AC"
+                                    ]
+                       },
+                       {
+                           "name":  "first_return_dyck",
+                           "analysis":  "L5-ядро разбора: для непустого Dyck первый возврат высоты в 0 находится в позиции k с 2<=k<=|p|, h(k)=0, и все промежуточные высоты >=1. Это НАИМЕНЬШИЙ такой индекс (Закон Порядка L5), делающий разбор каждого пути единственным и детерминированным — без AC. Доказано через first_return_aux_spec (тяжёлая индукция по структуре пути с отслеживанием Z-высоты).",
+                           "tags":  [
+                                        "L5",
+                                        "first-return",
+                                        "canonical",
+                                        "no-AC"
+                                    ]
+                       },
+                       {
+                           "name":  "dyck_compose_injective",
+                           "analysis":  "Инъективность склейки на Dyck-парах — то, что превращает счёт троек в биекцию (а не только сюръекцию). Доказывается через decompose_compose_a/b: разбор однозначно восстанавливает (a,b) из U a D b, опираясь на first_return_compose = 2+|a|. Вместе с dyck_decompose_recovers даёт обе стороны взаимной обратности compose/decompose.",
+                           "tags":  [
+                                        "injective",
+                                        "compose",
+                                        "bijection"
+                                    ]
+                       },
+                       {
+                           "name":  "dyck_compose_is_dyck",
+                           "analysis":  "Прямое направление биекции: склейка U::a++[D]++b двух Dyck-путей есть Dyck. Тонкость — проверка неотрицательности высот на стыке: на левом блоке (U::a) высоты сдвинуты на +1, на правом (после согласующего D) высота снова = высота b. Аккуратная работа с height_at_app_left/right и total_height. Структурно несёт всё содержание 'каждый Dyck-путь однозначно открывается стартовым U и его парным D'.",
+                           "tags":  [
+                                        "compose",
+                                        "dyck-preservation",
+                                        "height"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "The Catalan recurrence C_{n+1} = sum_{i=0}^n C_i C_{n-i} and its first-return (Dyck arch) decomposition bijection are classical combinatorics (Stanley, Catalan numbers). NEW here is only the fully constructive, 0-axiom, AC-free Coq formalization: first_return as an L5-canonical smallest-index selector, dyck_compose/dyck_decompose proven mutually inverse and injective, and the bijection assembled as an explicit Permutation between dyck_list and triple_list, with num_dyck a computable count. Mathematics classical; constructive mechanization is the contribution.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Полная биективная (0 аксиом, 0 AC) формализация рекуррентности Каталана через first-return разбор: first_return как L5-наименьший-индекс, compose/decompose взаимно обратны и инъективны, биекция как явная Permutation dyck_list<->triple_list.",
+                       "caveat":  "Классическая комбинаторика (рекуррентность Каталана, разбор по первой арке). Ново лишь конструктивная мехнизация и ER/RR-обрамление (L5 first-return, P4 конечный треугольник). Conditional-формулировка в Part V (комментарий о 'IF num_dyck(S n)=catalan_conv n') — устаревшая преамбула; фактическая теорема catalan_recurrence доказана безусловно."
+                   },
+    "tags":  [
+                 "catalan",
+                 "recurrence",
+                 "combinatorics",
+                 "first-return",
+                 "bijection",
+                 "dyck-paths",
+                 "no-AC",
+                 "P4",
+                 "L5",
+                 "constructive"
+             ]
+},
+{
+    "num":  1866,
+    "path":  "src/Motzkin.v",
+    "cluster":  "src",
+    "title":  "Motzkin numbers over a ternary alphabet: num_motzkin n = sum_{k} C(n,2k) Cat_k, proved via binomial transform of the Dyck count",
+    "topic":  "Introduces the ternary step set {MU,MD,MF} (first non-binary Element) and proves the Motzkin closed form num_motzkin n = sum_{k=0}^{n/2} C(n,2k)*num_dyck k, by showing a ternary path is Motzkin iff its U/D-extraction (drop the flats) is Dyck, then expressing the count as the binomial transform of the Dyck count and collapsing odd terms.",
+    "role":  "Third file of the combinatorics cluster, reuses Catalan.v as a factor: imports Path, all_paths, binomial, num_dyck, is_dyck_b/is_dyck_b_aux and the count machinery; the Catalan count num_dyck k appears as Cat_k inside the Motzkin closed form. Self-contained otherwise; no physics downstream.",
+    "qed":  36,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: Init.Nat PeanoNat List Lia ZArith Wf_nat",
+                    "ToS.Catalan"
+                ],
+    "err":  {
+                "elements":  "ТЕРНАРНЫЙ шаг MStep = {MU,MD,MF} — первое НЕбинарное различение в комбинаторной ветви; MPath = list MStep; флет MF не меняет высоту (нейтральный) — всё конечно (P4).",
+                "roles":  "позиция (последовательностная семантика, L5); знаковая высота Mheight_at; Mextract = роль-проекция, стирающая F и оставляющая U/D-подслово; выбор позиций F (binomial) против Dyck-укладки U/D (Catalan).",
+                "rules":  "is_motzkin = баланс (count_U=count_D) + неотрицательные высоты; ключ: is_motzkin_b p = is_dyck_b (Mextract p) (F прозрачен для высоты); биномиальное преобразование счёта Dyck, коллапс нечётных членов.",
+                "p4":  "M_n считается filter'ом по Mall_paths (3^n путей) — конечный процесс, без завершённой бесконечности. L5-канон: СНАЧАЛА позиции F (binomial), ПОТОМ Dyck-укладка U/D (Catalan) — два слоя одного конечного перечисления."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "MStep",
+                       "kind":  "Inductive",
+                       "role":  "★ тернарный шаг {MU,MD,MF} — первое небинарное Element"
+                   },
+                   {
+                       "name":  "MPath",
+                       "kind":  "Definition",
+                       "role":  "путь = list MStep"
+                   },
+                   {
+                       "name":  "Mcount_U",
+                       "kind":  "Fixpoint",
+                       "role":  "число MU-шагов"
+                   },
+                   {
+                       "name":  "Mcount_D",
+                       "kind":  "Fixpoint",
+                       "role":  "число MD-шагов"
+                   },
+                   {
+                       "name":  "Mcount_F",
+                       "kind":  "Fixpoint",
+                       "role":  "число MF-шагов"
+                   },
+                   {
+                       "name":  "Mcount_partition",
+                       "kind":  "Lemma",
+                       "role":  "U+D+F = length"
+                   },
+                   {
+                       "name":  "Mheight_at",
+                       "kind":  "Definition",
+                       "role":  "знаковая высота после k шагов (в Z)"
+                   },
+                   {
+                       "name":  "Mheight_at_0",
+                       "kind":  "Lemma",
+                       "role":  "Mheight_at p 0 = 0"
+                   },
+                   {
+                       "name":  "is_motzkin",
+                       "kind":  "Definition",
+                       "role":  "Constitution: баланс + неотрицательные высоты"
+                   },
+                   {
+                       "name":  "Mall_paths",
+                       "kind":  "Fixpoint",
+                       "role":  "перечисление всех тернарных путей длины n (3^n)"
+                   },
+                   {
+                       "name":  "Mall_paths_length",
+                       "kind":  "Lemma",
+                       "role":  "всё в Mall_paths n имеет длину n"
+                   },
+                   {
+                       "name":  "is_motzkin_b_aux",
+                       "kind":  "Fixpoint",
+                       "role":  "булева проверка Motzkin через высоту"
+                   },
+                   {
+                       "name":  "is_motzkin_b",
+                       "kind":  "Definition",
+                       "role":  "булев тест Motzkin"
+                   },
+                   {
+                       "name":  "num_motzkin",
+                       "kind":  "Definition",
+                       "role":  "★ число Motzkin-путей длины n (= M_n)"
+                   },
+                   {
+                       "name":  "msum_to",
+                       "kind":  "Definition",
+                       "role":  "сумма f(i), i=0..upper"
+                   },
+                   {
+                       "name":  "motzkin_closed",
+                       "kind":  "Definition",
+                       "role":  "★ замкнутая форма: sum_{k=0}^{n/2} C(n,2k)*num_dyck k"
+                   },
+                   {
+                       "name":  "M_0",
+                       "kind":  "Example",
+                       "role":  "M_0 = 1 (reflexivity)"
+                   },
+                   {
+                       "name":  "M_1",
+                       "kind":  "Example",
+                       "role":  "M_1 = 1 (vm_compute)"
+                   },
+                   {
+                       "name":  "M_2",
+                       "kind":  "Example",
+                       "role":  "M_2 = 2"
+                   },
+                   {
+                       "name":  "M_3",
+                       "kind":  "Example",
+                       "role":  "M_3 = 4"
+                   },
+                   {
+                       "name":  "M_4",
+                       "kind":  "Example",
+                       "role":  "M_4 = 9 (последовательность 1,1,2,4,9,21,51,...)"
+                   },
+                   {
+                       "name":  "Mextract",
+                       "kind":  "Fixpoint",
+                       "role":  "★ проекция: U/D-подслово (стирает F) -> бинарный Path"
+                   },
+                   {
+                       "name":  "is_motzkin_b_aux_extract",
+                       "kind":  "Lemma",
+                       "role":  "★ Motzkin-тест = Dyck-тест экстракции (F прозрачен)"
+                   },
+                   {
+                       "name":  "is_motzkin_b_extract",
+                       "kind":  "Lemma",
+                       "role":  "is_motzkin_b p = is_dyck_b (Mextract p)"
+                   },
+                   {
+                       "name":  "NP",
+                       "kind":  "Definition",
+                       "role":  "#бинарных путей длины j, удовлетворяющих P"
+                   },
+                   {
+                       "name":  "count_ext",
+                       "kind":  "Definition",
+                       "role":  "#тернарных путей длины n, чья экстракция удовлетворяет P"
+                   },
+                   {
+                       "name":  "num_motzkin_count_ext",
+                       "kind":  "Lemma",
+                       "role":  "num_motzkin n = count_ext is_dyck_b n"
+                   },
+                   {
+                       "name":  "Mfilter_map_cons_length",
+                       "kind":  "Lemma",
+                       "role":  "filter по map(cons s) для тернарных шагов"
+                   },
+                   {
+                       "name":  "NP_S",
+                       "kind":  "Lemma",
+                       "role":  "рекуррентность NP по первому биту"
+                   },
+                   {
+                       "name":  "count_ext_S",
+                       "kind":  "Lemma",
+                       "role":  "★ рекуррентность count_ext (MU/MD дописывают бит, MF стирает)"
+                   },
+                   {
+                       "name":  "binsum2",
+                       "kind":  "Fixpoint",
+                       "role":  "биномиальное преобразование с встроенным Паскалем"
+                   },
+                   {
+                       "name":  "binsum2_ext",
+                       "kind":  "Lemma",
+                       "role":  "экстенсиональность binsum2"
+                   },
+                   {
+                       "name":  "binsum2_add",
+                       "kind":  "Lemma",
+                       "role":  "аддитивность binsum2"
+                   },
+                   {
+                       "name":  "count_ext_binsum2",
+                       "kind":  "Lemma",
+                       "role":  "★ count_ext P n = binsum2 (NP P) n"
+                   },
+                   {
+                       "name":  "num_motzkin_binsum2",
+                       "kind":  "Corollary",
+                       "role":  "num_motzkin = binsum2 (NP is_dyck_b)"
+                   },
+                   {
+                       "name":  "gsum",
+                       "kind":  "Fixpoint",
+                       "role":  "сумма f по списку nat"
+                   },
+                   {
+                       "name":  "gsum_app",
+                       "kind":  "Lemma",
+                       "role":  "gsum аддитивен по ++"
+                   },
+                   {
+                       "name":  "gsum_add",
+                       "kind":  "Lemma",
+                       "role":  "gsum суммы = сумма gsum"
+                   },
+                   {
+                       "name":  "gsum_ext",
+                       "kind":  "Lemma",
+                       "role":  "экстенсиональность gsum"
+                   },
+                   {
+                       "name":  "gsum_map_S",
+                       "kind":  "Lemma",
+                       "role":  "gsum f (map S l) = gsum (f∘S) l"
+                   },
+                   {
+                       "name":  "seq_cons0",
+                       "kind":  "Lemma",
+                       "role":  "seq 0 (Sn) = 0 :: map S (seq 0 n)"
+                   },
+                   {
+                       "name":  "fold_sum",
+                       "kind":  "Definition",
+                       "role":  "явная форма: sum_{j=0}^n C(n,j)*g j"
+                   },
+                   {
+                       "name":  "fold_sum_head",
+                       "kind":  "Lemma",
+                       "role":  "выделение члена j=0"
+                   },
+                   {
+                       "name":  "gsum_seq_top_zero",
+                       "kind":  "Lemma",
+                       "role":  "сброс зануляющегося верхнего члена"
+                   },
+                   {
+                       "name":  "fold_sum_S",
+                       "kind":  "Lemma",
+                       "role":  "★ рекуррентность Паскаля для биномиально-взвешенной суммы"
+                   },
+                   {
+                       "name":  "binsum2_fold",
+                       "kind":  "Lemma",
+                       "role":  "binsum2 g n = fold_sum g n (две формы совпадают)"
+                   },
+                   {
+                       "name":  "NP_dyck_even",
+                       "kind":  "Lemma",
+                       "role":  "NP is_dyck_b (2k) = num_dyck k"
+                   },
+                   {
+                       "name":  "gsum_fold_right",
+                       "kind":  "Lemma",
+                       "role":  "gsum = fold_right Nat.add 0 ∘ map"
+                   },
+                   {
+                       "name":  "is_dyck_b_aux_balance",
+                       "kind":  "Lemma",
+                       "role":  "is_dyck_b_aux=true => высотный баланс"
+                   },
+                   {
+                       "name":  "is_dyck_b_balanced",
+                       "kind":  "Lemma",
+                       "role":  "Dyck => count_U = count_D"
+                   },
+                   {
+                       "name":  "length_filter_all_false",
+                       "kind":  "Lemma",
+                       "role":  "filter всё-ложно => длина 0"
+                   },
+                   {
+                       "name":  "NP_dyck_odd",
+                       "kind":  "Lemma",
+                       "role":  "★ NP is_dyck_b (нечёт) = 0 (Dyck-слово чётной длины)"
+                   },
+                   {
+                       "name":  "gsum_double_peel",
+                       "kind":  "Lemma",
+                       "role":  "выделение двух нижних членов суммы"
+                   },
+                   {
+                       "name":  "even_collapse",
+                       "kind":  "Lemma",
+                       "role":  "★ коллапс нечётно-зануляющейся суммы на чётные индексы"
+                   },
+                   {
+                       "name":  "num_motzkin_closed",
+                       "kind":  "Theorem",
+                       "role":  "★★ ГЛАВНОЕ: num_motzkin n = motzkin_closed n"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "num_motzkin_closed",
+                           "analysis":  "Капстоун: num_motzkin n = sum_{k=0}^{n/2} C(n,2k)*num_dyck k. Цепочка: num_motzkin = count_ext is_dyck_b (F прозрачен) = binsum2(NP is_dyck_b) (биномиальное преобразование) = fold_sum, затем even_collapse выбрасывает нечётные члены (NP_dyck_odd) и NP_dyck_even подставляет Cat_k. Делает формализацию Каталана ПЕРЕИСПОЛЬЗУЕМОЙ как множитель Motzkin. Файл завершается Print Assumptions num_motzkin_closed — публичный аудит 0 аксиом.",
+                           "tags":  [
+                                        "motzkin",
+                                        "closed-form",
+                                        "binomial-transform",
+                                        "capstone"
+                                    ]
+                       },
+                       {
+                           "name":  "is_motzkin_b_aux_extract",
+                           "analysis":  "Структурное ядро: булев Motzkin-тест на тернарном пути РАВЕН булеву Dyck-тесту на его U/D-экстракции, потому что флет MF не трогает Z-высоту (is_motzkin_b_aux p h = is_dyck_b_aux (Mextract p) h по индукции). Это и есть точная редукция тернарной задачи к бинарной — без неё нет ни биномиального преобразования, ни связи с Каталаном. В ER/RR: F = нейтральный шаг, его позиции выбираются отдельно (binomial), укладка U/D остаётся Dyck (Catalan).",
+                           "tags":  [
+                                        "extraction",
+                                        "ternary-to-binary",
+                                        "flat-transparent"
+                                    ]
+                       },
+                       {
+                           "name":  "count_ext_binsum2",
+                           "analysis":  "Комбинаторный мост: число тернарных путей длины n, чья экстракция удовлетворяет P, есть биномиальное преобразование binsum2(NP P) бинарного счёта NP P. Доказано индукцией через count_ext_S (MU/MD дописывают бит, MF стирает — три ветви Mall_paths) и NP_S. Это общий факт о 'вставке нейтрального символа', инстанцируемый затем на P=is_dyck_b. Аккуратная работа с двумя представлениями суммы (binsum2 Fixpoint vs fold_sum).",
+                           "tags":  [
+                                        "binomial-transform",
+                                        "count",
+                                        "recurrence"
+                                    ]
+                       },
+                       {
+                           "name":  "even_collapse",
+                           "analysis":  "Технический финал: сумма sum_{j=0}^n C(n,j)*g(j), где g зануляется на нечётных j, сворачивается на чётные индексы sum_{k=0}^{n/2} C(n,2k)*g(2k). Доказано сильной индукцией (well_founded_ind lt_wf) с двойным выделением членов (gsum_double_peel) и арифметикой деления n/2. Применяется к g=C(n,j)*NP is_dyck_b j (нечёт=0 по NP_dyck_odd, т.к. Dyck-слова чётной длины), давая ровно motzkin_closed.",
+                           "tags":  [
+                                        "even-collapse",
+                                        "well-founded",
+                                        "parity"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Motzkin numbers (1,1,2,4,9,21,...), the ternary-path model, and the closed form M_n = sum_k C(n,2k) C_k (Motzkin = binomial transform of Catalan, by inserting flat steps) are classical combinatorics. NEW here is only the 0-axiom Coq formalization: the exact reduction is_motzkin_b = is_dyck_b ∘ Mextract (flats transparent to height), the binomial-transform identity count_ext = binsum2 ∘ NP, and the even-index collapse — reusing Catalan.v's num_dyck as the factor; the full closed form num_motzkin = motzkin_closed is proved (NOT future work as the header still says). Mathematics classical; mechanization is the contribution.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "0-аксиомная формализация чисел Моцкина над тернарным алфавитом с ДОКАЗАННОЙ замкнутой формой num_motzkin = sum C(n,2k)*Cat_k: точная редукция Motzkin->Dyck через Mextract (флет прозрачен), биномиальное преобразование count_ext=binsum2∘NP, коллапс на чётные индексы; Каталан переиспользован как множитель.",
+                       "caveat":  "Полностью классическая комбинаторика (числа Моцкина, M_n = биномиальное преобразование Каталана). Ново только мехнизация + первое небинарное (тернарное) Element в ветви. Заголовок файла УСТАРЕЛ: называет полную биекцию/закрытую форму 'future work' и состояние 'closed-form definition', тогда как num_motzkin_closed фактически ДОКАЗАНА (Qed). См. notes."
+                   },
+    "tags":  [
+                 "motzkin",
+                 "combinatorics",
+                 "ternary",
+                 "binomial-transform",
+                 "catalan",
+                 "no-AC",
+                 "P4",
+                 "constructive",
+                 "nat"
+             ],
+    "notes":  "Header (Part VIII + Part 'CURRENT STATE') УСТАРЕЛ: называет 'num_motzkin n = motzkin_closed n' как 'FUTURE WORK' и состояние как 'closed-form definition', но теорема num_motzkin_closed фактически доказана Qed (Part IX-X), и файл оканчивается 'Print Assumptions num_motzkin_closed'. Qed actual = 36, 0 Admitted, 0 axioms (Print Assumptions подтверждает)."
+},
+{
+    "num":  1867,
+    "path":  "src/QIntervalNotCompact.v",
+    "cluster":  "src",
+    "classical_counterpart":  "The fact that [a,b]∩ℚ is closed and bounded but not compact (and the Heine–Borel theorem it fails) is standard real analysis / constructive analysis folklore; NEW here is only the explicit Coq witness — a √2-dodging open cover whose finite-subcover failure is driven by a Pell convergent crowding the absent √2 — framed as the P4 'completed cover of a completed point-set' category error vs the Lebesgue-number replacement.",
+    "title":  "ℚ∩[1,2] closed & bounded but NOT compact, as a proved theorem (√2-gap cover, no finite subcover)",
+    "topic":  "Builds an explicit open cover Uₖ = {x : |x²−2| > 1/(k+1)} of [1,2]∩ℚ (each open, union total since √2∉ℚ + Archimedes) and proves NO finite subfamily covers it: any largest index N is dodged by a Pell convergent xₙ with |xₙ²−2| ≤ 1/(k+1) for all k≤N. Compactness over ℚ genuinely fails.",
+    "role":  "Honest 'ℚ не компактно' (V.2 §2.5 / FORMALIZATION-BACKLOG F-20) turned from stated limitation into a fact. Imports Sqrt2Approx (sqrt2_uncovered witness) and analysis.Sqrt2Irrational (no_rational_sqrt2). Companion to HeineBorel_ERR.v (Lebesgue-number replacement) and CantorHeineQ.v.",
+    "qed":  5,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lqa ZArith Lia PeanoNat List",
+                    "ToS.Sqrt2Approx",
+                    "ToS.analysis.Sqrt2Irrational"
+                ],
+    "err":  {
+                "elements":  "рациональные точки [1,2]∩ℚ; конечный список индексов L; приближения Пелля xₙ — все актуальны (P4).",
+                "roles":  "√2 = role-limit (отсутствующая предельная точка); покрытия Uₖ = роль-окрестности; «компактность» = role-limit-свойство.",
+                "rules":  "Uₖ покрывают (x²≠2 из иррациональности √2 + Архимед); конечного подпокрытия нет — xₙ у √2-зазора не попадает ни в один выбранный Uₖ.",
+                "p4":  "некомпактность ℚ — ДОКАЗАННЫЙ факт (свидетель xₙ), не дефект формализации; ToS-замена = число Лебега (операциональное измельчение, HeineBorel_ERR). Классическое «завершённое покрытие завершённого множества точек» реифицирует Element-тотальность = ошибка P4."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "inC",
+                       "kind":  "Definition",
+                       "role":  "носитель [1,2]∩ℚ: 1 ≤ x ≤ 2"
+                   },
+                   {
+                       "name":  "U",
+                       "kind":  "Definition",
+                       "role":  "k-е множество покрытия |x²−2| > 1/(k+1), записано без обратной дроби (кросс-умножение)"
+                   },
+                   {
+                       "name":  "in_le_max",
+                       "kind":  "Lemma",
+                       "role":  "элемент списка ≤ максимума списка (fold_right Nat.max) — helper для конечного N"
+                   },
+                   {
+                       "name":  "nat_archimedean",
+                       "kind":  "Lemma",
+                       "role":  "над любым рациональным есть натуральное (Архимед, через Qarchimedean)"
+                   },
+                   {
+                       "name":  "covers",
+                       "kind":  "Theorem",
+                       "role":  "★ покрытие покрывает всё [1,2]∩ℚ: каждый x лежит в некотором Uₖ (x²≠2 + Архимед)"
+                   },
+                   {
+                       "name":  "no_finite_subcover",
+                       "kind":  "Theorem",
+                       "role":  "★ для любого конечного L есть x∈[1,2]∩ℚ, не покрытый ни одним Uₖ, k∈L (свидетель Пелля)"
+                   },
+                   {
+                       "name":  "Q_interval_not_compact",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: покрытие тотально ∧ конечного подпокрытия нет — [1,2]∩ℚ не компактно"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "no_finite_subcover",
+                           "analysis":  "Сердце результата: всякое конечное подсемейство имеет наибольший индекс N, а sqrt2_uncovered N даёт рациональное приближение Пелля xₙ∈[1,2] с |xₙ²−2| ≤ 1/(k+1) для ВСЕХ k≤N — т.е. xₙ не лежит ни в одном выбранном Uₖ. Конкретно реализует «рациональные сгущаются у √2, а √2 отсутствует»: это и есть провал компактности над ℚ. Честно: сама теорема классична (ℚ не полно ⟹ не компактно), новизна — машинный свидетель и P4-обрамление.",
+                           "tags":  [
+                                        "non-compactness",
+                                        "sqrt2-gap",
+                                        "pell-witness",
+                                        "no-finite-subcover"
+                                    ]
+                       },
+                       {
+                           "name":  "covers",
+                           "analysis":  "Доказывает тотальность покрытия: для каждого рационального x∈[1,2] имеем x²≠2 (иррациональность √2, no_rational_sqrt2), значит |x²−2|>0, и Архимед помещает его за некоторое 1/(k+1). Element-сторона: каждая точка покрыта актуальной окрестностью. Контраст с no_finite_subcover делает дихотомию «тотально, но не конечно» наглядной.",
+                           "tags":  [
+                                        "open-cover",
+                                        "archimedean",
+                                        "irrationality",
+                                        "total"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Некомпактность [1,2]∩ℚ предъявлена как ДОКАЗАННАЯ теорема с явным √2-додж-покрытием и свидетелем Пелля, обрамлённая как P4-ошибка завершённого покрытия против числа Лебега (операциональная замена).",
+                       "caveat":  "Классика: над ℚ замкнутое-ограниченное ≠ компактное, Гейне–Борель не выполняется — это стандарт конструктивного анализа. Ново только машинный свидетель + E/R/R-рамка; финитно/над-ℚ, 0 собственных аксиом."
+                   },
+    "tags":  [
+                 "non-compactness",
+                 "sqrt2",
+                 "pell",
+                 "heine-borel",
+                 "lebesgue-number",
+                 "P4",
+                 "constructive-analysis"
+             ]
+},
+{
+    "num":  1868,
+    "path":  "src/RealFieldApart.v",
+    "cluster":  "src",
+    "classical_counterpart":  "Apartness fields / Heyting fields (an element invertible iff apart from 0, a # b := ∃ separating gap) are standard in Bishop-style constructive analysis (Bishop, Bridges, Troelstra–van Dalen); NEW here is only the ToS framing — 'partiality of division' recast as the P4 ex→sig demand to EXHIBIT a gap, on the repo's own Cauchy-process reals built on RealField.v.",
+    "title":  "Cauchy reals as an APARTNESS (Heyting) FIELD: invertible exactly when a gap from 0 is exhibited",
+    "topic":  "Defines apart0 x = ∃q>0, eventually |xₙ|>q and proves: an apart real is eventually one-signed (apart0_sign), every apart real has a multiplicative inverse with x·y ~~ 1 (apart_has_inverse), and apartness is irreflexive at 0 (apart0_zero_absurd) — the witnessed replacement for '≠ 0'.",
+    "role":  "Closes FORMALIZATION-BACKLOG F-25 (IV.3 §3.6.4 'деление частично'): upgrades the POSITIVE-only inverse of RealField.v to total invertibility on apart elements. Imports CauchyReal + RealField (cauchy_inv_pos, cauchy_mul_inv_r_pos, ring/ordered-field laws). Part of the calculus_chain.",
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lqa Lia",
+                    "ToS.CauchyReal",
+                    "ToS.RealField"
+                ],
+    "err":  {
+                "elements":  "Коши-процессы nat→ℚ; свидетель-зазор q>0 с |xₙ|>q в конце концов — актуально предъявлен (P4).",
+                "roles":  "апартность x#0 = роль-условие обратимости; обратный элемент = роль, назначаемая правилом ТОЛЬКО при наличии зазора; знак = роль (в конце концов один).",
+                "rules":  "обратимость требует свидетеля-апартности (P4 ex→sig); Коши + |xₙ|>q ⟹ знак в конце концов один (скачок >q невозможен за модулем); x#0 ⟺ (−x)#0.",
+                "p4":  "классическое поле реифицирует завершённое множество обратимых (все ненулевые по голому ¬(x=0)); ToS — поле апартности: обратный там и только там, где зазор ПРЕДЪЯВЛЕН. ¬(x~~0) над конструктивным числом обратного не даёт — нужен свидетель. «Частичность деления» = честное содержание, не дефект."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "qabs_gt_pos",
+                       "kind":  "Lemma",
+                       "role":  "0≤a ∧ q<|a| ⟹ q<a (извлечение знака из зазора, положительный случай)"
+                   },
+                   {
+                       "name":  "qabs_gt_neg",
+                       "kind":  "Lemma",
+                       "role":  "a≤0 ∧ q<|a| ⟹ q<−a (извлечение знака, отрицательный случай)"
+                   },
+                   {
+                       "name":  "apart0",
+                       "kind":  "Definition",
+                       "role":  "апартность от 0: ∃q>0 ∃N ∀n≥N, q<|xₙ| (зазор предъявлен)"
+                   },
+                   {
+                       "name":  "cauchy_apart",
+                       "kind":  "Definition",
+                       "role":  "апартность двух реалов = апартность их разности x+(−y)"
+                   },
+                   {
+                       "name":  "apart0_sign",
+                       "kind":  "Lemma",
+                       "role":  "★ апартный реал в конце концов ОДНОЗНАЧНО знаков: apart0 x ⟹ cauchy_pos x ∨ cauchy_pos(−x)"
+                   },
+                   {
+                       "name":  "apart_has_inverse",
+                       "kind":  "Theorem",
+                       "role":  "★ всякий apart0 x обратим: ∃y, x·y ~~ 1 (положит. = cauchy_inv_pos; отриц. = −((−x)⁻¹))"
+                   },
+                   {
+                       "name":  "apart0_zero_absurd",
+                       "kind":  "Lemma",
+                       "role":  "★ ¬ apart0 0 — нельзя быть апартным от 0, будучи 0 (замена «≠0»)"
+                   },
+                   {
+                       "name":  "apartness_field",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: знак-резолюция ∧ тотальный обратный на апартных ∧ иррефлексивность в 0 = поле апартности"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "apart_has_inverse",
+                           "analysis":  "Тотальная обратимость на апартных элементах: каждый apart0 x имеет y с cauchy_mul x y ~~ cauchy_one. Положительный случай делегирует существующий cauchy_inv_pos из RealField; отрицательный берёт y=−((−x)⁻¹) и сводит цепочкой equiv/коммутативности/neg_r. Это закрывает «открытую частичность» RealField (там был только односторонний положительный зазор). Содержательно стандартно (апартность ⟹ обратимость в конструктивном поле), ценность — полнота над собственными процесс-реалами, 0 аксиом.",
+                           "tags":  [
+                                        "apartness",
+                                        "total-inverse",
+                                        "heyting-field",
+                                        "ex-to-sig"
+                                    ]
+                       },
+                       {
+                           "name":  "apart0_sign",
+                           "analysis":  "Конструктивная резолюция апартности в знак: последовательность Коши с |xₙ|>q не может сменить знак, не совершив скачок >q, что невозможно за модулем Коши — поэтому apart0 x распадается в cauchy_pos x ∨ cauchy_pos(−x). Это аналог конструктивной co-transitivity апартности и мост, переносящий односторонний инверс на оба знака. Классический факт конструктивного анализа; здесь — на repo-процессах.",
+                           "tags":  [
+                                        "sign-resolution",
+                                        "cauchy-modulus",
+                                        "constructive",
+                                        "apartness"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Коши-реалы repo показаны как поле апартности (Гейтинга): обратимость = предъявленный зазор от 0 (P4 ex→sig), с тотальным обратным на апартных, знак-резолюцией и иррефлексивностью в 0 — поверх существующего RealField, 0 аксиом.",
+                       "caveat":  "Поле апартности / условие «обратим ⟺ апартен от 0» — стандарт конструктивного анализа (Bishop, Bridges). Ново только ToS-обрамление «частичность деления = честное P4-содержание» и реализация над собственными процесс-реалами; финитно-конструктивно."
+                   },
+    "tags":  [
+                 "apartness",
+                 "heyting-field",
+                 "constructive-reals",
+                 "inverse",
+                 "ex-to-sig",
+                 "P4",
+                 "calculus-chain"
+             ]
+},
+{
+    "num":  1869,
+    "path":  "src/Sqrt2Approx.v",
+    "cluster":  "src",
+    "classical_counterpart":  "Pell's equation x²−2y²=±1, its recurrence pₖ₊₁=pₖ+2qₖ / qₖ₊₁=pₖ+qₖ, and the convergents pₖ/qₖ→√2 with error 1/qₖ² are classical number theory (continued fraction of √2 = [1;2,2,…]); NEW here is only packaging it as a reusable Coq brick whose output sqrt2_uncovered feeds the ℚ-non-compactness and Cantor–Heine-failure files, framed as √2 = role-limit process.",
+    "title":  "Pell convergents of √2 as a PROCESS: exact error |xₖ²−2|=1/qₖ², reusable √2-uncovered brick",
+    "topic":  "Defines the integer Pell sequence (1,1)→(p+2q,p+q), proves the ring invariant pₖ²−2qₖ²=±1, growth qₖ≥k+1 and range 1≤pₖ/qₖ≤2, hence xₖ=pₖ/qₖ satisfies EXACTLY |xₖ²−2|=1/qₖ². Capstone sqrt2_uncovered N yields a rational in [1,2] with |x²−2|≤1/(k+1) for all k≤N.",
+    "role":  "Reusable tool (the file self-labels уровень «инструмент»). Pure Stdlib QArith/ZArith. Consumed by QIntervalNotCompact.v (F-20, no finite subcover) and the Cantor–Heine-over-ℚ failure (F-21). Sibling of the surd↔Pell process files Sqrt3Pell / GoldenFibonacci / LucasFibonacci.",
+    "qed":  14,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lqa ZArith Lia"
+                ],
+    "err":  {
+                "elements":  "пары Пелля (pₖ,qₖ:ℤ); приближение xₖ=pₖ/qₖ∈ℚ — каждое актуально (P4).",
+                "roles":  "√2 = role-limit (незавершённый процесс, никогда не достигается); xₖ = роль-приближение, точная ошибка |xₖ²−2|=1/qₖ² назначается правилом-инвариантом.",
+                "rules":  "рекуррентность Пелля + ring-инвариант pₖ²−2qₖ²=±1 (один ring-шаг на индукцию) ⟹ точная ошибка 1/qₖ², qₖ↑→∞.",
+                "p4":  "xₖ — Element-сторона (рациональны, |xₖ²−2|>0 ВСЕГДА, ибо √2∉ℚ); √2 само = role-limit, к которому процесс сходится, но не доходит. Уровень файла: инструмент для F-20/F-21."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "injZ_lt",
+                       "kind":  "Lemma",
+                       "role":  "ℤ<ℤ ⟹ inject_Z< inject_Z (мост, ручное разворачивание)"
+                   },
+                   {
+                       "name":  "injZ_le",
+                       "kind":  "Lemma",
+                       "role":  "ℤ≤ℤ ⟹ inject_Z ≤ inject_Z"
+                   },
+                   {
+                       "name":  "injZ_pos",
+                       "kind":  "Lemma",
+                       "role":  "0<z ⟹ 0< inject_Z z"
+                   },
+                   {
+                       "name":  "injZ_neq0",
+                       "kind":  "Lemma",
+                       "role":  "z≠0 ⟹ inject_Z z ≠ 0 (как Qeq)"
+                   },
+                   {
+                       "name":  "injZ_sub",
+                       "kind":  "Lemma",
+                       "role":  "inject_Z(a−b) = inject_Z a − inject_Z b"
+                   },
+                   {
+                       "name":  "Qinv_antitone",
+                       "kind":  "Lemma",
+                       "role":  "обратная антитонна на положительных: 0<a≤b ⟹ /b ≤ /a"
+                   },
+                   {
+                       "name":  "pell",
+                       "kind":  "Fixpoint",
+                       "role":  "целочисленное ядро Пелля: (1,1) → (p+2q, p+q)"
+                   },
+                   {
+                       "name":  "pp",
+                       "kind":  "Definition",
+                       "role":  "pₖ = fst (pell k)"
+                   },
+                   {
+                       "name":  "qq",
+                       "kind":  "Definition",
+                       "role":  "qₖ = snd (pell k)"
+                   },
+                   {
+                       "name":  "pell_S",
+                       "kind":  "Lemma",
+                       "role":  "разворот шага: p(S k)=pₖ+2qₖ ∧ q(S k)=pₖ+qₖ"
+                   },
+                   {
+                       "name":  "pell_inv",
+                       "kind":  "Lemma",
+                       "role":  "позитивность+диапазон: 0<qₖ ≤ pₖ ≤ 2qₖ (даёт 1≤p/q≤2)"
+                   },
+                   {
+                       "name":  "qq_ge",
+                       "kind":  "Lemma",
+                       "role":  "рост знаменателя: qₖ ≥ k+1"
+                   },
+                   {
+                       "name":  "pell_pm",
+                       "kind":  "Lemma",
+                       "role":  "★ инвариант Пелля: pₖ²−2qₖ²=±1 (один ring-шаг на индукцию)"
+                   },
+                   {
+                       "name":  "sx",
+                       "kind":  "Definition",
+                       "role":  "рациональное приближение xₖ=pₖ/qₖ"
+                   },
+                   {
+                       "name":  "sx_num_eq",
+                       "kind":  "Lemma",
+                       "role":  "inject_Z уважает числитель квадрат-отклонения"
+                   },
+                   {
+                       "name":  "sx_range",
+                       "kind":  "Lemma",
+                       "role":  "1 ≤ xₖ ≤ 2"
+                   },
+                   {
+                       "name":  "sx_abs_eq",
+                       "kind":  "Lemma",
+                       "role":  "★ ТОЧНАЯ ошибка: |xₖ²−2| = 1/qₖ²"
+                   },
+                   {
+                       "name":  "sqrt2_uncovered",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН-инструмент: ∀N ∃x∈[1,2]∩ℚ, |x²−2|≤1/(k+1) ∀k≤N (x=xₙ Пелля)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "sx_abs_eq",
+                           "analysis":  "Точная (не оценочная) формула ошибки |xₖ²−2|=1/qₖ²: выводится из ring-инварианта pₖ²−2qₖ²=±1 делением на qₖ². Именно равенство (а не ≤) делает кирпич сильным — приближение контролируется в обе стороны, и 1/qₖ²→0 при qₖ↑. Классика теории Пелля / цепной дроби √2=[1;2,2,…]; ценность файла — машинная упаковка для повторного использования.",
+                           "tags":  [
+                                        "pell-invariant",
+                                        "exact-error",
+                                        "convergents",
+                                        "ring"
+                                    ]
+                       },
+                       {
+                           "name":  "sqrt2_uncovered",
+                           "analysis":  "Капстоун-инструмент, ради которого файл существует: для любого N даёт рациональное xₙ∈[1,2] с |xₙ²−2|≤1/(k+1) для всех k≤N (через антитонность обратной + qₙ≥N+1). Это ровно свидетель, который QIntervalNotCompact.v использует, чтобы дожировать любое конечное подпокрытие, и аналогично для провала Кантора–Гейне над ℚ. √2 как role-limit-процесс, инстанцированный конкретными Element-приближениями.",
+                           "tags":  [
+                                        "sqrt2-uncovered",
+                                        "role-limit",
+                                        "tool",
+                                        "F-20",
+                                        "F-21"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Сходимость Пелля к √2 упакована как переиспользуемый процесс-кирпич с ТОЧНОЙ ошибкой 1/qₖ² и готовым свидетелем sqrt2_uncovered для F-20/F-21; √2 — role-limit, приближения — Element-сторона.",
+                       "caveat":  "Уравнение Пелля, рекуррентность сходимостей и оценка ошибки 1/qₖ² — классическая теория чисел (цепная дробь √2). Новизна — 0-аксиомная Coq-формализация и роль reusable-инструмента; сам файл честно помечает уровень «инструмент». Финитно, над ℚ/ℤ."
+                   },
+    "tags":  [
+                 "pell",
+                 "sqrt2",
+                 "convergents",
+                 "role-limit",
+                 "tool",
+                 "number-theory",
+                 "process",
+                 "P4"
+             ]
+}
 ]

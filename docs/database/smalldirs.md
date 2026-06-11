@@ -2,7 +2,7 @@
 
 _Generated from `smalldirs.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**29 files / 292 Qed.** Score distribution: s5=0 / s4=0 / s3=0 / s2=15 / s1=14 / s0=0
+**30 files / 298 Qed.** Score distribution: s5=0 / s4=0 / s3=1 / s2=15 / s1=14 / s0=0
 
 ---
 
@@ -835,4 +835,48 @@ _Generated from `smalldirs.json` by `generate.ps1` - do not edit by hand; edit t
 
 **Uniqueness - score 1 (exposition).** Сводка термальной ветви: тепло = равновесный звук, нулевая энергия положительна.
 > _Caveat:_ Чистый узел-агрегатор; собственного результата нет.
+
+---
+
+## #1894 - `src/information/ChannelCapacity.v` - score 3 (new-framing)
+
+**BSC capacity over ℚ: max-entropy-at-uniform as a perfect-square deficit (Padé-log proxy, 0 axioms)**
+
+- **Topic.** Closes two named gaps of Book Part XVI: §3.2 the maximum of binary entropy at the uniform distribution (as an equality-with-witness, strict off-uniform), and §3.3 the binary symmetric channel capacity C(p)=H_max−H(p), both via the closed form S2(p)=6p(1−p)/[(p+1)(2−p)] whose deficit from 2/3 is a perfect square in (2p−1)².
+- **Role.** Discrete-math/information file closing planned Part-XVI gaps; replicates S2/ln_pade from stdlib/ShannonSynthesis (self-contained quote), cites InformationTheory (I(X;Y)), MajorizationSchur, QuadraticDiscriminant. Leaf application file, not a hub.
+- **Counts.** Qed 6 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Lqa Lia
+- **E/R/R.** _Elements:_ вероятность ошибки p∈ℚ; Паде-log; квадрат (2p−1)²; крайние режимы p=0, p=1/2. _Roles:_ энтропия = роль-мера; равномерное = max-роль энтропии / min-роль ёмкости; (2p−1)² = Element-структура. _Rules:_ дефицит от равномерного 2/3−S2(p) = 4(2p−1)²/[3(p+1)(2−p)] (квадрат, знаменатель>0 на [0,1]) ⟹ S2(p)≤2/3 с равенством ⟺ p=1/2; ёмкость C(p)=H_max−H(p) = тот же квадрат-дефицит. _P4:_ ★ ёмкость = квадрат-дефицит энтропии от равномерного — равномерное максимизирует энтропию ИМЕННО потому, что дефицит есть КВАДРАТ (тот же Element-квадрат, что disc-критерий). Element-сторона (Паде-прокси) точна, 0-аксиом. ЧЕСТНО: log=Паде-прокси (истинный log2=role-limit); общий n-арный max + единственность M1 + n-арный канал = ГОРИЗОНТ.
+- **Classical counterpart.** Shannon's binary symmetric channel capacity C(p) = 1 − H(p) and the maximum-entropy-at-uniform principle are foundational information theory; the concavity of binary entropy is standard. NEW here is only: (a) using a rational Padé proxy for log so everything is exact 0-axiom over ℚ, and (b) the observation that the entropy DEFICIT from uniform is a PERFECT SQUARE 4(2p−1)²/[3(p+1)(2−p)] — tying the max-entropy fact to the same Element-square (2p−1)² that drives the discriminant rationality criterion (H38/H57).
+- **Tags.** information, shannon, channel-capacity, max-entropy, perfect-square, pade-proxy, part-XVI, P4
+- **Notes.** STATUS header says '9 Qed' but actual Qed. count is 6 (drift). cluster derived from path src/information/ → 'information'. log is a rational Padé PROXY, explicitly flagged honest; only entropy DIFFERENCES are load-bearing. 0 own axioms.
+
+**Lemmas (16):**
+
+| name | kind | role |
+|---|---|---|
+| `Qmul_nonneg` | Lemma | 0≤a, 0≤b ⟹ 0≤a*b (Lqa-помощник) |
+| `Qsq_nonneg` | Lemma | 0≤y*y для любого y (nra не берёт) |
+| `Qsq_pos` | Lemma | y≠0 ⟹ 0<y*y |
+| `ln_pade` | Definition | рациональный Паде-ПРОКСИ логарифма: 2(x−1)/(x+1) |
+| `S2` | Definition | бинарная энтропия через Паде-log (реплика ShannonSynthesis) |
+| `binary_entropy_uniform` | Lemma | S2(1/2)=2/3 (нормировка Паде: H_max=2/3=«1 бит») |
+| `S2_closed` | Lemma | ★ замкнутая форма S2(p)=6p(1−p)/[(p+1)(2−p)] |
+| `entropy_deficit_is_square` | Lemma | ★★ ЯДРО: 2/3−S2(p)=4(2p−1)²/[3(p+1)(2−p)] — дефицит = перфектный квадрат |
+| `binary_entropy_max` | Lemma | ★ равномерное максимизирует энтропию: S2(p)≤2/3 на [0,1] (gap §3.2) |
+| `binary_entropy_strict_below` | Lemma | ★ вне равномерного энтропия СТРОГО ниже (положительный квадрат) |
+| `bsc_capacity` | Definition | ёмкость BSC: C(p)=H_max−S2(p)=2/3−S2(p) |
+| `bsc_capacity_is_square` | Lemma | ★ ёмкость = квадрат-дефицит от равномерного |
+| `bsc_capacity_perfect` | Lemma | ★ идеальный канал p=0 ⟹ полная ёмкость 2/3 |
+| `bsc_capacity_useless` | Lemma | ★ максимум шума p=1/2 ⟹ нулевая ёмкость |
+| `bsc_capacity_nonneg` | Lemma | ёмкость ≥0 на [0,1] (= max-энтропии на равномерном) |
+| `bsc_channel_summary` | Theorem | ★ капстоун: max-энтропии ∧ ёмкость≥0 ∧ C(0)=2/3 ∧ C(1/2)=0 |
+
+**Key lemmas (deep):**
+
+- **`entropy_deficit_is_square`** - Алгебраическое ядро файла: тождество 2/3−S2(p)=4(2p−1)²/[3(p+1)(2−p)] (доказано field). Числитель 4(2p−1)²≥0, знаменатель >0 на [0,1] ⟹ S2(p)≤2/3 ВСЕГДА, равенство ⟺ p=1/2. Содержательно: равномерное максимизирует энтропию ИМЕННО потому, что «расстояние от равномерного» есть КВАДРАТ (2p−1)² — тот же Element-квадрат, что disc-критерий рациональности (QuadraticDiscriminant H38/H57). Это лейтмотив-связка, а не новая теорема — но связка машинно-точна над ℚ. _(perfect-square, max-entropy, deficit, element-square)_
+- **`bsc_capacity_is_square`** - Ёмкость BSC C(p):=H_max−H(p) тождественно равна тому же квадрат-дефициту, откуда сразу режимы: C(0)=2/3 (нет шума, полная ёмкость), C(1/2)=0 (максимум шума, бесполезный канал). Это закрывает gap §3.3 плана Части XVI как РАВЕНСТВО-со-свидетелем. Честно: вся точность держится на рациональном Паде-ПРОКСИ для log — важны РАЗНОСТИ энтропии, истинный log2 = role-limit, не завершённый объект. _(bsc-capacity, shannon, pade-proxy, channel)_
+
+**Uniqueness - score 3 (new-framing).** Ёмкость двоичного симметричного канала и максимум энтропии на равномерном закрыты над ℚ как РАВЕНСТВА-со-свидетелем, причём дефицит энтропии от равномерного выведен как перфектный квадрат (2p−1)² — связывая max-entropy с тем же Element-квадратом, что критерий рациональности дискриминанта.
+> _Caveat:_ Шенноновская ёмкость BSC и принцип max-энтропии классичны; вогнутость бинарной энтропии стандартна. Ново лишь (а) 0-ax точность через рациональный Паде-ПРОКСИ log (истинный log2 = role-limit, НЕ завершён) и (б) наблюдение «дефицит = квадрат». ГОРИЗОНТ (не берётся): общий n-арный max-энтропии (Schur-вогнутость/мажоризация), аксиоматич. единственность меры (M1), n-арный канал. Header заявляет 9 Qed — фактически 6.
 

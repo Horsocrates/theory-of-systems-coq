@@ -1,0 +1,1445 @@
+[
+{
+    "num":  7,
+    "path":  "src/acoustics/AcousticsSynthesis.v",
+    "cluster":  "acoustics",
+    "classical_counterpart":  "Standard acoustics — the damped/undamped harmonic oscillator, wave propagation on a coupled chain, discrete normal-mode spectrum, consonance via small-integer frequency ratios (Pythagorean/just intonation), and the inverse-square + |amplitude|² (Born/intensity) laws — all classical wave physics; NEW is only the rhetorical 'derived from L1–L5 + P4' E/R/R packaging on concrete rational instances.",
+    "title":  "Grand synthesis of acoustics: six aspects of sound (oscillation→propagation→spectrum→harmony→loudness) on rational instances",
+    "topic":  "Top-of-cluster synthesis: bundles an AcousticSystem record + Timbre as spectral fingerprint, then collects six aspects of sound — each a concrete Q computation re-exported from the cluster's files (Oscillation, WavePropagation, SoundSpectrum, Harmony, Loudness) — into one grand sound_from_first_principles theorem.",
+    "role":  "Capstone/aggregator of the acoustics cluster; pure consolidation (imports all five aspect files, re-exports their results). No new physics content; depends on Oscillation/WavePropagation/SoundSpectrum/Harmony/Loudness. Exposition layer for the book's acoustics narrative.",
+    "qed":  8,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith List Lqa",
+                    "ToS.acoustics.Oscillation",
+                    "ToS.acoustics.WavePropagation",
+                    "ToS.acoustics.SoundSpectrum",
+                    "ToS.acoustics.Harmony",
+                    "ToS.acoustics.Loudness"
+                ],
+    "err":  {
+                "elements":  "AcousticSystem (размер графа, связь, число мод, основной тон); Timbre = list Q (спектральный отпечаток); конкретные рациональные инстансы.",
+                "roles":  "L1–L5 + P4 → колебание→распространение→спектр→гармония→громкость: каждый закон играет роль ступени цепочки; тембр = роль-различитель источников.",
+                "rules":  "колебание (L2+L3+L5) → распространение (+связь графа=волна) → дискретный спектр (+P4, конечный граф) → гармония (+L1, возврат тождества) → громкость (+правило Борна p=2, |амплитуда|²).",
+                "p4":  "конечный граф ⟹ ДИСКРЕТНЫЙ спектр мод (P4-грань: счётность ступеней). Звук = распространение повторяющихся актов различения по графу связанных вершин — переописание стандартной волновой физики в ToS-словаре, НЕ вывод нового содержания."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "AcousticSystem",
+                       "kind":  "Record",
+                       "role":  "акустическая система: {размер графа; связь; число мод; основной тон}"
+                   },
+                   {
+                       "name":  "make_acoustic",
+                       "kind":  "Definition",
+                       "role":  "конструктор: N вершин, c² связь → система с N модами, основным тоном 2c²"
+                   },
+                   {
+                       "name":  "Timbre",
+                       "kind":  "Definition",
+                       "role":  "тембр = list Q (спектральный отпечаток)"
+                   },
+                   {
+                       "name":  "flute_timbre",
+                       "kind":  "Definition",
+                       "role":  "тембр флейты [0;1;1/10;1/100;0]"
+                   },
+                   {
+                       "name":  "string_timbre",
+                       "kind":  "Definition",
+                       "role":  "тембр струны [0;1;4/5;3/5;2/5]"
+                   },
+                   {
+                       "name":  "different_timbre",
+                       "kind":  "Definition",
+                       "role":  "тембры различны: ∃k, k-я гармоника отличается"
+                   },
+                   {
+                       "name":  "timbre_distinguishes",
+                       "kind":  "Lemma",
+                       "role":  "флейта ≠ струна (на 2-й гармонике, discriminate)"
+                   },
+                   {
+                       "name":  "modes_equal_vertices",
+                       "kind":  "Lemma",
+                       "role":  "число мод = число вершин (make_acoustic 64 → 64 моды)"
+                   },
+                   {
+                       "name":  "aspect_oscillation",
+                       "kind":  "Theorem",
+                       "role":  "Аспект 1: осциллятор k=2 период 4, переход через ноль (L2+L3+L5)"
+                   },
+                   {
+                       "name":  "aspect_propagation",
+                       "kind":  "Theorem",
+                       "role":  "Аспект 2: импульс распространяется, волновой фронт причинен (+связь)"
+                   },
+                   {
+                       "name":  "aspect_spectrum",
+                       "kind":  "Theorem",
+                       "role":  "Аспект 3: 4 моды, основной тон = 2 (+P4)"
+                   },
+                   {
+                       "name":  "aspect_harmony",
+                       "kind":  "Theorem",
+                       "role":  "Аспект 4: октава консонантнее квинты, период октавы = 2 (L1)"
+                   },
+                   {
+                       "name":  "aspect_loudness",
+                       "kind":  "Theorem",
+                       "role":  "Аспект 5: энергия ∝ амплитуда², закон обратных квадратов (Борн)"
+                   },
+                   {
+                       "name":  "sound_from_first_principles",
+                       "kind":  "Theorem",
+                       "role":  "★ ГРАНД-СИНТЕЗ: все шесть аспектов звука в одной теореме"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "sound_from_first_principles",
+                           "analysis":  "Капстоун кластера: одна конъюнкция собирает шесть аспектов звука — осциллятор (период 4, переход через ноль), распространение (импульс идёт, фронт причинен), спектр (4 моды, основной тон 2), гармония (октава>квинта, период тритона 1440), громкость (E∝A², обратные квадраты) — каждый кусок exact-доказан в соответствующем файле кластера. Чистая агрегация: ценность педагогическая (нарратив «звук из законов логики»), не новое содержание. Честно: всё это стандартная волновая физика на рациональных инстансах.",
+                           "tags":  [
+                                        "synthesis",
+                                        "capstone",
+                                        "aggregation",
+                                        "acoustics"
+                                    ]
+                       },
+                       {
+                           "name":  "timbre_distinguishes",
+                           "analysis":  "Тембр как спектральный отпечаток: флейта [0;1;1/10;…] и струна [0;1;4/5;…] различаются уже на 2-й гармонике (discriminate). Иллюстрирует, что Element-данные (рациональные амплитуды гармоник) различают источники звука — наглядно, но тривиально (несовпадение двух конкретных списков).",
+                           "tags":  [
+                                        "timbre",
+                                        "spectrum",
+                                        "example"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  1,
+                       "level":  "exposition",
+                       "claim":  "Чистая агрегация акустического кластера: шесть аспектов звука (колебание→распространение→спектр→гармония→громкость) собраны в один грант-синтез на рациональных инстансах, обрамлённые нарративом «звук = распространение актов различения».",
+                       "caveat":  "Всё содержание классическое (гармонический осциллятор, волна на цепочке, нормальные моды, консонанс малых отношений, обратные квадраты, |A|²). Никакого нового вывода — только E/R/R-переописание и агрегация. STATUS-заголовок завышает: заявлено 10 Qed, фактически 8 (DRIFT). Возможный оверклейм в фразе «derived, not described»."
+                   },
+    "notes":  "Qed DRIFT: STATUS-заголовок заявляет 10 Qed, фактический счёт = 8 (timbre_distinguishes, modes_equal_vertices, aspect_oscillation/propagation/spectrum/harmony/loudness, sound_from_first_principles). 0 Admitted, 0 собственных аксиом.",
+    "tags":  [
+                 "acoustics",
+                 "synthesis",
+                 "capstone",
+                 "wave-physics",
+                 "exposition",
+                 "timbre",
+                 "ERR"
+             ]
+},
+{
+    "num":  8,
+    "path":  "src/acoustics/DampingAndDissipation.v",
+    "cluster":  "acoustics",
+    "classical_counterpart":  "The damped harmonic oscillator (finite-difference recurrence dₙ₊₁=(2−k−γ)dₙ−(1−γ)dₙ₋₁), energy radiation = energy in − energy out, and damping rate from a coupling ratio k_env/(k_int+k_env) are textbook classical mechanics / wave dissipation; NEW is only the E/R/R reading 'damping = vibration energy becoming wave; silence = tension distributed across all DOF'.",
+    "title":  "Damping as vibration→wave: amplitude decay & energy radiation on rational instances",
+    "topic":  "Models the damped oscillator as a rational finite-difference recurrence damped_next, shows γ=0 recovers the undamped oscillator, that small damping shrinks amplitude, computes concrete damped trajectories (γ=1/4, 1/2), derives damping from a coupling ratio, and does simple radiated-energy accounting (initial − remaining).",
+    "role":  "Mid-cluster acoustics file (damping/dissipation aspect). Imports acoustics.VibrationCore (next_state). Feeds the cluster's narrative on why sound dies out; consumed indirectly by the AcousticsSynthesis capstone's propagation/loudness story. Pure rational vm_compute / ring exposition.",
+    "qed":  13,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lia ZArith Lqa",
+                    "ToS.acoustics.VibrationCore"
+                ],
+    "err":  {
+                "elements":  "конкретные рациональные траектории damped_next (k,γ,d_prev,d_curr); энергии E_initial/E_remaining; коэффициенты связи — все актуальны (P4).",
+                "roles":  "связь со средой = роль-канал утечки энергии; γ (затухание) = роль-параметр; «громкость» = скорость умирания (роль: чем громче, тем быстрее затухает).",
+                "rules":  "затухание = эмиссия волны: энергия течёт ИЗ локального колебания к связанным соседям; damped_next = осциллятор с потерей; γ из связи = k_env/(k_int+k_env); излучённая энергия = начальная − оставшаяся.",
+                "p4":  "тишина = L1–L5-напряжение, РАСПРЕДЕЛённое по всем степеням свободы (а не исчезнувшее) — энергобаланс конечен и сохранён. Стандартная диссипативная динамика в ToS-словаре «колебание становится волной»; нового вывода нет."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "damped_next",
+                       "kind":  "Definition",
+                       "role":  "затухающий шаг: (2−k−γ)·d_curr − (1−γ)·d_prev"
+                   },
+                   {
+                       "name":  "energy_radiated",
+                       "kind":  "Definition",
+                       "role":  "излучённая энергия = E_initial − E_remaining"
+                   },
+                   {
+                       "name":  "damping_from_coupling",
+                       "kind":  "Definition",
+                       "role":  "затухание из связи: k_env/(k_int+k_env)"
+                   },
+                   {
+                       "name":  "undamped_is_standard",
+                       "kind":  "Lemma",
+                       "role":  "γ=0 сводит к стандартному next_state (ring)"
+                   },
+                   {
+                       "name":  "undamped_k2_period",
+                       "kind":  "Lemma",
+                       "role":  "незатухающий k=2: damped_next 2 0 0 1 = 0, …1 0 = −1"
+                   },
+                   {
+                       "name":  "damped_decreasing",
+                       "kind":  "Lemma",
+                       "role":  "малое затухание γ=1/10: |d1|<1 (амплитуда падает, vm_compute)"
+                   },
+                   {
+                       "name":  "damped_g14_d1",
+                       "kind":  "Lemma",
+                       "role":  "γ=1/4: damped_next 2 (1/4) 0 1 = −1/4"
+                   },
+                   {
+                       "name":  "damped_g14_d2",
+                       "kind":  "Lemma",
+                       "role":  "γ=1/4 второй шаг = −11/16"
+                   },
+                   {
+                       "name":  "damped_g12_d1",
+                       "kind":  "Lemma",
+                       "role":  "тяжёлое затухание γ=1/2: первый шаг = −1/2"
+                   },
+                   {
+                       "name":  "damping_weak_coupling",
+                       "kind":  "Lemma",
+                       "role":  "слабая связь: damping_from_coupling 2 (1/10) = 1/21"
+                   },
+                   {
+                       "name":  "damping_equal_coupling",
+                       "kind":  "Lemma",
+                       "role":  "равная связь: damping_from_coupling 1 1 = 1/2"
+                   },
+                   {
+                       "name":  "damping_strong_coupling",
+                       "kind":  "Lemma",
+                       "role":  "сильная связь: damping_from_coupling 1 9 = 9/10"
+                   },
+                   {
+                       "name":  "stronger_coupling_more_damping",
+                       "kind":  "Lemma",
+                       "role":  "сильнее связь ⟹ больше затухание (1/1 < 1/9 связь)"
+                   },
+                   {
+                       "name":  "energy_accounting",
+                       "kind":  "Lemma",
+                       "role":  "баланс энергии: energy_radiated 10 3 = 7 (ring)"
+                   },
+                   {
+                       "name":  "no_damping_no_radiation",
+                       "kind":  "Lemma",
+                       "role":  "нет затухания ⟹ нет излучения: energy_radiated 10 10 = 0"
+                   },
+                   {
+                       "name":  "damping_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ СИНТЕЗ: γ=0=стандарт ∧ амплитуда↓ ∧ связь↑⟹затухание↑ ∧ нет затух.⟹нет излуч."
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "damping_synthesis",
+                           "analysis":  "Локальный капстоун файла: одна конъюнкция связывает четыре факта затухания — γ=0 даёт незатухающий осциллятор (ring), малое затухание уменьшает амплитуду (|d1|<1), более сильная связь даёт большее затухание, и отсутствие затухания означает нулевое излучение. Все куски — конкретные vm_compute/ring над ℚ. Чистая экспозиция диссипативной динамики; E/R/R-рамка «затухание = колебание становится волной, тишина = распределённое напряжение» риторическая, не выводящая.",
+                           "tags":  [
+                                        "synthesis",
+                                        "damping",
+                                        "energy-balance",
+                                        "exposition"
+                                    ]
+                       },
+                       {
+                           "name":  "undamped_is_standard",
+                           "analysis":  "Корректность модели: при γ=0 рекуррентность damped_next точно совпадает с базовым осциллятором next_state из VibrationCore (доказано ring). Это санити-якорь — показывает, что затухающая динамика непрерывно расширяет незатухающую, а не подменяет её. Стандартный предельный переход γ→0.",
+                           "tags":  [
+                                        "sanity-check",
+                                        "undamped-limit",
+                                        "ring"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  1,
+                       "level":  "exposition",
+                       "claim":  "Затухание представлено как переход колебание→волна: затухающая рекуррентность над ℚ, восстановление незатухающего предела при γ=0, конкретные траектории, затухание из отношения связи и баланс излучённой энергии — обрамлено «тишина = напряжение, распределённое по всем DOF».",
+                       "caveat":  "Всё классическое: затухающий гармонический осциллятор, энергобаланс, скорость затухания из связи. Нового вывода нет — только рациональные инстансы + E/R/R-переописание. STATUS-заголовок занижает: заявлено 12 Qed, фактически 13 (DRIFT)."
+                   },
+    "notes":  "Qed DRIFT: STATUS-заголовок заявляет 12 Qed, фактический счёт = 13 (undamped_is_standard, undamped_k2_period, damped_decreasing, damped_g14_d1, damped_g14_d2, damped_g12_d1, damping_weak/equal/strong_coupling, stronger_coupling_more_damping, energy_accounting, no_damping_no_radiation, damping_synthesis). 0 Admitted, 0 собственных аксиом.",
+    "tags":  [
+                 "acoustics",
+                 "damping",
+                 "dissipation",
+                 "harmonic-oscillator",
+                 "energy",
+                 "exposition",
+                 "ERR"
+             ]
+},
+{
+    "num":  9,
+    "path":  "src/acoustics/Harmony.v",
+    "cluster":  "acoustics",
+    "title":  "Музыкальные интервалы из отношений мод: консонанс C(p,q)=1/(p*q) на рациональных примерах",
+    "topic":  "Определяет меру консонанса consonance p q = 1/(p*q), табличные интервалы (октава 2, квинта 3/2, кварта 4/3, тритон 45/32), комбинированный период = lcm(p,q) и гармонический ряд; всё проверяется vm_compute на конкретных числах (A=440).",
+    "role":  "Лист кластера acoustics, прикладной/экспозиционный. Зависит только от Stdlib (QArith/Lqa). Не импортируется другими файлами — иллюстрация «музыка = следствие L1».",
+    "qed":  12,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith PeanoNat Lqa"
+                ],
+    "err":  {
+                "elements":  "пары тонов с целыми отношениями p/q; конкретные интервалы (октава, квинта, кварта, б.терция, тритон) как Q.",
+                "roles":  "L1 (тождество → периодический возврат): короткий совместный период = устойчивость = консонанс; роль = ранг в порядке консонанса.",
+                "rules":  "C(p,q) = 1/(p*q): простое отношение → большой консонанс; комбинированный период = lcm(p,q); гармоника n = n*fundamental.",
+                "p4":  "конечные целые отношения дают конечный совместный период (lcm) — Element-сторона: возврат достижим за lcm(p,q) шагов; иррациональные отношения (равномерная темперация) сюда НЕ попадают — это role-limit, формализуемый в соседнем MusicTemperament.v, не здесь."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "consonance",
+                       "kind":  "Definition",
+                       "role":  "мера консонанса 1/(p*q): чем проще отношение, тем больше"
+                   },
+                   {
+                       "name":  "unison_ratio",
+                       "kind":  "Definition",
+                       "role":  "унисон = 1"
+                   },
+                   {
+                       "name":  "octave_ratio",
+                       "kind":  "Definition",
+                       "role":  "октава = 2"
+                   },
+                   {
+                       "name":  "fifth_ratio",
+                       "kind":  "Definition",
+                       "role":  "квинта = 3/2"
+                   },
+                   {
+                       "name":  "fourth_ratio",
+                       "kind":  "Definition",
+                       "role":  "кварта = 4/3"
+                   },
+                   {
+                       "name":  "major_third_ratio",
+                       "kind":  "Definition",
+                       "role":  "большая терция = 5/4"
+                   },
+                   {
+                       "name":  "tritone_ratio",
+                       "kind":  "Definition",
+                       "role":  "тритон = 45/32"
+                   },
+                   {
+                       "name":  "octave_most_consonant",
+                       "kind":  "Lemma",
+                       "role":  "C(2,1) > C(3,2): октава консонантнее квинты (vm_compute)"
+                   },
+                   {
+                       "name":  "fifth_more_than_tritone",
+                       "kind":  "Lemma",
+                       "role":  "C(3,2) > C(45,32): квинта консонантнее тритона"
+                   },
+                   {
+                       "name":  "consonance_ordering",
+                       "kind":  "Lemma",
+                       "role":  "унисон > октава > квинта > кварта > б.терция (цепь неравенств)"
+                   },
+                   {
+                       "name":  "combined_period_factor",
+                       "kind":  "Definition",
+                       "role":  "совместный период = lcm(p,q)"
+                   },
+                   {
+                       "name":  "octave_period",
+                       "kind":  "Lemma",
+                       "role":  "lcm(2,1) = 2"
+                   },
+                   {
+                       "name":  "fifth_period",
+                       "kind":  "Lemma",
+                       "role":  "lcm(3,2) = 6"
+                   },
+                   {
+                       "name":  "tritone_period",
+                       "kind":  "Lemma",
+                       "role":  "lcm(45,32) = 1440 (длинный период тритона)"
+                   },
+                   {
+                       "name":  "harmonic_freq",
+                       "kind":  "Definition",
+                       "role":  "частота n-й гармоники = n*fundamental"
+                   },
+                   {
+                       "name":  "harmonic_2",
+                       "kind":  "Lemma",
+                       "role":  "2-я гармоника 440 = 880"
+                   },
+                   {
+                       "name":  "harmonic_3",
+                       "kind":  "Lemma",
+                       "role":  "3-я гармоника 440 = 1320"
+                   },
+                   {
+                       "name":  "octave_is_second_harmonic",
+                       "kind":  "Lemma",
+                       "role":  "октава = 2-я гармоника"
+                   },
+                   {
+                       "name":  "shared_harmonics",
+                       "kind":  "Fixpoint",
+                       "role":  "счётчик общих гармоник двух тонов в окне K"
+                   },
+                   {
+                       "name":  "shared_harmonics_octave",
+                       "kind":  "Lemma",
+                       "role":  "октава делит 3 из 6 гармоник"
+                   },
+                   {
+                       "name":  "shared_harmonics_fifth",
+                       "kind":  "Lemma",
+                       "role":  "квинта делит 2 из 6 гармоник"
+                   },
+                   {
+                       "name":  "harmony_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ свод: порядок консонанса + периоды + октава=2-я гармоника"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "consonance_ordering",
+                           "analysis":  "Главное содержательное утверждение файла: 1/(p*q) задаёт строгий порядок унисон>октава>квинта>кварта>б.терция. Это не теорема о консонансе вообще, а проверка одной выбранной формулы на пяти числах через vm_compute. Классически совпадает с ранжированием по простоте отношения (теория консонанса Гельмгольца/Эйлера gradus suavitatis); ново только E/R/R-обрамление «короткий lcm-возврат = L1-устойчивость».",
+                           "tags":  [
+                                        "consonance",
+                                        "exposition",
+                                        "L1"
+                                    ]
+                       },
+                       {
+                           "name":  "combined_period_factor",
+                           "analysis":  "lcm(p,q) = число периодов основного тона до совместного возврата; тритон 45/32 даёт 1440 (диссонанс) против октавы 2 (консонанс). Это и есть «Element-сторона»: целое отношение ⟹ конечный возврат. Честно: всё на конкретных p,q, никакого общего теоремного утверждения о монотонности консонанс↔lcm нет.",
+                           "tags":  [
+                                        "period",
+                                        "lcm",
+                                        "vibration-return"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Пифагоров строй и ранжирование интервалов по простоте целочисленного отношения (Эйлеров gradus suavitatis, теория консонанса Гельмгольца) — классика теории музыки. Иррациональная сторона (пифагорова комма, равная темперация) формализована отдельно в MusicTemperament.v; НОВОГО результата здесь нет.",
+    "uniqueness":  {
+                       "score":  1,
+                       "level":  "exposition",
+                       "claim":  "Чистая экспозиция: стандартная теория консонанса (1/(p*q), интервалы, lcm-период, гармонический ряд) аккуратно проверена над Q на конкретных интервалах, в E/R/R-обрамлении «консонанс из L1».",
+                       "caveat":  "Всё классично (Пифагор/Эйлер/Гельмгольц) и проверено лишь на отдельных числах через vm_compute — не общие теоремы. Лозунг шапки «Music theory = CONSEQUENCE of ToS» — оверклейм: формула 1/(p*q) ПОСТУЛИРОВАНА, а не выведена из законов; иррациональная (role-limit) сторона музыки в этом файле отсутствует."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "music",
+                 "consonance",
+                 "exposition",
+                 "L1",
+                 "over-branding"
+             ]
+},
+{
+    "num":  10,
+    "path":  "src/acoustics/HierarchyTheorem.v",
+    "cluster":  "acoustics",
+    "title":  "Лестница Колебание < Вибрация < Волна > Звук: каждый уровень = предыдущий + один ингредиент",
+    "topic":  "Вводит записи VibrationRec/WaveRec/SoundRec, вложения wave→vib и sound→wave, и показывает на примерах, что убирание ингредиента (связи c=0, восстанавливающей силы k=0) рушит соответствующий уровень, а слышимость = 20..20000 Гц.",
+    "role":  "Капстоун кластера acoustics: связывает VibrationCore и WavePropagation в иерархию записей. Импортирует acoustics.VibrationCore, acoustics.WavePropagation; верхний файл цепочки.",
+    "qed":  11,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith PeanoNat Lqa",
+                    "ToS: acoustics.VibrationCore",
+                    "ToS: acoustics.WavePropagation"
+                ],
+    "err":  {
+                "elements":  "записи-уровни VibrationRec{k}, WaveRec{k,coupling,size}, SoundRec{wave,freq}; конкретные обитатели (камертон k=2, воздушная волна).",
+                "roles":  "каждый уровень = роль-ярус: вибрация (L1 восстановление + L5 инерция), волна (+ пространственный граф + связь), звук (+ слышимость); вложение = «содержит предыдущий».",
+                "rules":  "wave_to_vib/sound_to_wave проектируют вниз; убрать ингредиент (c=0 ⟹ нет распространения; k=0 ⟹ линейный дрейф) ⟹ уровень коллапсирует; 20<=freq<=20000.",
+                "p4":  "лестница конечных уровней, каждый отделён ОДНИМ конструктивным ингредиентом; коллапс при обнулении ингредиента наблюдаем на конкретных значениях (no_coupling, no_restoring) — это демонстрация необходимости ингредиента, а не общая теорема о минимальности."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "VibrationRec",
+                       "kind":  "Record",
+                       "role":  "уровень вибрации: жёсткость k>0"
+                   },
+                   {
+                       "name":  "WaveRec",
+                       "kind":  "Record",
+                       "role":  "уровень волны: k>0, связь>0, граф>1 вершины"
+                   },
+                   {
+                       "name":  "SoundRec",
+                       "kind":  "Record",
+                       "role":  "уровень звука: волна + слышимая частота 20..20000"
+                   },
+                   {
+                       "name":  "wave_to_vib",
+                       "kind":  "Definition",
+                       "role":  "проекция волна→вибрация (забывает связь/граф)"
+                   },
+                   {
+                       "name":  "sound_to_wave",
+                       "kind":  "Definition",
+                       "role":  "проекция звук→волна (поле sr_wave)"
+                   },
+                   {
+                       "name":  "wave_has_vibration",
+                       "kind":  "Lemma",
+                       "role":  "волна содержит вибрацию: k>0"
+                   },
+                   {
+                       "name":  "sound_has_wave",
+                       "kind":  "Lemma",
+                       "role":  "звук содержит волну: граф>1"
+                   },
+                   {
+                       "name":  "tuning_fork",
+                       "kind":  "Definition",
+                       "role":  "камертон = VibrationRec с k=2 (через lra)"
+                   },
+                   {
+                       "name":  "air_wave",
+                       "kind":  "Definition",
+                       "role":  "воздушная волна = WaveRec(k=2,c=1/4,size=100)"
+                   },
+                   {
+                       "name":  "tuning_fork_k",
+                       "kind":  "Lemma",
+                       "role":  "k камертона = 2"
+                   },
+                   {
+                       "name":  "air_wave_size",
+                       "kind":  "Lemma",
+                       "role":  "размер графа воздушной волны = 100"
+                   },
+                   {
+                       "name":  "no_coupling_collapse",
+                       "kind":  "Lemma",
+                       "role":  "★ связь=0 ⟹ нет распространения (делегирует WavePropagation)"
+                   },
+                   {
+                       "name":  "no_restoring_drift",
+                       "kind":  "Lemma",
+                       "role":  "★ k=0 ⟹ линейный дрейф next_state, нет колебания"
+                   },
+                   {
+                       "name":  "both_present_oscillation",
+                       "kind":  "Lemma",
+                       "role":  "k=2 и связь>0 ⟹ колебание + распространение"
+                   },
+                   {
+                       "name":  "concert_A_audible",
+                       "kind":  "Lemma",
+                       "role":  "440 Гц в слышимом диапазоне"
+                   },
+                   {
+                       "name":  "ultrasound_inaudible",
+                       "kind":  "Lemma",
+                       "role":  "40000 Гц > 20000 (ультразвук неслышим)"
+                   },
+                   {
+                       "name":  "infrasound_inaudible",
+                       "kind":  "Lemma",
+                       "role":  "20 не <= 10 (инфразвук-граница)"
+                   },
+                   {
+                       "name":  "hierarchy_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ свод: вложение + два коллапса + оба ингредиента + слышимость A"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "no_restoring_drift",
+                           "analysis":  "Содержательное ядро «лестницы»: при k=0 рекуррентность next_state вырождается в линейный дрейф 1,2,3 (нет возврата к нулю), т.е. без L1-восстановления нет колебания. Вместе с no_coupling_collapse это и есть «убери ингредиент → коллапс уровня». Честно: оба факта проверены на конкретных значениях, а не как теоремы для всех начальных условий.",
+                           "tags":  [
+                                        "collapse",
+                                        "restoring-force",
+                                        "L1"
+                                    ]
+                       },
+                       {
+                           "name":  "hierarchy_synthesis",
+                           "analysis":  "Свод-капстоун: волна содержит вибрацию, обнуление связи/восстановления рушит распространение/колебание, оба вместе дают и колебание, и распространение, и 440 Гц слышимо. Архитектурно полезен (связывает VibrationCore↔WavePropagation в одну запись-иерархию), но это демонстрационная конъюнкция примеров, а не новый математический результат.",
+                           "tags":  [
+                                        "synthesis",
+                                        "hierarchy",
+                                        "records"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Стандартная физика: гармонический осциллятор (восстанавливающая сила + инерция), волновое уравнение на связанной решётке, слышимый диапазон 20 Гц–20 кГц. НОВОГО результата нет; ново лишь обрамление «уровень = предыдущий + один ингредиент» как лестница записей в E/R/R.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Необычная формализация-обрамление обычной акустики: четыре уровня (колебание/вибрация/волна/звук) как лестница записей с вложениями и наблюдаемым коллапсом при обнулении ингредиента (связь, восстановление).",
+                       "caveat":  "Содержание (осциллятор, волна на решётке, слышимость) полностью классично; коллапсы доказаны на конкретных значениях, не как общие теоремы. Шапка заявляет 10 Qed — фактически 11 (дрейф +1). Уровни L1/L2/L3/L5 в комментариях — интерпретация, не выведенные сущности."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "hierarchy",
+                 "records",
+                 "methods",
+                 "collapse",
+                 "drift"
+             ],
+    "notes":  "STATUS-шапка: 10 Qed; фактически 11 Qed (дрейф +1). 0 Admitted, 0 собственных аксиом. Делегирует no_coupling_no_propagation и impulse_propagates в acoustics.WavePropagation."
+},
+{
+    "num":  11,
+    "path":  "src/acoustics/Loudness.v",
+    "cluster":  "acoustics",
+    "title":  "Громкость = |амплитуда|^2 и закон обратных квадратов на рациональных примерах",
+    "topic":  "Определяет sound_energy a = a*a (энергия = квадрат амплитуды, мотивируется правилом Борна p=2), интенсивность E/n и обратно-квадратичное затухание E/(r*r); проверяет 2x амплитуды → 4x энергии, неотрицательность, тишину и 1/r^2 на конкретных числах.",
+    "role":  "Лист кластера acoustics, прикладной/экспозиционный. Зависит только от Stdlib (QArith/Lqa). Не импортируется другими файлами.",
+    "qed":  10,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith Lqa"
+                ],
+    "err":  {
+                "elements":  "амплитуда как Q; конкретные значения (3/5, 2, 3, -7, 0); расстояния r=1,2,3.",
+                "roles":  "правило Борна (p=2) → роль «энергия = квадрат»; интенсивность = энергия/вершины; затухание = энергия/r^2.",
+                "rules":  "E = A^2; I = E/n; I(r) = E/r^2; показатель 2 берётся как «выведенный из унитарности» (в соседних файлах), здесь зафиксирован.",
+                "p4":  "квадратичная мера на конечных рациональных амплитудах всегда вычислима (Element-сторона); неотрицательность energy_nonneg — единственное общее утверждение, остальное — конкретные примеры."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "sound_energy",
+                       "kind":  "Definition",
+                       "role":  "энергия звука = amplitude*amplitude (Борн p=2)"
+                   },
+                   {
+                       "name":  "intensity",
+                       "kind":  "Definition",
+                       "role":  "интенсивность = полная энергия / число вершин"
+                   },
+                   {
+                       "name":  "inverse_square",
+                       "kind":  "Definition",
+                       "role":  "затухание = энергия / r^2"
+                   },
+                   {
+                       "name":  "energy_is_amplitude_squared",
+                       "kind":  "Lemma",
+                       "role":  "E(3/5) = 9/25"
+                   },
+                   {
+                       "name":  "double_amplitude_quadruple_energy",
+                       "kind":  "Lemma",
+                       "role":  "удвоение амплитуды → учетверение энергии"
+                   },
+                   {
+                       "name":  "triple_amplitude",
+                       "kind":  "Lemma",
+                       "role":  "утроение амплитуды → 9x энергии"
+                   },
+                   {
+                       "name":  "energy_nonneg",
+                       "kind":  "Lemma",
+                       "role":  "★ E(a) >= 0 для ВСЕХ a (единственное общее утверждение)"
+                   },
+                   {
+                       "name":  "energy_zero_iff_silent",
+                       "kind":  "Lemma",
+                       "role":  "E(0) = 0 (тишина)"
+                   },
+                   {
+                       "name":  "inverse_square_decreases",
+                       "kind":  "Lemma",
+                       "role":  "I(r=2) < I(r=1): убывание с расстоянием"
+                   },
+                   {
+                       "name":  "inverse_square_r1",
+                       "kind":  "Lemma",
+                       "role":  "I(1) = 1"
+                   },
+                   {
+                       "name":  "inverse_square_r2",
+                       "kind":  "Lemma",
+                       "role":  "I(2) = 1/4"
+                   },
+                   {
+                       "name":  "inverse_square_r3",
+                       "kind":  "Lemma",
+                       "role":  "I(3) = 1/9"
+                   },
+                   {
+                       "name":  "loudness_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ свод: E=A^2 + квадратичность + E>=0 + тишина + 1/r^2"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "energy_nonneg",
+                           "analysis":  "Единственная содержательная общая лемма файла: для любой рациональной амплитуды a квадрат a*a >= 0 (разбор знака + Qmult_le_0_compat). Тривиальный факт о квадрате, но это и есть честное «E>=0 всегда»; остальные леммы — E(A^2), 2x→4x, 1/r^2 — проверены лишь на конкретных числах.",
+                           "tags":  [
+                                        "nonneg",
+                                        "born",
+                                        "general"
+                                    ]
+                       },
+                       {
+                           "name":  "double_amplitude_quadruple_energy",
+                           "analysis":  "Иллюстрация показателя p=2: 2x амплитуды ⟹ 4x энергии. Это определение sound_energy=A^2, проверенное на a=1,2 через vm_compute, а не вывод p=2 из чего-либо. «Born rule p=2 unique from unitarity» из шапки в этом файле НЕ доказывается — лишь постулируется и применяется.",
+                           "tags":  [
+                                        "born-exponent",
+                                        "quadratic",
+                                        "exposition"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Стандартная акустика/КМ: интенсивность ~ квадрат амплитуды (правило Борна) и закон обратных квадратов I~1/r^2. Уникальность показателя 2 (Борн из унитарности / Глисон) — известный результат, формализуемый отдельно; здесь p=2 зафиксирован и применён, не выведен.",
+    "uniqueness":  {
+                       "score":  1,
+                       "level":  "exposition",
+                       "claim":  "Экспозиция: громкость=A^2 и 1/r^2 над Q на конкретных амплитудах/расстояниях, с единственным общим фактом energy_nonneg.",
+                       "caveat":  "Всё классично (Борн, обратные квадраты) и проверено на отдельных числах. Шапка «Loudness = amplitude squared ... CONSEQUENCE of Born rule (p=2 unique from unitarity)» — оверклейм: показатель 2 здесь ПОСТУЛИРОВАН (sound_energy:=a*a), а не выведен; вывод p=2 живёт в других файлах, не в этом."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "loudness",
+                 "born-rule",
+                 "inverse-square",
+                 "exposition",
+                 "over-branding"
+             ]
+},
+{
+    "num":  12,
+    "path":  "src/acoustics/Oscillation.v",
+    "cluster":  "acoustics",
+    "title":  "Дискретный гармонический осциллятор delta(t+1)=(2-k)delta(t)-delta(t-1): периоды k=1,2,3, перезатухание k>=4",
+    "topic":  "Fixpoint oscillator реализует трёхчленную рекуррентность гармонического осциллятора над Q; на конкретных k проверяет период 4 (k=2), значения k=1/k=3, пересечение нуля, тишину, перезатухание k=4 и величины энергии (3/2, 1/2, перераспределение).",
+    "role":  "Лист кластера acoustics, прикладной/экспозиционный. Зависит только от Stdlib (QArith/Lqa). Реализует динамическое ядро, на которое концептуально опирается остальная акустика (но без импортов).",
+    "qed":  14,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith Lqa"
+                ],
+    "err":  {
+                "elements":  "отклонение delta(t) как Q; жёсткость k (1,2,3,4); начальные (d0,d1); энергия как Q.",
+                "roles":  "L2 (отклонение реально → восстанавливающая сила k>0) + L3 (состояние определённо → динамика корректна) + L5 (переход требует времени → инерция → овершут → колебание).",
+                "rules":  "delta(t+1) = (2-k)*delta(t) - delta(t-1); энергия = (Δскорость)^2/2 + k*x^2/2; 0<k<4 колебательно, k>=4 перезатухание.",
+                "p4":  "конечная рекуррентность над Q: каждый шаг вычислим (Fixpoint, vm_compute) — Element-сторона; период/коллапс наблюдаемы на конкретных k, но это табличные проверки, а не теоремы «для всех t период = 4» или «энергия сохраняется»."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "oscillator",
+                       "kind":  "Fixpoint",
+                       "role":  "трёхчленная рекуррентность гармонического осциллятора над Q"
+                   },
+                   {
+                       "name":  "energy",
+                       "kind":  "Definition",
+                       "role":  "энергия = (d_curr-d_prev)^2/2 + k*d_curr^2/2"
+                   },
+                   {
+                       "name":  "osc_k2_period4",
+                       "kind":  "Lemma",
+                       "role":  "★ k=2: значения 1,0,-1,0,1 (период 4) на 5 шагах"
+                   },
+                   {
+                       "name":  "osc_k1_values",
+                       "kind":  "Lemma",
+                       "role":  "k=1: 1,1,0,-1 (медленнее)"
+                   },
+                   {
+                       "name":  "energy_t0",
+                       "kind":  "Lemma",
+                       "role":  "энергия при t=0 = 3/2"
+                   },
+                   {
+                       "name":  "energy_t1",
+                       "kind":  "Lemma",
+                       "role":  "энергия при t=1 = 1/2"
+                   },
+                   {
+                       "name":  "energy_redistributes",
+                       "kind":  "Lemma",
+                       "role":  "★ E(t0) > E(t1): дискретная энергия НЕ сохраняется (честная оговорка)"
+                   },
+                   {
+                       "name":  "zero_crossing",
+                       "kind":  "Lemma",
+                       "role":  "osc 2 1 0 2 < 0: пересечение нуля = овершут"
+                   },
+                   {
+                       "name":  "silence_is_no_distinction",
+                       "kind":  "Lemma",
+                       "role":  "d0=d1=0 ⟹ всё 0 (тишина = нет различения)"
+                   },
+                   {
+                       "name":  "osc_k3_values",
+                       "kind":  "Lemma",
+                       "role":  "k=3: 1,0,-1,1 (период 3)"
+                   },
+                   {
+                       "name":  "overdamped_k4_0",
+                       "kind":  "Lemma",
+                       "role":  "k=4 шаг 0 = 1"
+                   },
+                   {
+                       "name":  "overdamped_k4_1",
+                       "kind":  "Lemma",
+                       "role":  "k=4 шаг 1 = 0"
+                   },
+                   {
+                       "name":  "overdamped_k4_2",
+                       "kind":  "Lemma",
+                       "role":  "k=4 шаг 2 = -1"
+                   },
+                   {
+                       "name":  "energy_positive_k2",
+                       "kind":  "Lemma",
+                       "role":  "0 < E(k=2,1,0): энергия положительна"
+                   },
+                   {
+                       "name":  "energy_zero_silence",
+                       "kind":  "Lemma",
+                       "role":  "E(k=2,0,0) = 0"
+                   },
+                   {
+                       "name":  "oscillation_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ свод: период 4 + пересечение нуля + энергия 3/2 + тишина + E>0"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "osc_k2_period4",
+                           "analysis":  "Ядро файла: при k=2 рекуррентность даёт 1,0,-1,0,1 — период 4. Это и есть «колебание из L2+L3+L5»: целая жёсткость → возврат. Честно: проверены пять конкретных шагов через vm_compute, а не доказан период для всех t; общая теорема о периодичности (собственные значения характеристического уравнения = корни из единицы при рац. k) НЕ формализована.",
+                           "tags":  [
+                                        "oscillator",
+                                        "period",
+                                        "recurrence"
+                                    ]
+                       },
+                       {
+                           "name":  "energy_redistributes",
+                           "analysis":  "Редкая для кластера ЧЕСТНАЯ оговорка: дискретная энергия (d_curr-d_prev)^2/2 + k*x^2/2 НЕ сохраняется — E(t0)=3/2 > E(t1)=1/2. Файл не выдаёт дискретный гамильтониан за сохраняющийся, прямо фиксируя перераспределение. Сильная сторона на фоне общей экспозиционности.",
+                           "tags":  [
+                                        "energy",
+                                        "non-conservation",
+                                        "honesty"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Стандартный дискретный гармонический осциллятор / линейная трёхчленная рекуррентность; устойчивость и период задаются собственными значениями (2-k)±... = корнями из единицы при подходящих k. Классика численной физики; ново лишь E/R/R-чтение «осцилляция из L2+L3+L5» и честная фиксация несохранения дискретной энергии.",
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Необычная формализация обычного дискретного осциллятора над Q с честной оговоркой о несохранении дискретной энергии; периоды k=1/2/3 и перезатухание k=4 проверены на конкретных значениях.",
+                       "caveat":  "Содержание классично; периоды доказаны как табличные равенства (5 шагов), а не как общие теоремы о периодичности для всех t. Связь с L2/L3/L5 — интерпретация. Шапка заявляет 12 Qed — фактически 14 (дрейф +2)."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "oscillator",
+                 "recurrence",
+                 "energy",
+                 "methods",
+                 "honesty",
+                 "drift"
+             ],
+    "notes":  "STATUS-шапка: 12 Qed; фактически 14 Qed (дрейф +2). 0 Admitted, 0 собственных аксиом. energy_redistributes — честная фиксация несохранения дискретной энергии."
+},
+{
+    "num":  13,
+    "path":  "src/acoustics/SoundSpectrum.v",
+    "cluster":  "acoustics",
+    "title":  "Дискретный спектр из мод конечного графа (DFT): N вершин → N мод, фундаментальная и спектральная энергия",
+    "topic":  "На цепи C_4 берёт лапласовы собственные значения omega^2 = [0;2;4;2], находит фундаментальную (наименьшую ненулевую = 2) и максимальную (=4), считает спектральную энергию E=Sum A_k^2 * omega_k и фиксирует P4: число мод = число вершин = длина списка.",
+    "role":  "Лист кластера acoustics, прикладной/экспозиционный. Зависит только от Stdlib (QArith/List/Lqa). Не импортируется другими файлами — иллюстрация «P4: конечный граф → дискретный спектр».",
+    "qed":  9,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith List Lqa"
+                ],
+    "err":  {
+                "elements":  "конкретный список собственных значений omega_sq_4=[0;2;4;2] (лапласиан C_4); амплитуды мод как list Q.",
+                "roles":  "P4 (конечный граф) → конечное число мод → квантованная частота; каждая мода = «чистый тон» omega_k; роль = ярус спектра.",
+                "rules":  "n_modes N = N; фундаментальная = наименьшая ненулевая omega^2; max = наибольшая; E = Sum A_k^2 * omega_k.",
+                "p4":  "ЯДРО P4-демонстрации: конечный граф (N вершин) ⟹ РОВНО N мод ⟹ дискретный (не континуальный) спектр; modes_eq_vertices фиксирует это как равенство length omega_sq_4 = n_modes 4 — но только на N=4, не для общего N."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "omega_sq_4",
+                       "kind":  "Definition",
+                       "role":  "лапласовы собственные значения C_4: [0;2;4;2]"
+                   },
+                   {
+                       "name":  "n_modes",
+                       "kind":  "Definition",
+                       "role":  "число мод = размер графа N"
+                   },
+                   {
+                       "name":  "four_modes",
+                       "kind":  "Lemma",
+                       "role":  "n_modes 4 = 4"
+                   },
+                   {
+                       "name":  "qlt_bool",
+                       "kind":  "Definition",
+                       "role":  "булево <  на Q через Qcompare"
+                   },
+                   {
+                       "name":  "qeq_bool",
+                       "kind":  "Definition",
+                       "role":  "булево == на Q через Qcompare"
+                   },
+                   {
+                       "name":  "find_fundamental",
+                       "kind":  "Fixpoint",
+                       "role":  "наименьшее ненулевое значение списка"
+                   },
+                   {
+                       "name":  "fundamental_chain4",
+                       "kind":  "Lemma",
+                       "role":  "★ фундаментальная C_4 = 2"
+                   },
+                   {
+                       "name":  "find_max",
+                       "kind":  "Fixpoint",
+                       "role":  "максимум списка"
+                   },
+                   {
+                       "name":  "max_freq_chain4",
+                       "kind":  "Lemma",
+                       "role":  "макс частота C_4 = 4"
+                   },
+                   {
+                       "name":  "spectral_energy_aux",
+                       "kind":  "Fixpoint",
+                       "role":  "Sum A_k^2 * omega_k (рекурсия по двум спискам)"
+                   },
+                   {
+                       "name":  "spectral_energy",
+                       "kind":  "Definition",
+                       "role":  "обёртка спектральной энергии"
+                   },
+                   {
+                       "name":  "spectral_energy_equal_amps",
+                       "kind":  "Lemma",
+                       "role":  "равные амплитуды [1;1;1;1] → E = 8"
+                   },
+                   {
+                       "name":  "spectral_energy_silent",
+                       "kind":  "Lemma",
+                       "role":  "нулевые амплитуды → E = 0"
+                   },
+                   {
+                       "name":  "single_mode_energy",
+                       "kind":  "Lemma",
+                       "role":  "одна мода [0;3;0;0] → E = 18"
+                   },
+                   {
+                       "name":  "spectrum_size",
+                       "kind":  "Lemma",
+                       "role":  "length omega_sq_4 = 4"
+                   },
+                   {
+                       "name":  "modes_eq_vertices",
+                       "kind":  "Lemma",
+                       "role":  "★ P4: n_modes 4 = length omega_sq_4 (моды = вершины)"
+                   },
+                   {
+                       "name":  "sound_spectrum_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ свод: 4 моды + фундаментальная 2 + макс 4 + энергии 8/0"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "modes_eq_vertices",
+                           "analysis":  "Заявленное P4-ядро: число мод = число вершин графа, т.е. конечный граф ⟹ дискретный конечный спектр (а не континуум). Честно: это равенство reflexivity на КОНКРЕТНОМ N=4 (n_modes 4 = length [0;2;4;2]); общего утверждения «для графа на N вершинах ровно N собственных мод» (спектральная теорема для симметричного лапласиана) здесь НЕТ — оно лишь иллюстрируется.",
+                           "tags":  [
+                                        "P4",
+                                        "discrete-spectrum",
+                                        "finite-graph"
+                                    ]
+                       },
+                       {
+                           "name":  "fundamental_chain4",
+                           "analysis":  "find_fundamental на [0;2;4;2] даёт 2 (наименьшее ненулевое). Собственные значения C_4 {0,2,4,2} ВПИСАНЫ как литерал, а не вычислены из матрицы лапласиана — то есть «DFT/нормальные моды» из шапки не выводятся, а табулируются. spectral_energy_equal_amps=8 = просто сумма частот при единичных амплитудах.",
+                           "tags":  [
+                                        "fundamental",
+                                        "eigenvalues",
+                                        "hardcoded"
+                                    ]
+                       }
+                   ],
+    "classical_counterpart":  "Дискретное преобразование Фурье / нормальные моды связанной цепочки: симметричная матрица N×N имеет N собственных мод, спектр графа = собственные значения лапласиана (здесь C_4: {0,2,4,2}). Классика линейной алгебры/физики; ново лишь P4-обрамление «конечный граф → дискретный спектр», проверенное на одном графе.",
+    "uniqueness":  {
+                       "score":  1,
+                       "level":  "exposition",
+                       "claim":  "Экспозиция: дискретный спектр конечного графа (C_4, моды=вершины, фундаментальная/макс частота, спектральная энергия) над Q на одном конкретном примере, в P4-обрамлении.",
+                       "caveat":  "Содержание классично (спектр лапласиана, DFT). Собственные значения [0;2;4;2] ЗАХАРДКОЖЕНЫ, а не выведены из матрицы; «N вершин → N мод» проверено лишь для N=4 (reflexivity), не как общая спектральная теорема. Шапка заявляет 10 Qed — фактически 9 (дрейф -1)."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "spectrum",
+                 "DFT",
+                 "graph-laplacian",
+                 "P4",
+                 "exposition",
+                 "drift"
+             ],
+    "notes":  "STATUS-шапка: 10 Qed; фактически 9 Qed (дрейф -1). 0 Admitted, 0 собственных аксиом. Собственные значения C_4 заданы литералом omega_sq_4=[0;2;4;2], не вычислены из лапласиана."
+},
+{
+    "num":  14,
+    "path":  "src/acoustics/VibrationCore.v",
+    "cluster":  "acoustics",
+    "classical_counterpart":  "The discrete (leapfrog) harmonic oscillator d(t+1)=(2-k)d(t)-d(t-1) and its energy partition (kinetic <-> potential) are standard SHM / Verlet-integrator physics; NEW is only the E/R/R reading of oscillation as a forced L1<->L5 compromise (restoring identity vs change-takes-time), proved on rational instances.",
+    "title":  "Vibration as forced L1<->L5 tension: restoring identity vs change-takes-time, on Q instances",
+    "topic":  "Defines the rational leapfrog oscillator next_state, velocity, and kinetic/potential energy, and shows by concrete Q computation that L1-alone or L5-alone gives no oscillation while L1+L5 forces a period-4 cycle with nonzero velocity at the equilibrium crossing.",
+    "role":  "First file of the acoustics chain. Imports acoustics.Oscillation; reused by VibrationSynthesis (vibration_wave_connection bridges next_state to wave_step). Pure single-vertex base for WavePropagation.",
+    "qed":  12,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lia ZArith PeanoNat Lqa",
+                    "acoustics.Oscillation"
+                ],
+    "err":  {
+                "elements":  "восстанавливающая сила, состояние next_state, скорость, фаза, энергия — конкретные рациональные значения (P4: каждый шаг актуален).",
+                "roles":  "L1 = роль возврата к тождеству (отклонение delta!=0 -> сила); L5 = роль инерции (скорость переносится через равновесие); пара ролей = вынужденное колебание.",
+                "rules":  "L1 один -> мгновенный возврат, стоп (нет колебания); L5 один (k=0) -> линейный дрейф, не возвращается; L1+L5 (k=2) -> период-4 цикл 0,-1,0,1.",
+                "p4":  "колебание = ВЕЧНЫЙ КОМПРОМИСС двух ролей: ни L1 (L5 мешает остановиться), ни L5 (L1 мешает уйти) не побеждают; скорость!=0 при delta=0 форсирует перелёт. Колебание — логическая необходимость при L1+L5+возмущении; всё на конечных Q-инстансах."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "restoring_force",
+                       "kind":  "Definition",
+                       "role":  "L1-сила -k*delta"
+                   },
+                   {
+                       "name":  "next_state",
+                       "kind":  "Definition",
+                       "role":  "лип-фрог шаг (2-k)*d_curr - d_prev (дискретный осциллятор)"
+                   },
+                   {
+                       "name":  "velocity",
+                       "kind":  "Definition",
+                       "role":  "скорость d_curr - d_prev"
+                   },
+                   {
+                       "name":  "phase_state",
+                       "kind":  "Definition",
+                       "role":  "фазовая точка (положение, скорость)"
+                   },
+                   {
+                       "name":  "kinetic_energy",
+                       "kind":  "Definition",
+                       "role":  "кинетическая энергия v*v/2 (L5)"
+                   },
+                   {
+                       "name":  "potential_energy",
+                       "kind":  "Definition",
+                       "role":  "потенциальная энергия k*delta^2/2 (L1)"
+                   },
+                   {
+                       "name":  "total_energy_vib",
+                       "kind":  "Definition",
+                       "role":  "полная энергия = кинетическая + потенциальная"
+                   },
+                   {
+                       "name":  "L1_without_L5_no_vibration",
+                       "kind":  "Lemma",
+                       "role":  "мгновенный возврат = 0, нет колебания (тривиально)"
+                   },
+                   {
+                       "name":  "L5_without_L1_no_vibration",
+                       "kind":  "Lemma",
+                       "role":  "k=0: дрейф 1->2->3->4 (никогда не возвращается)"
+                   },
+                   {
+                       "name":  "drift_never_returns",
+                       "kind":  "Lemma",
+                       "role":  "k=0: next_state > 1 (монотонный уход)"
+                   },
+                   {
+                       "name":  "L1_plus_L5_forced_oscillation",
+                       "kind":  "Lemma",
+                       "role":  "★ k=2: период-4 цикл d1..d4 = 0,-1,0,1 (vm_compute)"
+                   },
+                   {
+                       "name":  "velocity_nonzero_at_equilibrium",
+                       "kind":  "Lemma",
+                       "role":  "скорость = -1 при пересечении delta=0"
+                   },
+                   {
+                       "name":  "velocity_not_zero",
+                       "kind":  "Lemma",
+                       "role":  "скорость != 0 в равновесии -> ОБЯЗАН перелёт"
+                   },
+                   {
+                       "name":  "energy_at_max",
+                       "kind":  "Lemma",
+                       "role":  "энергия 3/2 при максимальном смещении"
+                   },
+                   {
+                       "name":  "energy_at_zero",
+                       "kind":  "Lemma",
+                       "role":  "энергия 1/2 при нулевом пересечении"
+                   },
+                   {
+                       "name":  "pure_kinetic_at_zero",
+                       "kind":  "Lemma",
+                       "role":  "потенциальная = 0 при delta=0 (вся энергия кинетическая)"
+                   },
+                   {
+                       "name":  "potential_at_max",
+                       "kind":  "Lemma",
+                       "role":  "потенциальная = 1 при delta=1 (вся энергия потенциальная)"
+                   },
+                   {
+                       "name":  "BinaryState",
+                       "kind":  "Inductive",
+                       "role":  "двоичное состояние StateA / StateNotA"
+                   },
+                   {
+                       "name":  "binary_oscillation",
+                       "kind":  "Definition",
+                       "role":  "чётность t -> StateA/StateNotA (дискретное чередование)"
+                   },
+                   {
+                       "name":  "binary_alternates",
+                       "kind":  "Lemma",
+                       "role":  "A,NotA,A на t=0,1,2 (минимальное колебание)"
+                   },
+                   {
+                       "name":  "is_audible",
+                       "kind":  "Definition",
+                       "role":  "омега в диапазоне слуха 20..20000 Гц"
+                   },
+                   {
+                       "name":  "vibration_core_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ синтез: дрейф (L5), период-4 (L1+L5), скорость -1, энергобаланс — в одной теореме"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "L1_plus_L5_forced_oscillation",
+                           "analysis":  "Ядро файла: при k=2 итерация next_state даёт ТОЧНЫЙ период-4 цикл 0,-1,0,1 на рациональных числах (vm_compute, без приближения). Контрастно к L5_without_L1 (дрейф) и L1_without_L5 (мгновенный стоп) — это машинная демонстрация тезиса 'колебание = вынужденный компромисс L1 и L5'. Честно: это стандартный дискретный осциллятор (Верле/лип-фрог) на одном инстансе k=2; новизна — рамка E/R/R, не вычисление.",
+                           "tags":  [
+                                        "oscillation",
+                                        "L1-L5",
+                                        "period-4",
+                                        "err-framing"
+                                    ]
+                       },
+                       {
+                           "name":  "velocity_not_zero",
+                           "analysis":  "Формализует 'натяжение': в момент пересечения равновесия (delta=0) скорость !=0, поэтому система ОБЯЗАНА проскочить — L1 не может остановить из-за L5. Логический мостик от энергии к необходимости перелёта; доказано через точное Q-значение -1 (lra). Содержательно тривиально, концептуально несёт всю историю файла.",
+                           "tags":  [
+                                        "velocity",
+                                        "overshoot",
+                                        "tension"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Колебание переосмыслено как вынужденный неустранимый компромисс двух законов ToS (L1 возврат-к-тождеству и L5 изменение-требует-времени), с машинно-проверенными конкретными Q-инстансами (период-4, скорость!=0 в равновесии, энергобаланс).",
+                       "caveat":  "Дискретный гармонический осциллятор и обмен кинетика<->потенциал классичны (Верле/SHM); ново только E/R/R-обрамление. Всё на единичных рациональных инстансах (k=2 и т.п.), не общая теорема о колебаниях. DRIFT: заголовок STATUS заявляет 15 Qed, фактически 12."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "oscillation",
+                 "L1-L5",
+                 "err-framing",
+                 "energy",
+                 "P4"
+             ],
+    "notes":  "STATUS header says 15 Qed; actual Qed. count = 12 (drift). 0 Admitted, 0 own axioms/Parameters."
+},
+{
+    "num":  15,
+    "path":  "src/acoustics/VibrationSynthesis.v",
+    "cluster":  "acoustics",
+    "classical_counterpart":  "Each piece is standard: lattice wave equation as a single-vertex limit, phonon energy E=hbar*omega*n, spectral truncation losing energy, zero-point energy sum omega/2 (Casimir/vacuum), damped vs undamped oscillator. NEW is only the umbrella E/R/R claim that one L1-L5 tension underlies acoustics/QFT/thermo/compression/vacuum.",
+    "title":  "Grand acoustics synthesis: one L1-L5 tension across wave/phonon/thermal/compression/vacuum",
+    "topic":  "Bundles results from the acoustics chain into one narrative: a single-vertex wave step equals next_state (vibration), phonon modes are finite, mode truncation loses energy, the zero-point sum is positive (vacuum not silent), and undamped=eternal vs damped=decaying.",
+    "role":  "Capstone of the acoustics cluster (pure consolidation, little new content). Imports VibrationCore, DampingAndDissipation, HierarchyTheorem, WavePropagation, Oscillation, SoundSpectrum.",
+    "qed":  11,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Qabs Lia ZArith List Lqa",
+                    "acoustics.VibrationCore",
+                    "acoustics.DampingAndDissipation",
+                    "acoustics.HierarchyTheorem",
+                    "acoustics.WavePropagation",
+                    "acoustics.Oscillation",
+                    "acoustics.SoundSpectrum"
+                ],
+    "err":  {
+                "elements":  "связь вибрация-волна, фонон, сжатие (выбор мод), тепловое распределение — конкретные Q-инстансы; конечное число мод (P4).",
+                "roles":  "ОДНА роль (натяжение L1-L5) играется в шести аренах: акустика, КТП (фонон), термодинамика, сжатие данных, вакуум, музыка.",
+                "rules":  "волна на одной вершине = вибрация (field-уравнение); фонон = квант моды; сжатие = усечение мод (теряет энергию); нулевая энергия = сумма omega/2 > 0.",
+                "p4":  "одна концепция = L1-L5 натяжение унифицирует домены; конечность мод (n_modes 64) = грань P4; вакуум не молчит (zpe>0) = неустранимое натяжение. Каждая связь — на конечном инстансе, не общий закон."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "vibration_wave_connection",
+                       "kind":  "Lemma",
+                       "role":  "★ волновой шаг без соседей = next_state (вибрация = волна на одной вершине), field"
+                   },
+                   {
+                       "name":  "phonon_modes_finite",
+                       "kind":  "Lemma",
+                       "role":  "число фононных мод = 64 = число вершин (P4)"
+                   },
+                   {
+                       "name":  "phonon_energy",
+                       "kind":  "Definition",
+                       "role":  "энергия фонона omega*n"
+                   },
+                   {
+                       "name":  "zero_phonons_zero_energy",
+                       "kind":  "Lemma",
+                       "role":  "0 фононов -> 0 энергии"
+                   },
+                   {
+                       "name":  "one_phonon_energy",
+                       "kind":  "Lemma",
+                       "role":  "1 фонон при omega=2 -> энергия 2"
+                   },
+                   {
+                       "name":  "truncated_energy",
+                       "kind":  "Lemma",
+                       "role":  "усечённый спектр (1 из 4 мод) -> энергия 2"
+                   },
+                   {
+                       "name":  "full_energy",
+                       "kind":  "Lemma",
+                       "role":  "полный спектр (4 моды) -> энергия 8"
+                   },
+                   {
+                       "name":  "compression_loses_energy",
+                       "kind":  "Lemma",
+                       "role":  "★ сжатие (усечение мод) теряет энергию (2 < 8)"
+                   },
+                   {
+                       "name":  "zero_point_energy",
+                       "kind":  "Definition",
+                       "role":  "нулевая энергия = sum omega/2"
+                   },
+                   {
+                       "name":  "zpe_chain4",
+                       "kind":  "Lemma",
+                       "role":  "нулевая энергия цепочки-4 = 4"
+                   },
+                   {
+                       "name":  "vacuum_not_silent",
+                       "kind":  "Lemma",
+                       "role":  "★ нулевая энергия > 0 (вакуум не молчит, Казимир)"
+                   },
+                   {
+                       "name":  "damping_connects",
+                       "kind":  "Lemma",
+                       "role":  "недемпфированное = next_state; демпфированное -> амплитуда убывает <1"
+                   },
+                   {
+                       "name":  "vibration_grand_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ КАПСТОУН: 6 доменов (волна/фонон/сжатие/вакуум/демпфирование) в одной теореме"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "vibration_wave_connection",
+                           "analysis":  "Несущий мост кластера: волновой шаг wave_step с одной вершиной (без соседей) ТОЧНО равен next_state из VibrationCore — то есть вибрация = вырожденный случай волнового уравнения. Доказано field на Q. Это содержательная связь (а не просто перечисление): волна = вибрация + связь между вершинами. Классически это стандартный предел решёточного уравнения, но здесь явно сшивает два файла кластера.",
+                           "tags":  [
+                                        "wave",
+                                        "vibration",
+                                        "bridge",
+                                        "single-vertex"
+                                    ]
+                       },
+                       {
+                           "name":  "vibration_grand_synthesis",
+                           "analysis":  "Капстоун-наблюдение: одно L1-L5 натяжение проявляется в шести доменах (акустика, фонон-КТП, сжатие, вакуум, демпфирование, музыка), собранных в одну конъюнкцию из ранее доказанных лемм. Уровень — синтез/наблюдение, НЕ новая теорема: всё содержание уже доказано в импортируемых файлах, ценность — унификация под один концепт. Честно: каждый домен на конечном Q-инстансе, аналогии физически известны.",
+                           "tags":  [
+                                        "capstone",
+                                        "synthesis",
+                                        "six-domains",
+                                        "unification"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Унификация шести физических доменов (волна/фонон/термо/сжатие/вакуум/музыка) под одним концептом L1-L5 натяжения, с машинной сшивкой вибрация=волна-на-одной-вершине и вакуум-не-молчит.",
+                       "caveat":  "Чистая консолидация ранее доказанного; каждый кирпич (фононы, нулевая энергия, демпфирование) классичен и взят на единичных Q-инстансах. Аналогия 'одно натяжение' — обрамление, не теорема. Заголовок STATUS (11 Qed) совпадает с фактическим."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "synthesis",
+                 "L1-L5",
+                 "phonon",
+                 "vacuum",
+                 "compression",
+                 "err-framing"
+             ]
+},
+{
+    "num":  16,
+    "path":  "src/acoustics/WavePropagation.v",
+    "cluster":  "acoustics",
+    "classical_counterpart":  "The discrete (leapfrog) wave equation on a 1D chain — equivalently the massless Klein-Gordon / lattice field equation — with finite propagation speed (causal wavefront) and an energy density; all standard numerical wave physics. NEW is only its presentation as 'oscillation + coupling = sound' in the E/R/R chain.",
+    "title":  "Discrete chain wave equation as oscillation+coupling: causal impulse propagation over Q",
+    "topic":  "Defines the 1D leapfrog wave step on a finite chain and shows by exact Q computation that an impulse spreads to its neighbour, the wavefront is causal (further vertices stay at rest one step), zero coupling kills propagation, and larger coupling transfers more.",
+    "role":  "Second file of the acoustics chain (oscillation -> coupling -> propagation). Self-contained over Q (no ToS imports). Reused by VibrationSynthesis (wave_step appears in vibration_wave_connection and the grand synthesis).",
+    "qed":  13,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lia ZArith PeanoNat Lqa"
+                ],
+    "err":  {
+                "elements":  "wave_step, импульс-отклик, фронт волны — конкретные рациональные значения на цепочке из 4 вершин (P4: конечная решётка).",
+                "roles":  "колебание (роль одной вершины) + связь с соседями (роль ребра графа) -> бегущая волна; коэффициент связи c^2 = роль скорости.",
+                "rules":  "delta(v,t+1)=(2-2c^2)*delta(v,t)+c^2*(сосед_лев+сосед_прав)-delta(v,t-1) (= Клейн-Гордон m=0); c^2=0 -> нет переноса.",
+                "p4":  "осциллятор один -> вибрация (не звук); связанные осцилляторы на конечном графе -> волна, которая бежит; фронт причинный (за один шаг возмущение доходит только до соседа). Всё на конечной решётке, точные Q-значения."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "wave_step",
+                       "kind":  "Definition",
+                       "role":  "лип-фрог шаг волнового уравнения на цепочке (с краевыми условиями)"
+                   },
+                   {
+                       "name":  "impulse",
+                       "kind":  "Definition",
+                       "role":  "начальный импульс: 1 в v=0, иначе 0"
+                   },
+                   {
+                       "name":  "zero_field",
+                       "kind":  "Definition",
+                       "role":  "нулевое поле (предыдущий слой в покое)"
+                   },
+                   {
+                       "name":  "wave_v0",
+                       "kind":  "Lemma",
+                       "role":  "источник v=0 после шага = 3/2"
+                   },
+                   {
+                       "name":  "wave_v1",
+                       "kind":  "Lemma",
+                       "role":  "сосед v=1 после шага = 1/4 (возмущение дошло)"
+                   },
+                   {
+                       "name":  "impulse_propagates",
+                       "kind":  "Lemma",
+                       "role":  "★ возмущение доходит до соседа (0 < wave_step ... 1)"
+                   },
+                   {
+                       "name":  "wavefront_causal",
+                       "kind":  "Lemma",
+                       "role":  "★ v=2 ещё в покое за один шаг (причинность фронта)"
+                   },
+                   {
+                       "name":  "wavefront_causal_3",
+                       "kind":  "Lemma",
+                       "role":  "v=3 тоже в покое (фронт не обгоняет)"
+                   },
+                   {
+                       "name":  "no_coupling_no_propagation",
+                       "kind":  "Lemma",
+                       "role":  "★ c^2=0 -> сосед остаётся 0 (нет переноса)"
+                   },
+                   {
+                       "name":  "no_coupling_source_stays",
+                       "kind":  "Lemma",
+                       "role":  "c^2=0 -> источник = 2 (стоит на месте, без затухания)"
+                   },
+                   {
+                       "name":  "energy_density",
+                       "kind":  "Definition",
+                       "role":  "плотность энергии (кинетическая + связь-потенциальная)"
+                   },
+                   {
+                       "name":  "energy_at_source",
+                       "kind":  "Lemma",
+                       "role":  "энергия у источника после импульса = 5/8"
+                   },
+                   {
+                       "name":  "energy_zero_ahead",
+                       "kind":  "Lemma",
+                       "role":  "энергия впереди фронта = 0 (волна ещё не дошла)"
+                   },
+                   {
+                       "name":  "wave_v1_fast",
+                       "kind":  "Lemma",
+                       "role":  "c^2=1/2: сосед = 1/2 (быстрее)"
+                   },
+                   {
+                       "name":  "fast_propagation",
+                       "kind":  "Lemma",
+                       "role":  "c^2=1/2: 0 < перенос к соседу"
+                   },
+                   {
+                       "name":  "faster_coupling_more_transfer",
+                       "kind":  "Lemma",
+                       "role":  "★ большая связь -> больше энергии соседу (1/4 < 1/2)"
+                   },
+                   {
+                       "name":  "wave_propagation_synthesis",
+                       "kind":  "Theorem",
+                       "role":  "★ синтез: распространение + причинность + нет-связи-нет-волны + энергия + скорость"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "wavefront_causal",
+                           "analysis":  "Машинная причинность: за один шаг импульс из v=0 доходит до v=1, но v=2 строго остаётся 0 (vm_compute, точное Q). Это конечно-разностная конечная скорость распространения (домен зависимости лип-фрог-схемы) — корректность 'волна бежит, а не телепортируется'. Классически известно для дискретного волнового уравнения; ценность здесь — явная демонстрация на инстансе в составе цепочки 'колебание+связь=звук'.",
+                           "tags":  [
+                                        "causality",
+                                        "wavefront",
+                                        "finite-speed"
+                                    ]
+                       },
+                       {
+                           "name":  "no_coupling_no_propagation",
+                           "analysis":  "Контрастная пара: при c^2=0 сосед остаётся 0 (нет переноса), при c^2>0 — переносится; faster_coupling_more_transfer ранжирует перенос по величине связи. Это формализует тезис 'волна = колебание + СВЯЗЬ': без связи каждая вершина колеблется отдельно (вибрация), со связью рождается распространение (звук). Стандартная физика решётки, на точных Q-инстансах.",
+                           "tags":  [
+                                        "coupling",
+                                        "propagation",
+                                        "contrast"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  2,
+                       "level":  "methods",
+                       "claim":  "Дискретное волновое уравнение на цепочке как 'колебание + связь = распространение', с точной рациональной проверкой причинного фронта, отсутствия переноса без связи и монотонности переноса по связи.",
+                       "caveat":  "Дискретное волновое уравнение = безмассовый Клейн-Гордон / решёточное поле — полностью классично (та же схема, что LatticeFieldEquations.v, как отмечает заголовок); новизна только в обрамлении и в 0-аксиомной Q-формализации на единичных инстансах. DRIFT: заголовок STATUS заявляет 12 Qed, фактически 13."
+                   },
+    "tags":  [
+                 "acoustics",
+                 "wave-equation",
+                 "klein-gordon",
+                 "lattice",
+                 "causality",
+                 "methods",
+                 "P4"
+             ],
+    "notes":  "STATUS header says 12 Qed; actual Qed. count = 13 (drift). 0 Admitted, 0 own axioms/Parameters."
+}
+]

@@ -2,7 +2,7 @@
 
 _Generated from `algebra.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**11 files / 150 Qed.** Score distribution: s5=1 / s4=4 / s3=3 / s2=3 / s1=0 / s0=0
+**12 files / 156 Qed.** Score distribution: s5=1 / s4=5 / s3=3 / s2=3 / s1=0 / s0=0
 
 ---
 
@@ -456,4 +456,57 @@ _Generated from `algebra.json` by `generate.ps1` - do not edit by hand; edit the
 
 **Uniqueness - score 3 (synthesis+observation).** Конкретное поле разложения (x²−2)(x²−3): все корни ±√2,±√3,√6 названы, теорема порождения, размерность базиса 4 — конкретный спутник GaloisQ23.
 > _Caveat:_ Поля разложения стандартны; вклад — явная конкретная конструкция для данного бикватичного расширения, опора под флагман.
+
+---
+
+## #1870 - `src/algebra/QuinticUnsolvable.v` - score 4 (synthesis+observation)
+
+**Abel-Ruffini for x^5-6x+3: transposition + 5-cycle GENERATE S_5 (120 perms), computed; engine reused**
+
+- **Topic.** Computes (vm_compute) that the right-multiplication closure of {(0 1),(0 1 2 3 4)} is exactly the 120 distinct permutations of {0..4} = S_5, shows it non-abelian, verifies the polynomial's arithmetic (no rational root, sign changes => >=3 real roots), and assembles Abel-Ruffini for x^5-6x+3 feeding the existing solvability engine.
+- **Role.** Singleton experiment supplying the COMPUTED group structure missing from algebra/SolvableGroup.v (which proved 'perfect non-abelian => not solvable' abstractly). Imports algebra.SolvableGroup; assembles its quintic_galois_group_not_solvable with the concrete S_5 and polynomial data.
+- **Counts.** Qed 6 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: List PeanoNat Bool Arith Lia ZArith; algebra.SolvableGroup
+- **E/R/R.** _Elements:_ перестановки {0..4} (списки длины 5); многочлен x^5-6x+3; генераторы t (транспозиция (0 1)), c (5-цикл (0 1 2 3 4)) — конечные объекты, P4. _Roles:_ разрешимость в радикалах = role-limit (производный ряд -> {e}); группа Галуа = роль симметрий корней; комплексное сопряжение = транспозиция-роль. _Rules:_ BFS-замыкание под умножением на генераторы (разрешимо: ровно 120 перестановок = S_5); Abel-Ruffini: perfect non-abelian => не разрешима (движок); рацион. корень монического => целый делитель 3. _P4:_ порождение S_5 транспозицией+5-циклом = Element (замкнутое vm_compute-вычисление 120 различных перестановок, 0 аксиом) — НОВОЕ ядро; неразрешимость квинтика = role-limit на классических мостах (Gal=S_5; A_5 простая; критерий Галуа), честно цитируемых, не подделанных.
+- **Classical counterpart.** Abel-Ruffini (the general quintic is not solvable by radicals) and the specific example x^5-6x+3 are classical (Eisenstein irreducibility, exactly 2 non-real roots => Galois group S_5, A_5 simple => S_5 not solvable, Galois solvability criterion). NEW here is the MACHINE-CHECKED group-theoretic heart: a transposition + a 5-cycle generate S_5 (120 perms) by closed BFS computation, the piece SolvableGroup.v took as an abstract premise.
+- **Tags.** algebra, galois, abel-ruffini, S5, quintic, computation, synthesis, role-limit
+- **Notes.** STATUS header says 7 Qed; actual Qed. count = 6 (drift). 0 Admitted, 0 own Axiom/Parameter (the unsolvability engine enters as a forall-hypothesis in the capstone, discharged by imported quintic_galois_group_not_solvable).
+
+**Lemmas (25):**
+
+| name | kind | role |
+|---|---|---|
+| `perm` | Definition | перестановка = список образов длины 5 |
+| `dom` | Definition | носитель {0;1;2;3;4} |
+| `app` | Definition | применение перестановки nth i p 0 |
+| `comp` | Definition | композиция (p∘q)(i)=p(q i) через map по dom |
+| `idp` | Definition | тождественная перестановка |
+| `t` | Definition | транспозиция (0 1) = [1;0;2;3;4] |
+| `c` | Definition | 5-цикл (0 1 2 3 4) = [1;2;3;4;0] |
+| `gens` | Definition | генераторы {t; c} |
+| `leqb` | Fixpoint | булево равенство перестановок |
+| `inb` | Definition | членство перестановки в списке |
+| `addnew` | Definition | добавить перестановку, если новая |
+| `next` | Definition | один раунд BFS: правое умножение всех на генераторы |
+| `gen_closure` | Definition | подгруппа <t,c> = 50 раундов BFS от [idp] |
+| `is_perm5` | Definition | проверка: длина 5 и каждая точка ровно раз |
+| `gen_report` | Definition | ★ булев отчёт: \|closure\|=120, все perm5, замкнуто, содержит id, 120 различных |
+| `gen_report_true` | Lemma | ★★ gen_report = true (vm_compute) — <t,c> = S_5 |
+| `s5_size` | Lemma | ★ \|gen_closure\| = 120 (= \|S_5\|) |
+| `s5_nonabelian` | Lemma | ★ t·c != c·t (S_5 неабелева, вход NonAbelianFull) |
+| `qf` | Definition | многочлен x^5-6x+3 над Z |
+| `root_candidates` | Definition | кандидаты-корни +-1,+-3 (делители 3) |
+| `no_rational_root` | Definition | ни один кандидат не корень (булево) |
+| `no_rational_root_true` | Lemma | ★ нет рационального корня (rational-root theorem, монический) |
+| `sign_changes` | Definition | знаки f на -2,-1,1,2 чередуются (булево) |
+| `sign_changes_true` | Lemma | ★ смена знака => >=3 вещественных корня (IVT) |
+| `quintic_x5m6x3_unsolvable_assembly` | Theorem | ★★ КАПСТОУН: (A) S_5 порождена + (B) арифметика + (C) движок => неразрешимость собрана |
+
+**Key lemmas (deep):**
+
+- **`gen_report_true`** - ★ Подлинно новый машинный результат файла: BFS-замыкание {транспозиция, 5-цикл} под правым умножением вычисляется (vm_compute) и проверяется как РОВНО 120 различных подлинных перестановок {0..4}, замкнутых под генераторами, с тождеством — то есть <t,c> = S_5. Это группо-теоретическое СЕРДЦЕ Abel-Ruffini, которое algebra/SolvableGroup.v брал абстрактной посылкой; здесь оно ПОСЧИТАНО, 0 аксиом, замкнутое конечное вычисление (Element-сторона). Классически 'транспозиция+p-цикл порождают S_p' известно; новизна — машинная проверка на конкретном S_5 в составе сборки. _(S5, generation, computation, abel-ruffini, element)_
+- **`quintic_x5m6x3_unsolvable_assembly`** - Капстоун-сборка: (A) НОВОЕ — S_5 порождена транспозицией+5-циклом (gen_report); (B) НОВОЕ — арифметика многочлена (нет рацион. корня + >=3 вещественных корня по IVT); (C) переиспользованный движок quintic_galois_group_not_solvable (perfect non-abelian => не разрешима). Вместе с ЧЕСТНО цитируемыми классическими мостами (Gal=S_5 из (A)+(B); A_5 проста => перфектная секция; критерий радикальной башни) — x^5-6x+3 не разрешим в радикалах. Мосты — role-limit, та же completed-object стена, что SolvableGroup называет для простоты A_5; файл их НЕ подделывает. _(capstone, assembly, role-limit, honest-bridges)_
+
+**Uniqueness - score 4 (synthesis+observation).** Машинно-проверенное порождение S_5 транспозицией+5-циклом (120 различных перестановок, замкнуто, vm_compute, 0 аксиом) — недостающее группо-теоретическое ядро движка Abel-Ruffini — плюс арифметика конкретного x^5-6x+3 и сборка неразрешимости с честно цитируемыми галуа-мостами.
+> _Caveat:_ Сам Abel-Ruffini, пример x^5-6x+3 и факт 'транспозиция+p-цикл порождают S_p' классичны; галуа-мосты (Gal=S_5, A_5 проста, критерий радикалов) НЕ формализованы, а цитируются как role-limit. Ново — машинная проверка порождения S_5 и 0-аксиомная сборка, не сами теоремы. DRIFT: заголовок STATUS заявляет 7 Qed, фактически 6. Движковая посылка (C) — forall-гипотеза, НЕ axiom.
 

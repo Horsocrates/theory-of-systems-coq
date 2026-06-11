@@ -917,5 +917,147 @@
       "caveat": "Термодинамическая стрела из огрубления/потери информации стандартна; вклад — переобрамление «стрела=сжатие», не новый результат."
     },
     "tags": ["arrow-of-time", "compression", "entropy", "new-framing"]
-  }
+  },
+{
+    "num":  1894,
+    "path":  "src/information/ChannelCapacity.v",
+    "cluster":  "information",
+    "classical_counterpart":  "Shannon's binary symmetric channel capacity C(p) = 1 − H(p) and the maximum-entropy-at-uniform principle are foundational information theory; the concavity of binary entropy is standard. NEW here is only: (a) using a rational Padé proxy for log so everything is exact 0-axiom over ℚ, and (b) the observation that the entropy DEFICIT from uniform is a PERFECT SQUARE 4(2p−1)²/[3(p+1)(2−p)] — tying the max-entropy fact to the same Element-square (2p−1)² that drives the discriminant rationality criterion (H38/H57).",
+    "title":  "BSC capacity over ℚ: max-entropy-at-uniform as a perfect-square deficit (Padé-log proxy, 0 axioms)",
+    "topic":  "Closes two named gaps of Book Part XVI: §3.2 the maximum of binary entropy at the uniform distribution (as an equality-with-witness, strict off-uniform), and §3.3 the binary symmetric channel capacity C(p)=H_max−H(p), both via the closed form S2(p)=6p(1−p)/[(p+1)(2−p)] whose deficit from 2/3 is a perfect square in (2p−1)².",
+    "role":  "Discrete-math/information file closing planned Part-XVI gaps; replicates S2/ln_pade from stdlib/ShannonSynthesis (self-contained quote), cites InformationTheory (I(X;Y)), MajorizationSchur, QuadraticDiscriminant. Leaf application file, not a hub.",
+    "err":  {
+                "elements":  "вероятность ошибки p∈ℚ; Паде-log; квадрат (2p−1)²; крайние режимы p=0, p=1/2.",
+                "roles":  "энтропия = роль-мера; равномерное = max-роль энтропии / min-роль ёмкости; (2p−1)² = Element-структура.",
+                "rules":  "дефицит от равномерного 2/3−S2(p) = 4(2p−1)²/[3(p+1)(2−p)] (квадрат, знаменатель>0 на [0,1]) ⟹ S2(p)≤2/3 с равенством ⟺ p=1/2; ёмкость C(p)=H_max−H(p) = тот же квадрат-дефицит.",
+                "p4":  "★ ёмкость = квадрат-дефицит энтропии от равномерного — равномерное максимизирует энтропию ИМЕННО потому, что дефицит есть КВАДРАТ (тот же Element-квадрат, что disc-критерий). Element-сторона (Паде-прокси) точна, 0-аксиом. ЧЕСТНО: log=Паде-прокси (истинный log2=role-limit); общий n-арный max + единственность M1 + n-арный канал = ГОРИЗОНТ."
+            },
+    "qed":  6,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib: QArith Lqa Lia"
+                ],
+    "lemmas":  [
+                   {
+                       "name":  "Qmul_nonneg",
+                       "kind":  "Lemma",
+                       "role":  "0≤a, 0≤b ⟹ 0≤a*b (Lqa-помощник)"
+                   },
+                   {
+                       "name":  "Qsq_nonneg",
+                       "kind":  "Lemma",
+                       "role":  "0≤y*y для любого y (nra не берёт)"
+                   },
+                   {
+                       "name":  "Qsq_pos",
+                       "kind":  "Lemma",
+                       "role":  "y≠0 ⟹ 0<y*y"
+                   },
+                   {
+                       "name":  "ln_pade",
+                       "kind":  "Definition",
+                       "role":  "рациональный Паде-ПРОКСИ логарифма: 2(x−1)/(x+1)"
+                   },
+                   {
+                       "name":  "S2",
+                       "kind":  "Definition",
+                       "role":  "бинарная энтропия через Паде-log (реплика ShannonSynthesis)"
+                   },
+                   {
+                       "name":  "binary_entropy_uniform",
+                       "kind":  "Lemma",
+                       "role":  "S2(1/2)=2/3 (нормировка Паде: H_max=2/3=«1 бит»)"
+                   },
+                   {
+                       "name":  "S2_closed",
+                       "kind":  "Lemma",
+                       "role":  "★ замкнутая форма S2(p)=6p(1−p)/[(p+1)(2−p)]"
+                   },
+                   {
+                       "name":  "entropy_deficit_is_square",
+                       "kind":  "Lemma",
+                       "role":  "★★ ЯДРО: 2/3−S2(p)=4(2p−1)²/[3(p+1)(2−p)] — дефицит = перфектный квадрат"
+                   },
+                   {
+                       "name":  "binary_entropy_max",
+                       "kind":  "Lemma",
+                       "role":  "★ равномерное максимизирует энтропию: S2(p)≤2/3 на [0,1] (gap §3.2)"
+                   },
+                   {
+                       "name":  "binary_entropy_strict_below",
+                       "kind":  "Lemma",
+                       "role":  "★ вне равномерного энтропия СТРОГО ниже (положительный квадрат)"
+                   },
+                   {
+                       "name":  "bsc_capacity",
+                       "kind":  "Definition",
+                       "role":  "ёмкость BSC: C(p)=H_max−S2(p)=2/3−S2(p)"
+                   },
+                   {
+                       "name":  "bsc_capacity_is_square",
+                       "kind":  "Lemma",
+                       "role":  "★ ёмкость = квадрат-дефицит от равномерного"
+                   },
+                   {
+                       "name":  "bsc_capacity_perfect",
+                       "kind":  "Lemma",
+                       "role":  "★ идеальный канал p=0 ⟹ полная ёмкость 2/3"
+                   },
+                   {
+                       "name":  "bsc_capacity_useless",
+                       "kind":  "Lemma",
+                       "role":  "★ максимум шума p=1/2 ⟹ нулевая ёмкость"
+                   },
+                   {
+                       "name":  "bsc_capacity_nonneg",
+                       "kind":  "Lemma",
+                       "role":  "ёмкость ≥0 на [0,1] (= max-энтропии на равномерном)"
+                   },
+                   {
+                       "name":  "bsc_channel_summary",
+                       "kind":  "Theorem",
+                       "role":  "★ капстоун: max-энтропии ∧ ёмкость≥0 ∧ C(0)=2/3 ∧ C(1/2)=0"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "entropy_deficit_is_square",
+                           "analysis":  "Алгебраическое ядро файла: тождество 2/3−S2(p)=4(2p−1)²/[3(p+1)(2−p)] (доказано field). Числитель 4(2p−1)²≥0, знаменатель >0 на [0,1] ⟹ S2(p)≤2/3 ВСЕГДА, равенство ⟺ p=1/2. Содержательно: равномерное максимизирует энтропию ИМЕННО потому, что «расстояние от равномерного» есть КВАДРАТ (2p−1)² — тот же Element-квадрат, что disc-критерий рациональности (QuadraticDiscriminant H38/H57). Это лейтмотив-связка, а не новая теорема — но связка машинно-точна над ℚ.",
+                           "tags":  [
+                                        "perfect-square",
+                                        "max-entropy",
+                                        "deficit",
+                                        "element-square"
+                                    ]
+                       },
+                       {
+                           "name":  "bsc_capacity_is_square",
+                           "analysis":  "Ёмкость BSC C(p):=H_max−H(p) тождественно равна тому же квадрат-дефициту, откуда сразу режимы: C(0)=2/3 (нет шума, полная ёмкость), C(1/2)=0 (максимум шума, бесполезный канал). Это закрывает gap §3.3 плана Части XVI как РАВЕНСТВО-со-свидетелем. Честно: вся точность держится на рациональном Паде-ПРОКСИ для log — важны РАЗНОСТИ энтропии, истинный log2 = role-limit, не завершённый объект.",
+                           "tags":  [
+                                        "bsc-capacity",
+                                        "shannon",
+                                        "pade-proxy",
+                                        "channel"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Ёмкость двоичного симметричного канала и максимум энтропии на равномерном закрыты над ℚ как РАВЕНСТВА-со-свидетелем, причём дефицит энтропии от равномерного выведен как перфектный квадрат (2p−1)² — связывая max-entropy с тем же Element-квадратом, что критерий рациональности дискриминанта.",
+                       "caveat":  "Шенноновская ёмкость BSC и принцип max-энтропии классичны; вогнутость бинарной энтропии стандартна. Ново лишь (а) 0-ax точность через рациональный Паде-ПРОКСИ log (истинный log2 = role-limit, НЕ завершён) и (б) наблюдение «дефицит = квадрат». ГОРИЗОНТ (не берётся): общий n-арный max-энтропии (Schur-вогнутость/мажоризация), аксиоматич. единственность меры (M1), n-арный канал. Header заявляет 9 Qed — фактически 6."
+                   },
+    "tags":  [
+                 "information",
+                 "shannon",
+                 "channel-capacity",
+                 "max-entropy",
+                 "perfect-square",
+                 "pade-proxy",
+                 "part-XVI",
+                 "P4"
+             ],
+    "notes":  "STATUS header says '9 Qed' but actual Qed. count is 6 (drift). cluster derived from path src/information/ → 'information'. log is a rational Padé PROXY, explicitly flagged honest; only entropy DIFFERENCES are load-bearing. 0 own axioms."
+}
 ]

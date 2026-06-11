@@ -2,7 +2,7 @@
 
 _Generated from `cs.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**25 files / 188 Qed.** Score distribution: s5=3 / s4=12 / s3=8 / s2=2 / s1=0 / s0=0
+**26 files / 203 Qed.** Score distribution: s5=3 / s4=13 / s3=8 / s2=2 / s1=0 / s0=0
 
 ---
 
@@ -938,4 +938,56 @@ _Generated from `cs.json` by `generate.ps1` - do not edit by hand; edit the JSON
 
 **Uniqueness - score 3 (new-framing).** Ловер (#108) и дихотомия границы (#1858/H77) машинно взаимовыведены как одна трёхступенчатая лестница на произвольном носителе статусов B: hit твиста ⟹ отражение ⟹ фикспойнт/именованный беглец; Кантор и nat/S — срезы; Prop-дихотомия — срез B=bool, f=negb, c:=dec.
 > _Caveat:_ Ловер 1969 классика; именованный беглец — стандартное содержание канторовского доказательства; вклад — лестничная декомпозиция, мост уровней и взаимовыведение, не новые матфакты.
+
+---
+
+## #1871 - `src/cs/RamseyBoundary.v` - score 4 (synthesis+observation)
+
+**Ramsey across the finitization boundary: R(3,3)=6 decided (Element), infinite Ramsey = vein-B choice**
+
+- **Topic.** Proves R(3,3)=6 by closed enumeration (forallb mono15 over all 2^15 K6-colourings => always a mono triangle; the pentagram colouring of K5 avoids one), then localizes the infinite Ramsey theorem: given the construction's output as decidable Rules, the infinite monochromatic set is built deterministically by vein B's dc_chain, 0 axioms.
+- **Role.** Singleton experiment placing Ramsey on the exact boundary of cs/DecidableKonig and the no-AC selection thread (vein B). Imports cs.CountableDependentChoiceFree (dc_chain / dc_chain_step); cites settheory/ChoicePriceMap.v, foundation/P4ProhibitsAC.v for the choice price.
+- **Counts.** Qed 15 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: List PeanoNat Bool Arith Lia; cs.CountableDependentChoiceFree
+- **E/R/R.** _Elements:_ конкретная раскраска c (15 бит K6 / 10 бит K5); конечные вершины; каждая раскраска актуальна (P4); пентаграмма c5 — свидетель нижней границы. _Roles:_ монохромный треугольник = роль; бесконечное монохромное множество = role-limit (незавершённая ветвь); решатель mono15 = роль-оракул. _Rules:_ конечно: pigeonhole форсирует треугольник в K6 (булев разрешитель mono15, перебор 2^15, 0 акс); бесконечно: 'наименьший следующий индекс цвета b' (dc_chain нити B) детерминирует монохромную подпоследовательность. _P4:_ КОНЕЧНЫЙ Рамсей = Element (R(3,3)=6 вычислимо, булев разрешитель, замкнутое вычисление, 0 акс); БЕСКОНЕЧНЫЙ = role-limit (бесконечный pigeonhole = выбор; на разрешимой стороне = dc_chain, 0 акс при данном свидетеле). Та же граница finite=decidable / infinite=choice, что König.
+- **Classical counterpart.** Finite Ramsey R(3,3)=6 (party problem) and the infinite Ramsey theorem (every 2-colouring of pairs of N has an infinite monochromatic set) are classical combinatorics; the infinite version is known to need weak choice. NEW is casting them as the SAME Element/role-limit finitization boundary as DecidableKonig, with the infinite-side choice localized to vein B's least-successor selector dc_chain.
+- **Tags.** cs, ramsey, finitization-boundary, vein-A, vein-B, no-AC, konig, P4, synthesis
+
+**Lemmas (24):**
+
+| name | kind | role |
+|---|---|---|
+| `tri` | Definition | тройка монохромна: три ребра (позиции i,j,k) равны |
+| `mono15` | Definition | ★ булев разрешитель: OR 20 тестов-треугольников K6 |
+| `edges6` | Definition | 15-битный список рёбер раскраски K6 |
+| `all_vectors` | Fixpoint | перечисление всех битовых векторов длины n |
+| `in_all_vectors` | Lemma | ★ всякий вектор есть в перечислении своей длины |
+| `enum_forces_triangle` | Lemma | ★ forallb mono15 по всем 2^15 раскраскам = true (vm_compute) |
+| `R33_upper` | Theorem | ★★ R(3,3)<=6: всякая 2-раскраска K6 форсирует моно-треугольник (Element, перебор) |
+| `c5` | Definition | пентаграмма K5: ребро красное iff циклически смежные |
+| `tri_c` | Definition | тест монохромности треугольника по функции-раскраске |
+| `hasmono5` | Definition | есть ли моно-треугольник среди 10 треугольников K5 |
+| `R33_lower` | Theorem | ★★ R(3,3)>5: пентаграмма K5 БЕЗ моно-треугольника (vm_compute) |
+| `ramsey_3_3` | Theorem | ★ R(3,3)=6 точно: K6 форсирует, K5 не обязан |
+| `ramsey_decidable` | Corollary | ★ конечное свойство Рамсея дано булевым разрешителем (Element) |
+| `Rb` | Definition | поздний индекс цвета b: i<j и actcolor j = b (локализованный выбор) |
+| `idx` | Definition | детерминированные индексы = dc_chain нити B (0 акс) |
+| `idx_step` | Lemma | шаг цепочки: Rb (idx k) (idx (S k)) |
+| `idx_lt_succ` | Lemma | idx k < idx (S k) (строго возрастает на шаг) |
+| `idx_inc` | Lemma | ★ цепочка индексов строго возрастает (k<l => idx k<idx l) |
+| `idx_color` | Lemma | ★ каждый выбранный индекс несёт цвет b |
+| `ramsey_inf_mono` | Theorem | ★★ бесконечный Рамсей (разрешимая сторона): все пары пивотов цвета b, 0 акс |
+| `ramsey_inf_increasing` | Theorem | пивоты строго возрастают |
+| `ramsey_inf_injective` | Theorem | ★ моно-множество бесконечно (инъекция в N) |
+| `ramsey_inf_exists` | Theorem | ★ существует бесконечное возрастающее моно-множество цвета b |
+| `ramsey_boundary` | Theorem | ★★ КАПСТОУН: конечный=Element + бесконечный=role-limit (цена = нить B), одна граница |
+
+**Key lemmas (deep):**
+
+- **`R33_upper`** - Element-сторона: R(3,3)<=6 доказано НЕ индукцией-pigeonhole, а ЗАМКНУТЫМ перебором — forallb mono15 по всем 2^15 раскраскам рёбер K6 = true (enum_forces_triangle, vm_compute), и всякая конкретная раскраска лежит в перечислении (in_all_vectors). Это подпись разрешимости/Element: конечная комбинаторика = замкнутое булево вычисление, 0 аксиом. С R33_lower (пентаграмма K5) даёт R(3,3)=6 точно. Классический факт; новизна — постановка как Element-сторона границы финитизации и перебор вместо pigeonhole. _(ramsey, enumeration, decidable, element, vein-A)_
+- **`ramsey_inf_mono`** - Role-limit-сторона, локализованная: ДАНО построение как разрешимые Rules (перечисление пивотов, гомогенный цвет actcolor, разрешимый свидетель 'поздний индекс цвета b') — бесконечное монохромное множество строится ДЕТЕРМИНИРОВАННО наименьше-следующей цепочкой dc_chain нити B, 0 аксиом. Остаточный выбор = ровно те гипотезы (бесконечный pigeonhole на цветах пивотов = неразрешимый Pi-предикат). Это та же локализация, что DecidableKonig делает для König: вынести AC в посылку, остальное — детерминированный селектор. Уровень — локализация цены, не устранение AC. _(infinite-ramsey, role-limit, dc-chain, vein-B, no-AC, choice-price)_
+- **`ramsey_boundary`** - Капстоун-наблюдение: Рамсей лежит на ТОЙ ЖЕ линии, что König / выбор-без-AC — конечная теорема = разрешимый Element (замкнутое булево вычисление), бесконечная = role-limit, чья цена на разрешимой стороне ЕСТЬ наименьше-следующий селектор нити B. 'Конечная комбинаторика = Element, бесконечный скачок = выбор'. Синтез/наблюдение поверх двух сторон: содержание доказано выше, ценность — помещение Рамсея в общую ось финитизации с честной локализацией AC. _(capstone, boundary, synthesis, konig-parallel)_
+
+**Uniqueness - score 4 (synthesis+observation).** Рамсей помещён на точную границу финитизации: R(3,3)=6 как разрешимый Element (замкнутый перебор 2^15, 0 акс) против бесконечного Рамсея как role-limit, чья choice-content локализована — на разрешимой стороне — к наименьше-следующему селектору нити B (dc_chain), та же линия, что König/выбор-без-AC.
+> _Caveat:_ И R(3,3)=6, и бесконечный Рамсей, и его потребность в слабом выборе классичны; конечная сторона тривиально разрешима перебором. Ново — единая ось Element/role-limit и ТОЧНАЯ локализация AC в нить B (не устранение: бесконечный pigeonhole остаётся неразрешимой посылкой-Pi-предикатом). Section-переменные/гипотезы — локальные, НЕ axiom. Заголовок STATUS (15 Qed) совпадает с фактическим.
 
