@@ -1907,3 +1907,7 @@ num	path
 1906	src/nonstandard/UltrafilterRoleLimit.v
 1907	src/nonstandard/UndecidedHierarchy.v
 1908	src/nonstandard/UnitZeroDivisorBoundary.v
+1909	src/stdlib/ChebyshevLLN.v
+1910	src/stdlib/CombinatoricsExt.v
+1911	src/stdlib/InclusionExclusionFib.v
+1912	src/stdlib/ShannonSynthesis.v

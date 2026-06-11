@@ -2,7 +2,7 @@
 
 _Generated from `stdlib.json` by `generate.ps1` - do not edit by hand; edit the JSON._
 
-**709 files / 8224 Qed.** Score distribution: s5=1 / s4=28 / s3=98 / s2=242 / s1=318 / s0=22
+**713 files / 8256 Qed.** Score distribution: s5=1 / s4=28 / s3=99 / s2=245 / s1=318 / s0=22
 
 ---
 
@@ -30621,4 +30621,168 @@ _Generated from `stdlib.json` by `generate.ps1` - do not edit by hand; edit the 
 
 **Uniqueness - score 2 (methods).** Точная-над-ℚ иллюстрация дзета-функции SFT как тонкого динамического инварианта: золотой и полный сдвиги различимы на орбитах, частичной ζ и спектре; orbit_determines_partial связывает орбиты с ζ первого порядка.
 > _Caveat:_ Стандартная динамическая дзета (Artin–Mazur/Ruelle). Только два SFT, низкие порядки (K=1, z=1/10); «ζ определяет всё» НЕ доказано как общая теорема — лишь различение двух примеров. Header говорит 10 Qed — фактически 6 (drift). Содержательна по сути одна лемма (orbit_determines_partial); остальное — различение конкретных чисел.
+
+---
+
+## #1909 - `src/stdlib/ChebyshevLLN.v` - score 2 (methods)
+
+**Markov & Chebyshev on a finite Q probability space (Element, 0 ax); weak LLN bound as a process, a.s. convergence = role-limit**
+
+- **Topic.** On a finite weighted space dist = list (Q*Q), defines E[X], the tail P(X>=a) and the squared-deviation space, proves Markov (a*P(X>=a)<=E[X]) and Chebyshev (eps^2*P((X-mu)^2>=eps^2)<=E[(X-mu)^2]) as decided rational inequalities, and packages the weak-LLN bound sigma^2/(n*eps^2) as a vanishing process whose a.s.-convergence limit is the role-limit.
+- **Role.** Adds the concentration inequalities the repo lacked (only `variance` existed in stdlib/Statistics.v). Self-contained over Stdlib QArith/List; cites settheory/ChoicePriceMap.v and analysis/BolzanoWeierstrass.v for the infinitary price but does not import them. A leaf exposition/methods file, not a hub.
+- **Counts.** Qed 7 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Lqa List PeanoNat Lia ZArith
+- **E/R/R.** _Elements:_ конечное вероятностное пространство (список (значение,вес), рациональные веса); частичные суммы по событию — актуальны (P4). _Roles:_ хвост P(X>=a) = роль-событие; среднее (expect/mean) = роль-центр, дисперсия (expect sqdev) = роль-разброс; сходимость п.н. = role-limit. _Rules:_ Марков (a*Sigma_событие <= E[X]) и Чебышёв (Марков на (X-mu)^2) — разрешимые конечные Q-неравенства; ЗБЧ-граница sigma^2/(n*eps^2) = процесс (каждое n — конкретное Q). _P4:_ конечное пространство + Чебышёв = Element (замкнутое Q-неравенство, 0 акс); бесконечное произведение / сходимость п.н. = role-limit (завершённая тотальность бесконечных испытаний, sigma-алгебра на Pi-N = выбор/classic), лишь цитируется. Та же граница finite=Element / infinite=role-limit.
+- **Classical counterpart.** Markov's inequality and Chebyshev's inequality (Chebyshev = Markov on the squared deviation) and the weak law of large numbers (Bernoulli/Khinchin) are textbook probability theory; NEW here is only the 0-axiom finite-Q formalization (events as Qle_bool tails over list (Q*Q)) plus the explicit finite-concentration = Element / infinite-product a.s.-convergence = role-limit boundary framing — the inequalities themselves are not new mathematics.
+- **Tags.** probability, markov, chebyshev, concentration, weak-LLN, finite-Q, boundary, role-limit, P4, methods
+- **Notes.** DRIFT: none for Qed (header says 7, actual 7). Markov & Chebyshev framed as 'new theorem' in header — flagged as over-branding (both are textbook). Infinite product / a.s. convergence only cited, not formalized.
+
+**Lemmas (15):**
+
+| name | kind | role |
+|---|---|---|
+| `dist` | Definition | конечное вер. пространство = list (Q*Q) пар (значение, вес) |
+| `sq` | Definition | квадрат x*x над Q |
+| `sq_nonneg` | Lemma | 0 <= sq x (через nra) |
+| `total_w` | Fixpoint | сумма весов Sigma w_i |
+| `expect` | Fixpoint | E[X] = Sigma v_i*w_i |
+| `tail_w` | Fixpoint | P(X>=a) = Sigma по событию {v_i>=a} весов (через Qle_bool) |
+| `sqdev` | Definition | пространство квадратов отклонений v_i \|-> (v_i-mu)^2, веса те же |
+| `mean` | Definition | mu = expect / total_w |
+| `tail_w_nonneg` | Lemma | веса>=0 ⟹ хвостовая вероятность >=0 (настоящая вероятность) |
+| `expect_nonneg` | Lemma | значения,веса>=0 ⟹ E[X]>=0 |
+| `markov` | Lemma | ★★ Марков: неотр. X на конечном Q-пространстве ⟹ a*P(X>=a) <= E[X] |
+| `chebyshev` | Lemma | ★★ Чебышёв: eps^2*P((X-mu)^2>=eps^2) <= E[(X-mu)^2] (Марков на sqdev) |
+| `chebyshev_mean` | Corollary | Чебышёв вокруг среднего mean l — стандартная форма концентрации |
+| `cheb_bound` | Definition | ЗБЧ-оценка var/(n*eps^2) как процесс nat->Q (каждое n — Element) |
+| `chebyshev_lln_boundary` | Theorem | ★ капстоун: markov ∧ chebyshev ∧ (хвост>=0) в одном утверждении; ЗБЧ = процесс |
+
+**Key lemmas (deep):**
+
+- **`markov`** - Индукция по списку: на каждом элементе либо v>=a (тогда вклад a*w<=v*w даёт неравенство), либо нет (хвост не растёт, E растёт на v*w>=0); nra закрывает оба случая. Это честная конечная Element-сторона — замкнутое разрешимое Q-неравенство, 0 аксиом. Само неравенство Маркова классично (учебник); ценность файла — что его в репо НЕ было (был лишь `variance`), и его Q-формализация над событием-как-Qle_bool-хвостом. _(markov, concentration, element, finite-Q)_
+- **`chebyshev`** - Чебышёв получен как Марков, применённый к переменной квадрата отклонения sqdev mu l с порогом sq eps: событие (X-mu)^2>=eps^2 есть в точности \|X-mu\|>=eps при eps>0. Неотрицательность значений sqdev (через sq_nonneg на образе map) поставляет посылку Маркова. Стандартный вывод Чебышёв-из-Маркова, выполненный над Q без аксиом; новизна — формализация, не математика. _(chebyshev, squared-deviation, reduction, element)_
+- **`chebyshev_lln_boundary`** - Капстоун собирает markov+chebyshev+tail_w_nonneg и в комментарии проводит границу: при Var(S_n/n)=sigma^2/n Чебышёв даёт P(\|S_n/n-mu\|>=eps)<=sigma^2/(n*eps^2)=cheb_bound — процесс, гаснущий с n (Element покадрово), тогда как сходимость в вероятности / п.н. над бесконечным произведением требует завершённой тотальности (выбор/classic) = role-limit. Уровень — методы+граница; заголовочное «новая теорема (Марков/Чебышёв)» — оверклейм (оба классичны), реальное новое = 0-акс Q-формализация + разрез. _(boundary, weak-LLN, process, role-limit, synthesis)_
+
+**Uniqueness - score 2 (methods).** 0-аксиомная Q-формализация неравенств Маркова и Чебышёва на конечном взвешенном пространстве (события через Qle_bool-хвосты) + явный разрез ЗБЧ: конечная концентрация = Element, бесконечное произведение / сходимость п.н. = role-limit.
+> _Caveat:_ Неравенства Маркова и Чебышёва и слабый ЗБЧ — учебная теория вероятностей; новизна лишь в том, что в репо их не было (был только `variance`), и в Q-формализации + граничной рамке. Заголовок файла называет это «новой теоремой» — оверклейм, помечен. Бесконечное произведение/п.н. только цитируются (ChoicePriceMap), не формализованы.
+
+---
+
+## #1910 - `src/stdlib/CombinatoricsExt.v` - score 2 (methods)
+
+**General choice symmetry C(n,k)=C(n,n-k), Pascal row-sum=2^n, Catalan closed form; finite pigeonhole engine (0 ax)**
+
+- **Topic.** Extends stdlib/Combinatorics.v with the general binomial symmetry (it had only concrete cases), the partial-and-full Pascal row sum proving sum_k C(n,k)=2^n, the Catalan numbers via closed form with values 0..6 and the central bound C_n<=C(2n,n), and re-exposes the finite pigeonhole as a named Element engine.
+- **Role.** Closes named gaps of Part XVI (discrete math): general choice symmetry + Catalan. Imports stdlib.Combinatorics (binomial, pascal_identity, pigeonhole_simple); a neighbour of InclusionExclusionFib.v. Leaf exposition file over nat.
+- **Counts.** Qed 12 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: PeanoNat Lia List; ToS: stdlib.Combinatorics
+- **E/R/R.** _Elements:_ конкретные натуральные n,k и значения binomial / catalan / row_sum — конечно-актуальные (P4). _Roles:_ k = роль-размер выборки, n = роль-размер вселенной; C_n = роль-счёт класса структур (скобочные/пути Дика); строка Паскаля = роль-счёт всех подмножеств. _Rules:_ рекуррентность Паскаля (из Combinatorics.v); двойственность выбора binom(n,k)=binom(n,n-k); замкнутая форма Каталана C_n=binom(2n,n)-binom(2n,n+1); row-sum-рекуррентность ⟹ 2^n. _P4:_ всё — конечный счёт (Element-сторона границы финитизации): значения вычисляются за конечное число шагов, ни LEM/AC/axiom-of-infinity. Бесконечная комбинаторика (бесконечный Рамсей, производящие функции как завершённые объекты) — role-limit, не здесь.
+- **Classical counterpart.** The binomial symmetry C(n,k)=C(n,n-k), the row-sum identity sum_k C(n,k)=2^n, and the Catalan numbers with closed form C_n=C(2n,n)-C(2n,n+1), plus the finite pigeonhole principle, are all standard combinatorics; NEW is only the 0-axiom nat formalization (general symmetry vs the concrete instances already in Combinatorics.v) and the Element/role-limit (finite-count vs infinite-Ramsey/generating-function) framing.
+- **Tags.** combinatorics, binomial, catalan, pascal, pigeonhole, finite-count, element, P4, methods
+- **Notes.** Actual Qed count = 12 (binomial_sym, rowsum_pascal, row_sum_pow2, catalan_0..6 = 7, catalan_le_central, finite_pigeonhole_engine), which MATCHES the STATUS header ('12 Qed') — no drift. The footer summary comment (line 133) says '10 Qed', which is stale/wrong, but the authoritative header is correct.
+
+**Lemmas (15):**
+
+| name | kind | role |
+|---|---|---|
+| `binomial_sym` | Theorem | ★ общая симметрия выбора: k<=n ⟹ binomial n k = binomial n (n-k) |
+| `rowsum` | Fixpoint | частичная сумма строки Sigma_{k=0}^{m} binomial n k |
+| `rowsum_pascal` | Lemma | рекуррентность строки rowsum(S n)(S m)=rowsum n (S m)+rowsum n m (без nat-вычитания) |
+| `row_sum` | Definition | полная сумма строки rowsum n n |
+| `row_sum_pow2` | Theorem | ★ сумма строки Паскаля = 2^n (число всех подмножеств n-множества) |
+| `catalan` | Definition | число Каталана = binomial(2n,n) - binomial(2n,n+1) |
+| `catalan_0` | Lemma | catalan 0 = 1 (vm_compute) |
+| `catalan_1` | Lemma | catalan 1 = 1 |
+| `catalan_2` | Lemma | catalan 2 = 2 |
+| `catalan_3` | Lemma | catalan 3 = 5 |
+| `catalan_4` | Lemma | catalan 4 = 14 |
+| `catalan_5` | Lemma | catalan 5 = 42 |
+| `catalan_6` | Lemma | catalan 6 = 132 |
+| `catalan_le_central` | Corollary | catalan n <= binomial(2n,n) — Element-граница счёта |
+| `finite_pigeonhole_engine` | Theorem | ★ конечный принцип Дирихле (>n в {0..n-1} ⟹ повтор) переименован как Element-движок (= pigeonhole_simple) |
+
+**Key lemmas (deep):**
+
+- **`binomial_sym`** - Общая двойственность выбора, доказанная индукцией по n с разбором k=0 (binomial_0_r/binomial_n_n) и k=n (Nat.sub_diag) и общим шагом через двойное применение pascal_identity и IH к обеим ветвям, перенося аргумент S(n-S k). Combinatorics.v давал лишь конкретные инстансы (binomial_sym_4_1) — здесь общее тождество «выбрать k = оставить n-k». Классическая комбинаторика; новое — общность над nat, 0 аксиом. _(binomial, symmetry, induction, general)_
+- **`row_sum_pow2`** - Сумма строки Паскаля = 2^n через rowsum_pascal (Паскаль-рекуррентность строки без вычитания) и binomial_gt (хвост строки = 0 за диагональю). Element-наблюдение: число всех подмножеств n-множества считается конечно. Стандартное тождество; ценность — чистая 0-акс nat-формализация и связь со счётом подмножеств. _(row-sum, powers-of-two, subsets, element)_
+- **`catalan_le_central`** - Замкнутая форма Каталана C_n=binom(2n,n)-binom(2n,n+1) даёт C_n<=binom(2n,n) одним lia, плюс табличные значения 0..6 (1,1,2,5,14,42,132) через vm_compute — конкретные Element-свидетели. Числа Каталана классичны (скобочные структуры, пути Дика); файл лишь формализует замкнутую форму и границу над nat. Бесконечная производящая функция не здесь. _(catalan, closed-form, central-binomial, finite)_
+
+**Uniqueness - score 2 (methods).** 0-аксиомная nat-формализация общей симметрии выбора binom(n,k)=binom(n,n-k) (Combinatorics.v имел лишь конкретные случаи), суммы строки Паскаля=2^n и замкнутой формы чисел Каталана с центральной границей; переименование конечного Дирихле как Element-движка.
+> _Caveat:_ Биномиальная симметрия, row-sum=2^n, числа Каталана и принцип Дирихле — стандартная комбинаторика. Единственная новизна — общность тождеств (vs конкретные инстансы соседа) и чистая 0-акс формализация над nat. Бесконечный Рамсей / производящие функции как завершённые объекты явно вынесены за пределы (role-limit, не здесь).
+
+---
+
+## #1911 - `src/stdlib/InclusionExclusionFib.v` - score 2 (methods)
+
+**Inclusion-exclusion (2-/3-set) over indicators + combinatorial Fibonacci (tilings = fib(n+1), sum fib = fib(n+2)-1), 0 ax**
+
+- **Topic.** Closes the Part XVI §3.4 gaps: defines count over a finite prefix [0,n), proves 2-set and 3-set inclusion-exclusion as pointwise boolean identities integrated by count, and casts Fibonacci as the tiling count of a 1xn strip (tilings n = fib (S n)) with the partial sum sum_i fib i = fib(n+2)-1.
+- **Role.** Closes named §3.4 gaps (inclusion-exclusion, Fibonacci/generating-function body) of Part XVI. Self-contained over Stdlib Arith/Bool; neighbour of CombinatoricsExt.v, cites FormalPowerSeries.v (Part XVII) for the actual generating function. Leaf exposition file over nat.
+- **Counts.** Qed 7 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: Arith Lia Bool
+- **E/R/R.** _Elements:_ конечный префикс [0,n); булевы предикаты A,B,C; натуральные fib / tilings — конечно-актуальные (P4). _Roles:_ count = роль-мера множества; индикатор A k = роль-членство; fib = роль-счётчик замощений. _Rules:_ вкл-искл = поэлементное булево тождество b(A\|B)+b(A&B)=bA+bB (и аналог на 3 множества), проинтегрированное count; fib-рекуррентность; замощения 1xn = fib(n+1); Sigma fib = fib(n+2)-1. _P4:_ чистая Element-сторона: конечная комбинаторика 0-аксиомна — count по [0,n) есть конечный перебор, nat не требует ни LEM, ни AC, ни axiom-of-infinity. Формальная производящая функция x/(1-x-x^2) = арена XVII (цитата); асимптотика fib_n ~ phi^n/sqrt5 = role-limit (phi иррационально).
+- **Classical counterpart.** The inclusion-exclusion principle (2- and 3-set), the Fibonacci numbers with the 1xn-strip tiling interpretation (tilings(n)=fib(n+1)) and the partial-sum identity sum_i fib(i)=fib(n+2)-1 are standard discrete math; NEW is only the 0-axiom indicator/count formalization over a finite prefix [0,n) and the Element (finite combinatorics) / role-limit (formal generating function, phi^n/sqrt5 asymptotics) framing.
+- **Tags.** combinatorics, inclusion-exclusion, fibonacci, tilings, indicator, finite-count, element, P4, methods
+- **Notes.** DRIFT: header STATUS says '8 Qed' but actual Qed count is 7 (count_union_inter, count_subadd, count_incl_excl_3, fib_pos, fib_sum, tilings_eq_fib, discrete_combinatorics_summary). Header overcounts by one.
+
+**Lemmas (11):**
+
+| name | kind | role |
+|---|---|---|
+| `count` | Fixpoint | count n P = число k<n с P k=true (конечная глубина перебора, P4) |
+| `count_union_inter` | Lemma | ★ вкл-искл-2: count(A\|B)+count(A&B)=count A+count B (аддитивно) |
+| `count_subadd` | Lemma | ★ субаддитивность count(A\|B)<=count A+count B |
+| `count_incl_excl_3` | Lemma | ★ вкл-искл для трёх множеств (аддитивная форма) |
+| `fib` | Fixpoint | числа Фибоначчи (0,1,1,2,3,5,...) |
+| `fib_pos` | Lemma | 1 <= fib(S n) (положительность со второго члена) |
+| `sumfib` | Fixpoint | частичная сумма Sigma_{i=0}^{n} fib i |
+| `fib_sum` | Lemma | ★ Sigma fib i = fib(n+2)-1, аддитивно sumfib n + 1 = fib(S(S n)) |
+| `tilings` | Fixpoint | число замощений полосы 1xn плитками 1x1 и 1x2 |
+| `tilings_eq_fib` | Lemma | ★ замощения 1xn = fib(n+1) (та же рекуррентность: последняя плитка 1x1/1x2) |
+| `discrete_combinatorics_summary` | Theorem | ★ капстоун: вкл-искл-2 ∧ субаддит. ∧ Sigma fib ∧ tilings=fib в одном утверждении |
+
+**Key lemmas (deep):**
+
+- **`count_union_inter`** - Вкл-искл-2 как ПОЭЛЕМЕНТНОЕ булево тождество, проинтегрированное счётом: индукция по n, на каждом шаге разбор четырёх случаев (A n, B n) с simpl;lia — b(A\|B)+b(A&B)=bA+bB поэлементно, count суммирует. Без nat-вычитания (аддитивная форма). Принцип вкл-искл классичен; новое — 0-акс индикаторная формализация над конечным префиксом [0,n), чистая Element-сторона (перебор+nat, ни LEM/AC/inf). _(inclusion-exclusion, indicator, boolean, element)_
+- **`tilings_eq_fib`** - Комбинаторный смысл Фибоначчи: число замощений полосы 1xn = fib(n+1), доказано усиленной индукцией (одновременно n и S n), последняя плитка 1x1 даёт tilings(n-1), 1x2 даёт tilings(n-2) — ровно fib-рекуррентность. Делает Фибоначчи РОЛЬ-СЧЁТЧИКОМ конкретных структур. Классическая биекция; ценность — 0-акс nat-формализация целого тела производящей функции (сам ряд x/(1-x-x^2) вынесен в XVII как цитата). _(fibonacci, tilings, combinatorial, generating-function-body)_
+- **`discrete_combinatorics_summary`** - Капстоун собирает вкл-искл-2, субаддитивность, Sigma fib=fib(n+2)-1 и tilings=fib(n+1) в одно утверждение и в комментарии очерчивает честный разрез: вся конечная комбинаторика 0-аксиомна (Element), а формальная производящая функция = арена XVII, асимптотика phi^n/sqrt5 = role-limit (phi иррационально). Уровень — методы/экспозиция: всё классично, ново лишь 0-акс формализация и граничная рамка. _(capstone, boundary, synthesis, element)_
+
+**Uniqueness - score 2 (methods).** 0-аксиомная индикаторно-счётная формализация вкл-искл (2 и 3 множества) над конечным префиксом [0,n) и комбинаторного Фибоначчи (замощения 1xn=fib(n+1), Sigma fib=fib(n+2)-1) с явным разрезом Element (конечная комбинаторика) / role-limit (формальный ряд, асимптотика phi^n/sqrt5).
+> _Caveat:_ Вкл-искл, числа Фибоначчи, биекция замощений и частичная сумма — стандартная дискретная математика. Новизна лишь в 0-акс формализации над nat и граничной рамке. Формальная производящая функция x/(1-x-x^2) НЕ доказывается здесь (цитата к FormalPowerSeries.v, Часть XVII); асимптотика phi^n/sqrt5 явно вынесена как role-limit.
+
+---
+
+## #1912 - `src/stdlib/ShannonSynthesis.v` - score 3 (new-framing)
+
+**Information = structural quantity (capstone): binary entropy peaks at 1/2; dyadic = Element, trit (log2 3) = role-limit (0 ax)**
+
+- **Topic.** A Part-XVI capstone tying the 0-axiom information layer into one statement: a locally-replicated Pade-log binary entropy S2 that peaks at the uniform point (S2(1/2)>S2(3/4),S2(1/3)), plus 2^3=8 (dyadic exact, Element) and the impossibility 2^a=3^b for b>=1 (log2 3 irrational, role-limit), bundled as 'information is structural'.
+- **Role.** Capstone / consolidation of the information thread; binds (not re-proves) DyadicBits.v, InformationTheory.v, DiscreteEntropy.v, MajorizationSchur.v. Imports stdlib.DyadicBits (dyadic_exact, log2_3_irrational); replicates binary entropy S2 locally to avoid the process/ stale-.vo chain. Leaf synthesis file.
+- **Counts.** Qed 6 / Admitted 0 / axioms 0
+- **Imports.** Stdlib: QArith Lqa Lia; ToS: stdlib.DyadicBits
+- **E/R/R.** _Elements:_ вероятности p in Q; степени двойки (биты); степени тройки (триты) — конечно-актуальные (P4). _Roles:_ энтропия = роль-мера неопределённости; диадическое (2^k) = Element-роль (точно k бит); тритовое (log2 3) = role-limit (нет конечного битового представления). _Rules:_ бинарная H пикует на равновероятном (максимум неопределённости); 2^k = точная битовая длина (правило кодирования); log2(нечётное) иррационально. _P4:_ информация = структурная величина (количество актов различения): её Element-сторона (диадическое, конечная длина) точна и 0-аксиомна; role-limit-сторона (трит log2 3, точная энтропия с ИСТИННЫМ log2, непрерывные алфавиты) = процесс/предел, не завершённый объект.
+- **Classical counterpart.** Shannon's binary entropy peaking at the uniform distribution (max uncertainty) and the dyadic/non-dyadic distinction (k bits encode exactly 2^k states; log2 3 irrational) are classical information theory; NEW is only the 0-axiom consolidation of the repo's existing info layer into one 'information = structural quantity' capstone with an explicit dyadic = Element / trit = role-limit cut — and the binary entropy here uses a Pade-approximation of log, not the true log.
+- **Tags.** information-theory, entropy, shannon, dyadic, trit, log2, boundary, element, role-limit, capstone, P4, new-framing
+- **Notes.** Actual Qed count = 6 (S2_at_half, S2_at_34, S2_at_13, S2_peaks_34, S2_peaks_13, information_is_structural_quantity), which MATCHES the STATUS header ('6 Qed') — no drift. (A raw 'Qed.' grep returns 7 because the footer comment on line 85 contains the text '6 Qed.'; only 6 are real proof terminators.) Binary entropy uses a Pade-approximation of log, not the true log — only entropy DIFFERENCES / the peak are meaningful (flagged in caveat). Pure consolidation of the existing 0-axiom info layer.
+
+**Lemmas (8):**
+
+| name | kind | role |
+|---|---|---|
+| `ln_pade` | Definition | Паде-приближение log: 2*(x-1)/(x+1) (локальная реплика MajorizationSchur) |
+| `S2` | Definition | бинарная энтропия (Паде-нормировка) -(a*ln_pade a+(1-a)*ln_pade(1-a)) |
+| `S2_at_half` | Lemma | S2(1/2)=2/3 — значение на равновероятном (максимум, vm_compute) |
+| `S2_at_34` | Lemma | S2(3/4)=18/35 |
+| `S2_at_13` | Lemma | S2(1/3)=3/5 |
+| `S2_peaks_34` | Lemma | ★ S2(3/4) < S2(1/2) — несимметричная точка строго ниже пика |
+| `S2_peaks_13` | Lemma | ★ S2(1/3) < S2(1/2) |
+| `information_is_structural_quantity` | Theorem | ★ капстоун: пик энтропии ∧ диадическое 2^3=8 (Element) ∧ нет 2^a=3^b (трит=role-limit) |
+
+**Key lemmas (deep):**
+
+- **`S2_peaks_34`** - Пик бинарной энтропии: значения вычислены точно (vm_compute) в трёх рациональных точках S2(1/2)=2/3, S2(3/4)=18/35, S2(1/3)=3/5, и lra даёт строгое S2(3/4)<S2(1/2). Это рациональная Element-тень классического факта «энтропия максимальна на равновероятном». ВАЖНАЯ оговорка: log заменён Паде-приближением ln_pade — корректны лишь РАЗНОСТИ/пик, не абсолютные значения энтропии; истинный log2-процесс = горизонт. _(binary-entropy, pade-log, peak, element)_
+- **`information_is_structural_quantity`** - Капстоун в одном утверждении собирает три грани информации как структурной величины: (1) бинарная энтропия пикует на равновероятном (S2_peaks_34/13); (2) ДИАДИЧЕСКОЕ точно — 2^3=8, k бит кодируют 2^k состояний (dyadic_exact, Element); (3) ТРИТОВОЕ — role-limit: нет a,b с 2^a=3^b (log2_3_irrational), нет конечного битового представления. Чистая консолидация существующего 0-акс слоя (DyadicBits импортируется, остальное проза); ценность — унификация и разрез Element/role-limit, не новая теорема. _(capstone, synthesis, dyadic-trit-boundary, role-limit)_
+
+**Uniqueness - score 3 (new-framing).** 0-аксиомный капстоун «информация = структурная величина», связывающий пик бинарной энтропии на равновероятном с явным разрезом границы финитизации: диадическое (2^k, точная длина) = Element, тритовое (log2 3 иррационально) = role-limit.
+> _Caveat:_ Пик энтропии и диадическое/тритовое различие — классическая теория информации (Шеннон). Чистая консолидация уже существующего слоя (dyadic_exact, log2_3_irrational из DyadicBits; остальное — проза), 0 нового содержания. log здесь = Паде-приближение (корректны лишь разности/пик, НЕ абсолютная энтропия); истинный log2-процесс, общий максимум по n исходов, пропускная способность канала и фон-Нейман явно вынесены как горизонт.
 
