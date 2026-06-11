@@ -11197,5 +11197,218 @@
                  "horizon-ascent"
              ],
     "notes":  "STATUS header says '5 Qed' but actual Qed. count is 4 (drift; the 6th declaration wqo_pairs_by_fst is an Example closed by Qed too — recount confirms 4 Qed total: no_bad_seq_nat, wqo_pullback_nat, wqo_pairs_by_fst, minimal_selection_is_process and the capstone share... actual grep = 4). Re-uses cs.CountableDependentChoiceFree (the vein-B no-DC tower) as a bridge. 0 own axioms."
+},
+{
+    "num":  1913,
+    "path":  "src/foundation/RoleLimitSpecies.v",
+    "cluster":  "foundation",
+    "classical_counterpart":  "Bolzano-Weierstrass / Banach (contraction r<1) / convergence-vs-boundedness (pointwise vs uniform); harmonic series divergence (2^m doubling); Basel sum<2 (telescope); bounded-vs-unbounded = excluded middle. Ново: только E/R/R-стратификация границы финитизации H1 на два вида с явным дайлом, и наблюдение что флагман 'процесс, а не стена' покрывает лишь Вид I.",
+    "title":  "Два вида роль-предела: H1 стратифицирован на ограниченный (Вид I) vs неограниченный (Вид II), дихотомия = L3",
+    "topic":  "Размер-последовательность N:nat->Q (норма на конечной ступени). RegularLimit = sup ограничен (Вид I), SingularLimit = неограничен (Вид II). Дайл = отношение роста: c<1->I, r>1->II, r=1 критично (оба вида). NS-энстрофия = r=1 член.",
+    "role":  "Капстоун нити NS/zeta-стен. Переиспользует is_cauchy (CauchyReal) и iterate_is_cauchy/is_contraction (FixedPoint) как Вид-I сертификат без дублирования. Импортируется navier_stokes/GalerkinFiniteRegularity.v (#1914).",
+    "qed":  39,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib.QArith/Qabs/Lia/ZArith/Arith",
+                    "Lqa",
+                    "ToS.ToS_Axioms (classic=L3)",
+                    "ToS.CauchyReal (is_cauchy)",
+                    "ToS.FixedPoint (is_contraction,iterate,iterate_is_cauchy)"
+                ],
+    "err":  {
+                "elements":  "Конечные ступени N n — актуальные рациональные нормы (энстрофия Omega_K, частичная сумма, модуль итерата); хвост (моды >K) — ещё не актуальная часть.",
+                "roles":  "RegularLimit/SingularLimit — два слоя границы финитизации H1; дайл (отношение роста) делает членство разрешимым-в-принципе; Вид II — честный контейнер открытого аналитического слоя.",
+                "rules":  "Исчерпываемость species_dichotomy = L3 (исключённое третье на ограниченности, через classic; De Morgan-проталкивание не-через-forall). Сертификаты: c<1 (decay_regular), r>1 (growth_singular); r=1 — дайл молчит, решает тонкая структура.",
+                "p4":  "Конечные ступени ограничены (вынуждено); равномерная-над-ступенями граница = роль-предел = потенциальна. NS = r=1 критич. член, классифицирован L3, какой вид — Millennium-зазор."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "RegularLimit",
+                       "kind":  "Definition",
+                       "role":  "Вид I: размер-посл. ограничена (exists M, forall n, N n <= M)"
+                   },
+                   {
+                       "name":  "SingularLimit",
+                       "kind":  "Definition",
+                       "role":  "Вид II: неограничена (forall M, exists n, M < N n)"
+                   },
+                   {
+                       "name":  "regular_not_singular",
+                       "kind":  "Lemma",
+                       "role":  "взаимоисключение видов (конструктивно)"
+                   },
+                   {
+                       "name":  "not_regular_singular",
+                       "kind":  "Lemma",
+                       "role":  "не-Вид-I -> Вид II (через classic)"
+                   },
+                   {
+                       "name":  "species_dichotomy",
+                       "kind":  "Theorem",
+                       "role":  "исчерпываемость двух видов = L3"
+                   },
+                   {
+                       "name":  "decays_geometrically",
+                       "kind":  "Definition",
+                       "role":  "субкритический дайл c<1"
+                   },
+                   {
+                       "name":  "decay_regular",
+                       "kind":  "Lemma",
+                       "role":  "c<1 -> Вид I"
+                   },
+                   {
+                       "name":  "qmax/maxabs/maxabs_ge",
+                       "kind":  "Definition/Fixpoint/Lemma",
+                       "role":  "конечный max-помощник для моста Cauchy"
+                   },
+                   {
+                       "name":  "cauchy_regular",
+                       "kind":  "Lemma",
+                       "role":  "МОСТ: is_cauchy (CauchyReal) -> RegularLimit"
+                   },
+                   {
+                       "name":  "contraction_regular",
+                       "kind":  "Theorem",
+                       "role":  "сжатие -> Вид I, через iterate_is_cauchy (Банах проекта)"
+                   },
+                   {
+                       "name":  "Q_unbounded_nat",
+                       "kind":  "Lemma",
+                       "role":  "nat неограничен в Q (Архимед)"
+                   },
+                   {
+                       "name":  "halfpow_regular",
+                       "kind":  "Lemma",
+                       "role":  "свидетель (1/2)^n: субкр. Вид I"
+                   },
+                   {
+                       "name":  "cap_regular",
+                       "kind":  "Lemma",
+                       "role":  "свидетель 2-1/(n+1): маргин. r=1 Вид I"
+                   },
+                   {
+                       "name":  "lin_singular",
+                       "kind":  "Lemma",
+                       "role":  "свидетель n: маргин. r=1 Вид II"
+                   },
+                   {
+                       "name":  "grows_geometrically",
+                       "kind":  "Definition",
+                       "role":  "суперкритический дайл r>1"
+                   },
+                   {
+                       "name":  "grow_additive/grow_ge_init/grow_pos",
+                       "kind":  "Lemma",
+                       "role":  "аддитивная нижняя граница r^n роста"
+                   },
+                   {
+                       "name":  "growth_singular",
+                       "kind":  "Lemma",
+                       "role":  "r>1 -> Вид II"
+                   },
+                   {
+                       "name":  "pow2_singular",
+                       "kind":  "Lemma",
+                       "role":  "свидетель 2^n: суперкр. Вид II"
+                   },
+                   {
+                       "name":  "Qinv_antitone",
+                       "kind":  "Lemma",
+                       "role":  "инверсия антитонна на положительных (общий помощник)"
+                   },
+                   {
+                       "name":  "basel_bound",
+                       "kind":  "Lemma",
+                       "role":  "Sum 1/n^2 <= 2-1/n (телескоп)"
+                   },
+                   {
+                       "name":  "basel_regular",
+                       "kind":  "Lemma",
+                       "role":  "свидетель Sum 1/n^2: канонический сходящийся Вид I"
+                   },
+                   {
+                       "name":  "harmonic_block",
+                       "kind":  "Lemma",
+                       "role":  "блок (p,p+k] добавляет >= k/(p+k)"
+                   },
+                   {
+                       "name":  "harmonic_double",
+                       "kind":  "Lemma",
+                       "role":  "H(2^m) >= 1+m/2 (удвоение)"
+                   },
+                   {
+                       "name":  "harmonic_singular",
+                       "kind":  "Lemma",
+                       "role":  "свидетель Sum 1/n: канонический расходящийся Вид II"
+                   },
+                   {
+                       "name":  "ns_regular/ns_is_classified",
+                       "kind":  "Definition/Theorem",
+                       "role":  "NS-регулярность = RegularLimit Omega; классифицирована L3"
+                   },
+                   {
+                       "name":  "canonical_witnesses",
+                       "kind":  "Theorem",
+                       "role":  "Sum 1/n^2 (Вид I) /\\ Sum 1/n (Вид II) — классическая пара через порог p=1"
+                   },
+                   {
+                       "name":  "role_limit_species_capstone",
+                       "kind":  "Theorem",
+                       "role":  "капстоун: дихотомия + взаимоискл + оба сертификата + мост + оба вида на r=1"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "species_dichotomy",
+                           "analysis":  "Исчерпываемость {Вид I, Вид II} — инстанс L3 (P\\/~P на ограниченности). Проталкивание ~ через forall требует classic. Локализует ровно ту аксиому, на которой держится 'у Millennium есть определённый ответ': это L3, ядровая аксиома проекта, а не новая.",
+                           "tags":  [
+                                        "L3",
+                                        "dichotomy",
+                                        "excluded-middle"
+                                    ]
+                       },
+                       {
+                           "name":  "cauchy_regular",
+                           "analysis":  "Мост без дублирования: is_cauchy (CauchyReal) -> RegularLimit(|a|). RegularLimit(ограничена) СЛАБЕЕ Cauchy — и это правильная грань для 'нет взрыва'. contraction_regular факторизует через iterate_is_cauchy (теорема Банаха проекта, переиспользована дословно). Сильнейший Вид-I сертификат = Банах.",
+                           "tags":  [
+                                        "interlock",
+                                        "banach",
+                                        "cauchy",
+                                        "no-duplication"
+                                    ]
+                       },
+                       {
+                           "name":  "canonical_witnesses",
+                           "analysis":  "Sum 1/n^2 сходится (Вид I, <2 телескопом) vs Sum 1/n расходится (Вид II, 2^m-удвоение H(2^m)>=1+m/2), ОБА на r=1 — грубый дайл молчит, решает показатель. Скалярная тень NS-зазора энергия Sum a^2 (огр.) vs энстрофия Sum k^2 a^2 (открыта).",
+                           "tags":  [
+                                        "harmonic",
+                                        "basel",
+                                        "critical",
+                                        "r=1",
+                                        "ns-shadow"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  4,
+                       "level":  "synthesis+observation",
+                       "claim":  "Стратификация границы финитизации H1 на Вид I (ограничен, растворяется процессом) vs Вид II (неограничен, открытый аналитический слой) через дайл-сжатие; NS на открытом конце Вида II; полный спектр свидетелей на всех режимах дайла (суб/супер/маргин); переиспользование Банаха проекта как Вид-I сертификата.",
+                       "caveat":  "Все ОТДЕЛЬНЫЕ факты КЛАССИЧЕСКИЕ (суперкритичность 3D NS, расходимость Sum 1/n, Банах нужен r<1, сходимость/ограниченность vs поточечно/равномерно). Вклад — только E/R/R-каркас, стратификация и честное ОГРАНИЧЕНИЕ флагмана 'процесс, а не стена' (покрывает лишь Вид I). Регулярность NS не сдвинута. 0 аксиом сверх classic=L3."
+                   },
+    "tags":  [
+                 "role-limit",
+                 "H1",
+                 "finitization-boundary",
+                 "P4",
+                 "L3",
+                 "navier-stokes",
+                 "cauchy",
+                 "banach",
+                 "harmonic",
+                 "basel",
+                 "no-overclaim"
+             ]
 }
 ]

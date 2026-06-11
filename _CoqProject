@@ -1991,3 +1991,5 @@ src/process/ProcessWaveEnergy.v
 src/stdlib/CombinatoricsExt.v
 src/stdlib/InclusionExclusionFib.v
 src/stdlib/ShannonSynthesis.v
+src/foundation/RoleLimitSpecies.v
+src/navier_stokes/GalerkinFiniteRegularity.v

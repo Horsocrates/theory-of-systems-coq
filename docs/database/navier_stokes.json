@@ -33,5 +33,90 @@
   {"num":643,"path":"src/navier_stokes/TriadicInteraction.v","cluster":"navier_stokes","classical_counterpart":"Triad counting, the coupling bound and the damping-exceeds-forcing steady state are standard NS spectral analysis; CRITICALLY the coupling bound |B(k,l,m)| <= C_B*max(k,l,m) is the LOAD-BEARING AXIOM (B_coeff_bounded) on which the whole conditional regularity rests, plus C_B_positive (harmless) and C_B (parameter) — 3 assumptions.","title":"Triadic interaction over Q (3 assumptions incl. the LOAD-BEARING coupling bound)","topic":"Triad count/bound, coupling for sum-triad, the nonlinear term bounded, mode forcing, clean forcing bound, damping rate, steady-state bound, damping exceeds forcing — resting on B_coeff_bounded (load-bearing), C_B_positive, C_B.","role":"NS (triadic coupling). CARRIES the LOAD-BEARING axiom B_coeff_bounded + C_B_positive axiom + C_B parameter (3). The conditional-regularity linchpin.","qed":36,"admitted":0,"axioms":3,"imports":["Stdlib: QArith"],"err":{"elements":"триады; коэффициент связи B; форсинг.","roles":"триадная связь как роль; коэффициентная оценка (НЕСУЩАЯ).","rules":"coupling_bound; damping_exceeds_forcing; steady_state_bound.","p4":"★ вся условная регулярность NS ПОКОИТСЯ на B_coeff_bounded (|B|≤C_B·max(k,l,m)) — ПОСТУЛИРОВАНО (load-bearing axiom) + C_B_positive + C_B param; 3 допущения."},"lemmas":[{"name":"triad_count coupling_for_sum_triad nonlinear_term_bounded mode_forcing clean_forcing_bound damping_rate steady_state_bound damping_exceeds_forcing triadic_interaction_main","kind":"Definition/Lemma","role":"★ триадная связь, демпфирование > форсинг (на B_coeff_bounded)"}],"key_lemmas":[{"name":"damping_exceeds_forcing","analysis":"★ Демпфирование превосходит форсинг (steady state ограничен) над Q — НО это ПОКОИТСЯ на B_coeff_bounded (|B(k,l,m)|≤C_B·max(k,l,m)), ПОСТУЛИРОВАННОМ load-bearing axiom'е. CLAUDE.md: вся NS-регулярность УСЛОВНА на этой оценке. Самый load-bearing файл NS.","tags":["triadic","coupling-bound","load-bearing-axiom"]}],"uniqueness":{"score":2,"level":"methods","claim":"Триадная связь над Q (демпфирование > форсинг, steady state) — но на ПОСТУЛИРОВАННОЙ load-bearing оценке B_coeff_bounded.","caveat":"★ Несёт 3 допущения: B_coeff_bounded (LOAD-BEARING — вся NS-регулярность conditional на ней), C_B_positive (harmless), C_B (parameter). axioms=3. Это линчпин условности NS."},"tags":["navier-stokes","triadic","load-bearing-axiom","conditional","methods"],"notes":"Declares B_coeff_bounded (LOAD-BEARING axiom — NS regularity is CONDITIONAL on it) + C_B_positive axiom + C_B parameter. axioms=3 per CLAUDE.md."},
   {"num":644,"path":"src/navier_stokes/TwoMillennium.v","cluster":"navier_stokes","classical_counterpart":"Unifying YM (gap) and NS (regularity) under two key inequalities (both 'number theory', both elementary) is the project's framing; NEW: only the unified two-inequality view.","title":"Two Millennium over Q: YM + NS unified","topic":"The YM key (gap positive, integer minimum), the NS key (amplitude positive, induction step), both elementary, the unified framework, both number theory.","role":"NS+YM (two-Millennium unification). Self-contained.","qed":20,"admitted":0,"axioms":0,"imports":["Stdlib: QArith"],"err":{"elements":"два ключевых неравенства (YM gap, NS amplitude).","roles":"объединение двух Millennium как роль.","rules":"yang_mills_key; navier_stokes_key; both_number_theory.","p4":"YM и NS сведены к двум элементарным неравенствам над Q (Element); оба УСЛОВНЫ."},"lemmas":[{"name":"yang_mills_key yang_mills_gap_positive navier_stokes_key both_elementary unified_framework both_number_theory two_millennium_main","kind":"Definition/Lemma","role":"два ключевых неравенства, объединение"}],"key_lemmas":[{"name":"unified_framework","analysis":"YM (gap) и NS (regularity) сведены к ДВУМ элементарным неравенствам (оба 'теория чисел') над Q. Объединяющая рамка проекта; оба результата УСЛОВНЫ (YM gap для конкретной решётки, NS на B_coeff_bounded).","tags":["two-millennium","YM","NS","unification"]}],"uniqueness":{"score":2,"level":"synthesis+observation","claim":"YM+NS объединены под двумя элементарными неравенствами над Q ('оба теория чисел').","caveat":"Объединяющая рамка; оба результата условны/над-брендированы (YM gap, NS на B_coeff_bounded)."},"tags":["navier-stokes","two-millennium","unification","synthesis"]},
   {"num":645,"path":"src/navier_stokes/UniformBounds.v","cluster":"navier_stokes","classical_counterpart":"Uniform-in-K bounds (energy, per-mode, enstrophy, palinstrophy, Sobolev, time-derivative, equicontinuity, compactness) for Galerkin compactness are standard; NEW: nothing — exact Q uniform bounds.","title":"Uniform bounds over Q (Galerkin compactness)","topic":"Uniform energy/per-mode/enstrophy/palinstrophy/Sobolev bounds (independent of K), time-derivative bounds, equicontinuity, compactness, strong-convergence key.","role":"NS (uniform bounds for compactness). Self-contained.","qed":37,"admitted":0,"axioms":0,"imports":["Stdlib: QArith"],"err":{"elements":"равномерные оценки (energy/enstrophy/Sobolev).","roles":"равномерность по K как роль (компактность).","rules":"all_bounds_uniform; equicontinuity; compactness.","p4":"оценки равномерны по K над Q (Element) ⟹ компактность."},"lemmas":[{"name":"uniform_energy uniform_per_mode uniform_enstrophy uniform_palinstrophy uniform_sobolev equicontinuity compactness all_bounds_uniform uniform_bounds_main","kind":"Definition/Lemma","role":"равномерные оценки, равностепенная непрерывность, компактность"}],"key_lemmas":[{"name":"all_bounds_uniform","analysis":"Все оценки (energy/enstrophy/Sobolev/time-derivative) РАВНОМЕРНЫ по K над Q ⟹ равностепенная непрерывность ⟹ компактность (для галёркинской сходимости). Element-сторона.","tags":["uniform-bounds","compactness","equicontinuity"]}],"uniqueness":{"score":1,"level":"exposition","claim":"Равномерные по K оценки над Q (energy/enstrophy/Sobolev) ⟹ компактность.","caveat":"Стандартные оценки компактности; ценность — Q-точность."},"tags":["navier-stokes","uniform-bounds","compactness","exposition"]},
-  {"num":646,"path":"src/navier_stokes/Vorticity.v","cluster":"navier_stokes","classical_counterpart":"Vorticity/palinstrophy, the norm hierarchy, 2D stretching vanishing, the enstrophy production rate, max-vorticity/BKM are standard; NEW: nothing — exact Q vorticity analysis (2D stretching vanishes).","title":"Vorticity over Q: 2D stretching vanishes","topic":"Vorticity = enstrophy, palinstrophy, the norm hierarchy, 2D stretching vanishing, enstrophy production rate (2D dissipative), max vorticity bound, BKM sum.","role":"NS (vorticity). Self-contained.","qed":26,"admitted":0,"axioms":0,"imports":["Stdlib: QArith"],"err":{"elements":"завихренность/палинстрофия.","roles":"завихренность как роль; 2D-растяжение исчезает.","rules":"stretching_vanishes_2d; enstrophy_dissipation_2d.","p4":"2D-растяжение исчезает ⟹ 2D-диссипация над Q (Element)."},"lemmas":[{"name":"vorticity_equals_enstrophy palinstrophy norm_hierarchy stretching_vanishes_2d enstrophy_dissipation_2d max_vorticity_bound bkm_sum vorticity_main","kind":"Definition/Lemma","role":"завихренность, 2D-растяжение исчезает, BKM"}],"key_lemmas":[{"name":"stretching_vanishes_2d","analysis":"В 2D растяжение вихря ИСЧЕЗАЕТ (нет vortex stretching) ⟹ энстрофия диссипативна ⟹ 2D-регулярность над Q. Element-сторона: структурная причина, почему 2D NS регулярна, а 3D нет.","tags":["vorticity","2D-stretching","enstrophy"]}],"uniqueness":{"score":1,"level":"exposition","claim":"Завихренность над Q (2D-растяжение исчезает ⟹ 2D-диссипация, иерархия норм, BKM).","caveat":"Структура завихренности классична; ценность — Q-точность (2D vs 3D)."},"tags":["navier-stokes","vorticity","2D","exposition"]}
+  {"num":646,"path":"src/navier_stokes/Vorticity.v","cluster":"navier_stokes","classical_counterpart":"Vorticity/palinstrophy, the norm hierarchy, 2D stretching vanishing, the enstrophy production rate, max-vorticity/BKM are standard; NEW: nothing — exact Q vorticity analysis (2D stretching vanishes).","title":"Vorticity over Q: 2D stretching vanishes","topic":"Vorticity = enstrophy, palinstrophy, the norm hierarchy, 2D stretching vanishing, enstrophy production rate (2D dissipative), max vorticity bound, BKM sum.","role":"NS (vorticity). Self-contained.","qed":26,"admitted":0,"axioms":0,"imports":["Stdlib: QArith"],"err":{"elements":"завихренность/палинстрофия.","roles":"завихренность как роль; 2D-растяжение исчезает.","rules":"stretching_vanishes_2d; enstrophy_dissipation_2d.","p4":"2D-растяжение исчезает ⟹ 2D-диссипация над Q (Element)."},"lemmas":[{"name":"vorticity_equals_enstrophy palinstrophy norm_hierarchy stretching_vanishes_2d enstrophy_dissipation_2d max_vorticity_bound bkm_sum vorticity_main","kind":"Definition/Lemma","role":"завихренность, 2D-растяжение исчезает, BKM"}],"key_lemmas":[{"name":"stretching_vanishes_2d","analysis":"В 2D растяжение вихря ИСЧЕЗАЕТ (нет vortex stretching) ⟹ энстрофия диссипативна ⟹ 2D-регулярность над Q. Element-сторона: структурная причина, почему 2D NS регулярна, а 3D нет.","tags":["vorticity","2D-stretching","enstrophy"]}],"uniqueness":{"score":1,"level":"exposition","claim":"Завихренность над Q (2D-растяжение исчезает ⟹ 2D-диссипация, иерархия норм, BKM).","caveat":"Структура завихренности классична; ценность — Q-точность (2D vs 3D)."},"tags":["navier-stokes","vorticity","2D","exposition"]},
+{
+    "num":  1914,
+    "path":  "src/navier_stokes/GalerkinFiniteRegularity.v",
+    "cluster":  "navier_stokes",
+    "classical_counterpart":  "Galerkin a priori energy bound E(t)<=E(0); finite-dim norm equivalence Sum (k+1)^2 a^2 <= K^2 Sum a^2 (K-dependent constant); 3D NS supercriticality. Ново: только мост к RoleLimitSpecies — конечно-K регулярность как Вид I, NS-стена = роль-предел Вида II.",
+    "title":  "Конечные усечения Галёркина регулярны; NS-стена = роль-предел K->oo (Вид II)",
+    "topic":  "Каждое конечное усечение K безусловно регулярно (энергия и энстрофия ограничены по времени); взрыв — только роль-предел K->oo. NS-глобальная регулярность = RegularLimit энстрофийной refinement-последовательности.",
+    "role":  "Парный капстоун к foundation/RoleLimitSpecies.v (#1913). Переиспользует energy_bounded_by_initial (EnergyEstimate), modal_energy/modal_enstrophy + sum_ns_le/sum_ns_scale (GalerkinSystem/GridFunction), RegularLimit/SingularLimit/ns_is_classified (RoleLimitSpecies).",
+    "qed":  4,
+    "admitted":  0,
+    "axioms":  0,
+    "imports":  [
+                    "Stdlib.QArith/Lia/ZArith",
+                    "Lqa",
+                    "ToS.foundation.RoleLimitSpecies",
+                    "ToS.navier_stokes.GridFunction",
+                    "ToS.navier_stokes.GalerkinSystem",
+                    "ToS.navier_stokes.EnergyEstimate"
+                ],
+    "err":  {
+                "elements":  "Конечно-ступенные размер-последовательности n|->energy_at/enstrophy_at K u n — актуальные рациональные.",
+                "roles":  "Энергия — всегда Вид I (равномерно по времени); энстрофия — Вид I при фиксированном K (потолок K^2*E0), но K-равномерность = Вид II = NS-регулярность.",
+                "rules":  "triple_sum=0 (сохранение энергии нелинейностью) даёт energy_decreasing; вязкость диссипирует; вес K^2 = зазор на одну степень критичности.",
+                "p4":  "Конечное K регулярно (доказано: |a_k| и Omega_K ограничены); взрыв — роль-предел K->oo ТОЛЬКО. NS-стена = инстанс границы финитизации H1, Вид II."
+            },
+    "lemmas":  [
+                   {
+                       "name":  "finite_galerkin_energy_regular",
+                       "kind":  "Theorem",
+                       "role":  "энергия при фикс. K — Вид I (из energy_bounded_by_initial)"
+                   },
+                   {
+                       "name":  "enstrophy_le_Ksq_energy",
+                       "kind":  "Lemma",
+                       "role":  "Omega <= K^2 * E (потолок, растёт с K) через sum_ns_le"
+                   },
+                   {
+                       "name":  "finite_galerkin_enstrophy_regular",
+                       "kind":  "Theorem",
+                       "role":  "энстрофия при фикс. K — Вид I (потолок K^2*E0): нет конечно-K взрыва"
+                   },
+                   {
+                       "name":  "galerkin_finite_regularity_capstone",
+                       "kind":  "Theorem",
+                       "role":  "капстоун: конечно-K регулярно (энергия+энстрофия) + NS = роль-предел Вида II (L3)"
+                   }
+               ],
+    "key_lemmas":  [
+                       {
+                           "name":  "enstrophy_le_Ksq_energy",
+                           "analysis":  "Omega=1/2 Sum (k+1)^2 a^2 <= 1/2 Sum K^2 a^2 = K^2*E, т.к. (k+1)^2<=K^2 для k<K (sum_ns_le). КОНСТАНТА K^2 РАСТЁТ с K — вот почему конечная граница ЕСТЬ, но не равномерна; неравномерность = открытый Вид II = Millennium.",
+                           "tags":  [
+                                        "K-ceiling",
+                                        "supercritical",
+                                        "one-power-gap"
+                                    ]
+                       },
+                       {
+                           "name":  "galerkin_finite_regularity_capstone",
+                           "analysis":  "Энергия безусловно Вид I; энстрофия Вид I при каждом K но с растущим потолком; NS-глобальная регулярность = RegularLimit refinement-посл., классифицирована L3 (ns_is_classified из RoleLimitSpecies). Тезис 'взрыв = чисто роль-предел K->oo' стал теоремой на реальных Галёркин-объектах.",
+                           "tags":  [
+                                        "capstone",
+                                        "role-limit",
+                                        "P4",
+                                        "bridge"
+                                    ]
+                       }
+                   ],
+    "uniqueness":  {
+                       "score":  3,
+                       "level":  "new-framing",
+                       "claim":  "Конечно-K регулярность (энергия+энстрофия Вид I) и NS-стена = роль-предел Вида II — машинно на реальных Галёркин-объектах проекта; потолок K^2 делает явной неравномерность как точку обрыва.",
+                       "caveat":  "Факты КЛАССИЧЕСКИЕ (a priori энерг. граница Галёркина; норм-эквивалентность с K-зависимой константой; суперкритичность 3D). Ново — только мост к RoleLimitSpecies (#1913) и P4-формулировка 'взрыв = роль-предел'. NS не решена. 0 аксиом сверх classic=L3."
+                   },
+    "tags":  [
+                 "navier-stokes",
+                 "galerkin",
+                 "role-limit",
+                 "H1",
+                 "P4",
+                 "finite-regularity",
+                 "millennium",
+                 "no-overclaim"
+             ]
+}
 ]

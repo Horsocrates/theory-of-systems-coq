@@ -1911,3 +1911,5 @@ num	path
 1910	src/stdlib/CombinatoricsExt.v
 1911	src/stdlib/InclusionExclusionFib.v
 1912	src/stdlib/ShannonSynthesis.v
+1913	src/foundation/RoleLimitSpecies.v
+1914	src/navier_stokes/GalerkinFiniteRegularity.v
