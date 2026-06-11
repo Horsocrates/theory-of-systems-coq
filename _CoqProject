@@ -1993,3 +1993,4 @@ src/stdlib/InclusionExclusionFib.v
 src/stdlib/ShannonSynthesis.v
 src/foundation/RoleLimitSpecies.v
 src/navier_stokes/GalerkinFiniteRegularity.v
+src/foundation/GroundedOrderedStructure.v
