@@ -116,6 +116,13 @@ bash generate_docs.sh
 - `cbv beta` instead of `simpl` to avoid unfolding Fixpoints
 - `set ... in *` lambda matching unreliable — set from GOAL directly
 - `cbv zeta in HN` required after `set ... in *` to eliminate `let` wrappers
+- `repeat split` HANGS (non-terminating, looks like a stuck coqc) on a goal that
+  contains an `exists` — it keeps splitting the `ex` single-constructor with fresh
+  evars. Use an explicit chain `split; [ | split; [ | split ] ]` for conjunctions
+  that contain an existential (verified 2026-06-12, foundation/MetaPairStrength.v capstone).
+- `lra` (Lqa) fails ("Cannot find witness") on a GROUND strict `#`-literal inequality
+  like `1#2 < 1` — use `rewrite Qlt_alt; reflexivity` (or `Qle_alt; discriminate`),
+  which decides via `Qcompare` (verified 2026-06-12, foundation/RoleLimitSpecies.v).
 
 ## Import Pattern
 
