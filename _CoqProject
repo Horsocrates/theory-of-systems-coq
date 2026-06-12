@@ -1965,6 +1965,7 @@ src/foundation/SHOThreeFormulas.v
 src/foundation/ThreeFormulasBridge.v
 src/foundation/ZFCAxiomLedger.v
 src/information/ChannelCapacity.v
+src/information/ShannonUniqueness.v
 src/Motzkin.v
 src/nonstandard/BoundaryIsInvertibility.v
 src/nonstandard/DerivativeViaInfinitesimal.v
@@ -2004,3 +2005,4 @@ src/foundation/KnowledgeInteraction.v
 src/foundation/KnowledgeTierLink.v
 src/foundation/KnowledgeProbability.v
 src/foundation/KnowledgeInsight.v
+src/foundation/KnowledgeShannon.v
