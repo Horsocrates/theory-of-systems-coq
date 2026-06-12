@@ -140,8 +140,8 @@ From ToS_Arch Require Import Architecture_of_Reasoning.
 
 | Definition | File |
 |-----------|------|
-| `Level`, `System`, `Criterion`, `ElemOf` | `TheoryOfSystems_Core_ERR.v` |
-| `RoleAssignment`, `ERR_WellFormed` | `Roles.v` |
+| `Level`, `System`, `Criterion` | `TheoryOfSystems_Core_ERR.v` |
+| `RoleAssignment`, `ERR_WellFormed`, `ElemOf` | `Roles.v` (canonical; `ElemOf` re-defined in `SystemMorphism.v` to avoid a circular dep) |
 | `CriterionOver`, `ext_equiv`, `int_equiv` | `IntensionalIdentity.v` |
 | `GenProcess`, `observe` | `ProcessGeneral.v` |
 | `DecTotalOrder`, `l5_resolve_gen` | `L5Resolution.v` |

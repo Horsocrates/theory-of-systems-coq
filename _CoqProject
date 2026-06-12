@@ -1995,3 +1995,12 @@ src/foundation/RoleLimitSpecies.v
 src/navier_stokes/GalerkinFiniteRegularity.v
 src/foundation/GroundedOrderedStructure.v
 src/foundation/MetaPairStrength.v
+src/foundation/LevelNatIso.v
+src/foundation/KnowledgeProcess.v
+src/foundation/KnowledgeGap.v
+src/foundation/KnowledgeInformation.v
+src/foundation/KnowledgeDepth.v
+src/foundation/KnowledgeInteraction.v
+src/foundation/KnowledgeTierLink.v
+src/foundation/KnowledgeProbability.v
+src/foundation/KnowledgeInsight.v
