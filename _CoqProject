@@ -2006,3 +2006,10 @@ src/foundation/KnowledgeTierLink.v
 src/foundation/KnowledgeProbability.v
 src/foundation/KnowledgeInsight.v
 src/foundation/KnowledgeShannon.v
+src/foundation/KnowledgeMutability.v
+src/foundation/KnowledgeFailure.v
+src/foundation/KnowledgeReflection.v
+src/foundation/KnowledgeInquiry.v
+src/foundation/KnowledgeBelief.v
+src/foundation/KnowledgeError.v
+src/foundation/KnowledgeFinitization.v
