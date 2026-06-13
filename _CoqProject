@@ -2013,3 +2013,5 @@ src/foundation/KnowledgeInquiry.v
 src/foundation/KnowledgeBelief.v
 src/foundation/KnowledgeError.v
 src/foundation/KnowledgeFinitization.v
+src/foundation/KnowledgeSubject.v
+src/foundation/KnowledgeCollective.v
