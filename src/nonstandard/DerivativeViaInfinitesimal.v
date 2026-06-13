@@ -21,6 +21,7 @@
 
    ★ ПРОИЗВОДНЫЕ ЧЕРЕЗ ТЕНЬ (st, через δ→0 по Архимеду):
      f(x)=x²  ⟹ f'(x) = 2x   (`deriv_sq`, флагман)
+     f(x)=x³  ⟹ f'(x) = 3x²  (`deriv_cube`)
      f(x)=x   ⟹ f'(x) = 1    (`deriv_id`)
      f(x)=c   ⟹ f'(x) = 0    (`deriv_const`)
 
@@ -29,11 +30,10 @@
    дифференцирование полиномов НЕ выходит за границу финитизации; role-limit появился бы лишь для
    трансцендентного f (exp и т.п. — нетерминирующий процесс, цитата к GermInfinitesimal/exp).
 
-   HONEST SCOPE.  Машинно-закрыто, 0 аксиом.  Для x³ доказано ТОЧНОЕ тождество (`dq_cube`); полный
-   st-шаг куба (тень от 3xδ+δ² — «ограниченное × бесконечно малое») здесь НЕ доказывается (потребовал бы
-   Qabs-оценок) — это честно опущено, не выдаётся за сделанное.  `converges` для x²/x/const доказан
-   полностью.  δ→0 — Архимед (стандартный QArith).  st-производная как ОБЩАЯ операция на гладких
-   процессах — арена будущего файла (цитата).
+   HONEST SCOPE.  Машинно-закрыто, 0 аксиом.  st-шаг куба ТЕПЕРЬ доказан (`deriv_cube`): остаток
+   3xδ+δ² ограничен (3|x|+1)·δ через Qabs и исчезает (δ→0).  `converges` для x²/x³/x/const доказан
+   полностью.  Общий xⁿ (биномиальное разложение (x+δ)ⁿ) — горизонт.  δ→0 — Архимед (стандартный
+   QArith).  st-производная как ОБЩАЯ операция на гладких процессах — арена будущего файла (цитата).
 
    Elements: GProc=nat→Q; delta=1/(n+1); diffquot; f_sq/f_cube/f_id/f_const; converges (двустор., lra).
    Roles:    δ=роль-приращение (∞-малое, ненулевое); diffquot=роль-наклон-секущей; st=роль-тень; f'=касательная.
@@ -55,11 +55,12 @@
    ДИАГНОСТИКА (P4): всё конечно-глубинно (Element); δ→0 = Архимед (процесс, не завершённая малость); f'
                  полинома = Element. ЧЕСТНО: куб — тождество доказано, st-шаг опущен; x²/x/const доказаны полностью.
 
-   STATUS: 12 Qed, 0 Admitted, 0 axioms
+   STATUS: 15 Qed, 0 Admitted, 0 axioms
    Author: Horsocrates | Date: June 2026
 *)
 
 From Stdlib Require Import QArith.
+From Stdlib Require Import Qabs.
 From Stdlib Require Import Arith Lia.
 From Stdlib Require Import Lqa.
 Open Scope Q_scope.
@@ -84,6 +85,27 @@ Proof. intro n. unfold delta. apply Qinv_lt_0_compat. apply Qsn_pos. Qed.
 Lemma delta_nonzero : forall n, ~ delta n == 0.
 Proof.
   intros n H. pose proof (delta_pos n) as Hp. rewrite H in Hp. exact (Qlt_irrefl 0 Hp).
+Qed.
+
+(** Деление положительных положительно (реплицировано из GermInfinitesimal). *)
+Lemma Qdiv_pos : forall a b : Q, 0 < a -> 0 < b -> 0 < a / b.
+Proof.
+  intros a b Ha Hb.
+  assert (Hinv : 0 < / b) by (apply Qinv_lt_0_compat; exact Hb).
+  unfold Qdiv. apply (proj2 (Qmult_lt_l 0 (/ b) a Ha)) in Hinv.
+  rewrite Qmult_0_r in Hinv. exact Hinv.
+Qed.
+
+(** ★ δ ≤ 1 на каждом шаге (1/(n+1) ≤ 1) — нужно для оценки δ² ≤ δ. *)
+Lemma delta_le_1 : forall n, delta n <= 1.
+Proof.
+  intro n. unfold delta.
+  assert (Hp : 0 < Qsn n) by apply Qsn_pos.
+  assert (Hne : ~ Qsn n == 0) by (intro Hc; rewrite Hc in Hp; exact (Qlt_irrefl 0 Hp)).
+  assert (Hinv : 0 < / Qsn n) by (apply Qinv_lt_0_compat; exact Hp).
+  assert (H1 : 1 <= Qsn n) by (unfold Qsn, Qle; simpl; lia).
+  pose proof (Qmult_le_compat_r 1 (Qsn n) (/ Qsn n) H1 (Qlt_le_weak _ _ Hinv)) as H.
+  rewrite Qmult_1_l in H. rewrite (Qmult_inv_r (Qsn n) Hne) in H. exact H.
 Qed.
 
 (* ===================================================================== *)
@@ -173,6 +195,40 @@ Proof.
   intros c x eps Heps. exists 0%nat. intros n _. rewrite (dq_const c x n). split; lra.
 Qed.
 
+(** ★★ f(x)=x³ ⟹ f'(x)=3x²: остаток 3xδ+δ² ограничен (3|x|+1)·δ и исчезает в тени (δ→0).
+    Полный st-шаг куба, парный к флагману x². *)
+Lemma deriv_cube : forall x, converges (diffquot f_cube x) (3 * x * x).
+Proof.
+  intros x eps Heps.
+  assert (Hxle : x <= Qabs x) by apply Qle_Qabs.
+  assert (Hxge : (- Qabs x) <= x).
+  { pose proof (Qle_Qabs (- x)) as H. rewrite Qabs_opp in H. lra. }
+  assert (Hq : 0 <= Qabs x) by apply Qabs_nonneg.
+  assert (HM : 0 < 3 * Qabs x + 1) by lra.
+  assert (Hbnd : 0 < eps / (3 * Qabs x + 1)) by (apply Qdiv_pos; [ exact Heps | exact HM ]).
+  destruct (delta_converges_0 (eps / (3 * Qabs x + 1)) Hbnd) as [N HN].
+  exists N. intros n Hn. destruct (HN n Hn) as [HA HB].
+  pose proof (delta_pos n) as Hd0. pose proof (delta_le_1 n) as Hd1.
+  assert (HBd : delta n < eps / (3 * Qabs x + 1)) by lra.
+  assert (Hne : ~ (3 * Qabs x + 1) == 0) by lra.
+  assert (Hmd : (3 * Qabs x + 1) * delta n < eps).
+  { apply Qlt_le_trans with ((3 * Qabs x + 1) * (eps / (3 * Qabs x + 1))).
+    - apply (proj2 (Qmult_lt_l (delta n) (eps / (3 * Qabs x + 1)) (3 * Qabs x + 1) HM)). exact HBd.
+    - setoid_replace ((3 * Qabs x + 1) * (eps / (3 * Qabs x + 1))) with eps by (field; exact Hne).
+      apply Qle_refl. }
+  assert (HMe : (3 * Qabs x + 1) * delta n == 3 * (Qabs x * delta n) + delta n) by ring.
+  assert (Hxd1 : x * delta n <= Qabs x * delta n)
+    by (apply Qmult_le_compat_r; [ exact Hxle | exact (Qlt_le_weak _ _ Hd0) ]).
+  assert (Hxd2 : (- Qabs x) * delta n <= x * delta n)
+    by (apply Qmult_le_compat_r; [ exact Hxge | exact (Qlt_le_weak _ _ Hd0) ]).
+  assert (Hdd : delta n * delta n <= 1 * delta n)
+    by (apply Qmult_le_compat_r; [ exact Hd1 | exact (Qlt_le_weak _ _ Hd0) ]).
+  assert (Hdd0 : 0 <= delta n * delta n).
+  { pose proof (Qmult_le_compat_r 0 (delta n) (delta n) (Qlt_le_weak _ _ Hd0) (Qlt_le_weak _ _ Hd0)) as H0.
+    rewrite Qmult_0_l in H0. exact H0. }
+  rewrite (dq_cube x n). split; lra.
+Qed.
+
 (* ===================================================================== *)
 (*  Капстоун: производная как тень разностного отношения                    *)
 (* ===================================================================== *)
@@ -188,11 +244,13 @@ Theorem derivative_summary :
   (forall n, ~ delta n == 0)
   /\ (forall x n, diffquot f_sq x n == 2 * x + delta n)
   /\ (forall x, converges (diffquot f_sq x) (2 * x))
+  /\ (forall x, converges (diffquot f_cube x) (3 * x * x))
   /\ (forall x, converges (diffquot f_id x) 1)
   /\ (forall c x, converges (diffquot (f_const c) x) 0).
 Proof.
   split; [ exact delta_nonzero |].
   split; [ exact dq_sq |].
   split; [ exact deriv_sq |].
+  split; [ exact deriv_cube |].
   split; [ exact deriv_id | exact deriv_const ].
 Qed.

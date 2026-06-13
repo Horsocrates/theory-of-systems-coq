@@ -14,11 +14,11 @@
    ★ ГРАНИЦА.  Предел 1/2 РАЦИОНАЛЕН ⟹ риманов процесс (n−1)/(2n) сходится ВНУТРЬ Element-стороны —
    интегрирование полинома НЕ выходит за границу финитизации (как и дифференцирование, парно).
 
-   HONEST SCOPE.  Машинно-закрыто, 0 аксиом.  Доказана ЗАКРЫТАЯ ФОРМА римановой суммы (`rsumlin_closed`:
-   Σ = Qof(Σk)·h²) — то есть это НАСТОЯЩАЯ термwise сумма, не подставленная формула — и флагман ∫x=1/2
-   (`integral_x_converges`).  ⚠ ∫x² = 1/3 (через Σk² = (n−1)n(2n−1)/6) НЕ доказывается здесь (мессовая
-   квадратичная сумма) — честно отмечено как обобщение, цитата.  Общий ∫ гладкой функции = арена
-   `RiemannIntegration.v` (цитата).  δ→0 — Архимед (стандартный QArith).
+   HONEST SCOPE.  Машинно-закрыто, 0 аксиом.  Доказаны ЗАКРЫТЫЕ ФОРМЫ обеих римановых сумм
+   (`rsumlin_closed`: Σ = Qof(Σk)·h²; `rsumquad_closed`: Σ = Qof(Σk²)·h³ — НАСТОЯЩИЕ термwise суммы) и
+   ОБА флагмана: ∫x=1/2 (`integral_x_converges`) и ∫x²=1/3 (`integral_xsq_converges`, через
+   6·Σk²=n(n−1)(2n−1)).  Общий ∫xⁿ=1/(n+1) (суммы Фаульхабера/Бернулли) = горизонт; общий ∫ гладкой
+   функции = арена `RiemannIntegration.v` (цитата).  δ→0 — Архимед (стандартный QArith).
 
    Elements: GProc; rsumlin (термwise рим. сумма); sumk (Гаусс Σk над ℕ); Qof (ℕ→ℚ); delta; converges.
    Roles:    δ=роль-сетка (∞-малая); rsumlin=роль-аппроксимация площади; st=роль-тень/интеграл; sumk=Гаусс.
@@ -40,7 +40,7 @@
    ДИАГНОСТИКА (P4): всё конечно-глубинно (Element); δ→0=Архимед; ∫ полинома=Element. ЧЕСТНО: ∫x доказан;
                  ∫x² (Σk²) — цитата; общий ∫ = RiemannIntegration (цитата).
 
-   STATUS: 10 Qed, 0 Admitted, 0 axioms
+   STATUS: 16 Qed, 0 Admitted, 0 axioms
    Author: Horsocrates | Date: June 2026
 *)
 
@@ -65,6 +65,9 @@ Proof.
   intro m. replace (S m) with (m + 1)%nat by lia.
   rewrite Qof_add. assert (H1 : Qof 1 == 1) by reflexivity. rewrite H1. reflexivity.
 Qed.
+
+Lemma Qof_mul : forall a b, Qof (a * b)%nat == Qof a * Qof b.
+Proof. intros a b. unfold Qof. rewrite Nat2Z.inj_mul. rewrite inject_Z_mult. reflexivity. Qed.
 
 Lemma Qof_pos : forall m, 0 < Qof (S m).
 Proof. intro m. unfold Qof, Qlt. simpl. lia. Qed.
@@ -91,6 +94,28 @@ Proof.
 Qed.
 
 (* ===================================================================== *)
+(*  ★ Сумма квадратов Σk² → ℚ-тождество 6·Σk² = n(n−1)(2n−1)               *)
+(* ===================================================================== *)
+
+Fixpoint sumk2 (n : nat) : nat :=
+  match n with O => O | S k => sumk2 k + k * k end.
+
+(** ★ Σ_{j<n} j² в ℚ: 6·Σk² = n·(n−1)·(2n−1) (индукция, без ℕ-вычитания). *)
+Lemma sumk2_closed_Q : forall n,
+  6 * Qof (sumk2 n) == Qof n * (Qof n - 1) * (2 * Qof n - 1).
+Proof.
+  induction n as [|k IH].
+  - assert (H0 : Qof (sumk2 0) == 0) by reflexivity.
+    assert (H0' : Qof 0 == 0) by reflexivity.
+    rewrite H0, H0'. ring.
+  - change (sumk2 (S k)) with (sumk2 k + k * k)%nat.
+    rewrite Qof_add. rewrite Qof_mul. rewrite (Qof_S k).
+    setoid_replace ((Qof k + 1) * ((Qof k + 1) - 1) * (2 * (Qof k + 1) - 1))
+      with (Qof k * (Qof k - 1) * (2 * Qof k - 1) + 6 * (Qof k * Qof k)) by ring.
+    rewrite <- IH. ring.
+Qed.
+
+(* ===================================================================== *)
 (*  Термwise левая риманова сумма для f(x)=x и её закрытая форма            *)
 (* ===================================================================== *)
 
@@ -105,6 +130,19 @@ Proof.
   - assert (H0 : Qof (sumk 0) == 0) by reflexivity. cbn [rsumlin]. rewrite H0. ring.
   - cbn [rsumlin]. rewrite IH.
     change (sumk (S k)) with (sumk k + k)%nat. rewrite Qof_add. ring.
+Qed.
+
+(** rsumquad n h = Σ_{k=0}^{n-1} (k·h)²·h  — интегранд f(x)=x². *)
+Fixpoint rsumquad (n : nat) (h : Q) : Q :=
+  match n with O => 0 | S k => rsumquad k h + (Qof k * h) * (Qof k * h) * h end.
+
+(** ★ Закрытая форма квадратичной суммы = Qof(Σk²)·h³. *)
+Lemma rsumquad_closed : forall n h, rsumquad n h == Qof (sumk2 n) * h * h * h.
+Proof.
+  induction n as [|k IH]; intro h.
+  - assert (H0 : Qof (sumk2 0) == 0) by reflexivity. cbn [rsumquad]. rewrite H0. ring.
+  - cbn [rsumquad]. rewrite IH.
+    change (sumk2 (S k)) with (sumk2 k + k * k)%nat. rewrite Qof_add. rewrite Qof_mul. ring.
 Qed.
 
 (** Интеграл-кандидат: риманова сумма с n точками и сеткой 1/n. *)
@@ -122,6 +160,22 @@ Proof.
   rewrite HA. field. exact Hq.
 Qed.
 
+(** Интеграл-кандидат для x²: риманова сумма с n точками и сеткой 1/n. *)
+Definition integral_xsq (n : nat) : Q := rsumquad n (/ Qof n).
+
+(** ★ ∫-сумма для x² в явном виде: 1/3 − (1/2)/n + (1/6)/n². *)
+Lemma integral_xsq_closed : forall m,
+  integral_xsq (S m) == (1#3) - (1#2) * / Qof (S m) + (1#6) * (/ Qof (S m)) * (/ Qof (S m)).
+Proof.
+  intro m. unfold integral_xsq. rewrite rsumquad_closed.
+  pose proof (Qof_pos m) as Hpos.
+  assert (Hq : ~ Qof (S m) == 0).
+  { intro Hc. rewrite Hc in Hpos. exact (Qlt_irrefl 0 Hpos). }
+  assert (HA : Qof (sumk2 (S m)) == Qof (S m) * (Qof (S m) - 1) * (2 * Qof (S m) - 1) / 6).
+  { pose proof (sumk2_closed_Q (S m)) as HC. rewrite <- HC. field. }
+  rewrite HA. field. exact Hq.
+Qed.
+
 (* ===================================================================== *)
 (*  Бесконечно малая сетка δ=1/(n+1) → 0 (Архимед, из DerivativeViaInfinitesimal) *)
 (* ===================================================================== *)
@@ -133,6 +187,18 @@ Definition delta (m : nat) : Q := / Qof (S m).
 
 Lemma delta_pos : forall m, 0 < delta m.
 Proof. intro m. unfold delta. apply Qinv_lt_0_compat. apply Qof_pos. Qed.
+
+(** ★ δ ≤ 1 на каждом шаге (1/(m+1) ≤ 1) — для оценки δ² ≤ δ в ∫x². *)
+Lemma delta_le_1 : forall m, delta m <= 1.
+Proof.
+  intro m. unfold delta.
+  assert (Hp : 0 < Qof (S m)) by apply Qof_pos.
+  assert (Hne : ~ Qof (S m) == 0) by (intro Hc; rewrite Hc in Hp; exact (Qlt_irrefl 0 Hp)).
+  assert (Hinv : 0 < / Qof (S m)) by (apply Qinv_lt_0_compat; exact Hp).
+  assert (H1 : 1 <= Qof (S m)) by (unfold Qof, Qle; simpl; lia).
+  pose proof (Qmult_le_compat_r 1 (Qof (S m)) (/ Qof (S m)) H1 (Qlt_le_weak _ _ Hinv)) as H.
+  rewrite Qmult_1_l in H. rewrite (Qmult_inv_r (Qof (S m)) Hne) in H. exact H.
+Qed.
 
 Lemma delta_converges_0 : converges delta 0.
 Proof.
@@ -182,6 +248,29 @@ Proof.
     split; lra.
 Qed.
 
+(** ★★ ∫₀¹ x² = 1/3: риманова сумма 1/3 − 1/(2n) + 1/(6n²); остаток исчезает (δ→0).
+    Сетка δ нигде не нуль (суммировали законно), 1/3 достигается лишь в тени. *)
+Lemma integral_xsq_converges : converges integral_xsq (1#3).
+Proof.
+  intros eps Heps.
+  destruct (delta_converges_0 eps Heps) as [N HN].
+  exists (S N). intros n Hn.
+  destruct n as [|m].
+  - exfalso. lia.
+  - assert (Hm : (N <= m)%nat) by lia.
+    destruct (HN m Hm) as [D1 D2].
+    pose proof (delta_pos m) as Dp. pose proof (delta_le_1 m) as Dl.
+    rewrite (integral_xsq_closed m).
+    unfold delta in D1, D2, Dp, Dl.
+    assert (Hdd0 : 0 <= / Qof (S m) * / Qof (S m)).
+    { pose proof (Qmult_le_compat_r 0 (/ Qof (S m)) (/ Qof (S m))
+        (Qlt_le_weak _ _ Dp) (Qlt_le_weak _ _ Dp)) as H0.
+      rewrite Qmult_0_l in H0. exact H0. }
+    assert (Hdd : / Qof (S m) * / Qof (S m) <= 1 * / Qof (S m)).
+    { apply Qmult_le_compat_r; [ exact Dl | exact (Qlt_le_weak _ _ Dp) ]. }
+    split; lra.
+Qed.
+
 (* ===================================================================== *)
 (*  Капстоун: интеграл как тень гиперконечной суммы                         *)
 (* ===================================================================== *)
@@ -195,8 +284,12 @@ Qed.
 Theorem hyperfinite_sum_summary :
   (forall n h, rsumlin n h == Qof (sumk n) * h * h)
   /\ (forall m, integral_x (S m) == (1#2) - (1#2) * / Qof (S m))
-  /\ converges integral_x (1#2).
+  /\ converges integral_x (1#2)
+  /\ (forall n h, rsumquad n h == Qof (sumk2 n) * h * h * h)
+  /\ converges integral_xsq (1#3).
 Proof.
   split; [ exact rsumlin_closed |].
-  split; [ exact integral_x_closed | exact integral_x_converges ].
+  split; [ exact integral_x_closed |].
+  split; [ exact integral_x_converges |].
+  split; [ exact rsumquad_closed | exact integral_xsq_converges ].
 Qed.
