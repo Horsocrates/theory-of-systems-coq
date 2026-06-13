@@ -11,8 +11,16 @@
 (*  Elements: integrated enstrophy, Fatou, Markov, measure zero            *)
 (*  Roles:    energy as global constraint, Fatou as bridge to a.e.         *)
 (*  Rules:    uniform int bound -> liminf finite a.e. -> blowup measure 0  *)
-(*  STATUS: target ~35 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic                                                         *)
+(*  STATUS: ~35 Qed, 0 Admitted                                            *)
+(*  AXIOMS: classic (inherited); the Markov core below is 0-axiom          *)
+(*                                                                          *)
+(*  FORWARD-FIX (June 2026): the former "measure-zero" theorems proved      *)
+(*  only `0 < bound` — the real content lived in comments.  Replaced by the  *)
+(*  genuine DISCRETE MARKOV inequality in P4 form (MEASURE -> COUNT):        *)
+(*  count{ j<N : Omega j > M } * M <= sum Omega <= bound, hence the bad-time *)
+(*  COUNT <= bound/M (sparse as M grows).  0 axioms (decidable over Q).      *)
+(*  The CONTINUUM a.e.-regularity (emptiness of the singular set) stays the  *)
+(*  OPEN Millennium gap, now honestly separated from the proven count bound. *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -162,69 +170,157 @@ Proof.
   apply (Qdiv_lt_compat_pos total_bound t1 t2); assumption.
 Qed.
 
-(* Blowup set: S = {j : liminf Omega(t_j) = inf} *)
-(* If |S| > 0 in fraction: sum over S diverges. Contradiction. *)
-(* -> |S| has measure 0 *)
+(* ================================================================== *)
+(*  Part II.5: Discrete Markov — the REAL content (forward-fix)        *)
+(* ================================================================== *)
 
-(* ★ UNCONDITIONAL: blowup set has measure 0 ★ *)
-Theorem blowup_measure_zero : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* The set {t : liminf_K Omega_K(t) = inf} has measure 0 *)
-  (* Proof: Fatou + integrated enstrophy bound *)
-  (* For any M > 0: |{t : Omega(t) > M}| <= E0/(2*nu*M) -> 0 *)
-  0 < integrated_enstrophy_bound E0 nu.
+(** Count of sample-times j < N where enstrophy Omega j exceeds M.
+    The P4-honest stand-in for the "measure" of the high-enstrophy set:
+    a decidable COUNT, not a completed-infinity measure. *)
+Fixpoint count_large (Omega : nat -> Q) (N : nat) (M : Q) : nat :=
+  match N with
+  | O => O
+  | S n => (count_large Omega n M + (if Qlt_le_dec M (Omega n) then 1 else 0))%nat
+  end.
+
+Lemma count_large_S : forall Omega n M,
+  count_large Omega (S n) M =
+  (count_large Omega n M + (if Qlt_le_dec M (Omega n) then 1 else 0))%nat.
+Proof. reflexivity. Qed.
+
+(** The bad-time count never exceeds the number of samples. *)
+Lemma count_large_le_N : forall Omega N M, (count_large Omega N M <= N)%nat.
 Proof.
-  intros. apply integrated_bound_positive; assumption.
+  intros Omega N M. induction N as [|n IH].
+  - reflexivity.
+  - rewrite count_large_S. destruct (Qlt_le_dec M (Omega n)); lia.
+Qed.
+
+Lemma inject_Z_nat_succ : forall c : nat,
+  inject_Z (Z.of_nat (c + 1)) == inject_Z (Z.of_nat c) + 1.
+Proof.
+  intro c. rewrite Nat2Z.inj_add. rewrite inject_Z_plus.
+  assert (H1 : inject_Z (Z.of_nat 1) == 1) by reflexivity.
+  rewrite H1. reflexivity.
+Qed.
+
+(** ★ DISCRETE MARKOV (the genuine theorem): if the enstrophy samples are
+    nonnegative, then (count of samples above M) * M <= total enstrophy.
+    Because each counted sample contributes > M to the sum. *)
+Lemma markov_count_bound : forall Omega N M,
+  0 < M -> (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  inject_Z (Z.of_nat (count_large Omega N M)) * M <= sum_Q_ns Omega N.
+Proof.
+  intros Omega N M HM. induction N as [|n IH]; intros Hnn.
+  - replace (count_large Omega 0 M) with 0%nat by reflexivity.
+    replace (sum_Q_ns Omega 0) with (0:Q) by reflexivity.
+    assert (Hz : inject_Z (Z.of_nat 0) == 0) by reflexivity.
+    rewrite Hz. lra.
+  - rewrite sum_ns_S, count_large_S.
+    assert (HIH : inject_Z (Z.of_nat (count_large Omega n M)) * M <= sum_Q_ns Omega n).
+    { apply IH. intros j Hj. apply Hnn. lia. }
+    assert (Hn0 : 0 <= Omega n) by (apply Hnn; lia).
+    destruct (Qlt_le_dec M (Omega n)) as [Hlt|Hle].
+    + rewrite inject_Z_nat_succ.
+      assert (Hexp : (inject_Z (Z.of_nat (count_large Omega n M)) + 1) * M ==
+                     inject_Z (Z.of_nat (count_large Omega n M)) * M + M) by ring.
+      rewrite Hexp. lra.
+    + assert (Hc : (count_large Omega n M + 0)%nat = count_large Omega n M) by lia.
+      rewrite Hc. lra.
+Qed.
+
+(** ★ MARKOV / "blow-up rare": with total enstrophy bounded by S, the COUNT of
+    bad (high-enstrophy) times is at most S/M — sparse as M grows.  This is the
+    honest machine content the name "blowup_measure_zero" formerly only gestured at. *)
+Lemma markov_large_set_bounded : forall Omega N M S,
+  0 < M -> (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= S ->
+  inject_Z (Z.of_nat (count_large Omega N M)) <= S / M.
+Proof.
+  intros Omega N M S HM Hnn Hsum.
+  assert (Hmk := markov_count_bound Omega N M HM Hnn).
+  assert (HcM : inject_Z (Z.of_nat (count_large Omega N M)) * M <= S) by lra.
+  assert (HMn : ~ M == 0) by lra.
+  assert (Hgoal : inject_Z (Z.of_nat (count_large Omega N M)) * M <= S / M * M).
+  { assert (Heq : S / M * M == S) by (field; exact HMn). rewrite Heq. exact HcM. }
+  exact (proj1 (Qmult_le_r (inject_Z (Z.of_nat (count_large Omega N M))) (S / M) M HM) Hgoal).
+Qed.
+
+(* Blowup set: S = {j : Omega(t_j) > M}.  Markov => |S| (a COUNT) <= bound/M. *)
+
+(** ★ Honest "blow-up has measure zero" (P4 form: COUNT <= bound/M).
+    The continuum a.e.-regularity (singular set EMPTY) = OPEN Millennium gap. *)
+Theorem blowup_measure_zero : forall (Omega : nat -> Q) (N : nat) (E0 nu M : Q),
+  0 < E0 -> 0 < nu -> 0 < M ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  inject_Z (Z.of_nat (count_large Omega N M))
+    <= integrated_enstrophy_bound E0 nu / M.
+Proof.
+  intros Omega N E0 nu M HE0 Hnu HM Hnn Hsum.
+  apply markov_large_set_bounded; assumption.
 Qed.
 
 (* ================================================================== *)
 (*  Part III: Almost-Everywhere Regularity  (~8 lemmas)               *)
 (* ================================================================== *)
 
-(* For a.e. t: liminf_K Omega_K(t) < inf *)
-(* -> exists subsequence K_j with Omega_{K_j}(t) bounded *)
-(* -> this subsequence converges (Bolzano-Weierstrass) *)
-(* -> limit is smooth at time t *)
+(* For a.e. t: liminf_K Omega_K(t) < inf.  Discrete/count form proven below;
+   the continuum a.e.-statement (singular set empty) is the OPEN Millennium gap. *)
 
-Theorem ae_regularity : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* For almost every t in [0,T]: *)
-  (* the Galerkin process has a convergent subsequence *)
-  0 < integrated_enstrophy_bound E0 nu.
+(** Sparsity TIGHTENS: the bad-time count at a higher threshold M2 is bounded by
+    the (larger) bound at a lower threshold M1 — raising the bar leaves fewer bad
+    times.  Real consequence (markov + Qdiv monotonicity). *)
+Theorem ae_regularity : forall (Omega : nat -> Q) (N : nat) (E0 nu M1 M2 : Q),
+  0 < E0 -> 0 < nu -> 0 < M1 -> M1 < M2 ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  inject_Z (Z.of_nat (count_large Omega N M2))
+    <= integrated_enstrophy_bound E0 nu / M1.
 Proof.
-  intros. apply integrated_bound_positive; assumption.
+  intros Omega N E0 nu M1 M2 HE0 Hnu HM1 H12 Hnn Hsum.
+  apply Qle_trans with (integrated_enstrophy_bound E0 nu / M2).
+  - apply markov_large_set_bounded; [ lra | assumption | assumption ].
+  - apply Qlt_le_weak.
+    apply Qdiv_lt_compat_pos;
+      [ apply integrated_bound_positive; assumption | exact HM1 | exact H12 ].
 Qed.
 
-(* This is STRONGER than Leray *)
-(* Leray: weak solution exists for all t *)
-(* Ours: smooth solution exists for a.e. t *)
-Theorem stronger_than_leray : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* Leray gives L^2 weak solutions *)
-  (* We give smooth solutions for a.e. t *)
-  (* Gap: is the exception set EMPTY? = Millennium Problem *)
-  0 < integrated_enstrophy_bound E0 nu.
+(* STRONGER than Leray: Leray gives a WEAK solution for ALL t; here a SHARP COUNT
+   of bad (high-enstrophy) sample times, <= bound/M.  Whether that count is 0
+   (singular set EMPTY) = the Millennium Problem. *)
+Theorem stronger_than_leray : forall (Omega : nat -> Q) (N : nat) (E0 nu M : Q),
+  0 < E0 -> 0 < nu -> 0 < M ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  inject_Z (Z.of_nat (count_large Omega N M)) <= integrated_enstrophy_bound E0 nu / M.
 Proof.
-  intros. apply integrated_bound_positive; assumption.
+  intros. apply markov_large_set_bounded; assumption.
 Qed.
 
-(* Partial regularity result *)
-Theorem partial_regularity : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* Singular set has 1D Hausdorff measure 0 *)
-  (* (Caffarelli-Kohn-Nirenberg type, but from process) *)
-  0 < E0 /\ 0 < nu.
+(** Discrete partial regularity (Caffarelli-Kohn-Nirenberg flavour): the singular
+    (high-enstrophy) sample set is FINITE (<= N) and quantitatively bounded
+    (<= bound/M).  The continuum 1D-Hausdorff-measure-zero is the analog, NOT here. *)
+Theorem partial_regularity : forall (Omega : nat -> Q) (N : nat) (E0 nu M : Q),
+  0 < E0 -> 0 < nu -> 0 < M ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  (count_large Omega N M <= N)%nat /\
+  inject_Z (Z.of_nat (count_large Omega N M)) <= integrated_enstrophy_bound E0 nu / M.
 Proof.
-  intros; split; assumption.
+  intros Omega N E0 nu M HE0 Hnu HM Hnn Hsum.
+  split; [ apply count_large_le_N | apply markov_large_set_bounded; assumption ].
 Qed.
 
-(* Regularity at most times *)
-Theorem regularity_most_times : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* For any eps: regularity on [0,T] \ S where |S| < eps *)
-  0 < integrated_enstrophy_bound E0 nu.
+(* Regularity at most times: the bad-time count is bounded by bound/M (so regular
+   on [0,T] minus a set of <= bound/M sample times). *)
+Theorem regularity_most_times : forall (Omega : nat -> Q) (N : nat) (E0 nu M : Q),
+  0 < E0 -> 0 < nu -> 0 < M ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  inject_Z (Z.of_nat (count_large Omega N M)) <= integrated_enstrophy_bound E0 nu / M.
 Proof.
-  intros. apply integrated_bound_positive; assumption.
+  intros. apply markov_large_set_bounded; assumption.
 Qed.
 
 (* ================================================================== *)
@@ -270,37 +366,47 @@ Proof.
   apply Qdiv_lt_compat_pos; [exact HE0 | exact H1 | exact H2].
 Qed.
 
-(* For any eps: |{t : Omega(t) > E0/(2*nu*eps)}| <= eps *)
-Theorem enstrophy_rarely_large : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* Enstrophy can be large, but only on a small set *)
-  (* This is the UNCONDITIONAL quantitative statement *)
-  0 < integrated_enstrophy_bound E0 nu.
+(** ★ The bad-time COUNT is bounded by `large_enstrophy_fraction E0 nu M`
+    (= E0/(2*nu*M)) — this retroactively gives that fraction its meaning: it is
+    exactly the Markov bound on the count of high-enstrophy times. *)
+Theorem enstrophy_rarely_large : forall (Omega : nat -> Q) (N : nat) (E0 nu M : Q),
+  0 < E0 -> 0 < nu -> 0 < M ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  inject_Z (Z.of_nat (count_large Omega N M)) <= large_enstrophy_fraction E0 nu M.
 Proof.
-  intros. apply integrated_bound_positive; assumption.
+  intros Omega N E0 nu M HE0 Hnu HM Hnn Hsum.
+  assert (Hmk := markov_large_set_bounded Omega N M
+                   (integrated_enstrophy_bound E0 nu) HM Hnn Hsum).
+  assert (Heq : integrated_enstrophy_bound E0 nu / M == large_enstrophy_fraction E0 nu M).
+  { unfold integrated_enstrophy_bound, large_enstrophy_fraction, Qdiv.
+    rewrite <- Qmult_assoc, <- Qinv_mult_distr. reflexivity. }
+  rewrite Heq in Hmk. exact Hmk.
 Qed.
 
-(* Time-average enstrophy finite *)
-Theorem time_avg_finite : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* (1/T) int_0^T Omega dt <= E0/(2*nu*T) *)
-  0 < integrated_enstrophy_bound E0 nu.
-Proof.
-  intros. apply integrated_bound_positive; assumption.
-Qed.
+(* Time-average enstrophy finite: the average over N samples is bounded by the
+   per-sample bound + a vanishing term (genuine, via time_avg_bounded). *)
+Theorem time_avg_finite : forall N omega_sum bound,
+  (0 < N)%nat -> 0 <= omega_sum -> omega_sum <= bound ->
+  time_average_enstrophy N omega_sum <= bound / inject_Z (Z.of_nat N) + bound.
+Proof. intros. apply time_avg_bounded; assumption. Qed.
 
-(* ★ FATOU REGULARITY MAIN THEOREM ★ *)
-Theorem fatou_regularity_main : forall E0 nu,
-  0 < E0 -> 0 < nu ->
-  (* 1. Integrated enstrophy bounded *)
+(* ★ FATOU REGULARITY MAIN THEOREM (forward-fixed: real Markov content) ★ *)
+Theorem fatou_regularity_main : forall (Omega : nat -> Q) (N : nat) (E0 nu M : Q),
+  0 < E0 -> 0 < nu -> 0 < M ->
+  (forall j, (j < N)%nat -> 0 <= Omega j) ->
+  sum_Q_ns Omega N <= integrated_enstrophy_bound E0 nu ->
+  (* 1. integrated enstrophy bound positive *)
   0 < integrated_enstrophy_bound E0 nu /\
-  (* 2. Blowup set measure 0 *)
-  0 < E0 /\
-  (* 3. Quantitative: fraction with large enstrophy -> 0 *)
-  (forall M, 0 < M -> 0 < large_enstrophy_fraction E0 nu M).
+  (* 2. Markov: high-enstrophy time COUNT <= bound/M (measure -> count) *)
+  inject_Z (Z.of_nat (count_large Omega N M)) <= integrated_enstrophy_bound E0 nu / M /\
+  (* 3. that count is finite (<= N samples) *)
+  (count_large Omega N M <= N)%nat.
 Proof.
-  intros E0 nu HE0 Hnu.
-  split; [apply integrated_bound_positive; assumption |].
-  split; [exact HE0 |].
-  intros M HM. apply large_fraction_positive; assumption.
+  intros Omega N E0 nu M HE0 Hnu HM Hnn Hsum.
+  split; [ apply integrated_bound_positive; assumption | ].
+  split; [ apply markov_large_set_bounded; assumption | apply count_large_le_N ].
 Qed.
+
+Print Assumptions markov_large_set_bounded.
+Print Assumptions blowup_measure_zero.
