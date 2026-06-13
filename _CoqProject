@@ -2015,3 +2015,9 @@ src/foundation/KnowledgeError.v
 src/foundation/KnowledgeFinitization.v
 src/foundation/KnowledgeSubject.v
 src/foundation/KnowledgeCollective.v
+src/foundation/KnowledgeProbabilityKolmogorov.v
+src/foundation/KnowledgeDepthCrossVertical.v
+src/foundation/KnowledgeInteractionResolution.v
+src/foundation/KnowledgeDiagonalBridge.v
+src/foundation/KnowledgeDistinctionGrounding.v
+src/foundation/KnowledgeSynthesis.v
