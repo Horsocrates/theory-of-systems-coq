@@ -2021,3 +2021,11 @@ src/foundation/KnowledgeInteractionResolution.v
 src/foundation/KnowledgeDiagonalBridge.v
 src/foundation/KnowledgeDistinctionGrounding.v
 src/foundation/KnowledgeSynthesis.v
+src/foundation/ERRRankAsymmetry.v
+src/foundation/ERRComposition.v
+src/foundation/ERRRepresentation.v
+src/foundation/ERRProductUniversal.v
+src/foundation/ERRSystemBridge.v
+src/foundation/ERRIrreducible.v
+src/foundation/ERRActualization.v
+src/foundation/ERRBeingAndStatus.v
