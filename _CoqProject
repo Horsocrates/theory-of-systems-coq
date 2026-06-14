@@ -2045,3 +2045,7 @@ src/foundation/ERREmergenceMeasure.v
 src/foundation/ERRDynamics.v
 src/foundation/ERRDynamicsArrow.v
 src/foundation/ERRDynamicsGroupBasin.v
+src/foundation/ERRDynamicsConjugacy.v
+src/foundation/ERRDynamicsAction.v
+src/foundation/ERRDynamicsInvariant.v
+src/foundation/ERRDynamicsLyapunov.v
