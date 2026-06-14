@@ -2057,3 +2057,4 @@ src/foundation/ERRFirstIso.v
 src/foundation/ERRTerminalInitial.v
 src/foundation/ERRFiniteQuotient.v
 src/foundation/ERRProductGeneral.v
+src/foundation/ERRTierIIResidue.v
