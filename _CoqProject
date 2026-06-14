@@ -2052,3 +2052,5 @@ src/foundation/ERRDynamicsLyapunov.v
 src/foundation/ERRCoproduct.v
 src/foundation/ERRCoproductEmergence.v
 src/foundation/ERRQuotient.v
+src/foundation/ERRIso.v
+src/foundation/ERRFirstIso.v
