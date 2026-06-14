@@ -2064,3 +2064,4 @@ src/foundation/ERREnrichedComposition.v
 src/foundation/ERREqualizer.v
 src/foundation/ERRCoequalizer.v
 src/foundation/ERRLevelFunctor.v
+src/foundation/ERRLevelTower.v
