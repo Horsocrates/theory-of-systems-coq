@@ -2021,6 +2021,8 @@ src/foundation/KnowledgeInteractionResolution.v
 src/foundation/KnowledgeDiagonalBridge.v
 src/foundation/KnowledgeDistinctionGrounding.v
 src/foundation/KnowledgeSynthesis.v
+src/foundation/KnowledgeSourceOrder.v
+src/foundation/KnowledgeIrreversible.v
 src/foundation/ERRRankAsymmetry.v
 src/foundation/ERRComposition.v
 src/foundation/ERRRepresentation.v
@@ -2029,3 +2031,17 @@ src/foundation/ERRSystemBridge.v
 src/foundation/ERRIrreducible.v
 src/foundation/ERRActualization.v
 src/foundation/ERRBeingAndStatus.v
+src/foundation/ERREntanglement.v
+src/foundation/ERREntanglementMeasure.v
+src/foundation/ERRMonoidal.v
+src/foundation/ERRCombinationCalculus.v
+src/foundation/ERRHilbertProcess.v
+src/foundation/ERRProcessConstitution.v
+src/foundation/ERROperator.v
+src/foundation/ERRProperty.v
+src/foundation/ERREmergenceTaxonomy.v
+src/foundation/ERREmergenceSystem.v
+src/foundation/ERREmergenceMeasure.v
+src/foundation/ERRDynamics.v
+src/foundation/ERRDynamicsArrow.v
+src/foundation/ERRDynamicsGroupBasin.v
