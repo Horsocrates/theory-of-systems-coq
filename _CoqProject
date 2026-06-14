@@ -2060,3 +2060,4 @@ src/foundation/ERRProductGeneral.v
 src/foundation/ERRTierIIResidue.v
 src/foundation/ERR2Category.v
 src/foundation/ERR2CategoryHom.v
+src/foundation/ERREnrichedComposition.v
