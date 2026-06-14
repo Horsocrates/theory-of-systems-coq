@@ -2049,3 +2049,5 @@ src/foundation/ERRDynamicsConjugacy.v
 src/foundation/ERRDynamicsAction.v
 src/foundation/ERRDynamicsInvariant.v
 src/foundation/ERRDynamicsLyapunov.v
+src/foundation/ERRCoproduct.v
+src/foundation/ERRCoproductEmergence.v
