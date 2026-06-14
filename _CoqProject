@@ -2054,3 +2054,5 @@ src/foundation/ERRCoproductEmergence.v
 src/foundation/ERRQuotient.v
 src/foundation/ERRIso.v
 src/foundation/ERRFirstIso.v
+src/foundation/ERRTerminalInitial.v
+src/foundation/ERRFiniteQuotient.v
