@@ -2058,3 +2058,5 @@ src/foundation/ERRTerminalInitial.v
 src/foundation/ERRFiniteQuotient.v
 src/foundation/ERRProductGeneral.v
 src/foundation/ERRTierIIResidue.v
+src/foundation/ERR2Category.v
+src/foundation/ERR2CategoryHom.v
