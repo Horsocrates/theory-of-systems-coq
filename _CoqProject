@@ -2061,3 +2061,4 @@ src/foundation/ERRTierIIResidue.v
 src/foundation/ERR2Category.v
 src/foundation/ERR2CategoryHom.v
 src/foundation/ERREnrichedComposition.v
+src/foundation/ERREqualizer.v
