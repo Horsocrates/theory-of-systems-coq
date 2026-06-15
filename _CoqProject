@@ -2068,3 +2068,4 @@ src/foundation/ERRLevelTower.v
 src/foundation/ERRImageFactorization.v
 src/foundation/ERRGrandTour.v
 src/foundation/ERRProcessBridge.v
+src/foundation/ERRSubobjectClassifier.v
