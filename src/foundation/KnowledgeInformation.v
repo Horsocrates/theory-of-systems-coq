@@ -2,7 +2,7 @@
       witness watershed where INFORMATION enters
 
     A formal base for the "Теория Знания" branch (derivation "Знание", §2 the ladder, §3 the E/R/R
-    system, §4 the field, §5 the three types).  It pins the rung that connects knowledge to
+    system, §4 the field, §5 знание-о and its first-hand positions).  It pins the rung that connects knowledge to
     INFORMATION: information = data become meaning FOR A WITNESS, and one resolved binary
     distinction = 1 bit.  It unifies the two existing F-39 files:
       - KnowledgeProcess.v  (qualitative anti-omniscience: the witnessed record),
@@ -55,9 +55,11 @@
               distinctions resolved FOR a witness"; one binary distinction = 1 bit (L2/L3
               side_binarity; DyadicBits).  info_bits = count of resolved distinctions ≤ field;
               unresolved = the зазор -> KnowledgeGap's race over distinctions.
-    Three types (§5) = three sides of a system; completability = the race regime: KThat (finite
-              fact, bounded) completes; KHow (unbounded process) diverges; KPresence (co-presence)
-              is the base both rest on.
+    знание-о and its sources (§5): знание-о (KThat) is the CONTENT.  присутствие is the observer's
+              POSITION relative to the observed: KPresence = извне (observing), KHow = изнутри
+              (= знание-как) — both deliver знание-о (not «three kinds»).  Completability by source:
+              KThat (bounded fact) completes; KHow (inside an unbounded process) diverges; KPresence
+              (a single observation) completes.
 
     Honest scope: the ladder is a clean type-theoretic encoding of §2–§5 + the watershed; the
     theorems are elementary (filter/list facts + the KnowledgeGap bridges).  The value is a
@@ -66,7 +68,7 @@
     connects to information (bit = a resolved distinction), and leaves hooks for the
     «Взаимодействие» / «Глубина» branches.
 
-    STATUS: 18 Qed, 0 Admitted, 0 axioms
+    STATUS: 19 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: June 2026
 *)
 
@@ -250,30 +252,48 @@ Proof.
 Qed.
 
 (* ===================================================================== *)
-(*  PART V — the three types (§5) as the three sides of a system           *)
+(*  PART V — знание-о (the CONTENT) and its two first-hand POSITIONS        *)
 (* ===================================================================== *)
 
-(** §5: a system has exactly three sides — what it IS (element), how it STANDS (state/role),
-    how it GOES (process/rule) — so there are exactly three knowledge types. *)
+(** Author's correction 2026-06-16: знание-о is NOT one of «three kinds».  знание-о (KThat) is the
+    CONTENT — the сводка of all that is knowable about a system (across its E/R/R sides:
+    element / role / rule — the OBJECT's structure).  присутствие is the observer's POSITION relative
+    to the observed (inside/outside): KPresence = присутствие-извне (observing), KHow = присутствие-
+    изнутри (= знание-как, passing through) — the two POSITIONS, BOTH delivering знание-о
+    (KnowledgeInsight §8, both_positions_yield_that); передача is the second-hand source (the
+    distillate).  These tags name ONE content and the positions of присутствие — NOT three parallel
+    kinds. *)
 Inductive KnowType := KPresence | KThat | KHow.
 
-(** Completability follows the phase transition: a finite state completes; an unbounded process
-    does not; co-presence is the minimal base. *)
+(** знание-о (KThat) is the CONTENT; присутствие (KPresence) and знание-как (KHow) are POSITIONS. *)
+Definition is_position (t : KnowType) : bool :=
+  match t with KPresence => true | KThat => false | KHow => true end.
+
+(** ★ ONE content, two first-hand positions: знание-о (KThat) is the content (not a position);
+    присутствие and знание-как are the positions.  (Counters the old «three parallel kinds».) *)
+Theorem that_is_content_others_positions :
+  is_position KThat = false /\ is_position KPresence = true /\ is_position KHow = true.
+Proof. repeat split; reflexivity. Qed.
+
+(** Completability of знание-о by its SOURCE: знание-о of a bounded fact completes; знание-о gathered
+    by ongoing прохождение (inside an unbounded process) does not; присутствие (a single meeting) is
+    the minimal base. *)
 Definition completable (t : KnowType) : Prop :=
   match t with
-  | KPresence => True     (* a single meeting *)
-  | KThat     => True     (* finite fact (§5); realized by finite_fact_fully_resolved *)
-  | KHow      => False    (* unbounded process (§7); refuted by unresolved_distinctions_diverge *)
+  | KPresence => True     (* присутствие: a single meeting completes *)
+  | KThat     => True     (* знание-о of a bounded fact; realized by finite_fact_fully_resolved *)
+  | KHow      => False    (* знание-о via inside-process (знание-как); diverges, unresolved_distinctions_diverge *)
   end.
 
-(** ★★ The two informative types ARE the two regimes of the distinction-race: KThat (bounded)
-    completes, KHow (outrunning) leaves an ever-growing residue. *)
+(** ★★ знание-о completes or diverges BY ITS SOURCE — the two regimes of the distinction-race:
+    знание-о of a bounded fact (KThat) completes; знание-о gathered by ongoing прохождение inside an
+    unbounded process (the знание-как position, KHow) leaves an ever-growing residue. *)
 Theorem types_follow_the_race :
-  (* KThat: a bounded knowable is fully resolved *)
+  (* знание-о of a bounded knowable is fully resolved *)
   (forall (present : nat -> Data) (resolve : nat -> list Distinction) (cap : nat),
      (forall n, length (present n) <= cap) -> (forall n, n <= length (resolve n)) ->
      exists N, length (present N) <= length (resolve N))
-  /\ (* KHow: an outrunning process leaves divergent unresolved residue *)
+  /\ (* знание-о via an outrunning inside-process leaves divergent residue *)
   (forall (present : nat -> Data) (resolve : nat -> list Distinction) (r g : nat),
      (forall n, length (resolve (S n)) <= length (resolve n) + r) ->
      (forall n, length (present n) + g <= length (present (S n))) ->
@@ -323,7 +343,7 @@ Print Assumptions types_follow_the_race.
 
 (* ========================================================================= *)
 (*  SUMMARY                                                                    *)
-(*  18 Qed, 0 Admitted, 0 axioms.                                            *)
+(*  19 Qed, 0 Admitted, 0 axioms.                                            *)
 (*  A formal base for the Теория Знания branch: the ladder данные ->          *)
 (*  информация -> знание as types, with the WATERSHED as TWO BEARERS — data   *)
 (*  are SOURCE-borne (manifested by the knowable, objective), information      *)
@@ -331,7 +351,8 @@ Print Assumptions types_follow_the_race.
 (*  chain) — where information theory enters (info_bits = resolved            *)
 (*  distinctions, 1 binary distinction = 1 bit).  Reading is grounded (R2)    *)
 (*  and depth-bounded (R3); knowledge resolves <= what was presented; the     *)
-(*  three types (§5) are the two race regimes of KnowledgeGap (KThat          *)
-(*  completes, KHow diverges) plus KPresence.  Unifies KnowledgeProcess.v +   *)
+(*  знание-о completes/diverges by SOURCE (KThat bounded completes, KHow      *)
+(*  inside-process diverges); присутствие/знание-как = positions, передача    *)
+(*  second-hand (§8).  Unifies KnowledgeProcess.v +                            *)
 (*  KnowledgeGap.v under one ladder. *)
 (* ========================================================================= *)

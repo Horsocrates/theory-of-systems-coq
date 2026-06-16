@@ -2023,6 +2023,7 @@ src/foundation/KnowledgeDistinctionGrounding.v
 src/foundation/KnowledgeSynthesis.v
 src/foundation/KnowledgeSourceOrder.v
 src/foundation/KnowledgeIrreversible.v
+src/foundation/KnowledgeDeterminacy.v
 src/foundation/KnowledgeReasoning.v
 src/foundation/KnowledgeReasoningLaws.v
 src/foundation/ERRRankAsymmetry.v

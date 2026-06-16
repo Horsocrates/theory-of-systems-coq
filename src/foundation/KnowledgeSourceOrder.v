@@ -1,9 +1,9 @@
-(** * KnowledgeSourceOrder.v — Теория Знания: the SOURCE-GROUNDING ORDER of the three knowledge types
+(** * KnowledgeSourceOrder.v — Теория Знания: the SOURCE-GROUNDING ORDER of знание-о (the content)
       — знание-О (KThat) is a LOSSY DISTILLATE, sourced from знание-ПРИСУТСТВИЯ (KPresence) AND
       знание-КАК (KHow); the direct meeting is NECESSARY, and the proposition is thinner than the
       lived encounter.
 
-    The branch already has the three types (KnowledgeInformation.v: KnowType = KPresence | KThat |
+    The branch already has these tags (KnowledgeInformation.v: KnowType = KPresence | KThat |
     KHow, §5) and their access modes (KnowledgeInsight.v: presence = the Meeting, not a channel;
     знание-о via the channels усмотрение/дискурсия; знание-как via прохождение).  KnowledgeInformation
     even states the seed in prose: "KPresence is the base both rest on".  This file makes the AUTHOR'S
@@ -11,8 +11,9 @@
     a distillate of the direct encounter.
 
     The thesis, decomposed into three machine-checked claims (over the existing ladder):
-      (1) SOURCE ORDER — there is a grounding order on the types: KPresence (the direct meeting) is the
-          ROOT, KHow draws on presence, and KThat is the SINK, grounded in BOTH presence and how.
+      (1) SOURCE ORDER — both POSITIONS of присутствие are first-hand ROOTS: KPresence (присутствие-
+          извне, observing) and KHow (присутствие-изнутри = знание-как); KThat (знание-о) is the SINK,
+          grounded in both — neither position grounds the other.
       (2) NECESSITY OF THE MEETING — no encounter (no presented data) => no знание-о; equivalently,
           any знание-о implies a meeting happened.  («необходима прямая встреча».)
       (3) LOSSY DISTILLATE — знание-о (read_content) is drawn from the encounter (subset) and is
@@ -27,9 +28,9 @@
 
     ============================== E/R/R разбор ==============================
     Rules (the generative rule first):
-      (1) a SOURCE order on the three types: KPresence (the direct meeting) is the root; KHow draws on
-          presence; KThat is the SINK, distilled from BOTH presence (the encounter-data) and how (the
-          process);
+      (1) a SOURCE order on знание-о's sources: both positions of присутствие are first-hand roots —
+          KPresence (извне) and KHow (изнутри = знание-как), coordinate; KThat is the SINK, distilled
+          from both;
       (2) the distillation is NECESSARY-CONDITIONED on the meeting (no encounter => no знание-о);
       (3) and LOSSY (the proposition is thinner than the lived encounter).
     Roles (L4): grounds (the source order); read_content/inform = the distillation map (presence-data
@@ -61,24 +62,27 @@ From ToS Require Import foundation.KnowledgeInformation.  (* KnowType, Distincti
 From ToS Require Import foundation.KnowledgeInsight.       (* Mode, Meeting, is_channel, fulfills *)
 
 (* ===================================================================== *)
-(*  PART I — the SOURCE-GROUNDING ORDER on the three types                 *)
+(*  PART I — the SOURCE-GROUNDING ORDER: присутствие/как -> знание-о         *)
 (* ===================================================================== *)
 
-(** A type is GROUNDED IN another if it draws its source from it.  KPresence (the direct meeting) is
-    the root; KHow draws on presence; KThat draws on BOTH presence and how — the sink. *)
+(** A type is GROUNDED IN another if it draws its source from it.  присутствие is the observer's
+    POSITION relative to the observed (inside/outside): KPresence = присутствие-Outside (observing),
+    KHow = присутствие-Inside (= знание-как, passing through).  BOTH positions are first-hand ROOTS,
+    and знание-о (KThat) is the SINK grounded in both.  Neither position grounds the other — they are
+    coordinate (corrects the earlier «присутствие grounds знание-как»). *)
 Definition grounds (src tgt : KnowType) : Prop :=
   match src, tgt with
-  | KPresence, KThat => True   (* presence grounds знание-о *)
-  | KPresence, KHow  => True   (* presence grounds знание-как *)
-  | KHow,      KThat => True   (* how grounds знание-о *)
+  | KPresence, KThat => True   (* присутствие-извне (наблюдение)  grounds знание-о *)
+  | KHow,      KThat => True   (* присутствие-изнутри (знание-как) grounds знание-о *)
   | _, _ => False
   end.
 
-(** ★★ THE AUTHOR'S THESIS, type level: знание-о (KThat) is grounded in BOTH присутствие and как. *)
+(** ★★ THE AUTHOR'S THESIS, type level: знание-о (KThat) is grounded in BOTH positions of присутствие
+    — outside (KPresence) and inside (KHow = знание-как). *)
 Lemma that_grounded_in_both : grounds KPresence KThat /\ grounds KHow KThat.
 Proof. split; exact I. Qed.
 
-(** ★ Присутствие is the ROOT: nothing grounds it — it is the direct meeting, the base. *)
+(** ★ присутствие-извне (KPresence) is a ROOT: nothing grounds it — it is direct contact. *)
 Lemma presence_is_root : forall t, ~ grounds t KPresence.
 Proof. intro t. destruct t; simpl; intro H; exact H. Qed.
 
@@ -90,9 +94,17 @@ Proof. intro t. destruct t; simpl; intro H; exact H. Qed.
 Lemma grounds_irrefl : forall t, ~ grounds t t.
 Proof. intro t. destruct t; simpl; intro H; exact H. Qed.
 
-(** ★ Присутствие grounds BOTH informative types — "the base both rest on" (matches the branch prose). *)
-Lemma presence_grounds_both : grounds KPresence KThat /\ grounds KPresence KHow.
-Proof. split; exact I. Qed.
+(** ★ The two positions of присутствие are COORDINATE: neither grounds the other (KPresence is
+    присутствие-извне, KHow = присутствие-изнутри = знание-как), and знание-как is itself a ROOT —
+    both rest directly on contact; знание-о (the sink) is grounded in both.  (Corrects the earlier
+    «присутствие grounds знание-как».) *)
+Lemma positions_coordinate :
+  ~ grounds KPresence KHow /\ ~ grounds KHow KPresence /\ (forall t, ~ grounds t KHow).
+Proof.
+  split; [ simpl; intro H; exact H
+         | split; [ simpl; intro H; exact H
+                  | intro t; destruct t; simpl; intro H; exact H ] ].
+Qed.
 
 (* ===================================================================== *)
 (*  PART II — the grounding REALIZED in the ladder: знание-о = the distillate *)
@@ -179,7 +191,7 @@ Print Assumptions knowledge_that_is_distilled.
 (*  sourced from знание-ПРИСУТСТВИЯ (KPresence) AND знание-КАК (KHow).  PART I  *)
 (*  the SOURCE order `grounds`: that_grounded_in_both (KThat grounded in both); *)
 (*  presence_is_root (the direct meeting, sourced from nothing); that_is_sink   *)
-(*  (the terminal distillate); grounds_irrefl; presence_grounds_both.  PART II  *)
+(*  (the terminal distillate); grounds_irrefl; positions_coordinate.  PART II  *)
 (*  realized in the ladder: that_drawn_from_presence (distillate ⊆ encounter),  *)
 (*  that_via_how (more know-how distills more), no_meeting_no_that +            *)
 (*  that_needs_meeting (the direct встреча is NECESSARY), that_is_distillate    *)

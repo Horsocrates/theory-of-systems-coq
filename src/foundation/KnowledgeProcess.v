@@ -36,9 +36,10 @@
     Generators: one diagonal generator negb b <> b (= circular_dep_is_paradox, Roles.v §XII)
       yields the non-transmissibility of knowledge-how — a finite record UNDERDETERMINES the
       process (finite_record_underdetermines).  The same diagonal as uncountability and halting.
-    Nested: three knowledge types = three sides of a system (presence / that / how); the formal
-      weight is carried by the pair that<->how = completed-value-object (transfers by copying)
-      vs process (does not transfer, only passing-through).
+    Nested: знание-о is the CONTENT; присутствие/знание-как are the two POSITIONS yielding it
+      (KnowledgeInsight §8 — NOT «three kinds»); the formal weight is the contrast знание-о
+      (completed-value-object, transfers by copying) vs the lived passing/прохождение (does not
+      transfer, only passing-through).
 
     Honest scope: the anti-omniscience SKELETON is the unboundedness of nat in epistemic dress
     (forall-exists holds, exists-forall fails) — no heavy new theorem.  The load-bearing PROCESS
