@@ -2072,3 +2072,6 @@ src/foundation/ERRImageFactorization.v
 src/foundation/ERRGrandTour.v
 src/foundation/ERRProcessBridge.v
 src/foundation/ERRSubobjectClassifier.v
+src/stdlib/CrossEntropyDyadic.v
+src/stdlib/WidthProcessKernel.v
+src/stdlib/ExpectationProcess.v
