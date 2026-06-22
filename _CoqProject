@@ -2026,6 +2026,8 @@ src/foundation/KnowledgeIrreversible.v
 src/foundation/KnowledgeDeterminacy.v
 src/foundation/KnowledgeReasoning.v
 src/foundation/KnowledgeReasoningLaws.v
+src/foundation/KnowledgeAnswerExists.v
+src/foundation/PerceptionTriad.v
 src/foundation/ERRRankAsymmetry.v
 src/foundation/ERRComposition.v
 src/foundation/ERRRepresentation.v
@@ -2075,3 +2077,10 @@ src/foundation/ERRSubobjectClassifier.v
 src/stdlib/CrossEntropyDyadic.v
 src/stdlib/WidthProcessKernel.v
 src/stdlib/ExpectationProcess.v
+src/ethics/EthicsStatus.v
+src/ethics/EthicsModality.v
+src/ethics/EthicsEvil.v
+src/ethics/EthicsResponsibility.v
+src/ethics/EthicsPathWisdom.v
+src/ethics/EthicsCapstone.v
+src/ethics/EthicsAI.v
