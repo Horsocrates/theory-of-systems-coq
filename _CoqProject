@@ -2016,6 +2016,7 @@ src/foundation/KnowledgeFinitization.v
 src/foundation/KnowledgeSubject.v
 src/foundation/KnowledgeCollective.v
 src/foundation/KnowledgeProbabilityKolmogorov.v
+src/foundation/KnowledgeProbabilityEpistemic.v
 src/foundation/KnowledgeDepthCrossVertical.v
 src/foundation/KnowledgeInteractionResolution.v
 src/foundation/KnowledgeDiagonalBridge.v
