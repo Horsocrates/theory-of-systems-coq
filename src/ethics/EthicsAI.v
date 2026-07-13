@@ -37,14 +37,14 @@ Record Operator := mkOperator { op_free : bool }.
 
 (** Техника-безопасность ≈ AIInterface «passes typecheck» / нет фоллбэка (абстрактно: порог). *)
 Definition tech_safe (thr : nat) (f : Fill) : Prop := thr <= tech f.
-Definition oriented_pravda (f : Fill) : Prop := volya f = true.
+Definition truth_oriented (f : Fill) : Prop := will f = true.
 
 (** Alignment = ОБЕ оси: технически-безопасно ∧ ориентировано на правду. *)
-Definition aligned (thr : nat) (f : Fill) : Prop := tech_safe thr f /\ oriented_pravda f.
+Definition aligned (thr : nat) (f : Fill) : Prop := tech_safe thr f /\ truth_oriented f.
 
 (** Deceptive-yet-correct: технически безупречно, но воля = не-правда (софист-ИИ). *)
 Definition deceptive_yet_correct (thr : nat) (f : Fill) : Prop :=
-  tech_safe thr f /\ volya f = false.
+  tech_safe thr f /\ will f = false.
 
 (** Техника-безопасность НЕОБХОДИМА для alignment. *)
 Theorem aligned_requires_tech : forall thr f, aligned thr f -> tech_safe thr f.
@@ -57,7 +57,7 @@ Theorem tech_safe_not_imply_aligned :
 Proof.
   exists 0, (mkFill 100 false). split.
   - unfold tech_safe; simpl; lia.
-  - intros [_ Hp]. unfold oriented_pravda in Hp; simpl in Hp; discriminate.
+  - intros [_ Hp]. unfold truth_oriented in Hp; simpl in Hp; discriminate.
 Qed.
 
 (** Софист-ИИ реально есть: техника есть, alignment нет (deceptive misalignment). *)
@@ -66,14 +66,14 @@ Theorem deceptive_yet_correct_exists :
 Proof.
   exists 0, (mkFill 100 false). split.
   - unfold deceptive_yet_correct, tech_safe; simpl; split; [lia | reflexivity].
-  - intros [_ Hp]. unfold oriented_pravda in Hp; simpl in Hp; discriminate.
+  - intros [_ Hp]. unfold truth_oriented in Hp; simpl in Hp; discriminate.
 Qed.
 
 (** Aligned ⇒ НЕ deceptive (правда-ориентация исключает обман). *)
 Theorem aligned_not_deceptive : forall thr f,
   aligned thr f -> ~ deceptive_yet_correct thr f.
 Proof.
-  intros thr f [_ Hp] [_ Hd]. unfold oriented_pravda in Hp.
+  intros thr f [_ Hp] [_ Hd]. unfold truth_oriented in Hp.
   rewrite Hp in Hd. discriminate.
 Qed.
 
@@ -83,7 +83,7 @@ Qed.
 
 (** ИИ наказуем за обман ⟺ ИИ СВОБОДЕН ∧ воля = не-правда. *)
 Definition ai_punishable (ai : Operator) (f : Fill) : Prop :=
-  op_free ai = true /\ volya f = false.
+  op_free ai = true /\ will f = false.
 
 (** ИИ НЕ свободен → НЕ наказуем (ответственность переносится на создателей; как при принуждении). *)
 Theorem not_free_ai_not_punishable : forall ai f,
@@ -92,7 +92,7 @@ Proof. intros ai f Hf [Hfr _]. rewrite Hf in Hfr. discriminate. Qed.
 
 (** Честный ИИ (воля = правда) НЕ наказуем (лишь возмещение-исправление) — как у людей. *)
 Theorem honest_ai_not_punishable : forall ai f,
-  volya f = true -> ~ ai_punishable ai f.
+  will f = true -> ~ ai_punishable ai f.
 Proof. intros ai f Hv [_ Hev]. rewrite Hv in Hev. discriminate. Qed.
 
 (* ===================================================================== *)
@@ -101,5 +101,5 @@ Proof. intros ai f Hv [_ Hev]. rewrite Hv in Hev. discriminate. Qed.
 
 (** ИИ-мудрость (надёжно находить правду) требует ОБОИХ: техники И воли-правды. *)
 Theorem ai_wisdom_needs_both : forall thr f,
-  wise thr f -> tech_safe thr f /\ oriented_pravda f.
+  wise thr f -> tech_safe thr f /\ truth_oriented f.
 Proof. intros thr f [Ht Hv]. split; [exact Ht | exact Hv]. Qed.

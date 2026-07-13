@@ -24,25 +24,25 @@ From Stdlib Require Import Arith Lia.
 (*  I. ПУТЬ = ЗАПОЛНЕНИЕ; техника ⊥ воля (Р-65, не верх/низ)              *)
 (* ===================================================================== *)
 
-(** Заполнение: tech = качество работы с данными; volya = ориентация
+(** Заполнение: tech = качество работы с данными; will = ориентация
     (true = правда / false = не-правда). Механизм один — разнится содержание. *)
-Record Fill := mkFill { tech : nat ; volya : bool }.
+Record Fill := mkFill { tech : nat ; will : bool }.
 
 (** ОРТОГОНАЛЬНОСТЬ: любая комбинация (техника, воля) реализуема. *)
-Theorem tech_volya_independent : forall (t : nat) (v : bool),
-  exists f : Fill, tech f = t /\ volya f = v.
+Theorem tech_will_independent : forall (t : nat) (v : bool),
+  exists f : Fill, tech f = t /\ will f = v.
 Proof. intros t v. exists (mkFill t v). split; reflexivity. Qed.
 
-Definition sophist (f : Fill) : Prop := volya f = false.            (* техника есть, воля=не-правда *)
-Definition simpleton_truthful (f : Fill) : Prop := volya f = true.  (* воля=правда, техника любая *)
+Definition sophist (f : Fill) : Prop := will f = false.            (* техника есть, воля=не-правда *)
+Definition simpleton_truthful (f : Fill) : Prop := will f = true.  (* воля=правда, техника любая *)
 
 (** Софист: умело заполняет ИЛЛЮЗИЕЙ (высокая техника + воля не-правда). *)
 Theorem sophist_example : exists f, sophist f /\ tech f = 100.
 Proof. exists (mkFill 100 false). split; reflexivity. Qed.
 
 (** Техника НЕ определяет волю (⊥). *)
-Theorem tech_does_not_fix_volya :
-  exists f1 f2, tech f1 = tech f2 /\ volya f1 <> volya f2.
+Theorem tech_does_not_fix_will :
+  exists f1 f2, tech f1 = tech f2 /\ will f1 <> will f2.
 Proof. exists (mkFill 5 true), (mkFill 5 false). split; [reflexivity | discriminate]. Qed.
 
 (* ===================================================================== *)
@@ -50,7 +50,7 @@ Proof. exists (mkFill 5 true), (mkFill 5 false). split; [reflexivity | discrimin
 (* ===================================================================== *)
 
 (** Мудрость = «находить правду правильно» = техника ≥ порога ∧ воля-правда. *)
-Definition wise (thr : nat) (f : Fill) : Prop := thr <= tech f /\ volya f = true.
+Definition wise (thr : nat) (f : Fill) : Prop := thr <= tech f /\ will f = true.
 
 (** Софист (воля не-правда) НЕ мудр — сколь угодно умел. *)
 Theorem sophist_not_wise : forall thr f, sophist f -> ~ wise thr f.
@@ -62,44 +62,44 @@ Proof. intros thr f Hlt [Hge _]. lia. Qed.
 
 (** Мудрость требует ОБОИХ — ни один аспект в отдельности не достаточен. *)
 Theorem wise_needs_both : forall thr f,
-  wise thr f -> thr <= tech f /\ volya f = true.
+  wise thr f -> thr <= tech f /\ will f = true.
 Proof. intros thr f H. exact H. Qed.
 
 (** «Находить правду правильно» ⟺ мудрость (единство, не две мудрости). *)
-Definition finds_pravda (thr : nat) (f : Fill) : Prop := thr <= tech f /\ volya f = true.
-Theorem wise_iff_finds_pravda : forall thr f, wise thr f <-> finds_pravda thr f.
-Proof. intros thr f. unfold wise, finds_pravda. split; intro H; exact H. Qed.
+Definition finds_truth (thr : nat) (f : Fill) : Prop := thr <= tech f /\ will f = true.
+Theorem wise_iff_finds_truth : forall thr f, wise thr f <-> finds_truth thr f.
+Proof. intros thr f. unfold wise, finds_truth. split; intro H; exact H. Qed.
 
 (* ===================================================================== *)
 (*  III. СПИРАЛЬ + ВЫХОД-ПРИЗНАНИЕ; восстановление всегда (Р-53/62/68)     *)
 (* ===================================================================== *)
 
-(** Состояние пути: ориентация (st_volya) + глубина искажения (depth). *)
-Record PState := mkPState { st_volya : bool ; depth : nat }.
+(** Состояние пути: ориентация (st_will) + глубина искажения (depth). *)
+Record PState := mkPState { st_will : bool ; depth : nat }.
 
 (** Шаг без признания: не-правда УГЛУБЛЯЕТСЯ (depth+1); правда стабильна. *)
 Definition step (s : PState) : PState :=
-  if st_volya s then s else mkPState false (S (depth s)).
+  if st_will s then s else mkPState false (S (depth s)).
 
 (** Признание: разворот к правде (волю → true); глубина-история сохраняется. *)
-Definition priznanie (s : PState) : PState := mkPState true (depth s).
+Definition acknowledgment (s : PState) : PState := mkPState true (depth s).
 
 (** Признание ВЫХОДИТ из спирали (воля → правда). *)
-Theorem priznanie_exits : forall s, st_volya (priznanie s) = true.
+Theorem acknowledgment_exits : forall s, st_will (acknowledgment s) = true.
 Proof. intro s. reflexivity. Qed.
 
 (** Без признания не-правда углубляется (спираль = расходящийся процесс). *)
-Theorem spiral_deepens : forall s, st_volya s = false -> depth (step s) = S (depth s).
+Theorem spiral_deepens : forall s, st_will s = false -> depth (step s) = S (depth s).
 Proof. intros s H. unfold step. rewrite H. reflexivity. Qed.
 
 (** Правда-ориентация стабильна (в спираль не входит). *)
-Theorem pravda_stable : forall s, st_volya s = true -> step s = s.
+Theorem truth_stable : forall s, st_will s = true -> step s = s.
 Proof. intros s H. unfold step. rewrite H. reflexivity. Qed.
 
 (** ВОССТАНОВЛЕНИЕ всегда возможно: из ЛЮБОГО состояния есть выход к правде. *)
-Theorem recovery_always_possible : forall s : PState, exists s', st_volya s' = true.
-Proof. intro s. exists (priznanie s). apply priznanie_exits. Qed.
+Theorem recovery_always_possible : forall s : PState, exists s', st_will s' = true.
+Proof. intro s. exists (acknowledgment s). apply acknowledgment_exits. Qed.
 
 (** История (глубина) НЕ стирается признанием (L5: необратимость; «шрам»). *)
-Theorem priznanie_keeps_depth : forall s, depth (priznanie s) = depth s.
+Theorem acknowledgment_keeps_depth : forall s, depth (acknowledgment s) = depth s.
 Proof. intro s. reflexivity. Qed.

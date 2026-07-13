@@ -28,11 +28,11 @@ From ToS Require Import ethics.EthicsStatus ethics.EthicsModality.
 (* ===================================================================== *)
 
 (** вид w = false (не-правда) ⇒ зло; вид w = true (правда) ⇒ (честная) ошибка. *)
-Definition is_evil  (w : Wrong) : Prop := vid w = false.
-Definition is_error (w : Wrong) : Prop := vid w = true.
+Definition is_evil  (w : Wrong) : Prop := intent w = false.
+Definition is_error (w : Wrong) : Prop := intent w = true.
 
 Theorem evil_xor_error : forall w, is_evil w \/ is_error w.
-Proof. intro w. unfold is_evil, is_error. destruct (vid w); [right|left]; reflexivity. Qed.
+Proof. intro w. unfold is_evil, is_error. destruct (intent w); [right|left]; reflexivity. Qed.
 
 Theorem evil_not_error : forall w, is_evil w -> ~ is_error w.
 Proof. intros w He Hr. unfold is_evil, is_error in *. rewrite He in Hr. discriminate. Qed.
@@ -84,7 +84,7 @@ Qed.
 
 Record Content := mkContent { filled : bool ; corresponds : bool }.
 
-Definition pravda_content (c : Content) : Prop := filled c = true /\ corresponds c = true.
+Definition truth_content (c : Content) : Prop := filled c = true /\ corresponds c = true.
 Definition illusion      (c : Content) : Prop := filled c = true /\ corresponds c = false.
 Definition empty_content (c : Content) : Prop := filled c = false.
 
@@ -97,8 +97,8 @@ Theorem illusion_not_corresponds : forall c, illusion c -> corresponds c = false
 Proof. intros c [_ Hc]. exact Hc. Qed.
 
 (** Отличие иллюзии от правды-контента — ТОЛЬКО в соответствии (заполнены оба). *)
-Theorem illusion_vs_pravda_same_filled : forall c1 c2,
-  illusion c1 -> pravda_content c2 -> filled c1 = filled c2.
+Theorem illusion_vs_truth_same_filled : forall c1 c2,
+  illusion c1 -> truth_content c2 -> filled c1 = filled c2.
 Proof. intros c1 c2 [H1 _] [H2 _]. rewrite H1, H2. reflexivity. Qed.
 
 (* ===================================================================== *)

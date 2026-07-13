@@ -31,7 +31,7 @@ Record RAct := mkRAct {
   free          : bool ;   (* (i)  свобода решения *)
   order_at_stake : bool ;  (* (ii) несёт статус правильно/неправильно *)
   harm          : bool ;   (*      причинён ли вред (факт) *)
-  ra_vid        : Vid      (*      намерение: true=правда / false=не-правда *)
+  ra_intent        : Intent      (*      намерение: true=правда / false=не-правда *)
 }.
 
 Definition responsible (a : RAct) : Prop :=
@@ -51,7 +51,7 @@ Proof. intros a Hs [_ Hst]. rewrite Hs in Hst. discriminate. Qed.
 (* ===================================================================== *)
 
 Definition owes_restitution   (a : RAct) : Prop := responsible a /\ harm a = true.
-Definition deserves_punishment (a : RAct) : Prop := responsible a /\ ra_vid a = false.
+Definition deserves_punishment (a : RAct) : Prop := responsible a /\ ra_intent a = false.
 
 (** Нет вреда → нет возмещения. *)
 Theorem no_harm_no_restitution : forall a, harm a = false -> ~ owes_restitution a.
@@ -59,7 +59,7 @@ Proof. intros a Hh [_ Hh']. rewrite Hh in Hh'. discriminate. Qed.
 
 (** ЧЕСТНАЯ ошибка с вредом: возмещение ДА, наказание НЕТ (Р-58). *)
 Theorem honest_harm_restitution_no_punishment : forall a,
-  responsible a -> harm a = true -> ra_vid a = true ->
+  responsible a -> harm a = true -> ra_intent a = true ->
   owes_restitution a /\ ~ deserves_punishment a.
 Proof.
   intros a Hr Hh Hv. split.
@@ -69,12 +69,12 @@ Qed.
 
 (** ЗЛО с вредом: возмещение И наказание (Р-58). *)
 Theorem evil_harm_both : forall a,
-  responsible a -> harm a = true -> ra_vid a = false ->
+  responsible a -> harm a = true -> ra_intent a = false ->
   owes_restitution a /\ deserves_punishment a.
 Proof. intros a Hr Hh Hv. split; split; assumption. Qed.
 
 (** Честность (вид=правда) ⇒ НИКОГДА не наказуемо (Р-57/58). *)
-Theorem honest_never_punished : forall a, ra_vid a = true -> ~ deserves_punishment a.
+Theorem honest_never_punished : forall a, ra_intent a = true -> ~ deserves_punishment a.
 Proof. intros a Hv [_ Hev]. rewrite Hv in Hev. discriminate. Qed.
 
 (* ===================================================================== *)
@@ -82,15 +82,15 @@ Proof. intros a Hv [_ Hev]. rewrite Hv in Hev. discriminate. Qed.
 (* ===================================================================== *)
 
 (** Признание = разворот намерения к правде (вид → true); вред-факт неизменен. *)
-Definition after_priznanie (a : RAct) : RAct :=
+Definition after_acknowledgment (a : RAct) : RAct :=
   mkRAct (free a) (order_at_stake a) (harm a) true.
 
-Theorem priznanie_cancels_punishment : forall a,
-  ~ deserves_punishment (after_priznanie a).
+Theorem acknowledgment_cancels_punishment : forall a,
+  ~ deserves_punishment (after_acknowledgment a).
 Proof. intros a [_ Hev]. simpl in Hev. discriminate. Qed.
 
-Theorem priznanie_keeps_restitution : forall a,
-  owes_restitution a -> owes_restitution (after_priznanie a).
+Theorem acknowledgment_keeps_restitution : forall a,
+  owes_restitution a -> owes_restitution (after_acknowledgment a).
 Proof.
   intros a [Hr Hh]. unfold owes_restitution. split.
   - unfold responsible in *; simpl. exact Hr.

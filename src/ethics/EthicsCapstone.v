@@ -20,26 +20,26 @@ From ToS Require Import ethics.EthicsPathWisdom.
 (* ===================================================================== *)
 (*  ОСЬ 1 — одно ОСНОВАНИЕ: статус «правильно = соответствие» РЕШАЕМ      *)
 (* ===================================================================== *)
-Theorem axis1_foundation : forall thr fit, {pravilno thr fit} + {~ pravilno thr fit}.
-Proof. exact pravilno_dec. Qed.
+Theorem axis1_foundation : forall thr fit, {correct thr fit} + {~ correct thr fit}.
+Proof. exact correct_dec. Qed.
 
 (* ===================================================================== *)
 (*  ОСЬ 2 — одна ОСЬ: полярность резка, нет нейтрального ТРЕТЬЕГО         *)
 (* ===================================================================== *)
 Theorem axis2_one_axis_no_third :
   forall (P : Status -> Prop),
-    (forall s, P s -> s <> Pravilno) ->
-    (forall s, P s -> s <> Nepravilno) ->
+    (forall s, P s -> s <> Correct) ->
+    (forall s, P s -> s <> Incorrect) ->
     forall s, ~ P s.
 Proof. exact no_neutral_third. Qed.
 
 (* ===================================================================== *)
 (*  ОСЬ 3 — одна СВОБОДА: намерение(вид)=шарнир добро/зло; неотчуждаема   *)
 (* ===================================================================== *)
-Theorem axis3_namerenie_hinge : forall w, is_evil w \/ is_error w.
+Theorem axis3_intent_hinge : forall w, is_evil w \/ is_error w.
 Proof. exact evil_xor_error. Qed.
 
-Theorem axis3_freedom_inalienable : forall s : PState, exists s', st_volya s' = true.
+Theorem axis3_freedom_inalienable : forall s : PState, exists s', st_will s' = true.
 Proof. exact recovery_always_possible. Qed.
 
 (* ===================================================================== *)
@@ -58,14 +58,14 @@ Proof. exact internal_not_punishable. Qed.
 (*  ОСЬ 6 — одна ДИСЦИПЛИНА: техника ⊥ воля                               *)
 (* ===================================================================== *)
 Theorem axis6_discipline_orthogonality :
-  exists f1 f2, tech f1 = tech f2 /\ volya f1 <> volya f2.
-Proof. exact tech_does_not_fix_volya. Qed.
+  exists f1 f2, tech f1 = tech f2 /\ will f1 <> will f2.
+Proof. exact tech_does_not_fix_will. Qed.
 
 (* ===================================================================== *)
 (*  ОСЬ 7 — один ПУТЬ: мудрость = единство; восстановление всегда         *)
 (* ===================================================================== *)
 Theorem axis7_wisdom_unity : forall thr f,
-  wise thr f -> thr <= tech f /\ volya f = true.
+  wise thr f -> thr <= tech f /\ will f = true.
 Proof. exact wise_needs_both. Qed.
 
 (* ===================================================================== *)
