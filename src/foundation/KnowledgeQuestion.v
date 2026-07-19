@@ -166,8 +166,8 @@ Proof. split; [reflexivity | split; reflexivity]. Qed.
 
 (* ---------- modal layers of the objective field (MP-5) ---------- *)
 
-Inductive Modality := MActual | MPotential | MImpossible.
-(* "can be — and is" | "can be, but is not" | "cannot be" *)
+Inductive Modality := MNecessary | MActual | MPotential | MImpossible.
+(* "cannot not be" | "can be — and is" | "can be, but is not" | "cannot be" *)
 
 Definition in_field (m : Modality) : bool :=
   match m with MImpossible => false | _ => true end.
@@ -175,11 +175,13 @@ Definition in_field (m : Modality) : bool :=
 Theorem impossible_outside_field : in_field MImpossible = false.
 Proof. reflexivity. Qed.
 
-Theorem field_two_layers :
-  forall m, in_field m = true -> m = MActual \/ m = MPotential.
+Theorem field_three_layers :
+  forall m, in_field m = true ->
+    m = MNecessary \/ m = MActual \/ m = MPotential.
 Proof.
   intro m; destruct m; intro H;
-  [ left; reflexivity | right; reflexivity | discriminate H ].
+  [ left; reflexivity | right; left; reflexivity
+  | right; right; reflexivity | discriminate H ].
 Qed.
 
 (* no field element can fill an impossible category *)
