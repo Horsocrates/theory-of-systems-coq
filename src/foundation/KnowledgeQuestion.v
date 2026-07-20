@@ -1,44 +1,55 @@
-(** * KnowledgeQuestion.v — the QUESTION as a system: support, point, contour
-      (formalization of MP-6/MP-7/MP-8, the mental-field working record,
-       Knigi/Volya/01; sibling of KnowledgeInquiry.v / KnowledgeAnswerExists.v)
+(** * KnowledgeQuestion.v — the QUESTION as a system: ground, direction, goal
+      (formalization of MP-6/MP-7/MP-8, renamed and corrected per MP-17/MP-18,
+       the mental-field working record, Knigi/Volya/01;
+       sibling of KnowledgeInquiry.v / KnowledgeAnswerExists.v)
 
-    Elements: the known support; the pointed ring-place; the contour category;
+    Elements: the known ground; the directed place; the goal category;
               the motivation state of the asking act.
-    Roles:    support = the Elements of the act (what it stands on);
-              point   = its Role (which place of the ring is taken up);
-              contour = its Rule (what counts as an answer — assigns the status).
-    Rules:    constitutive (generative) order contour -> point -> support
-              (Rules -> Roles -> Elements on the question itself);
+    Roles:    ground    = the Elements of the act (whence: what it stands on);
+              direction = its Role (whither: which place is taken up);
+              goal      = its Rule (what counts as an answer — the form of what
+                          closes the act; reaching the goal IS the answer).
+    Rules:    constitutive (generative) order goal -> direction -> ground
+              (the root question first says WHAT is sought);
               integrity of the three parts = well-formedness;
-              the point targets ONLY the ring (know-that-not-know);
-              cascade build -> select -> verify, always closed polarly;
-              the act fires only on sufficient ground (L4: attention + interest).
+              the direction stands in the KNOWN field for polar/selective
+              goals — only the status / the choice is missing (MP-18) — and
+              on the ring for the filling goal; never in the outer zone;
+              the path fill -> select -> verify, always closed polarly
+              ("cascade" retired per MP-18: the steps are the PATH to the answer);
+              the ground of the act is TWO-FACED (V21): the content ground
+              lives in the composition, the act ground (motivation ripened
+              to L4) fires the act — the faces are independent.
     Status:   the defects of catalog group 1.A are exactly damages of the three
-              parts (full classification); the FIFTH defect — the contour of the
-              impossible — is PREDICTED by the anatomy (MP-7) and included;
+              parts (full classification); the fifth defect — the IMPOSSIBLE
+              GOAL (1.A.7, renamed per MP-18) — was PREDICTED by the anatomy;
               closers: polar<->witness, selective<->will, filling<->actualization.
-    STATUS: 26 Qed, 0 Admitted, 0 axioms
+    STATUS: 37 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: July 2026
 
     ============================== E/R/R razbor ==============================
-    Rules (generative first): the contour (rule of answer-recognition) determines
-      the point — an aim is definite only under a given category; the point
-      differentiates the support — the known becomes support only under an acting
-      aim.  The constitutive order is strict; the TEMPORAL order is free (an
-      anomaly in the known may come first) — the same distinction as the domain
-      sequence (logical strict / temporal free).
-    Roles (L4): support carries the act; point takes up a ring-place; contour
-      assigns the status "answer"; motivation ripened to sufficiency is the
-      GROUND of the act (L4), not a fourth part — composition and ground do not
-      mix (MP-8).
+    Rules (generative first): the goal (rule of answer-recognition) determines
+      the direction — an aim is definite only under a given category; the
+      direction differentiates the ground — the known becomes ground only
+      under an acting aim.  The constitutive order is strict; the TEMPORAL
+      order is free (an anomaly in the known may come first) — the same
+      distinction as the domain sequence (logical strict / temporal free).
+    Roles (L4): ground carries the act; direction takes up a place — in the
+      known field (polar: status missing; selective: choice missing — a
+      question of DECISION, not of knowledge) or on the ring (filling:
+      content missing); goal assigns the status "answer"; motivation ripened
+      to sufficiency is the ACT ground (L4), not a fourth part — composition
+      and act-ground do not mix (MP-8), and the two faces of the ground are
+      independent (V21: grounds_two_faces).
     Elements (L1+P4): finitely many states, every predicate decidable (bool);
-      no completed totality anywhere — the "completed svod" contour is exactly
+      no completed totality anywhere — the "completed svod" goal is exactly
       the defect of the impossible layer ("cannot be", MP-5).
-    P4 diagnostic (could it be otherwise?): a fourth PART is not found (an act of
-      pointing needs exactly: whence, whither, what-closes); a fourth CONTOUR
-      kind is impossible (givenness full / pool / category-only exhausts); the
-      cascade cannot end non-polarly — whatever closes must be RECOGNIZED as
-      closing, i.e. polarly checked against the contour. *)
+    P4 diagnostic (could it be otherwise?): a fourth PART is not found (an act
+      of pointing needs exactly: whence, whither, what-closes); a fourth GOAL
+      kind is impossible (givenness full / pool / category-only exhausts); no
+      goal kind may target the outer zone (nothing is differentiated there to
+      take up); the path cannot end non-polarly — whatever closes must be
+      RECOGNIZED as closing, i.e. polarly checked against the goal. *)
 
 From Stdlib Require Import List.
 Import ListNotations.
@@ -49,104 +60,175 @@ Inductive Zone := ZKnown | ZRing | ZOuter.
 (* subjective field "I know" | ring "I know that I do not know" |
    objective field beyond the border ("I do not know that I do not know") *)
 
-Definition pointable (z : Zone) : bool :=
-  match z with ZRing => true | _ => false end.
+Definition reachable (z : Zone) : bool :=
+  match z with ZOuter => false | _ => true end.
 
-Theorem pointable_iff_ring : forall z, pointable z = true <-> z = ZRing.
-Proof. intro z; destruct z; simpl; split; intro H; try reflexivity; discriminate H. Qed.
-
-(* one cannot point into the unknown-unknown: only known unknowing is pointable *)
-Theorem outer_not_pointable : pointable ZOuter = false.
+(* one cannot direct a question into the unknown-unknown *)
+Theorem outer_not_reachable : reachable ZOuter = false.
 Proof. reflexivity. Qed.
+
+Theorem reachable_two :
+  forall z, reachable z = true -> z = ZKnown \/ z = ZRing.
+Proof.
+  intro z; destruct z; intro H;
+  [ left; reflexivity | right; reflexivity | discriminate H ].
+Qed.
+
+(* ---------- kinds of the goal and their target zones (MP-6/MP-18) ---------- *)
+
+Inductive GoalKind := CPolar | CSelective | CFilling.
+(* status missing | one-of-pool missing | content missing *)
+
+(* MP-18: the direction of a polar/selective question stands in the KNOWN
+   field (the pair / the pool is known material); only the filling question
+   directs onto the ring *)
+Definition target_ok (k : GoalKind) (z : Zone) : bool :=
+  match k, z with
+  | CPolar, ZKnown | CSelective, ZKnown | CFilling, ZRing => true
+  | _, _ => false
+  end.
+
+Theorem filling_targets_ring :
+  forall z, target_ok CFilling z = true <-> z = ZRing.
+Proof. intro z; destruct z; split; intro H; first [ reflexivity | discriminate H ]. Qed.
+
+(* "where shall I go on holiday?" works with a known list of candidates *)
+Theorem fact_and_choice_in_known :
+  target_ok CPolar ZKnown = true /\ target_ok CSelective ZKnown = true.
+Proof. split; reflexivity. Qed.
+
+Theorem no_goal_targets_outer : forall k, target_ok k ZOuter = false.
+Proof. intro k; destruct k; reflexivity. Qed.
+
+Theorem target_ok_reachable :
+  forall k z, target_ok k z = true -> reachable z = true.
+Proof. intros k z H; destruct k, z; simpl in *; try discriminate H; reflexivity. Qed.
 
 (* ---------- the three parts and their states ---------- *)
 
-Inductive SupportState := SupReal | SupFalse.
-(* support: real known / false support — built-in assumption (1.A.6) *)
+Inductive GroundState := GrReal | GrFalse.
+(* ground: real known / false ground — built-in assumption (1.A.6) *)
 
-Inductive PointState := PtOne | PtMerged | PtNone.
-(* point: single / merged (1.A.3) / absent (rhetorical shell — not a question) *)
+Inductive DirectionState := DirOne | DirMerged | DirNone.
+(* direction: single / merged (1.A.3) / absent (rhetorical shell — not a question) *)
 
-Inductive ContourState := CtWhole | CtTrimTopic | CtTrimContext | CtImpossible.
-(* contour: whole / trimmed by topics (1.A.4) / trimmed by context (1.A.5) /
-   contour of the impossible — outlines the "cannot be" layer (MP-7/MP-8) *)
+Inductive GoalState := GlWhole | GlTrimTopic | GlTrimContext | GlImpossible.
+(* goal: whole / trimmed by topics (1.A.4) / trimmed by context (1.A.5) /
+   the impossible goal — outlines the "cannot be" layer (MP-7/MP-18, 1.A.7) *)
 
 Record Question := mkQ {
-  q_support : SupportState;
-  q_point   : PointState;
-  q_target  : Zone;
-  q_contour : ContourState
+  q_ground    : GroundState;
+  q_direction : DirectionState;
+  q_kind      : GoalKind;
+  q_target    : Zone;
+  q_goal      : GoalState
 }.
 
 Definition is_question (q : Question) : bool :=
-  match q_point q with PtNone => false | _ => true end.
+  match q_direction q with DirNone => false | _ => true end.
 
 Definition well_formed (q : Question) : bool :=
-  match q_support q, q_point q, q_contour q, q_target q with
-  | SupReal, PtOne, CtWhole, ZRing => true
-  | _, _, _, _ => false
+  match q_ground q, q_direction q, q_goal q with
+  | GrReal, DirOne, GlWhole => target_ok (q_kind q) (q_target q)
+  | _, _, _ => false
   end.
 
-Theorem wf_targets_ring : forall q, well_formed q = true -> q_target q = ZRing.
+Theorem wf_target_fits_goal :
+  forall q, well_formed q = true -> target_ok (q_kind q) (q_target q) = true.
 Proof.
-  intros [s p t c] H; destruct s, p, c, t; simpl in H; try discriminate H; reflexivity.
+  intros [g dir k t gl] H; destruct g, dir, gl; simpl in *;
+  try discriminate H; exact H.
+Qed.
+
+(* the old canon "the direction targets the ring" survives CONDITIONALLY:
+   it is the law of the filling goal alone (MP-18) *)
+Theorem wf_filling_on_ring :
+  forall q, well_formed q = true -> q_kind q = CFilling -> q_target q = ZRing.
+Proof.
+  intros [g dir k t gl] H Hk; destruct g, dir, gl; simpl in *;
+  try discriminate H; subst k; destruct t; simpl in H;
+  try discriminate H; reflexivity.
+Qed.
+
+Theorem wf_polar_in_known :
+  forall q, well_formed q = true -> q_kind q = CPolar -> q_target q = ZKnown.
+Proof.
+  intros [g dir k t gl] H Hk; destruct g, dir, gl; simpl in *;
+  try discriminate H; subst k; destruct t; simpl in H;
+  try discriminate H; reflexivity.
+Qed.
+
+Theorem wf_selective_in_known :
+  forall q, well_formed q = true -> q_kind q = CSelective -> q_target q = ZKnown.
+Proof.
+  intros [g dir k t gl] H Hk; destruct g, dir, gl; simpl in *;
+  try discriminate H; subst k; destruct t; simpl in H;
+  try discriminate H; reflexivity.
+Qed.
+
+Theorem wf_never_outer :
+  forall q, well_formed q = true -> q_target q <> ZOuter.
+Proof.
+  intros [g dir k t gl] H; destruct g, dir, gl; simpl in *;
+  try discriminate H; destruct k, t; simpl in H;
+  try discriminate H; discriminate.
 Qed.
 
 (* ---------- defects: catalog group 1.A plus the predicted fifth ---------- *)
 
-Inductive Part := PSupport | PPoint | PContour.
+Inductive Part := PGround | PDirection | PGoal.
 
 Inductive Defect :=
   | D_BuiltInAssumption   (* 1.A.6: built-in assumption *)
   | D_MergedQuestions     (* 1.A.3: several questions merged into one *)
   | D_TopicExclusion      (* 1.A.4: exclusion of topics *)
   | D_ContextExclusion    (* 1.A.5: exclusion by context *)
-  | D_ImpossibleContour.  (* contour of the impossible — predicted (MP-7) *)
+  | D_ImpossibleGoal.     (* 1.A.7: the impossible goal — predicted (MP-7) *)
 
 Definition damaged_part (d : Defect) : Part :=
   match d with
-  | D_BuiltInAssumption => PSupport
-  | D_MergedQuestions   => PPoint
-  | D_TopicExclusion    => PContour
-  | D_ContextExclusion  => PContour
-  | D_ImpossibleContour => PContour
+  | D_BuiltInAssumption => PGround
+  | D_MergedQuestions   => PDirection
+  | D_TopicExclusion    => PGoal
+  | D_ContextExclusion  => PGoal
+  | D_ImpossibleGoal    => PGoal
   end.
 
 Definition strikes (d : Defect) (q : Question) : bool :=
   match d with
-  | D_BuiltInAssumption => match q_support q with SupFalse => true | _ => false end
-  | D_MergedQuestions   => match q_point q with PtMerged => true | _ => false end
-  | D_TopicExclusion    => match q_contour q with CtTrimTopic => true | _ => false end
-  | D_ContextExclusion  => match q_contour q with CtTrimContext => true | _ => false end
-  | D_ImpossibleContour => match q_contour q with CtImpossible => true | _ => false end
+  | D_BuiltInAssumption => match q_ground q with GrFalse => true | _ => false end
+  | D_MergedQuestions   => match q_direction q with DirMerged => true | _ => false end
+  | D_TopicExclusion    => match q_goal q with GlTrimTopic => true | _ => false end
+  | D_ContextExclusion  => match q_goal q with GlTrimContext => true | _ => false end
+  | D_ImpossibleGoal    => match q_goal q with GlImpossible => true | _ => false end
   end.
 
 Theorem wf_no_defect : forall q d, well_formed q = true -> strikes d q = false.
 Proof.
-  intros [s p t c] d H; destruct s, p, c, t; simpl in H; try discriminate H;
-  destruct d; reflexivity.
+  intros [g dir k t gl] d H; destruct g, dir, gl; simpl in H;
+  try discriminate H; destruct d; reflexivity.
 Qed.
 
 Theorem defect_not_wf : forall q d, strikes d q = true -> well_formed q = false.
 Proof.
-  intros [s p t c] d H; destruct d; destruct s, p, c, t; simpl in H;
+  intros [g dir k t gl] d H; destruct d; destruct g, dir, gl; simpl in H;
   try discriminate H; reflexivity.
 Qed.
 
-(* completeness: an ill-formed question is struck by a defect or misses the ring *)
+(* completeness: an ill-formed question is struck by a defect
+   or its target zone does not fit its goal kind *)
 Theorem ill_formed_classified :
   forall q, is_question q = true -> well_formed q = false ->
-    (exists d, strikes d q = true) \/ q_target q <> ZRing.
+    (exists d, strikes d q = true) \/ target_ok (q_kind q) (q_target q) = false.
 Proof.
-  intros [s p t c] Hq Hw; destruct s, p, c, t; simpl in *;
+  intros [g dir k t gl] Hq Hw; destruct g, dir, gl; simpl in *;
   first [ discriminate Hq
-        | discriminate Hw
+        | (right; exact Hw)
         | (left; exists D_BuiltInAssumption; reflexivity)
         | (left; exists D_MergedQuestions; reflexivity)
         | (left; exists D_TopicExclusion; reflexivity)
         | (left; exists D_ContextExclusion; reflexivity)
-        | (left; exists D_ImpossibleContour; reflexivity)
-        | (right; discriminate) ].
+        | (left; exists D_ImpossibleGoal; reflexivity) ].
 Qed.
 
 (* the damage map covers every part (surjectivity) *)
@@ -157,11 +239,11 @@ Proof.
   reflexivity.
 Qed.
 
-(* the contour carries three kinds of damage — the asymmetry is honest *)
-Theorem contour_carries_three :
-  damaged_part D_TopicExclusion = PContour /\
-  damaged_part D_ContextExclusion = PContour /\
-  damaged_part D_ImpossibleContour = PContour.
+(* the goal carries three kinds of damage — the asymmetry is honest *)
+Theorem goal_carries_three :
+  damaged_part D_TopicExclusion = PGoal /\
+  damaged_part D_ContextExclusion = PGoal /\
+  damaged_part D_ImpossibleGoal = PGoal.
 Proof. split; [reflexivity | split; reflexivity]. Qed.
 
 (* ---------- modal layers of the objective field (MP-5) ---------- *)
@@ -189,34 +271,46 @@ Theorem no_answer_in_impossible :
   forall m : Modality, in_field m = true -> m <> MImpossible.
 Proof. intros m H; destruct m; try discriminate H; discriminate. Qed.
 
-(* the "completed svod" contour is the defect of the impossible (V11) *)
-Definition completed_svod_contour : ContourState := CtImpossible.
+(* the "completed svod" goal is the defect of the impossible (V11) *)
+Definition completed_svod_goal : GoalState := GlImpossible.
 
 Theorem svod_question_defective :
-  forall q, q_contour q = completed_svod_contour ->
-    strikes D_ImpossibleContour q = true.
+  forall q, q_goal q = completed_svod_goal ->
+    strikes D_ImpossibleGoal q = true.
 Proof. intros q H; cbn; rewrite H; reflexivity. Qed.
 
-(* ---------- three contours: the measure of givenness (MP-6) ---------- *)
+(* ---------- three goals: the measure of givenness (MP-6) ---------- *)
 
 Inductive Givenness :=
   | GFull            (* both sides given — only the status is missing *)
   | GPool (n : nat)  (* a pool of S n candidates given — one-of is missing *)
   | GCategory.       (* only the category given — the sought is not in the field *)
 
-Inductive ContourKind := CPolar | CSelective | CFilling.
-
-Definition kind_of (g : Givenness) : ContourKind :=
+Definition kind_of (g : Givenness) : GoalKind :=
   match g with GFull => CPolar | GPool _ => CSelective | GCategory => CFilling end.
 
 Theorem kinds_exhaustive :
   forall g, kind_of g = CPolar \/ kind_of g = CSelective \/ kind_of g = CFilling.
 Proof. intro g; destruct g; [left | right; left | right; right]; reflexivity. Qed.
 
+(* MP-18: what each goal kind lacks — the selective question lacks a DECISION,
+   not a piece of knowledge *)
+Inductive Missing := MStatus | MChoice | MContent.
+
+Definition missing_of (k : GoalKind) : Missing :=
+  match k with CPolar => MStatus | CSelective => MChoice | CFilling => MContent end.
+
+Theorem missing_injective :
+  forall k1 k2, missing_of k1 = missing_of k2 -> k1 = k2.
+Proof. intros k1 k2 H; destruct k1, k2; try reflexivity; discriminate H. Qed.
+
+Theorem choice_is_not_content : MChoice <> MContent.
+Proof. discriminate. Qed.
+
 (* closers: witnessing, choice, actualization (MP-6) *)
 Inductive Closer := ByWitness | ByWill | ByActualization.
 
-Definition closes (k : ContourKind) : Closer :=
+Definition closes (k : GoalKind) : Closer :=
   match k with
   | CPolar => ByWitness | CSelective => ByWill | CFilling => ByActualization
   end.
@@ -230,30 +324,30 @@ Proof.
   reflexivity.
 Qed.
 
-(* ---------- the cascade: build -> select -> verify (MP-6/MP-7) ---------- *)
+(* ---------- the path to the answer: fill -> select -> verify (MP-6/7/18) ---------- *)
 
 Inductive Step := SBuild | SSelect | SVerify.
 
-Definition cascade (g : Givenness) : list Step :=
+Definition path (g : Givenness) : list Step :=
   match g with
   | GCategory => [SBuild; SSelect; SVerify]
   | GPool _   => [SSelect; SVerify]
   | GFull     => [SVerify]
   end.
 
-(* invariant of polar closure: every cascade ends with the verification step *)
-Theorem cascade_closes_polar :
-  forall g, exists pre, cascade g = pre ++ [SVerify].
+(* invariant of polar closure: every path ends with the verification step *)
+Theorem path_closes_polar :
+  forall g, exists pre, path g = pre ++ [SVerify].
 Proof.
   intro g; destruct g;
   [ exists [] | exists [SSelect] | exists [SBuild; SSelect] ]; reflexivity.
 Qed.
 
-(* truncation is only from the front: every cascade is a suffix of the full one *)
-Definition full_cascade : list Step := [SBuild; SSelect; SVerify].
+(* truncation is only from the front: every path is a suffix of the full one *)
+Definition full_path : list Step := [SBuild; SSelect; SVerify].
 
-Theorem cascade_is_suffix :
-  forall g, exists pre, pre ++ cascade g = full_cascade.
+Theorem path_is_suffix :
+  forall g, exists pre, pre ++ path g = full_path.
 Proof.
   intro g; destruct g;
   [ exists [SBuild; SSelect] | exists [SBuild] | exists [] ]; reflexivity.
@@ -261,50 +355,51 @@ Qed.
 
 (* a singleton pool still SELECTS — intuition begins, discourse verifies:
    the selective step is degenerate, not skipped (MP-7, candidate 4) *)
-Theorem singleton_pool_selects : In SSelect (cascade (GPool 0)).
+Theorem singleton_pool_selects : In SSelect (path (GPool 0)).
 Proof. simpl; left; reflexivity. Qed.
 
-(* no cascade is empty: a question is not closed without work *)
-Theorem cascade_nonempty : forall g, cascade g <> [].
+(* no path is empty: a question is not closed without work *)
+Theorem path_nonempty : forall g, path g <> [].
 Proof. intro g; destruct g; discriminate. Qed.
 
-(* ---------- constitutive order: contour -> point -> support (MP-7) ---------- *)
+(* ---------- constitutive order: goal -> direction -> ground (MP-7/MP-18) ---------- *)
 
-Inductive Stage := StNone | StContour | StPoint | StComplete.
-(* assembling the act: nothing -> contour given -> point definite -> support taken *)
+Inductive Stage := StNone | StGoal | StDirection | StComplete.
+(* assembling the act: nothing -> goal given -> direction definite -> ground taken *)
 
 Inductive Assembles : Stage -> Prop :=
-  | A_start   : Assembles StNone
-  | A_contour : Assembles StNone -> Assembles StContour
-  | A_point   : Assembles StContour -> Assembles StPoint
-  | A_support : Assembles StPoint -> Assembles StComplete.
+  | A_start     : Assembles StNone
+  | A_goal      : Assembles StNone -> Assembles StGoal
+  | A_direction : Assembles StGoal -> Assembles StDirection
+  | A_ground    : Assembles StDirection -> Assembles StComplete.
 
-(* the point is never prior to the contour *)
-Theorem point_needs_contour : Assembles StPoint -> Assembles StContour.
+(* the direction is never prior to the goal *)
+Theorem direction_needs_goal : Assembles StDirection -> Assembles StGoal.
 Proof. intro H; inversion H; assumption. Qed.
 
-(* the support is never prior to the point *)
-Theorem support_needs_point : Assembles StComplete -> Assembles StPoint.
+(* the ground is never prior to the direction *)
+Theorem ground_needs_direction : Assembles StComplete -> Assembles StDirection.
 Proof. intro H; inversion H; assumption. Qed.
 
-(* every complete question has passed through the contour stage *)
-Theorem complete_passed_contour : Assembles StComplete -> Assembles StContour.
-Proof. intro H; apply point_needs_contour; apply support_needs_point; exact H. Qed.
+(* every complete question has passed through the goal stage:
+   the root question first says WHAT is sought *)
+Theorem complete_passed_goal : Assembles StComplete -> Assembles StGoal.
+Proof. intro H; apply direction_needs_goal; apply ground_needs_direction; exact H. Qed.
 
-(* ---------- the ground of the act: motivation ripened to L4 (MP-8) ---------- *)
+(* ---------- the act ground: motivation ripened to L4 (MP-8, V21) ---------- *)
 
 Record Motivation := mkM {
   attention_drawn : bool;  (* something drew attention *)
   interest_held   : bool   (* interest: the will holds the beam, borders fixed *)
 }.
 
-Definition sufficient_ground (m : Motivation) : bool :=
+Definition act_ground (m : Motivation) : bool :=
   attention_drawn m && interest_held m.
 
-Definition act_fires (m : Motivation) : bool := sufficient_ground m.
+Definition act_fires (m : Motivation) : bool := act_ground m.
 
-Theorem no_ground_no_act :
-  forall m, sufficient_ground m = false -> act_fires m = false.
+Theorem no_act_ground_no_act :
+  forall m, act_ground m = false -> act_fires m = false.
 Proof. intros m H; exact H. Qed.
 
 (* attention alone is a precondition, not yet the ground (MP-8: no "pre-question") *)
@@ -314,10 +409,25 @@ Proof. reflexivity. Qed.
 Theorem interest_alone_insufficient : act_fires (mkM false true) = false.
 Proof. reflexivity. Qed.
 
-Theorem ground_needs_both :
+Theorem act_ground_needs_both :
   forall m, act_fires m = true ->
     attention_drawn m = true /\ interest_held m = true.
 Proof.
   intros [a i] H; destruct a, i; simpl in H; try discriminate H;
   split; reflexivity.
+Qed.
+
+(* V21: the ground is two-faced — the CONTENT ground lives in the composition
+   (q_ground), the ACT ground fires the act (motivation); the faces are
+   independent: a sound composition may stand unfired, a fired motive may
+   push a broken composition *)
+Theorem grounds_two_faces :
+  (exists q m, well_formed q = true /\ act_fires m = false) /\
+  (exists q m, well_formed q = false /\ act_fires m = true).
+Proof.
+  split.
+  - exists (mkQ GrReal DirOne CPolar ZKnown GlWhole), (mkM true false).
+    split; reflexivity.
+  - exists (mkQ GrFalse DirOne CPolar ZKnown GlWhole), (mkM true true).
+    split; reflexivity.
 Qed.

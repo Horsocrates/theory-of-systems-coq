@@ -2030,6 +2030,8 @@ src/foundation/KnowledgeReasoningLaws.v
 src/foundation/KnowledgeAnswerExists.v
 src/foundation/KnowledgeQuestion.v
 src/foundation/KnowledgeMentalField.v
+src/foundation/KnowledgeQuestionPath.v
+src/foundation/KnowledgeWillStatus.v
 src/foundation/PerceptionTriad.v
 src/foundation/ERRRankAsymmetry.v
 src/foundation/ERRComposition.v
