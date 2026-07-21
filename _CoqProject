@@ -2033,6 +2033,7 @@ src/foundation/KnowledgeMentalField.v
 src/foundation/KnowledgeQuestionPath.v
 src/foundation/KnowledgeWillStatus.v
 src/foundation/KnowledgeDomainCycle.v
+src/foundation/KnowledgeTruthLie.v
 src/foundation/PerceptionTriad.v
 src/foundation/ERRRankAsymmetry.v
 src/foundation/ERRComposition.v
