@@ -2035,6 +2035,9 @@ src/foundation/KnowledgeWillStatus.v
 src/foundation/KnowledgeDomainCycle.v
 src/foundation/KnowledgeTruthLie.v
 src/foundation/KnowledgeTruthLadder.v
+src/foundation/KnowledgeEgoZone.v
+src/foundation/KnowledgeIdentityRoles.v
+src/foundation/ERRLink.v
 src/foundation/PerceptionTriad.v
 src/foundation/ERRRankAsymmetry.v
 src/foundation/ERRComposition.v

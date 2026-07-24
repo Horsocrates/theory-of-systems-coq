@@ -74,3 +74,22 @@ Closed under the global context); добавлен в `_CoqProject`. Воля-в
 `ai_wisdom_needs_both`. ЧЕСТНО: шарнир «есть ли у ИИ воля» открыт (воля-ветка); операц. моста нет.
 **ВСЕГО src/ethics/ = 7 файлов, 78 Qed, 0 axioms.**
 Ещё открыто: паркованное (виды-зла, восстановление-детали, типология добродетелей); ось 5 — проза.
+
+**ТРЕТЬЯ ВОЛНА — углубление полярности умысла + истинный порядок (2026-07-16, Р-106…Р-117):**
+✅ `EthicsIntentDeep.v` **(16 Qed, 0 ax)** — углублённый критерий (Ш-58…Ш-64 сводного прохода):
+матрица «воля Другого × чей интерес» (полюса на диагонали, `evil_good_exclusive`; патернализм и
+обмен вне полярности); без умысла нет зла (`no_intent_no_evil` — лев-пример); клетка добра
+расщеплена притяжением (`attraction_blocks_good`, `merely_correct_not_good`); вид-удовольствие
+только у зла (`good_no_pleasure_motive` + `sadistic_evil_exists` — асимметрия полюсов, Р-112);
+тест получателя = L2-неуниверсализуемость (`evil_fails_receiver_test`); решаемость полюсов
+(`evil_b_reflect`, `good_b_reflect`); проверка по адресату и времени (`rationalization_dishonest`,
+`genuine_anti_trouble_exists`). ЧЕСТНО: булева структура; добрая натура/наблюдатель-градуальность —
+проза. ✅ `EthicsTrueOrder.v` **(9 Qed, 0 ax)** — истинный порядок (Р-110/Р-113): башня объемлющих
+уровней; `true_implies_local` + мафия-контрпример (`mafia_locally_optimal` ∧ `mafia_not_true_order`);
+`breaks_above_not_true`; мера решаема конечной проверкой (`true_order_b_reflect` — регресс конечен);
+вершина в мере (`apex_checked`); единственность не следует (`true_order_not_unique` — пул
+равно-наилучших, открытый хвост Р-113 честно). Print Assumptions: Closed по обоим файлам.
+**ВСЕГО src/ethics/ = 9 файлов, 103 Qed, 0 Admitted, 0 axioms.** Зарегистрированы в `_CoqProject`
+(check_coqproject: OK). Осталось из реестра ⊢нов: нов-1..3 (EthicsERRBridge), нов-4 (EthicsJustice),
+нов-5 (EthicsRuleHierarchy); согласование старого `EthicsEvil.is_evil` (вид-не-правда) с углублённым
+критерием — мостовая лемма, кандидат следующей волны.
