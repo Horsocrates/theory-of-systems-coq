@@ -2097,3 +2097,4 @@ src/ethics/EthicsCapstone.v
 src/ethics/EthicsAI.v
 src/ethics/EthicsIntentDeep.v
 src/ethics/EthicsTrueOrder.v
+src/ethics/EthicsEgoism.v

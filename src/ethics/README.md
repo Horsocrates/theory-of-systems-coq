@@ -93,3 +93,14 @@ Closed under the global context); добавлен в `_CoqProject`. Воля-в
 (check_coqproject: OK). Осталось из реестра ⊢нов: нов-1..3 (EthicsERRBridge), нов-4 (EthicsJustice),
 нов-5 (EthicsRuleHierarchy); согласование старого `EthicsEvil.is_evil` (вид-не-правда) с углублённым
 критерием — мостовая лемма, кандидат следующей волны.
+
+**ЧЕТВЁРТАЯ ВОЛНА — эгоизм (2026-07-24, Р-119…Р-121, хвост ветки эго):**
+✅ `EthicsEgoism.v` **(19 Qed, 0 ax, Closed)** — эгоизм = УСТАНОВКА (хроника центров nat→Center;
+`egoism_births_acts`, `act_is_not_stance`); ориентация оси матрицы умысла, не клетка
+(`orientation_alone_not_evil`, `evil_needs_both`); граница с заботой = центр, не выгодополучатель
+(`boundary_is_center_not_beneficiary`); служение записи, которая не волит (`egoism_serves_record`,
+`record_returns_no_will`); третий центр рушит пару эгоизм/альтруизм (`antipode_is_truth_not_altruism`);
+несправедливость назначения по зоне (`egoist_assignment_unjust`); застывшая запись расходится с
+движущейся истиной неограниченно (`frozen_misses_unboundedly`, `egoism_breeds_illusion`).
+Капстоун `egoism_canon`. ЧЕСТНО: булевы тени; ценностный слой — проза.
+**ВСЕГО src/ethics/ = 10 файлов, 122 Qed, 0 Admitted, 0 axioms.**
