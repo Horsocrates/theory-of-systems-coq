@@ -2098,3 +2098,5 @@ src/ethics/EthicsAI.v
 src/ethics/EthicsIntentDeep.v
 src/ethics/EthicsTrueOrder.v
 src/ethics/EthicsEgoism.v
+src/foundation/ReflectionRecursion.v
+src/foundation/ComparisonLevels.v
