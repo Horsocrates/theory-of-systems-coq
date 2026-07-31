@@ -1,0 +1,710 @@
+% Build: pdflatex -interaction=nonstopmode SHOWCASE.tex  (run x3).
+% cmap = ToUnicode (copyable/searchable Cyrillic); paratype = PT Serif/Sans/Mono.
+\documentclass[11pt,a4paper]{article}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{paratype}
+\usepackage[main=russian,english]{babel}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.7cm,right=2.7cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{listings}
+\definecolor{lstbg}{rgb}{0.97,0.97,0.97}
+\lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{lstbg},frame=single,framerule=0pt,rulecolor=\color{lstbg},numbers=left,numberstyle=\tiny\color{gray},numbersep=8pt,breaklines=true,keepspaces=true,showstringspaces=false,language=ML,
+  morekeywords={Theorem,Proof,Qed,Defined,Definition,Lemma,Fixpoint,Record,Inductive,Axiom,Parameter,Variable,forall,exists,Prop,Type,Set,match,with,end,fun,nat,list,bool,classic,L4_witness,intros,exact,destruct,apply,reflexivity,induction,lia,split,intro,Section,End}}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black}
+\usepackage{xspace}
+\newcommand{\Rocq}{\textsc{Rocq}\xspace}
+\newcommand{\CIC}{\textsc{CIC}\xspace}
+\newcommand{\ToS}{\textsc{ToS}\xspace}
+\newcommand{\NN}{\ensuremath{\mathbb{N}}}
+\newcommand{\QQ}{\ensuremath{\mathbb{Q}}}
+\newcommand{\ZZ}{\ensuremath{\mathbb{Z}}}
+\newcommand{\RR}{\ensuremath{\mathbb{R}}}
+\newcommand{\CC}{\ensuremath{\mathbb{C}}}
+\providecommand{\Prop}{\ensuremath{\mathrm{Prop}}}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0pt}
+\tolerance=1500
+\emergencystretch=3em
+\begin{document}
+\begin{center}{\LARGE\bfseries Теория Систем: законы логики, принципы и метод E/R/R --- математика без аксиом существования}\end{center}
+\vspace{0.5em}
+
+\subsection*{Витрина для математиков --- позитивное основание и сравнение с ZFC (рабочий документ)}
+
+\textbf{Статус:} рабочий черновик / каркас. Здесь собирается структура будущей <<витрины>> --- документа, которым мы знакомим математиков с системой. Язык черновика --- русский (рабочий); публикуемая версия будет переведена на английский (язык целевой аудитории). Ограничений по размеру нет: сначала полнота и честность, потом сжатие.
+
+\textbf{Принцип изложения:} границы и цена показаны так же явно, как достижения. Раздел <<честные стены>> (\S{}8) --- не приложение, а существенная часть аргументации: машинно проверяемый аудит собственных границ --- нечастая практика, и именно он отличает проверяемую программу от совокупности деклараций.
+
+\bigskip\hrule\bigskip
+
+\section{Позитивное основание: законы логики, принципы и метод E/R/R}
+
+Прежде чем сравнивать с ZFC, нужно сказать, чем система является \emph{положительно}. \textbf{Теория Систем не постулирует --- она выводит.} Где ZFC кладёт аксиомы существования, ToS стоит на трёх связанных опорах: \textbf{законы логики (L1--L5)}, выведенные из них \textbf{принципы (P1--P4)} и метод их применения --- \textbf{E/R/R}. Эти три опоры и делают аксиомы существования избыточными.
+
+\textbf{Корень: A = $\exists$.} Существовать --- значит существовать \emph{определённо}, быть отличённым от $\neg$A; единственный исходный акт --- различение (A | $\neg$A), запись \texttt{Distinction} в файле \texttt{foundation/\allowbreak{}Distinction.v} (<<the foundation of everything>>). Акт самопредъявляющ: его отрицание уже им пользуется --- поэтому он до-формален (границу помечаем честно). Всё дальнейшее из него \emph{выводится}.
+
+\textbf{Опора 1 --- пять Законов Логики (L1--L5).} Не постулаты, а \emph{теоремы о структуре различения}, доказанные в \texttt{Laws\allowbreak{}From\allowbreak{}Distinction.v} (0 новых аксиом): L1 --- тождество, L2 --- непротиворечие, L3 --- исключённое третье (формально = \texttt{classic}), L4 --- достаточное основание (Лейбниц; ToS придаёт ему \textbf{статус} закона --- самообоснование различения), \textbf{L5 --- закон Порядка/иерархии: уникальный вклад ToS} (строгий вполне-фундированный порядок уровней).
+
+\textbf{Опора 2 --- четыре Принципа (P1--P4), выведенные из законов} \footnote{\texttt{Principles\allowbreak{}From\allowbreak{}Laws.v}}. Здесь --- сила системы: \textbf{каждый Принцип делает работу аксиомы ZFC, но как теорема, а не постулат}, и \textbf{L5 в одиночку несёт три из четырёх}:
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\textbf{Принцип} & \textbf{из закона} & \textbf{делает работу аксиомы ZFC} \\ \hline
+\textbf{P1} --- нет \texttt{S $\in$ S} (иерархия уровней) & \textbf{L5} & Фундирования \\ \hline
+\textbf{P2} --- определение раньше запроса (нет круговых определений) & \textbf{L5} & дисциплины Выделения (Рассел снят) \\ \hline
+\textbf{P4} --- конечная актуальность (всё --- процесс, не завершённый объект) & \textbf{L5} & Бесконечности \\ \hline
+\textbf{P3} --- тождество по критерию (один критерий = одно) & L1 + L4 & Объёмности \\ \hline
+детерминированный выбор по порядку & \textbf{L5} & Выбора \\ \hline
+\end{tabularx}}
+
+Поэтому аксиомы существования не нужны: бытие не \emph{постулируется} --- структура \emph{выводится} из законов.
+
+\textbf{Опора 3 --- метод E/R/R (Элементы / Роли / Правила).} Три аспекта любого различения: \textbf{Что} различается (Элементы --- актуальные носители), \textbf{Как} организовано (Роли --- позиции), \textbf{Почему так} (Правила --- законы L1--L5); иерархия Правила > Роли > Элементы есть тот же L5 на триаде. Это рабочий \textbf{разбор}: локализовать объект на триаде и спросить P4 --- <<могло ли быть иначе при тех же Правилах?>>. Где аксиома \emph{замораживает} порождающее Правило в завершённый Элемент --- это \textbf{реификация} (категориальная ошибка), и E/R/R-разбор её вскрывает. Этим методом в \S{}5 снимается каждая аксиома ZFC.
+
+\textbf{Отсюда --- всё остальное.} Из P4 следует процессная онтология: всякий объект есть \textbf{процесс} ($\mathbb{N}$$\to$$\mathbb{Q}$), <<бесконечность --- это процесс, а не объект>>; а из неё --- центральная \textbf{граница финитизации}: процесс либо \emph{завершается} (Element), либо \emph{доказуемо никогда} (role-limit), и эта одна линия разом есть граница конструктивности, мощности и спектра (\S{}7). Числа, $\mathbb{R}$, континуум --- уже следствия. Единая цепь основания: \textbf{A = $\exists$ $\to$ различение $\to$ L1--L5 $\to$ P1--P4 $\to$ E/R/R $\to$ вся математика}.
+
+\textbf{Позитивное прочтение.} <<Ноль аксиом существования>> (\S{}2, \S{}4, \S{}5) --- не аскеза и не лакуна, а следствие устройства: бытие \emph{выводится} из законов логики методом E/R/R, а не вводится отдельными постулатами.
+
+\bigskip\hrule\bigskip
+
+\section{Главный тезис}
+
+Мы \textbf{не} заявляем <<у нас меньше аксиом, чем у ZFC>>. Спор о количестве аксиом малосодержателен и легко оспорим. Мы заявляем нечто более точное и более проверяемое:
+
+\textbf{Теория Систем не принимает ни одной аксиомы существования.} Всякий объект --- \emph{строится}; ничто не постулируется существующим.
+
+Это --- оборотная сторона позитивного основания (\S{}1): раз существование \textbf{порождается актом различения по законам логики}, отдельные постулаты бытия не нужны. <<Ноль аксиом существования>> --- не аскеза, а следствие самого устройства основания (\S{}1).
+
+ZFC держится на \textbf{аксиомах существования}: Бесконечность утверждает, что существует завершённое бесконечное множество; Степень --- что существует множество всех подмножеств; Пары --- что для любых двух существует их пара. Это онтологические постулаты: они \emph{вводят бытие}.
+
+Формальное ядро Теории Систем (в Rocq поверх CIC) держится ровно на \textbf{двух явных допущениях} (\texttt{Axiom} поверх CIC) --- и \textbf{ни одно из них не является аксиомой существования}. Постулатами системы они при этом не являются: оба --- формальные образы уже \emph{выведенных} звеньев цепи (\S{}1), цена переноса выведенного в чужое ядро:
+
+\begin{itemize}
+\item \texttt{classic : $\forall$ P,\allowbreak{} P $\lor$ $\neg$P} --- \textbf{логический} принцип (мы рассуждаем классически);
+\item \texttt{L4\_\allowbreak{}witness : ($\exists$ x,\allowbreak{} P x) $\to$ \{ x | P x \}} --- \textbf{эпистемический} (из \textbf{доказанного} существования извлекаем конкретного свидетеля; существование здесь --- установленный факт, а не постулат и не гипотеза; создаётся лишь имя свидетеля).
+\end{itemize}
+
+Всё остальное --- \textasciitilde{}25 900 теорем --- \texttt{Closed under the global context}, то есть \textbf{0 дополнительных аксиом}.
+
+И симметрично, со стороны ZFC: машинный реестр \texttt{foundation/\allowbreak{}ZFCAxiom\allowbreak{}Ledger.v} (0 аксиом) классифицирует все девять аксиом ZFC и доказывает \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit} --- \textbf{ровно одна из девяти (Степень) есть подлинная <<цена>>} (примыкает к завершённой бесконечности); три тривиальны, пять --- именованным принципом или законом (P4 / P1 / L5; таблица P$\leftrightarrow$аксиома в \S{}1). См. разбор \S{}5 и таблицу \S{}4.
+
+\subsection{Три слоя --- чтобы не путать <<Закон>> и <<аксиому>>}
+
+Вопрос <<есть ли у системы аксиомы?>> имеет три ответа, и их нельзя смешивать:
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\textbf{Слой} & \textbf{Что на нём} & \textbf{Есть ли <<аксиомы>>?} \\ \hline
+\textbf{Философская теория} (ToS) & примитив \emph{различения} + Законы L1--L5 + Принципы P1--P4 + метод E/R/R & нет <<аксиом>> в матсмысле --- есть \textbf{Законы и Принципы}, возводимые к единому акту различения (A = $\exists$) \\ \hline
+\textbf{Формальное кодирование} (Rocq/CIC) & \texttt{classic}, \texttt{L4\_\allowbreak{}witness} & \textbf{да, ровно 2} --- видны в \texttt{Print Assumptions}, неустранимы. Это формальные \emph{образы} L3 и P4 \\ \hline
+\textbf{Субстрат} (CIC) & конструктивная теория типов & это основоположение само по себе --- см. \S{}3 \\ \hline
+\end{tabularx}}
+
+\textbf{Существенное разграничение:} в формальной системе \texttt{classic} --- это \texttt{Axiom}, и <<вывести>> его внутри CIC нельзя. Утверждать <<у нас 0 аксиом>> или <<мы их выводим>> неверно --- это немедленно опровергается командой \texttt{Print Assumptions}. Защитимое сильное утверждение --- то, что в рамке выше: \textbf{2 аксиомы, обе не-онтологические, обе --- формальные образы Законов, а существование никогда не постулируется.}
+
+\subsection{Тонкость про исключённое третье (в нашу пользу)}
+
+Для \textbf{различений} исключённое третье --- не аксиома, а \emph{структура}: различение по определению исчерпывает своё поле (A | $\neg$A) --- это поле \texttt{exhaustive} в записи \texttt{Distinction}. Аксиома \texttt{classic} лишь поднимает этот структурный факт до \textbf{всех} высказываний. Подъём неустраним и это видно в коде: \texttt{Distinction} --- это \texttt{Record} с полем-правилом \texttt{exhaustive : positive $\lor$ negative} (исключённое третье \emph{встроено} в структуру различения), а \texttt{distinction\_\allowbreak{}of (P : Prop)} строит различение для произвольного \texttt{P}, передавая в это поле ровно \texttt{(classic P)} \footnote{\texttt{foundation/\allowbreak{}Distinction.v:75--80}}. То есть для самих различений L3 --- структура (поле записи), а его глобализация на любое \texttt{P} требует аксиомы \texttt{classic}. L3 не <<навешен снаружи>>: он конститутивен для различения, а аксиома --- честная цена глобализации.
+
+\subsection{Что мы не заявляем (калибровка честности)}
+
+Полный аудит каталога (1913 файлов) подтвердил: \textbf{подлинно новых теорем в математике/CS не найдено.} Каждый отдельный результат классичен. Уникальность системы --- в другом:
+
+\begin{itemize}
+\item \textbf{аксиомо-свободное исполнение над $\mathbb{Q}$} (классические факты без аксиом существования);
+\item \textbf{E/R/R / P4-онтология} (объект = процесс, а не завершённая бесконечность);
+\item \textbf{машинная проверка} всего корпуса;
+\item \textbf{граница финитизации} как изучаемый объект (что переживает перенос на $\mathbb{Q}$-процессы, что становится условным, где проходит разрешимая граница);
+\item \textbf{единая ось}, на которую сведены диагонали/парадоксы (корень Ловера) и цена выбора.
+\end{itemize}
+
+Вклад --- не в новых теоремах, а в демонстрации того, \emph{какая часть} классической математики достижима без онтологических обязательств ZFC, с машинно-видимой ценой этих обязательств.
+
+\bigskip\hrule\bigskip
+
+\section{Дисклеймер субстрата (обязательная честность)}
+
+<<2 аксиомы>> --- это 2 аксиомы \textbf{поверх CIC} (Calculus of Inductive Constructions --- конструктивная теория типов, лежащая в основе Rocq). CIC --- не ничто: это богатое основоположение со своими обязательствами (индуктивные типы, бесконечная иерархия универсумов). Это обязательство нельзя замалчивать: оно известно сведущему читателю.
+
+Поэтому честное сравнение --- \textbf{не} <<9 аксиом ZFC против 2 наших>> в вакууме, а:
+
+{\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{|X|X|X|X|}
+\hline
+\textbf{} & \textbf{Логика} & \textbf{Основание} & \textbf{Существование} \\ \hline
+\textbf{ZFC} & первопорядковая логика (классическая) & теория множеств & аксиомы существования множеств (Бесконечность, Степень, Пары, \ldots{}) \\ \hline
+\textbf{ToS / Rocq} & CIC + \texttt{classic} (классическая) & конструктивная теория типов & \textbf{нет аксиом существования} --- объекты строятся \\ \hline
+\end{tabularx}}
+
+Принципиально важное различие оснований: индуктивные типы дают $\mathbb{N}$ как \emph{способность итерировать преемник} --- \textbf{без Аксиомы Бесконечности в смысле ZFC} (без постулата завершённого бесконечного множества). Именно на этом обязательстве ZFC спотыкается физика (см. \S{}5.1). То, что у ZFC требует отдельной аксиомы существования, у нас даётся структурой типа --- это содержательное различие оснований, а не экономия в подсчёте аксиом.
+
+\textbf{Открытый вопрос формулировки:} насколько глубоко вводить CIC для читателя-математика? Предложение: один абзац + ссылка, без теории типов на пять страниц. Большинство знает Coq достаточно, чтобы принять <<индуктивный тип $\mathbb{N}$ $\ne$ Аксиома Бесконечности>>.
+
+\bigskip\hrule\bigskip
+
+\section{Сводная карта: девять аксиом ZFC $\to$ вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}}
+
+Вердикты машинно проверены: функция \texttt{tos\_\allowbreak{}verdict} в файле \texttt{foundation/\allowbreak{}ZFCAxiom\allowbreak{}Ledger.v}. Раздел \S{}5 идёт в порядке нарастания <<цены>>: сначала заменённые законом, затем единственная role-limit (Powerset), затем тривиальные.
+
+{\scriptsize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{|X|X|X|X|}
+\hline
+\textbf{Аксиома ZFC} & \textbf{Вердикт (ledger)} & \textbf{Позиция ToS (коротко)} & \textbf{Раздел} \\ \hline
+\textbf{Бесконечность} & \texttt{Replaced\allowbreak{}By P4} & $\mathbb{N}$ = индуктивный тип; бесконечность только как процесс (\texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity}) & \S{}5.1 \\ \hline
+\textbf{Степень} & \textbf{\texttt{Role\allowbreak{}Limit}} & единственная цена: конечный $\mathcal{P}$ = Element (2\textsuperscript{n}, \texttt{bitvectors\_\allowbreak{}length}), полный 2\textasciicircum{}$\mathbb{N}$ = role-limit; несчётность = правило; доказан Кантор--Бендиксон (не разрешение независимой CH) & \S{}5.2 \\ \hline
+\textbf{Фундирования} & \texttt{Replaced\allowbreak{}By P1} & бесплатно: иерархия уровней фундирована (\texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership}, 0 акс) & \S{}5.3 \\ \hline
+\textbf{Выделения} (схема) & \texttt{Replaced\allowbreak{}By P4} & предикативная/разрешимая выделимость; Рассел = ошибка типа (\texttt{P4Prohibits\allowbreak{}Impredicative}) & \S{}5.4 \\ \hline
+\textbf{Подстановки} (схема) & \texttt{Replaced\allowbreak{}By P4} & ограниченные процесс-семейства; трансфинитный охват $\aleph$\_$\omega$+ --- \textbf{осознанный отказ} & \S{}5.5 \\ \hline
+\textbf{Пары / Объединение} & \texttt{Trivial} & структурно-конструктивны: зависимая пара ($\Sigma$) / начальный-терминальный объекты, аксиома не нужна & \S{}5.6 \\ \hline
+\textbf{Выбора} & \texttt{Replaced\allowbreak{}By L5} & детерминированный выбор по индексу; глобальный AC не берётся, цена подсчитана (\texttt{AC\_\allowbreak{}is\_\allowbreak{}L5}, \texttt{Choice\allowbreak{}Price\allowbreak{}Map}) & \S{}5.7 \\ \hline
+\textbf{Объёмности} & \texttt{Trivial} & структурное/сетоидное равенство, без глобальной аксиомы (funext тоже не берём) & \S{}5.8 \\ \hline
+\end{tabularx}}
+
+\textbf{\texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}:} ровно одна из девяти (Powerset) --- на role-limit-стороне; восемь остальных тривиальны (3) или заменены именованным законом (5).
+
+\textbf{Остаётся как реальные обязательства:} классическая логика (\texttt{classic} = L3) + извлечение свидетеля (\texttt{L4\_\allowbreak{}witness} = P4), поверх CIC. Ни одно --- не аксиома существования. (Аксиомы ledger'а выше --- это аксиомы \emph{ZFC}, которые мы не берём; наши собственные два допущения --- отдельно, \S{}6.)
+
+\bigskip\hrule\bigskip
+
+\section{Аксиома за аксиомой}
+
+\textbf{Ядро документа --- машинно-проверенный реестр \texttt{foundation/\allowbreak{}ZFCAxiom\allowbreak{}Ledger.v}} (10 Qed, 0 аксиом). Девять аксиом ZFC классифицированы функцией \texttt{tos\_\allowbreak{}verdict} на \textbf{три вердикта}:
+
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{|X|X|X|}
+\hline
+\textbf{Вердикт} & \textbf{Аксиомы} & \textbf{Замена} \\ \hline
+\textbf{Trivial} (3) & Extensionality, Pairing, Union & структурно-конструктивны --- отдельная аксиома не нужна \\ \hline
+\textbf{ReplacedBy P4} (3) & Infinity, Separation, Replacement & процесс / предикативная (разрешимая) выделимость \\ \hline
+\textbf{ReplacedBy P1} (1) & Foundation & иерархия уровней (нет x $\in$ x) \\ \hline
+\textbf{ReplacedBy L5} (1) & Choice & детерминированный выбор по индексу \\ \hline
+\textbf{RoleLimit} (1) & \textbf{Powerset} & единственная <<цена>> --- примыкает к завершённой бесконечности \\ \hline
+\end{tabularx}}
+
+\textbf{Центральная теорема \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}: ровно одна аксиома ZFC (Powerset) попадает на role-limit-сторону границы финитизации; восемь остальных тривиальны или заменены именованным законом E/R/R.} И даже Powerset --- Element на конечной стороне (\texttt{bitvectors\_\allowbreak{}length}:
+{\footnotesize\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.2}\begin{tabularx}{\linewidth}{|X|X|}
+\hline
+\textbf{$\mathcal{P}$([0,n))} & \textbf{= 2\textsuperscript{n}, явно перечислимо), role-limit лишь в пределе 2\textasciicircum{}$\mathbb{N}$ (несчётность). Это формальное} \\ \hline
+\end{tabularx}}
+основание тезиса <<вся разрешимая математика строится без ZFC>>.
+
+Реестр --- честно \textbf{синтез/классификация, не новая теорема}: вердикты \texttt{Replaced\allowbreak{}By} \emph{цитируют} отдельные 0-аксиомные файлы (\texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity}, \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}AC}+\texttt{AC\_\allowbreak{}is\_\allowbreak{}L5}, \texttt{P1\_\allowbreak{}blocks\_\allowbreak{}russell}/\texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership}, \texttt{P4Prohibits\allowbreak{}Impredicative}, \texttt{Choice\allowbreak{}Price\allowbreak{}Map}), а не передоказывают их. Доказательная сила --- в анкерных файлах; реестр сводит их воедино.
+
+\textbf{Метод (E/R/R-разбор) --- главный уникальный инструмент.} Каждый вердикт получается одним приёмом: локализовать аксиому на триаде Elements/Roles/Rules и спросить P4 --- \emph{<<могло ли быть иначе при тех же Правилах?>>}. Где аксиома постулирует завершённый \textbf{Элемент} ($\omega$, 2\textasciicircum{}$\mathbb{N}$), а Правила его не вынуждают --- это \textbf{реификация} (Правило/Роль заморожены в Элемент; диагноз из \texttt{Real\allowbreak{}Point\allowbreak{}Setoid}/ \texttt{Principles\allowbreak{}To\allowbreak{}ERR} для случая реифицированного $\mathbb{R}$), и вердикт --- замена законом или role-limit. Где построение даётся самой структурой типов --- вердикт Trivial. Разбор (подраздел \textbf{в}) развёрнут полностью в каждом разделе: он, а не отдельные результаты, и есть вклад.
+
+Дисциплина каждого раздела: \textbf{(а)} что аксиома даёт классике --- наглядно, с фундаментальными теоремами-зависимостями; \textbf{(б)} цена --- фактически; \textbf{(в) E/R/R разбор} --- метод в действии (локализация на триаде $\to$ P4-диагностика $\to$ вердикт ledger'а $\to$ реконструкция \emph{следует}); \textbf{(г)} реконструкция с точными именами теорем; \textbf{(д)} свидетели; \textbf{(е)} честная граница, привязанная к границе разрешимости; \textbf{(ж)} <<проблема отсутствия аксиомы>> решается так --- разобранный пример.
+
+\bigskip\hrule\bigskip
+
+\subsection{Аксиома Бесконечности}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Replaced\allowbreak{}By P4}} --- заменена законом P4 (процесс вместо завершённой бесконечности). Машинный анкер: \texttt{foundation/\allowbreak{}P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity.v}.
+
+\textbf{(а) Что аксиома даёт классике.} Формально: \texttt{$\exists$ I. ($\emptyset$ $\in$ I) $\land$ ($\forall$ x $\in$ I,\allowbreak{} x $\cup$ \{x\} $\in$ I)} --- существует индуктивное множество. Выделением $\to$ $\omega$ (наименьшее индуктивное), отсюда $\mathbb{N}$ как \emph{завершённый объект}. На $\omega$ держится почти всё:
+\begin{itemize}
+\item \textbf{последовательность} = функция с областью $\omega$ (нужен $\omega$-как-область определения);
+\item \textbf{$\mathbb{R}$} = пополнение $\mathbb{Q}$ (классы Коши или дедекиндовы сечения) --- нужен $\omega$, чтобы вообще говорить о последовательностях, и Степень, чтобы собрать классы в один объект;
+\item \textbf{предел, производная, интеграл, Больцано--Вейерштрасс, теорема о промежуточном значении} --- все квантифицируют <<для всех n $\in$ $\omega$>> и <<существует подпоследовательность>>, т.е. по завершённому $\omega$.
+\end{itemize}
+
+Особенность среди аксиом ZF: \textbf{единственная, что выводит бесконечный объект из ничего.} Прочие строят из данного (Пара/Степень/Объединение/Подстановка) или ограничивают (Выделение/Фундирования). Бесконечность --- \emph{чистый онтологический постулат бытия}.
+
+\textbf{(б) Цена.} Завершённая актуальная бесконечность: $\omega$ содержит все натуральные сразу. Водораздел Гильберта (актуальная vs потенциальная бесконечность). Для математика --- рабочий инструмент без внутреннего противоречия. Для физики --- прямой источник <<болезней>>: УФ-расходимости КТП (сумма по завершённо-бесконечному множеству мод/импульсов), требующие перенормировки = вычитания бесконечностей.
+
+\textbf{(в) E/R/R разбор --- метод в действии.}
+
+\emph{Локализация на триаде.} Аксиома постулирует \textbf{Элемент} --- $\omega$, завершённый объект, содержащий все итерации преемника сразу. Спросим, где здесь Правило и где Роль. \textbf{Правило}: \texttt{0} (база) и \texttt{S} (преемник) --- порождающая операция, всегда делающая ещё один шаг. \textbf{Роль}: <<быть достигнутым за конечное число шагов>>.
+
+\emph{P4-диагностика --- <<могло ли быть иначе при тех же Правилах?>>} При тех же Правилах (\texttt{0}, \texttt{S}) ты порождаешь каждую стадию \texttt{0,\allowbreak{} S0,\allowbreak{} S(S0),\allowbreak{} \ldots{}}, но Правило \textbf{никогда не выдаёт <<все стадии разом, как объект>>}. Переход к <<завершённому множеству всех выходов>> --- отдельный акт, Правилами \textbf{не вынужденный}: чтобы его совершить, приходится \emph{постулировать тотальность отдельно} --- и это ровно Аксиома Бесконечности.
+
+\emph{Диагноз: реификация Правила в Элемент.} Преемство --- генеративное Правило (способность всегда сделать ещё шаг); <<множество всех шагов, завершённое>> замораживает это Правило в Элемент. Это та самая ошибка <<основание-как-продукт>>, которую ловит P4: порождающее Правило выдаётся за порождённую завершённую тотальность-Элемент. Различение существует, актуальная бесконечность --- нет.
+
+\emph{Реконструкция следует из диагноза:} сохранить Правило, отказаться от реифицированного Элемента. В CIC Правило преемства \textbf{есть сам тип}: \texttt{Inductive nat := O | S (n : nat)}. Тип --- это правило <<всегда можно ещё шаг>>; оно даёт каждую стадию, не доставляя <<все стадии как завершённый объект>>. $\mathbb{N}$ существует \textbf{как Правило}, не как Элемент-тотальность. Бесконечность вернулась туда, где она неустранима (потенция/процесс), и ушла оттуда, где была лишней (завершённый объект).
+
+\emph{Вердикт ledger'а --- \texttt{Replaced\allowbreak{}By P4}:} <<реификация Правила в Элемент>> --- это диагноз, а закон-замена названа: P4 (финитная актуальность = процесс). Машинно: \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity} --- индукция, частичные суммы, факториал и т.п. работают на \texttt{nat}-как-Правиле без завершённого $\omega$.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{enumerate}
+\item 
+\item 
+\item 
+\begin{itemize}
+\item \texttt{nested\_\allowbreak{}interval\_\allowbreak{}limit} --- свойство вложенных отрезков (NIP);
+\item \texttt{diagonal\_\allowbreak{}converges} --- \textbf{метрическая полнота}: последовательность Коши из вещественных (meta-Cauchy) сходится к вещественному. $\mathbb{R}$-как-процессы Коши-полны;
+\item \texttt{sup\_\allowbreak{}bisect\_\allowbreak{}cauchy} --- супремум бисекцией для \textbf{разрешимого} предиката \texttt{P : Q $\to$ bool}.
+\end{itemize}
+\end{enumerate}
+
+\textbf{(д) Свидетели} \emph{(проверено 2026-06-11)}.
+\begin{itemize}
+\item \texttt{src/\allowbreak{}Cauchy\allowbreak{}Real.v} --- \texttt{is\_\allowbreak{}cauchy}, \texttt{Cauchy\allowbreak{}Seq} (процесс + свидетель Коши), \texttt{cauchy\_\allowbreak{}equiv} (\texttt{\textasciitilde{}\textasciitilde{}}); заголовок <<18 Qed, 0 Admitted, AXIOMS: NONE --- fully constructive over Q>>.
+\item \texttt{src/\allowbreak{}Completeness.v} --- \texttt{nested\_\allowbreak{}interval\_\allowbreak{}limit}, \texttt{diagonal\_\allowbreak{}converges}, \texttt{sup\_\allowbreak{}bisect\_\allowbreak{}cauchy}; <<AXIOMS: NONE>>.
+\item \texttt{src/\allowbreak{}process/\allowbreak{}Process\allowbreak{}Core.v} --- \texttt{Real\allowbreak{}Process := nat $\to$ Q}; хаб (333+ импортёров).
+\item \texttt{src/\allowbreak{}geometry/\allowbreak{}Manifold\allowbreak{}As\allowbreak{}Limit.v}; \texttt{src/\allowbreak{}algebra/\allowbreak{}Algebraic\allowbreak{}Closure\allowbreak{}Process.v} ($\mathbb{Q}$ = башня).
+\item \texttt{src/\allowbreak{}foundation/\allowbreak{}Continuum\allowbreak{}Limit\allowbreak{}Role\allowbreak{}Limit.v} --- \texttt{sqrt2\_\allowbreak{}never\_\allowbreak{}reached}, \texttt{r\_\allowbreak{}sq\_\allowbreak{}ne\_\allowbreak{}2}; \texttt{Euler\allowbreak{}Process\allowbreak{}Role\allowbreak{}Limit.v} --- \texttt{e\_\allowbreak{}excludes\_\allowbreak{}rational}, \texttt{e\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}.
+\item \textbf{Анкер вердикта:} \texttt{src/\allowbreak{}foundation/\allowbreak{}P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity.v} --- \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity}; сведён в \texttt{ZFCAxiom\allowbreak{}Ledger.v} (\texttt{tos\_\allowbreak{}verdict Infinity = Replaced\allowbreak{}By P4}, 0 аксиом).
+\end{itemize}
+
+\textbf{(е) Честная граница --- = граница разрешимости.}
+\begin{itemize}
+\item \textbf{Не приписывать <<нет AoI>> себе как изобретение.} В CIC Аксиомы Бесконечности нет \emph{вообще} --- \texttt{nat} есть индуктивный тип по правилам теории типов; <<делаем X без AoI>> верно для \emph{любого} Coq-файла. Наш вклад --- \textbf{процессное прочтение} (объект = процесс/правило) и систематический отказ от завершённого континуума там, где классика молча его берёт.
+\item \textbf{Наша полнота конструктивна.} \texttt{sup\_\allowbreak{}bisect\_\allowbreak{}cauchy} даёт sup для \emph{разрешимого} \texttt{P : Q $\to$ bool}. Полный классический LUB --- <<у любого непустого ограниченного множества вещественных есть sup>> для \textbf{произвольного} (неразрешимого) множества --- мы не доказываем: это ровно место, где классика опирается на завершённую Степень + LEM над неразрешимыми предикатами. \textbf{Зазор <<конструктивная полнота $\to$ импредикативный LUB>> = граница разрешимости (вена A)} --- центральный предмет системы, не скрытый дефект.
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.}
+
+\emph{Опасение математика:} <<Без завершённого $\omega$ нет $\mathbb{R}$ --- рушится анализ: ни предела, ни Больцано--Вейерштрасса, ни теоремы о промежуточном значении.>>
+
+\emph{Решение --- два самых базовых факта анализа, реконструированных явно:}
+
+\begin{itemize}
+\item \textbf{Теорема о промежуточном значении.} \texttt{ivt\_\allowbreak{}cauchy\_\allowbreak{}real} \footnote{\texttt{IVT\_\allowbreak{}Cauchy\allowbreak{}Real.v}}: для непрерывной f на [a,b] с f(a)<0<f(b) \textbf{существует} \texttt{c : Cauchy\allowbreak{}Seq} в [a,b] с \texttt{f(c\_\allowbreak{}n) $\to$ 0} ($\varepsilon$-форма: $\forall$$\varepsilon$>0 $\exists$N $\forall$n$\ge$N, |f(c\_n)|<$\varepsilon$). Корень \textbf{локализован с любой точностью} --- рабочее содержание IVT налицо, без завершённого $\mathbb{R}$. Что <<теряется>>: точное \texttt{f(c) = 0} над $\mathbb{Q}$ недоказуемо --- но это не дефект, а \textbf{role-limit}: корень актуализуется как процесс-бисекция, не как завершённая точка. Граница <<локализуем $\forall$$\varepsilon$, но не точечно>> --- это в точности граница разрешимости.
+\item \textbf{Больцано--Вейерштрасс.} \texttt{bolzano\_\allowbreak{}weierstrass} \footnote{\texttt{analysis/\allowbreak{}Bolzano\allowbreak{}Weierstrass.v}}: у ограниченной последовательности есть точка сгущения \texttt{L : Cauchy\allowbreak{}Seq} --- доказано \textbf{детерминированной бисекцией, без Зависимого Выбора} (классически BW требует DC; здесь выбор разрешён Правилом <<иди в половину с бесконечным числом членов>>). Результат даже сильнее обычного: и без $\mathbb{R}$-как-объекта, и без выбора.
+\end{itemize}
+
+\emph{Вывод.} <<Отсутствие Бесконечности>> не теряет анализ --- теряет лишь \emph{фикцию завершённого континуума}. Рабочее содержание (корень, точка сгущения, предел) реконструировано как процесс; недостижимое (точное равенство, импредикативный sup) ровно совпадает с границей role-limit, которую система и изучает. Конкретный носитель этого --- $\surd$2: \texttt{Cauchy\allowbreak{}Seq}, вычислимый до любой точности, но \texttt{sqrt2\_\allowbreak{}never\_\allowbreak{}reached} => никакая рациональная стадия ему не равна. $\surd$2 \textbf{есть} (как правило-процесс), но не \textbf{как завершённая точка} --- E/R/R-чтение слова <<иррациональное>>.
+
+\bigskip\hrule\bigskip
+
+\subsection{Аксиома Степени (Power Set)}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Role\allowbreak{}Limit}} --- единственная из девяти аксиом на role-limit-стороне (\texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}). Не тривиальна и не заменяется законом --- это подлинная <<цена>>. Разбор показывает, где именно она пересекает границу финитизации.
+
+\textbf{(а) Что аксиома даёт классике.} Формально: для любого X существует $\mathcal{P}$(X) = \{ Y : Y $\subseteq$ X \} как множество. На чём держится, наглядно:
+\begin{itemize}
+\item \textbf{лестница кардиналов:} |X| < |$\mathcal{P}$(X)| (Кантор) $\Longrightarrow$ $\aleph$\textsubscript{0} < 2\textasciicircum{}$\aleph$\textsubscript{0} < 2\textasciicircum{}(2\textasciicircum{}$\aleph$\textsubscript{0}) < \ldots{} --- вся трансфинитная башня мощностей;
+\item \textbf{$\mathbb{R}$ как множество:} классы Коши / сечения надо собрать в один объект --- Степень над $\mathbb{Q}$-последовательностями;
+\item \textbf{пространства функций, $\sigma$-алгебры, топологии, теория меры} --- всё это множества подмножеств;
+\item \textbf{Континуум-гипотеза} --- вопрос именно о $\mathcal{P}$($\mathbb{N}$): есть ли мощность строго между $\aleph$\textsubscript{0} и 2\textasciicircum{}$\aleph$\textsubscript{0}.
+\end{itemize}
+
+\textbf{(б) Цена.} Завершённый 2\textasciicircum{}$\mathbb{N}$ = континуум как готовый несчётный объект. Согласованность башни кардиналов с остальной теорией \textbf{независима} (Гёдель--Коэн: CH не разрешима в ZFC) --- знаменитый <<потолок>>. Здесь обязательство ZFC к актуальной бесконечности тяжелее всего: завершённая \textbf{несчётная} тотальность.
+
+\textbf{(в) E/R/R разбор --- метод в действии.}
+
+\emph{Локализация на триаде.} Степень постулирует \textbf{Элемент} --- $\mathcal{P}$(X), завершённое множество всех подмножеств сразу. \textbf{Роль} здесь --- <<быть подмножеством X>> (предикат/критерий, который элемент удовлетворяет). Степень замораживает <<всё, играющее эту Роль, разом, как один объект>> в Элемент.
+
+\emph{P4-диагностика --- <<могло ли быть иначе при тех же Правилах?>>} Ответ \textbf{расщепляется по X} --- и в этом вся суть:
+\begin{itemize}
+\item Для \textbf{конечного} X = [0,n) <<все подмножества>> актуализуемы: их ровно 2\textsuperscript{n}, их можно выписать (битовые векторы). Конечная Степень --- \textbf{честный Element}.
+\item Для X = $\mathbb{N}$ <<все подмножества разом>> = 2\textasciicircum{}$\mathbb{N}$ = континуум: завершённая \textbf{несчётная} тотальность. Правило <<y $\subseteq$ $\mathbb{N}$ $\Longleftrightarrow$ y есть предикат $\mathbb{N}$$\to$Bool / процесс>> порождает каждое подмножество, но никогда не выдаёт <<все разом как объект>> --- и \textbf{Кантор доказывает, почему}: любую завершённую нумерацию обходит диагональное правило.
+\end{itemize}
+
+\emph{Диагноз --- единственный role-limit среди девяти.} У восьми других аксиом реификация добавляла \emph{заменимый законом} Элемент или была структурно тривиальной. Здесь она добавляет \textbf{role-limit Элемент} --- завершённую несчётную тотальность, к которой процесс принципиально не сходится. Вот почему Степень, одна из девяти, получает вердикт \texttt{Role\allowbreak{}Limit}. И диагноз \textbf{точечен}: пересечение границы --- ровно в переходе <<конечный $\mathcal{P}$ (Element) $\to$ завершённый 2\textasciicircum{}$\mathbb{N}$ (role-limit)>>. Роль (быть-подмножеством) и несчётность-как-правило остаются на Element-стороне; в role-limit уходит только \emph{завершённый объект}.
+
+Репозиторий формулирует это дословно так: \texttt{no\_\allowbreak{}maximal\_\allowbreak{}bool\_\allowbreak{}power} \footnote{\texttt{settheory/\allowbreak{}Cantor\allowbreak{}Theorem\allowbreak{}General.v}} снабжён комментарием --- \emph{<<role-comparison statement (<<no maximal cardinality>>), NOT a completed power-set Element-object>>}. Кантор у нас --- сравнение Ролей, не построение Элемента-степени.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{enumerate}
+\item 
+\item 
+\item 
+\begin{itemize}
+\item \texttt{binary\_\allowbreak{}processes\_\allowbreak{}not\_\allowbreak{}enumerable} + \texttt{diagonal\_\allowbreak{}differs : $\forall$ f n,\allowbreak{} \textasciitilde{} bp\_\allowbreak{}eq (diagonal f) (f n)} \footnote{\texttt{Process\allowbreak{}Diagonal.v}} --- диагональ обходит каждую запись любой нумерации;
+\item \texttt{unit\_\allowbreak{}interval\_\allowbreak{}uncountable\_\allowbreak{}trisect\_\allowbreak{}v2} \footnote{\texttt{Shrinking\allowbreak{}Intervals\_\allowbreak{}ERR.v}}: для любой регулярной нумерации E $\exists$ D : RealProcess в [0,1], Коши, $\forall$n \texttt{not\_\allowbreak{}equiv D (E n)} --- [0,1]$\cap$$\mathbb{Q}$ несчётен;
+\item \texttt{no\_\allowbreak{}maximal\_\allowbreak{}bool\_\allowbreak{}power} \footnote{\texttt{Cantor\allowbreak{}Theorem\allowbreak{}General.v}}: $\forall$ X (f : X $\to$ (X$\to$bool)), $\neg$ surjective f --- Кантор для любого типа как сравнение Ролей.
+\end{itemize}
+\item 
+\end{enumerate}
+
+\textbf{(д) Свидетели} \emph{(проверено 2026-06-11)}.
+\begin{itemize}
+\item \texttt{ZFCAxiom\allowbreak{}Ledger.v} --- \texttt{bitvectors\_\allowbreak{}length} (конечный $\mathcal{P}$ = 2\textsuperscript{n}), \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}.
+\item \texttt{Process\allowbreak{}Diagonal.v} --- \texttt{binary\_\allowbreak{}processes\_\allowbreak{}not\_\allowbreak{}enumerable}, \texttt{diagonal\_\allowbreak{}differs}.
+\item \texttt{Shrinking\allowbreak{}Intervals\_\allowbreak{}ERR.v} --- \texttt{unit\_\allowbreak{}interval\_\allowbreak{}uncountable\_\allowbreak{}trisect\_\allowbreak{}v2}.
+\item \texttt{settheory/\allowbreak{}Cantor\allowbreak{}Theorem\allowbreak{}General.v} --- \texttt{no\_\allowbreak{}maximal\_\allowbreak{}bool\_\allowbreak{}power} (+ комментарий <<role-comparison\ldots{} NOT a completed power-set Element-object>>).
+\item \texttt{Process\allowbreak{}Continuum\allowbreak{}Hypothesis.v} --- \texttt{process\_\allowbreak{}continuum\_\allowbreak{}hypothesis} (Кантор--Бендиксон; classic+L4).
+\item \texttt{foundation/\allowbreak{}Former\allowbreak{}Walls\allowbreak{}Ledger.v} --- завершённый Power Set-\textbf{объект} как артефакт упаковки (\texttt{WPowerset\allowbreak{}Object = Reached\allowbreak{}Freely}, 0 аксиом).
+\end{itemize}
+
+\textbf{(е) Честная граница --- это И есть role-limit, открыто.}
+\begin{itemize}
+\item Степень --- \textbf{единственная} аксиома ZFC, которую мы не заменяем: помечаем её как границу. Честное утверждение: всё разрешимое/конечное содержание Степени удержано на Element-стороне (конечный $\mathcal{P}$ = 2\textsuperscript{n}, быть-подмножеством = предикат, несчётность = правило), а завершённый несчётный 2\textasciicircum{}$\mathbb{N}$ --- ровно та актуальная бесконечность, от которой онтология отказывается.
+\item \textbf{CH мы не разрешаем --- существенная оговорка.} \texttt{process\_\allowbreak{}continuum\_\allowbreak{}hypothesis} --- это Кантор--Бендиксон (перфект-сет-свойство для замкнутых) = \textbf{CH для замкнутых множеств}, теорема, верная и в ZFC. Коэновскую независимую CH мы не трогаем: это вопрос об объекте (2\textasciicircum{}$\mathbb{N}$ как завершённое множество и башня кардиналов над ним), которого мы не строим. Не <<растворили независимость>> --- <<вопрос не возникает, ибо нет объекта>>. Имя \texttt{process\_\allowbreak{}continuum\_\allowbreak{}hypothesis} --- мягкое преувеличение (доказан Кантор--Бендиксон); кандидат на переименование --- \texttt{process\_\allowbreak{}cantor\_\allowbreak{}bendixson}.
+\item Башня кардиналов над 2\textasciicircum{}$\aleph$\textsubscript{0} не строится --- тот же осознанный отказ, что в Подстановке (\S{}5.5).
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.}
+
+\emph{Опасение математика:} <<Без Степени рушится несчётность, $\mathbb{R}$-как-множество, пространства функций, теория меры, вся шкала бесконечных кардиналов.>>
+
+\emph{Решение --- что удержано и что честно отдано:}
+\begin{itemize}
+\item \textbf{Несчётность не теряется --- восстановлена как правило.} \texttt{binary\_\allowbreak{}processes\_\allowbreak{}not\_\allowbreak{}enumerable}: никакая нумерация двоичных процессов не сюръективна (Кантор); \texttt{unit\_\allowbreak{}interval\_\allowbreak{}uncountable\_\allowbreak{}trisect\_\allowbreak{}v2}: [0,1]$\cap$$\mathbb{Q}$ несчётен. Получена теорема (несчётность) без объекта (завершённый 2\textasciicircum{}$\mathbb{N}$). <<Теряется>> лишь реифицированный кардинал-как-объект.
+\item \textbf{<<Множество подмножеств>> / пространства функций} $\to$ предикаты/процессы (подмножество = \texttt{X$\to$bool}); конечная Степень = Element (2\textsuperscript{n}).
+\item \textbf{Честно отдано в role-limit:} завершённый континуум как множество и трансфинитная башня кардиналов. Единственный role-limit среди девяти --- открыто помеченная цена.
+\end{itemize}
+
+\emph{Вывод.} Степень уникальна: её содержание расщепляется чисто. Element-сторона (конечный $\mathcal{P}$, быть-подмножеством, несчётность-как-правило) удержана полностью; role-limit-сторона (завершённый 2\textasciicircum{}$\mathbb{N}$-объект, башня кардиналов) осознанно отдана. Это не <<решено без аксиомы>>, как восемь остальных, а \textbf{честная цена, локализованная в точку пересечения границы} --- и \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit} доказывает, что цена ровно одна.
+
+\bigskip\hrule\bigskip
+
+\subsection{Аксиома Фундирования (Regularity)}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Replaced\allowbreak{}By P1}} --- заменена законом P1 (иерархия уровней, нет x$\in$x). Анкеры: \texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership}, \texttt{P1\_\allowbreak{}blocks\_\allowbreak{}russell}; Print Assumptions = 0 аксиом.
+
+\textbf{(а) Что аксиома даёт классике.} Формально: каждое непустое x содержит $\in$-непересекающийся с ним элемент (\texttt{$\forall$ x$\ne$$\emptyset$,\allowbreak{} $\exists$ y$\in$x,\allowbreak{} y$\cap$x=$\emptyset$}). Следствия: нет бесконечных $\in$-нисходящих цепей, нет x$\in$x, множества ложатся в кумулятивную иерархию V\_$\alpha$ (V\textsubscript{0}=$\emptyset$, V\_\{$\alpha$+1\}=$\mathcal{P}$(V\_$\alpha$), V\_$\lambda$=$\bigcup$). Регулярность делает $\in$-структуру вселенной ZFC фундированной --- на ней стоит $\in$-индукция и ранговая функция.
+
+\textbf{(б) Цена.} Это аксиома-\textbf{ограничение}: нужна исключительно чтобы исключить патологию ($\in$-петли, x$\in$x), которую сама теория без неё допускает. ZFC сперва своей онтологией (<<множество = любая совокупность>>) делает петли мыслимыми, а потом отдельной аксиомой их запрещает --- латание собственной либеральности, а не позитивная идея.
+
+\textbf{(в) E/R/R разбор --- метод в действии.}
+
+\emph{Локализация на триаде.} Фундирование --- \textbf{не} аксиома существования (ничего не вводит), а \textbf{Правило-ограничение} на отношении $\in$: <<нет $\in$-петель>>. P4-вопрос ставится наоборот, чем для аксиом существования: откуда вообще берётся возможность петли, которую надо запрещать?
+
+\emph{P4-диагностика.} Петля x$\in$x мыслима в ZFC потому, что $\in$ --- \textbf{плоское} отношение на одном недифференцированном универсуме: структурно ничто не мешает x стоять по обе стороны $\in$. Запрет приходится навешивать извне (аксиомой), ибо внутренней структуры, которая бы его вынуждала, нет.
+
+\emph{Диагноз: ограничение, ставшее лишним при наличии структуры.} В ToS принадлежность стратифицирована изначально: \texttt{Level} --- индуктивный тип уровней, \texttt{<<} --- строгий порядок на нём, элемент системы уровня L живёт строго ниже L. Тогда x$\in$x потребовало бы \texttt{L << L} --- а \texttt{level\_\allowbreak{}lt\_\allowbreak{}irrefl} доказывает \texttt{$\forall$ l,\allowbreak{} $\neg$(l << l)}. Петля невозможна \textbf{по типу}, не по запрету. Правило-ограничение не отвергается --- оно становится \textbf{теоремой о структуре уровней} (\texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership}), и притом 0-аксиомной (Print Assumptions = Closed). Это и есть вердикт \texttt{Replaced\allowbreak{}By P1}: не <<мы тоже постулируем фундированность>>, а <<фундированность \emph{вытекает} из закона P1 (иерархия), который у нас первичен>>.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{itemize}
+\item \texttt{level\_\allowbreak{}lt\_\allowbreak{}irrefl : $\forall$ l,\allowbreak{} $\neg$ (l << l)} \footnote{\texttt{Core\_\allowbreak{}ERR.v:96}}, через \texttt{level\_\allowbreak{}lt\_\allowbreak{}depth} (монотонность по глубине).
+\item \texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership : $\forall$ L,\allowbreak{} $\neg$ (L << L)} \footnote{\texttt{Core\_\allowbreak{}ERR.v:126}} --- P1 как теорема.
+\item \texttt{level\_\allowbreak{}lt\_\allowbreak{}trans} \footnote{\texttt{Core\_\allowbreak{}ERR.v:104}} --- транзитивность; фундированность по глубине.
+\item \texttt{P1\_\allowbreak{}blocks\_\allowbreak{}russell} \footnote{\texttt{P4Prohibits\allowbreak{}Impredicative.v:56}} --- из <<нет x$\in$x>> критерий Рассела тривиализуется.
+\end{itemize}
+
+\textbf{(д) Свидетели.} Все четыре выше; \texttt{Print Assumptions} \texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership} и \texttt{cantor\_\allowbreak{}no\_\allowbreak{}system\_\allowbreak{}of\_\allowbreak{}all\_\allowbreak{}L2\_\allowbreak{}systems} = \texttt{Closed under the global context} --- \textbf{0 аксиом} (проверено 2026-06-11). Сведено в \texttt{ZFCAxiom\allowbreak{}Ledger} (\texttt{tos\_\allowbreak{}verdict Foundation = Replaced\allowbreak{}By P1}).
+
+\textbf{(е) Честная граница.} Почти отсутствует --- самый чистый раздел: Фундирование не ослаблено и не отдано, а \emph{выведено} из первичной структуры (0 аксиом). Единственная честность: мы принимаем стратификацию (Level-иерархию) как первичную --- но это не аксиома существования, а индуктивный тип, и тот же тип несёт всю остальную теорию (единообразие, не ad hoc-постулат под одну патологию).
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.} \emph{Опасение математика:} <<Без Регулярности возможны не-фундированные множества, x$\in$x, $\in$-петли --- теория станет патологичной.>> \emph{Решение, конкретно.} Патология не <<запрещается отдельно>> --- она \textbf{невыразима}. x$\in$x потребовало бы \texttt{L << L}; \texttt{level\_\allowbreak{}lt\_\allowbreak{}irrefl} доказывает, что такого нет, 0 аксиом. То, что ZFC сначала допускает, а затем запрещает аксиомой, у нас просто не возникает: $\in$ стратифицирована по типу. \emph{Вывод.} <<Отсутствие Регулярности>> ничего не теряет --- наоборот: то, ради чего она вводилась (фундированность, отсутствие петель), здесь \textbf{бесплатная теорема}, а не постулат. Тем же механизмом блокирован и Рассел (\texttt{P1\_\allowbreak{}blocks\_\allowbreak{}russell}) --- это разворачивается в \S{}5.4 для схемы Выделения.
+
+\bigskip\hrule\bigskip
+
+\subsection{Схема Выделения (Separation / Specification)}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Replaced\allowbreak{}By P4}} --- предикативная/разрешимая выделимость. Анкеры: \texttt{P4\_\allowbreak{}dissolves\_\allowbreak{}russell} \footnote{\texttt{P4Prohibits\allowbreak{}Impredicative.v}}, \texttt{pi11\_\allowbreak{}hierarchy\_\allowbreak{}collapse}/\texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Pi11} \footnote{\texttt{P4\_\allowbreak{}Eliminates\_\allowbreak{}Pi11.v}}. Самочленство --- через P1 (см. \S{}5.3).
+
+\textbf{(а) Что аксиома даёт классике.} Схема (по аксиоме на каждую формулу $\varphi$): для множества A существует \texttt{\{ x $\in$ A | $\varphi$(x) \}}. \textbf{Намеренно ограничена} --- выделение только из \emph{уже существующего} A. Это исторический ответ ZFC на Рассела: безграничная свёртка Фреге \texttt{\{ x | $\varphi$(x) \}} запрещена (при $\varphi$(x) $\equiv$ x$\notin$x даёт парадокс). Даёт классике все подмножества-по-свойству: ядра, прообразы, \{x$\in$$\mathbb{R}$ | x\textsuperscript{2}<2\}, и т. п.
+
+\textbf{(б) Цена.} Ограничение мотивировано \emph{исключительно} избеганием Рассела --- это \textbf{заплатка}: схема (бесконечное семейство аксиом), форма которой продиктована патологией, а не позитивной идеей. Хуже того, $\varphi$ может быть \textbf{импредикативной} --- квантифицировать <<по всем множествам/функциям>>, т.е. по завершённой (несчётной) тотальности.
+
+\textbf{(в) E/R/R разбор --- метод в действии.}
+
+\emph{Локализация.} Выделение --- \textbf{Правило} (построить подколлекцию по критерию $\varphi$). Опасность в двух точках: (1) самочленство x$\in$x при безграничной свёртке; (2) импредикативность $\varphi$ (<<$\forall$ множеств\ldots{}>>). P4-вопрос: что из этого требует завершённого Элемента?
+
+\emph{P4-диагностика, два потока:}
+\begin{itemize}
+\item \textbf{(1) Самочленство.} x$\in$x требует плоского $\in$; у нас это \texttt{L << L}, опровергнутое \texttt{level\_\allowbreak{}lt\_\allowbreak{}irrefl} (\S{}5.3). Критерий Рассела тривиализуется (\texttt{P1\_\allowbreak{}blocks\_\allowbreak{}russell}), а сама свёртка даёт противоречие лишь \emph{без} P1 (\texttt{russell\_\allowbreak{}contradiction\_\allowbreak{}without\_\allowbreak{}P1}). Ограничивать свёртку не нужно --- самочленство \textbf{невыразимо по типу}.
+\item \textbf{(2) Импредикативность.} $\varphi$ вида <<$\forall$ f : $\mathbb{N}$$\to$$\mathbb{N}$, \ldots{}>> классически квантифицирует по несчётной завершённой тотальности функций. Под P4 всякая функция --- \textbf{процесс = программный код}, поэтому <<$\forall$ функций>> становится <<$\forall$ c : nat>>: импредикативная $\Pi$\textsuperscript{1}\textsubscript{1}-свёртка \textbf{коллапсирует в арифметику} (\texttt{pi11\_\allowbreak{}hierarchy\_\allowbreak{}collapse}, \texttt{pi11\_\allowbreak{}to\_\allowbreak{}arithmetic}). Завершённая тотальность, по которой шла квантификация, заменена счётным процесс-индексом.
+\end{itemize}
+
+\emph{Диагноз.} ZFC ограничивает Правило (свёртку) извне, чтобы обойти патологию. В ToS патология снята \textbf{структурой}: самочленство невыразимо (P1/уровни), импредикативная квантификация коллапсирует в предикативно-арифметическую (P4/функция-как-код). Поэтому выделение \textbf{не нужно ограничивать} --- оно свободно и предикативно. Вердикт \texttt{Replaced\allowbreak{}By P4}: безопасная (предикативная, разрешимая) выделимость даётся законом P4, а не урезанной схемой.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{itemize}
+\item \texttt{P4\_\allowbreak{}dissolves\_\allowbreak{}russell} \footnote{\texttt{P4Prohibits\allowbreak{}Impredicative.v}} --- 3-конъюнкт: P1 блокирует самочленство / свёртка Рассела без P1 = \texttt{False} / индуктивные типы P4-совместимы (stage-bounded).
+\item \texttt{pi11\_\allowbreak{}hierarchy\_\allowbreak{}collapse}, \texttt{pi11\_\allowbreak{}to\_\allowbreak{}arithmetic}, \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Pi11} \footnote{\texttt{P4\_\allowbreak{}Eliminates\_\allowbreak{}Pi11.v}}: <<$\forall$ функций>> = <<$\forall$ c:nat>> (функция = процесс/код), импредикативная свёртка $\to$ арифметическая. Использует \texttt{Parameter eval\_\allowbreak{}program} (универсальная МТ --- консервативный параметр, не аксиома; виден в Print Assumptions).
+\item \texttt{P1\_\allowbreak{}blocks\_\allowbreak{}russell}, \texttt{russell\_\allowbreak{}contradiction\_\allowbreak{}without\_\allowbreak{}P1} (там же) --- самочленство.
+\end{itemize}
+
+\textbf{(д) Свидетели} --- выше; плюс единый корень диагоналей: Рассел/Кантор/Тарский/Гёдель --- инстансы одной теоремы Ловера, вена E \footnote{\texttt{cs/\allowbreak{}Lawvere\allowbreak{}Fixed\allowbreak{}Point.v}, \texttt{cs/\allowbreak{}Russell\allowbreak{}Via\allowbreak{}Lawvere.v}}.
+
+\textbf{(е) Честная граница.}
+\begin{itemize}
+\item \textbf{не заявлять <<мы изобрели блокировку Рассела>>.} Типовые/стратифицированные основания блокируют Рассела со времён самого Рассела (теория типов, 1908) и затем Coq. Честно: \emph{берём типовое разрешение (Рассел = ошибка типа) вместо ZFC-разрешения (урезанная свёртка) и делаем блокирующий уровень той же L-иерархией, что несёт всю теорию} --- сила в \textbf{единообразии} и сведении всех диагоналей к корню Ловера, не в новизне факта блокировки.
+\item $\Pi$\textsuperscript{1}\textsubscript{1}-коллапс опирается на P4-тезис <<функция = программа>> (\texttt{eval\_\allowbreak{}program} --- параметр). Это содержательное обязательство (не всякая классическая функция вычислима) --- но именно оно и есть процессная онтология, заявленная открыто.
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.} \emph{Опасение математика:} <<Не ограничишь свёртку (как ZFC) --- вернётся Рассел; ограничишь --- нужна та же схема Выделения.>> \emph{Решение, конкретно.} Ни то, ни другое: свёртку \textbf{не ограничиваем} и Рассел \textbf{не возвращается} --- самочленство невыразимо по типу (\texttt{level\_\allowbreak{}lt\_\allowbreak{}irrefl}, 0 акс), импредикативная квантификация коллапсирует в арифметику (\texttt{pi11\_\allowbreak{}hierarchy\_\allowbreak{}collapse}). Предикативное выделение \texttt{\{ x : T | $\varphi$(x) \}} для разрешимого $\varphi$ --- это просто подтип/предикат в CIC, бесплатно. \emph{Вывод.} <<Отсутствие схемы Выделения>> не возвращает парадокс и не требует урезанной замены: безопасная выделимость следует из P1+P4. То, что ZFC лечит синтаксическим ограничением, у нас снято структурой.
+
+\bigskip\hrule\bigskip
+
+\subsection{Схема Подстановки (Replacement)}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Replaced\allowbreak{}By P4}} --- итерация/трансфинитная рекурсия как структурная. Анкер: \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0} \footnote{\texttt{P4\_\allowbreak{}Eliminates\_\allowbreak{}ATR.v}}. Честно частичный: завершённый кардинальный охват ($\aleph$\_$\omega$ как объект) --- осознанный отказ (role-limit, как у Степени).
+
+\textbf{(а) Что аксиома даёт классике.} Схема: образ множества под определимой функцией --- снова множество (\texttt{\{ F(x) : x$\in$A \}} есть множество для функционального класса F). Даёт трансфинитную мощь: множества мощности $\ge$ $\aleph$\_$\omega$, ординалы за $\omega$$\cdot$2 и $\varepsilon$\textsubscript{0}, итерацию операций вдоль вполне-порядков (трансфинитная рекурсия), ранговую функцию на всю иерархию V\_$\alpha$.
+
+\textbf{(б) Цена.} Самая <<сильная>> по онтологическому охвату часть ZFC: порождает трансфинитный зоопарк, большая часть которого не используется в рабочей математике. Reverse-math коррелят итерационного содержания --- \textbf{ATR\textsubscript{0}} (арифметическая трансфинитная рекурсия), сама аксиома в обратной математике.
+
+\textbf{(в) E/R/R разбор --- метод в действии.}
+
+\emph{Локализация.} В Подстановке два разных содержания: \textbf{(i)} Правило-\textbf{итерация} (применять операцию вдоль вполне-порядка --- трансфинитная рекурсия) и \textbf{(ii)} \textbf{завершённый кардинальный охват} (собрать образ в завершённый объект размера $\aleph$\_$\omega$+). P4-вопрос их разделяет.
+
+\emph{P4-диагностика:}
+\begin{itemize}
+\item \textbf{(i) Итерация --- Правило, и оно сохраняется.} Трансфинитная рекурсия = \texttt{Fixpoint} на индуктивном типе брауэровских ординалов \texttt{Ord} (\texttt{OZero | OSucc | OLim : (nat$\to$Ord)$\to$Ord}). Coq принимает это структурной рекурсией по $\alpha$ --- \textbf{без аксиомы ATR\textsubscript{0}} (\texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0}). И достаёт далеко за $\omega$: \texttt{OLim} берёт пределы nat-индексированных последовательностей ординалов ($\varepsilon$\textsubscript{0} и выше --- как \emph{нотации/процессы}). Итерационная мощь Подстановки \textbf{есть}, 0 аксиом.
+\item \textbf{(ii) Завершённый кардинал --- реификация в role-limit.} <<Образ как завершённый объект размера $\aleph$\_$\omega$>> --- сборка несчётной тотальности в Элемент, ровно то, что у Степени (\S{}5.2) ушло в role-limit. Под теми же Правилами тотальность не вынуждена.
+\end{itemize}
+
+\emph{Диагноз.} Вердикт \texttt{Replaced\allowbreak{}By P4} относится к содержанию (i): итерация/трансфинитная рекурсия дана законом P4 (структурная рекурсия на процессных ординалах), без ATR\textsubscript{0}. Содержание (ii) --- завершённый кардинальный охват --- \textbf{осознанный отказ} (та же role-limit-сторона, что 2\textasciicircum{}$\mathbb{N}$). Это единственный раздел с честно \emph{частичной} заменой: итерация заменена, кардинальная сборка отдана.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{itemize}
+\item \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0} \footnote{\texttt{P4\_\allowbreak{}Eliminates\_\allowbreak{}ATR.v}}: трансфинитная рекурсия (CB-производная и общая \texttt{iterate}) = структурная рекурсия на \texttt{Ord}; ATR\textsubscript{0}-аксиома не нужна; достаёт за $\omega$ (\texttt{OLim}, \texttt{omega}).
+\item \texttt{Dependent\allowbreak{}Systems.v} --- \texttt{Pi\allowbreak{}System}/\texttt{Sigma\allowbreak{}Elem}: построение через зависимые типы (ограниченные семейства).
+\item \texttt{Transfinite\allowbreak{}Induction\allowbreak{}Level.v} --- трансфинитная индукция по уровням; \texttt{Structural\allowbreak{}Well\allowbreak{}Orders\allowbreak{}Without\allowbreak{}Choice.v}.
+\end{itemize}
+
+\textbf{(д) Свидетели} --- выше (проверено 2026-06-11).
+
+\textbf{(е) Честная граница --- частичная замена, открыто.}
+\begin{itemize}
+\item \emph{Что заменено:} итерационное/трансфинитно-рекурсивное содержание (ATR\textsubscript{0}) --- 0 аксиом, за $\omega$.
+\item \emph{Что отдано в role-limit:} завершённый \textbf{кардинальный} охват ($\aleph$\_$\omega$+ как объект) --- не строим, та же сторона границы, что завершённый 2\textasciicircum{}$\mathbb{N}$ (\S{}5.2).
+\item \textbf{Исправление черновика:} прежняя формулировка <<трансфинитная индукция только $\omega$-длины>> была \textbf{занижением} --- рекурсия на брауэровских \texttt{Ord} достаёт далеко за $\omega$ (после \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0}). Отказ --- не от длины ординалов, а от их сборки в завершённый кардинал-объект.
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.} \emph{Опасение математика:} <<Без Подстановки нет трансфинитной рекурсии (ATR\textsubscript{0}), нет $\varepsilon$\textsubscript{0}, нет ранговой иерархии --- рушится ординальная техника.>> \emph{Решение, конкретно.} Трансфинитная рекурсия \textbf{восстановлена}: \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0} --- итерация операции вдоль брауэровских ординалов как \texttt{Fixpoint}, принятый termination-checker'ом Coq, 0 аксиом, за $\omega$ ($\varepsilon$\textsubscript{0} как нотация-процесс). <<Теряется>> лишь $\aleph$\_$\omega$ как завершённый кардинал-\textbf{объект} --- та же role-limit-фикция, что у Степени, рабочей математике не нужная. \emph{Вывод.} Подстановка расщепляется как Степень: процессное/итерационное содержание (ATR\textsubscript{0}) --- теорема P4 (0 акс, за $\omega$); завершённо-кардинальное --- осознанный отказ (role-limit). Единственный раздел с честно \emph{частичной} заменой, и граница названа точно.
+
+\bigskip\hrule\bigskip
+
+\subsection{Аксиомы Пары и Объединения}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Trivial}} --- структурно-конструктивны, отдельная аксиома не нужна. Тонкость: это \textbf{аксиомы существования} ZFC (вводят \{a,b\}, $\bigcup$F) --- но вердикт всё равно \texttt{Trivial}, а не <<реификация>>. Прямой контрпример к наивному <<всякое существование = проблема>>.
+
+\textbf{(а) Что аксиома даёт классике.} Пара: для любых a,b существует \{a,b\}. Объединение: для семейства F существует $\bigcup$F. Базовые кирпичи: на Паре стоят упорядоченная пара, декартово произведение, функция-как-множество-пар; на Объединении --- $\cup$ и счётные объединения.
+
+\textbf{(б) Цена.} Минимальна: <<безобидные>> аксиомы существования. Но всё же \emph{существования} --- формально постулируют, что \{a,b\} / $\bigcup$F \textbf{есть}.
+
+\textbf{(в) E/R/R разбор --- почему \texttt{Trivial}, а не реификация.}
+
+\emph{Локализация.} Как Бесконечность/Степень, Пара/Объединение постулируют \textbf{Элемент} (\{a,b\}, $\bigcup$F). P4-вопрос: вынужден ли он Правилами --- или его надо постулировать отдельно?
+
+\emph{P4-диагностика --- ответ другой, чем у Бесконечности.} Пара двух \emph{уже данных} a,b --- \textbf{конечная, немедленно актуализуемая} конструкция: ни завершённой бесконечности, ни role-limit. В теории типов она дана структурой: зависимая пара \texttt{$\langle$a,\allowbreak{}b$\rangle$}/произведение --- term-конструктор, не постулат существования. То же для конечного объединения. Элемент здесь \textbf{вынужден} правилами формации типов: он не <<замораживает>> Правило/Роль в недостижимый объект --- он \emph{есть} немедленный результат правила.
+
+\emph{Диагноз: \texttt{Trivial}.} Различие с Бесконечностью точечно и важно: Пара/Объединение постулируют Элемент, который \textbf{Правила и так дают} (конечная конструкция из данного), --- отдельная аксиома избыточна. Бесконечность постулирует Элемент, который Правила \textbf{не дают} (завершённую тотальность), --- отсюда реификация и замена законом. \textbf{Аксиома существования проблемна не тем, что вводит бытие, а тем, вводит ли она бытие завершённо-бесконечное.} Пара/Объединение конечны --- и потому бесплатны.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{itemize}
+\item \textbf{Пара} $\to$ \texttt{Dependent\allowbreak{}Systems.v}: \texttt{Sigma\allowbreak{}Elem} (\texttt{mk\allowbreak{}Sigma\allowbreak{}Elem} --- зависимая пара) с законами \texttt{sigma\_\allowbreak{}eta}, \texttt{sigma\_\allowbreak{}pair\_\allowbreak{}injective}, проекциями \texttt{sigma\_\allowbreak{}fst}/\texttt{sigma\_\allowbreak{}snd}. Теоретико-типовой аналог \{a,b\}/упорядоченной пары, данный структурой.
+\item \textbf{Пустое/единичное} $\to$ \texttt{System\allowbreak{}Category.v}: \texttt{empty\_\allowbreak{}system} (начальный, \texttt{empty\_\allowbreak{}is\_\allowbreak{}initial}), \texttt{unit\_\allowbreak{}system} (терминальный, \texttt{unit\_\allowbreak{}is\_\allowbreak{}terminal}) --- универсальные конструкции вместо постулатов.
+\end{itemize}
+
+\textbf{(д) Свидетели} --- выше (проверено 2026-06-11).
+
+\textbf{(е) Честная граница.}
+\begin{itemize}
+\item \textbf{Объединение --- честно слабее Пары:} выделенной теоремы <<объединение систем>> нет; теоретико- типовой аналог --- индексированная $\Sigma$ / копроизведение, но посвящённой формализации не нашлось. Не заявлять <<Объединение покрыто>>: пара покрыта $\Sigma$, конечное объединение тривиально, общее объединение = индексированная $\Sigma$ без отдельной теоремы. \emph{(опционально --- добавить копроизведение в SystemCategory).}
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.} \emph{Опасение математика:} <<Без Пары/Объединения нечем строить упорядоченные пары, произведения, функции --- рассыплется стандартная конструкция множеств.>> \emph{Решение, конкретно.} Эти конструкции даются \textbf{термами типов}, не аксиомами: упорядоченная пара = \texttt{mk\allowbreak{}Sigma\allowbreak{}Elem} (с \texttt{sigma\_\allowbreak{}pair\_\allowbreak{}injective} --- восстановима из компонент); произведение/функция --- $\Sigma$/$\Pi$-типы. Постулировать существование \{a,b\} не нужно: \texttt{$\langle$a,\allowbreak{}b$\rangle$} \emph{строится} как term. \emph{Вывод.} Пара/Объединение --- лучшая иллюстрация, что <<ноль аксиом существования>> не теряет конструктивной силы: конечное построение из данного даётся структурой типов бесплатно. Проблема ZFC --- не существование как таковое, а \emph{завершённо-бесконечное} существование (Бесконечность, Степень); конечное тривиально.
+
+\bigskip\hrule\bigskip
+
+\subsection{Аксиома Выбора (AC)}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Replaced\allowbreak{}By L5}} --- детерминированный выбор по конститутивному порядку. Анкеры: \texttt{AC\_\allowbreak{}is\_\allowbreak{}L5}/\texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}AC} \footnote{\texttt{P4\_\allowbreak{}Eliminates\_\allowbreak{}AC.v}}, \texttt{P4\_\allowbreak{}prohibits\_\allowbreak{}AC} \footnote{\texttt{P4Prohibits\allowbreak{}AC.v}}, \texttt{Choice\allowbreak{}Price\allowbreak{}Map.v}. Флагман вены B.
+
+\textbf{(а) Что аксиома даёт классике.} Селекция из произвольного семейства непустых множеств: \texttt{($\forall$i,\allowbreak{} F i $\ne$ $\emptyset$) $\to$ $\exists$ f,\allowbreak{} $\forall$i,\allowbreak{} f i $\in$ F i}. Эквивалентна вполне-упорядочению (Цермело) и лемме Цорна. Нужна для базы Гамеля, неизмеримых множеств, общей тихоновской компактности, <<всякое вект. пространство имеет базис>> и т. п.
+
+\textbf{(б) Цена.} Неконструктивна (постулирует функцию выбора без правила вычисления); источник <<парадоксальных>> следствий (Банах--Тарский). Обратная математика десятилетиями измеряет, \emph{что именно} требует AC и в какой силе --- это и есть наш язык здесь.
+
+\textbf{(в) E/R/R разбор --- метод в действии.}
+
+\emph{Локализация.} AC постулирует \textbf{Элемент} --- функцию выбора f (завершённый объект). \textbf{Правило}: <<из непустого взять элемент>> (селекция). \textbf{Роль}: f играет <<согласованный выбор по всему семейству сразу>>.
+
+\emph{P4-диагностика --- расщепление по структуре семейства:}
+\begin{itemize}
+\item Если каждое F i \textbf{разрешимо-непусто и упорядочено} (список; или предикат с разрешимым тестом + порядок на носителе), выбор \textbf{вынужден Правилом}: бери первый по порядку. Это L5 (конститутивный порядок). Функция выбора --- не постулат, а \emph{вычисление}: \texttt{f i := head(F i)}.
+\item Если семейство --- \textbf{произвольная завершённая бесконечная} коллекция без теста/порядка, <<согласованный выбор по всему сразу>> = завершённый бесконечный объект f, к которому процесс не сходится. Это role-limit.
+\end{itemize}
+
+\emph{Диагноз --- \texttt{Replaced\allowbreak{}By L5} + честная граница.} Замена относится к разрешимо-упорядоченному случаю: там AC --- \textbf{теорема} (\texttt{AC\_\allowbreak{}is\_\allowbreak{}L5}: для \texttt{family : nat $\to$ list nat} непустых, \texttt{f i := L5\_\allowbreak{}choose} = голова, \texttt{In (f i) (family i)}, 0 аксиом). Тезис вены B: \textbf{селекция аксиомо-свободна $\Longleftrightarrow$ есть разрешимый тест + порядок, который её разрешает; AC --- это цена структурного дефицита (отсутствия теста/порядка).} Полный AC над произвольным семейством --- завершённый объект, который P4 отвергает онтологически (\texttt{P4\_\allowbreak{}prohibits\_\allowbreak{}AC}: AC-на-$\mathbb{N}$ $\Longrightarrow$ завершённая \texttt{nat$\to$nat} функция выбора $\Longrightarrow$ противоречит P4; финитный L5-выбор выживает).
+
+\emph{Цена --- не замолчана, а машинно картографирована.} \texttt{Choice\allowbreak{}Price\allowbreak{}Map.v} приписывает каждому результату стоимость в шкале \texttt{PZero | PL3 | PL3\_\allowbreak{}L4 | PBoundary}: общий Кантор / счётность $\mathbb{Q}$ / трансфинитная индукция по уровням = \texttt{PZero} (0 акс); Хигман = \texttt{PL3} (нужен classic=L3, не AC); Шрёдер--Бернштейн и антисимметрия кардиналов = \texttt{PL3\_\allowbreak{}L4}; полный AC = \texttt{PBoundary} (\texttt{full\_\allowbreak{}AC\_\allowbreak{}is\_\allowbreak{}boundary}), и \texttt{proven\_\allowbreak{}results\_\allowbreak{}below\_\allowbreak{}boundary} --- все доказанные результаты лежат ниже границы AC.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{itemize}
+\item \texttt{AC\_\allowbreak{}is\_\allowbreak{}L5} / \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}AC} \footnote{\texttt{P4\_\allowbreak{}Eliminates\_\allowbreak{}AC.v}}: выбор над \texttt{nat $\to$ list nat} непустых = \texttt{head} по L5-порядку, 0 аксиом; \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}AC\_\allowbreak{}finite} --- постадийная конечная версия.
+\item \texttt{P4\_\allowbreak{}prohibits\_\allowbreak{}AC} \footnote{\texttt{P4Prohibits\allowbreak{}AC.v}}: полный AC-на-$\mathbb{N}$ $\Longrightarrow$ завершённый бесконечный объект $\Longrightarrow$ противоречит P4; финитный L5-выбор выживает (3 конъюнкта).
+\item \texttt{Choice\allowbreak{}Price\allowbreak{}Map.v}: машинная шкала цены (\texttt{price}, \texttt{full\_\allowbreak{}AC\_\allowbreak{}is\_\allowbreak{}boundary}, \texttt{proven\_\allowbreak{}results\_\allowbreak{}below\_\allowbreak{}boundary}).
+\item \texttt{analysis/\allowbreak{}Bolzano\allowbreak{}Weierstrass.v} --- \texttt{bolzano\_\allowbreak{}weierstrass}: точка сгущения \textbf{детерминированной бисекцией, без Dependent Choice} (классически BW требует DC).
+\item \texttt{EVT\_\allowbreak{}idx.v} --- argmax по \textbf{индексу} (экстремум без Qeq, детерминированный порядок).
+\item \texttt{cs/\allowbreak{}Selection\allowbreak{}Without\allowbreak{}Choice\allowbreak{}Synthesis.v} (флагман s5, тезис вены B); \texttt{cs/\allowbreak{}\{Countable\allowbreak{}Selection\allowbreak{}Free,\allowbreak{}Countable\allowbreak{}Dependent\allowbreak{}Choice\allowbreak{}Free,\allowbreak{}Decidable\allowbreak{}Konig,\allowbreak{}Decidable\allowbreak{}Selection\}.v}; \texttt{settheory/\allowbreak{}\{Cardinality\allowbreak{}Without\allowbreak{}Choice,\allowbreak{}Structural\allowbreak{}Well\allowbreak{}Orders\allowbreak{}Without\allowbreak{}Choice\}.v}.
+\end{itemize}
+
+\textbf{(д) Свидетели} --- выше (проверено 2026-06-11).
+
+\textbf{(е) Честная граница.}
+\begin{itemize}
+\item \textbf{не <<нам не нужен выбор>>.} Мы используем \texttt{L4\_\allowbreak{}witness} (условный: $\exists$$\to$свидетель) и местами classic. Честно: \emph{глобальный AC не предполагается; сила выбора локализована и оценена} --- \texttt{Choice\allowbreak{}Price\allowbreak{}Map} --- буквальное доказательство, не лозунг.
+\item \texttt{L4\_\allowbreak{}witness} (P4) --- индефинитное описание / разновидность счётного выбора, \textbf{не} полный AC: глобальная теорема вполне-упорядочения (Цермело-эквивалент AC) сознательно не доказывается (\texttt{P4Prohibits\allowbreak{}AC}).
+\item \textbf{Для логика:} \texttt{P4\_\allowbreak{}prohibits\_\allowbreak{}AC} --- \textbf{онтологическая} несовместимость (функция выбора \texttt{nat$\to$nat} = завершённый объект, P4-финитизм его запрещает), не заявление <<AC ложна>> (в ZF независима). Формулировать именно так.
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.} \emph{Опасение математика:} <<Без AC рушится вполне-упорядочение, лемма Цорна, существование базисов, Больцано--Вейерштрасс (через DC), компактность.>> \emph{Решение, конкретно.} Селекция \textbf{восстановлена там, где есть тест+порядок}: \texttt{AC\_\allowbreak{}is\_\allowbreak{}L5} --- выбор-как-голова, 0 аксиом; \texttt{bolzano\_\allowbreak{}weierstrass} --- точка сгущения \textbf{без DC} (детерминированная бисекция <<иди в половину с бесконечным числом членов>>); \texttt{EVT\_\allowbreak{}idx} --- экстремум по индексу. Честно отдано: выбор над произвольным завершённым семейством без теста/порядка --- он же \texttt{PBoundary}, он же завершённый объект, который P4 не строит. \emph{Вывод.} AC расщепляется по структуре семейства: разрешимо-упорядоченное $\to$ теорема L5 (0 акс); произвольно-завершённое $\to$ цена \texttt{PBoundary}, осознанно не берётся. И --- в отличие от молчаливого принятия AC в ZFC --- \textbf{цена каждого результата выписана} (\texttt{Choice\allowbreak{}Price\allowbreak{}Map}): обратная математика, но машинная.
+
+\bigskip\hrule\bigskip
+
+\subsection{Аксиома Объёмности (Extensionality)}
+
+\textbf{Вердикт \texttt{ZFCAxiom\allowbreak{}Ledger}: \texttt{Trivial}} --- структурное/сетоидное равенство, без глобальной аксиомы.
+
+\textbf{(а) Что аксиома даёт классике.} \texttt{($\forall$x,\allowbreak{} x$\in$A $\leftrightarrow$ x$\in$B) $\to$ A = B}: два множества равны $\Longleftrightarrow$ имеют одни элементы. Фиксирует, что множество определяется протяжением (экстенсионально), а не способом задания. На ней стоит сама осмысленность <<=>> между множествами.
+
+\textbf{(б) Цена.} Концептуально минимальна. Но в формальном контексте тянет за собой \textbf{функциональную экстенсиональность} (funext: \texttt{($\forall$x,\allowbreak{} f x = g x) $\to$ f = g}), которая в CIC \textbf{не} доказуема и обычно добавляется отдельной аксиомой --- то есть <<наивная>> экстенсиональность в теории типов не бесплатна.
+
+\textbf{(в) E/R/R разбор --- почему \texttt{Trivial}.}
+
+\emph{Локализация.} Объёмность --- не существование, а \textbf{Правило тождества} (критерий равенства). P4-вопрос: требует ли это правило завершённого объекта или глобального постулата?
+
+\emph{P4-диагностика.} Равенство-по-протяжению --- это \textbf{Роль} (отношение эквивалентности на носителе), а не Элемент. Его не нужно постулировать глобально: для каждого конкретного типа равенство задаётся \emph{структурно} (сетоид = <<носитель + отношение эквивалентности>>), операции уважают его через \texttt{Proper}/\texttt{Equivalence}. Реификации нет: <<равенство>> остаётся Ролью (отношением), не замораживается в аксиому-объект. Глобальная Объёмность (тем более funext) \textbf{не нужна} --- нужна локальная сетоидная дисциплина, которую несёт сама структура.
+
+\emph{Диагноз: \texttt{Trivial}.} Объёмность заменяется не законом, а \textbf{отсутствием необходимости в ней}: равенство всюду сетоидное, по построению. Это даже строже обычной формализации: многие берут funext втихую как аксиому Coq --- мы её \textbf{не берём}, и счёт аксиом остаётся 2.
+
+\textbf{(г) Реконструкция (точные теоремы).}
+\begin{itemize}
+\item \texttt{Intensional\allowbreak{}Identity.v} --- \texttt{ext\_\allowbreak{}equiv} vs \texttt{int\_\allowbreak{}equiv} (экстенсиональное vs интенсиональное равенство, явно различены).
+\item \texttt{Real\allowbreak{}Point\allowbreak{}Setoid.v} --- <<точка = класс эквивалентности>> как \textbf{сетоид}: \texttt{Equivalence}-инстанс + операции \texttt{Proper}, без реификации фактор-объекта и без новых аксиом.
+\item \texttt{Cauchy\allowbreak{}Real.cauchy\_\allowbreak{}equiv} (\texttt{\textasciitilde{}\textasciitilde{}}) --- равенство вещественных как сетоидное отношение (\S{}5.1).
+\end{itemize}
+
+\textbf{(д) Свидетели} --- выше (проверено 2026-06-11).
+
+\textbf{(е) Честная граница.}
+\begin{itemize}
+\item \textbf{funext не берём --- это +1 к честности счёта аксиом.} Многие формализации добавляют функциональную экстенсиональность как аксиому Coq; мы обходимся сетоидами, поэтому аксиом ровно две (classic, L4\_witness), без третьей. Сознательная дисциплина, не случайность.
+\item Цена дисциплины: всюду доказывать \texttt{Proper}/\texttt{Equivalence} и работать с \texttt{\textasciitilde{}\textasciitilde{}} вместо \texttt{=}. Это рабочая нагрузка, не слабость --- но честно: <<бесплатность>> означает <<вместо одной аксиомы --- сетоидная бухгалтерия в каждом определении>>.
+\end{itemize}
+
+\textbf{(ж) <<Проблема отсутствия аксиомы>> решается так.} \emph{Опасение математика:} <<Без Объёмности <<=>> между множествами теряет смысл; без funext не докажешь равенство функций.>> \emph{Решение, конкретно.} <<=>> не теряется --- оно \emph{локализуется}: для каждого носителя задаётся сетоидное \texttt{\textasciitilde{}\textasciitilde{}} (\texttt{cauchy\_\allowbreak{}equiv} и т. п.) --- это и есть <<равенство по протяжению>> на данном типе; операции уважают его (\texttt{Proper}). Равенство функций = \texttt{$\forall$x,\allowbreak{} f x \textasciitilde{}\textasciitilde{} g x} (поточечное), и его достаточно для всей работы; реифицировать в Лейбницево \texttt{f = g} (что требовало бы funext) не нужно. \emph{Вывод.} Объёмность не теряется --- становится \textbf{локальной сетоидной структурой} вместо глобальной аксиомы, а отказ от funext держит счёт аксиом на двух. Как Пара/Объединение --- иллюстрация: то, что ZFC кодирует аксиомой, теория типов несёт структурой.
+
+\bigskip\hrule\bigskip
+
+\section{Что остаётся: два допущения инструмента (не постулаты системы)}
+
+Симметрия с \S{}4--\S{}5: из девяти аксиом ZFC система не берёт \textbf{ни одной} (восемь тривиальны или заменены законом, Степень --- role-limit). Что она берёт взамен --- ровно два явных допущения, и слово выбрано точно: \textbf{постулатами системы они не являются}. Цепь основания --- различение $\to$ L1--L5 $\to$ P1--P4 $\to$ E/R/R --- выведена сквозняком и проверена машиной (\texttt{Laws\allowbreak{}From\allowbreak{}Distinction.v}: \texttt{five\_\allowbreak{}laws\_\allowbreak{}from\_\allowbreak{}distinction}; \texttt{Principles\allowbreak{}From\allowbreak{}Laws.v}: \texttt{derivation\_\allowbreak{}chain}); постулатов в ней нет ни одного звена. Оба допущения --- формальные образы уже выведенных звеньев, и возникают они только при переносе в чужое ядро: CIC изнутри не доказывает ни глобализацию L3 на все высказывания, ни извлечение свидетеля. И оба, в отличие от аксиом ZFC, \textbf{не онтологичны}: ни одно ничего не вводит в бытие. Детально --- почему:
+
+\subsection{\texttt{classic} --- классическая логика (образ L3)}
+\begin{lstlisting}
+Axiom classic : forall P : Prop, P \/ ~ P.
+\end{lstlisting}
+\begin{itemize}
+\item \textbf{Род:} логический принцип, не утверждение о существовании объекта.
+\item \textbf{Связь с теорией:} формальный образ Закона L3 (тотальность различения). Для самих различений --- структурен (поле \texttt{exhaustive}), \texttt{classic} лишь глобализует. См. \S{}2.2.
+\item \textbf{Источник:} \texttt{foundation/\allowbreak{}Distinction.v:36}. Текстово ре-декларирован (то же утверждение) ещё в 3 файлах --- \texttt{EVT\_\allowbreak{}idx.v:338}, \texttt{settheory/\allowbreak{}Borel\allowbreak{}Determinacy.v:21}, \texttt{settheory/\allowbreak{}Higman\allowbreak{}Lemma.v:13} (проверено grep 2026-06-11: ровно 4 строки \texttt{Axiom classic}). Это \textbf{один принцип}, 4 декларации, а не 4 разных аксиомы --- в витрине сказать прямо (кандидат на консолидацию к одному импорту).
+\end{itemize}
+
+\subsection{\texttt{L4\_\allowbreak{}witness} --- извлечение свидетеля (образ P4)}
+\begin{lstlisting}
+Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> { x : A | P x }.
+\end{lstlisting}
+\begin{itemize}
+\item \textbf{Род:} эпистемический, по характеру близкий к выбору, но \textbf{условный}: на вход нужно \textbf{доказательство} \texttt{$\exists$ x,\allowbreak{} P x} --- установленный факт, а не предположение. Бытие не создаётся: из доказанного существования извлекается лишь имя свидетеля.
+\item \textbf{Связь с теорией:} формальный образ P4 (финитная актуальность): актуализуемое существование имеет конструктивного свидетеля.
+\end{itemize}
+
+\textbf{Чеканная формулировка для витрины:} \emph{<<Аксиомы ZFC по большей части онтологичны (что существует: бесконечное множество, все подмножества, пары). Два допущения Теории Систем --- логическое и эпистемическое (как мы рассуждаем и как именуем свидетеля), оба --- образы выведенных звеньев цепи, не постулаты. Мы не делаем ни одного постулата существования; всякий объект построен.>>}
+
+\subsection{Субстрат и честный полный счёт обязательств}
+
+<<Два допущения>> --- это два \texttt{Axiom} \textbf{поверх CIC} (см. \S{}3). Честный полный счёт того, на что система опирается:
+
+\textbf{CIC (конструктивная теория типов) + \texttt{classic} + \texttt{L4\_\allowbreak{}witness}} --- и всё.
+
+Чего в этом счёте нет и почему: \textbf{AoI} --- $\mathbb{N}$ есть индуктивный тип (\S{}5.1), не аксиома; \textbf{funext} --- не берём, равенство сетоидное (\S{}5.8); \textbf{AC} --- \texttt{L4\_\allowbreak{}witness} $\ne$ AC. CIC --- настоящее основоположение (индуктивные типы, иерархия универсумов), и именно оно даёт $\mathbb{N}$ без аксиомы существования. Поэтому честное сравнение читается так: \emph{FOL + \textasciitilde{}9 аксиом существования множеств} (ZFC) против \emph{CIC + 2 допущения инструмента} (ToS) --- см. \S{}3.
+
+\textbf{Связь с веной B (\S{}5.7):} \texttt{L4\_\allowbreak{}witness} --- P4-форма извлечения свидетеля, \textbf{строго слабее} полного AC. Глобальное вполне-упорядочение (Цермело-эквивалент AC) не выводимо и онтологически отвергается (\texttt{P4Prohibits\allowbreak{}AC}). Не путать \texttt{L4\_\allowbreak{}witness} с выбором: первое --- условное \texttt{$\exists$$\to$sig}, второе --- выбор по произвольному завершённому семейству.
+
+\bigskip\hrule\bigskip
+
+\section{Позитивный вклад: граница финитизации как предмет}
+
+Сравнение с ZFC (\S{}5) --- контрастная рамка (<<то же содержание без тех обязательств>>). Но у системы есть и \textbf{позитивная ось}, и она прямо вырастает из \S{}5: то, что в сравнении было <<ценой>> (role-limit-сторона Степени \S{}5.2 и Подстановки \S{}5.5), система изучает положительно --- \textbf{как разрешимый объект}. Граница Element / role-limit --- не дефект, а предмет.
+
+\textbf{Единая мысль: цена ZFC = предмет ToS.} \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit} (\S{}5.2) говорит, что ровно одна аксиома ZFC пересекает границу финитизации. Вена A берёт эту самую границу и делает её \textbf{машинно разрешимой}: один вентиль <<$\Delta$ = tr\textsuperscript{2}$-$4$\cdot$det --- полный квадрат?>> сортирует Element (рациональное собств. значение, терминирует) vs role-limit (сурд) --- для числа / программы / множества / спектра. То, на чём ZFC ставит молчаливый постулат (завершённый объект), ToS ставит \textbf{разрешающий тест}.
+
+Три флагмана позитивной оси (score 5 в каталоге):
+\begin{itemize}
+\item \textbf{Граница финитизации как разрешимый критерий} (вена A) --- капстоун \texttt{stdlib/\allowbreak{}Reduction\allowbreak{}Atlas\allowbreak{}Synthesis.v}: пять движков (сурд/det/норм-форма/след/чётность) = пять координат одной 2$\times$2-матрицы, вся граница = один перфект-квадрат-вентиль.
+\item \textbf{Единый корень диагоналей} (вена E) --- \texttt{cs/\allowbreak{}Lawvere\allowbreak{}Fixed\allowbreak{}Point.v}: Кантор / halting / Rice / Тарский / Рассел / Гёдель = инстансы одной теоремы Ловера о неподвижной точке. (Та же теорема стоит за \S{}5.2 Кантором, \S{}5.3--4.4 Расселом --- единый механизм.)
+\item \textbf{Необычно полные конкретные формализации} (вена D) --- \texttt{algebra/\allowbreak{}Galois\allowbreak{}Q23.v}: реальное соответствие Галуа Q[$\surd$2,$\surd$3] $\cong$ V\textsubscript{4} с действием автоморфизмов, редкость в полностью формализованном виде.
+\end{itemize}
+
+\textbf{Честная планка} (из аудита каталога, \S{}2.3): подлинно новых теорем нет; вклад --- синтез + аксиомо- свободное Q-исполнение + машинная проверка + сведение границы к разрешимому тесту. Полная карта десяти вен A--J (с равной честностью о том, что классично) --- \texttt{docs/\allowbreak{}database/\allowbreak{}UNIQUENESS.md}; пофайловый каталог 1913/1913 --- \texttt{docs/\allowbreak{}database/\allowbreak{}INDEX.md}.
+
+Объём \S{}7 сознательно ограничен: главный стержень витрины --- сравнение с ZFC (\S{}5); позитивная ось приводится как дополнение --- изучение той же границы, --- а не как второй самостоятельный раздел сопоставимого объёма. Глубина каждой вены --- в \texttt{UNIQUENESS.md}.
+
+\bigskip\hrule\bigskip
+
+\section{Честные стены (калибровка границ)}
+
+Границы показаны так же явно, как достижения, --- это и отличает проверяемую программу от завышенных заявлений. Полный честный счёт обязательств:
+
+\textbf{Ядро (\S{}6): 2 аксиомы} --- \texttt{classic} (L3) + \texttt{L4\_\allowbreak{}witness} (P4), обе не-онтологические, поверх CIC. Весь foundation-слой, который разбирает \S{}5, --- 0-аксиомен сверх этих двух.
+
+\textbf{Доменные стены --- не 0-аксиомны, и это сказано прямо.} Тяжёлые прикладные результаты (Navier--Stokes, zeta) несут доменные допущения. Их было четыре; машинный аудит \texttt{foundation/\allowbreak{}Heavy\allowbreak{}Wall\allowbreak{}Audit.v} классифицировал их (eliminable / harmless-input / load-bearing) и предсказал, что ровно два устранимы. \textbf{Оба устранены} (июнь 2026; \texttt{eliminated\_\allowbreak{}iff\_\allowbreak{}eliminable} --- машинно: устранённое множество = предсказанное к устранению). Осталось \textbf{два} доменных:
+\begin{itemize}
+\item \texttt{C\_\allowbreak{}B\_\allowbreak{}positive} --- \textbf{harmless input} (положительная константа нормировки);
+\item \texttt{B\_\allowbreak{}coeff\_\allowbreak{}bounded} --- \textbf{LOAD-BEARING}: регулярность Navier--Stokes условна на этой оценке нелинейности.
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Navier--Stokes.} Доказана \textbf{Reading 2} (галёркинская/процессная регулярность над $\mathbb{Q}$), условная на \texttt{B\_\allowbreak{}coeff\_\allowbreak{}bounded}; капстоуны \texttt{ns\_\allowbreak{}galerkin\_\allowbreak{}bound\_\allowbreak{}chain} / \texttt{millennium\_\allowbreak{}reading2\_\allowbreak{}capstone} (переименованы из \texttt{navier\_\allowbreak{}stokes\_\allowbreak{}millennium} / \texttt{millennium\_\allowbreak{}complete\_\allowbreak{}final}). \textbf{Reading 1} (классическая задача Клэя --- гладкость континуальной 3D NS) не доказана; разрыв Reading 2 $\to$ Reading 1 \emph{и есть} граница финитизации. \texttt{Print Assumptions} капстоунов = \texttt{C\_\allowbreak{}B\_\allowbreak{}positive} (+ Parameter \texttt{C\_\allowbreak{}B}) --- только. (\texttt{navier\_\allowbreak{}stokes/\allowbreak{}}, \texttt{Heavy\allowbreak{}Wall\allowbreak{}Audit.v}.)
+\item \textbf{zeta / RH.} Работаем со \emph{структурной} моделью нулей (Коши + критическая полоса; \texttt{is\_\allowbreak{}nontrivial\_\allowbreak{}zero} формально без условия зануления). Отражение $\sigma$$\mapsto$1$-$$\sigma$ --- \textbf{изометрия, не сжатие} $\Longrightarrow$ RH не сводится к наивной банаховой неподвижной точке \footnote{\texttt{zeta/\allowbreak{}Contraction\allowbreak{}Zeros.v}}. Бывшая <<аксиома функционального уравнения>> устранена (стала 2-строчной леммой: оба конъюнкта определения нуля отражательно-устойчивы); \textbf{аналитическое} ФУ (о занулении настоящей дзеты) остаётся неформализованным --- в прозе, помечено. Сама RH не доказана; см. \texttt{zeta/\allowbreak{}RH\_\allowbreak{}Final\allowbreak{}Assessment.v} (<<что не доказано --- сама RH>>).
+\end{itemize}
+
+\textbf{Имена-оверклеймы вычищены} (июнь 2026): \texttt{yang\_\allowbreak{}mills\_\allowbreak{}SEALED}$\to$\texttt{ym\_\allowbreak{}lattice\_\allowbreak{}os\_\allowbreak{}bundle}, \texttt{millennium\_\allowbreak{}complete\_\allowbreak{}final}$\to$\texttt{millennium\_\allowbreak{}reading2\_\allowbreak{}capstone}, \texttt{two\_\allowbreak{}millennium\_\allowbreak{}complete}$\to$\texttt{two\_\allowbreak{}walls\_\allowbreak{}key\_\allowbreak{}facts} и т. д.; старые имена --- только в <<renamed from>>-комментариях. Удалены 53 <<total\_count>>-теоремы-маркера (самотождественности / нумерология) и вакуумные exists-заглушки; <<0 Admitted>> машинно подтверждено.
+
+Этот раздел демонстрирует метод: слабые места выявляются и помечаются \textbf{машинно} (\texttt{Heavy\allowbreak{}Wall\allowbreak{}Audit}, \texttt{Print Assumptions}, аудит каталога). Система калибрует собственные границы, и эта калибровка проверяема независимо.
+
+\bigskip\hrule\bigskip
+
+\section{Как проверить самому (проверяемость без доверия)}
+
+\begin{itemize}
+\item \textbf{Полная сборка:} \texttt{coq\_\allowbreak{}makefile -f \_\allowbreak{}Coq\allowbreak{}Project -o Makefile \&\& make} (Rocq 9.0.1). Ожидаемо: \textasciitilde{}1928 файлов, \textasciitilde{}25 900 \texttt{Qed}, \textbf{0 \texttt{Admitted}} (машинно пересчитано 2026-06-11; см. \S{}1).
+\item \textbf{Ядро --- один файл:} \texttt{foundation/\allowbreak{}ZFCAxiom\allowbreak{}Ledger.v} (10 Qed, 0 аксиом) --- реестр девяти аксиом ZFC + \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}. Прочтите \texttt{tos\_\allowbreak{}verdict} и убедитесь, что ровно Степень = \texttt{Role\allowbreak{}Limit}.
+\item \textbf{Аксиомы любой теоремы:} \texttt{Print Assumptions <name>.} --- увидите ровно то, что заявлено:
+\begin{itemize}
+\item \texttt{russell\_\allowbreak{}paradox\_\allowbreak{}blocked}, \texttt{cantor\_\allowbreak{}no\_\allowbreak{}system\_\allowbreak{}of\_\allowbreak{}all\_\allowbreak{}L2\_\allowbreak{}systems} $\to$ \texttt{Closed under the global context} (0 аксиом);
+\item \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}Infinity}, \texttt{AC\_\allowbreak{}is\_\allowbreak{}L5}, \texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0} $\to$ 0 аксиом / $\le$ \{classic\};
+\item \texttt{process\_\allowbreak{}continuum\_\allowbreak{}hypothesis} $\to$ \texttt{classic} + \texttt{L4\_\allowbreak{}witness} (это Кантор--Бендиксон, \S{}5.2);
+\item \texttt{millennium\_\allowbreak{}reading2\_\allowbreak{}capstone} $\to$ \texttt{C\_\allowbreak{}B\_\allowbreak{}positive} (+ Parameter \texttt{C\_\allowbreak{}B}) --- честная стена NS, и ничего больше.
+\end{itemize}
+\item \textbf{Целостность реестра сборки:} \texttt{powershell -File tools/\allowbreak{}check\_\allowbreak{}coqproject.ps1} (диск $\leftrightarrow$ \texttt{\_\allowbreak{}Coq\allowbreak{}Project}, ожидаемо 0 расхождений).
+\item \textbf{Пофайловый каталог:} \texttt{docs/\allowbreak{}database/\allowbreak{}INDEX.md} (1913/1913) + \texttt{\_\allowbreak{}uniqueness\_\allowbreak{}ranked.md} + JSON-шарды (источник истины) + \texttt{UNIQUENESS.md} (курируемый свод с честной планкой новизны).
+\end{itemize}
+
+\bigskip\hrule\bigskip
+
+\section{Очередь верификации}
+
+\textbf{Проход 2026-06-11 закрыл пункты 1--5, 7} (флаги сняты в соответствующих разделах). Осталось:
+
+\begin{itemize}
+\item \textbf{\S{}5.2 --- CH.} закрыто + исправлено: \texttt{process\_\allowbreak{}continuum\_\allowbreak{}hypothesis} = Кантор--Бендиксон (перфект-сет-свойство для замкнутых), \texttt{Print Assumptions} = \texttt{classic}+\texttt{L4\_\allowbreak{}witness}. Прежняя формулировка <<CH разрешима>> была неверна --- заменена. Имя файла --- кандидат на переименование.
+\item \textbf{\S{}5.5 --- Подстановка/settheory.} закрыто: трансфинитная индукция --- над $\omega$-уровнями (\texttt{Transfinite\allowbreak{}Induction\allowbreak{}Level}), не $\aleph$\_$\omega$; \texttt{Structural\allowbreak{}Well\allowbreak{}Orders\allowbreak{}Without\allowbreak{}Choice} + \texttt{P4Prohibits\allowbreak{}AC} подтверждены; <<осознанный отказ>> сформулирован.
+\item \textbf{\S{}5.3--4.4 --- имена.} закрыто: \texttt{level\_\allowbreak{}lt\_\allowbreak{}irrefl} (96), \texttt{P1\_\allowbreak{}no\_\allowbreak{}self\_\allowbreak{}membership} (126), \texttt{russell\_\allowbreak{}paradox\_\allowbreak{}blocked} (248), \texttt{cantor\_\allowbreak{}no\_\allowbreak{}system\_\allowbreak{}of\_\allowbreak{}all\_\allowbreak{}L2\_\allowbreak{}systems} (1300). Бонус: \texttt{Print Assumptions} блоков Рассела/Кантора = \textbf{0 аксиом} (сильнее ожидаемого).
+\item \textbf{\S{}2.2 --- лифт \texttt{classic}.} закрыто: \texttt{distinction\_\allowbreak{}of} передаёт \texttt{(classic P)} в поле \texttt{exhaustive} \footnote{\texttt{Distinction.v:75--80}}; \texttt{every\_\allowbreak{}prop\_\allowbreak{}distinguishes:82}.
+\item \textbf{\S{}1 --- якорный пересчёт.} закрыто: \textasciitilde{}25 900 Qed / 0 Admitted / \textasciitilde{}1928 файлов (тремя методами). CLAUDE.md (23 103) и каталог (24 506) занижены.
+\item \textbf{\S{}5.6 --- Пары.} закрыто: Пара = \texttt{Dependent\allowbreak{}Systems.Sigma\allowbreak{}Elem} (\texttt{sigma\_\allowbreak{}eta}, \texttt{sigma\_\allowbreak{}pair\_\allowbreak{}injective}); пустое/единичное = \texttt{System\allowbreak{}Category.empty\_\allowbreak{}system}/\texttt{unit\_\allowbreak{}system} (начальный/терминальный). Объединение --- честно помечено как не покрытое выделенной теоремой.
+\item \textbf{\S{}5.7 --- \texttt{P4Prohibits\allowbreak{}AC}.} закрыто: \texttt{P4\_\allowbreak{}prohibits\_\allowbreak{}AC} (3 конъюнкта); добавлена точность <<онтологическая несовместимость, не ZF-опровержение>>.
+\item \textbf{\S{}5.1 --- role-limit $\surd$2/e.} закрыто: \texttt{sqrt2\_\allowbreak{}never\_\allowbreak{}reached}/\texttt{r\_\allowbreak{}sq\_\allowbreak{}ne\_\allowbreak{}2}, \texttt{e\_\allowbreak{}excludes\_\allowbreak{}rational}/\texttt{e\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}.
+\end{itemize}
+
+\textbf{\S{}5 развёрнут полностью (2026-06-11):} все 8 разделов аксиом в полной глубине (формат а$\to$ж, E/R/R-разбор-центр, разобранный пример), привязаны к вердиктам \texttt{ZFCAxiom\allowbreak{}Ledger}, каждое утверждение о коде выверено. \S{}6--\S{}10 доведены до той же отделки (\S{}7 разрешён как <<граница = предмет>>, \S{}8 --- точный аксиомный счёт, \S{}9 --- Print-Assumptions-примеры).
+
+\textbf{Все технические флаги (на свидетелях) сняты} --- каждое утверждение о коде в \S{}\S{}2--8 проверено чтением / \texttt{Print Assumptions} / grep 2026-06-11.
+
+\textbf{Остаётся (содержательное, не верификация):}
+\begin{itemize}
+\item \textbf{Язык.} Перевести выверенную версию на английский (целевая аудитория).
+\item \textbf{CLAUDE.md Stats-блок} устарел (23 103/1639) --- обновить с подтверждения автора (shared-файл).
+\item \textbf{\S{}5.6 --- копроизведение} (опционально): добавить в \texttt{System\allowbreak{}Category} или оставить честную пометку <<Объединение = индексированная $\Sigma$, без выделенной теоремы>>. Сейчас --- честная пометка.
+\item \textbf{Коммит} витрины (по сигналу автора).
+\end{itemize}
+
+\bigskip\hrule\bigskip
+
+\section*{Приложение A. Решения по структуре (журнал)}
+
+Здесь фиксируем принятые решения по форме документа, чтобы не переигрывать.
+
+\begin{itemize}
+\item \textbf{2026-06-11} --- Ядро = сравнение с ZFC аксиома за аксиомой (по запросу автора). Главный тезис --- <<ноль аксиом существования>>, а не <<меньше аксиом>>. Тон средней колонки --- фактический, не полемический.
+\item \textbf{2026-06-11} --- Раздел <<честные стены>> (\S{}8) включён сознательно как часть калибровки, а не вынесен в конец.
+\item \textbf{2026-06-11 (проход верификации)} --- \S{}5.2 исправлена после чтения кода: доказан Кантор--Бендиксон (перфект-сет-свойство), не разрешимость независимой CH; ложная черновая формулировка снята до публикации (ровно та ошибка, ради ловли которой и делалась очередь \S{}10). Якорные числа пересчитаны машинно (\textasciitilde{}25 900 Qed / 0 Admitted / \textasciitilde{}1928 файлов). Блоки Рассела/Кантора подтверждены 0-аксиомными.
+\item \textbf{2026-06-11 (ядро заземлено на код)} --- оно переписано под машинный \texttt{ZFCAxiom\allowbreak{}Ledger.v} (3 вердикта Trivial/ReplacedBy/RoleLimit, \texttt{only\_\allowbreak{}powerset\_\allowbreak{}is\_\allowbreak{}role\_\allowbreak{}limit}). Прежнее <<реификационное>> ядро --- переобобщение (Пара/Объединение --- существование, но Trivial), понижено до локального глосса.
+\item \textbf{2026-06-11 (\S{}5 развёрнут)} --- все 8 разделов аксиом в полной глубине (формат а$\to$ж, E/R/R-разбор как центр, разобранный пример <<проблема отсутствия аксиомы>>). Ключевые формулировки: \S{}5.5 --- трансфинитная рекурсия за $\omega$ (\texttt{P4\_\allowbreak{}eliminates\_\allowbreak{}ATR0}, исправлено занижение), отказ только от кардинал-объекта; \S{}5.6 --- <<проблема не существование, а завершённо-бесконечное существование>> (Пара/Объединение = Trivial, контрпример). \S{}6--\S{}10 доведены до той же отделки.
+\item \emph{(добавлять по мере решений)}
+\end{itemize}
+
+\end{document}
