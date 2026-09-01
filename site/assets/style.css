@@ -1,0 +1,218 @@
+/* Теория Систем — общие стили сайта (скелет).
+   Принцип: простота, фокус на тексте и навигации. Один файл на весь сайт. */
+
+:root {
+  --bg: #faf9f5;
+  --panel: #ffffff;
+  --text: #24221d;
+  --muted: #6f6a60;
+  --line: #e2ded4;
+  --accent: #1f4e79;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1d1c19;
+    --panel: #26241f;
+    --text: #e8e5dd;
+    --muted: #a09a8d;
+    --line: #3a372f;
+    --accent: #8ab4dd;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.06rem;
+  line-height: 1.65;
+}
+
+.wrap { max-width: 52rem; margin: 0 auto; padding: 0 1.25rem; }
+
+a { color: var(--accent); }
+
+h1, h2, h3 { line-height: 1.25; }
+h2 { margin-top: 2.2rem; }
+
+/* Шапка и навигация */
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem 1.5rem;
+  padding-top: .9rem;
+  padding-bottom: .9rem;
+}
+.brand {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text);
+  letter-spacing: .02em;
+}
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem 1.1rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .92rem;
+}
+.site-nav a { text-decoration: none; color: var(--muted); padding: .15rem 0; }
+.site-nav a:hover { color: var(--accent); }
+.site-nav a.active { color: var(--text); border-bottom: 2px solid var(--accent); }
+
+main.wrap { padding-top: 2rem; padding-bottom: 3rem; }
+
+/* Герой (главная) */
+.hero { margin-bottom: 2.25rem; }
+.epigraph { color: var(--muted); font-style: italic; margin: 0 0 .5rem; }
+.hero h1 { font-size: 2.1rem; margin: .2rem 0 .8rem; }
+.lead { font-size: 1.16rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.2rem; }
+.button {
+  display: inline-block;
+  padding: .5rem 1.1rem;
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .95rem;
+}
+.button.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+
+/* Выделенный блок (Устав на главной) */
+.feature {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 1.3rem 1.5rem;
+  margin: 2rem 0;
+}
+.feature h2 { margin-top: 0; }
+.feature p:last-child { margin-bottom: 0; }
+
+/* Полоса фактов (машинная проверка) */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.1rem 0;
+  margin: 2rem 0;
+}
+.stats div { display: flex; flex-direction: column; }
+.stats strong { font-size: 1.5rem; }
+.stats span { color: var(--muted); font-size: .9rem; font-family: "Segoe UI", system-ui, sans-serif; }
+
+/* Карточки направлений */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0;
+}
+.card {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+}
+.card h3 { margin: 0 0 .4rem; font-size: 1.08rem; }
+.card h3 a { text-decoration: none; }
+.card p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+/* Каркас-заглушка: помечает место будущего наполнения */
+.placeholder {
+  border: 1.5px dashed var(--line);
+  border-radius: 6px;
+  padding: .8rem 1.1rem;
+  margin: 1rem 0 1.75rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.ph-label {
+  display: block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .3rem;
+}
+.placeholder p, .placeholder ul { margin: .3rem 0; }
+
+/* Устав: пункты статей (висячая нумерация) */
+.clauses { list-style: none; padding: 0; margin: .8rem 0 1.4rem; }
+.clauses li { margin: .55rem 0; padding-left: 2.6rem; text-indent: -2.6rem; }
+
+/* Служебная пометка (рабочая редакция и т.п.) */
+.note { color: var(--muted); font-style: italic; font-size: .95rem; }
+
+/* Хлебная крошка на страницах направлений */
+.crumb { font-family: "Segoe UI", system-ui, sans-serif; font-size: .88rem; margin-bottom: 1.2rem; }
+.crumb a { text-decoration: none; color: var(--muted); }
+.crumb a:hover { color: var(--accent); }
+
+/* Оглавление тома (страница книги) */
+.toc {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+  columns: 2;
+  column-gap: 2.5rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .95rem;
+}
+.toc li { margin: .3rem 0; break-inside: avoid; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+@media (max-width: 40rem) { .toc { columns: 1; } }
+
+.part { border-top: 1px solid var(--line); padding-top: .6rem; margin-top: 2rem; scroll-margin-top: 1rem; }
+.part h2 { margin-top: .6rem; }
+.part-desc { color: var(--muted); }
+.chapters { margin: .6rem 0 1rem; padding-left: 1.6rem; }
+.chapters li { margin: .3rem 0; }
+.to-top { font-family: "Segoe UI", system-ui, sans-serif; font-size: .85rem; }
+.to-top a { text-decoration: none; color: var(--muted); }
+.to-top a:hover { color: var(--accent); }
+
+/* Библиотека: список книг */
+.books { list-style: none; padding: 0; margin: 1.2rem 0; }
+.books li {
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.books .status {
+  color: var(--muted);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: .85rem;
+  white-space: nowrap;
+}
+
+/* Подвал */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0 2rem;
+  color: var(--muted);
+  font-size: .92rem;
+}
+.site-footer .motto { font-style: italic; margin: 0 0 .3rem; }
+.site-footer p { margin: .2rem 0; }

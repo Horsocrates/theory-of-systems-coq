@@ -1,0 +1,301 @@
+# yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+configuration:
+  pageTitle: Путь Мудрости
+  pageTitleSuffix: ""
+  enableSPA: true
+  enablePopovers: true
+  analytics: null
+  locale: ru-RU
+  baseUrl: localhost:8080
+  ignorePatterns:
+    - private
+    - templates
+    - .obsidian
+  theme:
+    fontOrigin: local
+    cdnCaching: true
+    typography:
+      header: PT Serif
+      body: PT Serif
+      code: Consolas
+    colors:
+      lightMode:
+        light: "#f7f3ea"
+        lightgray: "#ded5c1"
+        gray: "#9a917d"
+        darkgray: "#26231c"
+        dark: "#1c1914"
+        secondary: "#24557f"
+        tertiary: "#17436a"
+        highlight: rgba(36, 85, 127, 0.08)
+        textHighlight: "#eeda7f88"
+      darkMode:
+        light: "#181712"
+        lightgray: "#353024"
+        gray: "#756c58"
+        darkgray: "#eae4d2"
+        dark: "#f2ecdd"
+        secondary: "#92b8de"
+        tertiary: "#b3d0ea"
+        highlight: rgba(146, 184, 222, 0.09)
+        textHighlight: "#a88f3f66"
+plugins:
+  - source: github:quartz-community/created-modified-date
+    enabled: true
+    options:
+      defaultDateType: modified
+      priority:
+        - frontmatter
+        - git
+        - filesystem
+    order: 10
+  - source: github:quartz-community/syntax-highlighting
+    enabled: true
+    options:
+      theme:
+        light: github-light
+        dark: github-dark
+      keepBackground: false
+    order: 20
+  - source: github:quartz-community/obsidian-flavored-markdown
+    enabled: true
+    options:
+      enableInHtmlEmbed: false
+      enableCheckbox: true
+    order: 30
+  - source: github:quartz-community/github-flavored-markdown
+    enabled: true
+    order: 40
+  - source: github:quartz-community/table-of-contents
+    enabled: true
+    order: 50
+    layout:
+      position: right
+      priority: 30
+  - source: github:quartz-community/crawl-links
+    enabled: true
+    options:
+      markdownLinkResolution: shortest
+    order: 60
+  - source: github:quartz-community/description
+    enabled: true
+    order: 70
+  - source: github:quartz-community/latex
+    enabled: true
+    options:
+      renderEngine: katex
+    order: 80
+  - source: github:quartz-community/citations
+    enabled: false
+    order: 85
+  - source: github:quartz-community/hard-line-breaks
+    enabled: false
+    order: 90
+  - source: github:quartz-community/ox-hugo
+    enabled: false
+    order: 91
+  - source: github:quartz-community/roam
+    enabled: false
+    order: 92
+  - source: github:quartz-community/fonts
+    enabled: true
+    options:
+      fontOrigin: local
+      body: PT Serif
+      header: PT Serif
+      code: Consolas
+  - source: github:quartz-community/remove-draft
+    enabled: true
+  - source: github:quartz-community/explicit-publish
+    enabled: false
+  - source: github:quartz-community/alias-redirects
+    enabled: true
+  - source: github:quartz-community/content-index
+    enabled: true
+    options:
+      enableSiteMap: true
+      enableRSS: true
+  - source: github:quartz-community/favicon
+    enabled: true
+  - source: github:quartz-community/og-image
+    enabled: false
+  - source: github:quartz-community/cname
+    enabled: true
+  - source: github:quartz-community/canvas-page
+    enabled: true
+  - source: github:quartz-community/content-page
+    enabled: true
+  - source: github:quartz-community/folder-page
+    enabled: true
+  - source: github:quartz-community/tag-page
+    enabled: true
+  - source: github:quartz-community/explorer
+    enabled: true
+    options:
+      sortFn: |
+        (a, b) => {
+          const w = { "устав": 1, "этический-кодекс": 1.5, "библиотека": 2, "контакты": 99, "направления": 10, "логика": 51, "метафизика": 52, "теория-систем": 53, "эпистемология": 54, "этика": 55, "социальные-системы": 55.5, "архитектура-рассуждения": 56, "математика": 57, "вопрос": 43, "каталог-ошибок": 90, "каталог-парадоксов": 91, "формализация": 14, "физика": 15, "тождество": 71, "непротиворечие": 72, "исключённое-третье": 73, "достаточное-основание": 74, "порядок": 75, "философия": 76, "восприятие": 31, "структурные-парадоксы": 81, "дефектные-парадоксы": 82, "не-парадоксы": 83 };
+          const wa = w[a.slugSegment] ?? 50;
+          const wb = w[b.slugSegment] ?? 50;
+          if (wa !== wb) return wa - wb;
+          if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
+            return (a.slugSegment || "").localeCompare(b.slugSegment || "", undefined, { numeric: true, sensitivity: "base" });
+          }
+          return a.isFolder ? -1 : 1;
+        }
+      filterFn: |
+        (node) => node.slugSegment !== "tags" && !node.slugSegments.includes("том-математика") && !(node.slugSegments.includes("каталог-ошибок") && node.slugSegment !== "каталог-ошибок" && !/^0[1-5]-/.test(node.slugSegment) && !/^[1-5]\.[0-9a-z]+-/.test(node.slugSegment)) && !(node.slugSegments.includes("каталог-парадоксов") && node.slugSegment !== "каталог-парадоксов" && !["структурные-парадоксы", "дефектные-парадоксы", "не-парадоксы"].includes(node.slugSegment)) && !(node.slugSegments.includes("архитектура-размышления") && node.slugSegment !== "архитектура-размышления")
+      mapFn: |
+        (node) => { if (node.slugSegment === "математика" || node.slugSegment === "эпистемология" || node.slugSegment === "структурные-парадоксы" || node.slugSegment === "дефектные-парадоксы" || node.slugSegment === "не-парадоксы") { node.isFolder = false; } return node; }
+    layout:
+      position: left
+      priority: 50
+  - source: github:quartz-community/graph
+    enabled: true
+    layout:
+      position: right
+      priority: 10
+  - source: github:quartz-community/search
+    enabled: true
+    layout:
+      position: left
+      priority: 20
+      group: toolbar
+      groupOptions:
+        grow: true
+  - source: github:quartz-community/backlinks
+    enabled: true
+    layout:
+      position: right
+      priority: 50
+  - source: github:quartz-community/article-title
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 10
+  - source: github:quartz-community/content-meta
+    enabled: false
+    layout:
+      position: beforeBody
+      priority: 20
+  - source: github:quartz-community/tag-list
+    enabled: false
+    layout:
+      position: beforeBody
+      priority: 30
+  - source: github:quartz-community/page-title
+    enabled: true
+    layout:
+      position: left
+      priority: 10
+  - source: github:quartz-community/darkmode
+    enabled: true
+    layout:
+      position: left
+      priority: 30
+      group: toolbar
+  - source: github:quartz-community/reader-mode
+    enabled: true
+    layout:
+      position: left
+      priority: 35
+      group: toolbar
+  - source: github:quartz-community/breadcrumbs
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 5
+      condition: not-index
+  - source: github:quartz-community/comments
+    enabled: false
+    options:
+      provider: giscus
+      options: {}
+    layout:
+      position: afterBody
+      priority: 10
+  - source: github:quartz-community/footer
+    enabled: true
+    options:
+      links:
+        GitHub: https://github.com/Horsocrates/theory-of-systems-coq
+        
+  - source: github:quartz-community/recent-notes
+    enabled: false
+  - source: github:quartz-community/spacer
+    enabled: true
+    options: {}
+    order: 25
+    layout:
+      position: left
+      priority: 25
+      display: mobile-only
+  - source: github:quartz-community/bases-page
+    enabled: true
+    options: {}
+    order: 50
+  - source: github:quartz-community/note-properties
+    enabled: true
+    options:
+      includeAll: false
+      includedProperties:
+        - description
+        - tags
+        - aliases
+        - деривация
+      excludedProperties: []
+      hidePropertiesView: false
+      delimiters: ---
+      language: yaml
+    order: 5
+    layout:
+      position: beforeBody
+      priority: 15
+      display: all
+  - source: github:quartz-community/unlisted-pages
+    enabled: true
+    options: {}
+    order: 45
+  - source: github:quartz-community/encrypted-pages
+    enabled: true
+    options:
+      iterations: 600000
+      passwordField: password
+      unlistWhenEncrypted: false
+      outputPath: static/encryptedContentIndex.json
+    order: 900
+    layout:
+      position: body
+      priority: 100
+      display: all
+  - source: github:quartz-community/stacked-pages
+    enabled: false
+    layout:
+      position: afterBody
+      priority: 50
+      display: all
+layout:
+  groups:
+    toolbar:
+      priority: 35
+      direction: row
+      gap: 0.5rem
+  byPageType:
+    "404":
+      positions:
+        beforeBody: []
+        left: []
+        right: []
+    content: {}
+    folder:
+      exclude:
+        - reader-mode
+      positions:
+        right: []
+    tag:
+      exclude:
+        - reader-mode
+      positions:
+        right: []
+    canvas: {}
+    bases: {}

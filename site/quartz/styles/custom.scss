@@ -1,0 +1,428 @@
+@use "./variables.scss" as *;
+@use "./fonts.scss"; // self-hosted PT Serif / PT Sans (@font-face)
+
+// ============================================================================
+// «Путь Мудрости» — тема «Классический том» (2026-07-16)
+// Тёплая бумага, чернильный текст, единственный цветовой акцент — чернильно-
+// синий (--secondary из quartz.config.yaml), приглушённая бронза в деталях.
+// Гарнитура: PT Serif (текст), PT Sans (интерфейс), Consolas (код).
+// Файл подключается ПОСЛЕ @layer quartz-base — переопределения здесь надёжны.
+// ============================================================================
+
+:root {
+  --bronze: #8a6f47;
+  --muted: #6e6759;
+  --surface: #fcfaf3;
+  --link-underline: rgba(36, 85, 127, 0.4);
+  --sans: "PT Sans", "Segoe UI", system-ui, sans-serif;
+  --serif: "PT Serif", Georgia, serif;
+}
+:root[saved-theme="dark"] {
+  --bronze: #b3956a;
+  --muted: #a49b86;
+  --surface: #1e1c15;
+  --link-underline: rgba(146, 184, 222, 0.45);
+}
+
+// ── Базовая типографика ─────────────────────────────────────────────────────
+html {
+  font-size: 17px;
+}
+tbody,
+li,
+p {
+  line-height: 1.66;
+}
+// «рыхлые» списки (пункты-абзацы, разделённые пустой строкой) — воздух как в Obsidian
+article li {
+  margin: 0.3rem 0;
+}
+article li > p {
+  margin: 0.55rem 0;
+}
+article {
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--serif);
+  text-wrap: balance;
+  letter-spacing: 0.005em;
+}
+.article-title {
+  font-size: 1.75rem;
+  margin: 1.6rem 0 0;
+}
+
+// бронзовая линейка под h2 в тексте статей — знак раздела
+article h2::after {
+  content: "";
+  display: block;
+  width: 2.2rem;
+  height: 2px;
+  background: var(--bronze);
+  margin-top: 0.45rem;
+  opacity: 0.8;
+}
+.popover article h2::after {
+  display: none;
+}
+
+// ── Ссылки в тексте: книжное подчёркивание ──────────────────────────────────
+article a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--link-underline);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  &:hover {
+    text-decoration-color: var(--secondary);
+  }
+}
+// внутренние ссылки — без «пилюли», чистый акцент
+a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+// заголовки-ссылки в листингах папок/тегов — без подчёркивания до наведения
+article .page-listing a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--secondary);
+  }
+}
+
+// ── Главная: титульный лист тома ────────────────────────────────────────────
+body[data-slug="index"] {
+  .article-title {
+    text-align: center;
+    font-size: 2.05rem;
+    margin-top: 1.1rem;
+  }
+  // «Свойства» на титуле не нужны — описание дублирует подводку
+  .note-properties {
+    display: none;
+  }
+  article > h1 {
+    text-align: center;
+    font-size: 1.32rem;
+    margin: 2.3rem 0 0.6rem;
+  }
+  article > h1::after {
+    display: none;
+  }
+  article > h1 + p {
+    text-align: center;
+    color: var(--muted);
+    max-width: 33em;
+    margin: 0 auto 1rem;
+  }
+}
+.home-hero {
+  text-align: center;
+  margin-top: 0.9rem;
+}
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 0.3rem 0 1.15rem;
+  &::before,
+  &::after {
+    content: "";
+    width: 3.4rem;
+    height: 1px;
+    background: var(--bronze);
+    opacity: 0.75;
+  }
+  i {
+    width: 5px;
+    height: 5px;
+    background: var(--bronze);
+    transform: rotate(45deg);
+  }
+}
+.epigraph {
+  font-style: italic;
+  font-size: clamp(1.5rem, 3.2vw, 1.95rem);
+  line-height: 1.3;
+  margin: 0;
+}
+
+// кнопка «Читать Устав»
+article a.btn {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  border: 1px solid var(--secondary);
+  border-radius: 3px;
+  padding: 0.5em 1.15em;
+  text-decoration: none;
+  transition: background 0.15s ease;
+  &:hover {
+    background: var(--highlight);
+  }
+}
+
+// карточки направлений
+.directions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.9rem;
+  margin: 1.2rem 0;
+}
+a.internal.card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--lightgray);
+  border-radius: 3px;
+  padding: 1rem 1.15rem 0.9rem;
+  text-decoration: none;
+  color: var(--darkgray);
+  transition: border-color 0.15s ease;
+  &:hover {
+    border-color: var(--secondary);
+  }
+  .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--bronze);
+    letter-spacing: 0.12em;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .t {
+    font-weight: 700;
+    font-size: 1.06rem;
+    color: var(--secondary);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .d {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+}
+// строка «Разделы сайта» сразу после карточек
+.directions + p {
+  font-family: var(--sans);
+  font-size: 0.87rem;
+  color: var(--muted);
+  border-top: 1px solid var(--lightgray);
+  margin-top: 2.2rem;
+  padding-top: 1rem;
+}
+
+// ── Интерфейс — PT Sans ─────────────────────────────────────────────────────
+.sidebar {
+  font-family: var(--sans);
+}
+.page-title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+}
+.sidebar :is(h1, h2, h3):not(.page-title) {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+}
+.explorer {
+  font-size: 0.88rem;
+}
+.breadcrumb-container {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  margin-bottom: 0.4rem;
+}
+.toc,
+.backlinks {
+  font-family: var(--sans);
+}
+.search {
+  font-family: var(--sans);
+}
+
+// ── Таблица «Свойства» (note-properties) ────────────────────────────────────
+details.note-properties {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--lightgray);
+  border-bottom: 1px solid var(--lightgray);
+  border-radius: 0;
+  padding: 0.45rem 0;
+  margin: 1rem 0 1.2rem;
+  summary.note-properties-header {
+    .note-properties-title {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+    }
+    .note-properties-count {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+    }
+  }
+  table.note-properties-table {
+    td {
+      padding: 0.22rem 0;
+      border: none;
+    }
+    td.note-properties-key {
+      font-family: var(--sans);
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    td.note-properties-value {
+      font-size: 0.92rem;
+    }
+  }
+}
+
+// ── Листинги папок и тегов ──────────────────────────────────────────────────
+.page-listing > p {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+ul.section-ul {
+  li.section-li {
+    border-bottom: 1px solid var(--lightgray);
+    padding: 0.5rem 0;
+    margin: 0;
+    &:first-child {
+      border-top: 1px solid var(--lightgray);
+    }
+  }
+  .section h3 {
+    font-size: 1.02rem;
+    margin: 0;
+  }
+  .section .meta {
+    font-family: var(--sans);
+    color: var(--gray);
+  }
+}
+
+// ── Компоненты ──────────────────────────────────────────────────────────────
+.popover {
+  & > .popover-inner {
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    box-shadow: 0 8px 28px rgba(30, 26, 18, 0.14);
+  }
+}
+.popover-tabs button {
+  font-family: var(--sans);
+}
+:root[saved-theme="dark"] .popover > .popover-inner {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+.graph .graph-outer {
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+}
+
+blockquote {
+  border-left: 2px solid var(--bronze);
+  padding-left: 1.1rem;
+  margin-left: 0;
+}
+
+article table:not(.note-properties-table) {
+  border-collapse: collapse;
+  th {
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--gray);
+    padding: 0.35em 0.6em;
+  }
+  td {
+    border: none;
+    border-bottom: 1px solid var(--lightgray);
+    padding: 0.4em 0.6em;
+  }
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--lightgray);
+  margin: 2.2rem auto;
+  width: 100%;
+}
+
+// ── Подвал: девиз ───────────────────────────────────────────────────────────
+footer {
+  text-align: center;
+  font-family: var(--sans);
+  opacity: 1;
+  border-top: 1px solid var(--lightgray);
+  margin-top: 2.6rem;
+  padding-top: 1.3rem;
+  &::before {
+    content: "«Истина превыше всего»";
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.02rem;
+    color: var(--darkgray);
+    margin-bottom: 0.3rem;
+  }
+  p {
+    color: var(--gray);
+    font-size: 0.82rem;
+    margin: 0;
+  }
+  ul {
+    justify-content: center;
+    margin-top: 0.15rem;
+    li a {
+      color: var(--gray);
+      font-size: 0.82rem;
+    }
+  }
+}
+
+// ── Мелкая полировка ────────────────────────────────────────────────────────
+::selection {
+  background: rgba(36, 85, 127, 0.18);
+}
+:root[saved-theme="dark"] ::selection {
+  background: rgba(146, 184, 222, 0.25);
+}
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+@media all and #{$mobile} {
+  html {
+    font-size: 16.5px;
+  }
+  .directions {
+    grid-template-columns: 1fr;
+  }
+}
