@@ -35,6 +35,7 @@ $scripts = @(
 )
 foreach ($s in $scripts) { Copy-Item "$src\$s" "$dest\" -Force }
 Copy-Item "$src\tools\linkcheck.cjs" "$dest\tools\" -Force
+Copy-Item "$src\tools\en-status.cjs" "$dest\tools\" -Force
 Copy-Item "$src\tools\patch-graph-cyrillic.cjs" "$dest\tools\" -Force
 Copy-Item "$src\tools\highlights2md.ps1"     "$dest\tools\" -Force
 Copy-Item "$src\tools\highlights-vitrina.md" "$dest\tools\" -Force
@@ -45,6 +46,12 @@ Copy-Item "$src\tables\*.tsv" "$dest\tables\" -Force
 # content (mirror)
 if (Test-Path "$dest\content") { Remove-Item "$dest\content" -Recurse -Force -Confirm:$false }
 Copy-Item "$src\content" "$dest\content" -Recurse -Force
+
+# English version drafts (content-en): mirrored the same way; an absent folder is skipped
+if (Test-Path "$src\content-en") {
+  if (Test-Path "$dest\content-en") { Remove-Item "$dest\content-en" -Recurse -Force -Confirm:$false }
+  Copy-Item "$src\content-en" "$dest\content-en" -Recurse -Force
+}
 
 # patched Quartz core files (popover tabs)
 Copy-Item "$src\quartz\components\scripts\popover.inline.ts" "$dest\patches\popover.inline.ts" -Force
