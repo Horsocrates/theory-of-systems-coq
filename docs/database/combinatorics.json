@@ -1,0 +1,324 @@
+[
+  {
+    "num": 1862, "path": "src/combinatorics/ErdosSzekeres.v", "cluster": "combinatorics",
+    "classical_counterpart": "Erdős–Szekeres (1935): any sequence of n²+1 distinct numbers contains a monotone subsequence of length n+1. Classical proof uses pigeonhole on length-pair encoding; NEW is recasting pigeon-via-mu_le as a CONSTRUCTIVE WITNESS EXTRACTION (smallest colliding j) rather than a classical existence.",
+    "title": "Erdős-Szekeres via L5/μ: monotone subsequence existence by pigeonhole",
+    "topic": "Pigeonhole-via-mu_le finds the smallest j with a previous collision; abstract Erdős-Szekeres via length-pair encoding gives monotone subsequence existence.",
+    "role": "Foundation of combinatorics cluster (vein C/B applications of L5). Reused conceptually by M2/M5 cycle pigeonhole.",
+    "qed": 12, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "cs.MuRecursion"],
+    "err": {
+      "elements": "конечная последовательность; пары индексов; длины подпоследовательностей.",
+      "roles": "роль монотонности; роль свидетеля коллизии (наименьший j через mu_le).",
+      "rules": "pair_encode инъективен; pigeon: |dom|>|cod| ⟹ коллизия; формула n²+1.",
+      "p4": "вся комбинаторика ограничена n; L5 извлекает наименьший свидетель — без classical existence."
+    },
+    "lemmas": [
+      {"name": "NoDup_map_seq/injective_bound/incl_bounded_seq", "kind": "Lemma", "role": "инъективные отображения ограничены"},
+      {"name": "has_prev_collision/first_collision_j", "kind": "Definition", "role": "поиск наименьшего j с предыдущей коллизией через mu_le"},
+      {"name": "pigeonhole_via_L5", "kind": "Theorem", "role": "★ pigeon как L5-извлечение"},
+      {"name": "pair_encode/pair_encode_bound/pair_encode_inj", "kind": "Definition", "role": "0-based пары и инъективность"},
+      {"name": "abstract_erdos_szekeres", "kind": "Theorem", "role": "★ длина последовательности > n² ⟹ существует монотонная подпоследовательность длины n+1"},
+      {"name": "erdos_szekeres_contrapositive", "kind": "Theorem", "role": "контрапозитивный вариант"}
+    ],
+    "key_lemmas": [
+      {"name": "pigeonhole_via_L5", "analysis": "Pigeonhole как μ-извлечение: наименьший j с предыдущей коллизией находится mu_le-поиском. КЛАССИЧЕСКОЕ pigeon = «существует коллизия»; ЗДЕСЬ — конкретный наименьший свидетель. Уровень не theorem-new (Эрдёш-Секереш классичен), но methods: способ замены classical existence на L5-конструктив.", "tags": ["pigeon", "mu_le", "witness", "no-classical-existence"]},
+      {"name": "abstract_erdos_szekeres", "analysis": "Главная теорема: pigeon на (i,j)-парах через pair_encode (биективен на бок-bounded пары). При длине > n² есть коллизия пар (длина-возр, длина-убыв), что даёт монотонную подпоследовательность длины n+1. Классична; новизна в конструктивной реализации pigeon-engine.", "tags": ["erdos-szekeres", "pigeon", "vein-C"]}
+    ],
+    "uniqueness": {
+      "score": 2, "level": "methods",
+      "claim": "Конструктивная реализация Эрдёша-Секереша через L5/μ pigeonhole (наименьший j извлекается mu_le, не классическим существованием).",
+      "caveat": "Сама теорема классична (1935); ново только формализационное обрамление — L5-извлечение наименьшего свидетеля как замена classical existence."
+    },
+    "tags": ["erdos-szekeres", "pigeon", "mu_le", "vein-C", "combinatorics"],
+    "notes": "Placeholder num: TBD on _files.tsv reconciliation (append-exception convention)."
+  },
+  {
+    "num": 1863, "path": "src/combinatorics/HallsMarriage.v", "cluster": "combinatorics",
+    "classical_counterpart": "Hall's marriage theorem (1935): a system of distinct representatives exists iff |N(S)| ≥ |S| for every S. Classical proofs use augmenting paths or induction; NEW is the constructive greedy-with-mu_le that builds the SDR DIRECTLY when 'strong Hall' (each set has |U_i| free elements after i steps) holds.",
+    "title": "Strong Hall's marriage via greedy-with-μ: constructive SDR",
+    "topic": "System of distinct representatives via greedy algorithm: at each step, find smallest unused element of current set via mu_le. Strong Hall hypothesis (|U_i| free) suffices.",
+    "role": "Combinatorics-cluster matching infrastructure. Demonstrates L5/μ matching the existence pattern. Building block for graph matching extensions (König, Gale-Shapley).",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "cs.MuRecursion"],
+    "err": {
+      "elements": "семейство множеств U_0,...,U_{n-1}; SDR = инъективное представительство.",
+      "roles": "роль представителя; роль использованных vs свободных элементов; роль pigeon-избытка.",
+      "rules": "find_unused через mu_le; greedy_sdr_aux строит SDR пошагово; strong_hall: |U_i| > i после i шагов.",
+      "p4": "вся комбинаторика финитна; greedy ограничен n шагами; mu_le детерминистичен."
+    },
+    "lemmas": [
+      {"name": "is_sdr/in_list", "kind": "Definition", "role": "SDR-предикат и список-членство"},
+      {"name": "find_unused/find_unused_some_iff/find_unused_none_iff", "kind": "Definition/Lemma", "role": "mu_le-поиск наименьшего неиспользованного"},
+      {"name": "remove_NoDup_length/remove_NoDup_preserves", "kind": "Lemma", "role": "remove сохраняет NoDup, длина-1"},
+      {"name": "greedy_sdr_aux/greedy_sdr", "kind": "Definition", "role": "greedy-конструкция SDR"},
+      {"name": "greedy_sdr_aux_correct/greedy_sdr_correct", "kind": "Theorem", "role": "корректность greedy"},
+      {"name": "find_unused_exists_long", "kind": "Lemma", "role": "pigeon-хелпер: длинный список + достаточно много свободных ⟹ find_unused успешен"},
+      {"name": "strong_hall/strong_hall_sdr_exists", "kind": "Definition/Theorem", "role": "★ strong Hall ⟹ существует SDR (constructively)"}
+    ],
+    "key_lemmas": [
+      {"name": "strong_hall_sdr_exists", "analysis": "Конструктивное SDR-существование: strong Hall (|U_i| > i после i шагов = pigeon-избыток) даёт явный greedy-алгоритм. Не классический Hall (требующий |N(S)| ≥ |S|), а УСИЛЕННАЯ форма с pigeon-избытком — конструктивно сильнее, классически слабее. Уровень methods: формализация greedy через mu_le.", "tags": ["hall", "sdr", "greedy", "mu_le", "constructive"]},
+      {"name": "find_unused_exists_long", "analysis": "Pigeon-pattern: если множество длиной > k содержит > k уникальных элементов, mu_le находит свободный. Ядро greedy-аргумента. Кооперируется с remove-машинерией.", "tags": ["pigeon", "find-unused", "mu_le"]}
+    ],
+    "uniqueness": {
+      "score": 2, "level": "methods",
+      "claim": "Конструктивный SDR через greedy-with-mu_le под strong Hall (pigeon-избыток). Альтернатива классическому Hall'у с augmenting paths.",
+      "caveat": "Strong Hall классически тривиален (классический Hall сильнее: при |N(S)| ≥ |S| доказать SDR через теорему о расширении). Ново — формализация greedy через mu_le, не сама теорема."
+    },
+    "tags": ["hall", "sdr", "matching", "greedy", "mu_le", "combinatorics"],
+    "notes": "Placeholder num: TBD on _files.tsv reconciliation."
+  },
+  {
+    "num": 1864, "path": "src/combinatorics/GreedyColoring.v", "cluster": "combinatorics",
+    "classical_counterpart": "Folklore: χ(G) ≤ Δ(G) + 1 by greedy coloring in any vertex order. NEW is the stronger statement χ(G) ≤ Δ⁻(G) + 1 (backward degree only) plus full L5/μ formalization with pigeon-via-remove_one.",
+    "title": "Greedy graph coloring: χ(G) ≤ Δ⁻(G) + 1 via L5/μ",
+    "topic": "Greedy assigns to vertex x the smallest color k ≤ K not used by backward neighbors. mu_le extracts smallest color deterministically. Pigeonhole guarantees k exists.",
+    "role": "Deep combinatorics M1 (this session). Foundation file for graph coloring pillar. Reused conceptually by future Brooks/Vizing/Bipartite/Planar extensions.",
+    "qed": 18, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia"],
+    "err": {
+      "elements": "вершины [0..n-1]; цвета [0..K]; список-prev накопленных цветов.",
+      "roles": "роль backward-соседа; роль forbidden-цвета; роль наименьшего разрешённого.",
+      "rules": "color_ok prev i k = forallb (для всех y<i с adj y i: prev[y] ≠ k); build_colors добавляет mu_le-выбор; pigeon: K+1 ≥ Δ⁻+1.",
+      "p4": "вся рекурсия ограничена n; mu_le-поиск bound K; pigeon-via-remove_one конструктивен."
+    },
+    "lemmas": [
+      {"name": "mu_le/mu_le_sound/mu_le_none_all_false/mu_le_complete", "kind": "Fixpoint/Lemma", "role": "L5/μ инфраструктура"},
+      {"name": "remove_one/remove_one_length/remove_one_preserves", "kind": "Fixpoint/Lemma", "role": "remove-one элемент из списка"},
+      {"name": "exists_color_outside_K", "kind": "Lemma", "role": "★ pigeon: длина ≤ K ⟹ некоторый k ≤ K не в списке"},
+      {"name": "adj_rel/forbidden_colors/color_ok", "kind": "Definition", "role": "граф + проверка корректности цвета"},
+      {"name": "color_ok_from_not_in/color_ok_correct", "kind": "Lemma", "role": "soundness color_ok"},
+      {"name": "build_colors/build_colors_length/build_colors_step/build_colors_nth_stable", "kind": "Fixpoint/Lemma", "role": "★ greedy-конструкция списка цветов"},
+      {"name": "back_degree/forbidden_colors_length_eq/greedy_step_succeeds", "kind": "Definition/Lemma", "role": "оценка через backward-степень"},
+      {"name": "back_deg_bounded/build_colors_proper/build_colors_bounded", "kind": "Definition/Theorem", "role": "★ greedy даёт правильную раскраску с цветами ≤ K"},
+      {"name": "is_proper_coloring/greedy_coloring/greedy_proper_symmetric/greedy_uses_at_most_K_plus_1_colors", "kind": "Definition/Theorem", "role": "★ финальная теорема: χ(G) ≤ Δ⁻+1 для симметричных irreflexive графов"},
+      {"name": "empty_graph_back_deg_0/empty_graph_chromatic", "kind": "Example/Corollary", "role": "пример: пустой граф — 1 цвет"}
+    ],
+    "key_lemmas": [
+      {"name": "build_colors_proper", "analysis": "Правильность greedy: для любого ребра x<y с adj x y, цвета различны. ДОКАЗАТЕЛЬСТВО опирается на (1) stability nth (раннее не меняется) + (2) mu_le возвращает k с color_ok = true ⟹ k ≠ prev[x]. Класс standard greedy proof, ново — формализация через L5/μ-минимум + pigeon-via-remove_one (не через классический pigeon).", "tags": ["greedy", "coloring", "mu_le", "proper"]},
+      {"name": "exists_color_outside_K", "analysis": "★ ЯДРО pigeonhole в L5-форме: список длиной ≤ K имеет некоторый k ≤ K вне его. ДОКАЗАТЕЛЬСТВО индукцией на K с remove_one (если K ∈ L, удалить и применить IH на K-1; иначе K — свободный). КОНСТРУКТИВНО даёт свидетеля. Это сам L5-pigeon-engine.", "tags": ["pigeon", "remove-one", "constructive", "L5"]},
+      {"name": "greedy_proper_symmetric", "analysis": "Капстоун: симметричный irreflexive граф ⟹ greedy даёт proper coloring. Объединяет build_colors_proper с симметрией: для x<y используем proper напрямую; для y<x — переход через сим. Бонус: каждый цвет ≤ K.", "tags": ["greedy", "symmetric", "irreflexive", "capstone"]}
+    ],
+    "uniqueness": {
+      "score": 3, "level": "new-framing",
+      "claim": "χ(G) ≤ Δ⁻(G)+1 через L5/μ: greedy = build_colors_step с mu_le, pigeon = exists_color_outside_K через remove_one. Усиленная форма bound (backward degree, не полная Δ) + полная axiom-free формализация.",
+      "caveat": "Folklore-результат (greedy coloring), сама теорема не нова. Уровень — переосмысление через L5/μ оператор + конструктивный pigeon. Brooks (χ ≤ Δ кроме K_n/odd cycles) — открыто."
+    },
+    "tags": ["greedy", "coloring", "L5", "mu_le", "pigeon", "remove-one", "M1", "combinatorics"],
+    "notes": "M1 of deep combinatorics pyramid. Placeholder num: TBD on _files.tsv reconciliation."
+  },
+  {
+    "num": 1865, "path": "src/combinatorics/CycleInPermutation.v", "cluster": "combinatorics",
+    "classical_counterpart": "Folklore: every finite permutation has cycles. Classical proof uses pigeon on iterates {σ^0(x), σ^1(x), ..., σ^n(x)} (n+1 values in n slots). NEW is the full L5/μ formalization with constructive NoDup-bounded-length pigeon (via remove_one) plus mu_le-canonical cycle_length.",
+    "title": "Cycle existence in finite permutations via L5/μ + constructive pigeonhole",
+    "topic": "For permutation σ of [0..n-1] and x<n: exists k, 1 ≤ k ≤ n, σ^k(x) = x. Proof: NoDup-bounded-length pigeon on iterates list, find collision indices, derive cycle via iter_inj.",
+    "role": "Deep combinatorics M2 (this session). Foundation for orbit/cycle theory. Reused by M3-M7.",
+    "qed": 19, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia"],
+    "err": {
+      "elements": "перестановка σ : nat→nat; итерации iter_sigma σ k x; список [iter 0..n].",
+      "roles": "роль перестановки (инъективна); роль pigeon (n+1 значений в n слотах); роль cycle_length (наименьший положительный период).",
+      "rules": "iter_inj: σ^k инъективна; pigeon: NoDup + values < n ⟹ length ≤ n; cycle_length = mu_le.",
+      "p4": "ВСЁ финитно: список длины S n, ограничен < n; cycle_length ≤ n; mu_le extract smallest."
+    },
+    "lemmas": [
+      {"name": "mu_le/mu_le_sound/mu_le_none_all_false", "kind": "Fixpoint/Lemma", "role": "L5/μ инфраструктура"},
+      {"name": "remove_one/remove_one_in/remove_one_length_in/NoDup_remove_one/remove_one_in_neq", "kind": "Fixpoint/Lemma", "role": "NoDup-сохраняющий remove"},
+      {"name": "nodup_bounded_length", "kind": "Lemma", "role": "★ NoDup + values < n ⟹ length ≤ n (constructive pigeon ядро)"},
+      {"name": "is_perm", "kind": "Definition", "role": "перестановка [0..n-1] = bounded + injective"},
+      {"name": "iter_sigma/iter_bound/iter_inj/iter_compose", "kind": "Fixpoint/Lemma", "role": "итерации σ + ограниченность + инъективность + композиция"},
+      {"name": "iterates_list/iterates_list_length/iterates_list_bound", "kind": "Definition/Lemma", "role": "список iter 0..n + длина S n + bound"},
+      {"name": "iterates_have_dup", "kind": "Lemma", "role": "★ iterates_list НЕ NoDup (pigeon на n+1 значений)"},
+      {"name": "first_repeat/not_nodup_dup_indices", "kind": "Definition/Lemma", "role": "извлечение пары коллизирующих индексов из not-NoDup"},
+      {"name": "iterates_collision_indices", "kind": "Lemma", "role": "★ существует i<j≤n с iter i x = iter j x"},
+      {"name": "cycle_exists", "kind": "Theorem", "role": "★★ главная теорема: ∃ k, 1 ≤ k ≤ n, iter k x = x"},
+      {"name": "cycle_length/cycle_length_some/cycle_length_minimal", "kind": "Definition/Theorem", "role": "★ канонический наименьший период через mu_le"}
+    ],
+    "key_lemmas": [
+      {"name": "cycle_exists", "analysis": "Главная теорема: всякая конечная перестановка имеет цикл через любой элемент. ДОКАЗАТЕЛЬСТВО: 3 шага — (1) iterates [iter 0..n] x содержат коллизию (pigeon), (2) от пары i<j с iter i = iter j через iter_inj получаем iter (j-i) x = x, (3) k = j-i в [1..n]. Уровень — methods (теорема классична, formalization L5/μ-aligned).", "tags": ["cycle", "permutation", "pigeon", "iter_inj"]},
+      {"name": "nodup_bounded_length", "analysis": "★★ Сердце pigeon в L5-форме: NoDup-список с values < n имеет length ≤ n. ДОКАЗАТЕЛЬСТВО индукцией на n с remove_one (для S n': если n' ∈ L удалить и применить IH с bound n'; иначе все < n' и IH применяется). КОНСТРУКТИВНО, без classical, ядро pigeon-arithmetic.", "tags": ["pigeon", "NoDup", "remove-one", "constructive", "L5-core"]},
+      {"name": "cycle_length_minimal", "analysis": "★ L5-минимальность: cycle_length возвращает НАИМЕНЬШИЙ положительный период через mu_le_minimal. Никакой k' < k не даёт iter k' x = x. Это L5/μ-каноничность периода — ключ для M4 (PermutationOrder), M5 (FixedPoints), M6 (Involutions).", "tags": ["cycle_length", "minimal", "mu_le", "canonical"]}
+    ],
+    "uniqueness": {
+      "score": 3, "level": "new-framing",
+      "claim": "Существование цикла перестановки через NoDup-bounded-length pigeon (constructive remove_one) + cycle_length как L5/μ-канонический наименьший период. Фундамент для M3-M7 (orbit/order/fixed/involutions).",
+      "caveat": "Сама теорема (всякая перестановка распадается на циклы) классична. Ново — формализация pigeon через remove_one (constructive) + cycle_length как mu_le-extraction."
+    },
+    "tags": ["cycle", "permutation", "pigeon", "mu_le", "NoDup", "M2", "combinatorics"],
+    "notes": "M2 of deep combinatorics pyramid. Foundation for M3-M7."
+  },
+  {
+    "num": 1866, "path": "src/combinatorics/CycleDecomposition.v", "cluster": "combinatorics",
+    "classical_counterpart": "Folklore: orbits of a permutation partition the domain. NEW is the constructive orbit_same theorem via mod-reduction (Nat.Div0.div_mod) + orbit_partition (either same or disjoint).",
+    "title": "Orbit structure: partition via orbit_same / disjoint",
+    "topic": "orbit(x) = list of iter 0..(cycle_length-1) x. Theorems: x ∈ orbit(x), closed under σ, symmetric (y ∈ orbit(x) ⟹ x ∈ orbit(y) via mod-reduction), orbit_same as sets, orbit_partition.",
+    "role": "Deep combinatorics M3 (this session). Provides equivalence-relation structure on permutation domain. Foundation for M7 (OrbitMin).",
+    "qed": 11, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "combinatorics.CycleInPermutation"],
+    "err": {
+      "elements": "орбита = list nat = [x, σx, σ²x, ..., σ^(k-1)x].",
+      "roles": "роль представителя цикла; роль закрытости (σ переводит орбиту в себя); роль симметричности (orbit_same).",
+      "rules": "orbit_wraps: iter k x = x; orbit_closed_sigma: σ перебрасывает внутри; mod-редукция: iter (m mod k) y = iter m y.",
+      "p4": "финитная орбита длины ≤ n; mod-редукция конечна; partition децидабельна."
+    },
+    "lemmas": [
+      {"name": "orbit/orbit_length/x_in_orbit/orbit_bound/orbit_in_iff", "kind": "Definition/Theorem", "role": "базовая структура орбиты"},
+      {"name": "orbit_wraps/orbit_closed_sigma/orbit_closed_iter", "kind": "Lemma", "role": "★ закрытость под σ и iter"},
+      {"name": "orbit_symmetric", "kind": "Theorem", "role": "★ y ∈ orbit(x) ⟹ x ∈ orbit(y) через mod-редукцию"},
+      {"name": "iter_in_orbit_any", "kind": "Theorem", "role": "★ любая iter m x в orbit (через mod cycle_length)"},
+      {"name": "orbit_same", "kind": "Theorem", "role": "★★ orbit x = orbit y как множества"},
+      {"name": "orbit_partition", "kind": "Theorem", "role": "★★ orbits либо равны либо непересекаются"}
+    ],
+    "key_lemmas": [
+      {"name": "orbit_symmetric", "analysis": "★★ y ∈ orbit(x) ⟹ x ∈ orbit(y). ТЕХНИКА: если y = iter i x, то iter (k-i) y = iter k x = x. Но (k-i) может быть > k_y (длина цикла y), поэтому нужна mod-редукция: iter ((k-i) mod k_y) y = iter (k-i) y = x. Использует Nat.Div0.div_mod для (k-i) = k_y*q + r и Hround для iter (k_y*q) y = y. Не тривиально.", "tags": ["orbit", "symmetric", "mod-reduction", "div_mod"]},
+      {"name": "orbit_same", "analysis": "★★ Если y ∈ orbit(x), то orbit(x) = orbit(y) как множества (forall z, In z orbit_x ↔ In z orbit_y). ДОКАЗАТЕЛЬСТВО через orbit_symmetric + orbit_closed_iter: z = iter i x ⟹ iter i x ∈ orbit y (закрытость орбиты y под iter, поскольку x ∈ orbit y).", "tags": ["orbit", "set-equality", "closure"]},
+      {"name": "orbit_partition", "analysis": "★★ Любые два orbits либо РАВНЫ как множества, либо НЕПЕРЕСЕКАЮТСЯ. ТРАНЗИТИВНОСТЬ-аргумент: если z ∈ orbit x ∩ orbit y, то orbit z = orbit x и orbit z = orbit y ⟹ orbit x = orbit y. Это даёт partition-структуру (equivalence relation).", "tags": ["partition", "equivalence", "disjoint-or-equal"]}
+    ],
+    "uniqueness": {
+      "score": 3, "level": "new-framing",
+      "claim": "Orbit-структура с явным orbit_same и orbit_partition через mod-редукцию. Конструктивная equivalence relation на [0..n-1] = orbit-разбиение.",
+      "caveat": "Структурная теория орбит классична. Ново — формализация через mod-редукцию + явный orbit_partition. Mirsky/Dilworth-style chain/antichain декомпозиция — открыто."
+    },
+    "tags": ["orbit", "partition", "symmetric", "mod-reduction", "equivalence", "M3", "combinatorics"],
+    "notes": "M3 of deep combinatorics pyramid."
+  },
+  {
+    "num": 1867, "path": "src/combinatorics/PermutationOrder.v", "cluster": "combinatorics",
+    "classical_counterpart": "Group theory of S_n: order(σ) = LCM of cycle lengths; σ^m = id iff m divisible by every cycle length. NEW is the constructive characterization via cycle_length_minimal + mod arithmetic, with order_exists via factorial bound.",
+    "title": "Order characterization: σ^m = id iff cycle_length divides m",
+    "topic": "iter σ^m(x) = x ⟺ cycle_length(x) | m. Direction: (⟹) via cycle_length_minimal (no smaller r < k has iter r x = x). (⟸) via Hround (iter (k*q) x = x). Plus factorial bound for existence.",
+    "role": "Deep combinatorics M4 (this session). Bridge from cycle structure to group order. Specialized in M5 (m=1, fixed points), M6 (m=2, involutions).",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "combinatorics.CycleInPermutation"],
+    "err": {
+      "elements": "перестановка σ; экспонента m; cycle_length k = период.",
+      "roles": "роль идентификатора (σ^m = id); роль делимости (k | m).",
+      "rules": "iter (k*q) x = x; iter_eq_x ⟹ k | m через minimality; factorial n кратно каждому k ≤ n.",
+      "p4": "ВСЁ финитно; m свободно но cycle_length ≤ n; factorial-bound = явный универсальный m."
+    },
+    "lemmas": [
+      {"name": "iter_round", "kind": "Lemma", "role": "★ iter (k*q) x = x (multiples of cycle length)"},
+      {"name": "iter_eq_x_implies_div", "kind": "Lemma", "role": "★ iter m x = x ⟹ k | m (через cycle_length_minimal)"},
+      {"name": "iter_id_iff_div", "kind": "Theorem", "role": "★★ ГЛАВНАЯ: iter m x = x ⟺ m mod k = 0"},
+      {"name": "perm_identity_iff", "kind": "Theorem", "role": "★ σ^m = id (pointwise) ⟺ ∀ x, cycle_length(x) | m"},
+      {"name": "factorial/factorial_pos/divides_factorial", "kind": "Fixpoint/Lemma", "role": "n! и k | n! для k ∈ [1..n]"},
+      {"name": "order_exists", "kind": "Theorem", "role": "★ ∃ m ≥ 1 такое что σ^m = id (через factorial)"}
+    ],
+    "key_lemmas": [
+      {"name": "iter_id_iff_div", "analysis": "★★ ГЛАВНАЯ характеризация: iter σ^m x = x ⟺ cycle_length(x) | m. (⟹) ЯДРО: предположим k ∤ m, разделим m = k*q + r с r ∈ (0, k). Тогда iter m x = iter r (iter (k*q) x) = iter r x (через Hround). Это даёт iter r x = x с r ∈ (0, k), что противоречит cycle_length_minimal. (⟸) ТРИВИАЛЬНО: m = k*q ⟹ iter m x = x через iter_round.", "tags": ["order", "divisibility", "cycle_length_minimal", "mod"]},
+      {"name": "perm_identity_iff", "analysis": "★ Глобальная характеризация: σ^m = id поточечно на [0..n-1] ⟺ для каждой орбиты её длина делит m. Объединяет iter_id_iff_div через все элементы. Корень для order(σ) = LCM cycle_lengths (которое доказуемо через эту теорему).", "tags": ["identity", "global", "lcm-implicit"]},
+      {"name": "order_exists", "analysis": "★ ЯВНОЕ свидетельство существования: m = n! работает (поскольку n! кратно каждому cycle_length ≤ n). Не оптимально (оптимально = LCM), но конструктивно показывает, что order существует. divides_factorial доказывается индукцией с mod_mul.", "tags": ["existence", "factorial", "constructive-witness"]}
+    ],
+    "uniqueness": {
+      "score": 3, "level": "new-framing",
+      "claim": "σ^m = id характеризация через cycle_length (минимальный период) + явное existence через факториал. Связь cycle_length_minimal с групповым порядком.",
+      "caveat": "Сама теорема (order = LCM cycle lengths) классична. Ново — формализация через mu_le-минимальность + factorial-existence (не LCM-extraction)."
+    },
+    "tags": ["order", "permutation", "divisibility", "cycle_length", "factorial", "M4", "combinatorics"],
+    "notes": "M4 of deep combinatorics pyramid. Generalizes M5/M6 (specializations m=1, m=2)."
+  },
+  {
+    "num": 1868, "path": "src/combinatorics/PermutationFixedPoints.v", "cluster": "combinatorics",
+    "classical_counterpart": "Trivial: σ(x) = x iff x is a fixed point iff cycle length is 1. NEW is bidirectional formalization via cycle_length_minimal (the L5/μ-link).",
+    "title": "Fixed points = cycles of length 1",
+    "topic": "σ(x) = x ⟺ cycle_length(x) = Some 1. Bidirectional through cycle_length_minimal (forward) and orbit_wraps (backward).",
+    "role": "Deep combinatorics M5 (this session). Specialization of M4 at m=1. Foundation for derangement count theory.",
+    "qed": 7, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "combinatorics.CycleInPermutation"],
+    "err": {
+      "elements": "перестановка σ; неподвижная точка x с σ(x) = x; цикл длины 1.",
+      "roles": "роль fixed (σ x = x); роль minimal period (cycle_length = 1).",
+      "rules": "iter_sigma σ 1 x = σ x; cycle_length 1 ⟺ iter 1 x = x ⟺ σ x = x.",
+      "p4": "финитно; cycle_length_minimal даёт L5-связь."
+    },
+    "lemmas": [
+      {"name": "iter_sigma_1", "kind": "Lemma", "role": "iter σ 1 x = σ x"},
+      {"name": "fixed_iff_cycle_length_1", "kind": "Theorem", "role": "★★ ГЛАВНАЯ: σ x = x ⟺ cycle_length = Some 1"},
+      {"name": "fixed_point_iter", "kind": "Theorem", "role": "σ x = x ⟹ iter k x = x для всех k"},
+      {"name": "non_fixed_cycle_length_ge_2", "kind": "Theorem", "role": "σ x ≠ x ⟹ cycle_length ≥ 2"},
+      {"name": "cycle_length_1_implies_fixed", "kind": "Corollary", "role": "обратное направление как corollary"},
+      {"name": "identity_is_perm/identity_cycle_length_1", "kind": "Lemma/Theorem", "role": "★ тождество — перестановка с cycle_length везде = 1"}
+    ],
+    "key_lemmas": [
+      {"name": "fixed_iff_cycle_length_1", "analysis": "★★ Связь fixed ↔ cycle_length=1 через cycle_length_minimal. (⟹) Если σx=x, то iter 1 x = x. По cycle_length_minimal, нет k' < cycle_length с iter k' x = x; но 1 — кандидат, значит cycle_length ≤ 1. Поскольку cycle_length ≥ 1, она = 1. (⟸) cycle_length=1 ⟹ iter 1 x = x = σ x. L5-минимальность — ядро.", "tags": ["fixed", "cycle_length", "minimality", "L5"]},
+      {"name": "identity_cycle_length_1", "analysis": "Капстоун-пример: тождественная перестановка — every cycle_length = 1. ПРЯМОЕ применение fixed_iff_cycle_length_1: idenitity_fixes даёт σx=x, поэтому cycle_length = 1.", "tags": ["identity", "capstone-example"]}
+    ],
+    "uniqueness": {
+      "score": 2, "level": "methods",
+      "claim": "Bidirectional fixed-point characterization через L5/μ-минимальность cycle_length. Простое следствие M4 (m=1 case), но изолирует ключевой механизм минимальности.",
+      "caveat": "Тривиальная теорема (fixed point ⟺ cycle of length 1). Уровень methods: показывает, как cycle_length_minimal даёт bidirectional связь."
+    },
+    "tags": ["fixed", "cycle_length", "minimality", "identity", "M5", "combinatorics"],
+    "notes": "M5 of deep combinatorics pyramid. Specialization of M4 at m=1."
+  },
+  {
+    "num": 1869, "path": "src/combinatorics/PermutationInvolution.v", "cluster": "combinatorics",
+    "classical_counterpart": "Group theory: an involution is σ with σ² = id; equivalent to cycles being length 1 or 2 (fixed points and transpositions). NEW is the formalization as specialization of M4 (PermutationOrder iter_id_iff_div) at m=2 + the divides_2_iff lemma.",
+    "title": "Involutions: σ² = id iff cycles are length 1 or 2",
+    "topic": "σ² = id pointwise ⟺ every cycle_length ∈ {1, 2}. Proof via M4 (iter_id_iff_div) with m=2 + divides_2_iff (divisors of 2 are 1 and 2). Transposition property follows.",
+    "role": "Deep combinatorics M6 (this session). Specialization of M4 at m=2. Foundation for involution-count theory (telephone numbers).",
+    "qed": 5, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "combinatorics.CycleInPermutation", "combinatorics.PermutationOrder"],
+    "err": {
+      "elements": "перестановка σ; инволюция σ² = id; цикл длины 1 (fixed) или 2 (transposition).",
+      "roles": "роль involution; роль divisor of 2 = {1, 2}.",
+      "rules": "divides_2_iff: 2 mod k = 0 ⟺ k ∈ {1, 2}; iter_id_iff_div специализирован m=2.",
+      "p4": "финитно; делители 2 явно перечислены."
+    },
+    "lemmas": [
+      {"name": "divides_2_iff", "kind": "Lemma", "role": "★ k | 2 ⟺ k = 1 ∨ k = 2"},
+      {"name": "involution_iff_cycle_12", "kind": "Theorem", "role": "★★ ГЛАВНАЯ: σ² = id ⟺ ∀ x, cycle_length ∈ {1, 2}"},
+      {"name": "involution_cycle_length_bound", "kind": "Theorem", "role": "инволюция ⟹ length ≤ 2"},
+      {"name": "cycle_length_2_transposition", "kind": "Theorem", "role": "★ cycle_length = 2 ⟹ σ x ≠ x И σ(σ x) = x"},
+      {"name": "identity_is_involution", "kind": "Theorem", "role": "id² = id"}
+    ],
+    "key_lemmas": [
+      {"name": "involution_iff_cycle_12", "analysis": "★★ ГЛАВНАЯ инволюция-характеризация: специализация M4's iter_id_iff_div при m=2. (⟹) σ²=id ⟹ cycle_length | 2 ⟹ ∈ {1, 2}. (⟸) cycle_length ∈ {1, 2} ⟹ k | 2 ⟹ σ²=id. ДВЕРЬ — divides_2_iff характеризует делители 2.", "tags": ["involution", "specialization", "M4-corollary"]},
+      {"name": "cycle_length_2_transposition", "analysis": "★ Если cycle_length=2, то цикл — транспозиция: σ x ≠ x И σ(σ x) = x. (1) σx≠x: иначе cycle_length=1<2, противоречие cycle_length_minimal. (2) σ(σx)=x: iter 2 x = x по cycle_length_some.", "tags": ["transposition", "cycle_length_2"]}
+    ],
+    "uniqueness": {
+      "score": 2, "level": "methods",
+      "claim": "Инволюции характеризованы как σ² = id ⟺ cycle_lengths ⊆ {1,2}. Прямая специализация M4 (iter_id_iff_div m=2) + явные divisor-of-2 свойства + transposition property.",
+      "caveat": "Классическая характеризация (involution = product of disjoint transpositions). Ново — формализация как тривиальная специализация M4."
+    },
+    "tags": ["involution", "transposition", "cycle_length", "M6", "specialization", "combinatorics"],
+    "notes": "M6 of deep combinatorics pyramid. Specialization of M4 at m=2."
+  },
+  {
+    "num": 1870, "path": "src/combinatorics/OrbitMin.v", "cluster": "combinatorics",
+    "classical_counterpart": "Folklore: each orbit has a canonical representative (the smallest element). NEW is the constructive orbit_min via mu_le over orbit membership + orbit_min_same invariance through orbit_same (via mu_le extensionality).",
+    "title": "Canonical orbit representatives via mu_le; orbit_count",
+    "topic": "orbit_min sigma n x := mu_le (in_orbit_b sigma n x) n — smallest y ≤ n in orbit. Properties: in_orbit, smallest, ≤ x, < n. Invariant under orbit equivalence (orbit_min_same). orbit_count = # x with orbit_min x = x.",
+    "role": "Deep combinatorics M7 (this session). Provides canonical representatives → orbit counting infrastructure. Bridge to Burnside-style theorems.",
+    "qed": 10, "admitted": 0, "axioms": 0,
+    "imports": ["Stdlib: PeanoNat Bool List Lia", "combinatorics.CycleInPermutation", "combinatorics.CycleDecomposition"],
+    "err": {
+      "elements": "перестановка σ; orbit как list; orbit_min = наименьший элемент.",
+      "roles": "роль представителя (orbit_min); роль orbit-invariant (orbit_min_same).",
+      "rules": "in_orbit_b — булева decidability; mu_le — L5-извлечение; mu_le_ext — extensionality.",
+      "p4": "финитно; orbit_min ≤ x ≤ n; orbit_count ≤ n."
+    },
+    "lemmas": [
+      {"name": "mu_le_complete", "kind": "Lemma", "role": "локальное доказательство witness extraction"},
+      {"name": "in_orbit_b/in_orbit_b_iff", "kind": "Definition/Lemma", "role": "булевый тест ↔ In z (orbit x)"},
+      {"name": "orbit_min", "kind": "Definition", "role": "★ orbit_min := mu_le (in_orbit_b) n"},
+      {"name": "orbit_min_in_orbit/orbit_min_smallest", "kind": "Theorem", "role": "★ представитель ∈ orbit + smallest"},
+      {"name": "orbit_min_le_x/orbit_min_bound", "kind": "Theorem", "role": "orbit_min ≤ x < n"},
+      {"name": "mu_le_ext/in_orbit_b_ext", "kind": "Lemma", "role": "★ extensionality для mu_le под orbit_same"},
+      {"name": "orbit_min_same", "kind": "Theorem", "role": "★★ orbit_min invariant под orbit equivalence"},
+      {"name": "orbit_count/orbit_count_le_n", "kind": "Definition/Theorem", "role": "★ orbit_count = # x с orbit_min x = x"}
+    ],
+    "key_lemmas": [
+      {"name": "orbit_min_same", "analysis": "★★ ИНВАРИАНТНОСТЬ orbit_min: y ∈ orbit(x) ⟹ orbit_min(y) = orbit_min(x). ТЕХНИКА: (1) orbit_same даёт extensionally равные in_orbit_b sigma n x и in_orbit_b sigma n y (через 4-разветвление с обоими iff). (2) mu_le_ext — pointwise-равные предикаты ⟹ равные mu_le. (3) Match-Some/None разрешается через x_in_orbit (x всегда в orbit x, mu_le даёт Some, не None).", "tags": ["orbit_min", "invariant", "extensionality", "mu_le"]},
+      {"name": "orbit_min_smallest", "analysis": "★ Наименьший: orbit_min(x) ≤ y для каждого y ∈ orbit(x), y ≤ n. ДОКАЗАТЕЛЬСТВО: mu_le_complete с y как кандидатом даёт Some j ≤ y. j = orbit_min, поэтому orbit_min ≤ y.", "tags": ["mu_le", "minimality", "smallest"]},
+      {"name": "orbit_count", "analysis": "★ Счётчик орбит: orbit_count = # x ∈ [0..n-1] с orbit_min x = x. Поскольку orbit_min canonical per-orbit (через orbit_min_same), это = # различных орбит. Корень для Burnside-стиля подсчёта.", "tags": ["orbit_count", "canonical", "Burnside-cousin"]}
+    ],
+    "uniqueness": {
+      "score": 3, "level": "new-framing",
+      "claim": "Канонические представители орбит через mu_le-extraction (наименьший элемент) + invariance под orbit_same (через mu_le extensionality). orbit_count infrastructure для подсчёта орбит.",
+      "caveat": "Концепция канонического представителя классична (любой выбор работает). Ново — L5/μ-extraction + явный orbit_count + чистая extensionality-инфраструктура (mu_le_ext)."
+    },
+    "tags": ["orbit_min", "canonical", "mu_le", "orbit_count", "Burnside-adjacent", "M7", "combinatorics"],
+    "notes": "M7 of deep combinatorics pyramid. Canonical representatives + orbit_count."
+  }
+]
