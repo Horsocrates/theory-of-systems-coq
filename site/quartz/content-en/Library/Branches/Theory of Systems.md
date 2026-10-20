@@ -6,8 +6,8 @@ aliases:
   - Efficiency
 lang: en
 translationOf: "Библиотека/Направления/Теория Систем.md"
-sourceBlob: 65cd6587024eac3cc64e61d8d079482e9e0135d0
-translated: 2026-10-11
+sourceBlob: abe092861e141e68d81b3ef91486b85e593e7ec3
+translated: 2026-10-14
 status: draft
 ---
 The structure of every system is Rules, Roles, and Elements. From this triad the arrangement of any whole is derived: from an atom to a piece of reasoning. The triad is the core of the whole theory.
@@ -60,7 +60,7 @@ Russell’s paradox is not even forbidden here—it **does not form**: “the se
 
 ## Soft and Hard System
 
-**A soft system** is one whose rules allow a right and a wrong choice, while the [[Operator|operator]] does not know in advance which is which. **A hard system** is one in which a wrong choice is impossible. The rules themselves are not broken in either case: they assign a status to any choice; a wrong choice violates the existing [[Order#In Ethics|order]], and the rules remain in force.
+**A soft system** is one whose rules allow a right and a wrong choice, while the [[Operator|operator]] does not know in advance which is which. **A hard system** is one in which a wrong choice is impossible. Laws are broken in neither; rules—constructions composed for the goal of a system—can be broken in a soft system. Rules assign a status to any choice; a wrong choice violates the existing [[Order#In Ethics|order]].
 
 The division carries ethics: [[Ethics|ethics]] exists only in soft systems—where a wrong choice is possible. In a hard system there is execution, not ethics: a stone is not “in the wrong.”
 

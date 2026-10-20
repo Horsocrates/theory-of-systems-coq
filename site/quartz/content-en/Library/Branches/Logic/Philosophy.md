@@ -2,8 +2,8 @@
 title: Philosophy
 lang: en
 translationOf: "Библиотека/Направления/Логика/Философия.md"
-sourceBlob: c8e07018378428e23e933e7864743c54f5642420
-translated: 2026-10-10
+sourceBlob: 3ba7bc6d04f1999051b58a98d5c54ae420088e86
+translated: 2026-10-20
 status: draft
 ---
 Philosophy is the love of wisdom: the discipline that brings knowledge into accord with what is.
@@ -14,7 +14,7 @@ Philosophy is the love of wisdom: the discipline that brings knowledge into acco
 
 According to tradition, the word was introduced by Pythagoras. Cicero and Diogenes Laertius relate his conversation with Leon, ruler of Phlius: asked who he was, Pythagoras answered with an unfamiliar word—“philosopher”—and explained it by comparing life to the games. Some come to the games to compete for a prize, others to trade; the best come as spectators—to watch, to understand, to appreciate. So it is in life: some are slaves of fame, others of gain; the philosopher observes and understands—he seeks absolute truth. And when Pythagoras was called a sage, he objected: only a god is wise; a human being can only love wisdom and strive toward it.[^1]
 
-From this comes an old distinction. The word σοφιστής (sophistēs) meant “expert, master”; it acquired its bad sense in Athens at the end of the fifth century BCE, and that sense was fixed by Plato. The **sophist** lays claim to possession: he passes himself off as one who has wisdom and trades in its illusion. The **philosopher** acknowledges that wisdom cannot be appropriated; one can only be seized by it—as one is seized by love. So far this sounds like a legend about modesty. The analysis of how the system is built will show that it is an exact reading of structure.
+From this comes an old distinction. The word σοφιστής (sophistēs) meant “expert, master”; it acquired its bad sense in Athens at the end of the fifth century BCE, and that sense was fixed by Plato. The **sophist** lays claim to possession, posing as one who has wisdom and trading in its illusion. The **philosopher** acknowledges that wisdom cannot be appropriated; one can only be seized by it—as one is seized by love. So far this sounds like a legend about modesty. The analysis of how the system is built will show that it is an exact reading of structure.
 
 ## Definition
 
@@ -28,7 +28,7 @@ An analysis of philosophy as a system, in the generative order: goal, rules, rol
 
 - **The rules** are [[Logic|the laws of logic]]: Identity, Non-Contradiction, Excluded Middle, Sufficient Reason, Order; every transition is made on grounds. And there is one supreme norm that holds the rest: **absolute truth above all**—first of all, above self-love.
 
-- **The roles** are these: reality carries the role of the **measure**—every record is checked against what is (the role of absolute truth); knowledge carries the role of the **growing corpus**, in which every record supports the rest; the philosopher carries two roles at once: the **witness** (who perceives) and the **[[Metaphysics|operator]]** (who directs attention by will, choosing the region to be known). The [[Question|question]] serves as the direction of each act; reasoning is the path along which the act moves step by step, on grounds.
+- **The roles** are these: reality carries the role of the **object**—it is what is known, and every record is checked against what is; knowledge carries the role of the **growing corpus**, in which every record supports the rest; the philosopher carries two roles at once: the **witness** (who perceives) and the **[[Metaphysics|operator]]** (who directs attention by will, choosing the region to be known). The [[Question|question]] serves as the direction of each act; reasoning is the path along which the act moves step by step, on grounds.
 
 - **The elements** are three: the **philosopher**—the observer in the full sense of [[Epistemology|the theory of knowledge]] (the witness; the channels of perception; the field of knowledge in which what is distinguished is held); **knowledge**—records obtained at the boundary of the known and bound together by understanding; **reality**—what is, the object toward which everything else is turned.
 
@@ -48,13 +48,13 @@ The corpus is filled along a path, and the path has two independent axes: techni
 
 Wholeness has **a limit by construction**: the corpus grows together with [[Epistemology|the field of the knowable]]; at every step only the finite is actual, while the next step always lies open ahead—completeness remains a limit toward which the corpus converges but which it reaches at no step. It is proved that there is no completed wisdom as a finished object ([[Formalization]]). The present degree can be possessed; completeness cannot: toward a limit only a path and love are possible.
 
-Hence the objection of Pythagoras becomes a **theorem**, and the name becomes exact. Love is precisely the relation of a finite observer to this limit—the pull of the will. The will is the potential between the known and the knowable ([[Metaphysics]]): it creates the striving to fill the gap and is exhausted at no step. “The love of wisdom” is the structural name of the occupation. The distinction between the philosopher and the sophist becomes structural as well: the sophist passes off the present degree of understanding as completeness attained and trades in the illusion of wisdom; this is the substitution of the present for the limit. The philosopher knows that completeness is a limit, and so he is the first to know his own limit, leaving room in himself for not-knowing, without which no honest question is asked.
+Hence the objection of Pythagoras becomes a **theorem**, and the name becomes exact. Love is precisely the relation of a finite observer to this limit—the pull of the will. The will is the potential between the known and the knowable ([[Metaphysics]]): it creates the striving to fill the gap and is exhausted at no step. “The love of wisdom” is the structural name of the occupation. The distinction between the philosopher and the sophist becomes structural as well: the sophist passes off the present degree of understanding as completeness attained and trades in the illusion of wisdom; this is the substitution of the present for the limit. The philosopher knows that completeness is a limit, and so is the first to know their own limit, leaving room for not-knowing, without which no honest question is asked.
 
 ## The Philosopher
 
-**The philosopher is one who loves wisdom.** The love of wisdom is expressed in **an attunement to absolute truth above all**. But the philosopher does not stop at knowing absolute truth—otherwise this would be knowledge: **wisdom is understanding**, a link with the structure itself and its interrelations ([[Truth and Absolute Truth|the stages of representation]]). Hence the philosopher is one who is able to analyze order and who carries wisdom. This is a role of capacity: it unfolds in doing, and fitness is the outcome of a path ([[Code of Ethics]]). The analysis of the system has given his portrait: two roles at once—the witness, who perceives, and the operator, who directs attention by will; he holds wisdom as a degree of wholeness whose completeness is a limit; and so he is the first to know his own limit and leaves room in himself for not-knowing. Philosophy is open to everyone who is ready to ask honestly.
+**The philosopher is one who loves wisdom.** The love of wisdom is expressed in **an attunement to absolute truth above all**. But the philosopher does not stop at knowing absolute truth—otherwise this would be knowledge: **wisdom is understanding**, a link with the structure itself and its interrelations ([[Truth and Absolute Truth|the stages of representation]]). Hence the philosopher is one who is able to analyze order and who carries wisdom. This is a role of capacity: it unfolds in doing, and fitness is the outcome of a path ([[Code of Ethics]]). The analysis of the system has given the philosopher’s portrait: two roles at once—the witness, who perceives, and the operator, who directs attention by will; wisdom is held as a degree of wholeness whose completeness is a limit; and so the philosopher is the first to know their own limit and leaves room for not-knowing. Philosophy is open to everyone who is ready to ask honestly.
 
-**The sophist** is one who has the technique but lacks the will to truth ([[Ethics]]). At the center of his attention stands not what is but the Ego zone—the records about himself ([[Metaphysics|the Ego zone]]); egoism here is an orientation toward the record ([[Ethics|ethics]]). Hence the substitution: he passes off the present degree of understanding as completeness and trades in the illusion of wisdom.
+**The sophist** is one who has the technique but lacks the will to truth ([[Ethics]]). At the center of the sophist’s attention stands not what is but the Ego zone—the records about oneself ([[Metaphysics|the Ego zone]]); egoism here is an orientation toward the record ([[Ethics#Egoism: An Orientation toward the Record|ethics]]). Hence the substitution: the sophist passes off the present degree of understanding as completeness and trades in the illusion of wisdom.
 
 > [!note]- History: the path and the shift of meaning
 >
@@ -104,7 +104,7 @@ Word by word.
 
 **Bringing into accord** is unceasing work, because accord does not hold by itself: preferences, fears, and habits of attention continually distort the reading ([[Objectivity and Subjectivity]]).
 
-**With what is** names the measure and the object: reality, not our opinions about it. The philosopher asks “what is this?”—and by this question philosophy remains knowing.
+**With what is** names the object against which one checks: reality, not our opinions about it. The philosopher asks “what is this?”—and by this question philosophy remains knowing.
 
 The same norm, taken from the side of method: **philosophy is the discipline of knowing reality through reasoning.**
 
@@ -126,7 +126,7 @@ Philosophy is a practice that forms a way of existing.
 
 ## Summary
 
-Philosophy is the love of wisdom, not the possession of it. This is a theorem read directly off the structure of the system: wisdom is the degree of wholeness of the growing corpus of what is understood, whose completeness is a limit by construction; toward a limit only a path and love are possible—the pull of the will between the known and the knowable. This is what distinguishes the philosopher from the sophist: the latter passes off the present degree of understanding as completeness and trades in the illusion of wisdom; the philosopher knows his limit and leaves room in himself for not-knowing—like Socrates, wisest precisely in this.
+Philosophy is the love of wisdom, not the possession of it. This is a theorem read directly off the structure of the system: wisdom is the degree of wholeness of the growing corpus of what is understood, whose completeness is a limit by construction; toward a limit only a path and love are possible—the pull of the will between the known and the knowable. This is what distinguishes the philosopher from the sophist: the latter passes off the present degree of understanding as completeness and trades in the illusion of wisdom; the philosopher knows their own limit and leaves room for not-knowing—like Socrates, wisest precisely in this.
 
 Wisdom itself is the wholeness of what is understood: knowledge, understanding, and skill—*what*, *why*, and *how*—converge into one, repeating in the knower the structure of logic itself. It rests on technique and on the will to truth, and it carries over from one domain to another because the structure of every system is one in form.
 
@@ -136,7 +136,7 @@ One thing remains. The path of knowing requires the ability to walk it—step by
 
 ---
 
-Navigation: ← [[Order]] · [[Logic|Branch overview]] · [[Architecture of Reasoning]] →
+Navigation: ← [[Order]] · [[Logic|Branch overview]] · [[Metaphysics]] →
 
 [^1]: Cicero, *Tusculan Disputations*, V.3.8–9; Diogenes Laertius, *Lives of Eminent Philosophers*, I.12; VIII.8.
 

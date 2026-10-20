@@ -2,8 +2,8 @@
 title: Logic
 lang: en
 translationOf: "Библиотека/Направления/Логика/index.md"
-sourceBlob: 99217548f35a5ddb28ecdda57116827669284879
-translated: 2026-10-09
+sourceBlob: 70836efecd8f81d3c3678aa9dd5191a0c5fa9a03
+translated: 2026-10-14
 status: draft
 ---
 The laws of logic are properties of being itself, given together with it. Here they are derived from a single fact: “something exists.”
@@ -106,9 +106,9 @@ The laws of logic are not rules applied to reality from outside. Logic is not lo
 
 Here lies the boundary with Kant. For Kant, we know a priori of things only what we ourselves put into them: the forms belong to reason.[^13] Here the forms belong to the things themselves: reason finds them because it is itself structured by them.
 
-In its essence, logic is **rules**: rules that constitute **the very possibility of existence**—neither a convention nor a description of observed regularities. Each law gives existence one of its features. Identity gives stability: something remains what it is. Non-Contradiction gives exclusivity: what is determinate stands on one side of the boundary. Excluded Middle gives exhaustiveness: the boundary divides everything without remainder. Sufficient Reason gives a ground to everything that is. Order gives the relation between what is distinguished—sequence and levels.
+In its essence, logic is **laws**: laws that constitute **the very possibility of existence**—neither a convention nor a description of observed regularities. Each law gives existence one of its features. Identity gives stability: something remains what it is. Non-Contradiction gives exclusivity: what is determinate stands on one side of the boundary. Excluded Middle gives exhaustiveness: the boundary divides everything without remainder. Sufficient Reason gives a ground to everything that is. Order gives the relation between what is distinguished—sequence and levels.
 
-In reality these rules are unbreakable: they are its structure. A broken rule of logic does not create another reality; it creates an [[Paradox Catalog|illusion]] that falls apart under examination. But these rules **can be broken in thinking**—and then thinking diverges from what is. A [[Fallacy Catalog|fallacy]] is no accident: it is an attempt to exist outside the rules that make existence possible. Such an attempt fails by definition. [[Architecture of Reasoning|Thinking that follows the rules of logic]] moves together with reality; thinking that breaks them creates illusions.
+In reality these laws are unbreakable: they are its structure. A broken law of logic does not create another reality; it creates an [[Paradox Catalog|illusion]] that falls apart under examination. But these laws **can be broken in thinking**—and then thinking diverges from what is. A [[Fallacy Catalog|fallacy]] is no accident: it is an attempt to exist outside the laws that make existence possible. Such an attempt fails by definition. [[Architecture of Reasoning|Thinking that follows the laws of logic]] moves together with reality; thinking that breaks them creates illusions.
 
 Each law has its own page with a detailed analysis, history, and objections: [[Identity]] · [[Non-Contradiction]] · [[Excluded Middle]] · [[Sufficient Reason]] · [[Order]]. On the one who reasons by these laws, see [[Philosophy]].
 
@@ -144,7 +144,7 @@ Excluded Middle occupies a special position: it is **derived** from the joint op
 
 Sufficient Reason is a **meta-law**: it operates over the others as the very working of logic in which grounding is possible at all, and thereby makes everything else possible. Each moment of the act of distinction is grounded, and the act as a whole has a ground for occurring as it does and not otherwise; without Sufficient Reason the other laws would remain empty formal requirements.
 
-The primary distinction is **self-grounding**: the ground of the distinction *A* | not-*A* is the very difference between *A* and not-*A*. Nothing prior to the distinction (it is primary) and nothing external to it (that would require another distinction) can be its ground. This is not a circle: the ground is internal to the structure of the distinction—the difference between *A* and not-*A* is constitutive of what *A* and not-*A* are. The traditional formulations (Leibniz, Schopenhauer) invite a regress of “the ground of the ground”; here the regress is blocked at the root: the primary distinction is self-grounding, and subsequent distinctions find their grounds in prior ones. For a detailed analysis—*causa* and *ratio*, the trilemma, the objections of Kant, Hume, quantum mechanics, and Russell—see [[Sufficient Reason]].
+The primary distinction is **self-grounding**: the ground of the distinction *A* | not-*A* is the very difference between *A* and not-*A*. Nothing prior to the distinction (it is primary) and nothing external to it (that would require another distinction) can be its ground. This is not a circle: the ground is internal to the structure of the distinction—the difference between *A* and not-*A* is constitutive of what *A* and not-*A* are. The the traditional formulation (Leibniz) invites a regress of “the ground of the ground”; here the regress is blocked at the root: the primary distinction is self-grounding, and subsequent distinctions find their grounds in prior ones. For a detailed analysis—*causa* and *ratio*, the trilemma, the objections of Kant, Hume, quantum mechanics, and Russell—see [[Sufficient Reason]].
 
 ### Order — Ordering
 

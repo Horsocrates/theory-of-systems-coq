@@ -203,14 +203,14 @@ PD = HORPDT · PM = HORPMC · TS = HORTOS · FD = HORFDT-5.
 | ru | en у автора | варианты и конфликты | рекомендация | статус |
 |---|---|---|---|---|
 | Путь Мудрости | — | Way of Wisdom (религиозно-даосский оттенок) | **The Path of Wisdom** | П |
-| «Вера в Мудрость» (община) | — | Faith / Fidelity / Trust in Wisdom | **Faith in Wisdom** + глосса «вера = верность основанию» | Р |
+| «Вера в Мудрость» (община) | — | Faith / Fidelity / Trust in Wisdom | **Faith in Wisdom**; раздел Устава «Вера в имени» — “**“Faith” in the name.**” | автор · 2026-10-20 («8 - Б, А») |
 | Библиотека | — | — | **Library** | П |
 | Направления | — | Directions (калька) / Fields | **Branches** | П |
 | «Чего нет, и быть не может» | код: `registry`, `all_registry_illegal` | Registry of the Impossible | **What Is Not, and Cannot Be** | П |
 | Устав | — | Statute / Rule (монашеский «устав») | **Charter** | П |
 | Этический Кодекс | — | Ethical Code | **Code of Ethics** | П |
 | Клятва Маат | — | Ma'at | **Oath of Maat** | П |
-| «Истина (Правда) превыше всего» | — | на сайте две версии девиза | **Truth above all** — одна для обеих | П |
+| «Истина превыше всего» (девиз) | — | прежняя форма “Truth above all” снята | **Absolute truth above all** | автор · 2026-10-11 (П-3, П-4) |
 | Формализация | TS: “Formal Verification”; formalization (58 раз) | — | **Formalization** | У |
 | имя автора | Horsocrates — T18, T19 (подпись), PD, PM, TS, FD; Horsokrates — SD, AO, DV и сноски T19 | сайт, код и PhilArchive: Horsocrates | **Horsocrates** | У |
 

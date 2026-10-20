@@ -4,8 +4,8 @@ aliases:
   - Law of Sufficient Reason
 lang: en
 translationOf: "Библиотека/Направления/Логика/Достаточное основание.md"
-sourceBlob: eac806614e15262106de12a23f867645a9d599a8
-translated: 2026-10-09
+sourceBlob: fafdabee4ca2d936bc61a048db0dd444bb0d0f0c
+translated: 2026-10-14
 status: draft
 ---
 The Law of Sufficient Reason: ***nihil est sine ratione***
@@ -26,7 +26,7 @@ Among the five laws ([[Logic]]), Sufficient Reason is a **meta-law**: it stands 
 
 A simple example gathers all the laws at once. The door is either open or not open—[[Excluded Middle|excluded middle]]. It cannot be open and not open at once—[[Non-Contradiction|non-contradiction]]. An open door is an open door—[[Identity|identity]]. But *why* is it open? Someone turned the handle, the wind pushed it, the hinges broke. Without a ground the door does not pass from the closed state to the open one. First the handle is turned, then the door opens—[[Order|order]]. Three laws say what everything that is must be like; Sufficient Reason speaks of the link between ground and grounded: why precisely this state of affairs and not another.
 
-It cannot be proved without presupposing it: any proof already uses the notion of a ground. Nor can it be meaningfully denied: the statement “not everything has a ground” itself calls for a ground—why does precisely *this* have none? The self-confirmation of Sufficient Reason runs deeper than that of the primary laws: it concerns the very possibility of being grounded.
+It cannot be proved without presupposing it: any proof already uses the notion of a ground.[^11] Nor can it be meaningfully denied: the statement “not everything has a ground” itself calls for a ground—why does precisely *this* have none? The self-confirmation of Sufficient Reason runs deeper than that of the primary laws: it concerns the very possibility of being grounded.
 
 ## History
 
@@ -40,7 +40,7 @@ In being, the law makes **everything else** possible: nothing arises without a g
 
 **Knowledge.** Knowledge differs from opinion in being grounded. An opinion can be held without a ground; knowledge cannot: to say “I know” is to take on the obligation to present a ground. At the same time our *knowledge* of grounds is limited: Leibniz adds that the reasons “most often cannot be known to us.” The ground exists; we are not always able to find it.
 
-**The discipline of reasoning.** Every step must have a ground. One cannot pass from premise to conclusion without explaining why the conclusion follows; one cannot choose a framework of comparison without grounding the choice. “It seems” is not a ground. “It is obvious” is not a ground. “Everyone thinks so” is not a ground. The law also works as a criterion of completion: each domain is complete when there is a sufficient reason for moving on to the next ([[Architecture of Reasoning#Navigation|navigation]]).
+**The discipline of reasoning.** Every step must have a ground. One cannot pass from premise to conclusion without explaining why the conclusion follows; one cannot choose a framework of comparison without grounding the choice. “It seems” is not a ground. “It is obvious” is not a ground. “Everyone thinks so” is not a ground. The law also works as a criterion of completion: each domain is complete when there is a sufficient reason for moving on to the next ([[Architecture of Reasoning#Movement through the Domains|movement through the domains]]).
 
 ## Causa and Ratio
 
@@ -58,7 +58,7 @@ For the possible within reality, things stand otherwise. Here, between “can be
 
 The law raises a question: what is the ground of the ground itself? This is the problem of regress, already known to the ancients;[^6] it admits only three ways out. *Infinite regress*: the chain of grounds runs to infinity; but an infinite chain cannot be traversed, so nothing would ever be grounded. *Circle*: the chain returns to its beginning; but circular grounding is no grounding at all. *Starting points*: the chain rests on what itself requires no external ground; this is the only way out that makes grounding possible.
 
-The laws of logic are such starting points: they have no external ground—any attempt to give one already uses them. They confirm themselves: their denial is impossible without their use. Here the regress is blocked at the very root: the primary distinction is self-grounding—the ground of the distinction *A* | not-*A* is the very difference between *A* and not-*A*. This is no circle: the ground is internal to the structure of the distinction. Subsequent distinctions find their grounds in preceding ones; the chain ends at the primary one. The grounds of the laws lie in Logic itself: the laws are its properties. Logic and the Source are necessary systems: their status is “cannot not be” ([[Metaphysics]]).
+The laws of logic are such starting points: they have no external ground—any attempt to give one already uses them. They confirm themselves: their denial is impossible without their use. Here the regress is blocked at the very root: the primary distinction is self-grounding—the ground of the distinction *A* | not-*A* is the very difference between *A* and not-*A*. This is no circle: the ground is internal to the structure of the distinction. Subsequent distinctions find their grounds in preceding ones; the chain ends at the primary one. The grounds of the laws lie in Logic itself: the laws are its properties. Logic and the Source are necessary systems: their status is “cannot not be” ([[Metaphysics]]). Schopenhauer, too, ends the series in a law: the chain of grounds of knowing always terminates somewhere—in truths that express the conditions of all thinking and knowing; the principle of sufficient reason is the principle of all explanation and therefore is not itself subject to explanation.[^12]
 
 ## Objections
 
@@ -123,3 +123,7 @@ Navigation: ← [[Excluded Middle]] · [[Order]] →
 [^9]: On indeterminism and the law: Pruss, A. *The Principle of Sufficient Reason: A Reassessment* (Cambridge: Cambridge University Press, 2006). A contemporary defense of the law: Della Rocca, M. “PSR,” *Philosophers’ Imprint* 10, no. 7 (2010).
 
 [^10]: The Russell–Copleston debate: BBC Radio, January 28, 1948; transcript: Seckel, A., ed. *Bertrand Russell on God and Religion* (Prometheus Books, 1986). The root of the argument is in Parmenides: what is not can be neither known nor uttered (DK 28 B2). Heidegger, in *Was ist Metaphysik?* (1929), states the same difficulty—in asking about nothing we already posit it as something—though he draws a different conclusion.
+
+[^11]: So too in Schopenhauer: whoever demands a proof of the principle already presupposes its truth, and so “we find ourselves involved in the circle of exacting a proof of our right to exact a proof.” Schopenhauer, A. *Über die vierfache Wurzel des Satzes vom zureichenden Grunde*, 2nd ed. (1847), § 14; Eng. trans. K. Hillebrand, *On the Fourfold Root of the Principle of Sufficient Reason* (London: G. Bell, rev. ed. 1903), p. 27. The paragraph is absent from the 1st edition (1813).
+
+[^12]: Schopenhauer, A. *Über die vierfache Wurzel des Satzes vom zureichenden Grunde*, § 14, § 50; the sentence on the principle of all explanation appears only in the 3rd ed. (Leipzig, 1864); Eng. trans. K. Hillebrand (1903), pp. 183–184. The likeness: the series ends in a law, not in an object. The difference: for Schopenhauer the principle is a form of representation whose root lies in the knowing subject (§ 16).

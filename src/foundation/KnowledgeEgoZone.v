@@ -8,26 +8,37 @@
     unbuildable; "ego death" as a doubly impossible construction
     (records are not organisms; dis-identification and potentialization
     preserve the zone); labels without a meeting as projections; and the
-    registry seed: every impossible construction is built by a category
-    substitution, with root/derivative structure (nothing-as-thing ->
-    view-from-nowhere).
+    registry of impossible constructions, brought to the accepted page
+    "What Is Not, and Cannot Be" (2026-10-20): sixteen entries, each
+    built by a category substitution; the structure of the registry =
+    the classes of a shared source category — absence (nothing-as-thing
+    -> view-from-nowhere), element (ego-as-agent -> ego death), process
+    (completed corpus, actual infinity -> occupied role-limit) — and
+    nine standalone entries.
 
     Elements: self-records in the mental field (ego zone); witness
               states (zone, identification stance, attention); labels
-              about another's zone; categories and substitutions.
+              about another's zone; categories; registry entries
+              (source category + category passed as).
     Roles:    witness = the only willing agent (records and zones do
               not will); correctness = correspondence status of a
               record; identification and attention = droppable stances;
-              legality of a construction = category preservation.
+              legality of a construction = category preservation;
+              root / derivative / standalone = place of an entry in
+              the registry.
     Rules:    axes of the zone are independent (any size, either
               status); dis-identification and the peak experience
               preserve the zone and its size (return guaranteed);
               death applies to organisms only — a zone cannot die;
               a label without a meeting projects; a substitution is
-              never legal; derivatives share the root's category.
-    Status:   all proved; self-contained (no ToS imports).
-    STATUS: 21 Qed, 0 Admitted, 0 axioms
-    Author: Horsocrates | Date: July 2026
+              never legal; derivatives share the root's source
+              category; a standalone entry shares it with no other.
+    Status:   all proved; self-contained (no ToS imports). The two
+              categories of each registry entry are assigned by
+              reading the page: the file models the classification,
+              it does not derive it.
+    STATUS: 24 Qed, 0 Admitted, 0 axioms
+    Author: Horsocrates | Date: July 2026 (registry: October 2026)
 *)
 
 From Stdlib Require Import List Bool Arith Lia.
@@ -197,19 +208,47 @@ Proof.
 Qed.
 
 (* ================================================================ *)
-(** ** 5. Registry seed: impossibles built by category substitution  *)
+(** ** 5. The registry: impossibles built by category substitution   *)
 (* ================================================================ *)
 
+(** The categories the entries of the registry are built from and
+    passed off as (names of the page in comments). *)
 Inductive Category : Type :=
   | CProcess | CObject | CRole | CThing | CElement
-  | CStatus  | CSystem | CPosition | CPole | CAbsence.
+  | CPosition | CAbsence
+  | CNonexistence          (* nesushchestvovanie *)
+  | CMystery               (* tayna *)
+  | CCoincidence           (* sovpadenie *)
+  | CKnowledge             (* znanie *)
+  | CStatusChange          (* smena statusa *)
+  | CDestruction           (* unichtozhenie *)
+  | CInnerPosition         (* vnutrennee polozhenie *)
+  | COuterView             (* vneshniy vid na sebya *)
+  | CBuild                 (* ustroystvo *)
+  | CConstructionStatus    (* status nevernogo postroeniya *)
+  | CWorldProperty         (* svoystvo mira *)
+  | CRepresentationDefect  (* defekt predstavleniya *)
+  | CObjectProperty        (* svoystvo predmeta *)
+  | COtherSystem           (* drugoe A *)
+  | CSameChanged           (* to zhe A, izmenivsheesya *)
+  | CSlice                 (* srez *)
+  | CState.                (* sostoyanie *)
 
 Definition cat_eqb (a b : Category) : bool :=
   match a, b with
   | CProcess, CProcess | CObject, CObject | CRole, CRole
-  | CThing, CThing | CElement, CElement | CStatus, CStatus
-  | CSystem, CSystem | CPosition, CPosition | CPole, CPole
-  | CAbsence, CAbsence => true
+  | CThing, CThing | CElement, CElement | CPosition, CPosition
+  | CAbsence, CAbsence | CNonexistence, CNonexistence
+  | CMystery, CMystery | CCoincidence, CCoincidence
+  | CKnowledge, CKnowledge | CStatusChange, CStatusChange
+  | CDestruction, CDestruction | CInnerPosition, CInnerPosition
+  | COuterView, COuterView | CBuild, CBuild
+  | CConstructionStatus, CConstructionStatus
+  | CWorldProperty, CWorldProperty
+  | CRepresentationDefect, CRepresentationDefect
+  | CObjectProperty, CObjectProperty
+  | COtherSystem, COtherSystem | CSameChanged, CSameChanged
+  | CSlice, CSlice | CState, CState => true
   | _, _ => false
   end.
 
@@ -233,26 +272,48 @@ Theorem legal_iff_same : forall c,
   legal c = true <-> built_from c = passed_as c.
 Proof. intros c. unfold legal. apply cat_eqb_spec. Qed.
 
-(** The registry seed (adjudicated entries; names in comments). *)
-Definition nothing_as_thing  := mkCn CAbsence CThing.    (* nichto kak vesch *)
-Definition view_from_nowhere := mkCn CAbsence CPosition. (* vzglyad-niotkuda *)
-Definition ego_as_agent      := mkCn CElement CRole.     (* "ego khochet" *)
-Definition ego_death         := mkCn CElement CThing.    (* smert' ego *)
-Definition completed_corpus  := mkCn CProcess CObject.   (* zavershyonny svod *)
-Definition actual_infinity   := mkCn CProcess CObject.   (* aktualnaya beskonechnost *)
-Definition status_as_system  := mkCn CStatus  CSystem.   (* Sushchestvovanie = sistema *)
-Definition position_as_pole  := mkCn CPosition CPole.    (* naivny obyektivizm *)
+(** The registry of the accepted page (2026-10-20), in its order:
+    three groups, then the standalone entries (names in comments). *)
+
+(** Nothing: absence passed off as a thing — and its derivative. *)
+Definition nothing_as_thing      := mkCn CAbsence CThing.     (* "nichto" kak predmet ili mesto *)
+Definition view_from_nowhere     := mkCn CAbsence CPosition.  (* vzglyad niotkuda *)
+(** Records passed off as an agent — and its derivative. *)
+Definition ego_as_agent          := mkCn CElement CRole.      (* ego-instantsiya: "ego khochet" *)
+Definition ego_death             := mkCn CElement CThing.     (* smert' ego *)
+(** A process taken as an object — and the derivative of actual
+    infinity: the process declared arrived, an element in the role. *)
+Definition completed_corpus      := mkCn CProcess CObject.    (* zavershyonny svod, vseznanie-obyekt *)
+Definition actual_infinity       := mkCn CProcess CObject.    (* aktualnaya beskonechnost' *)
+Definition occupied_role_limit   := mkCn CProcess CElement.   (* zanyaty rol'-predel *)
+(** Standalone entries. *)
+Definition unknowable_something  := mkCn CNonexistence CMystery.             (* printsipialno nepoznavaemoe nechto *)
+Definition knew_by_chance        := mkCn CCoincidence CKnowledge.             (* "sluchayno uznal" *)
+Definition zero_will             := mkCn CStatusChange CDestruction.          (* volya = 0 u sushchestvuyushchego *)
+Definition inner_self_model      := mkCn CInnerPosition COuterView.           (* polnaya samo-model' iznutri *)
+Definition position_as_build     := mkCn CPosition CBuild.                    (* polozhenie kak ustroystvo *)
+Definition irrational_in_reality := mkCn CConstructionStatus CWorldProperty.  (* irratsional'noe kak svoystvo real'nosti *)
+Definition paradox_in_reality    := mkCn CRepresentationDefect CObjectProperty. (* paradoks v real'nosti *)
+Definition essence_change        := mkCn COtherSystem CSameChanged.           (* smena suti kak izmenenie A *)
+Definition past_state_return     := mkCn CSlice CState.                       (* vozvrat proshlogo sostoyaniya *)
 
 Definition registry : list Construction :=
-  [ nothing_as_thing; view_from_nowhere; ego_as_agent; ego_death;
-    completed_corpus; actual_infinity; status_as_system; position_as_pole ].
+  [ nothing_as_thing; view_from_nowhere;
+    ego_as_agent; ego_death;
+    completed_corpus; actual_infinity; occupied_role_limit;
+    unknowable_something; knew_by_chance; zero_will; inner_self_model;
+    position_as_build; irrational_in_reality; paradox_in_reality;
+    essence_change; past_state_return ].
+
+Theorem registry_size : length registry = 16.
+Proof. reflexivity. Qed.
 
 (** Every registry entry is a substitution — none is legal. *)
 Theorem all_registry_illegal :
   forallb (fun c => negb (legal c)) registry = true.
 Proof. reflexivity. Qed.
 
-(** Root/derivative structure: a derivative misuses the same root
+(** Root/derivative structure: a derivative misuses the same source
     category as its root entry. View-from-nowhere derives from
     nothing-as-thing: both build on reified absence. *)
 Definition derives_from (child parent : Construction) : bool :=
@@ -265,6 +326,23 @@ Proof. reflexivity. Qed.
 (** Ego death derives from ego-as-agent: both build on the records. *)
 Theorem ego_death_derives_from_reification :
   derives_from ego_death ego_as_agent = true.
+Proof. reflexivity. Qed.
+
+(** The occupied role-limit derives from actual infinity: both build on
+    a process; the derivative declares the process arrived. *)
+Theorem role_limit_derives_from_infinity :
+  derives_from occupied_role_limit actual_infinity = true.
+Proof. reflexivity. Qed.
+
+(** The shape of the registry. For each entry, in registry order, the
+    number of entries sharing its source category: three groups —
+    absence (2), element (2), process (3) — and nine standalone
+    entries, each alone in its class. *)
+Definition class_size (c : Construction) : nat :=
+  length (filter (fun d => derives_from d c) registry).
+
+Theorem registry_structure :
+  map class_size registry = [2; 2; 2; 2; 3; 3; 3; 1; 1; 1; 1; 1; 1; 1; 1; 1].
 Proof. reflexivity. Qed.
 
 (** The impossible does not exist — it is only built: an illegal

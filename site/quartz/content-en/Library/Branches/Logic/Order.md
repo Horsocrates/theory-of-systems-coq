@@ -4,8 +4,8 @@ aliases:
   - Law of Order
 lang: en
 translationOf: "Библиотека/Направления/Логика/Порядок.md"
-sourceBlob: a7f9801cab5c13018d2a7d2e853af74008dff92b
-translated: 2026-10-10
+sourceBlob: 7d50d76886a2f2aceb0c0d98a2aa0ef744247398
+translated: 2026-10-14
 status: draft
 ---
 The Law of Order: ***≺ , ⊏*** · ***ordo***
@@ -88,7 +88,7 @@ Distinctions, once made, are recorded: Order is a **law of preservation**. A dis
 
 ## In Ethics
 
-The law is unbreakable; what can be broken is the existing order—and it is entrusted to free choice. From this come two propositions of [[Ethics|ethics]]. *The Law of Conformity:* to conform to the rules is to maintain order. *Violation of order:* a wrong choice is a violation of the existing order; the rules themselves are unbreakable. The order of reasoning is therefore a demand of both logic and ethics: to begin with the conclusion and pick grounds to fit it is to pass off untruth as truth.
+The law is unbreakable; what can be broken is the existing order—and it is entrusted to free choice. From this come two propositions of [[Ethics|ethics]]. *The Law of Conformity:* to conform to the rules is to maintain order. *Violation of order:* a wrong choice is a violation of the existing order; laws are unbreakable, while rules—constructions of a system—can be broken. The order of reasoning is therefore a demand of both logic and ethics: to begin with the conclusion and pick grounds to fit it is to pass off untruth as truth.
 
 ## In the Theory of Systems
 
@@ -104,7 +104,7 @@ In reality the law is unbreakable; it is broken in thinking. What is broken is t
 
 *Level confusion.* An operation takes itself as its object; the organizer is identified with the organized. This is how [[Russell's Paradox]] and the [[Liar Paradox|Liar]] are built. It is an error of construction: in a well-formed statement it is impossible ([[Paradox Catalog]]).
 
-The skipped stage and reverse movement are violations along the horizontal; level confusion is a violation along the vertical. The horizontal ones are treated in the fallacy catalog, which distinguishes five forms: [[03 Sequence Violations|“Sequence Violations”]].
+The skipped stage and reverse movement are violations along the horizontal; level confusion is a violation along the vertical. Along the horizontal, the Architecture of Reasoning distinguishes eight forms: it calls an unfinished stage a premature transition, and a stage passed emptily the skipped stage ([[Architecture of Reasoning#Movement through the Domains|“Movement through the Domains”]]); the fallacy catalog has records for reverse movement and for burden inversion ([[03 Sequence Violations|“Violations of Sequence”]]).
 
 ## Summary
 

@@ -300,6 +300,10 @@ details.note-properties {
   font-size: 0.82rem;
   color: var(--muted);
 }
+// «Направления»: оглавление ведёт сама страница в порядке вывода — автолистинг папки (другой порядок) скрыт
+body[data-slug="библиотека/направления/index"] .page-listing {
+  display: none;
+}
 ul.section-ul {
   li.section-li {
     border-bottom: 1px solid var(--lightgray);
