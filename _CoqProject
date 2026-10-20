@@ -1967,6 +1967,25 @@ src/foundation/ZFCAxiomLedger.v
 src/information/ChannelCapacity.v
 src/information/ShannonUniqueness.v
 src/Motzkin.v
+# L5/mu corpus: mu-operator (cs), combinatorics, number theory, analysis, diagonal unification
+src/cs/MuRecursion.v
+src/cs/BoundedHalting.v
+src/cs/KleeneNF.v
+src/combinatorics/ErdosSzekeres.v
+src/combinatorics/HallsMarriage.v
+src/combinatorics/GreedyColoring.v
+src/combinatorics/CycleInPermutation.v
+src/combinatorics/CycleDecomposition.v
+src/combinatorics/PermutationOrder.v
+src/combinatorics/PermutationFixedPoints.v
+src/combinatorics/PermutationInvolution.v
+src/combinatorics/OrbitMin.v
+src/numbertheory/FTA.v
+src/numbertheory/Bezout.v
+src/analysis/DiscreteBolzanoWeierstrass.v
+src/analysis/SignChange.v
+src/analysis/KnasterTarski.v
+src/foundation/DiagonalUnification.v
 src/nonstandard/BoundaryIsInvertibility.v
 src/nonstandard/DerivativeViaInfinitesimal.v
 src/nonstandard/FinitizationBoundaryGeneratingStructure.v
