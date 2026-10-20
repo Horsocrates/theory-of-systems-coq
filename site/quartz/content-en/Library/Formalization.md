@@ -4,7 +4,7 @@ aliases:
   - Formalization
 lang: en
 translationOf: "Библиотека/Формализация.md"
-sourceBlob: f53b6bcc762d6736e8f9f12cb41345260f22ef81
+sourceBlob: 2400b7361354e51d04201ad4b40aa33409e6f028
 translated: 2026-10-20
 status: draft
 ---
@@ -12,12 +12,12 @@ Here is the machine layer of the corpus: which of the claims derived on the page
 
 | | |
 |---|---|
-| **27,283** | proofs (Qed) |
+| **27,286** | proofs (Qed) |
 | **0** | unproved statements (Admitted) |
 | **2,041** | files in the build |
 | **Rocq 9.0.1** | proof assistant |
 
-*Count taken on the `main` branch of the repository, 2026-10-17; `Qed` marks outside comments are counted.*
+*Count taken on the `main` branch of the repository, 2026-10-20; `Qed` marks outside comments are counted.*
 
 ## What Formalization Is
 
