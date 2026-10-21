@@ -295,7 +295,7 @@ This is step 21 in the domain of knowing: an action against the will of another 
 
 **Step 54** *(from steps 52, 53)*. The problem of sophistry: since the right stands on logic, what remains is to tell logic from its counterfeit, and the chief danger is sincere self-deception. The defense is knowledge of logic: what it is and what it is not; therefore ethics is bound up with the knowledge of [[Logic|logic]].
 
-The instrument of defense is the architecture of reasoning: the [[Domains of Reasoning|domains]] and the [[Fallacy Catalog|catalog of fallacies]]. Recognition is fallible—constant vigilance is needed.
+The instrument of defense is the architecture of reasoning: the [[Domains|domains]] and the [[Fallacy Catalog|catalog of fallacies]]. Recognition is fallible—constant vigilance is needed.
 
 ## Evil: Origin and Status
 

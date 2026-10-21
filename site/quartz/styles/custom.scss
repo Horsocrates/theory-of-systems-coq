@@ -301,7 +301,8 @@ details.note-properties {
   color: var(--muted);
 }
 // «Направления»: оглавление ведёт сама страница в порядке вывода — автолистинг папки (другой порядок) скрыт
-body[data-slug="библиотека/направления/index"] .page-listing {
+body[data-slug="библиотека/направления/index"] .page-listing,
+body[data-slug="library/branches/index"] .page-listing {
   display: none;
 }
 ul.section-ul {
@@ -373,7 +374,37 @@ hr {
   width: 100%;
 }
 
+// ── Переключатель языка и пометка черновика перевода (tools/lang-pairs.cjs) ──
+.lang-switch {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--darkgray);
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+  text-decoration: none;
+  &:hover {
+    color: var(--secondary);
+    border-color: var(--secondary);
+  }
+}
+.translation-draft {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--gray);
+  border-left: 2px solid var(--lightgray);
+  border-radius: 0;
+  padding-left: 0.6rem;
+  margin: 0 0 1.2rem;
+}
+
 // ── Подвал: девиз ───────────────────────────────────────────────────────────
+:root[lang^="en"] footer::before {
+  content: "“Absolute truth above all”";
+}
 footer {
   text-align: center;
   font-family: var(--sans);

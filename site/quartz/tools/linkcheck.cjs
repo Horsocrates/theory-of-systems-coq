@@ -54,10 +54,12 @@ if (fs.existsSync(PUB)) {
         if (!missing.has(resolved)) missing.set(resolved, hf);
       }
     }
-    // data-slug мёртвых викиссылок (резолвер упал в корень)
+    // data-slug мёртвых викиссылок (резолвер упал в корень).
+    // Английская сборка лежит в public/en/: её data-slug считаются от en/ (свой basePath).
+    const slugBase = hf.startsWith("en/") ? "en/" : "";
     const reSlug = /<a[^>]*data-slug="([^"]+)"[^>]*>/g;
     while ((m = reSlug.exec(html))) {
-      const slug = m[1];
+      const slug = slugBase + m[1];
       if (pubSet.has(slug + ".html") || pubSet.has(slug + "/index.html")) continue;
       if (!missing.has("data-slug:" + slug)) missing.set("data-slug:" + slug, hf);
     }

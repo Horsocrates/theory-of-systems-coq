@@ -49,7 +49,7 @@ In being, the law gives **the relation between what is distinguished**—the inf
 
 In knowing, three things stand on this.
 
-**Reasoning.** The conclusion comes after the grounds. Reasoning passes through six [[Domains of Reasoning|domains]]—recognition, clarification, framework selection, comparison, inference, reflection—and each supplies the material for the next. Skipping a domain leaves the later ones without support; reordering puts the conclusion before its grounds.
+**Reasoning.** The conclusion comes after the grounds. Reasoning passes through six [[Domains|domains]]—recognition, clarification, framework selection, comparison, inference, reflection—and each supplies the material for the next. Skipping a domain leaves the later ones without support; reordering puts the conclusion before its grounds.
 
 **The criterion.** The criterion is established before the question of membership: one can ask whether a thing belongs to a system once the system has been defined. This is the principle of Criterion Precedence ([[Logic]]).
 
@@ -61,7 +61,7 @@ Order **liberates**. Reasoning chaotically, we serve our prejudices: we find wha
 
 ## Order and the Assignment of Statuses
 
-**Order gives the places.** “First,” “last,” “least” have meaning only within an order. Assignment answers to a ground ([[Sufficient Reason]]). When several candidates fit one role, the ground is the place in the order: the status goes to the first that fits. This is the very definition of the status: “the point of maximum” means “the first of the points with the greatest value.” The axiom of choice asserts that a choice exists; Order gives the place, and there is nothing left to choose. This is how the extreme value theorem is proved: on a plateau, where the greatest value is taken at several points, the first of them is assigned as the point of maximum ([[Formalization]]).
+**Order gives the places.** “First,” “last,” “least” have meaning only within an order. Assignment answers to a ground ([[Sufficient Reason]]). When several candidates fit one role, the ground is the place in the order: the status goes to the first that fits. This is the very definition of the status: “the point of maximum” means “the first of the points with the greatest value.” The Axiom of Choice asserts that a choice exists; Order gives the place, and there is nothing left to choose. This is how the extreme value theorem is proved: on a plateau, where the greatest value is taken at several points, the first of them is assigned as the point of maximum ([[Formalization]]).
 
 ## Self-Confirmation
 
@@ -102,7 +102,7 @@ In reality the law is unbreakable; it is broken in thinking. What is broken is t
 
 *Reverse movement.* Reasoning runs from the conclusion to the grounds: the conclusion already lies in the premise ([[Circular Reasoning|the vicious circle]]), or the grounds are picked to fit a ready answer ([[A Priori Argument|rationalization]]; from the side of the ground it is treated on the page [[Sufficient Reason]]).
 
-*Level confusion.* An operation takes itself as its object; the organizer is identified with the organized. This is how [[Russell's Paradox]] and the [[Liar Paradox|Liar]] are built. It is an error of construction: in a well-formed statement it is impossible ([[Paradox Catalog]]).
+*Level confusion.* An operation takes itself as its object; the organizer is identified with the organized. This is how [[Russells Paradox|Russell's Paradox]] and the [[Liar Paradox|Liar]] are built. It is an error of construction: in a well-formed statement it is impossible ([[Paradox Catalog]]).
 
 The skipped stage and reverse movement are violations along the horizontal; level confusion is a violation along the vertical. Along the horizontal, the Architecture of Reasoning distinguishes eight forms: it calls an unfinished stage a premature transition, and a stage passed emptily the skipped stage ([[Architecture of Reasoning#Movement through the Domains|“Movement through the Domains”]]); the fallacy catalog has records for reverse movement and for burden inversion ([[03 Sequence Violations|“Violations of Sequence”]]).
 

@@ -29,7 +29,7 @@ Copy-Item "$src\quartz.lock.json"    "$dest\" -Force
 
 # ВЕСЬ конвейер (build + генерация тома и каталогов) — раньше терялись 7 из 9
 $scripts = @(
-  "deploy.ps1", "sync-to-repo.ps1",
+  "deploy.ps1", "build-en.ps1", "sync-to-repo.ps1",
   "tex2md.ps1", "batch_tom.ps1", "tom_concepts.ps1", "tom_nav.ps1", "tom_mentions.ps1",
   "catalog2md.ps1", "dump_xlsx.ps1", "knowledge_import.ps1"
 )
@@ -39,6 +39,10 @@ Copy-Item "$src\tools\en-status.cjs" "$dest\tools\" -Force
 Copy-Item "$src\tools\patch-graph-cyrillic.cjs" "$dest\tools\" -Force
 Copy-Item "$src\tools\highlights2md.ps1"     "$dest\tools\" -Force
 Copy-Item "$src\tools\highlights-vitrina.md" "$dest\tools\" -Force
+# английская версия: генератор EN-конфига, связь пар RU↔EN (кнопка, hreflang, черновик), статическое превью
+Copy-Item "$src\tools\make-en-config.cjs" "$dest\tools\" -Force
+Copy-Item "$src\tools\lang-pairs.cjs"     "$dest\tools\" -Force
+Copy-Item "$src\tools\serve-public.cjs"   "$dest\tools\" -Force
 
 # TSV-таблицы (производные от docs\*.xlsx, но нужны tom_mentions/catalog2md без Excel)
 Copy-Item "$src\tables\*.tsv" "$dest\tables\" -Force

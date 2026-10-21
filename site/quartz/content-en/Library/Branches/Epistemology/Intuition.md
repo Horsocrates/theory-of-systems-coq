@@ -124,7 +124,7 @@ The extreme case is mystical experience: a direct insight with a change in the v
 
 ## In Reasoning
 
-**Intuition is the vertical dimension that runs through all six [[Domains of Reasoning|domains]].** In [[1 Recognition|recognition]] it suggests where to look; in [[2 Clarification|clarification]], what is essential; in [[3 Framework Selection|framework selection]], which framework answers the object; in [[4 Comparison|comparison]], what is comparable; in [[5 Inference|inference]], it senses agreement or strain; in [[6 Reflection|reflection]], it sees what has been missed. It replaces no domain—it gives each a support ([[Architecture of Reasoning#Intuition and Reasoning|“Intuition and Reasoning”]]).
+**Intuition is the vertical dimension that runs through all six [[Domains|domains]].** In [[1 Recognition|recognition]] it suggests where to look; in [[2 Clarification|clarification]], what is essential; in [[3 Framework Selection|framework selection]], which framework answers the object; in [[4 Comparison|comparison]], what is comparable; in [[5 Inference|inference]], it senses agreement or strain; in [[6 Reflection|reflection]], it sees what has been missed. It replaces no domain—it gives each a support ([[Architecture of Reasoning#Intuition and Reasoning|“Intuition and Reasoning”]]).
 
 In ethics the same line is continued: conscience is a type of intuitive response to the status “right—wrong” ([[Ethics]]).
 

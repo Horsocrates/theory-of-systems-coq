@@ -30,7 +30,7 @@ The form of an entry: **the construction**—which substitution builds it—**th
 
 - **A completed corpus, omniscience as an object**—the process of knowing declared a finished object of possession. In reality: all-embracingness in the course; there is no ready-made corpus ([[Epistemology#The Gap and Incompletability|“Epistemology”]]).
 - **Actual infinity**—a process without a last step declared a ready “everything.” In reality: process infinity is a process open to continuation ([[Mathematics#Processes and Infinity|“Mathematics”]]).
-	- **An occupied role-limit**—a derivative: the process is declared to have arrived—the role “where it is all going” is ascribed an element that no step of the rules gives. In reality: approach without arrival; “it will not be occupied” is not a prohibition but a conclusion of the observer, held by the completeness of the rules: a theorem about the system ([[Theory of Systems#The Boundary of the Theory: The Role-Limit|the boundary of the theory]]).
+	- **An occupied role-limit**—a derivative: the process is declared to have arrived—the role “where it is all going” is ascribed an element that no step of the rules gives. In reality: approach without arrival; “it will not be occupied” is not a decree but a conclusion of the observer, held by the completeness of the rules: a theorem about the system ([[Theory of Systems#The Boundary of the Theory: The Role-Limit|the boundary of the theory]]).
 
 ## Standalone Entries
 
