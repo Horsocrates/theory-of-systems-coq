@@ -2,7 +2,7 @@
 title: "Chapter 5. Navier–Stokes and Synthesis"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/09 Уравнения в частных производных/05 Навье–Стокс и синтез.md"
-sourceBlob: 104eb55db15c637f56a63450388c9d8d794d7721
+sourceBlob: 262640c2cf5695a9bfae4c8ef4c99cfa83d5051d
 translated: 2026-10-20
 status: draft
 ---
@@ -19,7 +19,7 @@ $$
 
 Here $\nu \Delta u$ is viscosity, the same diffusion as in heat; $(u\cdot\nabla)u$ is convection, nonlinear transport (the analogue of the Burgers nonlinearity in a vector field, Chapter 9.4); $-\nabla p$ and the condition $\nabla\cdot u = 0$ are the pressure, which couples the field through incompressibility. This is the crown of Part IX and one of the Millennium Prize Problems.
 
-The chapter differs from the preceding ones in its status of honesty, and this must be said directly. First, the supporting NS cluster of ToS is a large formal layer, but it is *not* 0-axiom: it carries a domain axiom on the antisymmetry of the nonlinear term (plus `classic`). Second, three-dimensional regularity is proved only *conditionally*; unconditional regularity is an open problem, an honest “wall.” The chapter presents what is proved and outlines precisely what is not.
+The chapter differs from the preceding ones in its status of honesty, and this must be said directly. First, the supporting NS cluster of ToS is a large formal layer, but it is *not* 0-axiom: it carries domain axioms on the coupling constant (`C_B_positive`, `B_coeff_bounded`) plus `classic`; the antisymmetry of the nonlinear term is a lemma. Second, three-dimensional regularity is proved only *conditionally*; unconditional regularity is an open problem, an honest “wall.” The chapter presents what is proved and outlines precisely what is not.
 
 ### What This Chapter Claims—and What It Does Not
 
@@ -27,13 +27,13 @@ The proved core is energetic, on the modal (Galerkin) process. *Unconditionally*
 
 What the chapter does *not* do: it does not prove *unconditional* three-dimensional regularity (the Millennium Problem is open), does not build the completed continuous solution, and does not claim that the NS layer is 0-axiom. These frontiers are marked directly.
 
-Three levels. The *first* is what is proved (with a domain axiom): the dissipation of energy, two-dimensional regularity unconditionally, three-dimensional regularity conditionally. The *second* is the process *readings*: NS as a combined process (diffusion ${}+{}$ convection ${}+{}$ coupling), regularity as a property of the process. The *third*—unconditional three-dimensional regularity, the completed solution—is an open boundary and a role-limit.
+Three levels. The *first* is what is proved (with domain axioms): the dissipation of energy, two-dimensional regularity unconditionally, three-dimensional regularity conditionally. The *second* is the process *readings*: NS as a combined process (diffusion ${}+{}$ convection ${}+{}$ coupling), regularity as a property of the process. The *third*—unconditional three-dimensional regularity, the completed solution—is an open boundary and a role-limit.
 
 ## Navier–Stokes as the Combination of the Triptych
 
 Let us decompose the right-hand side into three familiar roles. *Viscosity* $\nu \Delta u$ is the diffusion of Chapter 9.2: the Laplacian smooths the velocity field, damping small scales; it is precisely viscosity that *dissipates* energy. *Convection* $(u\cdot\nabla)u$ is the transport of Chapter 9.4, but nonlinear: the field transports itself, and here lives the whole difficulty—the very Burgers nonlinearity that gave birth to shock waves. *Pressure* $-\nabla p$ with the condition $\nabla\cdot u = 0$ is a coupling that globally reconciles the field through the incompressibility condition (an elliptic constraint/projection, not wave transport).
 
-ToS carries this as a process, a Galerkin (modal) one: the field is expanded over a finite number of modes, and the evolution of each amplitude is given by a system of ordinary equations with a *triadic* interaction $B(k,l,m)$ between the modes. The key property of the nonlinearity is expressed by a single structural axiom: the coefficient is antisymmetric, $B(k,l,m) = -B(k,m,l)$.[^2] Antisymmetry means that the nonlinearity only *redistributes* energy, as linear transport redistributed mass (Chapter 9.4). Then the only sink of energy is viscous diffusion.
+ToS carries this as a process, a Galerkin (modal) one: the field is expanded over a finite number of modes, and the evolution of each amplitude is given by a system of ordinary equations with a *triadic* interaction $B(k,l,m)$ between the modes. The key property of the nonlinearity is the antisymmetry of the coefficient, $B(k,l,m) = -B(k,m,l)$; in the formalization this is a lemma: the coefficient is defined as the antisymmetrization of an abstract coupling.[^2] Antisymmetry means that the nonlinearity only *redistributes* energy, as linear transport redistributed mass (Chapter 9.4). Then the only sink of energy is viscous diffusion.
 
 *Navier–Stokes is the role-combination of the triptych: viscosity plays the role of diffusion, convection the role of nonlinear transport, pressure the role of coupling. The triadic coefficient with its antisymmetry is the role-rule of the conservation of energy by the nonlinearity; only diffusion dissipates.*
 
@@ -74,10 +74,10 @@ Part IX carried one system—*a partial differential equation as a process of gr
 | 9.2 Heat | maximum principle, dissipation of energy, CFL | 0 axioms |
 | 9.3 Wave | causality, finite speed | 0 axioms |
 | 9.4 Transport | conservation of mass, box, shift | 0 axioms |
-| 9.5 Navier–Stokes | dissipation, 2D regular, 3D conditionally | 1 domain axiom (+ L3) |
+| 9.5 Navier–Stokes | dissipation, 2D regular, 3D conditionally | domain axioms on the coupling constant (+ L3) |
 | Boundary of the whole Part | continuum limit, weak solutions in $L^2$/Sobolev, shock waves, unconditional 3D regularity | role-limits / open |
 
-The triptych (heat, wave, transport) is 0-axiom over ℚ; Navier–Stokes is richer in proofs but honestly carries one domain axiom and runs up against the open three-dimensional wall. The continuum limit, weak solutions, and completed equations are the single role-limit boundary of the whole Part.
+The triptych (heat, wave, transport) is 0-axiom over ℚ; Navier–Stokes is richer in proofs but honestly carries domain axioms on the coupling constant and runs up against the open three-dimensional wall. The continuum limit, weak solutions, and completed equations are the single role-limit boundary of the whole Part.
 
 *A partial differential equation is a role-process of grid functions; the type of the equation is a role of the spatial operator; conservation laws and estimates are finite sums; stability is CFL; the completed solution is a role-limit. Navier–Stokes combines all the roles and leads up to the honest boundary of knowledge, an open Millennium Problem.*
 
@@ -91,8 +91,8 @@ Partial differential equations are the ultimate test of this view, for it is pre
 
 ---
 
-[^1]: The supporting cluster is the directory `navier_stokes/` of the ToS Rocq repository: `energy_bounded_by_initial` (`EnergyEstimate.v`, $E(t)\le E(0)$ unconditionally), `unconditional_2d` (`AttackSynthesis.v`, two-dimensional stretching is zero), `conditional_regularity_theorem` (three-dimensional regularity under a condition), `millennium_gap_precise` (the precise formulation of the open gap). *Axioms:* the cluster carries `B_antisym` (the antisymmetry of the triadic coefficient, `GalerkinSystem.v`—exactly one domain axiom) and `classic` (L3); this is *not* a 0-axiom layer, unlike the triptych of Chapters 9.2–9.4. Exact names and counts follow the repository’s `README`/`CLAUDE`.
-[^2]: `B_antisym` in `GalerkinSystem.v` is the only axiom of the file. It formalizes that convection *conserves* energy (it only transfers it between modes), neither creating nor destroying it—the discrete analogue of $\int (u\cdot\nabla u)\cdot u = 0$.
+[^1]: The supporting cluster is the directory `navier_stokes/` of the ToS Rocq repository: `energy_bounded_by_initial` (`EnergyEstimate.v`, $E(t)\le E(0)$ unconditionally), `unconditional_2d` (`AttackSynthesis.v`, two-dimensional stretching is zero), `conditional_regularity_theorem` (three-dimensional regularity under a condition), `millennium_gap_precise` (the precise formulation of the open gap). *Axioms:* the cluster carries `C_B_positive` and `B_coeff_bounded` (`TriadicInteraction.v`; the conditionality of three-dimensional regularity rests on the second) and `classic` (L3); this is *not* a 0-axiom layer, unlike the triptych of Chapters 9.2–9.4. Exact names and counts follow the repository’s `README`/`CLAUDE`.
+[^2]: `B_antisym` in `GalerkinSystem.v` is a lemma: `B_coeff k l m := B_raw k l m - B_raw k m l`, with `B_raw` an abstract parameter; the file has no axioms. It formalizes that convection *conserves* energy (it only transfers it between modes), neither creating nor destroying it—the discrete analogue of $\int (u\cdot\nabla u)\cdot u = 0$.
 [^3]: `energy_rate_formula` (`GalerkinSystem.v`: $dE/dt=-2\nu\Omega$; the nonlinear contribution is zero—`nonlinear_energy_zero`) and `energy_bounded_by_initial`, `energy_monotone` (`EnergyEstimate.v`): $E$ is monotone and bounded by the initial energy, unconditionally. They rely on `B_antisym`.
 [^4]: `unconditional_2d`: `stretching_2d == 0` (`AttackSynthesis.v`). The absence of stretching is the reason for unconditional two-dimensional regularity.
 [^5]: `conditional_regularity_theorem` and the invariant region (`ConcentrationBound.v`, `EnergyEstimate.v`): with subcritical enstrophy, regularity is preserved. There is no unconditional passage into this region—this is the gap.

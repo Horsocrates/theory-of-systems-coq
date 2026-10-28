@@ -2,7 +2,7 @@
 title: "Chapter 6. Synthesis and the Map of Boundaries"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/12 Геометрия, многообразия, группы Ли/06 Синтез и карта границ.md"
-sourceBlob: 2c0da0335ae577bb6c7acf324c134a5c7f69211f
+sourceBlob: abef530fe9b9e46e330c4432059aab45c5423445
 translated: 2026-10-20
 status: draft
 ---
@@ -48,17 +48,17 @@ What remains is a narrow honest residue—the *smooth continuum limit* proper (t
 
 *The boundary of Part XII is the continuum, the same price as the one named in Parts IV and X, not a new exclusion. Much resolves into a process (the manifold), a rational replacement (Cayley), and a defect (curvature); only the smooth continuum limit remains.*
 
-## Unity across the Book
+## Unity across the Volume
 
 Part XII is not a separate island—it joins what has already been covered at three points.
 
 *One barrier, seen three times.* $\sqrt3$ and $\sqrt5$ surfaced in Part XII more than once: $\sqrt3$ rules out the equilateral triangle on $ℤ^2$ (12.1) and the rotation by $60^\circ$ as a rational point (12.3); $\sqrt5$ rules out the regular pentagon (12.1) and the fifth axis of symmetry (12.3). And in Part XI this is *the same* irreducible quadratic tier: $x^2+x-1=0$ with no rational root. Lattice geometry, symmetry, and the algebraic tier are one structure seen from three angles.
 
-*One move, “object ${}\to{}$ process.”* A real number turned out to be a Cauchy process (Part IV), the algebraic closure an ascending tower (Part XI), and the manifold a refining triangulation (12.2). Each time, what the classical theory takes as a completed continuum object, ToS reads as a never-completing process. This is *one* move on three storeys of the book.
+*One move, “object ${}\to{}$ process.”* A real number turned out to be a Cauchy process (Part IV), the algebraic closure an ascending tower (Part XI), and the manifold a refining triangulation (12.2). Each time, what the classical theory takes as a completed continuum object, ToS reads as a never-completing process. This is *one* move on three storeys of the volume.
 
 *One identity, “defect ${}\to{}$ curvature ${}\to{}$ gravity.”* The angular defect (12.2) is curvature, and curvature in the geometric reading of general relativity expresses gravity (12.5); the sum of the defects is topology (Gauss–Bonnet). Geometry, topology, and gravity meet in one finite rational invariant.
 
-*Part XII is one with the book: the $\sqrt3/\sqrt5$ barrier (lattice/symmetry/algebra) is one; the move “object ${}\to{}$ process” ($ℝ$, $\overline{ℚ}$, the manifold) is one; the identity “defect ${}\to{}$ curvature ${}\to{}$ the geometric reading of gravity” is one.*
+*Part XII is one with the volume: the $\sqrt3/\sqrt5$ barrier (lattice/symmetry/algebra) is one; the move “object ${}\to{}$ process” ($ℝ$, $\overline{ℚ}$, the manifold) is one; the identity “defect ${}\to{}$ curvature ${}\to{}$ the geometric reading of gravity” is one.*
 
 ## E/R/R Analysis of the Part
 

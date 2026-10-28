@@ -2,7 +2,7 @@
 title: "Stone Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс камня.md"
-sourceBlob: 6cb830017a316365649b84ed4653dc5cf39b81f8
+sourceBlob: 020333b28380ce5d02b60e7f7189dc8c3278404f
 translated: 2026-10-20
 status: draft
 description: "A popular formulation of the omnipotence paradox"
@@ -52,7 +52,7 @@ A concrete scene is a strong instrument and a trap at once: it makes the knot vi
 
 [[Omnipotence Paradox]] (the full analysis is there), [[Barber Paradox]] (the same pair “scene/theory” among the structural paradoxes), “an irresistible force against an immovable object” (the same incompatibility, spread over two objects).
 
-**Machine check.** In the registry of 46 it is `D10_Stone`: the field `ConceptualAmbiguity`, the level `L3_MetaOperations`—as for omnipotence; the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D10_Stone`: the field `ConceptualAmbiguity`, the level `L3_MetaOperations`—as for omnipotence; the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

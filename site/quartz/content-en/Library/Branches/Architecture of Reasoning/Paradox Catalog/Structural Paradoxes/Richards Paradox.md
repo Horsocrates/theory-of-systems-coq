@@ -2,7 +2,7 @@
 title: "Richard’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Ришара.md"
-sourceBlob: a43d6d544ee352d702e4143c7c269d956cc9f7d3
+sourceBlob: 0f69c47aae7a7755db9a542b4780ad425e06a2fd
 translated: 2026-10-20
 status: draft
 description: "Definition through all definitions"

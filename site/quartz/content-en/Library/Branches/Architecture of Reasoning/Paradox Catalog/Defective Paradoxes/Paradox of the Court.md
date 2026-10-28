@@ -2,7 +2,7 @@
 title: "Paradox of the Court"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс суда (Протагор).md"
-sourceBlob: 617081084fe68c30f303cc6cb06cc0b15282b78c
+sourceBlob: cf0de4757c926bda7bc685773a8ec101fb03054e
 translated: 2026-10-20
 status: draft
 description: "The contract includes the result of its own test"
@@ -54,7 +54,7 @@ Three moves, from diagnosis to practice. The first is to lay open the substituti
 
 [[Crocodile Dilemma|The Crocodile]] (a structural loop of a single rule—there the condition is closed on its own fulfillment by construction), [[Buridans Bridge|Buridan’s Bridge]] (a norm without a performable subject), [[Unexpected Hanging]] (a neighbor by subtype: contradiction in the conditions), [[Newcombs Paradox|Newcomb]] (two valid arguments as a symptom of a defect in the premises).
 
-**Machine check.** In the registry of 46 it is `D8_ParadoxOfCourt`: the field `ConceptualAmbiguity`, the level `L2_Operations`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the performative mechanics of the loop is inherited from the crocodile, and the defect of the ground is made explicit by clarification. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D8_ParadoxOfCourt`: the field `ConceptualAmbiguity`, the level `L2_Operations`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the performative mechanics of the loop is inherited from the crocodile, and the defect of the ground is made explicit by clarification. Map: [[Formalization]].
 
 ---
 

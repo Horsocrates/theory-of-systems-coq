@@ -2,7 +2,7 @@
 title: "Chapter 1. The First Principle: A = ∃"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/01 Первоначало A = ∃.md"
-sourceBlob: 500544c688a20da7b42e5dd4974d69bd92583458
+sourceBlob: 01ff4f9e9d578245139bd832ae3128720e446708
 translated: 2026-10-20
 status: draft
 ---
@@ -145,7 +145,7 @@ exactly* works as the starting point, *what status* this starting point
 has, and *how* handling it differs from handling the ordinary statements
 of the theory.
 
-### The Position of Volume II on the Problem of the Beginning
+### The Position of the Volume on the Problem of the Beginning
 
 The question “where to begin?” is not a philosophical decoration placed
 in front of the mathematical content of the volume. It is the *first
@@ -153,16 +153,16 @@ mathematical question*. Before we formalize number, function, or space,
 before we write a single definition in Rocq, we must decide: *what do we
 accept* as the condition of the very possibility of this formalization?
 
-In this respect Volume II takes a special position relative to the three
-classical strategies. Volume II neither *chooses* among them nor
+In this respect the volume takes a special position relative to the three
+classical strategies. It neither *chooses* among them nor
 *proposes* a fourth strategy as a methodological alternative on a par
-with the previous ones. Volume II works on the ontological basis
-established in Volume I (Metaphysics), and this basis *already gives an
+with the previous ones. The present volume works on the ontological basis
+established in [[Metaphysics|“Metaphysics”]], and this basis *already gives an
 answer* to the question of the nature of the starting point—an answer
 that goes beyond methodological choice and moves the discussion into the
 ontological register.
 
-In the metaphysics of Volume I, the problem of the beginning is resolved
+In “Metaphysics”, the problem of the beginning is resolved
 by *discovering* what is the starting point structurally, not by
 *selecting* a suitable starting point (as with Euclid, Hilbert, and
 Brouwer)—that is, by discovering what *is* the starting point because it
@@ -170,11 +170,11 @@ Brouwer)—that is, by discovering what *is* the starting point because it
 This discovery is the work of Logic considering the very primary
 givenness of existence.
 
-The content of this discovery in Volume I is the subject of the
-metaphysical exposition. Volume II rests on its result: the *primary
+The content of this discovery is the subject of “Metaphysics”. The
+volume rests on its result: the *primary
 fact* of existence (written as $A = \exists$), which we shall accept in
 the next section and which will serve as the starting point of the
-mathematical unfolding. From the standpoint of Volume II this fact is
+mathematical unfolding. From the standpoint of the present volume this fact is
 the *primary givenness* on which mathematical work becomes possible—not
 the choice of a strategy and not the proposal of a fourth alternative.
 
@@ -185,15 +185,15 @@ structural boundary—and this boundary is ontologically substantive: it
 says something important about the relation between a formal system and
 what the system stands on. In § 1.4 we pass to the *first
 formalizable*—the act of distinction, which will prove to be the first
-object that Volume II can write in Rocq and with which the mathematical
+object that we can write in Rocq and with which the mathematical
 work of the volume proper begins.
 
 Correct handling of the boundary between the pre-formal and the
-formalizable is the central methodological position of Volume II, to
+formalizable is the central methodological position of the volume, to
 which we shall return many times: in Part IV (in discussing the principle
 $P4$—infinity as a property of processes rather than of completed
 objects), in Part X (in discussing sets as a mode of consideration), and
-in Chapter 14.8 (in discussing the fundamental openness of the category
+in Chapter 14.4 (in discussing the fundamental openness of the category
 $\mathbf{ToS}$). Each time the structure of the work will be the same:
 *acknowledge* the boundary, *do not attempt* to formalize what lies
 beyond it, and *move on* to the nearest formalizable object on this side
@@ -203,8 +203,8 @@ of the boundary.
 
 ### The Formula and Its Reading
 
-Having established in § 1.1 that Volume II rests on the ontological
-resolution of the problem of the beginning given in Volume I, we can now
+Having established in § 1.1 that the volume rests on the ontological
+resolution of the problem of the beginning given in “Metaphysics”, we can now
 present the *primary fact* itself on which mathematical work stands.
 
 This fact is written by the formula
@@ -218,9 +218,9 @@ a variable for *any something*—not a pointer to some particular
 object—and $\exists$ is taken as underived: *the very fact of being*,
 prior to distinguishing what exactly exists.
 
-The formula from “The Formula and Its Reading” is neither a definition
+The formula $A = \exists$ is neither a definition
 nor an axiom. It is the record of a *primary fact*, established in
-Volume I and accepted by Volume II as the ground of the further
+“Metaphysics” and accepted by the volume as the ground of the further
 unfolding. From the standpoint of the metaphysical exposition, this fact
 is discovered by analyzing the work of Logic on its own primary
 givenness; from the standpoint of the present volume, it is taken *as a
@@ -297,8 +297,7 @@ $$
 \neg E \;\Longrightarrow\; \neg(\text{the statement } \neg E \text{ exists}),
 $$
 
-which contradicts the very fact that $\neg E$ *is asserted*. The record
-in “Why the Statement Is Not Empty” is not a proof of $E$ in a formal
+which contradicts the very fact that $\neg E$ *is asserted*. This record is not a proof of $E$ in a formal
 system: at this point we do not yet have a formal system, and the record
 itself mixes the object level ($\neg E$) with the meta level (the
 presence of the assertion). It is an *observation* of the structural
@@ -308,7 +307,7 @@ Here it becomes clear what the content of $A = \exists$ consists in.
 
 - Structurally, $A = \exists$ is *not empty*, because its denial is *structurally impossible*. A statement whose denial is impossible *by the inner structure of denial, not by the weakness of the denier*, carries content—the content of *the ineliminability of some “is.”*
 - $A = \exists$ *stands opposed to absolute nothingness*—the state that Parmenides called “is not” and that is unutterable: one can neither think nor speak of it without falling into contradiction. The content of $A = \exists$ is precisely the denial of absolute nothingness as structurally inadmissible.
-- $A = \exists$ is *a presupposition of the theory*. If nothing exists, there is neither reasoning, nor a reasoner, nor an object of reasoning. The very presence of the present theory—the mathematical work of Volume II, the reader, the physical text on which these words are written—is *testimony* that $A = \exists$ holds. Work that did not presuppose the primary fact of existence could not be carried on.
+- $A = \exists$ is *a presupposition of the theory*. If nothing exists, there is neither reasoning, nor a reasoner, nor an object of reasoning. The very presence of the present theory—the mathematical work of the volume, the reader, the physical text on which these words are written—is *testimony* that $A = \exists$ holds. Work that did not presuppose the primary fact of existence could not be carried on.
 
 ### Self-Witnessing as the Work of Logic
 
@@ -317,8 +316,8 @@ contradiction through itself—has a special name in the Methodological
 Introduction: *self-witnessing*.
 
 Self-witnessing is the mode in which a statement *confirms itself
-through its own nature*, with no need of external justification. In the
-metaphysics of Volume I this property is tied to the very nature of
+through its own nature*, with no need of external justification. In
+“Metaphysics” this property is tied to the very nature of
 Logic: Logic is self-witnessing through being that which grounds.
 
 Applied to $A = \exists$, this means the following. The paradox of
@@ -348,14 +347,14 @@ ground, and $\neg(A = \exists)$ as a statement for which a ground is
 
 In this sense $A = \exists$ is *the first thing that Logic establishes
 about itself* when it turns to the question of existence, *not the first
-proposition laid down by Volume I*. The self-witnessing of $A = \exists$
+proposition laid down by “Metaphysics”*. The self-witnessing of $A = \exists$
 is Sufficient Reason at work.
 
 ### Substantive Content through the Philosophical Tradition
 
-The formula $A = \exists$ and its self-witnessing status are not an
-invention of the present series. This thesis belongs to a great
-philosophical tradition, and Volume II can rely on this tradition as on
+The formula $A = \exists$ and its self-witnessing status are not our
+invention. This thesis belongs to a great
+philosophical tradition, and the volume can rely on this tradition as on
 *converging independent testimonies* to a structural fact.
 
 **Parmenides.**  Already in the fifth century BCE, Parmenides formulates
@@ -371,7 +370,7 @@ being.
 
 Parmenides formulates this differently from the way we do here and
 builds it into a further ontological thesis about the character of being
-(one, motionless, eternal), which Volume II does not fully share. But
+(one, motionless, eternal), which this volume does not fully share. But
 the *structural core*—the ineliminability of existence through the
 impossibility of denial—is established by Parmenides for the first time
 in the history of philosophy, and it remains valid.
@@ -384,7 +383,7 @@ Non-Contradiction cannot say anything without making use of it[^8]. The
 structure of the argument is the same as in our discussion of the
 self-witnessing of $A = \exists$: *the very act of denial* uses what is
 denied. Aristotle applies this structure to the Law of
-Non-Contradiction; Volume I applies it at a deeper level—to the very
+Non-Contradiction; our “Metaphysics” applies it at a deeper level—to the very
 fact of existence.
 
 **Descartes and Augustine.**  The early modern period gives a well-known
@@ -396,14 +395,14 @@ doubts[^9]. Twelve centuries before Descartes, Augustine formulates the
 same discovery in the form *si fallor, sum*—“if I am deceived, I
 am”[^10].
 
-Structurally, Descartes’s $cogito$ and Augustine’s $si fallor$ are
+Structurally, Descartes’s *cogito* and Augustine’s *si fallor* are
 applications of $A = \exists$ to a *particular* case—the existence of
 the one who thinks. They show that the ineliminability of existence
 manifests itself at the individual level as well: an individual cannot
 deny their own existence without falling into contradiction, just as
-Logic cannot deny existence as such. Volume II does not use the *cogito*
+Logic cannot deny existence as such. The volume does not use the *cogito*
 as an independent ground (that is already a step toward subjectivity,
-which has a specific place in the metaphysics of Volume I), but it
+which has a specific place in “Metaphysics”), but it
 acknowledges the *cogito* as *converging testimony* to the same
 structural fact.
 
@@ -416,9 +415,9 @@ of the being of anything*, irreducible to any concrete being.
 The formula $A = \exists$ is closer precisely to the second—to being in
 Heidegger’s sense. $A$ is left indeterminate (any something); $\exists$
 fixes *the very fact of being*. This agrees with Heidegger’s program of
-a *return to the question of being*, and Volume I, on metaphysics,
-largely follows this program. Volume II, resting on the ontology of
-Volume I, inherits this distinction without unfolding it to its full
+a *return to the question of being*, and “Metaphysics”
+largely follows this program. The present volume, resting on the ontology of
+“Metaphysics”, inherits this distinction without unfolding it to its full
 Heideggerian depth.
 
 **Wittgenstein.**  The *Tractatus Logico-Philosophicus*, in § 6.44,
@@ -427,7 +426,7 @@ gives a formulation especially close to the content of $A = \exists$:
 Wittgenstein separates the *how* of the world (the subject matter of
 science) from the *that* of the world (the subject matter—in his
 view—of mystical contemplation; philosophy, for its part, must remain
-silent). Volume II does not follow Wittgenstein in his conclusion about
+silent). The volume does not follow Wittgenstein in his conclusion about
 silence, but it fixes the same distinction: $A = \exists$ asserts
 precisely the *that* of the world, not the *how*.
 
@@ -435,8 +434,8 @@ This convergence of testimonies—Parmenides, Aristotle, Descartes,
 Augustine, Heidegger, Wittgenstein, so different in their epochs,
 languages, and methodological commitments—upon one and the same
 structural fact testifies to its *ineliminability*. $A = \exists$ is
-neither an invention of our series nor a thesis on which only Volume I,
-on metaphysics, insists. It is a structural discovery to which the
+neither our invention nor a thesis on which only
+“Metaphysics” insists. It is a structural discovery to which the
 philosophical tradition returns at every major stage of its development,
 reformulating it in the language of its time.
 
@@ -444,7 +443,7 @@ reformulating it in the language of its time.
 
 A natural objection, for which we must be prepared: “All this is
 philosophy. What does $A = \exists$ have to do with the mathematical work
-of Volume II proper?”
+of the volume proper?”
 
 A direct and essential one.
 
@@ -512,7 +511,7 @@ mathematical objects of that level.
 This work of $A = \exists$ remains *implicit* in ordinary mathematical
 practice: the mathematician uses the quantifier $\exists$, type
 constructors, and notations for objects without asking what “existence”
-is in general. Volume II makes this work *explicit* at the very first
+is in general. The volume makes this work *explicit* at the very first
 stage. Having acknowledged $A = \exists$ as the primary fact, we obtain a
 ground for the whole further unfolding: we *unfold* the naturals, the
 reals, groups, and spaces from that basic “is” which already works at
@@ -535,7 +534,7 @@ next section is devoted to this question.
 ### The Natural Attempt
 
 Having established in § 1.2 the primary fact $A = \exists$ as the
-substantive ground of Volume II, we face a natural question that any
+substantive ground of the volume, we face a natural question that any
 mathematician accustomed to working in a strictly formal system must
 ask: *how is this fact to be written in Rocq*?
 
@@ -555,12 +554,12 @@ mathematical formalization: if there is a statement on which the theory
 rests without proof, let us write it down as an axiom. Hilbert’s
 foundational program, which we examined in § 1.1.2, requires exactly
 this—to define a formal system as a set of axioms and rules of
-inference. If $A = \exists$ is the ground of Volume II, it must have a
-place in the formal system of Rocq in which Volume II is written.
+inference. If $A = \exists$ is the ground of the volume, it must have a
+place in the formal system of Rocq in which this volume is written.
 
 This section shows that this natural move *does not work*, and
 discovers why it does not. The discovery is no criticism of the method;
-on the contrary, it *confirms* the ontology of Volume I and clarifies
+on the contrary, it *confirms* the ontology of “Metaphysics” and clarifies
 the status of $A = \exists$ as a primary fact rather than a postulate.
 
 ### What the Entry `Axiom A_exists : True` Does
@@ -723,7 +722,7 @@ structural reasoning about the status of formal systems as technical
 implementations of an already-working Logic (see the Methodological
 Introduction, the section on Logic as the structure of being).
 
-**The boundary is ontologically substantive.**  The thesis “The
+**The boundary is ontologically substantive.**  The thesis of the section “The
 Structure of the Boundary” should not be read as a defect of the method
 or a limitation of formalization. It is the *discovery* of a structural
 property of what we are trying to write down. The boundary says:
@@ -739,7 +738,7 @@ the mirror and its observer ultimately remain *outside* the picture
 itself. Internal formal means cannot encompass the condition of their
 own possibility.
 
-In the terms of the metaphysics of Volume I: Logic cannot be written in
+In the terms of “Metaphysics”: Logic cannot be written in
 a formal system, because a formal system *is* a technical implementation
 of Logic, not Logic itself; $A = \exists$ cannot be written in a formal
 system, because a formal system *works* on the ground of the fact of
@@ -748,7 +747,7 @@ existence without defining it.
 ### Connection with the Incompleteness Theorems
 
 Here one important clarification is in order, especially for a reader
-familiar with Gödel’s results. The thesis “The Structure of the
+familiar with Gödel’s results. The thesis of the section “The Structure of the
 Boundary” *is not* Gödel’s incompleteness theorem, but it is
 *structurally akin* to what Gödel showed.
 
@@ -758,7 +757,7 @@ about the natural numbers that are not provable in $S$*. These
 statements belong to the language $L(S)$—that is, they are *expressible*
 in $S$—but their proof lies beyond $S$.
 
-The thesis “The Structure of the Boundary” is different. It speaks not
+The thesis of the section “The Structure of the Boundary” is different. It speaks not
 of the *unprovability* of a formula in the system but of the fact that
 $A = \exists$ cannot be an *internal ground* of the system. Every formula
 claiming to express $A = \exists$ as the ground of $S$ either becomes an
@@ -770,7 +769,7 @@ own possibility*, rather than between the expressible and the provable.
 The difference can be pictured as follows:
 
 - Gödel: within a formal system there are expressible but *unprovable* formulas. The boundary lies between the *expressible* and the *provable*.
-- Volume II: for $A = \exists$ the boundary lies *earlier*—between *what is expressible by the formal system* and what is *the condition of the possibility* of this formal system. The boundary lies between the *expressible* and the *presupposition of expressibility*.
+- The present volume: for $A = \exists$ the boundary lies *earlier*—between *what is expressible by the formal system* and what is *the condition of the possibility* of this formal system. The boundary lies between the *expressible* and the *presupposition of expressibility*.
 
 These boundaries are not identical, but they belong to one structural
 type: *both* are discoveries that a formal system has a *limit*—something
@@ -781,7 +780,7 @@ entrance* to the system, before the first axiom is written.
 In the Methodological Introduction we said that formal systems are
 *technical implementations* of Logic. Gödel adds: even as technical
 implementations, they are *incomplete*—they cannot encompass everything
-that Logic establishes at their level. The thesis “The Structure of the
+that Logic establishes at their level. The thesis of the section “The Structure of the
 Boundary” says: they cannot encompass the conditions of their own
 possibility either. Both discoveries clarify the status of a formal
 system as a *means*, not as a *ground*.
@@ -825,7 +824,7 @@ This is easy to see. The Peano axiom “there exists $0 \in ℕ$” is the
 *presentation* of the particular object $0$ as an element of the type
 $ℕ$, given that both $0$ and $ℕ$ *are* as objects of the language; it is
 not an axiomatization of existence. The axiom works at the level of the
-*properties* of $ℕ$, not at the level of the *presence* of $ℕ$. Volume II
+*properties* of $ℕ$, not at the level of the *presence* of $ℕ$. The present volume
 does not reject Hilbert’s program at its own level; it points out that
 *below* the axiomatic level lies the condition of the very possibility
 of these axioms, and that this condition has a different status.
@@ -850,7 +849,7 @@ for an object whose existence and uniqueness are established within the
 theory; it is not a primitive symbol of the language. All the listed
 items are manifestations of $A = \exists$ *at a level below the axiom*.
 The empty set axiom axiomatizes the existence of *one particular set*;
-it does not axiomatize existence *in general*. Volume II does not
+it does not axiomatize existence *in general*. The volume does not
 criticize ZFC for this: ZFC *makes no claim* to axiomatize existence in
 general, and it works correctly within its own framework. We merely
 point out that the question of *existence in general*, unlike the
@@ -863,10 +862,10 @@ perhaps we should simply start from particular axioms, as ordinary
 mathematics does?”
 
 *Reply.* This is indeed a possible approach—it is how ordinary
-mathematics works. Volume II does otherwise *for two reasons*.
+mathematics works. The present volume does otherwise *for two reasons*.
 
 First, ordinary mathematics, without asking about $A = \exists$,
-*implicitly* accepts it at every step. Volume II makes this explicit in
+*implicitly* accepts it at every step. The volume makes this explicit in
 order to *present* the ground that works in any case, not in order to
 change ordinary work.
 
@@ -884,14 +883,14 @@ it is the *first formalizable*, not the *first as such*.
 
 The distinction between the *first as such* ($A = \exists$, pre-formal)
 and the *first formalizable* (the act of distinction, written in Rocq) is
-the central methodological work of Chapter 1 and Chapter 2. Volume II
+the central methodological work of Chapter 1 and Chapter 2. The volume
 makes this distinction explicit so that it works throughout all the
 subsequent parts.
 
 Having established the structural boundary of the formalization of
 $A = \exists$, considered its substance, and answered the natural
 objections, we pass to the last section of Chapter 1—a description of
-how Volume II handles this boundary and of the step that follows its
+how the volume handles this boundary and of the step that follows its
 acknowledgment.
 
 ## What to Do with the Boundary: The Transition to the Act of Distinction
@@ -911,15 +910,15 @@ century Heidegger, Levinas, and Derrida devoted substantial texts to this
 work, and each of them is a philosophical tradition of its own, with its
 own terminology, methodology, and subtleties.
 
-Volume II does not take this path. This is not because the path is
-unimportant or fruitless; the task of Volume II is simply different.
-Volume II is a mathematical unfolding on the ontological basis
-established in Volume I. The detailed discussion of the boundary between
+The volume does not take this path. This is not because the path is
+unimportant or fruitless; the task of the volume is simply different.
+The present volume is a mathematical unfolding on the ontological basis
+established in “Metaphysics”. The detailed discussion of the boundary between
 the pre-formal and the formal belongs to the metaphysical exposition and
-receives its full development in Volume I. Volume II *inherits* the
+receives its full development there. The volume *inherits* the
 result of this analysis and moves on to its own task.
 
-The strategy of Volume II with respect to the boundary is as follows:
+The strategy of the volume with respect to the boundary is as follows:
 
 > Acknowledge the boundary of formalization, do not try to *shrink* or
 > *bypass* it, and move on to the nearest formalizable object on this
@@ -928,24 +927,24 @@ The strategy of Volume II with respect to the boundary is as follows:
 This is a working method, not a philosophical digression. The
 acknowledgment of the boundary was made in § 1.3 (the Proposition “The
 Structure of the Boundary”). Now we must take the second step: *find*
-the object that, resting on $A = \exists$, is the *first* thing Volume II
+the object that, resting on $A = \exists$, is the *first* thing the volume
 can write formally—that is, formalize in Rocq and work with as an object
 of mathematical theory.
 
 In other words, the question changes. We no longer ask *what is
-$\exists$?*—a question that leads into the metaphysics of Volume I. We
+$\exists$?*—a question that leads into “Metaphysics”. We
 ask *what is the first formalizable after $\exists$?*—a question that
 leads into Chapter 2 and beyond.
 
 This shift—from *ontology* (what is) to *operational ontology* (how to
-work with it)—is characteristic of the whole of Volume II. The volume
+work with it)—is characteristic of the whole volume. The volume
 does not stop at every boundary for a substantive analysis of it; it
 *fixes* boundaries where they occur and *passes on* to working with what
 lies on this side of the boundary. This strategy will recur many
 times—in Part IV (the boundary separating completed actual infinity as
 an object from infinity as a property of processes; the principle $P4$),
-in Part X (the boundary of “the set as a primary object,” $\mathbf{M3}$),
-and in Chapter 14.8 (the boundary of “the universe of everything,” the
+in Part X (the boundary of “the set as a primary object”),
+and in Chapter 14.4 (the boundary of “the universe of everything,” the
 openness of the hierarchy). Each time the structure of the work will be
 the same: *acknowledge*, *do not shrink*, *move on*.
 
@@ -967,11 +966,11 @@ existence of anything to take place? This is not a rhetorical question;
 Sufficient Reason is the work of Logic, and Logic by its nature leaves
 no fact without a ground.
 
-The detailed discovery of these conditions is the task of Volume I, on
-metaphysics. For Volume II it is enough to rest on its result and
+The detailed discovery of these conditions is the task of
+“Metaphysics”. For the present volume it is enough to rest on its result and
 briefly repeat what is essential.
 
-Volume I shows that for the existence of anything to take place, *there
+“Metaphysics” shows that for the existence of anything to take place, *there
 must be a structure* in which the distinguishable *would be*
 distinguishable. Namely:
 
@@ -987,17 +986,17 @@ is impossible.
 Derived from Identity and Non-Contradiction is the *Law of Excluded
 Middle*: if something *is* (Identity) and cannot be at once itself and
 not itself (Non-Contradiction), then between “is” and “is not” *there is
-no third*—nothing that would be neither the one nor the other. In the
-metaphysics of Volume I this law is recognized as derived; in the
-formalization of Volume II, as we recall from the Methodological
+no third*—nothing that would be neither the one nor the other. In
+“Metaphysics” this law is recognized as derived; in the
+formalization of the present volume, as we recall from the Methodological
 Introduction, it receives the status of an independent $L3$ for
 technical reasons of Rocq.
 
 These laws—Identity, Non-Contradiction, Excluded Middle (derived),
 Order—are *the structure of Logic itself*, which makes the fact
 $A = \exists$ possible. They are ontologically *primary*: they do not
-*follow* from existence; they are *its conditions*. Volume I unfolds
-this picture in full; Volume II accepts it and passes on to its properly
+*follow* from existence; they are *its conditions*. “Metaphysics” unfolds
+this picture in full; the volume accepts it and passes on to its properly
 mathematical task.
 
 *The position of Sufficient Reason.* Sufficient Reason does not enter
@@ -1005,8 +1004,8 @@ this list as one more law. Sufficient Reason is a *meta-law*, the very
 action of Logic through which the listed laws are discovered as
 conditions. Applying Sufficient Reason to $A = \exists$ is precisely the
 move by which the other laws were revealed; Sufficient Reason works
-*over* them, not *alongside* them. This agrees with the thesis of the
-metaphysics of Volume I: Sufficient Reason is grounding itself, not one
+*over* them, not *alongside* them. This agrees with the thesis of
+“Metaphysics”: Sufficient Reason is grounding itself, not one
 of the grounded. Later we shall see that in the act of distinction, too,
 Sufficient Reason acts as the meta-structure in which all four fields of
 the record work, rather than as one of its conditions.
@@ -1014,7 +1013,7 @@ the record work, rather than as one of its conditions.
 Here it is important to distinguish the ontological and formal levels at
 once, so that no terminological ambiguity arises later. In the
 ontological exposition, Sufficient Reason is a meta-law—the very action
-of Logic, which demands a ground. In the formal record of Volume II,
+of Logic, which demands a ground. In the formal record of the volume,
 this action has several distinct technical traces, and they must not be
 confused. In the structure `Distinction` it shows itself as the
 self-grounding of distinction: from the positive side follows the
@@ -1046,8 +1045,8 @@ positive and a negative side. Let us examine it carefully:
 
 - The positive side is what *is* in the sense of the division being made. The statement `positive`. The Law of Identity applies to it: the positive side is identical to itself—`positive` is `positive`.
 - The negative side is what the positive *is not*. The statement `negative`.
-- The Law of Non-Contradiction requires that the positive and the negative cannot hold at once. `exclusive`: $\neg(`positive` \wedge `negative`)$.
-- Between the positive and the negative there is no third; together they exhaust the possible sides of the division. `exhaustive`: $`positive` \vee `negative`$. (This is Excluded Middle, derived from Identity and Non-Contradiction in the ontology of Volume I but written in the Rocq formalization as an independent field.)
+- The Law of Non-Contradiction requires that the positive and the negative cannot hold at once. `exclusive`: $\neg(\texttt{positive} \wedge \texttt{negative})$.
+- Between the positive and the negative there is no third; together they exhaust the possible sides of the division. `exhaustive`: $\texttt{positive} \vee \texttt{negative}$. (This is Excluded Middle, derived from Identity and Non-Contradiction in the ontology of “Metaphysics” but written in the Rocq formalization as an independent field.)
 
 Over all this works the *Law of Sufficient Reason* as a meta-law.
 Sufficient Reason is *the very action of Logic* in which distinction
@@ -1094,8 +1093,8 @@ each side, a hierarchy of divisions—all of this will come in later
 chapters).
 
 This structural movement we call the *act of distinction*. And it is
-precisely this act that Volume II *discovers* as the first
-formalizable: Volume II ascertains it as the simplest manifestation of
+precisely this act that the volume *discovers* as the first
+formalizable: it ascertains this act as the simplest manifestation of
 all the laws of Logic (including Sufficient Reason) accessible to a
 record in Rocq; it neither chooses nor assigns it.
 
@@ -1105,14 +1104,7 @@ The word “first,” applied to the act of distinction, requires precise
 clarification, since it works in several senses at once, and it is
 important not to confuse them.
 
-**First in the ontology of Volume I: generating time.**  The metaphysics
-of Volume I shows that *the first act of distinction* (Light, in the
-terminology of Volume I—the act of Logic distinguishing the inner state
-of the Source) is *the first event in the ontology*. Before this act,
-Logic and the Source exist as facts, but there are no events;
-accordingly, there is no sequence; and there is no time either. Time *is
-born* in the very act of distinction—as the structure of the sequence of
-acts that starts from the first distinction.
+**First in the ontology: generating time.**  In [[Metaphysics|“Metaphysics”]], time begins with the first act: “The first act is the first moment: time begins.” Before the first act, Logic and the Source exist, but there are no events; accordingly, there is no sequence; and there is no time either. Time *is born* in the very act of distinction—as the structure of the sequence of acts that starts from the first distinction.
 
 In this sense the act of distinction is *temporally first* in the most
 exact sense of the word: it *generates* time itself as a structure. Not
@@ -1120,20 +1112,18 @@ exact sense of the word: it *generates* time itself as a structure. Not
 first act time begins to be*, and all subsequent distinctions are placed
 along this structure of sequence.
 
-Volume II does not unfold this ontology of the first act in its
-fullness: that is the work of Volume I, and a reader who wishes to
-obtain it should turn to the metaphysical exposition. But Volume II
+The present volume does not unfold this ontology in its fullness: that is the work of [[Metaphysics|“Metaphysics”]], and a reader who wishes to obtain it should turn to it. But the volume
 *inherits* the result: the act of distinction is the act through which
 time itself becomes possible as a structure, not one of many events
 occurring in time.
 
-**First in the record of Volume II: structurally basic.**  In the
-mathematical work of Volume II the act of distinction plays the role of
+**First in the record of the volume: structurally basic.**  In the
+mathematical work of the volume the act of distinction plays the role of
 the *first formalizable*: the first object that is written in Rocq and
 from which what follows is *derived*. This role is *structural*, not
 temporal (it asserts neither the order in which the chapters were
 written nor the order of the author’s research): the act of distinction
-lies at the foundation of the deductive chain of Volume II, and every
+lies at the foundation of the deductive chain, and every
 subsequent object of the volume (number systems, functions, spaces,
 categories) unfolds from it through a sequence of formalizations.
 
@@ -1155,7 +1145,7 @@ All three senses of “first”—ontological (generates time), structural
 (basic for deduction), technical (priority in the repository)—agree with
 one another, but they have different grounds and work at different
 levels. When we say that the act of distinction is *the first
-formalizable in Volume II*, we use all three senses at once, since in
+formalizable in the volume*, we use all three senses at once, since in
 our case they coincide on one object.
 
 The properties of the act of distinction as the first formalizable—that
@@ -1168,7 +1158,7 @@ no choice); they *record what the discovered object has*.
 
 ### A Preview of the Act of Distinction
 
-The first formalizable in Volume II is the act of distinction. It will be
+The first formalizable in the volume is the act of distinction. It will be
 introduced and unfolded in Chapter 2; here we merely outline what
 Chapter 2 will contain.
 
@@ -1207,7 +1197,7 @@ The type `Distinction` is a record with four fields, and each of its
 instances is a *particular* distinction, given by particular `positive`
 and `negative` together with confirmations of their exclusivity and
 exhaustiveness. This is the first *explicitly constructive* object of
-Volume II: a formal construction that Rocq accepts into its language and
+the volume: a formal construction that Rocq accepts into its language and
 that one can work with—not a mention, not a description, not a
 reference.
 
@@ -1231,7 +1221,7 @@ The later chapter on the co-definition of the positive and the negative
 will unfold *co-definition*: one cannot build a `Distinction` having
 only one of the sides. The positive and the negative *co-arise* in the
 act itself, and this co-arising structure is the basis for the further
-understanding of dualities in Volume II.
+understanding of dualities in the volume.
 
 The later chapter on the axiomatic layer of Rocq will spell out the
 technical axioms on which work with `Distinction` rests (`classic` and
@@ -1239,15 +1229,14 @@ technical axioms on which work with `Distinction` rests (`classic` and
 replaces the Axiom of Choice—the transfer of status through E/R/R with
 the use of $L4$ and $L5$.
 
-Chapter 6 will fix the four recurring motifs of the volume,
-$\mathbf{M1}$, $\mathbf{M2}$, $\mathbf{M3}$, $\mathbf{M4}$, to which
-Volume II will return throughout all subsequent parts.
+Chapter 7 will gather the ontological positions of the volume, to which
+it will return throughout all subsequent parts.
 
 ### What We Have Gained
 
 Before closing § 1.4 (and with it Chapter 1), let us sum up what has been
 achieved, since this result matters not only for Chapter 1 but for all
-the further work of Volume II.
+the further work of the volume.
 
 The boundary of the formalization of $A = \exists$ has been neither
 *discarded* nor *ignored*. It has been *fixed* where it structurally
@@ -1257,44 +1246,44 @@ down (which, as we saw in § 1.3, leads to degeneration or circularity),
 and *do not pretend* that it is absent (which would be carelessness, a
 hidden appeal to what has been denied recognition).
 
-Within the formal system, Volume II has a concrete ground: the act of
+Within the formal system, the volume has a concrete ground: the act of
 distinction as the first formalizable. From it are derived the laws of
 logic (Chapter 3), typing (Chapter 2.4), and the ontology of the
-positive-negative (Chapter 4). The further work of Volume II receives a
+positive-negative (Chapter 4). The further work of the volume receives a
 firm foundation in the form of a formal object on which it rigorously
 stands.
 
 At the same time $A = \exists$ remains a *pre-formal ground* to which
-Volume II refers—through the Methodological Introduction, through the
-discussion in Chapter 1, through the returns of the motifs in later
+the volume refers—through the Methodological Introduction, through the
+discussion in Chapter 1, through the returns to it in later
 parts—but which it does not *appropriate* into its formal language. This
 is respect for the structural boundary. What is ontologically primary
 (Logic, $\exists$, Sufficient Reason as the action of Logic) remains
-*outside* the formal system and belongs to Volume I, on metaphysics.
+*outside* the formal system and belongs to “Metaphysics”.
 What is mathematically the *first formalizable* (the act of
 distinction) becomes the central object of Chapter 2 and the foundation
-of the whole of Volume II.
+of the whole present volume.
 
 ### Connection with the Whole Volume
 
 The strategy unfolded in Chapter 1—*distinguish the pre-formal and the
 formal, acknowledge the boundary, move on to the nearest
-formalizable*—is the *methodological matrix* of Volume II. This matrix
-will work at different levels through all 16 parts. A brief preview of
+formalizable*—is the *methodological matrix* of the volume. This matrix
+will work at different levels through all 20 parts. A brief preview of
 the most important returns:
 
 - **Part IV.** The principle $P4$: infinity is a property of processes, not of completed objects. No exclusion is introduced here; what is *stated* here is a structural fact about the nature of infinity—infinity as a completed object does not exist, since completedness and inexhaustibility are incompatible characteristics. What exists is an infinite *process* as an actual entity, unfolding step by step. The first formalizable in this ontology is `RealProcess` as a function $ℕ \to ℚ$: the primary object of analysis, from which the functions that $ℝ$ performs classically are then reconstructed.
-- **Part X.** The principle $\mathbf{M3}$: sets as a mode of consideration. The boundary lies between the list as an ontologically primary structure and the set as an abstract “already-gathered” object. The first formalizable beyond the boundary is the list as an inductive type, on which an operator works in a mode that ignores some of the attributes.
-- **Chapter 14.8.** The fundamental openness of the category $\mathbf{ToS}$. The boundary lies between the concrete levels of the hierarchy $\Sys(L_0), \Sys(L_1), …, \Sys(L_n)$ and a hypothetical “universe of everything,” which Volume II does not formalize as a completed object. The first formalizable beyond the boundary is the very scheme of transition between levels (the functors `forget` and `embed` with their adjunction).
+- **Part X.** Sets as a mode of consideration. The boundary lies between the list as an ontologically primary structure and the set as an abstract “already-gathered” object. The first formalizable on this side of the boundary is the list as an inductive type, on which an operator works in a mode that ignores some of the attributes.
+- **Chapter 14.4.** The fundamental openness of the category $\mathbf{ToS}$. The boundary lies between the concrete levels of the hierarchy $\Sys(L_0), \Sys(L_1), …, \Sys(L_n)$ and a hypothetical “universe of everything,” which this volume does not formalize as a completed object. The first formalizable on this side of the boundary is the very scheme of transition between levels (the functors `forget` and `embed` with their adjunction).
 
 In each case *one and the same* matrix works:
 
 1. Discovery of the boundary: the substantive observation that some object (actual infinity, the completed set of everything, the universe of types) cannot be formalized without degeneration or circularity.
-2. Acknowledgment of the boundary: fixing that the object *is not subject* to formalization in Volume II, and keeping respect for this fact rather than attempting to get around it.
+2. Acknowledgment of the boundary: fixing that the object *is not subject* to formalization in the volume, and keeping respect for this fact rather than attempting to get around it.
 3. Movement to the nearest formalizable: finding the object that, resting on the pre-formal, is the *first* formalizable on this side of the boundary.
 
 In this sense Chapter 1 is not only an introduction to Part I but *a
-model of the methodology of the whole of Volume II*. Each subsequent
+model of the methodology of the whole volume*. Each subsequent
 discovery of a structural boundary will repeat the structure of
 discovery unfolded here—but in the context of concrete mathematical
 work. Having mastered this structure in Chapter 1, the reader has an
@@ -1312,7 +1301,7 @@ volume.
 [^2]: Gödel, K. *On Formally Undecidable Propositions of Principia Mathematica and Related Systems*, 1931. Gödel’s second theorem establishes that in any formal system capable of expressing arithmetic, the statement of the consistency of this system is not provable by the means of the system itself.
 [^3]: Anselm of Canterbury, *Proslogion*, II–IV. English edition: *Proslogium*, trans. Sidney Norton Deane (Chicago: Open Court, 1903). The argument was later reproduced in various forms by Descartes (*Meditations*, V) and Leibniz (*Monadology*, §44–45); it was subjected to critical analysis by Kant (*Critique of Pure Reason*, B 620–630) and, in the twentieth century, by Russell.
 [^4]: Parmenides, fr. B6 DK. See also fr. B2: “The first, namely, that It is, and that it is impossible for it not to be … The other, namely, that It is not, and that it must needs not be.” English edition: trans. John Burnet, in *Early Greek Philosophy*, 2nd ed. (London: Adam and Charles Black, 1908).
-[^5]: Parmenides, fr. B2.3–5 DK. Greek: $\dot{\eta}$ $\mu\grave{\varepsilon}\nu$ $\ddot{o}\pi\omega\varsigma$ $\ddot{\varepsilon}\sigma\tau\iota\nu$ $\tau\varepsilon$ $\kappa\alpha\grave{\iota}$ $\dot{o}\varsigma$ $o\dot{v}\kappa$ $\ddot{\varepsilon}\sigma\tau\iota$ $\mu\grave{\eta}$ $\varepsilon\tilde{\iota}\nu\alpha\iota$\dots
+[^5]: Parmenides, fr. B2.3–5 DK. Greek: $\dot{\eta}$ $\mu\grave{\varepsilon}\nu$ $\ddot{o}\pi\omega\varsigma$ $\ddot{\varepsilon}\sigma\tau\iota\nu$ $\tau\varepsilon$ $\kappa\alpha\grave{\iota}$ $\dot{o}\varsigma$ $o\dot{v}\kappa$ $\ddot{\varepsilon}\sigma\tau\iota$ $\mu\grave{\eta}$ $\varepsilon\tilde{\iota}\nu\alpha\iota$…
 [^6]: Parmenides, fr. B2.7–8 DK. English edition: trans. John Burnet, in *Early Greek Philosophy*, 2nd ed. (London: Adam and Charles Black, 1908).
 [^7]: Aristotle, *Metaphysics*, IV.3, 1005b19–23.
 [^8]: Ibid., IV.4. Aristotle argues that whoever denies the law must speak, and one who speaks says *something*, that is, asserts a definite meaning; without this there is no meaningful speech.

@@ -2,7 +2,7 @@
 title: "Chapter 4. E/R/R: The Ontology of a System"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/04 ERR онтология системы.md"
-sourceBlob: 771d4cc7c7caf80ac58b32fee5f7fb4bb3b1e3b5
+sourceBlob: 3f73ae841559ec83b9cc8889ee81ec5e4c886dda
 translated: 2026-10-20
 status: draft
 ---
@@ -13,14 +13,14 @@ The body of theorems in the file `LawsFromDistinction.v`, analyzed in Chapter 3,
 
 **The next step.**  After this work it is natural to turn to the question: what is the structure of that which all these laws determine? In other words: *what is a system*? This question is central to the Theory of Systems, within which the present work is written, and posing it completes the movement of Part I from the first principle to the ontological arrangement.
 
-The answer unfolded in the present chapter is as follows. The derivation chain begun in Chapter 2 and continued in Chapter 3 has one more step that has not been taken so far. After the laws $L1$–$L5$ comes an intermediate link: four principles, derived from the laws as their structural consequences. And after the principles comes the concluding link: the E/R/R structure (Elements / Roles / Rules), which realizes the necessary conditions of systemhood. *Architecturally*, the full chain of the book has the form:
+The answer unfolded in the present chapter is as follows. The derivation chain begun in Chapter 2 and continued in Chapter 3 has one more step that has not been taken so far. After the laws $L1$–$L5$ comes an intermediate link: four principles, derived from the laws as their structural consequences. And after the principles comes the concluding link: the E/R/R structure (Elements / Roles / Rules), which realizes the necessary conditions of systemhood. *Architecturally*, the full chain of the volume has the form:
 
 $$
 A = \exists \;\to\; \text{Distinction} \;\to\;
   L1\text{–}L5 \;\to\; P1\text{–}P4 \;\to\; E/R/R.
 $$
 
-Here, however, precision is needed about what exactly has been formalized. The links $\text{Distinction} \to L1$–$L5$ and $L1$–$L5 \to P1$–$P4$ are formal theorems of Rocq (the files `LawsFromDistinction.v` and `PrinciplesFromLaws.v`). The concluding link is analyzed in the file `ERRFromDistinction.v`, and this file fixes a *narrower* core of the chain than the full architectural scheme: it derives the E/R/R structure directly from the record `Distinction` and the laws, without carrying out a *separate* formal theorem of the form “from $P1$–$P4$ follows E/R/R.” The full bridge through $P1$–$P4$ is a conceptual interpretation of the architecture: it is substantively correct and may later be strengthened by a separate theorem, but *at present* it is not written in the repository as a single formal dependency. We shall keep this difference between the architectural scheme of the book and the actual content of the file in view throughout the chapter.
+Here, however, precision is needed about what exactly has been formalized. The links $\text{Distinction} \to L1$–$L5$ and $L1$–$L5 \to P1$–$P4$ are formal theorems of Rocq (the files `LawsFromDistinction.v` and `PrinciplesFromLaws.v`). The concluding link is analyzed in the file `ERRFromDistinction.v`, and this file fixes a *narrower* core of the chain than the full architectural scheme: it derives the E/R/R structure directly from the record `Distinction` and the laws, without carrying out a *separate* formal theorem of the form “from $P1$–$P4$ follows E/R/R.” The full bridge through $P1$–$P4$ is a conceptual interpretation of the architecture: it is substantively correct and may later be strengthened by a separate theorem, but *at present* it is not written in the repository as a single formal dependency. We shall keep this difference between the architectural scheme of the volume and the actual content of the file in view throughout the chapter.
 
 Let us begin by completing the derivation chain.
 
@@ -76,7 +76,7 @@ Proof. intros L C. exact (crit_level_valid L C). Qed.
 
 **Structural embeddedness.**  The peculiarity of $P2$ is that it does not *follow* from a law as a separate theorem: it is *built into* the very record of the criterion. The field `crit_level_valid` in the record `Criterion` *requires* a proof that the level of the criterion precedes the level of the system. Without this proof the criterion *cannot be constructed*: Rocq refuses to compile the definition.
 
-This parallels the way $L2$ is built into the record `Distinction` through the field `exclusive` ((see the corresponding chapter) of Chapter 3): the law works as a part of the structure without which the structure itself is impossible, not “from outside.”
+This parallels the way $L2$ is built into the record `Distinction` through the field `exclusive` ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Field exclusive as a Built-In Proof|§ 3.3.3 “The Field exclusive as a Built-In Proof”]] of Chapter 3): the law works as a part of the structure without which the structure itself is impossible, not “from outside.”
 
 **Consequence: circular definitions are ruled out.**  From $P2$ it follows formally that no criterion can be constructed whose level coincides with the level of the system it defines:
 
@@ -119,7 +119,7 @@ The first three ensure that intensional identity is an equivalence relation (ref
 
 **Consequence: identity through the criterion, not through the elements.**  Traditional set theory works with extensional identity: “$A$ and $B$ have the same elements, hence $A = B$.” In ToS intensional identity is at work, and it is stronger: even if two systems contain the same elements, they are *not identical* if these elements are obtained under different criteria. Consider a classical example from Euclidean geometry: the set of *equilateral* triangles (the criterion: three equal sides) and the set of *equiangular* triangles (the criterion: three equal angles) in the plane contain the same figures. But the *criteria* differ essentially: one rests on the measure of the sides, the other on the measure of the angles. By $P3$ these two systems coincide extensionally but are not intensionally identical: they have different grounds, different ways of being what they are.
 
-**Consequence: the ontological priority of the criterion.**  From $P3$ it follows that a system is determined by *that through which it is*, not by *what is in it*. The criterion is an ontological ground, as opposed to a description of content (see (see the corresponding chapter) of Chapter 2). This position draws an essential methodological distinction between ToS and the set-theoretic approach, and it is at work throughout the rest of the volume.
+**Consequence: the ontological priority of the criterion.**  From $P3$ it follows that a system is determined by *that through which it is*, not by *what is in it*. The criterion is an ontological ground, as opposed to a description of content (see [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#Over Everything: The Work of Sufficient Reason|§ 2.2.6 “Over Everything: The Work of Sufficient Reason”]] of Chapter 2). This position draws an essential methodological distinction between ToS and the set-theoretic approach, and it is at work throughout the rest of the volume.
 
 ### $P4$: Finite Actuality
 
@@ -211,7 +211,7 @@ This is the E/R/R structure of *one* particular system (the act of distinction).
 
 **Structural content.**  In the simplest system, the act of distinction, each aspect of E/R/R is represented by exactly *two* constituents. This number is not arbitrary: it is *derived* from the already established structure of the record `Distinction` and cannot be changed without destroying the act of distinction itself.
 
-**Derivation of two elements.**  In Chapter 2 ((see the corresponding chapter)) it was shown that the record `Distinction` has exactly four fields—`positive`, `negative`, `exclusive`, `exhaustive`—and that none of these fields can be removed without losing the very nature of distinction. The fields `positive` and `negative` have the type `Prop`: they express *what exactly* is distinguished. These are the Elements in the simplest act: two substantive poles between which the distinction is drawn.
+**Derivation of two elements.**  In Chapter 2 ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#Minimality of the Record: Can One of the Four Fields Be Removed?|§ 2.6 “Minimality of the Record: Can One of the Four Fields Be Removed?”]]) it was shown that the record `Distinction` has exactly four fields—`positive`, `negative`, `exclusive`, `exhaustive`—and that none of these fields can be removed without losing the very nature of distinction. The fields `positive` and `negative` have the type `Prop`: they express *what exactly* is distinguished. These are the Elements in the simplest act: two substantive poles between which the distinction is drawn.
 
 A difference of *one* pole from itself is identity, not distinction. Therefore *one* element does not form an act of distinction. Consequently, the number of elements in the simplest act cannot be less than two—and it is exactly two, since the record `Distinction` has exactly two fields of type `Prop`.
 
@@ -221,14 +221,14 @@ Why precisely *two* roles? If there were one role, both sides would occupy one a
 
 **Derivation of two rules.**  The fields `exclusive` and `exhaustive` express how exactly the sides relate to each other: `exclusive` asserts the incompatibility of the sides; `exhaustive`, their joint exhaustiveness. These are two *logically independent* rules: neither reduces to the other, and both are obligatory.
 
-What would happen if one of them were removed? In (see the corresponding chapter) of Chapter 2 it was shown: without `exclusive` the sides can coincide, and the act of distinction collapses into identity; without `exhaustive` a “third way” appears between the sides, and the division becomes incomplete. Consequently, *fewer than two* rules are not enough to hold the structure of distinction together. And *more than two* rules are not needed in the simplest act: exclusivity and exhaustiveness together already fix all the laws of distinction—and this is precisely what the minimality of the record `Distinction`, proved in Chapter 2, consists in.
+What would happen if one of them were removed? In [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#Minimality of the Record: Can One of the Four Fields Be Removed?|§ 2.6 “Minimality of the Record: Can One of the Four Fields Be Removed?”]] of Chapter 2 it was shown: without `exclusive` the sides can coincide, and the act of distinction collapses into identity; without `exhaustive` a “third way” appears between the sides, and the division becomes incomplete. Consequently, *fewer than two* rules are not enough to hold the structure of distinction together. And *more than two* rules are not needed in the simplest act: exclusivity and exhaustiveness together already fix all the laws of distinction—and this is precisely what the minimality of the record `Distinction`, proved in Chapter 2, consists in.
 
-**Numerical fixing in the formalization.**  In Rocq the duality is fixed by numerical invariants:[^7] for every $D : `Distinction`$:
+**Numerical fixing in the formalization.**  In Rocq the duality is fixed by numerical invariants:[^7] for every $D : \texttt{Distinction}$:
 
 $$
-`err_element_count`(D) = 2, \quad
-  `err_role_count`(D) = 2, \quad
-  `err_rule_count`(D) = 2.
+\texttt{err\_element\_count}(D) = 2, \quad
+  \texttt{err\_role\_count}(D) = 2, \quad
+  \texttt{err\_rule\_count}(D) = 2.
 $$
 
 **Consequence: duality as a structural minimum.**  The derivation shows that the number “two” in the simplest system is a structural minimum below which distinction does not exist, not an arbitrary convention. One element: no difference; one role: no functional asymmetry; one rule: the structure collapses. Duality is the minimal nontrivial structure of determinacy.
@@ -303,7 +303,7 @@ In the *potential* mode the system is set by rules and roles; the elements may n
 
 **Example.**  Consider the *parameterized scheme* $S_c$: “the set of natural numbers $n$ such that $n^2 < c$,” where $c$ is a parameter. The rules of the scheme are defined: the condition $n^2 < c$ sets the role “element of the set” through an explicit arithmetic requirement. For $c = 10$ the roles are filled by the elements $\{1, 2, 3\}$—if the naturals are counted from one[^9]—and the system $S_{10}$ is actualized by three bearers. For $c = 2$ there is a single element $\{1\}$, and the system $S_2$ is actualized minimally. For $c = 1$ the roles have no bearers: the system $S_1$ remains in the potential mode—the set is empty as an actual collection but *is* as a structurally defined possibility with an explicitly set criterion.
 
-Here it is important to avoid an imprecision. It would be wrong to say that $S_{10}$, $S_2$, $S_1$ are “one and the same system with different fillings.” By the principle $P3$ (Intensional Identity, “: Intensional Identity”), the identity of a system is set by its *criterion*, and the criterion of $S_c$ includes the value of the parameter $c$. Different $c$ are different criteria, and hence *different systems* in the intensional sense. The precise formulation is this: there is one parameterized *scheme* $S_c$, and $S_{10}$, $S_2$, $S_1$ are different *instances* of this scheme—intensionally different, for their criteria differ. What they have in common is the scheme (the form of the criterion, the type of the role); what differs is the particular criterion and therefore the system itself. The distinction between the potential and the actual runs *within* each instance $S_c$: the rules and roles set its potential, the bearers its actualization.
+Here it is important to avoid an imprecision. It would be wrong to say that $S_{10}$, $S_2$, $S_1$ are “one and the same system with different fillings.” By the principle $P3$ (Intensional Identity, “$P3$: Intensional Identity”), the identity of a system is set by its *criterion*, and the criterion of $S_c$ includes the value of the parameter $c$. Different $c$ are different criteria, and hence *different systems* in the intensional sense. The precise formulation is this: there is one parameterized *scheme* $S_c$, and $S_{10}$, $S_2$, $S_1$ are different *instances* of this scheme—intensionally different, for their criteria differ. What they have in common is the scheme (the form of the criterion, the type of the role); what differs is the particular criterion and therefore the system itself. The distinction between the potential and the actual runs *within* each instance $S_c$: the rules and roles set its potential, the bearers its actualization.
 
 **Connection with $L1$.**  Each actualized element in a system is identical to itself: this is the work of $L1$ applied to bearers. Without the identity of the elements, their stable identification in different contexts would be impossible. $L1$ works in Elements as the condition of the very possibility of treating actual bearers as determinate.
 
@@ -391,9 +391,7 @@ In each example the universal layer is the same; the concrete layers differ and 
 
 **Consequence: systems as two-layered constructions.**  Any particular system is $L1$–$L5$ (the universal layer) plus its specific rules (the concrete layer), which together define the roles and set the selection of elements. The universal layer provides structural coherence; the concrete one, specific content. Without the universal layer a system could not be a system; without the concrete one it would not be *this* system.
 
-{
 With the two layers of Rules we complete the analysis of the ontological arrangement of rules. The next section unfolds the asymmetry of the relations among the three aspects of E/R/R—the generative order by which rules set roles, and roles set elements.
-}
 
 ## Asymmetry and the Generative Order
 
@@ -458,10 +456,7 @@ The generative order is a structural consequence of the work of $L1$, $L4$, $L5$
 | Roles constrain Elements | Roles are brought to light from Elements |
 | Elements actualize the system | Rules are inferred from Roles |
 
-{
-
 **Why the two orders are reverse.**  The unfolding of a system goes from the top down (Rules $\to$ Elements), because rules are primary. The recognition of a system goes from the bottom up (Elements $\to$ Rules), because the observer first sees the elements: they are directly accessible in experience. The same phenomenon occurs in the natural sciences: the structure of the atom *in reality* unfolds from the laws of physics but *is known* starting from observable phenomena (spectra, scattering).
-}
 
 **Consequence: the consistency of the abbreviation E/R/R.**  The abbreviation E/R/R is epistemic (Elements first, Rules last), which agrees with the practice of analysis: in analyzing an unfamiliar system it is natural to begin with the elements. This is a *practical* convention, not an ontological claim. Each time we carry out an E/R/R analysis, we move along the epistemic order—but we *discover* a system unfolded in the generative order.
 
@@ -481,7 +476,7 @@ $n$.***
 **Derivation from $L5$ and $P1$.**  The hierarchy is a *consequence* of what has already been derived, not an additional postulate:
 
 - By $L5$ (the Law of Order), every operation stands above its operand: the rules of a system are above its elements and roles.
-- By $P1$ (Hierarchy, “: Hierarchy”), the level of the organized is strictly below the level of the organizer: $\text{Level}(\text{organized}) < \text{Level}(\text{organizer})$.
+- By $P1$ (Hierarchy, “$P1$: Hierarchy”), the level of the organized is strictly below the level of the organizer: $\text{Level}(\text{organized}) < \text{Level}(\text{organizer})$.
 
 Applying these two principles: the elements of a given system ($\text{Level} = n$) are themselves organized—that is, they have their own E/R/R structure. Hence they too are systems. Their own level is *strictly below* the level of the organizer: they are located beneath it in the order $\ll$. In the nearest, illustrative case this is the level $n-1$; but formally only the relation “lower in level” is required, not exactly one step down. The hierarchy of levels is a structural consequence of the joint work of $L5$ and $P1$.
 
@@ -489,9 +484,9 @@ Applying these two principles: the elements of a given system ($\text{Level} = n
 
 ### The Connection with the Type `Level`
 
-**Formalization in Rocq.**  In Chapter 3 ((see the corresponding chapter)) the type `Level` was briefly introduced, with the strict order operator $\ll$ and the depth function `level_depth`.[^13] The hierarchy of levels of E/R/R systems is formalized through this type:
+**Formalization in Rocq.**  In Chapter 3 ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Formal Apparatus: The Type Level|§ 3.6.2 “The Formal Apparatus: The Type Level”]]) the type `Level` was briefly introduced, with the strict order operator $\ll$ and the depth function `level_depth`.[^13] The hierarchy of levels of E/R/R systems is formalized through this type:
 
-- Each system $S$ is located at a definite level: $\text{Level}(S) \in `Level`$.
+- Each system $S$ is located at a definite level: $\text{Level}(S) \in \texttt{Level}$.
 - The elements of a system $S$ are located at a strictly lower level: $\text{Level}(e) \ll \text{Level}(S)$ for every element $e \in S$.
 - Each particular level has a finite depth relative to the ground; this is what the theorem `L5_no_infinite_descent` from Chapter 3 fixes. It is natural to interpret this fact as the absence of non-well-founded descent; but a theorem on the impossibility of an infinite descending chain of levels would have to be formulated separately—the theorem `L5_no_infinite_descent` proves the weaker statement that each level has finite depth.
 
@@ -524,9 +519,9 @@ Let us consider several examples in which the hierarchy of levels shows itself e
 
 **Structural content.**  Each level of the hierarchy is an unfolding of E/R/R *anew*, but now at a higher level. The rules, roles, and elements of a system $L_2$ themselves have their own E/R/R structure, but on the scale of $L_2$. Likewise for $L_3$, $L_4$, and further.
 
-**The universal layer works at all levels.**  The laws $L1$–$L5$—the universal layer of rules (“The Universal Layer: The Laws –”)—work in the same way at every level. Only the concrete layer differs: at $L_2$ the rules of set theory are at work, at $L_3$ those of the theory of functions, at $L_4$ those of higher theories. The universal laws are the common structure; the concrete rules are what characterizes precisely the given level.
+**The universal layer works at all levels.**  The laws $L1$–$L5$—the universal layer of rules (“The Universal Layer: The Laws $L1$–$L5$”)—work in the same way at every level. Only the concrete layer differs: at $L_2$ the rules of set theory are at work, at $L_3$ those of the theory of functions, at $L_4$ those of higher theories. The universal laws are the common structure; the concrete rules are what characterizes precisely the given level.
 
-**The lowest level as a boundary.**  By the theorem `L5_no_infinite_descent` ((see the corresponding chapter) of Chapter 3), there is no infinite descent: the hierarchy has a *lower bound*—the base level $L_1$. What is at $L_1$? In each particular hierarchy, its own elements: the natural numbers in the arithmetical hierarchy, elementary particles in the physical one, the symbols of the alphabet in the formal-linguistic one. But in all cases $L_1$ is the level of elements *not further decomposable* in the given hierarchy: the limit below which the given hierarchy does not go.
+**The lowest level as a boundary.**  By the theorem `L5_no_infinite_descent` ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Theorems of L5|§ 3.6.3 “The Theorems of L5”]] of Chapter 3), there is no infinite descent: the hierarchy has a *lower bound*—the base level $L_1$. What is at $L_1$? In each particular hierarchy, its own elements: the natural numbers in the arithmetical hierarchy, elementary particles in the physical one, the symbols of the alphabet in the formal-linguistic one. But in all cases $L_1$ is the level of elements *not further decomposable* in the given hierarchy: the limit below which the given hierarchy does not go.
 
 **Consequence: the limiting act of distinction.**  At the very lowest level of the hierarchy the simplest act of distinction is at work: the record `Distinction`, analyzed in Chapter 2. The elements of $L_1$ are *determinate* objects (distinct from what is not themselves), and this determinacy is provided by the work of $L1$–$L5$ in its simplest form. The hierarchy of levels begins with the act of distinction and unfolds upward through the repeated application of E/R/R at each next level.
 
@@ -534,9 +529,9 @@ Let us consider several examples in which the hierarchy of levels shows itself e
 
 ## The Meta-System: The Absolute
 
-In “Hierarchy as the Unfolding of E/R/R” it was noted that the hierarchy of levels of systems has no internal upper bound but has a *limiting* structure: the meta-system, formed by the universal laws and by the very fact of existence. This meta-system is the Absolute, analyzed in the metaphysics of Volume I. The present section shows that the Absolute has an E/R/R structure—and thereby closes the ontological chain between the metaphysical arrangement and the formal work of the present volume.
+In “Hierarchy as the Unfolding of E/R/R” it was noted that the hierarchy of levels of systems has no internal upper bound but has a *limiting* structure: the meta-system, formed by the universal laws and by the very fact of existence. This meta-system is the Absolute, analyzed in [[Metaphysics|“Metaphysics”]]. The present section shows that the Absolute has an E/R/R structure—and thereby closes the ontological chain between the metaphysical arrangement and the formal work of the present volume.
 
-Before unfolding this analysis, its status must be stated precisely. Nothing said below about the Absolute *is* a theorem of the current Rocq formalization. The Coq files of the repository contain no formal object `Absolute`, no Logic and Source as elements of some meta-system, and no theorem of the form “$E/R/R \to \text{Absolute}$.” The formalization analyzed in the preceding sections gives E/R/R as the structure of *systems*; the present section is a *metaphysical application* of this structure—the application of E/R/R to the Absolute, which connects the present volume with the metaphysics of Volume I. This step is substantive, not machine-checked. Therefore, when it was said above that each link of the derivation chain is derived from the preceding ones, this does *not* apply to the link “E/R/R $\to$ Absolute”: it belongs to the metaphysical interpretation, not to the current formal corpus. The reader must keep this distinction in mind throughout the section.
+Before unfolding this analysis, its status must be stated precisely. Nothing said below about the Absolute *is* a theorem of the current Rocq formalization. The Coq files of the repository contain no formal object `Absolute`, no Logic and Source as elements of some meta-system, and no theorem of the form “$E/R/R \to \text{Absolute}$.” The formalization analyzed in the preceding sections gives E/R/R as the structure of *systems*; the present section is a *metaphysical application* of this structure—the application of E/R/R to the Absolute, which connects the present volume with “Metaphysics.” This step is substantive, not machine-checked. Therefore, when it was said above that each link of the derivation chain is derived from the preceding ones, this does *not* apply to the link “E/R/R $\to$ Absolute”: it belongs to the metaphysical interpretation, not to the current formal corpus. The reader must keep this distinction in mind throughout the section.
 
 ### What “Meta-System” Means
 
@@ -581,7 +576,7 @@ selection.**  In ordinary systems elements are *selected* for roles defined in a
 
 This is a structural exception, in agreement with the primordial status of the Absolute (“Primordial Status”). In an ordinary system the generative order (Rules $\to$ Roles $\to$ Elements) unfolds sequentially: the rules are defined, then the roles under them, and the elements are selected for the roles. In the meta-system all three aspects are given *at once*: there is no “moment before selection,” since there is nothing that would be “before” the meta-system. Logic, the Source, their roles, and the rules establishing the distribution of roles are a single meta-arrangement, given as the condition of existence as such.
 
-**Consequence: the laws of logic work at the level of the Rules of the Absolute.**  It follows from the E/R/R analysis of the Absolute that the laws $L1$–$L5$ stand *at the level of the Rules* of the meta-arrangement, not *within* the Absolute as part of its content. This agrees with the position already fixed ((see the corresponding chapter)): the laws are ontologically primary—they work at the meta-level as the conditions of the very possibility of any existence.
+**Consequence: the laws of logic work at the level of the Rules of the Absolute.**  It follows from the E/R/R analysis of the Absolute that the laws $L1$–$L5$ stand *at the level of the Rules* of the meta-arrangement, not *within* the Absolute as part of its content. This agrees with the position already fixed ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Laws of Logic and Their Derivation as Theorems|§ 3.1.2 “The Laws of Logic and Their Derivation as Theorems”]]): the laws are ontologically primary—they work at the meta-level as the conditions of the very possibility of any existence.
 
 ### Primordial Status
 
@@ -591,7 +586,7 @@ This is a structural exception, in agreement with the primordial status of the A
 
 **Consequence: the question “where does the Absolute come from?” is impossible.**  To ask where the Absolute came from, or what was “before” the Absolute, is to commit a category mistake. The question “from where?” presupposes the existence of that relative to which it is posed; but the Absolute is the very *condition* of such existence. There is no “before the Absolute,” because there is nothing relative to which this “before” could be determined.
 
-**A remark on the act of Light.**  The metaphysics of Volume I fixes a *first event*: the act of Light, in which Logic for the first time actualizes the witnessing property of the Source. This event belongs to the unfolding of particular content within the Absolute, not to the coming-into-being of the meta-system itself. The act of Light is not “the moment of the appearance of the Absolute”; it is the *first application* of the rules of the Absolute within it. In the present volume the act of Light is not relevant: it belongs to the substantive metaphysics of Volume I; here we are interested only in the *structure* of the meta-system.
+**A remark on the metaphysics of the act.**  In [[Metaphysics|“Metaphysics”]], the act of distinction is the meeting of form and content: Logic (form) applies form to the potential of the Source (content). This belongs to the unfolding of particular content within the Absolute, not to the coming-into-being of the meta-system itself. The act of distinction is not “the moment of the appearance of the Absolute”; it is the *application* of the rules of the Absolute within it. It is not considered here: it belongs to substantive metaphysics; here we are interested only in the *structure* of the meta-system.
 
 ### Closing the Ontological Chain
 
@@ -605,7 +600,7 @@ $$
 
 Each link of the chain is a structural condition derived from the preceding ones. The concluding link is the Absolute as the meta-system realizing the E/R/R structure at the meta-level.
 
-**The connection between Volume I and the present volume.**  In Volume I the Absolute is analyzed from the standpoint of metaphysics: as the original meta-arrangement that makes any existence possible. In the present volume the Absolute appears as the *limiting* structure of E/R/R: a meta-system to which the same categories Elements, Roles, Rules apply as to ordinary systems, but with its primordial status taken into account—the selection of elements for roles, which works in ordinary systems, does not operate in the meta-system: Logic and the Source are given at once with their roles. These are not two different Absolutes: this is one structure, analyzed from two sides—the metaphysical and the formal.
+**The connection between “Metaphysics” and the present volume.**  In “Metaphysics” the Absolute is analyzed from the standpoint of metaphysics: as the original meta-arrangement that makes any existence possible. In the present volume the Absolute appears as the *limiting* structure of E/R/R: a meta-system to which the same categories Elements, Roles, Rules apply as to ordinary systems, but with its primordial status taken into account—the selection of elements for roles, which works in ordinary systems, does not operate in the meta-system: Logic and the Source are given at once with their roles. These are not two different Absolutes: this is one structure, analyzed from two sides—the metaphysical and the formal.
 
 **Consequence: the formal apparatus of E/R/R is universal.**  From the work of E/R/R at the meta-level (in the Absolute) and at each particular level ($L_1, L_2, L_3, …$) it follows that the E/R/R structure is a *universal* ontological structure, not a limited instrument applicable only to a certain class of systems. It works wherever determinate existence is at work—from the simplest act of distinction to the meta-system of existence as such. In the meta-system, moreover, the generative order is realized in a *limiting* form: as the simultaneous givenness of all three aspects rather than as a sequence of unfolding.
 
@@ -617,7 +612,7 @@ With the analysis of the Absolute we obtain a full picture of the ontological st
 
 In the preceding sections the E/R/R structure was analyzed as the ontology of any system—from the simplest act of distinction through the hierarchy of levels to the meta-system of the Absolute. A natural question of verification arises: is the E/R/R structure *itself* well-formed as a system? In other words, if we apply an E/R/R analysis to E/R/R as a system, shall we obtain a consistent result, or will structural contradictions arise?
 
-This question is a test of the *tenability* of the structure. There is a parallel with the work of Chapter 3: in (see the corresponding chapter) it was shown that $L4$ is *self-grounded* in the formal system of Rocq—the Law of Sufficient Reason grounds itself. An analogous check is required for E/R/R: if the structure is internally contradictory under self-application, it is unfit to be the universal ontology of systems.
+This question is a test of the *tenability* of the structure. There is a parallel with the work of Chapter 3: in [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Law of Sufficient Reason (L4)|§ 3.5 “The Law of Sufficient Reason (L4)”]] it was shown that $L4$ is *self-grounded* in the formal system of Rocq—the Law of Sufficient Reason grounds itself. An analogous check is required for E/R/R: if the structure is internally contradictory under self-application, it is unfit to be the universal ontology of systems.
 
 ### Setting the Problem
 
@@ -625,8 +620,8 @@ This question is a test of the *tenability* of the structure. There is a paralle
 
 **The difference in principle from the Absolute.**  In “The Meta-System: The Absolute” the Absolute was analyzed as a *meta-system*, with a peculiarity: its elements are given as primordial rather than selected for roles. E/R/R is not the Absolute. It is an *ontological structure*, traceable in any system (the Absolute included), but not itself a meta-system. Under self-application E/R/R works *in the ordinary mode*—with the selection of elements for roles, as in any system at a level of the hierarchy.
 
-**Remark: the self-application is formalized.**  { This self-application is now fixed by machine as well. In the file `PrinciplesToERR.v` the E/R/R triad is written as an object `ERRSystem` (`err_meta_system`), and the theorem `err_self_well_formed` proves that it passes that very criterion of well-formedness from `ERRWellFormedness.v`[^16]: E/R/R satisfies its own criterion. What matters is precisely how: the theorem `self_application_not_self_membership` separates two senses of “E/R/R is applied to itself.” This is *self-application* (stratified self-description, one level down), *not* self-membership ($x \in x$, under which $\mathrm{level}(S) <
-\mathrm{level}(S)$), which $P1$ rules out; and therefore it is $P1$-*compatible*, not an exception to it. The self-consistency of E/R/R is proved by a separate Rocq theorem, without axioms; the substantive analysis below unfolds what this theorem fixes.}
+**Remark: the self-application is formalized.**  This self-application is now fixed by machine as well. In the file `PrinciplesToERR.v` the E/R/R triad is written as an object `ERRSystem` (`err_meta_system`), and the theorem `err_self_well_formed` proves that it passes that very criterion of well-formedness from `ERRWellFormedness.v`[^16]: E/R/R satisfies its own criterion. What matters is precisely how: the theorem `self_application_not_self_membership` separates two senses of “E/R/R is applied to itself.” This is *self-application* (stratified self-description, one level down), *not* self-membership ($x \in x$, under which $\mathrm{level}(S) <
+\mathrm{level}(S)$), which $P1$ rules out; and therefore it is $P1$-*compatible*, not an exception to it. The self-consistency of E/R/R is proved by a separate Rocq theorem, without axioms; the substantive analysis below unfolds what this theorem fixes.
 
 ### E/R/R Applied to E/R/R: The Analysis
 
@@ -671,9 +666,9 @@ By $L4$, each assignment of a role is grounded: the category Elements plays the 
 
 ### The Parallel with the Self-Grounding of $L4$
 
-**Structural content.**  The self-consistency of E/R/R is a structural phenomenon parallel to the self-grounding of $L4$ fixed in Chapter 3 ((see the corresponding chapter)). In both cases the formal apparatus of ToS *can be applied to itself*, and in both cases the result is consistency, not contradiction.
+**Structural content.**  The self-consistency of E/R/R is a structural phenomenon parallel to the self-grounding of $L4$ fixed in Chapter 3 ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#Formalization: Self-Grounding|§ 3.5.2 “Formalization: Self-Grounding”]]). In both cases the formal apparatus of ToS *can be applied to itself*, and in both cases the result is consistency, not contradiction.
 
-**The parallel.**  \;\;
+**The parallel.**
 *$L4$ applied to itself.* The Law of Sufficient Reason asserts that every existence has a ground. Applying $L4$ to $L4$ itself: the ground of $L4$ is the structural incompatibility of contradiction (the field `exclusive` in the record `Distinction`). The law grounds itself without appeal to anything external.
 
 *E/R/R applied to itself.* The E/R/R structure asserts that every system can be analyzed into three aspects. Applying E/R/R to E/R/R itself: the structure can be analyzed into three categories (Elements, Roles, Rules) without self-reference and without confusion of categories. The structure grounds its applicability to itself.
@@ -691,10 +686,7 @@ The E/R/R analysis of `Distinction` gives two things: it shows how the methodolo
 
 ### Setup
 
-{
-
-**What we analyze.**  The record `Distinction` with four fields `positive`, `negative`, `exclusive`, `exhaustive`, which formalizes the act of distinction. The structural analysis of the four fields was carried out in (see the corresponding chapter) of Chapter 2; the formal derivation of the laws from this record, in Chapter 3. Here we arrange the content of the act of distinction into the three E/R/R categories and check that the result is well-formed.
-}
+**What we analyze.**  The record `Distinction` with four fields `positive`, `negative`, `exclusive`, `exhaustive`, which formalizes the act of distinction. The structural analysis of the four fields was carried out in [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#Minimality of the Record: Can One of the Four Fields Be Removed?|§ 2.6 “Minimality of the Record: Can One of the Four Fields Be Removed?”]] of Chapter 2; the formal derivation of the laws from this record, in Chapter 3. Here we arrange the content of the act of distinction into the three E/R/R categories and check that the result is well-formed.
 
 **The level of the system.**  In the substantive interpretation of the hierarchy of levels it is convenient to understand `Distinction` as a system of the ground level: the record contains no other systems as elements; it fixes the act of distinction directly. As in the case of `distinction_of` (“Application to distinction_of”), this is an interpretation in terms of the hierarchy, not a literal typing of `Distinction` in `Level`: formally, `Distinction` is a `Record`, not an object of `System L`.
 
@@ -709,8 +701,8 @@ The E/R/R analysis of `Distinction` gives two things: it shows how the methodolo
 
 *The concrete layer*—two structural fields of the record itself, which formalize the rules by which the act of distinction works:
 
-- The field `exclusive` ($\neg(`positive` \wedge `negative`)$): the rule fixing that the positive and the negative sides are incompatible.
-- The field `exhaustive` ($`positive` \vee `negative`$): the rule fixing that there is no third between the sides.
+- The field `exclusive` ($\neg(\texttt{positive} \wedge \texttt{negative})$): the rule fixing that the positive and the negative sides are incompatible.
+- The field `exhaustive` ($\texttt{positive} \vee \texttt{negative}$): the rule fixing that there is no third between the sides.
 
 These two fields are *concrete* rules, specific to the act of distinction. Together with the universal layer they set that `Distinction` is precisely an act of distinction and not some other two-component structure.
 
@@ -721,7 +713,7 @@ These two fields are *concrete* rules, specific to the act of distinction. Toget
 
 By $L4$, both roles are necessary on structural grounds: without the positive side there is nothing to distinguish; without the negative, nothing to distinguish it against. Fewer than two roles: no distinction (“Minimality: Two Elements, Two Roles, Two Rules”); exactly two roles: the structural minimum realized in `Distinction`.
 
-**Elements: the positive and the negative sides.**  At the level of Elements, the two sides of the distinction are at work in the act of distinction. For a particular instance $D : `Distinction`$ these are the values `positive` $D$ and `negative` $D$—exactly as `err_elements` is arranged in `ERRFromDistinction.v`. When the record is applied through the universal construction `distinction_of` $(A)$ ((see the corresponding chapter) of Chapter 2), these values are the proposition $A$ and its negation $\neg A$:
+**Elements: the positive and the negative sides.**  At the level of Elements, the two sides of the distinction are at work in the act of distinction. For a particular instance $D : \texttt{Distinction}$ these are the values `positive` $D$ and `negative` $D$—exactly as `err_elements` is arranged in `ERRFromDistinction.v`. When the record is applied through the universal construction `distinction_of` $(A)$ ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#The Construction distinction_of: Building a Distinction from a Proposition|§ 2.5 “The Construction distinction_of: Building a Distinction from a Proposition”]] of Chapter 2), these values are the proposition $A$ and its negation $\neg A$:
 
 - The proposition $A$: the positive side, the element occupying the role of what is singled out.
 - The proposition $\neg A$: the negative side, the element occupying the role of the background.
@@ -730,13 +722,11 @@ By $L1$, each of these elements is identical to itself: $A = A$, $\neg A = \neg 
 
 **Two levels of reading: instance and schema.**  In this analysis two levels must be explicitly distinguished; otherwise the E/R/R labeling of `Distinction` will come into contradiction with the formalization.
 
-{
-*The instance level.* For a particular $D : `Distinction`$ the elements are the *values* `positive` $D$ and `negative` $D$. This is exactly how the formalization is arranged: the file `ERRFromDistinction.v` defines the list of elements as
+*The instance level.* For a particular $D : \texttt{Distinction}$ the elements are the *values* `positive` $D$ and `negative` $D$. This is exactly how the formalization is arranged: the file `ERRFromDistinction.v` defines the list of elements as
 
 `err_elements D := [ positive D; negative D ]`,
 
 that is, the positive and the negative sides of the instance are the *Elements* of the E/R/R analysis. At the instance level the arrangement is as follows: the Elements are `positive` $D$ and `negative` $D$; the Roles, “the singled-out” and “the background”; the Rules, `exclusive` and `exhaustive`.
-}
 
 *The level of the record schema.* At the level of the record schema `Distinction` itself, as a type, the field names `positive` and `negative` can be read differently—as *role slots*: “the positive side” and “the negative side,” two positions that a particular instance fills. This reading is substantively useful: it shows that the schema sets the *potential* of the act of distinction. But it must be understood precisely as a meta-level reading of the record schema, *not* as a literal E/R/R labeling coinciding with `ERRFromDistinction.v`. In the formalization the Elements are the values `positive` $D$ and `negative` $D$ of the instance, not the contents “inside” the role slots of the schema.
 
@@ -751,7 +741,7 @@ In other words, the arrangement “Elements $=$ the values of the fields” refe
 | `exclusive` | Rule: incompatibility of the sides | Rule |
 | `exhaustive` | Rule: exhaustiveness of the sides | Rule |
 
-The left column is the literal E/R/R labeling of the instance, coinciding with the code of the file `ERRFromDistinction.v`: `positive` $D$ and `negative` $D$ are Elements. The right column is the meta-level reading of the schema, in which `positive` and `negative` are seen as role slots. The roles of the E/R/R analysis (“the singled-out” and “the background”) are, at the instance level, the positions that these two elements occupy; at the schema level they are the slots themselves.
+The column “Level of the instance” is the literal E/R/R labeling of the instance, coinciding with the code of the file `ERRFromDistinction.v`: `positive` $D$ and `negative` $D$ are Elements. The column “Schema level” is the meta-level reading of the schema, in which `positive` and `negative` are seen as role slots. The roles of the E/R/R analysis (“the singled-out” and “the background”) are, at the instance level, the positions that these two elements occupy; at the schema level they are the slots themselves.
 
 ### Well-Formedness Check
 
@@ -763,7 +753,7 @@ The left column is the literal E/R/R labeling of the instance, coinciding with t
 *Absence of self-reference.* The field `exclusive` is a rule about the relation of the roles `positive` and `negative`, not about itself. The field `exhaustive` likewise. By $P1$ such self-reference across levels is structurally impossible. The elements $A$ and $\neg A$ play their roles without referring to themselves as rules or roles.
 
 **Consequence: `Distinction` is well-formed.**
-{ The simplest formal structure of the present volume satisfies the criterion of E/R/R analysis—and now not only substantively. In the file `PrinciplesToERR.v`, `Distinction` is written as an object `ERRSystem` (`distinction_meta_system`), and the theorem `distinction_err_well_formed` confirms by machine that it passes the criterion `is_well_formed`; and `every_distinction_err_well_formed` extends this to every such analysis. The substantive justification of its legitimacy as a formal model of the act of distinction is backed by a separate Rocq theorem.}
+The simplest formal structure of the present volume satisfies the criterion of E/R/R analysis—and now not only substantively. In the file `PrinciplesToERR.v`, `Distinction` is written as an object `ERRSystem` (`distinction_meta_system`), and the theorem `distinction_err_well_formed` confirms by machine that it passes the criterion `is_well_formed`; and `every_distinction_err_well_formed` extends this to every such analysis. The substantive justification of its legitimacy as a formal model of the act of distinction is backed by a separate Rocq theorem.
 
 ### What the Analysis Yields
 
@@ -776,24 +766,20 @@ The left column is the literal E/R/R labeling of the instance, coinciding with t
 **Consequence: the methodology works.**  The application of E/R/R to the simplest formal structure gives a consistent result: each field finds its place in the E/R/R categories, particular elements actualize the structure, and the well-formedness check passes. This is the first *working* confirmation of the applicability of the methodology to the particular formal objects of the present volume.
 
 **Consequence: a basis for application to derived constructions.**
-{
-`Distinction` is the basic record on which the universal construction `distinction_of` is built (analyzed in (see the corresponding chapter) of Chapter 2). Since `Distinction` is well-formed, the construction `distinction_of` inherits E/R/R consistency—which we analyze in the next section.
-}
+`Distinction` is the basic record on which the universal construction `distinction_of` is built (analyzed in [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#The Construction distinction_of: Building a Distinction from a Proposition|§ 2.5 “The Construction distinction_of: Building a Distinction from a Proposition”]] of Chapter 2). Since `Distinction` is well-formed, the construction `distinction_of` inherits E/R/R consistency—which we analyze in the next section.
 
 ## Application to `distinction_of`
 
-After the analysis of `Distinction` as the simplest system of the base level, we pass to the second working application of the methodology: to the universal construction `distinction_of`, introduced in (see the corresponding chapter) of Chapter 2.
+After the analysis of `Distinction` as the simplest system of the base level, we pass to the second working application of the methodology: to the universal construction `distinction_of`, introduced in [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/02 Act of Distinction and Its Record#The Construction distinction_of: Building a Distinction from a Proposition|§ 2.5 “The Construction distinction_of: Building a Distinction from a Proposition”]] of Chapter 2.
 
 The E/R/R analysis of `distinction_of` yields something qualitatively new: this construction is a *mechanism for producing* acts of distinction for arbitrary propositions, not a separate act of distinction. It is the first *producer system* in the present work, as opposed to a mere bearer system.
 
 ### Setup
 
-**What we analyze.**  The construction `distinction_of` $(P)$, which for any proposition $P : `Prop`$ builds an instance of the record `Distinction` with the following field values: `positive` $=P$, `negative` $=\neg P$; the field `exclusive` receives a constructive proof of the incompatibility of $P$ and $\neg P$; the field `exhaustive` receives a proof of $P \vee \neg P$ from the axiom `classic` (as discussed in (see the corresponding chapter) of Chapter 3).
+**What we analyze.**  The construction `distinction_of` $(P)$, which for any proposition $P : \texttt{Prop}$ builds an instance of the record `Distinction` with the following field values: `positive` $=P$, `negative` $=\neg P$; the field `exclusive` receives a constructive proof of the incompatibility of $P$ and $\neg P$; the field `exhaustive` receives a proof of $P \vee \neg P$ from the axiom `classic` (as discussed in [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Axiom classic and Its Role|§ 3.4.5 “The Axiom classic and Its Role”]] of Chapter 3).
 
 **The level: a substantive interpretation.**
-{
 In the substantive E/R/R interpretation it is convenient to understand `distinction_of` as a construction of a higher level than `Distinction`: it takes a proposition and builds an instance of `Distinction`, and by the principle of hierarchy a producer construction stands above what it produces. This is a useful explanatory reading. But its status relative to the formalization must be stated at once. In the current formalization `Distinction` is a `Record`, and `distinction_of` is a `Definition` function that builds an instance from a proposition $P$; *neither is set up* as an object of type `System L` with a particular level. When we say below that `distinction_of` “belongs to the level $L_2$” and `Distinction` “is a record of level $L_1$,” this is an interpretation of the constructor function in terms of the hierarchy, *not* a literal typing in the type `Level` present in the code. In substance the interpretation is correct and useful; formally, however, the typing of `distinction_of` and `Distinction` in `Level` has not yet been carried out.
-}
 
 **The order of analysis.**  In accordance with the ontological order, the analysis proceeds in the direction Rules $\to$ Roles $\to$ Elements.
 
@@ -807,7 +793,7 @@ In the substantive E/R/R interpretation it is convenient to understand `distinct
 
 - The rule of applying `mkDistinction`: to build an instance of `Distinction`, the constructor requires four arguments—two propositions and two proofs.
 - The rule of the constructive proof of `exclusive`: for an arbitrary $P$ the proof of $\neg(P \wedge \neg P)$ is built constructively (this is $L2$ for $P$, requiring no axioms).
-- The rule of recourse to the axiom `classic`: to obtain `exhaustive` $= P \vee \neg P$, `classic` is used, since for an arbitrary proposition exhaustiveness is not constructively provable ((see the corresponding chapter) of Chapter 3).
+- The rule of recourse to the axiom `classic`: to obtain `exhaustive` $= P \vee \neg P$, `classic` is used, since for an arbitrary proposition exhaustiveness is not constructively provable ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Axiom classic and Its Role|§ 3.4.5 “The Axiom classic and Its Role”]] of Chapter 3).
 
 **Roles: the input position and the output position.**  A producer construction has two specific positions that do not exist in the simple system `Distinction`:
 
@@ -869,10 +855,7 @@ roles at once.***
 
 ### The Diagnostic Function of E/R/R
 
-{
-
 **Laying open, not solving.**  There is a difference in principle between two approaches to paradoxes: solving and laying open. To solve a paradox is to answer the question it poses: “is the lying sentence true?” or “does Russell’s set contain itself?” To *lay a paradox open* is to show that the question itself is ill-posed and has no meaningful content, since the construction underlying it violates the structure.
-}
 
 Laying open is not evasion. It is *exact diagnosis*: an indication of where exactly the construction goes beyond the bounds of a correct categorial labeling. Once the diagnosis has been made, the paradox receives no answer: it ceases to be a question.
 
@@ -899,12 +882,9 @@ In the present section we analyze in detail the *structural* paradoxes—those t
 
 In other words: *Element `=` Rule*. The object attempts to be at once that which is classified and that which classifies.
 
-**The violation of $P1$.**  In “: Hierarchy” it was shown that $P1$ (Hierarchy, $S \notin S$) is derived from $L1 + L5$. Applied to Russell’s paradox: a set cannot be its own element, since the organizer and the organized stand at different levels. The construction $R \in R$ requires $\text{Level}(R) < \text{Level}(R)$, which violates the irreflexivity of $L5$.
-
-{
+**The violation of $P1$.**  In “$P1$: Hierarchy” it was shown that $P1$ (Hierarchy, $S \notin S$) is derived from $L1 + L5$. Applied to Russell’s paradox: a set cannot be its own element, since the organizer and the organized stand at different levels. The construction $R \in R$ requires $\text{Level}(R) < \text{Level}(R)$, which violates the irreflexivity of $L5$.
 
 **Laid open formally.**  In the repository Russell’s construction is formalized as `russell_system` in `ERRWellFormedness.v` and checked for well-formedness—the result is `false`. This is established by machine by two theorems in two files: the lemma `russell_ill_formed` in `ERRWellFormedness.v` itself (directly about `russell_system`) and the lemma `russell_is_ill_formed` in `ParadoxDiagnosis.v` (through the map `paradox_system`, which assigns to a type of paradox its E/R/R system).[^20]
-}
 
 **The historical solution and its place in the E/R/R picture.**  The classical solution—Russell’s theory of types—distributes sets and elements over different types, making self-membership syntactically inexpressible. The Axiom of Regularity in ZFC formulates the same requirement by ruling out $\in$-cycles. Both solutions are particular cases of the general $P1$: the organizer and the organized are different levels.
 
@@ -929,10 +909,7 @@ This is a special case: *an Element applies a Rule to itself*. The self-referent
 
 **The construction.**  A word is called *heterological* if it does not describe itself (for example, “long” is a short word and does not describe itself). Is the word “heterological” heterological? If yes, then by definition it does *not* describe itself, that is, it is not heterological; if no, then it describes itself, and hence it is heterological.
 
-{
-
 **E/R/R diagnosis.**  The word “heterological” occupies two positions:
-}
 
 - As a Rule: it is a property (a rule of the applicability of a predicate) working on words.
 - As an Element: in the test for self-applicability it is itself considered as a word to which the rule is applied.
@@ -955,10 +932,7 @@ Here *Rule `=` Element*. The rule attempts to be its own operand.
 
 *E/R/R diagnosis*: the totality of all ordinals $\Omega$ occupies two positions—as a Totality (the set itself) and as an Element (entering into this totality). Structurally the same error: *Totality `=` Element of itself*.
 
-{
-
 **Laid open formally.**  Both constructions are structurally equivalent to Russell’s construction: the self-membership of a totality. In the repository they are represented through `russell_system` (Cantor) and `grelling_system` (Burali-Forti) as concretizations of the general pattern of self-membership.[^22]
-}
 
 **The historical solution.**  In ZFC the renunciation of the universal set and the passage to proper classes (NBG, MK) formalize exactly the exclusion that $P1$ expresses: totalities cannot be their own elements.
 
@@ -983,10 +957,7 @@ where `ParadoxType` enumerates the five paradoxes and `paradox_system` assigns t
 | Cantor | System `=` Element of itself | No univ. set |
 | Burali-Forti | Totality `=` Element of itself | Proper classes |
 
-{
-
 **The contrapositive.**  If a system is well-formed, it cannot coincide with any of the paradoxical constructions. This is fixed by the theorem `well_formed_paradox_free`: well-formedness *excludes* paradoxicality.
-}
 
 **The connection with the principles $P1$–$P4$.**  The principles analyzed in “The Four Principles” work as structural blocks against paradoxes:
 
@@ -1035,12 +1006,12 @@ With the analysis of paradoxes as the diagnostic work of E/R/R we complete the s
 [^12]: “Nontrivial” in the sense of not degenerating into the simplest act of distinction. The simplest act of distinction is the limiting case of the hierarchy, in which the levels do not unfold further; see “Hierarchy as the Unfolding of E/R/R.”
 [^13]: A detailed discussion of `Level` as a structure in its own right is in Chapter 6. Here its role in the formalization of the hierarchy is enough for us.
 [^14]: Formally: the inductive definition of the natural numbers through one and the operation of adding one is the simplest E/R/R structure, with two elements at each step—“what is already built” and “the next.”
-[^15]: This structure agrees with the metaphysical derivation of Volume I, where the Structure/Filling duality arises as $L4$ for $A = \exists$: the very fact of existence requires a meta-arrangement in which both roles are present.
+[^15]: This structure agrees with the derivation in “Metaphysics,” where the Structure/Filling duality arises as $L4$ for $A = \exists$: the very fact of existence requires a meta-arrangement in which both roles are present.
 [^16]: A detailed discussion of the criterion is in “Paradoxes as a Confusion of E/R/R Categories.”
 [^17]: The exact formulations of `no_self_reference` and `rules_above_elements` are analyzed in “Paradoxes as a Confusion of E/R/R Categories.”
 [^18]: The formal apparatus is in the files `ERRWellFormedness.v` (the criterion of well-formedness) and `ParadoxDiagnosis.v` (the unified analysis of five paradoxes). The main theorem `all_paradoxes_ill_formed` establishes that all the classical paradoxes are structurally ill-formed.
 [^19]: The full classification of $46$ classical paradoxes into three classes (structural, defective, non-paradoxes) and a detailed method of domain analysis are in the author’s separate work on the diagnosis of paradoxes through the architecture of reasoning. In the present section we confine ourselves to structural paradoxes, since it is precisely they that are analyzed directly through E/R/R diagnosis.
-[^20]: In `PrinciplesFromLaws.v` (“: Hierarchy”) there is also a separate theorem `P1_blocks_russell`, fixing that $P1$ blocks Russell’s construction.
+[^20]: In `PrinciplesFromLaws.v` (“$P1$: Hierarchy”) there is also a separate theorem `P1_blocks_russell`, fixing that $P1$ blocks Russell’s construction.
 [^21]: Formally: $L \Leftrightarrow \neg L$.
 [^22]: The theorems `cantor_is_ill_formed` and `buraliforti_is_ill_formed` in the file `ParadoxDiagnosis.v` establish the ill-formed status of both constructions—through the map `paradox_system`, in which Cantor is assigned `russell_system` and Burali-Forti `grelling_system`.
 [^23]: The full synthesis is in the theorem `paradox_diagnosis_synthesis`, which unites: (1) the ill-formed status of all the paradoxes; (2) the contrapositive `well_formed_paradox_free`; (3) the exact classification of violations for each paradox.

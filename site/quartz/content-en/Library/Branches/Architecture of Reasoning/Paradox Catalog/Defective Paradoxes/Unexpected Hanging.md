@@ -2,7 +2,7 @@
 title: "Unexpected Hanging"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Неожиданная казнь.md"
-sourceBlob: df7b571275d29ce7d647599ef743782eaf9fdc4f
+sourceBlob: d4676588e9d32035febd0e4c85cf1c62dbd2cf11
 translated: 2026-10-20
 status: draft
 description: "“An announced surprise” is a performative contradiction"
@@ -62,7 +62,7 @@ The prisoner’s right move would have taken a minute: “Your Honor, your state
 
 The Moorean phenomenon (“it is raining, but I do not believe it”—performative kin), [[Newcombs Paradox|Newcomb]] (a neighbor by type: a hidden contradiction of the conditions), [[Horned Man|the Horned Man]] (a defect sewn into the posing of the question), self-refuting prophecies.
 
-**Machine check.** In the registry of 46 the knot is recorded as `D7_UnexpectedHanging`: the category “defective,” the path of resolution is the rejection of the premise (`defective_46_requires_rejection`, the category count `defective_count_25`, the general guarantee `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by clarifying the conditions. Map: [[Formalization]].
+**Machine check.** In the registry of 46 the knot is recorded as `D7_UnexpectedHanging`: the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, the category count `defective_count_25`, the general guarantee `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by clarifying the conditions. Map: [[Formalization]].
 
 ---
 

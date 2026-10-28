@@ -2,7 +2,7 @@
 title: "Teleportation Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс телепортации.md"
-sourceBlob: 680f900baf9d8dc95d500956d460d860f7fbb9f5
+sourceBlob: de7cb65ae9e5ac86c7c5d81d960690372f5cc145
 translated: 2026-10-20
 status: draft
 description: "No criterion of personal identity is specified"
@@ -54,7 +54,7 @@ The explication of the criterion takes the knot apart piece by piece. The materi
 
 [[Ship of Theseus]] (the canonical form—a thing instead of a person), [[Grandfathers Axe|Grandfather’s Axe]] (an everyday miniature), the division of the brain and Parfit’s cases (branching without technology), [[Masked Man]] (the criterion for recognizing a person—the epistemic side).
 
-**Machine check.** The criterial mechanics is in the analysis of Theseus: `verdict_depends_on_criterion`, `process_identity` (identity as a process—src/foundation/KnowledgeIdentityRoles.v). In the registry of 46 it is `D6_Teleportation`: the field `ConceptualAmbiguity`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** The criterial mechanics is in the analysis of Theseus: `verdict_depends_on_criterion`, `process_identity` (identity as a process—src/foundation/KnowledgeIdentityRoles.v). In the registry of 46 it is `D6_Teleportation`: the field `ConceptualAmbiguity`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

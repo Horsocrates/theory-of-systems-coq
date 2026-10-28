@@ -2,7 +2,7 @@
 title: "Chapter 3. Measurable Functions and the Lebesgue Integral"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/06 Меры и интегрирование/03 Измеримые функции и интеграл Лебега.md"
-sourceBlob: c900721cae2aa9360097868a301e2549244b8ca6
+sourceBlob: ceacc639eea984ddfc88e1ebf716b7ebd01cc5cc
 translated: 2026-10-20
 status: draft
 ---
@@ -60,7 +60,7 @@ This is the same reformulation of completeness that ran through Part V: complete
 
 ## Preimage Measurability—a Classical Comparison
 
-Let us return to the textbook definition. Measurability through the preimage—$f^{-1}(U)$ is measurable for every open $U$—is powerful and familiar, but in our order it is *not a foundation but an alternative route*. To speak of the preimages of all open sets one needs a completed $\sigma$-algebra, which ToS does not build (§ (see the corresponding chapter) of Chapter 6.2). Therefore preimage measurability is introduced as a classical comparison, while the spine follows integrability.
+Let us return to the textbook definition. Measurability through the preimage—$f^{-1}(U)$ is measurable for every open $U$—is powerful and familiar, but in our order it is *not a foundation but an alternative route*. To speak of the preimages of all open sets one needs a completed $\sigma$-algebra, which ToS does not build ([[Library/Branches/Mathematics/Volume/06 Measure and Integration/02 Lebesgue Measure on the Process Continuum#What Outer Measure Would Be—and Why It Is Not Here|§ 2.4 “What Outer Measure Would Be—and Why It Is Not Here”]] of Chapter 6.2). Therefore preimage measurability is introduced as a classical comparison, while the spine follows integrability.
 
 The connection between the two notions has content: for “good” functions they coincide, and preimage measurability is a convenient criterion where it applies. But what is *defining* in ToS is integrability, approximability by step functions, precisely because it is constructive and does not require a completed collection of preimages.[^6]
 
@@ -70,7 +70,7 @@ The last brick is the relation “almost everywhere.” Two integrable functions
 
 **“Almost everywhere” is a mode of identification, not a property of points.** A function in L¹ is not a separate pointwise object but a *class* of functions indistinguishable in the integral norm; distinctions on a set of measure zero are suppressed as inessential.
 
-This is a direct echo of a recurring motif of the volume. A rational number was a *class* of fractions (Chapter 3.2, the relation of $ℚ$-equality); a point of the continuum, a *class* of convergent processes (Chapter 4.3); now an integrable function is a *class* of functions equal almost everywhere. Each time a class is a *mode* in which the system declares inessential those distinctions that do not affect its rule (equality of fractions, equivalence of processes, zero norm of a difference). This is motif M3: ignoring distinctions that are not significant for the system. As in Chapter 4.3, what is formally given are the *representatives* (the type of L¹ processes) and the equivalence *relation* ($\|f-g\|_1\to 0$), but a separate quotient type of L¹ classes is not built: the class remains a mode of reading, not a built object.
+This is a direct echo of a position of the volume: the set as a mode. A rational number was a *class* of fractions (Chapter 3.2, the relation of $ℚ$-equality); a point of the continuum, a *class* of convergent processes (Chapter 4.3); now an integrable function is a *class* of functions equal almost everywhere. Each time a class is a *mode* in which the system declares inessential those distinctions that do not affect its rule (equality of fractions, equivalence of processes, zero norm of a difference). This is the mode of consideration: ignoring distinctions that are not significant for the system. As in Chapter 4.3, what is formally given are the *representatives* (the type of L¹ processes) and the equivalence *relation* ($\|f-g\|_1\to 0$), but a separate quotient type of L¹ classes is not built: the class remains a mode of reading, not a built object.
 
 ## E/R/R Analysis: The Integral as a Rule, the Function as a Role
 
@@ -80,7 +80,7 @@ The framework was set at the beginning of the chapter (§ “The E/R/R Framework
 
 **Rules ($\leftrightarrow$ L5).** At the foundation is the integral of a step function (the exact sum $\sum v_i w_i$) and its properties (additivity, homogeneity, monotonicity). Above it are the rule of L¹ completion (an integrable function is a Cauchy sequence of step functions in $\|\cdot\|_1$), the rule of identification almost everywhere ($\|f-g\|_1\to 0$), and the agreement of the integral-process with the Riemann one (on bounded functions, by definition). The universal layer is L1–L5 and P4.
 
-**Roles ($\leftrightarrow$ L4).** “Integrable function” is the role of a process of step approximations (an L¹ class), not a preimage object. “The integral of a function” is the role-limit of the process of step sums. “Almost everywhere” is a role-mode that suppresses distinctions of zero norm (M3). “Measurability” is the role of distinguishability, extended from sets to functions.
+**Roles ($\leftrightarrow$ L4).** “Integrable function” is the role of a process of step approximations (an L¹ class), not a preimage object. “The integral of a function” is the role-limit of the process of step sums. “Almost everywhere” is a role-mode that suppresses distinctions of zero norm. “Measurability” is the role of distinguishability, extended from sets to functions.
 
 **Elements ($\leftrightarrow$ L1${}+{}$P4).** The bearers are finite at every stage: step functions, their exact integrals $\sum v_i w_i$, the terms of the approximating sequence. The completed limit function and the completed L¹ as a ready pleroma do not belong to the elements; only finite approximations are actual.
 
@@ -92,8 +92,7 @@ The framework was set at the beginning of the chapter (§ “The E/R/R Framework
 
 ### What the Analysis Yields
 
-{
-The analysis fixes two things. First: *an integrable function is a Role*—a process of step approximations, read up to equality almost everywhere—not a preimage object in a completed $\sigma$-algebra. To take it for a pointwise object with measurable preimages is to substitute a ready element for a role-process, the same confusion of categories as in the other chapters. Second: *“almost everywhere” is the mode M3*, the third embodiment of the class-as-role after the rational number (Chapter 3.2) and the point (Chapter 4.3); the system suppresses distinctions that do not affect its rule ($\|f-g\|_1=0$), just as it suppressed the distinctions of fractions ($ℚ$-equality) and of processes (equivalence).}
+The analysis fixes two things. First: *an integrable function is a Role*—a process of step approximations, read up to equality almost everywhere—not a preimage object in a completed $\sigma$-algebra. To take it for a pointwise object with measurable preimages is to substitute a ready element for a role-process, the same confusion of categories as in the other chapters. Second: *“almost everywhere” is a mode*, the third embodiment of the class-as-role after the rational number (Chapter 3.2) and the point (Chapter 4.3); the system suppresses distinctions that do not affect its rule ($\|f-g\|_1=0$), just as it suppressed the distinctions of fractions ($ℚ$-equality) and of processes (equivalence).
 
 The proved part—the step integral and its properties, the Lebesgue integral as a process, the agreement with Riemann, the L¹ integral as a limit and its classes—gives a firm foundation for the next step. The next chapter raises the question of the *limit under the integral sign*: when the integral of the limit equals the limit of the integrals—the theorems of monotone and dominated convergence, where the domain-explicit dominating function (Chapter 6.1) carries the whole constructive load.
 

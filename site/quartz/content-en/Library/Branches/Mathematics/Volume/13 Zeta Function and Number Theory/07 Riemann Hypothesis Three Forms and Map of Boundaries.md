@@ -2,7 +2,7 @@
 title: "Chapter 7. The Riemann Hypothesis: Three Forms and the Map of Boundaries"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/07 Гипотеза Римана три формы и карта границ.md"
-sourceBlob: 5d692851aa806b5b1f44bf0fcca805559e761983
+sourceBlob: ca40bb2efd7394854dcea27252206fe49b5363bc
 translated: 2026-10-20
 status: draft
 ---
@@ -11,33 +11,33 @@ status: draft
 
 Part XIII has traveled the path of analytic number theory from the end to the beginning. Chapter 13.1 gave the *primes* as finite, computable, constructive material: the uniqueness of factorization, the infinitude of primes, arithmetic functions. Chapters 13.2–13.3 built *zeta as a process* and the Euler product—the bridge “analysis ${}\leftrightarrow{}$ primes.” Chapter 13.4 gave the *functional equation* and the symmetry $s\leftrightarrow 1-s$; Chapter 13.5, the *zeros* in the critical strip; Chapter 13.6, the *explicit formula*, which linked the zeros and the primes.
 
-What remains is the summit—**the Riemann Hypothesis**: all nontrivial zeros of zeta lie on the critical line $\Re s = 1/2$. This chapter does not solve RH (no one has solved it). It does what, in the spirit of ToS, is more honest and more useful: it *formalizes the formulation itself*—three equivalent forms of the hypothesis with machine-checked equivalence; it reads RH as a statement about a *fixed point* and connects it with the recurring fixed-point primitive of the whole volume; it formalizes the *obstacle*—why the method of the “squeeze” in principle does not reach the line; and, finally, it draws the **map of boundaries** of the whole of Part XIII, separating the proved core from the axiom tier, the continuum price, and the openness of RH proper.
+What remains is the summit—**the Riemann Hypothesis**: all nontrivial zeros of zeta lie on the critical line $\Re s = 1/2$. This chapter does not solve RH (no one has solved it). It does what, in the spirit of ToS, is more honest and more useful: it *formalizes the formulation itself*—three equivalent forms of the hypothesis with machine-checked equivalence; it reads RH as a statement about a *fixed point* and connects it with the recurring fixed-point primitive of the whole volume; it formalizes the *obstacle*—why the method of the “squeeze” in principle does not reach the line; and, finally, it draws the **map of boundaries** of the whole of Part XIII, separating the proved core from the classical reading, the continuum price, and the openness of RH proper.
 
 ## The Three Forms of the Hypothesis and Their Equivalence
 
-In our foundation a zero of zeta is not a point of a completed plane but a *process* (a Cauchy process $\rho:ℕ\toℂ$ over $ℚ$, in the spirit of “$ℝ$ ${}={}$ process” of Part III). Over this representation the Riemann Hypothesis is written in three ways.
+In our foundation a zero of zeta is not a point of a completed plane but a *process* (a Cauchy process $\rho:ℕ\toℂ$ over $ℚ$, in the spirit of “$ℝ={}$ process” of Part III). Over this representation the Riemann Hypothesis is written in three ways.
 
 - **The zero form.** Every nontrivial zero lies on the critical line: 
 $$
-`RH_zeros`:\quad \forall\rho,\ \text{nontrivial}(\rho)\Rightarrow \text{on\_line}(\rho).
+\texttt{RH\_zeros}:\quad \forall\rho,\ \text{nontrivial}(\rho)\Rightarrow \text{on\_line}(\rho).
 $$
 
 - **The process form.** The real part of every nontrivial zero converges to $1/2$: 
 $$
-`RH_process`:\quad \forall\rho,\ \forall\varepsilon>0,\ \exists N,\ \forall n\ge N:\ |\Re\rho_n - \tfrac12| < \varepsilon.
+\texttt{RH\_process}:\quad \forall\rho,\ \forall\varepsilon>0,\ \exists N,\ \forall n\ge N:\ |\Re\rho_n - \tfrac12| < \varepsilon.
 $$
 
 - **The fixed-point form.** The real part converges to its own reflection $1-\Re\rho$: 
 $$
-`RH_fixed`:\quad \forall\rho,\ \forall\varepsilon>0,\ \exists N,\ \forall n\ge N:\ |\Re\rho_n - (1-\Re\rho_n)| < \varepsilon.
+\texttt{RH\_fixed}:\quad \forall\rho,\ \forall\varepsilon>0,\ \exists N,\ \forall n\ge N:\ |\Re\rho_n - (1-\Re\rho_n)| < \varepsilon.
 $$
 
 These three forms are *machine-equivalent*. The zero form and the process form coincide by definition; the passage to the fixed-point form is a simple rescaling: $\Re - (1-\Re) = 2(\Re - \tfrac12)$, so that $| \cdot |<\varepsilon$ in one form is equivalent to $| \cdot |<\varepsilon$ in the other up to a factor of $2$.[^1]
 
 $$
-\boxed{\ `RH_all_equivalent`:\quad
-  `RH_zeros`\ \Longleftrightarrow\ `RH_process`
-  \ \wedge\ (`RH_process`\Longleftrightarrow`RH_fixed`).\ }
+\boxed{\ \texttt{RH\_all\_equivalent}:\quad
+  \texttt{RH\_zeros}\ \Longleftrightarrow\ \texttt{RH\_process}
+  \ \wedge\ (\texttt{RH\_process}\Longleftrightarrow\texttt{RH\_fixed}).\ }
 $$
 
 Let us stress: what is machine-proved is the *equivalence of the formulations*, not the hypothesis itself. But this too has content—three different languages (the geometry of zeros, the convergence of a process, the fixed point of a symmetry) turn out to be one statement, and this is *proved without a single axiom*.
@@ -70,21 +70,21 @@ The `src/zeta/` corpus formalizes not RH itself but the *scaffolding* around it�
 
 ## A Bridge to Physics: The Spectral Hypothesis
 
-The most promising approach to RH is the *spectral* one, and it leads straight into Volume III. The Hilbert–Pólya conjecture: the nontrivial zeros are the eigenvalues of some *self-adjoint* operator; self-adjointness implies that the spectrum is real, and hence that the zeros lie on the critical line. Montgomery (1973) discovered that the pair correlation of the zeros coincides with the correlation of the eigenvalues of random Hermitian matrices (the GUE ensemble); Odlyzko’s numerical experiments confirmed this with striking precision for zeros of enormous index. Berry and Keating linked the zeros with the quantization of classical dynamics.
+The most promising approach to RH is the *spectral* one, and it leads straight into physics. The Hilbert–Pólya conjecture: the nontrivial zeros are the eigenvalues of some *self-adjoint* operator; self-adjointness implies that the spectrum is real, and hence that the zeros lie on the critical line. Montgomery (1973) discovered that the pair correlation of the zeros coincides with the correlation of the eigenvalues of random Hermitian matrices (the GUE ensemble); Odlyzko’s numerical experiments confirmed this with striking precision for zeros of enormous index. Berry and Keating linked the zeros with the quantization of classical dynamics.
 
-These are classical and hypothetical connections; in this volume they are *not formalized* and are given as motivation. But the direction coincides with ours: self-adjointness gives a *real* spectrum, which after the right renormalization should correspond to the zeros lying on the critical line—that is, the language of the fixed point and of self-adjointness is a bridge from arithmetic to physics. The spectral side is the subject of Volume III, “Physics”; here we only note that the form `RH_fixed` (zero ${}={}$ the fixed point of the reflection) and spectral reality are two dialects of one thought.
+These are classical and hypothetical connections; in this volume they are *not formalized* and are given as motivation. But the direction coincides with ours: self-adjointness gives a *real* spectrum, which after the right renormalization should correspond to the zeros lying on the critical line—that is, the language of the fixed point and of self-adjointness is a bridge from arithmetic to physics. The spectral side is the subject of physics; here we only note that the form `RH_fixed` (zero ${}={}$ the fixed point of the reflection) and spectral reality are two dialects of one thought.
 
 ## The Map of Boundaries of Part XIII
 
 Let us gather the status of the whole part by *tiers of strength*—this is the final honest summary for which §13.6.6 and every chapter have prepared.
 
 - **Proved, 0 axioms** (at the level of separate rational, algebraic, and constructive lemmas). *Elementary number theory* (the layer `src/numbertheory/`, 9 files, 138 `Qed`, built and checked locally—to be synchronized with the main branch upon publication): the uniqueness of factorization, the infinitude of primes ($N!+1$), the functions $\varphi/\tau/\sigma/\mu$, the commutativity of Dirichlet convolution, Fermat’s little theorem, Euler’s theorem, the Chinese remainder theorem, the multiplicativity of $\varphi$. *The formulation of RH:* the equivalence of the three forms (`RH_all_equivalent`; the file `RH_Statement.v`, header “AXIOMS: none”—pure ℚ-algebra). *Rational cores of the analysis:* finite Euler products are nonzero, the trig inequality $2(1+x)^2\ge0$, the prime counters and the Chebyshev sum, the rationality of the Li coefficients, the log series, the crude estimate of the zero count, the exponentiated von Mangoldt function.
-- **With `classic` (L3){}—inherited through the Cauchy/zeta layer:** zeta as a Cauchy process; the Euler extension; the zeros of partial sums; the truncated explicit formula; the structure of the zeros; the geometry of the fixed point ($1/2$ as the fixed point of the reflection, `re_fixed_point_half`); the metric analysis of the reflection—an isometry, not a contraction (`reflect_isometry`, `reflect_not_contraction_euclidean`; `ContractionZeros.v`, header “classic (inherited)”); the squeeze and the limit of the method—the wall against the breaker (`squeeze`, `wall_vs_breaker`; the syntheses `rh_phase1_complete`, `rh_phase2_complete`, headers “1 axiom (classic)”); conditional RH (`conditional_rh`).
-- **An accepted axiom** (the only domain axiom in the whole zeta branch): the functional equation—`functional_equation_structure` (`FunctionalEquation.v`): “if $\rho$ is a nontrivial zero, then its reflection $1-\bar\rho$ is a nontrivial zero too.” This is the symmetry of the set of zeros—the substantive core of the functional equation, accepted as one analytic fact.
+- **With `classic` (L3)—inherited through the Cauchy/zeta layer:** zeta as a Cauchy process; the Euler extension; the zeros of partial sums; the truncated explicit formula; the structure of the zeros; the geometry of the fixed point ($1/2$ as the fixed point of the reflection, `re_fixed_point_half`); the metric analysis of the reflection—an isometry, not a contraction (`reflect_isometry`, `reflect_not_contraction_euclidean`; `ContractionZeros.v`, header “classic (inherited)”); the squeeze and the limit of the method—the wall against the breaker (`squeeze`, `wall_vs_breaker`; the syntheses `rh_phase1_complete`, `rh_phase2_complete`, headers “1 axiom (classic)”); conditional RH (`conditional_rh`).
+- **A lemma** (an axiom until June 2026): `functional_equation_structure` (`FunctionalEquation.v`): “if $\rho$ is a nontrivial zero, then its reflection $1-\rho$ is a nontrivial zero too,” where “nontrivial zero” is a formal predicate (a Cauchy process in the critical strip; it contains no condition that zeta vanishes). The analytic functional equation is a classical reading.
 - **The continuum price (role-limit; not formalized as completed):** the full complex zeta and analytic continuation; the zeros of the completed zeta as objects; the existence of the process-limit; the actual $N(T)$ and the Riemann–von Mangoldt formula; the full explicit formula; the PNT; the spectral side (Hilbert–Pólya).
 - **Open:** **the Riemann Hypothesis itself**—formalized exactly as `rh_requires_gap_to_zero` (the gap ${}\to0$); the wall (`the_wall`${}+{}$`wall_vs_breaker`) proves that the current method does not close it.
 
-This ladder is the main result of Part XIII. We have not solved RH; we have built a rigorous framework around it and *precisely outlined* where the proved ends, where the axiom begins, where the continuum price lies, and where the genuinely open is. The honesty of a boundary matters more than its extent.
+This ladder is the main result of Part XIII. We have not solved RH; we have built a rigorous framework around it and *precisely outlined* where the proved ends, where the classical reading begins, where the continuum price lies, and where the genuinely open is. The honesty of a boundary matters more than its extent.
 
 *A remark on the precision of the tier.* Separate lemmas within `classic`-tier files (for example, `reflect_isometry`, `re_fixed_point_half`, `wall_vs_breaker`) are algebraically rational and do not use `classic` in the term itself; we assign them to the `classic` tier *conservatively*—by the status of the carrier file, without singling them out by a separate `Print Assumptions`. This is a deliberate *understatement* of strength, not an overstatement.
 
@@ -94,9 +94,7 @@ This ladder is the main result of Part XIII. We have not solved RH; we have buil
 
 **Roles (L4).**  RH itself is a *role-statement* (an object of type Prop). The three forms (zeros / process / fixed point) are *role-equivalent* representations of one constraint (`RH_all_equivalent`). “A zero” is a role; “the critical line” is a role-target (the fixed set of the reflection but, as proved in §13.7.3, *not* an attractor of its dynamics); “the reflection” is a role-symmetry; “the gap” is a role-measure of the distance to the target.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete computable data: the zeros of the partial sum $\zeta_N$, the nonnegative $\lambda_n^{(K)}$, the finite estimates of the squeeze at a given $|t|$, the passing of each conditional check—`conditional_rh`, `p4_each_check_passes`—*under the premise* that a finite list of zeros already lies on the line (this is the conditional tier, not a check of the actual zeros of $\zeta$). *Not* elements in the sense of a finite computable check: the completed set of the zeros of zeta, the process-limit, the truth-value of RH as a completed statement about all analytic zeros (the formula `RH_zeros` : Prop exists as an object of the language, but there is no proof of it).}
+**Elements (L1${}+{}$P4).**  Concrete computable data: the zeros of the partial sum $\zeta_N$, the nonnegative $\lambda_n^{(K)}$, the finite estimates of the squeeze at a given $|t|$, the passing of each conditional check—`conditional_rh`, `p4_each_check_passes`—*under the premise* that a finite list of zeros already lies on the line (this is the conditional tier, not a check of the actual zeros of $\zeta$). *Not* elements in the sense of a finite computable check: the completed set of the zeros of zeta, the process-limit, the truth-value of RH as a completed statement about all analytic zeros (the formula `RH_zeros` : Prop exists as an object of the language, but there is no proof of it).
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -110,7 +108,7 @@ This ladder is the main result of Part XIII. We have not solved RH; we have buil
 
 Part XIII has gone from the *primes* (finite, constructive, 0-axiom material) through *zeta as a process* to *the Riemann Hypothesis as an open fixed point*. We have machine-built the elementary foundation of number theory; read zeta not as a completed object but as a process; formalized the formulation of RH in three equivalent forms and proved their equivalence without axioms; shown that the critical line is the fixed point of the reflection, and *proved* why the recurring fixed-point device does not draw the zeros in here; formalized the obstacle (the wall) and the precise form of not-knowing; and drawn the map of boundaries of the whole part.
 
-The main result is honest: **we have not solved the Riemann Hypothesis, and we say so directly**—but we have formalized its framework, its equivalent forms, and the provable limit of the current method. The spectral side (Hilbert–Pólya, GUE) leads into *Volume III, “Physics,”* where the language of self-adjointness and the fixed point receives a physical body. With this, “Mathematics” as a process closes its conversation about numbers and passes to the next topic of the volume—carrying the same discipline: to build the proved core, to name the axiom and the continuum price honestly, and not to pass off the open as solved.
+The main result is honest: **we have not solved the Riemann Hypothesis, and we say so directly**—but we have formalized its framework, its equivalent forms, and the provable limit of the current method. The spectral side (Hilbert–Pólya, GUE) leads into *physics*, where the language of self-adjointness and the fixed point receives a physical body. With this, “Mathematics” as a process closes its conversation about numbers and passes to the next topic of the volume—carrying the same discipline: to build the proved core, to name the classical reading and the continuum price honestly, and not to pass off the open as solved.
 
 ---
 

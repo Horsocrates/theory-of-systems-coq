@@ -2,7 +2,7 @@
 title: "Chapter 6. The Axiomatic Minimum and the Status Mechanism"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/06 Аксиоматический минимум и механизм статуса.md"
-sourceBlob: e2e759e6ce7756b4f9eace57c32241a14ca69440
+sourceBlob: 0dee416b8144d198076967da0d4818d0fd9b0075
 translated: 2026-10-20
 status: draft
 ---
@@ -123,14 +123,14 @@ meet the concrete type system of CIC. (Technically, $L3$ is registered in
 more than one place in the current repository—see § 6.2; this is a
 matter of synchronization, not an extension of the axiomatics.)*
 
-### A Terminological Clarification: $L4${L4} and `L4_level`
+### A Terminological Clarification: $L4$ and `L4_level`
 
 Before passing to the analysis of each of the two `Axiom` declarations
 separately, it is necessary to remove one terminological difficulty that
-arises in the repository for technical reasons and that the book will
+arises in the repository for technical reasons and that the volume will
 systematically keep apart.
 
-In the book, $L4$ is the *Law of Sufficient Reason*, the fourth of the
+In the volume, $L4$ is the *Law of Sufficient Reason*, the fourth of the
 laws of logic, analyzed in Chapter 3 (§ 3.5). In substance: every
 statement requires a ground that secures its status; in the formal part,
 this is the law of the self-grounding of an instance of `Distinction`
@@ -144,12 +144,12 @@ This is the *fourth level* of the type hierarchy
 third step of succession above the base level $L_1$. This object belongs
 to the structure of the $P1$ hierarchy, not to a law of logic.
 
-To avoid confusion, the book keeps the following distinction:
+To avoid confusion, the volume keeps the following distinction:
 
-- $L4$ (a capital bold numeral preceded by `L`)—a law of logic, the fourth of the five laws.
+- $L4$ (the notation for a law)—a law of logic, the fourth of the five laws.
 - `L4_level` (entirely in monospace)—a technical object of Coq, the fourth level of the type hierarchy.
 
-At the first appearance of a technical name, the book always states
+At the first appearance of a technical name, the volume always states
 explicitly that the code is meant, not the law. The axiom analyzed in
 § 6.3 below, `L4_witness`, belongs to the law $L4$, not to the level
 `L4_level`; its name contains “L4” precisely because of its connection
@@ -210,13 +210,10 @@ file `ToS_Axioms.v`:
 Require Export Coq.Logic.Classical_Prop.
 ```
 
-{
-
 the standard module `Classical_Prop` of the Rocq library, in which
 `classic` is already declared as an `Axiom`, is imported and re-exported.
 After this line the statement `classic` is available in all files that
 import `ToS_Axioms`.
-}
 
 That `classic` is taken from the standard library is *not* an accidental
 circumstance: the author of the ToS repository does not invent a separate
@@ -424,7 +421,7 @@ attestation of the law $L4$ in CIC.
 
 ### The Declaration
 
-The second of the two `Axiom` declarations of ToS, found in the file
+The second of the two `Axiom` declarations of ToS, declared in the file
 `ToS_Axioms.v`, has the following signature:
 
 ```coq
@@ -450,7 +447,6 @@ picture of the difference between two related constructions of CIC—
 `exists` and `sig`.
 
 **Propositional existence (`exists`).** 
-{
 The notation `exists x, P x` has type Prop. It is a *proposition*
 asserting that *some* $x$ satisfying $P$ exists. Precision is needed
 here. A proof of `exists x, P x` in CIC is usually built through the
@@ -462,7 +458,6 @@ general, $x_0$ *cannot* be extracted as a computational value of type
 witness *is there* in its proof but is in general *inaccessible* as a
 computational value. It is this inaccessibility, not the absence of a
 witness, that constitutes the barrier.
-}
 
 **Informative existence (`sig`).** 
 The notation $\{x : A \mid P x\}$—short for `sig P`—has type `Type`. It
@@ -496,7 +491,7 @@ formulations is as follows.
 **Existence = determinacy.** 
 In the position of ToS, existence is never “being as a fog.” To exist is
 to be *set apart* from what is not, that is, to be *determinate*. This is
-the content of Volume I and the content of the law $L4$ unfolded in
+the content of [[Metaphysics|“Metaphysics”]] and the content of the law $L4$ unfolded in
 Chapter 3. When we assert “there exists an $x$ satisfying $P$,” we assert
 the presence of a *determinate* $x$, distinguishable from everything
 else, not a vague possibility of something of the kind.
@@ -571,7 +566,7 @@ Choice to be derived” at all. `L4_witness` is declared as a principle
 *polymorphic* over `Type`:
 
 $$
-`L4_witness` : \forall (A : `Type`) (P : A \to Prop),\;
+\texttt{L4\_witness} : \forall (A : \texttt{Type}) (P : A \to Prop),\;
   (\exists x,\ P x) \;\to\; \{x : A \mid P x\}.
 $$
 
@@ -588,7 +583,7 @@ family of sets—and it is precisely this set-theoretic AC that the
 principle $P4$ does not admit, as a completed infinity (§ 6.5). But as a
 polymorphic type-theoretic principle, `L4_witness` has choice-like
 strength: given a family of proofs of existence, it allows one to define
-a function that chooses a witness at each index. In the book these two
+a function that chooses a witness at each index. In the volume these two
 things must be kept apart: the set-theoretic AC, incompatible with $P4$,
 which `L4_witness` is *not*, and the *type-theoretic* strength of
 `L4_witness` as a principle of description. What separates ToS from
@@ -847,7 +842,7 @@ The principle $P1$ (Chapter 4) gives the hierarchy of levels: $L1$,
 `LS L1`, `LS (LS L1)`, and so on. Objects are distinguished by levels; an
 object of level $L$ cannot contain objects of the same level. This
 stratification is built into the type system of CIC through the universe
-hierarchy ($Prop$, $`Type`_0$, $`Type`_1$, $…$); in substance it
+hierarchy ($Prop$, $\texttt{Type}_0$, $\texttt{Type}_1$, $…$); in substance it
 expresses a structural consequence of the act of distinction—the
 impossibility of self-inclusion, analyzed in Chapter 4.
 
@@ -856,8 +851,8 @@ From the arrangement of distinction unfolded in Chapter 4, the separation
 of roles and rules of formation is derived: every system has a level of
 elements (Elements), a level of roles (Roles), and a level of rules
 (Rules). This separation works in the formal part as well, as a
-structural principle of organization: { roles correspond to types, rules
-to dependencies between types, elements to values.} A detailed analysis
+structural principle of organization: roles correspond to types, rules
+to dependencies between types, elements to values. A detailed analysis
 of the $E/R/R$ mechanism for the case of choice is given in § 6.6 below.
 
 **Inductive definitions.** 
@@ -1382,7 +1377,7 @@ synchronization in the repository itself. The file
 (and the equal theorem `P4_eliminates_AC`):
 
 $$
-\forall  (*family* : \mathbb{N} \to `list nat`),\;
+\forall  (*family* : \mathbb{N} \to \texttt{list nat}),\;
   (\forall i,\ *family*\ i \neq []) \;\to\;
   \exists f,\ \forall i,\ f i \in *family*\ i,
 $$
@@ -1390,13 +1385,13 @@ $$
 that is, choice over an *$\mathbb{N}$-indexed* family of nonempty
 lists—the index $i$ ranges over *all* of $\mathbb{N}$, with no finite
 bound. The file `P4ProhibitsAC.v`, by contrast, defines `AC_on_nat` with
-*the same* signature ($\mathbb{N} \to `list nat`$) and proves that it
+*the same* signature ($\mathbb{N} \to \texttt{list nat}$) and proves that it
 entails completed infinity and is therefore incompatible with $P4$. An
 apparent tension results: one theorem presents $\mathbb{N}$-indexed
 choice as a constructive “$L5$,” the other as something $P4$ does not
 admit. Only the *finite* version is constructively
 indisputable—`finite_choice` with an explicit finite index $n < N$—and it
-is indeed present in both files. The correct position for the book is
+is indeed present in both files. The correct position for the volume is
 this: *finite* choice (over a list, over a finite index) is constructive
 and compatible with $P4$; *process* choice over stages is compatible with
 $P4$ only when presented as a stage function, not as a completed graph;
@@ -1404,7 +1399,7 @@ and the $\mathbb{N}$-indexed theorem `AC_is_L5` in its current form is a
 place that should be reconciled in the repository with `P4ProhibitsAC.v`
 (by restricting `AC_is_L5` to a finite index or by explicitly marking it
 as a statement about a stage-wise, not a completed, function). Until such
-synchronization, the book must not present the conflict between $P4$ and
+synchronization, the volume must not present the conflict between $P4$ and
 AC as already fully disentangled formally.
 
 Having fixed the status mechanism through $E/R/R$ as a construction that
@@ -1569,8 +1564,7 @@ This result leads to the last substantive question of the chapter. If
 foundations; if the built-in properties of CIC are an implementation
 environment, not axioms of ToS; then what exactly does the *ontological*
 status of the Laws $L1$–$L5$ consist in, and how does it differ from the
-status of everything technical? The concluding section of the chapter is
-devoted to this distinction—between ontological Laws and technical
+status of everything technical? The next section is devoted to this distinction—between ontological Laws and technical
 axioms.
 
 ## Ontological Laws and Technical Axioms
@@ -1740,9 +1734,9 @@ process ontology of ToS relates to the openness found in mathematics
 itself and beyond it. The concluding section of the chapter is devoted
 to this.
 
-##  Non-Completion: Mathematics and Quantum Superposition{Non-Completion: Mathematics and Quantum Superposition}
+##  Non-Completion: Mathematics and Quantum Superposition
 
-### Non-Completion as the Recurring Motif of the Chapter
+### Non-Completion as the Through-Line of the Chapter
 
 One motif has run through the whole of the present chapter, and in
 conclusion it is worth naming it directly. The principle $P4$ excludes
@@ -1817,7 +1811,7 @@ which ToS begins: determinacy arises *in* the act of distinction, not
 *before* it. What has not been distinguished is not “determinate but
 hidden”; it is *indeterminate*, and determinacy comes with the act.
 
-### The Derivation of Physics: The Subject of the Next Volume
+### The Derivation of Physics: Beyond the Volume
 
 What has been said requires a clarification—an exact and important one.
 The coincidence of the structural motif of mathematics and of the quantum
@@ -1842,17 +1836,16 @@ derivation of quantum theory from the act of distinction: what has been
 checked are individual matrix lemmas, not the philosophical-physical
 derivation of the structure as a whole. The full unfolding of this
 derivation—from the act of distinction to the structure of a physical
-theory—belongs to the *next volume* and must not be presented in the
+theory—belongs to *physics* and must not be presented in the
 present chapter as already fully carried out and machine-checked.
 
-*The next volume is devoted to physics. It uses the mathematical
-instruments built in the present volume and unfolds the derivation of the
-laws of physics from the act of distinction—including the derivation of
-the unistochastic structure of quantum theory. The present section only
+*The derivation of the laws of physics from the act of distinction—including
+the derivation of the unistochastic structure of quantum theory—rests on
+the mathematical instruments built in the present volume. The present section only
 marks this bridge and this program: the process ontology of ToS, unfolded
 in mathematics, continues into physics. Individual mathematical
 components of this derivation have already been formalized; the full
-derivation is the subject of the next volume.*
+derivation is the subject of physics.*
 
 ### The Completion of the Chapter
 
@@ -1871,7 +1864,7 @@ at work in Chapters 1–6 but were not *gathered* and *explicitly declared*
 as ontological positions of the volume.
 
 Chapter 7, the concluding chapter of Part I, is devoted to this. It is
-*ontological*: it brings out into the open the recurring motifs to which
+*ontological*: it brings out into the open the ontological positions to which
 the volume will return throughout all subsequent parts, and declares them
 explicitly. After Chapter 7, Part I—“The First Distinction and the Laws
 of Logic”—will be complete in both its dimensions, formal and
@@ -1904,4 +1897,4 @@ Part: [[01 First Distinction and Laws of Logic|Part I. The First Distinction and
 
 Concepts: [[Order]] · [[Paradox]] · [[Logic]] · [[Formalization]]
 
-Navigation: ← [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/05 Co Definition of A and Not A|Chapter 5. The Co-Definition of A and ¬A]] · [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/07 Ontological Core Recurring Motifs|Chapter 7. The Ontological Core: Recurring Motifs]] →
+Navigation: ← [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/05 Co Definition of A and Not A|Chapter 5. The Co-Definition of A and ¬A]] · [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/07 Ontological Core Recurring Motifs|Chapter 7. The Ontological Core]] →

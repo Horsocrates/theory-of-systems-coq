@@ -2,7 +2,7 @@
 title: "Galileo’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс Галилея.md"
-sourceBlob: 4639105109df63be40ea0a3c1723fc8af33a3d6e
+sourceBlob: e2a135a71f2a9cd0d18f65668e1e64464d1dd388
 translated: 2026-10-20
 status: draft
 description: "“As many” changes its meaning (quantity → bijection)"
@@ -54,7 +54,7 @@ Separating the meanings closes the knot. “As many by count” is not defined o
 
 [[Hilberts Hotel|Hilbert’s Hotel]] (the same correspondence of part and whole in the setting of rooms), [[Cantors Paradox|Cantor]] (where the choice of Hume’s principle leads), [[Horned Man|the Horned Man]] (equivocation—the verbal mechanism in pure form), [[Banach Tarski|Banach–Tarski]] (the next rung of the same ladder: “parts” that have no measure).
 
-**Machine check.** In the registry of 46 it is `D22_Galileo`: the field `ConceptualAmbiguity` (the splitting of “as many”), the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground is the same as for the hotel: infinity as a rule of continuation (`RealProcess := nat -> Q`, src/process/ProcessCore.v); on this reading the correspondence n ↔ n² is an honest operation on processes, and the question “how many” is not posed to them. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D22_Galileo`: the field `ConceptualAmbiguity` (the splitting of “as many”), the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground is the same as for the hotel: infinity as a rule of continuation (`RealProcess := nat -> Q`, src/process/ProcessCore.v); on this reading the correspondence n ↔ n² is an honest operation on processes, and the question “how many” is not posed to them. Map: [[Formalization]].
 
 ---
 

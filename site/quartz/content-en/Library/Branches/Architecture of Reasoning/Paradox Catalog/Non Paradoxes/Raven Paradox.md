@@ -2,7 +2,7 @@
 title: "Raven Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Не-парадоксы/Парадокс воронов.md"
-sourceBlob: 5d6f30639418ce88c4e6c325ba0555c6923bcc1f
+sourceBlob: d9f48cfc85520c5568857b4043b809fcd70fd4c9
 translated: 2026-10-20
 status: draft
 description: "Shows the problem of inductive confirmation"

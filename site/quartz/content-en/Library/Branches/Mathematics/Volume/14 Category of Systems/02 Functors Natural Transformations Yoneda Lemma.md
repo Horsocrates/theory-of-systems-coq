@@ -2,7 +2,7 @@
 title: "Chapter 2. Functors, Natural Transformations, the Yoneda Lemma"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/02 Функторы, естественные преобразования, лемма Йонеды.md"
-sourceBlob: a5f0128cecef79a43390023775eba23dedb9311e
+sourceBlob: aa9339cda4851ed12c9e59b24636afcdecfde824
 translated: 2026-10-20
 status: draft
 ---
@@ -42,7 +42,7 @@ Machine-checked: `Record NatTrans` (`nt_comp`, `nt_natural`); the identity trans
 
 A natural isomorphism is precisely an isomorphism in the functor category $[\mathcal{C},\mathcal{D}]$. Therefore reflexivity, symmetry, and transitivity come *for free* from the general properties of isomorphism (§14.1); each component of a natural isomorphism is an isomorphism (and hence a mono and an epi).[^4]
 
-The substantive theorem of the chapter is `natural_ inverse_ is_ natural`:
+The substantive theorem of the chapter is `natural_inverse_is_natural`:
 
 > **If a natural transformation is pointwise invertible, then the inverse components
 > are *automatically* natural.**
@@ -51,7 +51,7 @@ That is, “the inverse of a natural isomorphism is natural” is proved, not po
 
 ## The Representable Functor and the Yoneda Lemma
 
-**The representable functor.**  Fix an object $x$. The functor $\Hom(x,-):\mathcal{C}\to\SetoidCat$ sends an object $a$ to the *hom-setoid* (the carrier $\Hom_{\mathcal{C}}(x,a)=`cat_mor` x a$, with the setoid equality `cat_mor_eq`), and a morphism $f$ to *postcomposition* $g\mapsto f\circ g$. The functor laws follow from the compatibility of composition, the left unit, and the associativity of $\mathcal{C}$. Here the choice of \SetoidCat{} in 14.1 pays off: it is precisely the setoid equality of hom-sets that makes $\Hom(x,-)$ a *functor*.[^5]
+**The representable functor.**  Fix an object $x$. The functor $\Hom(x,-):\mathcal{C}\to\SetoidCat$ sends an object $a$ to the *hom-setoid* (the carrier $\Hom_{\mathcal{C}}(x,a)=\texttt{cat\_mor} x a$, with the setoid equality `cat_mor_eq`), and a morphism $f$ to *postcomposition* $g\mapsto f\circ g$. The functor laws follow from the compatibility of composition, the left unit, and the associativity of $\mathcal{C}$. Here the choice of $\mathbf{Setoid}$ in 14.1 pays off: it is precisely the setoid equality of hom-sets that makes $\Hom(x,-)$ a *functor*.[^5]
 
 **The Yoneda lemma.**  For any functor $F:\mathcal{C}\to\SetoidCat$ and object $x$, the natural transformations $\Hom(x,-)\Rightarrow F$ are in *bijection* with the elements of $F(x)$:
 
@@ -72,7 +72,7 @@ The bijection is machine-proved in both directions:
 A morphism $h:y\to x$ induces a natural transformation $\Hom(x,-)\Rightarrow\Hom(y,-)$ by precomposition ($g\mapsto g\circ h$). It is machine-proved that this assignment is *full and faithful*:
 
 $$
-`cat_mor` y x\ =\ \Hom(y,x)\ \cong\ \Nat\bigl(\Hom(x,-), \Hom(y,-)\bigr),
+\texttt{cat\_mor} y x\ =\ \Hom(y,x)\ \cong\ \Nat\bigl(\Hom(x,-), \Hom(y,-)\bigr),
 $$
 
 that is, *faithfulness* (distinct morphisms give distinct transformations) and *fullness* (every transformation comes from a morphism) are a direct consequence of the Yoneda lemma with $F:=\Hom(y,-)$. On the left stands precisely $\Hom(y,x)$: this is the *contravariance* of the embedding—the object $x$ goes to $\Hom(x,-)$, and the arrow $h:y\to x$ gives the transformation $\Hom(x,-)\Rightarrow\Hom(y,-)$ (in the code, `yoneda_faithful`, `yoneda_full` over `cat_mor` $y x$).[^6] This is the exact form of the central thesis:
@@ -80,7 +80,7 @@ that is, *faithfulness* (distinct morphisms give distinct transformations) and *
 > **an object is completely determined by its system of morphisms**—the categorical form of P3 (the identity
 > of an object is through its roles, not through an “internal substance”).
 
-**An honest wall (important).**  Fullness and faithfulness are proved *in substance*—as a bijection between a hom-set and the set of natural transformations. But assembling the Yoneda embedding into a *single Functor object* $\mathcal{C}^{\mathrm{op}}\to[\mathcal{C},\SetoidCat]$ *does not go through*: the record `Category` is universe-monomorphic, and $[\mathcal{C},\SetoidCat]$ is strictly higher in universe than $\mathcal{C}$ (the objects of \SetoidCat{} have already raised the level), while the packaging requires the reverse inequality. This is the classical “*the presheaf category is large*”—a P4 boundary of *size*, not a gap in the proof: the content of the embedding (fullness+faithfulness) does not depend on this large object. Therefore we *do not claim* that “the embedding has been built as a functor”; the size wall is carried over to the map of boundaries in 14.7.
+**An honest wall (important).**  Fullness and faithfulness are proved *in substance*—as a bijection between a hom-set and the set of natural transformations. But assembling the Yoneda embedding into a *single Functor object* $\mathcal{C}^{\mathrm{op}}\to[\mathcal{C},\SetoidCat]$ *does not go through*: the record `Category` is universe-monomorphic, and $[\mathcal{C},\SetoidCat]$ is strictly higher in universe than $\mathcal{C}$ (the objects of $\mathbf{Setoid}$ have already raised the level), while the packaging requires the reverse inequality. This is the classical “*the presheaf category is large*”—a P4 boundary of *size*, not a gap in the proof: the content of the embedding (fullness+faithfulness) does not depend on this large object. Therefore we *do not claim* that “the embedding has been built as a functor”; the size wall is carried over to the map of boundaries in 14.7.
 
 ## E/R/R Analysis: Functor, Naturality, Representation
 
@@ -88,14 +88,12 @@ that is, *faithfulness* (distinct morphisms give distinct transformations) and *
 
 **Roles (L4).**  The functor is a role-transfer (of the structure of $\mathcal{C}$ into $\mathcal{D}$); the natural transformation is a role-family (a coherent set of components); $\Hom(x,-)$ is the role “probing from $x$”; $\alpha_x(\mathrm{id}_x)$ is the role-seed; the Yoneda embedding is the role “to represent an object by its morphisms.”
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete data: the components $\eta_a$, the morphisms $g:x\to a$, the elements $u\in F(x)$. *Not* an element *in the sense of a completed cardinality*: “the set of all natural transformations” (in the working layer this is the hom-setoid of the category $[\mathcal{C},\SetoidCat]$ / a rule of reconstruction, not a cardinal totality); and the single large Functor object $[\mathcal{C},\SetoidCat]$ *as an object over* $\mathcal{C}$ (the size wall).}
+**Elements (L1${}+{}$P4).**  Concrete data: the components $\eta_a$, the morphisms $g:x\to a$, the elements $u\in F(x)$. *Not* an element *in the sense of a completed cardinality*: “the set of all natural transformations” (in the working layer this is the hom-setoid of the category $[\mathcal{C},\SetoidCat]$ / a rule of reconstruction, not a cardinal totality); and the single large Functor object $[\mathcal{C},\SetoidCat]$ *as an object over* $\mathcal{C}$ (the size wall).
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
 | preservation of id/composition; naturality square; Yoneda bijection | the constitution of transfer, coherence, and representation | Rule (L5) |
-| functor ${}={}$ transfer; nat.\ trans. ${}={}$ family; $\Hom(x,-)$ ${}={}$ probe; $\alpha_x(\mathrm{id}_x)$ ${}={}$ seed | the status of transfers and families | Role (L4) |
+| functor ${}={}$ transfer; nat. trans. ${}={}$ family; $\Hom(x,-)={}$ probe; $\alpha_x(\mathrm{id}_x)={}$ seed | the status of transfers and families | Role (L4) |
 | $\eta_a$, $g:x\to a$, $u\in F(x)$ | computable bearers | Element (L1${}+{}$P4) |
 
 **What the analysis removes.**  The Yoneda lemma often sounds mystical (“an object knows everything about itself through its arrows”). ToS reads it as a *rule*: naturality forces the reconstruction of a family from one seed, and the embedding makes “object ${}={}$ its roles” an exact bijection. There is no riddle—there is a law (L5) and its seed (L1). And the honest universe wall shows where the categorical language *itself* meets P4: the completed “category of all presheaves” cannot be assembled as an object.
@@ -112,7 +110,7 @@ Next comes Chapter 14.3: the *category of systems* $\mathrm{Sys}(L)$, where the 
 
 [^1]: `src/stdlib/Functor.v` (18 Qed, 0 axioms; in `origin/main`): `Record Functor` (`fobj`, `fmor`, `fmor_compat`, `fmor_id`, `fmor_comp`); `id_functor`, `compose_functor`, `compose_functor_assoc`; the examples `ListFunctor`, `OptionFunctor`, `const_functor`; `fmor_preserves_iso` (a functor preserves isomorphisms).
 [^2]: `src/stdlib/ D1_DerivedFunctor.v` (20 Qed; in `origin/main`): $R^nF$ as levels of a process, a cascade of corrections $1/2^n$.
-[^3]: `src/category/ FunctorCategory.v` (4 Qed, 0 axioms): `nt_eq` (componentwise equality), `FunctorCat` $\mathcal{C} \mathcal{D}$ as a `Category`; the bridge `FunctorCat_ iso_ componentwise` (an isomorphism in $[\mathcal{C},\mathcal{D}]$ = a pointwise isomorphism). *A caveat on reproducibility (as in 14.1):* the layer `src/category/` (13 files, 49 Qed, 0 axioms, `Print Assumptions`${}={}$“Closed under the global context”, commit `90ebd74`) has been built and checked *locally*; synchronization with the main branch is an item of the checklist.
+[^3]: `src/category/ FunctorCategory.v` (4 Qed, 0 axioms): `nt_eq` (componentwise equality), `FunctorCat` $\mathcal{C} \mathcal{D}$ as a `Category`; the bridge `FunctorCat_iso_componentwise` (an isomorphism in $[\mathcal{C},\mathcal{D}]$ = a pointwise isomorphism). *A caveat on reproducibility (as in 14.1):* the layer `src/category/` (13 files, 49 Qed, 0 axioms, `Print Assumptions`${}={}$“Closed under the global context”, commit `90ebd74`) has been built and checked *locally*; synchronization with the main branch is an item of the checklist.
 [^4]: `src/category/NaturalIsomorphism.v` (7 Qed, 0 axioms, the same local layer): `NaturalIso` as `is_iso` in `FunctorCat`; `nat_iso_id`/`nat_iso_sym`/ `nat_iso_trans`; `nat_iso_components` (a pointwise isomorphism); the components are mono/epi.
 [^5]: `src/category/YonedaLemma.v` (3 Qed, 0 axioms, the local layer): `hom_setoid`, `representable` ($\Hom(x,-):\mathcal{C}\to\SetoidCat$); `yoneda_to`, `yoneda_from`; `yoneda_to_from`, `yoneda_from_to`, `yoneda_unique`.
 [^6]: `src/category/YonedaEmbedding.v` (3 Qed, 0 axioms, the local layer): `yoneda_embed_mor` (precomposition), `yoneda_faithful`, `yoneda_full`.

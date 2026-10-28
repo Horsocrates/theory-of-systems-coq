@@ -2,7 +2,7 @@
 title: "Buridan’s Bridge"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Мост Буридана.md"
-sourceBlob: 161d67d67d7871d55c14cedac9d66aaadb3a7be9
+sourceBlob: 20c1aa3590f5e2d400f1eb040c99b02f3c5fe1d5
 translated: 2026-10-20
 status: draft
 description: "The truth-value of the condition depends on its execution"
@@ -44,7 +44,7 @@ The Bridge is the performative loop taken from the side of *obligation*: of the 
 
 ## Why There Is No Paradox
 
-Given Socrates’ answer, Plato’s oath **does not set an action**: the set of deeds that fulfill it is empty—the obligation “what Plato must do” does not exist; the question has no subject. Socrates did not catch Plato—he showed the boundary of his oath: it is defined only for words whose truth-value comes from outside (“say whether it is raining”), and undefined for words about the verdict itself. Buridan decided from within scholasticism (Socrates’ word in such a setting is simply false—but then the oath obliges a throw, which makes it true: words do not open the circle); Sancho decided more honestly—outside the rule, by mercy: where a norm is incoherent, the verdict is taken from another ground. This is the resolution: not to “find what is due,” but to see that nothing due has been assigned here—and to assign it by a legitimate external move.
+Given Socrates’ answer, Plato’s oath **does not set an action**: the set of deeds that fulfill it is empty—the obligation “what Plato must do” does not exist; the question has no subject. Socrates did not catch Plato—he showed the boundary of his oath: it is defined only for words whose truth-value comes from outside (“say whether it is raining”), and undefined for words about the verdict itself. Buridan decided from within scholasticism (Socrates’ word in such a setting is simply false—but then the oath obliges a throw, which makes it true: words do not open the circle); Sancho decided more honestly—outside the rule, by mercy: where a norm is incoherent, the verdict is taken from another ground. This is what laying the paradox open means: not to “find what is due,” but to see that nothing due has been assigned here—and to assign it by a legitimate external move.
 
 ## Lesson
 

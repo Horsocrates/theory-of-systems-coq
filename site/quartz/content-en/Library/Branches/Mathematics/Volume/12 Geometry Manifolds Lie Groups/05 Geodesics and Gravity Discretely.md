@@ -2,7 +2,7 @@
 title: "Chapter 5. Geodesics and Gravity, Discretely"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/12 Геометрия, многообразия, группы Ли/05 Геодезические и гравитация дискретно.md"
-sourceBlob: cf68fd2945659ff4c4e1429c37c4f31ddb77517c
+sourceBlob: a8d01f6cc5c2ce583d0dc1a6456548ad098528db
 translated: 2026-10-20
 status: draft
 ---
@@ -16,9 +16,9 @@ Chapters 12.3–12.4 built the symmetries of geometry—rotation groups and thei
 - “tides” are *geodesic deviation*: the divergence of neighboring paths *is* curvature—the Element side of the identity “gravity ${}={}$ curvature”;
 - the smooth geodesic equation, the continuous Einstein equation, and the curvature tensor over $ℝ$ are *role-limits* (the continuum price of Part X), whose map is given in 12.6.
 
-*A reservation about the boundary of the volume.* The dynamics of gravity is the subject of a separate volume on physics. Here Part XII only *closes the geometric thread*: the geodesic as an extremal and the identity “curvature-defect ${}={}$ gravity,” over $ℚ$ and with reference to the already built Regge layer; the full physics is not duplicated.
+*A reservation about the boundary of the volume.* The dynamics of gravity is the subject of physics. Here Part XII only *closes the geometric thread*: the geodesic as an extremal and the identity “curvature-defect ${}={}$ gravity,” over $ℚ$ and with reference to the already built Regge layer; the full physics is not duplicated.
 
-*A geodesic is a role-extremal (the shortest discrete path); gravity is curvature-defect (Regge); tides are geodesic deviation. The smooth Einstein equation is a role-limit; the dynamics is in the volume on physics.*
+*A geodesic is a role-extremal (the shortest discrete path); gravity is curvature-defect (Regge); tides are geodesic deviation. The smooth Einstein equation is a role-limit; the dynamics is the subject of physics.*
 
 ## The Geodesic as a Role-Extremal
 
@@ -48,9 +48,9 @@ $$
 
 —the discrete analogue of the Einstein–Hilbert action $\int R \sqrt{g}$. A flat lattice has zero defect and zero action; curving gives a nonzero rational defect.[^4] Thus gravity over $ℚ$ is presented *as geometry*: a rational defect on the hinges, whose variation gives the discrete field equation.
 
-Here the geometric thread of Part XII joins physics—and here, too, runs the boundary of the volume. The *dynamics* of gravity (evolution, solutions, observables) is developed by a separate volume on physics; for Part XII only the *geometric identity* matters: curvature-defect *is* gravity, and it is finite and rational at every stage. The continuous Einstein equation for a smooth tensor is a role-limit (12.6).
+Here the geometric thread of Part XII joins physics—and here, too, runs the boundary of the volume. The *dynamics* of gravity (evolution, solutions, observables) is developed by physics; for Part XII only the *geometric identity* matters: curvature-defect *is* gravity, and it is finite and rational at every stage. The continuous Einstein equation for a smooth tensor is a role-limit (12.6).
 
-*Gravity ${}={}$ curvature-defect: the Regge action $\sum\delta\cdot$ area is the discrete Einstein–Hilbert, flat ${}\Rightarrow{}$ zero. The geometric identity is finite and rational; the dynamics is in the volume on physics, and the continuous Einstein equation is a role-limit.*
+*Gravity ${}={}$ curvature-defect: the Regge action $\sum\delta\cdot$ area is the discrete Einstein–Hilbert, flat ${}\Rightarrow{}$ zero. The geometric identity is finite and rational; the dynamics is the subject of physics, and the continuous Einstein equation is a role-limit.*
 
 ## E/R/R Analysis
 
@@ -68,24 +68,24 @@ Let us assemble the structure of the chapter in the generating order.
 
 **Diagnosis.** The root error is the reification of *the geodesic as the solution of a continuum equation* and of *gravity as a continuous tensor field*. ToS returns them to their category: the geodesic is a role-extremal (the rule of the shortest path), gravity is curvature-defect (a rule).
 
-**Honest boundaries.** The smooth geodesic equation, parallel transport and the connection, and the continuous Einstein equation over $ℝ$ are role-limits (the continuum price of Part X). The dynamics of gravity belongs to a separate volume on physics. The full map is in 12.6.
+**Honest boundaries.** The smooth geodesic equation, parallel transport and the connection, and the continuous Einstein equation over $ℝ$ are role-limits (the continuum price of Part X). The dynamics of gravity belongs to physics. The full map is in 12.6.
 
-*The geodesic is a role-extremal (the shortest path ${}+{}$ the orbit), curvature is felt as deviation (tides), gravity ${}={}$ the Regge defect. The Element side is finite and rational; the smooth equations and the dynamics are role-limits and the volume on physics.*
+*The geodesic is a role-extremal (the shortest path ${}+{}$ the orbit), curvature is felt as deviation (tides), gravity ${}={}$ the Regge defect. The Element side is finite and rational; the smooth equations and the dynamics are role-limits and the subject of physics.*
 
 ## Summary and Transition
 
-The chapter has closed the geometric thread of motion. The *geodesic* has become a role-extremal—the shortest discrete path (every path is at least as long as the straight one; refinement does not change the length—the limit of discrete paths) or a rational orbit (ISCO, Kepler $T^2/r^3$). *Curvature* has manifested itself as the *deviation* of neighboring geodesics—the geometric name of the tidal force; “gravity” has turned out to be not a field but a role of the divergence of paths. And the identity has closed: curvature-defect (12.2) *is* gravity—the Regge action $\sum\delta\cdot$ area as the discrete Einstein–Hilbert. The dynamics is developed by a separate volume on physics; what matters here is the geometric core, finite and rational at every stage.
+The chapter has closed the geometric thread of motion. The *geodesic* has become a role-extremal—the shortest discrete path (every path is at least as long as the straight one; refinement does not change the length—the limit of discrete paths) or a rational orbit (ISCO, Kepler $T^2/r^3$). *Curvature* has manifested itself as the *deviation* of neighboring geodesics—the geometric name of the tidal force; “gravity” has turned out to be not a field but a role of the divergence of paths. And the identity has closed: curvature-defect (12.2) *is* gravity—the Regge action $\sum\delta\cdot$ area as the discrete Einstein–Hilbert. The dynamics is developed by physics; what matters here is the geometric core, finite and rational at every stage.
 
 Next comes the last chapter of Part XII. Chapter 12.6 assembles the synthesis and draws the *honest map of boundaries*: what geometry-in-ToS realizes over $ℚ$ (the rational/lattice structure, curvature-defect, symmetry groups, the Lie algebra, geodesics) and where its *boundary* lies—the continuum: the smooth manifold, the Lie group over $ℝ$, the continuous curvature tensor, and the Einstein equation, the same continuum price as the one named in Part X.
 
-*The geodesic is a role-extremal, gravity is curvature-defect, tides are the deviation of paths—all finite and rational over $ℚ$. The smooth equations and the dynamics of gravity are a role-limit and the subject of the volume on physics; their map will be closed by 12.6.*
+*The geodesic is a role-extremal, gravity is curvature-defect, tides are the deviation of paths—all finite and rational over $ℚ$. The smooth equations and the dynamics of gravity are a role-limit and the subject of physics; their map will be closed by 12.6.*
 
 ---
 
 [^1]: `DiscreteGeodesic.v` (0 axioms): `d1_triangle` (the triangle inequality—the rule of the geodesic), `plen_ge` (every path $\geq$ the straight distance), `straight_is_shortest` (the straight path is the shortest), `geodesic_insert` (invariance under refinement). The $\ell^1$ metric is chosen because it is rational; in it geodesics are not unique (any monotone “staircase”)—an honest peculiarity, and the Euclidean geodesic is a continuum role-limit.
 [^2]: `ProcessGeodesic.v`: `effective_potential`, `isco_radius` (the innermost stable orbit—radius $30$ in Schwarzschild units with $M{=}5$), `kepler_T_sq_over_r3` and `kepler_ratio` ($T^2/r^3$ as a rational ratio), `freefall_velocity_sq` (the free-fall velocity at different shells).
 [^3]: `gravity/GeodesicDeviation.v`: `metric_deviation` and `curvature_shortens` (in the model of the file, curvature shortens the model length), `zero_deviation_flat` (on a plane there is no deviation), `equivalence_principle_local` (the local indistinguishability of a fall from inertia), `gravitational_redshift` (the frequency shift from the difference of curvature).
-[^4]: `ProcessRegge.v`: `deficit_angle` (the valence defect; `deficit_flat`${}=0$ at valence $6$, positive at a smaller one), `Record ReggeLattice`, `regge_action` ($\sum\delta\cdot$ area), `flat_lattice_zero_action`, and the capstone `regge_is_discrete_gr` (Regge as the discrete geometric analogue of the Einstein–Hilbert action; the dynamics is in the volume on physics). The discrete variational reading of the field equation is `process/ProcessDiscreteEinstein.v`.
+[^4]: `ProcessRegge.v`: `deficit_angle` (the valence defect; `deficit_flat`${}=0$ at valence $6$, positive at a smaller one), `Record ReggeLattice`, `regge_action` ($\sum\delta\cdot$ area), `flat_lattice_zero_action`, and the capstone `regge_is_discrete_gr` (Regge as the discrete geometric analogue of the Einstein–Hilbert action; the dynamics is the subject of physics). The discrete variational reading of the field equation is `process/ProcessDiscreteEinstein.v`.
 
 ---
 

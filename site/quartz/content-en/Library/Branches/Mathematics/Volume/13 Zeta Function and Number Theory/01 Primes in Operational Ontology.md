@@ -2,7 +2,7 @@
 title: "Chapter 1. Prime Numbers in the Operational Ontology"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/01 Простые числа в операциональной онтологии.md"
-sourceBlob: f113a511a9eba2c337ac758ad21c1c96fa754a55
+sourceBlob: de4d9c1acd3418607511d413585f7e6b1af6ed98
 translated: 2026-10-20
 status: draft
 ---
@@ -15,12 +15,12 @@ Part XII reread geometry: a point turned out to be a *role-position*, curvature 
 
 The through-line of the part is short: *the zeta function is a process of partial sums; the theory of prime numbers is the study of this process; the zeros and the pole of zeta are its structural features; the Riemann Hypothesis is an open statement about the structure of the zeros*. In ToS all of this is carried out *without the Axiom of Choice*, through explicit algorithmic constructions.
 
-Before taking up zeta (Chapter 13.2), we lay the foundation—the prime numbers. And here it is important to state at once that in ToS the primes are not points of a “set of all primes” given in advance but a *role* in the multiplicative arrangement of the natural series. This chapter unfolds them in the four recurring motifs of the part:
+Before taking up zeta (Chapter 13.2), we lay the foundation—the prime numbers. And here it is important to state at once that in ToS the primes are not points of a “set of all primes” given in advance but a *role* in the multiplicative arrangement of the natural series. This chapter unfolds them in four positions:
 
-- [(M1)] *Structural inevitability.* The primes arise not as one possible way of classifying but as structurally inevitable generators—atoms.
-- [(M2)] *Operational divisibility.* A natural number $n$ is considered on several levels: as an object, as a product of primes, as a process of factorization.
-- [(M3)] *Sets as a mode.* “The set of all primes” is a mode of operation; what is real is “prime” as a classification of the naturals by a decidable predicate.
-- [(M4)] *Positive ontology.* Prime divisors are structurally nonnegative; multiplicities are nonnegative; Dirichlet series in the region of convergence work with positive terms.
+- *Structural inevitability.* The primes arise not as one possible way of classifying but as structurally inevitable generators—atoms.
+- *Operational divisibility.* A natural number $n$ is considered on several levels: as an object, as a product of primes, as a process of factorization.
+- *Sets as a mode.* “The set of all primes” is a mode of operation; what is real is “prime” as a classification of the naturals by a decidable predicate.
+- *Positive ontology.* Prime divisors are structurally nonnegative; multiplicities are nonnegative; Dirichlet series in the region of convergence work with positive terms.
 
 **A remark on confirmation.** As throughout the volume, the leading role belongs to the *description of the system*; the Rocq repository serves as *confirmation* that the construction is machine-checkable. The names of files, the formulations, and the numbers of checked statements are moved to the notes. For this part we have additionally checked all the cited numbers against the current state of the repository and give exactly those.[^1]
 
@@ -42,7 +42,7 @@ The key word here is *decidability*. Alongside the predicate a Boolean check `is
 - $1$ is the *unit*: neither prime nor composite (its only divisor is itself), but the *first act of counting* (Part II);
 - $0$ is a special case: it is divisible by everything and carries no multiplicative status.
 
-The position (M3) is already visible here: we do not introduce “the set $\mathbb P$ of all primes” as a completed object-totality. The predicate `is_prime` itself is, of course, perfectly legitimate—what is ruled out is only the *completed infinite collection* as an Element. The prime is a *classification* of the naturals by a predicate; “all primes” is a mode of traversing this classification, not an object lying before us in its entirety.
+The position “sets as a mode” is already visible here: we do not introduce “the set $\mathbb P$ of all primes” as a completed object-totality. The predicate `is_prime` itself is, of course, perfectly legitimate—what is ruled out is only the *completed infinite collection* as an Element. The prime is a *classification* of the naturals by a predicate; “all primes” is a mode of traversing this classification, not an object lying before us in its entirety.
 
 ## Primes as Atoms: The Fundamental Theorem of Arithmetic
 
@@ -52,7 +52,7 @@ What makes the primes *fundamental*? The answer is the fundamental theorem of ar
 
 **Uniqueness through Euclid’s lemma.**  The heart of uniqueness is *Euclid’s lemma*: if a prime $p$ divides a product $a\cdot b$, then $p$ divides $a$ or $b$.[^4] It follows that two factorizations of one number are permutations of each other. Thus the *multiplicity* of each prime in the factorization turns out to be an invariant of the number—its constitutive characteristic.
 
-**Motif M1.**  This is structural inevitability in pure form. The primes are not a “convenient” classification: they are *uniquely* determined by divisibility and are the *generators* of the multiplicative monoid $ℕ$. From any nontrivial view of the natural numbers the primes emerge as fundamental points. The machine-checked uniqueness of factorization is the *well-formedness* of the role “atom”: atoms not only exist but compose every number *unambiguously*.
+This is structural inevitability in pure form. The primes are not a “convenient” classification: they are *uniquely* determined by divisibility and are the *generators* of the multiplicative monoid $ℕ$. From any nontrivial view of the natural numbers the primes emerge as fundamental points. The machine-checked uniqueness of factorization is the *well-formedness* of the role “atom”: atoms not only exist but compose every number *unambiguously*.
 
 A concrete example checked by computation: $12 = 2\cdot 2\cdot 3$, and every prime factorization of the number $12$ is a permutation of the list $[2;2;3]$.[^5]
 
@@ -70,7 +70,7 @@ This is infinity in the sense of P4: *infinity is a property of a process, not o
 
 Since the primes thin out but are never exhausted, it is natural to *count* them. The counting function $\pi(x)$—the number of primes not exceeding $x$—is in ToS a *role-counter*: for each concrete $x$ it is a concrete number, computed in finite time as the length of a sieve.[^7]
 
-| $x$ | $\pi(x)$ | \quad | $x$ | $\pi(x)$ |
+| $x$ | $\pi(x)$ |  | $x$ | $\pi(x)$ |
 |---|---|---|---|---|
 | $10$ | $4$ |  | $100$ | $25$ |
 | $30$ | $10$ |  | $1000$ | $168$ |
@@ -91,7 +91,7 @@ Let us gather what has been said into the standard Elements/Roles/Rules analysis
 
 **Rules (L5).**  The constituting rule is *divisibility*: a prime is defined as indecomposable with respect to multiplication (`is_prime`). At the level of the whole series the rule strengthens to *factorization with uniqueness*—the fundamental theorem of arithmetic. It is the rule (and not a list) that says what “being an atom” means.
 
-**Roles (L4).**  A natural number receives a *multiplicative status*: “prime” is the role of an *atom* (a generator of the monoid); “composite” is the role of a *product of atoms*; “$1$” is the role of the *unit* (the empty product). The number $n$ is, moreover, multilayered (M2): an object of counting, a product of primes, a process of factorization.
+**Roles (L4).**  A natural number receives a *multiplicative status*: “prime” is the role of an *atom* (a generator of the monoid); “composite” is the role of a *product of atoms*; “$1$” is the role of the *unit* (the empty product). The number $n$ is, moreover, multilayered: an object of counting, a product of primes, a process of factorization.
 
 **Elements (L1${}+{}$P4).**  At each stage, finite data over $ℕ$: concrete primes, finite lists of divisors and factorizations, values of the counter $\pi(x)$ up to a finite $x$. *Not* elements: “the set of all primes,” a completed table of primality, an infinite collection of factorizations.
 
@@ -103,13 +103,13 @@ Let us gather what has been said into the standard Elements/Roles/Rules analysis
 
 **Well-formedness check.**  Each component falls into exactly one category. The role “atom” is *well-formed* precisely because the uniqueness of factorization is machine-proved: atoms compose every number unambiguously. The infinitude of the primes is well-formed as a rule (an algorithm of construction), not as an object.
 
-**What the analysis removes (diagnosis).**  The root category mistake is the reification of “the set of all primes” as a completed object and the ascription to it of properties available only to finite data. ToS separates the levels: the prime is a role (an atom); “all primes” is a mode of traversal (M3); infinity is a rule of unbounded construction (P4). This is the same discipline that allowed Part IV not to confuse a process with a completed continuum; here it is applied to the multiplicative structure of $ℕ$.
+**What the analysis removes (diagnosis).**  The root category mistake is the reification of “the set of all primes” as a completed object and the ascription to it of properties available only to finite data. ToS separates the levels: the prime is a role (an atom); “all primes” is a mode of traversal; infinity is a rule of unbounded construction (P4). This is the same discipline that allowed Part IV not to confuse a process with a completed continuum; here it is applied to the multiplicative structure of $ℕ$.
 
-## Primes and Quantum Chaos: A Bridge to Volume III
+## Primes and Quantum Chaos: A Bridge to Physics
 
-One of the most striking connections of modern mathematical physics deserves mention already here, although its unfolding is the business of Volume III. Studying the spacings between the nontrivial zeros of zeta, Hugh Montgomery (1973) noticed a statistical coincidence with the distribution of spacings between the eigenvalues of random Hermitian matrices (the Gaussian Unitary Ensemble, GUE)—a model of the spectra of complex quantum systems. The connection is *not proved*, but it is numerically confirmed for trillions of computed zeros.
+One of the most striking connections of modern mathematical physics deserves mention already here, although its unfolding is the business of physics. Studying the spacings between the nontrivial zeros of zeta, Hugh Montgomery (1973) noticed a statistical coincidence with the distribution of spacings between the eigenvalues of random Hermitian matrices (the Gaussian Unitary Ensemble, GUE)—a model of the spectra of complex quantum systems. The connection is *not proved*, but it is numerically confirmed for trillions of computed zeros.
 
-Hence the Hilbert–Pólya conjecture: the zeros of zeta are the eigenvalues of some self-adjoint operator, a “quantum Hamiltonian of number theory.” No such operator has been found, and the search for it is an active field. In the operational reading this is an *inverse problem*: the distribution of the spectrum (the zeros of zeta) is given, and an operator is required. We record here only the philosophical frame: if the picture is right, the distribution of primes is the classical trace of some quantum system, and the zeros of zeta are its energy levels. We present no formalization of this connection; in the repository it corresponds only to the analogy “zeros $\leftrightarrow$ zeros of partition functions,” drawn separately.[^8] A detailed discussion is in Volume III.
+Hence the Hilbert–Pólya conjecture: the zeros of zeta are the eigenvalues of some self-adjoint operator, a “quantum Hamiltonian of number theory.” No such operator has been found, and the search for it is an active field. In the operational reading this is an *inverse problem*: the distribution of the spectrum (the zeros of zeta) is given, and an operator is required. We record here only the philosophical frame: if the picture is right, the distribution of primes is the classical trace of some quantum system, and the zeros of zeta are its energy levels. We present no formalization of this connection; in the repository it corresponds only to the analogy “zeros $\leftrightarrow$ zeros of partition functions,” drawn separately.[^8] A detailed discussion belongs to physics.
 
 ## What the Chapter Has Prepared
 

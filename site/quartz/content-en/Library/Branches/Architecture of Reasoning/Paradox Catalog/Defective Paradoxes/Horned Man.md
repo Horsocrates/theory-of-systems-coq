@@ -2,7 +2,7 @@
 title: "Horned Man"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Рогатый (софизм).md"
-sourceBlob: 618a53583333c99e5605b4819bf24aa6f10ecdce
+sourceBlob: 85aedd9a64f75081d8215c8739ac6a891dc5f156
 translated: 2026-10-20
 status: draft
 description: "Equivocation: “not lost” presupposes “had”"
@@ -54,7 +54,7 @@ Separate the readings—and the sophism falls apart before one’s eyes. “What
 
 The loaded question (“have you stopped beating your father?”—the direct heir), equivocation and term substitution in the [[Fallacy Catalog|fallacy catalog]] (the verbal family), [[Two Envelopes]] (the same substitution in arithmetical dress: a letter instead of a word), [[Horse Paradox|the Horse Paradox]] (a neighbor by subtype: a defect hidden in a step of the reasoning).
 
-**Machine check.** In the registry of 46 it is `D17_HornedMan`: the field `ConceptualAmbiguity` (the splitting of a term), the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by separating the readings. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D17_HornedMan`: the field `ConceptualAmbiguity` (the splitting of a term), the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by separating the readings. Map: [[Formalization]].
 
 ---
 

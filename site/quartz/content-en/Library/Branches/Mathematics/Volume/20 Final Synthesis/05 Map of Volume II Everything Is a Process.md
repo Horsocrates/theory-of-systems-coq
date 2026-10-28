@@ -1,28 +1,27 @@
 ---
-title: "Chapter 5. The Map of Volume II: Everything Is a Process"
+title: "Chapter 5. The Map of the Volume: Everything Is a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/05 Карта Тома II всё — процесс.md"
-sourceBlob: c4f9387a0279456ca15e95243976f81302559d39
+sourceBlob: c55cc518bb56710a7641f4777b8c399ce68971af
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-The boundary has been drawn (Chapter 1), refined (Chapter 2), compressed into one gate (Chapter 3); the verdict has separated the constructed from the named (Chapter 4). It remains to show the constructed *as a whole*—and here what was the through-line of the whole book, but was never said in one voice, comes into view.
+The boundary has been drawn (Chapter 1), refined (Chapter 2), compressed into one gate (Chapter 3); the verdict has separated the constructed from the named (Chapter 4). It remains to show the constructed *as a whole*—and here what was the through-line of the volume, but was never said in one voice, comes into view.
 
 The whole volume has spoken of *one thing*. Not of many different objects—number, the continuum, the manifold, the zeros of zeta, computation, function, the infinitesimal—but of one *move* applied to each of them.
 
-{
-*The flagship: one move runs through all the parts of the volume—the object is relocated from a ready *thing* onto a *process*. A number is a position-role, not an object; $\sqrt2$ is a process of approximations, not a point; the continuum, the manifold, the zeros of zeta, computation, function, the $\infty$-small—all are processes. The mathematics of the volume is one ontology, refracted by domains.*}
+*The flagship: one move runs through all the parts of the volume—the object is relocated from a ready *thing* onto a *process*. A number is a position-role, not an object; $\sqrt2$ is a process of approximations, not a point; the continuum, the manifold, the zeros of zeta, computation, function, the $\infty$-small—all are processes. The mathematics of the volume is one ontology, refracted by domains.*
 
-And the frame at once: “everything is a process” is the organizing *ontology* of the book, not a new theorem. What is machine-checked is something else—that each object *has* a process witness in its own part; the contribution of this chapter is to see that this is *one* move, not a scattering of coincidences.
+And the frame at once: “everything is a process” is the organizing *ontology* of the volume, not a new theorem. What is machine-checked is something else—that each object *has* a process witness in its own part; the contribution of this chapter is to see that this is *one* move, not a scattering of coincidences.
 
 ## What the Chapter Establishes and What It Does Not
 
 Honesty matters all the more, the broader the thesis sounds. The map below is a *reframing*: the classical facts (the irrationality of $\sqrt2$, the four automorphisms of the Galois group, the uncountability of the interval) remain classical and are proved in their parts; the *process reading* of each is the contribution of ToS. For each item of the map a process anchor or a structural fragment is presented in the corresponding chapters[^1]; what is *not* proved is any single metatheorem running over all domains. The unity of the form is an *observation*, not a derived universal.
 
-And we do **not** claim that ToS has “solved” the continuum, the Riemann hypothesis, or the halting problem. It *relocates* them: the continuum is a process, not a completed set; the Riemann hypothesis is read *structurally* as a fixed point of a reflection (the analytic content is the horizon, see\ Chapter 6); halting is a role-limit, not a defect. Relocation is not a solution but a change of ontological address.
+And we do **not** claim that ToS has “solved” the continuum, the Riemann hypothesis, or the halting problem. It *relocates* them: the continuum is a process, not a completed set; the Riemann hypothesis is read *structurally* as a fixed point of a reflection (the analytic content is the horizon, see Chapter 6); halting is a role-limit, not a defect. Relocation is not a solution but a change of ontological address.
 
 ## One Move: The Object Becomes a Process
 
@@ -30,11 +29,9 @@ Let us name the move directly, once. Classically an object is a *completed thing
 
 Made once—in Part III for number, in Part IV for the principle—this move is not repeated anew afterward but *spreads*. A number becomes a position-role; $\sqrt2$, a process of approximations whose “irrationality” is not a flaw but the correct P4 status: non-termination. From that moment on every subsequent object of the volume enters already as a process—and the task of a part is only to present its process witness.
 
-## The Map of Volume II
+## The Map of the Volume
 
 One and the same replacement—a ready object by a process—has run through the whole volume. Let us gather it into a map[^2].
-
-\setlength{\tabcolsep}{4pt}
 
 | **Part** | **Classically (a ready object)** | **As a process (ToS)** |
 |---|---|---|
@@ -54,7 +51,7 @@ Eleven rows—eleven domains, one replacement. The left column is the completed 
 
 ## One Ontology—Many Faces
 
-The map reads not as a list but as *one* statement. These are not nine reframings that happen to be similar but one ontology refracted by domains: everywhere a *process* in place of a completed thing. Geometry, number theory, algebra, and analysis spoke of one thing in different languages.
+The map reads not as a list but as *one* statement. These are not eleven reframings that happen to be similar but one ontology refracted by domains: everywhere a *process* in place of a completed thing. Geometry, number theory, algebra, and analysis spoke of one thing in different languages.
 
 And this ontology joins the two other unities of the finale into one whole.
 
@@ -64,7 +61,7 @@ And this ontology joins the two other unities of the finale into one whole.
 
 *The volume is three unities reducing to one: one ontology (process), one boundary (finitization $=$ invertibility), one root (the shadow of P1). Three aspects of one thing—mathematics under the principle P4.*
 
-This is the level of synthesis: each of the three unities is backed by machine in instances, but their merging itself is an *observation* that organizes the book, not a proved universal theorem. That is what we will call it.
+This is the level of synthesis: each of the three unities is backed by machine in instances, but their merging itself is an *observation* that organizes the volume, not a proved universal theorem. That is what we will call it.
 
 ## E/R/R Analysis: The Map as a System
 
@@ -84,7 +81,7 @@ The positive map has been drawn. One last thing remains—an honest summary: wha
 
 ---
 
-[^1]: The anchors are checked against their own chapters (the references are gathered in § “The Map of Volume II”); not every item is a full classical theorem in the traditional sense. The level is “a new framing of the known”: a classical result plus its process reading.
+[^1]: The anchors are checked against their own chapters (the references are gathered in § “The Map of the Volume”); not every item is a full classical theorem in the traditional sense. The level is “a new framing of the known”: a classical result plus its process reading.
 [^2]: The anchors are checked against the corresponding chapters: $\sqrt2$—`no_rational_sqrt2`; Galois—`galois_group_four_distinct`; the Riemann hypothesis—`RH_critical_strip_symmetric` (a *structural* anchor, not a proof of RH); computation—`cs/HaltingRoleLimit`; the $\infty$-small—`nonstandard_synthesis`; $ℝ$ as a Cauchy process, the manifold, function—by the files of their parts. The Element fragments presented are, as a rule, 0-axiom (Chapter 1).
 
 ---

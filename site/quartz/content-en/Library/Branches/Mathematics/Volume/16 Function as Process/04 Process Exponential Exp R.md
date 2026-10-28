@@ -2,7 +2,7 @@
 title: "Chapter 4. The Process Exponential exp_ℝ"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/04 Процессная экспонента exp_ℝ.md"
-sourceBlob: 24754ec257539f70f51551e6b6de59300b9cd77d
+sourceBlob: 016b2367107cc4900913ff616a8cd45fc64ec743
 translated: 2026-10-20
 status: draft
 ---
@@ -10,7 +10,7 @@ status: draft
 ## The Plan of the Chapter and the Change of Tier
 
 The formal heart of Chapter 16.3—the identity $e^{-\ln(1-x)} = 1/(1-x)$—was obtained *on coefficients*: as an equality of formal series. To transfer it into an equality of *number*-processes (at every point $|x|<1$), we need a tool that we do not yet have: an exponential able to take as its argument a *whole process* rather than a rational number—the real exponential $\exp_{ℝ}\colon
-`CauchySeq` \to `CauchySeq`$. This chapter builds it.
+\texttt{CauchySeq} \to \texttt{CauchySeq}$. This chapter builds it.
 
 And here let us honestly note the *change of tier*. Chapters 16.1–16.3 lived on the 0-axiom, purely formal side: everything was finite arithmetic of coefficients. Starting with this chapter we enter the *analytic* layer—the layer of Cauchy reals, where limits are at work. The analytic *estimates* are axiom-free in themselves, but the whole construction of the real exponential rests on the Law of Excluded Middle, L3. This is the first tier of Part XVI where L3 appears, and we mark it directly: the notes here say “no new axioms, only L3,” not “0 axioms.”
 
@@ -47,7 +47,7 @@ $$
 
 say that the exponential behaves as a *homomorphism* from the additive group of the rationals $(ℚ,+,0,-)$ into the *multiplicative group of invertible Cauchy processes* (these are the positive reals $ℝ^{+}$ as a process structure)—addition passes into multiplication, zero into one, negation into inversion. This is the very canonical homomorphism that Part XI (algebra) knows abstractly; here it is built explicitly, over processes—as a set of proved group identities (we do not introduce a separate carrier $ℝ^{+}$ for this).
 
-## The Exponential of a Process: $\exp_{ℝ}${exp_R}
+## The Exponential of a Process: $\exp_{ℝ}$
 
 So far the exponential takes a *rational* number as its argument. But a real number in our system is a *process* $P\colonℕ\toℚ$ (Part IV). To take the exponential of a real, we need $\exp_{ℝ}$, whose argument is a whole process.
 

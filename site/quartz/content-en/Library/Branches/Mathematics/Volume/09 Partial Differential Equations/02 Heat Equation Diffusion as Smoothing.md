@@ -2,7 +2,7 @@
 title: "Chapter 2. The Heat Equation: Diffusion as Smoothing"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/09 Уравнения в частных производных/02 Уравнение теплопроводности диффузия как сглаживание.md"
-sourceBlob: 2bdbfdd0f6486e501570d769c846e5bb08aafcd0
+sourceBlob: acb8ca0df5dd0827fbb334500e324cff160e5574
 translated: 2026-10-20
 status: draft
 ---
@@ -126,8 +126,7 @@ rational values at the nodes $u^n_j\inℚ$, the weights $r,1-2r\inℚ$, a finite
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is that the maximum principle is expressed as the preservation of an *interval-invariant*, not through the construction of the maximum and minimum as separate objects; and dissipation, as the monotonicity of a finite sum. Neither “the completed solution” nor “the limiting profile” enters as an element: averaging acts on a finite profile and produces a finite profile. That is precisely why heat conduction here needs neither the Gaussian nor the continuum limit.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is that the maximum principle is expressed as the preservation of an *interval-invariant*, not through the construction of the maximum and minimum as separate objects; and dissipation, as the monotonicity of a finite sum. Neither “the completed solution” nor “the limiting profile” enters as an element: averaging acts on a finite profile and produces a finite profile. That is precisely why heat conduction here needs neither the Gaussian nor the continuum limit.
 
 What the analysis yields. It translates the chapter into the language of structure: *diffusion is a Role-averaging*, *the maximum principle is a Rule of preserving the interval-invariant*, *dissipation is a Rule of monotone smoothing*, and the values $u^n_j$ and weights $r$ are *Elements*. To take the heat kernel or $u(x,t)$ as a completed object-Element is to put the role-limit in the place of an Element—the same confusion as “the solution of an ODE as a ready function” (Chapter 8.1). Heat conduction is a process of averaging; its limit is a direction, not a built entity.
 

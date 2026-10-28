@@ -2,7 +2,7 @@
 title: "Chapter 2. Rational Numbers"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/03 От натуральных к рациональным/02 Рациональные числа.md"
-sourceBlob: 77f76d5cb594e229b7ea708db0617eef28a368c8
+sourceBlob: 5c8994eab3fc6098daec2842b3d69f05f9b04e85
 translated: 2026-10-20
 status: draft
 ---
@@ -270,8 +270,7 @@ The unit interval, taken at the level of marking, is a system (§ 2.3): it is op
 
 How many distinctions can be drawn inside the unit interval? Any number.
 
-{
-The interval is divided in two—the point $1/2$ is marked. It is divided in three—$1/3$ and $2/3$ are marked. It is divided into $n$ parts—for every $n \ge 2$ the interior positions $1/n, 2/n, …, (n-1)/n$ are marked. For every natural $n \ge 2$ such a division gives interior points: the commensurability $1/n$ sets a small step $n$ of which make up the unit, and this step is a legitimate commensurable position. For $n = 1$ the division is trivial: no interior points arise—the interval remains a single part, which agrees with the emptiness of the list $1/n, …, (n-1)/n$ for $n = 1$.}
+The interval is divided in two—the point $1/2$ is marked. It is divided in three—$1/3$ and $2/3$ are marked. It is divided into $n$ parts—for every $n \ge 2$ the interior positions $1/n, 2/n, …, (n-1)/n$ are marked. For every natural $n \ge 2$ such a division gives interior points: the commensurability $1/n$ sets a small step $n$ of which make up the unit, and this step is a legitimate commensurable position. For $n = 1$ the division is trivial: no interior points arise—the interval remains a single part, which agrees with the emptiness of the list $1/n, …, (n-1)/n$ for $n = 1$.
 
 Moreover, division does not stop at what has once been carried out. Between two already marked points of the unit interval a new one can be marked—one more, finer distinction can be drawn. This can also be indicated by a formula: if $a/b < c/d$ are two commensurable positions, then between them lies, for example, their *mediant*
 
@@ -313,8 +312,7 @@ The rational numbers do not add a new sort of entities to the number series. The
 
 ### E/R/R Analysis: The Rational-as-Commensurable-Position as a System
 
-{
-The rational, reduced to a commensurable position (§ 2.8.2), is worth analyzing by E/R/R (Part I). A reservation about status, as for the integers (Chapter III.1): ToS does not build its own type of rationals—it uses the standard `Q` from `QArith` (a `Record` of numerator/denominator, § 2.5); what is machine-checked is the field arithmetic of `Q` itself and the relation `Qeq`, while the commensurable reading is carried by the prose. The file `Countability_Q.v` (the Calkin–Wilf tree) is the anchor of the *next* chapter and works with *positive* pairs `QPos` (§ 2.8.5). We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements.}
+The rational, reduced to a commensurable position (§ 2.8.2), is worth analyzing by E/R/R (Part I). A reservation about status, as for the integers (Chapter III.1): ToS does not build its own type of rationals—it uses the standard `Q` from `QArith` (a `Record` of numerator/denominator, § 2.5); what is machine-checked is the field arithmetic of `Q` itself and the relation `Qeq`, while the commensurable reading is carried by the prose. The file `Countability_Q.v` (the Calkin–Wilf tree) is the anchor of the *next* chapter and works with *positive* pairs `QPos` (§ 2.8.5). We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements.
 
 *Rules* (the law $L5$). The constitution is *commensurability*: the division of the step into $q$ equal parts with the order retained (§ 2.2); $p/q$ is the position $p\cdot(1/q)$. To it is added the field structure: the four operations are performable, every nonzero element has the inverse $q/p$ (§ 2.6). And the rule of equality: `Qeq` ($p\cdot s=r\cdot q$) is a *separate* relation, not the structural equality of records (§ 2.5). Division by zero is excluded by the constitution as nonsense, not as something ruled out: there is nothing to commensurate with zero parts (§ 2.4).
 
@@ -322,7 +320,7 @@ The rational, reduced to a commensurable position (§ 2.8.2), is worth analyzing
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are fractions (a `Record` over the integers of Chapter III.1) and the commensurable positions they represent. By $L1$, a record is identical with itself *structurally*: `1#2` and `2#4` are different pairs (hence `Q` is not a quotient type). By $P4$, every rational is a *finite* object—a numerator/denominator pair—whereas “all the rationals” are a potential, uncompleted marking (§ 2.8.4).
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -334,10 +332,9 @@ The rational, reduced to a commensurable position (§ 2.8.2), is worth analyzing
 | fractions (`Record` over $ℤ$; not a quotient) | bearers (a finite pair, $P4$) | Element |
 | laws $L1$–$L5$ (here $L5$) | the universal layer | Rule (univ.) |
 
-{
-*Well-formedness.* The labeling is unambiguous: fractions are elements, the position and the class are roles, commensurability and the field are rules. And well-formedness is visible in two places. The first: *division by zero*. The denominator is the role “number of parts”; zero parts do not realize this role—$p/0$ is not a “wrong” number but an *ill-formed* record (§ 2.4). The second: *equality*. To mix up the structural equality of records, `Qeq`, and the idea of a class is to confuse an element with a role: `1#2` and `2#4` are different element-records but one role-position, which `Qeq` declares (§ 2.5). The rational as a *class* is a role-mode of identification, not a quotient object; this directly prepares the reading of the point as a class in Chapter 4.3.}
+*Well-formedness.* The labeling is unambiguous: fractions are elements, the position and the class are roles, commensurability and the field are rules. And well-formedness is visible in two places. The first: *division by zero*. The denominator is the role “number of parts”; zero parts do not realize this role—$p/0$ is not a “wrong” number but an *ill-formed* record (§ 2.4). The second: *equality*. To mix up the structural equality of records, `Qeq`, and the idea of a class is to confuse an element with a role: `1#2` and `2#4` are different element-records but one role-position, which `Qeq` declares (§ 2.5). The rational as a *class* is a role-mode of identification, not a quotient object; this directly prepares the reading of the point as a class in Chapter 4.3.
 
- What the analysis yields. The rational is the same role-position as the integer (Chapter III.1), but on a *commensurable* marking: the step has become fractional, the marking *denser*, while the ground (reference point, step, orientation) is the same. The field structure has closed the four operations—hence $ℚ$ is the first field on the path of ToS. And the role-class (by `Qeq`) and the contrast of the finite *point* with the infinite *process* (Part IV) lead to the question of the next chapter: can the commensurable positions be *enumerated* (§ 2.8.4–2.8.5)?
+What the analysis yields. The rational is the same role-position as the integer (Chapter III.1), but on a *commensurable* marking: the step has become fractional, the marking *denser*, while the ground (reference point, step, orientation) is the same. The field structure has closed the four operations—hence $ℚ$ is the first field on the path of ToS. And the role-class (by `Qeq`) and the contrast of the finite *point* with the infinite *process* (Part IV) lead to the question of the next chapter: can the commensurable positions be *enumerated* (§ 2.8.4–2.8.5)?
 
 ### What the Chapter Did Not Unfold
 
@@ -353,8 +350,7 @@ The rational numbers have been built: a coordinate marking with a commensurable 
 
 The next chapter will take up the question that the present one has only indicated: can the positions of a commensurable marking be *enumerated*—gone through one after another so that every one is reached? This is the question of the countability of the rational numbers, and ToS will answer it by directly constructing a traversal, not by referring to a ready set.
 
-{
-In the formalization, the nearest anchor of the next chapter is the file `Countability_Q.v` of the ToS Rocq repository. It constructively enumerates the *positive* rational numbers via the Calkin–Wilf tree: a positive rational is represented there by a pair `QPos` (numerator and denominator, both positive), the function `enum_QPos` traverses the tree, and the theorem `Q_positive_countable` proves—fully constructively, without a single axiom—that this traversal is injective and reaches every irreducible pair. It is worth stating the exact status in advance: a *complete* bijection $ℕ \leftrightarrow ℚ$ with computable inversion has been proved not only for the positive rationals but for the whole of $ℚ$—with sign and zero. The function `enum_Q` adds the sign and the position of zero to the traversal, its inverse `index_of_Q` finds the index of a given rational, and the theorem `Q_bijection` proves—also without axioms—that they are mutually inverse (up to `Qeq`: $2/4$ and $1/2$ receive one index).}
+In the formalization, the nearest anchor of the next chapter is the file `Countability_Q.v` of the ToS Rocq repository. It constructively enumerates the *positive* rational numbers via the Calkin–Wilf tree: a positive rational is represented there by a pair `QPos` (numerator and denominator, both positive), the function `enum_QPos` traverses the tree, and the theorem `Q_positive_countable` proves—fully constructively, without a single axiom—that this traversal is injective and reaches every irreducible pair. It is worth stating the exact status in advance: a *complete* bijection $ℕ \leftrightarrow ℚ$ with computable inversion has been proved not only for the positive rationals but for the whole of $ℚ$—with sign and zero. The function `enum_Q` adds the sign and the position of zero to the traversal, its inverse `index_of_Q` finds the index of a given rational, and the theorem `Q_bijection` proves—also without axioms—that they are mutually inverse (up to `Qeq`: $2/4$ and $1/2$ receive one index).
 
 And one more distinction is worth outlining here, so that the next chapter is not understood more broadly than needed. It will be about the countability of rational *points*—and this is not the same as the countability of rational *processes*. A rational point is finite: it is a pair of a numerator and a denominator, a finite object, and therefore such pairs are enumerable. A process over the rational numbers—for example, a sequence of rational approximations $n \mapsto ℚ$—is an object of another kind: not a pair but a function, an infinite specification of how to compute the terms. The file `Countability_Q.v` notes this contrast directly: rational points are enumerable, while processes of approximation are not enumerated in this way. This distinction—point versus process—will become essential in Part IV, where numbers will appear as processes; for now it suffices to indicate it.
 

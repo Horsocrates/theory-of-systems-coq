@@ -2,7 +2,7 @@
 title: "Chapter 5. The Analytic Bridge eval and Tannery’s Theorem: Closing the Logarithm Equation"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/05 Аналитический мост eval и теорема Таннери замыкание уравнения логарифма.md"
-sourceBlob: effddd32e0fd893879790c1a2d28a0ba0b62811f
+sourceBlob: 16e3d7c48fec2e5d8f9e55a5dd132eb9db6b9364
 translated: 2026-10-20
 status: draft
 ---
@@ -21,12 +21,12 @@ The bridge rests on two new tools. The first is the *evaluation homomorphism* $\
 
 The tier, as in Chapter 16.4, is *analytic*, on L3. But the core here is surprisingly clean: Tannery’s theorem itself, the decay $n z^n \to 0$, the finite Fubini interchange, and the additivity of $\mathrm{eval}$ are *axiom-free*; L3 enters only into the final assembly of the equalities.
 
-## The Evaluation Bridge: $\mathrm{eval}${eval} as a Homomorphism
+## The Evaluation Bridge: $\mathrm{eval}$ as a Homomorphism
 
 A formal series is a coefficient process (Chapter 16.1). Fix a point $x$, $0\le x<1$. The partial sums $\sum a_n x^n$ form a Cauchy process—the *value* of the series at the point:
 
 $$
-\mathrm{eval} a x \;:=\; \operatorname{series_limit}\Bigl(\textstyle\sum_n a_n x^n\Bigr).
+\mathrm{eval} a x \;:=\; \operatorname{series\_limit}\Bigl(\textstyle\sum_n a_n x^n\Bigr).
 $$
 
 This evaluation is a *homomorphism* from the formal calculus of Chapter 16.2 into number-processes:
@@ -40,8 +40,8 @@ $$
 where on the left $\cdot$ is the convolution of series and on the right the product of processes. And it *identifies* the named series with their classical values:
 
 $$
-\mathrm{eval} `exp_fps` t \sim \exp(t), \quad
-  \mathrm{eval} `log1m_fps` x \sim L(x).
+\mathrm{eval} \texttt{exp\_fps} t \sim \exp(t), \quad
+  \mathrm{eval} \texttt{log1m\_fps} x \sim L(x).
 $$
 
 Here $L$ is, throughout the chapter, the *positive* logarithm process $L(x) = -\ln(1-x) = \sum_{n\ge1}
@@ -49,10 +49,10 @@ x^n/n$; accordingly, `log1m_fps` is read as the series for $-\ln(1-x)$, *not* fo
 
 ## The Formal Heart, Evaluated
 
-The formal heart of Chapter 16.3 was the equality of series $E\circ L = `geom`$. Let us apply $\mathrm{eval}$ at the point $x$:
+The formal heart of Chapter 16.3 was the equality of series $E\circ L = \texttt{geom}$. Let us apply $\mathrm{eval}$ at the point $x$:
 
 $$
-\mathrm{eval} (`exp_fps` \circ `log1m_fps`) x \;\sim\; \frac{1}{1-x}.
+\mathrm{eval} (\texttt{exp\_fps} \circ \texttt{log1m\_fps}) x \;\sim\; \frac{1}{1-x}.
 $$
 
 The identity that lived on coefficients now holds as an equality of *number*-processes—at every point $0\le x<1$. Under the hood, the evaluation of the composition requires a finite Fubini interchange—at stage $n$, swapping the order of summation in $\mathrm{eval}(f\circ g)$—which is legitimate when $g(0)=0$ and is itself *axiom-free*. Thus the bridge carries the formal heart over to the other side—at a finite price.[^2]
@@ -123,10 +123,10 @@ This is exactly `ln_mul_closed`. A statement that the system previously carried 
 | component of the chapter | role in the system | E/R/R layer |
 |---|---|---|
 | partial sums of $\mathrm{eval}$, finite convolutions and blocks at stage $n$ | bearers, finite | Element (P4) |
-| $\mathrm{eval}$—the evaluation homomorphism | bridge formal $\to$ analyt.\ (functor.\ reading) | Role |
+| $\mathrm{eval}$—the evaluation homomorphism | bridge formal $\to$ analyt. (functor. reading) | Role |
 | key and closure $L(x){+}L(y)\sim L(x\oplus y)$ | additivity of $L$ over $\oplus$ | Role |
 | Tannery, $n z^n\to0$, finite Fubini | axiom-free estimates | Rule (0 ax.) |
-| geom.\ group law, key, injectivity of $\exp_{ℝ}$ | process estimates | Rule (L3) |
+| geom. group law, key, injectivity of $\exp_{ℝ}$ | process estimates | Rule (L3) |
 
 **Elements.** At every stage $n$ there are finite rational partial sums of $\mathrm{eval}$, finite Fubini interchanges, and finite Tannery blocks. The Element side is intact.
 
@@ -148,8 +148,8 @@ That is, Tannery’s theorem, the decay $n z^n\to0$, the finite Fubini, and the 
 
 ---
 
-[^1]: `src/FPSEval.v` (32 Qed, 0 Admitted): `eval_add` is *axiom-free*; `eval_mul`, `eval_pow`, `eval_exp` ($\mathrm{eval} `exp_fps` t \sim `exp_limit` t$), `eval_log1m` ($\mathrm{eval} `log1m_fps` x \sim `ln_proc` x$) use no new axioms, only L3. Machine-checked.
-[^2]: `src/FPSEval.v`: `eval_compose_exp_log1m_geom` ($\mathrm{eval}(E\circ L) x \sim `geometric_limit` x$)—no new axioms, only L3; its support `eval_compose_swap` (the finite Fubini under $g(0)=0$) is *axiom-free*.
+[^1]: `src/FPSEval.v` (32 Qed, 0 Admitted): `eval_add` is *axiom-free*; `eval_mul`, `eval_pow`, `eval_exp` ($\mathrm{eval} \texttt{exp\_fps} t \sim \texttt{exp\_limit} t$), `eval_log1m` ($\mathrm{eval} \texttt{log1m\_fps} x \sim \texttt{ln\_proc} x$) use no new axioms, only L3. Machine-checked.
+[^2]: `src/FPSEval.v`: `eval_compose_exp_log1m_geom` ($\mathrm{eval}(E\circ L) x \sim \texttt{geometric\_limit} x$)—no new axioms, only L3; its support `eval_compose_swap` (the finite Fubini under $g(0)=0$) is *axiom-free*.
 [^3]: `src/Tannery.v` (4 Qed, 0 Admitted): `tannery` is *axiom-free*. `src/PolyTimesGeom.v` (2 Qed): `n_times_pow_limit` ($n z^n\to0$) is *axiom-free*. The junction `boss` (`src/LnMulClosed.v`) uses no new axioms, only L3. Machine-checked.
 [^4]: `src/LnMulReduction.v` (6 Qed, 0 Admitted): `geom_inv`, `geom_mul` (the $\oplus$ law), `ln_mul_from_key` (“key $\Rightarrow$ equation”). `src/LnMulClosed.v` (11 Qed, 0 Admitted): `exp_R_ln_proc_is_geom` (the key), `ln_mul_closed` (the closure). No new axioms, only L3. The Prop formulation itself, `ln_mul_functional_equation`, lives in `src/Log2FunctionalEq.v` (7 Qed, 0 Admitted) as a horizon—here that horizon is removed. Machine-checked.
 

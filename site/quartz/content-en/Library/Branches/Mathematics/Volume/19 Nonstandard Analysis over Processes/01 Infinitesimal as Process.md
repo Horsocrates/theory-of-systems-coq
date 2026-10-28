@@ -2,7 +2,7 @@
 title: "Chapter 1. The Infinitesimal as a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/01 Бесконечно малое как процесс.md"
-sourceBlob: d8f7ba43bcb46f534d0cb4ab7d4c94a62ffce8b3
+sourceBlob: 6439b3cae7b7877fc852e438fffead4f724be58b
 translated: 2026-10-20
 status: draft
 ---
@@ -13,8 +13,7 @@ After function-as-process (Part XVI), discrete mathematics and information (Part
 
 *The flagship of the part: all the real content of nonstandard analysis is relocated onto processes. An infinitesimal is the process $\delta=1/(n+1)$, not a “vanishingly small number”; the hyperreals are the role-limit closure of germ-processes, and nonconstructivity sits at exactly ONE point: the maximization of the Fréchet filter (cofinite, constructive) to a nonprincipal ultrafilter (omniscience). This chapter builds the Element core—the ring of germs WITHOUT an ultrafilter.*
 
-{
-Since the system is ontological, it must deliver a verdict on every construction “beyond the boundary”: an *Element core* (real content, expressible by processes, 0 axioms); a *role-limit instrument* (a real organizing role, but nonconstructive packaging—removable formwork); or the *illusory* (consistent in ZFC, but without a referent or application—ToS names it and dispels it, Chapter 6). The part goes through the constructions of nonstandard analysis with this verdict; we begin with the very core—the infinitesimal.}
+Since the system is ontological, it must deliver a verdict on every construction “beyond the boundary”: an *Element core* (real content, expressible by processes, 0 axioms); a *role-limit instrument* (a real organizing role, but nonconstructive packaging—removable formwork); or the *illusory* (consistent in ZFC, but without a referent or application—ToS names it and dispels it, Chapter 6). The part goes through the constructions of nonstandard analysis with this verdict; we begin with the very core—the infinitesimal.
 
 The approach was not invented by ToS: infinitesimals through the Fréchet filter, without an ultrafilter, are close in spirit to the Schmieden–Laugwitz tradition (the $\Omega$-calculus, 1958). The contribution of ToS is the relocation ONTO PROCESSES $ℕ\toℚ$, the machine check of the Element core, zero divisors as the trace of the missing ultrafilter, and the tie to the finitization boundary. The index $n$ here runs over the natural type *from zero* (a convention of the instrument): $\delta_n=1/(n+1)$, that is, $1,\tfrac12,\tfrac13,…$ There is no completed infinity and no $ℝ$ as a primary object—only processes and their roles.
 
@@ -24,9 +23,9 @@ Take $\delta_n = 1/(n+1)$: $1, \tfrac12, \tfrac13, …$ This is a *process*, fin
 
 *As an element* $\delta$ is **nonzero**: $1/(n+1)\neq 0$ for every $n$—and even as a germ $\delta\not\sim 0$ (there is no tail on which $\delta_n=0$). *As a role* $\delta$ is **infinitesimal**: for every standard $\varepsilon>0$, from some $n$ on, $|\delta_n|<\varepsilon$ holds[^1].
 
-This is where the old riddle “is the infinitesimal zero or not?” comes undone. Nonzeroness is a *fact about elements* ($\delta_n\neq 0$); infinitesimality is a *role* (the behavior of the process in the limit). They do not contradict each other, because they belong to different levels: $\delta$ is not a number with a paradoxical property but a *process*. In the next chapter the same move will show rigorously that Berkeley’s paradox of the “ghosts of departed quantities” does not form: the ghost is the shadow operation, taken at the end, not a substitution of zero.
+This is where the old riddle “is the infinitesimal zero or not?” falls away. Nonzeroness is a *fact about elements* ($\delta_n\neq 0$); infinitesimality is a *role* (the behavior of the process in the limit). They do not contradict each other, because they belong to different levels: $\delta$ is not a number with a paradoxical property but a *process*. In the next chapter the same move will rigorously lay open Berkeley’s paradox of the “ghosts of departed quantities”: the ghost is the shadow operation, taken at the end, not a substitution of zero.
 
-## The Ring of Germs: $\omega\cdot\delta=1${omega·delta=1} and the Trace of the Missing Ultrafilter
+## The Ring of Germs: $\omega\cdot\delta=1$ and the Trace of the Missing Ultrafilter
 
 Processes $ℕ\toℚ$ are added and multiplied pointwise and identified as *germs*—by the Fréchet filter: $x\sim y$ if $x_n=y_n$ for all $n\ge N$, for some $N$ (cofinite agreement). This rule is given *constructively*: it requires no choice on $2^{ℕ}$ and does not select one of two infinite parts (although for arbitrary processes it is not a total Boolean decider). We work with germs at the *setoid* level—processes modulo $\sim$, with operations compatible with $\sim$ (congruent); an explicit quotient type is not needed, and no ultrafilter is used. This is the ring of germs $ℚ^{ℕ}/\text{Fréchet}$.
 
@@ -50,12 +49,11 @@ Let us analyze the ring of germs by E/R/R in the generating order Rules $\to$ Ro
 
 **Elements (L1 + P4).** The bearers are processes $ℕ\toℚ$, finitely actual at every stage: $\delta_n=1/(n+1)$, $\omega_n=n+1$, the even/odd indicators. There is no completed “infinitesimal number”—only a process.
 
-{
-**Well-formedness check.** The rule is germ equality; the roles are infinitesimal / finite / infinitely large; the elements are rational processes; there are no overlaps. $\delta$ itself is a complete E/R/R system: the rule-descent $n\mapsto 1/(n+1)$ (Archimedean decrease), the role “$<$ every standard $\varepsilon$,” and the elements, rational values.}
+**Well-formedness check.** The rule is germ equality; the roles are infinitesimal / finite / infinitely large; the elements are rational processes; there are no overlaps. $\delta$ itself is a complete E/R/R system: the rule-descent $n\mapsto 1/(n+1)$ (Archimedean decrease), the role “$<$ every standard $\varepsilon$,” and the elements, rational values.
 
-**What the analysis yields.** It lays open the riddle of the infinitesimal: $\delta$ is nonzero (an element) and $\infty$-small (a role)—this is not a paradox but two levels of one process. And it names the boundary: the ring of germs is the Element core (decidable, 0 axioms); the field $^{*}ℝ$ (a total order, full transfer) requires closing the gap of the zero divisors with an external ultrafilter—a role-limit, and this is the horizon of Chapter 4. Zero divisors are the honest price of “a ring, not a field”: the machine trace of that very undecided distinction.
+**What the analysis yields.** It removes the riddle of the infinitesimal: $\delta$ is nonzero (an element) and $\infty$-small (a role)—this is not a paradox but two levels of one process. And it names the boundary: the ring of germs is the Element core (decidable, 0 axioms); the field $^{*}ℝ$ (a total order, full transfer) requires closing the gap of the zero divisors with an external ultrafilter—a role-limit, and this is the horizon of Chapter 4. Zero divisors are the honest price of “a ring, not a field”: the machine trace of that very undecided distinction.
 
-The infinitesimal has been built as a process. The next chapter brings the *shadow* (the standard part) and the *derivative* through the infinitesimal: one operation $\mathrm{st}$, on which the whole calculus rests, and a rigorous showing that Berkeley’s paradox does not form.
+The infinitesimal has been built as a process. The next chapter brings the *shadow* (the standard part) and the *derivative* through the infinitesimal: one operation $\mathrm{st}$, on which the whole calculus rests, and a rigorous laying open of Berkeley’s paradox.
 
 ---
 

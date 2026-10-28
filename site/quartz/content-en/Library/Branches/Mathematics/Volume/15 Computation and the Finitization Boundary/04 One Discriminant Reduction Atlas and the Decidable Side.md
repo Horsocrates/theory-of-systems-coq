@@ -2,7 +2,7 @@
 title: "Chapter 4. One Discriminant: The Reduction Atlas and the Decidable Side"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/04 Один дискриминант редукционный атлас и разрешимая сторона.md"
-sourceBlob: 9429e79c083a8e5cafddffd0a77cd96f6859d022
+sourceBlob: 0006073cdfebf638d0df225485122d071b266760
 translated: 2026-10-20
 status: draft
 ---
@@ -51,9 +51,7 @@ On the decidable side one more thing is given for free—*choice*. If a predicat
 
 This is the same line as in our set theory without AC (deterministic choice: argmax-by-index, the first witness): where the role-limit side would require an *oracle* (an unreachable choice from all at once), the Element side *computes* the choice in a finite number of steps—on a finite ordered carrier with a decidable predicate. Choice as a process, not as an oracle—P4 in action.
 
-{
 And this is not the ceiling of the finite. The same device—a decidable criterion plus a canonical order (the least element of $ℕ$)—rises as a *ladder*: from a countable carrier (countable choice) to a countable chain (dependent choice) and to an infinite tree with decidable branching (Kőnig’s lemma). At every rung, as long as the criterion is decidable and the carrier is ordered, choice remains *computable*, and the Axiom of Choice is not required. The synthesis is one: of the five levels of the ladder, four are free of the Axiom of Choice—the finite, the countable, the dependent, and Kőnig’s—and its price falls exactly on the fifth, where the predicate becomes undecidable. Ramsey’s theorem sits on the same boundary: finite Ramsey is *decidable* ($R(3,3)=6$ is computed by exhaustive search), while infinite Ramsey is a role-limit (one must choose a color that repeats infinitely). The same Element/role-limit face on which the whole chapter stands.[^4]
-}
 
 ## The Discriminant as a Decision Procedure
 
@@ -71,7 +69,7 @@ And both stand in one theorem about the faces of the boundary: number is *Elemen
 
 Let us be exact about scale. The discriminant criterion is carried out in our system *concretely*—for the quadratic case ($2\times2$, $\Delta=\trace^2-4\det$) and for the five engines of the atlas, all by machine and 0-axiom. A *fully general* procedure—deciding the rationality of the spectrum *in any degree* ($n\times n$, the rational roots of an arbitrary characteristic polynomial)—is a natural *continuation* of the same criterion (the rational root test and the factorization of the characteristic polynomial; for higher degrees one discriminant no longer suffices). In our system it has so far been developed case by case (the quadratic atlas), not closed into *one* procedure of general degree; this is the nearest horizon of the positive side, not a claimed result.
 
-The distinction is honest and of the same kind as in 15.3 (where four faces are assembled by machine and the top of the ladder is a standard reading): here the quadratic discriminant and the atlas are assembled by machine, and the general degree is named as a direction.
+The distinction is honest and of the same kind as in 15.2–15.3 (in 15.3 four faces are assembled by machine, in 15.2 the top of the ladder is a standard reading): here the quadratic discriminant and the atlas are assembled by machine, and the general degree is named as a direction.
 
 ## E/R/R Analysis and What the Chapter Has Prepared
 
@@ -79,9 +77,7 @@ The distinction is honest and of the same kind as in 15.3 (where four faces are 
 
 **Roles (L4).**  “Rational spectrum / Element” versus “irrational / role-limit” are two roles of the spectral datum; the decider (the square test) is a role-criterion; the first witness is the role of *choice-as-computation* (not an oracle).
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete matrices, values of $\Delta$, finite lists of witnesses. *Not* an element *of the current confirmed layer*: a closed procedure of general degree—a boundary of coverage, not an ontological P4 exclusion (rational root procedures exist).}
+**Elements (L1${}+{}$P4).**  Concrete matrices, values of $\Delta$, finite lists of witnesses. *Not* an element *of the current confirmed layer*: a closed procedure of general degree—a boundary of coverage, not an ontological P4 exclusion (rational root procedures exist).
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -95,11 +91,11 @@ The distinction is honest and of the same kind as in 15.3 (where four faces are 
 
 ---
 
-[^1]: Machine-checked, **0 axioms**: `src/cs/BoundaryDecidability.v`—`is_square` (the perfect-square test via the integer root), `rational_split` ($\Delta$ is a square), `discriminant_ element_drawn` (the Element-drawnness of the criterion). The bridge and the discriminant: `src/stdlib/ReductionAtlasSynthesis.v`—`disc` / `tr2` / `det2`, `disc_eq` ($\Delta=\trace^2-4\det=(a{-}d)^2{+}4bc$), `char_poly_ complete_square`, and the directing `eigenvalue_ forces_ square_disc` (a rational root $\Rightarrow$ a square $\Delta$). The full iff is a standard mathematical reading for an integer $2\times2$.
-[^2]: Machine-checked, **0 axioms**: the capstone `src/stdlib/ReductionAtlasSynthesis.reduction_ atlas_ synthesis` (all engines reduced to `disc`); the five engines are `ReductionAtlasPell.v`, `ReductionAtlasNiven.v`, `ReductionAtlasSurd.v`, `ReductionAtlasParity.v`, `ReductionAtlasUnimodular.v` (additional quadratic lemmas are in `QuadraticDiscriminant.v`).
+[^1]: Machine-checked, **0 axioms**: `src/cs/BoundaryDecidability.v`—`is_square` (the perfect-square test via the integer root), `rational_split` ($\Delta$ is a square), `discriminant_element_drawn` (the Element-drawnness of the criterion). The bridge and the discriminant: `src/stdlib/ReductionAtlasSynthesis.v`—`disc` / `tr2` / `det2`, `disc_eq` ($\Delta=\trace^2-4\det=(a{-}d)^2{+}4bc$), `char_poly_complete_square`, and the directing `eigenvalue_forces_square_disc` (a rational root $\Rightarrow$ a square $\Delta$). The full iff is a standard mathematical reading for an integer $2\times2$.
+[^2]: Machine-checked, **0 axioms**: the capstone `src/stdlib/ReductionAtlasSynthesis.reduction_atlas_synthesis` (all engines reduced to `disc`); the five engines are `ReductionAtlasPell.v`, `ReductionAtlasNiven.v`, `ReductionAtlasSurd.v`, `ReductionAtlasParity.v`, `ReductionAtlasUnimodular.v` (additional quadratic lemmas are in `QuadraticDiscriminant.v`).
 [^3]: Machine-checked, **0 axioms**: `src/cs/DecidableSelection.v` (7 Qed)—`first_witness` (the first witness in a list) with `first_witness_sound / complete / first`, `decidable_list_choice` (choice under a decidable finite predicate).
 [^4]: Machine-checked, **0 axioms**: `src/cs/CountableSelectionFree.v` (6 Qed, `countable_selection_free`, `dec_family_choice`); `CountableDependentChoiceFree.v` (7 Qed, `countable_dependent_choice_free`, `dc_chain_step`); `DecidableKonig.v` (7 Qed, `decidable_konig`); the synthesis `SelectionWithoutChoiceSynthesis.v` (8 Qed, `selection_without_choice_synthesis`: `count_free_4` are free, `count_priced_1` comes with a price); the boundary is `RamseyBoundary.v` (15 Qed, `R33_upper` / `R33_lower` /  `ramsey_3_3`, $R(3,3)=6$).
-[^5]: The Element face and the role-limit faces together: `src/cs/BoundaryDecidability.one_boundary_three_faces` and `KolmogorovRoleLimit.one_boundary_four_faces` (**0 axioms**): `discriminant_ element_drawn` stands in one conjunction with `halting_ role_limit_drawn` and Cantor.
+[^5]: The Element face and the role-limit faces together: `src/cs/BoundaryDecidability.one_boundary_three_faces` and `KolmogorovRoleLimit.one_boundary_four_faces` (**0 axioms**): `discriminant_element_drawn` stands in one conjunction with `halting_role_limit_drawn` and Cantor.
 
 ---
 

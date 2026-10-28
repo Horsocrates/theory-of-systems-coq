@@ -2,7 +2,7 @@
 title: "Chapter 3. Determinacy Up the Hierarchy"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/03 Детерминированность вверх по иерархии.md"
-sourceBlob: 464f7b4f6672a9a5e964f2c5d009986a713ae000
+sourceBlob: af6111f3afc17313453cd36c2656878379b3ecdb
 translated: 2026-10-20
 status: draft
 ---
@@ -19,8 +19,7 @@ The thesis of the chapter is a P4 rollback: the wall turns out to be an *ascent*
 
 ## What the Chapter Establishes and What It Does Not
 
-{
-*Proved exactly and without axioms*: on a finite game tree the winner is *computable* by backward induction; the step from the finite to the infinite—the question “will player I ever win”—is exactly LPO; and under the Law of Excluded Middle it collapses[^1].}
+*Proved exactly and without axioms*: on a finite game tree the winner is *computable* by backward induction; the step from the finite to the infinite—the question “will player I ever win”—is exactly LPO; and under the Law of Excluded Middle it collapses[^1].
 
 *Not proved here (the horizon)*: the *full* strategic determinacy of Gale–Stewart open games (where one also needs a strategy of *evasion* for the second player), and still less Martin’s full Borel determinacy. They remain a *horizon-ascent*—honestly localized by rung, but not fully built. That the decidable “clopen/open” dichotomy of the outcome is equivalent to LPO is a known fact of constructive reverse mathematics; our contribution is to *place* this step on the ordinal-process ascent and to connect it by a bridge with backward induction.
 
@@ -38,8 +37,7 @@ Now let us raise the game to an infinite horizon. We present an open game as a *
 
 Let us ask about the whole game: *will player I ever win*—that is, does the outcome thread fire at some stage, or does it never fire? But this is *exactly* the question of storey 1 from Chapter 2—“fires or never”—and it is LPO.
 
-{
-And the equality here is complete: the outcome dichotomy *for all* such games is equivalent to LPO—for every Boolean thread is the outcome thread of a suitable game (a game consisting of leaves alone)[^3].}
+And the equality here is complete: the outcome dichotomy *for all* such games is equivalent to LPO—for every Boolean thread is the outcome thread of a suitable game (a game consisting of leaves alone)[^3].
 
 Here is the exact localization for the sake of which the chapter was written:
 

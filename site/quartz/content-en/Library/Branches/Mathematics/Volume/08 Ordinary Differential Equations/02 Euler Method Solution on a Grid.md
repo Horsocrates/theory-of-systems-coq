@@ -2,7 +2,7 @@
 title: "Chapter 2. Euler’s Method: The Solution on a Grid"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/02 Метод Эйлера решение на сетке.md"
-sourceBlob: 411214c1ad6943b5e76781d5e91d02383fd7dc00
+sourceBlob: 54039b13cae916d1814560207ad5ca1cd813fd4b
 translated: 2026-10-20
 status: draft
 ---
@@ -76,7 +76,7 @@ Take $y' = 1$, $y_0 = 0$. The exact solution is $y(t) = t$. Euler’s method on 
 
 Now $y' = 2t$, $y_0 = 0$, with the exact solution $y(t) = t^2$. Here the right-hand side *changes* along the step, and Euler’s method, which freezes the slope at the start of the step, lags behind. On the grid $N = 4$ at the final moment $t = 1$ the method gives $3/4$, whereas the exact value is $1$; the error is exactly $1/4$.[^6] What is essential is that the error is a *finite rational number*, not a vague “tends to zero.” The method underestimates the solution (a convex curve outruns its tangents), and the measure of this lag on each concrete grid is computed exactly. Reducing the error means *refining the grid*, growing $N$: the next direction of the process, not a finished limit.
 
-### The Exponential Equation: The Path to $e${e}
+### The Exponential Equation: The Path to $e$
 
 Finally, $y' = y$, $y_0 = 1$, with the exact solution $y(t) = e^t$. The Euler step is especially transparent here: since $f(t,y) = y$, each step multiplies the value by $(1 + h)$,
 
@@ -93,7 +93,7 @@ $$
 
 growing toward $e$; for the stages shown both the exact values and the bounds are checked, in particular $2 < 625/256 < 3$.[^8] This is the famous path to the number $e \approx 2{,}718$—but a path, not a destination: each $(1+1/N)^N$ is a rational Element, computable exactly, and $e$ is the role-limit toward which the process of refinement is directed.
 
-## The Sequence $(1+1/N)^N${(1+1/N)^N} as a Process toward $e${e}
+## The Sequence $(1+1/N)^N$ as a Process toward $e$
 
 The exponential regime deserves a separate word, because in it the process ontology of the volume is seen with particular sharpness. The sequence $(1+1/N)^N$ is *not* the completed number $e$ with a “tail of approximations” but the process itself, whose stages are the rational numbers $2, 9/4, 64/27, 625/256, …$ Each stage is finite and presentable; none equals $e$; and convergence is a property of the process (monotone growth, boundedness above), not a finished object at its end.
 
@@ -126,8 +126,7 @@ bearers, and the bearers here are finite: the rational nodes $t_k = k/N$, the va
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). Essential is the distinction of the two indices, the resolution $N$ and the stage $k$: to mix them (as the classical limit “the solution at the point $t$,” which forgets the grid, does) would be to confuse the role-resolution with the role-stage. Here they are separated and fall into Roles separately, and their bearers—two different natural numbers—are likewise separately Elements. It is precisely this separateness that explains why Euler’s method remains finite and computable at every stage: the limit $N \to \infty$ does not enter the construction.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). Essential is the distinction of the two indices, the resolution $N$ and the stage $k$: to mix them (as the classical limit “the solution at the point $t$,” which forgets the grid, does) would be to confuse the role-resolution with the role-stage. Here they are separated and fall into Roles separately, and their bearers—two different natural numbers—are likewise separately Elements. It is precisely this separateness that explains why Euler’s method remains finite and computable at every stage: the limit $N \to \infty$ does not enter the construction.
 
 What the analysis yields. It translates the results of the chapter into the language of structure: *the Euler polygon is a Role-process* (an approximation of the solution), *resolution and stage are two different Roles* (the fineness of the grid and the position in time), *the error is a Role-defect* (unaccounted curvature), and the nodes $t_k$, values $y_k$, and indices $N, k$ are *Elements* (finite at every stage). To take “the exact solution” or $e$ as a completed object-Element is to put the role-limit in the place of an Element—the same confusion of categories as “number as an object” instead of the role-quantity (Part II) or “a Fourier series as a completed sum” instead of a family of truncations (Chapter 7.1). The solution on a grid begins here as a *finite polygonal line*; making it more precise is a process of refinement, and the completed solution function is neither needed nor built.
 
@@ -136,9 +135,9 @@ The next chapter raises the approximation one level higher: from the Euler traje
 ---
 
 [^1]: The supporting file is `analysis/PicardLindelof.v` (the ToS Rocq repository): `grid`, `euler_step`, `euler_traj`, and theorems on concrete trajectories (`euler_traj_linear_4`, `euler_quadratic_error`, `euler_traj_exp_4`, and others). All are exact rational arithmetic (`vm_compute` or `ring`), 0 axioms. For the exponential as a process, see `ProcessExpProcess.v` (Chapter 8.5, batch C).
-[^2]: `grid N k` ${}= `inject_Z(Z.of_nat k)` / `inject_Z(Z.of_nat N)`$ in `PicardLindelof.v` is $k/N$ over ℚ. The step $h = 1/N$ is built into the definition of the trajectory.
+[^2]: `grid N k` ${}= \texttt{inject\_Z(Z.of\_nat k)} / \texttt{inject\_Z(Z.of\_nat N)}$ in `PicardLindelof.v` is $k/N$ over ℚ. The step $h = 1/N$ is built into the definition of the trajectory.
 [^3]: `euler_step f h t y` ${}= y + h \cdot f t y$ and `euler_traj f y0 N k` (a recursion on $k$ with step $1/N$ and nodes `grid N k'`) in `PicardLindelof.v`. The base case `euler_traj_0`: `euler_traj f y0 N 0 == y0`.
-[^4]: This is exactly why in `euler_traj` the resolution $N$ and the index $k$ are different arguments, and the step $1/`inject_Z(Z.of_nat N)`$ is taken from $N$. The convergence $(1+1/N)^N \to e$ is the growth of $N$ *with* $k = N$ (fixed final time $t = 1$); movement along the linear trajectory is the growth of $k$ with $N$ fixed.
+[^4]: This is exactly why in `euler_traj` the resolution $N$ and the index $k$ are different arguments, and the step $1/\texttt{inject\_Z(Z.of\_nat N)}$ is taken from $N$. The convergence $(1+1/N)^N \to e$ is the growth of $N$ *with* $k = N$ (fixed final time $t = 1$); movement along the linear trajectory is the growth of $k$ with $N$ fixed.
 [^5]: `euler_traj_linear_1`, `_2`, `_4` in `PicardLindelof.v`: `euler_traj f_const_one 0 4 k` gives $1/4, 1/2, 1$ for $k = 1, 2, 4$. The exactness is a consequence of the absence of curvature: the right-hand side is constant. `lipschitz_const`: the field $f \equiv 1$ is Lipschitz with $L = 0$.
 [^6]: `euler_traj_quadratic_4`: `euler_traj f_two_t 0 4 4 == 3#4`; `euler_quadratic_error`: $1 - 3/4 = 1/4$. Both in `PicardLindelof.v`, exact arithmetic.
 [^7]: `euler_step_concrete`: `euler_step f_identity h t y == y*(1+h)` in `PicardLindelof.v`. `lipschitz_identity`: the field $f(t,y)=y$ is Lipschitz with $L = 1$.

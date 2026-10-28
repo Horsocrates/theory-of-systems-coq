@@ -2,7 +2,7 @@
 title: "Chapter 4. Convergence Theorems: Monotone and Dominated"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/06 Меры и интегрирование/04 Теоремы сходимости монотонная и мажорированная.md"
-sourceBlob: b738437c8606fe58998737d21bee4e7291e9917b
+sourceBlob: 7c5a57063742cba358dfc912fd21649ba198ca45
 translated: 2026-10-20
 status: draft
 ---
@@ -110,8 +110,7 @@ every stage: the values of the integrals $\int f_n$, the values of the dominatin
 
 ### What the Analysis Yields
 
-{
-The analysis shows where infinity hides in the interchange of limits and how ToS deals with it. Monotone convergence honestly pays L3 for the single step “monotone-bounded converges.” Dominated convergence is *reduced*: its arithmetic machine (engine and envelope) is proved without axioms, and the only infinitary step—the tending of the residual to zero, classically going through the completed measure and Fatou—is moved out into an explicit hypothesis. The dominating function, moreover, does not “exist” but is *presented* (L4, P4). This is the way ToS makes convergence theorems constructive: not by hiding the infinitary step in a completed object but by naming it and placing it on the boundary.}
+The analysis shows where infinity hides in the interchange of limits and how ToS deals with it. Monotone convergence honestly pays L3 for the single step “monotone-bounded converges.” Dominated convergence is *reduced*: its arithmetic machine (engine and envelope) is proved without axioms, and the only infinitary step—the tending of the residual to zero, classically going through the completed measure and Fatou—is moved out into an explicit hypothesis. The dominating function, moreover, does not “exist” but is *presented* (L4, P4). This is the way ToS makes convergence theorems constructive: not by hiding the infinitary step in a completed object but by naming it and placing it on the boundary.
 
 The proved part—monotone convergence, the engine and envelope of dominated convergence, the process core of Fatou—gives a working apparatus for passing to the limit under the integral. The next chapter assembles *spaces* from the integral—$L^1$ and $L^2$—where this apparatus of convergence finds its natural place, and completeness, as before, turns out to be the constructibility of the limit-process.
 
@@ -129,4 +128,4 @@ The proved part—monotone convergence, the engine and envelope of dominated con
 
 Part: [[06 Measure and Integration|Part VI. Measure and Integration]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[03 Measurable Functions and the Lebesgue Integral|Chapter 3. Measurable Functions and the Lebesgue Integral]] · [[05 L1 and L2 Spaces as Processes Completeness as Constructibility|Chapter 5. L^1 and L^2: Spaces as Processes, Completeness as Constructibility]] →
+Navigation: ← [[03 Measurable Functions and the Lebesgue Integral|Chapter 3. Measurable Functions and the Lebesgue Integral]] · [[05 L1 and L2 Spaces as Processes Completeness as Constructibility|Chapter 5. L¹ and L²: Spaces as Processes, Completeness as Constructibility]] →

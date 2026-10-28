@@ -2,7 +2,7 @@
 title: "Chapter 5. The Co-Definition of A and ¬A"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/05 Со-определение A и ¬ A.md"
-sourceBlob: 3f4dde8371466e6cb4fa50e2a5b0485c2a34fcf6
+sourceBlob: 1bd2ff4332d6b6ed54c08987529cf42f4f1cc1f3
 translated: 2026-10-20
 status: draft
 ---
@@ -23,7 +23,7 @@ Chapter 4 its metaphysical application to the Absolute as well.
 *Architecturally*, these links form the chain
 
 $$
-A = \exists \;\to\; `Distinction` \;\to\;
+A = \exists \;\to\; \texttt{Distinction} \;\to\;
   L1\text{–}L5 \;\to\; P1\text{–}P4 \;\to\; E/R/R.
 $$
 
@@ -42,7 +42,6 @@ two separate things that are afterward somehow related. They co-arise in
 the act itself, and this co-arising is a *central* property of the
 structure, not an auxiliary remark about `Distinction`.
 
-\sloppypar
 In § 2.6 of the present work this was designated as the impossibility of
 building `Distinction` having only one of the sides. At that point the
 observation played a *minimalist* role: it entered the general check of
@@ -223,7 +222,7 @@ co-defined is not a particular, technical property of the record
 of negation: as an *aspect of the primary act*, not as an operation on a
 ready-made object.
 
-### Where in the Book Separation Works and Where Distinction Works
+### Where in the Volume Separation Works and Where Distinction Works
 
 The distinction between the two stances should not be understood
 polemically, as if the stance of the separation of the ready-made were
@@ -302,8 +301,8 @@ equal footing. The fields `positive` and `negative` are ordinary values of
 type Prop. But the types of the fields `exclusive` and `exhaustive`
 *depend* on the already specified values of `positive` and `negative`:
 
-- The type of the field `exclusive` is $\neg (`positive` \wedge `negative`)$. This expression has no meaning until `positive` and `negative` are specified: $\wedge$ and $\neg$ have to be applied to *something*.
-- The type of the field `exhaustive` is $`positive` \vee `negative`$. The same remark holds: disjunction requires both sides as concrete propositions.
+- The type of the field `exclusive` is $\neg (\texttt{positive} \wedge \texttt{negative})$. This expression has no meaning until `positive` and `negative` are specified: $\wedge$ and $\neg$ have to be applied to *something*.
+- The type of the field `exhaustive` is $\texttt{positive} \vee \texttt{negative}$. The same remark holds: disjunction requires both sides as concrete propositions.
 
 This kind of typing is a standard construction of CIC, in which the types
 of later fields of a record may refer to the values of earlier fields.
@@ -327,9 +326,9 @@ The application of the constructor `mkDistinction` is a formal *single
 act* of building an instance. The signature of the constructor is:
 
 $$
-`mkDistinction` :
+\texttt{mkDistinction} :
   \forall (p n : Prop),\;
-  \neg(p \wedge n) \;\to\; (p \vee n) \;\to\; `Distinction`.
+  \neg(p \wedge n) \;\to\; (p \vee n) \;\to\; \texttt{Distinction}.
 $$
 
 The constructor takes *four* arguments, one after another, and returns an
@@ -363,8 +362,8 @@ are listed is not an ontological order in which the sides appear.
 
 ### The Case `distinction_of P`: One Proposition, Both Sides
 
-In the record `Distinction` the sides $`positive`$ and
-$`negative`$ are two independent fields. In principle they can be
+In the record `Distinction` the sides $\texttt{positive}$ and
+$\texttt{negative}$ are two independent fields. In principle they can be
 specified by entirely different propositions, provided that `exclusive`
 and `exhaustive` can be proved. But Rocq has a construction that, from an
 arbitrary proposition $P$, builds the corresponding distinction *in one
@@ -516,7 +515,7 @@ side?” This case is substantively instructive. The constructor
 `mkDistinction`—we shall come to this in a moment—also requires proofs
 of `exclusive` and `exhaustive`, with types that mention both sides. If
 `positive` is $P$ and `negative` is `True`, then `exclusive` must have
-the type $\neg (P \wedge `True`)$,
+the type $\neg (P \wedge \texttt{True})$,
 which is equivalent to $\neg P$. This is no longer a statement about the
 arrangement of a distinction but simply the assertion that $\neg P$ is
 true—which in the general case is false. Consequently, supplying `True`
@@ -534,7 +533,7 @@ without a substantive negative side.
 ### Impossibility without the Field `exclusive`
 
 Let us pass to the two other fields. The field `exclusive` has the type
-$\neg (`positive` \wedge `negative`)$—a statement about the mutual
+$\neg (\texttt{positive} \wedge \texttt{negative})$—a statement about the mutual
 incompatibility of the sides. What happens if one tries to build the
 record without this field?
 
@@ -546,7 +545,7 @@ What do we lose?
 
 By the theorem `L2_from_distinction`[^1], the field `exclusive` in the
 record `Distinction` *is identically* the law $L2$ for the given
-instance: $\neg (`positive` D \wedge `negative` D)$.
+instance: $\neg (\texttt{positive} D \wedge \texttt{negative} D)$.
 In other words, it is *the field of the record itself* that is the
 structural realization of $L2$ on this instance, *not a separate*
 statement derived from something else.
@@ -568,7 +567,7 @@ construction.
 ### Impossibility without the Field `exhaustive`
 
 The picture with the field `exhaustive` is symmetric. Its type is
-$`positive` \vee `negative`$. By the theorem
+$\texttt{positive} \vee \texttt{negative}$. By the theorem
 `L3_from_distinction`[^2],
 this field identically realizes $L3$ on the instance.
 
@@ -657,7 +656,7 @@ weakened.
 The following observation is especially important, and precision is
 required here as to what the formalization fixes. In the file
 `Distinction.v` the single theorem `five_properties_of_distinction`
-asserts that for every $D : `Distinction`$ *four* properties of
+asserts that for every $D : \texttt{Distinction}$ *four* properties of
 distinction hold: stability ($L1$), exclusivity ($L2$), exhaustiveness
 ($L3$), and self-grounding ($L4$). The fifth law $L5$ does not enter this
 theorem: $L5$ concerns the hierarchy of *levels* and is not a property of
@@ -798,11 +797,11 @@ Record Distinction := mkDistinction {
 
 In this signature the field `negative` has type Prop—that is, it is
 simply a proposition, alongside the field `positive`. The field
-`negative` is *not defined* as $\neg `positive`$. The signature contains
+`negative` is *not defined* as $\neg \texttt{positive}$. The signature contains
 no equation of the form:
 
 $$
-`negative` \;=\; \neg `positive`.
+\texttt{negative} \;=\; \neg \texttt{positive}.
 $$
 
 In principle, when a particular instance of `Distinction` is built, the
@@ -842,25 +841,25 @@ proposition may be supplied for `negative`—provided that proofs of
 At the level of logical content, matters stand differently. From the
 proofs of `exclusive` and `exhaustive`—that is, from the very
 requirements of mutual exclusivity and joint exhaustiveness—it follows
-that `negative` and $\neg `positive`$ are *logically equivalent*.
+that `negative` and $\neg \texttt{positive}$ are *logically equivalent*.
 
 This statement is easy to check structurally. If `exclusive` asserts
-$\neg (`positive` \wedge `negative`)$, and `exhaustive` asserts
-$`positive` \vee `negative`$, then taken together they are *equivalent*
-to the statement $`negative`
-\leftrightarrow \neg `positive`$:
+$\neg (\texttt{positive} \wedge \texttt{negative})$, and `exhaustive` asserts
+$\texttt{positive} \vee \texttt{negative}$, then taken together they are *equivalent*
+to the statement $\texttt{negative}
+\leftrightarrow \neg \texttt{positive}$:
 
-- From `negative` follows $\neg `positive`$—this is a reformulation of `exclusive` (if `positive`, then not `negative`, and contrapositively).
-- From $\neg `positive`$ follows `negative`—this is a direct application of `exhaustive`: one of the sides must hold, and if not the positive one, then the negative one.
+- From `negative` follows $\neg \texttt{positive}$—this is a reformulation of `exclusive` (if `positive`, then not `negative`, and contrapositively).
+- From $\neg \texttt{positive}$ follows `negative`—this is a direct application of `exhaustive`: one of the sides must hold, and if not the positive one, then the negative one.
 
 In other words, *any* proposition that, together with `positive`,
 satisfies `exclusive` and `exhaustive` turns out to be logically
-equivalent to $\neg `positive`$. In content, `negative` is *always* the
+equivalent to $\neg \texttt{positive}$. In content, `negative` is *always* the
 negation of `positive`, even if syntactically it is written differently.
 
 **What exactly the record shows.** 
 The observation that the record `Distinction` makes does not consist in
-`negative` differing in content from $\neg `positive`$. In content they
+`negative` differing in content from $\neg \texttt{positive}$. In content they
 coincide, and this coincidence is a direct consequence of the
 requirements of mutual exclusivity and joint exhaustiveness. The
 observation lies elsewhere: the *role* “negative side” is specified in
@@ -873,7 +872,7 @@ does *not define* the second position through the operation; the record
 defines the second position through its *structural role* in the act of
 distinction.
 
-*Syntactically, `negative` is independent of $\neg `positive`$;
+*Syntactically, `negative` is independent of $\neg \texttt{positive}$;
 logically, it is equivalent to it. The record `Distinction` fixes the
 syntactic level: the role “negative side” is introduced independently of
 the operation $\neg$, although in content the two coincide in every
@@ -882,8 +881,8 @@ instance.*
 ### What This Distinction Is Needed For
 
 A natural question arises: if at the logical level `negative` and
-$\neg `positive`$ coincide, does their syntactic independence matter?
-Could one simply accept that `negative` *is* $\neg `positive`$ and
+$\neg \texttt{positive}$ coincide, does their syntactic independence matter?
+Could one simply accept that `negative` *is* $\neg \texttt{positive}$ and
 simplify the record?
 
 It does matter. The distinction between the syntactic and the logical
@@ -893,7 +892,7 @@ an ontological claim about the status of the two sides in the act of
 distinction, not a technical remark about the syntax of CIC.
 
 **First structural consequence.** 
-If `negative` were defined syntactically as $\neg `positive`$,
+If `negative` were defined syntactically as $\neg \texttt{positive}$,
 the negative side would be a *derivative* construction over the positive
 one—what results when an operation has been applied to `positive`. This
 is precisely the stance of the separation of the ready-made analyzed in
@@ -923,7 +922,7 @@ found, but in which there is *no* operation through which one side would
 be expressed syntactically through the other. The record `Distinction`,
 with the syntactic independence of its fields, serves as a model for such
 structures; if `Distinction` were written with `negative` $=$
-$\neg `positive`$, it would be a *degenerate* case, not representative
+$\neg \texttt{positive}$, it would be a *degenerate* case, not representative
 of the general pattern.
 
 ### Connection with E/R/R: The Level of the Schema and the Level of the Instance
@@ -939,7 +938,7 @@ different things*: the *name of a field* in the record schema and the
 schema of the record `Distinction` as a type, the field names `positive`
 and `negative` are *role slots*, the positions “positive side” and
 “negative side.” At the level of a particular instance
-$D : `Distinction`$, the values `positive` $D$ and `negative` $D$ are
+$D : \texttt{Distinction}$, the values `positive` $D$ and `negative` $D$ are
 concrete propositions, and it is they that are the *elements* of the
 E/R/R analysis: the file `ERRFromDistinction.v` defines the list of
 elements as `err_elements D = [ positive D; negative D ]`. Accordingly,
@@ -1295,7 +1294,7 @@ distinction, not a claim about all that exists. The formula “nothing
 exists independently; everything is determined through another” is too
 broad for a technically oriented chapter, and we take it *only* as a
 heuristic parallel, not as evidential support for ToS. The ontological
-position of the present work—which Volume I develops and which shows
+position of the present work—which [[Metaphysics|“Metaphysics”]] develops and which shows
 through in Chapter 4 on $E/R/R$—echoes the Eastern one in its structure:
 the whole system $E/R/R$ works so that the elements of a system receive
 their determinacy through Roles, and Roles through Rules; no level is
@@ -1471,8 +1470,8 @@ ready-made leads to oblivion of the pre-formal foundations on which formal
 work stands. The objects of mathematics begin to seem self-sufficient—as
 existing “by themselves,” without reference to the structure of the act
 of distinction, to the laws of logic, to the Absolute as a meta-system.
-This is precisely the loss of the ontological ground that Volume I
-analyzes and that in Volume II receives a counterweight through the
+This is precisely the loss of the ontological ground that “Metaphysics”
+analyzes and that in the present volume receives a counterweight through the
 rigorous methodology of the first formalizable, analyzed in Chapter 1.
 
 *Distinction and separation are not two opposed methodologies, one of
@@ -1529,8 +1528,8 @@ structures with pairs of sides are at issue—from duality in categories
 
 ---
 
-[^1]: In the file `LawsFromDistinction.v` the theorem `L2_from_distinction` asserts that $\neg(`positive` D \wedge `negative` D)$ for every $D : `Distinction`$, and its proof is a direct application of `L2_exclusivity`—that is, a direct reference to the field `exclusive` of the record.
-[^2]: Analogously to `L2`: in `LawsFromDistinction.v` the theorem `L3_from_distinction` asserts $`positive` D \vee `negative` D$ for every $D$ and is proved by a direct appeal to the field `exhaustive`.
+[^1]: In the file `LawsFromDistinction.v` the theorem `L2_from_distinction` asserts that $\neg(\texttt{positive} D \wedge \texttt{negative} D)$ for every $D : \texttt{Distinction}$, and its proof is a direct application of `L2_exclusivity`—that is, a direct reference to the field `exclusive` of the record.
+[^2]: Analogously to `L2`: in `LawsFromDistinction.v` the theorem `L3_from_distinction` asserts $\texttt{positive} D \vee \texttt{negative} D$ for every $D$ and is proved by a direct appeal to the field `exhaustive`.
 [^3]: The lemma is located in the file `Distinction.v`, in the section marked as co-constitution.
 [^4]: In the current version of the repository these equivalences are not stated as separate named lemmas: their formal content is fully secured by the fields `exclusive` and `exhaustive`, but the file does not yet contain standalone lemmas `negative_iff_not_positive` and `positive_iff_not_negative`. Adding them would make the formal support of co-definition explicit; this is a natural direction for refining the repository.
 [^5]: A detailed analysis of the unifying theorem and of the form in which $L5$ enters it is given in § 3.7 of Chapter 3.

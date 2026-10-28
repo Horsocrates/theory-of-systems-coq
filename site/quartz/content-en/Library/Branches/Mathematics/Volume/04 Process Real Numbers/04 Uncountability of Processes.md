@@ -2,7 +2,7 @@
 title: "Chapter 4. The Uncountability of Processes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/04 Несчётность процессов.md"
-sourceBlob: 3eb080fd972fbe6bc043e51a77c867f289825b32
+sourceBlob: 806219c0752eefdaf43e0b2143f7952a916cdf17
 translated: 2026-10-20
 status: draft
 ---
@@ -77,7 +77,7 @@ conditions—the regularity of the enumeration, the reliance on classical
 logic—the chapter will state them along with it, without presenting the
 result as stronger than it is proved.
 
-## What “Uncountability” Cannot Mean under $P4${What “Uncountability” Cannot Mean under P4}
+## What “Uncountability” Cannot Mean under $P4$
 
 ### The Classical Formulation and Its Subject
 
@@ -192,7 +192,7 @@ enumeration is a function from indices to processes:
 one into the other:
 
 $$
-`Enumeration` \;=\; `nat` \to (`nat` \to ℚ).
+\texttt{Enumeration} \;=\; \texttt{nat} \to (\texttt{nat} \to ℚ).
 $$
 
 An enumeration is a *process that yields processes*. It is an object
@@ -203,9 +203,9 @@ processes, not over a table of ready real numbers as in the classical
 exposition. Schematically:
 
 $$
-E 0 : `RealProcess`, \quad
-E 1 : `RealProcess`, \quad
-E 2 : `RealProcess`, \quad …
+E 0 : \texttt{RealProcess}, \quad
+E 1 : \texttt{RealProcess}, \quad
+E 2 : \texttt{RealProcess}, \quad …
 $$
 
 each term $E n$ is a process of rational approximations to some point.
@@ -245,15 +245,12 @@ Definition valid_regular_enumeration (E : Enumeration) : Prop :=
   forall n, is_Regular_Cauchy (E n) /\ (forall m, 0 <= E n m <= 1).
 ```
 
-{
-
 Here each term is required to be not merely Cauchy but *regular*
 Cauchy—`is_Regular_Cauchy`. What this means and why it is required is
 the subject of the next section. The file proves that a regular
 enumeration is also an ordinary one (the lemma
 `valid_regular_implies_valid`): regularity is a strengthening of the
 notion of admissibility, not a departure from it.
-}
 
 ### The Exact Formulation of Uncountability
 
@@ -433,12 +430,12 @@ link three quantities so that the inequality always holds. In the
 current code the parameters are synchronized as follows:
 
 $$
-`ref`(n) = 48\cdot 3^{n}, \quad
+\texttt{ref}(n) = 48\cdot 3^{n}, \quad
 \delta(n) = \frac{1}{24\cdot 3^{n}}, \quad
 \text{width}(n) = \frac{1}{3^{n}}.
 $$
 
-Here $`ref`(n)$ is the number of the step at which the approximation of
+Here $\texttt{ref}(n)$ is the number of the step at which the approximation of
 $E(n)$ is taken (regularity guarantees that by this step $E(n)$ is
 already close to its limit); $\delta(n)$ is the half-width of the
 confidence interval; the width is the size of the interval after $n$
@@ -454,13 +451,11 @@ half-width of the confidence interval is always less than the width of
 a third. No edge cases remain—the inequality holds for every $n$, and a
 free third is *always* found.[^2]
 
-{
 The width of the nested intervals decreases geometrically, as
 $1/3^n$—a threefold contraction at each step; from this follows the
 Cauchy property of the diagonal process (§ 4.6.2). In the process
 reformulation this rate is recorded as a separate quantity—
 `diagonal_convergence_rate`, equal to $1/3$.
-}
 
 ## The Diagonal Process
 
@@ -468,7 +463,7 @@ reformulation this rate is recorded as a separate quantity—
 
 Putting the trisection together, we obtain the diagonal process. We
 start with the interval $[0,1]$. At each step $n$ we take the
-approximation of $E(n)$ at step $`ref`(n)$, build around it a
+approximation of $E(n)$ at step $\texttt{ref}(n)$, build around it a
 confidence interval of half-width $\delta(n)$, find a free third, and
 narrow the current interval to it. This yields a sequence of nested,
 contracting intervals. The *diagonal process* is the process of their
@@ -480,7 +475,6 @@ give the uncountability theorem. Let us analyze them one by one.
 
 ### The Diagonal Is a Cauchy Process
 
-{
 First: the diagonal process *converges*—it is a Cauchy process. This is
 the lemma `diagonal_trisect_v2_is_Cauchy`. The proof rests on the
 contraction of the intervals: the width of the $n$-th interval is
@@ -491,11 +485,9 @@ narrower than $\varepsilon$; and the midpoints, from this step on, all
 lie in one narrow interval and therefore differ by less than
 $\varepsilon$. The diagonal is a genuine process of a point, not a
 divergent collection of rational numbers.
-}
 
 ### The Diagonal Lies in the Interval
 
-{
 Second: the diagonal process does not leave $[0,1]$. This is the lemma
 `diagonal_trisect_v2_in_unit`: at every step the value of the diagonal
 is contained between $0$ and $1$. The proof is simple in essence: the
@@ -505,7 +497,6 @@ the nested intervals therefore remains in $[0,1]$. This property is
 needed for the diagonal to be a *legitimate rival* of the enumerated
 processes: they lie in $[0,1]$ by the admissibility condition, and so
 does the diagonal—otherwise the comparison would not be quite fair.
-}
 
 ### The Diagonal Differs from Every Enumerated Process
 
@@ -591,7 +582,6 @@ theorem to take its place in the common line of process mathematics, it
 must be *translated* into the terms of `ProcessCore`. A separate file is
 devoted to this—`ProcessUncountable.v`.
 
-{
 It is important to separate the roles of the two files at once, without
 mixing them. `ShrinkingIntervals_ERR.v` is the file where the diagonal
 is *built* and the theorem *proved*; all the heavy work—trisection,
@@ -600,7 +590,6 @@ synchronization, the gap—is there. `ProcessUncountable.v` is a
 prove uncountability from scratch; it *transfers* what has already been
 proved into the language of the process core. Its own theorem rests
 directly on `unit_interval_uncountable_trisect_v2`.
-}
 
 ### A Bridge between Two Notations of the Cauchy Property
 
@@ -646,30 +635,25 @@ Proof.
   ...
 ```
 
-{
-
 The same uncountability—but in the types of `ProcessCore`. And the
 structure of the proof is visible at once: it *destructures* the result
 of the main theorem (`destruct … unit_interval_uncountable_trisect_v2`)
 and recasts its three conjuncts through the bridges. The translator file
 is honest about its source: it does not claim to be an independent
 proof; it translates.
-}
 
-### One Point of Precision: $\neg${not} process_equiv and not_equiv
+### One Point of Precision: $\neg$ process_equiv and not_equiv
 
-{
 A subtlety must be noted here, so as not to read the translated theorem
 as stronger than the original. The original theorem in
 `ShrinkingIntervals_ERR.v` gives `not_equiv`—a *positive* statement
 about a persistent gap: a threshold $\varepsilon$ is presented that the
 discrepancy reaches again and again, arbitrarily far along the steps.
 The translated theorem in `ProcessUncountable.v` gives
-$\neg `process_equiv`$—the *negation* of equivalence.
-}
+$\neg \texttt{process\_equiv}$—the *negation* of equivalence.
 
 The bridge leads *in one direction*: `not_equiv` implies
-$\neg `process_equiv`$, and this implication is proved. The converse
+$\neg \texttt{process\_equiv}$, and this implication is proved. The converse
 implication—that a persistent gap can be *extracted* from the negation
 of equivalence—is not singled out as a separate lemma in the
 repository. It is therefore most exact to put it this way: at the level
@@ -748,7 +732,6 @@ diagonal process that did not enter the enumeration.
 
 ### E/R/R Analysis: Uncountability as a Statement about Processes
 
-{
 What has been proved has an E/R/R arrangement (Part I), and its analysis
 secures the main shift of the chapter. The header of the supporting file
 gives the labeling directly: *elements—nested intervals avoiding every
@@ -757,7 +740,7 @@ process; rule—at step $n$ avoid $E(n)$ by choosing a free third*.[^3] We
 conduct the analysis in the ontological order Rules $\to$ Roles $\to$
 Elements. A reservation about status: the subject is processes over
 $ℚ$, the quotient type of classes is not built (Chapter 4.3), and the
-“system” is not an object `System` $L$.}
+“system” is not an object `System` $L$.
 
 *Rules* (the law $L5$). The constitution-construction is the rule of
 trisection: at step $n$ narrow the interval to a third *free* of $E(n)$
@@ -789,7 +772,7 @@ step: the diagonal is built step by step, the enumeration is a function
 yielding functions—no completed uncountable set of points is formed
 anywhere.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -822,7 +805,6 @@ structurally, is the question of Chapter 4.5.
 
 ### What It Rests On: Classical Logic
 
-{
 Honesty requires naming the logical means on which the result rests.
 Both supporting files—`ShrinkingIntervals_ERR.v` and
 `ProcessUncountable.v`—use *classical logic*: the axiom `classic`, the
@@ -831,7 +813,6 @@ directly: the file imports the classical module and is provided with a
 philosophical note on the role of this law; `ProcessUncountable.v`
 inherits the same axiom. The result on the uncountability of processes
 is *not* fully constructive: it rests on $L3$.
-}
 
 This is neither a contradiction nor a defect. Chapter 4.1 showed that
 $L3$—the law of excluded middle—is in ToS one of the accepted laws of
@@ -907,16 +888,16 @@ open, without prejudging the answer: it has carried the uncountability
 theorem through to the end, and it passes on the question of the “size”
 of what turned out to be uncountable.
 
-{*The summary of the chapter comes in three parts. First: what is proved.
+*The summary of the chapter comes in three parts. First: what is proved.
 No regular enumeration of Cauchy processes in the interval $[0,1]$ covers
 all the process classes of this interval: for every such enumeration a
 diagonal Cauchy process is built, lying in $[0,1]$ and separated by a
 persistent gap (`not_equiv`) from every term. This is Cantor’s theorem
 in the $P4$ reading—a statement about the impossibility of a process
 enumeration, not about a completed uncountable set; the construction of
-the diagonal is by trisection.*}
+the diagonal is by trisection.*
 
-{*Second: what it rests on. The construction and the theorem are proved
+*Second: what it rests on. The construction and the theorem are proved
 in `ShrinkingIntervals_ERR.v`; the process reformulation is in
 `ProcessUncountable.v`, which transfers the result into the language of
 `ProcessCore` through the bridge `si_cauchy_compat` and the implication
@@ -925,10 +906,10 @@ enumeration—with a known modulus of convergence; for arbitrary Cauchy
 enumerations it is not established. Both files use classical logic
 ($L3$, the axiom `classic`); the Axiom of Choice and the axiom of
 infinity are *not* used—trisection is deterministic, and there are no
-completed infinities.*}
+completed infinities.*
 
-{*Third: what remains open. The process theorem gives
-$\neg `process_equiv`$—the negation of equivalence; the original
+*Third: what remains open. The process theorem gives
+$\neg \texttt{process\_equiv}$—the negation of equivalence; the original
 `not_equiv`, with an explicit gap, is more informative, and the converse
 passage is not singled out as a separate lemma in the code. The diagonal
 represents a new equivalence class; the quotient type of these classes
@@ -937,7 +918,7 @@ is not built as a separate Rocq type (Chapter 4.3)—what works is the
 question of the “magnitude” of the process continuum remains open: how
 exactly the process classes of the interval differ from the countable
 rational points, if the difference is spoken of in a language other than
-that of completed cardinalities—Chapter 4.5 leads to this question.*}
+that of completed cardinalities—Chapter 4.5 leads to this question.*
 
 ---
 

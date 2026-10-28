@@ -2,7 +2,7 @@
 title: "Chapter 7. Synthesis: A Map of Mathematics beyond the Boundary"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/07 Синтез карта математики за границей.md"
-sourceBlob: bf0206f61cccc1f9c96cc38c4f8e12f9e01e25c2
+sourceBlob: d536163d9e8cab7e81cf1b9ec245a346692f6935
 translated: 2026-10-20
 status: draft
 ---
@@ -11,15 +11,13 @@ status: draft
 
 Chapters 1–6 went through the mathematics “beyond the boundary” piece by piece: the infinitesimal as a process, the calculus as one shadow operation, the ring-not-a-field, the ultrafilter as a role-limit engine, the boundary as invertibility with the single seed $\mathrm{negb}$, the registry of the illusory. It remains to bring everything into *one map* and to state the thesis of the part as a whole.
 
-{
-*The flagship of the part: the **calculational content** of this block is processual: the Element core plus *removable* role-limit scaffolding (by conservativity); the boundary runs at exactly one point—**the maximization of the Fréchet filter to omniscience**; and the ZFC phantoms (in the ontology of ToS) stand *to the side* of Element mathematics, not *above* it. The machine heart of the map is the single root: one undecided distinction $\mathrm{undecided} S$ generates all three algebraic forms of the role-limit gap.*}
+*The flagship of the part: the **calculational content** of this block is processual: the Element core plus *removable* role-limit scaffolding (by conservativity); the boundary runs at exactly one point—**the maximization of the Fréchet filter to omniscience**; and the ZFC phantoms (in the ontology of ToS) stand *to the side* of Element mathematics, not *above* it. The machine heart of the map is the single root: one undecided distinction $\mathrm{undecided} S$ generates all three algebraic forms of the role-limit gap.*
 
 And an honest frame at once (it is also the content of § “What We Do Not Claim: The Horizon”): we do **not** claim that ToS “does all of nonstandard analysis.” We claim exactly three things—the Element core is formalized, the role-limit is honestly marked (and conservativity is cited), the illusory is named.
 
 ## The Single Root: One Distinction—Three Forms
 
-{
-The whole role-limit side of the part grows from one place. The *undecided distinction* $\mathrm{undecided} S$ is given by a subset $S\subseteqℕ$ for which both $S$ and its complement hold *infinitely often*: the Fréchet filter (the cofinite one) does not decide “which of them is large.” This is a **positive** property (both occur arbitrarily far out—but not “cofinitely”), not a double negation.}
+The whole role-limit side of the part grows from one place. The *undecided distinction* $\mathrm{undecided} S$ is given by a subset $S\subseteqℕ$ for which both $S$ and its complement hold *infinitely often*: the Fréchet filter (the cofinite one) does not decide “which of them is large.” This is a **positive** property (both occur arbitrarily far out—but not “cofinitely”), not a double negation.
 
 This one property gives, by machine, **three** forms of one gap[^1]:
 
@@ -29,8 +27,7 @@ This one property gives, by machine, **three** forms of one gap[^1]:
 
 The canonical $\mathrm{undecided}$ set is the evens, $\mathrm{evens}$. This is the structural reason why the germ ring of processes is *a ring, not a field* (Chapter 3): the gap is not an algebraic defect but *one* root in three garbs.
 
-{
-*Honestly about the status. Constructivity here is no accident: all three forms are derived **without** the axiom L3 (excluded middle) precisely because $\mathrm{undecided}$ is given positively (both arbitrarily far out: $S$ and $\neg S$ are cofinal, not cofinite), and not as $\neg(\text{cofinite})$—the latter would require the elimination of a double negation. The genuine content is the **unification** (one root $\to$ three forms) by machine, not a new theorem of nonstandard analysis.*}
+*Honestly about the status. Constructivity here is no accident: all three forms are derived **without** the axiom L3 (excluded middle) precisely because $\mathrm{undecided}$ is given positively (both arbitrarily far out: $S$ and $\neg S$ are cofinal, not cofinite), and not as $\neg(\text{cofinite})$—the latter would require the elimination of a double negation. The genuine content is the **unification** (one root $\to$ three forms) by machine, not a new theorem of nonstandard analysis.*
 
 The same root is also visible algebro-logically (Chapter 5): the anti-fixed point $\mathrm{negb} b\neq b$—Lawvere’s seed—generates the zero divisor, the prime resolution of the ultrafilter measure, uncountability ($ℕ\to 2^ℕ$), and Russell; and on the ToS core this is the shadow of P1 (no self-membership). One seed—many refractions.
 
@@ -38,19 +35,17 @@ The same root is also visible algebro-logically (Chapter 5): the anti-fixed poin
 
 Now the whole part is in one table. The rows are the layers of nonstandard analysis; the columns are the three statuses of the verdict.
 
-\setlength{\tabcolsep}{4pt}
-
 | **Layer** | **Element** (process, $0$ ax) | **role-limit** (formwork) | **Illusory** (phantom) |
 |---|---|---|---|
-| $\infty$-small | the germ ring $ℚ^{ℕ}/$ Fréchet, $\delta=1/(n+1)$, the derivative | the field $^{*}ℝ$ (ultrafilter) | {—} |
-| transfer | Fréchet: the cofinite filter / eventual equality | the full Łoś transfer | {—} |
+| $\infty$-small | the germ ring $ℚ^{ℕ}/$ Fréchet, $\delta=1/(n+1)$, the derivative | the field $^{*}ℝ$ (ultrafilter) | — |
+| transfer | Fréchet: the cofinite filter / eventual equality | the full Łoś transfer | — |
 | measure, integral | hyperfinite $=$ Riemann; Loeb as the limit of finite ones | standardization | the non-measurable (Vitali) |
 | filters | cofinite (Fréchet) | ultrafilter-ROLE ($\mathrm{LPO}_\omega$) | ultrafilter-object without a witness; $\betaℕ\setminusℕ$ |
-| pathology | {—} | {—} | Hamel, Banach–Tarski, a well-ordering of $ℝ$ |
+| pathology | — | — | Hamel, Banach–Tarski, a well-ordering of $ℝ$ |
 
 The map reads as one sentence: the left and middle columns are one and the same process mathematics (Element plus *removable* formwork by conservativity), the right one holds artifacts of the chosen set theory.
 
-And the boundary between the middle and the right runs at *one* point—the maximization of the cofinite filter to a nonprincipal ultrafilter, that is, the omniscience $\mathrm{LPO}_\omega$ (a coherent decision of “is $S$ large” for *all* subsets at once). In the foundation of the project this place is marked by the ladder of principles of omniscience $\mathrm{LLPO}\sqsubset\mathrm{WLPO}\sqsubset\mathrm{LPO}$[^2], and in the registry of set-theoretic assumptions the power set and choice are assigned to the role-limit side[^3]. This is the same finitization boundary as in thesis H1 of the whole book: *the finitization boundary $=$ the boundary of constructivity*.
+And the boundary between the middle and the right runs at *one* point—the maximization of the cofinite filter to a nonprincipal ultrafilter, that is, the omniscience $\mathrm{LPO}_\omega$ (a coherent decision of “is $S$ large” for *all* subsets at once). In the foundation of the project this place is marked by the ladder of principles of omniscience $\mathrm{LLPO}\sqsubset\mathrm{WLPO}\sqsubset\mathrm{LPO}$[^2], and in the registry of set-theoretic assumptions the power set and choice are assigned to the role-limit side[^3]. This is the same finitization boundary as in thesis H1 of the whole volume: *the finitization boundary $=$ the boundary of constructivity*.
 
 ## What We Do Not Claim: The Horizon
 

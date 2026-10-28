@@ -2,7 +2,7 @@
 title: "Chapter 3. The Euler Product and the Link to the Primes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/03 Произведение Эйлера и связь с простыми.md"
-sourceBlob: 64513fed8c2fad6cf9d2a640177c427042edc2e5
+sourceBlob: bf23ab915d40b4d0faa209bba1428faaabb8d0c3
 translated: 2026-10-20
 status: draft
 ---
@@ -53,7 +53,7 @@ Definition euler_partial (k : nat) (primes_up_to_N : list nat) : Q :=
   Qprod (map (fun p => euler_factor p k) primes_up_to_N).
 ```
 
-Each factor $`euler_factor` p k = p^{k}/(p^{k}-1)$ is a concrete rational number greater than $1$; the partial product $`euler_partial`$ is the product of these factors over the primes from the sieve. Machine-checked are the positivity, the bounds $>1$ and $\le 2$ for the factors, and also the positivity and *nonvanishing* of each finite partial product; all over $ℚ$, for integer $k\ge 2$, *without axioms*.[^2]
+Each factor $\texttt{euler\_factor} p k = p^{k}/(p^{k}-1)$ is a concrete rational number greater than $1$; the partial product $\texttt{euler\_partial}$ is the product of these factors over the primes from the sieve. Machine-checked are the positivity, the bounds $>1$ and $\le 2$ for the factors, and also the positivity and *nonvanishing* of each finite partial product; all over $ℚ$, for integer $k\ge 2$, *without axioms*.[^2]
 
 **The honest boundary.**  What is machine-checked is the *constructive side*: the partial products over $ℚ$ for integer $k\ge 2$ and their properties. The *full* infinite identity $\prod_p 1/(1-p^{-s})=\zeta(s)$ for arbitrary $s$ is a classical analytic result; the repository formalizes the process of partial products and the comparison, not a completed transcendental equality. This is the same cut by status as in Chapter 13.2.
 
@@ -100,7 +100,7 @@ where $N(n)$ is the number of points of period $n$; its singularities count peri
 | the Euler product over primes | the product over prime orbits |
 | the zeros and the pole of $\zeta$ | the singularities of $\zeta_{\mathrm{dyn}}$ |
 
-This is a deep structural connection: number theory and the theory of dynamics speak one language of zeta functions. In modern mathematical physics it is actively studied (Montgomery’s conjecture, the spectral interpretation of the zeros)—but as an *analogy and a program*, not as a proved identity; its place is Volume III.
+This is a deep structural connection: number theory and the theory of dynamics speak one language of zeta functions. In modern mathematical physics it is actively studied (Montgomery’s conjecture, the spectral interpretation of the zeros)—but as an *analogy and a program*, not as a proved identity; its place is in physics.
 
 ## E/R/R Analysis: The Product as a Rule of Recoding
 
@@ -108,13 +108,13 @@ This is a deep structural connection: number theory and the theory of dynamics s
 
 **Roles (L4).**  “The Euler product” is a *role-process* (a sequence of partial products over the primes), the double of the sum-process of Chapter 13.2. “The factor $1/(1-p^{-s})$” is the *role-contribution* of a single atom $p$. “Freedom from zeros for $\Re s>1$” is a *role-consequence* of the positivity of the contributions.
 
-**Elements (L1${}+{}$P4).**  At each stage, finite data: concrete $`euler_factor` p k\inℚ$, partial products over the primes from a finite sieve. *Not* elements: the completed infinite product as an object, the identity for arbitrary $s$ as a ready equality.
+**Elements (L1${}+{}$P4).**  At each stage, finite data: concrete $\texttt{euler\_factor} p k\inℚ$, partial products over the primes from a finite sieve. *Not* elements: the completed infinite product as an object, the identity for arbitrary $s$ as a ready equality.
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
 | the recoding sum ${}\leftrightarrow{}$ product (through the uniqueness of factorization) | the constitution of the link between zeta and the primes | Rule (L5) |
 | “the Euler product” ${}={}$ process; factor ${}={}$ the contribution of an atom; freedom from zeros ${}={}$ consequence | the status of objects within the recoding | Role (L4) |
-| concrete $`euler_factor` p k$; partial products over the sieve | the bearers at each stage | Element (L1${}+{}$P4) |
+| concrete $\texttt{euler\_factor} p k$; partial products over the sieve | the bearers at each stage | Element (L1${}+{}$P4) |
 
 **What the analysis removes.**  The Euler product is often presented as a “magical” identity. ToS shows its *mechanism*: it is a recoding whose legitimacy rests on the uniqueness of factorization—that is, on the well-formedness of the role “atom” from Chapter 13.1. The link between zeta and the primes ceases to be a mystery and becomes a consequence of the multiplicative arrangement of $ℕ$.
 

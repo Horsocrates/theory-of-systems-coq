@@ -2,7 +2,7 @@
 title: "Chapter 2. Lebesgue Measure on the Process Continuum"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/06 Меры и интегрирование/02 Мера Лебега на процессном континууме.md"
-sourceBlob: d31d707479fe1d391cd0a33889a237737ec67adb
+sourceBlob: 6070969cda2e6d27b4efd207a4f79ae5404db5ce
 translated: 2026-10-20
 status: draft
 ---
@@ -15,7 +15,7 @@ Chapter 6.1 introduced measure as a *rule of assignment*: $\mu(A)=I(\chi_A)$, th
 
 ### What the Chapter Proves and What It Leaves as a Program
 
-Let us hold to the three levels of rigor introduced in § (see the corresponding chapter). *Proved without axioms*: the measure of an interval and its invariance under translation and scaling; measure zero for the rational points of an interval and for the Cantor set, as the convergence of a covering process to zero. *Proved at an explicit price* (L3): countable additivity as the convergence of partial sums (Chapter 6.1). *Remains a program or a classical comparison*: outer measure and Carathéodory measurability (in our order they are neither built nor needed), measure on the whole process continuum as a completed object, and the impossibility of the Vitali set (this is not a theorem of the system but a diagnosis of the absence of a bearer).
+Let us hold to the three levels of rigor introduced in [[Library/Branches/Mathematics/Volume/06 Measure and Integration/01 Measure as a Process of Assignment#Where the Chapter Stands|§ 1.1 “Where the Chapter Stands”]]. *Proved without axioms*: the measure of an interval and its invariance under translation and scaling; measure zero for the rational points of an interval and for the Cantor set, as the convergence of a covering process to zero. *Proved at an explicit price* (L3): countable additivity as the convergence of partial sums (Chapter 6.1). *Remains a program or a classical comparison*: outer measure and Carathéodory measurability (in our order they are neither built nor needed), measure on the whole process continuum as a completed object, and the impossibility of the Vitali set (this is not a theorem of the system but a diagnosis of the absence of a bearer).
 
 *The spine of the exposition here deliberately diverges from the textbook: we do not build a $\sigma$-algebra and an outer measure but extend the rule $\mu=I(\chi)$ directly.*
 
@@ -109,8 +109,7 @@ at every stage: measures of intervals $(d-c)$, cover lengths $(1/2)^n$ and $(2/3
 
 ### What the Analysis Yields
 
-{
-The capstone of the chapter is the diagnosis of “what is lost without AC.” Vitali and Banach–Tarski are *roles without a bearer*: the classical theory assigns them a place, but this place requires a bearer—the completed collection of all subsets and an external choice—and under P4 there is no such bearer. Hence their absence is not a gap in the theory: it is a direct structural consequence of the fact that the continuum in ToS is populated by *processes*, not by completed objects. The same diagnosis has guided the whole volume: to take a role (measure zero, measurability, uncountability) for an object is a confusion of categories; to populate the continuum with completed subsets instead of processes is the same confusion at the level of the whole of measure theory.}
+The capstone of the chapter is the diagnosis of “what is lost without AC.” Vitali and Banach–Tarski are *roles without a bearer*: the classical theory assigns them a place, but this place requires a bearer—the completed collection of all subsets and an external choice—and under P4 there is no such bearer. Hence their absence is not a gap in the theory: it is a direct structural consequence of the fact that the continuum in ToS is populated by *processes*, not by completed objects. The same diagnosis has guided the whole volume: to take a role (measure zero, measurability, uncountability) for an object is a confusion of categories; to populate the continuum with completed subsets instead of processes is the same confusion at the level of the whole of measure theory.
 
 The positive part is exactly the one that is proved: the measure of an interval and its invariance, measure zero for the countable and the Cantor sets as convergent processes, and the accumulation of measure for unions. This is enough to pass on to functions: the next chapter introduces measurable functions and the Lebesgue integral as a process, relying on the same step foundation, and brings the notion of “almost everywhere” to classes that echo the point-class of Chapter 4.3.
 
@@ -118,7 +117,7 @@ The positive part is exactly the one that is proved: the measure of an interval 
 
 [^1]: `measure_translation`: $\mu([a,a+w])=\mu([b,b+w])$ (the measure depends only on the width $w$); `measure_scale`: $\mu([0,k])=k$. Plus `measure_point_zero` (a degenerate interval has measure zero). All in `LebesgueMeasure.v`, 0 axioms.
 [^2]: `measure_additive` in `LebesgueMeasure.v` (the case of two adjacent intervals); the process analogue is `q_measure_additive` in `ProcessMeasureTheory.v`.
-[^3]: `sigma_additive_converges` (`ProcessSigmaAdditive.v`), price: L3. More in § (see the corresponding chapter) of Chapter 6.1.
+[^3]: `sigma_additive_converges` (`ProcessSigmaAdditive.v`), price: L3. More in [[Library/Branches/Mathematics/Volume/06 Measure and Integration/01 Measure as a Process of Assignment#Countable Additivity as Convergence of a Process|§ 1.4 “Countable Additivity as Convergence of a Process”]] of Chapter 6.1.
 [^4]: The infimum over *all* covers is a completed operation over an infinite collection; in the process reading it is replaced by a concrete covering process with an explicit decreasing estimate (see § “Sets of Measure Zero: The Countable and the Cantor Set”), not by taking an exact bound over a ready totality.
 [^5]: Proved: the covering process $(1/2)^n$ converges to zero as a process, `rationals_cover_to_zero` (`ProcessRationalsNull.v`, 0 axioms). It is precisely countability (the enumeration from Chapter 3.3) that makes the total budget of the cover summable.
 [^6]: Proved: the covering process $(2/3)^n$ converges to zero, `cantor_measure_zero` (`ProcessCantorMeasure.v`, 0 axioms).

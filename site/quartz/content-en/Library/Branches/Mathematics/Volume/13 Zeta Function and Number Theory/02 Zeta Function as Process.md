@@ -2,7 +2,7 @@
 title: "Chapter 2. The Zeta Function as a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/02 Дзета-функция как процесс.md"
-sourceBlob: 2500ab46974a6b7a5714630d7b63faed096bdfb0
+sourceBlob: d26be5965af46fc1c87e6590b2ed4ff1fa852be8
 translated: 2026-10-20
 status: draft
 ---
@@ -32,7 +32,7 @@ Definition zeta_partial (k N : nat) : Q := (* sum of zeta_term k n over n < N *)
 Definition zeta_process (k : nat) : nat -> Q := fun N => zeta_partial k N.
 ```
 
-Here $`nat_power` (n) k = n^{k}$ is an exact integer power, so that each partial sum $\zeta_N(k)=\sum_{n=1}^{N} 1/n^{k}$ is a *concrete rational number*. The *process* $`zeta_process` k$ is the sequence $N\mapsto\zeta_N(k)$.[^2]
+Here $\texttt{nat\_power} (n) k = n^{k}$ is an exact integer power, so that each partial sum $\zeta_N(k)=\sum_{n=1}^{N} 1/n^{k}$ is a *concrete rational number*. The *process* $\texttt{zeta\_process} k$ is the sequence $N\mapsto\zeta_N(k)$.[^2]
 
 **The restriction on the exponent.**  We work with *integer* $k\ge 2$ precisely because for them $n^{k}$ is exactly computable over $ℚ$—by finite data, without recourse to $ℝ$. For a non-integer $s$ (for example, $s=3/2$) already $n^{s}$ itself requires the exponential and the logarithm, that is, a transfer into the mode of Cauchy processes; this step honestly belongs to the continuum boundary of the part (the map is in 13.7).
 
@@ -40,7 +40,7 @@ Here $`nat_power` (n) k = n^{k}$ is an exact integer power, so that each partial
 
 The main result about this process is its convergence for all integer $k\ge 2$:
 
-> **Theorem.** For every integer $k\ge 2$ the process $`zeta_process` k$ is a Cauchy
+> **Theorem.** For every integer $k\ge 2$ the process $\texttt{zeta\_process} k$ is a Cauchy
 > process.[^3]
 
 The proof is a *telescoping comparison*. Since for $k\ge 2$
@@ -57,7 +57,7 @@ This is the meaning of the word “process”: convergence is not postulated by 
 
 At $s=1$ the picture breaks off: the harmonic series diverges.
 
-> **Lemma.** The process $`zeta_process` 1$ is *not* a Cauchy
+> **Lemma.** The process $\texttt{zeta\_process} 1$ is *not* a Cauchy
 > process.[^4]
 
 Ontologically this is essential: at $s=1$ zeta has a *pole*. In ToS a pole is not an “infinite value” but a *role-singularity*: a point where the process *goes beyond every bound*, that is, ceases to be a Cauchy process. The pole is a property of the *behavior* of the process, not a number in a completed table of values. This single singularity at $s=1$ organizes, as we will see, the whole analytic theory: it is precisely the pole at $s=1$ that serves as the key input to the classical proofs of the zero-free region near the line $\Re s=1$ (Chapter 13.5).
@@ -117,7 +117,7 @@ $$
 
 The *strict* statement, then, is not “the sum $1+2+3+…$ equals $-1/12$” (as a process of convergence it diverges) but: “the analytic continuation of the function $\sum 1/n^{s}$, defined for $\Re s>1$, to the point $s=-1$ gives $-1/12$.” The everyday notation pulls two processes together into one equals sign—and this is the error being diagnosed.
 
-**The physical meaning—a bridge to Volume III.**  The value $\zeta(-1)=-1/12$ has real applications: the Casimir effect (a finite force between plates after the regularization of a divergent sum of vacuum modes) and the critical dimension of the bosonic string ($D=26$). The ToS reading: in physically measurable quantities the divergent formal series is replaced by a *regularized* process, and ToS diagnoses this as a *change of rule*, not as the literal sum of a divergent series; the finite quantity is the result of *another*, algorithmically rigid process—analytic continuation. A detailed discussion is in Volume III; here we only record the mathematical basis.[^8]
+**The physical meaning.**  The value $\zeta(-1)=-1/12$ has real applications: the Casimir effect (a finite force between plates after the regularization of a divergent sum of vacuum modes) and the critical dimension of the bosonic string ($D=26$). The ToS reading: in physically measurable quantities the divergent formal series is replaced by a *regularized* process, and ToS diagnoses this as a *change of rule*, not as the literal sum of a divergent series; the finite quantity is the result of *another*, algorithmically rigid process—analytic continuation. A detailed discussion belongs to physics; here we only record the mathematical basis.[^8]
 
 ### Odd Values: $\zeta(3)$ as a Process
 
@@ -134,7 +134,7 @@ For the odd values no closed forms through $\pi$ are known. The irrationality of
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
 | the summation of partial sums; the modulus of convergence ($k\ge 2$); the continuation consistent in $\Re s>1$ | the constitution of zeta as a process | Rule (L5) |
-| “zeta” ${}={}$ process; “the pole $s{=}1$” ${}={}$ singularity; $\zeta(2k),\zeta(3)$ ${}={}$ role-limits | the status of an object within the process | Role (L4) |
+| “zeta” ${}={}$ process; “the pole $s{=}1$” ${}={}$ singularity; $\zeta(2k),\zeta(3)={}$ role-limits | the status of an object within the process | Role (L4) |
 | partial sums $\zeta_N(k)$; pairs of rationals; Bernoulli numbers | the bearers at each stage | Element (L1${}+{}$P4) |
 
 **What the analysis removes (diagnosis).**  The root error is the reification of zeta as a *completed function-object* and the ascription of a “sum” to a divergent series. ToS separates: zeta is a process; $\zeta(-1)=-1/12$ is a value of *another* process (the continuation), which coincides with the first only in $\Re s>1$; the pole is behavior (going beyond a bound), not an “infinite value.” This is the same discipline that in Part IV did not allow a Cauchy process to be confused with the completed continuum $ℝ$.
@@ -149,18 +149,18 @@ Next:
 - Chapter 13.4—the functional equation and the critical line;
 - Chapter 13.5—the zeros, the zero-free region, and the counting of zeros;
 - Chapter 13.6—von Mangoldt’s explicit formula, which links the zeros with the distribution of primes;
-- Chapter 13.7—three forms of the Riemann Hypothesis and the map of boundaries of the part (where the continuum price, the axiom tier, and openness are all gathered).
+- Chapter 13.7—three forms of the Riemann Hypothesis and the map of boundaries of the part (where the continuum price, the classical reading, and openness are all gathered).
 
 ---
 
 [^1]: Zeta as a process is formalized in `src/zeta/ZetaProcess.v` and in the complex-structural layer `src/zeta/ComplexZeta.v`—parts of the `src/zeta/` corpus (exact counts per the current build accounting). *A reservation about axioms:* `ZetaProcess.v`, in the Cauchy formulation, inherits `classic` (L3—the excluded middle, one of the two base axioms of the volume) through `MonotoneConvergence`; this is L3, not the Axiom of Choice.
 [^2]: `ZetaProcess.v`: `zeta_term`, `zeta_partial`, `zeta_process`.
-[^3]: `zeta_process_cauchy` in `ZetaProcess.v`: $\forall k,\ 2\le k\Rightarrow `is_cauchy`(`zeta_process` k)$. The explicit telescoping estimate is given by `zeta_term_2_le_shifted_tele` and `zeta_partial_bounded`; the Cauchy formulation inherits `classic` through `MonotoneConvergence`.
+[^3]: `zeta_process_cauchy` in `ZetaProcess.v`: $\forall k,\ 2\le k\Rightarrow \texttt{is\_cauchy}(\texttt{zeta\_process} k)$. The explicit telescoping estimate is given by `zeta_term_2_le_shifted_tele` and `zeta_partial_bounded`; the Cauchy formulation inherits `classic` through `MonotoneConvergence`.
 [^4]: `zeta_1_not_cauchy` in `ZetaProcess.v`. The standard grouping $1+\tfrac12+(\tfrac13+\tfrac14)+\dots>1+\tfrac12+\tfrac12+\dots$ gives unbounded growth: for every $M$ there is an $N$ with $\sum_{n\le N}1/n>M$. This is an algorithmic statement of divergence.
 [^5]: `ComplexZeta.v`: `TComplex`, `zeta_complex_at_integer`, norm estimates, `pole_unbounded`, `zeta_dichotomy`. *Honestly:* the full formula $n^{-s}=e^{-s\ln n}=n^{-\sigma}\bigl(\cos(t\ln n)-i\sin(t\ln n)\bigr)$ for an arbitrary complex $s$ is *not* built in this file (it stands in the header as an intention); its realization requires the exponential and the logarithm and belongs to the continuum boundary of the part (13.7).
 [^6]: This principle (the “algorithmic rigidity” of analytic functions) is discussed in detail in the line on analytic functions in Part VII; here we use only its consequence—the uniqueness of the consistent continuation.
-[^7]: `src/experimental/BernoulliNumbers.v`: the Bernoulli numbers $B_0=1$, $B_1=-\tfrac12$, $B_2=\tfrac16$, $B_3=0$, $B_4=-\tfrac1{30}$, \dots\ as exact rationals. The same file defines the Bernoulli layer $`zeta_neg`(k):=-B_{k+1}/(k+1)$ and machine-computes the first values (`zeta_neg_0..3`, including $`zeta_neg_1`=-\tfrac1{12}$). This formalizes the exact *rational* side of the values of the continuation but does *not* prove the analytic continuation itself.
-[^8]: In the repository, regularization and the Casimir effect are touched on separately (`src/experimental/CasimirProcess.v`, `AbelRegularization.v`); full-fledged physics is the subject of Volume III, not of this chapter.
+[^7]: `src/experimental/BernoulliNumbers.v`: the Bernoulli numbers $B_0=1$, $B_1=-\tfrac12$, $B_2=\tfrac16$, $B_3=0$, $B_4=-\tfrac1{30}$, … as exact rationals. The same file defines the Bernoulli layer $\texttt{zeta\_neg}(k):=-B_{k+1}/(k+1)$ and machine-computes the first values (`zeta_neg_0..3`, including $\texttt{zeta\_neg\_1}=-\tfrac1{12}$). This formalizes the exact *rational* side of the values of the continuation but does *not* prove the analytic continuation itself.
+[^8]: In the repository, regularization and the Casimir effect are touched on separately (`src/experimental/CasimirProcess.v`, `AbelRegularization.v`); full-fledged physics lies beyond this chapter.
 [^9]: `src/foundation/AperyConstantERR.v`: the standard and Apéry-accelerated partial sums of $\zeta(3)$, exact rational values and comparisons, $\zeta(3)\approx 1{,}202\dots$; the E/R/R analysis: $\zeta(3)$ is a process, not an Element. The *equality* of the limit values of both procedures and the *irrationality* of $\zeta(3)$ (Apéry, 1979) are a classical mathematical reading, not reformalized here.
 
 ---

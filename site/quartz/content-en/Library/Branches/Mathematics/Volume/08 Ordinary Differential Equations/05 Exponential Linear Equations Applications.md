@@ -2,7 +2,7 @@
 title: "Chapter 5. The Exponential, Linear Equations, Applications"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/05 Экспонента, линейные уравнения, применения.md"
-sourceBlob: 187ee4ba87602d5963f712105aa94cc1860c663d
+sourceBlob: c10f39f190ac99dd0dc8f11f236bd61ac8752779
 translated: 2026-10-20
 status: draft
 ---
@@ -17,7 +17,7 @@ All the examples obey the single ontology built in the preceding chapters: the s
 
 ### What This Chapter Claims—and What It Does Not
 
-The proved core is concrete processes over ℚ: the exponential trajectory of $y' = y$ as the ladder $(1+h)^n y_0$, the decay $y' = -\alpha y$, the general linear equation $y' = L y$, the vector step for systems and the harmonic oscillator $y» = -y$, and discrete price dynamics.[^1] All the stages are finite rational numbers, checkable by exact arithmetic.
+The proved core is concrete processes over ℚ: the exponential trajectory of $y' = y$ as the ladder $(1+h)^n y_0$, the decay $y' = -\alpha y$, the general linear equation $y' = L y$, the vector step for systems and the harmonic oscillator $y'' = -y$, and discrete price dynamics.[^1] All the stages are finite rational numbers, checkable by exact arithmetic.
 
 What the chapter does *not* do: it does not present $e^t$, $\sin$, $\cos$ as completed transcendentals, does not prove the exact conservation of the oscillator’s energy, and does not build global-in-time solutions. These objects are role-limits, and $\varepsilon$-convergence to them inherits L3 (as in Chapters 8.3–8.4).
 
@@ -41,7 +41,7 @@ Decay—$y' = -\alpha y$ with $\alpha > 0$—is especially important for applica
 
 So far we have dealt with a single equation. But many problems are *systems*: a pair (or an $n$-tuple) of quantities evolving jointly. The vector Euler step carries everything said over to pairs: the state $(y, v)$ is updated componentwise, $(y, v) \mapsto (y + h f_1, v + h f_2)$.[^7]
 
-The vector form makes it possible to reduce a *higher-order equation* to a first-order system: $y» = g(t, y, y')$ becomes the pair $y' = v$, $v' = g(t, y, v)$; introducing the velocity as an independent role enlarges the state space and lowers the order.[^8] The classical example is the harmonic oscillator $y» = -y$, that is, the pair $y' = v$, $v' = -y$. Its exact solution is $(\cos t, \sin t)$, and this trajectory is the role-limit of the vector Euler process; $\sin$ and $\cos$ as completed transcendentals are not Elements but role-limits, exactly like $e$.
+The vector form makes it possible to reduce a *higher-order equation* to a first-order system: $y'' = g(t, y, y')$ becomes the pair $y' = v$, $v' = g(t, y, v)$; introducing the velocity as an independent role enlarges the state space and lowers the order.[^8] The classical example is the harmonic oscillator $y'' = -y$, that is, the pair $y' = v$, $v' = -y$. Its exact solution is $(\cos t, \sin t)$, and this trajectory is the role-limit of the vector Euler process; $\sin$ and $\cos$ as completed transcendentals are not Elements but role-limits, exactly like $e$.
 
 The oscillator also lays bare the *honest* side of the numerical method: explicit Euler does not conserve energy. The quantity $E = y^2 + v^2$, classically constant, *drifts upward* on the grid: in two steps with $y_0=1, v_0=0, h=1/10$ it grows from $1$ to $1{,}0201$.[^9] This is not a defect of the exposition but a *property* of the explicit method, honestly computed: exact conservation of energy belongs to the continuous flow of the oscillator (or to specially structure-preserving, symplectic, schemes), whereas explicit Euler on a finite grid gives a systematic rational drift.
 
@@ -82,8 +82,7 @@ finite rational data: the values $y_n$, the nodes $t_n$, the factors $(1+Lh)^n$,
 
 ### What Is Proved and Where the Boundary Lies
 
-{
-Let us draw up the balance of the Part. *Proved over ℚ without axioms*: Euler’s method and its concrete trajectories; the Picard operator as a contraction on grid functions ($ℚ^{N+1}$, the sup metric) with the geometric gap between the iterates; the uniqueness of the solution on the grid through a finite maximum; stepwise and geometric control of divergence; homogeneous Grönwall and decay; the exponential, linear equations, the oscillator, and price dynamics as concrete rational processes. *The boundary* (L3 / role-limit): the $\varepsilon$-convergence of iterations and factors to a completed limit; completed solution functions, $e^t$, $\sin$, $\cos$ as objects; global-in-time continuation, blow-up, the maximal interval. This boundary is not a gap but an honest demarcation: what is a process over ℚ is not passed off as a completed object.}
+Let us draw up the balance of the Part. *Proved over ℚ without axioms*: Euler’s method and its concrete trajectories; the Picard operator as a contraction on grid functions ($ℚ^{N+1}$, the sup metric) with the geometric gap between the iterates; the uniqueness of the solution on the grid through a finite maximum; stepwise and geometric control of divergence; homogeneous Grönwall and decay; the exponential, linear equations, the oscillator, and price dynamics as concrete rational processes. *The boundary* (L3 / role-limit): the $\varepsilon$-convergence of iterations and factors to a completed limit; completed solution functions, $e^t$, $\sin$, $\cos$ as objects; global-in-time continuation, blow-up, the maximal interval. This boundary is not a gap but an honest demarcation: what is a process over ℚ is not passed off as a completed object.
 
 ### The Transition to Partial Differential Equations
 
@@ -97,7 +96,7 @@ Part VIII solved ordinary equations: evolution in time. The next step is partial
 [^2]: `exp_rhs`${}= \lambda y. y$ and `exp_euler` in `ProcessODEExamples.v`: `exp_euler_succ` gives $y_{n+1}=(1+h)y_n$. `exp_rhs_lipschitz`: the Lipschitz constant $1$.
 [^3]: `exp_euler_is_gronwall` in `ProcessODEExamples.v`: `exp_euler y0 h n == gronwall_iterate 1 0 h y0 n`. The exponential is Grönwall with $\alpha=1$, $\beta=0$.
 [^4]: `exp1_process`, `exp1_is_euler` (the identity “$e$-process ${}={}$ Euler trajectory for $y'=y$ at $t=1$”), `exp1_lower` ($\ge 2$ for all $N$, Bernoulli) in `ProcessExpProcess.v`, 0 axioms.
-[^5]: `expt_process` in `ProcessExpProcess.v`: stage $N$ is $(1+t/(N{+}1))^{N+1}$; concretely, $`expt_process` 0 0 = 1$ (the value $e^0$), $`expt_process` 1 0 = 2$ (the first stage of $e^1$).
+[^5]: `expt_process` in `ProcessExpProcess.v`: stage $N$ is $(1+t/(N{+}1))^{N+1}$; concretely, $\texttt{expt\_process} 0 0 = 1$ (the value $e^0$), $\texttt{expt\_process} 1 0 = 2$ (the first stage of $e^1$).
 [^6]: `decay_rhs`${}= \lambda y. -\alpha y$ and `decay_rhs_lipschitz` (the constant $\alpha$) in `ProcessODEExamples.v`.
 [^7]: `sys_euler` in `ProcessODESystem.v` (batch A): the vector Euler method for the system $y'=f_1$, $v'=f_2$; the laws of the step are `sys_euler_fst_S`, `sys_euler_snd_S`. 0 axioms.
 [^8]: `order2_euler` in `ProcessODESystem.v`; `order2_position_step`: in the reduced system the position grows by $h\cdot v$, that is, the equation $y'=v$ holds. 0 axioms.

@@ -2,7 +2,7 @@
 title: "Chapter 1. Orthonormal Systems and Fourier Coefficients"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/01 Ортонормированные системы и коэффициенты Фурье.md"
-sourceBlob: f47bd34775916a02b33936b86c45456347cc4143
+sourceBlob: c48a2de82ff571436650b3d345641d62421abfeb
 translated: 2026-10-20
 status: draft
 ---
@@ -221,8 +221,7 @@ $\sum_{k<K}$. Under P4 no element is a completed infinity: only finite expansion
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the expansion does *not* take as its element “the collection of all infinite harmonics” or a completed orthonormal basis. The system is finite, and completeness is checked as a *criterion* on $N$ coordinates, not as the membership of a function in the closure of a completed basis. It is precisely the absence of such self-reference that explains why the theory of Fourier coefficients needs here neither a completed infinite sum nor a postulate about the completeness of the basis: everything substantive is expressed by finite coordinates and the criterion of their sufficiency.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the expansion does *not* take as its element “the collection of all infinite harmonics” or a completed orthonormal basis. The system is finite, and completeness is checked as a *criterion* on $N$ coordinates, not as the membership of a function in the closure of a completed basis. It is precisely the absence of such self-reference that explains why the theory of Fourier coefficients needs here neither a completed infinite sum nor a postulate about the completeness of the basis: everything substantive is expressed by finite coordinates and the criterion of their sufficiency.
 
 What the analysis yields. It translates the results of the chapter into the language of structure: *the Fourier coefficient is a Role* (a coordinate along a direction), *completeness is a Rule-criterion* (the exhaustion of energy), and the numbers $c_k$ and the values
 $f(m)$ themselves are *Elements* (finite at every stage). To take the “Fourier series” as a completed infinite sum-object is to put a role-limit in the place of an Element—a confusion of categories of the same kind as “number as an object” instead of the role-quantity (Part II), “a point as an object” instead of a class (Chapter 4.3), and “uncountability as a property of a set” instead of a rule about processes (Chapter 4.4). The Fourier series begins here as a *family of finite* best approximations; its process convergence is the subject of Chapter 7.4, and as a completed object it is neither needed nor built.
@@ -252,4 +251,4 @@ The next chapter presents a concrete rational orthonormal system in full: the Wa
 
 Part: [[07 Harmonic Analysis|Part VII. Harmonic Analysis]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[06 Operators on L2 Self Adjointness Spectrum and Bridge to Quantum Dynamics|Chapter 6. Operators on L^2: Self-Adjointness, Spectrum, and the Bridge to Quantum Dynamics—Part VI]] · [[02 Walsh Hadamard Transform without Transcendentals|Chapter 2. Walsh–Hadamard: A Transform without Transcendentals]] →
+Navigation: ← [[06 Operators on L2 Self Adjointness Spectrum and Bridge to Quantum Dynamics|Chapter 6. Operators on L²: Self-Adjointness, Spectrum, and the Bridge to Quantum Dynamics—Part VI]] · [[02 Walsh Hadamard Transform without Transcendentals|Chapter 2. Walsh–Hadamard: A Transform without Transcendentals]] →

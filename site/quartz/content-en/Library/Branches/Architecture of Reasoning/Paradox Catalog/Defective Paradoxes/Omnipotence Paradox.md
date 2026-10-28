@@ -2,7 +2,7 @@
 title: "Omnipotence Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс всемогущества.md"
-sourceBlob: 793cfe8e1d59b2f1f0d6eeefb1f866cde4ef0b5b
+sourceBlob: 103ba9c175d0251c46f6900a32cb2ba3ae28e432
 translated: 2026-10-20
 status: draft
 description: "“Omnipotence” as an unlimited ability is contradictory"
@@ -40,7 +40,7 @@ The structure of the knot lives far beyond theology. Sovereignty: can a sovereig
 
 ## Diagnosis
 
-**Domain of the error:** Domain 2 (clarification). **Type:** defective—indeterminacy of a concept: the self-contradictoriness of the naive reading. **Violated laws:** [[Non-Contradiction]]—“a stone that cannot be lifted by one who can lift everything” requires an object at once liftable and unliftable; [[Identity]]—two different concepts go about under one word. **Essence of the defect:** the concept is undefined; naive omnipotence is incoherent in itself, and the philosophical one produces no knot. On the E/R/R triad: “omnipotence” is a Role over all the Rules; the naive reading requires the Role to cancel the very Rules that make it meaningful.
+**Domain of the error:** Domain 2 (clarification). **Type:** defective—contradiction in the definition: the self-contradictoriness of the naive reading. **Violated laws:** [[Non-Contradiction]]—“a stone that cannot be lifted by one who can lift everything” requires an object at once liftable and unliftable; [[Identity]]—two different concepts go about under one word. **Essence of the defect:** the concept is undefined; naive omnipotence is incoherent in itself, and the philosophical one produces no knot. On the E/R/R triad: “omnipotence” is a Role over all the Rules; the naive reading requires the Role to cancel the very Rules that make it meaningful.
 
 ## Why There Is No Paradox
 
@@ -60,7 +60,7 @@ Under the naive reading, “a stone that the omnipotent cannot lift” is not th
 
 [[Stone Paradox]] (the canonical scene of this knot—its folk dress, like the [[Barber Paradox|barber]] for Russell), the Euthyphro dilemma (the consistency of attributes), the paradox of the sovereign (Hart), [[Liar Paradox|the Liar]] (a figure of self-application—but there the knot is structural, here it is a defect of the concept).
 
-**Machine check.** In the registry of 46 it is `D9_Omnipotence`: the mismatch field `ConceptualAmbiguity`, the level `L3_MetaOperations`—the place of the concept above the rules is recorded in the entry itself; the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by clarifying the concept. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D9_Omnipotence`: the mismatch field `ConceptualAmbiguity`, the level `L3_MetaOperations`—the place of the concept above the rules is recorded in the entry itself; the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by clarifying the concept. Map: [[Formalization]].
 
 ---
 

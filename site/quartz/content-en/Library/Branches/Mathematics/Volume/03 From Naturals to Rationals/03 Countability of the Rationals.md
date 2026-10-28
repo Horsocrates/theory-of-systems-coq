@@ -2,7 +2,7 @@
 title: "Chapter 3. The Countability of the Rational Numbers"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/03 От натуральных к рациональным/03 Счётность рациональных чисел.md"
-sourceBlob: 88a15f2b94d032afdebe928c51b32045e0ea261b
+sourceBlob: fd03382f10b4cb228cd1113d69942f42f303cd70
 translated: 2026-10-20
 status: draft
 ---
@@ -235,15 +235,14 @@ $$
 
 Every rational number—positive, negative, or zero—receives its own index in this alternation, and to every index corresponds exactly one rational number.
 
-{
-Here one must be exact about the status of this step—and it is now *closed*. In the file `Countability_Q.v` the formula given above is implemented literally: the function `enum_Q` sets $\operatorname{enum}_ℚ(0)=0$, assigns the positive copy of the traversal to an odd index, and the negative one to an even index (except zero). An *inverse* function `index_of_Q` is built for it: for an arbitrary rational—through reduction to irreducible form and the inverse pass for the positive ones—it finds its index, handling zero, plus, and minus. Both have been proved mutually inverse—by the theorems `enum_Q_index_id` ($`enum_Q` (`index_of_Q` q) \mathrel{==} q$) and `index_of_Q_enum_id` ($`index_of_Q` (`enum_Q` n) = n$)—and the theorem `Q_bijection` connects them:
+Here one must be exact about the status of this step—and it is now *closed*. In the file `Countability_Q.v` the formula given above is implemented literally: the function `enum_Q` sets $\operatorname{enum}_ℚ(0)=0$, assigns the positive copy of the traversal to an odd index, and the negative one to an even index (except zero). An *inverse* function `index_of_Q` is built for it: for an arbitrary rational—through reduction to irreducible form and the inverse pass for the positive ones—it finds its index, handling zero, plus, and minus. Both have been proved mutually inverse—by the theorems `enum_Q_index_id` ($\texttt{enum\_Q} (\texttt{index\_of\_Q} q) \mathrel{==} q$) and `index_of_Q_enum_id` ($\texttt{index\_of\_Q} (\texttt{enum\_Q} n) = n$)—and the theorem `Q_bijection` connects them:
 
 `(forall n, index_of_Q (enum_Q n) = n)  /\ (forall q, enum_Q (index_of_Q q) == q)`.
 
 This is a *complete bijection $ℕ \leftrightarrow ℚ$ with computable inversion*—now not only for the positive rationals but for the whole of $ℚ$, constructively and *without a single axiom* (`Print Assumptions
 Q_bijection`: “Closed under the global context”).
 
-One precision of formulation remains—not a limitation but the right measure. The bijection connects $ℕ$ with $ℚ$ *taken up to* `Qeq`: the inverse pass goes through the reduction `Qred`, so that $2/4$ and $1/2$ receive one index. It cannot be otherwise—on raw notations of fractions there is no bijection, for $2/4$ and $1/2$ are different notations of one number (§ 2.5). Hence `index_of_Q_enum_id` is exact on $ℕ$ (equality of indices), while `enum_Q_index_id` holds up to `Qeq` on $ℚ$; together this is precisely a bijection of rational *values*.}
+One precision of formulation remains—not a limitation but the right measure. The bijection connects $ℕ$ with $ℚ$ *taken up to* `Qeq`: the inverse pass goes through the reduction `Qred`, so that $2/4$ and $1/2$ receive one index. It cannot be otherwise—on raw notations of fractions there is no bijection, for $2/4$ and $1/2$ are different notations of one number (§ 2.5). Hence `index_of_Q_enum_id` is exact on $ℕ$ (equality of indices), while `enum_Q_index_id` holds up to `Qeq` on $ℚ$; together this is precisely a bijection of rational *values*.
 
 *The inverse procedure `path_to_node` traces, from a fraction, the path from its node to the root and finds the index. Two round-trip theorems prove that the direct and the inverse procedures exactly invert each other. The main theorem `Q_positive_countable` asserts that the enumeration is injective and surjective—that is, it is a bijection for the *positive* rational numbers. The proof is fully constructive, without the Law of Excluded Middle: countability is not merely asserted but built—and the construction is the way of proving it. The traversal of all rational numbers—with zero and the negative side—is implemented by the function `enum_Q` according to the formula $E(0)=0$, $E(2n+1)=+\operatorname{enum}(n)$, $E(2n+2)=-\operatorname{enum}(n)$; the inverse pass `index_of_Q` is built for it, and the theorem `Q_bijection` proves that they are mutually inverse—a complete bijection $ℕ \leftrightarrow ℚ$ (up to `Qeq`, 0 axioms) now for the whole of $ℚ$.*
 
@@ -333,8 +332,7 @@ With this the passage through the rational numbers as a number system is complet
 
 ### E/R/R Analysis: Countability as an Operational Traversal
 
-{
-The countability gone through is worth analyzing by E/R/R (Part I): the analysis secures how the *operational* countability of ToS is richer than the existence of a bijection. The supporting file is `Countability_Q.v` (776 lines, *without a single axiom*, not even the Law of Excluded Middle): the Calkin–Wilf tree, the enumeration `enum_QPos` and its inverse `index_of_QPos`, the theorem `Q_positive_countable`; and for the whole of $ℚ$, the function `enum_Q`, its inverse `index_of_Q`, and the theorem `Q_bijection`. The reservation about status has now been lifted: for the whole of $ℚ$ a *complete* bijection $ℕ \leftrightarrow ℚ$ with computable inversion has been proved—two round-trip theorems, `enum_Q_index_id` and `index_of_Q_enum_id`, 0 axioms—with the single precision that $ℚ$ is taken up to `Qeq` ($2/4$ and $1/2$ receive one index); otherwise there could be no bijection at all. We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements.}
+The countability gone through is worth analyzing by E/R/R (Part I): the analysis secures how the *operational* countability of ToS is richer than the existence of a bijection. The supporting file is `Countability_Q.v` (776 lines, *without a single axiom*, not even the Law of Excluded Middle): the Calkin–Wilf tree, the enumeration `enum_QPos` and its inverse `index_of_QPos`, the theorem `Q_positive_countable`; and for the whole of $ℚ$, the function `enum_Q`, its inverse `index_of_Q`, and the theorem `Q_bijection`. The reservation about status has now been lifted: for the whole of $ℚ$ a *complete* bijection $ℕ \leftrightarrow ℚ$ with computable inversion has been proved—two round-trip theorems, `enum_Q_index_id` and `index_of_Q_enum_id`, 0 axioms—with the single precision that $ℚ$ is taken up to `Qeq` ($2/4$ and $1/2$ receive one index); otherwise there could be no bijection at all. We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements.
 
 *Rules* (the law $L5$). The constitution is the construction of the tree: the root and the two branching rules (`cw_left`/`cw_right`), § 3.3. To it is added navigation: binary path $\leftrightarrow$ node, node $\leftrightarrow$ index (§ 3.4), and the *invertibility* of the direct and the inverse traversal (`enum_injective` and `enum_surjective` give `Q_positive_countable`, § 3.5). And the rule of canonicity: irreducibility (`enum_coprime`)—every rational *value* occurs exactly once; $2/4$ does not appear separately from $1/2$ (§ 3.3). By $P4$, the traversal is a *process*: it reaches every rational in a *finite* number of steps, rather than presenting a completed list.
 
@@ -342,7 +340,7 @@ The countability gone through is worth analyzing by E/R/R (Part I): the analysis
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are the nodes of the tree (pairs `QPos`, whose representatives are the irreducible ones) and the natural indices. By $L1$, every node is identical with itself. By $P4$, every rational is a *finite* object—a numerator/denominator pair, an expression of finite length—and can therefore be traversed; “all the rationals,” meanwhile, are a potential traversal, not a ready collection.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -353,10 +351,9 @@ The countability gone through is worth analyzing by E/R/R (Part I): the analysis
 | node-pairs / irreducible representatives | bearers (finite, $P4$) | Element |
 | laws $L1$–$L5$ (here $L5$) | the universal layer | Rule (univ.) |
 
-{
-*Well-formedness.* The traversal is formed correctly: it is *bijective* (the direct and the inverse invert each other—proved) and *canonical* by irreducibility—no value is counted twice (there is no $2/4$ next to $1/2$). And here the analysis turns into a *diagnosis*, a twofold one. The first: ToS reads countability as a *rule*-traversal—a procedure that can be computed, traced, and inverted—not as the bare *existence* of a correspondence; the operational form is strictly stronger (§ 3.1). The second, and the main one for what follows: *data* and *behavior* must not be mixed. A rational is finite data (a pair, an element), and is therefore enumerable; a process of approximation is infinite behavior (a function $ℕ\toℚ$), and it does not reduce to the collection of finite programs (§ 3.7). To count processes in the same way as points is a confusion of categories: element-data and role-behavior are different levels.}
+*Well-formedness.* The traversal is formed correctly: it is *bijective* (the direct and the inverse invert each other—proved) and *canonical* by irreducibility—no value is counted twice (there is no $2/4$ next to $1/2$). And here the analysis turns into a *diagnosis*, a twofold one. The first: ToS reads countability as a *rule*-traversal—a procedure that can be computed, traced, and inverted—not as the bare *existence* of a correspondence; the operational form is strictly stronger (§ 3.1). The second, and the main one for what follows: *data* and *behavior* must not be mixed. A rational is finite data (a pair, an element), and is therefore enumerable; a process of approximation is infinite behavior (a function $ℕ\toℚ$), and it does not reduce to the collection of finite programs (§ 3.7). To count processes in the same way as points is a confusion of categories: element-data and role-behavior are different levels.
 
- What the analysis yields. Countability appears not as a property of a ready set but as a *rule*: a traversal that gives every rational a finite index. This closes the arc of number-positions of Part III—natural, integer, rational—all are finite data that can be laid out in a traversal. And by the same token the analysis sets the threshold of Part IV: *data* are enumerable; *behavior* is an open question. The processes of approximation that do not terminate at a rational position (§ 3.8.4) are precisely that behavior; whether *they* are enumerable Part IV will examine (the uncountability of processes).
+What the analysis yields. Countability appears not as a property of a ready set but as a *rule*: a traversal that gives every rational a finite index. This closes the arc of number-positions of Part III—natural, integer, rational—all are finite data that can be laid out in a traversal. And by the same token the analysis sets the threshold of Part IV: *data* are enumerable; *behavior* is an open question. The processes of approximation that do not terminate at a rational position (§ 3.8.4) are precisely that behavior; whether *they* are enumerable Part IV will examine (the uncountability of processes).
 
 ### What the Rational Numbers Lack
 

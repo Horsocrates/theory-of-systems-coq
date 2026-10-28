@@ -2,7 +2,7 @@
 title: "Bald Man Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс лысого.md"
-sourceBlob: 584958ecb3b72e8bbe75e22839ec64ff465b39a8
+sourceBlob: 8f05110c01201feefa92630c5684424ecda8e34e
 translated: 2026-10-20
 status: draft
 description: "“Bald” is a graded concept without a sharp boundary"
@@ -48,13 +48,13 @@ It inherits from the sorites word for word: the inductive step is a practical ge
 
 ## Lesson
 
-Recognize the sorites in any dress: sand, hairs, dollars, pixels—the mechanism is one, and so is the untying. A change of scenery does not create a new paradox; it tests whether the lesson of the old one has been learned.
+Recognize the sorites in any dress: sand, hairs, dollars, pixels—the mechanism is one, and so is the laying open. A change of scenery does not create a new paradox; it tests whether the lesson of the old one has been learned.
 
 ## Kin by Mechanism
 
 [[Sorites Paradox|Sorites]] (the canonical form—the full analysis is there), [[Color Spectrum|the Color Spectrum]] (a sorites in perception), wealth and poverty (a sorites with money).
 
-**Machine check.** In the registry of 46 it is `D2_BaldMan`, with the same diagnosis field `InstrumentObjectMismatch` as the sorites; the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D2_BaldMan`, with the same diagnosis field `InstrumentObjectMismatch` as the sorites; the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

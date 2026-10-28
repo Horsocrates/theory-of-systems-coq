@@ -2,7 +2,7 @@
 title: "Chapter 5. L¹ and L²: Spaces as Processes, Completeness as Constructibility"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/06 Меры и интегрирование/05 L^1 и L^2 пространства как процессы, полнота как конструируемость.md"
-sourceBlob: cd2ebcbbb8dfc633de12f2862df1d95d5768afa3
+sourceBlob: e664bdd7a763c53e6f126c0d298ee38f2005f10e
 translated: 2026-10-20
 status: draft
 ---
@@ -11,7 +11,7 @@ status: draft
 
 ### From the Integral to Spaces
 
-Chapters 6.1–6.4 built measure, the Lebesgue integral, and the apparatus for passing to the limit under the integral. The present chapter takes the next step: it assembles *function spaces* from the integral—$L^1$ and $L^2$. $L^1$ is the completion of step functions in the integral norm $\|f\|_1=\int|f|$; it was already built in Chapter 6.3 as a process. $L^2$ is the space of functions with finite $\int|f|^2$, equipped with an *inner product* $\langle f,g\rangle=\int fg$, and therefore with geometry: lengths, angles, orthogonality. This geometry is the new material of the chapter: it turns analysis into geometry, and it is $L^2$, a Hilbert space, that will become the stage for operators and quantum mechanics (Chapter 6.6 and the physics volume).
+Chapters 6.1–6.4 built measure, the Lebesgue integral, and the apparatus for passing to the limit under the integral. The present chapter takes the next step: it assembles *function spaces* from the integral—$L^1$ and $L^2$. $L^1$ is the completion of step functions in the integral norm $\|f\|_1=\int|f|$; it was already built in Chapter 6.3 as a process. $L^2$ is the space of functions with finite $\int|f|^2$, equipped with an *inner product* $\langle f,g\rangle=\int fg$, and therefore with geometry: lengths, angles, orthogonality. This geometry is the new material of the chapter: it turns analysis into geometry, and it is $L^2$, a Hilbert space, that will become the stage for operators and quantum mechanics (Chapter 6.6, then physics).
 
 ### Where Infinity Hides—and What Is Proved
 
@@ -143,11 +143,11 @@ $$
 f_\infty(i)\;:=\;\bigl(n\mapsto f_n(i)\bigr).
 $$
 
-{ No choice at all: the limit is the sequence itself, reread as a vector of process reals. Then the convergence “$\|f_n-f_\infty\|_2\to0$” *unfolds into the Cauchy condition itself*: the stage-$s$ rational approximation of the limit $f_\infty$ is exactly $f_s$.[^11]}
+No choice at all: the limit is the sequence itself, reread as a vector of process reals. Then the convergence “$\|f_n-f_\infty\|_2\to0$” *unfolds into the Cauchy condition itself*: the stage-$s$ rational approximation of the limit $f_\infty$ is exactly $f_s$.[^11]
 
 **The completeness of $L^2$ is not the existence of a limit but its constructibility.** The limit is not “chosen” from a completed space (Zorn, AC) but *built* as a process from the sequence itself.
 
-{*An honest boundary (the most important reservation of the chapter).* The proved theorem works at a *fixed finite truncation* $N$: the square of the norm is a finite sum over $N$ coordinates, and from $L^2$-Cauchy in this finite norm a coordinatewise limit-process is built—this is the constructive *core* of Riesz–Fischer. The full infinite-dimensional Riesz–Fischer theorem for a completed $\ell^2/L^2$, where the norm contains a sum over *all* coordinates ($N\to\infty$), and the limit as a *separate completed* real object remain a role-limit / the P4 boundary. We build the core; the completed infinite-dimensional space we mark.}
+*An honest boundary (the most important reservation of the chapter).* The proved theorem works at a *fixed finite truncation* $N$: the square of the norm is a finite sum over $N$ coordinates, and from $L^2$-Cauchy in this finite norm a coordinatewise limit-process is built—this is the constructive *core* of Riesz–Fischer. The full infinite-dimensional Riesz–Fischer theorem for a completed $\ell^2/L^2$, where the norm contains a sum over *all* coordinates ($N\to\infty$), and the limit as a *separate completed* real object remain a role-limit / the P4 boundary. We build the core; the completed infinite-dimensional space we mark.
 
 ## E/R/R Analysis: The $L^2$ Space as a System
 
@@ -174,11 +174,10 @@ The analysis is well-formed: each component falls into exactly one category, and
 
 ### What the Analysis Yields
 
-{
 The analysis shows that $L^2$ in ToS is not a completed Hilbert space but a *process geometry* at a fixed finite $N$: the rules (Cauchy–Schwarz, the square-root-free distance, best approximation, Bessel, Parseval) are proved at finite stages without axioms, and completeness is read as the constructibility of the limit—it is built coordinatewise, not chosen. Infinity—the completed basis, the infinite-dimensional
-$\ell^2$, the sum over all coordinates—is honestly moved to the P4 boundary and marked as a role-limit. This is the same line of honesty as in Chapters 6.1–6.4: the infinitary step is not hidden in a ready object but named and placed on the boundary.}
+$\ell^2$, the sum over all coordinates—is honestly moved to the P4 boundary and marked as a role-limit. This is the same line of honesty as in Chapters 6.1–6.4: the infinitary step is not hidden in a ready object but named and placed on the boundary.
 
-Having obtained a space with an inner product, a squared distance, best approximation, orthonormal expansions, and completeness by construction, we are ready for its *operators*. The next chapter introduces self-adjoint operators on $L^2$, their spectrum, and the orthogonality of eigendirections—and carries the line through to the canonical commutator, the harmonic oscillator, and Schrödinger evolution, through which the $L^2$ apparatus becomes a bridge to quantum mechanics (the physics volume).
+Having obtained a space with an inner product, a squared distance, best approximation, orthonormal expansions, and completeness by construction, we are ready for its *operators*. The next chapter introduces self-adjoint operators on $L^2$, their spectrum, and the orthogonality of eigendirections—and carries the line through to the canonical commutator, the harmonic oscillator, and Schrödinger evolution, through which the $L^2$ apparatus becomes a bridge to quantum mechanics.
 
 ---
 
@@ -198,4 +197,4 @@ Having obtained a space with an inner product, a squared distance, best approxim
 
 Part: [[06 Measure and Integration|Part VI. Measure and Integration]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[04 Convergence Theorems Monotone and Dominated|Chapter 4. Convergence Theorems: Monotone and Dominated]] · [[06 Operators on L2 Self Adjointness Spectrum and Bridge to Quantum Dynamics|Chapter 6. Operators on L^2: Self-Adjointness, Spectrum, and the Bridge to Quantum Dynamics]] →
+Navigation: ← [[04 Convergence Theorems Monotone and Dominated|Chapter 4. Convergence Theorems: Monotone and Dominated]] · [[06 Operators on L2 Self Adjointness Spectrum and Bridge to Quantum Dynamics|Chapter 6. Operators on L²: Self-Adjointness, Spectrum, and the Bridge to Quantum Dynamics]] →

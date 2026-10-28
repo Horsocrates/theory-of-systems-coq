@@ -2,7 +2,7 @@
 title: "Chapter 4. Well-Quasi-Ordering as a Process over the Decidable"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/04 Вполне-упорядоченность как процесс над разрешимым.md"
-sourceBlob: 214da8db66d5c48579f24f52f81c43af67e68a30
+sourceBlob: d049e60cd76357fefc86f315bcb515cd19e8c4ce
 translated: 2026-10-20
 status: draft
 ---
@@ -13,20 +13,17 @@ Chapter 3 rolled back one “wall”—determinacy. The same technique applies t
 
 Recall the classical construction of Nash-Williams. To prove that a certain quasi-ordering is a *well-quasi-ordering* (wqo)—that is, that every infinite sequence contains a “good pair” $i<j$ with $f(i)\preceq f(j)$—one assumes the contrary (there is a “bad” sequence without good pairs) and builds a *minimal* bad sequence, choosing at each step the least bad continuation. This choice is *dependent*, and for it classical mathematics needs the axiom of Dependent Choice, stretching along a completed tower; the full Kruskal theorem has real proof-theoretic strength. Again a “wall.”
 
-{
-The thesis of the chapter is the same rollback: over a *decidable* space both well-quasi-ordering itself and its method are *axiom-free processes*.}
+The thesis of the chapter is the same rollback: over a *decidable* space both well-quasi-ordering itself and its method are *axiom-free processes*.
 
 *Over the decidable, the choice of a minimal bad sequence is not an axiom but a deterministic least-successor process; and the wqo $ℕ$ itself is a well-founded descent, already a process.*
 
 ## What the Chapter Establishes and What It Does Not
 
-{
-*Proved exactly and without axioms*: over ℕ there is no bad sequence; every structure with a monotone ℕ-measure that reflects the order is a wqo; and the choice of a minimal bad sequence over a *decidable* order is a deterministic least-successor process, without Dependent Choice[^1].}
+*Proved exactly and without axioms*: over ℕ there is no bad sequence; every structure with a monotone ℕ-measure that reflects the order is a wqo; and the choice of a minimal bad sequence over a *decidable* order is a deterministic least-successor process, without Dependent Choice[^1].
 
-{
-*Not proved here (the horizon)*: the *full* Kruskal theorem for arbitrary trees—it requires Higman’s lemma over arbitrary wqo alphabets and a general minimal bad sequence along the structure of the tree, and it has real proof-theoretic strength. What is closed is the *decidable, ℕ-measurable subpart* (including trees of bounded depth via the number of descendants); the general case remains a *horizon-ascent*, graded by how decidable the space is. The least-successor device itself is standard; our contribution is to package “wqo and its method as a process over the decidable” and to localize the frontier exactly.}
+*Not proved here (the horizon)*: the *full* Kruskal theorem for arbitrary trees—it requires Higman’s lemma over arbitrary wqo alphabets and a general minimal bad sequence along the structure of the tree, and it has real proof-theoretic strength. What is closed is the *decidable, ℕ-measurable subpart* (including trees of bounded depth via the number of descendants); the general case remains a *horizon-ascent*, graded by how decidable the space is. The least-successor device itself is standard; our contribution is to package “wqo and its method as a process over the decidable” and to localize the frontier exactly.
 
-## The Base Rung: Over $ℕ${N} There Is No Bad Sequence
+## The Base Rung: Over $ℕ$ There Is No Bad Sequence
 
 The purest case is $ℕ$ with the usual order. Here well-quasi-ordering needs no choice and no tower whatsoever: it *is* well-foundedness.
 
@@ -36,7 +33,7 @@ Suppose a sequence $f:ℕ\toℕ$ is “bad”—not a single good pair, that is,
 
 What classical mathematics sees as a subtle set-theoretic theorem is, on the base rung, simply the absence of an infinite descent—the Element side of the finitization boundary.
 
-## Closure: An $ℕ${N}-Measure Gives wqo as a Process
+## Closure: An $ℕ$-Measure Gives wqo as a Process
 
 From the base rung we climb higher—but as a process, not as an object. *Measurability in $ℕ$* suffices: if a structure has a monotone measure $h$ with values in $ℕ$ that *reflects* the order ($h(a)\le h(b)$ implies $a\preceq b$), then the structure is automatically well-quasi-ordered. The good pair is found by the same descent in $ℕ$: we apply the well-quasi-ordering of $ℕ$ to the measured sequence $h\circ f$ and carry the pair back[^3].
 

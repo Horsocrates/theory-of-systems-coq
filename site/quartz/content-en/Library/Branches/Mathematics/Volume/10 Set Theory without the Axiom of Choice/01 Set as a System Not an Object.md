@@ -2,7 +2,7 @@
 title: "Chapter 1. Set as a System, Not an Object"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/01 Множество как Система, а не объект.md"
-sourceBlob: 92afd020a0bf17dd488e2af9b1a6410695ad5fcd
+sourceBlob: b7c409ee75a2b6b8ab4ef62a99f345cf25b57563
 translated: 2026-10-20
 status: draft
 ---

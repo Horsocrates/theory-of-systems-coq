@@ -2,14 +2,14 @@
 title: "Chapter 2. The Calculus of Process Functions"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/02 Исчисление функций-процессов.md"
-sourceBlob: 0b9528f1e971e88eb185bfa64be38c01a00373f7
+sourceBlob: 4026f35051d1bbc272869eb27f09f52b080ba485
 translated: 2026-10-20
 status: draft
 ---
 
 ## The Plan of the Chapter
 
-Chapter 16.1 gave the *carrier*: the function is reified as a coefficient process $`FPS` = ℕ \to
+Chapter 16.1 gave the *carrier*: the function is reified as a coefficient process $\texttt{FPS} = ℕ \to
 ℚ$, and the Element/role-limit boundary ran through it (polynomial versus nonpolynomial series). But a carrier without operations is inert. For reified functions to *live*—to be added, multiplied, differentiated—the coefficient processes need a *calculus*.
 
 This chapter builds it. Under the Cauchy convolution, formal power series carry a *ring structure*: multiplication is commutative, associative, and has a unit (a commutative monoid), addition and scaling are pointwise, and the formal *derivative* is coordinated with multiplication by the Leibniz and power rules. And this whole calculus has one common feature for the sake of which reification is worth undertaking: *every* operation here is finite arithmetic of coefficients. Not a single limit, not a single $\varepsilon$-$\delta$. The sum, the product, and the derivative of a process function are computed in a finite number of steps from a finite number of coefficients. The calculus lies entirely on the *Element* side—and therefore has 0 axioms.
@@ -45,12 +45,12 @@ Convolution endows coefficient processes with the structure of a *commutative ri
 *Commutativity*: $f\cdot g = g\cdot f$. At the level of coefficients this is the symmetry of the sum $\sum_{i+j=n}
 f_i g_j$ under the swap $i \leftrightarrow j$.[^3]
 
-*Unit*: the series $`fps_one` = (1,0,0,…)$ (coefficient $1$ at $x^0$, zeros after it) is the neutral element: $`fps_one`\cdot f = f$.[^4]
+*Unit*: the series $\texttt{fps\_one} = (1,0,0,…)$ (coefficient $1$ at $x^0$, zeros after it) is the neutral element: $\texttt{fps\_one}\cdot f = f$.[^4]
 
 *Associativity*: $(f\cdot g)\cdot h = f\cdot(g\cdot h)$—the most substantive law. Both sides equal one *triple* Cauchy sum $\sum_{i+j+k=n} f_i g_j h_k$; to reduce the left and right groupings to it, one must regroup the triangle of indices $\{(i,j): j\le i\le n\}$ by column. This *triangular Fubini swap* of finite sums had to be proved separately—the earlier library did not have it; associativity rests on it.[^5]
 
-Together these laws mean: under convolution, formal series form a *commutative monoid* with unit $`fps_one`$, and together with pointwise addition and scaling, a ring structure over $ℚ$. What is machine-confirmed is precisely the *multiplicative* laws of convolution (commutativity, associativity, unit) and their coordination with the derivative (below); the distributivity of convolution over pointwise addition and the laws of the additive group are routine and are not singled out as separate lemmas.[^6]
-The reified functions have acquired an algebra. Its first nontrivial fact was already met in Chapter 16.1: the defining equation of the geometric function $(1-x)\cdot\frac{1}{1-x} = 1$ is exactly the statement that $`geom_fps`$ is the *inverse* of $(1-x)$ in this ring. What in Chapter 16.1 was the first evidence that “the process function works” is now seen as an equality in the ring of process functions.
+Together these laws mean: under convolution, formal series form a *commutative monoid* with unit $\texttt{fps\_one}$, and together with pointwise addition and scaling, a ring structure over $ℚ$. What is machine-confirmed is precisely the *multiplicative* laws of convolution (commutativity, associativity, unit) and their coordination with the derivative (below); the distributivity of convolution over pointwise addition and the laws of the additive group are routine and are not singled out as separate lemmas.[^6]
+The reified functions have acquired an algebra. Its first nontrivial fact was already met in Chapter 16.1: the defining equation of the geometric function $(1-x)\cdot\frac{1}{1-x} = 1$ is exactly the statement that $\texttt{geom\_fps}$ is the *inverse* of $(1-x)$ in this ring. What in Chapter 16.1 was the first evidence that “the process function works” is now seen as an equality in the ring of process functions.
 
 ## The Formal Derivative: Differentiation without a Limit
 
@@ -68,7 +68,7 @@ Definition fps_deriv (f : FPS) : FPS := fun n => inject_Z (Z.of_nat (S n)) * f (
 
 And here is the observation for the sake of which reification was undertaken. *Classically* the derivative is the *limit* of a difference quotient—an object of the role-limit side, $\varepsilon$-$\delta$, an infinite process of approximation. But for a function *reified as a coefficient process*, the derivative is *finite arithmetic*: a shift of the sequence by one step and multiplication of the $n$-th term by $(n+1)$. Neither limit nor analysis. The differentiation of a process function is an *Element* operation: it is *computed*, not *taken as a limit*. What classically lives on the role-limit side passes, on the reified function, to the Element side—exactly as multiplication reduced to a finite convolution.
 
-And the reified basic functions satisfy their defining identities *at the level of coefficients*—in the formal sense, as equalities of coefficient processes, without any convergence. The formal exponential is a *fixed point* of the formal derivative: $(e^x)' = e^x$, because $(n+1)\cdot\frac{1}{(n+1)!} = \frac{1}{n!}$. And the series $-\ln(1-x)$—which is exactly $`log1m_fps`$ (with coefficients $c_0 = 0$, $c_{k+1} = 1/(k{+}1)$)—gives the geometric function: $\bigl(-\ln(1-x)\bigr)' =
+And the reified basic functions satisfy their defining identities *at the level of coefficients*—in the formal sense, as equalities of coefficient processes, without any convergence. The formal exponential is a *fixed point* of the formal derivative: $(e^x)' = e^x$, because $(n+1)\cdot\frac{1}{(n+1)!} = \frac{1}{n!}$. And the series $-\ln(1-x)$—which is exactly $\texttt{log1m\_fps}$ (with coefficients $c_0 = 0$, $c_{k+1} = 1/(k{+}1)$)—gives the geometric function: $\bigl(-\ln(1-x)\bigr)' =
 \frac{1}{1-x}$, because $(n+1)\cdot\frac{1}{n+1} = 1$ is the constant coefficient of the geometric function. Both identities are finite equalities of coefficients, not passages to the limit.[^7]
 
 ## The Leibniz Rule and the Power Rule
@@ -81,7 +81,7 @@ $$
 
 At the level of coefficients this is an equality of convolutions, and it is proved by a *convolution recurrence*—the factorial form of Vandermonde’s identity, without any binomial coefficients.[^8]
 
-From Leibniz, induction gives the *power rule*. The power of a series is defined by the usual recursion—$g^0 = `fps_one`$, $g^{k+1} = g\cdot g^k$—and for it
+From Leibniz, induction gives the *power rule*. The power of a series is defined by the usual recursion—$g^0 = \texttt{fps\_one}$, $g^{k+1} = g\cdot g^k$—and for it
 
 $$
 \bigl(g^{k+1}\bigr)' = (k+1)  g^{k}  g' .
@@ -98,7 +98,7 @@ These two rules are the last piece of the calculus before composition. Having th
 | coefficients $c_n \in ℚ$, finite sums $\sum_{i+j=n}$ | bearers and counting | Element (P4) |
 | multiplication $=$ Cauchy convolution | role-convolution | Role |
 | derivative $=$ shift ${+}$ multiplication by $(n{+}1)$ | role-operation | Role |
-| convolution: comm.{/}assoc.{/}unit (monoid) | algebra of the carrier | Rule (constructively) |
+| convolution: comm./assoc./unit (monoid) | algebra of the carrier | Rule (constructively) |
 | Leibniz and power | coordination of the derivative with the ring | Rule (constructively) |
 
 **Elements.** Everything the chapter operates with is rational coefficients and *finite* sums over indices $i+j=n$. Every stage is finitely actual; there is not a single completed-infinite object.
@@ -121,7 +121,7 @@ These two rules are the last piece of the calculus before composition. Having th
 [^4]: Ibid.: `conv_one_l`, `conv_one_r`. Machine-checked, 0 axioms.
 [^5]: Ibid.: `conv_assoc` via `partial_sum_triangle_swap` (regrouping of a triangular double sum). Machine-checked, 0 axioms.
 [^6]: Ibid.: `fps_mul_comm`, `fps_mul_assoc`, `fps_mul_one_l`, `fps_mul_one_r`—the multiplicative laws of convolution (a commutative monoid over `conv`). Machine-checked, 0 axioms.
-[^7]: `src/FormalPowerSeries.v`: `exp_fps_deriv` ($`fps_deriv` `exp_fps` = `exp_fps`$) and `log1m_deriv` ($`fps_deriv` `log1m_fps` = `geom_fps`$). Machine-checked, 0 axioms.
+[^7]: `src/FormalPowerSeries.v`: `exp_fps_deriv` ($\texttt{fps\_deriv} \texttt{exp\_fps} = \texttt{exp\_fps}$) and `log1m_deriv` ($\texttt{fps\_deriv} \texttt{log1m\_fps} = \texttt{geom\_fps}$). Machine-checked, 0 axioms.
 [^8]: `src/FormalPowerSeries.v`: `fps_deriv_mul`—the Leibniz rule on coefficients. Machine-checked, 0 axioms.
 [^9]: Ibid.: `fps_pow` (the power of a series), `fps_pow_deriv`, and `fps_pow_deriv_eq`—the power rule. Machine-checked, 0 axioms.
 [^10]: All the material of the chapter comes from `src/FormalPowerSeries.v` (37 Qed, 0 Admitted, **0 axioms**; `Print Assumptions` = “Closed under the global context” for the key lemmas).

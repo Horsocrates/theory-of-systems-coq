@@ -2,7 +2,7 @@
 title: "Chapter 6. The Reification Ladder: Number → Function → Functional"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/06 Лестница реификации число → функция → функционал.md"
-sourceBlob: 9cfcda6cba91a71f8bf0625677eb2dd30587585e
+sourceBlob: 2e68ff3e44daaede46614f46a0199fd367d34abb
 translated: 2026-10-20
 status: draft
 ---
@@ -11,9 +11,9 @@ status: draft
 
 This part has built *one ladder* rather than proved five separate results. Let us gather its rungs into one ascent.
 
-- **16.1.** The function is *reified* as a process—the coefficient process $`FPS` = ℕ\toℚ$. And the boundary shows through at once: a polynomial has finitely many nonzero coefficients, its tail breaks off (Element); a nonpolynomial series is a coefficient process without a zero tail (role-limit).
+- **16.1.** The function is *reified* as a process—the coefficient process $\texttt{FPS} = ℕ\toℚ$. And the boundary shows through at once: a polynomial has finitely many nonzero coefficients, its tail breaks off (Element); a nonpolynomial series is a coefficient process without a zero tail (role-limit).
 - **16.2.** On this carrier, a full calculus: the convolution ring, the derivative, Leibniz, powers.
-- **16.3.** Composition and the chain rule give the *formal heart* $E\circ L = `geom`$, $e^{-\ln(1-x)} = 1/(1-x)$—as the recurrence $c_n = 1$, with 0 axioms.
+- **16.3.** Composition and the chain rule give the *formal heart* $E\circ L = \texttt{geom}$, $e^{-\ln(1-x)} = 1/(1-x)$—as the recurrence $c_n = 1$, with 0 axioms.
 - **16.4.** The real exponential of a process, $\exp_{ℝ}$: the group homomorphism and injectivity.
 - **16.5.** The bridge $\mathrm{eval}$ and Tannery’s theorem close the functional equation $L(x)+L(y) \sim L(x\oplus y)$, $x\oplus y = x+y-xy$.
 

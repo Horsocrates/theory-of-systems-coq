@@ -2,7 +2,7 @@
 title: "Hilbert’s Hotel"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Отель Гильберта.md"
-sourceBlob: ccd8118882d321ae6dbaee054275eff4549efa80
+sourceBlob: 832d72bc42fb0833c268f3846cf141ad86997154
 translated: 2026-10-20
 status: draft
 description: "“Full” does not apply to the unbounded"
@@ -56,9 +56,9 @@ In layers, each standing on its own. First: “a full infinity” is an oxymoron
 
 ## Kin by Mechanism
 
-[[Galileos Paradox|Galileo]] (the correspondence of part and whole—the same mechanism an age earlier), [[Cantors Paradox|Cantor]] (where the hotel leads when taken seriously), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks: “completing the uncompletable” in dynamic form), [[Zenos Dichotomy|Zeno’s Dichotomy]] (the mirror: there, motion was denied a beginning; here, infinite work is ordered to finish).
+[[Galileos Paradox|Galileo]] (the correspondence of part and whole—the same mechanism three centuries earlier), [[Cantors Paradox|Cantor]] (where the hotel leads when taken seriously), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks: “completing the uncompletable” in dynamic form), [[Zenos Dichotomy|Zeno’s Dichotomy]] (the mirror: there, motion was denied a beginning; here, infinite work is ordered to finish).
 
-**Machine check.** In the registry of 46 it is `D21_HilbertHotel`: the field `ConceptualAmbiguity`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4)—infinity as a rule of continuation, not as an object; the whole base is built on this reading. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D21_HilbertHotel`: the field `ConceptualAmbiguity`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4)—infinity as a rule of continuation, not as an object; the whole base is built on this reading. Map: [[Formalization]].
 
 ---
 

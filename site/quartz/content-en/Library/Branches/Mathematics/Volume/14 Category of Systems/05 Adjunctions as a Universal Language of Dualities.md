@@ -2,14 +2,14 @@
 title: "Chapter 5. Adjunctions as a Universal Language of Dualities"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/05 Сопряжения как универсальный язык двойственностей.md"
-sourceBlob: a5f62cf633ffed6307c0a16f0c7c440ad662ac55
+sourceBlob: feec197ca262fa33f1af185cb4ce8d2d21c8ed41
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-Chapter 14.4 presented *one* adjunction—$`embed`\dashv`forget`$, the crown of P2. This chapter raises its sights: an adjunction is a **universal language of
+Chapter 14.4 presented *one* adjunction—$\texttt{embed}\dashv\texttt{forget}$, the crown of P2. This chapter raises its sights: an adjunction is a **universal language of
 dualities**, not a one-off construction. One and the same pattern, “left ${}\dashv{}$ right, unit, counit, triangles,” recurs throughout the volume—from levels to Galois theory and geometry–gauge.
 
 We do three things. First, we write out the *general* adjunction $F\dashv G$ (between any categories, not only between levels). Second, we prove the main structural consequence: **a right adjoint
@@ -55,14 +55,14 @@ $$
 Every adjunction has a “shadow” on one side—the *monad* $T=G\circ F$ (and, dually, the *comonad* $F\circ G$). A monad is a pattern of computation: a type constructor with `return` and `bind`, subject to three laws (left/right unit, associativity). In the machine layer this is `Record Monad` with the instances `Option`/`List`/`Result`, Kleisli composition (`kleisli_assoc`), and `m_map`.
 [^3]
 
-**An honest boundary.**  The *general* theorem “every adjunction induces a monad” has *not* been formalized by us as a *single* machine result (it requires naturality and the triangles assembled into $\mu,\eta$). Both supports, however, are machine-checked separately: (1) the abstract monad laws (`Monad.v`, 0 axioms); (2) the *concrete* monad of the adjunction of levels—in the *process* layer, which inherits `classic`—$T=`forget`\circ`embed`$, and by the tightness of 14.4 it *is the identity* (`monad_is_identity`), while the dual comonad $`embed`\circ`forget`$ is isomorphic to the identity on the forgettable systems.
+**An honest boundary.**  The *general* theorem “every adjunction induces a monad” has *not* been formalized by us as a *single* machine result (it requires naturality and the triangles assembled into $\mu,\eta$). Both supports, however, are machine-checked separately: (1) the abstract monad laws (`Monad.v`, 0 axioms); (2) the *concrete* monad of the adjunction of levels—in the *process* layer, which inherits `classic`—$T=\texttt{forget}\circ\texttt{embed}$, and by the tightness of 14.4 it *is the identity* (`monad_is_identity`), while the dual comonad $\texttt{embed}\circ\texttt{forget}$ is isomorphic to the identity on the forgettable systems.
 [^4] The triviality of this monad is a *sign*, not poverty: a unit that is an isomorphism means that the “round trip” of a level adds nothing.
 
 ## The Catalog of the Volume’s Dualities
 
 One and the same pattern “$\dashv$” occurs in the volume three times—in three different encodings. We bring them together in *prose* (a single Coq object would require a deep re-unification: the encodings are heterogeneous).
 
-**(1) Levels (Chapter 14.4).**  $`embed`\dashv`forget`$ is a genuine categorical adjunction between $\Sys(L)$ and $\Sys(LS L)$, the machine form of P2; its unit is an isomorphism, and it is not an equivalence (because of P1). Tier: **0 axioms, `origin/main`**.
+**(1) Levels (Chapter 14.4).**  $\texttt{embed}\dashv\texttt{forget}$ is a genuine categorical adjunction between $\Sys(L)$ and $\Sys(LS L)$, the machine form of P2; its unit is an isomorphism, and it is not an equivalence (because of P1). Tier: **0 axioms, `origin/main`**.
 
 **(2) The Galois theory of fields (Part XI).**  The Galois correspondence for $ℚ[\sqrt2,\sqrt3]$ is an *antitone Galois connection*: the lattice of subgroups of $\Gal$ and the lattice of intermediate fields correspond to each other *by reversing inclusion* (`correspondence_inclusion_reversing`), with $[E:ℚ]=|\Gal|=4$ (`degree_equals_galois_order`), and $V_4$ has exactly $5$ subgroups (`klein_four_subgroups`).
 [^5]
@@ -86,15 +86,13 @@ The lesson is methodological: the categorical language *distinguishes* patterns�
 
 **Roles (L4).**  The left adjoint (free-like); the right adjoint (forgetful, *limit-preserving*—RAPL); unit/counit, the passages $1\Rightarrow GF$, $FG\Rightarrow 1$; the monad, the role-trace of the adjunction; the antitone Galois connection, a role-adjunction on *opposite* orders.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete data: `id_adjunction`; $T=`forget`\circ`embed`={}$ the identity; the $5$ subgroups of $V_4$ and $[E:ℚ]=4$; the order $\le$ on geometries/gauges. *Not a field of the current record* `Adjunction`: the *naturality* of the unit is needed as a *premise/rule* (exposed as the hypothesis `unit_natural`), not as a ready field of the record. And $\Aut(\mathrm{ERR}_N)\cong SU(N)$ is a continuum limit (P4), not a discrete fact.}
+**Elements (L1${}+{}$P4).**  Concrete data: `id_adjunction`; $T=\texttt{forget}\circ\texttt{embed}={}$ the identity; the $5$ subgroups of $V_4$ and $[E:ℚ]=4$; the order $\le$ on geometries/gauges. *Not a field of the current record* `Adjunction`: the *naturality* of the unit is needed as a *premise/rule* (exposed as the hypothesis `unit_natural`), not as a ready field of the record. And $\Aut(\mathrm{ERR}_N)\cong SU(N)$ is a continuum limit (P4), not a discrete fact.
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
 | triangles + naturality + monad laws; $F G\le\mathrm{id}\le GF$ | the constitution of duality | Rule (L5) |
 | left ${}\dashv{}$ right; unit/counit; monad-trace | the status of the partner functors | Role (L4) |
-| `id_adjunction`; $T={}$ identity; $|V_4|$, $[E:ℚ]$; order $\le$ | computable witnesses | Element (L1${}+{}$P4) |
+| `id_adjunction`; $T={}$ identity; $\lvert V_4\rvert$, $[E:ℚ]$; order $\le$ | computable witnesses | Element (L1${}+{}$P4) |
 
 **P4 diagnostics.**  The continuum walls show through precisely in the dualities: $\Aut\cong SU(N)$ requires a topology; the strict geometry–gauge adjunction does *not* go through and has been honestly weakened to a Galois connection. P4 here is an *indication of scale*, not an exclusion: at the finite-process level duality lives as a connection of orders; its continuum form is a limit, not a ready object.
 
@@ -109,10 +107,10 @@ Next comes Chapter 14.6: *processes as universal constructions* (P4: limits and 
 ---
 
 [^1]: `src/stdlib/Adjunction.v` (5 Qed, 0 Admitted, 0 axioms; in `origin/main`): `Record Adjunction` (`mkAdj`), `triangle_left`/`_right`, `is_adjunction`, `id_adjunction`, `id_adjunction_triangle_left`/`_right`, `id_is_adjunction`, `id_defect_zero`. (The lemma `adjunction_unique_up_to_iso` in the file is a *placeholder* for the identity case, *not* the general theorem on the uniqueness of the right adjoint: the latter has not been formalized.)
-[^2]: `src/category/RightAdjointPreservesLimits.v` (3 Qed, 0 Admitted, 0 axioms; **local layer** `src/category/`, commit `90ebd74`, awaiting `git push`): `unit_natural`, `id_adjunction_unit_natural`, `right_adjoint_ transpose_ roundtrip`, `right_adjoint_ preserves_ terminal`.
+[^2]: `src/category/RightAdjointPreservesLimits.v` (3 Qed, 0 Admitted, 0 axioms; **local layer** `src/category/`, commit `90ebd74`, awaiting `git push`): `unit_natural`, `id_adjunction_unit_natural`, `right_adjoint_transpose_roundtrip`, `right_adjoint_preserves_terminal`.
 [^3]: `src/stdlib/Monad.v` (20 Qed, 0 Admitted, 0 axioms; in `origin/main`): `Record Monad`, `m_left_id`/`m_right_id`/`m_assoc`; `OptionMonad`, `ListMonad`, `ResultMonad`; `kleisli_assoc`, `kleisli_id_left`/`_right`, `m_map_id`.
 [^4]: `src/process/ProcessAdjunction.v` (the process layer, inherits `classic`; in `origin/main`): `level_monad`, `monad_is_identity`, `monad_unit_is_iso`; `level_comonad`, `comonad_counit_is_iso`.
-[^5]: `src/algebra/GaloisQ23.v`, `GaloisDegreeQ23.v`, `GaloisCorrespondence.v` (Part XI, 0 axioms; in `origin/main`): `fixed_by`, `base_fixed_by_all`, `correspondence_ inclusion_ reversing`, `degree_ equals_ galois_ order`, `klein_four_subgroups`.
+[^5]: `src/algebra/GaloisQ23.v`, `GaloisDegreeQ23.v`, `GaloisCorrespondence.v` (Part XI, 0 axioms; in `origin/main`): `fixed_by`, `base_fixed_by_all`, `correspondence_inclusion_reversing`, `degree_equals_galois_order`, `klein_four_subgroups`.
 [^6]: `src/process/ProcessGGGalois.v` (15 Qed, 0 Admitted; the process layer, imports `Classical` and so inherits `classic`; in `origin/main`): `geom_coarser`, `gauge_more_trivial`, `galois_lower_trivial`, `galois_upper`, `geom_gauge_galois`, `galois_physical_meaning`.
 [^7]: `src/foundation/ERRGaugeFunctorSynthesis.v` (9 Qed by grep; the banner says “12”; 0 Admitted; in `origin/main`): `distinction_is_category`, `gauge_is_automorphism`, `generators_match_sm`, `err_gauge_synthesis`.
 

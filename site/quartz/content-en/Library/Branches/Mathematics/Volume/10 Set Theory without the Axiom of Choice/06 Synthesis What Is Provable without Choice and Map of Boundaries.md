@@ -2,7 +2,7 @@
 title: "Chapter 6. Synthesis of Part X: What Is Provable without Choice, and the Map of Boundaries"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/06 Синтез Части X что доказуемо без выбора, и карта границ.md"
-sourceBlob: ee26e7ea77fd7c14dc1cc43be5a9212b69da666d
+sourceBlob: ea207119a3d04c061167666198ff1a48e335c939
 translated: 2026-10-20
 status: draft
 ---

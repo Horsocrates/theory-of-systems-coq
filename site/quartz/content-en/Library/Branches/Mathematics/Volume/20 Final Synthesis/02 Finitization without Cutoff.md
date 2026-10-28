@@ -2,7 +2,7 @@
 title: "Chapter 2. Finitization without Cutoff"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/02 Финитизация без обрезания.md"
-sourceBlob: d1bd187b4c870cf1e3b5b5d40f056d7ca2857878
+sourceBlob: 8cfdb3478215136c4ddedd29a9f8752cd6cc48f5
 translated: 2026-10-20
 status: draft
 ---
@@ -92,7 +92,7 @@ Thus the role-limit side, outlined in the previous chapter, receives an exact fo
 ---
 
 [^1]: The statements of the chapter are checked as “Closed under the global context” (without the Law of Excluded Middle and without additional witness axioms). The Pell part, `tos_beats_granular`, relies on the infinite sequence of Pell solutions and does not follow from `nonsquare_gap_nonzero` alone.
-[^2]: The substantive illustration lies in the application to physics—in finite-precision readings of quantum mechanics; here they serve as an image of a single numerical form, not as the subject of the present volume. See\ § “Finitization Is Not a Cutoff.”
+[^2]: The substantive illustration lies in the application to physics—in finite-precision readings of quantum mechanics; here they serve as an image of a single numerical form, not as the subject of the present volume. See § “Finitization Is Not a Cutoff.”
 [^3]: “$\sqrt D$ is a role-limit $\Leftrightarrow$ $D$ is not a perfect square” is proved in general form: a rational value of the square root would force $D$ to be a perfect square. This is `rational_square_is_perfect`; for each individual $D$ the impossibility of a rational value is `not_perfect_square_irrational`.
 [^4]: This statement—`nonsquare_gap_nonzero`—reduces “the impossibility of an exact hit” to a theorem about the root: the termination of $\sqrt D$ is exactly “$D$ is a perfect square.” The physical consequence, as we will see, turns out to be this theorem about numbers.
 [^5]: The floor is formulated for the *square* error $|D-r^2|$; for the error of the value itself, $|\sqrt D-r|$, a related estimate is obtained by dividing by $\sqrt D+r$.

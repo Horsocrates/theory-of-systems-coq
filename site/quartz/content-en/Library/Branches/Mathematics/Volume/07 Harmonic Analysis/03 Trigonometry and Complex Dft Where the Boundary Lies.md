@@ -2,7 +2,7 @@
 title: "Chapter 3. Trigonometry and the Complex DFT: Where the Boundary Lies"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/03 Тригонометрия и комплексный DFT где граница.md"
-sourceBlob: b8e19f32e8d8db4aa1370940e58175301587715b
+sourceBlob: 00e89f49c972ff02bbfa49a22f611794724c7844
 translated: 2026-10-20
 status: draft
 ---
@@ -48,7 +48,7 @@ $$
 \int_{-\pi}^{\pi}\sin(mx)\cos(nx) dx = 0 .
 $$
 
-Let us compare this with the Walsh orthogonality of § (see the corresponding chapter), where there stood a *finite sum of signs* $\sum_{j<N}H_{ij}H_{i'j}=N\delta_{ii'}$. The difference is the boundary. Here transcendence enters by three paths at once: *first*, summation is replaced by an integral over the continuum—a completed object that ToS does not actualize; *second*, the integrand is a product of the transcendental $\sin$ and $\cos$; *third*, the value $\pi$ on the right is itself transcendental.
+Let us compare this with the Walsh orthogonality of [[Library/Branches/Mathematics/Volume/07 Harmonic Analysis/02 Walsh Hadamard Transform without Transcendentals|Chapter 7.2 “Walsh–Hadamard: A Transform without Transcendentals”]], where there stood a *finite sum of signs* $\sum_{j<N}H_{ij}H_{i'j}=N\delta_{ii'}$. The difference is the boundary. Here transcendence enters by three paths at once: *first*, summation is replaced by an integral over the continuum—a completed object that ToS does not actualize; *second*, the integrand is a product of the transcendental $\sin$ and $\cos$; *third*, the value $\pi$ on the right is itself transcendental.
 
 ### The Integral as a Process, Not as a Taken Object
 
@@ -91,9 +91,9 @@ $(ℤ_N,+)$, whose characters are roots of unity. The algebraic skeleton (the va
 
 The previous section showed that what is transcendental is the *values* of the characters, while the mechanism of orthogonality is algebraic. This prompts a precise question: *which properties of the characters are needed for orthogonality, and how many of them are transcendental?* The answer is unexpectedly modest. Let us take the values of the characters $\chi(k,j)$ as *abstract* rational parameters (without building $e^{2\pi ikj/N}$) and require of them only three properties:
 
-- [(1)] the zero frequency is constant: $\chi(0,j)=1$;
-- [(2)] the character is a homomorphism in frequency: $\chi(k,j) \chi(k',j)=\chi(k+k',j)$;
-- [(3)] the vanishing geometric sum: $\sum_{j<N}\chi(m,j)=0$ for $0<m<N$.
+- (1) the zero frequency is constant: $\chi(0,j)=1$;
+- (2) the character is a homomorphism in frequency: $\chi(k,j) \chi(k',j)=\chi(k+k',j)$;
+- (3) the vanishing geometric sum: $\sum_{j<N}\chi(m,j)=0$ for $0<m<N$.
 
 Properties (1)–(2) are purely algebraic; *only* property (3) is transcendental: it is the abstract form of the fact “the sum of the roots of unity equals zero.” And under these hypotheses discrete orthogonality is a finite theorem over ℚ (in the range
 $k+k'<N$):
@@ -107,7 +107,7 @@ $$
 proved by pure rational algebra.[^3] The full modular DFT formula $k+k'\equiv0\pmod N$ would require arithmetic of indices modulo $N$, which this file deliberately does not build; in the proved range
 $k+k'<N$ the condition $k+k'\equiv0$ coincides with $k+k'=0$. In the classical DFT this is read as orthogonality with the inverse character $k'=-k\pmod N$, usually realized by complex conjugation—but the file builds neither the conjugation nor the modular arithmetic of characters: it proves the rational skeleton under explicit hypotheses.
 
-{*The boundary file builds nothing transcendental: it shows that the whole orthogonality of the DFT is the rational algebra of characters plus *one* input, the vanishing sum of the roots of unity. The boundary is compressed into a single explicit hypothesis.*}
+*The boundary file builds nothing transcendental: it shows that the whole orthogonality of the DFT is the rational algebra of characters plus *one* input, the vanishing sum of the roots of unity. The boundary is compressed into a single explicit hypothesis.*
 
 ## Diagnosis: The Boundary Runs along the Choice of the Group
 
@@ -115,7 +115,7 @@ Let us bring the three sections together into one diagnosis. Harmonic analysis i
 
 | **Group** | **Characters** | **Status** |
 |---|---|---|
-| Boolean cube $(ℤ_2^{ n},\oplus)$ | $\pm1$ (Walsh) | rational, core (§ (see the corresponding chapter)) |
+| Boolean cube $(ℤ_2^{ n},\oplus)$ | $\pm1$ (Walsh) | rational, core ([[Library/Branches/Mathematics/Volume/07 Harmonic Analysis/02 Walsh Hadamard Transform without Transcendentals\|Chapter 7.2 “Walsh–Hadamard: A Transform without Transcendentals”]]) |
 | cyclic $(ℤ_N,+)$ | roots of unity $e^{2\pi ik/N}$ | complex, role-limit |
 | circle $(\mathbb{T},+)$ | $e^{2\pi ikx}$, continuum | transcendental, role-limit |
 
@@ -151,10 +151,9 @@ $k,k',j<N$, the finite sums $\sum_{j<N}$. Under P4 what remains outside the elem
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component is in one E/R/R category, and there is no self-reference (P1). What is essential is that the transcendental does not substitute for an Element here: it is honestly held either as a role-limit (the values, $ℂ$, the integral) or as an explicit input hypothesis (the vanishing sum). The conditional theorem does not pretend to have built the roots of unity; it shows that *given* their key property the whole orthogonality is rational.}
+The system is well-formed: each component is in one E/R/R category, and there is no self-reference (P1). What is essential is that the transcendental does not substitute for an Element here: it is honestly held either as a role-limit (the values, $ℂ$, the integral) or as an explicit input hypothesis (the vanishing sum). The conditional theorem does not pretend to have built the roots of unity; it shows that *given* their key property the whole orthogonality is rational.
 
-What the analysis yields. It calls the boundary by its exact name: *the boundary runs along the choice of the group*, that is, along the field of values of the characters. The idea of harmonic analysis, the Rule, is rational and does not depend on the group; the character is a Role; the abstract values are Elements. To take $e^{2\pi ik/N}$, $i$, or $\pi$ for a ready Element is to put a role-limit in the place of an actual object, the same confusion of categories as in the previous chapters. This is why Part VII is arranged as it is: the rational core (Walsh, § (see the corresponding chapter)) is presented and proved, while the transcendental instances are marked and compressed into explicit hypotheses, without losing a single substantive theorem along the way.
+What the analysis yields. It calls the boundary by its exact name: *the boundary runs along the choice of the group*, that is, along the field of values of the characters. The idea of harmonic analysis, the Rule, is rational and does not depend on the group; the character is a Role; the abstract values are Elements. To take $e^{2\pi ik/N}$, $i$, or $\pi$ for a ready Element is to put a role-limit in the place of an actual object, the same confusion of categories as in the previous chapters. This is why Part VII is arranged as it is: the rational core (Walsh, [[Library/Branches/Mathematics/Volume/07 Harmonic Analysis/02 Walsh Hadamard Transform without Transcendentals|Chapter 7.2 “Walsh–Hadamard: A Transform without Transcendentals”]]) is presented and proved, while the transcendental instances are marked and compressed into explicit hypotheses, without losing a single substantive theorem along the way.
 
 The next chapter returns to the rational core from another side: to the *convergence* of Fourier series in L<sup>2</sup>. There the partial sum is the best approximation (Chapter 7.1), the truncation error equals the tail energy, and all of this is finite and rational; while the passage to the completed infinite series is again an honest P4 boundary.
 
@@ -169,4 +168,4 @@ The next chapter returns to the rational core from another side: to the *converg
 
 Part: [[07 Harmonic Analysis|Part VII. Harmonic Analysis]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[02 Walsh Hadamard Transform without Transcendentals|Chapter 2. Walsh–Hadamard: A Transform without Transcendentals]] · [[04 Convergence of Fourier Series in L2|Chapter 4. Convergence of Fourier Series in L2]] →
+Navigation: ← [[02 Walsh Hadamard Transform without Transcendentals|Chapter 2. Walsh–Hadamard: A Transform without Transcendentals]] · [[04 Convergence of Fourier Series in L2|Chapter 4. Convergence of Fourier Series in L²]] →

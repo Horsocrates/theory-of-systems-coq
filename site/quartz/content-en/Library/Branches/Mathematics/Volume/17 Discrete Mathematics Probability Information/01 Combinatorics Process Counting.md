@@ -2,7 +2,7 @@
 title: "Chapter 1. Combinatorics—Process Counting"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/17 Дискретная математика, вероятность, информация/01 Комбинаторика — процессный счёт.md"
-sourceBlob: 92e5bf4a6f520f0a6f9effbf044db594265886a6
+sourceBlob: 870c8e4e5de3dc506a842c530f7294d00ed1b9cd
 translated: 2026-10-20
 status: draft
 ---
@@ -41,7 +41,6 @@ What is essential is that this is *the same* engine that works in the pumping of
 
 A generating function is a bridge between counting and analysis, and in our ontology it is a *process*: a sequence of coefficients unfolded on demand, not a completed analytic object (exactly the “function as process” of Part XVI). The brightest example is the Catalan numbers.
 
-{
 The Catalan numbers admit a closed form through binomial coefficients,
 
 $$
@@ -54,7 +53,7 @@ $$
 C_{n+1} = \sum_{i=0}^{n} C_i   C_{n-i},
 $$
 
-which corresponds to the *formal* generating equation $C(x) = 1 + x C(x)^2$ (at the level of coefficient processes, not of an analytic equality) and is proved by the *first-return bijection* on Dyck paths—a structural argument, not a formulaic one[^5]. The Motzkin numbers obtain their closed form by the same device[^6].}
+which corresponds to the *formal* generating equation $C(x) = 1 + x C(x)^2$ (at the level of coefficient processes, not of an analytic equality) and is proved by the *first-return bijection* on Dyck paths—a structural argument, not a formulaic one[^5]. The Motzkin numbers obtain their closed form by the same device[^6].
 
 The lesson is a process one: a generating function does not “exist” somewhere as a whole—it *generates* its coefficients by a rule, and a combinatorial identity is a proved property of this rule, not a coincidence of ready series.
 
@@ -74,8 +73,7 @@ The finitization boundary in combinatorics is seen most sharply in Ramsey theory
 
 Let us analyze combinatorics by E/R/R in the generating order Rules $\to$ Roles $\to$ Elements.
 
-{
-**Rules (L5).** The holding rules are the rules of counting: the product of independent choices, the sum of incompatible ones, Pascal’s recursion, the Catalan recurrence $C_{n+1}=\sum C_i C_{n-i}$. Above them stands the common finite engine, Dirichlet’s principle. These rules stand one level above the counted objects and give the quantities.}
+**Rules (L5).** The holding rules are the rules of counting: the product of independent choices, the sum of incompatible ones, Pascal’s recursion, the Catalan recurrence $C_{n+1}=\sum C_i C_{n-i}$. Above them stands the common finite engine, Dirichlet’s principle. These rules stand one level above the counted objects and give the quantities.
 
 **Roles (L4).** Quantity is a *role-measure* of a finite carrier. “The set of combinations” and “the set of permutations” are *modes* (different roles) of one list, not different objects (operational divisibility). The generating function plays the role of a *process-thread* that generates the coefficients; on the infinite side counting plays the role of a *limit* (infinite Ramsey).
 

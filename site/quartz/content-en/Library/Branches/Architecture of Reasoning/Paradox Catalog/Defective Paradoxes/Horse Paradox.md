@@ -2,7 +2,7 @@
 title: "Horse Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс лошадей.md"
-sourceBlob: b2bfee8bec8310b3eabf9c52e49dfda41eba4e75
+sourceBlob: 4f52f2267bb98c7971fb5c12132085d7e421c969
 translated: 2026-10-20
 status: draft
 description: "An error in the base case of the induction at n=1"
@@ -54,7 +54,7 @@ A run at n = 1 lays everything bare. Two horses: remove the first—the second �
 
 [[Sorites Paradox|Sorites]] (a contrast: induction on an unfit concept versus a holed step), “proofs” that 1 = 2 (a hidden division by zero—the genre of false proofs), “all triangles are isosceles” (a defect of the drawing), [[Two Envelopes]] (a neighbor by subtype: a defect in the move itself, with sound premises).
 
-**Machine check.** In the registry of 46 it is `D18_Horse`: the field `ConceptualAmbiguity`, the level `L2_Operations`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by running the step at n = 1. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D18_Horse`: the field `ConceptualAmbiguity`, the level `L2_Operations`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by running the step at n = 1. Map: [[Formalization]].
 
 ---
 

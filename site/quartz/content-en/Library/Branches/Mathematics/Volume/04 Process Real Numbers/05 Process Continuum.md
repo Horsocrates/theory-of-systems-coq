@@ -2,7 +2,7 @@
 title: "Chapter 5. The Process Continuum"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/05 Процессный континуум.md"
-sourceBlob: a85e69621c14b191f58affb1e3e3e8dc2f865cfb
+sourceBlob: 53d11737b967fc562e0426de92c3b410513ed6f2
 translated: 2026-10-20
 status: draft
 ---
@@ -327,7 +327,6 @@ Theorem binary_processes_not_enumerable :
 No function $f$ from indices to binary processes covers them all: the
 diagonal always escapes.
 
-{
 Let us state exactly what this theorem is *not*. It is *not* the same
 theorem as `unit_interval_uncountable_trisect_v2` of Chapter 4.4. That
 one spoke of Cauchy processes in the interval $[0,1]$; this one speaks
@@ -337,7 +336,6 @@ the informal sense. The binary one is simpler and more constructive; and
 it clears the ground for the main result. Uncountability is
 established; now the question is not “how many” processes there are,
 but *how* their collections *are arranged*.
-}
 
 ## Trees and Closed Collections
 
@@ -379,7 +377,7 @@ Definition is_tree (T : PrunedTree) : Prop :=
 ```
 
 Two requirements. First: the empty string—the *root*—is a node
-($T [ ] = `true`$). Second: *prefix-closedness*—if a string is a node,
+($T [ ] = \texttt{true}$). Second: *prefix-closedness*—if a string is a node,
 then the string without its last element (`removelast`) is a node too.
 In other words: every node is reachable from the root; the tree has no
 pieces “hanging in the air.”
@@ -531,7 +529,7 @@ structure, not a cardinality as a ready magnitude. It is in this
 sense—structural, not quantitative—that the perfect subset will be the
 second pole of the dichotomy.
 
-## The Cantor–Bendixson Dichotomy{The Cantor-Bendixson Dichotomy}
+## The Cantor–Bendixson Dichotomy
 
 ### The Main Theorem
 
@@ -619,7 +617,6 @@ sides of the dichotomy are inhabited: neither “enumerable” nor
 
 ### The Names of the Theorem
 
-{
 The file gives the central result a second name as well—
 `no_intermediate_process_type`—proving it by a verbatim repetition of
 the first. The name is chosen to be telling: it stresses the essence—there
@@ -637,7 +634,6 @@ to be expected for the Cantor space, but no separate lemma on
 incompatibility is singled out in the supporting file; the chapter
 therefore speaks of the absence of an intermediate case without
 asserting formal mutual exclusivity as proved.)
-}
 
 ## The Process Reading of the Continuum Hypothesis
 
@@ -667,14 +663,12 @@ is either countable or contains a perfect subset. This is a structural
 theorem about closed sets, and, unlike the continuum hypothesis, it is
 provable by ordinary means.
 
-{
 The process version is exactly what was analyzed in § 5.6: every
 *closed* collection of binary processes is either enumerable or contains
 a perfect subset. This is a structural dichotomy, not a statement about
 cardinality. The name given in the file, `no_intermediate_process_type`,
 names the essence more exactly than the title one: there is no
 intermediate *structural type*.
-}
 
 ### How the Dichotomy Takes the Place of the Continuum Question
 
@@ -723,7 +717,6 @@ continuum—a proved structural fork, not a thing.
 
 ### E/R/R Analysis: The Process Continuum as a System
 
-{
 Let us secure what has been read by an E/R/R analysis (Part I). The
 header of the supporting file gives the labeling directly:
 *elements—binary processes (the Cantor space $2^ℕ$); roles—closed
@@ -733,9 +726,8 @@ ontological order Rules $\to$ Roles $\to$ Elements. A reservation about
 status: the dichotomy is proved in the *binary* model $2^ℕ$, separate
 from the Cauchy model of Chapters 4.2–4.4 (§ 5.8); the “system” is a
 substantive interpretation over the type `BinProcess`, read
-operationally.}
+operationally.
 
-{
 *Rules* (the laws $L3$, $L4$).
 The constitution is the Cantor–Bendixson dichotomy itself
 (`process_continuum_hypothesis`): every closed collection is either
@@ -762,9 +754,9 @@ elements are binary processes, `BinProcess := nat -> bool` (the Cantor
 space $2^ℕ$). By $L1$ each is identical to itself. By $P4$ this is a
 *type* of process rules (a rule answers a finite request $n$ with the
 value `true`/`false`), not a completed set; there is no completed
-uncountable object at the level of elements (§ 5.2).}
+uncountable object at the level of elements (§ 5.2).
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -775,7 +767,6 @@ uncountable object at the level of elements (§ 5.2).}
 | binary processes (`nat -> bool`, $2^ℕ$) | bearers (type, $P4$) | Element |
 | laws $L1$–$L5$ (here $L3$, $L4$) | universal layer | Rule (univ.) |
 
-{
 *Well-formedness.* The labeling is unambiguous: binary processes are the
 elements, the two types and the perfect kernel are the roles, the
 dichotomy and the tree are the rules. $P1$ is observed: a collection is
@@ -792,9 +783,9 @@ Honest boundaries: the mutual exclusivity of the two types is not
 singled out as a separate lemma (the chapter speaks of the *absence of
 an intermediate* case, not of proved incompatibility); the perfect
 kernel is a logical witness (Prop), not a decidable tree; the model
-$2^ℕ$ is kept separate from the Cauchy model.}
+$2^ℕ$ is kept separate from the Cauchy model.
 
- What the analysis yields. The continuum, read by E/R/R, is the last of
+What the analysis yields. The continuum, read by E/R/R, is the last of
 the process recastings: infinity became a process (Chapter 4.1), the
 number a process (4.2), the point a class (4.3), uncountability a rule
 about processes (4.4), and the continuum a structural *type*, a fork
@@ -847,7 +838,6 @@ sufficient reason is at work: every enumerable class *has* a ground—a
 witness of its enumerability—and $L4$ makes it possible to take this
 witness.
 
-{
 And—just as important—let us name what the proof does *not* contain.
 There is no *axiom of choice* as a separate set-theoretic axiom—an act
 of choice over a completed family of sets. This, however, must be stated
@@ -859,7 +849,6 @@ set-theoretic axiom of choice over completed families of sets, but it
 does use $L4$-witnessing as an internal law of ToS. This is the law of
 sufficient reason at work, not set-theoretic choice—and it is more
 honest to name it than to pass over it in silence.
-}
 
 Nor is there *completed infinity* as a ready object: the proof does not
 use a ZFC-like axiom of infinity. Here, too, a reservation is needed, so
@@ -903,7 +892,7 @@ principle of processes but also as a *filter* of the admissible strength
 of a statement. The process continuum itself, at which the present
 chapter has arrived, can now be summed up in three points.
 
-{*The summary of the chapter comes in three parts. First: what is proved.
+*The summary of the chapter comes in three parts. First: what is proved.
 Every closed collection of binary processes is either enumerable or
 contains a perfect subset; there is no intermediate structural type.
 This is the process version of the Cantor–Bendixson theorem—a structural
@@ -911,16 +900,16 @@ dichotomy that under $P4$ takes the place of the continuum question, not
 a statement about cardinality and not a resolution of the classical
 continuum hypothesis. The process continuum is a proved fork between the
 countable and the inexhaustibly branching structural types, not an
-object.*}
+object.*
 
-{*Second: what it rests on. The dichotomy is proved in the binary
+*Second: what it rests on. The dichotomy is proved in the binary
 model—the Cantor space $2^ℕ$, separate from the Cauchy model of
 Chapters 4.2–4.4—on three supporting files. The central theorem rests on
 two axioms—the laws of logic $L3$ and $L4$ ($L4$ for the countable
 union of enumerable classes). A separate set-theoretic axiom of choice
-and an axiom of completed infinity are *not* used.*}
+and an axiom of completed infinity are *not* used.*
 
-{*Third: what remains open. The theorem applies to *closed*
+*Third: what remains open. The theorem applies to *closed*
 collections—those given by a tree; it does not cover arbitrary
 collections. The perfect subtree is extracted as a logical witness (a
 predicate over Prop), not as a decidable tree—the original tree of the
@@ -934,7 +923,7 @@ $L3$) and proves the model identification `bin_ones_equiv_one`
 inverse map $[0,1] \to 2^ℕ$, the general ambiguity of representation,
 and the transfer of the Cantor–Bendixson dichotomy itself to the Cauchy
 model; the connection of the two branches in full awaits a separate
-investigation.*}
+investigation.*
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Zeno’s Achilles"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Ахиллес и черепаха.md"
-sourceBlob: 6e103e9f05c368dcaf0cc9fabf37bc7b825ee02f
+sourceBlob: ea76f8ba7f36de2172e5ddc5ee811972589f9d9d
 translated: 2026-10-20
 status: draft
 description: "An infinite number of steps ≠ an infinite time"
@@ -18,7 +18,7 @@ Achilles runs ten times faster than the tortoise and gives it a head start of a 
 
 ## Origin
 
-Zeno of Elea (fifth century BCE), a pupil of Parmenides, built his aporias as weapons: not to show that motion cannot be seen, but to show that the thought of motion is contradictory, and thereby to defend the doctrine of the one motionless being. The four aporias of motion have come down to us through Aristotle’s *Physics*: the [[Zenos Dichotomy|dichotomy]], Achilles, the [[Zenos Arrow|arrow]], and the stadium. Aristotle gave the answer himself, and it remains load-bearing to this day: the distinction between actual and potential infinity; the path is infinitely *divisible*, but not infinitely *divided*. An anecdote credits Diogenes with an answer given by the body: he stood up and walked—solvitur ambulando, “it is solved by walking.” Strict reckoning came with the theory of limits: the sum of an infinite series of decreasing terms is defined and finite; the twentieth century continued the dispute on new material—Bergson (motion is indivisible; it is the intellect that cuts it up), Russell (mathematics has solved it), and then the discussion of supertasks (Black, Thomson, Grünbaum), which grew directly out of this aporia.
+Zeno of Elea (fifth century BCE), a pupil of Parmenides, built his aporias as weapons: not to show that motion cannot be seen, but to show that the thought of motion is contradictory, and thereby to defend the doctrine of the one motionless being. The four aporias of motion have come down to us through Aristotle’s *Physics*: the [[Zenos Dichotomy|dichotomy]], Achilles, the [[Zenos Arrow|arrow]], and the stadium. Aristotle gave the answer himself, and it remains load-bearing to this day: the distinction between actual and potential infinity; the path is infinitely *divisible*, but not infinitely *divided*. An anecdote credits Diogenes with an answer given by the body: he stood up and walked—solvitur ambulando, “it is solved by walking.” Strict reckoning came with the theory of limits: the sum of an infinite geometric series is defined and finite; the twentieth century continued the dispute on new material—Bergson (motion is indivisible; it is the intellect that cuts it up), Russell (mathematics has solved it), and then the discussion of supertasks (Black, Thomson, Grünbaum), which grew directly out of this aporia.
 
 ## Consequence
 
@@ -36,7 +36,7 @@ The aporias are the first thought experiments about infinity, and their progeny 
 
 **Domain 5—Inference:** within the description everything is honest: at each step the tortoise is ahead—true. Only the transfer “at each step” → “always” is false. The problem is not in the inference.
 
-**Domain 6—Reflection:** the meeting is observed in every race—signal: the description does not cover the event; return to domain 2. The converse is also worth noticing: Diogenes’ walking does not lay the defect open—it only signals it; the resolution is the work of logic.
+**Domain 6—Reflection:** the meeting is observed in every race—signal: the description does not cover the event; return to domain 2. The converse is also worth noticing: Diogenes’ walking does not lay the defect open—it only signals it; laying it open is the work of logic.
 
 ## Diagnosis
 
@@ -54,7 +54,7 @@ Reckoning, diagnosis, ground. Reckoning: with a head start of a hundred meters a
 
 [[Zenos Dichotomy|Zeno’s Dichotomy]] (the same mechanics on half-segments—“never to arrive” at the goal), [[Zenos Arrow|Zeno’s Arrow]] (the third aporia—on motion in an instant), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks—the direct heirs), [[Hilberts Hotel|Hilbert’s Hotel]] (actual infinity taken as an object), [[Carrolls Tortoise|Carroll’s Tortoise]] (the same characters in a logical race).
 
-**Machine check.** The convergence that settles the computational part is formalized as a process: `geometric_series_cauchy`, `series_limit` (src/SeriesConvergence.v—the sum of a geometric series as a Cauchy process over Q); infinity-as-process itself is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4). In the registry of 46 it is `D13_ZenoAchilles`, and the diagnosis is sewn into the record: the field `InstrumentObjectMismatch`—“the instrument does not fit the object”; resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). An honest note: ProcessQuantumZeno.v in the base concerns the quantum physics of measurement, not the aporia. Map: [[Formalization]].
+**Machine check.** The convergence that settles the computational part is formalized as a process: `geometric_series_cauchy`, `series_limit` (src/SeriesConvergence.v—the sum of a geometric series as a Cauchy process over Q); infinity-as-process itself is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4). In the registry of 46 it is `D13_ZenoAchilles`, and the diagnosis is sewn into the record: the field `InstrumentObjectMismatch`—“the instrument does not fit the object”; laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). An honest note: ProcessQuantumZeno.v in the base concerns the quantum physics of measurement, not the aporia. Map: [[Formalization]].
 
 ---
 

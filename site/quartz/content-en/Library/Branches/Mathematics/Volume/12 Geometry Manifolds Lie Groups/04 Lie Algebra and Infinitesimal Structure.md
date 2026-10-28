@@ -2,7 +2,7 @@
 title: "Chapter 4. The Lie Algebra and Infinitesimal Structure"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/12 Геометрия, многообразия, группы Ли/04 Алгебра Ли и инфинитезимальная структура.md"
-sourceBlob: 2d78d58aec44f23617738ceb0a092b6a717fb939
+sourceBlob: 9241d96043e49bc0d041b7299495a7321263fa13
 translated: 2026-10-20
 status: draft
 ---
@@ -22,7 +22,7 @@ The central thesis of the chapter. Infinitesimal symmetry in ToS is a *finite ru
 
 *The Lie algebra is an infinitesimal rule (a bracket over $ℚ$), not the limit of a derivative; $\so(3)\cong\su(2)$ is concrete; the exponential is a role-limit, and its rational replacement is Cayley.*
 
-## The Bracket as an Infinitesimal Rule: $\so(3)${so(3)} over $ℚ${Q}
+## The Bracket as an Infinitesimal Rule: $\so(3)$ over $ℚ$
 
 Classically an element of a Lie algebra is a tangent vector at the identity of the group: the derivative $\tfrac{d}{dt}\big|_{0}R(t)$ of a one-parameter family of rotations. To take the derivative in the classical form is to take a limit, relying on the layer over $ℝ$. ToS makes the reverse move: it gives the algebra *directly* as a finite operation. The algebra $\so(3)$ is simply $ℚ^3$ with the *bracket* equal to the *cross product*:
 
@@ -51,7 +51,7 @@ which replaces associativity in the world of brackets. The algebra is *non-abeli
 
 *$\so(3)$ over $ℚ$ is $(ℚ^3,\times)$: the bracket as a finite rule, the structure constants $[e_i,e_j]=\varepsilon_{ijk}e_k$, antisymmetry, bilinearity, Jacobi, the non-abelian character—without a limit and without axioms.*
 
-## $\so(3)\cong\su(2)${so(3) = su(2)}: The Cover Is Invisible Infinitesimally
+## $\so(3)\cong\su(2)$: The Cover Is Invisible Infinitesimally
 
 The algebra of §12.4.2 has a second name—$\su(2)$. The generators of $\su(2)$ (the anti-Hermitian matrices $T_k=-\tfrac{i}{2}\sigma_k$ on the Pauli basis) obey *the same* structure constants $[T_i,T_j]=\varepsilon_{ijk}T_k$. The cross product on $ℚ^3$ is their common rational realization: one and the same table of brackets $\varepsilon_{ijk}$ is both $\so(3)$ and $\su(2)$.[^4]
 
@@ -89,7 +89,7 @@ Let us assemble the structure of the chapter in the generating order.
 | **Layer** | **Content** |
 |---|---|
 | *Rules* (L5) | the bracket $[a,b]=a\times b$ and the structure constants $[e_i,e_j]=\varepsilon_{ijk}e_k$; the axioms of a Lie algebra (antisymmetry, bilinearity, Jacobi); the Cayley transform $R=(I-K)(I+K)^{-1}$ as the rule of transition algebra ${}\to{}$ group |
-| *Roles* (L4) | Lie algebra ${}={}$ role-infinitesimal (the tangent rule at the identity); bracket ${}={}$ the rule of infinitesimal symmetry; $\exp$ ${}={}$ role-limit (the bridge to the group); Cayley ${}={}$ its rational replacement; $\so(3)\cong\su(2)$ ${}={}$ the common role of the group and its cover |
+| *Roles* (L4) | Lie algebra ${}={}$ role-infinitesimal (the tangent rule at the identity); bracket ${}={}$ the rule of infinitesimal symmetry; $\exp={}$ role-limit (the bridge to the group); Cayley ${}={}$ its rational replacement; $\so(3)\cong\su(2)={}$ the common role of the group and its cover |
 | *Elements* (L1${}+{}$P4) | finite data over $ℚ$: vectors $(x,y,z)\inℚ^3$, the integer structure constants $\varepsilon_{ijk}$, the rational Cayley numerator $N$; the analytic $\exp$ and the smooth Lie correspondence over $ℝ$ are *not* Elements |
 
 **Well-formedness.** The algebra is well-formed by the axioms: antisymmetry $[a,b]=-[b,a]$ and the Jacobi identity (which replaces associativity). The transition is well-formed: $N^{\mathsf T}N=(1+\norm{v}^2)^2 I$ and $\det N=(1+\norm{v}^2)^3$ give, after normalization, $R\in\SO(3,ℚ)$.
@@ -117,7 +117,7 @@ Next, Part XII passes from symmetry to *motion through geometry*. Chapter 12.5 b
 [^3]: `LieAlgebraSO3.v`: `bracket_antisym`, `bracket_self_zero`, `bracket_add_l`/`bracket_scale_l` (and the right-hand versions), `jacobi` (the Jacobi identity), and `so3_nonabelian`. In the geometric layer of ToS this is the basic Lie algebra with a bracket and Jacobi.
 [^4]: `LieAlgebraSO3.v`: the basis brackets `bracket_e1_e2` and so on are the structure constants common to $\so(3)$ and $\su(2)$ (the definition `structure_constant_123`). What is formalized is the rational $\so(3)$ model ($ℚ^3$ with the bracket); the coincidence with $\su(2)$ is a mathematical reading of the same structure constants, not a separate formalization of the Pauli matrices over $ℂ$.
 [^5]: `CayleySO3.v` (0 axioms): `cay_num` (the Cayley numerator), `cay_orthogonal_scaled` ($N^{\mathsf T}N=(1+\norm{v}^2)^2 I$—the ring identity), `cay_det_scaled`, `cay_identity` ($v=0\mapsto I$), and the concrete `rot90x`. The two-dimensional map is `cayley_on_circle` (`RationalRotationGroup.v`).
-[^6]: The same rational Cayley bridge on $\SO(2,ℚ)$ recurs in cross-links beyond geometry: `foundation/CayleyGeometrySpectralBridge.v` (6 Qed, 0 axioms)—the Cayley spectral point lies on $\SO(2,ℚ)$ and composes there (`spectral_composes_in_SO2Q`, `mass_4_is_rotation`); `CayleyFourierMassBridge.v` (9 Qed) links Cayley $\leftrightarrow$ Fourier $\leftrightarrow$ lattice mass (`cayley_fourier_is_mass`, `lattice_masses_pythagorean`); `ThreeFifthsUnification.v` (5 Qed) brings together the value $3/5$ in the Born/Schrödinger/Cayley readings (`three_fifths_unification`). All are 0 axioms, machine-checked; these are observational cross-bridges (some of them gravitate toward the physics volume), not new theorems.
+[^6]: The same rational Cayley bridge on $\SO(2,ℚ)$ recurs in cross-links beyond geometry: `foundation/CayleyGeometrySpectralBridge.v` (6 Qed, 0 axioms)—the Cayley spectral point lies on $\SO(2,ℚ)$ and composes there (`spectral_composes_in_SO2Q`, `mass_4_is_rotation`); `CayleyFourierMassBridge.v` (9 Qed) links Cayley $\leftrightarrow$ Fourier $\leftrightarrow$ lattice mass (`cayley_fourier_is_mass`, `lattice_masses_pythagorean`); `ThreeFifthsUnification.v` (5 Qed) brings together the value $3/5$ in the Born/Schrödinger/Cayley readings (`three_fifths_unification`). All are 0 axioms, machine-checked; these are observational cross-bridges (some of them gravitate toward physics), not new theorems.
 
 ---
 

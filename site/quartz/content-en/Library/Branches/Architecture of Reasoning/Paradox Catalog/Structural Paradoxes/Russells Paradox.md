@@ -2,7 +2,7 @@
 title: "Russell’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Рассела.md"
-sourceBlob: 5a426f9247d6f73573ebc79f6ad887692accd8de
+sourceBlob: 88efbca34edd17c25a0067417b70051acb09cbdf
 translated: 2026-10-20
 status: draft
 description: "A set contains itself as an element (container = content)"
@@ -59,7 +59,7 @@ Level 1—elements: what is gathered. Level 2—sets: organizing structures, rul
 
 ## Kin by Mechanism
 
-[[Barber Paradox|The barber]] is the folk form of the same structure: a rule applied to its own executor; it comes undone trivially—such a barber does not exist, the rule is incoherent (with Russell the stakes are higher: not one barber but the whole of naive set theory). [[Grelling Nelson|Grelling]] is a mirror on predicates: classification classifies itself. [[Cantors Paradox|Cantor]] and [[Burali Forti|Burali-Forti]]—“a system as an element of itself” and “a totality as an element of itself.” The common formula of the family: an operation of level 2 directed at an object of level 2—self-evaluation, self-organization, self-classification, the self-application of a rule.
+[[Barber Paradox|The barber]] is the folk form of the same structure: a rule applied to its own executor; it is laid open trivially—such a barber does not exist, the rule is incoherent (with Russell the stakes are higher: not one barber but the whole of naive set theory). [[Grelling Nelson|Grelling]] is a mirror on predicates: classification classifies itself. [[Cantors Paradox|Cantor]] and [[Burali Forti|Burali-Forti]]—“a system as an element of itself” and “a totality as an element of itself.” The common formula of the family: an operation of level 2 directed at an object of level 2—self-evaluation, self-organization, self-classification, the self-application of a rule.
 
 **Machine check.** In the Theory of Systems the construction does not even form: the hierarchy of levels is a theorem, and `S ∈ S` is rejected by type checking—`russell_paradox_blocked` (TheoryOfSystems_Core_ERR.v), `P1_blocks_russell` (src/foundation/PrinciplesFromLaws.v: P1—from Identity and Order); its status in the catalog—`russell_invalid` (Architecture_of_Reasoning/ParadoxDissolution.v); diagnosis by the triad—Element = Rule; solution—type theory: `russell_is_ill_formed`, `russell_violation` (src/foundation/ParadoxDiagnosis.v). Map: [[Formalization]].
 

@@ -2,7 +2,7 @@
 title: "Newcomb’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс Ньюкомба.md"
-sourceBlob: 8ecc9b33db0112351e1bb964c0f2949d0e62580f
+sourceBlob: 3785c7eac3220ef225034456d28e04e43be0b287
 translated: 2026-10-20
 status: draft
 description: "A conflict between determinism (for prediction) and freedom (for choice)"
@@ -60,7 +60,7 @@ The explication of the contradiction closes the “paradox.” Whoever accepts f
 
 [[Unexpected Hanging]] (a neighbor in the family: there the contradiction of the conditions becomes explicit on explication, here it is hidden), [[Crocodile Dilemma|the Crocodile]] (a prediction woven into a rule—structural kin), the prisoner’s dilemma (correlation without causation), the Solomon problem (a common cause of preference and outcome).
 
-**Machine check.** In the registry of 46 it is `D11_Newcomb`, and the diagnosis is sewn into the entry itself: the mismatch field is `HiddenDeterminism`, hidden determinism; the category “defective,” the level `L2_Operations`, resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D11_Newcomb`, and the diagnosis is sewn into the entry itself: the mismatch field is `HiddenDeterminism`, hidden determinism; the category “defective,” the level `L2_Operations`, laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

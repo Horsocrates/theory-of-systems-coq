@@ -2,7 +2,7 @@
 title: "Chapter 1. Computation as Finitization"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/01 Вычисление как финитизация.md"
-sourceBlob: 422884dae168a03cb2266134c74b782695ecf7c9
+sourceBlob: 542bd8e23d1d86ff2f0cc96a7859a6defa1a0919
 translated: 2026-10-20
 status: draft
 ---
@@ -19,7 +19,7 @@ This chapter lays the foundation: what computation is in our system and what its
 
 ## Computation as a Process
 
-*Computation* in ToS is a process with its own E/R/R triad. Its *elements* are configurations (states of the machine). Its *rule* is the ordered *step*: it is precisely the ORDER of steps (L5) that turns a sequence of configurations into a *computation* rather than an arbitrary list. And its *status* is *halting*: whether the result has been reached (this is a status component, not a role—see\ the analysis in §15.1.6).
+*Computation* in ToS is a process with its own E/R/R triad. Its *elements* are configurations (states of the machine). Its *rule* is the ordered *step*: it is precisely the ORDER of steps (L5) that turns a sequence of configurations into a *computation* rather than an arbitrary list. And its *status* is *halting*: whether the result has been reached (this is a status component, not a role—see the analysis in §15.1.6).
 
 The machine is run to a *finite depth* $n$, not “to the end”—this is P4 (“infinity is a property of process, not of object”):
 
@@ -42,7 +42,7 @@ To speak of computation as an *object* rather than a set of scattered definition
 Fix a budget $n$. The question “has the configuration halted within $n$ steps?” is
 
 $$
-\mathrm{halts_in} n c \;:=\; \bigl( \mathrm{halted} (\mathrm{run} n c) = \text{true} \bigr),
+\mathrm{halts\_in} n c \;:=\; \bigl( \mathrm{halted} (\mathrm{run} n c) = \text{true} \bigr),
 $$
 
 and it is **decidable**: for any fixed $n$ there is a *constructive Boolean decision*—run $n$ steps and look at the status. This is a *terminating* procedure, and it is 0-axiom.
@@ -55,11 +55,11 @@ It matters *why* bounded halting is decidable: the budget $n$ makes the process 
 Let us remove the budget. *Full* halting
 
 $$
-\mathrm{halts} c \;:=\; \exists  n,\ \mathrm{halts_in} n c
+\mathrm{halts} c \;:=\; \exists  n,\ \mathrm{halts\_in} n c
 $$
 
-is the completion of the run over *all* budgets. The positive case by itself has a finite witness (if the machine has halted within some $n$, then this is an Element); a **role-limit** arises *as a universal recognition problem*—to decide this predicate for *all* configurations at once (in particular, negatively) requires control over all budgets simultaneously. Dually, *divergence* \(\mathrm{diverges} c := \forall n,\
-\mathrm{halted} (\mathrm{run} n c)=\text{false}\): the result is not reached at any finite depth; halting and divergence are mutually exclusive.
+is the completion of the run over *all* budgets. The positive case by itself has a finite witness (if the machine has halted within some $n$, then this is an Element); a **role-limit** arises *as a universal recognition problem*—to decide this predicate for *all* configurations at once (in particular, negatively) requires control over all budgets simultaneously. Dually, *divergence* $\mathrm{diverges} c := \forall n,\
+\mathrm{halted} (\mathrm{run} n c)=\text{false}$: the result is not reached at any finite depth; halting and divergence are mutually exclusive.
 
 **P4 diagnostics.**  Unbounded halting is *not* an Element object. To take “does it halt at all?” as a decidable Boolean predicate is to *reify a role-limit into an Element*: a category mistake of the same kind as “infinity as a completed object” (Part IV). The honest formulation is “*a role-limit cannot be finitized into an Element decider*,” not “we cannot compute it.” The exact form of this—the absence of a universal halting decider—is given by the *diagonal* (15.3); here we only draw the cut: the *bounded* is an Element, decidable; the *unbounded* is a role-limit. An increment machine without a halting status gives an example of the negative side: every finite run exists, but there is no result at any budget—divergence, a pure role-limit.
 
@@ -74,7 +74,7 @@ $$
 \end{gathered}
 $$
 
-Precision is essential here: the unbounded predicate $\mathrm{halts} c:=\exists n,\ \mathrm{halts_in} n c$ *in a concrete case* may have a finite witness $n$ (if the machine has indeed halted)—and then it is an Element; the role-limit arises in the demand for a *total* decider of this predicate for *all* programs, and it is this decider that the diagonal will rule out (15.3). This is the same line that in Part IV divided the rational (a terminating process) from the irrational (a nonterminating one) and, as a general principle, the constructive from the classical. Computation only makes it *algorithmic*: decidability becomes a property of a concrete procedure at a finite stage.
+Precision is essential here: the unbounded predicate $\mathrm{halts} c:=\exists n,\ \mathrm{halts\_in} n c$ *in a concrete case* may have a finite witness $n$ (if the machine has indeed halted)—and then it is an Element; the role-limit arises in the demand for a *total* decider of this predicate for *all* programs, and it is this decider that the diagonal will rule out (15.3). This is the same line that in Part IV divided the rational (a terminating process) from the irrational (a nonterminating one) and, as a general principle, the constructive from the classical. Computation only makes it *algorithmic*: decidability becomes a property of a concrete procedure at a finite stage.
 
 The boundary has two sides, and one arena carries both. The *undecidable* side has one engine—the diagonal (the fixed-point theorem), which yields halting, Rice, Cantor, and Kolmogorov (15.3). The *decidable* side has one criterion—the discriminant of the reduction atlas (15.4). Between them lies the graded ladder of languages (15.2). All of this is assembled into one machine result—“computation is the finitization boundary”: Element decidability on any machine, the role-limit as one diagonal, the root in Lawvere’s theorem.[^4]
 
@@ -84,14 +84,12 @@ The boundary has two sides, and one arena carries both. The *undecidable* side h
 
 **Roles (L4).**  *Halting* (`halted`) is a *status* (what the configuration has *become* under the rules), not a role (the distinction Status $\neq$ Role); the halting decider is a role-oracle; *unbounded* halting $\mathrm{halts}$ is a role-limit (the completion of `run` over all $n$).
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete configurations, fuel-bounded runs `run` $n$, the countdown machine. *Not* an element: a total halting oracle—its role-limit cannot be finitized into an Element decider (P4 / the diagonal rule it out).}
+**Elements (L1${}+{}$P4).**  Concrete configurations, fuel-bounded runs `run` $n$, the countdown machine. *Not* an element: a total halting oracle—its role-limit cannot be finitized into an Element decider (P4 / the diagonal rule it out).
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
 | ordered step + `run` $n$ + the cut “terminates${}\Leftrightarrow{}$Element” | the constitution of computability | Rule (L5) |
-| halting status; decider-oracle; $\mathrm{halts}$ ${}={}$ role-limit | the status and limits of the process | Role (L4) |
+| halting status; decider-oracle; $\mathrm{halts}={}$ role-limit | the status and limits of the process | Role (L4) |
 | configurations; runs `run` $n$; `countdown` | finitely actual bearers | Element (L1${}+{}$P4) |
 
 **P4 diagnostics.**  Bounded halting (a fixed budget) = Element: decidable, Boolean, 0 axioms. Unbounded = role-limit: “to decide halting in general” would be a level confusion. The boundary does not rule out—it *names the scale*: what is captured by a finite run, and what is a limit/process.
@@ -106,8 +104,8 @@ Next comes Chapter 15.2: *finite memory and the Chomsky ladder*, where the Eleme
 
 [^1]: `src/cs/HaltingRoleLimit.v` (13 Qed, 0 Admitted, **0 axioms**): `run`, `run_absorb` (absorption), `halts_in_mono` (monotonicity in the budget), `halts_not_diverges` (the mutual exclusion of halting and divergence).
 [^2]: `src/cs/ComputationModel.v` (3 Qed, **0 axioms**): `Record CompModel` (configurations ${}+{}$ step ${}+{}$ status), `cm_halts_in`, `cm_halts`; a concrete inhabitant of the arena is the countdown machine (`countdown`).
-[^3]: `HaltingRoleLimit.v`: `bounded_halting_decidable`, the decidability $\{\mathrm{halts_in} n c\}+\{\neg \mathrm{halts_in} n c\}$; the same decidability on the arena is `ComputationModel.cm_ bounded_ decidable`.
-[^4]: `ComputationModel.computation_ is_ finitization_ boundary`: the conjunction of (1) bounded halting is decidable on any machine; (2) one diagonal in four faces; (3) the root is `lawvere_fixed_point`. **0 axioms**. Here it serves as an *orienting* synthesis; it is unfolded in detail in the finale, 15.7.
+[^3]: `HaltingRoleLimit.v`: `bounded_halting_decidable`, the decidability $\{\mathrm{halts\_in} n c\}+\{\neg \mathrm{halts\_in} n c\}$; the same decidability on the arena is `ComputationModel.cm_bounded_decidable`.
+[^4]: `ComputationModel.computation_is_finitization_boundary`: the conjunction of (1) bounded halting is decidable on any machine; (2) one diagonal in four faces; (3) the root is `lawvere_fixed_point`. **0 axioms**. Here it serves as an *orienting* synthesis; it is unfolded in detail in the finale, 15.7.
 
 ---
 

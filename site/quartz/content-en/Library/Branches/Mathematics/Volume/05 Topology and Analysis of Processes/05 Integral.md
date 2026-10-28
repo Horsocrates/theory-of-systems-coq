@@ -2,7 +2,7 @@
 title: "Chapter 5. The Integral"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/05 Интеграл.md"
-sourceBlob: 4c4558a5a1d8322d47e5311eeef70bb6eceb104d
+sourceBlob: f30395961b09af347951e4fe975e930a8dfbc05d
 translated: 2026-10-20
 status: draft
 ---
@@ -42,17 +42,17 @@ Fixpoint riemann_sum (f : Q -> Q) (a step : Q) (n : nat) : Q :=
   end.
 ```
 
-That is, $`riemann_sum` f a `step` n = \sum_{k=0}^{n-1}
-f(`walk_point` a `step` k)\cdot`step`$—the sum of the areas of $n$ rectangles with height $f$ at a node and width `step`. At each fixed $n$ this is a rational number, exact, with no approximation whatsoever.
+That is, $\texttt{riemann\_sum} f a \texttt{step} n = \sum_{k=0}^{n-1}
+f(\texttt{walk\_point} a \texttt{step} k)\cdot\texttt{step}$—the sum of the areas of $n$ rectangles with height $f$ at a node and width `step`. At each fixed $n$ this is a rational number, exact, with no approximation whatsoever.
 
-{ Let us note the level of the type (the Part V safeguard): $f:ℚ\toℚ$, and the sum is a rational number. And at once a warning about names (safeguard C4). The repository has *three different* definitions named `riemann_sum`: this one, the main one, from `RiemannIntegration.v` (the left sum over `walk_point`); a separate `riemann_sum_01` on the interval $[0,1]$ in `ProcessIntegration.v`; and one more, a demonstration one, in `ProcessAnalysis.v`. The names coincide, the definitions differ; below, by `riemann_sum` we always mean the first, and we will turn to the other two separately in § 5.7, naming the file each time.}
+Let us note the level of the type (the Part V safeguard): $f:ℚ\toℚ$, and the sum is a rational number. And at once a warning about names (safeguard C4). The repository has *three different* definitions named `riemann_sum`: this one, the main one, from `RiemannIntegration.v` (the left sum over `walk_point`); a separate `riemann_sum_01` on the interval $[0,1]$ in `ProcessIntegration.v`; and one more, a demonstration one, in `ProcessAnalysis.v`. The names coincide, the definitions differ; below, by `riemann_sum` we always mean the first, and we will turn to the other two separately in § 5.7, naming the file each time.
 
-### The Integral-Process: `integral_process`{The integral-process: integral_process}
+### The Integral-Process: `integral_process`
 
 The second layer is a *process*. To obtain the integral, the finite sum has to be refined. Let us fix a sequence of ever finer grids: at level $n$ we take $n+1$ subintervals with the step
 
 $$
-`integral_step`\;a\;b\;n \;=\; \frac{b-a}{n+1}
+\texttt{integral\_step}\;a\;b\;n \;=\; \frac{b-a}{n+1}
 $$
 
 and compute the Riemann sum on this grid. We obtain a process—at level $n$, a rational number:
@@ -73,32 +73,32 @@ The same *safeguard* is needed here as for the derivative-process in § 5.4. The
 
 The integral is a system, and the E/R/R methodology (Part I) applies to it. The analysis unfolds the labeling from the headers of the supporting files: *elements—partial Riemann sums; role—a Cauchy process converging to the value of the integral; rules—linearity, monotonicity, nonnegativity*.[^1] We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements. The caveat on status is the same as in Chapters 5.1–5.4: we are dealing with functions $ℚ \to ℚ$, not with an integral on quotient classes; the “system” is a substantive ontological interpretation, not an object `System` $L$.
 
-*Rules* (the law $L5$). The constitution of the integral is *accumulation*: the Riemann sum on the walk grid (§ 5.1.3) plus refinement (`integral_process`, § 5.1.4). Adjoining it is a concrete layer—linearity (§ 5.3), monotonicity and *nonnegativity* (motif M4, § 5.4): it is precisely these order rules that make the integral the foundation of measure. The legitimacy of the process as an integral is given by one more rule-condition—*integrability* as the Cauchy property of the process of sums (through grid-FTC, § 5.5). An honest boundary: the core has no separate predicate of integrability; the Cauchy property is assembled from grid estimates for a particular class of functions (§ 5.5.3).
+*Rules* (the law $L5$). The constitution of the integral is *accumulation*: the Riemann sum on the walk grid (§ 5.1.3) plus refinement (`integral_process`, § 5.1.4). Adjoining it is a concrete layer—linearity (§ 5.3), monotonicity and *nonnegativity* (§ 5.4): it is precisely these order rules that make the integral the foundation of measure. The legitimacy of the process as an integral is given by one more rule-condition—*integrability* as the Cauchy property of the process of sums (through grid-FTC, § 5.5). An honest boundary: the core has no separate predicate of integrability; the Cauchy property is assembled from grid estimates for a particular class of functions (§ 5.5.3).
 
 *Roles—the significance of positions* (the law $L4$). The central role is the *accumulated quantity*, the area under the graph, which integration assigns to a function on an interval. The computational side of the role is carried by the *process* of Riemann sums—a Cauchy process converging to the value of the integral (this is how the role is named in the file header). In the exact step line the same role appears as *integration* and the $L^1$-*norm* (§ 5.2.3). By $L4$ the role is grounded: the area is structurally given by a sum of values with widths as weights, not from outside.
 
-*Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are integrand functions $ℚ \to ℚ$ and *partial Riemann sums* $`RS`_n$ (and in the step line, records `Step`). By $L1$ each sum is identical to itself. By $P4$ the bearers are finite at each level: $`RS`_n$ is a finite sum of rationals, exact and surveyable; the integral is actual as a process of accumulation, and there is no completed limit of the sums.
+*Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are integrand functions $ℚ \to ℚ$ and *partial Riemann sums* $\texttt{RS}_n$ (and in the step line, records `Step`). By $L1$ each sum is identical to itself. By $P4$ the bearers are finite at each level: $\texttt{RS}_n$ is a finite sum of rationals, exact and surveyable; the integral is actual as a process of accumulation, and there is no completed limit of the sums.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
-| functions $ℚ \to ℚ$; sums $`RS`_n$; `Step` records | bearers | Element |
+| functions $ℚ \to ℚ$; sums $\texttt{RS}_n$; `Step` records | bearers | Element |
 | area; the process converging to the value of the integral | roles | Role |
 | the Riemann sum on the grid $+$ refinement | constitution as accumulation | Rule (constr.) |
-| linearity, monotonicity, nonnegativity (M4) | order rules | Rule (constr.) |
+| linearity, monotonicity, nonnegativity | order rules | Rule (constr.) |
 | integrability $=$ the Cauchy property (grid-FTC) | condition of legitimacy | Rule |
 | the laws $L1$–$L5$ | universal layer | Rule (univ.) |
 
 *Well-formedness.* The labeling is unambiguous: functions and sums are elements, the area is a role, accumulation and the order laws are rules. There is no self-reference: the sum works *on* the values of the function and stands above them—by $L5$ the operation stands above its operands. The two constructions—the exact step line and the process of Riemann sums—are two agreed representations of one role-integral (§ 5.2.5); they do not compete. The integral is well-formed.
 
- The analysis clarifies the place of the integral in Part V. It is *dual* to the derivative (§ 5.4): both systems have one role pattern—a process converging to a value (the slope there, the area here)—and dual rules (differentiation versus accumulation); the fundamental theorem (Chapter 5.6) will link the two processes into one. Motif M4—nonnegativity—is the rule by which the integral becomes a *positive functional*, the foundation of measure (Part VI). And the two constructions, the exact and the process one, are two intensional representations of one integral—the same multiplicity of representations ($P3$) as with the three levels of the intermediate value theorem in Chapter 5.3. The same analysis also sets the pattern for Part V: every analytic concept is read as a system with its own E/R/R structure.
+ The analysis clarifies the place of the integral in Part V. It is *dual* to the derivative (§ 5.4): both systems have one role pattern—a process converging to a value (the slope there, the area here)—and dual rules (differentiation versus accumulation); the fundamental theorem (Chapter 5.6) will link the two processes into one. Nonnegativity is the rule by which the integral becomes a *positive functional*, the foundation of measure (Part VI). And the two constructions, the exact and the process one, are two intensional representations of one integral—the same multiplicity of representations ($P3$) as with the three levels of the intermediate value theorem in Chapter 5.3. The same analysis also sets the pattern for Part V: every analytic concept is read as a system with its own E/R/R structure.
 
 ### The Plan of the Chapter
 
-From here the chapter proceeds as follows. § 5.2: the integral of simple functions—the constant, the width of the grid, exact step functions. § 5.3: linearity. § 5.4: monotonicity and nonnegativity (motif M4). § 5.5: estimates and convergence—integrability as the Cauchy property of the process of sums. § 5.6: the boundary of the chapter—what the integral prepares for the fundamental theorem of calculus (the telescope, grid-FTC as a bridge, a brief survey of the rules that Chapter 5.6 will unfold). § 5.7: computational examples. § 5.8: the summary.
+From here the chapter proceeds as follows. § 5.2: the integral of simple functions—the constant, the width of the grid, exact step functions. § 5.3: linearity. § 5.4: monotonicity and nonnegativity. § 5.5: estimates and convergence—integrability as the Cauchy property of the process of sums. § 5.6: the boundary of the chapter—what the integral prepares for the fundamental theorem of calculus (the telescope, grid-FTC as a bridge, a brief survey of the rules that Chapter 5.6 will unfold). § 5.7: computational examples. § 5.8: the summary.
 
-{ The supporting files have two anchors: `RiemannIntegration.v`, the core of finite Riemann sums, and `ProcessIntegral.v`, the process built from these sums. Additional layers: `StepIntegral.v` (the exact integral of piecewise constant functions) and demonstration files with examples; `IntegralApplications.v`, with the rules of the integral, we will only name in § 5.6, leaving its analysis to Chapter 5.6. The caveat on the status of axioms—with the important case of `ProcessArithmetic.v`, where the header diverges from the fact—the chapter gives in § 5.8.}
+The supporting files have two anchors: `RiemannIntegration.v`, the core of finite Riemann sums, and `ProcessIntegral.v`, the process built from these sums. Additional layers: `StepIntegral.v` (the exact integral of piecewise constant functions) and demonstration files with examples; `IntegralApplications.v`, with the rules of the integral, we will only name in § 5.6, leaving its analysis to Chapter 5.6. The caveat on the status of axioms—with the important case of `ProcessArithmetic.v`, where the header diverges from the fact—the chapter gives in § 5.8.
 
 ## The Integral of Simple Functions
 
@@ -107,12 +107,12 @@ From here the chapter proceeds as follows. § 5.2: the integral of simple functi
 Let us test the definition on the simplest case—a constant function. Formally, the lemma `integral_process_const` states an equivalence of processes:
 
 $$
-`integral_process`\;(\lambda_. c)\;a\;b
+\texttt{integral\_process}\;(\lambda_. c)\;a\;b
 \;\sim\;
-`const_process`\;\bigl(c\cdot(b-a)\bigr),
+\texttt{const\_process}\;\bigl(c\cdot(b-a)\bigr),
 $$
 
-that is, the process of the integral of the constant $c$ is equivalent to the constant process with value $c\cdot(b-a)$. It is worth stating precisely: the result is expressed through the equivalence of processes (`process_equiv`), although the proof shows even a *pointwise zero* gap at each level. Indeed, at level $n$ the Riemann sum of the constant is $c\cdot(n+1)\cdot`step`$ (by `riemann_sum_const`), and the product $(n+1)\cdot`step`$ equals exactly $b-a$ (by `grid_width_eq`); therefore the difference from $c\cdot(b-a)$ is zero at every $n$, and not only in the limit.
+that is, the process of the integral of the constant $c$ is equivalent to the constant process with value $c\cdot(b-a)$. It is worth stating precisely: the result is expressed through the equivalence of processes (`process_equiv`), although the proof shows even a *pointwise zero* gap at each level. Indeed, at level $n$ the Riemann sum of the constant is $c\cdot(n+1)\cdot\texttt{step}$ (by `riemann_sum_const`), and the product $(n+1)\cdot\texttt{step}$ equals exactly $b-a$ (by `grid_width_eq`); therefore the difference from $c\cdot(b-a)$ is zero at every $n$, and not only in the limit.
 
 In substance this is the familiar area under a horizontal line: height $c$ times width $b-a$, exactly and at once. And this is the only class where integrability in the sense of § 5.1.4 is visible immediately—without any grid estimates: the process is already constant.
 
@@ -121,8 +121,8 @@ In substance this is the familiar area under a horizontal line: height $c$ times
 The fact on which the previous subsection relied deserves a line of its own. The integral of the unit function is the total width of the grid:
 
 $$
-`riemann_sum`\;(\lambda_. 1)\;a\;`step`\;n
-\;=\; n\cdot`step`
+\texttt{riemann\_sum}\;(\lambda_. 1)\;a\;\texttt{step}\;n
+\;=\; n\cdot\texttt{step}
 $$
 
 (the lemma `riemann_sum_width`), and on a grid of $n+1$ subintervals with step $(b-a)/(n+1)$ this gives exactly $b-a$ (`grid_width_eq`). That is, the total width of the grid is exactly equal to the length of the interval, *independently* of the level of refinement. This is the “normalization” on which all the estimates of § 5.4 and § 5.5 later rest: however many rectangles we take, their total width is one and the same.
@@ -162,22 +162,22 @@ Let us add a caveat on the status of this connection (an honest remark). In the 
 The first substantive property of the integral is linearity. At the level of the finite Riemann sum these are two identities, true on *every* grid. A sum of functions gives a sum of sums:
 
 $$
-`riemann_sum`\;(\lambda x. f x + g x)\;a\;`step`\;n
+\texttt{riemann\_sum}\;(\lambda x. f x + g x)\;a\;\texttt{step}\;n
 \;=\;
-`riemann_sum`\;f\;a\;`step`\;n
-+ `riemann_sum`\;g\;a\;`step`\;n
+\texttt{riemann\_sum}\;f\;a\;\texttt{step}\;n
++ \texttt{riemann\_sum}\;g\;a\;\texttt{step}\;n
 $$
 
-(the lemma `riemann_sum_add`); a scalar multiple can be pulled out: $`riemann_sum` (\lambda x. c\cdot f x) = c\cdot
-`riemann_sum` f$ (the lemma `riemann_sum_scale`). Both are proved by a short induction on the number of nodes: at each step a ring identity for rational numbers does the work.
+(the lemma `riemann_sum_add`); a scalar multiple can be pulled out: $\texttt{riemann\_sum} (\lambda x. c\cdot f x) = c\cdot
+\texttt{riemann\_sum} f$ (the lemma `riemann_sum_scale`). Both are proved by a short induction on the number of nodes: at each step a ring identity for rational numbers does the work.
 
 At the level of the process these identities are lifted verbatim: `integral_process_add` and `integral_process_scale` give additivity and homogeneity pointwise at each level, and `integral_linearity_process` joins them into one: $\int(c\cdot f + g) = c\cdot\int f + \int g$. Safeguard C1: on the finite sum this is an *exact* identity; on the process, a pointwise equality at each level. In substance the integral is linear for the same reason that a sum is linear: the Riemann sum is a linear combination of the values of the function with widths as weights.
 
 ### The Difference
 
-{ The difference is derived from the sum and the scalar rather than proved anew. The lemma `riemann_sum_negate_fn` gives $`RS`(-f) =
--`RS`(f)$, and `riemann_sum_sub` gives $`RS`(f-g) =
-`RS`(f) - `RS`(g)$. Both are obtained by rewriting through `riemann_sum_ext`—the extensionality lemma: if $f$ and $g$ coincide at the nodes of the grid, their Riemann sums are equal. This is the same economy of means as with the difference rule of the derivative in § 5.4: each next identity is set on top of those already proved. Safeguard C4, on sources: `riemann_sum_sub` and `riemann_sum_negate_fn` belong to the FTC layer of the repository—the file `analysis/FTC.v`; the extensionality lemma `riemann_sum_ext` lives in `IntegralApplications.v`. What matters for the chapter in substance is this: the difference is derived from additivity and scaling rather than proved anew.}
+The difference is derived from the sum and the scalar rather than proved anew. The lemma `riemann_sum_negate_fn` gives $\texttt{RS}(-f) =
+-\texttt{RS}(f)$, and `riemann_sum_sub` gives $\texttt{RS}(f-g) =
+\texttt{RS}(f) - \texttt{RS}(g)$. Both are obtained by rewriting through `riemann_sum_ext`—the extensionality lemma: if $f$ and $g$ coincide at the nodes of the grid, their Riemann sums are equal. This is the same economy of means as with the difference rule of the derivative in § 5.4: each next identity is set on top of those already proved. Safeguard C4, on sources: `riemann_sum_sub` and `riemann_sum_negate_fn` belong to the FTC layer of the repository—the file `analysis/FTC.v`; the extensionality lemma `riemann_sum_ext` lives in `IntegralApplications.v`. What matters for the chapter in substance is this: the difference is derived from additivity and scaling rather than proved anew.
 
 ### What the Linearity of the Integral Means
 
@@ -187,63 +187,63 @@ Linearity reflects the fact that the Riemann sum is a linear combination of the 
 
 ### Monotonicity
 
-{ The integral preserves order. The lemma `riemann_sum_monotone` states: if $f\le g$ at all nodes of the grid and the step is nonnegative, then $`riemann_sum` f \le `riemann_sum` g$. At the level of the process this is `integral_monotone`: from $f\le g$ on the grid follows $`integral_process` f \le `integral_process` g$ pointwise. The proof is induction on the number of nodes: at each step $f(x_k)\cdot`step`\le g(x_k)\cdot`step`$, since the factor `step` is nonnegative. Safeguard C1: on the finite sum, an exact inequality; on the process, a pointwise one. In substance: a larger integrand covers a larger area.}
+The integral preserves order. The lemma `riemann_sum_monotone` states: if $f\le g$ at all nodes of the grid and the step is nonnegative, then $\texttt{riemann\_sum} f \le \texttt{riemann\_sum} g$. At the level of the process this is `integral_monotone`: from $f\le g$ on the grid follows $\texttt{integral\_process} f \le \texttt{integral\_process} g$ pointwise. The proof is induction on the number of nodes: at each step $f(x_k)\cdot\texttt{step}\le g(x_k)\cdot\texttt{step}$, since the factor `step` is nonnegative. Safeguard C1: on the finite sum, an exact inequality; on the process, a pointwise one. In substance: a larger integrand covers a larger area.
 
-### Nonnegativity: Motif M4
+### Nonnegativity
 
-{ A special case of monotonicity is the key motif of the whole of Part V. The lemma `riemann_sum_nonneg`: if $f\ge 0$ at all nodes of the grid and the step is nonnegative, then $`riemann_sum` f\ge 0$. This is the *fourth* recurring motif of Part V (M4): the integral of a nonnegative function is nonnegative. It follows from monotonicity with $g=f$, $f=0$, or is proved by direct induction.}
+A special case of monotonicity is the key property of the whole of Part V. The lemma `riemann_sum_nonneg`: if $f\ge 0$ at all nodes of the grid and the step is nonnegative, then $\texttt{riemann\_sum} f\ge 0$. This is *structural nonnegativity*: the integral of a nonnegative function is nonnegative. It follows from monotonicity with $g=f$, $f=0$, or is proved by direct induction.
 
-In substance the motif is simple: the area under a nonnegative graph is nonnegative. But it is precisely the basis for the integral’s defining a *measure*: a positive linear functional taking nonnegative functions to nonnegative numbers. This is a bridge to Part VI, where general measure will grow out of the integral of piecewise constant functions. M4 here is the order law for the sake of which the integral is fit to be the foundation of measure at all, not a technical detail. In the analysis of § 5.1.5, M4 is the rule (Rule) by which the integral is a positive functional.
+In substance the property is simple: the area under a nonnegative graph is nonnegative. But it is precisely the basis for the integral’s defining a *measure*: a positive linear functional taking nonnegative functions to nonnegative numbers. This is a bridge to Part VI, where general measure will grow out of the integral of piecewise constant functions. Nonnegativity here is the order law for the sake of which the integral is fit to be the foundation of measure at all, not a technical detail. In the analysis of § 5.1.5, nonnegativity is the rule (Rule) by which the integral is a positive functional.
 
 ### The Nonnegativity of the Norm of Step Functions
 
-The same motif M4 also shows itself in the exact step line. The $L^1$-norm of a step function is defined as the integral of its absolute value, $\lVert f\rVert_1 = I(|f|)$, and the lemma `norm_nonneg` states $\lVert f\rVert_1\ge 0$. Together with `step_integral_nonneg` (the integral of a nonnegative step is nonnegative) this shows: the law M4 is one for both lines—the process-grid line (`riemann_sum_nonneg`) and the exact step line (`norm_nonneg`). One and the same order law of the integral shows itself twice, on two different constructions—as befits a fundamental property.
+The same nonnegativity also shows itself in the exact step line. The $L^1$-norm of a step function is defined as the integral of its absolute value, $\lVert f\rVert_1 = I(|f|)$, and the lemma `norm_nonneg` states $\lVert f\rVert_1\ge 0$. Together with `step_integral_nonneg` (the integral of a nonnegative step is nonnegative) this shows: the law of nonnegativity is one for both lines—the process-grid line (`riemann_sum_nonneg`) and the exact step line (`norm_nonneg`). One and the same order law of the integral shows itself twice, on two different constructions—as befits a fundamental property.
 
 ### Upper and Lower Estimates
 
-Order also gives quantitative estimates. The lemma `riemann_sum_abs_bound`: if $|f|\le M$ at the nodes, then $|`riemann_sum` f a `step` n|\le M\cdot
-n\cdot`step`$. The lemma `riemann_sum_global_bound`: for $\mathrm{lo}\le f\le \mathrm{hi}$ at the nodes, the sum of $n$ terms is squeezed between $\mathrm{lo}\cdot n\cdot`step`$ and $\mathrm{hi}\cdot
-n\cdot`step`$. These are estimates of an arbitrary finite sum with $n$ subintervals. In the integral process at level $n$ the number of subintervals equals $S n$ (that is, $n+1$), and the normalization is this: $(S n)\cdot`integral_step` a b n = b-a$ (`grid_width_eq`). Substituting, we obtain for the finite sum of the process $`RS`_n$:
+Order also gives quantitative estimates. The lemma `riemann_sum_abs_bound`: if $|f|\le M$ at the nodes, then $|\texttt{riemann\_sum} f a \texttt{step} n|\le M\cdot
+n\cdot\texttt{step}$. The lemma `riemann_sum_global_bound`: for $\mathrm{lo}\le f\le \mathrm{hi}$ at the nodes, the sum of $n$ terms is squeezed between $\mathrm{lo}\cdot n\cdot\texttt{step}$ and $\mathrm{hi}\cdot
+n\cdot\texttt{step}$. These are estimates of an arbitrary finite sum with $n$ subintervals. In the integral process at level $n$ the number of subintervals equals $S n$ (that is, $n+1$), and the normalization is this: $(S n)\cdot\texttt{integral\_step} a b n = b-a$ (`grid_width_eq`). Substituting, we obtain for the finite sum of the process $\texttt{RS}_n$:
 
 $$
-|`RS`_n(f)| \le M\cdot(b-a),
+|\texttt{RS}_n(f)| \le M\cdot(b-a),
 \quad
-\mathrm{lo}\cdot(b-a) \le `RS`_n(f) \le \mathrm{hi}\cdot(b-a).
+\mathrm{lo}\cdot(b-a) \le \texttt{RS}_n(f) \le \mathrm{hi}\cdot(b-a).
 $$
 
-They are worth formulating *exactly so*—as estimates of the *finite sum* $`RS`_n$, theorems about a particular level, not about the limiting integral. As estimates of the integral—$|\int f|\le M\cdot(b-a)$ and so on—they are read *after* the process of sums has been accepted as the integral’s representative in the Cauchy sense (§ 5.1.4, § 5.5). Safeguard C1: the estimates on the finite sum are exact and unconditional; the integral reading is secondary and conditional. These estimates prepare the convergence estimate of § 5.5.
+They are worth formulating *exactly so*—as estimates of the *finite sum* $\texttt{RS}_n$, theorems about a particular level, not about the limiting integral. As estimates of the integral—$|\int f|\le M\cdot(b-a)$ and so on—they are read *after* the process of sums has been accepted as the integral’s representative in the Cauchy sense (§ 5.1.4, § 5.5). Safeguard C1: the estimates on the finite sum are exact and unconditional; the integral reading is secondary and conditional. These estimates prepare the convergence estimate of § 5.5.
 
 ## Convergence: Integrability as the Cauchy Property
 
 ### The Telescope and the Connection with the Derivative
 
-{ To understand when the process of sums converges, let us begin with a construction that connects the sums with the increment of the function—the telescoping sum. Let us define $`tele_sum` f a `step` n =
-\sum_{k=0}^{n-1}\bigl[f(y_{k+1})-f(y_k)\bigr]$, the sum of the increments of $f$ over consecutive nodes $y_k=`walk_point` a `step` k$. The lemma `telescope_collapse` collapses it exactly:
+To understand when the process of sums converges, let us begin with a construction that connects the sums with the increment of the function—the telescoping sum. Let us define $\texttt{tele\_sum} f a \texttt{step} n =
+\sum_{k=0}^{n-1}\bigl[f(y_{k+1})-f(y_k)\bigr]$, the sum of the increments of $f$ over consecutive nodes $y_k=\texttt{walk\_point} a \texttt{step} k$. The lemma `telescope_collapse` collapses it exactly:
 
 $$
-`tele_sum`\;f\;a\;`step`\;n \;=\;
+\texttt{tele\_sum}\;f\;a\;\texttt{step}\;n \;=\;
 f(y_n) - f(a).
 $$
 
-The sum of the increments over the nodes equals the total increment from $a$ to the end of the grid—and this coincidence is *Leibniz-exact*, because the nodes are given by the recursive `walk_point` of § 5.4 rather than by the formula $a+ks$ (the same honest detail that was examined in the chapter on the derivative).}
+The sum of the increments over the nodes equals the total increment from $a$ to the end of the grid—and this coincidence is *Leibniz-exact*, because the nodes are given by the recursive `walk_point` of § 5.4 rather than by the formula $a+ks$ (the same honest detail that was examined in the chapter on the derivative).
 
 The connection with the derivative is given by the lemma `rs_tele_error_bound`: if $f$ is uniformly differentiable on $[a,b]$ with derivative $f'$ (`udiff_on` from § 5.4), then the difference between the Riemann sum of $f'$ and the telescoping sum of $f$ is small—there is a level $N$ at which it does not exceed $\varepsilon\cdot(b-a)$. Safeguard C1: this is an estimate with a choice of level, an $\varepsilon$-grid form. The proof is an inner induction on the number of steps of the grid; at each step the bound from uniform differentiability does the work.
 
-### grid-FTC: The Riemann Sum of the Derivative Approximates the Increment{grid-FTC: the Riemann sum of the derivative approximates the increment}
+### grid-FTC: The Riemann Sum of the Derivative Approximates the Increment
 
 Joining the telescope with its collapse, we obtain the grid form of the fundamental theorem of calculus—the lemma `ftc_grid`. If $f$ is uniformly differentiable on $[a,b]$ with derivative $f'$, then for every $\varepsilon>0$ there is a level $N$ at which
 
 $$
-\bigl| `riemann_sum`\;f'\;a\;`step`\;(N{+}1)
+\bigl| \texttt{riemann\_sum}\;f'\;a\;\texttt{step}\;(N{+}1)
 \;-\; \bigl(f(y_{N+1}) - f(a)\bigr) \bigr|
 \;\le\; \varepsilon\cdot(b-a).
 $$
 
-{ Here $N{+}1$ corresponds to `S N` in the code. In substance: the sum of the values of the derivative over the grid approximates the total increment of the function. The proof is direct: `rs_tele_error_bound` estimates the distance from the telescope, and `telescope_collapse` identifies the telescope with the increment $f(y_{N+1})-f(a)$.}
+Here $N{+}1$ corresponds to `S N` in the code. In substance: the sum of the values of the derivative over the grid approximates the total increment of the function. The proof is direct: `rs_tele_error_bound` estimates the distance from the telescope, and `telescope_collapse` identifies the telescope with the increment $f(y_{N+1})-f(a)$.
 
 Let us name the status honestly (safeguard C1). This is the *grid, approximate* form of the classical equality $\int_a^b f' = f(b)-f(a)$, *not* that equality itself: for a fine enough grid the sum of the derivative is arbitrarily close to the increment. The fully unfolded fundamental theorem of calculus—its exact grid-process formulation and its corollaries—is the subject of Chapter 5.6; here `ftc_grid` serves as a *bridge*, showing that refinement really does bring the sum closer to the increment.
 
-### Integrability as the Cauchy Property of the Process{Integrability as the Cauchy property of the process}
+### Integrability as the Cauchy Property of the Process
 
 Now we can say what “the function is integrable” means in the process sense. It means that the process `integral_process` is a *Cauchy* process: its values at different levels draw closer as the grid is refined. Then the candidate process of § 5.1.4 becomes a legitimate integral—a converging process with a stable value. For some sufficiently regular classes this behavior is already supported by grid estimates. In particular, `ftc_grid` controls the Riemann sums of the derivative of a uniformly differentiable function through the increment of the function itself (§ 5.5.2). A more general statement—about the Cauchy convergence of `integral_process` for *all* Lipschitz or *all* continuous functions—would require a separate theorem, which the supporting files do not have.
 
@@ -253,7 +253,7 @@ Here a terminological safeguard is needed. We use the word “integrability” a
 
 One last brick remains—that refinement really reaches any precision. The lemma `integral_step_vanishes`: for every $\delta>0$ there is a level $N$ at which the step of the grid is smaller than $\delta$. It relies on the Archimedean property—specifically on the lemma `nat_above_Q` from the process layer of the derivative (§ 5.4). A kindred Archimedean lemma `q_archimedean` exists in `ProcessArithmetic.v`, but it is a different technical route (monotone bounded processes), and `integral_step_vanishes` does not use it. In a *finite* number of subdivisions the step becomes as small as desired.
 
-{ This is the same intonation as in § 5.1 (the scale of processes is arbitrarily fine) and § 5.4 (`walk_step_small`). Under $P4$ “refinement to infinity” is a process, not a completed infinity: each level is finite, at each level the grid has a finite number of nodes, and the limit is not taken as a separate object. The integral *is* a process of ever finer finite partitions; it does not wait for an “infinitely fine partition.”}
+This is the same intonation as in § 5.1 (the scale of processes is arbitrarily fine) and § 5.4 (`walk_step_small`). Under $P4$ “refinement to infinity” is a process, not a completed infinity: each level is finite, at each level the grid has a finite number of nodes, and the limit is not taken as a separate object. The integral *is* a process of ever finer finite partitions; it does not wait for an “infinitely fine partition.”
 
 ## The Boundary of the Chapter: What the Integral Prepares for the FTC
 
@@ -265,7 +265,7 @@ The constructive kernel of the future theorem is already in hand—the telescope
 
 ### grid-FTC as a Preliminary Form
 
-The second ready brick is `ftc_grid` from § 5.5.2. Let us stress its status once more: it is the *preliminary*, grid form of the fundamental theorem—the inequality $| `RS`(f') - (f(\text{end})-f(a)) |\le\varepsilon\cdot(b-a)$, not the exact equality $\int f' = f(b)-f(a)$. Safeguard C1: an $\varepsilon$-grid form. Chapter 5.5 does *not* prove the unfolded theorem and its corollaries—it only carries matters as far as the grid bridge, on which the next chapter will build the exact connection.
+The second ready brick is `ftc_grid` from § 5.5.2. Let us stress its status once more: it is the *preliminary*, grid form of the fundamental theorem—the inequality $| \texttt{RS}(f') - (f(\text{end})-f(a)) |\le\varepsilon\cdot(b-a)$, not the exact equality $\int f' = f(b)-f(a)$. Safeguard C1: an $\varepsilon$-grid form. Chapter 5.5 does *not* prove the unfolded theorem and its corollaries—it only carries matters as far as the grid bridge, on which the next chapter will build the exact connection.
 
 ### The Rules the Next Chapter Will Unfold
 
@@ -273,7 +273,7 @@ Let us name—precisely name, without analyzing—what Chapter 5.6 will build on
 
 ### Why the General Change of Variables Is Not Yet Built
 
-{ One boundary deserves special mention—the change of variables. The core has no general chain rule, as already noted in § 5.4; it has only the *affine* case: `udiff_chain_affine` for the inner function $g=c\cdot x+d$, and on it the affine substitution in the integral (`ftc_u_substitution_affine`). That is, substitution is formalized only for a linear change of variables; the general substitution $u=g(x)$ with an arbitrary smooth $g$ is not. This is an honest boundary, outlined concretely: Chapter 5.6 will unfold the rules of the integral within the proved limits, without attributing to the theory more than it contains.}
+One boundary deserves special mention—the change of variables. The core has no general chain rule, as already noted in § 5.4; it has only the *affine* case: `udiff_chain_affine` for the inner function $g=c\cdot x+d$, and on it the affine substitution in the integral (`ftc_u_substitution_affine`). That is, substitution is formalized only for a linear change of variables; the general substitution $u=g(x)$ with an arbitrary smooth $g$ is not. This is an honest boundary, outlined concretely: Chapter 5.6 will unfold the rules of the integral within the proved limits, without attributing to the theory more than it contains.
 
 ## Computational Examples
 
@@ -281,7 +281,7 @@ Let us name—precisely name, without analyzing—what Chapter 5.6 will build on
 
 The process integral is good in that at each level it gives a concrete rational number that can be computed. The file `ProcessIntegration.v` does this explicitly on the interval $[0,1]$: its own sum `riemann_sum_01` with $K+1$ nodes and the integral `process_integral_01` $f K$ at level $K$. The examples are proved by direct computation (`vm_compute`): the integral of one, $\int_0^1 1$, equals $1$ at the levels $K=0,1,2$; the integral of zero equals zero; the integral of two equals $2$. At each level there is an exact rational value, machine-checkable.
 
-{ Safeguard C4: this is a *separate* `riemann_sum_01` on $[0,1]$, distinct from the main `riemann_sum` over `walk_point` of § 5.1.3. The file is a demonstration; we use it as an illustration that “the integral computes,” not as the main theory.}
+Safeguard C4: this is a *separate* `riemann_sum_01` on $[0,1]$, distinct from the main `riemann_sum` over `walk_point` of § 5.1.3. The file is a demonstration; we use it as an illustration that “the integral computes,” not as the main theory.
 
 ### Calculus as a Process: A Demonstration
 
@@ -304,7 +304,7 @@ Let us gather what has been done in infrastructure mode.
 - the integral as a *process* of accumulation `integral_process` (step $(b-a)/(n+1)$); the finite Riemann sum `riemann_sum` on the walk grid; `integral_is_process_construction`;
 - the *exact* integral of step functions `step_fun_integral`—the foundation of a future measure;
 - linearity (addition, scalar, difference)—on the finite sum and on the process;
-- monotonicity; nonnegativity—motif M4 (`riemann_sum_nonneg`, `norm_nonneg`);
+- monotonicity; nonnegativity (`riemann_sum_nonneg`, `norm_nonneg`);
 - estimates of the sums (`abs_bound`, `global_bound`); the telescope (`telescope_collapse`); the grid bridge grid-FTC (`ftc_grid`);
 - computational examples ($\int_0^1$ at different levels).
 
@@ -329,17 +329,17 @@ The chapter has honestly confined itself to functions $ℚ\toℚ$. Let us name c
 
 ### A Caveat on the Status of Axioms
 
-{ The Part V safeguard requires precision about axioms. The cores—`ProcessIntegral.v`, `RiemannIntegration.v`, `IntegralApplications.v`—declare “none” or “0 axioms” in their headers, but they import layers in which classical logic occurs: `EVT_idx.v` (with a local `classic`, from § 5.3) and `ProcessArithmetic.v` (see below). `Differentiation.v` and `MeanValueTheorem.v` themselves also declare the absence of axioms in their headers—so the matter lies not in them as such but in the fact that transitive imports may pass through files with classical logic. This does not mean that every integral lemma depends on `classic`; it means that the status of each particular theorem has to be checked with the command `Print Assumptions`.}
+The Part V safeguard requires precision about axioms. The cores—`ProcessIntegral.v`, `RiemannIntegration.v`, `IntegralApplications.v`—declare “none” or “0 axioms” in their headers, but they import layers in which classical logic occurs: `EVT_idx.v` (with a local `classic`, from § 5.3) and `ProcessArithmetic.v` (see below). `Differentiation.v` and `MeanValueTheorem.v` themselves also declare the absence of axioms in their headers—so the matter lies not in them as such but in the fact that transitive imports may pass through files with classical logic. This does not mean that every integral lemma depends on `classic`; it means that the status of each particular theorem has to be checked with the command `Print Assumptions`.
 
 A special case deserves direct mention. The file `ProcessArithmetic.v` declares “AXIOMS: none” in its header, but imports `Stdlib.Classical` and *uses* `classic` in the proof of `monotone_bounded_Cauchy`—the header directly diverges from the fact. And the main anchor `ProcessIntegral.v` imports `ProcessArithmetic.v`. The precise—and not wholesale—formula is this: the fact of the import by itself does *not* yet mean that every integral theorem depends on `classic` (many may not), but the file header “0 axioms” is *not* a sufficient audit—the status of a particular theorem is established only by the command `Print Assumptions` for that theorem itself. This is the strongest argument for the recurring rule C3. No wholesale statement should be made in either direction.
 
-{ `Print Assumptions` is written out at the end of `RiemannIntegration.v` for `ftc_grid`, `udiff_add`, `ftc_comparison`. For files without such a final block, the status of a particular theorem is checked separately when needed. Genuinely constructive (importing only the Rocq stdlib or `ProcessCore`, without the classical layer) are `StepIntegral.v`, `ProcessIntegration.v`, and `ProcessAnalysis.v`; `StepIntegral.v`, moreover, is short and declares “20 Qed, 0 Admitted, 0 axioms.” And one more honest fact for completeness: the name `riemann_sum` is borne by three different definitions in three files.}
+`Print Assumptions` is written out at the end of `RiemannIntegration.v` for `ftc_grid`, `udiff_add`, `ftc_comparison`. For files without such a final block, the status of a particular theorem is checked separately when needed. Genuinely constructive (importing only the Rocq stdlib or `ProcessCore`, without the classical layer) are `StepIntegral.v`, `ProcessIntegration.v`, and `ProcessAnalysis.v`; `StepIntegral.v`, moreover, is short and declares “20 Qed, 0 Admitted, 0 axioms.” And one more honest fact for completeness: the name `riemann_sum` is borne by three different definitions in three files.
 
 ### Summary of the Chapter
 
 The chapter has built the integral—the analytic layer dual to the derivative of § 5.4. The main turn lies in how the concept itself is arranged. The integral is a *process of accumulation* of Riemann sums, not a completed limit: the finite sum at each level is exact and rational, and the process gathers the refinement of the grid. The process itself exists for any $ℚ$-function and serves as a *representative* of the integral; its legitimacy as an integral is given by convergence—the Cauchy property, which for particular regular classes of functions is assembled from grid estimates. The main caution: grid-FTC is a grid form; the unfolded connection of the derivative and the integral will be the subject of Chapter 5.6; step functions are the foundation of measure, not measure itself.
 
-*Built: the integral-process `integral_process` and the finite Riemann sum; the exact integral of step functions; linearity, monotonicity, nonnegativity (M4); estimates, the telescope, and the grid bridge grid-FTC; computational examples.*
+*Built: the integral-process `integral_process` and the finite Riemann sum; the exact integral of step functions; linearity, monotonicity, nonnegativity; estimates, the telescope, and the grid bridge grid-FTC; computational examples.*
 
 *What it stands on: the walk points and uniform differentiability of § 5.4, the Archimedean property as the fuel of refinement, and the process ontology of $P4$, in which the integral is a process of accumulation of sums, not a completed limit of them.*
 

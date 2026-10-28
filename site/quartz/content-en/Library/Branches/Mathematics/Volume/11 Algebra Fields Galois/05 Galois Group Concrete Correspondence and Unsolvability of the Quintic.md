@@ -2,7 +2,7 @@
 title: "Chapter 5. Galois Group: Concrete Correspondence and Unsolvability of the Quintic"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/05 Группа Галуа конкретное соответствие и неразрешимость квинтики.md"
-sourceBlob: d29703ca019904cac5e71240b4a39e7587ce954d
+sourceBlob: 5eb81434107b374c5b1a564399f3b49a3f717c92
 translated: 2026-10-20
 status: draft
 ---
@@ -20,7 +20,7 @@ The Galois correspondence in ToS lives on two levels. The coarse one is the *num
 
 *The center of Part XI: the symmetry of the roots. Two concrete results—the table of the Galois correspondence for $ℚ[\sqrt2,\sqrt3]$ and the engine of unsolvability (perfect$ \Rightarrow$ not solvable).*
 
-## A Genuine Galois Correspondence for $ℚ[\sqrt2,\sqrt3]${Q[v2,v3]}
+## A Genuine Galois Correspondence for $ℚ[\sqrt2,\sqrt3]$
 
 Take the field $E=ℚ[\sqrt2,\sqrt3]$ from 11.1—quadruples of coordinates $a+b\sqrt2+c\sqrt3+d\sqrt6$. Its automorphisms are maps that preserve $+,\cdot$ and are fixed on $ℚ$. Four standard automorphisms are presented, each given by an *explicit* formula on the coordinates (in the mathematical reading they exhaust $\Gal(E/ℚ)$):[^2]
 
@@ -58,7 +58,7 @@ The larger the subgroup, the smaller the fixed field; the reversal of inclusion 
 
 *For $ℚ[\sqrt2,\sqrt3]$ an explicit table of the Galois correspondence has been built: four explicit automorphisms (the group $V_4$), the computed fixed subfields ($ℚ[\sqrt3],ℚ[\sqrt2],ℚ[\sqrt6],ℚ$), and the order-reversing matching subgroup$ \leftrightarrow$ subfield—the maps and subfields themselves, not a numerical shadow.*
 
-## The Symmetry Group of the Roots: From $S_3${S3} to $S_5${S5}
+## The Symmetry Group of the Roots: From $S_3$ to $S_5$
 
 In the general case the Galois group is the symmetries of the *roots* of a polynomial: the permutations of the roots that preserve all the algebraic relations among them. For a polynomial of degree $n$ (in the classical separable case) it is a subgroup of the symmetric group $S_n$.
 
@@ -120,7 +120,7 @@ Next comes Chapter 11.6, synthesis and the map of boundaries. There the whole of
 [^1]: The numerical layer is `algebra/GaloisCorrespondence.v` (`v4_subgroup_count`${}=5={}$`biquadratic_field_count`, `s5_is_solvable`${}={}$`false`). The concrete table of the correspondence is `algebra/GaloisQ23.v`; the engine is `algebra/SolvableGroup.v` (both 0 axioms).
 [^2]: `GaloisQ23.v`: `a_id`, `a_sig`, `a_tau`, `a_st`. The file checks their action, their being homomorphisms (`sig_add`/`sig_mul`, etc.), their fixing $ℚ$ (`base_fixed_by_all`), the compositions, and the fixed subfields; the *classification* “every automorphism is one of these four” is not proved in the file (mathematical reading).
 [^3]: `sig_invol`, `sig_tau_eq_st` ($\sigma\circ\tau=\sigma\tau$), `V4_abelian` ($\sigma\tau=\tau\sigma$).
-[^4]: `fix_sig_iff`: $\mathrm{fixed_by}\ \sigma\ u \Leftrightarrow (c_1=0\wedge c_3=0)$, that is, $u\inℚ[\sqrt3]$; similarly `fix_tau_iff` ($ℚ[\sqrt2]$), `fix_st_iff` ($ℚ[\sqrt6]$), `fix_V4_iff` ($ℚ$).
+[^4]: `fix_sig_iff`: $\mathrm{fixed\_by}\ \sigma\ u \Leftrightarrow (c_1=0\wedge c_3=0)$, that is, $u\inℚ[\sqrt3]$; similarly `fix_tau_iff` ($ℚ[\sqrt2]$), `fix_st_iff` ($ℚ[\sqrt6]$), `fix_V4_iff` ($ℚ$).
 [^5]: `correspondence_inclusion_reversing` (`GaloisQ23.v`)—one concrete inclusion; the full bijection of all five objects is the mathematical reading of this explicit table, not a separate formal object.
 [^6]: `GaloisGroup.v`: `perm_compose`, `transpose`, `s3_non_commutative` (with the witnesses `s3_12_23_at_1`${}=2$ versus `s3_23_12_at_1`${}=3$); `s3_order`${}=6$.
 [^7]: `GaloisCorrespondence.v`: `s5_order`${}=120$, `a5_order`${}=60$, `a5_is_simple`—this is a *numerical marker* (`a5_normal_subgroup_count`${}=2$), not a machine enumeration of all normal subgroups of $A_5$. This is a numerical/constant layer; the genuine engine of unsolvability is in §11.5.4.

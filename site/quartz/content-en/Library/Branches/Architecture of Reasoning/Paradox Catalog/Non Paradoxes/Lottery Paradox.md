@@ -2,7 +2,7 @@
 title: "Lottery Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Не-парадоксы/Парадокс лотереи.md"
-sourceBlob: 085d31324fd339cb04b4784d7562b6df7c7fb2a3
+sourceBlob: abb30da47558e2656e146f29004fb0f3138feecd
 translated: 2026-10-20
 status: draft
 description: "Belief in the individual ≠ belief in the conjunction"
@@ -44,7 +44,7 @@ In the probabilities everything is consistent, to a hair: P(ticket i loses) = 99
 
 ## Resolution
 
-The computational layer: the probability that “none of the thousand wins” in a fair lottery is exactly zero—the conjunction is defined and certainly false; there is no tension in the probabilities themselves. The conceptual layer is a choice of which premise to give up. The Bayesian move: give up binary acceptance—beliefs are degrees, “I believe the ticket will not win” means “I am 0.999 confident,” and degrees combine by the rules of probability, not by conjunction: irrationality arises nowhere. Kyburg’s move: keep acceptance, give up closure—beliefs accepted by a threshold do not combine freely; honest, but costly: “I believe A” and “I believe B” without the right to “I believe A and B.” The common upshot of both moves is one: threshold belief is not a lesser kind of knowledge; knowledge is closed under conjunction because it stands on grounds, not on frequency; rounding a degree up to “yes” adds no grounds. The difference between belief and knowledge by status is a theme of our own: see the section on the status of belief on the page [[Truth and Absolute Truth]].
+The computational layer: the probability that “none of the thousand wins” in a fair lottery is exactly zero—the conjunction is defined and certainly false; there is no tension in the probabilities themselves. The conceptual layer is a choice of which premise to give up. The Bayesian move: give up binary acceptance—beliefs are degrees, “I believe the ticket will not win” means “I am 0.999 confident,” and degrees combine by the rules of probability, not by conjunction: irrationality arises nowhere. Kyburg’s move: keep acceptance, give up closure—beliefs accepted by a threshold do not combine freely; honest, but costly: “I believe A” and “I believe B” without the right to “I believe A and B.” The common upshot of both moves is one: threshold belief is not a lesser kind of knowledge; knowledge is closed under conjunction because it stands on grounds, not on frequency; rounding a degree up to “yes” adds no grounds. The difference between belief and knowledge by status is a theme of our own: see the section “The Rungs of Representation” (the paragraph “The word ‘belief’”) on the page [[Truth and Absolute Truth#The Rungs of Representation|Truth and Absolute Truth]].
 
 ## Lesson
 

@@ -2,7 +2,7 @@
 title: "Chapter 1. Field as Role-Extension; Degree as Tier"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/01 Поле как роль-расширение; степень как ярус.md"
-sourceBlob: bd33a96006d0c30366bdde594c7b744b285ae3c5
+sourceBlob: 3032780e0545b3562708cc04fdeca478094e683d
 translated: 2026-10-20
 status: draft
 ---
@@ -75,7 +75,7 @@ Degree-as-tier immediately turns into a *measure of obstruction*—the topic of 
 
 A legitimate question arises: where, then, is the *abstract* field—a structure with axioms of associativity, distributivity, and invertibility? In ToS it *is there*—as a *framework*: a record with operations and the proved axioms of a ring and a field.[^11] But the role of this framework in ToS differs from its role in the classical theory. The classical theory *starts* from the abstract field and descends to examples; ToS starts from *concrete degree-tiered extensions* and keeps the abstract record as a *confirming frame*—a check that the concrete $ℚ[\sqrt d ]$ do indeed satisfy the axioms.
 
-This is the same “level B” discipline as in the whole book: *the theory leads, the repository confirms*. The abstract `Record Field` is not the substantive core of the part—the core remains the reachable tier of degree and the norm form. The framework is instantiated by concrete extensions, not the other way around; and precisely because the concrete is finite and computable, the whole cluster does without axioms.
+This is the same “level B” discipline as in the whole volume: *the theory leads, the repository confirms*. The abstract `Record Field` is not the substantive core of the part—the core remains the reachable tier of degree and the norm form. The framework is instantiated by concrete extensions, not the other way around; and precisely because the concrete is finite and computable, the whole cluster does without axioms.
 
 *The abstract structure of a field is a role-framework (a record with axioms) that confirms the concrete extensions, not a primary object. The theory leads with the concreteness of tiers; the record $\mathrm{Field}$ certifies it.*
 
@@ -86,7 +86,7 @@ Let us gather the structure of the chapter in the generating order.
 | **Layer** | **Content** |
 |---|---|
 | *Rules* (L5) | the minimal polynomial as the rule of algebraicity ($\sqrt2\mapsto x^2-2$); the rules for multiplying surds ($\sqrt2\cdot\sqrt2=2$, $\sqrt2\cdot\sqrt3=\sqrt6$); the tower law of tiers ($2\cdot2=4$); the ring/field axioms as the rule of a well-formed structure |
-| *Roles* (L4) | field ${}={}$ role-extension ($ℚ$ with an adjoined surd); degree ${}={}$ the tier of a role ($1\subset2\subset3$); $\sqrt2$ ${}={}$ a formal generator / a finite coordinate with the rule $r^2=2$ (the process reading—11.2); $i,\omega$ ${}={}$ finite algebraic roles (a preview of 11.4–11.5) |
+| *Roles* (L4) | field ${}={}$ role-extension ($ℚ$ with an adjoined surd); degree ${}={}$ the tier of a role ($1\subset2\subset3$); $\sqrt2={}$ a formal generator / a finite coordinate with the rule $r^2=2$ (the process reading—11.2); $i,\omega={}$ finite algebraic roles (a preview of 11.4–11.5) |
 | *Elements* (L1${}+{}$P4) | at each stage, finite data over $ℚ$: pairs $(a,b)\inℚ[\sqrt d ]$, quadruples $(a,b,c,d)\inℚ[\sqrt2,\sqrt3]$, lists of coefficients of a polynomial; the abstract correspondence $L/K\mapsto\Aut(L/K)$ for an arbitrary $L/K$ is *not* an Element |
 
 **Well-formedness.** An extension is well-formed as an algebraic structure: the coordinates are closed under $+,\cdot$ and have a norm in $ℚ$; a tier is well-formed when the tower is nondegenerate ($\sqrt3\notinℚ[\sqrt2]$); the abstract record, by the ring/field axioms. Each component falls into exactly one E/R/R category.

@@ -2,7 +2,7 @@
 title: "Color Spectrum Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс цветового спектра.md"
-sourceBlob: b80fb9b5e8cad3b3a924168fff70f3f7d8744b44
+sourceBlob: 8e2d3218e81fd73290d8cd111f05e1d3593c19d1
 translated: 2026-10-20
 status: draft
 description: "Color categories are conventions, not discrete entities"
@@ -54,7 +54,7 @@ Two moves, and both are honest. The first is to acknowledge the convention: the 
 
 [[Sorites Paradox|Sorites]] (the canonical form—the full analysis is there), [[Bald Man Paradox|the Bald Man]] (a sorites by decrease), [[Ship of Theseus]] (the category “the same” without a criterion—ambiguity next to vagueness).
 
-**Machine check.** In the registry of 46 it is `D3_ColorSpectrum`, with the diagnosis field `InstrumentObjectMismatch` (“the instrument does not fit the object”); the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D3_ColorSpectrum`, with the diagnosis field `InstrumentObjectMismatch` (“the instrument does not fit the object”); the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

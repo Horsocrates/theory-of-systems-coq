@@ -2,7 +2,7 @@
 title: "Epimenides Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Эпименида.md"
-sourceBlob: e72eaf06cab5500816163c6b685b68f3387359f8
+sourceBlob: 4a889cdccb85e2ae2bd88e915f01bd85566a2a34
 translated: 2026-10-20
 status: draft
 description: "The speaker is included in the domain of his own universal statement"

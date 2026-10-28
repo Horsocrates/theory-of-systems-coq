@@ -3,11 +3,11 @@ title: "Paradox Catalog"
 aliases: ["Paradox"]
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/index.md"
-sourceBlob: b3e8e5e36330c79b89ac19b0ec719d76cf51830d
+sourceBlob: efa0f6aafa59cc3fc95562b7688c18c97bc0206a
 translated: 2026-10-20
 status: draft
 ---
-**Paradoxes are not deep mysteries that expose the limits of reason but diagnostic signals**: they indicate where the architecture of reasoning has been violated or where the premises carry an unrecognized defect. A well-formed statement makes a paradox impossible—**there are no paradoxes in reality**; hence paradoxes **are not solved: they are shown not to form**.
+**Paradoxes are not deep mysteries that expose the limits of reason but diagnostic signals**: they indicate where the architecture of reasoning has been violated or where the premises carry an unrecognized defect. A well-formed statement makes a paradox impossible—**there are no paradoxes in reality**; hence paradoxes **are not solved but laid open**: the error in the construction is found.
 
 <!-- PROSE:BEGIN -->
 ## Etymology
@@ -20,7 +20,7 @@ The paradox was born as a weapon of dispute. Zeno of Elea (fifth century BCE) bu
 
 ## The Nature of Paradoxes
 
-A [[Fallacies|fallacy]] says: “you have taken a wrong turn.” A paradox, it seems, says something else: “the road itself is impossible.” The catalog proceeds from another view—and the etymology has already pointed the direction: a paradox lives in the layer of *representation*. **A paradox is not the opposite of a fallacy but a special form of it: an error hidden in the construction itself.** A map on which one road leads to two cities is not a map of an impossible land; it is a map with a defect. And when the defect is found, the paradox is not *solved*, as a problem is: it is *shown not to form*—not defeated but understood, down to what it was made of. Diagnosis begins with the question: **where exactly is the error hidden?** There are exactly three places—in the construction, in the premises, in the expectation itself. These are the three categories of the catalog.
+A [[Fallacies|fallacy]] says: “you have taken a wrong turn.” A paradox, it seems, says something else: “the road itself is impossible.” The catalog proceeds from another view—and the etymology has already pointed the direction: a paradox lives in the layer of *representation*. **A paradox is not the opposite of a fallacy but a special form of it: an error hidden in the construction itself.** A map on which one road leads to two cities is not a map of an impossible land; it is a map with a defect. And when the defect is found, the paradox is not *solved*, as a problem is: it is *laid open*—not defeated but understood, down to what it was made of. Diagnosis begins with the question: **where exactly is the error hidden?** There are exactly three places—in the construction, in the premises, in the expectation itself. These are the three categories of the catalog.
 
 **In the construction—[[Structural Paradoxes|structural]].** [[Fallacies]] violate the horizontal—the order of the [[Domains|domains]], the movement of thought along a level. A structural paradox violates the other axis—the **vertical**: the hierarchy of the levels on which thought works. Reasoning works on more than one storey: there are **elements**—what thought is about; there are **operations** on elements—evaluation, negation, counting, assignment to a class; and there are **meta-operations**—actions on the operations themselves. The storeys are not equal in rank: an operation works with elements, not with itself; to take an operation as an object, one must rise a storey higher. This hierarchy is a manifestation of the [[Order|Law of Order]]: the Principle of Hierarchy is its vertical dimension, as much a feature of reality as Identity and Non-Contradiction.[^1]
 
@@ -38,7 +38,7 @@ The mixing of storeys has an exact formal heart. Take the operation of **negatio
 
 This is the very figure by which mathematics and logic set their famous limits. [[Liar Paradox|The Liar]] seeks a statement that is true if and only if it is false—a fixed point of negation, which does not exist. [[Library/Branches/Mathematics/Volume/10 Set Theory without the Axiom of Choice/02 Countability Is Constructive Uncountability Is a Rule About Processes|Cantor]] builds a number that differs from each one on a list along the diagonal—and proves that a complete list of the real numbers does not exist. [[Logic#Order — Ordering|Gödel]] builds a statement about its own unprovability—and shows that no system will encompass all truths about itself. [[Library/Branches/Mathematics/Volume/15 Computation and the Finitization Boundary/03 One Diagonal Halting Rice Cantor Kolmogorov|Turing]]—that there is no program deciding whether every program halts. Only the arena changes—statements, numbers, proofs, programs; the move is one: self-application seeking a fixed point of negation is bound to miss it.[^2] This common figure—the **diagonal**—is worth keeping in mind throughout the catalog: behind the motley paradoxes stands one movement.
 
-And at once an important point of honesty, because a dispute has gone on around Cantor’s diagonal for generations. The diagonal as a *technique* is flawless, and what it proves is genuine: a list of all real numbers is impossible; they cannot be enumerated. The dispute begins where from “cannot be enumerated” a judgment about *quantity* is inferred—as if one completed infinity were “larger” than another. This is no longer a theorem but an interpretation, and a doubtful one: to treat an unfinishable process as a ready object and to measure its “size” is that same level confusion, only turned upon infinity. What in infinity is process and what is object is a question for the branch [[Mathematics]], where it is honestly checked against machine verification; here the figure is enough: negation has no fixed point.
+And at once an important point of honesty, because a dispute has gone on around Cantor’s diagonal for more than a century. The diagonal as a *technique* is flawless, and what it proves is genuine: a list of all real numbers is impossible; they cannot be enumerated. The dispute begins where from “cannot be enumerated” a judgment about *quantity* is inferred—as if one completed infinity were “larger” than another. This is no longer a theorem but an interpretation, and a doubtful one: to treat an unfinishable process as a ready object and to measure its “size” is that same level confusion, only turned upon infinity. What in infinity is process and what is object is a question for the branch [[Mathematics]], where it is honestly checked against machine verification; here the figure is enough: negation has no fixed point.
 
 ## Why There Is No Paradox
 
@@ -67,11 +67,11 @@ Hence the **criterion of well-formedness**: a construction is well-formed if and
 
 - **[[Sorites Paradox|The sorites]]** (“the heap”)—a comparative term is deprived of a point of reference: “adding one grain changes nothing” works in a comparative context and breaks in an absolute one; this is the indeterminacy of a concept, and there is no paradox of logic here. The same holds for [[Bald Man Paradox|the “Bald Man”]].
 - **[[Ship of Theseus|The Ship of Theseus]]**—the question “which ship is the *real* one?” presupposes what it should itself have established: a criterion of identity. Until a criterion is chosen, the question has no object.
-- **[[Unexpected Hanging|The Unexpected Hanging]]**—the premises are inconsistent: a check of coherence shows that the paradox does not form.
+- **[[Unexpected Hanging|The Unexpected Hanging]]**—the premises are inconsistent: a check of coherence lays the inconsistency open.
 - **[[Newcombs Paradox|Newcomb]]**—a confusion of levels in the assumptions about choice and prediction; the paradox is not about decision theory.
 - **[[Carrolls Tortoise|Carroll’s Tortoise]]**—the demand to write a rule of inference (level 2) as a premise (level 1) produces an endless regress; the construction itself is correct—it is the *demand* that is illegitimate. Not every demand deserves compliance.
 
-**Non-paradoxes**—the result is correct, intuition lags behind:
+**The indeterminacy of infinity** (defective, D.21–D.23):
 
 - **[[Hilberts Hotel|Hilbert’s Hotel]]**—an illustration of how actual infinity differs from the finite: a process of accommodation, not a completed object.
 - **[[Galileos Paradox|Galileo]]** (there are “as many” squares as numbers)—a bijection is structural, not quantitative: “size” does not apply here.
@@ -79,7 +79,7 @@ Hence the **criterion of well-formedness**: a construction is well-formed if and
 
 ## In the Theory of Systems
 
-Structural paradoxes are blocked formally: the hierarchy of levels is a theorem, not a convention; [[Russells Paradox|Russell’s paradox]] **does not form** (the construction does not pass type checking). The formalization is 390+ proved lemmas ([[Formalization]]). The division of labor with [[Fallacy Catalog|fallacies of reasoning]]: fallacies violate the *horizontal* of the Law of Order (the sequence of domains), paradoxes its *vertical* (the hierarchy of levels) or the discipline of premises.
+Structural paradoxes are blocked formally: the hierarchy of levels is a theorem, not a convention; [[Russells Paradox|Russell’s paradox]] **does not form** (the construction does not pass type checking). The proofs are machine-checked ([[Formalization]]). The division of labor with [[Fallacy Catalog|fallacies of reasoning]]: fallacies violate the *horizontal* of the Law of Order (the sequence of domains), paradoxes its *vertical* (the hierarchy of levels) or the discipline of premises.
 
 
 <!-- PROSE:END -->

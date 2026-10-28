@@ -2,7 +2,7 @@
 title: "Chapter 6. Operators on L²: Self-Adjointness, Spectrum, and the Bridge to Quantum Dynamics"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/06 Меры и интегрирование/06 Операторы на L^2 самосопряжённость, спектр и мост в квантовую динамику.md"
-sourceBlob: 238e8ef591314f01da521d6ed76984cfa66c66f9
+sourceBlob: 9054225edb6566a2ce5e97f6cc0244a87ba921a1
 translated: 2026-10-20
 status: draft
 ---
@@ -12,7 +12,7 @@ status: draft
 ### From the Space to Its Operators
 
 Chapter 6.5 assembled $L^2$: a space with an inner product, a squared distance, best approximation, orthonormal expansions, and completeness by construction. The present chapter, the last in Part VI, studies its *operators*: linear maps $T$ of the space into itself, and three questions about them—*self-adjointness*
-($\langle Tf,g\rangle=\langle f,Tg\rangle$), the *spectrum* (eigenvalues and eigendirections), and *evolution* (how a state changes in time under the action of an operator). These three topics are the mathematical apparatus on which quantum mechanics stands; the chapter carries the line of Part VI to its natural exit into physics, leaving the physical payoff itself to a future physics volume.
+($\langle Tf,g\rangle=\langle f,Tg\rangle$), the *spectrum* (eigenvalues and eigendirections), and *evolution* (how a state changes in time under the action of an operator). These three topics are the mathematical apparatus on which quantum mechanics stands; the chapter carries the line of Part VI to its natural exit into physics, leaving the physical payoff itself to physics.
 
 ### What Is Proved—and Where the Honest Boundary Lies
 
@@ -120,7 +120,7 @@ $[a,a^\dagger]=1$ and the level formula (with unboundedness) are proved over ℚ
 
 The Schrödinger equation $i\hbar \partial_t\psi=\hat H\psi$ sets a *unitary* evolution: the total probability is conserved. The exact propagator $e^{-i\hat H t}$, a complex exponential of continuous time, is unattainable over ℚ; ToS keeps its constructive core: the *discrete* evolution $\psi_{n+1}=U\psi_n$. If the step $U$ is an *isometry* ($\|U\psi\|=\|\psi\|$, discrete unitarity), then the norm is conserved at every step, $\|\psi_n\|^2=\|\psi_0\|^2$ for all $n$, proved by induction on the number of steps.[^10] The norm $\|\psi_n\|^2$ is the total probability; its constancy is the law of its conservation.
 
-The second conservation law is *energy* $E(\psi)=\langle\psi,\hat H\psi\rangle$. If the step conserves energy (a discrete analogue of commuting with $\hat H$), then $E(\psi_n)=E(\psi_0)$ for all $n$, by the same induction.[^11] In general form this is the germ of Noether’s theorem: a symmetry of the evolution (commuting with an observable) implies the conservation of that observable—a line naturally continued in the physics volume.
+The second conservation law is *energy* $E(\psi)=\langle\psi,\hat H\psi\rangle$. If the step conserves energy (a discrete analogue of commuting with $\hat H$), then $E(\psi_n)=E(\psi_0)$ for all $n$, by the same induction.[^11] In general form this is the germ of Noether’s theorem: a symmetry of the evolution (commuting with an observable) implies the conservation of that observable—a line naturally continued in physics.
 
 **Both conservation laws of quantum mechanics—of probability and of energy—are proved as
 process facts, without axioms.** The exact propagator $e^{-i\hat H t}$ is a role-limit (continuous time, the complex exponential); the process $\psi_n$ approximates it, and the conservation laws already hold at the discrete step.
@@ -150,10 +150,9 @@ The analysis is well-formed: each component is in one category, without self-ref
 
 ### What the Analysis Yields—and How Part VI Closes
 
-{
-The analysis shows that operator theory on $L^2$ in ToS is a process theory: the rules (self-adjointness, Rayleigh, orthogonality, the canonical ladder, the absence of a finite commutator, the conservation of norm and energy) are proved at finite stages without axioms, and the infinitary—the existence of an eigenvector, the exact propagator, the completed basis—is honestly moved to the P4 boundary and marked as a role-limit. The canonical commutator is not merely “moved out”: it is proved that finite actuality does *not accommodate* it—a rare case in which the P4 boundary itself becomes a theorem.}
+The analysis shows that operator theory on $L^2$ in ToS is a process theory: the rules (self-adjointness, Rayleigh, orthogonality, the canonical ladder, the absence of a finite commutator, the conservation of norm and energy) are proved at finite stages without axioms, and the infinitary—the existence of an eigenvector, the exact propagator, the completed basis—is honestly moved to the P4 boundary and marked as a role-limit. The canonical commutator is not merely “moved out”: it is proved that finite actuality does *not accommodate* it—a rare case in which the P4 boundary itself becomes a theorem.
 
-With this Part VI closes. It has gone from measure zero and the Lebesgue integral as processes (6.1–6.3) through the convergence theorems (6.4) to the spaces $L^1$, $L^2$ and their completeness by construction (6.5), and finally to operators, the spectrum, and quantum dynamics (6.6). The through-line is one: infinity is a property of processes, not of completed objects; every infinitary step is either proved as the constructibility of a limit or named and placed on the boundary. The resulting $L^2$ apparatus—the inner product, orthonormal expansions, completeness, self-adjoint operators, the spectrum, position and the oscillator, unitary evolution with the conservation of probability and energy—is a ready mathematical stage for quantum mechanics, which the future physics volume develops.
+With this Part VI closes. It has gone from measure zero and the Lebesgue integral as processes (6.1–6.3) through the convergence theorems (6.4) to the spaces $L^1$, $L^2$ and their completeness by construction (6.5), and finally to operators, the spectrum, and quantum dynamics (6.6). The through-line is one: infinity is a property of processes, not of completed objects; every infinitary step is either proved as the constructibility of a limit or named and placed on the boundary. The resulting $L^2$ apparatus—the inner product, orthonormal expansions, completeness, self-adjoint operators, the spectrum, position and the oscillator, unitary evolution with the conservation of probability and energy—is a ready mathematical stage for quantum mechanics.
 
 ---
 
@@ -173,4 +172,4 @@ With this Part VI closes. It has gone from measure zero and the Lebesgue integra
 
 Part: [[06 Measure and Integration|Part VI. Measure and Integration]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[05 L1 and L2 Spaces as Processes Completeness as Constructibility|Chapter 5. L^1 and L^2: Spaces as Processes, Completeness as Constructibility]] · [[01 Orthonormal Systems and Fourier Coefficients|Chapter 1. Orthonormal Systems and Fourier Coefficients—Part VII]] →
+Navigation: ← [[05 L1 and L2 Spaces as Processes Completeness as Constructibility|Chapter 5. L¹ and L²: Spaces as Processes, Completeness as Constructibility]] · [[01 Orthonormal Systems and Fourier Coefficients|Chapter 1. Orthonormal Systems and Fourier Coefficients—Part VII]] →

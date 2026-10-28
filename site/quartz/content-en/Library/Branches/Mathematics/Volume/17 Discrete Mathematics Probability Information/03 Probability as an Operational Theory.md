@@ -2,24 +2,24 @@
 title: "Chapter 3. Probability as an Operational Theory"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/17 Дискретная математика, вероятность, информация/03 Вероятность как операциональная теория.md"
-sourceBlob: 8e6688995f9ddebb190dfc1a301e4f0f5e90e3f7
+sourceBlob: b120153d27987c29909c8e4c79c4655a7fdb8e15
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-Probability in the present volume is an *operational* theory: a function on a finite list of outcomes with values in ℚ. No Lebesgue measure, no $\sigma$-algebra, no axiom of choice—these constructions belong to the completed continuum, that is, to the role-limit side, and are *not needed* for discrete probability. “The set of outcomes” is a mode (M3): in reality we work with a list of possible values, and probability distributes over it the acts of distinction that combinatorics (Chapter 1) learned to count.
+Probability in the present volume is an *operational* theory: a function on a finite list of outcomes with values in ℚ. No Lebesgue measure, no $\sigma$-algebra, no axiom of choice—these constructions belong to the completed continuum, that is, to the role-limit side, and are *not needed* for discrete probability. “The set of outcomes” is a mode: in reality we work with a list of possible values, and probability distributes over it the acts of distinction that combinatorics (Chapter 1) learned to count.
 
 *The flagship of the chapter: concentration (Markov, Chebyshev) is an **Element**—a finite, decidable estimate; the limit laws (the LLN) are a **role-limit**—convergence-as-process.*
 
-Probabilities are structurally nonnegative (M4: $P\ge 0$), and this is a property of the construction, not an axiom. The chapter leads from probability-without-measure through Bayes-as-algorithm to the machine diagnosis of cognitive fallacies and ends with the finitization boundary in its probabilistic form.
+Probabilities are structurally nonnegative ($P\ge 0$), and this is a property of the construction, not an axiom. The chapter leads from probability-without-measure through Bayes-as-algorithm to the machine diagnosis of cognitive fallacies and ends with the finitization boundary in its probabilistic form.
 
 ## Probability without Measure
 
 A finite probability space is a list of outcomes with assigned rational weights whose sum equals one. An event is a decidable predicate on the list of outcomes (equivalent to a subset of outcomes in a representation without repetitions); the probability of an event is the sum of the weights of the outcomes that pass the predicate. There is no completed measure space here: there is a finite list and ℚ-arithmetic on it. Nonnegativity $P\ge 0$ is structural in the chosen model: the distribution contains only nonnegative rational weights (from a nonnegative subtype / with a proof of nonnegativity), and normalization is a condition on a finite sum. Everything is decidable by enumerating the list—the Element side.
 
-A random variable, then, is a *morphism of lists*, not a mysterious “quantity with randomness”: a function that translates the list of outcomes into a list of values. This is operational divisibility (M2): a random variable, its distribution, and its numerical characteristics (mean, variance) are different *role-levels* of one finite object, not different entities.
+A random variable, then, is a *morphism of lists*, not a mysterious “quantity with randomness”: a function that translates the list of outcomes into a list of values. This is operational divisibility: a random variable, its distribution, and its numerical characteristics (mean, variance) are different *role-levels* of one finite object, not different entities.
 
 ## Bayes as an Algorithm of Distinction
 
@@ -29,15 +29,13 @@ Bayes’ theorem in the operational reading is an *algorithm*: a rule that recom
 
 The sharpest result of the chapter is the *machine diagnosis of cognitive fallacies*. And the diagnosis is stronger than “unlikely”: typical errors of judgment turn out to be *structurally impossible*—contradicting proved identities, not merely rare.
 
-{
-**The conjunction fallacy.** The famous “Linda problem” supposes that a conjunction of events can be more probable than one of them. But $P(A\wedge B)\le P(A)$ is a *theorem*; to assert the opposite is *absurd*, not “unlikely,” and this is proved as an absurdity[^2].}
+**The conjunction fallacy.** The famous “Linda problem” supposes that a conjunction of events can be more probable than one of them. But $P(A\wedge B)\le P(A)$ is a *theorem*; to assert the opposite is *absurd*, not “unlikely,” and this is proved as an absurdity[^2].
 
 **The base-rate fallacy** confuses $P(H\mid E)$ with $P(E\mid H)$: in the nondegenerate case (nonzero $P(H)$, $P(E)$ and a nonzero joint probability $P(H\wedge E)$) the equality $P(H\mid E)=P(E\mid H)$ is legitimate only when $P(H)=P(E)$, which is detected[^3]. **The gambler’s fallacy** denies the independence of trials and is likewise caught as a contradiction[^4].
 
 *A cognitive fallacy is a confusion of categories caught by *structure*: the error is structurally impossible, not rare. A distinction drawn incorrectly yields a P1-incompatible result—incompatible with the primary rule of the event—not an improbable one.*
 
-{
-This is a direct continuation of the ToS diagnosis of fallacies (Architecture of Reasoning): an incorrect judgment is a violation of the rules for structuring distinctions, and it is recognized by machine.}
+This is a direct continuation of the ToS diagnosis of fallacies (Architecture of Reasoning): an incorrect judgment is a violation of the rules for structuring distinctions, and it is recognized by machine.
 
 ## Concentration versus Limit Laws
 
@@ -55,7 +53,7 @@ Let us analyze probability by E/R/R in the generating order Rules $\to$ Roles $\
 
 **Rules (L5).** The holding rules are the axioms of probability (nonnegativity, normalization, additivity of incompatible events) and Bayes’ update rule. Above them are the rules of concentration (Markov, Chebyshev). These rules structure the distribution of distinctions.
 
-**Roles (L4).** A random variable (a morphism of lists), its distribution, and its characteristics (mean, variance) are three *role-levels* of one finite object (M2). “The set of outcomes” is a mode of the list (M3). Probability is a role-weight (a normalized weight function), structurally nonnegative (M4).
+**Roles (L4).** A random variable (a morphism of lists), its distribution, and its characteristics (mean, variance) are three *role-levels* of one finite object. “The set of outcomes” is a mode of the list. Probability is a role-weight (a normalized weight function), structurally nonnegative.
 
 **Elements (L1 + P4).** The bearers are finite lists of outcomes with rational weights. Under P4 it is they that are actual; a completed probability space on the continuum (Lebesgue measure, $\sigma$-algebra) and the limit of the LLN are role-limits, not completed objects.
 

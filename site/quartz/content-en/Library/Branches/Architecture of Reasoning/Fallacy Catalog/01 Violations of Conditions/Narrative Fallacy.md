@@ -2,13 +2,13 @@
 title: "Narrative Fallacy"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/01 Нарушения условий/Нарративная ошибка — Басня.md"
-sourceBlob: 917ae08d61516cb21204627c9ad39a4ab46a5ff6
+sourceBlob: 91b501e7c58f85c780e93dd683cc6001236d2c57
 translated: 2026-10-20
 status: draft
 description: "Persuasion through a “touching” or horrifying story instead of logical arguments"
 ---
 
-**1.B.2.2** · [[01 Violations of Conditions|Violations of Conditions (Type 1)]] → [[1.B Reasoning Substitutions Manipulations|1.B Manipulations]] · subtype: Emotion Instead of Argument
+**1.B.2.2** · [[01 Violations of Conditions|Violations of Conditions (Type 1)]] → [[1.B Reasoning Substitutions Manipulations|1.B Manipulations]] · subtype: Pity Instead of Argument
 
 **Formulation.** Persuasion through a “touching” or horrifying story instead of logical arguments
 

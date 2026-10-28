@@ -2,7 +2,7 @@
 title: "Chapter 4. From Position to Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/03 От натуральных к рациональным/04 От позиции к процессу.md"
-sourceBlob: ded6aebc5fb15f92d2d1f1c3d75a120285229cb7
+sourceBlob: 541430684dc4a7b979c33ff26447a21f091bd1c8
 translated: 2026-10-20
 status: draft
 ---
@@ -96,7 +96,7 @@ the type is arranged (the type `positive`, Chapter III.2, § 2.5). The
 proof is therefore built in two moves: first an intermediate theorem is
 proved for arbitrary integers $p$ and $q$ under the condition
 $q \neq 0$, and then it is applied to a rational number whose
-denominator has the form $q = `Z.pos`(d)$ with positive $d$.
+denominator has the form $q = \texttt{Z.pos}(d)$ with positive $d$.
 What is proved will establish that the condition $r \cdot r = 2$ cannot
 be fulfilled by any rational position.
 
@@ -135,7 +135,7 @@ $p'^2 = 2 q'^2$. The halves $p'$ and $q'$ satisfy *the very same*
 equality.[^4]
 
 But then $p'$, $q'$ are both even as well—by the same argument—and can
-be halved, giving $p»$ and $q»$, again with the same equality. And
+be halved, giving $p''$ and $q''$, again with the same equality. And
 again. And again. The descent does not end: every pair of solutions
 generates a pair half as large, and so on without limit.
 
@@ -353,8 +353,8 @@ error of its square, $|R(n) \cdot R(n) - 2|$, becomes smaller than any
 prescribed precision. Formally:
 
 $$
-\mathrm{sqrt2_process}(R) \;:=\;
-\mathrm{is_Cauchy}(R)
+\mathrm{sqrt2\_process}(R) \;:=\;
+\mathrm{is\_Cauchy}(R)
 \;\land\;
 \forall  \varepsilon > 0\;\;
 \exists  N\;\;
@@ -608,7 +608,7 @@ exists in the repository—it is `process_equiv` of the file
 `ProcessCore.v`, defined as
 
 $$
-\mathrm{process_equiv}(R, S) \;:=\;
+\mathrm{process\_equiv}(R, S) \;:=\;
 \forall  \varepsilon > 0\;\;
 \exists  N\;\;
 \forall  n \ge N \colon\;
@@ -619,7 +619,7 @@ and for it reflexivity, symmetry, and transitivity are proved
 there—that is, it is a *genuine* equivalence relation.[^13]
 And then $\sqrt{2}$, in the process reading of ToS, is a *class of
 equivalent* processes of rational approximations—the class of all
-processes that satisfy the condition $\mathrm{sqrt2_process}$ (§ 4.4)
+processes that satisfy the condition $\mathrm{sqrt2\_process}$ (§ 4.4)
 and are equivalent to one another by `process_equiv`—rather than a
 separate rational position or one distinguished process.
 
@@ -854,7 +854,6 @@ than any prescribed $\varepsilon$. And this is the Cauchy property. ToS
 proves this connection as a theorem: the process of *shrinking
 intervals* that defines $\sqrt{2}$ is a Cauchy process.[^17]
 
-{
 Precision is needed here so as not to say more than is proved. The
 theorem `shrinking_interval_Cauchy` speaks of a process of a *special
 kind*—a process of shrinking intervals that holds its approximations
@@ -873,7 +872,7 @@ intervals that defines $\sqrt{2}$ is, by this mechanism, a Cauchy
 process. For the Newton and continued-fraction processes, however, the
 statement “this is a Cauchy process” needs convergence estimates of
 their own—and these estimates are not proved in the current version of
-`RefinementSqrt.v` (§ 4.5).[^18]}
+`RefinementSqrt.v` (§ 4.5).[^18]
 
 ### Where the Boundary of Part III Lies
 
@@ -944,7 +943,6 @@ positively at the level of systems composed of rational positions.
 
 ### E/R/R Analysis: The Number-Process as a Functional System
 
-{
 The main transition of the chapter—from the number-position to the
 number-process—is worth securing by an E/R/R analysis (Part I). The
 chapter already decomposed the system $\sqrt{2}$ into its three layers
@@ -956,7 +954,7 @@ of the system. The reservation about status is the same as before: the
 functional system of Part I, not an object `System` $L$ built
 in the code; the unity of the processes is taken through the *weak*
 relation `process_equiv`, and the predicate `sqrt2_process` is a target
-formalization (§ 4.4–4.5).}
+formalization (§ 4.4–4.5).
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -985,7 +983,7 @@ proved constructively (without $L3$), whereas the theory of shrinking
 intervals of § 4.7 rests on $L3$—these are different statuses, and they
 should not be conflated.
 
- What the analysis yields. It secures the whole path of Part III by a
+What the analysis yields. It secures the whole path of Part III by a
 single distinction of levels. The integer and the rational are
 number-*positions*, roles within the power of an *element*; $\sqrt{2}$ is
 the first number whose role is within the power of a *system* rather
@@ -1083,7 +1081,7 @@ numbers as processes is the task of Part IV.
 [^2]: The lemma `sq_even_implies_even` of the file `Sqrt2Irrational.v`: if $n \cdot n$ is even, then $n$ is even.
 [^3]: This is the lemma `sq_eq_2sq_both_even` of the file `Sqrt2Irrational.v`.
 [^4]: The descent step is the lemma `descent_step` of the file `Sqrt2Irrational.v`: from $p^2 = 2 q^2$ one builds $p' = p/2$ and $q' = q/2$ with the same $p'^2 = 2 q'^2$.
-[^5]: This is the lemma `descent_to_zero` of the file `Sqrt2Irrational.v`, proved by strong induction (Rocq: `lt_wf_ind`) on the measure $|p| + |q|$, more exactly on $`Z.to_nat`(|p| + |q|)$: every solution of $p^2 = 2 q^2$ is $p = 0$, $q = 0$. Each step of the descent strictly decreases this measure, and there can be no infinitely decreasing chain of natural-number measures.
+[^5]: This is the lemma `descent_to_zero` of the file `Sqrt2Irrational.v`, proved by strong induction (Rocq: `lt_wf_ind`) on the measure $|p| + |q|$, more exactly on $\texttt{Z.to\_nat}(|p| + |q|)$: every solution of $p^2 = 2 q^2$ is $p = 0$, $q = 0$. Each step of the descent strictly decreases this measure, and there can be no infinitely decreasing chain of natural-number measures.
 [^6]: `sqrt2_not_in_Q` of the file `Sqrt2Irrational.v`: $\lnot (\exists  r : ℚ,\; r \cdot r == 2)$. The predicate “the square equals two” is not realized by any element of type $ℚ$.
 [^7]: The processes analyzed in this section and the next are formalized in the file `RefinementSqrt.v` of the ToS Rocq repository (directory `stdlib`). The file defines the processes `sqrt2_newton` and `sqrt2_cf` and proves their concrete values at the first steps; on the limits of what is proved, see § 4.5.
 [^8]: In the file `RefinementSqrt.v` the quality of approximation is defined by the function `sqrt2_quality`, which assigns to a number $x$ the quantity $|x \cdot x - 2|$.
@@ -1091,7 +1089,7 @@ numbers as processes is the task of Part IV.
 [^10]: The coincidence at steps $0$ and $1$ is proved in `RefinementSqrt.v` by the lemmas `agree_at_0` and `agree_at_1`.
 [^11]: That the approximations of the two processes differ at step $2$ is proved by the lemma `differ_at_2` of the file `RefinementSqrt.v`.
 [^12]: That at step $2$ the Newton approximation is more accurate—smaller in the quality measure `sqrt2_quality`—is proved by the lemma `newton_better_at_2`; the coincidence at the early steps and the divergence with Newton’s advantage at step $2$ are combined in the theorem `sqrt2_strict_refinement` of the file `RefinementSqrt.v`.
-[^13]: `process_equiv` (notation `\~{}\~{}`) of the file `ProcessCore.v`; `process_equiv_refl`, `process_equiv_sym`, `process_equiv_trans` are proved there as well. Let us note for precision that in its current form the chapter *uses* `process_equiv` as a ready definition from the repository, but the theorem “the Newton process and the continued-fraction process are equivalent by `process_equiv`” has not yet been proved in the repository; the chapter points to this relation as the one by which the unity of the processes is to be expressed.
+[^13]: `process_equiv` (notation `~~`) of the file `ProcessCore.v`; `process_equiv_refl`, `process_equiv_sym`, `process_equiv_trans` are proved there as well. Let us note for precision that in its current form the chapter *uses* `process_equiv` as a ready definition from the repository, but the theorem “the Newton process and the continued-fraction process are equivalent by `process_equiv`” has not yet been proved in the repository; the chapter points to this relation as the one by which the unity of the processes is to be expressed.
 [^14]: The Archimedean property in this form is the theorem `Archimedean` of the file `Archimedean_ERR.v` of the ToS Rocq repository: for every $\varepsilon > 0$ there exists $N$ for which $1/2^N < \varepsilon$. The file contains 14 proved statements and introduces no axiom; in particular, no axiom of infinity is used.
 [^15]: The file `Archimedean_ERR.v` states explicitly that the Archimedean property is a statement about processes: for every precision the halving process attains it, and no completed infinity is required for this.
 [^16]: The definition `is_Cauchy` and the theorems of this section are in the file `ShrinkingIntervals_ERR.v` of the ToS Rocq repository. A reservation is in order: different files of the formalization use equivalent technical variants of the Cauchy condition—with indices $n > N$ (as in `ShrinkingIntervals_ERR.v` and `Archimedean_ERR.v`) or with indices $N \le n$ (as in the file `ProcessCore.v`). In substance they express one and the same thing—from some step on, all further terms of the process are mutually close—and they translate into each other by shifting the index by one; the chapter therefore speaks of one property in substance, written in equivalent forms, rather than of a *single* definition.

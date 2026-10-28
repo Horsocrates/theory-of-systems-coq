@@ -2,7 +2,7 @@
 title: "Chapter 3. Constructibility as Reachability by Degree 2; Greek Impossibilities"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/03 Конструктивность как достижимость степенью 2; греческие невозможности.md"
-sourceBlob: bc67b9b88c1b8bbb725a96576acea429569d4efb
+sourceBlob: 205fffd768068df962787bda7c41bc9d12b38db5
 translated: 2026-10-20
 status: draft
 ---
@@ -83,7 +83,7 @@ Next comes Chapter 11.4: from the *exclusions* of tiers to *positive* structures
 
 ---
 
-[^1]: The full Gauss–Wantzel criterion (constructible $\Leftrightarrow$ the degree is $2^k$, via a tower of quadratic extensions) is not formalized in the repository as a general theorem; what is formalized are *concrete* cases of reachability and obstruction (below). This agrees with the discipline of the book: the theory leads, the repository confirms concrete cases.
+[^1]: The full Gauss–Wantzel criterion (constructible $\Leftrightarrow$ the degree is $2^k$, via a tower of quadratic extensions) is not formalized in the repository as a general theorem; what is formalized are *concrete* cases of reachability and obstruction (below). This agrees with the discipline of the volume: the theory leads, the repository confirms concrete cases.
 [^2]: `stdlib/ConstructiblePolygons.v`: $ℚ[\sqrt5]$ is modeled by pairs, `pentagon_in_Qsqrt5` places the pentagon quantity in $ℚ[\sqrt5]$, and `pentagon_no_rational` ($\lnot\exists q\inℚ,\ q^2+q-1=0$) shows that it is not reachable rationally—exactly tier 2 is needed.
 [^3]: `cbrt2_not_in_Qsqrt2` (`stdlib/CubicRoleLimit.v`): no $a+b\sqrt2$ gives $2$ when cubed. `ext_degree_cbrt2_is_3` (`FieldExtension.v`) fixes the degree of the *supporting* polynomial $x^3-2$; the degree $3$ of the number $\sqrt[3]2$ proper is read together with the absence of a rational root (a cubic without one is irreducible; see 11.2).
 [^4]: `trisection_no_rational` (`stdlib/AngleTrisection.v`): $\lnot\exists q\inℚ,\ q^3=3q+1$. The chain “a cubic without a rational root $\Rightarrow$ irreducible $\Rightarrow$ tier 3” (see 11.2) gives nonconstructibility.

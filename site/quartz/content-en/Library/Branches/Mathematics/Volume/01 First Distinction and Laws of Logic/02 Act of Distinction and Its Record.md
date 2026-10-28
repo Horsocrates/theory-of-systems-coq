@@ -2,7 +2,7 @@
 title: "Chapter 2. The Act of Distinction: The Distinction Record"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/02 Акт различия запись Distinction.md"
-sourceBlob: c1db8ab205e136540bf63a4f8a046b7d8ed58b40
+sourceBlob: 51211310860c5e0f1485e6470c52cf36ff456572
 translated: 2026-10-20
 status: draft
 ---
@@ -17,9 +17,9 @@ Let us begin with how $A = \exists$ and the act of distinction are related.
 
 The statement $A = \exists$ says that something *is*, and it says nothing more. It is a maximally substantive minimal statement: it fixes the fact of existence and leaves everything else entirely *indeterminate*. What exactly is? How much of it is there? What is it like? What is its inner structure? All these questions lie beyond $A = \exists$. What exists, as it is given in $A = \exists$, is *indistinct*: it is, but in this “is” nothing determinate has yet been singled out.
 
-In the terms of the metaphysics of Volume I, this ontological state has a precise description. Before the first act of distinction (what Volume I calls Light—the act of Logic distinguishing the dormant status of the Source), there are Logic and the Source as *meta-level entities*—primary facts established in Volume I—but there are no *events*, no distinguishable inner structures, no sequence. This is not “emptiness”: Logic and the Source exist as primary entities; but this is existence that is *not yet differentiated*. The act of Light, as the first event of distinction, actualizes the already-present relation of Logic and the Source: Logic distinguishes the dormant status of the Source, and this distinction becomes the ground for the activation of the witnessing property of the Source—the Source passes from the dormant mode into the active one. From this moment the *determinacy* of structure appears: the division into the actualized and the non-actualized, into what is singled out by distinction and what it is not.
+In the terms of [[Metaphysics|“Metaphysics”]], this ontological state has a precise description. Before acts of distinction, there are Logic and the Source—two systems that must be and always are—but there are no *events*, no distinguishable inner structures, no sequence. This is not “emptiness”: Logic and the Source exist; but this is existence that is *not yet differentiated*. The act of distinction is the meeting of form and content: Logic (form) recognizes a potential in the Source (content) and applies form to it. The Source is unchanged by this: actualization is manifestation, not extraction. With the act, the *determinacy* of structure appears: the division into the actualized and the non-actualized, into what is singled out by distinction and what it is not.
 
-The present work does not unfold this metaphysics; its full exposition belongs to Volume I. Mathematically, however, it is important for us to fix the structural fact that follows from it: *determinacy arises through distinction*. Before distinction, what exists has in principle no structural characteristics on which mathematical work could rely. With distinction the first structural characteristic appears: the division into sides.
+The present work does not unfold this metaphysics; its full exposition belongs to “Metaphysics.” Mathematically, however, it is important for us to fix the structural fact that follows from it: *determinacy arises through distinction*. Before distinction, what exists has in principle no structural characteristics on which mathematical work could rely. With distinction the first structural characteristic appears: the division into sides.
 
 ### The First Determinate Statement: About the Boundary
 
@@ -29,13 +29,13 @@ This formulation is exact. A boundary is the only object that introduces determi
 
 A boundary, by contrast, requires nothing prior except that within which it is drawn. To draw a boundary, it is enough to have the indistinct “is” already asserted by $A = \exists$ and the work of Logic, which is capable of distinguishing. What exists, within which the boundary is drawn, *already is*—no act of distinction cancels this fact. But the *sides* as determinate sides—what is *this* resting on what is *not that*—appear together with the act itself. Distinction *actualizes* a structural relation that before it existed only as a possibility, not as determinacy.
 
-This agrees with how the metaphysics of Volume I describes the first act of Light. The Source exists before Light as well—but in the dormant mode, in which its witnessing property is not activated. The act of Light *does not create* the Source; it *actualizes* its witnessing property, carrying the dormant mode over into the active one. So too in derivative acts of distinction: the material within which the boundary is drawn exists before this act as well—but as determinate *sides* of a division, as the structural relation “this resting on not that,” it first appears in the act itself. Distinction is ontologically productive by *actualizing determinacy* in what exists, not by *creating* what exists.
+This agrees with how [[Metaphysics|“Metaphysics”]] describes the act of distinction. The Source is unchanged by actualization: actualization is manifestation, not extraction. The act *does not create* the Source; it applies form to its potential. So too in each particular act of distinction: the material within which the boundary is drawn exists before this act as well—but as determinate *sides* of a division, as the structural relation “this resting on not that,” it first appears in the act itself. Distinction is ontologically productive by *actualizing determinacy* in what exists, not by *creating* what exists.
 
 In the later chapter on the co-definition of the positive and the negative, this principle will be unfolded in full. Here it is enough for us to fix it as the condition under which the act of distinction can play the role of the first determining gesture: it *does not presuppose* an already divided existent; it *actualizes* the structure of division within what exists.
 
 ### Converging Testimonies in the Tradition
 
-The idea that *distinction* (rather than an object, a relation, or a property) is the structural origin of determinacy has a long tradition in philosophy and mathematics. ToS does not base itself on this tradition—its grounding belongs to Volume I—but it is useful to point to converging independent testimonies: they show that the position we have discovered was not invented by us from scratch but recurs in the tradition at different stages of its development.
+The idea that *distinction* (rather than an object, a relation, or a property) is the structural origin of determinacy has a long tradition in philosophy and mathematics. ToS does not base itself on this tradition—its grounding belongs to “Metaphysics”—but it is useful to point to converging independent testimonies: they show that the position we have discovered was not invented by us from scratch but recurs in the tradition at different stages of its development.
 
 **Spencer-Brown.**  In *Laws of Form* (1969)[^1], George Spencer-Brown begins with a single operation: “*Draw a distinction*.” From this gesture, conveyed by a single graphic sign, he unfolds the whole of mathematical logic, including the propositional calculus and fragments of arithmetic. For Spencer-Brown, distinction is the *utterly simple* mathematical action on which everything else stands, and there is nothing structurally simpler that would precede it.
 
@@ -51,13 +51,13 @@ Heidegger’s approach is far from the mathematical one, yet the same intuition 
 
 **Derrida: *différance*.**  In *Différance*[^4] (1968), Jacques Derrida introduces a neologism that unites two senses of the French verb *différer*: “to differ” and “to defer.” *Différance* is a structure in which difference *produces* identity rather than following from it.
 
-For all the specificity of Derrida’s approach—for him difference is *ontologically, radically primary*, and the identity of objects turns out to be its own effect—the structural move coincides in its general direction with what is at work in the act of distinction: the positive side has identity (the law $L1$) only by resting on its distinction from the negative side. ToS does not follow Derrida in his more radical conclusions about the absence of a stable ontology, but it records the same structural observation: distinction *actualizes* the identities of the sides; it does not presuppose them as given in advance.
+For all the specificity of Derrida’s approach—for him difference is *ontologically, radically primary*, and the identity of objects turns out to be an effect of difference—the structural move coincides in its general direction with what is at work in the act of distinction: the positive side has identity (the law $L1$) only by resting on its distinction from the negative side. ToS does not follow Derrida in his more radical conclusions about the absence of a stable ontology, but it records the same structural observation: distinction *actualizes* the identities of the sides; it does not presuppose them as given in advance.
 
-**The metaphysics of Volume I.**  Finally, the testimony that matters most for us. In Volume I, on metaphysics, the act of distinction occupies a central place: Light, as the act of Logic distinguishing the dormant status of the Source, is the *first event* in the ontology. Before this act, Logic and the Source exist as meta-level entities, but without events—the Source abides in the dormant mode, and its witnessing property is not activated. The act of Light does not *create* the Source; it *actualizes* its witnessing property, carrying the dormant mode over into the active one. And it is precisely through this first event that time itself becomes possible as the structure of the sequence of acts. ToS rests on this result: the act of distinction is not one of many possible starts but the structurally primary point at which the possibility of determinacy first passes into actuality.
+**Metaphysics.**  Finally, the testimony that matters most for us. In [[Metaphysics|“Metaphysics”]], the act of distinction occupies a central place: it is the meeting of form and content—Logic (form) recognizes a potential in the Source (content) and applies form to it. Logic and the Source are two systems that must be and always are; only the space of actualized distinctions grows—the record of their meetings. The act does not *create* the Source: actualization is manifestation, not extraction. And it is precisely through acts of distinction that time itself becomes possible as the structure of the sequence of acts. ToS rests on this result: the act of distinction is not one of many possible starts but the structurally primary point at which the possibility of determinacy first passes into actuality.
 
-*Accordingly, mathematics as a language of description* begins its work from this first act: mathematics records the structure of acts of distinction found in reality; it does not create a separate world of “mathematical entities.” The position fixed in the Methodological Introduction—mathematics is a language for describing the logical structure of reality—receives, in the work of Volume I and in the analysis of the act of distinction, its first mathematical application: `Distinction`, as a formal record in the language of Rocq, is a record of the logical structure of real acts of distinction, not a self-standing mathematical entity.
+*Accordingly, mathematics as a language of description* begins its work from the act of distinction: mathematics records the structure of acts of distinction found in reality; it does not create a separate world of “mathematical entities.” The position fixed in the Methodological Introduction—mathematics is a language for describing the logical structure of reality—receives, in [[Metaphysics|“Metaphysics”]] and in the analysis of the act of distinction, its first mathematical application: `Distinction`, as a formal record in the language of Rocq, is a record of the logical structure of real acts of distinction, not a self-standing mathematical entity.
 
-This convergence—from Spencer-Brown, working in mathematical logic, through Saussure’s structural linguistics and Heidegger’s ontology, to Derrida’s poststructuralism and the metaphysics of Volume I—is not a proof of the position of ToS. Proof and grounding belong to the present volume’s own line: the derivation of the laws and principles from $A = \exists$. But this convergence shows that the idea of the primacy of distinction is not an arbitrary invention of the author: it arises again and again in different traditions—mathematical, linguistic, philosophical—as a stable structure of thought that is reached independently from different sides. It is testimony to the aptness of the initial idea, not a substitute for its grounding.
+This convergence—from Spencer-Brown, working in mathematical logic, through Saussure’s structural linguistics and Heidegger’s ontology, to Derrida’s poststructuralism and “Metaphysics”—is not a proof of the position of ToS. Proof and grounding belong to the present volume’s own line: the derivation of the laws and principles from $A = \exists$. But this convergence shows that the idea of the primacy of distinction is not an arbitrary invention of the author: it arises again and again in different traditions—mathematical, linguistic, philosophical—as a stable structure of thought that is reached independently from different sides. It is testimony to the aptness of the initial idea, not a substitute for its grounding.
 
 Having established that the act of distinction is the object through which the present work passes from the pre-formal $A = \exists$ to formalizable mathematical work, we can now consider its structure *in substance*: what exactly takes place in it, which four moments are combined in it, and how they are connected with one another. The next section is devoted to this.
 
@@ -76,7 +76,7 @@ These four moments are *not four independent statements* but *four aspects of on
 
 When we say that the moments are aspects, we mean the following. It is impossible to produce the positive side without at the same time producing the negative one (*this* is *this* as distinct from what?). It is impossible to produce both sides without at the same time fixing their mutual exclusion (otherwise they would merge, and there would be no division). It is impossible to produce a division without at the same time asserting its exhaustiveness (otherwise there would remain room for a “third,” and the original “is” would not be divided). Each moment *requires* the others; none can be produced in isolation from the rest.
 
-In this sense the act of distinction is a *synchronous unity* of four moments. They are distinguishable for analysis—we can speak of each separately, as we are doing now—but ontologically they are *simultaneous* and *mutually require one another*. The entry `Record Distinction`, which we shall introduce in “Formalization in : The Entry Record Distinction,” will reflect this unity as *one structure with four fields*, not as a set of independent statements.
+In this sense the act of distinction is a *synchronous unity* of four moments. They are distinguishable for analysis—we can speak of each separately, as we are doing now—but ontologically they are *simultaneous* and *mutually require one another*. The entry `Record Distinction`, which we shall introduce in “Formalization in Rocq: The Entry `Record Distinction`,” will reflect this unity as *one structure with four fields*, not as a set of independent statements.
 
 Let us now consider each of the four moments in substance.
 
@@ -86,7 +86,7 @@ The positive side is what *is* in the sense of the division being made. This for
 
 In $A = \exists$, “exists” is the *primary fact of existence in general*, prior to any distinction. In the act of distinction, “is” refers to one of the sides of the division: the positive side *is* in the sense of being *singled out* by the act, resting on the fact that it *is not* the negative side. Here “is” is a *determinate* “is,” structurally different from “is” as such.
 
-In the terms of the metaphysics of Volume I, the positive side is the *actualized* pole of the distinction. Distinction, as we saw in “From ‘Is’ to ‘Distinguished,’” actualizes a structural relation that existed as a possibility. The positive side is one of the two poles of this actualized relation—the one to which the act of singling out itself refers.
+In the terms of “Metaphysics,” the positive side is the *actualized* pole of the distinction. Distinction, as we saw in “From ‘Is’ to ‘Distinguished,’” actualizes a structural relation that existed as a possibility. The positive side is one of the two poles of this actualized relation—the one to which the act of singling out itself refers.
 
 The Law of Identity $L1$ applies to the positive side: it is identical to itself throughout the whole theory. This is an *ontological* application of the Law of Identity, not a formal rule: the positive side is a *determinate* side, and as such it is stably identical to itself in all contexts where this distinction is in force. Without this self-identity the positive side could not take part in further structures—statements about it would not be stable, and references to it would lose their determinacy.
 
@@ -138,7 +138,7 @@ $$
 
 “Either the positive holds or the negative holds; there is no third.”
 
-Care is needed in the formulation here. In the metaphysics of Volume I, as was pointed out in the Methodological Introduction, the Law of Excluded Middle is *derived* from Identity and Non-Contradiction. If something *is* (Identity) and cannot at once be and not be (Non-Contradiction), then between “is” and “is not” *there is no third*—nothing that would be neither the one nor the other. This is a consequence of the joint work of the first two laws, not a self-standing third law.
+Care is needed in the formulation here. In “Metaphysics,” as was pointed out in the Methodological Introduction, the Law of Excluded Middle is *derived* from Identity and Non-Contradiction. If something *is* (Identity) and cannot at once be and not be (Non-Contradiction), then between “is” and “is not” *there is no third*—nothing that would be neither the one nor the other. This is a consequence of the joint work of the first two laws, not a self-standing third law.
 
 In the formal system Rocq, however, in which the present work is carried out, the Law of Excluded Middle is *not derivable* as a theorem: for an arbitrary proposition $P$ there is no constructive proof of $P \vee \neg P$. For this reason it receives in the formalization the status of a self-standing $L3$—technically a separate field of the record `Distinction` and a separate axiom `classic`, on which the construction `distinction_of` rests (“The Construction distinction_of: Building a Distinction from a Proposition”).
 
@@ -150,7 +150,7 @@ For the act of distinction itself, what matters is that exhaustiveness is an inn
 
 The four moments—the positive side, the negative side, mutual exclusion, joint exhaustiveness—form the structure of the act of distinction. But they do not work by themselves. Over the whole act works the Law of Sufficient Reason—the meta-structure in which the four moments are *grounded* as moments of the act being performed.
 
-Let us unfold this claim. Sufficient Reason, as was established in the Methodological Introduction and in (see the corresponding chapter) of Chapter 1, is not one of the laws alongside the others. Sufficient Reason is *the very action of Logic*, in which grounding exists as a structure. Applied to the act of distinction, this means that each of the four moments has a *ground*, and the act itself as a whole has a ground for taking place as it does and not otherwise.
+Let us unfold this claim. Sufficient Reason, as was established in the Methodological Introduction and in [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/01 First Principle A Equals Exists#What to Do with the Boundary: The Transition to the Act of Distinction|§ 1.4 “What to Do with the Boundary: The Transition to the Act of Distinction”]] of Chapter 1, is not one of the laws alongside the others. Sufficient Reason is *the very action of Logic*, in which grounding exists as a structure. Applied to the act of distinction, this means that each of the four moments has a *ground*, and the act itself as a whole has a ground for taking place as it does and not otherwise.
 
 Concretely:
 
@@ -249,8 +249,8 @@ Inductive Distinction : Type :=
 
 together with automatically generated *projections* (the functions `positive`, `negative`, `exclusive`, `exhaustive`, which extract the corresponding fields from an instance). The `Record` form is more compact and more convenient to work with; in substance it does not differ from the inductive definition.
 
-What does it mean “to define the type `Distinction`”? A new type is introduced into the type system of Rocq, whose instances are tuples of four consistent values. What does it mean “to have an instance of `Distinction`”? It means having concrete values for all four fields, the third and fourth fields being *proofs* of the corresponding statements in terms of the first two. Without these proofs an instance cannot be built: the Rocq compiler will reject an entry in which `exclusive` does not prove $\neg(`positive` \wedge
-`negative`)$ or `exhaustive` does not prove $`positive` \vee `negative`$.
+What does it mean “to define the type `Distinction`”? A new type is introduced into the type system of Rocq, whose instances are tuples of four consistent values. What does it mean “to have an instance of `Distinction`”? It means having concrete values for all four fields, the third and fourth fields being *proofs* of the corresponding statements in terms of the first two. Without these proofs an instance cannot be built: the Rocq compiler will reject an entry in which `exclusive` does not prove $\neg(\texttt{positive} \wedge
+\texttt{negative})$ or `exhaustive` does not prove $\texttt{positive} \vee \texttt{negative}$.
 
 This is one of the manifestations of what we discussed in “Over Everything: The Work of Sufficient Reason”: Sufficient Reason is built into the very work of Rocq. It is impossible to build an act of distinction without explicitly presenting grounds for all four of its moments. The formal system requires justifications; the requirement of grounds is the work of Sufficient Reason.
 
@@ -292,7 +292,7 @@ In CIC—the Calculus of Inductive Constructions, on which Rocq is built—there
 - `Set`—the universe of *computable data*. The elements of `Set` are types of concrete values: `nat` (natural numbers), `bool` (Boolean values), `list` (lists), and so on.
 - `Type`—a more general universe that encompasses `Prop` and `Set` and admits definitions of higher-order types.
 
-When we write `positive : Prop`, we fix that the positive side is a *statement* (something that can be true or false), not a computable value and not a data type. The same holds for `negative`. The fields `exclusive` and `exhaustive` have no type declaration of their own in the form `Prop`; they are declared with a concrete type that depends on the values of `positive` and `negative`—namely $\neg(`positive` \wedge `negative`)$ and $`positive` \vee `negative`$.
+When we write `positive : Prop`, we fix that the positive side is a *statement* (something that can be true or false), not a computable value and not a data type. The same holds for `negative`. The fields `exclusive` and `exhaustive` have no type declaration of their own in the form `Prop`; they are declared with a concrete type that depends on the values of `positive` and `negative`—namely $\neg(\texttt{positive} \wedge \texttt{negative})$ and $\texttt{positive} \vee \texttt{negative}$.
 
 This is a characteristic feature of *dependent types* in CIC: the type of a field can depend on the values of other fields. The record `Distinction` uses this possibility: the types of the third and fourth fields are constructed from the first two. If we tried to define `Distinction` in a system without dependent types (for example, in an ordinary typed theory), this would require workarounds.
 
@@ -300,7 +300,7 @@ This is a characteristic feature of *dependent types* in CIC: the type of a fiel
 
 Let us sum up what we have obtained together with the entry `Record Distinction`.
 
-**The first formal object of the present volume.**  Up to this point the exposition worked at the substantive level: formulations, discussions, references to Volume I, on metaphysics. With the introduction of `Distinction` there appears the *first* object that the Rocq compiler accepts into its language, that can be written in a file, checked by machine, and used in further definitions. This transition is central for all the subsequent work: with it *properly mathematical* work begins.
+**The first formal object of the present volume.**  Up to this point the exposition worked at the substantive level: formulations, discussions, references to “Metaphysics.” With the introduction of `Distinction` there appears the *first* object that the Rocq compiler accepts into its language, that can be written in a file, checked by machine, and used in further definitions. This transition is central for all the subsequent work: with it *properly mathematical* work begins.
 
 **A universal template for subsequent structures.**  The record `Distinction` sets the pattern by which the subsequent structures of the volume will be built. The idea “fix the type, specify its fields, require justifications” works in all the parts:
 
@@ -342,13 +342,13 @@ Inductive bool : Set :=
   | false : bool.
 ```
 
-A statement about a Boolean variable $b : `bool`$ is *decided by computation*. If we have an expression returning `bool`, we can *compute* it and obtain, in a finite number of steps, either `true` or `false`. For example, the expression `Nat.eqb 2 2` (Boolean equality of natural numbers) computes to `true`; `Nat.eqb 2 3`, to `false`. In both cases the checking algorithm is available and terminates.
+A statement about a Boolean variable $b : \texttt{bool}$ is *decided by computation*. If we have an expression returning `bool`, we can *compute* it and obtain, in a finite number of steps, either `true` or `false`. For example, the expression `Nat.eqb 2 2` (Boolean equality of natural numbers) computes to `true`; `Nat.eqb 2 3`, to `false`. In both cases the checking algorithm is available and terminates.
 
 In this sense `bool` is a type of *computable results of checking*. Every statement written in `bool` is *decidable*: there is an algorithm giving the answer “yes” or “no” in a finite number of steps.
 
-**`Prop` is a type of statements.**  `Prop` is the universe of *propositions*—statements that can be true or false but are *not necessarily* decided by computation. A statement $P : `Prop`$ is *proved* by building a *term* (an object in type theory) that has type $P$. The existence of such a term guarantees the truth of $P$.
+**`Prop` is a type of statements.**  `Prop` is the universe of *propositions*—statements that can be true or false but are *not necessarily* decided by computation. A statement $P : \texttt{Prop}$ is *proved* by building a *term* (an object in type theory) that has type $P$. The existence of such a term guarantees the truth of $P$.
 
-The key difference: `Prop` *does not presuppose a checking algorithm*. A statement $P : `Prop`$ can be:
+The key difference: `Prop` *does not presuppose a checking algorithm*. A statement $P : \texttt{Prop}$ can be:
 
 - proved, if the corresponding term has been built;
 - refuted, if $\neg P$ has been proved (that is, a term of type $P \to \mathtt{False}$ has been built);
@@ -365,7 +365,7 @@ This is a characteristic example of `Prop` being *wider* than `bool`. Everything
 
 Besides the technical difference in the mode of verification, there is a subtler difference between `Prop` and `bool`, connected with the *status of proofs* (or, in the case of `bool`, of values).
 
-**Proof-irrelevance.**  If a statement $P : `Prop`$ has two different proofs $p_1 : P$ and $p_2 : P$, are they considered *different*? In standard mathematical practice, no. A proof is valuable because it establishes truth; different paths to one truth are considered equivalent as proofs. This position is called *proof-irrelevance*—the indistinguishability of proofs.
+**Proof-irrelevance.**  If a statement $P : \texttt{Prop}$ has two different proofs $p_1 : P$ and $p_2 : P$, are they considered *different*? In standard mathematical practice, no. A proof is valuable because it establishes truth; different paths to one truth are considered equivalent as proofs. This position is called *proof-irrelevance*—the indistinguishability of proofs.
 
 In `bool`, proof-irrelevance is trivial: each Boolean value has *exactly one* way of being itself. `true` is `true`, `false` is `false`; there are no “different ways of being `true`.”
 
@@ -393,9 +393,9 @@ This agrees with the understanding of mathematics as a language for describing t
 
 In writing `positive : Prop`, we assert that the positive side of a distinction *is a statement*—something that can be true or not true, something that has a structure irreducible to a computable value. A statement exists as a structural object; its truth-value is established by proof, not by a checking algorithm.
 
-If we chose `bool`, we would in effect be saying that the positive side of a distinction *is a computable result*—one of two outcomes given in advance. This reduces the act of distinction to an algorithm; an algorithm, in turn, is a technical implementation, not an ontological structure. The choice of `bool` would thereby reduce Logic to computability—which contradicts the ontological primacy of Logic established in Volume I.
+If we chose `bool`, we would in effect be saying that the positive side of a distinction *is a computable result*—one of two outcomes given in advance. This reduces the act of distinction to an algorithm; an algorithm, in turn, is a technical implementation, not an ontological structure. The choice of `bool` would thereby reduce Logic to computability—which contradicts the ontological primacy of Logic established in “Metaphysics.”
 
-**Logic is primary; computability is a particular case.**  This is the central methodological position of the whole work of ToS. Computability is a *particular case* of the work of Logic—the case in which the structure of a statement is such that it admits an algorithmic solution. But not every work of Logic is computable, and not every true statement has a checking algorithm. Gödel showed this formally for arithmetic (there exist true arithmetical statements unprovable in a given formal system); the metaphysics of Volume I shows it ontologically (Logic as the structure of being *does not reduce* to the technique of computation).
+**Logic is primary; computability is a particular case.**  This is the central methodological position of the whole work of ToS. Computability is a *particular case* of the work of Logic—the case in which the structure of a statement is such that it admits an algorithmic solution. But not every work of Logic is computable, and not every true statement has a checking algorithm. Gödel showed this formally for arithmetic (there exist true arithmetical statements unprovable in a given formal system); “Metaphysics” shows it ontologically (Logic as the structure of being *does not reduce* to the technique of computation).
 
 The choice of `Prop` is the consistent carrying out of this position at the most basic level. The present volume begins with it; from it everything further branches out.
 
@@ -446,11 +446,11 @@ The three dimensions—the nature of the records, the mode of access, the status
 
 ### Implications for the Subsequent Parts
 
-The choice of `Prop` in the record `Distinction` is not a local decision concerning only “Formalization in : The Entry Record Distinction.” From this point on, all further work will be conducted in the `Prop` style. Every statement about mathematical objects is a proposition, not a Boolean value. This will make it possible to work with objects whose *truth-value* is nontrivial (it requires proof) while their *structure* is clear.
+The choice of `Prop` in the record `Distinction` is not a local decision concerning only “Formalization in Rocq: The Entry `Record Distinction`.” From this point on, all further work will be conducted in the `Prop` style. Every statement about mathematical objects is a proposition, not a Boolean value. This will make it possible to work with objects whose *truth-value* is nontrivial (it requires proof) while their *structure* is clear.
 
 Let us briefly indicate where this position will show itself in the subsequent parts, and *what in reality* each of these formalisms describes.
 
-**Part IV: `RealProcess` and analysis.**  Processes of approximation really exist—geometric approximations of the length of a circle, measurements of physical quantities with increasing precision, iterative computations. These processes have a common logical structure: a sequence of approximations with convergence. The type `RealProcess := nat -> Q` is a formal record of this structure in the language of Rocq. The process itself, $r : `nat` \to `Q`$, is a computable function living in `Set`. But statements about the process—that it converges, that it represents a concrete geometric or physical value, that it dominates another process—are propositions in `Prop`. In the subsequent parts this will be used as a working approach to the formalization of classical analysis: the data and the processes themselves live in computable types, while statements about their convergence and about the values they represent are formulated in `Prop` (see the discussion of the principle $P4$ and of the continuum hypothesis in the Methodological Introduction).
+**Part IV: `RealProcess` and analysis.**  Processes of approximation really exist—geometric approximations of the length of a circle, measurements of physical quantities with increasing precision, iterative computations. These processes have a common logical structure: a sequence of approximations with convergence. The type `RealProcess := nat -> Q` is a formal record of this structure in the language of Rocq. The process itself, $r : \texttt{nat} \to \texttt{Q}$, is a computable function living in `Set`. But statements about the process—that it converges, that it represents a concrete geometric or physical value, that it dominates another process—are propositions in `Prop`. In the subsequent parts this will be used as a working approach to the formalization of classical analysis: the data and the processes themselves live in computable types, while statements about their convergence and about the values they represent are formulated in `Prop` (see the discussion of the principle $P4$ and of the continuum hypothesis in the Methodological Introduction).
 
 **Part V: topology.**  Continuous processes really exist—motion, deformation, the transfer of a state from one point of space to a neighboring one. They have a common logical structure: the preservation of “closeness” under transformations. The openness of a set, closedness, compactness, connectedness are formal records of aspects of this structure in the language of topology. They are propositions in `Prop`, not computable predicates: for many real topological properties there is no direct checking algorithm. Work in `Prop` here is not a choice of convenience but a way of preserving the logical structure of really discoverable properties of continuous processes.
 
@@ -460,7 +460,7 @@ Let us briefly indicate where this position will show itself in the subsequent p
 
 In all four cases one and the same connection is at work: *processes and structures really exist; mathematics records their logical structure formally; in Rocq these records live as propositions, not as computable values, because the real structures being described are in general not decidable by a checking algorithm*. The choice of `Prop` instead of `bool` is the systematic carrying out of this position through all the subsequent work.
 
-Thus the choice of `Prop` in the record `Distinction` is not a local technical detail but a *decision of principle* that shapes the face of the present volume. It is a concrete manifestation of the position of logical realism at the very initial level of formal work. All the subsequent mathematical work begins with it and passes through it, and in it the ontological position of the metaphysics of Volume I and the technical practice of work in Rocq are brought into agreement.
+Thus the choice of `Prop` in the record `Distinction` is not a local technical detail but a *decision of principle* that shapes the face of the present volume. It is a concrete manifestation of the position of logical realism at the very initial level of formal work. All the subsequent mathematical work begins with it and passes through it, and in it the ontological position of “Metaphysics” and the technical practice of work in Rocq are brought into agreement.
 
 Having established the record `Distinction` and grounded its typing in `Prop`, we can now pass to the universal construction that builds a distinction from any proposition. This construction, denoted `distinction_of`, is a bridge between the general statements of Rocq and concrete acts of distinction. The next section is devoted to it.
 
@@ -542,13 +542,13 @@ Axiom classic : forall P : Prop, P \/ ~ P.
 
 This axiom postulates that for any proposition $P$, $P \vee \neg P$ holds. It is not proved constructively (as we have seen); it is *accepted* as a statement of classical logic.
 
-In ToS the acceptance of `classic` is grounded ontologically: according to the metaphysics of Volume I, the Law of Excluded Middle is one of the conditions of the work of Logic on $A = \exists$. In reality there is *always* a determinate state of affairs: either something holds or it does not (in one respect). That we have no algorithm to establish, for each concrete $P$, which of the two it is does not cancel the ontological fact: the state of affairs is determinate.
+In ToS the acceptance of `classic` is grounded ontologically: according to “Metaphysics,” the Law of Excluded Middle is one of the conditions of the work of Logic on $A = \exists$. In reality there is *always* a determinate state of affairs: either something holds or it does not (in one respect). That we have no algorithm to establish, for each concrete $P$, which of the two it is does not cancel the ontological fact: the state of affairs is determinate.
 
 Constructive undecidability is an epistemological limitation (the impossibility of always learning which of the two holds); `classic` as an axiom fixes ontological determinacy (one of the two always holds). The acceptance of this axiom is a clear expression of the position of logical realism discussed in “Why Prop and Not bool: The Position of Logical Realism”: Logic is ontologically primary, and computability is its particular case.
 
 One caveat is important here, so as not to ascribe to `classic` more than it gives. The axiom `classic P` gives a proof of the disjunction $P \vee \neg P$ in `Prop`—but it does *not* give a computable test that would return `true` or `false` depending on which side holds. In other words, `classic` asserts that one of the two is true but does not indicate which. For building the field `exhaustive` this is enough: `exhaustive` is a proof of $P \vee \neg P$, not a computed indicator of the side. But if an *informative* choice of branch is needed later—computational branching that depends on whether $P$ holds—`classic` alone is not enough: an additional principle of witnessing is needed, discussed in the later chapter on the axiomatic layer of ToS.
 
-**Double numbering and status.**  The Methodological Introduction fixed the following: in the ontology of Volume I the Law of Excluded Middle is *derived* from Identity and Non-Contradiction; in the formal system Rocq it is a *self-standing* $L3$ resting on the axiom `classic`. This is a particular case of the double numbering of the laws, and it concerns precisely the construction `distinction_of`: the field `exhaustive` in a record `Distinction` built from an arbitrary proposition $P$ rests on `classic`.
+**Double numbering and status.**  The Methodological Introduction fixed the following: in the ontology of “Metaphysics” the Law of Excluded Middle is *derived* from Identity and Non-Contradiction; in the formal system Rocq it is a *self-standing* $L3$ resting on the axiom `classic`. This is a particular case of the double numbering of the laws, and it concerns precisely the construction `distinction_of`: the field `exhaustive` in a record `Distinction` built from an arbitrary proposition $P$ rests on `classic`.
 
 A detailed discussion of all the technical axioms on which ToS rests (`classic` and `L4_witness`), and the ontological clarification of their status, is the subject of the later chapter on the axiomatic layer of ToS. Here it is important for us to fix that `distinction_of`, as a universal construction, requires `classic`, and that this requirement is ontologically grounded.
 
@@ -578,7 +578,7 @@ Let us go through it line by line.
 In mathematical notation the same object is written more briefly:
 
 $$
-\text{distinction_of}(P) \;=\; \big(P, \neg P, \varepsilon_P, \eta_P\big),
+\text{distinction\_of}(P) \;=\; \big(P, \neg P, \varepsilon_P, \eta_P\big),
 $$
 
 where $\varepsilon_P$ is a proof of $\neg(P \wedge \neg P)$ (constructive), and $\eta_P$ is a proof of $P \vee \neg P$ (resting on `classic`).
@@ -593,7 +593,7 @@ Let us sum up in substance. The construction `distinction_of` shows the followin
 
 **A bridge between statements and acts.**  `distinction_of` is a bridge between two levels of work: the level of *statements* in Rocq and the level of *acts of distinction* as the structural objects of the present work. Any statement available in Rocq can be considered *as* a distinction and worked with in this structure—through the four fields `positive`, `negative`, `exclusive`, `exhaustive`.
 
-**Preparation for deriving the laws.**  From `distinction_of` the laws of logic $L1, L2, L3, L4$ will be derived as theorems about the properties of `Distinction`. Chapter 3 will show concretely that for any $D : `Distinction`$, in particular for $D = `distinction_of` (P)$, formal statements expressing the classical laws of logic are checked. This is the central result of Part I.
+**Preparation for deriving the laws.**  From `distinction_of` the laws of logic $L1, L2, L3, L4$ will be derived as theorems about the properties of `Distinction`. Chapter 3 will show concretely that for any $D : \texttt{Distinction}$, in particular for $D = \texttt{distinction\_of} (P)$, formal statements expressing the classical laws of logic are checked. This is the central result of Part I.
 
 **Connection with operational realism.**  `distinction_of` agrees with the fixed ontological position: mathematics as a language for describing the logical structure of the real. The construction does not *create* a distinction where there was none; it *makes explicit* the logical structure already present in the statement itself. This is the structure of the *real*: in any real situation where the statement $P$ has meaning, the distinction between $P$ and $\neg P$ has meaning as well.
 
@@ -605,14 +605,14 @@ With the construction `distinction_of` in hand, we are ready to consider the que
 
 The record `Distinction` has four fields: `positive`, `negative`, `exclusive`, `exhaustive`. A natural question, especially for a mathematical audience: *is this a minimal set*? Can the same substantive work be obtained with fewer fields?
 
-This question is not aesthetic. In (see the corresponding chapter) of Chapter 1 it was established that the first formalizable must stand *at the point of balance* between minimality and productivity. If the record were redundant, we would obtain additional structure not justified by proximity to the boundary of formalization. If the record were insufficient, we would lose the possibility of deriving further structures from it (the laws of logic, further constructions). Minimality is a structural characteristic that must be *shown*, not *postulated*.
+This question is not aesthetic. In [[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/01 First Principle A Equals Exists#What to Do with the Boundary: The Transition to the Act of Distinction|§ 1.4 “What to Do with the Boundary: The Transition to the Act of Distinction”]] of Chapter 1 it was established that the first formalizable must stand *at the point of balance* between minimality and productivity. If the record were redundant, we would obtain additional structure not justified by proximity to the boundary of formalization. If the record were insufficient, we would lose the possibility of deriving further structures from it (the laws of logic, further constructions). Minimality is a structural characteristic that must be *shown*, not *postulated*.
 
 The method of showing is structural analysis: let us consider what happens without each of the fields in turn and make sure that in each case the record loses the status of a *distinction*. This is not a rigorous proof in a formal system (the minimality of `Distinction` is a metatheoretical observation about the choice of formalism, not a theorem inside Rocq), but a concrete structural analysis on which our choice stands.
 
 ### Without the Fields `positive` or `negative`
 
-The obvious case: without one of the sides *there is no division itself*. A record with three fields—for example, `positive`, `exclusive`, `exhaustive` without `negative`—would be syntactically meaningless: the fields `exclusive` and `exhaustive` refer to `negative` in their types ($\neg(`positive` \wedge
-`negative`)$ and $`positive` \vee `negative`$, respectively). Without `negative` these types cannot even be written.
+The obvious case: without one of the sides *there is no division itself*. A record with three fields—for example, `positive`, `exclusive`, `exhaustive` without `negative`—would be syntactically meaningless: the fields `exclusive` and `exhaustive` refer to `negative` in their types ($\neg(\texttt{positive} \wedge
+\texttt{negative})$ and $\texttt{positive} \vee \texttt{negative}$, respectively). Without `negative` these types cannot even be written.
 
 This case requires no detailed analysis: `positive` and `negative` are the two sides of the division; without both there is no division. More interesting are the cases where the sides themselves are in place but one of the conditions (`exclusive` or `exhaustive`) is absent.
 
@@ -644,7 +644,7 @@ True`—even one of the sides gives the whole condition). We obtain a “record�
 
 This is not merely an inconvenience. It is a *loss of the ontological function* of the record. A distinction is by definition a structural division into two *incompatible* sides; removing the condition of incompatibility, we obtain not a distinction but merely *a pair of statements one of which holds*. This is an entirely different object, expressing merely a disjunction of two propositions rather than the work of Logic on $A = \exists$.
 
-**In the terms of the metaphysics of Volume I.**  The four moments of the act of distinction, as we saw in “Four Moments of One Act,” are aspects of one act that mutually require one another. Removing mutual exclusion means removing one of these aspects. The remaining aspects lose their connection with being aspects of a *distinction*: they become merely components of a pair of statements, not the structure of an act.
+**In the terms of “Metaphysics.”**  The four moments of the act of distinction, as we saw in “Four Moments of One Act,” are aspects of one act that mutually require one another. Removing mutual exclusion means removing one of these aspects. The remaining aspects lose their connection with being aspects of a *distinction*: they become merely components of a pair of statements, not the structure of an act.
 
 ### Without the Field `exhaustive`
 
@@ -771,7 +771,7 @@ Chapter 2 introduced the first formal object of the present work—the record `D
 Chapter 1 established the methodological matrix of the present volume: on meeting a structural boundary of formalization, acknowledge it, do not shrink it, and move on to the nearest formalizable object. In Chapter 2 this matrix was *applied for the first time*.
 
 - **Acknowledge the boundary.** $A = \exists$ remains the pre-formal ground and is not formalized in the entries of Rocq. The boundary established in § 1.3 is preserved.
-- **Do not shrink it.** No artificial constructions that try to get around this boundary are introduced (such as `Axiom A_exists : True` or the like); $A = \exists$ remains a fundamental fact of the ontology of Volume I.
+- **Do not shrink it.** No artificial constructions that try to get around this boundary are introduced (such as `Axiom A_exists : True` or the like); $A = \exists$ remains a fundamental fact of the ontology of “Metaphysics.”
 - **Move on to the nearest formalizable.** This formalizable turned out to be the act of distinction, unfolded in Chapter 2 as `Distinction`. The first formal definition has been made; properly mathematical work has begun.
 
 In this sense Chapter 2 completes the work begun in Chapter 1: what Chapter 1 pointed to as the first formalizable has become, in Chapter 2, a real object of Rocq, ready for further constructions.

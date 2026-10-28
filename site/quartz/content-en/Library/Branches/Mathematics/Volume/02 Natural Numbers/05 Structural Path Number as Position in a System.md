@@ -2,7 +2,7 @@
 title: "Chapter 5. The Structural Path: Number as Position in a System"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/02 Натуральные числа/05 Структурный путь число как позиция в системе.md"
-sourceBlob: d42e2a0041857cc9615b30a222ab8ae6cbf2a8bc
+sourceBlob: f7806b2809fa133ae4e21ee61acedf6ad5c910e3
 translated: 2026-10-20
 status: draft
 ---
@@ -45,13 +45,13 @@ The fourth path stands on one ground: on what a system is. If it is clear what i
 
 The statement to be grounded is this: *to be a system is to be an ordered collection of distinguishable places*. This statement has two components—“distinguishable places” and “ordered”—and each rests on its own law: the distinguishability of places is given by the law $L4$, the ordering by the law $L5$.
 
-### The Law $L4${L4}: Places Are Distinguishable
+### The Law $L4$: Places Are Distinguishable
 
 Let us state $L4$ as it is understood in Chapter I.3. The Law of Sufficient Reason is the statement that everything determinate has a ground for being precisely what it is. Chapter I.3 showed the special position of $L4$: it is a *meta-law*—it works over $L1$, $L2$, $L3$ as the very action of Logic in which the determinate becomes *grounded*. Applied to a system, $L4$ means: every element of a system has a ground for being in it—for having a *role*. An element without a role, without a ground for being there, is indistinguishable from what is not in the system (Chapter I.4).
 
 Let us apply this to the places of a system. A place in a system is a place *for a role*: it is a place precisely because something on it bears a definite role. Precision is needed here about what exactly $L4$ gives. The law $L4$ requires every *occupied* place to be *role-grounded*—the element standing on it must have a ground-role; an element without a role, without a ground for being there, is indistinguishable from what is not in the system (Chapter I.4). This is what $L4$ *proves*: every occupied place has a role grounding. What $L4$ does *not* give by itself is that *different* places necessarily have *different* roles: two places can bear similar or even one and the same role. Therefore the distinguishability of places in the strict sense is not provided by $L4$ alone. $L4$ gives that every occupied place is role-grounded—it stands in the system for a reason; the *distinguishability* of places as different ones is supplied by the link of $L4$ with $L5$: even if two positions bear similar roles, they are distinguishable as *different positions of the order*. The law $L4$, by requiring a role ground for every occupied place, keeps the places of a system from being an indifferent homogeneous mass; but that each place is *this* place and not another is finally provided by $L5$—the order to which the chapter turns next.
 
-### The Law $L5${L5}: Places Are Ordered
+### The Law $L5$: Places Are Ordered
 
 Let us state $L5$ in its formulation from Chapter I.3. The Law of Order is the statement that every determinacy carries order and hierarchy; its vertical side is the hierarchy of levels, its horizontal side is sequence. Applied to a system, $L5$ means: the places of a system are *ordered*—they stand in the relation “before—after,” “above—below”—rather than being heaped together as equals.
 
@@ -299,8 +299,7 @@ Thus the structural path has been traversed: a natural number is a position in a
 
 ### E/R/R Analysis: The Number-Position as a System
 
-{
-Of the four paths, the structural one is the closest to E/R/R (Part I): a position *is* a role—a place in a system—and the chapter has traversed both of its sides: the static (§ 5.2–5.4: places are distinguishable and ordered, a position is a number) and the dynamic (§ 5.5: an E/R/R system, in acting, measures correspondence; number is the self-measure). The headers of the supporting files give the labeling: *elements—$L1$, roles—$L4$, rules—$L5$* (`Roles.v`), and the E/R/R process runs in the direction Rules $\to$ Roles $\to$ Elements (`ERRProcess.v`, § 5.5).[^7] A caveat on status: the “system” here is a substantive interpretation (`StructuredSystem` with a partial assignment of places); `ss_L5_valid` fixes only one side of uniqueness, the first position requires nonemptiness (§ 5.3–5.4), and `process_entity` currently assigns only `Candidate`/`Invalid` (§ 5.5).}
+Of the four paths, the structural one is the closest to E/R/R (Part I): a position *is* a role—a place in a system—and the chapter has traversed both of its sides: the static (§ 5.2–5.4: places are distinguishable and ordered, a position is a number) and the dynamic (§ 5.5: an E/R/R system, in acting, measures correspondence; number is the self-measure). The headers of the supporting files give the labeling: *elements—$L1$, roles—$L4$, rules—$L5$* (`Roles.v`), and the E/R/R process runs in the direction Rules $\to$ Roles $\to$ Elements (`ERRProcess.v`, § 5.5).[^7] A caveat on status: the “system” here is a substantive interpretation (`StructuredSystem` with a partial assignment of places); `ss_L5_valid` fixes only one side of uniqueness, the first position requires nonemptiness (§ 5.3–5.4), and `process_entity` currently assigns only `Candidate`/`Invalid` (§ 5.5).
 
 *Rules* (the laws $L5$, $L4$).
 The constitution of the system is two laws: $L5$ orders the places (they stand in a series), $L4$ grounds the roles (an occupied place has a ground—the role that its occupant meets). Their linkage gives the series: the first position and the passage to the next—beginning and succession. To the statics, dynamics is added (§ 5.5): E/R/R is a *process*—the rules check (the agreement gate), roles are assigned according to the check (status), and elements are selected for the roles (by weight). $L1$–$L5$ all act; $L4$ and $L5$ are the distinctive ones.
@@ -309,7 +308,7 @@ The constitution of the system is two laws: $L5$ orders the places (they stand i
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are the occupants of places (the assignment `ss_assignment` is partial: a place may stay empty). By $L1$, each is identical to itself. By $P4$, a concrete system actualizes a *fragment* of the positional form—a finite number of occupied places—whereas the form of the series of positions itself is potentially infinite (§ 5.7).
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -320,10 +319,9 @@ The constitution of the system is two laws: $L5$ orders the places (they stand i
 | occupied places (`ss_assignment`, partial) | bearers (a fragment, $P4$) | Element |
 | laws $L1$–$L5$ (here $L4$, $L5$) | universal layer | Rule (univ.) |
 
-{
-*Well-formedness.* The labeling is unambiguous: the occupants of places are elements, position and weight are roles, $L4$/$L5$ and the E/R/R process are rules. $P1$ is observed: places are positions *inside* the system, the order is strict (no place precedes itself), and the system is not a position within itself. And here the analysis turns into a *diagnosis*—a concluding one at that. The fourth path makes *explicit* what the three previous paths showed implicitly: number is always a *role*—a count, a level, a number of bits, a position—not a self-standing element-object hanging outside every system. To take number for such an object is the same confusion of categories as taking a set or a point for a self-standing object (on this, Part I). Number *is a position in a structure*, a role; the structural path names this directly.}
+*Well-formedness.* The labeling is unambiguous: the occupants of places are elements, position and weight are roles, $L4$/$L5$ and the E/R/R process are rules. $P1$ is observed: places are positions *inside* the system, the order is strict (no place precedes itself), and the system is not a position within itself. And here the analysis turns into a *diagnosis*—a concluding one at that. The fourth path makes *explicit* what the three previous paths showed implicitly: number is always a *role*—a count, a level, a number of bits, a position—not a self-standing element-object hanging outside every system. To take number for such an object is the same confusion of categories as taking a set or a point for a self-standing object (on this, Part I). Number *is a position in a structure*, a role; the structural path names this directly.
 
- What the analysis yields. It leads to the synthesis of Part II (§ 5.8.3): since number is a role set by beginning and succession, the four paths are *one* role structure (one syntax) on four bearers (four semantics, § 5.8.4). The structural path is the E/R/R reading of number: it takes number directly as a position-role and shows that by the same numerical form the system *counts* itself as well (§ 5.5). In this way E/R/R links all four paths and closes Part II; the further extensions (integers, rationals) Part III will build as new systems of roles over the positions of number.
+What the analysis yields. It leads to the synthesis of Part II (§ 5.8.3): since number is a role set by beginning and succession, the four paths are *one* role structure (one syntax) on four bearers (four semantics, § 5.8.4). The structural path is the E/R/R reading of number: it takes number directly as a position-role and shows that by the same numerical form the system *counts* itself as well (§ 5.5). In this way E/R/R links all four paths and closes Part II; the further extensions (integers, rationals) Part III will build as new systems of roles over the positions of number.
 
 ### Synthesis: Why Four Paths Give One Series
 
@@ -355,7 +353,7 @@ This gives an ontological proof of what was sought. At the level of the derivati
 
 ### Transition to Part III
 
-Part II has traversed the natural number series to the end: it has established its primacy, its arrangement, its inevitability. Let us agree on notation: in this book the symbol $ℕ$ denotes the *positive* natural number series $1, 2, 3, …$—the series of ToS, which begins with one (Chapter II.1). This differs from the widespread convention according to which $0 \in ℕ$; the standard type `nat` of the Rocq repository, for its part, includes $0$ as a constructor, and wherever it is discussed this is specified separately. In the notation adopted here, $ℕ = \{1, 2, 3,
+Part II has traversed the natural number series to the end: it has established its primacy, its arrangement, its inevitability. Let us agree on notation: in this volume the symbol $ℕ$ denotes the *positive* natural number series $1, 2, 3, …$—the series of ToS, which begins with one (Chapter II.1). This differs from the widespread convention according to which $0 \in ℕ$; the standard type `nat` of the Rocq repository, for its part, includes $0$ as a constructor, and wherever it is discussed this is specified separately. In the notation adopted here, $ℕ = \{1, 2, 3,
 …\}$, and it is precisely this series that Part II has traversed. But the natural number series is not the whole of number. It is its *beginning*.
 
 In the natural number series the larger cannot be wholly subtracted from the smaller—and this shortfall will compel the extension of the series to the integers. In the integers one cannot divide without remainder—and this shortfall will compel going on to the rational numbers. ToS will traverse each extension just as it traversed the natural number series: as a derivation—as what has already been achieved compels—not as an adopted convention. Part III is devoted to this—to the integers and the rational numbers, and then to the interval and the real numbers.

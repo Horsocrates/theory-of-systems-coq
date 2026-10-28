@@ -2,7 +2,7 @@
 title: "Chapter 6. What Is Proved, What Is an Observation, What Is a Horizon"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/06 Что доказано, что наблюдение, что горизонт.md"
-sourceBlob: e11c0e53f9a27ac8fdadd906d70c427dd6d7b582
+sourceBlob: 981216443d4a32b240587c51364c4154ec213b54
 translated: 2026-10-20
 status: draft
 ---
@@ -11,10 +11,9 @@ status: draft
 
 The boundary is drawn, the verdict delivered, the map charted. What remains is that without which the synthesis would be not a summary but self-praise—an *honest accounting*: what of all that has been said in the volume is **proved** by machine, what is an **observation** on top of the proved, and what is an open **horizon**, not yet reached.
 
-{
-*The flagship: three registers of honesty. **Proved**—the machine core of the volume: over twenty-three thousand checked statements, not a single open gap, on two supporting axioms. **Observation**—the syntheses (the boundary, the atlas, the seed, “everything is a process”): backed by instances, but their universality is a matter of interpretation, not a theorem. **Horizon**—the honestly named open edges: the analytic content of zeta, full transfer, Navier–Stokes regularity.*}
+*The flagship: three registers of honesty. **Proved**—the machine core of the volume ([[Formalization]]): not a single open gap, on two supporting axioms. **Observation**—the syntheses (the boundary, the atlas, the seed, “everything is a process”): backed by instances, but their universality is a matter of interpretation, not a theorem. **Horizon**—the honestly named open edges: the analytic content of zeta, full transfer, Navier–Stokes regularity.*
 
-This chapter hides nothing. The strength of the book lies precisely in keeping the three registers apart: not passing off an observation as a theorem, and not keeping silent about the horizon.
+This chapter hides nothing. The strength of the volume lies precisely in keeping the three registers apart: not passing off an observation as a theorem, and not keeping silent about the horizon.
 
 ## Three Registers of Honesty
 
@@ -28,7 +27,7 @@ Every key statement of our final registry stands in exactly one of the three reg
 
 ## What Is Proved: The Machine Core
 
-The solid floor of the volume is its machine core. Over twenty-five thousand statements in almost two thousand files, *not a single* open gap (0 `Admitted`), and all of it on a surprisingly narrow axiom picture[^1].
+The solid floor of the volume is its machine core ([[Formalization]]): *not a single* open gap (0 `Admitted`), and all of it on a surprisingly narrow axiom picture[^1].
 
 **Where the classical layer appears.** The Law of Excluded Middle (L3) is used above all in talk of the completed side—of the continuum, of uncountability, of a perfect subset. The witness parameter (connected with P4) turns proved existence into a presentable object. The Element side—that of terminating processes—does not require it: it is *zero-axiom*, and this is checkable for each of its summary theorems.
 
@@ -70,7 +69,7 @@ The accounting itself is a *system*; let us analyze it briefly and close the vol
 
 **Well-formedness check.** Each statement is in one register; there is no mixing, and the self-assessment of the accounting is honest: this chapter itself stands in the register “observation and horizon,” not passing itself off as a theorem.
 
-And—the final word. The volume has gone from number-as-process to the concluding boundary and gathered all of mathematics under one principle: P4—there is no completed infinity; only finite stages are actual. Under it a number became a position-role, the continuum a Cauchy process, the manifold charts, the structural layer of the zeros of zeta a fixed point of a reflection, computation finitization, a function observation, the infinitesimal a germ. Not a multitude of ready things but one ontology of process, refracted by domains; one boundary separating the constructed from the named; one root of the far side. The book does not claim to have solved more than it has solved: the solid floor is machine-checked, the syntheses are named observations, the horizons horizons. But in this honesty lies its thesis: *mathematics is a process, not a warehouse of completed objects; and what can be constructed is separable from what can only be named*.
+And—the final word. The volume has gone from number-as-process to the concluding boundary and gathered all of mathematics under one principle: P4—there is no completed infinity; only finite stages are actual. Under it a number became a position-role, the continuum a Cauchy process, the manifold charts, the structural layer of the zeros of zeta a fixed point of a reflection, computation finitization, a function observation, the infinitesimal a germ. Not a multitude of ready things but one ontology of process, refracted by domains; one boundary separating the constructed from the named; one root of the far side. The volume does not claim to have solved more than it has solved: the solid floor is machine-checked, the syntheses are named observations, the horizons horizons. But in this honesty lies its thesis: *mathematics is a process, not a warehouse of completed objects; and what can be constructed is separable from what can only be named*.
 
 ---
 
@@ -84,4 +83,4 @@ And—the final word. The volume has gone from number-as-process to the concludi
 
 Part: [[20 Final Synthesis|Part XX. The Final Synthesis]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[Library/Branches/Mathematics/Volume/20 Final Synthesis/05 Map of Volume II Everything Is a Process|Chapter 5. The Map of Volume II: Everything Is a Process]]
+Navigation: ← [[Library/Branches/Mathematics/Volume/20 Final Synthesis/05 Map of Volume II Everything Is a Process|Chapter 5. The Map of the Volume: Everything Is a Process]]

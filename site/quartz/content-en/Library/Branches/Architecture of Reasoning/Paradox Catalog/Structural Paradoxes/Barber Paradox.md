@@ -2,7 +2,7 @@
 title: "Barber Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс парикмахера.md"
-sourceBlob: e9f92e41e7053bed881e09d893f9ed9ccd00c467
+sourceBlob: fb14fcb08d1f0c73f6c18b54320b2c70247df5b8
 translated: 2026-10-20
 status: draft
 description: "The rule is applied to the maker of the rule"

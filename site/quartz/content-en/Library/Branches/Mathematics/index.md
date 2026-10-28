@@ -2,7 +2,7 @@
 title: Mathematics
 lang: en
 translationOf: "Библиотека/Направления/Математика/index.md"
-sourceBlob: 15fe2421bf6de7ed0279d6b4eba637bf5387ada5
+sourceBlob: 12e5d74ea091095a157ac10f62d1adc05c968e85
 translated: 2026-10-17
 status: draft
 ---
@@ -30,7 +30,7 @@ Systems as such are not subject to mathematical laws but have their own—they s
 
 Here the laws are called by their names; their statuses are on the page [[Logic#The Unity of the Laws|“Logic”]]: Sufficient Reason and Order are meta-laws, Identity and Non-Contradiction are primary, and Excluded Middle is derived from them. The numbers under which the same laws appear in the author’s articles are given there too, in the line below the table; the formal code uses the same numbers ([[Formalization]]).
 
-Four cross-cutting motifs run through the whole volume: **positive ontology** (speaking of what is), **operational divisibility**, **sets as a mode**, **structural inevitability**.
+Four ontological positions run through the whole volume: **positive ontology** (speaking of what is), **operational divisibility**, **sets as a mode**, **structural inevitability**.
 
 ## The Price of Axioms
 
@@ -76,7 +76,7 @@ The finitization boundary coincides with the boundary of constructivity—this i
 
 The full edifice of the volume: 20 parts, 120 chapters—from the first distinction and the laws of logic to the final synthesis. Each part has its own page with a description and a list of chapters.
 
-[[00 Methodological Introduction|Methodological Introduction]]—the place of the volume in the series, the minimal ontological fragment, the convention on the two languages of the laws.
+[[00 Methodological Introduction|Methodological Introduction]]—the place of the volume in the Library, the minimal ontological fragment, the convention on the two languages of the laws.
 
 - **Foundations and numbers:** [[01 First Distinction and Laws of Logic|I. The First Distinction and the Laws of Logic]] · [[02 Natural Numbers|II. Natural Numbers]] · [[03 From Naturals to Rationals|III. From Naturals to Rationals]] · [[04 Process Real Numbers|IV. Process Real Numbers]].
 - **Analysis:** [[05 Topology and Analysis of Processes|V. Topology and Analysis of Processes]] · [[06 Measure and Integration|VI. Measure and Integration]] · [[07 Harmonic Analysis|VII. Harmonic Analysis]] · [[08 Ordinary Differential Equations|VIII. Ordinary Differential Equations]] · [[09 Partial Differential Equations|IX. Partial Differential Equations]].

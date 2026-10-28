@@ -2,7 +2,7 @@
 title: "Chapter 3. One Diagonal: Halting, Rice, Cantor, Kolmogorov"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/03 Одна диагональ halting, Райс, Кантор, Колмогоров.md"
-sourceBlob: 85a0d67090a104d52b3b7752483b67ba40fbfab1
+sourceBlob: 47229d1dd6baded40284e8b7fa1ff1897ae6fbbe
 translated: 2026-10-20
 status: draft
 ---
@@ -74,15 +74,16 @@ The fourth face is the *complexity* of an object (its shortest description). Lik
 
 ## One Diagonal, Four Faces (and Beyond)
 
-Let us gather the faces into one. All four are particular cases of one engine (`diagonal_ defeats_ decider`), rooted in Lawvere’s theorem:
+Let us gather the faces into one. All four are particular cases of one engine (`diagonal_defeats_decider`), rooted in Lawvere’s theorem:
 
 | **Face** | **Role-limit (ruled out by the diagonal)** | **Machine anchor** |
 |---|---|---|
 | program | a total halting decider | `no_halting_decider` |
 | set | a surjection $A\to(A\to\BB)$ (Cantor) | `cantor_no_surjection` |
 | semantics | a decider of a nontrivial property (Rice) | `rice_role_limit` |
-| complexity | a decider of the complexity criterion (Berry / Chaitin) | `kolmogorov_ role_ limit_ drawn` |
-| \multicolumn{3}{@{}p{0.93\textwidth}@{}}{*Element contrast (number):* the discriminant `rational_split` is *decidable* (`discriminant_element_drawn`)—a bridge to 15.4.} |
+| complexity | a decider of the complexity criterion (Berry / Chaitin) | `kolmogorov_role_limit_drawn` |
+
+*Element contrast (number):* the discriminant `rational_split` is *decidable* (`discriminant_element_drawn`)—a bridge to 15.4.
 
 These faces are assembled into one machine result: number (Element), program, set, and complexity are *one* boundary, four faces, a single engine $b\neq\negb b$.[^7] The *decidable* face (number, the discriminant) deliberately stands in the same theorem—it is the very mirror that 15.4 unfolds.
 
@@ -94,9 +95,7 @@ These faces are assembled into one machine result: number (Element), program, se
 
 **Roles (L4).**  The decider / oracle is a role-oracle; “halts,” “is complex,” “is true,” “is in the diagonal set” are role-limit predicates. Their Element twins (bounded halting, a trivial property, incompressibility-by-counting, the discriminant) are decidable—this is a different role.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete programs, finite runs, Boolean negation itself, the counting argument of the pigeonhole. *Not* an element: a total halting oracle, a total $K$-decider, a truth predicate, a universal set—the diagonal rules out each of them.}
+**Elements (L1${}+{}$P4).**  Concrete programs, finite runs, Boolean negation itself, the counting argument of the pigeonhole. *Not* an element: a total halting oracle, a total $K$-decider, a truth predicate, a universal set—the diagonal rules out each of them.
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -110,14 +109,14 @@ These faces are assembled into one machine result: number (Element), program, se
 
 ---
 
-[^1]: `src/cs/LawvereFixedPoint.v` (**0 axioms**): `point_surjective`, `lawvere_fixed_point`; the theorem `cs_ diagonals_ are_lawvere` formally assembles the root—`lawvere_fixed_point`, `negb_no_fixpoint`, and the Cantor face; halting / Rice / Kolmogorov use the same $\negb$ engine via `diagonal_ defeats_ decider`. The seed is `HaltingRoleLimit.negb_no_fixpoint` ($b\neq\negb b$). The universal engine is `src/cs/BoundaryDecidability.diagonal_defeats_decider`: if against every decider there is a self-negating witness, the criterion is role-limit-drawn.
+[^1]: `src/cs/LawvereFixedPoint.v` (**0 axioms**): `point_surjective`, `lawvere_fixed_point`; the theorem `cs_diagonals_are_lawvere` formally assembles the root—`lawvere_fixed_point`, `negb_no_fixpoint`, and the Cantor face; halting / Rice / Kolmogorov use the same $\negb$ engine via `diagonal_defeats_decider`. The seed is `HaltingRoleLimit.negb_no_fixpoint` ($b\neq\negb b$). The universal engine is `src/cs/BoundaryDecidability.diagonal_defeats_decider`: if against every decider there is a self-negating witness, the criterion is role-limit-drawn.
 [^2]: `src/cs/HaltingRoleLimit.v` (**0 axioms**): `no_halting_decider` (there is no decider of self-application under self-programmability, `SelfProgrammable`), `no_total_halting_oracle`. The Element twin is `bounded_halting_decidable` from 15.1.
 [^3]: `src/cs/HaltingRoleLimit.cantor_no_surjection` (**0 axioms**); as a particular case of Lawvere: `LawvereFixedPoint.cantor_via_lawvere`, `nat_fun_not_enumerable`.
 [^4]: The uncountability of the completed continuum is `ProcessDiagonal.binary_processes_not_enumerable`, `ProcessContinuumHypothesis.process_continuum_hypothesis`: the layer L3 (classic)${}+{}$L4, separate and stronger (cf. Part IV). The contrast is honest: `cantor_no_surjection` and halting do NOT require classic—this is what “the Element side is constructive” means.
 [^5]: `src/cs/RiceRoleLimit.v` (**0 axioms**): `trivial_property_element_drawn` (the trivial is an Element, decidable), `RiceDiagonal` and `rice_diagonal_exists` (the self-negating witness), `rice_role_limit`, `rice_no_semantic_decider`.
-[^6]: `src/cs/KolmogorovRoleLimit.v` (**0 axioms**): `incompressible_exists` (Element / counting: for a budget $n$ there is an indescribable object), `kolmogorov_ role_ limit_ drawn` proves the role-limit character of the criterion `Complex` under the Berry / Chaitin diagonal (a particular case of `diagonal_ defeats_ decider`); this is *not* a theorem on the invariance of $K$ and not a universal machine in full generality.
-[^7]: The formal capstone of the section is `src/cs/ KolmogorovRoleLimit. one_boundary_ four_faces`; it extends `BoundaryDecidability. one_boundary_ three_faces`; **0 axioms**.
-[^8]: `src/cs/RussellViaLawvere.v` (`russell_ no_universal_set`, `liar`, `grelling`, `paradoxes_ one_diagonal`; the seed is `not_no_fixpoint`: $(\neg P)\neq P$); `src/cs/TarskiUndefinability.v` (`tarski_ no_truth_predicate`, `tarski_ from_lawvere`). **0 axioms**.
+[^6]: `src/cs/KolmogorovRoleLimit.v` (**0 axioms**): `incompressible_exists` (Element / counting: for a budget $n$ there is an indescribable object), `kolmogorov_role_limit_drawn` proves the role-limit character of the criterion `Complex` under the Berry / Chaitin diagonal (a particular case of `diagonal_defeats_decider`); this is *not* a theorem on the invariance of $K$ and not a universal machine in full generality.
+[^7]: The formal capstone of the section is `src/cs/ KolmogorovRoleLimit. one_boundary_four_faces`; it extends `BoundaryDecidability. one_boundary_three_faces`; **0 axioms**.
+[^8]: `src/cs/RussellViaLawvere.v` (`russell_no_universal_set`, `liar`, `grelling`, `paradoxes_one_diagonal`; the seed is `not_no_fixpoint`: $(\neg P)\neq P$); `src/cs/TarskiUndefinability.v` (`tarski_no_truth_predicate`, `tarski_from_lawvere`). **0 axioms**.
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Part X. Set Theory without the Axiom of Choice"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/index.md"
-sourceBlob: 82f414dc4cf195eb88691c4fbf4fc871839aea8b
+sourceBlob: 1691831477383fec1ef21fb543f95b1032ef9669
 translated: 2026-10-20
 status: draft
 description: "The set as a system, not an object: comparing cardinalities without choice, the reinterpretation of the Axiom of Choice, ordinals as processes."

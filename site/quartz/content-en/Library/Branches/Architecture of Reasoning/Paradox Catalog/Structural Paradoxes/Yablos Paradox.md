@@ -2,7 +2,7 @@
 title: "Yablo’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Ябло.md"
-sourceBlob: 2117a16e4e20f37387b07a67d6697404545149d2
+sourceBlob: b7df42c52983680a2aa0635b2dae61e59584ab9f
 translated: 2026-10-20
 status: draft
 description: "Distributed self-reference through an infinite chain"

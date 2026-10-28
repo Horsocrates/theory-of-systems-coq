@@ -2,7 +2,7 @@
 title: "Chapter 1. Metric on Processes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/01 Метрика на процессах.md"
-sourceBlob: 3880e5ba624de6fa068ff303592ba8f235cb73cf
+sourceBlob: 3bc0c920d9b9f5e589315c3ac4f15e9caab7de66
 translated: 2026-10-20
 status: draft
 ---
@@ -49,9 +49,7 @@ It is worth beginning with the simplest distance there is in ToS: the distance b
 Definition Q_dist (x y : Q) : Q := Qabs (x - y).
 ```
 
-{
 Let us note one peculiarity of the repository at once: the same definition occurs in it under several names. In `ProcessTopMetric.v` it is called `qdist`; in `ProcessGeneral.v`, `Qdist`. All three—`Q_dist`, `qdist`, `Qdist`—are one construction: $|x-y|$ for rational $x,y$. This is one notion in three files, not three different notions. From here on the chapter will use the working name `qdist`; the reader need only remember that behind all three names stands one and the same absolute value of a difference.
-}
 
 | Name | File | Role |
 |---|---|---|
@@ -79,9 +77,9 @@ Let us note what is *not* in this list. The property of zero on the diagonal is 
 
 ### Distance Is Positive by Its Nature
 
-It is worth dwelling on the first of the four properties, non-negativity. In ToS it manifests a recurring motif of the whole volume and is no accidental technical detail: distance is *structurally positive*. The absolute value of a rational number is non-negative because the absolute value *is* an operation that discards the sign by construction; convenience of postulation plays no part here. A “negative distance” does not occur because of how distance is arranged, and nothing needs to rule it out: from the very start it is a quantity without a sign.
+It is worth dwelling on the first of the four properties, non-negativity. In ToS it manifests a position of the whole volume and is no accidental technical detail: distance is *structurally positive*. The absolute value of a rational number is non-negative because the absolute value *is* an operation that discards the sign by construction; convenience of postulation plays no part here. A “negative distance” does not occur because of how distance is arranged, and nothing needs to rule it out: from the very start it is a quantity without a sign.
 
-This agrees with the general positive ontology of ToS. Distances, norms, lengths, volumes—all measures of separatedness and extension—are non-negative structurally, not by convention. The chapter will meet this motif more than once: it will return when we come to the integral of a non-negative function. The metric is its first example in Part V; in the E/R/R analysis (§ 1.3.2) non-negativity will turn out to be one of the *rules* (Rules) that sustain distance.
+This agrees with the general positive ontology of ToS. Distances, norms, lengths, volumes—all measures of separatedness and extension—are non-negative structurally, not by convention. The chapter will meet structural non-negativity more than once: it will return when we come to the integral of a non-negative function. The metric is its first example in Part V; in the E/R/R analysis (§ 1.3.2) non-negativity will turn out to be one of the *rules* (Rules) that sustain distance.
 
 ### The Level of Rational Numbers
 
@@ -154,25 +152,19 @@ At this level of formalization ToS chooses a *rational-valued* metric: every fin
 
 Care is needed here; otherwise the abstract frame will sound stronger than it is. Among the four hypotheses of the section there is `d_zero`—but let us look closely at its form. `d_zero` asserts *only* that $d(x,x) = 0$: the distance from a point to itself is zero. This is *zero on the diagonal*.
 
-{
 The classical definition of a metric requires more, namely *strict separation*: $d(x,y) = 0 \Rightarrow x = y$, that is, zero distance is possible only between coinciding points. And precisely this stronger hypothesis is *absent* from the abstract section of `MetricSpace.v`: it is not among the four `Hypothesis` entries.
-}
 
 What does this mean? That the abstract section, strictly speaking, fixes not a full metric but a slightly weaker structure—if we keep to strict terminology, closer to a *pseudometric*. This is no omission: for many arguments (convergence, Cauchy, contraction) strict separation is not even needed, and the section honestly takes exactly the hypotheses that do the work. Where separation is required, it is proved *separately* for the concrete space. The rational distance has it: in `ProcessTopMetric.v` the lemma `qdist_zero_iff` establishes that $|x-y| = 0$ if and only if $x = y$. That is, the rational metric has separation, while the abstract frame does not presuppose it as a general hypothesis. The chapter marks this line between them so that a reader who strictly distinguishes a metric from a pseudometric does not take the abstract section for more than it asserts.
 
 ### What Is Proved in the General Frame
 
-{
 Within this frame we introduce the key notions of analysis—those that all of Part V will need later—and prove several general lemmas. There are three notions: a *Cauchy sequence* in a metric space (its values come arbitrarily close to one another beyond some cutoff), the *limit* of a sequence, and a *contraction mapping*. In `MetricSpace.v` they correspond to `is_cauchy_metric`, `is_limit_metric`, and `is_contraction_metric`.
-}
 
-{
 The lemmas are general facts, true in *every* metric space. Non-negativity with the arguments swapped (`d_nonneg_alt`). If a sequence converges to two limits, the distance between these limits is arbitrarily small (`limit_dist_zero`)—the germ of the uniqueness of the limit. Every convergent sequence is Cauchy (`cauchy_of_limit`)—one of the two classical implications between convergence and the Cauchy property. And several lemmas on contraction mappings: the contraction factor is non-negative and strictly less than one, and a contraction does not increase distances.
-}
 
 All this is general theory, proved once, for every metric space. `MetricSpace.v` carries eighteen verified lemmas and uses not a single axiom; of these, seven belong to the abstract section, and the rest belong to the metric on $ℚ$ and the $L^\infty$ metric on `QVec`, discussed below. Further constructions will rest on this general frame, beginning with the next section, where distance first becomes a process.
 
-## Two Process Distances: Pointwise and Finite-Horizon{Two Process Distances}
+## Two Process Distances: Pointwise and Finite-Horizon
 
 ### Distance Ceases to Be a Number
 
@@ -201,10 +193,7 @@ Definition metric_cauchy (a : RealProcess) : Prop :=
       qdist (a m) (a n) < eps.
 ```
 
-{
-
 A process $a$ satisfies `metric_cauchy` if its values, measured by the rational distance `qdist`, come arbitrarily close to one another beyond some cutoff. And `ProcessTopMetric.v` proves that this is exactly the ordinary process Cauchy condition:
-}
 
 ```coq
 Theorem metric_cauchy_equiv : forall a,
@@ -240,7 +229,7 @@ Let us read it carefully. `process_dist` $f\;g\;N$ for fixed $N$ is a *finite we
 
 Let us name this construction precisely: `process_dist` is a *finite-horizon observable distance*. It is the distance between two processes as seen *up to level $N$*, up to a finite horizon of observation. The farther the horizon $N$ is pushed, the more steps are taken into account; but for every fixed $N$ this is a finite rational quantity.
 
-It is essential to see what `process_dist` is *not*. It is *not* the pointwise process of distances $n \mapsto |P(n)-Q(n)|$ from the previous subsection: there each step carries one discrepancy, here each horizon $N$ carries the accumulated weighted sum of all discrepancies up to it. (If, however, $f$ and $g$ are fixed and $N$ is let run through the step numbers, then the map $N \mapsto `process_dist` f g N$ is itself a process—a process of *accumulated finite-horizon* distances; this is a different process from the pointwise $n \mapsto |P(n)-Q(n)|$, and the two must not be confused.) Nor is `process_dist` a limit distance between classes of processes: there is no passage to a limit in the definition, only a finite horizon. `process_dist` is a convenient measure of how far two processes have diverged *within the surveyable range*; the weight factor $(1/2)^k$ guarantees that distant steps contribute less and less.
+It is essential to see what `process_dist` is *not*. It is *not* the pointwise process of distances $n \mapsto |P(n)-Q(n)|$ from the previous subsection: there each step carries one discrepancy, here each horizon $N$ carries the accumulated weighted sum of all discrepancies up to it. (If, however, $f$ and $g$ are fixed and $N$ is let run through the step numbers, then the map $N \mapsto \texttt{process\_dist} f g N$ is itself a process—a process of *accumulated finite-horizon* distances; this is a different process from the pointwise $n \mapsto |P(n)-Q(n)|$, and the two must not be confused.) Nor is `process_dist` a limit distance between classes of processes: there is no passage to a limit in the definition, only a finite horizon. `process_dist` is a convenient measure of how far two processes have diverged *within the surveyable range*; the weight factor $(1/2)^k$ guarantees that distant steps contribute less and less.
 
 Let us gather the three constructions of distance on processes into a table; it fixes the distinction on which the whole section rests:
 
@@ -248,18 +237,13 @@ Let us gather the three constructions of distance on processes into a table; it 
 |---|---|---|
 | $n \mapsto |P(n)-Q(n)|$ | process over $ℚ$ | pointwise discrepancy at each level (a notion of the chapter; there is no separate name in the code) |
 | `process_dist` $P Q N$ | $ℚ$, for fixed $N$ | weighted sum of discrepancies up to horizon $N$ |
-| $N \mapsto `process_dist` P Q N$ | process over $ℚ$ | accumulated finite-horizon distances |
-
-{
+| $N \mapsto \texttt{process\_dist} P Q N$ | process over $ℚ$ | accumulated finite-horizon distances |
 
 The first row is the pointwise distance of § 1.4.2; the second is `process_dist` itself from `ProcessSpace.v`, a rational number for a given horizon; the third is the same `process_dist` read as a process in the horizon. All three are legitimate; mixing them is not.
-}
 
 ### ProcessSpace.v as an Infrastructure Layer
 
-{
 Around `process_dist` it is natural to build a small topological apparatus—and it has been built: `cylinder` (agreement of processes on the first $N$ coordinates within a radius), `process_ball` (a ball in the finite-horizon distance), `process_bounded` (boundedness of a process). Basic facts are proved: the distance from a process to itself is zero, the center lies in its ball, a constant process is bounded. All of this is gathered in the file `ProcessSpace.v`.
-}
 
 Here it is important to outline precisely what this layer *is* and what it is not. `ProcessSpace.v` is an *infrastructure* layer: it lays down the rudiments of a topology on the space of processes, but it does not build a full metric on the type of classes `RealPoint`. It contains a theorem with a grand name, `process_space_complete`, and here the chapter is obliged to call things by their proper names. Contrary to its name, `process_space_complete` is *not* a theorem about the completeness of the space of processes. If one reads its proof closely, it turns out to be a simple *conjunction of two already proved trivial lemmas*: “the distance from a process to itself is zero” and “the center lies in its ball.” It is a useful summary of two elementary facts, but not a statement that every Cauchy sequence of processes converges. The name promises more than the theorem gives, and our audit notes this directly. Genuine completeness—and why it is a *notion* here rather than a proved theorem—is the subject of § 1.6.
 
@@ -273,7 +257,7 @@ Up to now processes have been Cauchy processes over $ℚ$—functions from the s
 Definition GenProcess (A : Type) := nat -> A.
 ```
 
-A Cauchy process is a particular case, $A = ℚ$. The binary process of Chapter 4.5 is a particular case, $A = `bool`$. `GenProcess` is the general form of them all.
+A Cauchy process is a particular case, $A = ℚ$. The binary process of Chapter 4.5 is a particular case, $A = \texttt{bool}$. `GenProcess` is the general form of them all.
 
 Over this general type we also build a general apparatus: `observe` (read the value at step $n$), `prefix` (collect the first $n$ values into a list—a finite observation, in the spirit of $P4$), `process_map` (apply a function at each step), `const_process` (the constant process). All this is the content of `ProcessGeneral.v`.
 
@@ -292,9 +276,7 @@ Definition is_cauchy_gen {A : Type} (dist : A -> A -> Q)
 
 Note that the distance $\mathit{dist}$ here again has values in $ℚ$—the same logic as in the abstract metric frame of § 1.3. `is_cauchy_gen` generalizes the Cauchy condition of Chapter 4.2 to any type with a rational distance. And it is worth making sure that the generalization has not drifted away from the original notion: for $A = ℚ$ with the distance $|x-y|$, the generalized condition coincides exactly with the ordinary Cauchy condition. This coincidence is confirmed by the lemma `cauchy_Q_equiv` from `ProcessGeneral.v`: `is_cauchy` and `is_cauchy_gen Qdist` are equivalent. In the terms of the analysis of § 1.3.2 this is the same role—distance as a measure of separatedness—generalized to an arbitrary carrier type $A$: the Elements change, while the role of distance itself remains.
 
-{
 A useful lemma of this layer is `process_map_cauchy`: a map that does not *increase* distances sends a Cauchy process to a Cauchy process. And a related one, already in `ProcessTopMetric.v`, is `cauchy_map_lipschitz`: a Lipschitz map preserves the Cauchy property. These lemmas are groundwork for continuity: they say that “good” maps respect convergence. We will return to continuity in § 5.3 of the volume.
-}
 
 ### The Name process_equiv in Different Files
 
@@ -353,13 +335,11 @@ Cauchy` from `ProcessCore.v`) or an explicitly attached modulus. It is no accide
 *distinguishes* `is_Cauchy` and `is_Regular_
 Cauchy`: this distinction is exactly what separates the logical property from the one that carries computable data.
 
-Therefore the chapter formulates this cautiously. Not “a Cauchy proof already is an algorithm,” but this: in the ToS reading, a Cauchy proof *points to* a rule for finding the cutoff; and for a computable implementation of this rule an *explicit* modulus or a regular variant of the Cauchy property is useful. The ontological thesis that in ToS existence and constructibility draw close remains in force as a recurring process motif of ToS and as an *interpretation*—but it is not an automatic property of every Prop proof, and the chapter does not pass it off as one.
+Therefore the chapter formulates this cautiously. Not “a Cauchy proof already is an algorithm,” but this: in the ToS reading, a Cauchy proof *points to* a rule for finding the cutoff; and for a computable implementation of this rule an *explicit* modulus or a regular variant of the Cauchy property is useful. The ontological thesis that in ToS existence and constructibility draw close remains in force as an expression of the processuality of the ontology of ToS and as an *interpretation*—but it is not an automatic property of every Prop proof, and the chapter does not pass it off as one.
 
 ### What Remains
 
-{
 Let us draw a line under the section. Completeness in Chapter 5.1 is a *notion*: the definition `is_complete_metric`, clean and checkable. The application of this notion to a concrete process space—a proof that one space of classes or another is complete—has *not been carried out* in the supporting files of the chapter and is honestly left as a direction. This is the “infrastructure mode” of which § 1.1 gave warning: the notion is built, the boundary is named, and neither is passed off as the other.
-}
 
 ## The Archimedean Property as Fuel
 
@@ -400,9 +380,7 @@ This is the Archimedean property at work: a concrete table showing how many step
 
 And an honest caveat, in the spirit of the whole chapter. The seven *main* supporting files of Chapter 5.1 declare in their headers the status “0 axioms”—not a single axiom; this was said in § 1.1. For a strict audit of a concrete theorem, the status is still checked with the command `Print Assumptions`: a declaration in a file header does not replace it.
 
-{
 The present section, however, additionally relies on a separate file, `Archimedean_ERR.v`, where the Archimedean property of $ℚ$ is formalized. Therefore the chapter makes no sweeping claim that “the whole chapter stands on zero axioms.” The precise formulation is this: the seven main files are axiom-free; the section on the Archimedean property draws on `Archimedean_ERR.v` in addition, and its dependence on axioms, if any, has to be established separately—with the command `Print Assumptions` for the corresponding theorem. This is the same discipline as in Chapter 4.6: axiom status is checked for a concrete theorem, not ascribed wholesale to a file or a chapter.
-}
 
 ## What Has Been Built and What Is Being Prepared. Summary of the Chapter
 
@@ -431,18 +409,16 @@ The chapter opened Part V, and it is most honest to sum it up as “infrastructu
 
 ### The Metric on Classes: Built
 
-{
 The list “not built” refers to *this* chapter and its seven supporting files. The metric on the classes `RealPoint` itself has *been built* in the repository, in a separate file, `RealPointMetric.v`; it is worth naming concretely what it consists of, so that the boundary of the chapter is drawn precisely.
 
 First, the pointwise distance as a named construction—and with values directly in the *reals*, not the rationals: the distance between two points is itself a point (a process),
 
 $$
-`rp_dist`\;(a b : `RealPoint`)
-  := \;`cauchy_abs` (`cauchy_sub`\;a\;b),
+\texttt{rp\_dist}\;(a b : \texttt{RealPoint})
+  := \;\texttt{cauchy\_abs} (\texttt{cauchy\_sub}\;a\;b),
 $$
 
 that is, $|a-b|$ as a process. Second, those very two lemmas. The first: the process of distances is Cauchy (`cauchy_abs_is_cauchy`, the sketched estimate of § 1.4.2, now a theorem). The second: `rp_dist` is *compatible* with equivalence—replacing representatives by equivalent ones does not change the distance (`rp_dist_compat` and the instance `rp_dist_Proper`). It is precisely the second lemma that makes the distance *descend* from processes to classes and turns `RealPoint` into a metric space. Beyond that, the four axioms of a metric are proved—non-negativity (`rp_dist_nonneg`), zero on the diagonal (`rp_dist_self_zero`), symmetry (`rp_dist_sym`), the triangle (`rp_dist_triangle`)—and, beyond them, separation (`rp_dist_eq_zero_iff`). So what separates the chapter from a metric on classes is no longer a gap: the metric is built, though in `RealPointMetric.v` rather than in the seven files of *this* chapter. What remains open is only the next layer, the metric *completeness* of the space of classes (§ 1.6).
-}
 
 ### A Bridge to Multidimensional Analysis
 
@@ -452,11 +428,11 @@ One remark for the future. The file `MetricSpace.v` contains not only the distan
 
 Chapter 5.1 has laid the first analytic layer of Part V: distance. It traveled the path from the simplest rational $|x-y|$ through the abstract metric frame to process distances—and at every step it kept the boundary between what is proved and what is only sketched. The main turn: the *pointwise* distance between processes is itself a process, not a completed number (and alongside it `process_dist` gives a finite-horizon distance, a different layer); the main caution: completeness is so far a notion, not a theorem. On this foundation Part V will build topology, continuity, and all further analysis.
 
-{*The summary of the chapter comes in three parts. First: what is built. The distance between rational numbers—$|x-y|$ with the four proved axioms of a metric; the abstract metric frame as a parametric `Section`; distance as a process—`metric_cauchy` over `RealProcess`, equivalent to the ordinary Cauchy condition; the finite-horizon observable distance `process_dist`; bridges between `CauchySeq`, `RealProcess`, and `GenProcess`. All seven supporting files are axiom-free.*}
+*The summary of the chapter comes in three parts. First: what is built. The distance between rational numbers—$|x-y|$ with the four proved axioms of a metric; the abstract metric frame as a parametric `Section`; distance as a process—`metric_cauchy` over `RealProcess`, equivalent to the ordinary Cauchy condition; the finite-horizon observable distance `process_dist`; bridges between `CauchySeq`, `RealProcess`, and `GenProcess`. All seven supporting files are axiom-free.*
 
-{*Second: what this rests on. Distance takes values in the rational numbers: the process metric does not require a completed “$ℝ$.” The abstract section fixes the basic structure—non-negativity, zero on the diagonal, symmetry, the triangle; strict separation does not enter it as a general hypothesis, and for the rational metric it is proved separately. $\varepsilon$-arguments rely on the Archimedean property of $ℚ$, which makes the refinement of precision computably finite.*}
+*Second: what this rests on. Distance takes values in the rational numbers: the process metric does not require a completed “$ℝ$.” The abstract section fixes the basic structure—non-negativity, zero on the diagonal, symmetry, the triangle; strict separation does not enter it as a general hypothesis, and for the rational metric it is proved separately. $\varepsilon$-arguments rely on the Archimedean property of $ℚ$, which makes the refinement of precision computably finite.*
 
-{*Third: what remains open. The metric on the classes `RealPoint` is already built—outside the seven files of this chapter, in `RealPointMetric.v` (`rp_dist` with the axioms and `rp_dist_Proper`; § 1.8.2). What remain open are *full metric completeness* of the space of these classes (completeness is introduced as a notion, not as a proved theorem) and a reified quotient type as a separate object; the latter ToS deliberately does not build, by $P4$ (Chapter 4.3). The chapter has given the foundation, distance; the topology and continuity that will stand on it are the subject of the following chapters of Part V.*}
+*Third: what remains open. The metric on the classes `RealPoint` is already built—outside the seven files of this chapter, in `RealPointMetric.v` (`rp_dist` with the axioms and `rp_dist_Proper`; § 1.8.2). What remain open are *full metric completeness* of the space of these classes (completeness is introduced as a notion, not as a proved theorem) and a reified quotient type as a separate object; the latter ToS deliberately does not build, by $P4$ (Chapter 4.3). The chapter has given the foundation, distance; the topology and continuity that will stand on it are the subject of the following chapters of Part V.*
 
 ---
 

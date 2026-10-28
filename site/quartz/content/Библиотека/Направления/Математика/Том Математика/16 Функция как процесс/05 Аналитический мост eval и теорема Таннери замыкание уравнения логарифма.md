@@ -26,13 +26,13 @@ $$
 сама теорема Таннери, затухание $n z^n \to 0$, конечная перестановка Фубини и аддитивность
 $\mathrm{eval}$ — *аксиомо-свободны*; L3 входит лишь в финальную сборку равенств.
 
-## Мост вычисления: $\mathrm{eval}${eval} как гомоморфизм
+## Мост вычисления: $\mathrm{eval}$ как гомоморфизм
 
 Формальный ряд — это коэффициент-процесс (Глава 16.1). Зафиксируем точку $x$, $0\le x<1$. Частичные
 суммы $\sum a_n x^n$ образуют Коши-процесс — *значение* ряда в точке:
 
 $$
-\mathrm{eval} a x \;:=\; \operatorname{series_limit}\Bigl(\textstyle\sum_n a_n x^n\Bigr).
+\mathrm{eval} a x \;:=\; \operatorname{series\_limit}\Bigl(\textstyle\sum_n a_n x^n\Bigr).
 $$
 
 Это вычисление — *гомоморфизм* из формального исчисления Главы 16.2 в числа-процессы:
@@ -47,24 +47,24 @@ $$
 именные ряды с их классическими значениями:
 
 $$
-\mathrm{eval} `exp_fps` t \sim \exp(t), \quad
-  \mathrm{eval} `log1m_fps` x \sim L(x).
+\mathrm{eval} \texttt{exp\_fps} t \sim \exp(t), \quad
+  \mathrm{eval} \texttt{log1m\_fps} x \sim L(x).
 $$
 
 Здесь $L$ — всюду в главе *положительный* логарифм-процесс $L(x) = -\ln(1-x) = \sum_{n\ge1}
 x^n/n$; соответственно `log1m_fps` читается как ряд для $-\ln(1-x)$, а *не* для $\ln(1-x)$.
-То есть $\mathrm{eval}$ играет роль *функтора* <<формальное $\to$ аналитическое>> (в категориальном
+То есть $\mathrm{eval}$ играет роль *функтора* «формальное $\to$ аналитическое» (в категориальном
 чтении; в самой формализации это *гомоморфизм оценки*, без отдельного categorical-слоя): он
 переносит коэффициентную алгебру Главы 16.2 в равенства *чисел* и закрепляет двух героев —
 экспоненту и логарифм — за их аналитическим смыслом.[^1]
 
 ## Формальное сердце, оценённое
 
-Формальное сердце Главы 16.3 было равенством рядов $E\circ L = `geom`$. Применим $\mathrm{eval}$ в
+Формальное сердце Главы 16.3 было равенством рядов $E\circ L = \texttt{geom}$. Применим $\mathrm{eval}$ в
 точке $x$:
 
 $$
-\mathrm{eval} (`exp_fps` \circ `log1m_fps`) x \;\sim\; \frac{1}{1-x}.
+\mathrm{eval} (\texttt{exp\_fps} \circ \texttt{log1m\_fps}) x \;\sim\; \frac{1}{1-x}.
 $$
 
 Тождество, жившее на коэффициентах, теперь держится как равенство *чисел*-процессов — в каждой
@@ -95,7 +95,7 @@ $$
 детали делают её *нужным* и притом *честным* инструментом:
 
 - Мажоранту здесь поставляет затухание $n z^n \to 0$: $k$-й блок ограничен $\sigma^k$ при суммируемом $\sigma<1$ — ровно $M(k)$ Таннери.
-- Теорема Таннери в нашей системе *аксиомо-свободна* — <<Closed under the global context>>, — и таковы же затухание $n z^n\to0$ и конечный Фубини. Аналитический клей, лицензирующий перестановку, вполне конструктивен; L3 несут лишь обрамляющие конструкции вещественных равенств (`series_limit`, $\exp_{ℝ}$).
+- Теорема Таннери в нашей системе *аксиомо-свободна* — «Closed under the global context», — и таковы же затухание $n z^n\to0$ и конечный Фубини. Аналитический клей, лицензирующий перестановку, вполне конструктивен; L3 несут лишь обрамляющие конструкции вещественных равенств (`series_limit`, $\exp_{ℝ}$).
 
 Итог — ключевая лемма-стык:
 
@@ -157,10 +157,10 @@ $$
 | компонент главы | роль в системе | слой E/R/R |
 |---|---|---|
 | частичные суммы $\mathrm{eval}$, конечные свёртки и блоки на стадии $n$ | носители, конечны | Element (P4) |
-| $\mathrm{eval}$ — гомоморфизм оценки | мост формальное $\to$ аналит.\ (функтор.\ чтение) | Role |
+| $\mathrm{eval}$ — гомоморфизм оценки | мост формальное $\to$ аналит. (функтор. чтение) | Role |
 | ключ и замыкание $L(x){+}L(y)\sim L(x\oplus y)$ | аддитивность $L$ над $\oplus$ | Role |
 | Таннери, $n z^n\to0$, конечный Фубини | аксиомо-свободные оценки | Rule (0 акс.) |
-| геом.\ групповой закон, ключ, инъективность $\exp_{ℝ}$ | процесс-оценки | Rule (L3) |
+| геом. групповой закон, ключ, инъективность $\exp_{ℝ}$ | процесс-оценки | Rule (L3) |
 
 **Elements.** На каждой стадии $n$ — конечные рациональные частичные суммы $\mathrm{eval}$,
 конечные перестановки Фубини, конечные блоки Таннери. Element-сторона цела.
@@ -178,7 +178,7 @@ $ℚ$-процессами; его *аналитическое* замыкани
 Главы 16.4. Но аналитическое *ядро* необычно чисто — разделение проверено машинно
 (`Print Assumptions`):
 
-| аксиомо-свободно (0 акс., <<Closed>>) | только L3 (`Classical_Prop.classic`) |
+| аксиомо-свободно (0 акс., «Closed») | только L3 (`Classical_Prop.classic`) |
 |---|---|
 | `tannery`, `n_times_pow_limit`, `eval_compose_swap`, `eval_add` | `eval_mul`, `eval_exp`, `eval_log1m`, `eval_pow`, `eval_compose_exp_log1m_geom`, `geom_inv`, `geom_mul`, `ln_mul_from_key`, `boss`, `exp_R_ln_proc_is_geom`, `ln_mul_closed` |
 
@@ -201,10 +201,10 @@ $ℚ$-процессами; его *аналитическое* замыкани
 
 ---
 
-[^1]: `src/FPSEval.v` (32 Qed, 0 Admitted): `eval_add` — *аксиомо-свободна*; `eval_mul`, `eval_pow`, `eval_exp` ($\mathrm{eval} `exp_fps` t \sim `exp_limit` t$), `eval_log1m` ($\mathrm{eval} `log1m_fps` x \sim `ln_proc` x$) — без новых аксиом, только L3. Машинно проверено.
-[^2]: `src/FPSEval.v`: `eval_compose_exp_log1m_geom` ($\mathrm{eval}(E\circ L) x \sim `geometric_limit` x$) — без новых аксиом, только L3; её опора `eval_compose_swap` (конечный Фубини при $g(0)=0$) — *аксиомо-свободна*.
+[^1]: `src/FPSEval.v` (32 Qed, 0 Admitted): `eval_add` — *аксиомо-свободна*; `eval_mul`, `eval_pow`, `eval_exp` ($\mathrm{eval} \texttt{exp\_fps} t \sim \texttt{exp\_limit} t$), `eval_log1m` ($\mathrm{eval} \texttt{log1m\_fps} x \sim \texttt{ln\_proc} x$) — без новых аксиом, только L3. Машинно проверено.
+[^2]: `src/FPSEval.v`: `eval_compose_exp_log1m_geom` ($\mathrm{eval}(E\circ L) x \sim \texttt{geometric\_limit} x$) — без новых аксиом, только L3; её опора `eval_compose_swap` (конечный Фубини при $g(0)=0$) — *аксиомо-свободна*.
 [^3]: `src/Tannery.v` (4 Qed, 0 Admitted): `tannery` — *аксиомо-свободна*. `src/PolyTimesGeom.v` (2 Qed): `n_times_pow_limit` ($n z^n\to0$) — *аксиомо-свободна*. Стык `boss` (`src/LnMulClosed.v`) — без новых аксиом, только L3. Машинно проверено.
-[^4]: `src/LnMulReduction.v` (6 Qed, 0 Admitted): `geom_inv`, `geom_mul` (закон $\oplus$), `ln_mul_from_key` (<<ключ $\Rightarrow$ уравнение>>). `src/LnMulClosed.v` (11 Qed, 0 Admitted): `exp_R_ln_proc_is_geom` (ключ), `ln_mul_closed` (замыкание). Без новых аксиом, только L3. Сама формулировка-Prop `ln_mul_functional_equation` живёт в `src/Log2FunctionalEq.v` (7 Qed, 0 Admitted) как горизонт — здесь он снят. Машинно проверено.
+[^4]: `src/LnMulReduction.v` (6 Qed, 0 Admitted): `geom_inv`, `geom_mul` (закон $\oplus$), `ln_mul_from_key` («ключ $\Rightarrow$ уравнение»). `src/LnMulClosed.v` (11 Qed, 0 Admitted): `exp_R_ln_proc_is_geom` (ключ), `ln_mul_closed` (замыкание). Без новых аксиом, только L3. Сама формулировка-Prop `ln_mul_functional_equation` живёт в `src/Log2FunctionalEq.v` (7 Qed, 0 Admitted) как горизонт — здесь он снят. Машинно проверено.
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Chapter 4. The Ultrafilter as a Role-Limit Engine"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/04 Ультрафильтр как role-limit-движок.md"
-sourceBlob: d036af2d780a6508f516a16d4ecc2900f6117f99
+sourceBlob: 6fc0fd8be9cb02f30d5525ed90b1a49a7f3edab3
 translated: 2026-10-20
 status: draft
 ---
@@ -33,8 +33,7 @@ An important caveat about the boundary. The existence of a free ultrafilter on $
 
 And here is the key point: the ultrafilter is needed **only** to make the ring a field (a total order, the full Łoś transfer). But the whole calculus of Chapter 2—the derivative, the integral, the shadow—lived on the *ring* of germs, without any ultrafilter. There was no need to decide “what is large” there.
 
-{
-And there is a formal backbone to this—*conservativity*. A known meta-theorem (Nelson): nonstandard analysis is conservative over standard analysis—every *standard* statement provable by means of $^{*}ℝ$ is provable without them as well. Hence the role-limit scaffolding (the ultrafilter) is **removable** for real content[^6]. ToS makes this removal the default: we work on processes and germs, and the ultrafilter is (removable) formwork.}
+And there is a formal backbone to this—*conservativity*. A known meta-theorem (Nelson): nonstandard analysis is conservative over standard analysis—every *standard* statement provable by means of $^{*}ℝ$ is provable without them as well. Hence the role-limit scaffolding (the ultrafilter) is **removable** for real content[^6]. ToS makes this removal the default: we work on processes and germs, and the ultrafilter is (removable) formwork.
 
 *The ultrafilter is a role-limit engine: it coherently chooses a side for all subsets at once—and precisely by this it is stronger than the one-off $\mathrm{LPO}$ (it is a fragment of the Axiom of Choice); it gives the field and the full transfer—but as an **organizing role**, not a presentable object, and one removable by conservativity.*
 
@@ -46,11 +45,9 @@ Let us analyze by E/R/R in the generating order Rules $\to$ Roles $\to$ Elements
 
 **Roles (L4).** The Fréchet premeasure has the role of the decidable core; the ultrafilter, the role of the total decider ($=$ a 2-valued measure, Stone); the undecided, the role of the open; the zero divisor is the trace of an unclosed choice.
 
-{
-**Elements (L1 + P4).** The bearers are sets $ℕ\to\mathrm{bool}$ and the cofinite filter (the Element core, given constructively). A nontrivial ultrafilter itself is *not* an element: it cannot be presented; its existence is a fragment of the Axiom of Choice.}
+**Elements (L1 + P4).** The bearers are sets $ℕ\to\mathrm{bool}$ and the cofinite filter (the Element core, given constructively). A nontrivial ultrafilter itself is *not* an element: it cannot be presented; its existence is a fragment of the Axiom of Choice.
 
-{
-**Well-formedness check.** The rule is the selection of the “large”; the roles are the premeasure, the ultrafilter, the open; the elements are bool-sets and the cofinite filter; there are no overlaps. The ultrafilter as a system: values on sets (the Element aspect), totalization of size (a Role), but *on the undecided the value is free*—an external choice, a role-limit.}
+**Well-formedness check.** The rule is the selection of the “large”; the roles are the premeasure, the ultrafilter, the open; the elements are bool-sets and the cofinite filter; there are no overlaps. The ultrafilter as a system: values on sets (the Element aspect), totalization of size (a Role), but *on the undecided the value is free*—an external choice, a role-limit.
 
 **What the analysis yields.** The ultrafilter is one thing: a filter, a 2-valued measure, a license for the field. Its constructive core (Fréchet) is of the Element kind; its maximization is a role-limit and is removable by conservativity. A considerable part of the calculational content we need here already lives on the ring of processes; the field and full transfer require the ultrafilter, but for the standard results used, this formwork is removable.
 

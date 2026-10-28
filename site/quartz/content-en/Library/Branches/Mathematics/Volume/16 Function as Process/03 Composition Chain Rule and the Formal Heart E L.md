@@ -2,7 +2,7 @@
 title: "Chapter 3. Composition, the Chain Rule, and the Formal Heart E∘L"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/03 Композиция, цепное правило и формальное сердце E∘ L.md"
-sourceBlob: 59399c84872a675ad4f52e38ade03f86368ca85c
+sourceBlob: 29831e4ae060167d3741595f91b60bcd488e792d
 translated: 2026-10-20
 status: draft
 ---
@@ -25,7 +25,7 @@ The order of the chapter: the composition of series and why the condition $g(0)=
 
 ## The Composition of Series
 
-To substitute one series into another means to compute $f(g(x))$ coefficient by coefficient. If $f = \sum_k f_k y^k$, then $f(g(x)) = \sum_k f_k  g(x)^k$, and the coefficient at $x^n$ is assembled from all the powers $g^k$ (with the convention $g^0 = `fps_one`$, the unit series):
+To substitute one series into another means to compute $f(g(x))$ coefficient by coefficient. If $f = \sum_k f_k y^k$, then $f(g(x)) = \sum_k f_k  g(x)^k$, and the coefficient at $x^n$ is assembled from all the powers $g^k$ (with the convention $g^0 = \texttt{fps\_one}$, the unit series):
 
 $$
 (f\circ g)_n \;=\; \sum_{k=0}^{n} f_k  (g^k)_n .
@@ -56,17 +56,17 @@ At the level of coefficients this is an equality of convolutions, and it is prov
 
 Before assembling the identity, we need one structural fact: that the geometric function is *uniquely* determined by a simple differential equation.
 
-The series `geom` itself satisfies the equation $`geom`' = `geom`\cdot`geom`$—that is, $h' = h\cdot`geom`$ for $h = `geom`$ (equivalently, $(1-x)h' = h$).[^5] And—this is the key—*no other* process function with the condition $h(0)=1$ satisfies the equation $h' = h\cdot`geom`$:
+The series `geom` itself satisfies the equation $\texttt{geom}' = \texttt{geom}\cdot\texttt{geom}$—that is, $h' = h\cdot\texttt{geom}$ for $h = \texttt{geom}$ (equivalently, $(1-x)h' = h$).[^5] And—this is the key—*no other* process function with the condition $h(0)=1$ satisfies the equation $h' = h\cdot\texttt{geom}$:
 
 $$
-h' = h\cdot`geom`\quad\text{and}\quad h(0)=1
+h' = h\cdot\texttt{geom}\quad\text{and}\quad h(0)=1
   \quad\Longrightarrow\quad
-  h = `geom`.
+  h = \texttt{geom}.
 $$
 
 [^6]
 
-Why uniqueness is so transparent on coefficients. Since `geom` is a series of ones only, convolution with it is simply a *partial sum*: $(h\cdot`geom`)_n = \sum_{i\le n} h_i$.[^7] Therefore the equation $h' = h\cdot`geom`$ on coefficients is the recurrence
+Why uniqueness is so transparent on coefficients. Since `geom` is a series of ones only, convolution with it is simply a *partial sum*: $(h\cdot\texttt{geom})_n = \sum_{i\le n} h_i$.[^7] Therefore the equation $h' = h\cdot\texttt{geom}$ on coefficients is the recurrence
 
 $$
 (n+1) h_{n+1} = \sum_{i=0}^{n} h_i .
@@ -74,10 +74,10 @@ $$
 
 With the initial condition $h_0 = 1$ it unwinds uniquely: $h_1 = h_0 = 1$; $2h_2 = h_0+h_1 = 2$, that is, $h_2 = 1$; and by induction—if $h_0,…,h_n$ are all ones, then $\sum_{i\le n} h_i = n+1$, and hence $(n+1)h_{n+1} = n+1$, whence $h_{n+1}=1$. All the coefficients equal one—this is exactly `geom`. The differential equation *pins down* the geometric function as its unique normalized process function, and does so by finite induction.
 
-## The Formal Heart: $e^{-\ln(1-x)} = 1/(1-x)${e^(-ln(1-x)) = 1/(1-x)}
+## The Formal Heart: $e^{-\ln(1-x)} = 1/(1-x)$
 
-Now we assemble the summit. Consider the composition $h := \exp\circ(-\ln(1-x))$—that is, the substitution of the series $-\ln(1-x)$ into the exponential. (Here $`log1m_fps`$ denotes precisely the series $-\ln(1-x) = \sum_{n\ge1}
-x^n/n$—the *positive* logarithmic series, not $\ln(1-x)$; the sign is chosen so that the derivative is $+ `geom`$.) The substitution is well defined: $-\ln(1-x)$ has no constant term, $\bigl(-\ln(1-x)
+Now we assemble the summit. Consider the composition $h := \exp\circ(-\ln(1-x))$—that is, the substitution of the series $-\ln(1-x)$ into the exponential. (Here $\texttt{log1m\_fps}$ denotes precisely the series $-\ln(1-x) = \sum_{n\ge1}
+x^n/n$—the *positive* logarithmic series, not $\ln(1-x)$; the sign is chosen so that the derivative is $+ \texttt{geom}$.) The substitution is well defined: $-\ln(1-x)$ has no constant term, $\bigl(-\ln(1-x)
 \bigr)(0)=0$, so § 16.3.2 applies.
 
 Let us show that $h$ satisfies that very ODE. By the *chain rule* (§ 16.3.3):
@@ -86,13 +86,13 @@ $$
 h' = \bigl(\exp'\circ(-\ln(1-x))\bigr)\cdot\bigl(-\ln(1-x)\bigr)'.
 $$
 
-But both derivatives are known from § 16.2.4: the exponential is its own derivative, $\exp' = \exp$; and the derivative of $-\ln(1-x)$ is the geometric series, $\bigl(-\ln(1-x)\bigr)' = `geom`$. Substituting:
+But both derivatives are known from § 16.2.4: the exponential is its own derivative, $\exp' = \exp$; and the derivative of $-\ln(1-x)$ is the geometric series, $\bigl(-\ln(1-x)\bigr)' = \texttt{geom}$. Substituting:
 
 $$
-h' = \bigl(\exp\circ(-\ln(1-x))\bigr)\cdot`geom` = h\cdot`geom`.
+h' = \bigl(\exp\circ(-\ln(1-x))\bigr)\cdot\texttt{geom} = h\cdot\texttt{geom}.
 $$
 
-And the initial condition: $h(0) = \exp\bigl((-\ln(1-x))(0)\bigr) = \exp(0) = 1$. So $h' = h\cdot`geom`$ and $h(0)=1$—and by the structural heart of § 16.3.4 such an $h$ is unique and equals `geom`. Hence
+And the initial condition: $h(0) = \exp\bigl((-\ln(1-x))(0)\bigr) = \exp(0) = 1$. So $h' = h\cdot\texttt{geom}$ and $h(0)=1$—and by the structural heart of § 16.3.4 such an $h$ is unique and equals `geom`. Hence
 
 $$
 \boxed{ e^{-\ln(1-x)} = \frac{1}{1-x} }
@@ -108,7 +108,7 @@ This is the meaning of this result for our program. The inversion identity—the
 |---|---|---|
 | coefficients and truncated sums $\sum_{k\le n}$ | bearers and counting | Element (P4) |
 | composition $=$ substitution of a series | role-substitution | Role |
-| ODE $h'=h\cdot`geom`$, $h(0)=1$ | role-constraint, pins down `geom` | Rule |
+| ODE $h'=h\cdot\texttt{geom}$, $h(0)=1$ | role-constraint, pins down `geom` | Rule |
 | chain rule, uniqueness for the ODE, heart $c_n=1$ | process recurrences | Rule (constructively) |
 
 **Elements.** Composition under $g(0)=0$ is a *finite* truncated sum $\sum_{k\le n} f_k(g^k)_n$; the recurrence of the heart $(n+1)h_{n+1}=\sum_{i\le n}h_i$ is a finite step. Everything is computed in a finite number of operations on coefficients.
@@ -129,10 +129,10 @@ This is the meaning of this result for our program. The inversion identity—the
 [^2]: Ibid.: `fps_compose_zero`. Machine-checked, 0 axioms.
 [^3]: `src/FormalPowerSeries.v`: `fps_chain_rule` (under $g(0)=0$). Machine-checked, 0 axioms.
 [^4]: Ibid.: `conv_compose_swap`—the basis of the chain rule (`partial_sum_swap` ${+}$ `fps_pow_low_order`). Machine-checked, 0 axioms.
-[^5]: `src/FormalPowerSeries.v`: `geom_satisfies_ode`—$`fps_deriv` `geom` = `fps_mul` `geom` `geom`$. Machine-checked, 0 axioms.
+[^5]: `src/FormalPowerSeries.v`: `geom_satisfies_ode`—$\texttt{fps\_deriv} \texttt{geom} = \texttt{fps\_mul} \texttt{geom} \texttt{geom}$. Machine-checked, 0 axioms.
 [^6]: Ibid.: `ode_geom_unique`. Machine-checked, 0 axioms.
-[^7]: Ibid.: `conv_ones`—$`conv` a `geom` n = `partial_sum` a n$.
-[^8]: `src/FormalPowerSeries.v`: `compose_exp_log1m_is_geom`—$`fps_compose`\ `exp_fps`\ `log1m_fps` = `geom_fps`$. Machine-checked, **0 axioms**.
+[^7]: Ibid.: `conv_ones`—$\texttt{conv} a \texttt{geom} n = \texttt{partial\_sum} a n$.
+[^8]: `src/FormalPowerSeries.v`: `compose_exp_log1m_is_geom`—$\texttt{fps\_compose}\ \texttt{exp\_fps}\ \texttt{log1m\_fps} = \texttt{geom\_fps}$. Machine-checked, **0 axioms**.
 [^9]: All the material of the chapter comes from `src/FormalPowerSeries.v` (37 Qed, 0 Admitted, **0 axioms**; `Print Assumptions` = “Closed under the global context” for the key lemmas, including `compose_exp_log1m_is_geom`).
 
 ---

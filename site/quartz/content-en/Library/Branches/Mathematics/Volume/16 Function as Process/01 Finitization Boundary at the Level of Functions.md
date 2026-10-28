@@ -2,7 +2,7 @@
 title: "Chapter 1. The Finitization Boundary at the Level of Functions"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/01 Граница финитизации на уровне функций.md"
-sourceBlob: 56ea1d38f4cbb46b48c2c569fb507d47a841a319
+sourceBlob: ec2c83a470ec899e7155dcbd2714d1014e7443b5
 translated: 2026-10-20
 status: draft
 ---
@@ -27,7 +27,7 @@ Further on, the part will unfold this foundation: the calculus of process functi
 
 Let us return to what was done with *number*. In Part IV the real number ceased to be a completed point of the line and became a *process*: `RealProcess` is $ℕ \to ℚ$—a sequence of rational approximations, finite at every stage and never completed in the limit. The number *is* this process (more precisely, a class of equivalent processes). The irrational number is not given as an object; it *unfolds* as a mode of being of the finitely actual (P4).
 
-Now let us see what happens with *function* in our construction. Here we discover an asymmetry. All the analysis of the volume quantifies over $f$ as over an *external map*: $f\colon ℚ \to ℚ$ or $f\colon `CauchySeq` \to `CauchySeq`$—a meta-level object, a Rocq function that the theory *uses* but does not *build* as an object-in-the-theory. Continuity, the derivative, the integral—all these are properties attached to an ambient $f$ from outside. The number is reified; the function is not.
+Now let us see what happens with *function* in our construction. Here we discover an asymmetry. All the analysis of the volume quantifies over $f$ as over an *external map*: $f\colon ℚ \to ℚ$ or $f\colon \texttt{CauchySeq} \to \texttt{CauchySeq}$—a meta-level object, a Rocq function that the theory *uses* but does not *build* as an object-in-the-theory. Continuity, the derivative, the integral—all these are properties attached to an ambient $f$ from outside. The number is reified; the function is not.
 
 This is an *ontological incompleteness*. The system says: “a process is the mode of being of the finitely actual”—and carries this through to the end for numbers. But its own functions do not have this mode of being: they live one storey higher, as meta-maps not reduced to the process ontology. As long as this is so, the claim “everything in our mathematics is a process” remains incomplete: it is true of numbers and false of functions.
 
@@ -122,7 +122,7 @@ Let us gather the chapter into the E/R/R triad—as it is read in the very carri
 [^2]: Ibid., `src/FormalPowerSeries.v`: `geom_fps := fun _ => 1` (the geometric $1/(1-x)$, all $c_n = 1$); `exp_fps := fun n => / Qfact n` (the exponential, $c_n = 1/n!$); `log1m_fps` ($-\ln(1-x)$, $c_0 = 0$, $c_{k+1} = 1/(k{+}1)$). Machine-checked, 0 axioms.
 [^3]: `src/FormalPowerSeries.v`: `fps_one_polynomial` (one is a polynomial), `fps_X_polynomial` (the monomial $x$ is a polynomial). Machine-checked, 0 axioms.
 [^4]: Ibid.: `geom_not_polynomial` ($1/(1-x)$ is not a polynomial—all $c_n = 1 \neq 0$) and `exp_fps_not_polynomial` ($e^x$ is not a polynomial—$1/n! \neq 0$ for every $n$). Machine-checked, 0 axioms.
-[^5]: `src/FormalPowerSeries.v`: `geom_inverse_fps`—$(1-X)\cdot`geom` = `1`$ on coefficients. Machine-checked, 0 axioms. This is already the calculus of process functions—Chapter 16.2 turns to it.
+[^5]: `src/FormalPowerSeries.v`: `geom_inverse_fps`—$(1-X)\cdot\texttt{geom} = \texttt{1}$ on coefficients. Machine-checked, 0 axioms. This is already the calculus of process functions—Chapter 16.2 turns to it.
 [^6]: The whole carrier and the boundary of the chapter come from `src/FormalPowerSeries.v` (37 Qed, 0 Admitted, **0 axioms**, `Print Assumptions` = “Closed under the global context” for the key lemmas).
 
 ---

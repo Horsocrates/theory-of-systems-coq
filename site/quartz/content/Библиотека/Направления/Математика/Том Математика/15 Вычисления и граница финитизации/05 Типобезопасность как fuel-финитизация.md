@@ -50,12 +50,12 @@ $$
 и здесь вступает **горючее** (`fuel`). `eval_fuel` $n$ применяет шаг *не более* $n$ раз:
 
 $$
-`eval_fuel`\;0\;e = e,
+\texttt{eval\_fuel}\;0\;e = e,
   \quad
-  `eval_fuel`\;(n{+}1)\;e =
+  \texttt{eval\_fuel}\;(n{+}1)\;e =
     \begin{cases}
       e, & e \text{ — значение},\\
-      `eval_fuel`\;n (\text{шаг }e), & \text{иначе.}
+      \texttt{eval\_fuel}\;n (\text{шаг }e), & \text{иначе.}
     \end{cases}
 $$
 
@@ -95,11 +95,9 @@ Element-границу одним терминирующим критерием;
 **Роли (L4).**  *Тип* — роль, которую выражению позволено играть; проверка типов —
 роль-критерий (разрешимый); «значение / благонамеренный тупик / шаг» — статусы прогресса.
 
-{
-
 **Элементы (L1${}+{}$P4).**  Конкретные выражения, прогоны `eval_fuel` $n$,
 значения. *Не* элемент: бесконечная завершённая цепь редукций — role-limit, финитизируемый
-горючим.}
+горючим.
 
 | **Компонент** | **Что фиксирует** | **E/R/R-категория** |
 |---|---|---|
@@ -122,7 +120,7 @@ Element-границу одним терминирующим критерием;
 
 [^1]: Машинно проверено, **0 аксиом**: `src/Expressions.v` (тип `Expr`, типовое суждение), `src/Reduction.v` (отношение `step`, его детерминированность `step_deterministic`, и `multi_step`).
 [^2]: Машинно проверено, **0 аксиом**: `src/SubjectReduction.subject_reduction` (сохранение типа при шаге); `src/Progress.progress` (значение или шаг) с `is_benign_stuck` (благонамеренные тупики) и `no_unexpected_stuck`.
-[^3]: Машинно проверено, **0 аксиом**: `src/Reduction.v` — `eval_fuel`, `eval_fuel_terminates`; `src/SubjectReduction.eval_fuel_preservation` (сохранение вдоль прогона); `src/TypeSafety.v` — `type_safety` и `P4_ evaluation_ terminates` (бег с горючим завершается через `eval_fuel_terminates` — P4); `safety_ implies_ no_paradox` в текущем файле — *мостовая формулировка сохранения типа* при `eval_fuel` (отдельный предикат «нет парадокса» не вводится); `src/Evaluator.v` — `safe_eval` / `safe_eval_sound` и сквозной `verified_pipeline` (типизация${}+{}$оценка).
+[^3]: Машинно проверено, **0 аксиом**: `src/Reduction.v` — `eval_fuel`, `eval_fuel_terminates`; `src/SubjectReduction.eval_fuel_preservation` (сохранение вдоль прогона); `src/TypeSafety.v` — `type_safety` и `P4_evaluation_terminates` (бег с горючим завершается через `eval_fuel_terminates` — P4); `safety_implies_no_paradox` в текущем файле — *мостовая формулировка сохранения типа* при `eval_fuel` (отдельный предикат «нет парадокса» не вводится); `src/Evaluator.v` — `safe_eval` / `safe_eval_sound` и сквозной `verified_pipeline` (типизация${}+{}$оценка).
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Chapter 5. Compression, Fast Transform, Convolution"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/05 Сжатие, быстрое преобразование, свёртка.md"
-sourceBlob: a99833759dee6fc7ef5790c4264f005217394b77
+sourceBlob: a20344457dc4b83154543969982df1e751ac0274
 translated: 2026-10-20
 status: draft
 ---
@@ -94,7 +94,7 @@ Let us analyze the system of applications—compression, the fast transform, con
 
 **Rules ($\leftrightarrow$ L5).** The rules of the applications are built on top of the transform: compression error $=$ discarded energy (monotone in $K$); a band-limited signal $\Rightarrow$ zero tail; fast Walsh $=$ the matrix transform; $H(f\ast g)=(Hf)\cdot(Hg)$. The universal layer is L1–L5; the concrete one is Sylvester’s recursion and the group character.
 
-**Roles ($\leftrightarrow$ L4).** Compression is the role-truncation (keep the first $K$); fast Walsh is the role-algorithm (the same result, lower cost); convolution is the role-pronunciation of the group operation through multiplication. $O(N\log N)$ is the role-cost (operational, on top of the equality); “the best $K$” is a role that requires sorting. The completed spectrum is a role-limit.
+**Roles ($\leftrightarrow$ L4).** Compression is the role-truncation (keep the first $K$); fast Walsh is the role-algorithm (the same result, lower cost); convolution is the role-product of the group operation through multiplication. $O(N\log N)$ is the role-cost (operational, on top of the equality); “the best $K$” is a role that requires sorting. The completed spectrum is a role-limit.
 
 **Elements ($\leftrightarrow$ L1${}+{}$P4).** The bearers are finite and
 rational: the coefficients $c_i\inℚ$, the amplitudes $f,g$, XOR indices, finite sums,
@@ -106,8 +106,7 @@ $N=2^k$. Under P4 cost as a meta-object and the completed spectrum are not eleme
 | compression-truncation; fast Walsh-algorithm; convolution-product; $O(N\log N)$-cost; best-$K$ | WHAT FOR the bearers are significant; what is operational/boundary | Roles ($L4$) |
 | $c_i\inℚ$; $f,g$; XOR indices; finite sums; $N=2^k$ | WHAT exists at each stage (finite, P4) | Elements ($L1$, P4) |
 
-{
-The system is well-formed: each component is in one E/R/R category, and there is no self-reference (P1). What is essential is that the cost $O(N\log N)$ and the selection of “the best $K$” do not substitute for Elements: the first is an operational role on top of the proved equality, the second is a role that requires a separate layer of sorting. The proved core consists of equalities over finite rational data.}
+The system is well-formed: each component is in one E/R/R category, and there is no self-reference (P1). What is essential is that the cost $O(N\log N)$ and the selection of “the best $K$” do not substitute for Elements: the first is an operational role on top of the proved equality, the second is a role that requires a separate layer of sorting. The proved core consists of equalities over finite rational data.
 
 ## The Closing of Part VII: Rational Harmonic Analysis
 
@@ -124,7 +123,7 @@ $\mathrm{w}_i(a\oplus b)=\mathrm{w}_i(a)\mathrm{w}_i(b)$, Bessel’s inequality 
 
 ### A Bridge to Spectral Methods and Physics
 
-Part VII is not an end in itself: it prepares the spectral language for what follows. The Hadamard gate (Chapter 7.2) is already a bridge to quantum computing; the transform as a self-adjoint operator with the conservation of energy (Part VI) leads to the spectral methods of the physics volume, where eigenvalues, evolution, and observables are read in the same process-finite language. Walsh has given a model: genuine harmonic analysis is possible without a single transcendental if the carrier is chosen rationally. The same device—to keep the finite and rational core and to mark the transcendental as a boundary—will carry physics as well.
+Part VII is not an end in itself: it prepares the spectral language for what follows. The Hadamard gate (Chapter 7.2) is already a bridge to quantum computing; the transform as a self-adjoint operator with the conservation of energy (Part VI) leads to the spectral methods of physics, where eigenvalues, evolution, and observables are read in the same process-finite language. Walsh has given a model: genuine harmonic analysis is possible without a single transcendental if the carrier is chosen rationally. The same device—to keep the finite and rational core and to mark the transcendental as a boundary—will carry physics as well.
 
 With this Part VII is closed. The next part goes beyond harmonic analysis, to differential equations on processes, while keeping the recurring method of the volume: every analytic object is a process that can be carried to any precision, not a completed object.
 
@@ -133,11 +132,11 @@ With this Part VII is closed. The next part goes beyond harmonic analysis, to di
 [^1]: The supporting files (directory `src/process/`): `ProcessFourierCompression.v` (6 statements), `ProcessWalshCompaction.v` (1), `ProcessFastWalsh.v` (2), `ProcessWalshConvolutionGeneral.v` (7); all with 0 `Admitted`, 0 axioms.
 [^2]: In `ProcessFourierCompression.v`: `captured`$(c,K)=\sum_{i<K}c_i^2$; `truncation_error_eq` gives the balance `captured`$(c,N)=$`captured`$(c,K)+$ tail; `captured_mono` is the monotonicity in $K$. For Walsh the full energy is $N\norm{f}^2$ (Plancherel), so the error is controlled by Parseval, `walsh_captured_le_energy`. 0 axioms.
 [^3]: `walsh_compaction` in `ProcessWalshCompaction.v`: if $c_i=0$ for $K\le i<N$, then `captured`$(c,N)=$`captured`$(c,K)$—the tail is zero. 0 axioms. Exact rational compression of a band-limited signal.
-[^4]: `fwht_correct` in `ProcessFastWalsh.v`: `fwht`$ k f i =$`op_apply`$ (`had` k) f (2^k) i$ for $i<2^k$, by induction on $k$ through Sylvester’s block structure. 0 axioms. “Fast $=$ matrix”: the algorithm as a process equal to the transform.
-[^5]: `walsh_convolution` in `ProcessWalshConvolutionGeneral.v`: $H(f\ast g)=(Hf)\cdot(Hg)$ for all $2^k$. The proof relies on the Walsh character property (`had_character`, Chapter 7.2) and on the reindexing of a finite sum under the XOR bijection ($`xor_perm_q_sum`$, proved by Sylvester’s block recursion). 0 axioms.
+[^4]: `fwht_correct` in `ProcessFastWalsh.v`: `fwht`$ k f i =$`op_apply`$ (\texttt{had} k) f (2^k) i$ for $i<2^k$, by induction on $k$ through Sylvester’s block structure. 0 axioms. “Fast $=$ matrix”: the algorithm as a process equal to the transform.
+[^5]: `walsh_convolution` in `ProcessWalshConvolutionGeneral.v`: $H(f\ast g)=(Hf)\cdot(Hg)$ for all $2^k$. The proof relies on the Walsh character property (`had_character`, Chapter 7.2) and on the reindexing of a finite sum under the XOR bijection ($\texttt{xor\_perm\_q\_sum}$, proved by Sylvester’s block recursion). 0 axioms.
 
 ---
 
 Part: [[07 Harmonic Analysis|Part VII. Harmonic Analysis]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[04 Convergence of Fourier Series in L2|Chapter 4. Convergence of Fourier Series in L2]] · [[01 Cauchy Problem and Solution as Process|Chapter 1. The Cauchy Problem and the Solution as a Process—Part VIII]] →
+Navigation: ← [[04 Convergence of Fourier Series in L2|Chapter 4. Convergence of Fourier Series in L²]] · [[01 Cauchy Problem and Solution as Process|Chapter 1. The Cauchy Problem and the Solution as a Process—Part VIII]] →

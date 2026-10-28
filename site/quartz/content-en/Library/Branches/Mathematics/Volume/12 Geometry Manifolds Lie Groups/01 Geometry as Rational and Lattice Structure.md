@@ -2,7 +2,7 @@
 title: "Chapter 1. Geometry as a Rational and Lattice Structure"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/12 Геометрия, многообразия, группы Ли/01 Геометрия как рациональная и решёточная структура.md"
-sourceBlob: 989c65451a3cb476e9f3f20b71cf784512a5c92a
+sourceBlob: 8759041c4acdc998d26dda1cf3d8e0d6ffacb30d
 translated: 2026-10-20
 status: draft
 ---
@@ -60,7 +60,7 @@ The same shift is visible in the *shoelace formula*: the area of a polygon with 
 
 *On the lattice, area is controlled finitely and in integers: Pick’s formula is checked in the basic cases, and the shoelace formula gives rational area. Measure is an Element quantity; the completed integral over a continuum body is a role-limit (12.6), whereas the process integral as finite accumulation has already been built in Part V.*
 
-## Where the Rational Reaches Its Edge: $\sqrt{\phantom{x}}${sqrt}-Obstructions
+## Where the Rational Reaches Its Edge: $\sqrt{\phantom{x}}$-Obstructions
 
 Rational and lattice geometry has bounds—and its *edges are themselves theorems*. The cleanest example: *no equilateral triangle has all three vertices in $ℤ^2$*. The proof brings two measures of area together. On the one hand, the area of a lattice triangle is rational (the shoelace formula). On the other, the area of an equilateral triangle with side $s$ equals $\tfrac{\sqrt3}{4}s^2$, and $s^2$ for a lattice side is an integer. The equality of a rational number and $\tfrac{\sqrt3}{4}\cdot(\text{integer})$ would force $\sqrt3$ to be rational—which it is not. Algebraically this is Lagrange’s identity, forcing $3$ to be the square of a rational number.[^10]
 
@@ -80,7 +80,7 @@ Having laid the rational and lattice foundation, Part XII unfolds it tier by tie
 - **12.5—geodesics discretely**: the geodesic as the shortest discrete path and as a role-extremal; discrete curvature as gravity (Regge).
 - **12.6—synthesis and the map of boundaries**: where geometry-in-ToS runs up against the *continuum* (the smooth manifold, the Lie group over $ℝ$, the analytic exponential, the continuous curvature tensor)—the same price as the one named in Part X.
 
-The map of boundaries stands at the *end* of the part for a reason: the book describes a *system*, and the honest edge of a system is its property, not a reservation attached to every step.
+The map of boundaries stands at the *end* of the part for a reason: the volume describes a *system*, and the honest edge of a system is its property, not a reservation attached to every step.
 
 ## E/R/R Analysis
 

@@ -2,7 +2,7 @@
 title: "Chapter 3. The Hierarchical Path: Number as Level"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/02 Натуральные числа/03 Иерархический путь число как уровень.md"
-sourceBlob: a98aedc7480233f1e18ac36854fa0b4faec28f8b
+sourceBlob: 3c02c4a7c7964858e6adbcd257d85ad0c17abad0
 translated: 2026-10-20
 status: draft
 ---
@@ -33,13 +33,13 @@ The chapter will traverse the hierarchical path step by step. First we establish
 
 *The hierarchical path is the second of the paths by which ToS reaches the natural number series. It starts from the Law of Order $L5$ and the hierarchy of levels it gives, not from the repeatability of the act, as the cardinal path does. On this path a number is a level of the hierarchy; the natural number series is the series of levels. The coincidence of the results of two independent paths shows that $ℕ$ is a structural inevitability rather than the artifact of a single device.*
 
-## The Law $L5${L5} and the Hierarchy of Levels
+## The Law $L5$ and the Hierarchy of Levels
 
 ### What the Path Rests On
 
 The hierarchical path starts from the law $L5$ and the hierarchy of levels it gives. Both have already been introduced in Part I: $L5$ in Chapter I.3, the hierarchy of levels in Chapter I.4. The present section briefly collects what the path will rest on, with references to the places where it was established, rather than rediscovering them.
 
-### The Law $L5${L5}: The Condition of the Possibility of Hierarchy
+### The Law $L5$: The Condition of the Possibility of Hierarchy
 
 Let us state $L5$ in its own formulation from Chapter I.3, without substituting a paraphrase for it. The laws $L1$–$L4$ concern the structure of *a single* act of distinction: the identity of its sides, their exclusivity, exhaustiveness, and groundedness. $L5$, the Law of Order, differs from them in the level at which it acts: it makes possible the very structure of the *relations between* acts of distinction—their sequence, their ordering, their hierarchy. Ontologically, $L5$ is *the structural condition of the very possibility of hierarchy*: every determinate existence unfolds on determinate levels, and these levels stand in a relation of order—one level precedes another.
 
@@ -93,11 +93,11 @@ The type `Level` is arranged as follows. It has the base level `L1`, and there i
 
 From this, finiteness from below follows by itself. Take any *concrete* level and begin to descend—to pass from a level to the one over which it is stacked. Each step down removes one stacking `LS`. But the stackings by which a given level is obtained are *finite* in number: the level is obtained from `L1` by finitely many applications of `LS`, otherwise it would not be a level of the type `Level`. Hence the descent from a given level *comes up against* `L1` after finitely many steps—and there is nowhere further to go: `L1` is stacked over nothing, and there is nothing more to remove. For *each concrete* level the descent downward is finite: it removes finitely many stackings and comes up against the ground.
 
-It is worth stating at once the exact boundary of this claim. What has been said concerns descent *from any concrete level*: such a descent is finite because the number of stackings by which the level is obtained is finite. This is *not* the same as asserting a general theorem on the nonexistence of *any* infinitely descending sequence of levels—a theorem of the form “there is no function $f : `nat` \to `Level`$ with $f(n{+}1) \ll f(n)$ for all
+It is worth stating at once the exact boundary of this claim. What has been said concerns descent *from any concrete level*: such a descent is finite because the number of stackings by which the level is obtained is finite. This is *not* the same as asserting a general theorem on the nonexistence of *any* infinitely descending sequence of levels—a theorem of the form “there is no function $f : \texttt{nat} \to \texttt{Level}$ with $f(n{+}1) \ll f(n)$ for all
 $n$.” Such a theorem is not used in the hierarchical path and is not proved in the cited files; it would require a separate formalization (resting on the decrease of `level_depth` along $\ll$, see below).[^1]
 The chapter needs only a weaker and directly grounded claim: for each *presented* level the descent is finite and comes up against the ground.
 
-This can also be seen from the side of the operator $\ll$. The statement $l \ll `L1`$—“$l$ is closer to the ground than the base level”—is *false* for every $l$: nothing is closer to the ground than the ground itself. Below `L1` the order operator points to nothing—not because there is an “empty level” there, but because there *is no level* there. Descent along $\ll$ breaks off at `L1`, since below `L1` the order operator has nothing to match. Formally this is supported by properties of the operator $\ll$ proved in `TheoryOfSystems_Core_ERR.v`: the lemma `level_lt_depth` (depth strictly decreases down the order) and the lemma `level_lt_irrefl` (no level is below itself). The direct minimality of the ground and the upward openness of the hierarchy could conveniently be expressed by two more short lemmas—$\neg (l \ll `L1`)$ for every $l$ (there are no levels below the ground) and $l \ll `LS` l$ (above every level there is a next one); both are trivially provable from the definition of $\ll$, and adding them to the main file would make the chapter’s reliance on the code direct.[^2]
+This can also be seen from the side of the operator $\ll$. The statement $l \ll \texttt{L1}$—“$l$ is closer to the ground than the base level”—is *false* for every $l$: nothing is closer to the ground than the ground itself. Below `L1` the order operator points to nothing—not because there is an “empty level” there, but because there *is no level* there. Descent along $\ll$ breaks off at `L1`, since below `L1` the order operator has nothing to match. Formally this is supported by properties of the operator $\ll$ proved in `TheoryOfSystems_Core_ERR.v`: the lemma `level_lt_depth` (depth strictly decreases down the order) and the lemma `level_lt_irrefl` (no level is below itself). The direct minimality of the ground and the upward openness of the hierarchy could conveniently be expressed by two more short lemmas—$\neg (l \ll \texttt{L1})$ for every $l$ (there are no levels below the ground) and $l \ll \texttt{LS} l$ (above every level there is a next one); both are trivially provable from the definition of $\ll$, and adding them to the main file would make the chapter’s reliance on the code direct.[^2]
 
 *Every hierarchy of levels is finite from below: it has a base level—the ground—below which there are no levels. This is the arrangement of the type of levels, not a postulate: every level either is the base or is stacked over another in finitely many steps, and therefore descent from any presented level comes up against the ground after finitely many steps. Infinite descent from a given level is impossible—but this is a claim about each concrete level, not a general theorem about arbitrary descending sequences.*
 
@@ -105,7 +105,7 @@ This can also be seen from the side of the operator $\ll$. The statement $l \ll 
 
 The hierarchy is finite from below—but does this not mean that it simply “comes up against” the base level, while thought is entitled to ask: what is *beneath* the ground? Should the hierarchy not be continued downward—to a “level below the ground,” to something still more original?
 
-This question has no object, and ToS explains why through the motif $M_1$, positive ontology (Chapter I.7). By $M_1$, everything that exists ontologically exists *positively*: there are no “negative objects,” and nonbeing is not a special kind of being. A level is something posited—it exists positively or does not exist at all. A “level below the ground” would be a level that is stacked over nothing and is not itself the ground—that is, posited by nothing and not posited as the original either. There is no such level because there is nothing to *posit* there, not because ToS excludes it by special decree: below the base level of a given hierarchy there is nothing from which one more level could be posited. “Beneath the ground” it is not *empty*—there is simply *no place* there for a level.
+This question has no object, and ToS explains why through positive ontology (Chapter I.7). By positive ontology, everything that exists ontologically exists *positively*: there are no “negative objects,” and nonbeing is not a special kind of being. A level is something posited—it exists positively or does not exist at all. A “level below the ground” would be a level that is stacked over nothing and is not itself the ground—that is, posited by nothing and not posited as the original either. There is no such level because there is nothing to *posit* there, not because ToS excludes it by special decree: below the base level of a given hierarchy there is nothing from which one more level could be posited. “Beneath the ground” it is not *empty*—there is simply *no place* there for a level.
 
 In other words, finiteness from below is not a halt before something not yet traversed. It is not a boundary behind which something is hidden. The base level is the bottom of the hierarchy in the full sense—*the one below which there are no levels*, not “the lowest of those traversed so far.”
 
@@ -121,7 +121,7 @@ It gives, second, a beginning precisely *with one*, not with zero. Here the hier
 
 The hierarchy has a ground, and the series of levels has a beginning. It remains to show the main thing: that the series of levels *is* the natural number series—that a level is a number. This is the subject of the next section.
 
-## Level as Number: `LS`{LS} Is `S`{S}
+## Level as Number: `LS` Is `S`
 
 ### What Remained to Be Shown
 
@@ -141,7 +141,7 @@ Now, how the hierarchy of levels is arranged; § 3.3 has already shown this, and
 
 Let us set the two arrangements side by side. The natural number series: the initial element `1`, the operation of succession `S`. The hierarchy of levels: the initial element `L1`, the stacking operation `LS`. *This is one and the same arrangement.* The base level corresponds to the initial number; the stacking operation corresponds to the operation of succession. In both cases: one primary element plus one operation that generates the next element from each element, and everything is generated from the primary element by repeating that operation.
 
-### `LS`{LS} Is `S`{S}
+### `LS` Is `S`
 
 The coincidence of the arrangements is neither accidental nor approximate. ToS introduces the type of levels `Level` as an *inductive* type—a type every object of which *either* is the base element *or* is obtained by applying a single operation to an already built object of the same type. Formally, `Level` is written as follows:[^3]
 
@@ -155,8 +155,8 @@ The first line: `L1` is a level—the base one, obtained from nothing. The secon
 
 But the type of natural numbers is arranged in exactly the same way—as an inductive type with a base element and one operation of succession. Precision is needed here. Strictly speaking, `Level` and the type `nat` are *not one and the same* type in Rocq: they are two different inductive declarations, and `LS` is not literally the same constructor as `S`—they act on different types. But both types have *one and the same inductive form*: a base element and one successor constructor. Therefore they are *structurally isomorphic*—and through the isomorphism of `Level` with `nat` the constructor `LS` goes over *exactly* into `S`. In this sense, and only in this sense, `LS` is `S`: one operation of succession taken on two isomorphic types, not the identity of two Coq objects. The heading “`LS` is `S`” should be read thus: `LS` is `S` transferred to the type of levels through the isomorphism.
 
-Hence the result of the hierarchical path. Since `Level` and the type of natural numbers have one and the same inductive form—a base element plus an operation of succession—they are *structurally isomorphic*: two realizations of one inductive scheme, not one type in Rocq. The series of levels $`L1`, `LS` `L1`,
-`LS` (`LS` `L1`), …$ and the natural number series $1, 2, 3, …$ are one inductive scheme in two presentations—neither two independent series nor literally one Coq type. In this sense the natural number $n$ *is* a level: the level that stands $n - 1$ stackings away from the ground.
+Hence the result of the hierarchical path. Since `Level` and the type of natural numbers have one and the same inductive form—a base element plus an operation of succession—they are *structurally isomorphic*: two realizations of one inductive scheme, not one type in Rocq. The series of levels $\texttt{L1}, \texttt{LS} \texttt{L1},
+\texttt{LS} (\texttt{LS} \texttt{L1}), …$ and the natural number series $1, 2, 3, …$ are one inductive scheme in two presentations—neither two independent series nor literally one Coq type. In this sense the natural number $n$ *is* a level: the level that stands $n - 1$ stackings away from the ground.
 
 *The type of levels `Level` and the type of natural numbers are two inductive types of one form—a base element plus an operation of succession—rather than one and the same type in Rocq. They are structurally isomorphic. Under the isomorphism, `LS` (the stacking of a level) goes over exactly into `S` (the succession of a number); in this sense `LS` is `S` taken on the type of levels. The series of levels and the natural number series are two realizations of one inductive scheme; a number is a level of the hierarchy.*
 
@@ -185,13 +185,12 @@ Proof. reflexivity. Qed.
 
 The lemma is almost trivial—it is proved by a single `reflexivity`—but it is substantive: it shows that `LS` on levels and `S` on numbers agree elementwise through `level_depth`.
 
-Depth does not *add* numbers to the hierarchy from outside; it only *reads* the already existing arrangement: since `Level` is arranged like the natural number series, each level *already* has its number, and `level`_`depth` presents this number. The bridge does not join two banks—it shows that there is one bank.
+Depth does not *add* numbers to the hierarchy from outside; it only *reads* the already existing arrangement: since `Level` is arranged like the natural number series, each level *already* has its number, and `level_depth` presents this number. The bridge does not join two banks—it shows that there is one bank.
 
 That the hierarchy of levels is isomorphic to the natural number series, and that the properties which the standard exposition introduces by axioms of counting turn out to be properties of the inductive type of levels, ToS also establishes formally—by a separate group of proved theorems. But precision is needed here, otherwise the formal side will be read as stronger than it is; let us examine it in three steps.
 
 **Two layers of level numbering.** 
-{
-The repository has *two* functions that assign a number to a level, and they give *different* results for the ground. In the main file `TheoryOfSystems_Core_ERR.v`, the function `level_depth` (the listing above) assigns to the base level `L1` the depth *one*: `level_depth L1 = 1`. In the separate file `L5_NatFromHierarchy.v`, the function `level_to_nat` assigns to the base level *zero*: there `level_to_nat LBase = 0`. These are *two different assignments*, not a contradiction, and it is necessary to distinguish them:}
+The repository has *two* functions that assign a number to a level, and they give *different* results for the ground. In the main file `TheoryOfSystems_Core_ERR.v`, the function `level_depth` (the listing above) assigns to the base level `L1` the depth *one*: `level_depth L1 = 1`. In the separate file `L5_NatFromHierarchy.v`, the function `level_to_nat` assigns to the base level *zero*: there `level_to_nat LBase = 0`. These are *two different assignments*, not a contradiction, and it is necessary to distinguish them:
 
 | Level | `level_depth` (Core) | `level_to_nat` (separate file) |
 |---|---|---|
@@ -251,9 +250,9 @@ The hierarchy, finite from below (§ 3.3), is *unbounded above*. And these are t
 Now the generation of the series is fully visible. We begin at the ground—with the base level `L1`, to which one corresponds. We apply `LS`—we ascend one rung; the depth becomes two. We apply `LS` once more—the depth becomes three. Each step of ascent adds one; each level reached is the next natural number. Ascent, begun from the ground and continued without bound, *generates* the whole natural number series:
 
 $$
-`L1` \;\xrightarrow{\;`LS`\;}\;
-`LS` `L1` \;\xrightarrow{\;`LS`\;}\;
-`LS` (`LS` `L1`) \;\xrightarrow{\;`LS`\;}\;
+\texttt{L1} \;\xrightarrow{\;\texttt{LS}\;}\;
+\texttt{LS} \texttt{L1} \;\xrightarrow{\;\texttt{LS}\;}\;
+\texttt{LS} (\texttt{LS} \texttt{L1}) \;\xrightarrow{\;\texttt{LS}\;}\;
 \cdots
 $$
 
@@ -385,8 +384,7 @@ Thus the hierarchical path has been traversed: a natural number is a level of th
 
 ### E/R/R Analysis: The Number-Level as a System
 
-{
-The path traversed has an E/R/R arrangement (Part I), and its analysis consolidates the result of the chapter. The header of the separate anchor file gives the labeling directly: *elements—levels; role—encoding the hierarchy; rules—the isomorphism with `nat` and the irreflexivity of the order*.[^6] We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements. A caveat on status: the “system” here is a substantive interpretation (the number-level); its formal support is the inductive type `Level` and the proved isomorphism with `nat`, and the strict machine isomorphism is established on a *separate copy* of the type of levels, isomorphic in form to the Core type (§ 3.4).}
+The path traversed has an E/R/R arrangement (Part I), and its analysis consolidates the result of the chapter. The header of the separate anchor file gives the labeling directly: *elements—levels; role—encoding the hierarchy; rules—the isomorphism with `nat` and the irreflexivity of the order*.[^6] We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements. A caveat on status: the “system” here is a substantive interpretation (the number-level); its formal support is the inductive type `Level` and the proved isomorphism with `nat`, and the strict machine isomorphism is established on a *separate copy* of the type of levels, isomorphic in form to the Core type (§ 3.4).
 
 *Rules* (the law $L5$). The constitution of the system is the law $L5$: it is what makes the hierarchy of levels possible, establishing that the system *builds up* levels (§ 3.2). Adjoining it are three rules proved in the code. The first is the isomorphism with `nat`: `LS` goes over exactly into `S` (§ 3.4), and the series of levels is the natural number series. The second is the *irreflexivity* of the order (`hierarchy_irrefl`: no level is below itself) together with finiteness from below: the hierarchy has a ground, and the series begins with one (§ 3.3). The third is induction on levels: the base corresponds to the ground, the step to stacking (§ 3.7). And the most general constitution is $P4$: ascent is a process, and the series of levels is potentially infinite, not completed (§ 3.5).
 
@@ -394,7 +392,7 @@ The path traversed has an E/R/R arrangement (Part I), and its analysis consolida
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are the levels themselves: the base `L1` and the stacked `LS` $l$. By $L1$, each level is identical to itself (equality of levels is decidable). By $P4$, every level is reached in finitely many stackings from the ground—each bearer is finite, although the series of bearers is potentially infinite.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -407,7 +405,7 @@ The path traversed has an E/R/R arrangement (Part I), and its analysis consolida
 
 *Well-formedness.* The labeling is unambiguous: levels are elements, depth is the role, $L5$ with the isomorphism and irreflexivity are rules; no layer stands in for another. The principle $P1$ (no self-membership) is satisfied here in an especially graphic form—as the proved *irreflexivity*: no level is below itself (`hierarchy_irrefl`), the hierarchy ascends strictly, without loops, and the system does not contain itself in the role of its own level. And here the analysis turns into a *diagnosis*. The temptation to see in the two paths—the cardinal and the hierarchical—two *different* numbers (or two dimensions of number) is a confusion of categories: a path is a *role*, a mode of access, not an *element*-object; the two modes lead to one and the same series (§ 3.8.3). Likewise, one should not confuse a *level* (an element) with its *depth* (a role-number): “`LS` is `S`” asserts the coincidence of the *rule* of succession under the isomorphism, not the identity of two Coq objects (§ 3.4).
 
- What the analysis yields. It explains *why* the two independent paths converged on one series: a number is a *role*—a position set by the base and succession—and both paths assign this role by one and the same rules ($L1$–$L5$), only on different bearers (lists of distinctions there, levels here). The coincidence is not accidental: one system of roles in two realizations. In this way Part II also prepares the remaining paths: each next path is a new bearer of the same role structure of number, and the next one, the binary path, will add one more (§ 3.8.4).
+What the analysis yields. It explains *why* the two independent paths converged on one series: a number is a *role*—a position set by the base and succession—and both paths assign this role by one and the same rules ($L1$–$L5$), only on different bearers (lists of distinctions there, levels here). The coincidence is not accidental: one system of roles in two realizations. In this way Part II also prepares the remaining paths: each next path is a new bearer of the same role structure of number, and the next one, the binary path, will add one more (§ 3.8.4).
 
 ### Two Paths, One Series
 
@@ -427,9 +425,9 @@ The next chapter is devoted to the third path.
 
 ---
 
-[^1]: Formally, the decrease of depth along the order is fixed in `TheoryOfSystems_Core_ERR.v` by the lemma `level_lt_depth`: from $l_1 \ll l_2$ it follows that $`level_depth` l_1 < `level_depth` l_2$. From it the nonexistence of an infinitely descending chain is *derivable* (through the impossibility of an infinitely descending sequence in `nat`), but as a separate theorem about chains this has not yet been formalized in the repository.
+[^1]: Formally, the decrease of depth along the order is fixed in `TheoryOfSystems_Core_ERR.v` by the lemma `level_lt_depth`: from $l_1 \ll l_2$ it follows that $\texttt{level\_depth} l_1 < \texttt{level\_depth} l_2$. From it the nonexistence of an infinitely descending chain is *derivable* (through the impossibility of an infinitely descending sequence in `nat`), but as a separate theorem about chains this has not yet been formalized in the repository.
 [^2]: The current `TheoryOfSystems_Core_ERR.v` does not contain these two lemmas (`L1_minimal` and `level_lt_successor`) as separate named statements, although both follow immediately from the definition of `level_lt`. This is a matter for future synchronization of the repository.
-[^3]: The type `Level`, like the depth function `level`_`depth` below, is defined in the file `TheoryOfSystems`_`Core`_`ERR.v` of the ToS Rocq repository; the theorems on the order relation of levels are in the file `LawsFromDistinction.v`. Here and below, file names of the repository are given for reference.
+[^3]: The type `Level`, like the depth function `level_depth` below, is defined in the file `TheoryOfSystems_Core_ERR.v` of the ToS Rocq repository; the theorems on the order relation of levels are in the file `LawsFromDistinction.v`. Here and below, file names of the repository are given for reference.
 [^4]: In the file `L5_NatFromHierarchy.v`: the maps `level_to_nat` and `nat_to_level`, together with two round-trip lemmas—`level_nat_level` and `nat_level_nat`—establish that they are mutually inverse.
 [^5]: The current `TheoryOfSystems_Core_ERR.v` does not contain these two lemmas as separate named statements, although both follow trivially from the definitions; adding them is a matter for future synchronization of the repository. In substance, the upward openness of the hierarchy is already ensured by the fact that the constructor `LS` is total.
 [^6]: The E/R/R labeling is in the header of the file `L5_NatFromHierarchy.v`; the type of levels and the depth come from `TheoryOfSystems_Core_ERR.v`. Here it is unfolded on the model of Part I.

@@ -2,7 +2,7 @@
 title: "Chapter 6. Complexity as the Price of Finitization"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/06 Сложность как цена финитизации.md"
-sourceBlob: b93ba4c4aeeb8590414cf427b95b231aeb375ca2
+sourceBlob: c0ddbdeaed0622aca91717fda721603525612249
 translated: 2026-10-20
 status: draft
 ---
@@ -35,9 +35,7 @@ We hold to this strictly and honestly. In our system this question is *named*—
 
 **Roles (L4).**  The *verifier* (the one who checks) and the *decider* (the one who searches) are two roles; the gap in price between them is the content of $\mathrm{P}$ vs $\mathrm{NP}$. “Cheap / expensive” are *cost statuses* of the process.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete inputs, certificates, bounded searches. *Not* an element: an unbounded search without a budget—it has no finite price.}
+**Elements (L1${}+{}$P4).**  Concrete inputs, certificates, bounded searches. *Not* an element: an unbounded search without a budget—it has no finite price.
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -52,7 +50,7 @@ We hold to this strictly and honestly. In our system this question is *named*—
 ---
 
 [^1]: Machine-checked, **0 axioms**: `src/cs/PvsNP_Framing.v` (4 Qed)—`verifies`, `Decider`, `in_P` / `in_NP`; `verification_is_element` (verification is an Element), `P_subset_NP` ($\mathrm{P}\subseteq\mathrm{NP}$), `NP_bounded_search_decidable` (bounded search over certificates is decidable). There is also an applied complexity layer in `src/stdlib/complexity/`.
-[^2]: `P_collapses_NP` ($\mathrm{in_NP}\to\mathrm{in_P}$) in `PvsNP_Framing.v` is a *definition* (a named open question), not a theorem: neither $\mathrm{P}=\mathrm{NP}$ nor $\mathrm{P}\neq\mathrm{NP}$ is proved or claimed.
+[^2]: `P_collapses_NP` ($\mathrm{in\_NP}\to\mathrm{in\_P}$) in `PvsNP_Framing.v` is a *definition* (a named open question), not a theorem: neither $\mathrm{P}=\mathrm{NP}$ nor $\mathrm{P}\neq\mathrm{NP}$ is proved or claimed.
 
 ---
 

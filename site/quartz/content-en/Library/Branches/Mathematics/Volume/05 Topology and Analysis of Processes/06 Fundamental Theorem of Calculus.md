@@ -2,7 +2,7 @@
 title: "Chapter 6. The Fundamental Theorem of Calculus"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/06 Основная теорема анализа.md"
-sourceBlob: 86ea1f9cd09cb626e873cef76da9c637889ca0c2
+sourceBlob: a64e65565fdb41bf9b8f086f3d849dc848135e8f
 translated: 2026-10-20
 status: draft
 ---
@@ -21,21 +21,21 @@ The classical fundamental theorem of calculus has two parts. The first part: if 
 
 What prevents carrying this over into ToS directly is the arrangement of the current layer, not logic. The classical theorem cannot simply be imported as a ready statement about the real line: the current layer has no primary completed $ℝ$, no integral function $F(x)=\int_a^x f$ with a variable upper limit on quotient classes, and the integral itself is represented by a process of Riemann sums (§ 5.5). Therefore the classical formula has to be restored as a *grid-process connection*, not as an equality of completed limits. This is an honest boundary, and we name it at the very beginning of the chapter: what is built below is the grid form of the theorem plus exact special cases, rather than the full classical two-part theorem.
 
-### The Grid Form: `ftc_grid`{ftc_grid}
+### The Grid Form: `ftc_grid`
 
-{ The substantive core of the chapter is the theorem `ftc_grid` from `RiemannIntegration.v`. If a function $f$ is uniformly differentiable on $[a,b]$ with derivative $f'$ (the condition `udiff_on` from § 5.4), then for every $\varepsilon>0$ there is a level $N$ at which the Riemann sum of the derivative on a grid of $N+1$ subintervals approximates the increment:
+The substantive core of the chapter is the theorem `ftc_grid` from `RiemannIntegration.v`. If a function $f$ is uniformly differentiable on $[a,b]$ with derivative $f'$ (the condition `udiff_on` from § 5.4), then for every $\varepsilon>0$ there is a level $N$ at which the Riemann sum of the derivative on a grid of $N+1$ subintervals approximates the increment:
 
 $$
-\bigl| `riemann_sum`\;f'\;a\;`step`\;(N{+}1)
+\bigl| \texttt{riemann\_sum}\;f'\;a\;\texttt{step}\;(N{+}1)
 \;-\;\bigl(f(y_{N+1}) - f(a)\bigr) \bigr|
 \;\le\; \varepsilon\cdot(b-a),
 $$
 
-where $y_{N+1}=`walk_point` a `step` (N{+}1)$ and $N{+}1$ corresponds to `S N` in the code. There is no limiting division by $h$ here: the derivative enters through the division-free criterion `udiff_on` (§ 5.4). The grid itself, of course, uses safe rational division in choosing the step $(b-a)/(S N)$—the denominator is nonzero, and this is a legitimate finite division, not an inadmissible passage to the limit. The form is a grid form. The proof is assembled from two lemmas of § 5.5.1: `telescope_collapse` identifies the sum of increments with the difference of the endpoints, and `rs_tele_error_bound` estimates the distance between the Riemann sum of $f'$ and this telescope. It is here that the probative force of the whole chapter lies.}
+where $y_{N+1}=\texttt{walk\_point} a \texttt{step} (N{+}1)$ and $N{+}1$ corresponds to `S N` in the code. There is no limiting division by $h$ here: the derivative enters through the division-free criterion `udiff_on` (§ 5.4). The grid itself, of course, uses safe rational division in choosing the step $(b-a)/(S N)$—the denominator is nonzero, and this is a legitimate finite division, not an inadmissible passage to the limit. The form is a grid form. The proof is assembled from two lemmas of § 5.5.1: `telescope_collapse` identifies the sum of increments with the difference of the endpoints, and `rs_tele_error_bound` estimates the distance between the Riemann sum of $f'$ and this telescope. It is here that the probative force of the whole chapter lies.
 
 One point of precision is worth naming at once (Qeq hygiene). The theorem compares the Riemann sum with $f(y_{N+1})-f(a)$, where $y_{N+1}$ is the last walk point, and *not* literally with $f(b)-f(a)$. The lemma `walk_endpoint_qeq` gives that $y_{N+1}$ equals $b$ in the sense of the relation `Qeq`; but to carry this under $f$ and read $f(y_{N+1})$ as $f(b)$, the function $f$ must respect `Qeq` (be `Proper`). For an arbitrary $f:ℚ\toℚ$ this requires a separate caveat. Below, reading `ftc_grid` as “the sum of $f'$ approximates $f(b)-f(a)$,” we keep this subtlety in mind.
 
-### The Process Wrapper: `ftc_error_process`{The process wrapper: ftc_error_process}
+### The Process Wrapper: `ftc_error_process`
 
 A process layer is built on top of the grid estimate—the file `ProcessFTC.v`. It defines the error of the fundamental theorem as a process:
 
@@ -61,7 +61,7 @@ The fundamental theorem is a *connection* between two systems already analyzed�
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are functions, their derivatives and integrals (Riemann sums), and at the process level, the derivative and integral processes themselves, linked by the theorem. By $L1$ each preserves its identity. By $P4$ both are processes of approximation, not completed limits—and the connection between them is also a process one: a family of grid estimates, sharpening with refinement.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -86,39 +86,39 @@ The supporting files are distributed as follows. The substantive anchors are `Ri
 
 ### The Telescope: The Sum of Increments Is the Difference of the Endpoints
 
-{ The proof of the grid fundamental theorem rests on the telescoping sum. Let us define it as the sum of the increments of the function over consecutive nodes of the walk grid: $`tele_sum` f a `step` n =
-\sum_{k=0}^{n-1}\bigl[f(y_{k+1})-f(y_k)\bigr]$, where $y_k=`walk_point` a `step` k$. The lemma `telescope_collapse` collapses it exactly:
+The proof of the grid fundamental theorem rests on the telescoping sum. Let us define it as the sum of the increments of the function over consecutive nodes of the walk grid: $\texttt{tele\_sum} f a \texttt{step} n =
+\sum_{k=0}^{n-1}\bigl[f(y_{k+1})-f(y_k)\bigr]$, where $y_k=\texttt{walk\_point} a \texttt{step} k$. The lemma `telescope_collapse` collapses it exactly:
 
 $$
-`tele_sum`\;f\;a\;`step`\;n \;=\; f(y_n) - f(a).
+\texttt{tele\_sum}\;f\;a\;\texttt{step}\;n \;=\; f(y_n) - f(a).
 $$
 
-The intermediate values cancel in pairs; the difference of the endpoints remains. This is the constructive kernel of the fundamental theorem: the accumulation of the increments of a function over the grid equals its total change from $a$ to $y_n$. The coincidence is *Leibniz-exact*, since the nodes are given by the recursive `walk_point` of § 5.4 rather than by a closed formula—the same honest detail that was examined in the chapter on the derivative.}
+The intermediate values cancel in pairs; the difference of the endpoints remains. This is the constructive kernel of the fundamental theorem: the accumulation of the increments of a function over the grid equals its total change from $a$ to $y_n$. The coincidence is *Leibniz-exact*, since the nodes are given by the recursive `walk_point` of § 5.4 rather than by a closed formula—the same honest detail that was examined in the chapter on the derivative.
 
-### Estimating the Error of the Telescope: `rs_tele_error_bound`{Estimating the error of the telescope}
+### Estimating the Error of the Telescope: `rs_tele_error_bound`
 
 The second brick connects the telescope of a function with the Riemann sum of its derivative. The lemma `rs_tele_error_bound`: under uniform differentiability `udiff_on` $f f' a b$, for every $\varepsilon>0$ there is a level $N$ at which
 
 $$
-\bigl| `riemann_sum`\;f'\;a\;`step`\;(N{+}1)
-\;-\; `tele_sum`\;f\;a\;`step`\;(N{+}1) \bigr|
+\bigl| \texttt{riemann\_sum}\;f'\;a\;\texttt{step}\;(N{+}1)
+\;-\; \texttt{tele\_sum}\;f\;a\;\texttt{step}\;(N{+}1) \bigr|
 \;\le\; \varepsilon\cdot(b-a).
 $$
 
-The idea of the proof is an inner induction on the number of steps of the grid. On one step the Riemann term $f'(y_k)\cdot`step`$ differs from the increment $f(y_{k+1})-f(y_k)$ exactly by the error of the linear approximation of the derivative, and this error, by uniform differentiability, is smaller than $\varepsilon\cdot`step`$ (the one-step estimate $|f(x+h)-f(x)-f'(x)h|<\varepsilon|h|$). Summing over $k$ steps, we accumulate $k\cdot\varepsilon\cdot`step`$; for $k=N{+}1$, where $(N{+}1)\cdot`step`=b-a$, this gives $\varepsilon\cdot(b-a)$. The full code is a large induction; what matters here is the scheme: uniformity gives the estimate of one step, the addition of the steps gives the overall one.
+The idea of the proof is an inner induction on the number of steps of the grid. On one step the Riemann term $f'(y_k)\cdot\texttt{step}$ differs from the increment $f(y_{k+1})-f(y_k)$ exactly by the error of the linear approximation of the derivative, and this error, by uniform differentiability, is smaller than $\varepsilon\cdot\texttt{step}$ (the one-step estimate $|f(x+h)-f(x)-f'(x)h|<\varepsilon|h|$). Summing over $k$ steps, we accumulate $k\cdot\varepsilon\cdot\texttt{step}$; for $k=N{+}1$, where $(N{+}1)\cdot\texttt{step}=b-a$, this gives $\varepsilon\cdot(b-a)$. The full code is a large induction; what matters here is the scheme: uniformity gives the estimate of one step, the addition of the steps gives the overall one.
 
 ### The Grid Theorem as the Result
 
-{ Putting the two bricks together, we obtain `ftc_grid`. The telescope equals the difference of the endpoints (`telescope_collapse`), and the Riemann sum of the derivative is close to the telescope (`rs_tele_error_bound`); hence the Riemann sum of the derivative is close to the difference of the endpoints:
+Putting the two bricks together, we obtain `ftc_grid`. The telescope equals the difference of the endpoints (`telescope_collapse`), and the Riemann sum of the derivative is close to the telescope (`rs_tele_error_bound`); hence the Riemann sum of the derivative is close to the difference of the endpoints:
 
 $$
-\bigl| `riemann_sum`\;f'\;a\;`step`\;(N{+}1)
+\bigl| \texttt{riemann\_sum}\;f'\;a\;\texttt{step}\;(N{+}1)
 \;-\;\bigl(f(y_{N+1}) - f(a)\bigr) \bigr|
 \;\le\; \varepsilon\cdot(b-a).
 $$
 
 This is the central theorem of § 6.2. Let us name its status honestly (safeguard C1): the form is *division-free*, *grid*, *approximate*—it is not the exact equality $\int_a^b f' =
-f(b)-f(a)$. Where classical analysis puts an equals sign, here there stands $\le\varepsilon\cdot(b-a)$ for a sufficiently fine grid.}
+f(b)-f(a)$. Where classical analysis puts an equals sign, here there stands $\le\varepsilon\cdot(b-a)$ for a sufficiently fine grid.
 
 And again the Qeq precision of § 6.1.3: on the right-hand side stands $f(y_{N+1})$, not $f(b)$. The lemma `walk_endpoint_qeq` gives $y_{N+1}=b$ in the sense of `Qeq`; reading $f(y_{N+1})$ as $f(b)$ is correct when $f$ respects `Qeq`. The prose phrase “the sum of $f'$ approximates $f(b)-f(a)$” keeps this caveat in mind.
 
@@ -130,41 +130,41 @@ It may seem that an “approximate” theorem is weaker than the classical one. 
 
 ### Zero Derivative
 
-The simplest case of the fundamental theorem is the zero derivative. The lemma `ftc_zero_deriv` states: $`integral_process` 
+The simplest case of the fundamental theorem is the zero derivative. The lemma `ftc_zero_deriv` states: $\texttt{integral\_process} 
 (\lambda_. 0) a b n = 0$ pointwise at each level $n$. The integral of the zero derivative is zero—exactly, without approximation; it is proved by direct induction on the number of nodes. This agrees with the fundamental theorem: if $f$ is constant, then $f'=0$, the increment $f(b)-f(a)=0$, and the integral of the derivative is also zero. Safeguard C1: here the result is *exact*; the process is identically zero.
 
 ### Constant Derivative: An Exact Theorem for the Affine Function
 
-{ The next case is a constant derivative, that is, an affine function. The lemma `ftc_error_const` is the only nontrivial substantive fact of the file `ProcessFTC.v`: for $f(x)=c\cdot x$ with derivative $f'=c$ the error process of the fundamental theorem is equivalent to the constant process zero,
+The next case is a constant derivative, that is, an affine function. The lemma `ftc_error_const` is the only nontrivial substantive fact of the file `ProcessFTC.v`: for $f(x)=c\cdot x$ with derivative $f'=c$ the error process of the fundamental theorem is equivalent to the constant process zero,
 
 $$
-`ftc_error_process`\;(\lambda x. c x)\;(\lambda_. c)\;a\;b
-\;\sim\; `const_process`\;0.
+\texttt{ftc\_error\_process}\;(\lambda x. c x)\;(\lambda_. c)\;a\;b
+\;\sim\; \texttt{const\_process}\;0.
 $$
 
-That is, $\int_a^b c = c (b-a) = f(b)-f(a)$ *exactly*: the error is identically zero at each level. This is the *exact process case* of the fundamental theorem.}
+That is, $\int_a^b c = c (b-a) = f(b)-f(a)$ *exactly*: the error is identically zero at each level. This is the *exact process case* of the fundamental theorem.
 
-{ Here two close results must be separated (safeguard C1). What is exact is precisely `ftc_error_const`—the process zero for $f(x)=c x$. The lemma `ftc_affine` from `RiemannIntegration.v`, by contrast, casts the same affine theme in the *grid* $\varepsilon$-form through `ftc_grid` (of the form “there exists $N$ at which the error is $\le\varepsilon(b-a)$”), not as a separate exact equality at each level. To place them in one row as “exact” would be wrong: `ftc_error_const` is exact, `ftc_affine` is an $\varepsilon$-estimate. (A third relative, `ftc_const_deriv`, re-exports `integral_process_const` from § 5.5.) In substance: for a straight line the area under the derivative is exactly equal to the increment, and the same fact is visible in grid form.}
+Here two close results must be separated (safeguard C1). What is exact is precisely `ftc_error_const`—the process zero for $f(x)=c x$. The lemma `ftc_affine` from `RiemannIntegration.v`, by contrast, casts the same affine theme in the *grid* $\varepsilon$-form through `ftc_grid` (of the form “there exists $N$ at which the error is $\le\varepsilon(b-a)$”), not as a separate exact equality at each level. To place them in one row as “exact” would be wrong: `ftc_error_const` is exact, `ftc_affine` is an $\varepsilon$-estimate. (A third relative, `ftc_const_deriv`, re-exports `integral_process_const` from § 5.5.) In substance: for a straight line the area under the derivative is exactly equal to the increment, and the same fact is visible in grid form.
 
 ### Uniformly Differentiable Functions: A Grid Estimate
 
 For general uniformly differentiable functions the fundamental theorem is a grid one rather than exact: `ftc_grid` gives an error $\le\varepsilon(b-a)$, but not zero. The boundary between the exact and the approximate runs exactly along linearity. Affine functions—exactly, because their increment is linear in the step and the Riemann sum catches it without remainder. Nonlinear ones—approximately, because a remainder of higher order appears (the same theme as with the square in § 5.4: the error of the linear approximation was $h^2$). The finer the grid, the smaller this remainder.
 
-{ The grid estimate `ftc_grid` itself stands on uniform differentiability (`udiff_on`), the telescope (`telescope_collapse`), and the estimate `rs_tele_error_bound`—it needs no additional regularity. However, `FTC.v` builds a regularity layer on top of it: lemmas such as `udiff_implies_bounded` (an estimate of the values of the function through the derivative) and `lipschitz_bounded` (the boundedness of a Lipschitz function) help to control the classes of functions on which grid arguments apply stably—this is useful for the applications of § 6.4–6.5, not for the central estimate itself.}
+The grid estimate `ftc_grid` itself stands on uniform differentiability (`udiff_on`), the telescope (`telescope_collapse`), and the estimate `rs_tele_error_bound`—it needs no additional regularity. However, `FTC.v` builds a regularity layer on top of it: lemmas such as `udiff_implies_bounded` (an estimate of the values of the function through the derivative) and `lipschitz_bounded` (the boundedness of a Lipschitz function) help to control the classes of functions on which grid arguments apply stably—this is useful for the applications of § 6.4–6.5, not for the central estimate itself.
 
 ### The Nonnegativity of the Integral of the Derivative
 
-The last case connects the fundamental theorem with order. The lemma `ftc_nonneg_integral` (`RiemannIntegration.v`): for $f'\ge 0$ the Riemann sum of the derivative is nonnegative up to the grid error. In substance: a nonnegative derivative gives a nondecreasing increment—if the rate of the function is nowhere negative, its value does not fall. This is the grid FTC form of motif M4 from § 5.5 and a bridge to the monotonicity of § 6.4: the sign of the derivative governs the growth of the increment.
+The last case connects the fundamental theorem with order. The lemma `ftc_nonneg_integral` (`RiemannIntegration.v`): for $f'\ge 0$ the Riemann sum of the derivative is nonnegative up to the grid error. In substance: a nonnegative derivative gives a nondecreasing increment—if the rate of the function is nowhere negative, its value does not fall. This is the grid FTC form of nonnegativity from § 5.5 and a bridge to the monotonicity of § 6.4: the sign of the derivative governs the growth of the increment.
 
 ## Corollaries of the Fundamental Theorem
 
 ### The Estimate of the Increment
 
-The first corollary is the estimate of the increment through the derivative. The lemma `ftc_increment_bound` (`FTC.v`) is in essence the same `bounded_deriv_bounded_increment` from the mean value theorem of § 5.4 §4.6: a bounded derivative gives a bounded increment of the function. Safeguard C4: this is the same lemma as in the chapter on the derivative, read here in the context of the fundamental theorem. The connection is direct—the grid mean value theorem was one of the forerunners of `ftc_grid`, and the estimate of the increment carries over unchanged.
+The first corollary is the estimate of the increment through the derivative. The lemma `ftc_increment_bound` (`FTC.v`) is in essence the same `bounded_deriv_bounded_increment` from the mean value theorem of § 4.6 of Chapter 5.4: a bounded derivative gives a bounded increment of the function. Safeguard C4: this is the same lemma as in the chapter on the derivative, read here in the context of the fundamental theorem. The connection is direct—the grid mean value theorem was one of the forerunners of `ftc_grid`, and the estimate of the increment carries over unchanged.
 
 ### Monotonicity from the Sign of the Derivative
 
-{ The second corollary is monotonicity. The lemma `ftc_monotone`: for $f'\ge 0$ the function grows on the grid (the increment is nonnegative); `ftc_strict_monotone` (the same as `pos_deriv_increases` from § 5.4) gives strict growth for a derivative bounded away from zero. The fundamental theorem turns the local property “the derivative is positive” into the global one “the function grows”: the sign of the derivative governs the growth of the accumulated increment. These are grid results, like everything in § 6.2–6.4.}
+The second corollary is monotonicity. The lemma `ftc_monotone`: for $f'\ge 0$ the function grows on the grid (the increment is nonnegative); `ftc_strict_monotone` (the same as `pos_deriv_increases` from § 5.4) gives strict growth for a derivative bounded away from zero. The fundamental theorem turns the local property “the derivative is positive” into the global one “the function grows”: the sign of the derivative governs the growth of the accumulated increment. These are grid results, like everything in § 6.2–6.4.
 
 ### The Difference and the Linearity of Increments
 
@@ -178,14 +178,14 @@ The fourth corollary is the absolute estimate. The lemma `ftc_absolute_value_bou
 
 ### The Product Rule for Uniform Differentiability
 
-{ The main nonlinear application of the fundamental theorem is the product rule, the lemma `udiff_product` from `IntegralApplications.v`. If $f$ and $g$ are uniformly differentiable on an interval with bounded values and derivatives, then their product $f\cdot g$ is uniformly differentiable with the derivative
+The main nonlinear application of the fundamental theorem is the product rule, the lemma `udiff_product` from `IntegralApplications.v`. If $f$ and $g$ are uniformly differentiable on an interval with bounded values and derivatives, then their product $f\cdot g$ is uniformly differentiable with the derivative
 
 $$
 (f\cdot g)' = f' g + f g'.
 $$
 
-We give the proof as an idea in three steps. First, `product_decomp` decomposes the increment of the product into three terms—on the pattern of the decomposition from the derivative rule of § 5.4 §4.4.2. Second, each term is bounded by a share $\varepsilon/3$. Third, the factors are controlled by the bounds $M_f, M_g, M_{f'}, M_{g'}$ on the values and derivatives. The sum of the three estimates of $\varepsilon/3$ each gives what is required. This is a full theorem (safeguard C1), a direct uniform version of the product rule for the derivative—but on an interval, as integration requires. A special case is `udiff_square`: the derivative of the square, $(f^2)' =
-2f f'$.}
+We give the proof as an idea in three steps. First, `product_decomp` decomposes the increment of the product into three terms—on the pattern of the decomposition from the derivative rule of § 4.4.2 of Chapter 5.4. Second, each term is bounded by a share $\varepsilon/3$. Third, the factors are controlled by the bounds $M_f, M_g, M_{f'}, M_{g'}$ on the values and derivatives. The sum of the three estimates of $\varepsilon/3$ each gives what is required. This is a full theorem (safeguard C1), a direct uniform version of the product rule for the derivative—but on an interval, as integration requires. A special case is `udiff_square`: the derivative of the square, $(f^2)' =
+2f f'$.
 
 ### The Fundamental Theorem for a Product
 
@@ -193,16 +193,16 @@ Applying `ftc_grid` to the derivative of the product, we obtain the lemma `ftc_p
 
 ### Integration by Parts
 
-{ Regrouping `ftc_product`, we obtain integration by parts—the lemma `integration_by_parts`. In grid form it states: the Riemann sum of $f'g$ approximates the boundary term $fg$ minus the Riemann sum of $fg'$,
+Regrouping `ftc_product`, we obtain integration by parts—the lemma `integration_by_parts`. In grid form it states: the Riemann sum of $f'g$ approximates the boundary term $fg$ minus the Riemann sum of $fg'$,
 
 $$
-\bigl| `RS`(f'g) - \bigl(f(\text{end})g(\text{end}) -
-f(a)g(a)\bigr) + `RS`(fg') \bigr| \;\le\;
+\bigl| \texttt{RS}(f'g) - \bigl(f(\text{end})g(\text{end}) -
+f(a)g(a)\bigr) + \texttt{RS}(fg') \bigr| \;\le\;
 \varepsilon\cdot(b-a).
 $$
 
 The proof is `ftc_product` plus the linearity of Riemann sums (`riemann_sum_add`, `riemann_sum_sub`). Safeguard C1: this is an $\varepsilon$-grid form, not an exact equality. Special cases: `ibp_self` gives $2\int f'f \approx
-f(\text{end})^2 - f(a)^2$, and `ibp_identity` a formula with the identity factor, $\int g \approx xg |_a^b - \int xg'$.}
+f(\text{end})^2 - f(a)^2$, and `ibp_identity` a formula with the identity factor, $\int g \approx xg |_a^b - \int xg'$.
 
 ### What Integration by Parts Means
 
@@ -212,7 +212,7 @@ The geometric and operational meaning of integration by parts is worth naming di
 
 ### The Uniqueness of the Antiderivative
 
-{ One more classical corollary is the uniqueness of the antiderivative. The lemma `antiderivative_unique` from `IntegralApplications.v`: if functions $f$ and $g$ have one and the same derivative $h$ on $[a,b]$, then their increments coincide (up to the grid error $\varepsilon(b-a)$). The proof relies on `udiff_sub`: the difference $f-g$ has a zero derivative, and then `ftc_grid` with a zero derivative gives a small increment of the difference. In substance this is the grid form of the statement “an antiderivative is determined up to a constant”: two antiderivatives of one function differ by something with a zero derivative, that is, something nearly constant. A direct parallel with `zero_deriv_near_constant` from § 5.4 §4.7: a zero derivative implies near-constancy.}
+One more classical corollary is the uniqueness of the antiderivative. The lemma `antiderivative_unique` from `IntegralApplications.v`: if functions $f$ and $g$ have one and the same derivative $h$ on $[a,b]$, then their increments coincide (up to the grid error $\varepsilon(b-a)$). The proof relies on `udiff_sub`: the difference $f-g$ has a zero derivative, and then `ftc_grid` with a zero derivative gives a small increment of the difference. In substance this is the grid form of the statement “an antiderivative is determined up to a constant”: two antiderivatives of one function differ by something with a zero derivative, that is, something nearly constant. A direct parallel with `zero_deriv_near_constant` from § 4.7 of Chapter 5.4: a zero derivative implies near-constancy.
 
 ### Change of Variables: Only the Affine Case
 
@@ -220,9 +220,9 @@ The change of variables is formalized only partially, and this must be named hon
 
 ### The Lipschitz Property and Uniform Continuity
 
-{ The regularity on which the FTC estimates stand forms a hierarchy, but it must be named carefully. There is one strict bridge: `lipschitz_uniform_cont` (`FTC.v`) proves that a Lipschitz function is uniformly continuous. The notions `Lipschitz_on` and `uniformly_continuous_on` are defined right there.}
+The regularity on which the FTC estimates stand forms a hierarchy, but it must be named carefully. There is one strict bridge: `lipschitz_uniform_cont` (`FTC.v`) proves that a Lipschitz function is uniformly continuous. The notions `Lipschitz_on` and `uniformly_continuous_on` are defined right there.
 
-{ Beyond this, one should be careful. The file does not contain a separate theorem of the form “`udiff_on` $\Rightarrow$ `Lipschitz_on`” in standard form, and the hierarchy should not be presented as a ready chain. What is there for certain: `lipschitz_bounded`—the boundedness of a function if it is already Lipschitz; `udiff_implies_bounded`—an estimate of the values through the layer of the mean value theorem. For uniformly differentiable functions there are grid and MVT estimates of increments (for example, `bounded_deriv_bounded_increment` from § 5.4 and its relatives), but this is not one simple theorem “uniformly differentiable, hence Lipschitz.” The connection with § 5.3, where the Lipschitz property was introduced as a condition, and with § 5.4, where MVT estimates of increments close to Lipschitz ones were derived from a bounded derivative, rests precisely on these particular lemmas, not on a single implication.}
+Beyond this, one should be careful. The file does not contain a separate theorem of the form “`udiff_on` $\Rightarrow$ `Lipschitz_on`” in standard form, and the hierarchy should not be presented as a ready chain. What is there for certain: `lipschitz_bounded`—the boundedness of a function if it is already Lipschitz; `udiff_implies_bounded`—an estimate of the values through the layer of the mean value theorem. For uniformly differentiable functions there are grid and MVT estimates of increments (for example, `bounded_deriv_bounded_increment` from § 5.4 and its relatives), but this is not one simple theorem “uniformly differentiable, hence Lipschitz.” The connection with § 5.3, where the Lipschitz property was introduced as a condition, and with § 5.4, where MVT estimates of increments close to Lipschitz ones were derived from a bounded derivative, rests precisely on these particular lemmas, not on a single implication.
 
 ## The Duality of the Derivative and the Integral. The Bridge to Weak Derivatives
 
@@ -282,7 +282,7 @@ The chapter has proved the grid form; let us name concretely what is missing for
 
 ### A Caveat on the Status of Axioms
 
-{ The Part V safeguard requires precision about axioms. The cores—`RiemannIntegration.v`, `FTC.v`, `IntegralApplications.v`—declare “none” or “0 axioms” in their headers; `ProcessFTC.v`, “8 Qed, 0 axioms.” But *some* of these files import layers in which classical logic occurs: for example, `EVT_idx.v` with a local `classic`, or `ProcessArithmetic.v`, where `classic` is used in `monotone_bounded_Cauchy`. `Differentiation.v` and `MeanValueTheorem.v` themselves declare the absence of axioms in their headers. One should not say wholesale “they all drag in classic”: an import by itself does not mean that every lemma depends on `classic`—the status of a particular theorem is established only by the command `Print Assumptions` for that theorem itself.}
+The Part V safeguard requires precision about axioms. The cores—`RiemannIntegration.v`, `FTC.v`, `IntegralApplications.v`—declare “none” or “0 axioms” in their headers; `ProcessFTC.v`, “8 Qed, 0 axioms.” But *some* of these files import layers in which classical logic occurs: for example, `EVT_idx.v` with a local `classic`, or `ProcessArithmetic.v`, where `classic` is used in `monotone_bounded_Cauchy`. `Differentiation.v` and `MeanValueTheorem.v` themselves declare the absence of axioms in their headers. One should not say wholesale “they all drag in classic”: an import by itself does not mean that every lemma depends on `classic`—the status of a particular theorem is established only by the command `Print Assumptions` for that theorem itself.
 
 `Print Assumptions` is written out at the end of `RiemannIntegration.v` (for `ftc_grid` and others) and of `FTC.v` (for `lipschitz_uniform_cont`, `ftc_u_substitution_affine`, and others); `ProcessFTC.v` and `IntegralApplications.v` have no final block—for the theorem one needs, it is run separately. And honest facts for the completeness of the picture: `ftc_grid` is named in the header of `ProcessFTC.v` among the rules but is not invoked in the proofs of the file; the theorem `derivative_integral_duality` contains a fictitious process; `ftc_interval_split` is not additivity; many lemmas of `ProcessFTC.v` are re-exports of what has already been proved.
 

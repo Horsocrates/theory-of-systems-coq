@@ -2,7 +2,7 @@
 title: "Chapter 1. Integers: Coordinate Marking"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/03 От натуральных к рациональным/01 Целые числа координатная разметка.md"
-sourceBlob: 9682ec15c058142a75b6c62ade5057d5f665ad66
+sourceBlob: a5b1945a205cc25d5167f02556673d79c4022e6e
 translated: 2026-10-20
 status: draft
 ---
@@ -49,7 +49,7 @@ To arrive at this answer, we must first separate two questions in which the word
 
 ### Two Senses of the Word “Positive”
 
-In this book the word “positive” works in two different senses. They do not contradict each other, but they belong to different levels, and it is important for the reader to distinguish them from the very beginning—otherwise the principle of positive existence will be misunderstood.
+In this volume the word “positive” works in two different senses. They do not contradict each other, but they belong to different levels, and it is important for the reader to distinguish them from the very beginning—otherwise the principle of positive existence will be misunderstood.
 
 The first sense is *ontological positivity*. An object is ontologically positive if it *is*—is as an actualized act of distinction or a consequence of one. This is the primary sense; it concerns the *fact of existence* and nothing more. It is precisely this sense that the principle of § 1.1 speaks of: everything that exists exists positively.
 
@@ -258,7 +258,7 @@ The minus side is potentially unbounded in the same way. The minus position $-k$
 
 Thus the two-sided marking is *symmetric* as a coordinate system: both sides are formal displacements from the reference point, both are extendable in the same way, neither is more finite than the other. But this symmetry is the symmetry of the *coordinate record*, not the symmetry of two ways of existing. There is an asymmetry of plus and minus—and it lies in the *status* of the sides, not in their extent. The plus side coincides with the direction in which the natural number series is *generated*: to go into the plus is to go where the series of acts of distinction grows. The minus side is a purely *coordinate* orientation—the opposite one, the mirror one; nothing in the generation of the series directly corresponds to it; it is a direction given by the *choice of the marking*. As displacements, both sides are on an equal footing and equally infinite; they differ in that one holds on to the ontological growth of the series, while the other is its coordinate mirror.
 
-{*The two sides of the reference point are ontologically on an equal footing: neither exists more fully. The sign of a position carries the side—substantively—and the convention as to which side to mark with the minus—conventionally. As a coordinate system the marking is symmetric: both sides are formal displacements from the reference point, both are extendable in the same way, and the minus side comes up against no bottom. The asymmetry of plus and minus lies in the status of the sides, not in the finiteness of one of them: the plus direction coincides with the direction in which the series is generated; the minus direction is a purely coordinate orientation opposite to it. The symmetry of $ℤ$ is the symmetry of the coordinate record, not the symmetry of positive and negative existence.*}
+*The two sides of the reference point are ontologically on an equal footing: neither exists more fully. The sign of a position carries the side—substantively—and the convention as to which side to mark with the minus—conventionally. As a coordinate system the marking is symmetric: both sides are formal displacements from the reference point, both are extendable in the same way, and the minus side comes up against no bottom. The asymmetry of plus and minus lies in the status of the sides, not in the finiteness of one of them: the plus direction coincides with the direction in which the series is generated; the minus direction is a purely coordinate orientation opposite to it. The symmetry of $ℤ$ is the symmetry of the coordinate record, not the symmetry of positive and negative existence.*
 
 ### What Has Been Built
 
@@ -391,9 +391,8 @@ And the chapter has noted a result of ToS’s own that refines the habitual pict
 
 ### E/R/R Analysis: The Integer-Position as a System
 
-{
 The integer, reduced to a position (§ 1.8.2), is worth analyzing by E/R/R (Part I): the analysis secures why the minus is not negative existence. A reservation about status: this chapter now has *its own* anchor file—`CoordinateIntegers.v` (§ 1.8.1) builds a record of the integer as a formal difference (`Record FormalDiff`) and proves its isomorphism with the standard `Z`. Hence the “system” here is a coordinate marking with its own machine construction (`FormalDiff`), isomorphic to `Z`; both `Z` itself and the isomorphism are machine-checked. The standard `Z` remains the target of the isomorphism (§ 1.6.1).
-We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements.}
+We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements.
 
 *Rules* (the laws $L5$, $L2$, $L3$). The constitution of the marking is the reference point (the choice of a point in the existing series) and the step (the unit displacement); two-sidedness follows from the choice of the reference point *inside* an ordered series (§ 1.3–1.5). To these is added the rule of signs: multiplication is the repetition of a displacement, $(-a)\cdot(-n)=a\cdot n$—a structural property of two-sidedness, not a memorized convention (§ 1.7). And an equivalent rule: the integer as a *formal difference* of two positive counts (pairs with the identification $a+d=b+c$, § 1.6.2). The universal $L1$–$L5$ are in force; distinctive here are $L5$ (the order of positions) and $L2$/$L3$ (exactly two sides of the reference point).
 
@@ -401,7 +400,7 @@ We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Element
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are positions (equally: formal differences), composed of the reference point and steps; the material of the steps is the natural counts of Part II. By $L1$, each position is identical with itself. By $P4$, every integer is a *finite* displacement from the reference point—a finite number of steps to one side—although both sides are extendable without bound.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -412,10 +411,9 @@ We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Element
 | positions/differences (over $ℕ$; formally `Z`) | bearers ($P4$) | Element |
 | laws $L1$–$L5$ (here $L5$, $L2$/$L3$) | the universal layer | Rule (univ.) |
 
-{
-*Well-formedness.* The labeling is unambiguous: positions are elements, place and orientation are roles, the reference point with the step and the signs are rules. $P1$ is observed: positions are points *inside* the marking relative to the reference point, and the reference-point zero is not mixed with the counting zero (§ 1.4). And here the analysis turns into a *diagnosis*. “Minus three” as “less than nothing,” as a negative *object*, is a confusion of categories: the minus sign is a coordinate *role* (an orientation relative to the reference point), not an element-object of negative existence. In the world there are no “minus three apples”—there is a positive obligation of magnitude three, recorded with a minus sign (§ 1.1.2). And three things must not be mixed: the minus sign (a coordinate), logical negation ($\lnot P$), and algebraic invertibility (§ 1.2.1). The symmetry of `Z` is the symmetry of the coordinate *record*, not of two ways of existing.}
+*Well-formedness.* The labeling is unambiguous: positions are elements, place and orientation are roles, the reference point with the step and the signs are rules. $P1$ is observed: positions are points *inside* the marking relative to the reference point, and the reference-point zero is not mixed with the counting zero (§ 1.4). And here the analysis turns into a *diagnosis*. “Minus three” as “less than nothing,” as a negative *object*, is a confusion of categories: the minus sign is a coordinate *role* (an orientation relative to the reference point), not an element-object of negative existence. In the world there are no “minus three apples”—there is a positive obligation of magnitude three, recorded with a minus sign (§ 1.1.2). And three things must not be mixed: the minus sign (a coordinate), logical negation ($\lnot P$), and algebraic invertibility (§ 1.2.1). The symmetry of `Z` is the symmetry of the coordinate *record*, not of two ways of existing.
 
- What the analysis yields. The integer is again a *role* (a position), like number on the structural path (Chapter II.5), but now a *two-sided* one: orientation has been added to place. There is no “negative existence”—there is a negative *side* of the marking; in this way E/R/R shows that the seeming paradox of the negative number does not form, while upholding the principle of positive existence (§ 1.1). And the same move sets the line of Part III: the coordinate marking has been built with an *integer* step; the next chapter will make the step *fractional* and unfold the rational numbers.
+What the analysis yields. The integer is again a *role* (a position), like number on the structural path (Chapter II.5), but now a *two-sided* one: orientation has been added to place. There is no “negative existence”—there is a negative *side* of the marking; in this way E/R/R shows that the seeming paradox of the negative number does not form, while upholding the principle of positive existence (§ 1.1). And the same move sets the line of Part III: the coordinate marking has been built with an *integer* step; the next chapter will make the step *fractional* and unfold the rational numbers.
 
 ### What the Marking Does Not Yet Give
 

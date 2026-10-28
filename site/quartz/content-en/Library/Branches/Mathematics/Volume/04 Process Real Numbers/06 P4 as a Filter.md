@@ -2,7 +2,7 @@
 title: "Chapter 6. P4 as a Filter"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/06 P4 как фильтр.md"
-sourceBlob: 0892b7f06171ba141ff28a2a08dc2750aca548c1
+sourceBlob: 4dd9f5d2f55c29baa5198613a5479bf233e41200
 translated: 2026-10-20
 status: draft
 ---
@@ -67,7 +67,7 @@ it showed on key results *how* $P4$ rebuilds the basic structures on
 process carriers, and that this rebuilding is possible, rigorous, and
 checkable.
 
-### $P4${P4} as a Filter: The Central Thesis
+### $P4$ as a Filter: The Central Thesis
 
 The discipline in question can be named in a single formula. Up to now
 $P4$ has appeared as an ontological principle: infinity is a property of
@@ -95,11 +95,11 @@ The chapter is arranged as follows. First, the two scales of strength by
 which ToS assesses its results: the scale of *derivation strength*
 (§ 6.2) and the scale of *IF-conditions* (§ 6.3). Then an analysis of
 the filter itself as an E/R/R system (§ 6.4). Then the application of
-the filter to the *mathematical* corpus of Volume II (§ 6.5): what in it
+the filter to the *mathematical* corpus of the volume (§ 6.5): what in it
 is proved, what is accepted, what is chosen. Then the two sides of the
 filter: what $P4$ *cuts off* (§ 6.6) and what it *keeps* (§ 6.7). Then
 an honest catalog of what is *open* (§ 6.8). And finally, the summary of
-Part IV and the place of Volume II in the landscape of foundations
+Part IV and the place of the volume in the landscape of foundations
 (§ 6.9).
 
 ## Derivation Strength: Five Grades
@@ -135,7 +135,7 @@ classifies physical results: some are marked `FullyDerived` (three of
 them, by its count), others `DerivedWithInput` (two), `Constrained`
 (two), `ConsistentWith` (one); in total, eight classified results (the
 theorem `total_classified`). These results themselves are the subject of
-another volume; what matters here is *the scale itself*, which we will
+physics; what matters here is *the scale itself*, which we will
 take as an instrument, not their nature.
 
 ### A Documented Meta-Audit, Not a Scanner
@@ -247,20 +247,19 @@ else’s, higher role. This is exactly the overstatement that the filter
 catches. The maturity of a theory is measured by the *precision* of the
 labeling, not by the number of `FullyDerived` results.
 
-## The Filter on the Mathematics of Volume II
+## The Filter on the Mathematics of the Volume
 
 ### An Author’s Retrospective, Not a Coq Table
 
-{
 In the meta-files themselves the scales are applied first of all to the
 results of the future physical layer. In this chapter we use the same
 scales as a *retrospective instrument* for the mathematical corpus of
-Volume II. This is the *author’s* classification of results already
+the volume. This is the *author’s* classification of results already
 proved, not a separate Coq table automatically labeling Parts II–IV.
 The repository has no file that would list the mathematical theorems of
 the volume with their strength statuses; the labeling below was derived
 by the author from the chapters themselves and from their axiom price,
-checkable by the command `Print Assumptions`.}
+checkable by the command `Print Assumptions`.
 
 ### Two Independent Axes
 
@@ -298,7 +297,7 @@ must be named, not hidden. And finally, a number of forks are a
 representative of a class, from which number to count—here ToS chooses
 deliberately, and this choice is the role `Chosen`, not `Forced`.
 
-## What $P4${P4} Cuts Off
+## What $P4$ Cuts Off
 
 ### Completed Infinity as the Primary Carrier
 
@@ -317,13 +316,13 @@ was replaced by a process carrier.
 
 One must be more careful with impredicativity. It would be wrong to say
 that $P4$ “cuts off impredicativity in general”: the logical level
-Prop\ in Rocq itself carries impredicative features, and many files of
+Prop in Rocq itself carries impredicative features, and many files of
 the volume work at this level (the perfect kernel of § 4.5 is a
-Prop-valued witness). $P4$ does not rule out Prop\ as a logical level.
+Prop-valued witness). $P4$ does not rule out Prop as a logical level.
 What $P4$ cuts off is the turning of impredicatively given collections
 into *primary ontological objects* of analysis: defining a real number
 or the continuum through a collection that quantifies over itself as a
-ready object. The logical instrument Prop\ remains; only its ontological
+ready object. The logical instrument Prop remains; only its ontological
 translation into a completed carrier-object is ruled out.
 
 ### The External Axiom of Choice—but Not the Law of Witnessing
@@ -343,7 +342,7 @@ choice” but this: *there is no external ZFC axiom of choice; there is a
 local law of witnessing, $L4$, within ToS*—choice-like in technical
 strength, but not set-theoretic in substance.
 
-## What $P4${P4} Keeps
+## What $P4$ Keeps
 
 ### A Retrospective Table of What Has Been Built
 
@@ -371,7 +370,6 @@ keeps mathematics; it only changes *what* it is made *of*.
 
 ### A Working Map, Not a Repository File
 
-{
 The maturity of a theory is visible also in its naming plainly what has
 *not been done*. Below is the working numbering of a backlog of
 $F$-tasks. These are *not* names of Coq theorems and not a repository
@@ -381,7 +379,7 @@ the $P4$ program has its own catalog of what is open—the file
 `ProcessOpenQuestions.v`, “what remains”; but its items are physical,
 and its own honest final assessment is given for the physical layer.
 Here, by contrast, the subject is the mathematical tasks of the present
-volume.)}
+volume.)
 
 ### Open Problems of the Mathematics of the Volume
 
@@ -401,7 +399,7 @@ with sign and zero is a standard extension not secured by a theorem.
 *different* models; a translation between them—$2^{ℕ}\leftrightarrow
 [0,1]$—does not exist in the code.
 
-*The derivation $L1\wedgeL5\RightarrowP4$* ($F$-18). The derivation of
+*The derivation $L1\wedge L5\Rightarrow P4$* ($F$-18). The derivation of
 the principle $P4$ itself from the laws is carried out in the volume *in
 substance*, not by machine: in the code $P4$ stands as an independent
 predicate, without a formal chain from the laws.
@@ -410,7 +408,7 @@ This catalog is a map of the way, not an admission of failure. Each
 problem is named because it *can* be named exactly: it follows from what
 has already been built and awaits formalization.
 
-## Summary of Part IV and the Place of Volume II
+## Summary of Part IV and the Place of the Volume
 
 ### Where the Filter Goes Next
 
@@ -420,14 +418,14 @@ from which both scales are taken (§ 6.2–6.3). It is there that the
 filter distinguishes what is *derived* from the principles, what is
 *compatible* with them, what is *chosen* as a parameter, and what is
 merely *postulated*. The examples of those files—the quantities and
-relations of physics—are the subject of another volume; what matters
+relations of physics—lie beyond the volume; what matters
 here is that the *discipline* of the filter has already been worked out
 and tested on mathematics before being applied to more contentious
 material.
 
-### The Place of Volume II in the Landscape of Foundations
+### The Place of the Volume in the Landscape of Foundations
 
-And the last point. Volume II is not yet another axiomatics competing
+And the last point. The present volume is not yet another axiomatics competing
 with set theory for the right to be the foundation. It is a *recasting
 of the carrier*: the same mathematics—number, point, limit,
 continuum—but on a process instead of a completed set, with an
@@ -443,7 +441,7 @@ done. $P4$ has been read not only as the ontological principle of
 processes but also as a filter of the admissible strength of a
 statement—one that distinguishes the forced, the natural, the chosen,
 the compatible, and the external; this filter has been applied
-retrospectively to the mathematics of Volume II. Second: what it rests
+retrospectively to the mathematics of the volume. Second: what it rests
 on. The two scales—`DerivationStrength` and `IFStrength`—are introduced
 in the code on physical material; here they are taken as an instrument,
 and the labeling of the mathematics of the volume is the author’s own,

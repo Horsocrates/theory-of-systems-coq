@@ -2,7 +2,7 @@
 title: "Chapter 3. Comparing Cardinalities without Choice: Schröder–Bernstein and Cantor’s Theorem"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/03 Сравнение мощностей без выбора Шрёдер–Бернштейн и теорема Кантора.md"
-sourceBlob: 275833e7861d0ab00d6febf19a82a775d86bec38
+sourceBlob: 6a6f03327a67416a8117801694ac7c038ec6932e
 translated: 2026-10-20
 status: draft
 ---
@@ -103,7 +103,7 @@ This leads to Chapter 10.4, where the Axiom of Choice is considered directly—i
 [^1]: In `settheory/CardinalityWithoutChoice.v` (this work): `injects`, `surjects`, `bijects`; `injects_refl`, `injects_trans` (the preorder $\le$), `surjects_refl/_trans`, `bijects_refl/_trans/_injects/_both`—all **0 axioms**.
 [^2]: `Schroeder_Bernstein` (`SchroederBernstein_ERR.v`): from two injections a bijection $h$ is built (injective and surjective). The depth of the chain is `nat`; the test `B_rooted` is decided via `L3_informative` (the informative excluded middle)—this is exactly the price of L3.
 [^3]: The axiom status is checked by `Print Assumptions`: `Schroeder_Bernstein` and the wrapper `cardinal_antisym` (`CardinalityWithoutChoice.v`, this work) give exactly `classic` ${}+{}$ `L4_witness`. In the proof itself `L4_witness` is applied through the derived lemma of definite description `L4_definite` (CDD), which extracts the *unique* partial preimage from $\exists!$—this is exactly how the file header labels the technique. See the distinction between L4 and choice in Chapter 10.4.
-[^4]: `cantor_no_surjection` (`settheory/CantorTheoremGeneral.v`, this work): $\forall X (f:X\to(X\to\mathtt{bool})),\ \lnot `surjective` f$. Purely constructive, **0 axioms**; it works for any $X$ without assuming that it is inhabited.
+[^4]: `cantor_no_surjection` (`settheory/CantorTheoremGeneral.v`, this work): $\forall X (f:X\to(X\to\mathtt{bool})),\ \lnot \texttt{surjective} f$. Purely constructive, **0 axioms**; it works for any $X$ without assuming that it is inhabited.
 [^5]: `no_maximal_cardinality` (`CardinalityWithoutChoice.v`): $\forall X,\ \lnot (X \twoheadrightarrow (X\to\mathtt{bool}))$. A consequence of `cantor_no_surjection`; **0 axioms**.
 [^6]: Documented in the header of `CardinalityWithoutChoice.v`: the passage `surjects` $\to$ `injects` in the reverse direction is choice and is not derived here.
 

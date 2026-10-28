@@ -2,7 +2,7 @@
 title: "Chapter 2. RealProcess as a Type"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/02 RealProcess как тип.md"
-sourceBlob: 953d5f99967305ab125984e609f3bdee73be62db
+sourceBlob: 769ce17c1998403d152d2ae8f7132ebd0cadcb42
 translated: 2026-10-20
 status: draft
 ---
@@ -31,7 +31,7 @@ The chapter, like the previous ones, is checked against the Rocq formalization l
 
 ## The Bare Process as a Type of Functions
 
-### The Definition of `RealProcess`{RealProcess}
+### The Definition of `RealProcess`
 
 In the ToS Rocq repository the basic process type is defined in the file `ProcessCore.v` and bears the name `RealProcess`.[^1]
 The definition is extremely short:
@@ -52,7 +52,7 @@ Definition const_process (q : Q) : RealProcess := fun _ => q.
 
 At every step it outputs one and the same rational number $q$. This is a process that “has already arrived”: its approximations are not refined, because there is nothing to refine. The constant process will serve as a touchstone in all further constructions—the simplest case on which every definition is tested.
 
-### `RealProcess`{RealProcess} Is a Type of Total Functions
+### `RealProcess` Is a Type of Total Functions
 
 Chapter 4.1, in § 1.8, already made a caveat that needs to be unfolded here. Technically, `nat -> Q` is, in Rocq, a type of *total* functions: a term of this type is defined on *every* $n$, not only on the numbers that have already been requested. It would be inaccurate to say that there is “nothing completed” in `RealProcess`.
 
@@ -154,7 +154,7 @@ Theorem scale_preserves_Cauchy : forall c R,
 
 Each asserts one thing: an operation applied to Cauchy processes yields a Cauchy process again. The proofs are classical $\varepsilon$-arguments: for the sum to fit within the precision $\varepsilon$, it suffices for each summand to fit within $\varepsilon/2$, and the triangle inequality for the absolute value of rationals completes the matter. What is essential is not the arrangement of the proofs but their result: *the selected class is closed under arithmetic*. Adding, subtracting, and scaling real numbers, we again obtain real numbers—we do not fall out of the class that the selection of § 2.3 singled out.
 
-### The Connection with $P4${P4} of Chapter 4.1
+### The Connection with $P4$ of Chapter 4.1
 
 It is worth noticing that these preservation theorems echo what we met in Chapter 4.1. There the predicate `P4_formalized` from `ProcessFourPrinciples.v` was a conjunction of three statements: a Cauchy process exists; a certain operation on Cauchy processes preserves the Cauchy property; the sum of Cauchy processes is a Cauchy process. The third conjunct of `P4_formalized` is exactly the theorem of closure under addition, analogous to `add_preserves_Cauchy` given here.
 
@@ -166,9 +166,7 @@ The connection with Chapter 4.1 is therefore substantive but not literal. Chapte
 
 ### Bearer and Witness in One Object
 
-{
 Until now a real number has been described in two moves: a bare process (the type `RealProcess`, § 2.2) *plus* a condition of selection (the Cauchy property, § 2.3). A number was a process *and* a proof that the process had passed the selection—but these two things lay apart: the process in one place, its Cauchy property in another.
-}
 
 A full-fledged *type* of a real number brings them together into one object. In Rocq this is done by a record—a structure with fields. The file `CauchyReal.v` introduces the type `CauchySeq`:[^4]
 
@@ -183,9 +181,7 @@ A term of type `CauchySeq` is a *pair*: the first field, `cs_seq`, is the proces
 
 Here we must say at once precisely what `CauchySeq` *is* and what it is not, because the temptation to call it directly “the type of real numbers” is great, and this would be inaccurate. `CauchySeq` is the type of process *representatives* of real numbers. A term of type `CauchySeq` is a process of rational approximations together with a proof that it is a Cauchy sequence; it is a *candidate that has passed selection*, a legitimate representative of some real number. But strictly speaking, `CauchySeq` is not yet the *number* proper. The number arises at the next step—as an *equivalence class* of such representatives under the relation `cauchy_equiv` (on which see § 2.6); this step, quotienting, will be taken by Chapter 4.3. The difference is essential, and the chapter will hold to it: `RealProcess` (§ 2.2) is the bare candidate process; `CauchySeq` is the representative process, a candidate that has passed selection; the number proper is a class of equivalent representatives.
 
-{
 With this caveat it is clear how `CauchySeq` differs from `RealProcess`. The type `RealProcess` was *wider*: it also accommodated divergent processes, which define no number. The type `CauchySeq` cannot accommodate a divergent process: to build a term of type `CauchySeq` with a given bearer, one must present the second field—a proof `is_cauchy` for this bearer; and for a process whose Cauchy property has been *refuted*, no such proof can be presented. Therefore the population of the type `CauchySeq` is exactly the Cauchy processes, that is, the admissible representatives of real numbers, and nothing beyond. The selection of § 2.3 is here not a separate step but part of the arrangement of the type.
-}
 
 A small but important detail of the record is the colon with an arrow in `cs_seq :> nat -> Q`. This is a *coercion*: Rocq allows a term of type `CauchySeq` to be applied directly as a function, automatically taking its first field. If $a$ is a `CauchySeq`, then $a (n)$ means `cs_seq` $a (n)$—the approximation of the representative $a$ at step $n$. The representative can be queried as a process without extracting the bearer by hand. The type remembers that the process representative of a number is *still a process*, only a process with a guarantee.
 
@@ -211,9 +207,9 @@ The three lines are conveniently gathered into a table—all the more so since t
 
 | **File** | **Type** | **Cauchy predicate** | **Status** |
 |---|---|---|---|
-| `Process\-Core.v` | `RealProcess`, i.e., `nat -> Q` | `is_Cauchy` | Bare process ${}+{}$ external selection |
-| `Cauchy\-Real.v` | `CauchySeq` | `is_cauchy` | Process ${}+{}$ built-in proof |
-| `Process\-Gene\-ral.v` | `GenProcess A`, i.e., `nat -> A` | `is_cauchy_gen` | General metric frame |
+| `ProcessCore.v` | `RealProcess`, i.e., `nat -> Q` | `is_Cauchy` | Bare process ${}+{}$ external selection |
+| `CauchyReal.v` | `CauchySeq` | `is_cauchy` | Process ${}+{}$ built-in proof |
+| `ProcessGeneral.v` | `GenProcess A`, i.e., `nat -> A` | `is_cauchy_gen` | General metric frame |
 
 Let us also note the arrangement of the repository: `CauchyReal.v` and `ProcessGeneral.v` lie in the top-level directory `src/`, while `ProcessCore.v` lies in `src/process/`. This is a historical placement of the files; conceptually all three belong to one process layer.
 
@@ -226,13 +222,9 @@ Lemma cauchy_Q_equiv : forall (a : nat -> Q),
   is_cauchy a <-> is_cauchy_gen Qdist a.
 ```
 
-{
 The left-hand side is the predicate `is_cauchy` from `CauchyReal.v`; the right-hand side is the general Cauchy property with the metric `Qdist`. The lemma establishes their equivalence: *the Cauchy property of the second line is a special case of the general Cauchy property of the third*. The next lemma, `cauchy_seq_is_gen_process`, completes the picture: every `CauchySeq` is a `GenProcess` $ℚ$ satisfying the general Cauchy property.
-}
 
-{
-It is worth tracing the connection of the lines to the end. `ProcessGeneral.v` connects the second and third lines—the predicate `is_cauchy` with `is_cauchy_gen`. The first line is now connected with the second by a separate file, `CauchyProcessBridge.v`: the predicates `is_Cauchy` (from `ProcessCore.v`, the first line) and `is_cauchy` (from `CauchyReal.v`, the second) formalize one and the same $\varepsilon$-$N$ condition and turned out to *coincide literally*—so the bridge lemma `is_Cauchy_iff_is_cauchy` ($`is_Cauchy` R \leftrightarrow `is_cauchy` R$ for every $R$) is proved by a simple unfolding of the definitions. The lemma `process_equiv_iff_cauchy_equiv` connects the equivalence *relations* of the two lines as well, and the function `to_CauchySeq` translates a process of the first line into a representative of the second.
-}
+It is worth tracing the connection of the lines to the end. `ProcessGeneral.v` connects the second and third lines—the predicate `is_cauchy` with `is_cauchy_gen`. The first line is now connected with the second by a separate file, `CauchyProcessBridge.v`: the predicates `is_Cauchy` (from `ProcessCore.v`, the first line) and `is_cauchy` (from `CauchyReal.v`, the second) formalize one and the same $\varepsilon$-$N$ condition and turned out to *coincide literally*—so the bridge lemma `is_Cauchy_iff_is_cauchy` ($\texttt{is\_Cauchy} R \leftrightarrow \texttt{is\_cauchy} R$ for every $R$) is proved by a simple unfolding of the definitions. The lemma `process_equiv_iff_cauchy_equiv` connects the equivalence *relations* of the two lines as well, and the function `to_CauchySeq` translates a process of the first line into a representative of the second.
 
 This lifts the earlier caveat: the *direction of synchronization* that the chapter used to name here has been *carried through*. The bridge lemma “for every $R$, `is_Cauchy` $R$ holds if and only if `is_cauchy` $R$ holds” has been built (`is_Cauchy_iff_is_cauchy`), and with the full coincidence of the definitions its proof reduced to unfolding. Operations are carried over by the same bridge: the multiplication of the second line, `cauchy_mul`, yields the multiplication of the first, `process_mul`—with Cauchy preservation and compatibility (`CauchyProcessBridge.v`). So the first and second lines are not “related but formally separate” but *machine-linked*: a passage between them is now a reference to something proved, not only a substantive gesture. The difference that remains is *ontological*, not formal—these are two records of one $\varepsilon$-$N$ condition, and the bridge identifies precisely the records.
 
@@ -264,19 +256,15 @@ Definition cauchy_equiv (a b : CauchySeq) : Prop :=
 ```
 
 The processes $a$ and $b$ are equivalent if for every precision $\varepsilon$ there is a cutoff $N$ from which on their approximations differ by less than $\varepsilon$. The file introduces a sign for this relation—$a \mathbin{\sim\mkern-3mu\sim} b$ (in the notation of the repository,
-`a \~{}\~{} b`).
+`a ~~ b`).
 
-{
 For such a relation to be fit for identifying numbers, it must be an *equivalence relation*—reflexive, symmetric, transitive. `CauchyReal.v` proves exactly this, with three separate lemmas: `cauchy_equiv_refl` (every process is equivalent to itself), `cauchy_equiv_sym` (if $a$ is equivalent to $b$, then $b$ is equivalent to $a$), `cauchy_equiv_trans` (if $a$ is equivalent to $b$, and $b$ to $c$, then $a$ is equivalent to $c$). The three properties are proved; `cauchy_equiv` is a full-fledged equivalence relation on the type `CauchySeq`.
-}
 
 ### Arithmetic Respects Equivalence
 
 An equivalence relation alone is not enough—it must also be *compatible* with arithmetic. If a number can be given by different processes, then the result of addition must not depend on which process-representatives we took. Adding $a$ to $b$, and adding a process $a'$ equivalent to $a$ to a process $b'$ equivalent to $b$, we must obtain equivalent results—otherwise addition would be an operation not on *numbers* but only on processes.
 
-{
 `CauchyReal.v` proves this as well. The file defines the arithmetic of the second line—`cauchy_add`, `cauchy_neg`, `cauchy_sub`, `cauchy_const`—where each operation is a `mkCauchy`: it builds a new `CauchySeq`, immediately equipping the result with a proof that it is again Cauchy (this is the same closure as in § 2.4, but carried out within the second line). And then come the key compatibility lemmas:
-}
 
 ```coq
 Lemma cauchy_add_compat : forall a a' b b' : CauchySeq,
@@ -324,10 +312,8 @@ A caveat on logical status is needed here, and the chapter makes it. Unlike the 
 
 ### Geometric Rate: The Process Gap
 
-{
 The second criterion is of another nature and is connected with the *rate* of convergence. The file `ProcessBounds.v` introduces a structure that can be called a *process gap*.[^5]
 This is the record `has_process_mass_gap` with three conditions: the process has a stable positive lower bound; its approximations converge at a *geometric* rate—the discrepancy decreases as a power of some number less than one; and the process decreases monotonically.
-}
 
 The name `mass_gap` should be read as a *technical term* of the process formalization—the presence of a positive lower gap and a geometric estimate of the rate. It is not a statement about a physical mass gap in the sense of quantum field theory; the caveat is not superfluous, since the ToS repository also contains files of physical content, and the reader might connect the names. Here `mass_gap` is a purely structural notion of convergence.
 
@@ -360,7 +346,7 @@ The layers just listed fit together into a system—the process real number—an
 *Elements—the bearers* (the law $L1$ and the principle
 $P4$). The elements are the rational approximations $a(n)$ at each step; the bearer itself is a process `nat -> Q`, the simplest being the constant `const_process`. By $L1$, each approximation is identical to itself. By $P4$, the bearer is finite at any level: a process is observed in *prefixes*—finite lists of length $n$ (§ 2.2.3)—and is never presented whole.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -374,8 +360,7 @@ $P4$). The elements are the rational approximations $a(n)$ at each step; the bea
 
 *Well-formedness.* The labeling is unambiguous: the approximations and the process are elements, the statuses candidate/representative/number are roles, $P4$ with the Cauchy property and arithmetic are rules. There is no self-reference. Two honest caveats. First, the role “number” is *not yet realized* at the level of this chapter: the bearer and the representatives have been built, while the number as a class is built by Chapter 4.3—so the system here is well-formed *at the level of representatives*. Second, the “inevitability” of the type (§ 2.8.3 below) is a substantive thesis, not a Rocq theorem about the uniqueness of the construction.
 
-{
- This analysis is the E/R/R foundation of the whole of Part IV. It shows that `RealProcess`, `CauchySeq`, and the number are not three competing definitions but three *role statuses* of one bearer, connected by a rule of selection (Cauchy) and a rule of identification (equivalence); and that $P4$ is the constitution by which a number is a process at all, not a point. Both the quotienting of Chapter 4.3 (the number as a class) and the whole analysis of Part V will stand on this type: metric, continuity, derivative, and integral work over process numbers read in exactly this way.}
+ This analysis is the E/R/R foundation of the whole of Part IV. It shows that `RealProcess`, `CauchySeq`, and the number are not three competing definitions but three *role statuses* of one bearer, connected by a rule of selection (Cauchy) and a rule of identification (equivalence); and that $P4$ is the constitution by which a number is a process at all, not a point. Both the quotienting of Chapter 4.3 (the number as a class) and the whole analysis of Part V will stand on this type: metric, continuity, derivative, and integral work over process numbers read in exactly this way.
 
 ### The Type Is Not Arbitrary
 
@@ -401,10 +386,10 @@ The equality $0{,}999… = 1$ will thus turn out to be not a paradox but a simpl
 
 The present chapter has given Part IV its main building material—the type of process representatives of a real number. Everything that follows works with this type.
 
-{*A process representative of a real number is a process of rational approximations that has passed selection by the Cauchy property, taken as an object of a single type. The Rocq formalization of ToS gives this type in three related designs: the bare process `RealProcess`
+*A process representative of a real number is a process of rational approximations that has passed selection by the Cauchy property, taken as an object of a single type. The Rocq formalization of ToS gives this type in three related designs: the bare process `RealProcess`
 ${}={}$ `nat -> Q` with the external predicate `is_Cauchy`; the type `CauchySeq` equipped with a built-in proof of convergence
 ${}={}$ `mkCauchy { cs_seq; cs_cauchy }`; and the universal frame `GenProcess A` ${}={}$ `nat -> A`. These designs are connected (the lemma `cauchy_Q_equiv` reduces the Cauchy property of the second line to the general case of the third), but the first and second lines are not machine-identified as a single term; the chapter assigns the three lines to roles—candidate, representative, frame—and adopts `CauchySeq` as the main type for building the number in Part IV. What is essential: `CauchySeq` is a type of *representatives*, while the *number* proper is a class of equivalent representatives; the quotienting will be carried out by Chapter 4.3. Over the type a pointwise additive arithmetic is defined—addition, subtraction, negation, rational scaling—and it is proved that it preserves the Cauchy property; *this* chapter does not build a full multiplication of two processes (it has been built separately: `process_mul`, `cauchy_mul`). An
-equivalence relation `cauchy_equiv` has been introduced with proved reflexivity, symmetry, transitivity, and compatibility with arithmetic—different processes can be representatives of one number. Convergence is established not only by the definition but also by structural criteria—monotonicity with boundedness, a geometric rate. The basic construction `CauchySeq`, the relation `cauchy_equiv`, and the additive arithmetic in `CauchyReal.v` carry zero axioms and zero incomplete proofs; certain structural criteria—for example, monotonicity with boundedness—use the classical logic of $L3$, which is noted specially. The type is not arbitrary: each of its layers is forced by the task of building number as a process in the spirit of $P4$—this is a substantive thesis of the chapter, not a Rocq theorem and not a statement about the uniqueness of the construction among all formalizations of the real number. The real number as an equivalence class of representatives, and the point as such a class, are built by Chapter 4.3.*}
+equivalence relation `cauchy_equiv` has been introduced with proved reflexivity, symmetry, transitivity, and compatibility with arithmetic—different processes can be representatives of one number. Convergence is established not only by the definition but also by structural criteria—monotonicity with boundedness, a geometric rate. The basic construction `CauchySeq`, the relation `cauchy_equiv`, and the additive arithmetic in `CauchyReal.v` carry zero axioms and zero incomplete proofs; certain structural criteria—for example, monotonicity with boundedness—use the classical logic of $L3$, which is noted specially. The type is not arbitrary: each of its layers is forced by the task of building number as a process in the spirit of $P4$—this is a substantive thesis of the chapter, not a Rocq theorem and not a statement about the uniqueness of the construction among all formalizations of the real number. The real number as an equivalence class of representatives, and the point as such a class, are built by Chapter 4.3.*
 
 ---
 

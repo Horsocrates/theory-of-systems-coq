@@ -2,7 +2,7 @@
 title: "Chapter 4. The Derivative"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/04 Производная.md"
-sourceBlob: 4ac17c8eaa4cce9bee41f059d644437753082b7f
+sourceBlob: 77f8dd767cb710af619f0235c76b77783437f99a
 translated: 2026-10-20
 status: draft
 ---
@@ -29,7 +29,7 @@ Before carrying it over into ToS, it is worth understanding precisely what *cons
 
 The difficulty lies elsewhere, and it is twofold. First, the classical definition makes the limit of the *quotient* as $h \to 0$ the *primary object*. But $h$ then runs through values tending to zero, and one cannot divide by zero; for the limit to be defined, one has to consider the quotient on ever smaller steps and pass to the limit. Second, this limit itself is a completed object “$\lim$,” and under $P4$ there are no completed limits: a “real” in ToS is itself a process. What is needed is a formulation in which the limit of the quotient at $h=0$ does *not* stand in the place of the primary definition.
 
-### The Division-Free Criterion: $o(h)${Division-free criterion: o(h)}
+### The Division-Free Criterion: $o(h)$
 
 The first layer of the derivative in ToS is a *criterion*: a rule answering the question “which number $L$ is the derivative of the function $f$ at the point $x$?” And we formulate this criterion *without division*.
 
@@ -58,7 +58,7 @@ Let us note the level of the type precisely (the Part V safeguard). Here $f :
 
 One more detail calls for a word. The step $h$ is taken to be *nonzero*: the condition is written as $0<|h|<\delta$. The main reason is substantive: the derivative checks the behavior of the function under small *nonzero* shifts, that is, in a *punctured* neighborhood of the point $x$. A zero step is uninformative: for $h=0$ the estimate turns into $0<0$ on the left and is trivially true; it carries no local content. In the code the nonzeroness of $h$ additionally helps to get around technical subtleties of the rational representation and of the relation `Qeq`—but this is a secondary motive, not the main one. The same device was applied to `continuous_at` in § 5.3; it is a deliberate detail, not an oversight.
 
-### The Derivative-Process: `deriv_process` and the Bridge{The derivative-process: deriv_process and the bridge}
+### The Derivative-Process: `deriv_process` and the Bridge
 
 The criterion of § 4.1.3 says *which* number $L$ is the derivative. But it does not *compute* $L$: it is a predicate, a check, rather than a construction. The computational side needs a second layer—the derivative as a *process*.
 
@@ -80,19 +80,18 @@ Definition deriv_process (f : Q -> Q) (x : Q) : RealProcess :=
     (f (x + h) - f x) / h.
 ```
 
-{
-Here there *is* division—but it is division by $h_n$, and $h_n$ is positive by construction: the lemma `deriv_step_pos` establishes $0<h_n$ for every $n$. This is legitimate division by a nonzero rational step, not the inadmissible limit at $h=0$. On the simplest functions the process behaves as expected: `deriv_process_const` shows that for a constant it is equivalent to the constant process $0$, and `deriv_process_id` that for the identity $w\mapsto w$ it is equivalent to the constant process $1$.}
+Here there *is* division—but it is division by $h_n$, and $h_n$ is positive by construction: the lemma `deriv_step_pos` establishes $0<h_n$ for every $n$. This is legitimate division by a nonzero rational step, not the inadmissible limit at $h=0$. On the simplest functions the process behaves as expected: `deriv_process_const` shows that for a constant it is equivalent to the constant process $0$, and `deriv_process_id` that for the identity $w\mapsto w$ it is equivalent to the constant process $1$.
 
-{ The two layers—the criterion and the process—are linked by a *bridge*: the theorem `deriv_process_converges`. It states: if $L$ is the derivative of $f$ at the point $x$ in the sense of the criterion `has_derivative`, then the process of difference quotients is equivalent to the constant process $L$:
+The two layers—the criterion and the process—are linked by a *bridge*: the theorem `deriv_process_converges`. It states: if $L$ is the derivative of $f$ at the point $x$ in the sense of the criterion `has_derivative`, then the process of difference quotients is equivalent to the constant process $L$:
 
 $$
-`has_derivative`\;f\;x\;L
+\texttt{has\_derivative}\;f\;x\;L
 \;\Longrightarrow\;
-`deriv_process`\;f\;x \;\sim\; `const_process`\;L.
+\texttt{deriv\_process}\;f\;x \;\sim\; \texttt{const\_process}\;L.
 $$
 
 In substance the bridge says: the division-free criterion and the computational process *agree*—the number $L$ satisfying the criterion is exactly what the process of difference quotients converges to. The proof is direct: the criterion gives $\delta$, the lemma `deriv_step_vanishes` finds a level $N$ from which on $h_n<\delta$, and then $\bigl|(f(x+h)-f(x))/h - L\bigr| = |f(x+h)-f(x)-L h|/|h| <
-\varepsilon$. Two more facts follow at once from the bridge: `deriv_process_cauchy` (the process of difference quotients is a Cauchy process) and `derivative_is_process_construction` (the derivative is presented as a Cauchy process equivalent to the constant $L$—the E/R/R form of the result).}
+\varepsilon$. Two more facts follow at once from the bridge: `deriv_process_cauchy` (the process of difference quotients is a Cauchy process) and `derivative_is_process_construction` (the derivative is presented as a Cauchy process equivalent to the constant $L$—the E/R/R form of the result).
 
 It is worth separating three statuses so as not to confuse them later (the Part V safeguard). `has_derivative` is a *criterion*, a predicate. `deriv_process` is a *process*, a construction. `deriv_process_converges` is the *bridge theorem* between them. These are three different things, and the chapter will indicate every time which of them is meant.
 
@@ -110,7 +109,7 @@ The derivative is a system, and the E/R/R methodology (Part I) applies to it. Th
 
 *Elements—the bearers* (the law $L1$ and the principle $P4$). The elements are functions $ℚ \to ℚ$, and in the process, the difference quotients $q(n) = \bigl(f(x+h_n)-f(x)\bigr)/h_n$ with $h_n = 1/(n+1)$. By $L1$ the slope, if it exists, is identical to itself (unique). By $P4$ the bearers of the process are finite at each step—rational difference quotients, surveyable at any level; the derivative is actual as a process of approximations of the slope, and there is no completed “limit as $h\to 0$.”
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -130,7 +129,7 @@ The derivative is a system, and the E/R/R methodology (Part I) applies to it. Th
 
 From here the chapter proceeds as follows. § 4.2: the basic rules of differentiation—the derivative of a constant, of the identity, linearity. § 4.3: the connection with § 5.3—differentiability implies continuity. § 4.4: product and power, the main nonlinear rules. § 4.5: the uniqueness of the derivative and an application to optimization—Fermat’s theorem. § 4.6: the mean value theorem via “walk points.” § 4.7: corollaries of the mean value theorem—monotonicity, the Lipschitz property. § 4.8: the summary.
 
-{ There are three supporting files. `Differentiation.v`: the division-free criterion and the rules. `ProcessDerivative.v`: the derivative as a process and the bridge to the criterion. `MeanValueTheorem.v`: the grid mean value theorem and its corollaries. All three declare the status “AXIOMS: none” in their headers; the chapter gives in § 4.8 the precise caveat on what this header means and what it does not.}
+There are three supporting files. `Differentiation.v`: the division-free criterion and the rules. `ProcessDerivative.v`: the derivative as a process and the bridge to the criterion. `MeanValueTheorem.v`: the grid mean value theorem and its corollaries. All three declare the status “AXIOMS: none” in their headers; the chapter gives in § 4.8 the precise caveat on what this header means and what it does not.
 
 ## Basic Rules of Differentiation
 
@@ -206,7 +205,7 @@ One more technical fact is extracted from continuity, and it will be needed in �
 
 The proof is short: continuity with $\varepsilon=1$ gives a $\delta$ on which $|f(x+h)-f(x)|<1$; then $|f(x+h)|\le|f(x)|+1$, and $|f(x)|+1$ is taken as $M$. By itself the fact is modest, but in § 4.4.2 it will turn out to be essential: in the proof of the product rule the factor $g(x+h)$ will have to be bounded by something, and it is precisely this lemma that bounds it. Its role is named in advance so that the appearance of `continuous_bounded_near` in § 4.4 does not look unexpected.
 
-### The Hierarchy: Smooth $\subset$ Continuous{The hierarchy: smooth within continuous}
+### The Hierarchy: Smooth $\subset$ Continuous
 
 The summary of the section is one line of hierarchy: differentiability is strictly stronger than continuity. Every differentiable function is continuous—this is `deriv_implies_continuous`. The converse is false. The standard example is the function $|x|$ at zero: it is continuous but not differentiable, since on the left the increment behaves with slope $-1$ and on the right with slope $+1$, and there is no single linear approximation. Over $ℚ$ this example works just as it does over $ℝ$.
 
@@ -229,14 +228,14 @@ that is, exactly $h^2$. It remains to note that $|h\cdot h| =
 
 ### The Product Rule
 
-{ The main nonlinear rule: the derivative of a product. If $f$ has derivative $L_f$ and $g$ has derivative $L_g$, then the function $w\mapsto
+The main nonlinear rule: the derivative of a product. If $f$ has derivative $L_f$ and $g$ has derivative $L_g$, then the function $w\mapsto
 f(w)\cdot g(w)$ has the derivative
 
 $$
 L_f\cdot g(x) + f(x)\cdot L_g.
 $$
 
-In `Differentiation.v` this is `deriv_product`—the longest proof of the file (`SECTION 4`, about one hundred fifty lines). We will not give it in full; let us name the idea.}
+In `Differentiation.v` this is `deriv_product`—the longest proof of the file (`SECTION 4`, about one hundred fifty lines). We will not give it in full; let us name the idea.
 
 The idea is an algebraic decomposition of the approximation error into three terms:
 
@@ -254,7 +253,7 @@ $$
 
 Each of the three terms is bounded by the quantity $(\varepsilon/3)\cdot|h|$—hence the splitting of $\varepsilon$ into three parts. The term $T_1$ contains the approximation error of $f$ multiplied by $g(x+h)$; to bound it, the factor $g(x+h)$ must be bounded—and here the lemma `continuous_bounded_near` from § 4.3.2, prepared in advance for this purpose, does its work. The term $T_2$ is bounded through the continuity of $g$ (the difference $g(x+h)-g(x)$ is small). The term $T_3$ is bounded through the derivative of $g$ (the error of its approximation is small to the order of $h$). The sum of the three bounds of $(\varepsilon/3)\cdot|h|$ each, together with the triangle inequality, gives what is required.
 
-{ This is a full theorem, not a grid or approximate version (the Part V safeguard). The rule also has a process form: `deriv_product_process` in `ProcessDerivative.v` states that the process of difference quotients of the product is equivalent to the constant process $L_f g(x)+f(x) L_g$. It is proved, like the process rules of § 4.2.3, through the bridge `deriv_process_converges` and `deriv_product` itself—again a superstructure, not a separate proof.}
+This is a full theorem, not a grid or approximate version (the Part V safeguard). The rule also has a process form: `deriv_product_process` in `ProcessDerivative.v` states that the process of difference quotients of the product is equivalent to the constant process $L_f g(x)+f(x) L_g$. It is proved, like the process rules of § 4.2.3, through the bridge `deriv_process_converges` and `deriv_product` itself—again a superstructure, not a separate proof.
 
 ### The Power Rule by Induction
 
@@ -283,13 +282,13 @@ The part linear in $h$ is exactly $L_f g(x)+f(x)L_g$, the slope from the product
 
 The criterion `has_derivative` checks whether a given number $L$ is the derivative. But could several different numbers satisfy the criterion at once? The lemma `deriv_unique` answers: no. If both $L$ and $L'$ are derivatives of $f$ at the point $x$, then $L=L'$ (in the sense of `Qeq`).
 
-{ The proof is by contradiction. Let $L\ne L'$; then $|L-L'|>0$, and one can take $\varepsilon = |L-L'|/4$. Both criteria—for $L$ and for $L'$—supply their error estimates; adding them and applying the triangle inequality, we obtain for a suitable nonzero $h$
+The proof is by contradiction. Let $L\ne L'$; then $|L-L'|>0$, and one can take $\varepsilon = |L-L'|/4$. Both criteria—for $L$ and for $L'$—supply their error estimates; adding them and applying the triangle inequality, we obtain for a suitable nonzero $h$
 
 $$
 |L-L'|\cdot|h| \;<\; \tfrac{1}{2} |L-L'|\cdot|h|,
 $$
 
-which is impossible. Hence $L=L'$. In substance: if a linear approximation of the increment exists at all, there is exactly one—therefore the phrase “the derivative of $f$ at the point $x$” is correct: it names a unique object. The process form of this fact is `deriv_process_unique` in `ProcessDerivative.v`: two constant processes corresponding to two derivatives of one function are equivalent. In terms of the analysis of § 4.1.5, this is the $L1$-correctness of the role “slope”: the derivative is defined unambiguously.}
+which is impossible. Hence $L=L'$. In substance: if a linear approximation of the increment exists at all, there is exactly one—therefore the phrase “the derivative of $f$ at the point $x$” is correct: it names a unique object. The process form of this fact is `deriv_process_unique` in `ProcessDerivative.v`: two constant processes corresponding to two derivatives of one function are equivalent. In terms of the analysis of § 4.1.5, this is the $L1$-correctness of the role “slope”: the derivative is defined unambiguously.
 
 ### The Affine Function and the Quadratic Loss
 
@@ -313,14 +312,14 @@ This is a full theorem. As for the axiom audit (the Part V safeguard): at the en
 The last subsection is a bridge to optimization. The lemma `gradient_step_uses_derivative` connects a step of gradient descent with the derivative of the quadratic loss: the first step is
 
 $$
-`gd_weight`\;w_0\;w_\star\;\eta\;1
+\texttt{gd\_weight}\;w_0\;w_\star\;\eta\;1
 \;=\;
 w_0 - \eta\cdot\bigl(2(w_0-w_\star)\bigr).
 $$
 
 The right-hand side is “the weight minus the learning rate times the derivative of the loss”: the factor $2(w_0-w_\star)$ is exactly the derivative of the quadratic loss from § 4.5.2.
 
-{ An honest remark on the status of this lemma (the Part V safeguard: loud names are to be called what they are). `gradient_step_uses_derivative` is not a deep theorem. Its proof is the unfolding of the definitions `gd_weight`, `gd_error`, `contraction` and the identity `ring`. In essence it is a consistency check: the object `gd_weight` introduced in `GradientDescent.v` does implement a “gradient step” in the sense of the derivative of this chapter. A useful stitching of two files—but it has no self-standing content, and it should be called exactly that.}
+An honest remark on the status of this lemma (the Part V safeguard: loud names are to be called what they are). `gradient_step_uses_derivative` is not a deep theorem. Its proof is the unfolding of the definitions `gd_weight`, `gd_error`, `contraction` and the identity `ring`. In essence it is a consistency check: the object `gd_weight` introduced in `GradientDescent.v` does implement a “gradient step” in the sense of the derivative of this chapter. A useful stitching of two files—but it has no self-standing content, and it should be called exactly that.
 
 The chapter does not go into the theory of gradient descent itself—the convergence of the weights, the rate, the choice of $\eta$: that is the material of `GradientDescent.v` and, possibly, of a separate future chapter. One thing matters here—the identification of the direction of the step with the derivative of the quadratic loss; with this the bridge is exhausted.
 
@@ -338,7 +337,7 @@ Division by $b-a$ poses no fundamental difficulty here: since $a<b$, the denomin
 
 Therefore `MeanValueTheorem.v` proves the *constructive corollaries* of the classical form rather than the form with the point $c$ itself—those estimates of the increment through bounds on the derivative for the sake of which the mean value theorem is usually applied. The move is the same as in § 5.3: in place of an elusive point, a grid construction yielding checkable inequalities.
 
-### Walk Points: A Leibniz-Exact Chain{Walk points: a Leibniz-exact chain}
+### Walk Points: A Leibniz-Exact Chain
 
 The grid construction is built on *walk points*—the chain $x,\;x+s,\;(x+s)+s,\;…$ with a fixed step $s$. In `MeanValueTheorem.v` this is a recursive function:
 
@@ -370,7 +369,7 @@ The difference from `has_derivative` lies in the order of the quantifiers. In th
 
 For the grid to approximate the interval as precisely as desired, its step must be arbitrarily small. The lemma `walk_step_pos` establishes that the step $(b-a)/(N+1)$ is positive, and `walk_step_small` that for every $\delta>0$ there is a number of subdivisions $N$ for which this step is smaller than $\delta$.
 
-{ The proof of `walk_step_small` relies on the Archimedean property. In `MeanValueTheorem.v` itself a lemma named `Archimedean_nat` is used; kindred Archimedean lemmas in other files of the chain may be named differently. In substance it is one and the same step of reasoning: to find a finite $N$ at which the rational grid becomes finer than the given $\delta$. The Archimedean property—that very “fuel” of $\varepsilon$-arguments which in § 5.1 already made the scale of processes arbitrarily fine—here allows the grid to be made as dense as desired in a *finite* number of subdivisions. No completed infinity is needed for this.}
+The proof of `walk_step_small` relies on the Archimedean property. In `MeanValueTheorem.v` itself a lemma named `Archimedean_nat` is used; kindred Archimedean lemmas in other files of the chain may be named differently. In substance it is one and the same step of reasoning: to find a finite $N$ at which the rational grid becomes finer than the given $\delta$. The Archimedean property—that very “fuel” of $\varepsilon$-arguments which in § 5.1 already made the scale of processes arbitrarily fine—here allows the grid to be made as dense as desired in a *finite* number of subdivisions. No completed infinity is needed for this.
 
 ### The Main Theorem: Bounded Derivative, Bounded Increment
 
@@ -402,7 +401,7 @@ The formulation is worth reading carefully. The theorem does *not* assert the fu
 
 ### The Sign of the Derivative Sets Monotonicity
 
-{ The second corollary connects the sign of the derivative with growth and decrease. The lemma `pos_deriv_increases`: if on the interval the derivative is bounded below by a positive number $c$, then the function has grown on the grid—the increment $f(\text{walk endpoint})-f(a)$ is strictly positive. The dual lemma `neg_deriv_decreases`: if the derivative is bounded above by a negative number, the function has decreased.}
+The second corollary connects the sign of the derivative with growth and decrease. The lemma `pos_deriv_increases`: if on the interval the derivative is bounded below by a positive number $c$, then the function has grown on the grid—the increment $f(\text{walk endpoint})-f(a)$ is strictly positive. The dual lemma `neg_deriv_decreases`: if the derivative is bounded above by a negative number, the function has decreased.
 
 In substance this is the classical corollary of the mean value theorem—“a positive derivative means growth”—but in grid form and without the point $c$. The proofs repeat the telescope of § 4.6.4, except that the estimate of one step is taken from below rather than from above. These are grid results, like everything in § 4.6–4.7.
 
@@ -422,7 +421,7 @@ $$
 
 In substance: for the square, that very “point $c$” of the classical theorem is found explicitly and exactly—it is the midpoint of the interval, $(a+b)/2$. Here the grid picture of § 4.6 and the classical formulation meet at one checkable point.
 
-{ One honest remark about the file. `MeanValueTheorem.v` ends with the lemma `mvt_quadratic_midpoint`—without the final block of `Check` and `Print Assumptions` that is present, for example, in `Differentiation.v`. This is *not* a sign that the proofs are incomplete: all eighteen lemmas of the file are closed with `Qed`. It is only the absence of a summary axiom audit at the end of the file; such an audit for the theorem one needs is run separately with the command `Print Assumptions`.}
+One honest remark about the file. `MeanValueTheorem.v` ends with the lemma `mvt_quadratic_midpoint`—without the final block of `Check` and `Print Assumptions` that is present, for example, in `Differentiation.v`. This is *not* a sign that the proofs are incomplete: all eighteen lemmas of the file are closed with `Qed`. It is only the absence of a summary axiom audit at the end of the file; such an audit for the theorem one needs is run separately with the command `Print Assumptions`.
 
 ## What Has Been Built and What Is Being Prepared. Summary of the Chapter
 
@@ -462,12 +461,12 @@ It would be necessary, first, to prove that the criterion `has_derivative` is we
 
 ### A Caveat on the Status of Axioms
 
-{ The Part V safeguard requires precision on the question of axioms. All three supporting files—`Differentiation.v`, `ProcessDerivative.v`, `MeanValueTheorem.v`—declare the status “AXIOMS: none” in their headers (`ProcessDerivative.v`: “0 axioms, 16 Qed”). However, all of them import files through which the classical layer passes: `Differentiation.v` relies on `SeriesConvergence.v` and `GradientDescent.v`, and these on `MonotoneConvergence.v`, which carries the axiom `classic`; `ProcessDerivative.v` relies on `Differentiation.v`. Moreover, `MeanValueTheorem.v` imports `EVT_idx.v`, and in `EVT_idx.v` the axiom `classic` is declared locally (this file was examined in § 5.3). This does not mean that every mean value theorem depends on `classic`—it means only that for a particular theorem one has to look at `Print Assumptions`.}
+The Part V safeguard requires precision on the question of axioms. All three supporting files—`Differentiation.v`, `ProcessDerivative.v`, `MeanValueTheorem.v`—declare the status “AXIOMS: none” in their headers (`ProcessDerivative.v`: “0 axioms, 16 Qed”). However, all of them import files through which the classical layer passes: `Differentiation.v` relies on `SeriesConvergence.v` and `GradientDescent.v`, and these on `MonotoneConvergence.v`, which carries the axiom `classic`; `ProcessDerivative.v` relies on `Differentiation.v`. Moreover, `MeanValueTheorem.v` imports `EVT_idx.v`, and in `EVT_idx.v` the axiom `classic` is declared locally (this file was examined in § 5.3). This does not mean that every mean value theorem depends on `classic`—it means only that for a particular theorem one has to look at `Print Assumptions`.
 
-{ The precise formulation—and precisely not a wholesale one—is this. The imports pass through files with a classical layer, and therefore a file header by itself does *not* replace the command `Print Assumptions` for a particular theorem (a rule adopted as early as Chapter 4.6). One should not assert “the dependencies drag in `classic`” as a blanket verdict on every theorem—the factual axiom status is given only by `Print Assumptions` for that very theorem. At the end of `Differentiation.v` such a check is written out for the key theorems—`deriv_product`, `deriv_power_succ`, `local_min_zero_deriv`, `gradient_step_uses_derivative`—and it is these outputs that give the factual picture. `MeanValueTheorem.v` and `ProcessDerivative.v` have no final block of `Print
-Assumptions`; for the theorem one needs, it should be run separately.}
+The precise formulation—and precisely not a wholesale one—is this. The imports pass through files with a classical layer, and therefore a file header by itself does *not* replace the command `Print Assumptions` for a particular theorem (a rule adopted as early as Chapter 4.6). One should not assert “the dependencies drag in `classic`” as a blanket verdict on every theorem—the factual axiom status is given only by `Print Assumptions` for that very theorem. At the end of `Differentiation.v` such a check is written out for the key theorems—`deriv_product`, `deriv_power_succ`, `local_min_zero_deriv`, `gradient_step_uses_derivative`—and it is these outputs that give the factual picture. `MeanValueTheorem.v` and `ProcessDerivative.v` have no final block of `Print
+Assumptions`; for the theorem one needs, it should be run separately.
 
-{ For the completeness of the audit, let us also name two honest facts from the depths of the chain, established by a verbatim check of the source files: the lemma `partial_sum_tail` in `SeriesConvergence.v` is left unfinished via `Abort` (with the author’s comment that the direct formulation of the telescope is inconvenient and the Cauchy property is proved differently), and the proof of `mct_inc_least` in `MonotoneConvergence.v` contains `Restart`—the first attempt at the proof is abandoned and replaced by a second. This does not affect the theorems of the present chapter, but in an honest picture of the dependencies such places must be named.}
+For the completeness of the audit, let us also name two honest facts from the depths of the chain, established by a verbatim check of the source files: the lemma `partial_sum_tail` in `SeriesConvergence.v` is left unfinished via `Abort` (with the author’s comment that the direct formulation of the telescope is inconvenient and the Cauchy property is proved differently), and the proof of `mct_inc_least` in `MonotoneConvergence.v` contains `Restart`—the first attempt at the proof is abandoned and replaced by a second. This does not affect the theorems of the present chapter, but in an honest picture of the dependencies such places must be named.
 
 ### Summary of the Chapter
 

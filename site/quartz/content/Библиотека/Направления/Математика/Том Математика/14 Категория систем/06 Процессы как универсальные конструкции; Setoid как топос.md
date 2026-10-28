@@ -34,7 +34,7 @@ ToS понимает *универсальные конструкции*: пре
 
 **Уравнитель — процесс разностей.**  $\mathrm{eq}(f,g)$ есть `equalizer_process` $f g
 = \lambda n. f n - g n$. Он сходится к нулю ровно тогда, когда $f$ и $g$ эквивалентны как процессы
-(`equalizer_converges` и обратно `equalizer_ zero_ means_ equiv`).
+(`equalizer_converges` и обратно `equalizer_zero_means_equiv`).
 То есть «совпадать» для процессов — это *уравнитель стремится к нулю*, а не «равны как
 завершённые объекты».
 
@@ -48,7 +48,7 @@ ToS понимает *универсальные конструкции*: пре
 не нуждается в «завершённом» копределе-объекте: им служит **диагональ** — сам процесс
 
 $$
-`directed_colimit`\ \mathrm{chain}\ =\ \lambda n. \mathrm{chain} n n
+\texttt{directed\_colimit}\ \mathrm{chain}\ =\ \lambda n. \mathrm{chain} n n
 $$
 
 (`colimit_diagonal`). Это и есть P4 во плоти: «копредел цепи $a_0,a_1,…$ есть сам
@@ -78,7 +78,7 @@ $$
 
 **Конечные пределы.**  Терминальный объект — единичный сетоид (`setoid_terminal`);
 бинарные произведения с универсальным свойством (`setoid_prod_beta1`/`_beta2`,
-`setoid_ prod_ unique`); уравнители (`eq_equalizes`,
+`setoid_prod_unique`); уравнители (`eq_equalizes`,
 `eq_univ`, `eq_unique`). Математически терминал${}+{}$бинарные произведения${}+{}$уравнители
 образуют стандартный базис *всех* конечных пределов; машинно проверены эти базовые компоненты и их
 универсальные свойства.
@@ -86,7 +86,7 @@ $$
 
 **Конечные копределы.**  Инициальный объект — пустой сетоид (`setoid_initial`);
 копроизведения с универсальным свойством (`coprod_beta1`/`_beta2`,
-`coprod_ unique`). Инициал${}+{}$бинарные копроизведения образуют стандартный базис
+`coprod_unique`). Инициал${}+{}$бинарные копроизведения образуют стандартный базис
 конечных копределов (машинно — эти компоненты и их универсальные свойства).
 [^4]
 
@@ -137,12 +137,10 @@ $$
 (экспонента); `char`/классификатор (подобъекты); *процесс-как-копредел* — роль самой
 P4.
 
-{
-
 **Элементы (L1${}+{}$P4).**  Конкретные данные: пары $(R_1 n,R_2 n)$, разности $f n-g n$,
 переплетение, диагональ $\mathrm{chain} n n$; сетоидные носители, $Prop$. *Не* элемент:
 *завершённый* бесконечный предел/копредел (процессная сторона его не вводит); и кардинал $B^A$ /
-классификатор произвольных моно (топосная сторона даёт лишь *предикатный*).}
+классификатор произвольных моно (топосная сторона даёт лишь *предикатный*).
 
 | **Компонент** | **Что фиксирует** | **E/R/R-категория** |
 |---|---|---|
@@ -163,8 +161,6 @@ $\SetoidCat$ несёт конечные (ко)пределы, декартов�
 конструктивный предикатный топос-слой. Оба прочтения суть одно P4-движение: потенциальное вместо
 завершённого.
 
-{
-
 **Ярусы (честно).**  Процессная сторона — `ProcessLimitColimit.v` +
 `ProcessCategory.v` — процессный слой, *консервативно* отнесённый к `classic`
 (аналитика ℚ-Коши; `ProcessCategory.v` прямо импортирует `Classical`); в
@@ -172,7 +168,7 @@ $\SetoidCat$ несёт конечные (ко)пределы, декартов�
 (`SetoidProducts` 4, `SetoidEqualizers` 3, `SetoidCoproducts` 4,
 `SetoidExponential` 2, `SetoidClassifier` 4 = **17 Qed**) — **0 аксиом по
 локальному build**, но *локальный* слой (`90ebd74`, ожидает `push`). Честная граница: предикатный, не полный
-топос (нужна факторизация образа).}
+топос (нужна факторизация образа).
 
 Дальше — Глава 14.7, финал: *вся ToS как категория* (E/R/R сам есть категория); мост к теории
 типов (Карри–Ховард); и **карта границ Части XIV** — стены вселенных («категория всех
@@ -180,7 +176,7 @@ $\SetoidCat$ несёт конечные (ко)пределы, декартов�
 
 ---
 
-[^1]: `src/process/ProcessLimitColimit.v` (0 Admitted; в `origin/main`). Шапка файла указывает `AXIOMS: none`; но модуль зависит от процессного стека, где `ProcessArithmetic` импортирует `Classical`, поэтому процессную сторону мы *консервативно* относим к ярусу `classic` (точный статус — по `Print Assumptions`). Ключевые имена: `process_product`, `product_universal`, `equalizer_process`, `equalizer_converges`, `equalizer_ zero_ means_ equiv`, `process_coproduct`, `coproduct_inj1`/`_inj2`, `directed_colimit` и др.
+[^1]: `src/process/ProcessLimitColimit.v` (0 Admitted; в `origin/main`). Шапка файла указывает `AXIOMS: none`; но модуль зависит от процессного стека, где `ProcessArithmetic` импортирует `Classical`, поэтому процессную сторону мы *консервативно* относим к ярусу `classic` (точный статус — по `Print Assumptions`). Ключевые имена: `process_product`, `product_universal`, `equalizer_process`, `equalizer_converges`, `equalizer_zero_means_equiv`, `process_coproduct`, `coproduct_inj1`/`_inj2`, `directed_colimit` и др.
 [^2]: `src/process/ProcessCategory.v` (20 Qed, 0 Admitted; наследует `classic` — «inherited from ProcessNoetherian», импортирует `Classical`; в `origin/main`). Рядом — `src/process/ProcessUniversalAdjunction.v` (24 Qed; процессный слой; в `origin/main`): универсальное сопряжение на процессной стороне.
 [^3]: `src/category/SetoidProducts.v` (4 Qed) и `SetoidEqualizers.v` (3 Qed); 0 Admitted, 0 аксиом; **локальный слой** `src/category/` (`90ebd74`, ожидает `push`): `unit_setoid`/`setoid_terminal`, `prod_setoid`/`setoid_fst`/`_snd`/`_pair`, `setoid_prod_beta1`/`_beta2`/`_unique`; `eq_setoid`/`eq_incl`/`eq_mediator`, `eq_equalizes`/`eq_univ`/`eq_unique`.
 [^4]: `src/category/SetoidCoproducts.v` (4 Qed, 0 Admitted, 0 аксиом; локальный слой): `empty_setoid`/`setoid_initial`, `sum_setoid`/`inl_mor`/`inr_mor`/`sum_copair`, `coprod_beta1`/`_beta2`/`_unique`.

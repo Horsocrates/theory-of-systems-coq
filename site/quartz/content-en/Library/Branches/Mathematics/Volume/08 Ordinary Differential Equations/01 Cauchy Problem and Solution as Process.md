@@ -2,7 +2,7 @@
 title: "Chapter 1. The Cauchy Problem and the Solution as a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/01 Задача Коши и решение как процесс.md"
-sourceBlob: e7e34aac5773a87b0404337447a3ff32e57c0054
+sourceBlob: a969438a92840586592a02783955176eb81d4a31
 translated: 2026-10-20
 status: draft
 ---
@@ -132,8 +132,7 @@ bearers, and the bearers here are finite at every stage: the rational approximat
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the solution process does *not* take as its element “the completed trajectory on the whole interval” or “the solution function as a ready object.” The system is finite at every stage, and existence is checked as the *Cauchy property* of the generated process, not as the membership of an object in a completed function space. It is precisely the absence of such self-reference that explains why the theory of ODEs needs here neither a completed function nor a postulate of its existence beyond the convergence of the process: everything substantive is expressed by finite approximations and the criterion of their drawing together.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the solution process does *not* take as its element “the completed trajectory on the whole interval” or “the solution function as a ready object.” The system is finite at every stage, and existence is checked as the *Cauchy property* of the generated process, not as the membership of an object in a completed function space. It is precisely the absence of such self-reference that explains why the theory of ODEs needs here neither a completed function nor a postulate of its existence beyond the convergence of the process: everything substantive is expressed by finite approximations and the criterion of their drawing together.
 
 What the analysis yields. It translates the results of the chapter into the language of structure: *the solution is a Role* (the limit of the process of approximations), *existence is a Rule-criterion* (contraction, which entails the Cauchy property), and the approximations $y_n$ and nodes $t_n$ themselves are *Elements* (finite at every stage). To take “the solution” as a completed function-object is to put the role-limit in the place of an Element—a confusion of categories of the same kind as “number as an object” instead of the role-quantity (Part II), “a point as an object” instead of a class (Chapter 4.3), and “a Fourier series as a completed sum” instead of a family of truncations (Chapter 7.1). The solution of an ODE begins here as a *process* of finite approximations; its convergence is the Cauchy property of this process, and as a completed object the solution is neither needed nor built.
 

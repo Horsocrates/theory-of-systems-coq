@@ -2,7 +2,7 @@
 title: "Grandfather Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс дедушки.md"
-sourceBlob: ff81128c136dd521078c529c91eb02e03a94b6e4
+sourceBlob: a14b2204909e02d93344a359e9812306a08b2356
 translated: 2026-10-20
 status: draft
 description: "“A changeable past” is a contradictory concept"
@@ -54,7 +54,7 @@ Three layers, from logic to physics. The first is to read the story as a proof: 
 
 [[Russells Paradox|Russell]] (machine-recorded kinship: a single rule against the reflexive loop), the predestination loop (bootstrap: an object without an origin—the second trouble of the same framework), [[Newcombs Paradox|Newcomb]] (an action that “influences” what is already fixed), Polchinski’s billiard ball (the physical form of the knot).
 
-**Machine check.** There is a named analysis: src/foundation/ObserverSystemTime.v—`no_causal_loop` (the causal order is acyclic: an event is never its own strict ancestor; the grandfather loop is blocked by the same irreflexivity P1 as Russell and Cantor—this is how the file records it), `proper_irreversible` and `cannot_move_back` (proper time is irreversible), the summary `observer_system_time`. In the registry of 46 it is `D12_Grandfather`: the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** There is a named analysis: src/foundation/ObserverSystemTime.v—`no_causal_loop` (the causal order is acyclic: an event is never its own strict ancestor; the grandfather loop is blocked by the same irreflexivity P1 as Russell and Cantor—this is how the file records it), `proper_irreversible` and `cannot_move_back` (proper time is irreversible), the summary `observer_system_time`. In the registry of 46 it is `D12_Grandfather`: the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

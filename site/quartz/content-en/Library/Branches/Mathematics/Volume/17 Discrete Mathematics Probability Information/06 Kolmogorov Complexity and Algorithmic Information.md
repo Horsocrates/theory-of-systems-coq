@@ -2,7 +2,7 @@
 title: "Chapter 6. Kolmogorov Complexity and Algorithmic Information"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/17 Дискретная математика, вероятность, информация/06 Колмогоровская сложность и алгоритмическая информация.md"
-sourceBlob: 9b1de3720e4bb7efb1052968b6b3a319c8850829
+sourceBlob: 8694861bb7371311f494221fc078c5e12ccd6131
 translated: 2026-10-20
 status: draft
 ---
@@ -23,13 +23,13 @@ Kolmogorov complexity $K(x)$ is the length of the shortest program (on a fixed m
 
 The difference from Shannon is fundamental. Shannon ascribes information to a *distribution* (one must know the probabilities); Kolmogorov, to the *string itself* (no probabilities are needed). Randomness in Kolmogorov’s sense is incompressibility: a string is random if its shortest description is the string itself.
 
-## Compression Realizes $K${K} from Above
+## Compression Realizes $K$ from Above
 
 Although $K$ is uncomputable, it can be *approximated from above*: every concrete compressor gives a length no smaller than $K$. And here the Element side is at work: prefix codes are *verified*—a binary tree gives a prefix-free code, the Kraft sum $\sum 2^{-l_i}=1$, and on the concrete dyadic distribution $\{\tfrac12,\tfrac14,\tfrac18,\tfrac18\}$ the optimal tree attains an average length of $\tfrac74$ bits—exactly the entropy of this distribution[^2]. Compression also receives a *physical reading*: the observer is modeled as a compressor, and compression itself fits into the same type of process (modes, spectrum, energy) as physical processes do[^3].
 
 *Concrete compression is an Element: a finite code, a computable upper bound on $K$. It is a terminating process of description.*
 
-## $K${K} Is Uncomputable—the Fourth Face of One Boundary
+## $K$ Is Uncomputable—the Fourth Face of One Boundary
 
 $K$ itself, unlike its approximations, is *uncomputable*: in a fixed model there is no total algorithm that outputs $K(x)$ for all $x$. And this uncomputability is *the same diagonal* as halting, Cantor’s Boolean diagonal ($A\to\mathsf{bool}$; uncountability, Part IV), and [[Russells Paradox|Russell’s paradox]], not a separate fact: the assumption of a $K$-decider is defeated by the same diagonal engine[^4].
 
@@ -59,13 +59,13 @@ Let us analyze by E/R/R in the generating order Rules $\to$ Roles $\to$ Elements
 
 **What the analysis yields.** It shows that algorithmic information repeats the structure of the whole part: the finitely computable side (compression, upper bounds) is Element, the exactly minimal side ($K$) is a role-limit; and that this boundary is *the same* one that the whole project carries—$K(x)$ as the fourth face of the diagonal boundary.
 
-The two measures of information are brought onto each other; the last step of the part remains—the limit of information itself. In the next chapter: the uncertainty principle in information and the bridge to von Neumann and quantum information (Volume III).
+The two measures of information are brought onto each other; the last step of the part remains—the limit of information itself. In the next chapter: the uncertainty principle in information and the bridge to von Neumann and quantum information (physics).
 
 ---
 
 [^1]: `incompressible_exists` (in `cs/KolmogorovRoleLimit`): for any budget $n$ there are finitely many short programs, so some object is not describable within $n$—pigeonhole, 0 axioms.
 [^2]: `VerifiedHuffman` (`huffman_synthesis`): a prefix-free tree, the Kraft equality $\sum 2^{-l_i}=1$, the concrete `tree_4_optimal` with average length $\tfrac74$ for the dyadic $\{\tfrac12,\tfrac14,\tfrac18,\tfrac18\}$ (coinciding with its entropy). This is a *prefix-free structure and a concrete example*, not a general theorem of Huffman optimality among all prefix codes. Informativeness as a measure of the reduction in search cost is `complexity/Informativeness`. Machine-checked, 0 axioms.
-[^3]: `ObserverCompressor` (`observer_compressor_synthesis`: measurement/collapse as maximal compression) and `crown/CompressionIsPhysics` (`compression_is_physics_synthesis`: compression as a process of the same type—$N$ modes, spectrum, energy—as sound/light/QM). A structural reading and a bridge to Landauer (Chapter 5) and Volume III, not a full thermodynamic model of compression. Machine-checked, 0 axioms.
+[^3]: `ObserverCompressor` (`observer_compressor_synthesis`: measurement/collapse as maximal compression) and `crown/CompressionIsPhysics` (`compression_is_physics_synthesis`: compression as a process of the same type—$N$ modes, spectrum, energy—as sound/light/QM). A structural reading and a bridge to Landauer (Chapter 5) and to physics, not a full thermodynamic model of compression. Machine-checked, 0 axioms.
 [^4]: `kolmogorov_role_limit_drawn` and `complexity_decidable_no_diagonal` (in `cs/KolmogorovRoleLimit`): the complexity criterion is drawn *as a role-limit*—given the self-negating Berry/Chaitin diagonal, there is no total terminating decider (an instance of `diagonal_defeats_decider`); a role-limit, not an exclusion, and with no claim to the invariance of $K$ across machines. Machine-checked, 0 axioms.
 [^5]: `one_boundary_four_faces` (in `cs/KolmogorovRoleLimit`) extends `one_boundary_three_faces`: $K$ is added to the discriminant, halting, and Cantor. Machine-checked, 0 axioms.
 

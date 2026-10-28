@@ -2,7 +2,7 @@
 title: "Grandfather’s Axe"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Топор дедушки.md"
-sourceBlob: 9be61ed7ea17eb7238e2e69cac8069e1e7bf18f8
+sourceBlob: 4e974d107245dc54c41cafe9a852151bb4c1787c
 translated: 2026-10-20
 status: draft
 description: "The identity of an artifact is a matter of convention"
@@ -54,7 +54,7 @@ The miniature is a test for the criterion: if the dispute about “the same” i
 
 [[Ship of Theseus]] (the canonical form—the full analysis is there), [[Teleportation Paradox]] (the same question about a person), Jeannot’s knife and Trigger’s broom (folklore brothers), [[Sorites Paradox|Sorites]] (a neighbor by type: vagueness next to ambiguity).
 
-**Machine check.** The criterial mechanics is formalized in the analysis of Theseus: `verdict_depends_on_criterion`, `elements_flow` (src/foundation/KnowledgeIdentityRoles.v—the elements flow, the system stands). In the registry of 46 it is `D5_GrandfatherAxe`: the field `ConceptualAmbiguity`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** The criterial mechanics is formalized in the analysis of Theseus: `verdict_depends_on_criterion`, `elements_flow` (src/foundation/KnowledgeIdentityRoles.v—the elements flow, the system stands). In the registry of 46 it is `D5_GrandfatherAxe`: the field `ConceptualAmbiguity`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

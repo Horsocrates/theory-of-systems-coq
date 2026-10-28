@@ -2,7 +2,7 @@
 title: "Chapter 5. Synthesis: The Hierarchy Is a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/05 Синтез иерархия есть процесс.md"
-sourceBlob: 3dbdcf0400955d2fb99dd2acbc3987ed3ae34a03
+sourceBlob: 6ea8de8617092104c2f840ce9cde287d4ea3925f
 translated: 2026-10-20
 status: draft
 ---
@@ -41,7 +41,7 @@ Nonconstructivity, for its part, enters *not throughout* but at precisely named 
 
 Part X marked out the “high” constructions of set theory with a registry of “former walls” and left the minimal bad sequence and the Borel tower with the status “process form not invoked.” The present part *raises* this status: their lower rungs are built as processes, and both “walls” move to *“partially rolled back”*[^4].
 
-{*Of the classical “high” constructions, the only object that P4 genuinely rules out is completed actual infinity itself. The rest is either reached as an operation-role or built as a process; the “walls” have turned out to be ascents.*}
+*Of the classical “high” constructions, the only object that P4 genuinely rules out is completed actual infinity itself. The rest is either reached as an operation-role or built as a process; the “walls” have turned out to be ascents.*
 
 This is the demonstration of the strength of the stance: where the familiar packaging sees a blank boundary that demands a completed object, P4 sees a graded ascent in which the reachable is reached and the unreachable is honestly named a horizon.
 

@@ -2,7 +2,7 @@
 title: "Chapter 6. Synthesis and the Map of Boundaries"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/06 Синтез и карта границ.md"
-sourceBlob: 403bbf68f7215fefe6e587a70d7796b2b2fdac96
+sourceBlob: 36a7835de748abe1dc81fa76e7675872d98ce7eb
 translated: 2026-10-20
 status: draft
 ---
@@ -15,7 +15,7 @@ This chapter does three things. First, it assembles a *unified picture* of Galoi
 
 *The finale of Part XI: a unified picture (the tier governs everything), a rethinking (the closure of $ℚ$ is a process), and a map of boundaries without new P4 exclusions.*
 
-## Galois-in-ToS{ToS}: A Unified Picture
+## Galois-in-ToS: A Unified Picture
 
 The recurring protagonist of the whole part is the *algebraic tier* (the degree). It governs everything encountered:
 
@@ -30,7 +30,7 @@ One and the same tier determines what is *reachable* (the quadratic tower), what
 
 *The algebraic tier is the recurring protagonist of Part XI: it governs the reachable, the ruled-out, the symmetric, and the stable. Galois-in-ToS is a concrete tier-norm-correspondence shadow over $ℚ$, finitely actual and requiring no axioms.*
 
-## The Algebraic Closure of $ℚ${Q} as a Process
+## The Algebraic Closure of $ℚ$ as a Process
 
 The most unexpected rethinking of the part concerns the *algebraic closure* $\overline{ℚ}$. The classical theory takes it as a completed object—a single field containing the roots of all polynomials (for an arbitrary field, via Zorn’s lemma). It is tempting to enter it into the “wall”: here, one might say, is a completed infinite totality that P4 does not let in. But this is a *mistake*: $\overline{ℚ}$ is *not a wall but a process*.
 
@@ -40,7 +40,7 @@ $$
 ℚ \subset ℚ[\sqrt2] \subset ℚ[\sqrt2,\sqrt3] \subset ℚ[\sqrt2,\sqrt3,\sqrt5] \subset \cdots,
 $$
 
-which has *no maximal rung* and in which *every* element is localized at some finite rung.[^1] This is precisely the type of object the whole book has dealt with: a process over finite stages, like `RealProcess`.
+which has *no maximal rung* and in which *every* element is localized at some finite rung.[^1] This is precisely the type of object the whole volume has dealt with: a process over finite stages, like `RealProcess`.
 
 The moral repeats the device of Part X. The classical demand “build the closure as a ready thing” mixes two statements: the *Rule*—“the roots of any rational polynomial lie in *some* finite extension” (true, constructive, and precisely what mathematics actually uses)—and the completed *Element*—“there exists a *single* object with all the roots of all polynomials *at once*” (a Platonist surplus). ToS keeps the rule (the process) and discards the surplus. The formal file proves precisely the *tower ontology* of the process (no maximal rung, every element finitely localized), and *not* a full algorithm for factoring and adjoining all the roots; that for $ℚ$ *itself* the closure is constructive (without choice, factorization over $ℚ$ is algorithmic) is a classical / mathematical reading on top of this model.
 
@@ -84,7 +84,7 @@ Let us gather the whole part in the generating order.
 
 Part XI has read algebra, fields, and Galois theory in the same optics in which Part X read set theory: by changing the category and holding to the finitely actual. The field has become a role-extension, the degree a tier, the number a role-limit with the minimal polynomial as its rule. Constructibility has turned out to be reachability by tier $2$, and the Greek impossibilities theorems about the tier. Finite multiplicative structures (roots of unity, the norms $1,2,4,8$, $\FF_p$) have given a positive algebra of finite order. At the center are the concrete $V_4$ Galois table for $ℚ[\sqrt2,\sqrt3]$ (automorphisms, fixed subfields, reversal of inclusion) and the engine of group unsolvability (perfect nonabelian$ \Rightarrow$ not solvable; the application to the quintic—with explicit classical premises about $A_5/S_5$), which have raised the former numerical counts and the flag to real results.
 
-Two conclusions are worth taking away. The first: *the algebraic closure of $ℚ$ is a process, not a wall*—one more completed object resolved into a rule plus finite Elements. The second, more general: *the boundary of the formalized layer of Part XI contains no P4 exclusions* (the completed $\overline{ℚ}$ as an object is not used—it is read as a process). Everything not done is labor or role-limit; the only genuine prices (choice, the continuum) have already been named in Part X, and $ℚ$ itself does not pay them. This agrees with the recurring thesis of the book: *the finitization boundary is the boundary of constructivity*, not of exclusions—and over $ℚ$ this boundary lies especially far away.
+Two conclusions are worth taking away. The first: *the algebraic closure of $ℚ$ is a process, not a wall*—one more completed object resolved into a rule plus finite Elements. The second, more general: *the boundary of the formalized layer of Part XI contains no P4 exclusions* (the completed $\overline{ℚ}$ as an object is not used—it is read as a process). Everything not done is labor or role-limit; the only genuine prices (choice, the continuum) have already been named in Part X, and $ℚ$ itself does not pay them. This agrees with the recurring thesis of the volume: *the finitization boundary is the boundary of constructivity*, not of exclusions—and over $ℚ$ this boundary lies especially far away.
 
 *Galois-in-ToS is tiers of degree ${}+{}$ norm forms ${}+{}$ a concrete
 correspondence ${}+{}$ an engine of unsolvability, finitely actual and with 0 new axioms in the key files. The closure of $ℚ$ is a process. The boundary is labor and role-limits, without new P4 exclusions in the formalized layer; algebra over $ℚ$ is ontologically almost free. With this, Part XI comes to a close.*

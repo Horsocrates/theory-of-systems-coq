@@ -2,7 +2,7 @@
 title: "Defective Paradoxes"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/index.md"
-sourceBlob: c8798bd2bc497c6c18cb3126acb4c8c4d2190989
+sourceBlob: 864a8e21054d39b9b5ed165b7e39c1f35fbbf6bf
 translated: 2026-10-20
 status: draft
 description: "The construction is correct; the defect is in the premises: an unclarified concept, a hidden contradiction, a false assumption, or an error of reasoning. The “Domain” column gives the address of the flaw in the domains of reasoning."
@@ -10,7 +10,7 @@ description: "The construction is correct; the defect is in the premises: an unc
 
 **Category** · [[Paradox Catalog]]
 
-The construction is correct; the defect is in the premises: an unclarified concept, a hidden contradiction, a false assumption, or an error of reasoning. The “Domain” column gives the address of the flaw in the [[Domains|domains of reasoning]]. To lay such a paradox open is to expose the defect of the premise.
+The construction is correct; the defect is in the premises: an unclarified concept, a hidden contradiction, a false assumption, or an error of reasoning. The “Domain” column gives the address of the flaw in the [[Domains|domains of reasoning]]. The analysis lays open the defect of the premise.
 
 Total: **25**, by subtype of flaw. Concept: [[Paradox]]. **In bold**—the central analyses.
 

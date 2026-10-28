@@ -2,7 +2,7 @@
 title: "Banach–Tarski Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс Банаха-Тарского.md"
-sourceBlob: c60413d5d771f3f8d1d594913c424f82699cffff
+sourceBlob: e587422b019de008db36e44f6696a180fe2f2044
 translated: 2026-10-20
 status: draft
 description: "The “parts” are non-measurable sets, not physical objects"

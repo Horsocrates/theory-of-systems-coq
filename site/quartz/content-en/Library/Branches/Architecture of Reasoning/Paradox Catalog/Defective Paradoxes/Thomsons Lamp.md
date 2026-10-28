@@ -2,7 +2,7 @@
 title: "Thomson’s Lamp"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Лампа Томсона.md"
-sourceBlob: 6898fb981a6c9ce4772b1f0961eab2e17509db20
+sourceBlob: d875500661c8eacf414f3aea4c301a452547cde4
 translated: 2026-10-20
 status: draft
 description: "“After infinity” is meaningless"
@@ -54,7 +54,7 @@ Benacerraf’s move is the core: the states at all moments before the minute imp
 
 [[Zenos Dichotomy|Zeno’s Dichotomy]] (“before all the steps”—the mirror question), [[Zenos Arrow|Zeno’s Arrow]] (a property where it is not defined), [[Hilberts Hotel|Hilbert’s Hotel]] (the completion of the uncompletable—the statics of the same), [[Ross Littlewood|Ross–Littlewood]] (the next rung: an “outcome” of a supertask that depends on the order of the acts), Grandi’s series (the arithmetical shadow), Zeno machines in hypercomputation.
 
-**Machine check.** In the registry of 46 it is `D24_ThomsonLamp`: the field `ConceptualAmbiguity`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground: a limit value in the base is a predicate of a fundamental (Cauchy) process (src/CauchyReal.v, `RealProcess`); the sequence 1, 0, 1, 0, … is not fundamental, and the question “value in the limit” is not posed to it—the question has no bearer. The convergence of the durations is honest: `geometric_series_cauchy` (src/SeriesConvergence.v). Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D24_ThomsonLamp`: the field `ConceptualAmbiguity`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground: a limit value in the base is a predicate of a fundamental (Cauchy) process (src/CauchyReal.v, `RealProcess`); the sequence 1, 0, 1, 0, … is not fundamental, and the question “value in the limit” is not posed to it—the question has no bearer. The convergence of the durations is honest: `geometric_series_cauchy` (src/SeriesConvergence.v). Map: [[Formalization]].
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Chapter 6. Processes as Universal Constructions; Setoid as a Topos"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/06 Процессы как универсальные конструкции; Setoid как топос.md"
-sourceBlob: 1a514dc905602e614466535c8803c9e5f536ea55
+sourceBlob: c888230bcdaf55a160af41b3c9b120948d1675ab
 translated: 2026-10-20
 status: draft
 ---
@@ -24,7 +24,7 @@ Under P4 a universal construction is *computed stage by stage* rather than “as
 **The product is a process of pairs.**  $A\times B$ is the pointwise pairing `process_product`: $n\mapsto(R_1 n, R_2 n)$; the projections return the components (`product_fst`/`_snd`), the pairing is unique (`product_universal`), and if both components are Cauchy, so is the product (`product_cauchy`).
 
 **The equalizer is a process of differences.**  $\mathrm{eq}(f,g)$ is `equalizer_process` $f g
-= \lambda n. f n - g n$. It converges to zero exactly when $f$ and $g$ are equivalent as processes (`equalizer_converges` and conversely `equalizer_ zero_ means_ equiv`). That is, for processes “to coincide” means that *the equalizer tends to zero*, not “they are equal as completed objects.”
+= \lambda n. f n - g n$. It converges to zero exactly when $f$ and $g$ are equivalent as processes (`equalizer_converges` and conversely `equalizer_zero_means_equiv`). That is, for processes “to coincide” means that *the equalizer tends to zero*, not “they are equal as completed objects.”
 
 **The coproduct is an interleaving.**  $A+B$ is the alternation (`process_coproduct`): the even positions carry $R_1$, the odd ones $R_2$; the injections land exactly in their places ($R_1(k)$ at position $2k$, $R_2(k)$ at $2k+1$—`coproduct_inj1`/`_inj2`).
 
@@ -33,7 +33,7 @@ Under P4 a universal construction is *computed stage by stage* rather than “as
 The high point of the process reading is the *directed colimit*. A chain of processes $a_0,a_1,a_2,…$ needs no “completed” colimit-object: the **diagonal** serves as one—the process itself
 
 $$
-`directed_colimit`\ \mathrm{chain}\ =\ \lambda n. \mathrm{chain} n n
+\texttt{directed\_colimit}\ \mathrm{chain}\ =\ \lambda n. \mathrm{chain} n n
 $$
 
 (`colimit_diagonal`). This is P4 in the flesh: “the colimit of the chain $a_0,a_1,…$ is the process $a$ itself”—no completed limit object is required or introduced.
@@ -49,10 +49,10 @@ When processes are packaged into a *category* (the objects are processes, the mo
 
 The abstract side presents universal constructions in the *category of setoids* $\SetoidCat$ (the objects are types with an equivalence, the morphisms are maps that respect it; see 14.1). Here a **topos kit** of structures is assembled—and all of it is **0-axiom**.
 
-**Finite limits.**  The terminal object is the unit setoid (`setoid_terminal`); binary products with the universal property (`setoid_prod_beta1`/`_beta2`, `setoid_ prod_ unique`); equalizers (`eq_equalizes`, `eq_univ`, `eq_unique`). Mathematically, terminal ${}+{}$ binary products ${}+{}$ equalizers form the standard basis of *all* finite limits; these basic components and their universal properties are machine-checked.
+**Finite limits.**  The terminal object is the unit setoid (`setoid_terminal`); binary products with the universal property (`setoid_prod_beta1`/`_beta2`, `setoid_prod_unique`); equalizers (`eq_equalizes`, `eq_univ`, `eq_unique`). Mathematically, terminal ${}+{}$ binary products ${}+{}$ equalizers form the standard basis of *all* finite limits; these basic components and their universal properties are machine-checked.
 [^3]
 
-**Finite colimits.**  The initial object is the empty setoid (`setoid_initial`); coproducts with the universal property (`coprod_beta1`/`_beta2`, `coprod_ unique`). Initial ${}+{}$ binary coproducts form the standard basis of finite colimits (by machine: these components and their universal properties).
+**Finite colimits.**  The initial object is the empty setoid (`setoid_initial`); coproducts with the universal property (`coprod_beta1`/`_beta2`, `coprod_unique`). Initial ${}+{}$ binary coproducts form the standard basis of finite colimits (by machine: these components and their universal properties).
 [^4]
 
 **Cartesian closedness.**  The exponential $B^A$ is the setoid of maps $A\to B$ with pointwise equality, with application (`setoid_eval`) and currying (`setoid_curry`); the universal property is the bijection
@@ -81,9 +81,7 @@ The classifier classifies *respecting predicates* (constructive subsetoids), *no
 
 **Roles (L4).**  Projections/injections/mediators (limits/colimits); application/currying (the exponential); `char`/the classifier (subobjects); *process-as-colimit*, the role of P4 itself.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete data: the pairs $(R_1 n,R_2 n)$, the differences $f n-g n$, the interleaving, the diagonal $\mathrm{chain} n n$; setoid carriers, $Prop$. *Not* an element: a *completed* infinite limit/colimit (the process side does not introduce it); and the cardinal $B^A$ / a classifier of arbitrary monos (the topos side gives only a *predicate* one).}
+**Elements (L1${}+{}$P4).**  Concrete data: the pairs $(R_1 n,R_2 n)$, the differences $f n-g n$, the interleaving, the diagonal $\mathrm{chain} n n$; setoid carriers, $Prop$. *Not* an element: a *completed* infinite limit/colimit (the process side does not introduce it); and the cardinal $B^A$ / a classifier of arbitrary monos (the topos side gives only a *predicate* one).
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -97,16 +95,14 @@ The classifier classifies *respecting predicates* (constructive subsetoids), *no
 
 Universal constructions have received two concordant readings. The *process* one (P4 literally): the product is a process of pairs, the equalizer a process of differences, the coproduct an interleaving, and **the colimit is the process itself** (the diagonal $\mathrm{chain} n n$)—the flagship of P4. The *setoid-topos* one: $\SetoidCat$ carries finite (co)limits, cartesian closedness, and a predicate subobject classifier—a constructive predicate topos layer. Both readings are one P4 movement: the potential instead of the completed.
 
-{
-
 **Tiers (honestly).**  The process side—`ProcessLimitColimit.v` + `ProcessCategory.v`—is the process layer, *conservatively* assigned to `classic` (the ℚ-Cauchy analysis; `ProcessCategory.v` imports `Classical` directly); in `origin/main`. The topos side—five files of `src/category/` (`SetoidProducts` 4, `SetoidEqualizers` 3, `SetoidCoproducts` 4, `SetoidExponential` 2, `SetoidClassifier` 4 = **17 Qed**)—is **0 axioms by the
-local build**, but in the *local* layer (`90ebd74`, awaiting `push`). The honest boundary: a predicate topos, not a full one (an image factorization is needed).}
+local build**, but in the *local* layer (`90ebd74`, awaiting `push`). The honest boundary: a predicate topos, not a full one (an image factorization is needed).
 
 Next comes Chapter 14.7, the finale: *all of ToS as a category* (E/R/R itself is a category); the bridge to type theory (Curry–Howard); and the **map of boundaries of Part XIV**—the universe walls (“the category of all categories/presheaves is large”), the `classic` tier, the continuum price—gathered in one place.
 
 ---
 
-[^1]: `src/process/ProcessLimitColimit.v` (0 Admitted; in `origin/main`). The file header states `AXIOMS: none`; but the module depends on the process stack, where `ProcessArithmetic` imports `Classical`, so we *conservatively* assign the process side to the `classic` tier (the exact status is by `Print Assumptions`). Key names: `process_product`, `product_universal`, `equalizer_process`, `equalizer_converges`, `equalizer_ zero_ means_ equiv`, `process_coproduct`, `coproduct_inj1`/`_inj2`, `directed_colimit`, and others.
+[^1]: `src/process/ProcessLimitColimit.v` (0 Admitted; in `origin/main`). The file header states `AXIOMS: none`; but the module depends on the process stack, where `ProcessArithmetic` imports `Classical`, so we *conservatively* assign the process side to the `classic` tier (the exact status is by `Print Assumptions`). Key names: `process_product`, `product_universal`, `equalizer_process`, `equalizer_converges`, `equalizer_zero_means_equiv`, `process_coproduct`, `coproduct_inj1`/`_inj2`, `directed_colimit`, and others.
 [^2]: `src/process/ProcessCategory.v` (20 Qed, 0 Admitted; inherits `classic`—“inherited from ProcessNoetherian”—and imports `Classical`; in `origin/main`). Next to it is `src/process/ProcessUniversalAdjunction.v` (24 Qed; the process layer; in `origin/main`): the universal adjunction on the process side.
 [^3]: `src/category/SetoidProducts.v` (4 Qed) and `SetoidEqualizers.v` (3 Qed); 0 Admitted, 0 axioms; **local layer** `src/category/` (`90ebd74`, awaiting `push`): `unit_setoid`/`setoid_terminal`, `prod_setoid`/`setoid_fst`/`_snd`/`_pair`, `setoid_prod_beta1`/`_beta2`/`_unique`; `eq_setoid`/`eq_incl`/`eq_mediator`, `eq_equalizes`/`eq_univ`/`eq_unique`.
 [^4]: `src/category/SetoidCoproducts.v` (4 Qed, 0 Admitted, 0 axioms; the local layer): `empty_setoid`/`setoid_initial`, `sum_setoid`/`inl_mor`/`inr_mor`/`sum_copair`, `coprod_beta1`/`_beta2`/`_unique`.

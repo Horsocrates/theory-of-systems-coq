@@ -2,7 +2,7 @@
 title: "Ship of Theseus"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Корабль Тесея.md"
-sourceBlob: 421565a0d1c797648a17709f552fe6e72c9b2ca0
+sourceBlob: 0a4654cba91b11c825140d238103d9ecf6d5269f
 translated: 2026-10-20
 status: draft
 description: "“The same” is undefined—a criterion of identity is needed"
@@ -44,7 +44,7 @@ The knot’s progeny is wider than that of any other defective paradox. Personal
 
 ## Why There Is No Paradox
 
-The resolution is the explication of the question, not a search for the “right answer.” Aspect by aspect, the picture is clean: the maintained ship is the same structurally, functionally, and conceptually, and different materially; the reassembled one is the same materially and structurally, different functionally (it was taken apart), and conceptually disputed. There is no contradiction—there are different answers to different questions. The dispute about the “real” ship is a dispute about values: to a museum the material matters more, to an active fleet the function, to a culture the name; logic does not decide this dispute, but it clarifies what the dispute is about. Deeper still: identity is a process, not a property. An organism holds itself by metabolism, an artifact by maintenance, a company by social practices; the question “is it the same object?” means “has the process that maintains identity been preserved?” The Ise Shrine is a cultural answer of the same grade: the identity of the shrine is placed in the ritual of rebuilding, not in the wood. The full derivation of identity through change—necessary and permitted characteristics, the square on roles—is on the page [[Identity]].
+Laying open is the explication of the question, not a search for the “right answer.” Aspect by aspect, the picture is clean: the maintained ship is the same structurally, functionally, and conceptually, and different materially; the reassembled one is the same materially and structurally, different functionally (it was taken apart), and conceptually disputed. There is no contradiction—there are different answers to different questions. The dispute about the “real” ship is a dispute about values: to a museum the material matters more, to an active fleet the function, to a culture the name; logic does not decide this dispute, but it clarifies what the dispute is about. Deeper still: identity is a process, not a property. An organism holds itself by metabolism, an artifact by maintenance, a company by social practices; the question “is it the same object?” means “has the process that maintains identity been preserved?” The Ise Shrine is a cultural answer of the same grade: the identity of the shrine is placed in the ritual of rebuilding, not in the wood. The full derivation of identity through change—necessary and permitted characteristics, the square on roles—is on the page [[Identity]].
 
 ## Lesson
 
@@ -54,7 +54,7 @@ The resolution is the explication of the question, not a search for the “right
 
 [[Grandfathers Axe|Grandfather’s Axe]] (the same structure in miniature: the father replaced the handle, the grandson the blade), [[Teleportation Paradox]] (personal identity under copying), [[Masked Man]] (a substitution of the criterion of identity in knowledge), [[Sorites Paradox|Sorites]] (a neighbor by type—another kind of indeterminacy: vagueness).
 
-**Machine check.** There is a named analysis: identity on roles—src/foundation/KnowledgeIdentityRoles.v: `verdict_depends_on_criterion` (the verdict depends on the chosen criterion), `hobbes_table` (the table of the two ships, machine-checked), `process_identity` and `elements_flow` (the elements flow—the system stands: identity as a process), `manifestation_varies_identity_stands` (the manifestation changes—identity holds). In the registry of 46 it is `D4_ShipOfTheseus`: defective, resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** There is a named analysis: identity on roles—src/foundation/KnowledgeIdentityRoles.v: `verdict_depends_on_criterion` (the verdict depends on the chosen criterion), `hobbes_table` (the table of the two ships, machine-checked), `process_identity` and `elements_flow` (the elements flow—the system stands: identity as a process), `manifestation_varies_identity_stands` (the manifestation changes—identity holds). In the registry of 46 it is `D4_ShipOfTheseus`: defective, laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

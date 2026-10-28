@@ -2,7 +2,7 @@
 title: "Chapter 2. Algebraic Number as Role-Limit; Minimal Polynomial"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/02 Алгебраическое число как роль-предел; минимальный многочлен.md"
-sourceBlob: 02326710447de8b92de640b8faba704ece17d398
+sourceBlob: 82ede1c0e054822932c4b29804e78e61a186b3e6
 translated: 2026-10-20
 status: draft
 ---
@@ -55,7 +55,7 @@ Let us gather the structure of the chapter in the generating order.
 | **Layer** | **Content** |
 |---|---|
 | *Rules* (L5) | the minimal polynomial as the rule of algebraicity ($\sqrt2\mapsto x^2-2$, $\sqrt[3]2\mapsto x^3-2$, $\varphi\mapsto x^2-x-1$); the general Gauss’s lemma / rational root test as a rule: whether the process of the root will close in $ℚ$; infinite descent as the rule of irrationality |
-| *Roles* (L4) | algebraic number ${}={}$ a role-limit of a process tamed by a finite rule; “irrational” ${}={}$ a nonterminating process; degree ${}={}$ tier; $\varphi$ ${}={}$ the role-limit of Fibonacci / the continued fraction $[1;1,1,…]$ |
+| *Roles* (L4) | algebraic number ${}={}$ a role-limit of a process tamed by a finite rule; “irrational” ${}={}$ a nonterminating process; degree ${}={}$ tier; $\varphi={}$ the role-limit of Fibonacci / the continued fraction $[1;1,1,…]$ |
 | *Elements* (L1${}+{}$P4) | at each stage, finite data: rational approximations $q_n$, convergents of a continued fraction, Fibonacci ratios, steps of descent, lists of coefficients of a polynomial; the completed irrational as a point of the continuum is *not* an Element |
 
 **Well-formedness.** A number is well-formed as an algebraic role when its process is a Cauchy process (the approximations converge, in the sense of the theory of the reals of Parts II–IV) *and* there exists a finite algebraic rule $p(x)=0$, $p\inℚ[x]$, which the limit obeys (minimality and degree—by separate lemmas). Irrationality is a property of the process (it does not terminate), not a missing property of an imaginary object.

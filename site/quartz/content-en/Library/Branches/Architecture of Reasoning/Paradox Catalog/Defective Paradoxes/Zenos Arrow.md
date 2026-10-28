@@ -2,7 +2,7 @@
 title: "Zeno’s Arrow"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Стрела Зенона.md"
-sourceBlob: 5719a4b51ca78329bc4eef205ef4baa69f75b9d1
+sourceBlob: 3a1bbda1b94c1e8b0033e86bbf2853cd55b0c0bf
 translated: 2026-10-20
 status: draft
 description: "Motion is not a sequence of rests"
@@ -30,7 +30,7 @@ The arrow posed the question more precisely than its sisters: not “how many pa
 
 **Domain 2—Clarification: what do the terms mean?** Here is the defect. Rest is the same place at *different* moments; motion is different places at different moments. Both predicates concern a relation of moments; both require an interval as their bearer, not a point. “The arrow is at rest in an instant” applies a predicate of intervals to a point—categorially empty, like a question about the color of a number. The instantaneous slice of a flying arrow and of a hanging one is the same—and this is not a discovery about the arrow but the definition of a slice: a slice is not a bearer of motion. Signal: a substitution of the bearer of a predicate.
 
-**Domain 3—Framework Selection:** the second layer of the defect, which the draft card records as the main one: the instrument—the instantaneous slice—does not fit the object. Motion is a relation between slices; to look for it inside a slice is to look for a melody in a single note. Motion cannot be “assembled” from slices, not because there is no motion, but because it lives not in the slices but in their correspondence.
+**Domain 3—Framework Selection:** the second, main layer of the defect: the instrument—the instantaneous slice—does not fit the object. Motion is a relation between slices; to look for it inside a slice is to look for a melody in a single note. Motion cannot be “assembled” from slices, not because there is no motion, but because it lives not in the slices but in their correspondence.
 
 **Domain 4—Comparison:** not engaged.
 
@@ -44,7 +44,7 @@ The arrow posed the question more precisely than its sisters: not “how many pa
 
 ## Why There Is No Paradox
 
-Separating the predicates does all the work. Rest and motion are predicates of pairs of moments; in a single instant there is neither one nor the other—not because the arrow has “frozen,” but because the question has not been posed: a snapshot does not answer questions about change. “Motion cannot be assembled from rests” is true, but there is nothing to assemble either: there are no instantaneous “rests”—there are places-at-moments, and their correspondence *is* the flight; a property of a process lives in the rule of correspondence, which is why it cannot be found in a slice—like a melody in a note, like meaning in a single letter. To Aristotle belongs the priority of the rejection: time is not composed of “nows” as a wall is of bricks. To Russell belongs the purity of the result: motion is at-at, being there at that time, and nothing over and above; analysis merely gave this the form of a limit—even instantaneous velocity is an interval concept in the dress of a limit. The process base carries the untying down to the structure itself: a process is given as a correspondence of step and value (`nat → Q`), a state is a step, velocity is the difference of neighboring steps; in a single step there is no motion by construction, and the arrow in this framework is not a paradox but the first property of any process. Bergson’s truth we will also keep honestly: slices are a device of description; a description is free to cut, while motion is whole.
+Separating the predicates does all the work. Rest and motion are predicates of pairs of moments; in a single instant there is neither one nor the other—not because the arrow has “frozen,” but because the question has not been posed: a snapshot does not answer questions about change. “Motion cannot be assembled from rests” is true, but there is nothing to assemble either: there are no instantaneous “rests”—there are places-at-moments, and their correspondence *is* the flight; a property of a process lives in the rule of correspondence, which is why it cannot be found in a slice—like a melody in a note, like meaning in a single letter. To Aristotle belongs the priority of the rejection: time is not composed of “nows” as a wall is of bricks. To Russell belongs the purity of the result: motion is at-at, being there at that time, and nothing over and above; analysis merely gave this the form of a limit—even instantaneous velocity is an interval concept in the dress of a limit. The process base carries the laying open down to the structure itself: a process is given as a correspondence of step and value (`nat → Q`), a state is a step, velocity is the difference of neighboring steps; in a single step there is no motion by construction, and the arrow in this framework is not a paradox but the first property of any process. Bergson’s truth we will also keep honestly: slices are a device of description; a description is free to cut, while motion is whole.
 
 ## Lesson
 
@@ -54,7 +54,7 @@ Separating the predicates does all the work. Rest and motion are predicates of p
 
 [[Zenos Achilles|Zeno’s Achilles]] and [[Zenos Dichotomy|Zeno’s Dichotomy]] (sisters in the block: there the path is cut, here time), [[Thomsons Lamp|Thomson’s Lamp]] (the demand for a state where it is not defined—kin by the substitution of the bearer), the cinematographic illusion (frames represent motion without containing it), the quantum Zeno effect (a kinship in name).
 
-**Machine check.** The process structure that unties the aporia is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4)—a state is a step, motion is a rule of correspondence between steps, and in a single step there is no motion by construction. In the registry of 46 it is `D15_ZenoArrow`: the field `InstrumentObjectMismatch` (“the instrument does not fit the object”—a slice against a process), the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** The process structure that lays the aporia open is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4)—a state is a step, motion is a rule of correspondence between steps, and in a single step there is no motion by construction. In the registry of 46 it is `D15_ZenoArrow`: the field `InstrumentObjectMismatch` (“the instrument does not fit the object”—a slice against a process), the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

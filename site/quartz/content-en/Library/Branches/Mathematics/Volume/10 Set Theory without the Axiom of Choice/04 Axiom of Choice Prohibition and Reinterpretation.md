@@ -2,7 +2,7 @@
 title: "Chapter 4. The Axiom of Choice: Exclusion and Reinterpretation"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/04 Аксиома выбора запрет и переинтерпретация.md"
-sourceBlob: 06dcb59ae4966f507d14d1ea8966b510fb2e3713
+sourceBlob: cd8d48de188786d5ad031eec530cfb47c543308f
 translated: 2026-10-20
 status: draft
 ---
@@ -18,7 +18,7 @@ And—the synthesis: *the exclusion is strictly stronger than the reinterpretati
 
 *The Axiom of Choice is a role-confusion: the legitimate rule of resolution of L5 glued to an illegitimate completed graph. ToS reinterprets the first as a theorem and excludes the second as incompatible with P4; the exclusion is stronger than the reinterpretation.*
 
-## The Admissible Core: Choice as the Rule L5{L5}
+## The Admissible Core: Choice as the Rule L5
 
 What is a “set” at stage $N$ in ToS? A finite list. And what does it mean “to choose an element from it”? To take the *first* in the constitutive order—the head of the list. This is exactly L5: positional resolution. For a nonempty list the head lies in it; for a family of nonempty lists the function “head” gives a choice for all of them at once.[^1]
 
@@ -28,7 +28,7 @@ An important honest reservation about the *boundary* of this core. The version w
 
 *Choice on a finite/stage-by-stage family is a role-rule of L5 (the head in the constitutive order); the choice function and the finite Zorn’s lemma are theorems (0 axioms), not postulates. We read the unbounded version as a rule-on-demand, not as an object.*
 
-## The Exclusion: The Completed Choice Graph Is Incompatible with P4{P4}
+## The Exclusion: The Completed Choice Graph Is Incompatible with P4
 
 Let us take the full form of choice over $ℕ$: for any family of nonempty lists $F:ℕ\to$ `list` $ℕ$ there exists a function $f:ℕ\toℕ$ with $f(n)\in F(n)$ for *all* $n$. The key point: such an $f$, taken at once over *all* $n$ as a ready object (in the code this completed totality is encoded by `choice_graph`—the completed support of the domain, not a set of pairs with their values), is a *completed infinity*. And P4 (Finite Actuality) requires that at each stage only the finite be actual. A completed infinite collection violates this boundedness—a contradiction.[^4]
 
@@ -44,7 +44,7 @@ This is the precise E/R/R diagnosis of a strong axiom. The Axiom of Choice *glue
 
 *Exclusion ${}\Rightarrow{}$ reinterpretation (strictly): the impossibility of the completed object is stronger than its being unnecessary. The E/R/R diagnosis of AC: unglue the legitimate rule of L5 and the illegitimate completed graph; keep the rule, reject the object.*
 
-## L4{L4} Is Not Choice; and Why There Is No Banach–Tarski
+## L4 Is Not Choice; and Why There Is No Banach–Tarski
 
 A critical distinction on which the whole of Part X rests. The principle L4 (`L4_witness`) extracts a witness from a *single* existence: from $\exists x, 
 P(x)$, the object $\{x\mid P(x)\}$. The Axiom of Choice takes a function over an *arbitrary family* of existences at once. These are objects of *different ontological categories*: the definiteness of a single existence versus simultaneous selection over an unbounded completed collection.[^7] Therefore the results of 10.3 (Schröder–Bernstein, antisymmetry) use L4 but *not* choice: L4 inverts what is *unique*, whereas choice would select over fibers. At the same time, L4 is not a 0-axiom construction but a separate witness principle at the level of L4 (in 10.3 it was applied through `L4_definite`); its price is counted *separately* from choice.
@@ -61,11 +61,10 @@ Hence the fate of the pathologies of choice. The Banach–Tarski paradox and the
 | *Roles* (L4) | “choice” ${}={}$ the role-rule of resolution; the completed graph $\{(n,f(n))\}={}$ an illegitimate role-reification; L4${}={}$ a witness from a single $\exists$ (not choice) |
 | *Elements* (L1${}+{}$P4) | finite lists at each stage; the choice function as a completed infinite graph is *not* an Element |
 
-{
 **What it yields.** The admissible core is a theorem (`AC_is_L5`,
 `P4_eliminates_AC_finite`, `finite_zorn`; 0 axioms). The full form is
 excluded (`P4_prohibits_AC`, `completed_inf_contradicts_P4`). The link is
-`prohibition_implies_reinterpretation` (the exclusion is stronger).}
+`prohibition_implies_reinterpretation` (the exclusion is stronger).
 
 **Diagnosis.** In the P4 ontology of ToS, the Axiom of Choice is a gluing of the rule of L5 and the completed graph-Element. L4 must not be confused with it: these are different categories.
 

@@ -2,7 +2,7 @@
 title: "Chapter 5. Type Safety as Fuel Finitization"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/05 Типобезопасность как fuel-финитизация.md"
-sourceBlob: 9a026966619c4bbfe61a10bf77a01f034a42e758
+sourceBlob: 2ec5dfda4ab3333ff361ea533d191bb89b0cb014
 translated: 2026-10-20
 status: draft
 ---
@@ -40,12 +40,12 @@ This is “well-typed programs don’t get stuck,” by machine.[^2]
 Preservation and progress speak of *each* step. But the chain of steps can be arbitrarily long—and here **fuel** (`fuel`) comes in. `eval_fuel` $n$ applies the step *at most* $n$ times:
 
 $$
-`eval_fuel`\;0\;e = e,
+\texttt{eval\_fuel}\;0\;e = e,
   \quad
-  `eval_fuel`\;(n{+}1)\;e =
+  \texttt{eval\_fuel}\;(n{+}1)\;e =
     \begin{cases}
       e, & e \text{ is a value},\\
-      `eval_fuel`\;n (\text{step }e), & \text{otherwise.}
+      \texttt{eval\_fuel}\;n (\text{step }e), & \text{otherwise.}
     \end{cases}
 $$
 
@@ -65,9 +65,7 @@ It matters what the chapter does *not* claim. The diagonal (15.3) rules out a to
 
 **Roles (L4).**  The *type* is the role an expression is permitted to play; type checking is a role-criterion (a decidable one); “value / benign stuck state / step” are the statuses of progress.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete expressions, runs `eval_fuel` $n$, values. *Not* an element: an infinite completed chain of reductions—a role-limit finitized by fuel.}
+**Elements (L1${}+{}$P4).**  Concrete expressions, runs `eval_fuel` $n$, values. *Not* an element: an infinite completed chain of reductions—a role-limit finitized by fuel.
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -83,7 +81,7 @@ It matters what the chapter does *not* claim. The diagonal (15.3) rules out a to
 
 [^1]: Machine-checked, **0 axioms**: `src/Expressions.v` (the type `Expr`, the typing judgment), `src/Reduction.v` (the relation `step`, its determinism `step_deterministic`, and `multi_step`).
 [^2]: Machine-checked, **0 axioms**: `src/SubjectReduction.subject_reduction` (preservation of the type under a step); `src/Progress.progress` (a value or a step) with `is_benign_stuck` (benign stuck states) and `no_unexpected_stuck`.
-[^3]: Machine-checked, **0 axioms**: `src/Reduction.v`—`eval_fuel`, `eval_fuel_terminates`; `src/SubjectReduction.eval_fuel_preservation` (preservation along a run); `src/TypeSafety.v`—`type_safety` and `P4_ evaluation_ terminates` (the run with fuel terminates via `eval_fuel_terminates`—P4); `safety_ implies_ no_paradox` in the current file is a *bridging formulation of type preservation* under `eval_fuel` (a separate “no paradox” predicate is not introduced); `src/Evaluator.v`—`safe_eval` / `safe_eval_sound` and the end-to-end `verified_pipeline` (typing ${}+{}$ evaluation).
+[^3]: Machine-checked, **0 axioms**: `src/Reduction.v`—`eval_fuel`, `eval_fuel_terminates`; `src/SubjectReduction.eval_fuel_preservation` (preservation along a run); `src/TypeSafety.v`—`type_safety` and `P4_evaluation_terminates` (the run with fuel terminates via `eval_fuel_terminates`—P4); `safety_implies_no_paradox` in the current file is a *bridging formulation of type preservation* under `eval_fuel` (a separate “no paradox” predicate is not introduced); `src/Evaluator.v`—`safe_eval` / `safe_eval_sound` and the end-to-end `verified_pipeline` (typing ${}+{}$ evaluation).
 
 ---
 

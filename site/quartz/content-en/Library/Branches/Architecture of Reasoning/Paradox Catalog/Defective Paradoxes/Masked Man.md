@@ -2,7 +2,7 @@
 title: "Masked Man"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс замаскированного.md"
-sourceBlob: 39cc43a1ebaf5665e12c1da4a224cba167bf0471
+sourceBlob: 6582d37a369dbc177054d80495038e4de795d438
 translated: 2026-10-20
 status: draft
 description: "“To know” is an intensional context"
@@ -54,7 +54,7 @@ Indexing by description does all the work. Electra is acquainted with Orestes—
 
 [[Horned Man|The Horned Man]] (a neighbor in Eubulides’ arsenal: there the contraband is in the presupposition, here in the substitution), [[Teleportation Paradox]] (the criterion for recognizing a person—the ontological side of the same question), the pair “morning star / evening star” (the descendant theory in Frege), the objection to Cartesian dualism (the metaphysical dress of the knot), [[Liar Paradox|the Liar]] (Eubulides’ family—but there it is a genuine structural knot).
 
-**Machine check.** In the registry of 46 it is `D19_MaskedMan`: the field `ConceptualAmbiguity`, the level `L2_Operations`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The support of the ground is knowledge as a relation to a representation: src/foundation/KnowledgeTruthLadder.v. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D19_MaskedMan`: the field `ConceptualAmbiguity`, the level `L2_Operations`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The support of the ground is knowledge as a relation to a representation: src/foundation/KnowledgeTruthLadder.v. Map: [[Formalization]].
 
 ---
 

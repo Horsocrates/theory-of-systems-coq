@@ -2,7 +2,7 @@
 title: "Chapter 4. Transport and Nonlinearity"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/09 Уравнения в частных производных/04 Перенос и нелинейность.md"
-sourceBlob: 3b0aa8e46fa3600f68c12c98f3b8b8b44156ffc2
+sourceBlob: 780f78697a746f3a5ed618ea7cced4de6a694197
 translated: 2026-10-20
 status: draft
 ---
@@ -113,8 +113,7 @@ rational values at the nodes $u^n_j\inℚ$, the weights $1-\nu,\nu\inℚ$, a fin
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). It is essential that conservation of mass is expressed as an equality of finite sums (through a cyclic shift), not through an integral over a completed domain; that motion is the shift of a finite profile, not the evolution of a ready function $u(x-at)$; and that the discontinuity (the shock wave) is deliberately *not* taken as an element—it goes beyond the smooth process and is marked as a boundary. That is precisely why linear transport here is fully finite and rational, while nonlinear transport is honestly deferred.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). It is essential that conservation of mass is expressed as an equality of finite sums (through a cyclic shift), not through an integral over a completed domain; that motion is the shift of a finite profile, not the evolution of a ready function $u(x-at)$; and that the discontinuity (the shock wave) is deliberately *not* taken as an element—it goes beyond the smooth process and is marked as a boundary. That is precisely why linear transport here is fully finite and rational, while nonlinear transport is honestly deferred.
 
 What the analysis yields. It translates the chapter into the language of structure: *transport is a Role-motion* of the profile; *conservation of mass is a Rule* (the quantity is fixed, the position changes); *the Courant number is a Role-fraction of displacement*; and the values $u^n_j$ are *Elements*. To take the completed solution or the shock wave as an object-Element is to put the role-limit (or an extra-process discontinuity) in the place of an Element. Linear transport is a finite process of motion with conservation of mass; nonlinearity is the direction toward Navier–Stokes.
 

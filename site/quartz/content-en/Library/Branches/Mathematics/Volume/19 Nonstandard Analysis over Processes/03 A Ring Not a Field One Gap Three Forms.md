@@ -2,7 +2,7 @@
 title: "Chapter 3. A Ring, Not a Field: One Gap, Three Forms"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/03 Кольцо, а не поле один зазор — три формы.md"
-sourceBlob: 0c00e23567d94ef2e285d6d6b279d0c568b1ad4e
+sourceBlob: 3091a4eb6512fa8b940bf0e7cf002027e52f3173
 translated: 2026-10-20
 status: draft
 ---
@@ -51,8 +51,7 @@ Let us analyze by E/R/R in the generating order Rules $\to$ Roles $\to$ Elements
 
 **Elements (L1 + P4).** The bearers are processes $ℕ\toℚ$ and sets $ℕ\to\mathrm{bool}$: $E,O$ (undecided), $\{0\}$ (finite), $\delta$ (a unit). They are finitely actual; membership is decidable on each, but size is not.
 
-{
-**Well-formedness check.** The rule is the undecided distinction; the roles are the indicator, the oscillator, the unit, the divisor; the elements are processes and bool-sets; there are no overlaps. $E$ as a system: the values $1,0,1,0,…$ (Elements), the role of indicator and of divisor (Roles), while the unit status is *not determined internally*—the rule of invertibility is external (Fréchet does not decide “is the set of evens large”) $\Rightarrow$ the system is not closed internally (it requires external closure) $\Rightarrow$ a role-limit.}
+**Well-formedness check.** The rule is the undecided distinction; the roles are the indicator, the oscillator, the unit, the divisor; the elements are processes and bool-sets; there are no overlaps. $E$ as a system: the values $1,0,1,0,…$ (Elements), the role of indicator and of divisor (Roles), while the unit status is *not determined internally*—the rule of invertibility is external (Fréchet does not decide “is the set of evens large”) $\Rightarrow$ the system is not closed internally (it requires external closure) $\Rightarrow$ a role-limit.
 
 **What the analysis yields.** It reduces everything to one root: the undecided distinction “what is large” generates three algebraic forms of the gap, and the ring of germs is not a field precisely because this question is left open. The Element side consists of eventually nonzero units; the role-limit side, of zero sets that recur arbitrarily far out, decidable only by a global fragment of choice (above the one-off $\mathrm{LPO}$ decisions).
 

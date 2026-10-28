@@ -2,7 +2,7 @@
 title: "Chapter 7. Fubini’s Theorem on Processes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/07 Теорема Фубини на процессах.md"
-sourceBlob: 5b1c0a137e379c4c51885f5db985fc8f2e9cde4f
+sourceBlob: 1c9541999d054399df61427f57ff9eee3f58c657
 translated: 2026-10-20
 status: draft
 ---
@@ -49,8 +49,7 @@ A two-dimensional step function is a finite list of such rectangles, `StepFun2D 
 
 ### A Caveat: A List of Contributions, Not a Partition
 
-{
-Precision is needed here; otherwise a modest object will sound stronger than it is. `StepFun2D` is a *formal finite sum of rectangular contributions*—*not* necessarily a partition of the domain and *not* necessarily a disjoint set of rectangles. The file defines the sum of the contributions and proves its properties; it builds no theory of covers of the domain and does not require the rectangles to tile $[a,b]\times[c,d]$ without gaps and overlaps. This suffices to see the law of order, but it is not the general double integral of an arbitrary function.}
+Precision is needed here; otherwise a modest object will sound stronger than it is. `StepFun2D` is a *formal finite sum of rectangular contributions*—*not* necessarily a partition of the domain and *not* necessarily a disjoint set of rectangles. The file defines the sum of the contributions and proves its properties; it builds no theory of covers of the domain and does not require the rectangles to tile $[a,b]\times[c,d]$ without gaps and overlaps. This suffices to see the law of order, but it is not the general double integral of an arbitrary function.
 
 ## Fubini for Step Functions: What Is Proved
 
@@ -73,8 +72,7 @@ The proof is the single word `ring`: the equality is exactly the commutativity o
 
 ### A List of Rectangles: Induction
 
-{
-For a finite list of contributions Fubini’s theorem is proved by induction on the list: on the empty list, an identity; on the step, the equality for the head rectangle (`fubini_rectangle`) plus the induction hypothesis.}
+For a finite list of contributions Fubini’s theorem is proved by induction on the list: on the empty list, an identity; on the step, the equality for the head rectangle (`fubini_rectangle`) plus the induction hypothesis.
 
 ```coq
 Theorem fubini_step : forall f : StepFun2D,
@@ -86,13 +84,11 @@ Proof.
 Qed.
 ```
 
-{
-And both iterated integrals of the list equal the double one (`iterated_xy_eq_2d`, `iterated_yx_eq_2d`): the order of adding the contributions and the order of integration inside a contribution are both immaterial.}
+And both iterated integrals of the list equal the double one (`iterated_xy_eq_2d`, `iterated_yx_eq_2d`): the order of adding the contributions and the order of integration inside a contribution are both immaterial.
 
 ### Concrete Computations
 
-{
-In the spirit of Part V—not only a construction but a working computation. Take $f=3$ on $[0,1]\times[0,2]$: the double integral is $3\cdot1\cdot2=6$, and both orders give the same (`example_rect_integral`, `example_fubini_concrete`). For two rectangles—$f=2$ on $[0,1]\times[0,1]$ and $f=3$ on $[1,2]\times[0,1]$—the double integral is $2+3=5$ (`example_two_rects`). Rocq checks all this by exact rational arithmetic: in these examples the proofs reduce to `ring` or a direct application of `fubini_rectangle`—process analysis here is computation, not abstraction.}
+In the spirit of Part V—not only a construction but a working computation. Take $f=3$ on $[0,1]\times[0,2]$: the double integral is $3\cdot1\cdot2=6$, and both orders give the same (`example_rect_integral`, `example_fubini_concrete`). For two rectangles—$f=2$ on $[0,1]\times[0,1]$ and $f=3$ on $[1,2]\times[0,1]$—the double integral is $2+3=5$ (`example_two_rects`). Rocq checks all this by exact rational arithmetic: in these examples the proofs reduce to `ring` or a direct application of `fubini_rectangle`—process analysis here is computation, not abstraction.
 
 ### Trivial at the Step, Hard at the Limit
 
@@ -122,7 +118,7 @@ So the interchange of limits in Fubini on a compact rectangle rests on three con
 |---|---|
 | continuity of $f$ | local moduli of continuity at each point |
 | compactness of the domain (Heine–Borel, 5.2) | uniformity—a single modulus on the whole rectangle |
-| the Archimedean property of ℚ\ (3.4) | coordination of the partition levels in the two coordinates by one $N$ |
+| the Archimedean property of ℚ (3.4) | coordination of the partition levels in the two coordinates by one $N$ |
 
 Without any one of the three the theorem in general form breaks down: for discontinuous functions or on noncompact domains there are classical counterexamples in which the iterated integrals disagree. With the three conditions a framework of the future justification appears: they give the synchronization of grids and control of the approximations. But—and this is the subject of the next section—the proof itself of the interchange of two limit processes requires the $L^1$ layer and dominated convergence, and in the repository it has not yet been assembled into a machine theorem.
 
@@ -134,9 +130,7 @@ The three conditions of § 7.4 are the correct and standard path to the continuo
 
 ### The Bricks—and What Exactly They Are
 
-{
 The bricks for the future continuous case exist in the repository, and it is important to name each one *precisely*, without attributing to it a strength that belongs to something else.
-}
 
 *The exact step integral.* The file `StepIntegral.v` (20 Qed, 0 axioms) gives the exact integral of step functions over ℚ—the foundation of the Bishop–Cheng approach, on which everything else is the $L^1$ completion. This is the future *bearer* of the approximation; the theorem itself on approximating a continuous function by step functions is *not proved* in this chapter.
 
@@ -178,8 +172,7 @@ With the present chapter Part V closes. Let us compress its path. The metric tur
 
 Next come measure and Lebesgue integration. The step integral, which served here as the bearer, is the foundation of measure in the Bishop–Cheng approach; the $L^1$ completion, left as a frontier in § 7.5, is precisely the subject of Part VI. There ToS will build integration *without an external set-theoretic axiom of choice*, with explicit local marking of $L3$ and $L4$ where they are needed—and then the continuous Fubini, the program of this chapter, will receive its full proof.
 
-{
-*The summary—in three parts. First: what is proved. Fubini’s theorem for finite lists of rectangular contributions: the double integral does not depend on the order of integration (`fubini_step`)—exactly, without axioms, as the commutativity of multiplication. Second: what this rests on and what is not here. A step prototype is proved; the continuous case is a program on three conditions (uniform continuity, compactness, the Archimedean property) with named bricks (`StepIntegral`, `DominatedConvergence`, `HeineBorelComplete`), but without an assembled $L^1$ layer. Third: where it leads. The interchange of limits is the heart of multidimensional analysis, not a triviality; the step Fubini is its finite prototype, and the full proof awaits the measure of Part VI. With this Part V is completed: the whole of basic analysis has received a process-compatible infrastructure—some results are already given as processes, some as finite step prototypes of future process limits—and the strength of each step has been honestly labeled.*}
+*The summary—in three parts. First: what is proved. Fubini’s theorem for finite lists of rectangular contributions: the double integral does not depend on the order of integration (`fubini_step`)—exactly, without axioms, as the commutativity of multiplication. Second: what this rests on and what is not here. A step prototype is proved; the continuous case is a program on three conditions (uniform continuity, compactness, the Archimedean property) with named bricks (`StepIntegral`, `DominatedConvergence`, `HeineBorelComplete`), but without an assembled $L^1$ layer. Third: where it leads. The interchange of limits is the heart of multidimensional analysis, not a triviality; the step Fubini is its finite prototype, and the full proof awaits the measure of Part VI. With this Part V is completed: the whole of basic analysis has received a process-compatible infrastructure—some results are already given as processes, some as finite step prototypes of future process limits—and the strength of each step has been honestly labeled.*
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Chapter 2. Countability Is Constructive; Uncountability Is a Rule about Processes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/02 Счётность конструктивна; несчётность — правило о процессах.md"
-sourceBlob: 76ce20e9c8c3253ec4175095a309b0761a67ffe9
+sourceBlob: 3fad7715c7a79cfd95b9a194031a91c2234877fe
 translated: 2026-10-20
 status: draft
 ---
@@ -90,7 +90,7 @@ Chapter 10.3 will take the next step: *comparing* cardinalities without the Axio
 
 [^1]: Countability: `Countability_Q.v`, header “AXIOMS: NONE (not even classic!)”. The diagonal: `diagonal_differs` (`ProcessDiagonal.v`)—the file explicitly prints `Print Assumptions` and gets “Closed under the global context.” The uncountability of $[0,1]$: `unit_interval_uncountable_trisect_v2` (`ShrinkingIntervals_ERR.v`) uses `classic` (L3).
 [^2]: `enum_QPos` (`Countability_Q.v`): $ℕ \to$ irreducible positive pairs; `enum_injective` and `enum_surjective` give a bijection, assembled in `Q_positive_countable`; the signed extension to all of $ℚ$ is `enum_Q`. Fully constructive, **0 axioms**.
-[^3]: `diagonal` and `diagonal_differs` (`ProcessDiagonal.v`): $\forall f n,\ \lnot `bp_eq` (`diagonal`  f) (f n)$. Only the involutivity of `flip` (Boolean negation) is used; **0 axioms**—the file prints this.
+[^3]: `diagonal` and `diagonal_differs` (`ProcessDiagonal.v`): $\forall f n,\ \lnot \texttt{bp\_eq} (\texttt{diagonal}  f) (f n)$. Only the involutivity of `flip` (Boolean negation) is used; **0 axioms**—the file prints this.
 [^4]: `binary_processes_not_enumerable` and `cantor_for_processes` (`ProcessDiagonal.v`)—both rest on the 0-axiom `diagonal_differs`.
 [^5]: `unit_interval_uncountable_trisect_v2` (`ShrinkingIntervals_ERR.v`) is the main theorem of the file: $[0,1]$ is uncountable. Here `classic` (L3) is already used.
 

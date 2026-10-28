@@ -2,7 +2,7 @@
 title: "Chapter 2. Finite Memory and the Chomsky Ladder"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/02 Конечная память и лестница Хомского.md"
-sourceBlob: 2ff57d40d6f16ac690eb4aaaff7b27acf7341634
+sourceBlob: fa2bf88b3a183172aec809882104f88e4c2f670e
 translated: 2026-10-20
 status: draft
 ---
@@ -76,9 +76,7 @@ and the characterization of context-free languages by pushdown automata are a st
 
 **Roles (L4).**  *Memory* is a role: finite control, a stack, a bounded tape, a full tape are resource-roles that a computation is entitled to carry. And the *class of a language* (regular, context-free, …) is a role-tier of the hierarchy: the place the language occupies in the gradient.
 
-{
-
-**Elements (L1${}+{}$P4).**  Concrete words, the inductive grammar `CFG_anbn`, concrete automata, finite runs. *Not* an element: a finite automaton for $\{a^nb^n\}$—it would reify unbounded counting into fixed memory (the pigeonhole rules it out).}
+**Elements (L1${}+{}$P4).**  Concrete words, the inductive grammar `CFG_anbn`, concrete automata, finite runs. *Not* an element: a finite automaton for $\{a^nb^n\}$—it would reify unbounded counting into fixed memory (the pigeonhole rules it out).
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
@@ -98,8 +96,8 @@ The very top of the ladder—membership in a recursively enumerable language—i
 
 [^1]: The mechanics of finite automata is in `src/stdlib/Automata.v` (DFA/NFA). The Element floor is `src/cs/RegularElementFloor.v` (9 Qed, **0 axioms**): `run` (the run of the automaton over a word), `accepts` (acceptance), `membership_decidable` (the decidability of membership), `complement_spec`; closure under intersection and union is via the product of automata (`dprod`, `run_prod`, `intersection_spec`, `union_spec`).
 [^2]: `src/cs/PumpingRoleLimit.v` (11 Qed, **0 axioms**): a revisited state is a loop (`loop_pump`), pumping preserves the final state (`pump_preserves`); the language $a^nb^n$ is `word_a`, `word_b`, `In_L`; the letter counters `cF`/`cT` and the balance `anbn_balanced` (if $a^j b^i\in L$, then $i=j$).
-[^3]: The unconditional absence of a DFA is `src/cs/PumpingPigeonhole.v` (4 Qed, **0 axioms**): the pigeonhole on prefix states (`gpref`, `gpref_collision`) gives `no_dfa_for_ anbn_ unconditional`.
-[^4]: `src/cs/ChomskyHierarchy.v` (8 Qed, **0 axioms**): `CFG_anbn` (the rules $S\to\varepsilon\mid aSb$), `CFG_anbn_iff_In_L` (the grammar generates EXACTLY $a^nb^n$), `regular_recognized` (formally: “some DFA recognizes”), `regular_ subsetneq_ context_free` (the strict inclusion).
+[^3]: The unconditional absence of a DFA is `src/cs/PumpingPigeonhole.v` (4 Qed, **0 axioms**): the pigeonhole on prefix states (`gpref`, `gpref_collision`) gives `no_dfa_for_anbn_unconditional`.
+[^4]: `src/cs/ChomskyHierarchy.v` (8 Qed, **0 axioms**): `CFG_anbn` (the rules $S\to\varepsilon\mid aSb$), `CFG_anbn_iff_In_L` (the grammar generates EXACTLY $a^nb^n$), `regular_recognized` (formally: “some DFA recognizes”), `regular_subsetneq_context_free` (the strict inclusion).
 
 ---
 

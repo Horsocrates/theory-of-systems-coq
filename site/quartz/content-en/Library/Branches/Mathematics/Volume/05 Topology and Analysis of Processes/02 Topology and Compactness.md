@@ -2,7 +2,7 @@
 title: "Chapter 2. Topology and Compactness"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/02 Топология и компактность.md"
-sourceBlob: c0a5b607126241b432db7924b82b618b3523b103
+sourceBlob: 97bcf6df77f35bd1d9f9436cb165391f8e89b121
 translated: 2026-10-20
 status: draft
 ---
@@ -19,7 +19,7 @@ Having distance, we can build *topology*—the science of closeness, neighborhoo
 
 The chapter falls into two layers, and it is more honest to state the difference between them at once, from the very beginning.
 
-The first layer is *topology* proper: open and closed sets, separation, connectedness. Over $ℚ$ this layer is built *fully and constructively*. The supporting files of the topological layer—`Topology.v`, `ProcessTopOpen.v`, `ProcessTop\-
+The first layer is *topology* proper: open and closed sets, separation, connectedness. Over $ℚ$ this layer is built *fully and constructively*. The supporting files of the topological layer—`Topology.v`, `ProcessTopOpen.v`, `ProcessTop
 Connected.v`—use not a single axiom. Here ToS obtains topology “for free”: from the rational distance alone, without any additional assumptions.
 
 The second layer is *compactness*: the Heine–Borel and Bolzano–Weierstrass theorems. And here the picture changes. Compactness is the place where the rational numbers *reveal their incompleteness*. Over $ℚ$ the classical Heine–Borel theorem is simply *false* (more on this in § 2.5), and the compactness theorems have either to be repaired or to be proved with the help of the *laws of logic* of ToS. The files of the compactness layer—`HeineBorel_ERR.v`, `BolzanoWeierstrass.v`—rely on $L3$ and, locally, on $L4$.
@@ -42,7 +42,7 @@ The chapter goes from the simple to the difficult. First come open and closed se
 
 There are eleven supporting files—six main ones and five auxiliary process wrappers; all have been checked against the repository verbatim. The topological layer is axiom-free; the compactness layer has $L3$ and $L4$ explicitly accounted for.
 
-## Open and Closed Sets over $ℚ${Q}
+## Open and Closed Sets over $ℚ$
 
 ### The Open Ball and the Open Set
 
@@ -82,17 +82,11 @@ On these definitions we build the whole basic apparatus of point-set topology ov
 
 *The empty and the full sets are open.* Two degenerate but necessary cases: both the empty set and the whole of $ℚ$ are open (`empty_is_open`, `full_is_open`).
 
-{
 *The union and the intersection of two open sets are open.* Topology is closed under the two basic operations on sets; for the intersection, the margin of free space is taken as the smaller of the two margins. These are `union_two_open` and `intersection_two_open`.
-}
 
-{
 *Intervals.* An open interval $(a,b)$ is an open set, and a closed interval $[a,b]$ is a closed one (`interval_open`, `closed_interval_closed`). These two facts support the whole future theory of compactness: it is precisely the *closed* interval that will turn out to be compact.
-}
 
-{
 *Continuity.* Here we also introduce continuity—at a point (`continuous_at`) and everywhere (`continuous`)—and establish its stability: the identity and constants are continuous, the shift $x \mapsto x+c$ is continuous, and the sum, negation, and composition of continuous functions are continuous. We also prove the lemma that is key for topology, `continuous_preserves_open_preimage`: the preimage of an open set under a continuous map is open. This is the topological *definition* of continuity in an equivalent form; Chapter 5.3 will return to it in detail.
-}
 
 ### Topology over Q, Not over Classes
 
@@ -165,11 +159,9 @@ Why a process form, if `Topology.v` has already given the open set as a predicat
 
 Let us be precise, however, about what exactly we have *built* here and what we have not. What is built is *infrastructure*: `QBallCover`, `OpenProcess`, `is_refining`, `covered_by_balls`—and its basic properties are proved. What we have *not* proved is the full equivalence theorem: that to every open predicate $S : ℚ \to Prop$ there corresponds a process of covers exhausting exactly $S$, and conversely. Therefore it is honest to call the process of covers a *process representation* of openness, an infrastructure layer, and not a proved identity between all open predicates and processes of covers. The chapter uses it in just this way: as a way of *presenting* openness by finite approximations, not as a theorem about the coincidence of two descriptions. What has been built in `ProcessTopOpen.v` we present as exactly what it is.
 
-{
 And, importantly for the overall picture of the chapter, the process layer, like the topological one, remains *constructive*: `ProcessTopOpen.v`, like `Topology.v`, uses not a single axiom.
-}
 
-## Separation: $ℚ$ Is Hausdorff{Separation: Q Is Hausdorff}
+## Separation: $ℚ$ Is Hausdorff
 
 ### To Distinguish Is to Separate
 
@@ -202,7 +194,7 @@ The Hausdorff property builds a topological storey on top of this. A positive ga
 
 And, as before, not a single axiom. `hausdorff_Q` and `not_Qeq_pos_dist` are proved purely constructively. ToS builds the whole topological layer—open sets, closed sets, continuity, separation—without appealing to the laws of logic. This changes in the next section, where the chapter comes to compactness.
 
-## Compactness: Where $ℚ$ Reveals Its Incompleteness{Compactness: Where Q Reveals Its Incompleteness}
+## Compactness: Where $ℚ$ Reveals Its Incompleteness
 
 ### A Bold Line
 
@@ -214,9 +206,7 @@ The classical Heine–Borel theorem asserts: every open cover of a closed bounde
 
 ### The Counterexample
 
-{
 Why the classical Heine–Borel theorem is false over $ℚ$ can be seen from a counterexample. The file `HeineBorel_ERR.v` records the general sense of the obstacle—the classical Heine–Borel theorem requires completeness, which $ℚ$ lacks—while the concrete construction is given here as the chapter’s own illustration.
-}
 
 Let us take an irrational number $\alpha$ lying inside the interval—say, $\alpha = \sqrt{2}/2$ on the interval $[0,1]$. For each rational point $x$ of the interval, let us set the radius
 
@@ -263,19 +253,15 @@ Given a Lebesgue number, a finite subcover *exists*. The theorem `Heine_Borel` i
 
 ### What Is Proved and What Is Not
 
-{
 Let us be precise about what exactly has been established. What is proved is the *uniform* version of Heine–Borel, for covers that possess a Lebesgue number. *Full* classical compactness—“every cover has a finite subcover,” without the uniformity proviso—is *not* proved, and cannot be: the counterexample contradicts it. The chapter does not pass off `Heine_Borel_uniform` as the classical theorem. This is an honest repair: the theorem is restored on the class of covers on which it holds over $ℚ$ at all.
-}
 
-### Axiom Status: $L3${L3} in the Bisection
+### Axiom Status: $L3$ in the Bisection
 
-{
 And, as agreed in § 2.1, let us honestly mark where our argument rests on a law of logic. The Heine–Borel bisection hinges on one step that is not constructive. This step is the lemma `not_coverable_half`: if an interval is not covered by finitely many balls, then one of its halves is not covered either. The statement is true, but to indicate *which* half is not covered, the Law of Excluded Middle is needed. Therefore `HeineBorel_ERR.v` imports `ToS_Axioms.v`, and this lemma uses `classic`.
-}
 
 Let us recall the agreement of § 2.1: `classic` is the technical Rocq implementation of $L3$, the Law of Excluded Middle of ToS. Appealing to it is an *explicit accounting of the level*, not a breach in rigor: the bisection argument of Heine–Borel rests on a law of logic of ToS, and the chapter notes this. The compactness layer, moreover, is *not homogeneous*. Some of its parts are fully constructive—for example, the total boundedness of an interval and the construction of $\varepsilon$-nets, to which the chapter will turn in § 2.6. Others—for example, the bisection arguments about the uncoverable half or the infinitely inhabited half—rest on $L3$. To distinguish “proved constructively” from “proved with support from $L3$” is not pedantry here but an exact description of what each particular theorem stands on. This is precisely the sublayer of *Rules* resting on a law of logic that the analysis of § 2.2.4 singled out.
 
-## Total Boundedness and $\varepsilon$-Nets{Total Boundedness and eps-Nets}
+## Total Boundedness and $\varepsilon$-Nets
 
 ### Another Approach to Compactness
 
@@ -297,9 +283,7 @@ Definition totally_bounded (a b : Q) : Prop :=
 
 ### The Main Theorem: An Interval Is Totally Bounded
 
-{
 Let us establish the main thing: every closed interval is totally bounded. In `HeineBorelComplete.v` this is a theorem:
-}
 
 ```coq
 Theorem totally_bounded_interval : forall a b,
@@ -310,19 +294,13 @@ And, what is important for the ontology of ToS, it is proved *constructively*, b
 
 Unlike Heine–Borel, where a genuine difficulty arose over $ℚ$, the total boundedness of an interval is a constructive and unproblematic result. And this is understandable: total boundedness does not require a limit point to *exist*; it requires only that the interval can be *approximated* by a finite grid. And $ℚ$ knows how to approximate finitely without any completeness.
 
-{
 On the same foundation we also build a *bridge to uniform continuity*, groundwork for Chapter 5.3. A Lipschitz map is uniformly continuous (`lipschitz_uniform_cont`); this is the constructive replacement for the classical implication “continuity implies uniform continuity,” which is unprovable over $ℚ$. The sum, scaling, and composition of uniformly continuous functions are again uniformly continuous. `HeineBorelComplete.v` supplies this whole apparatus to Chapter 5.3.
-}
 
 ### A Caveat on Axiom Status
 
-{
 An honest caveat is needed here—and it also illustrates a general rule of ToS auditing. The header of the file `HeineBorelComplete.v` declares the status “0 axioms.” But this is the status of the *file according to its header*, not of every theorem in it. Among the lemmas of the file is `mono_bounded_is_cauchy`—“a monotone bounded sequence is Cauchy”—and it *uses* `classic` (through the device `NNPP`, double-negation elimination).
-}
 
-{
 There is no contradiction with the header; there is a reminder of the rule established back in Chapter 4.6: axiom status is checked for a *concrete theorem*, with the command `Print Assumptions`, not ascribed wholesale to a file. `totally_bounded_interval` and the construction of $\varepsilon$-nets are constructive. But `mono_bounded_is_cauchy` rests on $L3$—and, as agreed in § 2.1, this is an *explicit accounting of the level*: the given lemma stands on the Law of Excluded Middle of ToS, and the audit records this.
-}
 
 ### A Computational Example: The Grid of an Interval
 
@@ -336,10 +314,7 @@ The grid is laid out with a step equal to $\varepsilon$; the number of points is
 | $1/8$ | $1/8$ | $9$ |
 | $1/16$ | $1/16$ | $17$ |
 
-{
-
 Let us read the table. To cover $[0,1]$ with precision $1/4$, five points suffice—$0,\ 1/4,\ 1/2,\ 3/4,\ 1$: every point of the interval lies at a distance less than $1/4$ from one of them. With precision $1/8$, nine points. With precision $1/16$, seventeen. The grid is *finite* for every $\varepsilon$, and its size is computed directly: when $\varepsilon$ is halved, the number of points roughly doubles. This is total boundedness at work: a concrete finite table in place of the abstract “a grid exists.” And everything is computable—no completeness, no passage to a limit, only rational arithmetic.
-}
 
 One technical caveat. The table above shows the most intuitive grid, with a step of exactly $\varepsilon$. The *formal* proof in `HeineBorelComplete.v` is arranged more robustly: the lemma `rational_eps_net` builds a grid with a *half* step $\varepsilon/2$ to guarantee the strict inequality $|x - p| < \varepsilon$ without provisos about the endpoints. The table here is a pedagogical illustration of the orders of magnitude, not the literal `grid_points` of the proof; the code takes a grid twice as dense and thereby avoids fussing with the boundaries.
 
@@ -349,17 +324,13 @@ One technical caveat. The table above shows the most intuitive grid, with a step
 
 Heine–Borel speaks of covers. Compactness also has a second face, dual to the first: the Bolzano–Weierstrass theorem, which speaks of *sequences*. Classically it is formulated as the existence of a convergent subsequence for every bounded sequence. The current formalization proves a close, Cauchy-compatible form. In the terms of ToS, where a limit is a process: every bounded sequence of rational numbers has a *cluster point*—a Cauchy process to which terms of the sequence with large indices come arbitrarily close. It is precisely this formulation—through a cluster point, not through an explicitly constructed subsequence $k : ℕ \to ℕ$—that will be proved.
 
-{
 To prove this theorem is our next step (its formalization is gathered in `BolzanoWeierstrass.v`). And at once, honestly and as agreed in § 2.1, a word about the basis on which it will stand. Unlike the total boundedness of § 2.6, Bolzano–Weierstrass will not be constructive: its proof rests on *two* laws of logic of ToS, $L3$ and $L4$. The header of `BolzanoWeierstrass.v` does not hide its axiom status and declares it directly: *“Axioms: classic ($L3$), L4_witness ($L4$)”*. The chapter makes this basis the crux of the section rather than a footnote in small print—and § 2.7.2 will show exactly where and why the laws of logic come into play.
-}
 
 ### Bisection and the Choice of a Half
 
 The proof is a bisection akin to the one that worked in Heine–Borel, but applied to a sequence. We are given an interval $[a,b]$ in which a bounded sequence $s$ lies. We divide the interval in half. In one of the halves—in at least one—lie *infinitely many* terms of the sequence (there are infinitely many terms in all, and only two halves). We choose such a half, divide again, and so on. The result is a process of nested intervals whose width tends to zero; the “point” to which they contract is the cluster point.
 
-{
 There is exactly one non-constructive step in this argument, and we point it out directly instead of masking it. The step is the *choice of a half*; in Rocq it is written as follows:
-}
 
 ```coq
 Definition bw_step (s : nat -> Q) (st : BWState) : BWState.
@@ -392,13 +363,9 @@ Every bounded sequence in $[a,b]$ has a cluster point, and this point is present
 
 ### Bisection as a Process
 
-{
 It remains to translate the result into the process language of ToS; this wrapper is carried by the file `ProcessBW.v`. We regard the left and right endpoints of the bisection as processes over $ℚ$ (`bw_left_process` and `bw_right_process`) and establish that they are monotone (the left ones increase, the right ones decrease), that both are Cauchy, and that they converge to one limit. The theorem `bw_is_process_construction` assembles this into a single E/R/R picture, and `bw_convergence_rate` fixes the rate, $1/2$: the interval is halved at each step.
-}
 
-{
 The process wrapper does not change the axiomatic basis: it adds nothing and takes nothing away, carrying over into the language of processes the theorem as it is—proved, with support from $L3$ and $L4$. The header of `ProcessBW.v` records exactly this: *“classic (inherited from BolzanoWeierstrass)”*.
-}
 
 Ontologically, the Bolzano–Weierstrass bisection is a pure specimen of a ToS process. The cluster point is not given in advance; it is *built*—step by step, division after division, choice of an inhabited half after choice. The result is a Cauchy process unfolding at the rate $1/2$. What classical mathematics has as a ready “limit point” is a process here; and the only place where the process rests on a law of logic rather than on computation is the honestly named choice of a half.
 
@@ -438,9 +405,7 @@ Let us now bring together the different guises of compactness: in ToS there turn
 
 It is worth saying precisely, however, what the *status* of these summary theorems is. `p4_compactness_summary` and its relatives are *conjunctions* of what has already been proved, not new results: they gather together theorems established in `HeineBorel_ERR.v` and in the files on Noetherianity. The same applies to the file `ProcessTopUnified.v`, a summary of all the topological material: it lists five subpatterns of topology (open sets, metric, compactness, connectedness, separation) and places topology eleventh in the series of process patterns of ToS. `ProcessTopUnified.v` is an *overview* file, a summary; the chapter refers to it as a map of ground already covered, not as a source of new proofs. And, as agreed in § 2.1, the headers of `ProcessTopCompact.v` and `ProcessTopUnified.v` honestly note that `classic` is inherited from the Noetherianity layer.
 
-{
 The small file `ProcessCompactness.v`, with its theorem `compactness_foundation`, belongs here as well. The name is grand, but, as with `process_space_complete` in Chapter 5.1, in its content it is a *foundation stub*, not a theory of compactness: it records basic facts such as the boundedness of a constant process and the Cauchy property of a constant sequence. The chapter counts it exactly as such and calls things by their proper names.
-}
 
 ### What Has Been Built and What Is Being Prepared
 
@@ -448,9 +413,9 @@ The summary of the chapter comes as three lists, following the discipline of the
 
 **Built and checked.**
 
-- { The topological layer over $ℚ$—open and closed sets, balls, intervals, continuity, the Hausdorff property, process path-reachability; constructively, without axioms (`Topology.v`, `ProcessTopOpen.v`, `ProcessTopConnected.v`).}
+- The topological layer over $ℚ$—open and closed sets, balls, intervals, continuity, the Hausdorff property, process path-reachability; constructively, without axioms (`Topology.v`, `ProcessTopOpen.v`, `ProcessTopConnected.v`).
 - The open set in process form: a process of finite rational covers by balls, with refinement across levels.
-- Heine–Borel in the uniform version (`Heine_Borel_ uniform`), for covers with a Lebesgue number; proved by bisection.
+- Heine–Borel in the uniform version (`Heine_Borel_uniform`), for covers with a Lebesgue number; proved by bisection.
 - The total boundedness of every interval (`totally_bounded_interval`), constructively, through the explicit construction of $\varepsilon$-grids.
 - Bolzano–Weierstrass (`bolzano_weierstrass`) in the `CauchySeq` form: every bounded sequence has a Cauchy cluster point (rather than an explicitly constructed subsequence).
 
@@ -462,7 +427,7 @@ The summary of the chapter comes as three lists, following the discipline of the
 **Not built in this chapter.**
 
 - The classical Heine–Borel theorem without the uniformity proviso: over $ℚ$ it is *false*, and this is a mathematical fact, not a gap.
-- { The *full* topology of open sets and compactness on the quotient classes `RealPoint` are not built as a separate structure; the material of this chapter lives at the level of $ℚ$ and of processes over $ℚ$. (The basis of the metric topology on classes—the open ball `rp_in_ball` with well-definedness—is built separately, in `RealPointTopology.v`; see § 2.2.3.)}
+- The *full* topology of open sets and compactness on the quotient classes `RealPoint` are not built as a separate structure; the material of this chapter lives at the level of $ℚ$ and of processes over $ℚ$. (The basis of the metric topology on classes—the open ball `rp_in_ball` with well-definedness—is built separately, in `RealPointTopology.v`; see § 2.2.3.)
 
 **Prepares next.** Uniform continuity, the Lipschitz apparatus, and $\varepsilon$-nets are groundwork for Chapter 5.3 on continuity; the compactness of an interval is the instrument on which the intermediate value and extreme value theorems will stand.
 
@@ -470,11 +435,11 @@ The summary of the chapter comes as three lists, following the discipline of the
 
 Chapter 5.2 has taken the topology of processes from the open ball to the cluster point. Its main lesson concerns the *two layers*. Topology as such—openness, closedness, separation, connectedness—is given to ToS for free, purely constructively, from the rational distance alone. Compactness is given differently: here $ℚ$ reveals its incompleteness, the classical Heine–Borel theorem breaks down, and the theorems are restored either by repair (the Lebesgue number) or by support from the laws of logic of ToS. And this support is an honestly presented structure, not a weakness: $L3$ and $L4$ are laws of logic of ToS, and the audit marks the appeal to them as an accounting of the level, not as a breach.
 
-{*The summary of the chapter comes in three parts. First: what is built. The topological layer over $ℚ$—open and closed sets, balls, intervals, continuity, the Hausdorff property, process path-reachability—is built constructively, without a single axiom. The open set has received a process form: a process of finite rational covers by balls. The uniform version of Heine–Borel, the total boundedness of every interval, and the Bolzano–Weierstrass theorem are proved.*}
+*The summary of the chapter comes in three parts. First: what is built. The topological layer over $ℚ$—open and closed sets, balls, intervals, continuity, the Hausdorff property, process path-reachability—is built constructively, without a single axiom. The open set has received a process form: a process of finite rational covers by balls. The uniform version of Heine–Borel, the total boundedness of every interval, and the Bolzano–Weierstrass theorem are proved.*
 
-{*Second: what this rests on. The topological layer rests on pure construction. The compactness layer rests on the laws of logic of ToS: the bisection of Heine–Borel and Bolzano–Weierstrass rests on $L3$, and Bolzano–Weierstrass additionally on $L4$. The technical Rocq axioms `classic` and `L4_witness` are implementations of the ontological laws of logic of ToS; appealing to them is an explicit accounting of the level of a proof, not a departure from rigor.*}
+*Second: what this rests on. The topological layer rests on pure construction. The compactness layer rests on the laws of logic of ToS: the bisection of Heine–Borel and Bolzano–Weierstrass rests on $L3$, and Bolzano–Weierstrass additionally on $L4$. The technical Rocq axioms `classic` and `L4_witness` are implementations of the ontological laws of logic of ToS; appealing to them is an explicit accounting of the level of a proof, not a departure from rigor.*
 
-{*Third: what remains open. The classical Heine–Borel theorem without the uniformity proviso is false over $ℚ$: this is a mathematical fact. On the quotient classes `RealPoint` the *basis* of the metric topology has been built—the open ball `rp_in_ball` with well-definedness (`RealPointTopology.v`, § 2.2.3); the full theory of open sets and compactness on classes, however, has not been built as a separate structure. The chapter has given the topology of processes and two compactness theorems; continuity, which will stand on this basis, is the subject of the next chapter of Part V.*}
+*Third: what remains open. The classical Heine–Borel theorem without the uniformity proviso is false over $ℚ$: this is a mathematical fact. On the quotient classes `RealPoint` the *basis* of the metric topology has been built—the open ball `rp_in_ball` with well-definedness (`RealPointTopology.v`, § 2.2.3); the full theory of open sets and compactness on classes, however, has not been built as a separate structure. The chapter has given the topology of processes and two compactness theorems; continuity, which will stand on this basis, is the subject of the next chapter of Part V.*
 
 ---
 

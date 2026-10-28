@@ -2,7 +2,7 @@
 title: "Chapter 4. Symmetry Groups over Q; Norm Forms; Finite Fields"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/04 Группы симметрии над Q; норменные формы; конечные поля.md"
-sourceBlob: 0b21144c0bbf561ee1eb4f1520fce46ccbf5d444
+sourceBlob: b8e3727a4126465f9a763b786eb76214206c922e
 translated: 2026-10-20
 status: draft
 ---
@@ -44,7 +44,7 @@ An honest reservation about the tiers of formalization. The repository proves th
 *A norm form is a rule-measure of finite order: the multiplicativity $\norm{z\cdot
 w}=\norm z\cdot\norm w$. The identities $1,2,4,8$ (Brahmagupta, Euler, Degen) give the closure of the units; the exceptionality of these dimensions (Hurwitz) is a mathematical frame.*
 
-## Finite Fields $\FF_p${Fp}
+## Finite Fields $\FF_p$
 
 The third positive structure is the *finite field*. Take $ℤ/pℤ$ for a prime $p$: $\{0,1,…,p-1\}$ with addition and multiplication modulo $p$. This is a *field*—every nonzero element is invertible. ToS reads $\FF_p$ as a *role-field of finite order*: the whole structure is finite, actual, without any role-limit.
 
@@ -64,7 +64,7 @@ Let us gather the structure of the chapter in the generating order.
 | **Layer** | **Content** |
 |---|---|
 | *Rules* (L5) | the multiplicativity of the norm as a rule of finite order (the identities $1,2,4,8$); the group axioms of rotations; arithmetic modulo $p$ and invertibility as the rule of a field |
-| *Roles* (L4) | norm form ${}={}$ role-measure of finite order; $i,\omega$ ${}={}$ Element-roles of finite order ($ℤ_4,ℤ_3$); $\FF_p$ ${}={}$ role-field of finite order; order of a symmetry ${}={}$ a role ($C_n$, $n\in\{1,2,3,4,6\}$) |
+| *Roles* (L4) | norm form ${}={}$ role-measure of finite order; $i,\omega={}$ Element-roles of finite order ($ℤ_4,ℤ_3$); $\FF_p={}$ role-field of finite order; order of a symmetry ${}={}$ a role ($C_n$, $n\in\{1,2,3,4,6\}$) |
 | *Elements* (L1${}+{}$P4) | finite data: the coordinates of quaternions/octonions in $ℚ$, the identities of squares, the elements $\{0,…,p-1\}$ and their inverses, roots of unity; “all dimensions with a norm” / “all $\FF_p$” as a completed object is *not* an Element |
 
 **Well-formedness.** A structure is well-formed when it is closed and finite: the unit sphere is closed under multiplication (the multiplicativity of the norm); $\FF_p$ has inverses for all nonzero elements; a rotation group returns to the identity in a finite number of steps. Finite order is the common criterion of well-formedness.
@@ -97,7 +97,7 @@ Next comes Chapter 11.5, the center of Part XI: the *Galois group*. The finite s
 [^8]: `unit_quaternion_closed` (`RationalQuaternions.v`), `unit_octonion_closed` (`HurwitzTower.v`): the product of units is again a unit. `HurwitzTower.v` itself notes that the octonion unit structure is a Moufang loop, not a group.
 [^9]: The bridge to rotation groups: `foundation/NormFormTowerBridge.v` (5 Qed, 0 axioms)—the dimension-2 storey of the norm tower *is* the rational circle $\mathrm{SO}(2,ℚ)$ (`n2_rung_is_SO2Q_closure`), with the concrete triple $3{:}4{:}5$ ($(\tfrac35)^2+(\tfrac45)^2=1$, `unit_345_n2`) and the closure of the unit quaternions of storey 4 (`unit_quaternion_closed`). The algebraic *gate* for landing on this circle is `foundation/GapPythagoreanBoundary.v` (11 Qed, 0 axioms): the rationality of an eigenvalue $\Leftrightarrow$ the Pythagorean property $\Leftrightarrow$ the discriminant is a perfect square (`gap_element_iff_pythagorean`, `gap_element_iff_disc_square`), decidable over $ℤ$ (`gap_element_decidable_Z`); the same triple $3{:}4{:}5$ (`bcs_345_element`). Machine-checked, 0 axioms.
 [^10]: That is, the formal layer is *positive* (the identities $1,2,4,8$ and closure); the impossibility of the other dimensions is a classical result, not reformalized.
-[^11]: `F5_field` ($\mathtt{has_inverses}\ 5\ \mathtt{inv5}$) and `F7_field` ($\mathtt{has_inverses}\ 7\ \mathtt{inv7}$) in `algebra/FiniteFieldFp.v` (0 axioms): the inverses are given by the functions `inv5`, `inv7`, and zero has no inverse (`zero_no_inverse_F7`).
+[^11]: `F5_field` ($\mathtt{has\_inverses}\ 5\ \mathtt{inv5}$) and `F7_field` ($\mathtt{has\_inverses}\ 7\ \mathtt{inv7}$) in `algebra/FiniteFieldFp.v` (0 axioms): the inverses are given by the functions `inv5`, `inv7`, and zero has no inverse (`zero_no_inverse_F7`).
 [^12]: `fermat5` ($a^4\bmod5=1$ for $1\le a\le4$) and `fermat7` ($a^6\bmod7=1$ for $1\le a\le6$) in `FiniteFieldFp.v`. Thus every nonzero element has finite order dividing $p-1$.
 
 ---

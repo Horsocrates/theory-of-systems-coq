@@ -107,15 +107,16 @@ $ b\neq\negb b$, что halting и Кантор. Колмогоров — *че�
 ## Одна диагональ — четыре грани (и далее)
 
 Соберём грани в одно. Все четыре — частные случаи одного движка
-(`diagonal_ defeats_ decider`), укоренённого в теореме Лавера:
+(`diagonal_defeats_decider`), укоренённого в теореме Лавера:
 
 | **Грань** | **Role-limit (запрещено диагональю)** | **Машинный анкер** |
 |---|---|---|
 | программа | тотальный решатель остановки | `no_halting_decider` |
 | множество | сюръекция $A\to(A\to\BB)$ (Кантор) | `cantor_no_surjection` |
 | семантика | решатель нетривиального свойства (Райс) | `rice_role_limit` |
-| сложность | решатель критерия сложности (Берри / Чейтин) | `kolmogorov_ role_ limit_ drawn` |
-| \multicolumn{3}{@{}p{0.93\textwidth}@{}}{*Element-контраст (число):* дискриминант `rational_split` *разрешим* (`discriminant_element_drawn`) — мост к 15.4.} |
+| сложность | решатель критерия сложности (Берри / Чейтин) | `kolmogorov_role_limit_drawn` |
+
+*Element-контраст (число):* дискриминант `rational_split` *разрешим* (`discriminant_element_drawn`) — мост к 15.4.
 
 Эти грани собраны в один машинный итог: число (Element), программа, множество и сложность —
 *одна* граница, четыре лица, единый движок $b\neq\negb b$.[^7]
@@ -140,11 +141,9 @@ Element-решатель; атомарное правило — $b\neq\negb b$ (
 «в диагональном множестве» — role-limit-предикаты. Их Element-двойники (ограниченная остановка,
 тривиальное свойство, несжимаемость-счётом, дискриминант) разрешимы — это другая роль.
 
-{
-
 **Элементы (L1${}+{}$P4).**  Конкретные программы, конечные прогоны, само булево
 отрицание, счётный аргумент голубятни. *Не* элемент: тотальный оракул остановки, тотальный
-$K$-решатель, предикат истины, универсальное множество — диагональ запрещает каждый.}
+$K$-решатель, предикат истины, универсальное множество — диагональ запрещает каждый.
 
 | **Компонент** | **Что фиксирует** | **E/R/R-категория** |
 |---|---|---|
@@ -166,14 +165,14 @@ $K$-решатель, предикат истины, универсальное 
 
 ---
 
-[^1]: `src/cs/LawvereFixedPoint.v` (**0 аксиом**): `point_surjective`, `lawvere_fixed_point`; теорема `cs_ diagonals_ are_lawvere` формально собирает корень — `lawvere_fixed_point`, `negb_no_fixpoint` и канторовскую грань; halting / Райс / Колмогоров используют тот же $\negb$-движок через `diagonal_ defeats_ decider`. Семя — `HaltingRoleLimit.negb_no_fixpoint` ($b\neq\negb b$). Универсальный движок — `src/cs/BoundaryDecidability.diagonal_defeats_decider`: если против каждого решателя есть самоотрицающий свидетель, критерий role-limit-нарисован.
+[^1]: `src/cs/LawvereFixedPoint.v` (**0 аксиом**): `point_surjective`, `lawvere_fixed_point`; теорема `cs_diagonals_are_lawvere` формально собирает корень — `lawvere_fixed_point`, `negb_no_fixpoint` и канторовскую грань; halting / Райс / Колмогоров используют тот же $\negb$-движок через `diagonal_defeats_decider`. Семя — `HaltingRoleLimit.negb_no_fixpoint` ($b\neq\negb b$). Универсальный движок — `src/cs/BoundaryDecidability.diagonal_defeats_decider`: если против каждого решателя есть самоотрицающий свидетель, критерий role-limit-нарисован.
 [^2]: `src/cs/HaltingRoleLimit.v` (**0 аксиом**): `no_halting_decider` (нет решателя самоприменения при самопрограммируемости `SelfProgrammable`), `no_total_halting_oracle`. Element-двойник — `bounded_halting_decidable` из 15.1.
 [^3]: `src/cs/HaltingRoleLimit.cantor_no_surjection` (**0 аксиом**); как частный случай Лавера — `LawvereFixedPoint.cantor_via_lawvere`, `nat_fun_not_enumerable`.
 [^4]: Несчётность завершённого континуума — `ProcessDiagonal.binary_processes_not_enumerable`, `ProcessContinuumHypothesis.process_continuum_hypothesis`: слой L3 (classic)${}+{}$L4, отдельный и более сильный (ср. Часть IV). Контраст честен: `cantor_no_surjection` и halting classic НЕ требуют — это и есть «Element-сторона конструктивна».
 [^5]: `src/cs/RiceRoleLimit.v` (**0 аксиом**): `trivial_property_element_drawn` (тривиальное — Element, разрешимо), `RiceDiagonal` и `rice_diagonal_exists` (самоотрицающий свидетель), `rice_role_limit`, `rice_no_semantic_decider`.
-[^6]: `src/cs/KolmogorovRoleLimit.v` (**0 аксиом**): `incompressible_exists` (Element / счёт — при бюджете $n$ есть необъяснимый объект), `kolmogorov_ role_ limit_ drawn` доказывает role-предельность критерия `Complex` при диагонали Берри / Чейтина (частный случай `diagonal_ defeats_ decider`); это *не* теорема об инвариантности $K$ и не универсальная машина в полной общности.
-[^7]: Формальный капстоун раздела — `src/cs/ KolmogorovRoleLimit. one_boundary_ four_faces`, расширяет `BoundaryDecidability. one_boundary_ three_faces`; **0 аксиом**.
-[^8]: `src/cs/RussellViaLawvere.v` (`russell_ no_universal_set`, `liar`, `grelling`, `paradoxes_ one_diagonal`; семя `not_no_fixpoint`: $(\neg P)\neq P$); `src/cs/TarskiUndefinability.v` (`tarski_ no_truth_predicate`, `tarski_ from_lawvere`). **0 аксиом**.
+[^6]: `src/cs/KolmogorovRoleLimit.v` (**0 аксиом**): `incompressible_exists` (Element / счёт — при бюджете $n$ есть необъяснимый объект), `kolmogorov_role_limit_drawn` доказывает role-предельность критерия `Complex` при диагонали Берри / Чейтина (частный случай `diagonal_defeats_decider`); это *не* теорема об инвариантности $K$ и не универсальная машина в полной общности.
+[^7]: Формальный капстоун раздела — `src/cs/ KolmogorovRoleLimit. one_boundary_four_faces`, расширяет `BoundaryDecidability. one_boundary_three_faces`; **0 аксиом**.
+[^8]: `src/cs/RussellViaLawvere.v` (`russell_no_universal_set`, `liar`, `grelling`, `paradoxes_one_diagonal`; семя `not_no_fixpoint`: $(\neg P)\neq P$); `src/cs/TarskiUndefinability.v` (`tarski_no_truth_predicate`, `tarski_from_lawvere`). **0 аксиом**.
 
 ---
 

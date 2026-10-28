@@ -2,7 +2,7 @@
 title: "Chapter 3. Rotation Groups over Q: SO(2), Quaternions, SU(2)"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/12 Геометрия, многообразия, группы Ли/03 Группы вращений над Q SO(2), кватернионы, SU(2).md"
-sourceBlob: b1fca75a0eb96a5c7518ecb8ec3fd884fae9a163
+sourceBlob: 3150c9c268b6dcac4ac5d67483d5c369180fe0e1
 translated: 2026-10-20
 status: draft
 ---
@@ -21,7 +21,7 @@ The central thesis of the chapter. *Within the P4 ontology of ToS* a rotation gr
 
 *A rotation is a role-symmetry with a rational bearer; a group is closure under the multiplicative norm; the cover is a concrete $2{:}1$ map; an admissible order is a role-restriction. The smooth Lie group is a role-limit.*
 
-## Rotation as a Rational Point: The Group $\SO(2,ℚ)${SO(2,Q)}
+## Rotation as a Rational Point: The Group $\SO(2,ℚ)$
 
 A rotation of the plane is given by a pair $(c,s)$ with $c^2+s^2=1$—the cosine and sine of the angle. ToS takes *rational* pairs of this kind: $\SO(2,ℚ)$ is the rational points of the unit circle (Chapter 12.1 has already enumerated them by the Pythagorean tree). The composition of rotations is a rule on pairs
 
@@ -41,7 +41,7 @@ This structure has a subtlety important for ToS. Its points lie on the circle *d
 
 *$\SO(2,ℚ)$ is the group of rational points of the circle (closure under the multiplicative norm, inverse ${}=$ conjugate). It is dense, but $60^\circ/45^\circ$ are not its points ($\sqrt3,\sqrt2$): the same barrier as in 12.1.*
 
-## Quaternions and the Double Cover $\SU(2)\to\SO(3)${SU(2)->SO(3)}
+## Quaternions and the Double Cover $\SU(2)\to\SO(3)$
 
 In three dimensions rotations are encoded by *quaternions*—quadruples $q=(w,x,y,z)\inℚ^4$ with the Hamilton product. ToS keeps them over $ℚ$: they are *finite data*, not points of a smooth group. The norm $\norm{q}^2=w^2+x^2+y^2+z^2$ is *multiplicative*—this is *Euler’s four-square identity*, a direct analogue of the two squares of §12.3.2:
 

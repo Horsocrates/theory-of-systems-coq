@@ -2,13 +2,13 @@
 title: "Save the Children Fallacy"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/01 Нарушения условий/Ошибка «Спасите детей».md"
-sourceBlob: ca0eea89deb0ad2d6e67a03565ce395884313f24
+sourceBlob: bd302c8e536010c43bbf9bf08684c8c53a8c97e1
 translated: 2026-10-20
 status: draft
 description: "Winning support by showing the suffering of children on “our” side while ignoring the others"
 ---
 
-**1.B.2.3** · [[01 Violations of Conditions|Violations of Conditions (Type 1)]] → [[1.B Reasoning Substitutions Manipulations|1.B Manipulations]] · subtype: Emotion Instead of Argument
+**1.B.2.3** · [[01 Violations of Conditions|Violations of Conditions (Type 1)]] → [[1.B Reasoning Substitutions Manipulations|1.B Manipulations]] · subtype: Pity Instead of Argument
 
 **Formulation.** Winning support by showing the suffering of children on “our” side while ignoring the others
 

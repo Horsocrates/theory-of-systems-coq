@@ -2,7 +2,7 @@
 title: "Chapter 3. The Reduction Atlas"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/03 Редукционный атлас.md"
-sourceBlob: 5c3fe0d7b4c2b4c5cd87704f1ba23048cbf2d094
+sourceBlob: b4705494143049beed4a3e47fe07302851aaeee6
 translated: 2026-10-20
 status: draft
 ---
@@ -116,15 +116,15 @@ The atlas itself is a *system* in the sense of ToS, and it should be analyzed by
 
 **What the analysis yields.** First, it shows that the diversity of the sixty-eight cases is only apparent: geometry, dynamics, number theory, and information theory spoke of one matrix in different languages. Second, it names the gate of the boundary: the question “is the object finitely actual?” is exactly “does its $2\times2$ matrix have a rational eigenvalue?”, that is, “is its discriminant a perfect square?”—one decidable arithmetic question.
 
-With this the final synthesis is complete. The finitization boundary, which the first chapter fixed and the second refined as an unbounded process, appears here, on top of all the particular cases, as one arithmetic gate: the squareness of the discriminant of a $2\times2$ matrix. From here on the work uses this atlas as a ready map—reducing every new domain dichotomy to its matrix and to one question about an integer.
+With this the synthesis of the finitization boundary (Chapters 20.1–20.3) is complete. The finitization boundary, which the first chapter fixed and the second refined as an unbounded process, appears here, on top of all the particular cases, as one arithmetic gate: the squareness of the discriminant of a $2\times2$ matrix. From here on the work uses this atlas as a ready map—reducing every new domain dichotomy to its matrix and to one question about an integer.
 
 ---
 
-[^1]: Six files make up this atlas: one for each engine and one synthesizing file. The synthesis is `reduction_atlas_ synthesis`; below we refer to the individual engines by their synthesis theorems. All statements are checked without axioms.
+[^1]: Six files make up this atlas: one for each engine and one synthesizing file. The synthesis is `reduction_atlas_synthesis`; below we refer to the individual engines by their synthesis theorems. All statements are checked without axioms.
 [^2]: All theorems of the chapter are checked as “Closed under the global context”: without the Law of Excluded Middle and without additional witness axioms. The connecting loop is `eigenvalue_forces_square_disc`, which relies on the identity `char_poly_complete_square`.
 [^3]: The synthesis of the engine is `surd_atlas`. One and the same question, “is it a perfect square?”, put to different $D$ explains why there is no equilateral triangle on the lattice ($D=3$), why a rotation of the fifth order is ruled out ($D=5$), and why the correlation optimum is a role-limit ($D=8$).
 [^4]: The synthesis is `unimodular_atlas`. The mediant, Ford tangency, lowest terms, Pick’s area—one identity about columns and one invariant $|\det|=1$.
-[^5]: The synthesis is `pell_ atlas`. The norm is the determinant of the regular representation of the number $x+y\sqrt D$—which directly connects engine III with engine II.
+[^5]: The synthesis is `pell_atlas`. The norm is the determinant of the regular representation of the number $x+y\sqrt D$—which directly connects engine III with engine II.
 [^6]: The synthesis is `niven_trace_atlas`. The trace is the second invariant of the $2\times2$ matrix—a full sibling of the determinant of engine II; together they exhaust its characteristic polynomial.
 [^7]: The synthesis is `parity_atlas`. The whole Element side of the Walsh constructions rests on this character; its only contact with the role-limit is the normalization factor $\sqrt2$.
 [^8]: The core proves the necessary direction: an integer root of the characteristic polynomial implies a square discriminant (`eigenvalue_forces_square_disc`). The converse—“a square $\Delta\ge0$ $\Rightarrow$ a rational eigenvalue”—follows from the quadratic formula $\lambda=(t\pm\sqrt\Delta)/2$ (an integer one under a parity condition). The identity of the discriminant $\Delta=(a-d)^2+4bc$ is `disc_eq`.

@@ -2,7 +2,7 @@
 title: "Taboo / Dogmatism"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/01 Нарушения условий/Табу — Догматизм.md"
-sourceBlob: 9fd387bda1b55bfc65055af985b88354ac82c62f
+sourceBlob: 75f84a127cdf1473b51e99117b1c0a1bbaa3e8f8
 translated: 2026-10-20
 status: draft
 description: "Unilateral declaration of topics or arguments as “sacred” and not subject to discussion"

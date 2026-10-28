@@ -2,7 +2,7 @@
 title: "Chapter 2. Curvature as Angular Defect; Manifold as Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/12 Геометрия, многообразия, группы Ли/02 Кривизна как угловой дефект; многообразие как процесс.md"
-sourceBlob: 8b53bc8797a292870c4a541302cad61843142ad2
+sourceBlob: 3c2a2bb75cfc3d35d4ad6a5c513318460f0c4503
 translated: 2026-10-20
 status: draft
 ---
@@ -11,7 +11,7 @@ status: draft
 
 Chapter 12.1 laid the foundation: geometry in ToS is a rational and lattice structure, a point is a coordinate, a figure a locus under a rule, measure a finite quantity. Two concepts remain that the classical theory holds most firmly as completed continuum objects: *curvature* (a tensor on a smooth manifold) and the *manifold* itself. This chapter is the flagship of the part: it rethinks both.
 
-The move is the same one that runs through the whole book. *Within the P4 ontology of ToS*:
+The move is the same one that runs through the whole volume. *Within the P4 ontology of ToS*:
 
 - *curvature* is presented first of all as an *angular DEFECT*—a local, discrete, rational (in units of $\pi$) deviation from flatness (the Regge calculus); the continuous curvature tensor is its smooth role-limit;
 - the *manifold* is not a continuum given in advance but a *PROCESS*—a refining triangulation whose smooth limit is a role-limit.
@@ -75,7 +75,7 @@ Let us assemble the structure of the chapter in the generating order.
 | **Layer** | **Content** |
 |---|---|
 | *Rules* (L5) | the defect $\delta=2\pi-\sum\alpha$ (Regge’s rule); Gauss–Bonnet $\sum\delta=2\pi\chi$ (Descartes); the rule of refinement (inscribed polygons, nested triangulations); $\partial^2=0$ (the chain complex); Forman curvature as a rule on a graph |
-| *Roles* (L4) | curvature ${}={}$ role-measure (angular defect); manifold ${}={}$ the role-limit of a refining process; “smoothness” ${}={}$ a process, not an object; $\chi$ ${}={}$ topological role-invariant; “circle” ${}={}$ the name of a process |
+| *Roles* (L4) | curvature ${}={}$ role-measure (angular defect); manifold ${}={}$ the role-limit of a refining process; “smoothness” ${}={}$ a process, not an object; $\chi={}$ topological role-invariant; “circle” ${}={}$ the name of a process |
 | *Elements* (L1${}+{}$P4) | at each stage, finite data: the numbers $V,E,F$; defects in units of $\pi$ (rational); lists of polygon vertices and their rational areas; degrees of graph vertices; the smooth manifold and the continuous curvature tensor as objects are *not* Elements |
 
 **Well-formedness.** Curvature is well-formed as a defect: the sum of the defects equals the integer invariant $2\chi$ (Gauss–Bonnet). The process-manifold is well-formed: refinement is monotone, bounded, and stabilizes curvature. Each component falls into exactly one E/R/R category.

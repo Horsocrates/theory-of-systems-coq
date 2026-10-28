@@ -2,7 +2,7 @@
 title: "Curry’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Карри.md"
-sourceBlob: 5d151d9ef4276a3b7527c3aae44bf1485ac09ad0
+sourceBlob: 8c5e43f5d34e2944fada94e432bce6f659533766
 translated: 2026-10-20
 status: draft
 description: "The conditional includes itself in its antecedent"

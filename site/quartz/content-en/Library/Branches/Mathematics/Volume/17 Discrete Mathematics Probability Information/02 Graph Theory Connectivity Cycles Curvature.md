@@ -2,7 +2,7 @@
 title: "Chapter 2. Graph Theory—Connectivity, Cycles, Curvature"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/17 Дискретная математика, вероятность, информация/02 Теория графов — связность, циклы, кривизна.md"
-sourceBlob: 5367466f4289e88427030614055805acbfee021c
+sourceBlob: f08ad90fead964c859f5ff1b5bf5d405fe380457
 translated: 2026-10-20
 status: draft
 ---
@@ -14,7 +14,7 @@ A graph is the simplest relational system: a finite list of vertices and a finit
 *A graph is a pair of finite lists; connectivity and cycles are **terminating
 processes** (fuel-bounded search), not properties of a completed object.*
 
-The chapter leads from structure (vertices/edges) to connectivity and cycles, then to the graph Laplacian and the spectrum, and closes with bridges: to discrete curvature (Part XII) and to the physical substrate of Volume III—lattice field theory, tensor and spin networks.
+The chapter leads from structure (vertices/edges) to connectivity and cycles, then to the graph Laplacian and the spectrum, and closes with bridges: to discrete curvature (Part XII) and to the physical substrate—lattice field theory, tensor and spin networks.
 
 ## The Graph as a Finite Structure
 
@@ -30,15 +30,14 @@ The comparison with the finitization boundary is direct. Reachability in a finit
 
 ## The Laplacian and the Spectrum
 
-{
-It is convenient to gather the structure of a graph into one operator—the *graph Laplacian* $L = D - A$ (degrees minus adjacency). It is computed exactly over ℚ, and its rows *sum to zero*—a structural conservation law, a direct property of the definition[^3].}
+It is convenient to gather the structure of a graph into one operator—the *graph Laplacian* $L = D - A$ (degrees minus adjacency). It is computed exactly over ℚ, and its rows *sum to zero*—a structural conservation law, a direct property of the definition[^3].
 
-The spectrum of the Laplacian is a bridge from structure to number: its eigenvalues (algebraic in general, not necessarily rational) encode connectivity (the smallest nonzero one is the algebraic connectivity), and the spectral entropy measures the “spread” of the structure[^4]. And the same Laplacian links the graph with physics: the spectral gap plays the role of the mass gap—a direct bridge to Volume III[^5].
+The spectrum of the Laplacian is a bridge from structure to number: its eigenvalues (algebraic in general, not necessarily rational) encode connectivity (the smallest nonzero one is the algebraic connectivity), and the spectral entropy measures the “spread” of the structure[^4]. And the same Laplacian links the graph with physics: the spectral gap plays the role of the mass gap[^5].
 All of this is exact ℚ-arithmetic on a finite matrix: the Element side.
 
 ## Discrete Curvature and the Physical Substrate
 
-A graph is not only a combinatorial object but also a *discrete space*. Discrete curvature is defined on it (a bridge to the geometry of Part XII: a manifold as a process of gluing local charts—and its discrete model is a lattice graph), and it serves as the *substrate* of the physical theories of Volume III: lattice gauge theory lives on a lattice graph, and tensor and spin networks are graphs with data on the edges[^6].
+A graph is not only a combinatorial object but also a *discrete space*. Discrete curvature is defined on it (a bridge to the geometry of Part XII: a manifold as a process of gluing local charts—and its discrete model is a lattice graph), and it serves as the *substrate* of the physical theories: lattice gauge theory lives on a lattice graph, and tensor and spin networks are graphs with data on the edges[^6].
 
 What is essential for the ontology: everywhere here space is *discrete and finite* at every stage—the continuous manifold appears only as a limit-process of lattice refinement (Part XII), not as an initial completed object. In the geometric reading, the lattice graph is the Element substrate, and continuum space arises as a limit-process of refinement.
 

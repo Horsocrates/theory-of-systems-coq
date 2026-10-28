@@ -2,7 +2,7 @@
 title: "Chapter 3. Picard–Lindelöf: A Contraction Operator on a Function Space"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/03 Пикар–Линделёф оператор-сжатие на пространстве функций.md"
-sourceBlob: c95e7d88bced832f6f648d80937e4d67ec23610e
+sourceBlob: b9b00ff0c9762c28b8d1b4340d7cedd30d6d8bd7
 translated: 2026-10-20
 status: draft
 ---
@@ -156,8 +156,7 @@ grid functions $y:\{0,…,N\}\toℚ$, their values $y_k\inℚ$, finite sums $\su
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the Picard operator does *not* take as its arena “the space of all functions” as a completed infinite-dimensional object. The arena on the grid is the finite $ℚ^{N+1}$, the metric is a maximum over a finite set of nodes, and uniqueness is proved through this finite maximum *without* a passage to the limit. It is precisely this finiteness of the arena that separates what is proved (contraction, gap, uniqueness—0 axioms) from the boundary (the completed limit—the L3 layer).}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the Picard operator does *not* take as its arena “the space of all functions” as a completed infinite-dimensional object. The arena on the grid is the finite $ℚ^{N+1}$, the metric is a maximum over a finite set of nodes, and uniqueness is proved through this finite maximum *without* a passage to the limit. It is precisely this finiteness of the arena that separates what is proved (contraction, gap, uniqueness—0 axioms) from the boundary (the completed limit—the L3 layer).
 
 What the analysis yields. It translates the central result into the language of structure: *the Picard operator is a Role-map* of functions, *contraction is a Rule* of drawing together, *the fixed point is a Role-solution*, and grid functions and their values are *Elements* (finite at every stage). To take “the function space” as a completed infinite-dimensional object or “the solution” as a ready limit function is to put the role-arena or the role-limit in the place of an Element—the same confusion of categories as “a point as an object” instead of a class (Chapter 4.3) or “a series as a completed sum” instead of a family of truncations (Chapter 7.1). The process core of the Picard–Lindelöf theorem *is* here, and it is finite: contraction on $ℚ^{N+1}$, the geometric drawing-together of the iterates, and the uniqueness of the fixed point on the grid. The passage to the completed solution function remains a role-limit.
 
@@ -169,8 +168,8 @@ Having the guarantee of convergence, the next chapter turns to *stability*: how 
 [^2]: The supporting file is `ProcessPicardOperator.v` (the ToS Rocq repository): the Picard operator on grid functions, the theorem on contraction in the sup metric (`picard_op_contraction`), the geometric gap between the iterates (`picard_iter_gap`), and the uniqueness of the solution on the grid (`picard_unique`). The key theorems have 0 axioms (`Print Assumptions`: “closed under the global context”).
 [^3]: The wrapper “the iterates converge to a limit” goes through `iterate_is_cauchy` / `Qpow_vanish` in `FixedPoint.v`, which inherit `classic`. Contraction, the gap, and uniqueness have 0 axioms; the limit is the L3 layer.
 [^4]: The header labels directly: Rules—$\Phi(y)_k=y_0+h\sum_{j<k}f(t_j,y_j)$, Lipschitz $\Rightarrow$ $\Phi$ is a contraction, rate $L\cdot T$; Roles—$\Phi$ is the role-operator, the uniform bound is the role-metric; Elements—grid functions, values $y_k$, finite sums.
-[^5]: `picard_sum` ${}= `q_sum` (\lambda j. f(t_j, y_j)) k$ and `picard_op`${}(y)_k = y_0 + h\cdot `picard_sum` y k$ in `ProcessPicardOperator.v`; the nodes $t_j = `tgrid` j = j\cdot h$, the length $T = `Tlen` = N\cdot h$.
-[^6]: `picard_diff_bound` (the bound on the difference of Picard sums, by induction on $k$) and `picard_op_contraction` (contraction with coefficient $L\cdot`Tlen`$) in `ProcessPicardOperator.v`, 0 axioms. The coefficient is $L\cdot T = L\cdot N h$.
+[^5]: `picard_sum` ${}= \texttt{q\_sum} (\lambda j. f(t_j, y_j)) k$ and `picard_op`${}(y)_k = y_0 + h\cdot \texttt{picard\_sum} y k$ in `ProcessPicardOperator.v`; the nodes $t_j = \texttt{tgrid} j = j\cdot h$, the length $T = \texttt{Tlen} = N\cdot h$.
+[^6]: `picard_diff_bound` (the bound on the difference of Picard sums, by induction on $k$) and `picard_op_contraction` (contraction with coefficient $L\cdot\texttt{Tlen}$) in `ProcessPicardOperator.v`, 0 axioms. The coefficient is $L\cdot T = L\cdot N h$.
 [^7]: `picard_iter_gap` in `ProcessPicardOperator.v`: $\supnorm{\Phi^{n+1}-\Phi^n}\le (L\cdot T)^n C_0$, where $C_0$ is a bound on the first gap; proved by induction on $n$ through the contraction theorem. 0 axioms.
 [^8]: `picard_unique` in `ProcessPicardOperator.v`: the uniqueness of the fixed point on the grid. The maximum over the finite grid is implemented as `gmax`, the largest of $N{+}1$ rational values; hence $D^*\le(LT)D^*$ and $LT<1$ give $D^*=0$ *without* appeal to a limit. 0 axioms.
 [^9]: The header of the file conducts the analysis directly: Rules—$\Phi(y)_k=y_0+h\sum_{j<k}f(t_j,y_j)$, Lipschitz $\Rightarrow$ contraction, rate $L\cdot T$, iterates with the gap $(LT)^n$, uniqueness of the fixed point; Roles—$\Phi$ is the role-operator, the uniform bound is the role-metric, $\Phi^n$ is the role-approximation, the fixed point is the role-solution; Elements—grid functions, values $y_k$, finite sums, $k\le N$.

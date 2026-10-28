@@ -2,7 +2,7 @@
 title: "Chapter 5. Ordinals as Processes; the Tower of Strong Axioms (ATR₀, Π¹₁) and Its Removal"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/05 Ординалы как процессы; башня сильных аксиом (ATR_0, ^1_1) и её снятие.md"
-sourceBlob: 86f8e4e7fe42628d8bd2f7bb292a6e21459fd04c
+sourceBlob: 1ff2130ee331ff2de25e4186f7b080a4c6ccde05
 translated: 2026-10-20
 status: draft
 ---
@@ -23,7 +23,7 @@ In ToS an ordinal is given inductively: zero, successor, and the *limit of a pro
 f$ for $f:ℕ\to\mathrm{Ord}$. It is precisely the last constructor that makes the ordinal a process: $\mathrm{OLim} f$ carries the role “take the limit of the process $f$, stepping through the natural stages.” Thus $\omega = \mathrm{OLim}$ of the embedding $ℕ\hookrightarrow\mathrm{Ord}$, and $\varepsilon_0 =
 \mathrm{OLim}$ of the *tower* $\omega,\ \omega^\omega,\ \omega^{\omega^{\omega}},…$—the limit of the process of exponentiation.[^1] At each stage $n$ only the finite is actual ($\mathrm{OSucc}^n(\mathrm{OZero})$); the ordinal itself is not a completed transfinite object but a position in a well-founded process.
 
-This gives transfinite induction and recursion *on notations*—without axioms. The relation $\mathrm{ord_lt}$ is well-founded, and from this follow the principles of induction up to $\omega$, the tower, and $\varepsilon_0$.[^2] Let us stress the domain: this is induction/recursion on *constructive ordinal notations* `Ord`, not on an arbitrary completed well-order.
+This gives transfinite induction and recursion *on notations*—without axioms. The relation $\mathrm{ord\_lt}$ is well-founded, and from this follow the principles of induction up to $\omega$, the tower, and $\varepsilon_0$.[^2] Let us stress the domain: this is induction/recursion on *constructive ordinal notations* `Ord`, not on an arbitrary completed well-order.
 
 *An ordinal is a role-process ($\mathrm{OLim}$ is the limit of a process; $\varepsilon_0$ is the limit of the tower); transfinite induction on constructive notations is structural and 0-axiom. A completed transfinite object lies outside the Elements.*
 
@@ -62,11 +62,10 @@ P1${}+{}$P4. The whole tower is one role-confusion of a legitimate reading and a
 | *Roles* (L4) | ordinal ${}={}$ role-process; $\varepsilon_0={}$ the limit of the tower; “removal of a principle” ${}={}$ the role of P4 reinterpretation (not an RM metatheorem) |
 | *Elements* (L1${}+{}$P4) | a finite notation/code/stage at each step; the completed transfinite, a completed well-order, and the uncountable space of all functions are *not* Elements |
 
-{
 **What it yields.** Transfinite induction/recursion on notations—`wf_ord_lt`,
 `transfinite_ind` (0 axioms). ATR$_0$/$\Pi^1_1$/Infinity/impredicativity are
 reinterpreted (`P4_eliminates_ATR0`, `P4_eliminates_Pi11`,
-`P4_eliminates_Infinity`, `P4ProhibitsImpredicative`; ATR/Infinity/impredicativity 0 axioms, $\Pi^1_1$—0 logical axioms with the primitive `eval_program`).}
+`P4_eliminates_Infinity`, `P4ProhibitsImpredicative`; ATR/Infinity/impredicativity 0 axioms, $\Pi^1_1$—0 logical axioms with the primitive `eval_program`).
 
 **Diagnosis.** In the P4 ontology of ToS, a strong principle is a gluing of a legitimate reading and a completed-object form; P4 unglues them.
 
@@ -84,7 +83,7 @@ Chapter 10.6 will assemble Part X: what is provable without choice (including th
 
 ---
 
-[^1]: `Ordinal.v`: `Ord` (with `OZero`/`OSucc`/`OLim`), `omega` ${}=\mathrm{OLim} `nat_to_ord`$, `epsilon_0` ${}=\mathrm{OLim} `omega_tower`$—checked by `Print Assumptions`: Closed, 0 axioms. The arithmetic ($+,\cdot,{}^\wedge$) is by structural recursion, but some of its lemmas rely on functional extensionality.
+[^1]: `Ordinal.v`: `Ord` (with `OZero`/`OSucc`/`OLim`), `omega` ${}=\mathrm{OLim} \texttt{nat\_to\_ord}$, `epsilon_0` ${}=\mathrm{OLim} \texttt{omega\_tower}$—checked by `Print Assumptions`: Closed, 0 axioms. The arithmetic ($+,\cdot,{}^\wedge$) is by structural recursion, but some of its lemmas rely on functional extensionality.
 [^2]: `TransfiniteInduction.v`: `wf_ord_lt` (`well_founded ord_lt`), `transfinite_ind`, `transfinite_rec`; `omega_tower_induction`. **0 axioms** (checked by `Print Assumptions`: `wf_ord_lt` and `transfinite_ind` are closed—*contrary to* the outdated comment in the file header, which wrongly names `classic`; the file does not even import the source of these axioms). In addition, induction on the *level* hierarchy is `level_strong_induction` in `TransfiniteInductionLevel.v` (this work).
 [^3]: `P4_Eliminates_ATR.v`: `CB_transfinite`—transfinite iteration (the Cantor–Bendixson derivative) as a `Fixpoint` on `Ord`; `P4_eliminates_ATR0` records the zero/successor equations of the recursion (the limit stage is given by the `Fixpoint` itself). 15 Qed, 0 axioms (checked by `Print Assumptions`: Closed).
 [^4]: `P4_Eliminates_Pi11.v`: `Program := nat`, `P4_forall_functions` (a quantifier over functions via codes), with the outcome `P4_eliminates_Pi11`. By `Print Assumptions`, 0 logical axioms, but it depends on `eval_program` (a `Parameter`—a computational primitive of the universal machine); this is the P4 code reinterpretation, not a construction of the space of programs from within.

@@ -2,7 +2,7 @@
 title: "Chapter 6. Illusory Constructions of ZFC"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/06 Иллюзорные конструкции ZFC.md"
-sourceBlob: 485d102d9fce5f5b7bfb665773d0d70084e4d285
+sourceBlob: b3c8e1e2e2b56a46c695c97dd8c63eb351567f75
 translated: 2026-10-20
 status: draft
 ---
@@ -11,8 +11,7 @@ status: draft
 
 Chapters 1–5 went through the real content of nonstandard analysis: process infinitesimals, the shadow, the ring, the ultrafilter, the boundary as invertibility. But “beyond the boundary” there also live constructions of ZFC of another kind—those that exist only inside the formalism, through the Axiom of Choice, without a computable referent. Since ToS is ontological, it must deliver an honest verdict on them.
 
-{
-*The flagship: a three-valued machine verdict—**Element core / role-limit instrument / illusory**. The Element core is expressible by processes (0 choice, there is a witness); the role-limit instrument is nonconstructive but *removable* scaffolding that delivers something (conservativity); the illusory is a ZFC phantom without an Element referent, delivering neither a witness nor removable formwork. The flagship anchor is Banach–Tarski: the doubling of the ball is incompatible with any nonzero Element measure ($\mu=2\mu\Rightarrow\mu=0$).*}
+*The flagship: a three-valued machine verdict—**Element core / role-limit instrument / illusory**. The Element core is expressible by processes (0 choice, there is a witness); the role-limit instrument is nonconstructive but *removable* scaffolding that delivers something (conservativity); the illusory is a ZFC phantom without an Element referent, delivering neither a witness nor removable formwork. The flagship anchor is Banach–Tarski: the doubling of the ball is incompatible with any nonzero Element measure ($\mu=2\mu\Rightarrow\mu=0$).*
 
 And two clarifications at once. The first is terminological: “illusory” here is a *technical term* of ToS, not the everyday “does not exist.” A construction can be a theorem of ZFC and yet have no Element referent in the process ontology; this does **not** mean inconsistency or falsity inside ZFC. The second: we **do not assert** anything illusory (we do not postulate the existence of a Banach–Tarski decomposition)—we only classify, and for the flagship we prove incompatibility with Element preservation.
 
@@ -20,13 +19,9 @@ And two clarifications at once. The first is terminological: “illusory” here
 
 Every construction “beyond the boundary” receives exactly one of three statuses[^1]:
 
-{
-
 - **Element core** ($\neg$AC, there is a witness): the $\delta$-process, the shadow of a convergent process, the derivative of a polynomial—all built in Chapters 1–2, 0 axioms[^2];
 - **role-limit instrument** (AC, but removable scaffolding): the free ultrafilter, $^{*}ℝ$-as-a-field—nonconstructive but *conservative* (in the metatheoretical sense of Nelson: a standard consequence obtained through NSA scaffolding has a standard proof), hence removable, and they *deliver* something[^3];
 - **illusory** (AC, no witness, not scaffolding): the Hamel basis, the Vitali set, a well-ordering of $ℝ$, Banach–Tarski—pure ZFC phantoms[^4].
-
-}
 
 *The key distinction is the illusory versus the role-limit instrument: scaffolding is **removable and delivers something** (an Element consequence through conservativity); a phantom delivers **neither an Element witness nor removable formwork** for a process result—it is only an “object” that does not exist on the Element side (which does not prevent it from having consequences *inside* ZFC). The ultrafilter (Chapter 4) is scaffolding; Banach–Tarski is a phantom.*
 
@@ -54,8 +49,7 @@ Let us analyze by E/R/R in the generating order Rules $\to$ Roles $\to$ Elements
 
 **Roles (L4).** A construction is a role-candidate; the verdict is a role-status; needs-AC, the witness, and removability are role-diagnostics; the Element measure is the role-preservation that cuts off the phantom.
 
-{
-**Elements (L1 + P4).** The bearers are the enumeration of concrete constructions, Boolean diagnostics, the $ℚ$-measure. Under P4 the Element core (processes) and the diagnostics themselves are actual; the illusory “objects” (the Banach–Tarski pieces, the non-measurable Vitali set) are exactly what P4 does not actualize.}
+**Elements (L1 + P4).** The bearers are the enumeration of concrete constructions, Boolean diagnostics, the $ℚ$-measure. Under P4 the Element core (processes) and the diagnostics themselves are actual; the illusory “objects” (the Banach–Tarski pieces, the non-measurable Vitali set) are exactly what P4 does not actualize.
 
 **Well-formedness check.** The rule is the verdict; the roles are the status and the diagnostics; the elements are the constructions and the measure; there are no overlaps. Banach–Tarski as a system: the “pieces” (Elements) are declared measure-preserving (Roles), but Element preservation rules this out (Rules) $\Rightarrow$ pieces without a referent $\Rightarrow$ a phantom system.
 

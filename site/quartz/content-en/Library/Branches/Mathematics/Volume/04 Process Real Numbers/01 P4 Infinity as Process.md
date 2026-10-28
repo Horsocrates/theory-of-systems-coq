@@ -2,7 +2,7 @@
 title: "Chapter 1. P4: Infinity as Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/01 P4 бесконечность как процесс.md"
-sourceBlob: 3fa18178cd11f001b9f3f925c85b28b0bdaa2c5e
+sourceBlob: a9949f1ab0e316a873ca868fefb13579fbc1eba2
 translated: 2026-10-20
 status: draft
 ---
@@ -17,7 +17,7 @@ Part IV crosses this threshold. It introduces the *process* as a full-fledged ty
 
 Before building the process as a type (the next chapter will do this), we must bring to full clarity the *principle* that justifies this type. The principle is called $P4$. It has been at work in the volume since the very construction of the natural number series, but at work without a developed exposition: it was mentioned where it was needed and applied, yet it did not receive a chapter of its own. The present chapter gives it such a chapter.
 
-### $P4${P4}: What It Asserts
+### $P4$: What It Asserts
 
 Let us begin with what $P4$ *asserts*—and give the statement verbatim, in the formulation that the exposition of ToS gives it.[^1]
 The principle bears the name *Finite Actuality* (so it is called in the original), and its statement consists of two sentences:
@@ -45,12 +45,10 @@ A special caveat concerns § 1.5. ToS has a machine-checked formalization in the
 
 To anticipate: in the formalization $P4$ also appears affirmatively—and even more sharply than in the prose. The formalization does not write “there is no completed infinite object”; that cannot even be written directly, since it is a statement about *nonexistence*. It writes the opposite—*what* exists: processes of a definite kind, which behave in a definite way. Let us examine this—first the formalization itself (§ 1.2.2), then its ontological reading (§ 1.2.3), then its logical ground (§ 1.2.4).
 
-### $P4${P4} in the Formalization: What Is Built
+### $P4$ in the Formalization: What Is Built
 
-{
 In the ToS Rocq repository the four principles—$P1$, $P2$, $P3$, $P4$—are gathered in one file, `ProcessFourPrinciples.v`, and each receives a formal definition there.[^2]
 In an explanatory comment the file itself characterizes $P4$ in one line: `P4: Process — everything is a process (nat -> Q)`—in mathematical notation, “$P4$: Process—everything is a process ($ℕ \to ℚ$).” Note that here too the formulation is *affirmative*: it says what everything *is* (a process), not what does not exist.
-}
 
 The definition of $P4$ in this file is built in agreement with this characterization—but is not equal to it. It is affirmative and consists of three parts. *First*, there exists a process that is a Cauchy process—an unfolding sequence of rational approximations, convergent in the operational sense that Chapter III.4 called the Cauchy property. *Second*, Cauchy processes are closed under multiplication: the product of two such processes is again a Cauchy process. *Third*, they are closed under addition: the sum of two Cauchy processes is again a Cauchy process. Formally, this is the predicate `P4_formalized`, the conjunction of these three statements; here it is, verbatim, in Rocq notation:
 
@@ -72,7 +70,7 @@ Why is the formalization arranged as a statement about the presence of processes
 The file goes further and lists named instances of processes. It declares the inductive type `ProcessInstance`—exactly twelve constructors, each named after a definite kind of process: the arithmetic process, the product process, the process of partial sums of a series, the process of the difference quotient (the derivative), the process of Riemann sums (the integral), the process of Picard iterations (the solution of an ordinary differential equation), and so on.[^3]
 And here—precision again. `ProcessInstance` is an inductive type of *labels*: twelve label constructors, each of which *names* a kind of process pattern. The lemmas `twelve_instances` and `all_instances_nodup` prove exactly two things about the list of these labels—that it has length twelve and that it has no repetitions. This is *not* in itself a proof of the existence of twelve concrete Cauchy processes with all their analytic properties: the corresponding constructions and theorems—the derivative as a process, the integral as a process, and the rest—live in separate files of the process part of the repository. `ProcessInstance` fixes the *nomenclature* of the twelve patterns; their substantive development is the subject of other files and other chapters of the volume.
 
-### $P4${P4} as an Ontological Thesis
+### $P4$ as an Ontological Thesis
 
 The positive formalization of § 1.2.2 says that Cauchy processes exist and behave as a closed arithmetic domain. The ontological thesis of $P4$ adds to this a statement about *status*: the process is that through which the infinite enters mathematics—and the only thing through which it enters. Infinity *as a scheme*, not *as an object*. In the E/R/R labeling this means: infinity is a *rule*, not an element (the analysis of § 1.8.3).
 
@@ -86,21 +84,19 @@ Here it is worth pausing to bring together what the chapter has already distingu
 
 *The second level* is the formal predicate `P4_formalized` from `ProcessFourPrinciples.v`: Cauchy processes exist, and the basic arithmetic operations preserve the Cauchy property. This is the machine-checkable process trace of the ontological principle, proved by the theorem `P4_holds_formalized`.
 
-{
 *The third level* consists of the prohibition theorems of the files `P4CompletedInfinity.v` and `P4Prohibits*`: under the special definitions `CompletedInfSet`, `P4_stage_bounded`, and `bridge`, completed infinity leads to a contradiction.
-}
 
 These three levels are connected—the second and the third are formal supports of the first—but they are not equal. The ontological principle is wider than any single Rocq theorem; `P4_formalized` proves the process core, not the whole thesis; the prohibition theorems prove incompatibility for *their own* definitions, not unconditionally. The chapter will hold to this distinction everywhere, and the reader will not go wrong in gathering it into one table:
 
 | **Level** | **Content** | **Status** |
 |---|---|---|
 | Ontological $P4$ | Every system at a moment is finite; infinity is a property of process, not of object | Philosophical-methodological principle of ToS |
-| `P4_formalized` | Cauchy processes exist; sum and product preserve the Cauchy property | Proved in `Process\-Four\-Principles.v` |
-| Prohibition layer | `CompletedInfSet` ${}\land{}$ `P4_stage_bounded` ${}\land{}$ `bridge` ${}\to{}$ `False` | Proved in `P4Comple\-ted\-In\-fi\-ni\-ty.v` |
+| `P4_formalized` | Cauchy processes exist; sum and product preserve the Cauchy property | Proved in `ProcessFourPrinciples.v` |
+| Prohibition layer | `CompletedInfSet` ${}\land{}$ `P4_stage_bounded` ${}\land{}$ `bridge` ${}\to{}$ `False` | Proved in `P4CompletedInfinity.v` |
 
 The formal levels—the second and the third—are not identical to the philosophical $P4$ of the first level; but together they give it strong machine-checkable support. It is precisely so—as support, not as a full equivalent—that all the chapter’s further references to the Rocq formalization should be understood.
 
-### Formal Status: Which Axioms Stand behind $P4${P4}
+### Formal Status: Which Axioms Stand behind $P4$
 
 Since the chapter insists on checking against the formalization, it is obliged to answer precisely the question of the *logical ground* as well—on which axioms the Rocq formalization of ToS stands at all. The answer matters, because a principle of “no completed infinity” that secretly relied on the Axiom of Infinity would be strange.
 
@@ -114,15 +110,11 @@ Special precision is needed here, because $L4$ is easily mistaken for the Axiom 
 But it would be inaccurate to say that `L4_witness` “does not allow choice” or is “immeasurably weaker than the Axiom of Choice” in the usual technical sense. In its form—a polymorphic passage from `exists` to `sig`, from a proof of existence to the pair “witness plus proof”—`L4_witness` is a principle of indefinite description, and in the type-theoretic sense it has *choice-like* strength: given a family of existence proofs, one can build from it a function that outputs a witness for each index. The chapter therefore distinguishes two things. The ontological Axiom of Choice is a completed simultaneous choice over a completed family; $L4$ does not sanction such a choice, and in this sense ToS does not use it. The technical strength of `L4_witness` as a principle of indefinite description, however, is real, and it should not be passed off as something “immeasurably weaker than any choice.”
 
 What is essential is something else: neither the Axiom of Infinity nor the set-theoretic Axiom of Choice is among the foundations of ToS. A separate file of the repository is devoted to this—`ProcessAxiomAudit.v`.[^5]
-{
 Here again honesty is needed about *what* this file does. `ProcessAxiomAudit.v` is *not* an automatic dependency crawler, not a theorem that mechanically runs through the whole repository. The file itself states that it relies on the results of the `Print Assumptions` command, run separately; inside Rocq it *records and formalizes the summary* of this audit—it classifies the dependencies of the key results and fixes meta-classifications. Its theorem `axiom_minimal` is formalized *documentation* of the conclusion “the formalization is axiomatically minimal: no Axiom of Infinity, no Axiom of Choice, no univalence axiom, no axiom of functional extensionality”—not a scanner that would itself verify this conclusion by enumeration. It should be read as a documented meta-audit based on `Print Assumptions`. With this caveat, the summary is as follows: the results of the process part of the formalization depend only on `classic`, and only rarely on $L4$, with $L4$ localized in one file devoted to the variational principle. So the ToS preprint that speaks of “the single axiom `classic`” and the file `ToS_Axioms.v`, which declares two axioms, do not contradict each other: the process part really does manage with $L3$ alone, while $L4$ belongs to the foundations and is hardly needed in process mathematics.
-}
 
-{
 Let us sum up the formal status. $P4$ is not an axiom. In the file `ProcessFourPrinciples.v` the formal trace of $P4$ is *defined* (as the predicate `P4_formalized`) and *proved* (by the theorem `P4_holds_formalized`); the proof relies only on `classic` and process arithmetic. When the chapter says that $P4$ is “proved in Rocq,” exactly this is meant: what is proved is the machine-checkable process trace of the principle—the predicate `P4_formalized`—not the whole ontological thesis. To see *where* the principle comes from in substance—from which starting points of ToS it follows—let us pass to the next section.
-}
 
-## Where $P4${P4} Comes From
+## Where $P4$ Comes From
 
 ### Derivation from the Laws of Logic
 
@@ -133,33 +125,33 @@ Its course is as follows. By $L5$ (Order, the hierarchical dimension), every lev
 
 $P4$ is thus a *substantively derivable* consequence of starting points already accepted: the derivation of section 2.2.4 obtains it from $L1$ and $L5$, adding nothing to the foundations of ToS. But a caveat must be made at once, without which the word “derived” would mislead. This derivation is *substantive*, philosophical-methodological; it is carried out in the exposition of ToS, not in Rocq. The Rocq formalization does *not* reproduce the chain $L1 \land L5 \Rightarrow P4$ as a proved theorem. The file `ProcessFourPrinciples.v` does not derive $P4$ from the laws of logic—it proves the formal process predicate `P4_formalized` (through the constant process and the closure lemmas, § 1.2.2); moreover, in this file $P4$ is characterized as *independent*—the theorem `P4_independent` establishes the existence of a Cauchy process at any level regardless of the other principles. So “is derived” here and “is proved in Rocq” in § 1.2 are two different statements about two different levels (see the table of § 1.2.3): the first concerns the ontological derivation of the principle, the second the machine-checkable process trace. The chapter keeps them apart and does not pass one off as the other.
 
-With this caveat, the present section does not repeat the formal derivation step by step—the substantive derivation is given above—but shows the same thing in another way: $P4$ is the application, to the case of the infinite, of three motifs that the volume has developed from the very beginning—operational divisibility, the understanding of the set as a mode of consideration, and the principle of positive existence. The three motifs are three facets of the same thing that the formal derivation extracts from $L1$ and $L5$. Let us examine each.
+With this caveat, the present section does not repeat the formal derivation step by step—the substantive derivation is given above—but shows the same thing in another way: $P4$ is the application, to the case of the infinite, of three positions that the volume has developed from the very beginning—operational divisibility, the understanding of the set as a mode of consideration, and the principle of positive existence. The three positions are three facets of the same thing that the formal derivation extracts from $L1$ and $L5$. Let us examine each.
 
 ### Operational Divisibility: Atomicity Is Relative
 
-The first motif is operational divisibility. Part I, analyzing the structure of a system, showed that *atomicity is relative*: to be an element, something simple and indivisible, is not an absolute property of an object but its position relative to the existing state of the system of distinctions. One and the same object is taken as an element at one level of consideration and at another is opened up as a system of parts. Divisibility is not a property that an object possesses once and for all; it is performed—in an act that draws a new distinction within what was previously simple.
+The first position is operational divisibility. Part I, analyzing the structure of a system, showed that *atomicity is relative*: to be an element, something simple and indivisible, is not an absolute property of an object but its position relative to the existing state of the system of distinctions. One and the same object is taken as an element at one level of consideration and at another is opened up as a system of parts. Divisibility is not a property that an object possesses once and for all; it is performed—in an act that draws a new distinction within what was previously simple.
 
-Let us apply this to infinite division. Completed infinity, in one of its guises, is the demand that *all* the distinctions within some object be drawn *at once*—that infinite divisibility be not a process but an existing fact, the ready result of all divisions together. But operational divisibility says precisely that divisibility is an act, not an existing fact. One cannot “have already drawn” an infinite number of distinctions; distinction is performed, and every concrete performed distinction is finite. $P4$ is the application of this motif to the limit: absolute, completed infinite divisibility is impossible not because it is difficult, but because “completed” contradicts “divisibility as an act.”
+Let us apply this to infinite division. Completed infinity, in one of its guises, is the demand that *all* the distinctions within some object be drawn *at once*—that infinite divisibility be not a process but an existing fact, the ready result of all divisions together. But operational divisibility says precisely that divisibility is an act, not an existing fact. One cannot “have already drawn” an infinite number of distinctions; distinction is performed, and every concrete performed distinction is finite. $P4$ is the application of this position to the limit: absolute, completed infinite divisibility is impossible not because it is difficult, but because “completed” contradicts “divisibility as an act.”
 
 ### The Set as a Mode: The List Is Prior to the Set
 
-The second motif is the understanding of the set as a mode of consideration. Part I drew a distinction between the *list* and the *set*. The list is primary: it is a sequence of elements written out in order, as it was built. A set is a list taken in a special mode—a mode in which order and multiplicity are deliberately forgotten, in which the operator has agreed to look only at membership. A set is not a separate entity alongside the list; it is the list seen from a certain angle.
+The second position is the understanding of the set as a mode of consideration. Part I drew a distinction between the *list* and the *set*. The list is primary: it is a sequence of elements written out in order, as it was built. A set is a list taken in a special mode—a mode in which order and multiplicity are deliberately forgotten, in which the operator has agreed to look only at membership. A set is not a separate entity alongside the list; it is the list seen from a certain angle.
 
-Completed infinity implies “an infinite list composed in its entirety.” But composing a list is a process: the elements are written out one after another. The motif “the set as a mode” shows that an infinite set, too, is thinkable only as a mode of consideration of some list—and an infinite list is a process of writing out that does not complete. $P4$ is an application of this motif as well: the process of composing an infinite list *never* completes, and therefore a “completed infinite set” is a mode of consideration of a nonexistent object—a ready infinite list.
+Completed infinity implies “an infinite list composed in its entirety.” But composing a list is a process: the elements are written out one after another. The position “the set as a mode” shows that an infinite set, too, is thinkable only as a mode of consideration of some list—and an infinite list is a process of writing out that does not complete. $P4$ is an application of this position as well: the process of composing an infinite list *never* completes, and therefore a “completed infinite set” is a mode of consideration of a nonexistent object—a ready infinite list.
 
 ### Positive Existence: To Be Is to Be Actualized
 
-The third motif is the principle of positive existence. ToS understands existence positively: to exist is to be actualized through an act—to be the result of a performed distinction, not to passively “be on hand” in a ready universe of objects. This principle has a direct consequence for the infinite. An infinite collection of acts “already actualized simultaneously” is impossible: acts are performed in a hierarchy, one after another, sequentially. “All acts at once” is not a big act—it is no act at all, but a refusal to understand existence as an act.
+The third position is the principle of positive existence. ToS understands existence positively: to exist is to be actualized through an act—to be the result of a performed distinction, not to passively “be on hand” in a ready universe of objects. This principle has a direct consequence for the infinite. An infinite collection of acts “already actualized simultaneously” is impossible: acts are performed in a hierarchy, one after another, sequentially. “All acts at once” is not a big act—it is no act at all, but a refusal to understand existence as an act.
 
 Here $P4$ is closest to its source. If to exist is to be actualized, and actualization proceeds step by step, then “completed infinity” demands the impossible: an infinite number of actualizations carried out not step by step but at once. $P4$ is a direct consequence of the positive understanding of existence, applied to infinite cases.
 
-### $P4${P4} as a Specialization of the Accepted Starting Points
+### $P4$ as a Specialization of the Accepted Starting Points
 
-The three motifs converge on one thing. Operational divisibility: divisibility is an act, and infinite divisibility-as-a-fact is impossible. The set as a mode: an infinite set is a mode of consideration of an infinite list, and that list is a never-completing process. Positive existence: to be is to be actualized, and an infinite collection of simultaneous actualizations is impossible. Each of the three, applied to the case of the infinite, yields one and the same: infinity enters mathematics as a scheme of construction, not as a completed object. This is $P4$.
+The three positions converge on one thing. Operational divisibility: divisibility is an act, and infinite divisibility-as-a-fact is impossible. The set as a mode: an infinite set is a mode of consideration of an infinite list, and that list is a never-completing process. Positive existence: to be is to be actualized, and an infinite collection of simultaneous actualizations is impossible. Each of the three, applied to the case of the infinite, yields one and the same: infinity enters mathematics as a scheme of construction, not as a completed object. This is $P4$.
 
-$P4$ is thus a *specialization of three already accepted motifs* to the case of infinity—and, in the substantive derivation of section 2.2.4, a consequence derivable from $L1$ and $L5$. The volume notes that the starting points laid down in Part I have a definite consequence concerning the infinite, and gives this consequence a name. At the same time—recall the caveat of § 1.3.1—two levels must be kept apart: *in substance*, $P4$ is derived from the motifs and from $L1, L5$; *formally*, what is proved in Rocq is not this derivation but the process predicate `P4_formalized` (§ 1.2.2). At neither level is $P4$ a separate axiom: it is either derived in substance or appears as a proved process trace. A principle that discloses what is already laid down in the foundations requires of the reader no separate trust beyond what has already been given to the laws of logic of Part I: $P4$ is in this sense *free*—it costs exactly as much as the starting points already accepted, and not a jot more.
+$P4$ is thus a *specialization of three already accepted positions* to the case of infinity—and, in the substantive derivation of section 2.2.4, a consequence derivable from $L1$ and $L5$. The volume notes that the starting points laid down in Part I have a definite consequence concerning the infinite, and gives this consequence a name. At the same time—recall the caveat of § 1.3.1—two levels must be kept apart: *in substance*, $P4$ is derived from the three positions and from $L1, L5$; *formally*, what is proved in Rocq is not this derivation but the process predicate `P4_formalized` (§ 1.2.2). At neither level is $P4$ a separate axiom: it is either derived in substance or appears as a proved process trace. A principle that discloses what is already laid down in the foundations requires of the reader no separate trust beyond what has already been given to the laws of logic of Part I: $P4$ is in this sense *free*—it costs exactly as much as the starting points already accepted, and not a jot more.
 
-## Where $P4${P4} Has Already Been at Work
+## Where $P4$ Has Already Been at Work
 
 ### A Principle Recognized in Retrospect
 
@@ -171,7 +163,7 @@ The earliest and purest appearance of $P4$ is in Part II, in the construction of
 
 This is already $P4$ in action, though its name has not yet been spoken. An inductive type is a scheme of construction, not a completed object. Every concrete natural number—a hundred, a thousand, any given one—is accessible: it is built in a finite number of applications of the rule. “All the natural numbers as a ready, gathered set” do not figure in this picture at all—not because they have been forgotten, but because the inductive type does not presuppose them. Rocq realizes this directly: the natural number series `nat` is an inductive type, and every argument about all natural numbers—every sum, every limit, every check of convergence—goes through the induction principle, not through an appeal to “the set of all naturals.” The induction principle is a rule of inference; it does not require the natural numbers to be gathered together anywhere. Part II, in building counting, already stood on $P4$.
 
-A precise caveat is needed, however. Formally, `nat` *exists*—as a type of the Rocq language, and one can quantify over this type: the notation “for every $n : `nat`$” is perfectly legitimate. ToS does not deny this formal fact: the type `nat` exists. ToS gives up only one *reading* of this type—the reading on which `nat` would be the completed actuality of all natural numbers, a ready, gathered set. Here `nat` is understood as an inductive scheme of generation and reasoning; the quantifier “for every $n$” is read as a reference to this scheme, to the induction principle, not to a survey of a ready infinite collection. This distinction—between a type as a scheme and a type as a completed set—will be important throughout Part IV.
+A precise caveat is needed, however. Formally, `nat` *exists*—as a type of the Rocq language, and one can quantify over this type: the notation “for every $n : \texttt{nat}$” is perfectly legitimate. ToS does not deny this formal fact: the type `nat` exists. ToS gives up only one *reading* of this type—the reading on which `nat` would be the completed actuality of all natural numbers, a ready, gathered set. Here `nat` is understood as an inductive scheme of generation and reasoning; the quantifier “for every $n$” is read as a reference to this scheme, to the induction principle, not to a survey of a ready infinite collection. This distinction—between a type as a scheme and a type as a completed set—will be important throughout Part IV.
 
 ### Non-Completion as Ontology (Part I)
 
@@ -197,21 +189,19 @@ This is $P4$ almost at full strength, but still on one particular example—on o
 
 The four returns—to the inductive `nat` of Part II, to the non-completion of Part I, to the distinction of data and behavior in Chapter III.3, to the number-process of Chapter III.4—show one thing. $P4$ is not introduced in this chapter for the first time; it is only *named* here for the first time. The principle has worked in the volume since the very construction of the natural number series; it acted in four independent places, on different material, and every time in one and the same way: the infinite was taken as a scheme, not as an object. The chapter does not ask the reader to believe in a new assumption; it shows the reader that they have already seen $P4$ at work four times, and now only draws a line under what has been seen.
 
-## $P4${P4} and the Classical Axioms
+## $P4$ and the Classical Axioms
 
 ### Dispensability and Incompatibility
 
 It is customary to say that $P4$ *cuts off* a number of axioms of standard mathematics—the Axiom of Infinity, the Axiom of Choice, and others. This is true, but the word “cuts off” is vague, and the vagueness is dangerous here. It can mean at least two different things: either “the formalization of ToS manages without this axiom—it is simply not needed,” or “$P4$ is *incompatible* with this axiom—one cannot accept both at once.” These are two different statements, and the second is strictly stronger than the first.
 
 The Rocq formalization of ToS contains both layers—and contains them separately, as two generations of files. Moreover, it documents this difference itself: one of the files describes directly in its header *what changed* between the generations.[^7]
-The present section analyzes both layers in order: first the early one, the layer of *dispensability* (§ 1.5.2–1.5.3), then the later one, the layer of *incompatibility* (§ 1.5.4–1.5.6), and in § 1.5.7 it shows how they relate. To say hastily “$P4$ rules out the Axiom of Choice” is to lump the two layers together and to lose the precision that the formalization actually achieves.
+The present section analyzes both layers in order: first the early one, the layer of *dispensability* (§ 1.5.2–1.5.3), then the later one, the layer of *incompatibility* (§ 1.5.4–1.5.5), and in § 1.5.6 it shows how they relate. To say hastily “$P4$ rules out the Axiom of Choice” is to lump the two layers together and to lose the precision that the formalization actually achieves.
 
 ### The First Layer: The Axiom Is Not Needed
 
-{
 The early layer of the formalization is represented by a group of files with a common name of the form `P4_Eliminates_*`—one for each axiom.
 Each such file proves a statement of one and the same kind: the work for the sake of which standard mathematics introduces the given axiom is performed in the $P4$ ontology *without* it—by means that $P4$ provides anyway. The axiom is not refuted; it turns out to be *superfluous*. Let us call this layer the layer of dispensability and analyze it on the example of four axioms.
-}
 
 *The Axiom of Infinity.* The file `P4_Eliminates_Infinity.v` shows that everything for the sake of which the Axiom of Infinity is introduced is done through the inductive type `nat`.[^8]
 The file builds and proves the induction principle (as a built-in rule, not an axiom), partial sums, a convergence predicate, strong induction, the factorial, and the boundedness of a finite list. The final theorem `P4_eliminates_Infinity` is *not* a negation of the Axiom of Infinity; it is a *conjunction of four positive facts*: the induction principle works, every $n$ is finite, the factorial of five equals one hundred twenty, the partial sum of the first natural numbers is computed. The meaning of the theorem is exactly “here is a demonstration: all this works, and the Axiom of Infinity was not needed for it.” The axiom is not refuted—it is shown to be unnecessary.
@@ -219,8 +209,7 @@ The file builds and proves the induction principle (as a built-in rule, not an a
 *The Axiom of Choice.* The file `P4_Eliminates_AC.v` is arranged in the same
 way.[^9]
 In the $P4$ ontology every set at stage $N$ is a finite list—a process taken up to step $N$. Choosing a representative from a finite nonempty list requires no axiom: one can take the *first* element—the head of the list. This is the $L5$ resolution: canonical choice in the order of construction. The file proves lemmas of finite choice, a finite version of Zorn’s lemma (the maximum of a list), and a theorem on choice over a finite front: for a fixed finite $N$ and nonempty lists $F(n)$ with $n < N$, the choice function is built explicitly—as taking the head.[^10]
-With this, choice at the level of dispensability is exhausted: for a finite front the axiom is not required. The same file also has a theorem without a restriction on $N$—for the family `family` indexed by *all* natural numbers; its status is subtler, and the chapter will return to it in
-§ 1.5.6. Here let us fix what is beyond dispute: for the choice that the $P4$ ontology actually makes—choice from finite lists on a finite front—the Axiom of Choice is not needed.
+With this, choice at the level of dispensability is exhausted: for a finite front the axiom is not required. The same file also has a theorem without a restriction on $N$—for the family `family` indexed by *all* natural numbers; its status is subtler, and the chapter will return to it in § 1.5.5. Here let us fix what is beyond dispute: for the choice that the $P4$ ontology actually makes—choice from finite lists on a finite front—the Axiom of Choice is not needed.
 
 *Transfinite recursion.* The file `P4_Eliminates_ATR.v` takes arithmetical transfinite recursion—in reverse mathematics, an axiom.[^11]
 The file declares an inductive type of ordinals—with constructors for zero, successor, and limit—and transfinite recursion is defined as an ordinary `Fixpoint` function over this type. Rocq’s termination checker accepts it as structural recursion. The upshot: transfinite recursion is not an axiom but a *definition*. What reverse mathematics postulates is, in the $P4$ ontology, simply written down as a function.
@@ -256,23 +245,19 @@ The Axiom of Choice over the natural number series is the statement that for eve
 Precision is needed here, and the chapter insists on it. The file
 `P4ProhibitsAC.v` does *not* prove the closed statement “the Axiom of Choice is false.” It proves: the Axiom of Choice yields a completed infinite object; and a completed infinite object *together with* $P4$ stage-boundedness *and* the bridge is contradictory. This is a *conditional* theorem: the contradiction arises when all three premises are present. Its strength lies in the fact that $P4$ stage-boundedness is a direct formalization of $P4$, and the bridge is a natural condition connecting “being a member” with “being actual.” But it is still a statement relative to the *internal definitions* of the formalization (“completed set,” “stage-boundedness,” “bridge”—as they are written in `P4CompletedInfinity.v`), not the statement “the Axiom of Choice is contradictory in Zermelo–Fraenkel theory.” The formalization proves a strictly defined, honest, and strong thing—and exactly that, no more.
 
-Here too the apparent tension between the two files on choice—the early `P4_Eliminates_AC.v` and the later `P4ProhibitsAC.v`—is removed. The early one proves that choice is *not needed* (the head of the list); the later one, that choice is *incompatible* (it yields a completed infinity). Is this not a contradiction? No, and the resolution is subtle. The point lies in the *mode of reading* the choice function. The finite theorem `P4_eliminates_AC_finite` (§ 1.5.2) speaks of a finite front $N$: here the choice function is a finite object, and the question is settled. But `P4_eliminates_AC.v` also contains a theorem for a family indexed by *all* natural numbers. Such a total choice function can be read in two ways. If it is read as a process *rule*—a prescription that outputs a choice for any *presented* index—it is $P4$-compatible: each request receives a finite answer, and there is no completed object. If it is read as a completed *graph*—a total collection of pairs $(i, f(i))$ for all $i$ at once, gathered into one—we land exactly in the mode of `P4ProhibitsAC.v`: such a graph is a completed infinity, and together with stage-boundedness and the bridge it yields a contradiction. The difference between the two files, then, does not reduce to “a finite list versus an infinite family”; it lies in the mode of reading the choice function itself: a process rule or a completed graph. $P4$ keeps the first and cuts off the second.
+Here too the apparent tension between the two files on choice—the early `P4_Eliminates_AC.v` and the later `P4ProhibitsAC.v`—is removed. The early one proves that choice is *not needed* (the head of the list); the later one, that choice is *incompatible* (it yields a completed infinity). Is this not a contradiction? No, and the resolution is subtle. The point lies in the *mode of reading* the choice function. The finite theorem `P4_eliminates_AC_finite` (§ 1.5.2) speaks of a finite front $N$: here the choice function is a finite object, and the question is settled. But `P4_Eliminates_AC.v` also contains a theorem for a family indexed by *all* natural numbers. Such a total choice function can be read in two ways. If it is read as a process *rule*—a prescription that outputs a choice for any *presented* index—it is $P4$-compatible: each request receives a finite answer, and there is no completed object. If it is read as a completed *graph*—a total collection of pairs $(i, f(i))$ for all $i$ at once, gathered into one—we land exactly in the mode of `P4ProhibitsAC.v`: such a graph is a completed infinity, and together with stage-boundedness and the bridge it yields a contradiction. The difference between the two files, then, does not reduce to “a finite list versus an infinite family”; it lies in the mode of reading the choice function itself: a process rule or a completed graph. $P4$ keeps the first and cuts off the second.
 
 ### How the Two Layers Relate
 
-{
 The formalization of ToS also records how the two layers relate—with the file
 `P4ProhibitionSynthesis.v`.[^15]
 In substance the relation is this: the layer of incompatibility is stronger than the layer of dispensability—if something is incompatible with $P4$, then $P4$ thereby already supplies an alternative to it, since the impossible has to be replaced by something; the converse is false—the presence of an alternative does not mean that the original is incompatible.
-}
 
-{
 The file also contains a theorem with a telling name—`prohibition_implies_reinterpretation`. But here it is important not to overrate it. In its formulation it states: *if* completed infinity is incompatible with $P4$-boundedness given the bridge, *then* potential infinity holds. In its proof, however, it is arranged simply: it does *not use* the premise—it proves the conclusion directly, returning the lemma on the existence of potential infinity already proved in the repository (`potential_inf_exists`). Therefore `prohibition_implies_reinterpretation` is not a formalization of a *nontrivial logical dependence* “exclusion entails reinterpretation.” It is rather a synthetic *summary*: a documented record of the fact that the repository *has* a prohibition theorem and *separately* has a proved alternative (potential infinity). It should not be presented as a nontrivial proof of logical entailment; the substantive relation of the layers—the one stated in the previous paragraph—is true, but it is grounded in reasoning, not in this particular theorem.
-}
 
 Let us bring the two layers together. When the chapter says that $P4$ *cuts off* the Axiom of Infinity or the Axiom of Choice, it means exactly the following. First (the layer of dispensability): the work of these axioms is performed in the $P4$ ontology without them—by an inductive type, the head of a list, a `Fixpoint` function, a program code; this has been checked by the four files `P4_Eliminates_*` and confirmed by the audit `ProcessAxiomAudit.v`. Second (the layer of incompatibility): completed infinity—in the form in which it is formalized by the predicates of `P4CompletedInfinity.v`—is *incompatible* with $P4$ stage-boundedness in the presence of the bridge; and the Axiom of Choice over the natural number series yields precisely such a completed infinity. These are conditional theorems relative to the internal definitions of the formalization—strong and honest, but conditional all the same. What the chapter does *not* assert is that a closed “the Axiom of Choice is false,” in the sense of set theory, has been proved in Rocq. The cutting off is real and formally checked; its exact meaning is set by two layers, not by a slogan.
 
-## What $P4${P4} Leaves
+## What $P4$ Leaves
 
 ### Cutting Off and Preserving: Two Sides
 
@@ -304,13 +289,13 @@ And analysis is built on processes. Chapter III.4 has already shown how $\sqrt{2
 
 Let us draw up the balance. $P4$ leaves: the natural numbers, integers, and rationals; finite collections and operations on them; induction, recursion, strong induction; constructive proofs of existence; processes and the whole of analysis built on processes. This is not a remainder that survived the cutting off, but the *main body* of mathematics. $P4$ cuts off completed infinity—an object that on closer inspection (§ 1.5) turns out to be either unnecessary or incompatible with the accepted ontology. What is cut off, in other words, is not a working part of mathematics but a definite assumption about the nature of the infinite—an assumption without which the working part stands perfectly well. What exactly is lost in the process, and why the loss is not burdensome, is the subject not of the present chapter but of Chapter 4.6, which closes Part IV; here it is enough to say that the balance of cutting off and preserving comes out decisively in favor of preserving.
 
-## $P4${P4} and Brouwer’s Intuitionism
+## $P4$ and Brouwer’s Intuitionism
 
 ### What the Comparison Is For
 
 $P4$ has an important historical predecessor—the intuitionist program in the foundations of mathematics, begun by Luitzen Brouwer at the beginning of the twentieth century and developed afterward by Arend Heyting and others. The comparison with it is no tribute to erudition: it clarifies the place of ToS more precisely than any description from within. Intuitionism was the first in modern times to refuse to regard completed infinity as ontologically primary—and therefore, having seen *where* ToS converges with intuitionism and *where* it diverges, the reader will also see what is distinctive in the position of ToS.
 
-### Where $P4${P4} Converges with Intuitionism
+### Where $P4$ Converges with Intuitionism
 
 There are three points of convergence, and they are essential.
 
@@ -322,7 +307,7 @@ There are three points of convergence, and they are essential.
 
 On all three points ToS and intuitionism are allies. And the understanding of mathematics as an *activity*, as a process of construction rather than the description of a ready, eternal reality, is also common to them.
 
-### Where $P4${P4} Diverges from Intuitionism
+### Where $P4$ Diverges from Intuitionism
 
 But there is also a divergence, and a deep one—so deep that the two positions are usually considered incompatible. The divergence concerns the attitude toward the *Law of Excluded Middle*.
 
@@ -330,7 +315,7 @@ Brouwer rejects the Law of Excluded Middle. For an intuitionist, the statement �
 
 ToS *accepts* the Law of Excluded Middle. Moreover, it accepts it not as an additional axiom-concession but as one of the five laws of logic derived in Part I from a single starting point. Part I showed: the act of distinction that separates $A$ from not-$A$ is by its very nature *exhaustive*—it leaves no third region assigned neither to $A$ nor to not-$A$. This exhaustiveness of the completed act of distinction is the Law of Excluded Middle, $L3$. In Rocq it enters as the axiom `classic` (§ 1.2.4) precisely because the Rocq system is constructive by design, and $L3$ is built on top of it; but in ToS $L3$ is not arbitrary—it is a theorem about the arrangement of distinction.
 
-### $P4${P4}: Constructivism with Classical Logic
+### $P4$: Constructivism with Classical Logic
 
 Hence the exact characterization of the position of ToS: *it is constructivism with classical logic*. With intuitionism ToS shares a constructive ontology: infinity is potential, existence requires a witness, there is no completed infinite. What distinguishes ToS from intuitionism is classical logic: the Law of Excluded Middle is kept.
 
@@ -342,7 +327,7 @@ In the landscape of the foundations of mathematics ToS therefore occupies a plac
 
 ## The Bridge to the Construction of the Process
 
-### What Follows from $P4${P4}
+### What Follows from $P4$
 
 $P4$ has been formulated verbatim, derived in substance from $L1$ and $L5$, recognized in the earlier work of the volume, analyzed from the side of what it makes superfluous and what it is incompatible with, and related to intuitionism. It remains to ask: what *follows* from all this for the construction of number?
 
@@ -360,20 +345,19 @@ And here is the chapter’s last caveat about precision. Technically, `RealProce
 
 ### E/R/R Analysis: Infinity as a Scheme, Not an Object
 
-{
 Before passing to the construction, let us consolidate by an E/R/R analysis (Part I) *how* $P4$ is arranged in the labeling of elements, roles, and rules. This chapter analyzes not a number system but a *principle*, and the analysis here is less about composition and more about which *level* of the labeling $P4$ holds. The caveat on status is stricter than usual and repeats the three levels of $P4$ (§ 1.2): the ontological thesis; its machine-checkable *trace* `P4_formalized` (proved); and the conditional
 prohibition layer (theorems under precise definitions of completed infinity). We conduct the analysis in the ontological order
-Rules $\to$ Roles $\to$ Elements.}
+Rules $\to$ Roles $\to$ Elements.
 
 *Rules* (the principle $P4$). $P4$ is the *constitution of the level of elements*: infinity enters mathematics *as a scheme*—the rule “zero is a number; every number is followed by a number,” applicable without end—and not *as an object*, a ready, gathered “all” (§ 1.2.3). In substance $P4$ is derived from $L1$ and $L5$ (§ 1.3), but precisely *in substance*: the chain
-$L1\landL5\RightarrowP4$ is not proved in Rocq, while the trace of $P4$ (`P4_formalized`: Cauchy processes exist and are closed under arithmetic) is proved independently. The prohibition layer adds: under a precise definition of a completed infinite object, such an object is incompatible with $P4$ (`P4_Eliminates_Infinity`: `nat` is a rule of induction, not a ready set), and the choice function *as a rule* is compatible with $P4$, while *as a completed graph* it is not
+$L1\land L5\Rightarrow P4$ is not proved in Rocq, while the trace of $P4$ (`P4_formalized`: Cauchy processes exist and are closed under arithmetic) is proved independently. The prohibition layer adds: under a precise definition of a completed infinite object, such an object is incompatible with $P4$ (`P4_Eliminates_Infinity`: `nat` is a rule of induction, not a ready set), and the choice function *as a rule* is compatible with $P4$, while *as a completed graph* it is not
 (§ 1.5).
 
 *Roles—the significance of positions* (the law $L4$). Infinity receives the role of a *scheme*—a potentially extendable rule, not an existing collection. Every stage plays the role of a *finite actualization*. And the *point* (a ready real number) under $P4$ turns from a primary object into a *derived role*—an equivalence class of processes, a mode of consideration (Chapter 4.3): $P4$ does not abolish the point but moves it to its true, derived place.
 
 *Elements—the bearers* (the law $L1$ and $P4$ itself). Only *finitely actualized* objects remain bearers: every natural number is constructible in a finite number of steps, every stage of a process is a finite rational record. There is no completed infinite object at the level of elements. A caveat of precision (§ 1.8.2): the type `RealProcess := nat -> Q` in Rocq is a type of *total* functions; $P4$ rests on the *operational* reading of the term (a rule giving an answer for a presented $n$), not on denying that this is a function type.
 
- Let us gather the analysis into a table.
+Let us gather the analysis into a table.
 
 | Component | What it determines | E/R/R |
 |---|---|---|
@@ -384,11 +368,10 @@ $L1\landL5\RightarrowP4$ is not proved in Rocq, while the trace of $P4$ (`P4_for
 | finite actualizations (stages, `nat`, records) | bearers (finite) | Element |
 | laws $L1$–$L5$ (here $L1$, $L5$) | universal layer | Rule (univ.) |
 
-{
 *Well-formedness.* The labeling is unambiguous and here turns into the *root diagnostics* of the whole volume. To take infinity for an *object* (a completed set, a ready line) is a confusion of categories: a scheme-rule is read as an element-object. $P4$ is precisely the principle that rules out this confusion: it holds infinity at the level of *rules*, not of *elements*. And every particular diagnosis of the volume is a case of it: number is a role, not an object (Part II); the point is a class-mode, not an object (Chapter 4.3); uncountability is a rule about processes, not the size of a set (Chapter 4.4); a rational number is a class by `Qeq`, not a quotient object (Chapter III.2). The honest boundary: the three levels of $P4$ are not to be merged—what is proved is the *trace*
-`P4_formalized`, while the full ontological thesis and the substantive derivation from $L1\landL5$ lie beyond any single Rocq theorem.}
+`P4_formalized`, while the full ontological thesis and the substantive derivation from $L1\land L5$ lie beyond any single Rocq theorem.
 
- What the analysis yields. It lays the *foundation* of the whole of Part IV: since infinity is a rule-scheme, not an object, the real number is built as a *process* (Rule), not as a ready point (Element); and the point returns later as a derived role-class (Chapter 4.3). $P4$, analyzed by E/R/R, is the constitution under which the whole of process analysis unfolds—and the chapter now passes on to its plan.
+What the analysis yields. It lays the *foundation* of the whole of Part IV: since infinity is a rule-scheme, not an object, the real number is built as a *process* (Rule), not as a ready point (Element); and the point returns later as a derived role-class (Chapter 4.3). $P4$, analyzed by E/R/R, is the constitution under which the whole of process analysis unfolds—and the chapter now passes on to its plan.
 
 ### Where Part IV Is Going
 
@@ -396,7 +379,7 @@ Part IV is occupied with the construction and study of this type. Chapter 4.2 gi
 
 The present chapter has been a philosophical-methodological introduction to all of this. It did not build the process—it justified the principle for the sake of which the process will be built. Now the principle $P4$ has been presented in full strength: formulated precisely, derived from the foundations, checked against the formalization, delimited from hasty readings. With this foundation Part IV can get down to work—and Chapter 4.2 begins it by giving the process the definition of a type.
 
-{*$P4$ is the principle of Finite Actuality: every system is finite at any moment, and infinity is a property of process, not of object. In substance it is derived from $L1$ and $L5$, and the three motifs of the volume (operational divisibility, the set as a mode, positive existence) are its facets; that completed infinity “does not exist” is a conclusion from the principle, not the principle itself. In $P4$ three levels should be distinguished: the ontological principle; its formal process trace `P4_formalized`, proved in Rocq (Cauchy processes exist; sum and product preserve the Cauchy property); and the prohibition theorems, which show the incompatibility of completed infinity with $P4$ stage-boundedness under special definitions. These levels are a support of the principle, not its full equivalent. ToS has two fundamental logical axioms, $L3$ and $L4$; neither the Axiom of Infinity nor the set-theoretic Axiom of Choice is among them, which is recorded by a documented meta-audit. The formalization develops the relation of $P4$ to the classical axioms in two layers: dispensability (the work of an axiom can be done without it—shown for infinity, finite choice, transfinite recursion, and $\Pi^1_1$-comprehension) and incompatibility (completed infinity, as formalized, contradicts $P4$ stage-boundedness given the bridge—conditional but rigorous theorems). At the same time $P4$ leaves the main body of mathematics working: numbers, finite collections, induction, constructive proofs, processes, and process analysis. ToS is constructivism with classical logic—a combination possible because $L3$ speaks of the completed act of distinction, and $P4$ of an infinite collection; ToS separates these two attitudes into different levels. From $P4$ it follows that a real number is not originally a ready point—the point is recovered later as a mode of consideration of processes; what a real number is originally—a process—and how this process is built as a type is shown by Chapter 4.2.*}
+*$P4$ is the principle of Finite Actuality: every system is finite at any moment, and infinity is a property of process, not of object. In substance it is derived from $L1$ and $L5$, and the three positions of the volume (operational divisibility, the set as a mode, positive existence) are its facets; that completed infinity “does not exist” is a conclusion from the principle, not the principle itself. In $P4$ three levels should be distinguished: the ontological principle; its formal process trace `P4_formalized`, proved in Rocq (Cauchy processes exist; sum and product preserve the Cauchy property); and the prohibition theorems, which show the incompatibility of completed infinity with $P4$ stage-boundedness under special definitions. These levels are a support of the principle, not its full equivalent. ToS has two fundamental logical axioms, $L3$ and $L4$; neither the Axiom of Infinity nor the set-theoretic Axiom of Choice is among them, which is recorded by a documented meta-audit. The formalization develops the relation of $P4$ to the classical axioms in two layers: dispensability (the work of an axiom can be done without it—shown for infinity, finite choice, transfinite recursion, and $\Pi^1_1$-comprehension) and incompatibility (completed infinity, as formalized, contradicts $P4$ stage-boundedness given the bridge—conditional but rigorous theorems). At the same time $P4$ leaves the main body of mathematics working: numbers, finite collections, induction, constructive proofs, processes, and process analysis. ToS is constructivism with classical logic—a combination possible because $L3$ speaks of the completed act of distinction, and $P4$ of an infinite collection; ToS separates these two attitudes into different levels. From $P4$ it follows that a real number is not originally a ready point—the point is recovered later as a mode of consideration of processes; what a real number is originally—a process—and how this process is built as a type is shown by Chapter 4.2.*
 
 ---
 

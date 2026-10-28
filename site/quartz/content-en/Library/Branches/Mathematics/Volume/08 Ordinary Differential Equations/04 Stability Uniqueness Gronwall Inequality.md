@@ -2,7 +2,7 @@
 title: "Chapter 4. Stability, Uniqueness, Grönwall’s Inequality"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/04 Устойчивость, единственность, неравенство Гронуолла.md"
-sourceBlob: dfc5ddb314846361726c3074cd2485e25f72d701
+sourceBlob: a74f9ac6215c667a804677a5532a7b43ba4281b8
 translated: 2026-10-20
 status: draft
 ---
@@ -80,7 +80,7 @@ This is the process form of Grönwall, and for $\alpha = L$, $u_0 = \lvert\Delta
 
 *Grönwall is the role-rule of control: it turns local information about the rate of growth (“no faster than a multiple of itself”) into a global estimate of the whole trajectory. The geometric factor $(1+\alpha h)^n$ is the role-of-growth; stability and decay are its two regimes ($\alpha$ positive or negative.)*
 
-## The Growth Factor and $e^{Lt}${e^(Lt)} as a Role-Limit
+## The Growth Factor and $e^{Lt}$ as a Role-Limit
 
 The classical theory of stability writes the estimate of continuous dependence in *exponential* form:
 
@@ -117,8 +117,7 @@ rational divergences $\lvert\Delta_n\rvert \in ℚ$, factors $(1+Lh)^n \in ℚ$,
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is that stability is taken as the *controllability* of the divergence by a finite factor, not as a statement about completed behavior on an infinite interval. The factor $(1+Lh)^n$ is an Element (a rational number at each stage), while its limit $e^{Lt}$ is a role-limit; to mix them would be to put a completed exponential in the place of a rational factor.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is that stability is taken as the *controllability* of the divergence by a finite factor, not as a statement about completed behavior on an infinite interval. The factor $(1+Lh)^n$ is an Element (a rational number at each stage), while its limit $e^{Lt}$ is a role-limit; to mix them would be to put a completed exponential in the place of a rational factor.
 
 What the analysis yields. It translates the results of the chapter into the language of structure: *divergence is a Role-sensitivity*, *the growth factor is a Role-of-growth*, *stability is a Role-property of controllability*, and the numbers $\lvert\Delta_n\rvert$, $(1+Lh)^n$, $u_n$ themselves are *Elements*. Uniqueness fits in as the limiting case (zero perturbation), and Grönwall as the general Rule of which the divergence estimate is a special case. To take $e^{Lt}$ as a completed exponential is to put the role-limit in the place of an Element—the same confusion as “number as an object” (Part II) or “the solution as a ready function” (Chapter 8.1).
 
@@ -133,7 +132,7 @@ The final chapter of the Part will gather the threads together: the exponential 
 [^5]: `gronwall_step` and `gronwall_iterate` in `ProcessGronwall.v`; `gronwall_process` is the corresponding `RealProcess`.
 [^6]: `gronwall_beta_zero` in `ProcessGronwall.v`: `gronwall_iterate alpha 0 h u0 n == u0 * Qpow (1+alpha*h) n`. 0 axioms. For $\alpha=L$ this is the right-hand side of `euler_diff_bound`.
 [^7]: `gronwall_decay_factor` in `ProcessGronwall.v`: for $0 \le r \le 1$ we have $u_0 r^n \le u_0$. 0 axioms.
-[^8]: `euler_growth_is_expt_process` in `ProcessODEStability.v`: the factor $(1+s/(k{+}1))^{k+1}$ *is* the stage $`expt_process` s k$ from `ProcessExpProcess.v` (batch C). 0 axioms. For $s = Lt$ this is $(1+Lt/n)^n$.
+[^8]: `euler_growth_is_expt_process` in `ProcessODEStability.v`: the factor $(1+s/(k{+}1))^{k+1}$ *is* the stage $\texttt{expt\_process} s k$ from `ProcessExpProcess.v` (batch C). 0 axioms. For $s = Lt$ this is $(1+Lt/n)^n$.
 [^9]: The header labels directly: Rules—Lipschitz $\Rightarrow$ $\lvert\Delta_{n+1}\rvert\le(1+Lh)\lvert\Delta_n\rvert$ $\Rightarrow$ $\lvert\Delta_n\rvert\le(1+Lh)^n\lvert\Delta_0\rvert$; Roles—$\lvert\Delta_n\rvert$ is the role-divergence, $(1+Lh)^n$ the role-of-growth, $e^{Lt}$ the role-limit; Elements—rational $\lvert\Delta_n\rvert$, $(1+Lh)^n$, finite $n$.
 
 ---

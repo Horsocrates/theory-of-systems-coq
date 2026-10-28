@@ -2,7 +2,7 @@
 title: "Chapter 5. The Zeros of Zeta and the Zero-Free Region"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/05 Нули дзеты и свободная от нулей зона.md"
-sourceBlob: 51cda6c8ceec6ab70dd64f8148db47d1de4fb7da
+sourceBlob: 563679b4946e468d01d576af8cf3d1596c25004a
 translated: 2026-10-20
 status: draft
 ---
@@ -83,28 +83,27 @@ Progress in widening the zero-free region is progress in the direction of RH; th
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
 | the algebraic inequality $2(1+x)^2\ge 0$; the pole estimate | the exclusion of zeros near $\Re s=1$ | Rule (L5) |
-| zero ${}={}$ process; zone ${}={}$ region; $N(T)$ ${}={}$ counter; migration ${}={}$ squeeze | the status of special points and of their distribution | Role (L4) |
+| zero ${}={}$ process; zone ${}={}$ region; $N(T)={}$ counter; migration ${}={}$ squeeze | the status of special points and of their distribution | Role (L4) |
 | rational `mertens_f`, `pole_lower_bound`, `zero_count_bound` | the bearers at each stage | Element (L1${}+{}$P4) |
 
 **What the analysis removes.**  The “trigonometric” inequality that locks out the zeros turns out to be *not* an analytic fact but an *algebraic identity over $ℚ$*—maximally transparent and machine-checkable. The counting of zeros is not a property of a completed infinity but a rational estimate at each finite level. ToS singles out precisely the finite rational core of the theory of zeros, honestly leaving the full complex analysis as a classical reading.
 
 ## What the Chapter Has Prepared
 
-{
-The zeros have been read as processes; the zero-free region as a rule. The rational core is sorted by status: `TrigInequality.v` (the algebraic $2(1+x)^2\ge 0$ over $ℚ$), `ZeroFreeRegion.v` (the pole estimate, the model width $c/(1+|t|)$), and `ZeroCountingProcess.v` (the crude counting estimate $K(T+1)$) are *0 axioms*; the synthesis `RH_Phase1_Synthesis.v` and the layer `PartialSumZeros.v` inherit `classic`. The full complex region of de la Vallée Poussin $1-c/\log|t|$ and the Riemann–von Mangoldt asymptotics are honestly left classical.}
+The zeros have been read as processes; the zero-free region as a rule. The rational core is sorted by status: `TrigInequality.v` (the algebraic $2(1+x)^2\ge 0$ over $ℚ$), `ZeroFreeRegion.v` (the pole estimate, the model width $c/(1+|t|)$), and `ZeroCountingProcess.v` (the crude counting estimate $K(T+1)$) are *0 axioms*; the synthesis `RH_Phase1_Synthesis.v` and the layer `PartialSumZeros.v` inherit `classic`. The full complex region of de la Vallée Poussin $1-c/\log|t|$ and the Riemann–von Mangoldt asymptotics are honestly left classical.
 
 Next:
 
 - Chapter 13.6—the logarithmic derivative of zeta and von Mangoldt’s explicit formula, which links the zeros with the distribution of primes (where the von Mangoldt layer of our arithmetic base meshes with the analysis);
-- Chapter 13.7—three equivalent forms of the Riemann Hypothesis (the “process” form directly uses the zero-process of this chapter) and the map of boundaries of the part, which gathers the continuum price, the axiom tier, and the openness of RH.
+- Chapter 13.7—three equivalent forms of the Riemann Hypothesis (the “process” form directly uses the zero-process of this chapter) and the map of boundaries of the part, which gathers the continuum price, the classical reading, and the openness of RH.
 
 ---
 
 [^1]: `src/zeta/ZetaZeros.v`: `CauchyComplex`${}={}ℕ\to{}$`TComplex`, the predicates `in_critical_strip`, `is_nontrivial_zero`, `on_critical_line`; a zero is a Cauchy process converging to the zero value (`nontrivial_zero_cauchy`).
-[^2]: `src/zeta/ZeroFreeRegion.v` (its header says “AXIOMS: none,” 0 axioms): `pole_lower_bound`, `pole_lower_bound_nonneg`, `pole_lower_bound_monotone`, and `pole_large`—a lower estimate of the “pole” contribution, expressing the repulsion of the zeros from $\Re s=1$ at the rational/process level; also `mertens_combination`, `gap_unbounded`, `integer_zero_free`, and the *model* width $`dvp_width`=c/(1+|t|)$ with $`dvp_boundary`=1-`dvp_width`\to 1$. *Important:* $c/(1+|t|)$ is a rational surrogate, *not* the classical width $c/\log|t|$. The full *complex* region of de la Vallée Poussin $\Re s>1-c/\log|t|$ is a classical result; the file formalizes its rational, estimating side.
-[^3]: `src/zeta/TrigInequality.v` (its header: 0 axioms; and directly: “Over Q: we prove this for ALL rational $x$, not just $\cos\theta$”). Here `mertens_f`$(x)=2(1+x)^2$ (the Mertens combination after the substitution $\cos 2\theta\to{}$`double_angle_form`$(x)=2x^2-1$), and `mertens_f_nonneg`: $`mertens_f`(x)\ge 0$ for all rational $x$; and `mertens_f_positive`: $`mertens_f`(x)>0$ for $x\ne -1$ (with a zero only at $x=-1$, `mertens_f_zero_iff`); `trig_inequality_algebraic`, `trig_inequality_double_angle`. The trigonometric reading ($x=\cos\theta$) is the classical interpretation of a rational algebraic lemma.
+[^2]: `src/zeta/ZeroFreeRegion.v` (its header says “AXIOMS: none,” 0 axioms): `pole_lower_bound`, `pole_lower_bound_nonneg`, `pole_lower_bound_monotone`, and `pole_large`—a lower estimate of the “pole” contribution, expressing the repulsion of the zeros from $\Re s=1$ at the rational/process level; also `mertens_combination`, `gap_unbounded`, `integer_zero_free`, and the *model* width $\texttt{dvp\_width}=c/(1+|t|)$ with $\texttt{dvp\_boundary}=1-\texttt{dvp\_width}\to 1$. *Important:* $c/(1+|t|)$ is a rational surrogate, *not* the classical width $c/\log|t|$. The full *complex* region of de la Vallée Poussin $\Re s>1-c/\log|t|$ is a classical result; the file formalizes its rational, estimating side.
+[^3]: `src/zeta/TrigInequality.v` (its header: 0 axioms; and directly: “Over Q: we prove this for ALL rational $x$, not just $\cos\theta$”). Here `mertens_f`$(x)=2(1+x)^2$ (the Mertens combination after the substitution $\cos 2\theta\to{}$`double_angle_form`$(x)=2x^2-1$), and `mertens_f_nonneg`: $\texttt{mertens\_f}(x)\ge 0$ for all rational $x$; and `mertens_f_positive`: $\texttt{mertens\_f}(x)>0$ for $x\ne -1$ (with a zero only at $x=-1$, `mertens_f_zero_iff`); `trig_inequality_algebraic`, `trig_inequality_double_angle`. The trigonometric reading ($x=\cos\theta$) is the classical interpretation of a rational algebraic lemma.
 [^4]: `src/zeta/RH_Phase1_Synthesis.v`: the assembly of the zero-free region from the trig inequality, the pole estimate (`pole_large`), and the Mertens “squeeze”—at the rational/process level (it inherits `classic`). The full analytic form with the complex logarithm of zeta is classical.
-[^5]: `src/zeta/ZeroCountingProcess.v` (its header says “AXIOMS: none,” 0 axioms): $`zero_count_bound` K T := K\cdot(T+1)$ is a *crude linear* estimate (with `zero_count_bound_nonneg`, `_pos`, `_mono_K`), *not* the Riemann–von Mangoldt formula. The full asymptotics $N(T)\sim(T\log T)/(2\pi)$ is a classical result. The file also introduces the process formulation `rh_zero_variance` and proves basic consequences (`rh_implies_no_deviation`)—this is *not* a proof of RH and not a full equivalence for the analytic zeros.
+[^5]: `src/zeta/ZeroCountingProcess.v` (its header says “AXIOMS: none,” 0 axioms): $\texttt{zero\_count\_bound} K T := K\cdot(T+1)$ is a *crude linear* estimate (with `zero_count_bound_nonneg`, `_pos`, `_mono_K`), *not* the Riemann–von Mangoldt formula. The full asymptotics $N(T)\sim(T\log T)/(2\pi)$ is a classical result. The file also introduces the process formulation `rh_zero_variance` and proves basic consequences (`rh_implies_no_deviation`)—this is *not* a proof of RH and not a full equivalence for the analytic zeros.
 [^6]: `src/zeta/PartialSumZeros.v`: the gap at $k=2$, interval estimates, a crude count, the decay of the perturbation, the fixed critical line, `zero_squeeze`, the reflection distance; it inherits `classic`. This is a process framework, not a proof of the migration of all the zeros of $\zeta_N$ to the line.
 
 ---

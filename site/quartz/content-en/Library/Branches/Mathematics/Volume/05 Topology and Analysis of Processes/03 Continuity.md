@@ -2,7 +2,7 @@
 title: "Chapter 3. Continuity"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/03 Непрерывность.md"
-sourceBlob: 8d6ff68430b12dae4693c3dfeb0c5bccb3591f7f
+sourceBlob: 635d1064e7cf184a6a37464bd9411929d3acab47
 translated: 2026-10-20
 status: draft
 ---
@@ -25,9 +25,7 @@ With continuity over $ℚ$ we must agree from the very beginning on a distinctio
 
 *Uniform* continuity requires more. It requires that $\delta$ can be chosen *one for the whole interval*, common to all points at once. Not “each point has its own neighborhood,” but “there is a single scale at which the function behaves tamely everywhere.”
 
-{
 Over the real numbers there is a classical theorem, the Cantor–Heine theorem, which says that on a closed interval (on a compact set) these two kinds of continuity *coincide*. A pointwise continuous function on $[a,b]$ is automatically uniformly continuous. Over $ℚ$ this is *not so*. And the reason is the same one that brought down Heine–Borel in § 2.5: the *incompleteness* of $ℚ$. The rational interval is full of holes, and pointwise continuity is not enough to pull all the local $\delta$ together into one global one.
-}
 
 From this follows a key fact about the structure of the chapter. Both main theorems—on the intermediate value and on the extreme value—are formalized with the hypothesis of *uniform* continuity, not pointwise continuity. This is not because the formalization is weak but because over $ℚ$ uniformity is exactly what is needed, and it has to be required *explicitly*, since Cantor–Heine does not hold.
 
@@ -47,7 +45,7 @@ There are nine supporting files, all checked against the repository verbatim. Th
 
 ## Continuity: The Topological Face
 
-### Definition via $\delta${delta}-$\varepsilon${epsilon}
+### Definition via $\delta$-$\varepsilon$
 
 Let us begin with the simplest face of continuity, the pointwise one. ToS defines the *continuity of a function at a point* as follows: a function $f$ is continuous at a point $x$ if any required precision of the value can be ensured by a sufficient precision of the argument. Formally: for any $\varepsilon$ there is a radius $\delta$ such that every argument $y$ closer than $\delta$ to $x$ gives a value $f(y)$ closer than $\varepsilon$ to $f(x)$. A function is *continuous* if it is continuous at every point. This is the classical $\delta$-$\varepsilon$ definition, carried over to the rational level: argument, point, and radii are rational. In Rocq it is written in the file `Topology.v`, with which the chapter already became acquainted in § 2.2:
 
@@ -78,13 +76,9 @@ Definition continuous_on (f : Q -> Q) (a b : Q) : Prop :=
 
 Continuity is a *stable* property: it survives the basic operations on functions, and so a rich class can be built from a few of the simplest continuous functions. Let us trace this construction; each of its steps is confirmed by a proved lemma of `Topology.v`.
 
-{
 *The simplest functions are continuous.* The identity $x \mapsto x$ is continuous: a small change of the argument is exactly a small change of the value (lemma `identity_continuous`). A constant function is trivially continuous: the value does not change at all (`constant_continuous`). The shift $x \mapsto x + c$ is continuous (`add_const_continuous`). These are the starting bricks.
-}
 
-{
 *Operations preserve continuity.* The sum of two functions continuous at a point is continuous at that point (`continuous_at_sum`); the negation of a continuous function is continuous (`continuous_at_neg`); the composition of continuous functions is continuous (`continuous_at_comp`). Each of these lemmas of `Topology.v` closes the class of continuous functions under one more operation.
-}
 
 Putting the starting bricks together with these operations, we obtain a great deal at once: by addition, negation, shift, and composition, a rich class of continuous functions is built from the identity and the constants. The full claim—that *all* polynomials are continuous—requires one more link: a lemma on the preservation of continuity under multiplication. Among the lemmas of `Topology.v` on which the chapter relies here (`continuous_at_sum`, `continuous_at_neg`, `continuous_at_comp`, and the starting `identity_
 continuous`, `constant_continuous`), there is no such link;
@@ -134,7 +128,7 @@ Let us gather the analysis into a table.
 
 The analysis clarifies two subtleties to which the chapter will come later. The *three levels* of the intermediate value theorem (§ 3.5) are, by $P3$, three intensionally distinct *representations* of one root: three answers to the question “what is a root,” agreeing in content but different in type. And the *argmax* of the extreme value theorem (§ 3.7) is an $L5$-distinguished role-position: the order $L5$ makes the choice of the maximizer unambiguous where there are several candidate values. And the same analysis sets the pattern of Part V: every analytic notion is read as a system with its own E/R/R structure.
 
-## Uniform Continuity and the Boundary of $ℚ${Uniform Continuity and the Boundary of Q}
+## Uniform Continuity and the Boundary of $ℚ$
 
 ### The Definition of Uniform Continuity
 
@@ -151,9 +145,7 @@ Definition uniformly_continuous_on (f : Q -> Q) (a b : Q) : Prop :=
 
 The whole difference from the pointwise continuity of § 3.2 lies in the *order of quantifiers*. There, $\delta$ stood *inside* the quantifier over the point: “for each point, its own $\delta$.” Here, $\delta$ is moved *outside*, in front of the quantifier over $x$ and $y$: one $\delta$ for the whole interval. Swap two quantifiers, and a fundamentally different, stronger property results: a single scale at which the function behaves tamely everywhere on $[a,b]$ at once.
 
-{
 One honest word must be said about this notion, about its *status* in our construction. The canonical head file of the theory of continuity now exists: `analysis/Continuity.v`. It brings together the definitions `continuous_on`, `uniformly_continuous_on`, and `Lipschitz_on` (for $f\colonℚ\toℚ$ on an interval $[a,b]$), proves the bridge `lipschitz_uniform` (the Lipschitz property implies uniform continuity) and the passage `uniformly_continuous_pointwise`, and, together with them, elementary algebra (constant, identity, sum)—all without axioms. The honest caveat, however, is twofold. First, *migration*: the existing great theorems—`IVT_ERR.v`, `EVT_ERR.v`, `EVT_idx.v`, `HeineBorelComplete.v`—have *not* yet been moved onto this head file: each still carries its own local, verbatim repeated definition of `uniformly_continuous_on`, and reducing them to the canon has been postponed (so as not to set off a cascade of edits in what has already been proved). Second, the canon contains no reverse passage, from pointwise continuity to uniform continuity, and this is no omission: over $ℚ$ it is false (the Cantor–Heine theorem, to which the chapter turns below). So the head file sets the canon and the Lipschitz path to uniformity, but it will become a unified theory on which *all* theorems of the chapter rely only after the migration.
-}
 
 ### Cantor–Heine Fails over Q
 
@@ -189,9 +181,7 @@ Theorem lipschitz_uniform_cont : forall f a b L,
 
 Here is the meaning of this replacement. Over $ℝ$ the path to uniform continuity went like this: continuity $\Rightarrow$ (by Cantor–Heine) uniformity. Over $ℚ$ the first arrow is broken. But there is a detour: Lipschitz property $\Rightarrow$ uniformity—and this path is constructive; it does not depend on completeness. Where the classical picture uses an implication unprovable over $ℚ$, ToS uses a provable one: the Lipschitz property is a checkable, computable property, and uniform continuity follows from it by direct calculation.
 
-{
 And around this bridge stands the same algebra that surrounded pointwise continuity in § 3.2. The sum, scaling, and composition of uniformly continuous functions are again uniformly continuous, and the identity and constants are uniformly continuous: the class of uniformly continuous functions is just as closed and rich as the class of continuous ones. These closures are confirmed in `HeineBorelComplete.v` by the lemmas `uniform_cont_sum`, `uniform_cont_scale`, `uniform_cont_composition`.
-}
 
 ### Why the Theorems of Analysis Require Uniform Continuity
 
@@ -253,9 +243,7 @@ For bisection to work, the sign change must be preserved at the endpoints of eac
 
 One would naturally expect a *strict* invariant: at the endpoints of each interval, $f(\text{left}) < 0$ and $f(\text{right}) > 0$. But the strict invariant is *unprovable* over $ℚ$, and here is why. The midpoint of an interval is a rational number; $f$ is a function $ℚ \to ℚ$. It may well happen that $f(\text{mid})$ turns out to be *exactly equal* to zero: for a rational function this is a possible case, not an exception. If this happens, $f$ vanishes exactly at the new endpoint of the interval, and the strict inequality fails there.
 
-{
 Hence the provable invariant is a *weak* one: $f(\text{left}) \le 0$ and $f(\text{right}) \ge 0$, with non-strict inequalities. And this is quite enough. If at some midpoint $f$ has become exactly zero, so much the better: the root has been found literally; and if not, the weak invariant keeps squeezing the sign change between the endpoints. It is precisely the weak invariant that the theory needs, and it is precisely this invariant that `IVT_ERR.v` proves, under the name `bisection_preserves_signs_weak`; the word *weak* in the name is there for a reason. The weak formulation is an exact accounting of the fact that over $ℚ$ a function can hit zero exactly, not carelessness.
-}
 
 ### The Main Theorem
 
@@ -287,9 +275,7 @@ The intermediate value theorem is formalized in ToS *three times*—not out of r
 
 On the first level the root was a `RealProcess`: a function $ℕ \to ℚ$, a bare sequence of rational numbers to which the Cauchy property is *attached* by a separate lemma. To raise the result to the level of *processes* in the sense of `ProcessCore`—the apparatus on which all of Part V stands—means to rewrite the theorem in its language. This is what the second level does.
 
-{
 The main work here is to build *compatibility bridges*. The snag is technical: the Cauchy property is defined in two slightly different ways. `Archimedean_ERR`, where the bisection came from, formulates it through the condition $(m > N)$; `ProcessCore` formulates it through $(N \le m)$. The conditions are equivalent—up to a shift of $N$ by one—but formally they are different predicates, and before carrying the theorem over, one has to prove their equivalence. Having proved it, we obtain the bridges: `cauchy_compat` (the Cauchy properties coincide), `interval_compat` (the definitions of “lying in $[a,b]$” coincide), `equiv_compat` (the definitions of equivalence of processes coincide). Along these bridges the intermediate value theorem is rewritten in the types of `ProcessCore` as `process_IVT`, and `ivt_convergence_rate` fixes the rate, $1/2$. All this is the content of the file `ProcessIVT.v` (175 lines).
-}
 
 There are no new mathematical difficulties at this level: bisection and its convergence have already been proved, and here there is only a careful joining of the theorem to the process language of ToS. Nor does this level bring in axioms of its own: it inherits `classic` from `IVT_ERR`, adding nothing to it.
 
@@ -317,9 +303,7 @@ The lemma essential for this level is `continuous_compose_cauchy`. It asserts th
 
 It is worth saying why one fact is written three times. The point is *intensional precision*, the principle $P3$, not redundancy.
 
-{
 The three levels are three answers to the question “what is a root.” At the level of `IVT_ERR` it is a bare sequence plus a separate certificate of its Cauchy property. At the level of `ProcessIVT` it is a process in the sense of `ProcessCore`, built into the general apparatus of Part V. At the level of `IVT_CauchyReal` it is an object in whose *type* the Cauchy property is already written. The mathematical content—bisection converging to the sign change—is one. But *how the object is given*, *what it is intensionally*, changes from level to level. By $P3$ this means precisely that we have before us three different, though agreeing, representations of one fact. ToS builds a ladder of typing, and the intermediate value theorem is written out on each of its rungs. In the terms of the analysis of § 3.2.4, these are three role-representations of one root, different in type and agreeing in content ($P3$).
-}
 
 ## The Extreme Value Theorem: The Grid
 
@@ -352,9 +336,7 @@ Now comes the crucial point of precision of the whole section. On the grid the m
 
 The *value* of the maximum is `max_on_grid`, the largest of the values of $f$ over the grid nodes. The *position* of the maximum is `argmax`, the node at which this largest value is attained. As the grid is refined, both would seem bound to converge. But this is not so.
 
-{
 The *process of values*, `sup_process`, converges. The file proves `sup_process_is_Cauchy`: the sequence of largest values over ever denser grids is a Cauchy process.
-}
 
 The *process of positions*, `argmax_process`, is *not bound* to converge. And `EVT_ERR.v` states this directly in a comment. Imagine a constant function: $f(x) = 1$ everywhere. Then the largest value is attained *at every* node of the grid. Without a fixed rule of choice, the “position of the maximum” is not uniquely defined here at all: under different admissible choices it can jump from node to node at each refinement. The process of values meanwhile converges impeccably: it is simply constant and equal to one.
 
@@ -378,9 +360,7 @@ Theorem EVT_complete : forall f a b,
 
 The theorem gives two processes: $M$, the process of values of the supremum, and $c$, the process of approximate maximizers. It asserts that $M$ is a Cauchy process; that $c$ lies in $[a,b]$; that at each step $f(c)$ coincides with $M$; and that $M$ *dominates* $f$: the value of $f$ at any point of the interval does not exceed $M$ (up to the process $\le$). The hypothesis is again `uniformly_continuous_on`, uniform continuity, for the reason given in § 3.3.4.
 
-{
 And here honesty requires us to note what is *absent* from this formulation compared with what one would like to prove. Looking at § 3.6.3, one would naturally expect the conclusion to contain the Cauchy property for the process of positions $c$ as well. It is not there, and in such a general formulation it should not be: the maximization problem by itself does not guarantee the Cauchy property of the process of positions. With a plateau or several equally good maxima, the choice of position requires an additional rule; without it, the positional process may turn out to jump around. Therefore the formulation had to be *weakened*, leaving the Cauchy property only to the process of values $M$. It is precisely this—the convergence of $M$ and its dominating property—that is the honest content of the extreme value theorem over $ℚ$; and it is precisely so that `EVT_complete` is formulated in the repository (the comment of the file notes this weakening directly). The chapter does not pass off `EVT_complete` as the full classical theorem: it is its repaired, weakened—and therefore *true*—form.
-}
 
 ## The EVT: The Argmax Version, the Index Version, the Wrapper
 
@@ -388,9 +368,7 @@ And here honesty requires us to note what is *absent* from this formulation comp
 
 The extreme value theorem is formalized in the repository *twice*, and these two formalizations must be discussed directly, because one of them ran into a difficulty and the other got around it.
 
-{
 The first formalization is `EVT_ERR.v`, the argmax version. Today it is the *historical* version: its header carries the note *“DEPRECATED: Use EVT_idx.v instead”*, and it is not the one recommended for use. The trace of the difficulty for whose sake the version was replaced is visible inside the file as well: one lemma, `max_list_attained`, breaks off with the command `Abort`; it could not be proved in the intended form, and the workaround `max_list_attained_classical` was put to use. We do not hide this `Abort`: it is the very evidence that the argmax version ran into a wall.
-}
 
 The second formalization, `EVT_idx.v`, gets around this wall, and it is also today’s recommended, main version. To understand why the change of version was needed, let us examine what the difficulty consisted of and what its solution is.
 
@@ -422,11 +400,9 @@ The result of the section `EVT_STRONG` of the file is the theorem `EVT_strong_pr
 
 ### The Process Wrapper
 
-{
 The third file, `ProcessEVT.v` (133 lines), plays the same role as `ProcessIVT.v` does for the intermediate value theorem: a thin wrapper that carries the result over into the process language of `ProcessCore`. Cauchy-compatibility bridges (`evt_cauchy_
 compat`), `sup_process_cauchy`, `process_EVT`;
 `evt_convergence_rate` fixes the rate, $1/2$.
-}
 
 Here one caveat about consistency matters. `ProcessEVT.v` wraps precisely the layer of `EVT_ERR.v`: it imports the *historical* argmax version, not the new index version `EVT_idx.v`. Therefore `ProcessEVT.v` should be read as a process adaptation of the historical formulation of the extreme value theorem. And for the question of the attainment of the maximum on the grid and for resolving the difficulty of “`Qeq` versus Leibniz equality,” the main file remains `EVT_idx.v`.
 
@@ -463,17 +439,13 @@ Theorem uniform_limit_continuous_on :
 
 One honest caveat about boundaries. The file `UniformConvergence.v` is broader than this one theorem: it also contains the interchange of limit and integral, the interchange with the derivative, and Dini’s theorem. But these topics rest on integration and differentiation, an apparatus that Part V builds *later*. Chapter 5.3 takes from `UniformConvergence.v` only what pertains to continuity proper: the definition `continuous_on` and the theorem on the uniform limit. The interchange of the limit with the integral and the derivative is material for one of the following chapters of Part V.
 
-{
 And, as agreed in § 3.1, a word about axiom status. The header of the file `UniformConvergence.v` declares that the file *as a whole* imports the classical layer: `classic` comes into it through adjacent results on monotone convergence and differentiation. The proof of `uniform_limit_continuous_on` itself has the standard $\varepsilon/3$ form. However, without a separate `Print Assumptions` check of precisely this theorem, the chapter does not assert its axiomatic purity, by the audit rule established back in Chapter 4.6: axiom status is established by the `Print
 Assumptions` of a *concrete* theorem, not ascribed to it from the file header.
 Therefore the chapter uses `uniform_limit_continuous_on` as a working result on uniform limits and leaves the judgment about its axiomatic purity to that check.
-}
 
 ### An Adjacent Stub: Maps of Processes
 
-{
-For the map to be complete, one more file is worth mentioning: `ProcessContinuity.v`. Its name promises a theory of continuity, but its content is different, and it is more honest to say so directly. The file is small (36 lines) and speaks not of the continuity of functions $ℚ \to ℚ$ but of *maps of processes*, maps $`RealProcess` \to `RealProcess`$. It introduces `process_map_lipschitz` (the Lipschitz property of such a map) and `process_contraction` (contraction), notions that belong to the future line of fixed points, not to the present chapter. Its theorem with the grand name `continuity_foundation`, like the namesake “foundation” theorems of Chapter 5.1, is honestly only a *conjunction of two trivial lemmas* (the identity map is Lipschitz with constant $1$, a constant map with constant $0$). `ProcessContinuity.v` has no direct bearing on the theory of the continuity of functions; the chapter says so directly.
-}
+For the map to be complete, one more file is worth mentioning: `ProcessContinuity.v`. Its name promises a theory of continuity, but its content is different, and it is more honest to say so directly. The file is small (36 lines) and speaks not of the continuity of functions $ℚ \to ℚ$ but of *maps of processes*, maps $\texttt{RealProcess} \to \texttt{RealProcess}$. It introduces `process_map_lipschitz` (the Lipschitz property of such a map) and `process_contraction` (contraction), notions that belong to the future line of fixed points, not to the present chapter. Its theorem with the grand name `continuity_foundation`, like the namesake “foundation” theorems of Chapter 5.1, is honestly only a *conjunction of two trivial lemmas* (the identity map is Lipschitz with constant $1$, a constant map with constant $0$). `ProcessContinuity.v` has no direct bearing on the theory of the continuity of functions; the chapter says so directly.
 
 ### What Has Been Built and What Is Being Prepared
 
@@ -481,7 +453,7 @@ The summary of the chapter comes as three lists, following the discipline of the
 
 **Built and checked.**
 
-- { The topological face of continuity over $ℚ$—the $\delta$-$\varepsilon$ definition (`continuous_at`, `continuous`, `continuous_on`), the algebra of continuous functions, the preimage of an open set is open; constructively, without axioms (`Topology.v`).}
+- The topological face of continuity over $ℚ$—the $\delta$-$\varepsilon$ definition (`continuous_at`, `continuous`, `continuous_on`), the algebra of continuous functions, the preimage of an open set is open; constructively, without axioms (`Topology.v`).
 - Uniform continuity and the constructive bridge to it: `lipschitz_uniform_cont` (the Lipschitz property implies uniform continuity), with the algebra of uniformly continuous functions.
 - The intermediate value theorem on three levels: the $\varepsilon$-version (`IVT_process`), the process wrapper (`process_IVT`), the type upgrade to `CauchySeq` (`ivt_cauchy_real`); the root is a bisection Cauchy process.
 - The extreme value theorem in two versions: the historical argmax version `EVT_complete` is kept but marked as deprecated; the current recommended index-based version is `EVT_strong_process`. In both, the process of values of the supremum is Cauchy.
@@ -494,26 +466,23 @@ The summary of the chapter comes as three lists, following the discipline of the
 
 **Not built in this chapter.**
 
-- { The Cantor–Heine theorem over $ℚ$: pointwise continuity on a closed interval *does not imply* uniform continuity; this is a mathematical fact, not a gap, and the reason is the incompleteness of $ℚ$.}
+- The Cantor–Heine theorem over $ℚ$: pointwise continuity on a closed interval *does not imply* uniform continuity; this is a mathematical fact, not a gap, and the reason is the incompleteness of $ℚ$.
 - Convergence of the process of *positions* of the maximum: over $ℚ$, `argmax_process` need not be Cauchy; only the convergence of the process of *values* is proved.
-- { Migration of the theorems onto the head file: the canonical head file of the theory of continuity has been built (`analysis/Continuity.v`: the canon `continuous_on`, `uniformly_continuous_on`, `Lipschitz_on` and the Lipschitz bridge), but the existing theorems (IVT, EVT, HeineBorelComplete) have not yet been moved onto it; each carries its own local definition.}
+- Migration of the theorems onto the head file: the canonical head file of the theory of continuity has been built (`analysis/Continuity.v`: the canon `continuous_on`, `uniformly_continuous_on`, `Lipschitz_on` and the Lipschitz bridge), but the existing theorems (IVT, EVT, HeineBorelComplete) have not yet been moved onto it; each carries its own local definition.
 - Continuity of functions on the quotient classes `RealPoint`: the material of the chapter lives at the level of functions $ℚ \to ℚ$.
 
-{
-
-**Prepares next.** Uniform continuity and the Lipschitz property are the working apparatus for the next chapter of Part V, on the derivative; the intermediate value and extreme value theorems are instruments on which the differential calculus will rely; the interchange of the uniform limit with the integral and the derivative (the rest of `Uniform\-
+**Prepares next.** Uniform continuity and the Lipschitz property are the working apparatus for the next chapter of Part V, on the derivative; the intermediate value and extreme value theorems are instruments on which the differential calculus will rely; the interchange of the uniform limit with the integral and the derivative (the rest of `Uniform
 Convergence.v`) is material for one of the following chapters.
-}
 
 ### Summary of the Chapter
 
 Chapter 5.3 has taken continuity from the $\delta$-$\varepsilon$ definition to the two great theorems of analysis. Its main lesson concerns the *two faces of continuity*. Over $ℚ$, pointwise and uniform continuity do not coincide: the Cantor–Heine theorem, which glues them together over $ℝ$, is false over $ℚ$—the same incompleteness that brought down Heine–Borel. Therefore both main theorems, on the intermediate value and on the extreme value, honestly carry precisely uniform continuity in their hypotheses, and both build a *process* rather than a classical “point”: a bisection converging to the sign change, and a refining grid whose values of the supremum form a Cauchy process.
 
-{*The summary of the chapter comes in three parts. First: what is built. The topological face of continuity over $ℚ$—the definition, the algebra of continuous functions, the preimage theorem—is built constructively, without axioms, within the file `Topology.v`. Uniform continuity is furnished with a constructive bridge—the Lipschitz property implies uniform continuity—in place of the Cantor–Heine theorem, which is unprovable over $ℚ$. The intermediate value theorem is proved on three levels of typing, the extreme value theorem in two versions; the uniform limit of continuous functions is continuous.*}
+*The summary of the chapter comes in three parts. First: what is built. The topological face of continuity over $ℚ$—the definition, the algebra of continuous functions, the preimage theorem—is built constructively, without axioms, within the file `Topology.v`. Uniform continuity is furnished with a constructive bridge—the Lipschitz property implies uniform continuity—in place of the Cantor–Heine theorem, which is unprovable over $ℚ$. The intermediate value theorem is proved on three levels of typing, the extreme value theorem in two versions; the uniform limit of continuous functions is continuous.*
 
-{*Second: what this rests on. The topological face of continuity rests on pure construction. The intermediate value and extreme value theorems rest on $L3$, the Law of Excluded Middle of ToS. The technical Rocq axiom `classic` is an implementation of $L3$; appealing to it is an explicit accounting of the level of a proof, not a departure from rigor.*}
+*Second: what this rests on. The topological face of continuity rests on pure construction. The intermediate value and extreme value theorems rest on $L3$, the Law of Excluded Middle of ToS. The technical Rocq axiom `classic` is an implementation of $L3$; appealing to it is an explicit accounting of the level of a proof, not a departure from rigor.*
 
-{*Third: what remains open. The Cantor–Heine theorem is false over $ℚ$: this is a mathematical fact. The process of positions of the maximum over $ℚ$ need not be Cauchy; only the convergence of the process of values is proved. The canonical head file of the theory of continuity has been built (`analysis/Continuity.v`), but the migration of the existing theorems (IVT, EVT) onto it has been postponed for now. The chapter has given continuity and its two theorems; the derivative, which will stand on this basis, is the subject of the next chapter of Part V.*}
+*Third: what remains open. The Cantor–Heine theorem is false over $ℚ$: this is a mathematical fact. The process of positions of the maximum over $ℚ$ need not be Cauchy; only the convergence of the process of values is proved. The canonical head file of the theory of continuity has been built (`analysis/Continuity.v`), but the migration of the existing theorems (IVT, EVT) onto it has been postponed for now. The chapter has given continuity and its two theorems; the derivative, which will stand on this basis, is the subject of the next chapter of Part V.*
 
 ---
 

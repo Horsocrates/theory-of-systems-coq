@@ -2,7 +2,7 @@
 title: "Chapter 3. The Wave Equation: Propagation"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/09 Уравнения в частных производных/03 Волновое уравнение распространение.md"
-sourceBlob: 7f9ebbcf46580385103207ce6fc050aa3d891159
+sourceBlob: 690f263f9c1c412901a83002a7f76bdc0f2b5a64
 translated: 2026-10-20
 status: draft
 ---
@@ -53,7 +53,7 @@ $$
 
 Unlike heat, here *two* previous levels are needed: the current profile $u^n$ and the past one $u^{n-1}$. This is a direct consequence of the second order in time—just as an ordinary oscillator needs both position and velocity.[^2]
 
-The connection with Part VIII is literal here. The harmonic oscillator $y» = -y$ (Chapter 8.5) was *one* oscillating point. The wave equation is a *chain* of such oscillators coupled by the Laplacian: each node oscillates, pushed by its neighbors, $u»_j = c^2(u_{j+1} - 2u_j + u_{j-1})$. A wave is a *distributed oscillation*, and propagation is the transmission of a disturbance along a chain of couplings. (The hierarchy “oscillation $\to$ vibration $\to$ wave” is traced in the acoustics layer of the repository.)
+The connection with Part VIII is literal here. The harmonic oscillator $y'' = -y$ (Chapter 8.5) was *one* oscillating point. The wave equation is a *chain* of such oscillators coupled by the Laplacian: each node oscillates, pushed by its neighbors, $u''_j = c^2(u_{j+1} - 2u_j + u_{j-1})$. A wave is a *distributed oscillation*, and propagation is the transmission of a disturbance along a chain of couplings. (The hierarchy “oscillation $\to$ vibration $\to$ wave” is traced in the acoustics layer of the repository.)
 
 *The pair $(u^n, u^{n-1})$ is the role-state of the wave: the second order in time requires two levels, as an oscillator requires position and velocity. The Laplacian here plays the role-coupling between neighboring oscillators, not the role-averaging, as in heat. The wave is a role-process of propagation along this coupling.*
 
@@ -111,8 +111,7 @@ rational values at the nodes on two time levels, a finite grid, the Courant numb
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is that the state of the wave is a *pair* of levels, not a single profile: an attempt to make do with one level would confuse the second-order role-state with the first-order one. And it is essential that causality is expressed through the finite domain of dependence—a finite fact about the formula of the step—not through a completed cone of influence as an object. That is precisely why the wave here needs neither a completed energy nor the continuum limit: propagation is a process with finite speed.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is that the state of the wave is a *pair* of levels, not a single profile: an attempt to make do with one level would confuse the second-order role-state with the first-order one. And it is essential that causality is expressed through the finite domain of dependence—a finite fact about the formula of the step—not through a completed cone of influence as an object. That is precisely why the wave here needs neither a completed energy nor the continuum limit: propagation is a process with finite speed.
 
 What the analysis yields. It translates the chapter into the language of structure: *the wave is a Role-propagation*; *the Laplacian is a Role-coupling* (not averaging); *finite speed is a Role-consequence* of locality; and the values on two levels are *Elements*. To take the completed wave or its energy as an object-Element is to put the role-limit in the place of an Element. The wave is a process of propagation with finite speed; its energy and the continuum limit are a direction, not built entities.
 

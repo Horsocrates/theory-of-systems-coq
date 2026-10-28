@@ -2,7 +2,7 @@
 title: "Chapter 1. Categories as Metasystems"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/01 Категории как метасистемы.md"
-sourceBlob: ffeea9b30eb5f6f47625686768c94ed5a3916eb2
+sourceBlob: 93a66e8ff02a43ce4dc9b50ba587e18ad83acd86
 translated: 2026-10-20
 status: draft
 ---
@@ -16,11 +16,11 @@ In the ToS ontology the shift acquires a character of its own. A category is an 
 > **The categorical language is a language, not the subject matter of ToS.** ToS does not reduce to category theory;
 > category theory serves as a *metalanguage* for describing the links of ToS.
 
-This chapter takes the first step: it gives the formal concept of a category (a return to Chapter 1.5 on E/R/R), the basic *universal constructions* (terminal/initial object, product, coproduct), a survey of the standard categories, and—what is essential for ToS—it shows their *constructive* nature (a type, not a “set,” without the Axiom of Choice; a bridge to Part X). At the end we build the first concrete category—the *category of setoids* `SetoidCat`, which will become the working stage of Chapters 14.2 and 14.6.
+This chapter takes the first step: it gives the formal concept of a category (a return to Chapter I.4 on E/R/R), the basic *universal constructions* (terminal/initial object, product, coproduct), a survey of the standard categories, and—what is essential for ToS—it shows their *constructive* nature (a type, not a “set,” without the Axiom of Choice; a bridge to Part X). At the end we build the first concrete category—the *category of setoids* `SetoidCat`, which will become the working stage of Chapters 14.2 and 14.6.
 
 ## The Category as an E/R/R Structure of Higher Order
 
-A return to Chapter 1.5. A system there is a structure of *elements* with *roles* and *rules*. A category $\mathcal{C}$ is the same triad raised one level higher:
+A return to Chapter I.4. A system there is a structure of *elements* with *roles* and *rules*. A category $\mathcal{C}$ is the same triad raised one level higher:
 
 - **Elements:** objects (the type `cat_obj`) and arrows/morphisms (the type `cat_mor` $a b$);
 - **Roles:** the identity arrow `cat_id` $a$ (*the neutral*) and composition `cat_comp` $f g$ (*the combinator*);
@@ -29,8 +29,8 @@ A return to Chapter 1.5. A system there is a structure of *elements* with *roles
 In Rocq this is a full-fledged record.[^1]
 
 $$
-`Record Category` := \{\ `cat_obj` : \mathrm{Type};\ \
-  `cat_mor` : `cat_obj`\to`cat_obj`\to\mathrm{Type};\ …\ \}.
+\texttt{Record Category} := \{\ \texttt{cat\_obj} : \mathrm{Type};\ \
+  \texttt{cat\_mor} : \texttt{cat\_obj}\to\texttt{cat\_obj}\to\mathrm{Type};\ …\ \}.
 $$
 
 **A subtlety that will later become a principle.**  The field `cat_mor_eq` sets its *own* equality of morphisms—a *setoid* equality rather than the Leibniz one (with explicit reflexivity, symmetry, transitivity, and compatibility with composition). This is not a technical detail: P3 is already built in here—the distinction between “equal” and “isomorphic/equivalent,” which will become central in Chapter 14.3 (`P3_strictly_stronger_than_iso`).
@@ -46,8 +46,7 @@ The categorical shift consists in this: an object is given *by its role in the n
 - **Product** $A\times B$: an object with projections $\pi_A,\pi_B$ through which any pair $f:C\to A$, $g:C\to B$ factors uniquely.
 - **Coproduct** $A+B$: dually, with injections.
 
-{
-It is machine-checked that these roles are *determined uniquely up to isomorphism*: the initial and terminal objects are unique (`initial_unique_ up_to_iso`, `terminal_unique_ up_to_iso`); isomorphism is an equivalence relation (`iso_refl`/`iso_sym`/`iso_trans`); every isomorphism is monic and epic (`iso_is_mono`, `iso_is_epi`); a composition of monos/epis is again a mono/epi.[^2]}
+It is machine-checked that these roles are *determined uniquely up to isomorphism*: the initial and terminal objects are unique (`initial_unique_up_to_iso`, `terminal_unique_up_to_iso`); isomorphism is an equivalence relation (`iso_refl`/`iso_sym`/`iso_trans`); every isomorphism is monic and epic (`iso_is_mono`, `iso_is_epi`); a composition of monos/epis is again a mono/epi.[^2]
 
 From the standpoint of ToS a universal property is a *rule* (L5) that constitutes an object through its role. The question is “how does $A\times B$ behave with respect to all the others,” rather than “what is $A\times B$ inside.” This is exactly the move that makes the categorical language a metalanguage: it speaks of links, not of substance.
 
@@ -59,13 +58,13 @@ One record `Category` covers all of ordinary mathematics:
 
 | **Category** | **Objects** | **Morphisms** |
 |---|---|---|
-| \Set | sets/types | functions |
+| $\mathbf{Set}$ | sets/types | functions |
 | $\mathbf{Grp}$ | groups | homomorphisms |
 | $\mathbf{Ring}$/$\mathbf{Field}$ | rings/fields | homomorphisms |
 | $\mathbf{Vec}_k$ | vector spaces | linear maps |
 | $\mathbf{Top}$ | topological spaces | continuous maps |
 | $\mathbf{Man}$ | smooth manifolds | smooth maps |
-| \Cat | categories | functors (Chapter 14.2) |
+| $\mathbf{Cat}$ | categories | functors (Chapter 14.2) |
 
 In the ToS formalization each such category is a concrete record of type `Category`. The basic example is already built: `TypeCat`, the category of types and functions (the equality of morphisms is pointwise; `TypeCat_valid`, `TypeCat_id_is_iso`, `TypeCat_comp_iso`). The manifolds, groups, and fields of Parts XI–XII live in their own categories; Part XIV gives the language that unites them.
 
@@ -74,7 +73,7 @@ In the ToS formalization each such category is a concrete record of type `Catego
 Classical category theory often speaks of a “set of objects,” which is problematic in the ToS ontology (Part X: set theory without choice; P4: there is no completed infinity). ToS categories work on *types*:
 
 $$
-`cat_obj` : \mathrm{Type}, \quad `cat_mor`\ a\ b : \mathrm{Type}.
+\texttt{cat\_obj} : \mathrm{Type}, \quad \texttt{cat\_mor}\ a\ b : \mathrm{Type}.
 $$
 
 In the *basic categorical layer of this chapter* no axiom of choice is used; the equality of morphisms is a constructive setoid relation (`cat_mor_eq`), not the Leibniz one. `Category.v` is closed without axioms (20 machine-checked lemmas, 0 axioms). The *process* categories further on (14.6) have their own axiom price (they inherit `classic` through the Cauchy layer); this will enter the map of boundaries in 14.7.
@@ -114,7 +113,7 @@ Yoneda embedding**. This will give an exact form to the thesis already built int
 ---
 
 [^1]: `src/stdlib/Category.v` (20 Qed, 0 axioms; in `origin/main`): `Record Category` with the fields `cat_obj`, `cat_mor`, `cat_mor_eq` (the equality of morphisms), `cat_id`, `cat_comp` and the axioms `cat_assoc`, `cat_id_l`, `cat_id_r`, `cat_comp_compat`; plus `TypeCat`, `is_iso`/`is_mono`/`is_epi`, `is_initial`/`is_terminal`, `opposite_cat`.
-[^2]: The same 20 Qed of the file `Category.v`: `iso_refl`, `iso_sym`, `iso_trans`, `iso_inv_unique`, `cat_id_unique`, `comp_mono`, `comp_epi`, `iso_is_mono`, `iso_is_epi`, `initial_unique_ up_to_iso`, `terminal_unique_ up_to_iso`, `iso_in_opposite`, and others. All 0 axioms.
+[^2]: The same 20 Qed of the file `Category.v`: `iso_refl`, `iso_sym`, `iso_trans`, `iso_inv_unique`, `cat_id_unique`, `comp_mono`, `comp_epi`, `iso_is_mono`, `iso_is_epi`, `initial_unique_up_to_iso`, `terminal_unique_up_to_iso`, `iso_in_opposite`, and others. All 0 axioms.
 [^3]: `src/category/SetoidCategory.v` (3 Qed, 0 axioms): `Setoid` (a carrier + `st_eq`/`st_refl`/`st_sym`/ `st_trans`), `SetoidMor` (a map + `sm_resp`), `SetoidCat` as a `Category` (`SetoidCat_mor_eq_iff`, `SetoidCat_comp_map`, `SetoidCat_id_map`); `discrete_setoid` as an example. *A caveat on reproducibility:* the layer `src/category/` (13 files, 49 Qed, 0 axioms, `Print Assumptions`${}={}$“Closed under the global context”, commit `90ebd74`) has been built and checked *locally*; synchronization with the main branch is an item of the checklist (plan v2).
 
 ---

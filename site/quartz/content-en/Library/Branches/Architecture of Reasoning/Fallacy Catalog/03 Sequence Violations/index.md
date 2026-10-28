@@ -2,7 +2,7 @@
 title: "Violations of Sequence (Type 3)"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/03 Нарушения последовательности/index.md"
-sourceBlob: 54e14258d9ab859820df624b36dd9013bdb644b0
+sourceBlob: f62bac2ebff42aab7f715098dc82bc935fce7102
 translated: 2026-10-20
 status: draft
 description: "Reasoning moves backward, in a circle, or with inverted roles."
@@ -50,7 +50,6 @@ Each form has fallacies of its own.
 
 The fallacies of this type are different ways of breaking one order: the vicious circle and the Texas sharpshooter go backward from the conclusion; the non sequitur and the appeal skip a link; the halo effect mixes domains; the red herring substitutes the object. All of them *look* like reasoning—with their own vocabulary, structure, and appearance of justification. Their defect is structural rather than one of content: correct operations in the wrong order. That is why they are so tenacious and so contagious: the form is observed, and an eye that seeks the error in the content does not find it.
 
-Basis: the chapter “Violations of Sequence” in *Architecture of Reasoning*, vol. 2.
 <!-- PROSE:END -->
 
 ## Groups

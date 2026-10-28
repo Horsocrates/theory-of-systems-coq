@@ -2,15 +2,15 @@
 title: "Structural Paradoxes"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/index.md"
-sourceBlob: d1e1a04f70a57edfd63ce7cb9d79b2aeb58e28e8
+sourceBlob: a94250b7434c86d8bf2c7ca0baead349284ba8b7
 translated: 2026-10-20
 status: draft
-description: "The construction itself confuses levels—the vertical of the Law of Order (Order) is violated: an operation takes itself as an object, an element acts as its own rule. To lay the paradox open is to expose the…"
+description: "The construction itself confuses levels—the vertical of the Law of Order (Order) is violated: an operation takes itself as an object, an element acts as its own rule. There is no paradox here: the analysis lays open the violation of the hierarchy—the construction is ill-formed."
 ---
 
 **Category** · [[Paradox Catalog]]
 
-The construction itself confuses levels—the vertical of the Law of Order ([[Order]]) is violated: an operation takes itself as an object, an element acts as its own rule. To lay the paradox open is to expose the violation of the hierarchy: the construction is not paradoxical; it is ill-formed.
+The construction itself confuses levels—the vertical of the Law of Order ([[Order]]) is violated: an operation takes itself as an object, an element acts as its own rule. There is no paradox here: the analysis lays open the violation of the hierarchy—the construction is ill-formed.
 
 Total: **13**, by subtype of flaw. Concept: [[Paradox]]. **In bold**—the central analyses.
 

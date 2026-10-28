@@ -2,7 +2,7 @@
 title: "Zeno’s Dichotomy"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Дихотомия Зенона.md"
-sourceBlob: bec84451897fd1bd2101c68d6aeb506338ce9da3
+sourceBlob: 874017b2864277abaf6f4253d551867886ae9629
 translated: 2026-10-20
 status: draft
 description: "Infinite division ≠ the impossibility of completion"
@@ -48,13 +48,13 @@ The computational part could not be shorter: 1/2 + 1/4 + 1/8 + … = 1; the time
 
 ## Lesson
 
-**On the two edges.** A description may have neither a first nor a last member—and both are facts about the description; transferring them to the object is one and the same error from two ends. **On “beginning.”** On hearing “it cannot begin,” check: does the process lack a beginning—or does the chosen partition lack a first member? **On the purity of form.** The dichotomy is Achilles without the tortoise: take away the race, and you see the mechanism bare; reducing a problem to its pure form is half of untying it.
+**On the two edges.** A description may have neither a first nor a last member—and both are facts about the description; transferring them to the object is one and the same error from two ends. **On “beginning.”** On hearing “it cannot begin,” check: does the process lack a beginning—or does the chosen partition lack a first member? **On the purity of form.** The dichotomy is Achilles without the tortoise: take away the race, and you see the mechanism bare; reducing a problem to its pure form is half of laying it open.
 
 ## Kin by Mechanism
 
 [[Zenos Achilles|Zeno’s Achilles]] (the same mechanics with characters—the full analysis of the ground is there), [[Zenos Arrow|Zeno’s Arrow]] (the third aporia: the instant instead of division), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks: “after all the steps” mirrors “before all the steps”), [[Sorites Paradox|Sorites]] (a neighbor by the registry field: the instrument does not fit the object).
 
-**Machine check.** The convergence of the halving series is a special case of what has been formalized: `geometric_series_cauchy` with r = 1/2, `series_limit` (src/SeriesConvergence.v); infinity as a process—`RealProcess := nat -> Q` (src/process/ProcessCore.v, P4). In the registry of 46 it is `D14_ZenoDichotomy`: the field `InstrumentObjectMismatch`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** The convergence of the halving series is a special case of what has been formalized: `geometric_series_cauchy` with r = 1/2, `series_limit` (src/SeriesConvergence.v); infinity as a process—`RealProcess := nat -> Q` (src/process/ProcessCore.v, P4). In the registry of 46 it is `D14_ZenoDichotomy`: the field `InstrumentObjectMismatch`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

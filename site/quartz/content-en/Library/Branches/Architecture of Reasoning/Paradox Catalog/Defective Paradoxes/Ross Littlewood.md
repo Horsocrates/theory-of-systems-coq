@@ -2,7 +2,7 @@
 title: "Ross–Littlewood Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс Росса-Литтлвуда.md"
-sourceBlob: 7451ce022851dda1dd1c7c1bfabba50f1a517778
+sourceBlob: 5c4bd02070add685f9742e778105a7fdbc63af60
 translated: 2026-10-20
 status: draft
 description: "Infinite operations do not commute"
@@ -52,9 +52,9 @@ Separating the questions does the main work. The limit of the quantity: the proc
 
 ## Kin by Mechanism
 
-[[Thomsons Lamp|Thomson’s Lamp]] (a pair for comparison: there the fate-states do not converge—everything is underdetermined; here they converge—the completion is singled out), [[Hilberts Hotel|Hilbert’s Hotel]] (bookkeeping on the infinite), [[Galileos Paradox|Galileo]] (count against correspondence—the same pair of operations an age earlier), [[Zenos Dichotomy|Zeno’s Dichotomy]] (a moment outside the series), conditionally convergent series (rearranging the terms changes the sum—the arithmetical twin of the order variation).
+[[Thomsons Lamp|Thomson’s Lamp]] (a pair for comparison: there the fate-states do not converge—everything is underdetermined; here they converge—the completion is singled out), [[Hilberts Hotel|Hilbert’s Hotel]] (bookkeeping on the infinite), [[Galileos Paradox|Galileo]] (count against correspondence—the same pair of operations three centuries earlier), [[Zenos Dichotomy|Zeno’s Dichotomy]] (a moment outside the series), conditionally convergent series (rearranging the terms changes the sum—the arithmetical twin of the order variation).
 
-**Machine check.** In the registry of 46 it is `D25_RossLittlewood`: the field `ConceptualAmbiguity`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground: a limit value is a predicate of a fundamental process (src/CauchyReal.v); the process of the quantity 9, 18, 27, … is not fundamental—“the limit of the quantity” has no bearer, whereas the fate of each ball is a converging (eventually constant) process: the difference between the two questions is visible in the base itself. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D25_RossLittlewood`: the field `ConceptualAmbiguity`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground: a limit value is a predicate of a fundamental process (src/CauchyReal.v); the process of the quantity 9, 18, 27, … is not fundamental—“the limit of the quantity” has no bearer, whereas the fate of each ball is a converging (eventually constant) process: the difference between the two questions is visible in the base itself. Map: [[Formalization]].
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Chapter 2. Depth = Rung of Omniscience"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/02 Глубина = рунг всеведения.md"
-sourceBlob: 1f0bfc6ba938787ad1fa627cede5a99b94c88bf4
+sourceBlob: 8ffa81ecb1ec4cb0f3f9930d156470dd6cf56894
 translated: 2026-10-20
 status: draft
 ---
@@ -19,8 +19,7 @@ And here is the main observation of the chapter, one the classical view does not
 
 Let us outline the contribution honestly. *Proved exactly and without axioms*: the lowest storey is decidable (rung 0), the storey of predicates over ℕ corresponds exactly to the *limited principle of omniscience*, and this gradation collapses under the Law of Excluded Middle—that is, it is constructive[^1].
 
-{
-*Borrowed, not new*: the ascending implications between the rungs themselves ($\text{LPO}\to\text{WLPO}\to\text{LLPO}$ and others) are standard constructive reverse mathematics (Bishop, Ishihara). *Not proved here*: the *strictness* of the rungs—that the implications are irreversible, that the rungs are really distinct—requires model-theoretic constructions (realizability, Kripke models) and is not built in our foundation; this is stated honestly, and here we stop[^2]. Our own contribution is modest and exact: *to place the storeys of the tower on this ladder* and to record by machine *the constructivity of the gradation itself*.}
+*Borrowed, not new*: the ascending implications between the rungs themselves ($\text{LPO}\to\text{WLPO}\to\text{LLPO}$ and others) are standard constructive reverse mathematics (Bishop, Ishihara). *Not proved here*: the *strictness* of the rungs—that the implications are irreversible, that the rungs are really distinct—requires model-theoretic constructions (realizability, Kripke models) and is not built in our foundation; this is stated honestly, and here we stop[^2]. Our own contribution is modest and exact: *to place the storeys of the tower on this ladder* and to record by machine *the constructivity of the gradation itself*.
 
 ## The Zeroth Storey: Decidability without Omniscience
 
@@ -57,7 +56,7 @@ LLPO is an ultra-weak fork principle (“if two events cannot both fire, then on
 
 The ascending implications are proved: a higher rung implies a lower one[^5]. In particular, the cascade is strictly more demanding than a single question: $\text{LPO}_\omega\to\text{LPO}$ is proved directly[^6]. Thus the ladder grades the role-limit side: the higher up the tower a question rises, the higher its rung of omniscience.
 
-## The Gradation Is Constructive (and Visible Only through P4{P4})
+## The Gradation Is Constructive (and Visible Only through P4)
 
 Now for the observation for the sake of which the chapter was written.
 

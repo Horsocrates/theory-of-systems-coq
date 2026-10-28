@@ -2,7 +2,7 @@
 title: "Chapter 2. Walsh–Hadamard: A Transform without Transcendentals"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/02 Уолш–Адамар преобразование без трансцендентностей.md"
-sourceBlob: 88cd43cca4d965286a2625b5c4715f0b2bdc3f49
+sourceBlob: 56a97c72bfaa52b7c6ad36445daa794343d39ef5
 translated: 2026-10-20
 status: draft
 ---
@@ -169,8 +169,7 @@ $1/\sqrt N$ for odd $k$ are not actualized.
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the system takes as its element neither a completed infinite spectrum nor a transcendental value. “Frequency” is not a real number-element but a *role*-character of a finite group; the group $(ℤ_2^{ n},\oplus)$ is finite, it has exactly $N$ characters, and all of them are presented as rows of a concrete matrix.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the system takes as its element neither a completed infinite spectrum nor a transcendental value. “Frequency” is not a real number-element but a *role*-character of a finite group; the group $(ℤ_2^{ n},\oplus)$ is finite, it has exactly $N$ characters, and all of them are presented as rows of a concrete matrix.
 
 What the analysis yields. It reveals why Walsh is genuine harmonic analysis and not a surrogate for it: *a Walsh function is a Role* (a character of a group), *the transform is a Rule* (recursion plus orthogonality plus the conservation of energy), and the $\pm1$ values and amplitudes are *Elements* (finite, rational). Transcendence enters classical Fourier not through the *idea* of harmonic analysis but through the *choice of the group*: the circle. Replacing the circle by the Boolean cube, we obtain the same idea in a purely rational execution. To take “frequency” for a real number or the spectrum for a completed infinite object is to put a role-limit in the place of an Element, the same confusion of categories that guided Parts II and IV.
 
@@ -181,12 +180,12 @@ The next chapter outlines the boundary from the other side: what happens when th
 [^1]: The supporting file is `ProcessWalshHadamard.v` (directory `src/process/` of the ToS Rocq repository, 12 proved statements, 0 `Admitted`, 0 axioms), supplemented by `ProcessFourierON.v` (5 statements), `ProcessWalshCharacter.v` (7 statements), and `ProcessHadamardGate.v` (5 statements). The lemma names are in the notes below.
 [^2]: In the code the matrix is given recursively: `had k i j` returns the entry $(i,j)$ of the matrix $H_{2^k}$ as a value from $\{+1,-1\}$ (`ProcessWalshHadamard.v`); the size $N=2^k$ is `pow2 k`. The sign nature is fixed by the lemma `had_sq`: each entry squared equals $1$.
 [^3]: The central theorem `hadamard_orthogonal` in `ProcessWalshHadamard.v`: $\sum_{j<2^k} H_{ij}H_{i'j} = 2^k \delta_{ii'}$, proved by induction on $k$. The diagonal case ($i=i'$) is `walsh_norm`: each row has squared norm $N$. The concrete $N=2,4$ are `hadamard_2_orthogonal`, `hadamard_4_orthogonal`. All: 0 axioms.
-[^4]: The theorem `had_character` in `ProcessWalshCharacter.v`: $`had `k i (a\oplus b) = `had `k i a \cdot `had `k i b$, proved by induction on $k$ with an analysis of the bit structure of `Nat.lxor` (XOR). 0 axioms. XOR here is the operation of the group $ℤ_2^{ n}$.
+[^4]: The theorem `had_character` in `ProcessWalshCharacter.v`: $\texttt{had }k i (a\oplus b) = \texttt{had }k i a \cdot \texttt{had }k i b$, proved by induction on $k$ with an analysis of the bit structure of `Nat.lxor` (XOR). 0 axioms. XOR here is the operation of the group $ℤ_2^{ n}$.
 [^5]: The general convolution is `walsh_convolution` in `ProcessWalshConvolutionGeneral.v`: $H(f\ast g)=(Hf)\cdot(Hg)$ for all $2^k$, through the character (`had_character`) and the lemma `xor_perm_q_sum` (the invariance of `q_sum` under the XOR bijection, proved by Sylvester’s block recursion). 0 axioms.
 [^6]: The theorem `parseval_walsh` in `ProcessFourierON.v`: $\inner{Hf}{Hf}_N = N \inner{f}{f}_N$, derived from the self-adjointness of the transform (the Walsh matrix is symmetric, `had_symmetric`) and the identity $H^2=N\cdot I$. 0 axioms.
 [^7]: `walsh_HH` in `ProcessFourierON.v`: $H(Hf)=N f$ (Fourier inversion up to $1/N$); it follows from $H_N^{\mathsf T}H_N=N\cdot I$ and the symmetry of $H$.
-[^8]: `hgate_involution` in `ProcessHadamardGate.v`: for the normalized gate $`hgate`(`hgate ` f)=f$. The normalization $1/\sqrt2$ is introduced as an abstract parameter $s$ with the relation $s^2\cdot2=1$; the identity $H(Hf)=2f$ (the special case $N=2$) then gives $s^2\cdot 2\cdot f=f$. The entries of $H_2$ themselves are from $\{\pm1\}$ (`hadamard_2x2`).
-[^9]: `hgate_superposition`: $`hgate` e_0 = (s,s)$, equal amplitudes on two coordinates. This is the passage from a definite state to a superposition performed by the Hadamard gate.
+[^8]: `hgate_involution` in `ProcessHadamardGate.v`: for the normalized gate $\texttt{hgate}(\texttt{hgate } f)=f$. The normalization $1/\sqrt2$ is introduced as an abstract parameter $s$ with the relation $s^2\cdot2=1$; the identity $H(Hf)=2f$ (the special case $N=2$) then gives $s^2\cdot 2\cdot f=f$. The entries of $H_2$ themselves are from $\{\pm1\}$ (`hadamard_2x2`).
+[^9]: `hgate_superposition`: $\texttt{hgate} e_0 = (s,s)$, equal amplitudes on two coordinates. This is the passage from a definite state to a superposition performed by the Hadamard gate.
 [^10]: The headers give the labeling directly: `ProcessWalshHadamard.v`—Elements: the $\pm1$ matrix, size $2^k$; Rules: Sylvester’s recursion, $H^{\mathsf T}H=N\cdot I$. `ProcessWalshCharacter.v`—Rules: $\mathrm{w}_i(a\oplus b)=\mathrm{w}_i(a)\mathrm{w}_i(b)$; Roles: $\mathrm{w}_i$ is a character $(ℤ_2^{ n},\oplus)\to\{\pm1\}$. `ProcessFourierON.v`—Rules: $\norm{Hf}^2=N\norm{f}^2$.
 
 ---

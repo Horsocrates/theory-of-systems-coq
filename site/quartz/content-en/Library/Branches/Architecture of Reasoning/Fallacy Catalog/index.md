@@ -3,7 +3,7 @@ title: "Fallacy Catalog"
 aliases: ["Fallacies"]
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/index.md"
-sourceBlob: 30d267559dc7bb9c1a70174cd2ba15713eca2bd1
+sourceBlob: ae7a3a50d990e38ea75eb429c2937651dedf57ba
 translated: 2026-10-20
 status: draft
 ---
@@ -114,8 +114,8 @@ Five types → groups → mechanisms of violation; each node is a link. *(Genera
     - [[2.5 Domain 5 Inference#Scale Error|2.5.4 · Scale Error]] — 10
   - [[2.6 Domain 6 Reflection|2.6 · Domain 6: Reflection]] — 22
     - [[2.6 Domain 6 Reflection#Illusion of Completion|2.6.1 · Illusion of Completion]] — 6
-    - [[2.6 Domain 6 Reflection#Self-Assessment Distortion|2.6.2 · Self-Assessment Distortion]] — 2
-    - [[2.6 Domain 6 Reflection#Past Investment Influence|2.6.3 · Past Investment Influence]] — 2
+    - [[2.6 Domain 6 Reflection#Self-Assessment Distortion|2.6.2 · Self-Assessment Distortion]] — 1
+    - [[2.6 Domain 6 Reflection#Past Investment Influence|2.6.3 · Past Investment Influence]] — 3
     - [[2.6 Domain 6 Reflection#Immunization from Testing|2.6.4 · Immunization from Testing]] — 12
 - **[[03 Sequence Violations|Type 3 · Violations of Sequence]]** — 3
   - [[3.2 Backward Movement|3.2 · Reverse Movement]] — 2

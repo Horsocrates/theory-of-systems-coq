@@ -1,8 +1,8 @@
 ---
-title: "Chapter 7. The Ontological Core: Recurring Motifs"
+title: "Chapter 7. The Ontological Core"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/07 Онтологическое ядро сквозные мотивы.md"
-sourceBlob: f341b45f489a4844f12441b36e9363fd3cc277b4
+sourceBlob: 60a224216ea5dbbfba7c8ba80fd3a6457c5e3097
 translated: 2026-10-20
 status: draft
 ---
@@ -23,43 +23,24 @@ in the act of distinction rather than preexisting it. These decisions
 worked, but they were not *gathered* and *explicitly declared* as the
 ontological positions of the volume.
 
-The present chapter gathers them. It declares the *recurring
-motifs*—the ontological positions to which ToS returns throughout all
-the subsequent parts of the volume—and fixes the *reading program* for
-these parts. The chapter is ontological: it clarifies on what
-ontological grounds the already-built apparatus stands, rather than
-introducing new formal apparatus. Some of the nodes gathered below have
-direct Rocq anchors; some have partial formal traces; some are
-methodological motifs that will unfold in later parts.
+The present chapter gathers them as the *ontological positions* to which
+ToS returns throughout all the subsequent parts of the volume, and fixes
+the *reading program* for these parts. The chapter is ontological: it
+clarifies on what ontological grounds the already-built apparatus
+stands, rather than introducing new formal apparatus. Some of the nodes
+gathered below have direct Rocq anchors; some have partial formal
+traces; some are methodological guides that will unfold in later parts.
 
 ## Non-Completion and Quantum Superposition
 
-### Meta-Motif $M_{\mathrm{MM}}${MM}: The Processuality of Ontology
+### The Processuality of Ontology
 
-The processuality of ontology is *not* one of the four recurring motifs
-of the volume on a par with the others. It is their common background,
-the condition on which all four rest. We therefore denote it
-$M_{\mathrm{MM}}$ (meta-motif): a background notation relative to the
-recurring motifs proper, $M_1$–$M_4$, which will be declared in § 7.3.
-Let us stress the choice of notation: we do *not* write “$M_{\mathrm{MM}}$”.
-In ToS the symbol $0$ means *absence* (Chapter 5), and to denote the
-meta-motif with a zero index would be to place it in one row with
-$M_1$–$M_4$ as their predecessor on the same scale—whereas processuality
-stands not *before* the four motifs but *beneath* them, as their
-background. The index $\mathrm{MM}$ fixes precisely this different
-status. The structure of the motifs is thus as follows:
+The processuality of ontology is *not* one of the four positions of the
+volume (§ 7.3) on a par with the others. It is the background of all the
+ontological positions of the volume, the condition on which all four
+rest.
 
-$$
-\begin{aligned}
-  M_{\mathrm{MM}} &: \text{the processuality of ontology (meta-motif, background);}\\
-  M_1 &: \text{positive ontology;}\\
-  M_2 &: \text{operational divisibility;}\\
-  M_3 &: \text{sets as a mode of consideration;}\\
-  M_4 &: \text{structural inevitability.}
-\end{aligned}
-$$
-
-The meta-motif $M_{\mathrm{MM}}$ was in fact already unfolded in Chapter 6,
+The processuality of ontology was in fact already unfolded in Chapter 6,
 in the discussion of the principle $P4$ and of non-completion. Here it is
 formulated directly, as an ontological position.
 
@@ -79,7 +60,7 @@ nor the determinate; with it determinacy sets in. An ontology derived
 from an act cannot but be processual: at its foundation lies an act, not
 an object.
 
-**Why the meta-motif needs a separate declaration.** 
+**Why the processuality of ontology needs a separate declaration.** 
 In Chapters 1–6 processuality served as a working principle: concrete
 constructions were built on it. But a working principle and a *declared
 ontological position* are not the same thing. To declare a position
@@ -165,38 +146,37 @@ programmatic hypothesis: both processualities—the one ToS discovers in
 the foundations of mathematics and the one physics discovers in the
 quantum description—are manifestations of a single ontology of the act
 of distinction, derived from one first principle, $A = \exists$. Turning
-this hypothesis into a formal derivation is the subject of the next
-volume, not of the present one.
+this hypothesis into a formal derivation is the subject of physics.
 
-### The Bridge to Volume III
+### The Bridge to Physics
 
 What has been said marks out a bridge that unfolds fully beyond the
 present volume.
 
-Volume II is devoted to mathematics: it builds the apparatus of ToS and
+This volume is devoted to mathematics: it builds the apparatus of ToS and
 applies it to number systems, analysis, algebra, and geometry—to
-mathematical content. The derivation of physics from the act of
-distinction is the subject of the next volume. There the process
-ontology, grounded here as the meta-motif $M_{\mathrm{MM}}$, unfolds into a
-program for deriving the laws of physics: in particular, into a study of
-the unistochastic structure of quantum theory as a structure consistent
-with the arrangement of distinction[^1].
+mathematical content. The derivation of physical laws from the act of
+distinction is the subject of physics. There the process
+ontology, grounded here, unfolds into a program for deriving the laws of
+physics: in particular, into a study of the unistochastic structure of
+quantum theory as a structure consistent with the arrangement of
+distinction[^1].
 
-For the present volume the following is essential: the first recurring
-motif—the processuality of ontology—is not confined to mathematics. It
-is *ontological*, not narrowly mathematical; and precisely for this
-reason it is a *recurring motif* of the volume rather than a local
-principle of one of its parts. In every subsequent part of Volume II
-where a mathematical object turns out to be a process rather than a
-completed givenness, the reader meets this motif again. The full set of
-recurring motifs, and the system of labels by which their returns are
-traced through the volume, are established in § 7.3.
+For the present volume the following is essential: the processuality of
+ontology is not confined to mathematics. It is *ontological*, not
+narrowly mathematical; and precisely for this reason it is the
+*background* of all the ontological positions of the volume rather than
+a local principle of one of its parts. In every subsequent part of
+the volume where a mathematical object turns out to be a process rather
+than a completed givenness, the reader meets this position again. The
+full set of the ontological positions of the volume is established in
+§ 7.3.
 
 ## Sets as a Mode of Consideration of a List
 
 ### The Demand for Sufficient Reason for the Existence of a Set
 
-The second recurring motif of the volume concerns the relation between
+The next ontological position of the volume concerns the relation between
 two fundamental constructions—the *list* and the *set*—and which of
 them is ontologically primary.
 
@@ -238,7 +218,7 @@ not gathering.
 ### The Primacy of the List
 
 From what has been said follows the ontological thesis that forms the
-core of the second recurring motif.
+core of this position.
 
 **Thesis.** 
 *The list is primary; the set is derived.* A list is the direct
@@ -263,12 +243,12 @@ primary: it is what is obtained from the act of distinction
 operation.
 
 **Connection with process ontology.** 
-The primacy of the list is a manifestation of the meta-motif
-$M_{\mathrm{MM}}$ (§ 7.1), not an independent thesis. The list is
+The primacy of the list is a manifestation of the processuality of
+ontology (§ 7.1), not an independent thesis. The list is
 processual: it unfolds. The set, taken as a ready-made collection, is
 object-like. To assert the primacy of the list over the set is the same
-as to assert the primacy of process over object. The second motif thus
-rests on $M_{\mathrm{MM}}$.
+as to assert the primacy of process over object. This position thus
+rests on the processuality of ontology.
 
 ### The Set as a Mode of Consideration
 
@@ -353,7 +333,7 @@ in a list.
 
 This list-based explanation agrees with the hierarchical blocking
 already introduced and complements it rather than replacing it. From the
-standpoint of the motif $M_3$ (sets as a mode, § 7.3), the Russellian
+standpoint of the position “sets as a mode” (§ 7.3), the Russellian
 totality has no process source. From the standpoint of $P2/L5$, the same
 totality attempts to set a criterion at its own level, which the
 hierarchy of levels does not admit: formally this is analyzed in the
@@ -390,7 +370,6 @@ order. Questions of this kind are thereby *reformulated* rather than
 discarded; their detailed analysis is the subject of the part of the
 volume devoted to number systems and the continuum.
 
-{
 Let us stress the boundary of this thesis. *No* solution of the
 continuum hypothesis is asserted here—neither positive nor negative.
 What is asserted is only a change in the ontological *status* of the
@@ -398,7 +377,6 @@ question: cardinality ceases to be a primary characteristic of a
 ready-made totality and becomes a characteristic of a mode of
 consideration. Formal work with this reformulation is the task of later
 parts, and the present chapter does not prejudge it.
-}
 
 **Set theory as a superstructure.** 
 What has been said does not abolish set theory. It indicates its
@@ -411,8 +389,8 @@ as a foundation.
 
 ### What This View Does Not Assert
 
-So that the second recurring motif is not read as stronger than it is,
-its boundaries must be outlined.
+So that the position “sets as a mode” is not read as stronger than it
+is, its boundaries must be outlined.
 
 ToS does *not* assert that set theory is false. Set theory is a precise,
 powerful, and working mathematical apparatus; nothing in the position of
@@ -428,19 +406,19 @@ distinction is ontological, not practical. Mathematicians can go on
 working with sets exactly as before; ToS only specifies *what* a set is
 in doing so.
 
-### Connection with the Recurring Motifs
+### Connection with the Ontological Positions of the Volume
 
-The second motif—the primacy of the list, the set as a mode of
-consideration—is connected with the rest of the ontological core of the
-volume.
+The position of the present section—the primacy of the list, the set as
+a mode of consideration—is connected with the rest of the ontological
+core of the volume.
 
-It continues the first motif (§ 7.1): the primacy of the list over the
+It continues process ontology (§ 7.1): the primacy of the list over the
 set is a special case of the primacy of process over object. The list is
 processual, the set as a ready-made collection is object-like; to assert
 the first as primary is to carry process ontology into the domain of set
 theory.
 
-At the foundation of the second motif lies a triad worth fixing
+At the foundation of this position lies a triad worth fixing
 explicitly:
 
 > **List** (primary) $\;\longrightarrow\;$ **mode of
@@ -454,9 +432,9 @@ explicitly:
 > in this mode—not an independent object, but a list considered
 > with order and multiplicity suppressed.
 
-This triad is the core of the second motif. The full set of the
-recurring motifs of the volume and their mutual connections are
-established in § 7.3.
+This triad is the core of the position under consideration. The full
+set of the ontological positions of the volume and their mutual
+connections are established in § 7.3.
 
 ### Connection with Categorical Structure
 
@@ -481,32 +459,29 @@ structure is primary, and what is obtained from it is obtained by
 forgetting. The detailed development of this correspondence is the
 subject of the corresponding part of the volume.
 
-## Recurring Motifs
+## The Ontological Positions of the Volume
 
-### The Setting: From Separate Motifs to Their Full Set
+### The Setting: From Separate Positions to Their Full Set
 
-§ 7.1 and § 7.2 disclosed separate ontological motifs: § 7.1, the
+§ 7.1 and § 7.2 disclosed separate ontological positions: § 7.1, the
 processuality of ontology; § 7.2, the primacy of the list over the set.
 The present section gathers the *full set* of the ontological core of
-the volume and establishes the order in which its motifs are connected.
+the volume and establishes the order in which its positions are connected.
 
 First of all, one clarification about processuality. The processuality
-of ontology, unfolded in § 7.1 as the meta-motif $M_{\mathrm{MM}}$, is not
-*one of* the four motifs listed below. It is a *common feature* of the
-whole ontological core—a feature running through each of the four
-motifs. Infinity is processual; the list is processual; divisibility is
-carried out in a process; structures arise in unfolding. Processuality is
-what pervades the whole list, not a separate item of it. That is why it
-was set apart in § 7.1, separately and earlier, under the label
-$M_{\mathrm{MM}}$: it is the background on which the four motifs
-$M_1$–$M_4$ stand.
+of ontology, unfolded in § 7.1, is not *one of* the four positions listed
+below. It is a *common feature* of the whole ontological core—a feature
+running through each of the four positions. Infinity is processual; the
+list is processual; divisibility is carried out in a process; structures
+arise in unfolding. Processuality is what pervades the whole list, not a
+separate item of it. That is why it was set apart in § 7.1, separately
+and earlier: it is the background on which the four positions stand.
 
-The four motifs themselves are four ontological positions to which the
-volume returns throughout all the subsequent parts. They are listed
-below in the order of the *deductive hierarchy*: each subsequent one
-rests on the preceding ones.
+The volume returns to these four ontological positions throughout all
+the subsequent parts. They are listed below in the order of the
+*deductive hierarchy*: each subsequent one rests on the preceding ones.
 
-### Motif $M_1${M1}: Positive Ontology
+### Positive Ontology
 
 **Formulation.** 
 *Everything that exists ontologically exists positively.* There are no
@@ -515,7 +490,7 @@ alongside being. What is, is as presence; what is not simply is not—it
 is not a *special object* called “absence.”
 
 **Ground.** 
-The motif $M_1$ follows directly from the arrangement of the act of
+Positive ontology follows directly from the arrangement of the act of
 distinction. The act of distinction *posits* the distinguished—it is an
 act of presence, not an act of absence. To distinguish $A$ means to
 posit $A$; to distinguish $\neg A$ means to posit something other than
@@ -525,7 +500,6 @@ $\neg A$ is not “the negative object $A$”; it is the result of the
 operation of distinction applied so that something other is posited.
 
 **Technical caveat.** 
-{
 In the record `Distinction` (the file `Distinction.v`) there is the field
 `negative : Prop`. Formally this does *not* mean that
 `negative` is a “negative object.” This field is the
@@ -535,20 +509,19 @@ connected with the positive side `positive` through the fields
 (exhaustiveness). In the canonical case `distinction_of` $(P)$
 the field `negative` is given as $\neg P$—that is, as the result of the
 operation of negation, not as an independent negative object.
-The motif $M_1$ agrees with this: what is positively posited is the
+Positive ontology agrees with this: what is positively posited is the
 structure of distinction itself with both its sides, while negation is
 an aspect of this structure, not a separate kind of being.
-}
 
-**Why $M_1$ is primary.** 
-$M_1$ stands first in the deductive hierarchy because it formulates *the
-very way* in which something is in ToS. Before speaking of the
-divisibility of what exists, of the modes of its consideration, of the
-inevitability of structures, one must fix that what exists exists
-positively. All subsequent motifs already operate on what is positively
-posited.
+**Why positive ontology is primary.** 
+Positive ontology stands first in the deductive hierarchy because it
+formulates *the very way* in which something is in ToS. Before speaking
+of the divisibility of what exists, of the modes of its consideration, of
+the inevitability of structures, one must fix that what exists exists
+positively. All subsequent positions already operate on what is
+positively posited.
 
-### Motif $M_2${M2}: Operational Divisibility
+### Operational Divisibility
 
 **Formulation.** 
 *Atomicity is operational, not absolute.* An object can be indivisible
@@ -561,7 +534,7 @@ level at which the object does not decompose, not an absolute property of
 the object.
 
 **Ground.** 
-The motif $M_2$ rests on the hierarchy of levels—the principle $P1$
+Operational divisibility rests on the hierarchy of levels—the principle $P1$
 (Chapter 4). Levels in ToS are not absolute: above every level $L$ there
 is a higher level, and beneath a structure that appears as an element at
 one level, its own arrangement is found at a lower level. What ToS calls
@@ -569,157 +542,165 @@ an element is always an element *at some level*; an “element as such,”
 absolutely indivisible, has no place in the hierarchical structure of
 levels.[^3]
 
-**Connection with $M_1$.** 
-$M_2$ rests on $M_1$. It makes sense to speak of divisibility only with
-respect to what is *posited* positively: what is divided is what is
-present. Operational divisibility is a statement about the arrangement of
-what positively exists—namely, that its indivisibility is always relative
-to a level. Without $M_1$ (the positivity of what exists) $M_2$ would have
-no subject matter: there would be nothing to divide.
+**Connection with positive ontology.** 
+Operational divisibility rests on positive ontology. It makes sense to
+speak of divisibility only with respect to what is *posited* positively:
+what is divided is what is present. Operational divisibility is a
+statement about the arrangement of what positively exists—namely, that
+its indivisibility is always relative to a level. Without the positivity
+of what exists, operational divisibility would have no subject matter:
+there would be nothing to divide.
 
-### Motif $M_3${M3}: Sets as a Mode
+### Sets as a Mode
 
 **Formulation.** 
 *Sets are secondary; lists are primary.* A set is not an initial object;
 it is a mode of consideration of a list, abstracted from order and
-multiplicity. This motif is fully unfolded in § 7.2; here it merely takes
-its place in the overall composition.
+multiplicity. This position is fully unfolded in § 7.2; here it merely
+takes its place in the overall composition.
 
-**Connection with $M_{\mathrm{MM}}$, $L5$, and the preceding motifs.** 
-$M_3$ rests *above all* on the meta-motif $M_{\mathrm{MM}}$ and the Law of
-Order $L5$: a list is an ordered unfolding, that is, a process
-construction, and without processuality ($M_{\mathrm{MM}}$) and order
+**Connection with the processuality of ontology, $L5$, and the preceding positions.** 
+The position “sets as a mode” rests *above all* on the processuality of
+ontology and the Law of Order $L5$: a list is an ordered unfolding, that
+is, a process construction, and without processuality and order
 ($L5$) the very concept of a list would not exist. It is on them that
-$M_3$ depends in the first place. The connection with $M_1$ and $M_2$ is
-secondary but essential: $M_3$ rests on $M_1$ in that a list is a
-sequence of *positively posited* elements; on $M_2$, in that the passage
-from list to set is a *change of the mode of consideration*, that is, an
-operation carried out at some operational level of work with an already
-given structure. Abstraction from order and multiplicity is operational
-in exactly the same sense in which divisibility is operational. $M_3$ is
-thus the application of the operational view to the pair “list / set”—but
-it is rooted in the processuality of $M_{\mathrm{MM}}$ and the order of
-$L5$.
+this position depends in the first place. The connection with positive
+ontology and operational divisibility is secondary but essential: this
+position rests on positive ontology in that a list is a sequence of
+*positively posited* elements; on operational divisibility, in that the
+passage from list to set is a *change of the mode of consideration*, that
+is, an operation carried out at some operational level of work with an
+already given structure. Abstraction from order and multiplicity is
+operational in exactly the same sense in which divisibility is
+operational. This position is thus the application of the operational
+view to the pair “list / set”—but it is rooted in the processuality of
+ontology and the order of $L5$.
 
-### Motif $M_4${M4}: Structural Inevitability
+### Structural Inevitability
 
 **Formulation.** 
 *Stable structures are regarded as recurring manifestations of the
 arrangement of distinction.* Certain structures—orders, hierarchies,
 equivalence relations, categorical constructions, and others—appear in
-the most diverse areas of mathematics. The motif $M_4$ proposes to read
-this as the recurring manifestation of one arrangement—the arrangement of
-the act of distinction—rather than as a chance coincidence or an
-arbitrary choice of axioms. This is essential: $M_4$ is a *working
-ontological thesis* and a *reading program* for the subsequent parts,
+the most diverse areas of mathematics. The position of structural
+inevitability proposes to read this as the recurring manifestation of one
+arrangement—the arrangement of the act of distinction—rather than as a
+chance coincidence or an arbitrary choice of axioms. This is essential:
+structural inevitability is a *working ontological thesis* and a
+*reading program* for the subsequent parts,
 not an already proven universal theorem. ToS does not claim that *all*
 the stable structures of mathematics have been formally derived; ToS
 proposes to check, in each area of the volume, how order, distinction,
 level, criterion, and role again yield familiar mathematical structures.
 
 **Ground.** 
-The motif $M_4$ rests on all the preceding ones, including the meta-motif
-$M_{\mathrm{MM}}$. If what exists is posited positively ($M_1$), if it is
-divisible operationally, by levels ($M_2$), and if the modes of its
-consideration are derived from primary process constructions ($M_3$),
+Structural inevitability rests on all the preceding positions, including
+the processuality of ontology. If what exists is posited positively, if
+it is divisible operationally, by levels, and if the modes of its
+consideration are derived from primary process constructions,
 then the structures that arise in this way are naturally regarded as a
 trace of the arrangement of distinction rather than as an external
 choice. The Law of Order ($L5$) gives ordering wherever there is
 unfolding; the hierarchy of levels ($P1$) gives hierarchical structure
-wherever there is distinction by levels. $M_4$ proposes to hold this
-observation as a guiding hypothesis of reading—and to test it on concrete
-material in each part of the volume, rather than accept it as an already
-proven universal fact.
+wherever there is distinction by levels. The position of structural
+inevitability proposes to hold this observation as a guiding hypothesis
+of reading—and to test it on concrete material in each part of the
+volume, rather than accept it as an already proven universal fact.
 
-**Why $M_4$ completes the hierarchy.** 
-$M_4$ stands last because it is a *programmatic conclusion* from the
-three preceding ones: it formulates a *guiding hypothesis* resting on the
-fact that all three preceding positions hold, rather than a separate
-position. If the ontology is positive, divisibility operational, and sets
-derived, then the stability and recurrence of structures is naturally to
-be *expected* as a trace of the arrangement of distinction and to be
-checked part by part. $M_4$ is the outcome of the deductive hierarchy of
-the motifs and, at the same time, the reading program for the rest of
-the volume.
+**Why structural inevitability completes the hierarchy.** 
+Structural inevitability stands last because it is a *programmatic
+conclusion* from the three preceding ones: it formulates a *guiding
+hypothesis* resting on the fact that all three preceding positions hold,
+rather than a separate position. If the ontology is positive,
+divisibility operational, and sets derived, then the stability and
+recurrence of structures is naturally to be *expected* as a trace of the
+arrangement of distinction and to be checked part by part. Structural
+inevitability is the outcome of the deductive hierarchy of the positions
+and, at the same time, the reading program for the rest of the volume.
 
 ### The Ontological Core of the Volume
 
-The four motifs, gathered together, form the ontological core of
-Volume II. They are connected by a deductive hierarchy,
-$M_1 \to M_2 \to M_3 \to M_4$: each subsequent motif rests on the
+The four positions, gathered together, form the ontological core of
+the volume. They are connected by a deductive hierarchy, positive
+ontology $\to$ operational divisibility $\to$ sets as a mode $\to$
+structural inevitability: each subsequent position rests on the
 preceding ones.
 
 > 
-> **THE ONTOLOGICAL CORE OF THE VOLUME: THE META-MOTIF AND THE FOUR MOTIFS**
+> **THE ONTOLOGICAL CORE OF THE VOLUME: THE BACKGROUND AND THE FOUR POSITIONS**
 > 
 > 
 > 
 > 
-> **$M_{\mathrm{MM}}$—The processuality of ontology (meta-motif).** What exists
+> **The processuality of ontology.** What exists
 > exists as unfolding, not as a ready-made givenness. The common background
-> pervading all four motifs below.
+> pervading all four positions below.
 > 
 > 
 > 
-> **$M_1$—Positive ontology.** Everything that exists
+> **Positive ontology.** Everything that exists
 > ontologically exists positively. Non-being is not a special kind of
 > being; negation is a derived operation, not an initial object.
 > 
 > 
 > 
-> **$M_2$—Operational divisibility.** Atomicity is
+> **Operational divisibility.** Atomicity is
 > operational, not absolute. Indivisibility indicates a level of
 > consideration, not an absolute property of the object.
 > 
 > 
 > 
-> **$M_3$—Sets as a mode.** Sets are secondary, lists are
+> **Sets as a mode.** Sets are secondary, lists are
 > primary. A set is a mode of consideration of a list (its support),
 > abstracted from order and multiplicity.
 > 
 > 
 > 
-> **$M_4$—Structural inevitability.** A working thesis and a
+> **Structural inevitability.** A working thesis and a
 > reading program: stable structures are regarded as recurring
 > manifestations of the arrangement of distinction and are checked part by part.
 > 
 > 
 > 
-> *Deductive hierarchy:* $M_1 \to M_2 \to M_3 \to M_4$, against the common
-> background of the meta-motif $M_{\mathrm{MM}}$. Each motif rests on the
-> preceding ones; processuality is the background pervading all four.
+> *Deductive hierarchy:* positive ontology $\to$ operational
+> divisibility $\to$ sets as a mode $\to$ structural inevitability, against
+> the common background of the processuality of ontology. Each position
+> rests on the preceding ones; processuality is the background pervading all four.
 
-### Motifs and Their Formal Status
+### Positions and Their Formal Status
 
 To distinguish clearly what in the assembled core is already
-machine-checked and what is a methodological motif, let us collect the
-motifs in a table indicating their formal anchors and status.
+machine-checked and what is a methodological guide, let us collect the
+positions in a table indicating their formal anchors and status.
 
-| Motif | Formal anchor | Status |
+| Position | Formal anchor | Status |
 |---|---|---|
-| $M_{\mathrm{MM}}$ processuality | `Generator`/`Process` in Core, `P4CompletedInfinity.v`, the physics-track files | partially formalized |
-| $M_1$ positive ontology | `Distinction`, fields `positive`, `negative`, `exclusive`, `exhaustive` | direct formal trace |
-| $M_2$ operational divisibility | `Level`, `System` $L$, `Criterion` in `Core_ERR.v` | formalized as the hierarchy of levels |
-| $M_3$ sets as a mode | lists, support, the layer `src/settheory/` | needs refinement |
-| $M_4$ structural inevitability | the recurrence of order, equivalence, categorical constructions | methodological motif |
+| processuality | `Generator`/`Process` in Core, `P4CompletedInfinity.v`, the physics-track files | partially formalized |
+| positive ontology | `Distinction`, fields `positive`, `negative`, `exclusive`, `exhaustive` | direct formal trace |
+| operational divisibility | `Level`, `System` $L$, `Criterion` in `Core_ERR.v` | formalized as the hierarchy of levels |
+| sets as a mode | lists, support, the layer `src/settheory/` | needs refinement |
+| structural inevitability | the recurrence of order, equivalence, categorical constructions | methodological guide |
 
-The table makes the difference in statuses explicit. $M_1$ has a direct
-formal trace: the record `Distinction` with its fields is
-machine-checked. $M_2$ is formalized as the hierarchy of levels (the type
-`Level` and related constructions). $M_{\mathrm{MM}}$ is formalized
-*partially*: process constructions and the non-completion of infinity
-have been checked, but not as a single complete model. $M_3$ rests on
+The table makes the difference in statuses explicit. Positive ontology
+has a direct formal trace: the record `Distinction` with its fields is
+machine-checked. Operational divisibility is formalized as the hierarchy
+of levels (the type `Level` and related constructions). The
+processuality of ontology is formalized *partially*: process
+constructions and the non-completion of infinity have been checked, but
+not as a single complete model. The position “sets as a mode” rests on
 the list apparatus, but the exact connection between the list, the
-support, and the set-theoretic layer still needs refinement. $M_4$ is a
-methodological motif, a reading program, not a machine-checked theorem.
+support, and the set-theoretic layer still needs refinement. Structural
+inevitability is a methodological guide, a reading program, not a
+machine-checked theorem.
 This heterogeneity of statuses is normal for a chapter that fixes an
 *ontological core and a program*: part of the core is already formal,
 part is a guide for subsequent work.
 
 ### The Completion of Part I
 
-With the declaration of the four recurring motifs, Part I—“The First
-Distinction and the Laws of Logic”—is complete in both its dimensions.
+With the establishment of the four ontological positions, Part I—“The
+First Distinction and the Laws of Logic”—is complete in both its
+dimensions.
 
 In the *formal* dimension, Chapters 1–6 set the main axis of the ToS
 apparatus: $A = \exists$ as the pre-formal first principle; `Distinction`
@@ -730,12 +711,12 @@ system; levels, criteria, and the technical status of the axioms of
 implementation. A number of key nodes of this architecture are directly
 machine-checked in Rocq; some nodes serve as an ontological and
 methodological guide for the subsequent parts. The exact distribution of
-what is already machine-checked and what remains a motif is collected in
-the table “Motifs and Their Formal Status.”
+what is already machine-checked and what remains a guide is collected in
+the table “Positions and Their Formal Status.”
 
 In the *ontological* dimension (Chapter 7), the core has been gathered:
-the processuality of ontology as the common background meta-motif
-$M_{\mathrm{MM}}$, and the four recurring motifs—positive ontology,
+the processuality of ontology as the background of all the ontological
+positions of the volume, and the four positions—positive ontology,
 operational divisibility, sets as a mode, structural inevitability—in
 their deductive hierarchy.
 
@@ -744,7 +725,7 @@ the *reading program* through which the subsequent parts of the volume
 will consider number systems, the structure of the continuum, the
 foundations of analysis, algebraic and geometric structures, the
 categorical organization of mathematics, and the bridge to physics. In
-each of these areas the recurring motifs are to be checked anew: where a
+each of these areas the ontological positions are to be checked anew: where a
 number system turns out to be a process rather than a completed object;
 where the atomicity of an object proves relative; where a set turns out
 to be a mode of consideration; and where one and the same structure
@@ -753,9 +734,9 @@ program; the volume continues with their application.
 
 ---
 
-[^1]: In the repository this line has several formal traces. The file `DistinctionProcess.v` sets up a sharpness/coherence model in which measurement is understood as a gradual sharpening of a distinction; `MeasurementSynthesis.v` formulates a quantum/classical bridge; `UnistochasticFromGraph.v` and the related Cayley files check concrete unistochastic constructions (matrices over $ℚ$, orthogonality, double stochasticity, examples of size $2\times2$ and $3\times3$); `ConnectionClosesGap.v` assembles a Barandes-style correspondence between the distinction graph, doubly stochastic / unistochastic transitions, and path-dependence. These files give formal *components* of the physical bridge, but they should not be read as an already completed formal derivation of the whole of quantum theory from `Distinction`; such a derivation belongs to the next volume.
+[^1]: In the repository this line has several formal traces. The file `DistinctionProcess.v` sets up a sharpness/coherence model in which measurement is understood as a gradual sharpening of a distinction; `MeasurementSynthesis.v` formulates a quantum/classical bridge; `UnistochasticFromGraph.v` and the related Cayley files check concrete unistochastic constructions (matrices over $ℚ$, orthogonality, double stochasticity, examples of size $2\times2$ and $3\times3$); `ConnectionClosesGap.v` assembles a Barandes-style correspondence between the distinction graph, doubly stochastic / unistochastic transitions, and path-dependence. These files give formal *components* of the physical bridge, but they should not be read as an already completed formal derivation of the whole of quantum theory from `Distinction`; such a derivation belongs to physics.
 [^2]: The corresponding constructions are in the directory `src/settheory/` of the repository `theory-of-systems-coq`.
-[^3]: The formalization of levels is in the file `src/TheoryOfSystems_Core_ERR.v` (the type `Level`, the relation `level_lt`, and its irreflexivity). An essential caveat: the type `Level` sets up a *hierarchy* of levels, but it does not prove that every object necessarily has a further internal decomposition. That is precisely why the motif $M_2$ is formulated as *operational* atomicity—a statement about the relativity of indivisibility to the level of consideration, not a theorem about the infinite divisibility of every object.
+[^3]: The formalization of levels is in the file `src/TheoryOfSystems_Core_ERR.v` (the type `Level`, the relation `level_lt`, and its irreflexivity). An essential caveat: the type `Level` sets up a *hierarchy* of levels, but it does not prove that every object necessarily has a further internal decomposition. That is precisely why the position of operational divisibility is formulated as *operational* atomicity—a statement about the relativity of indivisibility to the level of consideration, not a theorem about the infinite divisibility of every object.
 
 ---
 

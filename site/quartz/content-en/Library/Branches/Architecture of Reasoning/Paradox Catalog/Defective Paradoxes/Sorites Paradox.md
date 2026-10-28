@@ -2,7 +2,7 @@
 title: "Sorites Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс кучи (сорит).md"
-sourceBlob: 8ae28115616469c785ec07afa4abb1b65e5c1653
+sourceBlob: 78fa90115e9f3300463a2266cf538c394e27a358
 translated: 2026-10-20
 status: draft
 description: "“Heap” is not clarified as a graded concept"
@@ -60,7 +60,7 @@ The inductive step does not apply—it is not false but insufficiently strict: f
 
 [[Bald Man Paradox|The Bald Man]] (Eubulides’ second sorites—by decrease instead of accumulation), [[Color Spectrum|the Color Spectrum]] (a sorites in perception), wealth and poverty (the same scheme with money), [[Ship of Theseus]] (a neighbor by type—ambiguity instead of vagueness).
 
-**Machine check.** In the registry of 46 the knot is recorded as `D1_Sorites`, and the diagnosis is fixed in the entry itself: the mismatch field is `InstrumentObjectMismatch`, “the instrument does not fit the object”; the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, the count `defective_count_25`—ParadoxDissolution.v). Map: [[Formalization]].
+**Machine check.** In the registry of 46 the knot is recorded as `D1_Sorites`, and the diagnosis is fixed in the entry itself: the mismatch field is `InstrumentObjectMismatch`, “the instrument does not fit the object”; the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, the count `defective_count_25`—ParadoxDissolution.v). Map: [[Formalization]].
 
 ---
 

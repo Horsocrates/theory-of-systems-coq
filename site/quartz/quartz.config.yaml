@@ -84,6 +84,32 @@ plugins:
     enabled: true
     options:
       renderEngine: katex
+      # Макросы преамбулы Тома «Математика» — по определениям глав книги (А-47, 2026-10-27).
+      customMacros:
+        "\\norm": "\\lVert #1\\rVert"
+        "\\supnorm": "\\lVert #1\\rVert_{\\infty}"
+        "\\inner": "\\langle #1,\\,#2\\rangle"
+        "\\SO": "\\operatorname{SO}"
+        "\\SU": "\\operatorname{SU}"
+        "\\Spin": "\\operatorname{Spin}"
+        "\\Hom": "\\operatorname{Hom}"
+        "\\Aut": "\\operatorname{Aut}"
+        "\\Gal": "\\operatorname{Gal}"
+        "\\Nat": "\\operatorname{Nat}"
+        "\\negb": "\\operatorname{negb}"
+        "\\negbb": "\\operatorname{negb}"
+        "\\st": "\\operatorname{st}"
+        "\\ind": "\\operatorname{ind}"
+        "\\osc": "\\operatorname{osc}"
+        "\\trace": "\\operatorname{tr}"
+        "\\Sys": "\\mathrm{Sys}"
+        "\\FF": "\\mathbb{F}"
+        "\\BB": "\\mathbb{B}"
+        "\\so": "\\mathfrak{so}"
+        "\\su": "\\mathfrak{su}"
+        "\\g": "\\mathfrak{g}"
+        "\\Cat": "\\mathbf{Cat}"
+        "\\SetoidCat": "\\mathbf{Setoid}"
     order: 80
   - source: github:quartz-community/citations
     enabled: false

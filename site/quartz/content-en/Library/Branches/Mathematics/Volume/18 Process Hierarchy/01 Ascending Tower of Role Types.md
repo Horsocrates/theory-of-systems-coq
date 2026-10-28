@@ -2,7 +2,7 @@
 title: "Chapter 1. The Ascending Tower of Role-Types"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/01 Восходящая башня роль-типов.md"
-sourceBlob: b0de0827cc72209ff0261c14d5bcb1af0c829576
+sourceBlob: bafe877cdc2b6cb4d55a7d0824f6a28bec669c19
 translated: 2026-10-20
 status: draft
 ---
@@ -85,11 +85,9 @@ The tower of role-types is itself a *system* in the sense of ToS, and it should 
 
 **Well-formedness check.** Each component falls into exactly one category: the rule of ascent is a Rule, the storey and the height are Roles, the point-stages are Elements; none is assigned to two at once. Self-application, which P1 rules out, does not arise: the rule of ascent stands one level above the storeys and is not one of them—the tower does not contain itself as a storey.
 
-{
-**What the analysis yields.** First, it shows that the question “how large is the hierarchy?” is a confusion of categories: it demands that the process-ascent be a completed Element-object, whereas the hierarchy *is* a process. The correct question is a different one—*how far one can provably climb*; and it is answered rung by rung by the following chapters, not by one completed “all.” Second, the analysis explains why the ascent is constructive: the rule, the storeys, and the height are built without appeal to a completed object, and the demand for completed infinity—if it arises at all—concerns only the *completed* limit, not the ascent itself (Chapter 2 will show that this demand, too, is itself graded).}
+**What the analysis yields.** First, it shows that the question “how large is the hierarchy?” is a confusion of categories: it demands that the process-ascent be a completed Element-object, whereas the hierarchy *is* a process. The correct question is a different one—*how far one can provably climb*; and it is answered rung by rung by the following chapters, not by one completed “all.” Second, the analysis explains why the ascent is constructive: the rule, the storeys, and the height are built without appeal to a completed object, and the demand for completed infinity—if it arises at all—concerns only the *completed* limit, not the ascent itself (Chapter 2 will show that this demand, too, is itself graded).
 
-{
-Thus the line begun by number-as-process (Part III) and the principle P4 (Part IV), and continued by the tower $\overline{ℚ}$ (Part XI) and the manifold-process (Part XII), arrives at the hierarchy: *the role-limit side is an ascending ordinal-process, generative and uncompletable*. In the next chapter we will see that this ascent is also *graded by depth*—that the question on each storey requires a precisely determined measure of “completed infinity,” and that this gradation is visible only under P4.}
+Thus the line begun by number-as-process (Part III) and the principle P4 (Part IV), and continued by the tower $\overline{ℚ}$ (Part XI) and the manifold-process (Part XII), arrives at the hierarchy: *the role-limit side is an ascending ordinal-process, generative and uncompletable*. In the next chapter we will see that this ascent is also *graded by depth*—that the question on each storey requires a precisely determined measure of “completed infinity,” and that this gradation is visible only under P4.
 
 ---
 

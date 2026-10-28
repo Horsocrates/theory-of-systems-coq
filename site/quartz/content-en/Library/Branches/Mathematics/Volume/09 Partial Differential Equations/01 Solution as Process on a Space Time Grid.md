@@ -2,7 +2,7 @@
 title: "Chapter 1. The Solution as a Process on a Space-Time Grid"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/09 Уравнения в частных производных/01 Решение как процесс на пространственно-временной сетке.md"
-sourceBlob: 8789ba092cc1a58423de92eb5763a0c86cc860a8
+sourceBlob: fd32eb938e9c70eca37e5576e44bf01a2107327c
 translated: 2026-10-20
 status: draft
 ---
@@ -121,8 +121,7 @@ grid functions $u^n:\{0,…,N{-}1\}\toℚ$, the values at the nodes $u^n_j\inℚ
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the solution process does *not* take as its element “the function $u(x,t)$ as a completed object” or “the continuous domain.” Space is discretized by a finite grid, the derivative is a finite difference, and the laws (energy, mass, maximum) are checked as finite sums. It is precisely this finiteness of every stage that separates what is proved (the discrete calculus over ℚ, without axioms; the laws and stability of concrete schemes—in the following chapters, likewise as finite rational facts) from the boundary (the continuous solution and the limit—a role-limit).}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the solution process does *not* take as its element “the function $u(x,t)$ as a completed object” or “the continuous domain.” Space is discretized by a finite grid, the derivative is a finite difference, and the laws (energy, mass, maximum) are checked as finite sums. It is precisely this finiteness of every stage that separates what is proved (the discrete calculus over ℚ, without axioms; the laws and stability of concrete schemes—in the following chapters, likewise as finite rational facts) from the boundary (the continuous solution and the limit—a role-limit).
 
 What the analysis yields. It translates the design of the Part into the language of structure: *the solution is a Role-process* of grid functions; *the type of the equation is a Role* of the spatial operator; *a finite difference is a Role-derivative*; and the profiles $u^n_j$ and sums themselves are *Elements* (finite at every stage). To take “the solution” or a continuous function as a completed object-Element is to put the role-limit in the place of an Element—the same confusion of categories as “the solution of an ODE as a ready function” (Chapter 8.1) or “a point as an object” instead of a class (Chapter 4.3). A partial differential equation is solved not by extracting a ready function but by unfolding a process of profiles on a grid.
 

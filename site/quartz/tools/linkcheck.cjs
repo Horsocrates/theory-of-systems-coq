@@ -114,9 +114,11 @@ for (const f of mdFiles) {
     const hit = nameToFile.get(key) || aliasToFile.get(key) || fullPathToFile.get(key);
     if (!hit) { badLinks++; fail(`БИТАЯ ВИКИССЫЛКА: [[${target}]] в ${rel}`); continue; }
     if (anchor) {
+      // как в движке: код и формулы в заголовке дают в якорь только свой текст (без ` и $)
+      const norm = s => s.replace(/[`$]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
       const headings = [...fs.readFileSync(path.join(CONTENT, hit), "utf8")
-        .matchAll(/^#{1,6}\s+(.*)$/gm)].map(h => h[1].trim().toLowerCase());
-      if (!headings.some(h => h.includes(anchor.toLowerCase()))) {
+        .matchAll(/^#{1,6}\s+(.*)$/gm)].map(h => norm(h[1]));
+      if (!headings.some(h => h.includes(norm(anchor)))) {
         badAnchors++; fail(`БИТЫЙ ЯКОРЬ: [[${target}#${anchor}]] в ${rel}`);
       }
     }

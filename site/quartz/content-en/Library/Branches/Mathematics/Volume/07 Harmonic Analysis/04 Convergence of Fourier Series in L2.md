@@ -2,7 +2,7 @@
 title: "Chapter 4. Convergence of Fourier Series in L²"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/04 Сходимость рядов Фурье в L2.md"
-sourceBlob: 62654f41aae8cf47951f06b13a112867f57d4fe9
+sourceBlob: df64cc8053eb61bd5660c59f41eb7394124e9d6b
 translated: 2026-10-20
 status: draft
 ---
@@ -143,18 +143,17 @@ $\sum_{k<K}$, the indices $K\le N$. Under P4 the completed infinite series is no
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component is in one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the system does not take as its element the completed infinite series. “Convergence” is not an attained state of a completed sum but the *role*-decrease of the defect, a property of the process of truncations; and the limit itself is a role-limit toward which the process moves without being actualized as a sum.}
+The system is well-formed: each component is in one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the system does not take as its element the completed infinite series. “Convergence” is not an attained state of a completed sum but the *role*-decrease of the defect, a property of the process of truncations; and the limit itself is a role-limit toward which the process moves without being actualized as a sum.
 
 What the analysis yields. It translates the convergence of Fourier series into the language of structure: *the partial sum is a Role* (the best approximation), *convergence is a Rule-decrease* of the defect, and the coefficients and truncations are *Elements* (finite, rational). To take “the Fourier series converges to $f$” for an equality of two completed objects is to put a role-limit in the place of an Element, the same confusion of categories that guided Parts II and IV. And to confuse L<sup>2</sup> convergence with pointwise convergence (Dirichlet, Gibbs) is to mix the layer of energy with the layer of values: different roles, different bearers.
 
-The next chapter applies this core: compression as truncation by significant coefficients with an error equal to the discarded energy; the fast Walsh transform as a process-algorithm equal to the matrix transform; and convolution—after which Part VII closes with a bridge to spectral methods and the physics volume.
+The next chapter applies this core: compression as truncation by significant coefficients with an error equal to the discarded energy; the fast Walsh transform as a process-algorithm equal to the matrix transform; and convolution—after which Part VII closes with a bridge to spectral methods and physics.
 
 ---
 
 [^1]: The supporting files are `ProcessFourierSeriesL2.v` (6 statements, 0 axioms) and `ProcessBestApproximation.v` (9 statements, 0 axioms), both in the directory `src/process/`, on top of the L<sup>2</sup> apparatus of Part VI (`ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v`, `ProcessL2RieszFischer.v`). The names are in the notes below.
 [^2]: The process reading of Riesz–Fischer is `l2_riesz_fischer` in `ProcessL2RieszFischer.v` (Part VI): the L<sup>2</sup> space of processes is Cauchy-complete by construction; this is a *bridge* to the bearer of the limit; see § “The Boundary: The Completed Series, Pointwise Convergence, Gibbs.”
-[^3]: `fourier_error_eq` in `ProcessFourierSeriesL2.v`: $\norm{f-P_K}^2=\norm{f}^2-`captured`(c,K)$, where `captured`$(c,K)=\sum_{k<K}c_k^2$. A direct consequence of `resid_norm` (Part VI). 0 axioms.
+[^3]: `fourier_error_eq` in `ProcessFourierSeriesL2.v`: $\norm{f-P_K}^2=\norm{f}^2-\texttt{captured}(c,K)$, where `captured`$(c,K)=\sum_{k<K}c_k^2$. A direct consequence of `resid_norm` (Part VI). 0 axioms.
 [^4]: `fourier_error_nonneg`; equivalent to `bessel_general` (Chapter 7.1).
 [^5]: `fourier_error_monotone`; it relies on the monotonicity of the captured energy (`captured_mono`, Chapter 7.5). 0 axioms.
 [^6]: `fourier_partial_best` in `ProcessFourierSeriesL2.v` (the same as `best_approx_ge` from `ProcessBestApproximation.v`): $\norm{f-P_K}^2\le\norm{f-\sum_{k<K}a_k e_k}^2$ for any weights $a_k$; the uniqueness of the minimum is `best_approx_unique`. 0 axioms.

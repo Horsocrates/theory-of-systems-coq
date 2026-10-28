@@ -25,7 +25,7 @@ $\SU(2)$ — как гладкие многообразия с координа�
 мультипликативной норме; накрытие — конкретное $2{:}1$ отображение; допустимый порядок —
 роль-ограничение. Гладкая группа Ли — роль-предел.*
 
-## Вращение как рациональная точка: группа $\SO(2,ℚ)${SO(2,Q)}
+## Вращение как рациональная точка: группа $\SO(2,ℚ)$
 
 Поворот плоскости задаётся парой $(c,s)$ с $c^2+s^2=1$ — косинусом и синусом угла. ToS берёт
 *рациональные* такие пары: $\SO(2,ℚ)$ — рациональные точки единичной окружности (глава 12.1
@@ -57,7 +57,7 @@ $45^\circ$ (нужен $\tfrac{\sqrt2}{2}$). Поворот на $60^\circ$ не
 норме, обратный${}=$сопряжённый). Плотная, но $60^\circ/45^\circ$ — не её точки ($\sqrt3,\sqrt2$):
 та же преграда, что в 12.1.*
 
-## Кватернионы и двойное накрытие $\SU(2)\to\SO(3)${SU(2)->SO(3)}
+## Кватернионы и двойное накрытие $\SU(2)\to\SO(3)$
 
 В трёх измерениях вращения кодируются *кватернионами* — четвёрками $q=(w,x,y,z)\inℚ^4$ с
 произведением Гамильтона. ToS держит их над $ℚ$: это *конечные данные*, а не точки
@@ -174,7 +174,7 @@ $[e_i,e_j]=\varepsilon_{ijk}e_k$ и тождеством Якоби; а эксп
 [^3]: Скалярное тождество — `euler_four_square` (`RationalQuaternions.v`). Группа как запись — `SU2Group.v`: `Record Quaternion`, `qmul_assoc`, `qconj_involutive`, `is_unit`, `qnorm_mul` (норма мультипликативна) и `unit_closed` (единичные замкнуты относительно умножения).
 [^4]: `QuaternionRotation.v` (0 аксиом): `rotation_scales_norm` ($\norm{q v\bar q}^2=\norm{q}^2(\norm{q}^2\norm{v}^2)$) и `rotation_preserves_norm` (изометрия при $\norm{q}^2=1$); `conjugate_action_pure` (образ чистого кватерниона чист). Мнимые единицы: `qi_squared` ($i^2=-1$), `qij` ($ij=k$) и т.д.
 [^5]: `QuaternionRotation.v`: `double_cover` ($\mathrm{Heq} ((-q) v \overline{(-q)})  (q v \bar q)$). Это geometric-side той же $2{:}1$-особенности, с которой в физике связан спинорный знак: оборот на $2\pi$ меняет знак кватерниона, оборот на $4\pi$ — возвращает его.
-[^6]: `QuaternionRotation.v`: `qhalf_cube` ($q^3=-1$), `rotation_order3`. Матричная сторона — `RationalSO3.v` (0 аксиom): `cyc` (перестановочная матрица), `cyc_orthogonal`, `cyc_det`${}=1$, `cyc_order3` ($\mathrm{cyc}^3=I$); семейство `rot_z` вкладывает $\SO(2,ℚ)\subset\SO(3,ℚ)$.
+[^6]: `QuaternionRotation.v`: `qhalf_cube` ($q^3=-1$), `rotation_order3`. Матричная сторона — `RationalSO3.v` (0 аксиом): `cyc` (перестановочная матрица), `cyc_orthogonal`, `cyc_det`${}=1$, `cyc_order3` ($\mathrm{cyc}^3=I$); семейство `rot_z` вкладывает $\SO(2,ℚ)\subset\SO(3,ℚ)$.
 [^7]: `NivenRationalCosine.v`: `infinite_order_345`, `orbit_never_returns` — орбита $(3,4,5)$ не возвращается в $(1,0)$ (через mod-$5$ инвариант).
 [^8]: `CrystallographicRestriction.v`: следовая рекурсия `tau_rec`, `order5_forces_golden`, `no_rational_golden` ($\nexists x\inℚ:\ x^2+x-1=0$), `no_rational_order5` и `realizable_orders` ($1,2,3,4,6$ реализуемы). См. также `NivenGeneral.v`: $\cos(r\pi)\inℚ\Rightarrow \cos\in\{0,\pm\tfrac12,\pm1\}$.
 

@@ -19,9 +19,9 @@ title: "Глава 3. Категория систем Sys(L)"
 
 ## Система — объект, морфизм — сохранение критерия
 
-Возврат к Главе 1.5. *Система* на уровне $L$ несёт свои элементы (`ElemOf` $S$) и критерий
+Возврат к Главе I.4. *Система* на уровне $L$ несёт свои элементы (`ElemOf` $S$) и критерий
 (роль-правило, конституирующее, что принадлежит системе). *Морфизм* $f:S_1\to S_2$ — отображение
-элементов $`ElemOf` S_1\to`ElemOf` S_2$, *сохраняющее критерий*: оно переносит
+элементов $\texttt{ElemOf} S_1\to\texttt{ElemOf} S_2$, *сохраняющее критерий*: оно переносит
 «быть элементом $S_1$» в «быть элементом $S_2$».
 
 Машинно это запись с композицией и сетоидным равенством морфизмов.[^1] Композиция ассоциативна, тождество нейтрально — ровно условия,
@@ -38,8 +38,8 @@ title: "Глава 3. Категория систем Sys(L)"
 Машинно проверено, что категорные понятия совпадают с системными: изоморфизм в `SystemCat`
 равносилен системному изоморфизму (`SystemCat_iso_iff_isomorphism`); вложение влечёт
 мономорфность, сюръекция — эпиморфность
-(`embedding_ implies_ SystemCat_mono`,
-`surjection_ implies_ SystemCat_epi`). То есть категорный язык 14.1
+(`embedding_implies_SystemCat_mono`,
+`surjection_implies_SystemCat_epi`). То есть категорный язык 14.1
 действительно *описывает* системы: «моно/эпи/изо» сети стрелок суть «вложение/сюръекция/изоморфизм»
 систем.
 
@@ -53,7 +53,7 @@ title: "Глава 3. Категория систем Sys(L)"
 `unit_system` требует *свидетеля* $w\ll L$ — уровня *ниже* $L$. На уровне $L1$ такого
 нет (`no_system_at_L1_with_witness`), и `SystemCat` $L1$ вырождена
 (`SystemCat_L1_vacuous`); инициальный и терминальный объекты появляются лишь на уровнях вида
-$LS L$ (`SystemCat_ LS_ has_ initial_ and_ terminal`).
+$LS L$ (`SystemCat_LS_has_initial_and_terminal`).
 Это честный P4-урок: «пустое» и «единичное» суть *роли в иерархии*, а не первичные объекты на
 дне — они сами опираются на уровень-под-собой. (Параллель с Частью X: пустое множество — не
 беспредпосылочный объект.)
@@ -63,12 +63,12 @@ $LS L$ (`SystemCat_ LS_ has_ initial_ and_ terminal`).
 Категорное прочтение E/R/R даёт *забывающий функтор* «система${}\mapsto{}$её элементы»:
 
 $$
-`ElementsFunctor`\ L\ :\ \Sys(L)\ \longrightarrow\ \mathbf{TypeCat},
+\texttt{ElementsFunctor}\ L\ :\ \Sys(L)\ \longrightarrow\ \mathbf{TypeCat},
 $$
 
 который объекту сопоставляет тип его элементов, а морфизму — действие на элементах. Он
 *верен* (`ElementsFunctor_faithful`: морфизм определяется своим действием на элементах) и
-*сохраняет изоморфизмы* (`ElementsFunctor_ preserves_ iso`).
+*сохраняет изоморфизмы* (`ElementsFunctor_preserves_iso`).
 [^4]
 
 С точки зрения E/R/R: «элементы» — это *образ забывающего функтора*; «роли» — структура
@@ -81,17 +81,14 @@ $$
 Это центр главы и одна из вершин Части XIV. Соотношение «равенство / изоморфизм» машинно разложено на
 две несимметричные половины:
 
-{
-
 - **Лейбницево равенство влечёт изоморфизм:** равные системы изоморфны (`P3_eq_implies_iso`) — тривиальная сторона.
 - **Изоморфизм *не* влечёт лейбницева равенства:** существуют системы, изоморфные в `SystemCat`, но не равные как объекты Rocq (`P3_strictly_stronger_than_iso`, `iso_not_implies_P3`).
-}
 
 Вместе это и есть `P3_separation_categorical`: *изоморфизм строго слабее лейбницева
 равенства*. Изоморфизм сохраняет всё, что видно «снаружи» — предикат-критерий
 (`iso_implies_predicate_equiv`), биекцию элементов, корректность, — но *не* всякую
 внутреннюю разметку: например, граница позиции *не* инвариантна относительно изоморфизма
-(`position_ bound_ not_ iso_ invariant`).
+(`position_bound_not_iso_invariant`).
 [^5]
 
 **Почему это P3.**  P3 (Различение) утверждал, что *интенсиональная* идентичность
@@ -113,12 +110,10 @@ $$
 сюръекция/изоморфизм — роли морфизмов; `ElementsFunctor` — роль-забывание (до носителя);
 изоморфизм — роль «неотличимо ролями», но не «тождественно».
 
-{
-
 **Элементы (L1${}+{}$P4).**  Конкретные данные: `ElemOf` $S$, компоненты морфизмов,
 биекции элементов при изоморфизме. *Не* элемент *категорной наблюдаемости*: лейбницево
 равенство систем — как Prop оно существует, но не восстанавливается из сети морфизмов (тоньше
-изоморфизма) — именно это и фиксирует P3.}
+изоморфизма) — именно это и фиксирует P3.
 
 | **Компонент** | **Что фиксирует** | **E/R/R-категория** |
 |---|---|---|
@@ -142,15 +137,15 @@ $$
 
 Дальше — Глава 14.4: функторы *между уровнями* (`embed`/`forget`) и их
 сопряжение — корона Части XIV, где принцип P2 (Дополнительность) оказывается категорным
-сопряжением $`embed`\dashv`forget`$ (`embed` — левый, `forget` — правый).
+сопряжением $\texttt{embed}\dashv\texttt{forget}$ (`embed` — левый, `forget` — правый).
 
 ---
 
 [^1]: `src/SystemMorphism.v` (17 Qed, 0 Admitted; в `origin/main`; изоморфизм определён конструктивно, без аксиомы выбора — файл заявляет 0 аксиом): `ElemOf`, `Record SystemMorphism` (`mkSystemMorphism`), `id_morphism`, `compose_morphism`, `morphism_eq` (+ рефл./сим./транз.), `compose_assoc`, `compose_id_left`/`_right`; `is_embedding`, `is_surjection`, `is_isomorphism` (+ `iso_symmetric`, `iso_pair_predicate_equiv`).
-[^2]: `src/SystemCategory.v` (29 Qed, 0 аксиом; в `origin/main`): `SystemCat` $L$ как `Category`; `SystemCat_valid`, `SystemCat_comp_is_compose`, `SystemCat_id_is_id`; `SystemCat_ iso_ iff_ isomorphism`, `embedding_ implies_ SystemCat_mono`, `surjection_ implies_ SystemCat_epi`, `SystemCat_iso_compose`.
+[^2]: `src/SystemCategory.v` (29 Qed, 0 аксиом; в `origin/main`): `SystemCat` $L$ как `Category`; `SystemCat_valid`, `SystemCat_comp_is_compose`, `SystemCat_id_is_id`; `SystemCat_iso_iff_isomorphism`, `embedding_implies_SystemCat_mono`, `surjection_implies_SystemCat_epi`, `SystemCat_iso_compose`.
 [^3]: `SystemCategory.v`: `empty_system`, `empty_is_initial`; `unit_system`, `unit_is_terminal`; `SystemCat_initial_unique`, `SystemCat_terminal_unique`; `SystemCat_LS_has_initial_and_terminal`.
-[^4]: `src/ERR_Categorical.v` (24 Qed, 0 аксиом; в `origin/main`): `ElementsFunctor`, `ElementsFunctor_obj`/`_mor`, `ElementsFunctor_faithful`, `ElementsFunctor_ preserves_ iso`; `iso_gives_element_bijection`.
-[^5]: `ERR_Categorical.v`: `P3_eq_implies_iso`, `iso_implies_predicate_equiv`, `P3_strictly_stronger_than_iso`, `iso_not_implies_P3`, `P3_separation_categorical`, `position_ bound_ not_ iso_ invariant`, `well_formed_iso_invariant`, `err_decomposition`.
+[^4]: `src/ERR_Categorical.v` (24 Qed, 0 аксиом; в `origin/main`): `ElementsFunctor`, `ElementsFunctor_obj`/`_mor`, `ElementsFunctor_faithful`, `ElementsFunctor_preserves_iso`; `iso_gives_element_bijection`.
+[^5]: `ERR_Categorical.v`: `P3_eq_implies_iso`, `iso_implies_predicate_equiv`, `P3_strictly_stronger_than_iso`, `iso_not_implies_P3`, `P3_separation_categorical`, `position_bound_not_iso_invariant`, `well_formed_iso_invariant`, `err_decomposition`.
 
 ---
 

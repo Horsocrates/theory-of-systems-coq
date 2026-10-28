@@ -2,7 +2,7 @@
 title: "Monty Hall Problem"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Не-парадоксы/Проблема Монти Холла.md"
-sourceBlob: 717e58859a55a58863e5b54b9bbb6f068ab120d4
+sourceBlob: 00061ef35a8e9ee76431e7129a4bead67a8c3c02
 translated: 2026-10-20
 status: draft
 description: "A correct result: switching pays (2/3)"
@@ -54,7 +54,7 @@ Enumerating the cases settles the question. The prize is behind your door (proba
 
 The three prisoners problem (Gardner—the same mechanism in a prison setting), Bertrand’s boxes (an ancestor), [[False Positive|False positives]] (the same blindness to informational structure—to the base rate), [[Birthday Paradox|Birthdays]] (a neighbor in the category: computation against expectation).
 
-**Machine check.** In the registry of 46—`N1_MontyHall`: category `NonParadox`, with a note in the entry itself—“Intuition misleads”; the status of the category is formalized: `nonparadox_46_not_paradox` (a non-paradox needs no resolution—there is nothing to resolve), the count `nonparadox_count_8` (ParadoxDissolution.v). There is as yet no named probabilistic computation of 2/3 in the base—a candidate for formalization for the “Probability” branch (see [[Formalization]]).
+**Machine check.** In the registry of 46—`N1_MontyHall`: category `NonParadox`, with a note in the entry itself—“Intuition misleads”; the status of the category is formalized: `nonparadox_46_not_paradox` (a non-paradox needs no laying open—there is nothing to lay open), the count `nonparadox_count_8` (ParadoxDissolution.v). There is as yet no named probabilistic computation of 2/3 in the base—a candidate for formalization for the “Probability” branch (see [[Formalization]]).
 
 ---
 

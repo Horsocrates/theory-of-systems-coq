@@ -2,7 +2,7 @@
 title: "Two Envelopes Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс двух конвертов.md"
-sourceBlob: 33914656209b45b7e18978d10223d1059862882e
+sourceBlob: 581f95072b75e34b0cd962ffc0cbb6a887a52d46
 translated: 2026-10-20
 status: draft
 description: "An incorrect application of expected utility"
@@ -54,7 +54,7 @@ The right reckoning is short. Name the sums honestly: the pair holds A and 2A. I
 
 The necktie paradox and the wallet game (direct ancestors—the same gluing of hypotheses), the St. Petersburg paradox (infinite expectations against decisions—the neighbor at the honest boundary), [[Newcombs Paradox|Newcomb]] (a neighbor in the workshop of decision theory—but there the defect is in the conditions, here in the calculation), the sophisms of term substitution in the [[Fallacy Catalog|fallacy catalog]] (equivocation—the verbal form of the same thing).
 
-**Machine check.** In the registry of 46 it is `D16_TwoEnvelopes`: the field `ConceptualAmbiguity` (the split referent of X), the level `L2_Operations`, the category “defective,” resolution by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by honest reckoning through A and 2A. Map: [[Formalization]].
+**Machine check.** In the registry of 46 it is `D16_TwoEnvelopes`: the field `ConceptualAmbiguity` (the split referent of X), the level `L2_Operations`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by honest reckoning through A and 2A. Map: [[Formalization]].
 
 ---
 

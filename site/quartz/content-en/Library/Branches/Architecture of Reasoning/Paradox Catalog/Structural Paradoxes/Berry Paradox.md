@@ -2,7 +2,7 @@
 title: "Berry Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Берри.md"
-sourceBlob: 0b9b94a078e5b9bb68775de9b491ab1597fbbc3b
+sourceBlob: 3f70b27db1616be93be403918364e8fa89aa100a
 translated: 2026-10-20
 status: draft
 description: "Definition through undefinability (the meta-level in the object level)"

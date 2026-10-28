@@ -2,7 +2,7 @@
 title: "Chapter 1. Measure as a Process of Assignment"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/06 Меры и интегрирование/01 Мера как процесс приписывания.md"
-sourceBlob: c7b722386b042e203e5322c411e1dbe19b5b9ce3
+sourceBlob: edb98d7d8c52ce5965b65179fdd7c3abe54ee4c2
 translated: 2026-10-20
 status: draft
 ---
@@ -75,7 +75,7 @@ From this one sees at once why in this order there is no place for a non-measura
 
 In Carathéodory’s axiomatics nonnegativity $\mu(A)\ge 0$ is postulated—it is the first axiom of measure. In our order there is nothing to postulate: the indicator $\chi_A$ is nonnegative, the integral of a nonnegative step function is nonnegative, and hence $\mu(A)=I(\chi_A)\ge 0$ *by construction*.[^6] The same holds for the other “axioms of measure”: at the interval/step level the corresponding properties of measure turn out to be *theorems* about the construction.
 
-*Structural nonnegativity* (M4 in the volume’s numbering of recurring motifs): the properties of measure are not imposed on it from outside by a list of axioms but are traced in the very rule of assignment.
+*Structural nonnegativity*: the properties of measure are not imposed on it from outside by a list of axioms but are traced in the very rule of assignment.
 
 ### Finite Additivity, Monotonicity, the Point
 
@@ -105,15 +105,14 @@ $$
 
 is the measure of the union of the first $n$ pieces, a finite quantity available at every stage. Since every $\mu(A_k)\ge 0$, the sequence $S_n$ *increases monotonically*.[^9] If all the $A_k$ lie in one bounded interval $[c,d]$ (as happens in practice), then their disjoint pieces taken together cover no more than $[c,d]$, and therefore $S_n\le d-c$ for all $n$: the process is *bounded*.
 
-{
-And a monotone bounded process over ℚ *converges*: it forms a Cauchy sequence.[^10] Thus the *provable core* of $\sigma$-additivity in our reading is a theorem: the process of partial sums of measures converges.}
+And a monotone bounded process over ℚ *converges*: it forms a Cauchy sequence.[^10] Thus the *provable core* of $\sigma$-additivity in our reading is a theorem: the process of partial sums of measures converges.
 
 **$\sigma$-additivity is not an equality of two completed
 infinities but the convergence of the process of partial sums of measures.** The limit that the classical theory writes as $\mu(\bigsqcup_k A_k)$ is a *role*, the value to which the process converges; reading it as the measure of the countable union is a substantive role of the process, not a built object of a completed union.
 
 ### The Honest Price
 
-There is exactly one price, and it is named. The step “a monotone bounded process converges” is classical: it relies on the Law of Excluded Middle (L3){} in the same sense in which the theorem on the monotone convergence of processes rests on it (`monotone_bounded_Cauchy` in the process arithmetic).[^11] The *completed* union $\bigsqcup_k A_k$ as a self-standing object, however, is something ToS does not build: it would remain an actual infinity, which P4 does not admit. But for the content of the theory it is not needed: everything that $\sigma$-additivity says is expressed by the convergence of the process $S_n$, and the convergence is proved.
+There is exactly one price, and it is named. The step “a monotone bounded process converges” is classical: it relies on the Law of Excluded Middle (L3) in the same sense in which the theorem on the monotone convergence of processes rests on it (`monotone_bounded_Cauchy` in the process arithmetic).[^11] The *completed* union $\bigsqcup_k A_k$ as a self-standing object, however, is something ToS does not build: it would remain an actual infinity, which P4 does not admit. But for the content of the theory it is not needed: everything that $\sigma$-additivity says is expressed by the convergence of the process $S_n$, and the convergence is proved.
 
 ## The Domain-Explicit Dominating Function—the Method of Part VI
 
@@ -162,8 +161,7 @@ $\mu(A_k)$, characteristic step functions, partial sums $S_n$. Under P4 no eleme
 
 ### Well-Formedness Check and What the Analysis Yields
 
-{
-The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the rule $\mu=I(\chi)$ does *not* take as its element “the collection of all measurable sets.” A completed $\sigma$-algebra does not exist as a bearer: the domain of the rule is outlined by distinguishability, stage by stage, and is not given as a ready totality. It is precisely the absence of such self-reference (measure as an element of its own domain) that explains why the initial conditions of the classical constructions of Vitali and Banach–Tarski do not arise within this frame: the *completed* totality of all subsets and the external choice of representatives. Therefore these constructions are not objects of the present measure theory. This is not a separate metatheorem of impossibility but a diagnosis of the absence of the needed bearer.}
+The system is well-formed: each component falls into exactly one E/R/R category, and there is no self-reference (P1). What is essential is what is *absent* here: the rule $\mu=I(\chi)$ does *not* take as its element “the collection of all measurable sets.” A completed $\sigma$-algebra does not exist as a bearer: the domain of the rule is outlined by distinguishability, stage by stage, and is not given as a ready totality. It is precisely the absence of such self-reference (measure as an element of its own domain) that explains why the initial conditions of the classical constructions of Vitali and Banach–Tarski do not arise within this frame: the *completed* totality of all subsets and the external choice of representatives. Therefore these constructions are not objects of the present measure theory. This is not a separate metatheorem of impossibility but a diagnosis of the absence of the needed bearer.
 
 What the analysis yields. It translates the central sentence of the chapter into the language of structure: *measure is a Rule* (a process of assignment), *measurability is a Role* (distinguishability), and the numerical measures and partial sums are *Elements* (finite at every stage). To take measure as a “function on a completed set” is to put the never-completed domain of the Rule in the place of a ready Element-totality—a confusion of categories of the same kind as “number as an object” instead of the role-quantity (Part II), “a point as an object” instead of a class (Chapter 4.3), and “uncountability as a property of a set” instead of a rule about processes (Chapter 4.4). The loss of the Axiom of Choice does not impoverish the theory here: it only removes what was a postulate about a completed totality all along, leaving everything constructive untouched.
 

@@ -2,7 +2,7 @@
 title: "Grelling–Nelson Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Греллинга-Нельсона.md"
-sourceBlob: bdac4a4e36768880b496f00e066b5a5d8be7d615
+sourceBlob: 0e1500085c5978eb3e79336236db5f2e9e2a808c
 translated: 2026-10-20
 status: draft
 description: "A second-order property is applied to itself"
@@ -14,7 +14,7 @@ description: "A second-order property is applied to itself"
 
 ## Exact Formulation
 
-Let us call a word **autological** if it describes itself: “short” is a short word, “English” is English, “pentasyllabic” is pentasyllabic. Let us call a word **heterological** if it does not describe itself: “long” is not a long word, “French” is not French. The question: is the word “heterological” heterological? If yes—it describes itself (it really is heterological), hence it is autological, not heterological. If no—it does not describe itself; but “heterological” means precisely “not describing itself”—it turns out that it describes itself, that is, it is autological—whereas we supposed that it is not heterological, and an autological word is not heterological. Both paths lead to contradiction.
+Let us call a word **autological** if it describes itself: “short” is a short word, “English” is English, “pentasyllabic” is pentasyllabic. Let us call a word **heterological** if it does not describe itself: “long” is not a long word, “French” is not French. The question: is the word “heterological” heterological? If yes—it describes itself (it really is heterological), hence it is autological, not heterological. If no—it is autological, that is, it describes itself; but what it says of itself is “heterological”—so it is heterological. Both paths lead to contradiction.
 
 ## Origin
 

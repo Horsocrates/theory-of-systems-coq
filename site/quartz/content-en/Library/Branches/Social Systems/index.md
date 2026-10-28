@@ -2,7 +2,7 @@
 title: "Social Systems"
 lang: en
 translationOf: "Библиотека/Направления/Социальные Системы/index.md"
-sourceBlob: 45aad81e8d25fbe9e2f5f7c9179345bb68c6f42f
+sourceBlob: a7ece77272dae4ffb3f96c2cee9f21b2e493cb7b
 translated: 2026-10-20
 status: draft
 description: "Social systems are open: selection for roles is led by the operator’s will; the task is the ground of the triad; governance is a gardener; Guilds, two lineages, flows of distribution."
@@ -39,7 +39,7 @@ A peculiarity of the triad: **the element and the operator coincide.** Those who
 
 ## The Systems
 
-Five systems are analyzed in depth—each on its own page, each by its own task:
+Six systems are analyzed in depth—each on its own page, each by its own task:
 
 - **[[Economy]]**—creation and provision: production and distribution.
 - **[[Politics]]**—the coordination of the common field: roles and selection; gardener governance.
@@ -62,11 +62,11 @@ Since a person is drawn to a kind of activity, systems naturally gather around i
 
 The house of a Guild is its space: creating spaces for socialization is one of the functions of a Guild ([[Spaces]]).
 
-With the Guild a second axis of the arrangement opens. A person is always in two lineages at once: by **interest** (house—sub-domain—Guild) and by **place** (house—district—region). These axes are orthogonal, and the division of decisions falls along them: what requires **knowledge of the matter** is decided by interest, in the Guild; what concerns **living together**—the disposal of a local resource, taxes from the house up to the region—remains with the systems of place. Every decision goes to the encompassing system within whose sphere it falls.
+With the Guild a second axis of the arrangement opens. A person is always in two lineages at once: by **competence** (the Guild) and by **place** (house—district—region). These axes are orthogonal, and the division of decisions falls along them: what requires **knowledge of the matter** is decided by interest, in the Guild; what concerns **living together**—the disposal of a local resource, taxes from the house up to the region—remains with the systems of place. Every decision goes to the encompassing system within whose sphere it falls.
 
 ## Functions: Education, Law, Creation
 
-**Education free of charge.** Knowledge is absolute truth; to withhold absolute truth for the sake of advantage is to create a field for illusion, and this is a distortion of absolute truth, not service to it: the choice of untruth for one’s own gain.[^3] Hence access to knowledge is free of payment out of necessity, not out of kindness: a paywall on absolute truth is a distortion. Access is free—but labor is not unpaid: the role of the teacher is sustained by the Guild’s network of mutual provision.
+**Education free of charge.** Knowledge is absolute truth; to withhold absolute truth for the sake of advantage is to create a field for illusion, and this is a distortion of absolute truth, not service to it—untruth turned against the will of others for one’s own gain.[^3] Hence access to knowledge is free of payment out of necessity, not out of kindness: a paywall on absolute truth is a distortion. Access is free—but labor is not unpaid: the role of the teacher is sustained by the Guild’s network of mutual provision.
 
 **Law on two axes.** One half of it—decisions of knowledge—goes to the Guild, by expertise; the other—decisions of living together—remains with the systems of place. Law here is routing, not a single code from above: each case goes to its competent tier.
 
@@ -84,13 +84,13 @@ Nor is reward for a contribution rejected. Whoever has brought an underfunded pr
 
 Within a Guild the operator is its members themselves: one vote per member, with the right to delegate, specialized committees by area, decision by vote. The operator here is a role filled by a multitude, and a replaceable one; delegation is the fluid transfer of one’s share in it; and everything is transparent, for a hidden operator would be a withholding of absolute truth—the same distortion as a paywall on knowledge.
 
-Above the field of Guilds stands the **Philosophical Guild**—of those who are drawn to the very structure of systems. Philosophy is precisely knowledge of structure; hence the Guild of this interest naturally leads the architecture of the whole—a coordinator that keeps the systems in accord but does not enter into the internal rules of each. It is above the field by arrangement, not by power: above only in architecture, open in membership, replaceable in its operator, transparent in its work—hence a Guild of its own interest, not an estate. So the thought about philosophy comes true in deed: the structure of systems is led by those whose pull is toward structure (the roles and obligations of the philosopher—[[Code of Ethics]]).
+Above the field of Guilds stands the **Guild of Philosophers**—of those who are drawn to the very structure of systems. Philosophy is precisely knowledge of structure; hence the Guild of this interest naturally leads the architecture of the whole—a coordinator that keeps the systems in accord but does not enter into the internal rules of each. It is above the field by arrangement, not by power: above only in architecture, open in membership, replaceable in its operator, transparent in its work—hence a Guild of its own interest, not an estate. So the thought about philosophy comes true in deed: the structure of systems is led by those whose pull is toward structure (the roles and obligations of the philosopher—[[Code of Ethics]]).
 
 A conflict of systems is resolved by the same law of level: any two disputing systems have a nearest common encompassing system, and the dispute goes to it—no higher. Hence the diseases, too, are seen as level confusion: a higher system that has entered into the affairs of a lower one is overreach; the seizure of the encompassing system by a part of it is usurpation; and the protection against it is that the operator is replaceable.
 
 ## Synthesis
 
-Everything in this arrangement is routed in the same way: by the level of nesting, with deference to the lower one, by the decision of its own community. This is how decisions and disputes go, how distribution flows, how capital is gathered. The arrangement turns out self-similar, fractal: each tier is a system with its own operator, its own bank, its own projects, deciding and nourishing at its own level. And everything rests on a single ground, not on a scheme invented from above: order is fitting elements in fitting roles, and it is also the good.[^2] Hence the social organization here is not capitalism—for the recipient-accumulator has been driven out of the center—and not leveling—for the uniqueness of each is accepted; but a third: a structure in which the will to create is aligned, potential unfolds by calling, and the surplus flows without stagnating.
+Everything in this arrangement is routed in the same way: by the level of nesting, with deference to the lower one, by the decision of its own community. This is how decisions and disputes go, how distribution flows, how capital is gathered. The arrangement turns out self-similar, fractal: each tier is a system with its own operator, its own bank, its own projects, deciding and nourishing at its own level. And everything rests on a single ground, not on a scheme invented from above: order is fitting elements in fitting roles, and it is also the right (the rightful).[^2] Hence the social organization here is not capitalism—for the recipient-accumulator has been driven out of the center—and not leveling—for the uniqueness of each is accepted; but a third: a structure in which the will to create is aligned, potential unfolds by calling, and the surplus flows without stagnating.
 
 ---
 
@@ -98,7 +98,7 @@ Everything in this arrangement is routed in the same way: by the level of nestin
 
 [^2]: Order = fitting elements in fitting roles; “the right = logic = order”; justice is the same order on a social scale. [[Ethics|The derivation of ethics]], steps 29, 36, 70–74.
 
-[^3]: Evil is the choice of untruth for the sake of one’s own gain, a distortion of intention; it is positively real, but parasitic—a parasite on order. [[Ethics|The derivation of ethics]], steps 21, 55–61.
+[^3]: Evil is an action against the will of another for one’s own ends, a distortion of intention; it is positively real, but parasitic—a parasite on order. [[Ethics|The derivation of ethics]], steps 21, 55–61.
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Burali-Forti Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Буралли-Форти.md"
-sourceBlob: cd8290e792022f99e2ca25c53b078df69499725b
+sourceBlob: 3ca1f71d3aa6b60e69007e2f498e3d5d551d2fe8
 translated: 2026-10-20
 status: draft
 description: "The ordinal of all ordinals (an open sequence as a set)"
@@ -14,7 +14,7 @@ description: "The ordinal of all ordinals (an open sequence as a set)"
 
 ## Exact Formulation
 
-An ordinal is the order type of a well-ordered collection; each ordinal is the collection of all smaller ordinals. Let Ω be the collection of *all* ordinals. It is well-ordered—so it has an order type itself, that is, Ω is an ordinal. Then Ω belongs to the collection of all ordinals—to itself: Ω ∈ Ω; moreover, every ordinal is strictly smaller than its successor—Ω than Ω + 1, which is also an ordinal and must lie in Ω—so the “greatest order” is both greater than itself and not the greatest. A contradiction from both sides.
+An ordinal is the order type of a well-ordered collection; each ordinal is the collection of all smaller ordinals. Let Ω be the collection of *all* ordinals. It is well-ordered—so it has an order type itself, that is, Ω is an ordinal. Then Ω belongs to the collection of all ordinals—to itself: Ω ∈ Ω; moreover, Ω is strictly smaller than its successor Ω + 1, which is also an ordinal and therefore must lie in Ω—so the “greatest order” is both greater than itself and not the greatest. A contradiction from both sides.
 
 ## Origin
 
@@ -54,7 +54,7 @@ There is no “ordinal of all ordinals”—by its kind, not by decree: the seri
 
 [[Cantors Paradox|Cantor]] (the same on cardinalities: the system of all systems), [[Russells Paradox|Russell]] (the minimal form), [[Liar Paradox|the Liar]] (the same figure on truth-value); defective neighbors in the reification of the infinite—[[Hilberts Hotel|Hilbert’s Hotel]], [[Thomsons Lamp|Thomson’s Lamp]].
 
-**Machine check.** Diagnosis by the triad—Totality = an element of itself; solution—proper classes: `buraliforti_is_ill_formed` (src/foundation/ParadoxDiagnosis.v); the structural resolution on levels: there is no “level of all levels”—after every level there is a next one (G3, no top level), and transfinite induction runs over levels without a top: src/foundation/TransfiniteInductionLevel.v. Map: [[Formalization]].
+**Machine check.** Diagnosis by the triad—Totality = an element of itself; solution—proper classes: `buraliforti_is_ill_formed` (src/foundation/ParadoxDiagnosis.v); the structural laying open on levels: there is no “level of all levels”—after every level there is a next one (G3, no top level), and transfinite induction runs over levels without a top: src/foundation/TransfiniteInductionLevel.v. Map: [[Formalization]].
 
 ---
 
