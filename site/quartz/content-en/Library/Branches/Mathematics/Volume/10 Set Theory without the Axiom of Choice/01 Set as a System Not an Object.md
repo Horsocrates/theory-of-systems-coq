@@ -2,7 +2,7 @@
 title: "Chapter 1. Set as a System, Not an Object"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/01 Множество как Система, а не объект.md"
-sourceBlob: b7c409ee75a2b6b8ab4ef62a99f345cf25b57563
+sourceBlob: 2aef9d5e77c7facf78673a2d478dd47958577b48
 translated: 2026-10-20
 status: draft
 ---
@@ -78,7 +78,7 @@ criterion${}+{}$P2; paradoxes $\to$ structurally impossible. The strong axioms l
 
 **Diagnosis.** The root error is “the set as a completed object”; every strong axiom and every paradox is a particular manifestation of it.
 
-**Honest boundaries.** The principle L4 (witness extraction from a single $\exists$) is *not* the Axiom of Choice (choice over an arbitrary completed family); this is clarified in 10.4. The power set *as an object* is not built here (only the type of bool-predicates, 10.3). ToS does not prove the metatheoretical independence of AC (forcing, models): what is at issue is an *object-level* bypass of choice.
+**Honest boundaries.** The principle L4 (witness extraction from a single $\exists$) is not the Axiom of Choice as a completed graph, but its strength is choice-like: choice over any family follows from it ([[Formalization]]); this is clarified in 10.4. The power set *as an object* is not built here (only the type of bool-predicates, 10.3). ToS does not prove the metatheoretical independence of AC (forcing, models): what is at issue is an *object-level* bypass of choice.
 
 *A set is a role-System; membership is a role; the hierarchy is a rule; completed infinity is a role-limit. A strong axiom and a paradox are two forms of one error: the reification of a role/rule as an Element.*
 

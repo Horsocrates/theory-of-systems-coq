@@ -2,7 +2,7 @@
 title: "Part XVIII. The Process Hierarchy"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/index.md"
-sourceBlob: fbe435f71494bbf8d15ea0d1b8fa040941d0500d
+sourceBlob: d1f509f5cfa4c126b2479cd9ffccbd7cbd103082
 translated: 2026-10-20
 status: draft
 description: "The ascending tower of role-types: depth, determinacy up the hierarchy, well-quasi-ordering—the hierarchy is a process."

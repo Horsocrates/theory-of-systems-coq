@@ -2,7 +2,7 @@
 title: "Chapter 2. Walsh–Hadamard: A Transform without Transcendentals"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/02 Уолш–Адамар преобразование без трансцендентностей.md"
-sourceBlob: 56a97c72bfaa52b7c6ad36445daa794343d39ef5
+sourceBlob: 50b9d11ed5afae863ea1ac43a8509f878c3f3d8e
 translated: 2026-10-20
 status: draft
 ---
@@ -137,7 +137,7 @@ The case $N=2$ has its own name. The matrix $H_2=\big[\begin{smallmatrix}1&1\\
 
 First, the gate is an *involution*: $H^2=I$; applied twice, it returns the initial state.[^8] Second, it creates an *equal superposition*: from the basis state $\lvert0\rangle$ it makes a vector with equal amplitudes $1/\sqrt2$ on both outcomes.[^9]
 
-*The conservation of energy is an exact rational fact ($\norm{Hf}^2=N\norm{f}^2$); the quantum Hadamard gate is the normalized Walsh transform on two points. The only transcendence, the normalization $1/\sqrt N$, is separated and marked; the structure of the gate (involution, superposition) is rational.*
+*The conservation of energy is an exact rational fact ($\norm{Hf}^2=N\norm{f}^2$); the quantum Hadamard gate is the normalized Walsh transform on two points. The only irrationality, the normalization $1/\sqrt N$, is separated and marked; the structure of the gate (involution, superposition) is rational.*
 
 ## E/R/R Analysis: The Transform as Characters of a Group
 

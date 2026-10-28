@@ -1883,7 +1883,7 @@ $\neg P$. Это — мост между утверждениями Rocq и ак
 [^2]: Соссюр Ф. де, *Курс общей лингвистики*. Москва: Логос, 1998. Оригинал: de Saussure F., *Cours de linguistique générale*, 1916.
 [^3]: Heidegger M., *Identität und Differenz*. Pfullingen: Neske, 1957. Русский перевод: Хайдеггер М., *Идентичность и различие* / Пер. А. В. Денежкина. Москва: Гнозис, 1997.
 [^4]: Derrida J., *Marges de la philosophie*. Paris: Minuit, 1972. Русский перевод: Деррида Ж., *Поля философии* / Пер. Д. Ю. Кралечкина. Москва: Академический Проект, 2012.
-[^5]: Аристотель, *Метафизика*, IV.3 1005b19–23. Греческий оригинал: $\dot{\alpha}\delta\acute{v}\nu\alpha\tau o\nu$ $\gamma\grave{\alpha}\rho$ $\dot{o}\tau\iota o\tilde{v}\nu$ $\tau\dot{o}$ $\alpha\dot{v}\tau\dot{o}$ $\dot{v}\pi\acute{\alpha}\rho\chi\varepsilon\iota\nu$ $\tau\varepsilon$ $\kappa\alpha\grave{\iota}$ $\mu\grave{\eta}$ $\dot{v}\pi\acute{\alpha}\rho\chi\varepsilon\iota\nu$ $\tau\tilde{\omega}$ $\alpha\dot{v}\tau\tilde{\omega}$ $\kappa\alpha\grave{\iota}$ $\kappa\alpha\tau\grave{\alpha}$ $\tau\dot{o}$ $\alpha\dot{v}\tau\acute{o}$.
+[^5]: Аристотель, *Метафизика*, IV.3 1005b19–23. Греческий оригинал (изд. W. D. Ross, 1924): τὸ γὰρ αὐτὸ ἅμα ὑπάρχειν τε καὶ μὴ ὑπάρχειν ἀδύνατον τῷ αὐτῷ καὶ κατὰ τὸ αὐτό.
 
 ---
 

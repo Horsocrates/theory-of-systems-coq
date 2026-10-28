@@ -2,14 +2,14 @@
 title: "Chapter 6. Processes as Universal Constructions; Setoid as a Topos"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/06 Процессы как универсальные конструкции; Setoid как топос.md"
-sourceBlob: c888230bcdaf55a160af41b3c9b120948d1675ab
+sourceBlob: fc5e9adbf1ed36f3b1d9d81dad1bcd0cf6abc139
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-Chapters 14.1–14.3 worked within a level, 14.4 linked the levels by an adjunction (P2), and 14.5 raised the adjunction to a language of dualities. This chapter is about P4 (Finite Actuality)—about how ToS understands *universal constructions*: limits, colimits, exponentials, the subobject classifier. Here ToS has **two readings**, and both dispense with the “completed infinite object”:
+Chapters 14.1–14.3 worked within a level, 14.4 linked the levels by an adjunction (complementarity), and 14.5 raised the adjunction to a language of dualities. This chapter is about P4 (Finite Actuality)—about how ToS understands *universal constructions*: limits, colimits, exponentials, the subobject classifier. Here ToS has **two readings**, and both dispense with the “completed infinite object”:
 
 - **The process reading (P4 literally):** a limit and a colimit *are processes*. A product is a process of pairs, an equalizer a process of differences, a colimit *the process itself*.
 - **The setoid-topos reading (abstract):** the category of setoids $\SetoidCat$ carries a *topos kit* of structures—finite (co)limits, cartesian closedness, a predicate subobject classifier—and all of them are constructive.

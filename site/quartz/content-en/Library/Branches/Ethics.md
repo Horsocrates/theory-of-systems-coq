@@ -285,9 +285,9 @@ The full analysis of the will is in [[Metaphysics#The Operator and the Will|Meta
 
 A disposition is the limit of repeated choices (steps 75, 78).
 
-**Step 52** *(from steps 2, 51)*. Virtue toward another has three parts: the demonstration of logic—to show the rules without imposing conclusions; the absence of pressure on another’s will; the protection of those who are pressed. The ground: the way of logic is to show itself by being itself; therefore its bearer too shows and does not impose.
+**Step 52** *(from steps 2, 51)*. Virtue toward another has three parts: the demonstration of logic—to show the rules without imposing conclusions; the absence of pressure on another’s will; the protection of those who are pressured. The ground: the way of logic is to show itself by being itself; therefore its bearer too shows and does not impose.
 
-The proposition “shows and does not impose” rests on reasoning; it has no machine check. In the code these are the obligations of the philosopher ([[Code of Ethics]]).
+The proposition “shows and does not impose” rests on reasoning; it has no machine check. In the Code these are the obligations of the philosopher ([[Code of Ethics]]).
 
 **Step 53** *(from steps 21, 52)*. Imposition is the binding of another’s freedom: the other’s free knowing is replaced by an alien will. It contradicts the very way of logic: one who imposes does not represent logic—such a one is an aggressor.
 
@@ -353,7 +353,7 @@ The bound of the duty: “ought” presupposes “can”—the duty lies on the 
 
 **Step 73** *(from steps 34, 72)*. Particular duties: order requires analysis, and analysis requires capacity; the capable are obliged to carry order, the holders of a resource to give the capable their conditions; the two duties close on each other. “Philosopher” and “elite” are roles by capacity, not estates; the duty repeats at every level.
 
-In the code these are the obligations of the philosopher and the step of reciprocity ([[Code of Ethics]]).
+In the Code these are the obligations of the philosopher and the step of reciprocity ([[Code of Ethics]]).
 
 **Step 74** *(from steps 67, 68, 70)*. The criterion of the justice of an institution: an institution is just if and only if its verdict coincides with the verdict of order itself; an unjust law itself distorts order. The administration of justice exists because the victim is not the judge: punishment goes upward from the victim.
 

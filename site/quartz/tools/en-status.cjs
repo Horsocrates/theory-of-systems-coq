@@ -17,6 +17,9 @@ const enRoot = path.join(root, "content-en")
 const ruRoot = path.join(root, "content")
 
 function blobHash(buf) {
+  // git here runs with core.autocrlf=true and hashes text with LF line ends;
+  // do the same, so a Russian file saved with CRLF does not look changed
+  buf = Buffer.from(buf.toString("utf8").replace(/\r\n/g, "\n"), "utf8")
   const h = crypto.createHash("sha1")
   h.update(`blob ${buf.length}\0`)
   h.update(buf)

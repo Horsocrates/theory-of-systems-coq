@@ -2,7 +2,7 @@
 title: "Chapter 4. E/R/R: The Ontology of a System"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/04 ERR онтология системы.md"
-sourceBlob: 3f73ae841559ec83b9cc8889ee81ec5e4c886dda
+sourceBlob: 52f1321145342f196fa56842bc7aa59bcb56964b
 translated: 2026-10-20
 status: draft
 ---
@@ -61,7 +61,7 @@ Particular structural properties are also at work in the $L5$-hierarchy: $L_1 \l
 
 ### $P2$: Criterion Precedence
 
-**Structural content.**  By $L5$, every operation stands above its operand: an operation presupposes the operand as already existing. Applied to systems: the criterion that defines a system is an operation *on* that to which it is addressed; consequently, it stands at a level above the level of the result. This is *criterion precedence*: the level of the criterion $<$ the level of the system it sets.
+**Structural content.**  By $L5$, every operation stands above its operand: an operation presupposes the operand as already existing. Applied to systems: the criterion that defines a system is an operation *on* that to which it is addressed; consequently, it stands at a level above the elements to which it is applied and below the system it sets. This is *criterion precedence*: the level of the criterion $<$ the level of the system it sets.
 
 **Formal theorem.**  The principle is presented in two forms:
 
@@ -195,7 +195,7 @@ They cannot be separated from one another. An element without a role is somethin
 
 **The epistemic order vs. the ontological.**  The abbreviation E/R/R lists the aspects in the *epistemic* order: from what is outwardly observable to what lies deep. In analyzing an unfamiliar system it is natural first to see its *elements* (something directly accessible), then to recognize the *roles* (to see that the elements have significance, that they do something), and only then to bring to light the *rules* (to understand by what laws all of this works).
 
-*Ontologically*, the order is the reverse. Rules are primary: they set *what it means* to be in the system. Roles are secondary: they are defined by the rules as positions that must be filled. Elements are tertiary: they are selected for the roles as their bearers. This ontological order (Rules $\to$ Roles $\to$ Elements) is known as the *generative order*—the order in which the structure *generates* itself. It will be analyzed in detail in “Asymmetry and the Generative Order.”
+*Ontologically*, the order is the reverse. Rules are primary: they set *what it means* to be in the system. Roles are secondary: they are defined by the rules as positions that must be filled. Elements are tertiary: they are selected for the roles as their bearers. This ontological order (Rules $\to$ Roles $\to$ Elements) is known as the *generating order*—the order in which the structure *generates* itself. It will be analyzed in detail in “Asymmetry and the Generating Order.”
 
 The abbreviation E/R/R is nonetheless kept for the generally accepted epistemic order, for practical reasons: it is with the elements that analysis begins. But in each particular case the structure *works* in the reverse direction: rules $\to$ roles $\to$ elements.
 
@@ -255,7 +255,7 @@ With the formulation of E/R/R we obtain the basis for everything that follows: t
 
 ### The Order of Exposition
 
-In “Three Aspects of a System” we fixed the distinction between the *epistemic* order—the abbreviation E/R/R, in which the aspects are listed from the outwardly observable (Elements) to the deep (Rules)—and the *ontological* order (the generative order), in which rules are primary, roles secondary, and elements tertiary.
+In “Three Aspects of a System” we fixed the distinction between the *epistemic* order—the abbreviation E/R/R, in which the aspects are listed from the outwardly observable (Elements) to the deep (Rules)—and the *ontological*, generating order, in which rules are primary, roles secondary, and elements tertiary.
 
 The detailed unfolding of the three aspects proceeds in the *ontological* order: Rules $\to$ Roles $\to$ Elements. This is the order in which a system *unfolds*: first the rules are set, then the roles are defined under them, and only then are the elements selected.
 
@@ -325,7 +325,7 @@ Here $L2$ (Non-Contradiction) and $L3$ (Excluded Middle) work *in all three* asp
 
 **Consequence: the unity of E/R/R analysis.**  In analyzing any system the three aspects come to light together. Although rules are ontologically primary, it is epistemically convenient to begin with the elements (which are observable) and move toward the roles and the rules. A systematic E/R/R analysis—passing through all three questions in sequence—gives a full description of the ontological structure of a system regardless of the order in which these questions are asked.
 
-With the three aspects unfolded in their connection with the laws, we obtain the basis for the subsequent analysis of subtler structural features: the two layers of rules, the asymmetry of the generative order, the hierarchy of levels. We pass to the two layers of rules in the next section.
+With the three aspects unfolded in their connection with the laws, we obtain the basis for the subsequent analysis of subtler structural features: the two layers of rules, the asymmetry of the generating order, the hierarchy of levels. We pass to the two layers of rules in the next section.
 
 ## The Two Layers of Rules: The Universal and the Concrete
 
@@ -391,13 +391,13 @@ In each example the universal layer is the same; the concrete layers differ and 
 
 **Consequence: systems as two-layered constructions.**  Any particular system is $L1$–$L5$ (the universal layer) plus its specific rules (the concrete layer), which together define the roles and set the selection of elements. The universal layer provides structural coherence; the concrete one, specific content. Without the universal layer a system could not be a system; without the concrete one it would not be *this* system.
 
-With the two layers of Rules we complete the analysis of the ontological arrangement of rules. The next section unfolds the asymmetry of the relations among the three aspects of E/R/R—the generative order by which rules set roles, and roles set elements.
+With the two layers of Rules we complete the analysis of the ontological arrangement of rules. The next section unfolds the asymmetry of the relations among the three aspects of E/R/R—the generating order by which rules set roles, and roles set elements.
 
-## Asymmetry and the Generative Order
+## Asymmetry and the Generating Order
 
-In “Three Aspects of a System” and “The Order of Exposition” two orders were distinguished: the epistemic (Elements $\to$ Roles $\to$ Rules) and the ontological (Rules $\to$ Roles $\to$ Elements). The present section unfolds the ontological order—the generative order—as a structural asymmetry of the relations among the three aspects of E/R/R.
+In “Three Aspects of a System” and “The Order of Exposition” two orders were distinguished: the epistemic (Elements $\to$ Roles $\to$ Rules) and the ontological (Rules $\to$ Roles $\to$ Elements). The present section unfolds the ontological order—the generating order—as a structural asymmetry of the relations among the three aspects of E/R/R.
 
-***The generative order: Rules set Roles; Roles constrain
+***The generating order: Rules set Roles; Roles constrain
 Elements. There is no reverse asymmetry: Elements do not define Roles,
 and Roles do not set Rules.***
 
@@ -413,9 +413,9 @@ and Roles do not set Rules.***
 
 *The converse is false.* Elements do not define roles. A particular element—for example, the number $2$—can play different roles in different systems: in one group as a generator, in another as the neutral element, in a third as an arbitrary bearer. The element itself does not *set* the role it plays; the role is set by the rules and *prescribed* to the element.
 
-**The third relation: Rules $\to$ Elements (through Roles).**  The direct relation from rules to elements is mediated by roles: rules by themselves do not determine particular elements; they determine *roles*, which are then filled by elements. This is the *transitive* aspect of the generative order: rules determine roles, roles determine elements, and therefore rules (through roles) determine elements.
+**The third relation: Rules $\to$ Elements (through Roles).**  The direct relation from rules to elements is mediated by roles: rules by themselves do not determine particular elements; they determine *roles*, which are then filled by elements. This is the *transitive* aspect of the generating order: rules determine roles, roles determine elements, and therefore rules (through roles) determine elements.
 
-### The Generative Order: The Ontological Order of a System
+### The Generating Order: The Ontological Order of a System
 
 **Structural content.**  Together, the three asymmetric relations give a single order of the unfolding of a system:
 
@@ -423,34 +423,34 @@ $$
 \text{Rules} \;\to\; \text{Roles} \;\to\; \text{Elements}.
 $$
 
-This is the *generative order*, the ontological order in which a system *unfolds*: first the rules are set, then the roles are defined under them, and only then are the elements selected.
+This is the *generating order*, the ontological order in which a system *unfolds*: first the rules are set, then the roles are defined under them, and only then are the elements selected.
 
-**Why precisely this order.**  The generative order is not arbitrary: it follows from the work of the laws of logic at different levels:
+**Why precisely this order.**  The generating order is not arbitrary: it follows from the work of the laws of logic at different levels:
 
 - $L5$ (the Law of Order) sets the hierarchy: rules stand at a level above roles, and roles at a level above elements.
 - $L4$ (the Law of Sufficient Reason) requires that each role be grounded—the rules serve as the ground; accordingly, roles can be defined only *after* the rules.
 - $L1$ (the Law of Identity) provides the stability of elements as bearers of roles—but this stability is possible only when the roles for which the elements are bearers have already been defined.
 
-The generative order is a structural consequence of the work of $L1$, $L4$, $L5$ applied to the aspects of a system.
+The generating order is a structural consequence of the work of $L1$, $L4$, $L5$ applied to the aspects of a system.
 
 **Consequence: reverse unfolding is impossible.**  A system cannot be “unfolded in the reverse direction”—starting from the elements and deriving the roles and rules from them. Particular elements by themselves do not determine what system they are in: the number $2$ plays one role in one group, another in another, a third in a third. To understand what role a given element plays, one must first know which *rules* are at work in the given system and which *roles* they define.
 
 ### The Connection with Potential and Actualization
 
-**Structural content.**  The generative order and the distinction between the *potential/actual* modes of a system (“Elements: The Actualization of Potential”) are two sides of one structural picture:
+**Structural content.**  The generating order and the distinction between the *potential/actual* modes of a system (“Elements: The Actualization of Potential”) are two sides of one structural picture:
 
-- The *potential* of a system is what is set by the rules and roles. These are the first two links of the generative order: Rules $\to$ Roles.
+- The *potential* of a system is what is set by the rules and roles. These are the first two links of the generating order: Rules $\to$ Roles.
 - The *actualization* of a system is the selection of elements for already defined roles. This is the concluding link: Roles $\to$ Elements.
 
-**The generative order as the unfolding of potential into the actual.**  When we say that a system *unfolds* in the order Rules $\to$ Roles $\to$ Elements, we mean a structural relation rather than a temporal process: *potential precedes actualization*, and actualization *follows* from potential, not conversely. Particular elements may be selected (or not—if the roles have no bearers), but the very possibility of selection presupposes rules and roles set in advance.
+**The generating order as the unfolding of potential into the actual.**  When we say that a system *unfolds* in the order Rules $\to$ Roles $\to$ Elements, we mean a structural relation rather than a temporal process: *potential precedes actualization*, and actualization *follows* from potential, not conversely. Particular elements may be selected (or not—if the roles have no bearers), but the very possibility of selection presupposes rules and roles set in advance.
 
-**Consequence: the act of selection as the closure of the generative order.**  The selection of elements for roles is the concluding moment of the unfolding. If the rules contain a selection mechanism, the closure takes place automatically; if there is no mechanism, an act of the operator is required (“Selection of Elements: Automatic and Operator-Driven”). In both cases this is the *last* step of the generative order; before it the system exists as potential.
+**Consequence: the act of selection as the closure of the generating order.**  The selection of elements for roles is the concluding moment of the unfolding. If the rules contain a selection mechanism, the closure takes place automatically; if there is no mechanism, an act of the operator is required (“Selection of Elements: Automatic and Operator-Driven”). In both cases this is the *last* step of the generating order; before it the system exists as potential.
 
 ### The Epistemic Order as the Reverse
 
-**Structural content.**  The generative order is the order in which a system *is* (unfolds ontologically). The epistemic order is the order in which a system *is known* (recognized by us in analysis). These two orders are *the reverse* of each other:
+**Structural content.**  The generating order is the order in which a system *is* (unfolds ontologically). The epistemic order is the order in which a system *is known* (recognized by us in analysis). These two orders are *the reverse* of each other:
 
-| **Generative order (ontologically)** | **Epistemic order** |
+| **Generating order (ontologically)** | **Epistemic order** |
 |---|---|
 | Rules set Roles | Elements are recognized |
 | Roles constrain Elements | Roles are brought to light from Elements |
@@ -458,13 +458,13 @@ The generative order is a structural consequence of the work of $L1$, $L4$, $L5$
 
 **Why the two orders are reverse.**  The unfolding of a system goes from the top down (Rules $\to$ Elements), because rules are primary. The recognition of a system goes from the bottom up (Elements $\to$ Rules), because the observer first sees the elements: they are directly accessible in experience. The same phenomenon occurs in the natural sciences: the structure of the atom *in reality* unfolds from the laws of physics but *is known* starting from observable phenomena (spectra, scattering).
 
-**Consequence: the consistency of the abbreviation E/R/R.**  The abbreviation E/R/R is epistemic (Elements first, Rules last), which agrees with the practice of analysis: in analyzing an unfamiliar system it is natural to begin with the elements. This is a *practical* convention, not an ontological claim. Each time we carry out an E/R/R analysis, we move along the epistemic order—but we *discover* a system unfolded in the generative order.
+**Consequence: the consistency of the abbreviation E/R/R.**  The abbreviation E/R/R is epistemic (Elements first, Rules last), which agrees with the practice of analysis: in analyzing an unfamiliar system it is natural to begin with the elements. This is a *practical* convention, not an ontological claim. Each time we carry out an E/R/R analysis, we move along the epistemic order—but we *discover* a system unfolded in the generating order.
 
-With the generative order unfolded, we obtain the basis for the analysis of multilevel systems—those in which the elements of one level are themselves systems of a lower level. We pass to the hierarchy of levels in the next section.
+With the generating order unfolded, we obtain the basis for the analysis of multilevel systems—those in which the elements of one level are themselves systems of a lower level. We pass to the hierarchy of levels in the next section.
 
 ## The Hierarchy of Levels
 
-The preceding sections showed that E/R/R are the three aspects of any system. In “Asymmetry and the Generative Order” the unfolding of a system was traced along the generative order. The present section unfolds the *vertical* structure: the hierarchy of levels in which systems of different complexity are arranged.
+The preceding sections showed that E/R/R are the three aspects of any system. In “Asymmetry and the Generating Order” the unfolding of a system was traced along the generating order. The present section unfolds the *vertical* structure: the hierarchy of levels in which systems of different complexity are arranged.
 
 ***The elements of a system of level $n+1$ are themselves systems of level
 $n$.***
@@ -521,28 +521,27 @@ Let us consider several examples in which the hierarchy of levels shows itself e
 
 **The universal layer works at all levels.**  The laws $L1$–$L5$—the universal layer of rules (“The Universal Layer: The Laws $L1$–$L5$”)—work in the same way at every level. Only the concrete layer differs: at $L_2$ the rules of set theory are at work, at $L_3$ those of the theory of functions, at $L_4$ those of higher theories. The universal laws are the common structure; the concrete rules are what characterizes precisely the given level.
 
-**The lowest level as a boundary.**  By the theorem `L5_no_infinite_descent` ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Theorems of L5|§ 3.6.3 “The Theorems of L5”]] of Chapter 3), there is no infinite descent: the hierarchy has a *lower bound*—the base level $L_1$. What is at $L_1$? In each particular hierarchy, its own elements: the natural numbers in the arithmetical hierarchy, elementary particles in the physical one, the symbols of the alphabet in the formal-linguistic one. But in all cases $L_1$ is the level of elements *not further decomposable* in the given hierarchy: the limit below which the given hierarchy does not go.
+**The lowest level as a boundary.**  By the theorem `L5_no_infinite_descent` ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Theorems of L5|§ 3.6.3 “The Theorems of L5”]] of Chapter 3), each level has finite depth; hence the hierarchy has a *lower bound*—the base level $L_1$. What is at $L_1$? In each particular hierarchy, its own elements: the natural numbers in the arithmetical hierarchy, elementary particles in the physical one, the symbols of the alphabet in the formal-linguistic one. But in all cases $L_1$ is the level of elements *not further decomposable* in the given hierarchy: the limit below which the given hierarchy does not go.
 
 **Consequence: the limiting act of distinction.**  At the very lowest level of the hierarchy the simplest act of distinction is at work: the record `Distinction`, analyzed in Chapter 2. The elements of $L_1$ are *determinate* objects (distinct from what is not themselves), and this determinacy is provided by the work of $L1$–$L5$ in its simplest form. The hierarchy of levels begins with the act of distinction and unfolds upward through the repeated application of E/R/R at each next level.
 
-**Consequence: the upper bound and the meta-system.**  What is at the top of the hierarchy? The hierarchy of levels has no *internal* upper bound: one can always build a system of a higher level whose elements are systems of the preceding one. But within this unboundedness there is a *limiting* structure: the *meta-system*, formed by the universal laws and by the very fact of existence. We pass to this meta-system—the Absolute—in the next section.
+**Consequence: the upper bound and the meta-system.**  What is at the top of the hierarchy? The hierarchy of levels has no *internal* upper bound: one can always build a system of a higher level whose elements are systems of the preceding one. But the whole hierarchy, with all its levels, is contained in one *meta-system*, formed by Logic and the Source. We pass to this meta-system—the Absolute—in the next section.
 
 ## The Meta-System: The Absolute
 
-In “Hierarchy as the Unfolding of E/R/R” it was noted that the hierarchy of levels of systems has no internal upper bound but has a *limiting* structure: the meta-system, formed by the universal laws and by the very fact of existence. This meta-system is the Absolute, analyzed in [[Metaphysics|“Metaphysics”]]. The present section shows that the Absolute has an E/R/R structure—and thereby closes the ontological chain between the metaphysical arrangement and the formal work of the present volume.
+In “Hierarchy as the Unfolding of E/R/R” it was noted that the hierarchy of levels of systems has no internal upper bound, but the whole of it is contained in one meta-system. This meta-system is the Absolute, analyzed in [[Metaphysics|“Metaphysics”]]: Logic and the Source cover everything that exists—every being is filling in form; together they make up the Absolute—the sum of all that is: one whole, in which Logic is the rules and the Source is the filling. E/R/R are the constituent aspects of any system, and the Absolute, as a meta-system, is analyzed in terms of the same three aspects. The present section carries out this analysis—and thereby connects the metaphysical arrangement with the formal work of the present volume.
 
-Before unfolding this analysis, its status must be stated precisely. Nothing said below about the Absolute *is* a theorem of the current Rocq formalization. The Coq files of the repository contain no formal object `Absolute`, no Logic and Source as elements of some meta-system, and no theorem of the form “$E/R/R \to \text{Absolute}$.” The formalization analyzed in the preceding sections gives E/R/R as the structure of *systems*; the present section is a *metaphysical application* of this structure—the application of E/R/R to the Absolute, which connects the present volume with “Metaphysics.” This step is substantive, not machine-checked. Therefore, when it was said above that each link of the derivation chain is derived from the preceding ones, this does *not* apply to the link “E/R/R $\to$ Absolute”: it belongs to the metaphysical interpretation, not to the current formal corpus. The reader must keep this distinction in mind throughout the section.
+Before unfolding this analysis, its status must be stated precisely. Nothing said below about the Absolute *is* a theorem of the current Rocq formalization. The Coq files of the repository contain no formal object `Absolute` and no Logic and Source as elements of some meta-system. The formalization analyzed in the preceding sections gives E/R/R as the structure of *systems*; the present section is a *metaphysical application* of this structure—an E/R/R analysis of the Absolute, which connects the present volume with “Metaphysics.” This step is substantive, not machine-checked. The Absolute does not serve as a link of the derivation chain: the chain derives the arrangement of *any* system—its E/R/R aspects—while the Absolute is the meta-system containing all that is; it is formed by Logic and the Source. The reader must keep this distinction in mind throughout the section.
 
 ### What “Meta-System” Means
 
-**Structural content.**  The Absolute is not “a system among systems”: its place is not in the hierarchy $L_1, L_2, L_3, …$ alongside other levels. The Absolute is a *meta*-arrangement: that which sets the very possibility of the hierarchy of levels before any particular level appears in it. In this it differs from any system within the hierarchy: an inner system is one of many; the meta-system is the condition of the very possibility of the existence of any of them.
+**Structural content.**  The Absolute is not “a system among systems”: its place is not in the hierarchy $L_1, L_2, L_3, …$ alongside other levels—the whole hierarchy is in it. The Absolute is a *meta*-system: the sum of all that is—one whole that contains every level and every system. In this it differs from any system within the hierarchy: an inner system is one of many; the meta-system contains them all.
 
-***The Absolute is the meta-system formed by Logic and
-the Source as its elements.***
+***The Absolute is the meta-system containing all that is; it is formed by Logic and the Source.***
 
-**The Absolute is not an entity.**  This clarification is of fundamental importance; without it all the further work would be misunderstood. The Absolute is not an *entity*—not a separate thing existing alongside other things. It is not a “something” one can point a finger at or of which one can say “here it is.” The Absolute is the *meta-arrangement of existence*: that which makes possible the existence of anything at all. To say “the Absolute is” in the ordinary sense of “here it stands before me” is to commit a category mistake: to confuse an entity with the meta-level.
+**The Absolute is not an entity.**  This clarification is of fundamental importance; without it all the further work would be misunderstood. The Absolute is not an *entity*—not a separate thing existing alongside other things. It is not a “something” one can point a finger at or of which one can say “here it is.” The Absolute is the *meta-system*—the sum of all that is: each thing is in it, not alongside it. To say “the Absolute is” in the ordinary sense of “here it stands before me” is to commit a category mistake: to confuse an entity with the meta-level.
 
-**What “formed” means.**  The Absolute does not *consist of* two entities (Logic and the Source); that would be a reading of the Absolute as a “thing with parts.” Rather, the Absolute is *formed*: its structure *arises as a result* of Logic and the Source working with each other in definite roles. The meta-system is *the very arrangement* of how Logic and the Source together make up the possibility of existence, neither an object nor a process taken separately.
+**What “formed” means.**  The Absolute does not *consist of* two entities (Logic and the Source); that would be a reading of the Absolute as a “thing with parts.” Rather, the Absolute is *formed* by them: Logic and the Source are two systems that must be and always are, and the Source is within Logic, as the filling within a structure. The meta-system is neither an object nor a process but one whole that they make up together: every being in it is filling in form.
 
 ### The E/R/R Structure of the Absolute
 
@@ -574,35 +573,34 @@ the Source as its elements.***
 **The peculiarity of the meta-system: an exception to the general rule of
 selection.**  In ordinary systems elements are *selected* for roles defined in advance—either automatically (if a mechanism is given) or through the action of an operator (“Selection of Elements: Automatic and Operator-Driven”). In the Absolute there is no such selection. Logic and the Source are not *selected* for the roles of Structure and Filling: they are *already given* as primordial and *form* the meta-system by working with each other in these roles.
 
-This is a structural exception, in agreement with the primordial status of the Absolute (“Primordial Status”). In an ordinary system the generative order (Rules $\to$ Roles $\to$ Elements) unfolds sequentially: the rules are defined, then the roles under them, and the elements are selected for the roles. In the meta-system all three aspects are given *at once*: there is no “moment before selection,” since there is nothing that would be “before” the meta-system. Logic, the Source, their roles, and the rules establishing the distribution of roles are a single meta-arrangement, given as the condition of existence as such.
+This is a structural exception, in agreement with the primordial status of the Absolute (“Primordial Status”). In an ordinary system the generating order (Rules $\to$ Roles $\to$ Elements) unfolds sequentially: the rules are defined, then the roles under them, and the elements are selected for the roles. In the meta-system all three aspects are given *at once*: there is no “moment before selection,” since there is nothing that would be “before” the meta-system. Logic, the Source, their roles, and the rules establishing the distribution of roles are a single meta-arrangement, given as the condition of existence as such.
 
 **Consequence: the laws of logic work at the level of the Rules of the Absolute.**  It follows from the E/R/R analysis of the Absolute that the laws $L1$–$L5$ stand *at the level of the Rules* of the meta-arrangement, not *within* the Absolute as part of its content. This agrees with the position already fixed ([[Library/Branches/Mathematics/Volume/01 First Distinction and Laws of Logic/03 Deriving the Laws of Logic from Distinction#The Laws of Logic and Their Derivation as Theorems|§ 3.1.2 “The Laws of Logic and Their Derivation as Theorems”]]): the laws are ontologically primary—they work at the meta-level as the conditions of the very possibility of any existence.
 
 ### Primordial Status
 
-**Structural content.**  The Absolute does not “appear” at some moment: it does not arise as the result of any process and is not created by an act or a cause. The Absolute is *primordial*: that which always is, as the *condition* of the very possibility of existence and not as a result.
+**Structural content.**  The Absolute does not “appear” at some moment: it does not arise as the result of any process and is not created by an act or a cause. The Absolute is *primordial*: that which always is, and not as a result. It is formed by Logic and the Source; their status is “cannot not be,” and they have no generating step.
 
-**Derivation from $L4$.**  The Absolute is primordial for the following structural reason: the very fact of existence requires a meta-arrangement in which there are Structure and Filling. By $L4$ this requirement is structurally necessary, not arbitrary: without the two obligatory roles determinate existence would be impossible. Consequently, the meta-arrangement realizing these roles (that is, the Absolute) cannot “appear” later than any existence: it is the *condition* of existence as such.
+**Derivation from $L4$.**  The Absolute is primordial for the following structural reason: the very fact of existence requires Structure and Filling. By $L4$ this requirement is structurally necessary, not arbitrary: without the two obligatory roles determinate existence would be impossible. Consequently, Logic and the Source, which perform these roles, cannot “appear” later than any existence—they are its grounds; and the meta-system they make up, the Absolute, has no “before.”
 
-**Consequence: the question “where does the Absolute come from?” is impossible.**  To ask where the Absolute came from, or what was “before” the Absolute, is to commit a category mistake. The question “from where?” presupposes the existence of that relative to which it is posed; but the Absolute is the very *condition* of such existence. There is no “before the Absolute,” because there is nothing relative to which this “before” could be determined.
+**Consequence: the question “where does the Absolute come from?” is impossible.**  To ask where the Absolute came from, or what was “before” the Absolute, is to commit a category mistake. The question “from where?” presupposes something outside what is being asked about—that relative to which it is posed; but the Absolute contains all that is. There is no “before the Absolute,” because there is nothing relative to which this “before” could be determined.
 
 **A remark on the metaphysics of the act.**  In [[Metaphysics|“Metaphysics”]], the act of distinction is the meeting of form and content: Logic (form) applies form to the potential of the Source (content). This belongs to the unfolding of particular content within the Absolute, not to the coming-into-being of the meta-system itself. The act of distinction is not “the moment of the appearance of the Absolute”; it is the *application* of the rules of the Absolute within it. It is not considered here: it belongs to substantive metaphysics; here we are interested only in the *structure* of the meta-system.
 
-### Closing the Ontological Chain
+### The Derivation Chain and the Absolute
 
-**Structural content.**  With the introduction of the Absolute as the meta-system, the ontological chain begun in the first chapters of the present volume closes:
+**Structural content.**  The ontological chain begun in the first chapters of the present volume concludes with the E/R/R structure:
 
 $$
 A = \exists \;\to\; \text{Distinction} \;\to\;
-  L1\text{–}L5 \;\to\; P1\text{–}P4 \;\to\; E/R/R
-  \;\to\; \text{Absolute}.
+  L1\text{–}L5 \;\to\; P1\text{–}P4 \;\to\; E/R/R.
 $$
 
-Each link of the chain is a structural condition derived from the preceding ones. The concluding link is the Absolute as the meta-system realizing the E/R/R structure at the meta-level.
+Each link of the chain is a structural condition derived from the preceding ones; the chain derives the arrangement of *any* system. The Absolute does not continue it: E/R/R are the constituent aspects of any system, whereas the Absolute is the meta-system containing all that is; it is formed by Logic and the Source. The chain stands wholly within the Absolute: each of its links concerns systems within it, while the Absolute itself, as a meta-system, is analyzed in terms of the same three aspects (“The E/R/R Structure of the Absolute”).
 
-**The connection between “Metaphysics” and the present volume.**  In “Metaphysics” the Absolute is analyzed from the standpoint of metaphysics: as the original meta-arrangement that makes any existence possible. In the present volume the Absolute appears as the *limiting* structure of E/R/R: a meta-system to which the same categories Elements, Roles, Rules apply as to ordinary systems, but with its primordial status taken into account—the selection of elements for roles, which works in ordinary systems, does not operate in the meta-system: Logic and the Source are given at once with their roles. These are not two different Absolutes: this is one structure, analyzed from two sides—the metaphysical and the formal.
+**The connection between “Metaphysics” and the present volume.**  In “Metaphysics” the Absolute is analyzed from the standpoint of metaphysics—as the meta-system, the sum of all that is: one whole, in which Logic is the rules and the Source is the filling. In the present volume the same categories Elements, Roles, Rules are applied to the Absolute as to any system, but with its primordial status taken into account—the selection of elements for roles, which works in ordinary systems, does not operate in the meta-system: Logic and the Source are given at once with their roles. These are not two different Absolutes: this is one meta-system, analyzed from two sides—the metaphysical and the formal.
 
-**Consequence: the formal apparatus of E/R/R is universal.**  From the work of E/R/R at the meta-level (in the Absolute) and at each particular level ($L_1, L_2, L_3, …$) it follows that the E/R/R structure is a *universal* ontological structure, not a limited instrument applicable only to a certain class of systems. It works wherever determinate existence is at work—from the simplest act of distinction to the meta-system of existence as such. In the meta-system, moreover, the generative order is realized in a *limiting* form: as the simultaneous givenness of all three aspects rather than as a sequence of unfolding.
+**Consequence: the formal apparatus of E/R/R is universal.**  From the work of E/R/R at the meta-level (in the Absolute) and at each particular level ($L_1, L_2, L_3, …$) it follows that the E/R/R structure is a *universal* ontological structure, not a limited instrument applicable only to a certain class of systems. It works wherever determinate existence is at work—from the simplest act of distinction to the meta-system that contains everything. In the meta-system, moreover, the generating order is realized in a *limiting* form: as the simultaneous givenness of all three aspects rather than as a sequence of unfolding.
 
 **Consequence: ontological primacy is confirmed.**  The ontological primacy of the laws $L1$–$L5$, fixed in Chapter 3, receives further confirmation: these laws work at the level of the Rules of the meta-system itself, not *within* any particular system. They are already there in the very structure of the meta-arrangement; they are not “introduced” into the formal theory. Their derivation in Rocq as theorems (Chapter 3) is a methodological tracing, not an ontological ground.
 
@@ -648,7 +646,7 @@ By $L4$, each assignment of a role is grounded: the category Elements plays the 
 
 - The rule “three categories—exactly three, no more and no fewer” (by the minimality of E/R/R, “Minimality: Two Elements, Two Roles, Two Rules”).
 - The rule “the categories are distinguishable from one another” (hence a confusion of E/R/R categories is inadmissible—which is unfolded in “Paradoxes as a Confusion of E/R/R Categories”).
-- The rule “they work in the generative order: Rules set Roles, Roles constrain Elements” (“Asymmetry and the Generative Order”).
+- The rule “they work in the generating order: Rules set Roles, Roles constrain Elements” (“Asymmetry and the Generating Order”).
 
 **A remark on the selection of elements.**  In the self-application the selection of elements for roles works in a *limiting* form: *the categories* of E/R/R *themselves* play definite roles. This is the *only possible* distribution of roles, not “selection from an arbitrary set of candidates”: the category “Elements” cannot play the role of “bearer of the organizing laws,” since organization is a function of Rules, not of Elements. The distribution of roles in the self-application is set by the structure itself.
 
@@ -662,7 +660,7 @@ By $L4$, each assignment of a role is grounded: the category Elements plays the 
 
 *Absence of self-reference.* The category Rules does not act as an element of itself; the category Elements does not act as a rule for itself; the category Roles does not act as an element of itself. In substance this agrees with $P1$ (Hierarchy): no self-relation across levels arises. No self-referential relation through the categories is found in this analysis.
 
-**Consequence: the self-application reveals no violation.**  Let us formulate the conclusion cautiously, in accordance with the status of the analysis. In the current version of ToS the self-consistency of E/R/R is *not* a machine-checked theorem but a substantive check against the criterion formalized in `ERRWellFormedness.v` for the known paradoxical systems. Therefore the correct formulation is this: the self-application of E/R/R *reveals no structural violation* by the same signs (self-reference, confusion of categories) by which paradoxical systems are formally diagnosed. This is substantive evidence that E/R/R is fit to be the universal ontology of systems—but precisely substantive evidence, not a theorem of self-consistency proved in Rocq.
+**Consequence: the self-application reveals no violation.**  Let us formulate the conclusion cautiously, in accordance with the status of the analysis. The self-consistency of E/R/R is proved by machine (`err_self_well_formed`, `PrinciplesToERR.v`; see the remark above); the substantive check against the criterion of `ERRWellFormedness.v` agrees with it: the self-application of E/R/R *reveals no structural violation* by the same signs (self-reference, confusion of categories) by which paradoxical systems are formally diagnosed. This is substantive evidence that E/R/R is fit to be the universal ontology of systems; the self-consistency itself is a theorem proved in Rocq.
 
 ### The Parallel with the Self-Grounding of $L4$
 
@@ -1006,7 +1004,7 @@ With the analysis of paradoxes as the diagnostic work of E/R/R we complete the s
 [^12]: “Nontrivial” in the sense of not degenerating into the simplest act of distinction. The simplest act of distinction is the limiting case of the hierarchy, in which the levels do not unfold further; see “Hierarchy as the Unfolding of E/R/R.”
 [^13]: A detailed discussion of `Level` as a structure in its own right is in Chapter 6. Here its role in the formalization of the hierarchy is enough for us.
 [^14]: Formally: the inductive definition of the natural numbers through one and the operation of adding one is the simplest E/R/R structure, with two elements at each step—“what is already built” and “the next.”
-[^15]: This structure agrees with the derivation in “Metaphysics,” where the Structure/Filling duality arises as $L4$ for $A = \exists$: the very fact of existence requires a meta-arrangement in which both roles are present.
+[^15]: This structure agrees with the derivation in “Metaphysics,” where the Structure/Filling duality is derived by $L4$ for $A = \exists$: the very fact of existence requires both roles—performed by Logic and the Source.
 [^16]: A detailed discussion of the criterion is in “Paradoxes as a Confusion of E/R/R Categories.”
 [^17]: The exact formulations of `no_self_reference` and `rules_above_elements` are analyzed in “Paradoxes as a Confusion of E/R/R Categories.”
 [^18]: The formal apparatus is in the files `ERRWellFormedness.v` (the criterion of well-formedness) and `ParadoxDiagnosis.v` (the unified analysis of five paradoxes). The main theorem `all_paradoxes_ill_formed` establishes that all the classical paradoxes are structurally ill-formed.

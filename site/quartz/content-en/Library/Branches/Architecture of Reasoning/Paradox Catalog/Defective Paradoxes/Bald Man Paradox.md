@@ -44,7 +44,7 @@ As a pair to the heap, it shows the symmetry of the mechanism: the sorites works
 
 ## Why There Is No Paradox
 
-It inherits from the sorites word for word: the inductive step is a practical generalization, not a strict truth, and it does not withstand induction; the question “how many hairs make a man bald?” demands from the concept what, by the way it is built, it does not contain. The full derivation—including the reply to epistemicism and the defense of classical logic on its legitimate territory—is in the analysis of the [[Sorites Paradox|sorites]]. Where a boundary is needed in practice, it is assigned by a scale and declared a convention—this is what medicine does, and there is no paradox in it.
+It inherits from the sorites word for word: the inductive step is a practical generalization, not a strict truth, and it does not withstand induction; the question “how many hairs make a man bald?” demands from the concept what, by its arrangement, it does not contain. The full derivation—including the reply to epistemicism and the defense of classical logic on its legitimate territory—is in the analysis of the [[Sorites Paradox|sorites]]. Where a boundary is needed in practice, it is assigned by a scale and declared a convention—this is what medicine does, and there is no paradox in it.
 
 ## Lesson
 

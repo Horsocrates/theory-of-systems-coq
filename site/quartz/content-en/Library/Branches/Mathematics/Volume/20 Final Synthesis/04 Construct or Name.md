@@ -2,7 +2,7 @@
 title: "Chapter 4. Construct or Name"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/04 Построить или назвать.md"
-sourceBlob: c2ea2bbe7bf9010045d221dec6de0346a31ef5ed
+sourceBlob: 1ad3543f1f88bb0e9c4793382c3b50711484a045
 translated: 2026-10-20
 status: draft
 ---
@@ -45,12 +45,12 @@ The main thing is positive: most of the volume is *Element core*, built with a p
 - $ℝ$ is a Cauchy process, not a completed object (Part IV and beyond);
 - the Galois group of $ℚ[\sqrt2,\sqrt3]$ is a process-tower of extensions with four distinct automorphisms (Part XI)[^5];
 - a manifold is a process of charts (Part XII);
-- the Riemann hypothesis is a fixed point of the reflection of the critical strip (Part XIII), *structurally*: the reflection itself is an isometry, not a contraction[^6];
+- the Riemann Hypothesis is a fixed point of the reflection of the critical strip (Part XIII), *structurally*: the reflection itself is an isometry, not a contraction[^6];
 - computation is finitization; halting is a role-limit (the part on computation)[^7];
 - a function is a process, not a ready graph (Part XVI);
 - the calculus of the nonstandard is the shadow $\mathrm{st}$ over germs (Part XIX)[^8].
 
-Each item has a checked Element fragment or a structural anchor in its part—but not each is a full classical theorem in the traditional sense (for the Riemann hypothesis this is a *structural* fragment, not a proof of RH). This is the main body of the volume: not *named* but **constructed**.
+Each item has a checked Element fragment or a structural anchor in its part—but not each is a full classical theorem in the traditional sense (for the Riemann Hypothesis this is a *structural* fragment, not a proof of RH). This is the main body of the volume: not *named* but **constructed**.
 
 ## What the Volume Merely Names; the Flagship Banach–Tarski
 

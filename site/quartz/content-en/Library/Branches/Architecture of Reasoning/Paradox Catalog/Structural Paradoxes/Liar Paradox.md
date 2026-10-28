@@ -2,7 +2,7 @@
 title: "Liar Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс лжеца.md"
-sourceBlob: 2ea9c690e1e147003c6442d8d204ad6445fee4f6
+sourceBlob: 2f013afded72d785de1d1f6e7fb53b3caae3c93f
 translated: 2026-10-20
 status: draft
 description: "A statement evaluates its own truth-value (level confusion)"
@@ -18,7 +18,7 @@ L: “This statement is false.” If L is true, what it says holds—so L is fal
 
 ## Origin
 
-Eubulides of Miletus (fourth century BCE), the Megarian school, in his list of knots: “A man says: ‘I am lying.’ Is this true or false?” (*our translation*). An older and weaker relative is [[Epimenides Paradox|Epimenides the Cretan]]: “all Cretans are liars” from the mouth of a Cretan—only a proto-paradox, settled by a fact: one truthful Cretan is enough, and Epimenides simply lies, exaggerating. Eubulides brought self-reference to its limit, removing all loopholes. The scholastics kept the liar among the *insolubilia*; Buridan and Bradwardine built the first solutions; according to legend, the poet Philitas of Cos died after exhausting himself over this knot.
+Eubulides of Miletus (fourth century BCE), the Megarian school, in his list of knots—“the Liar”; the traditional formulation: a man says “I am lying”—is this true or false? An older and weaker relative is [[Epimenides Paradox|Epimenides the Cretan]]: “all Cretans are liars” from the mouth of a Cretan—only a proto-paradox, settled by a fact: one truthful Cretan is enough, and Epimenides simply lies, exaggerating. Eubulides brought self-reference to its limit, removing all loopholes. The scholastics kept the liar among the *insolubilia*; Buridan and Bradwardine built the first solutions; according to legend, the poet Philitas of Cos died after exhausting himself over this knot.
 
 ## Consequence
 

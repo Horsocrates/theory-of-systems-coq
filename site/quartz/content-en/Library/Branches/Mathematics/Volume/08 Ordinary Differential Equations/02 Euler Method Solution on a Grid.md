@@ -87,11 +87,11 @@ $$
 so that after $N$ steps of size $h = 1/N$ the value at the moment $t = 1$ is $(1 + 1/N)^N$.[^7] Growing the resolution, we obtain a sequence of rational approximations:
 
 $$
-N = 1:\ 2; \quad N = 2:\ \tfrac{9}{4} = 2{,}25; \quad
-  N = 4:\ \tfrac{625}{256} \approx 2{,}441,
+N = 1:\ 2; \quad N = 2:\ \tfrac{9}{4} = 2.25; \quad
+  N = 4:\ \tfrac{625}{256} \approx 2.441,
 $$
 
-growing toward $e$; for the stages shown both the exact values and the bounds are checked, in particular $2 < 625/256 < 3$.[^8] This is the famous path to the number $e \approx 2{,}718$—but a path, not a destination: each $(1+1/N)^N$ is a rational Element, computable exactly, and $e$ is the role-limit toward which the process of refinement is directed.
+growing toward $e$; for the stages shown both the exact values and the bounds are checked, in particular $2 < 625/256 < 3$.[^8] This is the famous path to the number $e \approx 2.718$—but a path, not a destination: each $(1+1/N)^N$ is a rational Element, computable exactly, and $e$ is the role-limit toward which the process of refinement is directed.
 
 ## The Sequence $(1+1/N)^N$ as a Process toward $e$
 

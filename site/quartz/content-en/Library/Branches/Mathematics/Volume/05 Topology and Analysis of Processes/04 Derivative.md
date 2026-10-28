@@ -2,7 +2,7 @@
 title: "Chapter 4. The Derivative"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/05 Топология и анализ процессов/04 Производная.md"
-sourceBlob: 77f8dd767cb710af619f0235c76b77783437f99a
+sourceBlob: 68ede80da095c62ffdf6f57dd5cc2c9fd4ae34f3
 translated: 2026-10-20
 status: draft
 ---

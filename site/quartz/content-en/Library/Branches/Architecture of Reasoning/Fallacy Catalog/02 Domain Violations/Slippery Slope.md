@@ -20,7 +20,7 @@ description: "“One thing inevitably leads to another”—a chain whose links 
 
 **Psychological source.** Catastrophizing, fear
 
-**Related fallacies:** [[Excluded Middle Fallacy|Excluded Middle]], 2.5.2
+**Related fallacies:** [[Excluded Middle Fallacy]], 2.5.2
 
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: "Chapter 1. Combinatorics—Process Counting"
+title: "Chapter 1. Combinatorics: Process Counting"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/17 Дискретная математика, вероятность, информация/01 Комбинаторика — процессный счёт.md"
-sourceBlob: 870c8e4e5de3dc506a842c530f7294d00ed1b9cd
+sourceBlob: 53c3e2508f2b6cd2dba47bad2469280ad0447f64
 translated: 2026-10-20
 status: draft
 ---
@@ -31,11 +31,11 @@ $$
 
 and this is a *proved* equality, not an observation[^2]. The symmetry $\binom{n}{k}=\binom{n}{n-k}$ is the identity of *two ways* of counting one and the same thing—exactly operational divisibility: the quantity does not depend on which role (the chosen / the discarded) we count it by.
 
-## Dirichlet’s Principle—the Common Finite Engine
+## The Pigeonhole Principle—the Common Finite Engine
 
-At the foundation of discrete mathematics lies one modest but universal engine—*Dirichlet’s principle* (the “pigeonhole” principle): if $n+1$ objects are distributed among $n$ boxes, some box receives two. In our ontology it is *constructive*: on a finite carrier the coincidence is found *by enumeration*—a pure Element operation, without any recourse to infinity[^3].
+At the foundation of discrete mathematics lies one modest but universal engine—*the pigeonhole principle* (Dirichlet’s box principle): if $n+1$ objects are distributed among $n$ boxes, some box receives two. In our ontology it is *constructive*: on a finite carrier the coincidence is found *by enumeration*—a pure Element operation, without any recourse to infinity[^3].
 
-What is essential is that this is *the same* engine that works in the pumping of automata and in the Chinese remainder theorem: one finite combinatorial principle manifesting itself in different domains. Its infinite relative (some box holds infinitely many objects) lives already on the role-limit side—we will return to it in the flagship of the chapter.
+What is essential is that this is *the same* engine that works in the pumping of automata and in the Chinese remainder theorem: one finite combinatorial principle manifesting itself in different domains. Its infinite relative (if infinitely many objects are distributed among finitely many boxes, some box holds infinitely many of them) lives already on the role-limit side—we will return to it in the flagship of the chapter.
 
 ## Generating Functions as Processes
 
@@ -65,15 +65,15 @@ The finitization boundary in combinatorics is seen most sharply in Ramsey theory
 
 *Finite Ramsey theory is an Element: the number $R(3,3)$ is found by enumeration, on the side of the terminating process.*
 
-**Infinite Ramsey theory is a role-limit.** The infinite Ramsey theorem (in every two-coloring of the infinite complete graph there is an infinite monochromatic subset) requires surveying a *completed* infinite object and is proved through Kőnig’s lemma / compactness—the role-limit side[^9]. Formally, the infinite Ramsey theorem itself is *not* proved here—the classification is fixed: the finite version is an Element (exhaustive search and a witness), the infinite one requires the limit / compactness tier. And here Dirichlet’s principle is at work again—but its *infinite* version, which is what carries counting across the boundary.
+**Infinite Ramsey theory is a role-limit.** The infinite Ramsey theorem (in every two-coloring of the infinite complete graph there is an infinite monochromatic subset) requires surveying a *completed* infinite object and is proved through Kőnig’s lemma / compactness—the role-limit side[^9]. Formally, the infinite Ramsey theorem itself is *not* proved here—the classification is fixed: the finite version is an Element (exhaustive search and a witness), the infinite one requires the limit / compactness tier. And here the pigeonhole principle is at work again—but its *infinite* version, which is what carries counting across the boundary.
 
-*One and the same Ramsey theory is cut by the finitization boundary: the finite number $R(3,3)$ is enumerable (Element), the infinite analogue is a role-limit. One engine (Dirichlet), two sides.*
+*One and the same Ramsey theory is cut by the finitization boundary: the finite number $R(3,3)$ is enumerable (Element), the infinite analogue is a role-limit. One engine (the pigeonhole principle), two sides.*
 
 ## E/R/R Analysis: Combinatorics as a System
 
 Let us analyze combinatorics by E/R/R in the generating order Rules $\to$ Roles $\to$ Elements.
 
-**Rules (L5).** The holding rules are the rules of counting: the product of independent choices, the sum of incompatible ones, Pascal’s recursion, the Catalan recurrence $C_{n+1}=\sum C_i C_{n-i}$. Above them stands the common finite engine, Dirichlet’s principle. These rules stand one level above the counted objects and give the quantities.
+**Rules (L5).** The holding rules are the rules of counting: the product of independent choices, the sum of incompatible ones, Pascal’s recursion, the Catalan recurrence $C_{n+1}=\sum C_i C_{n-i}$. Above them stands the common finite engine, the pigeonhole principle. These rules stand one level above the counted objects and give the quantities.
 
 **Roles (L4).** Quantity is a *role-measure* of a finite carrier. “The set of combinations” and “the set of permutations” are *modes* (different roles) of one list, not different objects (operational divisibility). The generating function plays the role of a *process-thread* that generates the coefficients; on the infinite side counting plays the role of a *limit* (infinite Ramsey).
 
@@ -81,7 +81,7 @@ Let us analyze combinatorics by E/R/R in the generating order Rules $\to$ Roles 
 
 **Well-formedness check.** The rules of counting are Rules; quantity-as-measure and the modes are Roles; finite lists are Elements; there are no overlaps. There is no self-application: the rule of counting stands above the lists and is not one of them.
 
-**What the analysis yields.** It shows why discrete mathematics fits so comfortably into P4: its bearers are *finite* and *enumerable* by construction, and quantity is the value of a process, not a property of a completed set. And it names its only boundary: the passage to the *completed* infinite (infinite Ramsey, the infinite Dirichlet principle) is the role-limit side—exactly the same finitization boundary that the whole volume carries, not an exclusion.
+**What the analysis yields.** It shows why discrete mathematics fits so comfortably into P4: its bearers are *finite* and *enumerable* by construction, and quantity is the value of a process, not a property of a completed set. And it names its only boundary: the passage to the *completed* infinite (infinite Ramsey, the infinite pigeonhole principle) is the role-limit side—exactly the same finitization boundary that the whole volume carries, not an exclusion.
 
 Counting is in place; in the next chapter the same finite structures acquire edges—we pass to graph theory: connectivity, cycles, and discrete curvature, still on the 0-axiom Element side.
 
@@ -101,4 +101,4 @@ Counting is in place; in the next chapter the same finite structures acquire edg
 
 Part: [[17 Discrete Mathematics Probability Information|Part XVII. Discrete Mathematics, Probability, Information]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[Library/Branches/Mathematics/Volume/16 Function as Process/06 Reification Ladder Number Function Functional|Chapter 6. The Reification Ladder: Number → Function → Functional—Part XVI]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/02 Graph Theory Connectivity Cycles Curvature|Chapter 2. Graph Theory—Connectivity, Cycles, Curvature]] →
+Navigation: ← [[Library/Branches/Mathematics/Volume/16 Function as Process/06 Reification Ladder Number Function Functional|Chapter 6. The Reification Ladder: Number → Function → Functional—Part XVI]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/02 Graph Theory Connectivity Cycles Curvature|Chapter 2. Graph Theory: Connectivity, Cycles, Curvature]] →

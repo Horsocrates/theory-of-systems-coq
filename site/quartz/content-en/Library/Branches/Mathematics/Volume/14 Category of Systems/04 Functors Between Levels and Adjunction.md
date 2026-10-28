@@ -2,14 +2,14 @@
 title: "Chapter 4. Functors between Levels and Adjunction"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/04 Функторы между уровнями и сопряжение.md"
-sourceBlob: 80ffcf577d7465424b23a8d2cd61911c04c2f340
+sourceBlob: b7aa386bfaada690fcfba99d44f34427bde8fa4c
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-Chapters 14.1–14.3 worked *within a single level*: the category as a metasystem (14.1), functors and the Yoneda embedding (14.2), the category of systems $\Sys(L)$ with the core of P3 (14.3). This chapter takes the step for whose sake the whole hierarchy was undertaken: it builds *functors between levels* and shows that their link is an exact categorical adjunction. This is the **crown of Part XIV**: the principle P2 (Complementarity) receives a machine form.
+Chapters 14.1–14.3 worked *within a single level*: the category as a metasystem (14.1), functors and the Yoneda embedding (14.2), the category of systems $\Sys(L)$ with the core of P3 (14.3). This chapter takes the step for whose sake the whole hierarchy was undertaken: it builds *functors between levels* and shows that their link is an exact categorical adjunction. This is the **crown of Part XIV**: the principle of complementarity receives a machine form.
 
 Two arrows connect adjacent levels. The *embedding*
 
@@ -25,10 +25,10 @@ $$
 
 lowers it back—but only *partially* (the symbol $\rightharpoonup$). The main result:
 
-> **$\texttt{embed}\dashv\texttt{forget}$ is an adjunction, and this is P2 (Complementarity):**
+> **$\texttt{embed}\dashv\texttt{forget}$ is an adjunction, and this is the principle of complementarity:**
 > two complementary views of one structure, neither of which is complete by itself.
 
-The anchors of the adjunction—`LevelFunctors.v`, `LevelAdjunction.v`, and (for the name P2) `ProcessAdjunction.v`—are all in the main branch (`origin/main`): they can be cited with confidence, as in 14.3. The general frame “equivalence of categories” rests on the new local layer `src/category/` (we mark it separately).
+The anchors of the adjunction—`LevelFunctors.v`, `LevelAdjunction.v`, and (for the name “complementarity”) `ProcessAdjunction.v`—are all in the main branch (`origin/main`): they can be cited with confidence, as in 14.3. The general frame “equivalence of categories” rests on the new local layer `src/category/` (we mark it separately).
 
 ## The Hierarchy of Levels: The Relation $\ll$
 
@@ -70,7 +70,7 @@ Forgettability itself is *decidable* (`is_forgettable_dec`): for each system one
 forgettability hypotheses**, not as a pair of functors.
 [^3] Nevertheless *all* the properties of the adjunction—the hom-bijection, naturality, unit, counit, triangles—are proved pointwise (the next section). `forget_mor` is faithful on its domain of definition and preserves embeddings (`forget_faithful`, `forget_preserves_embedding`).
 
-## The Adjunction $\texttt{embed}\dashv\texttt{forget}$ Is P2
+## The Adjunction $\texttt{embed}\dashv\texttt{forget}$ Is Complementarity
 
 The heart of the chapter. Between levels there is a natural bijection of hom-sets:
 
@@ -85,7 +85,7 @@ from left to right, `adj_forward`; from right to left, `adj_backward`; the two s
 **The unit and the counit.**  The unit $\eta_S:S\to\texttt{forget}(\texttt{embed} S)$ is an *isomorphism* (`adjunction_unit_is_iso`); moreover, $\texttt{forget}(\texttt{embed} S)=S$ holds *in the Leibniz sense* (`forget_embed_roundtrip`). The counit $\varepsilon_T:\texttt{embed}(\texttt{forget} T)\to T$ is an isomorphism for forgettable $T$ (`adjunction_counit_is_iso_for_forgettable`). Both triangle identities hold (`triangle_identity_1`, `triangle_identity_2`). Since the unit is an isomorphism, the adjunction is “tight”; categorically this means that `embed` is *fully faithful*. *Faithfulness* is proved explicitly by machine (`embed_faithful`), and *fullness* follows from the unit being an isomorphism (`forget_embed_adjunction_tight`); this agrees with what we already knew about `embed` directly.
 [^5]
 
-**Why this is P2 (Complementarity).**  P2 asserts that a system has *complementary* aspects that cannot be specified simultaneously. Categorically, this is exactly a pair of adjoints: `embed` *adds* the level-structure, `forget` *removes* it—two complementary views of one structure, neither of which by itself is the full picture. This thesis is assembled by machine: `P2_categorical`/`P2_holds` (the adjunction at every level), `P2_unit_is_iso`, `P2_counit_is_iso_forgettable`, and the summarizing `P2_grand_summary`.
+**Why this is complementarity.**  The principle of complementarity asserts that a system has *complementary* aspects that cannot be specified simultaneously. Categorically, this is exactly a pair of adjoints: `embed` *adds* the level-structure, `forget` *removes* it—two complementary views of one structure, neither of which by itself is the full picture. This thesis is assembled by machine: `P2_categorical`/`P2_holds` (the adjunction at every level), `P2_unit_is_iso`, `P2_counit_is_iso_forgettable`, and the summarizing `P2_grand_summary`.
 [^6]
 
 **This is *not* an equivalence.**  From the P1 obstruction it follows that `forget` is *not* total, and hence the adjunction is *not* an equivalence of categories (`complementarity_not_equivalence`): among the systems of level $LS L$ there are non-forgettable ones, which cannot be reached from below. This is the *asymmetry* of complementarity (`complementarity_asymmetry`): up-and-down returns the original ($\texttt{forget}\circ\texttt{embed}=\mathrm{id}$), but down-and-up covers only the forgettable part.
@@ -102,7 +102,7 @@ The adjunction of levels is a particular (and “tight”) case. The general not
 
 ## E/R/R Analysis: The Interlevel Structure as E/R/R
 
-**Rules (L5).**  The functor laws of `embed` (preservation of identity/composition) + the laws of adjunction (triangles, naturality in both arguments) + the **P2 complementarity** ($\texttt{embed}\dashv\texttt{forget}$) + the **P1 obstruction** (`forget` is partial: $\neg L\ll L$). Equivalence sets the rule “sameness up to role” (an echo of P3).
+**Rules (L5).**  The functor laws of `embed` (preservation of identity/composition) + the laws of adjunction (triangles, naturality in both arguments) + **complementarity** ($\texttt{embed}\dashv\texttt{forget}$) + the **P1 obstruction** (`forget` is partial: $\neg L\ll L$). Equivalence sets the rule “sameness up to role” (an echo of P3).
 
 **Roles (L4).**  `embed` is the left adjoint (a free-like embedding); `forget` is the right one (forgetful, partial); the unit is the role “the lower sits in the upper” (iso); the counit is the role “restore the forgettable”; equivalence is the role “the same up to role.”
 
@@ -110,7 +110,7 @@ The adjunction of levels is a particular (and “tight”) case. The general not
 
 | **Component** | **What it determines** | **E/R/R category** |
 |---|---|---|
-| the functor laws of `embed` + triangles/naturality + P2 + the P1 obstruction | the constitution of the interlevel link | Rule (L5) |
+| the functor laws of `embed` + triangles/naturality + complementarity + the P1 obstruction | the constitution of the interlevel link | Rule (L5) |
 | `embed`${}={}$ left adj.; `forget`${}={}$ right (partial); $\eta,\varepsilon$ as roles | the status of arrows between levels | Role (L4) |
 | `ElemOf`; the witness $w\ll L$; `witness_L_system` | computable bearers and the “key” of forgetting | Element (L1${}+{}$P4) |
 
@@ -118,9 +118,9 @@ The adjunction of levels is a particular (and “tight”) case. The general not
 
 ## What the Chapter Has Prepared
 
-Functors between levels have been built: `embed`, a full-fledged faithful functor $\Sys(L)\to\Sys(LS L)$ that preserves embeddings/surjections/isomorphisms; `forget`, a partial forgetting limited by the P1 obstruction (`P1_obstructs_total_forget`, decidable). Their link is the adjunction $\texttt{embed}\dashv\texttt{forget}$ with a bijection of hom-sets, a unit that is an isomorphism (whence `embed` is fully faithful), and a counit that is an isomorphism on the forgettable systems; this is the machine form of the principle P2 (Complementarity). The adjunction is *not* an equivalence—precisely because of P1. The general frame “sameness up to role” is given by `CatEquiv` (symmetry, reflexivity, essential surjectivity), the categorical echo of P3.
+Functors between levels have been built: `embed`, a full-fledged faithful functor $\Sys(L)\to\Sys(LS L)$ that preserves embeddings/surjections/isomorphisms; `forget`, a partial forgetting limited by the P1 obstruction (`P1_obstructs_total_forget`, decidable). Their link is the adjunction $\texttt{embed}\dashv\texttt{forget}$ with a bijection of hom-sets, a unit that is an isomorphism (whence `embed` is fully faithful), and a counit that is an isomorphism on the forgettable systems; this is the machine form of the principle of complementarity. The adjunction is *not* an equivalence—precisely because of P1. The general frame “sameness up to role” is given by `CatEquiv` (symmetry, reflexivity, essential surjectivity), the categorical echo of P3.
 
-**Tiers (honestly).**  The core of the adjunction—`LevelFunctors.v` (30 lemmas) + `LevelAdjunction.v` (25 Qed)—is **0 axioms, in `origin/main`**. The name P2 and the monad/comonad are in `ProcessAdjunction.v` (a synthetic layer that carries `classic`), also in `origin/main`. The equivalence frame—`EquivalenceOfCategories.v` (7 Qed) + `IdentityEquivalence.v` (2 Qed)—is 0 axioms but a **local layer** `src/category/` (commit `90ebd74`), awaiting `git push`.
+**Tiers (honestly).**  The core of the adjunction—`LevelFunctors.v` (30 lemmas) + `LevelAdjunction.v` (25 Qed)—is **0 axioms, in `origin/main`**. The name “complementarity” and the monad/comonad are in `ProcessAdjunction.v` (a synthetic layer that carries `classic`), also in `origin/main`. The equivalence frame—`EquivalenceOfCategories.v` (7 Qed) + `IdentityEquivalence.v` (2 Qed)—is 0 axioms but a **local layer** `src/category/` (commit `90ebd74`), awaiting `git push`.
 
 Next comes Chapter 14.5: adjunctions $F\dashv G$ as a *universal language of dualities*; a right adjoint preserves limits (RAPL, the terminal case, by machine); and the *catalog of the volume’s adjunctions* (levels here / Galois from Part XI / geometry–gauge from Part XII) as a through-line.
 
@@ -131,7 +131,7 @@ Next comes Chapter 14.5: adjunctions $F\dashv G$ as a *universal language of dua
 [^3]: The key remark of `src/LevelAdjunction.v` (lines 11–14): “Since `forget` is partial (requires `is_forgettable`), we cannot form a proper `Functor` instance for it. Instead, we prove all adjunction properties as standalone lemmas with explicit forgettability hypotheses.”
 [^4]: The direction is fixed by the bijection itself. An adjunction $F\dashv G$ (where $F$ is the left adjoint and $G$ the right one) is $\Hom_{D}(F c,d)\cong\Hom_{C}(c,G d)$; matching them, $F=\texttt{embed}$, $G=\texttt{forget}$. This is the form “*free* $\dashv$ *forgetful*”: `embed` embeds freely, `forget` forgets the level. The same is confirmed by the unit $\eta_S:S\to\texttt{forget}(\texttt{embed} S)$ (of the form $1\to GF$) and the counit $\varepsilon_T:\texttt{embed}(\texttt{forget} T)\to T$ (of the form $FG\to 1$). The canonical machine statement `P2_categorical` (`ProcessAdjunction.v`) formulates exactly “`Embed` $\dashv$ `Forget`.” In the old *headers* of the files (`LevelAdjunction.v`, `ProcessAdjunction.v`) the reverse *verbal* labeling of the roles may occur; the direction here is fixed by the hom-bijection itself, not by a banner: $\Hom(\texttt{embed} S,T)\cong\Hom(S,\texttt{forget} T)$, hence $\texttt{embed}\dashv\texttt{forget}$.
 [^5]: `src/LevelAdjunction.v` (25 Qed, 0 Admitted, 0 axioms; in `origin/main`): `adj_forward`/`adj_backward`, `level_adjunction`, `adj_natural_S`/`_T`, `adjunction_unit_component`/`_is_iso`, `adjunction_counit_component`, `triangle_identity_1`/`_2`, `embed_reflects_iso`, `forget_embed_adjunction_tight`, `adj_preserves_iso`/`adj_reflects_iso`.
-[^6]: `src/process/ProcessAdjunction.v`, the synthetic P2 layer (0 Admitted; in `origin/main`). The file lies in the *process* layer and imports `Classical`, so it inherits `classic` in its tier—but the re-exported core of the adjunction consists of the same 0-axiom lemmas from `LevelAdjunction.v`. Here too are the monad $\texttt{forget}\circ\texttt{embed}$ (which *is the identity*, `monad_is_identity`) and the comonad $\texttt{embed}\circ\texttt{forget}$ (`comonad_counit_is_iso`).
+[^6]: `src/process/ProcessAdjunction.v`, the synthetic layer of complementarity (0 Admitted; in `origin/main`). The file lies in the *process* layer and imports `Classical`, so it inherits `classic` in its tier—but the re-exported core of the adjunction consists of the same 0-axiom lemmas from `LevelAdjunction.v`. Here too are the monad $\texttt{forget}\circ\texttt{embed}$ (which *is the identity*, `monad_is_identity`) and the comonad $\texttt{embed}\circ\texttt{forget}$ (`comonad_counit_is_iso`).
 [^7]: `src/category/EquivalenceOfCategories.v` (7 Qed, 0 Admitted, 0 axioms; **local layer** `src/category/`, commit `90ebd74`, awaiting `git push`): `Record CatEquiv`, `ce_unit_is_nat_iso`, `ce_counit_is_nat_iso`, `equiv_F_ess_surjective`, `equiv_G_ess_surjective`, `equiv_sym`, `equiv_F_preserves_iso`; the definitions `is_ess_surjective`/`is_faithful`/`is_full`. Unlike `LevelFunctors.v`/`LevelAdjunction.v` (in `origin/main`), this section rests on the *local* layer `src/category/`; until the `push` we do not mix its status with the confirmed `origin/main`.
 [^8]: `src/category/IdentityEquivalence.v` (2 Qed, 0 axioms; the local layer): `id_equiv`, `id_equiv_unit_components`, `id_equiv_ess_surjective`. Together with `equiv_sym` this gives the reflexivity and symmetry of $\simeq$; transitivity (the gluing of equivalences) is left for later.
 

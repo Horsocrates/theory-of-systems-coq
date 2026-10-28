@@ -2,7 +2,7 @@
 title: "Chapter 5. Synthesis: The Hierarchy Is a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/05 Синтез иерархия есть процесс.md"
-sourceBlob: 6ea8de8617092104c2f840ce9cde287d4ea3925f
+sourceBlob: 8483a6439c3e9a0bdc2b0d5c050647f8368ce071
 translated: 2026-10-20
 status: draft
 ---

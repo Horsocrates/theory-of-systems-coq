@@ -146,7 +146,7 @@ For process mathematics this is a poor carrier for the proof, and
 Chapter 4.3 has already shown why. Extracting a digit is a
 *discontinuous* operation: for a number on the boundary between two
 decimal intervals, the digit “jumps.” And it is sensitive to double
-representations: $0{,}999…$ and $1{,}000…$ are two digit
+representations: $0.999…$ and $1.000…$ are two digit
 representations of one point, one class (§ 3.7 of Chapter 4.3), and an
 argument that works with digits stumbles over such duality.
 

@@ -2,7 +2,7 @@
 title: "Cantor’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Кантора.md"
-sourceBlob: ea403b5a9d397cb0408006b922e37f6b84246218
+sourceBlob: d2f355b5bbf0b4b3c08529cd8c9ff2ee0d19216b
 translated: 2026-10-20
 status: draft
 description: "The set of all sets (the universal set)"

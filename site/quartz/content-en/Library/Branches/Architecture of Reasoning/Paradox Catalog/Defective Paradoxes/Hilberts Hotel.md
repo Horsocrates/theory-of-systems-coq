@@ -2,7 +2,7 @@
 title: "Hilbert’s Hotel"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Отель Гильберта.md"
-sourceBlob: 832d72bc42fb0833c268f3846cf141ad86997154
+sourceBlob: fa67cb9329942681fd7363790208e56796436c5f
 translated: 2026-10-20
 status: draft
 description: "“Full” does not apply to the unbounded"
@@ -18,7 +18,7 @@ A hotel with an infinite number of rooms: 1, 2, 3, … All the rooms are occupie
 
 ## Origin
 
-David Hilbert introduced the image in lectures of the 1920s; the exact date is unknown—the knot lived orally before it reached print (Gamow’s retelling brought it wide fame). The context matters: Hilbert was a defender of Cantor—“no one shall be able to drive us out of the paradise that Cantor created for us” (*our translation*; “Über das Unendliche,” 1926)—and the hotel was conceived as a pedagogical illustration of a thesis: infinity behaves unusually, but consistently. The catalog holds the opposite diagnosis, derived in the volume “Mathematics”: the hotel demonstrates not strange properties of infinity but a category mistake—the application of finite concepts (“full,” “all,” “quantity”) to what they do not apply to, and the reification of an uncompletable process into a ready-made object.
+David Hilbert introduced the image in lectures of the 1920s; the exact date is unknown—the knot lived orally before it reached print (Gamow’s retelling brought it wide fame). The context matters: Hilbert was a defender of Cantor—“no one shall be able to drive us out of the paradise that Cantor created for us”[^1]—and the hotel was conceived as a pedagogical illustration of a thesis: infinity behaves unusually, but consistently. The catalog holds the opposite diagnosis, derived in the volume “Mathematics”: the hotel demonstrates not strange properties of infinity but a category mistake—the application of finite concepts (“full,” “all,” “quantity”) to what they do not apply to, and the reification of an uncompletable process into a ready-made object.
 
 ## Consequence
 
@@ -59,6 +59,8 @@ In layers, each standing on its own. First: “a full infinity” is an oxymoron
 [[Galileos Paradox|Galileo]] (the correspondence of part and whole—the same mechanism three centuries earlier), [[Cantors Paradox|Cantor]] (where the hotel leads when taken seriously), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks: “completing the uncompletable” in dynamic form), [[Zenos Dichotomy|Zeno’s Dichotomy]] (the mirror: there, motion was denied a beginning; here, infinite work is ordered to finish).
 
 **Machine check.** In the registry of 46 it is `D21_HilbertHotel`: the field `ConceptualAmbiguity`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, `all_46_dissolvable`—ParadoxDissolution.v). The process ground is the core of the base: `RealProcess := nat -> Q` (src/process/ProcessCore.v, P4)—infinity as a rule of continuation, not as an object; the whole base is built on this reading. Map: [[Formalization]].
+
+[^1]: Hilbert, D. “Über das Unendliche” (“On the Infinite”), *Mathematische Annalen* 95 (1926): 170: “Aus dem Paradies, das Cantor uns geschaffen, soll uns niemand vertreiben können” (our translation).
 
 ---
 

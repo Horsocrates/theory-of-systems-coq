@@ -2,14 +2,14 @@
 title: "Chapter 5. Adjunctions as a Universal Language of Dualities"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/05 Сопряжения как универсальный язык двойственностей.md"
-sourceBlob: feec197ca262fa33f1af185cb4ce8d2d21c8ed41
+sourceBlob: ebbef6608e1fdac0e31cab4ccb8cb482c42f1fdb
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-Chapter 14.4 presented *one* adjunction—$\texttt{embed}\dashv\texttt{forget}$, the crown of P2. This chapter raises its sights: an adjunction is a **universal language of
+Chapter 14.4 presented *one* adjunction—$\texttt{embed}\dashv\texttt{forget}$, the crown of complementarity. This chapter raises its sights: an adjunction is a **universal language of
 dualities**, not a one-off construction. One and the same pattern, “left ${}\dashv{}$ right, unit, counit, triangles,” recurs throughout the volume—from levels to Galois theory and geometry–gauge.
 
 We do three things. First, we write out the *general* adjunction $F\dashv G$ (between any categories, not only between levels). Second, we prove the main structural consequence: **a right adjoint
@@ -62,7 +62,7 @@ Every adjunction has a “shadow” on one side—the *monad* $T=G\circ F$ (and,
 
 One and the same pattern “$\dashv$” occurs in the volume three times—in three different encodings. We bring them together in *prose* (a single Coq object would require a deep re-unification: the encodings are heterogeneous).
 
-**(1) Levels (Chapter 14.4).**  $\texttt{embed}\dashv\texttt{forget}$ is a genuine categorical adjunction between $\Sys(L)$ and $\Sys(LS L)$, the machine form of P2; its unit is an isomorphism, and it is not an equivalence (because of P1). Tier: **0 axioms, `origin/main`**.
+**(1) Levels (Chapter 14.4).**  $\texttt{embed}\dashv\texttt{forget}$ is a genuine categorical adjunction between $\Sys(L)$ and $\Sys(LS L)$, the machine form of complementarity; its unit is an isomorphism, and it is not an equivalence (because of P1). Tier: **0 axioms, `origin/main`**.
 
 **(2) The Galois theory of fields (Part XI).**  The Galois correspondence for $ℚ[\sqrt2,\sqrt3]$ is an *antitone Galois connection*: the lattice of subgroups of $\Gal$ and the lattice of intermediate fields correspond to each other *by reversing inclusion* (`correspondence_inclusion_reversing`), with $[E:ℚ]=|\Gal|=4$ (`degree_equals_galois_order`), and $V_4$ has exactly $5$ subgroups (`klein_four_subgroups`).
 [^5]

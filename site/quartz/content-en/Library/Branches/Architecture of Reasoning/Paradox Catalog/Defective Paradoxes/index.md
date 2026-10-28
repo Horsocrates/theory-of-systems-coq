@@ -65,7 +65,7 @@ Total: **25**, by subtype of flaw. Concept: [[Paradox]]. **In bold**—the centr
 | ID | Paradox | Domain | Essence of the error |
 |---|---|---|---|
 | D.12 | [[Grandfather Paradox]] | 3 | “A changeable past” is a contradictory concept |
-| D.13 | [[Zenos Achilles\|Zeno’s Achilles]] | 2 | An infinite number of steps ≠ an infinite time |
+| D.13 | [[Zenos Achilles\|Achilles and the Tortoise]] | 2 | An infinite number of steps ≠ an infinite time |
 | D.14 | [[Zenos Dichotomy\|Zeno’s Dichotomy]] | 2 | Infinite division ≠ the impossibility of completion |
 | D.15 | [[Zenos Arrow\|Zeno’s Arrow]] | 3 | Motion is not a sequence of rests |
 

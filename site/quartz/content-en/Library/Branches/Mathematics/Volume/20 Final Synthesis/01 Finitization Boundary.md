@@ -2,7 +2,7 @@
 title: "Chapter 1. The Finitization Boundary"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/01 Граница финитизации.md"
-sourceBlob: 61ae54d01d156fac6a78e9330f42dc9885e70337
+sourceBlob: 9c552244f4667ab10eef6e94a029623bed3e468e
 translated: 2026-10-20
 status: draft
 ---
@@ -56,7 +56,7 @@ The same boundary in *rational quantum information*[^4] runs along the rule of p
 
 The boundary is concentrated in a few concrete role-limits. These are quadratic irrationals—but in our ontology they are not “ready numbers” but non-terminating processes; and each is an obstruction to a quite definite *finite structure*.
 
-**$\sqrt2$** locks the rotation by $45^\circ$: its process of approximations (the converging sides of isosceles Pythagorean triangles) improves forever but does not reach a rational value[^7]—therefore the corresponding rotation does not close.
+**$\sqrt2$** locks the rotation by $45^\circ$: its process of approximations (the sides of nearly isosceles Pythagorean triangles—the legs differ by one) improves forever but does not reach a rational value[^7]—therefore the corresponding rotation does not close.
 
 **$\sqrt3$** locks the $60^\circ$ point. Here one sees exactly how a process becomes an obstruction: the cosine of $60^\circ$ is *rational* (equal to one half), but the sine is $\sqrt3/2$—a non-terminating process[^8]. A rational point of the circle requires the termination of *both* coordinates; the cosine-process closes, the sine-process does not; hence a *rational point* $(\cos,\sin)$ of order 6 on the circle is a phantom that has a closed cosine-role but no Element-point (as a matrix in another representation, order 6 is possible—the obstruction belongs precisely to the orthogonal point). It is excluded not by fiat but by the fact that $\sqrt3$ provably does not close.
 

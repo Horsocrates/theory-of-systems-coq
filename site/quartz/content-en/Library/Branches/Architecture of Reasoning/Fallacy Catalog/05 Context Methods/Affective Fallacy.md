@@ -2,7 +2,7 @@
 title: "Affective Fallacy"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/05 Контекстные методы/Аффективная ошибка.md"
-sourceBlob: 021a4ac7e6c9319411eaf6acf45d48056283be9b
+sourceBlob: 170ace19d010960079b3f5b9500afc319d1fa9d8
 translated: 2026-10-20
 status: draft
 description: "A context-dependent method: valid under its conditions, fallacious outside them."

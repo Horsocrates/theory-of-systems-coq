@@ -52,7 +52,7 @@ The computational part could not be shorter: 1/2 + 1/4 + 1/8 + … = 1; the time
 
 ## Kin by Mechanism
 
-[[Zenos Achilles|Zeno’s Achilles]] (the same mechanics with characters—the full analysis of the ground is there), [[Zenos Arrow|Zeno’s Arrow]] (the third aporia: the instant instead of division), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks: “after all the steps” mirrors “before all the steps”), [[Sorites Paradox|Sorites]] (a neighbor by the registry field: the instrument does not fit the object).
+[[Zenos Achilles|Achilles and the Tortoise]] (the same mechanics with characters—the full analysis of the ground is there), [[Zenos Arrow|Zeno’s Arrow]] (the third aporia: the instant instead of division), [[Thomsons Lamp|Thomson’s Lamp]] and [[Ross Littlewood|Ross–Littlewood]] (supertasks: “after all the steps” mirrors “before all the steps”), [[Sorites Paradox|Sorites]] (a neighbor by the registry field: the instrument does not fit the object).
 
 **Machine check.** The convergence of the halving series is a special case of what has been formalized: `geometric_series_cauchy` with r = 1/2, `series_limit` (src/SeriesConvergence.v); infinity as a process—`RealProcess := nat -> Q` (src/process/ProcessCore.v, P4). In the registry of 46 it is `D14_ZenoDichotomy`: the field `InstrumentObjectMismatch`, the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`—ParadoxDissolution.v). Map: [[Formalization]].
 

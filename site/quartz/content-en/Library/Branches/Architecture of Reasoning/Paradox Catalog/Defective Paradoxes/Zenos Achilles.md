@@ -1,8 +1,8 @@
 ---
-title: "Zeno’s Achilles"
+title: "Achilles and the Tortoise"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Ахиллес и черепаха.md"
-sourceBlob: ea76f8ba7f36de2172e5ddc5ee811972589f9d9d
+sourceBlob: 2178b62641bf23e1885e2bc06c375f571e7a741a
 translated: 2026-10-20
 status: draft
 description: "An infinite number of steps ≠ an infinite time"

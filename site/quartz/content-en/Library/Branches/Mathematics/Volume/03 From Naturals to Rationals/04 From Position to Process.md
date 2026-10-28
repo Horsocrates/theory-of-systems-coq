@@ -294,7 +294,7 @@ it holds together.
 
 Classical mathematics calls the object satisfying the condition
 $r \cdot r = 2$ the *square root of two* and writes it $\sqrt{2}$. It is
-also written as a decimal fraction—$1{,}41421…$—with an ellipsis that
+also written as a decimal fraction—$1.41421…$—with an ellipsis that
 refers to an infinite tail of digits never written out to the end.
 
 ToS accepts the name $\sqrt{2}$ but asks what stands behind it. And here

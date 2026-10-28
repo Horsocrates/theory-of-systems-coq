@@ -161,7 +161,7 @@ Next:
 [^6]: This principle (the “algorithmic rigidity” of analytic functions) is discussed in detail in the line on analytic functions in Part VII; here we use only its consequence—the uniqueness of the consistent continuation.
 [^7]: `src/experimental/BernoulliNumbers.v`: the Bernoulli numbers $B_0=1$, $B_1=-\tfrac12$, $B_2=\tfrac16$, $B_3=0$, $B_4=-\tfrac1{30}$, … as exact rationals. The same file defines the Bernoulli layer $\texttt{zeta\_neg}(k):=-B_{k+1}/(k+1)$ and machine-computes the first values (`zeta_neg_0..3`, including $\texttt{zeta\_neg\_1}=-\tfrac1{12}$). This formalizes the exact *rational* side of the values of the continuation but does *not* prove the analytic continuation itself.
 [^8]: In the repository, regularization and the Casimir effect are touched on separately (`src/experimental/CasimirProcess.v`, `AbelRegularization.v`); full-fledged physics lies beyond this chapter.
-[^9]: `src/foundation/AperyConstantERR.v`: the standard and Apéry-accelerated partial sums of $\zeta(3)$, exact rational values and comparisons, $\zeta(3)\approx 1{,}202\dots$; the E/R/R analysis: $\zeta(3)$ is a process, not an Element. The *equality* of the limit values of both procedures and the *irrationality* of $\zeta(3)$ (Apéry, 1979) are a classical mathematical reading, not reformalized here.
+[^9]: `src/foundation/AperyConstantERR.v`: the standard and Apéry-accelerated partial sums of $\zeta(3)$, exact rational values and comparisons, $\zeta(3)\approx 1.202\dots$; the E/R/R analysis: $\zeta(3)$ is a process, not an Element. The *equality* of the limit values of both procedures and the *irrationality* of $\zeta(3)$ (Apéry, 1979) are a classical mathematical reading, not reformalized here.
 
 ---
 

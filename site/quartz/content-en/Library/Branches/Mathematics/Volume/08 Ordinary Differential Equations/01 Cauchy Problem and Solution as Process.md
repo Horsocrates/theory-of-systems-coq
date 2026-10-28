@@ -2,7 +2,7 @@
 title: "Chapter 1. The Cauchy Problem and the Solution as a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/01 Задача Коши и решение как процесс.md"
-sourceBlob: a969438a92840586592a02783955176eb81d4a31
+sourceBlob: 5a9cf9659736d75e40c192ac0fa9ab54c4b4cd77
 translated: 2026-10-20
 status: draft
 ---
@@ -29,7 +29,7 @@ with a right-hand side $f$ satisfying the Lipschitz condition in $y$, and it ref
 
 What the chapter does *not* do: it does not present the completed solution function on the interval as a ready object, does not prove global-in-time continuation, and does not call the exact limit into existence otherwise than as a role-limit. In the current formal layer, the very passage from the geometric decrease of the iterates to their *Cauchy convergence* and to a completed limit inherits the Law of Excluded Middle (L3); this is honestly marked where it is used and is not disguised as a construction.[^2]
 
-To keep the boundary in view, we distinguish three levels of rigor. The *first* is the concrete processes over ℚ: the Euler trajectory, the scalar Euler–Picard iteration, its contraction and Cauchy property—proved exactly, without axioms. The *second* is the process *readings*: the solution as the role-limit of the Cauchy process of iterates, existence as the Cauchy property of the approximations, the right-hand side $f$ as the law of velocity. The *third* is the completed solution function on the interval as a ready object, global continuation, and the exact limit—role-limits and a direction, not a built theory. The chapter treats the first two levels as proved (with an explicit mark where the limit requires L3), and the third as an honestly marked boundary.
+To keep the boundary in view, we distinguish three levels of rigor. The *first* is the concrete processes over ℚ: the Euler trajectory, the scalar Euler–Picard iteration, its contraction and the geometric gap between the iterates—proved exactly, without axioms; the Cauchy property inherits `classic` (footnotes 2 and 6). The *second* is the process *readings*: the solution as the role-limit of the Cauchy process of iterates, existence as the Cauchy property of the approximations, the right-hand side $f$ as the law of velocity. The *third* is the completed solution function on the interval as a ready object, global continuation, and the exact limit—role-limits and a direction, not a built theory. The chapter treats the first two levels as proved (with an explicit mark where the limit requires L3), and the third as an honestly marked boundary.
 
 ### The E/R/R Framework of the Chapter
 

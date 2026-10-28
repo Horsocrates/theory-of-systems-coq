@@ -20,7 +20,7 @@ description: "Rejecting a claim only because it seems “incredible” or contra
 
 **Psychological source.** The representativeness heuristic, limited experience
 
-**Related fallacies:** [[Affective Fallacy Follow Your Heart|Affective Fallacy: “Follow Your Heart”]]
+**Related fallacies:** [[Affective Fallacy Follow Your Heart|Affective Fallacy / Follow Your Heart]]
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Buridan’s Bridge"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Мост Буридана.md"
-sourceBlob: 20c1aa3590f5e2d400f1eb040c99b02f3c5fe1d5
+sourceBlob: 373745e5239f5a17443f77a107f4f79da3662bb2
 translated: 2026-10-20
 status: draft
 description: "The truth-value of the condition depends on its execution"

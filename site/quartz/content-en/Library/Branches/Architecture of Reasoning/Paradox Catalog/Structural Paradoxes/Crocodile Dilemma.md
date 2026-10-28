@@ -2,7 +2,7 @@
 title: "Crocodile Dilemma"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Дилемма крокодила.md"
-sourceBlob: d3465f0f1ea8ca6603fa06ed4d31bcac79f464b1
+sourceBlob: 62df1189acc8a55547828ab4499bfd8a71aca857
 translated: 2026-10-20
 status: draft
 description: "The rule depends on a statement about its own execution"

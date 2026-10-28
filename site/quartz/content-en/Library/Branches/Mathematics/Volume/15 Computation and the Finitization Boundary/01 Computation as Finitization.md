@@ -2,7 +2,7 @@
 title: "Chapter 1. Computation as Finitization"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/15 Вычисления и граница финитизации/01 Вычисление как финитизация.md"
-sourceBlob: 542bd8e23d1d86ff2f0cc96a7859a6defa1a0919
+sourceBlob: e6a4cbe7c7b4660ef2f62faf499430ce9716a1d1
 translated: 2026-10-20
 status: draft
 ---
@@ -96,7 +96,7 @@ The boundary has two sides, and one arena carries both. The *undecidable* side h
 
 ## What the Chapter Has Prepared
 
-Computation has been presented as a process with the E/R/R triad: configurations (elements), the ordered step (the rule, L5), the halting status (role); `run` $n$ is the unfolding to a finite depth (P4), and the configuration arena binds them into one object. The central cut of the part has been drawn: **bounded halting is decidable** (Element, 0 axioms), **unbounded halting is a role-limit**; this is the finitization boundary made algorithmic. Everything rests on the 0-axiom machine-checked layer; the honest walls (uncomputability, the uncountability of the continuum) will take their places later and will be gathered in 15.7.
+Computation has been presented as a process with the E/R/R triad: configurations (elements), the ordered step (the rule, L5), the halting status (a status in the layer of roles, L4); `run` $n$ is the unfolding to a finite depth (P4), and the configuration arena binds them into one object. The central cut of the part has been drawn: **bounded halting is decidable** (Element, 0 axioms), **unbounded halting is a role-limit**; this is the finitization boundary made algorithmic. Everything rests on the 0-axiom machine-checked layer; the honest walls (uncomputability, the uncountability of the continuum) will take their places later and will be gathered in 15.7.
 
 Next comes Chapter 15.2: *finite memory and the Chomsky ladder*, where the Element floor (the regular languages) turns out to be the lowest rung of a graded gradient of role-limits leading up to the very top—halting (15.3).
 

@@ -2,7 +2,7 @@
 title: "Russell’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Рассела.md"
-sourceBlob: 88efbca34edd17c25a0067417b70051acb09cbdf
+sourceBlob: 39b9c97389721434c1718dfaa8904d1e25d1ba3a
 translated: 2026-10-20
 status: draft
 description: "A set contains itself as an element (container = content)"

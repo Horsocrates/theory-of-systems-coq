@@ -2,7 +2,7 @@
 title: "Chapter 6. P4 as a Filter"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/06 P4 как фильтр.md"
-sourceBlob: 4dd9f5d2f55c29baa5198613a5479bf233e41200
+sourceBlob: 729ea926eae15f3460486b514cf198051fd8ebb5
 translated: 2026-10-20
 status: draft
 ---
@@ -396,8 +396,8 @@ with sign and zero is a standard extension not secured by a theorem.
 
 *A bridge between the models* ($F$-19). The reals as Cauchy processes
 (Chapters 4.2–4.4) and the continuum as $2^{ℕ}$ (Chapter 4.5) live in
-*different* models; a translation between them—$2^{ℕ}\leftrightarrow
-[0,1]$—does not exist in the code.
+*different* models; a full translation between them—$2^{ℕ}\leftrightarrow
+[0,1]$—does not exist in the code: only the direct `bin_to_real` is formalized (Chapter 4.5).
 
 *The derivation $L1\wedge L5\Rightarrow P4$* ($F$-18). The derivation of
 the principle $P4$ itself from the laws is carried out in the volume *in

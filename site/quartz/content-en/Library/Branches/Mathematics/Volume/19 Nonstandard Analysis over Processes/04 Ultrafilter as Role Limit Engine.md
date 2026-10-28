@@ -2,7 +2,7 @@
 title: "Chapter 4. The Ultrafilter as a Role-Limit Engine"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/04 Ультрафильтр как role-limit-движок.md"
-sourceBlob: 6fc0fd8be9cb02f30d5525ed90b1a49a7f3edab3
+sourceBlob: 46916dedb4bb35ef907296fa9187475640ebdaff
 translated: 2026-10-20
 status: draft
 ---
@@ -33,7 +33,7 @@ An important caveat about the boundary. The existence of a free ultrafilter on $
 
 And here is the key point: the ultrafilter is needed **only** to make the ring a field (a total order, the full Łoś transfer). But the whole calculus of Chapter 2—the derivative, the integral, the shadow—lived on the *ring* of germs, without any ultrafilter. There was no need to decide “what is large” there.
 
-And there is a formal backbone to this—*conservativity*. A known meta-theorem (Nelson): nonstandard analysis is conservative over standard analysis—every *standard* statement provable by means of $^{*}ℝ$ is provable without them as well. Hence the role-limit scaffolding (the ultrafilter) is **removable** for real content[^6]. ToS makes this removal the default: we work on processes and germs, and the ultrafilter is (removable) formwork.
+And there is a formal backbone to this—*conservativity*. A known meta-theorem (Nelson): nonstandard analysis is conservative over standard mathematics (ZFC)—every *standard* statement provable by means of $^{*}ℝ$ is provable without them as well. Hence the role-limit scaffolding (the ultrafilter) is **removable** for real content[^6]. ToS makes this removal the default: we work on processes and germs, and the ultrafilter is (removable) formwork.
 
 *The ultrafilter is a role-limit engine: it coherently chooses a side for all subsets at once—and precisely by this it is stronger than the one-off $\mathrm{LPO}$ (it is a fragment of the Axiom of Choice); it gives the field and the full transfer—but as an **organizing role**, not a presentable object, and one removable by conservativity.*
 
@@ -60,7 +60,7 @@ The ring, the field, and the ultrafilter have converged on one question—invert
 [^3]: `uf_measure_prime` / `uf_measure_resolves_undecided`; the summary theorem `seed_measure_bridge`. Machine-checked, 10 Qed, 0 axioms.
 [^4]: `germ_ring_not_field` (in `UltrafilterRoleLimit`). Machine-checked, 0 axioms.
 [^5]: `ultrafilter_decision_required`: $E$ is invertible mod Evens and zero mod Odds; the summary theorem `ultrafilter_role_limit_summary`. Machine-checked, 0 axioms.
-[^6]: Conservativity is a classical meta-theorem (Nelson), *cited* here, not reproved; the existence of a nontrivial ultrafilter is a fragment of the Axiom of Choice and is not asserted.
+[^6]: Conservativity is a classical meta-theorem (Nelson, 1977), *cited* here, not reproved; the existence of a nontrivial ultrafilter is a fragment of the Axiom of Choice and is not asserted.
 
 ---
 

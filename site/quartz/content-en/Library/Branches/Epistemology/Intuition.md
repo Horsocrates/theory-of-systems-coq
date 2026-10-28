@@ -65,7 +65,7 @@ An analysis by the [[Theory of Systems]]—from the goal to the rules, the roles
 
 Hence the **three conditions** of the transmission: *a request*—consciousness is seeking, openly or tacitly; *sufficient complexity of the one who is conscious*—the capacity to take in the level requested; *an open channel*—the filter does not block the signal. When all three meet, the transmission goes; when any is lacking, there is silence or distortion. In the structure of knowledge the conditions have exact places: complexity is the threshold, openness is the channel ([[Epistemology#Depth|depth]]); the request stands apart: threshold and channel limit, while the request acts—it is the activation.
 
-**Intuition is not innate content.** What is built in—instincts, innate structures of perception—works automatically, is switched on by a trigger, and its content took shape before any experience. Intuition is built differently: it shows itself in the moment, adjusts to the particular situation, and requires a request. The layers interact—intuition takes what is built in as material—but it is itself a process, not a content.
+**Intuition is not innate content.** What is built in—instincts, innate structures of perception—works automatically, is switched on by a trigger, and its content took shape before any experience. Intuition is arranged differently: it shows itself in the moment, adjusts to the particular situation, and requires a request. The layers interact—intuition takes what is built in as material—but it is itself a process, not a content.
 
 ## Two Modes
 

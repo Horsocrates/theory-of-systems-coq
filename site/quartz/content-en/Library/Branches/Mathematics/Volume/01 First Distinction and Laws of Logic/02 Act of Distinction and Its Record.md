@@ -2,7 +2,7 @@
 title: "Chapter 2. The Act of Distinction: The Distinction Record"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/02 Акт различия запись Distinction.md"
-sourceBlob: 51211310860c5e0f1485e6470c52cf36ff456572
+sourceBlob: ee8e9abebe6f86b5a2789329c0c22891a37fa928
 translated: 2026-10-20
 status: draft
 ---
@@ -790,7 +790,7 @@ The universality of `distinction_of`—the fact that this record is applicable t
 [^2]: Saussure, F. de. *Cours de linguistique générale*, 1916. English edition: *Course in General Linguistics*, trans. Wade Baskin (New York: Philosophical Library, 1959).
 [^3]: Heidegger, M. *Identität und Differenz*. Pfullingen: Neske, 1957. English edition: *Identity and Difference*, trans. Joan Stambaugh (New York: Harper & Row, 1969).
 [^4]: Derrida, J. *Marges de la philosophie*. Paris: Minuit, 1972. English edition: *Margins of Philosophy*, trans. Alan Bass (Chicago: University of Chicago Press, 1982).
-[^5]: Aristotle, *Metaphysics*, IV.3 1005b19–23. Greek original: $\dot{\alpha}\delta\acute{v}\nu\alpha\tau o\nu$ $\gamma\grave{\alpha}\rho$ $\dot{o}\tau\iota o\tilde{v}\nu$ $\tau\dot{o}$ $\alpha\dot{v}\tau\dot{o}$ $\dot{v}\pi\acute{\alpha}\rho\chi\varepsilon\iota\nu$ $\tau\varepsilon$ $\kappa\alpha\grave{\iota}$ $\mu\grave{\eta}$ $\dot{v}\pi\acute{\alpha}\rho\chi\varepsilon\iota\nu$ $\tau\tilde{\omega}$ $\alpha\dot{v}\tau\tilde{\omega}$ $\kappa\alpha\grave{\iota}$ $\kappa\alpha\tau\grave{\alpha}$ $\tau\dot{o}$ $\alpha\dot{v}\tau\acute{o}$. The English quotation in the text: trans. Hugh Tredennick, Loeb Classical Library (Cambridge, MA: Harvard University Press, 1933); Tredennick’s “relation” is what this chapter calls “respect.”
+[^5]: Aristotle, *Metaphysics*, IV.3 1005b19–23. Greek original (ed. W. D. Ross, 1924): τὸ γὰρ αὐτὸ ἅμα ὑπάρχειν τε καὶ μὴ ὑπάρχειν ἀδύνατον τῷ αὐτῷ καὶ κατὰ τὸ αὐτό. The English quotation in the text: trans. Hugh Tredennick, Loeb Classical Library (Cambridge, MA: Harvard University Press, 1933); Tredennick’s “relation” is what this chapter calls “respect.”
 
 ---
 

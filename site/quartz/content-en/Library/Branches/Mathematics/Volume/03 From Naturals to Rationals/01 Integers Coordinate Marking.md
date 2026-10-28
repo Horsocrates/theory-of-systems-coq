@@ -2,7 +2,7 @@
 title: "Chapter 1. Integers: Coordinate Marking"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/03 От натуральных к рациональным/01 Целые числа координатная разметка.md"
-sourceBlob: a5b1945a205cc25d5167f02556673d79c4022e6e
+sourceBlob: ba4d142a68162f32bb5d385dcee1cabeb29cf674
 translated: 2026-10-20
 status: draft
 ---
@@ -81,7 +81,7 @@ Standard mathematics answers “$-3$” to “$5 - 8$” at once, without asking
 
 This is not an error of standard mathematics. It is a *convenience*, and a justified one: in the overwhelming majority of technical problems we really are speaking of coordinates—balances, scales, axes—and the clarifying question would each time be a superfluous ceremony. Standard mathematics omits it because in its working domain the answer to it is almost always the same: “in coordinates.”
 
-But “almost always” is not “always.” In problems sensitive to ontology—where it matters whether an object *is* or *is not*—the silent transition conceals an essential difference. It returns a coordinate answer to a question that may have been ontological, and it does so without warning. The difference between “there are five objects and a debt of three” and “there is the position $-3$ on an axis” is erased: both are written as $-3$, and it seems as if they were one and the same.
+But “almost always” is not “always.” In problems sensitive to ontology—where it matters whether an object *is* or *is not*—the silent transition conceals an essential difference. It returns a coordinate answer to a question that may have been ontological, and it does so without warning. The difference between “there are zero objects and a debt of three” and “there is the position $-3$ on an axis” is erased: both are written as $-3$, and it seems as if they were one and the same.
 
 ToS keeps the convenience of standard mathematics but makes the transition *explicit*. When one writes $5 - 8 = -3$ in ToS, one thereby *declares*: we are working in the coordinate system $ℤ$. This means that a reference point has been chosen, a step of the marking has been chosen, and what is recorded is a *position* in this system, not an ontological count of real objects. The notation $-3$ is legitimate; only the silence about our having passed to coordinates is illegitimate.
 
@@ -129,7 +129,7 @@ And since the minus is a coordinate orientation of a displacement, both sides of
 
 One more thing follows from the coordinate nature of the minus, and it clarifies how coordinate marking differs from ontology.
 
-Which position carries the minus sign depends on where the reference point is chosen. Let us move the reference point by one point in the direction of growth—and the position that was zero will become the position $+1$, the one that was $-1$ will become zero, and the whole marking will shift. A point of the natural number series that was *positive* relative to the former reference point may turn out to be *negative* relative to the new one. Whether a given element is “positive” or “negative” is a property of the *choice of the reference point*—not a property of the element itself, nor a property of the series.
+Which position carries the minus sign depends on where the reference point is chosen. Let us move the reference point by one point in the direction of growth—and the position that was $+1$ will become zero, and the one that was zero will become the position $-1$: the points have stayed in place, the reference point has moved ahead, and the former zero is now behind it, on the side of decrease. The whole marking will shift. A point of the natural number series that was *positive* relative to the former reference point may turn out to be *negative* relative to the new one. Whether a given element is “positive” or “negative” is a property of the *choice of the reference point*—not a property of the element itself, nor a property of the series.
 
 This is exactly what § 1.2 called the coordinate character. The minus is not an ontological property—not a mode of existence that a thing would have by itself. The minus is a *position relative to a chosen point*, and which position it marks is set by which point is chosen as the reference point. Move the reference point, and the whole marking will change, although nothing has shifted either in the series or in the acts of distinction. What changes is the marking, not the ontology. The minus sign belongs to the *coordinate system*, not to the things marked in it.
 

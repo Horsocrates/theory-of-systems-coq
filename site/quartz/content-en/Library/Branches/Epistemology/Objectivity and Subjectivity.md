@@ -31,7 +31,7 @@ The etymology suggests the axis of the theme: “set opposite, standing by itsel
 
 **The subjective is how what exists is given to a witness from its position.** A position is the context of the meeting and the witness’s channel and threshold ([[Epistemology#Depth|depth]]). What is given to the witness in a meeting—the given—already carries its position; the data do not depend on position.
 
-**The objective as a view is a view of the build of the system:** of its rules, roles, and elements. The subjective as a view is a view of how the system is given from here. The witness always looks from its own position; what distinguishes the two views is what they are directed at. The first is objectivity—the orientation toward what does not depend on position.
+**The objective as a view is a view of the arrangement of the system:** of its rules, roles, and elements. The subjective as a view is a view of how the system is given from here. The witness always looks from its own position; what distinguishes the two views is what they are directed at. The first is objectivity—the orientation toward what does not depend on position.
 
 **The subjective is positional, not “unreliable.”** A position is the place from which one begins: what is given from a position is truth; the honest orientation and the path bring it to absolute truth ([[Truth and Absolute Truth]]).
 
@@ -83,21 +83,21 @@ Movement along the ladder has a direction: the rungs go in order. What leads to 
 
 In reasoning the same orientation is held by the Principle of Objectivity: one always looks through a framework, and one chooses it by the nature of the phenomenon and by the goal—not to fit the desired result ([[3 Framework Selection|Framework Selection]]).
 
-**The witness always looks from its own position.** An objective view is a view of the build of the system: of what does not depend on position. One looks at the build, too, from a position; the witness reaches the build by reasoning, along a chain of grounds: the path to the objective goes through the subjective.
+**The witness always looks from its own position.** An objective view is a view of the arrangement of the system: of what does not depend on position. One looks at the arrangement, too, from a position; the witness reaches the arrangement by reasoning, along a chain of grounds: the path to the objective goes through the subjective.
 
 **The mechanics of the orientation is parallax.** Two positions give two givens; when the relation between the positions is known, the divergence of the givens is a measurement, and from it one takes what does not depend on position—the invariant ([[Truth and Absolute Truth#Case: Parallax|the case “Parallax”]]). A second position is obtained by changing one’s own—or is given by another witness.
 
 > [!example]- Case: the “view from nowhere”—the name of a task
 > The name was given by Thomas Nagel: *The View from Nowhere* (1986).[^4] For him objectivity is “a method of understanding,” and it has degrees: “a view or form of thought is more objective than another if it relies less on the specifics of the individual’s makeup and position in the world…” Nagel names the limit himself: “reality is not just objective reality,” and an objective picture must include an acknowledgment of its own incompleteness. On this page every view has a position: the “view from nowhere” is a construction from the registry of the impossible ([[What Is Not and Cannot Be|the view from nowhere]]). The series of ever more objective views is real: objectivity is a direction of movement from one’s own place, not a place outside all places.
 
-A special case is the view of oneself: the witness looks at its own build only from within itself—it has no full outside view of itself—and here it needs another witness ([[Metaphysics#The Witness|the limit of the witness]]). An objective view of oneself is a labor of its own, and it begins with acknowledging one’s own subjectivity.
+A special case is the view of oneself: the witness looks at its own arrangement only from within itself—it has no full outside view of itself—and here it needs another witness ([[Metaphysics#The Witness|the limit of the witness]]). An objective view of oneself is a labor of its own, and it begins with acknowledging one’s own subjectivity.
 
 ## Two Edges: Naive Objectivism and Relativism
 
 Two symmetrical errors—both about the objective view:
 
-- **Naive objectivism** (“I see it as it is,” “the data speak for themselves”) **appropriates** it: it takes how the system is given from here for the build of the system. The data are indeed objective—but they are not taken “raw”: only through oneself.
-- **Relativism** (“everything is subjective,” “everyone has their own truth”) **abolishes** it: as though one could look only at how things are given from here, and there were no build common to all. It declares correspondence within the given to be the limit—and loses absolute truth.
+- **Naive objectivism** (“I see it as it is,” “the data speak for themselves”) **appropriates** it: it takes how the system is given from here for the arrangement of the system. The data are indeed objective—but they are not taken “raw”: only through oneself.
+- **Relativism** (“everything is subjective,” “everyone has their own truth”) **abolishes** it: as though one could look only at how things are given from here, and there were no arrangement common to all. It declares correspondence within the given to be the limit—and loses absolute truth.
 
 Both errors are one substitution, in opposite directions: objectivism passes off subjective correspondence as objective—a given of a position as absolute truth ([[Truth and Absolute Truth#The Potential and Projection|three substitutions of status]]); relativism reduces objective correspondence to subjective—absolute truth to a given of a position.
 
@@ -109,7 +109,7 @@ Both errors are one substitution, in opposite directions: objectivism passes off
 ## Summary
 
 1. **The objective is what does not depend on the witness:** one for all positions. The subjective is how what exists is given to a witness from its position.
-2. **The objective as a view is a view of the build of the system;** the subjective as a view is a view of how the system is given from here.
+2. **The objective as a view is a view of the arrangement of the system;** the subjective as a view is a view of how the system is given from here.
 3. **The subjective is positional, not “unreliable”:** a position is the place from which one begins.
 4. **The objective is two-faced:** structure is open to reasoning, data are presented to experience.
 5. **The words have two applications.** By field: data lie in the objective field; reading, information, and record, in the subjective one. By correspondence: truth is subjective, absolute truth objective. The field of a record is always subjective; what can be objective is its correspondence.

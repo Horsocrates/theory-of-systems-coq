@@ -2,7 +2,7 @@
 title: "Sorites Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс кучи (сорит).md"
-sourceBlob: 78fa90115e9f3300463a2266cf538c394e27a358
+sourceBlob: df8e7111d3bd70e8cd432ebc1a4298fb8d12ac13
 translated: 2026-10-20
 status: draft
 description: "“Heap” is not clarified as a graded concept"
@@ -48,13 +48,13 @@ The inductive step does not apply—it is not false but insufficiently strict: f
 
 ## Objections and Replies
 
-**Epistemicism.** “The boundary exists—we merely do not know where it is.” Reply: the concept was created without a boundary; no analysis and no consensus of speakers determines one—not from any weakness of mind, but from the way the concept is built. To ascribe a hidden threshold to “heap” is to confuse a conceptual instrument with the object it describes.
+**Epistemicism.** “The boundary exists—we merely do not know where it is.” Reply: the concept was created without a boundary; no analysis and no consensus of speakers determines one—not from any weakness of mind, but from the arrangement of the concept. To ascribe a hidden threshold to “heap” is to confuse a conceptual instrument with the object it describes.
 
 **“Classical logic does not work.”** Reply: it works—on precise concepts. The sorites shows the boundary of logic’s application, not a defect in it: a hammer is good, but it will not drive in a screw. “A number is even or odd” is true without exceptions; “a heap or not a heap” first requires the concept to be made precise.
 
 ## Lesson
 
-**On types of concepts.** Binary concepts (“even”) and comparative ones (“heap,” “tall”) are built differently—this is a difference of functions, not a hierarchy of quality. **On the limits of formalization.** A precise definition of “heap” would not improve the concept—it would destroy its usefulness; formal logic is a powerful instrument, but not a universal one. **On “precision envy.”** Vagueness is not a failure but an adaptation: language was created for coordination in a continuous world, and vague concepts are its strong side. **On practice.** Recognize the type of a concept: do not present a vague one with a demand for precision; if precision is needed, create a technical term with a definition, and do not confuse the one with the other.
+**On types of concepts.** Binary concepts (“even”) and comparative ones (“heap,” “tall”) are arranged differently—this is a difference of functions, not a hierarchy of quality. **On the limits of formalization.** A precise definition of “heap” would not improve the concept—it would destroy its usefulness; formal logic is a powerful instrument, but not a universal one. **On “precision envy.”** Vagueness is not a failure but an adaptation: language was created for coordination in a continuous world, and vague concepts are its strong side. **On practice.** Recognize the type of a concept: do not present a vague one with a demand for precision; if precision is needed, create a technical term with a definition, and do not confuse the one with the other.
 
 ## Kin by Mechanism
 

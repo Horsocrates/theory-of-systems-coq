@@ -12,8 +12,8 @@ Combinatorics as process counting, graphs, probability as an operational theory,
 
 **Chapters:**
 
-1. [[01 Combinatorics Process Counting|Chapter 1. Combinatorics—Process Counting]]
-2. [[02 Graph Theory Connectivity Cycles Curvature|Chapter 2. Graph Theory—Connectivity, Cycles, Curvature]]
+1. [[01 Combinatorics Process Counting|Chapter 1. Combinatorics: Process Counting]]
+2. [[02 Graph Theory Connectivity Cycles Curvature|Chapter 2. Graph Theory: Connectivity, Cycles, Curvature]]
 3. [[03 Probability as an Operational Theory|Chapter 3. Probability as an Operational Theory]]
 4. [[04 Random Processes and Markov Chains|Chapter 4. Random Processes and Markov Chains]]
 5. [[05 Shannon Entropy|Chapter 5. Shannon Entropy]]

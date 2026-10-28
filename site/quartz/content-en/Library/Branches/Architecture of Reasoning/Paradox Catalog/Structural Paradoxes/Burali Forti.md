@@ -2,7 +2,7 @@
 title: "Burali-Forti Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Буралли-Форти.md"
-sourceBlob: 3ca1f71d3aa6b60e69007e2f498e3d5d551d2fe8
+sourceBlob: 122701a23e2e7c81cea1cfce2a0734a8f275cb06
 translated: 2026-10-20
 status: draft
 description: "The ordinal of all ordinals (an open sequence as a set)"

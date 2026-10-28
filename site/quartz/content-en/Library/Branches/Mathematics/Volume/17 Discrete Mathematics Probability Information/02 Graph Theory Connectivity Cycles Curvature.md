@@ -1,8 +1,8 @@
 ---
-title: "Chapter 2. Graph Theory—Connectivity, Cycles, Curvature"
+title: "Chapter 2. Graph Theory: Connectivity, Cycles, Curvature"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/17 Дискретная математика, вероятность, информация/02 Теория графов — связность, циклы, кривизна.md"
-sourceBlob: f08ad90fead964c859f5ff1b5bf5d405fe380457
+sourceBlob: ef1dc8e51039777e8b586a5141c9046dd917e9c4
 translated: 2026-10-20
 status: draft
 ---
@@ -32,7 +32,7 @@ The comparison with the finitization boundary is direct. Reachability in a finit
 
 It is convenient to gather the structure of a graph into one operator—the *graph Laplacian* $L = D - A$ (degrees minus adjacency). It is computed exactly over ℚ, and its rows *sum to zero*—a structural conservation law, a direct property of the definition[^3].
 
-The spectrum of the Laplacian is a bridge from structure to number: its eigenvalues (algebraic in general, not necessarily rational) encode connectivity (the smallest nonzero one is the algebraic connectivity), and the spectral entropy measures the “spread” of the structure[^4]. And the same Laplacian links the graph with physics: the spectral gap plays the role of the mass gap[^5].
+The spectrum of the Laplacian is a bridge from structure to number: its eigenvalues (algebraic in general, not necessarily rational) encode connectivity (the second-smallest eigenvalue $\lambda_2$ is the algebraic connectivity; for a connected graph it is the smallest nonzero one), and the spectral entropy measures the “spread” of the structure[^4]. And the same Laplacian links the graph with physics: the spectral gap plays the role of the mass gap[^5].
 All of this is exact ℚ-arithmetic on a finite matrix: the Element side.
 
 ## Discrete Curvature and the Physical Substrate
@@ -70,4 +70,4 @@ The structure and its spectrum are built; in the next chapter a measure is laid 
 
 Part: [[17 Discrete Mathematics Probability Information|Part XVII. Discrete Mathematics, Probability, Information]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/01 Combinatorics Process Counting|Chapter 1. Combinatorics—Process Counting]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/03 Probability as an Operational Theory|Chapter 3. Probability as an Operational Theory]] →
+Navigation: ← [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/01 Combinatorics Process Counting|Chapter 1. Combinatorics: Process Counting]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/03 Probability as an Operational Theory|Chapter 3. Probability as an Operational Theory]] →

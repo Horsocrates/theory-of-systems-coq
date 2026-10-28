@@ -2,7 +2,7 @@
 title: "Chapter 1. Orthonormal Systems and Fourier Coefficients"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/01 Ортонормированные системы и коэффициенты Фурье.md"
-sourceBlob: c48a2de82ff571436650b3d345641d62421abfeb
+sourceBlob: 249e4d3a7005b67e58672621e55ea33814d5f696
 translated: 2026-10-20
 status: draft
 ---
@@ -23,7 +23,7 @@ L<sup>2</sup> apparatus as a theory of *Fourier coefficients*: what the coordina
 Honesty from the very start. The chapter works with a *finite* orthonormal system $\{e_k\}_{k<K}$ of $K$ vectors on $N$ coordinates over ℚ and proves about it everything needed for the theory of coefficients: the linearity of the inner product over a finite expansion, the orthogonality of the remainder of a projection to its carrier, the identity “energy $=$ captured part $+$ remainder,” Bessel’s inequality
 $\sum_{k<K} c_k^2 \le \norm{f}^2$, and Parseval’s identity as a *criterion of completeness*—all of this *without a single axiom*.[^1]
 
-What the chapter does *not* do: it does not build a completed *infinite* orthonormal basis, does not claim that the closed span of the system is the whole space, and does not introduce the normalization $1/\sqrt N$ otherwise than as an abstract parameter (it is $\sqrt{}$-transcendental and rational only when $N$ is a perfect square). The infinite Fourier series as a completed sum and continuous trigonometry are an honest P4 boundary, to which we will return in Chapters 7.3 and 7.4.
+What the chapter does *not* do: it does not build a completed *infinite* orthonormal basis, does not claim that the closed span of the system is the whole space, and does not introduce the normalization $1/\sqrt N$ otherwise than as an abstract parameter (it is irrational if $N$ is not a perfect square). The infinite Fourier series as a completed sum and continuous trigonometry are an honest P4 boundary, to which we will return in Chapters 7.3 and 7.4.
 
 To keep the boundary in view, we distinguish three levels of rigor. The *first* is a finite orthonormal system on $N$ coordinates: here Bessel, the energy identity, and the completeness criterion are proved exactly over ℚ, without axioms. The *second* is the process *readings*: the coefficient as a coordinate-projection, the partial sum as the best approximation, completeness as the exhaustion of energy. The *third* is the completed infinite basis and the full Fourier series as ready objects—a role-limit and a direction, not a built theory. The chapter treats the first two levels as proved and the third as an honestly marked boundary.
 
@@ -181,7 +181,7 @@ $$
 \inner{H_i}{H_j}_N \;=\; N\cdot\delta_{ij} .
 $$
 
-This is proved *for all* $N=2^k$ as an exact identity over ℚ (by induction on Sylvester’s recursive structure), without axioms.[^14] To obtain from them an orthonormal system in the sense of `Hon` ($\inner{e_i}{e_j}=\delta_{ij}$), one must normalize: $e_k = H_k/\sqrt N$. And here lies the only transcendence: the factor $1/\sqrt N$ is rational only when $N$ is a perfect square (for example, $N=4$, $\sqrt N=2$), and in the general case it is introduced as an *abstract parameter* $s$ with the condition $s^2=N$, in full agreement with the device of Part VI (the root is parametrized and cancels in the observable quantities).
+This is proved *for all* $N=2^k$ as an exact identity over ℚ (by induction on Sylvester’s recursive structure), without axioms.[^14] To obtain from them an orthonormal system in the sense of `Hon` ($\inner{e_i}{e_j}=\delta_{ij}$), one must normalize: $e_k = H_k/\sqrt N$. And here lies the only irrationality: the factor $1/\sqrt N$ is rational only when $N$ is a perfect square (for example, $N=4$, $\sqrt N=2$), and in the general case it is introduced as an *abstract parameter* $s$ with the condition $s^2=N$, in full agreement with the device of Part VI (the root is parametrized and cancels in the observable quantities).
 
 The conservation of energy itself requires no normalization and is proved directly: for the unnormalized Walsh transform
 
@@ -191,7 +191,7 @@ $$
 
 (a discrete analogue of the Plancherel identity).[^15] Passing to the normalized system divides both sides by $N$ and returns Parseval in the form $\sum_k c_k^2 = \norm{f}^2$.
 
-*The concrete orthogonal system is rational by construction (the Hadamard $\pm1$ vectors, orthogonality as an exact identity over ℚ). The only transcendence on the way to orthonormalization is the factor $1/\sqrt N$; it is separated from orthogonality and honestly moved into a role-limit. “Fourier without transcendentals” is orthogonality and the conservation of energy before normalization.*
+*The concrete orthogonal system is rational by construction (the Hadamard $\pm1$ vectors, orthogonality as an exact identity over ℚ). The only irrationality on the way to orthonormalization is the factor $1/\sqrt N$; it is separated from orthogonality and honestly moved into a role-limit. “Fourier without transcendentals” is orthogonality and the conservation of energy before normalization.*
 
 ## E/R/R Analysis: The Coefficient as a Role-Coordinate
 

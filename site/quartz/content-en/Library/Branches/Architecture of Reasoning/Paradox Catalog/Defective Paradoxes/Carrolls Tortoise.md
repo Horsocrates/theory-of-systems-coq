@@ -52,7 +52,7 @@ Achilles’ right answer: “No, Tortoise. C is not a premise. It is the rule by
 
 ## Kin by Mechanism
 
-[[Russells Paradox|Russell]] (a machine-recorded mirror: there Element → Rule, here Rule → Element), [[Liar Paradox|the Liar]] (an evaluation inside what is evaluated), the regress of justification and the problem of induction (justifying a method by the means of that very method), Kripkenstein (rule-following), [[Zenos Achilles|Zeno’s Achilles]] (the ancestor characters: in Zeno it was motion that got stuck, in Carroll inference).
+[[Russells Paradox|Russell]] (a machine-recorded mirror: there Element → Rule, here Rule → Element), [[Liar Paradox|the Liar]] (an evaluation inside what is evaluated), the regress of justification and the problem of induction (justifying a method by the means of that very method), Kripkenstein (rule-following), [[Zenos Achilles|Achilles and the Tortoise]] (the ancestor characters: in Zeno it was motion that got stuck, in Carroll inference).
 
 **Machine check.** There is a named analysis: `tortoise_demand_illegitimate` (the Tortoise’s demand is illegitimate—a rule does not turn into a premise), `regress_stopped` (refusing the demand stops the regress), `carroll_is_err_confusion` (the confusion Rule → Element; the neighboring line of the same definition records Russell as Element → Rule—the mirror, machine-checked); the registry entry `D20_CarrollTortoise` carries the diagnosis in its field: `RuleAsPremise` (all in ParadoxDissolution.v). Map: [[Formalization]].
 

@@ -15,7 +15,7 @@ $$
 \zeta(s) \;=\; 2^{s} \pi^{s-1} \sin\!\Bigl(\frac{\pi s}{2}\Bigr) \Gamma(1-s) \zeta(1-s),
 $$
 
-or, in symmetric form with the *full* zeta $\xi(s)=\tfrac12 s(s-1) \pi^{-s/2}\Gamma(s/2) \zeta(s)$,
+or, in symmetric form with the *full* zeta function $\xi(s)=\tfrac12 s(s-1) \pi^{-s/2}\Gamma(s/2) \zeta(s)$ (in the literature, the completed zeta function),
 
 $$
 \xi(s) \;=\; \xi(1-s).

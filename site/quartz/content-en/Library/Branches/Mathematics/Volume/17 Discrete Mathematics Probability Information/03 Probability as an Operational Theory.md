@@ -76,4 +76,4 @@ The static distribution is built; in the next chapter it begins to *move*—we p
 
 Part: [[17 Discrete Mathematics Probability Information|Part XVII. Discrete Mathematics, Probability, Information]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/02 Graph Theory Connectivity Cycles Curvature|Chapter 2. Graph Theory—Connectivity, Cycles, Curvature]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/04 Random Processes and Markov Chains|Chapter 4. Random Processes and Markov Chains]] →
+Navigation: ← [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/02 Graph Theory Connectivity Cycles Curvature|Chapter 2. Graph Theory: Connectivity, Cycles, Curvature]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/04 Random Processes and Markov Chains|Chapter 4. Random Processes and Markov Chains]] →

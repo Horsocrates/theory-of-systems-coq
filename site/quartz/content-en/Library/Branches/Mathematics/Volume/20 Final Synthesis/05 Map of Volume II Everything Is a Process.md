@@ -21,7 +21,7 @@ And the frame at once: “everything is a process” is the organizing *ontology
 
 Honesty matters all the more, the broader the thesis sounds. The map below is a *reframing*: the classical facts (the irrationality of $\sqrt2$, the four automorphisms of the Galois group, the uncountability of the interval) remain classical and are proved in their parts; the *process reading* of each is the contribution of ToS. For each item of the map a process anchor or a structural fragment is presented in the corresponding chapters[^1]; what is *not* proved is any single metatheorem running over all domains. The unity of the form is an *observation*, not a derived universal.
 
-And we do **not** claim that ToS has “solved” the continuum, the Riemann hypothesis, or the halting problem. It *relocates* them: the continuum is a process, not a completed set; the Riemann hypothesis is read *structurally* as a fixed point of a reflection (the analytic content is the horizon, see Chapter 6); halting is a role-limit, not a defect. Relocation is not a solution but a change of ontological address.
+And we do **not** claim that ToS has “solved” the continuum, the Riemann Hypothesis, or the halting problem. It *relocates* them: the continuum is a process, not a completed set; the Riemann Hypothesis is read *structurally* as a fixed point of a reflection (the analytic content is the horizon, see Chapter 6); halting is a role-limit, not a defect. Relocation is not a solution but a change of ontological address.
 
 ## One Move: The Object Becomes a Process
 
@@ -82,7 +82,7 @@ The positive map has been drawn. One last thing remains—an honest summary: wha
 ---
 
 [^1]: The anchors are checked against their own chapters (the references are gathered in § “The Map of the Volume”); not every item is a full classical theorem in the traditional sense. The level is “a new framing of the known”: a classical result plus its process reading.
-[^2]: The anchors are checked against the corresponding chapters: $\sqrt2$—`no_rational_sqrt2`; Galois—`galois_group_four_distinct`; the Riemann hypothesis—`RH_critical_strip_symmetric` (a *structural* anchor, not a proof of RH); computation—`cs/HaltingRoleLimit`; the $\infty$-small—`nonstandard_synthesis`; $ℝ$ as a Cauchy process, the manifold, function—by the files of their parts. The Element fragments presented are, as a rule, 0-axiom (Chapter 1).
+[^2]: The anchors are checked against the corresponding chapters: $\sqrt2$—`no_rational_sqrt2`; Galois—`galois_group_four_distinct`; the Riemann Hypothesis—`RH_critical_strip_symmetric` (a *structural* anchor, not a proof of RH); computation—`cs/HaltingRoleLimit`; the $\infty$-small—`nonstandard_synthesis`; $ℝ$ as a Cauchy process, the manifold, function—by the files of their parts. The Element fragments presented are, as a rule, 0-axiom (Chapter 1).
 
 ---
 

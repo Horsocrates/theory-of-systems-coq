@@ -2,7 +2,7 @@
 title: "Chapter 4. Well-Quasi-Ordering as a Process over the Decidable"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/18 Процессная иерархия/04 Вполне-упорядоченность как процесс над разрешимым.md"
-sourceBlob: d049e60cd76357fefc86f315bcb515cd19e8c4ce
+sourceBlob: 1310b28b4e4898c85360e08425e85947f8f7d55c
 translated: 2026-10-20
 status: draft
 ---

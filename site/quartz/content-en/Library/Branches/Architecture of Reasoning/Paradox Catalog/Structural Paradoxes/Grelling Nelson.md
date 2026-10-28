@@ -2,7 +2,7 @@
 title: "Grelling–Nelson Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Структурные парадоксы/Парадокс Греллинга-Нельсона.md"
-sourceBlob: 0e1500085c5978eb3e79336236db5f2e9e2a808c
+sourceBlob: c4f1260b11c000c6ab2a11784cb44980f785e55d
 translated: 2026-10-20
 status: draft
 description: "A second-order property is applied to itself"
@@ -18,7 +18,7 @@ Let us call a word **autological** if it describes itself: “short” is a shor
 
 ## Origin
 
-Kurt Grelling and Leonard Nelson, 1908, a paper on the paradoxes of Russell and Burali-Forti—the knot was built on purpose, as a *semantic* replica of the set-theoretic paradox: what Russell did with sets, Grelling and Nelson did with words. The paradox was sometimes attributed to Weyl—Ramsey in 1926 already analyzed it as “Weyl’s contradiction,” and Grelling himself later restored the authorship. In Ramsey’s classification the knot fell into the “second class”—semantic paradoxes, which require the concepts of meaning and denotation—beside the [[Liar Paradox|liar]], as distinct from the “logical” ones (Russell, Burali-Forti); our analysis shows that Ramsey’s division concerns the arena, not the mechanism: the figure is one.
+Kurt Grelling and Leonard Nelson, 1908, a paper on the paradoxes of Russell and Burali-Forti—the knot was built on purpose, as a *semantic* replica of the set-theoretic paradox: what Russell did with sets, Grelling and Nelson did with words. The paradox was sometimes attributed to Weyl—Ramsey in 1926 already analyzed it as “Weyl’s contradiction,” and Grelling himself later restored the authorship. In Ramsey’s classification the knot fell into Group B—semantic paradoxes, which require the concepts of meaning and denotation—beside the [[Liar Paradox|liar]], as distinct from the “logical” ones (Russell, Burali-Forti); our analysis shows that Ramsey’s division concerns the arena, not the mechanism: the figure is one.
 
 ## Consequence
 

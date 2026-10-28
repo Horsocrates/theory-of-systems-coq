@@ -2,7 +2,7 @@
 title: "Chapter 6. What Is Proved, What Is an Observation, What Is a Horizon"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/20 Заключительный синтез/06 Что доказано, что наблюдение, что горизонт.md"
-sourceBlob: 981216443d4a32b240587c51364c4154ec213b54
+sourceBlob: d596fb19d9eada62d3a0455a38f3b714ffb1acd8
 translated: 2026-10-20
 status: draft
 ---
@@ -29,7 +29,7 @@ Every key statement of our final registry stands in exactly one of the three reg
 
 The solid floor of the volume is its machine core ([[Formalization]]): *not a single* open gap (0 `Admitted`), and all of it on a surprisingly narrow axiom picture[^1].
 
-**Where the classical layer appears.** The Law of Excluded Middle (L3) is used above all in talk of the completed side—of the continuum, of uncountability, of a perfect subset. The witness parameter (connected with P4) turns proved existence into a presentable object. The Element side—that of terminating processes—does not require it: it is *zero-axiom*, and this is checkable for each of its summary theorems.
+**Where the classical layer appears.** The Law of Excluded Middle (L3) is used above all in talk of the completed side—of the continuum, of uncountability, of a perfect subset. The witness parameter (connected with $L4$—Sufficient Reason) turns proved existence into a presentable object. The Element side—that of terminating processes—does not require it: it is *zero-axiom*, and this is checkable for each of its summary theorems.
 
 **One honest conditionality.** There is a single place where the volume rests on a domain estimate: in the Navier–Stokes problem regularity stands *conditionally*—on the bound on the triadic interaction, which is honestly named load-bearing[^2]. Elsewhere additional dependencies are either absent or explicitly brought out and checkable.
 
@@ -48,7 +48,7 @@ Above the solid floor stand the syntheses—and their status must be named exact
 
 And finally, the honestly named horizons—content that the volume *names* but does not reach by machine.
 
-**The analytic zeta.** The Riemann hypothesis is read *structurally*—as the symmetry of the reflection of the critical strip; the *analytic* content of the zeros of zeta—the proof of statements about the location of the nontrivial zeros—remains beyond the horizon and is honestly marked as unbuilt.
+**The analytic zeta.** The Riemann Hypothesis is read *structurally*—as the symmetry of the reflection of the critical strip; the *analytic* content of the zeros of zeta—the proof of statements about the location of the nontrivial zeros—remains beyond the horizon and is honestly marked as unbuilt.
 
 **Full transfer and Loeb measure.** Nonstandard analysis gave an Element core (germs, the shadow, the derivative, the integral) and an honestly marked role-limit packaging (the ultrafilter); the *full* Łoś transfer and Loeb measure in general form are the horizon.
 
@@ -73,7 +73,7 @@ And—the final word. The volume has gone from number-as-process to the concludi
 
 ---
 
-[^1]: The axiom picture is narrow and auditable. The Element fragments are closed *without axioms* on a mass scale (“Closed under the global context”); the classical layers show their dependence explicitly—above all `classic` (L3, the Law of Excluded Middle: $\forall P,\ P\vee\neg P$). The witness parameter `L4_witness` (connected with P4, but *not* identical to the whole law) and several abstract parameters (inhabited types, which produce no contradictions) are honestly shown by the same check—this is not a hidden ZFC base but an explicit list of assumptions.
+[^1]: The axiom picture is narrow and auditable. The Element fragments are closed *without axioms* on a mass scale (“Closed under the global context”); the classical layers show their dependence explicitly—above all `classic` (L3, the Law of Excluded Middle: $\forall P,\ P\vee\neg P$). The witness parameter `L4_witness` (connected with $L4$—Sufficient Reason, but *not* identical to the whole law) and several abstract parameters (inhabited types, which produce no contradictions) are honestly shown by the same check—this is not a hidden ZFC base but an explicit list of assumptions.
 [^2]: `B_coeff_bounded` (Navier–Stokes): regularity is *conditional* on this estimate. This is not a hidden axiom but an explicitly marked load—in exactly one place in the volume.
 [^3]: `finitization_principle` (`stdlib/FinitizationPrinciple`): the summary theorem of the Element arenas; “Closed under the global context.” Machine-checked, 0 axioms. The level is synthesis $+$ observation, not a universal theorem.
 [^4]: `reduction_atlas_synthesis` (`stdlib/ReductionAtlasSynthesis`). Machine-checked, 0 axioms. The compression is a structural synthesis, not a metatheorem.

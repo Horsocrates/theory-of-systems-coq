@@ -104,7 +104,7 @@ The full edifice of the volume: 20 parts, 120 chapters—from the first distinct
 
 **Analysis and number theory.**
 
-- **The zeta function is a process.** Partial sums are a Cauchy process, analytic continuation a new process; the Euler product is the analytic expression of the uniqueness of prime factorization; the Riemann hypothesis is the statement that every nontrivial zero is a fixed point of the reflection s ↦ 1 − s̄: a research line of the volume, not a solution. *([[13 Zeta Function and Number Theory|Part XIII]])*
+- **The zeta function is a process.** Partial sums are a Cauchy process, analytic continuation a new process; the Euler product is the analytic expression of the uniqueness of prime factorization; the Riemann Hypothesis is the statement that every nontrivial zero is a fixed point of the reflection s ↦ 1 − s̄: a research line of the volume, not a solution. *([[13 Zeta Function and Number Theory|Part XIII]])*
 - **Nonstandard analysis over processes.** Berkeley’s paradox is not formed: δ is a process, “o = 0” is a shadow; and a zero divisor in the ring of germs of sequences (modulo the Fréchet filter) is the trace of a missing ultrafilter. *([[19 Nonstandard Analysis over Processes|Part XIX]])*
 
 **Discrete mathematics and combinatorics.**

@@ -2,21 +2,21 @@
 title: "Chapter 7. Synthesis: All of ToS as a Category; the Bridge to Type Theory; the Map of Boundaries"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/07 Синтез вся ToS как категория; мост к теории типов; карта границ.md"
-sourceBlob: d56ac6435c1afe15952bc016733cd4c1747f7371
+sourceBlob: d826f7941562b5ac960eaa1ff19ce184fe4ed38a
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-This is the finale of Part XIV. The path traveled: the category as a metasystem (14.1), functors and Yoneda (14.2), the category of systems $\Sys(L)$ with the core of P3 (14.3), the adjunction of levels $\texttt{embed}\dashv\texttt{forget}$ as P2 (14.4), adjunctions as a language of dualities (14.5), processes and the topos layer as P4 (14.6). It remains to close the circle with three moves:
+This is the finale of Part XIV. The path traveled: the category as a metasystem (14.1), functors and Yoneda (14.2), the category of systems $\Sys(L)$ with the core of P3 (14.3), the adjunction of levels $\texttt{embed}\dashv\texttt{forget}$ as complementarity (14.4), adjunctions as a language of dualities (14.5), processes and the topos layer as P4 (14.6). It remains to close the circle with three moves:
 
 - to show that **E/R/R itself is a category** (rather than “has a categorical structure”);
 - to build a **bridge to type theory** (Curry–Howard as a link);
 - to gather in one place the **map of boundaries of Part XIV**—the universe walls, the `classic` tier, the continuum price, what is NOT formalized.
 
 The flagship of the part, toward which everything led: **the key principles of ToS receive a categorical form as
-universal properties**—P2 is an adjunction, P3 is “isomorphism ${}\neq{}$ Leibniz equality,” P4 is “limits are processes.” The categorical language is the *language* of ToS, not its new subject matter.
+universal properties**—complementarity is an adjunction, P3 is “isomorphism ${}\neq{}$ Leibniz equality,” P4 is “limits are processes.” The categorical language is the *language* of ToS, not its new subject matter.
 
 ## All of E/R/R Is a Category
 
@@ -86,7 +86,7 @@ domain axiom**. Universal properties and the laws of the category are theorems, 
 
 **Rules (L5).**  The axioms of the category + universal properties constitute the categorical language of ToS; the **map of boundaries** is itself a rule—the honest scope (what is 0-axiom, what is `classic`, what lies beyond the universe wall, what is not formalized).
 
-**Roles (L4).**  Each principle of ToS is a categorical universal property: P2 ${}={}$ adjunction, P3 ${}={}$ isomorphism ${}\neq{}$ equality, P4 ${}={}$ limits-as-processes; E/R/R objects and morphisms; gauge ${}={}$ automorphisms.
+**Roles (L4).**  Each principle of ToS is a categorical universal property: complementarity ${}={}$ adjunction, P3 ${}={}$ isomorphism ${}\neq{}$ equality, P4 ${}={}$ limits-as-processes; E/R/R objects and morphisms; gauge ${}={}$ automorphisms.
 
 **Elements (L1${}+{}$P4).**  Concrete categories: $\Sys(L)$, $\SetoidCat$, $[C,D]$, the process and E/R/R categories; finite role-structures (`err_primary`/`ternary`/`reflexive`). *Not* an element: the large objects—$\Cat$, the presheaf category (the universe wall); continuum identifications ($\Aut\cong SU(N)$, a P4 limit).
 
@@ -101,7 +101,7 @@ domain axiom**. Universal properties and the laws of the category are theorems, 
 ## The Summary of Part XIV and the Bridge to Physics
 
 Part XIV has accomplished a metatheoretical turn: **the laws and principles of ToS are categorical
-universal properties**, and E/R/R itself is a category. The machine pillars of the flagship: P2 as the adjunction $\texttt{embed}\dashv\texttt{forget}$ (14.4); P3 as `P3_strictly_stronger_than_iso` (14.3); P4 as limits-processes and the topos layer $\SetoidCat$ (14.6); the Yoneda embedding (full+faithful, 14.2); and the E/R/R category with gauge ${}={}\Aut$ (14.7). The categorical language is a *language*, not a subject matter: it *describes* what has already been built rather than adding a new ontology.
+universal properties**, and E/R/R itself is a category. The machine pillars of the flagship: complementarity as the adjunction $\texttt{embed}\dashv\texttt{forget}$ (14.4); P3 as `P3_strictly_stronger_than_iso` (14.3); P4 as limits-processes and the topos layer $\SetoidCat$ (14.6); the Yoneda embedding (full+faithful, 14.2); and the E/R/R category with gauge ${}={}\Aut$ (14.7). The categorical language is a *language*, not a subject matter: it *describes* what has already been built rather than adding a new ontology.
 
 **Honesty as a method.**  The part leaves a neat map: the 0-axiom categorical layer (locally, before the `push`) versus the `classic` tier of analysis and foundations; **zero domain axioms**; the universe walls, named outright; the continuum price and the unformalized, listed by name. This is the style of the volume: not “everything is proved,” but *it is known exactly what is proved, at what price, and where the boundary lies*.
 

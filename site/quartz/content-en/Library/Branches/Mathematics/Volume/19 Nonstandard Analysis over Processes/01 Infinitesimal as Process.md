@@ -2,7 +2,7 @@
 title: "Chapter 1. The Infinitesimal as a Process"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/01 Бесконечно малое как процесс.md"
-sourceBlob: 6439b3cae7b7877fc852e438fffead4f724be58b
+sourceBlob: 2de4cd23aea6d02f45fb7e4f73803997857611ac
 translated: 2026-10-20
 status: draft
 ---

@@ -8,7 +8,7 @@ status: draft
 description: "“Proof” by burying the audience under mountains of documents it cannot evaluate"
 ---
 
-**2.2.4.2** · [[02 Domain Violations|Domain Violations (Type 2)]] → [[2.2 Domain 2 Clarification|2.2 Clarification]] · subtype: Excessive Analysis
+**2.2.4.2** · [[02 Domain Violations|Domain Violations (Type 2)]] → [[2.2 Domain 2 Clarification|2.2 Clarification]] · subtype: Excessive Clarification
 
 **Formulation.** “Proof” by burying the audience under mountains of documents it cannot evaluate
 

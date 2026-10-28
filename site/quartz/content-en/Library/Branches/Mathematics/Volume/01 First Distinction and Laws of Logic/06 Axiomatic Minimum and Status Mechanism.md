@@ -2,7 +2,7 @@
 title: "Chapter 6. The Axiomatic Minimum and the Status Mechanism"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/06 Аксиоматический минимум и механизм статуса.md"
-sourceBlob: 0dee416b8144d198076967da0d4818d0fd9b0075
+sourceBlob: 3f9d15818aef7f4520ef84125d2126f00f5b81ce
 translated: 2026-10-20
 status: draft
 ---

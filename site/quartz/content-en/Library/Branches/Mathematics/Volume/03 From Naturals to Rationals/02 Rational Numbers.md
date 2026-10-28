@@ -2,7 +2,7 @@
 title: "Chapter 2. Rational Numbers"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/03 От натуральных к рациональным/02 Рациональные числа.md"
-sourceBlob: 5c8994eab3fc6098daec2842b3d69f05f9b04e85
+sourceBlob: 50b1cb7f743681a3f36f57a2075f68f5c0008129
 translated: 2026-10-20
 status: draft
 ---
@@ -120,7 +120,7 @@ It is convenient to gather the modes in which the sign “one” works into a ta
 | counting (Part II) | the first act of distinction | no: an atom |
 | integer marking (Chapter III.1) | one step of the marking | its inside is not considered |
 | commensurable marking (this chapter) | the unit interval | yes |
-| the field $ℚ$ (§ 2.6) | the multiplicative unit | carries the inverse role in the field |
+| the field $ℚ$ (§ 2.6) | the multiplicative unit | yes: inverse elements are defined relative to it |
 
 One sign “$1$,” four modes. In counting, one is an atom; in integer marking, a step into which that mode does not look; in commensurable marking, a divisible unit interval; in the field, the neutral element of multiplication. To mix up the modes would be to take the divisibility or indivisibility of one for its unconditional property, whereas it is a property of one *in the given mode*.
 

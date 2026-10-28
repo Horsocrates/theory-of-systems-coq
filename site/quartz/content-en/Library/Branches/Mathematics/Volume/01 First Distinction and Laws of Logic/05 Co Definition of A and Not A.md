@@ -2,7 +2,7 @@
 title: "Chapter 5. The Co-Definition of A and ¬A"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/05 Со-определение A и ¬ A.md"
-sourceBlob: 1bd2ff4332d6b6ed54c08987529cf42f4f1cc1f3
+sourceBlob: f6c21514ab86932b165c0ceca745ab9460e859c1
 translated: 2026-10-20
 status: draft
 ---
@@ -967,7 +967,7 @@ signature: the fields `positive` and `negative` are both declared in the
 same way (of type Prop), with no indication that one is “original” and
 the other “obtained from the original.”
 
-From the standpoint of the generative order (Chapter 4): first the
+From the standpoint of the generating order (Chapter 4): first the
 *rules* are specified (the type `Distinction`, the requirements
 `exclusive` and `exhaustive`), *then* the *roles* are distributed
 (`positive` and `negative` as positions), and only *after that* are
@@ -1031,7 +1031,7 @@ In the formalism of CIC an instance of `Distinction` exists as a *whole*
 with four fields—not as the result of a step-by-step application of
 operations. This agrees with the general ontological position of ToS
 analyzed in Chapter 4: *Rules are primary* with respect to Roles, and
-Roles with respect to Elements (the generative order). Structure
+Roles with respect to Elements (the generating order). Structure
 specifies the possibilities of procedures; procedures do not create
 structure.
 
@@ -1067,7 +1067,7 @@ as sides of one arrangement, rather than being independent entities
 between which a relation is afterward established—is not new. It shows
 through in several traditions of thought remote from one another in time,
 language, and cultural context: in structural linguistics, in Hegelian
-dialectics, in classical Chinese philosophy, in early Buddhism. These
+dialectics, in classical Chinese philosophy, in Buddhist philosophy (Madhyamaka). These
 traditions did not communicate with one another; they differ in method,
 vocabulary, and subject matter. And yet each of them—by different means
 and in different terms—arrives at one and the same structural
@@ -1420,7 +1420,7 @@ are “already given,” the question of their consistency with roles does
 not arise—roles do not work at all.
 
 **Third: preserving the connection between levels.** 
-The generative order (Chapter 4) states: rules specify roles, roles
+The generating order (Chapter 4) states: rules specify roles, roles
 select elements. This sequence must not be violated. In the stance of
 distinction the connection between levels *is preserved*: every concrete
 object of work stays together with the rules and roles through which it

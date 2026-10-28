@@ -2,7 +2,7 @@
 title: "Newcomb’s Paradox"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Парадокс Ньюкомба.md"
-sourceBlob: 3785c7eac3220ef225034456d28e04e43be0b287
+sourceBlob: 8678fdfe230ff5ec42c97eb519b480429aeebc94
 translated: 2026-10-20
 status: draft
 description: "A conflict between determinism (for prediction) and freedom (for choice)"
@@ -22,7 +22,7 @@ A rare paradox with a precisely known author: William Newcomb, a theoretical phy
 
 ## Consequence
 
-The structure of the knot recurs wherever a choice correlates with what it does not cause. The prisoner’s dilemma: with a partner who resembles you, “to cooperate” correlates with his cooperating—Nozick himself noted the connection with Newcomb. The Solomon problem: a common factor influences both the preference and the outcome—the choice does not cause the illness but is evidence of it. Copies and simulations: a choice correlates with the choices of the copies. AI alignment: which decision theory to build into an agent is a practical question, and Newcomb’s paradox serves as its touchstone. Variants of the formulation clarify how it is built: the transparent box, the pill for yesterday’s money, a version with no Predictor at all—a bare statistical correlation gives the same knot without the mysticism.
+The structure of the knot recurs wherever a choice correlates with what it does not cause. The prisoner’s dilemma: with a partner who resembles you, “to cooperate” correlates with his cooperating—Nozick himself noted the connection with Newcomb. The Solomon problem: a common factor influences both the preference and the outcome—the choice does not cause the illness but is evidence of it. Copies and simulations: a choice correlates with the choices of the copies. AI alignment: which decision theory to build into an agent is a practical question, and Newcomb’s paradox serves as its touchstone. Variants of the formulation clarify how it is arranged: the transparent box, the pill for yesterday’s money, a version with no Predictor at all—a bare statistical correlation gives the same knot without the mysticism.
 
 ## Domain Analysis
 

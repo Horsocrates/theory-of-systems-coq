@@ -2,7 +2,7 @@
 title: "Chapter 7. Synthesis: A Map of Mathematics beyond the Boundary"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/07 Синтез карта математики за границей.md"
-sourceBlob: d536163d9e8cab7e81cf1b9ec245a346692f6935
+sourceBlob: cbe55b6145f49db6ca5ece0254ff76d8b01cc6d3
 translated: 2026-10-20
 status: draft
 ---
@@ -45,7 +45,7 @@ Now the whole part is in one table. The rows are the layers of nonstandard analy
 
 The map reads as one sentence: the left and middle columns are one and the same process mathematics (Element plus *removable* formwork by conservativity), the right one holds artifacts of the chosen set theory.
 
-And the boundary between the middle and the right runs at *one* point—the maximization of the cofinite filter to a nonprincipal ultrafilter, that is, the omniscience $\mathrm{LPO}_\omega$ (a coherent decision of “is $S$ large” for *all* subsets at once). In the foundation of the project this place is marked by the ladder of principles of omniscience $\mathrm{LLPO}\sqsubset\mathrm{WLPO}\sqsubset\mathrm{LPO}$[^2], and in the registry of set-theoretic assumptions the power set and choice are assigned to the role-limit side[^3]. This is the same finitization boundary as in thesis H1 of the whole volume: *the finitization boundary $=$ the boundary of constructivity*.
+And the boundary between the left and the middle runs at *one* point—the maximization of the cofinite filter to a nonprincipal ultrafilter, that is, the omniscience $\mathrm{LPO}_\omega$ (a coherent decision of “is $S$ large” for *all* subsets at once). In the foundation of the project this place is marked by the ladder of principles of omniscience $\mathrm{LLPO}\sqsubset\mathrm{WLPO}\sqsubset\mathrm{LPO}$[^2], and in the registry of set-theoretic assumptions the power set and choice are assigned to the role-limit side[^3]. This is the same finitization boundary as in thesis H1 of the whole volume: *the finitization boundary $=$ the boundary of constructivity*.
 
 ## What We Do Not Claim: The Horizon
 

@@ -1,8 +1,8 @@
 ---
-title: "Affective Fallacy: “Follow Your Heart”"
+title: "Affective Fallacy / Follow Your Heart"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/02 Нарушения доменов/Аффективная ошибка — «Следуй за сердцем».md"
-sourceBlob: 25afeeb230dddbf5ada1d73f5fde13a656f83998
+sourceBlob: f06c1e52ea9659853a09d90d83675a7164beecf8
 translated: 2026-10-20
 status: draft
 description: "Emotions are declared self-validating and not subject to criticism: “I feel it—so it is the truth”"

@@ -2,7 +2,7 @@
 title: "Chapter 3. Trigonometry and the Complex DFT: Where the Boundary Lies"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/03 Тригонометрия и комплексный DFT где граница.md"
-sourceBlob: 00e89f49c972ff02bbfa49a22f611794724c7844
+sourceBlob: 7435d7e1dc9fb31463025596fc1c577783e8c2c9
 translated: 2026-10-20
 status: draft
 ---
@@ -83,7 +83,7 @@ N\delta_{kk'}$—exactly the same structure of characters as with Walsh, but ove
 The boundary here is different from that of continuous trigonometry: the sum is *finite*, and the mechanism of vanishing is *algebraic* (a geometric progression). What is transcendental and complex are the *values* themselves: $\omega=e^{2\pi i/N}$ requires the imaginary unit $i$ and the base $e$; the characters live in $ℂ^N$; ToS does not build a full-fledged field $ℂ$ as an already constructed carrier over the process reals, and the root of unity $\omega^{kj}$ is in general irrational and complex.[^2]
 
 *The complex DFT is the same harmony of characters as Walsh, but on the group
-$(ℤ_N,+)$, whose characters are roots of unity. The algebraic skeleton (the vanishing sum) becomes rational if the values of the characters are replaced by abstract rational parameters with the required laws; the *values* $e^{2\pi ik/N}$ themselves and the imaginary unit $i$ are transcendental and complex.*
+$(ℤ_N,+)$, whose characters are roots of unity. The algebraic skeleton (the vanishing sum) becomes rational if the values of the characters are replaced by abstract rational parameters with the required laws; the *values* $e^{2\pi ik/N}$ themselves and the imaginary unit $i$ are algebraic but not rational (complex) numbers; $\pi$ and the values of $\sin/\cos$ at general points are transcendental.*
 
 ## Discrete Sampling: What Becomes Rational
 
@@ -95,7 +95,7 @@ The previous section showed that what is transcendental is the *values* of the c
 - (2) the character is a homomorphism in frequency: $\chi(k,j) \chi(k',j)=\chi(k+k',j)$;
 - (3) the vanishing geometric sum: $\sum_{j<N}\chi(m,j)=0$ for $0<m<N$.
 
-Properties (1)–(2) are purely algebraic; *only* property (3) is transcendental: it is the abstract form of the fact “the sum of the roots of unity equals zero.” And under these hypotheses discrete orthogonality is a finite theorem over ℚ (in the range
+Properties (1)–(2) are purely algebraic; *only* property (3) goes beyond ℚ: it is the abstract form of the fact “the sum of the roots of unity equals zero.” And under these hypotheses discrete orthogonality is a finite theorem over ℚ (in the range
 $k+k'<N$):
 
 $$

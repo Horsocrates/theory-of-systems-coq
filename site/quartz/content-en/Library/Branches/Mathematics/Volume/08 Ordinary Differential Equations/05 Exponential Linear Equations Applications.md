@@ -43,7 +43,7 @@ So far we have dealt with a single equation. But many problems are *systems*: a 
 
 The vector form makes it possible to reduce a *higher-order equation* to a first-order system: $y'' = g(t, y, y')$ becomes the pair $y' = v$, $v' = g(t, y, v)$; introducing the velocity as an independent role enlarges the state space and lowers the order.[^8] The classical example is the harmonic oscillator $y'' = -y$, that is, the pair $y' = v$, $v' = -y$. Its exact solution is $(\cos t, \sin t)$, and this trajectory is the role-limit of the vector Euler process; $\sin$ and $\cos$ as completed transcendentals are not Elements but role-limits, exactly like $e$.
 
-The oscillator also lays bare the *honest* side of the numerical method: explicit Euler does not conserve energy. The quantity $E = y^2 + v^2$, classically constant, *drifts upward* on the grid: in two steps with $y_0=1, v_0=0, h=1/10$ it grows from $1$ to $1{,}0201$.[^9] This is not a defect of the exposition but a *property* of the explicit method, honestly computed: exact conservation of energy belongs to the continuous flow of the oscillator (or to specially structure-preserving, symplectic, schemes), whereas explicit Euler on a finite grid gives a systematic rational drift.
+The oscillator also lays bare the *honest* side of the numerical method: explicit Euler does not conserve energy. The quantity $E = y^2 + v^2$, classically constant, *drifts upward* on the grid: in two steps with $y_0=1, v_0=0, h=1/10$ it grows from $1$ to $1.0201$.[^9] This is not a defect of the exposition but a *property* of the explicit method, honestly computed: exact conservation of energy belongs to the continuous flow of the oscillator (or to specially structure-preserving, symplectic, schemes), whereas explicit Euler on a finite grid gives a systematic rational drift.
 
 *A system is a joint vector process; the velocity in the reduction of order is an independent role, not an auxiliary symbol. The energy of the oscillator is a role-invariant of the continuous flow (and of structure-preserving schemes); its drift on the explicit grid is an honest rational Element. $\cos$ and $\sin$ are role-limits of the vector process, as $e$ is the role-limit of the scalar one.*
 
@@ -57,7 +57,7 @@ $$
 
 and the whole trajectory is a process over the list of impacts.[^10] Concretely: the price $100$ under the impacts $1, -\tfrac12,
 \tfrac34, -\tfrac14, \tfrac12$ passes through the stages $100, 101, \tfrac{201}{2}, \tfrac{405}{4},
-101$ and arrives at $\tfrac{203}{2} = 101{,}5$, an exact rational trajectory.[^11] The file also introduces a stability check through a Lipschitz coefficient: an analogous Lipschitz condition (a contraction coefficient less than one), akin to the condition $LT<1$ of Picard contraction (Chapter 8.3), read as a sign of stable dynamics.
+101$ and arrives at $\tfrac{203}{2} = 101.5$, an exact rational trajectory.[^11] The file also introduces a stability check through a Lipschitz coefficient: an analogous Lipschitz condition (a contraction coefficient less than one), akin to the condition $LT<1$ of Picard contraction (Chapter 8.3), read as a sign of stable dynamics.
 
 *In applied dynamics the process is not an approximation to a completed curve but the model itself: the price is a role-process updated by impacts. Stability is governed by a Lipschitz condition of the same type as Picard convergence: a single E/R/R mechanism works in both the pure and the applied problem.*
 

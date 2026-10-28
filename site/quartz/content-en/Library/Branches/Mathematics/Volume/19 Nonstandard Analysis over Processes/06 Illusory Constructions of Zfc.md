@@ -2,7 +2,7 @@
 title: "Chapter 6. Illusory Constructions of ZFC"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/06 Иллюзорные конструкции ZFC.md"
-sourceBlob: b3c8e1e2e2b56a46c695c97dd8c63eb351567f75
+sourceBlob: df63be427a30d92c0aa340de1be2d2d8fa382ab2
 translated: 2026-10-20
 status: draft
 ---
@@ -20,7 +20,7 @@ And two clarifications at once. The first is terminological: “illusory” here
 Every construction “beyond the boundary” receives exactly one of three statuses[^1]:
 
 - **Element core** ($\neg$AC, there is a witness): the $\delta$-process, the shadow of a convergent process, the derivative of a polynomial—all built in Chapters 1–2, 0 axioms[^2];
-- **role-limit instrument** (AC, but removable scaffolding): the free ultrafilter, $^{*}ℝ$-as-a-field—nonconstructive but *conservative* (in the metatheoretical sense of Nelson: a standard consequence obtained through NSA scaffolding has a standard proof), hence removable, and they *deliver* something[^3];
+- **role-limit instrument** (AC, but removable scaffolding): the free ultrafilter, $^{*}ℝ$-as-a-field—nonconstructive but *conservative* (in the metatheoretical sense of Nelson’s theorem: a standard consequence obtained through NSA scaffolding has a standard proof), hence removable, and they *deliver* something[^3];
 - **illusory** (AC, no witness, not scaffolding): the Hamel basis, the Vitali set, a well-ordering of $ℝ$, Banach–Tarski—pure ZFC phantoms[^4].
 
 *The key distinction is the illusory versus the role-limit instrument: scaffolding is **removable and delivers something** (an Element consequence through conservativity); a phantom delivers **neither an Element witness nor removable formwork** for a process result—it is only an “object” that does not exist on the Element side (which does not prevent it from having consequences *inside* ZFC). The ultrafilter (Chapter 4) is scaffolding; Banach–Tarski is a phantom.*

@@ -2,7 +2,7 @@
 title: "Bandwagon Fallacy"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/02 Нарушения доменов/Ошибка вагона с оркестром — Апелляция к большинству.md"
-sourceBlob: f7cd8d3db3321429b726fe8bf0b3ee2156192dad
+sourceBlob: 4abb60e374b0af47b173fea0fd1db77f16c0469e
 translated: 2026-10-20
 status: draft
 description: "“Everyone thinks/does so” as an argument that something is true or right"

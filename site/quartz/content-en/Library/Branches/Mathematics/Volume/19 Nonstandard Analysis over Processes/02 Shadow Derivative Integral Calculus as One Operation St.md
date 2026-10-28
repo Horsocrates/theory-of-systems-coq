@@ -2,7 +2,7 @@
 title: "Chapter 2. Shadow, Derivative, Integral: Calculus as One Operation st"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/19 Нестандартный анализ над процессами/02 Тень, производная, интеграл исчисление как одна операция st.md"
-sourceBlob: feaf3cdb0eb623519d2a934d85bfbcf65b55e3ad
+sourceBlob: 7c91c6f222edea1717f06afbcfb7725df9ccc862
 translated: 2026-10-20
 status: draft
 ---
@@ -33,7 +33,7 @@ $$
 
 *exactly*—an identity of field algebra on the Element side[^5]. The remainder is exactly $\delta$; the shadow removes it, and $f'(x)=2x$ **exactly**[^6].
 
-This is where Berkeley’s paradox is laid open. The classical charge against fluxions is that they divide by $o$ as by a nonzero quantity, THEN set $o=0$—a phantom of vanished quantities (Berkeley’s *ghosts of departed quantities*). There is no contradiction: $\delta$ is a process, at every step $\delta_n>0$ (we divide legitimately), and nowhere does it “become” zero; “$o=0$” is a separate operation, the taking of the *shadow* (the limit of the process). The ghost is $\delta_n$: nonzero at each step, vanishing only in the shadow.
+This is where Berkeley’s paradox is laid open. The classical charge against fluxions is that they divide by $o$ as by a nonzero quantity, THEN set $o=0$—phantoms of vanished quantities (Berkeley’s *ghosts of departed quantities*). There is no contradiction: $\delta$ is a process, at every step $\delta_n>0$ (we divide legitimately), and nowhere does it “become” zero; “$o=0$” is a separate operation, the taking of the *shadow* (the limit of the process). The ghost is $\delta_n$: nonzero at each step, vanishing only in the shadow.
 
 The same device carries the cube through as well: from the identity $(f(x+\delta)-f(x))/\delta = 3x^2+3x\delta+\delta^2$ the remainder $3x\delta+\delta^2$ is bounded by $(3|x|+1) \delta$ and vanishes in the shadow, so that $f'(x^3)=3x^2$ **exactly**[^7]. And the finitization boundary: the limits $2x$ and $3x^2$ are *rational* for rational $x$, and the processes $2x+\delta_n$ and $3x^2+3x\delta_n+\delta_n^2$ converge INSIDE the Element side—on the checked powers ($1,x,x^2,x^3$) the boundary is not crossed. The general polynomial theorem is the next step; for nonpolynomial functions additional limit estimates arise (the general $x^n$ and transcendental $f$ are the horizon).
 

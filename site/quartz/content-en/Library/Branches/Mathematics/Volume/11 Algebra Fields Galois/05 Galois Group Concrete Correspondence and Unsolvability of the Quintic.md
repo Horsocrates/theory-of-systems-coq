@@ -2,7 +2,7 @@
 title: "Chapter 5. Galois Group: Concrete Correspondence and Unsolvability of the Quintic"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/11 Алгебра, поля, Галуа/05 Группа Галуа конкретное соответствие и неразрешимость квинтики.md"
-sourceBlob: 5eb81434107b374c5b1a564399f3b49a3f717c92
+sourceBlob: b3266f72a915e8f0114493ea02869e9d8cff89a4
 translated: 2026-10-20
 status: draft
 ---

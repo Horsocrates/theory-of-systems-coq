@@ -2,7 +2,7 @@
 title: "Violations of Sequence (Type 3)"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/03 Нарушения последовательности/index.md"
-sourceBlob: f62bac2ebff42aab7f715098dc82bc935fce7102
+sourceBlob: 802705858d4e5d7c2ffa183e27ebb0917ca45df5
 translated: 2026-10-20
 status: draft
 description: "Reasoning moves backward, in a circle, or with inverted roles."

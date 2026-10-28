@@ -2,7 +2,7 @@
 title: "Chapter 4. The Axiom of Choice: Exclusion and Reinterpretation"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/04 Аксиома выбора запрет и переинтерпретация.md"
-sourceBlob: cd8d48de188786d5ad031eec530cfb47c543308f
+sourceBlob: 078b2c47d46708e7793502422b32a5ec792bcae3
 translated: 2026-10-20
 status: draft
 ---
@@ -51,7 +51,7 @@ P(x)$, the object $\{x\mid P(x)\}$. The Axiom of Choice takes a function over an
 
 Hence the fate of the pathologies of choice. The Banach–Tarski paradox and the non-measurable Vitali sets require *manufacturing* a non-measurable set by choice over an uncountable family of classes. In the current finite/list layer of P4 there is no such ground: every *decidable* subset of a finite list is itself a finite list (a filter), and length is preserved under finite decomposition—the paradoxical doubling has nothing to stand on.[^8]
 
-*L4 (a witness from a single $\exists$) is not choice (selection over a family); these are different categories. The pathologies of choice (Vitali, Banach–Tarski) lose their footing: under P4, decidable subsets of the finite remain finite, and length is additive.*
+*L4 is a rule of extraction, not a completed graph of choice: the strength is comparable, the categories differ. The pathologies of choice (Vitali, Banach–Tarski) lose their footing: under P4, decidable subsets of the finite remain finite, and length is additive.*
 
 ## E/R/R Analysis
 
@@ -66,7 +66,7 @@ Hence the fate of the pathologies of choice. The Banach–Tarski paradox and the
 excluded (`P4_prohibits_AC`, `completed_inf_contradicts_P4`). The link is
 `prohibition_implies_reinterpretation` (the exclusion is stronger).
 
-**Diagnosis.** In the P4 ontology of ToS, the Axiom of Choice is a gluing of the rule of L5 and the completed graph-Element. L4 must not be confused with it: these are different categories.
+**Diagnosis.** In the P4 ontology of ToS, the Axiom of Choice is a gluing of the rule of L5 and the completed graph-Element. L4 is a rule of extraction, not a completed graph of choice: the strength is comparable, the categories differ.
 
 **Honest boundaries.** `P4_eliminates_AC` is proved for families of *finite lists* (finite sets) / as a rule-on-demand—this is *not* full ZFC-AC, which P4 in fact rules out. The anti-Banach–Tarski result is an absence of footing (decidable finite subsets ${}+{}$ additivity of length), not a metatheorem about the falsity of the paradox. Potential infinity is compatible; only the completed object is excluded.
 
@@ -88,7 +88,7 @@ Chapter 10.5 will extend the same two-level diagnosis to the rest of the tower o
 [^4]: `P4ProhibitsAC.v`: `AC_on_nat` (the full form), `ac_implies_completed` (AC gives a completed graph), `P4_prohibits_AC`. And `P4CompletedInfinity.v`: `CompletedInfSet` against `P4_stage_bounded`, with the outcome `completed_inf_contradicts_P4`. All **0 axioms**.
 [^5]: `P4CompletedInfinity.v`: `potential_compatible_with_P4`—potential infinity does not contradict P4. What is excluded is precisely the *completed* object, not the process.
 [^6]: `P4ProhibitionSynthesis.v`: `prohibition_implies_reinterpretation` (the exclusion entails the reinterpretation), `reinterpretation_weaker` (the converse fails), `P4_is_prohibition`. 0 axioms.
-[^7]: `ToS_Axioms.v`—the header says this outright: “This is NOT the Axiom of Choice”; `L4_witness` is `(exists x, P x) -> {x | P x}`, neither ZFC-AC nor dependent choice. To compare them on one “scale of strength” is a category mistake.
+[^7]: `ToS_Axioms.v`—the header says this outright: “This is NOT the Axiom of Choice”; `L4_witness` is `(exists x, P x) -> {x | P x}`, neither ZFC-AC nor dependent choice. In strength they are comparable (`l4_statement_gives_functional_choice`); the difference lies in category: a rule versus a completed object.
 [^8]: `P4_Eliminates_AC.v`: `decidable_subset_finite` (a decidable subset of a finite list is finite), `finite_decomposition_preserves_length` (length is additive under concatenation). This is not the metatheorem “Banach–Tarski is false” but the absence of *footing* for the construction: there are no non-measurable pieces—and so no paradoxical decomposition either.
 
 ---

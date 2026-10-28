@@ -2,7 +2,7 @@
 title: "Chapter 4. Convergence of Fourier Series in L²"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/07 Гармонический анализ/04 Сходимость рядов Фурье в L2.md"
-sourceBlob: df64cc8053eb61bd5660c59f41eb7394124e9d6b
+sourceBlob: 1ec1f403d4dce9a259e0762ba1c05b81ea2dd1ec
 translated: 2026-10-20
 status: draft
 ---
@@ -158,7 +158,7 @@ The next chapter applies this core: compression as truncation by significant coe
 [^5]: `fourier_error_monotone`; it relies on the monotonicity of the captured energy (`captured_mono`, Chapter 7.5). 0 axioms.
 [^6]: `fourier_partial_best` in `ProcessFourierSeriesL2.v` (the same as `best_approx_ge` from `ProcessBestApproximation.v`): $\norm{f-P_K}^2\le\norm{f-\sum_{k<K}a_k e_k}^2$ for any weights $a_k$; the uniqueness of the minimum is `best_approx_unique`. 0 axioms.
 [^7]: `fourier_error_zero_iff`: $\norm{f-P_K}^2=0 \Leftrightarrow \sum_{k<K}c_k^2=\norm{f}^2$; it relies on the completeness criterion `parseval_iff_complete` (Chapter 7.1). 0 axioms.
-[^8]: The headers: `ProcessFourierSeriesL2.v`—Rules: error $=\norm{f}^2-$ captured, monotone, zero $\Leftrightarrow$ Parseval; Roles: $P_K$ is an approximation, the tail is the completeness defect; N$\to\infty$ is marked as the P4 boundary. `ProcessBestApproximation.v`—Rules: $P_K$ is the unique minimum of the residual.
+[^8]: The headers: `ProcessFourierSeriesL2.v`—Rules: error $=\norm{f}^2-$ captured, monotone, zero $\Leftrightarrow$ Parseval; Roles: $P_K$ is an approximation, the tail is the completeness defect; $N\to\infty$ is marked as the P4 boundary. `ProcessBestApproximation.v`—Rules: $P_K$ is the unique minimum of the residual.
 
 ---
 

@@ -8,7 +8,7 @@ sourceBlob: c3597d5b4353a4178aeddb75104ca6bcee97003d
 translated: 2026-10-17
 status: draft
 ---
-Reflection is the last of the six [[Domains|domains]] of reasoning: in it the path traveled is analyzed from the position above the slice—limits are drawn, patterns of thinking are noticed, and the work returns to the domain where a defect entered. Here: where the domain comes from and how it is built, why reflection is a domain by its place in the path and a recursion by its mechanism, what the Principle of Limitation requires, where the limits of reflection itself lie, when the domain has been passed, and where reflection breaks down.
+Reflection is the last of the six [[Domains|domains]] of reasoning: in it the path traveled is analyzed from the position above the slice—limits are drawn, patterns of thinking are noticed, and the work returns to the domain where a defect entered. Here: where the domain comes from and how it is arranged, why reflection is a domain by its place in the path and a recursion by its mechanism, what the Principle of Limitation requires, where the limits of reflection itself lie, when the domain has been passed, and where reflection breaks down.
 
 ## Etymology
 

@@ -1,5 +1,5 @@
 ---
-title: "Excluded Middle — “More Is Better”"
+title: "Excluded Middle Fallacy"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/02 Нарушения доменов/Исключённая середина — «Больше — лучше».md"
 sourceBlob: b355cea47248009821454b9feed73608c42a5d6d

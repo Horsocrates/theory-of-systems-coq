@@ -52,7 +52,7 @@ The computational layer: 0.99 to the power of three hundred is about 0.05; “su
 
 ## Kin by Mechanism
 
-[[Lottery Paradox|The Lottery]] (the twin: the same mechanism on countable beliefs—the full analysis of the triad of premises is there), Moore’s phenomenon (a contrast: “it is raining, but I do not believe it” is absurd, since it sets beliefs of one level about one fact against each other; the preface is rational, since the meta-belief is about the corpus), [[Liar Paradox|the Liar]] (the degenerate case of an empty book—a departure into the structural family), fallibilism as a position.
+[[Lottery Paradox|The Lottery]] (the twin: the same mechanism on countable beliefs—the full analysis of the triad of premises is there), Moore’s paradox (a contrast: “it is raining, but I do not believe it” is absurd, since it sets beliefs of one level about one fact against each other; the preface is rational, since the meta-belief is about the corpus), [[Liar Paradox|the Liar]] (the degenerate case of an empty book—a departure into the structural family), fallibilism as a position.
 
 **Machine check.** In the registry of 46—`N6_Preface`: category `NonParadox`; the status of the category is formalized (`nonparadox_46_not_paradox`, `nonparadox_count_8`—ParadoxDissolution.v). The separation by level—belief-about-beliefs a storey above—is in tune with our own formalization of reflection as raising the level of observation (src/foundation/ReflectionRecursion.v). The computational core (0.99ⁿ over Q) is a candidate for the “Probability” branch (see [[Formalization]]).
 

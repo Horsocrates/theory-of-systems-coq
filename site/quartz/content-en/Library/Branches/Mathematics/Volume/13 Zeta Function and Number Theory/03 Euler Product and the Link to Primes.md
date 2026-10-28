@@ -2,7 +2,7 @@
 title: "Chapter 3. The Euler Product and the Link to the Primes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/03 Произведение Эйлера и связь с простыми.md"
-sourceBlob: bf23ab915d40b4d0faa209bba1428faaabb8d0c3
+sourceBlob: fe4cf719e4611da585bedfc5a460bf8cd0e33eff
 translated: 2026-10-20
 status: draft
 ---
@@ -120,7 +120,7 @@ This is a deep structural connection: number theory and the theory of dynamics s
 
 ## What the Chapter Has Prepared
 
-The Euler product has been read as a *rule of recoding* a sum into a product, legitimate by virtue of the uniqueness of factorization (Chapter 13.1); its constructive side (partial products, positivity, $\zeta(k)>0$) is machine-checked over $ℚ$ without axioms, and the full transcendental identity is honestly left classical. Hence the region $\Re s>1$ is free of zeros, and all the interesting zeros are in the critical strip.
+The Euler product has been read as a *rule of recoding* a sum into a product, legitimate by virtue of the uniqueness of factorization (Chapter 13.1); its constructive side (partial products and their positivity) is machine-checked over $ℚ$ without axioms; the limiting $\zeta(k)>0$ is a classical consequence (footnote 3); and the full transcendental identity is honestly left classical. Hence the region $\Re s>1$ is free of zeros, and all the interesting zeros are in the critical strip.
 
 Next:
 

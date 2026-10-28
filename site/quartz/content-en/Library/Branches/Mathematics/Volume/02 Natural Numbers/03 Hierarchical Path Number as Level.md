@@ -115,9 +115,9 @@ Now we can say what finiteness from below gives the path to the natural number s
 
 It gives, first, a *beginning*. Since the hierarchy has a base level, the series of levels—if, as § 3.4 will show, levels are numbers—has a first term. The natural number series does not hang without a beginning; it begins where the hierarchy begins—at the ground.
 
-It gives, second, a beginning precisely *with one*, not with zero. Here the hierarchical path converges with what Chapter II.1 established for the cardinal one. ToS assigns to a level its *depth*—the distance from the ground, counted in rungs. The depth of the base level `L1` is *one*: the ground is the *first* level, not a “zeroth level”—it is itself a level, existing and posited, not the absence of a level. The echo of Chapter II.1 is exact here: just as the first performed act of distinction is one, not zero (§ 1.2), so the first level of the hierarchy—the ground—is one, not zero. Zero in the hierarchy would mark the *absence* of a level; but the ground is an existing level, and therefore one corresponds to it.
+It gives, second, a beginning precisely *with one*, not with zero. Here the hierarchical path converges with what Chapter II.1 established for the cardinal one. ToS assigns to a level its *depth*—the distance from the ground, counted in rungs. The depth of the base level `L1` is *one*: the ground is the *first* level, not a “zeroth level”—it is itself a level, present and posited, not the absence of a level. The echo of Chapter II.1 is exact here: just as the first performed act of distinction is one, not zero (§ 1.2), so the first level of the hierarchy—the ground—is one, not zero. Zero in the hierarchy would mark the *absence* of a level; but the ground is a level that is present, and therefore one corresponds to it.
 
-*The finiteness of the hierarchy from below gives the path to the natural number series a beginning: the series of levels has a first term—the ground. And it gives a beginning precisely with one: the depth of the base level is one, because the ground is an existing level, not the absence of a level. Here the hierarchical path converges with the cardinal one: the primacy of one is confirmed from a second, independent side.*
+*The finiteness of the hierarchy from below gives the path to the natural number series a beginning: the series of levels has a first term—the ground. And it gives a beginning precisely with one: the depth of the base level is one, because the ground is a level that is present, not the absence of a level. Here the hierarchical path converges with the cardinal one: the primacy of one is confirmed from a second, independent side.*
 
 The hierarchy has a ground, and the series of levels has a beginning. It remains to show the main thing: that the series of levels *is* the natural number series—that a level is a number. This is the subject of the next section.
 
@@ -175,7 +175,7 @@ Fixpoint level_depth (l : Level) : nat :=
 ```
 
 The depth function assigns a natural number to each level and thereby serves as a *bridge* between the type of levels and the natural number series. This assignment is the role of the level in the E/R/R analysis (§ 3.8.2): the depth is the number of the level.
-Two of its features are essential. The first: the depth of the base level is *one*, not zero—the ground is an existing level, and the first number corresponds to it, not a mark of absence (§ 3.3.5). The second: each stacking `LS` increases the depth by exactly one—a step along the hierarchy corresponds exactly to a step along the natural number series. The second feature is fixed by a simple lemma:
+Two of its features are essential. The first: the depth of the base level is *one*, not zero—the ground is a level that is present, and the first number corresponds to it, not a mark of absence (§ 3.3.5). The second: each stacking `LS` increases the depth by exactly one—a step along the hierarchy corresponds exactly to a step along the natural number series. The second feature is fixed by a simple lemma:
 
 ```coq
 Lemma level_depth_LS : forall l,
@@ -185,7 +185,7 @@ Proof. reflexivity. Qed.
 
 The lemma is almost trivial—it is proved by a single `reflexivity`—but it is substantive: it shows that `LS` on levels and `S` on numbers agree elementwise through `level_depth`.
 
-Depth does not *add* numbers to the hierarchy from outside; it only *reads* the already existing arrangement: since `Level` is arranged like the natural number series, each level *already* has its number, and `level_depth` presents this number. The bridge does not join two banks—it shows that there is one bank.
+Depth does not *add* numbers to the hierarchy from outside; it only *reads* the arrangement already present: since `Level` is arranged like the natural number series, each level *already* has its number, and `level_depth` presents this number. The bridge does not join two banks—it shows that there is one bank.
 
 That the hierarchy of levels is isomorphic to the natural number series, and that the properties which the standard exposition introduces by axioms of counting turn out to be properties of the inductive type of levels, ToS also establishes formally—by a separate group of proved theorems. But precision is needed here, otherwise the formal side will be read as stronger than it is; let us examine it in three steps.
 
@@ -198,7 +198,7 @@ The repository has *two* functions that assign a number to a level, and they giv
 | `LS L1` / `LSucc LBase` | 2 | 1 |
 | `LS (LS L1)` / `LSucc (LSucc LBase)` | 3 | 2 |
 
-The right column is a *technical indexing* by the standard `nat`, which starts at `0`: this is the ordinary isomorphism of the inductive type of levels with the standard `nat`, and it is *not* specific to ToS. The left column is the *ToS reading*: depth as a *positive* level, where the ground is the first existing level, not the absence of a level. The thesis of the chapter is precisely the left column: the ontological depth of a level is read from one. This is *not* a claim that the standard `nat` ceases to start at `0`; the standard indexing stays as it is. ToS only reads *depth* from one—the ground is an existing level, and the first positive number corresponds to it.
+The right column is a *technical indexing* by the standard `nat`, which starts at `0`: this is the ordinary isomorphism of the inductive type of levels with the standard `nat`, and it is *not* specific to ToS. The left column is the *ToS reading*: depth as a *positive* level, where the ground is the first level that is present, not the absence of a level. The thesis of the chapter is precisely the left column: the ontological depth of a level is read from one. This is *not* a claim that the standard `nat` ceases to start at `0`; the standard indexing stays as it is. ToS only reads *depth* from one—the ground is a level that is present, and the first positive number corresponds to it.
 
 **The isomorphism of the standalone type.** 
 The file `L5_NatFromHierarchy.v`[^4]

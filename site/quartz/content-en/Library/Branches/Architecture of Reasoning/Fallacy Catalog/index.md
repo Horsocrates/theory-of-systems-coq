@@ -3,7 +3,7 @@ title: "Fallacy Catalog"
 aliases: ["Fallacies"]
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог ошибок/index.md"
-sourceBlob: ae7a3a50d990e38ea75eb429c2937651dedf57ba
+sourceBlob: 98ff08fe6dab9534a4745a6226f1f53c158b0e0e
 translated: 2026-10-20
 status: draft
 ---
@@ -12,7 +12,7 @@ status: draft
 
 ## The Nature of Fallacies
 
-**The catalog and its walls.** Fallacies have been collected for as long as logic itself. The first list was given by Aristotle: in the treatise *On Sophistical Refutations* he analyzed thirteen kinds of false arguments.[^1] Behind the list stood a sound intuition: a sophism is the *appearance* of a refutation—counterfeit gold that the inexperienced cannot tell from the real thing, while one who knows the nature of the genuine recognizes it at once. Hence, to recognize errors one must understand health—how right reasoning is built.
+**The catalog and its walls.** Fallacies have been collected for as long as logic itself. The first list was given by Aristotle: in the treatise *On Sophistical Refutations* he analyzed thirteen kinds of false arguments.[^1] Behind the list stood a sound intuition: a sophism is the *appearance* of a refutation—counterfeit gold that the inexperienced cannot tell from the real thing, while one who knows the nature of the genuine recognizes it at once. Hence, to recognize errors one must understand health—the arrangement of right reasoning.
 
 But the catalog did not provide such an architecture—it only accumulated cases. Medieval logicians expanded the list. Francis Bacon noticed that distortion enters before proof and called such distortions the “idols of the mind.”[^2] In the twentieth century Charles Hamblin judged the learned tradition of fallacies to be a wastebasket—a collection of examples without a unifying theory.[^3] Daniel Kahneman and Amos Tversky described the systematic deviations of the mind—heuristics and biases.[^4] By the end of this path the lists ran to hundreds of names—and came up against three walls.
 
@@ -98,7 +98,7 @@ Five types → groups → mechanisms of violation; each node is a link. *(Genera
     - [[2.2 Domain 2 Clarification#Meaning Drift|2.2.1 · Meaning Drift]] — 7
     - [[2.2 Domain 2 Clarification#Hidden Agent|2.2.2 · Hidden Agent]] — 1
     - [[2.2 Domain 2 Clarification#Incomplete Analysis|2.2.3 · Incomplete Analysis]] — 3
-    - [[2.2 Domain 2 Clarification#Excessive Analysis|2.2.4 · Excessive Analysis]] — 2
+    - [[2.2 Domain 2 Clarification#Excessive Clarification|2.2.4 · Excessive Clarification]] — 2
   - [[2.3 Domain 3 Framework Selection|2.3 · Domain 3: Framework Selection]] — 16
     - [[2.3 Domain 3 Framework Selection#Category Mismatch|2.3.1 · Category Mismatch]] — 3
     - [[2.3 Domain 3 Framework Selection#Irrelevant Criterion|2.3.5 · Irrelevant Criterion]] — 9

@@ -2,7 +2,7 @@
 title: "Buridan’s Ass"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Не-парадоксы/Буриданов осёл.md"
-sourceBlob: 1b5571841f575df1ec184f16ef60d0f23dbc71d2
+sourceBlob: 682dd6425036bbc24c1d1afe9228e4ee0624bfd5
 translated: 2026-10-20
 status: draft
 description: "Resolved by random choice"

@@ -11,7 +11,7 @@ status: draft
 
 Chapter 13.4 showed that the nontrivial zeros of zeta live in the critical strip $0<\Re s<1$ and are symmetric about the line $\Re s=1/2$. This chapter introduces the main technical tool of analytic number theory—the *zero-free region*—and its machine-checkable core. And here it is especially important to keep the cut: the repository proves *rational and algebraic* pieces (identities, estimates, counting processes—all with 0 axioms), while the full *complex-analytic* theorems (the de la Vallée Poussin region, the Riemann–von Mangoldt asymptotics) remain a classical reading.
 
-**A zero as a process.**  In ToS a zero of zeta is not a point of a completed set but a *process*: a complex Cauchy sequence $\rho\colonℕ\to\mathbb{TC}$ whose value converges to zero. Nontriviality and position are fixed by predicates over such a process.[^1] The known small zeros—$\rho_1\approx\tfrac12+14{,}13 i$, $\rho_2\approx\tfrac12+21{,}02 i,…$—are *numerical* data (huge initial ranges have been checked, all on the critical line); they enter the repository as a landmark, not as machine-constructed objects.
+**A zero as a process.**  In ToS a zero of zeta is not a point of a completed set but a *process*: a complex Cauchy sequence $\rho\colonℕ\to\mathbb{TC}$ whose value converges to zero. Nontriviality and position are fixed by predicates over such a process.[^1] The known small zeros—$\rho_1\approx\tfrac12+14.13 i$, $\rho_2\approx\tfrac12+21.02 i,…$—are *numerical* data (huge initial ranges have been checked, all on the critical line); they enter the repository as a landmark, not as machine-constructed objects.
 
 ## The Zero-Free Region
 

@@ -2,7 +2,7 @@
 title: "Chapter 3. The Point as an Equivalence Class of Processes"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/04 Процессные действительные числа/03 Точка как класс эквивалентности процессов.md"
-sourceBlob: 3c04b6462184fa1b5f55569adc2ae0164f5b129a
+sourceBlob: 2d476e39f394a7aa21e7b00a26c76d8fdeabdef7
 translated: 2026-10-20
 status: draft
 ---
@@ -35,7 +35,7 @@ $P4$. This continues the same line of precision that Chapters 4.1 and 4.2 pursue
 
 ### The Familiar Picture: The Point as an Atom of the Line
 
-In the familiar mathematical picture the point is primary. The real line is thought of as a collection of points already gathered into one; the point is its indivisible atom, a ready object that simply *is*. The number $\sqrt{2}$, on this view, is a definite point occupying its place on the line between $1{,}41$ and $1{,}42$; the processes of rational approximation only *point* to it, edging toward a ready place that existed before any approximation.
+In the familiar mathematical picture the point is primary. The real line is thought of as a collection of points already gathered into one; the point is its indivisible atom, a ready object that simply *is*. The number $\sqrt{2}$, on this view, is a definite point occupying its place on the line between $1.41$ and $1.42$; the processes of rational approximation only *point* to it, edging toward a ready place that existed before any approximation.
 
 This picture is so familiar that it seems the only one possible. But it carries within itself exactly the assumption that the principle $P4$ rejects. The collection of all the points of the line is a completed infinity: an uncountable set of atoms gathered into a ready object. The point as an atom of this collection is an element of a completed whole. To accept the point as primary is to accept the completed line as primary; and Chapter 4.1 showed that there is no completed line in the $P4$ ontology.
 
@@ -77,7 +77,7 @@ Let us read it operationally. Demand any tightness $\varepsilon$ you like—ther
 Here we must at once forestall a confusion that is easy to make. `cauchy_equiv` does *not* require the processes to coincide at every step. It speaks only of the *limit* of the discrepancy: the difference $|a_n - b_n|$ must eventually fall below every $\varepsilon$, but *at any concrete step* it may be nonzero.
 
 The difference is one of principle. Pointwise equality of processes—“$a_n =
-b_n$ for every $n$”—is a completely different, much stricter relation. Two processes can define one point without coinciding at *any* finite step: it suffices that their discrepancy decrease to zero. It is precisely this that will make possible the analysis of the equality $0{,}999… = 1$ in § 3.7—there the two processes will coincide nowhere, yet the number they define will be one. The relation “to define one number” is `cauchy_equiv`, a relation about a common limit, not about pointwise identity.
+b_n$ for every $n$”—is a completely different, much stricter relation. Two processes can define one point without coinciding at *any* finite step: it suffices that their discrepancy decrease to zero. It is precisely this that will make possible the analysis of the equality $0.999… = 1$ in § 3.7—there the two processes will coincide nowhere, yet the number they define will be one. The relation “to define one number” is `cauchy_equiv`, a relation about a common limit, not about pointwise identity.
 
 ### Three Properties That Make the Relation Fit
 
@@ -216,20 +216,20 @@ it is precisely this statement that carries the order relation *from representat
 
 The result of the section is now fuller than it was. The equivalence class is not merely “a bundle of processes”: on classes there is a provably well-defined numerical *ring* structure and a compatible order. Addition, subtraction, and negation descend to classes (§ 3.6.2); order descends fully (`cauchy_le_compat`, § 3.6.3). Multiplication has been built too: `cauchy_mul` (the file `RealField.v`) with proved commutativity, associativity, unit, and distributivity, compatibility with equivalence (`cauchy_mul_compat`), and the morphism `cauchy_mul_Proper` (`RealPointSetoid.v`), which carries it down to the classes; on the bare line of processes it corresponds to `process_mul` (`CauchyProcessBridge.v`). So classes can be added, subtracted, multiplied, and compared—and these are operations on *numbers*, well defined on points. An honest measure remains: the multiplicative inverse (`cauchy_inv_is_cauchy`) is defined only for representatives bounded away from zero—division is partial, as befits a constructive field (a process that is merely *equivalent* to zero cannot be inverted). A full field structure with *total* division is not a gap to be closed but a boundary of the constructive notion of number itself.[^2]
 
-## Analysis of $0{,}999… = 1$
+## Analysis of $0.999… = 1$
 
 ### The Famous “Paradox”
 
-The equality $0{,}999… = 1$ is one of the best-known stumbling blocks of school mathematics. Intuition resists: $0{,}999…$ “looks smaller” than one, “falls short” of it, as though an infinitesimal gap remained between them. And yet mathematics insists that this is *one and the same number*.
+The equality $0.999… = 1$ is one of the best-known stumbling blocks of school mathematics. Intuition resists: $0.999…$ “looks smaller” than one, “falls short” of it, as though an infinitesimal gap remained between them. And yet mathematics insists that this is *one and the same number*.
 
 The present chapter gives this equality a natural reading—and, more importantly, shows that the “paradox” arises *only* in the point picture, while in the process picture it does not arise. This is a good test of the whole construction: if the point as a class works, then the most disputed school example must become clear in it.
 
 ### Two Processes
 
-In the process picture $0{,}999…$ is not “a number with an infinite tail of nines” but a *process*: a sequence of rational approximations unfolding according to a rule
+In the process picture $0.999…$ is not “a number with an infinite tail of nines” but a *process*: a sequence of rational approximations unfolding according to a rule
 
 $$
-0{,}9; \quad 0{,}99; \quad 0{,}999; \quad 0{,}9999; \quad …
+0.9; \quad 0.99; \quad 0.999; \quad 0.9999; \quad …
 $$
 
 At step $n$ this process outputs a rational number with $n{+}1$ nines after the decimal point. Let us call it the *decimal process*.
@@ -242,24 +242,24 @@ These are *two different processes*. And they differ not slightly: they differ *
 
 They are in one class because their discrepancy *goes to zero*. At step $n$ the difference between one and the decimal process is exactly $1/10^{n+1}$: one minus a number with $n{+}1$ nines. And $1/10^{n+1}$ decreases without limit: name any tightness $\varepsilon$ you like, and from some step on the discrepancy will become smaller than $\varepsilon$ and will not go beyond it again. This is exactly the definition of `cauchy_equiv` from § 3.3: the decimal process and the constant process are *equivalent*.
 
-And since they are equivalent, they are in one class. And therefore, by the definition of § 3.4, they define *one number*. The equality $0{,}999… = 1$ is neither a mysterious coincidence of two different numbers nor a “convention”; it is a simple statement of fact: *two different representatives of one class*. $0{,}999…$ and $1$ are two processes, one bundle, one point.
+And since they are equivalent, they are in one class. And therefore, by the definition of § 3.4, they define *one number*. The equality $0.999… = 1$ is neither a mysterious coincidence of two different numbers nor a “convention”; it is a simple statement of fact: *two different representatives of one class*. $0.999…$ and $1$ are two processes, one bundle, one point.
 
 ### Where the “Paradox” Was
 
-Now it is clear where the sense of paradox came from. It is a product of the point picture. If the point is primary, if $0{,}999…$ and $1$ are *ready points* on a ready line, then a legitimate question arises: is this one point or two? And if two—where is the gap between them; and if one—why does it have two different “notations”? The point picture poses a question that it cannot answer clearly, and therefore the question feels like a paradox.
+Now it is clear where the sense of paradox came from. It is a product of the point picture. If the point is primary, if $0.999…$ and $1$ are *ready points* on a ready line, then a legitimate question arises: is this one point or two? And if two—where is the gap between them; and if one—why does it have two different “notations”? The point picture poses a question that it cannot answer clearly, and therefore the question feels like a paradox.
 
-The process picture simply does not give rise to this question. In it $0{,}999…$ and $1$ are *processes* from the very beginning, and different processes—no one has claimed that they are one object at the level of representatives. The question “one number or two?” receives an exact meaning: *do the two processes lie in one equivalence class?*—and an exact answer: *yes, they do, for their discrepancy decreases to zero*. The “infinitesimal gap” that intuition sought between $0{,}999…$ and $1$ is precisely the discrepancy $1/10^{n+1}$; it is not an “infinitesimal quantity” frozen somewhere on the line, but a *term of a process* that decreases with each step. At every step the gap exists and is positive; in the limit the process of discrepancy falls below every $\varepsilon$. The paradox was an artifact of a picture in which the infinite process of approximation was replaced by a ready point. Remove the substitution, and the paradox does not form. In E/R/R terms (§ 3.8.2) this was a confusion of categories: the point-*role* (a class) was taken for an *element*-object.
+The process picture simply does not give rise to this question. In it $0.999…$ and $1$ are *processes* from the very beginning, and different processes—no one has claimed that they are one object at the level of representatives. The question “one number or two?” receives an exact meaning: *do the two processes lie in one equivalence class?*—and an exact answer: *yes, they do, for their discrepancy decreases to zero*. The “infinitesimal gap” that intuition sought between $0.999…$ and $1$ is precisely the discrepancy $1/10^{n+1}$; it is not an “infinitesimal quantity” frozen somewhere on the line, but a *term of a process* that decreases with each step. At every step the gap exists and is positive; in the limit the process of discrepancy falls below every $\varepsilon$. The paradox was an artifact of a picture in which the infinite process of approximation was replaced by a ready point. Remove the substitution, and the paradox does not form. In E/R/R terms (§ 3.8.2) this was a confusion of categories: the point-*role* (a class) was taken for an *element*-object.
 
 ### The Formal Proof: The File `ProcessNinePoint.v`
 
-What has been said so far is a substantive analysis. Let us also indicate the *formal* status of this equality, and here the chapter can be precise: in the ToS repository the equality $0{,}999… = 1$ is *proved* as a theorem—the file `process/ProcessNinePoint.v`, the theorem `nine_equiv_one`, without a single axiom. The proof proceeds in exactly the four steps that the substantive analysis sketched; let us go through them in order.
+What has been said so far is a substantive analysis. Let us also indicate the *formal* status of this equality, and here the chapter can be precise: in the ToS repository the equality $0.999… = 1$ is *proved* as a theorem—the file `process/ProcessNinePoint.v`, the theorem `nine_equiv_one`, without a single axiom. The proof proceeds in exactly the four steps that the substantive analysis sketched; let us go through them in order.
 
 *Step one*—the decimal process as a function from numbers to rationals:
 ```coq
 Definition nine_raw : RealProcess := fun n => 1 - 1 / ten_pow (S n).
 ```
-Here `S n` is the number following $n$, so that the numbering starts from the first nine: at step $n = 0$ the process gives $1 - 1/10 = 0{,}9$ (the machine check `nine_raw_0`), at step $n = 1$,
-$1 - 1/100 = 0{,}99$, and so on. The power of ten is taken by a separate function `ten_pow` (through `pow10` over `positive`): the ordinary notation `10 ^ (S n)` over $ℚ$ would not work in Rocq. Here, too, is the machine-checked laying open of the “paradox”: at the level of *elements* every truncation is strictly less than one (the theorem `nine_raw_lt_one`: `forall n, nine_raw n < 1`), while at the level of the *point* the process coincides with one (step four); the “paradox” $0{,}999… < 1$ is a confusion of these two levels.
+Here `S n` is the number following $n$, so that the numbering starts from the first nine: at step $n = 0$ the process gives $1 - 1/10 = 0.9$ (the machine check `nine_raw_0`), at step $n = 1$,
+$1 - 1/100 = 0.99$, and so on. The power of ten is taken by a separate function `ten_pow` (through `pow10` over `positive`): the ordinary notation `10 ^ (S n)` over $ℚ$ would not work in Rocq. Here, too, is the machine-checked laying open of the “paradox”: at the level of *elements* every truncation is strictly less than one (the theorem `nine_raw_lt_one`: `forall n, nine_raw n < 1`), while at the level of the *point* the process coincides with one (step four); the “paradox” $0.999… < 1$ is a confusion of these two levels.
 
 *Step two*—to prove that `nine_raw` is a Cauchy process. The path is indirect, through the two representations, and it is carried out exactly so. First `nine_raw` is taken as a bare `RealProcess`, and its `process_equiv` with `const_process 1` is proved (step four). Then from the Cauchy property of the constant process (`const_is_Cauchy` from `ProcessCore.v`) and the lemma `equiv_cauchy_l` of the same file (a process equivalent to a Cauchy process is itself a Cauchy process), `is_Cauchy nine_raw` is derived—the theorem `nine_raw_is_Cauchy`. Thereby `nine_raw` can, if needed, be packed into a
 `CauchySeq`.
@@ -272,11 +272,11 @@ Theorem nine_equiv_one : nine_raw ~~ const_process 1.
 ```
 The proof is a direct application of the tail estimate from step three: the discrepancy of the processes at step $n$ equals $1/10^{n+1}$ and falls below every $\varepsilon$—hence, by the definition of `process_equiv` ($\mathbin{\sim\mkern-3mu\sim}$), the processes name one point.
 
-So one may write with full formal right: *$0{,}999…$
+So one may write with full formal right: *$0.999…$
 and $1$ are different processes* (different bearers: $\texttt{nine\_raw} 0 =
-0{,}9 \neq 1$), *but one class, one point*. The theorem is proved at
+0.9 \neq 1$), *but one class, one point*. The theorem is proved at
 the level of bare processes ($\texttt{nine\_raw} \mathbin{\sim\mkern-3mu\sim}
-\texttt{const\_process}\;1$); the transfer to the packaged line `CauchySeq` is available through `nine_raw_is_Cauchy` and the bridge, but the statement itself is the equality-as-points on processes. The formalization does not *change* the meaning of the substantive analysis of § 3.7.1–3.7.4 but *turns* it into a machine-checked theorem: $0{,}999… = 1$ is an equality of *points* ($\mathbin{\sim\mkern-3mu\sim}$), not an identity of objects ($=$)—the processes are distinct, the point is one.
+\texttt{const\_process}\;1$); the transfer to the packaged line `CauchySeq` is available through `nine_raw_is_Cauchy` and the bridge, but the statement itself is the equality-as-points on processes. The formalization does not *change* the meaning of the substantive analysis of § 3.7.1–3.7.4 but *turns* it into a machine-checked theorem: $0.999… = 1$ is an equality of *points* ($\mathbin{\sim\mkern-3mu\sim}$), not an identity of objects ($=$)—the processes are distinct, the point is one.
 
 ## The Point Has Been Built
 
@@ -284,13 +284,13 @@ the level of bare processes ($\texttt{nine\_raw} \mathbin{\sim\mkern-3mu\sim}
 
 The chapter began with the step that Chapter 4.2 left unfinished: quotienting. The type of representatives `CauchySeq` and the relation `cauchy_equiv` had been built earlier; the present chapter carried out this passage at the *setoid level*, and this setoid is now formalized (`RealPointSetoid.v`: `Equivalence` + `Proper` morphisms): a real number has been read as a setoid class of representatives under the relation `cauchy_equiv`. A separate *quotient type* in Rocq was not built along the way—and not for lack of means but deliberately (§ 3.4.3): the chapter worked with a formalized setoid and a proved bridge, without reifying the classes into a new type-space of points.
 
-The path was as follows. First, why the point cannot be primary: a ready line of point-atoms is a completed infinity, and $P4$ excludes it; processes are primary, and the point must be *built* from them (§ 3.2). Then the relation “to define one number,” `cauchy_equiv`, with proved reflexivity, symmetry, and transitivity—a relation not reducible to pointwise equality (§ 3.3); and the bridge proved in `ProcessBridge.v`, connecting the two representations of the process into one object (§ 3.3.1). Then the definition: a point is an equivalence class of processes, where *class* is understood as a setoid mode of identification, not a completed collection, and the quotient type is honestly not built as a separate Rocq type (§ 3.4). Then the point as a mode, not an object: a derived angle of view on processes, from which the limit is visible and the manner is not (§ 3.5). Then arithmetic on classes: addition, negation, and multiplication provably descend to classes (`cauchy_mul_Proper`), and order descends fully (`cauchy_le_compat`) (§ 3.6). Finally, the analysis of $0{,}999… = 1$: two processes, one class, one number, and the “paradox” an artifact of the point picture; the equality is proved by the theorem `nine_equiv_one` (§ 3.7).
+The path was as follows. First, why the point cannot be primary: a ready line of point-atoms is a completed infinity, and $P4$ excludes it; processes are primary, and the point must be *built* from them (§ 3.2). Then the relation “to define one number,” `cauchy_equiv`, with proved reflexivity, symmetry, and transitivity—a relation not reducible to pointwise equality (§ 3.3); and the bridge proved in `ProcessBridge.v`, connecting the two representations of the process into one object (§ 3.3.1). Then the definition: a point is an equivalence class of processes, where *class* is understood as a setoid mode of identification, not a completed collection, and the quotient type is honestly not built as a separate Rocq type (§ 3.4). Then the point as a mode, not an object: a derived angle of view on processes, from which the limit is visible and the manner is not (§ 3.5). Then arithmetic on classes: addition, negation, and multiplication provably descend to classes (`cauchy_mul_Proper`), and order descends fully (`cauchy_le_compat`) (§ 3.6). Finally, the analysis of $0.999… = 1$: two processes, one class, one number, and the “paradox” an artifact of the point picture; the equality is proved by the theorem `nine_equiv_one` (§ 3.7).
 
 ### E/R/R Analysis: The Point as a Class—a System
 
 What has been built in this chapter also has an E/R/R arrangement (Part I), and its analysis crystallizes the main turn of the chapter. The headers of the supporting files give the labeling: `ProcessCore.v` declares the rule *every object is a finite process at each stage* ($P4$); and the relation `cauchy_equiv`/`process_equiv` and the bridge `ProcessBridge.v` give the rule of identification.[^3] We conduct the analysis in the ontological order Rules $\to$ Roles $\to$ Elements. A caveat on status: everything below is a substantive reading; the quotient type has not been built as a separate Rocq type (§ 3.4.3), and “system” here is not an object `System` $L$.
 
-*Rules* (the law $L5$). The constitution is the same as in Chapter 4.2—the principle $P4$: a number is a process, not a completed point, and therefore “class” is read as a setoid mode, not as a completed collection (§ 3.4.2). The main rule of the chapter is the *equivalence relation* `cauchy_equiv` (“to define one limit,” not pointwise equality, § 3.3): it is this relation that identifies processes. Its reflexivity, symmetry, and transitivity make quotienting legitimate (the partition into disjoint classes is a mathematical consequence of these three lemmas). Adjoining it are the rules of compatibility: addition and negation descend to classes (`cauchy_add_compat`, `cauchy_neg_compat`); order only partially (`cauchy_le_of_equiv`, § 3.6.3); and the bridge `ProcessBridge.v` brings the two representations of the process into agreement.
+*Rules* (the law $L5$). The constitution is the same as in Chapter 4.2—the principle $P4$: a number is a process, not a completed point, and therefore “class” is read as a setoid mode, not as a completed collection (§ 3.4.2). The main rule of the chapter is the *equivalence relation* `cauchy_equiv` (“to define one limit,” not pointwise equality, § 3.3): it is this relation that identifies processes. Its reflexivity, symmetry, and transitivity make quotienting legitimate (the partition into disjoint classes is a mathematical consequence of these three lemmas). Adjoining it are the rules of compatibility: addition and negation descend to classes (`cauchy_add_compat`, `cauchy_neg_compat`); order does too (`cauchy_le_compat`, § 3.6.3); and the bridge `ProcessBridge.v` brings the two representations of the process into agreement.
 
 *Roles—the significance of positions* (the law $L4$). Here is the very turn of the chapter, read as E/R/R. *The point is a role, not an element.* It is not an object among objects but a *mode* of consideration of processes: an equivalence class, an angle of view from which equivalent processes are not distinguished (§ 3.5). This completes the progression of role statuses of Chapter 4.2: candidate $\to$ representative $\to$ *number* (class); the number-point is the final role, realized by the rule of quotienting. By $L4$ the role is grounded: the class is a structural invariant of a bundle of equivalent processes, not an arbitrary union of them.
 
@@ -309,7 +309,7 @@ Let us gather the analysis into a table.
 | laws $L1$–$L5$ | universal layer | Rule (univ.) |
 
 *Well-formedness.* The labeling is unambiguous: processes are elements, the point-class is a role, equivalence is a rule. And here the analysis turns into a *diagnosis*: the “paradox”
-$0{,}999… = 1$ (§ 3.7) was a *confusion of categories*—the point-*role* (a class) was taken for an *element*-object, and people asked “is this one point or two?” In the correct labeling the question falls away: two process-elements, one role-class. This is the very diagnosis of paradoxes as a confusion of E/R/R categories that was introduced in Part I.
+$0.999… = 1$ (§ 3.7) was a *confusion of categories*—the point-*role* (a class) was taken for an *element*-object, and people asked “is this one point or two?” In the correct labeling the question falls away: two process-elements, one role-class. This is the very diagnosis of paradoxes as a confusion of E/R/R categories that was introduced in Part I.
 
  The analysis continues the E/R/R foundation of Part IV (Chapter 4.2). If there the process number was read as a progression of roles, here the concluding role—*the point as a class-mode*—receives an explicit meaning: it is not a primary element but a derived role, given by the rule `cauchy_equiv` over the process-elements. Just as the *set* in Parts I–II turned out to be a mode, not a thing, the *point* here turns out to be a mode, not an atom. Chapter 4.4 will ask *how many* such role-classes there are—and the count there will go by classes.
 
@@ -320,7 +320,7 @@ The result can be formulated in one sentence. The point has not been abolished o
 It is worth specifying at once in what exact sense the point has been “built”—the heading of this section is strong, and it needs to be read precisely. The point has been built in the *mathematical-ontological* sense: as a setoid class of equivalent representatives, as a mode of identification of processes by `cauchy_equiv`. What has been built in the Rocq kernel is not a new type-space of points but a *setoid*: an equivalence relation registered as an `Equivalence`, with `Proper` morphisms for the operations (`RealPointSetoid.v`)—that on which the reading of the point as a class rests. The chapter has kept the difference between two things all along: the point as a setoid class—built and formalized; the reified quotient type as a separate Rocq type—deliberately not built (§ 3.4.3, by
 $P4$).
 
-The $P4$ ontology, as we see, does not impoverish mathematics. The familiar objects—set, point, number—remain; only their *order* and *status* change. Acts of distinction and processes are primary; the set and the point are derived modes. A real number is a class of processes; and this picture not only loses nothing necessary but also clarifies what remained obscure in the point picture—as the analysis of $0{,}999… = 1$ showed.
+The $P4$ ontology, as we see, does not impoverish mathematics. The familiar objects—set, point, number—remain; only their *order* and *status* change. Acts of distinction and processes are primary; the set and the point are derived modes. A real number is a class of processes; and this picture not only loses nothing necessary but also clarifies what remained obscure in the point picture—as the analysis of $0.999… = 1$ showed.
 
 ### The Bridge to Chapter 4.4
 
@@ -336,7 +336,7 @@ The second concerns the sense in which the diagonal process “differs” from t
 
 *Second: what has been proved formally. The relation by which the class is built is `cauchy_equiv` from `CauchyReal.v` on the representatives `CauchySeq`; on the bare processes `RealProcess` it corresponds to `process_equiv` from `ProcessCore.v`—the same relation of a common limit on another representation, and the bridge between them is proved in `ProcessBridge.v`. The relation is provably reflexive, symmetric, and transitive (and registered as an `Equivalence` in `RealPointSetoid.v`). Addition, negation, and multiplication of classes are provably well defined (`cauchy_add_compat`, `cauchy_neg_compat`, `cauchy_mul_Proper`); order also descends to classes fully (`cauchy_le_compat`).*
 
-*Third: what has been built and what, deliberately, has not. The passage to classes has been carried out at the formalized setoid level (`RealPointSetoid.v`: `Equivalence` + `Proper` morphisms); a reified quotient type as a separate Rocq type is not built—by $P4$, not for lack of means (§ 3.4.3). Addition, negation, multiplication, and—fully—order have been carried down to the classes (`cauchy_le_compat`); division is partial, as befits a constructive field. The equality $0{,}999… = 1$ is proved by the theorem `nine_equiv_one` (`process/ProcessNinePoint.v`, without axioms): the decimal and the constant processes are different representatives of one class, and the “paradox” was an artifact of the point picture. How many such classes there are in all—countably or uncountably many—is analyzed by Chapter 4.4.*
+*Third: what has been built and what, deliberately, has not. The passage to classes has been carried out at the formalized setoid level (`RealPointSetoid.v`: `Equivalence` + `Proper` morphisms); a reified quotient type as a separate Rocq type is not built—by $P4$, not for lack of means (§ 3.4.3). Addition, negation, multiplication, and—fully—order have been carried down to the classes (`cauchy_le_compat`); division is partial, as befits a constructive field. The equality $0.999… = 1$ is proved by the theorem `nine_equiv_one` (`process/ProcessNinePoint.v`, without axioms): the decimal and the constant processes are different representatives of one class, and the “paradox” was an artifact of the point picture. How many such classes there are in all—countably or uncountably many—is analyzed by Chapter 4.4.*
 
 ---
 

@@ -2,7 +2,7 @@
 title: "Chapter 3. The Category of Systems Sys(L)"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/14 Категория систем/03 Категория систем Sys(L).md"
-sourceBlob: 574f18551ab3adfa14657a4859b292ee0bc24397
+sourceBlob: ef627f0837aecba5e18005ac15a4ba62bf967857
 translated: 2026-10-20
 status: draft
 ---
@@ -57,7 +57,7 @@ This is the center of the chapter and one of the summits of Part XIV. The relati
 Together this is `P3_separation_categorical`: *isomorphism is strictly weaker than Leibniz equality*. Isomorphism preserves everything visible “from outside”—the predicate-criterion (`iso_implies_predicate_equiv`), the bijection of elements, well-formedness—but *not* every internal marking: for example, the position bound is *not* invariant under isomorphism (`position_bound_not_iso_invariant`).
 [^5]
 
-**Why this is P3.**  P3 (Distinction) asserted that *intensional* identity is finer than extensional coincidence. Here this becomes an exact categorical theorem: “to behave in the same way with respect to all arrows” (isomorphism) is *strictly weaker* than “to be the same object” (Leibniz equality). The link with 14.2 is direct: the Yoneda embedding (the local layer of 14.2) says that an object is determined by its roles *up to isomorphism*—and P3 adds that this precision is *not* identity. The categorical structure works invariantly with isomorphism; Leibniz equality remains a *meta-level* relation of Rocq objects and is not a categorical invariant—this is an *honest* boundary, not a defect.
+**Why this is P3.**  P3 (Intensional Identity) asserted that *intensional* identity is finer than extensional coincidence. Here this becomes an exact categorical theorem: “to behave in the same way with respect to all arrows” (isomorphism) is *strictly weaker* than “to be the same object” (Leibniz equality). The link with 14.2 is direct: the Yoneda embedding (the local layer of 14.2) says that an object is determined by its roles *up to isomorphism*—and P3 adds that this precision is *not* identity. The categorical structure works invariantly with isomorphism; Leibniz equality remains a *meta-level* relation of Rocq objects and is not a categorical invariant—this is an *honest* boundary, not a defect.
 
 ## E/R/R Analysis: The Category of Systems as E/R/R, Categorically
 
@@ -79,7 +79,7 @@ Together this is `P3_separation_categorical`: *isomorphism is strictly weaker th
 
 The category of systems $\Sys(L)$ has been built (`SystemCat`, 29 Qed) with morphisms as criterion-preserving transfers (`SystemMorphism`, 17 Qed); the categorical iso/mono/epi have coincided with the systemic ones; the initial and terminal objects exist (at levels $LS L$, not at the bottom—P4); the forgetful `ElementsFunctor` is faithful and preserves isomorphisms. The core is the machine theorem `P3_strictly_stronger_than_iso`: *isomorphism is strictly weaker than Leibniz equality*. Everything is in `origin/main`, 0 axioms.
 
-Next comes Chapter 14.4: functors *between levels* (`embed`/`forget`) and their adjunction—the crown of Part XIV, where the principle P2 (Complementarity) turns out to be the categorical adjunction $\texttt{embed}\dashv\texttt{forget}$ (`embed` is the left adjoint, `forget` the right one).
+Next comes Chapter 14.4: functors *between levels* (`embed`/`forget`) and their adjunction—the crown of Part XIV, where the principle of complementarity turns out to be the categorical adjunction $\texttt{embed}\dashv\texttt{forget}$ (`embed` is the left adjoint, `forget` the right one).
 
 ---
 

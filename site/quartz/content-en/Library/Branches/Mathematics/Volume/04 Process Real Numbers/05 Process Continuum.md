@@ -156,9 +156,9 @@ This connection is now formalized as well—in one direction: the file
 to every binary process a point of the interval (the partial sums
 $\sum_k \mathrm{bit}_k/2^{k+1}$, lying in $[0,1]$). But there is no
 *identity*, and this is visible right in the translation: the binary
-expansion is ambiguous—$0{,}0111…$ and $0{,}1000…$ define one
+expansion is ambiguous—$0.0111…$ and $0.1000…$ define one
 point—and the proved lemma `bin_ones_equiv_one`
-($0{,}111\ldots_2 = 1$ as an equality of points) serves as the model
+($0.111\ldots_2 = 1$ as an equality of points) serves as the model
 case. Because of this ambiguity $2^ℕ$ and $[0,1]$ are arranged
 differently; the translation is not one-to-one, and the Cantor space,
 strictly speaking, is not the interval.
@@ -273,7 +273,7 @@ The value of a binary process at step $n$ is simply `true` or `false`:
 one of two *exact* options, not a rational approximation surrounded by
 uncertainty. To “step away” from it is simply `flip`: to take the other
 option. No approximation, no confidence interval, no boundary that could
-be straddled. Nor is there an analogue of the problem $0{,}999… = 1$—the
+be straddled. Nor is there an analogue of the problem $0.999… = 1$—the
 duality of representation that hindered the digit argument in
 Chapter 4.3: the coordinate of a binary process is unambiguous. `flip`
 *guarantees* a non-coincidence in one coordinate—and this is enough.
@@ -919,7 +919,7 @@ file `ProcessBinReal.v` builds a direct translation
 `bin_to_real` $\colon 2^ℕ \to [0,1]$
 (`bin_to_real_in_interval`, `bin_to_real_is_Cauchy`—the latter rests on
 $L3$) and proves the model identification `bin_ones_equiv_one`
-($0{,}111\ldots_2 = 1$). What remains open is the *full* translation—the
+($0.111\ldots_2 = 1$). What remains open is the *full* translation—the
 inverse map $[0,1] \to 2^ℕ$, the general ambiguity of representation,
 and the transfer of the Cantor–Bendixson dichotomy itself to the Cauchy
 model; the connection of the two branches in full awaits a separate

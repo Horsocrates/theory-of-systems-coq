@@ -83,4 +83,4 @@ The general rung is a *horizon*, mathematically: the next step of the hierarchy,
 
 Part: [[16 Function as Process|Part XVI. Function as Process]] · Volume: [[Mathematics|“Mathematics”]]
 
-Navigation: ← [[Library/Branches/Mathematics/Volume/16 Function as Process/05 Analytic Bridge Eval and Tannery Theorem Closing the Logarithm Equation|Chapter 5. The Analytic Bridge eval and Tannery’s Theorem: Closing the Logarithm Equation]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/01 Combinatorics Process Counting|Chapter 1. Combinatorics—Process Counting—Part XVII]] →
+Navigation: ← [[Library/Branches/Mathematics/Volume/16 Function as Process/05 Analytic Bridge Eval and Tannery Theorem Closing the Logarithm Equation|Chapter 5. The Analytic Bridge eval and Tannery’s Theorem: Closing the Logarithm Equation]] · [[Library/Branches/Mathematics/Volume/17 Discrete Mathematics Probability Information/01 Combinatorics Process Counting|Chapter 1. Combinatorics: Process Counting—Part XVII]] →

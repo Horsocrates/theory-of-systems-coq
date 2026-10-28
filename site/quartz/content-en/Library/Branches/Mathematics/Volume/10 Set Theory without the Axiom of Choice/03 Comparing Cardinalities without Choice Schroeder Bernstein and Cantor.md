@@ -2,7 +2,7 @@
 title: "Chapter 3. Comparing Cardinalities without Choice: Schröder–Bernstein and Cantor’s Theorem"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/10 Теория множеств без аксиомы выбора/03 Сравнение мощностей без выбора Шрёдер–Бернштейн и теорема Кантора.md"
-sourceBlob: 6a6f03327a67416a8117801694ac7c038ec6932e
+sourceBlob: 8139b0807576972b970e26c6a25d9dccec8951f9
 translated: 2026-10-20
 status: draft
 ---
@@ -44,7 +44,7 @@ The antisymmetry of the preorder is the substantive core of the theory of cardin
 
 The classical proof traces for each point an infinite “shuttle” chain $…\to a\to f(a)\to…$ under the two injections. ToS replaces the completed infinite chain with a *finite depth*—a natural number: each point is either rooted at a finite depth (reaches a point without a preimage in a finite number of steps) or belongs to a two-sided infinite chain. The bijection $h$ is assembled by this test: on points rooted in $B$ we take the partial inverse $g^{-1}$, otherwise $f$. An infinite object is replaced by a finite process—a move in the spirit of P4.[^2]
 
-What is the axiom price? Exactly `classic` (L3) and `L4_witness` (L4)—and *not* the Axiom of Choice.[^3] L3 enters as the decidability of the rootedness test; `L4_witness` picks a witness from a *single* existence, not a function over an arbitrary family—both are strictly weaker than choice. Therefore the fundamental theorem on cardinalities holds without choice.
+What is the axiom price? Exactly `classic` (L3) and `L4_witness` (L4)—and *not* the Axiom of Choice.[^3] L3 enters as the decidability of the rootedness test; `L4_witness` picks a witness from a *single* existence; a function over a family is derivable from it (choice-like strength), but the theorem does not require a completed graph of choice. Therefore the fundamental theorem on cardinalities holds without choice.
 
 *Schröder–Bernstein is the role-rule of the antisymmetry of $\le$: two embeddings in opposite directions give a bijection. The completed chain is replaced by a finite depth (P4); the price is L3${}+{}$L4,
 not choice.*

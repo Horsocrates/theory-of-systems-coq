@@ -2,7 +2,7 @@
 title: "Chapter 1. The First Principle: A = ∃"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/01 Перво-различие и законы логики/01 Первоначало A = ∃.md"
-sourceBlob: 01ff4f9e9d578245139bd832ae3128720e446708
+sourceBlob: d5c09db05247f106da2dbb422f2bd703cbdd07a0
 translated: 2026-10-20
 status: draft
 ---
@@ -432,7 +432,7 @@ precisely the *that* of the world, not the *how*.
 
 This convergence of testimonies—Parmenides, Aristotle, Descartes,
 Augustine, Heidegger, Wittgenstein, so different in their epochs,
-languages, and methodological commitments—upon one and the same
+languages, and methodological stances—upon one and the same
 structural fact testifies to its *ineliminability*. $A = \exists$ is
 neither our invention nor a thesis on which only
 “Metaphysics” insists. It is a structural discovery to which the

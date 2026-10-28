@@ -2,7 +2,7 @@
 title: "Chapter 1. Prime Numbers in the Operational Ontology"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/01 Простые числа в операциональной онтологии.md"
-sourceBlob: de4d9c1acd3418607511d413585f7e6b1af6ed98
+sourceBlob: 9d5a00e1ab5e51ca73945a60c2d38e72d917e8d1
 translated: 2026-10-20
 status: draft
 ---
@@ -109,7 +109,7 @@ Let us gather what has been said into the standard Elements/Roles/Rules analysis
 
 One of the most striking connections of modern mathematical physics deserves mention already here, although its unfolding is the business of physics. Studying the spacings between the nontrivial zeros of zeta, Hugh Montgomery (1973) noticed a statistical coincidence with the distribution of spacings between the eigenvalues of random Hermitian matrices (the Gaussian Unitary Ensemble, GUE)—a model of the spectra of complex quantum systems. The connection is *not proved*, but it is numerically confirmed for trillions of computed zeros.
 
-Hence the Hilbert–Pólya conjecture: the zeros of zeta are the eigenvalues of some self-adjoint operator, a “quantum Hamiltonian of number theory.” No such operator has been found, and the search for it is an active field. In the operational reading this is an *inverse problem*: the distribution of the spectrum (the zeros of zeta) is given, and an operator is required. We record here only the philosophical frame: if the picture is right, the distribution of primes is the classical trace of some quantum system, and the zeros of zeta are its energy levels. We present no formalization of this connection; in the repository it corresponds only to the analogy “zeros $\leftrightarrow$ zeros of partition functions,” drawn separately.[^8] A detailed discussion belongs to physics.
+Consonant with this is the earlier Hilbert–Pólya conjecture (1910s): the zeros of zeta are the eigenvalues of some self-adjoint operator, a “quantum Hamiltonian of number theory.” No such operator has been found, and the search for it is an active field. In the operational reading this is an *inverse problem*: the distribution of the spectrum (the zeros of zeta) is given, and an operator is required. We record here only the philosophical frame: if the picture is right, the distribution of primes is the classical trace of some quantum system, and the zeros of zeta are its energy levels. We present no formalization of this connection; in the repository it corresponds only to the analogy “zeros $\leftrightarrow$ zeros of partition functions,” drawn separately.[^8] A detailed discussion belongs to physics.
 
 ## What the Chapter Has Prepared
 

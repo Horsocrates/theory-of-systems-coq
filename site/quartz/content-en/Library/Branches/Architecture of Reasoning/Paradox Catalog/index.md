@@ -3,7 +3,7 @@ title: "Paradox Catalog"
 aliases: ["Paradox"]
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/index.md"
-sourceBlob: efa0f6aafa59cc3fc95562b7688c18c97bc0206a
+sourceBlob: afc4f060dcc8c73a09b561bfaa5a06e26570e14e
 translated: 2026-10-20
 status: draft
 ---
@@ -34,7 +34,7 @@ In all three cases the defect stands on the side of representation—in the stru
 
 ## One Figure
 
-The mixing of storeys has an exact formal heart. Take the operation of **negation**—it turns a side into its opposite. Does it have a **fixed point**—something that negation leaves as itself? No: if `нечто` (“something”) were equal to its own “not-,” we would get A equal to not-A—a direct violation of Identity.
+The mixing of storeys has an exact formal heart. Take the operation of **negation**—it turns a side into its opposite. Does it have a **fixed point**—something that negation leaves as itself? No: if *something* were equal to its own “not-,” we would get A equal to not-A—a direct violation of Identity.
 
 This is the very figure by which mathematics and logic set their famous limits. [[Liar Paradox|The Liar]] seeks a statement that is true if and only if it is false—a fixed point of negation, which does not exist. [[Library/Branches/Mathematics/Volume/10 Set Theory without the Axiom of Choice/02 Countability Is Constructive Uncountability Is a Rule About Processes|Cantor]] builds a number that differs from each one on a list along the diagonal—and proves that a complete list of the real numbers does not exist. [[Logic#Order — Ordering|Gödel]] builds a statement about its own unprovability—and shows that no system will encompass all truths about itself. [[Library/Branches/Mathematics/Volume/15 Computation and the Finitization Boundary/03 One Diagonal Halting Rice Cantor Kolmogorov|Turing]]—that there is no program deciding whether every program halts. Only the arena changes—statements, numbers, proofs, programs; the move is one: self-application seeking a fixed point of negation is bound to miss it.[^2] This common figure—the **diagonal**—is worth keeping in mind throughout the catalog: behind the motley paradoxes stands one movement.
 

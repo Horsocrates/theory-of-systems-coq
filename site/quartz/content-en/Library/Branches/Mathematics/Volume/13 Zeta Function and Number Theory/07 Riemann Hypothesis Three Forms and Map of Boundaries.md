@@ -2,14 +2,14 @@
 title: "Chapter 7. The Riemann Hypothesis: Three Forms and the Map of Boundaries"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/13 Дзета-функция и теория чисел/07 Гипотеза Римана три формы и карта границ.md"
-sourceBlob: ca40bb2efd7394854dcea27252206fe49b5363bc
+sourceBlob: b6f034c3be24aced1720929f3c5189ce448875b5
 translated: 2026-10-20
 status: draft
 ---
 
 ## Where the Chapter Stands
 
-Part XIII has traveled the path of analytic number theory from the end to the beginning. Chapter 13.1 gave the *primes* as finite, computable, constructive material: the uniqueness of factorization, the infinitude of primes, arithmetic functions. Chapters 13.2–13.3 built *zeta as a process* and the Euler product—the bridge “analysis ${}\leftrightarrow{}$ primes.” Chapter 13.4 gave the *functional equation* and the symmetry $s\leftrightarrow 1-s$; Chapter 13.5, the *zeros* in the critical strip; Chapter 13.6, the *explicit formula*, which linked the zeros and the primes.
+Part XIII has traveled the path of analytic number theory from beginning to end. Chapter 13.1 gave the *primes* as finite, computable, constructive material: the uniqueness of factorization, the infinitude of primes, arithmetic functions. Chapters 13.2–13.3 built *zeta as a process* and the Euler product—the bridge “analysis ${}\leftrightarrow{}$ primes.” Chapter 13.4 gave the *functional equation* and the symmetry $s\leftrightarrow 1-s$; Chapter 13.5, the *zeros* in the critical strip; Chapter 13.6, the *explicit formula*, which linked the zeros and the primes.
 
 What remains is the summit—**the Riemann Hypothesis**: all nontrivial zeros of zeta lie on the critical line $\Re s = 1/2$. This chapter does not solve RH (no one has solved it). It does what, in the spirit of ToS, is more honest and more useful: it *formalizes the formulation itself*—three equivalent forms of the hypothesis with machine-checked equivalence; it reads RH as a statement about a *fixed point* and connects it with the recurring fixed-point primitive of the whole volume; it formalizes the *obstacle*—why the method of the “squeeze” in principle does not reach the line; and, finally, it draws the **map of boundaries** of the whole of Part XIII, separating the proved core from the classical reading, the continuum price, and the openness of RH proper.
 
@@ -52,7 +52,7 @@ $$
 
 and this is machine-checked (`re_fixed_point_half`). The complex reflection $s\mapsto 1-\bar s$ of the functional equation fixes exactly the line $\Re s = 1/2$ (`reflect_fixed_iff`). Hence RH is the statement “*all zeros lie on the fixed set of the constituting symmetry*,” and the form `RH_fixed` says literally: each zero is a fixed point of the reflection of the real part.
 
-**The fixed-point primitive across the whole volume.**  The fixed point is one of the recurring structural primitives of the whole “Architecture.” It has already been at work: the *Banach contraction* (`is_contraction`, `iterate_is_cauchy` in `FixedPoint.v`)—the engine of the convergence of reasoning and of iterations; *L5 resolution* (`l5_resolve_gen`)—the constituting “fixed choice” that removes indeterminacy; the *Cauchy completion* (Part III)—a point as a process whose tail is “fixed” up to $\varepsilon$; the *fixed field* of a Galois subgroup (Part XI). RH takes its place in this row: the critical line is the fixed set of the reflection.
+**The fixed-point primitive across the whole volume.**  The fixed point is one of the recurring structural primitives of the whole Theory of Systems. It has already been at work: the *Banach contraction* (`is_contraction`, `iterate_is_cauchy` in `FixedPoint.v`)—the engine of the convergence of reasoning and of iterations; *L5 resolution* (`l5_resolve_gen`)—the constituting “fixed choice” that removes indeterminacy; the *Cauchy completion* (Part III)—a point as a process whose tail is “fixed” up to $\varepsilon$; the *fixed field* of a Galois subgroup (Part XI). RH takes its place in this row: the critical line is the fixed set of the reflection.
 
 **An honest reservation (and why RH is hard).**  But here the primitive behaves differently, and this is *proved*. In the cases of Banach and L5 the fixed point is an *attractor*: iteration converges to it because the map is a *contraction*. The reflection $s\mapsto 1-\bar s$, by contrast, is an *isometry*: it preserves distance (`reflect_isometry`), and therefore is *not* a contraction (`reflect_not_contraction_euclidean`); moreover, *no* metric in which the reflection is an isometry makes it contracting (`reflect_not_contractive_isometric`).[^2] The conclusion is honest and deep: the symmetry *fixes* the critical line as a fixed *set* but gives *no dynamics* that draws the zeros onto it. The very fixed-point device that solves other problems of the volume *provably does not work* here—and this is one of the reasons why RH resists.[^3]
 

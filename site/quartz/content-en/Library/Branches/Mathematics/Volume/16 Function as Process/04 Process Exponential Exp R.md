@@ -2,7 +2,7 @@
 title: "Chapter 4. The Process Exponential exp_ℝ"
 lang: en
 translationOf: "Библиотека/Направления/Математика/Том Математика/16 Функция как процесс/04 Процессная экспонента exp_ℝ.md"
-sourceBlob: 016b2367107cc4900913ff616a8cd45fc64ec743
+sourceBlob: 92c35df94ed5233f41e383efaf6ef3825d5fbf57
 translated: 2026-10-20
 status: draft
 ---
@@ -18,7 +18,7 @@ The road is as follows. First, the engine: *Mertens’* theorem on the product o
 
 ## The Engine: Mertens’ Theorem
 
-For the exponential to be *multiplicative*—$\exp(u+v) = \exp(u)\exp(v)$—one must be able to multiply series as limits. Mertens’ general principle: the *Cauchy product* of two convergent series converges to the product of their limits,
+For the exponential to be *multiplicative*—$\exp(u+v) = \exp(u)\exp(v)$—one must be able to multiply series as limits. Mertens’ general principle: the *Cauchy product* of two convergent series, at least one of which converges absolutely, converges to the product of their limits,
 
 $$
 \Bigl(\sum_i a_i\Bigr)\Bigl(\sum_j b_j\Bigr) = \sum_n \Bigl(\sum_{i+j=n} a_i b_j\Bigr).

@@ -2,7 +2,7 @@
 title: "Unexpected Hanging"
 lang: en
 translationOf: "Библиотека/Направления/Архитектура Рассуждения/Каталог парадоксов/Дефектные парадоксы/Неожиданная казнь.md"
-sourceBlob: d4676588e9d32035febd0e4c85cf1c62dbd2cf11
+sourceBlob: bc7a2f8e16a9a4ae5e0b3f01155024e4cfb5189d
 translated: 2026-10-20
 status: draft
 description: "“An announced surprise” is a performative contradiction"
@@ -22,7 +22,7 @@ One of the few classical paradoxes whose birth is known precisely—and it was n
 
 ## Consequence
 
-The central specimen of a defective paradox, and its value is pedagogical: it teaches one to distinguish genuine knots of construction (the structural ones) from problems with spoiled conditions. Its closest kin is the Moorean phenomenon: “It is raining, but I do not believe that it is raining”—grammatically correct, performatively absurd: in asserting it, the speaker expresses a belief that he at once denies. The same family includes self-refuting prophecies and the oxymorons of practice: “mandatory voluntary attendance,” “planned spontaneity,” “a public secret.” A by-product of the debates is an honest one: epistemic concepts—“knowledge,” “expectation,” “surprise”—resist formalization, and this discovery is valuable in itself.
+The central specimen of a defective paradox, and its value is pedagogical: it teaches one to distinguish genuine knots of construction (the structural ones) from problems with spoiled conditions. Its closest kin is Moore’s paradox: “It is raining, but I do not believe that it is raining”—grammatically correct, performatively absurd: in asserting it, the speaker expresses a belief that he at once denies. The same family includes self-refuting prophecies and the oxymorons of practice: “mandatory voluntary attendance,” “planned spontaneity,” “a public secret.” A by-product of the debates is an honest one: epistemic concepts—“knowledge,” “expectation,” “surprise”—resist formalization, and this discovery is valuable in itself.
 
 ## Domain Analysis
 
@@ -60,7 +60,7 @@ The prisoner’s right move would have taken a minute: “Your Honor, your state
 
 ## Kin by Mechanism
 
-The Moorean phenomenon (“it is raining, but I do not believe it”—performative kin), [[Newcombs Paradox|Newcomb]] (a neighbor by type: a hidden contradiction of the conditions), [[Horned Man|the Horned Man]] (a defect sewn into the posing of the question), self-refuting prophecies.
+Moore’s paradox (“it is raining, but I do not believe it”—performative kin), [[Newcombs Paradox|Newcomb]] (a neighbor by type: a hidden contradiction of the conditions), [[Horned Man|the Horned Man]] (a defect sewn into the posing of the question), self-refuting prophecies.
 
 **Machine check.** In the registry of 46 the knot is recorded as `D7_UnexpectedHanging`: the category “defective,” laying open by rejecting the premise (`defective_46_requires_rejection`, the category count `defective_count_25`, the general guarantee `all_46_dissolvable`—ParadoxDissolution.v). There is no named analysis—the defect is made explicit by clarifying the conditions. Map: [[Formalization]].
 

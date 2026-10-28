@@ -22,7 +22,7 @@ Henry Kyburg, *Probability and the Logic of Rational Belief* (1961)—the knot w
 
 ## Why This Is Not a Paradox
 
-In the probabilities everything is consistent, to a hair: P(ticket i loses) = 999/1000 for every i, P(all lose) = 0—both estimates are correct and compatible; probability theory is built exactly so: a conjunction of highly probable propositions need not be highly probable. The “contradiction” appears only when an external step is added—binarization: the rule “probability above a threshold → accept it as a belief” plus the habit of combining what has been accepted by conjunction. The triad “threshold acceptance + closure under conjunction + consistency” is incompatible—this is not a paradox but a theorem about the price of quantization: rounding degrees to “yes/no,” one loses precisely the information that held the coherence. The defect lies in the expectation that threshold belief behaves like knowledge.
+In the probabilities everything is consistent, to a hair: P(ticket i loses) = 999/1000 for every i, P(all lose) = 0—both estimates are correct and compatible; probability theory is arranged exactly so: a conjunction of highly probable propositions need not be highly probable. The “contradiction” appears only when an external step is added—binarization: the rule “probability above a threshold → accept it as a belief” plus the habit of combining what has been accepted by conjunction. The triad “threshold acceptance + closure under conjunction + consistency” is incompatible—this is not a paradox but a theorem about the price of quantization: rounding degrees to “yes/no,” one loses precisely the information that held the coherence. The defect lies in the expectation that threshold belief behaves like knowledge.
 
 ## Domain Analysis
 
