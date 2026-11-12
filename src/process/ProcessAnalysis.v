@@ -128,6 +128,29 @@ Proof. unfold process_integral, riemann_sum, inject_Z. unfold Qeq; simpl; lia. Q
 Lemma integral_one_K2 : process_integral (fun _ => 1) 2 == 1.
 Proof. unfold process_integral, riemann_sum, inject_Z. unfold Qeq; simpl; lia. Qed.
 
+(** The integral of 1 over [0,1] equals 1 on EVERY level (Nov 2026; until
+    then three levels were checked, K = 0, 1, 2). *)
+Lemma riemann_sum_one : forall n K,
+  riemann_sum (fun _ => 1) n K == inject_Z (Z.of_nat (S n)).
+Proof.
+  intros n K. induction n as [| n IH].
+  - simpl. reflexivity.
+  - change (riemann_sum (fun _ : Q => 1) (S n) K)
+      with (riemann_sum (fun _ : Q => 1) n K + 1).
+    rewrite IH.
+    replace (Z.of_nat (S (S n))) with (Z.of_nat (S n) + 1)%Z by lia.
+    rewrite inject_Z_plus. reflexivity.
+Qed.
+
+Theorem integral_one_all_levels : forall K,
+  process_integral (fun _ => 1) K == 1.
+Proof.
+  intro K. unfold process_integral.
+  rewrite riemann_sum_one.
+  field. intro H.
+  assert (Hp : 0 < inject_Z (Z.of_nat (S K))) by (unfold Qlt; simpl; lia). lra.
+Qed.
+
 Lemma integral_zero_K0 : process_integral (fun _ => 0) 0 == 0.
 Proof. unfold process_integral, riemann_sum, inject_Z. unfold Qeq; simpl; lia. Qed.
 
@@ -184,6 +207,21 @@ Proof.
   - exact (deriv_const (42:Q) 0 99).
   - exact (deriv_id 0 99).
   - exact integral_one_K2.
+Qed.
+
+(* ================================================================== *)
+(*  Bridge to the main definition of the derivative process (Nov 2026)  *)
+(* ================================================================== *)
+
+From ToS Require process.ProcessDerivative.
+
+(** [process_derivative] of this file and [deriv_process] of
+    ProcessDerivative.v are written differently and agree on every level. *)
+Lemma process_derivative_agrees : forall f x K,
+  process_derivative f x K == ProcessDerivative.deriv_process f x K.
+Proof.
+  intros f x K. rewrite ProcessDerivative.deriv_process_unfold.
+  unfold process_derivative, ProcessDerivative.deriv_step. reflexivity.
 Qed.
 
 Definition analysis_count := 22%nat.

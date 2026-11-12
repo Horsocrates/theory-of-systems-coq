@@ -3,7 +3,7 @@
     Roles:    Cauchy process converging to integral value
     Rules:    ftc_grid convergence from RiemannIntegration.v
     Status:   complete
-    STATUS: 11 Qed, 0 Admitted, 0 axioms
+    STATUS: 15 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -19,7 +19,7 @@
 (*    Roles:    Cauchy process converging to integral value                  *)
 (*    Rules:    ftc_grid from RiemannIntegration.v                          *)
 (*                                                                            *)
-(*  STATUS: 11 Qed, 0 Admitted                                               *)
+(*  STATUS: 15 Qed, 0 Admitted                                               *)
 (*  AXIOMS: none                                                              *)
 (* ========================================================================= *)
 
@@ -173,21 +173,53 @@ Qed.
 (*  Part V: E/R/R Pattern                                               *)
 (* ================================================================== *)
 
-(** Riemann sum as process: convergence rate *)
-Definition integral_convergence_rate : Q := 1 # 2.
+(** The grid of the integral process.  Stage n has n+1 cells of step
+    (b-a)/(n+1): there is no fixed ratio between stages (the constant
+    [integral_convergence_rate := 1 # 2], tied to nothing, stood here until
+    Nov 2026).  Where 1/2 does live: the number of cells doubled -- the step
+    halved.  The convergence of the sums themselves is ProcessFTC's matter. *)
+Lemma integral_step_halves_on_doubling : forall a b n,
+  integral_step a b (2 * n + 1) == (1 # 2) * integral_step a b n.
+Proof.
+  intros a b n. unfold integral_step.
+  assert (E : inject_Z (Z.of_nat (S (2 * n + 1))) == 2 * inject_Z (Z.of_nat (S n))).
+  { unfold Qeq, inject_Z, Qmult. simpl Qnum. simpl Qden. lia. }
+  rewrite E. field.
+  intro H. assert (Hp := inject_Z_Sn_pos n). lra.
+Qed.
 
-Lemma integral_rate_valid : 0 < integral_convergence_rate /\ integral_convergence_rate < 1.
-Proof. unfold integral_convergence_rate. split; lra. Qed.
+(** The step of the grid is eventually below any delta (all far levels). *)
+Lemma integral_step_eventually_small : forall a b delta,
+  a < b -> 0 < delta ->
+  exists N : nat, forall n : nat, (N <= n)%nat -> integral_step a b n < delta.
+Proof.
+  intros a b delta Hab Hdelta.
+  destruct (integral_step_vanishes a b delta Hab Hdelta) as [N HN].
+  exists N. intros n Hn.
+  eapply Qle_lt_trans; [| exact HN].
+  unfold integral_step. apply grid_step_antitone; assumption.
+Qed.
 
-(** The integral is a process construction *)
+(** The integral is a process construction: the passport of the grid.
+    Stage n is the Riemann sum over n+1 cells; the step is positive, the
+    cells cover [a,b] exactly, and the step is eventually below any delta.
+    This is NOT a theorem of integrability: the Cauchy property of the
+    process is a separate matter (ProcessFTC.ftc_integral_process_Cauchy).
+    Until Nov 2026 only the first clause stood here, under [exists], and
+    the premise a < b was not used. *)
 Theorem integral_is_process_construction : forall f a b,
   a < b ->
-  exists proc : RealProcess,
-    (forall n, proc n == riemann_sum f a (integral_step a b n) (S n)).
+  (forall n, integral_process f a b n == riemann_sum f a (integral_step a b n) (S n)) /\
+  (forall n, 0 < integral_step a b n) /\
+  (forall n, inject_Z (Z.of_nat (S n)) * integral_step a b n == b - a) /\
+  (forall delta, 0 < delta ->
+     exists N : nat, forall n : nat, (N <= n)%nat -> integral_step a b n < delta).
 Proof.
-  intros f a b Hab.
-  exists (integral_process f a b).
-  intro n. unfold integral_process. reflexivity.
+  intros f a b Hab. split; [| split; [| split]].
+  - intro n. unfold integral_process. reflexivity.
+  - intro n. apply integral_step_pos. exact Hab.
+  - intro n. apply grid_width_eq.
+  - intros delta Hdelta. apply integral_step_eventually_small; assumption.
 Qed.
 
 (** Linearity as process equivalence *)
@@ -215,6 +247,43 @@ Proof.
   apply riemann_sum_monotone.
   - exact Hfg.
   - apply Qlt_le_weak. apply integral_step_pos. exact Hab.
+Qed.
+
+(** Bounds of the process itself (Nov 2026): on every level, with no
+    convergence needed.  The step of the process is positive when a < b, so
+    the condition "the step is nonnegative" of the grid lemmas is met. *)
+Lemma integral_process_abs_bound : forall f a b n M,
+  a < b -> 0 <= M ->
+  (forall k, (k < S n)%nat -> Qabs (f (walk_point a (integral_step a b n) k)) <= M) ->
+  Qabs (integral_process f a b n) <= M * (b - a).
+Proof.
+  intros f a b n M Hab HM Hf. unfold integral_process.
+  assert (Hstep : 0 <= integral_step a b n).
+  { apply Qlt_le_weak. apply integral_step_pos. exact Hab. }
+  assert (H := riemann_sum_abs_bound f a (integral_step a b n) (S n) M Hf Hstep HM).
+  assert (Hw := grid_width_eq a b n).
+  assert (Heq : M * inject_Z (Z.of_nat (S n)) * integral_step a b n == M * (b - a)).
+  { rewrite <- Hw. ring. }
+  lra.
+Qed.
+
+Lemma integral_process_global_bound : forall f a b n lo hi,
+  a < b ->
+  (forall k, (k < S n)%nat ->
+     lo <= f (walk_point a (integral_step a b n) k) /\
+     f (walk_point a (integral_step a b n) k) <= hi) ->
+  lo * (b - a) <= integral_process f a b n /\ integral_process f a b n <= hi * (b - a).
+Proof.
+  intros f a b n lo hi Hab Hf. unfold integral_process.
+  assert (Hstep : 0 <= integral_step a b n).
+  { apply Qlt_le_weak. apply integral_step_pos. exact Hab. }
+  destruct (riemann_sum_global_bound f a (integral_step a b n) (S n) lo hi Hf Hstep) as [H1 H2].
+  assert (Hw := grid_width_eq a b n).
+  assert (Hlo : lo * inject_Z (Z.of_nat (S n)) * integral_step a b n == lo * (b - a)).
+  { rewrite <- Hw. ring. }
+  assert (Hhi : hi * inject_Z (Z.of_nat (S n)) * integral_step a b n == hi * (b - a)).
+  { rewrite <- Hw. ring. }
+  split; lra.
 Qed.
 
 (** P4: the integral IS the process of refining Riemann sums *)

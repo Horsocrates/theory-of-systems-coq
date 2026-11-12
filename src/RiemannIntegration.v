@@ -5,7 +5,8 @@
 (*                                                                          *)
 (*  PURPOSE: Define Riemann sums on walk-point grids and prove:             *)
 (*    - Linearity, monotonicity, bounds for Riemann sums                    *)
-(*    - Telescoping sum collapse (Leibniz-exact)                            *)
+(*    - Telescoping sum collapse (== of rationals; the NODES are           *)
+(*      Leibniz-exact, so f need not respect ==)                           *)
 (*    - Fundamental Theorem of Calculus (grid version)                      *)
 (*    - FTC applications: constant, affine, nonneg, linearity, comparison   *)
 (*    - udiff closure under addition and scaling                            *)
@@ -341,6 +342,145 @@ Proof.
     - assert (Qabs X == X) by (apply Qabs_pos; lra).
       assert (Qabs Y == Y) by (apply Qabs_pos; lra). lra. }
   exact (Qle_trans _ _ _ Hkey HN).
+Qed.
+
+(* ========================================================================= *)
+(*  FTC ON ALL FINE GRIDS (Nov 2026)                                         *)
+(*  [ftc_grid] gives ONE grid level for each eps.  The three statements      *)
+(*  below give the bound on EVERY level from some level on -- the form       *)
+(*  needed to read the fundamental theorem as convergence of a process.      *)
+(* ========================================================================= *)
+
+(** The error bound on one grid level, for a known delta (the body of
+    [rs_tele_error_bound], with the level left free). *)
+Lemma rs_tele_error_level : forall (f f' : Q -> Q) (a b eps delta : Q) (N : nat),
+  a < b -> 0 < eps ->
+  (forall x h : Q, a <= x -> x <= b -> 0 < Qabs h -> Qabs h < delta ->
+     Qabs (f (x + h) - f x - f' x * h) < eps * Qabs h) ->
+  (b - a) / inject_Z (Z.of_nat (S N)) < delta ->
+  Qabs (riemann_sum f' a ((b - a) / inject_Z (Z.of_nat (S N))) (S N) -
+        tele_sum f a ((b - a) / inject_Z (Z.of_nat (S N))) (S N)) <= eps * (b - a).
+Proof.
+  intros f f' a b eps delta N Hab Heps Hbd HN.
+  assert (Hba : 0 < b - a) by lra.
+  set (step := (b - a) / inject_Z (Z.of_nat (S N))) in *.
+  assert (Hstep_pos : 0 < step) by (apply walk_step_pos; exact Hab).
+  assert (Hstep_abs : Qabs step == step).
+  { rewrite Qabs_pos; lra. }
+  assert (Hstep_abs_pos : 0 < Qabs step).
+  { rewrite Hstep_abs. exact Hstep_pos. }
+  assert (Hstep_lt : Qabs step < delta).
+  { rewrite Hstep_abs. exact HN. }
+  assert (Hmain : forall k : nat, (k <= S N)%nat ->
+    Qabs (riemann_sum f' a step k - tele_sum f a step k) <=
+    inject_Z (Z.of_nat k) * eps * step).
+  { induction k as [| k' IHk].
+    - intros _. simpl riemann_sum. simpl tele_sum. simpl Z.of_nat.
+      assert (Hdiff : (0 : Q) - 0 == 0) by ring.
+      qabs_rw Hdiff.
+      assert (H1 : Qabs 0 == 0) by reflexivity.
+      assert (H2 : inject_Z 0 * eps * step == 0) by ring.
+      lra.
+    - intros Hk. assert (Hk' : (k' <= S N)%nat) by lia.
+      specialize (IHk Hk').
+      assert (HRS : riemann_sum f' a step (S k') ==
+                     f' (walk_point a step k') * step + riemann_sum f' a step k')
+        by reflexivity.
+      assert (HTS : tele_sum f a step (S k') ==
+                     (f (walk_point a step (S k')) - f (walk_point a step k')) +
+                     tele_sum f a step k')
+        by reflexivity.
+      assert (Hdiff : riemann_sum f' a step (S k') - tele_sum f a step (S k') ==
+                        (f' (walk_point a step k') * step -
+                         (f (walk_point a step (S k')) - f (walk_point a step k'))) +
+                        (riemann_sum f' a step k' - tele_sum f a step k')).
+      { lra. }
+      assert (HWP : walk_point a step (S k') = walk_point a step k' + step)
+        by reflexivity.
+      assert (Herr_eq : f' (walk_point a step k') * step -
+                          (f (walk_point a step (S k')) - f (walk_point a step k')) ==
+                        -(f (walk_point a step k' + step) - f (walk_point a step k') -
+                           f' (walk_point a step k') * step)).
+      { rewrite HWP. ring. }
+      assert (Hin : a <= walk_point a step k' /\ walk_point a step k' <= b).
+      { apply walk_point_in_interval; [exact Hab | exact Hk']. }
+      destruct Hin as [Hlo_k Hhi_k].
+      assert (Hstep_err : Qabs (f (walk_point a step k' + step) - f (walk_point a step k') -
+                                  f' (walk_point a step k') * step) < eps * Qabs step).
+      { apply Hbd; assumption. }
+      assert (Hstep_err2 : Qabs (f (walk_point a step k' + step) - f (walk_point a step k') -
+                                   f' (walk_point a step k') * step) < eps * step).
+      { assert (Heq : eps * Qabs step == eps * step) by (rewrite Hstep_abs; reflexivity).
+        lra. }
+      assert (Herr_abs : Qabs (f' (walk_point a step k') * step -
+                                 (f (walk_point a step (S k')) - f (walk_point a step k'))) < eps * step).
+      { qabs_rw Herr_eq.
+        rewrite Qabs_opp. exact Hstep_err2. }
+      apply Qle_trans with (Qabs (f' (walk_point a step k') * step -
+                                    (f (walk_point a step (S k')) - f (walk_point a step k'))) +
+                             Qabs (riemann_sum f' a step k' - tele_sum f a step k')).
+      { qabs_rw Hdiff. apply Qabs_triangle. }
+      assert (Hinj : inject_Z (Z.of_nat (S k')) == inject_Z (Z.of_nat k') + 1).
+      { replace (Z.of_nat (S k')) with (Z.of_nat k' + 1)%Z by lia.
+        rewrite inject_Z_plus. reflexivity. }
+      assert (Hring : (inject_Z (Z.of_nat k') + 1) * eps * step ==
+                        eps * step + inject_Z (Z.of_nat k') * eps * step) by ring.
+      rewrite Hinj. lra. }
+  specialize (Hmain (S N) (Nat.le_refl _)).
+  assert (Hcancel : inject_Z (Z.of_nat (S N)) * eps * step == eps * (b - a)).
+  { unfold step. field.
+    intros Hcontra.
+    assert (HSN_pos : 0 < inject_Z (Z.of_nat (S N))).
+    { unfold Qlt. simpl. lia. }
+    lra. }
+  setoid_rewrite Hcancel in Hmain. exact Hmain.
+Qed.
+
+(** The grid step does not grow with the level. *)
+Lemma grid_step_antitone : forall (a b : Q) (N n : nat),
+  a < b -> (N <= n)%nat ->
+  (b - a) / inject_Z (Z.of_nat (S n)) <= (b - a) / inject_Z (Z.of_nat (S N)).
+Proof.
+  intros a b N n Hab Hn.
+  assert (HpN : 0 < inject_Z (Z.of_nat (S N))) by (unfold Qlt; simpl; lia).
+  assert (Hpn : 0 < inject_Z (Z.of_nat (S n))) by (unfold Qlt; simpl; lia).
+  assert (Hle : inject_Z (Z.of_nat (S N)) <= inject_Z (Z.of_nat (S n))).
+  { rewrite <- Zle_Qle. lia. }
+  set (s := (b - a) / inject_Z (Z.of_nat (S N))).
+  assert (Hs : 0 < s) by (apply walk_step_pos; exact Hab).
+  assert (HsN : s * inject_Z (Z.of_nat (S N)) == b - a).
+  { unfold s. field. intro H. lra. }
+  apply Qle_shift_div_r; [exact Hpn |].
+  assert (H1 : s * inject_Z (Z.of_nat (S N)) <= s * inject_Z (Z.of_nat (S n))).
+  { apply Qmult_le_l; assumption. }
+  lra.
+Qed.
+
+(** Grid FTC for ALL levels from some level on. *)
+Theorem ftc_grid_eventually : forall (f f' : Q -> Q) (a b eps : Q),
+  udiff_on f f' a b ->
+  0 < eps ->
+  exists N : nat, forall n : nat, (N <= n)%nat ->
+    Qabs (riemann_sum f' a ((b - a) / inject_Z (Z.of_nat (S n))) (S n) -
+          (f (walk_point a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)) - f a)) <=
+    eps * (b - a).
+Proof.
+  intros f f' a b eps [Hab Hudiff] Heps.
+  destruct (Hudiff eps Heps) as [delta [Hdelta Hbd]].
+  destruct (walk_step_small a b delta Hab Hdelta) as [N HN].
+  exists N. intros n Hn.
+  assert (Hsmall : (b - a) / inject_Z (Z.of_nat (S n)) < delta).
+  { apply Qle_lt_trans with ((b - a) / inject_Z (Z.of_nat (S N))).
+    - apply grid_step_antitone; assumption.
+    - exact HN. }
+  assert (H := rs_tele_error_level f f' a b eps delta n Hab Heps Hbd Hsmall).
+  assert (Htele := telescope_collapse f a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)).
+  assert (Heq : riemann_sum f' a ((b - a) / inject_Z (Z.of_nat (S n))) (S n) -
+                (f (walk_point a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)) - f a) ==
+                riemann_sum f' a ((b - a) / inject_Z (Z.of_nat (S n))) (S n) -
+                tele_sum f a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)).
+  { rewrite Htele. reflexivity. }
+  rewrite (Qabs_wd _ _ Heq). exact H.
 Qed.
 
 (** L12: FTC for constant zero — trivial case *)

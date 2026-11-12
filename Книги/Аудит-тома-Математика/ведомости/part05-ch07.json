@@ -1,0 +1,659 @@
+{
+ "batch": "audit-part-05",
+ "chapter": "05 Топология и анализ процессов/07 Теорема Фубини на процессах.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 19,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Формально в этой главе доказан *не* процесс измельчающихся двумерных разбиений, а конечный *ступенчатый* уровень: списки прямоугольных вкладов с точной рациональной арифметикой.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "FubiniProcess.v: Record Rectangle (:54), StepFun2D := list Rectangle (:65), integral_2d (:76) — конечные суммы над Q; последовательностей и пределов в файле нет. Статус назван честно.",
+   "assumptions": "Closed under the global context (все 32 объявления файла, реестр pa-all.tsv)"
+  },
+  {
+   "line": 22,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В опорном файле нет ни типа `RealProcess`, ни функции `nat` $\\to$ ℚ, ни последовательности мельчающихся 2D-сеток — есть конечный список прямоугольников и конечные суммы их вкладов.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по FubiniProcess.v: слов RealProcess и nat в файле нет; подключены только QArith, Qabs, List, Lqa, Lia. Сам тип RealProcess := nat -> Q объявлен в ProcessCore.v:34 (и ещё в девяти файлах). Вне опорного файла сеточные функции nat -> nat -> Q есть в process/ProcessFubiniGeneral.v — см. запись стр. 266."
+  },
+  {
+   "line": 23,
+   "theorem": "nat",
+   "external": true,
+   "claim": "ни функции `nat` $\\to$ ℚ",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тип стандартной библиотеки (Corelib.Init.Datatypes.nat), не имя формализации; в FubiniProcess.v не встречается, как и сказано.",
+   "assumptions": "не применимо (стандартная библиотека)"
+  },
+  {
+   "line": 27,
+   "theorem": "integral_2d_perm",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Но именно этот скромный уровень показывает *первый закон порядка наблюдения* — что итог не зависит от того, в каком порядке сложены вклады, — и показывает, *где* этот закон из тривиального становится трудным.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора) — слова те же, доведена формализация: о перестановке вкладов леммы не было (менялся только порядок сомножителей внутри вклада). Добавлена integral_2d_perm : Permutation f g -> integral_2d f == integral_2d g (и integral_2d_app_comm, fubini_step_perm). Closed under the global context."
+  },
+  {
+   "line": 30,
+   "theorem": null,
+   "claim": "«Двойной интеграл как процесс по 2D-разбиениям» останется в этой главе *философской рамкой* и программой, а не доказанным объектом; доказан конечный прототип, который этот процесс в будущем должен поднять к пределу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: теоремы о сходимости двумерных сеточных сумм к двойному интегралу в src нет (поиск; шапка process/ProcessFubiniGeneral.v, строки 19–23, говорит то же)."
+  },
+  {
+   "line": 37,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Сперва — конечный двойной интеграл по прямоугольным вкладам (§ 7.2) и доказанная на нём теорема Фубини для ступенчатых функций (§ 7.3), с конкретными вычислениями.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fubini_step (:138) доказана (Qed); вычисления — example_rect_integral (:174), example_fubini_concrete (:181), example_two_rects (:189), example_fubini_two (:198)."
+  },
+  {
+   "line": 50,
+   "theorem": "step_fun_integral",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Одномерный интеграл ступенчатой функции (Глава 5.5) есть сумма вкладов $c_i\\cdot(b_i-a_i)$ — значение на куске, умноженное на длину куска.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "step_integral s := step_val s * (step_right s - step_left s) (StepIntegral.v:38); step_fun_integral — сумма step_integral по списку (:42)."
+  },
+  {
+   "line": 58,
+   "theorem": "Rectangle",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Прямоугольный вклад ToS записывает типом `Rectangle`: постоянное рациональное значение на рациональном прямоугольнике, с условием корректности границ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record Rectangle (:54): rect_val, четыре границы типа Q, rect_x_valid : rect_x1 <= rect_x2, rect_y_valid : rect_y1 <= rect_y2; блок кода стр. 63–68 совпадает с исходником. Копия записи есть в MeasureSynthesis.v:71."
+  },
+  {
+   "line": 70,
+   "theorem": "rect_integral",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Definition rect_integral (r : Rectangle) : Q := rect_val r * (rect_x2 r - rect_x1 r) * (rect_y2 r - rect_y1 r).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с FubiniProcess.v:72."
+  },
+  {
+   "line": 74,
+   "theorem": "StepFun2D",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Двумерная ступенчатая функция — конечный список таких прямоугольников, `StepFun2D := list Rectangle`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition StepFun2D := list Rectangle (:65) — дословно."
+  },
+  {
+   "line": 75,
+   "theorem": "integral_2d",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "а её двойной интеграл `integral_2d` — сумма вкладов `rect_integral` по списку.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint integral_2d (:76): [] => 0; r :: rest => rect_integral r + integral_2d rest."
+  },
+  {
+   "line": 77,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Вся арифметика — точная, в ℚ; никаких пределов на этом уровне нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все равенства файла — Qeq над Q, доказательства ring/lra; кванторов по eps и последовательностей в файле нет."
+  },
+  {
+   "line": 82,
+   "theorem": "StepFun2D",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "`StepFun2D` — это *не* обязательно разбиение области и *не* обязательно непересекающийся набор прямоугольников; это *формальная конечная сумма прямоугольных вкладов*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "StepFun2D := list Rectangle без условий на взаимное расположение; предикатов разбиения или непересечения в файле нет. Оговорка главы точна."
+  },
+  {
+   "line": 84,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Файл не строит теории покрытий области, не требует, чтобы прямоугольники замощали $[a,b]\\times[c,d]$ без щелей и наложений; он определяет сумму вкладов и доказывает её свойства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Свойства суммы в файле: integral_2d_nil (:211), integral_2d_app (:215), rect_integral_zero_val (:224), rect_integral_zero_width (:232). Теории покрытий нет."
+  },
+  {
+   "line": 94,
+   "theorem": "iterated_xy",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Повторный интеграл по одному прямоугольнику можно взять в двух порядках: сперва по $x$, потом по $y$ — или наоборот. На прямоугольном вкладе каждый из них сводится к готовому произведению; ToS записывает оба сразу в этом виде и доказывает их равенство.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было «ToS записывает оба» — iterated_xy и iterated_yx суть одно произведение с двумя порядками сомножителей (iterated_xy совпадает с rect_integral по определению). Слова приведены к этому; повторный интеграл из двух одномерных построен отдельно (nested_xy, nested_yx)."
+  },
+  {
+   "line": 102,
+   "theorem": "iterated_yx",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Definition iterated_yx (r : Rectangle) : Q := rect_val r * (rect_y2 r - rect_y1 r) * (rect_x2 r - rect_x1 r).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода стр. 99–102 совпадает с исходником (iterated_xy :87, iterated_yx :91). О содержании определений — запись стр. 94."
+  },
+  {
+   "line": 105,
+   "theorem": "fubini_rectangle",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Lemma fubini_rectangle : forall r : Rectangle, iterated_xy r == iterated_yx r.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с FubiniProcess.v:113, включая доказательство (intros r. unfold iterated_xy, iterated_yx. ring.)."
+  },
+  {
+   "line": 110,
+   "theorem": "ring",
+   "external": true,
+   "claim": "Доказательство — одно слово `ring`: равенство есть в точности коммутативность умножения, $c\\cdot\\Delta x\\cdot\\Delta y = c\\cdot\\Delta y\\cdot\\Delta x$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`ring` — тактика Rocq, не имя формализации. Доказательство fubini_rectangle (:115–117) действительно закрывается ею после развёртывания определений.",
+   "assumptions": "не применимо (тактика)"
+  },
+  {
+   "line": 112,
+   "theorem": "iterated_eq_double",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "И обе повторные величины равны двойному интегралу прямоугольника (`iterated_eq_double`, `iterated_yx_eq_double`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "iterated_eq_double (:120): iterated_xy r == rect_integral r. Утверждение верно; тела iterated_xy и rect_integral совпадают дословно, так что равенство выполняется уже по определению (см. запись стр. 94)."
+  },
+  {
+   "line": 114,
+   "theorem": "iterated_yx_eq_double",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "(`iterated_eq_double`, `iterated_yx_eq_double`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "iterated_yx_eq_double (:127): iterated_yx r == rect_integral r; доказательство — ring (перестановка двух сомножителей)."
+  },
+  {
+   "line": 123,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Для конечного списка вкладов теорема Фубини доказывается индукцией по списку: на пустом — тождество, на шаге — равенство для головного прямоугольника (`fubini_rectangle`) плюс предположение индукции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ход доказательства (:140–144) описан верно: induction f; база — simpl. ring; шаг — rewrite fubini_rectangle, rewrite IH, ring."
+  },
+  {
+   "line": 128,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Theorem fubini_step : forall f : StepFun2D, iterated_xy_list f == iterated_yx_list f.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с FubiniProcess.v:138. iterated_xy_list (:95) и iterated_yx_list (:102) — суммы iterated_xy и iterated_yx по списку, обе в порядке списка."
+  },
+  {
+   "line": 137,
+   "theorem": "iterated_xy_eq_2d",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "И оба повторных интеграла списка равны двойному (`iterated_xy_eq_2d`, `iterated_yx_eq_2d`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "iterated_xy_eq_2d (:147): iterated_xy_list f == integral_2d f. Верно; iterated_xy_list и integral_2d совпадают и как термы (равенство Лейбница индукцией — проверено)."
+  },
+  {
+   "line": 138,
+   "theorem": "iterated_yx_eq_2d",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "(`iterated_xy_eq_2d`, `iterated_yx_eq_2d`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "iterated_yx_eq_2d (:156): iterated_yx_list f == integral_2d f; индукция по списку и iterated_yx_eq_double."
+  },
+  {
+   "line": 138,
+   "theorem": "integral_2d_perm",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "порядок сложения вкладов (`integral_2d_perm`) и порядок интегрирования внутри вклада — оба безразличны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): к словам о порядке сложения вкладов добавлена лемма, которой раньше не было."
+  },
+  {
+   "line": 145,
+   "theorem": "example_rect_integral",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Возьмём $f=3$ на $[0,1]\\times[0,2]$: двойной интеграл есть $3\\cdot1\\cdot2=6$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "example_rect_integral (:174): rect_integral (mkRect 3 0 1 0 2 le_0_1 le_0_2) == 6."
+  },
+  {
+   "line": 146,
+   "theorem": "example_fubini_concrete",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "и оба порядка дают одно (`example_rect_integral`, `example_fubini_concrete`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "example_fubini_concrete (:181): iterated_xy == iterated_yx на том же прямоугольнике. Что обе величины равны 6, отдельной леммой не записано; следует из example_rect_integral и iterated_eq_double."
+  },
+  {
+   "line": 147,
+   "theorem": "example_two_rects",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Для двух прямоугольников — $f=2$ на $[0,1]\\times[0,1]$ и $f=3$ на $[1,2]\\times[0,1]$ — двойной интеграл есть $2+3=5$ (`example_two_rects`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "example_two_rects (:189): integral_2d [mkRect 2 0 1 0 1 …; mkRect 3 1 2 0 1 …] == 5. Числа и области совпадают."
+  },
+  {
+   "line": 149,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Всё это Rocq проверяет точной рациональной арифметикой: в этих примерах доказательства сводятся к `ring` или прямому применению `fubini_rectangle`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено: example_rect_integral и example_two_rects — unfold, simpl, ring; example_fubini_concrete — apply fubini_rectangle."
+  },
+  {
+   "line": 157,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "*На ступенчатом уровне теорема Фубини **тривиальна**: она есть коммутативность умножения, доказываемая одним `ring`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оценка честна и совпадает с шапкой файла (строки 11–12: «EXACT and TRIVIAL»): fubini_rectangle — ring; fubini_step — индукция, две перезаписи и ring."
+  },
+  {
+   "line": 161,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Доказанное `fubini_step` — конечный **прототип** закона порядка; настоящая Фубини начинается за ним. Между ступенью и пределом есть ещё одна доказанная ступень — перестановка двойной суммы на произвольной конечной сетке (§ 7.5).*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус fubini_step назван честно. Между этим прототипом и пределом в формализации есть промежуточная ступень, которой глава не называет: перестановка двойной суммы на произвольной сетке (process/ProcessFubiniGeneral.v) — см. запись стр. 266."
+  },
+  {
+   "line": 224,
+   "theorem": null,
+   "claim": "само доказательство перестановки двух предельных процессов требует $L^1$-слоя и доминированной сходимости и в репозитории ещё не собрано в машинную теорему.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус «не собрано» верен: теоремы о перестановке пределов или о сходимости сеточных сумм к двойному интегралу в src нет. Слово «требует» — сомнительное место: шапка ProcessFubiniGeneral.v (строки 19–23) называет недостающим равномерную непрерывность на компакте, а не L1-слой (см. заметки)."
+  },
+  {
+   "line": 238,
+   "theorem": null,
+   "claim": "*Этот слой здесь не собран.* Единой машинной теоремы «Фубини для непрерывных» в репозитории нет.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: поиск по src (27 файлов со словом Fubini) такой теоремы не находит; MeasureSynthesis.v:236 числит «General Fubini for L1 functions» в недостающем; ProcessFubiniGeneral.v доказывает равенство повторных сеточных сумм, но не сходимость к двойному интегралу."
+  },
+  {
+   "line": 247,
+   "theorem": null,
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Файл `StepIntegral.v` (17 Qed, 0 аксиом) даёт точный интеграл ступенчатых функций над ℚ",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): в файле 17 Qed (в шапке стояло 20; исправлено шагом 12).",
+   "assumptions": "Closed under the global context (все 25 объявлений файла, реестр pa-all.tsv)"
+  },
+  {
+   "line": 248,
+   "theorem": "step_integral",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "даёт точный интеграл ступенчатых функций над ℚ — основание подхода Бишопа–Ченга, на котором всё остальное есть $L^1$-пополнение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "step_integral (:38), step_fun_integral (:42) — точные суммы над Q; слова об основании подхода Бишопа — Ченга повторяют шапку файла (строки 14–15). FubiniProcess.v этот файл не подключает: определения скопированы (FubiniProcess.v:31–47) и в теоремах о прямоугольниках не используются."
+  },
+  {
+   "line": 250,
+   "theorem": null,
+   "claim": "Это будущий *носитель* аппроксимации; сама теорема о приближении непрерывной функции ступенчатыми в этой главе *не доказана*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: в StepIntegral.v теоремы о приближении нет; в опорных файлах главы — тоже."
+  },
+  {
+   "line": 255,
+   "theorem": null,
+   "file": "src/analysis/DominatedConvergence.v",
+   "claim": "`DominatedConvergence.v` (26 Qed, 0 аксиом)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): после шага 15 в файле 26 Qed (добавлено восемь утверждений, сняты теорема-вывеска dominated_convergence_step и пример example_dct); все утверждения — Closed under the global context.",
+   "assumptions": "Closed under the global context (все 35 объявлений файла, реестр pa-all.tsv)"
+  },
+  {
+   "line": 255,
+   "theorem": "l1_convergence_integral",
+   "file": "src/analysis/DominatedConvergence.v",
+   "claim": "даёт основания *ступенчатого* уровня: доминирование, $L^1$-сходимость, сходимость интегралов — и теорему, которая на этом уровне действительно верна: на общем разбиении $L^1$-сходимость влечёт сходимость интегралов (`l1_convergence_integral`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было «скелет теоремы о доминированной сходимости» — заключение dominated_convergence_step дословно повторяло третью посылку, мажоранта не работала; теорема снята (вариант А, слово автора). Добавлена l1_convergence_integral : (forall n, aligned (seq n) limit) -> l1_converges seq limit -> integral_converges seq (step_fun_integral limit). Closed under the global context."
+  },
+  {
+   "line": 260,
+   "theorem": "l1_convergence_alone_is_not_enough",
+   "file": "src/analysis/DominatedConvergence.v",
+   "claim": "Без общего разбиения это неверно, и контрпример проверен (`l1_convergence_alone_is_not_enough`). Мажоранта на общем конечном разбиении ничего не добавляет; её содержание возникает при переходе к $L^1$-пополнению.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было — довод файла «L1-сходимость уже влечёт сходимость интегралов» в его определениях без общего разбиения неверен (step_fun_diff обрезает списки по более короткому). Контрпример внесён теоремой; заметка в конце файла исправлена."
+  },
+  {
+   "line": 263,
+   "theorem": null,
+   "file": "src/analysis/DominatedConvergence.v",
+   "claim": "Это *ещё не* та доминированная сходимость, что доказывает непрерывную Фубини.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: теоремы о перестановке предела и интеграла при мажоранте в файле нет."
+  },
+  {
+   "line": 267,
+   "theorem": null,
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "*Компактность — с ограничением ℚ.* Файл `HeineBorelComplete.v` (28 Qed; собственных аксиом нет",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): в файле 28 Qed (в шапке стояло 22; шапка исправлена)."
+  },
+  {
+   "line": 268,
+   "theorem": "mono_bounded_is_cauchy",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "одна лемма — `mono_bounded_is_cauchy` — опирается на $L3$, см. Главу 5.2)",
+   "page_price": "L3 (classic) у одной леммы",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было «0 аксиом» — mono_bounded_is_cauchy стоит на Classical_Prop.classic; остальные 27 утверждений закрыты. Цена названа."
+  },
+  {
+   "line": 269,
+   "theorem": "totally_bounded_interval",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "даёт тотальную ограниченность ℚ-интервалов",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "totally_bounded_interval (:245): forall a b, a <= b -> totally_bounded a b; totally_bounded (:67) — для всякого eps > 0 существует конечная eps-сеть. Без допущений."
+  },
+  {
+   "line": 270,
+   "theorem": "lipschitz_uniform_cont",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "и равномерную непрерывность *из липшицевости*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "lipschitz_uniform_cont (:307): a <= b -> Lipschitz_on f a b K -> uniformly_continuous_on f a b; условие липшицевости в словах главы названо. Без допущений."
+  },
+  {
+   "line": 271,
+   "theorem": "rational_eps_net",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "плюс теорию $\\varepsilon$-сетей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "eps_net (:62), eps_net_nil, eps_net_singleton, eps_net_cons, rational_eps_net (:215), eps_net_length_bound (:253), finite_cover_refinement (:463) — все без допущений."
+  },
+  {
+   "line": 271,
+   "theorem": null,
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "Но он же прямо отмечает: полный Гейне–Борель и переход «непрерывность $\\Rightarrow$ равномерность» в общем виде над ℚ *не доступны в текущем слое* — используются лишь липшицев частный случай или допущение о числе Лебега.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "По существу верно, с двумя оговорками (см. заметки, сомнительные места): шапка файла (строки 5–6) говорит сильнее — «unprovable over Q»; допущение о числе Лебега стоит не в этом файле, а в HeineBorel_ERR.v (Heine_Borel :536, Heine_Borel_uniform :517, оба Closed) — в HeineBorelComplete.v оно названо только в шапке, теорем с ним нет."
+  },
+  {
+   "line": 288,
+   "theorem": "fubini_iterated_eq",
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "Итак, непрерывная Фубини есть *программа*, не теорема. Равенство двух порядков доказано на каждой конечной сетке; открытым остаётся шаг к пределу — сходимость сеточных сумм непрерывной функции к двойному интегралу",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было — непрерывный случай назван программой целиком; равенство порядков на любой конечной сетке доказано (ProcessFubiniGeneral.v: q_sum_swap, fubini_iterated_eq), открыта только сходимость к двойному интегралу (горизонт; не доказана и не пробовалась)."
+  },
+  {
+   "line": 292,
+   "theorem": null,
+   "claim": "В рабочем списке задач формализации он стоит отдельным пунктом: равенство порядка на конечной сетке закрыто, сходимость к двойному интегралу открыта.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было «в рабочей карте формализации (см. итог тома)» — в Части XX пункта нет; он стоит в рабочем списке вне тома (Книги/FORMALIZATION-BACKLOG.md, F-1)."
+  },
+  {
+   "line": 298,
+   "theorem": null,
+   "claim": "Ниже — *не* результаты текущего файла, а направления, для которых ступенчатая Фубини есть первый конечный прототип.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: ни n-мерного обобщения, ни перечисленных применений в FubiniProcess.v нет."
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "claim": "В коде этого обобщения нет — оно намечено как программа.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: n-мерного интеграла и индукции по размерности в src нет (поиск по Fubini, dsum, iter_); ProcessFubiniGeneral.v — только двумерная сетка."
+  },
+  {
+   "line": 314,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "шапка опорного файла даёт разметку прямо.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "FubiniProcess.v:2–4: Elements: Rectangle records, 2D step functions, iterated integrals; Roles: Double integral, iterated integral, order exchange; Rules: Fubini: integral_xy = integral_yx for step functions."
+  },
+  {
+   "line": 318,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "*Rules* — конституция: порядок интегрирования не влияет на итог (`fubini_step`); на ступенчатом уровне это коммутативность умножения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует строке Rules шапки и утверждению fubini_step (:138)."
+  },
+  {
+   "line": 320,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "*Roles* — значимые позиции: двойной интеграл, повторный интеграл, обмен порядка.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Дословно строка Roles шапки файла."
+  },
+  {
+   "line": 321,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "*Elements* — носители: прямоугольники и конечные списки прямоугольных вкладов; по $P4$ всякий такой список конечен, интеграл вычисляется точно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка числит в Elements ещё и «iterated integrals» (те же, что в Roles); глава относит их только к ролям — расхождение с шапкой в пользу главы."
+  },
+  {
+   "line": 328,
+   "theorem": null,
+   "claim": "на конечном ступенчатом уровне правило перестановки *доказано* (коммутативность); на уровне *предела* оно становится трудной теоремой.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первая половина — fubini_step, доказано. Вторая — оценка, не утверждение о формализации; о промежуточной ступени (произвольная конечная сетка, ProcessFubiniGeneral.v) см. запись стр. 266."
+  },
+  {
+   "line": 341,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Доказан — точно и без аксиом — ступенчатый случай: двойной интеграл конечного списка прямоугольных вкладов не зависит от порядка интегрирования (`fubini_step`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions fubini_step: Closed under the global context. Строго fubini_step — равенство двух повторных сумм; равенство каждой из них двойному интегралу — iterated_xy_eq_2d (:147) и iterated_yx_eq_2d (:156), тоже без допущений."
+  },
+  {
+   "line": 347,
+   "theorem": null,
+   "claim": "И честно очерчено, что непрерывный случай остаётся программой: каркас трёх условий верен, кирпичи названы, но $L^1$-слой не собран.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«L1-слой не собран» верно: в analysis/L1Space.v есть запись L1Process (:86), но сходимость интегралов L1-процесса не доказана, а l1_equiv_integral (:178) повторяет свою посылку. О неназванном кирпиче — запись стр. 266."
+  },
+  {
+   "line": 356,
+   "theorem": null,
+   "claim": "компактность взята через конструктивные и условно-классические формы — $\\varepsilon$-сети, uniform-вариант Гейне–Бореля и Cauchy-версию Больцано–Вейерштрасса, с явной маркировкой $L3$/$L4$ там, где она нужна (5.2).",
+   "page_price": "L3/L4 там, где нужна",
+   "verdict": "ok",
+   "note": "Сводка главы V.2; по реестру цены: rational_eps_net и Heine_Borel_uniform (HeineBorel_ERR.v:517) — Closed under the global context; bolzano_weierstrass (analysis/BolzanoWeierstrass.v) — classic и L4_witness. Формулировки сверяются при аудите главы V.2."
+  },
+  {
+   "line": 372,
+   "theorem": null,
+   "claim": "Ступенчатый интеграл, служивший здесь носителем, есть основание меры в подходе Бишопа–Ченга; $L^1$-пополнение, оставленное фронтиром в § 7.5, и есть предмет Части VI.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ссылка верна по составу тома: L1 и L2 — глава VI.5; в формализации — analysis/L1Space.v (тип L1Process). Что именно там доказано, сверяется при аудите Части VI."
+  },
+  {
+   "line": 375,
+   "theorem": null,
+   "claim": "ToS строит там интегрирование *без внешней сет-теоретической аксиомы выбора*, с явной локальной маркировкой $L3$ и $L4$ там, где они понадобятся. Непрерывная Фубини и после Части VI остаётся программой: её предельный шаг в формализации ещё не собран.",
+   "page_price": "L3 и L4 там, где понадобятся",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было «и тогда непрерывная Фубини … получит своё полное доказательство» — в Части VI теорема упомянута только отсылками назад, доказательства нет."
+  },
+  {
+   "line": 381,
+   "theorem": "fubini_step",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Теорема Фубини для конечных списков прямоугольных вкладов: двойной интеграл не зависит от порядка интегрирования (`fubini_step`) — точно, без аксиом, как коммутативность умножения.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Closed under the global context; формулировка — как на стр. 318."
+  },
+  {
+   "line": 385,
+   "theorem": "fubini_iterated_eq",
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "Доказаны ступенчатый прототип и равенство повторных сумм на произвольной конечной сетке (`fubini_iterated_eq`); сходимость к двойному интегралу для непрерывной функции — программа на трёх условиях",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): итог приведён к действительному состоянию: fubini_iterated_eq : forall f wx wy N M, iter_xy f wx wy N M == iter_yx f wx wy N M. Closed under the global context."
+  },
+  {
+   "line": 392,
+   "theorem": null,
+   "claim": "ступенчатая Фубини есть её конечный прототип, а полное доказательство остаётся горизонтом — за пределами доказанного в этом томе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): было «полное доказательство ждёт меры Части VI» — Часть VI его не даёт; назван горизонт."
+  },
+  {
+   "line": 401,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Опорный файл — `FubiniProcess.v` Rocq-репозитория ToS (каталог `src/analysis/`), 30 доказанных утверждений, 0 `Admitted`, 0 аксиом. Имена, приводимые ниже, — из него.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): после шага 15 в файле 30 Qed (было 20); все утверждения — Closed under the global context.",
+   "assumptions": "Closed under the global context (все 32 объявления файла, реестр pa-all.tsv)"
+  },
+  {
+   "line": 401,
+   "theorem": "Admitted",
+   "external": true,
+   "claim": "0 `Admitted`, 0 аксиом",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Ключевое слово Rocq, не имя; в FubiniProcess.v вхождений «Admitted.» нет.",
+   "assumptions": "не применимо (ключевое слово)"
+  },
+  {
+   "line": 402,
+   "theorem": null,
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "Отдельного файла для непрерывного случая в формализации нет; опорный файл главы — `FubiniProcess.v` — доказывает ступенчатый случай",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 15, слово автора): сноска переписана — имя несуществующего файла Fubini.v убрано."
+  },
+  {
+   "line": 402,
+   "theorem": null,
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "а `ProcessFubiniGeneral.v` — равенство повторных сумм на произвольной конечной сетке.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл существует (src/process/ProcessFubiniGeneral.v, 8 Qed); сноска переписана шагом 15 Части V."
+  },
+  {
+   "line": 117,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 15: nested_xy r == iterated_xy r, где nested_xy — интеграл по y от ступени, значение которой есть одномерный step_integral сечения по x. Closed under the global context.",
+   "theorem": "nested_xy_eq_iterated",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "доказано отдельно (`nested_xy_eq_iterated`, `nested_yx_eq_iterated`)"
+  },
+  {
+   "line": 118,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 15 (то же для порядка «сперва y, потом x»). Closed under the global context.",
+   "theorem": "nested_yx_eq_iterated",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "`nested_yx_eq_iterated`), как и равенство"
+  },
+  {
+   "line": 118,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 15: nested_xy r == nested_yx r; для списков — fubini_step_nested. Closed under the global context.",
+   "theorem": "fubini_rectangle_nested",
+   "file": "src/analysis/FubiniProcess.v",
+   "claim": "как и равенство двух порядков для них (`fubini_rectangle_nested`)."
+  },
+  {
+   "line": 259,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 15: (forall m n, aligned (seq m) (seq n)) -> l1_cauchy seq -> integral_cauchy seq. Closed under the global context.",
+   "theorem": "l1_cauchy_integral_cauchy",
+   "file": "src/analysis/DominatedConvergence.v",
+   "claim": "для последовательностей Коши — `l1_cauchy_integral_cauchy`)"
+  },
+  {
+   "line": 279,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "q_sum_swap : forall (f : nat -> nat -> Q) (N M : nat), dsum_xy f N M == dsum_yx f N M. Closed under the global context.",
+   "theorem": "q_sum_swap",
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "доказывает перестановку двойной конечной суммы для сетки любого размера $N\\times M$ (`q_sum_swap`)"
+  },
+  {
+   "line": 280,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fubini_iterated_eq : forall f wx wy N M, iter_xy f wx wy N M == iter_yx f wx wy N M. Closed under the global context. Сходимости к двойному интегралу файл не доказывает.",
+   "theorem": "fubini_iterated_eq",
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "равенство двух повторных сеточных сумм для любой функции, заданной значениями в узлах (`fubini_iterated_eq`)."
+  }
+ ]
+}

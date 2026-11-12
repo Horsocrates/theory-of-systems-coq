@@ -3,7 +3,7 @@
     Roles:    unified P4 interface for IVT, EVT, BW, HB, Uncountable
     Rules:    each theorem is a process construction with convergence rate
     Status:   complete
-    STATUS: 12 Qed, 0 Admitted, 0 axioms
+    STATUS: 13 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -13,12 +13,12 @@
 (*  This file imports all five Process* wrappers and proves cross-cutting     *)
 (*  properties:                                                                *)
 (*    1. All convergence rates are valid (in (0,1))                          *)
-(*    2. IVT and BW share bisection-type rate 1/2                            *)
+(*    2. IVT and BW share bisection-type rate 1/2; EVT is a grid, no ratio  *)
 (*    3. Diagonal uses trisection rate 1/3                                   *)
 (*    4. Every infinite process construction produces Cauchy processes        *)
 (*    5. P4 interpretation: theorems ARE their constructions                  *)
 (*                                                                            *)
-(*  STATUS: 15 Qed, 0 Admitted                                               *)
+(*  STATUS: 13 Qed, 0 Admitted                                               *)
 (*  AXIOMS: classic (inherited from wrappers)                                *)
 (* ========================================================================= *)
 
@@ -41,8 +41,10 @@ From ToS Require Import process.ProcessUncountable.
 (*  Part I: Convergence Rate Catalogue                                  *)
 (* ================================================================== *)
 
-(** All three convergence rates collected *)
-Definition rates : list Q := [ivt_convergence_rate; evt_convergence_rate;
+(** The three geometric rates collected: bisection (IVT, BW) and trisection.
+    EVT is not here: its grid gets one more cell per stage, there is no fixed
+    ratio; its actual rate is ProcessEVT.evt_lipschitz_rate (Nov 2026). *)
+Definition rates : list Q := [ivt_convergence_rate;
                                bw_convergence_rate; diagonal_convergence_rate].
 
 (** Every rate is in (0,1) *)
@@ -52,10 +54,9 @@ Proof.
   intros r Hr.
   unfold rates in Hr.
   simpl in Hr.
-  destruct Hr as [Hr | [Hr | [Hr | [Hr | Hr]]]];
+  destruct Hr as [Hr | [Hr | [Hr | Hr]]];
     subst; try contradiction.
   - exact ivt_rate_valid.
-  - exact evt_rate_valid.
   - exact bw_rate_valid.
   - exact diagonal_rate_valid.
 Qed.
@@ -67,11 +68,20 @@ Proof.
   unfold ivt_convergence_rate, bw_convergence_rate. reflexivity.
 Qed.
 
-(** EVT and BW share the same convergence rate *)
-Lemma evt_bw_same_rate :
-  evt_convergence_rate == bw_convergence_rate.
+(** The two bisections shrink by the same ratio at EVERY stage -- about the
+    processes themselves, not only about the two numbers. *)
+Lemma ivt_bw_same_stage_ratio : forall f s a b n,
+  (IVT_ERR.bis_right (IVT_ERR.bisection_iter f (IVT_ERR.mkBisection a b) (S n))
+   - IVT_ERR.bis_left (IVT_ERR.bisection_iter f (IVT_ERR.mkBisection a b) (S n)) ==
+   bw_convergence_rate *
+   (IVT_ERR.bis_right (IVT_ERR.bisection_iter f (IVT_ERR.mkBisection a b) n)
+    - IVT_ERR.bis_left (IVT_ERR.bisection_iter f (IVT_ERR.mkBisection a b) n))) /\
+  (bw_right_process s a b (S n) - bw_left_process s a b (S n) ==
+   bw_convergence_rate * (bw_right_process s a b n - bw_left_process s a b n)).
 Proof.
-  unfold evt_convergence_rate, bw_convergence_rate. reflexivity.
+  intros f s a b n. split.
+  - rewrite <- ivt_bw_same_rate. apply ivt_rate_is_width_ratio.
+  - apply bw_rate_is_width_ratio.
 Qed.
 
 (** Diagonal rate is strictly smaller (faster convergence) *)
@@ -100,6 +110,18 @@ Definition is_infinite_pattern (p : ProcessPattern) : bool :=
   | _     => true
   end.
 
+(** Geometric patterns: the interval shrinks by a fixed ratio at every stage.
+    EVT is infinite but not geometric (a grid with one more cell per stage). *)
+Definition is_geometric_pattern (p : ProcessPattern) : bool :=
+  match p with
+  | PP_IVT | PP_BW | PP_Diagonal => true
+  | _ => false
+  end.
+
+Lemma geometric_patterns_are_infinite : forall p,
+  is_geometric_pattern p = true -> is_infinite_pattern p = true.
+Proof. intros p Hp. destruct p; simpl in *; try discriminate; reflexivity. Qed.
+
 (** The number of process patterns *)
 Lemma five_patterns : length [PP_IVT; PP_EVT; PP_BW; PP_HB; PP_Diagonal] = 5%nat.
 Proof. reflexivity. Qed.
@@ -112,20 +134,19 @@ Proof. reflexivity. Qed.
 Definition pattern_rate (p : ProcessPattern) : Q :=
   match p with
   | PP_IVT       => ivt_convergence_rate
-  | PP_EVT       => evt_convergence_rate
+  | PP_EVT       => 0  (* grid, no fixed ratio: see evt_lipschitz_rate *)
   | PP_BW        => bw_convergence_rate
   | PP_HB        => 0  (* finite, no rate needed *)
   | PP_Diagonal  => diagonal_convergence_rate
   end.
 
-(** Every infinite pattern has valid rate *)
-Lemma infinite_patterns_have_valid_rate : forall p,
-  is_infinite_pattern p = true ->
+(** Every geometric pattern has valid rate *)
+Lemma geometric_patterns_have_valid_rate : forall p,
+  is_geometric_pattern p = true ->
   0 < pattern_rate p /\ pattern_rate p < 1.
 Proof.
-  intros p Hinf. destruct p; simpl in *; try discriminate.
+  intros p Hgeo. destruct p; simpl in *; try discriminate.
   - exact ivt_rate_valid.
-  - exact evt_rate_valid.
   - exact bw_rate_valid.
   - exact diagonal_rate_valid.
 Qed.
@@ -162,25 +183,24 @@ Theorem diagonal_convergence_interpretation :
   diagonal_convergence_rate == 1 # 3.
 Proof. unfold diagonal_convergence_rate. reflexivity. Qed.
 
-(** All bisection-type theorems share the 1/2 rate *)
+(** The two bisections share the 1/2 rate *)
 Theorem bisection_family_rate :
-  ivt_convergence_rate == evt_convergence_rate /\
-  evt_convergence_rate == bw_convergence_rate.
+  ivt_convergence_rate == bw_convergence_rate /\
+  bw_convergence_rate == 1 # 2.
 Proof.
   split.
-  - unfold ivt_convergence_rate, evt_convergence_rate. reflexivity.
-  - unfold evt_convergence_rate, bw_convergence_rate. reflexivity.
+  - unfold ivt_convergence_rate, bw_convergence_rate. reflexivity.
+  - unfold bw_convergence_rate. reflexivity.
 Qed.
 
-(** The diagonal rate is the only non-1/2 rate *)
+(** Among the geometric patterns the diagonal rate is the only non-1/2 rate *)
 Lemma diagonal_is_unique_rate : forall p,
-  is_infinite_pattern p = true ->
+  is_geometric_pattern p = true ->
   p <> PP_Diagonal ->
   pattern_rate p == 1 # 2.
 Proof.
-  intros p Hinf Hneq.
+  intros p Hgeo Hneq.
   destruct p; simpl in *; try discriminate; try contradiction.
   - unfold ivt_convergence_rate. reflexivity.
-  - unfold evt_convergence_rate. reflexivity.
   - unfold bw_convergence_rate. reflexivity.
 Qed.

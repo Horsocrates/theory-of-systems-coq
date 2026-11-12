@@ -1,0 +1,956 @@
+{
+ "batch": "audit-part-05",
+ "chapter": "05 Топология и анализ процессов/04 Производная.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 71,
+   "theorem": "has_derivative",
+   "file": "src/Differentiation.v",
+   "claim": "В Rocq это определение носит имя `has_derivative` и записано в файле `Differentiation.v`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition has_derivative (Differentiation.v:36); блок кода (стр. 76–80) совпадает с исходником: для всякого eps > 0 есть delta > 0, при 0 < |h| < delta: |f(x+h) − f(x) − L·h| < eps·|h|; деления в определении нет."
+  },
+  {
+   "line": 94,
+   "theorem": "RealPoint",
+   "file": "src/RealPointSetoid.v",
+   "claim": "Это *не* процесс и *не* функция на фактор-классах `RealPoint`; глава работает с рационально-значными функциями рационального аргумента, и это honest-ограничение названо сразу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все определения и теоремы трёх опорных файлов типизированы f : Q -> Q; RealPoint := CauchySeq (RealPointSetoid.v:74) в них не участвует."
+  },
+  {
+   "line": 106,
+   "theorem": "continuous_at",
+   "file": "src/Differentiation.v",
+   "claim": "Тот же приём применён к местному определению `continuous_at` в `Differentiation.v` (§ 4.3.1); это сознательная деталь, не недосмотр.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): было «применялся к continuous_at в § 5.3» — приём ненулевого шага стоит в местном определении Differentiation.v, а определение § 5.3 (Topology.v) говорит обо всех точках окрестности."
+  },
+  {
+   "line": 127,
+   "theorem": "deriv_process",
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "Под $P4$ производная — не завершённый предел этого процесса, а *сам процесс* пошаговых рациональных приближений наклона. В файле `ProcessDerivative.v` это записано так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "deriv_step (ProcessDerivative.v:40) и deriv_process (:62); блок кода (стр. 133–139) совпадает с исходником: на уровне n значение (f(x+h_n) − f(x))/h_n при h_n = 1/(n+1)."
+  },
+  {
+   "line": 143,
+   "theorem": "deriv_step_pos",
+   "claim": "лемма `deriv_step_pos` устанавливает $0<h_n$ для всякого $n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:48: forall n, 0 < deriv_step n."
+  },
+  {
+   "line": 146,
+   "theorem": "deriv_process_const",
+   "claim": "`deriv_process_const` показывает, что для константы он эквивалентен постоянному процессу $0$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:82: process_equiv (deriv_process (fun _ => c) x) (const_process 0)."
+  },
+  {
+   "line": 148,
+   "theorem": "deriv_process_id",
+   "claim": "`deriv_process_id` — что для тождества $w\\mapsto w$ он эквивалентен постоянному процессу $1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:94: process_equiv (deriv_process (fun w => w) x) (const_process 1)."
+  },
+  {
+   "line": 151,
+   "theorem": "deriv_process_converges",
+   "claim": "Два слоя — критерий и процесс — связывает *мост*: теорема `deriv_process_converges`. Она утверждает: если $L$ есть производная $f$ в точке $x$ в смысле критерия `has_derivative`, то процесс разностных отношений эквивалентен постоянному процессу $L$:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:152: has_derivative f x L -> process_equiv (deriv_process f x) (const_process L); одна сторона, как и оговорено на стр. 194–197."
+  },
+  {
+   "line": 165,
+   "theorem": "deriv_step_vanishes",
+   "claim": "критерий даёт $\\delta$, лемма `deriv_step_vanishes` находит уровень $N$, начиная с которого $h_n<\\delta$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:130: forall delta, 0 < delta -> exists N, deriv_step N < delta — лемма даёт один уровень N; что h_n < delta при всех n >= N, устанавливается уже внутри доказательства моста (убывание шага, Qinv_le_compat_local)."
+  },
+  {
+   "line": 170,
+   "theorem": "deriv_process_cauchy",
+   "claim": "`deriv_process_cauchy` (процесс разностных отношений есть процесс Коши)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:205: has_derivative f x L -> is_Cauchy (deriv_process f x) — при существующей производной."
+  },
+  {
+   "line": 171,
+   "theorem": "derivative_is_process_construction",
+   "claim": "`derivative_is_process_construction` (производная предъявляется как Коши-процесс, эквивалентный постоянному $L$ — E/R/R-форма результата)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 5, слово автора) — слова те же, доведена формализация: has_derivative f x L -> (forall n, deriv_process f x n == (f (x + deriv_step n) - f x) / deriv_step n) /\\ is_Cauchy (deriv_process f x) /\\ process_equiv (deriv_process f x) (const_process L). Раньше процесс стоял под «существует», и заключение выполнялось для const_process L без посылки. Closed under the global context."
+  },
+  {
+   "line": 194,
+   "theorem": "deriv_process_converges",
+   "claim": "теорема `deriv_process_converges` утверждает лишь *одно направление* — если производная существует в division-free смысле, то выбранный процесс разностных отношений к ней сходится.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Обратной стороны в файле нет, и она неверна: для |x| в нуле правый процесс эквивалентен постоянному 1, а производной нет (проверено компилятором: abs_right_quotients, abs_no_derivative_at_0, Check1.v)."
+  },
+  {
+   "line": 200,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "Про статус аксиом: `ProcessDerivative.v` в шапке заявляет « 0 axioms, 17 Qed »; он импортирует `ProcessCore`, `ProcessArithmetic` и `Differentiation`.",
+   "page_price": "шапка файла: 0 axioms",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): в файле 17 Qed; шапка файла (стояло 16) и число на странице приведены к этому."
+  },
+  {
+   "line": 209,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "Разбор разворачивает разметку из заголовка опорного файла, где она дана прямо: *элементы — разностные отношения; роль — Cauchy-процесс, сходящийся к наклону; правило — условие `has_derivative`*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessDerivative.v, стр. 2–4: Elements: difference quotients; Roles: Cauchy process converging to slope; Rules: has_derivative condition from Differentiation.v — перевод точен."
+  },
+  {
+   "line": 225,
+   "theorem": "udiff_on",
+   "claim": "Над $ℚ$ у правил есть *усиление*: для теоремы о среднем нужна не поточечная, а *равномерная* дифференцируемость (`udiff_on`, § 4.6)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition udiff_on (MeanValueTheorem.v:46); все сеточные теоремы файла имеют посылку udiff_on f f' a b."
+  },
+  {
+   "line": 259,
+   "theorem": "udiff_on",
+   "claim": "| равномерная дифференцируемость (`udiff_on`) | усиление для среднего | Rule |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): было сокращённое имя udiff; полное — udiff_on.",
+   "file": "src/MeanValueTheorem.v"
+  },
+  {
+   "line": 276,
+   "theorem": "bounded_deriv_Lipschitz_on",
+   "claim": "А липшицевость § 4.7.3 показывает, как Rules производной *порождают* то, что в § 5.3 приходилось требовать для непрерывности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора) — слова те же, доведена формализация: раньше из производной выводилась только оценка возле одной точки (bounded_deriv_lipschitz_local). Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (|f'| <= M на отрезке) -> forall x y из отрезка, |f y - f x| <= M * |y - x|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context.",
+   "file": "src/MeanValueTheorem.v"
+  },
+  {
+   "line": 293,
+   "theorem": null,
+   "file": "src/Differentiation.v",
+   "claim": "Опорных файлов три. `Differentiation.v` — division-free критерий и правила. `ProcessDerivative.v` — производная как процесс и мост к критерию. `MeanValueTheorem.v` — сеточная теорема о среднем и её следствия.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три файла существуют; счёт Qed: Differentiation.v — 18, process/ProcessDerivative.v — 17, MeanValueTheorem.v — 18; Admitted, Axiom, Parameter — 0 во всех трёх."
+  },
+  {
+   "line": 296,
+   "theorem": null,
+   "claim": "Все три в своих шапках заявляют статус « AXIOMS: none »; точную оговорку о том, что этот заголовок означает и чего не означает, глава даёт в § 4.8.",
+   "page_price": "шапки файлов: AXIOMS: none",
+   "verdict": "ok",
+   "note": "Шапки: Differentiation.v:12 и MeanValueTheorem.v:14 — «AXIOMS: none (fully constructive)», ProcessDerivative.v:23 — «AXIOMS: none». Компилятор подтверждает: все 53 утверждения трёх файлов (18 + 17 + 18) — Closed under the global context."
+  },
+  {
+   "line": 310,
+   "theorem": "has_derivative_ext",
+   "claim": "В `Differentiation.v` это `has_derivative_ext`: из `forall w, f w == g w` и `has_derivative f x L` следует `has_derivative g x L`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:59 — утверждение то же дословно."
+  },
+  {
+   "line": 316,
+   "theorem": "has_derivative_eq",
+   "claim": "Если $L=L'$ как рациональные числа (в смысле `Qeq`), то $L'$ есть производная всякий раз, когда $L$ есть производная. Это `has_derivative_eq`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:72: L == L' -> has_derivative f x L -> has_derivative f x L'."
+  },
+  {
+   "line": 328,
+   "theorem": "deriv_const",
+   "file": "src/Differentiation.v",
+   "claim": "Производная константы есть нуль. Если $f$ — постоянная функция $w\\mapsto c$, то её производная в любой точке равна $0$. В коде это `deriv_const`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:87: forall c x, has_derivative (fun _ => c) x 0. Одноимённые леммы есть ещё в трёх файлах; глава называет Differentiation.v."
+  },
+  {
+   "line": 342,
+   "theorem": "deriv_id",
+   "file": "src/Differentiation.v",
+   "claim": "Производная тождества есть единица. Для функции $w\\mapsto w$ производная в любой точке равна $1$ — это `deriv_id`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:98: forall x, has_derivative (fun w => w) x 1."
+  },
+  {
+   "line": 351,
+   "theorem": "deriv_power_succ",
+   "claim": "Эти два правила — `deriv_const` и `deriv_id` — послужат базой индукции в § 4.4.3, где из них вырастет степенное правило.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Мелочь: в доказательстве deriv_power_succ (Differentiation.v:493–518) база индукции — одна deriv_id, шаг — deriv_product и deriv_id; deriv_const там не применяется. § 4.4.3 главы называет базой именно deriv_id."
+  },
+  {
+   "line": 357,
+   "theorem": null,
+   "file": "src/Differentiation.v",
+   "claim": "Это означает четыре правила, собранные в `SECTION 2` файла `Differentiation.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "SECTION 2: LINEARITY (стр. 108–203 файла): deriv_scale, deriv_neg, deriv_sum, deriv_sub — четыре леммы."
+  },
+  {
+   "line": 360,
+   "theorem": "deriv_scale",
+   "file": "src/Differentiation.v",
+   "claim": "Если $L$ есть производная $f$, то $c\\cdot L$ есть производная функции $w\\mapsto c\\cdot f(w)$ — это `deriv_scale`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:113: has_derivative f x L -> has_derivative (fun w => c * f w) x (c * L)."
+  },
+  {
+   "line": 362,
+   "theorem": "deriv_neg",
+   "claim": "Производная противоположной функции: $(-f)' = -f'$ — это `deriv_neg`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:152: has_derivative f x L -> has_derivative (fun w => - f w) x (- L)."
+  },
+  {
+   "line": 363,
+   "theorem": "deriv_sum",
+   "claim": "Производная суммы: $(f+g)' = f'+g'$ — это `deriv_sum`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:165; в доказательстве eps * (1#2) для каждого слагаемого и Qabs_triangle — как описано на стр. 367–380."
+  },
+  {
+   "line": 364,
+   "theorem": "deriv_sub",
+   "claim": "Производная разности: $(f-g)' = f'-g'$ — это `deriv_sub`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:191: has_derivative (fun w => f w - g w) x (Lf - Lg)."
+  },
+  {
+   "line": 382,
+   "theorem": "deriv_sub",
+   "claim": "Правило разности `deriv_sub` не доказывается заново: оно выводится из `deriv_sum` и `deriv_neg` через экстенсиональные леммы § 4.2.1",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство (:194–203): deriv_neg, deriv_sum, затем has_derivative_ext и has_derivative_eq — как сказано."
+  },
+  {
+   "line": 391,
+   "theorem": "deriv_sum_process",
+   "claim": "`deriv_sum_process` утверждает, что процесс разностных отношений суммы $f+g$ эквивалентен постоянному процессу $L_f+L_g$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:230 — при has_derivative f x Lf и has_derivative g x Lg."
+  },
+  {
+   "line": 393,
+   "theorem": "deriv_scale_process",
+   "claim": "`deriv_scale_process` — что процесс для $c\\cdot f$ эквивалентен постоянному процессу $c\\cdot L$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:242 — при has_derivative f x L."
+  },
+  {
+   "line": 394,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "Оба доказываются единообразно и коротко: применяется мост `deriv_process_converges`, а затем соответствующее правило `deriv_sum` или `deriv_scale` из `Differentiation.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательства (:236–238, :248–250): apply deriv_process_converges; exact (deriv_sum …) и exact (deriv_scale …)."
+  },
+  {
+   "line": 422,
+   "theorem": "deriv_implies_continuous",
+   "claim": "если функция дифференцируема в точке, то она в этой точке непрерывна. В `Differentiation.v` это `deriv_implies_continuous`: из `has_derivative f x L` следует `continuous_at f x`, где `continuous_at` — определение непрерывности через приращение, записанное в самом `Differentiation.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): было «определение непрерывности из § 5.3» — это одноимённое местное, более слабое определение (проколотая окрестность). Мост записан: topo_continuous_implies_punctured; обратно — deriv_implies_topo_continuous при условии, что функция уважает Qeq; без условия неверно (derivative_does_not_give_topo_continuity). Заодно имя has_derivative f x L, разорванное переносом строки, собрано."
+  },
+  {
+   "line": 442,
+   "theorem": "deriv_implies_continuous",
+   "claim": "Берётся $\\delta$ как минимум двух величин: $\\delta$, доставленного критерием производной при $\\varepsilon=1$, и числа $\\varepsilon/(|L|+1)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство (:215–222): delta_d от критерия при eps = 1, delta2 := eps * / (Qabs L + 1), свидетель Qmin delta_d delta2 — как сказано."
+  },
+  {
+   "line": 453,
+   "theorem": "continuous_bounded_near",
+   "claim": "Лемма `continuous_bounded_near` утверждает: непрерывная в точке $x$ функция *ограничена* в некоторой проколотой окрестности $x$ — существуют число $M$ и радиус $\\delta>0$, такие что $|f(x+h)|\\le M$ при $0<|h|<\\delta$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:246; свидетель M = Qabs (f x) + 1 при eps = 1 — как в главе; непрерывность — в смысле Differentiation.v:43."
+  },
+  {
+   "line": 470,
+   "theorem": "deriv_implies_continuous",
+   "claim": "Всякая дифференцируемая функция непрерывна — это `deriv_implies_continuous`. Обратное неверно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Прямая сторона — лемма :210 (непрерывность в смысле Differentiation.v:43). «Обратное неверно» в src не формализовано, и глава это оговаривает (стр. 470–473)."
+  },
+  {
+   "line": 478,
+   "theorem": null,
+   "file": "src/Differentiation.v",
+   "claim": "леммы вида « $|x|$ не дифференцируема в нуле » в `Differentiation.v` нет, и приписывать репозиторию её не следует.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: такой леммы нет ни в Differentiation.v, ни в остальном src (поиск). Утверждение доказуемо без аксиом: forall L, ~ has_derivative Qabs 0 L (abs_no_derivative_at_0, _part05/ch04/Check1.v)."
+  },
+  {
+   "line": 483,
+   "theorem": "deriv_process",
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "у $|x|$ в нуле правые разностные отношения сходятся к $1$, и процесс `deriv_process` был бы процессом Коши, тогда как двусторонней производной нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В src не формализовано (глава подаёт как интуицию). Проверено пробным файлом, без аксиом: process_equiv (deriv_process Qabs 0) (const_process 1) и forall L, ~ has_derivative Qabs 0 L (Check1.v)."
+  },
+  {
+   "line": 495,
+   "theorem": "deriv_square",
+   "file": "src/Differentiation.v",
+   "claim": "для функции $w\\mapsto w\\cdot w$ производная в точке $x$ равна $2x$. В коде это `deriv_square`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:270: has_derivative (fun w => w * w) x (2 * x); свидетель delta = eps, остаток h * h — как в главе."
+  },
+  {
+   "line": 515,
+   "theorem": "deriv_product",
+   "claim": "Если $f$ имеет производную $L_f$, а $g$ — производную $L_g$, то функция $w\\mapsto f(w)\\cdot g(w)$ имеет производную",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:284: has_derivative f x Lf -> has_derivative g x Lg -> has_derivative (fun w => f w * g w) x (Lf * g x + f x * Lg). Разложение на три слагаемых (стр. 523–533 главы) совпадает с Hdecomp (:355–359); оценки по eps * (1#3)."
+  },
+  {
+   "line": 523,
+   "theorem": null,
+   "file": "src/Differentiation.v",
+   "claim": "В `Differentiation.v` это `deriv_product` — самое длинное доказательство файла (`SECTION 4`, около двухсот строк).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): было «около ста пятидесяти строк»; в доказательстве 201 строка."
+  },
+  {
+   "line": 545,
+   "theorem": "continuous_bounded_near",
+   "claim": "чтобы оценить его, множитель $g(x+h)$ нужно ограничить — и здесь работает лемма `continuous_bounded_near` из § 4.3.2",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В доказательстве deriv_product: Hcg := deriv_implies_continuous g x Lg Hg; continuous_bounded_near g x Hcg (:290–291); второе слагаемое — через непрерывность g, третье — через производную g, как сказано."
+  },
+  {
+   "line": 553,
+   "theorem": "deriv_product",
+   "claim": "Это полная теорема, не сеточная и не приближённая версия (предохранитель Части V).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: утверждение :284–286 — точный критерий has_derivative для произведения, без сетки и без ослабления; Print Assumptions: Closed under the global context."
+  },
+  {
+   "line": 555,
+   "theorem": "deriv_product_process",
+   "claim": "`deriv_product_process` в `ProcessDerivative.v` утверждает, что процесс разностных отношений произведения эквивалентен постоянному процессу $L_f g(x)+f(x) L_g$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:254; доказательство — apply deriv_process_converges; exact (deriv_product …), как сказано на стр. 550–553."
+  },
+  {
+   "line": 564,
+   "theorem": "deriv_power_succ",
+   "claim": "для всякого натурального $n$ производная функции $w\\mapsto w^{n+1}$ в точке $x$ равна $(n+1)\\cdot x^n$. В коде это `deriv_power_succ`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:490: has_derivative (fun w => Qpow w (S n)) x (inject_Z (Z.of_nat (S n)) * Qpow x n); индукция по n: база — deriv_id, шаг — deriv_product; как в главе."
+  },
+  {
+   "line": 576,
+   "theorem": "Qpow",
+   "file": "src/SeriesConvergence.v",
+   "claim": "Степень рационального числа — это `Qpow`, рекурсивная функция; она построена не здесь, а раньше по цепочке зависимостей — в файле `SeriesConvergence.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint Qpow (SeriesConvergence.v:35); Differentiation.v импортирует SeriesConvergence (стр. 26). Одноимённые определения есть ещё в семи файлах; используется названное."
+  },
+  {
+   "line": 611,
+   "theorem": "deriv_unique",
+   "claim": "Лемма `deriv_unique` отвечает: нет. Если и $L$, и $L'$ суть производные $f$ в точке $x$, то $L=L'$ (в смысле `Qeq`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:521: has_derivative f x L -> has_derivative f x L' -> L == L'. Доказательство — разбор Qeq_dec, eps = Qabs (L - L') * (1#4), h = Qmin d1 d2 * (1#2), как в главе; классическая логика не применяется."
+  },
+  {
+   "line": 627,
+   "theorem": "deriv_process_unique",
+   "claim": "Процессная форма этого факта — `deriv_process_unique` в `ProcessDerivative.v`: два постоянных процесса, отвечающих двум производным одной функции, эквивалентны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDerivative.v:215: has_derivative f x L1 -> has_derivative f x L2 -> process_equiv (const_process L1) (const_process L2) — это deriv_unique, переписанная для постоянных процессов; описана точно."
+  },
+  {
+   "line": 634,
+   "theorem": "deriv_affine",
+   "claim": "Перед теоремой Ферма — две подготовительные производные из `SECTION 5` файла. Производная аффинной функции $w\\mapsto a\\cdot w + b$ в любой точке равна $a$ — это `deriv_affine`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:582, SECTION 5: APPLICATIONS TO OPTIMIZATION: has_derivative (fun w => a * w + b) x a."
+  },
+  {
+   "line": 638,
+   "theorem": "quadratic_loss_derivative",
+   "claim": "для функции $w\\mapsto (w-w_\\star)^2$ производная в точке $x$ равна $2(x-w_\\star)$ — это `quadratic_loss_derivative`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:594: has_derivative (fun w => (w - wstar) * (w - wstar)) x (2 * (x - wstar))."
+  },
+  {
+   "line": 648,
+   "theorem": "local_min_zero_deriv",
+   "claim": "Если функция $f$ имеет в точке $x$ локальный минимум и дифференцируема в этой точке, то её производная там равна нулю. В коде это `local_min_zero_deriv`: из `local_min f x` и `has_derivative f x L` следует $L=0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:616: local_min f x -> has_derivative f x L -> L == 0; local_min (:50) — есть delta > 0, при Qabs h < delta: f x <= f (x + h). Ход доказательства (eps = |L|/2, шаг влево при L > 0, вправо при L < 0) совпадает с описанным."
+  },
+  {
+   "line": 669,
+   "theorem": "local_min_zero_deriv",
+   "claim": "в финале `Differentiation.v` стоит, среди прочих, `Print Assumptions local_min_zero_deriv` — и именно по этому выводу, а не по заголовку файла, устанавливается фактический аксиомный статус теоремы.",
+   "page_price": "по выводу Print Assumptions (сам вывод не назван)",
+   "verdict": "ok",
+   "note": "Differentiation.v:733 — Print Assumptions local_min_zero_deriv; вывод компилятора: Closed under the global context. Глава результата не называет — его можно вписать."
+  },
+  {
+   "line": 676,
+   "theorem": "gradient_step_uses_derivative",
+   "claim": "Лемма `gradient_step_uses_derivative` связывает шаг градиентного спуска с производной квадратичной потери: первый шаг",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Differentiation.v:609: gd_weight w0 wstar eta 1 == w0 - eta * (2 * (w0 - wstar)) — тождество для первого шага; has_derivative в утверждении не участвует, связь с производной идёт через отдельную лемму quadratic_loss_derivative. Статус леммы глава называет сама (стр. 683–692)."
+  },
+  {
+   "line": 692,
+   "theorem": "gradient_step_uses_derivative",
+   "claim": "`gradient_step_uses_derivative` — не глубокая теорема. Её доказательство — это разворачивание определений `gd_weight`, `gd_error`, `contraction` и тождество `ring`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство (:612): intros. unfold gd_weight, gd_error, contraction. ring. — дословно так; статус назван честно."
+  },
+  {
+   "line": 695,
+   "theorem": "ring",
+   "external": true,
+   "claim": "тождество `ring`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тактика Rocq, не имя формализации."
+  },
+  {
+   "line": 696,
+   "theorem": "gd_weight",
+   "file": "src/GradientDescent.v",
+   "claim": "введённый в `GradientDescent.v` объект `gd_weight` действительно реализует «градиентный шаг» в смысле производной этой главы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "gd_weight w0 wstar eta n := wstar + gd_error (w0 - wstar) eta n (GradientDescent.v:50); gd_error умножает ошибку на contraction eta = 1 - 2 * eta (:40, :43). Определение задано через сжатие ошибки, не через производную; лемма сверяет первый шаг с формулой w0 − eta·2(w0 − wstar)."
+  },
+  {
+   "line": 701,
+   "theorem": null,
+   "file": "src/GradientDescent.v",
+   "claim": "В саму теорию градиентного спуска — сходимость весов, скорость, выбор $\\eta$ — глава не углубляется: это материал `GradientDescent.v` и, возможно, отдельной будущей главы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "GradientDescent.v (18 Qed): gd_weight_converges, gd_loss_converges_zero, gd_convergence_rate, optimal_lr_contraction — всё для квадратичной потери при valid_lr eta (0 < eta < 1)."
+  },
+  {
+   "line": 723,
+   "theorem": "argmax",
+   "external": true,
+   "claim": "та же трудность, что с `argmax` в теореме об экстремуме § 5.3, где пришлось брать индексную версию вместо точки максимума.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слово-понятие, не имя: объявления argmax в формализации нет; в EVT_idx.v — argmax_idx (:93, максимум по индексу сетки), argmax_on_grid (:617), argmax_process (:621)."
+  },
+  {
+   "line": 727,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "Поэтому `MeanValueTheorem.v` не доказывает классическую форму с точкой $c$. Он доказывает её *конструктивные следствия* — те оценки приращения через границы производной, ради которых теорема о среднем обычно и применяется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: утверждения вида «существует c» в файле нет; шапка: «Prove MVT consequences via walk-point telescoping»."
+  },
+  {
+   "line": 737,
+   "theorem": "walk_point",
+   "claim": "с фиксированным шагом $s$. В `MeanValueTheorem.v` это рекурсивная функция:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint walk_point (MeanValueTheorem.v:38); блок кода (стр. 734–738) совпадает с исходником."
+  },
+  {
+   "line": 749,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "Причина — honest-деталь, и она прямо названа в шапке файла.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка, стр. 11–12: «Walk-point Fixpoint ensures Leibniz-exact chaining, avoiding the Q Qeq-vs-Leibniz issue for intermediate f-values»; шаг телескопа в доказательствах — simpl. ring (например :255–258)."
+  },
+  {
+   "line": 756,
+   "theorem": "walk_point_qeq",
+   "claim": "Лемма `walk_point_qeq` отдельно доказывает, что walk-точка `Qeq`-равна $x+n\\cdot s$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:59: walk_point x s n == x + inject_Z (Z.of_nat n) * s."
+  },
+  {
+   "line": 758,
+   "theorem": "walk_point_in_interval",
+   "claim": "`walk_point_in_interval` — что при шаге $(b-a)/(N+1)$ все точки остаются в отрезке $[a,b]$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:72: при a < b и k <= S N: a <= walk_point a step k <= b, step = (b - a)/(N+1) — все точки сетки с номерами до N+1 включительно."
+  },
+  {
+   "line": 761,
+   "theorem": "udiff_on",
+   "claim": "Здесь же файл вводит *равномерную дифференцируемость* на отрезке — усиление поточечного критерия:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition udiff_on (MeanValueTheorem.v:46); блок кода (стр. 758–764) совпадает с исходником; один delta на все x из [a, b]; в определение входит a < b."
+  },
+  {
+   "line": 785,
+   "theorem": "walk_step_pos",
+   "claim": "Лемма `walk_step_pos` устанавливает, что шаг $(b-a)/(N+1)$ положителен",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:115: a < b -> 0 < (b - a) / inject_Z (Z.of_nat (S N))."
+  },
+  {
+   "line": 786,
+   "theorem": "walk_step_small",
+   "claim": "`walk_step_small` — что для всякого $\\delta>0$ найдётся такое число делений $N$, при котором этот шаг меньше $\\delta$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:125: a < b -> 0 < delta -> exists N, (b - a) / inject_Z (Z.of_nat (S N)) < delta."
+  },
+  {
+   "line": 790,
+   "theorem": "Archimedean_nat",
+   "file": "src/EVT_idx.v",
+   "claim": "Доказательство `walk_step_small` опирается на архимедово свойство. В самом `MeanValueTheorem.v` используется лемма с именем `Archimedean_nat`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walk_step_small (:131) применяет Archimedean_nat — теорему, объявленную в EVT_idx.v:355 (MeanValueTheorem.v её импортирует, сам не объявляет; одноимённая есть в EVT_ERR.v:479). Print Assumptions Archimedean_nat: Closed under the global context — локальная аксиома classic из EVT_idx.v в неё не входит."
+  },
+  {
+   "line": 803,
+   "theorem": "bounded_deriv_bounded_increment",
+   "claim": "Главная теорема файла — `bounded_deriv_bounded_increment`. Если на отрезке $[a,b]$ функция равномерно дифференцируема и её производная ограничена по модулю числом $M$, то полное приращение функции от $a$ до конца сетки оценивается так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:218: udiff_on f f' a b -> (forall x, a <= x -> x <= b -> Qabs (f' x) <= M) -> 0 < eps -> exists N, Qabs (f (walk_point a step (S N)) - f a) <= (M + eps) * (b - a), step = (b - a)/(N+1). Число делений N существует для каждого eps и от него зависит; оценка — для конца именно этой сетки (на странице квантор по N не назван)."
+  },
+  {
+   "line": 816,
+   "theorem": "bounded_deriv_bounded_increment",
+   "claim": "Каждый шаг оценивается равномерной дифференцируемостью: приращение на одном шаге не больше $(M+\\varepsilon/2)$, помноженного на длину шага.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство: delta от udiff_on при eps * (1#2); индукция Hmain по k: Qabs (f (walk_point a step k) - f a) <= k * (M + eps/2) * step (:242–309); при k = N+1 — (M + eps/2)(b − a) <= (M + eps)(b − a). Совпадает."
+  },
+  {
+   "line": 825,
+   "theorem": "bounded_deriv_bounded_increment",
+   "claim": "Это *не* классическая теорема о среднем с точкой $c$. Это сеточное *следствие* теоремы о среднем: оценка полного приращения через верхнюю границу производной.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; Print Assumptions: Closed under the global context."
+  },
+  {
+   "line": 828,
+   "theorem": "walk_endpoint_qeq",
+   "claim": "Картину замыкает лемма `walk_endpoint_qeq` — конец walk-цепочки при шаге $(b-a)/(N+1)$ `Qeq`-равен правому концу $b$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:646: a < b -> walk_point a ((b - a)/(N+1)) (S N) == b. Равенство — Qeq, не лейбницево: значения f в конце сетки и в точке b в файле не связаны (f : Q -> Q не обязана уважать Qeq)."
+  },
+  {
+   "line": 846,
+   "theorem": "zero_deriv_near_constant",
+   "claim": "В коде это `zero_deriv_near_constant` — прямое следствие § 4.6.4 при $M=0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:331: udiff_on f f' a b -> (forall x из [a,b], f' x == 0) -> 0 < eps -> exists N, Qabs (f (walk_point a step (S N)) - f a) <= eps * (b - a); доказательство — bounded_deriv_bounded_increment при M = 0 (:347)."
+  },
+  {
+   "line": 851,
+   "theorem": "zero_deriv_constant",
+   "claim": "Полная форма — « $f$ постоянна на всём отрезке » — доказана отдельной теоремой `zero_deriv_constant`: если производная равна нулю на отрезке, то $f(x)=f(y)$ для любых $x,y$ из него.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): было — глава честно писала, что полная форма не доказывается. Добавлена zero_deriv_constant : udiff_on f f' a b -> (f' x == 0 на отрезке) -> forall x y из отрезка, f x == f y. Closed under the global context.",
+   "file": "src/MeanValueTheorem.v"
+  },
+  {
+   "line": 865,
+   "theorem": "pos_deriv_increases",
+   "claim": "Лемма `pos_deriv_increases`: если на отрезке производная отделена снизу положительным числом $c$, то функция на сетке выросла — приращение $f(\\text{walk-конец})-f(a)$ строго положительно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:352: udiff_on f f' a b -> (forall x из [a,b], c <= f' x) -> 0 < c -> exists N, 0 < f (walk_point a step (S N)) - f a. Условие равномерной дифференцируемости во фразе не повторено (оно общее для § 4.6–4.7). Утверждение — о приращении между a и концом сетки, не о всех парах точек отрезка."
+  },
+  {
+   "line": 868,
+   "theorem": "neg_deriv_decreases",
+   "claim": "Двойственная лемма `neg_deriv_decreases`: если производная отделена сверху отрицательным числом, функция убыла.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:456: f' x <= - c на [a,b] при 0 < c -> exists N, f (walk_point a step (S N)) - f a < 0."
+  },
+  {
+   "line": 881,
+   "theorem": "bounded_deriv_lipschitz_local",
+   "claim": "Третье следствие — липшицевость. Лемма `bounded_deriv_lipschitz_local` даёт локальную оценку: вблизи точки $|f(x+h)-f(x)| \\le (|L|+1)\\cdot|h|$ — приращение функции пропорционально шагу с постоянным коэффициентом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): локальная лемма описана верно; рядом теперь названа теорема для всего отрезка. Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (|f'| <= M на отрезке) -> forall x y из отрезка, |f y - f x| <= M * |y - x|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context."
+  },
+  {
+   "line": 888,
+   "theorem": "nonneg_deriv_approx_nondec",
+   "claim": "Лемма `nonneg_deriv_approx_nondec` утверждает, что неотрицательная производная делает функцию приближённо неубывающей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:558: udiff_on, 0 <= f' x на [a,b], 0 < eps -> exists N, -(eps * (b - a)) <= f (walk_point a step (S N)) - f a — сеточная eps-форма: приращение между a и концом сетки не меньше −eps·(b − a)."
+  },
+  {
+   "line": 890,
+   "theorem": "udiff_continuous_at",
+   "claim": "Лемма `udiff_continuous_at` замыкает связь с § 4.3: равномерная дифференцируемость влечёт непрерывность в каждой точке отрезка",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:548: udiff_on f f' a b -> a <= x -> x <= b -> continuous_at f x; доказательство — deriv_implies_continuous и udiff_pointwise, как сказано. Непрерывность — в смысле Differentiation.v:43."
+  },
+  {
+   "line": 893,
+   "theorem": "udiff_pointwise",
+   "claim": "через `udiff_pointwise` (равномерная дифференцируемость даёт поточечную) и `deriv_implies_continuous` из § 4.3.1.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:145: udiff_on f f' a b -> a <= x -> x <= b -> has_derivative f x (f' x)."
+  },
+  {
+   "line": 896,
+   "theorem": "bounded_deriv_Lipschitz_on",
+   "claim": "В § 5.3 липшицевость вводилась *как условие* — конструктивная замена равномерной непрерывности, которую над $ℚ$ нельзя получить даром. Теперь липшицевость *выводится* — из ограниченной производной.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора) — слова те же («теперь липшицевость выводится — из ограниченной производной»), доведена формализация. Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (|f'| <= M на отрезке) -> forall x y из отрезка, |f y - f x| <= M * |y - x|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context.",
+   "file": "src/MeanValueTheorem.v"
+  },
+  {
+   "line": 908,
+   "theorem": "affine_udiff",
+   "claim": "Лемма `affine_udiff` устанавливает, что аффинная функция равномерно дифференцируема на любом отрезке;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:665: a < b -> udiff_on (fun w => c * w + d) (fun _ => c) a b."
+  },
+  {
+   "line": 910,
+   "theorem": "quadratic_udiff",
+   "claim": "`quadratic_udiff` — то же для квадрата.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:680: a < b -> udiff_on (fun w => w * w) (fun w => 2 * w) a b; свидетель delta = eps."
+  },
+  {
+   "line": 911,
+   "theorem": "mvt_quadratic_midpoint",
+   "claim": "А лемма `mvt_quadratic_midpoint` даёт для квадрата *точное* равенство теоремы о среднем:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:697: forall a b, 2 * ((a + b) * (1#2)) * (b - a) == b * b - a * a — формула страницы совпадает. Это алгебраическое тождество (доказательство — ring); в утверждении нет ни функции, ни производной, ни условия, что середина лежит внутри отрезка. Чтение «точка c — середина» верно в соединении с deriv_square; единое утверждение с точкой и производной проверено пробным файлом (mvt_quadratic_exact, Check1.v)."
+  },
+  {
+   "line": 923,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "`MeanValueTheorem.v` заканчивается на лемме `mvt_quadratic_midpoint` — без финального блока `Check` и `Print Assumptions`, который есть, например, в `Differentiation.v`. Это *не* признак незавершённости доказательств: все восемнадцать лемм файла закрыты `Qed`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Счёт верен: 18 Lemma, 18 Qed, 0 Admitted; последняя строка файла (701) — Qed леммы mvt_quadratic_midpoint; блока Check и Print Assumptions нет. В Differentiation.v такой блок есть (:712–734)."
+  },
+  {
+   "line": 942,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "производная как *процесс* разностных отношений `deriv_process` с безопасным ненулевым шагом $h_n=1/(n+1)$; мост `deriv_process_converges` между критерием и процессом; `deriv_process_cauchy`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все три объявления существуют (ProcessDerivative.v:62, :152, :205); допущений нет."
+  },
+  {
+   "line": 943,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "линейность дифференцирования (скаляр, противоположность, сумма, разность) — в форме критерия и в процессной форме (`deriv_sum_process`, `deriv_scale_process`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В форме критерия — четыре правила (Differentiation.v, SECTION 2); в процессной форме — два из четырёх, сумма и скалярное кратное, как и указано в скобках."
+  },
+  {
+   "line": 948,
+   "theorem": "bounded_deriv_bounded_increment",
+   "claim": "`bounded_deriv_bounded_increment` — сеточное следствие теоремы о среднем — и монотонность с липшицевостью как дальнейшие следствия; точные формы на всём отрезке — `zero_deriv_constant`, `pos_deriv_strictly_increasing`, `bounded_deriv_lipschitz`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): к итогу добавлены три точные теоремы шага 11."
+  },
+  {
+   "line": 952,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "классическая теорема о среднем с точкой $c$ — доказаны только сеточные следствия, и это сознательный выбор;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно. Над ℚ классическая форма в общем случае неверна (для w ↦ w³ на [0, 1] точка c = 1/√3 иррациональна), так что её отсутствие — не пробел формализации."
+  },
+  {
+   "line": 954,
+   "theorem": null,
+   "claim": "производные высших порядков и ряд Тейлора — за пределами опорных файлов;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно для трёх опорных файлов. В src вне главы есть TaylorSeries.v (формулы первого порядка на udiff_on) и stdlib/Hessian.v (has_second_deriv)."
+  },
+  {
+   "line": 955,
+   "theorem": null,
+   "file": "src/Differentiation.v",
+   "claim": "цепное правило для композиции — в `Differentiation.v` его нет;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно. В остальном src общего цепного правила для has_derivative тоже нет; есть частный случай udiff_chain_affine (analysis/FTC.v:370, внутренняя функция аффинна) и fps_chain_rule для формальных степенных рядов (FormalPowerSeries.v:641)."
+  },
+  {
+   "line": 956,
+   "theorem": null,
+   "claim": "правило Лопиталя — вынесено за пределы главы; отдельный файл для него в репозитории есть",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "src/analysis/LHopital.v существует."
+  },
+  {
+   "line": 961,
+   "theorem": null,
+   "file": "src/GradientDescent.v",
+   "claim": "градиентный спуск как приложение — мост к нему намечен в § 4.5.4, полная теория содержится в `GradientDescent.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "GradientDescent.v озаглавлен «GRADIENT DESCENT CONVERGENCE FOR QUADRATIC LOSS»: сходимость весов и потерь для одной модели — квадратичной потери с множителем сжатия 1 − 2·eta. «Полная теория» верна в этих пределах."
+  },
+  {
+   "line": 974,
+   "theorem": null,
+   "claim": "Ни того ни другого в опорных файлах нет; это честная граница главы, очерченная конкретно, а не общими словами.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: has_derivative используется в пяти файлах src (Differentiation, MeanValueTheorem, process/ProcessDerivative, process/ProcessFTC, stdlib/Hessian), всюду для f : Q -> Q; производной для функций на CauchySeq / RealPoint в src нет."
+  },
+  {
+   "line": 980,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "Все три опорных файла — `Differentiation.v`, `ProcessDerivative.v`, `MeanValueTheorem.v` — в своих шапках заявляют статус « AXIOMS: none » (`ProcessDerivative.v` — « 0 axioms, 17 Qed »).",
+   "page_price": "шапки файлов: AXIOMS: none",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора): число приведено к файлу (17 Qed)."
+  },
+  {
+   "line": 984,
+   "theorem": null,
+   "file": "src/MonotoneConvergence.v",
+   "claim": "Однако все они импортируют файлы, через которые проходит классический слой: `Differentiation.v` опирается на `SeriesConvergence.v` и `GradientDescent.v`, а те — на `MonotoneConvergence.v`, несущий аксиому `classic`; `ProcessDerivative.v` опирается на `Differentiation.v`.",
+   "page_price": "импорты проходят через файлы с classic; о самих теоремах не утверждается",
+   "verdict": "ok",
+   "note": "Импорты верны: Differentiation.v:26–27; SeriesConvergence.v:27 и GradientDescent.v:26 импортируют MonotoneConvergence; тот получает classic из стандартной библиотеки через ToS_Axioms (своего объявления Axiom в файле нет; пример зависимости — mct_inc_least: Classical_Prop.classic). У ProcessDerivative.v есть и второй путь: ProcessArithmetic.v:22 импортирует Stdlib Classical. Ни одна теорема трёх опорных файлов classic не использует: Closed under the global context у всех 53."
+  },
+  {
+   "line": 989,
+   "theorem": null,
+   "file": "src/EVT_idx.v",
+   "claim": "Кроме того, `MeanValueTheorem.v` импортирует `EVT_idx.v` (этот файл разбирался в § 5.3; его теоремы допущений не имеют).",
+   "page_price": "теоремы EVT_idx.v — без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «в EVT_idx.v аксиома classic объявлена локально»; объявление снято; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context"
+  },
+  {
+   "line": 991,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "Импорт классического слоя не значит, что каждая теорема о среднем зависит от `classic` — значит лишь, что для конкретной теоремы нужно смотреть `Print Assumptions`.",
+   "page_price": "зависимость от classic не утверждается и не отрицается; отсылка к Print Assumptions",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): начало фразы изменено вслед за предыдущей; все 18 утверждений MeanValueTheorem.v — Closed under the global context"
+  },
+  {
+   "line": 1002,
+   "theorem": null,
+   "file": "src/Differentiation.v",
+   "claim": "В финале `Differentiation.v` такая проверка выписана для ключевых теорем — `deriv_product`, `deriv_power_succ`, `local_min_zero_deriv`, `gradient_step_uses_derivative`, — и именно эти выводы дают фактическую картину.",
+   "page_price": "по выводам Print Assumptions (сами выводы не названы)",
+   "verdict": "ok",
+   "note": "Differentiation.v:731–734 — четыре команды Print Assumptions для названных теорем; вывод каждой: Closed under the global context."
+  },
+  {
+   "line": 1007,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "У `MeanValueTheorem.v` и `ProcessDerivative.v` финального блока `Print Assumptions` нет; для нужной теоремы его следует запускать отдельно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: команд Print Assumptions в обоих файлах нет. Запущено при аудите для всех 35 утверждений двух файлов: Closed under the global context."
+  },
+  {
+   "line": 1012,
+   "theorem": "partial_sum_tail",
+   "file": "src/SeriesConvergence.v",
+   "claim": "лемма `partial_sum_tail` в `SeriesConvergence.v` оставлена незавершённой через `Abort` (с авторским комментарием, что прямая формулировка телескопа неудобна и свойство Коши доказывается иначе)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "SeriesConvergence.v:313–320: объявление начато и снято командой Abort; комментарий: «This is tricky to state cleanly. Instead, prove the Cauchy property directly.» В окружении имени нет (Print Assumptions: reference not found); на счёт Qed файла (22) не влияет."
+  },
+  {
+   "line": 1016,
+   "theorem": "mct_inc_least",
+   "file": "src/MonotoneConvergence.v",
+   "claim": "доказательство `mct_inc_least` в `MonotoneConvergence.v` содержит `Restart` — первая попытка доказательства брошена и заменена второй.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MonotoneConvergence.v:230; Restart на стр. 306, лемма закрыта Qed. Print Assumptions mct_inc_least: Classical_Prop.classic. На теоремы главы не влияет — верно."
+  },
+  {
+   "line": 1017,
+   "theorem": "Restart",
+   "external": true,
+   "claim": "`MonotoneConvergence.v` содержит `Restart`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Команда Rocq, не имя формализации."
+  },
+  {
+   "line": 1037,
+   "theorem": "bounded_deriv_lipschitz",
+   "claim": "сеточная теорема о среднем и её следствия — монотонность и липшицевость.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 11, слово автора) — слова те же, доведена формализация. Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (|f'| <= M на отрезке) -> forall x y из отрезка, |f y - f x| <= M * |y - x|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context.",
+   "file": "src/MeanValueTheorem.v"
+  },
+  {
+   "line": 1050,
+   "theorem": null,
+   "file": "src/process/ProcessDerivative.v",
+   "claim": "E/R/R-разметка в шапке файла `ProcessDerivative.v`; здесь разворачивается по образцу Части I.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessDerivative.v, стр. 2–4 и 17–20 — разметка Elements / Roles / Rules есть."
+  },
+  {
+   "line": 855,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 11: x == x' -> continuous_at f x -> continuous_at f x' -> f x == f x' (непрерывность — в смысле Differentiation.v). Closed under the global context.",
+   "theorem": "continuous_at_qeq_values",
+   "file": "src/MeanValueTheorem.v",
+   "claim": "функция, непрерывная в двух равных как числа точках, принимает в них равные значения (`continuous_at_qeq_values`)"
+  },
+  {
+   "line": 874,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 11: udiff_on f f' a b -> (c <= f' x на отрезке) -> 0 < c -> forall x < y из отрезка, f x < f y. Closed under the global context.",
+   "theorem": "pos_deriv_strictly_increasing",
+   "file": "src/MeanValueTheorem.v",
+   "claim": "Точную форму даёт теорема `pos_deriv_strictly_increasing`: если производная отделена снизу положительным числом, то $f(x)<f(y)$ для любых $x<y$ из отрезка."
+  },
+  {
+   "line": 884,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 11. Closed under the global context.",
+   "theorem": "bounded_deriv_lipschitz",
+   "file": "src/MeanValueTheorem.v",
+   "claim": "На всём отрезке липшицевость даёт теорема `bounded_deriv_lipschitz`: при равномерной дифференцируемости и $|f'|\\le M$ на $[a,b]$ имеем $|f(y)-f(x)|\\le M\\,|y-x|$ для любых двух точек отрезка"
+  },
+  {
+   "line": 887,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новое следствие шага 11: 0 < M -> udiff_on f f' a b -> (|f'| <= M на отрезке) -> Continuity.Lipschitz_on f a b M. Closed under the global context.",
+   "theorem": "bounded_deriv_Lipschitz_on",
+   "file": "src/MeanValueTheorem.v",
+   "claim": "в терминах § 5.3 это `bounded_deriv_Lipschitz_on`."
+  },
+  {
+   "line": 429,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 11: Topology.continuous_at f x -> continuous_at f x. Closed under the global context.",
+   "theorem": "topo_continuous_implies_punctured",
+   "file": "src/Differentiation.v",
+   "claim": "из него местное следует (`topo_continuous_implies_punctured`)"
+  },
+  {
+   "line": 430,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 11: (forall u v, u == v -> f u == f v) -> has_derivative f x L -> Topology.continuous_at f x. Closed under the global context.",
+   "theorem": "deriv_implies_topo_continuous",
+   "file": "src/Differentiation.v",
+   "claim": "а обратно — только для функции, уважающей равенство рациональных (`deriv_implies_topo_continuous`)"
+  },
+  {
+   "line": 432,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 11: exists f x L, has_derivative f x L /\\ ~ Topology.continuous_at f x; свидетель — rep_fn (различает записи одного числа), точка 2#2, производная 0. Closed under the global context.",
+   "theorem": "derivative_does_not_give_topo_continuity",
+   "file": "src/Differentiation.v",
+   "claim": "без этого условия переход неверен, и контрпример проверен (`derivative_does_not_give_topo_continuity`)."
+  }
+ ]
+}

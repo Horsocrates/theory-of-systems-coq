@@ -1,0 +1,1174 @@
+{
+ "batch": "audit-part-05",
+ "chapter": "05 Топология и анализ процессов/02 Топология и компактность.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 30,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "Этот слой над $ℚ$ строится *полностью и конструктивно*. Опорные файлы топологического слоя — `Topology.v`, `ProcessTopOpen.v`, `ProcessTopConnected.v` — не используют ни одной аксиомы.",
+   "page_price": "ни одной аксиомы",
+   "verdict": "ok",
+   "note": "По компилятору все объявления трёх файлов — Closed under the global context: Topology.v (27 объявлений, 19 Qed), ProcessTopOpen.v (21 объявление, 14 Qed), ProcessTopConnected.v (20 объявлений, 16 Qed). Имя третьего файла на странице разорвано переносом строки — отдельная запись."
+  },
+  {
+   "line": 33,
+   "theorem": null,
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "`ProcessTopConnected.v` — не используют ни одной аксиомы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): имя файла было разорвано переносом строки («ProcessTop Connected.v»); собрано на одной строке."
+  },
+  {
+   "line": 42,
+   "theorem": null,
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "Из файлов компактностного слоя `BolzanoWeierstrass.v` опирается на $L3$ и локально на $L4$; восстановленная теорема Гейне–Бореля в `HeineBorel_ERR.v` доказана без допущений (§ 2.5).",
+   "page_price": "Больцано–Вейерштрасс — L3 и локально L4; Гейне–Борель — без допущений",
+   "verdict": "ok",
+   "note": "bolzano_weierstrass: classic и L4_witness; Heine_Borel, Heine_Borel_uniform: Closed. L4 входит в одном месте (L3_informative внутри bw_step, BolzanoWeierstrass.v:103), но наследуется 24 объявлениями файла из 34, включая главную теорему. «Без допущений» — об аксиомах; посылка теоремы (равномерность покрытия) названа в § 2.5."
+  },
+  {
+   "line": 59,
+   "theorem": null,
+   "file": "src/ToS_Axioms.v",
+   "claim": "речь идёт о вполне определённых объектах из файла `ToS_Axioms.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В самом файле объявлена одна аксиома — L4_witness (ToS_Axioms.v:105); classic — аксиома стандартной библиотеки, файл её реэкспортирует (строка 31: Require Export Coq.Logic.Classical_Prop). Оба имени доступны через этот файл."
+  },
+  {
+   "line": 63,
+   "theorem": "classic",
+   "file": "src/ToS_Axioms.v",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Аксиома `classic` — это $L3$, закон исключённого третьего, в той форме, в какой его принимает Rocq.",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Classical_Prop.classic : forall P : Prop, P \\/ ~ P — стандартная библиотека; ToS_Axioms.v:31 реэкспортирует. В выводе компилятора у теорем главы стоит именно она."
+  },
+  {
+   "line": 65,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Аксиома `L4_witness` — это $L4$, закон достаточного основания.",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x} — ToS_Axioms.v:105."
+  },
+  {
+   "line": 99,
+   "theorem": null,
+   "claim": "Опорных файлов одиннадцать — семь основных и четыре процессные обёртки и сводки; к ним — файл аксиом `ToS_Axioms.v` и файл контрпримера `QIntervalNotCompact.v`, на который опирается сноска 2; все сверены с репозиторием дословно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «шесть основных и пять вспомогательных process-обёрток» при двенадцати названных файлах. Основные: Topology, ProcessTopOpen, ProcessTopConnected, RealPointTopology, HeineBorel_ERR, HeineBorelComplete, BolzanoWeierstrass; обёртки и сводки: ProcessBW, ProcessTopCompact, ProcessTopUnified, ProcessCompactness."
+  },
+  {
+   "line": 103,
+   "theorem": null,
+   "claim": "Топологический слой — без аксиом; компактностный — с явно учтёнными $L3$ и $L4$.",
+   "page_price": "топологический слой — без аксиом; компактностный — L3 и L4",
+   "verdict": "ok",
+   "note": "Сходится с компилятором: Topology.v, ProcessTopOpen.v, ProcessTopConnected.v — все объявления Closed; в компактностных файлах classic у not_coverable_half, mono_bounded_is_cauchy, infinite_pigeonhole и теорем о нётеровости, classic и L4_witness — у бисекции Больцано–Вейерштрасса."
+  },
+  {
+   "line": 114,
+   "theorem": "open_ball",
+   "file": "src/stdlib/Topology.v",
+   "claim": "В Rocq это записано в файле `Topology.v` так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 116–117) совпадает с Topology.v:29: Qabs (x - center) < radius."
+  },
+  {
+   "line": 122,
+   "theorem": "center",
+   "external": true,
+   "claim": "Точка $x$ лежит в шаре с центром `center`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "не объявление, а имя связанной переменной в определении open_ball (Topology.v:29)"
+  },
+  {
+   "line": 123,
+   "theorem": "radius",
+   "external": true,
+   "claim": "`radius`, если расстояние от $x$ до центра строго меньше радиуса",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "не объявление, а имя связанной переменной в определении open_ball (Topology.v:29)"
+  },
+  {
+   "line": 127,
+   "theorem": "is_open",
+   "file": "src/stdlib/Topology.v",
+   "claim": "Множество назовём открытым, если у каждой его точки есть *запас свободного пространства*: шар, целиком лежащий внутри множества.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 132–134) совпадает с Topology.v:33; словесное чтение соответствует кванторам."
+  },
+  {
+   "line": 143,
+   "theorem": "is_closed",
+   "file": "src/stdlib/Topology.v",
+   "claim": "*Замкнутое* множество мы определяем через открытое — как дополнение к открытому: $S$ замкнуто, если множество точек *вне* $S$ открыто.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 146–147) совпадает с Topology.v:37: is_open (fun x => ~ S x)."
+  },
+  {
+   "line": 152,
+   "theorem": "is_bounded",
+   "file": "src/stdlib/Topology.v",
+   "claim": "И, наконец, *ограниченным* мы называем множество, целиком умещающееся в некоторый шар вокруг нуля.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:41: exists M, 0 < M /\\ forall x, S x -> Qabs x < M."
+  },
+  {
+   "line": 157,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "На этих определениях мы строим весь базовый аппарат точечно-множественной топологии над $ℚ$ — и строим конструктивно, ни разу не прибегая к аксиоме. Девятнадцать лемм `Topology.v` подтверждают каждый шаг; перечислим главные.",
+   "page_price": "ни разу не прибегая к аксиоме",
+   "verdict": "ok",
+   "note": "В файле 19 Qed: 18 нумерованных лемм и вспомогательная qabs_lt_of_bounds (:255). Все 27 объявлений — Closed under the global context."
+  },
+  {
+   "line": 162,
+   "theorem": "open_ball_is_open",
+   "claim": "Открытый шар сам есть открытое множество: у всякой его внутренней точки $y$ есть запас свободного пространства — шар радиуса $r - |y-c|$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:76: forall c r, 0 < r -> is_open (open_ball c r); в доказательстве радиус r - Qabs (x - c) и неравенство треугольника — как в главе."
+  },
+  {
+   "line": 167,
+   "theorem": "full_is_open",
+   "claim": "*Пустое и полное множества открыты.* Два вырожденных, но необходимых случая",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:105: is_open (fun _ => True)."
+  },
+  {
+   "line": 168,
+   "theorem": "empty_is_open",
+   "claim": "и пустое множество, и всё $ℚ$ открыты (`empty_is_open`, `full_is_open`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:98: is_open (fun _ => False)."
+  },
+  {
+   "line": 171,
+   "theorem": "union_two_open",
+   "claim": "*Объединение и пересечение двух открытых открыты.* Топология замкнута относительно двух базовых операций над множествами",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:114: is_open S1 -> is_open S2 -> is_open (fun x => S1 x \\/ S2 x). Речь о двух множествах; о произвольных объединениях лемм нет — глава их и не называет."
+  },
+  {
+   "line": 172,
+   "theorem": "intersection_two_open",
+   "claim": "для пересечения запас свободного пространства берётся как меньший из двух запасов. Это `union_two_open` и `intersection_two_open`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:128; в доказательстве Qmin eps1 eps2 — меньший из двух запасов, как в главе."
+  },
+  {
+   "line": 177,
+   "theorem": "interval_open",
+   "claim": "Открытый интервал $(a,b)$ есть открытое множество, замкнутый интервал $[a,b]$ — замкнутое (`interval_open`, `closed_interval_closed`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:284: a < b -> is_open (open_interval a b)."
+  },
+  {
+   "line": 179,
+   "theorem": "closed_interval_closed",
+   "claim": "Эти два факта — опора всей будущей теории компактности: компактным окажется именно *замкнутый* интервал.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:298: a <= b -> is_closed (closed_interval a b). В файлах компактности эти две леммы не используются (HeineBorel_ERR.v Topology.v не подключает); «опора» — по смыслу, не по импорту."
+  },
+  {
+   "line": 185,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "тождество и постоянная непрерывны, сдвиг $x \\mapsto x+c$ непрерывен, сумма, отрицание и композиция непрерывных функций непрерывны",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "identity_continuous (:190), constant_continuous (:199), add_const_continuous (:224) — для continuous; сумма, отрицание, композиция доказаны в поточечной форме: continuous_at_sum (:346), continuous_at_neg (:373), continuous_at_comp (:210). Глобальная форма из поточечной следует сразу."
+  },
+  {
+   "line": 188,
+   "theorem": "continuous_preserves_open_preimage",
+   "claim": "`continuous_preserves_open_preimage`: прообраз открытого множества под непрерывным отображением открыт. Вместе с обратной стороной (`continuous_iff_open_preimage`) это топологическое *определение* непрерывности в эквивалентной форме",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было «в эквивалентной форме» при одной доказанной стороне. Добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))). Closed under the global context."
+  },
+  {
+   "line": 198,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "Открытое множество здесь есть предикат `Q -> Prop` — подмножество $ℚ$; непрерывность — свойство функций $ℚ \\to ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "is_open (S : Q -> Prop), continuous (f : Q -> Q) — Topology.v:33, :50."
+  },
+  {
+   "line": 205,
+   "theorem": "rp_in_ball",
+   "file": "src/RealPointTopology.v",
+   "claim": "там определён шар на классах `rp_in_ball` — замкнутый, расстояние до центра не больше радиуса (центр — точка, радиус — рациональное)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «открытый шар» — rp_in_ball c r x := cauchy_le (rp_dist c x) (cauchy_const r), шар замкнутый (rp_in_ball_contains_boundary: точка на расстоянии ровно 1 принадлежит шару радиуса 1). Открытый шар добавлен отдельно — rp_in_open_ball."
+  },
+  {
+   "line": 207,
+   "theorem": "rp_in_ball_well_defined",
+   "claim": "доказана его *корректность* на классах (`rp_in_ball_well_defined`: принадлежность шару не зависит от выбора представителя)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointTopology.v:79: x ~~ x' -> (rp_in_ball c r x <-> rp_in_ball c r x'). Независимость от представителя центра отдельной леммой не записана; следует из rp_dist_Proper и cauchy_le_Proper."
+  },
+  {
+   "line": 210,
+   "theorem": "rp_in_ball_centre",
+   "claim": "а также `rp_in_ball_centre` (центр лежит в своём шаре)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointTopology.v:87: 0 < r -> rp_in_ball c r c."
+  },
+  {
+   "line": 214,
+   "theorem": null,
+   "file": "src/RealPointTopology.v",
+   "claim": "Полная же теория открытых и замкнутых множеств на классах — ещё не перенесена.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: rp_in_ball встречается только в RealPointTopology.v; открытых и замкнутых множеств на RealPoint в src нет (поиск). В файле 4 Qed, все 5 объявлений Closed."
+  },
+  {
+   "line": 221,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "И заметим главное о топологическом слое: `Topology.v` — девятнадцать лемм, *ноль аксиом*.",
+   "page_price": "ноль аксиом",
+   "verdict": "ok",
+   "note": "19 Qed; все 27 объявлений файла Closed under the global context."
+  },
+  {
+   "line": 233,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "*элементы — точки, подмножества, шары; роли — точка как позиция, шар как окрестность, множество как область; правила — открытость и непрерывность как конституции*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка Topology.v, строки 5–8. В шапке среди элементов четвёртыми названы «functions Q -> Q» — в пересказе главы их нет; сноска 1 зовёт разметку дословной, на деле это перевод с одним пропуском."
+  },
+  {
+   "line": 259,
+   "theorem": null,
+   "claim": "Больцано–Вейерштрасс привлекает $L3$ и $L4$, а восстановленный Гейне–Борель обходится без допущений.",
+   "page_price": "Больцано–Вейерштрасс — L3 и L4; Гейне–Борель — без допущений",
+   "verdict": "ok",
+   "note": "bolzano_weierstrass: classic и L4_witness; Heine_Borel, Heine_Borel_uniform: Closed under the global context."
+  },
+  {
+   "line": 282,
+   "theorem": "cover_frame_bounded",
+   "claim": "всякий его кадр конечен и обозрим (кадр — конечный список и потому покрывает лишь ограниченное множество: лемма `cover_frame_bounded`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было «(лемма p4_cover_finite)» — та лемма («список пуст или имеет голову») верна для любого списка. Названа новая cover_frame_bounded : forall bc : QBallCover, exists M, 0 < M /\\ forall x, covered_by_balls bc x -> Qabs x < M. Closed under the global context.",
+   "file": "src/process/ProcessTopOpen.v"
+  },
+  {
+   "line": 294,
+   "theorem": null,
+   "claim": "| конечное подпокрытие, терминация | компактность | Rule (Гейне–Борель — без допущений; Больцано–Вейерштрасс — $L3$/$L4$) |",
+   "page_price": "Гейне–Борель — без допущений; Больцано–Вейерштрасс — L3/L4",
+   "verdict": "ok",
+   "note": "Сходится с компилятором (Heine_Borel*: Closed; bolzano_weierstrass: classic и L4_witness)."
+  },
+  {
+   "line": 344,
+   "theorem": "in_ball_shrink",
+   "claim": "`in_ball_shrink` — если точка внутри шара, вокруг неё помещается меньший шар (снова неравенство треугольника)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopOpen.v:64: in_ball c r x -> Qabs (y - x) < r - Qabs (x - c) -> in_ball c r y. Центр в своём шаре — in_ball_center (:41)."
+  },
+  {
+   "line": 347,
+   "theorem": "ball_is_open",
+   "claim": "Над шаром — открытое множество в процессной форме, `is_open_process`, и тот же набор лемм, что в § 2.2, только на процессном языке: пустое и полное множества открыты, шар открыт (`ball_is_open`), объединение и пересечение открытых открыты, открытый интервал открыт.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "empty_open (:90), full_open (:94), ball_is_open (:100), union_open (:115), intersection_open (:129), open_interval_open (:146). Само определение is_open_process — тот же предикат, что is_open из Topology.v (проверено: is_open_process S <-> is_open S); процессного в нём нет, процессную идею несут QBallCover и OpenProcess, как глава и говорит дальше."
+  },
+  {
+   "line": 369,
+   "theorem": "is_refining",
+   "file": "src/process/ProcessTopOpen.v",
+   "claim": "`is_refining` — свойство *уточнения*: всё, что покрыто на уровне $n$, остаётся покрытым на уровне $n+1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 349–355) совпадает с ProcessTopOpen.v:217, :247, :250. Чтение определения верное. Ни одной леммы об is_refining в формализации нет (имя встречается только в своём определении)."
+  },
+  {
+   "line": 373,
+   "theorem": "p4_cover_finite",
+   "claim": "Существенно, что на каждом уровне покрытие *конечно* — список конечной длины: это дано самим типом кадра (`p4_cover_finite` лишь разворачивает его — список пуст либо имеет голову).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было «это устанавливает лемма p4_cover_finite». p4_cover_finite : op n = nil \\/ exists b rest, op n = cons b rest — верно для любого списка; конечность дана типом QBallCover := list (Q * Q). Слова приведены к этому; содержание конечности — в cover_frame_bounded."
+  },
+  {
+   "line": 395,
+   "theorem": "covered_by_balls",
+   "claim": "Построена *инфраструктура*: `QBallCover`, `OpenProcess`, `is_refining`, `covered_by_balls` — и доказаны её базовые свойства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "О covered_by_balls доказаны single_ball_covers_center (:224) и append_covers_union (:233). Об OpenProcess — только p4_cover_finite (см. запись стр. 365), об is_refining — ничего. «Базовые свойства» относятся к покрытию, не к процессу покрытий."
+  },
+  {
+   "line": 397,
+   "theorem": null,
+   "file": "src/process/ProcessTopOpen.v",
+   "claim": "Чего мы *не* доказали — так это полной теоремы эквивалентности: что всякому открытому предикату $S : ℚ \\to Prop$ отвечает процесс покрытий, исчерпывающий ровно $S$, и наоборот.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: OpenProcess встречается только в ProcessTopOpen.v, теоремы о связи is_open и процессов покрытий в src нет."
+  },
+  {
+   "line": 409,
+   "theorem": null,
+   "file": "src/process/ProcessTopOpen.v",
+   "claim": "процессный слой, как и топологический, остаётся *конструктивным* — `ProcessTopOpen.v`, подобно `Topology.v`, не использует ни одной аксиомы.",
+   "page_price": "ни одной аксиомы",
+   "verdict": "ok",
+   "note": "Все 21 объявление ProcessTopOpen.v — Closed under the global context. Шапка файла называет 20 Qed, в файле 14 (глава числа не приводит)."
+  },
+  {
+   "line": 438,
+   "theorem": "not_Qeq_pos_dist",
+   "claim": "лемма `not_Qeq_pos_dist`: различные рациональные числа имеют строго положительное расстояние",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopOpen.v:167: ~ (x == y) -> 0 < Qabs (x - y)."
+  },
+  {
+   "line": 445,
+   "theorem": "hausdorff_Q",
+   "claim": "Так выводится теорема `hausdorff_Q`, записанная в `ProcessTopOpen.v` так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 438–441) совпадает с ProcessTopOpen.v:182. В доказательстве радиус d * (1#2), где d = Qabs (x - y), и неравенство треугольника — ход главы."
+  },
+  {
+   "line": 481,
+   "theorem": "hausdorff_Q",
+   "claim": "И — по-прежнему — ни одной аксиомы. `hausdorff_Q` и `not_Qeq_pos_dist` доказаны чисто конструктивно.",
+   "page_price": "ни одной аксиомы",
+   "verdict": "ok",
+   "note": "Обе — Closed under the global context."
+  },
+  {
+   "line": 495,
+   "theorem": null,
+   "file": "src/QIntervalNotCompact.v",
+   "claim": "**Классическая теорема Гейне–Бореля над $ℚ$ *неверна*. И это не дефект формализации, а математический факт.**",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Подтверждено теоремой Q_interval_not_compact (QIntervalNotCompact.v:126, Closed) — для счётного семейства множеств U_k на [1,2]. В определениях самой положительной теоремы (OpenCover, valid_cover, covers_interval) отрицание в src не записано; оно доказуемо без аксиом (набросок проверен, см. заметки к сноске 2)."
+  },
+  {
+   "line": 507,
+   "theorem": null,
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "Файл `HeineBorel_ERR.v` фиксирует общий смысл препятствия — классический Гейне–Борель требует полноты, которой у $ℚ$ нет, — а конкретную конструкцию мы приведём здесь как пояснение главы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарии HeineBorel_ERR.v:23–26, :423–438, :533–535 — слова, теоремы о некомпактности в файле нет; статус назван честно. Пример из комментария :534 (C(x) = |x - sqrt(2)| без половины) контрпримером не служит: два таких шара по обе стороны от разреза покрывают всё; у главы радиус с множителем 1/2 — верно."
+  },
+  {
+   "line": 535,
+   "theorem": null,
+   "claim": "всякая точка, отстоящая от $\\alpha$ меньше чем на $\\tfrac12 d$, не покрыта *ни одним* из выбранных шаров",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Рассуждение верно: |z - x_i| >= |x_i - α| - |z - α| > ½|x_i - α|. В формализации этой конструкции нет и в таком виде быть не может: радиус ½|x - α| иррационален, а OpenCover := Q -> Q. Рациональный аналог (радиус min(1, |x² - 2|)/8) проверен наброском."
+  },
+  {
+   "line": 572,
+   "theorem": "valid_cover",
+   "claim": "Обычное покрытие (`valid_cover`) лишь требует, чтобы у каждой точки радиус был положителен",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HeineBorel_ERR.v:76: forall x, a <= x <= b -> C x > 0. Покрытие здесь — функция радиуса C : Q -> Q (шар радиуса C x вокруг каждой точки x), не произвольное семейство открытых множеств."
+  },
+  {
+   "line": 577,
+   "theorem": "uniform_cover_has_lebesgue",
+   "claim": "Такое $\\delta$ служит числом Лебега покрытия — масштабом, на котором покрытие работает *равномерно* по всему интервалу: всякий кусок уже $\\delta$ целиком лежит в одном шаре (лемма `uniform_cover_has_lebesgue`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было «Это и есть число Лебега» — uniform_cover (все радиусы не меньше delta) сильнее has_lebesgue_number; обратное неверно (пример в пробном файле). Добавлена uniform_cover_has_lebesgue : uniform_cover C a b delta -> has_lebesgue_number C a b delta. Closed under the global context.",
+   "file": "src/HeineBorel_ERR.v"
+  },
+  {
+   "line": 582,
+   "theorem": "Heine_Borel_uniform",
+   "claim": "С этим условием Гейне–Борель снова доказуем.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 581–584) совпадает с HeineBorel_ERR.v:517: a < b -> uniform_cover C a b delta -> exists centers, covers_interval C centers a b. Closed under the global context."
+  },
+  {
+   "line": 586,
+   "theorem": "Heine_Borel_by_depth",
+   "claim": "Архимедовость $ℚ$ гарантирует, что нужная мелкость достигается за конечное число шагов, — и конечное подпокрытие собирается из конечного числа шаров.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pow2_eventually_large (:314) даёт глубину N с (b - a) / Qpow2 N < delta; Heine_Borel_by_depth (:449) — индукция по N: кусок уже delta накрыт одним шаром (small_interval_coverable), половины склеиваются (coverable_concat). Ход главы соответствует доказательству."
+  },
+  {
+   "line": 589,
+   "theorem": "Heine_Borel_by_depth",
+   "claim": "формализован в `HeineBorel_ERR.v` (спуск по глубине бисекции — `Qpow2`, `pow2_eventually_large`, `Heine_Borel_by_depth`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было «(бисекционный спуск — hb_step, Qpow2, Heine_Borel_by_depth)» — hb_step в доказательство Heine_Borel_uniform не входит (Print All Dependencies); названы леммы, на которых вывод стоит.",
+   "file": "src/HeineBorel_ERR.v"
+  },
+  {
+   "line": 600,
+   "theorem": "Heine_Borel",
+   "claim": "При равномерном покрытии конечное подпокрытие *существует*. Теорема `Heine_Borel` — то же утверждение с гипотезой «найдётся такое $\\delta$».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) — слова уточнены: Heine_Borel : a < b -> valid_cover C a b -> (exists delta, uniform_cover C a b delta) -> exists centers, covers_interval C centers a b; гипотеза — равномерность, а не число Лебега в собственном смысле."
+  },
+  {
+   "line": 610,
+   "theorem": "Heine_Borel_lebesgue",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "Доказан Гейне–Борель для покрытий, обладающих числом Лебега (`Heine_Borel_lebesgue`), и его *равномерная* версия (`Heine_Borel_uniform`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): новая теорема Heine_Borel_lebesgue : a < b -> has_lebesgue_number C a b delta -> exists centers, covers_interval C centers a b; с ней слова «для покрытий, обладающих числом Лебега» верны буквально. Closed under the global context."
+  },
+  {
+   "line": 616,
+   "theorem": null,
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "Это честный ремонт: теорема восстановлена на классе покрытий, для которого она над $ℚ$ заведомо верна; число Лебега — условие достаточное.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было «на том классе покрытий, на котором она вообще верна» — сильнее доказанного: доказано, что числа Лебега достаточно; необходимость не доказана."
+  },
+  {
+   "line": 624,
+   "theorem": "not_coverable_half",
+   "claim": "В файле `HeineBorel_ERR.v` есть один шаг, который конструктивным не является, — лемма `not_coverable_half`: если интервал не покрывается конечным числом шаров, то и одна из его половин не покрывается.",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "HeineBorel_ERR.v:379: ~coverable C a b -> ~coverable C a ((a+b)/2) \\/ ~coverable C ((a+b)/2) b; допущение — Classical_Prop.classic. Это единственное из 46 объявлений файла с допущением, остальные 45 — Closed."
+  },
+  {
+   "line": 632,
+   "theorem": "Heine_Borel",
+   "claim": "для `Heine_Borel` и `Heine_Borel_uniform` команда `Print Assumptions` отвечает «Closed under the global context» — допущений нет",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Проверено заново: обе теоремы и Heine_Borel_by_depth — Closed under the global context; not_coverable_half в их зависимости не входит (Print All Dependencies)."
+  },
+  {
+   "line": 643,
+   "theorem": null,
+   "claim": "Другие — например, бисекционные рассуждения о непокрываемой или о бесконечно населённой половине — опираются на $L3$.",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "not_coverable_half (HeineBorel_ERR.v:379) и infinite_pigeonhole (BolzanoWeierstrass.v:62) — Classical_Prop.classic, без L4_witness."
+  },
+  {
+   "line": 678,
+   "theorem": "pts",
+   "external": true,
+   "claim": "`eps_net` — конечный список точек `pts` такой, что всякая точка интервала отстоит от какой-нибудь точки списка меньше чем на $\\varepsilon$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pts — не объявление, а имя связанной переменной в определении eps_net (HeineBorelComplete.v:62); чтение определения верное."
+  },
+  {
+   "line": 680,
+   "theorem": "totally_bounded",
+   "claim": "`totally_bounded` — свойство интервала иметь такую сеть для *каждого* $\\varepsilon$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 650–656) совпадает с HeineBorelComplete.v:62, :67."
+  },
+  {
+   "line": 687,
+   "theorem": "totally_bounded_interval",
+   "claim": "Установим главное: всякий замкнутый интервал тотально ограничен.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 672–673) совпадает с HeineBorelComplete.v:245: a <= b -> totally_bounded a b. Closed under the global context."
+  },
+  {
+   "line": 700,
+   "theorem": "rational_eps_net",
+   "claim": "Никакого обращения к законам логики — сетка строится явно (лемма `rational_eps_net`, узлы — `grid_points`).",
+   "page_price": "без законов логики",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:215: a <= b -> eps > 0 -> exists pts, eps_net pts a b eps; свидетель — grid_points a (eps/2) K (:228). Closed under the global context."
+  },
+  {
+   "line": 712,
+   "theorem": "lipschitz_uniform_cont",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "Липшицево отображение равномерно непрерывно (`lipschitz_uniform_cont`); это конструктивная замена недоказуемой над $ℚ$ классической импликации «непрерывность влечёт равномерную непрерывность».",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:307: a <= b -> Lipschitz_on f a b K -> uniformly_continuous_on f a b (на отрезке, K > 0). Closed under the global context."
+  },
+  {
+   "line": 715,
+   "theorem": null,
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "Сумма, масштаб и композиция равномерно непрерывных функций снова равномерно непрерывны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "uniform_cont_sum (:331), uniform_cont_scale (:357), uniform_cont_composition (:432; при условии, что первая функция переводит свой отрезок в отрезок второй). Все Closed."
+  },
+  {
+   "line": 723,
+   "theorem": null,
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "Заголовок файла `HeineBorelComplete.v` объявляет статус «0 axioms».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка, строка 16: «STATUS: 22 Qed, 0 Admitted, 0 axioms». Число Qed в шапке отстало: в файле 28 (глава числа не приводит)."
+  },
+  {
+   "line": 725,
+   "theorem": "mono_bounded_is_cauchy",
+   "claim": "Среди лемм файла есть `mono_bounded_is_cauchy` — «монотонная ограниченная последовательность есть Коши», — и она *использует* `classic` (через приём `NNPP`, снятие двойного отрицания).",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:547: неубывающая последовательность в [a,b] фундаментальна; допущение — Classical_Prop.classic (apply NNPP, :556). Единственное из 33 объявлений файла с допущением."
+  },
+  {
+   "line": 734,
+   "theorem": "totally_bounded_interval",
+   "claim": "`totally_bounded_interval` и построение $\\varepsilon$-сетей — конструктивны. А `mono_bounded_is_cauchy` опирается на $L3$",
+   "page_price": "конструктивны; mono_bounded_is_cauchy — L3",
+   "verdict": "ok",
+   "note": "totally_bounded_interval, rational_eps_net, grid_covers_aux — Closed; mono_bounded_is_cauchy — Classical_Prop.classic."
+  },
+  {
+   "line": 757,
+   "theorem": null,
+   "claim": "Чтобы накрыть $[0,1]$ с точностью $1/4$, довольно пяти точек — $0,\\ 1/4,\\ 1/2,\\ 3/4,\\ 1$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено наброском: eps_net [0; 1/4; 1/2; 3/4; 1] 0 1 (1/4), со строгим неравенством, Closed. Числа 5, 9, 17 — это 1/ε + 1. В формализации таблицы нет; глава сама называет её иллюстрацией."
+  },
+  {
+   "line": 770,
+   "theorem": "rational_eps_net",
+   "claim": "лемма `rational_eps_net` строит грид с *половинным* шагом $\\varepsilon/2$, чтобы гарантировать строгое неравенство $|x - p| < \\varepsilon$ без оговорок о крайних точках",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:221: half_eps := eps * (1#2); grid_covers_aux даёт Qabs (x - p) <= half_eps, откуда строгое < eps (:234–235)."
+  },
+  {
+   "line": 788,
+   "theorem": "bolzano_weierstrass",
+   "claim": "всякая ограниченная последовательность рациональных чисел имеет *точку сгущения* — процесс Коши, к которому члены последовательности с большими индексами сколь угодно приближаются",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) — слова те же, доведена формализация. Определение is_cluster_point заменено сильным: forall eps > 0, exists M0, forall M >= M0, forall N, exists k >= N, |cs_seq L M - s k| < eps — близость ко ВСЕМ далёким членам процесса, то есть к точке; прежняя запись сохранена как is_cluster_point_weak (следует из новой: cluster_point_implies_weak). Добавлена cluster_point_invariant: свойство не зависит от представителя (у прежней записи зависело — пример в пробном файле). bolzano_weierstrass передоказана для новой записи той же бисекцией; допущения прежние — classic и L4_witness."
+  },
+  {
+   "line": 798,
+   "theorem": "bolzano_weierstrass",
+   "claim": "Больцано–Вейерштрасс конструктивным не будет: его доказательство опирается на *два* закона логики ToS — $L3$ и $L4$.",
+   "page_price": "L3 и L4",
+   "verdict": "ok",
+   "note": "Print Assumptions bolzano_weierstrass: Classical_Prop.classic и ToS_Axioms.L4_witness — ровно два."
+  },
+  {
+   "line": 800,
+   "theorem": null,
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "Заголовок `BolzanoWeierstrass.v` аксиомного статуса не скрывает и объявляет его прямо: *«Axioms: classic ($L3$), L4_witness ($L4$)»*.",
+   "page_price": "classic (L3), L4_witness (L4)",
+   "verdict": "ok",
+   "note": "Шапка, строка 16: «Axioms: classic (L3), L4_witness (L4) — via ToS_Axioms.v». Шапка называет 22 Qed, в файле 26 (глава числа не приводит); там же первая строка обещает «Cauchy subsequence» — глава верно говорит о точке сгущения."
+  },
+  {
+   "line": 835,
+   "theorem": "L3_informative",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Здесь и вступает `L3_informative` — информативная форма закона исключённого третьего",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): имя было разорвано переносом строки («L3_ informative»); собрано на одной строке."
+  },
+  {
+   "line": 838,
+   "theorem": "infinite_pigeonhole",
+   "claim": "Лемма `infinite_pigeonhole` — бесконечный вариант принципа Дирихле, «хотя бы в одной половине бесконечно много», — по той же причине использует `classic`.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "BolzanoWeierstrass.v:62: infinitely_many_in s lo hi -> в левой или в правой половине; допущение — только Classical_Prop.classic."
+  },
+  {
+   "line": 842,
+   "theorem": "L3_informative",
+   "file": "src/ToS_Axioms.v",
+   "claim": "`classic` — техническая Rocq-реализация $L3$, а `L3_informative` получена из неё извлечением свидетеля — `L4_witness`. Здесь и входит $L4$",
+   "page_price": "classic (L3) и L4_witness (L4)",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «L3_informative и classic — технические Rocq-реализации L3» — Print Assumptions L3_informative: Classical_Prop.classic и ToS_Axioms.L4_witness (значение извлекается командой destruct (L4_witness _ Hex), ToS_Axioms.v). Место входа L4 в бисекцию теперь названо; bw_step_is_gen_step показывает, что допущения входят только через этот выбор."
+  },
+  {
+   "line": 856,
+   "theorem": "bw_step",
+   "claim": "`bw_step` выбирает половину *классическим разбором случаев* по предложению «в левой половине бесконечно много членов» — через `L3_informative`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 805–810) совпадает с BolzanoWeierstrass.v:101. Допущения bw_step: classic и L4_witness."
+  },
+  {
+   "line": 868,
+   "theorem": "bw_width_to_zero",
+   "claim": "Остальные свойства бисекции отработаны подробно: каждый шаг сохраняет вложенность и «населённость» выбранной половины, ширина после $n$ шагов не превосходит $(b-a)/2^n$ и — через архимедовость (`bw_width_to_zero`) — стремится к нулю, а левые и правые концы образуют процессы Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «конструктивны» — у лемм о bw_iter в допущениях classic и L4_witness (унаследованы от шага bw_step). Слово снято; рядом названо, что от выбора не зависит и доказано без допущений (gen_step_nested, gen_step_width)."
+  },
+  {
+   "line": 887,
+   "theorem": "bolzano_weierstrass",
+   "claim": "Всякая ограниченная последовательность в $[a,b]$ имеет точку сгущения — и эта точка предъявлена как `CauchySeq`, процесс Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 854–856) совпадает с BolzanoWeierstrass.v:444; свидетель — процесс левых концов бисекции. Что «точка сгущения» значит формально — запись стр. 861. Допущения: classic и L4_witness."
+  },
+  {
+   "line": 889,
+   "theorem": "is_cluster_point",
+   "claim": "Предикат `is_cluster_point` определён Коши-совместимо: для любой точности и любого порога найдётся член последовательности с большим индексом, лежащий к точке сгущения ближе требуемого.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) — слова те же, доведена формализация. Определение is_cluster_point заменено сильным: forall eps > 0, exists M0, forall M >= M0, forall N, exists k >= N, |cs_seq L M - s k| < eps — близость ко ВСЕМ далёким членам процесса, то есть к точке; прежняя запись сохранена как is_cluster_point_weak (следует из новой: cluster_point_implies_weak). Добавлена cluster_point_invariant: свойство не зависит от представителя (у прежней записи зависело — пример в пробном файле). bolzano_weierstrass передоказана для новой записи той же бисекцией; допущения прежние — classic и L4_witness."
+  },
+  {
+   "line": 892,
+   "theorem": "monotone_bounded_cauchy",
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "Двойственная пара теорем — `monotone_bounded_cauchy`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "BolzanoWeierstrass.v:464: неубывающая и ограниченная сверху последовательность — is_cauchy. Допущение — только Classical_Prop.classic (через q_inc_bounded_cauchy), без L4_witness."
+  },
+  {
+   "line": 893,
+   "theorem": "decreasing_bounded_cauchy",
+   "claim": "`decreasing_bounded_cauchy` — добавляет: монотонная ограниченная последовательность сама есть Коши",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "BolzanoWeierstrass.v:474: невозрастающая и ограниченная снизу — is_cauchy. Допущение — только Classical_Prop.classic."
+  },
+  {
+   "line": 899,
+   "theorem": "bw_left_process",
+   "claim": "Левые и правые концы бисекции мы рассматриваем как процессы над $ℚ$ (`bw_left_process` и `bw_right_process`) и устанавливаем: они монотонны (левые растут, правые убывают), оба суть Коши и сходятся к одному пределу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "О конкретных процессах концов: bw_left_increasing (ProcessBW.v:84), bw_right_decreasing (:94), bw_left_is_cauchy_process (:64), bw_right_is_cauchy_process (:74), bw_endpoints_equiv (:104), при a < b. Допущения: classic и L4_witness."
+  },
+  {
+   "line": 903,
+   "theorem": "bw_is_process_construction",
+   "claim": "Теорема `bw_is_process_construction` собирает это в единую картину E/R/R",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 5, слово автора) — слова те же, доведена формализация: теорема теперь говорит о самих процессах концов (bw_left_process s a b, bw_right_process s a b): монотонны, оба Коши, эквивалентны, и для каждого n infinitely_many_in s (левый конец n) (правый конец n). Раньше оба процесса стояли под «существует» и с последовательностью связаны не были (заключение выполнялось для пары нулевых процессов). Допущения те же, что у леммы о бисекции: classic и L4_witness."
+  },
+  {
+   "line": 904,
+   "theorem": "bw_convergence_rate",
+   "claim": "а `bw_convergence_rate` фиксирует скорость — $1/2$: интервал на каждом шаге уполовинивается (лемма `bw_rate_is_width_ratio`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 6, слово автора): было — число, вписанное определением, с процессом не связанное (единственная лемма bw_rate_valid: 0 < 1/2 < 1). Добавлена связка bw_rate_is_width_ratio; само уполовинивание доказано в BolzanoWeierstrass.v (bw_step_width)."
+  },
+  {
+   "line": 908,
+   "theorem": "process_BW",
+   "file": "src/process/ProcessBW.v",
+   "claim": "Саму теорему на язык процессов переносит `process_BW`: существует процесс Коши в $[a,b]$, к каждой далёкой стадии которого сколь угодно близко подходят члены последовательности со сколь угодно большими номерами.",
+   "page_price": "те же L3 и L4",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 5, слово автора): было «она ничего не добавляет и не убавляет, перенося на язык процессов теорему, как она есть» — process_BW заключала лишь «существует процесс Коши». Теперь: exists L, is_Cauchy L /\\ in_interval a b L /\\ forall eps > 0, exists M0, forall M >= M0, forall N, exists k >= N, |L M - s k| < eps (свидетель — процесс левых концов бисекции). Это сильнее записи is_cluster_point базовой теоремы (строка 1 таблицы главы — отдельный шаг). Допущения: classic и L4_witness."
+  },
+  {
+   "line": 914,
+   "theorem": null,
+   "file": "src/process/ProcessBW.v",
+   "claim": "Заголовок `ProcessBW.v` это и фиксирует: *«classic (inherited from BolzanoWeierstrass)»*.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "Шапка, строка 23: «AXIOMS: classic (inherited from BolzanoWeierstrass)» — цитата точна. Шапка называет только classic; L4_witness, который показывает компилятор, в ней нет, а строка 6 той же шапки говорит «0 axioms»."
+  },
+  {
+   "line": 934,
+   "theorem": null,
+   "claim": "В смысле классической *топологической* связности $ℚ$ *не связно* — более того, вполне несвязно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Математический факт; глава не приписывает его формализации. В src теоремы о несвязности ℚ нет — только комментарий ProcessTopConnected.v:13."
+  },
+  {
+   "line": 951,
+   "theorem": "linear_path",
+   "claim": "`linear_path` — при параметре $t=0$ даёт $a$, при $t=1$ — $b$, между — линейную интерполяцию.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 915) совпадает с ProcessTopConnected.v:35; linear_path_at_0 (:38), linear_path_at_1 (:43)."
+  },
+  {
+   "line": 961,
+   "theorem": "PathIn",
+   "claim": "В определении `PathIn` *нет требования непрерывности* отображения `gamma`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 923–925) совпадает с ProcessTopConnected.v:100; непрерывности в определении действительно нет. Следствие этого — запись стр. 944."
+  },
+  {
+   "line": 963,
+   "theorem": "gamma",
+   "external": true,
+   "claim": "отображения `gamma`. Стандартный топологический путь — это *непрерывное* отображение связного отрезка",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "gamma — не объявление, а имя связанной переменной в определении PathIn (ProcessTopConnected.v:100)"
+  },
+  {
+   "line": 976,
+   "theorem": null,
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "`linear_path` остаётся внутри интервала, липшицева по $t$, пути обращаются и склеиваются",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "linear_path_in_interval (:48, при a <= b и 0 <= t <= 1), linear_path_lipschitz (:58 — точное равенство |γ(s) - γ(t)| = |b - a|·|s - t|), reverse_path (:91), concat_paths (:156)."
+  },
+  {
+   "line": 977,
+   "theorem": "interval_path_connected",
+   "claim": "`interval_path_connected` даёт процессную достижимость для замкнутого интервала",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): слова те же, цена определения названа рядом новым абзацем: без требования непрерывности достижимо всякое множество (any_set_path_connected); содержание несёт липшицева достижимость (interval_lip_path_connected, two_points_not_lip_path_connected)."
+  },
+  {
+   "line": 978,
+   "theorem": "process_path",
+   "claim": "процессная форма `process_path` — ходок, движущийся из $a$ к $b$, на шаге $n$ занимающий параметр $t = n/(n+1)$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopConnected.v:179: fun n => linear_path a b (n / (n + 1))."
+  },
+  {
+   "line": 981,
+   "theorem": "process_path_cauchy",
+   "claim": "`process_path_cauchy` показывает, что этот процесс есть Коши, а `process_path_converges` — что он сходится к $b$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора): было — оба утверждения приписаны process_path_cauchy, в которой только свойство Коши. Добавлена process_path_converges : forall a b eps, 0 < eps -> exists N, forall n, N <= n -> Qabs (process_path a b n - b) < eps. Closed under the global context."
+  },
+  {
+   "line": 982,
+   "theorem": null,
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "Весь этот слой — ноль аксиом.",
+   "page_price": "ноль аксиом",
+   "verdict": "ok",
+   "note": "Все 20 объявлений ProcessTopConnected.v — Closed under the global context. Шапка называет 20 Qed, в файле 16 (глава числа не приводит)."
+  },
+  {
+   "line": 1011,
+   "theorem": null,
+   "file": "src/process/ProcessTopCompact.v",
+   "claim": "*Гейне–Борель*: всякое (равномерное) покрытие имеет конечное подпокрытие. *Нётеровость*: всякая ограниченная возрастающая цепь стабилизируется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "interval_compact (ProcessTopCompact.v:47) — определение с условием uniform_cover внутри, оговорка «(равномерное)» на месте; bounded_ascending_stabilizes (ProcessNoetherian.v:64) — для цепей натуральных чисел, ограниченных числом B, на classic."
+  },
+  {
+   "line": 1014,
+   "theorem": "p4_compactness_summary",
+   "claim": "Три формулировки глава читает как одно; в `ProcessTopCompact.v` они стоят рядом в теореме-конъюнкции `p4_compactness_summary`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «их единство закреплено теоремой» — p4_compactness_summary есть конъюнкция трёх независимых утверждений (interval_compact; ограниченная возрастающая цепь стабилизируется; стабилизировавшаяся цепь даёт процесс Коши). Довести формализацию до прежних слов нельзя: общего объекта у утверждений нет."
+  },
+  {
+   "line": 1018,
+   "theorem": "compact_eq_noetherian",
+   "claim": "`compact_eq_noetherian` — нётеровость вместе с её следствием для процессов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «связывают их попарно» — compact_eq_noetherian : forall B, (цепь, ограниченная B, стабилизируется) /\\ (она же даёт процесс Коши); о покрытиях в утверждении ничего нет."
+  },
+  {
+   "line": 1016,
+   "theorem": "compact_eq_hb",
+   "claim": "`compact_eq_hb` повторяет Гейне–Бореля в терминах `interval_compact`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «связывают их попарно» — compact_eq_hb : a < b -> interval_compact a b, то есть сама теорема Гейне — Бореля."
+  },
+  {
+   "line": 1022,
+   "theorem": null,
+   "file": "src/process/ProcessTopCompact.v",
+   "claim": "`p4_compactness_summary` и родственные ей — не новые результаты, а *конъюнкции* уже доказанного: они собирают вместе теоремы, установленные в `HeineBorel_ERR.v` и в файлах о нётеровости.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: члены конъюнкции — Heine_Borel (HeineBorel_ERR.v:536), bounded_ascending_stabilizes (ProcessNoetherian.v:64), stabilized_chain_cauchy (ProcessNoetherian.v:169)."
+  },
+  {
+   "line": 1026,
+   "theorem": null,
+   "file": "src/process/ProcessTopUnified.v",
+   "claim": "он перечисляет пять подпаттернов топологии (открытые множества, метрика, компактность, связность, отделимость) и помещает топологию одиннадцатым в ряду процессных паттернов ToS",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive ProcessPatternTopo — 5 конструкторов (:62); Inductive ProcessInstance — 11, последний PI_Topology (:124). Леммы five_topo_patterns и eleven_instances утверждают лишь существование списка нужной длины; глава называет файл обзорным — честно."
+  },
+  {
+   "line": 1032,
+   "theorem": null,
+   "file": "src/process/ProcessTopCompact.v",
+   "claim": "шапки `ProcessTopCompact.v` и `ProcessTopUnified.v` честно отмечают: `classic` унаследован от слоя нётеровости",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "ProcessTopCompact.v:20 «AXIOMS: classic (from ProcessNoetherian)», ProcessTopUnified.v:33 «AXIOMS: classic (inherited from ProcessNoetherian)». По компилятору classic у 4 объявлений из 18 в первом файле и у 1 из 12 во втором — все от bounded_ascending_stabilizes. Первая строка STATUS обеих шапок при этом говорит «0 axioms»."
+  },
+  {
+   "line": 1037,
+   "theorem": "process_space_complete",
+   "claim": "Имя громкое — но, как и у `process_space_complete` в Главе 5.1, по своему содержанию это *foundation-заготовка*, а не теория компактности",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "stdlib/ProcessSpace.v:58: (process_dist f f N == 0) /\\ (0 < r -> process_ball f r N f) — о полноте в утверждении нет ничего; оценка главы честна. Глава 5.1 говорит о ней то же (стр. 625–627)."
+  },
+  {
+   "line": 1039,
+   "theorem": "compactness_foundation",
+   "claim": "она фиксирует базовые факты вроде ограниченности постоянного процесса и Коши-свойства постоянной последовательности",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "stdlib/ProcessCompactness.v:39: (forall q, process_bounded (const_process q) (Qabs q)) /\\ (forall f N, process_seq_cauchy (fun _ => f) N) — ровно то, что сказано. Closed; в файле 5 Qed."
+  },
+  {
+   "line": 1050,
+   "theorem": null,
+   "claim": "Топологический слой над $ℚ$ — открытые и замкнутые множества, шары, интервалы, непрерывность, хаусдорфовость, процессная путь-достижимость; конструктивно, без аксиом (`Topology.v`, `ProcessTopOpen.v`, `ProcessTopConnected.v`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Цена верна: все 68 объявлений трёх файлов — Closed under the global context. О содержании «путь-достижимости» — запись стр. 944."
+  },
+  {
+   "line": 1051,
+   "theorem": null,
+   "file": "src/process/ProcessTopOpen.v",
+   "claim": "Открытое множество в процессной форме — процесс конечных рациональных покрытий шарами, с уточнением по уровням.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Построены определения QBallCover, OpenProcess, is_refining (ProcessTopOpen.v:217, :247, :250). Теорем о процессе покрытий и об уточнении нет — это глава оговаривает в § 2.3 («инфраструктура»)."
+  },
+  {
+   "line": 1052,
+   "theorem": "Heine_Borel_uniform",
+   "claim": "Гейне–Борель для покрытий с числом Лебега (`Heine_Borel_lebesgue`) и его равномерная версия (`Heine_Borel_uniform`); доказан бисекцией.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) — итог приведён к двум теоремам: Heine_Borel_lebesgue (число Лебега) и Heine_Borel_uniform (радиусы не меньше delta)."
+  },
+  {
+   "line": 1053,
+   "theorem": "totally_bounded_interval",
+   "claim": "Тотальная ограниченность всякого интервала (`totally_bounded_interval`) — конструктивно, через явное построение $\\varepsilon$-сеток.",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:245; Closed under the global context."
+  },
+  {
+   "line": 1054,
+   "theorem": "bolzano_weierstrass",
+   "claim": "Больцано–Вейерштрасс (`bolzano_weierstrass`) — в `CauchySeq`-форме: всякая ограниченная последовательность имеет Коши-точку сгущения (а не явно построенную подпоследовательность).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение теоремы названо верно (exists L : CauchySeq, is_cluster_point s L); оговорка о подпоследовательности честна. Насколько слаб сам предикат is_cluster_point — запись стр. 861."
+  },
+  {
+   "line": 1058,
+   "theorem": null,
+   "claim": "Топологический слой — на чистой конструкции, без законов логики.",
+   "page_price": "без законов логики",
+   "verdict": "ok",
+   "note": "Topology.v, ProcessTopOpen.v, ProcessTopConnected.v — все объявления Closed under the global context."
+  },
+  {
+   "line": 1059,
+   "theorem": "bolzano_weierstrass",
+   "claim": "Компактностный слой неоднороден: восстановленный Гейне–Борель (`Heine_Borel`, `Heine_Borel_uniform`) доказан без допущений; бисекция Больцано–Вейерштрасса опирается на $L3$ (`classic`, `L3_informative`) и дополнительно — на $L4$ (`L4_witness`).",
+   "page_price": "Гейне–Борель — без допущений; Больцано–Вейерштрасс — L3 и L4",
+   "verdict": "ok",
+   "note": "Место, не сверенное 12.11, сверено: Print Assumptions bolzano_weierstrass — Classical_Prop.classic и ToS_Axioms.L4_witness; то же у bw_step, bw_iter и у 9 объявлений ProcessBW.v. Итоговая цена названа верно. Уточнение: L3_informative сама стоит на обоих допущениях (см. запись стр. 823), так что L4 входит не «дополнительно», а через неё."
+  },
+  {
+   "line": 1063,
+   "theorem": "classical_Heine_Borel_fails_over_Q",
+   "file": "src/QIntervalNotCompact.v",
+   "claim": "Классический Гейне–Борель без оговорки о равномерности — он над $ℚ$ *ложен*, и это математический факт, а не пробел: теорема `classical_Heine_Borel_fails_over_Q`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора) — к словам добавлена теорема: ~ (forall C a b, a < b -> valid_cover C a b -> exists centers, covers_interval C centers a b), в определениях HeineBorel_ERR.v; свидетель — покрытие C_gap. Closed under the global context."
+  },
+  {
+   "line": 1064,
+   "theorem": "rp_in_ball",
+   "file": "src/RealPointTopology.v",
+   "claim": "(Базис метрической топологии на классах — шары `rp_in_ball` (замкнутый) и `rp_in_open_ball` (открытый) с корректностью — построен отдельно, в `RealPointTopology.v`; см. § 2.2.3.)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «открытый шар rp_in_ball» — он замкнутый; названы оба шара."
+  },
+  {
+   "line": 1068,
+   "theorem": null,
+   "claim": "теоремы о промежуточном значении и об экстремуме пойдут там собственным путём — бисекцией и сеткой, — потому что на компактность над $ℚ$ опереться нельзя.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «компактность интервала — инструмент, на котором будут стоять теоремы…» — файлы IVT_ERR, IVT_CauchyReal, EVT_idx, EVT_ERR, ProcessIVT, ProcessEVT не подключают ни HeineBorel_ERR, ни HeineBorelComplete, ни BolzanoWeierstrass (проверено поиском)."
+  },
+  {
+   "line": 1091,
+   "theorem": null,
+   "claim": "Доказаны равномерная версия Гейне–Бореля, тотальная ограниченность всякого интервала и теорема Больцано–Вейерштрасса.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Heine_Borel_uniform (HeineBorel_ERR.v:517), totally_bounded_interval (HeineBorelComplete.v:245), bolzano_weierstrass (BolzanoWeierstrass.v:444) — все три с Qed."
+  },
+  {
+   "line": 1095,
+   "theorem": null,
+   "claim": "Компактностный слой неоднороден: восстановленный Гейне–Борель доказан без допущений, бисекция Больцано–Вейерштрасса опирается на $L3$ и дополнительно на $L4$.",
+   "page_price": "Гейне–Борель — без допущений; Больцано–Вейерштрасс — L3 и L4",
+   "verdict": "ok",
+   "note": "Сходится с компилятором: Heine_Borel, Heine_Borel_uniform — Closed; bolzano_weierstrass — classic и L4_witness."
+  },
+  {
+   "line": 1104,
+   "theorem": "rp_in_ball",
+   "file": "src/RealPointTopology.v",
+   "claim": "На фактор-классах `RealPoint` построен *базис* метрической топологии — шары `rp_in_ball` (замкнутый) и `rp_in_open_ball` (открытый) с корректностью (`RealPointTopology.v`, § 2.2.3)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «открытый шар rp_in_ball» — он замкнутый; названы оба шара."
+  },
+  {
+   "line": 1115,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "Дословная E/R/R-разметка в шапке файла `Topology.v`; здесь она разворачивается по образцу Части I.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Разметка в шапке есть (Topology.v:5–8), на английском; пересказ главы на стр. 226–228 — перевод, в котором опущен четвёртый элемент (functions Q -> Q)."
+  },
+  {
+   "line": 1116,
+   "theorem": "C_gap_no_finite_subcover",
+   "file": "src/QIntervalNotCompact.v",
+   "claim": "А конструкция главы — радиус, мельчающий у разреза, — записана в определениях самой теоремы Гейне–Бореля: у покрытия `C_gap` с радиусом $\\min(1,|x^2-2|)/8$ конечного подпокрытия нет (`C_gap_no_finite_subcover`), и потому классический Гейне–Борель над $ℚ$ ложен (`classical_Heine_Borel_fails_over_Q`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 9, слово автора): было «Эта конкретная конструкция теперь и машинно проверена» — проверена была родственная конструкция (семейство U_k), а открытость U_k стояла в комментарии. Добавлены U_open и конструкция главы в определениях HeineBorel_ERR.v: C_gap, C_gap_no_finite_subcover, classical_Heine_Borel_fails_over_Q. Closed under the global context."
+  },
+  {
+   "line": 1116,
+   "theorem": "covers",
+   "file": "src/QIntervalNotCompact.v",
+   "claim": "оно накрывает весь рациональный отрезок (`covers`, ибо $x^2\\neq 2$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "QIntervalNotCompact.v:74: forall x, inC x -> exists k, U k x; опирается на no_rational_sqrt2 и архимедовость. Closed."
+  },
+  {
+   "line": 1116,
+   "theorem": "no_finite_subcover",
+   "claim": "но конечного подпокрытия не имеет (`no_finite_subcover`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "QIntervalNotCompact.v:99: forall L : list nat, exists x, inC x /\\ forall k, In k L -> ~ U k x; свидетель — sqrt2_uncovered (приближения Пелля). Closed."
+  },
+  {
+   "line": 1116,
+   "theorem": "Q_interval_not_compact",
+   "claim": "Вместе — `Q_interval_not_compact`; свидетелем служат Pell-приближения $\\sqrt2$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Q_interval_not_compact — Closed under the global context. После шага 9 Части V в файле 15 Qed, 0 аксиом (на странице число приведено)."
+  },
+  {
+   "line": 905,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 6: bw_right_process s a b (S n) - bw_left_process s a b (S n) == bw_convergence_rate * (bw_right_process s a b n - bw_left_process s a b n). Допущения — classic и L4_witness (от bw_step в формулировке).",
+   "theorem": "bw_rate_is_width_ratio",
+   "file": "src/process/ProcessBW.v",
+   "claim": "интервал на каждом шаге уполовинивается (лемма `bw_rate_is_width_ratio`)"
+  },
+  {
+   "line": 189,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 8: continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))). Closed under the global context.",
+   "theorem": "continuous_iff_open_preimage",
+   "file": "src/stdlib/Topology.v",
+   "claim": "Вместе с обратной стороной (`continuous_iff_open_preimage`)"
+  },
+  {
+   "line": 375,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 8 (индукция по списку шаров). Closed under the global context.",
+   "theorem": "cover_frame_bounded",
+   "file": "src/process/ProcessTopOpen.v",
+   "claim": "Что конечность даёт, говорит лемма `cover_frame_bounded`: конечный кадр покрывает лишь ограниченное множество."
+  },
+  {
+   "line": 590,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Лемма существует (HeineBorel_ERR.v): для ширины и delta найдётся глубина N с (b - a) / Qpow2 N < delta; на неё опирается Heine_Borel_uniform (и новая Heine_Borel_lebesgue). Closed under the global context.",
+   "theorem": "pow2_eventually_large",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "`Qpow2`, `pow2_eventually_large`, `Heine_Borel_by_depth`)"
+  },
+  {
+   "line": 602,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 8. has_lebesgue_number C a b delta := delta > 0 /\\ forall x из отрезка, exists c из отрезка, forall y, |y - x| < delta -> covered_by C c y. Доказательство — тот же спуск по глубине (HB_lebesgue_by_depth). Closed under the global context.",
+   "theorem": "Heine_Borel_lebesgue",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "А теорема `Heine_Borel_lebesgue` доказывает его и при числе Лебега в собственном смысле (`has_lebesgue_number`: у каждой точки её $\\delta$-окрестность лежит в одном шаре покрытия)"
+  },
+  {
+   "line": 982,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 8: расстояние до b на шаге n равно |a - b|/(n+1). Closed under the global context.",
+   "theorem": "process_path_converges",
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "а `process_path_converges` — что он сходится к $b$."
+  },
+  {
+   "line": 985,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 8: forall S, is_path_connected S (путь «a при t < 1, b при t = 1»). Closed under the global context.",
+   "theorem": "any_set_path_connected",
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "в нём достижимо *всякое* множество (`any_set_path_connected`) — путь вправе перескочить из $a$ в $b$ в последней точке параметра."
+  },
+  {
+   "line": 988,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 8: lo < hi -> is_lip_path_connected (fun x => lo <= x /\\ x <= hi) — линейным путём с константой |b - a|. Closed under the global context.",
+   "theorem": "interval_lip_path_connected",
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "интервал связывается липшицевым путём (`interval_lip_path_connected`)"
+  },
+  {
+   "line": 989,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 8: ~ is_lip_path_connected (fun x => x == 0 \\/ x == 1); по сетке мельче 1/K значения липшицева пути не могут перейти из 0 в 1 (lip_no_jump). Closed under the global context.",
+   "theorem": "two_points_not_lip_path_connected",
+   "file": "src/process/ProcessTopConnected.v",
+   "claim": "а двухточечное множество $\\{0,1\\}$ — нет (`two_points_not_lip_path_connected`)."
+  },
+  {
+   "line": 212,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 9: rp_in_open_ball c r x -> exists e, 0 < e /\\ forall y, rp_in_ball x e y -> rp_in_open_ball c r y; корректность на классах — rp_in_open_ball_well_defined. Closed under the global context.",
+   "theorem": "rp_open_ball_is_open",
+   "file": "src/RealPointTopology.v",
+   "claim": "он тоже корректен на классах и *открыт*: вместе с каждой точкой содержит шар положительного радиуса вокруг неё (`rp_open_ball_is_open`)."
+  },
+  {
+   "line": 873,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 9: при bw_left st <= bw_right st шаг с любым выбором половины не выводит концы наружу. Closed under the global context.",
+   "theorem": "gen_step_nested",
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "для бисекции с произвольным выбором они доказаны без допущений (`gen_step_nested`, `gen_step_width`)"
+  },
+  {
+   "line": 875,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 9: ширина после шага с любым выбором половины равна половине прежней. Closed under the global context.",
+   "theorem": "gen_step_width",
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "`gen_step_width`), а шаг `bw_step` — её частный случай"
+  },
+  {
+   "line": 875,
+   "page_price": "выбор — по L3_informative",
+   "verdict": "ok",
+   "note": "Новая лемма шага 9: bw_step s st = gen_step (if L3_informative (bw_step_left s st) then true else false) st. В допущениях classic и L4_witness — они стоят в самой формулировке (bw_step, L3_informative).",
+   "theorem": "bw_step_is_gen_step",
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "с выбором, который называет `L3_informative` (`bw_step_is_gen_step`)."
+  },
+  {
+   "line": 1116,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 9: forall k, is_open (U k) в смысле stdlib/Topology.v. Closed under the global context.",
+   "theorem": "U_open",
+   "file": "src/QIntervalNotCompact.v",
+   "claim": "(открытость — `U_open`)"
+  },
+  {
+   "line": 1116,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новая теорема шага 9; в файле QIntervalNotCompact.v 15 Qed. Closed under the global context.",
+   "theorem": "classical_Heine_Borel_fails_over_Q",
+   "file": "src/QIntervalNotCompact.v",
+   "claim": "и потому классический Гейне–Борель над $ℚ$ ложен (`classical_Heine_Borel_fails_over_Q`). Машинно проверено, 15 Qed, 0 аксиом."
+  }
+ ]
+}

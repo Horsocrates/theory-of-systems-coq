@@ -10,7 +10,8 @@
    "claim": "восстановленная теорема Гейне–Бореля в\n`HeineBorel_ERR.v` доказана без допущений (§ 2.5)",
    "page_price": "без допущений",
    "verdict": "ok",
-   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части",
+   "line": 44
   },
   {
    "theorem": "not_coverable_half",
@@ -18,7 +19,8 @@
    "claim": "импортирует `ToS_Axioms.v` и эта лемма пользуется `classic`",
    "page_price": "classic (L3)",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части; теоремы Гейне — Бореля от этой леммы не зависят"
+   "note": "сверена цена; формулировка — при аудите части; теоремы Гейне — Бореля от этой леммы не зависят",
+   "line": 630
   },
   {
    "theorem": "Heine_Borel_uniform",
@@ -26,15 +28,17 @@
    "claim": "для `Heine_Borel` и `Heine_Borel_uniform`\nкоманда `Print Assumptions` отвечает «Closed under the global\ncontext» — допущений нет",
    "page_price": "без допущений",
    "verdict": "ok",
-   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части",
+   "line": 632
   },
   {
    "theorem": null,
    "file": "src/analysis/BolzanoWeierstrass.v",
    "claim": "бисекция Больцано–Вейерштрасса опирается на $L3$ (`classic`, `L3_informative`) и дополнительно — на $L4$ (`L4_witness`)",
    "page_price": "L3 и L4",
-   "verdict": "not-checked",
-   "note": "12.11 не проверялось; очередь — аудит Части V"
+   "verdict": "ok",
+   "note": "сверено 12.11 при аудите Части V: Print Assumptions bolzano_weierstrass — Classical_Prop.classic и ToS_Axioms.L4_witness; слова страницы о цене верны (уточнение о том, где входит L4, — строка 14 таблицы главы V.2 в отчёте 03)",
+   "line": 1059
   }
  ]
 }

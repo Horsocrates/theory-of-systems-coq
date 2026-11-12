@@ -12,7 +12,7 @@
     Strategy: bisect [a,b], choose half with infinitely many terms (classic),
     nested intervals -> convergent subsequence via Completeness.v
 
-    STATUS: 22 Qed, 0 Admitted
+    STATUS: 32 Qed, 0 Admitted
     Axioms: classic (L3), L4_witness (L4) — via ToS_Axioms.v
     Author: Horsocrates | Date: March 2026
 *)
@@ -419,28 +419,103 @@ Proof.
 Qed.
 
 (* ========================================================================= *)
+(* SECTION 5b: BISECTION WITH AN ARBITRARY CHOICE OF THE HALF (Nov 2026)      *)
+(* ========================================================================= *)
+
+(** Width and nesting of the bisection need no axioms: they hold for ANY
+    choice of the half.  The axioms (classic, L4_witness) enter in one place
+    only -- the choice that L3_informative names ([bw_step_is_gen_step]). *)
+Definition gen_step (go_left : bool) (st : BWState) : BWState :=
+  if go_left then mkBW (bw_left st) (bw_mid st) else mkBW (bw_mid st) (bw_right st).
+
+Lemma gen_step_valid : forall g st,
+  bw_left st <= bw_right st -> bw_left (gen_step g st) <= bw_right (gen_step g st).
+Proof.
+  intros g [l r] H. change (l <= r) in H. destruct g; simpl; unfold bw_mid; simpl.
+  - setoid_replace ((l + r) / 2) with ((l + r) * (1#2)) by field. lra.
+  - setoid_replace ((l + r) / 2) with ((l + r) * (1#2)) by field. lra.
+Qed.
+
+Lemma gen_step_width : forall g st,
+  bw_right (gen_step g st) - bw_left (gen_step g st) == (bw_right st - bw_left st) / 2.
+Proof. intros g [l r]. destruct g; simpl; unfold bw_mid; simpl; field. Qed.
+
+Lemma gen_step_nested : forall g st, bw_left st <= bw_right st ->
+  bw_left st <= bw_left (gen_step g st) /\ bw_right (gen_step g st) <= bw_right st.
+Proof.
+  intros g [l r] H. change (l <= r) in H. destruct g; simpl; unfold bw_mid; simpl.
+  - setoid_replace ((l + r) / 2) with ((l + r) * (1#2)) by field. split; lra.
+  - setoid_replace ((l + r) / 2) with ((l + r) * (1#2)) by field. split; lra.
+Qed.
+
+Lemma bw_step_is_gen_step : forall s st,
+  bw_step s st = gen_step (if L3_informative (bw_step_left s st) then true else false) st.
+Proof.
+  intros s st. unfold bw_step, gen_step.
+  destruct (L3_informative (bw_step_left s st)); reflexivity.
+Qed.
+
+(* ========================================================================= *)
 (* SECTION 6: BOLZANO-WEIERSTRASS MAIN THEOREM                             *)
 (* ========================================================================= *)
 
-(** Cluster point: a CauchySeq L is a cluster point of s if
-    for every eps > 0 and every threshold N, there exists k >= N
-    with s(k) within eps of the limit.
-    We use a Cauchy-compatible formulation: for large enough
-    index M of L, |L(M) - s(k)| < eps. *)
+(** Cluster point: a CauchySeq L is a cluster point of s if the terms of s
+    with arbitrarily large indices come within eps of ALL far stages of L --
+    that is, of the point that L names.
+    Until Nov 2026 the index M of L stood under [exists] and was not bounded
+    below: closeness to SOME stage of L only, a property of the
+    representative and not of the point (kept as [is_cluster_point_weak]). *)
 Definition is_cluster_point (s : nat -> Q) (L : CauchySeq) : Prop :=
+  forall eps : Q, 0 < eps ->
+    exists M0 : nat, forall M : nat, (M0 <= M)%nat ->
+      forall N : nat, exists k : nat,
+        (N <= k)%nat /\
+        Qabs (cs_seq L M - s k) < eps.
+
+(** The former, weak record; it follows from the present one. *)
+Definition is_cluster_point_weak (s : nat -> Q) (L : CauchySeq) : Prop :=
   forall eps : Q, 0 < eps ->
     forall N : nat, exists k : nat, exists M : nat,
       (N <= k)%nat /\
       Qabs (cs_seq L M - s k) < eps.
 
+Lemma cluster_point_implies_weak : forall s L,
+  is_cluster_point s L -> is_cluster_point_weak s L.
+Proof.
+  intros s L H eps Heps N. destruct (H eps Heps) as [M0 HM0].
+  destruct (HM0 M0 (le_n _) N) as [k [Hk Hd]]. exists k, M0. split; assumption.
+Qed.
+
+(** A cluster point is a property of the POINT: equivalent representatives
+    have the same cluster-point status. *)
+Lemma cluster_point_invariant : forall s (L L' : CauchySeq),
+  cauchy_equiv L L' -> is_cluster_point s L -> is_cluster_point s L'.
+Proof.
+  intros s L L' He H eps Heps.
+  assert (Hh : 0 < eps * (1#2)) by lra.
+  destruct (H _ Hh) as [M1 HM1]. destruct (He _ Hh) as [M2 HM2].
+  exists (Nat.max M1 M2). intros M HM N.
+  destruct (HM1 M ltac:(lia) N) as [k [Hk Hd]].
+  exists k. split; [exact Hk|].
+  pose proof (HM2 M ltac:(lia)) as Hd2.
+  assert (E : cs_seq L' M - s k == (cs_seq L' M - cs_seq L M) + (cs_seq L M - s k)) by ring.
+  rewrite (Qabs_wd _ _ E).
+  apply Qle_lt_trans with (Qabs (cs_seq L' M - cs_seq L M) + Qabs (cs_seq L M - s k)).
+  - apply Qabs_triangle.
+  - assert (Es : Qabs (cs_seq L' M - cs_seq L M) == Qabs (cs_seq L M - cs_seq L' M)).
+    { assert (E2 : cs_seq L' M - cs_seq L M == - (cs_seq L M - cs_seq L' M)) by ring.
+      rewrite (Qabs_wd _ _ E2). apply Qabs_opp. }
+    lra.
+Qed.
+
 (** 20. Bolzano-Weierstrass: every bounded sequence in [a,b] (a < b)
     has a cluster point that is a CauchySeq.
 
     The bisection left endpoints form a Cauchy sequence L.
-    For any eps > 0 and threshold N, we find a bisection level M
-    with width < eps, then pick s(k) from that interval (k >= N).
-    Since s(k) and L(M) = bw_left(iter M) are both in [L(M), R(M)]
-    with width < eps, we get |L(M) - s(k)| < eps. *)
+    For any eps > 0 we find a bisection level M0 with width < eps; for
+    every threshold N we pick s(k), k >= N, from that interval.  All the
+    later left endpoints L(M), M >= M0, lie in the same interval, so
+    |L(M) - s(k)| < eps for ALL M >= M0. *)
 Theorem bolzano_weierstrass : forall (s : nat -> Q) (a b : Q),
   a < b -> bounded_seq s a b ->
   exists L : CauchySeq, is_cluster_point s L.
@@ -448,16 +523,17 @@ Proof.
   intros s a b Hab Hbnd.
   assert (Hvalid : a <= b) by lra.
   exists (mkCauchy _ (bw_left_cauchy s a b Hab)).
-  intros eps Heps N.
-  destruct (bw_width_to_zero s a b Hab eps Heps) as [M HM].
-  destruct (bw_infinitely_many s a b M Hvalid Hbnd N) as [k [HkN [Hklo Hkhi]]].
-  exists k. exists M. split.
-  - exact HkN.
-  - change (Qabs (bw_left (bw_iter s (mkBW a b) M) - s k) < eps).
-    assert (Hvalid_M : bw_left (bw_iter s (mkBW a b) M) <=
-                       bw_right (bw_iter s (mkBW a b) M)).
-    { apply bw_iter_valid. exact Hvalid. }
-    apply Qabs_lt_bound; lra.
+  intros eps Heps.
+  destruct (bw_width_to_zero s a b Hab eps Heps) as [M0 HM0].
+  exists M0. intros M HM N.
+  destruct (bw_infinitely_many s a b M0 Hvalid Hbnd N) as [k [HkN [Hklo Hkhi]]].
+  exists k. split; [exact HkN|].
+  change (Qabs (bw_left (bw_iter s (mkBW a b) M) - s k) < eps).
+  pose proof (bw_left_mono s a b Hvalid M0 M HM) as H1.
+  pose proof (bw_right_mono s a b Hvalid M0 M HM) as H3.
+  assert (H2 : bw_left (bw_iter s (mkBW a b) M) <= bw_right (bw_iter s (mkBW a b) M)).
+  { apply bw_iter_valid. exact Hvalid. }
+  apply Qabs_lt_bound; lra.
 Qed.
 
 (** 21. Monotone bounded implies Cauchy *)

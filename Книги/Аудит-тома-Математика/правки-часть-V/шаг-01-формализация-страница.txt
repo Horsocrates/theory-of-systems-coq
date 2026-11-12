@@ -1,0 +1,11 @@
+@@FILE Формализация.md
+@@OLD
+в Distinction.v, в EVT_idx.v и в BorelDeterminacy.v
+@@NEW
+в Distinction.v и в BorelDeterminacy.v
+@@END
+@@OLD
+| `EVT_strong_process` (EVT_idx.v) | исключённое третье (EVT_idx.v) |
+@@NEW
+| `EVT_strong_process` (EVT_idx.v) | нет |
+@@END

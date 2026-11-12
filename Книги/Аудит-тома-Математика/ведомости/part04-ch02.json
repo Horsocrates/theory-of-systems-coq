@@ -590,15 +590,15 @@
   },
   {
    "line": 855,
-   "theorem": null,
-   "file": "src/CauchyReal.v",
-   "claim": "полная метрическая полнота пространства классов `CauchySeq` — отдельная задача, выходящая за пределы Главы 4.2",
-   "page_price": "",
+   "theorem": "regular_class_complete",
+   "file": "src/RealPointComplete.v",
+   "claim": "полная метрическая полнота пространства классов `CauchySeq` доказана отдельно, за пределами Главы 4.2, — в файле `RealPointComplete.v` (Глава 5.1): без допущений для регулярных представителей, на $L4$ для произвольных.",
+   "page_price": "без допущений — для регулярных представителей; L4 — для произвольных",
    "verdict": "ok",
-   "note": "Статус честный; наблюдение: в src/Completeness.v есть частичный шаг к ней — diagonal_converges (:464, без допущений): последовательность CauchySeq с равномерным условием meta_cauchy (:421) сходится к диагональному пределу; глава этот файл не называет."
+   "note": "исправлено 12.11 (Часть V, шаг 4, слово автора): было «полная метрическая полнота пространства классов CauchySeq — отдельная задача, выходящая за пределы Главы 4.2» (статус был честен). Шагом 4 Части V создан src/RealPointComplete.v: regular_class_complete — Closed under the global context; class_complete_L4 — только ToS_Axioms.L4_witness."
   },
   {
-   "line": 861,
+   "line": 863,
    "theorem": null,
    "file": "src/CauchyReal.v",
    "claim": "И этот базовый результат доказан без завершённой бесконечности: `CauchyReal.v` в своей основе несёт ноль аксиом",
@@ -607,7 +607,7 @@
    "note": "cauchy_rational_approx, cauchy_complete_self и добавленные шагом 6 cauchy_complete_self_lower, cauchy_complete_self_two_sided — «Closed under the global context», как и остальные леммы файла."
   },
   {
-   "line": 907,
+   "line": 909,
    "theorem": null,
    "file": "src/process/ProcessCore.v",
    "claim": "`ProcessCore.v` объявляет правило — *всякий объект есть конечный процесс на каждой стадии* ($P4$); `ProcessArithmetic.v` — *каждая операция сохраняет свойство Коши*",
@@ -616,7 +616,7 @@
    "note": "Шапки: ProcessCore.v:4 «Rules: every mathematical object is a finite process at each stage (P4)»; ProcessArithmetic.v:4 «Rules: each operation preserves the Cauchy condition»."
   },
   {
-   "line": 924,
+   "line": 926,
    "theorem": "monotone_bounded_Cauchy",
    "file": "src/process/ProcessArithmetic.v",
    "claim": "критерий `monotone_bounded_Cauchy` опирается на $L3$ (не на чистую конструкцию)",
@@ -625,7 +625,7 @@
    "note": "Print Assumptions: Classical_Prop.classic."
   },
   {
-   "line": 1034,
+   "line": 1036,
    "theorem": "cauchy_const",
    "file": "src/CauchyReal.v",
    "claim": "постоянный процесс `cauchy_const 1` — два *разных* представителя, но один класс эквивалентности, а значит — одно число",
@@ -634,7 +634,7 @@
    "note": "cauchy_const существует (CauchyReal.v:173); но доказанная теорема о 0,999… записана на первой линии, через const_process 1 — см. запись о nine_equiv_one."
   },
   {
-   "line": 1036,
+   "line": 1038,
    "theorem": "nine_process_equiv_one",
    "file": "src/process/ProcessNinePoint.v",
    "claim": "Точная форма — определение конкретного представителя для $0{,}999…$, постоянного представителя для единицы и доказательство их эквивалентности по `cauchy_equiv`; в файле `process/ProcessNinePoint.v` она записана так:",
@@ -643,7 +643,7 @@
    "note": "исправлено 12.11 (шаг 8, слово автора «А»): схема стала кодом — в ProcessNinePoint.v добавлены nine_process, one_process, nine_process_lt_one_stagewise и Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process (доказательство — теорема первой линии nine_equiv_one, линии совпадают по CauchyProcessBridge); Closed under the global context"
   },
   {
-   "line": 1042,
+   "line": 1044,
    "theorem": "nine_process",
    "file": "src/process/ProcessNinePoint.v",
    "claim": "Definition nine_process : CauchySeq := to_CauchySeq nine_raw nine_raw_is_Cauchy.",
@@ -652,7 +652,7 @@
    "note": "исправлено 12.11 (шаг 8, слово автора «А»): имя теперь есть в формализации (ProcessNinePoint.v), блок страницы совпадает с исходником"
   },
   {
-   "line": 1043,
+   "line": 1045,
    "theorem": "one_process",
    "file": "src/process/ProcessNinePoint.v",
    "claim": "Definition one_process  : CauchySeq := cauchy_const 1.",
@@ -661,7 +661,7 @@
    "note": "исправлено 12.11 (шаг 8, слово автора «А»): определение добавлено в ProcessNinePoint.v; блок страницы совпадает с исходником"
   },
   {
-   "line": 1048,
+   "line": 1050,
    "theorem": "nine_raw_is_Cauchy",
    "file": "src/process/ProcessNinePoint.v",
    "claim": "`nine_raw_is_Cauchy` — доказательство его свойства Коши",
@@ -670,7 +670,7 @@
    "note": "Theorem nine_raw_is_Cauchy : is_Cauchy nine_raw (ProcessNinePoint.v:114); Closed under the global context"
   },
   {
-   "line": 1048,
+   "line": 1050,
    "theorem": "nine_equiv_one",
    "file": "src/process/ProcessNinePoint.v",
    "claim": "ту же теорему для голых процессов (`nine_equiv_one`) разбирает Глава 4.3.",
@@ -679,7 +679,7 @@
    "note": "nine_equiv_one : nine_raw ~~ const_process 1 (ProcessNinePoint.v:84), первая линия; Closed under the global context"
   },
   {
-   "line": 1070,
+   "line": 1072,
    "theorem": "is_Cauchy_iff_is_cauchy",
    "file": "src/CauchyProcessBridge.v",
    "claim": "(лемма `cauchy_Q_equiv` сводит свойство Коши второй линии к общему случаю третьей; лемма `is_Cauchy_iff_is_cauchy` связывает первую линию со второй)",
@@ -688,7 +688,7 @@
    "note": "исправлено 12.11 (шаг 7, слово автора): было «…, но первая и вторая линии не отождествлены машинно как единый терм» — оговорка, которую § 2.5.4 той же главы объявляет снятой; мосты is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47) и process_equiv_iff_cauchy_equiv (:58) доказаны"
   },
   {
-   "line": 1088,
+   "line": 1090,
    "theorem": null,
    "file": "src/CauchyReal.v",
    "claim": "Базовое построение `CauchySeq`, отношение `cauchy_equiv` и аддитивная арифметика в `CauchyReal.v` несут ноль аксиом и ноль незавершённых доказательств",
@@ -697,7 +697,7 @@
    "note": "В CauchyReal.v нет Axiom и Admitted; все 19 доказанных утверждений — «Closed under the global context»."
   },
   {
-   "line": 1090,
+   "line": 1092,
    "theorem": "monotone_bounded_Cauchy",
    "file": "src/process/ProcessArithmetic.v",
    "claim": "отдельные структурные критерии — например монотонность с ограниченностью — используют классическую логику $L3$",
@@ -706,7 +706,7 @@
    "note": "Print Assumptions: Classical_Prop.classic у monotone_bounded_Cauchy и decreasing_bounded_Cauchy; остальные 15 лемм ProcessArithmetic.v без допущений."
   },
   {
-   "line": 1102,
+   "line": 1104,
    "theorem": "process_equiv",
    "file": "src/process/ProcessCore.v",
    "claim": "Файл объявлен в репозитории как единый источник базовых процессных определений. Имена `RealProcess`, `is_Cauchy`, `const_process`, `process_equiv`, используемые ниже, — из него.",
@@ -715,7 +715,7 @@
    "note": "Шапка ProcessCore.v:3: «SINGLE source of truth for process definitions»; четыре имени объявлены в файле (:34, :68, :37, :170); наблюдение: шапка называет 25 Qed, действительных 19 (глава числа не приводит)."
   },
   {
-   "line": 1103,
+   "line": 1105,
    "theorem": null,
    "file": "src/ProcessGeneral.v",
    "claim": "`ProcessGeneral.v` Rocq-репозитория ToS (каталог `src/`), 16 доказанных утверждений, 0 `Admitted`, 0 аксиом.",
@@ -724,7 +724,7 @@
    "note": "Действительный счёт: 16 Qed, 0 Admitted, 0 Axiom; все 16 лемм — «Closed under the global context»."
   },
   {
-   "line": 1104,
+   "line": 1106,
    "theorem": null,
    "file": "src/process/ProcessArithmetic.v",
    "claim": "`ProcessArithmetic.v` Rocq-репозитория ToS (каталог `src/process/`), 17 доказанных утверждений, 0 `Admitted`.",
@@ -733,7 +733,7 @@
    "note": "исправлено 12.11 (шаг 7, слово автора): было 13; в файле 17 Qed (4 Theorem + 13 Lemma), 0 Admitted; шапка файла исправлена тем же шагом (13 → 17, два места)"
   },
   {
-   "line": 1105,
+   "line": 1107,
    "theorem": null,
    "file": "src/CauchyReal.v",
    "claim": "`CauchyReal.v` Rocq-репозитория ToS (каталог `src/`), 21 доказанное утверждение, 0 `Admitted`, 0 аксиом.",
@@ -742,13 +742,22 @@
    "note": "исправлено 12.11 (шаг 7, слово автора): было 18; после шага 6 в файле 21 Qed (4 Theorem + 17 Lemma), 0 Admitted, 0 Axiom; название шапки приведено верно"
   },
   {
-   "line": 1106,
+   "line": 1108,
    "theorem": null,
    "file": "src/process/ProcessBounds.v",
    "claim": "`ProcessBounds.v` Rocq-репозитория ToS (каталог `src/process/`), 11 доказанных утверждений, 0 `Admitted`, 0 аксиом.",
    "page_price": "0 аксиом",
    "verdict": "ok",
    "note": "Действительный счёт: 11 Qed, 0 Admitted, 0 Axiom; все 11 — «Closed under the global context» (шапка файла в двух местах называет 11 и 14)."
+  },
+  {
+   "line": 857,
+   "file": "src/RealPointComplete.v",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "Шаг 4 Части V: вторая из двух теорем, названных фразой (произвольные представители). Print Assumptions: только ToS_Axioms.L4_witness.",
+   "theorem": "class_complete_L4",
+   "claim": "без допущений для регулярных представителей, на $L4$ для произвольных."
   }
  ]
 }

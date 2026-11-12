@@ -10,7 +10,8 @@
    "claim": "`unit_interval_uncountable_trisect_v2` (ShrinkingIntervals_ERR.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 91
   },
   {
    "theorem": "binary_processes_not_enumerable",
@@ -18,7 +19,8 @@
    "claim": "`binary_processes_not_enumerable` (ProcessDiagonal.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 92
   },
   {
    "theorem": "process_continuum_hypothesis",
@@ -26,7 +28,8 @@
    "claim": "`process_continuum_hypothesis` (ProcessContinuumHypothesis.v) | исключённое третье (стандартная библиотека), извлечение свидетеля",
    "page_price": "исключённое третье (стандартная библиотека), извлечение свидетеля",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 100
   },
   {
    "theorem": "IVT_process",
@@ -34,7 +37,8 @@
    "claim": "`IVT_process` (IVT_ERR.v); `ivt_cauchy_real` (IVT_CauchyReal.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 103
   },
   {
    "theorem": "ivt_cauchy_real",
@@ -42,7 +46,8 @@
    "claim": "`ivt_cauchy_real` (IVT_CauchyReal.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 103
   },
   {
    "theorem": "Heine_Borel",
@@ -50,7 +55,8 @@
    "claim": "`Heine_Borel` (HeineBorel_ERR.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 106
   },
   {
    "theorem": "kruskal_chains",
@@ -58,7 +64,8 @@
    "claim": "`kruskal_chains`, `kruskal_forks` (KruskalTree.v)",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 95
   },
   {
    "theorem": "kruskal_forks",
@@ -66,7 +73,8 @@
    "claim": "`kruskal_forks` (KruskalTree.v)",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 95
   },
   {
    "theorem": "depth1_wqo",
@@ -74,7 +82,8 @@
    "claim": "`depth1_wqo`, `L5_from_kruskal` (KruskalFull.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 95
   },
   {
    "theorem": "L5_from_kruskal",
@@ -82,15 +91,35 @@
    "claim": "`L5_from_kruskal` (KruskalFull.v) | нет |",
    "page_price": "нет",
    "verdict": "ok",
-   "note": "сверена цена; формулировка — при аудите части"
+   "note": "сверена цена; формулировка — при аудите части",
+   "line": 95
   },
   {
    "theorem": "EVT_strong_process",
    "file": "src/EVT_idx.v",
-   "claim": "`EVT_strong_process` (EVT_idx.v) | исключённое третье (EVT_idx.v) |",
-   "page_price": "исключённое третье (EVT_idx.v)",
+   "claim": "`EVT_strong_process` (EVT_idx.v) | нет |",
+   "page_price": "нет",
    "verdict": "ok",
-   "note": "цена сверена при заведении базы (12.11 не проверялось): `EVT_idx.classic`; формулировка — при аудите Части V"
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «исключённое третье (EVT_idx.v)»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context",
+   "line": 104
+  },
+  {
+   "line": 107,
+   "file": "src/RealPointComplete.v",
+   "page_price": "нет — для регулярных представителей",
+   "verdict": "ok",
+   "note": "Строка внесена шагом 4 Части V (12.11, слово автора). Print Assumptions: Closed under the global context.",
+   "theorem": "regular_class_complete",
+   "claim": "`regular_class_complete`; `class_complete_L4` (RealPointComplete.v) | нет — для регулярных представителей; извлечение свидетеля — для произвольных |"
+  },
+  {
+   "line": 107,
+   "file": "src/RealPointComplete.v",
+   "page_price": "извлечение свидетеля — для произвольных",
+   "verdict": "ok",
+   "note": "Строка внесена шагом 4 Части V (12.11, слово автора). Print Assumptions: только ToS_Axioms.L4_witness.",
+   "theorem": "class_complete_L4",
+   "claim": "`class_complete_L4` (RealPointComplete.v) | нет — для регулярных представителей; извлечение свидетеля — для произвольных |"
   }
  ],
  "root": "library"

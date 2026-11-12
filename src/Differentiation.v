@@ -728,6 +728,96 @@ Check quadratic_loss_derivative.
 Check gradient_step_uses_derivative.
 Check local_min_zero_deriv.
 
+(* ========================================================================= *)
+(*  TWO RECORDS OF CONTINUITY AT A POINT (Nov 2026)                          *)
+(*                                                                          *)
+(*  [continuous_at] of this file speaks of increments h with 0 < |h|         *)
+(*  (a punctured neighbourhood); [Topology.continuous_at] speaks of all      *)
+(*  points y of the neighbourhood.  The second gives the first; the          *)
+(*  converse needs f to respect ==, and fails without it.                    *)
+(* ========================================================================= *)
+
+From ToS Require stdlib.Topology.
+
+Lemma topo_continuous_implies_punctured : forall (f : Q -> Q) (x : Q),
+  Topology.continuous_at f x -> continuous_at f x.
+Proof.
+  intros f x H eps Heps.
+  destruct (H eps Heps) as [delta [Hd Hb]].
+  exists delta. split; [exact Hd |].
+  intros h _ Hh. apply Hb.
+  assert (E : x + h - x == h) by ring.
+  qabs_rw E. exact Hh.
+Qed.
+
+(** A function that tells apart two records of one number. *)
+Definition rep_fn (y : Q) : Q :=
+  match Qden y with xO _ => 0 | _ => 1 end.
+
+Lemma rep_fn_shift : forall h : Q, rep_fn ((2#2) + h) = 0.
+Proof. intros [n d]. unfold rep_fn, Qplus. simpl. reflexivity. Qed.
+
+Lemma rep_fn_has_derivative : has_derivative rep_fn (2#2) 0.
+Proof.
+  intros eps Heps. exists 1. split; [lra |].
+  intros h Hpos _.
+  rewrite rep_fn_shift.
+  assert (E : 0 - rep_fn (2#2) - 0 * h == 0) by (unfold rep_fn; simpl; ring).
+  qabs_rw E. rewrite Qabs_pos; [| lra].
+  apply Qmult_lt_0_compat; assumption.
+Qed.
+
+Lemma rep_fn_punctured_continuous : continuous_at rep_fn (2#2).
+Proof. exact (deriv_implies_continuous rep_fn (2#2) 0 rep_fn_has_derivative). Qed.
+
+Lemma rep_fn_not_topo_continuous : ~ Topology.continuous_at rep_fn (2#2).
+Proof.
+  intro H.
+  destruct (H 1 ltac:(lra)) as [delta [Hd Hb]].
+  assert (Hlt : Qabs (1 - (2#2)) < delta).
+  { assert (E : 1 - (2#2) == 0) by reflexivity.
+    qabs_rw E. rewrite Qabs_pos; lra. }
+  specialize (Hb 1 Hlt).
+  assert (V1 : rep_fn 1 = 1) by reflexivity.
+  assert (V2 : rep_fn (2#2) = 0) by reflexivity.
+  rewrite V1, V2 in Hb. compute in Hb. discriminate.
+Qed.
+
+(** [has_derivative] alone does not give continuity in the sense of Topology.v. *)
+Theorem derivative_does_not_give_topo_continuity :
+  exists (f : Q -> Q) (x L : Q),
+    has_derivative f x L /\ ~ Topology.continuous_at f x.
+Proof.
+  exists rep_fn, (2#2), 0. split.
+  - exact rep_fn_has_derivative.
+  - exact rep_fn_not_topo_continuous.
+Qed.
+
+(** For a function that respects ==, the derivative does give it. *)
+Theorem deriv_implies_topo_continuous : forall (f : Q -> Q) (x L : Q),
+  (forall u v : Q, u == v -> f u == f v) ->
+  has_derivative f x L -> Topology.continuous_at f x.
+Proof.
+  intros f x L Hresp Hd eps Heps.
+  destruct (deriv_implies_continuous f x L Hd eps Heps) as [delta [Hdelta Hb]].
+  exists delta. split; [exact Hdelta |].
+  intros y Hy.
+  destruct (Qeq_dec (y - x) 0) as [Hz | Hnz].
+  - assert (Hyx : y == x) by lra.
+    assert (E : f y - f x == 0) by (rewrite (Hresp y x Hyx); ring).
+    qabs_rw E. rewrite Qabs_pos; lra.
+  - assert (Hpos : 0 < Qabs (y - x)).
+    { destruct (Qlt_le_dec (y - x) 0).
+      - rewrite Qabs_neg; lra.
+      - rewrite Qabs_pos; [| lra].
+        destruct (Qlt_le_dec 0 (y - x)); [lra | exfalso; apply Hnz; lra]. }
+    specialize (Hb (y - x) Hpos Hy).
+    assert (Hxy : x + (y - x) == y) by ring.
+    assert (E : f y - f x == f (x + (y - x)) - f x).
+    { rewrite (Hresp (x + (y - x)) y Hxy). reflexivity. }
+    qabs_rw E. exact Hb.
+Qed.
+
 Print Assumptions deriv_product.
 Print Assumptions deriv_power_succ.
 Print Assumptions local_min_zero_deriv.

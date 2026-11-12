@@ -10,7 +10,8 @@
    "claim": "Команда `Print Assumptions` для\n`IVT_process` отвечает «Closed under the global context»",
    "page_price": "без допущений",
    "verdict": "ok",
-   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части",
+   "line": 650
   },
   {
    "theorem": null,
@@ -18,31 +19,35 @@
    "claim": "архимедовость $ℚ$, а она доказана конструктивно: в\n`Archimedean_ERR` аксиом нет",
    "page_price": "в файле аксиом нет",
    "verdict": "ok",
-   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части; в файле нет объявлений Axiom и Parameter"
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части; в файле нет объявлений Axiom и Parameter",
+   "line": 649
   },
   {
    "theorem": "process_IVT",
    "file": "src/process/ProcessIVT.v",
-   "claim": "`process_IVT`, как и теорема `IVT_ERR`, доказана без допущений",
+   "claim": "`process_IVT`, как и теорема `IVT_process`, доказана без допущений",
    "page_price": "без допущений",
    "verdict": "ok",
-   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части",
+   "line": 694
   },
   {
    "theorem": "ivt_cauchy_real",
    "file": "src/IVT_CauchyReal.v",
-   "claim": "Теорема о промежуточном значении доказана без допущений (`IVT_process`, `process_IVT`, `ivt_cauchy_real`)",
+   "claim": "Теорема о промежуточном значении и теорема об экстремуме доказаны без допущений (`IVT_process`, `process_IVT`, `ivt_cauchy_real`",
    "page_price": "без допущений",
    "verdict": "ok",
-   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+   "note": "исправлено 12.11 (сверка цены); 12.11 вечером фраза расширена шагом 1 Части V; ivt_cauchy_real — Closed under the global context",
+   "line": 1149
   },
   {
    "theorem": "EVT_strong_process",
    "file": "src/EVT_idx.v",
-   "claim": "теорема об экстремуме — на $L3$: `classic` приходит в `EVT_ERR` и `EVT_idx` напрямую",
-   "page_price": "classic (L3)",
+   "claim": "`EVT_strong_process`, `EVT_complete`): и выбор половины в бисекции, и поиск ячейки сетки вычислимы.",
+   "page_price": "без допущений",
    "verdict": "ok",
-   "note": "цена сверена при заведении базы (12.11 не проверялось): аксиома `EVT_idx.classic`, объявленная в самом файле; формулировка — при аудите Части V"
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «теорема об экстремуме — на L3: classic приходит в EVT_ERR и EVT_idx напрямую»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context",
+   "line": 1149
   }
  ]
 }

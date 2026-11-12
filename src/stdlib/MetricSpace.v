@@ -13,7 +13,7 @@
 (*    Section 2: Q as a metric space via Qdist                            *)
 (*    Section 3: QVec L-infinity distance via component-max               *)
 (*                                                                         *)
-(*  STATUS: 18 Qed, 0 Admitted                                            *)
+(*  STATUS: 24 Qed, 0 Admitted                                            *)
 (*  AXIOMS: NONE                                                          *)
 (*                                                                         *)
 (*  Connection: CauchyReal.v, ProcessGeneral.v, FixedPoint.v              *)
@@ -170,6 +170,19 @@ Proof.
     assert (Hle : c * d x y <= 1 * d x y).
     { apply Qmult_le_compat_r; lra. }
     lra.
+Qed.
+
+(** The hypothesis [d_zero] at work (Nov 2026; until then it entered no
+    lemma of the section): a constant sequence converges to its value and is
+    a Cauchy sequence. *)
+Lemma const_limit_metric : forall x : X, is_limit_metric (fun _ => x) x.
+Proof.
+  intros x eps Heps. exists 0%nat. intros n _. rewrite (d_zero x). exact Heps.
+Qed.
+
+Lemma const_cauchy_metric : forall x : X, is_cauchy_metric (fun _ => x).
+Proof.
+  intros x eps Heps. exists 0%nat. intros m n _ _. rewrite (d_zero x). exact Heps.
 Qed.
 
 End MetricSpaces.
@@ -379,12 +392,33 @@ Proof.
   - rewrite Hr. exact Htail_le.
 Qed.
 
+(** The four properties for the distance on vectors itself (Nov 2026; until
+    then they were stated for lists only).  For lists the triangle inequality
+    needs equal lengths; for [QVec n] the lengths are equal by construction
+    ([qv_length]), so the condition disappears. *)
+Lemma QVec_dist_nonneg : forall (n : nat) (v1 v2 : QVec n), 0 <= QVec_dist v1 v2.
+Proof. intros n v1 v2. unfold QVec_dist. apply list_max_dist_nonneg. Qed.
+
+Lemma QVec_dist_zero : forall (n : nat) (v : QVec n), QVec_dist v v == 0.
+Proof. intros n v. unfold QVec_dist. apply list_max_dist_zero. Qed.
+
+Lemma QVec_dist_sym : forall (n : nat) (v1 v2 : QVec n),
+  QVec_dist v1 v2 == QVec_dist v2 v1.
+Proof. intros n v1 v2. unfold QVec_dist. apply list_max_dist_sym. Qed.
+
+Lemma QVec_dist_triangle : forall (n : nat) (v1 v2 v3 : QVec n),
+  QVec_dist v1 v3 <= QVec_dist v1 v2 + QVec_dist v2 v3.
+Proof.
+  intros n [l1 H1] [l2 H2] [l3 H3]. unfold QVec_dist. simpl.
+  apply list_max_dist_triangle; congruence.
+Qed.
+
 (* ========================================================================= *)
 (* SUMMARY                                                                   *)
 (* ========================================================================= *)
 
 (**
-  THEOREM INVENTORY (18 Qed, 0 Admitted)
+  THEOREM INVENTORY (24 Qed, 0 Admitted)
   ========================================
 
   Section 1 — Abstract Metric Space (Section MetricSpaces):
@@ -395,6 +429,8 @@ Qed.
     5.  contraction_nonneg_factor : 0 <= c
     6.  contraction_lt_one_factor : c < 1
     7.  contraction_shrinks     : d(f x, f y) <= d(x, y)
+    19. const_limit_metric      : a constant sequence converges (uses d_zero)
+    20. const_cauchy_metric     : a constant sequence is Cauchy (uses d_zero)
 
   Section 2 — Q Metric Space:
     8.  Q_dist_nonneg          : 0 <= |x - y|
@@ -409,5 +445,9 @@ Qed.
     15. list_max_dist_sym      : list_max_dist l1 l2 == list_max_dist l2 l1
     16. list_max_dist_head_le  : |x - y| <= list_max_dist (x::xs) (y::ys)
     17. list_max_dist_tail_le  : lmd xs ys <= list_max_dist (x::xs) (y::ys)
-    18. list_max_dist_triangle : triangle inequality for L-infinity
+    18. list_max_dist_triangle : triangle inequality for L-infinity (equal lengths)
+    21. QVec_dist_nonneg       : 0 <= QVec_dist v1 v2
+    22. QVec_dist_zero         : QVec_dist v v == 0
+    23. QVec_dist_sym          : QVec_dist v1 v2 == QVec_dist v2 v1
+    24. QVec_dist_triangle     : triangle inequality on QVec n, no condition
 *)

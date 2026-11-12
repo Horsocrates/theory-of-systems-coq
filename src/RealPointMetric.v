@@ -20,7 +20,7 @@
 
     Status: F-5 — метрика rp_dist на RealPoint (= CauchySeq до cauchy_equiv),
             axiom-free; разблокирована F-10. Готовит F-6 (топология на классах).
-    STATUS: 18 Qed, 0 Admitted, 0 axioms
+    STATUS: 21 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: May 2026
 *)
 
@@ -115,6 +115,35 @@ Definition rp_dist (a b : RealPoint) : RealPoint := cauchy_abs (cauchy_sub a b).
 Lemma cs_rp_dist : forall a b n,
   cs_seq (rp_dist a b) n = Qabs (cs_seq a n - cs_seq b n).
 Proof. reflexivity. Qed.
+
+(** The process of distances of TWO Cauchy processes is a Cauchy process --
+    stated as a lemma of its own (Nov 2026; until then the fact lived only
+    inside the type of [rp_dist], in two steps: cauchy_sub, then
+    cauchy_abs_is_cauchy, which is about ONE process). *)
+Lemma dist_of_dists_le : forall pm qm pn qn : Q,
+  Qabs (Qabs (pm - qm) - Qabs (pn - qn)) <= Qabs (pm - pn) + Qabs (qm - qn).
+Proof.
+  intros pm qm pn qn.
+  eapply Qle_trans; [ apply Qabs_abs_sub_le | ].
+  assert (E : pm - qm - (pn - qn) == (pm - pn) + - (qm - qn)) by ring.
+  rewrite (Qabs_wd _ _ E).
+  eapply Qle_trans; [ apply Qabs_triangle | ].
+  rewrite Qabs_opp. apply Qle_refl.
+Qed.
+
+Lemma cauchy_dist_is_cauchy : forall a b : CauchySeq,
+  is_cauchy (fun n => Qabs (cs_seq a n - cs_seq b n)).
+Proof.
+  intros a b. exact (cs_cauchy (rp_dist a b)).
+Qed.
+
+(** The same for bare processes nat -> Q. *)
+Lemma pointwise_dist_is_cauchy : forall R1 R2 : nat -> Q,
+  is_cauchy R1 -> is_cauchy R2 -> is_cauchy (fun n => Qabs (R1 n - R2 n)).
+Proof.
+  intros R1 R2 H1 H2.
+  exact (cauchy_dist_is_cauchy (mkCauchy R1 H1) (mkCauchy R2 H2)).
+Qed.
 
 (** Well-defined on classes: rp_dist respects cauchy_equiv in both args. *)
 Lemma rp_dist_compat : forall a a' b b' : RealPoint,

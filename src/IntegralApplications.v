@@ -277,7 +277,7 @@ Proof.
   assert (Hdecomp :
     f (x + h) * g (x + h) - f x * g x - (f' x * g x + f x * g' x) * h ==
     ef * g x + f x * eg + Df * Dg).
-  { unfold ef, eg, Df, Dg. ring. }
+  { unfold ef, eg, Df, Dg. apply product_decomp. }
   qabs_rw Hdecomp.
   (* Bound each of the three terms *)
   (* Term 1: |ef * g(x)| ≤ eps1*|h|*Mg *)
@@ -732,4 +732,60 @@ Proof.
   set (step := (b - a) / inject_Z (Z.of_nat (S N))) in *.
   (* RS(1*g) and RS(x*g') — need to match *)
   exact HN.
+Qed.
+
+(* ========================================================================= *)
+(*  EXACT UNIQUENESS OF THE ANTIDERIVATIVE (Nov 2026)                        *)
+(* ========================================================================= *)
+
+Lemma Qabs_le_all_eps_zero : forall (D c : Q), 0 < c ->
+  (forall eps, 0 < eps -> Qabs D <= eps * c) -> D == 0.
+Proof.
+  intros D c Hc H.
+  assert (Hnn := Qabs_nonneg D).
+  destruct (Qlt_le_dec 0 (Qabs D)) as [Hpos | Hle].
+  - exfalso.
+    set (e := Qabs D / (2 * c)).
+    assert (He : 0 < e) by (unfold e; apply Qlt_shift_div_l; lra).
+    specialize (H e He).
+    assert (Hec : e * c == Qabs D * (1#2)) by (unfold e; field; lra).
+    lra.
+  - assert (Hz : Qabs D == 0) by lra.
+    destruct (Qlt_le_dec D 0) as [Hn | Hp].
+    + rewrite Qabs_neg in Hz; lra.
+    + rewrite Qabs_pos in Hz; lra.
+Qed.
+
+(** Two functions with one derivative have EQUAL increments over [a,b] --
+    exactly, between the ends of the interval, and with no condition that the
+    functions respect ==: uniform differentiability gives continuity at every
+    point of the interval (MeanValueTheorem.continuous_at_qeq_values). *)
+Theorem antiderivative_unique_exact : forall (f g h : Q -> Q) (a b : Q),
+  udiff_on f h a b -> udiff_on g h a b ->
+  f b - f a == g b - g a.
+Proof.
+  intros f g h a b Huf Hug.
+  assert (Hab : a < b) by (destruct Huf; assumption).
+  assert (Hba : 0 < b - a) by lra.
+  assert (E : (f b - f a) - (g b - g a) == 0).
+  { apply (Qabs_le_all_eps_zero _ (b - a) Hba).
+    intros eps Heps.
+    destruct (antiderivative_unique f g h a b eps Huf Hug Heps) as [N HN].
+    cbv zeta in HN.
+    set (we := walk_point a ((b - a) / inject_Z (Z.of_nat (S N))) (S N)) in *.
+    assert (Hwe : we == b) by (unfold we; apply walk_endpoint_qeq; exact Hab).
+    assert (Hin : a <= we /\ we <= b).
+    { unfold we. apply (walk_point_in_interval a b N (S N) Hab). apply Nat.le_refl. }
+    destruct Hin as [Hlo Hhi].
+    assert (Hfv : f we == f b).
+    { apply continuous_at_qeq_values; [exact Hwe | |].
+      - apply (udiff_continuous_at f h a b we Huf); assumption.
+      - apply (udiff_continuous_at f h a b b Huf); lra. }
+    assert (Hgv : g we == g b).
+    { apply continuous_at_qeq_values; [exact Hwe | |].
+      - apply (udiff_continuous_at g h a b we Hug); assumption.
+      - apply (udiff_continuous_at g h a b b Hug); lra. }
+    assert (Hrw : (f b - f a) - (g b - g a) == (f we - f a) - (g we - g a)) by lra.
+    rewrite (Qabs_wd _ _ Hrw). exact HN. }
+  lra.
 Qed.

@@ -9,7 +9,7 @@
 (*  This file provides an alternative approach to EVT using argmax on grid   *)
 (*  instead of bisection search.                                             *)
 (*                                                                           *)
-(*  STATUS: 34 Qed, 0 Admitted — DEPRECATED, use EVT_idx.v instead          *)
+(*  STATUS: 36 Qed, 0 Admitted — DEPRECATED, use EVT_idx.v instead          *)
 (*                                                                           *)
 (*  Author: Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026          *)
 (* ========================================================================= *)
@@ -28,7 +28,7 @@
 (*    At each step n, grid has 2^n points.                                   *)
 (*    argmax_process : nat -> Q converges to actual maximum.                 *)
 (*                                                                           *)
-(*  AXIOMS: classic (L3) only. NO Axiom of Infinity.                         *)
+(*  AXIOMS: none since Nov 2026 (the grid-cell search is computed).          *)
 (*                                                                           *)
 (* ========================================================================= *)
 
@@ -360,66 +360,36 @@ Proof.
     unfold Qle, inject_Z. simpl. lia.
 Qed.
 
-(** Helper: x is between consecutive grid points (classical proof) *)
+(** Helper: the grid cell containing x is found by COMPUTATION -- walk the
+    cells from the right, comparing x with a grid point (Qlt_le_dec).
+    Nov 2026: this search used to go through [classic]; it never needed it,
+    so the whole extreme value chain below is now axiom-free. *)
+Lemma x_between_aux : forall a b n x m,
+  (m <= n)%nat -> (0 < m)%nat ->
+  grid_point a b n O <= x -> x <= grid_point a b n m ->
+  exists k, (k < m)%nat /\ grid_point a b n k <= x <= grid_point a b n (S k).
+Proof.
+  intros a b n x m. induction m as [|m' IH]; intros Hmn Hpos Hlo Hhi.
+  - lia.
+  - destruct (Qlt_le_dec x (grid_point a b n m')) as [Hlt | Hge].
+    + destruct m' as [|m''].
+      * exfalso. apply (Qlt_irrefl x).
+        apply Qlt_le_trans with (grid_point a b n O); assumption.
+      * assert (H1 : (S m'' <= n)%nat) by lia.
+        assert (H2 : (0 < S m'')%nat) by lia.
+        destruct (IH H1 H2 Hlo (Qlt_le_weak _ _ Hlt)) as [k [Hk Hbetween]].
+        exists k. split; [lia | exact Hbetween].
+    + exists m'. split; [lia | split; assumption].
+Qed.
+
 Lemma x_between_grid_points : forall a b n x,
   a < b -> (n > 0)%nat -> a <= x <= b ->
-  exists k, (k < n)%nat /\ 
-    grid_point a b n k <= x /\ x <= grid_point a b n (S k).
+  exists k, (k < n)%nat /\ grid_point a b n k <= x <= grid_point a b n (S k).
 Proof.
-  intros a b n x Hab Hn Hx.
-  destruct Hx as [Hax Hxb].
-  revert x Hax Hxb.
-  induction n as [|n' IH].
-  - lia.
-  - intros x Hax Hxb.
-    destruct n' as [|n''].
-    + (* n = 1: only interval is [gp(0), gp(1)] = [a, b] *)
-      exists 0%nat. split. { lia. }
-      split.
-      * rewrite grid_point_0 by lia. exact Hax.
-      * rewrite grid_point_n_is_b by lia. exact Hxb.
-    + (* n >= 2 *)
-      destruct (Qlt_le_dec (grid_point a b (S (S n'')) 1) x) as [Hgt | Hle].
-      * (* x > gp(1): use classical choice *)
-        destruct (classic (exists k, (k < S (S n''))%nat /\
-                  grid_point a b (S (S n'')) k <= x /\
-                  x <= grid_point a b (S (S n'')) (S k))) as [Hex | Hnex].
-        { exact Hex. }
-        { exfalso.
-          assert (Hcover : forall k, (k < S (S n''))%nat -> 
-                   grid_point a b (S (S n'')) k > x \/ 
-                   x > grid_point a b (S (S n'')) (S k)).
-          {
-            intros k Hk.
-            destruct (Qlt_le_dec x (grid_point a b (S (S n'')) k)) as [H1 | H1].
-            - left. exact H1.
-            - destruct (Qlt_le_dec (grid_point a b (S (S n'')) (S k)) x) as [H2 | H2].
-              + right. exact H2.
-              + exfalso. apply Hnex. exists k. split. exact Hk. split; assumption.
-          }
-          assert (Hchain : forall j, (j < S (S n''))%nat -> x > grid_point a b (S (S n'')) (S j)).
-          {
-            induction j.
-            - intros _. exact Hgt.
-            - intro Hj.
-              assert (Hj' : (j < S (S n''))%nat) by lia.
-              specialize (IHj Hj').
-              destruct (Hcover (S j) Hj) as [Hbad | Hok].
-              + exfalso. apply (Qlt_irrefl x).
-                apply Qlt_trans with (grid_point a b (S (S n'')) (S j)); assumption.
-              + exact Hok.
-          }
-          assert (Hcontra : x > grid_point a b (S (S n'')) (S (S n''))).
-          { apply Hchain. lia. }
-          rewrite grid_point_n_is_b in Hcontra by lia.
-          (* Hcontra: x > b, Hxb: x <= b - contradiction *)
-          apply Qlt_not_le in Hcontra. apply Hcontra. exact Hxb.
-        }
-      * (* x <= gp(1): x is in first interval *)
-        exists 0%nat. split. { lia. }
-        split.
-        { rewrite grid_point_0 by lia. exact Hax. }
-        { exact Hle. }
+  intros a b n x Hab Hn [Hax Hxb].
+  apply (x_between_aux a b n x n); [lia | lia | |].
+  - rewrite grid_point_0 by lia. exact Hax.
+  - rewrite grid_point_n_is_b by lia. exact Hxb.
 Qed.
 
 (** For any x in [a,b], there exists a grid point within spacing distance *)

@@ -12,7 +12,7 @@
 (*    - Dini's theorem: monotone pointwise -> uniform on bounded interval   *)
 (*    - Algebraic closure (sums) of uniform convergence                     *)
 (*                                                                          *)
-(*  AXIOMS: classic (inherited from MonotoneConvergence via udiff_on)       *)
+(*  AXIOMS: none (Print Assumptions of all 20 statements: Closed)           *)
 (*                                                                          *)
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)

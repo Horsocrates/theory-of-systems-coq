@@ -3,7 +3,7 @@
     Roles:    bridge between differentiation and integration processes
     Rules:    ftc_grid from RiemannIntegration.v, udiff_on from Differentiation.v
     Status:   complete
-    STATUS: 8 Qed, 0 Admitted, 0 axioms
+    STATUS: 14 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -19,7 +19,7 @@
 (*    Roles:    bridge connecting derivative + integral processes             *)
 (*    Rules:    ftc_grid error bound from RiemannIntegration.v               *)
 (*                                                                            *)
-(*  STATUS: 8 Qed, 0 Admitted                                               *)
+(*  STATUS: 14 Qed, 0 Admitted                                              *)
 (*  AXIOMS: none                                                              *)
 (* ========================================================================= *)
 
@@ -139,22 +139,11 @@ Qed.
 (*  Part IV: E/R/R Pattern                                               *)
 (* ================================================================== *)
 
-(** Convergence rate for FTC process *)
-Definition ftc_convergence_rate : Q := 1 # 2.
+(** The rate of the FTC process is not a number: it is governed by the
+    modulus of uniform differentiability -- see [ftc_error_level_bound] at
+    the end of the file.  (The constant [ftc_convergence_rate := 1 # 2], tied
+    to nothing, stood here until Nov 2026.) *)
 
-Lemma ftc_rate_valid : 0 < ftc_convergence_rate /\ ftc_convergence_rate < 1.
-Proof. unfold ftc_convergence_rate. split; lra. Qed.
-
-(** E/R/R: FTC as process construction *)
-Theorem ftc_is_process_construction : forall f f' a b,
-  a < b ->
-  exists err_proc : RealProcess,
-    (forall n, err_proc n == integral_process f' a b n - (f b - f a)).
-Proof.
-  intros f f' a b Hab.
-  exists (ftc_error_process f f' a b).
-  intro n. unfold ftc_error_process. reflexivity.
-Qed.
 
 (** P4: the FTC is not a single identity but a PROCESS of approximations *)
 (** At each refinement level n:                                            *)
@@ -177,3 +166,131 @@ Proof.
     intros x Hd. exact (deriv_process_cauchy f x (f' x) Hd).
   - exists (integral_process f' a b). reflexivity.
 Qed.
+
+(* ================================================================== *)
+(*  Part V: FTC as CONVERGENCE of the process (Nov 2026)               *)
+(* ================================================================== *)
+
+From Stdlib Require Import Morphisms.
+
+(** The process of Riemann sums of the derivative names the same point as
+    the increment f(b) - f(a).  The last grid node is b only up to ==; that
+    f takes ==-equal values there follows from uniform differentiability
+    (MeanValueTheorem.udiff_walk_endpoint_value), so the condition
+    [Proper (Qeq ==> Qeq) f], which stood here at first, was dropped. *)
+Theorem ftc_process_converges : forall (f f' : Q -> Q) (a b : Q),
+  udiff_on f f' a b ->
+  process_equiv (integral_process f' a b) (const_process (f b - f a)).
+Proof.
+  intros f f' a b Hud eps Heps.
+  assert (Hab : a < b) by (destruct Hud; assumption).
+  assert (Hba : 0 < b - a) by lra.
+  set (eps' := eps * (1#2) / (b - a)).
+  assert (Heps' : 0 < eps').
+  { unfold eps'. apply Qlt_shift_div_l; lra. }
+  destruct (ftc_grid_eventually f f' a b eps' Hud Heps') as [N HN].
+  exists N. intros n Hn.
+  specialize (HN n Hn).
+  unfold integral_process, integral_step, const_process.
+  rewrite (udiff_walk_endpoint_value f f' a b n Hud) in HN.
+  assert (Hcalc : eps' * (b - a) == eps * (1#2)).
+  { unfold eps'. field. lra. }
+  rewrite Hcalc in HN.
+  apply Qle_lt_trans with (eps * (1#2)); [exact HN | lra].
+Qed.
+
+(** Hence the integral process of a derivative is a Cauchy process. *)
+Corollary ftc_integral_process_Cauchy : forall (f f' : Q -> Q) (a b : Q),
+  udiff_on f f' a b ->
+  is_Cauchy (integral_process f' a b).
+Proof.
+  intros f f' a b Hud.
+  apply equiv_cauchy_l with (R1 := const_process (f b - f a)).
+  - apply process_equiv_sym. apply ftc_process_converges; assumption.
+  - apply const_is_Cauchy.
+Qed.
+
+(** The FTC error process vanishes: it names the point 0. *)
+Corollary ftc_error_process_vanishes : forall (f f' : Q -> Q) (a b : Q),
+  udiff_on f f' a b ->
+  process_equiv (ftc_error_process f f' a b) (const_process 0).
+Proof.
+  intros f f' a b Hud eps Heps.
+  destruct (ftc_process_converges f f' a b Hud eps Heps) as [N HN].
+  exists N. intros n Hn. specialize (HN n Hn).
+  unfold ftc_error_process, const_process in *.
+  assert (Heq : integral_process f' a b n - (f b - f a) - 0 ==
+                integral_process f' a b n - (f b - f a)) by ring.
+  rewrite (Qabs_wd _ _ Heq). exact HN.
+Qed.
+
+(** The affine case is exact on EVERY level (not only "from some level on"). *)
+Lemma integral_process_const_exact : forall c a b n,
+  integral_process (fun _ => c) a b n == c * (b - a).
+Proof.
+  intros c a b n. unfold integral_process.
+  rewrite riemann_sum_const.
+  unfold integral_step. field.
+  intro H. assert (Hp := inject_Z_Sn_pos n). lra.
+Qed.
+
+Lemma ftc_error_const_exact : forall c a b n,
+  ftc_error_process (fun x => c * x) (fun _ => c) a b n == 0.
+Proof.
+  intros c a b n. unfold ftc_error_process.
+  rewrite integral_process_const_exact. ring.
+Qed.
+
+
+(** E/R/R: FTC as process construction -- the error process BY NAME, the
+    Cauchy property of the process of sums, and the points both processes
+    name.  Stands here, after Part V, because it needs the convergence.
+    Until Nov 2026 only the first clause stood (Part IV), under [exists]:
+    true by definition, with an unused premise a < b. *)
+Theorem ftc_is_process_construction : forall (f f' : Q -> Q) (a b : Q),
+  udiff_on f f' a b ->
+  (forall n, ftc_error_process f f' a b n == integral_process f' a b n - (f b - f a)) /\
+  is_Cauchy (integral_process f' a b) /\
+  process_equiv (integral_process f' a b) (const_process (f b - f a)) /\
+  process_equiv (ftc_error_process f f' a b) (const_process 0).
+Proof.
+  intros f f' a b Hud. split; [| split; [| split]].
+  - intro n. unfold ftc_error_process. reflexivity.
+  - exact (ftc_integral_process_Cauchy f f' a b Hud).
+  - exact (ftc_process_converges f f' a b Hud).
+  - exact (ftc_error_process_vanishes f f' a b Hud).
+Qed.
+
+(** The rate of the FTC process: once the step of level n is below the
+    modulus delta that uniform differentiability gives for eps, the error of
+    level n is at most eps * (b - a). *)
+Theorem ftc_error_level_bound : forall (f f' : Q -> Q) (a b eps delta : Q) (n : nat),
+  a < b -> 0 < eps ->
+  (forall x h : Q, a <= x -> x <= b -> 0 < Qabs h -> Qabs h < delta ->
+     Qabs (f (x + h) - f x - f' x * h) < eps * Qabs h) ->
+  integral_step a b n < delta ->
+  Qabs (ftc_error_process f f' a b n) <= eps * (b - a).
+Proof.
+  intros f f' a b eps delta n Hab Heps Hbd Hsmall.
+  assert (Hdelta : 0 < delta).
+  { eapply Qlt_trans; [apply (integral_step_pos a b n Hab) | exact Hsmall]. }
+  unfold integral_step in Hsmall.
+  assert (H := rs_tele_error_level f f' a b eps delta n Hab Heps Hbd Hsmall).
+  assert (Htele := telescope_collapse f a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)).
+  assert (Hend := walk_endpoint_qeq a b n Hab).
+  assert (Hin := walk_point_in_interval a b n (S n) Hab (Nat.le_refl _)).
+  destruct Hin as [Hlo Hhi].
+  assert (Hval : f (walk_point a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)) == f b).
+  { apply continuous_at_qeq_values; [exact Hend | |].
+    - apply (local_modulus_continuous_at f f' a b eps delta); assumption.
+    - apply (local_modulus_continuous_at f f' a b eps delta); try assumption; lra. }
+  unfold ftc_error_process, integral_process, integral_step.
+  assert (Heq : riemann_sum f' a ((b - a) / inject_Z (Z.of_nat (S n))) (S n) - (f b - f a) ==
+                riemann_sum f' a ((b - a) / inject_Z (Z.of_nat (S n))) (S n) -
+                tele_sum f a ((b - a) / inject_Z (Z.of_nat (S n))) (S n)).
+  { rewrite Htele. rewrite Hval. reflexivity. }
+  rewrite (Qabs_wd _ _ Heq). exact H.
+Qed.
+
+
+Print Assumptions ftc_process_converges.

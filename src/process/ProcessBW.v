@@ -3,7 +3,7 @@
     Roles:    each interval contains infinitely many terms of s
     Rules:    pigeonhole — at least one half has infinitely many terms
     Status:   complete
-    STATUS: 9 Qed, 0 Admitted, 0 axioms
+    STATUS: 10 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -19,7 +19,7 @@
 (*  NOTE: BW returns CauchySeq (from CauchyReal.v).                         *)
 (*  We use ProcessBridge to convert to RealProcess.                           *)
 (*                                                                            *)
-(*  STATUS: 9 Qed, 0 Admitted                                               *)
+(*  STATUS: 10 Qed, 0 Admitted                                              *)
 (*  AXIOMS: classic (inherited from BolzanoWeierstrass)                      *)
 (* ========================================================================= *)
 
@@ -132,41 +132,71 @@ Qed.
 (*  Part III: Bridge from CauchySeq                                    *)
 (* ================================================================== *)
 
-(** BW gives a CauchySeq; convert to RealProcess *)
+(** Bolzano-Weierstrass in process language: a Cauchy process L inside [a,b]
+    such that every far stage of L is approached, within eps, by terms of s
+    with arbitrarily large indices (a cluster point).  Witness: the process
+    of left endpoints of the bisection.
+    Until Nov 2026 the conclusion was only [exists L, is_Cauchy L]: it did
+    not mention s and held for the zero process. *)
 Theorem process_BW : forall (s : nat -> Q) (a b : Q),
   a < b -> bounded_seq s a b ->
   exists L : RealProcess,
-    ProcessCore.is_Cauchy L.
+    ProcessCore.is_Cauchy L /\
+    ProcessCore.in_interval a b L /\
+    forall eps : Q, 0 < eps ->
+      exists M0 : nat, forall M : nat, (M0 <= M)%nat ->
+        forall N : nat, exists k : nat, (N <= k)%nat /\ Qabs (L M - s k) < eps.
 Proof.
   intros s a b Hab Hbnd.
-  destruct (bolzano_weierstrass s a b Hab Hbnd) as [L _].
-  exists (cauchyseq_to_process L).
-  apply cauchyseq_is_cauchy.
+  assert (Hvalid : a <= b) by lra.
+  exists (bw_left_process s a b). split; [| split].
+  - apply bw_left_is_cauchy_process; assumption.
+  - intro n. unfold bw_left_process.
+    pose proof (bw_left_mono s a b Hvalid 0%nat n ltac:(lia)) as H1.
+    pose proof (bw_right_mono s a b Hvalid 0%nat n ltac:(lia)) as H3.
+    assert (H2 : bw_left (bw_iter s (mkBW a b) n) <= bw_right (bw_iter s (mkBW a b) n)).
+    { apply bw_iter_valid. exact Hvalid. }
+    simpl in H1, H3. split; lra.
+  - intros eps Heps.
+    destruct (bw_width_to_zero s a b Hab eps Heps) as [M0 HM0].
+    exists M0. intros M HM N.
+    destruct (bw_infinitely_many s a b M0 Hvalid Hbnd N) as [k [HkN [Hklo Hkhi]]].
+    exists k. split; [exact HkN|].
+    unfold bw_left_process.
+    pose proof (bw_left_mono s a b Hvalid M0 M HM) as H1.
+    pose proof (bw_right_mono s a b Hvalid M0 M HM) as H3.
+    assert (H2 : bw_left (bw_iter s (mkBW a b) M) <= bw_right (bw_iter s (mkBW a b) M)).
+    { apply bw_iter_valid. exact Hvalid. }
+    apply Qabs_case; intros; lra.
 Qed.
 
 (* ================================================================== *)
 (*  Part IV: E/R/R Pattern                                             *)
 (* ================================================================== *)
 
-(** BW as process construction: nested intervals + cluster point *)
+(** BW as process construction: the two processes of bisection endpoints,
+    BY NAME, and the role of every stage -- the interval between them holds
+    terms of s with arbitrarily large indices.
+    Until Nov 2026 the two processes stood under [exists] and were not tied
+    to s: the conclusion held for a pair of zero processes. *)
 Theorem bw_is_process_construction : forall s a b,
   a < b -> bounded_seq s a b ->
-  exists (left_proc right_proc : RealProcess),
-    monotone_increasing left_proc /\
-    monotone_decreasing right_proc /\
-    ProcessCore.is_Cauchy left_proc /\
-    ProcessCore.is_Cauchy right_proc /\
-    process_equiv left_proc right_proc.
+    monotone_increasing (bw_left_process s a b) /\
+    monotone_decreasing (bw_right_process s a b) /\
+    ProcessCore.is_Cauchy (bw_left_process s a b) /\
+    ProcessCore.is_Cauchy (bw_right_process s a b) /\
+    process_equiv (bw_left_process s a b) (bw_right_process s a b) /\
+    (forall n, infinitely_many_in s (bw_left_process s a b n) (bw_right_process s a b n)).
 Proof.
   intros s a b Hab Hbnd.
-  exists (bw_left_process s a b).
-  exists (bw_right_process s a b).
-  split; [| split; [| split; [| split]]].
+  split; [| split; [| split; [| split; [| split]]]].
   - apply bw_left_increasing; assumption.
   - apply bw_right_decreasing; assumption.
   - apply bw_left_is_cauchy_process; assumption.
   - apply bw_right_is_cauchy_process; assumption.
   - apply bw_endpoints_equiv; assumption.
+  - intro n. unfold bw_left_process, bw_right_process.
+    apply bw_infinitely_many; [lra | exact Hbnd].
 Qed.
 
 (** BW convergence rate is 1/2 (interval halves) *)
@@ -174,3 +204,13 @@ Definition bw_convergence_rate : Q := 1 # 2.
 
 Lemma bw_rate_valid : 0 < bw_convergence_rate /\ bw_convergence_rate < 1.
 Proof. unfold bw_convergence_rate. split; lra. Qed.
+
+(** The number is tied to the process: the width of the bisection interval
+    at stage n+1 is the width at stage n times the rate (Nov 2026). *)
+Lemma bw_rate_is_width_ratio : forall s a b n,
+  bw_right_process s a b (S n) - bw_left_process s a b (S n) ==
+  bw_convergence_rate * (bw_right_process s a b n - bw_left_process s a b n).
+Proof.
+  intros s a b n. unfold bw_right_process, bw_left_process. simpl bw_iter.
+  rewrite bw_step_width. unfold bw_convergence_rate. field.
+Qed.

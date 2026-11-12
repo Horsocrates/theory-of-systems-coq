@@ -3,7 +3,7 @@
     Roles:    Cauchy process in [a,b], converging to root
     Rules:    bisection — evaluate sign at midpoint, choose half
     Status:   complete
-    STATUS: 13 Qed, 0 Admitted, 0 axioms
+    STATUS: 14 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -18,7 +18,7 @@
 (*    Roles:    Cauchy process in [a,b], converging to root                  *)
 (*    Rules:    bisection — evaluate sign at midpoint, choose half           *)
 (*                                                                            *)
-(*  STATUS: 13 Qed, 0 Admitted                                               *)
+(*  STATUS: 14 Qed, 0 Admitted                                               *)
 (*  AXIOMS: none (inherits classic from IVT_ERR)                             *)
 (* ========================================================================= *)
 
@@ -173,3 +173,18 @@ Definition ivt_convergence_rate : Q := 1 # 2.
 
 Lemma ivt_rate_valid : 0 < ivt_convergence_rate /\ ivt_convergence_rate < 1.
 Proof. unfold ivt_convergence_rate. split; lra. Qed.
+
+(** The number is tied to the process: the width of the bisection interval
+    at stage n+1 is the width at stage n times the rate (Nov 2026). *)
+Lemma ivt_rate_is_width_ratio : forall f a b n,
+  bis_right (bisection_iter f (mkBisection a b) (S n))
+  - bis_left (bisection_iter f (mkBisection a b) (S n)) ==
+  ivt_convergence_rate *
+  (bis_right (bisection_iter f (mkBisection a b) n)
+   - bis_left (bisection_iter f (mkBisection a b) n)).
+Proof.
+  intros f a b n.
+  rewrite (bisection_width f a b (S n)), (bisection_width f a b n).
+  rewrite Qpow2_Sn. unfold ivt_convergence_rate.
+  field. apply Qpow2_nonzero.
+Qed.

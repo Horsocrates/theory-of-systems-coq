@@ -1,4 +1,15 @@
-(* ProcessSpace.v — Topology on process space *)
+(** * ProcessSpace.v — Finite-horizon distance and balls on process space
+    Elements: processes (nat -> Q), horizons N, radii
+    Roles:    cylinder, process_dist (weighted sum up to horizon N),
+              process_ball, process_bounded
+    Rules:    the distance of a process to itself is zero; a centre lies in
+              its own ball
+    Status:   infrastructure layer; NO completeness theorem here
+              (process_space_complete is the conjunction of process_dist_self
+              and self_in_ball; completeness of the classes: RealPointComplete.v)
+    STATUS: 6 Qed, 0 Admitted, 0 axioms
+    Author: Horsocrates | header added Nov 2026
+*)
 From Stdlib Require Import QArith QArith_base Lia.
 From Stdlib Require Import QArith.Qabs.
 From Stdlib Require Import Lqa.
@@ -60,4 +71,4 @@ Theorem process_space_complete :
   (forall f r N, 0 < r -> process_ball f r N f).
 Proof. split; [exact process_dist_self | exact self_in_ball]. Qed.
 
-Definition process_space_count := 7%nat.
+Definition process_space_count := 6%nat.

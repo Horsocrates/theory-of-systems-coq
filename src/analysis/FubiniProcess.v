@@ -2,7 +2,7 @@
     Elements: Rectangle records, 2D step functions, iterated integrals
     Roles:    Double integral, iterated integral, order exchange
     Rules:    Fubini: integral_xy = integral_yx for step functions
-    STATUS:   20 Qed, 0 Admitted, 0 axioms
+    STATUS:   30 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: March 2026
 
     Fubini's theorem says: for "nice" functions on R^2,
@@ -282,3 +282,105 @@ Qed.
     - Trace: discrete observation on matrices
     - Both: P4 process invariance under re-ordering
 *)
+
+(* ========================================================================= *)
+(*  Nov 2026: the iterated integral built from TWO one-dimensional integrals, *)
+(*  and the order in which the contributions are added                        *)
+(* ========================================================================= *)
+
+From Stdlib Require Import Permutation.
+
+(* [iterated_xy] above is the double integral written a second time: one
+   product with two orders of the factors.  Here the iterated integral is
+   really iterated: the inner one-dimensional [step_integral] over x gives a
+   constant on [y1,y2], that is, again a one-dimensional step, and that step
+   is integrated over y. *)
+(* сечение прямоугольного вклада вдоль x (при фиксированном y из [y1,y2]) и вдоль y *)
+Definition slice_x (r : Rectangle) : Step :=
+  mkStep (rect_val r) (rect_x1 r) (rect_x2 r) (rect_x_valid r).
+Definition slice_y (r : Rectangle) : Step :=
+  mkStep (rect_val r) (rect_y1 r) (rect_y2 r) (rect_y_valid r).
+
+(* внутренний интеграл по x даёт постоянную на [y1,y2] — снова одномерную ступень *)
+Definition inner_x_then_y (r : Rectangle) : Step :=
+  mkStep (step_integral (slice_x r)) (rect_y1 r) (rect_y2 r) (rect_y_valid r).
+Definition inner_y_then_x (r : Rectangle) : Step :=
+  mkStep (step_integral (slice_y r)) (rect_x1 r) (rect_x2 r) (rect_x_valid r).
+
+(* два последовательных одномерных интеграла *)
+Definition nested_xy (r : Rectangle) : Q := step_integral (inner_x_then_y r).
+Definition nested_yx (r : Rectangle) : Q := step_integral (inner_y_then_x r).
+
+Lemma nested_xy_eq_iterated : forall r, nested_xy r == iterated_xy r.
+Proof. intros r. unfold nested_xy, inner_x_then_y, slice_x, iterated_xy, step_integral. simpl. ring. Qed.
+
+Lemma nested_yx_eq_iterated : forall r, nested_yx r == iterated_yx r.
+Proof. intros r. unfold nested_yx, inner_y_then_x, slice_y, iterated_yx, step_integral. simpl. ring. Qed.
+
+(* Фубини для одного вклада: два вложенных одномерных интеграла в разных порядках равны *)
+Theorem fubini_rectangle_nested : forall r, nested_xy r == nested_yx r.
+Proof.
+  intros r. rewrite nested_xy_eq_iterated, nested_yx_eq_iterated. apply fubini_rectangle.
+Qed.
+
+(* ... и оба равны двойному интегралу вклада *)
+Theorem nested_eq_double : forall r,
+  nested_xy r == rect_integral r /\ nested_yx r == rect_integral r.
+Proof.
+  intros r. split.
+  - rewrite nested_xy_eq_iterated. apply iterated_eq_double.
+  - rewrite nested_yx_eq_iterated. apply iterated_yx_eq_double.
+Qed.
+
+(* список вкладов: повторный интеграл списка = одномерный интеграл ступенчатой функции,
+   составленной из внутренних интегралов *)
+Lemma nested_list_xy : forall f : StepFun2D,
+  step_fun_integral (map inner_x_then_y f) == iterated_xy_list f.
+Proof.
+  induction f as [| r rest IH]; simpl.
+  - reflexivity.
+  - rewrite IH. fold (nested_xy r). rewrite nested_xy_eq_iterated. reflexivity.
+Qed.
+
+Lemma nested_list_yx : forall f : StepFun2D,
+  step_fun_integral (map inner_y_then_x f) == iterated_yx_list f.
+Proof.
+  induction f as [| r rest IH]; simpl.
+  - reflexivity.
+  - rewrite IH. fold (nested_yx r). rewrite nested_yx_eq_iterated. reflexivity.
+Qed.
+
+Theorem fubini_step_nested : forall f : StepFun2D,
+  step_fun_integral (map inner_x_then_y f) == step_fun_integral (map inner_y_then_x f) /\
+  step_fun_integral (map inner_x_then_y f) == integral_2d f.
+Proof.
+  intros f. split.
+  - rewrite nested_list_xy, nested_list_yx. apply fubini_step.
+  - rewrite nested_list_xy. apply iterated_xy_eq_2d.
+Qed.
+
+(* ---------- (2) порядок сложения вкладов ---------- *)
+
+Lemma integral_2d_perm : forall f g : StepFun2D,
+  Permutation f g -> integral_2d f == integral_2d g.
+Proof.
+  intros f g H. induction H as [| x l l' H IH | x y l | l l' l'' H1 IH1 H2 IH2]; simpl.
+  - reflexivity.
+  - rewrite IH. reflexivity.
+  - ring.
+  - rewrite IH1. exact IH2.
+Qed.
+
+Lemma integral_2d_app_comm : forall f g : StepFun2D,
+  integral_2d (f ++ g) == integral_2d (g ++ f).
+Proof. intros f g. apply integral_2d_perm. apply Permutation_app_comm. Qed.
+
+(* общий закон порядка: переставь вклады как угодно и возьми любой порядок интегрирования *)
+Theorem fubini_step_perm : forall f g : StepFun2D,
+  Permutation f g ->
+  iterated_xy_list f == iterated_yx_list g /\ iterated_xy_list f == integral_2d g.
+Proof.
+  intros f g H. split.
+  - rewrite iterated_xy_eq_2d, iterated_yx_eq_2d. apply integral_2d_perm. exact H.
+  - rewrite iterated_xy_eq_2d. apply integral_2d_perm. exact H.
+Qed.

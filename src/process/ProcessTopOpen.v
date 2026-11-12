@@ -3,7 +3,7 @@
     Roles:    covering (balls that cover S), refining (smaller balls)
     Rules:    ball overlap (union is open), rational density
     Status:   complete
-    STATUS: 20 Qed, 0 Admitted, 0 axioms
+    STATUS: 16 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -15,7 +15,7 @@
 (*    S_n = union of rational balls B(c_i, r_i) with c_i, r_i ∈ Q          *)
 (*  The process {S_n} IS the open set.                                       *)
 (*                                                                           *)
-(*  STATUS: 20 Qed, 0 Admitted                                              *)
+(*  STATUS: 16 Qed, 0 Admitted                                              *)
 (*  AXIOMS: none                                                             *)
 (* ========================================================================= *)
 
@@ -261,6 +261,43 @@ Proof.
   intros op n. destruct (op n) as [| b rest].
   - left. reflexivity.
   - right. exists b, rest. reflexivity.
+Qed.
+
+(* ================================================================== *)
+(*  What finiteness of a frame gives (Nov 2026)                         *)
+(* ================================================================== *)
+
+(** [p4_cover_finite] only unfolds the type: a list is empty or has a head.
+    The content of finiteness: a finite frame covers a BOUNDED set only --
+    a property an infinite family of balls does not have. *)
+Lemma cover_frame_bounded : forall bc : QBallCover,
+  exists M : Q, 0 < M /\ forall x, covered_by_balls bc x -> Qabs x < M.
+Proof.
+  induction bc as [| [c r] rest IH].
+  - exists 1. split; [lra|]. intros x [p [Hin _]]. destruct Hin.
+  - destruct IH as [M [HM HB]].
+    exists (M + Qabs c + Qabs r). split.
+    + pose proof (Qabs_nonneg c). pose proof (Qabs_nonneg r). lra.
+    + intros x [p [Hin [Hpos Hball]]].
+      pose proof (Qabs_nonneg c) as Hc. pose proof (Qabs_nonneg r) as Hr.
+      destruct Hin as [Heq | Hin].
+      * subst p. simpl in Hpos, Hball. unfold in_ball in Hball.
+        assert (Htri : Qabs x <= Qabs (x - c) + Qabs c).
+        { assert (E : x == (x - c) + c) by ring.
+          rewrite (Qabs_wd _ _ E) at 1. apply Qabs_triangle. }
+        assert (Hrr : r <= Qabs r) by apply Qle_Qabs.
+        lra.
+      * assert (Hx : Qabs x < M).
+        { apply HB. exists p. split; [exact Hin | split; assumption]. }
+        lra.
+Qed.
+
+(** Refinement keeps what is covered on all later levels. *)
+Lemma refining_monotone : forall (op : OpenProcess), is_refining op ->
+  forall n m x, (n <= m)%nat -> covered_by_balls (op n) x -> covered_by_balls (op m) x.
+Proof.
+  intros op Href n m x Hnm Hx. induction Hnm as [|m Hnm IH]; [exact Hx|].
+  apply Href. exact IH.
 Qed.
 
 (* ================================================================== *)

@@ -2121,3 +2121,5 @@ src/foundation/ReflectionRecursion.v
 src/foundation/ComparisonLevels.v
 src/foundation/BinarityVsTotality.v
 src/foundation/TotalityNow.v
+src/RealPointComplete.v
+src/EVT_ArgmaxNotCauchy.v

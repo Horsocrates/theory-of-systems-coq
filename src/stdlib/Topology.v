@@ -8,7 +8,7 @@
               continuous = preimage of open is open (constitution)
     Status:   open | closed | bounded | compact
 
-    STATUS: 19 Qed, 0 Admitted, 0 axioms
+    STATUS: 21 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -414,4 +414,26 @@ Proof.
       assert (Htri0 := Qabs_triangle (f y - f x) (f x)).
       lra. }
     lra.
+Qed.
+
+(* ===== The converse: open preimages give continuity (Nov 2026) ===== *)
+
+(** The other side of [continuous_preserves_open_preimage]. *)
+Lemma open_preimage_implies_continuous : forall f : Q -> Q,
+  (forall S, is_open S -> is_open (fun x => S (f x))) -> continuous f.
+Proof.
+  intros f H x eps Heps.
+  assert (Hb : is_open (open_ball (f x) eps)) by (apply open_ball_is_open; exact Heps).
+  destruct (H _ Hb x (open_ball_center (f x) eps Heps)) as [delta [Hd Hin]].
+  exists delta. split; [exact Hd|].
+  intros y Hy. apply (Hin y). exact Hy.
+Qed.
+
+(** Continuity IS the openness of preimages of open sets -- both sides. *)
+Theorem continuous_iff_open_preimage : forall f : Q -> Q,
+  continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))).
+Proof.
+  intro f. split.
+  - exact (continuous_preserves_open_preimage f).
+  - exact (open_preimage_implies_continuous f).
 Qed.

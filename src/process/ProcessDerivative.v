@@ -3,7 +3,7 @@
     Roles:    Cauchy process converging to slope
     Rules:    has_derivative condition from Differentiation.v
     Status:   complete
-    STATUS: 16 Qed, 0 Admitted, 0 axioms
+    STATUS: 17 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -19,7 +19,7 @@
 (*    Roles:    Cauchy process converging to slope                           *)
 (*    Rules:    has_derivative condition from Differentiation.v              *)
 (*                                                                            *)
-(*  STATUS: 16 Qed, 0 Admitted                                               *)
+(*  STATUS: 17 Qed, 0 Admitted                                               *)
 (*  AXIOMS: none                                                              *)
 (* ========================================================================= *)
 
@@ -266,16 +266,19 @@ Qed.
 (*  Part V: E/R/R Pattern                                               *)
 (* ================================================================== *)
 
-(** E/R/R: derivative as process construction *)
+(** E/R/R: the derivative as process construction -- about the process of
+    difference quotients BY NAME: its n-th stage, its Cauchy property and
+    the point it names.
+    Until Nov 2026 the process stood under [exists]: the conclusion held
+    for [const_process L] and did not mention f. *)
 Theorem derivative_is_process_construction : forall f x L,
   has_derivative f x L ->
-  exists proc : RealProcess,
-    is_Cauchy proc /\
-    process_equiv proc (const_process L).
+  (forall n, deriv_process f x n == (f (x + deriv_step n) - f x) / deriv_step n) /\
+  is_Cauchy (deriv_process f x) /\
+  process_equiv (deriv_process f x) (const_process L).
 Proof.
-  intros f x L Hderiv.
-  exists (deriv_process f x).
-  split.
+  intros f x L Hderiv. split; [| split].
+  - intro n. unfold deriv_process. reflexivity.
   - exact (deriv_process_cauchy f x L Hderiv).
   - exact (deriv_process_converges f x L Hderiv).
 Qed.
@@ -284,8 +287,26 @@ Qed.
 (** Each stage n gives a rational approximation (f(x+h_n)-f(x))/h_n *)
 (** No completed limit object needed *)
 
-(** Convergence rate: h_n = 1/(n+1) -> 0 *)
-Definition deriv_convergence_rate : Q := 1 # 2.
-
-Lemma deriv_rate_valid : 0 < deriv_convergence_rate /\ deriv_convergence_rate < 1.
-Proof. unfold deriv_convergence_rate. split; lra. Qed.
+(** The rate of the derivative process.  The step is h_n = 1/(n+1): there is
+    no fixed ratio between stages (the constant [deriv_convergence_rate :=
+    1 # 2], tied to nothing, stood here until Nov 2026).  The actual estimate:
+    if the remainder is quadratic, |f(x+h) - f x - L h| <= C h^2, then the
+    error of stage n is at most C * h_n = C/(n+1). *)
+Theorem deriv_process_rate : forall (f : Q -> Q) (x L C : Q),
+  (forall h, 0 < h -> Qabs (f (x + h) - f x - L * h) <= C * (h * h)) ->
+  forall n, Qabs (deriv_process f x n - L) <= C * deriv_step n.
+Proof.
+  intros f x L C H n.
+  assert (Hh : 0 < deriv_step n) by apply deriv_step_pos.
+  assert (E : deriv_process f x n - L ==
+              (f (x + deriv_step n) - f x - L * deriv_step n) * / deriv_step n).
+  { unfold deriv_process. cbv zeta. field. lra. }
+  rewrite (Qabs_wd _ _ E). rewrite Qabs_Qmult.
+  assert (Hinv : 0 < / deriv_step n) by (apply Qinv_lt_0_compat; exact Hh).
+  rewrite (Qabs_pos (/ deriv_step n)) by lra.
+  apply Qle_trans with (C * (deriv_step n * deriv_step n) * / deriv_step n).
+  - apply Qmult_le_compat_r; [apply H; exact Hh | lra].
+  - assert (E2 : C * (deriv_step n * deriv_step n) * / deriv_step n == C * deriv_step n)
+      by (field; lra).
+    rewrite E2. apply Qle_refl.
+Qed.

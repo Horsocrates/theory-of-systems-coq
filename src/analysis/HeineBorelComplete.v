@@ -13,7 +13,8 @@
     Roles:    net -> Approximation, cover -> Container, delta -> Modulus
     Rules:    eps-net coverage (constitution), Lebesgue number (constraint)
 
-    STATUS: 22 Qed, 0 Admitted, 0 axioms
+    STATUS: 28 Qed, 0 Admitted; no axioms of its own, one lemma
+            (mono_bounded_is_cauchy) rests on classic
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -305,10 +306,11 @@ Qed.
 
 (** 8. lipschitz_uniform_cont: Lipschitz implies uniformly continuous *)
 Theorem lipschitz_uniform_cont : forall f a b K,
-  a <= b -> Lipschitz_on f a b K ->
+  Lipschitz_on f a b K ->
   uniformly_continuous_on f a b.
 Proof.
-  intros f a b K Hab [HK Hlip] eps Heps.
+  (* the premise a <= b, never used in the proof, was dropped in Nov 2026 *)
+  intros f a b K [HK Hlip] eps Heps.
   set (delta := eps / (K + 1)).
   assert (HKp1 : K + 1 > 0) by lra.
   exists delta. split.
@@ -538,7 +540,7 @@ Lemma udiff_uniform_cont : forall (f : Q -> Q) (a b K : Q),
   uniformly_continuous_on f a b.
 Proof.
   intros f a b K Hab HK Hbound.
-  apply lipschitz_uniform_cont with K; [exact Hab|].
+  apply lipschitz_uniform_cont with K.
   apply udiff_lipschitz_bridge; assumption.
 Qed.
 

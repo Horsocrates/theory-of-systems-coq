@@ -2,18 +2,28 @@
 
 _Сгенерировано из `tom-links.json` скриптом `tom-links-generate.cjs`; руками не править — правится JSON._
 
-**Файлов формализации, названных в проверенных главах: 50; записей с файлом: 465.**
+**Файлов формализации, названных в проверенных главах: 89; записей с файлом: 1260.**
 
 | # | файл | записей | глав | расхождений |
 |---|---|---|---|---|
-| 29 | `src/analysis/BolzanoWeierstrass.v` | 1 | 1 | 1 |
+| 29 | `src/analysis/BolzanoWeierstrass.v` | 17 | 1 | 0 |
+| 32 | `src/analysis/Continuity.v` | 6 | 1 | 0 |
+| 33 | `src/analysis/DominatedConvergence.v` | 6 | 1 | 0 |
+| 48 | `src/analysis/FTC.v` | 33 | 2 | 0 |
+| 49 | `src/analysis/FubiniProcess.v` | 37 | 1 | 0 |
+| 51 | `src/analysis/HeineBorelComplete.v` | 26 | 3 | 0 |
 | 61 | `src/analysis/Sqrt2Irrational.v` | 2 | 1 | 0 |
-| 66 | `src/Archimedean_ERR.v` | 1 | 1 | 0 |
+| 64 | `src/analysis/StepIntegral.v` | 16 | 2 | 0 |
+| 66 | `src/Archimedean_ERR.v` | 8 | 2 | 0 |
+| 1863 | `src/CantorHeineQ.v` | 6 | 1 | 0 |
 | 83 | `src/CauchyProcessBridge.v` | 12 | 4 | 0 |
-| 84 | `src/CauchyReal.v` | 41 | 3 | 0 |
+| 84 | `src/CauchyReal.v` | 50 | 6 | 0 |
 | 94 | `src/Countability_Q.v` | 3 | 2 | 0 |
-| 136 | `src/EVT_idx.v` | 3 | 3 | 0 |
-| 228 | `src/foundation/Distinction.v` | 1 | 1 | 0 |
+| 125 | `src/Differentiation.v` | 41 | 3 | 0 |
+| — | `src/EVT_ArgmaxNotCauchy.v` | 4 | 1 | 0 |
+| 135 | `src/EVT_ERR.v` | 17 | 1 | 0 |
+| 136 | `src/EVT_idx.v` | 17 | 5 | 0 |
+| 228 | `src/foundation/Distinction.v` | 2 | 2 | 0 |
 | 342 | `src/foundation/P4_Eliminates_AC.v` | 7 | 1 | 0 |
 | 343 | `src/foundation/P4_Eliminates_ATR.v` | 2 | 1 | 0 |
 | 344 | `src/foundation/P4_Eliminates_Infinity.v` | 5 | 1 | 0 |
@@ -22,40 +32,69 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | 347 | `src/foundation/P4ProhibitionSynthesis.v` | 6 | 1 | 0 |
 | 348 | `src/foundation/P4ProhibitsAC.v` | 7 | 1 | 0 |
 | 349 | `src/foundation/P4ProhibitsImpredicative.v` | 1 | 1 | 0 |
-| 550 | `src/HeineBorel_ERR.v` | 4 | 2 | 0 |
-| 559 | `src/IVT_CauchyReal.v` | 2 | 2 | 0 |
-| 560 | `src/IVT_ERR.v` | 3 | 3 | 0 |
-| 704 | `src/process/ProcessArithmetic.v` | 23 | 3 | 0 |
+| 547 | `src/GradientDescent.v` | 5 | 1 | 0 |
+| 550 | `src/HeineBorel_ERR.v` | 21 | 2 | 0 |
+| 555 | `src/IntegralApplications.v` | 22 | 2 | 0 |
+| 559 | `src/IVT_CauchyReal.v` | 9 | 2 | 0 |
+| 560 | `src/IVT_ERR.v` | 19 | 3 | 0 |
+| 608 | `src/LinearAlgebra.v` | 1 | 1 | 0 |
+| 609 | `src/MeanValueTheorem.v` | 50 | 3 | 0 |
+| 611 | `src/MonotoneConvergence.v` | 2 | 1 | 0 |
+| 701 | `src/process/ProcessAnalysis.v` | 8 | 1 | 0 |
+| 704 | `src/process/ProcessArithmetic.v` | 31 | 6 | 0 |
 | 706 | `src/process/ProcessAxiomAudit.v` | 16 | 2 | 0 |
 | 712 | `src/process/ProcessBinReal.v` | 8 | 2 | 0 |
 | 717 | `src/process/ProcessBounds.v` | 6 | 1 | 0 |
-| 718 | `src/process/ProcessBridge.v` | 11 | 2 | 0 |
-| 719 | `src/process/ProcessBW.v` | 1 | 1 | 0 |
-| 734 | `src/process/ProcessCore.v` | 23 | 6 | 0 |
+| 718 | `src/process/ProcessBridge.v` | 13 | 3 | 0 |
+| 719 | `src/process/ProcessBW.v` | 8 | 2 | 0 |
+| 734 | `src/process/ProcessCore.v` | 35 | 11 | 0 |
+| 748 | `src/process/ProcessDerivative.v` | 27 | 3 | 0 |
 | 749 | `src/process/ProcessDerivedVsConsistent.v` | 8 | 1 | 0 |
+| 773 | `src/process/ProcessEVT.v` | 8 | 1 | 0 |
 | 796 | `src/process/ProcessFourPrinciples.v` | 20 | 3 | 0 |
-| 852 | `src/process/ProcessIVT.v` | 1 | 1 | 0 |
+| 798 | `src/process/ProcessFTC.v` | 26 | 2 | 0 |
+| 799 | `src/process/ProcessFubiniGeneral.v` | 5 | 1 | 0 |
+| 850 | `src/process/ProcessIntegral.v` | 27 | 2 | 0 |
+| 852 | `src/process/ProcessIVT.v` | 11 | 1 | 0 |
 | 872 | `src/process/ProcessLimitColimit.v` | 2 | 1 | 0 |
+| 878 | `src/process/ProcessMCT.v` | 1 | 1 | 0 |
 | 888 | `src/process/ProcessNinePoint.v` | 19 | 2 | 0 |
 | 897 | `src/process/ProcessOpenQuestions.v` | 1 | 1 | 0 |
+| 998 | `src/process/ProcessTopCompact.v` | 7 | 1 | 0 |
+| 999 | `src/process/ProcessTopConnected.v` | 12 | 1 | 0 |
+| 1000 | `src/process/ProcessTopMetric.v` | 8 | 1 | 0 |
+| 1001 | `src/process/ProcessTopOpen.v` | 16 | 1 | 0 |
+| 1002 | `src/process/ProcessTopUnified.v` | 1 | 1 | 0 |
 | 1006 | `src/process/ProcessUncountable.v` | 19 | 3 | 0 |
 | 1035 | `src/ProcessContinuumHypothesis.v` | 43 | 8 | 0 |
 | 1036 | `src/ProcessDiagonal.v` | 16 | 4 | 0 |
-| 1037 | `src/ProcessGeneral.v` | 14 | 2 | 0 |
+| 1037 | `src/ProcessGeneral.v` | 26 | 3 | 0 |
 | 1038 | `src/ProcessTypes.v` | 19 | 2 | 0 |
+| 1867 | `src/QIntervalNotCompact.v` | 9 | 1 | 0 |
 | 1047 | `src/RealField.v` | 6 | 2 | 0 |
 | 1868 | `src/RealFieldApart.v` | 6 | 1 | 0 |
-| 1049 | `src/RealPointSetoid.v` | 7 | 2 | 0 |
-| 1050 | `src/RealPointTopology.v` | 3 | 1 | 0 |
+| — | `src/RealPointComplete.v` | 16 | 3 | 0 |
+| 1048 | `src/RealPointMetric.v` | 15 | 1 | 0 |
+| 1049 | `src/RealPointSetoid.v` | 13 | 8 | 0 |
+| 1050 | `src/RealPointTopology.v` | 11 | 2 | 0 |
+| 1053 | `src/RiemannIntegration.v` | 51 | 2 | 0 |
+| 1057 | `src/SeriesConvergence.v` | 3 | 1 | 0 |
 | 1059 | `src/settheory/CantorBendixsonFull.v` | 1 | 1 | 0 |
 | 1062 | `src/settheory/ChoicePriceMap.v` | 3 | 1 | 0 |
 | 1064 | `src/settheory/HigmanLemma.v` | 1 | 1 | 1 |
 | 1065 | `src/settheory/KruskalFull.v` | 2 | 1 | 0 |
 | 1066 | `src/settheory/KruskalTree.v` | 3 | 2 | 0 |
 | 1068 | `src/ShrinkingIntervals_ERR.v` | 53 | 12 | 0 |
+| 1405 | `src/stdlib/MetricSpace.v` | 43 | 1 | 0 |
+| 1475 | `src/stdlib/ProcessCompactness.v` | 2 | 1 | 0 |
+| 1477 | `src/stdlib/ProcessContinuity.v` | 4 | 1 | 0 |
+| 1484 | `src/stdlib/ProcessIntegration.v` | 4 | 1 | 0 |
+| 1499 | `src/stdlib/ProcessSpace.v` | 12 | 2 | 0 |
 | 1610 | `src/stdlib/RefinementSqrt.v` | 1 | 1 | 0 |
-| 1789 | `src/TheoryOfSystems_Core_ERR.v` | 2 | 2 | 0 |
-| 1793 | `src/ToS_Axioms.v` | 15 | 4 | 0 |
+| 1699 | `src/stdlib/Topology.v` | 43 | 3 | 0 |
+| 1789 | `src/TheoryOfSystems_Core_ERR.v` | 7 | 7 | 0 |
+| 1793 | `src/ToS_Axioms.v` | 22 | 7 | 0 |
+| 1798 | `src/UniformConvergence.v` | 11 | 1 | 0 |
 
 ---
 
@@ -63,7 +102,166 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1016 | не проверено | 12.11 не проверялось; очередь — аудит Части V |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 42 | верно | bolzano_weierstrass: classic и L4_witness; Heine_Borel, Heine_Borel_uniform: Closed. L4 входит в одном месте (L3_informative внутри bw_step, BolzanoWeierstrass.v:103), но наследуется 24 объявлениями файла из 34, включая главную теорему. «Без допущений» — об аксиомах; посылка теоремы (равномерность покрытия) названа в § 2.5. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 800 | верно | Шапка, строка 16: «Axioms: classic (L3), L4_witness (L4) — via ToS_Axioms.v». Шапка называет 22 Qed, в файле 26 (глава числа не приводит); там же первая строка обещает «Cauchy subsequence» — глава верно говорит о точке сгущения. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1059 | верно | сверено 12.11 при аудите Части V: Print Assumptions bolzano_weierstrass — Classical_Prop.classic и ToS_Axioms.L4_witness; слова страницы о цене верны (уточнение о том, где входит L4, — строка 14 таблицы главы V.2 в отчёте 03) |
+| `infinite_pigeonhole` (62) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 838 | верно | BolzanoWeierstrass.v:62: infinitely_many_in s lo hi -> в левой или в правой половине; допущение — только Classical_Prop.classic. |
+| `bw_step` (101) | Definition | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 856, 875 | верно | Блок кода (стр. 805–810) совпадает с BolzanoWeierstrass.v:101. Допущения bw_step: classic и L4_witness. |
+| `bw_width_to_zero` (292) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 871 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «конструктивны» — у лемм о bw_iter в допущениях classic и L4_witness (унаследованы от шага bw_step). Слово снято; рядом названо, что от выбора не зависит и доказано без допущений (gen_step_nested, gen_step_width). |
+| `gen_step_width` (439) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 875 | верно | Новая лемма шага 9: ширина после шага с любым выбором половины равна половине прежней. Closed under the global context. |
+| `gen_step_nested` (443) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 874 | верно | Новая лемма шага 9: при bw_left st <= bw_right st шаг с любым выбором половины не выводит концы наружу. Closed under the global context. |
+| `bw_step_is_gen_step` (451) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 876 | верно | Новая лемма шага 9: bw_step s st = gen_step (if L3_informative (bw_step_left s st) then true else false) st. В допущениях classic и L4_witness — они стоят в самой формулировке (bw_step, L3_informative). |
+| `is_cluster_point` (468) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 889 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) — слова те же, доведена формализация. Определение is_cluster_point заменено сильным: forall eps > 0, exists M0, forall M >= M0, forall N, exists k >= N, \|cs_seq L M - s k\| < eps — близость ко ВСЕМ далёким членам процесса, то есть к точке; прежняя запись сохранена как is_cluster_point_weak (следует из новой: cluster_point_implies_weak). Добавлена cluster_point_invariant: свойство не зависит от представителя (у прежней записи зависело — пример в пробном файле). bolzano_weierstrass передоказана для новой записи той же бисекцией; допущения прежние — classic и L4_witness. |
+| `bolzano_weierstrass` (519) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 1054 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) — слова те же, доведена формализация. Определение is_cluster_point заменено сильным: forall eps > 0, exists M0, forall M >= M0, forall N, exists k >= N, \|cs_seq L M - s k\| < eps — близость ко ВСЕМ далёким членам процесса, то есть к точке; прежняя запись сохранена как is_cluster_point_weak (следует из новой: cluster_point_implies_weak). Добавлена cluster_point_invariant: свойство не зависит от представителя (у прежней записи зависело — пример в пробном файле). bolzano_weierstrass передоказана для новой записи той же бисекцией; допущения прежние — classic и L4_witness. |
+| `bolzano_weierstrass` (519) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 1054 | верно | Print Assumptions bolzano_weierstrass: Classical_Prop.classic и ToS_Axioms.L4_witness — ровно два. |
+| `bolzano_weierstrass` (519) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 1054 | верно | Блок кода (стр. 854–856) совпадает с BolzanoWeierstrass.v:444; свидетель — процесс левых концов бисекции. Что «точка сгущения» значит формально — запись стр. 861. Допущения: classic и L4_witness. |
+| `bolzano_weierstrass` (519) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 1054 | верно | Утверждение теоремы названо верно (exists L : CauchySeq, is_cluster_point s L); оговорка о подпоследовательности честна. Насколько слаб сам предикат is_cluster_point — запись стр. 861. |
+| `bolzano_weierstrass` (519) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 1054 | верно | Место, не сверенное 12.11, сверено: Print Assumptions bolzano_weierstrass — Classical_Prop.classic и ToS_Axioms.L4_witness; то же у bw_step, bw_iter и у 9 объявлений ProcessBW.v. Итоговая цена названа верно. Уточнение: L3_informative сама стоит на обоих допущениях (см. запись стр. 823), так что L4 входит не «дополнительно», а через неё. |
+| `monotone_bounded_cauchy` (540) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 892 | верно | BolzanoWeierstrass.v:464: неубывающая и ограниченная сверху последовательность — is_cauchy. Допущение — только Classical_Prop.classic (через q_inc_bounded_cauchy), без L4_witness. |
+| `decreasing_bounded_cauchy` (550) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 893 | верно | BolzanoWeierstrass.v:474: невозрастающая и ограниченная снизу — is_cauchy. Допущение — только Classical_Prop.classic. |
+
+---
+
+## #32 — `src/analysis/Continuity.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 346 | верно | Continuity.v:41, :48, :55. Lipschitz_on требует K > 0. continuous_on здесь записано иначе, чем в блоке § 3.2.1 (UniformConvergence.v:142), — см. запись к стр. 143. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1155 | верно | Ни IVT_ERR.v, ни EVT_ERR.v, ни EVT_idx.v, ни HeineBorelComplete.v файл analysis/Continuity.v не подключают; его подключает только CantorHeineQ.v. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1197 | верно | Соответствует шапке Continuity.v (строки 23–25) и импортам файлов. |
+| `uniformly_continuous_on` (48) | Definition | Closed under the global context | V.3 Непрерывность, стр. 349, 359, 479, 630, 875, 1155 | верно | Блок кода совпадает с analysis/Continuity.v:48. Словесное чтение (одна delta на весь отрезок, вынесена перед квантором по x и y) соответствует кванторам. |
+| `lipschitz_uniform` (64) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 351 | верно | Continuity.v:64: forall f a b K, Lipschitz_on f a b K -> uniformly_continuous_on f a b; в доказательстве delta := eps / K. |
+| `uniformly_continuous_pointwise` (80) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 352 | верно | Continuity.v:80: uniformly_continuous_on f a b -> continuous_on f a b. В файле 6 Qed: lipschitz_uniform, uniformly_continuous_pointwise, uniformly_continuous_const, identity_lipschitz, identity_uniformly_continuous, uniformly_continuous_sum — все Closed under the global context. |
+
+---
+
+## #33 — `src/analysis/DominatedConvergence.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  | Closed under the global context (все 35 объявлений файла, реестр pa-all.tsv) | V.7 Теорема Фубини на процессах, стр. 255 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): после шага 15 в файле 26 Qed (добавлено восемь утверждений, сняты теорема-вывеска dominated_convergence_step и пример example_dct); все утверждения — Closed under the global context. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 263 | верно | Верно: теоремы о перестановке предела и интеграла при мажоранте в файле нет. |
+| `DominatedConvergence` | модуль |  | V.7 Теорема Фубини на процессах, стр. 389 | верно | имя модуля; файл существует |
+| `l1_convergence_alone_is_not_enough` (406) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 261 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): было — довод файла «L1-сходимость уже влечёт сходимость интегралов» в его определениях без общего разбиения неверен (step_fun_diff обрезает списки по более короткому). Контрпример внесён теоремой; заметка в конце файла исправлена. |
+| `l1_convergence_integral` (460) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 259 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): было «скелет теоремы о доминированной сходимости» — заключение dominated_convergence_step дословно повторяло третью посылку, мажоранта не работала; теорема снята (вариант А, слово автора). Добавлена l1_convergence_integral : (forall n, aligned (seq n) limit) -> l1_converges seq limit -> integral_converges seq (step_fun_integral limit). Closed under the global context. |
+| `l1_cauchy_integral_cauchy` (473) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 260 | верно | Новая теорема шага 15: (forall m n, aligned (seq m) (seq n)) -> l1_cauchy seq -> integral_cauchy seq. Closed under the global context. |
+
+---
+
+## #48 — `src/analysis/FTC.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | V.5 Интеграл, стр. 378 | верно | упоминание файла; проверено существование |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 122 | верно | Шапка analysis/FTC.v:9–11: Elements: functions, derivatives, integrals, Lipschitz constants; Roles: f -> Integrand, f' -> Derivative, K -> LipschitzBound; Rules: FTC equation (constitution), Lipschitz bound (constraint). |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 683 | верно | RiemannIntegration.v:599–601: ftc_grid, udiff_add, ftc_comparison; analysis/FTC.v:684–687: lipschitz_compose, lipschitz_uniform_cont, ftc_u_substitution_affine, udiff_sub_interval; в ProcessFTC.v и IntegralApplications.v команды Print Assumptions нет. |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 728 | верно | Сноска верна: строки Elements / Roles / Rules стоят в шапках analysis/FTC.v:9–11 и process/ProcessFTC.v:2–4. |
+| `Lipschitz_on` (43) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 537 | верно | analysis/FTC.v:43 и :49. Оба имени объявлены и в других файлах: Lipschitz_on — ещё в analysis/Continuity.v:55 и analysis/HeineBorelComplete.v:72; uniformly_continuous_on — всего в семи файлах. |
+| `uniformly_continuous_on` (49) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 538 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 7 (файл назван в главе) |
+| `lipschitz_uniform_cont` (179) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 536, 638, 685 | верно | analysis/FTC.v:179: Lipschitz_on f a b K -> uniformly_continuous_on f a b (delta = eps / (K + 1)). Одноимённая лемма есть и в analysis/HeineBorelComplete.v:307; глава называет FTC.v. |
+| `lipschitz_uniform_cont` (179) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 536, 638, 685 | верно | analysis/FTC.v:179: Lipschitz_on f a b K -> uniformly_continuous_on f a b. |
+| `ftc_increment_bound` (211) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 386 | верно | analysis/FTC.v:211: доказательство — exact (bounded_deriv_bounded_increment …); утверждения совпадают, у ftc_increment_bound добавлена посылка 0 <= M, в доказательстве не используемая. Заключение: exists N, \|f (walk_point a step (S N)) - f a\| <= (M + eps) * (b - a). |
+| `ftc_monotone` (225) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 398 | верно | ftc_increment_bound, ftc_monotone и ftc_strict_monotone, ftc_difference, ftc_absolute_value_bound (analysis/FTC.v) — все замкнуты. Монотонность доказана с зазором eps: см. запись к стр. 385. |
+| `ftc_strict_monotone` (269) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 399 | верно | исправлено 12.11 (Часть V, шаг 3, слово автора): было «даёт строгий рост» — лемма даёт положительность приращения до последнего узла на одном уровне сетки; слова приведены к утверждению |
+| `ftc_difference` (282) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 408 | верно | analysis/FTC.v:282: udiff_on f f' a b -> udiff_on g g' a b -> 0 < eps -> exists N, \|RS(f' - g') - ((f y - g y) - (f a - g a))\| <= eps * (b - a), y — последний узел; доказательство — udiff_sub и ftc_grid. Форма та же, что у ftc_grid. |
+| `ftc_absolute_value_bound` (299) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 420 | верно | analysis/FTC.v:299: для произвольной функции f (о производной в утверждении речи нет) и каждого N: a < b -> (\|f (y_k)\| <= M в узлах k < S N) -> 0 <= M -> \|riemann_sum f a step (S N)\| <= M * (b - a); обёртка riemann_sum_abs_bound. В применении к f' — как в главе. |
+| `ftc_absolute_value_bound` (299) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 420 | верно | исправлено 12.11 (Часть V, шаг 13, слово автора): было «она понадобится в § 6.5 … эта лемма даёт нужный контроль» — ftc_absolute_value_bound нигде не используется; в udiff_product, ftc_product, integration_by_parts границы — посылки о значениях функций и производных. |
+| `ftc_sum_rule` (324) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 409 | верно | analysis/FTC.v:324: доказательство — exact (ftc_linearity …), где ftc_linearity — лемма RiemannIntegration.v:530; утверждения совпадают. |
+| `ftc_scale_rule` (351) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 410 | верно | analysis/FTC.v:351: udiff_on f f' a b -> 0 < eps -> exists N, \|RS(c * f') - (c * f y - c * f a)\| <= eps * (b - a); доказательство — udiff_scale и ftc_grid. |
+| `udiff_chain_affine` (370) | Lemma | Closed under the global context | V.5 Интеграл, стр. 647 | верно | analysis/FTC.v:370: условия — Proper (Qeq ==> Qeq) f и c > 0 (для c < 0 отдельная лемма udiff_chain_affine_neg, :434); на странице они не названы. Общего цепного правила для udiff_on или has_derivative в src нет (поиск). |
+| `udiff_chain_affine` (370) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 516 | верно | исправлено 12.11 (Часть V, шаг 13, слово автора) — добавлено неназванное условие: у обеих цепных лемм посылка Proper (Qeq ==> Qeq) f. |
+| `ftc_u_substitution_affine` (414) | Lemma | Closed under the global context | V.5 Интеграл, стр. 649 | верно | analysis/FTC.v:414: eps-сеточная форма (один уровень N), только c > 0, при Proper f. |
+| `ftc_u_substitution_affine` (414) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 520, 637, 686 | верно | исправлено 12.11 (Часть V, шаг 13, слово автора): было — «на них построена аффинная замена» при одной применённой лемме (c > 0). Добавлена ftc_u_substitution_affine_neg (c < 0) и сама замена на уровне сумм — riemann_sum_affine_subst. Closed under the global context. |
+| `ftc_u_substitution_affine` (414) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 520, 637, 686 | верно | analysis/FTC.v:414 существует и замкнута; доказан случай c > 0 при Proper f, в форме сеточной основной теоремы для f (c*x+d): см. запись к стр. 504. |
+| `udiff_chain_affine_neg` (434) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 518 | верно | Лемма существует (analysis/FTC.v); после шага 13 Части V она применяется в ftc_u_substitution_affine_neg. |
+| `riemann_sum_negate_fn` (492) | Lemma | Closed under the global context | V.5 Интеграл, стр. 369, 377 | верно | analysis/FTC.v:492; доказательство — riemann_sum_scale с множителем -(1) и riemann_sum_ext. |
+| `riemann_sum_sub` (506) | Lemma | Closed under the global context | V.5 Интеграл, стр. 370, 376 | верно | analysis/FTC.v:506; доказательство — riemann_sum_add, riemann_sum_ext и riemann_sum_negate_fn. Одноимённая лемма есть ещё в UniformConvergence.v:255; страница называет файл FTC.v. |
+| `lipschitz_bounded` (601) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 365, 545 | верно | analysis/FTC.v:601: Lipschitz_on f a b K -> forall x, a <= x -> x <= b -> \|f x - f a\| <= K * \|b - a\| — оценка на всём отрезке. |
+| `riemann_sum_deriv_nonneg_exact` (700) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 374 | верно | исправлено 12.11 (Часть V, шаг 3): лемма добавлена шагом 3 — a < b -> (g >= 0 на отрезке) -> 0 <= riemann_sum g a ((b - a) / (N+1)) (S N); Closed under the global context |
+| `nonneg_deriv_nondecreasing` (716) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 378, 396 | верно | исправлено 12.11 (Часть V, шаг 14, слово автора): было «для функции, уважающей равенство рациональных» — оговорка снята вместе с посылкой. nonneg_deriv_nondecreasing : udiff_on f f' a b -> (f' >= 0 на отрезке) -> f a <= f b. Closed under the global context. |
+| `nonneg_deriv_nondecreasing` (716) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 378, 396 | верно | исправлено 12.11 (Часть V, шаг 3, слово автора): было «Лемма ftc_monotone: при f' >= 0 функция растёт на сетке (приращение неотрицательно)» — у ftc_monotone зазор eps, один уровень, последний узел; точная форма — nonneg_deriv_nondecreasing |
+| `udiff_bounded_deriv_lipschitz` (759) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 541 | верно | исправлено 12.11 (Часть V, шаг 14, слово автора): было «условие — функция уважает равенство рациональных» — оговорка снята вместе с посылкой. udiff_bounded_deriv_lipschitz : udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> 0 <= M -> Lipschitz_on f a b M. Closed under the global context. |
+| `udiff_bounded_on` (802) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 364, 544 | верно | исправлено 12.11 (Часть V, шаг 3, слово автора): было «udiff_implies_bounded (оценка значений функции через производную)» — та лемма оценивает одно значение в последнем узле одной сетки; шагом 3 добавлена udiff_bounded_on: Proper f -> udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> 0 <= M -> forall x из отрезка, \|f x\| <= \|f a\| + M (b - a); Closed under the global context После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context. |
+| `udiff_bounded_on` (802) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 364, 544 | верно | исправлено 12.11 (Часть V, шаг 3, слово автора): было «udiff_implies_bounded — оценка значений через слой теоремы о среднем»; названа новая udiff_bounded_on (выведена из udiff_bounded_deriv_lipschitz и lipschitz_bounded) |
+| `riemann_sum_affine_subst` (829) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 524 | верно | Новая лемма шага 13: Proper phi -> riemann_sum (fun x => phi (c*x+d) * c) a step n == riemann_sum phi (c*a+d) (c*step) n. Closed under the global context. |
+| `ftc_u_substitution_affine_neg` (851) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 521 | верно | Новая лемма шага 13: при c < 0 и udiff_on f f' (c*b+d) (c*a+d) Риманова сумма f'(cx+d)*c по [a,b] приближает приращение f(cx+d) с точностью eps*(b-a) на некотором уровне. Closed under the global context. |
+
+---
+
+## #49 — `src/analysis/FubiniProcess.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  | Closed under the global context (все 32 объявления файла, реестр pa-all.tsv) | V.7 Теорема Фубини на процессах, стр. 19 | верно | FubiniProcess.v: Record Rectangle (:54), StepFun2D := list Rectangle (:65), integral_2d (:76) — конечные суммы над Q; последовательностей и пределов в файле нет. Статус назван честно. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 77 | верно | Все равенства файла — Qeq над Q, доказательства ring/lra; кванторов по eps и последовательностей в файле нет. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 84 | верно | Свойства суммы в файле: integral_2d_nil (:211), integral_2d_app (:215), rect_integral_zero_val (:224), rect_integral_zero_width (:232). Теории покрытий нет. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 149 | верно | Сверено: example_rect_integral и example_two_rects — unfold, simpl, ring; example_fubini_concrete — apply fubini_rectangle. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 157 | верно | Оценка честна и совпадает с шапкой файла (строки 11–12: «EXACT and TRIVIAL»): fubini_rectangle — ring; fubini_step — индукция, две перезаписи и ring. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 314 | верно | FubiniProcess.v:2–4: Elements: Rectangle records, 2D step functions, iterated integrals; Roles: Double integral, iterated integral, order exchange; Rules: Fubini: integral_xy = integral_yx for step functions. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 320 | верно | Дословно строка Roles шапки файла. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 321 | верно | Шапка числит в Elements ещё и «iterated integrals» (те же, что в Roles); глава относит их только к ролям — расхождение с шапкой в пользу главы. |
+| _файл целиком_ |  | Closed under the global context (все 32 объявления файла, реестр pa-all.tsv) | V.7 Теорема Фубини на процессах, стр. 401 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): после шага 15 в файле 30 Qed (было 20); все утверждения — Closed under the global context. |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 402 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): сноска переписана — имя несуществующего файла Fubini.v убрано. |
+| `Rectangle` (54) | Record | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 58 | верно | Record Rectangle (:54): rect_val, четыре границы типа Q, rect_x_valid : rect_x1 <= rect_x2, rect_y_valid : rect_y1 <= rect_y2; блок кода стр. 63–68 совпадает с исходником. Копия записи есть в MeasureSynthesis.v:71. |
+| `StepFun2D` (65) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 82 | верно | Definition StepFun2D := list Rectangle (:65) — дословно. |
+| `StepFun2D` (65) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 82 | верно | StepFun2D := list Rectangle без условий на взаимное расположение; предикатов разбиения или непересечения в файле нет. Оговорка главы точна. |
+| `rect_integral` (72) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 76 | верно | Совпадает с FubiniProcess.v:72. |
+| `integral_2d` (76) | Fixpoint | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 76 | верно | Fixpoint integral_2d (:76): [] => 0; r :: rest => rect_integral r + integral_2d rest. |
+| `iterated_xy` (87) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 94 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): было «ToS записывает оба» — iterated_xy и iterated_yx суть одно произведение с двумя порядками сомножителей (iterated_xy совпадает с rect_integral по определению). Слова приведены к этому; повторный интеграл из двух одномерных построен отдельно (nested_xy, nested_yx). |
+| `iterated_yx` (91) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 102 | верно | Блок кода стр. 99–102 совпадает с исходником (iterated_xy :87, iterated_yx :91). О содержании определений — запись стр. 94. |
+| `fubini_rectangle` (113) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 125, 152 | верно | Совпадает с FubiniProcess.v:113, включая доказательство (intros r. unfold iterated_xy, iterated_yx. ring.). |
+| `iterated_eq_double` (120) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 114 | верно | iterated_eq_double (:120): iterated_xy r == rect_integral r. Утверждение верно; тела iterated_xy и rect_integral совпадают дословно, так что равенство выполняется уже по определению (см. запись стр. 94). |
+| `iterated_yx_eq_double` (127) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 114 | верно | iterated_yx_eq_double (:127): iterated_yx r == rect_integral r; доказательство — ring (перестановка двух сомножителей). |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | fubini_step (:138) доказана (Qed); вычисления — example_rect_integral (:174), example_fubini_concrete (:181), example_two_rects (:189), example_fubini_two (:198). |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | Ход доказательства (:140–144) описан верно: induction f; база — simpl. ring; шаг — rewrite fubini_rectangle, rewrite IH, ring. |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | Совпадает с FubiniProcess.v:138. iterated_xy_list (:95) и iterated_yx_list (:102) — суммы iterated_xy и iterated_yx по списку, обе в порядке списка. |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | Статус fubini_step назван честно. Между этим прототипом и пределом в формализации есть промежуточная ступень, которой глава не называет: перестановка двойной суммы на произвольной сетке (process/ProcessFubiniGeneral.v) — см. запись стр. 266. |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | Соответствует строке Rules шапки и утверждению fubini_step (:138). |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | Print Assumptions fubini_step: Closed under the global context. Строго fubini_step — равенство двух повторных сумм; равенство каждой из них двойному интегралу — iterated_xy_eq_2d (:147) и iterated_yx_eq_2d (:156), тоже без допущений. |
+| `fubini_step` (138) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 161, 319, 343, 383 | верно | Closed under the global context; формулировка — как на стр. 318. |
+| `iterated_xy_eq_2d` (147) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 138 | верно | iterated_xy_eq_2d (:147): iterated_xy_list f == integral_2d f. Верно; iterated_xy_list и integral_2d совпадают и как термы (равенство Лейбница индукцией — проверено). |
+| `iterated_yx_eq_2d` (156) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 138 | верно | iterated_yx_eq_2d (:156): iterated_yx_list f == integral_2d f; индукция по списку и iterated_yx_eq_double. |
+| `example_rect_integral` (174) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 146 | верно | example_rect_integral (:174): rect_integral (mkRect 3 0 1 0 2 le_0_1 le_0_2) == 6. |
+| `example_fubini_concrete` (181) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 147 | верно | example_fubini_concrete (:181): iterated_xy == iterated_yx на том же прямоугольнике. Что обе величины равны 6, отдельной леммой не записано; следует из example_rect_integral и iterated_eq_double. |
+| `example_two_rects` (189) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 149 | верно | example_two_rects (:189): integral_2d [mkRect 2 0 1 0 1 …; mkRect 3 1 2 0 1 …] == 5. Числа и области совпадают. |
+| `nested_xy_eq_iterated` (314) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 118 | верно | Новая лемма шага 15: nested_xy r == iterated_xy r, где nested_xy — интеграл по y от ступени, значение которой есть одномерный step_integral сечения по x. Closed under the global context. |
+| `nested_yx_eq_iterated` (317) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 118 | верно | Новая лемма шага 15 (то же для порядка «сперва y, потом x»). Closed under the global context. |
+| `fubini_rectangle_nested` (321) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 119 | верно | Новая теорема шага 15: nested_xy r == nested_yx r; для списков — fubini_step_nested. Closed under the global context. |
+| `integral_2d_perm` (364) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 139 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора) — слова те же, доведена формализация: о перестановке вкладов леммы не было (менялся только порядок сомножителей внутри вклада). Добавлена integral_2d_perm : Permutation f g -> integral_2d f == integral_2d g (и integral_2d_app_comm, fubini_step_perm). Closed under the global context. |
+| `integral_2d_perm` (364) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 139 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): к словам о порядке сложения вкладов добавлена лемма, которой раньше не было. |
+
+---
+
+## #51 — `src/analysis/HeineBorelComplete.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 715 | верно | uniform_cont_sum (:331), uniform_cont_scale (:357), uniform_cont_composition (:432; при условии, что первая функция переводит свой отрезок в отрезок второй). Все Closed. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 723 | верно | Шапка, строка 16: «STATUS: 22 Qed, 0 Admitted, 0 axioms». Число Qed в шапке отстало: в файле 28 (глава числа не приводит). |
+| _файл целиком_ | файл |  | V.3 Непрерывность, стр. 357, 434, 457 | верно | упоминание файла; проверено существование |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 267 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): в файле 28 Qed (в шапке стояло 22; шапка исправлена). |
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 271 | верно | По существу верно, с двумя оговорками (см. заметки, сомнительные места): шапка файла (строки 5–6) говорит сильнее — «unprovable over Q»; допущение о числе Лебега стоит не в этом файле, а в HeineBorel_ERR.v (Heine_Borel :536, Heine_Borel_uniform :517, оба Closed) — в HeineBorelComplete.v оно названо только в шапке, теорем с ним нет. |
+| `HeineBorelComplete` | модуль |  | V.7 Теорема Фубини на процессах, стр. 390 | верно | имя модуля; файл существует |
+| `eps_net` (63) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 678 | верно | упоминание имени (Definition); проверено существование |
+| `totally_bounded` (68) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 680 | верно | Блок кода (стр. 650–656) совпадает с HeineBorelComplete.v:62, :67. |
+| `Lipschitz_on` (73) | Definition | Closed under the global context | V.3 Непрерывность, стр. 349, 1155 | верно | Сомнительное место, не расхождение: Lipschitz_on (HeineBorelComplete.v:72, Continuity.v:55) включает условие K > 0, так что случай L = 0 определением исключён и в формализации отдельно не разбирается (потери общности нет: функция с константой 0 липшицева и с константой 1). В доказательстве lipschitz_uniform_cont delta := eps / (K + 1), в lipschitz_uniform — eps / K. |
+| `grid_points` (90) | Fixpoint | Closed under the global context | V.2 Топология и компактность, стр. 702, 775 | верно | упоминание имени (Fixpoint); проверено существование |
+| `rational_eps_net` (216) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 702, 771 | верно | HeineBorelComplete.v:215: a <= b -> eps > 0 -> exists pts, eps_net pts a b eps; свидетель — grid_points a (eps/2) K (:228). Closed under the global context. |
+| `rational_eps_net` (216) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 702, 771 | верно | HeineBorelComplete.v:221: half_eps := eps * (1#2); grid_covers_aux даёт Qabs (x - p) <= half_eps, откуда строгое < eps (:234–235). |
+| `rational_eps_net` (216) | Lemma | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 271 | верно | eps_net (:62), eps_net_nil, eps_net_singleton, eps_net_cons, rational_eps_net (:215), eps_net_length_bound (:253), finite_cover_refinement (:463) — все без допущений. |
+| `totally_bounded_interval` (246) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 734, 1053 | верно | Блок кода (стр. 672–673) совпадает с HeineBorelComplete.v:245: a <= b -> totally_bounded a b. Closed under the global context. |
+| `totally_bounded_interval` (246) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 734, 1053 | верно | totally_bounded_interval, rational_eps_net, grid_covers_aux — Closed; mono_bounded_is_cauchy — Classical_Prop.classic. |
+| `totally_bounded_interval` (246) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 734, 1053 | верно | HeineBorelComplete.v:245; Closed under the global context. |
+| `totally_bounded_interval` (246) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 269 | верно | totally_bounded_interval (:245): forall a b, a <= b -> totally_bounded a b; totally_bounded (:67) — для всякого eps > 0 существует конечная eps-сеть. Без допущений. |
+| `lipschitz_uniform_cont` (308) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 713 | верно | HeineBorelComplete.v:307: a <= b -> Lipschitz_on f a b K -> uniformly_continuous_on f a b (на отрезке, K > 0). Closed under the global context. |
+| `lipschitz_uniform_cont` (308) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1141 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): блок кода теперь совпадает с исходником — у lipschitz_uniform_cont (analysis/HeineBorelComplete.v) снята неиспользуемая посылка a <= b; на странице имя константы приведено к исходнику (K). Closed under the global context. |
+| `lipschitz_uniform_cont` (308) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1141 | верно | HeineBorelComplete.v:307, Closed under the global context; в файле теорема несёт посылку a <= b (см. запись к стр. 428). |
+| `lipschitz_uniform_cont` (308) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 270 | верно | lipschitz_uniform_cont (:307): a <= b -> Lipschitz_on f a b K -> uniformly_continuous_on f a b; условие липшицевости в словах главы названо. Без допущений. |
+| `uniform_cont_sum` (333) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 458 | верно | HeineBorelComplete.v:331 (сумма); тождество и постоянная — identity_uniformly_continuous (:624), constant_uniformly_continuous (:633), в главе не названы. Все Closed under the global context. |
+| `uniform_cont_scale` (359) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 458 | верно | HeineBorelComplete.v:357: для любого c функция c * f x равномерно непрерывна (случай c == 0 разобран отдельно). |
+| `uniform_cont_composition` (434) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 459 | верно | HeineBorelComplete.v:432: f равномерно непрерывна на [a,b], g — на [c,d], и f переводит [a,b] в [c,d]; тогда g (f x) равномерно непрерывна на [a,b]. Условие на область значений в главе не названо, оно естественно для композиции на отрезках. |
+| `mono_bounded_is_cauchy` (549) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 726, 736 | верно | HeineBorelComplete.v:547: неубывающая последовательность в [a,b] фундаментальна; допущение — Classical_Prop.classic (apply NNPP, :556). Единственное из 33 объявлений файла с допущением. |
+| `mono_bounded_is_cauchy` (549) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.7 Теорема Фубини на процессах, стр. 269 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): было «0 аксиом» — mono_bounded_is_cauchy стоит на Classical_Prop.classic; остальные 27 утверждений закрыты. Цена названа. |
 
 ---
 
@@ -76,11 +274,54 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #64 — `src/analysis/StepIntegral.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 300 | верно | Шапка StepIntegral.v, строки 8 и 14: «P4-COMPATIBLE MEASURE THEORY: Integration first, measure derived», «This is the FOUNDATION of Bishop-Cheng measure theory». |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 325 | верно | Подтверждено поиском: ни один файл src не содержит одновременно riemann_sum и step_fun_integral. Мост доказуем без аксиом: пробный файл Check3.v, riemann_sum_is_step_integral (при неотрицательном шаге). |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 791 | верно | Импорты: StepIntegral.v — только Stdlib; ProcessIntegration.v и ProcessAnalysis.v — Stdlib и process.ProcessCore (тот — только Stdlib). Print Assumptions всех 41 леммы трёх файлов — Closed under the global context. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 794 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): в файле 17 Qed; шапка файла (стояло 20) и число на странице приведены к этому. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 830 | верно | Сноска соответствует шапкам: ProcessIntegral.v, строки 2–3 (Elements, Roles); StepIntegral.v, строка 4 (Rules: Linearity, monotonicity, non-negativity of norm). |
+| _файл целиком_ |  | Closed under the global context (все 25 объявлений файла, реестр pa-all.tsv) | V.7 Теорема Фубини на процессах, стр. 247 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): в файле 17 Qed (в шапке стояло 20; исправлено шагом 12). |
+| `StepIntegral` | модуль |  | V.7 Теорема Фубини на процессах, стр. 389 | верно | имя модуля; файл существует |
+| `Step` (27) | Record | Closed under the global context | V.5 Интеграл, стр. 166, 175, 299, 331 | верно | Блоки кода (стр. 273–282) совпадают с StepIntegral.v:27 и :38. StepFun := list Step (:35); функции вычисления значения в точке и условия «ступени не перекрываются» в файле нет — «сумма индикаторов» есть чтение списка ступеней. |
+| `step_integral` (38) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 116 | верно | step_integral (:38), step_fun_integral (:42) — точные суммы над Q; слова об основании подхода Бишопа — Ченга повторяют шапку файла (строки 14–15). FubiniProcess.v этот файл не подключает: определения скопированы (FubiniProcess.v:31–47) и в теоремах о прямоугольниках не используются. |
+| `step_fun_integral` (42) | Fixpoint | Closed under the global context | V.5 Интеграл, стр. 289, 328, 723 | верно | StepIntegral.v:42: рекурсия по списку; слагаемое step_integral s = step_val s * (step_right s - step_left s). |
+| `step_fun_integral` (42) | Fixpoint | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 50 | верно | step_integral s := step_val s * (step_right s - step_left s) (StepIntegral.v:38); step_fun_integral — сумма step_integral по списку (:42). |
+| `integral_constant` (59) | Lemma | Closed under the global context | V.5 Интеграл, стр. 293 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): integral_constant : step_integral (mkStep c 0 1 le_0_1) == c — ступень на [0,1]; на общем отрезке значение c * (b - a). Отрезок назван. |
+| `integral_half_indicator` (66) | Lemma | Closed under the global context | V.5 Интеграл, стр. 293 | верно | StepIntegral.v:66 (integral_half_indicator): step_integral (mkStep 1 0 (1#2) le_0_half) == 1#2; имя леммы на странице не приведено. |
+| `integral_two_step` (73) | Lemma | Closed under the global context | V.5 Интеграл, стр. 295 | верно | StepIntegral.v:73: step_fun_integral [s1; s2] == 5#2 для s1 = 2 на [0,1/2] и s2 = 3 на [1/2,1]. |
+| `step_integral_nonneg` (163) | Lemma | Closed under the global context | V.5 Интеграл, стр. 436 | верно | StepIntegral.v:163: forall s, 0 <= step_val s -> 0 <= step_integral s. |
+| `norm_nonneg` (180) | Lemma | Closed under the global context | V.5 Интеграл, стр. 435, 440, 725 | верно | StepIntegral.v:180: forall f, 0 <= step_fun_norm f; step_fun_norm f := step_fun_integral (step_fun_abs f) (:92), где модуль берётся у значения каждой ступени. |
+
+---
+
 ## #66 — `src/Archimedean_ERR.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| _файл целиком_ |  |  | V.3 Непрерывность, стр. 643 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части; в файле нет объявлений Axiom и Parameter |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 963 | верно | Все три строки таблицы проверены компилятором в пробном файле: 1 / Qpow2 4 < 1#10, 1 / Qpow2 7 < 1#100, 1 / Qpow2 10 < 1#1000, и для N − 1 неравенство ложно — числа 4, 7, 10 наименьшие. В формализации таблицы нет; глава этого и не утверждает. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 991 | верно | Archimedean_ERR.v: 14 Qed; Archimedean (:104), Archimedean_width (:116), shrinking_interval_Cauchy (:158). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 994 | верно | Установлено: Print Assumptions Archimedean — Closed under the global context; то же у всех 14 лемм файла; шапка файла: «AXIOMS: None». Слова «если она есть» можно заменить фактом (см. заметки, сомнительные места). |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 649 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части; в файле нет объявлений Axiom и Parameter |
+| `Archimedean_ERR` | модуль |  | V.3 Непрерывность, стр. 650, 676 | верно | имя модуля; файл существует |
+| `Archimedean` (104) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 920 | верно | Archimedean_ERR.v:104 — Theorem Archimedean : forall eps : Q, eps > 0 -> exists N : nat, 1 / Qpow2 N < eps — та же форма; Closed under the global context. |
+| `Archimedean_width` (116) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 937 | верно | Archimedean_ERR.v:116 — width > 0 -> eps > 0 -> exists N, width / Qpow2 N < eps (половинное деление интервала ширины width). Существование — в Prop; оговорка главы о разнице между теоремой существования и исполняемой процедурой честна. |
+| `Archimedean_width` (116) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 648 | верно | В IVT_process применяется Archimedean_width (Archimedean_ERR.v:116) — Closed under the global context; в файле нет Axiom и Parameter, подключена только стандартная библиотека. |
+
+---
+
+## #1863 — `src/CantorHeineQ.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  | Closed under the global context | V.3 Непрерывность, стр. 1207 | верно | В CantorHeineQ.v 11 Qed, нет Axiom и Parameter; cantor_heine_continuous, cantor_heine_not_uniform, cantor_heine_fails_Q — Closed under the global context. Точная ошибка \|x_k^2 - 2\| = 1/q_k^2 — sx_abs_eq (Sqrt2Approx.v:143); \|f(x_k)\| = q_k^2 — f_abs_val (CantorHeineQ.v:163). |
+| `cantor_heine_continuous` (90) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1207 | верно | CantorHeineQ.v:90: continuous_on f 1 2 (канон); знаменатель отличен от нуля по no_rational_sqrt2 (analysis/Sqrt2Irrational.v:200). Closed under the global context. |
+| `cantor_heine_not_uniform` (217) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1207 | верно | CantorHeineQ.v:217: ~ uniformly_continuous_on f 1 2; свидетели — соседние приближения Пелля: \|sx n - sx (S n)\| <= 1/(n+1), а \|f (sx n) - f (sx (S n))\| >= 1. Closed under the global context. |
+| `cantor_heine_fails_Q` (266) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1207 | верно | В Continuity.v обратного перехода нет (комментарий :140–143); его ложность над Q доказана: cantor_heine_fails_Q (CantorHeineQ.v:266), Closed under the global context. |
+| `cantor_heine_fails_Q` (266) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1207 | верно | CantorHeineQ.v:266: continuous_on f 1 2 /\ ~ uniformly_continuous_on f 1 2 для f x := / (x * x - 2); определения — канон analysis/Continuity.v. Closed under the global context. |
+| `cantor_heine_fails_Q` (266) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1207 | верно | Сомнительное место, не расхождение: пункт стоит в списке «Не построено», а на стр. 1181 — в «что остаётся открытым», хотя отказ теоремы машинно доказан (cantor_heine_fails_Q, сноска 3). Не построена сама теорема, потому что она ложна; контрпример построен. |
 
 ---
 
@@ -90,13 +331,13 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 |---|---|---|---|---|---|
 | _файл целиком_ | файл |  | IV.2 RealProcess как тип, стр. 271, 326, 576, 594 | верно | упоминание файла; проверено существование |
 | _файл целиком_ | файл |  | IV.3 Точка как класс эквивалентности процессов, стр. 575 | верно | упоминание файла; проверено существование |
-| `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 580, 590, 1071 | верно | исправлено 12.11 (шаг 7, слово автора): было «Файл `ProcessGeneral.v` проводит между ними мост»; в ProcessGeneral.v нет is_Cauchy; мост is_Cauchy ↔ is_cauchy — лемма is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47), как глава и пишет в § 2.5 |
-| `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 580, 590, 1071 | верно | CauchyProcessBridge.v:47–48: forall R, is_Cauchy R <-> is_cauchy R; доказательство — split; intro H; exact H (определения совпадают); допущений нет. |
-| `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 580, 590, 1071 | верно | исправлено 12.11 (шаг 7, слово автора): было «…, но первая и вторая линии не отождествлены машинно как единый терм» — оговорка, которую § 2.5.4 той же главы объявляет снятой; мосты is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47) и process_equiv_iff_cauchy_equiv (:58) доказаны |
+| `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 580, 590, 1073 | верно | исправлено 12.11 (шаг 7, слово автора): было «Файл `ProcessGeneral.v` проводит между ними мост»; в ProcessGeneral.v нет is_Cauchy; мост is_Cauchy ↔ is_cauchy — лемма is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47), как глава и пишет в § 2.5 |
+| `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 580, 590, 1073 | верно | CauchyProcessBridge.v:47–48: forall R, is_Cauchy R <-> is_cauchy R; доказательство — split; intro H; exact H (определения совпадают); допущений нет. |
+| `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 580, 590, 1073 | верно | исправлено 12.11 (шаг 7, слово автора): было «…, но первая и вторая линии не отождествлены машинно как единый терм» — оговорка, которую § 2.5.4 той же главы объявляет снятой; мосты is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47) и process_equiv_iff_cauchy_equiv (:58) доказаны |
 | `is_Cauchy_iff_is_cauchy` (47) | Lemma | Closed under the global context | IV.4 Несчётность процессов, стр. 604 | верно | исправлено 12.11 (шаг 11, слово автора «А»): было «мост, как мост между is_Cauchy и is_cauchy в Главе 4.2» — сравнение неточно; мост Главы 4.2 (is_Cauchy_iff_is_cauchy, CauchyProcessBridge.v:47) доказан развёрткой, определения совпадают буква в букву; мост этой главы (si_cauchy_compat, ProcessUncountable.v) — равносильность строгого и нестрогого рубежа, доказанная в обе стороны сдвигом рубежа |
 | `to_CauchySeq` (51) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 584 | верно | упоминание имени (Definition); проверено существование |
 | `process_equiv_iff_cauchy_equiv` (58) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 583 | верно | CauchyProcessBridge.v:58 (для R1, R2 с доказательствами is_Cauchy), :51 (to_CauchySeq R H := mkCauchy R H); допущений нет. |
-| `process_mul` (69) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 324, 593, 927, 1081 | верно | CauchyProcessBridge.v: mul_preserves_Cauchy :74, process_mul_compat :82, а также process_mul_comm :95 и process_mul_assoc :102; все 7 лемм файла без допущений. |
+| `process_mul` (69) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 324, 593, 929, 1083 | верно | CauchyProcessBridge.v: mul_preserves_Cauchy :74, process_mul_compat :82, а также process_mul_comm :95 и process_mul_assoc :102; все 7 лемм файла без допущений. |
 | `process_mul` (69) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 574 | верно | CauchyProcessBridge.v:69: поточечное произведение процессов; сохранение свойства Коши — mul_preserves_Cauchy (:74). |
 | `mul_preserves_Cauchy` (74) | Lemma | Closed under the global context | IV.1 P4 бесконечность как процесс, стр. 157 | верно | исправлено 12.11 правкой формализации (шаг 1, слово автора «А»): второй пункт предиката теперь is_Cauchy (process_mul R1 R2) — замкнутость относительно умножения (ProcessFourPrinciples.v; лемма mul_preserves_Cauchy, CauchyProcessBridge.v:74); слова главы верны как есть. Было: пункт о паре процессов (process_product). |
 | `mul_preserves_Cauchy` (74) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 325 | верно | CauchyProcessBridge.v:69 (process_mul), :74 (лемма); допущений нет. |
@@ -112,21 +353,29 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 496 | верно | Верно: фактортипа в файле нет; глава точнее шапки файла, где цель записана как «Define real numbers as equivalence classes» (CauchyReal.v:6). |
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 525 | верно | Импорты CauchyReal.v:25–30 — только стандартная библиотека. |
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 792 | верно | Все 19 лемм и теорем CauchyReal.v — «Closed under the global context»; слова classic в файле нет, импорты только стандартной арифметики. |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 855 | верно | Статус честный; наблюдение: в src/Completeness.v есть частичный шаг к ней — diagonal_converges (:464, без допущений): последовательность CauchySeq с равномерным условием meta_cauchy (:421) сходится к диагональному пределу; глава этот файл не называет. |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 861 | верно | cauchy_rational_approx, cauchy_complete_self и добавленные шагом 6 cauchy_complete_self_lower, cauchy_complete_self_two_sided — «Closed under the global context», как и остальные леммы файла. |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1088 | верно | В CauchyReal.v нет Axiom и Admitted; все 19 доказанных утверждений — «Closed under the global context». |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1105 | верно | исправлено 12.11 (шаг 7, слово автора): было 18; после шага 6 в файле 21 Qed (4 Theorem + 17 Lemma), 0 Admitted, 0 Axiom; название шапки приведено верно |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 863 | верно | cauchy_rational_approx, cauchy_complete_self и добавленные шагом 6 cauchy_complete_self_lower, cauchy_complete_self_two_sided — «Closed under the global context», как и остальные леммы файла. |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1090 | верно | В CauchyReal.v нет Axiom и Admitted; все 19 доказанных утверждений — «Closed under the global context». |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1107 | верно | исправлено 12.11 (шаг 7, слово автора): было 18; после шага 6 в файле 21 Qed (4 Theorem + 17 Lemma), 0 Admitted, 0 Axiom; название шапки приведено верно |
 | _файл целиком_ |  |  | IV.3 Точка как класс эквивалентности процессов, стр. 183 | верно | Notation "a ~~ b" := (cauchy_equiv a b) — CauchyReal.v:63 (область cauchy_scope). |
 | _файл целиком_ |  |  | IV.3 Точка как класс эквивалентности процессов, стр. 329 | верно | В CauchyReal.v леммы о разбиении на классы действительно нет (в файле refl/sym/trans, строки 67–91); статус следствия назван честно. |
 | _файл целиком_ |  |  | IV.3 Точка как класс эквивалентности процессов, стр. 389 | верно | Сверено со списком объявлений CauchyReal.v: CauchySeq (:48), cauchy_equiv (:57), три леммы эквивалентности; типа классов нет. |
+| `CauchyReal` | модуль |  | V.1 Метрика на процессах, стр. 737, 791, 802 | верно | имя модуля; файл существует |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 806 | верно | Верно: теоремы раздела 6 файла говорят об одном представителе; последовательностей точек в них нет. Статус назван честно. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 831 | верно | CauchyReal.v:43, :50 — is_cauchy : (nat -> Q) -> Prop; поле cs_cauchy : is_cauchy cs_seq. |
 | `is_cauchy` (43) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 218, 266, 454, 543, 565, 574, 577, 590 | верно | Словесная формулировка (стр. 213–216) и блок кода (стр. 221) совпадают с CauchyReal.v:43. |
 | `is_cauchy` (43) | Definition | Closed under the global context | IV.4 Несчётность процессов, стр. 605 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 3 (по Locate в окружении файлов главы) |
+| `is_cauchy` (43) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 686 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 3 (файл назван в главе) |
 | `CauchySeq` (48) | Record | Closed under the global context | IV.2 RealProcess как тип, стр. 416, 425, 432, 435, 436, 440, 445, 449 | верно | Блок кода (стр. 419) совпадает с CauchyReal.v:48; поля cs_seq, cs_cauchy и конструктор mkCauchy названы верно. |
 | `CauchySeq` (48) | Record | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 13, 20, 24, 64, 130, 227, 232, 239 | верно | Record CauchySeq := mkCauchy { cs_seq; cs_cauchy : is_cauchy cs_seq } (CauchyReal.v:48) — процесс вместе с доказательством сходимости, как сказано. |
 | `CauchySeq` (48) | Record | Closed under the global context | IV.4 Несчётность процессов, стр. 673 | верно | упоминание имени (Record); проверено существование |
-| `cauchy_equiv` (57) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 442, 498, 659, 681, 719, 793, 1038, 1054 | верно | Блок кода (стр. 662) совпадает с CauchyReal.v:57; знак a ~~ b — Notation на CauchyReal.v:63. |
+| `CauchySeq` (48) | Record | Closed under the global context | V.1 Метрика на процессах, стр. 726, 740, 742, 826, 831, 1017, 1098 | верно | CauchyReal.v:48 — Record CauchySeq := mkCauchy { cs_seq :> nat -> Q; cs_cauchy : is_cauchy cs_seq }. |
+| `CauchySeq` (48) | Record | Closed under the global context | V.2 Топология и компактность, стр. 888, 1054 | верно | упоминание имени (Record); проверено существование |
+| `CauchySeq` (48) | Record | Closed under the global context | V.3 Непрерывность, стр. 701, 732, 1142 | верно | 382 строки, 8 Qed. CauchySeq (CauchyReal.v:48) — запись из последовательности и доказательства is_cauchy: свойство Коши входит в тип, как сказано. |
+| `cauchy_equiv` (57) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 442, 498, 659, 681, 719, 793, 1040, 1056 | верно | Блок кода (стр. 662) совпадает с CauchyReal.v:57; знак a ~~ b — Notation на CauchyReal.v:63. |
 | `cauchy_equiv` (57) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 16, 41, 77, 172, 190, 202, 225, 229 | верно | Блок кода (стр. 175–178) совпадает с CauchyReal.v:57; словесное чтение (для всякой тесноты eps найдётся рубеж N) соответствует кванторам. |
 | `cauchy_equiv` (57) | Definition | Closed under the global context | IV.4 Несчётность процессов, стр. 13, 21, 674 | верно | упоминание имени (Definition); проверено существование |
+| `cauchy_equiv` (57) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 715 | верно | CauchyReal.v:57 — та же формула на CauchySeq; связь двух отношений доказана в ProcessBridge.v (:66, :78). |
+| `cauchy_equiv` (57) | Definition | Closed under the global context | V.3 Непрерывность, стр. 731 | верно | упоминание имени (Definition); проверено существование |
 | `cauchy_equiv_refl` (67) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 677 | верно | CauchyReal.v:67: forall a, a ~~ a; допущений нет. |
 | `cauchy_equiv_refl` (67) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 220, 331, 399 | верно | CauchyReal.v:67: forall a, a ~~ a; доказательство — разность нулевая, как в главе. |
 | `cauchy_equiv_sym` (78) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 678 | верно | CauchyReal.v:78: a ~~ b -> b ~~ a; допущений нет. |
@@ -147,6 +396,7 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | `cauchy_le_of_equiv` (231) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 532 | верно | CauchyReal.v:231: a ~~ b -> cauchy_le a b; блок кода (стр. 535) совпадает; обратная сторона — через cauchy_equiv_sym. |
 | `cauchy_rational_approx` (287) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 837, 854 | верно | CauchyReal.v:287: в формулировке стоит «exists q : Q»; то, что q — собственное приближение, видно из доказательства (exists (cs_seq a N), :294); допущений нет. |
 | `cauchy_complete_self` (300) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 840, 855 | верно | верхняя сторона: cauchy_le (cauchy_sub a (cauchy_const (a n))) (cauchy_const eps) (CauchyReal.v:300); двусторонняя форма — cauchy_complete_self_two_sided (шаг 6, 12.11); допущений нет |
+| `cauchy_complete_self` (300) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 803 | верно | CauchyReal.v:300 (объявление — Theorem): для n >= N: cauchy_le (cauchy_sub a (cauchy_const (cs_seq a n))) (cauchy_const eps) — оценка сверху; родственные: cauchy_rational_approx (:287), cauchy_complete_self_lower (:323), cauchy_complete_self_two_sided (:345). Оформление: имя на странице разорвано переводом строки (стр. 800–801) и читается с пробелом внутри. |
 | `cauchy_complete_self_two_sided` (345) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 841 | верно | исправлено 12.11 (шаг 6, слово автора «А») — правка формализации: в CauchyReal.v добавлены cauchy_complete_self_lower (нижняя сторона: cauchy_le (cauchy_sub (cauchy_const (a n)) a) (cauchy_const eps)) и cauchy_complete_self_two_sided (обе стороны при одном N); прежняя cauchy_complete_self давала только верхнюю оценку; на странице добавлено имя двусторонней теоремы; Print Assumptions: Closed under the global context |
 
 ---
@@ -161,13 +411,110 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #125 — `src/Differentiation.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| `Differentiation` | модуль |  | V.4 Производная, стр. 202 | верно | имя модуля; файл существует |
+| _файл целиком_ |  |  | V.4 Производная, стр. 293 | верно | Три файла существуют; счёт Qed: Differentiation.v — 18, process/ProcessDerivative.v — 17, MeanValueTheorem.v — 18; Admitted, Axiom, Parameter — 0 во всех трёх. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 357 | верно | SECTION 2: LINEARITY (стр. 108–203 файла): deriv_scale, deriv_neg, deriv_sum, deriv_sub — четыре леммы. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 478 | верно | Верно: такой леммы нет ни в Differentiation.v, ни в остальном src (поиск). Утверждение доказуемо без аксиом: forall L, ~ has_derivative Qabs 0 L (abs_no_derivative_at_0, _part05/ch04/Check1.v). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 523 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): было «около ста пятидесяти строк»; в доказательстве 201 строка. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 955 | верно | Верно. В остальном src общего цепного правила для has_derivative тоже нет; есть частный случай udiff_chain_affine (analysis/FTC.v:370, внутренняя функция аффинна) и fps_chain_rule для формальных степенных рядов (FormalPowerSeries.v:641). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 1002 | верно | Differentiation.v:731–734 — четыре команды Print Assumptions для названных теорем; вывод каждой: Closed under the global context. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 763 | верно | Differentiation.v:12 и MeanValueTheorem.v:14: «AXIOMS: none (fully constructive)». |
+| _файл целиком_ | файл |  | V.6 Основная теорема анализа, стр. 677 | верно | упоминание файла; проверено существование |
+| `has_derivative` (36) | Definition | Closed under the global context | V.4 Производная, стр. 72, 153, 176, 189, 194, 212, 220, 256 | верно | Definition has_derivative (Differentiation.v:36); блок кода (стр. 76–80) совпадает с исходником: для всякого eps > 0 есть delta > 0, при 0 < \|h\| < delta: \|f(x+h) − f(x) − L·h\| < eps·\|h\|; деления в определении нет. |
+| `has_derivative` (36) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 559 | верно | упоминание имени (Definition); проверено существование |
+| `continuous_at` (43) | Definition | Closed under the global context | V.4 Производная, стр. 107, 425 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): было «применялся к continuous_at в § 5.3» — приём ненулевого шага стоит в местном определении Differentiation.v, а определение § 5.3 (Topology.v) говорит обо всех точках окрестности. |
+| `has_derivative_ext` (59) | Lemma | Closed under the global context | V.4 Производная, стр. 311 | верно | Differentiation.v:59 — утверждение то же дословно. |
+| `has_derivative_eq` (72) | Lemma | Closed under the global context | V.4 Производная, стр. 319 | верно | Differentiation.v:72: L == L' -> has_derivative f x L -> has_derivative f x L'. |
+| `deriv_const` (87) | Lemma | Closed under the global context | V.4 Производная, стр. 330, 351 | верно | Differentiation.v:87: forall c x, has_derivative (fun _ => c) x 0. Одноимённые леммы есть ещё в трёх файлах; глава называет Differentiation.v. |
+| `deriv_id` (98) | Lemma | Closed under the global context | V.4 Производная, стр. 343, 352, 570 | верно | Differentiation.v:98: forall x, has_derivative (fun w => w) x 1. |
+| `deriv_scale` (113) | Lemma | Closed under the global context | V.4 Производная, стр. 362, 397 | верно | Differentiation.v:113: has_derivative f x L -> has_derivative (fun w => c * f w) x (c * L). |
+| `deriv_neg` (152) | Lemma | Closed under the global context | V.4 Производная, стр. 363, 384 | верно | Differentiation.v:152: has_derivative f x L -> has_derivative (fun w => - f w) x (- L). |
+| `deriv_sum` (165) | Lemma | Closed under the global context | V.4 Производная, стр. 364, 383, 397 | верно | Differentiation.v:165; в доказательстве eps * (1#2) для каждого слагаемого и Qabs_triangle — как описано на стр. 367–380. |
+| `deriv_sub` (191) | Lemma | Closed under the global context | V.4 Производная, стр. 365, 382 | верно | Differentiation.v:191: has_derivative (fun w => f w - g w) x (Lf - Lg). |
+| `deriv_sub` (191) | Lemma | Closed under the global context | V.4 Производная, стр. 365, 382 | верно | Доказательство (:194–203): deriv_neg, deriv_sum, затем has_derivative_ext и has_derivative_eq — как сказано. |
+| `deriv_implies_continuous` (210) | Lemma | Closed under the global context | V.4 Производная, стр. 424, 471, 894 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): было «определение непрерывности из § 5.3» — это одноимённое местное, более слабое определение (проколотая окрестность). Мост записан: topo_continuous_implies_punctured; обратно — deriv_implies_topo_continuous при условии, что функция уважает Qeq; без условия неверно (derivative_does_not_give_topo_continuity). Заодно имя has_derivative f x L, разорванное переносом строки, собрано. |
+| `deriv_implies_continuous` (210) | Lemma | Closed under the global context | V.4 Производная, стр. 424, 471, 894 | верно | Доказательство (:215–222): delta_d от критерия при eps = 1, delta2 := eps * / (Qabs L + 1), свидетель Qmin delta_d delta2 — как сказано. |
+| `deriv_implies_continuous` (210) | Lemma | Closed under the global context | V.4 Производная, стр. 424, 471, 894 | верно | Прямая сторона — лемма :210 (непрерывность в смысле Differentiation.v:43). «Обратное неверно» в src не формализовано, и глава это оговаривает (стр. 470–473). |
+| `continuous_bounded_near` (246) | Lemma | Closed under the global context | V.4 Производная, стр. 453, 464, 546 | верно | Differentiation.v:246; свидетель M = Qabs (f x) + 1 при eps = 1 — как в главе; непрерывность — в смысле Differentiation.v:43. |
+| `continuous_bounded_near` (246) | Lemma | Closed under the global context | V.4 Производная, стр. 453, 464, 546 | верно | В доказательстве deriv_product: Hcg := deriv_implies_continuous g x Lg Hg; continuous_bounded_near g x Hcg (:290–291); второе слагаемое — через непрерывность g, третье — через производную g, как сказано. |
+| `deriv_square` (270) | Lemma | Closed under the global context | V.4 Производная, стр. 496 | верно | Differentiation.v:270: has_derivative (fun w => w * w) x (2 * x); свидетель delta = eps, остаток h * h — как в главе. |
+| `deriv_product` (284) | Lemma | Closed under the global context | V.4 Производная, стр. 523, 559, 1004 | верно | Differentiation.v:284: has_derivative f x Lf -> has_derivative g x Lg -> has_derivative (fun w => f w * g w) x (Lf * g x + f x * Lg). Разложение на три слагаемых (стр. 523–533 главы) совпадает с Hdecomp (:355–359); оценки по eps * (1#3). |
+| `deriv_product` (284) | Lemma | Closed under the global context | V.4 Производная, стр. 523, 559, 1004 | верно | Верно: утверждение :284–286 — точный критерий has_derivative для произведения, без сетки и без ослабления; Print Assumptions: Closed under the global context. |
+| `deriv_power_succ` (490) | Lemma | Closed under the global context | V.4 Производная, стр. 566, 579, 1004 | верно | Мелочь: в доказательстве deriv_power_succ (Differentiation.v:493–518) база индукции — одна deriv_id, шаг — deriv_product и deriv_id; deriv_const там не применяется. § 4.4.3 главы называет базой именно deriv_id. |
+| `deriv_power_succ` (490) | Lemma | Closed under the global context | V.4 Производная, стр. 566, 579, 1004 | верно | Differentiation.v:490: has_derivative (fun w => Qpow w (S n)) x (inject_Z (Z.of_nat (S n)) * Qpow x n); индукция по n: база — deriv_id, шаг — deriv_product; как в главе. |
+| `deriv_unique` (521) | Lemma | Closed under the global context | V.4 Производная, стр. 611 | верно | Differentiation.v:521: has_derivative f x L -> has_derivative f x L' -> L == L'. Доказательство — разбор Qeq_dec, eps = Qabs (L - L') * (1#4), h = Qmin d1 d2 * (1#2), как в главе; классическая логика не применяется. |
+| `deriv_affine` (582) | Lemma | Closed under the global context | V.4 Производная, стр. 636 | верно | Differentiation.v:582, SECTION 5: APPLICATIONS TO OPTIMIZATION: has_derivative (fun w => a * w + b) x a. |
+| `quadratic_loss_derivative` (594) | Lemma | Closed under the global context | V.4 Производная, стр. 640 | верно | Differentiation.v:594: has_derivative (fun w => (w - wstar) * (w - wstar)) x (2 * (x - wstar)). |
+| `gradient_step_uses_derivative` (609) | Lemma | Closed under the global context | V.4 Производная, стр. 677, 692, 1006 | верно | Differentiation.v:609: gd_weight w0 wstar eta 1 == w0 - eta * (2 * (w0 - wstar)) — тождество для первого шага; has_derivative в утверждении не участвует, связь с производной идёт через отдельную лемму quadratic_loss_derivative. Статус леммы глава называет сама (стр. 683–692). |
+| `gradient_step_uses_derivative` (609) | Lemma | Closed under the global context | V.4 Производная, стр. 677, 692, 1006 | верно | Доказательство (:612): intros. unfold gd_weight, gd_error, contraction. ring. — дословно так; статус назван честно. |
+| `local_min_zero_deriv` (616) | Lemma | Closed under the global context | V.4 Производная, стр. 650, 946, 1005 | верно | Differentiation.v:616: local_min f x -> has_derivative f x L -> L == 0; local_min (:50) — есть delta > 0, при Qabs h < delta: f x <= f (x + h). Ход доказательства (eps = \|L\|/2, шаг влево при L > 0, вправо при L < 0) совпадает с описанным. |
+| `local_min_zero_deriv` (616) | Lemma | Closed under the global context | V.4 Производная, стр. 650, 946, 1005 | верно | Differentiation.v:733 — Print Assumptions local_min_zero_deriv; вывод компилятора: Closed under the global context. Глава результата не называет — его можно вписать. |
+| `topo_continuous_implies_punctured` (742) | Lemma | Closed under the global context | V.4 Производная, стр. 430 | верно | Новая лемма шага 11: Topology.continuous_at f x -> continuous_at f x. Closed under the global context. |
+| `derivative_does_not_give_topo_continuity` (787) | Theorem | Closed under the global context | V.4 Производная, стр. 433 | верно | Новая теорема шага 11: exists f x L, has_derivative f x L /\ ~ Topology.continuous_at f x; свидетель — rep_fn (различает записи одного числа), точка 2#2, производная 0. Closed under the global context. |
+| `deriv_implies_topo_continuous` (797) | Theorem | Closed under the global context | V.4 Производная, стр. 432 | верно | Новая теорема шага 11: (forall u v, u == v -> f u == f v) -> has_derivative f x L -> Topology.continuous_at f x. Closed under the global context. |
+
+---
+
+## #— — `src/EVT_ArgmaxNotCauchy.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | V.3 Непрерывность, стр. 841 | верно | упоминание файла; проверено существование |
+| `argmax_process_need_not_be_Cauchy` (273) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 840, 1004, 1154 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было — утверждение без теоремы и с неверным доводом (приближение к иррациональной точке свойству Коши не мешает). Новый файл EVT_ArgmaxNotCauchy.v: exists f, uniformly_continuous_on f 0 1 /\ ~ is_Cauchy (argmax_process f 0 1) — функция two_peaks. Closed under the global context. |
+| `argmax_process_need_not_be_Cauchy` (273) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 840, 1004, 1154 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было «его предел может оказаться иррациональным» — довод неверен и снят (и в комментарии EVT_idx.v тоже); названа теорема-контрпример. |
+| `argmax_process_need_not_be_Cauchy` (273) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 840, 1004, 1154 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора) — к словам добавлена теорема-контрпример. |
+
+---
+
+## #135 — `src/EVT_ERR.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 772 | верно | EVT_ERR.v — 35 Qed (шапка называет 34), пометка DEPRECATED в строке 6; EVT_idx.v — 26 Qed, одна локальная аксиома; ProcessEVT.v — 9 Qed, подключает EVT_ERR. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 904 | верно | EVT_ERR.v:6: «*** DEPRECATED: Use EVT_idx.v instead (0 Admitted, cleaner proofs) ***». |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 925 | верно | grid_point_0 (EVT_ERR.v:124): n > 0 -> grid_point a b n 0 == a; пояснение в файле :631–634; посылка f (grid_point a b n 0) == f a в max_on_grid_attained (EVT_ERR.v:635) выводится из равномерной непрерывности леммой uc_implies_proper (:788). |
+| `RealProcess` (53) | Definition | Closed under the global context | V.3 Непрерывность, стр. 667 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 10 (файл назван в главе) |
+| `grid_point` (68) | Definition | Closed under the global context | V.3 Непрерывность, стр. 790 | верно | EVT_ERR.v:68 (то же в EVT_idx.v:40); блок совпадает. Сетка шага n процесса — grid_list a b (S n): n+1 отрезок, узлы перечисляются от b к a (проверено вычислением). |
+| `grid_list` (78) | Definition | Closed under the global context | V.3 Непрерывность, стр. 800 | верно | grid_point_0, grid_point_n (EVT_ERR.v:124, :132): при n > 0 узлы 0 и n равны a и b как дроби (==), не буквально — на этом различии построен § 3.7.2. grid_list — EVT_ERR.v:78. |
+| `argmax_on_grid` (99) | Definition | Closed under the global context | V.3 Непрерывность, стр. 816 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было «argmax» — такого имени в формализации нет; позицию даёт argmax_on_grid (EVT_ERR.v; в index-версии — одноимённое определение EVT_idx.v). |
+| `argmax_process` (103) | Definition | Closed under the global context | V.3 Непрерывность, стр. 824, 836, 1154 | верно | Комментарий EVT_ERR.v:505–528 — да. Теоремы об этом в формализации нет. Для действующих определений постоянная функция даёт постоянную позицию (вычислено на [0,1] для пяти значений n: b в EVT_ERR, a в EVT_idx), так что пример файла к ним не относится; глава это оговаривает словами «без фиксированного правила выбора». |
+| `max_on_grid` (113) | Definition | Closed under the global context | V.3 Непрерывность, стр. 814, 947 | верно | EVT_ERR.v:113: max_list (f a) (map f (grid_list a b n)); в index-версии (EVT_idx.v:100) — f от узла с индексом argmax_idx. |
+| `sup_process` (117) | Definition | Closed under the global context | V.3 Непрерывность, стр. 820 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 2 (файл назван в главе) |
+| `max_list_attained` (545) | Lemma | не константа или не найдена: The reference ToS.EVT_ERR.max_list_attained was not found in the current environment. | V.3 Непрерывность, стр. 908 | верно | EVT_ERR.v:575–594: объявление открыто и закрыто командой Abort, константы в окружении нет. Уточнение: в задуманном виде утверждение неверно (если запасное значение d больше всех элементов списка, максимум равен d и в списке не лежит) — комментарий файла :587–590. |
+| `max_list_attained_classical` (579) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 910 | верно | EVT_ERR.v:609: l <> [] -> exists x, (x == d \/ In x l) /\ max_list d l == x. Вопреки имени, Closed under the global context (разбор случаев по Q.max_dec). |
+| `sup_process_is_Cauchy` (775) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 821 | верно | EVT_ERR.v:805: a < b -> uniformly_continuous_on f a b -> is_Cauchy (sup_process f a b). Условие равномерной непрерывности в этой фразе не повторено, оно названо в § 3.6.4. Допущение: Classical_Prop.classic. |
+| `EVT_complete` (899) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 889, 891, 1001, 1013, 1038, 1143, 1149 | верно | Блок кода совпадает с EVT_ERR.v:929. Допущение: Classical_Prop.classic. |
+| `EVT_complete` (899) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 889, 891, 1001, 1013, 1038, 1143, 1149 | верно | Четыре члена пересказаны верно. process_le (EVT_ERR.v:915): forall eps > 0, exists N, forall n > N, P n <= Q n + eps — мажоранта с эпсилон-запасом, слова «с точностью до процессного ≤» это оговаривают; совпадение f (c n) == M n — равенство дробей. Точный максимум не утверждается. |
+| `EVT_complete` (899) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 889, 891, 1001, 1013, 1038, 1143, 1149 | верно | Комментарий EVT_ERR.v:921–928: исходная формулировка содержала is_Cauchy c и была снята. |
+| `EVT_complete` (899) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 889, 891, 1001, 1013, 1038, 1143, 1149 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «теорема об экстремуме — на L3: classic приходит в EVT_ERR и EVT_idx напрямую»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
+
+---
+
 ## #136 — `src/EVT_idx.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| `EVT_strong_process` (663) | Theorem | Axioms: EVT_idx.classic : forall P : Prop, P \/ ~ P | V.3 Непрерывность, стр. 983, 1128 | верно | цена сверена при заведении базы (12.11 не проверялось): аксиома `EVT_idx.classic`, объявленная в самом файле; формулировка — при аудите Части V |
-| `EVT_strong_process` (663) | Theorem | Axioms: EVT_idx.classic : forall P : Prop, P \/ ~ P | Направления/Математика/index, стр. 96 | верно | цена сверена при заведении базы (12.11 не проверялось): `EVT_idx.classic` |
-| `EVT_strong_process` (663) | Theorem | Axioms: EVT_idx.classic : forall P : Prop, P \/ ~ P | Формализация, стр. 104, 134 | верно | цена сверена при заведении базы (12.11 не проверялось): `EVT_idx.classic`; формулировка — при аудите Части V |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 964 | верно | Комментарий EVT_idx.v:59–81 «L5 STATUS ASSIGNMENT FOR ARGMAX» — содержание пересказано верно; это комментарий, не теорема. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 989 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «в EVT_idx.v аксиома classic объявлена локально»; объявление снято; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 758 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «EVT_idx.v (с локальным classic, из § 5.3)»; EVT_idx.v подключает ToS_Axioms.v, местное объявление аксиомы снято, все его теоремы — Closed under the global context |
+| `find_max_idx_acc` (84) | Fixpoint | Closed under the global context | V.3 Непрерывность, стр. 946, 982 | верно | EVT_idx.v:88–90: if Qle_bool best_val (f x) then … curr_idx … — при равенстве индекс обновляется, выбирается последний по списку максимум. Список grid_list идёт от b к a, поэтому выделен самый левый узел (вычислено: на плато [1/4, 3/4] index-версия даёт 1/4, argmax-версия — 3/4). Осторожность главы («какой порядок обхода») оправдана. |
+| `argmax_idx` (93) | Definition | Closed under the global context | V.3 Непрерывность, стр. 933 | верно | EVT_idx.v:93; блок кода совпадает. Параметр default в теле не используется. |
+| `max_on_grid` (100) | Definition | Closed under the global context | V.3 Непрерывность, стр. 814, 947 | верно | EVT_idx.v:84 (find_max_idx_acc), :100: max_on_grid f a b n := f (nth (argmax_idx f l a) l a), l := grid_list a b n. Что этот индекс действительно даёт наибольшее значение — argmax_idx_maximizes (:185), Closed under the global context. |
+| `max_on_grid_attained` (212) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 950 | верно | EVT_idx.v:212: (n > 0) -> exists y, In y (grid_list a b n) /\ max_on_grid f a b n = f y — равенство буквальное. Мелочь: словом reflexivity закрывается только равенство; принадлежность узла списку доказана отдельно (nth_In, argmax_idx_bound), всё доказательство — одиннадцать строк (:216–226). Одним словом reflexivity доказана соседняя max_is_f_of_argmax (:625). Closed under the global context. |
+| `Archimedean_nat` (353) | Theorem | Closed under the global context | V.4 Производная, стр. 792 | верно | walk_step_small (:131) применяет Archimedean_nat — теорему, объявленную в EVT_idx.v:355 (MeanValueTheorem.v её импортирует, сам не объявляет; одноимённая есть в EVT_ERR.v:479). Print Assumptions Archimedean_nat: Closed under the global context — локальная аксиома classic из EVT_idx.v в неё не входит. |
+| `x_between_grid_points` (423) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 1036 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): абзац о местной аксиоме переписан; в EVT_idx.v лемма x_between_grid_points доказана через x_between_aux (индукция по числу ячеек, Qlt_le_dec), строки `Axiom classic` в файле больше нет; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
+| `EVT_idx_majorant` (637) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1000 | верно | Новая теорема шага 10: a < b -> uniformly_continuous_on f a b -> forall x из отрезка, forall eps > 0, exists N, forall n > N, f x <= sup_process f a b n + eps. Closed under the global context. |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 996, 1038, 1143, 1149 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «Доказательство теоремы об экстремуме использует аксиому classic»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 996, 1038, 1143, 1149 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора) — в теорему внесён четвёртый член, мажоранта: forall x из отрезка, forall eps > 0, exists N, forall n > N, f x <= sup_process f a b n + eps. Closed under the global context. |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 996, 1038, 1143, 1149 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора) — слова те же, доведена формализация: в EVT_strong_process не было мажорирующего свойства; теперь оно — четвёртый член (EVT_idx_majorant), и содержание действительно то же, что у EVT_complete. |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 996, 1038, 1143, 1149 | верно | is_Cauchy (sup_process f a b) — первый член и EVT_complete, и EVT_strong_process (в каждом файле своё sup_process). Допущения: Classical_Prop.classic и EVT_idx.classic соответственно. |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 996, 1038, 1143, 1149 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «теорема об экстремуме — на L3: classic приходит в EVT_ERR и EVT_idx напрямую»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | Направления/Математика/index, стр. 96 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «экстремум — с исключённым третьим»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
+| `EVT_strong_process` (659) | Theorem | Closed under the global context | Формализация, стр. 104, 135 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «исключённое третье (EVT_idx.v)»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context |
 
 ---
 
@@ -176,6 +523,7 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
 | `classic` (36) | Axiom | Axioms: Distinction.classic : forall P : Prop, P \/ ~ P | IV.1 P4 бесконечность как процесс, стр. 298, 309, 312, 360, 361, 362, 365, 1106 | верно | сомнительное: перечень неполон — classic переобъявлена в трёх файлах (foundation/Distinction.v:36, EVT_idx.v:338, settheory/BorelDeterminacy.v:21), а в допущениях девяти лемм стоит ещё аксиома стандартной библиотеки functional_extensionality_dep (ProcessWholeness.v:274, 283; DependentSystems.v:106; Conversion.v:127; stdlib/GameTheory.v:84, 91, 103; foundation/Ordinal.v:81, 92) |
+| `Distinction` (67) | Record | Closed under the global context | V.1 Метрика на процессах, стр. 299 | верно | упоминание имени (Record); проверено существование; объявлений с таким именем 5 (файл в главе не назван; объявлений 5) |
 
 ---
 
@@ -274,14 +622,72 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #547 — `src/GradientDescent.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.4 Производная, стр. 701 | верно | GradientDescent.v (18 Qed): gd_weight_converges, gd_loss_converges_zero, gd_convergence_rate, optimal_lr_contraction — всё для квадратичной потери при valid_lr eta (0 < eta < 1). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 961 | верно | GradientDescent.v озаглавлен «GRADIENT DESCENT CONVERGENCE FOR QUADRATIC LOSS»: сходимость весов и потерь для одной модели — квадратичной потери с множителем сжатия 1 − 2·eta. «Полная теория» верна в этих пределах. |
+| `contraction` (40) | Definition | Closed under the global context | V.4 Производная, стр. 694 | верно | упоминание имени (Definition); проверено существование |
+| `gd_error` (43) | Fixpoint | Closed under the global context | V.4 Производная, стр. 694 | верно | упоминание имени (Fixpoint); проверено существование |
+| `gd_weight` (50) | Definition | Closed under the global context | V.4 Производная, стр. 694, 696 | верно | gd_weight w0 wstar eta n := wstar + gd_error (w0 - wstar) eta n (GradientDescent.v:50); gd_error умножает ошибку на contraction eta = 1 - 2 * eta (:40, :43). Определение задано через сжатие ошибки, не через производную; лемма сверяет первый шаг с формулой w0 − eta·2(w0 − wstar). |
+
+---
+
 ## #550 — `src/HeineBorel_ERR.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| `not_coverable_half` (379) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 607 | верно | сверена цена; формулировка — при аудите части; теоремы Гейне — Бореля от этой леммы не зависят |
-| `Heine_Borel_uniform` (517) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 598, 613, 1009, 1016 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
-| `Heine_Borel` (536) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 588, 613, 1016 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 507 | верно | Комментарии HeineBorel_ERR.v:23–26, :423–438, :533–535 — слова, теоремы о некомпактности в файле нет; статус назван честно. Пример из комментария :534 (C(x) = \|x - sqrt(2)\| без половины) контрпримером не служит: два таких шара по обе стороны от разреза покрывают всё; у главы радиус с множителем 1/2 — верно. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 616 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было «на том классе покрытий, на котором она вообще верна» — сильнее доказанного: доказано, что числа Лебега достаточно; необходимость не доказана. |
+| `valid_cover` (76) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 572 | верно | HeineBorel_ERR.v:76: forall x, a <= x <= b -> C x > 0. Покрытие здесь — функция радиуса C : Q -> Q (шар радиуса C x вокруг каждой точки x), не произвольное семейство открытых множеств. |
+| `uniform_cover` (84) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 574 | верно | упоминание имени (Definition); проверено существование |
+| `has_lebesgue_number` (118) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 603 | верно | упоминание имени (Definition); проверено существование |
+| `Qpow2` (137) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 590 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 4 (файл назван в главе) |
+| `pow2_eventually_large` (314) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 590 | верно | Лемма существует (HeineBorel_ERR.v): для ширины и delta найдётся глубина N с (b - a) / Qpow2 N < delta; на неё опирается Heine_Borel_uniform (и новая Heine_Borel_lebesgue). Closed under the global context. |
+| `not_coverable_half` (379) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 626 | верно | HeineBorel_ERR.v:379: ~coverable C a b -> ~coverable C a ((a+b)/2) \/ ~coverable C ((a+b)/2) b; допущение — Classical_Prop.classic. Это единственное из 46 объявлений файла с допущением, остальные 45 — Closed. |
+| `not_coverable_half` (379) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 626 | верно | сверена цена; формулировка — при аудите части; теоремы Гейне — Бореля от этой леммы не зависят |
+| `Heine_Borel_by_depth` (449) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 590 | верно | pow2_eventually_large (:314) даёт глубину N с (b - a) / Qpow2 N < delta; Heine_Borel_by_depth (:449) — индукция по N: кусок уже delta накрыт одним шаром (small_interval_coverable), половины склеиваются (coverable_concat). Ход главы соответствует доказательству. |
+| `Heine_Borel_by_depth` (449) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 590 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было «(бисекционный спуск — hb_step, Qpow2, Heine_Borel_by_depth)» — hb_step в доказательство Heine_Borel_uniform не входит (Print All Dependencies); названы леммы, на которых вывод стоит. |
+| `Heine_Borel_uniform` (517) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 612, 632, 1052, 1059 | верно | Блок кода (стр. 581–584) совпадает с HeineBorel_ERR.v:517: a < b -> uniform_cover C a b delta -> exists centers, covers_interval C centers a b. Closed under the global context. |
+| `Heine_Borel_uniform` (517) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 612, 632, 1052, 1059 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| `Heine_Borel_uniform` (517) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 612, 632, 1052, 1059 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) — итог приведён к двум теоремам: Heine_Borel_lebesgue (число Лебега) и Heine_Borel_uniform (радиусы не меньше delta). |
+| `Heine_Borel` (536) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 601, 632, 1059 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| `Heine_Borel` (536) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 601, 632, 1059 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) — слова уточнены: Heine_Borel : a < b -> valid_cover C a b -> (exists delta, uniform_cover C a b delta) -> exists centers, covers_interval C centers a b; гипотеза — равномерность, а не число Лебега в собственном смысле. |
+| `Heine_Borel` (536) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 601, 632, 1059 | верно | Проверено заново: обе теоремы и Heine_Borel_by_depth — Closed under the global context; not_coverable_half в их зависимости не входит (Print All Dependencies). |
 | `Heine_Borel` (536) | Theorem | Closed under the global context | Формализация, стр. 106 | верно | сверена цена; формулировка — при аудите части |
+| `uniform_cover_has_lebesgue` (635) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 580 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было «Это и есть число Лебега» — uniform_cover (все радиусы не меньше delta) сильнее has_lebesgue_number; обратное неверно (пример в пробном файле). Добавлена uniform_cover_has_lebesgue : uniform_cover C a b delta -> has_lebesgue_number C a b delta. Closed under the global context. |
+| `Heine_Borel_lebesgue` (678) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 602, 611, 1052 | верно | Новая теорема шага 8. has_lebesgue_number C a b delta := delta > 0 /\ forall x из отрезка, exists c из отрезка, forall y, \|y - x\| < delta -> covered_by C c y. Доказательство — тот же спуск по глубине (HB_lebesgue_by_depth). Closed under the global context. |
+| `Heine_Borel_lebesgue` (678) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 602, 611, 1052 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): новая теорема Heine_Borel_lebesgue : a < b -> has_lebesgue_number C a b delta -> exists centers, covers_interval C centers a b; с ней слова «для покрытий, обладающих числом Лебега» верны буквально. Closed under the global context. |
+
+---
+
+## #555 — `src/IntegralApplications.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 216 | верно | analysis/StepIntegral.v (17 Qed) и IntegralApplications.v (19 Qed) существуют; демонстрационные файлы — stdlib/ProcessIntegration.v (6 Qed) и process/ProcessAnalysis.v (18 Qed). |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 732 | верно | udiff_product (:210), ftc_product (:422), integration_by_parts (:447), antiderivative_unique (:641) существуют; все — Closed under the global context. |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 207 | верно | IntegralApplications.v: udiff_product (:210), integration_by_parts (:447), antiderivative_unique (:641); 19 Qed. |
+| `product_decomp` (60) | Lemma | Closed under the global context | V.5 Интеграл, стр. 628 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было «то же разложение, что у производной» — у deriv_product тождество другое; общее — дробление eps на три части. product_decomp теперь применяется в udiff_product. |
+| `product_decomp` (60) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 443 | верно | IntegralApplications.v:60: a1*b1 - a2*b2 - (c1*b2 + a2*c2)*h == (a1 - a2 - c1*h)*b2 + a2*(b1 - b2 - c2*h) + (a1 - a2)*(b1 - b2) — три слагаемых. В доказательстве udiff_product сама лемма не вызывается: то же тождество получено на месте тактикой ring (:277–280), имя стоит только в комментарии (:269). Доли eps/3 и границы Mf, Mg, Mf', Mg' — как в главе. |
+| `riemann_sum_ext` (103) | Lemma | Closed under the global context | V.5 Интеграл, стр. 372, 379 | верно | IntegralApplications.v:103: равенство значений (==) в узлах k < n влечёт равенство сумм. Расположение трёх лемм названо верно. |
+| `udiff_product` (210) | Lemma | Closed under the global context | V.5 Интеграл, стр. 626, 740 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было «правило произведения для интеграла» — udiff_product говорит о udiff_on произведения; интегральная форма — ftc_product. Доказательство udiff_product теперь вызывает лемму product_decomp (раньше тождество выводилось на месте, лемма нигде не применялась). |
+| `udiff_product` (210) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 433, 636 | верно | IntegralApplications.v:210: udiff_on f f' a b -> udiff_on g g' a b -> (\|f\| <= Mf, \|g\| <= Mg, \|f'\| <= Mf', \|g'\| <= Mg' на [a,b]) -> 0 <= Mf, Mg, Mf', Mg' -> udiff_on (fun x => f x * g x) (fun x => f' x * g x + f x * g' x) a b — условия названы, заключение совпадает. Само правило основную теорему не использует (ftc_grid в доказательстве нет): это её предпосылка для ftc_product. |
+| `udiff_product` (210) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 433, 636 | верно | Пять лемм IntegralApplications.v (:210, :447, :551, :693, :641); все — Closed under the global context. |
+| `udiff_square` (398) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 450 | верно | IntegralApplications.v:398: при \|f\| <= Mf, \|f'\| <= Mf' на [a,b]: udiff_on (fun x => f x * f x) (fun x => 2 * f x * f' x) a b; доказательство — udiff_product и udiff_ext. |
+| `ftc_product` (422) | Lemma | Closed under the global context | V.5 Интеграл, стр. 630 | верно | Лемма существует (IntegralApplications.v): интегральная форма правила произведения. Closed under the global context. |
+| `ftc_product` (422) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 456, 464, 475 | верно | IntegralApplications.v:422: при границах Mf, Mg, Mf', Mg' и 0 < eps: exists N, \|RS(f' * g + f * g') - (f y * g y - f a * g a)\| <= eps * (b - a); доказательство — udiff_product и ftc_grid. |
+| `integration_by_parts` (447) | Lemma | Closed under the global context | V.5 Интеграл, стр. 631 | верно | IntegralApplications.v:447: eps-сеточная форма — exists N, Qabs (RS(f'g) - (fg(конец) - fg(a)) + RS(fg')) <= eps * (b - a), при ограничениях на f, g, f', g' на [a,b]. Страница лемму только называет. |
+| `integration_by_parts` (447) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 465, 636 | верно | IntegralApplications.v:447: exists N, \|RS(f' * g) - (f y * g y - f a * g a) + RS(f * g')\| <= eps * (b - a) — формула главы (стр. 455–459) совпадает; посылки — те же границы Mf, Mg, Mf', Mg', что у udiff_product (в этом разделе главы они не повторены). |
+| `integration_by_parts` (447) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 465, 636 | верно | исправлено 12.11 (Часть V, шаг 13, слово автора): было «(riemann_sum_add, riemann_sum_sub)» — в доказательстве integration_by_parts леммы riemann_sum_sub нет: она объявлена в analysis/FTC.v, который сам подключает IntegralApplications.v. |
+| `ibp_self` (551) | Lemma | Closed under the global context | V.5 Интеграл, стр. 632 | верно | IntegralApplications.v:551: Qabs (2 * RS(f'f) - (f(конец)^2 - f(a)^2)) <= eps * (b - a); по содержанию — случай g = f; в доказательстве выведена из ftc_product, а не из integration_by_parts. |
+| `ibp_self` (551) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 478, 636 | верно | IntegralApplications.v:551: при границах Mf, Mf' и 0 < eps: exists N, \|2 * RS(f' * f) - (f y * f y - f a * f a)\| <= eps * (b - a). |
+| `udiff_sub` (622) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 504 | верно | Так и в доказательстве (:651–690): udiff_sub, затем udiff_ext (h - h заменено на 0), затем ftc_grid для f - g с производной 0. udiff_sub — IntegralApplications.v:622. |
+| `antiderivative_unique` (641) | Lemma | Closed under the global context | V.5 Интеграл, стр. 635 | верно | antiderivative_unique : для всякого eps найдётся уровень N, на котором приращения f и g до последнего узла сетки различаются не больше чем на eps * (b - a). Closed under the global context. |
+| `antiderivative_unique` (641) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 500, 636 | верно | IntegralApplications.v:641: udiff_on f h a b -> udiff_on g h a b -> 0 < eps -> exists N, \|(f y - f a) - (g y - g a)\| <= eps * (b - a), y — последний узел. |
+| `ibp_identity` (693) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 479, 636 | верно | IntegralApplications.v:693: exists N, \|RS(1 * g) - (y * g y - a * g a) + RS(x * g')\| <= eps * (b - a); посылки: границы Mg, Mg' и \|x\| <= Mab на [a,b]. |
+| `antiderivative_unique_exact` (763) | Theorem | Closed under the global context | V.5 Интеграл, стр. 633 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было — «равные приращения» приписаны antiderivative_unique, которая даёт близость приращений на уровне сетки. Добавлена antiderivative_unique_exact : udiff_on f h a b -> udiff_on g h a b -> f b - f a == g b - g a — без условия, что функции уважают Qeq (мост — continuous_at_qeq_values). Closed under the global context. |
 
 ---
 
@@ -289,8 +695,15 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| `ivt_cauchy_real` (309) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 723, 1127, 1134 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 659 | верно | IVT_process (IVT_ERR.v:256), process_IVT (ProcessIVT.v:128), ivt_cauchy_real (IVT_CauchyReal.v:309); у всех трёх одни и те же посылки и эпсилон-заключение. |
+| `IVT_CauchyReal` | модуль |  | V.3 Непрерывность, стр. 745 | верно | имя модуля; файл существует |
+| `continuous_compose_cauchy` (111) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 723 | верно | IVT_CauchyReal.v:111: uniformly_continuous_on f a b -> (forall n, a <= cs_seq c n /\ cs_seq c n <= b) -> is_cauchy (fun n => f (cs_seq c n)). Closed under the global context. |
+| `ivt_cauchy_real` (309) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 733, 1142, 1149 | верно | Блок кода (стр. 700–708) совпадает с IVT_CauchyReal.v:309. Заключение — эпсилон-форма: Qabs (f (cs_seq c n)) < eps при N <= n. Closed under the global context. |
+| `ivt_cauchy_real` (309) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 733, 1142, 1149 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было «главная теорема и её следствие стоят на этой лемме» — доказательство ivt_cauchy_real (IVT_CauchyReal.v) применяет bisection_cauchy_seq, bisection_cauchy_in_interval, bisection_f_converges_to_zero; леммы continuous_compose_cauchy в нём нет. |
+| `ivt_cauchy_real` (309) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 733, 1142, 1149 | верно | Все три теоремы существуют, формулировки сверены (см. записи к стр. 631, 678, 711); эпсилон-форма названа эпсилон-формой. |
+| `ivt_cauchy_real` (309) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 733, 1142, 1149 | верно | исправлено 12.11 (сверка цены); 12.11 вечером фраза расширена шагом 1 Части V; ivt_cauchy_real — Closed under the global context |
 | `ivt_cauchy_real` (309) | Theorem | Closed under the global context | Формализация, стр. 103 | верно | сверена цена; формулировка — при аудите части |
+| `ivt_cauchy_real_equiv` (332) | Corollary | Closed under the global context | V.3 Непрерывность, стр. 730 | верно | Следствие применяет лемму через compose_cauchy_seq (IVT_CauchyReal.v); слова приведены к этому шагом 10 Части V. |
 
 ---
 
@@ -298,9 +711,114 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| `IVT_process` (256) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 645, 1127, 1134 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
-| `IVT_process` (256) | Theorem | Closed under the global context | Направления/Математика/index, стр. 96 | верно | сверена цена; формулировка — при аудите части |
-| `IVT_process` (256) | Theorem | Closed under the global context | Формализация, стр. 103, 134 | верно | сверена цена; формулировка — при аудите части |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 504 | верно | Счёт: 424 строки, 23 Qed, 0 Admitted, 0 Abort. Из 23 утверждений 13 — вспомогательные леммы арифметики дробей. Шапка файла называет допущения «classic (L3) + Archimedean» — по компилятору их нет (глава это учла). |
+| `IVT_ERR` | модуль |  | V.3 Непрерывность, стр. 742 | верно | имя модуля; файл существует |
+| `ContinuousFunction` (49) | Definition | Closed under the global context | V.3 Непрерывность, стр. 526 | верно | Сомнительное место, не расхождение: тип ContinuousFunction в блоках кода главы (стр. 520, 552, 614, 701) — это просто Q -> Q (IVT_ERR.v:49, EVT_ERR.v:52, EVT_idx.v:24); непрерывности он не требует. Условие несёт отдельная посылка uniformly_continuous_on, так что формулировки теорем от имени типа не зависят; читателю блока имя может подсказать лишнее. |
+| `uniformly_continuous_on` (51) | Definition | Closed under the global context | V.3 Непрерывность, стр. 349, 359, 479, 630, 875, 1155 | верно | analysis.Continuity подключает только CantorHeineQ.v. Локальные определения: IVT_ERR.v:51, EVT_ERR.v:58, EVT_idx.v:31, HeineBorelComplete.v:78 (а также FTC.v:49 и HeineBorel_ERR.v:565) — совпадают с каноном с точностью до записи и имени типа ContinuousFunction := Q -> Q. |
+| `uniformly_continuous_on` (51) | Definition | Closed under the global context | V.3 Непрерывность, стр. 349, 359, 479, 630, 875, 1155 | верно | Посылка в доказательствах применяется: в IVT_process — оценка \|f mid - f left\| < eps (IVT_ERR.v:352), в sup_process_is_Cauchy и EVT_complete — через f_bounded_by_grid_max. |
+| `bisection_step` (119) | Definition | Closed under the global context | V.3 Непрерывность, стр. 534 | верно | IVT_ERR.v:117 (BisectionState) и :119 (bisection_step); блок совпадает. При f mid < 0 берётся [mid, right], иначе [left, mid]. |
+| `bisection_iter` (123) | Fixpoint | Closed under the global context | V.3 Непрерывность, стр. 554 | верно | упоминание имени (Fixpoint); проверено существование |
+| `bisection_process` (126) | Definition | Closed under the global context | V.3 Непрерывность, стр. 555 | верно | IVT_ERR.v:123 (bisection_iter) и :126 (bisection_process); блок совпадает. |
+| `bisection_width` (136) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 576 | верно | IVT_ERR.v:136: bis_right - bis_left == (b - a) / Qpow2 n — равенство дробей, «в точности» обосновано. |
+| `bisection_shrinks` (195) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 582 | верно | IVT_ERR.v:195: a < b -> (m <= n) -> Qabs (mid m - mid n) <= (b - a) / Qpow2 m. |
+| `bisection_is_Cauchy` (219) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 582 | верно | IVT_ERR.v:219: a < b -> is_Cauchy (bisection_process f a b); is_Cauchy здесь — Archimedean_ERR.v:152 (вариант «m > N»), равносильность с ProcessCore.is_Cauchy — cauchy_compat. Темп 1/2 следует из bisection_shrinks и bisection_width. |
+| `bisection_preserves_signs_weak` (233) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 607 | верно | IVT_ERR.v:233: f a <= 0 -> f b >= 0 -> f (bis_left s) <= 0 /\ f (bis_right s) >= 0 на каждом шаге. Довод главы о невозможности строгой пары верен (комментарий :229–232). Уточнение: по построению шага левый конец сдвигается только при f mid < 0, так что нестрогость по существу нужна справа. |
+| `IVT_process` (256) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 651, 694, 1142, 1149 | верно | Блок кода совпадает с IVT_ERR.v:256. |
+| `IVT_process` (256) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 651, 694, 1142, 1149 | верно | equiv (IVT_ERR.v:45): forall eps > 0, exists N, forall n > N, Qabs (R1 n - R2 n) < eps. Эпсилон-форма пересказана как эпсилон-форма: «процесс f(c) сколь угодно близок к нулю», не «f(c) = 0». Все четыре посылки в доказательстве используются. |
+| `IVT_process` (256) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 651, 694, 1142, 1149 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| `IVT_process` (256) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 651, 694, 1142, 1149 | верно | Подтверждено компилятором: Closed under the global context. |
+| `IVT_process` (256) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 651, 694, 1142, 1149 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было «теорема IVT_ERR» — это имя файла; теорема называется IVT_process. Closed under the global context. |
+| `IVT_process` (256) | Theorem | Closed under the global context | Направления/Математика/index, стр. 96 | верно | IVT_process — Closed under the global context; фраза изменена шагом 1 Части V (12.11) |
+| `IVT_process` (256) | Theorem | Closed under the global context | Формализация, стр. 103, 135 | верно | сверена цена; формулировка — при аудите части |
+
+---
+
+## #608 — `src/LinearAlgebra.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| `QVec` (155) | Record | Closed under the global context | V.1 Метрика на процессах, стр. 321, 458, 1014, 1067, 1075 | верно | Сомнительное место, не расхождение: в формализации секция применена один раз — is_cauchy_metric Q Q_dist в Q_cauchy_metric_equiv (MetricSpace.v:230); ни к ℚ с qdist, ни к QVec с QVec_dist леммы секции не применены. Применение проходит без труда (пробный файл: QVec_cauchy_of_limit, qdist_cauchy_of_limit — Closed). |
+
+---
+
+## #609 — `src/MeanValueTheorem.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.4 Производная, стр. 727 | верно | Верно: утверждения вида «существует c» в файле нет; шапка: «Prove MVT consequences via walk-point telescoping». |
+| _файл целиком_ |  |  | V.4 Производная, стр. 749 | верно | Шапка, стр. 11–12: «Walk-point Fixpoint ensures Leibniz-exact chaining, avoiding the Q Qeq-vs-Leibniz issue for intermediate f-values»; шаг телескопа в доказательствах — simpl. ring (например :255–258). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 923 | верно | Счёт верен: 18 Lemma, 18 Qed, 0 Admitted; последняя строка файла (701) — Qed леммы mvt_quadratic_midpoint; блока Check и Print Assumptions нет. В Differentiation.v такой блок есть (:712–734). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 952 | верно | Верно. Над ℚ классическая форма в общем случае неверна (для w ↦ w³ на [0, 1] точка c = 1/√3 иррациональна), так что её отсутствие — не пробел формализации. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 991 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): начало фразы изменено вслед за предыдущей; все 18 утверждений MeanValueTheorem.v — Closed under the global context |
+| _файл целиком_ |  |  | V.4 Производная, стр. 1007 | верно | Верно: команд Print Assumptions в обоих файлах нет. Запущено при аудите для всех 35 утверждений двух файлов: Closed under the global context. |
+| _файл целиком_ | файл |  | V.5 Интеграл, стр. 764 | верно | упоминание файла; проверено существование |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 676 | верно | Differentiation.v:12 и MeanValueTheorem.v:14 — «AXIOMS: none (fully constructive)»; объявлений Axiom и Parameter в обоих файлах нет; по 18 Qed. |
+| `walk_point` (38) | Fixpoint | Closed under the global context | V.4 Производная, стр. 755 | верно | Fixpoint walk_point (MeanValueTheorem.v:38); блок кода (стр. 734–738) совпадает с исходником. |
+| `walk_point` (38) | Fixpoint | Closed under the global context | V.5 Интеграл, стр. 75, 331, 497, 671 | верно | riemann_sum (RiemannIntegration.v:39) берёт значения в узлах walk_point a step k (MeanValueTheorem.v:38) — на той же рекурсивной сетке, что и сеточная теорема о среднем. |
+| `walk_point` (38) | Fixpoint | Closed under the global context | V.6 Основная теорема анализа, стр. 231 | верно | упоминание имени (Fixpoint); проверено существование |
+| `udiff_on` (46) | Definition | Closed under the global context | V.4 Производная, стр. 227, 259, 776, 947 | верно | Definition udiff_on (MeanValueTheorem.v:46); все сеточные теоремы файла имеют посылку udiff_on f f' a b. |
+| `udiff_on` (46) | Definition | Closed under the global context | V.4 Производная, стр. 227, 259, 776, 947 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): было сокращённое имя udiff; полное — udiff_on. |
+| `udiff_on` (46) | Definition | Closed under the global context | V.4 Производная, стр. 227, 259, 776, 947 | верно | Definition udiff_on (MeanValueTheorem.v:46); блок кода (стр. 758–764) совпадает с исходником; один delta на все x из [a, b]; в определение входит a < b. |
+| `udiff_on` (46) | Definition | Closed under the global context | V.5 Интеграл, стр. 22, 505 | верно | упоминание имени (Definition); проверено существование |
+| `udiff_on` (46) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 49, 62, 137, 241, 360, 632 | верно | Definition udiff_on (MeanValueTheorem.v:46): a < b и для всякого eps > 0 есть delta > 0 такое, что при a <= x <= b и 0 < \|h\| < delta верно \|f (x + h) - f x - f' x * h\| < eps * \|h\| — деления в определении нет. |
+| `walk_point_qeq` (59) | Lemma | Closed under the global context | V.4 Производная, стр. 757 | верно | MeanValueTheorem.v:59: walk_point x s n == x + inject_Z (Z.of_nat n) * s. |
+| `walk_point_in_interval` (72) | Lemma | Closed under the global context | V.4 Производная, стр. 758 | верно | MeanValueTheorem.v:72: при a < b и k <= S N: a <= walk_point a step k <= b, step = (b - a)/(N+1) — все точки сетки с номерами до N+1 включительно. |
+| `walk_step_pos` (115) | Lemma | Closed under the global context | V.4 Производная, стр. 785 | верно | MeanValueTheorem.v:115: a < b -> 0 < (b - a) / inject_Z (Z.of_nat (S N)). |
+| `walk_step_small` (125) | Lemma | Closed under the global context | V.4 Производная, стр. 786, 790 | верно | MeanValueTheorem.v:125: a < b -> 0 < delta -> exists N, (b - a) / inject_Z (Z.of_nat (S N)) < delta. |
+| `walk_step_small` (125) | Lemma | Closed under the global context | V.5 Интеграл, стр. 587 | верно | MeanValueTheorem.v:125: a < b -> 0 < delta -> exists N, (b - a) / inject_Z (Z.of_nat (S N)) < delta — то же утверждение, что integral_step_vanishes, о том же шаге. |
+| `udiff_pointwise` (145) | Lemma | Closed under the global context | V.4 Производная, стр. 893 | верно | MeanValueTheorem.v:145: udiff_on f f' a b -> a <= x -> x <= b -> has_derivative f x (f' x). |
+| `bounded_deriv_bounded_increment` (218) | Lemma | Closed under the global context | V.4 Производная, стр. 803, 948 | верно | MeanValueTheorem.v:218: udiff_on f f' a b -> (forall x, a <= x -> x <= b -> Qabs (f' x) <= M) -> 0 < eps -> exists N, Qabs (f (walk_point a step (S N)) - f a) <= (M + eps) * (b - a), step = (b - a)/(N+1). Число делений N существует для каждого eps и от него зависит; оценка — для конца именно этой сетки (на странице квантор по N не назван). |
+| `bounded_deriv_bounded_increment` (218) | Lemma | Closed under the global context | V.4 Производная, стр. 803, 948 | верно | Доказательство: delta от udiff_on при eps * (1#2); индукция Hmain по k: Qabs (f (walk_point a step k) - f a) <= k * (M + eps/2) * step (:242–309); при k = N+1 — (M + eps/2)(b − a) <= (M + eps)(b − a). Совпадает. |
+| `bounded_deriv_bounded_increment` (218) | Lemma | Closed under the global context | V.4 Производная, стр. 803, 948 | верно | Статус назван честно; Print Assumptions: Closed under the global context. |
+| `bounded_deriv_bounded_increment` (218) | Lemma | Closed under the global context | V.4 Производная, стр. 803, 948 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): к итогу добавлены три точные теоремы шага 11. |
+| `bounded_deriv_bounded_increment` (218) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 387, 547 | верно | MeanValueTheorem.v:218: udiff_on f f' a b -> (\|f' x\| <= M на [a,b]) -> 0 < eps -> exists N, \|f (walk_point a step (S N)) - f a\| <= (M + eps) * (b - a). |
+| `zero_deriv_near_constant` (331) | Lemma | Closed under the global context | V.4 Производная, стр. 846, 850 | верно | MeanValueTheorem.v:331: udiff_on f f' a b -> (forall x из [a,b], f' x == 0) -> 0 < eps -> exists N, Qabs (f (walk_point a step (S N)) - f a) <= eps * (b - a); доказательство — bounded_deriv_bounded_increment при M = 0 (:347). |
+| `zero_deriv_near_constant` (331) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 509 | верно | MeanValueTheorem.v:331: udiff_on f f' a b -> (f' x == 0 на [a,b]) -> 0 < eps -> exists N, \|f (walk_point a step (S N)) - f a\| <= eps * (b - a). |
+| `pos_deriv_increases` (352) | Lemma | Closed under the global context | V.4 Производная, стр. 865 | верно | MeanValueTheorem.v:352: udiff_on f f' a b -> (forall x из [a,b], c <= f' x) -> 0 < c -> exists N, 0 < f (walk_point a step (S N)) - f a. Условие равномерной дифференцируемости во фразе не повторено (оно общее для § 4.6–4.7). Утверждение — о приращении между a и концом сетки, не о всех парах точек отрезка. |
+| `pos_deriv_increases` (352) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 400 | верно | MeanValueTheorem.v:352: udiff_on f f' a b -> (c <= f' x на [a,b]) -> 0 < c -> exists N, 0 < f (walk_point a step (S N)) - f a — утверждение то же, что у ftc_strict_monotone. |
+| `neg_deriv_decreases` (456) | Lemma | Closed under the global context | V.4 Производная, стр. 868 | верно | MeanValueTheorem.v:456: f' x <= - c на [a,b] при 0 < c -> exists N, f (walk_point a step (S N)) - f a < 0. |
+| `udiff_continuous_at` (548) | Lemma | Closed under the global context | V.4 Производная, стр. 891 | верно | MeanValueTheorem.v:548: udiff_on f f' a b -> a <= x -> x <= b -> continuous_at f x; доказательство — deriv_implies_continuous и udiff_pointwise, как сказано. Непрерывность — в смысле Differentiation.v:43. |
+| `nonneg_deriv_approx_nondec` (558) | Lemma | Closed under the global context | V.4 Производная, стр. 889 | верно | MeanValueTheorem.v:558: udiff_on, 0 <= f' x на [a,b], 0 < eps -> exists N, -(eps * (b - a)) <= f (walk_point a step (S N)) - f a — сеточная eps-форма: приращение между a и концом сетки не меньше −eps·(b − a). |
+| `bounded_deriv_lipschitz_local` (633) | Lemma | Closed under the global context | V.4 Производная, стр. 882 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): локальная лемма описана верно; рядом теперь названа теорема для всего отрезка. Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> forall x y из отрезка, \|f y - f x\| <= M * \|y - x\|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context. |
+| `walk_endpoint_qeq` (646) | Lemma | Closed under the global context | V.4 Производная, стр. 829 | верно | MeanValueTheorem.v:646: a < b -> walk_point a ((b - a)/(N+1)) (S N) == b. Равенство — Qeq, не лейбницево: значения f в конце сетки и в точке b в файле не связаны (f : Q -> Q не обязана уважать Qeq). |
+| `walk_endpoint_qeq` (646) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 74, 281 | верно | исправлено 12.11 (Часть V, шаг 14, слово автора): было «функция f должна уважать Qeq (быть Proper) … требует отдельной оговорки» — для равномерно дифференцируемой функции оговорка не нужна: udiff_walk_endpoint_value. walk_endpoint_qeq — Closed under the global context. |
+| `walk_endpoint_qeq` (646) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 74, 281 | верно | исправлено 12.11 (Часть V, шаг 14, слово автора): было «чтение f(y_{N+1}) как f(b) корректно, когда f уважает Qeq» — условие заменено доказанным фактом. |
+| `affine_udiff` (665) | Lemma | Closed under the global context | V.4 Производная, стр. 909 | верно | MeanValueTheorem.v:665: a < b -> udiff_on (fun w => c * w + d) (fun _ => c) a b. |
+| `quadratic_udiff` (680) | Lemma | Closed under the global context | V.4 Производная, стр. 910 | верно | MeanValueTheorem.v:680: a < b -> udiff_on (fun w => w * w) (fun w => 2 * w) a b; свидетель delta = eps. |
+| `mvt_quadratic_midpoint` (697) | Lemma | Closed under the global context | V.4 Производная, стр. 911, 924 | верно | MeanValueTheorem.v:697: forall a b, 2 * ((a + b) * (1#2)) * (b - a) == b * b - a * a — формула страницы совпадает. Это алгебраическое тождество (доказательство — ring); в утверждении нет ни функции, ни производной, ни условия, что середина лежит внутри отрезка. Чтение «точка c — середина» верно в соединении с deriv_square; единое утверждение с точкой и производной проверено пробным файлом (mvt_quadratic_exact, Check1.v). |
+| `continuous_at_qeq_values` (726) | Lemma | Closed under the global context | V.4 Производная, стр. 857 | верно | Новая лемма шага 11: x == x' -> continuous_at f x -> continuous_at f x' -> f x == f x' (непрерывность — в смысле Differentiation.v). Closed under the global context. |
+| `bounded_deriv_lipschitz` (827) | Theorem | Closed under the global context | V.4 Производная, стр. 885, 948 | верно | Новая теорема шага 11. Closed under the global context. |
+| `bounded_deriv_lipschitz` (827) | Theorem | Closed under the global context | V.4 Производная, стр. 885, 948 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора) — слова те же, доведена формализация. Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> forall x y из отрезка, \|f y - f x\| <= M * \|y - x\|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context. |
+| `bounded_deriv_Lipschitz_on` (865) | Corollary | Closed under the global context | V.4 Производная, стр. 888 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора) — слова те же, доведена формализация: раньше из производной выводилась только оценка возле одной точки (bounded_deriv_lipschitz_local). Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> forall x y из отрезка, \|f y - f x\| <= M * \|y - x\|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context. |
+| `bounded_deriv_Lipschitz_on` (865) | Corollary | Closed under the global context | V.4 Производная, стр. 888 | верно | Новое следствие шага 11: 0 < M -> udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> Continuity.Lipschitz_on f a b M. Closed under the global context. |
+| `bounded_deriv_Lipschitz_on` (865) | Corollary | Closed under the global context | V.4 Производная, стр. 888 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора) — слова те же («теперь липшицевость выводится — из ограниченной производной»), доведена формализация. Добавлена bounded_deriv_lipschitz : udiff_on f f' a b -> (\|f'\| <= M на отрезке) -> forall x y из отрезка, \|f y - f x\| <= M * \|y - x\|, и её запись в каноне § 5.3 — bounded_deriv_Lipschitz_on (при 0 < M); без условия, что функция уважает равенство рациональных (мост — continuous_at_qeq_values). Closed under the global context. |
+| `zero_deriv_constant` (878) | Theorem | Closed under the global context | V.4 Производная, стр. 853, 948 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): было — глава честно писала, что полная форма не доказывается. Добавлена zero_deriv_constant : udiff_on f f' a b -> (f' x == 0 на отрезке) -> forall x y из отрезка, f x == f y. Closed under the global context. |
+| `pos_deriv_strictly_increasing` (897) | Theorem | Closed under the global context | V.4 Производная, стр. 875, 948 | верно | Новая теорема шага 11: udiff_on f f' a b -> (c <= f' x на отрезке) -> 0 < c -> forall x < y из отрезка, f x < f y. Closed under the global context. |
+| `udiff_walk_endpoint_value` (937) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 81, 283 | верно | Новая лемма шага 14: udiff_on f f' a b -> f (walk_point a ((b - a) / (N+1)) (N+1)) == f b — значение в последнем узле сетки равно значению в b; из continuous_at_qeq_values и udiff_continuous_at. Closed under the global context. |
+
+---
+
+## #611 — `src/MonotoneConvergence.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.4 Производная, стр. 984 | верно | Импорты верны: Differentiation.v:26–27; SeriesConvergence.v:27 и GradientDescent.v:26 импортируют MonotoneConvergence; тот получает classic из стандартной библиотеки через ToS_Axioms (своего объявления Axiom в файле нет; пример зависимости — mct_inc_least: Classical_Prop.classic). У ProcessDerivative.v есть и второй путь: ProcessArithmetic.v:22 импортирует Stdlib Classical. Ни одна теорема трёх опорных файлов classic не использует: Closed under the global context у всех 53. |
+| `mct_inc_least` (230) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.4 Производная, стр. 1016 | верно | MonotoneConvergence.v:230; Restart на стр. 306, лемма закрыта Qed. Print Assumptions mct_inc_least: Classical_Prop.classic. На теоремы главы не влияет — верно. |
+
+---
+
+## #701 — `src/process/ProcessAnalysis.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 676 | верно | process/ProcessAnalysis.v, 18 Qed; все утверждения — равенства рациональных, eps и delta в файле нет. |
+| `process_derivative` (26) | Definition | Closed under the global context | V.5 Интеграл, стр. 679, 688, 691 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было «имена совпадают» — совпадает одно из трёх (riemann_sum); основные определения производной и интеграла носят имена deriv_process и integral_process. |
+| `derivative_of_square` (34) | Lemma | Closed under the global context | V.5 Интеграл, стр. 678 | верно | ProcessAnalysis.v:34 (derivative_of_square): process_derivative f_square x K == 2 * x + 1 / inject_Z (Z.of_nat (S K)); значения 3, 5/2, 21/10, 201/100 — леммы deriv_square_at_1_K0, _K1, _K9, _K99 (:44–61). Имя f_square стоит на странице внутри формулы ($f_square$), а не в обратных кавычках. |
+| `riemann_sum` (110) | Fixpoint | Closed under the global context | V.5 Интеграл, стр. 74, 80, 327, 670, 689, 689, 722, 796 | верно | Счёт верен: RiemannIntegration.v:39, process/ProcessAnalysis.v:110, process/ProcessMCT.v:111. Перечень на стр. 73–78 называет другой состав — см. запись к стр. 73. |
+| `process_integral` (116) | Definition | Closed under the global context | V.5 Интеграл, стр. 689, 691, 696 | верно | упоминание имени (Definition); проверено существование |
+| `integral_one_all_levels` (145) | Theorem | Closed under the global context | V.5 Интеграл, стр. 683 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было доказано для трёх уровней (K = 0, 1, 2). Добавлена integral_one_all_levels : forall K, process_integral (fun _ => 1) K == 1. Closed under the global context. |
+| `process_analysis_foundation` (199) | Theorem | Closed under the global context | V.5 Интеграл, стр. 684 | верно | ProcessAnalysis.v:176: четыре конъюнкта — производная квадрата в 1 при K = 99, производная константы 42, производная тождественной функции, интеграл единицы при K = 2. |
+| `process_derivative_agrees` (220) | Lemma | Closed under the global context | V.5 Интеграл, стр. 695 | верно | Новая лемма шага 12: process_derivative f x K == ProcessDerivative.deriv_process f x K. Closed under the global context. |
 
 ---
 
@@ -310,9 +828,13 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 |---|---|---|---|---|---|
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 321 | верно | Верно: в ProcessArithmetic.v умножения двух процессов нет (определения: add, neg, sub, scale, abs). |
 | `classic` | внешнее | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 788, 789, 794 | верно | В этом файле `classic` — аксиома стандартной библиотеки (Stdlib.Logic.Classical_Prop.classic, импорт ProcessArithmetic.v:22), по формулировке та же, что L3 формализации (foundation/Distinction.v:36); в самом ProcessArithmetic.v она не объявляется, а применяется. |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1104 | верно | исправлено 12.11 (шаг 7, слово автора): было 13; в файле 17 Qed (4 Theorem + 13 Lemma), 0 Admitted; шапка файла исправлена тем же шагом (13 → 17, два места) |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1106 | верно | исправлено 12.11 (шаг 7, слово автора): было 13; в файле 17 Qed (4 Theorem + 13 Lemma), 0 Admitted; шапка файла исправлена тем же шагом (13 → 17, два места) |
 | _файл целиком_ | файл |  | IV.3 Точка как класс эквивалентности процессов, стр. 712 | верно | упоминание файла; проверено существование |
 | _файл целиком_ |  |  | IV.6 P4 как фильтр, стр. 273 | верно | исправлено 12.11; арифметика (add / neg / sub / scale_preserves_Cauchy) замкнута; в том же ProcessArithmetic.v две леммы о монотонной сходимости — monotone_bounded_Cauchy (311), decreasing_bounded_Cauchy (339) — стоят на Classical_Prop.classic, к арифметике они не относятся |
+| `ProcessArithmetic` | модуль |  | V.4 Производная, стр. 202 | верно | имя модуля; файл существует |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 569 | верно | add_, neg_, sub_, scale_preserves_Cauchy (ProcessArithmetic.v:84–134) — Closed under the global context; classic стоит только под monotone_bounded_Cauchy и decreasing_bounded_Cauchy. ProcessIntegral.v ни одного имени из ProcessArithmetic не использует (копия файла без этого импорта компилируется). |
+| `Classical` | внешнее | не применимо (модуль стандартной библиотеки) | V.5 Интеграл, стр. 774 | верно | ProcessArithmetic.v:22: From Stdlib Require Import Classical — модуль стандартной библиотеки Stdlib.Logic.Classical. |
+| _файл целиком_ | файл |  | V.6 Основная теорема анализа, стр. 675 | верно | упоминание файла; проверено существование |
 | `process_add` (31) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 287 | верно | Блок кода (стр. 293) совпадает с ProcessArithmetic.v:31; в файле есть ещё поточечный модуль process_abs (:43), глава его не называет. |
 | `process_neg` (34) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 296 | верно | Блок кода совпадает с ProcessArithmetic.v:34. |
 | `process_sub` (37) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 299 | верно | Блок кода совпадает с ProcessArithmetic.v:37. |
@@ -326,10 +848,14 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | `monotone_decreasing` (176) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 747 | верно | ProcessArithmetic.v:176: forall n, R (S n) <= R n; блок кода совпадает. |
 | `q_archimedean` (263) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 776 | верно | ProcessArithmetic.v:263–306: K := S (Z.to_nat (target / step)); формулировка на стр. 776–778 совпадает (d < K * eps при 0 < eps); допущений нет. |
 | `q_archimedean` (263) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 711 | верно | ProcessArithmetic.v:263: forall d eps, 0 < eps -> exists K, d < inject_Z (Z.of_nat K) * eps; применена внутри доказательства nine_equiv_one (отдельной леммой оценка хвоста не выделена). Closed under the global context, хотя файл импортирует Classical. |
-| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 925 | верно | ProcessArithmetic.v:311 (в файле объявлена как Lemma, в прозе названа теоремой); блок кода (стр. 761) совпадает; Print Assumptions: Classical_Prop.classic. |
-| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 925 | верно | Print Assumptions: Axioms: Classical_Prop.classic; destruct (classic …) на ProcessArithmetic.v:316 и :324; импорт Classical — :22. |
-| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 925 | верно | Print Assumptions: Classical_Prop.classic. |
-| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 925 | верно | Print Assumptions: Classical_Prop.classic у monotone_bounded_Cauchy и decreasing_bounded_Cauchy; остальные 15 лемм ProcessArithmetic.v без допущений. |
+| `q_archimedean` (263) | Lemma | Closed under the global context | V.5 Интеграл, стр. 580 | верно | ProcessArithmetic.v:263: forall d eps, 0 < eps -> exists K, d < inject_Z (Z.of_nat K) * eps; стоит перед monotone_bounded_Cauchy; в ProcessIntegral.v не вызывается. |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 927 | верно | ProcessArithmetic.v:311 (в файле объявлена как Lemma, в прозе названа теоремой); блок кода (стр. 761) совпадает; Print Assumptions: Classical_Prop.classic. |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 927 | верно | Print Assumptions: Axioms: Classical_Prop.classic; destruct (classic …) на ProcessArithmetic.v:316 и :324; импорт Classical — :22. |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 927 | верно | Print Assumptions: Classical_Prop.classic. |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 758, 786, 795, 927 | верно | Print Assumptions: Classical_Prop.classic у monotone_bounded_Cauchy и decreasing_bounded_Cauchy; остальные 15 лемм ProcessArithmetic.v без допущений. |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.5 Интеграл, стр. 775 | верно | ProcessArithmetic.v:16 — «AXIOMS: none»; :22 — импорт Classical; :316 и :324 — destruct (classic …). Print Assumptions: Axioms: Classical_Prop.classic. |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.6 Основная теорема анализа, стр. 676 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): из примера убран «EVT_idx.v с локальным classic» — объявление снято; monotone_bounded_Cauchy (ProcessArithmetic.v) — Classical_Prop.classic |
+| `monotone_bounded_Cauchy` (311) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.6 Основная теорема анализа, стр. 676 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): прежняя запись была о местной аксиоме EVT_idx.v, её на странице больше нет; Print Assumptions monotone_bounded_Cauchy — Classical_Prop.classic |
 | `decreasing_bounded_Cauchy` (339) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.2 RealProcess как тип, стр. 767 | верно | ProcessArithmetic.v:339; формулировка верна; цена та же, что у основной — Classical_Prop.classic (выводится из monotone_bounded_Cauchy для -R), глава отдельно её не называет. |
 
 ---
@@ -376,9 +902,9 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1106 | верно | Действительный счёт: 11 Qed, 0 Admitted, 0 Axiom; все 11 — «Closed under the global context» (шапка файла в двух местах называет 11 и 14). |
-| `has_process_mass_gap` (39) | Record | Closed under the global context | IV.2 RealProcess как тип, стр. 804, 809, 814, 1106 | верно | ProcessBounds.v:39–50: PMG1 (0 < delta <= R n), PMG2 (\|R m - R n\| <= C * r^min(m,n), 0 < r < 1), PMG3 (monotone_decreasing R). |
-| `has_process_mass_gap` (39) | Record | не применимо (часть имени) | IV.2 RealProcess как тип, стр. 804, 809, 814, 1106 | верно | исправлено 12.11 (шаг 7, слово автора): было «Имя `mass_gap`» — часть имени; структура в файле называется has_process_mass_gap (ProcessBounds.v:39); оговорка «не физический массовый зазор» — чтение главы |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1108 | верно | Действительный счёт: 11 Qed, 0 Admitted, 0 Axiom; все 11 — «Closed under the global context» (шапка файла в двух местах называет 11 и 14). |
+| `has_process_mass_gap` (39) | Record | Closed under the global context | IV.2 RealProcess как тип, стр. 804, 809, 814, 1108 | верно | ProcessBounds.v:39–50: PMG1 (0 < delta <= R n), PMG2 (\|R m - R n\| <= C * r^min(m,n), 0 < r < 1), PMG3 (monotone_decreasing R). |
+| `has_process_mass_gap` (39) | Record | не применимо (часть имени) | IV.2 RealProcess как тип, стр. 804, 809, 814, 1108 | верно | исправлено 12.11 (шаг 7, слово автора): было «Имя `mass_gap`» — часть имени; структура в файле называется has_process_mass_gap (ProcessBounds.v:39); оговорка «не физический массовый зазор» — чтение главы |
 | `pmg_implies_cauchy` (74) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 817 | верно | ProcessBounds.v:74: has_process_mass_gap R -> is_Cauchy R; допущений нет. |
 | `pathological_no_pmg` (209) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 825 | верно | ProcessBounds.v:209: has_process_mass_gap (const_process 0) -> False; допущений нет. |
 | `vanishing_no_pmg` (217) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 826 | верно | ProcessBounds.v:217: условие в Rocq — значения процесса с некоторого шага меньше любого eps > 0 (монотонность не требуется); пересказ «убывающего к нулю» чуть уже, по смыслу верен; допущений нет. |
@@ -393,6 +919,8 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | _файл целиком_ |  | Closed under the global context (все 10 лемм файла) | IV.3 Точка как класс эквивалентности процессов, стр. 955 | верно | Действительный счёт: 10 Qed, 0 Admitted, объявлений Axiom / Parameter нет; Print Assumptions для всех 10 лемм файла — Closed under the global context. |
 | _файл целиком_ |  |  | IV.3 Точка как класс эквивалентности процессов, стр. 957 | верно | Обе шапки содержат строки Elements / Roles / Rules (ProcessCore.v:2–4, ProcessBridge.v:2–4). |
 | _файл целиком_ | файл |  | IV.4 Несчётность процессов, стр. 676 | верно | упоминание файла; проверено существование |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 733 | верно | cauchyseq_to_process (:35) и process_to_cauchyseq (:39); свойство Коши — cauchyseq_is_cauchy (:47); эквивалентность в обе стороны — cauchy_equiv_to_process_equiv (:66), process_equiv_to_cauchy_equiv (:78); обходы roundtrip_* (:94–:120). 10 Qed, все Closed under the global context. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1017 | верно | ProcessBridge.v (10 Qed) и ProcessGeneral.v:228; см. записи к стр. 731 и 737. |
 | `cauchyseq_to_process` (35) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 281 | верно | ProcessBridge.v:35: fun n => cs_seq cs n; блок кода (стр. 275) совпадает. |
 | `process_to_cauchyseq` (39) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 281 | верно | ProcessBridge.v:39: mkCauchy R H — принимает процесс вместе с доказательством is_Cauchy; блок кода (стр. 277) совпадает. |
 | `cauchy_equiv_to_process_equiv` (66) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 296 | верно | ProcessBridge.v:66; блок кода (стр. 288) совпадает с исходником. |
@@ -408,6 +936,13 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
 | _файл целиком_ |  |  | IV.1 P4 бесконечность как процесс, стр. 360 | верно | исправлено 12.11 (шаг 3, слово автора): было «зависят только от classic, и лишь изредка — от L4, причём L4 локализован в одном файле, посвящённом вариационному принципу»; сплошной прогон Print Assumptions после правок 2026-11-12, src/process: 4429 теорем и лемм, 4376 без допущений, 48 на classic (19 файлов), из них 7 ещё и на L4_witness — все в ProcessBW.v (process_BW и шесть лемм вокруг) |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 914 | верно | Шапка, строка 23: «AXIOMS: classic (inherited from BolzanoWeierstrass)» — цитата точна. Шапка называет только classic; L4_witness, который показывает компилятор, в ней нет, а строка 6 той же шапки говорит «0 axioms». |
+| `bw_left_process` (56) | Definition | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 900 | верно | О конкретных процессах концов: bw_left_increasing (ProcessBW.v:84), bw_right_decreasing (:94), bw_left_is_cauchy_process (:64), bw_right_is_cauchy_process (:74), bw_endpoints_equiv (:104), при a < b. Допущения: classic и L4_witness. |
+| `bw_right_process` (60) | Definition | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 901 | верно | упоминание имени (Definition); проверено существование |
+| `process_BW` (141) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 908 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора): было «она ничего не добавляет и не убавляет, перенося на язык процессов теорему, как она есть» — process_BW заключала лишь «существует процесс Коши». Теперь: exists L, is_Cauchy L /\ in_interval a b L /\ forall eps > 0, exists M0, forall M >= M0, forall N, exists k >= N, \|L M - s k\| < eps (свидетель — процесс левых концов бисекции). Это сильнее записи is_cluster_point базовой теоремы (строка 1 таблицы главы — отдельный шаг). Допущения: classic и L4_witness. |
+| `bw_is_process_construction` (182) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 903, 911 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора) — слова те же, доведена формализация: теорема теперь говорит о самих процессах концов (bw_left_process s a b, bw_right_process s a b): монотонны, оба Коши, эквивалентны, и для каждого n infinitely_many_in s (левый конец n) (правый конец n). Раньше оба процесса стояли под «существует» и с последовательностью связаны не были (заключение выполнялось для пары нулевых процессов). Допущения те же, что у леммы о бисекции: classic и L4_witness. |
+| `bw_convergence_rate` (203) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 904 | верно | исправлено 12.11 (Часть V, шаг 6, слово автора): было — число, вписанное определением, с процессом не связанное (единственная лемма bw_rate_valid: 0 < 1/2 < 1). Добавлена связка bw_rate_is_width_ratio; само уполовинивание доказано в BolzanoWeierstrass.v (bw_step_width). |
+| `bw_rate_is_width_ratio` (210) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 906 | верно | Новая лемма шага 6: bw_right_process s a b (S n) - bw_left_process s a b (S n) == bw_convergence_rate * (bw_right_process s a b n - bw_left_process s a b n). Допущения — classic и L4_witness (от bw_step в формулировке). |
 
 ---
 
@@ -417,27 +952,73 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 |---|---|---|---|---|---|
 | `Q` | внешнее | не применимо (тип стандартной библиотеки) | IV.2 RealProcess как тип, стр. 141, 147 | верно | Сомнительное место, не расхождение: `Q` и `nat` — типы стандартной библиотеки Rocq (Stdlib.QArith.QArith_base.Q, Corelib.Init.Datatypes.nat; ProcessCore.v:24 их импортирует), в файлах формализации они не строятся; «построенные в предыдущих частях тома» верно для изложения, не для кода. |
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 508 | верно | Три рода конструкции названы верно (ProcessCore.v:34, CauchyReal.v:48, ProcessGeneral.v:50); наблюдение: читатель встретит в src ещё локальные копии RealProcess (10 объявлений) и is_Cauchy (9). |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 907 | верно | Шапки: ProcessCore.v:4 «Rules: every mathematical object is a finite process at each stage (P4)»; ProcessArithmetic.v:4 «Rules: each operation preserves the Cauchy condition». |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 909 | верно | Шапки: ProcessCore.v:4 «Rules: every mathematical object is a finite process at each stage (P4)»; ProcessArithmetic.v:4 «Rules: each operation preserves the Cauchy condition». |
 | _файл целиком_ |  |  | IV.3 Точка как класс эквивалентности процессов, стр. 777 | верно | Шапка ProcessCore.v, строка 4: «Rules: every mathematical object is a finite process at each stage (P4)». Попутно: шапка называет 25 Qed, действительный счёт 19 (в этой главе число не приводится). |
 | _файл целиком_ | файл |  | IV.4 Несчётность процессов, стр. 578, 598, 612 | верно | упоминание файла; проверено существование |
 | `ProcessCore` | модуль |  | IV.4 Несчётность процессов, стр. 581, 638, 907 | верно | имя модуля; файл существует |
 | _файл целиком_ |  |  | IV.6 P4 как фильтр, стр. 268 | верно | все 27 объявлений ProcessCore.v (19 Qed) — «Closed under the global context» |
+| _файл целиком_ | файл |  | V.1 Метрика на процессах, стр. 709, 721, 729, 840 | верно | упоминание файла; проверено существование |
+| `ProcessCore` | модуль |  | V.1 Метрика на процессах, стр. 738 | верно | имя модуля; файл существует |
+| `ProcessCore` | модуль |  | V.3 Непрерывность, стр. 670, 677, 685, 744, 1011 | верно | имя модуля; файл существует |
+| `ProcessCore` | модуль |  | V.4 Производная, стр. 201 | верно | имя модуля; файл существует |
+| `ProcessCore` | модуль |  | V.5 Интеграл, стр. 792 | верно | имя модуля; файл существует |
 | `RealProcess` (34) | Definition | Closed under the global context | IV.1 P4 бесконечность как процесс, стр. 1203, 1215, 1219, 1225, 1313 | верно | Definition RealProcess := nat -> Q (ProcessCore.v:34); то же определение повторено ещё в девяти файлах |
 | `RealProcess` (34) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 77, 80, 88, 96, 97, 99, 115, 121 | верно | Определение и блок кода (стр. 84) совпадают с ProcessCore.v:34; наблюдение: в src ещё 9 локальных копий того же определения (Archimedean_ERR, EVT_idx, HeineBorel_ERR, ShrinkingIntervals_ERR и др.). |
 | `RealProcess` (34) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 11, 64, 126, 232, 237, 242, 267, 270 | верно | Definition RealProcess := nat -> Q (ProcessCore.v:34). |
 | `RealProcess` (34) | Definition | Closed under the global context | IV.5 Процессный континуум, стр. 90, 127 | верно | Definition RealProcess := nat -> Q (ProcessCore.v:34); то же определение повторено ещё в девяти файлах |
 | `RealProcess` (34) | Definition | Closed under the global context | IV.6 P4 как фильтр, стр. 268, 345 | верно | сомнительное: Definition RealProcess := nat -> Q (ProcessCore.v:34) — тип всех процессов, без условия Коши; условие задаёт отдельный предикат is_Cauchy (строка 68), упакованная форма — CauchySeq (CauchyReal.v:48); в сводной строке это сокращение, Глава 4.2 различие проводит |
-| `const_process` (37) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 944, 1102 | верно | Блок кода (стр. 106) совпадает с ProcessCore.v:37. |
-| `is_Cauchy` (68) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 254, 267, 518, 542, 576, 589, 1066, 1102 | верно | ProcessCore.v:68; наблюдение к словам «двумя предикатами в двух файлах» (стр. 264): в src 9 объявлений is_Cauchy, среди них запись со строгими неравенствами в ShrinkingIntervals_ERR.v:163 (её называет Глава 4.4). |
+| `RealProcess` (34) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 728, 743, 1017, 1096, 1099 | верно | ProcessCore.v:34 — Definition RealProcess := nat -> Q (имя объявлено ещё в девяти файлах; глава называет ProcessCore.v). |
+| `RealProcess` (34) | Definition | Closed under the global context | V.5 Интеграл, стр. 112 | верно | Definition RealProcess := nat -> Q (process/ProcessCore.v:34). |
+| `RealProcess` (34) | Definition | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 23 | верно | Поиск по FubiniProcess.v: слов RealProcess и nat в файле нет; подключены только QArith, Qabs, List, Lqa, Lia. Сам тип RealProcess := nat -> Q объявлен в ProcessCore.v:34 (и ещё в девяти файлах). Вне опорного файла сеточные функции nat -> nat -> Q есть в process/ProcessFubiniGeneral.v — см. запись стр. 266. |
+| `const_process` (37) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 946, 1104 | верно | Блок кода (стр. 106) совпадает с ProcessCore.v:37. |
+| `is_Cauchy` (68) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 254, 267, 518, 542, 576, 589, 1068, 1104 | верно | ProcessCore.v:68; наблюдение к словам «двумя предикатами в двух файлах» (стр. 264): в src 9 объявлений is_Cauchy, среди них запись со строгими неравенствами в ShrinkingIntervals_ERR.v:163 (её называет Глава 4.4). |
 | `is_Cauchy` (68) | Definition | Closed under the global context | IV.4 Несчётность процессов, стр. 561, 568, 604 | верно | Верно: ShrinkingIntervals_ERR.v:163–166 — (m > N), (n > N); process/ProcessCore.v:68–71 — (N <= m), (N <= n). |
 | `is_Cauchy` (68) | Definition | Closed under the global context | IV.6 P4 как фильтр, стр. 268 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 9 (файл назван в главе) |
+| `is_Cauchy` (68) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 841, 1015 | верно | ProcessCore.v:68 (is_Cauchy) и :74 (is_Regular_Cauchy) — два разных определения; имя is_Cauchy объявлено ещё в восьми файлах, глава называет ProcessCore.v. |
+| `is_Regular_Cauchy` (74) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 840, 842, 874 | верно | ProcessCore.v:74 — Qabs (R m - R n) <= 1/m + 1/n при m, n >= 1: модуль задан явно; regular_implies_Cauchy (:107). Пробная проверка тезиса: для регулярных представителей предел Коши-последовательности точек строится без допущений, для произвольных — на L4_witness (см. запись к стр. 1020). Оформление: имя разорвано переводом строки (стр. 836–837 и 838–839). |
 | `const_is_Cauchy` (78) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 701 | верно | ProcessCore.v:78: forall q, is_Cauchy (const_process q). |
-| `process_equiv` (170) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1102 | верно | Шапка ProcessCore.v:3: «SINGLE source of truth for process definitions»; четыре имени объявлены в файле (:34, :68, :37, :170); наблюдение: шапка называет 25 Qed, действительных 19 (глава числа не приводит). |
+| `process_equiv` (170) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1104 | верно | Шапка ProcessCore.v:3: «SINGLE source of truth for process definitions»; четыре имени объявлены в файле (:34, :68, :37, :170); наблюдение: шапка называет 25 Qed, действительных 19 (глава числа не приводит). |
 | `process_equiv` (170) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 243, 245, 258, 260, 299, 309, 699, 720 | верно | Блок кода (стр. 249–252) совпадает с ProcessCore.v:170; определение то же, что у cauchy_equiv, для голых процессов. |
 | `process_equiv` (170) | Definition | Closed under the global context | IV.4 Несчётность процессов, стр. 214, 613, 616, 664, 671, 675, 680, 690 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 3 (файл назван в главе) |
 | `process_equiv` (170) | Definition | Closed under the global context | IV.5 Процессный континуум, стр. 185 | верно | ProcessCore.v:170: для всякого eps разность членов меньше eps начиная с некоторого N; «общий предел» — пересказ, предел в определении не назван |
 | `process_equiv` (170) | Definition | Closed under the global context | IV.6 P4 как фильтр, стр. 268, 346 | верно | Equivalence для process_equiv и cauchy_equiv зарегистрированы в RealPointSetoid.v:52, 61; без допущений |
+| `process_equiv` (170) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 703, 706, 710, 719 | верно | ProcessCore.v:170 — forall eps > 0, exists N, forall n >= N, Qabs (R1 n - R2 n) < eps. Сомнительное место: определение говорит «разность стремится к нулю» и не требует ни свойства Коши, ни числа-предела (над ℚ его может не быть); слова «сходятся к одному числу» повторяют комментарий файла (:169). |
+| `process_equiv` (170) | Definition | Closed under the global context | V.5 Интеграл, стр. 239 | верно | process_equiv — ProcessCore.v:170. В доказательстве integral_process_const свидетель N = 0, а разность на каждом уровне == 0 (ProcessIntegral.v:69–79). |
 | `equiv_cauchy_l` (210) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 702 | верно | ProcessCore.v:210: R1 ~~ R2 -> is_Cauchy R1 -> is_Cauchy R2. |
+
+---
+
+## #748 — `src/process/ProcessDerivative.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.4 Производная, стр. 200 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): в файле 17 Qed; шапка файла (стояло 16) и число на странице приведены к этому. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 209 | верно | Шапка ProcessDerivative.v, стр. 2–4: Elements: difference quotients; Roles: Cauchy process converging to slope; Rules: has_derivative condition from Differentiation.v — перевод точен. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 394 | верно | Доказательства (:236–238, :248–250): apply deriv_process_converges; exact (deriv_sum …) и exact (deriv_scale …). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 942 | верно | Все три объявления существуют (ProcessDerivative.v:62, :152, :205); допущений нет. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 943 | верно | В форме критерия — четыре правила (Differentiation.v, SECTION 2); в процессной форме — два из четырёх, сумма и скалярное кратное, как и указано в скобках. |
+| _файл целиком_ |  |  | V.4 Производная, стр. 980 | верно | исправлено 12.11 (Часть V, шаг 11, слово автора): число приведено к файлу (17 Qed). |
+| _файл целиком_ |  |  | V.4 Производная, стр. 1050 | верно | Шапка ProcessDerivative.v, стр. 2–4 и 17–20 — разметка Elements / Roles / Rules есть. |
+| _файл целиком_ | файл |  | V.5 Интеграл, стр. 692 | верно | упоминание файла; проверено существование |
+| `deriv_step_pos` (48) | Lemma | Closed under the global context | V.4 Производная, стр. 143 | верно | ProcessDerivative.v:48: forall n, 0 < deriv_step n. |
+| `deriv_process` (62) | Definition | Closed under the global context | V.4 Производная, стр. 110, 177, 182, 198, 481, 484, 942 | верно | deriv_step (ProcessDerivative.v:40) и deriv_process (:62); блок кода (стр. 133–139) совпадает с исходником: на уровне n значение (f(x+h_n) − f(x))/h_n при h_n = 1/(n+1). |
+| `deriv_process` (62) | Definition | Closed under the global context | V.4 Производная, стр. 110, 177, 182, 198, 481, 484, 942 | верно | В src не формализовано (глава подаёт как интуицию). Проверено пробным файлом, без аксиом: process_equiv (deriv_process Qabs 0) (const_process 1) и forall L, ~ has_derivative Qabs 0 L (Check1.v). |
+| `deriv_process` (62) | Definition | Closed under the global context | V.5 Интеграл, стр. 12, 692 | верно | упоминание имени (Definition); проверено существование |
+| `deriv_process` (62) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 12 | верно | Definition deriv_process f x := fun n => let h := deriv_step n in (f (x + h) - f x) / h (process/ProcessDerivative.v:62) — процесс разностных отношений; сеточные следствия теоремы о среднем на walk-точках — MeanValueTheorem.v (walk_point, :38). |
+| `deriv_process_const` (82) | Lemma | Closed under the global context | V.4 Производная, стр. 146 | верно | ProcessDerivative.v:82: process_equiv (deriv_process (fun _ => c) x) (const_process 0). |
+| `deriv_process_id` (94) | Lemma | Closed under the global context | V.4 Производная, стр. 148 | верно | ProcessDerivative.v:94: process_equiv (deriv_process (fun w => w) x) (const_process 1). |
+| `nat_above_Q` (110) | Lemma | Closed under the global context | V.5 Интеграл, стр. 111, 579 | верно | ProcessDerivative.v:110: 0 < q -> exists N, q < inject_Z (Z.of_nat N); вызвана в integral_step_vanishes (ProcessIntegral.v:140). |
+| `deriv_step_vanishes` (130) | Lemma | Closed under the global context | V.4 Производная, стр. 166 | верно | ProcessDerivative.v:130: forall delta, 0 < delta -> exists N, deriv_step N < delta — лемма даёт один уровень N; что h_n < delta при всех n >= N, устанавливается уже внутри доказательства моста (убывание шага, Qinv_le_compat_local). |
+| `deriv_process_converges` (152) | Theorem | Closed under the global context | V.4 Производная, стр. 152, 178, 194, 396, 559, 942, 1030 | верно | ProcessDerivative.v:152: has_derivative f x L -> process_equiv (deriv_process f x) (const_process L); одна сторона, как и оговорено на стр. 194–197. |
+| `deriv_process_converges` (152) | Theorem | Closed under the global context | V.4 Производная, стр. 152, 178, 194, 396, 559, 942, 1030 | верно | Обратной стороны в файле нет, и она неверна: для \|x\| в нуле правый процесс эквивалентен постоянному 1, а производной нет (проверено компилятором: abs_right_quotients, abs_no_derivative_at_0, Check1.v). |
+| `deriv_process_converges` (152) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 179, 294, 579, 585, 720 | верно | process/ProcessDerivative.v:152: has_derivative f x L -> process_equiv (deriv_process f x) (const_process L) — сходимость в смысле process_equiv. |
+| `deriv_process_cauchy` (205) | Theorem | Closed under the global context | V.4 Производная, стр. 170, 942 | верно | ProcessDerivative.v:205: has_derivative f x L -> is_Cauchy (deriv_process f x) — при существующей производной. |
+| `deriv_process_cauchy` (205) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 560, 566 | верно | ProcessFTC.v:176: exists (fun _ => 0). (* dummy, the point is the forall statement *); далее exact (deriv_process_cauchy f x (f' x) Hd). deriv_process_cauchy — process/ProcessDerivative.v:205: has_derivative f x L -> is_Cauchy (deriv_process f x). |
+| `deriv_process_unique` (215) | Theorem | Closed under the global context | V.4 Производная, стр. 627 | верно | ProcessDerivative.v:215: has_derivative f x L1 -> has_derivative f x L2 -> process_equiv (const_process L1) (const_process L2) — это deriv_unique, переписанная для постоянных процессов; описана точно. |
+| `deriv_sum_process` (230) | Theorem | Closed under the global context | V.4 Производная, стр. 391, 943 | верно | ProcessDerivative.v:230 — при has_derivative f x Lf и has_derivative g x Lg. |
+| `deriv_scale_process` (242) | Theorem | Closed under the global context | V.4 Производная, стр. 393, 943 | верно | ProcessDerivative.v:242 — при has_derivative f x L. |
+| `deriv_product_process` (254) | Theorem | Closed under the global context | V.4 Производная, стр. 555, 945 | верно | ProcessDerivative.v:254; доказательство — apply deriv_process_converges; exact (deriv_product …), как сказано на стр. 550–553. |
+| `derivative_is_process_construction` (274) | Theorem | Closed under the global context | V.4 Производная, стр. 171 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора) — слова те же, доведена формализация: has_derivative f x L -> (forall n, deriv_process f x n == (f (x + deriv_step n) - f x) / deriv_step n) /\ is_Cauchy (deriv_process f x) /\ process_equiv (deriv_process f x) (const_process L). Раньше процесс стоял под «существует», и заключение выполнялось для const_process L без посылки. Closed under the global context. |
 
 ---
 
@@ -453,6 +1034,21 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | `derivation_count_forced` (198) | Lemma | Closed under the global context | IV.6 P4 как фильтр, стр. 179 | верно | count_forced = 4 вычисляется фильтром по списку all_derivations из 12 записей (E/R/R, метрика, Эйнштейн, CP); без допущений |
 | `derivation_count_natural` (203) | Lemma | Closed under the global context | IV.6 P4 как фильтр, стр. 180 | верно | count_natural = 5 (Паули, калибровка, Лоренц, СМ, D = 3); без допущений |
 | `derivation_count_chosen` (208) | Lemma | Closed under the global context | IV.6 P4 как фильтр, стр. 180 | верно | count_chosen = 3 (щель, Вайнберг, натяжение струны); сумма 4 + 5 + 3 = 12 — лемма derivation_total |
+
+---
+
+## #773 — `src/process/ProcessEVT.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 269 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было — максимизатор назван Cauchy-процессом в отрезке; доказана только принадлежность отрезку (argmax_in_interval), а свойства Коши у процесса позиций в общем случае нет (EVT_ArgmaxNotCauchy.v). Шапка ProcessEVT.v, откуда взята ролевая разметка, исправлена так же. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1008 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): после шага 10 в файле 194 строки (шапка выросла на четыре строки), 10 Qed. |
+| _файл целиком_ |  | все девять утверждений файла: Closed under the global context | V.3 Непрерывность, стр. 1022 | верно | ProcessEVT.v:29: From ToS Require Import EVT_ERR. После шагов 1 и 5 Части V все девять утверждений файла — Closed under the global context; строка шапки о цене приведена к этому («none (EVT_ERR itself needs no classic since Nov 2026)»). |
+| `evt_cauchy_compat` (60) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 1012 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора): имя на странице было разорвано переносом строки («evt_cauchy_ compat»); собрано на одной строке. ProcessEVT.v: EVT_ERR.is_Cauchy R <-> ProcessCore.is_Cauchy R; Closed under the global context. |
+| `sup_process_cauchy` (71) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1012 | верно | ProcessEVT.v: a < b -> EVT_ERR.uniformly_continuous_on f a b -> ProcessCore.is_Cauchy (sup_process f a b) — содержательный перенос sup_process_is_Cauchy. После шага 1 Части V — Closed under the global context. |
+| `process_EVT` (97) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1012 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора): было — заключение process_EVT не упоминало функцию. Теперь: exists M c, is_Cauchy M /\ in_interval a b c /\ (forall n, f (c n) == M n) /\ (forall x из отрезка, forall eps > 0, exists N, forall n >= N, f x <= M n + eps) — перенос EVT_complete в типы ProcessCore. Слова «тонкая обёртка, переносящая результат» стали верны. Closed under the global context. |
+| `evt_lipschitz_rate` (144) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1015 | верно | исправлено 12.11 (Часть V, шаг 6, слово автора): было «evt_convergence_rate фиксирует темп — 1/2» — число, вписанное определением; для сетки, получающей одну ячейку на стадию, такого темпа нет (отклонение для x(1-x) на [0,1]: 1/36, 1/100, 1/196, …). Определение evt_convergence_rate и лемма evt_rate_valid сняты (вариант А, слово автора); на их месте evt_lipschitz_rate : a < b -> a <= x <= b -> 0 <= K -> (условие Липшица на отрезке) -> f x <= sup_process f a b n + K * ((b - a) / (n+1)). Closed under the global context. Строка шапки файла «doubling points at each step» заменена на «one more cell at each stage, keep the max». |
+| `evt_step_halves_on_doubling` (166) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 1020 | верно | Новая лемма шага 6: (b - a) / (2n+2) == (1 # 2) * ((b - a) / (n+1)) — шаг сетки стадии 2n+1 вдвое меньше шага стадии n. Closed under the global context. |
 
 ---
 
@@ -483,11 +1079,100 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #798 — `src/process/ProcessFTC.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 124 | верно | Шапка process/ProcessFTC.v:2–4: Elements: derivative and integral processes linked by FTC; Roles: bridge between differentiation and integration processes; Rules: ftc_grid from RiemannIntegration.v, udiff_on from Differentiation.v. |
+| `proc_d` | внешнее |  | V.6 Основная теорема анализа, стр. 564 | верно | Не объявление, а имя связанной переменной в утверждении derivative_integral_duality (ProcessFTC.v:168). |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 673 | верно | исправлено 12.11 (Часть V, шаг 3, слово автора): после шага 3 в ProcessFTC.v 14 Qed (шапка файла исправлена); до шага 2 на странице стояло 8 при девяти |
+| `ftc_error` (44) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 99 | верно | ftc_error f f' a b n := Qabs (integral_process f' a b n - (f b - f a)) (ProcessFTC.v:44); здесь приращение — f b - f a, а не f (walk_point …), как в ftc_grid. |
+| `ftc_zero_deriv` (52) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 308, 633 | верно | ProcessFTC.v:52: a < b -> integral_process (fun _ => 0) a b n == 0 для каждого n; доказательство — induction (S n). Посылка a < b не используется. |
+| `ftc_const_deriv` (64) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 343 | верно | ProcessFTC.v:64: доказательство — exact (integral_process_const c a b Hab); утверждения двух лемм совпадают дословно. |
+| `ftc_interval_split` (96) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 589, 645, 692 | верно | ProcessFTC.v:96: a < m -> m < b -> exists proc_left proc_right, (forall k, proc_left k == integral_process f' a m k) /\ (forall k, proc_right k == integral_process f' m b k). |
+| `ftc_interval_split` (96) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 589, 645, 692 | верно | ProcessFTC.v:101–105: exists (integral_process f' a m), (integral_process f' m b). split; intro k; reflexivity. Посылки a < m и m < b не используются. |
+| `ftc_interval_split` (96) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 589, 645, 692 | верно | Соответствует утверждению ProcessFTC.v:96 (см. запись к стр. 571). |
+| `ftc_error_process` (115) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 84, 634 | верно | Блок кода (стр. 88–92) совпадает с process/ProcessFTC.v:44 (ftc_error) и :115 (ftc_error_process). |
+| `ftc_error_const` (119) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 319, 335, 341, 633 | верно | ProcessFTC.v:119: a < b -> process_equiv (ftc_error_process (fun x => c * x) (fun _ => c) a b) (const_process 0) — совпадает с формулой главы; доказательство — через integral_process_const. |
+| `ftc_error_const` (119) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 319, 335, 341, 633 | верно | Три леммы существуют и замкнуты. ftc_error_const — для f(x) = c * x (без свободного члена) и в форме process_equiv, не поуровневого нуля: см. запись к стр. 320. |
+| `derivative_integral_duality` (155) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 177, 556, 583, 691 | верно | ProcessFTC.v:166: конъюнкция двух существований (см. запись к стр. 539); оценка главы соответствует утверждению. |
+| `derivative_integral_duality` (155) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 177, 556, 583, 691 | верно | ProcessFTC.v:166: a < b -> (exists proc_d, forall x, has_derivative f x (f' x) -> is_Cauchy (deriv_process f x)) /\ (exists proc_i, proc_i = integral_process f' a b) — совпадает; proc_d под квантором не используется, посылка a < b — тоже. |
+| `derivative_integral_duality` (155) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 177, 556, 583, 691 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): первая часть фразы была «ftc_grid назван в шапке ProcessFTC.v среди правил, но в доказательствах файла не вызывается»; остальное без изменений |
+| `ftc_process_converges` (181) | Theorem | Closed under the global context | V.5 Интеграл, стр. 552 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора) — слова главы не менялись, доведена формализация: шагом 2 в формализацию добавлены ftc_grid_eventually (RiemannIntegration.v: оценка на всех уровнях начиная с некоторого) и ftc_process_converges, ftc_integral_process_Cauchy, ftc_error_process_vanishes (process/ProcessFTC.v; условие Proper (Qeq ==> Qeq) f); все — Closed under the global context После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context. |
+| `ftc_process_converges` (181) | Theorem | Closed under the global context | V.5 Интеграл, стр. 552 | верно | исправлено 12.11 (Часть V, шаг 14, слово автора): было «условие — функция уважает равенство рациональных (§ 5.5.2)» — оговорка снята вместе с посылкой. ftc_process_converges : udiff_on f f' a b -> process_equiv (integral_process f' a b) (const_process (f b - f a)). Closed under the global context. |
+| `ftc_process_converges` (181) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 107, 296, 690 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «Это процессная обёртка… сами по себе не доказывают, что эта ошибка убывает или образует процесс Коши»; шагом 2 в формализацию добавлены ftc_grid_eventually (RiemannIntegration.v: оценка на всех уровнях начиная с некоторого) и ftc_process_converges, ftc_integral_process_Cauchy, ftc_error_process_vanishes (process/ProcessFTC.v; условие Proper (Qeq ==> Qeq) f); все — Closed under the global context После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context. |
+| `ftc_process_converges` (181) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 107, 296, 690 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): сходимость процесса теперь теорема — process_equiv (integral_process f' a b) (const_process (f b - f a)); на странице добавлено её имя |
+| `ftc_process_converges` (181) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 107, 296, 690 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «а точность растёт с измельчением»; доказана сходимость (ftc_process_converges, ftc_error_process_vanishes), не убывание на каждом шаге |
+| `ftc_integral_process_Cauchy` (203) | Corollary | Closed under the global context | V.5 Интеграл, стр. 122, 554 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «для более широких классов функций свойство Коши собирается из сеточных оценок и grid-формы основной теоремы»; шагом 2 в формализацию добавлены ftc_grid_eventually (RiemannIntegration.v: оценка на всех уровнях начиная с некоторого) и ftc_process_converges, ftc_integral_process_Cauchy, ftc_error_process_vanishes (process/ProcessFTC.v; условие Proper (Qeq ==> Qeq) f); все — Closed under the global context После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context. |
+| `ftc_integral_process_Cauchy` (203) | Corollary | Closed under the global context | V.5 Интеграл, стр. 122, 554 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «свойство Коши собирается из сеточных оценок для конкретного класса функций»; константы — integral_process_const (ProcessIntegral.v:64) и const_riemann_cauchy (ProcessSimple.v:85); производные — ftc_integral_process_Cauchy |
+| `ftc_error_process_vanishes` (214) | Corollary | Closed under the global context | V.6 Основная теорема анализа, стр. 110 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «Чем мельче сетка, тем меньше этот остаток» — доказана сходимость ошибки к нулю (ftc_error_process_vanishes), а не её убывание на каждом шаге |
+| `ftc_error_const_exact` (237) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 331 | верно | исправлено 12.11 (Часть V, шаг 3, слово автора) — слова те же, добавлено имя: шагом 3 доказаны integral_process_const_exact (integral_process (fun _ => c) a b n == c * (b - a) при всяком n) и ftc_error_const_exact (ftc_error_process (fun x => c * x) (fun _ => c) a b n == 0); прежняя ftc_error_const давала это только как process_equiv; Closed under the global context |
+| `ftc_is_process_construction` (250) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 100, 634 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора) — слова уточнены по новой формулировке: Proper f -> udiff_on f f' a b -> (стадия процесса ошибки) /\ is_Cauchy (integral_process f' a b) /\ process_equiv (integral_process f' a b) (const_process (f b - f a)) /\ process_equiv (ftc_error_process f f' a b) (const_process 0). Closed under the global context. После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context. |
+| `ftc_is_process_construction` (250) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 100, 634 | верно | Оба объявления существуют; ftc_is_process_construction после шага 5 Части V собирает определение процесса ошибки, свойство Коши процесса сумм и обе эквивалентности (см. запись к § 6.1). |
+
+---
+
+## #799 — `src/process/ProcessFubiniGeneral.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.7 Теорема Фубини на процессах, стр. 402 | верно | Файл существует (src/process/ProcessFubiniGeneral.v, 8 Qed); сноска переписана шагом 15 Части V. |
+| `q_sum_swap` (78) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 280 | верно | q_sum_swap : forall (f : nat -> nat -> Q) (N M : nat), dsum_xy f N M == dsum_yx f N M. Closed under the global context. |
+| `fubini_iterated_eq` (113) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 282, 386 | верно | fubini_iterated_eq : forall f wx wy N M, iter_xy f wx wy N M == iter_yx f wx wy N M. Closed under the global context. Сходимости к двойному интегралу файл не доказывает. |
+| `fubini_iterated_eq` (113) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 282, 386 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): было — непрерывный случай назван программой целиком; равенство порядков на любой конечной сетке доказано (ProcessFubiniGeneral.v: q_sum_swap, fubini_iterated_eq), открыта только сходимость к двойному интегралу (горизонт; не доказана и не пробовалась). |
+| `fubini_iterated_eq` (113) | Theorem | Closed under the global context | V.7 Теорема Фубини на процессах, стр. 282, 386 | верно | исправлено 12.11 (Часть V, шаг 15, слово автора): итог приведён к действительному состоянию: fubini_iterated_eq : forall f wx wy N M, iter_xy f wx wy N M == iter_yx f wx wy N M. Closed under the global context. |
+
+---
+
+## #850 — `src/process/ProcessIntegral.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 132 | верно | Шапка ProcessIntegral.v (строки 2–3): Elements: partial Riemann sums; Roles: Cauchy process converging to integral value. Шапка StepIntegral.v (строка 4): Rules: Linearity, monotonicity, non-negativity of norm. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 156 | верно | Так сказано в шапке ProcessIntegral.v (строки 3 и 19); страница ссылается именно на шапку. В самом файле сходимость доказана только для константы — см. запись к стр. 118. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 554 | верно | Подтверждено поиском по src: теорем вида is_Cauchy (integral_process …) или process_equiv (integral_process …) для липшицевых или непрерывных функций нет. |
+| `is_riemann_integrable` | внешнее | не применимо (имени в формализации нет) | V.5 Интеграл, стр. 562 | верно | Имени is_riemann_integrable в src нет (поиск по всем .v), как и утверждает страница; предиката интегрируемости под другим именем тоже не найдено. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 565 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «есть сеточные оценки…, из которых свойство Коши собирается для конкретной функции»; теоремы — integral_process_const и ftc_integral_process_Cauchy |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 724 | верно | Сложение и скаляр — на сумме (riemann_sum_add, riemann_sum_scale) и на процессе (integral_process_add, integral_process_scale, integral_linearity_process). Разность — на сумме (riemann_sum_sub, analysis/FTC.v:506); отдельной леммы о разности на уровне процесса нет, она выводится одной строкой (Check4.v, integral_process_sub). |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 753 | верно | Подтверждено поиском: леммы о согласованности integral_process с эквивалентностью (Proper, ext) в src нет; есть только riemann_sum_ext — равенство сумм при равенстве значений в узлах. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 776 | верно | ProcessIntegral.v:32. Импорт не используется: копия файла без этой строки компилируется (пробная папка, ProcessIntegralNoArith.v). |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 778 | верно | По компилятору от classic не зависит ни одна теорема интегральных файлов главы (см. запись к стр. 740); осторожная формула страницы верна и может быть заменена проверенным фактом. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 807 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «для конкретных регулярных классов функций собирается из сеточных оценок»; теоремы — integral_process_const и ftc_integral_process_Cauchy |
+| `integral_step_pos` (47) | Lemma | Closed under the global context | V.5 Интеграл, стр. 108 | верно | ProcessIntegral.v:47: forall a b n, a < b -> 0 < integral_step a b n. |
+| `integral_process` (56) | Definition | Closed under the global context | V.5 Интеграл, стр. 84, 115, 117, 144, 318, 546, 555, 564 | верно | Блоки кода (стр. 96–101) совпадают с ProcessIntegral.v:42 (integral_step) и :56 (integral_process); тип значения — RealProcess. |
+| `integral_process` (56) | Definition | Closed under the global context | V.5 Интеграл, стр. 84, 115, 117, 144, 318, 546, 555, 564 | верно | Определение тотально по f; утверждений о сходимости в нём нет. Оговорка главы соответствует формализации. |
+| `integral_process` (56) | Definition | Closed under the global context | V.5 Интеграл, стр. 84, 115, 117, 144, 318, 546, 555, 564 | верно | Чтение главы, не объявление: предикат is_Cauchy — ProcessCore.v:68; к процессу сумм он применён в одной теореме — для константы (const_riemann_cauchy, process/ProcessSimple.v:85; поиск по src). |
+| `integral_process` (56) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 14, 561, 567, 591 | верно | Definition integral_process f a b := fun n => riemann_sum f a (integral_step a b n) (S n) (process/ProcessIntegral.v:56); integral_step a b n = (b - a) / (n + 1). |
+| `integral_process_const` (64) | Lemma | Closed under the global context | V.5 Интеграл, стр. 228, 551 | верно | ProcessIntegral.v:64: a < b -> process_equiv (integral_process (fun _ => c) a b) (const_process (c * (b - a))) — формула главы. Посылка a < b в лемме есть, в доказательстве не используется. |
+| `integral_process_const` (64) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 344 | верно | process/ProcessIntegral.v:64: a < b -> process_equiv (integral_process (fun _ => c) a b) (const_process (c * (b - a))); в доказательстве N = 0 и разность равна нулю на каждом уровне, но утверждение записано как process_equiv. |
+| `grid_width_eq` (93) | Lemma | Closed under the global context | V.5 Интеграл, стр. 244, 264, 456 | верно | ProcessIntegral.v:93: inject_Z (Z.of_nat (S n)) * integral_step a b n == b - a, без условий на a и b; равенство — Qeq. |
+| `integral_process_add` (105) | Lemma | Closed under the global context | V.5 Интеграл, стр. 357 | верно | ProcessIntegral.v:105: равенство == для каждого уровня n; доказательство — riemann_sum_add. |
+| `integral_process_scale` (115) | Lemma | Closed under the global context | V.5 Интеграл, стр. 357 | верно | ProcessIntegral.v:115: равенство == для каждого уровня n; доказательство — riemann_sum_scale. |
+| `integral_step_vanishes` (129) | Lemma | Closed under the global context | V.5 Интеграл, стр. 109, 576, 582 | верно | ProcessIntegral.v:129: a < b -> 0 < delta -> exists N, integral_step a b N < delta — один уровень N, как и сказано; посылка a < b названа в соседней фразе; в доказательстве вызвана ProcessDerivative.nat_above_Q (:140). |
+| `integral_is_process_construction` (210) | Theorem | Closed under the global context | V.5 Интеграл, стр. 124, 722 | верно | исправлено 12.11 (Часть V, шаг 5, слово автора) — слова уточнены по новой формулировке: a < b -> (стадия n есть riemann_sum f a (integral_step a b n) (S n)) /\ (0 < integral_step a b n) /\ ((n+1) * integral_step a b n == b - a) /\ (forall delta > 0, exists N, forall n >= N, integral_step a b n < delta). Было: «предъявляющая процесс сумм как конструкцию» — одно определение под «существует». Closed under the global context. |
+| `integral_is_process_construction` (210) | Theorem | Closed under the global context | V.5 Интеграл, стр. 124, 722 | верно | Все три объявления существуют. integral_is_process_construction после шага 5 Части V — «паспорт сетки» (стадия, положительность шага, точное покрытие отрезка, стремление шага к нулю); теоремой интегрируемости она по-прежнему не является — см. запись к § 5.1. |
+| `integral_linearity_process` (226) | Theorem | Closed under the global context | V.5 Интеграл, стр. 359 | верно | ProcessIntegral.v:194: integral_process (fun x => c * f x + g x) a b n == c * integral_process f a b n + integral_process g a b n — поточечно, на каждом уровне, как и оговорено на странице. |
+| `integral_monotone` (239) | Lemma | Closed under the global context | V.5 Интеграл, стр. 404 | верно | ProcessIntegral.v:207: a < b и f <= g в узлах сетки уровня n влекут неравенство на уровне n. Посылка a < b (знак шага) на странице не названа — подразумевается отрезком [a,b]. |
+| `integral_process_abs_bound` (255) | Lemma | Closed under the global context | V.5 Интеграл, стр. 458 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): формулы стояли выводом главы без леммы; добавлены integral_process_abs_bound : a < b -> 0 <= M -> (\|f\| <= M в узлах уровня n) -> \|integral_process f a b n\| <= M * (b - a) и integral_process_global_bound. Closed under the global context. |
+| `integral_process_global_bound` (270) | Lemma | Closed under the global context | V.5 Интеграл, стр. 459 | верно | Новая лемма шага 12: при lo <= f <= hi в узлах уровня n — lo * (b - a) <= integral_process f a b n <= hi * (b - a). Closed under the global context. |
+
+---
+
 ## #852 — `src/process/ProcessIVT.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| `process_IVT` (128) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 680, 687, 1127, 1134 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 689 | верно | исправлено 12.11 (Часть V, шаг 6, слово автора): после шага 6 в файле 190 строк, 14 Qed, 0 Admitted (было 175 строк, 13 Qed). |
+| `ProcessIVT` | модуль |  | V.3 Непрерывность, стр. 743 | верно | имя модуля; файл существует |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1206 | верно | ProcessIVT.v:3: «Roles: Cauchy process in [a,b], converging to root»; ProcessEVT.v:3: «Roles: Cauchy process in [a,b], approaching supremum». Ссылка точна; для ProcessEVT.v шапка шире доказанного (см. запись к стр. 264). |
+| `cauchy_compat` (63) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 681 | верно | ProcessIVT.v:63: Archimedean_ERR.is_Cauchy R <-> ProcessCore.is_Cauchy R (условия «m > N» и «N <= m», сдвиг на единицу — как в главе). Мелочь: бисекция определена в IVT_ERR.v, из Archimedean_ERR.v приходит определение is_Cauchy. |
+| `interval_compat` (70) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 682 | верно | ProcessIVT.v:70: IVT_ERR.in_interval a b R <-> ProcessCore.in_interval a b R. |
+| `equiv_compat` (97) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 683 | верно | ProcessIVT.v:97: IVT_ERR.equiv R1 R2 <-> ProcessCore.process_equiv R1 R2. |
+| `process_IVT` (128) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 686, 694, 1142, 1149 | верно | ProcessIVT.v:128: те же посылки; exists c, ProcessCore.is_Cauchy c /\ ProcessCore.in_interval a b c /\ ProcessCore.process_equiv (apply_to_process f c) (const_process 0) — содержание IVT_process перенесено полностью. |
+| `process_IVT` (128) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 686, 694, 1142, 1149 | верно | Closed under the global context — у process_IVT и у всех 13 утверждений ProcessIVT.v. |
+| `process_IVT` (128) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 686, 694, 1142, 1149 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
+| `ivt_convergence_rate` (172) | Definition | Closed under the global context | V.3 Непрерывность, стр. 686 | верно | исправлено 12.11 (Часть V, шаг 6, слово автора): было сомнительное место — число записано определением, а связывала его с бисекцией только соседняя bisection_width_bound. Добавлена связка ivt_rate_is_width_ratio (ширина на стадии n+1 равна ivt_convergence_rate * ширина на стадии n); Closed under the global context. |
+| `ivt_rate_is_width_ratio` (179) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 688 | верно | Новая лемма шага 6: bis_right (bisection_iter f (mkBisection a b) (S n)) - bis_left (…(S n)) == ivt_convergence_rate * (bis_right (… n) - bis_left (… n)); из bisection_width и Qpow2_Sn. Closed under the global context. |
 
 ---
 
@@ -500,28 +1185,36 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #878 — `src/process/ProcessMCT.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | V.5 Интеграл, стр. 77 | верно | упоминание файла; проверено существование |
+
+---
+
 ## #888 — `src/process/ProcessNinePoint.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
-| _файл целиком_ | файл |  | IV.2 RealProcess как тип, стр. 1039 | верно | упоминание файла; проверено существование |
+| _файл целиком_ | файл |  | IV.2 RealProcess как тип, стр. 1041 | верно | упоминание файла; проверено существование |
 | _файл целиком_ | файл |  | IV.3 Точка как класс эквивалентности процессов, стр. 669, 674, 948 | верно | упоминание файла; проверено существование |
 | `pow10` (42) | Fixpoint | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 688 | верно | упоминание имени (Fixpoint); проверено существование; объявлений с таким именем 2 (файл назван в главе) |
 | `ten_pow` (48) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 688 | верно | ProcessNinePoint.v:47 (ten_pow) и :41 (pow10 над positive). Проверено компилятором: `10 ^ (S n)` над Q с показателем nat не проходит проверку типов, `10 ^ Z.of_nat (S n)` проходит. |
 | `pow10_ge` (57) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 712 | верно | ProcessNinePoint.v:56: Z.of_nat (S m) <= Z.pos (pow10 m). |
-| `nine_raw` (66) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1047 | верно | упоминание имени (Definition); проверено существование |
+| `nine_raw` (66) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1049 | верно | упоминание имени (Definition); проверено существование |
 | `nine_raw` (66) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 618, 696, 698, 705 | верно | ProcessNinePoint.v:65: fun n => 1 - 1 / ten_pow (S n); блок кода (стр. 682) совпадает. |
 | `nine_raw_lt_one` (72) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 621, 692 | верно | ProcessNinePoint.v:71: forall n, nine_raw n < 1 — формулировка совпадает; в файле объявление названо Lemma (шапка файла тоже зовёт её теоремой). |
-| `nine_equiv_one` (84) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 1049 | верно | nine_equiv_one : nine_raw ~~ const_process 1 (ProcessNinePoint.v:84), первая линия; Closed under the global context |
+| `nine_equiv_one` (84) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 1051 | верно | nine_equiv_one : nine_raw ~~ const_process 1 (ProcessNinePoint.v:84), первая линия; Closed under the global context |
 | `nine_equiv_one` (84) | Theorem | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 675, 771, 948 | верно | ProcessNinePoint.v:83; Print Assumptions: Closed under the global context. |
 | `nine_equiv_one` (84) | Theorem | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 675, 771, 948 | верно | Блок кода (стр. 716) совпадает с ProcessNinePoint.v:83: nine_raw ~~ const_process 1; знак ~~ здесь — process_equiv (Notation, ProcessCore.v:175). |
 | `nine_equiv_one` (84) | Theorem | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 675, 771, 948 | верно | ProcessNinePoint.v:83; Print Assumptions: Closed under the global context. |
-| `nine_raw_is_Cauchy` (114) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 1048 | верно | Theorem nine_raw_is_Cauchy : is_Cauchy nine_raw (ProcessNinePoint.v:114); Closed under the global context |
+| `nine_raw_is_Cauchy` (114) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 1050 | верно | Theorem nine_raw_is_Cauchy : is_Cauchy nine_raw (ProcessNinePoint.v:114); Closed under the global context |
 | `nine_raw_is_Cauchy` (114) | Theorem | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 704, 729 | верно | ProcessNinePoint.v:113; доказательство: equiv_cauchy_l (const_process 1) nine_raw, process_equiv_sym от nine_equiv_one, const_is_Cauchy — ход описан верно. |
 | `nine_raw_0` (122) | Example | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 686 | верно | Example nine_raw_0 : nine_raw 0%nat == 9 # 10 (ProcessNinePoint.v:121). |
-| `nine_process` (135) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1042 | верно | исправлено 12.11 (шаг 8, слово автора «А»): имя теперь есть в формализации (ProcessNinePoint.v), блок страницы совпадает с исходником |
-| `one_process` (138) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1043 | верно | исправлено 12.11 (шаг 8, слово автора «А»): определение добавлено в ProcessNinePoint.v; блок страницы совпадает с исходником |
-| `nine_process_equiv_one` (150) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 1036 | верно | исправлено 12.11 (шаг 8, слово автора «А»): схема стала кодом — в ProcessNinePoint.v добавлены nine_process, one_process, nine_process_lt_one_stagewise и Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process (доказательство — теорема первой линии nine_equiv_one, линии совпадают по CauchyProcessBridge); Closed under the global context |
+| `nine_process` (135) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1044 | верно | исправлено 12.11 (шаг 8, слово автора «А»): имя теперь есть в формализации (ProcessNinePoint.v), блок страницы совпадает с исходником |
+| `one_process` (138) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 1045 | верно | исправлено 12.11 (шаг 8, слово автора «А»): определение добавлено в ProcessNinePoint.v; блок страницы совпадает с исходником |
+| `nine_process_equiv_one` (150) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 1038 | верно | исправлено 12.11 (шаг 8, слово автора «А»): схема стала кодом — в ProcessNinePoint.v добавлены nine_process, one_process, nine_process_lt_one_stagewise и Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process (доказательство — теорема первой линии nine_equiv_one, линии совпадают по CauchyProcessBridge); Closed under the global context |
 | `nine_process_equiv_one` (150) | Theorem | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 728 | верно | исправлено 12.11 (шаг 8, слово автора «А»): было «доступен через `nine_raw_is_Cauchy` и мост»; перенос выполнен — Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process; Closed under the global context |
 
 ---
@@ -531,6 +1224,85 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
 | _файл целиком_ |  |  | IV.6 P4 как фильтр, стр. 364 | верно | шапка файла: «What Remains After 10000 Qed … Honest catalogue of what is NOT derived»; теоремы not_derived_* и future_* — о физике; в шапке «~50 Qed», действительных 36 (глава числа не называет) |
+
+---
+
+## #998 — `src/process/ProcessTopCompact.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1011 | верно | interval_compact (ProcessTopCompact.v:47) — определение с условием uniform_cover внутри, оговорка «(равномерное)» на месте; bounded_ascending_stabilizes (ProcessNoetherian.v:64) — для цепей натуральных чисел, ограниченных числом B, на classic. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1022 | верно | Статус назван честно: члены конъюнкции — Heine_Borel (HeineBorel_ERR.v:536), bounded_ascending_stabilizes (ProcessNoetherian.v:64), stabilized_chain_cauchy (ProcessNoetherian.v:169). |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1032 | верно | ProcessTopCompact.v:20 «AXIOMS: classic (from ProcessNoetherian)», ProcessTopUnified.v:33 «AXIOMS: classic (inherited from ProcessNoetherian)». По компилятору classic у 4 объявлений из 18 в первом файле и у 1 из 12 во втором — все от bounded_ascending_stabilizes. Первая строка STATUS обеих шапок при этом говорит «0 axioms». |
+| `interval_compact` (47) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 1017 | верно | упоминание имени (Definition); проверено существование |
+| `compact_eq_noetherian` (218) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 1018 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «связывают их попарно» — compact_eq_noetherian : forall B, (цепь, ограниченная B, стабилизируется) /\ (она же даёт процесс Коши); о покрытиях в утверждении ничего нет. |
+| `compact_eq_hb` (228) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1016 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «связывают их попарно» — compact_eq_hb : a < b -> interval_compact a b, то есть сама теорема Гейне — Бореля. |
+| `p4_compactness_summary` (234) | Theorem | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 1016, 1022 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «их единство закреплено теоремой» — p4_compactness_summary есть конъюнкция трёх независимых утверждений (interval_compact; ограниченная возрастающая цепь стабилизируется; стабилизировавшаяся цепь даёт процесс Коши). Довести формализацию до прежних слов нельзя: общего объекта у утверждений нет. |
+
+---
+
+## #999 — `src/process/ProcessTopConnected.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 33 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): имя файла было разорвано переносом строки («ProcessTop Connected.v»); собрано на одной строке. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 976 | верно | linear_path_in_interval (:48, при a <= b и 0 <= t <= 1), linear_path_lipschitz (:58 — точное равенство \|γ(s) - γ(t)\| = \|b - a\|·\|s - t\|), reverse_path (:91), concat_paths (:156). |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 982 | верно | Все 20 объявлений ProcessTopConnected.v — Closed under the global context. Шапка называет 20 Qed, в файле 16 (глава числа не приводит). |
+| `linear_path` (35) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 951, 976 | верно | Блок кода (стр. 915) совпадает с ProcessTopConnected.v:35; linear_path_at_0 (:38), linear_path_at_1 (:43). |
+| `PathIn` (100) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 962, 965 | верно | Блок кода (стр. 923–925) совпадает с ProcessTopConnected.v:100; непрерывности в определении действительно нет. Следствие этого — запись стр. 944. |
+| `interval_path_connected` (111) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 977 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): слова те же, цена определения названа рядом новым абзацем: без требования непрерывности достижимо всякое множество (any_set_path_connected); содержание несёт липшицева достижимость (interval_lip_path_connected, two_points_not_lip_path_connected). |
+| `process_path` (179) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 979 | верно | ProcessTopConnected.v:179: fun n => linear_path a b (n / (n + 1)). |
+| `process_path_cauchy` (258) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 981 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было — оба утверждения приписаны process_path_cauchy, в которой только свойство Коши. Добавлена process_path_converges : forall a b eps, 0 < eps -> exists N, forall n, N <= n -> Qabs (process_path a b n - b) < eps. Closed under the global context. |
+| `any_set_path_connected` (326) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 986 | верно | Новая лемма шага 8: forall S, is_path_connected S (путь «a при t < 1, b при t = 1»). Closed under the global context. |
+| `interval_lip_path_connected` (345) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 989 | верно | Новая теорема шага 8: lo < hi -> is_lip_path_connected (fun x => lo <= x /\ x <= hi) — линейным путём с константой \|b - a\|. Closed under the global context. |
+| `two_points_not_lip_path_connected` (417) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 990 | верно | Новая теорема шага 8: ~ is_lip_path_connected (fun x => x == 0 \/ x == 1); по сетке мельче 1/K значения липшицева пути не могут перейти из 0 в 1 (lip_no_jump). Closed under the global context. |
+| `process_path_converges` (439) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 982 | верно | Новая лемма шага 8: расстояние до b на шаге n равно \|a - b\|/(n+1). Closed under the global context. |
+
+---
+
+## #1000 — `src/process/ProcessTopMetric.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 213 | верно | Четыре леммы § 1.2 названы для Q_dist (MetricSpace.v). Для рабочего имени qdist в ProcessTopMetric.v есть qdist_nonneg (:36), qdist_sym (:40), qdist_triangle (:53) и qdist_zero_iff (:63); отдельной леммы «нуль на диагонали» нет — она следует из qdist_zero_iff. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1106 | верно | qdist_zero_iff (ProcessTopMetric.v:63); для Q_dist в MetricSpace.v отдельной леммы о разделимости нет — она переносится с qdist, так как определения совпадают. |
+| `qdist` (33) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 134, 135, 138, 145, 213, 321, 517, 528 | верно | ProcessTopMetric.v:33, ProcessGeneral.v:217, MetricSpace.v:193 — все три `Qabs (x - y)`; три имени взаимно конвертируемы (равенства доказаны `reflexivity` в пробном файле). |
+| `qdist_zero_iff` (63) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 186, 425 | верно | ProcessTopMetric.v:63 — forall x y, qdist x y == 0 <-> x == y; доказаны обе стороны; равенство — Qeq, то есть равенство рациональных как чисел. |
+| `metric_cauchy` (187) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 516, 1015, 1096 | верно | ProcessTopMetric.v:187; блок кода (стр. 509) совпадает. |
+| `metric_cauchy_equiv` (213) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 526, 1015 | верно | ProcessTopMetric.v:213 — forall a, is_Cauchy a <-> metric_cauchy a; обе стороны; блок кода (стр. 521) совпадает. Сомнительное место: две стороны совпадают развёрткой определения qdist (равенство is_Cauchy a = metric_cauchy a доказывается `reflexivity`), так что теорема закрепляет переименование, а не новый факт. |
+| `metric_cauchy_equiv` (213) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 526, 1015 | верно | ProcessTopMetric.v:213 — эквивалентность в обе стороны (по определению qdist). |
+| `cauchy_map_lipschitz` (220) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 695, 1028 | верно | ProcessTopMetric.v:220 — для f : Q -> Q: 0 <= K -> lipschitz f K -> is_Cauchy a -> is_Cauchy (fun n => f (a n)); условие липшицевости названо; объявление — Theorem. |
+
+---
+
+## #1001 — `src/process/ProcessTopOpen.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 397 | верно | Статус честен: OpenProcess встречается только в ProcessTopOpen.v, теоремы о связи is_open и процессов покрытий в src нет. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 409 | верно | Все 21 объявление ProcessTopOpen.v — Closed under the global context. Шапка файла называет 20 Qed, в файле 14 (глава числа не приводит). |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1051 | верно | Построены определения QBallCover, OpenProcess, is_refining (ProcessTopOpen.v:217, :247, :250). Теорем о процессе покрытий и об уточнении нет — это глава оговаривает в § 2.3 («инфраструктура»). |
+| `in_ball_shrink` (64) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 344 | верно | ProcessTopOpen.v:64: in_ball c r x -> Qabs (y - x) < r - Qabs (x - c) -> in_ball c r y. Центр в своём шаре — in_ball_center (:41). |
+| `is_open_process` (85) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 348 | верно | упоминание имени (Definition); проверено существование |
+| `ball_is_open` (100) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 350 | верно | empty_open (:90), full_open (:94), ball_is_open (:100), union_open (:115), intersection_open (:129), open_interval_open (:146). Само определение is_open_process — тот же предикат, что is_open из Topology.v (проверено: is_open_process S <-> is_open S); процессного в нём нет, процессную идею несут QBallCover и OpenProcess, как глава и говорит дальше. |
+| `not_Qeq_pos_dist` (167) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 439, 466, 482 | верно | ProcessTopOpen.v:167: ~ (x == y) -> 0 < Qabs (x - y). |
+| `hausdorff_Q` (182) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 446, 481 | верно | Блок кода (стр. 438–441) совпадает с ProcessTopOpen.v:182. В доказательстве радиус d * (1#2), где d = Qabs (x - y), и неравенство треугольника — ход главы. |
+| `hausdorff_Q` (182) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 446, 481 | верно | Обе — Closed under the global context. |
+| `QBallCover` (217) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 366, 395 | верно | упоминание имени (Definition); проверено существование |
+| `covered_by_balls` (220) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 397 | верно | О covered_by_balls доказаны single_ball_covers_center (:224) и append_covers_union (:233). Об OpenProcess — только p4_cover_finite (см. запись стр. 365), об is_refining — ничего. «Базовые свойства» относятся к покрытию, не к процессу покрытий. |
+| `OpenProcess` (247) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 367, 396 | верно | упоминание имени (Definition); проверено существование |
+| `is_refining` (250) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 369, 396 | верно | Блок кода (стр. 349–355) совпадает с ProcessTopOpen.v:217, :247, :250. Чтение определения верное. Ни одной леммы об is_refining в формализации нет (имя встречается только в своём определении). |
+| `p4_cover_finite` (258) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 374 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было «это устанавливает лемма p4_cover_finite». p4_cover_finite : op n = nil \/ exists b rest, op n = cons b rest — верно для любого списка; конечность дана типом QBallCover := list (Q * Q). Слова приведены к этому; содержание конечности — в cover_frame_bounded. |
+| `cover_frame_bounded` (273) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 283, 376 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было «(лемма p4_cover_finite)» — та лемма («список пуст или имеет голову») верна для любого списка. Названа новая cover_frame_bounded : forall bc : QBallCover, exists M, 0 < M /\ forall x, covered_by_balls bc x -> Qabs x < M. Closed under the global context. |
+| `cover_frame_bounded` (273) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 283, 376 | верно | Новая лемма шага 8 (индукция по списку шаров). Closed under the global context. |
+
+---
+
+## #1002 — `src/process/ProcessTopUnified.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1026 | верно | Inductive ProcessPatternTopo — 5 конструкторов (:62); Inductive ProcessInstance — 11, последний PI_Topology (:124). Леммы five_topo_patterns и eleven_instances утверждают лишь существование списка нужной длины; глава называет файл обзорным — честно. |
 
 ---
 
@@ -639,18 +1411,30 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 |---|---|---|---|---|---|
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 533 | верно | Шапка ProcessGeneral.v:6–11: «CauchyReal.v instantiates it for Q. This file provides the GENERAL theory over arbitrary types. GenProcess A := nat -> A». |
 | _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 546 | верно | Расположение файлов верно. |
-| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1103 | верно | Действительный счёт: 16 Qed, 0 Admitted, 0 Axiom; все 16 лемм — «Closed under the global context». |
+| _файл целиком_ |  |  | IV.2 RealProcess как тип, стр. 1105 | верно | Действительный счёт: 16 Qed, 0 Admitted, 0 Axiom; все 16 лемм — «Closed under the global context». |
 | _файл целиком_ | файл |  | IV.3 Точка как класс эквивалентности процессов, стр. 261 | верно | упоминание файла; проверено существование |
-| `GenProcess` (50) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 532, 570, 626, 894 | верно | Совпадает с ProcessGeneral.v:50. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 654 | верно | RealProcess := nat -> Q (ProcessCore.v:34) и BinProcess := nat -> bool (ProcessTypes.v:34) определены независимо от GenProcess, но совпадают с GenProcess Q и GenProcess bool развёрткой (проверено компилятором: приведение типов в обе стороны проходит без доказательства). |
+| `GenProcess` (50) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 532, 570, 626, 896 | верно | Совпадает с ProcessGeneral.v:50. |
+| `GenProcess` (50) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 656, 741, 743, 1017, 1099 | верно | ProcessGeneral.v:50 — Definition GenProcess (A : Type) := nat -> A; блок кода (стр. 649) совпадает. |
 | `observe` (53) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 172 | верно | Блок кода (стр. 163) совпадает с ProcessGeneral.v:53. |
+| `observe` (53) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 658 | верно | ProcessGeneral.v:53 — observe p n := p n. |
 | `prefix` (56) | Fixpoint | Closed under the global context | IV.2 RealProcess как тип, стр. 173, 174 | верно | Блок кода (стр. 165) совпадает с ProcessGeneral.v:56. |
+| `prefix` (56) | Fixpoint | Closed under the global context | V.1 Метрика на процессах, стр. 659 | верно | ProcessGeneral.v:56; длина списка равна n — prefix_length (:83), k-й элемент равен p k — prefix_nth (:93). |
+| `process_map` (63) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 661 | верно | ProcessGeneral.v:63 — fun n => f (p n). |
+| `const_process` (67) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 662 | верно | ProcessGeneral.v:67 — const_process {A} (a : A) : GenProcess A := fun _ => a. Одноимённое определение для ℚ есть в ProcessCore.v:37; глава здесь называет ProcessGeneral.v. |
 | `prefix_length` (83) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 177 | верно | ProcessGeneral.v:83: length (prefix p n) = n; допущений нет. |
 | `prefix_nth` (93) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 179 | верно | ProcessGeneral.v:93: при k < n nth k (prefix p n) d = p k; условие k < n в главе подразумевается. |
 | `process_equiv` (122) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 243, 245, 258, 260, 299, 309, 699, 720 | верно | ProcessGeneral.v:122: process_equiv {A} (eq_A) p1 p2 := forall n, eq_A (p1 n) (p2 n) — параметр eq_A, согласие на каждом шаге; описание точное. |
+| `process_equiv` (122) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 703, 706, 710, 719 | верно | ProcessGeneral.v:122 — process_equiv eq_A p1 p2 := forall n, eq_A (p1 n) (p2 n). |
 | `is_cauchy_gen` (190) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 544, 557, 575 | верно | ProcessGeneral.v:190: параметр dist : A -> A -> Q произволен. |
+| `is_cauchy_gen` (190) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 681 | верно | ProcessGeneral.v:190; блок кода (стр. 670–674) совпадает; расстояние dist : A -> A -> Q. |
 | `Qdist` (217) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 556, 566 | верно | ProcessGeneral.v:217: Qdist x y := Qabs (x - y). |
-| `cauchy_Q_equiv` (220) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 558, 1070 | верно | ProcessGeneral.v:220: is_cauchy a <-> is_cauchy_gen Qdist a; блок кода (стр. 561) совпадает; допущений нет. |
+| `Qdist` (217) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 135, 136, 146, 1013 | верно | ProcessGeneral.v:217; используется в cauchy_Q_equiv (:220) и cauchy_seq_is_gen_process (:228). Собственных лемм о свойствах метрики для Qdist в файле нет — они записаны для Q_dist и qdist. |
+| `cauchy_Q_equiv` (220) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 558, 1072 | верно | ProcessGeneral.v:220: is_cauchy a <-> is_cauchy_gen Qdist a; блок кода (стр. 561) совпадает; допущений нет. |
+| `cauchy_Q_equiv` (220) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 685 | верно | ProcessGeneral.v:220 — forall a : nat -> Q, is_cauchy a <-> is_cauchy_gen Qdist a; обе стороны. Доказательство — unfold и reflexivity: стороны совпадают по определению, «в точности совпадает» сказано верно. |
 | `cauchy_seq_is_gen_process` (228) | Lemma | Closed under the global context | IV.2 RealProcess как тип, стр. 569 | верно | ProcessGeneral.v:228: forall cs, is_cauchy_gen Qdist (cs_seq cs); допущений нет. |
+| `cauchy_seq_is_gen_process` (228) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 740, 1017 | верно | ProcessGeneral.v:228 — forall cs : CauchySeq, is_cauchy_gen Qdist (cs_seq cs). |
+| `process_map_cauchy` (247) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 692, 1028 | верно | ProcessGeneral.v:247 — (forall a1 a2, distB (f a1) (f a2) <= distA a1 a2) -> is_cauchy_gen distA p -> is_cauchy_gen distB (process_map f p); условие названо. |
 
 ---
 
@@ -680,13 +1464,29 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #1867 — `src/QIntervalNotCompact.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 495 | верно | Подтверждено теоремой Q_interval_not_compact (QIntervalNotCompact.v:126, Closed) — для счётного семейства множеств U_k на [1,2]. В определениях самой положительной теоремы (OpenCover, valid_cover, covers_interval) отрицание в src не записано; оно доказуемо без аксиом (набросок проверен, см. заметки к сноске 2). |
+| `covers` (74) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1116 | верно | QIntervalNotCompact.v:74: forall x, inC x -> exists k, U k x; опирается на no_rational_sqrt2 и архимедовость. Closed. |
+| `no_finite_subcover` (99) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1116 | верно | QIntervalNotCompact.v:99: forall L : list nat, exists x, inC x /\ forall k, In k L -> ~ U k x; свидетель — sqrt2_uncovered (приближения Пелля). Closed. |
+| `Q_interval_not_compact` (126) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1116 | верно | Q_interval_not_compact — Closed under the global context. После шага 9 Части V в файле 15 Qed, 0 аксиом (на странице число приведено). |
+| `U_open` (142) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 1116 | верно | Новая лемма шага 9: forall k, is_open (U k) в смысле stdlib/Topology.v. Closed under the global context. |
+| `C_gap` (196) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 1116 | верно | упоминание имени (Definition); проверено существование |
+| `C_gap_no_finite_subcover` (292) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1116 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «Эта конкретная конструкция теперь и машинно проверена» — проверена была родственная конструкция (семейство U_k), а открытость U_k стояла в комментарии. Добавлены U_open и конструкция главы в определениях HeineBorel_ERR.v: C_gap, C_gap_no_finite_subcover, classical_Heine_Borel_fails_over_Q. Closed under the global context. |
+| `classical_Heine_Borel_fails_over_Q` (307) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1063, 1116 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора) — к словам добавлена теорема: ~ (forall C a b, a < b -> valid_cover C a b -> exists centers, covers_interval C centers a b), в определениях HeineBorel_ERR.v; свидетель — покрытие C_gap. Closed under the global context. |
+| `classical_Heine_Borel_fails_over_Q` (307) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1063, 1116 | верно | Новая теорема шага 9; в файле QIntervalNotCompact.v 15 Qed. Closed under the global context. |
+
+---
+
 ## #1047 — `src/RealField.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
 | _файл целиком_ | файл |  | IV.2 RealProcess как тип, стр. 327 | верно | упоминание файла; проверено существование |
 | _файл целиком_ |  |  | IV.3 Точка как класс эквивалентности процессов, стр. 565 | верно | Законы коммутативного кольца с точностью до ~~ доказаны: cauchy_add_comm / _assoc / _zero_r / _neg_r (CauchyReal.v:336–370), cauchy_mul_comm / _assoc / _one_l / _one_r, cauchy_distrib_l / _r (RealField.v:240–291); все — Closed under the global context. |
-| `cauchy_mul` (172) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 327, 593, 928, 1081 | верно | RealField.v:172; законы: коммутативность :240, ассоциативность :250, единица :261, дистрибутивность :280, обратный для положительных :396; все 17 лемм файла без допущений. |
+| `cauchy_mul` (172) | Definition | Closed under the global context | IV.2 RealProcess как тип, стр. 327, 593, 930, 1083 | верно | RealField.v:172; законы: коммутативность :240, ассоциативность :250, единица :261, дистрибутивность :280, обратный для положительных :396; все 17 лемм файла без допущений. |
 | `cauchy_mul` (172) | Definition | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 569 | верно | RealField.v:172; cauchy_mul_comm (:240), cauchy_mul_assoc (:250), cauchy_mul_one_r / _one_l (:261, :271), cauchy_distrib_l / _r (:280, :291) — все четыре названных закона есть. |
 | `cauchy_mul_compat` (181) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 572 | верно | RealField.v:181: a ~~ a' -> b ~~ b' -> cauchy_mul a b ~~ cauchy_mul a' b'. |
 | `cauchy_inv_is_cauchy` (333) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 578 | верно | RealField.v:333 — лемма о свойстве Коши у обратной последовательности при положительном зазоре q < a_n; сам обратный — cauchy_inv_pos (:390). Уточнение: в RealField.v закрыта положительная сторона, общий случай «отделён от нуля» — в RealFieldApart.v (сноска 2). |
@@ -706,6 +1506,51 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #— — `src/RealPointComplete.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | IV.2 RealProcess как тип, стр. 857 | верно | упоминание файла; проверено существование |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 894 | верно | исправлено 12.11 (Часть V, шаг 4, слово автора): было «Применение этого понятия к конкретному процессному пространству … в опорных файлах главы не проведено и честно оставлено направлением» (статус был честен). Шагом 4 создан src/RealPointComplete.v: regular_class_complete — Closed under the global context; class_complete_L4 — в допущениях только ToS_Axioms.L4_witness. Раздел переписан: понятие is_complete_metric остаётся понятием, теорема названа с ценой, полнота пространства процессов с process_dist оставлена направлением. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1023 | верно | исправлено 12.11 (Часть V, шаг 4, слово автора): было «Полная метрическая полнота пространства этих классов — не доказана; полнота введена как понятие». Цена обеих теорем сверена Print Assumptions (записи к § 1.6). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1060 | верно | исправлено 12.11 (Часть V, шаг 4, слово автора): было «Открытым остаётся лишь следующий слой — метрическая полнота пространства классов». Пробное доказательство помощника перенесено в src/RealPointComplete.v и собрано в общей сборке (2042 из 2042). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1114 | верно | исправлено 12.11 (Часть V, шаг 4, слово автора): было «Открытыми остаются полная метрическая полнота … (полнота введена как понятие, не как доказанная теорема) и реифицированный фактор-тип». Фактор-типа в src по-прежнему нет — статус честен. |
+| `class_cauchy` (70) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 860, 886 | верно | упоминание имени (Definition); проверено существование |
+| `class_limit` (76) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 863, 886 | верно | упоминание имени (Definition); проверено существование |
+| `class_limit_compat` (81) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 865 | верно | Новый текст шага 4. (forall k, s k ~~ s' k) -> L ~~ L' -> class_limit s L -> class_limit s' L'; Closed under the global context. |
+| `class_cauchy_compat` (92) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 865 | верно | Новый текст шага 4. (forall k, s k ~~ s' k) -> class_cauchy s -> class_cauchy s'; Closed under the global context. |
+| `diag_idx_converges` (181) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 870 | верно | Новый текст шага 4. Секция DiagonalCore: при рубежах idx (хвост k-й точки после idx k уходит не дальше r k), r k -> 0 и class_cauchy s — diag_idx_is_cauchy (диагональ k \|-> s k (idx k) есть процесс Коши) и diag_idx_converges : class_limit s diag_idx_limit; Closed under the global context. |
+| `regular_class_complete` (239) | Theorem | Closed under the global context | IV.2 RealProcess как тип, стр. 855 | верно | исправлено 12.11 (Часть V, шаг 4, слово автора): было «полная метрическая полнота пространства классов CauchySeq — отдельная задача, выходящая за пределы Главы 4.2» (статус был честен). Шагом 4 Части V создан src/RealPointComplete.v: regular_class_complete — Closed under the global context; class_complete_L4 — только ToS_Axioms.L4_witness. |
+| `regular_class_complete` (239) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 875, 1023 | верно | Новый текст шага 4. Формулировка: forall s : nat -> RealPoint, (forall k, is_Regular_Cauchy (cs_seq (s k))) -> class_cauchy s -> exists L : RealPoint, class_limit s L; рубеж idx k = k + 1 (S), остаток хвоста 2/(k+1). Print Assumptions: Closed under the global context. |
+| `regular_class_complete` (239) | Theorem | Closed under the global context | Формализация, стр. 107 | верно | Строка внесена шагом 4 Части V (12.11, слово автора). Print Assumptions: Closed under the global context. |
+| `class_complete_L4` (268) | Theorem | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.2 RealProcess как тип, стр. 857 | верно | Шаг 4 Части V: вторая из двух теорем, названных фразой (произвольные представители). Print Assumptions: только ToS_Axioms.L4_witness. |
+| `class_complete_L4` (268) | Theorem | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.1 Метрика на процессах, стр. 878, 1023 | верно | Новый текст шага 4. Формулировка: forall s : nat -> RealPoint, class_cauchy s -> exists L : RealPoint, class_limit s L; рубеж k-й точки — proj1_sig (L4_witness … (cs_cauchy (s k) (1/(k+1)) …)), по одному применению на каждое k. Print Assumptions: только ToS_Axioms.L4_witness. |
+| `class_complete_L4` (268) | Theorem | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | Формализация, стр. 107 | верно | Строка внесена шагом 4 Части V (12.11, слово автора). Print Assumptions: только ToS_Axioms.L4_witness. |
+
+---
+
+## #1048 — `src/RealPointMetric.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 548 | верно | RealPointMetric.v в число семи опорных файлов не входит; файл в репозитории есть, 18 Qed, все Closed. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 602 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора): было «отдельного имени в коде нет» — имя есть: rp_dist (RealPointMetric.v), cs_rp_dist: n-й член равен Qabs (cs_seq a n - cs_seq b n). Слова приведены к сказанному на стр. 501–503 и в § 1.8.2. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1051 | верно | Сомнительное место, не расхождение: верно в смысле доказанных для rp_dist аксиом; под абстрактную секцию § 1.3 (d : X -> X -> Q) rp_dist не подпадает — его значения лежат в RealPoint, и is_complete_metric к паре (RealPoint, rp_dist) в нынешнем виде не применим. |
+| `rp_dist` (113) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 503, 602, 860, 882, 1022, 1048, 1113 | верно | В семи опорных файлах имени нет (поиск); rp_dist объявлено в RealPointMetric.v:113, вне семи. Оговорка «в опорных файлах главы» точна. |
+| `rp_dist` (113) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 503, 602, 860, 882, 1022, 1048, 1113 | верно | RealPointMetric.v:113 — Definition rp_dist (a b : RealPoint) : RealPoint := cauchy_abs (cauchy_sub a b); формула главы (стр. 1002–1003) совпадает; cs_rp_dist (:115) — n-й член равен Qabs (cs_seq a n - cs_seq b n). |
+| `dist_of_dists_le` (123) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 547 | верно | Новая лемма шага 7: Qabs (Qabs (pm - qm) - Qabs (pn - qn)) <= Qabs (pm - pn) + Qabs (qm - qn) — дословно оценка, выписанная в главе формулой. Closed under the global context. |
+| `cauchy_dist_is_cauchy` (134) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 546, 1047 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора): было — названа cauchy_abs_is_cauchy, лемма о модуле ОДНОГО процесса. Добавлена cauchy_dist_is_cauchy : forall a b : CauchySeq, is_cauchy (fun n => Qabs (cs_seq a n - cs_seq b n)) и pointwise_dist_is_cauchy — то же для голых процессов. Closed under the global context. |
+| `cauchy_dist_is_cauchy` (134) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 546, 1047 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора): было — названа cauchy_abs_is_cauchy (лемма об одном процессе; она остаётся шагом построения rp_dist). Теперь названа лемма о двух процессах. |
+| `rp_dist_compat` (149) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1050 | верно | RealPointMetric.v:120 — a ~~ a' -> b ~~ b' -> rp_dist a b ~~ rp_dist a' b'; «не меняет» — с точностью до cauchy_equiv, то есть на классах. |
+| `rp_dist_Proper` (156) | Instance | Closed under the global context | V.1 Метрика на процессах, стр. 1022, 1051, 1114 | верно | RealPointMetric.v:127 — Instance rp_dist_Proper : Proper (cauchy_equiv ==> cauchy_equiv ==> cauchy_equiv) rp_dist; Closed under the global context. |
+| `rp_dist_nonneg` (165) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1054 | верно | RealPointMetric.v:136 — forall a b n, 0 <= cs_seq (rp_dist a b) n: поточечно, на каждом приближении. |
+| `rp_dist_sym` (169) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1056 | верно | RealPointMetric.v:140 — rp_dist a b ~~ rp_dist b a. |
+| `rp_dist_self_zero` (177) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1055 | верно | RealPointMetric.v:148 — rp_dist a a ~~ cauchy_const 0. |
+| `rp_dist_eq_zero_iff` (186) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1057 | верно | RealPointMetric.v:157 — rp_dist a b ~~ cauchy_const 0 <-> a ~~ b; обе стороны; разделимость на классах. |
+| `rp_dist_triangle` (204) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1056 | верно | RealPointMetric.v:175 — cauchy_le (rp_dist a c) (cauchy_add (rp_dist a b) (rp_dist b c)); cauchy_le — порядок на классах (CauchyReal.v:226), без условий. |
+
+---
+
 ## #1049 — `src/RealPointSetoid.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
@@ -715,6 +1560,12 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | _файл целиком_ |  |  | IV.4 Несчётность процессов, стр. 687 | верно | Статус честен: RealPointSetoid.v:71–74 — «NOT a reified quotient object», RealPoint := CauchySeq; класс задан отношением, а не отдельным типом. |
 | `cauchy_equiv_Equivalence` (52) | Instance | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 397 | верно | Instance cauchy_equiv_Equivalence (RealPointSetoid.v:52) собран ровно из cauchy_equiv_refl / _sym / _trans. |
 | `cauchy_equiv_Equivalence` (52) | Instance | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 933 | верно | Итог повторяет § 3.3 и § 3.4.3: три леммы CauchyReal.v:67–91 и Instance RealPointSetoid.v:52; всё Closed under the global context. |
+| `RealPoint` (74) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 626, 755, 859, 895, 1021, 1022, 1033, 1052 | верно | RealPointSetoid.v:74 — Definition RealPoint := CauchySeq: носитель сетоида по cauchy_equiv, не фактортип; фактортипа в src нет (как и сказано в Главе 4.3). |
+| `RealPoint` (74) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 201, 1064, 1104 | верно | упоминание имени (Definition); проверено существование |
+| `RealPoint` (74) | Definition | Closed under the global context | V.3 Непрерывность, стр. 1156 | верно | RealPoint := CauchySeq (RealPointSetoid.v:74). Все теоремы главы — о функциях Q -> Q; статус «не построено в этой главе» соответствует названным файлам. |
+| `RealPoint` (74) | Definition | Closed under the global context | V.4 Производная, стр. 95, 953, 967 | верно | Все определения и теоремы трёх опорных файлов типизированы f : Q -> Q; RealPoint := CauchySeq (RealPointSetoid.v:74) в них не участвует. |
+| `RealPoint` (74) | Definition | Closed under the global context | V.5 Интеграл, стр. 733, 748 | верно | RealPoint := CauchySeq (RealPointSetoid.v:74); интеграла от функций на RealPoint или CauchySeq в src нет (поиск). |
+| `RealPoint` (74) | Definition | Closed under the global context | V.6 Основная теорема анализа, стр. 643, 662 | верно | RealPoint := CauchySeq (RealPointSetoid.v:74); имя используется только в RealPointSetoid.v, RealPointMetric.v, RealPointTopology.v — утверждений об интеграле или производной на RealPoint в src нет. |
 | `cauchy_add_Proper` (81) | Instance | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 402 | верно | RealPointSetoid.v:81: Proper (cauchy_equiv ==> cauchy_equiv ==> cauchy_equiv) cauchy_add. |
 | `cauchy_mul_Proper` (85) | Instance | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 402, 572, 767, 937 | верно | RealPointSetoid.v:85: Proper (cauchy_equiv ==> cauchy_equiv ==> cauchy_equiv) cauchy_mul; доказан через cauchy_mul_compat. |
 
@@ -725,8 +1576,84 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
 | _файл целиком_ | файл |  | IV.3 Точка как класс эквивалентности процессов, стр. 554 | верно | упоминание файла; проверено существование |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 214 | верно | Статус честен: rp_in_ball встречается только в RealPointTopology.v; открытых и замкнутых множеств на RealPoint в src нет (поиск). В файле 4 Qed, все 5 объявлений Closed. |
 | `cauchy_le_compat` (43) | Lemma | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 553, 559, 568, 768, 795, 938, 946 | верно | RealPointTopology.v:43: a ~~ a' -> b ~~ b' -> cauchy_le a b -> cauchy_le a' b' — формулировка главы совпадает с утверждением. |
 | `cauchy_le_Proper` (61) | Instance | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 554 | верно | Instance cauchy_le_Proper: Proper (cauchy_equiv ==> cauchy_equiv ==> iff) cauchy_le (RealPointTopology.v:61) — «в обе стороны» = iff; статус «теперь доказана» честен. |
+| `rp_in_ball` (75) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 206, 1064, 1105 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «открытый шар» — rp_in_ball c r x := cauchy_le (rp_dist c x) (cauchy_const r), шар замкнутый (rp_in_ball_contains_boundary: точка на расстоянии ровно 1 принадлежит шару радиуса 1). Открытый шар добавлен отдельно — rp_in_open_ball. |
+| `rp_in_ball` (75) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 206, 1064, 1105 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «открытый шар rp_in_ball» — он замкнутый; названы оба шара. |
+| `rp_in_ball` (75) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 206, 1064, 1105 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «открытый шар rp_in_ball» — он замкнутый; названы оба шара. |
+| `rp_in_ball_well_defined` (79) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 209 | верно | RealPointTopology.v:79: x ~~ x' -> (rp_in_ball c r x <-> rp_in_ball c r x'). Независимость от представителя центра отдельной леммой не записана; следует из rp_dist_Proper и cauchy_le_Proper. |
+| `rp_in_ball_centre` (87) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 210 | верно | RealPointTopology.v:87: 0 < r -> rp_in_ball c r c. |
+| `rp_in_open_ball` (109) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 211, 1064, 1106 | верно | упоминание имени (Definition); проверено существование |
+| `rp_open_ball_is_open` (139) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 214 | верно | Новая лемма шага 9: rp_in_open_ball c r x -> exists e, 0 < e /\ forall y, rp_in_ball x e y -> rp_in_open_ball c r y; корректность на классах — rp_in_open_ball_well_defined. Closed under the global context. |
+
+---
+
+## #1053 — `src/RiemannIntegration.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| `step` | внешнее | не применимо (связанная переменная) | V.5 Интеграл, стр. 54, 68, 408 | верно | `step` — имя связанной переменной (шаг сетки) в riemann_sum, не объявление; одноимённые объявления в src (cs/LambdaGrounding.v и др.) к главе не относятся. |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 214 | верно | Оба файла существуют: RiemannIntegration.v — 18 Qed, process/ProcessIntegral.v — 12 Qed (в шапке второго стоит 11; на странице число не приводится). |
+| _файл целиком_ |  |  | V.5 Интеграл, стр. 767 | верно | Print Assumptions выполнен для всех 135 лемм и теорем восьми файлов (RiemannIntegration, ProcessIntegral, IntegralApplications, StepIntegral, ProcessIntegration, ProcessAnalysis, analysis/FTC, ProcessArithmetic): 133 — Closed under the global context; на Classical_Prop.classic стоят только monotone_bounded_Cauchy и decreasing_bounded_Cauchy из ProcessArithmetic.v. |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 204 | верно | RiemannIntegration.v: telescope_collapse (:207), rs_tele_error_bound (:219), ftc_grid (:314); analysis/FTC.v: разделы «Lipschitz theory», «FTC consequences», «U-substitution». Действительный счёт Qed: 18 и 28. |
+| _файл целиком_ |  |  | V.6 Основная теорема анализа, стр. 670 | верно | Шапки: RiemannIntegration.v:13 и IntegralApplications.v:13 — «AXIOMS: none (fully constructive)»; analysis/FTC.v:16 — «STATUS: 28 Qed, 0 Admitted, 0 axioms». Объявлений Axiom и Parameter в трёх файлах нет; действительный счёт Qed — 18, 28, 19. |
+| `riemann_sum` (40) | Fixpoint | Closed under the global context | V.5 Интеграл, стр. 74, 80, 327, 670, 689, 689, 722, 796 | верно | Блок кода (стр. 58–63) совпадает с RiemannIntegration.v:39; сумма левая: узлы k = 0..n-1. |
+| `riemann_sum` (40) | Fixpoint | Closed under the global context | V.5 Интеграл, стр. 74, 80, 327, 670, 689, 689, 722, 796 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было — третьим названо riemann_sum_01 (другое имя, stdlib/ProcessIntegration.v), а process/ProcessMCT.v не назван. Объявлений riemann_sum три: RiemannIntegration.v:39, process/ProcessAnalysis.v:110, process/ProcessMCT.v:111. |
+| `tele_sum` (47) | Fixpoint | Closed under the global context | V.6 Основная теорема анализа, стр. 217 | верно | Fixpoint tele_sum (RiemannIntegration.v:46): tele_sum f a step (S n') = (f (walk_point a step (S n')) - f (walk_point a step n')) + tele_sum f a step n' — сумма приращений по узлам, как в главе. |
+| `riemann_sum_const` (58) | Lemma | Closed under the global context | V.5 Интеграл, стр. 242 | верно | RiemannIntegration.v:57: riemann_sum (fun _ => c) a step n == c * inject_Z (Z.of_nat n) * step; при числе узлов S n — формула главы. |
+| `riemann_sum_add` (71) | Lemma | Closed under the global context | V.5 Интеграл, стр. 350 | верно | RiemannIntegration.v:70: riemann_sum (fun x => f x + g x) a step n == riemann_sum f a step n + riemann_sum g a step n; равенство — Qeq, без условий. |
+| `riemann_sum_add` (71) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 476 | верно | riemann_sum_add применяется в доказательстве integration_by_parts; слова приведены к этому шагом 13 Части V. |
+| `riemann_sum_scale` (81) | Lemma | Closed under the global context | V.5 Интеграл, стр. 352 | верно | RiemannIntegration.v:80: riemann_sum (fun x => c * f x) a step n == c * riemann_sum f a step n. Оба доказательства — индукция по n и ring. |
+| `riemann_sum_nonneg` (90) | Lemma | Closed under the global context | V.5 Интеграл, стр. 416, 439, 725 | верно | RiemannIntegration.v:89: условия 0 <= f в узлах и 0 <= step названы. В файле лемма доказана прямой индукцией и стоит раньше монотонности. |
+| `riemann_sum_monotone` (110) | Lemma | Closed under the global context | V.5 Интеграл, стр. 401 | верно | RiemannIntegration.v:109: условия — f <= g в узлах k < n и 0 <= step; оба названы. |
+| `riemann_sum_abs_bound` (134) | Lemma | Closed under the global context | V.5 Интеграл, стр. 447, 726 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): в лемме стоят условия 0 <= step и 0 <= M; без условия на шаг оценка неверна (контрпример помощника: step = -1). Условие названо. |
+| `riemann_sum_abs_bound` (134) | Lemma | Closed under the global context | V.5 Интеграл, стр. 447, 726 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было сокращённое имя abs_bound; полное — riemann_sum_abs_bound. |
+| `riemann_sum_width` (169) | Lemma | Closed under the global context | V.5 Интеграл, стр. 262 | верно | RiemannIntegration.v:168: riemann_sum (fun _ => 1) a step n == inject_Z (Z.of_nat n) * step — формула главы. |
+| `riemann_sum_global_bound` (178) | Lemma | Closed under the global context | V.5 Интеграл, стр. 449, 726 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): в лемме стоит условие 0 <= step; оно названо. |
+| `riemann_sum_global_bound` (178) | Lemma | Closed under the global context | V.5 Интеграл, стр. 449, 726 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было сокращённое имя global_bound; полное — riemann_sum_global_bound. |
+| `telescope_collapse` (208) | Lemma | Closed under the global context | V.5 Интеграл, стр. 487, 528, 603, 726 | верно | RiemannIntegration.v:207: tele_sum f a step n == f (walk_point a step n) - f a, без условий на f и шаг; tele_sum — Fixpoint, :46. |
+| `telescope_collapse` (208) | Lemma | Closed under the global context | V.5 Интеграл, стр. 487, 528, 603, 726 | верно | исправлено 12.11 (Часть V, шаг 12, слово автора): было «совпадение лейбницево-точное» о равенстве суммы и приращения — telescope_collapse даёт равенство рациональных ==; лейбницево равенство ложно (пример помощника: 16#16 против 4#4). Лейбницево-точно совпадение соседних узлов (walk_point a s (S k) = walk_point a s k + s по reflexivity). Довести формализацию нельзя. |
+| `telescope_collapse` (208) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 20, 66, 221, 264, 361 | верно | Обе леммы объявлены в RiemannIntegration.v (:207 и :314); на странице главы 5.5 они названы в разделе «Сходимость: интегрируемость как свойство Коши» (её строки 477 и 501), то есть в пятом разделе, подразделы 1 и 2. |
+| `telescope_collapse` (208) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 20, 66, 221, 264, 361 | верно | RiemannIntegration.v:207: tele_sum f a step n == f (walk_point a step n) - f a для любых f, a, step, n — формула главы; знак равенства в утверждении — Qeq (==), см. следующую запись. |
+| `telescope_collapse` (208) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 20, 66, 221, 264, 361 | верно | исправлено 12.11 (Часть V, шаг 13, слово автора): было «совпадение лейбницево-точное» — telescope_collapse даёт ==; лейбницево равенство ложно (контрпример помощника: 864#1296 против 24#36). Лейбницево-точны узлы. Довести формализацию нельзя; слова шапки RiemannIntegration.v приведены к тому же. |
+| `rs_tele_error_bound` (220) | Lemma | Closed under the global context | V.5 Интеграл, стр. 503, 527 | верно | RiemannIntegration.v:219: udiff_on f f' a b -> 0 < eps -> exists N, Qabs (RS f' - tele f) <= eps * (b - a) при шаге (b-a)/(N+1) — один уровень N, как и сказано; доказательство — внутренняя индукция по k <= S N. |
+| `rs_tele_error_bound` (220) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 67, 237, 240, 265, 361, 632 | верно | RiemannIntegration.v:219: udiff_on f f' a b -> 0 < eps -> exists N, \|riemann_sum f' a step (S N) - tele_sum f a step (S N)\| <= eps * (b - a), step = (b - a) / (S N) — совпадает с формулой главы. |
+| `rs_tele_error_bound` (220) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 67, 237, 240, 265, 361, 632 | верно | Доказательство (:225–307): внутренняя индукция Hmain — \|RS(f', k) - tele(f, k)\| <= k * eps * step при k <= S N, шаг индукции — одношаговая оценка из udiff_on; затем Hcancel: (S N) * eps * step == eps * (b - a). Ход описан верно. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.5 Интеграл, стр. 515, 534, 539, 612, 726, 731, 740, 788 | верно | RiemannIntegration.v:314 — формула главы дословно: один уровень N для каждого eps; конец сетки — walk_point a step (S N), не b. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.5 Интеграл, стр. 515, 534, 539, 612, 726, 731, 740, 788 | верно | Так и устроено доказательство (RiemannIntegration.v:323–343). |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.5 Интеграл, стр. 515, 534, 539, 612, 726, 731, 740, 788 | верно | Статус назван верно: неравенство с eps*(b-a), один уровень N, конец сетки вместо b. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.5 Интеграл, стр. 515, 534, 539, 612, 726, 731, 740, 788 | верно | Верно: точного равенства в RiemannIntegration.v нет; ftc_grid и её следствия (ftc_affine, ftc_linearity и др.) — в той же eps-сеточной форме. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | RiemannIntegration.v:314 (в файле — Lemma): udiff_on f f' a b -> 0 < eps -> exists N, let step := (b - a) / (S N) in \|riemann_sum f' a step (S N) - (f (walk_point a step (S N)) - f a)\| <= eps * (b - a). Формула главы совпадает с утверждением; утверждается существование одного уровня N. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Доказательство ftc_grid (RiemannIntegration.v:321–344): destruct (rs_tele_error_bound …), затем telescope_collapse и перенос оценки — как сказано. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Согласуется с ftc_grid (оценка <= eps * (b - a)) и с ftc_error_const (случай f(x) = c * x); о точности аффинного случая — запись к стр. 320. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Так и устроено доказательство ftc_grid (:321–344); формула на стр. 260–264 совпадает с утверждением. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | В форме утверждения: для каждого eps на некотором уровне сетки Риманова сумма f' отличается от приращения f до последнего узла не более чем на eps * (b - a). |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Соответствует утверждению ftc_grid (<= eps * (b - a)). |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Посылки ftc_grid — только udiff_on f f' a b и 0 < eps; в доказательстве вызваны rs_tele_error_bound и telescope_collapse. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | В форме утверждения ftc_grid: один уровень N на каждое eps, сравнение с f (walk_point a step (S N)) — см. записи к стр. 46 и 285. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Три леммы RiemannIntegration.v (:314, :207, :219); все — Closed under the global context. |
+| `ftc_grid` (315) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 21, 44, 46, 81, 111, 127, 136, 167 | верно | Соответствует ftc_grid и ftc_error_const; о форме точности аффинного случая — запись к стр. 320. |
+| `ftc_grid_eventually` (460) | Theorem | Closed under the global context | V.5 Интеграл, стр. 536 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора) — слова о «достаточно мелкой сетке» теперь покрыты теоремой ftc_grid_eventually (все уровни начиная с некоторого); следом на странице добавлена фраза о разнице между ftc_grid (один уровень) и ftc_grid_eventually |
+| `ftc_grid_eventually` (460) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 112, 690 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора): было «в доказательствах самого файла ftc_grid не вызывается»; теперь ftc_process_converges опирается на ftc_grid_eventually |
+| `ftc_grid_eventually` (460) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 112, 690 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора) — слова главы не менялись, доведена формализация: «оценки, уточняющиеся с измельчением» — ftc_grid_eventually (оценка держится на всех уровнях начиная с некоторого) |
+| `ftc_grid_eventually` (460) | Theorem | Closed under the global context | V.6 Основная теорема анализа, стр. 112, 690 | верно | исправлено 12.11 (Часть V, шаг 2, слово автора) — слова главы не менялись, доведена формализация: «при достаточно мелкой сетке» — ftc_grid_eventually |
+| `ftc_affine` (508) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 336, 342, 633 | верно | RiemannIntegration.v:368: a < b -> 0 < eps -> exists N, \|riemann_sum (fun _ => c) a step (S N) - ((c * y + d) - (c * a + d))\| <= eps * (b - a), y = walk_point a step (S N); доказательство — affine_udiff и ftc_grid. |
+| `ftc_nonneg_integral` (526) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 375 | верно | ftc_nonneg_integral (RiemannIntegration.v:386): exists N, -(eps*(b-a)) <= riemann_sum f' a step (S N) — с зазором eps и на одном уровне; Closed under the global context |
+| `udiff_add` (586) | Lemma | Closed under the global context | V.5 Интеграл, стр. 789 | верно | RiemannIntegration.v:599–601: Print Assumptions ftc_grid, udiff_add, ftc_comparison; все три — Closed under the global context. udiff_add (:446): сумма равномерно дифференцируемых равномерно дифференцируема. |
+| `udiff_scale` (620) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 411 | верно | RiemannIntegration.v:480: udiff_on f f' a b -> udiff_on (fun x => c * f x) (fun x => c * f' x) a b. |
+| `ftc_linearity` (670) | Lemma | Closed under the global context | V.6 Основная теорема анализа, стр. 410 | верно | Имя объявлено дважды с разными утверждениями: RiemannIntegration.v:530 (сеточная форма для суммы; она и есть ftc_sum_rule) и process/ProcessFTC.v:77 (поуровневая аддитивность integral_process). Глава имеет в виду первую; файл стоит назвать. |
+| `ftc_comparison` (690) | Lemma | Closed under the global context | V.5 Интеграл, стр. 789 | верно | RiemannIntegration.v:601; Closed under the global context. Глава содержание леммы не пересказывает. Для главы V.6: свидетель в доказательстве ftc_comparison (:550) — N = 0, один узел a; посылка udiff_on g g' и eps по существу не используются. |
+
+---
+
+## #1057 — `src/SeriesConvergence.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | V.4 Производная, стр. 578, 986, 1013 | верно | упоминание файла; проверено существование |
+| `Qpow` (35) | Fixpoint | Closed under the global context | V.4 Производная, стр. 576 | верно | Fixpoint Qpow (SeriesConvergence.v:35); Differentiation.v импортирует SeriesConvergence (стр. 26). Одноимённые определения есть ещё в семи файлах; используется названное. |
+| `partial_sum_tail` (313) | Lemma | не константа или не найдена: The reference ToS.SeriesConvergence.partial_sum_tail was not found in the current environment. | V.4 Производная, стр. 1013 | верно | SeriesConvergence.v:313–320: объявление начато и снято командой Abort; комментарий: «This is tricky to state cleanly. Instead, prove the Cauchy property directly.» В окружении имени нет (Print Assumptions: reference not found); на счёт Qed файла (22) не влияет. |
 
 ---
 
@@ -830,8 +1757,108 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | XV.7 Синтез одна диагональ, один дискриминант, стр. 46 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
 | `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | XX.1 Граница финитизации, стр. 164 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
 | `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | XX.6 Что доказано, что наблюдение, что горизонт, стр. 40 | верно | исправлено 12.11; сверена цена; формулировка — при аудите части |
-| `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | Направления/Математика/index, стр. 96 | верно | сверена цена; формулировка — при аудите части |
-| `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | Формализация, стр. 91, 134 | верно | сверена цена; формулировка — при аудите части |
+| `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | Направления/Математика/index, стр. 96 | верно | исправлено 12.11 (Часть V, шаг 1, слово автора): было «…, экстремум — с исключённым третьим»; строка создаётся генератором из tools/highlights-vitrina.md, источник поправлен; unit_interval_uncountable_trisect_v2 — Closed under the global context |
+| `unit_interval_uncountable_trisect_v2` (3569) | Theorem | Closed under the global context | Формализация, стр. 91, 135 | верно | сверена цена; формулировка — при аудите части |
+
+---
+
+## #1405 — `src/stdlib/MetricSpace.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| `stdlib` | внешнее | не применимо (имя каталога) | V.1 Метрика на процессах, стр. 144 | верно | `stdlib` — каталог src/stdlib, в котором лежит MetricSpace.v, не объявление. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 173 | верно | Ход доказательств сверен: Qabs_nonneg (:198), Qabs_wd + Qabs_pos (:206–207), Qabs_opp (:216), Qabs_triangle (:225). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 176 | верно | Print Assumptions четырёх лемм Q_dist_* — Closed under the global context. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 234 | верно | MetricSpace.v:60–63: четыре гипотезы — d_nonneg, d_zero, d_sym, d_triangle; разделимости среди них нет. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 238 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же, доведена формализация: гипотеза d_zero не входила ни в одну лемму секции; добавлены const_limit_metric и const_cauchy_metric (постоянная последовательность сходится к своему значению и есть Коши) — после закрытия секции обе зависят ровно от d_zero. Closed under the global context. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 240 | верно | MetricSpace.v:55 — Section MetricSpaces. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 253 | верно | Блок кода (стр. 260–268) совпадает с MetricSpace.v:55–63 дословно. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 279 | верно | То же сказано в комментарии файла (MetricSpace.v:50–52): «avoiding typeclasses in favour of explicit parametricity». |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 280 | верно | Проверено командой Check после закрытия секции: в типе каждой леммы остаются только использованные гипотезы (см. запись к стр. 237). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 292 | верно | Шапка MetricSpace.v:6–8: Elements: points of the space; Roles: distance -> MeasureOfSeparation; Rules: triangle inequality (constitution), symmetry, positivity. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 341 | верно | MetricSpace.v:58 — Variable d : X -> X -> Q. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 414 | верно | Сверено: в секции (MetricSpace.v:55–175) гипотезы вида d x y == 0 -> … нет. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 421 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же: теперь работают все четыре гипотезы секции (d_nonneg, d_sym, d_triangle — в прежних леммах; d_zero — в const_limit_metric и const_cauchy_metric). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 450 | верно | contraction_nonneg_factor (:146), contraction_lt_one_factor (:154), contraction_shrinks (:162); четвёртая — contraction_fixed_bound (:136). Первые две и четвёртая — проекции определения is_contraction_metric; содержательна contraction_shrinks. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 455 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора): было «восемнадцать … семь»; после шага 7 в файле 24 Qed, в секции MetricSpaces девять лемм (прежние семь, const_limit_metric, const_cauchy_metric). Все — Closed under the global context. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 458 | верно | Сомнительное место, не расхождение: верно для изложения; в формализации файлы следующих разделов (ProcessTopMetric.v, ProcessSpace.v, ProcessGeneral.v, RealPointMetric.v) MetricSpace.v не подключают, а леммы секции вне самого файла нигде не применены (поиск по src; файл подключают только projective/QuantumTower.v — ради QVec_dist и list_max_dist_nonneg — и projective/ConnectionTheorems.v, который его имён не использует). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 792 | верно | Верно: вне MetricSpace.v предикат нигде не применён. После шага 4 (12.11) имя упомянуто ещё в шапке RealPointComplete.v — в оговорке, что к паре (RealPoint, rp_dist) предикат буквально не применяется (расстояние там — точка, а предикат записан для d : X -> X -> Q). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1013 | верно | Q_dist_nonneg, Q_dist_zero, Q_dist_sym, Q_dist_triangle (MetricSpace.v:196–226); три имени конвертируемы. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1014 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора): число на странице приведено к файлу — «двадцать четыре проверенных результата» (было «восемнадцать»). |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 1125 | верно | Шапка MetricSpace.v:6–8; перевод дословный. |
+| `close` | внешнее | не применимо (слово из шапки файла) | V.1 Метрика на процессах, стр. 1126 | верно | MetricSpace.v:9 — «Status: close (d < eps) \| far (d >= eps) \| convergent \| divergent»; слово шапки, не объявление. |
+| `convergent` | внешнее | не применимо (слово из шапки файла) | V.1 Метрика на процессах, стр. 1126 | верно | MetricSpace.v:9; слово шапки, не объявление. |
+| `divergent` | внешнее | не применимо (слово из шапки файла) | V.1 Метрика на процессах, стр. 1126 | верно | MetricSpace.v:9; слово шапки, не объявление. |
+| `far` | внешнее | не применимо (слово из шапки файла) | V.1 Метрика на процессах, стр. 1126 | верно | MetricSpace.v:9; слово шапки, не объявление. |
+| `Status` | внешнее | не применимо (слово из шапки файла) | V.1 Метрика на процессах, стр. 1126 | верно | `Status` здесь — название строки шапки MetricSpace.v:9, а не одноимённые индуктивные типы (ethics/EthicsModality.v:28 и ещё пять). |
+| `d_zero` (61) | Hypothesis | не применимо (гипотеза секции) | V.1 Метрика на процессах, стр. 406, 407 | верно | MetricSpace.v:61 — Hypothesis d_zero : forall x, d x x == 0. Гипотеза секции: после её закрытия самостоятельного объекта с этим именем нет (поэтому Locate его не находит). |
+| `is_cauchy_metric` (66) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 440 | верно | MetricSpace.v:66 — forall eps > 0, exists N, forall m n, N < m -> N < n -> d (f m) (f n) < eps; рубеж строгий (N < m), в остальных файлах главы — нестрогий (N <= m); для ℚ эквивалентность доказана: Q_cauchy_metric_equiv (:230). |
+| `is_limit_metric` (72) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 440 | верно | MetricSpace.v:72 — forall eps > 0, exists N, forall n, N < n -> d (f n) l < eps. |
+| `is_complete_metric` (78) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 779, 793, 884, 893, 1023 | верно | MetricSpace.v:78; блок кода (стр. 771) совпадает. Определение — для расстояния со значениями в ℚ (d : X -> X -> Q). |
+| `is_contraction_metric` (82) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 441 | верно | MetricSpace.v:82 — 0 <= c /\ c < 1 /\ forall x y, d (f x) (f y) <= c * d x y. |
+| `d_nonneg_alt` (87) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 445 | верно | MetricSpace.v:87 — forall x y, 0 <= d y x. Сомнительное место: это гипотеза d_nonneg с переименованными переменными; нового содержания лемма не несёт (доказана через d_sym, хотя следует из d_nonneg подстановкой). |
+| `limit_dist_zero` (97) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 447 | верно | MetricSpace.v:97 — is_limit_metric f l1 -> is_limit_metric f l2 -> forall eps, 0 < eps -> d l1 l2 < eps; «сколь угодно мало», а не «равно нулю» — сказано точно. |
+| `cauchy_of_limit` (119) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 449 | верно | MetricSpace.v:119 — forall f l, is_limit_metric f l -> is_cauchy_metric f; одна сторона, так и сказано. |
+| `Q_dist` (206) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 135, 144, 1013 | верно | MetricSpace.v:193 — Definition Q_dist (x y : Q) : Q := Qabs (x - y); блок кода (стр. 128) совпадает. |
+| `Q_dist_nonneg` (209) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 161 | верно | MetricSpace.v:196 — forall x y, 0 <= Q_dist x y; доказательство — Qabs_nonneg. |
+| `Q_dist_zero` (215) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 164 | верно | MetricSpace.v:202 — forall x, Q_dist x x == 0 (равенство рациональных — Qeq). |
+| `Q_dist_sym` (224) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 167 | верно | MetricSpace.v:211 — forall x y, Q_dist x y == Q_dist y x. |
+| `Q_dist_triangle` (233) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 171 | верно | MetricSpace.v:220 — forall x y z, Q_dist x z <= Q_dist x y + Q_dist y z; без условий. |
+| `list_max_dist` (280) | Fixpoint | Closed under the global context | V.1 Метрика на процессах, стр. 1068 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же, доведена формализация: четыре свойства были доказаны только для списков (треугольник — при равных длинах); добавлены QVec_dist_nonneg, QVec_dist_zero, QVec_dist_sym, QVec_dist_triangle — для самого расстояния на QVec n, треугольник без условия (длины равны по построению, qv_length). Closed under the global context. |
+| `QVec_dist_nonneg` (399) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1070 | верно | Новая лемма шага 7: 0 <= QVec_dist v1 v2. Closed under the global context. |
+| `QVec_dist_zero` (402) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1070 | верно | Новая лемма шага 7: QVec_dist v v == 0. Closed under the global context. |
+| `QVec_dist_sym` (405) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1070 | верно | Новая лемма шага 7: QVec_dist v1 v2 == QVec_dist v2 v1. Closed under the global context. |
+| `QVec_dist_triangle` (409) | Lemma | Closed under the global context | V.1 Метрика на процессах, стр. 1071 | верно | Новая лемма шага 7: QVec_dist v1 v3 <= QVec_dist v1 v2 + QVec_dist v2 v3 для v1 v2 v3 : QVec n — без условия на длины (у списков оно есть и необходимо). Closed under the global context. |
+
+---
+
+## #1475 — `src/stdlib/ProcessCompactness.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | V.2 Топология и компактность, стр. 1036 | верно | упоминание файла; проверено существование |
+| `compactness_foundation` (39) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1037 | верно | stdlib/ProcessCompactness.v:39: (forall q, process_bounded (const_process q) (Qabs q)) /\ (forall f N, process_seq_cauchy (fun _ => f) N) — ровно то, что сказано. Closed; в файле 5 Qed. |
+
+---
+
+## #1477 — `src/stdlib/ProcessContinuity.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1119 | верно | 36 строк, 4 Qed (id_lipschitz, const_map_lipschitz, zero_lipschitz, continuity_foundation), все Closed under the global context; ProcessMap := RealProcess -> RealProcess. |
+| `process_map_lipschitz` (11) | Definition | Closed under the global context | V.3 Непрерывность, стр. 1124 | верно | ProcessContinuity.v:11: forall f g, process_dist (F f) (F g) N <= L * process_dist f g N — оценка на одном шаге N (N — параметр определения); :14 — process_contraction: 0 < c < 1 и липшицевость с константой c. |
+| `process_contraction` (14) | Definition | Closed under the global context | V.3 Непрерывность, стр. 1125 | верно | упоминание имени (Definition); проверено существование |
+| `continuity_foundation` (31) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1127 | верно | ProcessContinuity.v:31: (forall N, process_map_lipschitz (fun f => f) 1 N) /\ (forall h N, process_map_lipschitz (fun _ => h) 0 N) — в точности как сказано; статус назван честно. |
+
+---
+
+## #1484 — `src/stdlib/ProcessIntegration.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ | файл |  | V.5 Интеграл, стр. 79, 81, 661, 793 | верно | упоминание файла; проверено существование |
+| `vm_compute` | внешнее | не применимо (тактика) | V.5 Интеграл, стр. 664 | верно | integral_const_0, integral_const_1, integral_const_2 (K = 0, 1, 2), integral_zero_0 и integral_two (оба только при K = 0) — ProcessIntegration.v:18–31; доказательства — vm_compute. reflexivity. Все — Closed under the global context. |
+| `riemann_sum_01` (7) | Fixpoint | Closed under the global context | V.5 Интеграл, стр. 79, 662, 669 | верно | Fixpoint riemann_sum_01 (stdlib/ProcessIntegration.v:7) — отдельное определение со своим именем; файл импортирует только Stdlib и process.ProcessCore. |
+| `process_integral_01` (15) | Definition | Closed under the global context | V.5 Интеграл, стр. 663 | верно | stdlib/ProcessIntegration.v:7 и :15: сумма по i = 0..K значений f(i/(K+1))/(K+1) — K+1 узел; process_integral_01 f K := riemann_sum_01 f K K. |
+
+---
+
+## #1499 — `src/stdlib/ProcessSpace.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 104 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же, доведена формализация: у stdlib/ProcessSpace.v шапка была одной строкой без статуса; теперь стандартная шапка E/R/R со строкой «STATUS: 6 Qed, 0 Admitted, 0 axioms» (и вписанный счёт process_space_count исправлен с 7 на 6). Цена всех семи файлов по компилятору — Closed under the global context. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 590 | верно | Определение — конечная рекурсия по N; согласованность с process_equiv в файле не доказывается, и глава её не утверждает. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 618 | верно | process_dist_self (:23), self_in_ball (:39), const_bounded (:52); ещё cylinder_self (:42) и zero_bounded (:55); всего в файле 6 Qed. Неотрицательность, симметрия и неравенство треугольника для process_dist в файле не доказаны — глава их и не утверждает. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 624 | верно | Сверено с файлом (63 строки): определения cylinder, process_dist, process_ball, process_bounded и шесть простых лемм; RealPoint в файле не упоминается. Статус назван честно. |
+| _файл целиком_ |  |  | V.1 Метрика на процессах, стр. 984 | верно | исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же: седьмой файл, stdlib/ProcessSpace.v, получил шапку со статусом (см. запись к § 1.1). |
+| `cylinder` (21) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 615 | верно | ProcessSpace.v:10 — forall k, (k <= N)%nat -> Qabs (f k - center k) < radius. Мелочь: координат N + 1 (с нулевой по N-ю); близость строгая. |
+| `process_dist_aux` (25) | Fixpoint | Closed under the global context | V.1 Метрика на процессах, стр. 570 | верно | ProcessSpace.v:14; Qpow — SeriesConvergence.v:35. Развёртка при N = 2 (компилятор): \|f 0 − g 0\| + (1/2)·\|f 1 − g 1\| + (1/2)(1/2)·\|f 2 − g 2\| — веса (1/2)^k, шаги 0…N. |
+| `process_dist` (31) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 93, 556, 569, 575, 582, 590, 592, 603 | верно | ProcessSpace.v:20; блок кода (стр. 557–564) совпадает с :14–21. |
+| `process_ball` (47) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 617 | верно | ProcessSpace.v:36 — process_dist center f N < r; горизонт N — параметр шара. |
+| `process_bounded` (60) | Definition | Closed under the global context | V.1 Метрика на процессах, стр. 618 | верно | ProcessSpace.v:49 — forall K, Qabs (f K) <= B (одноимённое определение есть ещё в zeta/LiProcess.v:197; глава называет ProcessSpace.v). |
+| `process_space_complete` (69) | Theorem | Closed under the global context | V.1 Метрика на процессах, стр. 627, 629, 812 | верно | ProcessSpace.v:58 — (forall f N, process_dist f f N == 0) /\ (forall f r N, 0 < r -> process_ball f r N f); доказательство — split; [exact process_dist_self \| exact self_in_ball]. Глава называет положение дел точно. |
+| `process_space_complete` (69) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 1038 | верно | stdlib/ProcessSpace.v:58: (process_dist f f N == 0) /\ (0 < r -> process_ball f r N f) — о полноте в утверждении нет ничего; оценка главы честна. Глава 5.1 говорит о ней то же (стр. 625–627). |
 
 ---
 
@@ -843,12 +1870,67 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 
 ---
 
+## #1699 — `src/stdlib/Topology.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 30 | верно | По компилятору все объявления трёх файлов — Closed under the global context: Topology.v (27 объявлений, 19 Qed), ProcessTopOpen.v (21 объявление, 14 Qed), ProcessTopConnected.v (20 объявлений, 16 Qed). Имя третьего файла на странице разорвано переносом строки — отдельная запись. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 157 | верно | В файле 19 Qed: 18 нумерованных лемм и вспомогательная qabs_lt_of_bounds (:255). Все 27 объявлений — Closed under the global context. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 185 | верно | identity_continuous (:190), constant_continuous (:199), add_const_continuous (:224) — для continuous; сумма, отрицание, композиция доказаны в поточечной форме: continuous_at_sum (:346), continuous_at_neg (:373), continuous_at_comp (:210). Глобальная форма из поточечной следует сразу. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 198 | верно | is_open (S : Q -> Prop), continuous (f : Q -> Q) — Topology.v:33, :50. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 221 | верно | 19 Qed; все 27 объявлений файла Closed under the global context. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 233 | верно | Шапка Topology.v, строки 5–8. В шапке среди элементов четвёртыми названы «functions Q -> Q» — в пересказе главы их нет; сноска 1 зовёт разметку дословной, на деле это перевод с одним пропуском. |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 1115 | верно | Разметка в шапке есть (Topology.v:5–8), на английском; пересказ главы на стр. 226–228 — перевод, в котором опущен четвёртый элемент (functions Q -> Q). |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 176 | верно | Статус честен: леммы о произведении в Topology.v нет; поиск по src (continuous_at_mul, continuous_mul и подобные) её не находит и в других файлах. |
+| _файл целиком_ |  | Closed under the global context (все 19 лемм файла) | V.3 Непрерывность, стр. 231 | верно | В файле 19 Qed, нет Axiom и Parameter, подключена только стандартная библиотека; Print Assumptions всех 19 лемм — Closed under the global context. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 240 | верно | Шапка Topology.v, строки 7–8: «Rules: open = every point has a ball inside (constitution), continuous = preimage of open is open (constitution)». Пересказ точен; само определение continuous в файле — дельта-эпсилон (:50). |
+| _файл целиком_ |  | Closed under the global context | V.3 Непрерывность, стр. 252 | верно | continuous_at_sum, continuous_at_neg, add_const_continuous, continuous_at_comp — Closed under the global context. |
+| _файл целиком_ |  | Closed under the global context (все 19 лемм файла) | V.3 Непрерывность, стр. 1148 | верно | Все 19 лемм Topology.v — Closed under the global context. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1205 | верно | Шапка Topology.v, строки 5–9: Elements, Roles, Rules, Status. |
+| _файл целиком_ | файл |  | V.4 Производная, стр. 428 | верно | упоминание файла; проверено существование |
+| `open_ball` (29) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 114 | верно | Блок кода (стр. 116–117) совпадает с Topology.v:29: Qabs (x - center) < radius. |
+| `is_open` (33) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 127 | верно | Блок кода (стр. 132–134) совпадает с Topology.v:33; словесное чтение соответствует кванторам. |
+| `is_closed` (37) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 143 | верно | Блок кода (стр. 146–147) совпадает с Topology.v:37: is_open (fun x => ~ S x). |
+| `is_bounded` (41) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 152 | верно | Topology.v:41: exists M, 0 < M /\ forall x, S x -> Qabs x < M. |
+| `continuous_at` (45) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 184 | верно | упоминание имени (Definition); проверено существование; объявлений с таким именем 2 (файл назван в главе) |
+| `continuous_at` (45) | Definition | Closed under the global context | V.3 Непрерывность, стр. 1140 | верно | Topology.v:45 (continuous_at) и :50 (continuous). Блок главы пишет `eps > 0`, `delta > 0`, в файле `0 < eps`, `0 < delta` — это одна и та же запись (`>` есть нотация для перевёрнутого `<`); continuous совпадает буквально. Словесное чтение соответствует кванторам. |
+| `continuous` (50) | Definition | Closed under the global context | V.2 Топология и компактность, стр. 184 | верно | упоминание имени (Definition); проверено существование |
+| `continuous` (50) | Definition | Closed under the global context | V.3 Непрерывность, стр. 1140 | верно | упоминание имени (Definition); проверено существование |
+| `open_ball_is_open` (76) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 165 | верно | Topology.v:76: forall c r, 0 < r -> is_open (open_ball c r); в доказательстве радиус r - Qabs (x - c) и неравенство треугольника — как в главе. |
+| `empty_is_open` (98) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 169 | верно | Topology.v:98: is_open (fun _ => False). |
+| `full_is_open` (105) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 169 | верно | Topology.v:105: is_open (fun _ => True). |
+| `union_two_open` (114) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 174 | верно | Topology.v:114: is_open S1 -> is_open S2 -> is_open (fun x => S1 x \/ S2 x). Речь о двух множествах; о произвольных объединениях лемм нет — глава их и не называет. |
+| `intersection_two_open` (128) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 175 | верно | Topology.v:128; в доказательстве Qmin eps1 eps2 — меньший из двух запасов, как в главе. |
+| `identity_continuous` (190) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 162, 181 | верно | Topology.v:190: continuous (fun x => x); в доказательстве delta := eps. |
+| `identity_continuous` (190) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 162, 181 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): имя было разорвано переносом строки («identity_ continuous»); собрано на одной строке. Объявление существует (Topology.v). |
+| `constant_continuous` (199) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 164, 182 | верно | Topology.v:199: forall c, continuous (fun _ => c). |
+| `continuous_at_comp` (210) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 170, 181 | верно | Topology.v:210: continuous_at g x -> continuous_at f (g x) -> continuous_at (fun y => f (g y)) x — внутренняя функция непрерывна в x, внешняя — в g x. |
+| `add_const_continuous` (224) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 165 | верно | Topology.v:224: forall c, continuous (fun x => x + c). |
+| `continuous_preserves_open_preimage` (235) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 188 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора): было «в эквивалентной форме» при одной доказанной стороне. Добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))). Closed under the global context. |
+| `continuous_preserves_open_preimage` (235) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 193 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) (шаг главы V.2) — слова те же, доведена формализация. В stdlib/Topology.v добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))); до шага 8 была доказана одна сторона (continuous_preserves_open_preimage). Closed under the global context. |
+| `continuous_preserves_open_preimage` (235) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 216 | верно | Topology.v:235 (объявлено как Lemma): forall f, continuous f -> forall S, is_open S -> is_open (fun x => S (f x)). Блок главы (стр. 206) переставляет кванторы и пишет Theorem — по смыслу то же. Ход доказательства пересказан верно. Closed under the global context. |
+| `continuous_preserves_open_preimage` (235) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 226 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) — слова те же, доведена формализация: «ровно та» теперь теорема — continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))). Closed under the global context. |
+| `continuous_preserves_open_preimage` (235) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 248 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) (шаг главы V.2) — слова те же, доведена формализация. В stdlib/Topology.v добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))); до шага 8 была доказана одна сторона (continuous_preserves_open_preimage). Closed under the global context. |
+| `continuous_preserves_open_preimage` (235) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 291 | верно | исправлено 12.11 (Часть V, шаг 8, слово автора) (шаг главы V.2) — слова те же, доведена формализация. В stdlib/Topology.v добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))); до шага 8 была доказана одна сторона (continuous_preserves_open_preimage). Closed under the global context. |
+| `interval_open` (284) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 178 | верно | Topology.v:284: a < b -> is_open (open_interval a b). |
+| `closed_interval_closed` (298) | Lemma | Closed under the global context | V.2 Топология и компактность, стр. 179 | верно | Topology.v:298: a <= b -> is_closed (closed_interval a b). В файлах компактности эти две леммы не используются (HeineBorel_ERR.v Topology.v не подключает); «опора» — по смыслу, не по импорту. |
+| `continuous_at_sum` (346) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 168, 180 | верно | Topology.v:346: continuous_at f x -> continuous_at g x -> continuous_at (fun y => f y + g y) x. |
+| `continuous_at_neg` (373) | Lemma | Closed under the global context | V.3 Непрерывность, стр. 169, 180 | верно | Topology.v:373: continuous_at f x -> continuous_at (fun y => - f y) x — утверждение в точке. |
+| `continuous_iff_open_preimage` (433) | Theorem | Closed under the global context | V.2 Топология и компактность, стр. 190 | верно | Новая теорема шага 8: continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))). Closed under the global context. |
+
+---
+
 ## #1789 — `src/TheoryOfSystems_Core_ERR.v`
 
 | имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
 |---|---|---|---|---|---|
 | `System` (203) | Record | Closed under the global context | IV.3 Точка как класс эквивалентности процессов, стр. 783 | верно | Record System (L : Level) — TheoryOfSystems_Core_ERR.v:203; глава честно называет E/R/R-разбор содержательным чтением, а не объектом формализации. |
 | `System` (203) | Record | Closed under the global context | IV.4 Несчётность процессов, стр. 744 | верно | упоминание имени (Record); проверено существование |
+| `System` (203) | Record | Closed under the global context | V.1 Метрика на процессах, стр. 303 | верно | Record System (L : Level) — TheoryOfSystems_Core_ERR.v:203; MetricSpace.v объектов этого типа не строит. Оговорка о статусе разбора честна. |
+| `System` (203) | Record | Closed under the global context | V.2 Топология и компактность, стр. 244 | верно | упоминание имени (Record); проверено существование |
+| `System` (203) | Record | Closed under the global context | V.3 Непрерывность, стр. 246 | верно | упоминание имени (Record); проверено существование |
+| `System` (203) | Record | Closed under the global context | V.4 Производная, стр. 216 | верно | упоминание имени (Record); проверено существование |
+| `System` (203) | Record | Closed under the global context | V.5 Интеграл, стр. 140 | верно | Record System (L : Level) — TheoryOfSystems_Core_ERR.v:203; экземпляра System для интеграла в опорных файлах нет, как и сказано. |
 
 ---
 
@@ -865,10 +1947,35 @@ _Сгенерировано из `tom-links.json` скриптом `tom-links-ge
 | _файл целиком_ | файл |  | IV.5 Процессный континуум, стр. 839 | верно | упоминание файла; проверено существование |
 | `classic` | внешнее | аксиома стандартной библиотеки: Classical_Prop.classic : forall P : Prop, P \/ ~ P | IV.6 P4 как фильтр, стр. 147 | верно | classic в формализации — аксиома стандартной библиотеки Classical_Prop.classic, которую ToS_Axioms.v переэкспортирует (строка 31); одноимённые аксиомы объявлены ещё в foundation/Distinction.v:36, EVT_idx.v:338, settheory/BorelDeterminacy.v:21; исправлено 12.11 (шаг 3, слово автора): было «зависят только от classic — то есть от L3» |
 | _файл целиком_ |  |  | IV.6 P4 как фильтр, стр. 147 | верно | исправлено 12.11 (шаг 3, слово автора): было «локализован и появляется лишь в отдельных файлах (лемма l4_witness_localized)»; лемма-вывеска удалена; сплошной прогон Print Assumptions после правок 2026-11-12: от ToS_Axioms.L4_witness зависят объявления девяти файлов помимо ToS_Axioms.v — ProcessContinuumHypothesis.v, SchroederBernstein_ERR.v, analysis/BolzanoWeierstrass.v, process/ProcessBW.v, physics/SpectralDichotomy.v, physics/MeasurementProcess.v, physics/Entanglement.v, settheory/CardinalityWithoutChoice.v, zeta/ZeroStructure.v; напрямую аксиома применена в ProcessContinuumHypothesis.v:78 и в двух леммах ToS_Axioms.v, остальные наследуют |
+| _файл целиком_ |  |  | V.2 Топология и компактность, стр. 59 | верно | В самом файле объявлена одна аксиома — L4_witness (ToS_Axioms.v:105); classic — аксиома стандартной библиотеки, файл её реэкспортирует (строка 31: Require Export Coq.Logic.Classical_Prop). Оба имени доступны через этот файл. |
+| `classic` | внешнее | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P | V.2 Топология и компактность, стр. 59, 63, 69, 72, 630, 636, 728, 840 | верно | Classical_Prop.classic : forall P : Prop, P \/ ~ P — стандартная библиотека; ToS_Axioms.v:31 реэкспортирует. В выводе компилятора у теорем главы стоит именно она. |
+| _файл целиком_ | файл |  | V.5 Интеграл, стр. 762 | верно | упоминание файла; проверено существование |
 | `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.1 P4 бесконечность как процесс, стр. 301, 317, 328, 332, 339, 360 | верно | Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A \| P x} (:105) |
 | `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.1 P4 бесконечность как процесс, стр. 301, 317, 328, 332, 339, 360 | верно | форма (exists x, P x) -> {x : A \| P x} соответствует описанию |
 | `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.5 Процессный континуум, стр. 734, 816, 829, 840, 847 | верно | Axiom L4_witness : (exists x, P x) -> {x : A \| P x} (ToS_Axioms.v:105); в опорном файле применена явно в countable_union_enum (ProcessContinuumHypothesis.v:78) |
 | `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.6 P4 как фильтр, стр. 147, 320 | верно | Axiom L4_witness : (exists x, P x) -> {x : A \| P x} (ToS_Axioms.v:105) — пересказ точен |
 | `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.6 P4 как фильтр, стр. 147, 320 | верно | согласуется со строками 310–326 и с ChoicePriceMap.v (из утверждения L4_witness следует функциональный выбор) |
+| `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.1 Метрика на процессах, стр. 879 | верно | упоминание имени (Axiom); проверено существование |
+| `L4_witness` (105) | Axiom | Axioms: ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 59, 65, 844, 1059, 1098 | верно | Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A \| P x} — ToS_Axioms.v:105. |
 | `L3_informative` (119) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | IV.5 Процессный континуум, стр. 839 | верно | исправлено 12.11 (шаг 12) — фраза добавлена: Lemma L3_informative : forall P : Prop, {P} + {~P} (ToS_Axioms.v:119); Print Assumptions: Classical_Prop.classic и ToS_Axioms.L4_witness |
+| `L3_informative` (119) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 836, 843, 858, 876, 1059 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): имя было разорвано переносом строки («L3_ informative»); собрано на одной строке. |
+| `L3_informative` (119) | Lemma | Axioms: Classical_Prop.classic : forall P : Prop, P \/ ~ P ToS_Axioms.L4_witness : forall (A : Type) (P : A -> Prop), (exists x : A, P x) -> {x : A \| P x} | V.2 Топология и компактность, стр. 836, 843, 858, 876, 1059 | верно | исправлено 12.11 (Часть V, шаг 9, слово автора): было «L3_informative и classic — технические Rocq-реализации L3» — Print Assumptions L3_informative: Classical_Prop.classic и ToS_Axioms.L4_witness (значение извлекается командой destruct (L4_witness _ Hex), ToS_Axioms.v). Место входа L4 в бисекцию теперь названо; bw_step_is_gen_step показывает, что допущения входят только через этот выбор. |
+
+---
+
+## #1798 — `src/UniformConvergence.v`
+
+| имя (строка файла) | вид | допущения | где в томе | вердикт | пометка |
+|---|---|---|---|---|---|
+| _файл целиком_ |  | Closed under the global context (все 20 утверждений файла) | V.3 Непрерывность, стр. 1112 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): шапка файла исправлена («AXIOMS: none»); файл подключает MonotoneConvergence.v (в нём q_inc_bounded_cauchy и др. на classic), но в обходе допущений ни одного утверждения UniformConvergence.v нет. |
+| _файл целиком_ |  |  | V.3 Непрерывность, стр. 1162 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): имя файла было разорвано переносом строки; собрано. Слова «и производной» сняты: теоремы об обмене предела с производной в файле нет. |
+| `uniform_converges` (53) | Definition | Closed under the global context | V.3 Непрерывность, стр. 1056 | верно | Блок кода совпадает с UniformConvergence.v:53; номер N стоит перед квантором по x — как в пояснении главы. |
+| `continuous_on` (142) | Definition | Closed under the global context | V.3 Непрерывность, стр. 348, 1101, 1140, 1155 | верно | UniformConvergence.v:142; блок кода совпадает с исходником. |
+| `continuous_on` (142) | Definition | Closed under the global context | V.3 Непрерывность, стр. 348, 1101, 1140, 1155 | верно | Сомнительное место, не расхождение: § 3.3.1 называет каноном другое определение с тем же именем — analysis/Continuity.v:41 (через x и x0, без приращения); третье — HeineBorel_ERR.v:562. Моста между записями в формализации нет. Проверено пробным файлом: каноническая запись влечёт запись через приращение без условий; обратно — для функций, уважающих равенство дробей. |
+| `continuous_on` (142) | Definition | Closed under the global context | V.3 Непрерывность, стр. 348, 1101, 1140, 1155 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было — continuous_on приписано Topology.v; объявлено оно в UniformConvergence.v (и, в другой записи, в analysis/Continuity.v). |
+| `uniform_limit_continuous_on` (200) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1106, 1144 | верно | Блок кода (стр. 1058–1062) совпадает с UniformConvergence.v:200; continuous_on здесь — запись через приращение (:142). Ход доказательства (eps/3, три слагаемых) — в uniform_limit_continuous_at (:151), пересказан верно. |
+| `uniform_limit_continuous_on` (200) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1106, 1144 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было — цена «оставлена проверке»; проверка проведена: uniform_limit_continuous_on — Closed under the global context, как и все утверждения файла. |
+| `uniform_limit_continuous_on` (200) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1106, 1144 | верно | UniformConvergence.v:200; Closed under the global context. |
+| `integral_limit_exchange` (310) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1094 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было «и обмен с производной, и теорема Дини» — у derivative_limit_exchange предельная производная в заключение не входит (оценка приращений), у dini_monotone нет монотонности в условии (лемма о конечном числе узлов). Довести до прежних слов нельзя: теорема Дини над Q в классической форме, по оценке, неверна (как Кантор — Гейне); обмен предела с производной — горизонт главы о производной. |
+| `dini_monotone` (641) | Theorem | Closed under the global context | V.3 Непрерывность, стр. 1096 | верно | исправлено 12.11 (Часть V, шаг 10, слово автора): было «теорема Дини» — dini_monotone (UniformConvergence.v): если в каждом из конечного числа узлов сетки значения становятся меньше eps, то есть общий номер для всех узлов; монотонности в условии нет. Слова приведены к содержанию. |
 

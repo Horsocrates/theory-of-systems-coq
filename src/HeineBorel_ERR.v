@@ -5,7 +5,7 @@
 (*  Part of: Theory of Systems - Coq Formalization (E/R/R Framework)         *)
 (*  Author:  Horsocrates | Version: 2.0 (E/R/R) | Date: January 2026         *)
 (*                                                                           *)
-(*  STATUS: 25 Qed, 0 Admitted                                              *)
+(*  STATUS: 28 Qed, 0 Admitted                                              *)
 (*          Previously 2 Admitted (unprovable over Q); replaced with         *)
 (*          provable alternatives: Lebesgue-number corollary + Lipschitz    *)
 (*                                                                           *)
@@ -625,13 +625,77 @@ Proof.
         apply Qmult_lt_0_compat. unfold Qlt. simpl. lia. exact Heps.
 Qed.
 
+(* ===== SECTION 6b: HEINE-BOREL FOR A TRUE LEBESGUE NUMBER (Nov 2026) ===== *)
+
+From Stdlib Require Import Lqa.
+
+(** A uniform lower bound of the radii is a Lebesgue number (the same delta).
+    The converse fails: radii may be unseparated from zero while a Lebesgue
+    number exists. *)
+Lemma uniform_cover_has_lebesgue : forall C a b delta,
+  uniform_cover C a b delta -> has_lebesgue_number C a b delta.
+Proof.
+  intros C a b delta [Hd Hu]. split; [exact Hd|].
+  intros x Hx. exists x. split; [exact Hx|].
+  intros y Hy. unfold covered_by.
+  pose proof (Hu x Hx) as Hge. apply Qge_le in Hge. lra.
+Qed.
+
+Lemma HB_lebesgue_by_depth : forall N C a b delta,
+  has_lebesgue_number C a b delta ->
+  forall a' b', a <= a' -> a' <= b' -> b' <= b ->
+    (b' - a') / Qpow2 N < delta -> coverable C a' b'.
+Proof.
+  induction N as [|N IH]; intros C a b delta Hleb a' b' Haa Hab' Hbb Hw.
+  - destruct Hleb as [Hd Hl].
+    assert (E : (b' - a') / Qpow2 0 == b' - a') by (unfold Qpow2; simpl; field).
+    rewrite E in Hw.
+    destruct (Hl a' ltac:(split; lra)) as [c [_ Hc]].
+    exists [c]. intros y [Hy1 Hy2]. simpl. left. apply Hc.
+    rewrite Qabs_pos by lra. lra.
+  - set (m := (a' + b') / 2).
+    assert (Em : m == (a' + b') * (1#2)) by (unfold m; field).
+    assert (Hm1 : a' <= m) by lra.
+    assert (Hm2 : m <= b') by lra.
+    assert (HwL : (m - a') / Qpow2 N < delta).
+    { assert (E : (m - a') / Qpow2 N == (b' - a') / Qpow2 (S N)).
+      { rewrite <- div_half_pow2. assert (E2 : m - a' == (b' - a') / 2) by (unfold m; field).
+        rewrite E2. reflexivity. }
+      rewrite E. exact Hw. }
+    assert (HwR : (b' - m) / Qpow2 N < delta).
+    { assert (E : (b' - m) / Qpow2 N == (b' - a') / Qpow2 (S N)).
+      { rewrite <- div_half_pow2. assert (E2 : b' - m == (b' - a') / 2) by (unfold m; field).
+        rewrite E2. reflexivity. }
+      rewrite E. exact Hw. }
+    apply coverable_concat with m.
+    + apply (IH C a b delta Hleb a' m); lra.
+    + apply (IH C a b delta Hleb m b'); lra.
+Qed.
+
+(** Heine-Borel under a true Lebesgue number: every piece of the interval
+    narrower than delta lies in one ball of the cover.  [Heine_Borel_uniform]
+    is its special case (by [uniform_cover_has_lebesgue]). *)
+Theorem Heine_Borel_lebesgue : forall (C : OpenCover) (a b delta : Q),
+  a < b ->
+  has_lebesgue_number C a b delta ->
+  exists centers : FiniteSubcover, covers_interval C centers a b.
+Proof.
+  intros C a b delta Hab Hleb.
+  assert (Hd : 0 < delta) by (destruct Hleb as [Hd _]; exact Hd).
+  assert (Hw : b - a > 0) by lra.
+  destruct (pow2_eventually_large (b - a) delta Hw Hd) as [N HN].
+  apply (HB_lebesgue_by_depth N C a b delta Hleb a b); [lra | lra | lra | exact HN].
+Qed.
+
 (* ===== SECTION 7: SUMMARY ===== *)
 
 (**
-  PROVEN LEMMAS (25 Qed, 0 Admitted):
+  PROVEN LEMMAS (28 Qed, 0 Admitted):
   - Qpow2_pos, Qpow2_nonzero, pow2_eventually_large
   - Heine_Borel_by_depth (bisection induction with uniform bound)
-  - Heine_Borel_uniform (main theorem WITH Lebesgue number assumption)
+  - Heine_Borel_uniform (main theorem, radii bounded below by delta)
+  - uniform_cover_has_lebesgue, HB_lebesgue_by_depth, Heine_Borel_lebesgue
+    (Nov 2026: the theorem under a true Lebesgue number)
   - Heine_Borel (simplified: adds Lebesgue number hypothesis, corollary of uniform)
   - lipschitz_implies_uniform (replaces classical continuity_implies_uniform)
   - coverable_concat, not_coverable_half, small_interval_coverable

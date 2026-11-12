@@ -1,0 +1,917 @@
+{
+ "batch": "audit-part-05",
+ "chapter": "05 Топология и анализ процессов/06 Основная теорема анализа.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 11,
+   "theorem": "deriv_process",
+   "claim": "Глава 5.4 построила производную как процесс разностных отношений `deriv_process` и сеточную теорему о среднем через walk-точки.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition deriv_process f x := fun n => let h := deriv_step n in (f (x + h) - f x) / h (process/ProcessDerivative.v:62) — процесс разностных отношений; сеточные следствия теоремы о среднем на walk-точках — MeanValueTheorem.v (walk_point, :38)."
+  },
+  {
+   "line": 13,
+   "theorem": "integral_process",
+   "claim": "Глава 5.5 построила интеграл как процесс накопления Римановых сумм `integral_process`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition integral_process f a b := fun n => riemann_sum f a (integral_step a b n) (S n) (process/ProcessIntegral.v:56); integral_step a b n = (b - a) / (n + 1)."
+  },
+  {
+   "line": 19,
+   "theorem": "telescope_collapse",
+   "claim": "Телескопическая сумма `telescope_collapse`, сворачивающая сумму приращений в разность концов, введена в § 5.5.1; сеточная форма теоремы `ftc_grid` названа в § 5.5.2 как мост.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Обе леммы объявлены в RiemannIntegration.v (:207 и :314); на странице главы 5.5 они названы в разделе «Сходимость: интегрируемость как свойство Коши» (её строки 477 и 501), то есть в пятом разделе, подразделы 1 и 2."
+  },
+  {
+   "line": 46,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Содержательное ядро главы — теорема `ftc_grid` из `RiemannIntegration.v`. Если функция $f$ равномерно дифференцируема на $[a,b]$ с производной $f'$ (условие `udiff_on` из § 5.4), то для всякого $\\varepsilon>0$ найдётся уровень $N$, при котором Риманова сумма производной на сетке из $N+1$ подынтервалов приближает приращение:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v:314 (в файле — Lemma): udiff_on f f' a b -> 0 < eps -> exists N, let step := (b - a) / (S N) in |riemann_sum f' a step (S N) - (f (walk_point a step (S N)) - f a)| <= eps * (b - a). Формула главы совпадает с утверждением; утверждается существование одного уровня N."
+  },
+  {
+   "line": 60,
+   "theorem": "udiff_on",
+   "claim": "Предельного деления на $h$ здесь нет: производная входит через division-free критерий `udiff_on` (§ 5.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition udiff_on (MeanValueTheorem.v:46): a < b и для всякого eps > 0 есть delta > 0 такое, что при a <= x <= b и 0 < |h| < delta верно |f (x + h) - f x - f' x * h| < eps * |h| — деления в определении нет."
+  },
+  {
+   "line": 65,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Доказательство собирается из двух лемм § 5.5.1: `telescope_collapse` отождествляет сумму приращений с разностью концов, а `rs_tele_error_bound` оценивает расстояние между Римановой суммой $f'$ и этим телескопом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство ftc_grid (RiemannIntegration.v:321–344): destruct (rs_tele_error_bound …), затем telescope_collapse и перенос оценки — как сказано."
+  },
+  {
+   "line": 73,
+   "theorem": "walk_endpoint_qeq",
+   "claim": "Лемма `walk_endpoint_qeq` даёт, что $y_{N+1}$ равна $b$ в смысле отношения `Qeq`; но чтобы перенести это под $f$ и прочесть $f(y_{N+1})$ как $f(b)$, нужно, чтобы $f$ принимала в этих двух записях одного числа равные значения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 14, слово автора): было «функция f должна уважать Qeq (быть Proper) … требует отдельной оговорки» — для равномерно дифференцируемой функции оговорка не нужна: udiff_walk_endpoint_value. walk_endpoint_qeq — Closed under the global context."
+  },
+  {
+   "line": 86,
+   "theorem": "ftc_error_process",
+   "claim": "Над сеточной оценкой надстраивается процессный слой — файл `ProcessFTC.v`. Он определяет ошибку основной теоремы как процесс:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 88–92) совпадает с process/ProcessFTC.v:44 (ftc_error) и :115 (ftc_error_process)."
+  },
+  {
+   "line": 98,
+   "theorem": "ftc_error",
+   "claim": "На уровне $n$ это разность между Римановой суммой производной и приращением функции; `ftc_error` — её модуль.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ftc_error f f' a b n := Qabs (integral_process f' a b n - (f b - f a)) (ProcessFTC.v:44); здесь приращение — f b - f a, а не f (walk_point …), как в ftc_grid."
+  },
+  {
+   "line": 99,
+   "theorem": "ftc_is_process_construction",
+   "claim": "Теорема `ftc_is_process_construction` предъявляет этот процесс ошибки как конструкцию (E/R/R-форма) и собирает доказанное о нём: процесс сумм есть процесс Коши, а процесс ошибки называет нуль — при условиях теоремы сходимости, о которой ниже.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 5, слово автора) — слова уточнены по новой формулировке: Proper f -> udiff_on f f' a b -> (стадия процесса ошибки) /\\ is_Cauchy (integral_process f' a b) /\\ process_equiv (integral_process f' a b) (const_process (f b - f a)) /\\ process_equiv (ftc_error_process f f' a b) (const_process 0). Closed under the global context. После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context."
+  },
+  {
+   "line": 105,
+   "theorem": "ftc_process_converges",
+   "file": "src/process/ProcessFTC.v",
+   "claim": "Определения `ProcessFTC.v` записывают ошибку основной теоремы в процессной форме, а его теорема `ftc_process_converges` доказывает главное: процесс Римановых сумм производной эквивалентен постоянному процессу приращения $f(b)-f(a)$, то есть ошибка стремится к нулю (`ftc_error_process_vanishes`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора): было «Это процессная обёртка… сами по себе не доказывают, что эта ошибка убывает или образует процесс Коши»; шагом 2 в формализацию добавлены ftc_grid_eventually (RiemannIntegration.v: оценка на всех уровнях начиная с некоторого) и ftc_process_converges, ftc_integral_process_Cauchy, ftc_error_process_vanishes (process/ProcessFTC.v; условие Proper (Qeq ==> Qeq) f); все — Closed under the global context После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context."
+  },
+  {
+   "line": 110,
+   "theorem": "ftc_grid_eventually",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Сеточную оценку, на которой это стоит, даёт `RiemannIntegration.v`: лемма `ftc_grid` — для одного уровня сетки, теорема `ftc_grid_eventually` — для всех уровней начиная с некоторого.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора): было «в доказательствах самого файла ftc_grid не вызывается»; теперь ftc_process_converges опирается на ftc_grid_eventually"
+  },
+  {
+   "line": 122,
+   "theorem": null,
+   "file": "src/analysis/FTC.v",
+   "claim": "`FTC.v` размечает объекты: *$f$ — подынтегральное, $f'$ — производная, $K$ — липшицева граница; правило — уравнение FTC (конституция), липшицева оценка (ограничение)*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка analysis/FTC.v:9–11: Elements: functions, derivatives, integrals, Lipschitz constants; Roles: f -> Integrand, f' -> Derivative, K -> LipschitzBound; Rules: FTC equation (constitution), Lipschitz bound (constraint)."
+  },
+  {
+   "line": 124,
+   "theorem": null,
+   "file": "src/process/ProcessFTC.v",
+   "claim": "`ProcessFTC.v` размечает процессы: *элементы — производный и интегральный процессы; роль — мост между дифференцированием и интегрированием; правило — `ftc_grid`*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка process/ProcessFTC.v:2–4: Elements: derivative and integral processes linked by FTC; Roles: bridge between differentiation and integration processes; Rules: ftc_grid from RiemannIntegration.v, udiff_on from Differentiation.v."
+  },
+  {
+   "line": 139,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Честная граница: это сеточная, приближённая форма, точная лишь для аффинных функций (§ 6.3.2), — так что конституция здесь *процессная*, семейство оценок, а не одно завершённое равенство.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Согласуется с ftc_grid (оценка <= eps * (b - a)) и с ftc_error_const (случай f(x) = c * x); о точности аффинного случая — запись к стр. 320."
+  },
+  {
+   "line": 156,
+   "theorem": "ftc_grid_eventually",
+   "file": "src/RiemannIntegration.v",
+   "claim": "По $P4$ оба суть процессы приближений, не завершённые пределы — и связь между ними тоже процессная: семейство сеточных оценок, уточняющихся с измельчением.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора) — слова главы не менялись, доведена формализация: «оценки, уточняющиеся с измельчением» — ftc_grid_eventually (оценка держится на всех уровнях начиная с некоторого)"
+  },
+  {
+   "line": 176,
+   "theorem": "derivative_integral_duality",
+   "claim": "Одно честное уточнение: громкая теорема `derivative_integral_duality` (§ 6.7.1) сама по себе скромна — настоящая связь держится не на ней, а на *паре мостов* (`ftc_grid` и `deriv_process_converges`), и именно эта пара хорошо сформирована.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:166: конъюнкция двух существований (см. запись к стр. 539); оценка главы соответствует утверждению."
+  },
+  {
+   "line": 204,
+   "theorem": null,
+   "file": "src/RiemannIntegration.v",
+   "claim": "Содержательные якоря — `RiemannIntegration.v` (`ftc_grid`, телескоп) и `FTC.v` (липшицевость, монотонность, аффинная подстановка).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v: telescope_collapse (:207), rs_tele_error_bound (:219), ftc_grid (:314); analysis/FTC.v: разделы «Lipschitz theory», «FTC consequences», «U-substitution». Действительный счёт Qed: 18 и 28."
+  },
+  {
+   "line": 207,
+   "theorem": null,
+   "file": "src/IntegralApplications.v",
+   "claim": "Приложения — `IntegralApplications.v` (правило произведения, интегрирование по частям, единственность первообразной).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v: udiff_product (:210), integration_by_parts (:447), antiderivative_unique (:641); 19 Qed."
+  },
+  {
+   "line": 217,
+   "theorem": "tele_sum",
+   "claim": "Определим её как сумму приращений функции по последовательным узлам walk-сетки:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint tele_sum (RiemannIntegration.v:46): tele_sum f a step (S n') = (f (walk_point a step (S n')) - f (walk_point a step n')) + tele_sum f a step n' — сумма приращений по узлам, как в главе."
+  },
+  {
+   "line": 220,
+   "theorem": "telescope_collapse",
+   "claim": "Лемма `telescope_collapse` сворачивает её точно:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v:207: tele_sum f a step n == f (walk_point a step n) - f a для любых f, a, step, n — формула главы; знак равенства в утверждении — Qeq (==), см. следующую запись."
+  },
+  {
+   "line": 229,
+   "theorem": "telescope_collapse",
+   "claim": "Равенство здесь — равенство рациональных чисел (`Qeq`). Лейбницево-точны сами узлы: `walk_point` из § 5.4 задана рекурсивно",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 13, слово автора): было «совпадение лейбницево-точное» — telescope_collapse даёт ==; лейбницево равенство ложно (контрпример помощника: 864#1296 против 24#36). Лейбницево-точны узлы. Довести формализацию нельзя; слова шапки RiemannIntegration.v приведены к тому же."
+  },
+  {
+   "line": 240,
+   "theorem": "rs_tele_error_bound",
+   "claim": "Лемма `rs_tele_error_bound`: при равномерной дифференцируемости `udiff_on` $f f' a b$ для всякого $\\varepsilon>0$ найдётся уровень $N$, при котором",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v:219: udiff_on f f' a b -> 0 < eps -> exists N, |riemann_sum f' a step (S N) - tele_sum f a step (S N)| <= eps * (b - a), step = (b - a) / (S N) — совпадает с формулой главы."
+  },
+  {
+   "line": 250,
+   "theorem": "rs_tele_error_bound",
+   "claim": "Идея доказательства — внутренняя индукция по числу шагов сетки.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство (:225–307): внутренняя индукция Hmain — |RS(f', k) - tele(f, k)| <= k * eps * step при k <= S N, шаг индукции — одношаговая оценка из udiff_on; затем Hcancel: (S N) * eps * step == eps * (b - a). Ход описан верно."
+  },
+  {
+   "line": 263,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Телескоп равен разности концов (`telescope_collapse`), а Риманова сумма производной близка к телескопу (`rs_tele_error_bound`); значит, Риманова сумма производной близка к разности концов:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Так и устроено доказательство ftc_grid (:321–344); формула на стр. 260–264 совпадает с утверждением."
+  },
+  {
+   "line": 275,
+   "theorem": "ftc_grid_eventually",
+   "file": "src/RiemannIntegration.v",
+   "claim": "форма *division-free*, *сеточная*, *приближённая* — это не точное равенство $\\int_a^b f' = f(b)-f(a)$. Там, где классический анализ ставит знак равенства, здесь стоит $\\le\\varepsilon\\cdot(b-a)$ при достаточно мелкой сетке.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора) — слова главы не менялись, доведена формализация: «при достаточно мелкой сетке» — ftc_grid_eventually"
+  },
+  {
+   "line": 281,
+   "theorem": "walk_endpoint_qeq",
+   "claim": "Лемма `walk_endpoint_qeq` даёт $y_{N+1}=b$ в смысле `Qeq`, а равномерная дифференцируемость — что значения $f$ в этих двух точках равны (`udiff_walk_endpoint_value`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 14, слово автора): было «чтение f(y_{N+1}) как f(b) корректно, когда f уважает Qeq» — условие заменено доказанным фактом."
+  },
+  {
+   "line": 289,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "`ftc_grid` содержит всю суть основной теоремы: интеграл производной восстанавливает приращение функции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В форме утверждения: для каждого eps на некотором уровне сетки Риманова сумма f' отличается от приращения f до последнего узла не более чем на eps * (b - a)."
+  },
+  {
+   "line": 293,
+   "theorem": "ftc_process_converges",
+   "file": "src/process/ProcessFTC.v",
+   "claim": "Это та же интонация, что в § 5.4 с мостом `deriv_process_converges`: там процесс разностных отношений сходился к наклону, здесь процесс Римановых сумм производной сходится к приращению (`ftc_process_converges`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора): сходимость процесса теперь теорема — process_equiv (integral_process f' a b) (const_process (f b - f a)); на странице добавлено её имя"
+  },
+  {
+   "line": 310,
+   "theorem": "ftc_zero_deriv",
+   "claim": "Интеграл нулевой производной есть нуль — точно, без приближения, доказывается прямой индукцией по числу узлов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:52: a < b -> integral_process (fun _ => 0) a b n == 0 для каждого n; доказательство — induction (S n). Посылка a < b не используется."
+  },
+  {
+   "line": 319,
+   "theorem": "ftc_error_const",
+   "claim": "Лемма `ftc_error_const` — единственный нетривиальный содержательный факт файла `ProcessFTC.v`: для $f(x)=c\\cdot x$ с производной $f'=c$ процесс ошибки основной теоремы эквивалентен постоянному процессу нуль,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:119: a < b -> process_equiv (ftc_error_process (fun x => c * x) (fun _ => c) a b) (const_process 0) — совпадает с формулой главы; доказательство — через integral_process_const."
+  },
+  {
+   "line": 329,
+   "theorem": "ftc_error_const_exact",
+   "claim": "То есть $\\int_a^b c = c (b-a) = f(b)-f(a)$ *точно*: ошибка тождественно нулевая на каждом уровне (лемма `ftc_error_const_exact`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3, слово автора) — слова те же, добавлено имя: шагом 3 доказаны integral_process_const_exact (integral_process (fun _ => c) a b n == c * (b - a) при всяком n) и ftc_error_const_exact (ftc_error_process (fun x => c * x) (fun _ => c) a b n == 0); прежняя ftc_error_const давала это только как process_equiv; Closed under the global context",
+   "file": "src/process/ProcessFTC.v"
+  },
+  {
+   "line": 336,
+   "theorem": "ftc_affine",
+   "claim": "Лемма же `ftc_affine` из `RiemannIntegration.v` оформляет тот же аффинный сюжет в *сеточной* $\\varepsilon$-форме через `ftc_grid` (вида «существует $N$, при котором ошибка $\\le\\varepsilon(b-a)$»), а не как отдельное точное равенство на каждом уровне.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v:368: a < b -> 0 < eps -> exists N, |riemann_sum (fun _ => c) a step (S N) - ((c * y + d) - (c * a + d))| <= eps * (b - a), y = walk_point a step (S N); доказательство — affine_udiff и ftc_grid."
+  },
+  {
+   "line": 342,
+   "theorem": "ftc_const_deriv",
+   "claim": "(Третий родственник, `ftc_const_deriv`, переэкспортирует `integral_process_const` из § 5.5.)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:64: доказательство — exact (integral_process_const c a b Hab); утверждения двух лемм совпадают дословно."
+  },
+  {
+   "line": 344,
+   "theorem": "integral_process_const",
+   "claim": "`integral_process_const` из § 5.5.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process/ProcessIntegral.v:64: a < b -> process_equiv (integral_process (fun _ => c) a b) (const_process (c * (b - a))); в доказательстве N = 0 и разность равна нулю на каждом уровне, но утверждение записано как process_equiv."
+  },
+  {
+   "line": 350,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Для общих равномерно дифференцируемых функций основная теорема уже не точна, а сеточна: `ftc_grid` даёт ошибку $\\le\\varepsilon(b-a)$, но не нуль.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует утверждению ftc_grid (<= eps * (b - a))."
+  },
+  {
+   "line": 357,
+   "theorem": "ftc_error_process_vanishes",
+   "file": "src/process/ProcessFTC.v",
+   "claim": "С измельчением сетки этот остаток стремится к нулю.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора): было «Чем мельче сетка, тем меньше этот остаток» — доказана сходимость ошибки к нулю (ftc_error_process_vanishes), а не её убывание на каждом шаге"
+  },
+  {
+   "line": 359,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Сама сеточная оценка `ftc_grid` стоит на равномерной дифференцируемости (`udiff_on`), телескопе (`telescope_collapse`) и оценке `rs_tele_error_bound` — в дополнительной регулярности она не нуждается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылки ftc_grid — только udiff_on f f' a b и 0 < eps; в доказательстве вызваны rs_tele_error_bound и telescope_collapse."
+  },
+  {
+   "line": 363,
+   "theorem": "udiff_bounded_on",
+   "claim": "леммы вроде `udiff_bounded_on` (оценка значений функции на всём отрезке через границу производной) и `lipschitz_bounded` (ограниченность липшицевой функции) помогают контролировать классы функций",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3, слово автора): было «udiff_implies_bounded (оценка значений функции через производную)» — та лемма оценивает одно значение в последнем узле одной сетки; шагом 3 добавлена udiff_bounded_on: Proper f -> udiff_on f f' a b -> (|f'| <= M на отрезке) -> 0 <= M -> forall x из отрезка, |f x| <= |f a| + M (b - a); Closed under the global context После шага 14 Части V посылки Proper (Qeq ==> Qeq) f у теоремы нет: на отрезке это свойство следует из равномерной дифференцируемости (MeanValueTheorem.udiff_respects_qeq, udiff_walk_endpoint_value). Closed under the global context.",
+   "file": "src/analysis/FTC.v"
+  },
+  {
+   "line": 365,
+   "theorem": "lipschitz_bounded",
+   "claim": "`lipschitz_bounded` (ограниченность липшицевой функции)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:601: Lipschitz_on f a b K -> forall x, a <= x -> x <= b -> |f x - f a| <= K * |b - a| — оценка на всём отрезке."
+  },
+  {
+   "line": 373,
+   "theorem": "riemann_sum_deriv_nonneg_exact",
+   "file": "src/analysis/FTC.v",
+   "claim": "Риманова сумма производной неотрицательна — точно, на каждом уровне сетки (лемма `riemann_sum_deriv_nonneg_exact`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3): лемма добавлена шагом 3 — a < b -> (g >= 0 на отрезке) -> 0 <= riemann_sum g a ((b - a) / (N+1)) (S N); Closed under the global context"
+  },
+  {
+   "line": 374,
+   "theorem": "ftc_nonneg_integral",
+   "file": "src/RiemannIntegration.v",
+   "claim": "прежняя `ftc_nonneg_integral` из `RiemannIntegration.v` давала то же с зазором",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ftc_nonneg_integral (RiemannIntegration.v:386): exists N, -(eps*(b-a)) <= riemann_sum f' a step (S N) — с зазором eps и на одном уровне; Closed under the global context"
+  },
+  {
+   "line": 376,
+   "theorem": "nonneg_deriv_nondecreasing",
+   "claim": "Содержательно: неотрицательная производная даёт неубывающее приращение — $f(a)\\le f(b)$ (теорема `nonneg_deriv_nondecreasing`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 14, слово автора): было «для функции, уважающей равенство рациональных» — оговорка снята вместе с посылкой. nonneg_deriv_nondecreasing : udiff_on f f' a b -> (f' >= 0 на отрезке) -> f a <= f b. Closed under the global context.",
+   "file": "src/analysis/FTC.v"
+  },
+  {
+   "line": 385,
+   "theorem": "ftc_increment_bound",
+   "claim": "Лемма `ftc_increment_bound` (`FTC.v`) есть по сути та же `bounded_deriv_bounded_increment` из теоремы о среднем § 4.6 главы 5.4: ограниченная производная даёт ограниченное приращение функции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:211: доказательство — exact (bounded_deriv_bounded_increment …); утверждения совпадают, у ftc_increment_bound добавлена посылка 0 <= M, в доказательстве не используемая. Заключение: exists N, |f (walk_point a step (S N)) - f a| <= (M + eps) * (b - a)."
+  },
+  {
+   "line": 388,
+   "theorem": "bounded_deriv_bounded_increment",
+   "claim": "Предохранитель C4: это та же лемма, что и в главе о производной, здесь прочитанная в контексте основной теоремы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:218: udiff_on f f' a b -> (|f' x| <= M на [a,b]) -> 0 < eps -> exists N, |f (walk_point a step (S N)) - f a| <= (M + eps) * (b - a)."
+  },
+  {
+   "line": 395,
+   "theorem": "nonneg_deriv_nondecreasing",
+   "claim": "Теорема `nonneg_deriv_nondecreasing`: при $f'\\ge 0$ приращение неотрицательно, $f(a)\\le f(b)$; её сеточная предшественница — лемма `ftc_monotone`, с зазором на одном уровне сетки.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3, слово автора): было «Лемма ftc_monotone: при f' >= 0 функция растёт на сетке (приращение неотрицательно)» — у ftc_monotone зазор eps, один уровень, последний узел; точная форма — nonneg_deriv_nondecreasing",
+   "file": "src/analysis/FTC.v"
+  },
+  {
+   "line": 399,
+   "theorem": "ftc_strict_monotone",
+   "claim": "`ftc_strict_monotone` (то же, что `pos_deriv_increases` из § 5.4) даёт положительное приращение до последнего узла сетки при производной, отделённой от нуля.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3, слово автора): было «даёт строгий рост» — лемма даёт положительность приращения до последнего узла на одном уровне сетки; слова приведены к утверждению"
+  },
+  {
+   "line": 399,
+   "theorem": "pos_deriv_increases",
+   "claim": "то же, что `pos_deriv_increases` из § 5.4",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:352: udiff_on f f' a b -> (c <= f' x на [a,b]) -> 0 < c -> exists N, 0 < f (walk_point a step (S N)) - f a — утверждение то же, что у ftc_strict_monotone."
+  },
+  {
+   "line": 408,
+   "theorem": "ftc_difference",
+   "claim": "Лемма `ftc_difference` даёт приращение разности функций, `ftc_sum_rule` (она же `ftc_linearity`) и `ftc_scale_rule` (через `udiff_scale`) — приращения суммы и скалярного кратного.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:282: udiff_on f f' a b -> udiff_on g g' a b -> 0 < eps -> exists N, |RS(f' - g') - ((f y - g y) - (f a - g a))| <= eps * (b - a), y — последний узел; доказательство — udiff_sub и ftc_grid. Форма та же, что у ftc_grid."
+  },
+  {
+   "line": 409,
+   "theorem": "ftc_sum_rule",
+   "claim": "`ftc_sum_rule` (она же `ftc_linearity`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:324: доказательство — exact (ftc_linearity …), где ftc_linearity — лемма RiemannIntegration.v:530; утверждения совпадают."
+  },
+  {
+   "line": 409,
+   "theorem": "ftc_linearity",
+   "file": "src/RiemannIntegration.v",
+   "claim": "(она же `ftc_linearity`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя объявлено дважды с разными утверждениями: RiemannIntegration.v:530 (сеточная форма для суммы; она и есть ftc_sum_rule) и process/ProcessFTC.v:77 (поуровневая аддитивность integral_process). Глава имеет в виду первую; файл стоит назвать."
+  },
+  {
+   "line": 410,
+   "theorem": "ftc_scale_rule",
+   "claim": "`ftc_scale_rule` (через `udiff_scale`) — приращения суммы и скалярного кратного.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:351: udiff_on f f' a b -> 0 < eps -> exists N, |RS(c * f') - (c * f y - c * f a)| <= eps * (b - a); доказательство — udiff_scale и ftc_grid."
+  },
+  {
+   "line": 410,
+   "theorem": "udiff_scale",
+   "claim": "(через `udiff_scale`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v:480: udiff_on f f' a b -> udiff_on (fun x => c * f x) (fun x => c * f' x) a b."
+  },
+  {
+   "line": 419,
+   "theorem": "ftc_absolute_value_bound",
+   "claim": "Лемма `ftc_absolute_value_bound` (`FTC.v`): при $|f'|\\le M$ Риманова сумма производной не превосходит $M\\cdot(b-a)$ по модулю.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:299: для произвольной функции f (о производной в утверждении речи нет) и каждого N: a < b -> (|f (y_k)| <= M в узлах k < S N) -> 0 <= M -> |riemann_sum f a step (S N)| <= M * (b - a); обёртка riemann_sum_abs_bound. В применении к f' — как в главе."
+  },
+  {
+   "line": 422,
+   "theorem": "ftc_absolute_value_bound",
+   "claim": "В § 6.5 похожий контроль понадобится для множителей — там он входит прямо в условия: правило произведения и интегрирование по частям требуют границ $M_f, M_g, M_{f'}, M_{g'}$ на значения функций и производных.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 13, слово автора): было «она понадобится в § 6.5 … эта лемма даёт нужный контроль» — ftc_absolute_value_bound нигде не используется; в udiff_product, ftc_product, integration_by_parts границы — посылки о значениях функций и производных."
+  },
+  {
+   "line": 432,
+   "theorem": "udiff_product",
+   "claim": "Главное нелинейное приложение основной теоремы — правило произведения, лемма `udiff_product` из `IntegralApplications.v`. Если $f$ и $g$ равномерно дифференцируемы на отрезке с ограниченными значениями и производными, то их произведение $f\\cdot g$ равномерно дифференцируемо с производной",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:210: udiff_on f f' a b -> udiff_on g g' a b -> (|f| <= Mf, |g| <= Mg, |f'| <= Mf', |g'| <= Mg' на [a,b]) -> 0 <= Mf, Mg, Mf', Mg' -> udiff_on (fun x => f x * g x) (fun x => f' x * g x + f x * g' x) a b — условия названы, заключение совпадает. Само правило основную теорему не использует (ftc_grid в доказательстве нет): это её предпосылка для ftc_product."
+  },
+  {
+   "line": 442,
+   "theorem": "product_decomp",
+   "claim": "Во-первых, `product_decomp` раскладывает приращение произведения на три слагаемых — по образцу разложения из правила производной § 4.4.2 главы 5.4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:60: a1*b1 - a2*b2 - (c1*b2 + a2*c2)*h == (a1 - a2 - c1*h)*b2 + a2*(b1 - b2 - c2*h) + (a1 - a2)*(b1 - b2) — три слагаемых. В доказательстве udiff_product сама лемма не вызывается: то же тождество получено на месте тактикой ring (:277–280), имя стоит только в комментарии (:269). Доли eps/3 и границы Mf, Mg, Mf', Mg' — как в главе."
+  },
+  {
+   "line": 449,
+   "theorem": "udiff_square",
+   "claim": "Частный случай — `udiff_square`: производная квадрата $(f^2)' = 2f f'$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:398: при |f| <= Mf, |f'| <= Mf' на [a,b]: udiff_on (fun x => f x * f x) (fun x => 2 * f x * f' x) a b; доказательство — udiff_product и udiff_ext."
+  },
+  {
+   "line": 455,
+   "theorem": "ftc_product",
+   "claim": "Применив `ftc_grid` к производной произведения, получаем лемму `ftc_product`: Риманова сумма выражения $f'g + fg'$ приближает приращение произведения $fg$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:422: при границах Mf, Mg, Mf', Mg' и 0 < eps: exists N, |RS(f' * g + f * g') - (f y * g y - f a * g a)| <= eps * (b - a); доказательство — udiff_product и ftc_grid."
+  },
+  {
+   "line": 464,
+   "theorem": "integration_by_parts",
+   "claim": "Перегруппировав `ftc_product`, получаем интегрирование по частям — лемму `integration_by_parts`. В сеточной форме она утверждает: Риманова сумма $f'g$ приближает граничный член $fg$ минус Риманова сумма $fg'$,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:447: exists N, |RS(f' * g) - (f y * g y - f a * g a) + RS(f * g')| <= eps * (b - a) — формула главы (стр. 455–459) совпадает; посылки — те же границы Mf, Mg, Mf', Mg', что у udiff_product (в этом разделе главы они не повторены)."
+  },
+  {
+   "line": 475,
+   "theorem": "integration_by_parts",
+   "file": "src/IntegralApplications.v",
+   "claim": "Доказательство — `ftc_product` плюс аддитивность Римановых сумм (`riemann_sum_add`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 13, слово автора): было «(riemann_sum_add, riemann_sum_sub)» — в доказательстве integration_by_parts леммы riemann_sum_sub нет: она объявлена в analysis/FTC.v, который сам подключает IntegralApplications.v."
+  },
+  {
+   "line": 475,
+   "theorem": "riemann_sum_add",
+   "claim": "аддитивность Римановых сумм (`riemann_sum_add`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "riemann_sum_add применяется в доказательстве integration_by_parts; слова приведены к этому шагом 13 Части V."
+  },
+  {
+   "line": 478,
+   "theorem": "ibp_self",
+   "claim": "Частные случаи: `ibp_self` даёт $2\\int f'f \\approx f(\\text{конец})^2 - f(a)^2$, а `ibp_identity` — формулу с тождественным множителем, $\\int g \\approx xg |_a^b - \\int xg'$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:551: при границах Mf, Mf' и 0 < eps: exists N, |2 * RS(f' * f) - (f y * f y - f a * f a)| <= eps * (b - a)."
+  },
+  {
+   "line": 479,
+   "theorem": "ibp_identity",
+   "claim": "`ibp_identity` — формулу с тождественным множителем,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:693: exists N, |RS(1 * g) - (y * g y - a * g a) + RS(x * g')| <= eps * (b - a); посылки: границы Mg, Mg' и |x| <= Mab на [a,b]."
+  },
+  {
+   "line": 500,
+   "theorem": "antiderivative_unique",
+   "claim": "Лемма `antiderivative_unique` из `IntegralApplications.v`: если функции $f$ и $g$ имеют на $[a,b]$ одну и ту же производную $h$, то их приращения совпадают (с точностью до сеточной ошибки $\\varepsilon(b-a)$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IntegralApplications.v:641: udiff_on f h a b -> udiff_on g h a b -> 0 < eps -> exists N, |(f y - f a) - (g y - g a)| <= eps * (b - a), y — последний узел."
+  },
+  {
+   "line": 503,
+   "theorem": "udiff_sub",
+   "claim": "Доказательство опирается на `udiff_sub`: разность $f-g$ имеет нулевую производную, а тогда `ftc_grid` с нулевой производной даёт малое приращение разности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Так и в доказательстве (:651–690): udiff_sub, затем udiff_ext (h - h заменено на 0), затем ftc_grid для f - g с производной 0. udiff_sub — IntegralApplications.v:622."
+  },
+  {
+   "line": 509,
+   "theorem": "zero_deriv_near_constant",
+   "claim": "Прямая параллель с `zero_deriv_near_constant` из § 4.7 главы 5.4: нулевая производная влечёт почти-постоянство.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MeanValueTheorem.v:331: udiff_on f f' a b -> (f' x == 0 на [a,b]) -> 0 < eps -> exists N, |f (walk_point a step (S N)) - f a| <= eps * (b - a)."
+  },
+  {
+   "line": 514,
+   "theorem": null,
+   "claim": "Общего цепного правила в ядре нет, как уже отмечалось в § 5.4 и § 5.5.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: правил цепочки для has_derivative и udiff_on, кроме udiff_chain_affine и udiff_chain_affine_neg, нет (fps_chain_rule в FormalPowerSeries.v — о формальных степенных рядах). Проверено поиском, не компилятором."
+  },
+  {
+   "line": 515,
+   "theorem": "udiff_chain_affine",
+   "claim": "Есть только *аффинный* случай: `udiff_chain_affine` (`FTC.v`) — цепное правило для внутренней функции $g = c\\cdot x + d$ при $c>0$, и `udiff_chain_affine_neg` при $c<0$; обе — для внешней функции, уважающей равенство рациональных.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 13, слово автора) — добавлено неназванное условие: у обеих цепных лемм посылка Proper (Qeq ==> Qeq) f."
+  },
+  {
+   "line": 518,
+   "theorem": "udiff_chain_affine_neg",
+   "claim": "`udiff_chain_affine_neg` при $c<0$; обе — для внешней функции, уважающей равенство рациональных.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Лемма существует (analysis/FTC.v); после шага 13 Части V она применяется в ftc_u_substitution_affine_neg."
+  },
+  {
+   "line": 519,
+   "theorem": "ftc_u_substitution_affine",
+   "claim": "На них построены леммы `ftc_u_substitution_affine` ($c>0$) и `ftc_u_substitution_affine_neg` ($c<0$): Риманова сумма функции $f'(cx+d)\\cdot c$ по отрезку $[a,b]$ приближает приращение $f(cx+d)$ — сеточная основная теорема для сложной функции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 13, слово автора): было — «на них построена аффинная замена» при одной применённой лемме (c > 0). Добавлена ftc_u_substitution_affine_neg (c < 0) и сама замена на уровне сумм — riemann_sum_affine_subst. Closed under the global context."
+  },
+  {
+   "line": 535,
+   "theorem": "lipschitz_uniform_cont",
+   "file": "src/analysis/FTC.v",
+   "claim": "Строгий мост есть один: `lipschitz_uniform_cont` (`FTC.v`) доказывает, что липшицева функция равномерно непрерывна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:179: Lipschitz_on f a b K -> uniformly_continuous_on f a b (delta = eps / (K + 1)). Одноимённая лемма есть и в analysis/HeineBorelComplete.v:307; глава называет FTC.v."
+  },
+  {
+   "line": 537,
+   "theorem": "Lipschitz_on",
+   "file": "src/analysis/FTC.v",
+   "claim": "Понятия `Lipschitz_on` и `uniformly_continuous_on` определены здесь же.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:43 и :49. Оба имени объявлены и в других файлах: Lipschitz_on — ещё в analysis/Continuity.v:55 и analysis/HeineBorelComplete.v:72; uniformly_continuous_on — всего в семи файлах."
+  },
+  {
+   "line": 540,
+   "theorem": "udiff_bounded_deriv_lipschitz",
+   "file": "src/analysis/FTC.v",
+   "claim": "Мост от дифференцируемости к липшицевости тоже есть: теорема `udiff_bounded_deriv_lipschitz` (`FTC.v`) — равномерно дифференцируемая функция с ограниченной производной ($|f'|\\le M$ на отрезке) липшицева на этом отрезке с константой $M$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 14, слово автора): было «условие — функция уважает равенство рациональных» — оговорка снята вместе с посылкой. udiff_bounded_deriv_lipschitz : udiff_on f f' a b -> (|f'| <= M на отрезке) -> 0 <= M -> Lipschitz_on f a b M. Closed under the global context."
+  },
+  {
+   "line": 543,
+   "theorem": "udiff_bounded_on",
+   "claim": "Из неё следует `udiff_bounded_on` — ограниченность значений на всём отрезке. Рядом стоят `lipschitz_bounded` — ограниченность функции, если она уже липшицева, — и сеточные MVT-оценки приращений (например, `bounded_deriv_bounded_increment` из § 5.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3, слово автора): было «udiff_implies_bounded — оценка значений через слой теоремы о среднем»; названа новая udiff_bounded_on (выведена из udiff_bounded_deriv_lipschitz и lipschitz_bounded)",
+   "file": "src/analysis/FTC.v"
+  },
+  {
+   "line": 557,
+   "theorem": "derivative_integral_duality",
+   "claim": "Теорема утверждает для $a<b$ две вещи: во-первых, существует процесс, и при `has_derivative` $f x (f' x)$ производная-процесс есть Коши (через `deriv_process_cauchy`); во-вторых, существует `integral_process` $f' a b$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:166: a < b -> (exists proc_d, forall x, has_derivative f x (f' x) -> is_Cauchy (deriv_process f x)) /\\ (exists proc_i, proc_i = integral_process f' a b) — совпадает; proc_d под квантором не используется, посылка a < b — тоже."
+  },
+  {
+   "line": 563,
+   "theorem": "deriv_process_cauchy",
+   "claim": "В коде первый процесс `proc_d` — *фиктивный* (буквально $\\lambda_. 0$, с авторским комментарием «dummy»); реальное содержание — переэкспорт `deriv_process_cauchy` из § 5.4 плюс тривиальное существование `integral_process`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:176: exists (fun _ => 0). (* dummy, the point is the forall statement *); далее exact (deriv_process_cauchy f x (f' x) Hd). deriv_process_cauchy — process/ProcessDerivative.v:205: has_derivative f x L -> is_Cauchy (deriv_process f x)."
+  },
+  {
+   "line": 564,
+   "theorem": "proc_d",
+   "file": "src/process/ProcessFTC.v",
+   "external": true,
+   "claim": "первый процесс `proc_d` — *фиктивный*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Не объявление, а имя связанной переменной в утверждении derivative_integral_duality (ProcessFTC.v:168)."
+  },
+  {
+   "line": 577,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Первый мост — `ftc_grid` этой главы: интеграл производной восстанавливает приращение функции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В форме утверждения ftc_grid: один уровень N на каждое eps, сравнение с f (walk_point a step (S N)) — см. записи к стр. 46 и 285."
+  },
+  {
+   "line": 579,
+   "theorem": "deriv_process_converges",
+   "claim": "Второй — `deriv_process_converges` из § 5.4: производная-процесс сходится к наклону.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process/ProcessDerivative.v:152: has_derivative f x L -> process_equiv (deriv_process f x) (const_process L) — сходимость в смысле process_equiv."
+  },
+  {
+   "line": 589,
+   "theorem": "ftc_interval_split",
+   "claim": "Лемма `ftc_interval_split` (`ProcessFTC.v`) утверждает, что для $a<m<b$ существуют процессы на $[a,m]$ и $[m,b]$, поточечно равные `integral_process`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:96: a < m -> m < b -> exists proc_left proc_right, (forall k, proc_left k == integral_process f' a m k) /\\ (forall k, proc_right k == integral_process f' m b k)."
+  },
+  {
+   "line": 593,
+   "theorem": "ftc_interval_split",
+   "claim": "Доказательство — предъявление двух процессов и `reflexivity`; лемма утверждает лишь *существование* под-процессов на подотрезках, но не равенство интеграла их сумме.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFTC.v:101–105: exists (integral_process f' a m), (integral_process f' m b). split; intro k; reflexivity. Посылки a < m и m < b не используются."
+  },
+  {
+   "line": 596,
+   "theorem": null,
+   "claim": "Полная аддитивность по интервалу потребовала бы отдельной теоремы, которой в опорных файлах нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: леммы об аддитивности riemann_sum или integral_process по отрезку нет ни в опорных файлах, ни в других (measure_additive в Measure.v и analysis/LebesgueMeasure.v — о длине отрезков). Проверено поиском, не компилятором."
+  },
+  {
+   "line": 613,
+   "theorem": null,
+   "claim": "в опорных файлах этой главы слабых производных и пространств Соболева *нет*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: слабой производной нет нигде; слово Sobolev есть в navier_stokes (ClassicalRegularity.v: sobolev_regularity s := s - 2 — счёт показателей, не пространство); stdlib/ProcessDistribution.v — функционалы на последовательностях, без производной. Проверено поиском."
+  },
+  {
+   "line": 632,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "сеточная основная теорема `ftc_grid` (Риманова сумма $f'$ приближает приращение $f$ при `udiff_on`) — содержательное ядро; телескоп и `rs_tele_error_bound`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три леммы RiemannIntegration.v (:314, :207, :219); все — Closed under the global context."
+  },
+  {
+   "line": 633,
+   "theorem": "ftc_error_const",
+   "claim": "точный процессный случай для аффинной функции (`ftc_error_const`); нулевая производная (`ftc_zero_deriv`); аффинная $\\varepsilon$-форма (`ftc_affine`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три леммы существуют и замкнуты. ftc_error_const — для f(x) = c * x (без свободного члена) и в форме process_equiv, не поуровневого нуля: см. запись к стр. 320."
+  },
+  {
+   "line": 634,
+   "theorem": "ftc_is_process_construction",
+   "claim": "процессная обёртка `ftc_error_process`, `ftc_is_process_construction`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оба объявления существуют; ftc_is_process_construction после шага 5 Части V собирает определение процесса ошибки, свойство Коши процесса сумм и обе эквивалентности (см. запись к § 6.1)."
+  },
+  {
+   "line": 635,
+   "theorem": "ftc_monotone",
+   "claim": "следствия: оценка приращения, монотонность, разность, абсолютная оценка;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ftc_increment_bound, ftc_monotone и ftc_strict_monotone, ftc_difference, ftc_absolute_value_bound (analysis/FTC.v) — все замкнуты. Монотонность доказана с зазором eps: см. запись к стр. 385."
+  },
+  {
+   "line": 636,
+   "theorem": "udiff_product",
+   "claim": "правило произведения `udiff_product`, интегрирование по частям `integration_by_parts`, `ibp_self` и `ibp_identity`, единственность первообразной `antiderivative_unique`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пять лемм IntegralApplications.v (:210, :447, :551, :693, :641); все — Closed under the global context."
+  },
+  {
+   "line": 637,
+   "theorem": "ftc_u_substitution_affine",
+   "claim": "аффинная замена переменной `ftc_u_substitution_affine`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:414 существует и замкнута; доказан случай c > 0 при Proper f, в форме сеточной основной теоремы для f (c*x+d): см. запись к стр. 504."
+  },
+  {
+   "line": 638,
+   "theorem": "lipschitz_uniform_cont",
+   "file": "src/analysis/FTC.v",
+   "claim": "липшицевость влечёт равномерную непрерывность (`lipschitz_uniform_cont`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis/FTC.v:179: Lipschitz_on f a b K -> uniformly_continuous_on f a b."
+  },
+  {
+   "line": 642,
+   "theorem": null,
+   "claim": "классическая двухчастная теорема ($F(x)=\\int_a^x f$, $F'=f$) в общем виде — доказана сеточная форма плюс точный аффинный случай; двухчастная формулировка — содержательное чтение, не теорема;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: функции-интеграла с переменным верхним пределом и утверждения F' = f в общем виде нет (process/ProcessAnalysis.v: ftc_constant, ftc_linear — частные случаи для c*y и квадрата, с другим определением производной-процесса). Проверено поиском."
+  },
+  {
+   "line": 643,
+   "theorem": "RealPoint",
+   "claim": "основная теорема для функций на классах `RealPoint` — здесь только $ℚ$-функции (предохранитель C2);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPoint := CauchySeq (RealPointSetoid.v:74); имя используется только в RealPointSetoid.v, RealPointMetric.v, RealPointTopology.v — утверждений об интеграле или производной на RealPoint в src нет."
+  },
+  {
+   "line": 645,
+   "theorem": "ftc_interval_split",
+   "claim": "аддитивность интеграла по интервалу как теорема (`ftc_interval_split` — лишь существование под-процессов);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует утверждению ProcessFTC.v:96 (см. запись к стр. 571)."
+  },
+  {
+   "line": 670,
+   "theorem": null,
+   "file": "src/RiemannIntegration.v",
+   "claim": "Ядра — `RiemannIntegration.v`, `FTC.v`, `IntegralApplications.v` — в шапках заявляют « none » или « 0 axioms »;",
+   "page_price": "шапки: none / 0 axioms",
+   "verdict": "ok",
+   "note": "Шапки: RiemannIntegration.v:13 и IntegralApplications.v:13 — «AXIOMS: none (fully constructive)»; analysis/FTC.v:16 — «STATUS: 28 Qed, 0 Admitted, 0 axioms». Объявлений Axiom и Parameter в трёх файлах нет; действительный счёт Qed — 18, 28, 19."
+  },
+  {
+   "line": 673,
+   "theorem": null,
+   "file": "src/process/ProcessFTC.v",
+   "claim": "14 Qed, 0 axioms",
+   "page_price": "шапка: 0 axioms",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 3, слово автора): после шага 3 в ProcessFTC.v 14 Qed (шапка файла исправлена); до шага 2 на странице стояло 8 при девяти"
+  },
+  {
+   "line": 674,
+   "theorem": "monotone_bounded_Cauchy",
+   "claim": "Но *некоторые* из этих файлов импортируют слои, где встречается классическая логика: например, `ProcessArithmetic.v`, где `classic` используется в `monotone_bounded_Cauchy`.",
+   "page_price": "classic используется в monotone_bounded_Cauchy",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): из примера убран «EVT_idx.v с локальным classic» — объявление снято; monotone_bounded_Cauchy (ProcessArithmetic.v) — Classical_Prop.classic"
+  },
+  {
+   "line": 675,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "`ProcessArithmetic.v`, где `classic` используется в `monotone_bounded_Cauchy`",
+   "page_price": "classic в monotone_bounded_Cauchy",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): прежняя запись была о местной аксиоме EVT_idx.v, её на странице больше нет; Print Assumptions monotone_bounded_Cauchy — Classical_Prop.classic"
+  },
+  {
+   "line": 676,
+   "theorem": null,
+   "file": "src/MeanValueTheorem.v",
+   "claim": "Сами `Differentiation.v` и `MeanValueTheorem.v` в шапках заявляют отсутствие аксиом.",
+   "page_price": "шапки: аксиом нет",
+   "verdict": "ok",
+   "note": "Differentiation.v:12 и MeanValueTheorem.v:14 — «AXIOMS: none (fully constructive)»; объявлений Axiom и Parameter в обоих файлах нет; по 18 Qed."
+  },
+  {
+   "line": 678,
+   "theorem": null,
+   "claim": "Огульно говорить «все тянут classic» не следует: импорт сам по себе не означает, что каждая лемма зависит от `classic` — статус конкретной теоремы устанавливается только командой `Print Assumptions` для неё самой.",
+   "page_price": "цена теорем главы не названа: устанавливается командой Print Assumptions",
+   "verdict": "ok",
+   "note": "Print Assumptions выполнен для всех 45 лемм и теорем, названных в главе: у 44 — Closed under the global context; у monotone_bounded_Cauchy — Classical_Prop.classic (её глава и приводит как пример). Глава может сказать это прямо."
+  },
+  {
+   "line": 683,
+   "theorem": null,
+   "file": "src/analysis/FTC.v",
+   "claim": "`Print Assumptions` выписан в финале `RiemannIntegration.v` (для `ftc_grid` и других) и `FTC.v` (для `lipschitz_uniform_cont`, `ftc_u_substitution_affine` и других); у `ProcessFTC.v` и `IntegralApplications.v` финального блока нет — для нужной теоремы его запускают отдельно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RiemannIntegration.v:599–601: ftc_grid, udiff_add, ftc_comparison; analysis/FTC.v:684–687: lipschitz_compose, lipschitz_uniform_cont, ftc_u_substitution_affine, udiff_sub_interval; в ProcessFTC.v и IntegralApplications.v команды Print Assumptions нет."
+  },
+  {
+   "line": 689,
+   "theorem": "derivative_integral_duality",
+   "claim": "сходимость процесса в `ProcessFTC.v` доказана теоремой `ftc_process_converges` — через `ftc_grid_eventually`; теорема `derivative_integral_duality` содержит фиктивный процесс; `ftc_interval_split` не есть аддитивность; многие леммы `ProcessFTC.v` — переэкспорты уже доказанного.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора): первая часть фразы была «ftc_grid назван в шапке ProcessFTC.v среди правил, но в доказательствах файла не вызывается»; остальное без изменений"
+  },
+  {
+   "line": 698,
+   "theorem": "ftc_process_converges",
+   "file": "src/process/ProcessFTC.v",
+   "claim": "Под $P4$ основная теорема анализа — не одна завершённая предельная идентичность $\\int_a^b f' = f(b)-f(a)$, а *процессная связь*: семейство приближений, в котором на каждом уровне сетки Риманова сумма производной приближает приращение функции, а ошибка с измельчением стремится к нулю.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 2, слово автора): было «а точность растёт с измельчением»; доказана сходимость (ftc_process_converges, ftc_error_process_vanishes), не убывание на каждом шаге"
+  },
+  {
+   "line": 703,
+   "theorem": "ftc_grid",
+   "file": "src/RiemannIntegration.v",
+   "claim": "Содержательное ядро — division-free сеточная оценка `ftc_grid`; для аффинных функций связь точна, для общих равномерно дифференцируемых функций — сеточно-приближённа, и приближение контролируется именно оценкой `ftc_grid`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует ftc_grid и ftc_error_const; о форме точности аффинного случая — запись к стр. 320."
+  },
+  {
+   "line": 728,
+   "theorem": null,
+   "file": "src/analysis/FTC.v",
+   "claim": "E/R/R-разметка в шапках файлов `FTC.v` (объекты) и `ProcessFTC.v` (процессы); здесь разворачивается по образцу Части I.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска верна: строки Elements / Roles / Rules стоят в шапках analysis/FTC.v:9–11 и process/ProcessFTC.v:2–4."
+  },
+  {
+   "line": 521,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 13: при c < 0 и udiff_on f f' (c*b+d) (c*a+d) Риманова сумма f'(cx+d)*c по [a,b] приближает приращение f(cx+d) с точностью eps*(b-a) на некотором уровне. Closed under the global context.",
+   "theorem": "ftc_u_substitution_affine_neg",
+   "file": "src/analysis/FTC.v",
+   "claim": "`ftc_u_substitution_affine_neg` ($c<0$)"
+  },
+  {
+   "line": 523,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 13: Proper phi -> riemann_sum (fun x => phi (c*x+d) * c) a step n == riemann_sum phi (c*a+d) (c*step) n. Closed under the global context.",
+   "theorem": "riemann_sum_affine_subst",
+   "file": "src/analysis/FTC.v",
+   "claim": "Саму замену на уровне сумм даёт лемма `riemann_sum_affine_subst`: сумма функции $\\varphi(cx+d)\\cdot c$ по сетке с шагом $s$ равна сумме функции $\\varphi$ по сетке с шагом $c\\cdot s$ от точки $ca+d$ — точно, при любом знаке $c$."
+  },
+  {
+   "line": 79,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 14: udiff_on f f' a b -> f (walk_point a ((b - a) / (N+1)) (N+1)) == f b — значение в последнем узле сетки равно значению в b; из continuous_at_qeq_values и udiff_continuous_at. Closed under the global context.",
+   "theorem": "udiff_walk_endpoint_value",
+   "file": "src/MeanValueTheorem.v",
+   "claim": "функция, непрерывная в двух равных как числа точках, принимает в них равные значения (`udiff_walk_endpoint_value`)."
+  }
+ ]
+}

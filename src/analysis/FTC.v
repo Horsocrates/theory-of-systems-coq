@@ -13,7 +13,7 @@
 (*  P4 connection: integral = process of accumulation indexed by grid       *)
 (*  refinement                                                              *)
 (*                                                                          *)
-(*  STATUS: 28 Qed, 0 Admitted, 0 axioms                                   *)
+(*  STATUS: 35 Qed, 0 Admitted, 0 axioms                                   *)
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
 
@@ -685,3 +685,188 @@ Print Assumptions lipschitz_compose.
 Print Assumptions lipschitz_uniform_cont.
 Print Assumptions ftc_u_substitution_affine.
 Print Assumptions udiff_sub_interval.
+
+(* ========================================================================= *)
+(*  EXACT FORMS (Nov 2026)                                                   *)
+(*  The grid lemmas above speak of ONE grid level, up to eps, at the LAST     *)
+(*  node.  Here the eps disappears and the statements hold on the whole      *)
+(*  interval.  The condition Proper (Qeq ==> Qeq) f, which stood here at      *)
+(*  first, was dropped in Nov 2026: on [a,b] it follows from uniform          *)
+(*  differentiability (MeanValueTheorem.udiff_respects_qeq).                  *)
+(* ========================================================================= *)
+
+(** The Riemann sum of a nonnegative function is nonnegative -- exactly,
+    on every level, with no appeal to the fundamental theorem. *)
+Lemma riemann_sum_deriv_nonneg_exact : forall (g : Q -> Q) (a b : Q) (N : nat),
+  a < b ->
+  (forall x : Q, a <= x -> x <= b -> 0 <= g x) ->
+  0 <= riemann_sum g a ((b - a) / inject_Z (Z.of_nat (S N))) (S N).
+Proof.
+  intros g a b N Hab Hnn.
+  apply riemann_sum_nonneg.
+  - intros k Hk.
+    assert (Hin := walk_point_in_interval a b N k Hab).
+    assert (Hk_le : (k <= S N)%nat) by lia.
+    specialize (Hin Hk_le). destruct Hin as [Hlo Hhi].
+    apply Hnn; assumption.
+  - apply Qlt_le_weak. apply walk_step_pos. exact Hab.
+Qed.
+
+(** A nonnegative derivative gives a nondecreasing increment: f a <= f b. *)
+Theorem nonneg_deriv_nondecreasing : forall (f f' : Q -> Q) (a b : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> 0 <= f' x) ->
+  f a <= f b.
+Proof.
+  intros f f' a b Hud Hnn.
+  assert (Hab : a < b) by (destruct Hud; assumption).
+  destruct (Qlt_le_dec (f b) (f a)) as [Hlt | Hle]; [| exact Hle].
+  exfalso.
+  set (eps := (f a - f b) * (1#2) / (b - a)).
+  assert (Heps : 0 < eps).
+  { unfold eps. apply Qlt_shift_div_l; lra. }
+  destruct (ftc_monotone f f' a b eps Hud Hnn Heps) as [N HN].
+  cbv zeta in HN.
+  rewrite (udiff_walk_endpoint_value f f' a b N Hud) in HN.
+  assert (Hcalc : eps * (b - a) == (f a - f b) * (1#2)).
+  { unfold eps. field. lra. }
+  rewrite Hcalc in HN. lra.
+Qed.
+
+(** Exact bound of the increment by a bound of the derivative. *)
+Lemma udiff_increment_exact : forall (f f' : Q -> Q) (a b M : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> Qabs (f' x) <= M) ->
+  Qabs (f b - f a) <= M * (b - a).
+Proof.
+  intros f f' a b M Hud HM.
+  assert (Hab : a < b) by (destruct Hud; assumption).
+  destruct (Qlt_le_dec (M * (b - a)) (Qabs (f b - f a))) as [Hlt | Hle]; [| exact Hle].
+  exfalso.
+  set (D := Qabs (f b - f a)) in *.
+  set (eps := (D - M * (b - a)) * (1#2) / (b - a)).
+  assert (Heps : 0 < eps).
+  { unfold eps. apply Qlt_shift_div_l; lra. }
+  destruct (bounded_deriv_bounded_increment f f' a b M eps Hud HM Heps) as [N HN].
+  cbv zeta in HN.
+  rewrite (udiff_walk_endpoint_value f f' a b N Hud) in HN. fold D in HN.
+  assert (Hcalc : (M + eps) * (b - a) == M * (b - a) + (D - M * (b - a)) * (1#2)).
+  { unfold eps. field. lra. }
+  rewrite Hcalc in HN. lra.
+Qed.
+
+(** A bounded derivative gives the Lipschitz property on the whole interval. *)
+Theorem udiff_bounded_deriv_lipschitz : forall (f f' : Q -> Q) (a b M : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> Qabs (f' x) <= M) ->
+  0 <= M ->
+  Lipschitz_on f a b M.
+Proof.
+  intros f f' a b M Hud HM HMnn.
+  split; [exact HMnn |].
+  intros x y Hax Hxb Hay Hyb.
+  destruct (Q_dec x y) as [[Hlt | Hgt] | Heq].
+  - (* x < y *)
+    assert (Hsub : udiff_on f f' x y).
+    { apply (udiff_sub_interval f f' a b x y Hud); assumption. }
+    assert (HM' : forall z : Q, x <= z -> z <= y -> Qabs (f' z) <= M).
+    { intros z Hz1 Hz2. apply HM; lra. }
+    assert (Hinc := udiff_increment_exact f f' x y M Hsub HM').
+    assert (Habs1 : Qabs (f x - f y) == Qabs (f y - f x)).
+    { assert (He : f x - f y == -(f y - f x)) by ring.
+      qabs_rw He. apply Qabs_opp. }
+    assert (Habs2 : Qabs (x - y) == y - x).
+    { rewrite Qabs_neg; lra. }
+    rewrite Habs1, Habs2. exact Hinc.
+  - (* y < x *)
+    assert (Hsub : udiff_on f f' y x).
+    { apply (udiff_sub_interval f f' a b y x Hud); assumption. }
+    assert (HM' : forall z : Q, y <= z -> z <= x -> Qabs (f' z) <= M).
+    { intros z Hz1 Hz2. apply HM; lra. }
+    assert (Hinc := udiff_increment_exact f f' y x M Hsub HM').
+    assert (Habs2 : Qabs (x - y) == x - y).
+    { rewrite Qabs_pos; lra. }
+    rewrite Habs2. exact Hinc.
+  - (* x == y *)
+    assert (Hf : f x - f y == 0).
+    { rewrite (udiff_respects_qeq f f' a b x y Hud Hax Hxb Hay Hyb Heq). ring. }
+    qabs_rw Hf.
+    assert (Hz : Qabs 0 == 0) by reflexivity.
+    assert (Hnn : 0 <= M * Qabs (x - y)).
+    { apply Qmult_le_0_compat; [exact HMnn | apply Qabs_nonneg]. }
+    lra.
+Qed.
+
+(** ...and a bound of the VALUES on the whole interval, not only at the
+    last node of one grid. *)
+Theorem udiff_bounded_on : forall (f f' : Q -> Q) (a b M : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> Qabs (f' x) <= M) ->
+  0 <= M ->
+  forall x : Q, a <= x -> x <= b ->
+    Qabs (f x) <= Qabs (f a) + M * (b - a).
+Proof.
+  intros f f' a b M Hud HM HMnn x Hax Hxb.
+  assert (Hab : a < b) by (destruct Hud; assumption).
+  assert (Hlip := udiff_bounded_deriv_lipschitz f f' a b M Hud HM HMnn).
+  assert (Hb := lipschitz_bounded f a b M Hlip x Hax Hxb).
+  assert (Hba : Qabs (b - a) == b - a) by (rewrite Qabs_pos; lra).
+  rewrite Hba in Hb.
+  assert (Hdecomp : f x == f a + (f x - f a)) by ring.
+  qabs_rw Hdecomp.
+  apply Qle_trans with (Qabs (f a) + Qabs (f x - f a)); [apply Qabs_triangle |].
+  lra.
+Qed.
+
+(* ========================================================================= *)
+(*  AFFINE SUBSTITUTION ON THE LEVEL OF SUMS; THE CASE c < 0 (Nov 2026)      *)
+(* ========================================================================= *)
+
+(** The substitution u = c x + d on the level of Riemann sums: the nodes of
+    the x-grid go to the nodes of the u-grid with step c * step, and the
+    factor c goes into the step.  Any sign of c, any step, any number of
+    nodes; an EXACT equality of the two sums. *)
+Lemma riemann_sum_affine_subst :
+  forall (phi : Q -> Q) (a step c d : Q) (n : nat),
+  Proper (Qeq ==> Qeq) phi ->
+  riemann_sum (fun x => phi (c * x + d) * c) a step n ==
+  riemann_sum phi (c * a + d) (c * step) n.
+Proof.
+  intros phi a step c d n Hp. induction n as [| n IH].
+  - reflexivity.
+  - assert (HL : riemann_sum (fun x => phi (c * x + d) * c) a step (S n) ==
+                 phi (c * walk_point a step n + d) * c * step +
+                 riemann_sum (fun x => phi (c * x + d) * c) a step n) by reflexivity.
+    assert (HR : riemann_sum phi (c * a + d) (c * step) (S n) ==
+                 phi (walk_point (c * a + d) (c * step) n) * (c * step) +
+                 riemann_sum phi (c * a + d) (c * step) n) by reflexivity.
+    assert (Hnode : c * walk_point a step n + d ==
+                    walk_point (c * a + d) (c * step) n).
+    { rewrite !walk_point_qeq. ring. }
+    rewrite HL, HR, IH, (Hp _ _ Hnode). ring.
+Qed.
+
+(** The grid FTC for f (c x + d) when c < 0 (until Nov 2026 only c > 0 was
+    covered; [udiff_chain_affine_neg] was used nowhere). *)
+Lemma ftc_u_substitution_affine_neg :
+  forall (f f' : Q -> Q) (a b c d eps : Q),
+  Proper (Qeq ==> Qeq) f ->
+  c < 0 ->
+  udiff_on f f' (c * b + d) (c * a + d) ->
+  a < b ->
+  0 < eps ->
+  exists N : nat,
+    let step := (b - a) / inject_Z (Z.of_nat (S N)) in
+    Qabs (riemann_sum (fun x => f' (c * x + d) * c) a step (S N) -
+          (f (c * walk_point a step (S N) + d) - f (c * a + d))) <=
+    eps * (b - a).
+Proof.
+  intros f f' a b c d eps Hp Hc Hud Hab Heps.
+  assert (Hcomp : udiff_on (fun x => f (c * x + d)) (fun x => f' (c * x + d) * c) a b).
+  { apply udiff_chain_affine_neg; assumption. }
+  exact (ftc_grid _ _ a b eps Hcomp Heps).
+Qed.
+
+Print Assumptions nonneg_deriv_nondecreasing.
+Print Assumptions udiff_bounded_deriv_lipschitz.
+Print Assumptions udiff_bounded_on.

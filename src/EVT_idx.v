@@ -335,8 +335,6 @@ Qed.
 (*                     ARCHIMEDEAN AND NEAR GRID POINT                       *)
 (* ========================================================================= *)
 
-Axiom classic : forall P : Prop, P \/ ~ P.
-
 Fixpoint pow2 (n : nat) : positive :=
   match n with O => 1%positive | S n' => (2 * pow2 n')%positive end.
 
@@ -400,63 +398,36 @@ Proof.
   field. exact Hne.
 Qed.
 
+(** Helper: the grid cell containing x is found by COMPUTATION -- walk the
+    cells from the right, comparing x with a grid point (Qlt_le_dec).
+    Nov 2026: this search used to go through [classic]; it never needed it,
+    so the whole extreme value chain below is now axiom-free. *)
+Lemma x_between_aux : forall a b n x m,
+  (m <= n)%nat -> (0 < m)%nat ->
+  grid_point a b n O <= x -> x <= grid_point a b n m ->
+  exists k, (k < m)%nat /\ grid_point a b n k <= x <= grid_point a b n (S k).
+Proof.
+  intros a b n x m. induction m as [|m' IH]; intros Hmn Hpos Hlo Hhi.
+  - lia.
+  - destruct (Qlt_le_dec x (grid_point a b n m')) as [Hlt | Hge].
+    + destruct m' as [|m''].
+      * exfalso. apply (Qlt_irrefl x).
+        apply Qlt_le_trans with (grid_point a b n O); assumption.
+      * assert (H1 : (S m'' <= n)%nat) by lia.
+        assert (H2 : (0 < S m'')%nat) by lia.
+        destruct (IH H1 H2 Hlo (Qlt_le_weak _ _ Hlt)) as [k [Hk Hbetween]].
+        exists k. split; [lia | exact Hbetween].
+    + exists m'. split; [lia | split; assumption].
+Qed.
+
 Lemma x_between_grid_points : forall a b n x,
   a < b -> (n > 0)%nat -> a <= x <= b ->
   exists k, (k < n)%nat /\ grid_point a b n k <= x <= grid_point a b n (S k).
 Proof.
-  intros a b n x Hab Hn Hx.
-  destruct Hx as [Hax Hxb].
-  revert x Hax Hxb.
-  induction n as [|n' IH].
-  - lia.
-  - intros x Hax Hxb.
-    destruct n' as [|n''].
-    + (* n = 1: only interval is [gp(0), gp(1)] = [a, b] *)
-      exists 0%nat. split. { lia. }
-      split.
-      * rewrite grid_point_0 by lia. exact Hax.
-      * rewrite grid_point_n_is_b by lia. exact Hxb.
-    + (* n >= 2 *)
-      destruct (Qlt_le_dec (grid_point a b (S (S n'')) 1) x) as [Hgt | Hle].
-      * (* x > gp(1): use classical choice *)
-        destruct (classic (exists k, (k < S (S n''))%nat /\
-                  grid_point a b (S (S n'')) k <= x /\
-                  x <= grid_point a b (S (S n'')) (S k))) as [Hex | Hnex].
-        { exact Hex. }
-        { exfalso.
-          assert (Hcover : forall k, (k < S (S n''))%nat -> 
-                   grid_point a b (S (S n'')) k > x \/ 
-                   x > grid_point a b (S (S n'')) (S k)).
-          {
-            intros k Hk.
-            destruct (Qlt_le_dec x (grid_point a b (S (S n'')) k)) as [H1 | H1].
-            - left. exact H1.
-            - destruct (Qlt_le_dec (grid_point a b (S (S n'')) (S k)) x) as [H2 | H2].
-              + right. exact H2.
-              + exfalso. apply Hnex. exists k. split. exact Hk. split; assumption.
-          }
-          assert (Hchain : forall j, (j < S (S n''))%nat -> x > grid_point a b (S (S n'')) (S j)).
-          {
-            induction j.
-            - intros _. exact Hgt.
-            - intro Hj.
-              assert (Hj' : (j < S (S n''))%nat) by lia.
-              specialize (IHj Hj').
-              destruct (Hcover (S j) Hj) as [Hbad | Hok].
-              + exfalso. apply (Qlt_irrefl x).
-                apply Qlt_trans with (grid_point a b (S (S n'')) (S j)); assumption.
-              + exact Hok.
-          }
-          assert (Hcontra : x > grid_point a b (S (S n'')) (S (S n''))).
-          { apply Hchain. lia. }
-          rewrite grid_point_n_is_b in Hcontra by lia.
-          apply Qlt_not_le in Hcontra. apply Hcontra. exact Hxb.
-        }
-      * (* x <= gp(1): x is in first interval *)
-        exists 0%nat. split. { lia. }
-        split.
-        { rewrite grid_point_0 by lia. exact Hax. }
-        { exact Hle. }
+  intros a b n x Hab Hn [Hax Hxb].
+  apply (x_between_aux a b n x n); [lia | lia | |].
+  - rewrite grid_point_0 by lia. exact Hax.
+  - rewrite grid_point_n_is_b by lia. exact Hxb.
 Qed.
 
 Lemma near_grid_point : forall a b n x,
@@ -660,6 +631,31 @@ Qed.
   This follows directly from max_is_f_of_argmax and sup_process_is_Cauchy.
 *)
 
+(** The majorant property: every value of f on [a,b] is eventually below
+    the grid maximum, up to any eps.  (Until Nov 2026 it was proved inside
+    the file -- f_bounded_by_grid_max -- but was not part of the theorem.) *)
+Theorem EVT_idx_majorant : forall f a b,
+  a < b ->
+  uniformly_continuous_on f a b ->
+  forall x, a <= x <= b ->
+    forall eps, eps > 0 ->
+      exists N, forall n, (n > N)%nat -> f x <= sup_process f a b n + eps.
+Proof.
+  intros f a b Hab Hcont x Hx eps Heps.
+  destruct (Hcont eps Heps) as [delta [Hdelta Hdc]].
+  assert (Hba : b - a > 0) by (apply Qlt_minus_pos; exact Hab).
+  destruct (Archimedean_nat (b - a) delta Hba Hdelta) as [N [HN_pos HN]].
+  exists N. intros n Hn.
+  assert (Hspacing : (b - a) / inject_Z (Z.of_nat (S n)) < delta).
+  { apply Qle_lt_trans with ((b - a) / inject_Z (Z.of_nat N)).
+    - apply Qdiv_le_compat_l;
+        [exact Hba | unfold Qlt, inject_Z; simpl; lia | unfold Qle, inject_Z; simpl; lia].
+    - exact HN. }
+  apply Qlt_le_weak. unfold sup_process.
+  apply f_bounded_by_grid_max with delta; try assumption.
+  lia.
+Qed.
+
 Theorem EVT_strong_process : forall f a b,
   a < b ->
   uniformly_continuous_on f a b ->
@@ -668,10 +664,14 @@ Theorem EVT_strong_process : forall f a b,
   (* argmax_process stays in [a,b] *)
   (forall n, a <= argmax_process f a b n <= b) /\
   (* The sup value equals f(argmax) at each step *)
-  (forall n, sup_process f a b n = f (argmax_process f a b n)).
+  (forall n, sup_process f a b n = f (argmax_process f a b n)) /\
+  (* The values majorize f on the whole interval (added Nov 2026) *)
+  (forall x, a <= x <= b ->
+     forall eps, eps > 0 ->
+       exists N, forall n, (n > N)%nat -> f x <= sup_process f a b n + eps).
 Proof.
   intros f a b Hab Hcont.
-  split; [| split].
+  split; [| split; [| split]].
   - (* sup_process is Cauchy *)
     apply sup_process_is_Cauchy; assumption.
   - (* argmax in [a,b] *)
@@ -682,6 +682,8 @@ Proof.
   - (* sup = f(argmax) *)
     intro n. unfold sup_process, argmax_process.
     apply max_is_f_of_argmax.
+  - (* majorant *)
+    exact (EVT_idx_majorant f a b Hab Hcont).
 Qed.
 
 (**
@@ -691,12 +693,15 @@ Qed.
   1. The sequence of maximum values converges (Cauchy)
   2. Each approximate maximizer is in [a,b]
   3. The max value at step n equals f applied to the argmax at step n
+  4. Every value of f on [a,b] is eventually below the max value + eps
   
   In classical analysis with R, we would additionally prove:
   - argmax_process is Cauchy (requires leftmost + uniform continuity)
   - Both processes converge to the same limit (supremum, achieved at argmax_star)
   
-  Over Q, the argmax_process may not be Cauchy (limit could be irrational).
+  The argmax_process need not be Cauchy: with two equal maxima the position
+  jumps between them for ever (proved: EVT_ArgmaxNotCauchy.v).  A limit that
+  is irrational would NOT be an obstacle: such a process is still Cauchy.
   But the VALUE process (sup_process) IS Cauchy, giving us the supremum.
   
   This is the P4-philosophy: the MAXIMUM exists as a process,

@@ -1,0 +1,1160 @@
+{
+ "batch": "audit-part-05",
+ "chapter": "05 Топология и анализ процессов/03 Непрерывность.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 23,
+   "theorem": null,
+   "claim": "Теорема о промежуточном значении: непрерывная функция, меняющая знак, где-то обращается в нуль. Теорема об экстремуме: непрерывная функция на отрезке достигает максимума.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Вводная классическая формулировка («две опоры классического анализа»). В формализации обе теоремы имеют процессную форму: IVT_process — |f(c n)| < eps начиная с некоторого шага; EVT_complete — процесс значений Коши с мажорантой. Глава оговаривает это в § 3.4.1, § 3.4.5, § 3.6.1."
+  },
+  {
+   "line": 56,
+   "theorem": null,
+   "claim": "Обе главные теоремы — о промежуточном значении и об экстремуме — формализованы с гипотезой *равномерной* непрерывности, не поточечной.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылка uniformly_continuous_on f a b стоит в IVT_process (IVT_ERR.v:256), process_IVT (ProcessIVT.v:128), ivt_cauchy_real (IVT_CauchyReal.v:309), EVT_complete (EVT_ERR.v:929), EVT_strong_process (EVT_idx.v:663) и в доказательствах применяется."
+  },
+  {
+   "line": 68,
+   "theorem": "EVT_strong_process",
+   "file": "src/EVT_idx.v",
+   "claim": "Обе большие теоремы этой главы — о промежуточном значении и об экстремуме — как показала проверка `Print Assumptions`, обходятся без допущений.",
+   "page_price": "обе теоремы — без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «Доказательство теоремы об экстремуме использует аксиому classic»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context"
+  },
+  {
+   "line": 100,
+   "theorem": null,
+   "claim": "Опорных файлов девять; к ним примыкают головной файл `analysis/Continuity.v` и смежная заготовка `ProcessContinuity.v`. Блоки кода сверены с репозиторием дословно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): девять файлов несут материал главы (Topology, UniformConvergence, HeineBorelComplete, IVT_ERR, ProcessIVT, IVT_CauchyReal, EVT_ERR, EVT_idx, ProcessEVT); два названных рядом — примыкающие. Три блока кода, отличавшиеся от исходника записью (continuous_at, continuous_preserves_open_preimage, lipschitz_uniform_cont), приведены к исходнику; у третьего в исходнике снята лишняя посылка a <= b."
+  },
+  {
+   "line": 103,
+   "theorem": null,
+   "claim": "Топологический слой непрерывности, теорема о промежуточном значении и теорема об экстремуме — без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «теорема об экстремуме — с явно учтённым L3»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context",
+   "assumptions": "Topology.v (19 лемм), IVT_process, process_IVT, ivt_cauchy_real: Closed under the global context; EVT_complete: Classical_Prop.classic; EVT_strong_process: EVT_idx.classic"
+  },
+  {
+   "line": 118,
+   "theorem": "continuous_at",
+   "file": "src/stdlib/Topology.v",
+   "claim": "В Rocq оно записано в файле `Topology.v`, с которым глава познакомилась ещё в § 2.2:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:45 (continuous_at) и :50 (continuous). Блок главы пишет `eps > 0`, `delta > 0`, в файле `0 < eps`, `0 < delta` — это одна и та же запись (`>` есть нотация для перевёрнутого `<`); continuous совпадает буквально. Словесное чтение соответствует кванторам."
+  },
+  {
+   "line": 134,
+   "theorem": "continuous_on",
+   "file": "src/UniformConvergence.v",
+   "claim": "В репозитории эта форма записана в `UniformConvergence.v`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "UniformConvergence.v:142; блок кода совпадает с исходником."
+  },
+  {
+   "line": 147,
+   "theorem": "continuous_on",
+   "file": "src/UniformConvergence.v",
+   "claim": "`continuous_on f a b` — та же поточечная непрерывность, ограниченная отрезком и записанная через приращение. Это — главная интервальная форма определения непрерывности среди опорных файлов главы",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: § 3.3.1 называет каноном другое определение с тем же именем — analysis/Continuity.v:41 (через x и x0, без приращения); третье — HeineBorel_ERR.v:562. Моста между записями в формализации нет. Проверено пробным файлом: каноническая запись влечёт запись через приращение без условий; обратно — для функций, уважающих равенство дробей."
+  },
+  {
+   "line": 160,
+   "theorem": "identity_continuous",
+   "claim": "Тождество $x \\mapsto x$ непрерывно — малое изменение аргумента есть в точности малое изменение значения (лемма `identity_continuous`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:190: continuous (fun x => x); в доказательстве delta := eps."
+  },
+  {
+   "line": 162,
+   "theorem": "constant_continuous",
+   "claim": "Постоянная функция непрерывна тривиально — значение не меняется вовсе (`constant_continuous`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:199: forall c, continuous (fun _ => c)."
+  },
+  {
+   "line": 164,
+   "theorem": "add_const_continuous",
+   "claim": "Сдвиг $x \\mapsto x + c$ непрерывен (`add_const_continuous`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:224: forall c, continuous (fun x => x + c)."
+  },
+  {
+   "line": 167,
+   "theorem": "continuous_at_sum",
+   "claim": "Сумма двух непрерывных в точке функций непрерывна в этой точке (`continuous_at_sum`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:346: continuous_at f x -> continuous_at g x -> continuous_at (fun y => f y + g y) x."
+  },
+  {
+   "line": 169,
+   "theorem": "continuous_at_neg",
+   "claim": "отрицание непрерывной непрерывно (`continuous_at_neg`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:373: continuous_at f x -> continuous_at (fun y => - f y) x — утверждение в точке."
+  },
+  {
+   "line": 170,
+   "theorem": "continuous_at_comp",
+   "claim": "композиция непрерывных непрерывна (`continuous_at_comp`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:210: continuous_at g x -> continuous_at f (g x) -> continuous_at (fun y => f (g y)) x — внутренняя функция непрерывна в x, внешняя — в g x."
+  },
+  {
+   "line": 176,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "Полное утверждение — что непрерывны *все* многочлены — требует ещё одного звена: леммы о сохранении непрерывности при умножении.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: леммы о произведении в Topology.v нет; поиск по src (continuous_at_mul, continuous_mul и подобные) её не находит и в других файлах."
+  },
+  {
+   "line": 181,
+   "theorem": "identity_continuous",
+   "claim": "`continuous_at_comp` и отправные `identity_continuous`, `constant_continuous`), такого звена нет",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): имя было разорвано переносом строки («identity_ continuous»); собрано на одной строке. Объявление существует (Topology.v)."
+  },
+  {
+   "line": 193,
+   "theorem": "continuous_preserves_open_preimage",
+   "file": "src/stdlib/Topology.v",
+   "claim": "И его ToS не постулирует отдельно, а *выводит* из $\\delta$-$\\varepsilon$ определения — показывая, что два описания непрерывности суть одно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) (шаг главы V.2) — слова те же, доведена формализация. В stdlib/Topology.v добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))); до шага 8 была доказана одна сторона (continuous_preserves_open_preimage). Closed under the global context."
+  },
+  {
+   "line": 216,
+   "theorem": "continuous_preserves_open_preimage",
+   "file": "src/stdlib/Topology.v",
+   "claim": "Это утверждение — доказанная в `Topology.v` теорема, подтверждающая проведённый вывод: прообраз открытого множества под непрерывной функцией открыт.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Topology.v:235 (объявлено как Lemma): forall f, continuous f -> forall S, is_open S -> is_open (fun x => S (f x)). Блок главы (стр. 206) переставляет кванторы и пишет Theorem — по смыслу то же. Ход доказательства пересказан верно. Closed under the global context."
+  },
+  {
+   "line": 226,
+   "theorem": "continuous_preserves_open_preimage",
+   "file": "src/stdlib/Topology.v",
+   "claim": "непрерывная функция — ровно та, что уважает топологическую структуру, построенную предыдущей главой.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) — слова те же, доведена формализация: «ровно та» теперь теорема — continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))). Closed under the global context."
+  },
+  {
+   "line": 231,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "получено *конструктивно*, без обращения к законам логики; `Topology.v`, как отмечалось ещё в § 2.2, не использует ни одной аксиомы.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "В файле 19 Qed, нет Axiom и Parameter, подключена только стандартная библиотека; Print Assumptions всех 19 лемм — Closed under the global context.",
+   "assumptions": "Closed under the global context (все 19 лемм файла)"
+  },
+  {
+   "line": 233,
+   "theorem": null,
+   "claim": "Без аксиом обойдутся и две большие теоремы анализа, к которым глава переходит дальше.",
+   "page_price": "обе большие теоремы — без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «Аксиомы понадобятся дальше — когда глава перейдёт к двум большим теоремам анализа» (строка 10 таблицы главы V.3 в отчёте 03); IVT_process, ivt_cauchy_real, EVT_strong_process, EVT_complete — Closed under the global context",
+   "assumptions": "IVT_process, process_IVT, ivt_cauchy_real: Closed under the global context; EVT_complete: Classical_Prop.classic; EVT_strong_process: EVT_idx.classic"
+  },
+  {
+   "line": 240,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "*правило — непрерывность есть конституция: прообраз открытого открыт*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка Topology.v, строки 7–8: «Rules: open = every point has a ball inside (constitution), continuous = preimage of open is open (constitution)». Пересказ точен; само определение continuous в файле — дельта-эпсилон (:50)."
+  },
+  {
+   "line": 248,
+   "theorem": "continuous_preserves_open_preimage",
+   "file": "src/stdlib/Topology.v",
+   "claim": "Сама непрерывность есть *конституция* — в двух равносильных формах: локальной ($\\delta$-$\\varepsilon$) и топологической («прообраз открытого открыт»); § 3.2.3 показал, что это одно правило, записанное дважды.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) (шаг главы V.2) — слова те же, доведена формализация. В stdlib/Topology.v добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))); до шага 8 была доказана одна сторона (continuous_preserves_open_preimage). Closed under the global context."
+  },
+  {
+   "line": 252,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "замыкание класса непрерывных функций относительно суммы, отрицания, сдвига и композиции (§ 3.2.2); всё это конструктивно, без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "continuous_at_sum, continuous_at_neg, add_const_continuous, continuous_at_comp — Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 269,
+   "theorem": null,
+   "file": "src/process/ProcessEVT.v",
+   "claim": "корень играет роль *Cauchy-процесса в $[a,b]$*, сходящегося к перемене знака; у максимума эту роль несёт процесс *значений*, приближающий супремум, а процесс позиций лишь лежит в $[a,b]$.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было — максимизатор назван Cauchy-процессом в отрезке; доказана только принадлежность отрезку (argmax_in_interval), а свойства Коши у процесса позиций в общем случае нет (EVT_ArgmaxNotCauchy.v). Шапка ProcessEVT.v, откуда взята ролевая разметка, исправлена так же."
+  },
+  {
+   "line": 291,
+   "theorem": "continuous_preserves_open_preimage",
+   "file": "src/stdlib/Topology.v",
+   "claim": "| непрерывность ($\\delta$-$\\varepsilon$ $\\equiv$ прообраз открытого открыт) | конституция | Rule (конструкт.) |",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 8, слово автора) (шаг главы V.2) — слова те же, доведена формализация. В stdlib/Topology.v добавлены open_preimage_implies_continuous и continuous_iff_open_preimage : continuous f <-> (forall S, is_open S -> is_open (fun x => S (f x))); до шага 8 была доказана одна сторона (continuous_preserves_open_preimage). Closed under the global context."
+  },
+  {
+   "line": 293,
+   "theorem": null,
+   "claim": "| равномерность как требование (Кантор–Гейне над $ℚ$ неверна) | усиление правила | Rule (неполнота) |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): была пометка «Rule (неполнота, L3)» (строка 11 таблицы главы V.3 в отчёте 03); всё названное в строке — без допущений",
+   "assumptions": "cantor_heine_fails_Q, lipschitz_uniform, lipschitz_uniform_cont, IVT_process: Closed under the global context"
+  },
+  {
+   "line": 328,
+   "theorem": "uniformly_continuous_on",
+   "file": "src/analysis/Continuity.v",
+   "claim": "меньше чем на $\\varepsilon$. В Rocq это записано так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с analysis/Continuity.v:48. Словесное чтение (одна delta на весь отрезок, вынесена перед квантором по x и y) соответствует кванторам."
+  },
+  {
+   "line": 346,
+   "theorem": null,
+   "file": "src/analysis/Continuity.v",
+   "claim": "Канонический головной файл теории непрерывности теперь есть — `analysis/Continuity.v`: в нём сведены воедино определения `continuous_on`, `uniformly_continuous_on` и `Lipschitz_on`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Continuity.v:41, :48, :55. Lipschitz_on требует K > 0. continuous_on здесь записано иначе, чем в блоке § 3.2.1 (UniformConvergence.v:142), — см. запись к стр. 143."
+  },
+  {
+   "line": 350,
+   "theorem": "lipschitz_uniform",
+   "file": "src/analysis/Continuity.v",
+   "claim": "доказан мост `lipschitz_uniform` (липшицевость влечёт равномерную непрерывность)",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Continuity.v:64: forall f a b K, Lipschitz_on f a b K -> uniformly_continuous_on f a b; в доказательстве delta := eps / K."
+  },
+  {
+   "line": 352,
+   "theorem": "uniformly_continuous_pointwise",
+   "claim": "и переход `uniformly_continuous_pointwise`, а с ними элементарная алгебра (константа, тождество, сумма) — всё без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Continuity.v:80: uniformly_continuous_on f a b -> continuous_on f a b. В файле 6 Qed: lipschitz_uniform, uniformly_continuous_pointwise, uniformly_continuous_const, identity_lipschitz, identity_uniformly_continuous, uniformly_continuous_sum — все Closed under the global context."
+  },
+  {
+   "line": 357,
+   "theorem": "uniformly_continuous_on",
+   "file": "src/IVT_ERR.v",
+   "claim": "пока *не* переведены на этот головной файл: каждая по-прежнему несёт своё локальное, дословно повторяющееся определение `uniformly_continuous_on`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "analysis.Continuity подключает только CantorHeineQ.v. Локальные определения: IVT_ERR.v:51, EVT_ERR.v:58, EVT_idx.v:31, HeineBorelComplete.v:78 (а также FTC.v:49 и HeineBorel_ERR.v:565) — совпадают с каноном с точностью до записи и имени типа ContinuousFunction := Q -> Q."
+  },
+  {
+   "line": 361,
+   "theorem": "cantor_heine_fails_Q",
+   "file": "src/CantorHeineQ.v",
+   "claim": "обратного перехода — от поточечной непрерывности к равномерной — в каноне нет, и это не упущение: над $ℚ$ он неверен",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В Continuity.v обратного перехода нет (комментарий :140–143); его ложность над Q доказана: cantor_heine_fails_Q (CantorHeineQ.v:266), Closed under the global context."
+  },
+  {
+   "line": 373,
+   "theorem": "cantor_heine_fails_Q",
+   "file": "src/CantorHeineQ.v",
+   "claim": "**Над $ℚ$ поточечная непрерывность на отрезке *не влечёт* равномерную. Классическая теорема Кантора–Гейне над $ℚ$ неверна.**",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CantorHeineQ.v:266: continuous_on f 1 2 /\\ ~ uniformly_continuous_on f 1 2 для f x := / (x * x - 2); определения — канон analysis/Continuity.v. Closed under the global context."
+  },
+  {
+   "line": 406,
+   "theorem": "cantor_heine_continuous",
+   "claim": "поэтому функция определена и поточечно непрерывна в каждой точке отрезка.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CantorHeineQ.v:90: continuous_on f 1 2 (канон); знаменатель отличен от нуля по no_rational_sqrt2 (analysis/Sqrt2Irrational.v:200). Closed under the global context."
+  },
+  {
+   "line": 407,
+   "theorem": "cantor_heine_not_uniform",
+   "claim": "Но равномерно непрерывной она *не является*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CantorHeineQ.v:217: ~ uniformly_continuous_on f 1 2; свидетели — соседние приближения Пелля: |sx n - sx (S n)| <= 1/(n+1), а |f (sx n) - f (sx (S n))| >= 1. Closed under the global context."
+  },
+  {
+   "line": 432,
+   "theorem": "Lipschitz_on",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "Вырожденный случай $L = 0$ — постоянная функция — ещё проще: годится любая $\\delta$. Этот вывод формализован в `HeineBorelComplete.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: Lipschitz_on (HeineBorelComplete.v:72, Continuity.v:55) включает условие K > 0, так что случай L = 0 определением исключён и в формализации отдельно не разбирается (потери общности нет: функция с константой 0 липшицева и с константой 1). В доказательстве lipschitz_uniform_cont delta := eps / (K + 1), в lipschitz_uniform — eps / K."
+  },
+  {
+   "line": 434,
+   "theorem": "lipschitz_uniform_cont",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "(с этим файлом глава встречалась в § 2.6) теоремой:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): блок кода теперь совпадает с исходником — у lipschitz_uniform_cont (analysis/HeineBorelComplete.v) снята неиспользуемая посылка a <= b; на странице имя константы приведено к исходнику (K). Closed under the global context."
+  },
+  {
+   "line": 453,
+   "theorem": "uniform_cont_sum",
+   "claim": "Сумма, масштабирование и композиция равномерно непрерывных функций снова равномерно непрерывны, тождество и постоянная равномерно непрерывны",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:331 (сумма); тождество и постоянная — identity_uniformly_continuous (:624), constant_uniformly_continuous (:633), в главе не названы. Все Closed under the global context."
+  },
+  {
+   "line": 456,
+   "theorem": "uniform_cont_scale",
+   "claim": "Эти замыкания подтверждены в `HeineBorelComplete.v` леммами `uniform_cont_sum`, `uniform_cont_scale`,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:357: для любого c функция c * f x равномерно непрерывна (случай c == 0 разобран отдельно)."
+  },
+  {
+   "line": 459,
+   "theorem": "uniform_cont_composition",
+   "claim": "`uniform_cont_composition`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:432: f равномерно непрерывна на [a,b], g — на [c,d], и f переводит [a,b] в [c,d]; тогда g (f x) равномерно непрерывна на [a,b]. Условие на область значений в главе не названо, оно естественно для композиции на отрезках."
+  },
+  {
+   "line": 479,
+   "theorem": "uniformly_continuous_on",
+   "file": "src/IVT_ERR.v",
+   "claim": "Гипотеза `uniformly_continuous_on` в формулировках IVT и EVT — не лишняя предосторожность, а точное указание уровня",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылка в доказательствах применяется: в IVT_process — оценка |f mid - f left| < eps (IVT_ERR.v:352), в sup_process_is_Cauchy и EVT_complete — через f_bounded_by_grid_max."
+  },
+  {
+   "line": 504,
+   "theorem": null,
+   "file": "src/IVT_ERR.v",
+   "claim": "построенная конструкция целиком формализована в файле `IVT_ERR.v` (424 строки, двадцать три доказанные теоремы, ни одного незакрытого места).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Счёт: 424 строки, 23 Qed, 0 Admitted, 0 Abort. Из 23 утверждений 13 — вспомогательные леммы арифметики дробей. Шапка файла называет допущения «classic (L3) + Archimedean» — по компилятору их нет (глава это учла)."
+  },
+  {
+   "line": 526,
+   "theorem": "ContinuousFunction",
+   "file": "src/IVT_ERR.v",
+   "claim": "Definition bisection_step (f : ContinuousFunction) (s : BisectionState)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: тип ContinuousFunction в блоках кода главы (стр. 520, 552, 614, 701) — это просто Q -> Q (IVT_ERR.v:49, EVT_ERR.v:52, EVT_idx.v:24); непрерывности он не требует. Условие несёт отдельная посылка uniformly_continuous_on, так что формулировки теорем от имени типа не зависят; читателю блока имя может подсказать лишнее."
+  },
+  {
+   "line": 534,
+   "theorem": "bisection_step",
+   "file": "src/IVT_ERR.v",
+   "claim": "Так `IVT_ERR.v` записывает один шаг бисекции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_ERR.v:117 (BisectionState) и :119 (bisection_step); блок совпадает. При f mid < 0 берётся [mid, right], иначе [left, mid]."
+  },
+  {
+   "line": 534,
+   "theorem": "mid",
+   "external": true,
+   "assumptions": "не применимо (локальная переменная определения)",
+   "claim": "`mid` — середина; `Qlt_le_dec` проверяет знак $f$ в ней",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Не объявление, а локальная переменная let в определении bisection_step (IVT_ERR.v:120): mid := (bis_left s + bis_right s) / 2."
+  },
+  {
+   "line": 541,
+   "theorem": "Qlt_le_dec",
+   "external": true,
+   "assumptions": "не применимо (разрешающая процедура стандартной библиотеки)",
+   "claim": "Существенно здесь одно — `Qlt_le_dec`. Это *решающая процедура*",
+   "page_price": "без исключённого третьего",
+   "verdict": "ok",
+   "note": "Stdlib.QArith.QArith_base.Qlt_le_dec : forall x y, {x < y} + {y <= x} — вычислимое сравнение дробей; bisection_step и всё, что на нём стоит, — Closed under the global context. Сравнение с Больцано–Вейерштрассом: bolzano_weierstrass стоит на Classical_Prop.classic и ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 553,
+   "theorem": "bisection_process",
+   "claim": "В `IVT_ERR.v` итерация шага и сам процесс записаны так (`bisection_iter` применяет шаг $n$ раз, `bisection_process` выдаёт середину):",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_ERR.v:123 (bisection_iter) и :126 (bisection_process); блок совпадает."
+  },
+  {
+   "line": 574,
+   "theorem": "bisection_width",
+   "claim": "после $n$ шагов ширина отрезка есть в точности $(b-a)/2^n$. Это устанавливает лемма `bisection_width`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_ERR.v:136: bis_right - bis_left == (b - a) / Qpow2 n — равенство дробей, «в точности» обосновано."
+  },
+  {
+   "line": 581,
+   "theorem": "bisection_shrinks",
+   "claim": "Этот вывод подтверждён в `IVT_ERR.v` леммами `bisection_shrinks` и `bisection_is_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_ERR.v:195: a < b -> (m <= n) -> Qabs (mid m - mid n) <= (b - a) / Qpow2 m."
+  },
+  {
+   "line": 583,
+   "theorem": "bisection_is_Cauchy",
+   "claim": "Процесс бисекции — полноценный Cauchy-процесс в смысле Главы 5.1; темп его сходимости — $1/2$ за шаг.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_ERR.v:219: a < b -> is_Cauchy (bisection_process f a b); is_Cauchy здесь — Archimedean_ERR.v:152 (вариант «m > N»), равносильность с ProcessCore.is_Cauchy — cauchy_compat. Темп 1/2 следует из bisection_shrinks и bisection_width."
+  },
+  {
+   "line": 605,
+   "theorem": "bisection_preserves_signs_weak",
+   "claim": "Именно слабый инвариант — то, что нужно теории, и именно его `IVT_ERR.v` и доказывает, под именем `bisection_preserves_signs_weak`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_ERR.v:233: f a <= 0 -> f b >= 0 -> f (bis_left s) <= 0 /\\ f (bis_right s) >= 0 на каждом шаге. Довод главы о невозможности строгой пары верен (комментарий :229–232). Уточнение: по построению шага левый конец сдвигается только при f mid < 0, так что нестрогость по существу нужна справа."
+  },
+  {
+   "line": 617,
+   "theorem": "IVT_process",
+   "claim": "значении — в `IVT_ERR.v` она записана так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с IVT_ERR.v:256."
+  },
+  {
+   "line": 637,
+   "theorem": "IVT_process",
+   "claim": "Теорема даёт не «точку $c$ с $f(c) = 0$», а процесс $c$ — Cauchy-процесс, лежащий в $[a,b]$, — для которого `equiv (apply_to_process f c) (fun _ => 0)`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "equiv (IVT_ERR.v:45): forall eps > 0, exists N, forall n > N, Qabs (R1 n - R2 n) < eps. Эпсилон-форма пересказана как эпсилон-форма: «процесс f(c) сколь угодно близок к нулю», не «f(c) = 0». Все четыре посылки в доказательстве используются."
+  },
+  {
+   "line": 648,
+   "theorem": "Archimedean_width",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Доказательство опирается на архимедовость $ℚ$, а она доказана конструктивно: в `Archimedean_ERR` аксиом нет.",
+   "page_price": "в файле аксиом нет",
+   "verdict": "ok",
+   "note": "В IVT_process применяется Archimedean_width (Archimedean_ERR.v:116) — Closed under the global context; в файле нет Axiom и Parameter, подключена только стандартная библиотека."
+  },
+  {
+   "line": 650,
+   "theorem": "IVT_process",
+   "claim": "Команда `Print Assumptions` для `IVT_process` отвечает «Closed under the global context» — теорема не опирается ни на одно допущение.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Подтверждено компилятором: Closed under the global context."
+  },
+  {
+   "line": 652,
+   "theorem": "Qlt_le_dec",
+   "external": true,
+   "assumptions": "не применимо (разрешающая процедура стандартной библиотеки)",
+   "claim": "Выбор половины конструктивен (`Qlt_le_dec`), и $L3$ в этом рассуждении не понадобился.",
+   "page_price": "без L3",
+   "verdict": "ok",
+   "note": "bisection_step (IVT_ERR.v:121) ветвится по Qlt_le_dec (f mid) 0; допущений у IVT_process нет."
+  },
+  {
+   "line": 659,
+   "theorem": null,
+   "file": "src/IVT_CauchyReal.v",
+   "claim": "Теорема о промежуточном значении формализована в ToS *трижды*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_process (IVT_ERR.v:256), process_IVT (ProcessIVT.v:128), ivt_cauchy_real (IVT_CauchyReal.v:309); у всех трёх одни и те же посылки и эпсилон-заключение."
+  },
+  {
+   "line": 681,
+   "theorem": "cauchy_compat",
+   "claim": "получаем мосты: `cauchy_compat` (свойства Коши совпадают),",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessIVT.v:63: Archimedean_ERR.is_Cauchy R <-> ProcessCore.is_Cauchy R (условия «m > N» и «N <= m», сдвиг на единицу — как в главе). Мелочь: бисекция определена в IVT_ERR.v, из Archimedean_ERR.v приходит определение is_Cauchy."
+  },
+  {
+   "line": 682,
+   "theorem": "interval_compat",
+   "claim": "`interval_compat` (совпадают определения «лежать в $[a,b]$»)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessIVT.v:70: IVT_ERR.in_interval a b R <-> ProcessCore.in_interval a b R."
+  },
+  {
+   "line": 683,
+   "theorem": "equiv_compat",
+   "claim": "`equiv_compat` (совпадают определения эквивалентности процессов)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessIVT.v:97: IVT_ERR.equiv R1 R2 <-> ProcessCore.process_equiv R1 R2."
+  },
+  {
+   "line": 684,
+   "theorem": "process_IVT",
+   "claim": "По этим мостам теорема о промежуточном значении переписывается в типах `ProcessCore` как `process_IVT`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessIVT.v:128: те же посылки; exists c, ProcessCore.is_Cauchy c /\\ ProcessCore.in_interval a b c /\\ ProcessCore.process_equiv (apply_to_process f c) (const_process 0) — содержание IVT_process перенесено полностью."
+  },
+  {
+   "line": 686,
+   "theorem": "ivt_convergence_rate",
+   "claim": "а `ivt_convergence_rate` фиксирует темп — $1/2$: ширина интервала бисекции на каждом шаге уполовинивается (лемма `ivt_rate_is_width_ratio`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 6, слово автора): было сомнительное место — число записано определением, а связывала его с бисекцией только соседняя bisection_width_bound. Добавлена связка ivt_rate_is_width_ratio (ширина на стадии n+1 равна ivt_convergence_rate * ширина на стадии n); Closed under the global context."
+  },
+  {
+   "line": 689,
+   "theorem": null,
+   "file": "src/process/ProcessIVT.v",
+   "claim": "содержание файла `ProcessIVT.v` (190 строк).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 6, слово автора): после шага 6 в файле 190 строк, 14 Qed, 0 Admitted (было 175 строк, 13 Qed)."
+  },
+  {
+   "line": 693,
+   "theorem": "process_IVT",
+   "claim": "И аксиом этот уровень не вносит: `process_IVT`, как и теорема `IVT_process`, доказана без допущений.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Closed under the global context — у process_IVT и у всех 13 утверждений ProcessIVT.v."
+  },
+  {
+   "line": 694,
+   "theorem": "IVT_process",
+   "claim": "как и теорема `IVT_process`, доказана без допущений.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было «теорема IVT_ERR» — это имя файла; теорема называется IVT_process. Closed under the global context.",
+   "file": "src/IVT_ERR.v"
+  },
+  {
+   "line": 698,
+   "theorem": "CauchySeq",
+   "claim": "Третий уровень — `IVT_CauchyReal.v` (382 строки) — делает шаг тоньше.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "382 строки, 8 Qed. CauchySeq (CauchyReal.v:48) — запись из последовательности и доказательства is_cauchy: свойство Коши входит в тип, как сказано."
+  },
+  {
+   "line": 718,
+   "theorem": "ivt_cauchy_real",
+   "claim": "Корень — `c : CauchySeq`: не «последовательность, про которую доказано, что она Коши», а объект, чья *типовая принадлежность* уже несёт доказательство свойства Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 700–708) совпадает с IVT_CauchyReal.v:309. Заключение — эпсилон-форма: Qabs (f (cs_seq c n)) < eps при N <= n. Closed under the global context."
+  },
+  {
+   "line": 722,
+   "theorem": "continuous_compose_cauchy",
+   "claim": "Существенная для этого уровня лемма — `continuous_compose_cauchy`. Она утверждает: если $f$ равномерно непрерывна, а $c$ — Cauchy-последовательность в $[a,b]$, то и композиция $f \\circ c$ — снова Cauchy.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_CauchyReal.v:111: uniformly_continuous_on f a b -> (forall n, a <= cs_seq c n /\\ cs_seq c n <= b) -> is_cauchy (fun n => f (cs_seq c n)). Closed under the global context."
+  },
+  {
+   "line": 732,
+   "theorem": "ivt_cauchy_real",
+   "claim": "Главная теорема `ivt_cauchy_real` обходится без неё — её заключение записано прямо, через $|f(c_n)| < \\varepsilon$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было «главная теорема и её следствие стоят на этой лемме» — доказательство ivt_cauchy_real (IVT_CauchyReal.v) применяет bisection_cauchy_seq, bisection_cauchy_in_interval, bisection_f_converges_to_zero; леммы continuous_compose_cauchy в нём нет."
+  },
+  {
+   "line": 730,
+   "theorem": "ivt_cauchy_real_equiv",
+   "claim": "На этой лемме стоит следствие `ivt_cauchy_real_equiv` (которое выражает результат через `cauchy_equiv` с постоянным нулём)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Следствие применяет лемму через compose_cauchy_seq (IVT_CauchyReal.v); слова приведены к этому шагом 10 Части V."
+  },
+  {
+   "line": 772,
+   "theorem": null,
+   "file": "src/EVT_ERR.v",
+   "claim": "Опорные файлы EVT — три: `EVT_ERR.v` как историческая argmax-версия, `EVT_idx.v` как текущая рекомендуемая index-версия, и process-обёртка `ProcessEVT.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v — 35 Qed (шапка называет 34), пометка DEPRECATED в строке 6; EVT_idx.v — 26 Qed, одна локальная аксиома; ProcessEVT.v — 9 Qed, подключает EVT_ERR."
+  },
+  {
+   "line": 790,
+   "theorem": "grid_point",
+   "file": "src/EVT_ERR.v",
+   "claim": "Узел сетки строится прямой формулой: $k$-й из $n+1$ равноотстоящих узлов отрезка $[a,b]$ есть $a + \\frac{k}{n}(b-a)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v:68 (то же в EVT_idx.v:40); блок совпадает. Сетка шага n процесса — grid_list a b (S n): n+1 отрезок, узлы перечисляются от b к a (проверено вычислением)."
+  },
+  {
+   "line": 799,
+   "theorem": "grid_list",
+   "file": "src/EVT_ERR.v",
+   "claim": "При $k = 0$ это $a$, при $k = n$ — $b$, между — равномерные узлы; `grid_list` собирает их в конечный список.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "grid_point_0, grid_point_n (EVT_ERR.v:124, :132): при n > 0 узлы 0 и n равны a и b как дроби (==), не буквально — на этом различии построен § 3.7.2. grid_list — EVT_ERR.v:78."
+  },
+  {
+   "line": 814,
+   "theorem": "max_on_grid",
+   "file": "src/EVT_ERR.v",
+   "claim": "*Значение* максимума — `max_on_grid`, наибольшее из значений $f$ по узлам сетки.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v:113: max_list (f a) (map f (grid_list a b n)); в index-версии (EVT_idx.v:100) — f от узла с индексом argmax_idx."
+  },
+  {
+   "line": 815,
+   "theorem": "argmax_on_grid",
+   "claim": "*Позиция* максимума — `argmax_on_grid`, тот узел, на котором это наибольшее значение достигается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было «argmax» — такого имени в формализации нет; позицию даёт argmax_on_grid (EVT_ERR.v; в index-версии — одноимённое определение EVT_idx.v).",
+   "file": "src/EVT_ERR.v"
+  },
+  {
+   "line": 820,
+   "theorem": "sup_process_is_Cauchy",
+   "file": "src/EVT_ERR.v",
+   "claim": "*Процесс значений* — `sup_process` — сходится. Файл доказывает `sup_process_is_Cauchy`: последовательность наибольших значений по всё более густым сеткам есть процесс Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v:805: a < b -> uniformly_continuous_on f a b -> is_Cauchy (sup_process f a b). Условие равномерной непрерывности в этой фразе не повторено, оно названо в § 3.6.4. Допущение: Classical_Prop.classic."
+  },
+  {
+   "line": 824,
+   "theorem": "argmax_process",
+   "file": "src/EVT_ERR.v",
+   "claim": "*Процесс позиций* — `argmax_process` — сходиться *не обязан*. И `EVT_ERR.v` прямо это оговаривает в комментарии.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий EVT_ERR.v:505–528 — да. Теоремы об этом в формализации нет. Для действующих определений постоянная функция даёт постоянную позицию (вычислено на [0,1] для пяти значений n: b в EVT_ERR, a в EVT_idx), так что пример файла к ним не относится; глава это оговаривает словами «без фиксированного правила выбора»."
+  },
+  {
+   "line": 835,
+   "theorem": "argmax_process_need_not_be_Cauchy",
+   "file": "src/EVT_ArgmaxNotCauchy.v",
+   "claim": "Но и детерминированности мало: даже с однозначно выбираемой позицией процесс `argmax_process` Cauchy быть не обязан. Если у функции два равноценных максимума, сетки разных шагов попадают то в один, то в другой, и позиция перескакивает между ними, сколько бы шагов ни прошло: для функции с двумя равными пиками в $1/3$ и $1/2$ это доказано (`argmax_process_need_not_be_Cauchy`, файл `EVT_ArgmaxNotCauchy.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было — утверждение без теоремы и с неверным доводом (приближение к иррациональной точке свойству Коши не мешает). Новый файл EVT_ArgmaxNotCauchy.v: exists f, uniformly_continuous_on f 0 1 /\\ ~ is_Cauchy (argmax_process f 0 1) — функция two_peaks. Closed under the global context."
+  },
+  {
+   "line": 846,
+   "theorem": null,
+   "claim": "теорема об экстремуме над $ℚ$ доказывает сходимость *процесса значений*, не процесса позиций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В EVT_complete и EVT_strong_process свойство Коши утверждается только для процесса значений; о процессе позиций — лишь принадлежность отрезку."
+  },
+  {
+   "line": 858,
+   "theorem": "EVT_complete",
+   "claim": "теорему об экстремуме. В `EVT_ERR.v` она записана так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с EVT_ERR.v:929. Допущение: Classical_Prop.classic."
+  },
+  {
+   "line": 871,
+   "theorem": "EVT_complete",
+   "claim": "Утверждается: $M$ есть процесс Коши; $c$ лежит в $[a,b]$; на каждом шаге $f(c)$ совпадает с $M$; и $M$ *мажорирует* $f$ — значение $f$ в любой точке отрезка не превосходит $M$ (с точностью до процессного $\\le$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре члена пересказаны верно. process_le (EVT_ERR.v:915): forall eps > 0, exists N, forall n > N, P n <= Q n + eps — мажоранта с эпсилон-запасом, слова «с точностью до процессного ≤» это оговаривают; совпадение f (c n) == M n — равенство дробей. Точный максимум не утверждается."
+  },
+  {
+   "line": 889,
+   "theorem": "EVT_complete",
+   "claim": "именно так `EVT_complete` в репозитории и сформулирована (комментарий файла отмечает это ослабление прямо)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий EVT_ERR.v:921–928: исходная формулировка содержала is_Cauchy c и была снята."
+  },
+  {
+   "line": 904,
+   "theorem": null,
+   "file": "src/EVT_ERR.v",
+   "claim": "в её шапке стоит пометка *«DEPRECATED: Use EVT_idx.v instead»*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v:6: «*** DEPRECATED: Use EVT_idx.v instead (0 Admitted, cleaner proofs) ***»."
+  },
+  {
+   "line": 907,
+   "theorem": "max_list_attained",
+   "file": "src/EVT_ERR.v",
+   "claim": "одна лемма — `max_list_attained` — обрывается командой `Abort`; доказать её в задуманном виде не удалось",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v:575–594: объявление открыто и закрыто командой Abort, константы в окружении нет. Уточнение: в задуманном виде утверждение неверно (если запасное значение d больше всех элементов списка, максимум равен d и в списке не лежит) — комментарий файла :587–590."
+  },
+  {
+   "line": 909,
+   "theorem": "max_list_attained_classical",
+   "claim": "и в дело пошёл обходной вариант `max_list_attained_classical`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_ERR.v:609: l <> [] -> exists x, (x == d \\/ In x l) /\\ max_list d l == x. Вопреки имени, Closed under the global context (разбор случаев по Q.max_dec)."
+  },
+  {
+   "line": 925,
+   "theorem": null,
+   "file": "src/EVT_ERR.v",
+   "claim": "Узел сетки `grid_point a b n 0` равен $a$ *по значению* (`Qeq`), но не буквально — это разные термы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "grid_point_0 (EVT_ERR.v:124): n > 0 -> grid_point a b n 0 == a; пояснение в файле :631–634; посылка f (grid_point a b n 0) == f a в max_on_grid_attained (EVT_ERR.v:635) выводится из равномерной непрерывности леммой uc_implies_proper (:788)."
+  },
+  {
+   "line": 933,
+   "theorem": "argmax_idx",
+   "file": "src/EVT_idx.v",
+   "claim": "вместо значения наилучшего узла argmax возвращает его *номер*, индекс в списке.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_idx.v:93; блок кода совпадает. Параметр default в теле не используется."
+  },
+  {
+   "line": 946,
+   "theorem": "max_on_grid",
+   "file": "src/EVT_idx.v",
+   "claim": "`find_max_idx_acc` — аккумуляторный обход списка, возвращающий индекс наилучшего узла; `max_on_grid` определяется тогда как $f$ от узла, стоящего на этом индексе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_idx.v:84 (find_max_idx_acc), :100: max_on_grid f a b n := f (nth (argmax_idx f l a) l a), l := grid_list a b n. Что этот индекс действительно даёт наибольшее значение — argmax_idx_maximizes (:185), Closed under the global context."
+  },
+  {
+   "line": 949,
+   "theorem": "max_on_grid_attained",
+   "file": "src/EVT_idx.v",
+   "claim": "Лемма «максимум на сетке достигается» — `max_on_grid_attained` — в index-версии становится *тривиальной*: она доказывается одним словом `reflexivity`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_idx.v:212: (n > 0) -> exists y, In y (grid_list a b n) /\\ max_on_grid f a b n = f y — равенство буквальное. Мелочь: словом reflexivity закрывается только равенство; принадлежность узла списку доказана отдельно (nth_In, argmax_idx_bound), всё доказательство — одиннадцать строк (:216–226). Одним словом reflexivity доказана соседняя max_is_f_of_argmax (:625). Closed under the global context."
+  },
+  {
+   "line": 964,
+   "theorem": null,
+   "file": "src/EVT_idx.v",
+   "claim": "тот же ответ зафиксирован в комментарии `EVT_idx.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий EVT_idx.v:59–81 «L5 STATUS ASSIGNMENT FOR ARGMAX» — содержание пересказано верно; это комментарий, не теорема."
+  },
+  {
+   "line": 982,
+   "theorem": "find_max_idx_acc",
+   "file": "src/EVT_idx.v",
+   "claim": "В аккумуляторе `find_max_idx_acc` сравнение узлов идёт через `Qle_bool`, и обновление наилучшего индекса происходит *при равенстве* значений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "EVT_idx.v:88–90: if Qle_bool best_val (f x) then … curr_idx … — при равенстве индекс обновляется, выбирается последний по списку максимум. Список grid_list идёт от b к a, поэтому выделен самый левый узел (вычислено: на плато [1/4, 3/4] index-версия даёт 1/4, argmax-версия — 3/4). Осторожность главы («какой порядок обхода») оправдана."
+  },
+  {
+   "line": 995,
+   "theorem": "EVT_STRONG",
+   "external": true,
+   "assumptions": "не применимо (заголовок раздела в комментарии)",
+   "claim": "Итог секции `EVT_STRONG` файла",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Не имя Rocq, а заголовок раздела в комментарии EVT_idx.v:595 («EVT_STRONG: THE SUPREMUM IS ATTAINED»); команды Section в файле нет."
+  },
+  {
+   "line": 995,
+   "theorem": "EVT_strong_process",
+   "claim": "теорема `EVT_strong_process`: процесс значений супремума есть Коши, процесс позиций лежит в $[a,b]$, на каждом шаге значение супремума совпадает с $f$ от позиции, и всякое значение функции на отрезке в конце концов не превосходит значения процесса с любым зазором (`EVT_idx_majorant`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора) — в теорему внесён четвёртый член, мажоранта: forall x из отрезка, forall eps > 0, exists N, forall n > N, f x <= sup_process f a b n + eps. Closed under the global context."
+  },
+  {
+   "line": 1000,
+   "theorem": "EVT_strong_process",
+   "claim": "То же честное содержание, что и в `EVT_complete` (§ 3.6.4): сходимость доказана для процесса *значений*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора) — слова те же, доведена формализация: в EVT_strong_process не было мажорирующего свойства; теперь оно — четвёртый член (EVT_idx_majorant), и содержание действительно то же, что у EVT_complete."
+  },
+  {
+   "line": 1002,
+   "theorem": "argmax_process_need_not_be_Cauchy",
+   "file": "src/EVT_ArgmaxNotCauchy.v",
+   "claim": "процесс позиций Коши быть не обязан — при двух равноценных максимумах он перескакивает между ними (`argmax_process_need_not_be_Cauchy`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было «его предел может оказаться иррациональным» — довод неверен и снят (и в комментарии EVT_idx.v тоже); названа теорема-контрпример."
+  },
+  {
+   "line": 1008,
+   "theorem": null,
+   "file": "src/process/ProcessEVT.v",
+   "claim": "Третий файл — `ProcessEVT.v` (194 строки)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): после шага 10 в файле 194 строки (шапка выросла на четыре строки), 10 Qed."
+  },
+  {
+   "line": 1012,
+   "theorem": "process_EVT",
+   "claim": "`process_EVT` — она несёт всё содержание `EVT_complete`: процесс значений Коши, процесс точек отрезка, в которых эти значения достигаются, и мажорирующее свойство",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 5, слово автора): было — заключение process_EVT не упоминало функцию. Теперь: exists M c, is_Cauchy M /\\ in_interval a b c /\\ (forall n, f (c n) == M n) /\\ (forall x из отрезка, forall eps > 0, exists N, forall n >= N, f x <= M n + eps) — перенос EVT_complete в типы ProcessCore. Слова «тонкая обёртка, переносящая результат» стали верны. Closed under the global context."
+  },
+  {
+   "line": 1011,
+   "theorem": "evt_cauchy_compat",
+   "claim": "В нём мосты Cauchy-совместимости (`evt_cauchy_compat`),",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 5, слово автора): имя на странице было разорвано переносом строки («evt_cauchy_ compat»); собрано на одной строке. ProcessEVT.v: EVT_ERR.is_Cauchy R <-> ProcessCore.is_Cauchy R; Closed under the global context."
+  },
+  {
+   "line": 1012,
+   "theorem": "sup_process_cauchy",
+   "claim": "`sup_process_cauchy` и `process_EVT`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessEVT.v: a < b -> EVT_ERR.uniformly_continuous_on f a b -> ProcessCore.is_Cauchy (sup_process f a b) — содержательный перенос sup_process_is_Cauchy. После шага 1 Части V — Closed under the global context."
+  },
+  {
+   "line": 1015,
+   "theorem": "evt_lipschitz_rate",
+   "claim": "Темп называет теорема `evt_lipschitz_rate`: для функции с константой Липшица $K$ значение на $n$-й сетке отстоит от любого значения функции на отрезке не больше чем на $K(b-a)/(n+1)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 6, слово автора): было «evt_convergence_rate фиксирует темп — 1/2» — число, вписанное определением; для сетки, получающей одну ячейку на стадию, такого темпа нет (отклонение для x(1-x) на [0,1]: 1/36, 1/100, 1/196, …). Определение evt_convergence_rate и лемма evt_rate_valid сняты (вариант А, слово автора); на их месте evt_lipschitz_rate : a < b -> a <= x <= b -> 0 <= K -> (условие Липшица на отрезке) -> f x <= sup_process f a b n + K * ((b - a) / (n+1)). Closed under the global context. Строка шапки файла «doubling points at each step» заменена на «one more cell at each stage, keep the max».",
+   "file": "src/process/ProcessEVT.v"
+  },
+  {
+   "line": 1022,
+   "theorem": null,
+   "file": "src/process/ProcessEVT.v",
+   "claim": "`ProcessEVT.v` оборачивает именно слой `EVT_ERR.v` — он импортирует *историческую* argmax-версию, а не новую index-версию `EVT_idx.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessEVT.v:29: From ToS Require Import EVT_ERR. После шагов 1 и 5 Части V все девять утверждений файла — Closed under the global context; строка шапки о цене приведена к этому («none (EVT_ERR itself needs no classic since Nov 2026)»).",
+   "assumptions": "все девять утверждений файла: Closed under the global context"
+  },
+  {
+   "line": 1034,
+   "theorem": "x_between_grid_points",
+   "file": "src/EVT_idx.v",
+   "claim": "Этот поиск вычислим — ячеек конечное число, а сравнение рациональных чисел разрешимо, — и теперь лемма `x_between_grid_points` доказана перебором ячеек, а локальное объявление аксиомы из файла снято.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): абзац о местной аксиоме переписан; в EVT_idx.v лемма x_between_grid_points доказана через x_between_aux (индукция по числу ячеек, Qlt_le_dec), строки `Axiom classic` в файле больше нет; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context"
+  },
+  {
+   "line": 1056,
+   "theorem": "uniform_converges",
+   "claim": "Равномерную сходимость на $[a,b]$ записывают так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с UniformConvergence.v:53; номер N стоит перед квантором по x — как в пояснении главы."
+  },
+  {
+   "line": 1083,
+   "theorem": "uniform_limit_continuous_on",
+   "claim": "*Равномерный предел непрерывных функций непрерывен.* Если все $f_n$ непрерывны на $[a,b]$ и сходятся к $f$ равномерно, то и $f$ непрерывна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 1058–1062) совпадает с UniformConvergence.v:200; continuous_on здесь — запись через приращение (:142). Ход доказательства (eps/3, три слагаемых) — в uniform_limit_continuous_at (:151), пересказан верно."
+  },
+  {
+   "line": 1094,
+   "theorem": "integral_limit_exchange",
+   "file": "src/UniformConvergence.v",
+   "claim": "Файл `UniformConvergence.v` — шире этой одной теоремы: в нём есть обмен предела с интегралом (для сумм Римана), оценки приращений при равномерной сходимости и сеточная лемма о конечном числе узлов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было «и обмен с производной, и теорема Дини» — у derivative_limit_exchange предельная производная в заключение не входит (оценка приращений), у dini_monotone нет монотонности в условии (лемма о конечном числе узлов). Довести до прежних слов нельзя: теорема Дини над Q в классической форме, по оценке, неверна (как Кантор — Гейне); обмен предела с производной — горизонт главы о производной."
+  },
+  {
+   "line": 1096,
+   "theorem": "dini_monotone",
+   "file": "src/UniformConvergence.v",
+   "claim": "оценки приращений при равномерной сходимости и сеточная лемма о конечном числе узлов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было «теорема Дини» — dini_monotone (UniformConvergence.v): если в каждом из конечного числа узлов сетки значения становятся меньше eps, то есть общий номер для всех узлов; монотонности в условии нет. Слова приведены к содержанию."
+  },
+  {
+   "line": 1112,
+   "theorem": null,
+   "file": "src/UniformConvergence.v",
+   "claim": "`UniformConvergence.v` подключает результаты о монотонной сходимости, стоящие на `classic`, но этой теореме они не нужны.",
+   "page_price": "шапка файла: classic",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): шапка файла исправлена («AXIOMS: none»); файл подключает MonotoneConvergence.v (в нём q_inc_bounded_cauchy и др. на classic), но в обходе допущений ни одного утверждения UniformConvergence.v нет.",
+   "assumptions": "Closed under the global context (все 20 утверждений файла)"
+  },
+  {
+   "line": 1107,
+   "theorem": "uniform_limit_continuous_on",
+   "claim": "проверка `Print Assumptions` отвечает: «Closed under the global context» — теорема о равномерном пределе доказана без допущений, как и остальные утверждения файла.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было — цена «оставлена проверке»; проверка проведена: uniform_limit_continuous_on — Closed under the global context, как и все утверждения файла."
+  },
+  {
+   "line": 1119,
+   "theorem": null,
+   "file": "src/stdlib/ProcessContinuity.v",
+   "claim": "`ProcessContinuity.v`. Имя обещает теорию непрерывности, но содержание иное, и честнее сказать это прямо. Файл маленький (36 строк)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "36 строк, 4 Qed (id_lipschitz, const_map_lipschitz, zero_lipschitz, continuity_foundation), все Closed under the global context; ProcessMap := RealProcess -> RealProcess."
+  },
+  {
+   "line": 1123,
+   "theorem": "process_map_lipschitz",
+   "claim": "Он вводит `process_map_lipschitz` (липшицевость такого отображения) и `process_contraction` (сжатие)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessContinuity.v:11: forall f g, process_dist (F f) (F g) N <= L * process_dist f g N — оценка на одном шаге N (N — параметр определения); :14 — process_contraction: 0 < c < 1 и липшицевость с константой c."
+  },
+  {
+   "line": 1126,
+   "theorem": "continuity_foundation",
+   "claim": "Его теорема с громким именем `continuity_foundation` — как и одноимённые «foundation» из Главы 5.1 — честно есть лишь *конъюнкция двух тривиальных лемм*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessContinuity.v:31: (forall N, process_map_lipschitz (fun f => f) 1 N) /\\ (forall h N, process_map_lipschitz (fun _ => h) 0 N) — в точности как сказано; статус назван честно."
+  },
+  {
+   "line": 1140,
+   "theorem": "continuous_on",
+   "file": "src/UniformConvergence.v",
+   "claim": "(`continuous_at`, `continuous` в `Topology.v`; `continuous_on` в `UniformConvergence.v`), алгебра непрерывных функций, прообраз открытого открыт; конструктивно, без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): было — continuous_on приписано Topology.v; объявлено оно в UniformConvergence.v (и, в другой записи, в analysis/Continuity.v)."
+  },
+  {
+   "line": 1141,
+   "theorem": "lipschitz_uniform_cont",
+   "file": "src/analysis/HeineBorelComplete.v",
+   "claim": "Равномерная непрерывность и конструктивный мост к ней — `lipschitz_uniform_cont` (липшицевость влечёт равномерную непрерывность), с алгеброй равномерно непрерывных функций.",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "HeineBorelComplete.v:307, Closed under the global context; в файле теорема несёт посылку a <= b (см. запись к стр. 428)."
+  },
+  {
+   "line": 1142,
+   "theorem": "ivt_cauchy_real",
+   "claim": "Теорема о промежуточном значении на трёх уровнях — $\\varepsilon$-версия (`IVT_process`), процессная обёртка (`process_IVT`), типовой апгрейд до `CauchySeq` (`ivt_cauchy_real`); корень — бисекционный Cauchy-процесс.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все три теоремы существуют, формулировки сверены (см. записи к стр. 631, 678, 711); эпсилон-форма названа эпсилон-формой."
+  },
+  {
+   "line": 1143,
+   "theorem": "EVT_strong_process",
+   "claim": "текущая рекомендуемая index-based версия — `EVT_strong_process`. В обеих процесс значений супремума — Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "is_Cauchy (sup_process f a b) — первый член и EVT_complete, и EVT_strong_process (в каждом файле своё sup_process). Допущения: Classical_Prop.classic и EVT_idx.classic соответственно."
+  },
+  {
+   "line": 1144,
+   "theorem": "uniform_limit_continuous_on",
+   "claim": "Равномерный предел непрерывных функций непрерывен (`uniform_limit_continuous_on`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "UniformConvergence.v:200; Closed under the global context."
+  },
+  {
+   "line": 1148,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "Топологическое лицо непрерывности — на чистой конструкции, без аксиом (`Topology.v`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Все 19 лемм Topology.v — Closed under the global context.",
+   "assumptions": "Closed under the global context (все 19 лемм файла)"
+  },
+  {
+   "line": 1149,
+   "theorem": "EVT_complete",
+   "claim": "Теорема о промежуточном значении и теорема об экстремуме доказаны без допущений (`IVT_process`, `process_IVT`, `ivt_cauchy_real`; `EVT_strong_process`, `EVT_complete`): и выбор половины в бисекции, и поиск ячейки сетки вычислимы.",
+   "page_price": "IVT и EVT — без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «теорема об экстремуме — на L3: classic приходит в EVT_ERR и EVT_idx напрямую»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context",
+   "file": "src/EVT_ERR.v"
+  },
+  {
+   "line": 1153,
+   "theorem": "cantor_heine_fails_Q",
+   "file": "src/CantorHeineQ.v",
+   "claim": "Теорема Кантора–Гейне над $ℚ$ — поточечная непрерывность на отрезке *не влечёт* равномерную; это математический факт, а не пробел, и причина — неполнота $ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: пункт стоит в списке «Не построено», а на стр. 1181 — в «что остаётся открытым», хотя отказ теоремы машинно доказан (cantor_heine_fails_Q, сноска 3). Не построена сама теорема, потому что она ложна; контрпример построен."
+  },
+  {
+   "line": 1154,
+   "theorem": "argmax_process_need_not_be_Cauchy",
+   "file": "src/EVT_ArgmaxNotCauchy.v",
+   "claim": "Сходимость процесса *позиций* максимума: над $ℚ$ `argmax_process` не обязан быть Коши (контрпример — `argmax_process_need_not_be_Cauchy`) — доказана сходимость лишь процесса *значений*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора) — к словам добавлена теорема-контрпример."
+  },
+  {
+   "line": 1155,
+   "theorem": null,
+   "file": "src/analysis/Continuity.v",
+   "claim": "но существующие теоремы (IVT, EVT, HeineBorelComplete) на него ещё не переведены — каждая несёт своё локальное определение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ни IVT_ERR.v, ни EVT_ERR.v, ни EVT_idx.v, ни HeineBorelComplete.v файл analysis/Continuity.v не подключают; его подключает только CantorHeineQ.v."
+  },
+  {
+   "line": 1156,
+   "theorem": "RealPoint",
+   "claim": "Непрерывность функций на фактор-классах `RealPoint` — материал главы живёт на уровне функций $ℚ \\to ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPoint := CauchySeq (RealPointSetoid.v:74). Все теоремы главы — о функциях Q -> Q; статус «не построено в этой главе» соответствует названным файлам."
+  },
+  {
+   "line": 1162,
+   "theorem": null,
+   "file": "src/UniformConvergence.v",
+   "claim": "интегралом (остальная часть `UniformConvergence.v`) — материал одной из последующих глав.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 10, слово автора): имя файла было разорвано переносом строки; собрано. Слова «и производной» сняты: теоремы об обмене предела с производной в файле нет."
+  },
+  {
+   "line": 1185,
+   "theorem": null,
+   "claim": "Теорема о промежуточном значении доказана на трёх уровнях типизации, теорема об экстремуме — в двух версиях; равномерный предел непрерывных функций непрерывен.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "IVT_process, process_IVT, ivt_cauchy_real; EVT_complete, EVT_strong_process; uniform_limit_continuous_on — все существуют и доказаны (0 Admitted в названных файлах)."
+  },
+  {
+   "line": 1190,
+   "theorem": null,
+   "claim": "Теорема о промежуточном значении и теорема об экстремуме — без допущений: выбор половины и поиск ячейки сетки вычислимы.",
+   "page_price": "IVT и EVT — без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «теорема об экстремуме — на L3, законе исключённого третьего ToS»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context",
+   "assumptions": "IVT_process, process_IVT, ivt_cauchy_real: Closed under the global context; EVT_complete: Classical_Prop.classic; EVT_strong_process: EVT_idx.classic"
+  },
+  {
+   "line": 1197,
+   "theorem": null,
+   "file": "src/analysis/Continuity.v",
+   "claim": "Канонический головной файл теории непрерывности построен (`analysis/Continuity.v`), но миграция на него существующих теорем (IVT, EVT) пока отложена.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует шапке Continuity.v (строки 23–25) и импортам файлов."
+  },
+  {
+   "line": 1205,
+   "theorem": null,
+   "file": "src/stdlib/Topology.v",
+   "claim": "E/R/R-разметка в шапке файла `Topology.v`; здесь разворачивается по образцу Части I.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка Topology.v, строки 5–9: Elements, Roles, Rules, Status."
+  },
+  {
+   "line": 1206,
+   "theorem": null,
+   "file": "src/process/ProcessIVT.v",
+   "claim": "Эта ролевая разметка — из шапок `ProcessIVT.v` и `ProcessEVT.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessIVT.v:3: «Roles: Cauchy process in [a,b], converging to root»; ProcessEVT.v:3: «Roles: Cauchy process in [a,b], approaching supremum». Ссылка точна; для ProcessEVT.v шапка шире доказанного (см. запись к стр. 264)."
+  },
+  {
+   "line": 1207,
+   "theorem": null,
+   "file": "src/CantorHeineQ.v",
+   "claim": "Машинно проверено, 11 Qed, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В CantorHeineQ.v 11 Qed, нет Axiom и Parameter; cantor_heine_continuous, cantor_heine_not_uniform, cantor_heine_fails_Q — Closed under the global context. Точная ошибка |x_k^2 - 2| = 1/q_k^2 — sx_abs_eq (Sqrt2Approx.v:143); |f(x_k)| = q_k^2 — f_abs_val (CantorHeineQ.v:163).",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 687,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 6: bis_right (bisection_iter f (mkBisection a b) (S n)) - bis_left (…(S n)) == ivt_convergence_rate * (bis_right (… n) - bis_left (… n)); из bisection_width и Qpow2_Sn. Closed under the global context.",
+   "theorem": "ivt_rate_is_width_ratio",
+   "file": "src/process/ProcessIVT.v",
+   "claim": "ширина интервала бисекции на каждом шаге уполовинивается (лемма `ivt_rate_is_width_ratio`)"
+  },
+  {
+   "line": 1019,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 6: (b - a) / (2n+2) == (1 # 2) * ((b - a) / (n+1)) — шаг сетки стадии 2n+1 вдвое меньше шага стадии n. Closed under the global context.",
+   "theorem": "evt_step_halves_on_doubling",
+   "file": "src/process/ProcessEVT.v",
+   "claim": "$1/2$ появляется лишь при удвоении числа ячеек (`evt_step_halves_on_doubling`)."
+  },
+  {
+   "line": 998,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 10: a < b -> uniformly_continuous_on f a b -> forall x из отрезка, forall eps > 0, exists N, forall n > N, f x <= sup_process f a b n + eps. Closed under the global context.",
+   "theorem": "EVT_idx_majorant",
+   "file": "src/EVT_idx.v",
+   "claim": "и всякое значение функции на отрезке в конце концов не превосходит значения процесса с любым зазором (`EVT_idx_majorant`)."
+  }
+ ]
+}

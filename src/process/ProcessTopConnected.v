@@ -3,7 +3,7 @@
     Roles:    path as process, connectedness as reachability
     Rules:    linear path stays in interval, Lipschitz continuity
     Status:   complete
-    STATUS: 20 Qed, 0 Admitted, 0 axioms
+    STATUS: 21 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -15,7 +15,7 @@
 (*    gamma(t) = a + t * (b - a)  for t ∈ [0,1] ∩ Q                       *)
 (*  This is the correct notion under P4.                                    *)
 (*                                                                           *)
-(*  STATUS: 20 Qed, 0 Admitted                                              *)
+(*  STATUS: 21 Qed, 0 Admitted                                              *)
 (*  AXIOMS: none                                                             *)
 (* ========================================================================= *)
 
@@ -313,6 +313,149 @@ Proof.
     assert (Hm_half := HN m Hm).
     assert (Hn_half := HN n Hn).
     lra.
+Qed.
+
+(* ================================================================== *)
+(*  Part VI: what the path notion really says (Nov 2026)                *)
+(* ================================================================== *)
+
+(** Without any continuity requirement [is_path_connected] holds for EVERY
+    set: the path may jump from a to b at the last parameter value.  So
+    [interval_path_connected] says nothing about the interval; the content
+    is in the Lipschitz notion below. *)
+Lemma any_set_path_connected : forall S : Q -> Prop, is_path_connected S.
+Proof.
+  intros S a b Ha Hb.
+  exists (fun t => if Qlt_le_dec t 1 then a else b).
+  unfold PathIn. split; [| split].
+  - destruct (Qlt_le_dec 0 1) as [H | H]; [reflexivity | lra].
+  - destruct (Qlt_le_dec 1 1) as [H | H]; [lra | reflexivity].
+  - intros t _ _. destruct (Qlt_le_dec t 1); assumption.
+Qed.
+
+(** A path with a Lipschitz parametrization. *)
+Definition LipPathIn (S : Q -> Prop) (gamma : Q -> Q) (a b : Q) : Prop :=
+  PathIn S gamma a b /\
+  exists K : Q, 0 <= K /\ forall s t : Q, Qabs (gamma s - gamma t) <= K * Qabs (s - t).
+
+Definition is_lip_path_connected (S : Q -> Prop) : Prop :=
+  forall a b, S a -> S b -> exists gamma, LipPathIn S gamma a b.
+
+(** The interval is connected by Lipschitz paths (the linear one). *)
+Theorem interval_lip_path_connected : forall lo hi,
+  lo < hi -> is_lip_path_connected (fun x => lo <= x /\ x <= hi).
+Proof.
+  intros lo hi Hlt a b Ha Hb.
+  exists (linear_path a b). split.
+  - unfold PathIn. split; [apply linear_path_at_0 | split; [apply linear_path_at_1 |]].
+    intros t Ht0 Ht1. destruct Ha as [Halo Hahi]. destruct Hb as [Hblo Hbhi].
+    destruct (Qlt_le_dec a b) as [Hab | Hab].
+    + destruct (linear_path_in_interval a b t ltac:(lra) Ht0 Ht1) as [H1 H2]. split; lra.
+    + unfold linear_path.
+      assert (H1 : 0 <= t * (-(b-a))) by (apply Qmult_le_0_compat; lra).
+      assert (H3 : 0 <= (1-t) * (-(b-a))) by (apply Qmult_le_0_compat; lra).
+      split; lra.
+  - exists (Qabs (b - a)). split; [apply Qabs_nonneg|].
+    intros s t. rewrite linear_path_lipschitz. apply Qle_refl.
+Qed.
+
+(** A Lipschitz path with values in {0, 1} cannot leave 0: on a grid finer
+    than 1/K neighbouring values differ by less than 1. *)
+Lemma lip_no_jump : forall (g : Q -> Q) (K : Q) (n : nat),
+  0 <= K -> K < inject_Z (Z.of_nat (S n)) ->
+  (forall s t : Q, Qabs (g s - g t) <= K * Qabs (s - t)) ->
+  (forall t, 0 <= t -> t <= 1 -> g t == 0 \/ g t == 1) ->
+  g 0 == 0 ->
+  forall k : nat, (k <= S n)%nat ->
+    g (inject_Z (Z.of_nat k) / inject_Z (Z.of_nat (S n))) == 0.
+Proof.
+  intros g K n HK HKn Hlip Hval H0 k.
+  assert (HN : 0 < inject_Z (Z.of_nat (S n))) by (unfold Qlt; simpl; lia).
+  induction k as [|k IH]; intro Hk.
+  - assert (E : inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n)) == 0).
+    { unfold Qdiv. change (inject_Z (Z.of_nat 0)) with 0. ring. }
+    pose proof (Hlip (inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n))) 0) as HL.
+    assert (E2 : inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n)) - 0 == 0) by (rewrite E; ring).
+    rewrite (Qabs_wd _ _ E2) in HL. simpl (Qabs 0) in HL.
+    assert (HL2 : Qabs (g (inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n))) - g 0) <= 0) by lra.
+    pose proof (Qabs_nonneg (g (inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n))) - g 0)) as Hnn.
+    pose proof (Qle_Qabs (g (inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n))) - g 0)) as Hle.
+    pose proof (Qle_Qabs (- (g (inject_Z (Z.of_nat 0) / inject_Z (Z.of_nat (S n))) - g 0))) as Hle2.
+    rewrite Qabs_opp in Hle2. lra.
+  - assert (IH' := IH ltac:(lia)).
+    set (tk := inject_Z (Z.of_nat k) / inject_Z (Z.of_nat (S n))) in *.
+    set (tk1 := inject_Z (Z.of_nat (S k)) / inject_Z (Z.of_nat (S n))).
+    assert (Hstep : tk1 - tk == 1 / inject_Z (Z.of_nat (S n))).
+    { unfold tk1, tk. rewrite (Nat2Z.inj_succ k).
+      assert (Es : inject_Z (Z.succ (Z.of_nat k)) == inject_Z (Z.of_nat k) + 1).
+      { unfold Z.succ. rewrite inject_Z_plus. reflexivity. }
+      rewrite Es. field. lra. }
+    assert (Hpos : 0 < 1 / inject_Z (Z.of_nat (S n))).
+    { apply Qlt_shift_div_l; [exact HN | lra]. }
+    assert (Htk1_0 : 0 <= tk1).
+    { unfold tk1. apply Qle_shift_div_l; [exact HN|].
+      assert (0 <= inject_Z (Z.of_nat (S k))) by (unfold Qle; simpl; lia). lra. }
+    assert (Htk1_1 : tk1 <= 1).
+    { unfold tk1. apply Qle_shift_div_r; [exact HN|].
+      assert (inject_Z (Z.of_nat (S k)) <= inject_Z (Z.of_nat (S n))).
+      { rewrite <- Zle_Qle. lia. }
+      lra. }
+    destruct (Hval tk1 Htk1_0 Htk1_1) as [Hz | Ho]; [exact Hz | exfalso].
+    pose proof (Hlip tk1 tk) as HL.
+    rewrite (Qabs_wd _ _ Hstep) in HL.
+    rewrite (Qabs_pos (1 / inject_Z (Z.of_nat (S n)))) in HL by lra.
+    assert (Ed : g tk1 - g tk == 1) by (rewrite Ho, IH'; ring).
+    rewrite (Qabs_wd _ _ Ed) in HL. simpl (Qabs 1) in HL.
+    assert (Hlt : K * (1 / inject_Z (Z.of_nat (S n))) < 1).
+    { assert (E : K * (1 / inject_Z (Z.of_nat (S n))) == K / inject_Z (Z.of_nat (S n))) by (field; lra).
+      rewrite E. apply Qlt_shift_div_r; [exact HN | lra]. }
+    lra.
+Qed.
+
+(** The two-point set {0, 1} is NOT connected by Lipschitz paths: the
+    Lipschitz notion tells an interval from a pair of points. *)
+Theorem two_points_not_lip_path_connected :
+  ~ is_lip_path_connected (fun x => x == 0 \/ x == 1).
+Proof.
+  intro H.
+  destruct (H 0 1 (or_introl (Qeq_refl 0)) (or_intror (Qeq_refl 1))) as [g [[Hg0 [Hg1 Hin]] [K [HK Hlip]]]].
+  destruct (Qarchimedean K) as [p Hp].
+  set (n := Pos.to_nat p).
+  assert (HKn : K < inject_Z (Z.of_nat (S n))).
+  { apply Qlt_le_trans with (inject_Z (Z.pos p)); [exact Hp|].
+    rewrite <- Zle_Qle. unfold n. lia. }
+  pose proof (lip_no_jump g K n HK HKn Hlip Hin Hg0 (S n) (le_n _)) as Hend.
+  assert (HN : 0 < inject_Z (Z.of_nat (S n))) by (unfold Qlt; simpl; lia).
+  assert (E1 : inject_Z (Z.of_nat (S n)) / inject_Z (Z.of_nat (S n)) - 1 == 0) by (field; lra).
+  pose proof (Hlip (inject_Z (Z.of_nat (S n)) / inject_Z (Z.of_nat (S n))) 1) as HL.
+  rewrite (Qabs_wd _ _ E1) in HL. simpl (Qabs 0) in HL.
+  assert (Ed : g (inject_Z (Z.of_nat (S n)) / inject_Z (Z.of_nat (S n))) - g 1 == -1)
+    by (rewrite Hend, Hg1; ring).
+  rewrite (Qabs_wd _ _ Ed) in HL. simpl (Qabs (-1)) in HL. lra.
+Qed.
+
+(** The process of the path converges to b (until Nov 2026 only its Cauchy
+    property was stated; the limit stood in a comment). *)
+Lemma process_path_converges : forall a b eps, 0 < eps ->
+  exists N : nat, forall n : nat, (N <= n)%nat -> Qabs (process_path a b n - b) < eps.
+Proof.
+  intros a b eps Heps.
+  destruct (Qeq_dec a b) as [Hab | Hab].
+  - exists 0%nat. intros n _.
+    assert (E : process_path a b n - b == 0).
+    { unfold process_path, linear_path. rewrite Hab. ring. }
+    rewrite (Qabs_wd _ _ E). simpl. exact Heps.
+  - assert (Habs_pos : 0 < Qabs (a - b)).
+    { destruct (Qlt_le_dec (a - b) 0); [rewrite Qabs_neg | rewrite Qabs_pos]; lra. }
+    destruct (archimedean_witness (Qabs (a - b)) eps Habs_pos Heps) as [N HN].
+    exists N. intros n Hn.
+    assert (Hn1 : 0 < inject_Z (Z.of_nat n) + 1) by (unfold Qlt; simpl; lia).
+    assert (Hinv : 0 < / (inject_Z (Z.of_nat n) + 1)) by (apply Qinv_lt_0_compat; exact Hn1).
+    assert (Hd : process_path a b n - b == (a - b) * / (inject_Z (Z.of_nat n) + 1)).
+    { unfold process_path, linear_path. field. lra. }
+    rewrite (Qabs_wd _ _ Hd). rewrite Qabs_Qmult.
+    rewrite (Qabs_pos (/ (inject_Z (Z.of_nat n) + 1))) by lra.
+    exact (HN n Hn).
 Qed.
 
 (* ================================================================== *)

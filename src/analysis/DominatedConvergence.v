@@ -2,7 +2,7 @@
     Elements: Dominated sequences, pointwise convergence, integral exchange
     Roles:    Bounding, convergence, limit-integral exchange
     Rules:    |f_n| <= g implies lim I(f_n) = I(lim f_n)
-    STATUS:   20 Qed, 0 Admitted, 0 axioms
+    STATUS:   26 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: March 2026
 
     The Dominated Convergence Theorem (DCT) is the crown jewel
@@ -254,21 +254,6 @@ Proof.
   intros f M Hb n. exact Hb.
 Qed.
 
-(** ★ Dominated convergence theorem at step function level:
-    If f_n -> f in L1, |f_n| <= M uniformly, and integrals converge,
-    then the limiting integral equals I(f). *)
-Theorem dominated_convergence_step : forall seq limit M,
-  dominated M seq ->
-  0 <= M ->
-  integral_converges seq (step_fun_integral limit) ->
-  forall eps : Q, eps > 0 ->
-  exists N : nat, forall n : nat, (N <= n)%nat ->
-    Qabs (step_fun_integral (seq n) - step_fun_integral limit) < eps.
-Proof.
-  intros seq limit M Hdom HM Hic eps Heps.
-  exact (Hic eps Heps).
-Qed.
-
 (* ================================================================== *)
 (*  MONOTONE CONVERGENCE (COROLLARY)                                   *)
 (* ================================================================== *)
@@ -334,22 +319,6 @@ Proof.
   simpl. unfold step_integral. simpl. ring.
 Qed.
 
-(** ★ DCT applied to constant example: integral difference is 0 *)
-Theorem example_dct :
-  forall eps : Q, eps > 0 ->
-    Qabs (step_fun_integral [mkStep 3 0 1 le_0_1] -
-          step_fun_integral [mkStep 3 0 1 le_0_1]) < eps.
-Proof.
-  intros eps Heps.
-  assert (Hdiff : step_fun_integral [mkStep 3 0 1 le_0_1] -
-                  step_fun_integral [mkStep 3 0 1 le_0_1] == 0) by ring.
-  apply Qle_lt_trans with (y := 0); [| exact Heps].
-  assert (Habs0 : Qabs 0 == 0) by (apply Qabs_pos; lra).
-  apply Qle_trans with (y := Qabs 0).
-  - apply Qabs_Qle_condition. split; lra.
-  - lra.
-Qed.
-
 (* ================================================================== *)
 (*  ADDITIONAL PROPERTIES                                              *)
 (* ================================================================== *)
@@ -390,7 +359,11 @@ Qed.
 
 (** * PHILOSOPHICAL NOTE:
     At the step function level, DCT is almost tautological:
-    L1 convergence already implies integral convergence.
+    L1 convergence implies integral convergence -- when the partitions are
+    aligned ([l1_convergence_integral] below); without alignment it fails
+    ([l1_convergence_alone_is_not_enough]), because [step_fun_diff] cuts both
+    lists to the shorter one.  A majorant adds nothing on a common finite
+    partition.
 
     The real power of DCT emerges at the L1 COMPLETION level,
     where "pointwise convergence" of L1 processes (Cauchy sequences
@@ -400,3 +373,110 @@ Qed.
     during the limiting process. This is exactly the P4 principle:
     finite stages control the limiting behavior.
 *)
+
+(* ========================================================================= *)
+(*  Nov 2026: what IS true at the step level -- and what is not               *)
+(* ========================================================================= *)
+
+(* ---------- (1) контрпример: предел с другим числом ступеней ---------- *)
+
+Definition one_step : StepFun := [mkStep 1 0 1 le_0_1].
+
+Lemma counterexample_dominated : dominated 1 (fun _ => one_step).
+Proof.
+  intros n s Hin. destruct Hin as [Heq | Hin]; [| inversion Hin].
+  subst s. simpl. apply Qle_refl.
+Qed.
+
+Lemma counterexample_l1 : l1_converges (fun _ => one_step) [].
+Proof.
+  intros eps Heps. exists 0%nat. intros n _.
+  unfold step_fun_norm. simpl. exact Heps.
+Qed.
+
+Lemma counterexample_integrals :
+  ~ integral_converges (fun _ => one_step) (step_fun_integral []).
+Proof.
+  intro H. destruct (H 1 ltac:(lra)) as [N HN].
+  specialize (HN N (le_n N)).
+  unfold one_step in HN. simpl in HN. unfold step_integral in HN. simpl in HN.
+  exact (Qlt_irrefl 1 HN).
+Qed.
+
+Theorem l1_convergence_alone_is_not_enough :
+  exists (seq : nat -> StepFun) (limit : StepFun) (M : Q),
+    0 <= M /\ dominated M seq /\ l1_converges seq limit /\
+    ~ integral_converges seq (step_fun_integral limit).
+Proof.
+  exists (fun _ => one_step), [], 1.
+  split; [lra |]. split; [exact counterexample_dominated |].
+  split; [exact counterexample_l1 | exact counterexample_integrals].
+Qed.
+
+(* ---------- (2) настоящая теорема: согласованные разбиения ---------- *)
+
+Definition aligned (f g : StepFun) : Prop :=
+  Forall2 (fun s t => step_left s == step_left t /\ step_right s == step_right t) f g.
+
+Lemma step_diff_bound : forall s t : Step,
+  step_left s == step_left t -> step_right s == step_right t ->
+  Qabs (step_integral s - step_integral t) <=
+  Qabs (step_val s - step_val t) * (step_right s - step_left s).
+Proof.
+  intros s t Hl Hr. unfold step_integral.
+  assert (Hw : step_right t - step_left t == step_right s - step_left s)
+    by (rewrite Hl, Hr; ring).
+  assert (Heq : step_val s * (step_right s - step_left s)
+                - step_val t * (step_right t - step_left t)
+                == (step_val s - step_val t) * (step_right s - step_left s))
+    by (rewrite Hw; ring).
+  rewrite (Qabs_wd _ _ Heq). rewrite Qabs_Qmult.
+  assert (Hnn : 0 <= step_right s - step_left s)
+    by (pose proof (step_valid s); lra).
+  rewrite (Qabs_pos _ Hnn). apply Qle_refl.
+Qed.
+
+(* |I(f) - I(g)| <= ||f - g||_1 при общем разбиении *)
+Lemma integral_diff_le_norm : forall f g : StepFun,
+  aligned f g ->
+  Qabs (step_fun_integral f - step_fun_integral g) <= step_fun_norm (step_fun_diff f g).
+Proof.
+  intros f g H. induction H as [| s t f' g' [Hl Hr] Hrest IH].
+  - unfold step_fun_norm. simpl. apply Qle_refl.
+  - pose proof (step_diff_bound s t Hl Hr) as Hs.
+    assert (Hhead : step_fun_norm (step_fun_diff (s :: f') (t :: g')) ==
+                    Qabs (step_val s - step_val t) * (step_right s - step_left s)
+                    + step_fun_norm (step_fun_diff f' g')).
+    { unfold step_fun_norm. simpl. unfold step_integral at 1. simpl. reflexivity. }
+    rewrite Hhead.
+    apply Qabs_Qle_condition in Hs. apply Qabs_Qle_condition in IH.
+    apply Qabs_Qle_condition. cbn [step_fun_integral].
+    set (A := Qabs (step_val s - step_val t) * (step_right s - step_left s)) in *.
+    set (N := step_fun_norm (step_fun_diff f' g')) in *.
+    split; lra.
+Qed.
+
+(* L1-сходимость на общем разбиении влечёт сходимость интегралов *)
+Theorem l1_convergence_integral : forall (seq : nat -> StepFun) (limit : StepFun),
+  (forall n, aligned (seq n) limit) ->
+  l1_converges seq limit ->
+  integral_converges seq (step_fun_integral limit).
+Proof.
+  intros seq limit Hal Hl1 eps Heps.
+  destruct (Hl1 eps Heps) as [N HN]. exists N. intros n Hn.
+  apply Qle_lt_trans with (step_fun_norm (step_fun_diff (seq n) limit)).
+  - apply integral_diff_le_norm. apply Hal.
+  - apply HN. exact Hn.
+Qed.
+
+(* то же для последовательностей Коши: интегралы образуют последовательность Коши *)
+Theorem l1_cauchy_integral_cauchy : forall (seq : nat -> StepFun),
+  (forall m n, aligned (seq m) (seq n)) ->
+  l1_cauchy seq -> integral_cauchy seq.
+Proof.
+  intros seq Hal Hc eps Heps.
+  destruct (Hc eps Heps) as [N HN]. exists N. intros m n Hm Hn.
+  apply Qle_lt_trans with (step_fun_norm (step_fun_diff (seq m) (seq n))).
+  - apply integral_diff_le_norm. apply Hal.
+  - apply HN; assumption.
+Qed.

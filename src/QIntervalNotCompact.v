@@ -29,7 +29,7 @@
         (операциональное измельчение). Классическое «завершённое покрытие завершённого множества» = ошибка P4.
         Уровень: `новая теорема` (негативная: ℚ genuinely не компактно).
 
-    STATUS: 5 Qed, 0 Admitted, 0 axioms  (witness from Sqrt2Approx; irrationality from analysis.Sqrt2Irrational)
+    STATUS: 15 Qed, 0 Admitted, 0 axioms  (witness from Sqrt2Approx; irrationality from analysis.Sqrt2Irrational)
     Author: Horsocrates (experiment) | Date: June 2026
 *)
 
@@ -127,3 +127,196 @@ Theorem Q_interval_not_compact :
   (forall x, inC x -> exists k, U k x)
   /\ (forall L : list nat, exists x, inC x /\ forall k, In k L -> ~ U k x).
 Proof. split; [ exact covers | exact no_finite_subcover ]. Qed.
+
+(* ===================================================================== *)
+(*  Nov 2026: the sets U k ARE open; and the same failure stated in the    *)
+(*  very definitions of the positive theorem (HeineBorel_ERR.v)            *)
+(* ===================================================================== *)
+
+From Stdlib Require Import Qminmax.
+From ToS Require Import stdlib.Topology.
+From ToS Require Import HeineBorel_ERR.
+
+(** Each U k is open in the sense of Topology.is_open (until Nov 2026 this
+    stood in the header comment only). *)
+Lemma U_open : forall k : nat, is_open (U k).
+Proof.
+  intros k x Hx. unfold U in Hx.
+  remember (inject_Z (Z.of_nat (S k))) as n eqn:En.
+  assert (Hn : 0 < n) by (rewrite En; apply injZ_pos; lia).
+  assert (Hg : exists g : Q, 0 <= g /\ 1 < n * g /\
+            ((x * x - 2 < 0 /\ g == - (x * x - 2)) \/ (0 <= x * x - 2 /\ g == x * x - 2))).
+  { exists (Qabs (x * x - 2)). split; [apply Qabs_nonneg | split; [exact Hx|]].
+    destruct (Qlt_le_dec (x * x - 2) 0) as [Hneg | Hpos].
+    - left. split; [exact Hneg | apply Qabs_neg; lra].
+    - right. split; [exact Hpos | apply Qabs_pos; exact Hpos]. }
+  destruct Hg as [g [Hg0 [Hng Hcase]]].
+  assert (Ht : / n < g).
+  { assert (E : / n == 1 / n) by (field; lra). rewrite E.
+    apply Qlt_shift_div_r; [exact Hn | lra]. }
+  assert (HW : exists W : Q, 0 < W /\ 2 * Qabs x + 1 <= W).
+  { exists (2 * Qabs x + 1). pose proof (Qabs_nonneg x). split; lra. }
+  destruct HW as [W [HW0 HWx]].
+  assert (Heps : exists eps : Q, 0 < eps /\ eps <= 1 /\ eps * W <= g - / n).
+  { exists (Qmin 1 ((g - / n) / W)).
+    assert (Hq : 0 < (g - / n) / W) by (apply Qlt_shift_div_l; [exact HW0 | lra]).
+    split; [apply Q.min_glb_lt; lra | split; [apply Q.le_min_l |]].
+    assert (E : (g - / n) / W * W == g - / n) by (field; lra).
+    apply Qle_trans with ((g - / n) / W * W).
+    - apply Qmult_le_compat_r; [apply Q.le_min_r | lra].
+    - rewrite E. apply Qle_refl. }
+  destruct Heps as [eps [He0 [He1 HB]]].
+  exists eps. split; [exact He0|].
+  intros y Hy. unfold open_ball in Hy. unfold U. rewrite <- En.
+  apply Qabs_Qlt_condition in Hy. destruct Hy as [Hy1 Hy2].
+  assert (Hxa : x <= Qabs x) by apply Qle_Qabs.
+  assert (Hxb : - x <= Qabs x) by (rewrite <- Qabs_opp; apply Qle_Qabs).
+  assert (Hv1 : y + x < W) by lra.
+  assert (Hv2 : - W < y + x) by lra.
+  assert (P1 : 0 < (eps - (y - x)) * (W + (y + x))) by (apply Qmult_lt_0_compat; lra).
+  assert (P2 : 0 < (eps + (y - x)) * (W - (y + x))) by (apply Qmult_lt_0_compat; lra).
+  assert (P3 : 0 < (eps + (y - x)) * (W + (y + x))) by (apply Qmult_lt_0_compat; lra).
+  assert (P4 : 0 < (eps - (y - x)) * (W - (y + x))) by (apply Qmult_lt_0_compat; lra).
+  assert (Hup : y * y - x * x < eps * W) by lra.
+  assert (Hlo : - (eps * W) < y * y - x * x) by lra.
+  assert (Hfin : / n < Qabs (y * y - 2)).
+  { destruct Hcase as [[Hneg Hgeq] | [Hpos Hgeq]].
+    - pose proof (Qle_Qabs (- (y * y - 2))) as Hab. rewrite Qabs_opp in Hab. lra.
+    - pose proof (Qle_Qabs (y * y - 2)) as Hab. lra. }
+  assert (Hm : / n * n < Qabs (y * y - 2) * n)
+    by (apply Qmult_lt_compat_r; [exact Hn | exact Hfin]).
+  assert (E : / n * n == 1) by (field; lra).
+  lra.
+Qed.
+
+(** The cover of the chapter in rational form: the radius shrinks at the
+    cut sqrt 2.  C(x) = min(1, |x^2 - 2|) / 8. *)
+Definition gap (x : Q) : Q := Qabs (x * x - 2).
+
+Definition C_gap : OpenCover := fun x => Qmin 1 (gap x) * (1#8).
+
+Lemma gap_pos : forall x, 0 < gap x.
+Proof.
+  intros x. unfold gap.
+  destruct (Qlt_le_dec 0 (Qabs (x * x - 2))) as [H | H]; [exact H | exfalso].
+  apply Qabs_Qle_condition in H. destruct H as [H1 H2].
+  apply (no_rational_sqrt2 x). lra.
+Qed.
+
+Lemma C_gap_valid : forall a b, valid_cover C_gap a b.
+Proof.
+  intros a b x _. unfold C_gap. pose proof (gap_pos x) as Hg.
+  assert (Hm : 0 < Qmin 1 (gap x)) by (apply Q.min_glb_lt; lra).
+  assert (Hgoal : 0 < Qmin 1 (gap x) * (1#8)) by lra. exact Hgoal.
+Qed.
+
+Lemma covered_far_from_gap : forall c y,
+  1 <= y -> y <= 2 -> covered_by C_gap c y -> (3#8) * gap c < gap y.
+Proof.
+  intros c y Hy1 Hy2 Hcov. unfold covered_by, C_gap in Hcov.
+  pose proof (gap_pos c) as Hg.
+  assert (Hm1 : Qmin 1 (gap c) <= 1) by apply Q.le_min_l.
+  assert (Hm2 : Qmin 1 (gap c) <= gap c) by apply Q.le_min_r.
+  assert (Hm0 : 0 < Qmin 1 (gap c)) by (apply Q.min_glb_lt; lra).
+  assert (Hd0 : 0 < Qmin 1 (gap c) * (1#8)) by lra.
+  assert (Hd1 : Qmin 1 (gap c) * (1#8) <= 1#8) by lra.
+  assert (Hd2 : Qmin 1 (gap c) * (1#8) <= gap c * (1#8)) by lra.
+  clear Hm1 Hm2 Hm0.
+  revert Hcov Hd0 Hd1 Hd2. generalize (Qmin 1 (gap c) * (1#8)). intros d Hcov Hd0 Hd1 Hd2.
+  apply Qabs_Qlt_condition in Hcov. destruct Hcov as [Hc1 Hc2].
+  assert (Hs : 0 < y + c) by lra.
+  assert (Hs2 : 0 < 5 - (y + c)) by lra.
+  assert (P1 : 0 < (d - (y - c)) * (y + c)) by (apply Qmult_lt_0_compat; lra).
+  assert (P2 : 0 < ((y - c) + d) * (y + c)) by (apply Qmult_lt_0_compat; lra).
+  assert (P3 : 0 < d * (5 - (y + c))) by (apply Qmult_lt_0_compat; lra).
+  assert (Hup : y * y - c * c < d * 5) by lra.
+  assert (Hlo : - (d * 5) < y * y - c * c) by lra.
+  unfold gap in *.
+  destruct (Qlt_le_dec (c * c - 2) 0) as [Hn | Hp].
+  - rewrite (Qabs_neg (c * c - 2)) in * by lra.
+    pose proof (Qle_Qabs (- (y * y - 2))) as Hab. rewrite Qabs_opp in Hab. lra.
+  - rewrite (Qabs_pos (c * c - 2)) in * by lra.
+    pose proof (Qle_Qabs (y * y - 2)) as Hab. lra.
+Qed.
+
+Lemma inv_le_of : forall (n : nat) (g : Q),
+  1 <= g * inject_Z (Z.of_nat (S n)) -> / inject_Z (Z.of_nat (S n)) <= g.
+Proof.
+  intros n g H.
+  assert (HN : 0 < inject_Z (Z.of_nat (S n))) by (apply injZ_pos; lia).
+  assert (E : / inject_Z (Z.of_nat (S n)) == 1 / inject_Z (Z.of_nat (S n))) by (field; lra).
+  rewrite E. apply Qle_shift_div_r; [exact HN | exact H].
+Qed.
+
+Lemma small_gap_level : forall centers : list Q,
+  exists N : nat, forall c, In c centers ->
+    1 <= ((3#8) * gap c) * inject_Z (Z.of_nat (S N)).
+Proof.
+  induction centers as [| c rest IH].
+  - exists 0%nat. intros c [].
+  - destruct IH as [N1 HN1].
+    pose proof (gap_pos c) as Hg.
+    assert (Hg' : 0 < (3#8) * gap c) by lra.
+    destruct (Qarchimedean (/ ((3#8) * gap c))) as [p Hp].
+    set (N2 := Pos.to_nat p).
+    exists (Nat.max N1 N2). intros c' [Heq | Hin].
+    + subst c'.
+      assert (Hle : inject_Z (Z.pos p) <= inject_Z (Z.of_nat (S (Nat.max N1 N2)))).
+      { apply injZ_le. unfold N2. lia. }
+      assert (Hkey : / ((3#8) * gap c) * ((3#8) * gap c) < inject_Z (Z.pos p) * ((3#8) * gap c)).
+      { apply Qmult_lt_compat_r; [exact Hg' | exact Hp]. }
+      assert (E1 : / ((3#8) * gap c) * ((3#8) * gap c) == 1) by (field; lra).
+      rewrite E1 in Hkey.
+      assert (P : 0 <= ((3#8) * gap c) * (inject_Z (Z.of_nat (S (Nat.max N1 N2))) - inject_Z (Z.pos p))).
+      { apply Qmult_le_0_compat; lra. }
+      lra.
+    + pose proof (HN1 c' Hin) as H1.
+      pose proof (gap_pos c') as Hg1.
+      assert (Hle : inject_Z (Z.of_nat (S N1)) <= inject_Z (Z.of_nat (S (Nat.max N1 N2)))).
+      { apply injZ_le. lia. }
+      assert (P : 0 <= ((3#8) * gap c') * (inject_Z (Z.of_nat (S (Nat.max N1 N2))) - inject_Z (Z.of_nat (S N1)))).
+      { apply Qmult_le_0_compat; lra. }
+      lra.
+Qed.
+
+Lemma is_covered_In : forall C centers y,
+  is_covered C centers y -> exists c, In c centers /\ covered_by C c y.
+Proof.
+  intros C centers y. induction centers as [| c rest IH]; simpl; intro H; [contradiction|].
+  destruct H as [H | H].
+  - exists c. split; [left; reflexivity | exact H].
+  - destruct (IH H) as [c' [Hin Hc']]. exists c'. split; [right; exact Hin | exact Hc'].
+Qed.
+
+(** No finite family of centres (wherever they lie) covers [1,2] in Q. *)
+Theorem C_gap_no_finite_subcover : forall centers : FiniteSubcover,
+  ~ covers_interval C_gap centers 1 2.
+Proof.
+  intros centers Hcov.
+  destruct (small_gap_level centers) as [N HN].
+  destruct (sqrt2_uncovered N) as [y [[Hy1 Hy2] Hb]].
+  specialize (Hb N (le_n _)).
+  destruct (is_covered_In _ _ _ (Hcov y (conj Hy1 Hy2))) as [c [Hin Hc]].
+  pose proof (covered_far_from_gap c y Hy1 Hy2 Hc) as Hfar.
+  pose proof (inv_le_of N _ (HN c Hin)) as Hsmall.
+  unfold gap in *. lra.
+Qed.
+
+(** Classical Heine-Borel (no condition on the radii) is FALSE over Q --
+    in the definitions of HeineBorel_ERR.v. *)
+Theorem classical_Heine_Borel_fails_over_Q :
+  ~ (forall (C : OpenCover) (a b : Q), a < b -> valid_cover C a b ->
+       exists centers : FiniteSubcover, covers_interval C centers a b).
+Proof.
+  intro H.
+  destruct (H C_gap 1 2 ltac:(lra) (C_gap_valid 1 2)) as [centers Hc].
+  exact (C_gap_no_finite_subcover centers Hc).
+Qed.
+
+(** This cover has no uniform lower bound of the radii. *)
+Corollary C_gap_not_uniform : forall delta, ~ uniform_cover C_gap 1 2 delta.
+Proof.
+  intros delta Hu.
+  destruct (Heine_Borel_uniform C_gap 1 2 delta ltac:(lra) Hu) as [centers Hc].
+  exact (C_gap_no_finite_subcover centers Hc).
+Qed.

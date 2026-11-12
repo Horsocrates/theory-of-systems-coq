@@ -2,7 +2,7 @@
     Elements: Step records (value, left, right), StepFun lists
     Roles:    Integration, norm, pointwise evaluation
     Rules:    Linearity, monotonicity, non-negativity of norm
-    STATUS:   20 Qed, 0 Admitted, 0 axioms
+    STATUS:   17 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: March 2026
 
     P4-COMPATIBLE MEASURE THEORY: Integration first, measure derived.

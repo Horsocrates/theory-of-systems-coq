@@ -699,3 +699,282 @@ Lemma mvt_quadratic_midpoint : forall (a b : Q),
 Proof.
   intros a b. ring.
 Qed.
+
+(* ========================================================================= *)
+(*  EXACT CONSEQUENCES ON THE WHOLE INTERVAL (Nov 2026)                      *)
+(*                                                                          *)
+(*  The grid lemmas above speak of the last node of a grid, which is == b    *)
+(*  but need not be b as a term.  A function that is continuous at two       *)
+(*  ==-equal points takes ==-equal values there; uniform differentiability   *)
+(*  gives that continuity at every point of [a,b].  Hence the estimates      *)
+(*  move from the grid to the interval, with no eps and with NO condition    *)
+(*  that f respect ==.                                                       *)
+(* ========================================================================= *)
+
+From ToS Require analysis.Continuity.
+
+Lemma Qabs_pos_of_neq : forall q : Q, ~ q == 0 -> 0 < Qabs q.
+Proof.
+  intros q Hq.
+  destruct (Qlt_le_dec q 0).
+  - rewrite Qabs_neg; lra.
+  - rewrite Qabs_pos; [| lra].
+    destruct (Qlt_le_dec 0 q); [lra | exfalso; apply Hq; lra].
+Qed.
+
+(** A function continuous at two ==-equal points takes ==-equal values there. *)
+Lemma continuous_at_qeq_values : forall (f : Q -> Q) (x x' : Q),
+  x == x' -> continuous_at f x -> continuous_at f x' -> f x == f x'.
+Proof.
+  intros f x x' Hxx Hc Hc'.
+  destruct (Qeq_dec (f x) (f x')) as [E | NE]; [exact E |].
+  exfalso.
+  assert (Hgap : 0 < Qabs (f x - f x')).
+  { apply Qabs_pos_of_neq. intro Hz. apply NE. lra. }
+  set (eps := Qabs (f x - f x') * (1#2)).
+  assert (Heps : 0 < eps) by (unfold eps; lra).
+  destruct (Hc eps Heps) as [d1 [Hd1 Hb1]].
+  destruct (Hc' eps Heps) as [d2 [Hd2 Hb2]].
+  set (d := Qmin d1 d2).
+  assert (Hd : 0 < d).
+  { unfold d. destruct (Q.min_spec d1 d2) as [[_ ->] | [_ ->]]; lra. }
+  assert (Hdd1 : d <= d1) by (unfold d; apply Q.le_min_l).
+  assert (Hdd2 : d <= d2) by (unfold d; apply Q.le_min_r).
+  (* 1 # k < d *)
+  assert (Hk : exists k : positive, 1 # k < d).
+  { destruct d as [dn dd]. unfold Qlt in Hd. simpl in Hd.
+    exists (Pos.succ dd). unfold Qlt. simpl.
+    rewrite Pos2Z.inj_succ. nia. }
+  destruct Hk as [k Hk].
+  destruct x as [p q]. destruct x' as [p' q'].
+  unfold Qeq in Hxx. simpl in Hxx.
+  set (h := Z.pos q' # (q' * k)).
+  set (h' := Z.pos q # (q * k)).
+  assert (Hh1 : h == 1 # k).
+  { unfold h, Qeq. simpl. rewrite Pos2Z.inj_mul. ring. }
+  assert (Hh1' : h' == 1 # k).
+  { unfold h', Qeq. simpl. rewrite Pos2Z.inj_mul. ring. }
+  assert (Hkpos : 0 < 1 # k) by reflexivity.
+  assert (Ah : Qabs h == 1 # k).
+  { qabs_rw Hh1. apply Qabs_pos. lra. }
+  assert (Ah' : Qabs h' == 1 # k).
+  { qabs_rw Hh1'. apply Qabs_pos. lra. }
+  (* лейбницево равенство сдвинутых точек *)
+  assert (Hleib : (p # q) + h = (p' # q') + h').
+  { unfold h, h', Qplus. simpl.
+    f_equal.
+    - rewrite !Pos2Z.inj_mul. nia.
+    - rewrite !Pos.mul_assoc. rewrite (Pos.mul_comm q q'). reflexivity. }
+  assert (P1 : Qabs (f ((p # q) + h) - f (p # q)) < eps).
+  { apply Hb1; rewrite Ah; lra. }
+  assert (P2 : Qabs (f ((p' # q') + h') - f (p' # q')) < eps).
+  { apply Hb2; rewrite Ah'; lra. }
+  rewrite Hleib in P1.
+  assert (Edec : f (p # q) - f (p' # q') ==
+                 (f ((p' # q') + h') - f (p' # q')) + - (f ((p' # q') + h') - f (p # q))) by ring.
+  assert (T := Qabs_triangle (f ((p' # q') + h') - f (p' # q'))
+                             (- (f ((p' # q') + h') - f (p # q)))).
+  rewrite Qabs_opp in T.
+  assert (W := Qabs_wd _ _ Edec).
+  unfold eps in *. lra.
+Qed.
+
+Lemma udiff_on_sub : forall (f f' : Q -> Q) (a b c d : Q),
+  udiff_on f f' a b -> a <= c -> c < d -> d <= b -> udiff_on f f' c d.
+Proof.
+  intros f f' a b c d [Hab Hu] Hac Hcd Hdb.
+  split; [exact Hcd |].
+  intros eps Heps. destruct (Hu eps Heps) as [delta [Hdelta Hbd]].
+  exists delta. split; [exact Hdelta |].
+  intros x h Hcx Hxd Hp Hl. apply Hbd; lra.
+Qed.
+
+(** The increment between the ENDS of the interval: no grid, no eps. *)
+Theorem bounded_deriv_increment_exact :
+  forall (f f' : Q -> Q) (a b M : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> Qabs (f' x) <= M) ->
+  Qabs (f b - f a) <= M * (b - a).
+Proof.
+  intros f f' a b M Hu HM.
+  assert (Hab : a < b) by (destruct Hu; assumption).
+  destruct (Qlt_le_dec (M * (b - a)) (Qabs (f b - f a))) as [Hgt | Hle]; [| exact Hle].
+  exfalso.
+  set (gap := Qabs (f b - f a) - M * (b - a)).
+  assert (Hgap : 0 < gap) by (unfold gap; lra).
+  assert (Hba : 0 < b - a) by lra.
+  set (eps := gap * (1#2) * / (b - a)).
+  assert (Heps : 0 < eps).
+  { unfold eps. apply Qmult_lt_0_compat; [lra | apply Qinv_lt_0_compat; exact Hba]. }
+  destruct (bounded_deriv_bounded_increment f f' a b M eps Hu HM Heps) as [N HN].
+  cbv zeta in HN.
+  set (we := walk_point a ((b - a) / inject_Z (Z.of_nat (S N))) (S N)) in *.
+  assert (Hwe : we == b) by (unfold we; apply walk_endpoint_qeq; exact Hab).
+  assert (Hin : a <= we /\ we <= b).
+  { unfold we. apply (walk_point_in_interval a b N (S N) Hab). apply Nat.le_refl. }
+  destruct Hin as [Hlo Hhi].
+  assert (Hcw : continuous_at f we) by (apply (udiff_continuous_at f f' a b we Hu); assumption).
+  assert (Hcb : continuous_at f b) by (apply (udiff_continuous_at f f' a b b Hu); lra).
+  assert (Hval : f we == f b) by (apply continuous_at_qeq_values; assumption).
+  assert (Hrw : f b - f a == f we - f a) by lra.
+  assert (W := Qabs_wd _ _ Hrw).
+  assert (Hmul : (M + eps) * (b - a) == M * (b - a) + gap * (1#2)).
+  { unfold eps. field. lra. }
+  unfold gap in *. lra.
+Qed.
+
+(** Lipschitz on the whole interval, with the constant M. *)
+Theorem bounded_deriv_lipschitz :
+  forall (f f' : Q -> Q) (a b M : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> Qabs (f' x) <= M) ->
+  forall x y : Q, a <= x -> x <= b -> a <= y -> y <= b ->
+    Qabs (f y - f x) <= M * Qabs (y - x).
+Proof.
+  intros f f' a b M Hu HM x y Hax Hxb Hay Hyb.
+  destruct (Qlt_le_dec x y) as [Hxy | Hyx].
+  - (* x < y *)
+    assert (Hu' : udiff_on f f' x y) by (apply (udiff_on_sub f f' a b x y Hu); lra).
+    assert (HM' : forall z : Q, x <= z -> z <= y -> Qabs (f' z) <= M).
+    { intros z Hz1 Hz2. apply HM; lra. }
+    assert (H := bounded_deriv_increment_exact f f' x y M Hu' HM').
+    assert (A : Qabs (y - x) == y - x) by (apply Qabs_pos; lra).
+    rewrite A. exact H.
+  - destruct (Qlt_le_dec y x) as [Hlt | Hle].
+    + (* y < x *)
+      assert (Hu' : udiff_on f f' y x) by (apply (udiff_on_sub f f' a b y x Hu); lra).
+      assert (HM' : forall z : Q, y <= z -> z <= x -> Qabs (f' z) <= M).
+      { intros z Hz1 Hz2. apply HM; lra. }
+      assert (H := bounded_deriv_increment_exact f f' y x M Hu' HM').
+      assert (A : Qabs (y - x) == x - y) by (rewrite Qabs_neg; lra).
+      assert (E : f y - f x == - (f x - f y)) by ring.
+      qabs_rw E. rewrite Qabs_opp. rewrite A. exact H.
+    + (* x == y *)
+      assert (Hxy : x == y) by lra.
+      assert (Hcx : continuous_at f x) by (apply (udiff_continuous_at f f' a b x Hu); assumption).
+      assert (Hcy : continuous_at f y) by (apply (udiff_continuous_at f f' a b y Hu); assumption).
+      assert (Hv : f x == f y) by (apply continuous_at_qeq_values; assumption).
+      assert (E : f y - f x == 0) by lra.
+      assert (E2 : y - x == 0) by lra.
+      qabs_rw E. qabs_rw E2.
+      assert (Z : Qabs 0 == 0) by reflexivity.
+      rewrite Z. lra.
+Qed.
+
+(** The same in the terms of the canon of analysis/Continuity.v. *)
+Corollary bounded_deriv_Lipschitz_on :
+  forall (f f' : Q -> Q) (a b M : Q),
+  0 < M ->
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> Qabs (f' x) <= M) ->
+  Continuity.Lipschitz_on f a b M.
+Proof.
+  intros f f' a b M HMpos Hu HM. split; [exact HMpos |].
+  intros x y [Hax Hxb] [Hay Hyb].
+  exact (bounded_deriv_lipschitz f f' a b M Hu HM y x Hay Hyb Hax Hxb).
+Qed.
+
+(** Zero derivative: the values at all points of the interval are ==-equal. *)
+Theorem zero_deriv_constant :
+  forall (f f' : Q -> Q) (a b : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> f' x == 0) ->
+  forall x y : Q, a <= x -> x <= b -> a <= y -> y <= b -> f x == f y.
+Proof.
+  intros f f' a b Hu Hz x y Hax Hxb Hay Hyb.
+  assert (HM : forall z : Q, a <= z -> z <= b -> Qabs (f' z) <= 0).
+  { intros z Hz1 Hz2. assert (E := Hz z Hz1 Hz2). qabs_rw E.
+    assert (Z : Qabs 0 == 0) by reflexivity. rewrite Z. lra. }
+  assert (H := bounded_deriv_lipschitz f f' a b 0 Hu HM x y Hax Hxb Hay Hyb).
+  assert (Hn := Qabs_nonneg (f y - f x)).
+  assert (R : 0 * Qabs (y - x) == 0) by ring.
+  assert (Habs0 : Qabs (f y - f x) == 0) by lra.
+  destruct (Qeq_dec (f y - f x) 0) as [E | NE]; [lra |].
+  exfalso. assert (Hp := Qabs_pos_of_neq _ NE). lra.
+Qed.
+
+(** Derivative bounded below by c > 0: strict growth between any two points. *)
+Theorem pos_deriv_strictly_increasing :
+  forall (f f' : Q -> Q) (a b c : Q),
+  udiff_on f f' a b ->
+  (forall x : Q, a <= x -> x <= b -> c <= f' x) ->
+  0 < c ->
+  forall x y : Q, a <= x -> x < y -> y <= b -> f x < f y.
+Proof.
+  intros f f' a b c Hu Hlo Hc x y Hax Hxy Hyb.
+  assert (Hu' : udiff_on f f' x y) by (apply (udiff_on_sub f f' a b x y Hu); lra).
+  assert (Hlo' : forall z : Q, x <= z -> z <= y -> c <= f' z).
+  { intros z Hz1 Hz2. apply Hlo; lra. }
+  destruct (pos_deriv_increases f f' x y c Hu' Hlo' Hc) as [N HN].
+  cbv zeta in HN.
+  set (we := walk_point x ((y - x) / inject_Z (Z.of_nat (S N))) (S N)) in *.
+  assert (Hwe : we == y) by (unfold we; apply walk_endpoint_qeq; exact Hxy).
+  assert (Hin : x <= we /\ we <= y).
+  { unfold we. apply (walk_point_in_interval x y N (S N) Hxy). apply Nat.le_refl. }
+  destruct Hin as [H1 H2].
+  assert (Hcw : continuous_at f we) by (apply (udiff_continuous_at f f' x y we Hu'); assumption).
+  assert (Hcy : continuous_at f y) by (apply (udiff_continuous_at f f' x y y Hu'); lra).
+  assert (Hval : f we == f y) by (apply continuous_at_qeq_values; assumption).
+  lra.
+Qed.
+
+(* ========================================================================= *)
+(*  THE CONDITION "f RESPECTS ==" IS NOT NEEDED (Nov 2026)                   *)
+(* ========================================================================= *)
+
+(** Under uniform differentiability f respects == at the points of [a,b]. *)
+Lemma udiff_respects_qeq : forall (f f' : Q -> Q) (a b x y : Q),
+  udiff_on f f' a b -> a <= x -> x <= b -> a <= y -> y <= b ->
+  x == y -> f x == f y.
+Proof.
+  intros f f' a b x y Hu Hax Hxb Hay Hyb Hxy.
+  apply continuous_at_qeq_values; [exact Hxy | |].
+  - apply (udiff_continuous_at f f' a b x Hu); assumption.
+  - apply (udiff_continuous_at f f' a b y Hu); assumption.
+Qed.
+
+(** In particular the value at the last node of a grid is the value at b. *)
+Lemma udiff_walk_endpoint_value : forall (f f' : Q -> Q) (a b : Q) (N : nat),
+  udiff_on f f' a b ->
+  f (walk_point a ((b - a) / inject_Z (Z.of_nat (S N))) (S N)) == f b.
+Proof.
+  intros f f' a b N Hu.
+  assert (Hab : a < b) by (destruct Hu; assumption).
+  assert (Hin := walk_point_in_interval a b N (S N) Hab (Nat.le_refl _)).
+  destruct Hin as [Hlo Hhi].
+  apply (udiff_respects_qeq f f' a b); try assumption; try lra.
+  apply walk_endpoint_qeq. exact Hab.
+Qed.
+
+(** One modulus (delta for one eps) already gives continuity at the points
+    of [a,b]: the increment is bounded by (eps + |f' x|) * |h|. *)
+Lemma local_modulus_continuous_at : forall (f f' : Q -> Q) (a b eps delta x : Q),
+  0 < eps -> 0 < delta ->
+  (forall x h : Q, a <= x -> x <= b -> 0 < Qabs h -> Qabs h < delta ->
+     Qabs (f (x + h) - f x - f' x * h) < eps * Qabs h) ->
+  a <= x -> x <= b -> continuous_at f x.
+Proof.
+  intros f f' a b eps delta x Heps Hdelta Hbd Hax Hxb e He.
+  set (K := eps + Qabs (f' x) + 1).
+  assert (HK : 0 < K) by (unfold K; pose proof (Qabs_nonneg (f' x)); lra).
+  exists (Qmin delta (e / K)). split.
+  - apply Q.min_glb_lt; [exact Hdelta | apply Qlt_shift_div_l; lra].
+  - intros h Hpos Hlt.
+    assert (Hh1 : Qabs h < delta) by (eapply Qlt_le_trans; [exact Hlt | apply Q.le_min_l]).
+    assert (Hh2 : Qabs h < e / K) by (eapply Qlt_le_trans; [exact Hlt | apply Q.le_min_r]).
+    assert (Hb := Hbd x h Hax Hxb Hpos Hh1).
+    assert (E : f (x + h) - f x == (f (x + h) - f x - f' x * h) + f' x * h) by ring.
+    rewrite (Qabs_wd _ _ E).
+    eapply Qle_lt_trans; [apply Qabs_triangle |].
+    rewrite (Qabs_Qmult (f' x) h).
+    assert (H1 : K * Qabs h < K * (e / K)).
+    { apply (proj2 (Qmult_lt_l (Qabs h) (e / K) K HK)). exact Hh2. }
+    assert (H2 : K * (e / K) == e) by (field; lra).
+    assert (Hexp : K * Qabs h == eps * Qabs h + Qabs (f' x) * Qabs h + Qabs h)
+      by (unfold K; ring).
+    set (T := Qabs (f (x + h) - f x - f' x * h)) in *.
+    set (u := eps * Qabs h) in *.
+    set (v := Qabs (f' x) * Qabs h) in *.
+    set (w := Qabs h) in *.
+    lra.
+Qed.

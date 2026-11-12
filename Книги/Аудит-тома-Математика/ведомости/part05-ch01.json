@@ -1,0 +1,1138 @@
+{
+ "batch": "audit-part-05",
+ "chapter": "05 Топология и анализ процессов/01 Метрика на процессах.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 61,
+   "theorem": null,
+   "file": null,
+   "claim": "(Для настоящей главы, впрочем, оговорка работает в сильную сторону: все её опорные файлы — без единой аксиомы; об этом — ниже.)",
+   "page_price": "все опорные файлы — без единой аксиомы",
+   "verdict": "ok",
+   "note": "Print Assumptions по всем 107 леммам семи опорных файлов (MetricSpace 18, ProcessTopMetric 17, ProcessGeneral 16, ProcessSpace 6, ProcessBridge 10, CauchyReal 21, ProcessCore 19) — Closed under the global context; проверено компилятором отдельным прогоном."
+  },
+  {
+   "line": 103,
+   "theorem": null,
+   "file": null,
+   "claim": "Опорных файлов семь, и все они сверены с репозиторием дословно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Семь файлов: MetricSpace.v, ProcessTopMetric.v, ProcessGeneral.v, ProcessSpace.v, ProcessBridge.v, CauchyReal.v, ProcessCore.v. Блоки кода главы (8 объявлений и блок секции, стр. 260–268) совпадают с исходниками."
+  },
+  {
+   "line": 104,
+   "theorem": null,
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "все семь по своим заголовкам и проверенным ключевым теоремам имеют статус «0 axioms» — ни одной аксиомы",
+   "page_price": "семь файлов — «0 axioms» по заголовкам и по ключевым теоремам",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же, доведена формализация: у stdlib/ProcessSpace.v шапка была одной строкой без статуса; теперь стандартная шапка E/R/R со строкой «STATUS: 6 Qed, 0 Admitted, 0 axioms» (и вписанный счёт process_space_count исправлен с 7 на 6). Цена всех семи файлов по компилятору — Closed under the global context."
+  },
+  {
+   "line": 106,
+   "theorem": null,
+   "file": null,
+   "claim": "фундамент анализа закладывается на полностью конструктивном основании",
+   "page_price": "полностью конструктивное основание",
+   "verdict": "ok",
+   "note": "Ни одна из 107 лемм семи файлов не опирается ни на classic, ни на L4_witness (Print Assumptions: Closed under the global context)."
+  },
+  {
+   "line": 125,
+   "theorem": "Q_dist",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "В Rocq это записано в файле `MetricSpace.v`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:193 — Definition Q_dist (x y : Q) : Q := Qabs (x - y); блок кода (стр. 128) совпадает."
+  },
+  {
+   "line": 133,
+   "theorem": "qdist",
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "В `ProcessTopMetric.v` оно названо `qdist`, в `ProcessGeneral.v` — `Qdist`. Все три — `Q_dist`, `qdist`, `Qdist` — суть одна конструкция",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopMetric.v:33, ProcessGeneral.v:217, MetricSpace.v:193 — все три `Qabs (x - y)`; три имени взаимно конвертируемы (равенства доказаны `reflexivity` в пробном файле)."
+  },
+  {
+   "line": 144,
+   "theorem": "stdlib",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (имя каталога)",
+   "claim": "| `Q_dist` | `MetricSpace.v` | метрика в `stdlib`-рамке |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`stdlib` — каталог src/stdlib, в котором лежит MetricSpace.v, не объявление."
+  },
+  {
+   "line": 146,
+   "theorem": "Qdist",
+   "file": "src/ProcessGeneral.v",
+   "claim": "| `Qdist` | `ProcessGeneral.v` | расстояние в общей схеме процессов |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:217; используется в cauchy_Q_equiv (:220) и cauchy_seq_is_gen_process (:228). Собственных лемм о свойствах метрики для Qdist в файле нет — они записаны для Q_dist и qdist."
+  },
+  {
+   "line": 148,
+   "theorem": null,
+   "file": null,
+   "claim": "Все три определены одинаково — `Qabs (x - y)`, — и различаются только тем, в каком файле и для какой цели введены.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено с тремя определениями; тела совпадают дословно."
+  },
+  {
+   "line": 160,
+   "theorem": "Q_dist_nonneg",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*Неотрицательность*: $|x-y| \\geq 0$ для любых $x,y$ — расстояние не бывает отрицательным (лемма `Q_dist_nonneg`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:196 — forall x y, 0 <= Q_dist x y; доказательство — Qabs_nonneg."
+  },
+  {
+   "line": 163,
+   "theorem": "Q_dist_zero",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*Нуль на диагонали*: $|x-x| = 0$ — расстояние от числа до самого себя есть нуль (`Q_dist_zero`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:202 — forall x, Q_dist x x == 0 (равенство рациональных — Qeq)."
+  },
+  {
+   "line": 166,
+   "theorem": "Q_dist_sym",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*Симметрия*: $|x-y| = |y-x|$ — расстояние от $x$ до $y$ и от $y$ до $x$ одно и то же (`Q_dist_sym`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:211 — forall x y, Q_dist x y == Q_dist y x."
+  },
+  {
+   "line": 169,
+   "theorem": "Q_dist_triangle",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*Неравенство треугольника*: $|x-z| \\leq |x-y| + |y-z|$ — путь напрямую не длиннее пути через промежуточную точку (`Q_dist_triangle`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:220 — forall x y z, Q_dist x z <= Q_dist x y + Q_dist y z; без условий."
+  },
+  {
+   "line": 173,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Доказательства просты: все четыре опираются на свойства модуля рационального числа (`Qabs`) — модуль неотрицателен, модуль нуля есть нуль, модуль не зависит от знака, модуль суммы не превосходит суммы модулей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ход доказательств сверен: Qabs_nonneg (:198), Qabs_wd + Qabs_pos (:206–207), Qabs_opp (:216), Qabs_triangle (:225)."
+  },
+  {
+   "line": 176,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Все четыре свойства получены чисто рациональной арифметикой, без всякого обращения к бесконечным объектам.",
+   "page_price": "чисто рациональная арифметика",
+   "verdict": "ok",
+   "note": "Print Assumptions четырёх лемм Q_dist_* — Closed under the global context."
+  },
+  {
+   "line": 185,
+   "theorem": "qdist_zero_iff",
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "лемма `qdist_zero_iff` в `ProcessTopMetric.v` устанавливает $|x-y| = 0$ тогда и только тогда, когда $x = y$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopMetric.v:63 — forall x y, qdist x y == 0 <-> x == y; доказаны обе стороны; равенство — Qeq, то есть равенство рациональных как чисел."
+  },
+  {
+   "line": 213,
+   "theorem": null,
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "Всё, что построено в § 1.2, — `qdist` и его четыре свойства — работает на уровне *рациональных чисел*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре леммы § 1.2 названы для Q_dist (MetricSpace.v). Для рабочего имени qdist в ProcessTopMetric.v есть qdist_nonneg (:36), qdist_sym (:40), qdist_triangle (:53) и qdist_zero_iff (:63); отдельной леммы «нуль на диагонали» нет — она следует из qdist_zero_iff."
+  },
+  {
+   "line": 234,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Абстрактная рамка, которую мы сейчас построим, фиксирует метрическую структуру *без* общей аксиомы разделимости",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:60–63: четыре гипотезы — d_nonneg, d_zero, d_sym, d_triangle; разделимости среди них нет."
+  },
+  {
+   "line": 238,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "рамка же берёт ровно те гипотезы, которые нужны для общих рассуждений",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же, доведена формализация: гипотеза d_zero не входила ни в одну лемму секции; добавлены const_limit_metric и const_cauchy_metric (постоянная последовательность сходится к своему значению и есть Коши) — после закрытия секции обе зависят ровно от d_zero. Closed under the global context."
+  },
+  {
+   "line": 240,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Глава пользуется привычным словом «метрическое пространство» — так названа и сама Rocq-секция",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:55 — Section MetricSpaces."
+  },
+  {
+   "line": 253,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "внутри секции фиксируются *носитель* (произвольный тип), *функция расстояния* и четыре *гипотезы* о ней",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 260–268) совпадает с MetricSpace.v:55–63 дословно."
+  },
+  {
+   "line": 279,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "ToS-формализация сознательно берёт `Section` с явными параметрами.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "То же сказано в комментарии файла (MetricSpace.v:50–52): «avoiding typeclasses in favour of explicit parametricity»."
+  },
+  {
+   "line": 280,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "явная параметричность делает зависимости *видимыми*: глядя на лемму из секции, сразу видно, от каких именно гипотез о $d$ она зависит",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено командой Check после закрытия секции: в типе каждой леммы остаются только использованные гипотезы (см. запись к стр. 237)."
+  },
+  {
+   "line": 292,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*элементы — точки; роль — расстояние как мера разделённости; правила — неравенство треугольника (как конституция), симметрия, позитивность*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка MetricSpace.v:6–8: Elements: points of the space; Roles: distance -> MeasureOfSeparation; Rules: triangle inequality (constitution), symmetry, positivity."
+  },
+  {
+   "line": 301,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "в коде это параметрическая `Section` с носителем и четырьмя гипотезами, а не объект типа `System` $L$ с приписанным уровнем иерархии",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) — TheoryOfSystems_Core_ERR.v:203; MetricSpace.v объектов этого типа не строит. Оговорка о статусе разбора честна."
+  },
+  {
+   "line": 319,
+   "theorem": "QVec",
+   "file": "src/LinearAlgebra.v",
+   "claim": "`Section` задаёт *потенциал* (носитель, расстояние, гипотезы), а конкретные пространства — $ℚ$ с `qdist` или векторы `QVec` с $L^\\infty$-расстоянием — его *актуализируют*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: в формализации секция применена один раз — is_cauchy_metric Q Q_dist в Q_cauchy_metric_equiv (MetricSpace.v:230); ни к ℚ с qdist, ни к QVec с QVec_dist леммы секции не применены. Применение проходит без труда (пробный файл: QVec_cauchy_of_limit, qdist_cauchy_of_limit — Closed)."
+  },
+  {
+   "line": 341,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "`d : X -> X -> Q`: значение расстояния на каждом сравнении есть *конечное рациональное* число",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:58 — Variable d : X -> X -> Q."
+  },
+  {
+   "line": 406,
+   "theorem": "d_zero",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (гипотеза секции)",
+   "claim": "Среди четырёх гипотез секции есть `d_zero` — но посмотрим на её форму внимательно. `d_zero` утверждает *только*: $d(x,x) = 0$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:61 — Hypothesis d_zero : forall x, d x x == 0. Гипотеза секции: после её закрытия самостоятельного объекта с этим именем нет (поэтому Locate его не находит)."
+  },
+  {
+   "line": 414,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "более сильной гипотезы в абстрактной секции `MetricSpace.v` *нет* — она не входит в четвёрку `Hypothesis`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено: в секции (MetricSpace.v:55–175) гипотезы вида d x y == 0 -> … нет."
+  },
+  {
+   "line": 421,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "секция честно берёт ровно те гипотезы, которые работают",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же: теперь работают все четыре гипотезы секции (d_nonneg, d_sym, d_triangle — в прежних леммах; d_zero — в const_limit_metric и const_cauchy_metric)."
+  },
+  {
+   "line": 436,
+   "theorem": "is_cauchy_metric",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*Коши-последовательность* в метрическом пространстве (значения сколь угодно сближаются после некоторого рубежа)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:66 — forall eps > 0, exists N, forall m n, N < m -> N < n -> d (f m) (f n) < eps; рубеж строгий (N < m), в остальных файлах главы — нестрогий (N <= m); для ℚ эквивалентность доказана: Q_cauchy_metric_equiv (:230)."
+  },
+  {
+   "line": 438,
+   "theorem": "is_limit_metric",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*предел* последовательности и *сжимающее отображение*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:72 — forall eps > 0, exists N, forall n, N < n -> d (f n) l < eps."
+  },
+  {
+   "line": 439,
+   "theorem": "is_contraction_metric",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "В `MetricSpace.v` им отвечают `is_cauchy_metric`, `is_limit_metric` и `is_contraction_metric`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:82 — 0 <= c /\\ c < 1 /\\ forall x y, d (f x) (f y) <= c * d x y."
+  },
+  {
+   "line": 444,
+   "theorem": "d_nonneg_alt",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Неотрицательность с переставленными аргументами (`d_nonneg_alt`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:87 — forall x y, 0 <= d y x. Сомнительное место: это гипотеза d_nonneg с переименованными переменными; нового содержания лемма не несёт (доказана через d_sym, хотя следует из d_nonneg подстановкой)."
+  },
+  {
+   "line": 445,
+   "theorem": "limit_dist_zero",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Если последовательность сходится к двум пределам, расстояние между этими пределами сколь угодно мало (`limit_dist_zero`) — зародыш единственности предела.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:97 — is_limit_metric f l1 -> is_limit_metric f l2 -> forall eps, 0 < eps -> d l1 l2 < eps; «сколь угодно мало», а не «равно нулю» — сказано точно."
+  },
+  {
+   "line": 448,
+   "theorem": "cauchy_of_limit",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Всякая сходящаяся последовательность есть Коши (`cauchy_of_limit`) — одна из двух классических импликаций между сходимостью и свойством Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:119 — forall f l, is_limit_metric f l -> is_cauchy_metric f; одна сторона, так и сказано."
+  },
+  {
+   "line": 450,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "И несколько лемм о сжимающих отображениях: множитель сжатия неотрицателен, строго меньше единицы, сжатие не увеличивает расстояний.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "contraction_nonneg_factor (:146), contraction_lt_one_factor (:154), contraction_shrinks (:162); четвёртая — contraction_fixed_bound (:136). Первые две и четвёртая — проекции определения is_contraction_metric; содержательна contraction_shrinks."
+  },
+  {
+   "line": 455,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "`MetricSpace.v` несёт двадцать четыре проверенные леммы и не использует ни одной аксиомы; из них к абстрактной секции относятся девять",
+   "page_price": "ни одной аксиомы",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора): было «восемнадцать … семь»; после шага 7 в файле 24 Qed, в секции MetricSpaces девять лемм (прежние семь, const_limit_metric, const_cauchy_metric). Все — Closed under the global context."
+  },
+  {
+   "line": 458,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "На эту общую рамку и обопрутся дальнейшие построения — начиная со следующего раздела, где расстояние впервые станет процессом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: верно для изложения; в формализации файлы следующих разделов (ProcessTopMetric.v, ProcessSpace.v, ProcessGeneral.v, RealPointMetric.v) MetricSpace.v не подключают, а леммы секции вне самого файла нигде не применены (поиск по src; файл подключают только projective/QuantumTower.v — ради QVec_dist и list_max_dist_nonneg — и projective/ConnectionTheorems.v, который его имён не использует)."
+  },
+  {
+   "line": 502,
+   "theorem": "rp_dist",
+   "file": "src/RealPointMetric.v",
+   "claim": "Готового имени `rp_dist` для функции $n \\mapsto |P(n)-Q(n)|$ в опорных файлах главы *нет* — глава вводит это поточечное расстояние как понятие.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В семи опорных файлах имени нет (поиск); rp_dist объявлено в RealPointMetric.v:113, вне семи. Оговорка «в опорных файлах главы» точна."
+  },
+  {
+   "line": 505,
+   "theorem": "metric_cauchy",
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "в `ProcessTopMetric.v` есть тесно связанная и для анализа более важная конструкция — *метрическое условие Коши*:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopMetric.v:187; блок кода (стр. 509) совпадает."
+  },
+  {
+   "line": 518,
+   "theorem": "metric_cauchy_equiv",
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "И `ProcessTopMetric.v` доказывает, что это в точности обычное процессное условие Коши:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopMetric.v:213 — forall a, is_Cauchy a <-> metric_cauchy a; обе стороны; блок кода (стр. 521) совпадает. Сомнительное место: две стороны совпадают развёрткой определения qdist (равенство is_Cauchy a = metric_cauchy a доказывается `reflexivity`), так что теорема закрепляет переименование, а не новый факт."
+  },
+  {
+   "line": 544,
+   "theorem": "cauchy_dist_is_cauchy",
+   "file": "src/RealPointMetric.v",
+   "claim": "Лемма именно такого вида — «процесс расстояний двух Коши-процессов есть Коши» — теперь доказана: это `cauchy_dist_is_cauchy` из файла `RealPointMetric.v`, а сама оценка записана леммой `dist_of_dists_le`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора): было — названа cauchy_abs_is_cauchy, лемма о модуле ОДНОГО процесса. Добавлена cauchy_dist_is_cauchy : forall a b : CauchySeq, is_cauchy (fun n => Qabs (cs_seq a n - cs_seq b n)) и pointwise_dist_is_cauchy — то же для голых процессов. Closed under the global context."
+  },
+  {
+   "line": 548,
+   "theorem": null,
+   "file": "src/RealPointMetric.v",
+   "claim": "В семи *опорных* файлах этой главы её не было, но в репозитории она есть",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v в число семи опорных файлов не входит; файл в репозитории есть, 18 Qed, все Closed."
+  },
+  {
+   "line": 555,
+   "theorem": "process_dist",
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "Она задана в `ProcessSpace.v` и называется `process_dist`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessSpace.v:20; блок кода (стр. 557–564) совпадает с :14–21."
+  },
+  {
+   "line": 570,
+   "theorem": "process_dist_aux",
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "это *конечная взвешенная сумма*: по всем шагам от $0$ до $N$ берутся расхождения $|f(k)-g(k)|$, каждое с весом $(1/2)^k$, и складываются",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessSpace.v:14; Qpow — SeriesConvergence.v:35. Развёртка при N = 2 (компилятор): |f 0 − g 0| + (1/2)·|f 1 − g 1| + (1/2)(1/2)·|f 2 − g 2| — веса (1/2)^k, шаги 0…N."
+  },
+  {
+   "line": 590,
+   "theorem": null,
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "И `process_dist` — *не* предельное расстояние между классами процессов: никакого перехода к пределу в определении нет, есть конечный горизонт.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Определение — конечная рекурсия по N; согласованность с process_equiv в файле не доказывается, и глава её не утверждает."
+  },
+  {
+   "line": 602,
+   "theorem": null,
+   "file": "src/RealPointMetric.v",
+   "claim": "поточечное расхождение на каждом уровне (понятие главы; в семи опорных файлах имени нет, вне их — `rp_dist`, § 1.8.2)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора): было «отдельного имени в коде нет» — имя есть: rp_dist (RealPointMetric.v), cs_rp_dist: n-й член равен Qabs (cs_seq a n - cs_seq b n). Слова приведены к сказанному на стр. 501–503 и в § 1.8.2."
+  },
+  {
+   "line": 615,
+   "theorem": "cylinder",
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "`cylinder` (совпадение процессов на первых $N$ координатах в пределах радиуса)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessSpace.v:10 — forall k, (k <= N)%nat -> Qabs (f k - center k) < radius. Мелочь: координат N + 1 (с нулевой по N-ю); близость строгая."
+  },
+  {
+   "line": 617,
+   "theorem": "process_ball",
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "`process_ball` (шар по конечногоризонтной дистанции)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessSpace.v:36 — process_dist center f N < r; горизонт N — параметр шара."
+  },
+  {
+   "line": 618,
+   "theorem": "process_bounded",
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "`process_bounded` (ограниченность процесса)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessSpace.v:49 — forall K, Qabs (f K) <= B (одноимённое определение есть ещё в zeta/LiProcess.v:197; глава называет ProcessSpace.v)."
+  },
+  {
+   "line": 618,
+   "theorem": null,
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "Доказаны базовые факты — расстояние процесса до самого себя есть нуль, центр лежит в своём шаре, постоянный процесс ограничен.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_dist_self (:23), self_in_ball (:39), const_bounded (:52); ещё cylinder_self (:42) и zero_bounded (:55); всего в файле 6 Qed. Неотрицательность, симметрия и неравенство треугольника для process_dist в файле не доказаны — глава их и не утверждает."
+  },
+  {
+   "line": 624,
+   "theorem": null,
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "`ProcessSpace.v` — слой *инфраструктурный*: он закладывает заготовки топологии на пространстве процессов, но полной метрики на типе классов `RealPoint` не строит.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено с файлом (63 строки): определения cylinder, process_dist, process_ball, process_bounded и шесть простых лемм; RealPoint в файле не упоминается. Статус назван честно."
+  },
+  {
+   "line": 628,
+   "theorem": "process_space_complete",
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "Вопреки имени, `process_space_complete` *не* есть теорема о полноте пространства процессов. Если вчитаться в её доказательство, она оказывается простой *конъюнкцией двух уже доказанных тривиальных лемм*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessSpace.v:58 — (forall f N, process_dist f f N == 0) /\\ (forall f r N, 0 < r -> process_ball f r N f); доказательство — split; [exact process_dist_self | exact self_in_ball]. Глава называет положение дел точно."
+  },
+  {
+   "line": 648,
+   "theorem": "GenProcess",
+   "file": "src/ProcessGeneral.v",
+   "claim": "В `ProcessGeneral.v` это записано так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:50 — Definition GenProcess (A : Type) := nat -> A; блок кода (стр. 649) совпадает."
+  },
+  {
+   "line": 654,
+   "theorem": null,
+   "file": "src/ProcessGeneral.v",
+   "claim": "Процесс Коши — частный случай, $A = ℚ$. Бинарный процесс из Главы 4.5 — частный случай, $A = \\texttt{bool}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealProcess := nat -> Q (ProcessCore.v:34) и BinProcess := nat -> bool (ProcessTypes.v:34) определены независимо от GenProcess, но совпадают с GenProcess Q и GenProcess bool развёрткой (проверено компилятором: приведение типов в обе стороны проходит без доказательства)."
+  },
+  {
+   "line": 658,
+   "theorem": "observe",
+   "file": "src/ProcessGeneral.v",
+   "claim": "`observe` (прочесть значение на шаге $n$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:53 — observe p n := p n."
+  },
+  {
+   "line": 659,
+   "theorem": "prefix",
+   "file": "src/ProcessGeneral.v",
+   "claim": "`prefix` (собрать первые $n$ значений в список — конечное наблюдение, в духе $P4$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:56; длина списка равна n — prefix_length (:83), k-й элемент равен p k — prefix_nth (:93)."
+  },
+  {
+   "line": 661,
+   "theorem": "process_map",
+   "file": "src/ProcessGeneral.v",
+   "claim": "`process_map` (применить функцию к каждому шагу)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:63 — fun n => f (p n)."
+  },
+  {
+   "line": 662,
+   "theorem": "const_process",
+   "file": "src/ProcessGeneral.v",
+   "claim": "`const_process` (постоянный процесс). Всё это — содержание `ProcessGeneral.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:67 — const_process {A} (a : A) : GenProcess A := fun _ => a. Одноимённое определение для ℚ есть в ProcessCore.v:37; глава здесь называет ProcessGeneral.v."
+  },
+  {
+   "line": 667,
+   "theorem": "is_cauchy_gen",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Главное, что даёт общая схема, — *обобщённое условие Коши*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:190; блок кода (стр. 670–674) совпадает; расстояние dist : A -> A -> Q."
+  },
+  {
+   "line": 684,
+   "theorem": "cauchy_Q_equiv",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Это совпадение и подтверждает лемма `cauchy_Q_equiv` из `ProcessGeneral.v` — `is_cauchy` и `is_cauchy_gen Qdist` эквивалентны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:220 — forall a : nat -> Q, is_cauchy a <-> is_cauchy_gen Qdist a; обе стороны. Доказательство — unfold и reflexivity: стороны совпадают по определению, «в точности совпадает» сказано верно."
+  },
+  {
+   "line": 692,
+   "theorem": "process_map_cauchy",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Полезная лемма этого слоя — `process_map_cauchy`: отображение, не *увеличивающее* расстояний, переводит Коши-процесс в Коши-процесс.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:247 — (forall a1 a2, distB (f a1) (f a2) <= distA a1 a2) -> is_cauchy_gen distA p -> is_cauchy_gen distB (process_map f p); условие названо."
+  },
+  {
+   "line": 694,
+   "theorem": "cauchy_map_lipschitz",
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "И родственная ей, уже в `ProcessTopMetric.v`, — `cauchy_map_lipschitz`: Липшицево отображение сохраняет свойство Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopMetric.v:220 — для f : Q -> Q: 0 <= K -> lipschitz f K -> is_Cauchy a -> is_Cauchy (fun n => f (a n)); условие липшицевости названо; объявление — Theorem."
+  },
+  {
+   "line": 706,
+   "theorem": "process_equiv",
+   "file": "src/ProcessGeneral.v",
+   "claim": "В `ProcessGeneral.v` `process_equiv` — это *обобщённое поточечное* отношение: два процесса эквивалентны, если согласованы на каждом шаге относительно заданного отношения",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:122 — process_equiv eq_A p1 p2 := forall n, eq_A (p1 n) (p2 n)."
+  },
+  {
+   "line": 709,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В `ProcessCore.v` имя `process_equiv` носит *другое* отношение — *одинакового предела* для рациональных процессов: два процесса Коши эквивалентны, если сходятся к одному числу",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:170 — forall eps > 0, exists N, forall n >= N, Qabs (R1 n - R2 n) < eps. Сомнительное место: определение говорит «разность стремится к нулю» и не требует ни свойства Коши, ни числа-предела (над ℚ его может не быть); слова «сходятся к одному числу» повторяют комментарий файла (:169)."
+  },
+  {
+   "line": 713,
+   "theorem": "cauchy_equiv",
+   "file": "src/CauchyReal.v",
+   "claim": "А в `CauchyReal.v` родственное отношение одинакового предела названо `cauchy_equiv`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:57 — та же формула на CauchySeq; связь двух отношений доказана в ProcessBridge.v (:66, :78)."
+  },
+  {
+   "line": 726,
+   "theorem": "CauchySeq",
+   "file": "src/CauchyReal.v",
+   "claim": "`CauchySeq` из `CauchyReal.v` — запись, объединяющая последовательность с доказательством её Коши-свойства",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:48 — Record CauchySeq := mkCauchy { cs_seq :> nat -> Q; cs_cauchy : is_cauchy cs_seq }."
+  },
+  {
+   "line": 728,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "`RealProcess` из `ProcessCore.v` — голый процесс `nat -> Q`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:34 — Definition RealProcess := nat -> Q (имя объявлено ещё в девяти файлах; глава называет ProcessCore.v)."
+  },
+  {
+   "line": 733,
+   "theorem": null,
+   "file": "src/process/ProcessBridge.v",
+   "claim": "между этими типами нужно навести *мост* — переходы туда и обратно, при которых сохраняются Коши-свойство и эквивалентность. Этот мост и построен в файле `ProcessBridge.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cauchyseq_to_process (:35) и process_to_cauchyseq (:39); свойство Коши — cauchyseq_is_cauchy (:47); эквивалентность в обе стороны — cauchy_equiv_to_process_equiv (:66), process_equiv_to_cauchy_equiv (:78); обходы roundtrip_* (:94–:120). 10 Qed, все Closed under the global context."
+  },
+  {
+   "line": 739,
+   "theorem": "cauchy_seq_is_gen_process",
+   "file": "src/ProcessGeneral.v",
+   "claim": "лемма `cauchy_seq_is_gen_process`: всякая `CauchySeq` есть, в частности, `GenProcess` над $ℚ$, удовлетворяющий обобщённому условию Коши",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:228 — forall cs : CauchySeq, is_cauchy_gen Qdist (cs_seq cs)."
+  },
+  {
+   "line": 770,
+   "theorem": "is_complete_metric",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "В абстрактной секции `MetricSpace.v` мы записываем это так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:78; блок кода (стр. 771) совпадает. Определение — для расстояния со значениями в ℚ (d : X -> X -> Q)."
+  },
+  {
+   "line": 787,
+   "theorem": null,
+   "file": null,
+   "claim": "В семи опорных файлах Главы 5.1 *нет* теоремы, которая доказывала бы полноту.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено: is_complete_metric встречается только в MetricSpace.v и только как определение (поиск по src); process_space_complete и cauchy_complete_self полноты не утверждают — глава это оговаривает."
+  },
+  {
+   "line": 792,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Понятие `is_complete_metric` введено — но ни к одному пространству как доказанная теорема не применено.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: вне MetricSpace.v предикат нигде не применён. После шага 4 (12.11) имя упомянуто ещё в шапке RealPointComplete.v — в оговорке, что к паре (RealPoint, rp_dist) предикат буквально не применяется (расстояние там — точка, а предикат записан для d : X -> X -> Q)."
+  },
+  {
+   "line": 803,
+   "theorem": "cauchy_complete_self",
+   "file": "src/CauchyReal.v",
+   "claim": "Файл `CauchyReal.v` содержит лемму `cauchy_complete_self` и родственные ей — свойства *самих Коши-представителей*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:300 (объявление — Theorem): для n >= N: cauchy_le (cauchy_sub a (cauchy_const (cs_seq a n))) (cauchy_const eps) — оценка сверху; родственные: cauchy_rational_approx (:287), cauchy_complete_self_lower (:323), cauchy_complete_self_two_sided (:345). Оформление: имя на странице разорвано переводом строки (стр. 800–801) и читается с пробелом внутри."
+  },
+  {
+   "line": 806,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "Но это *не* полная метрическая полнота фактор-пространства классов",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: теоремы раздела 6 файла говорят об одном представителе; последовательностей точек в них нет. Статус назван честно."
+  },
+  {
+   "line": 831,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "`CauchySeq` хранит доказательство Коши-свойства в Prop — в мире логических утверждений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:43, :50 — is_cauchy : (nat -> Q) -> Prop; поле cs_cauchy : is_cauchy cs_seq."
+  },
+  {
+   "line": 837,
+   "theorem": "is_Regular_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Извлечение модуля как вычислимого объекта требует *информативного* варианта свойства — например, регулярного Коши-условия (`is_Regular_Cauchy` из `ProcessCore.v`) или явно приложенного модуля.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:74 — Qabs (R m - R n) <= 1/m + 1/n при m, n >= 1: модуль задан явно; regular_implies_Cauchy (:107). Пробная проверка тезиса: для регулярных представителей предел Коши-последовательности точек строится без допущений, для произвольных — на L4_witness (см. запись к стр. 1020). Оформление: имя разорвано переводом строки (стр. 836–837 и 838–839)."
+  },
+  {
+   "line": 841,
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "ToS не случайно *различает* `is_Cauchy` и `is_Regular_Cauchy`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:68 (is_Cauchy) и :74 (is_Regular_Cauchy) — два разных определения; имя is_Cauchy объявлено ещё в восьми файлах, глава называет ProcessCore.v."
+  },
+  {
+   "line": 894,
+   "theorem": null,
+   "file": "src/RealPointComplete.v",
+   "claim": "Теоремой полнота стала вне этих файлов и для одного пространства — классов `RealPoint`: без допущений для регулярных представителей, на $L4$ для произвольных.",
+   "page_price": "без допущений — для регулярных представителей; L4 — для произвольных",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 4, слово автора): было «Применение этого понятия к конкретному процессному пространству … в опорных файлах главы не проведено и честно оставлено направлением» (статус был честен). Шагом 4 создан src/RealPointComplete.v: regular_class_complete — Closed under the global context; class_complete_L4 — в допущениях только ToS_Axioms.L4_witness. Раздел переписан: понятие is_complete_metric остаётся понятием, теорема названа с ценой, полнота пространства процессов с process_dist оставлена направлением."
+  },
+  {
+   "line": 920,
+   "theorem": "Archimedean",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Конкретно для метрики важна такая её форма: для любого $\\varepsilon > 0$ существует натуральное $N$, при котором $(1/2)^N < \\varepsilon$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Archimedean_ERR.v:104 — Theorem Archimedean : forall eps : Q, eps > 0 -> exists N : nat, 1 / Qpow2 N < eps — та же форма; Closed under the global context."
+  },
+  {
+   "line": 937,
+   "theorem": "Archimedean_width",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Архимедовость поставляет циклу *верхнюю границу числа шагов*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Archimedean_ERR.v:116 — width > 0 -> eps > 0 -> exists N, width / Qpow2 N < eps (половинное деление интервала ширины width). Существование — в Prop; оговорка главы о разнице между теоремой существования и исполняемой процедурой честна."
+  },
+  {
+   "line": 963,
+   "theorem": null,
+   "file": "src/Archimedean_ERR.v",
+   "claim": "| $1/10$ | $4$ | $(1/2)^4 = 1/16 < 1/10$ |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все три строки таблицы проверены компилятором в пробном файле: 1 / Qpow2 4 < 1#10, 1 / Qpow2 7 < 1#100, 1 / Qpow2 10 < 1#1000, и для N − 1 неравенство ложно — числа 4, 7, 10 наименьшие. В формализации таблицы нет; глава этого и не утверждает."
+  },
+  {
+   "line": 970,
+   "theorem": null,
+   "file": null,
+   "claim": "Числа в среднем столбце не угаданы — они вычислены, и каждую строку можно проверить прямым сравнением дробей",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено (см. запись к стр. 923): 1/16 < 1/10 < 1/8; 1/128 < 1/100 < 1/64; 1/1024 < 1/1000 < 1/512."
+  },
+  {
+   "line": 984,
+   "theorem": null,
+   "file": "src/stdlib/ProcessSpace.v",
+   "claim": "Семь *основных* опорных файлов Главы 5.1 в своих шапках заявляют статус «0 axioms» — ни одной аксиомы; об этом сказано в § 1.1.",
+   "page_price": "семь файлов — «0 axioms» в шапках",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же: седьмой файл, stdlib/ProcessSpace.v, получил шапку со статусом (см. запись к § 1.1)."
+  },
+  {
+   "line": 991,
+   "theorem": null,
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Настоящий раздел, однако, опирается дополнительно на отдельный файл — `Archimedean_ERR.v`, где архимедовость $ℚ$ и формализована.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Archimedean_ERR.v: 14 Qed; Archimedean (:104), Archimedean_width (:116), shrinking_interval_Cauchy (:158)."
+  },
+  {
+   "line": 994,
+   "theorem": null,
+   "file": "src/Archimedean_ERR.v",
+   "claim": "семь основных файлов — без аксиом; раздел об архимедовости привлекает `Archimedean_ERR.v` дополнительно, и его зависимость от аксиом, если она есть, следует устанавливать отдельно — командой `Print Assumptions` для соответствующей теоремы",
+   "page_price": "семь файлов — без аксиом; Archimedean_ERR.v — устанавливать отдельно",
+   "verdict": "ok",
+   "note": "Установлено: Print Assumptions Archimedean — Closed under the global context; то же у всех 14 лемм файла; шапка файла: «AXIOMS: None». Слова «если она есть» можно заменить фактом (см. заметки, сомнительные места)."
+  },
+  {
+   "line": 1013,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Рациональная метрика на $ℚ$: расстояние $|x-y|$ и четыре аксиомы метрики, все доказанные (одна конструкция под тремя именами — `Q_dist`, `qdist`, `Qdist`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q_dist_nonneg, Q_dist_zero, Q_dist_sym, Q_dist_triangle (MetricSpace.v:196–226); три имени конвертируемы."
+  },
+  {
+   "line": 1014,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Абстрактная метрическая рамка: метрическое пространство как параметрическая `Section`, с понятиями Коши, предела, сжатия и общими леммами — без аксиом (в файле зафиксировано двадцать четыре проверенных результата, включая слои $ℚ$ и `QVec`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора): число на странице приведено к файлу — «двадцать четыре проверенных результата» (было «восемнадцать»)."
+  },
+  {
+   "line": 1015,
+   "theorem": "metric_cauchy_equiv",
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "Процессное условие Коши через рациональное расстояние — `metric_cauchy`, доказанно эквивалентное обычному `is_Cauchy` (теорема `metric_cauchy_equiv`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessTopMetric.v:213 — эквивалентность в обе стороны (по определению qdist)."
+  },
+  {
+   "line": 1017,
+   "theorem": null,
+   "file": "src/process/ProcessBridge.v",
+   "claim": "Мосты между типами процессов: `CauchySeq`, `RealProcess` и общий `GenProcess` сшиты в одну согласованную картину (`ProcessBridge.v`, `cauchy_seq_is_gen_process`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v (10 Qed) и ProcessGeneral.v:228; см. записи к стр. 731 и 737."
+  },
+  {
+   "line": 1021,
+   "theorem": "RealPoint",
+   "file": "src/RealPointSetoid.v",
+   "claim": "Фактор-тип `RealPoint` как Rocq-объект здесь не строится — глава работала с процессами и рациональными расстояниями.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointSetoid.v:74 — Definition RealPoint := CauchySeq: носитель сетоида по cauchy_equiv, не фактортип; фактортипа в src нет (как и сказано в Главе 4.3)."
+  },
+  {
+   "line": 1022,
+   "theorem": "rp_dist_Proper",
+   "file": "src/RealPointMetric.v",
+   "claim": "в репозитории она построена (файл `RealPointMetric.v`: `rp_dist` с аксиомами метрики и `rp_dist_Proper` — независимостью от выбора представителя)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:127 — Instance rp_dist_Proper : Proper (cauchy_equiv ==> cauchy_equiv ==> cauchy_equiv) rp_dist; Closed under the global context."
+  },
+  {
+   "line": 1023,
+   "theorem": null,
+   "file": "src/RealPointComplete.v",
+   "claim": "Полнота пространства этих классов в семи файлах *этой главы* не доказывается — но в репозитории она доказана (файл `RealPointComplete.v`: `regular_class_complete` без допущений, `class_complete_L4` на $L4$); см. § 1.6.",
+   "page_price": "regular_class_complete — без допущений; class_complete_L4 — L4",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 4, слово автора): было «Полная метрическая полнота пространства этих классов — не доказана; полнота введена как понятие». Цена обеих теорем сверена Print Assumptions (записи к § 1.6)."
+  },
+  {
+   "line": 1037,
+   "theorem": "rp_dist",
+   "file": "src/RealPointMetric.v",
+   "claim": "Во-первых, поточечное расстояние как именованная конструкция — причём сразу со значениями в *вещественных*, а не рациональных: расстояние двух точек само есть точка (процесс),",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:113 — Definition rp_dist (a b : RealPoint) : RealPoint := cauchy_abs (cauchy_sub a b); формула главы (стр. 1002–1003) совпадает; cs_rp_dist (:115) — n-й член равен Qabs (cs_seq a n - cs_seq b n)."
+  },
+  {
+   "line": 1047,
+   "theorem": "cauchy_dist_is_cauchy",
+   "file": "src/RealPointMetric.v",
+   "claim": "процесс расстояний есть Коши (`cauchy_dist_is_cauchy` — та оценка-набросок из § 1.4.2, ставшая теоремой)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора): было — названа cauchy_abs_is_cauchy (лемма об одном процессе; она остаётся шагом построения rp_dist). Теперь названа лемма о двух процессах."
+  },
+  {
+   "line": 1048,
+   "theorem": "rp_dist_compat",
+   "file": "src/RealPointMetric.v",
+   "claim": "Вторая: `rp_dist` *согласовано* с эквивалентностью — замена представителей на эквивалентные не меняет расстояния (`rp_dist_compat` и инстанс `rp_dist_Proper`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:120 — a ~~ a' -> b ~~ b' -> rp_dist a b ~~ rp_dist a' b'; «не меняет» — с точностью до cauchy_equiv, то есть на классах."
+  },
+  {
+   "line": 1051,
+   "theorem": null,
+   "file": "src/RealPointMetric.v",
+   "claim": "Именно вторая лемма *спускает* расстояние с процессов на классы и превращает `RealPoint` в метрическое пространство.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: верно в смысле доказанных для rp_dist аксиом; под абстрактную секцию § 1.3 (d : X -> X -> Q) rp_dist не подпадает — его значения лежат в RealPoint, и is_complete_metric к паре (RealPoint, rp_dist) в нынешнем виде не применим."
+  },
+  {
+   "line": 1054,
+   "theorem": "rp_dist_nonneg",
+   "file": "src/RealPointMetric.v",
+   "claim": "неотрицательность (`rp_dist_nonneg`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:136 — forall a b n, 0 <= cs_seq (rp_dist a b) n: поточечно, на каждом приближении."
+  },
+  {
+   "line": 1054,
+   "theorem": "rp_dist_self_zero",
+   "file": "src/RealPointMetric.v",
+   "claim": "нуль на диагонали (`rp_dist_self_zero`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:148 — rp_dist a a ~~ cauchy_const 0."
+  },
+  {
+   "line": 1055,
+   "theorem": "rp_dist_sym",
+   "file": "src/RealPointMetric.v",
+   "claim": "симметрия (`rp_dist_sym`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:140 — rp_dist a b ~~ rp_dist b a."
+  },
+  {
+   "line": 1056,
+   "theorem": "rp_dist_triangle",
+   "file": "src/RealPointMetric.v",
+   "claim": "треугольник (`rp_dist_triangle`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:175 — cauchy_le (rp_dist a c) (cauchy_add (rp_dist a b) (rp_dist b c)); cauchy_le — порядок на классах (CauchyReal.v:226), без условий."
+  },
+  {
+   "line": 1057,
+   "theorem": "rp_dist_eq_zero_iff",
+   "file": "src/RealPointMetric.v",
+   "claim": "и сверх них разделимость (`rp_dist_eq_zero_iff`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointMetric.v:157 — rp_dist a b ~~ cauchy_const 0 <-> a ~~ b; обе стороны; разделимость на классах."
+  },
+  {
+   "line": 1060,
+   "theorem": null,
+   "file": "src/RealPointComplete.v",
+   "claim": "Закрыт и следующий слой — метрическая *полнота* пространства классов: она доказана в `RealPointComplete.v` (§ 1.6).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 4, слово автора): было «Открытым остаётся лишь следующий слой — метрическая полнота пространства классов». Пробное доказательство помощника перенесено в src/RealPointComplete.v и собрано в общей сборке (2042 из 2042)."
+  },
+  {
+   "line": 1066,
+   "theorem": "list_max_dist",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "*$L^\\infty$-метрику на рациональных векторах* `QVec` — расстояние, равное наибольшему из покоординатных расхождений (`list_max_dist`), с доказанными для него четырьмя свойствами метрики",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 7, слово автора) — слова те же, доведена формализация: четыре свойства были доказаны только для списков (треугольник — при равных длинах); добавлены QVec_dist_nonneg, QVec_dist_zero, QVec_dist_sym, QVec_dist_triangle — для самого расстояния на QVec n, треугольник без условия (длины равны по построению, qv_length). Closed under the global context."
+  },
+  {
+   "line": 1099,
+   "theorem": null,
+   "file": null,
+   "claim": "Все семь опорных файлов — без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions всех 107 лемм семи файлов — Closed under the global context."
+  },
+  {
+   "line": 1106,
+   "theorem": null,
+   "file": "src/process/ProcessTopMetric.v",
+   "claim": "строгая разделимость в неё как общая гипотеза не входит, для рациональной метрики она доказана отдельно",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "qdist_zero_iff (ProcessTopMetric.v:63); для Q_dist в MetricSpace.v отдельной леммы о разделимости нет — она переносится с qdist, так как определения совпадают."
+  },
+  {
+   "line": 1114,
+   "theorem": null,
+   "file": "src/RealPointComplete.v",
+   "claim": "Доказана и *метрическая полнота* пространства этих классов — в `RealPointComplete.v`: без допущений для регулярных представителей, на $L4$ для произвольных. Открытым остаётся реифицированный фактор-тип отдельным объектом — его ToS не строит сознательно, по $P4$ (Глава 4.3).",
+   "page_price": "без допущений — для регулярных представителей; L4 — для произвольных",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (Часть V, шаг 4, слово автора): было «Открытыми остаются полная метрическая полнота … (полнота введена как понятие, не как доказанная теорема) и реифицированный фактор-тип». Фактор-типа в src по-прежнему нет — статус честен."
+  },
+  {
+   "line": 1125,
+   "theorem": null,
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "Это дословная E/R/R-разметка в шапке файла `MetricSpace.v`; здесь она лишь разворачивается по образцу Части I.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка MetricSpace.v:6–8; перевод дословный."
+  },
+  {
+   "line": 1126,
+   "theorem": "close",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (слово из шапки файла)",
+   "claim": "Эти четыре позиции — `close` / `far` / `convergent` / `divergent` — перечислены в строке `Status` шапки `MetricSpace.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:9 — «Status: close (d < eps) | far (d >= eps) | convergent | divergent»; слово шапки, не объявление."
+  },
+  {
+   "line": 1126,
+   "theorem": "far",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (слово из шапки файла)",
+   "claim": "Эти четыре позиции — `close` / `far` / `convergent` / `divergent` — перечислены в строке `Status` шапки `MetricSpace.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:9; слово шапки, не объявление."
+  },
+  {
+   "line": 1126,
+   "theorem": "convergent",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (слово из шапки файла)",
+   "claim": "Эти четыре позиции — `close` / `far` / `convergent` / `divergent` — перечислены в строке `Status` шапки `MetricSpace.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:9; слово шапки, не объявление."
+  },
+  {
+   "line": 1126,
+   "theorem": "divergent",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (слово из шапки файла)",
+   "claim": "Эти четыре позиции — `close` / `far` / `convergent` / `divergent` — перечислены в строке `Status` шапки `MetricSpace.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "MetricSpace.v:9; слово шапки, не объявление."
+  },
+  {
+   "line": 1126,
+   "theorem": "Status",
+   "file": "src/stdlib/MetricSpace.v",
+   "external": true,
+   "assumptions": "не применимо (слово из шапки файла)",
+   "claim": "Эти четыре позиции — `close` / `far` / `convergent` / `divergent` — перечислены в строке `Status` шапки `MetricSpace.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Status` здесь — название строки шапки MetricSpace.v:9, а не одноимённые индуктивные типы (ethics/EthicsModality.v:28 и ещё пять)."
+  },
+  {
+   "line": 873,
+   "file": "src/RealPointComplete.v",
+   "page_price": "ни одного допущения",
+   "verdict": "ok",
+   "note": "Новый текст шага 4. Формулировка: forall s : nat -> RealPoint, (forall k, is_Regular_Cauchy (cs_seq (s k))) -> class_cauchy s -> exists L : RealPoint, class_limit s L; рубеж idx k = k + 1 (S), остаток хвоста 2/(k+1). Print Assumptions: Closed under the global context.",
+   "theorem": "regular_class_complete",
+   "claim": "Если представители регулярны — скорость сходимости каждого известна заранее (`is_Regular_Cauchy`), — рубеж вычисляется, и теорема `regular_class_complete` не опирается ни на одно допущение."
+  },
+  {
+   "line": 878,
+   "file": "src/RealPointComplete.v",
+   "page_price": "только L4_witness; classic не нужен",
+   "verdict": "ok",
+   "note": "Новый текст шага 4. Формулировка: forall s : nat -> RealPoint, class_cauchy s -> exists L : RealPoint, class_limit s L; рубеж k-й точки — proj1_sig (L4_witness … (cs_cauchy (s k) (1/(k+1)) …)), по одному применению на каждое k. Print Assumptions: только ToS_Axioms.L4_witness.",
+   "theorem": "class_complete_L4",
+   "claim": "теорема `class_complete_L4` стоит на `L4_witness`, применённом к счётному семейству точек, и только на нём; `classic` ей не нужен."
+  },
+  {
+   "line": 864,
+   "file": "src/RealPointComplete.v",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новый текст шага 4. (forall k, s k ~~ s' k) -> class_cauchy s -> class_cauchy s'; Closed under the global context.",
+   "theorem": "class_cauchy_compat",
+   "claim": "Обе записи корректны на классах: замена представителей их не меняет (`class_cauchy_compat`, `class_limit_compat`)."
+  },
+  {
+   "line": 864,
+   "file": "src/RealPointComplete.v",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новый текст шага 4. (forall k, s k ~~ s' k) -> L ~~ L' -> class_limit s L -> class_limit s' L'; Closed under the global context.",
+   "theorem": "class_limit_compat",
+   "claim": "замена представителей их не меняет (`class_cauchy_compat`, `class_limit_compat`)"
+  },
+  {
+   "line": 869,
+   "file": "src/RealPointComplete.v",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новый текст шага 4. Секция DiagonalCore: при рубежах idx (хвост k-й точки после idx k уходит не дальше r k), r k -> 0 и class_cauchy s — diag_idx_is_cauchy (диагональ k |-> s k (idx k) есть процесс Коши) и diag_idx_converges : class_limit s diag_idx_limit; Closed under the global context.",
+   "theorem": "diag_idx_converges",
+   "claim": "Диагональный процесс есть процесс Коши и служит пределом (`diag_idx_converges`)."
+  },
+  {
+   "line": 546,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 7: Qabs (Qabs (pm - qm) - Qabs (pn - qn)) <= Qabs (pm - pn) + Qabs (qm - qn) — дословно оценка, выписанная в главе формулой. Closed under the global context.",
+   "theorem": "dist_of_dists_le",
+   "file": "src/RealPointMetric.v",
+   "claim": "а сама оценка записана леммой `dist_of_dists_le`."
+  },
+  {
+   "line": 1069,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 7: 0 <= QVec_dist v1 v2. Closed under the global context.",
+   "theorem": "QVec_dist_nonneg",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "с доказанными для него четырьмя свойствами метрики (`QVec_dist_nonneg`, `QVec_dist_zero`, `QVec_dist_sym`, `QVec_dist_triangle`)."
+  },
+  {
+   "line": 1070,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 7: QVec_dist v v == 0. Closed under the global context.",
+   "theorem": "QVec_dist_zero",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "(`QVec_dist_nonneg`, `QVec_dist_zero`, `QVec_dist_sym`, `QVec_dist_triangle`)"
+  },
+  {
+   "line": 1070,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 7: QVec_dist v1 v2 == QVec_dist v2 v1. Closed under the global context.",
+   "theorem": "QVec_dist_sym",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "`QVec_dist_sym`, `QVec_dist_triangle`)."
+  },
+  {
+   "line": 1071,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая лемма шага 7: QVec_dist v1 v3 <= QVec_dist v1 v2 + QVec_dist v2 v3 для v1 v2 v3 : QVec n — без условия на длины (у списков оно есть и необходимо). Closed under the global context.",
+   "theorem": "QVec_dist_triangle",
+   "file": "src/stdlib/MetricSpace.v",
+   "claim": "`QVec_dist_triangle`). В настоящей главе"
+  }
+ ]
+}
