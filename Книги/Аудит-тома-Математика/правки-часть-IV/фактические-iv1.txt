@@ -1,0 +1,52 @@
+@@FILE Направления/Математика/Том Математика/04 Процессные действительные числа/01 P4 бесконечность как процесс.md
+@@OLD
+`P4_holds_formalized`); доказательство опирается лишь на
+`classic` и процессную арифметику. Когда глава говорит, что
+@@NEW
+`P4_holds_formalized`); доказательство не опирается ни на одно
+допущение (`Print Assumptions`: «Closed under the global context»).
+Когда глава говорит, что
+@@END
+@@OLD
+файл содержит 25 доказанных утверждений, 0 `Admitted`, и наследует единственную логическую аксиому `classic` (о ней § 1.2.4).
+@@NEW
+файл содержит 25 доказанных утверждений, 0 `Admitted`; он импортирует классический модуль, но ни одна его теорема аксиому `classic` не применяет — `Print Assumptions` для всех отвечает «Closed under the global context» (об аксиоме — § 1.2.4).
+@@END
+@@OLD
+несовместим (`P4_Eliminates_Infinity`: `nat` — правило
+индукции, не готовое множество), причём функция выбора *как
+@@NEW
+несовместим (`P4CompletedInfinity.v`, теорема
+`completed_inf_contradicts_P4`; `nat` при этом — правило
+индукции, не готовое множество), причём функция выбора *как
+@@END
+@@OLD
+обыкновенная `Fixpoint`-функция по этому типу. Термination-checker
+@@NEW
+обыкновенная `Fixpoint`-функция по этому типу. Termination-checker
+@@END
+@@OLD
+[^8]: `P4_Eliminates_Infinity.v` (каталог `src/foundation/`), 12 доказанных утверждений,
+@@NEW
+[^8]: `P4_Eliminates_Infinity.v` (каталог `src/foundation/`), 10 доказанных утверждений,
+@@END
+@@OLD
+[^11]: `P4_Eliminates_ATR.v` (каталог `src/foundation/`), 15 доказанных утверждений,
+@@NEW
+[^11]: `P4_Eliminates_ATR.v` (каталог `src/foundation/`), 17 доказанных утверждений,
+@@END
+@@OLD
+[^13]: `P4CompletedInfinity.v` (каталог `src/foundation/`), 12 доказанных утверждений,
+@@NEW
+[^13]: `P4CompletedInfinity.v` (каталог `src/foundation/`), 9 доказанных утверждений,
+@@END
+@@OLD
+[^14]: `P4ProhibitsAC.v` (каталог `src/foundation/`), 10 доказанных утверждений,
+@@NEW
+[^14]: `P4ProhibitsAC.v` (каталог `src/foundation/`), 8 доказанных утверждений,
+@@END
+@@OLD
+[^15]: `P4ProhibitionSynthesis.v` (каталог `src/foundation/`), 8 доказанных утверждений,
+@@NEW
+[^15]: `P4ProhibitionSynthesis.v` (каталог `src/foundation/`), 6 доказанных утверждений,
+@@END

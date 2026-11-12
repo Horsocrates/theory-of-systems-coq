@@ -14,7 +14,7 @@
 (*  P4 connection: Euler trajectory IS a process (nat -> Q), convergence     *)
 (*  of (1+1/N)^N to e is a process limit.                                    *)
 (*                                                                           *)
-(*  STATUS: 20 Qed, 0 Admitted, 0 axioms                                     *)
+(*  STATUS: 23 Qed, 0 Admitted, 0 axioms                                     *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (* ========================================================================= *)
 
@@ -142,19 +142,19 @@ Qed.
 Lemma euler_traj_linear_1 :
   euler_traj f_const_one 0 4 1 == 1 # 4.
 Proof.
-  simpl. unfold euler_step, f_const_one, grid. simpl. ring.
+  simpl. unfold euler_step, f_const_one, grid. simpl. field.
 Qed.
 
 Lemma euler_traj_linear_2 :
   euler_traj f_const_one 0 4 2 == 1 # 2.
 Proof.
-  simpl. unfold euler_step, f_const_one, grid. simpl. ring.
+  simpl. unfold euler_step, f_const_one, grid. simpl. field.
 Qed.
 
 Lemma euler_traj_linear_4 :
   euler_traj f_const_one 0 4 4 == 1.
 Proof.
-  simpl. unfold euler_step, f_const_one, grid. simpl. ring.
+  simpl. unfold euler_step, f_const_one, grid. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -165,14 +165,14 @@ Qed.
 Lemma euler_traj_quadratic_4 :
   euler_traj f_two_t 0 4 4 == 3 # 4.
 Proof.
-  simpl. unfold euler_step, f_two_t, grid. simpl. ring.
+  simpl. unfold euler_step, f_two_t, grid. simpl. field.
 Qed.
 
 (* The exact solution at t=1 is 1, Euler gives 3/4 with N=4 *)
 Lemma euler_quadratic_error :
   1 - euler_traj f_two_t 0 4 4 == 1 # 4.
 Proof.
-  simpl. unfold euler_step, f_two_t, grid. simpl. ring.
+  simpl. unfold euler_step, f_two_t, grid. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -247,7 +247,7 @@ Qed.
 
 Lemma grid_0 : forall N, grid N 0 == 0.
 Proof.
-  intro N. unfold grid. simpl. ring.
+  intro N. unfold grid, Qdiv. simpl. ring.
 Qed.
 
 (* ========================================================================= *)
@@ -308,7 +308,9 @@ Proof.
   rewrite Qabs_pos by assumption.
   assert (c * L * Qabs (y1 - y2) == c * (L * Qabs (y1 - y2))) as Heq2 by ring.
   rewrite Heq2.
-  apply Qmult_le_compat_l; [| assumption].
+  rewrite (Qmult_comm c (Qabs (f t y1 - f t y2))),
+          (Qmult_comm c (L * Qabs (y1 - y2))).
+  apply Qmult_le_compat_r; [| assumption].
   apply Hf.
 Qed.
 
@@ -322,5 +324,5 @@ Definition f_const (a : Q) : ODE := fun _ _ => a.
 Lemma euler_linear_exact_2 :
   euler_traj (f_const 3) 0 2 2 == 3.
 Proof.
-  simpl. unfold euler_step, f_const, grid. simpl. ring.
+  simpl. unfold euler_step, f_const, grid. simpl. field.
 Qed.

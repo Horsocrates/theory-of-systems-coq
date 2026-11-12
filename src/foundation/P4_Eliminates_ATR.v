@@ -2,7 +2,7 @@
     Elements: Ordinals (OZero, OSucc, OLim), CB derivative, iterate_pred
     Roles:    Structural recursion eliminates ATR0 axiom
     Rules:    Coq's termination checker = the only needed principle
-    STATUS:   15 Qed, 0 Admitted, 0 new axioms
+    STATUS:   17 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY INSIGHT: ATR0 (Arithmetical Transfinite Recursion) is an axiom

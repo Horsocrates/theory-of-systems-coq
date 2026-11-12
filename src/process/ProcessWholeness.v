@@ -21,13 +21,12 @@
 (*  The GAP = the level witness is AT level L, not below it.                *)
 (*                                                                           *)
 (*  STATUS: 24 Qed, 0 Admitted                                              *)
-(*  AXIOMS: classic                                                          *)
+(*  AXIOMS: none (Classical is imported but not applied)                     *)
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith.Qabs Lia ZArith.
 From Stdlib Require Import Lqa.
 From Stdlib Require Import Classical.
-From Stdlib Require Import FunctionalExtensionality.
 
 Open Scope Q_scope.
 
@@ -270,20 +269,22 @@ Proof.
   - exfalso. lia.
 Qed.
 
-(** Wholeness process for a constant emergent family *)
-Lemma wholeness_process_emergent_family : forall L,
-  wholeness_process L (fun _ => P1_witness L) = const_process 1.
+(** Wholeness process for a constant emergent family.
+    Stated stage by stage: a process IS its stages (P4), so the identity of
+    two processes is agreement at every [n]; no functional extensionality. *)
+Lemma wholeness_process_emergent_family : forall L n,
+  wholeness_process L (fun _ => P1_witness L) n = const_process 1 n.
 Proof.
-  intros L. extensionality n.
+  intros L n.
   unfold wholeness_process, const_process.
   rewrite emergence_degree_witness. simpl. reflexivity.
 Qed.
 
-(** Wholeness process for a constant forgettable family *)
-Lemma wholeness_process_forgettable_family : forall L S,
-  wholeness_process L (fun _ => embed_obj L S) = const_process 0.
+(** Wholeness process for a constant forgettable family (stage by stage) *)
+Lemma wholeness_process_forgettable_family : forall L S n,
+  wholeness_process L (fun _ => embed_obj L S) n = const_process 0 n.
 Proof.
-  intros L S. extensionality n.
+  intros L S n.
   unfold wholeness_process, const_process.
   assert (H : emergence_degree L (embed_obj L S) = 0%nat).
   { apply emergence_degree_zero_iff. apply embed_is_forgettable. }

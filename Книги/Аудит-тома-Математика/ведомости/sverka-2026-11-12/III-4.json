@@ -1,0 +1,24 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "по `Print Assumptions` замкнуты — аксиома `classic` в их доказательствах не применяется",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "теоремы файла, на которые ссылается глава (`shrinking_interval_Cauchy`)",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части; одноимённая теорема есть и в Archimedean_ERR.v:158, тоже без допущений"
+  }
+ ]
+}

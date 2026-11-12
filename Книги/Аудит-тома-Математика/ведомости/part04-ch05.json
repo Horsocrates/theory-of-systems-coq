@@ -1,0 +1,693 @@
+{
+ "batch": "audit-part-04",
+ "chapter": "04 Процессные действительные числа/05 Процессный континуум.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 12,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "никакое регулярное перечисление процессов Коши не покрывает все процессные классы единичного отрезка",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "пересказ итога Главы 4.4: условие valid_regular_enumeration названо словом «регулярное»; вывод — существование процесса D в [0,1], не эквивалентного ни одному E n (ShrinkingIntervals_ERR.v:3569)"
+  },
+  {
+   "line": 76,
+   "theorem": null,
+   "claim": "Опорных файлов на этот раз три, и они образуют восходящую линию.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "число верно: названы три файла; цепочка импортов ProcessTypes -> ProcessDiagonal -> ProcessContinuumHypothesis подтверждена (ProcessDiagonal.v:31; ProcessContinuumHypothesis.v:36–37); то же число «три» на стр. 899"
+  },
+  {
+   "line": 77,
+   "theorem": null,
+   "file": "src/ProcessTypes.v",
+   "claim": "`ProcessTypes.v` вводит типы бинарных процессов, деревьев и совокупностей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "BinProcess, PrunedTree, BinCollection объявлены в файле (ProcessTypes.v:34, 67, 51)"
+  },
+  {
+   "line": 78,
+   "theorem": null,
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`ProcessDiagonal.v` строит на них диагональный аргумент.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "flip, diagonal, diagonal_differs, cantor_for_processes (ProcessDiagonal.v:38–122); файл импортирует ProcessTypes (стр. 31)"
+  },
+  {
+   "line": 79,
+   "theorem": null,
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "`ProcessContinuumHypothesis.v` доказывает центральную теорему — структурную дихотомию.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem process_continuum_hypothesis (ProcessContinuumHypothesis.v:619); в шапке файла «41 Qed, 0 Admitted» — действительный счёт тот же (41)"
+  },
+  {
+   "line": 90,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "`RealProcess` ${}={}$ `nat -> Q`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition RealProcess := nat -> Q (ProcessCore.v:34); то же определение повторено ещё в девяти файлах"
+  },
+  {
+   "line": 114,
+   "theorem": "BinProcess",
+   "file": "src/ProcessTypes.v",
+   "claim": "Definition BinProcess := nat -> bool.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода совпадает с ProcessTypes.v:34"
+  },
+  {
+   "line": 147,
+   "theorem": "bin_to_real",
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "файл `ProcessBinReal.v` строит перевод `bin_to_real`, который всякому бинарному процессу сопоставляет точку отрезка (частичные суммы $\\sum_k \\mathrm{bit}_k/2^{k+1}$, лежащие в $[0,1]$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bin_to_real := bin_partial, n-я частичная сумма bit(b k)/2^(k+1) (ProcessBinReal.v:84–90); попадание в [0,1] — bin_to_real_in_interval, без допущений"
+  },
+  {
+   "line": 152,
+   "theorem": "bin_ones_equiv_one",
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "образцом служит доказанная лемма `bin_ones_equiv_one` ($0{,}111\\ldots_2 = 1$ как равенство точек)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bin_to_real all_ones ~~ const_process 1 (ProcessBinReal.v:188, в файле объявлена как Theorem); без допущений"
+  },
+  {
+   "line": 155,
+   "theorem": null,
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "перевод не взаимно однозначен",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "сомнительное (статус): неинъективность перевода в файле не доказана — шапка относит её к «честной границе (вне ядра)» (ProcessBinReal.v:21–23), доказан только образец 0,111…=1; итог главы (стр. 915–917) честно называет общую неоднозначность записи открытой, а здесь она подана как видная «прямо на переводе»"
+  },
+  {
+   "line": 178,
+   "theorem": "bp_eq",
+   "file": "src/ProcessTypes.v",
+   "claim": "Definition bp_eq (p q : BinProcess) : Prop := forall n, p n = q n.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода совпадает с ProcessTypes.v:37; пересказ «совпадают на каждом шаге» точен"
+  },
+  {
+   "line": 185,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Там отношение `process_equiv` связывало процессы Коши с *общим пределом*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:170: для всякого eps разность членов меньше eps начиная с некоторого N; «общий предел» — пересказ, предел в определении не назван"
+  },
+  {
+   "line": 200,
+   "theorem": "BinCollection",
+   "file": "src/ProcessTypes.v",
+   "claim": "Definition BinCollection := BinProcess -> Prop.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода совпадает с ProcessTypes.v:51"
+  },
+  {
+   "line": 212,
+   "theorem": "is_enumerable",
+   "file": "src/ProcessTypes.v",
+   "claim": "Совокупность $C$ перечислима, если есть функция $f$ из номеров в бинарные процессы, накрывающая всякий член $C$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 207) совпадает с ProcessTypes.v:54; пересказ точен: exists f, forall p, C p -> exists n, bp_eq (f n) p"
+  },
+  {
+   "line": 237,
+   "theorem": "flip",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`flip` меняет `true` на `false` и обратно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 233) совпадает с ProcessDiagonal.v:38"
+  },
+  {
+   "line": 245,
+   "theorem": "diagonal",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "По перечислению $f$ строится бинарный процесс, который на шаге $n$ выдаёт *перевёрнутое* $n$-е значение $n$-го процесса перечисления.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 241) совпадает с ProcessDiagonal.v:41: fun n => flip (f n n)"
+  },
+  {
+   "line": 281,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Диагональный процесс не равен (по `bp_eq`) ни одному члену перечисления.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "forall f n, ~ bp_eq (diagonal f) (f n) (ProcessDiagonal.v:85); ход доказательства в главе совпадает с файлом: подстановка шага n и flip_neq (стр. 86–91)"
+  },
+  {
+   "line": 285,
+   "theorem": "flip_neq",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "а перевёрнутое значение не равно исходному (`flip_neq`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma flip_neq : forall b, flip b <> b (ProcessDiagonal.v:53); применена в diagonal_differs (стр. 90)"
+  },
+  {
+   "line": 288,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Эта лемма доказана *без всяких аксиом*. Файл проверяет это машинно командой `Print Assumptions`, и для `diagonal_differs` она показывает: ни одной аксиомы, доказательство замкнуто.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions: Closed under the global context; команда действительно стоит в файле (ProcessDiagonal.v:94)"
+  },
+  {
+   "line": 291,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Так же замкнута и трисекционная диагональ Главы 4.4; здесь конструкция ещё прозрачнее",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (было: «там трисекционная диагональ опиралась на классическую логику»); Print Assumptions: Closed under the global context"
+  },
+  {
+   "line": 308,
+   "theorem": "cantor_for_processes",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Для всякого перечисления $f$ существует бинарный процесс $g$, не равный ни одному $f n$, — и этот $g$ есть просто `diagonal` $f$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 303) совпадает с ProcessDiagonal.v:118; свидетель в доказательстве — exists (diagonal f) (стр. 121); без допущений"
+  },
+  {
+   "line": 319,
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Никакая функция $f$ из номеров в бинарные процессы не накрывает их все: диагональ всегда ускользает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 314) совпадает с ProcessDiagonal.v:108; без допущений (сверено и 12.11)"
+  },
+  {
+   "line": 322,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Это *не* та же теорема, что `unit_interval_uncountable_trisect_v2` из Главы 4.4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "верно: та — о процессах Коши (RealProcess) при valid_regular_enumeration, эта — о BinProcess без условий; две разные теоремы в двух файлах"
+  },
+  {
+   "line": 327,
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Бинарная — проще и прозрачнее",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 13, слово автора): было «проще и конструктивнее» — остаток контраста, снятого 12.11; binary_processes_not_enumerable (ProcessDiagonal.v:108) и unit_interval_uncountable_trisect_v2 (ShrinkingIntervals_ERR.v:3569) обе «Closed under the global context»"
+  },
+  {
+   "line": 348,
+   "theorem": "PrunedTree",
+   "file": "src/ProcessTypes.v",
+   "claim": "Дерево — это функция из конечных бинарных строк в булевы значения",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 345) совпадает с ProcessTypes.v:67; «P4-рефакторинг» — слова шапки файла (стр. 15)"
+  },
+  {
+   "line": 355,
+   "theorem": "tree_mem_dec",
+   "file": "src/ProcessTypes.v",
+   "claim": "файл доказывает разрешимость прямо — леммы `tree_mem_dec`, `is_splitting_dec` и другие, причём доказывает *без обращения к классической логике*, простым разбором булевых значений",
+   "page_price": "без классической логики",
+   "verdict": "ok",
+   "note": "Closed under the global context; доказательство — destruct (T sigma) (ProcessTypes.v:279–283); «другие» — has_left_dec, has_right_dec, bool_eq_dec, bp_eq_dec_at_n (стр. 264–299), тоже замкнуты"
+  },
+  {
+   "line": 356,
+   "theorem": "is_splitting_dec",
+   "file": "src/ProcessTypes.v",
+   "claim": "леммы `tree_mem_dec`, `is_splitting_dec` и другие",
+   "page_price": "без классической логики",
+   "verdict": "ok",
+   "note": "Closed under the global context (ProcessTypes.v:301)"
+  },
+  {
+   "line": 381,
+   "theorem": "is_tree",
+   "file": "src/ProcessTypes.v",
+   "claim": "Условие `is_tree` — ровно два пункта: корень и префикс-замкнутость, и ничего сверх.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 366) совпадает с ProcessTypes.v:70: T [] = true и замкнутость по removelast; требования «нет тупиков» в определении нет — оговорка главы верна"
+  },
+  {
+   "line": 391,
+   "theorem": "is_path",
+   "file": "src/ProcessTypes.v",
+   "claim": "процесс $p$ есть путь дерева $T$, если для всякого $n$ начальный отрезок $p$ длины $n$ принадлежит $T$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "is_path T p := forall n, T (bp_prefix p n) = true; bp_prefix p n := map p (seq 0 n) (ProcessTypes.v:86, 40)"
+  },
+  {
+   "line": 404,
+   "theorem": "is_closed",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "$C$ замкнута, если существует дерево $T$, такое что членство в $C$ равносильно «быть путём $T$».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 399) совпадает с ProcessContinuumHypothesis.v:43"
+  },
+  {
+   "line": 412,
+   "theorem": null,
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "В опорных файлах *не* определены ни общая топология, ни пределы, ни операция замыкания.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус честный: поиск по трём опорным файлам (closure, topolog, limit) пуст; замкнутость задана только через дерево"
+  },
+  {
+   "line": 437,
+   "theorem": "has_left",
+   "file": "src/ProcessTypes.v",
+   "claim": "строка с приписанным `false` тоже есть узел (`has_left`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "has_left T sigma := T (sigma ++ [false]) = true (ProcessTypes.v:74)"
+  },
+  {
+   "line": 438,
+   "theorem": "has_right",
+   "file": "src/ProcessTypes.v",
+   "claim": "строка с `true` есть узел (`has_right`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "has_right T sigma := T (sigma ++ [true]) = true (ProcessTypes.v:78)"
+  },
+  {
+   "line": 439,
+   "theorem": "is_splitting",
+   "file": "src/ProcessTypes.v",
+   "claim": "Узел называется *ветвящимся*, если у него есть *оба* продолжения",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 443) совпадает с ProcessTypes.v:82"
+  },
+  {
+   "line": 464,
+   "theorem": "is_perfect",
+   "file": "src/ProcessTypes.v",
+   "claim": "Из любого узла $\\sigma$ найдётся продолжение $\\tau$, ведущее к ветвящемуся узлу $\\sigma \\mathbin{+\\!\\!+} \\tau$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 457) совпадает с ProcessTypes.v:90; одноимённое определение есть и в settheory/CantorBendixsonFull.v:52 — глава говорит о первом"
+  },
+  {
+   "line": 470,
+   "theorem": "has_perfect_subset",
+   "file": "src/ProcessTypes.v",
+   "claim": "Определение `has_perfect_subset` это и говорит: существует древесная структура — с корнем, префикс-замкнутая, совершенная (всякий узел продолжается до ветвящегося), — все пути которой лежат в совокупности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "четыре конъюнкта определения переданы точно: корень, замкнутость по removelast, продолжение до узла с обоими потомками, пути в C (ProcessTypes.v:99–109)"
+  },
+  {
+   "line": 488,
+   "theorem": "has_perfect_subset",
+   "file": "src/ProcessTypes.v",
+   "claim": "со значениями в Prop, не в `bool`. Это *логический* предикат, не обязательно вычислимый.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exists (mem : list bool -> Prop) (ProcessTypes.v:100); ядро perf_subtree : list bool -> Prop (ProcessContinuumHypothesis.v:202); статус «разрешимо исходное дерево, ядро — нет» честный"
+  },
+  {
+   "line": 539,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Для всякой совокупности бинарных процессов $C$, *если она замкнута*, верно одно из двух: либо $C$ перечислима, либо $C$ содержит совершенное подмножество.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "блок кода (стр. 533) совпадает с ProcessContinuumHypothesis.v:619; оба условия (замкнутость, бинарная модель) названы; цена названа главой ниже (стр. 733, 812)"
+  },
+  {
+   "line": 577,
+   "theorem": "pick_dir",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "в файле он строится функцией выбора направления `pick_dir`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "главная цепь chain строится из pick_dir (ProcessContinuumHypothesis.v:272–281); цена здесь не названа, а уже у pick_dir в допущениях classic и L4_witness — см. запись к стр. 818"
+  },
+  {
+   "line": 582,
+   "theorem": "chain_followers_eq",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Путей, следующих главной цепи, не больше одного.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma chain_followers_eq: два пути через sigma, следующие цепи, равны по bp_eq (ProcessContinuumHypothesis.v:373)"
+  },
+  {
+   "line": 583,
+   "theorem": "path_classification",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "отклонившиеся пути классифицируются *по номеру первого отклонения*: для каждого номера — свой класс, и каждый такой класс перечислим",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "path_classification: путь либо следует цепи, либо лежит в классе k-го отклонения (ProcessContinuumHypothesis.v:407–414); перечислимость каждого класса — chain_other_enum (стр. 310)"
+  },
+  {
+   "line": 586,
+   "theorem": "countable_union_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "счётное объединение перечислимых совокупностей перечислимо",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "forall F, (forall n, is_enumerable (F n)) -> is_enumerable (fun p => exists n, F n p) (ProcessContinuumHypothesis.v:70); применена в no_split_implies_enum (стр. 478)"
+  },
+  {
+   "line": 595,
+   "theorem": "no_split_implies_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "`no_split_implies_enum` (нет возобновляемого ветвления $\\Rightarrow$ перечислимо)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "точная форма: для узла ядра sigma, если ни один узел главной цепи не имеет обоих потомков в ядре, пути через sigma перечислимы (ProcessContinuumHypothesis.v:465–470); пересказ главы — честное изложение идеи; в файле лемма работает внутри доказательства от противного (стр. 535–552)"
+  },
+  {
+   "line": 597,
+   "theorem": "perf_subtree_has_splitting",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "`perf_subtree_has_splitting` (совершенное поддерево всегда где-то ветвится)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "точная форма: всякий узел ядра (узел дерева с неперечислимым множеством путей, perf_subtree, стр. 202) имеет продолжение, оба потомка которого лежат в ядре (ProcessContinuumHypothesis.v:520–525)"
+  },
+  {
+   "line": 604,
+   "theorem": "empty_closed_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Пустая совокупность замкнута и перечислима (`empty_closed_enum`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "is_closed (fun _ => False) /\\ is_enumerable (fun _ => False) (ProcessContinuumHypothesis.v:682); без допущений"
+  },
+  {
+   "line": 605,
+   "theorem": "full_has_perfect",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "вся совокупность бинарных процессов имеет совершенное подмножество (`full_has_perfect`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "формулировка верна; цена в главе не названа, по компилятору — classic и L4_witness: теорема выведена из самой дихотомии (PCH_structural_dichotomy + неперечислимость, стр. 675–680), а не предъявлением свидетеля; прямой свидетель mem := fun _ => True дал бы 0 допущений — кандидат в бэклог формализации"
+  },
+  {
+   "line": 613,
+   "theorem": "no_intermediate_process_type",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Файл даёт центральному результату и второе имя — `no_intermediate_process_type`, — доказывая его дословным повторением первого.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "утверждение дословно то же; доказательство — exact process_continuum_hypothesis (ProcessContinuumHypothesis.v:641–645)"
+  },
+  {
+   "line": 622,
+   "theorem": "PCH_structural_dichotomy",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "`PCH_structural_dichotomy`: замкнутая и *не* перечислимая совокупность непременно содержит совершенное подмножество",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "is_closed C -> ~ is_enumerable C -> has_perfect_subset C (ProcessContinuumHypothesis.v:647); выведена из главной теоремы"
+  },
+  {
+   "line": 628,
+   "theorem": null,
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "отдельной леммы о несовместимости в опорном файле не выделено",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус честный: леммы вида has_perfect_subset C -> ~ is_enumerable C нет ни в трёх опорных файлах, ни в остальном src (поиск по has_perfect_subset: только применения дихотомии в physics/ и zeta/)"
+  },
+  {
+   "line": 636,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Центральная теорема названа в файле `process_continuum_hypothesis` — «процессная континуум-гипотеза».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 13, слово автора): имя было разорвано переносом строки и на странице читалось с пробелом; теперь на одной строке (ProcessContinuumHypothesis.v:619)"
+  },
+  {
+   "line": 641,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "эта теорема *не* решает классическую континуум-гипотезу. Она её не доказывает и не опровергает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус честный: утверждение Rocq — дихотомия для замкнутых совокупностей в 2^N; о мощностях в нём речи нет"
+  },
+  {
+   "line": 652,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Формально `process_continuum_hypothesis` — это процессная версия классической теоремы *Кантора–Бендиксона*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "совпадает с шапкой файла: «PROCESS CONTINUUM HYPOTHESIS (Cantor-Bendixson)» (ProcessContinuumHypothesis.v:3–5)"
+  },
+  {
+   "line": 664,
+   "theorem": "no_intermediate_process_type",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Второе имя теоремы — `no_intermediate_process_type` — называет суть точнее заглавного",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 13, слово автора): было «Имя файла `no_intermediate_process_ type`»; это второе имя теоремы (ProcessContinuumHypothesis.v:642), файла с таким именем нет; имя теперь стоит на одной строке"
+  },
+  {
+   "line": 715,
+   "theorem": null,
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Шапка опорного файла задаёт разметку прямо: *элементы — бинарные процессы (пространство Кантора $2^ℕ$); роли — замкнутые совокупности, совершенные поддеревья, пути; правила — дихотомия континуум-гипотезы, Кантора–Бендиксон*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "точный перевод шапки: Elements / Roles / Rules (ProcessContinuumHypothesis.v:11–13)"
+  },
+  {
+   "line": 733,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Логические средства — ровно две аксиомы: $L3$ (`classic`) и $L4$ (`L4_witness`; последний извлекает перечислитель класса",
+   "page_price": "ровно две аксиомы: L3 (classic) и L4 (L4_witness)",
+   "verdict": "ok",
+   "note": "число и имена верны: Print Assumptions даёт Classical_Prop.classic и ToS_Axioms.L4_witness; роль L4 описана неполно — см. запись к стр. 818"
+  },
+  {
+   "line": 759,
+   "theorem": "countable_union_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "разрешимое дерево; счётное объединение ($L4$)",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "Print Assumptions countable_union_enum: только ToS_Axioms.L4_witness — совпадает"
+  },
+  {
+   "line": 763,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "законы $L1$–$L5$ (здесь $L3$, $L4$)",
+   "page_price": "L3 и L4",
+   "verdict": "ok",
+   "note": "совпадает с Print Assumptions главной теоремы"
+  },
+  {
+   "line": 812,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Центральная теорема в `ProcessContinuumHypothesis.v` опирается на *две* аксиомы — оба раза это законы логики ToS.",
+   "page_price": "две аксиомы: L3 (classic) и L4 (L4_witness)",
+   "verdict": "ok",
+   "note": "сверено 12.11 («Верно») и повторно: Print Assumptions — Classical_Prop.classic и ToS_Axioms.L4_witness"
+  },
+  {
+   "line": 814,
+   "theorem": "classic",
+   "file": "src/ToS_Axioms.v",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Первая — $L3$, классическая логика (аксиома `classic`).",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "в допущениях стоит Classical_Prop.classic стандартной библиотеки, которую ToS_Axioms.v:31 реэкспортирует (Require Export Coq.Logic.Classical_Prop); одноимённые локальные Axiom classic (EVT_idx.v:338, foundation/Distinction.v:36, settheory/BorelDeterminacy.v:21) здесь не участвуют"
+  },
+  {
+   "line": 815,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Вторая — $L4$, закон достаточного основания (в файле — `L4_witness`).",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "Axiom L4_witness : (exists x, P x) -> {x : A | P x} (ToS_Axioms.v:105); в опорном файле применена явно в countable_union_enum (ProcessContinuumHypothesis.v:78)"
+  },
+  {
+   "line": 818,
+   "theorem": "countable_union_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Стоит сказать, *где* появляется $L4$, потому что места эти поучительны. Их два. Первое: доказательство берёт *счётное объединение* перечислимых совокупностей",
+   "page_price": "L4 в двух местах",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 12, слово автора «А»): было «место это поучительное… в одном месте»; мест два — countable_union_enum (:70–78, L4_witness применён напрямую) и pick_dir (:272–275, через L3_informative); Print Assumptions pick_dir: Classical_Prop.classic и ToS_Axioms.L4_witness; countable_union_enum: только L4_witness"
+  },
+  {
+   "line": 834,
+   "theorem": "pick_dir",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Второе место — сама главная цепь. Функция `pick_dir` на каждом шаге смотрит на одно из двух продолжений узла: если путей через него неперечислимо много, цепь идёт туда, иначе — в другую сторону.",
+   "page_price": "classic + L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 12, слово автора «А») — абзац добавлен: pick_dir T sigma := if L3_informative (perf_subtree T (sigma ++ [false])) then false else true; perf_subtree T s := T s /\\ ~ is_enumerable (paths_extending T s); L3_informative : forall P, {P} + {~P} (ToS_Axioms.v:119) стоит на classic + L4_witness; Print Assumptions pick_dir: Classical_Prop.classic и ToS_Axioms.L4_witness; countable_union_enum: только L4_witness"
+  },
+  {
+   "line": 838,
+   "theorem": "L3_informative",
+   "file": "src/ToS_Axioms.v",
+   "claim": "закон исключённого третьего нужен в информативной форме (`L3_informative` из `ToS_Axioms.v`), а она выводится из `classic` вместе с `L4_witness`",
+   "page_price": "classic + L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 12) — фраза добавлена: Lemma L3_informative : forall P : Prop, {P} + {~P} (ToS_Axioms.v:119); Print Assumptions: Classical_Prop.classic и ToS_Axioms.L4_witness"
+  },
+  {
+   "line": 823,
+   "theorem": null,
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "канторова кодировка пар натуральных чисел из стандартной библиотеки",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "From Stdlib Require Import Cantor (стр. 28); Cantor.of_nat, Cantor.to_nat, Cantor.cancel_of_to в countable_union_from_fam (стр. 57–68) — эта лемма без допущений"
+  },
+  {
+   "line": 828,
+   "theorem": "countable_union_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Вторая — $L4$, `L4_witness`: для каждого класса он *извлекает* конкретный перечислитель.",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "apply L4_witness к (HF n) — из exists f в {f | …} (ProcessContinuumHypothesis.v:76–78); Print Assumptions: только L4_witness"
+  },
+  {
+   "line": 845,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Нет *аксиомы выбора* как отдельной теоретико-множественной аксиомы",
+   "page_price": "аксиома выбора не используется; L4_witness делает похожую работу на уровне свидетелей",
+   "verdict": "ok",
+   "note": "в выводе Print Assumptions только classic и L4_witness; оговорка главы о сходстве L4_witness с выбором (стр. 837–845) честна"
+  },
+  {
+   "line": 857,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Нет и *завершённой бесконечности* как готового объекта: ZFC- подобной аксиомы бесконечности доказательство не использует.",
+   "page_price": "аксиома бесконечности не используется",
+   "verdict": "ok",
+   "note": "в выводе Print Assumptions такой аксиомы нет; оговорка о типах nat и nat -> bool сделана"
+  },
+  {
+   "line": 866,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Файл проверяет это машинно — командой `Print Assumptions`, которая для указанной теоремы выводит список аксиом, от которых та зависит; в списке — $L3$ и $L4$, и нет ни выбора, ни аксиомы бесконечности.",
+   "page_price": "L3 и L4",
+   "verdict": "ok",
+   "note": "команда Print Assumptions process_continuum_hypothesis стоит в файле (ProcessContinuumHypothesis.v:703); вывод совпадает"
+  },
+  {
+   "line": 872,
+   "theorem": "bp_eq_not_enum_witness",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`ProcessTypes.v` и `ProcessDiagonal.v` обращаются к $L3$ лишь по одной лемме каждый",
+   "page_price": "L3 — по одной лемме в каждом файле",
+   "verdict": "ok",
+   "note": "число верно: Print Assumptions по всем объявлениям — в ProcessDiagonal.v classic только у bp_eq_not_enum_witness (стр. 208), остальные 21 замкнуты; в ProcessTypes.v classic только у not_enum_union (стр. 398), остальные 46 замкнуты"
+  },
+  {
+   "line": 873,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "а ключевая `diagonal_differs` (§ 5.3) не использует аксиом вовсе",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Closed under the global context"
+  },
+  {
+   "line": 874,
+   "theorem": "not_enum_union",
+   "file": "src/ProcessTypes.v",
+   "claim": "Леммы разрешимости деревьев доказаны без обращения к классике; впрочем, сам `ProcessTypes.v` импортирует модуль законов ToS, и одна его лемма — `not_enum_union`, разбирающая неперечислимость объединения, — использует $L3$.",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Print Assumptions: Classical_Prop.classic; в доказательстве classic (is_enumerable A) и classic (is_enumerable B) (ProcessTypes.v:403–404); импорт ToS_Axioms — стр. 25"
+  },
+  {
+   "line": 879,
+   "theorem": null,
+   "file": "src/ProcessTypes.v",
+   "claim": "*разрешимость деревьев* — без аксиом, файл в целом — с одной",
+   "page_price": "разрешимость — без аксиом; в файле одна лемма на L3",
+   "verdict": "ok",
+   "note": "совпадает с шапкой файла «29 Qed, 0 Admitted, 0 axioms (except classic for 1 lemma)» (ProcessTypes.v:14); действительный счёт Qed — 29"
+  },
+  {
+   "line": 909,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Центральная теорема опирается на две аксиомы — законы логики $L3$ и $L4$ ($L4$ — для счётного объединения перечислимых классов и для выбора направления главной цепи).",
+   "page_price": "L3 и L4; L4 — для счётного объединения",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 12, слово автора «А»): добавлено второе место L4 — выбор направления главной цепи (pick_dir через L3_informative); Print Assumptions process_continuum_hypothesis: classic + L4_witness"
+  },
+  {
+   "line": 922,
+   "theorem": "bin_to_real_in_interval",
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "файл `ProcessBinReal.v` строит прямой перевод `bin_to_real` $\\colon 2^ℕ \\to [0,1]$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "forall b, in_interval 0 1 (bin_to_real b) (ProcessBinReal.v:169); без допущений; в файле 15 Qed, как и в его шапке"
+  },
+  {
+   "line": 924,
+   "theorem": "bin_to_real_is_Cauchy",
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "`bin_to_real_is_Cauchy` — последняя опирается на $L3$",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Print Assumptions: Classical_Prop.classic — через monotone_bounded_Cauchy (ProcessBinReal.v:176–181; ProcessArithmetic.v:311)"
+  },
+  {
+   "line": 926,
+   "theorem": null,
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "Открытым остаётся *полный* перевод — обратное отображение $[0,1] \\to 2^ℕ$, общая неоднозначность записи и перенос самой дихотомии Кантора–Бендиксона на модель Коши",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус честный: совпадает с «честной границей» в шапке файла (ProcessBinReal.v:21–23)"
+  }
+ ]
+}

@@ -18,7 +18,7 @@
 (*  This file proves: all four hold simultaneously.                          *)
 (*                                                                           *)
 (*  STATUS: 25 Qed, 0 Admitted                                              *)
-(*  AXIOMS: classic (inherited)                                              *)
+(*  AXIOMS: none (Classical is imported but not applied)                     *)
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith.Qabs Lia ZArith.
@@ -43,6 +43,7 @@ From ToS Require Import process.ProcessCategory.
 From ToS Require Import process.ProcessAdjunction.
 From ToS Require Import process.ProcessWholeness.
 From ToS Require Import process.ProcessLimitColimit.
+From ToS Require Import CauchyProcessBridge.  (* process_mul, mul_preserves_Cauchy *)
 
 (* ================================================================== *)
 (*  Part I: The Four Principles Formalized  (~12 lemmas)               *)
@@ -65,9 +66,12 @@ Definition P4_formalized : Prop :=
   (* P4 = things are processes: nat → Q sequences with convergence *)
   (* Witnessed by 10+ concrete process instances *)
   (exists R : RealProcess, is_Cauchy R) /\
-  (* Products of processes *)
+  (* Process algebra: the product (stage-wise multiplication) is Cauchy.
+     Nov 2026: this conjunct used to speak of the PAIR of two processes
+     (process_product = pointwise pairing), which says nothing about
+     multiplication; it now states closure under multiplication itself. *)
   (forall R1 R2 : RealProcess, is_Cauchy R1 -> is_Cauchy R2 ->
-    is_Cauchy (process_fst (process_product R1 R2))) /\
+    is_Cauchy (process_mul R1 R2)) /\
   (* Process algebra: sum is Cauchy *)
   (forall R1 R2 : RealProcess, is_Cauchy R1 -> is_Cauchy R2 ->
     is_Cauchy (process_sum R1 R2)).
@@ -101,8 +105,7 @@ Proof.
     unfold const_process.
     assert (Heq : 0 - 0 == 0) by lra. rewrite Heq.
     rewrite Qabs_pos; lra.
-  - intros R1 R2 H1 H2.
-    exact (proj1 (product_cauchy R1 R2 H1 H2)).
+  - exact mul_preserves_Cauchy.
   - exact sum_cauchy.
 Qed.
 

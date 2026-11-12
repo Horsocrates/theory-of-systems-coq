@@ -1,0 +1,37 @@
+@@FILE Направления/Математика/Том Математика/04 Процессные действительные числа/02 RealProcess как тип.md
+@@OLD
+Точная форма, которую Главе 4.3 предстоит предъявить, — это
+определение конкретного представителя для $0{,}999…$, постоянного
+представителя для единицы и доказательство их эквивалентности по
+`cauchy_equiv`: схематически
+
+```coq
+Definition nine_process : CauchySeq := (* 0.9, 0.99, 0.999, ... *)
+Definition one_process  : CauchySeq := cauchy_const 1.
+Theorem nine_equiv_one : nine_process ~~ one_process.
+```
+@@NEW
+Точная форма — определение конкретного представителя для
+$0{,}999…$, постоянного представителя для единицы и доказательство
+их эквивалентности по `cauchy_equiv`; в файле
+`process/ProcessNinePoint.v` она записана так:
+
+```coq
+Definition nine_process : CauchySeq := to_CauchySeq nine_raw nine_raw_is_Cauchy.
+Definition one_process  : CauchySeq := cauchy_const 1.
+Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process.
+```
+
+Здесь `nine_raw` — процесс усечёнок $0{,}9;\ 0{,}99;\ …$, а
+`nine_raw_is_Cauchy` — доказательство его свойства Коши; ту же
+теорему для голых процессов (`nine_equiv_one`) разбирает Глава 4.3.
+@@END
+@@FILE Направления/Математика/Том Математика/04 Процессные действительные числа/03 Точка как класс эквивалентности процессов.md
+@@OLD
+`CauchySeq` доступен через `nine_raw_is_Cauchy` и мост,
+но самим утверждением служит равенство-как-точек на процессах.
+@@NEW
+`CauchySeq` выполнен в том же файле (`nine_process_equiv_one`,
+через `nine_raw_is_Cauchy` и мост),
+но самим утверждением служит равенство-как-точек на процессах.
+@@END

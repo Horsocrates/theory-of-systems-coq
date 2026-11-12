@@ -78,8 +78,7 @@ Proof.
   rewrite Heq.
   rewrite Qabs_Qmult.
   rewrite Qabs_pos by assumption.
-  assert (M * h == h * M) as Heq2 by ring.
-  rewrite Heq2.
+  rewrite (Qmult_comm h (Qabs (f t y))).
   apply Qmult_le_compat_r; assumption.
 Qed.
 
@@ -103,7 +102,7 @@ Qed.
 Lemma euler_for_e_N1 :
   euler_pe f_exp_pe 1 1 1 == 2.
 Proof.
-  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -114,7 +113,7 @@ Qed.
 Lemma euler_for_e_N2 :
   euler_pe f_exp_pe 1 2 2 == 9 # 4.
 Proof.
-  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -125,7 +124,7 @@ Qed.
 Lemma euler_for_e_N4 :
   euler_pe f_exp_pe 1 4 4 == 625 # 256.
 Proof.
-  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -172,7 +171,7 @@ Qed.
 Lemma euler_for_linear :
   euler_pe f_const_pe 0 4 4 == 1.
 Proof.
-  simpl. unfold euler_step_pe, f_const_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_const_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -183,7 +182,7 @@ Qed.
 Lemma euler_for_decay_N2 :
   euler_pe f_decay_pe 1 2 2 == 1 # 4.
 Proof.
-  simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -194,7 +193,7 @@ Qed.
 Lemma euler_for_decay_N4 :
   euler_pe f_decay_pe 1 4 4 == 81 # 256.
 Proof.
-  simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -205,7 +204,8 @@ Qed.
 Lemma euler_decay_positive :
   0 < euler_pe f_decay_pe 1 4 4.
 Proof.
-  simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl. lra.
+  simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl.
+  unfold Qlt. simpl. lia.
 Qed.
 
 (* ========================================================================= *)
@@ -228,7 +228,7 @@ Qed.
 Lemma euler_exp_decay_product :
   euler_pe f_exp_pe 1 4 4 * euler_pe f_decay_pe 1 4 4 == 50625 # 65536.
 Proof.
-  simpl. unfold euler_step_pe, f_exp_pe, f_decay_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_exp_pe, f_decay_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -270,7 +270,7 @@ Qed.
 Lemma euler_matches_Qpow :
   euler_pe f_exp_pe 1 4 4 == Qpow (5 # 4) 4.
 Proof.
-  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_exp_pe, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -284,7 +284,7 @@ Definition f_const_a (a : Q) : ODE_pe := fun _ _ => a.
 Lemma euler_linear_exact_any_N :
   euler_pe (f_const_a 5) 2 3 3 == 7.
 Proof.
-  simpl. unfold euler_step_pe, f_const_a, grid_pe. simpl. ring.
+  simpl. unfold euler_step_pe, f_const_a, grid_pe. simpl. field.
 Qed.
 
 (* ========================================================================= *)
@@ -301,11 +301,11 @@ Qed.
 
 (* ========================================================================= *)
 (*  Theorem 22: euler_decay_monotone                                         *)
-(*  Decay: (1-1/2)^2 > (1-1/4)^4 — coarser grid decays faster.             *)
+(*  Decay: (1-1/2)^2 < (1-1/4)^4 — coarser grid decays faster.             *)
 (* ========================================================================= *)
 
 Lemma euler_decay_monotone :
-  euler_pe f_decay_pe 1 4 4 < euler_pe f_decay_pe 1 2 2.
+  euler_pe f_decay_pe 1 2 2 < euler_pe f_decay_pe 1 4 4.
 Proof.
   simpl. unfold euler_step_pe, f_decay_pe, grid_pe. simpl.
   unfold Qlt. simpl. lia.

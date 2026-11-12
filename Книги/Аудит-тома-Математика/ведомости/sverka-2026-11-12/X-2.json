@@ -1,0 +1,56 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "10 Теория множеств без аксиомы выбора/02 Счётность конструктивна; несчётность — правило о процессах.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`binary_processes_not_enumerable` и `cantor_for_processes` доказываются\nчистым применением 0-аксиомной `diagonal_differs`, без L3",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "cantor_for_processes",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Над\n$2^{ℕ}$ всё конструктивно, включая квантор $\\forall f$",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "(`diagonal_differs`, 0 аксиом на шаге)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Несчётность $[0,1]$: `unit_interval_uncountable_trisect_v2` (`ShrinkingIntervals_ERR.v`) — `Print Assumptions` даёт «Closed under the global context».",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Дихотомия: `process_continuum_hypothesis` (`ProcessContinuumHypothesis.v`) — `classic` (L3) и `L4_witness`.",
+   "page_price": "classic (L3) и L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": null,
+   "file": "src/Countability_Q.v",
+   "claim": "`Countability_Q.v` даже не подключает\nклассическую логику",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "в файле нет импорта классического модуля (шапка: «AXIOMS: NONE»); теоремы файла — при аудите Части X"
+  }
+ ]
+}

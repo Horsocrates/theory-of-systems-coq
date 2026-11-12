@@ -1,0 +1,430 @@
+{
+ "batch": "audit-part-04",
+ "chapter": "04 Процессные действительные числа/06 P4 как фильтр.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 13,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Несчётность стала невозможностью регулярного перечисления охватить все классы, а не свойством завершённого множества (Глава 4.4)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "условие «регулярного перечисления» названо, как в теореме (valid_regular_enumeration E); то же в строках 48–50"
+  },
+  {
+   "line": 108,
+   "theorem": "DerivationStrength",
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Шкала введена в Rocq-репозитории типом `DerivationStrength` с пятью значениями.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive с пятью конструкторами (ProcessAxiomAudit.v:28–33); порядок «от сильнейшей к слабейшей» в файле отношением не задан — это чтение главы по порядку конструкторов"
+  },
+  {
+   "line": 114,
+   "theorem": "DerivationStrength",
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "| `FullyDerived` | следует из $P1$–$P4$ одних, без выборов |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "все пять строк таблицы градаций совпадают с комментариями при конструкторах (ProcessAxiomAudit.v:29–33)"
+  },
+  {
+   "line": 120,
+   "theorem": null,
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "В самом файле эта шкала применена прежде всего к результатам *будущего физического слоя* — не к математике настоящего тома.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "все восемь классифицированных в файле результатов физические: Паули, щель 289/384, угол Вайнберга, группа СМ, знак Лоренца, rho = 1, D = 3, CP (строки 36–58)"
+  },
+  {
+   "line": 122,
+   "theorem": "total_classified",
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Файл классифицирует физические результаты: одни помечены `FullyDerived` (их в его счёте три), другие `DerivedWithInput` (два), `Constrained` (два), `ConsistentWith` (один); итог — восемь классифицированных результатов (теорема `total_classified`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "числа верны: по определениям *_strength (строки 36–58) 3 + 2 + 2 + 1 = 8; счётчики n_* вписаны в файл числами, лемма проверяет их сумму; в файле это Lemma, а не Theorem"
+  },
+  {
+   "line": 135,
+   "theorem": null,
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Это *документированный* мета-аудит: разметка силы внесена автором на основании результатов команды `Print Assumptions`, запускаемой отдельно для каждой теоремы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "после шага 3 (12.11) расхождения записи файла с компилятором нет: вместо «Expected results» в комментарии Part II стоят действительные ответы компилятора, а о шести ключевых результатах в файле стоит сама команда Print Assumptions; разметка силы (FullyDerived и др.) остаётся оценкой автора — Print Assumptions показывает допущения, а не силу вывода"
+  },
+  {
+   "line": 137,
+   "theorem": "fully_derived_strongest",
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Файл *фиксирует* вывод этого аудита как набор определений и проверяемых лемм (например, `fully_derived_strongest`), но сам по себе ничего не *сканирует*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "утверждение леммы — pauli_strength = FullyDerived (reflexivity): проверяет запись, порядка «сильнейшая» не доказывает; глава большего и не утверждает"
+  },
+  {
+   "line": 142,
+   "theorem": "key_results_hold",
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Шесть ключевых результатов собраны в нём в один объект доказательства — `key_results_hold`, — и команда `Print Assumptions` при каждой сборке отвечает о нём: «Closed under the global context», допущений нет.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 3, слово автора): было «Его теорема axiom_minimal утверждает содержательно: ключевые результаты зависят только от classic»; теорема-вывеска удалена; key_results_hold — конъюнкция шести теорем, Print Assumptions стоит в файле и отвечает «Closed under the global context»"
+  },
+  {
+   "line": 146,
+   "theorem": "classic",
+   "file": "src/ToS_Axioms.v",
+   "external": true,
+   "assumptions": "аксиома стандартной библиотеки: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "логических допущений в действии два — `classic`, то есть $L3$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "classic в формализации — аксиома стандартной библиотеки Classical_Prop.classic, которую ToS_Axioms.v переэкспортирует (строка 31); одноимённые аксиомы объявлены ещё в foundation/Distinction.v:36, EVT_idx.v:338, settheory/BorelDeterminacy.v:21; исправлено 12.11 (шаг 3, слово автора): было «зависят только от classic — то есть от L3»"
+  },
+  {
+   "line": 147,
+   "theorem": null,
+   "file": "src/ToS_Axioms.v",
+   "claim": "`L4_witness`, закон достаточного основания, входящий в теоремы девяти файлов, не считая файла аксиом",
+   "page_price": "L4_witness — в теоремах девяти файлов",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 3, слово автора): было «локализован и появляется лишь в отдельных файлах (лемма l4_witness_localized)»; лемма-вывеска удалена; сплошной прогон Print Assumptions после правок 2026-11-12: от ToS_Axioms.L4_witness зависят объявления девяти файлов помимо ToS_Axioms.v — ProcessContinuumHypothesis.v, SchroederBernstein_ERR.v, analysis/BolzanoWeierstrass.v, process/ProcessBW.v, physics/SpectralDichotomy.v, physics/MeasurementProcess.v, physics/Entanglement.v, settheory/CardinalityWithoutChoice.v, zeta/ZeroStructure.v; напрямую аксиома применена в ProcessContinuumHypothesis.v:78 и в двух леммах ToS_Axioms.v, остальные наследуют"
+  },
+  {
+   "line": 149,
+   "theorem": null,
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "аксиомы выбора, бесконечности, унивалентности, функциональной экстенсиональности не используются.",
+   "page_price": "выбор, бесконечность, унивалентность, функциональная экстенсиональность — не используются",
+   "verdict": "ok",
+   "note": "после правок 2026-11-12 верно: сплошной прогон Print Assumptions после правок 2026-11-12 — functional_extensionality_dep: 0 (было 9 лемм в 5 файлах); модулей выбора (ClassicalChoice, Epsilon, IndefiniteDescription) и унивалентности в импортах нет"
+  },
+  {
+   "line": 150,
+   "theorem": null,
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Это *документированное* утверждение об аудите; проверяет его сплошной прогон `Print Assumptions` по всем теоремам, а не сам файл.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 3, слово автора): было «опертое на Print Assumptions, а не машинная проверка всего репозитория одной командой»; статус назван честно — запись в комментарии файла, проверка — прогон (tools/tom-pa-all.cjs)"
+  },
+  {
+   "line": 160,
+   "theorem": "IFStrength",
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "Эта шкала — тип `IFStrength` — введена в отдельном файле[^2] и имеет три значения: `Forced` (следует из $P1$–$P4$ без выбора), `Natural` (простейший, родовой случай, но не вынужденный) и `Chosen` (определённый выбор среди нескольких возможностей).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "совпадает с Inductive IFStrength и комментариями при конструкторах (ProcessDerivedVsConsistent.v:33–36)"
+  },
+  {
+   "line": 177,
+   "theorem": "derivation_count_forced",
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "Из двенадцати разобранных в нём выводов `Forced` оказались четыре",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "count_forced = 4 вычисляется фильтром по списку all_derivations из 12 записей (E/R/R, метрика, Эйнштейн, CP); без допущений"
+  },
+  {
+   "line": 178,
+   "theorem": "derivation_count_natural",
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "`Natural` — пять",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "count_natural = 5 (Паули, калибровка, Лоренц, СМ, D = 3); без допущений"
+  },
+  {
+   "line": 179,
+   "theorem": "derivation_count_chosen",
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "`Chosen` — три (леммы `derivation_count_forced`, `derivation_count_natural`, `derivation_count_chosen`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "count_chosen = 3 (щель, Вайнберг, натяжение струны); сумма 4 + 5 + 3 = 12 — лемма derivation_total"
+  },
+  {
+   "line": 185,
+   "theorem": null,
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "Признание, что лишь треть выводов `Forced`, а прочие `Natural` или `Chosen`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "4 из 12 — треть; число совпадает с файлом"
+  },
+  {
+   "line": 200,
+   "theorem": null,
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "*элементы — шкала силы вывода и классификации аксиом; роли — мета-уровневый анализ, честная оценка; правила — классифицировать каждый результат по силе*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 13, слово автора): пересказ приведён к шапке ProcessAxiomAudit.v — «Elements: DerivationStrength, axiom classifications; Roles: meta-level analysis, honest assessment; Rules: classify each result by derivation strength»; у ProcessDerivedVsConsistent.v шапка своя (IFStrength, DerivationRecord; Forced/Natural/Chosen)"
+  },
+  {
+   "line": 244,
+   "theorem": null,
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "В репозитории нет файла, который перечислял бы математические теоремы тома с их статусами силы",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "для шкал силы (DerivationStrength, IFStrength) верно; для оси аксиомной цены такая таблица в Rocq теперь есть — settheory/ChoicePriceMap.v (июнь 2026, исправлена в октябре): RCountabilityQ, RDiagonal, RShrinkingIntervals — PZero, RContinuumHypothesis — PL3_L4; строки таблицы главы с ней согласуются; упоминать ли её здесь — решение автора"
+  },
+  {
+   "line": 252,
+   "theorem": null,
+   "claim": "Первая ось — *аксиомная цена*: сколько и каких логических аксиом стоит за результатом (ноль; один $L3$; два $L3$ и $L4$).",
+   "page_price": "ярусы: 0; L3; L3 + L4",
+   "verdict": "ok",
+   "note": "ярусы совпадают с PZero / PL3 / PL3_L4 в ChoicePriceMap.v (там есть ещё PL4 — один L4); после правки 12.11 в таблице ниже строки «один L3» нет"
+  },
+  {
+   "line": 268,
+   "theorem": "enum_surjective",
+   "file": "src/Countability_Q.v",
+   "claim": "счётность $ℚ^{+}$ через дерево Калкина–Уилфа (Глава III.3, `Countability_Q.v`)",
+   "page_price": "0 аксиом, конструктивно",
+   "verdict": "ok",
+   "note": "все 46 объявлений Countability_Q.v — «Closed under the global context»; в том же файле теперь и полная биекция для всего ℚ (Q_bijection)"
+  },
+  {
+   "line": 268,
+   "theorem": "no_rational_sqrt2",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "иррациональность $\\sqrt{2}$ конструктивно, без $L3$ (Глава III.4, `Sqrt2Irrational.v`)",
+   "page_price": "0 аксиом, без L3",
+   "verdict": "ok",
+   "note": "все 14 объявлений Sqrt2Irrational.v — «Closed under the global context»"
+  },
+  {
+   "line": 268,
+   "theorem": null,
+   "file": "src/process/ProcessCore.v",
+   "claim": "базовые процессные конструкции `RealProcess`/`is_Cauchy`/ `process_equiv` (`ProcessCore.v`)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "все 27 объявлений ProcessCore.v (19 Qed) — «Closed under the global context»"
+  },
+  {
+   "line": 268,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "несчётность процессов единичного интервала относительно регулярных перечислений (Глава 4.4, `ShrinkingIntervals_ERR.v`)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (перенесено из строки «L3»); Print Assumptions: «Closed under the global context»; условие регулярности названо"
+  },
+  {
+   "line": 269,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "дихотомия Кантора–Бендиксона для замкнутых совокупностей бинарных процессов (Глава 4.5; $L4$ — в счётном объединении и в выборе направления главной цепи)",
+   "page_price": "L3 + L4; L4 — в счётном объединении",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 12, слово автора «А»): цена совпадает (classic + L4_witness); названы оба места L4 — countable_union_enum и pick_dir (через L3_informative)"
+  },
+  {
+   "line": 270,
+   "theorem": null,
+   "claim": "бинарная модель $2^{ℕ}$ против модели Коши (Глава 4.5); выбор представителя класса, регистрация единицы (Глава II.1), формат кодирования",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "авторская разметка «выбор модели»; в Rocq не записана, и глава это оговаривает (строки 241–245); ссылки на главы II.1 и 4.5 существуют"
+  },
+  {
+   "line": 273,
+   "theorem": null,
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "счётность рациональных и иррациональность $\\sqrt{2}$ не стоят ни одной аксиомы и доказаны конструктивно; процессная арифметика — тоже; без допущений доказана и несчётность процессов отрезка",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11; арифметика (add / neg / sub / scale_preserves_Cauchy) замкнута; в том же ProcessArithmetic.v две леммы о монотонной сходимости — monotone_bounded_Cauchy (311), decreasing_bounded_Cauchy (339) — стоят на Classical_Prop.classic, к арифметике они не относятся"
+  },
+  {
+   "line": 276,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "дихотомия Части IV опирается на логические аксиомы — на $L3$ и $L4$",
+   "page_price": "L3 + L4",
+   "verdict": "ok",
+   "note": "исправлено 12.11; Print Assumptions: Classical_Prop.classic и ToS_Axioms.L4_witness"
+  },
+  {
+   "line": 303,
+   "theorem": "has_perfect_subset",
+   "file": "src/ProcessTypes.v",
+   "claim": "(совершенное ядро § 4.5 — Prop-значный свидетель)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "has_perfect_subset: exists (mem : list bool -> Prop), … (ProcessTypes.v:99); perf_subtree T : list bool -> Prop (ProcessContinuumHypothesis.v:202)"
+  },
+  {
+   "line": 315,
+   "theorem": null,
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "$P4$ не использует внешнюю теоретико-множественную *Аксиому Выбора* как онтологический принцип построения объектов",
+   "page_price": "внешней аксиомы выбора нет",
+   "verdict": "ok",
+   "note": "модули выбора стандартной библиотеки (ClassicalChoice, Epsilon, IndefiniteDescription) вне комментариев не встречаются ни в одном файле src; о силе L4 — следующие записи"
+  },
+  {
+   "line": 319,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "В ToS есть $L4$ — закон достаточного основания, в формализации `L4_witness`, — и он выполняет работу, *похожую* на выбор, но на уровне свидетелей: из доказательства существования он извлекает конкретный свидетель.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Axiom L4_witness : (exists x, P x) -> {x : A | P x} (ToS_Axioms.v:105) — пересказ точен"
+  },
+  {
+   "line": 322,
+   "theorem": "countable_union_enum",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "В Главе 4.5 этот закон прямо работает — в счётном объединении перечислимых семейств (`countable_union_enum`) он извлекает для каждого класса его перечислитель, а в построении главной цепи (`pick_dir`) — определённый ответ на вопрос «да или нет».",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 12, слово автора «А»): добавлено второе место; countable_union_enum применяет L4_witness к каждому F n (:76–78), Print Assumptions — только L4_witness; pick_dir — classic + L4_witness через L3_informative"
+  },
+  {
+   "line": 328,
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "*нет внешней ZFC-аксиомы выбора; есть локальный закон свидетельствования $L4$ внутри ToS* — choice-подобный по технической силе, но не теоретико-множественный по существу",
+   "page_price": "L4 — choice-подобный по силе",
+   "verdict": "ok",
+   "note": "техническая сила подтверждена машинно: из утверждения L4_witness следует функциональный выбор по произвольному семейству (ChoicePriceMap.v:164, без допущений), вместе с classic — эпсилон Гильберта; слово главы «choice-подобный» этому отвечает"
+  },
+  {
+   "line": 345,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "| действительное число | процесс Коши — `RealProcess`, сходящаяся последовательность рациональных приближений |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "сомнительное: Definition RealProcess := nat -> Q (ProcessCore.v:34) — тип всех процессов, без условия Коши; условие задаёт отдельный предикат is_Cauchy (строка 68), упакованная форма — CauchySeq (CauchyReal.v:48); в сводной строке это сокращение, Глава 4.2 различие проводит"
+  },
+  {
+   "line": 346,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "| точка | setoid-класс эквивалентных представителей (по `process_equiv`) |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Equivalence для process_equiv и cauchy_equiv зарегистрированы в RealPointSetoid.v:52, 61; без допущений"
+  },
+  {
+   "line": 347,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "| несчётность | невозможность регулярного обхода охватить все классы |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "forall E, valid_regular_enumeration E -> exists D, … forall n, ~ process_equiv D (E n); «Closed under the global context»"
+  },
+  {
+   "line": 348,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "| континуум | дихотомия замкнутых бинарных совокупностей (перечислимое либо совершенное) |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "точная форма: is_closed C -> is_enumerable C \\/ has_perfect_subset C — «перечислима либо содержит совершенное подмножество»; в строке таблицы сокращено"
+  },
+  {
+   "line": 364,
+   "theorem": null,
+   "file": "src/process/ProcessOpenQuestions.v",
+   "claim": "файл `ProcessOpenQuestions.v`, «что осталось»; но его пункты — физические, и сама его честная итоговая оценка дана для физического слоя",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "шапка файла: «What Remains After 10000 Qed … Honest catalogue of what is NOT derived»; теоремы not_derived_* и future_* — о физике; в шапке «~50 Qed», действительных 36 (глава числа не называет)"
+  },
+  {
+   "line": 375,
+   "theorem": "bin_to_real",
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "полного перевода между ними — $2^{ℕ}\\leftrightarrow [0,1]$ — в коде нет: формализован лишь прямой `bin_to_real` (Глава 4.5)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBinReal.v: bin_to_real, bin_to_real_in_interval, bin_ones_equiv_one — без допущений, bin_to_real_is_Cauchy — на classic; обратного отображения в src нет (в журнале формализации это задача F-23)"
+  },
+  {
+   "line": 380,
+   "theorem": "P4_formalized",
+   "file": "src/process/ProcessFourPrinciples.v",
+   "claim": "в коде $P4$ стоит самостоятельным предикатом, без формальной цепочки от законов",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P4_formalized — самостоятельный предикат (ProcessFourPrinciples.v:64); теорема с именем P4_from_L5 есть (foundation/PrinciplesFromLaws.v:191), но L5 в её посылках нет, и файл сам пишет «not derived as a theorem» (строки 188–189)"
+  },
+  {
+   "line": 405,
+   "theorem": null,
+   "claim": "с явно размеченной аксиомной ценой — прежде всего $L3$ и локально $L4$ — вместо неявного сет-теоретического фона",
+   "page_price": "прежде всего L3 и локально L4",
+   "verdict": "ok",
+   "note": "общая формула тома, согласуется с ChoicePriceMap.v; сверх L3 и L4 компилятор находит функциональную экстенсиональность в 9 леммах пяти файлов — см. запись строки 147"
+  },
+  {
+   "line": 415,
+   "theorem": null,
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "Две шкалы — `DerivationStrength` и `IFStrength` — введены в коде на физическом материале; здесь они взяты как инструмент, а разметка математики тома — авторская, опертая на `Print Assumptions`, не отдельная Coq-таблица.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "для шкал силы верно; для оси цены таблица в Rocq есть — settheory/ChoicePriceMap.v (см. запись строки 242)"
+  },
+  {
+   "line": 419,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Ядро тома стоит на нуле аксиом — включая несчётность процессов отрезка; дихотомия Части IV — на $L3+L4$",
+   "page_price": "несчётность — 0 аксиом; дихотомия — L3 + L4",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 13, слово автора): было «два результата Части IV — на L3 и на L3+L4» — место, пропущенное при правке 12.11; unit_interval_uncountable_trisect_v2 и process_uncountable — «Closed under the global context»; на classic + L4_witness в Части IV один результат — process_continuum_hypothesis"
+  },
+  {
+   "line": 420,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "внешней аксиомы выбора нет, но есть choice-подобный закон свидетельствования $L4$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "согласуется со строками 310–326 и с ChoicePriceMap.v (из утверждения L4_witness следует функциональный выбор)"
+  },
+  {
+   "line": 422,
+   "theorem": null,
+   "file": "src/process/ProcessBinReal.v",
+   "claim": "Мост между моделями и машинная деривация $P4$ из законов — рабочая карта, не доказанные теоремы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 14, слово автора «А»): из списка открытых задач и из итога сняты два закрытых пункта — полное перечисление ℚ (Q_bijection, Countability_Q.v:759, без допущений) и точка-класс (сетоид RealPointSetoid.v с метрикой и топологией; отдельный фактортип ToS осознанно не строит, Глава 4.3); оставшиеся два по формализации открыты: мост 2^ℕ ↔ [0,1] есть только в прямую сторону (bin_to_real, process/ProcessBinReal.v), а P4 в foundation/PrinciplesFromLaws.v держится «по построению типа», без цепочки от законов"
+  },
+  {
+   "line": 430,
+   "theorem": null,
+   "file": "src/process/ProcessAxiomAudit.v",
+   "claim": "Тип `DerivationStrength` и его применения — в файле `ProcessAxiomAudit.v` Rocq-репозитория ToS (каталог `src/process/`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "файл на месте: src/process/ProcessAxiomAudit.v, 10 Qed (после шага 3), 0 Admitted, аксиом не объявляет; все объявления замкнуты"
+  },
+  {
+   "line": 431,
+   "theorem": "all_derivations",
+   "file": "src/process/ProcessDerivedVsConsistent.v",
+   "claim": "`ProcessDerivedVsConsistent.v` Rocq-репозитория ToS; тип `IFStrength`, запись `DerivationRecord`, список `all_derivations`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "все три имени объявлены в файле (строки 33, 39, 184); в списке 12 записей; файл — 20 Qed, все 38 объявлений замкнуты"
+  }
+ ]
+}

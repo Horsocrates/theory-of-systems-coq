@@ -1,0 +1,8 @@
+@@FILE Направления/Математика/Том Математика/04 Процессные действительные числа/01 P4 бесконечность как процесс.md
+@@OLD
+  /\ (forall R1 R2 : RealProcess, is_Cauchy R1 -> is_Cauchy R2 ->
+        is_Cauchy (process_fst (process_product R1 R2)))
+@@NEW
+  /\ (forall R1 R2 : RealProcess, is_Cauchy R1 -> is_Cauchy R2 ->
+        is_Cauchy (process_mul R1 R2))
+@@END

@@ -1,0 +1,33 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "Направления/Математика/index.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Несчётность и промежуточное значение доказаны без допущений, экстремум — с исключённым третьим",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "IVT_process",
+   "file": "src/IVT_ERR.v",
+   "claim": "Несчётность и промежуточное значение доказаны без допущений",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "EVT_strong_process",
+   "file": "src/EVT_idx.v",
+   "claim": "экстремум — с исключённым третьим",
+   "page_price": "исключённое третье",
+   "verdict": "ok",
+   "note": "цена сверена при заведении базы (12.11 не проверялось): `EVT_idx.classic`"
+  }
+ ],
+ "root": "library"
+}

@@ -1,0 +1,24 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "15 Вычисления и граница финитизации/07 Синтез одна диагональ, один дискриминант.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "**classic (L3)${}+{}$L4 — только одна грань.**  *Дихотомия завершённого\nконтинуума*",
+   "page_price": "classic (L3) + L4",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Кантор-над-предикатами и сама несчётность отрезка classic *не* требуют",
+   "page_price": "без classic",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  }
+ ]
+}

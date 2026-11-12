@@ -20,7 +20,6 @@ From Stdlib Require Import Lia.
 From Stdlib Require Import PeanoNat.
 From Stdlib Require Import Bool.
 From Stdlib Require Import List.
-From Stdlib Require Import FunctionalExtensionality.
 Import ListNotations.
 Open Scope Q_scope.
 
@@ -81,19 +80,25 @@ Proof.
   - reflexivity.
 Qed.
 
+(** A strategy profile is a process [nat -> nat]: two profiles are the same
+    when they agree at every player.  The three laws below are stated in this
+    stage-wise form ([profile_eq]); the Leibniz form would need functional
+    extensionality, which ToS does not assume. *)
+Definition profile_eq (p q : StrategyProfile) : Prop := forall j : nat, p j = q j.
+
 Lemma update_profile_overwrite : forall (p : StrategyProfile) (i si si2 : nat),
-  update_profile (update_profile p i si2) i si = update_profile p i si.
+  profile_eq (update_profile (update_profile p i si2) i si) (update_profile p i si).
 Proof.
-  intros p i si si2. apply functional_extensionality. intros j.
+  intros p i si si2 j.
   unfold update_profile. destruct (Nat.eqb j i); reflexivity.
 Qed.
 
 Lemma update_profile_comm : forall (p : StrategyProfile) (i j si sj : nat),
   i <> j ->
-  update_profile (update_profile p i si) j sj =
-  update_profile (update_profile p j sj) i si.
+  profile_eq (update_profile (update_profile p i si) j sj)
+             (update_profile (update_profile p j sj) i si).
 Proof.
-  intros p i j si sj Hneq. apply functional_extensionality. intros k.
+  intros p i j si sj Hneq k.
   unfold update_profile.
   destruct (Nat.eqb_spec k j) as [Hkj | Hkj];
   destruct (Nat.eqb_spec k i) as [Hki | Hki]; try reflexivity.
@@ -101,9 +106,9 @@ Proof.
 Qed.
 
 Lemma update_profile_id : forall (p : StrategyProfile) (i : nat),
-  update_profile p i (p i) = p.
+  profile_eq (update_profile p i (p i)) p.
 Proof.
-  intros p i. apply functional_extensionality. intros j.
+  intros p i j.
   unfold update_profile.
   destruct (Nat.eqb_spec j i) as [Heq | _].
   - rewrite Heq. reflexivity.

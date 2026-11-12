@@ -22,8 +22,9 @@
     РАЗНЫЕ: nine_raw 0 = 0,9 <> 1), а равенство КАК ТОЧЕК (один режим/класс).
     Поэтому утверждаем «~~» (равенство точек), НЕ «=» (тождество объектов).
 
-    Status: F-11 — nine_raw ~~ const 1, axiom-free.
-    STATUS: 6 Qed, 0 Admitted, 0 axioms
+    Status: F-11 — nine_raw ~~ const 1, axiom-free; the same on the CauchySeq
+            line (nine_process, one_process, nine_process_equiv_one).
+    STATUS: 8 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: May 2026
 *)
 
@@ -121,4 +122,33 @@ Qed.
 Example nine_raw_0 : nine_raw 0%nat == 9 # 10.
 Proof. reflexivity. Qed.
 
+(* ===================================================================== *)
+(*  The same fact on the CauchySeq line: representatives that carry their *)
+(*  proof of convergence (Nov 2026)                                        *)
+(* ===================================================================== *)
+
+From ToS Require Import CauchyReal.           (* CauchySeq, cauchy_const, cauchy_equiv *)
+From ToS Require Import CauchyProcessBridge.  (* to_CauchySeq: the two lines coincide *)
+
+(** 0,999… as a representative: the truncation process packed together
+    with its proof of the Cauchy property. *)
+Definition nine_process : CauchySeq := to_CauchySeq nine_raw nine_raw_is_Cauchy.
+
+(** The unit as a representative: the constant process 1. *)
+Definition one_process : CauchySeq := cauchy_const 1.
+
+(** Element level, on this line too: at every stage the representative of
+    0,999… is strictly below the representative of 1 -- the two
+    representatives are different. *)
+Lemma nine_process_lt_one_stagewise :
+  forall n : nat, cs_seq nine_process n < cs_seq one_process n.
+Proof. exact nine_raw_lt_one. Qed.
+
+(** Role level: two DIFFERENT representatives, ONE class -- equivalence by
+    [cauchy_equiv].  The proof is the first-line theorem itself: the two
+    formalization lines coincide (CauchyProcessBridge). *)
+Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process.
+Proof. exact nine_equiv_one. Qed.
+
 Print Assumptions nine_equiv_one.
+Print Assumptions nine_process_equiv_one.

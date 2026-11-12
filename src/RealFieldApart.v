@@ -14,6 +14,9 @@
         (A Cauchy sequence with |xₙ|>q cannot change sign without a jump >q, impossible past the modulus.)
       * apart_has_inverse : EVERY apart0 x has a multiplicative inverse, cauchy_mul x y ~~ 1 — total
         invertibility on the apart elements (positive case = cauchy_inv_pos; negative case = −((−x)⁻¹)).
+      * inverse_implies_apart / invertible_iff_apart (Nov 2026): the CONVERSE — a real that has a
+        multiplicative inverse is apart from zero (the gap is exhibited from a bound of the inverse);
+        hence "invertible EXACTLY when apart" is now a theorem, not only a one-sided statement.
       * apart0_zero_absurd : ¬ apart0 0 — you cannot be apart from 0 if you ARE 0 (apartness is the
         constructive, witnessed replacement for "≠ 0").
       With RealField's commutative-ring + ordered-field laws, this IS the apartness (Heyting) field.
@@ -32,7 +35,7 @@
         (обратный там, где зазор предъявлен; Element-сторона, 0 акс). «Частичность деления» = честное содержание
         конструктивного числа, не дефект. Уровень: `новая теорема` (тотальный обратный на апартных) над RealField.
 
-    STATUS: 6 Qed, 0 Admitted, 0 axioms  (builds on CauchyReal + RealField)
+    STATUS: 8 Qed, 0 Admitted, 0 axioms  (builds on CauchyReal + RealField)
     Author: Horsocrates (experiment) | Date: June 2026
 *)
 
@@ -120,6 +123,45 @@ Proof.
       * apply cauchy_neg_compat. apply cauchy_mul_comm.
 Qed.
 
+(** ★★ The CONVERSE: a real that HAS a multiplicative inverse is apart from zero.  The gap is exhibited
+    from a bound of the inverse: if |y| <= B and x·y is eventually within 1/2 of 1, then |x| > 1/(2B)
+    eventually. *)
+Theorem inverse_implies_apart :
+  forall x y : CauchySeq, cauchy_equiv (cauchy_mul x y) cauchy_one -> apart0 x.
+Proof.
+  intros x y Hxy.
+  destruct (cauchy_bounded y) as [B [HB HyB]].
+  assert (Hhalf : 0 < 1#2) by reflexivity.
+  destruct (Hxy (1#2) Hhalf) as [N HN].
+  exists ((1#2) / B). split.
+  - apply Qlt_shift_div_l; [ exact HB | lra ].
+  - exists N. intros n Hn.
+    specialize (HN n Hn).
+    change (Qabs (cs_seq x n * cs_seq y n - 1) < 1#2) in HN.
+    apply Qabs_Qlt_condition in HN. destruct HN as [Hlo Hhi].
+    assert (Hp : 1#2 < cs_seq x n * cs_seq y n) by lra.
+    assert (Hprod : 1#2 < Qabs (cs_seq x n) * Qabs (cs_seq y n)).
+    { apply Qlt_le_trans with (Qabs (cs_seq x n * cs_seq y n)).
+      - apply Qlt_le_trans with (cs_seq x n * cs_seq y n); [ exact Hp | apply Qle_Qabs ].
+      - rewrite Qabs_Qmult. apply Qle_refl. }
+    assert (Hle : Qabs (cs_seq x n) * Qabs (cs_seq y n) <= Qabs (cs_seq x n) * B).
+    { rewrite (Qmult_comm (Qabs (cs_seq x n)) (Qabs (cs_seq y n))).
+      rewrite (Qmult_comm (Qabs (cs_seq x n)) B).
+      apply Qmult_le_compat_r; [ apply HyB | apply Qabs_nonneg ]. }
+    apply Qlt_shift_div_r; [ exact HB | ].
+    apply Qlt_le_trans with (Qabs (cs_seq x n) * Qabs (cs_seq y n)); assumption.
+Qed.
+
+(** ★★ Invertible EXACTLY when apart from zero. *)
+Theorem invertible_iff_apart :
+  forall x : CauchySeq,
+    apart0 x <-> exists y : CauchySeq, cauchy_equiv (cauchy_mul x y) cauchy_one.
+Proof.
+  intro x. split.
+  - apply apart_has_inverse.
+  - intros [y Hy]. exact (inverse_implies_apart x y Hy).
+Qed.
+
 (** ★ Apartness is irreflexive at 0: you cannot be apart from 0 if you ARE 0 (the witnessed replacement
     for "≠ 0"). *)
 Lemma apart0_zero_absurd : ~ apart0 (cauchy_const 0).
@@ -135,8 +177,9 @@ Qed.
 
 (** F-25 closed: the Cauchy reals form an APARTNESS FIELD.
       (apart0_sign)        an apart real is eventually one-signed — apartness resolves constructively;
-      (apart_has_inverse)  every apart-from-zero real has a multiplicative inverse, x·y ~~ 1 — TOTAL
-                           invertibility on the apart elements, 0 axioms;
+      (invertible_iff_apart) a real has a multiplicative inverse, x·y ~~ 1, EXACTLY when it is apart
+                           from zero — TOTAL invertibility on the apart elements (apart_has_inverse)
+                           and its converse (inverse_implies_apart), 0 axioms;
       (apart0_zero_absurd) apartness is irreflexive at 0 — the witnessed replacement for "≠ 0".
     With RealField's ring + ordered-field laws, this is the apartness (Heyting) field.  The classical
     field reifies a completed set of invertibles (all non-zero, by mere ¬(x=0)); ToS gives the inverse
@@ -144,9 +187,9 @@ Qed.
     not a defect.  Level: a new positive structure (total inverse on apart) over the existing RealField. *)
 Theorem apartness_field :
   (forall x, apart0 x -> cauchy_pos x \/ cauchy_pos (cauchy_neg x))
-  /\ (forall x, apart0 x -> exists y, cauchy_equiv (cauchy_mul x y) cauchy_one)
+  /\ (forall x, apart0 x <-> exists y, cauchy_equiv (cauchy_mul x y) cauchy_one)
   /\ (~ apart0 (cauchy_const 0)).
 Proof.
   split; [ exact apart0_sign | ].
-  split; [ exact apart_has_inverse | exact apart0_zero_absurd ].
+  split; [ exact invertible_iff_apart | exact apart0_zero_absurd ].
 Qed.

@@ -8,9 +8,11 @@
     Status:   complete
 
     Formalize the meta-level: derivation strength and axiom dependencies.
-    Uses Rocq's Print Assumptions results (run separately).
+    Part II gathers the six key results into one proof object and runs
+    Print Assumptions on it at every build; the statement about the whole
+    formalization rests on a full Print Assumptions sweep (run separately).
 
-    STATUS: 13 Qed, 0 Admitted
+    STATUS: 10 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -20,6 +22,15 @@ From Stdlib Require Import Lqa.
 Open Scope Q_scope.
 
 From ToS Require Import process.ProcessCore.
+
+(* The six key results audited in Part II (Require without Import: only the
+   qualified names are used, no notations or scopes are pulled in). *)
+From ToS Require process.ProcessPauliExclusion.
+From ToS Require gauge.SpectralGapCorrect.
+From ToS Require process.ProcessWeinbergAngle.
+From ToS Require process.ProcessNonAbelianERR.
+From ToS Require process.ProcessReggeVariation.
+From ToS Require process.ProcessAnomalyCancel.
 
 (* ================================================================== *)
 (*  Part I: Derivation Strength Classification  (~6 lemmas)           *)
@@ -80,51 +91,59 @@ Lemma total_classified :
 Proof. reflexivity. Qed.
 
 (* ================================================================== *)
-(*  Part II: Axiom Dependencies  (~5 lemmas)                          *)
+(*  Part II: Axiom Dependencies  (one object, Print Assumptions)      *)
 (* ================================================================== *)
 
-(** Expected results of Print Assumptions:
-    pauli_exclusion:           classic
-    spectral_gap_beta_1:       classic  (pure Q arithmetic)
-    weinberg_physical:          classic  (pure Q arithmetic)
-    trace_gauge_invariant_2:   classic  (ring tactic)
-    regge_equation_uniform:    classic
-    sm_anomaly_cancels:        classic  (vm_compute)
+(** What the compiler says (Print Assumptions, full build of 2026-11-12):
 
-    All key results depend ONLY on classic (= L3).
-    No other axioms needed for the core mathematics.
-    L4_witness used only in ProcessL4Variational.v.
-*)
+    pauli_exclusion                  Closed under the global context
+    spectral_gap_beta_1              Closed under the global context
+    weinberg_physical                Closed under the global context
+    trace_gauge_invariant_concrete   Closed under the global context
+    regge_equation_uniform           Closed under the global context
+    sm_anomaly_cancels               Closed under the global context
 
-(** The only non-logical axiom used *)
-Definition uses_classic : Prop := forall P : Prop, P \/ ~ P.
+    The six key results use NO assumption at all -- not even classic (L3).
+    (An earlier note here listed "classic" as the expected answer for each;
+    the compiler finds none.)
 
-(** Classic = excluded middle = L3 in ToS terms *)
-Lemma classic_is_L3 : uses_classic -> forall P, P \/ ~ P.
-Proof. intros H P. exact (H P). Qed.
+    Across the whole formalization the logical assumptions in use are two,
+    both laws of ToS itself: classic (L3) and L4_witness (L4).
+    L4_witness is in action (Print Assumptions lists it) in theorems of nine
+    files besides ToS_Axioms.v:
+      ProcessContinuumHypothesis.v, SchroederBernstein_ERR.v,
+      analysis/BolzanoWeierstrass.v, process/ProcessBW.v,
+      physics/SpectralDichotomy.v, physics/MeasurementProcess.v,
+      physics/Entanglement.v, settheory/CardinalityWithoutChoice.v,
+      zeta/ZeroStructure.v.
+    It is applied directly only in ProcessContinuumHypothesis.v and inside
+    ToS_Axioms.v; every other dependence is inherited.
+    In src/process/ itself: 4376 of 4429 theorems and lemmas have no
+    assumption, 48 rest on classic, and 7 of those 48 (all in ProcessBW.v)
+    also on L4_witness.
+    (process/ProcessL4Variational.v speaks of the LAW L4 and uses no axiom.)
+    No Axiom of Choice, no Axiom of Infinity, no Univalence, and -- since
+    2026-11-12 -- no functional extensionality anywhere.
 
-(** No Axiom of Choice needed *)
-(** No Axiom of Infinity needed *)
-(** No Univalence Axiom needed *)
-(** No function extensionality needed *)
+    An axiom audit is a statement ABOUT proofs and cannot itself be a theorem
+    of Rocq.  What can be done inside Rocq is to gather the audited results
+    into ONE proof object and ask the compiler about it: Print Assumptions on
+    [key_results_hold] lists every assumption any of the six uses.  The two
+    former lemmas [axiom_minimal] and [l4_witness_localized] stated only
+    "L3 implies L3" (their claims lived in comments) and were removed. *)
 
-Theorem axiom_minimal :
-  (* All results in gauge/ depend only on classic *)
-  (* All results in process/ depend only on classic + occasional L4 *)
-  (* No Axiom of Infinity. No Axiom of Choice. No Univalence. *)
-  (* The formalization is AXIOM-MINIMAL. *)
-  uses_classic -> forall P, P \/ ~ P.
-Proof. exact classic_is_L3. Qed.
+(** The six key results as one proof object. *)
+Definition key_results_hold :=
+  conj ProcessPauliExclusion.pauli_exclusion
+ (conj SpectralGapCorrect.spectral_gap_beta_1
+ (conj ProcessWeinbergAngle.weinberg_physical
+ (conj ProcessNonAbelianERR.trace_gauge_invariant_concrete
+ (conj ProcessReggeVariation.regge_equation_uniform
+       ProcessAnomalyCancel.sm_anomaly_cancels)))).
 
-(** L4_witness axiom used in ProcessL4Variational.v *)
-(** This is the only non-classic axiom, and it's localized *)
-Lemma l4_witness_localized :
-  (* L4_witness appears in exactly 1 file *)
-  (* All other results are independent of it *)
-  (* Removing L4_witness loses only the variational principle derivation *)
-  (* Meta: classic is the only axiom; classic IS L3 (excluded middle) *)
-  uses_classic -> forall P, P \/ ~ P.
-Proof. exact classic_is_L3. Qed.
+(** Machine check, printed at every build: expected answer
+    "Closed under the global context". *)
+Print Assumptions key_results_hold.
 
 (* ================================================================== *)
 (*  Part III: Circularity Check  (~4 lemmas)                          *)

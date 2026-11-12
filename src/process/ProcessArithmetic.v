@@ -3,7 +3,7 @@
     Roles:    pointwise arithmetic preserving Cauchy; monotonicity lemmas
     Rules:    each operation preserves the Cauchy condition
     Status:   complete
-    STATUS: 13 Qed, 0 Admitted, 0 axioms
+    STATUS: 17 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -12,7 +12,7 @@
 (*                                                                            *)
 (*  Pointwise arithmetic on RealProcess. Each operation preserves Cauchy.    *)
 (*                                                                            *)
-(*  STATUS: 13 Qed, 0 Admitted                                               *)
+(*  STATUS: 17 Qed, 0 Admitted                                               *)
 (*  AXIOMS: none                                                              *)
 (* ========================================================================= *)
 

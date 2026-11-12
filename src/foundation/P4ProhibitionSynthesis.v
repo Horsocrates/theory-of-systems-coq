@@ -2,7 +2,7 @@
     Elements: prohibition vs reinterpretation, three prohibitions, three preservations
     Roles:    prohibition = inconsistency, reinterpretation = alternative
     Rules:    prohibition ⇒ reinterpretation (strictly stronger)
-    STATUS:   8 Qed, 0 Admitted, 0 new axioms
+    STATUS:   6 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: April 2026
 
     WHAT CHANGED:
@@ -31,8 +31,8 @@ Theorem P4_prohibits_three :
   (* (1) Completed infinite sets *)
   (forall S actual, CompletedInfSet S -> P4_stage_bounded actual ->
     bridge S actual -> False) /\
-  (* (2) Full AC on nat (produces completed infinity) *)
-  (AC_on_nat -> exists f, CompletedInfSet (choice_graph f)) /\
+  (* (2) Full AC on nat: the choice function read as a completed graph *)
+  AC_gives_completed_graph /\
   (* (3) Russell's paradox (requires completed totality) *)
   (forall (member : nat -> nat -> Prop) (r : nat),
     (forall x, member x r <-> ~ member x x) -> False).
@@ -114,7 +114,7 @@ Theorem p4_prohibition_grand_synthesis :
   (* Three prohibitions *)
   (forall S actual, CompletedInfSet S -> P4_stage_bounded actual ->
     bridge S actual -> False) /\
-  (AC_on_nat -> exists f, CompletedInfSet (choice_graph f)) /\
+  AC_gives_completed_graph /\
   (forall (member : nat -> nat -> Prop) (r : nat), (forall x, member x r <-> ~ member x x) -> False) /\
   (* Three preservations *)
   potential_infinity /\
@@ -138,8 +138,11 @@ Qed.
   1. Completed infinite sets are INCONSISTENT with P4.
      (Proof: P4CompletedInfinity.v — contradiction via bound)
 
-  2. Full Axiom of Choice on nat is INCONSISTENT with P4.
-     (Proof: P4ProhibitsAC.v — choice function is completed infinite object)
+  2. The choice function READ AS A COMPLETED GRAPH is inconsistent with P4
+     (stage bound + bridge).  AC on nat for nonempty lists is itself a
+     theorem (head of each list); what is cut off is the reading.
+     (Proof: P4ProhibitsAC.v — ac_completed_graph_contradicts_P4,
+      completed_graph_contradicts_P4, AC_on_nat_as_rule)
 
   3. Impredicative set formation is INCONSISTENT with P4+P1.
      (Proof: P4ProhibitsImpredicative.v — Russell requires completed totality)

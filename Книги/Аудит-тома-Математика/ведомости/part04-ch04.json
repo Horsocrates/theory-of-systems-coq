@@ -1,0 +1,530 @@
+{
+ "batch": "audit-part-04",
+ "chapter": "04 Процессные действительные числа/04 Несчётность процессов.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 64,
+   "theorem": null,
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Конструкция диагонального процесса и сама теорема несчётности доказаны в файле `ShrinkingIntervals_ERR.v`; процессная переформулировка результата — в файле `ProcessUncountable.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: diagonal_trisect_v2 (ShrinkingIntervals_ERR.v:2987) и unit_interval_uncountable_trisect_v2 (:3569); process_uncountable — process/ProcessUncountable.v:88, выводится из главной теоремы (:97)."
+  },
+  {
+   "line": 70,
+   "theorem": null,
+   "claim": "И там, где формализация оговаривает условие — регулярность перечисления, — глава оговорит его вместе с ней, не выдавая результат сильнее, чем он доказан.",
+   "page_price": "о цене здесь не говорит",
+   "verdict": "ok",
+   "note": "Исправлено 12.11: из перечня условий снята «опора на классическую логику»; условие регулярности — valid_regular_enumeration в формулировке теоремы."
+  },
+  {
+   "line": 130,
+   "theorem": null,
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "под $P4$ «несчётность» означает, что никакое перечисление-процесс не захватывает все процессы Коши — это утверждение о процессах, а не о множестве.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пересказ заголовочного комментария process/ProcessUncountable.v:13–14 («no enumeration process captures all Cauchy processes — a statement about processes, not about a set»); условие регулярности оговорено в сноске 1."
+  },
+  {
+   "line": 174,
+   "theorem": "Enumeration",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Перечисление есть функция из номеров в процессы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 171) совпадает с ShrinkingIntervals_ERR.v:1080; одноимённое определение есть ещё в устаревшем DiagonalArgument_ERR.v."
+  },
+  {
+   "line": 185,
+   "theorem": "RealProcess",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Голый процесс есть функция из номеров шагов в рациональные приближения: `RealProcess` ${}={}$ `nat -> Q`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: Definition RealProcess := nat -> Q (ShrinkingIntervals_ERR.v:159); то же определение стоит в ядре process/ProcessCore.v:34 (всего 10 одноимённых объявлений в src)."
+  },
+  {
+   "line": 237,
+   "theorem": "valid_enumeration",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Каждый член есть процесс Коши и лежит в $[0,1]$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 233) совпадает с ShrinkingIntervals_ERR.v:1083."
+  },
+  {
+   "line": 245,
+   "theorem": "valid_regular_enumeration",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Здесь от каждого члена требуется быть не просто Коши, а *регулярным* Коши — `is_Regular_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 241) совпадает с ShrinkingIntervals_ERR.v:1089."
+  },
+  {
+   "line": 247,
+   "theorem": "valid_regular_implies_valid",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Файл доказывает, что регулярное перечисление есть и обычное (лемма `valid_regular_implies_valid`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: valid_regular_enumeration E -> valid_enumeration E (ShrinkingIntervals_ERR.v:1094)."
+  },
+  {
+   "line": 254,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "для всякого *регулярного* перечисления процессов точек отрезка $[0,1]$ существует процесс Коши, лежащий в $[0,1]$, не эквивалентный ни одному члену перечисления.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Словесная формулировка совпадает с теоремой: условие valid_regular_enumeration E; вывод — is_Cauchy D, 0 <= D m <= 1, not_equiv D (E n) для всех n (ShrinkingIntervals_ERR.v:3569)."
+  },
+  {
+   "line": 295,
+   "theorem": "is_Regular_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Расхождение приближений на шагах $m$ и $n$ ограничено суммой $\\tfrac1m + \\tfrac1n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 290) совпадает с ShrinkingIntervals_ERR.v:180; оценка стоит для m, n > 0, как и в блоке."
+  },
+  {
+   "line": 319,
+   "theorem": "Regular_implies_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "регулярный Коши есть и обычный Коши (лемма `Regular_implies_Cauchy`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: forall R, is_Regular_Cauchy R -> is_Cauchy R (ShrinkingIntervals_ERR.v:471)."
+  },
+  {
+   "line": 339,
+   "theorem": "trisect_ref",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "и конструкция может *вычислить* номер шага (в коде он называется `trisect_ref` $n$), на котором приближение $E(n)$ гарантированно попало в узкую окрестность предела.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: trisect_ref n := 48 * 3^n (ShrinkingIntervals_ERR.v:2835); шаг trisect_iter_v2 берёт приближение E n (trisect_ref n) (:2882–2892)."
+  },
+  {
+   "line": 348,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Теорема доказана для *регулярных* перечислений; для произвольных перечислений процессов Коши — без гарантии скорости — она в репозитории не устанавливается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: теорем несчётности с условием valid_enumeration в src нет; устаревший DiagonalArgument_ERR.v (цифровая диагональ) доказывает лишь сходимость диагонали и её нахождение в отрезке, но не отличие от членов перечисления."
+  },
+  {
+   "line": 379,
+   "theorem": "diagonal_intervals",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "`ShrinkingIntervals_ERR.v` этот подход реализует (конструкция `avoid_E`, `diagonal_intervals`), но сам же помечает его как *вытесненный* лучшим — из-за краевой трудности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: раздел 10 файла помечен «SUPERSEDED: This section uses BISECTION which has edge cases» (ShrinkingIntervals_ERR.v:1243); avoid_E — :1287, diagonal_intervals — :1300."
+  },
+  {
+   "line": 402,
+   "theorem": "TrisectChoice",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Rocq-формализация вводит для выбора трети тип из трёх значений и три соответствующие операции:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Число верно: тип TrisectChoice из трёх конструкторов (ShrinkingIntervals_ERR.v:2184) и три операции trisect_left, trisect_middle, trisect_right (:2187–2195); блок кода совпадает."
+  },
+  {
+   "line": 417,
+   "theorem": "smart_trisect_choice",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Выбор свободной трети выполняет функция `smart_trisect_choice`; она устроена не как «выбор» в каком-либо проблемном смысле, а как *детерминированное ветвление* по рациональным неравенствам",
+   "page_price": "без аксиомы выбора: детерминированное ветвление",
+   "verdict": "ok",
+   "note": "Верно: определение (ShrinkingIntervals_ERR.v:2562) ветвится по conf_below / conf_above, которые решаются через Qlt_le_dec (:2554–2559); функция возвращает только левую или правую треть."
+  },
+  {
+   "line": 432,
+   "theorem": "trisect_delta",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "\\texttt{ref}(n) = 48\\cdot 3^{n}, \\quad \\delta(n) = \\frac{1}{24\\cdot 3^{n}}, \\quad \\text{ширина}(n) = \\frac{1}{3^{n}}.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Числа верны: trisect_ref n := 48 * 3^n (ShrinkingIntervals_ERR.v:2835), trisect_delta n := 1 / (24 * 3^n) (:2841), ширина после n шагов равна 1/3^n — лемма trisect_iter_v2_width (:2895)."
+  },
+  {
+   "line": 448,
+   "theorem": "trisect_delta_bound",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "и это — доказанная лемма (`trisect_delta_bound`): двойная полуширина доверительного интервала всегда меньше ширины трети.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: forall n, 2 * (1 / (24 * 3^n)) < (1 / 3^n) / 3 (ShrinkingIntervals_ERR.v:289) — для всех n, как и сказано."
+  },
+  {
+   "line": 455,
+   "theorem": "diagonal_convergence_rate",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Эту скорость в процессной переформулировке отмечают отдельной величиной — `diagonal_convergence_rate`, равной $1/3$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно и сказано осторожно: это константа 1 # 3 (process/ProcessUncountable.v:132); теоремой с диагональным процессом она не связана — лемма diagonal_rate_valid (:134) проверяет лишь 0 < 1/3 < 1."
+  },
+  {
+   "line": 468,
+   "theorem": "diagonal_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "*Диагональный процесс* — это процесс их середин: на шаге $n$ он выдаёт середину $n$-го интервала. В Rocq-формализации он называется `diagonal_trisect_v2`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с определением: полусумма концов состояния trisect_iter_v2 E [0,1] n (ShrinkingIntervals_ERR.v:2987); шаг строится по E n (trisect_ref n) и trisect_delta n, как описано в абзаце."
+  },
+  {
+   "line": 478,
+   "theorem": "diagonal_trisect_v2_is_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Это лемма `diagonal_trisect_v2_is_Cauchy`. Доказательство опирается на стягивание интервалов: ширина $n$-го интервала есть $1/3^n$, а степени тройки растут неограниченно",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка: forall E, is_Cauchy (diagonal_trisect_v2 E) — без условий на E; ход доказательства описан верно: Archimedean_pow3 и trisect_iter_v2_width (ShrinkingIntervals_ERR.v:3334–3382)."
+  },
+  {
+   "line": 480,
+   "theorem": "Archimedean_pow3",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "(архимедова лемма `Archimedean_pow3` из того же файла)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя и файл верны: forall eps > 0, exists N, 1 / 3^N < eps (ShrinkingIntervals_ERR.v:327); в файле объявлена словом Theorem, не Lemma."
+  },
+  {
+   "line": 490,
+   "theorem": "diagonal_trisect_v2_in_unit",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Это лемма `diagonal_trisect_v2_in_unit`: на всяком шаге значение диагонали заключено между $0$ и $1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: forall E n, 0 <= diagonal_trisect_v2 E n <= 1 (ShrinkingIntervals_ERR.v:3385)."
+  },
+  {
+   "line": 502,
+   "theorem": "diagonal_trisect_v2_differs_from_E_n",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "диагональный процесс *не эквивалентен ни одному* перечисляемому. Это лемма `diagonal_trisect_v2_differs_from_E_n`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка: forall E n, valid_regular_enumeration E -> not_equiv (diagonal_trisect_v2 E) (E n) (ShrinkingIntervals_ERR.v:3423) — условие регулярности стоит в самой лемме, глава называет его в § 4.4."
+  },
+  {
+   "line": 515,
+   "theorem": "not_equiv",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "существует $\\varepsilon > 0$, такой что после любого рубежа $N$ найдётся шаг $m > N$, на котором расхождение процессов не меньше $\\varepsilon$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пересказ совпадает с определением; блок кода (стр. 509) совпадает с ShrinkingIntervals_ERR.v:1109."
+  },
+  {
+   "line": 530,
+   "theorem": "diagonal_trisect_v2_differs_from_E_n",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Зазор имеет вычислимую положительную ширину (она получается из той же синхронизации $2\\delta < \\text{ширина}/3$). Этот зазор и служит порогом $\\varepsilon$ в `not_equiv`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "По существу верно: зазор положителен по лемме regular_excluded_by_trisection_v2 (:3272); в доказательстве порогом взята половина зазора (exists (gap / 2), :3452 и :3512), а расхождение на поздних шагах не меньше всего зазора — различие техническое."
+  },
+  {
+   "line": 553,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Для всякого перечисления $E$, если оно *регулярно допустимо*, существует процесс $D$, такой что: $D$ есть Коши; $D$ лежит в $[0,1]$; и для всякого $n$ процесс $D$ не эквивалентен $E(n)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Дословное чтение совпадает; блок кода (стр. 544–551) совпадает с ShrinkingIntervals_ERR.v:3569; свидетель в доказательстве — diagonal_trisect_v2 E (:3577)."
+  },
+  {
+   "line": 566,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Регулярность диагонали в сигнатуру главной теоремы не входит, и глава её не утверждает",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: в выводе теоремы только is_Cauchy D, границы отрезка и not_equiv; is_Regular_Cauchy D не заявлено."
+  },
+  {
+   "line": 590,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Его собственная теорема прямо опирается на `unit_interval_uncountable_trisect_v2`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: process/ProcessUncountable.v:97 — destruct (unit_interval_uncountable_trisect_v2 E Hvalid)."
+  },
+  {
+   "line": 596,
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В `ShrinkingIntervals_ERR.v` рубеж берётся строгим неравенством — приближения сближаются для шагов *строго больше* $N$. В `ProcessCore.v` — нестрогим, для шагов *не меньше* $N$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: ShrinkingIntervals_ERR.v:163–166 — (m > N), (n > N); process/ProcessCore.v:68–71 — (N <= m), (N <= n)."
+  },
+  {
+   "line": 602,
+   "theorem": "si_cauchy_compat",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "`ProcessUncountable.v` связывает их леммой `si_cauchy_compat`: две записи свойства Коши равносильны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: forall R, ShrinkingIntervals_ERR.is_Cauchy R <-> ProcessCore.is_Cauchy R (process/ProcessUncountable.v:58)."
+  },
+  {
+   "line": 604,
+   "theorem": "is_Cauchy_iff_is_cauchy",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "Это — мост того же назначения, что мост между `is_Cauchy` и `is_cauchy` в Главе 4.2, но иного рода: там определения совпали буквально, здесь — не тождество термов, а доказанная равносильность двух формулировок одного содержания.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 11, слово автора «А»): было «мост, как мост между is_Cauchy и is_cauchy в Главе 4.2» — сравнение неточно; мост Главы 4.2 (is_Cauchy_iff_is_cauchy, CauchyProcessBridge.v:47) доказан развёрткой, определения совпадают буква в букву; мост этой главы (si_cauchy_compat, ProcessUncountable.v) — равносильность строгого и нестрогого рубежа, доказанная в обе стороны сдвигом рубежа"
+  },
+  {
+   "line": 613,
+   "theorem": "not_equiv_implies_not_process_equiv",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "`ProcessUncountable.v` доказывает лемму `not_equiv_implies_not_process_equiv`: если процессы связаны `not_equiv`, то они *не* эквивалентны по `process_equiv`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: ShrinkingIntervals_ERR.not_equiv R1 R2 -> ~ ProcessCore.process_equiv R1 R2 (process/ProcessUncountable.v:69)."
+  },
+  {
+   "line": 624,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Theorem process_uncountable : forall E : ShrinkingIntervals_ERR.Enumeration, ShrinkingIntervals_ERR.valid_regular_enumeration E -> exists D : RealProcess, ProcessCore.is_Cauchy D /\\ (forall m, 0 <= D m /\\ D m <= 1) /\\ (forall n, ~ ProcessCore.process_equiv D (E n)).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 10, слово автора): блок кода приведён дословно, с приставками модулей (process/ProcessUncountable.v:88–94); было без приставок"
+  },
+  {
+   "line": 639,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "оно *разбирает* результат главной теоремы (`destruct … unit_interval_uncountable_trisect_v2`) и переоформляет три его конъюнкта через мосты.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ход доказательства описан верно (process/ProcessUncountable.v:96–101): первый конъюнкт — si_cauchy_to_process, второй переносится как есть, третий — not_equiv_implies_not_process_equiv."
+  },
+  {
+   "line": 657,
+   "theorem": "not_equiv_implies_not_process_equiv",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Обратной импликации — что из отрицания эквивалентности можно *извлечь* устойчивый зазор — в репозитории отдельной леммой не выделено.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: поиск по src не нашёл леммы вида ~ process_equiv -> not_equiv; not_equiv используется только в ShrinkingIntervals_ERR.v, process/ProcessUncountable.v и устаревшем DiagonalArgument_ERR.v."
+  },
+  {
+   "line": 675,
+   "theorem": "cauchy_equiv_to_process_equiv",
+   "file": "src/process/ProcessBridge.v",
+   "claim": "мост между двумя отношениями доказан в `ProcessBridge.v`, § 3.3.1",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: леммы cauchy_equiv_to_process_equiv и process_equiv_to_cauchy_equiv (process/ProcessBridge.v:66, :78), обе без допущений; номер параграфа 3.3.1 на странице Главы 4.3 не проставлен (заголовки без номеров) — не проверялся."
+  },
+  {
+   "line": 687,
+   "theorem": null,
+   "file": "src/RealPointSetoid.v",
+   "claim": "Фактортип точек — тип, термами которого были бы сами классы, — в репозитории не построен (Глава 4.3, § 3.4.3)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честен: RealPointSetoid.v:71–74 — «NOT a reified quotient object», RealPoint := CauchySeq; класс задан отношением, а не отдельным типом."
+  },
+  {
+   "line": 738,
+   "theorem": null,
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "*элементы — вложенные интервалы, избегающие каждого перечисляемого процесса; роль — диагональ отлична от каждого перечисляемого; правило — на шаге $n$ избегать $E(n)$, выбирая свободную треть*.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с шапкой process/ProcessUncountable.v:2–4 (Elements: nested intervals avoiding each enumerated process; Roles: diagonal process differs from every enumerated one; Rules: at step n, avoid E(n) by choosing the other third)."
+  },
+  {
+   "line": 751,
+   "theorem": "valid_regular_enumeration",
+   "claim": "Условие допустимости — *регулярность* перечисления (`valid_regular_enumeration`), управляемый доступ к каждому процессу (§ 4.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 10, слово автора): было `valid_regular` — такого имени нет; определение — valid_regular_enumeration (ShrinkingIntervals_ERR.v:1089)",
+   "file": "src/ShrinkingIntervals_ERR.v"
+  },
+  {
+   "line": 755,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Честная граница средств: доказательство не опирается ни на одно допущение — ни на `classic`, ни на аксиому выбора, ни на завершённую бесконечность (§ 4.8.4 ниже).",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; совпадает с Print Assumptions: Closed under the global context."
+  },
+  {
+   "line": 761,
+   "theorem": null,
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "диагональ $D$ — роль *соперника*, процесса, отличного от каждого перечисляемого (так роль и названа в заголовке файла)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В шапке роль названа «diagonal process differs from every enumerated one» (process/ProcessUncountable.v:3); слово «соперник» — слово главы, в файле его нет."
+  },
+  {
+   "line": 785,
+   "theorem": null,
+   "claim": "| законы $L1$–$L5$ | универсальный слой | Rule (универс.) |",
+   "page_price": "о цене не говорит",
+   "verdict": "ok",
+   "note": "Исправлено 12.11: из строки таблицы снято «(здесь $L3$)»; старой цены в разборе E/R/R не осталось."
+  },
+  {
+   "line": 793,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "а *правило* о процессах: ни один *регулярный* процесс-нумератор не охватывает все классы-роли.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 10, слово автора): добавлено слово «регулярный» — теорема доказана для valid_regular_enumeration; ниже в том же разборе глава сама пишет «любой регулярный процесс-нумератор»"
+  },
+  {
+   "line": 809,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Обе опорные теоремы — `unit_interval_uncountable_trisect_v2` в `ShrinkingIntervals_ERR.v` и `process_uncountable` в `ProcessUncountable.v` — проверены командой `Print Assumptions`, и ответ в обоих случаях один: «Closed under the global context» — доказательство не опирается ни на одно допущение.",
+   "page_price": "без допущений (Closed under the global context)",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; подтверждено повторно на полной сборке 12.11: обе теоремы — Closed under the global context."
+  },
+  {
+   "line": 813,
+   "theorem": null,
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Файл `ShrinkingIntervals_ERR.v` импортирует классический модуль и снабжён философской заметкой о роли закона исключённого третьего, но в доказательстве главной теоремы аксиома `classic` не применяется.",
+   "page_price": "импорт есть, применения нет",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; верно: импорт ToS_Axioms и Classical_Pred_Type (ShrinkingIntervals_ERR.v:72–73), заметка — :76–85; ни classic, ни леммы Classical_Pred_Type не применяются ни в одном доказательстве файла (поиск по тексту: слово встречается только в комментариях :78, :83, :3621)."
+  },
+  {
+   "line": 816,
+   "theorem": "classic",
+   "file": "src/ToS_Axioms.v",
+   "external": true,
+   "claim": "аксиома `classic` не применяется",
+   "page_price": "не применяется",
+   "verdict": "ok",
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "note": "Имя стандартной библиотеки: Classical_Prop.classic, переэкспортируется ToS_Axioms.v:31; одноимённые аксиомы в src (foundation/Distinction.v:36, EVT_idx.v:338, settheory/BorelDeterminacy.v:21) к теоремам главы отношения не имеют."
+  },
+  {
+   "line": 817,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Результат о несчётности процессов *конструктивен*.",
+   "page_price": "конструктивен, без допущений",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; совпадает с Print Assumptions: Closed under the global context (и для process_uncountable, и для главной теоремы)."
+  },
+  {
+   "line": 824,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "$L3$ входит на следующем шаге — в дихотомии Главы 4.5, и там он назван.",
+   "page_price": "L3 (в дихотомии Главы 4.5)",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; верно: Print Assumptions называет classic и вместе с ним L4_witness — здесь упомянут только L3, L4 назван в Главе 4.5 и в Главе 4.6."
+  },
+  {
+   "line": 830,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Доказательство *не* использует *аксиому выбора*.",
+   "page_price": "без аксиомы выбора",
+   "verdict": "ok",
+   "note": "Совпадает с Print Assumptions (допущений нет вовсе); выбор трети — вычислимая функция smart_trisect_choice."
+  },
+  {
+   "line": 844,
+   "theorem": null,
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Файл `ShrinkingIntervals_ERR.v` это машинно проверяет: для ключевых теорем он содержит команды `Print Assumptions`, выводящие список аксиом, от которых теорема зависит. В этих зависимостях *не* появляется ничего: ни классическая логика, ни отдельная аксиома выбора, ни аксиома бесконечности",
+   "page_price": "в зависимостях ничего",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; число и факт верны: три команды — для shrinking_interval_Cauchy, bisect_width_n (ShrinkingIntervals_ERR.v:3588–3589) и главной теоремы (:3632); все три дают Closed under the global context."
+  },
+  {
+   "line": 868,
+   "theorem": null,
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Несчётность процессов получена средствами первого рода: правило порождения — да, завершённая актуальная бесконечность — нет; классическая логика при этом не понадобилась.",
+   "page_price": "классическая логика не понадобилась",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; совпадает с Print Assumptions главной теоремы."
+  },
+  {
+   "line": 896,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Никакое регулярное перечисление процессов Коши в отрезке $[0,1]$ не покрывает все процессные классы этого отрезка: для всякого такого перечисления строится диагональный процесс Коши, лежащий в $[0,1]$ и отделённый устойчивым зазором (`not_equiv`) от каждого члена.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итоговая формулировка совпадает с теоремой: условие регулярности названо, вывод — not_equiv."
+  },
+  {
+   "line": 911,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Обе теоремы доказаны без допущений (`Print Assumptions`: «Closed under the global context»): ни `classic`, ни аксиома выбора, ни аксиома бесконечности не используются — трисекция детерминирована, завершённых бесконечностей нет.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Исправлено 12.11; совпадает с Print Assumptions обеих теорем."
+  },
+  {
+   "line": 916,
+   "theorem": "process_uncountable",
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "Процессная теорема даёт $\\neg \\texttt{process\\_equiv}$ — отрицание эквивалентности; исходная `not_equiv` с явным зазором более информативна, и обратный переход отдельной леммой в коде не выделен.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: вывод process_uncountable — ~ ProcessCore.process_equiv D (E n) (process/ProcessUncountable.v:94); обратной леммы в src нет."
+  },
+  {
+   "line": 930,
+   "theorem": null,
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "`ProcessUncountable.v` Rocq-репозитория ToS (каталог `src/process/`); заголовочный комментарий файла.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 1 верна: файл лежит в src/process/, цитируемая мысль — строки 13–14 заголовочного комментария."
+  },
+  {
+   "line": 931,
+   "theorem": null,
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "часть пояснительных комментариев в `ShrinkingIntervals_ERR.v` использует более раннее численное обозначение параметров (с множителем $12$ вместо $48$ и $24$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 2 верна: комментарии со старым множителем 12 — ShrinkingIntervals_ERR.v:282, 2817, 2827, 2831, 3270, 3599–3600; действующие определения — 48 (:2835) и 24 (:2841)."
+  },
+  {
+   "line": 932,
+   "theorem": null,
+   "file": "src/process/ProcessUncountable.v",
+   "claim": "E/R/R-разметка в шапке файла `ProcessUncountable.v`; здесь разворачивается по образцу Части I.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 3 верна: разметка Elements / Roles / Rules стоит в шапке process/ProcessUncountable.v:2–4 и повторена в строках 16–19."
+  }
+ ]
+}

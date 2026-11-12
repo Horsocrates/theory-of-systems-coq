@@ -1,0 +1,40 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "05 Топология и анализ процессов/02 Топология и компактность.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "Heine_Borel",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "восстановленная теорема Гейне–Бореля в\n`HeineBorel_ERR.v` доказана без допущений (§ 2.5)",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "not_coverable_half",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "импортирует `ToS_Axioms.v` и эта лемма пользуется `classic`",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части; теоремы Гейне — Бореля от этой леммы не зависят"
+  },
+  {
+   "theorem": "Heine_Borel_uniform",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "для `Heine_Borel` и `Heine_Borel_uniform`\nкоманда `Print Assumptions` отвечает «Closed under the global\ncontext» — допущений нет",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": null,
+   "file": "src/analysis/BolzanoWeierstrass.v",
+   "claim": "бисекция Больцано–Вейерштрасса опирается на $L3$ (`classic`, `L3_informative`) и дополнительно — на $L4$ (`L4_witness`)",
+   "page_price": "L3 и L4",
+   "verdict": "not-checked",
+   "note": "12.11 не проверялось; очередь — аудит Части V"
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 (** * P4_Eliminates_Infinity.v — nat is inductive RULE, not completed SET
-    STATUS: 12 Qed, 0 Admitted, 0 new axioms
+    STATUS: 10 Qed, 0 Admitted, 0 new axioms
     Author: Horsocrates | Date: March 2026 *)
 
 From Stdlib Require Import Lia PeanoNat List.

@@ -12,7 +12,7 @@
 (*    Rules:    Subgroup count = field count, normal ↔ Galois,              *)
 (*              A5 simple → quintic unsolvable                              *)
 (*                                                                           *)
-(*  STATUS: 20 Qed, 0 Admitted, 0 axioms                                    *)
+(*  STATUS: 21 Qed, 0 Admitted, 0 axioms                                    *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (*                                                                           *)
 (* ========================================================================= *)
@@ -176,13 +176,13 @@ Proof. split; reflexivity. Qed.
 (* For V4: subgroups have orders 1, 2, 2, 2, 4 — all divide 4 *)
 
 Lemma lagrange_v4_trivial : (Nat.divide 1 v4_order).
-Proof. unfold v4_order. exists 4. lia. Qed.
+Proof. unfold v4_order. exists 4%nat. lia. Qed.
 
 Lemma lagrange_v4_z2 : (Nat.divide 2 v4_order).
-Proof. unfold v4_order. exists 2. lia. Qed.
+Proof. unfold v4_order. exists 2%nat. lia. Qed.
 
 Lemma lagrange_v4_full : (Nat.divide v4_order v4_order).
-Proof. unfold v4_order. exists 1. lia. Qed.
+Proof. unfold v4_order. exists 1%nat. lia. Qed.
 
 (* Index = [G:H] = |G|/|H| = extension degree of fixed field *)
 Lemma index_v4_z2 : (v4_order / 2 = 2)%nat.

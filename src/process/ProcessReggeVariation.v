@@ -225,15 +225,8 @@ Proof.
   rewrite single_vertex_deficit. apply deficit_flat.
 Qed.
 
-(** Regge equation physical interpretation *)
-Theorem regge_equation_physical :
-  (* In vacuum: dS/dℓ = 0 → total_deficit = 0 → flat *)
-  (* This IS the discrete vacuum Einstein equation: Rμν = 0 *)
-  (* Flat space (all deficit = 0) solves the vacuum field equations *)
-  (* For non-uniform lattice: per-edge equations give full Regge equations *)
-  forall K valences ell,
-  total_action_derivative K valences ell 0 == regge_true_derivative K valences ell.
-Proof. intros. apply vacuum_total_stationarity. Qed.
+(* [regge_equation_physical] is stated below, after [vacuum_total_stationarity]:
+   it refers to [total_action_derivative], which is defined in Part IV. *)
 
 (* ================================================================== *)
 (*  Part IV: With Matter  (~4 extra lemmas, included in count)        *)
@@ -260,6 +253,16 @@ Proof.
   intros. unfold total_action_derivative.
   rewrite vacuum_matter_zero. ring.
 Qed.
+
+(** Regge equation physical interpretation *)
+Theorem regge_equation_physical :
+  (* In vacuum: dS/dℓ = 0 → total_deficit = 0 → flat *)
+  (* This IS the discrete vacuum Einstein equation: Rμν = 0 *)
+  (* Flat space (all deficit = 0) solves the vacuum field equations *)
+  (* For non-uniform lattice: per-edge equations give full Regge equations *)
+  forall K valences ell,
+  total_action_derivative K valences ell 0 == regge_true_derivative K valences ell.
+Proof. intros. apply vacuum_total_stationarity. Qed.
 
 (** With matter: curvature responds to matter *)
 Theorem discrete_einstein_with_matter :

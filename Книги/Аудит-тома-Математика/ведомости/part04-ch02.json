@@ -1,0 +1,754 @@
+{
+ "batch": "audit-part-04",
+ "chapter": "04 Процессные действительные числа/02 RealProcess как тип.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 79,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В Rocq-репозитории ToS базовый процессный тип определён в файле `ProcessCore.v` и носит имя `RealProcess`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Определение и блок кода (стр. 84) совпадают с ProcessCore.v:34; наблюдение: в src ещё 9 локальных копий того же определения (Archimedean_ERR, EVT_idx, HeineBorel_ERR, ShrinkingIntervals_ERR и др.)."
+  },
+  {
+   "line": 103,
+   "theorem": "const_process",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Простейший обитатель этого пространства — *постоянный процесс*:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 106) совпадает с ProcessCore.v:37."
+  },
+  {
+   "line": 147,
+   "theorem": "Q",
+   "file": "src/process/ProcessCore.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "формально `nat` и `Q` — готовые типы языка Rocq, построенные в предыдущих частях тома",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сомнительное место, не расхождение: `Q` и `nat` — типы стандартной библиотеки Rocq (Stdlib.QArith.QArith_base.Q, Corelib.Init.Datatypes.nat; ProcessCore.v:24 их импортирует), в файлах формализации они не строятся; «построенные в предыдущих частях тома» верно для изложения, не для кода."
+  },
+  {
+   "line": 158,
+   "theorem": "GenProcess",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Файл вводит универсальный процессный тип `GenProcess A := nat -> A`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с ProcessGeneral.v:50."
+  },
+  {
+   "line": 172,
+   "theorem": "observe",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Операция `observe` читает значение на одном шаге.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 163) совпадает с ProcessGeneral.v:53."
+  },
+  {
+   "line": 172,
+   "theorem": "prefix",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Операция `prefix` собирает первые $n$ значений процесса в конечный список.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 165) совпадает с ProcessGeneral.v:56."
+  },
+  {
+   "line": 177,
+   "theorem": "prefix_length",
+   "file": "src/ProcessGeneral.v",
+   "claim": "лемма `prefix_length` устанавливает, что префикс длины $n$ имеет ровно $n$ элементов",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:83: length (prefix p n) = n; допущений нет."
+  },
+  {
+   "line": 178,
+   "theorem": "prefix_nth",
+   "file": "src/ProcessGeneral.v",
+   "claim": "лемма `prefix_nth` — что $k$-й элемент префикса есть в точности $p(k)$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:93: при k < n nth k (prefix p n) d = p k; условие k < n в главе подразумевается."
+  },
+  {
+   "line": 216,
+   "theorem": "is_cauchy",
+   "file": "src/CauchyReal.v",
+   "claim": "В файле `CauchyReal.v` (о нём подробно § 2.5) это предикат `is_cauchy`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Словесная формулировка (стр. 213–216) и блок кода (стр. 221) совпадают с CauchyReal.v:43."
+  },
+  {
+   "line": 249,
+   "theorem": null,
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "В формализации Главы III.4 для них проверены первые шаги, установлено различие двух процессов и проведено сравнение качества приближения на конкретном шаге.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: RefinementSqrt.v содержит newton_0…2, cf_0…2, differ_at_2, newton_better_at_2; теоремы is_Cauchy для ньютонова или цепно-дробного процесса в src нет (foundation/ContinuumLimitIsReal.v:27 сам оговаривает, что полное эпсилон-N не выведено)."
+  },
+  {
+   "line": 267,
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "предикат `is_Cauchy` (с заглавной буквой), наложенный на `RealProcess`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:68; наблюдение к словам «двумя предикатами в двух файлах» (стр. 264): в src 9 объявлений is_Cauchy, среди них запись со строгими неравенствами в ShrinkingIntervals_ERR.v:163 (её называет Глава 4.4)."
+  },
+  {
+   "line": 270,
+   "theorem": "is_Cauchy_iff_is_cauchy",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "Мост между ними проводит файл `CauchyProcessBridge.v` — к нему § 2.5 и вернётся.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 7, слово автора): было «Файл `ProcessGeneral.v` проводит между ними мост»; в ProcessGeneral.v нет is_Cauchy; мост is_Cauchy ↔ is_cauchy — лемма is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47), как глава и пишет в § 2.5"
+  },
+  {
+   "line": 287,
+   "theorem": "process_add",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "В текущем процессном ядре формализованы аддитивные операции и масштабирование рациональной постоянной: сложение, противоположный процесс, вычитание и умножение на рациональное число.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 293) совпадает с ProcessArithmetic.v:31; в файле есть ещё поточечный модуль process_abs (:43), глава его не называет."
+  },
+  {
+   "line": 296,
+   "theorem": "process_neg",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Definition process_neg (R : RealProcess) : RealProcess :=",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с ProcessArithmetic.v:34."
+  },
+  {
+   "line": 299,
+   "theorem": "process_sub",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Definition process_sub (R1 R2 : RealProcess) : RealProcess :=",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с ProcessArithmetic.v:37."
+  },
+  {
+   "line": 302,
+   "theorem": "process_scale",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Definition process_scale (c : Q) (R : RealProcess) : RealProcess :=",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с ProcessArithmetic.v:40."
+  },
+  {
+   "line": 321,
+   "theorem": null,
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "с доказательством, что она сохраняет свойство Коши, — среди операций `ProcessArithmetic.v` нет",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в ProcessArithmetic.v умножения двух процессов нет (определения: add, neg, sub, scale, abs)."
+  },
+  {
+   "line": 324,
+   "theorem": "mul_preserves_Cauchy",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "в репозитории построено — отдельным файлом: `process_mul` с леммой сохранения Коши `mul_preserves_Cauchy` (`CauchyProcessBridge.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyProcessBridge.v:69 (process_mul), :74 (лемма); допущений нет."
+  },
+  {
+   "line": 327,
+   "theorem": "cauchy_mul",
+   "file": "src/RealField.v",
+   "claim": "`cauchy_mul` с полевыми законами (`RealField.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealField.v:172; законы: коммутативность :240, ассоциативность :250, единица :261, дистрибутивность :280, обратный для положительных :396; все 17 лемм файла без допущений."
+  },
+  {
+   "line": 343,
+   "theorem": "add_preserves_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "`ProcessArithmetic.v` доказывает, что не выводит. В файле — четыре теоремы сохранения:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле ровно четыре Theorem (:84, :103, :114, :134); блок кода совпадает; допущений нет."
+  },
+  {
+   "line": 349,
+   "theorem": "neg_preserves_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Theorem neg_preserves_Cauchy : forall R,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с ProcessArithmetic.v:103; допущений нет."
+  },
+  {
+   "line": 351,
+   "theorem": "sub_preserves_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Theorem sub_preserves_Cauchy : forall R1 R2,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с ProcessArithmetic.v:114; допущений нет."
+  },
+  {
+   "line": 353,
+   "theorem": "scale_preserves_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Theorem scale_preserves_Cauchy : forall c R,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с ProcessArithmetic.v:134; допущений нет."
+  },
+  {
+   "line": 360,
+   "theorem": "add_preserves_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "неравенство треугольника для модуля рациональных довершает дело",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ход доказательства описан верно: ProcessArithmetic.v:88–101 — eps * (1#2) для каждого слагаемого и Qabs_triangle; «классические рассуждения» здесь значит традиционные, аксиома classic не применяется."
+  },
+  {
+   "line": 370,
+   "theorem": "P4_formalized",
+   "file": "src/process/ProcessFourPrinciples.v",
+   "claim": "Там предикат `P4_formalized` из `ProcessFourPrinciples.v` был конъюнкцией трёх утверждений: существует процесс Коши; некоторая операция над процессами Коши сохраняет свойство Коши; сумма процессов Коши есть процесс Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessFourPrinciples.v:64 — три конъюнкта именно таковы; третий записан через process_sum (ProcessLimitColimit.v:278, поточечная сумма)."
+  },
+  {
+   "line": 378,
+   "theorem": "process_product",
+   "file": "src/process/ProcessLimitColimit.v",
+   "claim": "В `P4_formalized` он записан через `process_product` и `process_fst`: сохранение свойства Коши под первой проекцией *продукта* процессов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessLimitColimit.v:38, :42: пара процессов и первая проекция, не арифметическое умножение — оговорка главы верна."
+  },
+  {
+   "line": 415,
+   "theorem": "CauchySeq",
+   "file": "src/CauchyReal.v",
+   "claim": "Файл `CauchyReal.v` вводит тип `CauchySeq`:[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 419) совпадает с CauchyReal.v:48; поля cs_seq, cs_cauchy и конструктор mkCauchy названы верно."
+  },
+  {
+   "line": 461,
+   "theorem": "cs_seq",
+   "file": "src/CauchyReal.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи CauchySeq)",
+   "claim": "двоеточие со стрелкой в `cs_seq :> nat -> Q`. Это *принуждение* (coercion)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:49: поле объявлено как cs_seq :> nat -> Q."
+  },
+  {
+   "line": 487,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "Заголовок файла называет это «конструктивным пополнением»",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка CauchyReal.v:2: «CAUCHY REALS: CONSTRUCTIVE COMPLETION OF Q»."
+  },
+  {
+   "line": 496,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "Файл `CauchyReal.v` строит тип представителей `CauchySeq` и отношение `cauchy_equiv`; он *не* строит фактортип",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: фактортипа в файле нет; глава точнее шапки файла, где цель записана как «Define real numbers as equivalence classes» (CauchyReal.v:6)."
+  },
+  {
+   "line": 508,
+   "theorem": null,
+   "file": "src/process/ProcessCore.v",
+   "claim": "представлен в Rocq-формализации ToS не одной конструкцией, а *тремя* родственными",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три рода конструкции названы верно (ProcessCore.v:34, CauchyReal.v:48, ProcessGeneral.v:50); наблюдение: читатель встретит в src ещё локальные копии RealProcess (10 объявлений) и is_Cauchy (9)."
+  },
+  {
+   "line": 525,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "`CauchyReal.v` даже не подключает `ProcessCore.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Импорты CauchyReal.v:25–30 — только стандартная библиотека."
+  },
+  {
+   "line": 533,
+   "theorem": null,
+   "file": "src/ProcessGeneral.v",
+   "claim": "Шапка файла прямо говорит, что `GenProcess A` — универсальный процессный тип, а конкретные процессы суть его частные случаи.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessGeneral.v:6–11: «CauchyReal.v instantiates it for Q. This file provides the GENERAL theory over arbitrary types. GenProcess A := nat -> A»."
+  },
+  {
+   "line": 546,
+   "theorem": null,
+   "file": "src/ProcessGeneral.v",
+   "claim": "`CauchyReal.v` и `ProcessGeneral.v` лежат в верхнем каталоге `src/`, а `ProcessCore.v` — в `src/process/`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Расположение файлов верно."
+  },
+  {
+   "line": 555,
+   "theorem": "Qdist",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Файл вводит рациональную метрику `Qdist` $x y := |x - y|$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:217: Qdist x y := Qabs (x - y)."
+  },
+  {
+   "line": 556,
+   "theorem": "is_cauchy_gen",
+   "file": "src/ProcessGeneral.v",
+   "claim": "общее свойство Коши `is_cauchy_gen` относительно произвольной метрики",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:190: параметр dist : A -> A -> Q произволен."
+  },
+  {
+   "line": 566,
+   "theorem": "cauchy_Q_equiv",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Лемма устанавливает их равносильность: *свойство Коши второй линии есть частный случай общего свойства Коши третьей*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:220: is_cauchy a <-> is_cauchy_gen Qdist a; блок кода (стр. 561) совпадает; допущений нет."
+  },
+  {
+   "line": 569,
+   "theorem": "cauchy_seq_is_gen_process",
+   "file": "src/ProcessGeneral.v",
+   "claim": "`cauchy_seq_is_gen_process`, довершает: всякий `CauchySeq` есть `GenProcess` $ℚ$, удовлетворяющий общему свойству Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:228: forall cs, is_cauchy_gen Qdist (cs_seq cs); допущений нет."
+  },
+  {
+   "line": 579,
+   "theorem": "is_Cauchy_iff_is_cauchy",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "оказались *совпадающими буквально*, — так что мостовая лемма `is_Cauchy_iff_is_cauchy`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyProcessBridge.v:47–48: forall R, is_Cauchy R <-> is_cauchy R; доказательство — split; intro H; exact H (определения совпадают); допущений нет."
+  },
+  {
+   "line": 582,
+   "theorem": "process_equiv_iff_cauchy_equiv",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "Лемма `process_equiv_iff_cauchy_equiv` связывает и *отношения* эквивалентности двух линий, а функция `to_CauchySeq` переводит процесс первой линии в представитель второй.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyProcessBridge.v:58 (для R1, R2 с доказательствами is_Cauchy), :51 (to_CauchySeq R H := mkCauchy R H); допущений нет."
+  },
+  {
+   "line": 592,
+   "theorem": "process_mul",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "умножение второй линии `cauchy_mul` даёт умножение первой `process_mul` — с сохранением Коши и совместимостью (`CauchyProcessBridge.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyProcessBridge.v: mul_preserves_Cauchy :74, process_mul_compat :82, а также process_mul_comm :95 и process_mul_assoc :102; все 7 лемм файла без допущений."
+  },
+  {
+   "line": 659,
+   "theorem": "cauchy_equiv",
+   "file": "src/CauchyReal.v",
+   "claim": "`CauchyReal.v` вводит его как предикат `cauchy_equiv`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 662) совпадает с CauchyReal.v:57; знак a ~~ b — Notation на CauchyReal.v:63."
+  },
+  {
+   "line": 677,
+   "theorem": "cauchy_equiv_refl",
+   "file": "src/CauchyReal.v",
+   "claim": "`cauchy_equiv_refl` (всякий процесс эквивалентен себе)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:67: forall a, a ~~ a; допущений нет."
+  },
+  {
+   "line": 678,
+   "theorem": "cauchy_equiv_sym",
+   "file": "src/CauchyReal.v",
+   "claim": "`cauchy_equiv_sym` (если $a$ эквивалентен $b$, то $b$ — $a$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:78: a ~~ b -> b ~~ a; допущений нет."
+  },
+  {
+   "line": 679,
+   "theorem": "cauchy_equiv_trans",
+   "file": "src/CauchyReal.v",
+   "claim": "`cauchy_equiv_trans` (если $a$ эквивалентен $b$, а $b$ — $c$, то $a$ — $c$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:91: a ~~ b -> b ~~ c -> a ~~ c; допущений нет."
+  },
+  {
+   "line": 694,
+   "theorem": "cauchy_sub",
+   "file": "src/CauchyReal.v",
+   "claim": "Файл определяет арифметику второй линии — `cauchy_add`, `cauchy_neg`, `cauchy_sub`, `cauchy_const`, — где каждая операция есть `mkCauchy`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Мелкая неточность, не расхождение: cauchy_add, cauchy_neg, cauchy_const определены через mkCauchy (CauchyReal.v:141, :157, :173), а cauchy_sub — как cauchy_add a (cauchy_neg b) (:160), то есть через mkCauchy опосредованно."
+  },
+  {
+   "line": 709,
+   "theorem": "cauchy_add_compat",
+   "file": "src/CauchyReal.v",
+   "claim": "Лемма `cauchy_add_compat` говорит: замена слагаемых на эквивалентные даёт эквивалентную сумму",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:180; блок кода (стр. 703) совпадает; допущений нет."
+  },
+  {
+   "line": 710,
+   "theorem": "cauchy_neg_compat",
+   "file": "src/CauchyReal.v",
+   "claim": "`cauchy_neg_compat` — то же для смены знака",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:203; блок кода (стр. 705) совпадает; допущений нет."
+  },
+  {
+   "line": 745,
+   "theorem": "monotone_increasing",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Процесс называется *монотонно возрастающим*, если каждое следующее приближение не меньше предыдущего",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessArithmetic.v:173: forall n, R n <= R (S n); блок кода совпадает."
+  },
+  {
+   "line": 747,
+   "theorem": "monotone_decreasing",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "и *монотонно убывающим* — если не больше",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessArithmetic.v:176: forall n, R (S n) <= R n; блок кода совпадает."
+  },
+  {
+   "line": 765,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Монотонно возрастающий процесс, ограниченный сверху некоторым рубежом $ub$, есть процесс Коши.",
+   "page_price": "classic (L3) — названа на стр. 784–797",
+   "verdict": "ok",
+   "note": "ProcessArithmetic.v:311 (в файле объявлена как Lemma, в прозе названа теоремой); блок кода (стр. 761) совпадает; Print Assumptions: Classical_Prop.classic."
+  },
+  {
+   "line": 766,
+   "theorem": "decreasing_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Двойственная теорема, `decreasing_bounded_Cauchy`, утверждает то же для монотонно убывающего, ограниченного снизу.",
+   "page_price": "отдельно не названа",
+   "verdict": "ok",
+   "note": "ProcessArithmetic.v:339; формулировка верна; цена та же, что у основной — Classical_Prop.classic (выводится из monotone_bounded_Cauchy для -R), глава отдельно её не называет."
+  },
+  {
+   "line": 781,
+   "theorem": "q_archimedean",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "`ProcessArithmetic.v` архимедовость не постулирует, а доказывает — через целочисленное деление.",
+   "page_price": "доказана, не постулирована",
+   "verdict": "ok",
+   "note": "ProcessArithmetic.v:263–306: K := S (Z.to_nat (target / step)); формулировка на стр. 776–778 совпадает (d < K * eps при 0 < eps); допущений нет."
+  },
+  {
+   "line": 785,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "доказательство `monotone_bounded_Cauchy` в `ProcessArithmetic.v` использует *классическую логику*: в коде применяется разбор случаев через `classic` (файл импортирует `Classical`).",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "Print Assumptions: Axioms: Classical_Prop.classic; destruct (classic …) на ProcessArithmetic.v:316 и :324; импорт Classical — :22."
+  },
+  {
+   "line": 789,
+   "theorem": "classic",
+   "file": "src/process/ProcessArithmetic.v",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Для ToS это не новая внешняя аксиома — `classic` есть уже принятый закон $L3$ (Глава 4.1, § 1.2.4)",
+   "page_price": "classic = L3",
+   "verdict": "ok",
+   "note": "В этом файле `classic` — аксиома стандартной библиотеки (Stdlib.Logic.Classical_Prop.classic, импорт ProcessArithmetic.v:22), по формулировке та же, что L3 формализации (foundation/Distinction.v:36); в самом ProcessArithmetic.v она не объявляется, а применяется."
+  },
+  {
+   "line": 792,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "`CauchyReal.v` с его базовой конструкцией `CauchySeq`, отношением `cauchy_equiv` и аддитивной арифметикой обходится без `classic` вовсе",
+   "page_price": "без classic",
+   "verdict": "ok",
+   "note": "Все 19 лемм и теорем CauchyReal.v — «Closed under the global context»; слова classic в файле нет, импорты только стандартной арифметики."
+  },
+  {
+   "line": 804,
+   "theorem": "has_process_mass_gap",
+   "file": "src/process/ProcessBounds.v",
+   "claim": "Это запись `has_process_mass_gap` с тремя условиями: процесс имеет устойчивый положительный нижний рубеж; его приближения сходятся с *геометрической* скоростью — расхождение убывает как степень некоторого числа меньше единицы; и процесс монотонно убывает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBounds.v:39–50: PMG1 (0 < delta <= R n), PMG2 (|R m - R n| <= C * r^min(m,n), 0 < r < 1), PMG3 (monotone_decreasing R)."
+  },
+  {
+   "line": 809,
+   "theorem": "has_process_mass_gap",
+   "file": "src/process/ProcessBounds.v",
+   "external": true,
+   "assumptions": "не применимо (часть имени)",
+   "claim": "Имя `has_process_mass_gap` стоит читать как *технический термин* процессной формализации",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 7, слово автора): было «Имя `mass_gap`» — часть имени; структура в файле называется has_process_mass_gap (ProcessBounds.v:39); оговорка «не физический массовый зазор» — чтение главы"
+  },
+  {
+   "line": 817,
+   "theorem": "pmg_implies_cauchy",
+   "file": "src/process/ProcessBounds.v",
+   "claim": "Главная теорема файла — `pmg_implies_cauchy`: процесс с таким зазором есть процесс Коши.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBounds.v:74: has_process_mass_gap R -> is_Cauchy R; допущений нет."
+  },
+  {
+   "line": 825,
+   "theorem": "pathological_no_pmg",
+   "file": "src/process/ProcessBounds.v",
+   "claim": "теоремы `pathological_no_pmg` и `vanishing_no_pmg` устанавливают, что у нулевого процесса и у процесса, убывающего к нулю, такого зазора нет",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBounds.v:209: has_process_mass_gap (const_process 0) -> False; допущений нет."
+  },
+  {
+   "line": 825,
+   "theorem": "vanishing_no_pmg",
+   "file": "src/process/ProcessBounds.v",
+   "claim": "теоремы `pathological_no_pmg` и `vanishing_no_pmg` устанавливают, что у нулевого процесса и у процесса, убывающего к нулю, такого зазора нет",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBounds.v:217: условие в Rocq — значения процесса с некоторого шага меньше любого eps > 0 (монотонность не требуется); пересказ «убывающего к нулю» чуть уже, по смыслу верен; допущений нет."
+  },
+  {
+   "line": 837,
+   "theorem": "cauchy_rational_approx",
+   "file": "src/CauchyReal.v",
+   "claim": "всякий процесс Коши на достаточно далёких шагах сколь угодно точно приближается *рациональным* числом — одним из своих же приближений",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:287: в формулировке стоит «exists q : Q»; то, что q — собственное приближение, видно из доказательства (exists (cs_seq a N), :294); допущений нет."
+  },
+  {
+   "line": 839,
+   "theorem": "cauchy_complete_self",
+   "file": "src/CauchyReal.v",
+   "claim": "И теорему `cauchy_complete_self` с её двусторонней формой",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "верхняя сторона: cauchy_le (cauchy_sub a (cauchy_const (a n))) (cauchy_const eps) (CauchyReal.v:300); двусторонняя форма — cauchy_complete_self_two_sided (шаг 6, 12.11); допущений нет"
+  },
+  {
+   "line": 839,
+   "theorem": "cauchy_complete_self_two_sided",
+   "file": "src/CauchyReal.v",
+   "claim": "И теорему `cauchy_complete_self` с её двусторонней формой `cauchy_complete_self_two_sided` — процесс Коши сходится «к себе»: его хвост укладывается в любую наперёд заданную точность вокруг любого достаточно далёкого приближения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 6, слово автора «А») — правка формализации: в CauchyReal.v добавлены cauchy_complete_self_lower (нижняя сторона: cauchy_le (cauchy_sub (cauchy_const (a n)) a) (cauchy_const eps)) и cauchy_complete_self_two_sided (обе стороны при одном N); прежняя cauchy_complete_self давала только верхнюю оценку; на странице добавлено имя двусторонней теоремы; Print Assumptions: Closed under the global context"
+  },
+  {
+   "line": 855,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "полная метрическая полнота пространства классов `CauchySeq` — отдельная задача, выходящая за пределы Главы 4.2",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный; наблюдение: в src/Completeness.v есть частичный шаг к ней — diagonal_converges (:464, без допущений): последовательность CauchySeq с равномерным условием meta_cauchy (:421) сходится к диагональному пределу; глава этот файл не называет."
+  },
+  {
+   "line": 861,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "И этот базовый результат доказан без завершённой бесконечности: `CauchyReal.v` в своей основе несёт ноль аксиом",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cauchy_rational_approx, cauchy_complete_self и добавленные шагом 6 cauchy_complete_self_lower, cauchy_complete_self_two_sided — «Closed under the global context», как и остальные леммы файла."
+  },
+  {
+   "line": 907,
+   "theorem": null,
+   "file": "src/process/ProcessCore.v",
+   "claim": "`ProcessCore.v` объявляет правило — *всякий объект есть конечный процесс на каждой стадии* ($P4$); `ProcessArithmetic.v` — *каждая операция сохраняет свойство Коши*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапки: ProcessCore.v:4 «Rules: every mathematical object is a finite process at each stage (P4)»; ProcessArithmetic.v:4 «Rules: each operation preserves the Cauchy condition»."
+  },
+  {
+   "line": 924,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "критерий `monotone_bounded_Cauchy` опирается на $L3$ (не на чистую конструкцию)",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Print Assumptions: Classical_Prop.classic."
+  },
+  {
+   "line": 1034,
+   "theorem": "cauchy_const",
+   "file": "src/CauchyReal.v",
+   "claim": "постоянный процесс `cauchy_const 1` — два *разных* представителя, но один класс эквивалентности, а значит — одно число",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cauchy_const существует (CauchyReal.v:173); но доказанная теорема о 0,999… записана на первой линии, через const_process 1 — см. запись о nine_equiv_one."
+  },
+  {
+   "line": 1036,
+   "theorem": "nine_process_equiv_one",
+   "file": "src/process/ProcessNinePoint.v",
+   "claim": "Точная форма — определение конкретного представителя для $0{,}999…$, постоянного представителя для единицы и доказательство их эквивалентности по `cauchy_equiv`; в файле `process/ProcessNinePoint.v` она записана так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 8, слово автора «А»): схема стала кодом — в ProcessNinePoint.v добавлены nine_process, one_process, nine_process_lt_one_stagewise и Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process (доказательство — теорема первой линии nine_equiv_one, линии совпадают по CauchyProcessBridge); Closed under the global context"
+  },
+  {
+   "line": 1042,
+   "theorem": "nine_process",
+   "file": "src/process/ProcessNinePoint.v",
+   "claim": "Definition nine_process : CauchySeq := to_CauchySeq nine_raw nine_raw_is_Cauchy.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 8, слово автора «А»): имя теперь есть в формализации (ProcessNinePoint.v), блок страницы совпадает с исходником"
+  },
+  {
+   "line": 1043,
+   "theorem": "one_process",
+   "file": "src/process/ProcessNinePoint.v",
+   "claim": "Definition one_process  : CauchySeq := cauchy_const 1.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 8, слово автора «А»): определение добавлено в ProcessNinePoint.v; блок страницы совпадает с исходником"
+  },
+  {
+   "line": 1048,
+   "theorem": "nine_raw_is_Cauchy",
+   "file": "src/process/ProcessNinePoint.v",
+   "claim": "`nine_raw_is_Cauchy` — доказательство его свойства Коши",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem nine_raw_is_Cauchy : is_Cauchy nine_raw (ProcessNinePoint.v:114); Closed under the global context"
+  },
+  {
+   "line": 1048,
+   "theorem": "nine_equiv_one",
+   "file": "src/process/ProcessNinePoint.v",
+   "claim": "ту же теорему для голых процессов (`nine_equiv_one`) разбирает Глава 4.3.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "nine_equiv_one : nine_raw ~~ const_process 1 (ProcessNinePoint.v:84), первая линия; Closed under the global context"
+  },
+  {
+   "line": 1070,
+   "theorem": "is_Cauchy_iff_is_cauchy",
+   "file": "src/CauchyProcessBridge.v",
+   "claim": "(лемма `cauchy_Q_equiv` сводит свойство Коши второй линии к общему случаю третьей; лемма `is_Cauchy_iff_is_cauchy` связывает первую линию со второй)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 7, слово автора): было «…, но первая и вторая линии не отождествлены машинно как единый терм» — оговорка, которую § 2.5.4 той же главы объявляет снятой; мосты is_Cauchy_iff_is_cauchy (CauchyProcessBridge.v:47) и process_equiv_iff_cauchy_equiv (:58) доказаны"
+  },
+  {
+   "line": 1088,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "Базовое построение `CauchySeq`, отношение `cauchy_equiv` и аддитивная арифметика в `CauchyReal.v` несут ноль аксиом и ноль незавершённых доказательств",
+   "page_price": "0 аксиом, 0 Admitted",
+   "verdict": "ok",
+   "note": "В CauchyReal.v нет Axiom и Admitted; все 19 доказанных утверждений — «Closed under the global context»."
+  },
+  {
+   "line": 1090,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "отдельные структурные критерии — например монотонность с ограниченностью — используют классическую логику $L3$",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Print Assumptions: Classical_Prop.classic у monotone_bounded_Cauchy и decreasing_bounded_Cauchy; остальные 15 лемм ProcessArithmetic.v без допущений."
+  },
+  {
+   "line": 1102,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Файл объявлен в репозитории как единый источник базовых процессных определений. Имена `RealProcess`, `is_Cauchy`, `const_process`, `process_equiv`, используемые ниже, — из него.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessCore.v:3: «SINGLE source of truth for process definitions»; четыре имени объявлены в файле (:34, :68, :37, :170); наблюдение: шапка называет 25 Qed, действительных 19 (глава числа не приводит)."
+  },
+  {
+   "line": 1103,
+   "theorem": null,
+   "file": "src/ProcessGeneral.v",
+   "claim": "`ProcessGeneral.v` Rocq-репозитория ToS (каталог `src/`), 16 доказанных утверждений, 0 `Admitted`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Действительный счёт: 16 Qed, 0 Admitted, 0 Axiom; все 16 лемм — «Closed under the global context»."
+  },
+  {
+   "line": 1104,
+   "theorem": null,
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "`ProcessArithmetic.v` Rocq-репозитория ToS (каталог `src/process/`), 17 доказанных утверждений, 0 `Admitted`.",
+   "page_price": "оговорка о classic в § 2.7.2",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 7, слово автора): было 13; в файле 17 Qed (4 Theorem + 13 Lemma), 0 Admitted; шапка файла исправлена тем же шагом (13 → 17, два места)"
+  },
+  {
+   "line": 1105,
+   "theorem": null,
+   "file": "src/CauchyReal.v",
+   "claim": "`CauchyReal.v` Rocq-репозитория ToS (каталог `src/`), 21 доказанное утверждение, 0 `Admitted`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 7, слово автора): было 18; после шага 6 в файле 21 Qed (4 Theorem + 17 Lemma), 0 Admitted, 0 Axiom; название шапки приведено верно"
+  },
+  {
+   "line": 1106,
+   "theorem": null,
+   "file": "src/process/ProcessBounds.v",
+   "claim": "`ProcessBounds.v` Rocq-репозитория ToS (каталог `src/process/`), 11 доказанных утверждений, 0 `Admitted`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Действительный счёт: 11 Qed, 0 Admitted, 0 Axiom; все 11 — «Closed under the global context» (шапка файла в двух местах называет 11 и 14)."
+  }
+ ]
+}

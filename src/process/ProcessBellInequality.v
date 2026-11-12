@@ -5,11 +5,12 @@
 (*  Quantum (entangled): can reach 2*sqrt(2) (Tsirelson bound)              *)
 (*  Over Q: 2*sqrt(2) ~ 20/7 ~ 2.857                                       *)
 (*                                                                          *)
-(*  STATUS: 21 Qed, 0 Admitted                                              *)
+(*  STATUS: 15 Qed, 0 Admitted                                              *)
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith_base Qabs.
+From Stdlib Require Import Lqa.
 From Stdlib Require Import List.
 Import ListNotations.
 From ToS Require Import process.ProcessCore.
@@ -28,10 +29,10 @@ Open Scope Q_scope.
 
 Definition correlator_2x2 (psi : CompositeState)
   (mA mB : nat -> Q) : Q :=
-  qi_norm2 (psi 0 0) * mA 0 * mB 0 +
-  qi_norm2 (psi 0 1) * mA 0 * mB 1 +
-  qi_norm2 (psi 1 0) * mA 1 * mB 0 +
-  qi_norm2 (psi 1 1) * mA 1 * mB 1.
+  qi_norm2 (psi 0%nat 0%nat) * mA 0%nat * mB 0%nat +
+  qi_norm2 (psi 0%nat 1%nat) * mA 0%nat * mB 1%nat +
+  qi_norm2 (psi 1%nat 0%nat) * mA 1%nat * mB 0%nat +
+  qi_norm2 (psi 1%nat 1%nat) * mA 1%nat * mB 1%nat.
 
 (** CHSH combination: S = <AB> + <AB'> + <A'B> - <A'B'> *)
 Definition chsh_value (psi : CompositeState)
@@ -43,7 +44,7 @@ Definition chsh_value (psi : CompositeState)
 
 (** pm1 measurement: each outcome is +1 or -1 *)
 Definition pm1_measurement (m : nat -> Q) : Prop :=
-  (m 0 == 1 \/ m 0 == -(1)) /\ (m 1 == 1 \/ m 1 == -(1)).
+  (m 0%nat == 1 \/ m 0%nat == -(1)) /\ (m 1%nat == 1 \/ m 1%nat == -(1)).
 
 (** Concrete measurements *)
 Definition meas_Z : nat -> Q := fun n => if Nat.eqb n 0 then 1 else -(1).
@@ -51,7 +52,7 @@ Definition meas_X : nat -> Q := fun _ => 1.
 Definition meas_minus : nat -> Q := fun n => if Nat.eqb n 0 then -(1) else 1.
 
 Lemma meas_Z_pm1 : pm1_measurement meas_Z.
-Proof. unfold pm1_measurement, meas_Z. simpl. split; left; reflexivity. Qed.
+Proof. unfold pm1_measurement, meas_Z. simpl. split; [left | right]; reflexivity. Qed.
 
 Lemma meas_X_pm1 : pm1_measurement meas_X.
 Proof. unfold pm1_measurement, meas_X. split; left; reflexivity. Qed.
@@ -100,7 +101,7 @@ Qed.
 
 (** Correlator with minus *)
 Lemma correlator_bell_X_minus :
-  correlator_2x2 bell_state meas_X meas_minus == -(50 # 49).
+  correlator_2x2 bell_state meas_X meas_minus == 0.
 Proof.
   unfold correlator_2x2, bell_state, meas_X, meas_minus, qi_norm2, qi_zero.
   simpl. ring.
@@ -113,11 +114,10 @@ Qed.
 (** CHSH for bell_state with A=Z, A'=X, B=Z, B'=minus *)
 Lemma chsh_bell_concrete :
   chsh_value bell_state meas_Z meas_X meas_Z meas_minus ==
-  (50 # 49) + (-(50 # 49)) + 0 - (-(50 # 49)).
+  (50 # 49) + (-(50 # 49)) + 0 - 0.
 Proof.
   unfold chsh_value.
   rewrite correlator_bell_Z_Z_value.
-  rewrite correlator_bell_Z_X.
   (* correlator bell meas_Z meas_minus *)
   assert (Hzm : correlator_2x2 bell_state meas_Z meas_minus == -(50 # 49)).
   { unfold correlator_2x2, bell_state, meas_Z, meas_minus, qi_norm2, qi_zero.
@@ -129,12 +129,12 @@ Proof.
 Qed.
 
 Lemma chsh_bell_value :
-  chsh_value bell_state meas_Z meas_X meas_Z meas_minus == 50 # 49.
+  chsh_value bell_state meas_Z meas_X meas_Z meas_minus == 0.
 Proof.
   rewrite chsh_bell_concrete. ring.
 Qed.
 
-(** 50/49 > 1: violation is mild with these measurements *)
+(** S = 0 <= 2: these measurements give NO violation (correlator_2x2 is diagonal) *)
 (** The Tsirelson bound 2*sqrt(2) ~ 20/7 ~ 2.857 requires optimal angles *)
 
 (** Tsirelson bound over Q *)

@@ -1,7 +1,7 @@
 (* ProcessGaugeFullSynthesis.v *)
 (* Phase G8: Final synthesis — all gauge/ files connected to process/ *)
 
-From Stdlib Require Import QArith.
+From Stdlib Require Import QArith Lia.
 From ToS Require Import process.ProcessCore.
 From ToS Require Import process.ProcessRGRigorConnection.
 From ToS Require Import process.ProcessContinuumGapConnection.
@@ -37,8 +37,17 @@ Definition g2_summary :=
 (*             YMWallBreach, WallTheorem, WallBreachSynthesis, YM3DComplete *)
 (* Key: complete 5-level YM mass gap argument, all 9 proof gaps closed *)
 
+(* Nov 2026: g3_summary used to alias
+   ProcessMillenniumConnection.millennium_fully_connected, which was DELETED
+   there in June 2026 as a doc-theorem (it proved the literal (13 > 0)%nat).
+   It now re-exports a surviving result with real content and NO assumptions
+   (Print Assumptions: Closed under the global context):
+   ProofClosure.all_nine_gaps_closed -- the "all 9 proof gaps closed" half of
+   the section comment above.  The level 1-4 synthesis
+   (ProcessMillenniumConnection.millennium_synthesis_connected) is the other
+   candidate, but two of its conjuncts rest on classic, so it is not used here. *)
 Definition g3_summary :=
-  ProcessMillenniumConnection.millennium_fully_connected.
+  ProcessMillenniumConnection.all_nine_gaps_closed_connected.
 
 (* === G4: OS1-3 === *)
 (* 7 modules: LatticeOS1_Analyticity, LatticeOS2_Regularity, *)
@@ -77,6 +86,12 @@ Definition g7_summary :=
 
 (* === Full Synthesis === *)
 
+(* NOTE (Nov 2026): gauge_fully_connected is a doc-theorem of the same kind
+   as the deleted millennium_fully_connected: its formal content is only the
+   literal (83 > 0)%nat, the claims are comments.  The real content of this
+   file is g1_summary..g7_summary and gauge_mass_gap_chain.  Kept (statement
+   untouched; Lia imported so that it compiles under Rocq 9) pending the
+   author's decision to delete it as was done in ProcessMillenniumConnection.v. *)
 Theorem gauge_fully_connected :
   (* All 7 connection phases verified *)
   (* G1: RG rigor — contraction mapping, Banach, gap stable *)

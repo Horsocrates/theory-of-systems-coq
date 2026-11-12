@@ -2,7 +2,7 @@
     Elements: impredicative quantification, totality, Russell's paradox
     Roles:    impredicativity requires completed totality, P4 prohibits that
     Rules:    P1 (hierarchy) + P4 (finiteness) dissolve Russell
-    STATUS:   10 Qed, 0 Admitted, 0 new axioms
+    STATUS:   7 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: April 2026
 
     IMPREDICATIVITY:

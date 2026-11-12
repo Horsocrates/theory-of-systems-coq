@@ -14,7 +14,7 @@
     eigenvalues {2,0,-2,0} so λ^K = {2^K,0,(-2)^K,0}.
     All concrete vm_compute.
 
-    STATUS: 12 Qed, 0 Admitted
+    STATUS: 14 Qed, 0 Admitted
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -200,9 +200,14 @@ Qed.
 (* Transfer matrix connection                                                 *)
 (* ========================================================================= *)
 
-(* 10. At K=2, heat kernel is A²/4 applied to impulse *)
+(* 10. At K=2, heat kernel is A² applied to impulse (unnormalized, exactly as
+   lemma 6 at K=1): both sides are (2, 0, 2, 0) for j = 0..3.
+   The factor 1/4 = 1/2^K belongs to normalized_heat_4 below
+   (normalized_heat_4 2 j = A²/4 on the impulse = (1/2, 0, 1/2, 0)); the
+   earlier statement "... == adj2_action_4 f_test1 j / 4" mixed the two
+   normalizations and was false (2 vs 1/2 at j = 0). *)
 Lemma heat_K2_via_adj2 : forall j, (j < 4)%nat ->
-  heat_impulse_4 2 j == adj2_action_4 f_test1 j / 4.
+  heat_impulse_4 2 j == adj2_action_4 f_test1 j.
 Proof.
   intros j Hj.
   destruct j as [|[|[|[|j']]]]; try lia; vm_compute; reflexivity.
@@ -228,10 +233,11 @@ Lemma spectral_gap_zero_modes :
 Proof. vm_compute. split; reflexivity. Qed.
 
 (** Summary:
-    - 5 heat eigenvalue computations (growth, vanishing, alternation)
+    - 6 heat eigenvalue computations (growth, vanishing, alternation)
     - 2 heat kernel structure (K=0 identity, K=1 adjacency)
     - 1 convolution with impulse = identity
     - 2 adjacency-squared eigenvalue verifications
     - 1 heat K=2 via A² connection
+    - 1 normalized heat at K=2, j=0
     - 1 spectral gap (zero modes vanish)
-    Total: 12 Qed, 0 Admitted *)
+    Total: 14 Qed, 0 Admitted *)

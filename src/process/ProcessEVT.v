@@ -130,4 +130,8 @@ Theorem evt_p4_interpretation :
   (* The supremum process and the maximizer process are the physics. *)
   (* No completed supremum needed — every stage gives a valid approximation. *)
   forall q, is_Cauchy (const_process q).
-Proof. intros. apply const_is_Cauchy. Qed.
+Proof.
+  (* Unqualified [is_Cauchy] is EVT_ERR.is_Cauchy here (last import, (m > N) form); *)
+  (* the constant-process lemma is ProcessCore's ((N <= m) form) — bridge by Part I. *)
+  intros q. apply process_cauchy_to_evt. apply ProcessCore.const_is_Cauchy.
+Qed.

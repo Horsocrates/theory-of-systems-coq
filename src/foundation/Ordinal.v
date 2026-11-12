@@ -2,7 +2,7 @@
     Elements: Ordinals (OZero, OSucc, OLim)
     Roles:    Arithmetic operations, ordering, embedding
     Rules:    Structural recursion, well-ordering
-    STATUS:   ~20 Qed, 0 Admitted, 0 axioms
+    STATUS:   24 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: March 2026
 
     P4 perspective: ordinals are PROCESSES.
@@ -10,7 +10,7 @@
     epsilon_0 = limit of the tower process omega, omega^omega, omega^omega^omega, ...
 *)
 
-From Stdlib Require Import Lia ZArith List FunctionalExtensionality.
+From Stdlib Require Import Lia ZArith List.
 Import ListNotations.
 
 (* ================================================================= *)
@@ -78,18 +78,57 @@ Proof. simpl. reflexivity. Qed.
 Lemma ord_add_succ_r : forall a b, ord_add a (OSucc b) = OSucc (ord_add a b).
 Proof. simpl. reflexivity. Qed.
 
-Lemma ord_add_zero_l : forall a, ord_add OZero a = a.
+(** Stage-wise equality of ordinals.  A limit ordinal [OLim f] is a PROCESS
+    [f : nat -> Ord]; two limits are the same when their processes agree at
+    every stage.  Leibniz equality [OLim f = OLim g] from stage-wise agreement
+    would need functional extensionality -- an axiom ToS does not assume --
+    so the two identities that pass through a limit are stated up to [ord_eq]. *)
+Inductive ord_eq : Ord -> Ord -> Prop :=
+  | oeq_zero : ord_eq OZero OZero
+  | oeq_succ : forall a b, ord_eq a b -> ord_eq (OSucc a) (OSucc b)
+  | oeq_lim  : forall f g, (forall n, ord_eq (f n) (g n)) -> ord_eq (OLim f) (OLim g).
+
+Lemma ord_eq_refl : forall a, ord_eq a a.
+Proof.
+  induction a as [| a' IH | f IH].
+  - constructor.
+  - constructor. exact IH.
+  - constructor. exact IH.
+Qed.
+
+Lemma ord_eq_sym : forall a b, ord_eq a b -> ord_eq b a.
+Proof.
+  intros a b H. induction H as [| a b _ IH | f g _ IH].
+  - constructor.
+  - constructor. exact IH.
+  - constructor. exact IH.
+Qed.
+
+Lemma ord_eq_trans : forall a b c, ord_eq a b -> ord_eq b c -> ord_eq a c.
+Proof.
+  intros a b c Hab. revert c.
+  induction Hab as [| a b _ IH | f g _ IH]; intros c Hbc.
+  - exact Hbc.
+  - inversion Hbc; subst. constructor. apply IH. assumption.
+  - inversion Hbc; subst. constructor. intro n. apply IH. match goal with H : forall n, ord_eq (g n) _ |- _ => apply H end.
+Qed.
+
+(** Leibniz-equal ordinals are stage-wise equal (the converse is the funext step). *)
+Lemma ord_eq_of_eq : forall a b, a = b -> ord_eq a b.
+Proof. intros a b H. subst. apply ord_eq_refl. Qed.
+
+Lemma ord_add_zero_l : forall a, ord_eq (ord_add OZero a) a.
 Proof.
   induction a as [| a' IH | f IH]; simpl.
-  - reflexivity.
-  - rewrite IH. reflexivity.
-  - f_equal. extensionality n. apply IH.
+  - constructor.
+  - constructor. exact IH.
+  - constructor. exact IH.
 Qed.
 
 Lemma ord_mul_zero_r : forall a, ord_mul a OZero = OZero.
 Proof. simpl. reflexivity. Qed.
 
-Lemma ord_mul_one_r : forall a, ord_mul a (OSucc OZero) = a.
+Lemma ord_mul_one_r : forall a, ord_eq (ord_mul a (OSucc OZero)) a.
 Proof.
   intros a. simpl. apply ord_add_zero_l.
 Qed.

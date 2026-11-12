@@ -5,11 +5,12 @@
 (*  This section computes the bound for specific geometries                 *)
 (*  and shows it is robust across different lattice sizes.                  *)
 (*                                                                          *)
-(*  STATUS: 28 Qed, 0 Admitted                                              *)
+(*  STATUS: 22 Qed, 0 Admitted                                              *)
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith_base Qabs.
+From Stdlib Require Import Lqa.
 From Stdlib Require Import List.
 Import ListNotations.
 From ToS Require Import process.ProcessCore process.ProcessBounds.
@@ -33,15 +34,15 @@ Open Scope Q_scope.
 
 (** Helper: 2 > 0 *)
 Lemma q_two_pos : 0 < (2 : Q).
-Proof. lra. Qed.
+Proof. reflexivity. Qed.
 
 (** Helper: 1/2 > 0 *)
 Lemma q_half_pos : 0 < (1 # 2 : Q).
-Proof. lra. Qed.
+Proof. reflexivity. Qed.
 
 (** Helper: 3 > 0 *)
 Lemma q_three_pos : 0 < (3 : Q).
-Proof. lra. Qed.
+Proof. reflexivity. Qed.
 
 (** Defect for edge of length 2 *)
 Lemma defect_length_2 :
@@ -131,7 +132,7 @@ Qed.
 Theorem h_bar_half_is_min_uncertainty :
   h_bar_full / 2 == h_bar_lattice.
 Proof.
-  unfold h_bar_full, h_bar_lattice. ring.
+  unfold h_bar_full, h_bar_lattice. vm_compute. reflexivity.
 Qed.
 
 (** The bound Dx*Dp >= hbar/2 in our language *)
@@ -139,10 +140,8 @@ Theorem heisenberg_in_h_bar :
   uncertainty_product (single_edge_geom 1 q_one_pos) >= h_bar_full / 2.
 Proof.
   rewrite h_bar_half_is_min_uncertainty.
-  unfold Qge. rewrite <- Qle_lteq.
-  left. unfold Qlt.
   rewrite uncertainty_unit_edge.
-  unfold h_bar_lattice. lra.
+  unfold h_bar_lattice. apply Qle_refl.
 Qed.
 
 (** For any edge >= 1, uncertainty >= hbar/2 *)
@@ -154,7 +153,7 @@ Proof.
   unfold uncertainty_product. rewrite defect_single_edge.
   unfold h_bar_lattice.
   rewrite Qabs_pos; [| lra].
-  unfold Qge. lra.
+  lra.
 Qed.
 
 (* ================================================================== *)
@@ -194,12 +193,8 @@ Lemma uncertainty_const_cauchy : forall G,
   is_Cauchy (uncertainty_process (fun _ => G)).
 Proof.
   intros G.
-  assert (Heq : process_equiv (uncertainty_process (fun _ => G))
-    (const_process (uncertainty_product G))).
-  { unfold process_equiv. intros n. unfold uncertainty_process, const_process.
-    reflexivity. }
-  apply (equiv_cauchy_l _ _ Heq).
-  apply const_is_Cauchy.
+  (* uncertainty_process (fun _ => G) is, by computation, const_process (uncertainty_product G) *)
+  exact (const_is_Cauchy (uncertainty_product G)).
 Qed.
 
 (** The uncertainty is BOUNDED BELOW at every K *)

@@ -11,7 +11,7 @@
 (*    Roles:    perm_compose (multiplication), transpose (generators)        *)
 (*    Rules:    Identity, involution, non-commutativity, order counting      *)
 (*                                                                           *)
-(*  STATUS: 20 Qed, 0 Admitted, 0 axioms                                    *)
+(*  STATUS: 18 Qed, 0 Admitted, 0 axioms                                    *)
 (*  Author: Horsocrates | Date: March 2026                                   *)
 (*                                                                           *)
 (* ========================================================================= *)
@@ -103,7 +103,7 @@ Qed.
 
 (* s3_12 ∘ s3_23 ≠ s3_23 ∘ s3_12  (at point 1) *)
 Lemma s3_non_commutative :
-  perm_compose s3_12 s3_23 1 <> perm_compose s3_23 s3_12 1.
+  perm_compose s3_12 s3_23 1%nat <> perm_compose s3_23 s3_12 1%nat.
 Proof.
   unfold perm_compose, s3_12, s3_23, transpose. simpl.
   discriminate.
@@ -114,10 +114,10 @@ Qed.
 (* (23)(12) at 1: first 12 maps 1->2, then 23 maps 2->3. Result: 3. *)
 (* So 2 ≠ 3. Correct! *)
 
-Lemma s3_12_23_at_1 : perm_compose s3_12 s3_23 1 = 2%nat.
+Lemma s3_12_23_at_1 : perm_compose s3_12 s3_23 1%nat = 2%nat.
 Proof. reflexivity. Qed.
 
-Lemma s3_23_12_at_1 : perm_compose s3_23 s3_12 1 = 3%nat.
+Lemma s3_23_12_at_1 : perm_compose s3_23 s3_12 1%nat = 3%nat.
 Proof. reflexivity. Qed.
 
 (* ======================================================================== *)
@@ -127,7 +127,7 @@ Proof. reflexivity. Qed.
 (* |S3| = 6 = 3! *)
 Definition s3_order : nat := 6.
 
-Lemma s3_order_is_factorial : s3_order = 3 * 2 * 1.
+Lemma s3_order_is_factorial : s3_order = (3 * 2 * 1)%nat.
 Proof. reflexivity. Qed.
 
 (* |Z/2Z| = 2 (Galois group of x^2-2) *)
@@ -171,7 +171,7 @@ Lemma three_cycle_order :
 Proof.
   intros n Hn.
   unfold perm_compose, s3_123, s3_12, s3_23, transpose, perm_id.
-  destruct n as [|[|[|[|n']]]]; simpl; try reflexivity. lia.
+  destruct n as [|[|[|[|n']]]]; simpl; reflexivity.
 Qed.
 
 (* The 3-cycle (132) has order 3 *)
@@ -181,7 +181,7 @@ Lemma three_cycle_132_order :
 Proof.
   intros n Hn.
   unfold perm_compose, s3_132, s3_23, s3_12, transpose, perm_id.
-  destruct n as [|[|[|[|n']]]]; simpl; try reflexivity. lia.
+  destruct n as [|[|[|[|n']]]]; simpl; reflexivity.
 Qed.
 
 (* (123) ∘ (132) = id on {0,1,2,3} *)
@@ -191,7 +191,7 @@ Lemma three_cycles_inverse :
 Proof.
   intros n Hn.
   unfold perm_compose, s3_123, s3_132, s3_12, s3_23, transpose, perm_id.
-  destruct n as [|[|[|[|n']]]]; simpl; try reflexivity. lia.
+  destruct n as [|[|[|[|n']]]]; simpl; reflexivity.
 Qed.
 
 (* Z/2Z is abelian: (12)(12) = id *)

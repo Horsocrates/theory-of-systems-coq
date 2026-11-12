@@ -10,11 +10,14 @@
 (*  In ToS:  For each element a of system A, a system B(a) with E/R/R     *)
 (*                                                                          *)
 (*  Depends on: TheoryOfSystems_Core_ERR.v, SystemMorphism.v               *)
-(*  STATUS: 24 Qed, 0 Admitted, 0 axioms beyond Classical                  *)
+(*  STATUS: 26 Qed, 0 Admitted, 0 axioms                                   *)
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
 
-From Stdlib Require Import Logic.FunctionalExtensionality.
+(* No import of Logic.FunctionalExtensionality: the identity of Pi-systems is the
+   pointwise relation [pi_eq] (an equivalence, Lemmas 1-3).  Functional
+   extensionality appears below only as a STATEMENT taken as a premise
+   (Lemmas 5 and 5'), never as an axiom. *)
 
 From Stdlib Require Import Init.Nat.
 From Stdlib Require Import Lists.List.
@@ -98,19 +101,41 @@ Proof.
 Qed.
 
 (* ----------------------------------------------------------------- *)
-(** ** Lemma 5: pi_extensionality (functional extensionality)         *)
+(** ** Lemma 5: pi_extensionality -- the price of the Leibniz reading *)
 (* ----------------------------------------------------------------- *)
 
-(** Two Pi-systems with the same action are Leibniz-equal.
-    This uses functional_extensionality from Stdlib. *)
-Lemma pi_extensionality : forall (f g : PiSystem),
-  pi_eq f g -> f = g.
+(** In ToS two Pi-systems are THE SAME when they act the same on every
+    element: [pi_eq] (Lemmas 1-3 make it an equivalence).  Passing from
+    [pi_eq f g] to the Leibniz equality [f = g] is a different, stronger
+    claim: it identifies two selections as one completed object.  That
+    step is exactly functional extensionality on the fibres.  We do NOT
+    assume it; we record it as a statement and prove that the Leibniz
+    reading costs precisely this statement -- no more (Lemma 5) and no
+    less (Lemma 5').  Both lemmas are closed under the global context. *)
+Definition pi_funext_statement : Prop :=
+  forall (u v : forall a : ElemOf L A, ElemOf L (B a)),
+    (forall a, u a = v a) -> u = v.
+
+(** Lemma 5: given the statement, pointwise-equal Pi-systems are Leibniz-equal. *)
+Lemma pi_extensionality :
+  pi_funext_statement ->
+  forall (f g : PiSystem), pi_eq f g -> f = g.
 Proof.
-  intros [f_app] [g_app] Heq.
+  intros Hfe [f_app] [g_app] Heq.
   simpl in Heq.
-  assert (Hext : f_app = g_app).
-  { apply functional_extensionality_dep. exact Heq. }
+  assert (Hext : f_app = g_app) by (apply Hfe; exact Heq).
   subst. reflexivity.
+Qed.
+
+(** Lemma 5': conversely, Leibniz extensionality of Pi-systems gives the statement. *)
+Lemma pi_extensionality_converse :
+  (forall (f g : PiSystem), pi_eq f g -> f = g) ->
+  pi_funext_statement.
+Proof.
+  intros Hext u v Huv.
+  assert (H : mkPiSystem u = mkPiSystem v).
+  { apply Hext. intro a. simpl. apply Huv. }
+  exact (f_equal pi_app H).
 Qed.
 
 End PiSystems.
@@ -503,15 +528,17 @@ End Examples.
 (* ========================================================================= *)
 
 (**
-  PROVEN (24 Qed, 0 Admitted):
+  PROVEN (26 Qed, 0 Admitted):
 
   Part I -- Pi-Systems (dependent functions):
     1.  pi_eq_refl            -- pointwise equality is reflexive
     2.  pi_eq_sym             -- pointwise equality is symmetric
     3.  pi_eq_trans           -- pointwise equality is transitive
     4.  pi_app_well_typed     -- pi_app f a is element of B(a)
-    5.  pi_extensionality     -- pointwise equal Pi-systems are Leibniz equal
-                                 (uses functional_extensionality_dep)
+    5.  pi_extensionality     -- GIVEN the funext statement as a premise,
+                                 pointwise equal Pi-systems are Leibniz equal
+    5'. pi_extensionality_converse -- and conversely: the Leibniz reading
+                                 costs exactly that statement
 
   Part II -- Pi identity (constant fiber):
     6.  pi_id_action          -- identity Pi selects the element itself
@@ -545,8 +572,9 @@ End Examples.
     24. nat_pi_succ                 -- successor as Pi-system
     25. sigma_projections_roundtrip -- projections roundtrip
 
-  NOTE: pi_extensionality uses functional_extensionality_dep
-        from Stdlib.Logic.FunctionalExtensionality.
+  NOTE: functional extensionality is NOT assumed.  It occurs only as the
+        statement [pi_funext_statement], taken as a premise in Lemma 5 and
+        derived in Lemma 5'.  The identity of Pi-systems is [pi_eq].
 
-  AXIOMS: classic (inherited), functional_extensionality_dep
+  AXIOMS: none (Print Assumptions: Closed under the global context)
 *)

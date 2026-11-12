@@ -7,11 +7,12 @@
 (*                                                                          *)
 (*  Dx * Dp >= defect_min > 0: derived, not postulated.                     *)
 (*                                                                          *)
-(*  STATUS: 28 Qed, 0 Admitted                                              *)
+(*  STATUS: 22 Qed, 0 Admitted                                              *)
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith_base Qabs.
+From Stdlib Require Import Lqa.
 From Stdlib Require Import List.
 Import ListNotations.
 From ToS Require Import process.ProcessCore process.ProcessBounds.

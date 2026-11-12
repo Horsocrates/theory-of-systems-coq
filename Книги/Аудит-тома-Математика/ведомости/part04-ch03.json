@@ -1,0 +1,583 @@
+{
+ "batch": "audit-part-04",
+ "chapter": "04 Процессные действительные числа/03 Точка как класс эквивалентности процессов.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 13,
+   "theorem": "CauchySeq",
+   "claim": "тип `CauchySeq`, сводящий процесс и доказательство его сходимости в один объект",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record CauchySeq := mkCauchy { cs_seq; cs_cauchy : is_cauchy cs_seq } (CauchyReal.v:48) — процесс вместе с доказательством сходимости, как сказано."
+  },
+  {
+   "line": 76,
+   "theorem": null,
+   "claim": "файл `RealPointSetoid.v` регистрирует `cauchy_equiv` как `Equivalence`, именует носитель `RealPoint := CauchySeq` и доказывает, что операции суть морфизмы (`Proper`), уважающие эквивалентность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено с файлом: Instance cauchy_equiv_Equivalence (RealPointSetoid.v:52), Definition RealPoint := CauchySeq (:74), Proper-экземпляры cauchy_add_Proper, cauchy_mul_Proper, cauchy_neg_Proper (:81, :85, :89); статус «формализован» честен.",
+   "file": "src/RealPointSetoid.v",
+   "assumptions": "Closed under the global context (все 7 утверждений файла)"
+  },
+  {
+   "line": 80,
+   "theorem": null,
+   "claim": "*фактортип* — новый тип, в котором эквивалентные процессы стали бы буквально одним термом, — отдельным объектом не построен, и *сознательно*: он реифицировал бы режим в вещь и потребовал бы аксиом (§ 3.4.3).",
+   "page_price": "фактортип потребовал бы аксиом",
+   "verdict": "ok",
+   "note": "Утверждение о сознательно не построенном объекте, не о теореме: компилятором не проверяется; повторяет шапку RealPointSetoid.v (строки 22–28); фактортипа над CauchySeq в src нет (поиск)."
+  },
+  {
+   "line": 171,
+   "theorem": "cauchy_equiv",
+   "claim": "В файле `CauchyReal.v` это предикат `cauchy_equiv`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 175–178) совпадает с CauchyReal.v:57; словесное чтение (для всякой тесноты eps найдётся рубеж N) соответствует кванторам.",
+   "file": "src/CauchyReal.v"
+  },
+  {
+   "line": 183,
+   "theorem": null,
+   "claim": "Файл вводит для этого отношения знак $\\mathbin{\\sim\\mkern-3mu\\sim}$ (в записи репозитория — `a ~~ b`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Notation \"a ~~ b\" := (cauchy_equiv a b) — CauchyReal.v:63 (область cauchy_scope).",
+   "file": "src/CauchyReal.v"
+  },
+  {
+   "line": 219,
+   "theorem": "cauchy_equiv_refl",
+   "claim": "`CauchyReal.v` доказывает все три. Это леммы `cauchy_equiv_refl`, `cauchy_equiv_sym` и `cauchy_equiv_trans`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:67: forall a, a ~~ a; доказательство — разность нулевая, как в главе."
+  },
+  {
+   "line": 221,
+   "theorem": "cauchy_equiv_sym",
+   "claim": "Доказательства — стандартные $\\varepsilon$-рассуждения: рефлексивность тривиальна (разность нулевая), симметричность опирается на $|{-}x| = |x|$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:78: a ~~ b -> b ~~ a; в доказательстве Qabs_opp — то самое |−x| = |x|."
+  },
+  {
+   "line": 223,
+   "theorem": "cauchy_equiv_trans",
+   "claim": "транзитивность — на неравенство треугольника с делением $\\varepsilon$ пополам",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:91: a ~~ b -> b ~~ c -> a ~~ c; в доказательстве Qabs_triangle и eps * (1#2) — как в главе."
+  },
+  {
+   "line": 237,
+   "theorem": "RealProcess",
+   "claim": "есть голый `RealProcess` ${}={}$ `nat -> Q` из `ProcessCore.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition RealProcess := nat -> Q (ProcessCore.v:34).",
+   "file": "src/process/ProcessCore.v"
+  },
+  {
+   "line": 245,
+   "theorem": "process_equiv",
+   "claim": "Важно понять, что `process_equiv` — это *то же самое* отношение по смыслу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 249–252) совпадает с ProcessCore.v:170; определение то же, что у cauchy_equiv, для голых процессов.",
+   "file": "src/process/ProcessCore.v"
+  },
+  {
+   "line": 259,
+   "theorem": "process_equiv",
+   "claim": "(Поточечное отношение в репозитории тоже есть — например, общий `process_equiv` с параметром в файле `ProcessGeneral.v`, требующий согласия на каждом шаге",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessGeneral.v:122: process_equiv {A} (eq_A) p1 p2 := forall n, eq_A (p1 n) (p2 n) — параметр eq_A, согласие на каждом шаге; описание точное.",
+   "file": "src/ProcessGeneral.v"
+  },
+  {
+   "line": 269,
+   "theorem": null,
+   "claim": "`ProcessBridge.v`, чья шапка прямо говорит, что `CauchySeq` и `RealProcess` суть *один и тот же математический объект*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessBridge.v, строка 16: «These are the same mathematical object.»",
+   "file": "src/process/ProcessBridge.v"
+  },
+  {
+   "line": 281,
+   "theorem": "cauchyseq_to_process",
+   "claim": "Первый забывает доказательство и оставляет голый процесс",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v:35: fun n => cs_seq cs n; блок кода (стр. 275) совпадает."
+  },
+  {
+   "line": 281,
+   "theorem": "process_to_cauchyseq",
+   "claim": "второй, получив процесс *вместе* с доказательством его фундаментальности, упаковывает их в `CauchySeq`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v:39: mkCauchy R H — принимает процесс вместе с доказательством is_Cauchy; блок кода (стр. 277) совпадает."
+  },
+  {
+   "line": 296,
+   "theorem": "cauchy_equiv_to_process_equiv",
+   "claim": "Первая лемма: эквивалентность на `CauchySeq` влечёт эквивалентность переведённых голых процессов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v:66; блок кода (стр. 288) совпадает с исходником."
+  },
+  {
+   "line": 297,
+   "theorem": "process_equiv_to_cauchy_equiv",
+   "claim": "Вторая — обратное. Вместе они означают, что `cauchy_equiv` и `process_equiv` — это *одно отношение, увиденное на двух репрезентациях*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v:78; вместе с леммой :66 — равносильность в обе стороны, вывод главы обоснован."
+  },
+  {
+   "line": 300,
+   "theorem": "roundtrip_process_equiv",
+   "claim": "Файл доказывает и то, что переводы взаимно-обратны",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v:101: process_equiv (cauchyseq_to_process (process_to_cauchyseq R H)) R — возврат к эквивалентному объекту."
+  },
+  {
+   "line": 301,
+   "theorem": "roundtrip_cauchyseq_equiv",
+   "claim": "леммы `roundtrip_process_equiv` и `roundtrip_cauchyseq_equiv` устанавливают, что перевод туда-обратно возвращает эквивалентный исходному объект.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessBridge.v:120: cauchy_equiv cs (process_to_cauchyseq (cauchyseq_to_process cs) (cauchyseq_is_cauchy cs))."
+  },
+  {
+   "line": 329,
+   "theorem": null,
+   "claim": "В файле `CauchyReal.v` это следствие не выделено отдельной леммой",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В CauchyReal.v леммы о разбиении на классы действительно нет (в файле refl/sym/trans, строки 67–91); статус следствия назван честно.",
+   "file": "src/CauchyReal.v"
+  },
+  {
+   "line": 388,
+   "theorem": null,
+   "claim": "В репозитории ToS такого фактортипа *нет*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: фактортипа над CauchySeq / cauchy_equiv нет; файлы foundation/ERRQuotient*.v — о факторах систем (тот же носитель, огрублённые роли), не о числах."
+  },
+  {
+   "line": 389,
+   "theorem": null,
+   "claim": "`CauchyReal.v` строит тип представителей `CauchySeq` и отношение `cauchy_equiv`; он доказывает рефлексивность, симметричность, транзитивность этого отношения — но *не* образует тип, термами которого были бы классы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сверено со списком объявлений CauchyReal.v: CauchySeq (:48), cauchy_equiv (:57), три леммы эквивалентности; типа классов нет.",
+   "file": "src/CauchyReal.v"
+  },
+  {
+   "line": 397,
+   "theorem": "cauchy_equiv_Equivalence",
+   "claim": "Файл `RealPointSetoid.v` регистрирует `cauchy_equiv` как `Equivalence` (собирая `cauchy_equiv_refl`, `_sym`, `_trans` в один носитель setoid-структуры)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Instance cauchy_equiv_Equivalence (RealPointSetoid.v:52) собран ровно из cauchy_equiv_refl / _sym / _trans.",
+   "file": "src/RealPointSetoid.v"
+  },
+  {
+   "line": 399,
+   "theorem": "_sym",
+   "claim": "`cauchy_equiv_refl`, `_sym`, `_trans`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сокращённая запись имени cauchy_equiv_sym (CauchyReal.v:78); отдельного имени _sym нет, и глава его не утверждает.",
+   "external": true
+  },
+  {
+   "line": 399,
+   "theorem": "_trans",
+   "claim": "`_sym`, `_trans` в один",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сокращённая запись имени cauchy_equiv_trans (CauchyReal.v:91); отдельного имени _trans нет, и глава его не утверждает.",
+   "external": true
+  },
+  {
+   "line": 402,
+   "theorem": "cauchy_add_Proper",
+   "claim": "`cauchy_add_Proper` и `cauchy_mul_Proper` уважают эквивалентность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointSetoid.v:81: Proper (cauchy_equiv ==> cauchy_equiv ==> cauchy_equiv) cauchy_add."
+  },
+  {
+   "line": 402,
+   "theorem": "cauchy_mul_Proper",
+   "claim": "`cauchy_mul_Proper` уважают эквивалентность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointSetoid.v:85: Proper (cauchy_equiv ==> cauchy_equiv ==> cauchy_equiv) cauchy_mul; доказан через cauchy_mul_compat."
+  },
+  {
+   "line": 409,
+   "theorem": null,
+   "claim": "реифицированный фактор превратил бы режим отождествления в самостоятельный объект (та самая $P4$-ошибка, что и завершённая совокупность, § 3.4.2) и потребовал бы аксиом (у вещественных в Rocq нет канонической формы, равенство неразрешимо).",
+   "page_price": "фактортип потребовал бы аксиом",
+   "verdict": "ok",
+   "note": "Обоснование отказа от фактортипа, не теорема: компилятором не проверяется; совпадает с шапкой RealPointSetoid.v (строки 22–28). В ядре Rocq фактортипов нет — общеизвестное свойство."
+  },
+  {
+   "line": 413,
+   "theorem": null,
+   "claim": "Сетоид — не временная замена фактортипа, а аксиомо-свободная конструкция, которая точке и нужна.",
+   "page_price": "сетоид — без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions для cauchy_equiv_Equivalence, process_equiv_Equivalence, cauchy_add_Proper, cauchy_mul_Proper, cauchy_neg_Proper и двух примеров файла — Closed under the global context.",
+   "file": "src/RealPointSetoid.v",
+   "assumptions": "Closed under the global context (все 7 утверждений файла)"
+  },
+  {
+   "line": 517,
+   "theorem": "cauchy_add_compat",
+   "claim": "`cauchy_add_compat`: заменили оба слагаемых на эквивалентные — сумма осталась эквивалентной.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:180; блок кода (стр. 511) совпадает с исходником."
+  },
+  {
+   "line": 518,
+   "theorem": "cauchy_neg_compat",
+   "claim": "`cauchy_neg_compat`: то же для смены знака.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:203; блок кода (стр. 513) совпадает с исходником."
+  },
+  {
+   "line": 530,
+   "theorem": "cauchy_le",
+   "claim": "В `CauchyReal.v` есть отношение `cauchy_le` — процессное «меньше либо равно»",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:226: forall eps > 0, exists N, forall n >= N, a n < b n + eps."
+  },
+  {
+   "line": 539,
+   "theorem": "cauchy_le_of_equiv",
+   "claim": "Она говорит: эквивалентные представители связаны отношением `cauchy_le` (а по симметрии — и в обратную сторону), то есть *взаимно неразличимы* по этому порядку.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyReal.v:231: a ~~ b -> cauchy_le a b; блок кода (стр. 535) совпадает; обратная сторона — через cauchy_equiv_sym."
+  },
+  {
+   "line": 548,
+   "theorem": "cauchy_le_compat",
+   "claim": "утверждение вида: если $a \\mathbin{\\sim\\mkern-3mu\\sim} a'$ и $b \\mathbin{\\sim\\mkern-3mu\\sim} b'$, то из `cauchy_le` $a b$ следует `cauchy_le` $a' b'$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealPointTopology.v:43: a ~~ a' -> b ~~ b' -> cauchy_le a b -> cauchy_le a' b' — формулировка главы совпадает с утверждением."
+  },
+  {
+   "line": 552,
+   "theorem": "cauchy_le_Proper",
+   "claim": "Эта лемма — под именем `cauchy_le_compat` — теперь *доказана*, в файле `RealPointTopology.v`, а с нею и `cauchy_le_Proper` (отношение `cauchy_le` согласовано с `cauchy_equiv` в обе стороны).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Instance cauchy_le_Proper: Proper (cauchy_equiv ==> cauchy_equiv ==> iff) cauchy_le (RealPointTopology.v:61) — «в обе стороны» = iff; статус «теперь доказана» честен."
+  },
+  {
+   "line": 565,
+   "theorem": null,
+   "claim": "на классах есть доказанно корректная *кольцевая* числовая структура и согласованный порядок.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Законы коммутативного кольца с точностью до ~~ доказаны: cauchy_add_comm / _assoc / _zero_r / _neg_r (CauchyReal.v:336–370), cauchy_mul_comm / _assoc / _one_l / _one_r, cauchy_distrib_l / _r (RealField.v:240–291); все — Closed under the global context.",
+   "file": "src/RealField.v"
+  },
+  {
+   "line": 568,
+   "theorem": "cauchy_mul",
+   "claim": "Умножение тоже построено: `cauchy_mul` (файл `RealField.v`) с доказанными коммутативностью, ассоциативностью, единицей и дистрибутивностью",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealField.v:172; cauchy_mul_comm (:240), cauchy_mul_assoc (:250), cauchy_mul_one_r / _one_l (:261, :271), cauchy_distrib_l / _r (:280, :291) — все четыре названных закона есть."
+  },
+  {
+   "line": 571,
+   "theorem": "cauchy_mul_compat",
+   "claim": "совместимостью с эквивалентностью (`cauchy_mul_compat`) и морфизмом `cauchy_mul_Proper` (`RealPointSetoid.v`), спускающим его на классы",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealField.v:181: a ~~ a' -> b ~~ b' -> cauchy_mul a b ~~ cauchy_mul a' b'."
+  },
+  {
+   "line": 573,
+   "theorem": "process_mul",
+   "claim": "на голой линии процессов ему отвечает `process_mul` (`CauchyProcessBridge.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CauchyProcessBridge.v:69: поточечное произведение процессов; сохранение свойства Коши — mul_preserves_Cauchy (:74).",
+   "file": "src/CauchyProcessBridge.v"
+  },
+  {
+   "line": 577,
+   "theorem": "cauchy_inv_is_cauchy",
+   "claim": "обратный по умножению (`cauchy_inv_is_cauchy`) определён лишь для отделённых от нуля представителей",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealField.v:333 — лемма о свойстве Коши у обратной последовательности при положительном зазоре q < a_n; сам обратный — cauchy_inv_pos (:390). Уточнение: в RealField.v закрыта положительная сторона, общий случай «отделён от нуля» — в RealFieldApart.v (сноска 2)."
+  },
+  {
+   "line": 614,
+   "theorem": "cauchy_const",
+   "claim": "шаге выдающий $1$. В терминах Главы 4.2 это `cauchy_const 1`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cauchy_const есть (CauchyReal.v:173); теорема nine_equiv_one сформулирована с const_process 1 (линия ProcessCore) — глава оговаривает это в § 3.7.5."
+  },
+  {
+   "line": 617,
+   "theorem": "nine_raw",
+   "claim": "значение десятичного процесса (`nine_raw`) на шаге $n$ равно $1 - 10^{-(n+1)}$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:65: fun n => 1 - 1 / ten_pow (S n); блок кода (стр. 682) совпадает."
+  },
+  {
+   "line": 620,
+   "theorem": "nine_raw_lt_one",
+   "claim": "Это и доказано формально — теорема `nine_raw_lt_one`: всякая усечёнка строго меньше единицы",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:71: forall n, nine_raw n < 1 — формулировка совпадает; в файле объявление названо Lemma (шапка файла тоже зовёт её теоремой)."
+  },
+  {
+   "line": 673,
+   "theorem": "nine_equiv_one",
+   "claim": "в репозитории ToS равенство $0{,}999… = 1$ *доказано* как теорема — файл `process/ProcessNinePoint.v`, теорема `nine_equiv_one`, без единой аксиомы.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:83; Print Assumptions: Closed under the global context."
+  },
+  {
+   "line": 685,
+   "theorem": "nine_raw_0",
+   "claim": "на шаге $n = 0$ процесс даёт $1 - 1/10 = 0{,}9$ (машинная проверка `nine_raw_0`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Example nine_raw_0 : nine_raw 0%nat == 9 # 10 (ProcessNinePoint.v:121)."
+  },
+  {
+   "line": 687,
+   "theorem": "ten_pow",
+   "claim": "Степень десятки берётся отдельной функцией `ten_pow` (через `pow10` над `positive`): обычная запись `10 ^ (S n)` над $ℚ$ в Rocq не сработала бы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:47 (ten_pow) и :41 (pow10 над positive). Проверено компилятором: `10 ^ (S n)` над Q с показателем nat не проходит проверку типов, `10 ^ Z.of_nat (S n)` проходит."
+  },
+  {
+   "line": 700,
+   "theorem": "nine_raw_is_Cauchy",
+   "claim": "Затем из Коши-свойства постоянного процесса (`const_is_Cauchy` из `ProcessCore.v`) и леммы `equiv_cauchy_l` того же файла (эквивалентный процессу Коши процесс сам есть процесс Коши) выводится `is_Cauchy nine_raw` — теорема `nine_raw_is_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:113; доказательство: equiv_cauchy_l (const_process 1) nine_raw, process_equiv_sym от nine_equiv_one, const_is_Cauchy — ход описан верно."
+  },
+  {
+   "line": 701,
+   "theorem": "const_is_Cauchy",
+   "claim": "(`const_is_Cauchy` из `ProcessCore.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:78: forall q, is_Cauchy (const_process q)."
+  },
+  {
+   "line": 702,
+   "theorem": "equiv_cauchy_l",
+   "claim": "леммы `equiv_cauchy_l` того же файла (эквивалентный процессу Коши процесс сам есть процесс Коши)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessCore.v:210: R1 ~~ R2 -> is_Cauchy R1 -> is_Cauchy R2."
+  },
+  {
+   "line": 710,
+   "theorem": "q_archimedean",
+   "claim": "технически оно получено из архимедовой леммы `q_archimedean` (из `ProcessArithmetic.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessArithmetic.v:263: forall d eps, 0 < eps -> exists K, d < inject_Z (Z.of_nat K) * eps; применена внутри доказательства nine_equiv_one (отдельной леммой оценка хвоста не выделена). Closed under the global context, хотя файл импортирует Classical."
+  },
+  {
+   "line": 712,
+   "theorem": "pow10_ge",
+   "claim": "и оценки роста `pow10_ge`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:56: Z.of_nat (S m) <= Z.pos (pow10 m)."
+  },
+  {
+   "line": 714,
+   "theorem": "nine_equiv_one",
+   "claim": "*Шаг четвёртый* — собрать воедино и доказать целевую теорему:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 716) совпадает с ProcessNinePoint.v:83: nine_raw ~~ const_process 1; знак ~~ здесь — process_equiv (Notation, ProcessCore.v:175)."
+  },
+  {
+   "line": 727,
+   "theorem": "nine_process_equiv_one",
+   "file": "src/process/ProcessNinePoint.v",
+   "claim": "перенос на упакованную линию `CauchySeq` выполнен в том же файле (`nine_process_equiv_one`, через `nine_raw_is_Cauchy` и мост)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 8, слово автора «А»): было «доступен через `nine_raw_is_Cauchy` и мост»; перенос выполнен — Theorem nine_process_equiv_one : cauchy_equiv nine_process one_process; Closed under the global context"
+  },
+  {
+   "line": 777,
+   "theorem": null,
+   "claim": "`ProcessCore.v` объявляет правило — *всякий объект есть конечный процесс на каждой стадии* ($P4$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessCore.v, строка 4: «Rules: every mathematical object is a finite process at each stage (P4)». Попутно: шапка называет 25 Qed, действительный счёт 19 (в этой главе число не приводится).",
+   "file": "src/process/ProcessCore.v"
+  },
+  {
+   "line": 781,
+   "theorem": "System",
+   "claim": "Оговорка о статусе: всё ниже — содержательное чтение; фактортип отдельным Rocq-типом не построен (§ 3.4.3), и «система» здесь — не объект `System` $L$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) — TheoryOfSystems_Core_ERR.v:203; глава честно называет E/R/R-разбор содержательным чтением, а не объектом формализации."
+  },
+  {
+   "line": 825,
+   "theorem": "cauchy_add_compat",
+   "claim": "совместимость (`cauchy_add_compat`); мост репрезентаций",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 10, слово автора): было сокращение `add_compat`; полное имя — cauchy_add_compat (CauchyReal.v:180)",
+   "external": true
+  },
+  {
+   "line": 895,
+   "theorem": "process_uncountable",
+   "claim": "для всякого *регулярного* перечисления процессов отрезка $[0,1]$ найдётся процесс Коши (лежащий в том же отрезке), *не эквивалентный* ни одному элементу перечисления.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 10, слово автора): добавлено условие теоремы — process_uncountable (ProcessUncountable.v:88) доказана при valid_regular_enumeration E: каждый член перечисления есть регулярный процесс Коши со значениями в [0,1] (ShrinkingIntervals_ERR.v:1089); было «для всякого перечисления процессов»",
+   "file": "src/process/ProcessUncountable.v"
+  },
+  {
+   "line": 897,
+   "theorem": "process_uncountable",
+   "claim": "Иначе говоря, никакое регулярное перечисление представителей не покрывает все классы эквивалентности отрезка — всегда есть класс, в перечислении не представленный.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 10, слово автора): вывод приведён к доказанному — регулярные перечисления процессов отрезка [0,1]; было «никакое перечисление представителей»",
+   "file": "src/process/ProcessUncountable.v"
+  },
+  {
+   "line": 933,
+   "theorem": "cauchy_equiv_Equivalence",
+   "claim": "Отношение доказанно рефлексивно, симметрично и транзитивно (и зарегистрировано как `Equivalence` в `RealPointSetoid.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итог повторяет § 3.3 и § 3.4.3: три леммы CauchyReal.v:67–91 и Instance RealPointSetoid.v:52; всё Closed under the global context.",
+   "file": "src/RealPointSetoid.v"
+  },
+  {
+   "line": 935,
+   "theorem": null,
+   "claim": "Сложение, отрицание и умножение классов доказанно корректны (`cauchy_add_compat`, `cauchy_neg_compat`, `cauchy_mul_Proper`); порядок тоже спускается на классы полностью (`cauchy_le_compat`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итог повторяет § 3.6: cauchy_add_compat (CauchyReal.v:180), cauchy_neg_compat (:203), cauchy_mul_Proper (RealPointSetoid.v:85), cauchy_le_compat (RealPointTopology.v:43) существуют и замкнуты."
+  },
+  {
+   "line": 947,
+   "theorem": "nine_equiv_one",
+   "claim": "Равенство $0{,}999… = 1$ доказано теоремой `nine_equiv_one` (`process/ProcessNinePoint.v`, без аксиом)",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "ProcessNinePoint.v:83; Print Assumptions: Closed under the global context."
+  },
+  {
+   "line": 955,
+   "theorem": null,
+   "claim": "`ProcessBridge.v` Rocq-репозитория ToS (каталог `src/process/`), 10 доказанных утверждений, 0 `Admitted`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Действительный счёт: 10 Qed, 0 Admitted, объявлений Axiom / Parameter нет; Print Assumptions для всех 10 лемм файла — Closed under the global context.",
+   "file": "src/process/ProcessBridge.v",
+   "assumptions": "Closed under the global context (все 10 лемм файла)"
+  },
+  {
+   "line": 956,
+   "theorem": "apart0",
+   "claim": "Отделённость от нуля — это предикат `apart0` (предъявленный рациональный зазор $q<|x|$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealFieldApart.v:56: exists q > 0, exists N, forall n >= N, q < |x_n| — предъявленный рациональный зазор."
+  },
+  {
+   "line": 956,
+   "theorem": "invertible_iff_apart",
+   "claim": "теорема `invertible_iff_apart` даёт: обратный по умножению существует *в точности* для апартных от нуля элементов",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 9, слово автора «А») — правка формализации: в RealFieldApart.v доказана обратная сторона, inverse_implies_apart : cauchy_equiv (cauchy_mul x y) cauchy_one -> apart0 x (зазор 1/(2B) из границы обратного, cauchy_bounded), и invertible_iff_apart : apart0 x <-> exists y, cauchy_equiv (cauchy_mul x y) cauchy_one; Closed under the global context",
+   "file": "src/RealFieldApart.v"
+  },
+  {
+   "line": 956,
+   "theorem": "apart_has_inverse",
+   "file": "src/RealFieldApart.v",
+   "claim": "в одну сторону — `apart_has_inverse`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "apart0 x -> exists y, cauchy_equiv (cauchy_mul x y) cauchy_one (RealFieldApart.v:103); Closed under the global context"
+  },
+  {
+   "line": 956,
+   "theorem": "inverse_implies_apart",
+   "file": "src/RealFieldApart.v",
+   "claim": "в обратную — `inverse_implies_apart`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 9, слово автора «А»): теорема добавлена шагом 9; forall x y, cauchy_equiv (cauchy_mul x y) cauchy_one -> apart0 x; Closed under the global context"
+  },
+  {
+   "line": 956,
+   "theorem": "apartness_field",
+   "claim": "всё вместе — `apartness_field`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "RealFieldApart.v — конъюнкция трёх: апартный в конце концов одного знака (apart0_sign); апартность равносильна обратимости (после шага 9 второй член — invertible_iff_apart, было: только apart_has_inverse); ~ apart0 0."
+  },
+  {
+   "line": 956,
+   "theorem": null,
+   "claim": "Машинно проверено, 8 Qed, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (шаг 9, слово автора «А»): было 6; после шага 9 в RealFieldApart.v 8 Qed, 0 Admitted; Print Assumptions для всех восьми — Closed under the global context.",
+   "file": "src/RealFieldApart.v",
+   "assumptions": "Closed under the global context (все 8 утверждений файла)"
+  },
+  {
+   "line": 957,
+   "theorem": null,
+   "claim": "E/R/R-разметка в шапках `ProcessCore.v` и `ProcessBridge.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Обе шапки содержат строки Elements / Roles / Rules (ProcessCore.v:2–4, ProcessBridge.v:2–4).",
+   "file": "src/process/ProcessBridge.v"
+  }
+ ]
+}

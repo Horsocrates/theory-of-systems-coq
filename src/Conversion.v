@@ -13,7 +13,6 @@
 (*  Author: Horsocrates | Date: March 2026                                  *)
 (* ========================================================================= *)
 
-From Stdlib Require Import Logic.FunctionalExtensionality.
 From Stdlib Require Import Init.Nat.
 From Stdlib Require Import Lists.List.
 From Stdlib Require Import Arith.PeanoNat.
@@ -123,12 +122,13 @@ Lemma beta_pi :
 Proof. intros f_body a. reflexivity. Qed.
 
 (** Lemma 8: Eta for Pi -- any PiSystem equals its pointwise reconstruction.
-    Uses pi_extensionality (functional_extensionality_dep). *)
+    No functional extensionality is needed: a PiSystem is a one-field record,
+    and [fun a => u a] is convertible with [u]. *)
 Lemma eta_pi :
   forall (f : PiSystem L A B),
     f = mkPiSystem L A B (fun a => pi_app L A B f a).
 Proof.
-  intros f. apply (pi_extensionality L A B). intro a. reflexivity.
+  intros [u]. reflexivity.
 Qed.
 
 (** Lemma 9: Beta for Sigma fst *)
@@ -233,7 +233,8 @@ Proof. intros. reflexivity. Qed.
     14. P3_convertible_element_transfer
     15. P3_convertible_same_level
 
-  AXIOMS: classical logic (inherited), functional_extensionality_dep (eta_pi)
+  AXIOMS: none for the beta/eta rules (eta_pi is proved by record destruction,
+          without functional extensionality); see the Print Assumptions below.
 *)
 
 Print Assumptions P3_not_extensional.

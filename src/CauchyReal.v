@@ -15,7 +15,7 @@
 (*    6. Completeness: rational approximation + self-convergence             *)
 (*    7. Algebraic laws (comm, assoc, identity, inverse)                     *)
 (*                                                                           *)
-(*  STATUS: 18 Qed, 0 Admitted (100%)                                       *)
+(*  STATUS: 21 Qed, 0 Admitted (100%)                                       *)
 (*                                                                           *)
 (*  AXIOMS: NONE - fully constructive over Q                                 *)
 (*                                                                           *)
@@ -317,6 +317,47 @@ Proof.
   lra.
 Qed.
 
+(** The other side of [cauchy_complete_self]: a far approximation exceeds
+    the process by at most eps.  (Nov 2026: [cauchy_complete_self] bounds the
+    tail from above only; the two theorems below complete the picture.) *)
+Theorem cauchy_complete_self_lower : forall (a : CauchySeq),
+  forall eps : Q, 0 < eps ->
+    exists N : nat, forall n : nat,
+      (N <= n)%nat ->
+      cauchy_le (cauchy_sub (cauchy_const (cs_seq a n)) a)
+                (cauchy_const eps).
+Proof.
+  intros a eps Heps.
+  destruct (cs_cauchy a (eps * (1#2)) ltac:(lra)) as [N HN].
+  exists N.
+  intros n Hn.
+  intros delta Hdelta.
+  exists N.
+  intros m Hm.
+  simpl.
+  assert (Hdiff := HN m n Hm Hn).
+  apply Qabs_Qlt_condition in Hdiff.
+  lra.
+Qed.
+
+(** Self-convergence, both sides at once: the tail of a Cauchy process lies
+    within eps AROUND every sufficiently far approximation. *)
+Theorem cauchy_complete_self_two_sided : forall (a : CauchySeq),
+  forall eps : Q, 0 < eps ->
+    exists N : nat, forall n : nat,
+      (N <= n)%nat ->
+      cauchy_le (cauchy_sub a (cauchy_const (cs_seq a n))) (cauchy_const eps) /\
+      cauchy_le (cauchy_sub (cauchy_const (cs_seq a n)) a) (cauchy_const eps).
+Proof.
+  intros a eps Heps.
+  destruct (cs_cauchy a (eps * (1#2)) ltac:(lra)) as [N HN].
+  exists N.
+  intros n Hn.
+  split; intros delta Hdelta; exists N; intros m Hm; simpl;
+    assert (Hdiff := HN m n Hm Hn);
+    apply Qabs_Qlt_condition in Hdiff; lra.
+Qed.
+
 Lemma cauchy_subsequence : forall (a : CauchySeq) (f : nat -> nat),
   (forall n : nat, (n <= f n)%nat) ->
   is_cauchy (fun n => cs_seq a (f n)).
@@ -404,6 +445,7 @@ Print Assumptions cauchy_equiv_trans.
 Print Assumptions cauchy_add_compat.
 Print Assumptions cauchy_pos_not_zero.
 Print Assumptions cauchy_complete_self.
+Print Assumptions cauchy_complete_self_two_sided.
 Print Assumptions cauchy_rational_approx.
 Print Assumptions cauchy_add_comm.
 Print Assumptions cauchy_add_neg_r.

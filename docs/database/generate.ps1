@@ -15,7 +15,8 @@ function Cell([string]$s) {
 function W($list, $s) { $list.Add($s) | Out-Null }
 
 # ---- collect shards -----------------------------------------------------
-$shards = Get-ChildItem -Path $dir -Filter *.json | Where-Object { $_.Name -notlike '_*' } | Sort-Object Name
+# tom-links.json is NOT a cluster shard: it is the volume<->formalization link base (own generator: tom-links-generate.cjs).
+$shards = Get-ChildItem -Path $dir -Filter *.json | Where-Object { $_.Name -notlike '_*' -and $_.Name -ne 'tom-links.json' } | Sort-Object Name
 $all = New-Object System.Collections.Generic.List[object]
 
 foreach ($shard in $shards) {

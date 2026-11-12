@@ -2,7 +2,7 @@
     Elements: Finite lists, choice functions, maximal elements
     Roles:    L5 status assignment provides canonical choice
     Rules:    Head-of-list = constructive choice, no axiom needed
-    STATUS:   16 Qed, 0 Admitted, 0 new axioms
+    STATUS:   15 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY INSIGHT: The Axiom of Choice asserts that for any family of

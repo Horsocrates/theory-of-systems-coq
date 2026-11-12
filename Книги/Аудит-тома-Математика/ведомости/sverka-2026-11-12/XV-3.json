@@ -1,0 +1,32 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "15 Вычисления и граница финитизации/03 Одна диагональ halting, Райс, Кантор, Колмогоров.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Несчётность — `ProcessDiagonal.binary_processes_not_enumerable` и `ShrinkingIntervals_ERR.unit_interval_uncountable_trisect_v2`: 0 аксиом",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Так же без допущений доказана и несчётность отрезка — и над двоичными\nпроцессами, и в трисекционной версии над $[0,1]$",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Дихотомия завершённой стороны — `ProcessContinuumHypothesis.process_continuum_hypothesis`: слой L3 (classic)${}+{}$L4",
+   "page_price": "L3 (classic) + L4",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  }
+ ]
+}

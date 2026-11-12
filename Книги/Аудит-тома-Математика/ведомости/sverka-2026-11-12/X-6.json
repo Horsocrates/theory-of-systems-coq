@@ -1,0 +1,40 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "10 Теория множеств без аксиомы выбора/06 Синтез Части X что доказуемо без выбора, и карта границ.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "| 0 аксиом | счётность ℚ (Калкин–Уилф); диагональ (`diagonal_differs`); несчётность $[0,1]$ (трисекция)",
+   "page_price": "ярус «0 аксиом»",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (перенесено из яруса classic); сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "kruskal_chains",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "Кантор–Бендиксон; Крускал (конкретные семейства)",
+   "page_price": "ярус «0 аксиом»",
+   "verdict": "ok",
+   "note": "исправлено 12.11 (перенесено из яруса classic); `kruskal_forks` (KruskalTree.v:276) — тоже без допущений"
+  },
+  {
+   "theorem": "S_finite_scattered",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "общий Кантор $X\\to(X\\to\\mathtt{bool})$; Кантор–Бендиксон",
+   "page_price": "ярус «0 аксиом»",
+   "verdict": "ok",
+   "note": "речь о производной множества в CantorBendixsonFull.v (не о процессной континуум-гипотезе главы IV.5); `CB_omega_finite_empty`, `CB_omega_accumulation_in_parent` — тоже без допущений"
+  },
+  {
+   "theorem": null,
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "| classic (L3) | Хигман; конечная детерминированность |",
+   "page_price": "classic (L3)",
+   "verdict": "not-checked",
+   "note": "12.11 не проверялось; сводная страница «Формализация» для `higman_unit` называет «нет», для `dickson_pair` — исключённое третье: сверить при аудите Части X"
+  }
+ ]
+}

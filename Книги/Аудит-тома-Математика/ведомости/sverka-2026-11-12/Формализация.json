@@ -1,0 +1,97 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "Формализация.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "`unit_interval_uncountable_trisect_v2` (ShrinkingIntervals_ERR.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`binary_processes_not_enumerable` (ProcessDiagonal.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "`process_continuum_hypothesis` (ProcessContinuumHypothesis.v) | исключённое третье (стандартная библиотека), извлечение свидетеля",
+   "page_price": "исключённое третье (стандартная библиотека), извлечение свидетеля",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "IVT_process",
+   "file": "src/IVT_ERR.v",
+   "claim": "`IVT_process` (IVT_ERR.v); `ivt_cauchy_real` (IVT_CauchyReal.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "ivt_cauchy_real",
+   "file": "src/IVT_CauchyReal.v",
+   "claim": "`ivt_cauchy_real` (IVT_CauchyReal.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "Heine_Borel",
+   "file": "src/HeineBorel_ERR.v",
+   "claim": "`Heine_Borel` (HeineBorel_ERR.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "kruskal_chains",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "`kruskal_chains`, `kruskal_forks` (KruskalTree.v)",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "kruskal_forks",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "`kruskal_forks` (KruskalTree.v)",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "depth1_wqo",
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "`depth1_wqo`, `L5_from_kruskal` (KruskalFull.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "L5_from_kruskal",
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "`L5_from_kruskal` (KruskalFull.v) | нет |",
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "EVT_strong_process",
+   "file": "src/EVT_idx.v",
+   "claim": "`EVT_strong_process` (EVT_idx.v) | исключённое третье (EVT_idx.v) |",
+   "page_price": "исключённое третье (EVT_idx.v)",
+   "verdict": "ok",
+   "note": "цена сверена при заведении базы (12.11 не проверялось): `EVT_idx.classic`; формулировка — при аудите Части V"
+  }
+ ],
+ "root": "library"
+}

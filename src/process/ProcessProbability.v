@@ -5,11 +5,12 @@
 (*  Frequency f(N) -> probability P = |psi|^2 as N -> infty.               *)
 (*  Concrete examples with Q[i] states.                                     *)
 (*                                                                          *)
-(*  STATUS: 22 Qed, 0 Admitted                                              *)
+(*  STATUS: 16 Qed, 0 Admitted                                              *)
 (*  AXIOMS: classic                                                         *)
 (* ========================================================================= *)
 
 From Stdlib Require Import QArith QArith_base Qabs.
+From Stdlib Require Import Lqa Lia PeanoNat.
 From Stdlib Require Import List.
 Import ListNotations.
 From ToS Require Import process.ProcessCore process.ProcessBounds.
@@ -47,7 +48,7 @@ Proof.
   intros proc l1 l2 Hc1 Hc2.
   destruct (Qlt_le_dec 0 (Qabs (l1 - l2))) as [Hpos | Hle].
   - (* Contradiction: distance > 0 but process converges to both *)
-    assert (Heps : 0 < Qabs (l1 - l2) / 2) by lra.
+    assert (Heps : 0 < Qabs (l1 - l2) * (1 # 2)) by lra.
     destruct (Hc1 _ Heps) as [N1 HN1].
     destruct (Hc2 _ Heps) as [N2 HN2].
     set (N := Nat.max N1 N2).
@@ -55,7 +56,7 @@ Proof.
     assert (HN2' := HN2 N (Nat.le_max_r N1 N2)).
     assert (Htri : Qabs (l1 - l2) <=
       Qabs (proc N - l2) + Qabs (l1 - proc N)).
-    { assert (Heq : l1 - l2 == (l1 - proc N) + (proc N - l2)) by ring.
+    { assert (Heq : l1 - l2 == (proc N - l2) + (l1 - proc N)) by ring.
       rewrite Heq. apply Qabs_triangle. }
     assert (Heq2 : Qabs (l1 - proc N) == Qabs (proc N - l1)).
     { rewrite <- Qabs_opp.
@@ -85,7 +86,7 @@ Lemma all_true_count : forall N,
 Proof.
   induction N as [|k IH].
   - simpl. reflexivity.
-  - simpl. unfold all_true_seq. rewrite IH. lia.
+  - simpl. rewrite IH. unfold all_true_seq. lia.
 Qed.
 
 Lemma all_true_frequency : forall N,
@@ -94,7 +95,7 @@ Proof.
   intros N. unfold frequency.
   rewrite all_true_count.
   unfold Qdiv. rewrite Qmult_inv_r; [reflexivity |].
-  intros Habs. apply inject_Z_injective in Habs. lia.
+  intros Habs. unfold Qeq in Habs. simpl in Habs. lia.
 Qed.
 
 (* ================================================================== *)
@@ -179,12 +180,12 @@ Theorem born_rule_derivation :
   (forall z w, qi_orthogonal z w ->
     qi_norm2 (qi_add z w) == qi_norm2 z + qi_norm2 w) /\
   (qi_norm2 example_state_1 + qi_norm2 example_state_2 == 1) /\
-  (forall s, is_Cauchy (frequency_process s)).
+  (forall s, in_interval 0 1 (frequency_process s)).
 Proof.
   split; [| split].
   - apply norm2_additive_orthogonal.
   - apply example_normalized.
-  - apply frequency_process_cauchy.
+  - apply frequency_process_in_interval.
 Qed.
 
 Theorem born_rule_vs_standard :

@@ -1,0 +1,48 @@
+{
+ "batch": "sverka-2026-11-12",
+ "chapter": "05 Топология и анализ процессов/03 Непрерывность.md",
+ "checked": "2026-11-12",
+ "auto": false,
+ "records": [
+  {
+   "theorem": "IVT_process",
+   "file": "src/IVT_ERR.v",
+   "claim": "Команда `Print Assumptions` для\n`IVT_process` отвечает «Closed under the global context»",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": null,
+   "file": "src/Archimedean_ERR.v",
+   "claim": "архимедовость $ℚ$, а она доказана конструктивно: в\n`Archimedean_ERR` аксиом нет",
+   "page_price": "в файле аксиом нет",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части; в файле нет объявлений Axiom и Parameter"
+  },
+  {
+   "theorem": "process_IVT",
+   "file": "src/process/ProcessIVT.v",
+   "claim": "`process_IVT`, как и теорема `IVT_ERR`, доказана без допущений",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "ivt_cauchy_real",
+   "file": "src/IVT_CauchyReal.v",
+   "claim": "Теорема о промежуточном значении доказана без допущений (`IVT_process`, `process_IVT`, `ivt_cauchy_real`)",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 12.11; сверена цена; формулировка — при аудите части"
+  },
+  {
+   "theorem": "EVT_strong_process",
+   "file": "src/EVT_idx.v",
+   "claim": "теорема об экстремуме — на $L3$: `classic` приходит в `EVT_ERR` и `EVT_idx` напрямую",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "цена сверена при заведении базы (12.11 не проверялось): аксиома `EVT_idx.classic`, объявленная в самом файле; формулировка — при аудите Части V"
+  }
+ ]
+}
