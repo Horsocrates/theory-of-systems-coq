@@ -24,6 +24,9 @@ From ToS Require Import navier_stokes.Vorticity.
 From ToS Require Import navier_stokes.EnstrophyProduction.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ========================================================================= *)
 (*  PART I: Linear Gronwall (Discrete)                                       *)
 (* ========================================================================= *)
@@ -389,3 +392,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~28 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

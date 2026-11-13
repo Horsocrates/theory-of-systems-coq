@@ -216,10 +216,9 @@ docs/                   — auto-generated documentation
 
 ### ToS_Axioms.v
 INVARIANTS:
-- Declares `L4_witness` (here, ToS_Axioms.v:105) and re-exports `classic` from Distinction.v.
-  NOTE (2026-06-05): `classic` is NOT globally sole-sourced — it is also independently
-  re-declared (same statement) in EVT_idx.v:338, settheory/BorelDeterminacy.v:21,
-  settheory/HigmanLemma.v:13 (4 declarations of one axiom total).
+- Declares `L4_witness` (here, ToS_Axioms.v:105) and re-exports `classic` from the standard
+  library (`Classical_Prop`). Since 2026-11-13 `classic` is declared ONCE in the whole
+  project: Distinction.v and BorelDeterminacy.v re-export the same library declaration.
 - Exactly 2 core axioms. Do NOT add new axioms without discussion.
 - All files that need LEM or constructive witnesses import from here.
 
@@ -473,27 +472,29 @@ IMPACT: annotations.json with 15 landmark + 9 bottleneck annotations. CLAUDE.md 
 
 ## Axioms (complete list)
 
-### Core (2)
-| Axiom | File | ToS Law | Purpose |
-|-------|------|---------|---------|
-| `classic` | foundation/Distinction.v:36 | L3 (Excluded Middle) | forall P, P \/ ~P |
-| `L4_witness` | ToS_Axioms.v:105 | P4 (Finite Actuality) | ex -> sig (constructive witness) |
+### Core (2) — the only axioms of the project
+| Axiom | Declared in | ToS Law | Statement |
+|-------|-------------|---------|-----------|
+| `classic` | standard library, `Classical_Prop.classic` (re-exported by ToS_Axioms.v, foundation/Distinction.v, settheory/BorelDeterminacy.v) | L3 | forall P, P \/ ~P |
+| `L4_witness` | ToS_Axioms.v:105 | P4 | ex -> sig |
 
-NOTE (verified 2026-06-05): `classic` is textually RE-DECLARED (same statement) in 3
-more files — EVT_idx.v:338, settheory/BorelDeterminacy.v:21, settheory/HigmanLemma.v:13
-— so there are 4 declarations of one axiom, not a single re-exported source.
+Since 2026-11-13 `classic` is declared ONCE: the local `Axiom classic` lines in
+Distinction.v and BorelDeterminacy.v were replaced by the import of the standard
+library. `Print Assumptions` names only `Classical_Prop.classic` and
+`ToS_Axioms.L4_witness`. The only `Axiom` line in src/ is `L4_witness`; there
+are no `Parameter` lines.
 
-### Domain-specific (2; was 4 — the 2 eliminable ones ELIMINATED 2026-06-10)
-CORRECTED 2026-06-05 (audit: foundation/HeavyWallAudit.v); UPDATED 2026-06-10: both
-ProvableStructure axioms were eliminated, exactly the set the audit predicted eliminable
-(machine-checked: HeavyWallAudit.eliminated_iff_eliminable). The foundation layer stays
-0-axiom; the NS wall keeps its honest load-bearing conditionality.
+### Domain-specific (0; was 2)
+Since 2026-11-13 the Navier-Stokes declarations are PREMISES, not axioms: the
+class `NSCoupling` (navier_stokes/GalerkinSystem.v) with fields `B_raw`, `C_B`,
+`C_B_positive`, `B_raw_antisym_bounded`. 32 files are wrapped in
+`Section WithNSCoupling` with ``Context `{nsc : NSCoupling}``; the theorems take
+the record as an implicit argument and are closed. `B_coeff_bounded` is a Lemma
+(TriadicInteraction.v). NS regularity stays CONDITIONAL on the coupling bound —
+now as a premise of the theorems. A file outside the section that uses
+coupling-dependent definitions must have an instance of `NSCoupling` in context.
 
-| Axiom | File | Wall | Kind | Statement |
-|-------|------|------|------|-----------|
-| `C_B_positive` | navier_stokes/TriadicInteraction.v:120 | NS | HarmlessInput | 0 < C_B (coupling constant positive; normalization) |
-| `B_coeff_bounded` | navier_stokes/TriadicInteraction.v:122 | NS | **LOAD-BEARING** | Qabs(B k l m) <= C_B*max(k,l,m): NS regularity is CONDITIONAL on this |
-
+### History
 ELIMINATED 2026-06-10 (Axiom -> Lemma, same names/statements, downstream unchanged):
 - `B_antisym` (was GalerkinSystem.v Axiom): `B_coeff` is now the ANTISYMMETRIZATION of an
   abstract raw coupling — `B_coeff k l m := B_raw k l m - B_raw k m l` — so antisymmetry is
@@ -506,16 +507,17 @@ ELIMINATED 2026-06-10 (Axiom -> Lemma, same names/statements, downstream unchang
   The axiom's NAME promised the analytic FE; its statement was free. The ANALYTIC functional
   equation (about actual zeta vanishing) remains unformalized — in prose, honestly flagged.
 
-Print Assumptions verified 2026-06-10: `millennium_reading2_capstone` / `ns_galerkin_bound_chain`
+As of 2026-06-10 (superseded 2026-11-13, when the Navier-Stokes declarations became
+premises): `millennium_reading2_capstone` / `ns_galerkin_bound_chain`
 (renamed 2026-06-10 from millennium_complete_final / navier_stokes_millennium) rest on
 `C_B_positive` (+ Parameter `C_B`) only; `reflect_zero_nontrivial` /
 `RH_critical_strip_symmetric` are "Closed under the global context" (0 axioms).
 
-Abstract `Parameter`s — conservative (inhabited types, cannot cause inconsistency) but
-they DO appear in `Print Assumptions`, so the honest count names them:
-`B_raw` (navier_stokes/GalerkinSystem.v, the raw coupling; replaced the former `B_coeff`
-Parameter on 2026-06-10 — `B_coeff` is now a Definition), `C_B` (navier_stokes/TriadicInteraction.v:119),
-`eval_program` (foundation/P4_Eliminates_Pi11.v:28).
+Until 2026-11-13 the section had two axioms (`C_B_positive` — harmless input;
+`B_coeff_bounded` — LOAD-BEARING) and two abstract `Parameter`s (`B_raw`, `C_B`),
+and `classic` was declared in three places (standard library, Distinction.v:36,
+BorelDeterminacy.v:21). `eval_program` (foundation/P4_Eliminates_Pi11.v) is a section
+variable since the audit of Part X.
 
 REMOVED 2026-06-05 — these names NEVER existed in src/ (documentation drift, now fixed):
 `ns_viscosity_axiom`, `ns_forcing_axiom` (claimed stdlib/GalerkinSystem.v); `zeta_euler_product`

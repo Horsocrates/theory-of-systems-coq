@@ -35,6 +35,9 @@ From ToS Require Import navier_stokes.EnstrophyConvergence.
 From ToS Require Import navier_stokes.ConcentrationBound.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: The Complete Per-Mode Chain  (~10 lemmas)                 *)
 (* ================================================================== *)
@@ -330,3 +333,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~30 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

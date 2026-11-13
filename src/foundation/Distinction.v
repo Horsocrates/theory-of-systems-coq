@@ -32,8 +32,12 @@ From Stdlib Require Import List.
 Import ListNotations.
 
 (** We use classical logic: this IS our formalization of L3 (Excluded Middle).
-    Not an additional axiom — L3 = classic. *)
-Axiom classic : forall P : Prop, P \/ ~P.
+    The axiom is declared ONCE for the whole project — in the standard library,
+    Classical_Prop.classic : forall P : Prop, P \/ ~ P — and is re-exported here
+    and by ToS_Axioms.v (2026-11-13: this file used to declare its own copy of
+    the same statement, `Axiom classic`; Print Assumptions then named two
+    different axioms for one law). *)
+From Stdlib Require Export Classical_Prop.
 
 (* ========================================================================= *)
 (*  FIRST PRINCIPLE: A = exists                                              *)

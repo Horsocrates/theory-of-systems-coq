@@ -1,0 +1,424 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/06 Аксиоматический минимум и механизм статуса.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 1073,
+   "theorem": null,
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "В § 6.5 было показано, что Аксиома Выбора в её полной формулировке в ToS не воспроизводится: одновременное удержание свидетелей по бесконечному семейству означает завершённую бесконечность, которая не имеет места в системе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формальная форма — `ac_completed_graph_contradicts_P4` (P4ProhibitsAC.v:122) и `completed_graph_contradicts_P4` (:108): противоречие получено при посылках `P4_stage_bounded actual` и `bridge` (все индексы графа актуальны на стадии 0); Closed under the global context. Сам выбор по ℕ-индексированному семейству непустых списков — теорема (`AC_on_nat_as_rule`, :160), а из `L4_witness` функция выбора строится для любого семейства (пробный файл: `functional_choice_from_L4`, допущение — только `L4_witness`); глава говорит об этом на стр. 582–615 и 1403–1430. Слова «не воспроизводится» верны для чтения функции выбора как завершённого графа — см. сомнительные места в заметках."
+  },
+  {
+   "line": 1364,
+   "theorem": "Observable",
+   "file": "src/CoinductiveSystems.v",
+   "claim": "Главное в механизме статуса — то, что он работает не только для конечных, но и для *потенциально продолжающихся* процессов — таких, как наблюдаемые процессы из главы о коиндуктивных системах[^12].",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Observable := mkObservable { obs_process : GenProcess A; obs_criterion : A -> Prop }` (CoinductiveSystems.v:29): процесс `nat -> A` с критерием; коиндуктивных типов в файле нет. Утверждения о присвоении статусов на `Observable` в формализации нет — это согласуется со стр. 1390–1401 (полный механизм не формализован). В пробном наброске состояние стадии n определено по первым n значениям процесса `nat -> nat` (`status_run`). Главы о коиндуктивных системах в томе не найдено — см. заметки."
+  },
+  {
+   "line": 1380,
+   "theorem": null,
+   "claim": "В репозитории формализован *более простой* механизм, чем полный механизм статуса, разобранный в § 6.6.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формализованы `l5_resolve_gen` с теоремами о результате (src/L5Resolution.v:76, :160–:224) и `L5_choose` (foundation/P4_Eliminates_AC.v:25, foundation/P4ProhibitsAC.v:141). Близкий по теме файл, на странице не названный, — foundation/StatusFromERR.v (11 Qed): статусы `PrimaryMax` / `SecondaryMax` / `Candidate` / `Invalid` присваиваются разом по готовому списку сущностей с весами, без шагов и без сброса."
+  },
+  {
+   "line": 1381,
+   "theorem": "l5_res_rule",
+   "file": "src/FormationRules.v",
+   "claim": "разрешение непустого списка по порядку — лемма `l5_res_rule` в файле `src/FormationRules.v`[^13]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`l5_res_rule : forall (T : Type) (HO : DecTotalOrder T) (l : list T), l <> [] -> exists v, l5_resolve_gen l = Some v` (FormationRules.v:177); доказательство — ссылка на `l5_resolve_gen_some` (L5Resolution.v:160). Closed under the global context. Заключение верно по определению `l5_resolve_gen` для всякого непустого списка: свойства порядка в доказательстве не участвуют (пробный файл: `some_without_order`)."
+  },
+  {
+   "line": 1383,
+   "theorem": "L5_choose",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "выбор первого элемента — функция `L5_choose` в файле `src/foundation/P4_Eliminates_AC.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L5_choose (l : list nat) (default : nat) := match l with nil => default | x :: _ => x end` (P4_Eliminates_AC.v:25): голова списка; для пустого списка — `default`. Определение с тем же именем и телом — P4ProhibitsAC.v:141. `L5_choose_in_nonempty` (:39): для непустого списка результат лежит в списке. Closed under the global context."
+  },
+  {
+   "line": 1385,
+   "theorem": "l5_resolve_gen_minimal",
+   "file": "src/L5Resolution.v",
+   "claim": "Эти конструкции формализуют, что при наличии порядка над элементами и непустого списка процесс, разворачиваемый по $L5$, всегда приходит к определённому результату.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Названная на странице лемма `l5_res_rule` утверждает только вид результата (`Some v`). Определённость результата доказана в L5Resolution.v: `l5_resolve_gen_in` (:176) — результат лежит в списке; `l5_resolve_gen_minimal` (:188) — он не больше всякого элемента списка; `l5_resolve_gen_deterministic` (:208) — он зависит только от состава списка. Все — Closed under the global context. В `L5_choose` порядок на элементах не участвует: берётся первая позиция списка."
+  },
+  {
+   "line": 1390,
+   "theorem": null,
+   "claim": "Полный механизм статуса, описанный в § 6.6, — с состоянием вида «действующий максимум плюс список повторных максимумов», с шаг-функцией, со сбросом повторов при смене максимума — в текущем репозитории отдельным файлом-автоматом *не* формализован.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Подтверждено поиском по `src`: записи состояния «максимум + список повторов» с шаг-функцией нет (см. запись стр. 1380). Набросок такого автомата проверен в пробном файле (`C:/Users/abary/tos-audit-build/_part01/ch06b/Check.v`): запись состояния, шаг-функция, теоремы о значении и носителе максимума, о составе списка повторов, о сбросе, о единственности носителя — Closed under the global context."
+  },
+  {
+   "line": 1398,
+   "theorem": null,
+   "claim": "Разобранная по шагам последовательность $1,3,2,5,4,5,7,7$ — точная иллюстрация этой схемы; но машинно-проверенной регистрацией всего механизма она пока не подкреплена.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно. В пробном файле прогон автомата на этой последовательности воспроизводит вычислением все стадии разбора стр. 1243–1310: шаг 6 — максимум 5 на позиции 4, повторы [6]; шаг 7 — максимум 7 на позиции 7, повторов нет; шаг 8 — повторы [8] (`example_stage_0` … `example_stage_8`)."
+  },
+  {
+   "line": 1404,
+   "theorem": "AC_is_L5",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Файл `P4_Eliminates_AC.v` содержит теорему `AC_is_L5` (и равную ей `P4_eliminates_AC`):",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Lemma AC_is_L5 : forall family : nat -> list nat, (forall i, family i <> nil) -> exists f, forall i, In (f i) (family i)` (:139); свидетель — `fun i => L5_choose (family i) 0`. Формула страницы совпадает с утверждением. Closed under the global context."
+  },
+  {
+   "line": 1404,
+   "theorem": "P4_eliminates_AC",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Файл `P4_Eliminates_AC.v` содержит теорему `AC_is_L5` (и равную ей `P4_eliminates_AC`):",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem P4_eliminates_AC` (:201) — то же утверждение дословно, доказательство `exact AC_is_L5`. Closed under the global context."
+  },
+  {
+   "line": 1414,
+   "theorem": "AC_is_L5",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "то есть выбор по *$\\mathbb{N}$-индексированному* семейству непустых списков — индекс $i$ пробегает *весь* $\\mathbb{N}$, без конечного ограничения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Индекс `i : nat` связан квантором всеобщности без ограничения. Версия с конечным фронтом — `P4_eliminates_AC_finite` (:217): `(forall i, i < N -> family i <> nil) -> forall i, i < N -> In (finite_choice_fn family i) (family i)`."
+  },
+  {
+   "line": 1416,
+   "theorem": "AC_on_nat",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Файл же `P4ProhibitsAC.v` определяет `AC_on_nat` с *той же* сигнатурой ($\\mathbb{N} \\to \\texttt{list nat}$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition AC_on_nat : Prop := forall F : nat -> list nat, (forall n, F n <> nil) -> exists f : nat -> nat, forall n, In (f n) (F n)` (:43) — то же утверждение, что `AC_is_L5`."
+  },
+  {
+   "line": 1418,
+   "theorem": "ac_completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "доказывает, что граф функции выбора — совокупность пар «индекс, выбранное значение», взятая как завершённое целое, — несовместим с $P4$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`ac_completed_graph_contradicts_P4` (:122): `AC_on_nat -> forall F, (forall n, F n <> nil) -> forall actual, P4_stage_bounded actual -> (forall f, (forall n, In (f n) (F n)) -> bridge (graph_indices (choice_graph f)) actual) -> False`. Слова «взятая как завершённое целое» соответствуют посылке `bridge`: всякий индекс графа актуален на стадии 0 (P4CompletedInfinity.v:48). Closed under the global context."
+  },
+  {
+   "line": 1421,
+   "theorem": "AC_on_nat_as_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Его теорема `AC_on_nat_as_rule` повторяет `AC_is_L5`: выбор как *правило* — голова списка по предъявленному индексу — есть теорема.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Lemma AC_on_nat_as_rule : AC_on_nat` (:160); свидетель — `fun n => L5_choose (F n) 0`. Closed under the global context."
+  },
+  {
+   "line": 1423,
+   "theorem": "completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Его теорема `completed_graph_contradicts_P4` показывает, что с $P4$ несовместимо *чтение* функции как завершённого графа, и это верно для графа любой всюду определённой функции, не только функции выбора.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`forall (f : nat -> nat) (actual : nat -> nat -> Prop), P4_stage_bounded actual -> bridge (graph_indices (choice_graph f)) actual -> False` (:108). «Чтение как завершённого графа» — посылка `bridge`; для графа функции она равносильна `forall n, actual 0 n` и от функции не зависит (пробный файл: `bridge_of_graph_iff_all_actual`). Closed under the global context."
+  },
+  {
+   "line": 1426,
+   "theorem": "P4_cuts_completed_keeps_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Позиция тома такова: *конечный* выбор (по списку, по конечному индексу) конструктивен и совместим с $P4$; $\\mathbb{N}$-индексированный выбор совместим с $P4$ как правило, отвечающее на предъявленный индекс, и несовместим с $P4$ как завершённый граф.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конечный выбор — `finite_choice_works` (:171), `P4_eliminates_AC_finite` (P4_Eliminates_AC.v:217). Правило при P4 — `choice_as_rule_compatible_with_P4` (:255): есть функция выбора и ограниченная по стадиям актуальность, при которой всякий индекс актуален на некоторой стадии. Завершённый граф — первая часть `P4_cuts_completed_keeps_rule` (:272), при посылке `bridge`. Все — Closed under the global context."
+  },
+  {
+   "line": 1432,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Зафиксировав механизм статуса через $E/R/R$ как конструкцию, выполняющую в ToS работу Аксиомы Выбора без её принятия",
+   "page_price": "Аксиома Выбора не принята",
+   "verdict": "ok",
+   "note": "В репозитории принята аксиома `L4_witness` (ToS_Axioms.v:105); из неё функция выбора строится для любого семейства: `forall (I A : Type) (R : I -> A -> Prop), (forall i, exists x, R i x) -> exists f, forall i, R i (f i)` (пробный файл: `functional_choice_from_L4`; допущение — только `L4_witness`). Глава оговаривает это на стр. 582–615: не принята сет-теоретическая форма, читаемая как завершённый граф."
+  },
+  {
+   "line": 1442,
+   "theorem": null,
+   "claim": "В § 6.1 формальная работа ToS была расчленена на три слоя: платформа CIC (слой A), два технических объявления `classic` и `L4_witness` (слой B), определения и теоремы ToS (слой C).",
+   "page_price": "два объявления",
+   "verdict": "ok",
+   "note": "Повтор разбиения § 6.1 (первая половина главы). О числе объявлений в репозитории — запись стр. 1451."
+  },
+  {
+   "line": 1451,
+   "theorem": "B_coeff_bounded",
+   "file": "src/navier_stokes/TriadicInteraction.v",
+   "claim": "Именно поэтому ToS-репозиторий обходится всего двумя техническими объявлениями: платформа CIC структурно созвучна позиции ToS, и многое из того, что иначе пришлось бы вводить явно, в CIC уже присутствует по построению.",
+   "page_price": "всего два объявления",
+   "verdict": "mismatch-price",
+   "note": "Логических допущений два: `classic` и `L4_witness`. Кроме них в репозитории объявлены `Axiom C_B_positive` (navier_stokes/TriadicInteraction.v:120), `Axiom B_coeff_bounded` (:122), `Parameter C_B` (:119), `Parameter B_raw` (navier_stokes/GalerkinSystem.v:208); по обходу компилятором 13.11.2026 на них стоят 316 теорем раздела Навье — Стокса (выборочно проверено: `coupling_for_sum_triad`, `ns_galerkin_bound_chain`). `classic` объявлен в трёх местах: стандартная библиотека через ToS_Axioms.v:31, foundation/Distinction.v:36, settheory/BorelDeterminacy.v:21."
+  },
+  {
+   "line": 1492,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В репозитории иерархия уровней ToS[^14] строится поверх универсной иерархии CIC: формальная иерархия типов ToS опирается на ту, что в CIC уже есть.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`Inductive Level : Set := L1 | LS : Level -> Level` (:59) и `Fixpoint level_lt` (:68) — тип меток и порядок на нём; `P1_no_self_membership : forall L, ~ (L << L)` (:126) доказана через `level_depth` и арифметику. С универсами эта разметка определением не связана: `System L1`, `System L2`, `System L3` имеют один и тот же тип `Type@{max(Set+1,Criterion.u0+1)}`, а уровень области — поле-метка `crit_level_witness`, задаваемая вручную. Критерий уровня L3 с областью `System L2` и законной меткой `L2 << L3` проверку универсов не проходит (universe inconsistency); в коде вместо этого индексы (`SystemL2Index := nat`, :372)."
+  },
+  {
+   "line": 1528,
+   "theorem": "nat_ind",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Для каждого объявленного индуктивного типа CIC *автоматически* строит соответствующий принцип индукции — для `nat` это `nat_ind`. Этот принцип не объявляется как аксиома: он есть прямое следствие того, как устроен индуктивный тип.",
+   "page_price": "не аксиома",
+   "verdict": "ok",
+   "note": "`nat_ind : forall P : nat -> Prop, P 0 -> (forall n, P n -> P (S n)) -> forall n, P n` — константа стандартной библиотеки (Corelib.Init.Datatypes), порождённая определением `nat`. Print Assumptions: Closed under the global context."
+  },
+  {
+   "line": 1548,
+   "theorem": "factorial_5",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "Когда в ToS проверяется, что `factorial 5` равно `120`, это проверяется *вычислением* — система разворачивает определение факториала и считает; никакой аксиомы для этого не требуется.",
+   "page_price": "никакой аксиомы",
+   "verdict": "ok",
+   "note": "`Lemma factorial_5 : factorial 5 = 120. Proof. reflexivity. Qed.` (:96); `factorial` — `Fixpoint` (:93). Closed under the global context."
+  },
+  {
+   "line": 1616,
+   "theorem": "classic",
+   "file": "src/ToS_Axioms.v",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Второй род — объявления `classic` и `L4_witness` в файле `ToS_Axioms.v`. Они *не выведены* внутри CIC — они объявлены директивой `Axiom`.",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "Статус назван честно: аксиома, не теорема. Уточнение о месте: в ToS_Axioms.v директива `Axiom` одна — `L4_witness` (:105); `classic` в этом файле не объявляется, а реэкспортируется из стандартной библиотеки (`Require Export Coq.Logic.Classical_Prop`, :31), где он объявлен как `Axiom`, — глава говорит это на стр. 208–219 и в сноске 3. Директивой `Axiom classic` в самом репозитории он объявлен в foundation/Distinction.v:36 и settheory/BorelDeterminacy.v:21."
+  },
+  {
+   "line": 1616,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Второй род — объявления `classic` и `L4_witness` в файле `ToS_Axioms.v`. Они *не выведены* внутри CIC — они объявлены директивой `Axiom`.",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "`Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x}` (ToS_Axioms.v:105)."
+  },
+  {
+   "line": 1621,
+   "theorem": null,
+   "claim": "Технические аксиомы суть *регистрация* в коде уже выведенных Законов $L3$ и $L4$ — регистрация, необходимая именно потому, что платформа CIC устроена определённым образом.",
+   "page_price": "аксиомы",
+   "verdict": "ok",
+   "note": "В коде это объявления без доказательства; вывода `classic` или `L4_witness` в Rocq нет — глава так и говорит («не выведены внутри CIC»). Слово «выведенных» относится к выводу Главы 3 в прозе, а не к доказательству в Rocq."
+  },
+  {
+   "line": 1652,
+   "theorem": "classic",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Закон $L3$ (Исключённого Третьего) инвариантен: он выведен из тотальности акта различения (Глава 3) и остаётся тем же, в какой бы системе ни велась формализация. Объявление `classic` зависит от платформы: оно существует *потому, что* CIC конструктивна.",
+   "page_price": "закон выведен в прозе Главы 3; в коде — объявление",
+   "verdict": "ok",
+   "note": "В Rocq L3 не выводится: `Axiom classic : forall P : Prop, P \\/ ~P` (foundation/Distinction.v:36; также стандартная библиотека через ToS_Axioms.v:31 и settheory/BorelDeterminacy.v:21). Теорема с именем закона `Law_of_ExcludedMiddle` (foundation/LawsFromDistinction.v:63) есть `exact classic`, а `L3_from_distinction` (:67) возвращает поле `exhaustive` записи `Distinction`. Глава 6 называет `classic` объявлением и слово «выведен» относит к выводу Главы 3: статус в этом месте назван честно."
+  },
+  {
+   "line": 1660,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Аналогично: $L4$ (Достаточного Основания) инвариантен; объявление `L4_witness` зависит от того, что CIC не выводит извлечение свидетеля конструктивно.",
+   "page_price": "объявление",
+   "verdict": "ok",
+   "note": "`L4_witness` — `Axiom` (ToS_Axioms.v:105). Производные от него: `L4_definite` (:135; допущение — `L4_witness`), `L3_informative` (:119; допущения — `Classical_Prop.classic` и `L4_witness`)."
+  },
+  {
+   "line": 1703,
+   "theorem": "classic",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Формально `classic` и `L4_witness` — настоящие аксиомы CIC; но онтологически они не *основания* ToS, а технические объявления, регистрирующие два Закона в платформе.",
+   "page_price": "аксиомы",
+   "verdict": "ok",
+   "note": "Статус назван честно. По компилятору в выводе `Print Assumptions` стоят `Classical_Prop.classic` либо `Distinction.classic` (например, у `distinction_of`, foundation/Distinction.v:75) и `ToS_Axioms.L4_witness`."
+  },
+  {
+   "line": 1719,
+   "theorem": null,
+   "claim": "У ToS есть технический слой — два объявления, регистрирующие два из Законов в конкретной платформе.",
+   "page_price": "два объявления",
+   "verdict": "ok",
+   "note": "Верно для объявлений, регистрирующих Законы: `classic` (объявлен в трёх местах) и `L4_witness`. О прочих объявлениях репозитория — запись стр. 1451."
+  },
+  {
+   "line": 1731,
+   "theorem": null,
+   "file": "src/navier_stokes/TriadicInteraction.v",
+   "claim": "Формально аксиомы у ToS есть — два объявления в CIC",
+   "page_price": "два объявления",
+   "verdict": "mismatch-price",
+   "note": "То же расхождение, что на стр. 1451: кроме двух логических аксиом, в формализации объявлены две аксиомы (`C_B_positive`, `B_coeff_bounded`, :120, :122) и два параметра (`C_B`, :119; `B_raw`, GalerkinSystem.v:208) раздела Навье — Стокса."
+  },
+  {
+   "line": 1738,
+   "theorem": null,
+   "file": "src/navier_stokes/TriadicInteraction.v",
+   "claim": "Этот объём — два объявления, `classic` и `L4_witness`. Они минимальны не в смысле «мы выбрали взять поменьше», а в смысле «CIC по своему устройству требует именно стольких, и не больше»: всё прочее, что нужно ToS, либо встроено в платформу (§ 6.7), либо выводится (Законы, Принципы, определения, теоремы).",
+   "page_price": "ровно два объявления, не больше",
+   "verdict": "mismatch-price",
+   "note": "«Не больше» и «всё прочее … выводится» компилятором не подтверждаются: теоремы раздела Навье — Стокса (316 по обходу 13.11.2026) стоят на `C_B_positive`, `B_coeff_bounded`, `C_B`, `B_raw` (см. запись стр. 1451). Минимальность в смысле независимости двух объявлений друг от друга и от CIC — утверждение метатеории; компилятором оно не проверяется."
+  },
+  {
+   "line": 1747,
+   "theorem": null,
+   "file": "src/navier_stokes/TriadicInteraction.v",
+   "claim": "ToS объявляет в CIC две технические аксиомы.",
+   "page_price": "две аксиомы",
+   "verdict": "mismatch-price",
+   "note": "То же расхождение, что на стр. 1451: в формализации объявлены ещё две аксиомы и два параметра раздела Навье — Стокса."
+  },
+  {
+   "line": 1849,
+   "theorem": null,
+   "claim": "Намечается это так: закон $L1$ (отсутствие привилегированной позиции) сопоставляется двойной стохастичности матрицы перехода; связь между двумя сторонами различения, применённая к графовой структуре, — унитарности; закон $L5$ — неделимости процесса.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус «намечается» честный. Файлы с соответствующими названиями в репозитории есть: foundation/L1_DoublyStochastic.v (`L1_doubly_stochastic`, :84: строчно-стохастическая матрица со стационарным равномерным распределением столбцово-стохастична), foundation/L5_Indivisible.v (`L5_implies_indivisible`, :141). Их содержание здесь подробно не сверялось."
+  },
+  {
+   "line": 1854,
+   "theorem": null,
+   "file": "src/foundation/UnistochasticFromGraph.v",
+   "claim": "В репозитории *уже есть* файлы, проверяющие *отдельные математические компоненты* унистохастической структуры[^16].",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файлы есть: UnistochasticFromGraph.v (19 Qed), BlockCayleyUnistochastic.v, L1_DoublyStochastic.v, DoublyStochasticForkBridge.v, GeneralHermitianCayley.v в `src/foundation/`. Все 19 утверждений первого — Closed under the global context."
+  },
+  {
+   "line": 1856,
+   "theorem": null,
+   "claim": "Но это *не* то же самое, что полный вывод квантовой теории из акта различения: проверены отдельные матричные леммы, а не философско-физический вывод структуры в целом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в названном файле — леммы о рациональных матрицах; вывода квантовой теории в формализации нет."
+  },
+  {
+   "line": 1868,
+   "theorem": null,
+   "claim": "Отдельные математические компоненты этого вывода уже формализованы; полный вывод — предмет физики.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "См. записи стр. 1854 и 1914."
+  },
+  {
+   "line": 1874,
+   "theorem": null,
+   "claim": "Глава 6 завершила *формальное* измерение Части I: разобран аппарат — Законы, Принципы, $E/R/R$-структура, технические основания реализации в Rocq, механизм статуса. Этот аппарат построен и формально проверен.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: слова «формально проверен» отнесены и к механизму статуса, тогда как на стр. 1390–1401 сказано, что полный механизм в репозитории не формализован (поиск по `src` это подтверждает), и к Законам, два из которых в Rocq — объявления без доказательства (`classic`, `L4_witness`). Набросок автомата статуса проверен в пробном файле (`status_run`, `status_run_inv`, `status_reset_on_new_max`, `status_maximum_unique`, пример главы) — Closed under the global context."
+  },
+  {
+   "line": 1910,
+   "theorem": "Observable",
+   "file": "src/CoinductiveSystems.v",
+   "claim": "Соответствующий тип `Observable` в файле `src/CoinductiveSystems.v` репозитория.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись `Observable` (CoinductiveSystems.v:29) объявлена в разделе с переменной `A : Type`: `obs_process : GenProcess A` (функция `nat -> A`), `obs_criterion : A -> Prop`. В файле 16 Qed, аксиом нет."
+  },
+  {
+   "line": 1911,
+   "theorem": "l5_res_rule",
+   "file": "src/FormationRules.v",
+   "claim": "`l5_res_rule`: для непустого списка с разрешимым полным порядком функция `l5_resolve_gen` возвращает значение определённого вида (`Some v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска точна: заключение леммы — `exists v, l5_resolve_gen l = Some v` (FormationRules.v:177); `DecTotalOrder` — разрешимый полный порядок (L5Resolution.v:44). Closed under the global context."
+  },
+  {
+   "line": 1911,
+   "theorem": "l5_resolve_gen",
+   "file": "src/L5Resolution.v",
+   "claim": "`l5_res_rule`: для непустого списка с разрешимым полным порядком функция `l5_resolve_gen` возвращает значение определённого вида (`Some v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`l5_resolve_gen l := match l with [] => None | x :: xs => Some (fold_left l5_min_step xs x) end` (L5Resolution.v:76): наименьший элемент при проходе списка слева направо."
+  },
+  {
+   "line": 1912,
+   "theorem": "level_lt",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Тип `Level` и отношение `level_lt` в файле `src/TheoryOfSystems_Core_ERR.v`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Level` (:59) и `level_lt` (:68) объявлены в названном файле; объявления с теми же именами есть ещё в нескольких файлах (`Level` — в четырёх, `level_lt` — в пяти)."
+  },
+  {
+   "line": 1912,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "формальная иерархия ToS строится поверх универсной иерархии CIC.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "См. запись стр. 1492: `Level : Set` — тип меток, все `System L` и `Criterion L` лежат в одном универсе, метка уровня области (`crit_level_witness`) с универсом области не связана; систему, областью которой служат системы, проверка универсов не пропускает ни при какой метке."
+  },
+  {
+   "line": 1913,
+   "theorem": "process_p4_grand_synthesis",
+   "file": "src/foundation/ProcessP4Synthesis.v",
+   "claim": "Процессная природа бесконечности зафиксирована в файле `src/foundation/ProcessP4Synthesis.v` репозитория — в формулировке «бесконечность есть процесс, не объект» и в конструкции порождающего процесса.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: формулировка «Infinity is a process, not an object» стоит в комментарии-заголовке файла (строки 4 и 9) и теоремой не является. Доказано: `process_p4_grand_synthesis` (:140) — конъюнкция шести фактов из других файлов: запрет завершённой бесконечности при посылке `bridge`; `forall n, exists m, n < m`; неотрицательность стадийной метрики и её нуль на диагонали; полнота; `length (gp_prefix p n) = n`. «Конструкция порождающего процесса» — определение `GenProcess A := nat -> A` (:115; общий процесс) с `gp_prefix`. Closed under the global context; в файле 9 Qed."
+  },
+  {
+   "line": 1914,
+   "theorem": null,
+   "file": "src/foundation/UnistochasticFromGraph.v",
+   "claim": "В частности, файл `src/foundation/UnistochasticFromGraph.v`: формализованы матрицы над $ℚ$, ортогональность, поэлементный квадрат (`gamma_of`), двойная стохастичность, унистохастичность, конкретные примеры $2\\times2$ и $3\\times3$, теорема `unistochastic_implies_DS`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Перечень соответствует файлу: `Mat := nat -> nat -> Q` (:20), `is_orthogonal` (:27), `is_transpose_orthogonal` (:75), `gamma_of` (:31), `is_doubly_stochastic` (:94), `is_unistochastic` (:100), примеры `U2`/`Gamma2` и `U3`/`Gamma3`. Матрицы — рациональные ортогональные; комплексных унитарных в этом файле нет. 19 Qed, все — Closed under the global context."
+  },
+  {
+   "line": 1914,
+   "theorem": "gamma_of",
+   "file": "src/foundation/UnistochasticFromGraph.v",
+   "claim": "поэлементный квадрат (`gamma_of`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition gamma_of (U : Mat) (i j : nat) : Q := U i j * U i j` (:31)."
+  },
+  {
+   "line": 1914,
+   "theorem": "Gamma2_unistochastic",
+   "file": "src/foundation/UnistochasticFromGraph.v",
+   "claim": "конкретные примеры $2\\times2$ и $3\\times3$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Gamma2_unistochastic : is_unistochastic Gamma2 2` (:160; U2 = [[3/5, −4/5], [4/5, 3/5]]) и `Gamma3_unistochastic : is_unistochastic Gamma3 3` (:234). Closed under the global context."
+  },
+  {
+   "line": 1914,
+   "theorem": "unistochastic_implies_DS",
+   "file": "src/foundation/UnistochasticFromGraph.v",
+   "claim": "теорема `unistochastic_implies_DS`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`unistochastic_implies_DS : forall (Gamma : Mat) (N : nat), is_unistochastic Gamma N -> is_doubly_stochastic Gamma N` (:312). `is_unistochastic` (:100): есть рациональная U с U·Uᵀ = I и Uᵀ·U = I на первых N индексах и Gamma = поэлементный квадрат U; `is_doubly_stochastic` (:94): суммы первых N элементов каждой строки и каждого столбца равны 1 (неотрицательность в определение не входит; для унистохастической матрицы она верна — пробный файл: `unistochastic_nonneg`). Closed under the global context."
+  }
+ ]
+}

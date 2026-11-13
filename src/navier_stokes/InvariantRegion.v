@@ -14,7 +14,7 @@
 (*  Roles:    trap as regulator, flow direction as diagnostic              *)
 (*  Rules:    boundary inward → invariant → enstrophy bounded → regularity *)
 (*  STATUS: target ~45 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
+(*  AXIOMS: classic. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -26,6 +26,9 @@ From ToS Require Import navier_stokes.EnergyEstimate.
 From ToS Require Import navier_stokes.TriadicInteraction.
 From ToS Require Import navier_stokes.PerModeBound.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: The Invariant Region  (~10 lemmas)                        *)
@@ -569,3 +572,5 @@ Proof.
   - intros nu k Hnu Hk. apply boundary_flow_all_modes; assumption.
   - apply harmonic_linear_bound.
 Qed.
+
+End WithNSCoupling.

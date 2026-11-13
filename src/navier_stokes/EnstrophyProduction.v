@@ -25,6 +25,9 @@ From ToS Require Import navier_stokes.EnergyEstimate.
 From ToS Require Import navier_stokes.Vorticity.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ========================================================================= *)
 (*  PART I: Stretching Interpolation Bounds                                  *)
 (* ========================================================================= *)
@@ -310,3 +313,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~25 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

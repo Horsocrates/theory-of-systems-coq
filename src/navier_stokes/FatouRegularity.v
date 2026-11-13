@@ -32,6 +32,9 @@ From ToS Require Import navier_stokes.EnergyEstimate.
 From ToS Require Import navier_stokes.TriadicInteraction.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* Local helpers for Q division *)
 Lemma Qdiv_pos : forall (x y : Q), 0 < x -> 0 < y -> 0 < x / y.
 Proof.
@@ -410,3 +413,5 @@ Qed.
 
 Print Assumptions markov_large_set_bounded.
 Print Assumptions blowup_measure_zero.
+
+End WithNSCoupling.

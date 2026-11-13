@@ -12,7 +12,7 @@
 (*  Roles:    process mathematics as unifier, A = exists as origin         *)
 (*  Rules:    elementary inequalities -> Millennium problems               *)
 (*  STATUS: target ~30 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, L4_witness, C_B_positive, B_coeff_bounded (B_antisym: Lemma 06.2026) *)
+(*  AXIOMS: classic, L4_witness. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -44,6 +44,9 @@ From ToS Require Import gauge.StripSynthesis.
 From ToS Require Import gauge.DimensionLadder.
 From ToS Require Import gauge.Continuum3DSynthesis.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: The Complete NS Chain  (~10 lemmas)                       *)
@@ -288,6 +291,9 @@ Proof. lra. Qed.
    foundation/HeavyWallAudit.v (machine-checked axiom audit),
    docs/database/ (per-file Qed counts).  Current axioms of this chain
    (Print Assumptions verified 2026-06-10): C_B_positive (+ Parameter C_B);
+   [13.11.2026: Closed under the global context — C_B, C_B_positive and the
+   coupling bound are fields of the record of premises NSCoupling, an argument
+   of the theorem]
    B_antisym is a Lemma; B_coeff_bounded is not on the capstone path. *)
 
 (* Process perspective *)
@@ -452,3 +458,5 @@ Qed.
   A = exists. Therefore mathematics.
   Therefore mass gap. Therefore regularity.
 *)
+
+End WithNSCoupling.

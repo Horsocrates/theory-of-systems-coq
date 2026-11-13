@@ -24,6 +24,9 @@ From ToS Require Import navier_stokes.TriadicInteraction.
 From ToS Require Import navier_stokes.InvariantRegion.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: Smooth Decay  (~10 lemmas)                                *)
 (* ================================================================== *)
@@ -366,3 +369,5 @@ Proof.
   - apply rescaled_in_region.
   - apply rescale_factor_positive.
 Qed.
+
+End WithNSCoupling.

@@ -2126,3 +2126,10 @@ src/EVT_ArgmaxNotCauchy.v
 src/UnitIntervalUncountableGeneral.v
 src/foundation/OrdinalOrders.v
 src/settheory/ZermeloDeterminacy.v
+src/foundation/DistinctionCoDefinition.v
+src/LevelForgetFunctor.v
+src/foundation/PrinciplesFromLawsDerived.v
+src/foundation/ERRStratification.v
+src/foundation/StatusMechanism.v
+src/settheory/ListModes.v
+src/foundation/GraphTransitionN2.v

@@ -15,7 +15,7 @@
 (*  Roles:    bounds as regulators, uniformity as passage enabler          *)
 (*  Rules:    energy -> per-mode -> enstrophy -> bootstrap -> H^s          *)
 (*  STATUS: target ~40 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
+(*  AXIOMS: classic. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -32,6 +32,9 @@ From ToS Require Import navier_stokes.SmoothInitialData.
 From ToS Require Import navier_stokes.TransientClosure.
 From ToS Require Import navier_stokes.LowModeControl.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: Hierarchy of Uniform Bounds  (~12 lemmas)                 *)
@@ -480,3 +483,5 @@ Proof.
   - intros. apply total_enstrophy_bound_positive; assumption.
   - intros. apply compactness_const_positive; assumption.
 Qed.
+
+End WithNSCoupling.

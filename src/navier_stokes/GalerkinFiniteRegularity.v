@@ -33,6 +33,9 @@ From ToS Require Import navier_stokes.GalerkinSystem.
 From ToS Require Import navier_stokes.EnergyEstimate.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: finite-K energy time-series is Species I (unconditional)   *)
 (* ================================================================== *)
@@ -130,3 +133,5 @@ Print Assumptions galerkin_finite_regularity_capstone.
 (*  K-growing ceiling); the NS wall is purely the K->infinity role-limit,     *)
 (*  a Species-II question in the sense of RoleLimitSpecies.v.                  *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

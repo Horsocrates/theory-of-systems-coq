@@ -26,6 +26,9 @@ From ToS Require Import navier_stokes.GalerkinSystem.
 From ToS Require Import navier_stokes.EnergyEstimate.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (** Helper: left multiply compat for Qle *)
 Lemma Qmult_le_l : forall x y z,
   x <= y -> 0 <= z -> z * x <= z * y.
@@ -116,11 +119,13 @@ Proof. intros. unfold triad_count. lia. Qed.
 (*  Part II: Coupling Strength  (~10 lemmas)                          *)
 (* ================================================================== *)
 
-Parameter C_B : Q.
-Axiom C_B_positive : 0 < C_B.
-
-Axiom B_coeff_bounded : forall k l m,
+(** C_B and C_B_positive are fields of the record of premises NSCoupling
+    (GalerkinSystem.v). The bound on the coupling — formerly
+    `Axiom B_coeff_bounded` — is its field [B_raw_antisym_bounded], restated
+    here for the antisymmetrized coefficient under the old name. *)
+Lemma B_coeff_bounded : forall k l m,
   Qabs (B_coeff k l m) <= C_B * inject_Z (Z.of_nat (Nat.max k (Nat.max l m))).
+Proof. intros k l m. unfold B_coeff. apply B_raw_antisym_bounded. Qed.
 
 Lemma coupling_for_sum_triad : forall k l m,
   k = (l + m)%nat -> (1 <= l)%nat -> (1 <= m)%nat ->
@@ -590,3 +595,5 @@ Proof.
   - apply clean_forcing_nonneg; assumption.
   - apply steady_state_bound_positive; assumption.
 Qed.
+
+End WithNSCoupling.

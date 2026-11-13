@@ -32,6 +32,9 @@ From ToS Require Import navier_stokes.InvariantRegion.
 From ToS Require Import navier_stokes.TransientClosure.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: The Three Faces of the Wall  (~12 lemmas)                 *)
 (* ================================================================== *)
@@ -383,3 +386,5 @@ Proof.
   - apply step4_bootstrap.
   - intros. apply wall_face_3_rdt; assumption.
 Qed.
+
+End WithNSCoupling.

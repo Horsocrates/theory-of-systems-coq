@@ -33,6 +33,9 @@ From ToS Require Import navier_stokes.EnergyConstraint.
 From ToS Require Import navier_stokes.Depletion.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: What Each Attack Achieved                                  *)
 (* ================================================================== *)
@@ -360,3 +363,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~35 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

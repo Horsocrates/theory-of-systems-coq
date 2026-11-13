@@ -12,7 +12,7 @@
 (*  Roles:    invariance as regulator, bootstrap as amplifier              *)
 (*  Rules:    data∈R → R invariant → enstrophy → Sobolev → C^∞           *)
 (*  STATUS: target ~40 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
+(*  AXIOMS: classic. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -27,6 +27,9 @@ From ToS Require Import navier_stokes.EnstrophyConvergence.
 From ToS Require Import navier_stokes.InvariantRegion.
 From ToS Require Import navier_stokes.SmoothInitialData.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: The Main Chain  (~12 lemmas)                              *)
@@ -287,3 +290,5 @@ Proof.
   - apply partial_enstrophy_monotone.
   - apply harmonic_linear_bound.
 Qed.
+
+End WithNSCoupling.

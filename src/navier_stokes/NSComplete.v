@@ -8,7 +8,7 @@
 (*  Roles:    synthesis as clarity, honesty as scientific value             *)
 (*  Rules:    proved -> conditional -> wall -> P4 -> summary               *)
 (*  STATUS: target ~35 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
+(*  AXIOMS: classic. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -32,6 +32,9 @@ From ToS Require Import navier_stokes.AttackSynthesis.
 From ToS Require Import navier_stokes.ProcessNS.
 From ToS Require Import gauge.StripSpectrum.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: Unconditional Results  (~10 lemmas)                       *)
@@ -326,3 +329,5 @@ Qed.
 
   THIS IS AN HONEST RESULT.
 *)
+
+End WithNSCoupling.

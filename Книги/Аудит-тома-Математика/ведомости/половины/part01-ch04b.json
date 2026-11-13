@@ -1,0 +1,629 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/04 ERR онтология системы.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 1078,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "был кратко введён тип `Level` с оператором строгого порядка $\\ll$ и функцией глубины `level_depth`.[^13]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Level : Set := L1 | LS : Level -> Level` (:59); порядок — `Fixpoint level_lt` (:68) с записью `l1 << l2` (:74). Closed under the global context."
+  },
+  {
+   "line": 1078,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "был кратко введён тип `Level` с оператором строгого порядка $\\ll$ и функцией глубины `level_depth`.[^13]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Fixpoint level_depth (l : Level) : nat` (:78): `L1` ↦ 1, `LS l'` ↦ `S (level_depth l')`. Closed under the global context."
+  },
+  {
+   "line": 1082,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Каждая система $S$ располагается на определённом уровне — $\\text{Level}(S) \\in \\texttt{Level}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Уровень — параметр типа: `Record System (L : Level)` (:203), `Record FunctionalSystem (L : Level)` (:1698). На уровне `L1` систем `System L1` нет: критерию нужна метка строго ниже своего уровня (`crit_level_valid`), а ниже `L1` уровней нет (пробный файл: no_system_at_L1, Closed)."
+  },
+  {
+   "line": 1083,
+   "theorem": "FunctionalSystem",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Элементы системы $S$ располагаются на уровне строго ниже: $\\text{Level}(e) \\ll \\text{Level}(S)$ для всякого элемента $e \\in S$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `fs_level_valid : forall e, fs_element_level e << L` записи `FunctionalSystem` (:1698) — требование, встроенное в запись, а не теорема; уровень элемента назначается полем `fs_element_level` (пробный файл: element_label_is_assigned). В записи `System L` метка одна на критерий (`crit_level_witness`, `crit_level_valid`, :163) и с областью критерия не связана; мост двух записей — `bridge_grading_valid` (foundation/ERRSystemBridge.v:107)."
+  },
+  {
+   "line": 1084,
+   "theorem": "L5_no_infinite_descent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Каждый конкретный уровень имеет конечную глубину относительно основания — это и фиксирует теорема `L5_no_infinite_descent` из Главы 3.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Утверждение теоремы другое: `forall l1 l2 : Level, l1 << l2 -> level_depth l1 < level_depth l2` (:130) — глубина строго убывает при спуске; Closed. Конечность глубины даёт уже тип функции `level_depth : Level -> nat`. Страница описывает прежнюю формулировку (`exists n, level_depth l = n`), заменённую в июне 2026 (комментарий :126–129)."
+  },
+  {
+   "line": 1084,
+   "theorem": "no_infinite_level_regress",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "но саму теорему о невозможности бесконечной нисходящей цепи уровней пришлось бы формулировать отдельно — теорема `L5_no_infinite_descent` доказывает более слабое утверждение о конечной глубине каждого уровня.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема сформулирована и доказана: `no_infinite_level_regress : forall f : nat -> Level, ~ (forall n, level_lt (f (S n)) (f n))` (:137); также `level_lt_wf : well_founded level_lt` и `level_foundation_form` (foundation/TransfiniteInductionLevel.v:43, :122). Все — Closed. Из нынешней `L5_no_infinite_descent` она следует в несколько строк (пробный файл: no_infinite_descent_from_L5)."
+  },
+  {
+   "line": 1086,
+   "theorem": "level_depth_injective",
+   "file": "src/UniversePolymorphism.v",
+   "claim": "Поскольку каждый уровень имеет конечную глубину, ему можно сопоставить натуральное число — эту глубину, считая от основания.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`level_depth : Level -> nat`, `level_depth L1 = 1`; нумерация взаимно однозначна — `level_depth_injective : level_depth l1 = level_depth l2 -> l1 = l2` (:59). «Неограниченно вверх» — `level_no_top` (foundation/TransfiniteInductionLevel.v:75). Closed under the global context."
+  },
+  {
+   "line": 1098,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Эти доменные ярусы *не следует* отождествлять с формальными конструкторами типа `Level` из `TheoryOfSystems_Core_ERR.v`, где $L_1$ обозначает не «первый ярус некоторой предметной области», а *Логику / основание*, а $L_2, L_3, …$ — надстраиваемые над ней уровни.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструкторов два — `L1` и `LS` (:59–61); `L2 := LS L1`, `L3 := LS L2` — определения (:63–64). «Логика / основание» — комментарий к конструктору `L1` (:60); формального объекта «Логика» в этом файле нет."
+  },
+  {
+   "line": 1169,
+   "theorem": "L5_no_infinite_descent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "каждый уровень имеет конечную глубину; потому иерархия имеет *нижнюю границу* — базовый уровень $L_1$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Названная теорема утверждает строгое убывание глубины при спуске, а не конечность глубины (см. запись стр. 1084). Нижняя граница доказана отдельно и следует из определения порядка: `L1_minimal : forall l, ~ (l << L1)`, `L1_lt_any_LS : forall l, L1 << LS l` (UniversePolymorphism.v:225, :248); Closed."
+  },
+  {
+   "line": 1176,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "На самом нижнем уровне иерархии работает простейший акт различения — запись `Distinction`, разобранная в Главе 2.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Distinction` (:67). Типом `Level` запись не размечена — страница оговаривает это на стр. 1540–1544. На формальном уровне `L1` систем с элементами нет: `System L1` пуст, у `FunctionalSystem L1` нет элементов (пробный файл: no_system_at_L1, functional_system_L1_has_no_elements)."
+  },
+  {
+   "line": 1194,
+   "theorem": "Absolute",
+   "external": true,
+   "assumptions": "не применимо (объекта с таким именем в формализации нет — это и утверждает страница)",
+   "claim": "Всё, что говорится ниже об Абсолюте, *не является* теоремой текущей Rocq-формализации. В Coq-файлах репозитория нет формального объекта `Absolute`, нет Логики и Источника как элементов некоторой мета-системы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; `Locate Absolute` — объекта нет, слова «Абсолют» в `src` нет. Логика и Источник названы в одном файле: `Inductive Sys := SLogic | SSource | SLight | SNest n` с функцией `parent` (foundation/KnowledgeQuestionPath.v:74; `source_inside_logic : parent SSource = SLogic`, :96) — перечисление с Логикой наверху, не мета-система с двумя элементами и не запись E/R/R."
+  },
+  {
+   "line": 1196,
+   "theorem": null,
+   "claim": "Формализация, разобранная в предыдущих разделах, даёт E/R/R как структуру *систем*; настоящий же раздел есть *метафизическое применение* этой структуры — E/R/R-разбор Абсолюта, связывающий настоящий том с «Метафизикой». Это содержательный, а не машинно-проверенный шаг.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус раздела назван честно: записей и теорем об Абсолюте в формализации нет."
+  },
+  {
+   "line": 1341,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Их вывод в Rocq как теорем (Глава 3) — методологическое прослеживание, не онтологическое основание.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: в записи `Distinction` L2 и L3 даны полями `exclusive` и `exhaustive`; `L2_from_distinction`, `L3_from_distinction` (:50, :67) эти поля проецируют, L4 (`Law_of_SufficientReason`, :79) — то же поле `exclusive` в другой записи. L3 для произвольной пропозиции — аксиома: `Law_of_ExcludedMiddle` (:63) — Axioms: Distinction.classic. L1 — `reflexivity`; L5 — свойство типа `Level`, от записи не зависит. Теоремой без опоры на данное является L2 в общей форме (`Law_of_NonContradiction`, :45; Closed)."
+  },
+  {
+   "line": 1362,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "было показано, что $L4$ *самообоснован* в формальной системе Rocq — закон достаточного основания обосновывает сам себя.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`L4_self_grounding : forall D : Distinction, positive D -> ~ negative D` (:128), доказательство — из поля `exclusive D`; Closed. Утверждение есть поле `exclusive` в иной записи (пробный файл: L4_form_is_L2_form); применения закона к самому себе в нём нет — «самообоснование» стоит в имени теоремы."
+  },
+  {
+   "line": 1384,
+   "theorem": "err_meta_system",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "В файле `PrinciplesToERR.v` E/R/R-триада записана как объект `ERRSystem` (`err_meta_system`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`err_meta_system := mkERRSys 3 …` (:45): три компонента с категориями Element, Role, Rule; ссылки 2 → 1 и 1 → 0 (правило → роль → элемент). Таблица записана определением."
+  },
+  {
+   "line": 1384,
+   "theorem": "ERRSystem",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "В файле `PrinciplesToERR.v` E/R/R-триада записана как объект `ERRSystem` (`err_meta_system`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record ERRSystem := mkERRSys { errs_n_components : nat; errs_category : nat -> ERRCategory; errs_references : nat -> nat -> bool }` (:39): число компонентов, категория каждого, таблица ссылок. Содержимого компонентов и уровней запись не хранит."
+  },
+  {
+   "line": 1386,
+   "theorem": "err_self_well_formed",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "теорема `err_self_well_formed` доказывает, что она проходит тот самый критерий хорошей сформированности из `ERRWellFormedness.v`[^16] — E/R/R удовлетворяет собственному критерию.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "`err_self_well_formed : is_well_formed err_meta_system = true` (:53), `vm_compute`; Closed under the global context. Проверено вычислением: у таблицы из трёх компонентов нет ссылки компонента на себя и нет ссылки правила на правило (точное содержание критерия — пробный файл: is_well_formed_spec)."
+  },
+  {
+   "line": 1390,
+   "theorem": "self_application_not_self_membership",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "теорема `self_application_not_self_membership` разделяет два смысла «E/R/R применяется к себе». Это *самоприменение* (стратифицированное самоописание, уровнем ниже), а *не* самочленство ($x \\in x$, при котором $\\mathrm{level}(S) < \\mathrm{level}(S)$), запрещаемое $P1$; и потому оно $P1$-*совместимо*, а не исключение из неё.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Утверждение — конъюнкция двух вычислений: `is_well_formed err_meta_system = true /\\ is_well_formed russell_system = false` (:59); Closed. Уровней, отношения принадлежности и $P1$ в нём нет: запись `ERRSystem` уровней не содержит. Две таблицы различает одна клетка: у `russell_system` задана ссылка компонента 0 на себя."
+  },
+  {
+   "line": 1396,
+   "theorem": "err_self_well_formed",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "Самосогласованность E/R/R доказана отдельной Rocq-теоремой, без аксиом; содержательный разбор ниже разворачивает то, что эта теорема фиксирует.",
+   "page_price": "без аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Цена верна (Closed). Теорема фиксирует таблицу из трёх компонентов — по одному на категорию (Element, Role, Rule); разбор ниже (стр. 1402–1437) устроен иначе: три категории как три элемента, три роли, два слоя правил. Таблицы, отвечающей разбору, в формализации нет (набросок — пробный файл: err_self_application_system, проверку проходит)."
+  },
+  {
+   "line": 1452,
+   "theorem": "is_well_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "зафиксирован критерий: система *хорошо сформирована*, если каждый её компонент относится ровно к одной E/R/R-категории и нет *самореференции* через категории.[^17]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`is_well_formed S := no_self_reference S && rules_above_elements S` (:97): (1) ни один компонент не ссылается на себя; (2) ни одно правило не ссылается на правило. Первое условие страницы выполнено самим представлением. Второе в коде иное: взаимная ссылка двух компонентов (самореференция через посредника) проверку проходит, а ссылка правила на другое правило — не проходит (пробный файл: is_well_formed_spec, two_cycle_well_formed, rule_refers_other_rule_ill_formed; Closed)."
+  },
+  {
+   "line": 2172,
+   "theorem": "no_self_reference",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Точные формулировки `no_self_reference` и `rules_above_elements` разбираются в «Парадоксы как смешение E/R/R-категорий».",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Определение есть (:61): для каждого k меньше числа компонентов `errs_references S k k = false`. В названном разделе (стр. 1866–2152) оба имени не встречаются и формулировки не приводятся; на странице их нет нигде, а словесное описание критерия (стр. 1452) с кодом расходится."
+  },
+  {
+   "line": 2172,
+   "theorem": "rules_above_elements",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Точные формулировки `no_self_reference` и `rules_above_elements` разбираются в «Парадоксы как смешение E/R/R-категорий».",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Определение есть (:72) и проверяет одно: компонент-правило не ссылается на компонент-правило. Отношения «правила выше элементов» в нём нет: ссылка элемента на правило проверку проходит (пробный файл: element_refers_rule_well_formed). В названном разделе формулировка не приводится."
+  },
+  {
+   "line": 1472,
+   "theorem": "err_self_well_formed",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "Самосогласованность E/R/R доказана машинно (`err_self_well_formed`, `PrinciplesToERR.v`; см. замечание выше); содержательная проверка по критерию `ERRWellFormedness.v` с ней согласна:",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Машинно проверена таблица из трёх компонентов, не совпадающая с содержательным разбором (см. запись стр. 1396): теорема о записанной таблице подана как теорема о самосогласованности E/R/R."
+  },
+  {
+   "line": 1473,
+   "theorem": "is_well_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "самоприменение E/R/R *не обнаруживает структурного нарушения* по тем же признакам (самореференция, смешение категорий), по которым формально диагностируются парадоксальные системы.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Формально диагностика идёт по двум признакам: ссылка компонента на себя и ссылка правила на правило. Признака «смешение категорий» в критерии нет: категория компонента — значение функции, и в записи `ERRSystem` смешение невыразимо (пробный файл: every_ERRSystem_unmixed, Closed)."
+  },
+  {
+   "line": 1489,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "основанием $L4$ является структурная несовместность противоречия (поле `exclusive` в записи `Distinction`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует доказательству: `L4_self_grounding` получена из поля `exclusive D` (:128–130); Closed. Следующая фраза страницы («закон обосновывает сам себя без обращения к чему-либо внешнему») формального соответствия не имеет: в Rocq утверждение L4 получено из другого данного — поля `exclusive` (см. запись стр. 1362)."
+  },
+  {
+   "line": 1529,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Запись `Distinction` с четырьмя полями `positive`, `negative`, `exclusive`, `exhaustive`, формализующая акт различения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~ (positive /\\ negative); exhaustive : positive \\/ negative }` (:67)."
+  },
+  {
+   "line": 1532,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "формальный вывод законов из этой записи — в Главе 3.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: `five_laws_from_distinction` (:139) получает L2 и L3 как `exclusive D` и `exhaustive D` — проекции полей записи; L4 — из того же поля `exclusive`; L1 — `reflexivity`; L5 — свойство типа `Level`, от D не зависит. Из записи законы L2–L4 распаковываются, а не выводятся (см. запись стр. 1341)."
+  },
+  {
+   "line": 1542,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "это — интерпретация в терминах иерархии, а не буквальная типизация `Distinction` в `Level`: формально `Distinction` есть `Record`, не объект `System L`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: `Distinction` — `Record` (:67); объявления, дающего ему тип `System L`, в `src` нет (поиск). Шапка `PrinciplesToERR.v` (:21–26) говорит то же."
+  },
+  {
+   "line": 1558,
+   "theorem": "L3_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "*Универсальный слой* — законы $L1$–$L5$. Они работают в `Distinction` как теоремы, выведенные в Главе 3.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: `L2_from_distinction` и `L3_from_distinction` (:50, :67) суть проекции полей `exclusive` и `exhaustive` — тех самых, что следующий абзац страницы относит к конкретному слою правил; для L2 и L3 два слоя формально совпадают. `L3_from_distinction` — Closed потому, что поле дано; построить различие для произвольной пропозиции (`distinction_of`) можно только с аксиомой `classic`."
+  },
+  {
+   "line": 1564,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Поле `exclusive` ($\\neg(\\texttt{positive} \\wedge \\texttt{negative})$) — правило, фиксирующее, что положительная и отрицательная стороны несовместны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `exclusive : ~ (positive /\\ negative)` (:70)."
+  },
+  {
+   "line": 1565,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Поле `exhaustive` ($\\texttt{positive} \\vee \\texttt{negative}$) — правило, фиксирующее, что между сторонами нет третьего.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `exhaustive : positive \\/ negative` (:71)."
+  },
+  {
+   "line": 1586,
+   "theorem": "err_elements",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Для конкретного экземпляра $D : \\texttt{Distinction}$ это значения `positive` $D$ и `negative` $D$ — ровно так устроен `err_elements` в `ERRFromDistinction.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition err_elements (D : Distinction) : list Prop := [positive D; negative D]` (:60). Closed under the global context."
+  },
+  {
+   "line": 1592,
+   "theorem": "co_constitution",
+   "file": "src/foundation/Distinction.v",
+   "claim": "эти значения суть пропозиция $A$ и её отрицание $\\neg A$:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`co_constitution : forall P : Prop, positive (distinction_of P) = P /\\ negative (distinction_of P) = ~ P` (:202), `reflexivity`. Print Assumptions: Axioms: Distinction.classic — через определение `distinction_of`, берущее поле `exhaustive` из `classic`."
+  },
+  {
+   "line": 1608,
+   "theorem": "err_elements",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Именно так устроена формализация: файл `ERRFromDistinction.v` определяет список элементов как",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с определением (:60). Роли и правила в этом файле представлены числами `err_role_count D := 2`, `err_rule_count D := 2` (:54, :57), от D не зависящими, и комментариями (:32–48)."
+  },
+  {
+   "line": 1647,
+   "theorem": "err_elements",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Столбец «Уровень экземпляра» — буквальная E/R/R-разметка экземпляра, совпадающая с кодом файла `ERRFromDistinction.v`: `positive` $D$ и `negative` $D$ суть Elements.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "С кодом буквально совпадает строка об элементах (`err_elements`, :60). Строки столбца о правилах `exclusive`, `exhaustive` в коде файла отражены числом `err_rule_count D := 2` и комментарием (:37–48), отдельного объекта для правил нет."
+  },
+  {
+   "line": 1666,
+   "theorem": "ERRSystem",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "в формализации `ERRWellFormedness.v` эта однозначность встроена в само представление — категория компонента задана функцией, так что двух категорий у одного компонента быть не может.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: `errs_category : nat -> ERRCategory` (:41). Следствие: «один объект в двух категориях» в записи `ERRSystem` невыразим ни для одной системы, включая `russell_system` (пробный файл: every_ERRSystem_unmixed) — см. запись стр. 1906."
+  },
+  {
+   "line": 1680,
+   "theorem": "distinction_meta_system",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "В файле `PrinciplesToERR.v` `Distinction` записана как объект `ERRSystem` (`distinction_meta_system`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`distinction_meta_system := mkERRSys 6 …` (:97): компоненты 0–1 — Element, 2–3 — Role, 4–5 — Rule; правила ссылаются на роли, роли — на элементы. Таблица записана определением; из записи `Distinction` она не строится и от экземпляра D не зависит."
+  },
+  {
+   "line": 1683,
+   "theorem": "distinction_err_well_formed",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "теорема `distinction_err_well_formed` машинно подтверждает, что она проходит критерий `is_well_formed`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`distinction_err_well_formed : is_well_formed distinction_meta_system = true` (:107), `vm_compute`; Closed under the global context."
+  },
+  {
+   "line": 1685,
+   "theorem": "every_distinction_err_well_formed",
+   "file": "src/foundation/PrinciplesToERR.v",
+   "claim": "`every_distinction_err_well_formed` распространяет это на всякий такой разбор.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`forall _ : Distinction, is_well_formed distinction_meta_system = true` (:111): переменная под квантором в утверждение не входит, доказательство — `intros _`; Closed. Утверждение равносильно `distinction_err_well_formed` (пробный файл: every_distinction_is_one_fact) — та же одна таблица, от экземпляра различия не зависящая."
+  },
+  {
+   "line": 1733,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "поле `exhaustive` получает доказательство $P \\vee \\neg P$ из аксиомы `classic`",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "`distinction_of P := mkDistinction P (~P) (fun H => match H with conj p np => np p end) (classic P)` (:75–80). Print Assumptions distinction_of: Axioms: Distinction.classic : forall P : Prop, P \\/ ~ P."
+  },
+  {
+   "line": 1744,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В текущей формализации `Distinction` есть `Record`, а `distinction_of` — `Definition`-функция, строящая экземпляр из пропозиции $P$; *ни то ни другое не оформлено* как объект типа `System L` с конкретным уровнем.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: `Definition distinction_of (P : Prop) : Distinction` (:75, завершено `Defined`). Записи `ERRSystem` и теоремы о хорошей сформированности для `distinction_of` в формализации тоже нет — проверка раздела (стр. 1819–1838) содержательная."
+  },
+  {
+   "line": 1773,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Правило применения `mkDistinction`: для построения экземпляра `Distinction` конструктор требует четыре аргумента — две пропозиции и два доказательства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор записи: `mkDistinction : forall positive negative : Prop, ~ (positive /\\ negative) -> positive \\/ negative -> Distinction` (:67)."
+  },
+  {
+   "line": 1774,
+   "theorem": "L2_canonical",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Правило конструктивного доказательства `exclusive`: для произвольной $P$ доказательство $\\neg(P \\wedge \\neg P)$ строится конструктивно (это — $L2$ для $P$, не требующее аксиом).",
+   "page_price": "не требует аксиом",
+   "verdict": "ok",
+   "note": "В `distinction_of` поле заполнено термом `fun H => match H with conj p np => np p end`. То же утверждение — `L2_canonical : forall P : Prop, ~ (P /\\ ~P)` (:55) и `Law_of_NonContradiction` (:45): Closed under the global context."
+  },
+  {
+   "line": 1775,
+   "theorem": "classic",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Правило обращения к аксиоме `classic`: для получения `exhaustive` $= P \\vee \\neg P$ используется `classic`, поскольку для произвольной пропозиции исчерпанность конструктивно не доказуема",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "`Axiom classic : forall P : Prop, P \\/ ~P` (:36) — статус назван верно. Недоказуемость без аксиомы — метатеоретический факт, в Rocq не формулируется; внутри доказуемо, что существование различия со сторонами P и ¬P у всякой пропозиции равносильно исключённому третьему (пробный файл: distinction_for_every_prop_iff_lem, Closed)."
+  },
+  {
+   "line": 1906,
+   "theorem": "is_well_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Парадоксы — именно те конструкции, для которых такой разбор *невозможен*: одна и та же сущность пытается одновременно занимать места разных категорий. Это — структурное нарушение, которое формализуется в Rocq и проверяется машинно.[^18]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В записи `ERRSystem` категория компонента — значение функции, и «одна сущность в двух категориях» невыразима (это отмечает и страница, стр. 1666–1669; пробный файл: every_ERRSystem_unmixed). Машинно проверяется другое: в таблице парадокса задана ссылка компонента на себя, и `is_well_formed` даёт `false` при любой расстановке категорий (пробный файл: diagonal_alone_decides, Closed)."
+  },
+  {
+   "line": 2173,
+   "theorem": null,
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Формальный аппарат — в файлах `ERRWellFormedness.v` (критерий хорошей сформированности) и `ParadoxDiagnosis.v` (унифицированный разбор пяти парадоксов).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оба файла есть: `foundation/ERRWellFormedness.v` (9 Qed), `foundation/ParadoxDiagnosis.v` (11 Qed); все утверждения обоих файлов — Closed under the global context."
+  },
+  {
+   "line": 2173,
+   "theorem": "all_paradoxes_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Главная теорема `all_paradoxes_ill_formed` устанавливает, что все классические парадоксы — структурно ill-formed.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`forall p : ParadoxType, is_well_formed (paradox_system p) = false` (:109); Closed. `ParadoxType` — перечисление пяти имён, которым сопоставлены три записи (`russell_system`, `liar_system`, `grelling_system`). Сама страница называет структурными ещё парадоксы Берри, Ричарда, Карри, Ябло (стр. 1917) — их в перечислении нет."
+  },
+  {
+   "line": 1950,
+   "theorem": "russell_system",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "В репозитории конструкция Рассела формализована как `russell_system` в `ERRWellFormedness.v` и проверена на хорошую сформированность — результат `false`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`russell_system := mkERRSys 2 …` (:113): компонент 0 — Element, компонент 1 — Rule; единственная ссылка 0 → 0. Результат `false` даёт эта одна клетка; компонент «R как правило» ни на что не ссылается и на результат не влияет (пробный файл: russell_rule_component_inert). Диагноз «Element = Rule» записью не выражен — см. запись стр. 1906."
+  },
+  {
+   "line": 1953,
+   "theorem": "russell_ill_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Это устанавливают машинно две теоремы в двух файлах: лемма `russell_ill_formed` в самом `ERRWellFormedness.v` (прямо о `russell_system`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`russell_ill_formed : is_well_formed russell_system = false` (:138), `vm_compute`; Closed under the global context."
+  },
+  {
+   "line": 1955,
+   "theorem": "russell_is_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "лемма `russell_is_ill_formed` в `ParadoxDiagnosis.v` (через отображение `paradox_system`, сопоставляющее типу парадокса его E/R/R-систему).[^20]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`russell_is_ill_formed : is_well_formed (paradox_system Paradox_Russell) = false` (:88); Closed. `paradox_system Paradox_Russell` по определению есть `russell_system`, так что две леммы утверждают одно и то же."
+  },
+  {
+   "line": 2175,
+   "theorem": "P1_blocks_russell",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "В `PrinciplesFromLaws.v` («$P1$: иерархия») есть также отдельная теорема `P1_blocks_russell`, фиксирующая, что $P1$ блокирует конструкцию Рассела.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`P1_blocks_russell : forall l : Level, ~ (l << l)` (:51) — иррефлексивность порядка уровней; дословно то же утверждение, что `P1_from_L1_L5` (:43), `P1_no_self_membership` (:47) и `L5_hierarchy`. Конструкции Рассела в утверждении нет. О ней — `russell_paradox_blocked` (TheoryOfSystems_Core_ERR.v:248, для L2), `criterion_label_never_own_level` и `russell_blocked_every_level` (foundation/TransfiniteInductionLevel.v:96, :109); все Closed."
+  },
+  {
+   "line": 1990,
+   "theorem": "liar_system",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Конструкция Лжеца формализована как `liar_system`; теорема `liar_is_ill_formed` устанавливает её ill-formed-статус.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`liar_system := mkERRSys 1 (fun _ => Cat_Element) …` (:122): один компонент-элемент со ссылкой на себя; компонента-правила в записи нет."
+  },
+  {
+   "line": 1990,
+   "theorem": "liar_is_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Конструкция Лжеца формализована как `liar_system`; теорема `liar_is_ill_formed` устанавливает её ill-formed-статус.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`liar_is_ill_formed : is_well_formed (paradox_system Paradox_Liar) = false` (:92); Closed. То же, что `liar_ill_formed` (foundation/ERRWellFormedness.v:141)."
+  },
+  {
+   "line": 2000,
+   "theorem": "L5_no_infinite_descent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "каждый *конкретный* уровень имеет конечную глубину относительно основания (это и есть содержание $L5$ и теоремы `L5_no_infinite_descent`)",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Содержание теоремы — строгое убывание глубины при спуске по `<<` (:130), а не конечность глубины; см. запись стр. 1084."
+  },
+  {
+   "line": 2003,
+   "theorem": "level_no_top",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "сама иерархия *не имеет внутренней верхней границы* — она продолжается вверх неограниченно через конструктор следующего уровня.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`level_no_top : forall M, exists L, ~ (L << M \\/ L = M)` (:75), `no_universal_level` (:83); шаг вверх — `P1_level_step : forall l, l << LS l` (foundation/PrinciplesFromLaws.v:63). Closed under the global context."
+  },
+  {
+   "line": 2033,
+   "theorem": "grelling_system",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "`grelling_system` ill-formed; теорема `grelling_is_ill_formed`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`grelling_system := mkERRSys 1 (fun _ => Cat_Rule) …` (:127): один компонент-правило со ссылкой на себя; от `liar_system` отличается только меткой категории единственного компонента."
+  },
+  {
+   "line": 2033,
+   "theorem": "grelling_is_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "`grelling_system` ill-formed; теорема `grelling_is_ill_formed`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`grelling_is_ill_formed : is_well_formed (paradox_system Paradox_Grelling) = false` (:96); Closed. То же, что `grelling_ill_formed` (foundation/ERRWellFormedness.v:144)."
+  },
+  {
+   "line": 2062,
+   "theorem": "paradox_system",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "В репозитории они представлены через `russell_system` (Кантор) и `grelling_system` (Бурали-Форти) как конкретизации общего паттерна самопринадлежности.[^22]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`paradox_system` (:79): `Paradox_Cantor` ↦ `russell_system`, `Paradox_BuraliForti` ↦ `grelling_system`; своих записей у двух парадоксов нет. Бурали-Форти сопоставлена запись с единственным компонентом-правилом, а не запись Рассела — при том что предыдущая фраза страницы называет обе конструкции эквивалентными расселовой."
+  },
+  {
+   "line": 2177,
+   "theorem": "cantor_is_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Теоремы `cantor_is_ill_formed` и `buraliforti_is_ill_formed` в файле `ParadoxDiagnosis.v` устанавливают ill-formed-статус обеих конструкций — через отображение `paradox_system`, в котором Кантору сопоставлена `russell_system`, а Бурали-Форти — `grelling_system`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`cantor_is_ill_formed : is_well_formed (paradox_system Paradox_Cantor) = false` (:100); Closed. То же вычисление, что для `russell_system`."
+  },
+  {
+   "line": 2177,
+   "theorem": "buraliforti_is_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Теоремы `cantor_is_ill_formed` и `buraliforti_is_ill_formed` в файле `ParadoxDiagnosis.v` устанавливают ill-formed-статус обеих конструкций — через отображение `paradox_system`, в котором Кантору сопоставлена `russell_system`, а Бурали-Форти — `grelling_system`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`buraliforti_is_ill_formed : is_well_formed (paradox_system Paradox_BuraliForti) = false` (:104); Closed. То же вычисление, что для `grelling_system`."
+  },
+  {
+   "line": 2074,
+   "theorem": "all_paradoxes_ill_formed",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Все пять разобранных парадоксов структурно ill-formed. В Rocq это зафиксировано единой теоремой:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с исходником (:109); Closed under the global context. Пяти именам перечисления отвечают три записи; у каждой ссылка компонента на себя задана при записи таблицы."
+  },
+  {
+   "line": 2082,
+   "theorem": "ParadoxType",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "где `ParadoxType` перечисляет пять парадоксов, а `paradox_system` сопоставляет каждому из них формальную конструкцию.[^23]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive ParadoxType` — пять конструкторов (:32); `paradox_system` (:79) — три различные записи на пять имён (пробный файл: five_names_three_records)."
+  },
+  {
+   "line": 2178,
+   "theorem": "paradox_diagnosis_synthesis",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Полный синтез — в теореме `paradox_diagnosis_synthesis`, объединяющей: (1) ill-formed-статус всех парадоксов; (2) контрапозитив `well_formed_paradox_free`; (3) точную классификацию нарушений для каждого парадокса.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "(:148) Closed. Члены (1) и (2) названы верно. Член (3) — три равенства вида `paradox_violation Paradox_Russell = Violation_ElementIsRule` (Рассел, Лжец, Грелинг; Кантора и Бурали-Форти нет), каждое — `reflexivity` на определении-таблице `paradox_violation` (:57). С записью системы вид нарушения не связан: одной записи отвечают два вида (пробный файл: violation_not_determined_by_system)."
+  },
+  {
+   "line": 2086,
+   "theorem": null,
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Все пять структурных парадоксов сводятся в единую таблицу через тип нарушения E/R/R-категорий:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Столбцы таблицы совпадают с определениями `paradox_violation` (:57) и `paradox_solution` (:66) — функциями-таблицами на перечислении `ParadoxType`. Теорем, связывающих вид нарушения или историческое решение с записью системы, в файле нет; о `paradox_solution` нет ни одной леммы."
+  },
+  {
+   "line": 2097,
+   "theorem": "well_formed_paradox_free",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Если система хорошо сформирована, она не может совпадать ни с одной из парадоксальных конструкций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`well_formed_paradox_free : forall S, is_well_formed S = true -> forall p : ParadoxType, S <> paradox_system p` (:120) — прямое следствие `all_paradoxes_ill_formed`; Closed under the global context."
+  },
+  {
+   "line": 2098,
+   "theorem": "well_formed_paradox_free",
+   "file": "src/foundation/ParadoxDiagnosis.v",
+   "claim": "Это зафиксировано теоремой `well_formed_paradox_free`: хорошая сформированность *исключает* парадоксальность.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема исключает совпадение системы с тремя записанными таблицами, а не парадоксальность: свойства «быть парадоксальной» в формализации нет. Взаимная ссылка двух компонентов (цикл длины 2) проверку `is_well_formed` проходит (пробный файл: two_cycle_well_formed, Closed)."
+  },
+  {
+   "line": 2179,
+   "theorem": "nat_well_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Это зафиксировано в `ERRWellFormedness.v` теоремой `nat_well_formed`: формальное представление натуральных чисел как `ERRSystem` проходит проверку `is_well_formed`.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`nat_well_formed : is_well_formed nat_system = true` (:135); Closed. `nat_system` (:105) — три метки (элемент «0», правило «преемник», роль «быть числом») при пустой таблице ссылок `fun _ _ => false`. Система без ссылок проходит проверку при любом числе компонентов и любой расстановке категорий (пробный файл: no_references_well_formed), так что о натуральных числах теорема ничего не утверждает. Расстановка в записи расходится и с разбором страницы (стр. 2120–2122)."
+  },
+  {
+   "line": 2180,
+   "theorem": "chess_well_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "Теорема `chess_well_formed`.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "`chess_well_formed : is_well_formed chess_system = true` (:180); Closed. `chess_system` (:172) — четыре метки (фигуры, клетки, роль «атакующий/защищающийся», правила ходов) при пустой таблице ссылок; проверка проходит по той же причине, что в сноске 24 (пробный файл: no_references_well_formed)."
+  },
+  {
+   "line": 2139,
+   "theorem": "is_well_formed",
+   "file": "src/foundation/ERRWellFormedness.v",
+   "claim": "E/R/R-диагностика отличает парадоксы от хорошо сформированных систем точно и формально.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Формально установлено: три записанные таблицы дают `false`, четыре — `true` (`nat_system`, `chess_system`, `err_meta_system`, `distinction_meta_system`). Утверждения «парадоксальна тогда и только тогда, когда не проходит проверку» в формализации нет, и для нынешнего критерия оно неверно в обе стороны: взаимная ссылка двух компонентов проходит, ссылка правила на другое правило без самореференции — не проходит (пробный файл: two_cycle_well_formed, rule_refers_other_rule_ill_formed)."
+  }
+ ]
+}

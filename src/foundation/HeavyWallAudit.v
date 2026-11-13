@@ -184,6 +184,12 @@ Proof. intros []; reflexivity. Qed.
 Definition n_remaining : nat :=
   length (filter (fun a => negb (ax_eliminated a)) all_axioms).
 
+(** 2026-11-13: the two remaining items are no longer project-wide AXIOMS: they
+    are fields of the record of premises NSCoupling
+    (navier_stokes/GalerkinSystem.v), and the theorems of the Navier-Stokes
+    section take that record as an argument. The classification below stands:
+    the bound on the coupling is load-bearing and is NOT eliminated — it is
+    still assumed, now as a premise of the theorems. *)
 (** ★ Remaining domain axioms: 2 (C_B_positive input + B_coeff_bounded load-bearing). *)
 Lemma n_remaining_eq : n_remaining = 2%nat.
 Proof. reflexivity. Qed.

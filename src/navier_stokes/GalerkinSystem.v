@@ -196,16 +196,47 @@ Qed.
 (*  приписать Элементу то, что следует из его Роли в Правиле энергобаланса.   *)
 (*  Не затронуто (честный обрыв): B_coeff_bounded (величина каскада, стена    *)
 (*  α=2, TriadicInteraction.v) — подлинно несущая гипотеза, остаётся          *)
-(*  аксиомой; C_B_positive — нормировка-вход.  Спуск того же содержания в     *)
+(*  посылкой (с 13.11.2026 — поле записи NSCoupling); C_B_positive — вход.  Спуск того же содержания в     *)
 (*  grid-пространстве: AdvectionEnergyConservation.v (кубическое              *)
 (*  телескопирование, 0 аксиом).                                              *)
 (* ========================================================================= *)
 
-(** Abstract RAW modal coupling (the un-symmetrized projection of the
-    advection tensor).  A conservative Parameter (inhabited: it could be
-    fun _ _ _ => 0); it shows in Print Assumptions as a Parameter, not an
-    Axiom — no propositional content is assumed about it. *)
-Parameter B_raw : nat -> nat -> nat -> Q.
+(** The coupling of the nonlinear term as a set of PREMISES (2026-11-13).
+    Before: `Parameter B_raw`, `Parameter C_B`, `Axiom C_B_positive`,
+    `Axiom B_coeff_bounded` — four project-wide declarations, on which every
+    theorem of the Navier-Stokes section rested as on axioms. Now they are
+    the fields of one record; the theorems of the section take it as an
+    (implicit) argument and read "for every coupling with this bound".
+    Nothing is assumed project-wide. The content is unchanged: the bound
+    [B_raw_antisym_bounded] is the load-bearing hypothesis of the section
+    and remains a hypothesis.
+
+    B_raw — the abstract RAW modal coupling (the un-symmetrized projection
+    of the advection tensor); C_B — the coupling constant. *)
+Class NSCoupling : Type := mkNSCoupling {
+  B_raw : nat -> nat -> nat -> Q;
+  C_B : Q;
+  C_B_positive : 0 < C_B;
+  B_raw_antisym_bounded : forall k l m : nat,
+    Qabs (B_raw k l m - B_raw k m l)
+      <= C_B * inject_Z (Z.of_nat (Nat.max k (Nat.max l m)))
+}.
+
+(** The premises are jointly satisfiable — by the ZERO coupling (trivial
+    nonlinear term). No model with the coefficients of real advection is
+    built here; that the premises hold for it is not claimed. *)
+Lemma NSCoupling_inhabited : inhabited NSCoupling.
+Proof.
+  constructor. refine (mkNSCoupling (fun _ _ _ => 0) 1 _ _).
+  - reflexivity.
+  - intros k l m.
+    assert (E : Qabs (0 - 0) == 0) by reflexivity.
+    rewrite E. rewrite Qmult_1_l.
+    unfold Qle. simpl. lia.
+Qed.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (** The advection coefficient IS the antisymmetrization of the raw coupling
     in its last two slots.  Only this part does work in the cubic energy
@@ -498,3 +529,5 @@ Qed.
 (*  ~46 Qed, 0 Admitted, 0 axioms (B_antisym eliminated June 2026:           *)
 (*  antisymmetrization of Parameter B_raw)                                   *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

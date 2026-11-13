@@ -3,8 +3,22 @@
     Roles:    each law = aspect of one structure, not independent axiom
     Rules:    five_laws_from_distinction unifies all five
     Status:   Foundation File 2 of 4
-    STATUS: Qed, 0 Admitted, 0 new axioms
+    STATUS: 22 Qed, 0 Admitted, 0 new axioms
     Author: Horsocrates | Date: March 2026
+
+    Given / derived (audit of Part I of the Mathematics volume, 2026-11-13:
+    what each theorem of this file rests on; checked by Print Assumptions):
+      L1 — reflexivity of the equality of the calculus ([x = x]);
+      L2 for the sides  — GIVEN: the field [exclusive];
+      L3 for the sides  — GIVEN: the field [exhaustive];
+      L3 for an arbitrary proposition — the axiom [classic];
+      L4 for the sides  — DERIVED from [exclusive] in one step;
+      L5 — theorems about the separate type [Level].
+    What is derived from BOTH fields together (co-determination of the
+    sides), the independence of the two fields, and "L3 = classic" as a
+    two-way equivalence without axioms: foundation/DistinctionCoDefinition.v.
+    Resting on Classical_Prop.classic here: Law_of_ExcludedMiddle and
+    L4_double_negation. The other 20 are closed.
 *)
 
 From ToS Require Import foundation.Distinction.
@@ -151,28 +165,46 @@ Proof.
   - intro l. exact (level_lt_irrefl l).
 Qed.
 
-(** ★ The five laws are JOINTLY consistent *)
+(** ★ The five laws are JOINTLY consistent. The witness is given directly
+    (sides True / False), so no axiom is used (2026-11-13: the witness was
+    [distinction_of True], which consumed `classic`). *)
 Theorem laws_consistent :
   exists D : Distinction,
     positive D /\
     ~ negative D.
 Proof.
-  exists (distinction_of True).
+  exists (mkDistinction True False (fun H => proj2 H) (or_introl I)).
   split.
-  - simpl. exact I.
-  - simpl. tauto.
+  - exact I.
+  - intro f. exact f.
 Qed.
 
-(** ★ L3-independence, internal form: L3 is exactly classic.
-    We cannot prove L3's independence inside Coq+classic (the meta-claim
-    that constructive logic lacks L3 is genuinely meta). What we CAN state
-    internally is the converse direction of the L3 <-> classic identity:
-    excluded middle for every Distinction yields classic for every Prop.
-    Together with L3_from_distinction this gives L3 = classic exactly. *)
-Theorem L3_independence : (forall D : Distinction, positive D \/ negative D)
-                          -> (forall P : Prop, P \/ ~ P).
+(** ★ L3-independence, internal form. Among the laws, L3 does not follow
+    from the others: there is a pair of sides for which L1, L2, L4 and L5
+    hold while L3 fails (both sides false — the "third way"). No axiom.
+    (2026-11-13: the former statement,
+       (forall D, positive D \/ negative D) -> forall P, P \/ ~ P,
+    discarded its premise and took the conclusion from `classic`.)
+    The other half — the content of L3 coincides with `classic` — is the
+    two-way, axiom-free equivalence every_prop_distinguishes_iff_EM in
+    foundation/DistinctionCoDefinition.v. The meta-claim that constructive
+    logic lacks L3 stays genuinely meta: this theorem is about a pair of
+    sides, not about the calculus. *)
+Theorem L3_independence :
+  exists p n : Prop,
+    (* L1 *) (p = p /\ n = n) /\
+    (* L2 *) ~ (p /\ n) /\
+    (* L4 *) (p -> ~ n) /\
+    (* L5 *) (forall l : Level, ~ (l << l)) /\
+    (* L3 fails *) ~ (p \/ n).
 Proof.
-  intros _ P. exact (classic P).
+  exists False, False.
+  split; [| split; [| split; [| split]]].
+  - split; reflexivity.
+  - intros [f _]. exact f.
+  - intros f _. exact f.
+  - exact level_lt_irrefl.
+  - intros [f | f]; exact f.
 Qed.
 
 (** ★ L1+L2 together: identity + non-contradiction *)

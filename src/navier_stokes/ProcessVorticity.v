@@ -29,6 +29,9 @@ From ToS Require Import navier_stokes.GronwallAnalysis.
 From ToS Require Import navier_stokes.ProcessNS.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ========================================================================= *)
 (*  PART I: Process Vorticity Norms                                          *)
 (* ========================================================================= *)
@@ -269,3 +272,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~22 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

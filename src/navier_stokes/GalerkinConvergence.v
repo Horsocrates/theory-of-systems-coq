@@ -10,7 +10,7 @@
 (*  Roles:    compactness as bridge, strong convergence as enabler         *)
 (*  Rules:    uniform bounds -> compactness -> convergence -> solution      *)
 (*  STATUS: target ~40 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
+(*  AXIOMS: classic. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -27,6 +27,9 @@ From ToS Require Import navier_stokes.TransientClosure.
 From ToS Require Import navier_stokes.LowModeControl.
 From ToS Require Import navier_stokes.UniformBounds.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: Weak Formulation  (~12 lemmas)                            *)
@@ -395,3 +398,5 @@ Proof.
   - intro s. apply uniform_sobolev; assumption.
   - apply total_enstrophy_bound_positive; assumption.
 Qed.
+
+End WithNSCoupling.

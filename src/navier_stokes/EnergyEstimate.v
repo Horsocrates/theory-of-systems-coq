@@ -23,6 +23,9 @@ From ToS Require Import navier_stokes.FiniteDifference.
 From ToS Require Import navier_stokes.GalerkinSystem.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ========================================================================= *)
 (*  PART I: Discrete Energy Evolution                                         *)
 (* ========================================================================= *)
@@ -392,3 +395,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~40 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

@@ -17,8 +17,9 @@ Import ListNotations.
 (** ** Axiom: Law of Excluded Middle (L3)                              *)
 (** ================================================================= *)
 
-(* Replicated from ToS_Axioms.v to keep file standalone *)
-Axiom classic : forall P : Prop, P \/ ~P.
+(* The one declaration of the project: Classical_Prop.classic of the standard
+   library (2026-11-13: this file used to declare its own copy). *)
+From Stdlib Require Export Classical_Prop.
 
 (** ================================================================= *)
 (** ** 1. Game Definitions                                             *)

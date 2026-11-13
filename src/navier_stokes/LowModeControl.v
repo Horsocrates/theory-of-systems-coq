@@ -25,6 +25,9 @@ From ToS Require Import navier_stokes.InvariantRegion.
 From ToS Require Import navier_stokes.TransientClosure.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: Energy Ball is Invariant  (~10 lemmas)                    *)
 (* ================================================================== *)
@@ -395,3 +398,5 @@ Proof.
   - intros. apply rhs_bound_positive; assumption.
   - intros. apply total_enstrophy_bound_positive; assumption.
 Qed.
+
+End WithNSCoupling.

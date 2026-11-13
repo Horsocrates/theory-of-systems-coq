@@ -15,7 +15,7 @@
               full strength, on top of excluded middle.
 
     zermelo_determinacy : forall W K, determined W K
-        — Print Assumptions: BorelDeterminacy.classic + ToS_Axioms.L4_witness.
+        — Print Assumptions: Classical_Prop.classic + ToS_Axioms.L4_witness.
     BorelDeterminacy.weak_determinacy is only "P or not P" for "player I has a
     winning strategy"; here one of the TWO players gets a strategy.  For
     finite game TREES the same is proved with no assumptions at all:
@@ -41,7 +41,7 @@ Fixpoint WinI (W : GameState -> Prop) (r : nat) (h : GameState) : Prop :=
 
 Lemma choose_ex : forall (Q : nat -> Prop), exists m, (exists m', Q m') -> Q m.
 Proof.
-  intro Q. destruct (BorelDeterminacy.classic (exists m', Q m')) as [[m Hm] | Hn].
+  intro Q. destruct (classic (exists m', Q m')) as [[m Hm] | Hn].
   - exists m. intros _. exact Hm.
   - exists 0. intro H. contradiction.
 Qed.
@@ -102,11 +102,11 @@ Proof.
     + intro Hw. apply IH. exists (sI h). exact Hw.
     + unfold sII_spoil. rewrite Hlen.
       apply (pick_spec (fun m => ~ WinI W (K - S k) (h ++ [m]))).
-      destruct (BorelDeterminacy.classic
+      destruct (classic
                   (exists m, ~ WinI W (K - S k) (h ++ [m]))) as [Hex | Hno];
         [exact Hex |].
       exfalso. apply IH. intro m.
-      destruct (BorelDeterminacy.classic (WinI W (K - S k) (h ++ [m])))
+      destruct (classic (WinI W (K - S k) (h ++ [m])))
         as [Hy | Hn]; [exact Hy |].
       exfalso. apply Hno. exists m. exact Hn.
 Qed.
@@ -114,7 +114,7 @@ Qed.
 (* Zermelo: every game of finite length K is determined *)
 Theorem zermelo_determinacy : forall W K, determined W K.
 Proof.
-  intros W K. destruct (BorelDeterminacy.classic (WinI W K [])) as [Hw | Hn].
+  intros W K. destruct (classic (WinI W K [])) as [Hw | Hn].
   - left. exists (sI_win W K). intro sII. unfold wins_I.
     pose proof (winI_invariant W K sII Hw K (Nat.le_refl _)) as H.
     rewrite Nat.sub_diag in H. exact H.

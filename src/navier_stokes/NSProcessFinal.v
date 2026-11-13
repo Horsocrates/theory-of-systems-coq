@@ -37,6 +37,9 @@ From ToS Require Import navier_stokes.Depletion.
 From ToS Require Import navier_stokes.AttackSynthesis.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: The Complete NS Result                                     *)
 (* ================================================================== *)
@@ -349,3 +352,5 @@ Qed.
 (*                                                                            *)
 (*  TOTAL NS formalization: 15 files, ~415 Qed; B_antisym is a Lemma since 06.2026          *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

@@ -23,6 +23,9 @@ From ToS Require Import navier_stokes.EnergyEstimate.
 From ToS Require Import navier_stokes.TriadicInteraction.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: Per-Mode Amplitude Bound  (~10 lemmas)                    *)
 (* ================================================================== *)
@@ -463,3 +466,5 @@ Proof.
     + intros. apply per_mode_decreasing; auto.
     + intros. apply enstrophy_contribution_nonneg.
 Qed.
+
+End WithNSCoupling.

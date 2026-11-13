@@ -1,0 +1,420 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/01 Первоначало A = ∃.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 451,
+   "theorem": "False",
+   "external": true,
+   "claim": "тип может быть безупречно сформирован и при этом пуст — таков, например, тип `False` в `Prop`, корректный объект языка, не имеющий ни одного обитателя.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя стандартной библиотеки: `Inductive False : Prop :=` без конструкторов (Corelib.Init.Logic). Слова страницы соответствуют определению."
+  },
+  {
+   "line": 560,
+   "theorem": "True",
+   "external": true,
+   "claim": "`True` — индуктивный тип с единственным конструктором:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя стандартной библиотеки: `Inductive True : Prop := I : True` (Corelib.Init.Logic). Блок кода стр. 563–564 определению соответствует."
+  },
+  {
+   "line": 567,
+   "theorem": "I",
+   "external": true,
+   "claim": "Тип `True` *населён* — у него есть обитатель `I`. Это означает: утверждение `True` в Rocq *уже доказуемо без каких-либо аксиом*, потому что обитатель `I` даёт прямое свидетельство.",
+   "page_price": "без каких-либо аксиом",
+   "verdict": "ok",
+   "assumptions": "Closed under the global context",
+   "note": "`I` — конструктор типа `True` (Corelib.Init.Logic). Проверено пробным файлом: цель `True` закрывается `exact I`, допущений нет."
+  },
+  {
+   "line": 573,
+   "theorem": "A_exists",
+   "external": true,
+   "claim": "Что добавляет аксиома `Axiom A_exists : True` к системе CIC? Технически: имя `A_exists`, ссылающееся на свидетеля типа `True`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя принадлежит странице: запись приведена как отвергаемая попытка. Объявления `A_exists` в формализации нет (поиск по `src`), что словам страницы соответствует."
+  },
+  {
+   "line": 593,
+   "theorem": "inhabited",
+   "claim": "В базовой библиотеке Rocq (модуль `Init.Logic`) есть индуктивный предикат, утверждающий, что некоторый тип *населён*, то есть имеет по крайней мере одного обитателя:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): было «в стандартной библиотеке Coq.Logic.Inhabited есть типовой класс» — такого модуля и класса нет. Inductive inhabited (A : Type) : Prop := inhabits : A -> inhabited A (Corelib.Init.Logic).",
+   "external": true
+  },
+  {
+   "line": 598,
+   "theorem": "inhabits",
+   "claim": "Inductive inhabited (A : Type) : Prop := inhabits : A -> inhabited A.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): прежний блок (`Class Inhabited (X : Type) : Prop := inhabited_witness : X.`) компилятор не принимал (Universe inconsistency). Нынешний блок — объявление базовой библиотеки.",
+   "external": true
+  },
+  {
+   "line": 613,
+   "theorem": null,
+   "claim": "Axiom A_exists_inhabited : exists (X : Type) (x : X), True.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись приведена как отвергаемая попытка; в формализации её нет. Равносильность двух форм (стр. 613: «или, эквивалентно») для библиотечного `inhabited` доказана в пробном файле: `inhabited_forms_equiv` — Closed under the global context."
+  },
+  {
+   "line": 624,
+   "theorem": null,
+   "claim": "Утверждение «существует тип, имеющий обитателя» *уже доказуемо* в CIC, без каких-либо аксиом:",
+   "page_price": "без каких-либо аксиом",
+   "verdict": "ok",
+   "assumptions": "Closed under the global context",
+   "note": "Блок стр. 632–636 (`some_type_inhabited`) собран дословно в пробном файле Check.v: Closed under the global context. В формализации такого объявления нет; страница приводит его как пример."
+  },
+  {
+   "line": 696,
+   "theorem": null,
+   "claim": "Это утверждение мы не доказываем формально — такого доказательства, в строгом смысле, не существует, потому что речь идёт о метатеоретическом наблюдении, не о теореме внутри одной системы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: утверждений о невыразимости A = ∃ в формализации нет; в `foundation/Distinction.v` формула стоит только в комментариях."
+  },
+  {
+   "line": 856,
+   "theorem": null,
+   "claim": "Но в Главе 3 акт различения станет основанием для *вывода* законов логики как теорем Rocq.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть I, шаг 4): формула автора «вывод законов» оставлена; какого рода этот вывод (L2, L3 — поля записи; L4 — из поля exclusive; L1 — рефлексивность равенства; общий L3 — аксиома classic), теперь сказано на стр. 1188–1196 этой главы и в главе 3."
+  },
+  {
+   "line": 969,
+   "theorem": "classic",
+   "claim": "В «Метафизике» этот закон признаётся производным; в формализации настоящего тома, как мы помним из Методологического введения, он получает статус самостоятельного $L3$ по техническим причинам Rocq.",
+   "page_price": "самостоятельный L3",
+   "verdict": "ok",
+   "note": "В формализации закон не выведен: это аксиома `classic : forall P : Prop, P \\/ ~P` (Distinction.v:36) и поле `exhaustive` записи (:71). Слово «самостоятельный» соответствует; слово «аксиома» стоит на стр. 1204–1206. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 995,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В структуре `Distinction` оно проявляется как самозаземление различения: из положительной стороны следует отрицание отрицательной.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L4_self_grounding : forall D, positive D -> ~ negative D` (Distinction.v:128), Closed under the global context. Утверждение есть поле `exclusive`, записанное импликацией: `(P -> ~N) <-> ~(P /\\ N)` (пробный файл, `self_grounding_iff_exclusive`)."
+  },
+  {
+   "line": 997,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "В аксиоматическом слое оно проявляется иначе — как требование определённого свидетеля для индивидуального существования.",
+   "page_price": "аксиоматический слой",
+   "verdict": "ok",
+   "note": "`Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x}` (ToS_Axioms.v:105). Статус аксиомы назван."
+  },
+  {
+   "line": 1003,
+   "theorem": null,
+   "claim": "Когда ниже мы говорим о законе $L4$ как о теореме формализации, речь идёт именно об одном из этих следов, а не о ЗДО в его онтологической полноте.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорема — `L4_self_grounding` (Distinction.v:128), Closed under the global context; оговорка о статусе соответствует формализации."
+  },
+  {
+   "line": 1023,
+   "theorem": "positive",
+   "external": true,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Утверждение `positive`. Закон Тождества применяется к ней: положительная сторона тождественна самой себе — `positive` есть `positive`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле записи: `positive : Prop` (Distinction.v:68). «`positive` есть `positive`» — `L1_stability : forall D, positive D = positive D` (:93), доказательство `reflexivity`; равенство терма самому себе выполнено для любого терма и полей записи не использует."
+  },
+  {
+   "line": 1024,
+   "theorem": "negative",
+   "external": true,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Отрицательная сторона — то, чем положительное *не является*. Утверждение `negative`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле записи: `negative : Prop` (Distinction.v:69)."
+  },
+  {
+   "line": 1025,
+   "theorem": "exclusive",
+   "external": true,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Закон Непротиворечия требует: положительное и отрицательное не могут одновременно иметь место. `exclusive`: $\\neg(\\texttt{positive} \\wedge \\texttt{negative})$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле записи: `exclusive : ~ (positive /\\ negative)` (Distinction.v:70)."
+  },
+  {
+   "line": 1026,
+   "theorem": "exhaustive",
+   "external": true,
+   "file": "src/foundation/Distinction.v",
+   "claim": "(Это — Исключённое Третье, производное от Тождества и Непротиворечия в онтологии «Метафизики», но в формализации Rocq записываемое как самостоятельное поле.)",
+   "page_price": "самостоятельное поле",
+   "verdict": "ok",
+   "note": "Поле записи: `exhaustive : positive \\/ negative` (Distinction.v:71). Статус в формализации назван верно: закон дан полем, а не выведен."
+  },
+  {
+   "line": 1092,
+   "theorem": null,
+   "claim": "В математической работе тома акт различения играет роль *первого формализуемого*: первого объекта, который записывается в Rocq и от которого *выводится* дальнейшее.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): фразы автора сохранены; следом добавлено, что в формализации связь проведена порядком изложения, а не зависимостью файлов (от Distinction.v зависит цепочка основания; ядро, процессы и категории его не подключают)."
+  },
+  {
+   "line": 1097,
+   "theorem": null,
+   "claim": "акт различения находится в основании дедуктивной цепи, и каждый последующий объект тома (числовые системы, функции, пространства, категории) разворачивается из него через последовательность формализаций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): фразы автора сохранены; следом добавлено, что в формализации связь проведена порядком изложения, а не зависимостью файлов (от Distinction.v зависит цепочка основания; ядро, процессы и категории его не подключают)."
+  },
+  {
+   "line": 1113,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В репозитории `theory-of-systems-coq` запись `Distinction` стоит в файле `foundation/Distinction.v`, с которого начинается цепочка основания: от неё идут теоремы о законах, принципах и E/R/R.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): было «исторически появилась раньше других основных структур и служит основанием для дальнейших определений». Цепочка: Distinction.v → LawsFromDistinction.v → PrinciplesFromLaws.v → PrinciplesToERR.v, ERRFromDistinction.v."
+  },
+  {
+   "line": 1118,
+   "theorem": null,
+   "claim": "Это — технический факт о порядке файлов и теорем в репозитории, не претендующий на онтологическое утверждение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): сама фраза не менялась; факт, к которому она относится, теперь назван по истории репозитория."
+  },
+  {
+   "line": 1122,
+   "theorem": null,
+   "claim": "Три смысла «первого» — онтологический (порождает время), структурный (базовый для дедукции), технический (начало цепочки основания в репозитории) — имеют разные основания и работают на разных уровнях.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): было «согласованы между собой… совпадают на одном объекте»; технический смысл теперь — начало цепочки основания, а не приоритет в репозитории."
+  },
+  {
+   "line": 1130,
+   "theorem": null,
+   "claim": "что он формализуем в CIC; что он минимален; что из него выводимы дальнейшие структуры (законы логики как теоремы, типизация, со-определение положительного/отрицательного) — суть *наблюдаемые характеристики* обнаруженного объекта.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть I, шаг 4): формула автора «вывод законов» оставлена; какого рода этот вывод (L2, L3 — поля записи; L4 — из поля exclusive; L1 — рефлексивность равенства; общий L3 — аксиома classic), теперь сказано на стр. 1188–1196 этой главы и в главе 3."
+  },
+  {
+   "line": 1144,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "*Акт различения* формализуется в CIC как запись с четырьмя полями:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок стр. 1145–1150 совпадает с исходником (Distinction.v:67–72) с точностью до пробела после `~` и точки с запятой после последнего поля. Closed under the global context."
+  },
+  {
+   "line": 1164,
+   "theorem": null,
+   "claim": "Однако технически в записи `Distinction` поле `negative` оставлено *самостоятельным* полем типа `Prop`: запись не требует синтаксического равенства `negative = ~ positive`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует записи. При этом для всякого `D` доказуемо `negative D <-> ~ positive D` (пробный файл, `negative_iff_not_positive`, Closed under the global context): отрицательная сторона определена положительной с точностью до равносильности."
+  },
+  {
+   "line": 1169,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Канонический случай — конструкция `distinction_of`, которая по пропозиции $P$ строит различение, выбирая отрицательную сторону равной $\\neg P$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`distinction_of P := mkDistinction P (~P) … (classic P)` (Distinction.v:75, `Defined`); `negative (distinction_of P) = ~P` по определению. Print Assumptions: `Distinction.classic`. Цена в этом месте страницей не названа; аксиома названа на стр. 1204–1206."
+  },
+  {
+   "line": 1179,
+   "theorem": null,
+   "claim": "Это первый *явно конструктивный* объект тома: не упоминание, не описание, не отсылка, а формальная конструкция, которую Rocq принимает в свой язык и с которой можно работать.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Distinction` (Distinction.v:67) — Closed under the global context. Построение экземпляра по произвольной пропозиции (`distinction_of`) требует аксиомы `classic`."
+  },
+  {
+   "line": 1191,
+   "theorem": "L1_stability",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Главе 3 будет показано, что из структуры `Distinction` *выводятся* законы логики $L1, L2, L3, L4$ как теоремы Rocq о свойствах этой записи, — и какого рода этот вывод: $L2$ и $L3$ для сторон записи даны её полями `exclusive` и `exhaustive`, $L4$ получается из поля `exclusive` одним шагом, $L1$ есть рефлексивность равенства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): к формуле автора добавлено, какого рода вывод. L1_stability — Closed under the global context."
+  },
+  {
+   "line": 1191,
+   "theorem": "L2_exclusivity",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Главе 3 будет показано, что из структуры `Distinction` *выводятся* законы логики $L1, L2, L3, L4$ как теоремы Rocq о свойствах этой записи, — и какого рода этот вывод: $L2$ и $L3$ для сторон записи даны её полями `exclusive` и `exhaustive`, $L4$ получается из поля `exclusive` одним шагом, $L1$ есть рефлексивность равенства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): к формуле автора добавлено, какого рода вывод. L2_exclusivity — Closed under the global context."
+  },
+  {
+   "line": 1191,
+   "theorem": "L3_totality",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Главе 3 будет показано, что из структуры `Distinction` *выводятся* законы логики $L1, L2, L3, L4$ как теоремы Rocq о свойствах этой записи, — и какого рода этот вывод: $L2$ и $L3$ для сторон записи даны её полями `exclusive` и `exhaustive`, $L4$ получается из поля `exclusive` одним шагом, $L1$ есть рефлексивность равенства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): к формуле автора добавлено, какого рода вывод. L3_totality — Closed under the global context."
+  },
+  {
+   "line": 1191,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Главе 3 будет показано, что из структуры `Distinction` *выводятся* законы логики $L1, L2, L3, L4$ как теоремы Rocq о свойствах этой записи, — и какого рода этот вывод: $L2$ и $L3$ для сторон записи даны её полями `exclusive` и `exhaustive`, $L4$ получается из поля `exclusive` одним шагом, $L1$ есть рефлексивность равенства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): к формуле автора добавлено, какого рода вывод. L4_self_grounding — Closed under the global context."
+  },
+  {
+   "line": 1200,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Закон Порядка $L5$ будет включён в единую схему законов, но не извлекается из четырёх полей `Distinction` так же непосредственно, как $L1$–$L4$: его формальный носитель — отдельная структура уровней `Level` с отношением `<<`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Level := L1 | LS` (TheoryOfSystems_Core_ERR.v:59), `level_lt` (:68), нотация `<<` (:74). Теоремы об L5 в `foundation/LawsFromDistinction.v` (`L5_hierarchy`, :111, и следующие) записи `Distinction` не используют — слова страницы соответствуют. Объявлений с именем `Level` в формализации пять."
+  },
+  {
+   "line": 1208,
+   "theorem": null,
+   "claim": "В последующей главе о со-определении положительного и отрицательного будет развёрнуто *со-определение*: невозможно построить `Distinction`, имея лишь одну из сторон.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно в смысле, названном в Главе 5: конструктор `mkDistinction` принимает обе стороны и оба доказательства. Отдельной теоремы о невозможности нет. `distinction_of` строит различение по одной пропозиции ценой `classic`; без аксиомы такое построение для всех пропозиций равносильно исключённому третьему (пробный файл, `every_prop_distinguishes_iff_L3`, Closed)."
+  },
+  {
+   "line": 1214,
+   "theorem": "classic",
+   "claim": "В последующей главе об аксиоматическом слое Rocq будут проговорены технические аксиомы формализации — `classic`, на которую опирается работа с `Distinction`, и `L4_witness`, которая нужна дальше, при извлечении свидетеля",
+   "page_price": "техническая аксиома",
+   "verdict": "ok",
+   "note": "`Axiom classic : forall P : Prop, P \\/ ~P` (Distinction.v:36) — собственное объявление файла, отдельное от `Classical_Prop.classic` стандартной библиотеки. На неё опираются `distinction_of` и 36 теорем в `Distinction.v` и зависящих от него файлах. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 1214,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "В последующей главе об аксиоматическом слое Rocq будут проговорены технические аксиомы формализации — `classic`, на которую опирается работа с `Distinction`, и `L4_witness`, которая нужна дальше, при извлечении свидетеля",
+   "page_price": "аксиома формализации; работа с Distinction на неё не опирается",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): было «аксиомы, на которые опирается работа с Distinction (classic и L4_witness)». Ни одна теорема о записи Distinction от L4_witness не зависит."
+  },
+  {
+   "line": 1239,
+   "theorem": null,
+   "claim": "Из него выводятся законы логики (Глава 3), типизация (Глава 2.4), онтология положительно-отрицательного (Глава 5).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): номер главы о со-определении исправлен (было «Глава 4»). формула автора «вывод законов» оставлена; какого рода этот вывод (L2, L3 — поля записи; L4 — из поля exclusive; L1 — рефлексивность равенства; общий L3 — аксиома classic), теперь сказано на стр. 1188–1196 этой главы и в главе 3."
+  },
+  {
+   "line": 1241,
+   "theorem": null,
+   "claim": "Дальнейшая работа тома получает прочный фундамент в виде формального объекта, на котором стоит строго.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть I, шаг 4): фраза автора не менялась; что зависит от записи формально, сказано на стр. 1101–1106."
+  },
+  {
+   "line": 1262,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Первое формализуемое в этой онтологии — `RealProcess` как функция $ℕ \\to ℚ$: первичный объект анализа, из которого затем реконструируются те функции, которые классически выполняет $ℝ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition RealProcess := nat -> Q` (process/ProcessCore.v:34), Closed under the global context. То же определение повторено ещё в девяти файлах (`ShrinkingIntervals_ERR.v:159`, `EVT_idx.v:25` и др.); все объявления совпадают."
+  },
+  {
+   "line": 1264,
+   "theorem": "ForgetFunctor",
+   "claim": "Первое формализуемое по эту сторону границы — сама схема перехода между уровнями (функторы забывания и вложения — `ForgetFunctor` и `EmbedToForgettable` — с их сопряжением `LevelAdj` на забываемых системах).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): было `forget` — такого имени нет. ForgetFunctor (L : Level) : Functor (ForgettableCat L) (SystemCat L) — забывание как функтор на полной подкатегории забываемых систем. Closed under the global context.",
+   "file": "src/LevelForgetFunctor.v"
+  },
+  {
+   "line": 1264,
+   "theorem": "EmbedToForgettable",
+   "file": "src/LevelForgetFunctor.v",
+   "claim": "Первое формализуемое по эту сторону границы — сама схема перехода между уровнями (функторы забывания и вложения — `ForgetFunctor` и `EmbedToForgettable` — с их сопряжением `LevelAdj` на забываемых системах).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): было `embed` — под этим именем в формализации другие объекты. EmbedToForgettable (L : Level) : Functor (SystemCat L) (ForgettableCat L). Closed under the global context."
+  },
+  {
+   "line": 1264,
+   "theorem": "LevelAdj",
+   "file": "src/LevelForgetFunctor.v",
+   "claim": "Первое формализуемое по эту сторону границы — сама схема перехода между уровнями (функторы забывания и вложения — `ForgetFunctor` и `EmbedToForgettable` — с их сопряжением `LevelAdj` на забываемых системах).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 4, слово автора): LevelAdj (L : Level) : Adjunction (SystemCat L) (ForgettableCat L) — вложение слева, забывание справа; оба тождества треугольника — level_adj_is_adjunction. Closed under the global context."
+  },
+  {
+   "line": 593,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя модуля базовой библиотеки (Corelib.Init.Logic), не объявление формализации.",
+   "theorem": "Logic",
+   "external": true,
+   "claim": "В базовой библиотеке Rocq (модуль `Init.Logic`) есть индуктивный предикат"
+  },
+  {
+   "line": 1100,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Граф зависимостей (coqdep): от foundation/Distinction.v прямо или через другие файлы зависят файлы каталогов foundation и stdlib; TheoryOfSystems_Core_ERR.v, ToS_Axioms.v, CauchyReal.v, process/ProcessCore.v, SystemCategory.v, LevelFunctors.v в их числе нет.",
+   "theorem": null,
+   "claim": "В самой формализации эта связь проведена порядком изложения, а не зависимостью файлов: от записи `Distinction` формально зависит цепочка основания — законы, принципы, E/R/R, — тогда как числа, процессы и категории систем определены на индуктивных типах Rocq и файла записи не подключают."
+  },
+  {
+   "line": 1117,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "История репозитория: foundation/Distinction.v — коммит 36ef3ff, 19.03.2026; Level, System (TheoryOfSystems_Core_ERR.v), RealProcess — коммит 06db789, 19.01.2026; process/ProcessCore.v — 14.03.2026.",
+   "theorem": null,
+   "claim": "По времени записи она не первая: файл внесён в марте 2026 года, после определений уровней, систем и процессов."
+  },
+  {
+   "line": 1196,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "every_prop_distinguishes_iff_EM : (forall P, exists D, positive D = P) <-> (forall P, P \\/ ~ P). Closed under the global context.",
+   "theorem": "every_prop_distinguishes_iff_EM",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Исключённое третье для произвольной пропозиции из записи не выводится: оно принято аксиомой `classic`, и доказано без аксиом, что оно равносильно тому, что всякая пропозиция есть положительная сторона некоторого различения (`every_prop_distinguishes_iff_EM`)."
+  },
+  {
+   "line": 1264,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_adj_is_adjunction : forall L, is_adjunction (LevelAdj L). Closed under the global context. Естественность единицы и коединицы: level_adj_unit_natural, level_adj_counit_natural; взаимно обратные отображения морфизмов: embed_forget_hom_bijection. Сужение на забываемые системы вынуждено: no_functor_to_base, forgettable_subcategory_is_proper.",
+   "theorem": "level_adj_is_adjunction",
+   "file": "src/LevelForgetFunctor.v",
+   "claim": "Первое формализуемое по эту сторону границы — сама схема перехода между уровнями (функторы забывания и вложения — `ForgetFunctor` и `EmbedToForgettable` — с их сопряжением `LevelAdj` на забываемых системах)."
+  }
+ ]
+}

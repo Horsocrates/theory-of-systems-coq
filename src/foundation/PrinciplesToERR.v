@@ -107,10 +107,40 @@ Definition distinction_meta_system : ERRSystem := mkERRSys 6
 Theorem distinction_err_well_formed : is_well_formed distinction_meta_system = true.
 Proof. vm_compute. reflexivity. Qed.
 
-(** The typing applies to EVERY distinction (the E/R/R type is structural). *)
-Theorem every_distinction_err_well_formed :
-  forall _ : Distinction, is_well_formed distinction_meta_system = true.
-Proof. intros _. exact distinction_err_well_formed. Qed.
+(** What the components of the table stand for in a GIVEN distinction:
+    0, 1 — its two sides; 4, 5 — its two rules; 2, 3 — the two positions
+    (a role carries no proposition of its own). *)
+Definition distinction_content (D : Distinction) (i : nat) : Prop :=
+  match i with
+  | 0%nat => Distinction.positive D
+  | 1%nat => negative D
+  | 4%nat => ~ (Distinction.positive D /\ negative D)
+  | 5%nat => Distinction.positive D \/ negative D
+  | _ => True
+  end.
+
+(** The typing applies to EVERY distinction, and the distinction enters the
+    statement: the table is well-formed; its Element components are the two
+    sides of D; every Rule component is a statement that holds of D by its
+    fields. (2026-11-13: the former statement,
+       forall _ : Distinction, is_well_formed distinction_meta_system = true,
+    did not mention its bound variable and repeated
+    distinction_err_well_formed.) *)
+Theorem every_distinction_err_well_formed : forall D : Distinction,
+  is_well_formed distinction_meta_system = true /\
+  (distinction_content D 0 = Distinction.positive D /\
+   distinction_content D 1 = negative D) /\
+  (forall i : nat,
+     errs_category distinction_meta_system i = Cat_Rule ->
+     distinction_content D i).
+Proof.
+  intro D. split; [exact distinction_err_well_formed | split; [split; reflexivity |]].
+  intros i Hc.
+  destruct i as [|[|[|[|[|[|i]]]]]]; simpl in *; try discriminate Hc.
+  - exact (exclusive D).
+  - exact (exhaustive D).
+  - exact I.
+Qed.
 
 Theorem distinction_has_all_three : exists i j k,
   errs_category distinction_meta_system i = Cat_Element /\

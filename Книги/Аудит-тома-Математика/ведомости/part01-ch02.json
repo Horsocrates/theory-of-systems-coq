@@ -1,0 +1,840 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/02 Акт различия запись Distinction.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 154,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`Distinction` как формальная запись на языке Rocq есть запись логической структуры реальных актов различения, а не самостоятельная математическая сущность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Distinction` (Distinction.v:67): поля `positive`, `negative : Prop`, `exclusive : ~ (positive /\\ negative)`, `exhaustive : positive \\/ negative`. Closed under the global context. Файл на странице не назван; объявлений с именем `Distinction` в src пять: ещё KnowledgeInformation.v:86 (другая запись) и три `Definition Distinction := nat` в src/physics."
+  },
+  {
+   "line": 208,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Запись `Record Distinction`, которую мы введём в «Формализация в Rocq: запись `Record Distinction`», отразит это единство как *одну структуру с четырьмя полями*, не как набор независимых утверждений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись имеет ровно четыре поля (Distinction.v:67–72)."
+  },
+  {
+   "line": 370,
+   "theorem": null,
+   "claim": "Однако в формальной системе Rocq, в которой ведётся настоящая работа, Закон Исключённого Третьего *не выводим* как теорема: для произвольной пропозиции $P$ конструктивного доказательства $P \\vee \\neg P$ нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Метаутверждение о системе без аксиом; изнутри компилятором не проверяется. В формализации закон объявлен аксиомой (`classic`, Distinction.v:36); без аксиом доказана форма с двойным отрицанием — `L3_binarity : forall P, ~ ~ (P \\/ ~ P)` (BinarityVsTotality.v:72, Closed)."
+  },
+  {
+   "line": 372,
+   "theorem": "classic",
+   "claim": "По этой причине в формализации он получает статус самостоятельного $L3$ — технически отдельное поле записи `Distinction` и отдельная аксиома `classic`, на которую опирается конструкция `distinction_of`",
+   "page_price": "отдельная аксиома classic",
+   "verdict": "ok",
+   "note": "`Axiom classic : forall P : Prop, P \\/ ~P` (Distinction.v:36); поле `exhaustive` (:71); `Print Assumptions distinction_of` — Distinction.classic. Статус назван честно: поле записи и аксиома. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 380,
+   "theorem": "exhaustive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "Онтологически совместная исчерпанность *следует* из взаимного исключения вместе с тождеством сторон; формально она *вводится* как отдельное поле и опирается на аксиому.",
+   "page_price": "поле и аксиома",
+   "verdict": "ok",
+   "note": "Формальная часть верна: `exhaustive` — отдельное поле (Distinction.v:71), в `distinction_of` оно заполнено аксиомой (`exhaustive (distinction_of P) = classic P`, reflexivity). В Rocq исчерпанность из исключительности не следует: `~ (forall p n : Prop, ~ (p /\\ n) -> p \\/ n)` — пробный файл, Closed."
+  },
+  {
+   "line": 423,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "ЗДО не записывается как отдельное поле или аксиома — его работа проявляется в том, что построение конкретного экземпляра `Distinction` требует предъявления *обоснований* для всех четырёх полей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поля, отвечающего ЗДО, в записи нет. Из четырёх полей два — пропозиции, два — доказательства; в канонической конструкции `distinction_of` доказательство исчерпанности есть применение аксиомы `classic`."
+  },
+  {
+   "line": 452,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "*Второй — закон $L4$ в слое `Distinction`.* Это — самозаземление различения, формально выразимое в Rocq как утверждение `positive D -> ~ negative D`: при наличии положительной стороны отрицательная сторона отрицается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L4_self_grounding : forall D : Distinction, forall (p : positive D), ~ negative D` (Distinction.v:128); доказана из поля `exclusive`. Closed under the global context."
+  },
+  {
+   "line": 456,
+   "theorem": "Law_of_SufficientReason",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Основание этого отрицания даётся самим фактом положительной стороны вместе с исключительностью — полем `exclusive`. Глава 3 выведет $L4$ именно в этом виде, как теорему о записи.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Law_of_SufficientReason : forall D, positive D -> ~ negative D` (LawsFromDistinction.v:79) — повторяет `L4_self_grounding`. Closed. Статус «теорема о записи» честный: источник (поле `exclusive`) назван."
+  },
+  {
+   "line": 460,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "*Третий — свидетельствование в аксиоматическом слое.* Это — отдельный технический след того же принципа: требование, что индивидуальное существование имеет *определённого свидетеля*.",
+   "page_price": "аксиоматический слой",
+   "verdict": "ok",
+   "note": "`Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x}` (ToS_Axioms.v:105) — аксиома извлечения свидетеля."
+  },
+  {
+   "line": 467,
+   "theorem": null,
+   "claim": "Смешивать эти три уровня не следует: онтологический ЗДО — принцип, $L4$ — теорема о записи, свидетельствование — технический приём аксиоматического слоя.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статусы соответствуют формализации: L4 в слое записи — теорема без допущений (`L4_self_grounding`, Closed), свидетельствование — аксиома `L4_witness`."
+  },
+  {
+   "line": 479,
+   "theorem": "positive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "| Положительная сторона | $L1$ (Тождество) | `positive : Prop` |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `positive : Prop` (Distinction.v:68). L1 в формализации — `L1_stability : positive D = positive D` (:93, reflexivity); её разбор — предмет главы 3."
+  },
+  {
+   "line": 480,
+   "theorem": "negative",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "| Отрицательная сторона | $L1$ (Тождество) | `negative : Prop` |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `negative : Prop` (Distinction.v:69); `L1_negative_stable : negative D = negative D` (:97, reflexivity)."
+  },
+  {
+   "line": 481,
+   "theorem": "exclusive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "| Взаимное исключение | $L2$ (Непротиворечие) | `exclusive` |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `exclusive : ~ (positive /\\ negative)` (Distinction.v:70); `L2_exclusivity` (:107) — его проекция."
+  },
+  {
+   "line": 482,
+   "theorem": "exhaustive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "| Совместная исчерпанность | $L3$ (Исключённое Третье) | `exhaustive` |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле `exhaustive : positive \\/ negative` (Distinction.v:71); `L3_totality` (:117) — его проекция."
+  },
+  {
+   "line": 494,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Он будет введён в последующей главе о структуре уровней — как самостоятельная структура `Level`, формализующая порядок уровней.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Level : Set := L1 | LS : Level -> Level` (TheoryOfSystems_Core_ERR.v:59) с порядком `level_lt` (:68) — этот файл называет глава 3. Closed. Объявлений с именем `Level` в формализации пять (четыре в src, одно в Architecture_of_Reasoning); в запись `Distinction` тип не входит."
+  },
+  {
+   "line": 517,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Это первый формальный объект настоящего тома, с которым непосредственно работает машинная проверка.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись — Distinction.v:67. В самом файле ей предшествует объявление аксиомы `classic` (:36)."
+  },
+  {
+   "line": 524,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~(positive /\\ negative); exhaustive : positive \\/ negative }.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок совпадает с Distinction.v:67–72 с точностью до пробела после `~`, точки с запятой после последнего поля и комментариев при полях; в виде со страницы принимается компилятором (пробный файл), сорт — `Type`. Тот же блок повторён на стр. 555 и 1726."
+  },
+  {
+   "line": 537,
+   "theorem": "exclusive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "`exclusive : ~(positive /\\ negative)` — взаимное исключение. Доказательство того, что положительное и отрицательное не могут одновременно иметь место.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тип поля — Distinction.v:70."
+  },
+  {
+   "line": 538,
+   "theorem": "exhaustive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "`exhaustive : positive \\/ negative` — совместная исчерпанность. Доказательство того, что одно из двух обязательно имеет место.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тип поля — Distinction.v:71."
+  },
+  {
+   "line": 540,
+   "theorem": "mkDistinction",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор записи Distinction)",
+   "claim": "Имя конструктора — `mkDistinction` — следует обычному соглашению Rocq для конструкторов записей",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`mkDistinction : forall positive negative : Prop, ~ (positive /\\ negative) -> positive \\/ negative -> Distinction` (Distinction.v:67; `Check` в пробном файле)."
+  },
+  {
+   "line": 541,
+   "theorem": "mk",
+   "external": true,
+   "assumptions": "не применимо (часть имени)",
+   "claim": "префикс `mk` означает «построить» (*make*)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Префикс имени конструктора `mkDistinction`, не имя объявления."
+  },
+  {
+   "line": 551,
+   "theorem": null,
+   "claim": "`Record` — синтаксическая конструкция Rocq, эквивалентная индуктивному типу с единственным конструктором.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно для записей без примитивных проекций, как здесь; см. запись стр. 566."
+  },
+  {
+   "line": 566,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Inductive Distinction : Type := | mkDistinction : forall (positive negative : Prop), ~(positive /\\ negative) -> positive \\/ negative -> Distinction.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Индуктивное определение со страницы принимается компилятором (пробный файл); сорт `Type` и тип конструктора совпадают с записью исходника (`Check Distinction : Type`). В исходнике объявление — `Record`."
+  },
+  {
+   "line": 599,
+   "theorem": "negative",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "В общей записи `Distinction` поле `negative` есть *самостоятельная* пропозиция типа `Prop`. Оно *не* определено синтаксически как отрицание поля `positive`: связь между положительной и отрицательной сторонами задаётся не равенством, а полями `exclusive` и `exhaustive` — исключительностью и исчерпанностью.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: `negative : Prop` — отдельное поле (Distinction.v:69), равенства `negative = ~ positive` в записи нет. Примеры записей, где отрицательная сторона не записана отрицанием: `swap_distinction` (AsymmetricDistinction.v:66), `bit_distinction` (KnowledgeDistinctionGrounding.v:141)."
+  },
+  {
+   "line": 609,
+   "theorem": "negative_iff_not_positive",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Общая запись, стало быть, шире канонической конструкции по форме: она оставляет отрицательную сторону явной частью акта, не сводя её заранее к отрицанию положительной. По содержанию же поля `exclusive` и `exhaustive` связывают стороны жёстко: во всякой записи отрицательная сторона равносильна отрицанию положительной (`negative_iff_not_positive`, файл `DistinctionCoDefinition.v`, без аксиом).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «общая запись этого не требует». negative_iff_not_positive : forall D, negative D <-> ~ positive D. Closed under the global context. С ценой classic: every_distinction_canonical_up_to_iff — всякое различение совпадает с каноническим с точностью до равносильности сторон."
+  },
+  {
+   "line": 656,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Заметим, что $\\varepsilon$ и $\\eta$ суть *доказательства*, не *истинностные значения*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поля `exclusive` и `exhaustive` — термы доказательств пропозиций `~ (positive /\\ negative)` и `positive \\/ negative` (Distinction.v:70–71)."
+  },
+  {
+   "line": 659,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Здесь зафиксируем лишь: $\\varepsilon$ и $\\eta$ — термы доказательств, которыми исключительность и исчерпанность установлены в данном различении; они не сводятся к булевским значениям «true/false».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «несут структурную информацию — они показывают, как… установлены». При принятой classic доказательства в полях неразличимы (distinction_proof_fields_irrelevant, цена — Distinction.classic)."
+  },
+  {
+   "line": 716,
+   "theorem": "CauchySeq",
+   "claim": "В Части IV — запись `CauchySeq` как процесс с полем сходимости.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было `CauchyProcess` — такого объявления нет. Record CauchySeq := mkCauchy { cs_seq :> nat -> Q; cs_cauchy : is_cauchy cs_seq } (CauchyReal.v:48).",
+   "file": "src/CauchyReal.v"
+  },
+  {
+   "line": 717,
+   "theorem": "Group",
+   "file": "src/stdlib/GroupTheory.v",
+   "claim": "В Части XI — запись `Group` как структура с операцией, нейтральным элементом, обратными элементами и полями ассоциативности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Group` (GroupTheory.v:30): носитель, равенство `g_eq`, операция `g_op`, нейтральный `g_id`, обратный `g_inv`, поля `g_assoc`, `g_id_l`, `g_inv_l` и поля согласованности с равенством. Closed. Часть XI на неё ссылается (сноска 11 главы 11.1)."
+  },
+  {
+   "line": 718,
+   "theorem": "Category",
+   "file": "src/stdlib/Category.v",
+   "claim": "В Части XIV — запись `Category` как структура с объектами, морфизмами, композицией и полями ассоциативности и тождества.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «В Части XII». Запись Category (stdlib/Category.v:23) разбирается в главе 14.1."
+  },
+  {
+   "line": 727,
+   "theorem": "L3_totality",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Главе 3 будут *выведены* законы логики $L1, L2, L3, L4$ как теоремы о свойствах этой записи. Каждое из четырёх полей породит соответствующее утверждение, и доказательство этого утверждения будет тривиальным — оно сведётся к проекции на соответствующее поле или к простому преобразованию.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: `L2_exclusivity` и `L3_totality` (Distinction.v:107, :117) — проекции полей `exclusive` и `exhaustive`; `L4_self_grounding` (:128) — из `exclusive`; `L1_stability` (:93) — `positive D = positive D`, reflexivity. Все четыре — Closed under the global context."
+  },
+  {
+   "line": 753,
+   "theorem": null,
+   "claim": "Record Distinction_bool := mkDistinction_bool { positive_b : bool; negative_b : bool; ... }.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Гипотетическая запись («выглядела бы так»); в формализации такого объявления нет, многоточие — часть наброска."
+  },
+  {
+   "line": 777,
+   "theorem": "bool",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Inductive bool : Set := | true : bool | false : bool.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает со стандартной библиотекой (`Print bool`: `Inductive bool : Set := true : bool | false : bool`)."
+  },
+  {
+   "line": 785,
+   "theorem": null,
+   "claim": "Например, выражение `Nat.eqb 2 2` (булевское равенство натуральных чисел) вычислится в `true`; `Nat.eqb 2 3` — в `false`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Eval compute in (Nat.eqb 2 2, Nat.eqb 2 3)` даёт `(true, false)` (пробный файл)."
+  },
+  {
+   "line": 860,
+   "theorem": null,
+   "claim": "В настоящем томе используется стандартная CIC, где `Prop` по умолчанию *не* обладает строгой proof-irrelevance; с аксиомой `classic`, принятой в томе, она становится теоремой",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «но в большинстве конкретных рассуждений мы можем её принимать». ClassicalFacts.proof_irrelevance_cci : (forall A, A \\/ ~ A) -> forall (B : Prop) (b1 b2 : B), b1 = b2; применена в distinction_proof_fields_irrelevant."
+  },
+  {
+   "line": 866,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Но *сама структура* объекта `Distinction` — *релевантна*. Разные акты различения, даже если они приводят к одному и тому же абстрактному факту, могут быть *структурно различны*: разные положительные стороны, разные отрицательные стороны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): из перечня убрано «разные обоснования исключительности и исчерпанности»; следом сказано, что обоснования актов не различают."
+  },
+  {
+   "line": 982,
+   "theorem": null,
+   "claim": "ToS использует механизм $E/R/R$ с явной передачей статуса, без Аксиомы Выбора.",
+   "page_price": "без Аксиомы Выбора",
+   "verdict": "ok",
+   "note": "Выбор по порядку — `L5_choose` (foundation/P4_Eliminates_AC.v:25), Closed; аксиомы выбора среди объявлений формализации нет. Из принятой `L4_witness` выбор по семейству выводится (`l4_statement_gives_functional_choice`, settheory/ChoicePriceMap.v:234) — предмет главы 6 и Части X. Механизм статуса разбирает глава 6, а не глава 5."
+  },
+  {
+   "line": 1022,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "чтобы построить экземпляр `Distinction`, нужно предъявить две пропозиции `positive` и `negative` и — вот здесь конструктивность — *доказательства* заявленных связей между ними: `exclusive` (исключительность) и `exhaustive` (исчерпанность). Конструктивный аспект состоит в том, что эти связи должны быть предъявлены как термы доказательств, а не постулированы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор требует две пропозиции и два доказательства (Distinction.v:67). В канонической конструкции связь исчерпанности предъявлена аксиомой: `exhaustive (distinction_of P) = classic P`. Без аксиом построены `bit_distinction` (KnowledgeDistinctionGrounding.v:141) и `swap_distinction` (AsymmetricDistinction.v:66) — обе Closed."
+  },
+  {
+   "line": 1113,
+   "theorem": null,
+   "claim": "С этого момента вся дальнейшая работа будет вестись в `Prop`-стиле. Каждое утверждение о математических объектах — пропозиция, не булевское значение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждения теорем — пропозиции по устройству Rocq. Булевы предикаты в формализации при этом есть: определений с результатом `bool` не меньше 365 в 185 файлах (подсчёт по шаблону), утверждения о них имеют вид `f … = true`."
+  },
+  {
+   "line": 1127,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Тип `RealProcess := nat -> Q` есть формальная запись этой структуры на языке Rocq.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition RealProcess := nat -> Q` (ProcessCore.v:34). Closed. То же определение повторено ещё в девяти файлах (Archimedean_ERR.v:150, EVT_idx.v:25, HeineBorel_ERR.v:64, ShrinkingIntervals_ERR.v:159 и др.)."
+  },
+  {
+   "line": 1129,
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Сам процесс $r : \\texttt{nat} \\to \\texttt{Q}$ — вычислимая функция, живущая в `Set`. Но утверждения о процессе — что он сходящийся, что он представляет конкретное геометрическое или физическое значение, что он мажорирует другой процесс, — пропозиции в `Prop`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`nat -> Q : Set`; сходимость — `is_Cauchy : RealProcess -> Prop` (ProcessCore.v:68) и `is_cauchy` (CauchyReal.v:43). Closed."
+  },
+  {
+   "line": 1142,
+   "theorem": "is_open",
+   "file": "src/stdlib/Topology.v",
+   "claim": "Открытость множества, замкнутость, компактность, связность — формальные записи аспектов этой структуры на языке топологии. Они пропозиции в `Prop`, не вычислимые предикаты",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`is_open`, `is_closed : (Q -> Prop) -> Prop` (stdlib/Topology.v:33, :37) — пропозиции. Определения компактности и связности Части V здесь не сверялись."
+  },
+  {
+   "line": 1150,
+   "theorem": null,
+   "claim": "**Часть XIV: категорная теория.**",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «Часть XII». Часть XIV — «Категория систем»."
+  },
+  {
+   "line": 1156,
+   "theorem": null,
+   "file": "src/stdlib/Category.v",
+   "claim": "Равенство морфизмов, коммутативность диаграмм, существование универсальных конструкций — пропозиции о реальной структуре связей в семействах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`cat_mor_eq : forall a b, cat_mor a b -> cat_mor a b -> Prop` (Category.v:26); `is_initial`, `is_terminal` (:105, :110) — со значением в `Prop`."
+  },
+  {
+   "line": 1162,
+   "theorem": null,
+   "claim": "**Части VI и XVII: квантовая теория и информация.**",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «Часть XV: квантовая информация» — части с таким предметом в томе нет (Часть XV — «Вычисления и граница финитизации»). Глава 6.6 — операторы и мост в квантовую динамику; глава 17.7 — раздел «Фон-Нейман и квантовая информация: мост к физике»."
+  },
+  {
+   "line": 1166,
+   "theorem": null,
+   "file": "src/physics/Orthogonality.v",
+   "claim": "Запись свойств квантовых состояний и операторов в Rocq — пропозиции в `Prop`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пример: `orthogonal : QVec n -> QVec n -> Prop` (physics/Orthogonality.v:33). В тех же разделах есть и булевы предикаты (например, `angular_selection_rule … : bool`, stdlib/qphysics/AngularMomentum.v:55)."
+  },
+  {
+   "line": 1219,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Назовём эту конструкцию `distinction_of`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition distinction_of (P : Prop) : Distinction` (Distinction.v:75): стороны `P` и `~P`. Print Assumptions — Distinction.classic."
+  },
+  {
+   "line": 1262,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Definition distinction_of (P : Prop) : Distinction := mkDistinction P (~ P) _ _.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): подпись блока — «Схема определения distinction_of в Rocq» (было «Формальное определение»). Блок с подчёркиваниями — заготовка: компилятор как определение его не принимает, и страница ниже сама называет подчёркивания обязательствами доказательства."
+  },
+  {
+   "line": 1276,
+   "theorem": "L2_constructive",
+   "file": "src/foundation/BinarityVsTotality.v",
+   "claim": "Утверждение $\\neg(P \\wedge \\neg P)$ доказуемо в Rocq *без всяких аксиом*, конструктивно.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "`L2_constructive : forall P : Prop, ~ (P /\\ ~ P)` (BinarityVsTotality.v:85); то же — `Law_of_NonContradiction`, `L2_canonical` (LawsFromDistinction.v:45, :55). Все три — Closed under the global context."
+  },
+  {
+   "line": 1287,
+   "theorem": "L2_constructive",
+   "claim": "Theorem L2_constructive : forall P : Prop, ~ (P /\\ ~ P). Proof. intros P [p np]. exact (np p). Qed.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было `Lemma no_contradiction_P` — такого имени нет. L2_constructive (BinarityVsTotality.v:85) — то же утверждение с тем же доказательством. Closed under the global context.",
+   "file": "src/foundation/BinarityVsTotality.v"
+  },
+  {
+   "line": 1304,
+   "theorem": null,
+   "claim": "В чистой CIC утверждение $P \\vee \\neg P$ — закон исключённого третьего — *не выводимо* для произвольной пропозиции $P$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Метаутверждение о CIC без аксиом; изнутри системы не проверяется. В формализации закон принят аксиомой (Distinction.v:36)."
+  },
+  {
+   "line": 1330,
+   "theorem": "classic",
+   "claim": "Чтобы работать с законом исключённого третьего в полной общности, Rocq предоставляет аксиому:",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "В стандартной библиотеке — `Classical_Prop.classic`. Конструкция `distinction_of` опирается на одноимённое собственное объявление `Axiom classic` (Distinction.v:36, то же утверждение); компилятор называет `Distinction.classic`. Ещё одно местное объявление — settheory/BorelDeterminacy.v:21; библиотечная аксиома подключена через ToS_Axioms.v:31. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 1334,
+   "theorem": "classic",
+   "claim": "Axiom classic : forall P : Prop, P \\/ ~ P.",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "Совпадает с Distinction.v:36 с точностью до пробела после `~`. Статус на странице — «принимается», не «доказывается». С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 1358,
+   "theorem": null,
+   "claim": "Аксиома `classic P` даёт доказательство дизъюнкции $P \\vee \\neg P$ в `Prop` — но *не* даёт вычислимого теста, который возвращал бы `true` или `false` в зависимости от того, какая сторона имеет место.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`classic P : P \\/ ~ P` — пропозиция; разбор её случаев при построении значения в `Set` правила Rocq не допускают."
+  },
+  {
+   "line": 1365,
+   "theorem": "L3_informative",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Но если позже понадобится *информативный* выбор ветви — вычислительное ветвление, зависящее от того, выполнено ли $P$, — одной `classic` мало: нужен дополнительный принцип свидетельствования, обсуждаемый в последующей главе об аксиоматическом слое ToS.",
+   "page_price": "classic и свидетельствование",
+   "verdict": "ok",
+   "note": "`L3_informative : forall P : Prop, {P} + {~P}` (ToS_Axioms.v:119); Print Assumptions — Classical_Prop.classic и ToS_Axioms.L4_witness. Что одной `classic` недостаточно — метаутверждение, компилятором не проверяется."
+  },
+  {
+   "line": 1377,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "поле `exhaustive` в записи `Distinction`, построенной из произвольной пропозиции $P$, опирается на `classic`.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "`exhaustive (distinction_of P) = classic P` (reflexivity, пробный файл). То же выражает `distinction_of_is_actualization` (BinarityVsTotality.v:191): аксиома входит в конструкцию только на месте поля `exhaustive`."
+  },
+  {
+   "line": 1380,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Подробное обсуждение всех технических аксиом, на которые опирается ToS (`classic` и `L4_witness`), и онтологическое прояснение их статуса — предмет последующей главы об аксиоматическом слое ToS.",
+   "page_price": "две аксиомы: classic и L4_witness",
+   "verdict": "ok",
+   "note": "Логических допущений в действии два: `classic` и `ToS_Axioms.L4_witness`. Кроме них в src объявлены две аксиомы раздела Навье — Стокса (`C_B_positive`, `B_coeff_bounded`, navier_stokes/TriadicInteraction.v:120, :122) и два параметра (`C_B`, `B_raw`); `classic` объявлена трижды (библиотечная через ToS_Axioms.v:31, Distinction.v:36, settheory/BorelDeterminacy.v:21). Полный перечень — предмет главы 6."
+  },
+  {
+   "line": 1383,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`distinction_of` как универсальная конструкция требует `classic`, и это требование онтологически обосновано.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "Print Assumptions distinction_of — `Distinction.classic : forall P : Prop, P \\/ ~ P`."
+  },
+  {
+   "line": 1393,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Definition distinction_of (P : Prop) : Distinction. Proof. apply (mkDistinction P (~ P)). - (* exclusive : ~(P /\\ ~ P) *) intros [p np]. exact (np p). - (* exhaustive : P \\/ ~ P *) apply classic. Defined.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): подпись блока — «полное определение можно записать в Rocq по шагам» (было «имеет вид»); после разбора добавлено, что в репозитории тот же объект записан одним термом и что равенство двух записей доказано (distinction_of_by_steps_eq). Print Assumptions distinction_of: Distinction.classic."
+  },
+  {
+   "line": 1406,
+   "theorem": "mkDistinction",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор записи Distinction)",
+   "claim": "`apply (mkDistinction P (~ P)).` — применяем конструктор `mkDistinction`, фиксируя первые два аргумента (`positive := P` и `negative := ~ P`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): разбор относится к пошаговой записи; страница теперь называет её пошаговой и говорит, что в репозитории объект записан одним термом."
+  },
+  {
+   "line": 1409,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`Defined.` (а не `Qed.`) — завершает построение, делая определение *прозрачным* для дальнейшей работы",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В исходнике — `Defined` (Distinction.v:80); прозрачность используется: `co_constitution` (:202) доказана `reflexivity`."
+  },
+  {
+   "line": 1419,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "где $\\varepsilon_P$ — доказательство $\\neg(P \\wedge \\neg P)$ (конструктивное), а $\\eta_P$ — доказательство $P \\vee \\neg P$ (опирающееся на `classic`).",
+   "page_price": "ε — без аксиом, η — classic",
+   "verdict": "ok",
+   "note": "Проверено (пробный файл CheckLaws.v): `exclusive (distinction_of P)` — замкнутый терм `fun H => match H with conj p np => np p end`; `exhaustive (distinction_of P) = classic P`."
+  },
+  {
+   "line": 1430,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Что тип `Distinction` не пуст, видно уже на простейшем примере: различение можно построить из `True` и `False`, и для этого никакой классический принцип не нужен — исключительность и исчерпанность пары `True` / `False` доказываются прямо.",
+   "page_price": "без классического принципа",
+   "verdict": "ok",
+   "note": "Верно: `mkDistinction True False (fun H => match H with conj _ f => f end) (or_introl I)` — Closed under the global context (пробный файл). В формализации экземпляра из `True` и `False` нет; без аксиом построен `bit_distinction` (KnowledgeDistinctionGrounding.v:141), а леммы о непустоте в Distinction.v (`one_distinction_exists`, :163; `distinction_count_any`, :178) берут `distinction_of True` и по компилятору стоят на `classic`."
+  },
+  {
+   "line": 1436,
+   "theorem": "every_prop_distinguishes",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Для *каждой* пропозиции $P$ есть соответствующее различение `distinction_of` $(P)$ — каноническое различение $P$ и $\\neg P$.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "`every_prop_distinguishes : forall P : Prop, exists D : Distinction, positive D = P` (Distinction.v:82); Print Assumptions — Distinction.classic."
+  },
+  {
+   "line": 1440,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "И именно эта универсальность, а не простая непустота, требует классического принципа `classic`: чтобы для *произвольной* $P$ предъявить поле `exhaustive` — доказательство $P \\vee \\neg P$.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "Слово «требует» подтверждается: `(forall P : Prop, exists D : Distinction, positive D = P) -> forall P : Prop, P \\/ ~ P` — пробный файл, Closed under the global context. В формализации этой обратной стороны нет."
+  },
+  {
+   "line": 1463,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Из записи `Distinction` будут выведены законы логики $L1, L2, L3, L4$ как теоремы о её свойствах; `distinction_of` приносит эти теоремы к каждой пропозиции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «Из distinction_of будут выведены законы». Теоремы о законах сформулированы о произвольной записи D; distinction_of в них не участвует."
+  },
+  {
+   "line": 1466,
+   "theorem": "five_properties_of_distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Глава 3 покажет конкретно: для любого $D : \\texttt{Distinction}$, в частности для $D = \\texttt{distinction\\_of} (P)$, проверяются формальные утверждения, выражающие классические законы логики.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`five_properties_of_distinction` (Distinction.v:236) и `five_laws_from_distinction` (LawsFromDistinction.v:139) — для любого `D`, Closed. Для `D = distinction_of P` утверждение L3 возвращает вложенное в запись `classic P`."
+  },
+  {
+   "line": 1506,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Это — не строгое доказательство в формальной системе (минимальность `Distinction` есть метатеоретическое наблюдение о выборе формализма, не теорема внутри Rocq), но конкретный структурный анализ, на котором стоит наш выбор.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: теорем о минимальности в формализации нет. Для двух полей-доказательств они возможны: `~ (forall p n : Prop, p \\/ n -> ~ (p /\\ n))` и `~ (forall p n : Prop, ~ (p /\\ n) -> p \\/ n)` — пробный файл, обе Closed."
+  },
+  {
+   "line": 1531,
+   "theorem": null,
+   "claim": "Record Distinction_NoExcl := mkDistinction_NoExcl { positive : Prop; negative : Prop; exhaustive : positive \\/ negative }.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Иллюстрация; в формализации такого объявления нет. Блок компилируется (пробный файл, модуль NoExcl)."
+  },
+  {
+   "line": 1546,
+   "theorem": null,
+   "claim": "Definition trivial_both : Distinction_NoExcl := mkDistinction_NoExcl True True (or_introl I).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Иллюстрация; компилируется, обе стороны имеют место (`trivial_both_overlap`, Closed; пробный файл)."
+  },
+  {
+   "line": 1582,
+   "theorem": null,
+   "claim": "Record Distinction_NoExh := mkDistinction_NoExh { positive : Prop; negative : Prop; exclusive : ~(positive /\\ negative) }.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Иллюстрация; компилируется (модуль NoExh). В формализации есть содержательная запись без поля исчерпанности — `PendingDistinction` (BinarityVsTotality.v:94), но с полем со-определения `p_neg <-> ~ p_pos`; для неё третья область исключена (`pending_binarity`, :104, Closed)."
+  },
+  {
+   "line": 1597,
+   "theorem": null,
+   "claim": "Definition trivial_neither : Distinction_NoExh := mkDistinction_NoExh False False (fun H => match H with conj h _ => h end).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Иллюстрация; компилируется, ни одна сторона не имеет места (`trivial_neither_gap`, Closed; пробный файл)."
+  },
+  {
+   "line": 1636,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Каждое поле отвечает за одну работу в структуре акта различения; ни одно не дублирует другое; ни одно не может быть выведено из остальных.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Для полей `exclusive` и `exhaustive` верно и доказуемо (запись стр. 1494). Поле `negative` равенством из остальных не получается, но его содержание ими определено с точностью до равносильности: `negative D <-> ~ positive D` (запись стр. 609). Статус на странице — наблюдение, не теорема."
+  },
+  {
+   "line": 1641,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Можно представить себе и другую запись — например, такую, в которой хранится лишь одна базовая пропозиция, а отрицательная сторона определяется как её отрицание, исключительность доказывается тривиально, а исчерпанность получается применением классического принципа. Такая кодировка была бы беднее по выразительности, но формально возможна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Описанная кодировка совпадает с областью значений `distinction_of`. По содержанию сторон она не беднее: всякая запись совпадает с канонической с точностью до равносильности сторон (`every_distinction_canonical_up_to_iff`, пробный файл); беднее она по форме — сторона не хранится отдельным термом."
+  },
+  {
+   "line": 1688,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В Главе 3 (Часть I) — тип `Level` как самостоятельная структура для формализации Закона Порядка $L5$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «В Главе 6». Тип Level вводится в главе 3 (раздел «Формальный аппарат: тип Level»)."
+  },
+  {
+   "line": 1689,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Части II — структуры отношений между различениями, опирающиеся на `Distinction` как на базовый объект, но вводящие свою собственную надстройку (счёт как длина списка различений).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «В Части III». Файлы Части III запись Distinction не подключают; надстройка — distinction_count (Distinction.v:157), глава II.2."
+  },
+  {
+   "line": 1690,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В Части XI — алгебраические структуры (группы, кольца): записи того же вида — носитель и поля-обоснования свойств элементов и операций. Сама запись `Distinction` в них не используется; акт различения присутствует в них опосредованно — каждое поле-свойство есть пропозиция.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 3, слово автора): было «в которых Distinction используется опосредованно». Файлы Части XI (stdlib/GroupTheory.v, stdlib/RingField.v, src/algebra/*) запись Distinction не подключают ни прямо, ни через зависимости."
+  },
+  {
+   "line": 1700,
+   "theorem": "L2_exclusivity",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Минимальность `Distinction` имеет прямое следствие для Главы 3, в которой из этой записи будут *выведены* законы логики $L1, L2, L3, L4$ как теоремы Rocq.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Источник назван верно: теоремы о произвольной записи — `L1_stability`, `L2_exclusivity`, `L3_totality`, `L4_self_grounding` (Distinction.v:93–130), все Closed under the global context."
+  },
+  {
+   "line": 1708,
+   "theorem": "L3_totality",
+   "file": "src/foundation/Distinction.v",
+   "claim": "$L1$ выводится из `positive` и `negative` (тождество сторон); $L2$ — из `exclusive`; $L3$ — из `exhaustive`; $L4$ — как самозаземление различения: из положительной стороны вместе с `exclusive`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует доказательствам: `L2_exclusivity` есть `exclusive D`, `L3_totality` есть `exhaustive D` — проекции полей (закон дан полем записи, и страница это называет); `L4_self_grounding` — из `exclusive`; `L1_stability`, `L1_negative_stable` — `reflexivity` (равенство терма самому себе)."
+  },
+  {
+   "line": 1746,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "чтобы построить экземпляр `Distinction`, необходимо предъявить *обе* стороны — и `positive`, и `negative`, и обоснования `exclusive` и `exhaustive`, явно связывающие эти стороны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор `mkDistinction` принимает четыре аргумента; типы третьего и четвёртого зависят от обоих первых (Distinction.v:67–72)."
+  },
+  {
+   "line": 1760,
+   "theorem": "co_constitution",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Когда мы определяем `positive := P`, мы одновременно определяем структурно `negative` как $\\neg P$ — именно так работает универсальная конструкция `distinction_of` $(P)$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`co_constitution : forall P : Prop, positive (distinction_of P) = P /\\ negative (distinction_of P) = ~ P` (Distinction.v:202), доказана `split; reflexivity`; по компилятору — Distinction.classic."
+  },
+  {
+   "line": 1806,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Структурная запись `Record Distinction` с четырьмя полями (`positive`, `negative`, `exclusive`, `exhaustive`) — формальная запись на языке Rocq логической структуры акта различения",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре поля — Distinction.v:67–72. Closed under the global context."
+  },
+  {
+   "line": 1822,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Для любой пропозиции $P$ конструкция `distinction_of` $(P)$ строит соответствующее различение с положительной стороной $P$ и отрицательной $\\neg P$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Стороны — по `co_constitution` (Distinction.v:202); цена конструкции — Distinction.classic."
+  },
+  {
+   "line": 1829,
+   "theorem": "classic",
+   "claim": "Конструкция `distinction_of` опирается на аксиому `classic` ($\\forall P, P \\vee \\neg P$) для построения поля `exhaustive`. Эта зависимость — техническая: в чистой CIC закон исключённого третьего не выводим.",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "Print Assumptions distinction_of — Distinction.classic; поле `exhaustive` заполнено термом `classic P` (Distinction.v:79). С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 1833,
+   "theorem": "classic",
+   "claim": "Онтологически закон производный (от Тождества и Непротиворечия); формально — самостоятельная аксиома",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "Статус назван честно: в формализации закон — аксиома (Distinction.v:36), теоремой без допущений не получен. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 1841,
+   "theorem": null,
+   "claim": "Без `exclusive` стороны могут совпасть (запись теряет исключительность); без `exhaustive` стороны могут отсутствовать обе (запись теряет полноту).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Подтверждается примерами страницы (пробный файл: `trivial_both_overlap`, `trivial_neither_gap`, обе Closed). Статус — структурный анализ, не теорема формализации."
+  },
+  {
+   "line": 1848,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Невозможно построить `Distinction`, имея только одну сторону.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор требует обе стороны. Функция `distinction_of : Prop -> Distinction` при этом строит запись по одной пропозиции: вторая сторона вычисляется как её отрицание, исчерпанность даёт `classic`."
+  },
+  {
+   "line": 1862,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "$A = \\exists$ остаётся пред-формальным основанием, не формализуется в записях Rocq.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В Distinction.v «FIRST PRINCIPLE: A = exists» — заголовок-комментарий (стр. 38–40); объявления, выражающего A = ∃, в src не найдено (поиск по именам)."
+  },
+  {
+   "line": 1863,
+   "theorem": null,
+   "claim": "Не вводятся искусственные конструкции, пытающиеся обойти эту границу (как `Axiom A_exists : True` или подобные)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявления `A_exists` в формализации нет. Все объявления `Axiom` в src: `classic` (Distinction.v:36; settheory/BorelDeterminacy.v:21), `L4_witness` (ToS_Axioms.v:105), `C_B_positive`, `B_coeff_bounded` (navier_stokes/TriadicInteraction.v:120, :122)."
+  },
+  {
+   "line": 1887,
+   "theorem": "every_prop_distinguishes",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Универсальность `distinction_of` — то, что эта запись применима к любой пропозиции, — отражает универсальность работы Логики",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`every_prop_distinguishes` (Distinction.v:82); цена — Distinction.classic."
+  },
+  {
+   "line": 871,
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "distinction_determined_by_sides : positive D1 = positive D2 -> negative D1 = negative D2 -> D1 = D2. Axioms: Distinction.classic.",
+   "theorem": "distinction_determined_by_sides",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Обоснования исключительности и исчерпанности запись тоже хранит, но актов они не различают: при принятой аксиоме `classic` различение определяется своими двумя сторонами (`distinction_determined_by_sides`, файл `DistinctionCoDefinition.v`; цена — `classic`)."
+  },
+  {
+   "line": 1411,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "distinction_of_by_steps_eq : forall P, distinction_of_by_steps P = distinction_of P (доказательство — reflexivity). Axioms: Distinction.classic (через distinction_of).",
+   "theorem": "distinction_of_by_steps_eq",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Обе записи дают одно и то же определение — равенство проверяется вычислением (`distinction_of_by_steps_eq`, файл `DistinctionCoDefinition.v`)."
+  }
+ ]
+}

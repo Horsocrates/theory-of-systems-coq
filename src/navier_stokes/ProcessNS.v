@@ -24,6 +24,9 @@ From ToS Require Import navier_stokes.GalerkinSystem.
 From ToS Require Import navier_stokes.EnergyEstimate.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ========================================================================= *)
 (*  PART I: Process Solution — Galerkin Tower                                *)
 (* ========================================================================= *)
@@ -369,3 +372,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~35 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

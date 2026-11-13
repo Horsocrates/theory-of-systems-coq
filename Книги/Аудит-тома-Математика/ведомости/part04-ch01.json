@@ -144,11 +144,11 @@
   {
    "line": 307,
    "theorem": "classic",
-   "file": "src/foundation/Distinction.v",
    "claim": "Технически в отдельных файлах репозитория могут встречаться локальные объявления и параметры — скажем, локальное переобъявление `classic` в одном из файлов оснований или неинтерпретированный параметр в файле о $\\Pi^1_1$-выделении",
    "page_price": "",
    "verdict": "ok",
-   "note": "сомнительное: перечень неполон — classic переобъявлена в трёх файлах (foundation/Distinction.v:36, EVT_idx.v:338, settheory/BorelDeterminacy.v:21), а в допущениях девяти лемм стоит ещё аксиома стандартной библиотеки functional_extensionality_dep (ProcessWholeness.v:274, 283; DependentSystems.v:106; Conversion.v:127; stdlib/GameTheory.v:84, 91, 103; foundation/Ordinal.v:81, 92)"
+   "note": "сомнительное: перечень неполон — classic переобъявлена в трёх файлах (foundation/Distinction.v:36, EVT_idx.v:338, settheory/BorelDeterminacy.v:21), а в допущениях девяти лемм стоит ещё аксиома стандартной библиотеки functional_extensionality_dep (ProcessWholeness.v:274, 283; DependentSystems.v:106; Conversion.v:127; stdlib/GameTheory.v:84, 91, 103; foundation/Ordinal.v:81, 92) С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
   },
   {
    "line": 330,

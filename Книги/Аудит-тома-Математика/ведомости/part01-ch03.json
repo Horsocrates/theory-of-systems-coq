@@ -1,0 +1,878 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/03 Вывод законов логики из Distinction.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 9,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Глава 2 ввела запись `Distinction` с четырьмя полями: положительной стороной, отрицательной стороной, взаимным исключением и совместной исчерпанностью.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~ (positive /\\ negative); exhaustive : positive \\/ negative }` (Distinction.v:67). Closed under the global context. Одноимённых записей в формализации пять; глава называет файл `Distinction.v`."
+  },
+  {
+   "line": 22,
+   "theorem": "L1_through_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Закон Тождества $L1$ относится к полям `positive` и `negative` (тождественность сторон).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «опирается на поля». Теоремы L1 — x = x, рефлексивность равенства; свойств записи доказательство не использует — страница теперь говорит это (стр. 212–214, 1251)."
+  },
+  {
+   "line": 23,
+   "theorem": "L2_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Закон Непротиворечия $L2$ опирается на поле `exclusive`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L2_from_distinction : forall D, ~ (positive D /\\ negative D)` (:50) = `L2_exclusivity` (Distinction.v:107) = `exact (exclusive D)`: проекция поля. Closed under the global context."
+  },
+  {
+   "line": 24,
+   "theorem": "L3_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Закон Исключённого Третьего $L3$ опирается на поле `exhaustive`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L3_from_distinction : forall D, positive D \\/ negative D` (:67) = `L3_totality` (Distinction.v:117) = `exact (exhaustive D)`: проекция поля. Closed under the global context. Общая форма для произвольной пропозиции (`Law_of_ExcludedMiddle`, :63) — аксиома `classic`."
+  },
+  {
+   "line": 25,
+   "theorem": "Law_of_SufficientReason",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Закон Достаточного Основания $L4$ опирается на саму структуру записи как целого — через требование обоснований для всех полей; теоремой в файле представлена одна его сторона — самообоснование, выводимое из поля `exclusive`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): добавлено, что теоремой представлено самообоснование из поля exclusive (Law_of_SufficientReason, L4_contra — из L4_self_grounding, Distinction.v). Closed under the global context."
+  },
+  {
+   "line": 27,
+   "theorem": null,
+   "claim": "Это соответствие — не риторическое наблюдение. В настоящей главе для каждого из перечисленных законов будет предъявлена теорема Rocq о сторонах записи, и при каждом законе будет сказано, чем она обеспечена: полем записи, шагом вывода из поля, рефлексивностью равенства или аксиомой.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «каждое из перечисленных утверждений будет формально доказано». Страница называет, чем обеспечена каждая теорема."
+  },
+  {
+   "line": 47,
+   "theorem": "sides_codetermined",
+   "claim": "Тем не менее, в рамках *формальной системы* Rocq законы логики могут быть *выведены как теоремы* — то есть представлены как доказуемые утверждения о свойствах записи `Distinction`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): формула автора сохранена; следом добавлена роспись — L2 и L3 для сторон даны полями, L4 выведен из exclusive, L1 — рефлексивность равенства, L3 в общей форме — аксиома classic, L5 — о типе Level; выводом из обоих полей названа со-определённость сторон (sides_codetermined, Closed under the global context).",
+   "file": "src/foundation/DistinctionCoDefinition.v"
+  },
+  {
+   "line": 99,
+   "theorem": "classic",
+   "claim": "*Формально* в Rocq все пять законов представлены самостоятельными теоремами: $L3$ опирается на аксиому `classic`, $L5$ — на отдельный тип `Level`.",
+   "page_price": "L3 — на аксиоме classic",
+   "verdict": "ok",
+   "note": "`Axiom classic : forall P : Prop, P \\/ ~P` (Distinction.v:36). `Law_of_ExcludedMiddle` (LawsFromDistinction.v:63) — `exact classic`; Print Assumptions: `Distinction.classic`. Пять теорем $L5$ (:111–:132) — о `Level` из `TheoryOfSystems_Core_ERR.v:59`, Closed. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 107,
+   "theorem": null,
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Технической основой настоящей главы служит файл `LawsFromDistinction.v` (директория `src/foundation/`) репозитория ToS-Coq. Файл импортирует две зависимости:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл существует; строки подключения (:10–:11) совпадают с блоком кода страницы."
+  },
+  {
+   "line": 121,
+   "theorem": "laws_theorem_count",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Файл содержит *двадцать две теоремы*, реализующие формальное представление всех пяти законов и их объединений; это число зафиксировано в самом файле определением `laws_theorem_count`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле 22 объявления `Theorem` и 22 строки `Qed.`; `Definition laws_theorem_count := 22%nat` (:196). Число вписано рукой и со счётом совпадает; с теоремами определение не связано."
+  },
+  {
+   "line": 128,
+   "theorem": null,
+   "claim": "$L1$ и $L2$ имеют три формы — общую (в стандартной логической формулировке для произвольной пропозиции, например `Law_of_Identity : forall A, A = A`), структурную (как утверждение о произвольной `Distinction`, например `L1_through_distinction`) и каноническую (применённую к каноническому различению `distinction_of` $(P)$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "$L1$: `Law_of_Identity` (:27), `L1_through_distinction` (:31), `L1_distinction_preserves` (:37); $L2$: `Law_of_NonContradiction` (:45), `L2_from_distinction` (:50), `L2_canonical` (:55). Каноническая форма $L2$ конструкции `distinction_of` не содержит — глава оговаривает это на стр. 342–348."
+  },
+  {
+   "line": 129,
+   "theorem": "L3_independence",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "$L3$ имеет три формы — общую через аксиому `classic`, структурную через поле `exhaustive` и теорему независимости `L3_independence`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «теорему равносильности». L3_independence (LawsFromDistinction.v, с 13.11): exists p n : Prop, (p = p /\\ n = n) /\\ ~ (p /\\ n) /\\ (p -> ~ n) /\\ (forall l : Level, ~ (l << l)) /\\ ~ (p \\/ n); свидетель False, False. Closed under the global context. Прежняя формулировка — (forall D, positive D \\/ negative D) -> forall P, P \\/ ~ P — отбрасывала посылку и брала заключение из classic; снята по слову автора (вариант А)."
+  },
+  {
+   "line": 130,
+   "theorem": null,
+   "claim": "$L4$ имеет четыре формы — самообоснования, контрапозиции, канонического двойного отрицания и классического устранения двойного отрицания.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Law_of_SufficientReason` (:79), `L4_contra` (:84), `L4_canonical` (:89) — Closed under the global context; `L4_double_negation` (:94) — `Distinction.classic`."
+  },
+  {
+   "line": 131,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "$L5$ вынесен в отдельный аппарат типа `Level` и представлен своим набором теорем о порядке уровней.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Level : Set := L1 | LS : Level -> Level` (TheoryOfSystems_Core_ERR.v:59). Пять теорем `L5_*` (LawsFromDistinction.v:111–:132) запись `Distinction` не упоминают."
+  },
+  {
+   "line": 133,
+   "theorem": null,
+   "claim": "Такое *неравное* распределение форм не случайно: оно отражает различие формального статуса законов — $L1$ и $L2$ конструктивны и читаются из записи прямо, $L3$ требует классической аксиомы, $L4$ имеет несколько рабочих сторон, а $L5$ опирается на отдельный слой формализации.",
+   "page_price": "L1, L2 конструктивны; L3 требует классической аксиомы",
+   "verdict": "ok",
+   "note": "Цена названа верно: шесть теорем $L1$ и $L2$ — Closed under the global context; `Law_of_ExcludedMiddle` — `Distinction.classic`. «Читается из записи» в точном смысле относится к $L2$ (поле `exclusive`); $L1$ — рефлексивность равенства (см. запись стр. 212)."
+  },
+  {
+   "line": 180,
+   "theorem": "Law_of_Identity",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Доказательство состоит из единственной тактики `reflexivity` — встроенной в Rocq тактики, которая закрывает цели вида $x = x$ прямой ссылкой на правило типового равенства (рефлексивность).",
+   "page_price": "без обращения к каким-либо аксиомам",
+   "verdict": "ok",
+   "note": "`Theorem Law_of_Identity : forall (A : Prop), A = A. Proof. reflexivity. Qed.` (:27). Closed under the global context. Запись `Distinction` в утверждении не участвует."
+  },
+  {
+   "line": 196,
+   "theorem": "L1_through_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Здесь утверждается, что обе стороны произвольного акта различения — положительная и отрицательная — тождественны самим себе.",
+   "page_price": "ни одной аксиомы",
+   "verdict": "ok",
+   "note": "Формулировка совпадает: `forall D : Distinction, positive D = positive D /\\ negative D = negative D` (:31), `intro D; split; reflexivity`. Closed under the global context."
+  },
+  {
+   "line": 212,
+   "theorem": "L1_distinction_preserves",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Здесь утверждается: положительная сторона канонического различения, построенного из $P$, есть сама $P$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`forall P : Prop, positive (distinction_of P) = P` (:37), `reflexivity`: проекция от конструктора вычисляется (`distinction_of` закрыто `Defined`). Print Assumptions: Closed under the global context; сама `distinction_of` построена на `classic`."
+  },
+  {
+   "line": 221,
+   "theorem": null,
+   "claim": "Все три доказательства — одна или две тактики, без обращения к аксиомам.",
+   "page_price": "без обращения к аксиомам",
+   "verdict": "ok",
+   "note": "Print Assumptions для `Law_of_Identity`, `L1_through_distinction`, `L1_distinction_preserves`: Closed under the global context."
+  },
+  {
+   "line": 223,
+   "theorem": "L1_through_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Тривиальность доказательств — признак того, что для $L1$ достаточно самой типизации: равенство в CIC рефлексивно для любого терма, и сторонам записи `Distinction` достаточно быть термами типа `Prop`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «запись Distinction уже несёт в себе всю необходимую информацию для L1»."
+  },
+  {
+   "line": 309,
+   "theorem": "Hna",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "external": true,
+   "assumptions": "не применимо (имя гипотезы в доказательстве)",
+   "claim": "`exact (Hna Ha)` — применение `Hna` (имеющего тип $A \\to \\mathtt{False}$) к `Ha` (имеющему тип $A$), что даёт элемент типа `False` — противоречие, которое и требовалось получить.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "LawsFromDistinction.v:47 — `intros A [Ha Hna]. exact (Hna Ha).` `Hna` — местное имя гипотезы в доказательстве `Law_of_NonContradiction`, не объявление. Разбор доказательства соответствует исходнику."
+  },
+  {
+   "line": 309,
+   "theorem": "Ha",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "external": true,
+   "assumptions": "не применимо (имя гипотезы в доказательстве)",
+   "claim": "`exact (Hna Ha)` — применение `Hna` (имеющего тип $A \\to \\mathtt{False}$) к `Ha` (имеющему тип $A$), что даёт элемент типа `False` — противоречие, которое и требовалось получить.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "LawsFromDistinction.v:47; местное имя гипотезы в доказательстве, не объявление."
+  },
+  {
+   "line": 314,
+   "theorem": "Law_of_NonContradiction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Но эта работа — *конструктивная*: не требует обращения к каким-либо аксиомам. $L2$ доказуем средствами самой CIC, без расширений.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "`Theorem Law_of_NonContradiction : forall (A : Prop), ~ (A /\\ ~A)` (:45), `intros A [Ha Hna]. exact (Hna Ha)`. Closed under the global context. Вывод идёт из определения отрицания; запись `Distinction` не участвует."
+  },
+  {
+   "line": 327,
+   "theorem": "L2_exclusivity",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Доказательство — одна строка: `exact L2_exclusivity`, где `L2_exclusivity` — вспомогательная лемма,[^1] выражающая работу поля `exclusive` как утверждения о произвольной `Distinction`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L2_exclusivity : forall D : Distinction, ~ (positive D /\\ negative D). Proof. intros D. exact (exclusive D). Qed.` (Distinction.v:107). Closed under the global context. Объявлена словом `Theorem`."
+  },
+  {
+   "line": 338,
+   "theorem": "L2_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Теорема $L2$ через структуру различения — лишь формальная регистрация того, что доказательство уже есть, встроенное в саму запись.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван верно: заключение теоремы есть тип поля `exclusive`, доказательство — его проекция. Closed under the global context."
+  },
+  {
+   "line": 351,
+   "theorem": "L2_canonical",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Доказательство дословно повторяет общую форму — `L2_canonical` и `Law_of_NonContradiction` тождественны по содержанию. Различие — лишь в позиции в файле и в имени.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L2_canonical : forall P : Prop, ~ (P /\\ ~P)` (:55) — то же утверждение, что `Law_of_NonContradiction` (:45), с другими именами переменных; `distinction_of` в нём нет. Closed under the global context."
+  },
+  {
+   "line": 368,
+   "theorem": null,
+   "claim": "Без этого поля закон $L2$ *не следовал бы* из записи `Distinction`; пришлось бы постулировать его отдельно или доказывать сложным образом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первая часть верна и проверена: у записи без `exclusive` есть экземпляр со сторонами `True`, `True` (пробный `L2_fails_without_exclusive`, Closed). Утверждение при этом опровержимо, так что «доказывать сложным образом» было бы нельзя — остаётся только вернуть поле (см. заметки, сомнительные места)."
+  },
+  {
+   "line": 375,
+   "theorem": "L2_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Глава 3 даёт формальный коррелят этому наблюдению: без поля `exclusive` теорема `L2_from_distinction` *не могла бы быть доказана*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно; в `LawsFromDistinction.v` и `Distinction.v` такого утверждения нет — это рассуждение главы. Проверено пробным файлом: `L2_fails_without_exclusive : ~ (forall D : NoExcl, ~ (ne_pos D /\\ ne_neg D))`, Closed under the global context."
+  },
+  {
+   "line": 449,
+   "theorem": "classic",
+   "claim": "Формально же эта полнота фиксируется через аксиому `classic` — именно потому, что онтологический тезис не имеет конструктивного формального двойника.",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "Статус назван верно: `Axiom classic` (Distinction.v:36). С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 454,
+   "theorem": null,
+   "claim": "*Формально* в Rocq, однако, $L3$ как утверждение *для произвольной пропозиции* $\\forall P : \\mathbf{Prop},\\; P \\vee \\neg P$ *не выводимо* конструктивно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Метатеоретический факт о CIC; внутри формализации он не доказывается и доказан быть не может (глава говорит это на стр. 596–601). Согласуется с тем, что `Law_of_ExcludedMiddle` опирается на аксиому."
+  },
+  {
+   "line": 484,
+   "theorem": "classic",
+   "claim": "В файле `Distinction.v`, а через него и в `LawsFromDistinction.v`, постулируется аксиома:",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "`Axiom classic : forall P : Prop, P \\/ ~P.` (Distinction.v:36); `LawsFromDistinction.v` получает её подключением (:10). Блок кода страницы отличается от исходника пробелом (`~ P` — `~P`), утверждение то же. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 491,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Эта аксиома — одна из двух фундаментальных аксиом репозитория ToS-Coq (вторая — `L4_witness`, обсуждаемая в последующей главе об аксиоматическом слое).",
+   "page_price": "две фундаментальные аксиомы",
+   "verdict": "ok",
+   "note": "`Axiom L4_witness` (ToS_Axioms.v:105). Логических допущений в действии два: `classic` и `L4_witness`. `classic` объявлена в трёх местах (стандартная библиотека через `ToS_Axioms.v:31`, `foundation/Distinction.v:36`, `settheory/BorelDeterminacy.v:21`); кроме того, в разделе Навье — Стокса две аксиомы и два параметра."
+  },
+  {
+   "line": 496,
+   "theorem": null,
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "В исходном коде файла `LawsFromDistinction.v` к этой аксиоме приложен комментарий, который заслуживает явного цитирования:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий есть: LawsFromDistinction.v:71–72, дословно (кавычки в исходнике прямые). Стоит он после `L3_from_distinction`; сама аксиома объявлена в `Distinction.v:36`, где рядом сходный комментарий (:34–35)."
+  },
+  {
+   "line": 503,
+   "theorem": "classic",
+   "claim": "Технически `classic` *является* аксиоматическим расширением конструктивной основы CIC: в чистом исчислении индуктивных конструкций утверждение $\\forall P,\\ P \\vee \\neg P$ не доказуемо, и `classic` добавляется к системе как классический принцип.",
+   "page_price": "аксиоматическое расширение CIC",
+   "verdict": "ok",
+   "note": "Статус назван честно: `Axiom`. Print Assumptions всякой теоремы главы, использующей её, отвечает `Distinction.classic`. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в Distinction.v снято; файл подключает библиотечное).",
+   "external": true
+  },
+  {
+   "line": 514,
+   "theorem": null,
+   "claim": "Поле `exhaustive` в записи `Distinction` *есть* конкретное проявление того же содержания: оно постулирует, что для конкретного акта различения $D$ обязательно имеет место одна из двух сторон. Аксиома `classic` обобщает это до утверждения о произвольной пропозиции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует исходнику: поле — условие на каждый экземпляр (Distinction.v:71), аксиома — то, чем поле заполняется для произвольной пропозиции (`distinction_of`, :75). Точная связь проверена пробным файлом: «у всякой пропозиции есть каноническое различение» равносильно исключённому третьему (`distinction_for_every_prop_iff_EM`, Closed)."
+  },
+  {
+   "line": 553,
+   "theorem": "Law_of_ExcludedMiddle",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Доказательство — одна строка: `exact classic`. Теорема есть прямое применение аксиомы `classic` к произвольной пропозиции.",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "`Theorem Law_of_ExcludedMiddle : forall (A : Prop), A \\/ ~A. Proof. exact classic. Qed.` (:63). Print Assumptions: `Distinction.classic : forall P : Prop, P \\/ ~ P`. Теорема повторяет аксиому под другим именем; статус назван верно."
+  },
+  {
+   "line": 567,
+   "theorem": "L3_totality",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Доказательство опирается на вспомогательную лемму `L3_totality`,[^2] выражающую работу поля `exhaustive` как утверждения о произвольной `Distinction`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L3_totality : forall D : Distinction, positive D \\/ negative D. Proof. intros D. exact (exhaustive D). Qed.` (Distinction.v:117). Closed under the global context. Объявлена словом `Theorem`."
+  },
+  {
+   "line": 575,
+   "theorem": "L3_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "В отличие от `Law_of_ExcludedMiddle`, `L3_from_distinction` *не требует* прямого обращения к аксиоме `classic` в своём доказательстве — ему достаточно поля `exhaustive`.",
+   "page_price": "без обращения к classic; поле exhaustive",
+   "verdict": "ok",
+   "note": "Print Assumptions `L3_from_distinction`: Closed under the global context. Заключение теоремы есть тип поля `exhaustive`; доказательство — его проекция."
+  },
+  {
+   "line": 583,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Таким образом, `classic` работает в `distinction_of`, а `L3_from_distinction` работает с уже-построенной `Distinction`.",
+   "page_price": "classic — в distinction_of",
+   "verdict": "ok",
+   "note": "`distinction_of P := mkDistinction P (~P) … (classic P)` (Distinction.v:75). Print Assumptions `distinction_of`: `Distinction.classic`; `L3_from_distinction`: Closed."
+  },
+  {
+   "line": 602,
+   "theorem": "L3_independence",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Она утверждает: есть пара сторон, для которой выполнены $L1$, $L2$, $L4$ и $L5$, а $L3$ не выполнен, — обе стороны ложны, и между ними остаётся «третий путь». Доказана она без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора). L3_independence (LawsFromDistinction.v, с 13.11): exists p n : Prop, (p = p /\\ n = n) /\\ ~ (p /\\ n) /\\ (p -> ~ n) /\\ (forall l : Level, ~ (l << l)) /\\ ~ (p \\/ n); свидетель False, False. Closed under the global context. Прежняя формулировка — (forall D, positive D \\/ negative D) -> forall P, P \\/ ~ P — отбрасывала посылку и брала заключение из classic; снята по слову автора (вариант А)."
+  },
+  {
+   "line": 607,
+   "theorem": "every_prop_distinguishes_iff_EM",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Совпадение это доказано отдельно, в обе стороны и тоже без аксиом: «всякая пропозиция есть положительная сторона некоторого различения» равносильно исключённому третьему для всякой пропозиции (`every_prop_distinguishes_iff_EM`, файл `DistinctionCoDefinition.v`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «L3-через-различение и classic равносильны по силе… в обе стороны» — со ссылкой на теорему, посылка которой не работала. every_prop_distinguishes_iff_EM : (forall P, exists D, positive D = P) <-> (forall P, P \\/ ~ P). Closed under the global context."
+  },
+  {
+   "line": 620,
+   "theorem": "L3_independence",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Теорема фиксирует внутренне доступную часть: независимость $L3$ от остальных законов на паре сторон.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «точное совпадение L3-через-различение и classic». L3_independence (LawsFromDistinction.v, с 13.11): exists p n : Prop, (p = p /\\ n = n) /\\ ~ (p /\\ n) /\\ (p -> ~ n) /\\ (forall l : Level, ~ (l << l)) /\\ ~ (p \\/ n); свидетель False, False. Closed under the global context. Прежняя формулировка — (forall D, positive D \\/ negative D) -> forall P, P \\/ ~ P — отбрасывала посылку и брала заключение из classic; снята по слову автора (вариант А)."
+  },
+  {
+   "line": 626,
+   "theorem": "L3_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Положение, параллельное случаю $L2$: для $L3$ доказательство `L3_from_distinction` опирается на конкретное *поле* записи — `exhaustive`. Без этого поля закон $L3$ *не следовал бы* из записи `Distinction`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно; проверено пробным файлом: у записи без `exhaustive` есть экземпляр со сторонами `False`, `False` (`L3_fails_without_exhaustive`, Closed)."
+  },
+  {
+   "line": 634,
+   "theorem": "L3_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Глава 3 даёт формальный коррелят: без поля `exhaustive` теорема `L3_from_distinction` не была бы доказуемой — пара сторон, обе из которых ложны, удовлетворяет исключительности, и ни одна из сторон не имеет места (`third_way_without_exhaustive`, `exhaustive_not_from_exclusive`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «пришлось бы для каждого конкретного D отдельно применять classic» — classic даёт positive D \\/ ~ positive D и стороны не связывает; страница теперь говорит это и называет леммы о независимости полей."
+  },
+  {
+   "line": 645,
+   "theorem": null,
+   "claim": "Таким образом, поля `exclusive` и `exhaustive` играют параллельные роли: содержательно они фиксируют две стороны полноты разделения (исключительность и исчерпанность); формально они служат встроенными доказательствами $L2$ и $L3$ соответственно для каждой `Distinction`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван верно: `L2_from_distinction` и `L3_from_distinction` — проекции этих полей."
+  },
+  {
+   "line": 721,
+   "theorem": "Law_of_SufficientReason",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "В `LawsFromDistinction.v` закон Достаточного Основания формализуется через утверждение о *самообосновании* (*self-grounding*) акта различения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem Law_of_SufficientReason : forall D : Distinction, (positive D -> ~ negative D)` (:79), `exact L4_self_grounding`. Closed under the global context. Блок кода страницы (стр. 752) отличается от исходника только скобками."
+  },
+  {
+   "line": 750,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Формально утверждение $\\texttt{positive} D \\to \\neg \\texttt{negative} D$ выводится из поля `exclusive`, имеющего тип $\\neg(\\texttt{positive} D \\wedge \\texttt{negative} D)$. Это — эквивалентные формы: «не оба одновременно» равносильно «если одно, то не другое».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L4_self_grounding` (Distinction.v:128): `intros D p n. apply (exclusive D). split; [exact p | exact n]`. Closed under the global context. Равносильность форм проверена: `forall A B : Prop, (A -> ~ B) <-> ~ (A /\\ B)` (пробный `L4_form_iff_L2_form`, Closed) — структурная форма $L4$ есть структурная форма $L2$ в другой записи."
+  },
+  {
+   "line": 765,
+   "theorem": null,
+   "claim": "Файл `LawsFromDistinction.v` представляет $L4$ в четырёх формах. Первые две — симметричные применения самообоснования к двум сторонам произвольного $D$; две последние — классические следствия для произвольной пропозиции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре теоремы есть (:79, :84, :89, :94). Из двух последних на аксиому опирается одна: `L4_canonical` — Closed under the global context (глава сама называет её конструктивной на стр. 787–789), `L4_double_negation` — `Distinction.classic`."
+  },
+  {
+   "line": 779,
+   "theorem": "Law_of_SufficientReason",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Доказательство — одна строка: `exact L4_self_grounding`, где `L4_self_grounding` — вспомогательная лемма,[^3] выражающая самообоснование как утверждение о произвольной `Distinction`. Лемма опирается на поле `exclusive` (через эквивалентное преобразование).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с исходником (:79–:81; Distinction.v:128). Closed under the global context."
+  },
+  {
+   "line": 794,
+   "theorem": "L4_contra",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Если имеет место отрицательная сторона, то положительная не имеет места. Это — симметричное к `Law_of_SufficientReason` утверждение, опирающееся на ту же структурную связь полей записи.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L4_contra : forall D : Distinction, negative D -> ~ positive D` (:84) = `L4_contrapositive` (Distinction.v:133), из поля `exclusive`. Closed under the global context."
+  },
+  {
+   "line": 809,
+   "theorem": "L4_canonical",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Это — стандартное правило интуиционистской логики, доказуемое *конструктивно*, без обращения к `classic`.",
+   "page_price": "без classic",
+   "verdict": "ok",
+   "note": "`Theorem L4_canonical : forall P : Prop, P -> ~~P` (:89). Closed under the global context. Запись `Distinction` в утверждении не участвует."
+  },
+  {
+   "line": 828,
+   "theorem": "L4_double_negation",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Это — *классический* результат, не выводимый конструктивно: доказательство опирается на аксиому `classic` (применённую к произвольной $P$ для получения случаев $P$ или $\\neg P$, после чего рассуждение завершается обработкой каждого случая).",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "`Theorem L4_double_negation : forall P : Prop, ~~P -> P` (:94), `destruct (classic P)`. Print Assumptions: `Distinction.classic`. Текст доказательства на странице отличается от исходника именем гипотезы (`Hnnp` — `Hnn`)."
+  },
+  {
+   "line": 844,
+   "theorem": "L4_double_negation",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Несмотря на имя `L4_double_negation` и расположение в блоке $L4$, формальная зависимость этой теоремы — $L3$: устранение двойного отрицания доказывается через `destruct (classic P)` и потому опирается на классическую аксиому.",
+   "page_price": "L3 (classic)",
+   "verdict": "ok",
+   "note": "Соответствует компилятору: `Distinction.classic`."
+  },
+  {
+   "line": 858,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Её роль — обеспечить не произвольный *выбор*, а *свидетельствование* индивидуального существования: переход от утверждения `exists x, P x` к определённому свидетелю `{x | P x}`.",
+   "page_price": "аксиома",
+   "verdict": "ok",
+   "note": "`Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x}` (ToS_Axioms.v:105): формулировка перехода названа верно. В файлах главы аксиома не используется. О соотношении с выбором — запись стр. 839."
+  },
+  {
+   "line": 861,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Это — формальный след тезиса о детерминированности существования, и его *не следует* смешивать с Аксиомой Выбора: Аксиома Выбора строит выбирающую функцию для произвольного семейства множеств, тогда как `L4_witness` извлекает свидетеля из *одного* факта существования.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): фраза автора сохранена; следом добавлено, что по силе аксиома от выбора не отделена (записана без условия единственности свидетеля) и что граница проходит по единственности свидетеля — согласовано с главой 10.4."
+  },
+  {
+   "line": 957,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В ToS-Coq эта структура — тип `Level`, определённый в файле `TheoryOfSystems_Core_ERR.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Level : Set := | L1 : Level | LS : Level -> Level` (TheoryOfSystems_Core_ERR.v:59); `L2 := LS L1`, `L3 := LS L2` (:63–:64). Одноимённых типов в формализации пять; глава называет файл."
+  },
+  {
+   "line": 965,
+   "theorem": "level_lt",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "На `Level` определён оператор строгого порядка $\\ll$ (формально `level_lt`, сокращённо `<<`); запись $l_1 \\ll l_2$ читается как: *$l_1$ более фундаментален, ближе к основанию, чем $l_2$*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Fixpoint level_lt` (:68), `Notation \"l1 << l2\"` (:74). Строгость порядка доказана: `level_lt_irrefl` (:96), `level_lt_trans` (:104), обе Closed."
+  },
+  {
+   "line": 969,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Также определена функция `level_depth : Level -> nat`, дающая глубину каждого уровня.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Fixpoint level_depth (l : Level) : nat` (:78): `L1` — 1, `LS l'` — `S (level_depth l')`."
+  },
+  {
+   "line": 982,
+   "theorem": null,
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Файл `LawsFromDistinction.v` представляет $L5$ через пять теорем о свойствах типа `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L5_hierarchy` (:111), `L5_transitivity` (:114), `L5_concrete` (:119), `L5_chain` (:123), `L5_no_infinite_descent` (:130); каждая — ссылка на лемму `TheoryOfSystems_Core_ERR.v`. Все Closed under the global context."
+  },
+  {
+   "line": 986,
+   "theorem": "L5_hierarchy",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Никакой уровень не предшествует самому себе:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L5_hierarchy : forall l : Level, ~ (l << l). Proof. exact level_lt_irrefl. Qed.` (:111). Closed under the global context."
+  },
+  {
+   "line": 1008,
+   "theorem": "L5_transitivity",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Если $l_1$ предшествует $l_2$, а $l_2$ предшествует $l_3$, то $l_1$ предшествует $l_3$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L5_transitivity : forall l1 l2 l3 : Level, l1 << l2 -> l2 << l3 -> l1 << l3` (:114) = `level_lt_trans` (TheoryOfSystems_Core_ERR.v:104). Closed under the global context."
+  },
+  {
+   "line": 1021,
+   "theorem": "L5_concrete",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Атомарный уровень $L_1$ предшествует уровню $L_2$. Это — не общее утверждение о произвольных уровнях, а конкретное — фиксирующее конкретное отношение в иерархии.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L5_concrete : L1 << L2` (:119) = `L1_lt_L2` (TheoryOfSystems_Core_ERR.v:116). Closed under the global context. Слово «атомарный» расходится со стр. 941 той же главы (см. заметки, сомнительные места)."
+  },
+  {
+   "line": 1023,
+   "theorem": null,
+   "claim": "Аналогично доказывается $L_2 \\ll L_3$ и далее.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L2_lt_L3` (TheoryOfSystems_Core_ERR.v:119); общий шаг — `level_lt_succ : forall L, L << LS L` (foundation/TransfiniteInductionLevel.v:61). Closed."
+  },
+  {
+   "line": 1036,
+   "theorem": "L5_chain",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Атомарный уровень предшествует второму, второй предшествует третьему.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem L5_chain : L1 << L2 /\\ L2 << L3` (:123). Closed under the global context. Текст доказательства на странице записан иначе, чем в исходнике (`split.` с двумя пунктами — `split; [… | …]`), тактики те же."
+  },
+  {
+   "line": 1041,
+   "theorem": "L5_no_infinite_descent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Глубина строго убывает вдоль порядка:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): блок кода и разбор приведены к нынешней формулировке. L5_no_infinite_descent : forall l1 l2 : Level, l1 << l2 -> (level_depth l1 < level_depth l2)%nat (LawsFromDistinction.v; формулировка с июня 2026 г.). Closed under the global context."
+  },
+  {
+   "line": 1052,
+   "theorem": "L5_no_infinite_descent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Формально теорема доказывает утверждение о мере: каждый шаг вниз по порядку уменьшает натуральное число — глубину уровня.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было — описание прежней формулировки («конечная натуральная глубина»). L5_no_infinite_descent : forall l1 l2 : Level, l1 << l2 -> (level_depth l1 < level_depth l2)%nat (LawsFromDistinction.v; формулировка с июня 2026 г.). Closed under the global context."
+  },
+  {
+   "line": 1057,
+   "theorem": "no_infinite_level_regress",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "Но это утверждение из неё следует — натуральное число не может убывать бесконечно — и в репозитории доказано отдельно, без аксиом (`no_infinite_level_regress`, файл `MetaPairStrength.v`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «сама теорема фиксирует лишь конечность глубины». no_infinite_level_regress : forall f : nat -> Level, ~ (forall n, level_lt (f (S n)) (f n)). Closed under the global context."
+  },
+  {
+   "line": 1069,
+   "theorem": null,
+   "claim": "В отличие от $L1$–$L4$, теоремы $L5$ не привязаны к одной записи `Distinction`. Они работают с самостоятельной структурой — типом `Level` и оператором $\\ll$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван верно: ни одна из пяти теорем `L5_*` запись `Distinction` не упоминает; формальной связи между `Distinction` и `Level` в файлах главы нет."
+  },
+  {
+   "line": 1084,
+   "theorem": null,
+   "claim": "Пять теорем $L5$ — иррефлексивность, транзитивность, конкретные отношения, цепочка, отсутствие бесконечного нисхождения — характеризуют порядок $\\ll$ как строгий, транзитивный, конкретно реализуемый, и обоснованный снизу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "С нынешней формулировкой `L5_no_infinite_descent` (убывание глубины) слова «обоснованный снизу» подтверждены: фундированность `level_lt_wf` получается из неё одной ссылкой на `well_founded_lt_compat` (foundation/TransfiniteInductionLevel.v:43, Closed)."
+  },
+  {
+   "line": 1137,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Эти объединяющие теоремы собирают уже доказанное в одно утверждение и тем показывают, что законы работают *совместно* в одной и той же записи `Distinction`, в одной и той же иерархии `Level`, согласованно друг с другом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «не сумма уже сказанного, а самостоятельные формальные утверждения». Три из четырёх объединяющих теорем — конъюнкции доказанного; утверждение, которому два поля нужны вместе, названо следом (sides_codetermined)."
+  },
+  {
+   "line": 1147,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Центральная объединяющая теорема в `LawsFromDistinction.v` формулирует все пять законов как совместное свойство произвольной `Distinction` в контексте уровней `Level`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода совпадает с исходником (:139). Closed under the global context. Пятый член конъюнкции (`forall l : Level, ~ (l << l)`) от `D` не зависит; первый — рефлексивность; четвёртый равносилен второму."
+  },
+  {
+   "line": 1166,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Объединяющая теорема даёт каждый из пяти законов в его *структурной* форме, не урезая её.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «в его полной форме». В конъюнкции — по одной структурной форме каждого закона."
+  },
+  {
+   "line": 1172,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Общая форма $L3$ для произвольной пропозиции (на аксиоме `classic`), контрапозиция и двойное отрицание из блока $L4$, транзитивность и убывание глубины из блока $L5$ в конъюнкцию не входят — поэтому теорема доказана без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «каждый из пяти конъюнктов есть закон в той же силе, в какой он разобран отдельно». five_laws_from_distinction — Closed under the global context."
+  },
+  {
+   "line": 1177,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Доказательство теоремы — конъюнкция доказательств каждого из законов по отдельности",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует исходнику (:145–:152): `split; reflexivity`, `exact (exclusive D)`, `exact (exhaustive D)`, шаг из `exclusive D`, `exact (level_lt_irrefl l)`."
+  },
+  {
+   "line": 1194,
+   "theorem": "laws_consistent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Утверждение: существует акт различения $D$, в котором положительная сторона имеет место, а отрицательная — не имеет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Theorem laws_consistent : exists D : Distinction, positive D /\\ ~ negative D` (:155). Аксиома здесь не нужна: свидетель `mkDistinction True False …` даёт то же утверждение без допущений (пробный `laws_consistent_free`, Closed). С 13.11 (Часть I, шаг 2) свидетель предъявлен прямо — `mkDistinction True False …`; Print Assumptions: Closed under the global context (прежде свидетелем было `distinction_of True`, цена — `Distinction.classic`)."
+  },
+  {
+   "line": 1232,
+   "theorem": "L1_L2_combined",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Первая теорема (`L1_L2_combined`) объединяет тождество положительной стороны и невозможность одновременного наличия положительной и отрицательной.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`forall D : Distinction, positive D = positive D /\\ ~ (positive D /\\ negative D)` (:179). Closed under the global context."
+  },
+  {
+   "line": 1238,
+   "theorem": "L3_L4_combined",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Вторая теорема (`L3_L4_combined`) объединяет совместную исчерпанность и самообоснование.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`forall D : Distinction, (positive D \\/ negative D) /\\ (positive D -> ~ negative D)` (:188). Формулировка совпадает; о цене — запись стр. 1226."
+  },
+  {
+   "line": 1248,
+   "theorem": "L1_L2_combined",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Это — структурное минимальное условие *любой определённости вообще*, доказуемое *полностью конструктивно*, без обращения к `classic`.",
+   "page_price": "полностью конструктивно, без classic",
+   "verdict": "ok",
+   "note": "Print Assumptions `L1_L2_combined`: Closed under the global context."
+  },
+  {
+   "line": 1249,
+   "theorem": "L3_L4_combined",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Это — структурное условие *полноты разделения*; сама парная теорема доказана без аксиом — исчерпанность берётся из поля `exhaustive`, — а зависимость от аксиомы `classic` появляется там, где различение строится для произвольной пропозиции (`distinction_of`).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «появляется зависимость от аксиомы classic (через exhaustive)». L3_L4_combined — Closed under the global context."
+  },
+  {
+   "line": 1251,
+   "theorem": "L3_L4_combined",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Парные объединения, таким образом, не дублируют общую пятёрку, а *структурируют* её на два блока: определённость и несовместность ($L1, L2$) и полноту с обоснованностью ($L3, L4$). Обе парные теоремы доказаны без аксиом; классической аксиомы требуют общие формы для произвольной пропозиции — `Law_of_ExcludedMiddle` и `L4_double_negation`.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «условия, требующие классической аксиомы (L3, L4 в полной форме)». L1_L2_combined, L3_L4_combined — Closed; Law_of_ExcludedMiddle, L4_double_negation — Distinction.classic."
+  },
+  {
+   "line": 1261,
+   "theorem": null,
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Двадцать две теоремы файла `LawsFromDistinction.v` — три формы для $L1$, три для $L2$, три для $L3$, четыре для $L4$, пять для $L5$, плюс четыре объединяющих — показывают совместно следующее.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "3 + 3 + 3 + 4 + 5 + 4 = 22; в файле 22 `Theorem` и 22 `Qed.` (`L3_independence` сосчитана среди форм $L3$)."
+  },
+  {
+   "line": 1265,
+   "theorem": null,
+   "claim": "Запись `Distinction` с четырьмя полями и тип `Level` с оператором порядка — две согласованные части *одной* формализации, в которой все пять законов получают свои формальные представления: законы одного акта читаются из записи, закон порядка — из типа уровней (запись и тип объявлены отдельно; теоремы, связывающей различение с его уровнем, в файле нет).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «это одна формальная структура». Distinction и Level — два независимых объявления; фраза автора о чтении из одной структуры сохранена. Связь различения с уровнем — горизонт (новая конструкция)."
+  },
+  {
+   "line": 1279,
+   "theorem": "L1_through_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "$L1$ — на поля `positive` и `negative` (через рефлексивность равенства на типе `Prop`; иных свойств записи доказательство не требует);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «через рефлексивность их типов Prop»."
+  },
+  {
+   "line": 1281,
+   "theorem": null,
+   "claim": "$L3$ — на поле `exhaustive` (и на аксиому `classic` в общей форме);",
+   "page_price": "classic в общей форме",
+   "verdict": "ok",
+   "note": "Соответствует компилятору: `L3_from_distinction` — Closed; `Law_of_ExcludedMiddle` — `Distinction.classic`."
+  },
+  {
+   "line": 1282,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "$L4$ — на лемму самообоснования, выводимую из поля `exclusive`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`L4_self_grounding` (Distinction.v:128) выведена из `exclusive D`. $L2$ и $L4$ опираются тем самым на одно и то же поле."
+  },
+  {
+   "line": 1292,
+   "theorem": null,
+   "claim": "*если* мы хотим явно хранить положительную сторону, отрицательную сторону, их исключительность, их исчерпанность и уровень иерархии, *то* каждое из этих мест несёт отдельную, не сводимую к другим формальную работу — четыре поля `Distinction` плюс тип `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Несводимость двух полей-доказательств друг к другу проверена пробным файлом (`L2_fails_without_exclusive`, `L3_fails_without_exhaustive`, Closed); в файлах главы таких утверждений нет. Уровень в записи не хранится: `Level` — отдельный тип."
+  },
+  {
+   "line": 1300,
+   "theorem": "laws_consistent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Теорема `laws_consistent` *не* является метатеоретическим доказательством непротиворечивости всей формальной системы Rocq или всей формализации ToS — внутренняя теорема Rocq такого доказательства дать не может.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: утверждение теоремы — существование экземпляра записи. С 13.11 (Часть I, шаг 2) свидетель предъявлен прямо — `mkDistinction True False …`; Print Assumptions: Closed under the global context (прежде свидетелем было `distinction_of True`, цена — `Distinction.classic`)."
+  },
+  {
+   "line": 1303,
+   "theorem": "laws_consistent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Она показывает более скромный, но важный факт: запись `Distinction` *населена* конкретным экземпляром, в котором положительная сторона имеет место, а отрицательная — нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует утверждению (:155). С 13.11 (Часть I, шаг 2) свидетель предъявлен прямо — `mkDistinction True False …`; Print Assumptions: Closed under the global context (прежде свидетелем было `distinction_of True`, цена — `Distinction.classic`)."
+  },
+  {
+   "line": 1319,
+   "theorem": null,
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Совокупность теорем `LawsFromDistinction.v` показывает иное — что простейший формализуемый объект (запись `Distinction`) уже несёт в себе законы одного акта — $L1$–$L4$ — как свои *структурные свойства*, доступные для машинной проверки, а закон порядка $L5$ столь же прямо читается из типа `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «уже несёт в себе все пять законов». Теоремы L5 запись не упоминают — они о типе Level."
+  },
+  {
+   "line": 1331,
+   "theorem": "L2_exclusivity",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Лемма `L2_exclusivity` определена в файле `Distinction.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 1 (знак на стр. 316). `Theorem L2_exclusivity` — foundation/Distinction.v:107."
+  },
+  {
+   "line": 1332,
+   "theorem": "L3_totality",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Лемма `L3_totality` определена в файле `Distinction.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 2 (знак на стр. 556). `Theorem L3_totality` — foundation/Distinction.v:117."
+  },
+  {
+   "line": 1333,
+   "theorem": "L4_self_grounding",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Лемма `L4_self_grounding` определена в файле `Distinction.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 3 (знак на стр. 758). `Theorem L4_self_grounding` — foundation/Distinction.v:128."
+  },
+  {
+   "line": 1335,
+   "theorem": "level_lt_irrefl",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Доказательство опирается на лемму `level_lt_irrefl` из файла `TheoryOfSystems_Core_ERR.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 5 (знак на стр. 975). `Lemma level_lt_irrefl : forall l, ~ (l << l)` — TheoryOfSystems_Core_ERR.v:96, через `level_lt_depth` (:85). Closed under the global context."
+  },
+  {
+   "line": 634,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "third_way_without_exhaustive : exists p n, ~ (p /\\ n) /\\ ~ p /\\ ~ n. Closed under the global context.",
+   "theorem": "third_way_without_exhaustive",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Глава 3 даёт формальный коррелят: без поля `exhaustive` теорема `L3_from_distinction` не была бы доказуемой — пара сторон, обе из которых ложны, удовлетворяет исключительности, и ни одна из сторон не имеет места (`third_way_without_exhaustive`, `exhaustive_not_from_exclusive`)."
+  },
+  {
+   "line": 634,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exhaustive_not_from_exclusive : ~ (forall p n, ~ (p /\\ n) -> p \\/ n). Closed under the global context.",
+   "theorem": "exhaustive_not_from_exclusive",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Глава 3 даёт формальный коррелят: без поля `exhaustive` теорема `L3_from_distinction` не была бы доказуемой — пара сторон, обе из которых ложны, удовлетворяет исключительности, и ни одна из сторон не имеет места (`third_way_without_exhaustive`, `exhaustive_not_from_exclusive`)."
+  },
+  {
+   "line": 866,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l4_statement_gives_functional_choice : L4_statement -> forall I X R, (forall i, exists x, R i x) -> exists f, forall i, R i (f i). Closed under the global context (L4 — посылкой).",
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "По силе они при этом не разделены: аксиома записана без условия единственности свидетеля и, применённая к каждому члену семейства, даёт выбирающую функцию (`l4_statement_gives_functional_choice`); граница между L4 и выбором проходит по тому, единствен ли свидетель (Глава 10.4)."
+  },
+  {
+   "line": 1141,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sides_codetermined : forall D, (negative D <-> ~ positive D) /\\ (positive D <-> ~ negative D). Closed under the global context. Ни из одного поля в отдельности не следует: codefinition_needs_exclusive, codefinition_needs_exhaustive.",
+   "theorem": "sides_codetermined",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Утверждение, которому два правила записи нужны именно вместе, — со-определённость сторон (`sides_codetermined`): оно не следует ни из одного поля в отдельности."
+  },
+  {
+   "line": 1205,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 2, слово автора): было «универсальная конструкция distinction_of (P)… даёт нужный экземпляр». С шага 2 свидетель — mkDistinction True False …; Closed under the global context.",
+   "theorem": "laws_consistent",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "`laws_consistent` показывает, что построение возможно, — и показывает без аксиом: экземпляр предъявлен прямо, со сторонами `True` и `False`."
+  }
+ ]
+}

@@ -25,6 +25,9 @@ From ToS Require Import navier_stokes.TriadicInteraction.
 From ToS Require Import navier_stokes.PerModeBound.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: Energy Concentration Limits  (~10 lemmas)                 *)
 (* ================================================================== *)
@@ -293,3 +296,5 @@ Qed.
 (*  SUMMARY                                                                    *)
 (*  ~30 Qed, 0 Admitted, 0 Axioms                                            *)
 (* ========================================================================= *)
+
+End WithNSCoupling.

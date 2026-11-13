@@ -11,7 +11,7 @@
 (*  Roles:    invariant region as core, bootstrap as amplifier              *)
 (*  Rules:    smooth data → R → invariant → enstrophy → Sobolev → C^∞    *)
 (*  STATUS: target ~40 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, C_B_positive, B_coeff_bounded (B_antisym: Lemma since 06.2026)             *)
+(*  AXIOMS: classic. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -28,6 +28,9 @@ From ToS Require Import navier_stokes.SmoothInitialData.
 From ToS Require Import navier_stokes.TransientClosure.
 From ToS Require Import navier_stokes.ProcessNS.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: The Regularity Theorem  (~12 lemmas)                      *)
@@ -404,3 +407,5 @@ Proof.
   - apply partial_enstrophy_monotone.
   - intros. apply rescale_factor_positive; assumption.
 Qed.
+
+End WithNSCoupling.

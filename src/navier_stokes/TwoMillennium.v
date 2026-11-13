@@ -13,7 +13,7 @@
 (*  Roles:    process mathematics as unifier                                *)
 (*  Rules:    A = exists → both Millennium Problems                         *)
 (*  STATUS: target ~30 Qed, 0 Admitted                                     *)
-(*  AXIOMS: classic, L4_witness, C_B_positive, B_coeff_bounded (B_antisym: Lemma 06.2026) *)
+(*  AXIOMS: classic, L4_witness. PREMISES (record NSCoupling, since 13.11.2026): C_B_positive, the coupling bound *)
 (*  Author: Horsocrates | Date: March 2026                                 *)
 (* ========================================================================= *)
 
@@ -34,6 +34,9 @@ From ToS Require Import gauge.StripSynthesis.
 From ToS Require Import gauge.DimensionLadder.
 From ToS Require Import gauge.Continuum3DSynthesis.
 Open Scope Q_scope.
+
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
 
 (* ================================================================== *)
 (*  Part I: The Two Key Inequalities  (~10 lemmas)                    *)
@@ -274,3 +277,5 @@ Qed.
   Both follow from PROCESS MATHEMATICS (P4).
   Both proved from A = EXISTS.
 *)
+
+End WithNSCoupling.

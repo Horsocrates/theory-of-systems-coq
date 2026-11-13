@@ -1,0 +1,560 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/04 ERR онтология системы.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 7,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Совокупность теорем файла `LawsFromDistinction.v`, разобранная в Главе 3, показала: одна структура — запись `Distinction` вместе с типом `Level` — уже несёт в себе все пять законов логики $L1, L2, L3, L4, L5$ как свои структурные свойства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "five_laws_from_distinction (LawsFromDistinction.v:139): для всякой D — L1 (сторона равна себе, reflexivity), L2 и L3 (поля exclusive и exhaustive записи), L4 (positive D -> ~ negative D, из exclusive), L5 (forall l, ~ (l << l); от D не зависит). Closed under the global context. Слова «несёт в себе как структурные свойства» этому соответствуют: L2 и L3 даны полями записи. Для произвольной пропозиции запись строится на аксиоме classic (distinction_of, Distinction.v:75)."
+  },
+  {
+   "line": 11,
+   "theorem": null,
+   "claim": "При этом сами законы остаются *онтологически первичными*: они не *выводятся* из акта различения как из источника, а лишь *прослеживаются* в нём как теоремы — что есть методологический шаг в формальной системе, не онтологическое утверждение об их происхождении.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в формализации L2 и L3 для записи — её поля (теоремы L2_from_distinction, L3_from_distinction их проецируют), L1 — reflexivity, L4 — следствие поля exclusive, L5 — иррефлексивность порядка на типе Level."
+  },
+  {
+   "line": 39,
+   "theorem": "five_laws_from_distinction",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Звенья $\\text{Distinction} \\to L1$–$L5$ и $L1$–$L5 \\to P1$–$P4$ суть формальные теоремы Rocq (файлы `LawsFromDistinction.v` и `PrinciplesFromLaws.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первое звено: теорема вида «для всякой D : Distinction — пять законов» есть (LawsFromDistinction.v:139), Closed under the global context. Заключение она получает из полей записи (L2, L3), из reflexivity (L1) и из порядка на Level (L5). О втором звене — следующая запись."
+  },
+  {
+   "line": 39,
+   "theorem": "four_principles_from_five_laws",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Звенья $\\text{Distinction} \\to L1$–$L5$ и $L1$–$L5 \\to P1$–$P4$ суть формальные теоремы Rocq (файлы `LawsFromDistinction.v` и `PrinciplesFromLaws.v`).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теоремы PrinciplesFromLaws.v утверждают сами принципы, без законов в посылках: P1_from_L1_L5 : forall l, ~ (l << l) (дословно L5_hierarchy), P2_from_L5 — поле crit_level_valid записи Criterion, P3_* — свойства конъюнкции трёх равенств, P4_* — разбор конструктора Q. Теоремы LawsFromDistinction.v в доказательствах не используются: копия файла без подключения Distinction.v и LawsFromDistinction.v собирается (PrinciplesNoLaws.v). Ход «закон → принцип» записан в именах и комментариях, а не в утверждениях."
+  },
+  {
+   "line": 42,
+   "theorem": null,
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Завершающее же звено разобрано в файле `ERRFromDistinction.v`, и этот файл фиксирует более *узкое* ядро цепи, чем полная архитектурная схема: он выводит E/R/R-структуру прямо из записи `Distinction` и законов, не проводя *отдельной* формальной теоремы вида «из $P1$–$P4$ следует E/R/R».",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: объекта «E/R/R-структура» в файле нет, и вывода нет. Есть список err_elements D := [positive D; negative D] (:60), три счётчика, определённые как число 2 независимо от D (:51, :54, :57), и законы, повторённые под именами аспектов (L1_for_elements … L5_err_hierarchy, :86–:111). Это разметка записи определениями. Вторая часть фразы верна: теоремы «из P1–P4 следует E/R/R» в файле нет."
+  },
+  {
+   "line": 47,
+   "theorem": null,
+   "claim": "Полный мост через $P1$–$P4$ есть концептуальная интерпретация архитектуры — он содержательно верен и может быть впоследствии усилен отдельной теоремой, но *сейчас* как единая формальная зависимость в репозитории не записан.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: ERRFromDistinction.v подключает Distinction.v, LawsFromDistinction.v, TheoryOfSystems_Core_ERR.v и не подключает PrinciplesFromLaws.v. То же говорит шапка foundation/PrinciplesToERR.v (:15–:19): соответствие принципов и E/R/R, а не вывод; её теорема principles_err_correspondence (:78) — конъюнкция, не импликация."
+  },
+  {
+   "line": 60,
+   "theorem": "Law_of_ExcludedMiddle",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "Законы $L1$–$L5$, выведенные в Главе 3, суть условия определённости в их самом общем виде.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: L3 в формализации не выведен. Law_of_ExcludedMiddle : forall A : Prop, A \\/ ~ A (LawsFromDistinction.v:63) доказана строкой exact classic; Print Assumptions — Axioms: Distinction.classic (аксиома, Distinction.v:36). Для записи D законы L2 и L3 — её поля (L2_from_distinction, L3_from_distinction проецируют их). Слово расходится и со стр. 11–15 той же главы («не выводятся, а прослеживаются»)."
+  },
+  {
+   "line": 91,
+   "theorem": "P1_from_L1_L5",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "**Формальная теорема.** Иерархическая асимметрия выражается в Rocq иррефлексивностью оператора порядка:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P1_from_L1_L5 : forall l : Level, ~ (l << l) (:43), доказательство — exact level_lt_irrefl; блок кода совпадает с исходником. Closed under the global context. Утверждение дословно то же, что L5_hierarchy (LawsFromDistinction.v:111), P1_no_self_membership (:47) и P1_blocks_russell (:51); L1 в доказательстве не участвует. Теорема говорит о порядке на типе Level; отношения принадлежности между системами в формализации нет."
+  },
+  {
+   "line": 99,
+   "theorem": "P1_concrete_L1_L2",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "В $L5$-иерархии работают также конкретные структурные свойства: $L_1 \\ll L_2$ и $\\neg (L_2 \\ll L_1)$ (уровень основания $L_1$ строго ниже второго); $l \\ll LS l$ для любого $l$ (каждый уровень строго ниже своего преемника); асимметрия (если $l_1 \\ll l_2$, то $\\neg(l_2 \\ll l_1)$).[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P1_concrete_L1_L2 : L1 << L2 /\\ ~ (L2 << L1) (:55); P1_level_step : forall l, l << LS l (:63); P1_asymmetry : forall l1 l2, l1 << l2 -> ~ (l2 << l1) (:69, через транзитивность и иррефлексивность). Все три — Closed under the global context."
+  },
+  {
+   "line": 127,
+   "theorem": "P2_from_L5",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "**Формальная теорема.** Принцип представлен в двух формах:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P2_from_L5 : forall L (C : Criterion L), P2_valid L C (:91), где P2_valid L C := crit_level_witness L C << L (TheoryOfSystems_Core_ERR.v:171). Блок кода совпадает. Closed. Обе формы — одно утверждение с точностью до раскрытия P2_valid; обе проецируют поле crit_level_valid, что глава и говорит на стр. 138–144."
+  },
+  {
+   "line": 127,
+   "theorem": "P2_structural",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "**Формальная теорема.** Принцип представлен в двух формах:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P2_structural : forall L (C : Criterion L), crit_level_witness L C << L (:98), доказательство — exact (crit_level_valid L C). Блок кода совпадает. Closed under the global context."
+  },
+  {
+   "line": 138,
+   "theorem": "Criterion",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Особенность $P2$ в том, что она не *следует* из закона как самостоятельная теорема, а *встроена* в саму запись критерия. Поле `crit_level_valid` в записи `Criterion` *требует* доказательства предшествования уровня критерия уровню системы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный. Record Criterion (L : Level) := { crit_domain : Type; crit_predicate : crit_domain -> Prop; crit_level_witness : Level; crit_level_valid : crit_level_witness << L } (TheoryOfSystems_Core_ERR.v:163). «Уровень критерия» — поле crit_level_witness: метка, с областью и предикатом не связанная (проверено: Check.v, level_label_is_free). На уровне L1 критериев нет (no_criterion_at_L1)."
+  },
+  {
+   "line": 146,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Это параллельно тому, как $L2$ встроена в запись `Distinction` через поле `exclusive`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле exclusive : ~ (positive /\\ negative) записи Distinction (Distinction.v:70); L2_exclusivity (:107) и L2_from_distinction его проецируют."
+  },
+  {
+   "line": 151,
+   "theorem": "P2_no_circularity",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Из $P2$ выводится формальный запрет на построение критерия, уровень которого совпадает с уровнем определяемой им системы:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P2_no_circularity : forall L, ~ exists C : Criterion L, crit_level_witness L C = L (:103); из поля crit_level_valid и иррефлексивности. Блок кода совпадает. Closed under the global context."
+  },
+  {
+   "line": 160,
+   "theorem": "P2_no_circularity",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Иначе говоря: «$S$ есть то, что удовлетворяет $S$» — формулировка, заблокированная самой типовой системой Rocq, поскольку требует построить критерий, нарушающий $P2$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема запрещает только совпадение метки crit_level_witness с L. Метка от области и предиката критерия не зависит: к любым D и p можно приписать любую l << L (Check.v, level_label_is_free). Критерий с областью System L2 Rocq отклоняет при допустимой метке и на любом уровне (и Criterion L2, и Criterion L3) — проверкой вселенных (universe inconsistency: Criterion.u0 < Criterion.u0), а не полем crit_level_valid; самоссылку в определении исключает порядок определений."
+  },
+  {
+   "line": 179,
+   "theorem": "P3_reflexivity",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "$P3$ представлено четырьмя утверждениями — свойствами отношения интенсионального равенства `systems_intensionally_equal`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "systems_intensionally_equal S1 S2 := sys_criterion S1 = sys_criterion S2 /\\ sys_pos_bound S1 = sys_pos_bound S2 /\\ sys_uniqueness S1 = sys_uniqueness S2 (TheoryOfSystems_Core_ERR.v:282). Четыре блока кода совпадают с исходником (:125, :133, :143, :155); все — Closed. Отношение совпадает с равенством записей: systems_intensionally_equal S1 S2 <-> S1 = S2 (Check.v, intensional_iff_eq)."
+  },
+  {
+   "line": 203,
+   "theorem": "P3_symmetry",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Первые три обеспечивают, что интенсиональное тождество есть отношение эквивалентности (рефлексивность, симметрия, транзитивность);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P3_reflexivity (:125), P3_symmetry (:133), P3_transitivity (:143) — рефлексивность, симметрия и транзитивность конъюнкции трёх равенств. Closed under the global context."
+  },
+  {
+   "line": 203,
+   "theorem": "P3_transitivity",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Первые три обеспечивают, что интенсиональное тождество есть отношение эквивалентности (рефлексивность, симметрия, транзитивность);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P3_transitivity (:143). Closed under the global context."
+  },
+  {
+   "line": 205,
+   "theorem": "P3_from_L1_L4",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "четвёртая фиксирует содержательное условие: совпадение трёх компонент критерия влечёт интенсиональное равенство систем.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Три посылки P3_from_L1_L4 (:155) — равенства трёх полей записи System: критерия, границы позиций и ограничения единственности; критерий — одно из трёх. Заключение есть конъюнкция этих же трёх равенств по определению systems_intensionally_equal: теорема раскрывает определение. Одного совпадения критерия для интенсионального равенства недостаточно (Check.v, same_criterion_not_enough). Closed."
+  },
+  {
+   "line": 241,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В Rocq принцип формализован через тип `RealProcess` $:= \\mathbb{N} \\to \\mathbb{Q}$ — последовательность рациональных чисел, индексированная натуральными:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition RealProcess := nat -> Q (process/ProcessCore.v:34; то же определение ещё в девяти файлах). Теоремы P4_* записаны для R : nat -> Q напрямую; PrinciplesFromLaws.v имени RealProcess не подключает."
+  },
+  {
+   "line": 246,
+   "theorem": "P4_from_L5",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Theorem P4_from_L5 : forall (R : nat -> Q) (n : nat), exists q : Q, R n = q.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Блок кода расходится с исходником. В файле с июня 2026 (:191): forall (R : nat -> Q) (n : nat), (exists (num : Z) (den : positive), R n = num # den) /\\ (n = 0 \\/ exists m, n = S m). Прежняя форма со страницы верна для любого терма (свидетель — сам R n); комментарий файла (:183–:190) называет её пустой и говорит, что P4 задан выбором типа nat -> Q, а не выведен. Closed under the global context."
+  },
+  {
+   "line": 249,
+   "theorem": "P4_no_completed_infinity",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Theorem P4_no_completed_infinity : forall q : Q, exists (n : Z) (d : positive), q = n # d.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с исходником (:201) с точностью до имени BinNums.positive. Доказательство — разбор конструктора Q. Closed under the global context."
+  },
+  {
+   "line": 252,
+   "theorem": "P4_finite_at_each_stage",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Theorem P4_finite_at_each_stage : forall (R : nat -> Q) (n : nat), exists (num : Z) (den : positive), R n = num # den.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с исходником (:218) с точностью до имени BinNums.positive. Closed under the global context."
+  },
+  {
+   "line": 259,
+   "theorem": null,
+   "claim": "Формально они доказывают *скромное* утверждение: каждая наблюдаемая стадия процесса имеет конкретное рациональное значение, представленное конечными данными — числителем и знаменателем.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует P4_finite_at_each_stage и P4_no_completed_infinity: всякое значение типа Q есть num # den. Это свойство типа Q, верное по его определению."
+  },
+  {
+   "line": 262,
+   "theorem": null,
+   "claim": "Это *не* то же самое, что формальная теорема «актуально бесконечные множества не существуют» или «бесконечное множество традиционной теории не существует»: такого глобального запрета приведённые теоремы сами по себе не доказывают.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в PrinciplesFromLaws.v утверждений о множествах или о бесконечных тотальностях нет."
+  },
+  {
+   "line": 283,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В Части IV настоящего тома действительные числа будут конструироваться через `RealProcess` — последовательности рациональных приближений. Эта конструкция *не использует* ни Аксиомы Бесконечности (которая постулирует существование завершённого бесконечного множества), ни Аксиомы Выбора (которая позволяет извлекать элементы из бесконечного семейства непредъявимым алгоритмом).",
+   "page_price": "без Аксиомы Бесконечности и без Аксиомы Выбора",
+   "verdict": "ok",
+   "note": "Определение RealProcess := nat -> Q — Closed under the global context. Аксиом бесконечности и выбора в репозитории не объявлено: объявлены classic, L4_witness и две аксиомы раздела Навье — Стокса. Теоремы Части IV имеют свою цену (ведомости part04: classic; L4_witness — в ProcessBW.v); из L4_witness выводится функция выбора для любого семейства (Check.v, choice_function_from_L4_witness). Сама Часть IV здесь не сверялась."
+  },
+  {
+   "line": 306,
+   "theorem": "four_principles_from_five_laws",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "(forall (R : nat -> Q) n, exists q : Q, R n = q). (* P4 *)",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Блок кода расходится с исходником в четвёртом члене. В файле (:251): forall (R : nat -> Q) n, exists (num : Z) (den : positive), R n = num # den. Остальные три члена совпадают. Члены говорят о разных предметах: об уровнях, о критериях, о системах (рефлексивность равенства), о последовательностях nat -> Q; утверждения вида «для любой системы S выполнены все четыре» в теореме нет. Closed under the global context."
+  },
+  {
+   "line": 309,
+   "theorem": "four_principles_from_five_laws",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Доказательство объединяющего утверждения — конъюнкция четырёх теорем, разобранных выше.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство (:253–:259): level_lt_irrefl, P2_always_holds, P3_reflexivity, P4_finite_at_each_stage."
+  },
+  {
+   "line": 338,
+   "theorem": "complete_foundation",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Теорема `complete_foundation` из файла `ERRFromDistinction.v`[^5] доказывает следующее: из любой пропозиции строится `Distinction`; для всякой `Distinction` выполнены законы $L2$ и $L3$; всякая `Distinction` даёт E/R/R-структуру не менее чем с двумя ролями; и уровневая иерархия иррефлексивна.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Третий член теоремы (:165) — forall D, 2 <= err_role_count D, где err_role_count D := 2 (:54): после раскрытия это 2 <= 2, от D не зависит; E/R/R-структуры и ролей как объектов в утверждении нет. Остальные члены пересказаны верно: первый стоит на аксиоме classic (Print Assumptions: Axioms: Distinction.classic) и равносилен ей (Check.v, every_prop_distinguishes_iff_em), второй проецирует поля exclusive и exhaustive, четвёртый — level_lt_irrefl."
+  },
+  {
+   "line": 344,
+   "theorem": null,
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Чего теорема *не* содержит — это отдельной формальной зависимости вида «из $P1$–$P4$ следует E/R/R»: файл `ERRFromDistinction.v` не импортирует `PrinciplesFromLaws.v` и работает с записью `Distinction` напрямую.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: подключены List, Lia, foundation.Distinction, foundation.LawsFromDistinction, TheoryOfSystems_Core_ERR (:10–:16)."
+  },
+  {
+   "line": 371,
+   "theorem": null,
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "В исходной формализации этот принцип зафиксирован прямо: *«These are not three parts but three aspects of one act»*.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий ERRFromDistinction.v:26: «These are not three PARTS but three ASPECTS of ONE act.» Это комментарий, а не утверждение; сноска 6 так и говорит."
+  },
+  {
+   "line": 399,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Elements: положительная и отрицательная стороны (поля `positive` и `negative` записи `Distinction`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поля positive : Prop и negative : Prop (Distinction.v:68–:69); err_elements D := [positive D; negative D] (ERRFromDistinction.v:60). Комментарии самой записи называют эти поля ролями («role: the distinguished side», Distinction.v:68); два прочтения разведены во второй половине главы."
+  },
+  {
+   "line": 401,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Rules: исключительность и исчерпанность (поля `exclusive` и `exhaustive`), удерживающие акт как именно *различение*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exclusive : ~ (positive /\\ negative), exhaustive : positive \\/ negative (Distinction.v:70–:71)."
+  },
+  {
+   "line": 417,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "было показано, что запись `Distinction` имеет ровно четыре поля — `positive`, `negative`, `exclusive`, `exhaustive` — и ни одно из этих полей не может быть удалено без потери самой природы различения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре поля — Distinction.v:67–:72. Вторая часть отсылает к рассуждению Главы 2; теоремы о необходимости полей в формализации нет. Формальный вид проверен: без каждого из двух правил стороны могут совпасть (Check.v, without_exclusive_sides_may_coincide, without_exhaustive_sides_may_coincide; Closed)."
+  },
+  {
+   "line": 426,
+   "theorem": null,
+   "file": "src/foundation/Distinction.v",
+   "claim": "Следовательно, число элементов в простейшем акте не может быть меньше двух — и оно ровно два, поскольку запись `Distinction` имеет ровно два поля типа `Prop`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Полей типа Prop два: positive, negative. Что стороны всякой записи — две разные пропозиции, в формализации не доказано; проверено: forall D, positive D <> negative D и NoDup (err_elements D) (Check.v, sides_distinct, elements_nodup; Closed)."
+  },
+  {
+   "line": 447,
+   "theorem": null,
+   "claim": "Это два *логически независимых* правила: ни одно не сводится к другому, оба обязательны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава не называет это теоремой формализации, и в src такой теоремы нет. Утверждение верно и проверено: ~ (forall P N, P \\/ N -> ~ (P /\\ N)) и ~ (forall P N, ~ (P /\\ N) -> P \\/ N) (Check.v, exclusive_not_from_exhaustive, exhaustive_not_from_exclusive; Closed)."
+  },
+  {
+   "line": 461,
+   "theorem": "err_role_count",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "В Rocq двойственность зафиксирована числовыми инвариантами:[^7] для всякой $D : \\texttt{Distinction}$:",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: три функции определены как число 2 и аргумент не используют: Definition err_element_count (D : Distinction) : nat := 2, так же err_role_count и err_rule_count (:51, :54, :57). Равенства верны по определению; числа вписаны, а не получены из записи. Деривация стр. 410–459 в формализацию не входит."
+  },
+  {
+   "line": 752,
+   "theorem": "classic",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Это — условия самой возможности системности, выводимые из деривационной цепи и зафиксированные в Главе 3 как формальные теоремы Rocq.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: для L3 неверно. Axiom classic : forall P : Prop, P \\/ ~P (Distinction.v:36); Law_of_ExcludedMiddle (LawsFromDistinction.v:63) — exact classic, Print Assumptions: Axioms: Distinction.classic. L1, L2, L4, L5 записаны теоремами без допущений (Law_of_Identity, Law_of_NonContradiction, Law_of_SufficientReason, L5_hierarchy — Closed under the global context)."
+  },
+  {
+   "line": 790,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В репозитории ToS-Coq двухслойность зафиксирована через структуру типа `System`, в которой соединены универсальные требования и конкретные правила системы.[^10]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) := { sys_criterion : Criterion L; sys_pos_bound : PositionBound; sys_uniqueness : UniquenessConstraint } (TheoryOfSystems_Core_ERR.v:203). Из универсального слоя в типе представлено одно требование — метка уровня критерия ниже L (поле crit_level_valid); законы L1–L4 в тип не входят."
+  },
+  {
+   "line": 793,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Тип `System L` параметризован уровнем $L$ (универсальный слой работает через иерархию уровней) и содержит поле `sys_criterion` (конкретный критерий, специфичный для данной системы).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: параметр L : Level, поле sys_criterion : Criterion L (:203–:204)."
+  },
+  {
+   "line": 796,
+   "theorem": null,
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Универсальный слой проявляется как требования к `sys_criterion` (его уровень должен быть строго ниже уровня системы, по $P1$); конкретный слой — как само содержание критерия.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Требование — поле crit_level_valid : crit_level_witness << L записи Criterion (:167). В главе (стр. 118–144) и в TheoryOfSystems_Core_ERR.v (P2_valid, :171) оно названо P2; в Judgments.v и FormationRules.v — P1 (has_type_implies_P1, p1_check). Это одно и то же условие под двумя именами."
+  },
+  {
+   "line": 2156,
+   "theorem": null,
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Формализация четырёх принципов и их деривация от законов содержится в файле `PrinciplesFromLaws.v` репозитория ToS-Coq; файл опирается на `Distinction.v`, `LawsFromDistinction.v` и `TheoryOfSystems_Core_ERR.v`.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Опора названа по подключениям. Файл подключает все три (:13–:15), но в доказательствах использует только TheoryOfSystems_Core_ERR.v (level_lt_irrefl, level_lt_trans, L1_lt_L2, P2_always_holds, crit_level_valid) и стандартную библиотеку: копия без строк подключения Distinction.v и LawsFromDistinction.v собирается, Print Assumptions four_principles_from_five_laws — Closed (PrinciplesNoLaws.v). Деривация от законов изложена в комментариях («PROOF (from article)»), в утверждения теорем законы не входят."
+  },
+  {
+   "line": 2157,
+   "theorem": "P1_level_step",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Соответствующие теоремы файла — `P1_concrete_L1_L2`, `P1_level_step`, `P1_asymmetry`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P1_level_step : forall l : Level, l << LS l (:63). Closed under the global context."
+  },
+  {
+   "line": 2157,
+   "theorem": "P1_asymmetry",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Соответствующие теоремы файла — `P1_concrete_L1_L2`, `P1_level_step`, `P1_asymmetry`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P1_asymmetry : forall l1 l2 : Level, l1 << l2 -> ~ (l2 << l1) (:69). Closed under the global context."
+  },
+  {
+   "line": 2158,
+   "theorem": "P1_blocks_russell",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Этот результат зафиксирован в теореме `P1_blocks_russell`.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "P1_blocks_russell : forall l : Level, ~ (l << l) (:51) — дословно утверждение P1_from_L1_L5, доказательство то же (exact level_lt_irrefl). Ни отношения принадлежности, ни множества Рассела, ни систем в утверждении нет. Одноимённая теорема foundation/P4ProhibitsImpredicative.v:72 — другое утверждение: (forall x, ~ member x x) -> forall x, ~ member x x, заключение повторяет посылку. Обе — Closed under the global context."
+  },
+  {
+   "line": 2159,
+   "theorem": "four_principles_from_five_laws",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Соответствующая теорема в файле — `four_principles_from_five_laws`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорема есть (:242), Closed under the global context. О расхождении блока кода — запись стр. 306."
+  },
+  {
+   "line": 2159,
+   "theorem": "derivation_chain",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Также присутствует теорема `derivation_chain`, явно указывающая закон-источник для каждого принципа: $P1$ от $L1 + L5$; $P2$ от $L5$; $P3$ от $L1 + L4$; $P4$ от $L5$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Утверждение derivation_chain (:262) дословно совпадает с four_principles_from_five_laws и доказано ссылкой на неё. Закон-источник указан только в комментариях к членам, в утверждение не входит; для P1 комментарий называет один L5 («L5 → P1», :263), а не L1 + L5. Closed under the global context."
+  },
+  {
+   "line": 2160,
+   "theorem": null,
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Файл `ERRFromDistinction.v` репозитория ToS-Coq.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл есть: src/foundation/ERRFromDistinction.v, 17 Qed, объявлений Axiom и Parameter нет."
+  },
+  {
+   "line": 2161,
+   "theorem": null,
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Прямая цитата из комментариев файла `ERRFromDistinction.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий :26 — «These are not three PARTS but three ASPECTS of ONE act.»; цитата на странице отличается только регистром букв."
+  },
+  {
+   "line": 2162,
+   "theorem": "err_element_count",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Соответствующие функции файла `ERRFromDistinction.v` — `err_element_count`, `err_role_count`, `err_rule_count`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три определения есть (:51, :54, :57); каждое — постоянная функция fun _ => 2. В других файлах они не используются. О статусе — запись стр. 461."
+  },
+  {
+   "line": 2162,
+   "theorem": "distinction_has_two_elements",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Также присутствуют теоремы `distinction_has_two_elements`, `distinction_has_two_roles`, `minimum_two_roles`, доказывающие эти равенства.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "distinction_has_two_elements : forall D, length (err_elements D) = 2 (:64) — о длине списка [positive D; negative D], а не о err_element_count; что два члена списка различны, она не утверждает. Равенство err_element_count D = 2 верно по определению. Closed under the global context."
+  },
+  {
+   "line": 2162,
+   "theorem": "distinction_has_two_roles",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Также присутствуют теоремы `distinction_has_two_elements`, `distinction_has_two_roles`, `minimum_two_roles`, доказывающие эти равенства.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "distinction_has_two_roles : forall D, err_role_count D = 2 (:69) — после раскрытия определения 2 = 2, доказательство reflexivity; теорема повторяет определение. Closed under the global context."
+  },
+  {
+   "line": 2162,
+   "theorem": "minimum_two_roles",
+   "file": "src/foundation/ERRFromDistinction.v",
+   "claim": "Также присутствуют теоремы `distinction_has_two_elements`, `distinction_has_two_roles`, `minimum_two_roles`, доказывающие эти равенства.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "minimum_two_roles : forall D, 2 <= err_role_count D (:77) — неравенство, после раскрытия 2 <= 2; равенства не доказывает и от D не зависит. Для err_rule_count среди названных теорем нет ни одной. Closed under the global context."
+  },
+  {
+   "line": 2163,
+   "theorem": "classic",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Подробное обсуждение — в Главе 6, где разбираются обе фундаментальные аксиомы репозитория ToS-Coq (`classic` и `L4_witness`) и их соотношение с принципом $P4$.",
+   "page_price": "две аксиомы: classic и L4_witness",
+   "verdict": "ok",
+   "note": "Статус назван честно: Axiom classic (Distinction.v:36; то же утверждение объявлено в settheory/BorelDeterminacy.v:21 и берётся из стандартной библиотеки через ToS_Axioms.v). Логических допущений два; кроме них в репозитории две аксиомы раздела Навье — Стокса (C_B_positive, B_coeff_bounded)."
+  },
+  {
+   "line": 2163,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Подробное обсуждение — в Главе 6, где разбираются обе фундаментальные аксиомы репозитория ToS-Coq (`classic` и `L4_witness`) и их соотношение с принципом $P4$.",
+   "page_price": "две аксиомы: classic и L4_witness",
+   "verdict": "ok",
+   "note": "Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x} (ToS_Axioms.v:105)."
+  },
+  {
+   "line": 2164,
+   "theorem": null,
+   "claim": "Если работать с `nat` в Rocq, где натуральные начинаются с $0$, то уже $0^2 < 1$, и носитель при малых $c$ непуст; пример тогда удобнее брать с $c = 0$, где условие $n^2 < 0$ не выполнено ни для какого $n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Арифметика верна; nat — тип стандартной библиотеки, начинается с 0. Схема S_c в формализации не записана, и глава этого не утверждает."
+  },
+  {
+   "line": 2165,
+   "theorem": "HasType",
+   "file": "src/Judgments.v",
+   "claim": "Формальный аппарат — в файле `FormationRules.v`, опирающемся на тип `System`, поле `sys_criterion` (конкретный критерий системы), отношение `HasType` (типизация системы в контексте).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "HasType G S := ctx_well_formed G /\\ crit_level_witness L (sys_criterion L S) << L (Judgments.v:150). Второй член выполнен для всякой системы (поле crit_level_valid), поэтому суждение от системы не зависит: HasType L G S <-> ctx_well_formed G, и из HasType L G S следует HasType L G T для любой T (Check.v, HasType_iff_ctx, HasType_any_system; Closed). Типизацией системы оно не является."
+  },
+  {
+   "line": 2165,
+   "theorem": "sys_form",
+   "file": "src/FormationRules.v",
+   "claim": "Ключевые леммы — `sys_form` (правило формации системы), `p1_check` (проверка иерархии), `l4_role_principle` (проверка обоснованности ролей), `wf4_check` (общая проверка хорошей сформированности).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sys_form : ctx_well_formed G -> crit_level_witness L (sys_criterion L S) << L -> HasType L G S (:19) — правило введения по определению HasType; вторая посылка выполнена для всякой S. Closed under the global context."
+  },
+  {
+   "line": 2165,
+   "theorem": "p1_check",
+   "file": "src/FormationRules.v",
+   "claim": "Ключевые леммы — `sys_form` (правило формации системы), `p1_check` (проверка иерархии), `l4_role_principle` (проверка обоснованности ролей), `wf4_check` (общая проверка хорошей сформированности).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "p1_check : HasType L G S -> crit_level_witness L (sys_criterion L S) << L (:27). Заключение верно без посылки — это поле crit_level_valid (Check.v, p1_check_without_premise): проверка не может дать отрицательного ответа. Closed under the global context."
+  },
+  {
+   "line": 2165,
+   "theorem": "l4_role_principle",
+   "file": "src/FormationRules.v",
+   "claim": "Ключевые леммы — `sys_form` (правило формации системы), `p1_check` (проверка иерархии), `l4_role_principle` (проверка обоснованности ролей), `wf4_check` (общая проверка хорошей сформированности).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "l4_role_principle : HasType L G S -> P2_valid L (sys_criterion L S) (:35). Ролей и закона L4 в утверждении нет: заключение по определению P2_valid совпадает с заключением p1_check (Check.v, l4_role_principle_is_p1_check — reflexivity) и верно без посылки. Closed under the global context."
+  },
+  {
+   "line": 2165,
+   "theorem": "wf4_check",
+   "file": "src/FormationRules.v",
+   "claim": "Ключевые леммы — `sys_form` (правило формации системы), `p1_check` (проверка иерархии), `l4_role_principle` (проверка обоснованности ролей), `wf4_check` (общая проверка хорошей сформированности).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "wf4_check : HasType L G S -> ctx_well_formed G /\\ crit_level_witness L (sys_criterion L S) << L (:43). Заключение совпадает с посылкой по определению HasType (Check.v, wf4_check_is_identity — reflexivity). Closed under the global context."
+  },
+  {
+   "line": 2166,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "В ToS обе ситуации формально разделены: автоматический подбор реализуется через конструктивные конструкции Rocq, операторный — через аксиому `L4_witness`.",
+   "page_price": "аксиома L4_witness",
+   "verdict": "ok",
+   "note": "Статус назван честно: L4_witness — аксиома (ToS_Axioms.v:105), переводит exists в предъявленного свидетеля. Разделение видно в выводе Print Assumptions: теорема, обходящаяся определениями, закрыта, опирающаяся на свидетеля — называет ToS_Axioms.L4_witness. Из L4_witness следует функция выбора для любого семейства (Check.v, choice_function_from_L4_witness); обсуждение — в Главе 6."
+  }
+ ]
+}

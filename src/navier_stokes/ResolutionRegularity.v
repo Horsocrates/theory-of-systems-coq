@@ -28,6 +28,9 @@ From ToS Require Import navier_stokes.ProcessNS.
 From ToS Require Import navier_stokes.FatouRegularity.
 Open Scope Q_scope.
 
+Section WithNSCoupling.
+Context `{nsc : NSCoupling}.
+
 (* ================================================================== *)
 (*  Part I: Constructive Solution at Each K  (~12 lemmas)             *)
 (* ================================================================== *)
@@ -282,3 +285,5 @@ Proof.
   - intros p Hp K n. apply process_energy_le_initial. apply Hp.
   - intros. apply integrated_bound_positive; assumption.
 Qed.
+
+End WithNSCoupling.

@@ -1,0 +1,538 @@
+{
+ "batch": "audit-part-01",
+ "chapter": "01 Перво-различие и законы логики/07 Онтологическое ядро сквозные мотивы.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 8,
+   "theorem": null,
+   "file": null,
+   "claim": "Часть этих узлов уже имеет прямую машинную проверку в Rocq; часть служит онтологическим и методологическим ориентиром для последующих частей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Общая оговорка о статусе; распределение по позициям главы дано в таблице стр. 677–683 (см. записи к ней)."
+  },
+  {
+   "line": 23,
+   "theorem": null,
+   "file": null,
+   "claim": "Глава онтологическая: она не вводит нового формального аппарата, а проясняет, на каких онтологических основаниях стоит уже построенный.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: новых объявлений глава не называет; все 13 имён принадлежат `foundation/Distinction.v` и `TheoryOfSystems_Core_ERR.v`, остальные упоминания — файлы."
+  },
+  {
+   "line": 25,
+   "theorem": null,
+   "file": null,
+   "claim": "Некоторые из собираемых ниже узлов имеют прямые Rocq-якоря; некоторые — частичные формальные следы; некоторые суть методологические ориентиры, которые будут разворачиваться в дальнейших частях.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; какой узел к какому роду относится — таблица стр. 677–683."
+  },
+  {
+   "line": 90,
+   "theorem": null,
+   "file": null,
+   "claim": "В ToS Закон Исключённого Третьего онтологически выводится из $L1$ и $L2$ (Глава 3): если нечто тождественно себе ($L1$) и не может одновременно быть и не быть ($L2$), то между «быть $A$» и «не быть $A$» третьего исхода структурно нет.",
+   "page_price": "онтологически выводится из L1 и L2; о формальном статусе здесь не сказано",
+   "verdict": "ok",
+   "note": "Тезис подан как онтологический, не как доказанный в Rocq; Глава 3 (стр. 429–454) оговаривает двойной статус. В формализации: `Axiom classic : forall P, P \\/ ~ P` (foundation/Distinction.v:36) и поле `exhaustive` записи (:71); «третьего исхода нет» — `L3_binarity : forall P, ~ ~ (P \\/ ~ P)` (foundation/BinarityVsTotality.v:72), Closed under the global context. Теоремы, выводящей `P \\/ ~ P` из L1 и L2, нет."
+  },
+  {
+   "line": 93,
+   "theorem": null,
+   "file": null,
+   "claim": "$L3$ — это утверждение о *дизъюнкции исходов*, и оно держится *всегда*, для любого $A$.",
+   "page_price": "держится всегда, для любого A; статус не назван",
+   "verdict": "ok",
+   "note": "Для произвольной пропозиции это аксиома `classic` (foundation/Distinction.v:36), а не теорема; глава о Rocq здесь не говорит. Формализация различает две формы: `L3_binarity` (без аксиом) и `classic` (аксиома) — foundation/BinarityVsTotality.v, шапка файла. См. заметки, сомнительные места."
+  },
+  {
+   "line": 131,
+   "theorem": null,
+   "file": null,
+   "claim": "$L3$ утверждает полноту *завершённого* различения: $A \\vee \\neg A$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует структурной форме: `L3_totality : forall D : Distinction, positive D \\/ negative D` (foundation/Distinction.v:117), Closed under the global context — проекция поля `exhaustive` записи. Незавершённому различению в формализации отвечает запись `PendingDistinction` без этого поля (foundation/BinarityVsTotality.v:94); глава её не называет."
+  },
+  {
+   "line": 137,
+   "theorem": null,
+   "file": null,
+   "claim": "Это — структурная аналогия, общий мотив процессности, а *не* доказанное тождество математического аппарата и физической теории.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в файлах, названных сноской 1, утверждений о суперпозиции или измерении как о физических объектах нет (см. записи стр. 735)."
+  },
+  {
+   "line": 143,
+   "theorem": null,
+   "file": null,
+   "claim": "Превращение этой гипотезы в формальный вывод — предмет физики.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус «программная гипотеза» соответствует содержанию формализации: вывода квантовой теории из записи `Distinction` в ней нет."
+  },
+  {
+   "line": 154,
+   "theorem": null,
+   "file": null,
+   "claim": "Там процессная онтология, обоснованная здесь, разворачивается в программу вывода законов физики: в частности, в исследование унистохастической структуры квантовой теории как структуры, согласованной с устройством различения[^1].",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слово «программа» честное; что именно стоит в файлах — записи к сноске 1 (стр. 735)."
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "file": null,
+   "claim": "Формально этот режим — переход *список $\\to$ мультимножество $\\to$ множество* как последовательное погашение правил — развёрнут с E/R/R-разбором в Части II (список как кардинальный путь к числу).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отсылка к разбору E/R/R в Главе II.2 (её стр. 263–283), не к Rocq. В формализации перехода «список → мультимножество → множество» нет: слово `multiset` встречается в двух файлах другой темы, support списка определён один раз — `in_list` (settheory/CantorBendixsonFull.v:519). Слово «Формально» может быть прочитано как «в Rocq» — см. заметки, сомнительные места."
+  },
+  {
+   "line": 338,
+   "theorem": "russell_paradox_blocked",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "формально это разобрано в файле `TheoryOfSystems_Core_ERR.v`, где теорема `russell_paradox_blocked` устанавливает для уровня `L2` невозможность критерия-свидетеля на собственном уровне через иррефлексивность отношения `level_lt`; для всякого уровня то же утверждает `criterion_label_never_own_level` (`TransfiniteInductionLevel.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 10, слово автора): добавлено «для уровня L2» и названа общая теорема. russell_paradox_blocked — утверждение об одном уровне L2; Closed under the global context."
+  },
+  {
+   "line": 341,
+   "theorem": "level_lt",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "через иррефлексивность отношения `level_lt`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`level_lt` — `Fixpoint` (:68); иррефлексивность — `level_lt_irrefl : forall l, ~ (l << l)` (:96), через ранг `level_depth`; Closed under the global context. Одноимённые объявления есть ещё в пяти файлах; глава называет этот."
+  },
+  {
+   "line": 350,
+   "theorem": null,
+   "file": null,
+   "claim": "Для *конечного* списка или *конечной стадии* процесса выбор не требует отдельной аксиомы: порядок уже дан (он производится $L5$), а значит можно выбрать первый, максимальный или иной канонический элемент по правилу — механизм статуса (Глава 6, § 6.6) определяет такой выбор по порядку.",
+   "page_price": "не требует отдельной аксиомы",
+   "verdict": "ok",
+   "note": "Формализацию глава здесь не называет; цена верна: `finite_choice_works` (foundation/P4ProhibitsAC.v:171), `finite_choice` (foundation/P4_Eliminates_AC.v:47), `L5_resolve_le_all` (TheoryOfSystems_Core_ERR.v:637) — Closed under the global context."
+  },
+  {
+   "line": 356,
+   "theorem": null,
+   "file": null,
+   "claim": "Полная AC требует отдельного анализа через $P4$, поскольку она связана с *завершённой* функцией выбора по бесконечному семейству, а не с конечным выбором внутри одной стадии; и в этой, завершённой форме она, как разобрано в Главе 6 (§ 6.5–6.6), несовместима с $P4$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отсылка к Главе 6; формализацию глава здесь не называет. Слова «в завершённой форме» соответствуют `ac_completed_graph_contradicts_P4` (foundation/P4ProhibitsAC.v:122): противоречие получено для графа функции выбора, прочитанного как завершённое целое, при посылке-мосте `bridge`; для семейств непустых списков сам выбор — теорема (`AC_on_nat_as_rule`, :160). Обе — Closed under the global context."
+  },
+  {
+   "line": 379,
+   "theorem": null,
+   "file": null,
+   "claim": "Формальная работа с этой переформулировкой — задача последующих частей, и настоящая глава её не предрешает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; формализацию глава здесь не называет. Утверждения о континууме сверяются в Части IV."
+  },
+  {
+   "line": 391,
+   "theorem": null,
+   "file": null,
+   "claim": "Слой же теоретико-множественных конструкций[^2] на эту схему пока не опирается: множества в нём заданы предикатами и типами, а списки служат рабочим материалом — позициями игр, словами, наборами поддеревьев.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 10, слово автора): было «располагается поверх списочного аппарата, как производный слой». В 11 файлах src/settheory/ множества заданы предикатами и типами с отображениями; схема «список → множество» записана отдельным файлом ListModes.v. Перевод слоя на эту схему — горизонт."
+  },
+  {
+   "line": 510,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В записи `Distinction` (файл `Distinction.v`) есть поле `negative : Prop`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~ (positive /\\ negative); exhaustive : positive \\/ negative }` (:67–72). Одноимённые записи есть ещё в четырёх файлах; глава называет этот."
+  },
+  {
+   "line": 512,
+   "theorem": "negative",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "Это поле есть *отрицательная сторона различения* — пропозициональный аспект, связанный с положительной стороной `positive` через поля `exclusive` (несовместность сторон) и `exhaustive` (исчерпанность).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`negative` — поле типа `Prop` (:69). Из полей `exclusive` и `exhaustive` следует `negative D <-> ~ positive D` для всякого `D` (Check.v, `negative_iff_not_positive`, Closed under the global context); в формализации такой леммы нет."
+  },
+  {
+   "line": 514,
+   "theorem": "positive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "связанный с положительной стороной `positive`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`positive : Prop` — поле записи (:68). Имя `positive` без уточнения принадлежит стандартной библиотеке (двоичные положительные числа); в главе оно стоит рядом с именем записи."
+  },
+  {
+   "line": 515,
+   "theorem": "exclusive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "`exclusive` (несовместность сторон)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`exclusive : ~ (positive /\\ negative)` — поле записи (:70): требование к экземпляру, не теорема."
+  },
+  {
+   "line": 515,
+   "theorem": "exhaustive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "`exhaustive` (исчерпанность)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`exhaustive : positive \\/ negative` — поле записи (:71): требование к экземпляру, не теорема; в каноническом экземпляре заполнено аксиомой `classic`."
+  },
+  {
+   "line": 516,
+   "theorem": "distinction_of",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В каноническом случае `distinction_of` $(P)$ поле `negative` задаётся как $\\neg P$ — то есть как результат операции отрицания, а не как самостоятельный отрицательный объект.",
+   "page_price": "цена не названа",
+   "verdict": "ok",
+   "note": "`distinction_of P := mkDistinction P (~P) … (classic P)` (:75–80); `co_constitution : positive (distinction_of P) = P /\\ negative (distinction_of P) = ~ P` (:202). `Print Assumptions distinction_of`: `Distinction.classic` — поле `exhaustive` канонического экземпляра заполнено аксиомой; о цене страница здесь не говорит."
+  },
+  {
+   "line": 598,
+   "theorem": null,
+   "file": null,
+   "claim": "ToS не утверждает, что формально выведены *все* устойчивые структуры математики;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; теоремы о «всех устойчивых структурах» в формализации нет."
+  },
+  {
+   "line": 685,
+   "theorem": "Generator",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "| процессность | `Generator`/`Process` в Core, `P4CompletedInfinity.v`, файлы физического контура | частично формализовано |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Generator (ElemType : Type)` (:517): начальный элемент, шаг, сохраняемое свойство — определение; развёртка `unfold_gen` (:532). Статус «частично» честный. Какие файлы названы «физическим контуром», страница не уточняет (сноска 1 называет четыре)."
+  },
+  {
+   "line": 685,
+   "theorem": "Process",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "`Generator`/`Process` в Core",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Process (L : Level)` (:525): система, необязательный генератор, конечная глубина `proc_depth : nat` — определение. Одноимённая запись есть в stdlib/ProcessRefinement.v; глава называет Core."
+  },
+  {
+   "line": 685,
+   "theorem": null,
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "`P4CompletedInfinity.v`, файлы физического контура",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл существует: 10 Qed, все 10 утверждений — Closed under the global context. Главные: `completed_inf_contradicts_P4` (:70, при посылке-мосте `bridge`), `potential_process_compatible_with_P4` (:190)."
+  },
+  {
+   "line": 686,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "| позитивная онтология | `Distinction`, поля `positive`, `negative`, `exclusive`, `exhaustive` | прямой формальный след |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись с названными четырьмя полями существует (:67–72). «След» — точное слово: это определение; утверждений о позитивности существующего в файле нет."
+  },
+  {
+   "line": 687,
+   "theorem": null,
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "| операциональная делимость | `Level`, `System` $L$, `Criterion` в `TheoryOfSystems_Core_ERR.v` | формализовано как иерархия уровней |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 10, слово автора): было `Core_ERR.v` — файла с таким именем нет. Исправлено 13.11 (Часть I, шаг 10): на странице теперь полное имя файла."
+  },
+  {
+   "line": 687,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "`System` $L$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record System (L : Level)` (:203): критерий, граница числа позиций, ограничение единственности. Систем уровня `L1` не существует (Check.v, `no_system_at_L1`)."
+  },
+  {
+   "line": 687,
+   "theorem": "Criterion",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "`Criterion` в `TheoryOfSystems_Core_ERR.v`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Record Criterion (L : Level)` (:163) с полем `crit_level_valid : crit_level_witness << L`; область `crit_domain : Type` с уровнем-свидетелем не связана (Check.v, `domain_independent_of_witness`). Об имени файла — отдельная запись этой строки. Исправлено 13.11 (Часть I, шаг 10): на странице теперь полное имя файла."
+  },
+  {
+   "line": 688,
+   "theorem": null,
+   "file": null,
+   "claim": "| множества как режим | списки, support, слой `src/settheory/` | требует уточнения |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: операции support и перехода «список → мультимножество → множество» в формализации нет (кроме `in_list`, settheory/CantorBendixsonFull.v:519). Расходится со словами стр. 384–388 — см. запись стр. 384."
+  },
+  {
+   "line": 689,
+   "theorem": null,
+   "file": null,
+   "claim": "| структурная неизбежность | повторное появление порядка, эквивалентности, категорных конструкций | методологический ориентир |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формализация не названа; статус соответствует."
+  },
+  {
+   "line": 691,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Позитивная онтология имеет прямой формальный след: запись `Distinction` с её полями задана в Rocq, и о ней доказано, что каждая сторона всякого различения есть в точности отрицание другой и что стороны различны (`sides_codetermined`, `sides_distinct`, без аксиом); канонический экземпляр `distinction_of` построен ценой аксиомы `classic`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 10, слово автора): было «запись Distinction с её полями машинно проверена». Названо, что именно доказано о записи и какова цена построения экземпляра."
+  },
+  {
+   "line": 696,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Операциональная делимость формализована как иерархия уровней (тип `Level` и связанные конструкции).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формализована иерархия: `Level` (:59), `level_lt` (:68), `Criterion` (:163), `System` (:203). Утверждений о делимости объектов нет — это оговорено в сноске 3."
+  },
+  {
+   "line": 697,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Процессность онтологии формализована *частично*: процессные конструкции и незавершённость бесконечности проверены, но не как единая полная модель.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Незавершённость бесконечности»: `completed_inf_contradicts_P4 : CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False` (:70) — при посылке-мосте `bridge`; `potential_process_compatible_with_P4` (:190). Closed under the global context. Процессные конструкции Core (`Generator`, `Process`) — определения."
+  },
+  {
+   "line": 699,
+   "theorem": null,
+   "file": null,
+   "claim": "Позиция «множества как режим» опирается на списочный аппарат, но точная связь списка, support и теоретико-множественного слоя ещё требует уточнения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный; расходится со словами «отражено прямо» на стр. 384–388 той же главы (запись стр. 384)."
+  },
+  {
+   "line": 702,
+   "theorem": null,
+   "file": null,
+   "claim": "Структурная неизбежность — методологический ориентир, программа чтения, а не машинно-проверенная теорема.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно."
+  },
+  {
+   "line": 713,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`Distinction` как первый формализуемый след;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись `Distinction` (:67) — определение; слово «след» соответствует."
+  },
+  {
+   "line": 717,
+   "theorem": null,
+   "file": null,
+   "claim": "Ряд ключевых узлов этой архитектуры имеет прямую машинную проверку в Rocq; часть узлов служит онтологическим и методологическим ориентиром для последующих частей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Общая оговорка о статусе; по узлам Глав 1–6 сверка ведётся в ведомостях этих глав."
+  },
+  {
+   "line": 720,
+   "theorem": null,
+   "file": null,
+   "claim": "Точное распределение того, что уже машинно проверено, а что остаётся ориентиром, сведено в таблицу «Позиции и их формальный статус».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Таблица стр. 677–683 распределяет пять позиций Главы 7; узлы, перечисленные в этом же абзаце (Законы L1–L5, Принципы P1–P4, E/R/R, аксиомы реализации), в неё не входят. К формализации это замечание не относится — см. заметки, сомнительные места."
+  },
+  {
+   "line": 744,
+   "theorem": null,
+   "file": "src/foundation/DistinctionProcess.v",
+   "claim": "Файл `DistinctionProcess.v` задаёт модель sharpness/coherence, где измерение понимается как постепенное sharpening различения;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`distinction_sharpness K := K/(K+1)` (:41), `coherence K := 1/(K+1)` (:81) — две функции номера шага; запись `Distinction` в утверждения файла не входит. Доказано: значения при K = 0, 1, 2, положительность, сумма равна 1 (`coherence_plus_sharpness`, :104), порог 1/5 на шаге 9; общая теорема о завершении для любого eps оставлена под `Abort` (:139–151). 17 Qed, все утверждения — Closed under the global context."
+  },
+  {
+   "line": 744,
+   "theorem": null,
+   "file": "src/foundation/MeasurementSynthesis.v",
+   "claim": "`MeasurementSynthesis.v` формулирует quantum/classical bridge;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`is_quantum K := 1/2 < coherence K` (:80), `is_classical K := coherence K <= 1/2` (:83); доказано `is_quantum 0`, `is_classical 2`, `coherence 1 == 1/2`. Слово «формулирует» точно: мост задан порогом 1/2 на функции 1/(K+1). 8 Qed, все утверждения — Closed under the global context."
+  },
+  {
+   "line": 744,
+   "theorem": null,
+   "file": "src/foundation/UnistochasticFromGraph.v",
+   "claim": "`UnistochasticFromGraph.v` и связанные Cayley-файлы проверяют конкретные унистохастические конструкции (матрицы над $ℚ$, ортогональность, двойную стохастичность, примеры $2\\times2$ и $3\\times3$);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Mat := nat -> nat -> Q`; `is_orthogonal` (:27), `is_doubly_stochastic` (:94), `is_unistochastic` (:100); общая теорема `unistochastic_implies_DS` (:312); примеры `Gamma2_unistochastic` (:160), `Gamma3_unistochastic` (:234) с матрицами `U2`, `U3`, вписанными в файл. Графа и преобразования Кэли в этом файле нет: формула Кэли — в GraphUnitary.v (`cayley_2`, :43). 19 Qed, все утверждения — Closed under the global context."
+  },
+  {
+   "line": 744,
+   "theorem": "grand_synthesis",
+   "file": "src/foundation/ConnectionClosesGap.v",
+   "claim": "`ConnectionClosesGap.v` проверяет на примерах три звена Barandes-style correspondence и сводит проверки в одну теорему; само соответствие между distinction graph, doubly stochastic / unistochastic transitions и path-dependence приведено в нём таблицей в комментарии.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть I, шаг 10, слово автора): было «собирает Barandes-style correspondence». grand_synthesis — конъюнкция трёх числовых проверок; Closed under the global context."
+  },
+  {
+   "line": 744,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Эти файлы дают формальные *компоненты* физического моста, но не должны читаться как уже завершённый формальный вывод всей квантовой теории из `Distinction`; такой вывод относится к физике.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка честная. Точнее: ни одно утверждение четырёх названных файлов не содержит записи `Distinction` — `DistinctionProcess.v` и `MeasurementSynthesis.v` подключают модуль, но его объявлениями не пользуются; два других его не подключают."
+  },
+  {
+   "line": 745,
+   "theorem": null,
+   "file": null,
+   "claim": "Соответствующие построения — в каталоге `src/settheory/` репозитория `theory-of-systems-coq`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Каталог существует: 11 файлов `.v`, 178 строк `Qed.`; `BorelDeterminacy.v` (:21) объявляет `classic` собственной аксиомой. О связи слоя со списками — запись стр. 384."
+  },
+  {
+   "line": 746,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Формализация уровней — в файле `src/TheoryOfSystems_Core_ERR.v` (тип `Level`, отношение `level_lt` и его иррефлексивность).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Level := L1 | LS : Level -> Level` (:59); `level_lt` (:68); `level_lt_irrefl` (:96) и `P1_no_self_membership` (:126) — `forall L, ~ (L << L)`; Closed under the global context. Одноимённый тип объявлен ещё в четырёх файлах; глава называет этот. Над всяким уровнем есть следующий — `level_lt_succ` (foundation/TransfiniteInductionLevel.v:61)."
+  },
+  {
+   "line": 746,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Существенная оговорка: тип `Level` задаёт *иерархию* уровней, но не доказывает, что всякий объект непременно имеет дальнейшее внутреннее разложение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка честная. Сверх неё: у `Level` есть нижний уровень `L1` (`level_lt l L1` есть `False` по определению), критериев и систем уровня `L1` не существует (Check.v: `no_criterion_at_L1`, `no_system_at_L1`, Closed under the global context) — см. заметки, сомнительные места."
+  },
+  {
+   "line": 746,
+   "theorem": null,
+   "file": null,
+   "claim": "Позиция операциональной делимости потому и формулируется как *операциональная* атомарность — утверждение об относительности неделимости к уровню рассмотрения, а не теорема о бесконечной делимости всякого объекта.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: теоремы о делимости объектов в `TheoryOfSystems_Core_ERR.v` нет."
+  },
+  {
+   "line": 338,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "criterion_label_never_own_level : forall (L : Level) (C : Criterion L), crit_level_witness L C <> L. Closed under the global context.",
+   "theorem": "criterion_label_never_own_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "формально это разобрано в файле `TheoryOfSystems_Core_ERR.v`, где теорема `russell_paradox_blocked` устанавливает для уровня `L2` невозможность критерия-свидетеля на собственном уровне через иррефлексивность отношения `level_lt`; для всякого уровня то же утверждает `criterion_label_never_own_level` (`TransfiniteInductionLevel.v`)."
+  },
+  {
+   "line": 387,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "same_multiset l1 l2 <-> Permutation l1 l2. Closed under the global context.",
+   "theorem": "first_step_forgets_exactly_order",
+   "file": "src/settheory/ListModes.v",
+   "claim": "Сама схема записана теоремами: множество получается из списка двумя ступенями — мультимножество забывает порядок и только его, множество забывает ещё и кратность (`first_step_forgets_exactly_order`, `support_from_mult`, `second_step_well_defined`, файл `ListModes.v`)."
+  },
+  {
+   "line": 387,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "support l x <-> mult l x > 0. Closed under the global context.",
+   "theorem": "support_from_mult",
+   "file": "src/settheory/ListModes.v",
+   "claim": "Сама схема записана теоремами: множество получается из списка двумя ступенями — мультимножество забывает порядок и только его, множество забывает ещё и кратность (`first_step_forgets_exactly_order`, `support_from_mult`, `second_step_well_defined`, файл `ListModes.v`)."
+  },
+  {
+   "line": 387,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "same_multiset l1 l2 -> same_set l1 l2. Closed under the global context.",
+   "theorem": "second_step_well_defined",
+   "file": "src/settheory/ListModes.v",
+   "claim": "Сама схема записана теоремами: множество получается из списка двумя ступенями — мультимножество забывает порядок и только его, множество забывает ещё и кратность (`first_step_forgets_exactly_order`, `support_from_mult`, `second_step_well_defined`, файл `ListModes.v`)."
+  },
+  {
+   "line": 691,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Closed under the global context.",
+   "theorem": "sides_codetermined",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Позитивная онтология имеет прямой формальный след: запись `Distinction` с её полями задана в Rocq, и о ней доказано, что каждая сторона всякого различения есть в точности отрицание другой и что стороны различны (`sides_codetermined`, `sides_distinct`, без аксиом); канонический экземпляр `distinction_of` построен ценой аксиомы `classic`."
+  },
+  {
+   "line": 691,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Closed under the global context.",
+   "theorem": "sides_distinct",
+   "file": "src/foundation/DistinctionCoDefinition.v",
+   "claim": "Позитивная онтология имеет прямой формальный след: запись `Distinction` с её полями задана в Rocq, и о ней доказано, что каждая сторона всякого различения есть в точности отрицание другой и что стороны различны (`sides_codetermined`, `sides_distinct`, без аксиом); канонический экземпляр `distinction_of` построен ценой аксиомы `classic`."
+  },
+  {
+   "line": 744,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "U (I - M/2) = I + M/2 для всякого рационального theta. Closed under the global context.",
+   "theorem": "cayley_2_is_cayley_transform",
+   "file": "src/foundation/GraphTransitionN2.v",
+   "claim": "Для графа из двух узлов цепочка проведена теоремами целиком (`GraphTransitionN2.v`): матрица графа, её преобразование Кэли, ортогональность, унистохастическая и потому дважды стохастическая матрица переходов — при любом весе связи (`cayley_2_is_cayley_transform`, `graph_transition_unistochastic`); и неделимость — переход за два шага не равен произведению переходов за один (`two_step_transition_indivisible`)."
+  },
+  {
+   "line": 744,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "forall theta, is_unistochastic (Gamma_graph theta) 2. Closed under the global context.",
+   "theorem": "graph_transition_unistochastic",
+   "file": "src/foundation/GraphTransitionN2.v",
+   "claim": "Для графа из двух узлов цепочка проведена теоремами целиком (`GraphTransitionN2.v`): матрица графа, её преобразование Кэли, ортогональность, унистохастическая и потому дважды стохастическая матрица переходов — при любом весе связи (`cayley_2_is_cayley_transform`, `graph_transition_unistochastic`); и неделимость — переход за два шага не равен произведению переходов за один (`two_step_transition_indivisible`)."
+  },
+  {
+   "line": 744,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "49/625 против 337/625 (two_step_values). Closed under the global context.",
+   "theorem": "two_step_transition_indivisible",
+   "file": "src/foundation/GraphTransitionN2.v",
+   "claim": "Для графа из двух узлов цепочка проведена теоремами целиком (`GraphTransitionN2.v`): матрица графа, её преобразование Кэли, ортогональность, унистохастическая и потому дважды стохастическая матрица переходов — при любом весе связи (`cayley_2_is_cayley_transform`, `graph_transition_unistochastic`); и неделимость — переход за два шага не равен произведению переходов за один (`two_step_transition_indivisible`)."
+  }
+ ]
+}

@@ -736,11 +736,11 @@
   {
    "line": 183,
    "theorem": "classic",
-   "file": "src/settheory/BorelDeterminacy.v",
    "claim": "19 Qed, 1 аксиома (`classic`).",
    "page_price": "1 аксиома (classic)",
    "verdict": "ok",
-   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было 15; в BorelDeterminacy.v 19 Qed."
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было 15; в BorelDeterminacy.v 19 Qed. С 13.11.2026 объявление одно — `Classical_Prop.classic` стандартной библиотеки (местное объявление в BorelDeterminacy.v снято; файл подключает библиотечное).",
+   "external": true
   },
   {
    "line": 183,
