@@ -14,6 +14,15 @@
     Prohibition: P4 ∧ X → ⊥.
     Prohibition ⇒ Reinterpretation (if X is impossible, alternative exists trivially).
     Reinterpretation ⇏ Prohibition (alternative existing doesn't mean X is impossible).
+
+    Nov 2026 (honest scope).  The four lines above are a reading, not what the
+    two lemmas below prove: prohibition_implies_reinterpretation does not use
+    its premise, and reinterpretation_weaker restates potential_inf_exists.
+    Both are closed theorems, so each follows from the other; they are a
+    SUMMARY of two proved facts.  The relation itself is proved for the two
+    readings of a collection in P4ProhibitsAC: the completed reading entails
+    the rule reading and not conversely (completed_reading_strictly_stronger);
+    P4 cuts off the first and keeps the second (P4_cuts_completed_keeps_rule).
 *)
 
 From Stdlib Require Import PeanoNat Lia List.

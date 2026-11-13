@@ -1,0 +1,497 @@
+{
+ "batch": "audit-part-10",
+ "chapter": "10 Теория множеств без аксиомы выбора/01 Множество как Система, а не объект.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 23,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«множество» есть *Система* — носитель роли «совокупность, ограниченная критерием, на уровне $L$», — а *не* самостоятельный Элемент-объект;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) (Core_ERR.v:203): поля sys_criterion : Criterion L, sys_pos_bound, sys_uniqueness; уровень — параметр типа. Предикат критерия в определение принадлежности element_at не входит — заметки, сомнительное место 2."
+  },
+  {
+   "line": 24,
+   "theorem": "element_at",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«принадлежность» ($\\in$) есть *роль* (занятие позиции на уровне ниже), а не субстанциальное отношение между вещами;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "element_at (Core_ERR.v:583): exists p, ss_assignment L S p = Some e — занятие позиции в StructuredSystem L. «Уровень ниже» в Rocq — метка crit_level_witness << L у критерия (поле crit_level_valid, Core_ERR.v:167)."
+  },
+  {
+   "line": 25,
+   "theorem": null,
+   "claim": "сильные аксиомы либо *структурно ненужны* (парадоксы блокируются правилом уровней P1), либо *замещаются правилами* (выбор — позиционным разрешением L5; бесконечность — схемой процесса P4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис части. В этой главе за первой половиной стоят russell_paradox_blocked, cantor_paradox_blocked_v1 (Core_ERR.v) и no_universal_level (TransfiniteInductionLevel.v) — все Closed under the global context. Замещение выбора и бесконечности — предмет глав 10.4 и 10.5; здесь не сверялось."
+  },
+  {
+   "line": 30,
+   "theorem": null,
+   "claim": "Это *не* внешняя метатеорема о несостоятельности ZFC: внутри своей онтологии ZFC — иной фундаментальный режим.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: теорем о ZFC как формальной системе (модели, относительная непротиворечивость) в формализации нет; foundation/ZFCAxiomLedger.v — реестр-классификация, написанная рукой."
+  },
+  {
+   "line": 36,
+   "theorem": null,
+   "claim": "ToS *не* «доказывает ZFC без аксиомы выбора». ToS *меняет категорию* — множество становится системой, принадлежность — ролью, выбор — правилом, бесконечность — процессом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; формальных утверждений о выводимости аксиом ZFC глава не заявляет."
+  },
+  {
+   "line": 39,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Поэтому *допустимое ядро* сильных аксиом превращается в процедуру и теорему, а их *завершённо-объектная форма* запрещается принципом P4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава имени не называет. Формальная форма запрета — completed_inf_contradicts_P4 (P4CompletedInfinity.v:64): CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False; Closed under the global context. Запрет условный: нужна посылка bridge (каждый член S актуален на стадии 0)."
+  },
+  {
+   "line": 42,
+   "theorem": null,
+   "claim": "Она вводит множество-как-Систему и принадлежность-как-роль, формулирует правило уровней P1, делающее теорию беспарадоксальной *по построению*, и показывает, что Рассел, Кантор и Бурали-Форти — три облика одной категориальной ошибки.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "За словами — три теоремы о конкретных конструкциях. russell_paradox_blocked и cantor_paradox_blocked_v1 — одно утверждение (для L2 и для любого L), оба сводятся к level_lt_irrefl. Общего утверждения об отсутствии противоречий в формализации нет — заметки, сомнительное место 5."
+  },
+  {
+   "line": 46,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "сравнение мощностей без выбора (10.3)",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 1). После шага 1 Части X слова «без выбора» опираются на теорему: Schroeder_Bernstein_definite (SchroederBernstein_ERR.v) выводит заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля — и допущений не имеет (Closed under the global context); Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness). Страница не менялась."
+  },
+  {
+   "line": 56,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В ToS носитель, который классика называет «множеством», есть *Система*: критерий над некоторым нижним уровнем, помеченный уровнем $L$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record Criterion (L : Level) (Core_ERR.v:163): crit_domain : Type, crit_predicate, crit_level_witness : Level, crit_level_valid : crit_level_witness << L; Record System L (Core_ERR.v:203) несёт критерий. «Нижний уровень» домена — метка crit_level_witness, с типом домена не связанная — заметки, сомнительное место 1."
+  },
+  {
+   "line": 58,
+   "theorem": "element_at",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Соответственно «принадлежность» $x\\in S$ — это `element_at`: занятие $x$-ом позиции внутри $S$, причём $x$ живёт на уровне строго ниже уровня $S$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition element_at {L} (S : StructuredSystem L) (e : crit_domain L (sys_criterion L (ss_base L S))) : Prop := exists p, ss_assignment L S p = Some e (Core_ERR.v:583). Определено для StructuredSystem (система с назначением позиций, Core_ERR.v:567), не для System. Выполнения предиката критерия не требует: пробный пример element_at_ignores_criterion (Check2.v) — заметки, сомнительное место 2."
+  },
+  {
+   "line": 71,
+   "theorem": "element_at",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "*Множество — роль-Система (критерий над нижним уровнем); принадлежность — роль `element_at` (позиция на уровне ниже).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует определениям System, Criterion, StructuredSystem, element_at (Core_ERR.v:163, 203, 567, 583); оговорки — те же, что к стр. 58."
+  },
+  {
+   "line": 77,
+   "theorem": "level_lt_irrefl",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Порядок уровней задан строгим отношением $l_1 \\ll l_2$ («$l_1$ фундаментальнее $l_2$»). Он *иррефлексивен*: ни один уровень не ниже самого себя.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_lt (Core_ERR.v:68): l1 << L1 := False; l1 << LS l2' := l1 = l2' \\/ l1 << l2'. Lemma level_lt_irrefl : forall l, ~ (l << l) (Core_ERR.v:96). Closed under the global context."
+  },
+  {
+   "line": 78,
+   "theorem": "level_lt_irrefl",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В ToS это не постулат, а *теорема* — $l \\ll l$ влечёт строгое убывание натуральной глубины уровня, что невозможно.[^2]",
+   "page_price": "теорема, не постулат",
+   "verdict": "ok",
+   "note": "Доказательство level_lt_irrefl: apply level_lt_depth in H; lia. level_lt_depth (Core_ERR.v:85): l1 << l2 -> level_depth l1 < level_depth l2. Обе леммы — Closed under the global context."
+  },
+  {
+   "line": 80,
+   "theorem": "P1_no_self_membership",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Отсюда принцип P1: *нет самопринадлежности*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem P1_no_self_membership : forall L, ~ (L << L) (Core_ERR.v:126), доказательство — exact level_lt_irrefl. Это иррефлексивность порядка уровней; отношение element_at в утверждение не входит — заметки, сомнительное место 3."
+  },
+  {
+   "line": 83,
+   "theorem": null,
+   "claim": "P1 выполняет ту работу, которую в ZFC частично несёт аксиома Фундирования (Regularity): запрет самопринадлежности и циклической тотализации по уровням.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка «частично» стоит верно. Запрет петли — level_lt_irrefl; запрет циклов любой длины и бесконечного спуска — tos_hierarchy_models_meta_pair (foundation/MetaPairStrength.v:142); фундированность — level_lt_wf (TransfiniteInductionLevel.v:32). Все — Closed under the global context."
+  },
+  {
+   "line": 85,
+   "theorem": null,
+   "claim": "ZFC *добавляет* Фундирование как отдельную аксиому, чтобы запретить $\\in$-циклы; ToS делает их *структурно невозможными* — запрет есть следствие определения уровня, а не лишний постулат.",
+   "page_price": "следствие определения, не постулат",
+   "verdict": "ok",
+   "note": "Для порядка уровней верно: tos_hierarchy_models_meta_pair (MetaPairStrength.v:142) — forall L, ~ clos_trans Level level_lt L L; Closed under the global context. Утверждение о порядке <<; для отношения element_at теорем о циклах нет."
+  },
+  {
+   "line": 90,
+   "theorem": null,
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Условие *корректности* системы (well-formedness) и есть: критерий-домен лежит строго ниже самой системы (P2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P2 в Rocq — поле crit_level_valid записи Criterion (Core_ERR.v:167); P2_valid и P2_always_holds (Core_ERR.v:171, 174): условие выполнено у всякого критерия по построению. Отдельного свойства «корректна», равносильного P2, нет; имя ERR_WellFormed (Roles.v:290) занято другим условием — заметки, сомнительное место 4."
+  },
+  {
+   "line": 91,
+   "theorem": "russell_paradox_blocked",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Знаменитое расселово «множество всех множеств, не содержащих себя» проваливает именно это условие — его критерий должен был бы пробегать по своему же уровню. Поэтому оно не запрещается *ad hoc*, а просто *не формируется* как корректная система.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "russell_paradox_blocked (Core_ERR.v:248): ~ exists C : Criterion L2, crit_domain L2 C = System L2 /\\ crit_level_witness L2 C = L2. Слова передают утверждение: критерий с меткой собственного уровня невозможен. Условие о домене в доказательстве не используется, расселово условие x∉x в утверждение не входит — расхождение 1 и сомнительное место 1."
+  },
+  {
+   "line": 96,
+   "theorem": null,
+   "claim": "*Порядок уровней — роль-правило, конституирующее теорию; его иррефлексивность — условие корректности, делающее систему беспарадоксальной по построению. Где ZFC запрещает аксиомой, ToS не формирует по структуре.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итоговая формула раздела. Формальное содержание — level_lt_irrefl и три теоремы о невозможности конкретных конструкций; общего утверждения «противоречие не выводится» нет — заметки, сомнительное место 5."
+  },
+  {
+   "line": 102,
+   "theorem": null,
+   "claim": "Три классических парадокса — Рассела, Кантора, Бурали-Форти — суть, с точки зрения ToS, *один* ход: овеществление *роль/правило-тотальности* («множество всех …», «уровень всех …») как завершённого Элемента-объекта.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В формализации: russell_paradox_blocked и cantor_paradox_blocked_v1 — одно утверждение (L2 и любой L) через level_lt_irrefl; no_universal_level — через succ_not_le. Все три опираются на level_depth; P4 в доказательствах не участвует."
+  },
+  {
+   "line": 107,
+   "theorem": null,
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "При P1 (иерархия) и P4 (конечная актуальность) оно не формируется: завершённой тотальности «всех множеств» нет, а самопринадлежность невозможна.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис. «Самопринадлежность невозможна» — P1_no_self_membership; «завершённой тотальности нет» — completed_inf_contradicts_P4 (P4CompletedInfinity.v:64, при посылке bridge). Связи между расселовой совокупностью и завершённой тотальностью файл сноски не доказывает — расхождение 2 (записи к стр. 185, 186)."
+  },
+  {
+   "line": 112,
+   "theorem": "no_universal_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "В ToS соответствующий приём — «уровень всех уровней» — невозможен *структурно*: для любого кандидата на вершину $M$ его *успешник* $\\mathrm{LS} M$ уже не лежит ниже-или-равно $M$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "succ_not_le (TransfiniteInductionLevel.v:54): forall L, ~ (LS L << L \\/ LS L = L); level_no_top (:64): forall M, exists L, ~ (L << M \\/ L = M); no_universal_level (:72). Closed under the global context. Тип Level (L1 | LS) — нумерация уровней натуральными числами с единицы; об ординалах утверждения нет, глава говорит «соответствующий приём»."
+  },
+  {
+   "line": 117,
+   "theorem": "cantor_paradox_blocked_v1",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«Множество всех множеств» (и его диагональный спутник) в ToS блокирован тем же правилом: система «всех систем уровня $L_2$» потребовала бы критерия по уровню $L_2$, а он должен быть строго ниже.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_paradox_blocked_v1 (Core_ERR.v:1255): forall L, ~ exists C : Criterion L, crit_domain L C = System L /\\ crit_level_witness L C = L. Слова передают утверждение. Условие о домене в доказательстве не используется; диагонали в теореме нет (диагональ для любого носителя — cantor_no_surjection, settheory/CantorTheoremGeneral.v:55) — заметки, сомнительное место 1."
+  },
+  {
+   "line": 128,
+   "theorem": null,
+   "claim": "P1 снимает уровневую самоссылку, а P4 запрещает завершённую тотальность как Элемент; вместе они возвращают все три (Рассел, Бурали-Форти, Кантор) к ошибке категории — не запретом по отдельности, а сменой категории.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис. В формализации три теоремы (russell_paradox_blocked, cantor_paradox_blocked_v1, no_universal_level) доказаны из порядка уровней; P4 (P4_stage_bounded, completed_inf_contradicts_P4) в их доказательствах не участвует. Теоремы, соединяющей P1 и P4, нет — заметки, сомнительное место 6."
+  },
+  {
+   "line": 138,
+   "theorem": null,
+   "claim": "| *Rules* (L5) | порядок уровней $\\ll$ (P1, иррефлексивный); критерий${}+{}$P2 (домен строго ниже) — выполняют работу выделения (Separation); иерархия как конститутивное правило |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Чтение, теорема не названа. В Rocq P2 ограничивает метку уровня; предикат критерия ограничивает состав системы только при условии ERR_WellFormed (Roles.v:290, поле wf_L4) или в суждении HasElem (Judgments.v:158). Реестр foundation/ZFCAxiomLedger.v относит Separation к P4 (verdict_separation, :104) — заметки, сомнительное место 2."
+  },
+  {
+   "line": 139,
+   "theorem": "element_at",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "| *Roles* (L4) | множество${}={}$Система; $\\in{}={}$`element_at` (позиция); «быть совокупностью», «быть членом» |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "System (Core_ERR.v:203), element_at (Core_ERR.v:583): exists p, ss_assignment L S p = Some e."
+  },
+  {
+   "line": 140,
+   "theorem": null,
+   "claim": "| *Elements* (L1${}+{}$P4) | на каждой стадии — конечные данные; завершённая бесконечная совокупность — роль-предел, не Элемент |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Чтение. Тип System конечности не закрепляет: sys_pos_bound допускает Unbounded, ss_assignment — функция на всех позициях (Core_ERR.v:194, 569). Стадийная ограниченность записана отдельно — P4_stage_bounded (P4CompletedInfinity.v:33)."
+  },
+  {
+   "line": 142,
+   "theorem": null,
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "**Корректность.** Система корректна $\\Longleftrightarrow$ её критерий-домен строго ниже (P2);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Равносильность — по определению, теоремы за ней нет: P2 — поле записи Criterion, P2_always_holds (Core_ERR.v:174) — forall L (C : Criterion L), P2_valid L C. Заметки, сомнительное место 4."
+  },
+  {
+   "line": 143,
+   "theorem": "tos_hierarchy_models_meta_pair",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "фундированность $\\ll$ исключает циклы по уровням и бесконечный спуск *по построению*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 2, слово автора): было «иррефлексивность гарантирует отсутствие ∈-циклов». tos_hierarchy_models_meta_pair (MetaPairStrength.v): для порядка уровней нет петли, есть асимметрия, нет циклов любой длины (~ clos_trans Level level_lt L L) и нет бесконечного спуска — всё из level_lt_wf. Closed under the global context. Утверждения — о порядке уровней, а не об отношении element_at."
+  },
+  {
+   "line": 146,
+   "theorem": "level_lt_wf",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "**Что даёт.** Фундирование $\\to$ теорема (`level_lt_wf`: порядок уровней фундирован; в форме самой аксиомы — `level_foundation_form`);",
+   "page_price": "теорема",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 2, слово автора): было «Фундирование → теорема (level_lt_irrefl)» — иррефлексивность запрещает только петлю. level_lt_wf : well_founded level_lt. Closed under the global context."
+  },
+  {
+   "line": 146,
+   "theorem": null,
+   "claim": "работу Выделения (Separation) выполняют критерий${}+{}$P2;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Чтение, теорема не названа; оговорки те же, что к стр. 138 — заметки, сомнительное место 2."
+  },
+  {
+   "line": 147,
+   "theorem": null,
+   "claim": "парадоксы $\\to$ структурно невозможны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три теоремы главы: russell_paradox_blocked (для L2), cantor_paradox_blocked_v1 (для любого L), no_universal_level — Closed under the global context. Содержание первых двух — метка уровня критерия не равна уровню самой системы — заметки, сомнительное место 1."
+  },
+  {
+   "line": 153,
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Принцип L4 (извлечение свидетеля из одного $\\exists$) — не аксиома выбора как завершённый граф, но сила у него choice-подобная: выбор над любым семейством из него выводится ([[Формализация]]); это разъясняется в 10.4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l4_statement_gives_functional_choice (ChoicePriceMap.v:164): L4_statement -> forall (I X : Type) (R : I -> X -> Prop), (forall i, exists x, R i x) -> exists f : I -> X, forall i, R i (f i). Closed under the global context: утверждение L4_witness взято посылкой. Страница «Формализация» (стр. 101) называет ту же лемму."
+  },
+  {
+   "line": 153,
+   "theorem": null,
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Степенное множество *как объект* здесь не строится (только тип bool-предикатов, 10.3).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_no_surjection (CantorTheoremGeneral.v:55) — о типе X -> bool; шапка файла оговаривает то же. В реестре ChoicePriceMap.v строка RPowerSetObject имеет цену PBoundary («не построено»)."
+  },
+  {
+   "line": 154,
+   "theorem": null,
+   "claim": "Метатеоретической независимости AC (форсинг, модели) ToS не доказывает — речь об *объект-уровневом* обходе выбора.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: утверждений о моделях и форсинге в формализации нет."
+  },
+  {
+   "line": 163,
+   "theorem": null,
+   "claim": "Глава поставила фундамент Части X: множество есть Система, принадлежность — роль, а правило уровней P1 делает теорию беспарадоксальной без отдельных запрещающих аксиом.",
+   "page_price": "без отдельных запрещающих аксиом",
+   "verdict": "ok",
+   "note": "level_lt_irrefl, P1_no_self_membership, russell_paradox_blocked, cantor_paradox_blocked_v1, no_universal_level — Closed under the global context. «Беспарадоксальна» — о трёх названных конструкциях; общего утверждения нет — заметки, сомнительное место 5."
+  },
+  {
+   "line": 168,
+   "theorem": "Q_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "Глава 10.2: счётность конструктивна (ℚ перечислима без аксиом), а несчётность — *правило* о процессах, а не размер завершённого множества.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Q_countable (Countability_Q.v:610): forall q : Q, exists n : nat, enum_Q n == q; Q_bijection (:759); Q_positive_countable (:471). Все — Closed under the global context. Формулировки — предмет аудита главы 10.2."
+  },
+  {
+   "line": 170,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Глава 10.3: сравнение мощностей без выбора — Шрёдер–Бернштейн и общая теорема Кантора.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 1). После шага 1 Части X слова «без выбора» опираются на теорему: Schroeder_Bernstein_definite (SchroederBernstein_ERR.v) выводит заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля — и допущений не имеет (Closed under the global context); Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness). Страница не менялась. Общая теорема Кантора (cantor_no_surjection) — Closed under the global context."
+  },
+  {
+   "line": 170,
+   "theorem": "cantor_no_surjection",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Глава 10.3: сравнение мощностей без выбора — Шрёдер–Бернштейн и общая теорема Кантора.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "Для теоремы Кантора слова верны: cantor_no_surjection (CantorTheoremGeneral.v:55) — forall f : X -> (X -> bool), ~ surjective f при произвольном типе X; no_maximal_cardinality (CardinalityWithoutChoice.v:108). Closed under the global context."
+  },
+  {
+   "line": 183,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Базовые определения — `Level`, `System`, `element_at`, критерий — в `TheoryOfSystems_Core_ERR.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive Level : Set := L1 | LS (Core_ERR.v:59); Record Criterion (:163); Record System (:203); Definition element_at (:583). Одноимённый Level объявлен ещё в четырёх файлах; глава называет Core_ERR."
+  },
+  {
+   "line": 183,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Уровень системы строго выше уровня её критерий-домена (принцип P2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле crit_level_valid : crit_level_witness << L записи Criterion (Core_ERR.v:167); P2_always_holds (Core_ERR.v:174). «Уровень критерий-домена» — поле-метка crit_level_witness; с типом crit_domain оно не связано (пробный файл Check.v: домен nat принят с метками L1 и L2)."
+  },
+  {
+   "line": 184,
+   "theorem": "level_lt_irrefl",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "`level_lt_irrefl` и `P1_no_self_membership` (`TheoryOfSystems_Core_ERR.v`): $\\forall l,\\ \\lnot(l \\ll l)$, доказано через `level_depth` (строго убывающую при $\\ll$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma level_lt_irrefl : forall l, ~ (l << l) (Core_ERR.v:96); доказательство — через level_lt_depth (:85). Формула страницы совпадает с утверждением."
+  },
+  {
+   "line": 184,
+   "theorem": "P1_no_self_membership",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Конструктивно, без аксиом.",
+   "page_price": "конструктивно, без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions для level_lt_irrefl, P1_no_self_membership, level_lt_depth — Closed under the global context. Файл подключает ToS_Axioms и Classical_Pred_Type, в этих доказательствах они не применяются."
+  },
+  {
+   "line": 184,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "доказано через `level_depth` (строго убывающую при $\\ll$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_depth (Core_ERR.v:78): L1 => 1, LS l' => S (level_depth l'). Строгое убывание — level_lt_depth (Core_ERR.v:85): l1 << l2 -> level_depth l1 < level_depth l2."
+  },
+  {
+   "line": 185,
+   "theorem": "russell_blocked_every_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "`russell_blocked_every_level` (`foundation/TransfiniteInductionLevel.v`): ни на каком уровне нет системы, собирающей в точности те системы этого уровня, что не входят в себя, — каким бы ни было отношение принадлежности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 2, слово автора): было «russell_paradox_blocked: расселова совокупность не может быть построена ни на каком уровне» — та теорема доказана для L2 и говорит о метке уровня критерия. russell_blocked_every_level : forall L (mem : System L -> System L -> Prop), ~ exists R, forall X, mem X R <-> ~ mem X X. Closed under the global context. Диагональ уровня не использует: то же верно на любом носителе."
+  },
+  {
+   "line": 185,
+   "theorem": "russell_collector_escapes",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "См. также `P4ProhibitsImpredicative.v`: собиратель расселова условия по области сам в эту область не входит (`russell_collector_escapes`), поэтому область, у которой такой собиратель есть, не завершена (`russell_needs_incomplete_range`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 2, слово автора): было «импредикативное определение R требует завершённой тотальности всех множеств, которую P4 не допускает» — в файле это стояло только в комментариях. russell_collector_escapes : (forall x, T x -> (mem x r <-> ~ mem x x)) -> ~ T r (любой носитель). Closed under the global context."
+  },
+  {
+   "line": 186,
+   "theorem": "staged_russell_collector_exists",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "`P4ProhibitsImpredicative.v`: по каждой конечной стадии собиратель расселова условия существует, лежит вне стадии и появляется на следующей (`staged_russell_collector_exists`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 2, слово автора): было «R требует completed totality; P1 + P4 её исключают» — теорем об этом в файле не было. staged_russell_collector_exists : forall stage, exists r, (forall x, nat_staged_actual stage x -> (x < r <-> ~ x < x)) /\\ ~ nat_staged_actual stage r /\\ nat_staged_actual (S stage) r. Closed under the global context. Пример стадий — для отношения x < y на nat."
+  },
+  {
+   "line": 187,
+   "theorem": "no_universal_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "`no_universal_level` (`TransfiniteInductionLevel.v`, эта работа): $\\lnot \\exists \\text{Top},\\ \\forall L,\\ L \\ll \\text{Top} \\lor L = \\text{Top}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem no_universal_level : ~ exists Top : Level, forall L : Level, L << Top \\/ L = Top (TransfiniteInductionLevel.v:72). Формула страницы совпадает с утверждением."
+  },
+  {
+   "line": 187,
+   "theorem": "no_universal_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Доказано через успешник $\\mathrm{LS}$; конструктивно, 0 аксиом.",
+   "page_price": "конструктивно, 0 аксиом",
+   "verdict": "ok",
+   "note": "Доказательство: exact (succ_not_le Top (Hall (LS Top))). Print Assumptions — Closed under the global context. Реестр ChoicePriceMap.v даёт строке RTransfiniteLevel цену PZero — с компилятором согласуется."
+  },
+  {
+   "line": 187,
+   "theorem": null,
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Тот же файл даёт фундированную индукцию по иерархии уровней.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_lt_wf : well_founded level_lt (TransfiniteInductionLevel.v:32); level_strong_induction (:39): forall P, (forall L, (forall L', L' << L -> P L') -> P L) -> forall L, P L. Оба — Closed under the global context. В файле 6 Qed, 0 Axiom, 0 Parameter."
+  },
+  {
+   "line": 188,
+   "theorem": "cantor_paradox_blocked_v1",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "`cantor_paradox_blocked_v1` (`TheoryOfSystems_Core_ERR.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem cantor_paradox_blocked_v1 (Core_ERR.v:1255): forall L, ~ exists C : Criterion L, crit_domain L C = System L /\\ crit_level_witness L C = L. Closed under the global context."
+  },
+  {
+   "line": 185,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 2: forall (L : Level) (C : Criterion L), crit_level_witness L C <> L — из поля crit_level_valid (P2) и иррефлексивности. Closed under the global context. russell_paradox_blocked (Core_ERR.v) — то же для L2, с посылкой о домене, которую доказательство не использует.",
+   "theorem": "criterion_label_never_own_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Про сам критерий — `criterion_label_never_own_level`: уровень критерий-домена никогда не равен уровню системы (для $L_2$ это `russell_paradox_blocked` в `TheoryOfSystems_Core_ERR.v`)."
+  },
+  {
+   "line": 185,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 2: (forall x, T x -> (mem x r <-> ~ mem x x)) -> ~ CompletedInfSet T, где CompletedInfSet T := forall n, T n. Closed under the global context.",
+   "theorem": "russell_needs_incomplete_range",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "поэтому область, у которой такой собиратель есть, не завершена (`russell_needs_incomplete_range`)."
+  },
+  {
+   "line": 186,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 2 — сводка трёх фактов: стадии ограничены (nat_staged_bounded); по каждой стадии собиратель есть и лежит вне её; область с собирателем не завершена. Closed under the global context.",
+   "theorem": "russell_requires_completed_totality",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "противоречие возникает, только когда область обязана содержать собственный собиратель, то есть быть завершённой (`russell_requires_completed_totality`)."
+  },
+  {
+   "line": 186,
+   "page_price": "при условии bridge",
+   "verdict": "ok",
+   "note": "completed_inf_contradicts_P4 : CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False; bridge S actual := forall n, S n -> actual 0 n. Условие на странице названо. Closed under the global context.",
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Что P4 исключает завершённую область — `completed_inf_contradicts_P4` (`P4CompletedInfinity.v`), при условии `bridge`: все члены области актуальны уже на начальной стадии (см. Главу 4.1)."
+  },
+  {
+   "line": 146,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Новая теорема шага 2: forall P : Level -> Prop, (exists l, P l) -> ~ (forall l, P l -> exists l', P l' /\\ l' << l) — в непустой совокупности уровней есть член, ниже которого её членов нет. Closed under the global context.",
+   "theorem": "level_foundation_form",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "в форме самой аксиомы — `level_foundation_form`"
+  }
+ ]
+}

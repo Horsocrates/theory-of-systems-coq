@@ -2,13 +2,19 @@
     Elements: CompletedInfSet, P4_stage_bounded, potential_infinity
     Roles:    P4 (finite actuality) → bound at each stage → contradiction with completed ∞
     Rules:    completed_inf + P4_bounded + bridge → False
-    STATUS:   9 Qed, 0 Admitted, 0 new axioms
+    STATUS:   10 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: April 2026
 
     KEY DISTINCTION:
     "Reinterpretation": P4 provides ALTERNATIVE to infinity axiom.
     "Prohibition": P4 is INCONSISTENT with completed infinity.
     Prohibition implies reinterpretation, but not vice versa.
+    (Nov 2026: this sentence is a reading.  As closed statements the two are
+    both theorems, hence equivalent.  What IS proved is the relation of the
+    two readings of a collection: P4ProhibitsAC.completed_reading_strictly_stronger.)
+    Nov 2026: potential_compatible_with_P4 joins two independent facts (its
+    second conjunct does not mention the actuality).  The process form is
+    potential_process_compatible_with_P4 at the end of the file.
 
     THE ARGUMENT:
     CompletedInfSet S: every natural number is ACTUALLY a member of S.
@@ -172,4 +178,26 @@ Proof.
   split; [exact completed_inf_contradicts_P4 |
   split; [exact potential_compatible_with_P4 |
   exact potential_inf_exists]].
+Qed.
+
+(* ================================================================ *)
+(*  Nov 2026: POTENTIAL INFINITY AS A PROCESS OF STAGES              *)
+(* ================================================================ *)
+
+(** A process of stages compatible with P4: every stage is bounded, the
+    stages are nested, every number is reached at some stage, and no stage
+    contains everything. *)
+Theorem potential_process_compatible_with_P4 :
+  exists actual : nat -> nat -> Prop,
+    P4_stage_bounded actual /\
+    (forall stage n, actual stage n -> actual (S stage) n) /\
+    (forall n, exists stage, actual stage n) /\
+    (forall stage, exists n, ~ actual stage n).
+Proof.
+  exists (fun stage n => (n <= stage)%nat).
+  split; [| split; [| split]].
+  - intro stage. exists stage. intros n H. exact H.
+  - intros stage n H. lia.
+  - intro n. exists n. apply Nat.le_refl.
+  - intro stage. exists (S stage). lia.
 Qed.

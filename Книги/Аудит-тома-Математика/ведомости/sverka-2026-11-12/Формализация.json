@@ -29,7 +29,7 @@
    "page_price": "исключённое третье (стандартная библиотека), извлечение свидетеля",
    "verdict": "ok",
    "note": "сверена цена; формулировка — при аудите части",
-   "line": 100
+   "line": 101
   },
   {
    "theorem": "IVT_process",
@@ -38,7 +38,7 @@
    "page_price": "нет",
    "verdict": "ok",
    "note": "сверена цена; формулировка — при аудите части",
-   "line": 103
+   "line": 104
   },
   {
    "theorem": "ivt_cauchy_real",
@@ -47,7 +47,7 @@
    "page_price": "нет",
    "verdict": "ok",
    "note": "сверена цена; формулировка — при аудите части",
-   "line": 103
+   "line": 104
   },
   {
    "theorem": "Heine_Borel",
@@ -56,7 +56,7 @@
    "page_price": "нет",
    "verdict": "ok",
    "note": "сверена цена; формулировка — при аудите части",
-   "line": 106
+   "line": 107
   },
   {
    "theorem": "kruskal_chains",
@@ -101,10 +101,10 @@
    "page_price": "нет",
    "verdict": "ok",
    "note": "исправлено 12.11 (Часть V, шаг 1, слово автора): было «исключённое третье (EVT_idx.v)»; после правки формализации 12.11 (x_between_grid_points доказана вычислением; местная Axiom classic из EVT_idx.v снята) Print Assumptions для EVT_strong_process (EVT_idx.v), EVT_complete (EVT_ERR.v) и всей цепочки — Closed under the global context",
-   "line": 104
+   "line": 105
   },
   {
-   "line": 107,
+   "line": 108,
    "file": "src/RealPointComplete.v",
    "page_price": "нет — для регулярных представителей",
    "verdict": "ok",
@@ -113,13 +113,40 @@
    "claim": "`regular_class_complete`; `class_complete_L4` (RealPointComplete.v) | нет — для регулярных представителей; извлечение свидетеля — для произвольных |"
   },
   {
-   "line": 107,
+   "line": 108,
    "file": "src/RealPointComplete.v",
    "page_price": "извлечение свидетеля — для произвольных",
    "verdict": "ok",
    "note": "Строка внесена шагом 4 Части V (12.11, слово автора). Print Assumptions: только ToS_Axioms.L4_witness.",
    "theorem": "class_complete_L4",
    "claim": "`class_complete_L4` (RealPointComplete.v) | нет — для регулярных представителей; извлечение свидетеля — для произвольных |"
+  },
+  {
+   "line": 100,
+   "page_price": "нет: оба принципа взяты посылками",
+   "verdict": "ok",
+   "note": "Строка добавлена 13.11 (Часть X, шаг 8, слово автора). Schroeder_Bernstein_definite (SchroederBernstein_ERR.v): заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля; Closed under the global context. Schroeder_Bernstein, cardinal_antisym — те же теоремы на двух аксиомах: classic + L4_witness.",
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "| Та же теорема из исключённого третьего и извлечения единственного свидетеля, взятых посылками | `Schroeder_Bernstein_definite` (SchroederBernstein_ERR.v); `cardinal_antisym_definite` (CardinalityWithoutChoice.v) | нет: оба принципа взяты посылками |"
+  },
+  {
+   "line": 100,
+   "page_price": "нет: оба принципа взяты посылками",
+   "verdict": "ok",
+   "note": "cardinal_antisym_definite : ExcludedMiddle -> UniqueWitness -> forall A B, injects A B -> injects B A -> bijects A B. Closed under the global context.",
+   "theorem": "cardinal_antisym_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`cardinal_antisym_definite` (CardinalityWithoutChoice.v) | нет: оба принципа взяты посылками |"
+  },
+  {
+   "line": 97,
+   "page_price": "нет",
+   "verdict": "ok",
+   "note": "Цена исправлена 13.11 (Часть X, шаг 8, слово автора): было «исключённое третье (стандартная библиотека)». С шага 7 dickson_pair доказана конструктивно — Closed under the global context.",
+   "theorem": "dickson_pair",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "| Лемма Диксона для пар | `dickson_pair` (HigmanLemma.v) | нет |"
   }
  ],
  "root": "library"

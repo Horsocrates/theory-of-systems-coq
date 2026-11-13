@@ -279,33 +279,33 @@
   },
   {
    "line": 748,
-   "theorem": "eval_program",
+   "theorem": "P4_forall_functions",
    "file": "src/foundation/P4_Eliminates_Pi11.v",
-   "claim": "а функция восстанавливается через параметр `eval_program`",
+   "claim": "а функция восстанавливается через таблицу кодов `eval_program`",
    "page_price": "",
    "verdict": "ok",
-   "note": "Parameter eval_program : Program -> nat -> nat (:28); P4_forall_functions — квантор по кодам (:35)"
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было «через параметр eval_program». С 13.11 eval_program — переменная раздела Section Codes (а не Parameter): все утверждения файла верны для любой таблицы Program -> nat -> nat; в выводе Print Assumptions её нет."
   },
   {
    "line": 760,
-   "theorem": "eval_program",
+   "theorem": "P4_forall_functions",
    "file": "src/foundation/P4_Eliminates_Pi11.v",
-   "claim": "И `eval_program` здесь — не доказанное утверждение и не определённая функция, а *неинтерпретированный объявленный параметр*",
+   "claim": "И `eval_program` здесь — не доказанное утверждение и не определённая функция, а *переменная раздела*: произвольная таблица, сопоставляющая коду функцию, без каких-либо свойств.",
    "page_price": "объявленный параметр, не логическая аксиома",
    "verdict": "ok",
-   "note": "Parameter без определения; все теоремы файла, говорящие о кодах, несут его в выводе Print Assumptions, pi11_negation (:73) — ещё и Classical_Prop.classic"
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было «неинтерпретированный объявленный параметр… соответствующая универсальной машине Тьюринга». С 13.11 eval_program — переменная раздела Section Codes (а не Parameter): все утверждения файла верны для любой таблицы Program -> nat -> nat; в выводе Print Assumptions её нет."
   },
   {
-   "line": 765,
-   "theorem": null,
-   "file": "src/foundation/P4_Eliminates_Infinity.v",
-   "claim": "прочие три файла слоя ненужности обходятся вовсе без подобных объявлений.",
-   "page_price": "без объявлений",
+   "line": 763,
+   "theorem": "pi11_negation",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "Все утверждения файла верны для любой такой таблицы; допущений они не имеют, кроме одной леммы на исключённом третьем (`pi11_negation`).",
+   "page_price": "одна лемма на classic",
    "verdict": "ok",
-   "note": "в P4_Eliminates_Infinity.v, P4_Eliminates_AC.v, P4_Eliminates_ATR.v нет ни Axiom, ни Parameter; все их объявления — «Closed under the global context»"
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): поправка неточности шага 6 («допущений не имеют»). pi11_negation — Axioms: Classical_Prop.classic; остальные утверждения файла — Closed under the global context."
   },
   {
-   "line": 798,
+   "line": 799,
    "theorem": "CompletedInfSet",
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "*Завершённое бесконечное множество* — предикат $S$ на натуральных числах, для которого *всякое* $n$ есть член $S$",
@@ -314,7 +314,7 @@
    "note": "Definition CompletedInfSet S := forall n, S n (:29)"
   },
   {
-   "line": 800,
+   "line": 801,
    "theorem": "P4_stage_bounded",
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "*$P4$-стадийная ограниченность* — свойство «актуальности»: на всякой стадии число актуальных элементов ограничено сверху некоторым рубежом.",
@@ -323,7 +323,7 @@
    "note": "формально: на каждой стадии все актуальные n не превосходят рубежа — forall stage, exists bound, forall n, actual stage n -> n <= bound (:33); слова «число актуальных элементов» повторяют комментарий файла"
   },
   {
-   "line": 802,
+   "line": 803,
    "theorem": "bridge",
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "*Мост* — условие, связывающее эти две картины: если $n$ есть член завершённого множества, то $n$ актуально уже на нулевой стадии.",
@@ -332,7 +332,7 @@
    "note": "Definition bridge S actual := forall n, S n -> actual 0 n (:42)"
   },
   {
-   "line": 806,
+   "line": 807,
    "theorem": "completed_inf_contradicts_P4",
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "И тогда центральная теорема, `completed_inf_contradicts_P4`, гласит: завершённое бесконечное множество, $P4$-стадийная ограниченность и мост — вместе ведут к противоречию.",
@@ -341,7 +341,7 @@
    "note": "CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False (:64); ход доказательства в главе (рубеж B, число B+1) совпадает с :69–80"
   },
   {
-   "line": 822,
+   "line": 823,
    "theorem": "choice_graph",
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "такая функция выбора есть *сама по себе* завершённый бесконечный объект — её график (совокупность пар «индекс, выбранное значение») тотален, определён для всякого натурального индекса.",
@@ -350,7 +350,7 @@
    "note": "исправлено 12.11 (шаг 4, слово автора «А») — правка формализации, слова главы не менялись: теперь Definition choice_graph (f : nat -> nat) : nat -> nat -> Prop := fun n m => m = f n — совокупность пар «индекс, значение»; тотальность — лемма choice_graph_completed : forall f, CompletedInfSet (graph_indices (choice_graph f)), где graph_indices G n := exists m, G n m; было choice_graph f := fun n => True (от f не зависел)"
   },
   {
-   "line": 825,
+   "line": 826,
    "theorem": "ac_implies_completed",
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "Теорема `ac_implies_completed` доказывает это: из аксиомы выбора по натуральному ряду следует существование функции, чей график есть завершённое бесконечное множество.",
@@ -359,7 +359,7 @@
    "note": "исправлено 12.11 (шаг 4, слово автора «А») — правка формализации, слова главы не менялись: теперь ac_implies_completed : AC_on_nat -> forall F, (forall n, F n <> nil) -> exists f, (forall n m, choice_graph f n m -> In m (F n)) /\\ CompletedInfSet (graph_indices (choice_graph f)) — функция выбора привязана к семейству, посылка в доказательстве используется; Print Assumptions: Closed under the global context. Граница доказанного названа в самом файле: AC_on_nat_as_rule (посылка есть теорема) и completed_graph_contradicts_P4 (то же для графика любой функции)"
   },
   {
-   "line": 830,
+   "line": 831,
    "theorem": "ac_completed_graph_contradicts_P4",
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "Всё рассуждение собрано и одной теоремой — `ac_completed_graph_contradicts_P4`.",
@@ -368,7 +368,7 @@
    "note": "исправлено 12.11 (шаг 4, слово автора «А») — фраза добавлена: AC_on_nat -> forall F, (forall n, F n <> nil) -> forall actual, P4_stage_bounded actual -> (forall f, (forall n, In (f n) (F n)) -> bridge (graph_indices (choice_graph f)) actual) -> False; Closed under the global context"
   },
   {
-   "line": 832,
+   "line": 833,
    "theorem": "completed_graph_contradicts_P4",
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "то же противоречие даёт график *любой* всюду определённой функции, взятый как завершённое целое (`completed_graph_contradicts_P4`)",
@@ -377,7 +377,7 @@
    "note": "исправлено 12.11 (шаг 4, слово автора «А») — фраза добавлена: forall f actual, P4_stage_bounded actual -> bridge (graph_indices (choice_graph f)) actual -> False; Closed under the global context"
   },
   {
-   "line": 834,
+   "line": 835,
    "theorem": "AC_on_nat_as_rule",
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "а сам выбор из непустых списков есть теорема — голова списка (`AC_on_nat_as_rule`).",
@@ -386,7 +386,7 @@
    "note": "исправлено 12.11 (шаг 4, слово автора «А») — фраза добавлена: Lemma AC_on_nat_as_rule : AC_on_nat, свидетель fun n => L5_choose (F n) 0; Closed under the global context; то же утверждение — P4_Eliminates_AC.AC_is_L5"
   },
   {
-   "line": 837,
+   "line": 838,
    "theorem": null,
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "Файл `P4ProhibitsAC.v` *не* доказывает замкнутого утверждения «аксиома выбора ложна».",
@@ -395,7 +395,7 @@
    "note": "статус назван честно: замкнутого отрицания в файле нет; после шага 4 файл говорит это сам — AC_on_nat_as_rule доказывает AC_on_nat, а противоречие (ac_completed_graph_contradicts_P4) условно: стадийная ограниченность и мост"
   },
   {
-   "line": 858,
+   "line": 859,
    "theorem": "P4_eliminates_AC_finite",
    "file": "src/foundation/P4_Eliminates_AC.v",
    "claim": "Конечная теорема `P4_eliminates_AC_finite` (§ 1.5.2) говорит о конечном фронте $N$",
@@ -404,7 +404,7 @@
    "note": "forall family N, (forall i, i < N -> family i <> nil) -> forall i, i < N -> In (finite_choice_fn family i) (family i) (:217)"
   },
   {
-   "line": 861,
+   "line": 862,
    "theorem": "P4_eliminates_AC",
    "file": "src/foundation/P4_Eliminates_AC.v",
    "claim": "Но `P4_Eliminates_AC.v` содержит и теорему для семейства с индексом по *всем* натуральным числам.",
@@ -413,7 +413,7 @@
    "note": "Theorem P4_eliminates_AC (:201); двоякое чтение (правило или график) записано в самом файле (:191–195)"
   },
   {
-   "line": 886,
+   "line": 887,
    "theorem": "prohibition_implies_reinterpretation",
    "file": "src/foundation/P4ProhibitionSynthesis.v",
    "claim": "Файл содержит и теорему с говорящим именем — `prohibition_implies_reinterpretation`.",
@@ -422,7 +422,7 @@
    "note": "утверждение — «несовместимость -> potential_infinity» (:72); доказательство: intros _. exact potential_inf_exists. (:79) — посылка действительно не используется, как и сказано в главе"
   },
   {
-   "line": 890,
+   "line": 891,
    "theorem": "potential_inf_exists",
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "По доказательству же она устроена просто: посылку она *не использует* — доказывает заключение напрямую, возвращая уже доказанную в репозитории лемму существования потенциальной бесконечности (`potential_inf_exists`).",
@@ -431,7 +431,7 @@
    "note": "Lemma potential_inf_exists : potential_infinity (P4CompletedInfinity.v:87); potential_infinity := forall n, exists m, n < m"
   },
   {
-   "line": 908,
+   "line": 911,
    "theorem": null,
    "file": "src/foundation/P4_Eliminates_Infinity.v",
    "claim": "проверено четырьмя файлами `P4_Eliminates_*`: в выводе `Print Assumptions` для их теорем нет ни аксиомы бесконечности, ни аксиомы выбора.",
@@ -440,7 +440,7 @@
    "note": "исправлено 12.11 (шаг 3, слово автора): было «и подтверждено аудитом ProcessAxiomAudit.v»; сплошной прогон Print Assumptions после правок 2026-11-12: в P4_Eliminates_Infinity.v, P4_Eliminates_AC.v, P4_Eliminates_ATR.v все объявления замкнуты; в P4_Eliminates_Pi11.v 16 объявлений стоят на параметре eval_program (абстрактная функция вычисления программ — не аксиома бесконечности и не аксиома выбора), лемма pi11_negation — ещё и на classic"
   },
   {
-   "line": 934,
+   "line": 937,
    "theorem": "P4_preserves_three",
    "file": "src/foundation/P4ProhibitionSynthesis.v",
    "claim": "теорема `P4_preserves_three` устанавливает, что $P4$ *совместим* с тремя вещами — потенциальной бесконечностью, конечным выбором и индуктивными типами.",
@@ -449,7 +449,7 @@
    "note": "три конъюнкта (:49): potential_infinity; конечный выбор; P4_stage_bounded nat_staged_actual — стадийная модель nat ограничена; «индуктивные типы» — прочтение третьего конъюнкта по комментарию файла"
   },
   {
-   "line": 1200,
+   "line": 1203,
    "theorem": null,
    "file": "src/process/ProcessFourPrinciples.v",
    "claim": "образцом, а двенадцать образцов из `ProcessFourPrinciples.v`",
@@ -458,7 +458,7 @@
    "note": "двенадцать конструкторов ProcessInstance (:110–122), twelve_instances (:131)"
   },
   {
-   "line": 1203,
+   "line": 1206,
    "theorem": "RealProcess",
    "file": "src/process/ProcessCore.v",
    "claim": "Этот тип в Rocq-формализации ToS называется `RealProcess` и определяется — предельно просто — как тип функций из натуральных чисел в рациональные, `nat -> Q`.",
@@ -467,7 +467,7 @@
    "note": "Definition RealProcess := nat -> Q (ProcessCore.v:34); то же определение повторено ещё в девяти файлах"
   },
   {
-   "line": 1248,
+   "line": 1251,
    "theorem": "P4_formalized",
    "file": "src/process/ProcessFourPrinciples.v",
    "claim": "$P4$ (`P4_formalized`: процессы Коши есть и замкнуты по арифметике) доказан самостоятельно.",
@@ -476,7 +476,7 @@
    "note": "исправлено 12.11 правкой формализации (шаг 1, слово автора «А»): второй пункт предиката теперь is_Cauchy (process_mul R1 R2) — замкнутость относительно умножения (ProcessFourPrinciples.v; лемма mul_preserves_Cauchy, CauchyProcessBridge.v:74); слова главы верны как есть. Было: пункт о паре процессов (process_product)."
   },
   {
-   "line": 1249,
+   "line": 1252,
    "theorem": "completed_inf_contradicts_P4",
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "Слой несовместимости добавляет: при точном определении завершённого бесконечного объекта он с $P4$ несовместим (`P4CompletedInfinity.v`, теорема `completed_inf_contradicts_P4`; `nat` при этом — правило индукции, не готовое множество)",
@@ -485,7 +485,7 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было «(`P4_Eliminates_Infinity`: `nat` — правило индукции, не готовое множество)» — это файл слоя ненужности; теорема несовместимости — completed_inf_contradicts_P4 (P4CompletedInfinity.v:64), для nat — nat_not_completed_under_P4 (:146)"
   },
   {
-   "line": 1343,
+   "line": 1346,
    "theorem": "P4_formalized",
    "file": "src/process/ProcessFourPrinciples.v",
    "claim": "его формальный процессный след `P4_formalized`, доказанный в Rocq (процессы Коши существуют, сумма и произведение сохраняют свойство Коши);",
@@ -494,7 +494,7 @@
    "note": "исправлено 12.11 правкой формализации (шаг 1, слово автора «А»): второй пункт предиката теперь is_Cauchy (process_mul R1 R2) — замкнутость относительно умножения (ProcessFourPrinciples.v; лемма mul_preserves_Cauchy, CauchyProcessBridge.v:74); слова главы верны как есть. Было: пункт о паре процессов (process_product)."
   },
   {
-   "line": 1347,
+   "line": 1350,
    "theorem": null,
    "file": "src/ToS_Axioms.v",
    "claim": "Фундаментальных логических аксиом у ToS две, $L3$ и $L4$; ни аксиомы бесконечности, ни сет-теоретической аксиомы выбора среди них нет, что зафиксировано документированным мета-аудитом.",
@@ -503,7 +503,7 @@
    "note": "после правок 2026-11-12 функциональной экстенсиональности в допущениях нет (прогон: 0); аксиом бесконечности и выбора в формализации нет; «мета-аудит» (ProcessAxiomAudit.v) записывает это комментарием, а проверяет сплошной прогон Print Assumptions"
   },
   {
-   "line": 1370,
+   "line": 1373,
    "theorem": null,
    "file": "src/process/ProcessFourPrinciples.v",
    "claim": "он импортирует классический модуль, но ни одна его теорема аксиому `classic` не применяет",
@@ -512,7 +512,7 @@
    "note": "исправлено 12.11 (шаг 2, слово автора): было «наследует единственную логическую аксиому classic»; все объявления ProcessFourPrinciples.v — Closed under the global context; число 25 Qed верно"
   },
   {
-   "line": 1372,
+   "line": 1375,
    "theorem": null,
    "file": "src/ToS_Axioms.v",
    "claim": "3 доказанных производных утверждения, 0 `Admitted`.",
@@ -521,7 +521,7 @@
    "note": "три леммы: L3_informative (Defined, :119), L4_definite (:135), NNPP_from_L3 (:147) — 2 Qed и 1 Defined; шапка файла озаглавлена «ToS AXIOMS — The Formal Laws of Logic»"
   },
   {
-   "line": 1373,
+   "line": 1376,
    "theorem": null,
    "file": "src/process/ProcessAxiomAudit.v",
    "claim": "`ProcessAxiomAudit.v` (каталог `src/process/`), 10 доказанных утверждений.",
@@ -530,7 +530,7 @@
    "note": "исправлено 12.11 (шаг 3, слово автора): было 13; после удаления трёх лемм-вывесок в файле 10 Qed"
   },
   {
-   "line": 1375,
+   "line": 1378,
    "theorem": null,
    "file": "src/foundation/P4ProhibitionSynthesis.v",
    "claim": "вступительный комментарий файла противопоставляет ранний слой («$P4$ делает аксиому ненужной») позднему («$P4$ несовместим с завершёнными бесконечностями») и фиксирует, что второе сильнее первого.",
@@ -539,7 +539,7 @@
    "note": "шапка P4ProhibitionSynthesis.v:8–16 — «WHAT CHANGED … UNNECESSARY / INCONSISTENT», «Prohibition ⇒ Reinterpretation»"
   },
   {
-   "line": 1376,
+   "line": 1379,
    "theorem": null,
    "file": "src/foundation/P4_Eliminates_Infinity.v",
    "claim": "`P4_Eliminates_Infinity.v` (каталог `src/foundation/`), 10 доказанных утверждений, 0 `Admitted`, 0 новых аксиом.",
@@ -548,7 +548,7 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было 12; в файле 10 Qed (9 лемм и 1 теорема); шапка файла исправлена тем же шагом (12 → 10)"
   },
   {
-   "line": 1377,
+   "line": 1380,
    "theorem": null,
    "file": "src/foundation/P4_Eliminates_AC.v",
    "claim": "`P4_Eliminates_AC.v` (каталог `src/foundation/`), 0 `Admitted`, 0 новых аксиом.",
@@ -557,7 +557,7 @@
    "note": "верно: 15 Qed, все объявления замкнуты (шапка файла называет 16 Qed — число в сноске не приводится)"
   },
   {
-   "line": 1378,
+   "line": 1381,
    "theorem": "P4_eliminates_AC_finite",
    "file": "src/foundation/P4_Eliminates_AC.v",
    "claim": "Теорема `P4_eliminates_AC_finite`: для всякого семейства `family` и всякого конечного фронта $N$, если `family` $i$ непуст при $i < N$, то выбор головы списка попадает в `family` $i$ при всех $i < N$.",
@@ -566,7 +566,7 @@
    "note": "формулировка сноски совпадает с утверждением (:217)"
   },
   {
-   "line": 1379,
+   "line": 1382,
    "theorem": null,
    "file": "src/foundation/P4_Eliminates_ATR.v",
    "claim": "`P4_Eliminates_ATR.v` (каталог `src/foundation/`), 17 доказанных утверждений, 0 `Admitted`, 0 новых аксиом.",
@@ -575,7 +575,7 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было 15; в файле 17 Qed (16 лемм и 1 теорема); шапка файла исправлена тем же шагом (15 → 17)"
   },
   {
-   "line": 1380,
+   "line": 1383,
    "theorem": null,
    "file": "src/foundation/P4_Eliminates_Pi11.v",
    "claim": "`P4_Eliminates_Pi11.v` (каталог `src/foundation/`), 15 доказанных утверждений. В этом файле, в отличие от трёх предыдущих, есть объявленный параметр (см. ниже).",
@@ -584,7 +584,7 @@
    "note": "15 Qed; Parameter eval_program (:28)"
   },
   {
-   "line": 1381,
+   "line": 1384,
    "theorem": null,
    "file": "src/foundation/P4CompletedInfinity.v",
    "claim": "`P4CompletedInfinity.v` (каталог `src/foundation/`), 9 доказанных утверждений, 0 `Admitted`, 0 новых аксиом. Это ядро, на которое опираются файлы `P4ProhibitsAC.v` и `P4ProhibitsImpredicative.v`.",
@@ -593,7 +593,7 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было 12; в файле 9 Qed (4 леммы и 5 теорем); шапка файла исправлена тем же шагом (12 → 9); оба названных файла импортируют P4CompletedInfinity"
   },
   {
-   "line": 1382,
+   "line": 1385,
    "theorem": null,
    "file": "src/foundation/P4ProhibitsAC.v",
    "claim": "`P4ProhibitsAC.v` (каталог `src/foundation/`), 12 доказанных утверждений, 0 `Admitted`, 0 новых аксиом; опирается на `P4CompletedInfinity.v`.",
@@ -602,7 +602,7 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было 10; после шага 4 в файле 12 Qed (7 лемм и 5 теорем), 0 аксиом"
   },
   {
-   "line": 1383,
+   "line": 1386,
    "theorem": null,
    "file": "src/foundation/P4ProhibitionSynthesis.v",
    "claim": "`P4ProhibitionSynthesis.v` (каталог `src/foundation/`), 6 доказанных утверждений, 0 `Admitted`.",
@@ -611,7 +611,7 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было 8; в файле 6 Qed (5 теорем и 1 лемма); шапка файла исправлена шагом 4"
   },
   {
-   "line": 1383,
+   "line": 1386,
    "theorem": "P4_prohibits_three",
    "file": "src/foundation/P4ProhibitionSynthesis.v",
    "claim": "Файл доказывает `P4_prohibits_three` (несовместимость с тремя вещами: завершёнными множествами, функцией выбора, взятой как завершённый график, [[Парадокс Рассела|парадоксом Рассела]])",
@@ -620,13 +620,42 @@
    "note": "исправлено 12.11 (шаг 5, слово автора): было «полной аксиомой выбора»; три конъюнкта (:30) — условная несовместимость завершённого множества; AC_gives_completed_graph (функция выбора с графиком из выбранных пар, содержащим пару на всяком индексе); противоречивость множества Рассела. Сомнительным остаётся третье: в противоречивости множества Рассела P4 не участвует (лемма названа russell_contradiction_without_P1)"
   },
   {
-   "line": 1383,
+   "line": 1386,
    "theorem": "P4_preserves_three",
    "file": "src/foundation/P4ProhibitionSynthesis.v",
    "claim": "и `P4_preserves_three` (совместимость с тремя: потенциальной бесконечностью, конечным выбором, индуктивными типами).",
    "page_price": "",
    "verdict": "ok",
    "note": "см. запись к строке 924"
+  },
+  {
+   "line": 904,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Фраза добавлена 13.11 (Часть X, шаг 4, слово автора). completed_reading_strictly_stronger : (forall S actual, bridge S actual -> rule_reading S actual) /\\ (forall f, exists actual, P4_stage_bounded actual /\\ rule_reading (graph_indices (choice_graph f)) actual /\\ ~ bridge (graph_indices (choice_graph f)) actual). Closed under the global context.",
+   "theorem": "completed_reading_strictly_stronger",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Теоремой оно выражено в другом месте — для двух чтений графика функции: `completed_reading_strictly_stronger` (`P4ProhibitsAC.v`, Глава 10.4)."
+  },
+  {
+   "line": 765,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Фраза добавлена 13.11 (Часть X, шаг 6, слово автора). no_table_covers_all_functions : forall eval_program, ~ (forall f, exists c, f = eval_program c). Closed under the global context.",
+   "theorem": "no_table_covers_all_functions",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "Доказано и то, что ни одна таблица не содержит всех функций: диагональная функция в неё не входит (`no_table_covers_all_functions`)."
+  },
+  {
+   "line": 748,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "С 13.11 eval_program — переменная раздела файла P4_Eliminates_Pi11.v: Variable eval_program : Program -> nat -> nat. Прежде — Parameter.",
+   "claim": "а функция восстанавливается через таблицу кодов `eval_program`",
+   "theorem": "eval_program",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "external": true,
+   "assumptions": "не применимо (переменная раздела Section Codes, не объявление верхнего уровня)"
   }
  ]
 }

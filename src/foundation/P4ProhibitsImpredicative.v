@@ -2,7 +2,7 @@
     Elements: impredicative quantification, totality, Russell's paradox
     Roles:    impredicativity requires completed totality, P4 prohibits that
     Rules:    P1 (hierarchy) + P4 (finiteness) dissolve Russell
-    STATUS:   7 Qed, 0 Admitted, 0 new axioms
+    STATUS:   11 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: April 2026
 
     IMPREDICATIVITY:
@@ -19,6 +19,22 @@
     P4 ALLOWS INDUCTIVE DEFINITIONS:
     Inductive types build stage-by-stage, never requiring "all at once."
     nat = O | S n. Each element is finite. No completed totality needed.
+
+    WHAT IS PROVED ABOUT TOTALITY (Nov 2026, last section).  Until then the
+    sentences above were comments only: no lemma of the file spoke about a
+    totality (NatTotality is trivially true and is used nowhere).
+    Elements: a range T (what the definition quantifies over) and a collector
+              r of the Russell condition over T.
+    Roles:    r plays "collector over T"; T plays "the range".
+    Rules:    the collector never lies in its own range
+              (russell_collector_escapes); hence a range that has a collector
+              is not completed (russell_needs_incomplete_range); over every
+              finite stage a collector EXISTS, lies outside the stage and
+              appears at the next one (staged_russell_collector_exists).
+    So the contradiction arises exactly when the range is required to contain
+    its own collector, i.e. to be completed.  That P4 excludes a completed
+    range is P4CompletedInfinity.completed_inf_contradicts_P4, under its
+    premise [bridge].
 *)
 
 From Stdlib Require Import PeanoNat Lia.
@@ -158,4 +174,67 @@ Proof.
   split; [exact russell_contradiction_without_P1 |
   split; [exact nat_staged_bounded |
   exact nat_eventually_actual]]].
+Qed.
+
+(* ================================================================ *)
+(*  Nov 2026: RUSSELL'S DEFINITION NEEDS A COMPLETED RANGE           *)
+(* ================================================================ *)
+
+(** The collector of the Russell condition over a range T is not in T
+    (any carrier, any membership relation). *)
+Theorem russell_collector_escapes :
+  forall (A : Type) (mem : A -> A -> Prop) (T : A -> Prop) (r : A),
+    (forall x, T x -> (mem x r <-> ~ mem x x)) -> ~ T r.
+Proof.
+  intros A mem T r Hr HT.
+  destruct (Hr r HT) as [H1 H2].
+  assert (Hn : ~ mem r r) by (intro Hm; exact (H1 Hm Hm)).
+  exact (Hn (H2 Hn)).
+Qed.
+
+(** Hence a range that has such a collector is not a completed totality. *)
+Theorem russell_needs_incomplete_range :
+  forall (mem : nat -> nat -> Prop) (T : nat -> Prop) (r : nat),
+    (forall x, T x -> (mem x r <-> ~ mem x x)) -> ~ CompletedInfSet T.
+Proof.
+  intros mem T r Hr HT.
+  exact (russell_collector_escapes nat mem T r Hr (HT r)).
+Qed.
+
+(** Stage by stage the definition is harmless: over every finite stage a
+    collector exists, lies outside the stage and is actual at the next one
+    (membership x < y on nat). *)
+Theorem staged_russell_collector_exists :
+  forall stage : nat,
+    exists r : nat,
+      (forall x, nat_staged_actual stage x -> (x < r <-> ~ x < x)) /\
+      ~ nat_staged_actual stage r /\
+      nat_staged_actual (S stage) r.
+Proof.
+  intro stage. exists (S stage).
+  unfold nat_staged_actual.
+  split; [ | split ].
+  - intros x Hx. split.
+    + intros _ Hxx. lia.
+    + intros _. lia.
+  - lia.
+  - lia.
+Qed.
+
+(** Summary: stages are bounded (P4); over each stage the Russell collector
+    exists outside it; a range with a collector is never completed. *)
+Theorem russell_requires_completed_totality :
+  P4_stage_bounded nat_staged_actual /\
+  (forall stage : nat,
+     exists r : nat,
+       (forall x, nat_staged_actual stage x -> (x < r <-> ~ x < x)) /\
+       ~ nat_staged_actual stage r) /\
+  (forall (mem : nat -> nat -> Prop) (T : nat -> Prop) (r : nat),
+     (forall x, T x -> (mem x r <-> ~ mem x x)) -> ~ CompletedInfSet T).
+Proof.
+  split; [ exact nat_staged_bounded | split ].
+  - intro stage.
+    destruct (staged_russell_collector_exists stage) as [r [H1 [H2 _]]].
+    exists r. split; assumption.
+  - exact russell_needs_incomplete_range.
 Qed.

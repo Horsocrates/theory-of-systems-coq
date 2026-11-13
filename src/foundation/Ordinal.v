@@ -61,6 +61,10 @@ Fixpoint omega_tower (n : nat) : Ord :=
 Definition epsilon_0 : Ord := OLim omega_tower.
 
 (* Ordering *)
+(* Nov 2026: no constructor puts a limit notation on the LEFT, so along ord_lt
+   only finite notations lie below a notation (omega is not below omega+1 nor
+   below epsilon_0).  The order of construction and Brouwer's order of
+   comparison, with their well-foundedness, are in OrdinalOrders.v. *)
 Inductive ord_lt : Ord -> Ord -> Prop :=
   | lt_zero_succ : forall a, ord_lt OZero (OSucc a)
   | lt_succ_mono : forall a b, ord_lt a b -> ord_lt (OSucc a) (OSucc b)

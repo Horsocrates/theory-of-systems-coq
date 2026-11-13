@@ -1,27 +1,26 @@
 (** * HigmanLemma.v — Higman's lemma for the one-letter alphabet + Dickson's lemma for pairs
-    Elements: list embedding (list_le); WQO in the sequential form (is_wqo); right minima
+    Elements: list embedding (list_le); WQO in the sequential form (is_wqo); chains (FChain)
     Roles:    a WQO is an order with no bad infinite sequence; Nat.le is the base WQO;
-              a right minimum of f is a position not exceeded by any later value
+              a chain FChain f k i is k steps from i along which f does not decrease
     Rules:    nat is well-founded => Nat.le is a WQO (constructive, strong induction on the
               first value); one-letter lists embed by length => Higman for the one-letter
-              alphabet (constructive, reduces to Nat.le); Dickson for pairs: along the right
-              minima of f the sequence g would have to descend forever => needs a minimum over
-              an infinite tail, taken classically (classic = L3)
-    STATUS:   11 Qed, 0 Admitted; axioms: Classical_Prop.classic only, and only under
-              tail_min_exists, right_min_unbounded, dickson_pair, higman_synthesis — the rest
-              is closed under the global context (Print Assumptions at the end)
+              alphabet (constructive, reduces to Nat.le); Dickson for pairs: constructive since
+              Nov 2026 (along a chain on which f does not decrease, g cannot strictly
+              decrease more than g(start) times)
+    STATUS:   16 Qed, 0 Admitted; no axioms: every statement is closed under the global
+              context (Print Assumptions at the end)
     SCOPE:    Higman's lemma for an ARBITRARY finite alphabet is NOT proved here: only the
               one-letter case (lists of unit), which is Nat.le on lengths.
     REPAIR (2026-10-17): the March version never compiled.  wqo_nat_le, wqo_bool,
               dickson_pair and higman_unit inspected only the first three terms of the
               sequence and, in branches such as f 0 > f 1 > f 2, tried to prove false goals
               (first failure: line 40, "Cannot find witness").  The statements are unchanged;
-              the proofs are new.  The file no longer declares its own `classic`: it uses the
-              standard Classical_Prop.classic, the one ToS_Axioms.v re-exports.
+              the proofs are new.  The file declares no `classic` of its own, and since
+              November 2026 uses none: the classical route to Dickson's lemma was removed.
     Author:   Horsocrates | Date: March 2026 (proofs repaired October 2026)
 *)
 
-From Stdlib Require Import List Lia Bool PeanoNat Classical_Prop.
+From Stdlib Require Import List Lia Bool PeanoNat.
 Import ListNotations.
 
 Definition is_wqo {A : Type} (le : A -> A -> Prop) : Prop :=
@@ -62,67 +61,117 @@ Proof.
 Qed.
 
 (* ================================================================= *)
-(* DICKSON PAIR (classic = L3)                                         *)
+(* DICKSON PAIR, CONSTRUCTIVELY (Nov 2026)                             *)
 (* ================================================================= *)
 
-(** A right minimum of f: no later value is smaller. *)
-Definition right_min (f : nat -> nat) (n : nat) : Prop :=
-  forall m, (n < m)%nat -> (f n <= f m)%nat.
+(* Idea: along a chain of indices on which f does not decrease, g cannot
+   strictly decrease more than g(start) times; a chain whose length is given
+   by a function of its start is built by induction on f 0.  No case split
+   over an infinite tail is needed. *)
 
-(** Every tail [k, ∞) of f has a position of its minimum value.  The case
-    split «is some value of the tail below v?» quantifies over an infinite
-    tail, hence classic. *)
-Lemma tail_min_exists : forall (f : nat -> nat) (k : nat),
-  exists n, (k <= n)%nat /\ forall m, (k <= m)%nat -> (f n <= f m)%nat.
+(* a chain of k steps starting at i: i < j1 < ... < jk with f weakly increasing
+   on neighbours *)
+Fixpoint FChain (f : nat -> nat) (k i : nat) : Prop :=
+  match k with
+  | O => True
+  | S k' => exists j, (i < j)%nat /\ (f i <= f j)%nat /\ FChain f k' j
+  end.
+
+Lemma fchain_shift : forall f c k i,
+  FChain (fun n => f (n + c)) k i -> FChain f k (i + c).
 Proof.
-  intros f k.
-  assert (Hv : forall v, (exists m, (k <= m)%nat /\ (f m <= v)%nat) ->
-                 exists n, (k <= n)%nat /\ forall m, (k <= m)%nat -> (f n <= f m)%nat).
-  { induction v as [| v IH]; intros [m0 [Hk0 Hm0]].
-    - exists m0. split; [exact Hk0 |]. intros m _. lia.
-    - destruct (classic (exists m, (k <= m)%nat /\ (f m <= v)%nat)) as [Hex | Hno].
-      + exact (IH Hex).
-      + exists m0. split; [exact Hk0 |]. intros m Hkm.
-        destruct (Nat.le_gt_cases (f m) v) as [Hmv | Hmv].
-        * exfalso. apply Hno. exists m. split; [exact Hkm | exact Hmv].
-        * lia. }
-  apply (Hv (f k)). exists k. split; lia.
+  intros f c k. induction k as [| k IH]; intros i H.
+  - exact I.
+  - simpl in H. destruct H as [j [Hij [Hle Hc]]].
+    simpl. exists (j + c). split; [lia | split; [exact Hle | apply IH; exact Hc]].
 Qed.
 
-(** Right minima of f occur beyond every bound. *)
-Lemma right_min_unbounded : forall (f : nat -> nat) (k : nat),
-  exists n, (k <= n)%nat /\ right_min f n.
+Lemma fchain_exists_bounded : forall k,
+  (forall f : nat -> nat, exists i, FChain f k i) ->
+  forall m (f : nat -> nat), (f 0 <= m)%nat -> exists i, FChain f (S k) i.
 Proof.
-  intros f k. destruct (tail_min_exists f k) as [n [Hkn Hmin]].
-  exists n. split; [exact Hkn |]. intros m Hnm. apply Hmin. lia.
+  intros k IHk. induction m as [| m IHm]; intros f Hf0.
+  - destruct (IHk (fun n => f (n + 1))) as [i' Hi'].
+    apply fchain_shift in Hi'.
+    exists 0. simpl. exists (i' + 1). split; [lia | split; [lia | exact Hi']].
+  - destruct (IHk (fun n => f (n + 1))) as [i' Hi'].
+    apply fchain_shift in Hi'.
+    destruct (Nat.le_gt_cases (f 0) (f (i' + 1))) as [Hle | Hgt].
+    + exists 0. simpl. exists (i' + 1). split; [lia | split; [exact Hle | exact Hi']].
+    + destruct (IHm (fun n => f (n + (i' + 1)))) as [i'' Hi''].
+      * simpl. lia.
+      * apply fchain_shift in Hi''. exists (i'' + (i' + 1)). exact Hi''.
 Qed.
 
-(** Dickson's lemma for pairs.  If no pair i < j had f i <= f j and g i <= g j,
-    then along the right minima of f the values of g would descend forever —
-    impossible in nat. *)
-Lemma dickson_pair : forall f g : nat -> nat,
+Lemma fchain_exists : forall k (f : nat -> nat), exists i, FChain f k i.
+Proof.
+  induction k as [| k IHk]; intro f.
+  - exists 0. exact I.
+  - exact (fchain_exists_bounded k IHk (f 0) f (Nat.le_refl _)).
+Qed.
+
+(* the length of the chain may depend on its starting index *)
+Lemma fchain_dep_bounded : forall m (f h : nat -> nat),
+  (f 0 <= m)%nat -> exists i, FChain f (h i) i.
+Proof.
+  induction m as [| m IHm]; intros f h Hf0.
+  - destruct (h 0) as [| k] eqn:Eh.
+    + exists 0. rewrite Eh. exact I.
+    + destruct (fchain_exists k (fun n => f (n + 1))) as [i' Hi'].
+      apply fchain_shift in Hi'.
+      exists 0. rewrite Eh. simpl. exists (i' + 1).
+      split; [lia | split; [lia | exact Hi']].
+  - destruct (h 0) as [| k] eqn:Eh.
+    + exists 0. rewrite Eh. exact I.
+    + destruct (fchain_exists k (fun n => f (n + 1))) as [i' Hi'].
+      apply fchain_shift in Hi'.
+      destruct (Nat.le_gt_cases (f 0) (f (i' + 1))) as [Hle | Hgt].
+      * exists 0. rewrite Eh. simpl. exists (i' + 1).
+        split; [lia | split; [exact Hle | exact Hi']].
+      * destruct (IHm (fun n => f (n + (i' + 1))) (fun n => h (n + (i' + 1))))
+          as [i'' Hi''].
+        -- simpl. lia.
+        -- cbv beta in Hi''. apply fchain_shift in Hi''.
+           exists (i'' + (i' + 1)). exact Hi''.
+Qed.
+
+(* on a chain longer than g at its start, two neighbours are good for g too *)
+Lemma fchain_good_pair : forall (f g : nat -> nat) k i,
+  FChain f k i -> (g i < k)%nat ->
+  exists p q, (p < q)%nat /\ (f p <= f q)%nat /\ (g p <= g q)%nat.
+Proof.
+  intros f g k. induction k as [| k IH]; intros i Hc Hg.
+  - lia.
+  - simpl in Hc. destruct Hc as [j [Hij [Hle Hc]]].
+    destruct (Nat.le_gt_cases (g i) (g j)) as [Hgle | Hggt].
+    + exists i, j. split; [exact Hij | split; [exact Hle | exact Hgle]].
+    + apply (IH j Hc). lia.
+Qed.
+
+Theorem dickson_pair_constructive : forall f g : nat -> nat,
   exists i j : nat, (i < j)%nat /\ (f i <= f j)%nat /\ (g i <= g j)%nat.
 Proof.
   intros f g.
-  destruct (classic (exists i j : nat,
-              (i < j)%nat /\ (f i <= f j)%nat /\ (g i <= g j)%nat)) as [H | Hbad].
-  - exact H.
-  - exfalso.
-    assert (Hdesc : forall i, right_min f i ->
-              exists j, (i < j)%nat /\ right_min f j /\ (g j < g i)%nat).
-    { intros i Hi.
-      destruct (right_min_unbounded f (S i)) as [j [Hij Hj]].
-      exists j. split; [lia | split; [exact Hj |]].
-      destruct (Nat.le_gt_cases (g i) (g j)) as [Hle | Hlt]; [| exact Hlt].
-      exfalso. apply Hbad. exists i, j.
-      split; [lia | split; [exact (Hi j ltac:(lia)) | exact Hle]]. }
-    assert (Hno : forall v i, right_min f i -> (g i <= v)%nat -> False).
-    { induction v as [| v IH]; intros i Hi Hgi.
-      - destruct (Hdesc i Hi) as [j [_ [_ Hgj]]]. lia.
-      - destruct (Hdesc i Hi) as [j [_ [Hj Hgj]]]. apply (IH j Hj). lia. }
-    destruct (right_min_unbounded f 0) as [i [_ Hi]].
-    exact (Hno (g i) i Hi (Nat.le_refl _)).
+  destruct (fchain_dep_bounded (f 0) f (fun i => S (g i)) (Nat.le_refl _)) as [i Hi].
+  cbv beta in Hi.
+  exact (fchain_good_pair f g (S (g i)) i Hi (Nat.lt_succ_diag_r _)).
 Qed.
+
+(* the product order on nat * nat is a wqo *)
+Theorem wqo_nat_pair :
+  is_wqo (fun p q : nat * nat => (fst p <= fst q)%nat /\ (snd p <= snd q)%nat).
+Proof.
+  intro s.
+  destruct (dickson_pair_constructive (fun n => fst (s n)) (fun n => snd (s n)))
+    as [i [j [Hij [Hf Hg]]]].
+  exists i, j. split; [exact Hij | split; [exact Hf | exact Hg]].
+Qed.
+
+(** Dickson's lemma for pairs — the statement under its original name.  Since
+    Nov 2026 it is proved by dickson_pair_constructive above, with no classic. *)
+Lemma dickson_pair : forall f g : nat -> nat,
+  exists i j : nat, (i < j)%nat /\ (f i <= f j)%nat /\ (g i <= g j)%nat.
+Proof. exact dickson_pair_constructive. Qed.
 
 (* ================================================================= *)
 (* WQO FOR SPECIFIC TYPES                                             *)
@@ -183,8 +232,7 @@ Proof.
 Qed.
 
 (* Axiom audit: closed under the global context — wqo_nat_le, wqo_unit,
-   wqo_bool, higman_unit; Classical_Prop.classic — dickson_pair,
-   higman_synthesis. *)
+   wqo_bool, higman_unit, dickson_pair, wqo_nat_pair, higman_synthesis. *)
 Print Assumptions wqo_nat_le.
 Print Assumptions wqo_bool.
 Print Assumptions higman_unit.

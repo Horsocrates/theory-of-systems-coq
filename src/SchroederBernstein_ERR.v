@@ -9,7 +9,7 @@
 (*  Version: 2.0 (E/R/R)                                                     *)
 (*  Date:    January 2026                                                    *)
 (*                                                                           *)
-(*  STATUS: 14 Qed, 0 Admitted (100% COMPLETE)                               *)
+(*  STATUS: 22 Qed, 0 Admitted (100% COMPLETE)                               *)
 (*                                                                           *)
 (* ========================================================================= *)
 (*                                                                           *)
@@ -30,8 +30,23 @@
 (*  THEOREM: If exist injections f : A -> B and g : B -> A,                  *)
 (*           then exists bijection h : A -> B.                               *)
 (*                                                                           *)
-(*  AXIOMS: classic + L4_definite (CDD).               *)
-(*          NO epsilon. NO Axiom of Infinity.                                *)
+(*  WITNESS ROLES (Nov 2026):                                                *)
+(*    Elements = witnesses of existence statements                           *)
+(*    Roles    = the UNIQUE witness (fixed by the statement itself: the      *)
+(*               preimage under an injection, the truth-bit of a             *)
+(*               proposition) vs. ONE witness AMONG MANY                     *)
+(*    Rules    = DD extracts only the first; the proof never needs the       *)
+(*               second.  P4 diagnostic ("could it be otherwise?"): for a    *)
+(*               unique witness -- no, extraction adds nothing.              *)
+(*                                                                           *)
+(*  PREMISES: the proof takes two principles as premises, not as axioms --   *)
+(*    EM : excluded middle;                                                  *)
+(*    DD : extraction of the UNIQUE witness (definite description).          *)
+(*  Schroeder_Bernstein_definite is closed under the global context.         *)
+(*  Schroeder_Bernstein is its instance at classic and L4_definite; the      *)
+(*  compiler reports classic + L4_witness for it.  The full strength of      *)
+(*  L4_witness (an ARBITRARY witness, from which choice over families        *)
+(*  follows) is not used anywhere in the proof.  No Axiom of Infinity.       *)
 (*                                                                           *)
 (* ========================================================================= *)
 
@@ -44,6 +59,29 @@ From Stdlib Require Import Wf_nat.
 Set Implicit Arguments.
 
 Section SchroederBernstein.
+
+(* ======================== *)
+(* THE TWO PREMISES         *)
+(* ======================== *)
+
+(* Excluded middle and extraction of the UNIQUE witness, as premises. *)
+Variable EM : forall P : Prop, P \/ ~ P.
+Variable DD : forall (T : Type) (P : T -> Prop), (exists! x, P x) -> {x : T | P x}.
+
+(* Informative excluded middle: the truth-bit of P is a unique witness,
+   so DD suffices (no extraction of an arbitrary witness). *)
+Lemma em_inf : forall P : Prop, {P} + {~ P}.
+Proof.
+  intro P.
+  assert (Hex : exists! b : bool, if b then P else ~ P).
+  { destruct (EM P) as [HP | HnP].
+    - exists true. split; [exact HP |].
+      intros [|] Hb; [reflexivity | exfalso; exact (Hb HP)].
+    - exists false. split; [exact HnP |].
+      intros [|] Hb; [exfalso; exact (HnP Hb) | reflexivity]. }
+  destruct (@DD bool _ Hex) as [b Hb].
+  destruct b; [left | right]; exact Hb.
+Defined.
 
 Variables A B : Type.
 Variable inhA : inhabited A.
@@ -59,7 +97,7 @@ Hypothesis g_inj : forall b1 b2, g b1 = g b2 -> b1 = b2.
 (* PARTIAL INVERSES         *)
 (* ======================== *)
 
-(* Injectivity gives uniqueness of preimages, enabling L4_definite *)
+(* Injectivity gives uniqueness of preimages, enabling DD *)
 
 Lemma f_preimage_unique : forall b, (exists a, f a = b) -> exists! a, f a = b.
 Proof.
@@ -75,25 +113,25 @@ Proof.
   - intros b' Hb'. apply g_inj. congruence.
 Qed.
 
-(* Partial inverses using L4_definite (definite description from L4) *)
+(* Partial inverses using DD (extraction of the unique preimage) *)
 Definition f_inv (b : B) (H : exists a, f a = b) : A :=
-  proj1_sig (L4_definite (fun a => f a = b) (f_preimage_unique H)).
+  proj1_sig (@DD A (fun a => f a = b) (f_preimage_unique H)).
 Arguments f_inv : clear implicits.
 
 Definition g_inv (a : A) (H : exists b, g b = a) : B :=
-  proj1_sig (L4_definite (fun b => g b = a) (g_preimage_unique H)).
+  proj1_sig (@DD B (fun b => g b = a) (g_preimage_unique H)).
 Arguments g_inv : clear implicits.
 
 Lemma f_inv_spec : forall b (H : exists a, f a = b), f (f_inv b H) = b.
 Proof.
   intros b H. unfold f_inv.
-  destruct (L4_definite _ _) as [a Ha]. simpl. exact Ha.
+  destruct (@DD _ _ _) as [a Ha]. simpl. exact Ha.
 Qed.
 
 Lemma g_inv_spec : forall a (H : exists b, g b = a), g (g_inv a H) = a.
 Proof.
   intros a H. unfold g_inv.
-  destruct (L4_definite _ _) as [b Hb]. simpl. exact Hb.
+  destruct (@DD _ _ _) as [b Hb]. simpl. exact Hb.
 Qed.
 
 (* ======================== *)
@@ -271,7 +309,7 @@ Qed.
 (* ======================== *)
 
 Definition h (a : A) : B :=
-  match L3_informative (B_rooted a) with
+  match em_inf (B_rooted a) with
   | left HBa => g_inv a (B_rooted_has_g_preimage HBa)
   | right _ => f a
   end.
@@ -284,8 +322,8 @@ Theorem h_injective : forall a1 a2, h a1 = h a2 -> a1 = a2.
 Proof.
   intros a1 a2 Heq.
   unfold h in Heq.
-  destruct (L3_informative (B_rooted a1)) as [HB1 | HnB1];
-  destruct (L3_informative (B_rooted a2)) as [HB2 | HnB2].
+  destruct (em_inf (B_rooted a1)) as [HB1 | HnB1];
+  destruct (em_inf (B_rooted a2)) as [HB2 | HnB2].
 
   - (* Both B_rooted: g_inv a1 ... = g_inv a2 ... *)
     assert (H1 : g (g_inv a1 (B_rooted_has_g_preimage HB1)) = a1)
@@ -325,23 +363,23 @@ Qed.
 Theorem h_surjective : forall b, exists a, h a = b.
 Proof.
   intro b.
-  destruct (L3_informative (B_rooted_in_B b)) as [HBb | HnBb].
+  destruct (em_inf (B_rooted_in_B b)) as [HBb | HnBb].
 
   - (* b is B_rooted_in_B: use g b *)
     exists (g b).
     unfold h.
-    destruct (L3_informative (B_rooted (g b))) as [HBgb | HnBgb].
+    destruct (em_inf (B_rooted (g b))) as [HBgb | HnBgb].
     + (* h (g b) = g_inv (g b) ... *)
       apply g_inj. apply g_inv_spec.
     + exfalso. apply HnBgb.
       apply B_rooted_in_B_implies_B_rooted_g. exact HBb.
 
   - (* b is not B_rooted_in_B: use f-preimage *)
-    destruct (L3_informative (exists a, f a = b)) as [Hex | Hnex].
+    destruct (em_inf (exists a, f a = b)) as [Hex | Hnex].
     + destruct Hex as [a Ha].
       exists a.
       unfold h.
-      destruct (L3_informative (B_rooted a)) as [HBa | HnBa].
+      destruct (em_inf (B_rooted a)) as [HBa | HnBa].
       * (* a B_rooted implies f a = b is B_rooted_in_B: contradiction *)
         exfalso. apply HnBb. apply chain_separation with a; assumption.
       * exact Ha.
@@ -351,10 +389,98 @@ Proof.
 Qed.
 
 (* ======================== *)
+(* CHAIN TRICHOTOMY         *)
+(* ======================== *)
+
+(* Nov 2026.  What the two cases of [h] cover.  Following the chain of a
+   point backwards (a = g b, b = f a', ...), exactly three things can happen:
+   it stops in B (this is B_rooted), it stops in A (at a point without a
+   g-preimage), or it does not stop at any finite depth.  [h] uses g^-1 in
+   the first case and f in the other two. *)
+
+(* a'' is reached from a in n full backward steps *)
+Inductive back : nat -> A -> A -> Prop :=
+  | back_0 : forall a, back 0 a a
+  | back_S : forall n a b a' a'',
+      g b = a -> f a' = b -> back n a' a'' -> back (S n) a a''.
+
+Definition A_stops (a : A) : Prop :=
+  exists n a', back n a a' /\ no_g_preimage a'.
+
+Definition B_stops (a : A) : Prop :=
+  exists n a' b, back n a a' /\ g b = a' /\ no_f_preimage b.
+
+Definition never_stops (a : A) : Prop :=
+  forall n, exists a', back n a a'.
+
+Lemma back_extend : forall n a a',
+  back n a a' -> forall b a'', g b = a' -> f a'' = b -> back (S n) a a''.
+Proof.
+  intros n a a' H. induction H as [a | n a b a1 a2 Hg Hf Hb IH].
+  - intros b a'' Hg Hf. apply back_S with b a''.
+    + exact Hg.
+    + exact Hf.
+    + apply back_0.
+  - intros b0 a'' Hg0 Hf0. apply back_S with b a1.
+    + exact Hg.
+    + exact Hf.
+    + apply IH with b0; assumption.
+Qed.
+
+Lemma B_rooted_depth_back : forall n a,
+  B_rooted_depth n a ->
+  exists a' b, back n a a' /\ g b = a' /\ no_f_preimage b.
+Proof.
+  intros n a H. induction H as [a b Hg Hn | n a b a1 Hg Hf H1 IH].
+  - exists a, b. split; [apply back_0 | split; assumption].
+  - destruct IH as [a2 [b2 [Hb [Hg2 Hn2]]]].
+    exists a2, b2. split; [| split; assumption].
+    apply back_S with b a1; assumption.
+Qed.
+
+Lemma back_B_rooted_depth : forall n a a',
+  back n a a' -> forall b, g b = a' -> no_f_preimage b -> B_rooted_depth n a.
+Proof.
+  intros n a a' H. induction H as [a | n a b a1 a2 Hg Hf Hb IH].
+  - intros b Hg Hn. apply B_rooted_depth_0 with b; assumption.
+  - intros b0 Hg0 Hn0. apply B_rooted_depth_S with b a1.
+    + exact Hg.
+    + exact Hf.
+    + apply IH with b0; assumption.
+Qed.
+
+(* the criterion of the file is exactly "the chain stops in B" *)
+Lemma B_rooted_iff_B_stops : forall a, B_rooted a <-> B_stops a.
+Proof.
+  intro a. split.
+  - intros [n H]. destruct (@B_rooted_depth_back n a H) as [a' [b Hx]].
+    exists n, a', b. exact Hx.
+  - intros [n [a' [b [Hb [Hg Hn]]]]]. exists n.
+    apply back_B_rooted_depth with a' b; assumption.
+Qed.
+
+Theorem chain_trichotomy :
+  forall a : A, B_rooted a \/ A_stops a \/ never_stops a.
+Proof.
+  intro a.
+  destruct (EM (B_rooted a)) as [HB | HnB]; [left; exact HB |].
+  destruct (EM (A_stops a)) as [HA | HnA]; [right; left; exact HA |].
+  right; right. intro n. induction n as [| n [a' Hb]].
+  - exists a. apply back_0.
+  - destruct (EM (exists b, g b = a')) as [[b Hgb] | Hno].
+    + destruct (EM (exists a'', f a'' = b)) as [[a'' Hfa] | Hnf].
+      * exists a''. apply back_extend with a' b; assumption.
+      * exfalso. apply HnB. apply B_rooted_iff_B_stops.
+        exists n, a', b. split; [exact Hb | split; [exact Hgb | exact Hnf]].
+    + exfalso. apply HnA. exists n, a'. split; assumption.
+Qed.
+
+(* ======================== *)
 (* MAIN THEOREM             *)
 (* ======================== *)
 
-Theorem Schroeder_Bernstein : exists h : A -> B,
+(* From excluded middle and extraction of the unique witness. *)
+Theorem Schroeder_Bernstein_definite : exists h : A -> B,
   (forall a1 a2, h a1 = h a2 -> a1 = a2) /\
   (forall b, exists a, h a = b).
 Proof.
@@ -365,12 +491,31 @@ Qed.
 
 End SchroederBernstein.
 
+(* The theorem under the two logical assumptions of the formalization:
+   the instance of the premises at classic (L3) and L4_definite (L4 applied
+   to a unique witness).  Statement unchanged. *)
+Theorem Schroeder_Bernstein :
+  forall (A B : Type) (f : A -> B) (g : B -> A),
+    (forall a1 a2, f a1 = f a2 -> a1 = a2) ->
+    (forall b1 b2, g b1 = g b2 -> b1 = b2) ->
+    exists h : A -> B,
+      (forall a1 a2, h a1 = h a2 -> a1 = a2) /\
+      (forall b, exists a, h a = b).
+Proof.
+  intros A B f g Hf Hg.
+  exact (@Schroeder_Bernstein_definite classic (@L4_definite) A B f g Hf Hg).
+Qed.
+
 (* ======================== *)
 (* VERIFICATION             *)
 (* ======================== *)
 
+Check Schroeder_Bernstein_definite.
+Print Assumptions Schroeder_Bernstein_definite.
+(* Closed under the global context *)
 Check Schroeder_Bernstein.
 Print Assumptions Schroeder_Bernstein.
+(* classic + L4_witness *)
 
 (* 
    COMPLETE PROOF - NO ADMITTED LEMMAS
@@ -395,11 +540,15 @@ Print Assumptions Schroeder_Bernstein.
    - We use classical logic to decide B_rooted, but the STRUCTURE is finite
    - This demonstrates P4 (Finite Actuality): at any point, we work with finite depth
    
-   AXIOMS USED:
+   PRINCIPLES USED (as premises of Schroeder_Bernstein_definite):
 
-   - classic (excluded middle) - this is L3 in Theory of Systems
-   - L4_definite (CDD) - for partial inverses
-     (weaker than epsilon: only extracts UNIQUE witnesses)
+   - EM: excluded middle - this is L3 in Theory of Systems
+   - DD: extraction of the UNIQUE witness - for the partial inverses and
+     for the truth-bit in em_inf
 
-   NO epsilon. NO actual infinity. Chains are characterized by FINITE depth.
+   Schroeder_Bernstein instantiates them at classic and L4_definite, so the
+   compiler reports classic + L4_witness for it.  L4_witness in its full
+   strength (an arbitrary witness; choice over families and epsilon follow
+   from it) is not used.  No actual infinity: chains are characterized by
+   FINITE depth.
 *)

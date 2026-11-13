@@ -2,7 +2,7 @@
     Elements: tree WQO, bounded-depth Kruskal, growing sequences
     Roles:    Higman → Kruskal → L5 strengthened
     Rules:    finite trees form WQO under homeomorphic embedding
-    STATUS:   15 Qed, 0 Admitted, 0 new axioms
+    STATUS:   12 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     Kruskal's tree theorem: FTree under tree_embed is WQO.
@@ -12,6 +12,14 @@
     3. Bounded-depth trees (by Higman on child lists)
     Full Kruskal for arbitrary sequences requires minimal bad sequence
     argument — stated but not fully proved (honest assessment).
+
+    HONEST SCOPE (Nov 2026).  chain_wqo and fork_wqo speak about ONE fixed
+    sequence (chain 0, chain 1, ...); growing_wqo returns its premise at
+    k = 0; L5_from_kruskal is their conjunction with depth0_wqo.  The wqo
+    property for FAMILIES is in KruskalTree.v: kruskal_chains, kruskal_forks
+    (any sequence of chains / forks).  Here: depth1_wqo (any sequence of
+    stars) and depth_le1_wqo (any sequence of trees of depth <= 1, leaves and
+    stars mixed).  Item 3 above ("bounded depth by Higman") is not proved.
 *)
 
 From Stdlib Require Import List Lia Bool PeanoNat.
@@ -186,4 +194,28 @@ Proof.
   - exact chain_wqo.
   - exact fork_wqo.
   - exact depth0_wqo.
+Qed.
+
+(* ================================================================= *)
+(* Nov 2026: ALL TREES OF DEPTH <= 1 (leaves and stars mixed)          *)
+(* ================================================================= *)
+
+Definition depth_le1 (t : FTree) : Prop :=
+  t = FLeaf \/ exists m, t = FNode (repeat FLeaf m).
+
+Theorem depth_le1_wqo : forall f : nat -> FTree,
+  (forall k, depth_le1 (f k)) ->
+  exists i j, (i < j)%nat /\ tree_embed (f i) (f j).
+Proof.
+  intros f Hd.
+  pose (g := fun k => match f k with FLeaf => 0 | FNode ch => S (length ch) end).
+  destruct (KruskalTree.wqo_nat_le g) as [i [j [Hij Hle]]].
+  exists i, j. split; [exact Hij |].
+  unfold g in Hle.
+  destruct (Hd i) as [Hi | [mi Hi]]; rewrite Hi in *.
+  - constructor.
+  - destruct (Hd j) as [Hj | [mj Hj]]; rewrite Hj in *.
+    + exfalso. lia.
+    + apply depth1_grows_with_children.
+      rewrite !repeat_length in Hle. lia.
 Qed.

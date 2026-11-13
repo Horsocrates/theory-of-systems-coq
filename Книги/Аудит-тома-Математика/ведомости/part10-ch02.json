@@ -1,0 +1,609 @@
+{
+ "batch": "audit-part-10",
+ "chapter": "10 Теория множеств без аксиомы выбора/02 Счётность конструктивна; несчётность — правило о процессах.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 17,
+   "theorem": "Q_bijection",
+   "file": "src/Countability_Q.v",
+   "claim": "*счётность* — правило-обход: процедура, присваивающая каждому предмету номер (и обратно).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Countability_Q.v:759 Q_bijection: (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) — обе стороны обхода заданы функциями enum_Q (:582) и index_of_Q (:683). В главе теорема не названа."
+  },
+  {
+   "line": 18,
+   "theorem": "cantor_for_processes",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "*несчётность* — правило различения: процедура, которая по *любому* перечислению порождает процесс, отличный от каждого перечисленного (диагональ).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Для двоичных процессов верно без условий: cantor_for_processes (ProcessDiagonal.v:118): forall f : nat -> BinProcess, exists g, forall n, ~ bp_eq g (f n). Для отрезка теорема требует регулярности перечисления — см. запись к стр. 95."
+  },
+  {
+   "line": 20,
+   "theorem": null,
+   "claim": "Диагностика та же, что в Главе 4.4 («несчётность как правило»), теперь на уровне самой теории множеств",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отсылка сверена: Глава 4.4 «Несчётность процессов», стр. 789–793 — «не свойство завершённого множества, а правило о процессах»."
+  },
+  {
+   "line": 27,
+   "theorem": null,
+   "claim": "счётность ℚ, весь диагональный результат над $2^{ℕ}$ и несчётность отрезка $[0,1]$ в трисекционной версии *конструктивны* (0 аксиом;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена верна: Q_positive_countable, Q_countable, Q_bijection (Countability_Q.v); diagonal_differs, binary_processes_not_enumerable, cantor_for_processes (ProcessDiagonal.v); unit_interval_uncountable_trisect_v2 (ShrinkingIntervals_ERR.v) — Closed under the global context. Оговорки: теорема об отрезке доказана для регулярных перечислений (запись к стр. 95); в ProcessDiagonal.v одна лемма из двадцати — bp_eq_not_enum_witness (:208) — стоит на Classical_Prop.classic, она не о диагонали (заметки, сомнительные места).",
+   "assumptions": "Q_positive_countable, Q_countable, Q_bijection, diagonal_differs, binary_processes_not_enumerable, cantor_for_processes, unit_interval_uncountable_trisect_v2: Closed under the global context"
+  },
+  {
+   "line": 29,
+   "theorem": null,
+   "file": "src/Countability_Q.v",
+   "claim": "`Countability_Q.v` даже не подключает классическую логику",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Импорты файла (стр. 20–26): QArith, Qcanon, ZArith, PArith.Pnat, PeanoNat, Lia, List; классического модуля и ToS_Axioms среди них нет."
+  },
+  {
+   "line": 30,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "*структурное* утверждение о завершённой стороне — дихотомия «не более чем счётно либо содержит совершенное подмножество» (Глава 4.5) — опирается на классическую логику (L3) и извлечение свидетеля.[^1]",
+   "page_price": "L3 и извлечение свидетеля (L4)",
+   "verdict": "ok",
+   "note": "ProcessContinuumHypothesis.v:620: forall C : BinCollection, is_closed C -> is_enumerable C \\/ has_perfect_subset C. is_closed C (:44) — C есть совокупность путей дерева list bool -> bool; is_enumerable (ProcessTypes.v:54) — покрывается некоторым f : nat -> BinProcess (пустая и конечная совокупности включены: «не более чем счётно»). Print Assumptions: Classical_Prop.classic и ToS_Axioms.L4_witness. Условие замкнутости глава называет на стр. 35."
+  },
+  {
+   "line": 34,
+   "theorem": null,
+   "claim": "L3 не нужен ни для диагональной схемы $\\forall f$ над двоичными процессами, ни для трисекции: обе строятся шаг за шагом; он входит там, где о замкнутой совокупности процессов утверждается, какова она *целиком*.",
+   "page_price": "L3 не нужен для диагонали и трисекции; нужен для дихотомии",
+   "verdict": "ok",
+   "note": "binary_processes_not_enumerable, cantor_for_processes, unit_interval_uncountable_trisect_v2 — Closed under the global context; в доказательстве process_continuum_hypothesis classic применён прямо (ProcessContinuumHypothesis.v:626) и в леммах о ядре (стр. 258–529)."
+  },
+  {
+   "line": 37,
+   "theorem": null,
+   "claim": "Граница финитизации совпадает с границей конструктивности — это пройдёт сквозь всю главу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис-наблюдение (так он назван на стр. 159); теоремы с такой формулировкой глава не называет и ей не приписывает. Опора — три ответа компилятора: ядро без допущений, дихотомия на classic и L4_witness."
+  },
+  {
+   "line": 41,
+   "theorem": null,
+   "claim": "Конструктивное ядро (обход ℚ, диагональ, трисекция) свободно от аксиом; классическая логика входит там, где завершённая сторона классифицируется целиком.",
+   "page_price": "ядро — 0 аксиом; дихотомия — классическая логика",
+   "verdict": "ok",
+   "note": "Ядро: Closed under the global context (см. запись к стр. 27). Дихотомия: Classical_Prop.classic и ToS_Axioms.L4_witness; второе допущение названо на стр. 32 и в сноске 1."
+  },
+  {
+   "line": 46,
+   "theorem": "Q_bijection",
+   "file": "src/Countability_Q.v",
+   "claim": "Что $ℚ$ «счётно», в ToS означает: есть *явный обход* — биекция между $ℕ$ и рациональными.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q_bijection (Countability_Q.v:759): index_of_Q (enum_Q n) = n и enum_Q (index_of_Q q) == q — взаимно обратные функции, рациональные берутся с точностью до равенства дробей (==). Closed under the global context."
+  },
+  {
+   "line": 47,
+   "theorem": "cw_node_injective",
+   "file": "src/Countability_Q.v",
+   "claim": "Её строит дерево Калкина–Уилфа: каждый положительный рациональный получается из $1/1$ единственным конечным путём левых/правых шагов, и нумерация узлов $1,2,3,…$ перечисляет все несократимые положительные дроби *ровно по одному разу*.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cw_node (:98) — узел по двоичной записи номера; единственность пути — cw_node_injective (:246); существование — cw_node_path_roundtrip (:439): для взаимно простых a, b cw_node (path_to_node (a, b)) = (a, b); несократимость узлов — cw_node_coprime (:174); enum_QPos n = cw_node (Pos.of_nat (S n)) (:106). Все — Closed under the global context."
+  },
+  {
+   "line": 50,
+   "theorem": "Q_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "Знак добавляется тривиально, и обход покрывает все $ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "enum_Q (:582): 0 ↦ 0, нечётные номера — положительные, чётные — отрицательные; Q_countable (:610): forall q : Q, exists n, enum_Q n == q. Closed under the global context."
+  },
+  {
+   "line": 54,
+   "theorem": "index_of_Q",
+   "file": "src/Countability_Q.v",
+   "claim": "а *правило*: вычислимая процедура, сопоставляющая каждому рациональному уникальный номер и каждому номеру — рациональное.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "index_of_Q (:683) и enum_Q (:582) — определения, вычисляются: enum_Q 3 = 1#2, index_of_Q (3#4) = index_of_Q (6#8) = 27 (пробный файл CheckQ.v). «Уникальный»: равным дробям — один номер, разным — разные; отдельными леммами в файле не записано, из Q_bijection следует (CheckQ.v: index_of_Q_wd, index_of_Q_inj — Closed under the global context)."
+  },
+  {
+   "line": 55,
+   "theorem": "enum_Q",
+   "file": "src/Countability_Q.v",
+   "claim": "Это процесс, который можно *исполнить*: дайте номер — верну дробь; дайте дробь — верну номер.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено вычислением (vm_compute, CheckQ.v): enum_Q 0…6 = 0, 1, −1, 1/2, −1/2, 2, −2; index_of_Q (−2) = 6, index_of_Q 0 = 0. Допущений у определений нет."
+  },
+  {
+   "line": 58,
+   "theorem": "Q_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "Поэтому счётность ℚ не стоит ни одной аксиомы: ни выбора, ни бесконечности, ни даже исключённого третьего.",
+   "page_price": "ни одной аксиомы",
+   "verdict": "ok",
+   "note": "Print Assumptions Q_countable, Q_bijection, Q_positive_countable — Closed under the global context."
+  },
+  {
+   "line": 61,
+   "theorem": "enum_QPos",
+   "file": "src/Countability_Q.v",
+   "claim": "*Счётность — роль «быть перечислимым», реализованная конструктивным правилом-обходом (`enum_QPos`); это исполнимая процедура, а не ярлык размера готового множества.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "enum_QPos (:106): nat -> QPos — обход положительных несократимых пар; обход всех рациональных — enum_Q (:582). Допущений нет."
+  },
+  {
+   "line": 69,
+   "theorem": "diagonal",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Построим *диагональ*: процесс $d$, который в точке $n$ берёт значение $f(n)$ в той же точке $n$ и *переворачивает* его,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDiagonal.v:41: Definition diagonal (f : nat -> BinProcess) : BinProcess := fun n => flip (f n n); BinProcess := nat -> bool (ProcessTypes.v:34). Формула главы совпадает с определением."
+  },
+  {
+   "line": 76,
+   "theorem": "diagonal_ne_at_n",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Тогда $d$ отличается от каждого $f(n)$ хотя бы в точке $n$: по построению $d(n)\\neq f(n)(n)$.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diagonal_ne_at_n (:80): forall f n, diagonal f n <> f n n. Closed under the global context. В главе лемма не названа."
+  },
+  {
+   "line": 79,
+   "theorem": "not_enum_surj",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Дайте ей перечисление — она вернёт *свежий* процесс, которого в перечислении нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "not_enum_surj (:125): forall f, exists p, forall n, ~ bp_eq (f n) p; свидетель — diagonal f. Closed under the global context."
+  },
+  {
+   "line": 81,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Здесь ещё нет ни «несчётного множества», ни кардинала — есть лишь процедура, которая для любого $ℕ$-индексированного перечисления строит процесс, отличный от каждой строки;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diagonal_differs (:85): forall f n, ~ bp_eq (diagonal f) (f n); bp_eq — поточечное равенство (ProcessTypes.v:37). Условий на f нет."
+  },
+  {
+   "line": 83,
+   "theorem": "diagonal_prefix_determines",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "на каждом конечном фронте это видно как конечный набор уже предъявленных различий.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diagonal_prefix_determines (:163): bp_prefix (diagonal f) (S n) = bp_prefix (diagonal f) n ++ [flip (f n n)] — начальный отрезок диагонали растёт по одному перевёрнутому биту. Closed under the global context."
+  },
+  {
+   "line": 86,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "*Диагональ — роль-опровергатель: правило, конструктивно порождающее процесс, отличный от каждого перечисленного. На этом уровне — 0 аксиом, чистый порождающий шаг.*",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions diagonal_differs — Closed under the global context."
+  },
+  {
+   "line": 91,
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Из `diagonal_differs` немедленно следует: ни одно перечисление не *исчерпывает* двоичные процессы — для любого $f$ диагональ $d$ не равна никакому $f(n)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "binary_processes_not_enumerable (:108): ~ exists f : nat -> BinProcess, forall p, exists n, bp_eq (f n) p; доказательство (:110–116) — diagonal_differs и симметрия bp_eq."
+  },
+  {
+   "line": 92,
+   "theorem": "cantor_for_processes",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Это и есть канторов результат над $2^{ℕ}$.[^4] Здесь $2^{ℕ}$ — *пространство двоичных процессов*, а не уже построенное степенное множество $\\mathcal{P}(ℕ)$ в ZFC-смысле",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Обе теоремы говорят о функциях nat -> bool (BinProcess, ProcessTypes.v:34) и их перечислениях; множества-степени в формулировках нет."
+  },
+  {
+   "line": 95,
+   "theorem": "unit_interval_uncountable_general_definite",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "Для действительных чисел работает тот же приём в непрерывной форме — *трисекция*: по перечислению точек $[0,1]$ строится вложенная последовательность отрезков, отсекающая каждую перечисленную точку, и определяемый ею процесс лежит в $[0,1]$, но вне перечисления.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): было «по любому перечислению… и её предел лежит в [0,1]» при теореме, требовавшей регулярности. Теперь слова о перечислении общие, а цена названа следующими фразами. unit_interval_uncountable_modulated : forall E mu, valid_modulated_enumeration E mu -> exists D, is_Cauchy D /\\ (forall m, 0 <= D m <= 1) /\\ (forall n, not_equiv D (E n)) — Closed under the global context; теорема ShrinkingIntervals_ERR.v (регулярные перечисления) — её частный случай (regular_is_modulated). unit_interval_uncountable_general_definite: то же для valid_enumeration (произвольные процессы Коши в [0,1]) из двух посылок — исключённого третьего и извлечения единственного свидетеля (наименьшая скорость) — Closed under the global context; unit_interval_uncountable_general: без исключённого третьего, Axioms: ToS_Axioms.L4_witness. Теоремы дают процесс Коши со значениями в [0,1]; рационального предела не утверждают."
+  },
+  {
+   "line": 105,
+   "theorem": null,
+   "claim": "Вот где проходит честная граница — и она лежит не между «шагом» и «квантором» и не между *двоичными процессами* и *вещественным отрезком*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Согласуется с компилятором: и теоремы с квантором по перечислениям (binary_processes_not_enumerable, cantor_for_processes), и теорема об отрезке — Closed under the global context."
+  },
+  {
+   "line": 106,
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Над $2^{ℕ}$ всё конструктивно, включая квантор $\\forall f$: `binary_processes_not_enumerable` и `cantor_for_processes` доказываются чистым применением 0-аксиомной `diagonal_differs`, без L3.",
+   "page_price": "0 аксиом, без L3",
+   "verdict": "ok",
+   "note": "Print Assumptions обеих теорем — Closed under the global context; доказательства (:110–116, :120–123) применяют diagonal_differs (первая — ещё bp_eq_sym)."
+  },
+  {
+   "line": 109,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Конструктивна и *вещественная* трисекционная версия: при заданной скорости сходимости перечисленных процессов формальная теорема несчётности $[0,1]$ проверена командой `Print Assumptions` и не опирается ни на одно допущение",
+   "page_price": "ни одного допущения",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): добавлено условие «при заданной скорости сходимости». unit_interval_uncountable_trisect_v2 (регулярные перечисления) и unit_interval_uncountable_modulated (любая заданная скорость) — Closed under the global context. Устойчивость зазора для процессов Коши — not_equiv_stable_gap (UnitIntervalUncountableGeneral.v), Closed."
+  },
+  {
+   "line": 112,
+   "theorem": "diagonal_trisect_v2_differs_from_E_n",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "различие диагонального процесса и каждого члена перечисления предъявляется явным устойчивым зазором, без классического разрешения.",
+   "page_price": "без классической логики",
+   "verdict": "ok",
+   "note": "В доказательстве (:3423–3562) зазор gap держится при всех m >= max(trisect_ref n, n+1). В формулировке not_equiv (:1109) записано слабее: exists eps > 0, forall N, exists m > N, |D m − E n m| >= eps (сколь угодно поздно, а не начиная с некоторого шага). Для двух процессов Коши одно влечёт другое: пробный файл Check.v, not_equiv_stable_gap — Closed under the global context."
+  },
+  {
+   "line": 114,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Иными словами: оба диагональных результата свободны от аксиом; L3 отмеряет следующий шаг — дихотомию завершённой стороны (Глава 4.5).",
+   "page_price": "диагональные результаты — 0 аксиом; дихотомия — L3",
+   "verdict": "ok",
+   "note": "Диагональные результаты — Closed under the global context. У дихотомии компилятор называет два допущения: Classical_Prop.classic и ToS_Axioms.L4_witness; второе глава называет на стр. 32 и в сноске 1, здесь — сокращённо."
+  },
+  {
+   "line": 119,
+   "theorem": "unit_interval_uncountable_modulated",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "«процессы сопротивляются всякому перечислению». Это правило конструктивно целиком — и над двоичными процессами, и над процессами отрезка с заданной скоростью сходимости;",
+   "page_price": "0 аксиом при заданной скорости",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): было «и над процессами отрезка» без условия. unit_interval_uncountable_modulated : forall E mu, valid_modulated_enumeration E mu -> exists D, is_Cauchy D /\\ (forall m, 0 <= D m <= 1) /\\ (forall n, not_equiv D (E n)) — Closed under the global context; теорема ShrinkingIntervals_ERR.v (регулярные перечисления) — её частный случай (regular_is_modulated)."
+  },
+  {
+   "line": 121,
+   "theorem": "unit_interval_uncountable_general_definite",
+   "claim": "закон исключённого третьего нужен там, где скорость приходится извлекать, и там, где завершённая сторона классифицируется *целиком*.",
+   "page_price": "L3 — только в дихотомии",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): было «нужен лишь там, где завершённая сторона классифицируется целиком». unit_interval_uncountable_general_definite: то же для valid_enumeration (произвольные процессы Коши в [0,1]) из двух посылок — исключённого третьего и извлечения единственного свидетеля (наименьшая скорость) — Closed under the global context; unit_interval_uncountable_general: без исключённого третьего, Axioms: ToS_Axioms.L4_witness. Необходимость исключённого третьего (или L4) для произвольных перечислений не доказана: это цена нынешних доказательств.",
+   "file": "src/UnitIntervalUncountableGeneral.v"
+  },
+  {
+   "line": 124,
+   "theorem": "unit_interval_uncountable_modulated",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "*Несчётность — роль «сопротивляться перечислению»: для любого обхода правило-диагональ порождает процесс вне его. Оно конструктивно целиком (0 аксиом) — над $2^{ℕ}$ и над отрезком при заданной скорости сходимости; классична (L3) дихотомия завершённой стороны.",
+   "page_price": "0 аксиом при заданной скорости",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): было «над 2^ℕ и над отрезком» без условия. unit_interval_uncountable_modulated : forall E mu, valid_modulated_enumeration E mu -> exists D, is_Cauchy D /\\ (forall m, 0 <= D m <= 1) /\\ (forall n, not_equiv D (E n)) — Closed under the global context; теорема ShrinkingIntervals_ERR.v (регулярные перечисления) — её частный случай (regular_is_modulated)."
+  },
+  {
+   "line": 133,
+   "theorem": null,
+   "claim": "| *Rules* (L5) | правило-обход (перечисление-биекция, Калкин–Уилф); правило-различение (диагональ над битами, трисекция над отрезками) |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три правила соответствуют определениям enum_QPos / enum_Q (Countability_Q.v:106, :582), diagonal (ProcessDiagonal.v:41), diagonal_trisect_v2 (ShrinkingIntervals_ERR.v)."
+  },
+  {
+   "line": 135,
+   "theorem": null,
+   "claim": "на каждой стадии — конечное данное: рациональное (узел дерева), конечный бит/путь, вложенный отрезок; «несчётное множество» завершённым Элементом не является |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует типам: cw_node p : positive * positive; bp_prefix p n : list bool; состояние трисекции — пара рациональных концов (BisectionState). Типа «множество всех процессов» в формулировках нет."
+  },
+  {
+   "line": 137,
+   "theorem": "Q_positive_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "**Корректность.** Обход корректен как биекция (инъективность${}+{}$сюръективность, `Q_positive_countable`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Countability_Q.v:471: (forall n m, enum_QPos n = enum_QPos m -> n = m) /\\ (forall a b, Z.gcd (Z.pos a) (Z.pos b) = 1 -> exists n, enum_QPos n = (a, b)) — биекция с положительными несократимыми парами (попадание в несократимые — enum_coprime, :189). Для всех рациональных то же даёт Q_bijection (:759). Closed under the global context."
+  },
+  {
+   "line": 138,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "диагональ корректна как тотальная функция, отличная от каждой строки (`diagonal_differs`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diagonal f : BinProcess — функция, определённая при всех n; diagonal_differs (:85): forall f n, ~ bp_eq (diagonal f) (f n)."
+  },
+  {
+   "line": 141,
+   "theorem": null,
+   "claim": "**Что даёт.** Счётность ℚ — исполнимая процедура (0 аксиом); канторов результат над $2^{ℕ}$ — следствие 0-аксиомной диагонали; несчётность $[0,1]$ — трисекционная теорема, тоже без допущений.",
+   "page_price": "0 аксиом; без допущений",
+   "verdict": "ok",
+   "note": "Цена всех трёх верна (Closed under the global context). Теорема об отрезке — для регулярных перечислений (запись к стр. 95)."
+  },
+  {
+   "line": 149,
+   "theorem": null,
+   "claim": "**Честные границы.** Асимметрия аксиом не косметична: конструктивное ядро (обход, диагональ, трисекция) и классическая надстройка (дихотомия завершённой стороны) разделены ровно границей P4.",
+   "page_price": "ядро — без аксиом; дихотомия — классическая",
+   "verdict": "ok",
+   "note": "Распределение допущений подтверждено компилятором: ядро — Closed under the global context; process_continuum_hypothesis — Classical_Prop.classic и ToS_Axioms.L4_witness. «Ровно границей P4» — толкование, теоремой не выражено."
+  },
+  {
+   "line": 151,
+   "theorem": null,
+   "claim": "Завершённых $\\aleph$-кардиналов ToS не строит; «мощность континуума как число» здесь не объект, а роль-предельный вопрос.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус честен: поиск по src — определений алеф-кардиналов нет (слово встречается один раз, в шапке settheory/CardinalityWithoutChoice.v:11: «no aleph»)."
+  },
+  {
+   "line": 154,
+   "theorem": null,
+   "claim": "*Счётность — конструктивное правило-обход; несчётность — правило-сопротивление, тоже конструктивное; классична лишь классификация завершённой стороны.",
+   "page_price": "конструктивно; классична дихотомия",
+   "verdict": "ok",
+   "note": "Согласуется с компилятором (см. записи к стр. 27 и 30); для отрезка — при условии регулярности перечисления (запись к стр. 95)."
+  },
+  {
+   "line": 160,
+   "theorem": "enum_QPos",
+   "file": "src/Countability_Q.v",
+   "claim": "Счётность ℚ есть конструктивный обход (`enum_QPos`, 0 аксиом);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена верна. Неточность ссылки: enum_QPos обходит положительные несократимые пары; обход всех рациональных — enum_Q (:582), его свойства — Q_countable (:610) и Q_bijection (:759). Все — Closed under the global context."
+  },
+  {
+   "line": 161,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "несчётность есть правило-диагональ (`diagonal_differs`, 0 аксиом на шаге), доводимое до утверждения об отрезке трисекцией (`unit_interval_uncountable_trisect_v2`, тоже 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена обеих — Closed under the global context. Теорема об отрезке из diagonal_differs не выводится: ShrinkingIntervals_ERR.v файл ProcessDiagonal.v не подключает, доказательства независимы; общее у них — приём (на шаге n уйти от n-го члена). Теорема об отрезке — для регулярных перечислений."
+  },
+  {
+   "line": 163,
+   "theorem": null,
+   "claim": "Классическая логика входит позже — в дихотомии завершённой стороны; там граница финитизации и совпадает с границей конструктивности — наблюдение, к которому Часть X будет возвращаться.",
+   "page_price": "классическая логика — в дихотомии",
+   "verdict": "ok",
+   "note": "статус честен: совпадение границ названо наблюдением. У дихотомии компилятор называет Classical_Prop.classic и ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 170,
+   "theorem": "cardinal_antisym_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Шрёдер–Бернштейн делает это $\\le$ антисимметричным с точностью до биекции, а общая теорема Кантора показывает, что максимальной мощности нет — и всё это без выбора.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 1): страница не менялась, слова «без выбора» теперь опираются на теорему. cardinal_antisym_definite : ExcludedMiddle -> UniqueWitness -> forall A B, injects A B -> injects B A -> bijects A B — Closed under the global context; cardinal_antisym — её частный случай (classic + L4_witness). no_maximal_cardinality — Closed."
+  },
+  {
+   "line": 171,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "общая теорема Кантора показывает, что максимальной мощности нет",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "settheory/CardinalityWithoutChoice.v:108: forall X : Type, ~ surjects X (X -> bool); settheory/CantorTheoremGeneral.v:55 cantor_no_surjection — для любого X. Обе — Closed under the global context. Формулировка сверяется в аудите Главы 10.3."
+  },
+  {
+   "line": 174,
+   "theorem": null,
+   "claim": "Конструктивное ядро свободно от аксиом; классическая логика отмеряет ровно классификацию завершённой стороны — ни шагом больше.",
+   "page_price": "ядро — без аксиом; классическая логика — только дихотомия",
+   "verdict": "ok",
+   "note": "Распределение допущений подтверждено компилятором. Две оговорки (заметки, сомнительные места): у дихотомии, кроме classic, стоит L4_witness; что дихотомию нельзя получить без classic, в формализации не доказано — компилятор показывает лишь, что нынешнее доказательство его применяет."
+  },
+  {
+   "line": 179,
+   "theorem": null,
+   "file": "src/Countability_Q.v",
+   "claim": "Счётность: `Countability_Q.v`, заголовок «AXIOMS: NONE (not even classic!)».",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Countability_Q.v:15: «AXIOMS: NONE (not even classic!) - fully constructive»; компилятор подтверждает (Q_positive_countable, Q_countable, Q_bijection — Closed under the global context)."
+  },
+  {
+   "line": 179,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Диагональ: `diagonal_differs` (`ProcessDiagonal.v`) — файл явно печатает `Print Assumptions` и получает «Closed under the global context».",
+   "page_price": "Closed under the global context",
+   "verdict": "ok",
+   "note": "ProcessDiagonal.v:94: Print Assumptions diagonal_differs; ответ сборки — Closed under the global context."
+  },
+  {
+   "line": 179,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Несчётность $[0,1]$: `unit_interval_uncountable_trisect_v2` (`ShrinkingIntervals_ERR.v`) — `Print Assumptions` даёт «Closed under the global context».",
+   "page_price": "Closed under the global context",
+   "verdict": "ok",
+   "note": "Команда стоит в файле (:3632); ответ сборки — Closed under the global context. Запись сверки 12.11 подтверждена."
+  },
+  {
+   "line": 179,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "Дихотомия: `process_continuum_hypothesis` (`ProcessContinuumHypothesis.v`) — `classic` (L3) и `L4_witness`.",
+   "page_price": "classic (L3) и L4_witness",
+   "verdict": "ok",
+   "note": "Print Assumptions: Classical_Prop.classic и ToS_Axioms.L4_witness — совпадает дословно. Формулировка — запись к стр. 30."
+  },
+  {
+   "line": 179,
+   "theorem": "classic",
+   "file": "src/ToS_Axioms.v",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "`classic` (L3) и `L4_witness`.",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "В допущениях process_continuum_hypothesis стоит Classical_Prop.classic стандартной библиотеки; ToS_Axioms.v её реэкспортирует. Одноимённые местные объявления (foundation/Distinction.v, settheory/BorelDeterminacy.v) здесь не участвуют."
+  },
+  {
+   "line": 179,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "(L3) и `L4_witness`.",
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "ToS_Axioms.v:105: Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x}; стоит в допущениях process_continuum_hypothesis."
+  },
+  {
+   "line": 180,
+   "theorem": "enum_QPos",
+   "file": "src/Countability_Q.v",
+   "claim": "`enum_QPos` (`Countability_Q.v`): $ℕ \\to$ несократимые положительные пары;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Countability_Q.v:106: enum_QPos : nat -> QPos, QPos := positive * positive (:42); несократимость значений — отдельная теорема enum_coprime (:189), Closed under the global context."
+  },
+  {
+   "line": 180,
+   "theorem": "enum_injective",
+   "file": "src/Countability_Q.v",
+   "claim": "`enum_injective` и `enum_surjective` дают биекцию, собранную в `Q_positive_countable`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "enum_injective (:291): forall n m, enum_QPos n = enum_QPos m -> n = m. Closed under the global context."
+  },
+  {
+   "line": 180,
+   "theorem": "enum_surjective",
+   "file": "src/Countability_Q.v",
+   "claim": "и `enum_surjective` дают биекцию, собранную в `Q_positive_countable`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "enum_surjective (:450): forall a b : positive, Z.gcd (Z.pos a) (Z.pos b) = 1 -> exists n, enum_QPos n = (a, b) — сюръективность на несократимые пары; свидетель вычисляется (index_of_QPos). Closed under the global context."
+  },
+  {
+   "line": 180,
+   "theorem": "Q_positive_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "дают биекцию, собранную в `Q_positive_countable`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q_positive_countable (:471) — конъюнкция enum_injective и enum_surjective. Closed under the global context."
+  },
+  {
+   "line": 180,
+   "theorem": "enum_Q",
+   "file": "src/Countability_Q.v",
+   "claim": "знаковое расширение на все $ℚ$ — `enum_Q`. Полностью конструктивно, **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "enum_Q (:582) — определение; теоремы о нём — Q_countable (:610, каждое рациональное получено) и Q_bijection (:759, взаимная обратность с index_of_Q) — Closed under the global context; в сноске они не названы."
+  },
+  {
+   "line": 181,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`diagonal` и `diagonal_differs` (`ProcessDiagonal.v`): $\\forall f n,\\ \\lnot \\texttt{bp\\_eq} (\\texttt{diagonal} f) (f n)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с утверждением: Lemma diagonal_differs : forall f n, ~ bp_eq (diagonal f) (f n) (:85)."
+  },
+  {
+   "line": 181,
+   "theorem": "flip_neq",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "Используется только то, что `flip` (булево отрицание) не оставляет на месте ни одно значение (`flip_neq`: $\\texttt{flip}\\ b \\neq b$); **0 аксиом** — файл это печатает.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): было «используется только инволютивность flip» — доказательство diagonal_differs применяет flip_neq : forall b, flip b <> b; одной инволютивности недостаточно (тождественная функция инволютивна). Closed under the global context."
+  },
+  {
+   "line": 182,
+   "theorem": "cantor_for_processes",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "`binary_processes_not_enumerable` и `cantor_for_processes` (`ProcessDiagonal.v`) — оба опираются на 0-аксиомную `diagonal_differs`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cantor_for_processes (:118): forall f : nat -> BinProcess, exists g, forall n, ~ bp_eq g (f n); доказательство (:120–123) — свидетель diagonal f и diagonal_differs. Closed under the global context."
+  },
+  {
+   "line": 183,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "`unit_interval_uncountable_trisect_v2` (`ShrinkingIntervals_ERR.v`) — главная теорема файла: никакое *регулярное* перечисление (каждый член — процесс в $[0,1]$ с оценкой $|R_m - R_k| \\le 1/m + 1/k$) не исчерпывает процессы отрезка.",
+   "page_price": "0 допущений",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 3, слово автора): было «[0,1] несчётен» без условия. unit_interval_uncountable_trisect_v2 : forall E, valid_regular_enumeration E -> exists D, is_Cauchy D /\\ (forall m, 0 <= D m <= 1) /\\ (forall n, not_equiv D (E n)). Closed under the global context."
+  },
+  {
+   "line": 183,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Допущений нет: файл импортирует классический модуль, но в доказательстве `classic` не применяется.",
+   "page_price": "допущений нет",
+   "verdict": "ok",
+   "note": "Импорты: ToS_Axioms (:72) и Classical_Pred_Type (:73); Print Assumptions — Closed under the global context; слово classic в файле встречается только в комментариях."
+  },
+  {
+   "line": 183,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новая теорема шага 3. unit_interval_uncountable_modulated : forall E mu, valid_modulated_enumeration E mu -> exists D, is_Cauchy D /\\ (forall m, 0 <= D m <= 1) /\\ (forall n, not_equiv D (E n)) — Closed under the global context; теорема ShrinkingIntervals_ERR.v (регулярные перечисления) — её частный случай (regular_is_modulated).",
+   "theorem": "unit_interval_uncountable_modulated",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "Любая заданная скорость сходимости — `unit_interval_uncountable_modulated`, 0 аксиом."
+  },
+  {
+   "line": 183,
+   "page_price": "0 аксиом (посылки вместо аксиом)",
+   "verdict": "ok",
+   "note": "Новая теорема шага 3. unit_interval_uncountable_general_definite: то же для valid_enumeration (произвольные процессы Коши в [0,1]) из двух посылок — исключённого третьего и извлечения единственного свидетеля (наименьшая скорость) — Closed under the global context; unit_interval_uncountable_general: без исключённого третьего, Axioms: ToS_Axioms.L4_witness. При classic и L4_definite — unit_interval_uncountable_general_L3_L4 (classic + L4_witness).",
+   "theorem": "unit_interval_uncountable_general_definite",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "Произвольные сходящиеся процессы — `unit_interval_uncountable_general_definite` (из исключённого третьего и извлечения единственного свидетеля как посылок, 0 аксиом)"
+  },
+  {
+   "line": 183,
+   "page_price": "один L4_witness",
+   "verdict": "ok",
+   "note": "Новая теорема шага 3: forall E, valid_enumeration E -> exists D, … ; скорость каждого члена извлекается L4_witness из условия Коши (свидетель не единствен). Axioms: ToS_Axioms.L4_witness.",
+   "theorem": "unit_interval_uncountable_general",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "`unit_interval_uncountable_general` (без исключённого третьего; цена — один `L4_witness`)."
+  },
+  {
+   "line": 101,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "least_witness_exists : (forall P, P \\/ ~ P) -> forall P : nat -> Prop, (exists n, P n) -> exists! n, P n /\\ forall m, m < n -> ~ P m. Closed under the global context. На ней стоит unit_interval_uncountable_general_definite.",
+   "theorem": "least_witness_exists",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "с исключённым третьим извлекается *наименьшая* скорость — свидетель единственный; без исключённого третьего берётся какая-нибудь, и это стоит L4 в полную силу."
+  },
+  {
+   "line": 100,
+   "page_price": "0 допущений",
+   "verdict": "ok",
+   "note": "unit_interval_uncountable_modulated : forall E mu, valid_modulated_enumeration E mu -> exists D, is_Cauchy D /\\ (forall m, 0 <= D m <= 1) /\\ (forall n, not_equiv D (E n)) — Closed under the global context; теорема ShrinkingIntervals_ERR.v (регулярные перечисления) — её частный случай (regular_is_modulated).",
+   "theorem": "unit_interval_uncountable_modulated",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "Если скорость дана, допущений нет."
+  }
+ ]
+}

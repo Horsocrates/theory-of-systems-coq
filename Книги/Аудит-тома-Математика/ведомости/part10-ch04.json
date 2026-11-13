@@ -1,0 +1,689 @@
+{
+ "batch": "audit-part-10",
+ "chapter": "10 Теория множеств без аксиомы выбора/04 Аксиома выбора запрет и переинтерпретация.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 7,
+   "theorem": "Schroeder_Bernstein",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Глава 10.3 локализовала выбор: он не нужен ни для предпорядка вложений, ни для Шрёдера–Бернштейна, ни для Кантора",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "injects_refl, injects_trans, no_maximal_cardinality (settheory/CardinalityWithoutChoice.v:42, :45, :108) — Closed under the global context; Schroeder_Bernstein (:357) и cardinal_antisym — Classical_Prop.classic и ToS_Axioms.L4_witness; схемы выбора в выводе компилятора нет. В пробном файле CheckSB.v то же доказательство проходит с посылкой «извлечение единственного свидетеля» вместо L4_witness (допущения: classic). См. расхождение 6."
+  },
+  {
+   "line": 8,
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "но появляется в переходе сюръекция${}\\to{}$инъекция и в требовании линейности кардинальной шкалы",
+   "page_price": "выбор",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 1): страница не менялась. Выбор действительно входит в переходе «сюръекция → вложение»: surjects_injects_back выводится из L4_witness, применённого к слою (свидетель не единствен); Шрёдеру — Бернштейну хватает единственного свидетеля (Schroeder_Bernstein_definite, Closed). Теоремы о линейности порядка вложений в формализации нет."
+  },
+  {
+   "line": 12,
+   "theorem": "AC_is_L5",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Допустимая *работа* выбора — взять по одному элементу из каждого множества *конечного* семейства (или из приближения процесса) — выполняется *правилом*: позиционным разрешением L5 («голова списка»). Тогда выбор — не аксиома, а *теорема* конечной комбинаторики.",
+   "page_price": "теорема, не аксиома",
+   "verdict": "ok",
+   "note": "AC_is_L5 (:139), finite_choice (:47), P4_eliminates_AC_finite (:217), process_choice_valid (:83) — Closed under the global context. «Множество» в формулировках — список натуральных чисел (list nat), семейство — nat -> list nat: порядок элементов дан самим списком, и глава это называет («голова списка»)."
+  },
+  {
+   "line": 13,
+   "theorem": "completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "*Завершённо-объектная* форма выбора — функция выбора $f:ℕ\\toℕ$, *граф* которой $\\{(n,f(n))\\}$ есть готовая бесконечная совокупность, — *противоречит* P4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формальная опора условна: completed_graph_contradicts_P4 (:108) — P4_stage_bounded actual -> bridge (graph_indices (choice_graph f)) actual -> False. «Готовая совокупность» записана посылкой bridge (все индексы графика актуальны на нулевой стадии). Посылка в главе не названа — расхождение 1."
+  },
+  {
+   "line": 13,
+   "theorem": "AC_on_nat_as_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Уже нат-индексированная completed-object форма AC не «не принимается», а *несовместима* с конечной актуальностью; полная ZFC-AC тем более содержит такую object-форму.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Само утверждение AC_on_nat доказано без допущений (AC_on_nat_as_rule, :160); несовместимость относится к чтению функции выбора как завершённого графика (посылка bridge). О полной ZFC-AC теорем в формализации нет — глава говорит это на стр. 60–61."
+  },
+  {
+   "line": 15,
+   "theorem": null,
+   "claim": "И — синтез: *запрет строго сильнее переинтерпретации*. Если завершённая форма невозможна, то и аксиомой она быть не должна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис, обоснованный рассуждением. Теоремой отношение «строго сильнее» не закреплено — записи к стр. 74, 76, 124, 147, 168 (расхождение 3)."
+  },
+  {
+   "line": 19,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Сразу оговорка, проходящая сквозь главу: принцип L4 (`L4_witness`) — это *не* аксиома выбора.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Axiom L4_witness (:105): (exists x, P x) -> {x | P x} — по записи это извлечение свидетеля из одного существования, не утверждение о семействе. По силе из этой формулировки следует функциональный выбор по произвольному семейству (l4_statement_gives_functional_choice, settheory/ChoicePriceMap.v:164) — глава говорит это в сноске 7."
+  },
+  {
+   "line": 22,
+   "theorem": null,
+   "claim": "*Аксиома выбора — роль-смешение: законное правило разрешения L5 склеено с незаконным завершённым графом. ToS переинтерпретирует первое как теорему и запрещает второе как несовместимое с P4; запрет сильнее переинтерпретации.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сводка раздела. Первое — AC_is_L5, finite_choice (Closed); второе — completed_graph_contradicts_P4 при посылке bridge (расхождение 1); «запрет сильнее» — тезис (расхождение 3)."
+  },
+  {
+   "line": 30,
+   "theorem": "finite_choice",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Для непустого списка голова в нём лежит; для семейства непустых списков функция «голова» даёт выбор сразу для всех.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "L5_choose_in_nonempty (:39): l <> nil -> In (L5_choose l d) l; finite_choice (:47): forall family n, family n <> nil -> In (finite_choice_fn family n) (family n), где finite_choice_fn family n := L5_choose (family n) 0 — функция головы названа в формулировке. Closed under the global context."
+  },
+  {
+   "line": 33,
+   "theorem": "AC_is_L5",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Поэтому допустимое ядро выбора — *теорема* конечной комбинаторики, а не постулат: L5 (порядок, уже несущий статус позиции) сам производит функцию выбора.",
+   "page_price": "теорема, не постулат",
+   "verdict": "ok",
+   "note": "AC_is_L5 (:139): (forall i, family i <> nil) -> exists f, forall i, In (f i) (family i); свидетель в доказательстве — fun i => L5_choose (family i) 0 (:144). Closed under the global context."
+  },
+  {
+   "line": 34,
+   "theorem": "finite_zorn_general",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Из той же конечности следует и «конечная лемма Цорна»: в непустом конечном списке есть максимальный элемент — просто максимум списка, без всякого выбора.[^2]",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): страница не менялась; слова «максимальный элемент» теперь опираются на теорему для любого типа и любого разрешимого транзитивного отношения: finite_zorn_general : forall A (le : A -> A -> bool), транзитивность -> forall l, l <> nil -> exists m, In m l /\\ forall n, In n l -> le m n = true -> le n m = true. Closed under the global context. Прежняя finite_zorn — наибольшее число в списке натуральных."
+  },
+  {
+   "line": 38,
+   "theorem": "P4_eliminates_AC",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Версия с квантором по *всем* натуральным индексам ($\\forall i$) читается двояко. Как *правило процесса* — «выбор по запросу для любого предъявленного индекса» — она P4-совместима. Как *завершённый граф* $\\{(i,f(i))\\}$ — попадает под запрет следующего параграфа.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слова комментария P4_Eliminates_AC.v:191–195 к теореме P4_eliminates_AC (:201). Совместимость чтения-правила с P4 в этом файле теоремой не выражена (связи с P4_stage_bounded нет); она доказана в пробном файле (choice_as_rule_compatible_with_P4)."
+  },
+  {
+   "line": 41,
+   "theorem": "P4_eliminates_AC_finite",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Поэтому однозначно P4-совместима именно *постадийная* версия с конечным фронтом $N$; неограниченную следует читать как правило-на-запрос, а не как готовый объект.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P4_eliminates_AC_finite (:217): (forall i, i < N -> family i <> nil) -> forall i, i < N -> In (finite_choice_fn family i) (family i). Функция выбора в обеих версиях одна — голова списка, определённая на всех индексах; число N в неё не входит, версия с фронтом выводится из finite_choice одной строкой. Различие двух версий — в чтении, как глава и говорит."
+  },
+  {
+   "line": 45,
+   "theorem": "finite_zorn",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "*Выбор на конечном/постадийном семействе — роль-правило L5 (голова в конститутивном порядке); функция выбора и конечная лемма Цорна суть теоремы (0 аксиом), а не постулаты.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена верна: AC_is_L5, finite_choice, P4_eliminates_AC_finite, finite_zorn — Closed under the global context. О названии «лемма Цорна» — запись к стр. 34 (расхождение 5)."
+  },
+  {
+   "line": 51,
+   "theorem": "AC_on_nat",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Возьмём полную форму выбора над $ℕ$: для любого семейства непустых списков $F:ℕ\\to$ `list` $ℕ$ существует функция $f:ℕ\\toℕ$ с $f(n)\\in F(n)$ для *всех* $n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формула совпадает с Definition AC_on_nat (:43). То же утверждение дословно — AC_is_L5 и P4_eliminates_AC (пробный файл: AC_on_nat_is_AC_is_L5_statement), и в самом файле оно доказано без допущений (AC_on_nat_as_rule, :160). «Полной» форму делает не формулировка, а чтение графика — расхождения 1 и 2."
+  },
+  {
+   "line": 51,
+   "theorem": "list",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "$F:ℕ\\to$ `list` $ℕ$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тип списков стандартной библиотеки (Corelib.Init.Datatypes.list); в формулировках — list nat."
+  },
+  {
+   "line": 53,
+   "theorem": "choice_graph",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Ключевой момент: график такой $f$ (в коде это `choice_graph` — совокупность пар «индекс, значение») содержит пару на всяком индексе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "choice_graph f n m := m = f n (:49) — совокупность пар; «пара на всяком индексе» — choice_graph_completed (:65). Это свойство есть у графика любой функции nat -> nat, в том числе разрешённого правила «голова списка» (пробный файл: head_rule_graph_is_completed). «Взятость разом» в коде записана не в choice_graph, а отдельной посылкой bridge — расхождение 1."
+  },
+  {
+   "line": 56,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "А P4 (конечная актуальность) требует, чтобы на каждой стадии было актуально лишь конечное. График с парой на всяком индексе, стадийная ограниченность и мост вместе дают противоречие.[^4] Теорема условная: без моста противоречия нет.",
+   "page_price": "условная теорема: при мосте",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «завершённая бесконечная совокупность нарушает эту ограниченность — противоречие» без третьей посылки. completed_inf_contradicts_P4 : CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False. Closed under the global context. Без моста первые две посылки совместны."
+  },
+  {
+   "line": 62,
+   "theorem": "ac_completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Значит, уже *нат-индексированная* completed-choice форма AC несовместима с P4 — это сильнее, чем «мы её не принимаем»; полная ZFC-AC тем более содержит такую object-форму, но формальный файл фиксирует именно нат-индексированный диагноз.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ac_completed_graph_contradicts_P4 (:122): AC_on_nat, стадийная ограниченность и мост для графика всякой функции выбора дают False; Closed. Статус «нат-индексированный диагноз» назван честно. Шапка файла (:18–25): AC_on_nat не опровергнута и опровергнута быть не может; несовместимо чтение «функция = завершённый график», и оно несовместимо для графика любой функции (completed_graph_contradicts_P4)."
+  },
+  {
+   "line": 65,
+   "theorem": "potential_process_compatible_with_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "ToS не запрещает бесконечные *процессы*: потенциальная бесконечность с P4 вполне совместима.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): страница не менялась; слова теперь опираются на теорему о процессе: potential_process_compatible_with_P4 : exists actual, P4_stage_bounded actual /\\ (стадии вложены) /\\ (всякое число достигается) /\\ (ни одна стадия не содержит всего). Closed under the global context."
+  },
+  {
+   "line": 66,
+   "theorem": null,
+   "claim": "Запрещён ровно *завершённый* выбор-как-объект: график, взятый разом, целиком, как готовая вещь.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует completed_graph_contradicts_P4: «взятый разом» — посылка bridge. Шапка P4ProhibitsAC.v (:21–24) говорит то же: отсекается чтение, а не функция как правило."
+  },
+  {
+   "line": 70,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "*Полная аксиома выбора — роль-овеществление: завершённый граф $\\{(n,f(n))\\}$ как готовый бесконечный объект. P4 его запрещает (`completed_inf_contradicts_P4`); потенциальная бесконечность процесса при этом совместима.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорема условная: CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False; слова «как готовый бесконечный объект» отвечают посылке bridge. Называть её в сводке или нет — решается вместе с расхождением 1; о совместимости процесса — расхождение 4."
+  },
+  {
+   "line": 79,
+   "theorem": "completed_reading_strictly_stronger",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Их связь выражена теоремой о двух чтениях графика: чтение «завершённое целое» требует строго больше, чем чтение «правило по запросу»; P4 отсекает первое и оставляет второе (`completed_reading_strictly_stronger`, `P4_cuts_completed_keeps_rule`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «их связь сама есть теорема» со ссылкой на prohibition_implies_reinterpretation, которая посылку не использует. completed_reading_strictly_stronger : (forall S actual, bridge S actual -> rule_reading S actual) /\\ (forall f, exists actual, P4_stage_bounded actual /\\ rule_reading (graph_indices (choice_graph f)) actual /\\ ~ bridge (graph_indices (choice_graph f)) actual). Closed under the global context."
+  },
+  {
+   "line": 77,
+   "theorem": null,
+   "claim": "*Переинтерпретация* говорит: P4 делает выбор *ненужным* как аксиому, ибо его работу выполняет L5. *Запрет* говорит: P4 *несовместима* с завершённой формой выбора.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первое — AC_is_L5, finite_choice (Closed); второе — completed_graph_contradicts_P4, ac_completed_graph_contradicts_P4 (при посылке bridge; Closed)."
+  },
+  {
+   "line": 82,
+   "theorem": "P4_cuts_completed_keeps_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Отсюда и соотношение уровней: если завершённый объект невозможен, он тем более не нужен как постулат, тогда как наличие замены само по себе невозможности исходного не даёт — в этом смысле запрет сильнее.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «в формальном синтезе запрет даёт переинтерпретацию… одна переинтерпретация противоречия не даёт» со ссылкой на две сводные теоремы. Соотношение уровней — рассуждение; теоремой выражено соотношение двух чтений графика. P4_cuts_completed_keeps_rule : для семейства непустых списков F — (1) для всякой функции выбора f и всякой стадийно ограниченной актуальности мост для графика f невозможен; (2) есть функция выбора и ограниченная актуальность, при которой график читается как правило (rule_reading). Closed under the global context."
+  },
+  {
+   "line": 89,
+   "theorem": null,
+   "claim": "ToS расклеивает их: правило сохраняет (теорема, 0 аксиом), объект отвергает (несовместим с P4).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "AC_is_L5, AC_on_nat_as_rule, finite_choice_works — Closed under the global context; несовместимость — completed_graph_contradicts_P4 при посылке bridge."
+  },
+  {
+   "line": 94,
+   "theorem": null,
+   "claim": "*Запрет${}\\Rightarrow{}$переинтерпретация (строго): невозможность завершённого объекта сильнее его ненужности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис рассуждением. В формализации обе стороны — замкнутые теоремы, и каждая следует из другой; строгость теоремой не выражена и в этой записи выражена быть не может (расхождение 3). В пробном файле доказано строгое соотношение двух чтений графика (completed_reading_strictly_stronger)."
+  },
+  {
+   "line": 100,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "Принцип L4 (`L4_witness`) извлекает свидетеля из *одного* существования: из $\\exists x, P(x)$ — объект $\\{x\\mid P(x)\\}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Axiom L4_witness : forall (A : Type) (P : A -> Prop), (exists x, P x) -> {x : A | P x} (:105)."
+  },
+  {
+   "line": 102,
+   "theorem": null,
+   "file": "src/ToS_Axioms.v",
+   "claim": "Аксиома выбора берёт функцию по *произвольному семейству* существований сразу. Это объекты *разной онтологической категории*: определённость единичного существования против одновременного отбора по неограниченной завершённой совокупности.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слова комментария ToS_Axioms.v:76–79, :100–101 («objects of different ontological category»). Различие категорий — тезис, теоремой не выражен. Формально L4_witness, применённая к каждому индексу семейства, даёт функцию выбора по произвольному семейству (пробный файл CheckL4.v: functional_choice_from_L4_axiom, допущения — L4_witness)."
+  },
+  {
+   "line": 105,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Поэтому результаты 10.3 (Шрёдер–Бернштейн, антисимметрия) используют L4, но *не* выбор: в их доказательствах L4 извлекает только *единственного* свидетеля, и это закреплено теоремой — им хватает исключённого третьего и извлечения единственного свидетеля (`Schroeder_Bernstein_definite`).",
+   "page_price": "L4, без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «L4 обращает единственное, а выбор отбирал бы по слоям» — по компилятору аксиома делает и то, и другое. Schroeder_Bernstein_definite: заключение из двух посылок (исключённое третье; извлечение единственного свидетеля) — Closed under the global context."
+  },
+  {
+   "line": 111,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "При этом L4 — не 0-аксиомная конструкция, а отдельный свидетельский принцип уровня L4",
+   "page_price": "L4 (не 0 аксиом)",
+   "verdict": "ok",
+   "note": "L4_witness объявлена словом Axiom (:105); в выводе Print Assumptions для Schroeder_Bernstein, cardinal_antisym, L4_definite — ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 109,
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Сама аксиома `L4_witness` записана без условия единственности и, применённая к каждому слою, такой отбор даёт (`surjects_injects_back`): граница между L4 и выбором проходит по тому, единствен ли свидетель.",
+   "page_price": "L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «(в 10.3 он применялся через L4_definite)» — путей было два; после шага 1 доказательство перестроено на посылки. surjects_injects_back : surjects A B -> injects B A; Axioms: ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 116,
+   "theorem": "decidable_subset_finite",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "В текущем finite/list-слое P4 такого основания нет: всякое *разрешимое* подмножество конечного списка само есть конечный список (фильтр), а длина сохраняется при конечном разбиении — парадоксальному удвоению не на чём держаться.[^8]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "decidable_subset_finite (:166): для f : nat -> bool и списка l есть список l' с In x l' <-> (In x l /\\ f x = true); свидетель — filter f l. finite_decomposition_preserves_length (:157): length (l1 ++ l2) = length l1 + length l2 — длина при конкатенации двух списков; о разбиении списка по признаку леммы нет (в пробном файле: decidable_partition_length). Closed. Статус назван честно: нет основания для построения, не опровержение парадокса."
+  },
+  {
+   "line": 121,
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "*L4 — правило извлечения, а не завершённый граф выбора: сила сопоставима, категории разные.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Сила сопоставима»: доказана одна сторона — из формулировки L4 следует функциональный выбор по произвольному семейству (l4_statement_gives_functional_choice, :164; Closed, L4 — посылкой). Обратного утверждения в формализации нет."
+  },
+  {
+   "line": 121,
+   "theorem": "finite_decomposition_preserves_length",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Патологии выбора (Витали, Банах–Тарский) лишаются опоры: при P4 разрешимые подмножества конечного остаются конечными, длина аддитивна.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "decidable_subset_finite (:166) и finite_decomposition_preserves_length (:157, length (l1 ++ l2) = length l1 + length l2) — Closed under the global context."
+  },
+  {
+   "line": 128,
+   "theorem": "P4_stage_bounded",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "| *Rules* (L5) | разрешение L5 (голова списка) — выбор на конечном/постадийном семействе; P4-ограниченность стадии (источник запрета завершённого графа) |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "L5_choose (P4_Eliminates_AC.v:25); P4_stage_bounded actual := forall stage, exists bound, forall n, actual stage n -> n <= bound (:33). Запрет получается из ограниченности вместе с посылкой bridge (расхождение 1)."
+  },
+  {
+   "line": 129,
+   "theorem": null,
+   "claim": "L4${}={}$свидетель из одного $\\exists$ (не выбор) |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "По записи аксиомы — да (ToS_Axioms.v:105). По силе — см. записи к стр. 99 и 169."
+  },
+  {
+   "line": 132,
+   "theorem": "AC_is_L5",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "**Что даёт.** Допустимое ядро — теорема (`AC_is_L5`, `P4_eliminates_AC_finite`, `finite_zorn_general`; 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Все три — Closed under the global context (:139, :217, :124)."
+  },
+  {
+   "line": 133,
+   "theorem": "AC_on_nat_as_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Полная форма как утверждение совпадает с ядром и тоже доказана (`AC_on_nat_as_rule`); запрещено её чтение — график функции выбора как завершённое целое (`ac_completed_graph_contradicts_P4`, при мосте).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «полная форма — запрещена». AC_on_nat_as_rule : AC_on_nat (утверждение совпадает с AC_is_L5). Closed under the global context. Несовместимо с P4 чтение графика как завершённого целого: ac_completed_graph_contradicts_P4, при посылке bridge."
+  },
+  {
+   "line": 136,
+   "theorem": "P4_cuts_completed_keeps_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Связь — `P4_cuts_completed_keeps_rule` и `completed_reading_strictly_stronger`: чтение-график несовместимо с P4, чтение-правило совместимо, и первое требует строго больше второго.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «связь — prohibition_implies_reinterpretation (запрет сильнее)». P4_cuts_completed_keeps_rule : для семейства непустых списков F — (1) для всякой функции выбора f и всякой стадийно ограниченной актуальности мост для графика f невозможен; (2) есть функция выбора и ограниченная актуальность, при которой график читается как правило (rule_reading). Closed under the global context. completed_reading_strictly_stronger : (forall S actual, bridge S actual -> rule_reading S actual) /\\ (forall f, exists actual, P4_stage_bounded actual /\\ rule_reading (graph_indices (choice_graph f)) actual /\\ ~ bridge (graph_indices (choice_graph f)) actual). Closed under the global context."
+  },
+  {
+   "line": 142,
+   "theorem": "P4_eliminates_AC",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "**Честные границы.** `P4_eliminates_AC` доказана для семейств *конечных списков* (конечных множеств) / как правило-на-запрос — это *не* полная ZFC-AC, которую P4 как раз запрещает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P4_eliminates_AC (:201): семейство nat -> list nat непустых списков натуральных чисел; доказательство — exact AC_is_L5. Граница названа честно. Слова о полной ZFC-AC теоремой не закреплены: формализован нат-индексированный случай (глава говорит это на стр. 60–61), и в нём несовместимо чтение графика при мосте."
+  },
+  {
+   "line": 144,
+   "theorem": null,
+   "claim": "Анти-Банах–Тарский — отсутствие опоры (разрешимые конечные подмножества${}+{}$аддитивность длины), а не метатеорема о ложности парадокса.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в формализации две леммы о списках (decidable_subset_finite, finite_decomposition_preserves_length); о парадоксе, мере и движениях теорем нет."
+  },
+  {
+   "line": 146,
+   "theorem": null,
+   "claim": "Потенциальная бесконечность совместима; запрещён лишь завершённый объект.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Повтор стр. 62–65; о теореме potential_compatible_with_P4 — запись к стр. 62 (расхождение 4)."
+  },
+  {
+   "line": 148,
+   "theorem": null,
+   "claim": "*Выбор расщепляется надвое: правило L5 (теорема, 0 аксиом) и завершённый граф (запрещён P4). Запрет сильнее переинтерпретации; L4 — иная категория, не выбор; патологии выбора лишены опоры.*",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Сводка. Цена верна (AC_is_L5, P4_eliminates_AC_finite — Closed). Запрет — при посылке bridge (расхождение 1); «сильнее» — тезис (расхождение 3); о L4 — расхождение 6."
+  },
+  {
+   "line": 154,
+   "theorem": "P4_eliminates_AC_finite",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Её допустимое ядро — выбор по конечному (или постадийному) семейству — есть теорема: позиционное разрешение L5 производит функцию выбора без всякой аксиомы (`AC_is_L5`, `P4_eliminates_AC_finite`).",
+   "page_price": "без всякой аксиомы",
+   "verdict": "ok",
+   "note": "AC_is_L5 (:139) и P4_eliminates_AC_finite (:217) — Closed under the global context."
+  },
+  {
+   "line": 157,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Её завершённо-объектная форма — график выбора как готовая бесконечность — запрещена, ибо несовместима с P4 (`completed_inf_contradicts_P4`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорема условная (три посылки, третья — bridge); «как готовая бесконечность» отвечает посылке bridge. См. расхождение 1."
+  },
+  {
+   "line": 159,
+   "theorem": "P4_cuts_completed_keeps_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "и запрет сильнее переинтерпретации: P4 отсекает завершённое чтение графика и оставляет чтение-правило (`P4_cuts_completed_keeps_rule`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «запрет строго сильнее переинтерпретации (prohibition_implies_reinterpretation)». P4_cuts_completed_keeps_rule : для семейства непустых списков F — (1) для всякой функции выбора f и всякой стадийно ограниченной актуальности мост для графика f невозможен; (2) есть функция выбора и ограниченная актуальность, при которой график читается как правило (rule_reading). Closed under the global context."
+  },
+  {
+   "line": 161,
+   "theorem": null,
+   "claim": "Принцип L4 — не выбор, а определённость единичного существования; патологии выбора при P4 лишаются опоры.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тезис главы. По записи L4_witness — извлечение свидетеля из одного существования; по силе из неё следуют функциональный и зависимый выбор (пробные файлы CheckL4.v, CheckDC.v; допущения — L4_witness). См. расхождение 6."
+  },
+  {
+   "line": 169,
+   "theorem": null,
+   "claim": "*Аксиома выбора в ToS — не принимается и не отвергается целиком: её правило-ядро становится теоремой L5, а её завершённый граф запрещается P4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итог главы: AC_is_L5 / AC_on_nat_as_rule (Closed) и completed_graph_contradicts_P4 (при посылке bridge; Closed)."
+  },
+  {
+   "line": 176,
+   "theorem": "L5_choose",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`P4_Eliminates_AC.v`: `L5_choose` (голова списка)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition L5_choose l default (:25): голова списка, для пустого — default. То же определение повторено в P4ProhibitsAC.v:141."
+  },
+  {
+   "line": 176,
+   "theorem": "finite_choice",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`finite_choice` (голова непустого списка в нём лежит)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma finite_choice (:47): forall family n, family n <> nil -> In (finite_choice_fn family n) (family n). Одноимённое Definition finite_choice есть в P4ProhibitsAC.v:168 (функция с фронтом N); сноска называет файл P4_Eliminates_AC.v. Closed."
+  },
+  {
+   "line": 176,
+   "theorem": "AC_is_L5",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`AC_is_L5` (для семейства непустых списков функция выбора — голова)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:139) — существование функции выбора (exists f); что это голова, видно из доказательства (:144), в формулировку не входит. Явно голова названа в finite_choice и P4_eliminates_AC_finite."
+  },
+  {
+   "line": 176,
+   "theorem": "P4_eliminates_AC_finite",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`P4_eliminates_AC_finite` (явная версия для конечного фронта $\\{0,\\dots,N-1\\}$). Всё **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Формулировка (:217) совпадает; L5_choose, finite_choice, AC_is_L5, P4_eliminates_AC_finite — Closed under the global context. В файле 15 Qed, Axiom и Parameter нет."
+  },
+  {
+   "line": 177,
+   "theorem": "finite_zorn",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Частный случай для натуральных чисел — `finite_zorn`: $\\forall l\\neq\\varnothing,\\ \\exists m\\in l,\\ \\forall n\\in l,\\ n\\le m$. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Формула сноски совпадает с утверждением (:124); l : list nat, порядок — обычный на nat. Closed under the global context."
+  },
+  {
+   "line": 178,
+   "theorem": "P4_eliminates_AC",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "Это различение явно зафиксировано в комментарии `P4_Eliminates_AC.v` к `P4_eliminates_AC`: читать как процессное правило — P4-совместимо; читать как завершённый граф — под `P4ProhibitsAC.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий — строки 191–195, перед теоремой (:201)."
+  },
+  {
+   "line": 179,
+   "theorem": "AC_on_nat",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "`P4ProhibitsAC.v`: `AC_on_nat` (полная форма)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition AC_on_nat (:43). Утверждение доказано в том же файле (AC_on_nat_as_rule, :160) и в settheory/ChoicePriceMap.v (ac_on_nat_free, :198) — Closed; совпадает с AC_is_L5. См. расхождение 2."
+  },
+  {
+   "line": 179,
+   "theorem": "ac_implies_completed",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "`ac_implies_completed` (AC даёт функцию, график которой имеет пару на всяком индексе)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ac_implies_completed (:86): AC_on_nat -> forall F, (forall n, F n <> nil) -> exists f, (график f лежит в F) /\\ CompletedInfSet (graph_indices (choice_graph f)). Пересказ верен. Посылка AC_on_nat сама доказана, поэтому заключение верно и без неё (пробный файл: ac_implies_completed_conclusion_free, Closed); «завершённый граф» здесь — график всюду определённой функции. Глава IV.1 оговаривает это (стр. 831–835), в этой главе оговорки нет."
+  },
+  {
+   "line": 179,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "И `P4CompletedInfinity.v`: `CompletedInfSet`, `P4_stage_bounded` и мост `bridge` (всякий член совокупности актуален уже на начальной стадии); итог — `completed_inf_contradicts_P4`: три посылки вместе противоречивы.",
+   "page_price": "0 аксиом; три посылки",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «CompletedInfSet против P4_stage_bounded, итог — completed_inf_contradicts_P4» без третьей посылки. bridge S actual := forall n, S n -> actual 0 n. Closed under the global context."
+  },
+  {
+   "line": 179,
+   "theorem": "CompletedInfSet",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "`CompletedInfSet`, `P4_stage_bounded` и мост `bridge`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition CompletedInfSet S := forall n, S n (:29) — предикат, истинный на всех натуральных числах; о стадиях определение не говорит. Связь со стадиями даёт отдельное Definition bridge (:42)."
+  },
+  {
+   "line": 180,
+   "theorem": "potential_process_compatible_with_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "`P4CompletedInfinity.v`: `potential_process_compatible_with_P4` — есть процесс стадий, ограниченный на каждой стадии, вложенный, достигающий всякого числа и ни на одной стадии не содержащий всего.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «potential_compatible_with_P4 — потенциальная бесконечность не противоречит P4» (та лемма соединяет два независимых факта и выполняется на пустой актуальности). Новая теорема — о процессе стадий. Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "prohibition_implies_reinterpretation",
+   "file": "src/foundation/P4ProhibitionSynthesis.v",
+   "claim": "теорема `prohibition_implies_reinterpretation` там — тоже сводка: посылку она не использует (см. Главу 4.1).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «prohibition_implies_reinterpretation (запрет влечёт переинтерпретацию)». Доказательство: intros _. exact potential_inf_exists. — посылка не используется; страница это теперь говорит. Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "completed_reading_strictly_stronger",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "`P4ProhibitsAC.v`: `completed_reading_strictly_stronger` — мост влечёт чтение-правило, а для графика любой функции есть стадийно ограниченная актуальность, при которой чтение-правило выполнено, а мост — нет;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 4, слово автора): было «reinterpretation_weaker (обратное неверно)» — та лемма утверждает одну потенциальную бесконечность, а обратная импликация в Rocq доказуема; имя со страницы снято. completed_reading_strictly_stronger : (forall S actual, bridge S actual -> rule_reading S actual) /\\ (forall f, exists actual, P4_stage_bounded actual /\\ rule_reading (graph_indices (choice_graph f)) actual /\\ ~ bridge (graph_indices (choice_graph f)) actual). Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "P4_is_prohibition",
+   "file": "src/foundation/P4ProhibitionSynthesis.v",
+   "claim": "`P4ProhibitionSynthesis.v` собирает оба уровня в сводках `P4_prohibits_three`, `P4_preserves_three`, `P4_is_prohibition`;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "(:94) конъюнкция трёх доказанных утверждений: несовместимость при мосте; то же для nat_as_completed := fun _ => True; potential_compatible_with_P4. Все шесть утверждений файла — Closed under the global context; в файле 6 Qed."
+  },
+  {
+   "line": 182,
+   "theorem": null,
+   "file": "src/ToS_Axioms.v",
+   "claim": "`ToS_Axioms.v`, шапка прямо это проговаривает: «This is NOT the Axiom of Choice»",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слова стоят в строке 72 — в комментарии раздела L4 перед объявлением аксиомы (шапка файла — строки 1–29); там же, :100: «L4_witness and AC are objects of different ontological category»."
+  },
+  {
+   "line": 182,
+   "theorem": "L4_witness",
+   "file": "src/ToS_Axioms.v",
+   "claim": "`L4_witness` — `(exists x, P x) -> {x | P x}`, не ZFC-AC и не зависимый выбор.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает (:105); «не зависимый выбор» — слова комментария :83–84, верные о записи. По силе зависимый выбор из L4_witness выводится (пробный файл CheckDC.v: dependent_choice_from_L4_axiom, допущения — L4_witness); в формализации такой теоремы нет."
+  },
+  {
+   "line": 182,
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "По силе: из неё выводятся выбор функции по семейству (`l4_statement_gives_functional_choice`) и переход «сюръекция → вложение» (`surjects_injects_back`, Глава 10.3); различие — в категории: правило против завершённого объекта.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "(:164) L4_statement -> forall I X R, (forall i, exists x, R i x) -> exists f, forall i, R i (f i); Closed (формулировка L4 — посылкой). Доказана одна сторона: L4 не слабее функционального выбора по произвольному семейству."
+  },
+  {
+   "line": 183,
+   "theorem": "decidable_subset_finite",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`P4_Eliminates_AC.v`: `decidable_subset_finite` (разрешимое подмножество конечного списка конечно)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "(:166) forall (f : nat -> bool) (l : list nat), exists l', forall x, In x l' <-> (In x l /\\ f x = true). «Разрешимое» — заданное булевой функцией. Closed."
+  },
+  {
+   "line": 183,
+   "theorem": "finite_decomposition_preserves_length",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`finite_decomposition_preserves_length` (длина аддитивна при конкатенации)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "(:157) length (l1 ++ l2) = length l1 + length l2; доказательство — List.app_length. Пересказ сноски точен. Closed."
+  },
+  {
+   "line": 183,
+   "theorem": null,
+   "claim": "Это не метатеорема «Банах–Тарский ложен», а отсутствие *опоры* для построения: нет неизмеримых кусков — нет и парадоксального разбиения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; о мере и движениях в файле теорем нет."
+  },
+  {
+   "line": 177,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новая теорема шага 4. Closed under the global context. Частный случай при Nat.leb — finite_zorn_nat_from_general.",
+   "theorem": "finite_zorn_general",
+   "file": "src/foundation/P4_Eliminates_AC.v",
+   "claim": "`finite_zorn_general` (`P4_Eliminates_AC.v`): для любого типа и любого разрешимого транзитивного отношения в непустом списке есть максимальный элемент — такой $m$, что всякий $n$ из списка, лежащий не ниже $m$, лежит и не выше $m$."
+  },
+  {
+   "line": 181,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новая теорема шага 4. P4_cuts_completed_keeps_rule : для семейства непустых списков F — (1) для всякой функции выбора f и всякой стадийно ограниченной актуальности мост для графика f невозможен; (2) есть функция выбора и ограниченная актуальность, при которой график читается как правило (rule_reading). Closed under the global context.",
+   "theorem": "P4_cuts_completed_keeps_rule",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "`P4_cuts_completed_keeps_rule` — для семейства непустых списков завершённое чтение графика всякой функции выбора несовместимо с P4, а чтение-правило совместимо."
+  },
+  {
+   "line": 179,
+   "page_price": "0 аксиом; при мосте",
+   "verdict": "ok",
+   "note": "ac_completed_graph_contradicts_P4 (P4ProhibitsAC.v): из AC_on_nat, стадийной ограниченности и моста для графика функции выбора — противоречие. Closed under the global context.",
+   "theorem": "ac_completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "`ac_completed_graph_contradicts_P4` (всё рассуждение одной теоремой)"
+  },
+  {
+   "line": 179,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "completed_graph_contradicts_P4 : forall f actual, P4_stage_bounded actual -> bridge (graph_indices (choice_graph f)) actual -> False. AC_on_nat_as_rule : AC_on_nat. Обе — Closed under the global context.",
+   "theorem": "completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "То же противоречие даёт график любой всюду определённой функции (`completed_graph_contradicts_P4`), а выбор из непустых списков как правило есть теорема (`AC_on_nat_as_rule`)."
+  },
+  {
+   "line": 54,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition bridge (S : nat -> Prop) (actual : nat -> nat -> Prop) := forall n, S n -> actual 0 n (P4CompletedInfinity.v).",
+   "theorem": "bridge",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Взять его разом, как готовый объект, значит считать все эти пары актуальными на одной стадии; в формализации это отдельная посылка — *мост* (`bridge`)."
+  },
+  {
+   "line": 179,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "P4_prohibits_AC — конъюнкция трёх утверждений: ac_implies_completed; completed_inf_contradicts_P4 (при мосте); finite_choice_works. Противоречия из AC_on_nat она не выводит; страница называет её сводкой. Closed under the global context.",
+   "theorem": "P4_prohibits_AC",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "`P4_prohibits_AC` (сводка)"
+  },
+  {
+   "line": 181,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "P4_prohibits_three — сводная конъюнкция трёх теорем несовместимости (завершённая бесконечность при мосте; график выбора; расселова совокупность). Closed under the global context.",
+   "theorem": "P4_prohibits_three",
+   "file": "src/foundation/P4ProhibitionSynthesis.v",
+   "claim": "`P4ProhibitionSynthesis.v` собирает оба уровня в сводках `P4_prohibits_three`, `P4_preserves_three`, `P4_is_prohibition`;"
+  },
+  {
+   "line": 181,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "P4_preserves_three — сводная конъюнкция трёх сохранённых форм (потенциальная бесконечность; конечный выбор; стадийная ограниченность nat). Closed under the global context.",
+   "theorem": "P4_preserves_three",
+   "file": "src/foundation/P4ProhibitionSynthesis.v",
+   "claim": "`P4ProhibitionSynthesis.v` собирает оба уровня в сводках `P4_prohibits_three`, `P4_preserves_three`, `P4_is_prohibition`;"
+  }
+ ]
+}

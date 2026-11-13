@@ -7,16 +7,20 @@
                 PL3       — classic only;
                 PL4       — L4_witness only;
                 PL3_L4    — classic + L4_witness;
-                PBoundary — not constructed: objects the theory does not build.
+                PHorizon  — not built: a result the formalization does not have yet;
+                PBoundary — forbidden: the completed actual-infinite OBJECT, which the
+                            theory does not build and P4 excludes.
               PZero lies below PL3 and PL4; PL3 and PL4 are incomparable; both lie below
-              PL3_L4 (price_le).  Every PROVEN result stays below PBoundary.
-    STATUS:   17 Qed, 0 Admitted, 0 axioms
-    Author:   Horsocrates | Date: June 2026 (tiers corrected October 2026)
+              PL3_L4 (price_le).  Every PROVEN result stays below PHorizon and PBoundary.
+    STATUS:   20 Qed, 0 Admitted, 0 axioms
+    Author:   Horsocrates | Date: June 2026 (tiers corrected October 2026; registry
+              brought to the compiler November 2026)
 
     An AUDIT layer — a CLASSIFICATION, not a theorem about the results: the table below
     is a decidable function written by hand, and each entry is cross-checked against
-    Print Assumptions in the result's own file.  What this file DOES prove
-    (machine-checked, 0 axioms) is how strong the L4 tier is:
+    Print Assumptions in the result's own file.  A lemma about [price] is a lemma about
+    this TABLE.  What this file DOES prove (machine-checked, 0 axioms) is how strong
+    the L4 tier is:
       * the statement of L4_witness (ToS_Axioms.v) is exactly the constructive
         indefinite description of the standard library; applied to each index of a
         family it yields FUNCTIONAL CHOICE over an arbitrary family
@@ -26,22 +30,34 @@
       * «AC on nat» in the formulation of foundation/P4ProhibitsAC.v is provable with
         no axioms at all (ac_on_nat_free).
     So PL4 and PL3_L4 are NOT «below full AC»: whatever rests on L4_witness rests on a
-    principle from which choice over families follows.  The honest content of «without
-    the Axiom of Choice» is narrower: the results priced PZero or PL3 use neither
-    L4_witness nor any choice schema.
+    principle from which choice over families follows.
+
+    WHERE CHOICE ACTUALLY ENTERS (Nov 2026).  L4_witness is used in two ways: for a
+    UNIQUE witness (the statement fixes it — no choice) and for ONE witness AMONG MANY
+    (a choice).  Schroeder–Bernstein and cardinal antisymmetry need only the first:
+    Schroeder_Bernstein_definite derives them from excluded middle and extraction of the
+    unique witness taken as PREMISES and is closed (row RSchroederBernsteinDefinite,
+    PZero); the rows RSchroederBernstein / RCardinalAntisym price the same theorems
+    written on the two axioms.  The second way is what the rows RSurjectionBridge,
+    RIntervalAnyCauchy (PL4) and RContinuumHypothesis, RZermeloDeterminacy (PL3_L4) pay.
 
     CORRECTION (2026-10-17), from Print Assumptions on a mirror build (Rocq 9.0.1):
-      RShrinkingIntervals  PL3 -> PZero (unit_interval_uncountable_trisect_v2: closed);
-      RKruskalFamilies     PL3 -> PZero (kruskal_chains, kruskal_forks, depth1_wqo,
-                                         L5_from_kruskal: closed);
-      RHigman              PL3, now actually backed: HigmanLemma.v compiles again (its
-                           proofs were repaired); Nat.le and one-letter Higman are closed,
-                           Dickson's lemma for pairs uses classic;
-      RFullAC              (was PBoundary, «refused») replaced by two entries backed in
-                           this file: RFunctionalChoice — PL4; RACOnNat — PZero.
-    The old thesis «no PROVEN result reaches PBoundary — nothing in Part X uses the full
-    Axiom of Choice» is withdrawn in its second half: Schroeder–Bernstein, cardinal
-    antisymmetry and the closed-set dichotomy rest on L4_witness.
+      RShrinkingIntervals  PL3 -> PZero;  RKruskalFamilies  PL3 -> PZero;
+      RFullAC (was PBoundary, «refused») replaced by entries backed in this file.
+    CORRECTION (2026-11-13), after the audit of Part X against the compiler:
+      RHigman              PL3 -> PZero (Dickson's lemma for pairs is now constructive;
+                           higman_synthesis is closed);
+      RFiniteDeterminacy   split into RGameTreeDeterminacy (PZero), RWeakDeterminacy
+                           (PL3) and RZermeloDeterminacy (PL3_L4);
+      RFunctionalChoice    removed: its backing lemma takes L4 as a premise and is
+                           closed; the PL4 tier is now backed by theorems proved FROM
+                           the axiom (RSurjectionBridge, RIntervalAnyCauchy);
+      new rows             RSchroederBernsteinDefinite, RIntervalGivenRate,
+                           ROrdinalInduction, RP4Reinterpretations, RPi11Codes (PZero);
+      PBoundary            split: PBoundary (forbidden object) and PHorizon (not built);
+                           new rows RCompletedChoiceGraph, RHigmanGeneralAlphabet;
+      proven_results_below_boundary used to be a conjunction of ten [True]; it now says
+                           which rows of the table are NOT below the boundary.
 *)
 
 From Stdlib Require Import List.
@@ -49,15 +65,17 @@ Import ListNotations.
 
 (* ===================== Price tiers ===================== *)
 
-Inductive AxiomPrice : Set := PZero | PL3 | PL4 | PL3_L4 | PBoundary.
+Inductive AxiomPrice : Set := PZero | PL3 | PL4 | PL3_L4 | PHorizon | PBoundary.
 
-(** p ≼ q: every axiom declaration under p is also under q. *)
+(** p ≼ q: every axiom declaration under p is also under q (for the proven tiers;
+    PHorizon and PBoundary sit above them and are not comparable to each other). *)
 Definition price_le (p q : AxiomPrice) : bool :=
   match p, q with
   | PZero, _ => true
-  | PL3, (PL3 | PL3_L4 | PBoundary) => true
-  | PL4, (PL4 | PL3_L4 | PBoundary) => true
-  | PL3_L4, (PL3_L4 | PBoundary) => true
+  | PL3, (PL3 | PL3_L4 | PHorizon | PBoundary) => true
+  | PL4, (PL4 | PL3_L4 | PHorizon | PBoundary) => true
+  | PL3_L4, (PL3_L4 | PHorizon | PBoundary) => true
+  | PHorizon, PHorizon => true
   | PBoundary, PBoundary => true
   | _, _ => false
   end.
@@ -71,51 +89,100 @@ Proof. split; reflexivity. Qed.
 (* ===================== Results and their prices ===================== *)
 
 Inductive ResultName : Set :=
-  | RCantorGeneral | RCountabilityQ | RDiagonal | RCantorBendixson
-  | RTransfiniteLevel | RFiniteChoice
-  | RHigman | RKruskalFamilies | RFiniteDeterminacy | RShrinkingIntervals
-  | RSchroederBernstein | RCardinalAntisym | RContinuumHypothesis
-  | RFunctionalChoice | RACOnNat
-  | RPowerSetObject | RFullKruskal | RBorelDeterminacy.
+  (* closed under the global context *)
+  | RCountabilityQ | RDiagonal | RCantorGeneral
+  | RShrinkingIntervals | RIntervalGivenRate
+  | RSchroederBernsteinDefinite
+  | RCantorBendixson | RKruskalFamilies | RHigman
+  | RGameTreeDeterminacy
+  | ROrdinalInduction | RTransfiniteLevel
+  | RFiniteChoice | RACOnNat | RP4Reinterpretations | RPi11Codes
+  (* classic *)
+  | RWeakDeterminacy
+  (* L4_witness *)
+  | RSurjectionBridge | RIntervalAnyCauchy
+  (* classic + L4_witness *)
+  | RSchroederBernstein | RCardinalAntisym | RContinuumHypothesis | RZermeloDeterminacy
+  (* not built *)
+  | RFullKruskal | RBorelDeterminacy | RHigmanGeneralAlphabet
+  (* forbidden object *)
+  | RPowerSetObject | RCompletedChoiceGraph.
 
 (** Backing theorems (Print Assumptions in their own files):
-    RCantorGeneral      — CantorTheoremGeneral.cantor_no_surjection, no_maximal_bool_power;
-                          CardinalityWithoutChoice.no_maximal_cardinality: closed
     RCountabilityQ      — Countability_Q.Q_countable, Q_bijection: closed
     RDiagonal           — ProcessDiagonal.binary_processes_not_enumerable: closed
-    RCantorBendixson    — CantorBendixsonFull (derivative facts, e.g. S_finite_scattered,
-                          CB_omega_accumulation_in_parent): closed.  The perfect-set
-                          DICHOTOMY for closed sets is RContinuumHypothesis, not this entry.
-    RTransfiniteLevel   — TransfiniteInductionLevel.no_universal_level: closed
-    RShrinkingIntervals — ShrinkingIntervals_ERR.unit_interval_uncountable_trisect_v2: closed
-    RKruskalFamilies    — KruskalTree.kruskal_chains, kruskal_forks; KruskalFull.depth1_wqo,
-                          L5_from_kruskal: closed
+    RCantorGeneral      — CantorTheoremGeneral.cantor_no_surjection;
+                          CardinalityWithoutChoice.no_maximal_cardinality: closed
+    RShrinkingIntervals — ShrinkingIntervals_ERR.unit_interval_uncountable_trisect_v2
+                          (regular enumerations): closed
+    RIntervalGivenRate  — UnitIntervalUncountableGeneral.unit_interval_uncountable_modulated
+                          (any GIVEN rate of convergence): closed
+    RSchroederBernsteinDefinite
+                        — SchroederBernstein_ERR.Schroeder_Bernstein_definite,
+                          CardinalityWithoutChoice.cardinal_antisym_definite (excluded
+                          middle and extraction of the unique witness as premises): closed
+    RCantorBendixson    — CantorBendixsonFull.perfect_kernel_in_omega,
+                          stable_stage_is_perfect_kernel, finite_set_scattered: closed.
+                          The perfect-set DICHOTOMY for closed sets is
+                          RContinuumHypothesis, not this entry.
+    RKruskalFamilies    — KruskalTree.kruskal_chains, kruskal_forks;
+                          KruskalFull.depth1_wqo, depth_le1_wqo: closed
+    RHigman             — HigmanLemma.higman_unit (one-letter alphabet), dickson_pair,
+                          higman_synthesis: closed
+    RGameTreeDeterminacy— FiniteGameDeterminacy.finite_game_strategically_determined
+                          (every position of a finite tree is won by exactly one side;
+                          backward induction computes which): closed
+    ROrdinalInduction   — OrdinalOrders.wf_ord_below, structural_transfinite_ind,
+                          ord_rec_eq, wf_olt: closed
+    RTransfiniteLevel   — TransfiniteInductionLevel.no_universal_level,
+                          level_strong_induction: closed
+    RFiniteChoice       — P4_Eliminates_AC.finite_choice, AC_is_L5;
+                          P4ProhibitsAC.finite_choice_works: closed
     RACOnNat            — ac_on_nat_free (this file): closed
-    RHigman             — HigmanLemma.higman_synthesis: classic (only through dickson_pair)
-    RFiniteDeterminacy  — BorelDeterminacy.weak_determinacy (arbitrary win condition W):
-                          classic.  NB: this is excluded middle applied to «player I has
-                          a winning strategy», not determinacy proper; full `determined`
-                          is proved only for trivial games and for K = 0, and
-                          FiniteGameDeterminacy.finite_game_determined is just the boolean
-                          dichotomy of the backward-induction value (no link to winning
-                          strategies is proved)
-    RFunctionalChoice   — l4_statement_gives_functional_choice (this file): needs the
-                          statement of L4_witness only
+    RP4Reinterpretations— P4ProhibitsAC.P4_cuts_completed_keeps_rule;
+                          P4_Eliminates_ATR.P4_eliminates_ATR0;
+                          P4_Eliminates_Infinity.P4_eliminates_Infinity;
+                          P4ProhibitsImpredicative.russell_requires_completed_totality:
+                          closed
+    RPi11Codes          — P4_Eliminates_Pi11.P4_eliminates_Pi11 (for ANY table of codes;
+                          a section variable, not a Parameter): closed
+    RWeakDeterminacy    — BorelDeterminacy.weak_determinacy: classic.  This is excluded
+                          middle applied to «player I has a winning strategy», not
+                          determinacy proper.
+    RSurjectionBridge   — CardinalityWithoutChoice.surjects_injects_back,
+                          surjection_has_section: L4_witness (one witness among many in
+                          every fibre)
+    RIntervalAnyCauchy  — UnitIntervalUncountableGeneral.unit_interval_uncountable_general
+                          (arbitrary Cauchy enumerations, an arbitrary rate extracted):
+                          L4_witness.  With excluded middle the LEAST rate is a unique
+                          witness: unit_interval_uncountable_general_definite is closed.
     RSchroederBernstein — SchroederBernstein_ERR.Schroeder_Bernstein: classic + L4_witness
     RCardinalAntisym    — CardinalityWithoutChoice.cardinal_antisym: classic + L4_witness
     RContinuumHypothesis— ProcessContinuumHypothesis.process_continuum_hypothesis:
-                          classic + L4_witness (L4 applied to a countable family, 70–80)
-    PBoundary           — not constructed: the completed power-set object, Kruskal in full
-                          generality, Borel / Martin determinacy. *)
+                          classic + L4_witness (L4 applied to a countable family)
+    RZermeloDeterminacy — ZermeloDeterminacy.zermelo_determinacy (K rounds, moves in nat,
+                          arbitrary winning condition): classic + L4_witness
+    PHorizon            — not built: Kruskal in full generality, Borel / Martin
+                          determinacy, Higman's lemma for an alphabet of two or more
+                          letters.
+    PBoundary           — forbidden: the completed power-set object; the choice function
+                          read as a completed graph (P4ProhibitsAC.
+                          completed_graph_contradicts_P4, under the bridge). *)
 Definition price (r : ResultName) : AxiomPrice :=
   match r with
-  | RCantorGeneral | RCountabilityQ | RDiagonal | RCantorBendixson
-  | RTransfiniteLevel | RFiniteChoice
-  | RShrinkingIntervals | RKruskalFamilies | RACOnNat => PZero
-  | RHigman | RFiniteDeterminacy => PL3
-  | RFunctionalChoice => PL4
-  | RSchroederBernstein | RCardinalAntisym | RContinuumHypothesis => PL3_L4
-  | RPowerSetObject | RFullKruskal | RBorelDeterminacy => PBoundary
+  | RCountabilityQ | RDiagonal | RCantorGeneral
+  | RShrinkingIntervals | RIntervalGivenRate
+  | RSchroederBernsteinDefinite
+  | RCantorBendixson | RKruskalFamilies | RHigman
+  | RGameTreeDeterminacy
+  | ROrdinalInduction | RTransfiniteLevel
+  | RFiniteChoice | RACOnNat | RP4Reinterpretations | RPi11Codes => PZero
+  | RWeakDeterminacy => PL3
+  | RSurjectionBridge | RIntervalAnyCauchy => PL4
+  | RSchroederBernstein | RCardinalAntisym | RContinuumHypothesis
+  | RZermeloDeterminacy => PL3_L4
+  | RFullKruskal | RBorelDeterminacy | RHigmanGeneralAlphabet => PHorizon
+  | RPowerSetObject | RCompletedChoiceGraph => PBoundary
   end.
 
 (* ===== Concrete prices (each cross-checked by Print Assumptions elsewhere) == *)
@@ -135,7 +202,10 @@ Proof. reflexivity. Qed.
 Lemma kruskal_families_zero : price RKruskalFamilies = PZero.
 Proof. reflexivity. Qed.
 
-Lemma higman_uses_L3_not_AC : price RHigman = PL3.
+Lemma higman_costs_nothing : price RHigman = PZero.
+Proof. reflexivity. Qed.
+
+Lemma sb_definite_costs_nothing : price RSchroederBernsteinDefinite = PZero.
 Proof. reflexivity. Qed.
 
 Lemma sb_uses_L3_L4 : price RSchroederBernstein = PL3_L4.
@@ -144,7 +214,7 @@ Proof. reflexivity. Qed.
 Lemma cardinal_antisym_uses_L3_L4 : price RCardinalAntisym = PL3_L4.
 Proof. reflexivity. Qed.
 
-Lemma functional_choice_costs_L4 : price RFunctionalChoice = PL4.
+Lemma surjection_bridge_costs_L4 : price RSurjectionBridge = PL4.
 Proof. reflexivity. Qed.
 
 Lemma ac_on_nat_costs_nothing : price RACOnNat = PZero.
@@ -203,32 +273,55 @@ Proof.
   - simpl. left. reflexivity.
 Qed.
 
-(* ===================== The audited thesis ===================== *)
+(* ===================== What the table says about its own top ===================== *)
 
+(** Below the boundary: a tier under which something is PROVEN. *)
 Definition below_boundary (p : AxiomPrice) : Prop :=
-  match p with PBoundary => False | _ => True end.
+  match p with PHorizon | PBoundary => False | _ => True end.
 
-(** The completed power-set object is the boundary: not constructed. *)
+(** The forbidden rows are exactly two: the completed power-set object and the choice
+    function read as a completed graph. *)
+Lemma boundary_rows_exactly : forall r,
+  price r = PBoundary <-> r = RPowerSetObject \/ r = RCompletedChoiceGraph.
+Proof.
+  intro r. split.
+  - destruct r; simpl; intro H; try discriminate H; [left | right]; reflexivity.
+  - intros [H | H]; subst r; reflexivity.
+Qed.
+
+(** The rows not built yet are exactly three. *)
+Lemma horizon_rows_exactly : forall r,
+  price r = PHorizon <->
+  r = RFullKruskal \/ r = RBorelDeterminacy \/ r = RHigmanGeneralAlphabet.
+Proof.
+  intro r. split.
+  - destruct r; simpl; intro H; try discriminate H;
+      [left | right; left | right; right]; reflexivity.
+  - intros [H | [H | H]]; subst r; reflexivity.
+Qed.
+
+(** The completed power-set object is the boundary. *)
 Lemma power_set_object_is_boundary : price RPowerSetObject = PBoundary.
 Proof. reflexivity. Qed.
 
-(** Every PROVEN result listed here sits below the boundary.  This says nothing
-    about strength relative to choice: see the section above. *)
-Lemma proven_results_below_boundary :
-  below_boundary (price RCantorGeneral) /\
-  below_boundary (price RSchroederBernstein) /\
-  below_boundary (price RHigman) /\
-  below_boundary (price RCardinalAntisym) /\
-  below_boundary (price RCantorBendixson) /\
-  below_boundary (price RTransfiniteLevel) /\
-  below_boundary (price RShrinkingIntervals) /\
-  below_boundary (price RKruskalFamilies) /\
-  below_boundary (price RFunctionalChoice) /\
-  below_boundary (price RACOnNat).
-Proof. repeat split; exact I. Qed.
+(** Every row of the table other than those five sits below the boundary.  This is a
+    property of the TABLE; it says nothing about strength relative to choice — see the
+    section above. *)
+Lemma proven_results_below_boundary : forall r,
+  below_boundary (price r) <->
+  ~ In r [RFullKruskal; RBorelDeterminacy; RHigmanGeneralAlphabet;
+          RPowerSetObject; RCompletedChoiceGraph].
+Proof.
+  intro r. split.
+  - intros Hb Hin. simpl in Hin.
+    destruct Hin as [H | [H | [H | [H | [H | []]]]]]; subst r; exact Hb.
+  - intro Hn. destruct r; simpl; try exact I; exfalso; apply Hn; simpl; tauto.
+Qed.
 
 (* Axiom audit: every lemma of this file is closed under the global context. *)
 Print Assumptions l4_statement_gives_functional_choice.
 Print Assumptions l3_l4_statements_give_epsilon.
 Print Assumptions ac_on_nat_free.
+Print Assumptions boundary_rows_exactly.
+Print Assumptions horizon_rows_exactly.
 Print Assumptions proven_results_below_boundary.

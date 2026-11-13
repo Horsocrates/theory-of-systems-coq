@@ -5,7 +5,7 @@
               the same function as a completed GRAPH (all pairs at once)
     Rules:    completed graph + P4 stage bound + bridge → contradiction;
               the rule reading stays (choice from nonempty lists = head)
-    STATUS:   12 Qed, 0 Admitted, 0 axioms
+    STATUS:   15 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: April 2026 (graph made genuine: November 2026)
 
     THE ARGUMENT:
@@ -232,4 +232,75 @@ Proof.
   split; [exact ac_implies_completed |
   split; [exact finite_choice_works |
   exact L5_choose_deterministic]].
+Qed.
+
+(* ================================================================ *)
+(*  Nov 2026: THE TWO READINGS OF A GRAPH, AS THEOREMS               *)
+(* ================================================================ *)
+
+(* Elements: a collection S of indices (here: the indices of a graph) and a
+             staged actuality.
+   Roles:    S read as a COMPLETED WHOLE (bridge: every member actual at
+             stage 0) vs S read as a RULE ON DEMAND (every member becomes
+             actual at SOME stage).
+   Rules:    the first reading entails the second and not conversely; under
+             the P4 stage bound the first is impossible, the second is
+             realised by the stages 0..n. *)
+
+(** The rule reading: every member becomes actual at some stage. *)
+Definition rule_reading (S : nat -> Prop) (actual : nat -> nat -> Prop) : Prop :=
+  forall n, S n -> exists stage, actual stage n.
+
+(** Choice from nonempty lists, read as a rule, is compatible with P4. *)
+Theorem choice_as_rule_compatible_with_P4 :
+  forall F : nat -> list nat, (forall n, F n <> nil) ->
+  exists (f : nat -> nat) (actual : nat -> nat -> Prop),
+    (forall n, In (f n) (F n)) /\
+    P4_stage_bounded actual /\
+    rule_reading (graph_indices (choice_graph f)) actual.
+Proof.
+  intros F Hne.
+  exists (fun n => L5_choose (F n) 0%nat), (fun stage n => (n <= stage)%nat).
+  split; [| split].
+  - intro n. apply L5_choose_in. apply Hne.
+  - intro stage. exists stage. intros n H. exact H.
+  - intros n _. exists n. apply Nat.le_refl.
+Qed.
+
+(** P4 cuts off the completed reading of EVERY choice function for the family
+    and keeps the rule reading of one. *)
+Theorem P4_cuts_completed_keeps_rule :
+  forall F : nat -> list nat, (forall n, F n <> nil) ->
+  (forall (f : nat -> nat) (actual : nat -> nat -> Prop),
+     (forall n, In (f n) (F n)) ->
+     P4_stage_bounded actual ->
+     ~ bridge (graph_indices (choice_graph f)) actual) /\
+  (exists (f : nat -> nat) (actual : nat -> nat -> Prop),
+     (forall n, In (f n) (F n)) /\
+     P4_stage_bounded actual /\
+     rule_reading (graph_indices (choice_graph f)) actual).
+Proof.
+  intros F Hne. split.
+  - intros f actual _ HP4 Hb. exact (completed_graph_contradicts_P4 f actual HP4 Hb).
+  - exact (choice_as_rule_compatible_with_P4 F Hne).
+Qed.
+
+(** The completed reading demands strictly more than the rule reading: it
+    entails it, and for the graph of any function there is a stage-bounded
+    actuality under which the rule reading holds and the bridge fails. *)
+Theorem completed_reading_strictly_stronger :
+  (forall S actual, bridge S actual -> rule_reading S actual) /\
+  (forall f : nat -> nat, exists actual : nat -> nat -> Prop,
+     P4_stage_bounded actual /\
+     rule_reading (graph_indices (choice_graph f)) actual /\
+     ~ bridge (graph_indices (choice_graph f)) actual).
+Proof.
+  split.
+  - intros S actual Hb n Hn. exists 0%nat. apply Hb. exact Hn.
+  - intro f. exists (fun stage n => (n <= stage)%nat).
+    assert (HP4 : P4_stage_bounded (fun stage n => (n <= stage)%nat)).
+    { intro stage. exists stage. intros n H. exact H. }
+    split; [exact HP4 | split].
+    + intros n _. exists n. apply Nat.le_refl.
+    + intro Hb. exact (completed_graph_contradicts_P4 f _ HP4 Hb).
 Qed.

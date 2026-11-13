@@ -1,0 +1,690 @@
+{
+ "batch": "audit-part-10",
+ "chapter": "10 Теория множеств без аксиомы выбора/03 Сравнение мощностей без выбора Шрёдер–Бернштейн и теорема Кантора.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 14,
+   "theorem": null,
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Мощность — не число, приклеенное к завершённому множеству, а *роль*, которую носитель (тип) играет в предпорядке вложений. Два носителя *равномощны*, когда играют одну роль (есть биекция).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Определения injects (CardinalityWithoutChoice.v:30), bijects (:36) — существование функции с нужным свойством, для произвольных типов. Для bijects в файле доказаны рефлексивность и транзитивность; симметрии нет (см. заметки, сомнительное место 3)."
+  },
+  {
+   "line": 18,
+   "theorem": "cardinal_antisym_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Глава держится на двух столпах, оба — *без аксиомы выбора*:",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): слова страницы прежние; теперь они опираются на теорему. cardinal_antisym_definite : ExcludedMiddle -> UniqueWitness -> forall A B, injects A B -> injects B A -> bijects A B — Closed under the global context: антисимметрия выводится из исключённого третьего и извлечения единственного свидетеля, выбор из многих свидетелей в посылки не входит."
+  },
+  {
+   "line": 20,
+   "theorem": "cardinal_antisym",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "**Шрёдер–Бернштейн**: если $A$ вкладывается в $B$ и $B$ в $A$, то $A$ и $B$ равномощны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cardinal_antisym (CardinalityWithoutChoice.v:98): forall A B, injects A B -> injects B A -> bijects A B — для любых двух типов, без дополнительных посылок. Переменные inhA, inhB секции SchroederBernstein_ERR.v в утверждение Schroeder_Bernstein не входят (проверено командой Check)."
+  },
+  {
+   "line": 20,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Это делает предпорядок вложений *антисимметричным* с точностью до биекции — и доказывается без выбора — из исключённого третьего и извлечения *единственного* свидетеля, на конечной глубине цепи; в формализации цена теоремы — L3 и L4 (не 0 аксиом).",
+   "page_price": "без выбора; в формализации L3 и L4",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «без выбора, ценою L3 и L4». Schroeder_Bernstein_definite : (forall P, P \\/ ~ P) -> (forall T P, (exists! x, P x) -> {x | P x}) -> forall A B f g, инъективность f и g -> exists h, инъективна и сюръективна. Closed under the global context. Прежняя Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness)."
+  },
+  {
+   "line": 21,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "**Общая теорема Кантора**: ни один носитель не накрывает (сюръективно) своё пространство bool-предикатов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "no_maximal_cardinality (CardinalityWithoutChoice.v:108): forall X : Type, ~ surjects X (X -> bool). Тип X произволен; равенство в surjects — равенство функций X -> bool."
+  },
+  {
+   "line": 21,
+   "theorem": "cantor_no_surjection",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Максимальной мощности нет — и это *конструктивно*, без единой аксиомы.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "cantor_no_surjection, no_maximal_bool_power, no_maximal_cardinality: Closed under the global context. «Максимума нет» — в сюръективном смысле (стр. 88–91); строгость в порядке вложений в файлах не доказана, при цене L3 + L4 доказуема (пробный файл; заметки, сомнительное место 1)."
+  },
+  {
+   "line": 23,
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "*обратный* мост — от сюръекции $A\\twoheadrightarrow B$ к вложению $B\\hookrightarrow A$ — требует взять по прообразу в каждом слое сюръекции, а прообраз в слое не единствен. Это и есть выбор. В теории мощностей он живёт именно здесь: антисимметрии хватает *единственного* свидетеля, мосту нужен свидетель *произвольный*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «это в точности аксиома выбора. В ToS он не доказывается» — неверно: surjects_injects_back : surjects A B -> injects B A выводится из одного L4_witness. Антисимметрия — cardinal_antisym_definite, Closed under the global context."
+  },
+  {
+   "line": 30,
+   "theorem": "cardinal_antisym_definite",
+   "claim": "Антисимметрия (Шрёдер–Бернштейн) и отсутствие максимума (Кантор) держатся без выбора; выбор локализуется в одном переходе — сюръекция в инъекцию.*",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): слова страницы прежние; после шага 1 они опираются на теоремы: cardinal_antisym_definite (посылки — исключённое третье и единственный свидетель, Closed), no_maximal_cardinality (Closed), surjects_injects_back (L4_witness).",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 35,
+   "theorem": "injects",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Зафиксируем три роли сравнения для носителей (типов) $A,B$:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition injects (A B : Type) : Prop := exists f : A -> B, forall a1 a2, f a1 = f a2 -> a1 = a2 (CardinalityWithoutChoice.v:30). Формула страницы соответствует."
+  },
+  {
+   "line": 39,
+   "theorem": "surjects",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "A \\twoheadrightarrow B \\;:=\\; \\exists \\text{сюръекция}; \\quad",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition surjects (A B : Type) : Prop := exists f : A -> B, forall b : B, exists a : A, f a = b (CardinalityWithoutChoice.v:33)."
+  },
+  {
+   "line": 40,
+   "theorem": "bijects",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "A \\simeq B \\;:=\\; \\exists \\text{биекция.}",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition bijects (CardinalityWithoutChoice.v:36): существует f : A -> B, инъективная и сюръективная. Обратная функция в определение не входит."
+  },
+  {
+   "line": 43,
+   "theorem": "injects_refl",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Отношение $\\le$ (вложение) — *предпорядок*: рефлексивно (тождественная инъекция) и транзитивно (композиция инъекций инъективна).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "injects_refl : forall A, injects A A (:42); injects_trans : forall A B C, injects A B -> injects B C -> injects A C (:45). Свидетели — тождественная функция и композиция, как на странице."
+  },
+  {
+   "line": 44,
+   "theorem": "injects_trans",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Оба свойства конструктивны, без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "injects_refl, injects_trans: Closed under the global context."
+  },
+  {
+   "line": 44,
+   "theorem": "surjects_trans",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Так же ведут себя сюръекция и биекция: композиция сохраняет каждую из ролей.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "surjects_refl (:54), surjects_trans (:57), bijects_refl (:67), bijects_trans (:74) — все Closed under the global context."
+  },
+  {
+   "line": 49,
+   "theorem": "bijects_injects",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Равномощность $A\\simeq B$ — совпадение ролей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Определительная фраза. В файле: bijects_injects (A ~ B влечёт A <= B, :85), bijects_both (:88). Обратного вложения B <= A из A ~ B и симметрии ~ в файле нет; обе получаются ценой L4_witness (пробная bijects_sym). Заметки, сомнительное место 3."
+  },
+  {
+   "line": 52,
+   "theorem": null,
+   "claim": "*$\\le$ — роль-правило (предпорядок вложений), конструктивно рефлексивное и транзитивное; мощность — позиция носителя в этом предпорядке, равномощность — совпадение ролей.*",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "injects_refl, injects_trans: Closed under the global context."
+  },
+  {
+   "line": 58,
+   "theorem": "cardinal_antisym",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Антисимметрия предпорядка — содержательное ядро теории мощностей: если $A\\le B$ и $B\\le A$, то $A\\simeq B$. Это теорема Шрёдера–Бернштейна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cardinal_antisym (:98): forall A B, injects A B -> injects B A -> bijects A B. Доказательство — вызов Schroeder_Bernstein (SchroederBernstein_ERR.v:357)."
+  },
+  {
+   "line": 63,
+   "theorem": "chain_trichotomy",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Цепь точки, прослеженная назад, либо за конечное число шагов обрывается в $B$ (на точке без прообраза), либо обрывается в $A$, либо не обрывается ни на какой глубине (`chain_trichotomy`). Биекция $h$ собирается по первому признаку:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «каждая точка либо укоренена на конечной глубине, либо принадлежит двусторонне-бесконечной цепи». chain_trichotomy : (forall P, P \\/ ~ P) -> forall A B f g a, B_rooted f g a \\/ A_stops f g a \\/ never_stops f g a — Closed under the global context (исключённое третье — посылкой). B_rooted_iff_B_stops: признак файла есть «цепь обрывается в B»."
+  },
+  {
+   "line": 65,
+   "theorem": null,
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Биекция $h$ собирается по первому признаку: на укоренённых в $B$ точках берём частичный обратный $g^{-1}$, иначе — $f$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition h (SchroederBernstein_ERR.v): match em_inf (B_rooted a) with left HBa => g_inv a … | right _ => f a. После шага 1 Части X признак решается em_inf (из исключённого третьего и единственного свидетеля)."
+  },
+  {
+   "line": 67,
+   "theorem": null,
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Бесконечный объект заменён конечным процессом — ход в духе P4.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глубина — аргумент типа nat у B_rooted_depth (:117) и B_rooted_in_B_depth (:124). Сам признак B_rooted — существование глубины; он не вычисляется, а разрешается исключённым третьим (L3_informative), что страница оговаривает на стр. 69."
+  },
+  {
+   "line": 70,
+   "theorem": "Schroeder_Bernstein",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Какова аксиомная цена? По компилятору — `classic` (L3) и `L4_witness` (L4).[^3]",
+   "page_price": "classic (L3) и L4_witness (L4)",
+   "verdict": "ok",
+   "note": "Print Assumptions Schroeder_Bernstein: Classical_Prop.classic, ToS_Axioms.L4_witness — как на странице. Слова «и не аксиома выбора» после шага 1 Части X заменены теоремой Schroeder_Bernstein_definite (см. соседние записи)."
+  },
+  {
+   "line": 71,
+   "theorem": "em_inf",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "L3 входит как разрешимость признака укоренённости. L4 входит только как извлечение *единственного* свидетеля: прообраза под инъекцией и бита истинности признака.",
+   "page_price": "L3 — разрешимость признака; L4 — только единственный свидетель",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «L4_witness выбирает свидетеля из одного существования; функция по семейству из него выводима… завершённого графа выбора теорема не требует». После шага 1 в доказательстве два извлечения, оба — единственного свидетеля: DD для частичных обратных (f_inv, g_inv) и DD внутри em_inf (бит истинности). Closed under the global context."
+  },
+  {
+   "line": 75,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Поэтому фундаментальная теорема о мощностях держится без выбора.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): слова страницы прежние; теперь они опираются на теорему. Schroeder_Bernstein_definite : (forall P, P \\/ ~ P) -> (forall T P, (exists! x, P x) -> {x | P x}) -> forall A B f g, инъективность f и g -> exists h, инъективна и сюръективна. Closed under the global context. Прежняя Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness)."
+  },
+  {
+   "line": 79,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Завершённая цепь заменена конечной глубиной (P4); цена — L3 и извлечение единственного свидетеля, не выбор.*",
+   "page_price": "L3 и единственный свидетель",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «цена — L3 + L4, не выбор». Schroeder_Bernstein_definite : (forall P, P \\/ ~ P) -> (forall T P, (exists! x, P x) -> {x | P x}) -> forall A B f g, инъективность f и g -> exists h, инъективна и сюръективна. Closed under the global context. Прежняя Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness)."
+  },
+  {
+   "line": 84,
+   "theorem": "cantor_no_surjection",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Второй столп — общая теорема Кантора: для *любого* типа $X$ нет сюръекции $X \\to (X\\to\\mathtt{bool})$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_no_surjection (CantorTheoremGeneral.v:55): forall f : X -> (X -> bool), ~ surjective f, где X — произвольный тип секции (Context {X : Type}); surjective f := forall g, exists a, f a = g (:25). Теорема действительно общая, не для nat. Равенство f a = g — равенство функций; поточечная форма сильнее и тоже доказуема без допущений (заметки, сомнительное место 2)."
+  },
+  {
+   "line": 85,
+   "theorem": "diagonal_not_in_image",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Доказательство — та же диагональ, что в 10.2, но для произвольного носителя: предикат $g(x) := \\lnot f(x)(x)$ не совпадает ни с одной «строкой» $f(a)$, ибо в точке $a$ они различаются.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_diagonal f := fun x => negb (f x x) (:29); diagonal_not_in_image : forall f a, f a <> cantor_diagonal f (:46). Closed under the global context. Отсылка к 10.2 не сверялась."
+  },
+  {
+   "line": 87,
+   "theorem": "diagonal_differs_at_point",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Замечательно, что *никакого жителя* типа $X$ не требуется: сама сюръективность поставляет свидетеля — тот $a$, для которого $f(a)=g$, — и приводит к противоречию $f(a)(a) = \\lnot f(a)(a)$.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылки о населённости X нет. diagonal_differs_at_point : f a = cantor_diagonal f -> f a a = negb (f a a) (:35); no_bool_fixpoint : b = negb b -> False (:32). Ход доказательства cantor_no_surjection (:57–61) совпадает с описанием."
+  },
+  {
+   "line": 91,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Отсюда: ни один носитель не накрывает своё пространство bool-предикатов — *максимальной мощности нет*. Над любым $X$ есть роль, которую он *не накрывает сюръективно* — пространство предикатов $X\\to\\mathtt{bool}$.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "no_maximal_cardinality : forall X : Type, ~ surjects X (X -> bool) (:108). Слова «максимальной мощности нет» страница тут же ограничивает сюръективным смыслом (стр. 88–91)."
+  },
+  {
+   "line": 93,
+   "theorem": "no_maximal_cardinality",
+   "claim": "В этом канторовском (сюръективном) смысле максимума нет без единого допущения.",
+   "page_price": "0 допущений",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «это не строгость в инъекционном порядке (инъекция потребовала бы разрешимого равенства)». no_maximal_cardinality — Closed under the global context; строгость в порядке вложений теперь доказана отдельной теоремой (no_maximal_in_injection_order_definite, см. соседнюю запись).",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 100,
+   "theorem": null,
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Речь о *типе* bool-предикатов $X\\to\\mathtt{bool}$, а *не* о завершённом степенном множестве $\\mathcal{P}(X)$ как объекте.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорема сформулирована для типа X -> bool (разрешимые предикаты). Для предикатов X -> Prop та же диагональ проходит без допущений (пробная cantor_no_pointwise_surjection_Prop); в файле этого варианта нет."
+  },
+  {
+   "line": 101,
+   "theorem": null,
+   "claim": "Степень-как-множество в ToS структурно не строится (P1, Глава 10.1): «множество всех подмножеств» потребовало бы критерия по своему же уровню.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файлах главы об этом — только комментарий шапки CantorTheoremGeneral.v (строки 14–16); теоремы о степенном множестве в них нет, и страница на теорему не ссылается. Ссылка на P1 и главу 10.1 здесь не сверялась."
+  },
+  {
+   "line": 106,
+   "theorem": "no_maximal_bool_power",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "*Теорема Кантора — роль-правило отсутствия максимума: каждый носитель не накрывает сюръективно свою bool-степень. Конструктивно (0 аксиом) и о ролях-типах, а не о завершённом степенном объекте.*",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "no_maximal_bool_power (CantorTheoremGeneral.v:75), cantor_no_surjection, no_maximal_cardinality: Closed under the global context."
+  },
+  {
+   "line": 116,
+   "theorem": "split_iff_choice",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Именно этот обратный мост — *выбрать по одному прообразу для каждого $b\\in B$* — и есть выбор по слоям сюръекции: утверждение «у каждой сюръекции есть правая обратная» равносильно выбору функции по семейству (`split_iff_choice`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «и есть аксиома выбора… В ToS он не доказывается». split_iff_choice : surjections_split <-> functional_choice — Closed under the global context."
+  },
+  {
+   "line": 121,
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Аксиома `L4_witness` в объявленном виде единственности не требует; применённая к каждому слою, она даёт правую обратную, и мост в формализации выводится (`surjects_injects_back`, цена — один `L4_witness`).",
+   "page_price": "один L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «с одним лишь L4_witness можно обратить биекцию, но не произвольную сюръекцию» — неверно. surjects_injects_back : forall A B, surjects A B -> injects B A; Print Assumptions — ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 126,
+   "theorem": null,
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Вот почему антисимметрия $\\le$ опирается на Шрёдер–Бернштейна (L3${}+{}$L4), а не на выбор: она работает с *инъекциями*, где обратный частичный однозначен.",
+   "page_price": "L3 + L4, а не выбор",
+   "verdict": "ok",
+   "note": "Частичный обратный g_inv строится через L4_definite по единственному прообразу (SchroederBernstein_ERR.v:83, g_preimage_unique :71). Что неединственный свидетель доказательству не нужен, подтверждено пробным CheckSB.v (Schroeder_Bernstein_definite: посылки — исключённое третье и определённое описание; Closed under the global context). В src это теоремой не закреплено (расхождение 2)."
+  },
+  {
+   "line": 127,
+   "theorem": "surjects_injects_back",
+   "claim": "Содержательные результаты главы — предпорядок, антисимметрия, отсутствие максимума — выбора не требуют; выбор локализован ровно в одном переходе, и цена этого перехода — `L4_witness` в полную силу.",
+   "page_price": "выбора не требуют",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «в одном непроведённом переходе». Переход проведён: surjects_injects_back (L4_witness); антисимметрия — cardinal_antisym_definite (Closed).",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 132,
+   "theorem": "surjects_injects_back",
+   "claim": "*Сюръекция-в-инъекцию — это ровно место, где требуется выбор; в формализации его оплачивает `L4_witness`, взятый в полную силу. Антисимметрия живёт на инъекциях (L4 обращает единственное), а не на слоях сюръекции (где L4 выбирает из многих).*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «ToS его не проводит». surjects_injects_back — L4_witness; bijects_sym_definite и cardinal_antisym_definite — Closed under the global context.",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 140,
+   "theorem": null,
+   "claim": "| *Rules* (L5) | предпорядок вложений $\\le$ (рефл.${}+{}$транз.); Шрёдер–Бернштейн (конечная глубина цепи) для антисимметрии; диагональ Кантора для отсутствия максимума |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "injects_refl, injects_trans; Schroeder_Bernstein (глубина — nat в B_rooted_depth); cantor_diagonal, cantor_no_surjection. «Отсутствие максимума» — в сюръективном смысле стр. 88–91."
+  },
+  {
+   "line": 142,
+   "theorem": "nat",
+   "external": true,
+   "claim": "| *Elements* (L1${}+{}$P4) | носители (типы) и их точки; конечная глубина цепи (`nat`); кардинал-число завершённым Элементом не является |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "nat — тип стандартной библиотеки; первый аргумент B_rooted_depth : nat -> A -> Prop (SchroederBernstein_ERR.v:117). Носители — Variables A B : Type (:48).",
+   "assumptions": "не применимо (тип стандартной библиотеки)"
+  },
+  {
+   "line": 144,
+   "theorem": "h_injective",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "**Корректность.** $\\le$ — корректный предпорядок (инъекции компонуются); $h$ Шрёдера–Бернштейна корректна как биекция (инъективна${}+{}$сюръективна).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "h_injective, h_surjective (SchroederBernstein_ERR.v). После шага 1 Части X обе леммы доказаны внутри раздела с двумя посылками (исключённое третье EM и извлечение единственного свидетеля DD) и допущений не имеют: Closed under the global context."
+  },
+  {
+   "line": 147,
+   "theorem": "cardinal_antisym",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "**Что даёт.** Антисимметрия $\\le$ — `cardinal_antisym` (L3${}+{}$L4) и",
+   "page_price": "L3 + L4",
+   "verdict": "ok",
+   "note": "Print Assumptions cardinal_antisym: Classical_Prop.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 149,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "отсутствие максимума — `no_maximal_cardinality` (0 аксиом); предпорядок — 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "no_maximal_cardinality, injects_refl, injects_trans: Closed under the global context."
+  },
+  {
+   "line": 153,
+   "theorem": null,
+   "claim": "Вполне-упорядочение всех мощностей в одну линейную шкалу — это теорема выбора (Цермело), здесь не предполагаемая.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В src теоремы о линейности порядка injects нет (слово injects встречается только в CardinalityWithoutChoice.v). Математическое утверждение о теореме Цермело компилятором не проверялось."
+  },
+  {
+   "line": 156,
+   "theorem": "surjects_injects_back",
+   "claim": "**Честные границы.** Обратный мост сюръекция${}\\to{}$инъекция — выбор по слоям; в формализации он выводится ценой `L4_witness`, взятого в полную силу, и антисимметрии эта сила не нужна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «сам выбор, не проведён». surjects_injects_back — L4_witness; cardinal_antisym_definite — Closed under the global context.",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 158,
+   "theorem": null,
+   "claim": "Линейность кардинальной шкалы (трихотомия мощностей) требует выбора и здесь не утверждается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теоремы вида injects A B \\/ injects B A в src нет. Выводима ли трихотомия из classic + L4_witness, не проверялось."
+  },
+  {
+   "line": 161,
+   "theorem": "cardinal_antisym_definite",
+   "claim": "*Сравнение мощностей — предпорядок ролей; антисимметрия (Шрёдер–Бернштейн) и отсутствие максимума (Кантор) держатся без выбора (исключённое третье с единственным свидетелем и 0 аксиом соответственно); выбор локализован в переходе от сюръекции к инъекции, где L4 берётся в полную силу, и в линейности шкалы.*",
+   "page_price": "без выбора (L3 + L4 и 0 аксиом соответственно)",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «(L3 + L4 и 0 аксиом соответственно); выбор локализован в единственном непроведённом переходе». cardinal_antisym_definite, no_maximal_cardinality — Closed; surjects_injects_back — L4_witness.",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 169,
+   "theorem": "cardinal_antisym",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Шрёдер–Бернштейн делает его антисимметричным с точностью до биекции (`cardinal_antisym`, L3${}+{}$L4, конечная глубина вместо бесконечной цепи);",
+   "page_price": "L3 + L4",
+   "verdict": "ok",
+   "note": "Утверждение и цена совпадают с исходником и с Print Assumptions (classic, L4_witness)."
+  },
+  {
+   "line": 171,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "общая теорема Кантора лишает шкалу максимума (`no_maximal_cardinality`, 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Closed under the global context. «Лишает шкалу максимума» — в сюръективном смысле, оговорённом на стр. 88–91: утверждение теоремы — ~ surjects X (X -> bool), о порядке вложений оно не говорит (заметки, сомнительное место 1)."
+  },
+  {
+   "line": 172,
+   "theorem": "surjects_injects_back",
+   "claim": "Выбор понадобился лишь для обратного моста сюръекция${}\\to{}$инъекция — там его оплачивает `L4_witness` в полную силу — и понадобился бы для линейности шкалы, которую ToS не утверждает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «понадобилась бы… и именно их ToS не проводит». Мост проведён: surjects_injects_back (L4_witness). Теоремы о линейности порядка вложений в формализации нет.",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 181,
+   "theorem": "cardinal_antisym_definite",
+   "claim": "*Мощность есть роль в предпорядке вложений, а не кардинал-число; антисимметрия и отсутствие максимума доказуемы без выбора. Выбор не исчезает — он точно локализуется: в переходе от сюръекции к инъекции, где L4 берётся в полную силу, и в линейности кардинальной шкалы, которую ToS оставляет непроведённой.*",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «в переходе от сюръекции к инъекции и в линейности… которые ToS оставляет непроведёнными». cardinal_antisym_definite — Closed; surjects_injects_back — L4_witness.",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 188,
+   "theorem": null,
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "В `settheory/CardinalityWithoutChoice.v` (эта работа): `injects`, `surjects`, `bijects`; `injects_refl`, `injects_trans` (предпорядок $\\le$), `surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**.",
+   "page_price": "все 0 аксиом",
+   "verdict": "ok",
+   "note": "Восемь лемм (injects_refl, injects_trans, surjects_refl, surjects_trans, bijects_refl, bijects_trans, bijects_injects, bijects_both): у каждой Closed under the global context. В файле 10 Qed (шапка: 10)."
+  },
+  {
+   "line": 188,
+   "theorem": "surjects_trans",
+   "claim": "`surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было сокращение «surjects_refl/_trans, bijects_refl/_trans/_injects/_both» — таких объявлений нет; выписаны шесть полных имён. surjects_trans : forall A B C, surjects A B -> surjects B C -> surjects A C. Closed under the global context.",
+   "file": "src/settheory/CardinalityWithoutChoice.v"
+  },
+  {
+   "line": 188,
+   "theorem": "surjects_refl",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "surjects_refl : forall A, surjects A A. Closed under the global context."
+  },
+  {
+   "line": 188,
+   "theorem": "bijects_refl",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "bijects_refl : forall A, bijects A A. Closed under the global context."
+  },
+  {
+   "line": 188,
+   "theorem": "bijects_trans",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "bijects_trans : forall A B C, bijects A B -> bijects B C -> bijects A C. Closed under the global context."
+  },
+  {
+   "line": 188,
+   "theorem": "bijects_both",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "bijects_both : forall A B, bijects A B -> injects A B /\\ surjects A B. Closed under the global context."
+  },
+  {
+   "line": 189,
+   "theorem": "Schroeder_Bernstein",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "`Schroeder_Bernstein` (`SchroederBernstein_ERR.v`): из двух инъекций строится биекция $h$ (инъективная и сюръективная).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "После закрытия секции: forall (A B : Type) (f : A -> B) (g : B -> A), инъективность f -> инъективность g -> exists h : A -> B, инъективность /\\ сюръективность (SchroederBernstein_ERR.v:357; полная запись получена командой Check). В файле 16 Qed (шапка называет 14; страница числа не приводит)."
+  },
+  {
+   "line": 189,
+   "theorem": "B_rooted",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Глубина цепи — `nat`;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "B_rooted a := exists n, B_rooted_depth n a (:131); B_rooted_depth : nat -> A -> Prop (:117)."
+  },
+  {
+   "line": 189,
+   "theorem": "em_inf",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "признак `B_rooted` («цепь обрывается в $B$», `B_rooted_iff_B_stops`) решается информативным исключённым третьим `em_inf`. Оно выведено из исключённого третьего и извлечения единственного свидетеля: бит истинности высказывания единствен.",
+   "page_price": "цена L3",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «решается через L3_informative — это и есть цена L3» (L3_informative стоит на classic и L4_witness). После шага 1 доказательство использует em_inf : (forall P, P \\/ ~ P) -> (forall T P, (exists! x, P x) -> {x | P x}) -> forall P, {P} + {~ P} — Closed under the global context."
+  },
+  {
+   "line": 190,
+   "theorem": "cardinal_antisym",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`Schroeder_Bernstein` и обёртка `cardinal_antisym` — те же теоремы, в которых посылки заменены на `classic` и `L4_definite`",
+   "page_price": "classic + L4_witness",
+   "verdict": "ok",
+   "note": "Print Assumptions cardinal_antisym и Schroeder_Bernstein: Classical_Prop.classic, ToS_Axioms.L4_witness — и только они. После шага 1 Части X обе — частные случаи теорем с посылками (cardinal_antisym_definite, Schroeder_Bernstein_definite)."
+  },
+  {
+   "line": 190,
+   "theorem": "classic",
+   "external": true,
+   "claim": "для них компилятор называет `classic` ${}+{}$ `L4_witness`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "classic — Stdlib.Logic.Classical_Prop.classic; в SchroederBernstein_ERR.v приходит через ToS_Axioms.",
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "file": "src/ToS_Axioms.v"
+  },
+  {
+   "line": 190,
+   "theorem": "L4_definite",
+   "file": "src/ToS_Axioms.v",
+   "claim": "`Schroeder_Bernstein` и обёртка `cardinal_antisym` — те же теоремы, в которых посылки заменены на `classic` и `L4_definite` (определённое описание, выведенное из `L4_witness`); для них компилятор называет `classic` ${}+{}$ `L4_witness`.",
+   "page_price": "classic + L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «L4_witness применяется через L4_definite» при втором, неназванном пути через L3_informative. После шага 1 путь один: Schroeder_Bernstein := Schroeder_Bernstein_definite classic (@L4_definite). L4_definite : (exists! x, P x) -> {x | P x}, выведена из L4_witness."
+  },
+  {
+   "line": 191,
+   "theorem": "cantor_no_surjection",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "`cantor_no_surjection` (`settheory/CantorTheoremGeneral.v`, эта работа): $\\forall X (f:X\\to(X\\to\\mathtt{bool})),\\ \\lnot \\texttt{surjective} f$. Чисто конструктивно, **0 аксиом**; работает для любого $X$ без предположения о его населённости.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Утверждение совпадает (CantorTheoremGeneral.v:55; X — произвольный тип, посылки о населённости нет). Closed under the global context. Одноимённые теоремы есть ещё в cs/HaltingRoleLimit.v:156 и nonstandard/SeedDiagonalBridge.v:67; глава называет файл settheory/CantorTheoremGeneral.v. В файле 6 Qed (шапка: 6)."
+  },
+  {
+   "line": 192,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`no_maximal_cardinality` (`CardinalityWithoutChoice.v`): $\\forall X,\\ \\lnot (X \\twoheadrightarrow (X\\to\\mathtt{bool}))$. Следствие `cantor_no_surjection`; **0 аксиом**.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "forall X : Type, ~ surjects X (X -> bool) (:108); доказательство — exact (cantor_no_surjection f Hf). Closed under the global context."
+  },
+  {
+   "line": 193,
+   "theorem": "surjection_has_section",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "[^6]: `surjects_injects_back` (`CardinalityWithoutChoice.v`): `surjects A B -> injects B A`;",
+   "page_price": "один L4_witness",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 1, слово автора): было «документировано в шапке: переход есть выбор и здесь не выводится» — шапка была неверна и исправлена. surjection_has_section : (forall b, exists a, f a = b) -> exists g, forall b, f (g b) = b; Print Assumptions — ToS_Axioms.L4_witness; из неё surjects_injects_back."
+  },
+  {
+   "line": 188,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "bijects_injects : forall A B, bijects A B -> injects A B. Closed under the global context.",
+   "theorem": "bijects_injects",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`surjects_refl`, `surjects_trans`, `bijects_refl`, `bijects_trans`, `bijects_injects`, `bijects_both` — все **0 аксиом**."
+  },
+  {
+   "line": 73,
+   "page_price": "0 допущений (посылки вместо аксиом)",
+   "verdict": "ok",
+   "note": "Новая теорема шага 1. Schroeder_Bernstein_definite : (forall P, P \\/ ~ P) -> (forall T P, (exists! x, P x) -> {x | P x}) -> forall A B f g, инъективность f и g -> exists h, инъективна и сюръективна. Closed under the global context. Прежняя Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness).",
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Это закреплено теоремой `Schroeder_Bernstein_definite`: то же заключение выведено из двух посылок — исключённого третьего и извлечения единственного свидетеля, — и допущений у неё нет."
+  },
+  {
+   "line": 148,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новая теорема шага 1: ExcludedMiddle -> UniqueWitness -> forall A B, injects A B -> injects B A -> bijects A B. Closed under the global context.",
+   "theorem": "cardinal_antisym_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`cardinal_antisym_definite` (из исключённого третьего и единственного свидетеля как посылок, 0 аксиом)"
+  },
+  {
+   "line": 94,
+   "page_price": "L3 и единственный свидетель",
+   "verdict": "ok",
+   "note": "Новая теорема шага 1: ExcludedMiddle -> UniqueWitness -> forall X, exists Y, injects X Y /\\ ~ injects Y X. Closed under the global context; при classic и L4_definite — no_maximal_in_injection_order (classic + L4_witness). Прежде страница говорила, что строгости в порядке вложений нет.",
+   "theorem": "no_maximal_in_injection_order_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "В порядке вложений то же доказано ценой L3 и единственного свидетеля: вложение $X\\hookrightarrow(X\\to\\mathtt{bool})$ требует решать равенство точек, и тогда над каждым носителем есть строго больший (`no_maximal_in_injection_order_definite`)."
+  },
+  {
+   "line": 118,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новая теорема шага 1: UniqueWitness -> forall A B, bijects A B -> bijects B A. Closed under the global context. Что мост не выводится из одного единственного свидетеля, средствами Rocq не проверяется — страница говорит «неприменимо», а не «невыводимо».",
+   "theorem": "bijects_sym_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Извлечение *единственного* свидетеля обращает *биекцию* (прообразы единственны, `bijects_sym_definite`); к слою произвольной сюръекции оно неприменимо: прообразов там может быть много."
+  },
+  {
+   "line": 190,
+   "page_price": "0 допущений",
+   "verdict": "ok",
+   "note": "Сноска 3 после шага 1. Schroeder_Bernstein_definite : (forall P, P \\/ ~ P) -> (forall T P, (exists! x, P x) -> {x | P x}) -> forall A B f g, инъективность f и g -> exists h, инъективна и сюръективна. Closed under the global context. Прежняя Schroeder_Bernstein — её частный случай при classic и L4_definite (classic + L4_witness).",
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "`Schroeder_Bernstein_definite` (`SchroederBernstein_ERR.v`) и `cardinal_antisym_definite` (`CardinalityWithoutChoice.v`, эта работа) выводят заключение из двух посылок — исключённого третьего и извлечения *единственного* свидетеля из $\\exists!$ — и допущений не имеют."
+  },
+  {
+   "line": 193,
+   "page_price": "один L4_witness",
+   "verdict": "ok",
+   "note": "Сноска 6 после шага 1. surjects_injects_back : forall A B, surjects A B -> injects B A; Axioms: ToS_Axioms.L4_witness.",
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "`surjects_injects_back` (`CardinalityWithoutChoice.v`): `surjects A B -> injects B A`; `Print Assumptions` — один `L4_witness`."
+  },
+  {
+   "line": 193,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Сноска 6 после шага 1. split_iff_choice : surjections_split <-> functional_choice. Closed under the global context.",
+   "theorem": "split_iff_choice",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Равносильность «у каждой сюръекции есть правая обратная» и выбора функции по семейству — `split_iff_choice`, 0 аксиом."
+  },
+  {
+   "line": 193,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Сноска 6 после шага 1. Closed under the global context.",
+   "theorem": "bijects_sym_definite",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Обращение биекции извлечением единственного свидетеля — `bijects_sym_definite`, 0 аксиом."
+  },
+  {
+   "line": 193,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l4_statement_gives_functional_choice (ChoicePriceMap.v): из утверждения L4_witness (посылкой) — функция выбора по семейству. Closed under the global context.",
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Тот же ход для произвольного семейства — `l4_statement_gives_functional_choice` (`settheory/ChoicePriceMap.v`)."
+  },
+  {
+   "line": 189,
+   "theorem": "B_rooted_iff_B_stops",
+   "file": "src/SchroederBernstein_ERR.v",
+   "page_price": "",
+   "verdict": "ok",
+   "claim": "признак `B_rooted` («цепь обрывается в $B$», `B_rooted_iff_B_stops`)",
+   "note": "Новая лемма шага 1: forall A B f g a, B_rooted f g a <-> B_stops f g a — признак файла есть в точности «цепь, прослеженная назад, обрывается в B». Closed under the global context."
+  }
+ ]
+}

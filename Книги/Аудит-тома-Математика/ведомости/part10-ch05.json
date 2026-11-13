@@ -1,0 +1,715 @@
+{
+ "batch": "audit-part-10",
+ "chapter": "10 Теория множеств без аксиомы выбора/05 Ординалы как процессы; башня сильных аксиом (ATR_0, ^1_1) и её снятие.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 16,
+   "theorem": null,
+   "claim": "Когда мы говорим, что P4 «снимает» ATR$_0$ или $\\Pi^1_1$, речь идёт о *P4-переинтерпретации*: о прочтении, делающем сильный принцип *ненужным внутри P4-развития*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно. В формализации «снятие» представлено определениями (`iterate_pred`, `CB_transfinite` — P4_Eliminates_ATR.v:79, :43; `P4_forall_functions` — P4_Eliminates_Pi11.v:35) и теоремами о раскрытии этих определений; утверждений о принципах обратной математики в файлах нет."
+  },
+  {
+   "line": 18,
+   "theorem": null,
+   "claim": "Это *не* метатеорема обратной математики (reverse mathematics): ToS *не* доказывает разделения RM-иерархии, *не* доказывает недоказуемость ATR$_0$/$\\Pi^1_1$ в более слабых системах и *не* переопределяет эти принципы как формальные теоремы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В семи файлах главы нет ни определений подсистем арифметики второго порядка, ни утверждений о доказуемости или недоказуемости; оговорка соответствует содержанию формализации."
+  },
+  {
+   "line": 21,
+   "theorem": null,
+   "claim": "Утверждается строго следующее: допустимая *работа* каждого принципа выполняется конкретным P4-приёмом (структурной рекурсией по ординальным нотациям; отождествлением функции с программным кодом), а его *завершённо-объектная* форма (рекурсия по произвольному завершённому вполне-порядку; квантификация по завершённому несчётному пространству всех функций) к P4-развитию не привлекается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Структурная рекурсия по нотациям — `Fixpoint` `iterate_pred`, `CB_transfinite` (P4_Eliminates_ATR.v:79, :43), Closed. Чтение квантора по функциям как квантора по кодам — определение `P4_forall_functions` (P4_Eliminates_Pi11.v:35); само отождествление «всякая функция имеет код» утверждением в формализации не записано (см. запись стр. 170)."
+  },
+  {
+   "line": 28,
+   "theorem": null,
+   "claim": "*Ординал — роль-процесс; башня сильных аксиом получает тот же двухуровневый диагноз, что и выбор. «Снятие» ATR$_0$/$\\Pi^1_1$ — это P4-переинтерпретация (приём, делающий принцип ненужным), а не метатеорема обратной математики.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сводка раздела; статус («переинтерпретация, а не метатеорема») соответствует содержанию формализации."
+  },
+  {
+   "line": 34,
+   "theorem": "Ord",
+   "file": "src/foundation/Ordinal.v",
+   "claim": "В ToS ординал задан индуктивно: ноль, успешник и *предел процесса* — $\\mathrm{OLim} f$ для $f:ℕ\\to\\mathrm{Ord}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Inductive Ord : Set := OZero | OSucc : Ord -> Ord | OLim : (nat -> Ord) -> Ord` (Ordinal.v:20). Closed under the global context."
+  },
+  {
+   "line": 37,
+   "theorem": "omega",
+   "file": "src/foundation/Ordinal.v",
+   "claim": "Так $\\omega = \\mathrm{OLim}$ от вложения $ℕ\\hookrightarrow\\mathrm{Ord}$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`omega := OLim nat_to_ord` (Ordinal.v:30); инъективность `nat_to_ord` — `nat_to_ord_injective` (:153). Оба — Closed under the global context."
+  },
+  {
+   "line": 37,
+   "theorem": "epsilon_0",
+   "file": "src/foundation/Ordinal.v",
+   "claim": "а $\\varepsilon_0 = \\mathrm{OLim}$ от *башни* $\\omega,\\ \\omega^\\omega,\\ \\omega^{\\omega^{\\omega}},…$ — предел процесса возведения в степень.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`epsilon_0 := OLim omega_tower` (Ordinal.v:61); `omega_tower 0 = omega`, `omega_tower (S n) = ord_exp omega (omega_tower n)` (:57). Это определение: о нём доказана одна лемма — `epsilon_0_is_limit` (:190; не является успешником, по различию конструкторов); равенство ω^ε₀ = ε₀ в формализации не формулируется."
+  },
+  {
+   "line": 39,
+   "theorem": "tower_stage_is_limit",
+   "claim": "На каждой стадии $n$ предъявлена одна нотация: для $\\omega$ — конечная, $\\mathrm{OSucc}^n(\\mathrm{OZero})$; для $\\varepsilon_0$ — ступень башни, сама заданная как предел процесса.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): было «на каждой стадии n актуально лишь конечное (OSucc^n(OZero))» — верно для ω, неверно для ε₀. tower_stage_is_limit : forall n, exists g, omega_tower n = OLim g. Closed under the global context.",
+   "file": "src/foundation/OrdinalOrders.v"
+  },
+  {
+   "line": 44,
+   "theorem": "structural_transfinite_ind",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "Это даёт трансфинитную индукцию и рекурсию *по нотациям* — без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): слова страницы прежние; теперь они опираются на порядок построения. ord_below := clos_trans ord_sub, где ord_sub a (OSucc a) и ord_sub (f n) (OLim f) — порядок построения. wf_ord_below : well_founded ord_below; structural_transfinite_ind : (forall a, (forall b, ord_below b a -> P b) -> P a) -> forall a, P a. Closed under the global context. Рекурсия — ord_rec с уравнением ord_rec_eq. Прежнее отношение ord_lt слева допускает только конечные нотации (ord_lt_left_numeral: ord_lt a b -> exists n, a = nat_to_ord n); lim_not_lt, below_epsilon_0_iff_below_omega — Closed."
+  },
+  {
+   "line": 44,
+   "theorem": "wf_ord_below",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "Порядок здесь — порядок построения: ниже нотации лежат её стадии — предшественник успешника и всякая стадия предела (`ord_below`). Он фундирован, и по нему идут индукция, в предельном шаге опирающаяся на все стадии, рекурсия с доказанным уравнением и индукция вплоть до $\\omega$, по ступеням башни и ниже $\\varepsilon_0$.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): было «отношение ord_lt фундировано, и из этого следуют принципы индукции вплоть до ω, башни и ε₀». Прежнее отношение ord_lt слева допускает только конечные нотации (ord_lt_left_numeral: ord_lt a b -> exists n, a = nat_to_ord n); lim_not_lt, below_epsilon_0_iff_below_omega — Closed. ord_below := clos_trans ord_sub, где ord_sub a (OSucc a) и ord_sub (f n) (OLim f) — порядок построения. wf_ord_below : well_founded ord_below; structural_transfinite_ind : (forall a, (forall b, ord_below b a -> P b) -> P a) -> forall a, P a. Closed under the global context. induction_below_epsilon_0, tower_induction, nat_below_omega, tower_below_epsilon_0 — Closed."
+  },
+  {
+   "line": 50,
+   "theorem": null,
+   "claim": "Подчеркнём область: это индукция/рекурсия по *конструктивным ординальным нотациям* `Ord`, а не по произвольному завершённому вполне-порядку.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Область названа верно: все утверждения — о типе нотаций `Ord` (Ordinal.v:20); о вполне-порядках общего вида в файлах утверждений нет. О том, какой порядок на нотациях взят, — запись стр. 43."
+  },
+  {
+   "line": 54,
+   "theorem": null,
+   "claim": "*Ординал — роль-процесс ($\\mathrm{OLim}$ — предел процесса; $\\varepsilon_0$ — предел башни); трансфинитная индукция по конструктивным нотациям структурна и 0-аксиомна.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Верно для структурной индукции по типу `Ord` (принцип `Ord_ind`, порождаемый определением типа: в предельном шаге предположение индукции дано для всех стадий `f n`) — аксиом она не требует. Для `transfinite_ind` по `ord_lt` — см. запись стр. 43."
+  },
+  {
+   "line": 62,
+   "theorem": "iterate_pred",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "В ToS соответствующая *работа* — итерация операции вдоль *конструктивной ординальной нотации* — есть просто `Fixpoint` по индуктивному типу `Ord`: проверяющий завершаемость Rocq принимает рекурсию по структуре $\\alpha$, и никакой аксиомы не нужно.[^3]",
+   "page_price": "никакой аксиомы не нужно",
+   "verdict": "ok",
+   "note": "`Fixpoint iterate_pred` (P4_Eliminates_ATR.v:79): OZero — base, OSucc a — P от стадии a, OLim f — пересечение стадий `f k`; оператор P : (nat -> Prop) -> (nat -> Prop) произвольный. Closed under the global context. Тип `Ord` в этом файле — собственная копия (:21), не `Ordinal.Ord`."
+  },
+  {
+   "line": 67,
+   "theorem": null,
+   "claim": "Сказанное относится к рекурсии вдоль *нотаций* `Ord`: для них ATR$_0$-как-аксиома не требуется, её заменяет структурная рекурсия. Это *не* утверждение о полной ATR$_0$ над всеми завершёнными вполне-порядками и *не* RM-разделение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: `iterate_pred` и `CB_transfinite` определены на нотациях `Ord`; утверждений о вполне-порядках общего вида и о системах обратной математики в файле нет."
+  },
+  {
+   "line": 74,
+   "theorem": null,
+   "claim": "*ATR$_0$ — роль-смешение: законная итерация вдоль нотаций (структурный `Fixpoint`, 0 аксиом) склеена с завершённой рекурсией по произвольному вполне-порядку.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Структурный `Fixpoint` — `iterate_pred` (:79), `CB_transfinite` (:43); все 17 утверждений P4_Eliminates_ATR.v — Closed under the global context."
+  },
+  {
+   "line": 83,
+   "theorem": "P4_forall_functions",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "В ToS ход иной: при P4 всякая функция есть *процесс*, заданный *программным кодом*; тогда «$\\forall f$» сводится к «$\\forall c:ℕ$» по кодам — второй порядок прочитывается как первый.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В формализации это определение: `P4_forall_functions phi n := forall c : Program, phi (eval_program c) n` (:35), `Program := nat` (:26). Посылка «всякая функция задана кодом» в файле не записана; глава на стр. 82–89 называет её выбором онтологии. В Rocq квантор по кодам строго слабее квантора по функциям — см. запись стр. 170."
+  },
+  {
+   "line": 87,
+   "theorem": null,
+   "claim": "«Снятие» $\\Pi^1_1$ идёт через *отождествление функции с программным кодом* ($\\forall f \\mapsto \\forall c:ℕ$). Это *конкретный P4-выбор онтологии* (функция${}={}$процесс${}={}$код), переинтерпретирующий второпорядковую квантификацию как первопорядковую по кодам.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: в файле переинтерпретация задана определением `P4_forall_functions` (:35), а не теоремой; утверждения «всякая f : nat -> nat равна `eval_program c`» в формализации нет."
+  },
+  {
+   "line": 90,
+   "theorem": null,
+   "claim": "Это *не* метатеорема о $\\Pi^1_1$-CA$_0$ и *не* RM-разделение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждений о системе Π¹₁-CA₀ в файле нет; оговорка соответствует содержанию формализации."
+  },
+  {
+   "line": 91,
+   "theorem": null,
+   "claim": "Допустимое прочтение (квантор по функциям, *заданным кодами*) — первопорядковое;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Точная форма этого прочтения — `forall f, (exists c, f = eval_program c) -> phi f n`; она равносильна определению `P4_forall_functions` (проверено: CheckPi11.v, `P4_forall_functions_coded`; допущение — только `eval_program`). В самом файле такой теоремы нет."
+  },
+  {
+   "line": 99,
+   "theorem": null,
+   "claim": "*$\\Pi^1_1$ — роль-смешение: квантор по кодам-функциям (первый порядок) склеен с квантором по завершённому несчётному пространству всех функций. P4-переинтерпретация берёт первое (функция${}={}$код), второе не привлекает; это онтологический выбор, не RM-метатеорема.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сводка раздела; статус («онтологический выбор, не метатеорема») соответствует содержанию формализации."
+  },
+  {
+   "line": 105,
+   "theorem": null,
+   "claim": "*Бесконечность*: ToS не берёт завершённое бесконечное множество как Элемент, но удерживает бесконечность как *схему процесса* — потенциальную, в духе сходящихся приближений.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В P4_Eliminates_Infinity.v: индукция по nat как встроенное правило (`nat_induction_works`, :9), рекурсия как `Fixpoint` (`factorial`, `partial_sum`), определение `converges` (:28). Что утверждает итоговая теорема — запись стр. 171."
+  },
+  {
+   "line": 107,
+   "theorem": null,
+   "claim": "*Импредикативность*: определение $R=\\{x \\mid x\\notin x\\}$ квантует по тотальности, включающей само себя; при P1 (иерархия) и P4 (конечность) оно не формируется — это расселов случай Главы 10.1, теперь как импредикативное свёртывание.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`russell_contradiction_without_P1` (P4ProhibitsImpredicative.v:69): ни для какого отношения `member` на nat нет r с `forall x, member x r <-> ~ member x x`; Closed. Посылок о P1 и P4 в этой теореме нет — множество Рассела не образуется при любом отношении; о словах сноски — запись стр. 172."
+  },
+  {
+   "line": 118,
+   "theorem": null,
+   "claim": "*Бесконечность — процесс, не завершённый объект; импредикативность не формируется при P1${}+{}$P4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сводка раздела; опора — `nat_induction_works`, `russell_contradiction_without_P1`. О формулировках итоговых теорем — записи стр. 171 и 172."
+  },
+  {
+   "line": 126,
+   "theorem": null,
+   "claim": "| *Rules* (L5) | структурная рекурсия по `Ord`; отождествление функция${}={}$код ($\\forall f\\mapsto\\forall c$); схема процесса для бесконечности; уровневый порядок P1 |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Каждому пункту соответствует объект формализации: `Fixpoint` по `Ord` (`iterate_pred`, `ord_add`, `ord_mul`, `ord_exp`); определение `P4_forall_functions`; `nat_ind`; `level_lt` и `level_strong_induction` (TransfiniteInductionLevel.v:39)."
+  },
+  {
+   "line": 130,
+   "theorem": "structural_transfinite_ind",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "**Что даёт.** Трансфинитная индукция/рекурсия по нотациям — `wf_ord_below`, `structural_transfinite_ind`, `ord_rec_eq` (0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): было «wf_ord_lt, transfinite_ind». ord_below := clos_trans ord_sub, где ord_sub a (OSucc a) и ord_sub (f n) (OLim f) — порядок построения. wf_ord_below : well_founded ord_below; structural_transfinite_ind : (forall a, (forall b, ord_below b a -> P b) -> P a) -> forall a, P a. Closed under the global context."
+  },
+  {
+   "line": 131,
+   "theorem": "P4_eliminates_ATR0",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "ATR$_0$/$\\Pi^1_1$/Бесконечность/импредикативность — переинтерпретированы (`P4_eliminates_ATR0`, `P4_eliminates_Pi11`, `P4_eliminates_Infinity`, `russell_requires_completed_totality`; всё — 0 аксиом).",
+   "page_price": "ATR — 0 аксиом",
+   "verdict": "ok",
+   "note": "Closed under the global context. Утверждение — два определяющих равенства `iterate_pred` на нуле и успешнике (см. запись стр. 169)."
+  },
+  {
+   "line": 131,
+   "theorem": "P4_eliminates_Pi11",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "ATR$_0$/$\\Pi^1_1$/Бесконечность/импредикативность — переинтерпретированы (`P4_eliminates_ATR0`, `P4_eliminates_Pi11`, `P4_eliminates_Infinity`, `russell_requires_completed_totality`; всё — 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "P4_eliminates_Pi11 : forall eval_program phi n, P4_forall_functions eval_program phi n <-> (forall f, (exists c, f = eval_program c) -> phi f n). Closed under the global context. С 13.11 eval_program — переменная раздела Section Codes (а не Parameter): все утверждения файла верны для любой таблицы Program -> nat -> nat; в выводе Print Assumptions её нет."
+  },
+  {
+   "line": 131,
+   "theorem": "P4_eliminates_Infinity",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "ATR$_0$/$\\Pi^1_1$/Бесконечность/импредикативность — переинтерпретированы (`P4_eliminates_ATR0`, `P4_eliminates_Pi11`, `P4_eliminates_Infinity`, `russell_requires_completed_totality`; всё — 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "P4_eliminates_Infinity (после шага 6): индукция /\\ (forall l : list nat, exists n, ~ In n l) /\\ (forall n, exists m, n < m). Closed under the global context."
+  },
+  {
+   "line": 131,
+   "theorem": "russell_requires_completed_totality",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "ATR$_0$/$\\Pi^1_1$/Бесконечность/импредикативность — переинтерпретированы (`P4_eliminates_ATR0`, `P4_eliminates_Pi11`, `P4_eliminates_Infinity`, `russell_requires_completed_totality`; всё — 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было имя файла `P4ProhibitsImpredicative` в перечне теорем; теперь названа теорема russell_requires_completed_totality (шаг 2). Closed under the global context."
+  },
+  {
+   "line": 95,
+   "theorem": "no_table_covers_all_functions",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "никакая таблица кодов не содержит всех функций — диагональная функция в неё не входит, — и квантор по кодам строго слабее квантора по функциям (`no_table_covers_all_functions`, `codes_reading_is_weaker`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): запись прежде относилась к словам «при примитиве eval_program» (сняты: С 13.11 eval_program — переменная раздела Section Codes (а не Parameter): все утверждения файла верны для любой таблицы Program -> nat -> nat; в выводе Print Assumptions её нет.). no_table_covers_all_functions : forall eval_program, ~ (forall f, exists c, f = eval_program c). Closed under the global context."
+  },
+  {
+   "line": 138,
+   "theorem": null,
+   "claim": "«Снятие» ATR$_0$/$\\Pi^1_1$ — это *P4-переинтерпретация*, не метатеорема обратной математики: нет ни RM-разделений, ни доказательства недоказуемости в слабых системах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует содержанию файлов: утверждений о системах обратной математики в них нет."
+  },
+  {
+   "line": 140,
+   "theorem": null,
+   "claim": "Рекурсия — по *конструктивным нотациям* `Ord`, не по всем вполне-порядкам.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`iterate_pred`, `CB_transfinite`, `ord_add`, `ord_mul`, `ord_exp` — `Fixpoint` по типу нотаций `Ord`; рекурсии по вполне-порядку общего вида в файлах нет."
+  },
+  {
+   "line": 141,
+   "theorem": null,
+   "claim": "$\\Pi^1_1$ снят *отождествлением функции с кодом* — онтологический выбор, а не теорема о $\\Pi^1_1$-CA$_0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: в файле — определение `P4_forall_functions`; отождествление теоремой не является и утверждением не записано (см. запись стр. 170)."
+  },
+  {
+   "line": 142,
+   "theorem": null,
+   "claim": "Для ATR$_0$ и $\\Pi^1_1$ завершённые формы (произвольный вполне-порядок, несчётное пространство функций) не опровергаются как RM-принципы, а *не привлекаются* в P4-развитии; для завершённой бесконечности и импредикативной тотальности действует более сильный P4/P1-запрет object-формы (Главы 10.4, 10.1).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Для завершённой бесконечности проверено: `completed_inf_contradicts_P4` (foundation/P4CompletedInfinity.v:64) — `CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False`, Closed; запрет получен при посылке-мосте `bridge`. В остальном отсылки к главам 10.4 и 10.1 здесь не сверялись."
+  },
+  {
+   "line": 148,
+   "theorem": null,
+   "claim": "*Ординалы — процессы; башня сильных аксиом получает единый двухуровневый диагноз. Каждое «снятие» — P4-переинтерпретация законного ядра (структурная рекурсия, функция${}={}$код, процесс), а не метатеорема обратной математики; завершённые формы не привлекаются, а не опровергаются.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итоговая оговорка о статусе соответствует содержанию формализации: определения и теоремы об их раскрытии; утверждений обратной математики нет."
+  },
+  {
+   "line": 155,
+   "theorem": "wf_ord_below",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "Ординалы оказались процессами: $\\mathrm{OLim}$ — предел процесса, $\\varepsilon_0$ — предел башни, а трансфинитная индукция по конструктивным нотациям структурна и 0-аксиомна (`wf_ord_below`, `structural_transfinite_ind`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): было «(wf_ord_lt, transfinite_ind)». ord_below := clos_trans ord_sub, где ord_sub a (OSucc a) и ord_sub (f n) (OLim f) — порядок построения. wf_ord_below : well_founded ord_below; structural_transfinite_ind : (forall a, (forall b, ord_below b a -> P b) -> P a) -> forall a, P a. Closed under the global context."
+  },
+  {
+   "line": 158,
+   "theorem": "P4_eliminates_ATR0",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "ATR$_0$ — структурная рекурсия по нотациям (`P4_eliminates_ATR0`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`P4_eliminates_ATR0` (:178): `iterate_pred P OZero base = base /\\ iterate_pred P (OSucc alpha) base = P (iterate_pred P alpha base)` — два определяющих равенства рекурсии, доказательство `split; reflexivity`. Closed."
+  },
+  {
+   "line": 159,
+   "theorem": "P4_eliminates_Pi11",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "$\\Pi^1_1$ — второй порядок как первый по кодам (`P4_eliminates_Pi11`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Прочтение задано определением `P4_forall_functions`; названная теорема раскрывает это определение (см. запись стр. 170)."
+  },
+  {
+   "line": 160,
+   "theorem": "P4_eliminates_Infinity",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "Бесконечность — схема процесса (`P4_eliminates_Infinity`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первый член теоремы — схема индукции по nat; остальные три — `n < S n`, `factorial 5 = 120`, `partial_sum (fun n => n) 3 = 6` (см. запись стр. 171)."
+  },
+  {
+   "line": 161,
+   "theorem": null,
+   "claim": "импредикативность — не формируется при P1${}+{}$P4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`russell_contradiction_without_P1` (P4ProhibitsImpredicative.v:69), Closed: множество Рассела не образуется ни при каком отношении принадлежности на nat; посылок о P1 и P4 в теореме нет (см. запись стр. 172)."
+  },
+  {
+   "line": 161,
+   "theorem": null,
+   "claim": "И всё это — честно — P4-переинтерпретации, а не метатеоремы обратной математики.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно; см. записи стр. 16–26."
+  },
+  {
+   "line": 164,
+   "theorem": null,
+   "claim": "Глава 10.6 соберёт Часть X: что доказуемо без выбора (включая WQO-результаты Хигмана и Крускала для конкретных семейств и конечную детерминированность игр), полную карту аксиомных цен и честную «стену» — полную теорему Крускала, борелевскую детерминированность, метатеоретическую независимость, — куда ToS не заходит.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено на статус: в settheory/KruskalFull.v полная теорема записана определением `kruskal_full_statement` (:158) и не доказана, доказаны отдельные семейства (`L5_from_kruskal`, :166); settheory/BorelDeterminacy.v — игры конечной длины. Слову «стена» это соответствует; подробная сверка — в аудите главы X.6."
+  },
+  {
+   "line": 175,
+   "theorem": null,
+   "file": "src/foundation/Ordinal.v",
+   "claim": "`Ordinal.v`: `Ord` (с `OZero`/`OSucc`/`OLim`), `omega` ${}=\\mathrm{OLim} \\texttt{nat\\_to\\_ord}$, `epsilon_0` ${}=\\mathrm{OLim} \\texttt{omega\\_tower}$ — сверено `Print Assumptions`: Closed, 0 аксиом.",
+   "page_price": "Closed, 0 аксиом",
+   "verdict": "ok",
+   "note": "`Ord` (:20), `nat_to_ord` (:26), `omega` (:30), `omega_tower` (:57), `epsilon_0` (:61) — определения; ответ компилятора — Closed under the global context. Все 24 леммы файла — Closed."
+  },
+  {
+   "line": 175,
+   "theorem": "ord_add_zero_l",
+   "file": "src/foundation/Ordinal.v",
+   "claim": "Арифметика ($+,\\cdot,{}^\\wedge$) — структурной рекурсией; два тождества, проходящие через предел (`ord_add_zero_l`, `ord_mul_one_r`), записаны с точностью до постадийного равенства `ord_eq`, и функциональная экстенсиональность не привлекается: все 24 леммы файла закрыты.",
+   "page_price": "все 24 леммы закрыты",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было «часть её лемм опирается на функциональную экстенсиональность» — устарело после правки 12.11. ord_add_zero_l : forall a, ord_eq (ord_add OZero a) a. Closed under the global context; в Ordinal.v 24 Qed."
+  },
+  {
+   "line": 176,
+   "theorem": "wf_ord_lt",
+   "file": "src/foundation/TransfiniteInduction.v",
+   "claim": "Прежнее отношение `ord_lt` (`Ordinal.v`) тоже фундировано (`wf_ord_lt`, `transfinite_ind` в `TransfiniteInduction.v`), но ниже любой нотации по нему лежат только конечные нотации (`ord_lt_left_numeral`): $\\omega$ по нему не ниже $\\omega+1$ и не ниже $\\varepsilon_0$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "wf_ord_lt : well_founded ord_lt; transfinite_ind — индукция по ord_lt. Обе — Closed under the global context. Прежнее отношение ord_lt слева допускает только конечные нотации (ord_lt_left_numeral: ord_lt a b -> exists n, a = nat_to_ord n); lim_not_lt, below_epsilon_0_iff_below_omega — Closed."
+  },
+  {
+   "line": 176,
+   "theorem": "ord_rec_eq",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "рекурсия `ord_rec` с уравнением `ord_rec_eq`;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): было имя transfinite_rec — теорема без уравнения рекурсии (её тип населён и без фундированности); снята из TransfiniteInduction.v по слову автора (вариант А). ord_rec := Fix wf_ord_below …; ord_rec_eq : (шаг уважает поточечное равенство) -> forall a, ord_rec T step a = step a (fun b _ => ord_rec T step b). Closed under the global context."
+  },
+  {
+   "line": 176,
+   "theorem": "tower_induction",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "индукция по ступеням башни `tower_induction` и ниже $\\varepsilon_0$ — `induction_below_epsilon_0`;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 5, слово автора): было имя omega_tower_induction — дословно индукция по ℕ; снята из TransfiniteInduction.v по слову автора (вариант А). tower_induction : P omega -> (forall n, P (omega_tower n) -> P (omega_tower (S n))) -> forall n, P (omega_tower n). Closed under the global context."
+  },
+  {
+   "line": 176,
+   "theorem": "transfinite_ind",
+   "file": "src/foundation/TransfiniteInduction.v",
+   "claim": "**0 аксиом** (сверено `Print Assumptions`).",
+   "page_price": "0 аксиом; шапка файла ошибочно называет classic",
+   "verdict": "ok",
+   "note": "Все утверждения OrdinalOrders.v и TransfiniteInduction.v — Closed under the global context. Шапка TransfiniteInduction.v, прежде называвшая classic и L4_witness, исправлена 13.11."
+  },
+  {
+   "line": 176,
+   "theorem": "level_strong_induction",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Дополнительно индукция по *уровневой* иерархии — `level_strong_induction` в `TransfiniteInductionLevel.v` (эта работа).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`level_strong_induction : forall P : Level -> Prop, (forall L, (forall L', L' << L -> P L') -> P L) -> forall L, P L` (:39); через `level_lt_wf` (:32) по рангу `level_depth`. Closed. Тип `Level` — `L1 | LS Level` (TheoryOfSystems_Core_ERR.v:59): иерархия конечных уровней, это сильная индукция по ним."
+  },
+  {
+   "line": 177,
+   "theorem": "CB_transfinite_succ_stage",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "Пример `CB_transfinite` взят для модельного оператора `CB_step` (точка остаётся, если у неё есть сосед на расстоянии 1) — дискретного подобия производной Кантора–Бендиксона; его итерация стоит на месте уже после первого шага (`CB_transfinite_succ_stage`, `CB_transfinite_omega`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было «CB_transfinite — трансфинитная итерация (производная Кантора–Бендиксона)». CB_transfinite_succ_stage : CB_transfinite X (OSucc a) n <-> CB_step X n; CB_transfinite_omega — то же на стадии omega. Closed under the global context."
+  },
+  {
+   "line": 177,
+   "theorem": "P4_eliminates_ATR0",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "`P4_eliminates_ATR0` фиксирует zero/successor-уравнения рекурсии (limit-стадия задана самим `Fixpoint`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Описание точное: два равенства — на нуле и на успешнике, оба по определению (`split; reflexivity`). Предельная стадия — отдельной леммой `ATR_limit_stage` (:120), тоже по определению."
+  },
+  {
+   "line": 177,
+   "theorem": null,
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "22 Qed, 0 аксиом (сверено `Print Assumptions`: Closed).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было 15; в P4_Eliminates_ATR.v 22 Qed (17 прежних и пять новых шага 6)."
+  },
+  {
+   "line": 178,
+   "theorem": null,
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "`P4_Eliminates_Pi11.v`: `Program := nat`; `P4_forall_functions` — квантор по кодам;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Definition Program := nat` (:26); `P4_forall_functions phi n := forall c : Program, phi (eval_program c) n` (:35) — квантор по кодам; это определение."
+  },
+  {
+   "line": 178,
+   "theorem": "P4_eliminates_Pi11",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "Итог — `P4_eliminates_Pi11`: квантор по кодам есть квантор по функциям, *заданным кодами*.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): прежде обе стороны равносильности совпадали по определению; теорема переписана. P4_eliminates_Pi11 : forall eval_program phi n, P4_forall_functions eval_program phi n <-> (forall f, (exists c, f = eval_program c) -> phi f n). Closed under the global context."
+  },
+  {
+   "line": 178,
+   "theorem": "P4_forall_functions",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "таблица кодов `eval_program` — переменная раздела без каких-либо свойств, так что все утверждения верны для любой таблицы.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было «зависит от eval_program (Parameter — вычислительный примитив универсальной машины)». С 13.11 eval_program — переменная раздела Section Codes (а не Parameter): все утверждения файла верны для любой таблицы Program -> nat -> nat; в выводе Print Assumptions её нет. Definition P4_forall_functions eval_program phi n := forall c : Program, phi (eval_program c) n."
+  },
+  {
+   "line": 179,
+   "theorem": "converges_unique",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "`converges` — сходимость последовательности натуральных чисел: это стабилизация, и предел единствен (`converges_iff_stabilizes`, `converges_unique`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): определение converges усилено до строгого неравенства (прежде постоянная последовательность 1 «сходилась» к 0, 1 и 2). converges_unique : converges a L1 -> converges a L2 -> L1 = L2. Closed under the global context."
+  },
+  {
+   "line": 179,
+   "theorem": "P4_eliminates_Infinity",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "`P4_Eliminates_Infinity.v`: итог — `P4_eliminates_Infinity`: правило индукции; никакая конечная стадия не исчерпывает натуральных чисел (`no_finite_stage_exhausts_nat`); за всяким числом есть большее.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): прежде итог соединял четыре факта, не связанных с бесконечностью (индукция, n < n+1, 5! = 120, 0+1+2+3 = 6); теорема переписана. Closed under the global context."
+  },
+  {
+   "line": 179,
+   "theorem": null,
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "13 Qed, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было 12; в P4_Eliminates_Infinity.v 13 Qed."
+  },
+  {
+   "line": 179,
+   "theorem": null,
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Ср. 10.4: потенциальная бесконечность с P4 совместима, завершённая — нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`potential_compatible_with_P4` (P4CompletedInfinity.v:93) и `completed_inf_contradicts_P4` (:64; при посылке-мосте `bridge S actual`); обе — Closed under the global context. Сама глава 10.4 здесь не сверялась."
+  },
+  {
+   "line": 180,
+   "theorem": "russell_collector_escapes",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "`P4ProhibitsImpredicative.v`: собиратель расселова условия по области сам в эту область не входит (`russell_collector_escapes`); по каждой конечной стадии он существует и лежит вне стадии (`staged_russell_collector_exists`); область, у которой он есть, не завершена (`russell_needs_incomplete_range`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было «P1 + P4 исключают завершённую тотальность» — теоремы не было; три теоремы добавлены на шаге 2. Closed under the global context."
+  },
+  {
+   "line": 180,
+   "theorem": null,
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "11 Qed, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора): было 10; в P4ProhibitsImpredicative.v 11 Qed (7 прежних и четыре шага 2)."
+  },
+  {
+   "line": 176,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новый файл шага 5. ord_below := clos_trans ord_sub, где ord_sub a (OSucc a) и ord_sub (f n) (OLim f) — порядок построения. wf_ord_below : well_founded ord_below; structural_transfinite_ind : (forall a, (forall b, ord_below b a -> P b) -> P a) -> forall a, P a. Closed under the global context.",
+   "theorem": "wf_ord_below",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "`OrdinalOrders.v`: порядок построения `ord_below` и его фундированность `wf_ord_below`; индукция `structural_transfinite_ind`;"
+  },
+  {
+   "line": 176,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "induction_below_epsilon_0 : (forall a, ord_below a epsilon_0 -> (forall b, ord_below b a -> P b) -> P a) -> forall a, ord_below a epsilon_0 -> P a. Closed under the global context.",
+   "theorem": "induction_below_epsilon_0",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "индукция по ступеням башни `tower_induction` и ниже $\\varepsilon_0$ — `induction_below_epsilon_0`;"
+  },
+  {
+   "line": 176,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ole — порядок, в котором OLim f есть верхняя грань стадий; olt a b := ole (OSucc a) b. wf_olt : well_founded olt. Closed under the global context.",
+   "theorem": "wf_olt",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "порядок Брауэра `olt` — `wf_olt`, `olt_trans`, `olt_omega_epsilon_0`."
+  },
+  {
+   "line": 176,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "olt_trans : olt a b -> olt b c -> olt a c. Closed under the global context.",
+   "theorem": "olt_trans",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "порядок Брауэра `olt` — `wf_olt`, `olt_trans`, `olt_omega_epsilon_0`."
+  },
+  {
+   "line": 48,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "olt_omega_succ_omega : olt omega (OSucc omega); olt_omega_epsilon_0 : olt omega epsilon_0. Closed under the global context. Согласованность двух порядков: ord_below_ole — стадия построения не больше.",
+   "theorem": "olt_omega_epsilon_0",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "Фундирован и порядок сравнения, в котором предел есть верхняя грань стадий (порядок Брауэра, `olt`): в нём $\\omega<\\omega+1$ и $\\omega<\\varepsilon_0$."
+  },
+  {
+   "line": 176,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ord_lt_left_numeral : forall b a, ord_lt a b -> exists n, a = nat_to_ord n. Closed under the global context. Следствия: omega_not_lt_succ_omega, omega_not_lt_epsilon_0, below_epsilon_0_iff_below_omega.",
+   "theorem": "ord_lt_left_numeral",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "ниже любой нотации по нему лежат только конечные нотации (`ord_lt_left_numeral`)"
+  },
+  {
+   "line": 177,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint iterate_pred (P : (nat -> Prop) -> (nat -> Prop)) (alpha : Ord) (base : nat -> Prop) — структурная рекурсия по локальной копии типа Ord.",
+   "theorem": "iterate_pred",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "`P4_Eliminates_ATR.v`: `iterate_pred` — итерация произвольного оператора на подмножествах $ℕ$ вдоль нотации как `Fixpoint` на `Ord`;"
+  },
+  {
+   "line": 177,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Новое шага 6: Fixpoint CB_ord (X : PointSet) (a : Ord); CB_ord_nat : CB_ord X (nat_to_ord n) = CB_iter X n; CB_ord_omega : CB_ord X omega x <-> CB_omega X x. Closed under the global context. Множество, у которого стадии выше первой различны, не строилось.",
+   "theorem": "CB_ord_omega",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "Настоящая производная итерируется вдоль нотаций в `CantorBendixsonFull.v`: `CB_ord`, на конечных нотациях совпадающая с `CB_iter`, на $\\omega$ — с `CB_omega` (`CB_ord_nat`, `CB_ord_omega`)."
+  },
+  {
+   "line": 178,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "pi11_hierarchy_collapse (после шага 6): (forall f, exists c, f = eval_program c) -> forall n, (forall f, phi f n) <-> P4_forall_functions eval_program phi n. Closed under the global context. Слово «ровно»: обратное — что без этого условия совпадения нет — показывает codes_reading_is_weaker.",
+   "theorem": "pi11_hierarchy_collapse",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "Совпадение с квантором по всем функциям имеет место ровно при условии «всякая функция имеет код» (`pi11_hierarchy_collapse`), а оно не выполняется ни для какой таблицы (`no_table_covers_all_functions`)."
+  },
+  {
+   "line": 178,
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "pi11_negation: Axioms: Classical_Prop.classic. Остальные утверждения файла — Closed under the global context.",
+   "theorem": "pi11_negation",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "По `Print Assumptions` — 0 аксиом; одна лемма файла, `pi11_negation`, стоит на `classic`."
+  },
+  {
+   "line": 178,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "С 13.11 eval_program — переменная раздела файла P4_Eliminates_Pi11.v: Variable eval_program : Program -> nat -> nat. Прежде — Parameter.",
+   "claim": "таблица кодов `eval_program` — переменная раздела без каких-либо свойств, так что все утверждения верны для любой таблицы.",
+   "theorem": "eval_program",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "external": true,
+   "assumptions": "не применимо (переменная раздела Section Codes, не объявление верхнего уровня)"
+  },
+  {
+   "line": 96,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "codes_reading_is_weaker : forall eval_program, exists phi, (forall n, P4_forall_functions eval_program phi n) /\\ ~ (forall n f, phi f n). Closed under the global context.",
+   "theorem": "codes_reading_is_weaker",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "квантор по кодам строго слабее квантора по функциям (`no_table_covers_all_functions`, `codes_reading_is_weaker`)."
+  },
+  {
+   "line": 175,
+   "page_price": "закрыта",
+   "verdict": "ok",
+   "note": "ord_mul_one_r : forall a, ord_eq (ord_mul a (OSucc OZero)) a. Closed under the global context.",
+   "theorem": "ord_mul_one_r",
+   "file": "src/foundation/Ordinal.v",
+   "claim": "два тождества, проходящие через предел (`ord_add_zero_l`, `ord_mul_one_r`), записаны с точностью до постадийного равенства `ord_eq`"
+  },
+  {
+   "line": 177,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "CB_ord_nat : forall X n, CB_ord X (nat_to_ord n) = CB_iter X n. Closed under the global context.",
+   "theorem": "CB_ord_nat",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "`CB_ord`, на конечных нотациях совпадающая с `CB_iter`, на $\\omega$ — с `CB_omega` (`CB_ord_nat`, `CB_ord_omega`)."
+  },
+  {
+   "line": 177,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "CB_transfinite_omega : forall X n, CB_transfinite X omega n <-> CB_step X n. Closed under the global context.",
+   "theorem": "CB_transfinite_omega",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "его итерация стоит на месте уже после первого шага (`CB_transfinite_succ_stage`, `CB_transfinite_omega`)."
+  },
+  {
+   "line": 179,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "converges_iff_stabilizes : converges a L <-> exists N, forall n, n >= N -> a n = L. Closed under the global context.",
+   "theorem": "converges_iff_stabilizes",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "это стабилизация, и предел единствен (`converges_iff_stabilizes`, `converges_unique`)."
+  },
+  {
+   "line": 179,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "no_finite_stage_exhausts_nat : forall l : list nat, exists n, ~ In n l. Closed under the global context.",
+   "theorem": "no_finite_stage_exhausts_nat",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "никакая конечная стадия не исчерпывает натуральных чисел (`no_finite_stage_exhausts_nat`);"
+  },
+  {
+   "line": 180,
+   "page_price": "при условии bridge",
+   "verdict": "ok",
+   "note": "completed_inf_contradicts_P4 : CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False. Условие названо. Closed under the global context.",
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Что P4 исключает завершённую область — `completed_inf_contradicts_P4`, при условии `bridge` (Глава 10.4)."
+  },
+  {
+   "line": 180,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "russell_needs_incomplete_range : (forall x, T x -> (mem x r <-> ~ mem x x)) -> ~ CompletedInfSet T. Closed under the global context.",
+   "theorem": "russell_needs_incomplete_range",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "область, у которой он есть, не завершена (`russell_needs_incomplete_range`)."
+  },
+  {
+   "line": 180,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "staged_russell_collector_exists : forall stage, exists r, (условие Рассела по стадии) /\\ ~ nat_staged_actual stage r /\\ nat_staged_actual (S stage) r. Closed under the global context.",
+   "theorem": "staged_russell_collector_exists",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "по каждой конечной стадии он существует и лежит вне стадии (`staged_russell_collector_exists`);"
+  }
+ ]
+}

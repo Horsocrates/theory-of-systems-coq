@@ -1,0 +1,749 @@
+file	line	kind	name	axioms
+Architecture_of_Reasoning/ERR_Fallacies.v	684	Theorem	type5_resolution	Classical_Prop.classic
+src/CauchyProduct.v	175	Lemma	conv_cauchy	Classical_Prop.classic
+src/CauchyProduct.v	248	Lemma	partial_sum_abs_cauchy	Classical_Prop.classic
+src/CauchyProduct.v	399	Theorem	mertens_cauchy_product	Classical_Prop.classic
+src/ExpFunctionalEquation.v	84	Lemma	exp_abs_partial_bounded	Classical_Prop.classic
+src/ExpFunctionalEquation.v	109	Lemma	exp_add_from_conv	Classical_Prop.classic
+src/ExpFunctionalEquation.v	272	Theorem	exp_add	Classical_Prop.classic
+src/ExpFunctionalEquation.v	299	Lemma	exp_limit_wd	Classical_Prop.classic
+src/ExpFunctionalEquation.v	322	Lemma	exp_limit_zero	Classical_Prop.classic
+src/ExpFunctionalEquation.v	333	Theorem	exp_neg	Classical_Prop.classic
+src/EVT_ERR.v	545	Lemma	max_list_attained	не проверено
+src/FPSEval.v	90	Lemma	eval_terms_cauchy_le1	Classical_Prop.classic
+src/FPSEval.v	126	Lemma	geom_eval_cauchy	Classical_Prop.classic
+src/FPSEval.v	131	Lemma	eval_geom	Classical_Prop.classic
+src/FPSEval.v	153	Theorem	eval_compose_exp_log1m_geom	Classical_Prop.classic
+src/FPSEval.v	221	Lemma	conv_eval_cauchy	Classical_Prop.classic
+src/FPSEval.v	244	Theorem	eval_mul	Classical_Prop.classic
+src/FPSEval.v	273	Lemma	eval_exp	Classical_Prop.classic
+src/FPSEval.v	284	Lemma	eval_log1m	Classical_Prop.classic
+src/FPSEval.v	474	Theorem	eval_mul_abs	Classical_Prop.classic
+src/FPSEval.v	544	Lemma	abs_conv_mul	Classical_Prop.classic
+src/FPSEval.v	573	Lemma	abs_conv_pow	Classical_Prop.classic
+src/FPSEval.v	585	Lemma	eval_pow	Classical_Prop.classic
+src/HeineBorel_ERR.v	379	Lemma	not_coverable_half	Classical_Prop.classic
+src/LnMulReduction.v	70	Lemma	geom_inv	Classical_Prop.classic
+src/LnMulReduction.v	130	Lemma	geom_mul	Classical_Prop.classic
+src/LnMulReduction.v	157	Theorem	ln_mul_from_key	Classical_Prop.classic
+src/LnMulClosed.v	115	Lemma	abs_conv_log1m	Classical_Prop.classic
+src/LnMulClosed.v	138	Lemma	s_bound	Classical_Prop.classic
+src/LnMulClosed.v	155	Definition	lnmul_aT	Classical_Prop.classic
+src/LnMulClosed.v	166	Lemma	boss	Classical_Prop.classic
+src/LnMulClosed.v	273	Theorem	exp_R_ln_proc_is_geom	Classical_Prop.classic
+src/LnMulClosed.v	285	Theorem	ln_mul_closed	Classical_Prop.classic
+src/Log2FunctionalEq.v	51	Definition	ln_pow2	Classical_Prop.classic
+src/Log2FunctionalEq.v	55	Definition	log2_pow2	Classical_Prop.classic
+src/Log2FunctionalEq.v	64	Theorem	log2_pow2_eq	Classical_Prop.classic
+src/Log2FunctionalEq.v	76	Corollary	log2_pow2_one	Classical_Prop.classic
+src/Log2FunctionalEq.v	79	Corollary	log2_pow2_three	Classical_Prop.classic
+src/Log2FunctionalEq.v	83	Corollary	log2_pow2_zero	Classical_Prop.classic
+src/Log2FunctionalEq.v	96	Definition	ln_mul_functional_equation	Classical_Prop.classic
+src/Log2FunctionalEq.v	142	Lemma	ln_proc_zero	Classical_Prop.classic
+src/Log2FunctionalEq.v	169	Definition	H2_fair	Classical_Prop.classic
+src/Log2FunctionalEq.v	173	Theorem	H2_fair_one	Classical_Prop.classic
+src/Log2FunctionalEq.v	194	Theorem	log2_functional_synthesis	Classical_Prop.classic
+src/Log2Process.v	62	Theorem	ln_series_cauchy	Classical_Prop.classic
+src/Log2Process.v	82	Definition	ln_proc	Classical_Prop.classic
+src/Log2Process.v	86	Definition	ln2_process	Classical_Prop.classic
+src/Log2Process.v	90	Definition	ln3_process	Classical_Prop.classic
+src/Log2Process.v	116	Lemma	ln2_inv_lb	Classical_Prop.classic
+src/Log2Process.v	127	Definition	ln2_inv	Classical_Prop.classic
+src/Log2Process.v	131	Definition	log2_of	Classical_Prop.classic
+src/Log2Process.v	137	Theorem	log2_two	Classical_Prop.classic
+src/Log2Process.v	152	Theorem	log2_3_process_not_wall	Classical_Prop.classic
+src/Log2Process.v	169	Theorem	log2_process_synthesis	Classical_Prop.classic
+src/ProcessDiagonal.v	208	Lemma	bp_eq_not_enum_witness	Classical_Prop.classic
+src/MonotoneConvergence.v	134	Theorem	q_inc_bounded_cauchy	Classical_Prop.classic
+src/MonotoneConvergence.v	177	Theorem	q_dec_bounded_cauchy	Classical_Prop.classic
+src/MonotoneConvergence.v	204	Definition	mct_limit_inc	Classical_Prop.classic
+src/MonotoneConvergence.v	210	Definition	mct_limit_dec	Classical_Prop.classic
+src/MonotoneConvergence.v	216	Lemma	mct_inc_upper_bound	Classical_Prop.classic
+src/MonotoneConvergence.v	230	Lemma	mct_inc_least	Classical_Prop.classic
+src/MonotoneConvergence.v	419	Lemma	mct_inc_limit_const	Classical_Prop.classic
+src/ProcessTypes.v	398	Lemma	not_enum_union	Classical_Prop.classic
+src/PowerSeries.v	107	Theorem	ratio_test_abs	Classical_Prop.classic
+src/PowerSeries.v	248	Theorem	power_series_converges	Classical_Prop.classic
+src/PowerSeries.v	273	Definition	power_series_limit	Classical_Prop.classic
+src/PowerSeries.v	410	Theorem	exp_series_cauchy	Classical_Prop.classic
+src/PowerSeries.v	419	Definition	exp_limit	Classical_Prop.classic
+src/PowerSeries.v	444	Lemma	exp_series_zero	Classical_Prop.classic
+src/ProcessExp.v	292	Lemma	exp_meta_cauchy	Classical_Prop.classic
+src/ProcessExp.v	348	Definition	exp_R	Classical_Prop.classic
+src/ProcessExp.v	442	Theorem	exp_R_add	Classical_Prop.classic
+src/ProcessExp.v	542	Lemma	exp_R_wd	Classical_Prop.classic
+src/ProcessExp.v	593	Lemma	exp_R_zero	Classical_Prop.classic
+src/ProcessExp.v	605	Theorem	exp_R_neg	Classical_Prop.classic
+src/ProcessExp.v	642	Theorem	exp_R_inj_kernel	Classical_Prop.classic
+src/ProcessExp.v	686	Theorem	exp_R_inj	Classical_Prop.classic
+src/RealPointComplete.v	268	Theorem	class_complete_L4	ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	71	Lemma	countable_union_enum	ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	175	Lemma	not_enum_paths_child	Classical_Prop.classic
+src/ProcessContinuumHypothesis.v	214	Lemma	perf_subtree_nonempty	Classical_Prop.classic
+src/ProcessContinuumHypothesis.v	250	Lemma	perf_subtree_has_child	Classical_Prop.classic
+src/ProcessContinuumHypothesis.v	273	Definition	pick_dir	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	278	Fixpoint	chain	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	284	Lemma	chain_length	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	292	Lemma	chain_in_perf	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	311	Lemma	chain_other_enum	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	337	Lemma	chain_nth_sigma	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	346	Lemma	chain_nth_pick	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	366	Definition	chain_process	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	374	Lemma	chain_followers_eq	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	392	Lemma	follows_chain_eq	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	408	Lemma	path_classification	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	466	Lemma	no_split_implies_enum	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	501	Lemma	chain_starts_with_sigma	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	513	Lemma	chain_is_sigma_app	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	521	Lemma	perf_subtree_has_splitting	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	574	Lemma	perf_subtree_is_perfect	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	607	Theorem	not_enum_has_perfect_subset	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	620	Theorem	process_continuum_hypothesis	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	642	Theorem	no_intermediate_process_type	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	648	Theorem	PCH_structural_dichotomy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ProcessContinuumHypothesis.v	676	Theorem	full_has_perfect	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/SchroederBernstein_ERR.v	497	Theorem	Schroeder_Bernstein	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ToS_Axioms.v	105	Axiom	L4_witness	ToS_Axioms.L4_witness
+src/ToS_Axioms.v	119	Lemma	L3_informative	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/ToS_Axioms.v	135	Lemma	L4_definite	ToS_Axioms.L4_witness
+src/ToS_Axioms.v	147	Lemma	NNPP_from_L3	Classical_Prop.classic
+src/SeriesConvergence.v	232	Lemma	Qpow_cauchy	Classical_Prop.classic
+src/SeriesConvergence.v	313	Lemma	partial_sum_tail	не проверено
+src/SeriesConvergence.v	323	Lemma	partial_sum_nonneg_bound	Classical_Prop.classic
+src/SeriesConvergence.v	389	Theorem	geometric_series_cauchy	Classical_Prop.classic
+src/SeriesConvergence.v	404	Theorem	comparison_test	Classical_Prop.classic
+src/SeriesConvergence.v	588	Definition	geometric_limit	Classical_Prop.classic
+src/UnitIntervalUncountableGeneral.v	269	Theorem	unit_interval_uncountable_general_L3_L4	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/UnitIntervalUncountableGeneral.v	280	Theorem	unit_interval_uncountable_general	ToS_Axioms.L4_witness
+src/TheoryOfSystems_Core_ERR.v	732	Lemma	L4_equiv_Difference	Classical_Prop.classic
+src/analysis/BolzanoWeierstrass.v	62	Lemma	infinite_pigeonhole	Classical_Prop.classic
+src/analysis/BolzanoWeierstrass.v	101	Definition	bw_step	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	109	Fixpoint	bw_iter	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	127	Lemma	bw_step_valid	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	138	Lemma	bw_step_width	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	149	Lemma	bw_step_nested_left	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	160	Lemma	bw_step_nested_right	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	171	Lemma	bw_step_preserves_infinite	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	187	Lemma	bw_iter_valid	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	197	Lemma	bw_iter_left_inc	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	207	Lemma	bw_iter_right_dec	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	217	Lemma	bw_left_mono	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	231	Lemma	bw_right_mono	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	245	Lemma	bw_iter_preserves_infinite	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	262	Lemma	bw_width_bound	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	292	Lemma	bw_width_to_zero	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	309	Lemma	bw_left_cauchy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	323	Lemma	bw_right_cauchy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	341	Lemma	trapped_seq_cauchy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	370	Lemma	bw_endpoints_equiv	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	397	Lemma	bw_infinitely_many	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	410	Lemma	bw_term_exists	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	451	Lemma	bw_step_is_gen_step	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	519	Theorem	bolzano_weierstrass	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	540	Theorem	monotone_bounded_cauchy	Classical_Prop.classic
+src/analysis/BolzanoWeierstrass.v	550	Theorem	decreasing_bounded_cauchy	Classical_Prop.classic
+src/analysis/BolzanoWeierstrass.v	560	Lemma	bw_left_bounded	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/BolzanoWeierstrass.v	575	Lemma	bw_right_bounded	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/analysis/HeineBorelComplete.v	549	Theorem	mono_bounded_is_cauchy	Classical_Prop.classic
+src/experimental/ZetaNegative.v	188	Theorem	zeta_2_converges	Classical_Prop.classic
+src/experimental/ZetaNegative.v	192	Theorem	zeta_3_converges	Classical_Prop.classic
+src/extraction/GapExtraction.v	74	Lemma	gap_calculator_consistent	не проверено
+src/foundation/AsymmetricDistinction.v	92	Theorem	distinction_asymmetric	Distinction.classic
+src/foundation/AsymmetricDistinction.v	185	Theorem	asymmetric_distinction_summary	Distinction.classic
+src/foundation/BinarityVsTotality.v	170	Lemma	classic_decides	Distinction.classic
+src/foundation/BinarityVsTotality.v	175	Theorem	totality_completes	Distinction.classic
+src/foundation/BinarityVsTotality.v	191	Theorem	distinction_of_is_actualization	Distinction.classic
+src/foundation/BaryonFromFoundation.v	110	Theorem	step1_distinction_asymmetric	Distinction.classic
+src/foundation/BaryonFromFoundation.v	170	Theorem	baryon_asymmetry_summary	Distinction.classic
+src/foundation/Distinction.v	36	Axiom	classic	Distinction.classic
+src/foundation/Distinction.v	75	Definition	distinction_of	Distinction.classic
+src/foundation/Distinction.v	82	Theorem	every_prop_distinguishes	Distinction.classic
+src/foundation/Distinction.v	163	Lemma	one_distinction_exists	Distinction.classic
+src/foundation/Distinction.v	166	Lemma	two_distinctions_exist	Distinction.classic
+src/foundation/Distinction.v	170	Lemma	distinction_count_succ	Distinction.classic
+src/foundation/Distinction.v	178	Lemma	distinction_count_any	Distinction.classic
+src/foundation/Distinction.v	202	Lemma	co_constitution	Distinction.classic
+src/foundation/Distinction.v	222	Theorem	distinction_decidable	Distinction.classic
+src/foundation/Distinction.v	226	Lemma	distinction_and	Distinction.classic
+src/foundation/Distinction.v	231	Lemma	distinction_or	Distinction.classic
+src/foundation/DistinctionProcess.v	139	Theorem	measurement_eventually_completes	не проверено
+src/foundation/ERRCategory.v	72	Definition	err_compose	не проверено
+src/foundation/ERRCategory.v	93	Definition	err_self_compose	не проверено
+src/foundation/ERRFromDistinction.v	158	Theorem	complete_foundation	Distinction.classic
+src/foundation/ERRFromDistinction.v	204	Theorem	foundation_summary	Distinction.classic
+src/foundation/IndivisibleDistinction.v	28	Theorem	all_four_necessary	Distinction.classic
+src/foundation/IndivisibleDistinction.v	85	Lemma	without_exhaustive_gap	Distinction.classic
+src/foundation/IndivisibleDistinction.v	150	Theorem	indivisible_distinction_summary	Distinction.classic
+src/foundation/KnowledgeAnswerExists.v	73	Theorem	answer_exists	Distinction.classic
+src/foundation/KnowledgeAnswerExists.v	78	Corollary	valid_question_has_answer	Distinction.classic
+src/foundation/KnowledgeAnswerExists.v	85	Theorem	answer_road_but_not_totality	Distinction.classic
+src/foundation/LawsFromDistinction.v	63	Theorem	Law_of_ExcludedMiddle	Distinction.classic
+src/foundation/LawsFromDistinction.v	94	Theorem	L4_double_negation	Distinction.classic
+src/foundation/LawsFromDistinction.v	155	Theorem	laws_consistent	Distinction.classic
+src/foundation/LawsFromDistinction.v	172	Theorem	L3_independence	Distinction.classic
+src/foundation/MatterAsymmetry.v	140	Theorem	C_violation_from_asymmetry	Distinction.classic
+src/foundation/MatterAsymmetry.v	148	Theorem	matter_asymmetry_summary	Distinction.classic
+src/foundation/P4_Eliminates_Pi11.v	93	Lemma	pi11_negation	Classical_Prop.classic
+src/foundation/PrimalityOfOne.v	58	Theorem	first_count_is_one	Distinction.classic
+src/foundation/PrimalityOfOne.v	84	Theorem	succ_is_new_distinction	Distinction.classic
+src/foundation/PrimalityOfOne.v	94	Theorem	positive_nat_is_distinction_count	Distinction.classic
+src/foundation/PrimalityOfOne.v	156	Theorem	primality_summary	Distinction.classic
+src/foundation/QuantizationSynthesis.v	87	Theorem	quantization_chain	Distinction.classic
+src/foundation/QuantizationSynthesis.v	134	Theorem	indivisibility_grand_synthesis	Distinction.classic
+src/foundation/RoleLimitSpecies.v	56	Lemma	not_regular_singular	Classical_Prop.classic
+src/foundation/RoleLimitSpecies.v	68	Theorem	species_dichotomy	Classical_Prop.classic
+src/foundation/RoleLimitSpecies.v	440	Theorem	ns_is_classified	Classical_Prop.classic
+src/foundation/RoleLimitSpecies.v	447	Theorem	role_limit_species_capstone	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	55	Theorem	exact_rg_orbit_cauchy	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	145	Theorem	cauchy_from_contraction	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	170	Theorem	cauchy_from_telescoping	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	183	Theorem	three_methods_cauchy	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	199	Theorem	unconditional_cauchy	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	225	Theorem	exact_rg_main	Classical_Prop.classic
+src/gauge/ExactRGProcess.v	246	Theorem	what_exact_rg_proves	Classical_Prop.classic
+src/gauge/ExtendedInterval.v	260	Lemma	orbit_cauchy_below	Classical_Prop.classic
+src/gauge/ExtendedInterval.v	273	Lemma	orbit_cauchy_above	Classical_Prop.classic
+src/gauge/ExtendedInterval.v	298	Theorem	orbit_cauchy_all	Classical_Prop.classic
+src/gauge/ExtendedInterval.v	414	Theorem	extended_main	Classical_Prop.classic
+src/gauge/ExtendedInterval.v	431	Theorem	what_step9_proves	Classical_Prop.classic
+src/gauge/GlobalMassGap.v	64	Theorem	step9_all_converge	Classical_Prop.classic
+src/gauge/GlobalMassGap.v	109	Theorem	global_mass_gap	Classical_Prop.classic
+src/gauge/GlobalMassGap.v	135	Theorem	the_complete_chain	Classical_Prop.classic
+src/gauge/GlobalMassGap.v	160	Theorem	what_is_proved_steps_8_9	Classical_Prop.classic
+src/gauge/GlobalMassGap.v	202	Theorem	steps_8_9_synthesis	Classical_Prop.classic
+src/gauge/LargerLattice.v	265	Theorem	gap_process_cauchy	Classical_Prop.classic
+src/gauge/LargerLattice.v	296	Theorem	larger_lattice_main	Classical_Prop.classic
+src/gauge/NonperturbativeGap.v	70	Theorem	process_is_cauchy	Classical_Prop.classic
+src/gauge/NonperturbativeGap.v	137	Theorem	proved_results	Classical_Prop.classic
+src/gauge/NonperturbativeGap.v	183	Theorem	nonperturbative_main	Classical_Prop.classic
+src/gauge/MillenniumSynthesis.v	64	Theorem	level3_nonlinear_rg	Classical_Prop.classic
+src/gauge/MillenniumSynthesis.v	82	Theorem	level4_exact_rg	Classical_Prop.classic
+src/gauge/MillenniumSynthesis.v	124	Theorem	the_complete_chain_v2	Classical_Prop.classic
+src/gauge/MillenniumSynthesis.v	207	Theorem	what_tos_proves	Classical_Prop.classic
+src/gauge/MillenniumSynthesis.v	246	Theorem	millennium_synthesis	Classical_Prop.classic
+src/gauge/MillenniumSynthesis.v	276	Theorem	global_summary_v2	Classical_Prop.classic
+src/gauge/TopologicalObstruction.v	44	Theorem	model_captures_rg	Classical_Prop.classic
+src/gauge/WallTheorem.v	63	Theorem	beyond_the_wall	Classical_Prop.classic
+src/gauge/WallTheorem.v	92	Theorem	p4_interpretation	Classical_Prop.classic
+src/gauge/WallTheorem.v	131	Theorem	our_contribution	Classical_Prop.classic
+src/gauge/WallTheorem.v	170	Theorem	wall_main	Classical_Prop.classic
+src/gauge/YM3DComplete.v	158	Theorem	three_millennium_level3	Classical_Prop.classic
+src/gauge/YMWallBreach.v	175	Theorem	ns_wall_standing	Classical_Prop.classic
+src/gauge/YMWallBreach.v	189	Theorem	rh_wall_standing	Classical_Prop.classic
+src/gauge/YMWallBreach.v	197	Theorem	three_millennium_updated	Classical_Prop.classic
+src/gauge/YMWallBreach.v	270	Theorem	grand_total	Classical_Prop.classic
+src/gauge/YangMillsFinal.v	52	Theorem	positive_results	Classical_Prop.classic
+src/gauge/YangMillsFinal.v	126	Theorem	p4_resolution	Classical_Prop.classic
+src/gauge/YangMillsFinal.v	176	Theorem	yang_mills_complete	Classical_Prop.classic
+src/linalg/EigenvalueSynthesis.v	125	Theorem	gershgorin_hydrogen_diag	Classical_Prop.classic
+src/linalg/EigenvalueSynthesis.v	163	Theorem	verified_results	Classical_Prop.classic
+src/linalg/EigenvalueSynthesis.v	196	Theorem	eigenvalue_ionization_main	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	33	Lemma	nonzero_component_exists	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	106	Theorem	gershgorin_2x2	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	182	Theorem	gershgorin_id	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	199	Theorem	gershgorin_diag	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	240	Theorem	spectral_radius_bound_correct	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	269	Theorem	strictly_diag_dominant_no_zero_ev	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	307	Theorem	eigenvalue_in_interval_2x2	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	334	Lemma	gershgorin_2x2_example	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	346	Lemma	gershgorin_shift_2x2	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	369	Lemma	diag_dominant_positive_eigenvalues_2x2	Classical_Prop.classic
+src/linalg/GershgorinDiscs.v	390	Theorem	gershgorin_summary	Classical_Prop.classic
+src/navier_stokes/ConcentrationBound.v	88	Definition	worst_pair_forcing	TriadicInteraction.C_B
+src/navier_stokes/ConcentrationBound.v	91	Lemma	worst_pair_forcing_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	103	Lemma	worst_pair_forcing_linear	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	117	Lemma	concentrated_forcing_bounded	TriadicInteraction.C_B
+src/navier_stokes/ConcentrationBound.v	135	Definition	damping_forcing_ratio	TriadicInteraction.C_B
+src/navier_stokes/ConcentrationBound.v	156	Definition	uniform_forcing_bound	TriadicInteraction.C_B
+src/navier_stokes/ConcentrationBound.v	159	Lemma	uniform_forcing_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	170	Lemma	uniform_forcing_linear	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	187	Lemma	uniform_per_mode_is_per_mode	TriadicInteraction.C_B
+src/navier_stokes/ConcentrationBound.v	193	Lemma	uniform_per_mode_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	200	Lemma	uniform_per_mode_decreasing	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	214	Lemma	enstrophy_at_k_bounded	TriadicInteraction.C_B
+src/navier_stokes/ConcentrationBound.v	221	Lemma	iterated_uniform	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	229	Theorem	conditional_regularity_theorem	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	251	Theorem	concentration_does_not_help	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ConcentrationBound.v	270	Theorem	concentration_bound_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	74	Theorem	smooth_with_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	86	Theorem	limit_is_smooth	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	96	Theorem	classical_derivatives_exist	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	128	Theorem	linf_from_h2	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	137	Theorem	serrin_condition_satisfied	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	147	Theorem	solution_unique	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	159	Theorem	full_sequence_converges	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	171	Theorem	global_existence	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	195	Theorem	limit_enstrophy_inequality	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	221	Theorem	clay_nine_steps	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	238	Theorem	clay_formulation	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	257	Theorem	analyticity_in_time	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	267	Theorem	pressure_smooth	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	277	Theorem	higher_regularity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	288	Theorem	uniqueness_in_energy_class	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	299	Theorem	high_mode_decay	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	308	Theorem	full_galerkin_converges	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	331	Theorem	continuous_dependence	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	340	Theorem	backward_uniqueness	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	349	Theorem	vorticity_maximum	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	358	Theorem	regularity_at_zero	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	369	Theorem	high_freq_decay	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ClassicalRegularity.v	380	Theorem	classical_regularity_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinFiniteRegularity.v	107	Theorem	galerkin_finite_regularity_capstone	Classical_Prop.classic
+src/navier_stokes/EnergyEstimate.v	297	Theorem	uniform_energy_structure	GalerkinSystem.B_raw
+src/navier_stokes/EnergyEstimate.v	331	Lemma	energy_rate_is_neg_dissipation	GalerkinSystem.B_raw
+src/navier_stokes/EnergyEstimate.v	351	Theorem	energy_exponential_decay_rate	GalerkinSystem.B_raw
+src/navier_stokes/EnergyEstimate.v	362	Theorem	energy_estimate_main	GalerkinSystem.B_raw
+src/navier_stokes/FullRegularity.v	38	Theorem	navier_stokes_regularity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	64	Theorem	regularity_implies_energy_bound	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	77	Theorem	regularity_enstrophy_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	87	Theorem	regularity_per_mode	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	101	Theorem	regularity_boundary_controlled	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	117	Theorem	energy_can_be_large	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	126	Theorem	per_mode_is_stronger	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	137	Theorem	our_approach_avoids_wall	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	146	Theorem	self_consistency_well_defined	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	168	Definition	low_mode_count	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	171	Lemma	low_mode_count_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	186	Theorem	high_modes_in_region	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	201	Theorem	low_modes_finite	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	209	Theorem	low_modes_energy_bounded	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	220	Theorem	smooth_always_finite_energy	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	233	Theorem	general_smooth_regularity	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	245	Theorem	rescaled_always_in_R	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	264	Theorem	millennium_regularity_chain	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	277	Theorem	millennium_enstrophy_bounded	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	285	Theorem	millennium_partial_enstrophy	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	292	Theorem	millennium_statement	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	341	Theorem	regularity_process_view	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	354	Theorem	uniform_in_K	TriadicInteraction.C_B
+src/navier_stokes/FullRegularity.v	367	Theorem	argument_is_elementary	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/FullRegularity.v	381	Theorem	full_regularity_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/EnstrophyConvergence.v	110	Lemma	enstrophy_term_nonneg	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	117	Definition	partial_enstrophy	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	120	Lemma	partial_enstrophy_nonneg	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	128	Lemma	partial_enstrophy_monotone	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	183	Definition	sobolev_contribution	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	186	Lemma	sobolev_contribution_nonneg	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	196	Lemma	sobolev_s1_is_enstrophy	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	205	Definition	nth_iteration_amplitude	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	211	Lemma	nth_iteration_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/EnstrophyConvergence.v	221	Theorem	bootstrap_improves_decay	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/EnstrophyConvergence.v	306	Lemma	self_consistent_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/EnstrophyConvergence.v	314	Theorem	post_thermalization_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/EnstrophyConvergence.v	331	Theorem	enstrophy_convergence_summary	TriadicInteraction.C_B
+src/navier_stokes/EnstrophyConvergence.v	354	Theorem	enstrophy_convergence_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	99	Theorem	linear_term_converges	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	112	Theorem	nonlinear_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	121	Theorem	bilinear_estimate	TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	131	Theorem	nonlinear_error_structure	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	140	Theorem	time_derivative_converges	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	150	Theorem	limit_solves_ns	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	176	Theorem	limit_enstrophy_bounded	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	185	Theorem	limit_per_mode	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	196	Theorem	limit_sobolev_bounded	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	204	Theorem	limit_all_sobolev_finite	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	227	Theorem	process_classical_enstrophy	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	235	Theorem	process_classical_regularity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	244	Theorem	classical_and_process_agree	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	258	Theorem	limit_dissipation	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	277	Theorem	limit_high_modes	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	287	Theorem	convergence_rate	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	295	Theorem	strong_h1_convergence	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	312	Theorem	nonlinear_well_defined	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	323	Theorem	pressure_from_velocity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	339	Theorem	galerkin_error	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	348	Theorem	galerkin_unique	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	357	Theorem	projection_commutes	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	366	Theorem	tail_energy_vanishes	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	375	Theorem	limit_enstrophy_finite	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinConvergence.v	383	Theorem	galerkin_convergence_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	66	Theorem	wall_face_2_permode	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	98	Theorem	threshold_exact	TriadicInteraction.C_B
+src/navier_stokes/HonestAssessment.v	106	Theorem	at_threshold	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	121	Theorem	wall_face_3_rdt	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	142	Theorem	rdt_failure_quantitative	TriadicInteraction.C_B
+src/navier_stokes/HonestAssessment.v	152	Theorem	rdt_excess_grows	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	167	Theorem	three_faces_one_wall	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	247	Theorem	need_cancellation	TriadicInteraction.C_B
+src/navier_stokes/HonestAssessment.v	258	Theorem	condition_type	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	269	Theorem	vs_small_energy	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	281	Theorem	vs_prodi_serrin	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	293	Theorem	condition_is_sharp	TriadicInteraction.C_B
+src/navier_stokes/HonestAssessment.v	305	Theorem	conditional_result_gives	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	323	Theorem	solved_results	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	336	Theorem	not_solved	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	343	Theorem	p4_contribution	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	354	Theorem	wall_is_structural	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/HonestAssessment.v	369	Theorem	honest_assessment_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/GalerkinSystem.v	208	Parameter	B_raw	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	214	Definition	B_coeff	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	218	Lemma	B_antisym	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	250	Definition	triple_sum	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	257	Definition	inner_double_sum	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	262	Lemma	inner_term_neg	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	269	Lemma	inner_double_sum_self_neg	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	295	Theorem	nonlinear_energy_zero	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	319	Definition	nonlinear_energy_rate	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	322	Theorem	nonlinear_rate_zero	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	333	Definition	total_energy_rate	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	337	Theorem	energy_rate_equals_dissipation	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	345	Theorem	energy_rate_nonpositive	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	353	Theorem	energy_rate_decay	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	362	Theorem	energy_rate_formula	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	390	Lemma	energy_rate_at_zero	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	420	Lemma	enstrophy_energy_tradeoff	GalerkinSystem.B_raw
+src/navier_stokes/GalerkinSystem.v	477	Theorem	galerkin_main	GalerkinSystem.B_raw
+src/navier_stokes/NSComplete.v	49	Theorem	ns_u2_2d	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	89	Theorem	ns_unconditional	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	109	Theorem	ns_c1_invariant	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	118	Theorem	ns_c2_bootstrap	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	128	Theorem	ns_c3_sobolev	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	136	Theorem	ns_c4_galerkin	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	144	Theorem	ns_c5_smooth	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	154	Theorem	ns_conditional	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	174	Theorem	proved_conditional	TriadicInteraction.C_B
+src/navier_stokes/NSComplete.v	182	Theorem	not_proved_wall	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	193	Theorem	the_wall	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	207	Theorem	closing_the_gap	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	214	Theorem	gap_identified	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	230	Theorem	main_results	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	248	Theorem	combined_with_ym	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/NSComplete.v	271	Theorem	ns_synthesis_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	35	Definition	A_inv	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	37	Lemma	A_inv_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	46	Lemma	A_inv_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	52	Lemma	A_inv_scale	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	62	Definition	in_region	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	67	Lemma	region_scale	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	83	Theorem	region_contains_zero	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	100	Theorem	region_convex	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	129	Lemma	in_region_mode_bound	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	147	Definition	forcing_in_region	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	151	Lemma	forcing_in_region_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	173	Lemma	A_inv_sq_simplify	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	193	Definition	boundary_damping	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	196	Definition	boundary_velocity	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	199	Lemma	boundary_damping_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	321	Theorem	boundary_flow_nonpositive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	381	Theorem	boundary_flow_mode_1	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	390	Theorem	boundary_flow_all_modes	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	445	Theorem	region_invariant	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	473	Theorem	discrete_invariance_step	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	483	Theorem	invariance_by_induction	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	497	Theorem	region_implies_per_mode	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	507	Theorem	region_implies_sq_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/InvariantRegion.v	539	Theorem	region_energy_bound	TriadicInteraction.C_B
+src/navier_stokes/InvariantRegion.v	551	Theorem	invariant_region_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ProcessVorticity.v	195	Theorem	two_millennium_enhanced	GalerkinSystem.B_raw
+src/navier_stokes/MillenniumComplete.v	60	Theorem	chain_phase23	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	66	Theorem	chain_phase4	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	77	Theorem	chain_phase5	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	85	Theorem	chain_phase6	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	102	Theorem	ns_galerkin_bound_chain	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	135	Theorem	layer2_per_mode	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	148	Theorem	layer4_bootstrap	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	159	Theorem	layer5_classical	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	170	Theorem	proof_architecture	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	202	Theorem	phase_chain_complete	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	226	Theorem	enstrophy_bounded_final	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	240	Theorem	sobolev_final	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	294	Theorem	process_perspective	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	307	Theorem	a_equals_exists	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	321	Theorem	regularity_bounds_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	336	Theorem	uniqueness_sobolev_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	344	Theorem	thirty_file_chain	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	397	Theorem	both_walls_positive_bounds	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/MillenniumComplete.v	409	Theorem	millennium_reading2_capstone	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	106	Definition	rhs_bound	TriadicInteraction.C_B
+src/navier_stokes/LowModeControl.v	110	Theorem	rhs_bound_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	162	Theorem	finite_ode_global	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	172	Theorem	finite_ode_smooth	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	248	Definition	total_enstrophy_bound	TriadicInteraction.C_B
+src/navier_stokes/LowModeControl.v	251	Theorem	total_enstrophy_bound_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	262	Theorem	unconditional_enstrophy_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	279	Theorem	low_high_complete	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	304	Theorem	energy_ball_region_compatible	TriadicInteraction.C_B
+src/navier_stokes/LowModeControl.v	333	Theorem	total_bound_decomposition	TriadicInteraction.C_B
+src/navier_stokes/LowModeControl.v	342	Theorem	rhs_decomposition	TriadicInteraction.C_B
+src/navier_stokes/LowModeControl.v	360	Theorem	no_finite_time_singularity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	371	Theorem	low_modes_analytic	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/LowModeControl.v	378	Theorem	low_mode_control_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	31	Definition	per_mode_amplitude	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	34	Lemma	per_mode_amplitude_eq_ssb	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	40	Lemma	per_mode_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	48	Lemma	per_mode_decreasing	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	57	Definition	per_mode_sq	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	60	Lemma	per_mode_sq_nonneg	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	65	Definition	enstrophy_contribution	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	68	Lemma	enstrophy_contribution_nonneg	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	78	Lemma	enstrophy_contribution_formula	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	90	Lemma	first_iteration_enstrophy_constant	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	247	Definition	self_consistent_amplitude	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	250	Lemma	self_consistent_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	260	Definition	bootstrap_forcing	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	263	Lemma	bootstrap_forcing_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	279	Theorem	bootstrap_consistency	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	329	Theorem	bootstrap_closes	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	338	Definition	iterated_amplitude	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	341	Lemma	iterated_amplitude_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	363	Definition	iterated_enstrophy_term	TriadicInteraction.C_B
+src/navier_stokes/PerModeBound.v	366	Lemma	iterated_enstrophy_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	379	Lemma	iterated_bound_crude	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	418	Theorem	iterated_decays_comparison	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	431	Theorem	per_mode_summary	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/PerModeBound.v	453	Theorem	per_mode_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/ProcessNS.v	132	Theorem	uniform_rate_formula	GalerkinSystem.B_raw
+src/navier_stokes/ProcessNS.v	140	Theorem	uniform_rate_nonpositive	GalerkinSystem.B_raw
+src/navier_stokes/ProcessNS.v	290	Theorem	wellformed_exponential_decay	GalerkinSystem.B_raw
+src/navier_stokes/ProcessNS.v	348	Theorem	two_millennium_results	GalerkinSystem.B_raw
+src/navier_stokes/RegularitySynthesis.v	52	Theorem	chain_step2_per_mode	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	64	Theorem	chain_step3_forcing	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	71	Theorem	chain_step4_self_consistent	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	78	Theorem	chain_step5_iterated	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	86	Theorem	chain_step6_enstrophy	TriadicInteraction.C_B
+src/navier_stokes/RegularitySynthesis.v	93	Theorem	chain_step7_monotone	TriadicInteraction.C_B
+src/navier_stokes/RegularitySynthesis.v	100	Theorem	per_mode_chain	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	228	Theorem	per_mode_advantage	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	246	Theorem	ns_final_assessment	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/RegularitySynthesis.v	300	Theorem	ns_phase4_complete	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/SmoothInitialData.v	139	Theorem	smooth_in_region	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	179	Definition	critical_mode_index	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	184	Theorem	smooth_in_region_high_modes	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	196	Theorem	high_mode_in_region	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	234	Theorem	rescaling_puts_in_region	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/SmoothInitialData.v	246	Definition	rescale_factor	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	248	Lemma	rescale_factor_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/SmoothInitialData.v	256	Lemma	rescaled_amplitude	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	267	Lemma	rescaled_is_smooth	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/SmoothInitialData.v	297	Theorem	rescaled_in_region	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/SmoothInitialData.v	313	Theorem	smooth_data_in_region	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	322	Theorem	smooth_stays_smooth	TriadicInteraction.C_B
+src/navier_stokes/SmoothInitialData.v	338	Theorem	general_smooth_argument	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/SmoothInitialData.v	351	Theorem	smooth_initial_data_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	36	Theorem	step1_smooth_enters_region	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	46	Theorem	step2_region_invariant	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	54	Theorem	step3_per_mode_bound	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	64	Theorem	step4_bootstrap	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	76	Theorem	step5_enstrophy_converges	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	92	Theorem	step6_higher_regularity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	99	Theorem	step7_smooth_for_all_time	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	109	Theorem	regularity_chain	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	135	Definition	enstrophy_bound_in_region	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	138	Lemma	enstrophy_bound_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	159	Theorem	enstrophy_bounded_in_R	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	167	Theorem	enstrophy_uniform_in_K	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	175	Lemma	enstrophy_term_in_region	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	193	Theorem	palinstrophy_bounded_in_R	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	203	Theorem	all_sobolev_bounded	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	210	Theorem	iterated_improvement	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	237	Theorem	galerkin_convergence	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TransientClosure.v	248	Theorem	partial_enstrophy_monotone	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	261	Theorem	energy_controls_enstrophy	TriadicInteraction.C_B
+src/navier_stokes/TransientClosure.v	269	Theorem	transient_closure_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	65	Theorem	navier_stokes_amplitude_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	110	Theorem	unified_framework	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	142	Theorem	ns_regularity_chain	TriadicInteraction.C_B
+src/navier_stokes/TwoMillennium.v	151	Theorem	process_view	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	179	Theorem	the_final_numbers	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	215	Theorem	ns_enstrophy_convergence	TriadicInteraction.C_B
+src/navier_stokes/TwoMillennium.v	220	Theorem	ns_bootstrap	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	225	Theorem	ns_enstrophy_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	230	Theorem	gap_and_bound	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TwoMillennium.v	243	Theorem	two_millennium_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	119	Parameter	C_B	TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	120	Axiom	C_B_positive	TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	122	Axiom	B_coeff_bounded	TriadicInteraction.B_coeff_bounded
+src/navier_stokes/TriadicInteraction.v	125	Lemma	coupling_for_sum_triad	GalerkinSystem.B_raw + TriadicInteraction.B_coeff_bounded + TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	134	Lemma	coupling_bound_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	142	Lemma	coupling_monotone	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	151	Lemma	coupling_at_zero	TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	154	Lemma	coupling_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	162	Lemma	nonlinear_term_bounded	GalerkinSystem.B_raw + TriadicInteraction.B_coeff_bounded + TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	186	Definition	mode_forcing	GalerkinSystem.B_raw
+src/navier_stokes/TriadicInteraction.v	191	Lemma	mode_forcing_nonneg	GalerkinSystem.B_raw
+src/navier_stokes/TriadicInteraction.v	302	Theorem	forcing_bound	GalerkinSystem.B_raw + TriadicInteraction.B_coeff_bounded + TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	366	Definition	clean_forcing_bound	TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	369	Lemma	clean_forcing_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	380	Lemma	clean_forcing_linear	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	420	Definition	steady_state_bound	TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	423	Lemma	steady_state_bound_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	438	Definition	critical_mode	TriadicInteraction.C_B
+src/navier_stokes/TriadicInteraction.v	440	Lemma	critical_mode_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	451	Theorem	damping_exceeds_forcing	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	493	Lemma	steady_state_decreasing	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/TriadicInteraction.v	578	Theorem	triadic_interaction_main	GalerkinSystem.B_raw + TriadicInteraction.B_coeff_bounded + TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	66	Theorem	uniform_per_mode_high	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	77	Definition	combined_mode_bound	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	80	Theorem	combined_mode_bound_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	89	Theorem	uniform_enstrophy	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	97	Theorem	uniform_enstrophy_independent	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	107	Definition	palinstrophy_bound	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	110	Theorem	uniform_palinstrophy	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	121	Definition	sobolev_bound	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	124	Theorem	uniform_sobolev	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	134	Theorem	sobolev_uniform_in_K	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	149	Definition	time_deriv_bound	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	153	Theorem	time_deriv_bound_nonneg	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	179	Theorem	uniform_time_derivative	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	187	Definition	second_time_deriv_bound	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	190	Theorem	second_time_deriv_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	209	Definition	time_lipschitz_const	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	212	Theorem	time_lipschitz_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	229	Theorem	equicontinuity	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	237	Theorem	equicontinuity_uniform	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	257	Definition	compactness_const	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	260	Theorem	compactness_const_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	270	Theorem	compactness	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	279	Theorem	strong_convergence_key	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	288	Theorem	all_bounds_uniform	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	305	Theorem	sobolev_bound_monotone	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	325	Theorem	compactness_const_monotone	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	343	Theorem	sobolev_at_zero	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	351	Theorem	sobolev_at_one	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	359	Theorem	lipschitz_dominates	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	367	Theorem	second_deriv_dominates	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	377	Theorem	palinstrophy_dominates_enstrophy	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	385	Theorem	combined_dominates	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	394	Theorem	uniform_bootstrap	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	402	Theorem	uniform_ainv	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	409	Theorem	sobolev_hierarchy	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	420	Theorem	lipschitz_always_positive	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/navier_stokes/UniformBounds.v	451	Theorem	enstrophy_bound_monotone_k0	TriadicInteraction.C_B
+src/navier_stokes/UniformBounds.v	467	Theorem	uniform_bounds_main	TriadicInteraction.C_B + TriadicInteraction.C_B_positive
+src/physics/Decoherence.v	235	Theorem	decoherence_dichotomy	Classical_Prop.classic
+src/physics/Decoherence.v	364	Lemma	decohere_step_tree	не проверено
+src/physics/MeasurementProcess.v	136	Theorem	measurement_dichotomy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/MeasurementProcess.v	146	Theorem	no_intermediate_measurement	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/MeasurementProcess.v	293	Theorem	process_physics_measurement	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	106	Theorem	spectral_dichotomy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	115	Theorem	spectral_structural	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	137	Theorem	no_intermediate_spectrum	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	173	Lemma	not_discrete_implies_continuous	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	183	Lemma	not_continuous_implies_discrete	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	306	Lemma	discrete_continuous_exhaust	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	328	Lemma	spectral_cases_complete	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	354	Lemma	full_cantor_space_perfect	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	389	Lemma	countable_union_enumerable	ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	407	Theorem	spectral_classification	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/SpectralDichotomy.v	420	Theorem	observable_spectral_type	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/Entanglement.v	545	Theorem	entanglement_dichotomy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/Entanglement.v	564	Lemma	entangled_structural	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/physics/Entanglement.v	594	Theorem	entanglement_classification	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessAlgebraUnified.v	144	Lemma	noetherian_chain_terminates	Classical_Prop.classic
+src/process/ProcessAlgebraUnified.v	190	Theorem	process_hierarchy	Classical_Prop.classic
+src/process/ProcessArithmetic.v	311	Lemma	monotone_bounded_Cauchy	Classical_Prop.classic
+src/process/ProcessArithmetic.v	339	Lemma	decreasing_bounded_Cauchy	Classical_Prop.classic
+src/process/ProcessBW.v	56	Definition	bw_left_process	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	60	Definition	bw_right_process	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	64	Lemma	bw_left_is_cauchy_process	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	74	Lemma	bw_right_is_cauchy_process	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	84	Lemma	bw_left_increasing	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	94	Lemma	bw_right_decreasing	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	104	Lemma	bw_endpoints_equiv	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	141	Theorem	process_BW	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	182	Theorem	bw_is_process_construction	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBW.v	210	Lemma	bw_rate_is_width_ratio	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/process/ProcessBinReal.v	176	Theorem	bin_to_real_is_Cauchy	Classical_Prop.classic
+src/process/ProcessCrossing.v	142	Theorem	crossing_exists	не проверено
+src/process/ProcessERRWilson.v	119	Lemma	wilson_concat_sum	не проверено
+src/process/ProcessERRGaugeGroup.v	71	Lemma	group_order_positive	не проверено
+src/process/ProcessExactRGConnection.v	46	Theorem	exact_rg_cauchy	Classical_Prop.classic
+src/process/ProcessExactRGConnection.v	77	Theorem	three_cauchy_proofs	Classical_Prop.classic
+src/process/ProcessExactRGConnection.v	85	Theorem	rg_unconditional	Classical_Prop.classic
+src/process/ProcessExactRGConnection.v	117	Theorem	exact_rg_main_result	Classical_Prop.classic
+src/process/ProcessExactRGConnection.v	138	Theorem	phase_F2_complete	Classical_Prop.classic
+src/process/ProcessFuncUnified.v	180	Theorem	L2_norm_is_process	Classical_Prop.classic
+src/process/ProcessGlobalGapConnection.v	74	Definition	global_mass_gap_connected	Classical_Prop.classic
+src/process/ProcessGlobalGapConnection.v	77	Definition	the_complete_chain_connected	Classical_Prop.classic
+src/process/ProcessGlobalGapConnection.v	80	Definition	steps_8_9_synthesis_connected	Classical_Prop.classic
+src/process/ProcessGlobalGapConnection.v	116	Definition	nonperturbative_main_connected	Classical_Prop.classic
+src/process/ProcessL2.v	67	Theorem	L2_norm_cauchy	Classical_Prop.classic
+src/process/ProcessL2.v	294	Theorem	L2_is_process	Classical_Prop.classic
+src/process/ProcessMCT.v	157	Theorem	process_mct	Classical_Prop.classic
+src/process/ProcessMCT.v	177	Theorem	process_mct_nonneg	Classical_Prop.classic
+src/process/ProcessLatticeObservable.v	103	Lemma	creutz_process_cauchy	Classical_Prop.classic
+src/process/ProcessLatticeObservable.v	225	Theorem	observable_is_process	Classical_Prop.classic
+src/process/ProcessNoetherian.v	64	Theorem	bounded_ascending_stabilizes	Classical_Prop.classic
+src/process/ProcessNoetherian.v	108	Theorem	bounded_is_noetherian	Classical_Prop.classic
+src/process/ProcessNoetherian.v	142	Lemma	finite_dim_noetherian	Classical_Prop.classic
+src/process/ProcessNoetherian.v	151	Theorem	truncated_poly_noetherian	Classical_Prop.classic
+src/process/ProcessNoetherian.v	191	Theorem	noetherian_is_p4	Classical_Prop.classic
+src/process/ProcessMillenniumConnection.v	105	Definition	millennium_synthesis_connected	Classical_Prop.classic
+src/process/ProcessMillenniumConnection.v	142	Definition	yang_mills_complete_connected	Classical_Prop.classic
+src/process/ProcessMillenniumConnection.v	166	Definition	wall_main_connected	Classical_Prop.classic
+src/process/ProcessQuantization.v	148	Theorem	quantization_cauchy	Classical_Prop.classic
+src/process/ProcessSigmaAdditive.v	98	Theorem	sigma_additive_converges	Classical_Prop.classic
+src/process/ProcessSeries.v	64	Theorem	geometric_process_cauchy	Classical_Prop.classic
+src/process/ProcessSeries.v	124	Theorem	series_comparison_cauchy	Classical_Prop.classic
+src/process/ProcessStep8Synthesis.v	74	Theorem	w8_status	Classical_Prop.classic
+src/process/ProcessStep8Synthesis.v	142	Theorem	final_statistics_step8	Classical_Prop.classic
+src/process/ProcessTaylor.v	76	Theorem	exp_process_cauchy	Classical_Prop.classic
+src/process/ProcessTaylor.v	169	Theorem	exp_is_taylor_construction	Classical_Prop.classic
+src/process/ProcessSymBreaking.v	107	Lemma	broken_not_symmetric	не проверено
+src/process/ProcessSymBreaking.v	180	Lemma	site_break_not_symmetric	не проверено
+src/process/ProcessTopCompact.v	98	Theorem	compact_noetherian_bridge	Classical_Prop.classic
+src/process/ProcessTopCompact.v	133	Lemma	noetherian_means_termination	Classical_Prop.classic
+src/process/ProcessTopCompact.v	218	Theorem	compact_eq_noetherian	Classical_Prop.classic
+src/process/ProcessTopCompact.v	234	Theorem	p4_compactness_summary	Classical_Prop.classic
+src/process/ProcessTopUnified.v	106	Theorem	compact_equals_noetherian	Classical_Prop.classic
+src/process/ProcessStringTension.v	340	Theorem	ln_process_cauchy	Classical_Prop.classic
+src/process/ProcessStringTension.v	444	Theorem	sigma_cauchy	Classical_Prop.classic
+src/process/ProcessStringTension.v	595	Theorem	w8_string_tension	Classical_Prop.classic
+src/process/ProcessUnified.v	73	Lemma	ivt_bw_same_stage_ratio	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/settheory/CardinalityWithoutChoice.v	112	Theorem	cardinal_antisym	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/settheory/CardinalityWithoutChoice.v	203	Theorem	bijects_sym	ToS_Axioms.L4_witness
+src/settheory/CardinalityWithoutChoice.v	206	Theorem	no_maximal_in_injection_order	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/settheory/CardinalityWithoutChoice.v	213	Theorem	surjection_has_section	ToS_Axioms.L4_witness
+src/settheory/CardinalityWithoutChoice.v	223	Theorem	surjects_injects_back	ToS_Axioms.L4_witness
+src/settheory/BorelDeterminacy.v	21	Axiom	classic	BorelDeterminacy.classic
+src/settheory/BorelDeterminacy.v	154	Theorem	weak_determinacy	BorelDeterminacy.classic
+src/settheory/BorelDeterminacy.v	164	Theorem	zero_game_determined	BorelDeterminacy.classic
+src/settheory/BorelDeterminacy.v	272	Lemma	can_win_or_not	BorelDeterminacy.classic
+src/projective/ConnectionTheorems.v	200	Theorem	nested_interval_inc_cauchy	Classical_Prop.classic
+src/projective/ConnectionTheorems.v	217	Theorem	nested_interval_dec_cauchy	Classical_Prop.classic
+src/settheory/ZermeloDeterminacy.v	42	Lemma	choose_ex	BorelDeterminacy.classic
+src/settheory/ZermeloDeterminacy.v	49	Definition	pick	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/settheory/ZermeloDeterminacy.v	52	Lemma	pick_spec	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/settheory/ZermeloDeterminacy.v	58	Definition	sI_win	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/settheory/ZermeloDeterminacy.v	61	Definition	sII_spoil	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/settheory/ZermeloDeterminacy.v	71	Lemma	winI_invariant	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/settheory/ZermeloDeterminacy.v	89	Lemma	notwinI_invariant	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/settheory/ZermeloDeterminacy.v	115	Theorem	zermelo_determinacy	BorelDeterminacy.classic + ToS_Axioms.L4_witness
+src/projective/ProjectiveLimit.v	280	Lemma	frechet_partials_cauchy	Classical_Prop.classic
+src/projective/ProjectiveLimit.v	465	Lemma	frechet_tail_vanishes	Classical_Prop.classic
+src/stdlib/OperatorProcess.v	111	Lemma	koopman_doubling_geometric	не проверено
+src/stdlib/SharkovskiiForcing.v	69	Lemma	lucas_growth	не проверено
+src/zeta/ExplicitFormula.v	220	Lemma	pole_correction_unbounded	Classical_Prop.classic
+src/zeta/ExplicitFormula.v	319	Theorem	explicit_formula_summary	Classical_Prop.classic
+src/zeta/ExplicitFormula.v	346	Theorem	explicit_formula_axiom_check	Classical_Prop.classic
+src/zeta/LiProcess.v	229	Lemma	process_cauchy	Classical_Prop.classic
+src/zeta/LiProcess.v	276	Theorem	li_process_summary	Classical_Prop.classic
+src/zeta/ComplexZeta.v	107	Theorem	harmonic_diverges	Classical_Prop.classic
+src/zeta/ComplexZeta.v	245	Theorem	pole_unbounded	Classical_Prop.classic
+src/zeta/ComplexZeta.v	255	Theorem	zeta_dichotomy	Classical_Prop.classic
+src/zeta/ComplexZeta.v	276	Lemma	zeta_1_unbounded	Classical_Prop.classic
+src/zeta/ComplexZeta.v	328	Theorem	complex_zeta_summary	Classical_Prop.classic
+src/zeta/ApproximateZeros.v	156	Lemma	zeta_1_unbounded	Classical_Prop.classic
+src/zeta/ApproximateZeros.v	191	Lemma	zeta_1_no_approx_zero	Classical_Prop.classic
+src/zeta/RH_FinalAssessment.v	99	Theorem	proved_zeta_converges	Classical_Prop.classic
+src/zeta/RH_FinalAssessment.v	264	Theorem	tos_rh_verified	Classical_Prop.classic
+src/zeta/RH_FinalAssessment.v	280	Theorem	rh_grand_summary	Classical_Prop.classic
+src/zeta/RH_Phase1_Synthesis.v	257	Theorem	rh_phase1_complete	Classical_Prop.classic
+src/zeta/EulerExtension.v	335	Theorem	euler_convergent_k2	Classical_Prop.classic
+src/zeta/EulerExtension.v	399	Theorem	euler_process_type_transition	Classical_Prop.classic
+src/zeta/EulerExtension.v	528	Theorem	oscillation_vanishes	Classical_Prop.classic
+src/zeta/EulerExtension.v	548	Lemma	oscillation_convergent_k2	Classical_Prop.classic
+src/zeta/EulerExtension.v	562	Lemma	euler_k2_bounded_deviation	Classical_Prop.classic
+src/zeta/EulerExtension.v	608	Lemma	euler_gen_cauchy	Classical_Prop.classic
+src/zeta/ZeroStructure.v	60	Theorem	zero_dichotomy	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/zeta/ZeroStructure.v	146	Theorem	zero_structure	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/zeta/ZeroStructure.v	167	Theorem	zero_classification	Classical_Prop.classic + ToS_Axioms.L4_witness
+src/zeta/ZeroFreeRegion.v	88	Theorem	pole_bound_unbounded	Classical_Prop.classic
+src/zeta/ZeroFreeRegion.v	131	Lemma	zeta_cube_unbounded	Classical_Prop.classic
+src/zeta/ZeroFreeRegion.v	275	Theorem	pole_drives_repulsion	Classical_Prop.classic
+src/zeta/ZeroFreeRegion.v	288	Theorem	gap_unbounded	Classical_Prop.classic
+src/zeta/ZeroFreeRegion.v	325	Theorem	zero_free_region_summary	Classical_Prop.classic
+src/zeta/ZeroMigration.v	115	Lemma	cumulative_unbounded	Classical_Prop.classic
+src/zeta/ZetaProcess.v	376	Theorem	zeta_process_cauchy	Classical_Prop.classic
+src/zeta/ZetaProcess.v	387	Definition	zeta_real	Classical_Prop.classic
+src/zeta/ZetaProcess.v	518	Lemma	zeta_gen_cauchy	Classical_Prop.classic

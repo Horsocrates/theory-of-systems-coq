@@ -1,16 +1,26 @@
 (** * TransfiniteInduction.v — Transfinite Induction (PROVEN, no axiom)
     Elements: Ord, ord_lt (from Ordinal.v)
-    Roles:    Transfinite induction principle, recursion
+    Roles:    Transfinite induction principle along ord_lt
     Rules:    Well-foundedness PROVEN from structural induction on Ord
-    STATUS:   12 Qed, 0 Admitted, 0 new axioms
+    STATUS:   8 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY RESULT: wf_ord_lt is a THEOREM, not an axiom.
     Because Ord is inductive and ord_lt constructors decrease structure,
     well-foundedness follows from structural induction + acc_succ lemma.
 
-    Print Assumptions: classic, L4_witness only (2 axioms, same as before).
-    NO new axioms introduced.
+    Print Assumptions: every statement of the file is closed under the global
+    context (the file does not even import the two logical assumptions).
+
+    HONEST SCOPE (Nov 2026).  ord_lt compares with a notation only the FINITE
+    notations (OrdinalOrders.ord_lt_left_numeral): omega is not below omega+1
+    and not below epsilon_0, and below epsilon_0 lies exactly what lies below
+    omega.  So transfinite_ind, at a limit step, has the induction hypothesis
+    for finite notations only, and transfinite_ind_epsilon_0 does not differ
+    from transfinite_ind_omega.  Induction THROUGH limits, induction below
+    epsilon_0, induction along the tower and recursion with its equation are
+    in foundation/OrdinalOrders.v (the order of construction ord_below and
+    Brouwer's order olt).
 *)
 
 From ToS Require Import Ordinal.
@@ -67,41 +77,6 @@ Proof.
 Qed.
 
 (* ================================================================= *)
-(* TRANSFINITE RECURSION                                              *)
-(* ================================================================= *)
-
-(** Transfinite recursion -- existence of recursive functions along ord_lt *)
-Theorem transfinite_rec : forall (T : Type)
-  (step : forall a : Ord, (forall b : Ord, ord_lt b a -> T) -> T),
-  forall a : Ord, T.
-Proof.
-  intros T step a.
-  exact (well_founded_induction_type wf_ord_lt (fun _ => T) step a).
-Qed.
-
-(* ================================================================= *)
-(* SPECIAL CASES                                                      *)
-(* ================================================================= *)
-
-(** Nat induction as a special case (trivially provable, shows connection) *)
-Lemma nat_induction_from_transfinite : forall (P : nat -> Prop),
-  P O -> (forall n, P n -> P (S n)) -> forall n, P n.
-Proof.
-  intros P H0 HS n. induction n.
-  - exact H0.
-  - apply HS. exact IHn.
-Qed.
-
-(** Omega tower induction *)
-Lemma omega_tower_induction : forall (P : nat -> Prop),
-  P O ->
-  (forall n, P n -> P (S n)) ->
-  forall n, P n.
-Proof.
-  intros P H0 HS. exact (nat_ind P H0 HS).
-Qed.
-
-(* ================================================================= *)
 (* TRANSFINITE INDUCTION AT SPECIFIC ORDINALS                        *)
 (* ================================================================= *)
 
@@ -146,9 +121,3 @@ Lemma wf_restricts_to_nat : forall n, Acc ord_lt (nat_to_ord n).
 Proof.
   intros n. apply wf_ord_lt.
 Qed.
-
-(** Axiom inventory: NO new axioms. Only classic + L4_witness. *)
-Lemma axiom_count_documentation :
-  (* classic = L3, L4_witness = L4. wf_ord_lt is now a THEOREM. *)
-  True.
-Proof. exact I. Qed.

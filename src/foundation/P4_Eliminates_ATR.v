@@ -1,14 +1,24 @@
 (** * P4_Eliminates_ATR.v — Transfinite recursion = Fixpoint on Ord
-    Elements: Ordinals (OZero, OSucc, OLim), CB derivative, iterate_pred
+    Elements: Ordinals (OZero, OSucc, OLim), the model operator CB_step, iterate_pred
     Roles:    Structural recursion eliminates ATR0 axiom
     Rules:    Coq's termination checker = the only needed principle
-    STATUS:   17 Qed, 0 Admitted, 0 new axioms
+    STATUS:   22 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY INSIGHT: ATR0 (Arithmetical Transfinite Recursion) is an axiom
     in reverse mathematics. Under P4, transfinite recursion is simply
     a Fixpoint on the inductive type Ord. Coq ACCEPTS this by structural
     recursion on alpha — no axiom required.
+
+    HONEST SCOPE (Nov 2026).  CB_step is a MODEL operator on subsets of nat
+    ("keep a point if it has a neighbour at distance 1"), a discrete likeness
+    of the Cantor-Bendixson derivative, not that derivative.  It is
+    idempotent, so its iteration along the notations stands still after the
+    first step: at every successor stage and at omega it equals CB_step X
+    (CB_transfinite_succ_stage, CB_transfinite_omega, last section).  What the
+    file shows is the FORM of the recursion (zero, successor, limit).  The
+    genuine derivative (accumulation points in Q) is iterated along the
+    notations in settheory/CantorBendixsonFull.v (CB_ord).
 *)
 
 From Stdlib Require Import List Lia PeanoNat.
@@ -181,4 +191,65 @@ Theorem P4_eliminates_ATR0 : forall (P : (nat -> Prop) -> (nat -> Prop))
   iterate_pred P (OSucc alpha) base = P (iterate_pred P alpha base).
 Proof.
   intros. split; reflexivity.
+Qed.
+
+(* ================================================================= *)
+(* Nov 2026: WHAT THE MODEL OPERATOR DOES ALONG THE NOTATIONS         *)
+(* ================================================================= *)
+
+(** A neighbour of a kept point is itself kept: CB_step is idempotent. *)
+Lemma CB_step_idempotent : forall (X : nat -> Prop) n,
+  CB_step (CB_step X) n <-> CB_step X n.
+Proof.
+  intros X n. split.
+  - intros [H _]. exact H.
+  - intros H. split; [exact H |].
+    destruct H as [Hn [m [Hmn [Hm Hd]]]].
+    exists m. split; [exact Hmn |]. split; [| exact Hd].
+    split; [exact Hm |]. exists n. split; [intro E; apply Hmn; symmetry; exact E |].
+    split; [exact Hn | lia].
+Qed.
+
+Lemma CB_step_mono : forall (A B : nat -> Prop),
+  (forall n, A n -> B n) -> forall n, CB_step A n -> CB_step B n.
+Proof.
+  intros A B HAB n [Hn [m [Hmn [Hm Hd]]]].
+  split; [apply HAB; exact Hn |].
+  exists m. split; [exact Hmn |]. split; [apply HAB; exact Hm | exact Hd].
+Qed.
+
+(** Every stage lies between CB_step X and X. *)
+Lemma CB_transfinite_sandwich : forall (X : nat -> Prop) (a : Ord) n,
+  (CB_step X n -> CB_transfinite X a n) /\ (CB_transfinite X a n -> X n).
+Proof.
+  intros X a. induction a as [| a IH | f IH]; intro n; simpl.
+  - split; [intros [H _]; exact H | auto].
+  - split.
+    + intro H. apply CB_step_idempotent in H.
+      apply (CB_step_mono (CB_step X) (CB_transfinite X a)); [| exact H].
+      intros k Hk. apply (IH k). exact Hk.
+    + intros [H _]. apply (IH n). exact H.
+  - split.
+    + intros H k. apply (IH k n). exact H.
+    + intro H. apply (IH 0 n). apply H.
+Qed.
+
+(** The iteration stands still: at every successor stage it is the first step ... *)
+Theorem CB_transfinite_succ_stage : forall (X : nat -> Prop) (a : Ord) n,
+  CB_transfinite X (OSucc a) n <-> CB_step X n.
+Proof.
+  intros X a n. simpl. split.
+  - apply CB_step_mono. intros k Hk. apply (CB_transfinite_sandwich X a k). exact Hk.
+  - intro H. apply CB_step_idempotent in H.
+    apply (CB_step_mono (CB_step X) (CB_transfinite X a)); [| exact H].
+    intros k Hk. apply (CB_transfinite_sandwich X a k). exact Hk.
+Qed.
+
+(** ... and at the stage omega as well. *)
+Theorem CB_transfinite_omega : forall (X : nat -> Prop) n,
+  CB_transfinite X omega n <-> CB_step X n.
+Proof.
+  intros X n. unfold omega. simpl. split.
+  - intro H. exact (proj1 (CB_transfinite_succ_stage X OZero n) (H 1)).
+  - intros H k. apply (CB_transfinite_sandwich X (nat_to_ord k) n). exact H.
 Qed.

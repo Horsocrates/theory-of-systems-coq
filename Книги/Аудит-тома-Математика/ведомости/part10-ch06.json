@@ -1,0 +1,962 @@
+{
+ "batch": "audit-part-10",
+ "chapter": "10 Теория множеств без аксиомы выбора/06 Синтез Части X что доказуемо без выбора, и карта границ.md",
+ "checked": "2026-11-12",
+ "auto": true,
+ "records": [
+  {
+   "line": 9,
+   "theorem": null,
+   "file": null,
+   "claim": "Глава 10.2 прочла счётность и несчётность как правила о процессах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отсылка к главе X.2. Q_countable, Q_bijection (Countability_Q.v:610, 759), binary_processes_not_enumerable (ProcessDiagonal.v:108), unit_interval_uncountable_trisect_v2 (ShrinkingIntervals_ERR.v:3569) — Closed under the global context. Формулировки сверяются в ведомости главы X.2."
+  },
+  {
+   "line": 9,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Глава 10.3 свела сравнение мощностей к предпорядку вложений (Шрёдер–Бернштейн, Кантор) — без выбора.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 1): страница не менялась. Schroeder_Bernstein_definite (SchroederBernstein_ERR.v): заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля; Closed under the global context. Schroeder_Bernstein, cardinal_antisym — те же теоремы на двух аксиомах: classic + L4_witness."
+  },
+  {
+   "line": 9,
+   "theorem": "cantor_no_surjection",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Глава 10.3 свела сравнение мощностей к предпорядку вложений (Шрёдер–Бернштейн, Кантор) — без выбора.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "CantorTheoremGeneral.v:55: forall f : X -> (X -> bool), ~ surjective f — Closed. Предпорядок вложений (injects_refl, injects_trans, CardinalityWithoutChoice.v) — Closed."
+  },
+  {
+   "line": 10,
+   "theorem": "completed_graph_contradicts_P4",
+   "file": "src/foundation/P4ProhibitsAC.v",
+   "claim": "Глава 10.4 разложила аксиому выбора надвое: правило L5 переинтерпретируется, завершённый граф запрещается P4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Правило: AC_on_nat_as_rule (P4ProhibitsAC.v:160) — Closed. Запрет: completed_graph_contradicts_P4 (P4ProhibitsAC.v:108): для графа любой всюду определённой функции f из P4_stage_bounded actual и bridge (все индексы графа актуальны на стадии 0) следует False — Closed. Теорема верна для графа любой функции, не только функции выбора (так сказано и в шапке файла)."
+  },
+  {
+   "line": 12,
+   "theorem": null,
+   "file": null,
+   "claim": "Глава 10.5 распространила тот же двухуровневый диагноз на ординалы-процессы и башню сильных аксиом (Бесконечность, импредикативность, ATR$_0$, $\\Pi^1_1$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отсылка к главе X.5; формулировки сверяются в её ведомости. Цена по компилятору: P4_Eliminates_Infinity.v (10 лемм), P4_Eliminates_ATR.v (17), P4ProhibitsImpredicative.v (7) — Closed; P4_eliminates_Pi11 — только Parameter eval_program."
+  },
+  {
+   "line": 15,
+   "theorem": null,
+   "file": null,
+   "claim": "Настоящая, заключительная глава Части X собирает итог: *что ещё* доказуемо без выбора (результаты теории хорошо-квазиупорядочений и детерминированности)",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "Цена: в HigmanLemma.v, KruskalFull.v, KruskalTree.v, CantorBendixsonFull.v, BorelDeterminacy.v ни одна лемма не опирается на L4_witness (7+11+19+23+16 лемм — Closed; 4 леммы HigmanLemma.v — Classical_Prop.classic; 3 леммы BorelDeterminacy.v — BorelDeterminacy.classic). Объём доказанного — в записях строк 29–37."
+  },
+  {
+   "line": 28,
+   "theorem": null,
+   "file": null,
+   "claim": "Помимо ядра (счётность, диагональ, Шрёдер–Бернштейн, Кантор) кластер `settheory/` проводит без выбора и более «высокие» результаты.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "Для четырёх названных далее результатов верно: L4_witness в их файлах не применяется. В перечне ядра Шрёдер — Бернштейн стоит на classic и L4_witness — см. запись строки 9."
+  },
+  {
+   "line": 29,
+   "theorem": "higman_unit",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "*Лемма Хигмана*: списки над конечным алфавитом образуют хорошо-квазиупорядочение (wqo) — доказан случай однобуквенного алфавита (он сводится к wqo на длинах); рядом доказаны wqo для самих $\\mathtt{bool}$ и $ℕ$ и лемма Диксона для пар.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было «доказано для конкретных алфавитов (единичного, булева, ℕ) с леммой Диксона в основе». higman_unit : is_wqo (list_le (fun _ _ : unit => True)); wqo_bool, wqo_nat_le — о самих bool и nat. Closed under the global context. Алфавит из двух и более букв не доказан — горизонт."
+  },
+  {
+   "line": 33,
+   "theorem": "kruskal_chains",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "*Теорема Крускала*: конечные деревья wqo под гомеоморфным вложением — доказано для конкретных семейств (цепи, вилки, деревья глубины $\\le 1$).[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Семейства цепей и вилок: kruskal_chains, kruskal_forks (KruskalTree.v:265, 276) — is_wqo по любой последовательности цепей (вилок); звёзды: depth1_wqo (KruskalFull.v:129); все Closed. «Растущие последовательности» — growing_wqo, утверждение повторяет свою посылку (см. запись строки 172). Последовательности, где листья чередуются со звёздами, depth1_wqo не покрывает (в пробном файле CheckKruskal.v покрыты, Closed)."
+  },
+  {
+   "line": 35,
+   "theorem": "stable_stage_is_perfect_kernel",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "*Кантор–Бендиксон*: производная множества как процесс; $\\omega$-предел итераций содержит всякое совершенное подмножество, а при стабилизации на конечном шаге совпадает с совершенным ядром.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было «ω-предел — совершенное ядро» — теоремы не было, и в общем виде она неверна. perfect_kernel_in_omega : subset P A -> is_perfect P -> subset P (CB_omega A); stable_stage_is_perfect_kernel: при стабилизации на шаге n этот шаг совершенен, равен ω-пределу и содержит всякое совершенное подмножество. Closed under the global context."
+  },
+  {
+   "line": 37,
+   "theorem": "zermelo_determinacy",
+   "file": "src/settheory/ZermeloDeterminacy.v",
+   "claim": "И *конечная детерминированность игр* (Цермело, 1913): в игре конечной длины выигрышная стратегия есть у одного из игроков.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): прежде для произвольной игры было доказано только «у первого игрока стратегия либо есть, либо её нет» (weak_determinacy). zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 42,
+   "theorem": null,
+   "file": null,
+   "claim": "ToS проводит их *конструктивные ядра для конкретных семейств* без выбора — но *не* в полной общности.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): слова прежние, за ними добавлена оговорка об играх с бесконечным числом ходов. dickson_pair доказана конструктивно (dickson_pair_constructive); higman_synthesis, wqo_nat_pair — Closed under the global context. Прежний классический путь (right_min, tail_min_exists, right_min_unbounded) снят по слову автора (вариант А); в файле 16 Qed и ни одного допущения. Крускал (семейства), Кантор — Бендиксон, деревья игры — Closed. zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 49,
+   "theorem": "finite_game_strategically_determined",
+   "file": "src/foundation/FiniteGameDeterminacy.v",
+   "claim": "Без выбора доказуемы wqo-результаты (Хигман — для однобуквенного алфавита, Крускал — для конкретных семейств) и детерминированность конечных деревьев игры; для игр конечной длины с бесконечным числом ходов стратегию приходится извлекать — ценой L3 и L4.",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было «…и конечная (цермеловская) детерминированность». finite_game_strategically_determined : forall g, (Win g \\/ Lose g) /\\ ~ (Win g /\\ Lose g) /\\ (mover_wins g = true <-> Win g) /\\ (mover_wins g = false <-> Lose g). Closed under the global context. zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 51,
+   "theorem": null,
+   "file": null,
+   "claim": "Это ядра «высоких» теорем, не их полная общность.*",
+   "page_price": "конструктивные ядра",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): слово «конструктивные» снято: детерминированность игр конечной длины стоит на classic и L4_witness. Остальные ядра — Closed under the global context."
+  },
+  {
+   "line": 56,
+   "theorem": "price",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Все результаты Части X выстраиваются по *цене аксиом*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): страница не менялась. Реестр ChoicePriceMap.v переписан 13.11 и сверен с Print Assumptions построчно; ярусы: PZero, PL3, PL4, PL3_L4, PHorizon (не построено), PBoundary (запрещённый завершённый объект)."
+  },
+  {
+   "line": 56,
+   "theorem": "price",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Это оформлено как таблица-реестр: каждому результату сопоставлен ярус, сверенный с выводом `Print Assumptions` его теоремы.[^5]",
+   "page_price": "ни один доказанный результат не требует полной AC",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «доказан итог — ни один доказанный результат не требует полной аксиомы выбора» — тот итог был конъюнкцией десяти True по таблице. Реестр ChoicePriceMap.v переписан 13.11 и сверен с Print Assumptions построчно; ярусы: PZero, PL3, PL4, PL3_L4, PHorizon (не построено), PBoundary (запрещённый завершённый объект)."
+  },
+  {
+   "line": 62,
+   "theorem": "Q_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "счётность ℚ (Калкин–Уилф)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Q_countable (Countability_Q.v:610): forall q, exists n, enum_Q n == q; Q_bijection (:759) — оба Closed. Метод файла — дерево Калкина — Уилфа. Строка реестра RCountabilityQ = PZero согласована с компилятором."
+  },
+  {
+   "line": 62,
+   "theorem": "diagonal_differs",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "диагональ (`diagonal_differs`)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ProcessDiagonal.v:85: forall f n, ~ bp_eq (diagonal f) (f n) — Closed. Реестр (RDiagonal = PZero) называет опорой binary_processes_not_enumerable (:108) — тоже Closed."
+  },
+  {
+   "line": 62,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "несчётность $[0,1]$ при заданной скорости сходимости (трисекция)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ShrinkingIntervals_ERR.v:3569 — Closed; строка реестра RShrinkingIntervals = PZero согласована. Теорема дана при условии valid_regular_enumeration E (перечисление регулярных процессов Коши); в ячейке таблицы условие не названо."
+  },
+  {
+   "line": 62,
+   "theorem": "cantor_no_surjection",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "общий Кантор $X\\to(X\\to\\mathtt{bool})$",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cantor_no_surjection (:55), no_maximal_bool_power (:75), no_maximal_cardinality (CardinalityWithoutChoice.v:108) — Closed; X — произвольный тип. Строка реестра RCantorGeneral = PZero согласована."
+  },
+  {
+   "line": 62,
+   "theorem": "finite_set_scattered",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "Кантор–Бендиксон (производная, ядро при стабилизации, конечные множества)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Все 23 леммы CantorBendixsonFull.v — Closed; строка реестра RCantorBendixson = PZero согласована. Ярус относится к фактам о производной; дихотомия для замкнутых множеств — отдельная строка реестра RContinuumHypothesis = PL3_L4, на странице её нет (см. запись строки 150)."
+  },
+  {
+   "line": 62,
+   "theorem": "kruskal_forks",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "Крускал (конкретные семейства)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "kruskal_chains, kruskal_forks (KruskalTree.v:265, 276), depth1_wqo, L5_from_kruskal (KruskalFull.v:129, 166) — Closed; все 11 и 19 лемм двух файлов — Closed. Строка реестра RKruskalFamilies = PZero согласована."
+  },
+  {
+   "line": 62,
+   "theorem": "wf_ord_below",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "ординалы — порядок построения, `wf_ord_below`, `structural_transfinite_ind` (сверено `Print Assumptions`: Closed)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «wf_ord_lt, transfinite_ind» — прежнее отношение сравнивает только конечные обозначения (шаг 5). wf_ord_below — Closed under the global context."
+  },
+  {
+   "line": 62,
+   "theorem": "structural_transfinite_ind",
+   "file": "src/foundation/OrdinalOrders.v",
+   "claim": "ординалы — порядок построения, `wf_ord_below`, `structural_transfinite_ind` (сверено `Print Assumptions`: Closed)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора). structural_transfinite_ind — Closed under the global context."
+  },
+  {
+   "line": 62,
+   "theorem": "level_strong_induction",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "уровневая индукция",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "level_strong_induction (TransfiniteInductionLevel.v:39), level_lt_wf (:32), no_universal_level (:72) — Closed. Реестр (RTransfiniteLevel = PZero) называет опорой no_universal_level — согласовано."
+  },
+  {
+   "line": 62,
+   "theorem": "P4_eliminates_ATR0",
+   "file": "src/foundation/P4_Eliminates_ATR.v",
+   "claim": "переинтерпретации P4 — выбор-правило, ATR, Бесконечность, импредикативность, $\\Pi^1_1$",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена: все леммы P4_Eliminates_ATR.v (17), P4_Eliminates_Infinity.v (10), P4ProhibitsImpredicative.v (7), P4_Eliminates_AC.v (15), P4ProhibitsAC.v (12), P4CompletedInfinity.v (9), P4ProhibitionSynthesis.v (6) — Closed. В реестре ChoicePriceMap этой строки нет. Формулировки — предмет ведомостей глав X.4 и X.5."
+  },
+  {
+   "line": 62,
+   "theorem": "P4_eliminates_Infinity",
+   "file": "src/foundation/P4_Eliminates_Infinity.v",
+   "claim": "переинтерпретации P4 — выбор-правило, ATR, Бесконечность, импредикативность, $\\Pi^1_1$",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было `P4_Eliminates` — часть имён файлов, не объявление. P4_eliminates_Infinity — Closed under the global context."
+  },
+  {
+   "line": 62,
+   "theorem": "russell_requires_completed_totality",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "переинтерпретации P4 — выбор-правило, ATR, Бесконечность, импредикативность, $\\Pi^1_1$",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было `Prohibits` — часть имён файлов, не объявление. russell_requires_completed_totality — Closed under the global context."
+  },
+  {
+   "line": 62,
+   "theorem": "higman_synthesis",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "Хигман (однобуквенный алфавит) и лемма Диксона",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Сверено 12.11 (закрывает непроверенную запись сверки). higman_synthesis (HigmanLemma.v:169) — Classical_Prop.classic; строка реестра RHigman = PL3 согласована с компилятором. classic входит только через пятый конъюнкт (dickson_pair); четыре остальных — Closed."
+  },
+  {
+   "line": 62,
+   "theorem": "higman_unit",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "Хигман (однобуквенный алфавит) и лемма Диксона",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): прежде «Хигман» стоял в ярусе classic. higman_unit, dickson_pair, higman_synthesis — Closed under the global context (лемма Диксона доказана конструктивно, шаг 7)."
+  },
+  {
+   "line": 63,
+   "theorem": "weak_determinacy",
+   "file": "src/settheory/BorelDeterminacy.v",
+   "claim": "| classic (L3) | `weak_determinacy`: у первого игрока выигрышная стратегия либо есть, либо её нет |",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "Цена верна: weak_determinacy (:154), zero_game_determined (:164), can_win_or_not (:272) — BorelDeterminacy.classic (местное объявление того же высказывания); строка реестра RFiniteDeterminacy = PL3 согласована. Формулировка — см. запись строки 35."
+  },
+  {
+   "line": 65,
+   "theorem": "Schroeder_Bernstein",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Шрёдер–Бернштейн и антисимметрия мощностей в записи на двух аксиомах (`cardinal_antisym`)",
+   "page_price": "classic + L4",
+   "verdict": "ok",
+   "note": "SchroederBernstein_ERR.v:357: exists h : A -> B, инъективна и сюръективна (A, B — произвольные типы, f, g — инъекции) — Classical_Prop.classic и ToS_Axioms.L4_witness. Строка реестра RSchroederBernstein = PL3_L4 согласована."
+  },
+  {
+   "line": 65,
+   "theorem": "cardinal_antisym",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Шрёдер–Бернштейн и антисимметрия мощностей в записи на двух аксиомах (`cardinal_antisym`)",
+   "page_price": "classic + L4",
+   "verdict": "ok",
+   "note": "CardinalityWithoutChoice.v:98: forall A B, injects A B -> injects B A -> bijects A B — Classical_Prop.classic и ToS_Axioms.L4_witness. Строка реестра RCardinalAntisym = PL3_L4 согласована."
+  },
+  {
+   "line": 62,
+   "theorem": "P4_eliminates_Pi11",
+   "file": "src/foundation/P4_Eliminates_Pi11.v",
+   "claim": "переинтерпретации P4 — выбор-правило, ATR, Бесконечность, импредикативность, $\\Pi^1_1$",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 6, слово автора). P4_eliminates_Pi11 : forall eval_program phi n, P4_forall_functions eval_program phi n <-> (forall f, (exists c, f = eval_program c) -> phi f n). Closed under the global context. С 13.11 eval_program — переменная раздела Section Codes (а не Parameter): все утверждения файла верны для любой таблицы Program -> nat -> nat; в выводе Print Assumptions её нет. Одна лемма файла, pi11_negation, стоит на classic."
+  },
+  {
+   "line": 67,
+   "theorem": null,
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "завершённый актуально-бесконечный *объект* — единственный P4-запрет: завершённый граф выбора и $\\mathcal{P}(\\mathbb{N})$ как Element (правило-ядро выбора у нас — L5)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В реестре ярус PBoundary несут RPowerSetObject, RFullKruskal, RBorelDeterminacy с пометкой «not constructed»; строки о графе выбора в реестре нет (вместо неё RFunctionalChoice = PL4 и RACOnNat = PZero). Запрет завершённого множества — отдельная теорема completed_inf_contradicts_P4 (Closed), при условии bridge. Правило выбора: ac_on_nat_free, AC_on_nat_as_rule — Closed."
+  },
+  {
+   "line": 66,
+   "theorem": null,
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "| **Горизонт (`PHorizon`)** | не построено: полная теорема Крускала; борелевская детерминированность; лемма Хигмана для алфавита из двух и более букв |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): «не построено» вынесено из строки «Граница» в отдельный ярус PHorizon (строки реестра RFullKruskal, RBorelDeterminacy, RHigmanGeneralAlphabet)."
+  },
+  {
+   "line": 69,
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "Главное наблюдение: содержательное ядро теории множеств — от счётности до Кантора–Бендиксона и wqo — живёт на ярусе «0 аксиом». Выбор из многих свидетелей входит только там, где L4 берётся в полную силу: в мосте от сюръекции к вложению, в дихотомии замкнутых совокупностей, в играх с бесконечным числом ходов.",
+   "page_price": "ярусы 0 / L3 / L3+L4; не требует полной AC",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «живёт на ярусах 0 / L3 / L3 + L4, и ни один доказанный результат не требует полной аксиомы выбора». Три места: surjects_injects_back (L4_witness), process_continuum_hypothesis и zermelo_determinacy (classic + L4_witness). Ещё одно место яруса L4 — unit_interval_uncountable_general (в таблице названо). l4_statement_gives_functional_choice — Closed."
+  },
+  {
+   "line": 82,
+   "theorem": "price",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "каждый результат несёт ярус (0 / L3 / L4 / L3${}+{}$L4), сверенный с компилятором; где входит выбор из многих свидетелей — названо.",
+   "page_price": "доказано: не требует полной AC",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «и доказано, что доказанное не требует полной AC». Реестр ChoicePriceMap.v переписан 13.11 и сверен с Print Assumptions построчно; ярусы: PZero, PL3, PL4, PL3_L4, PHorizon (не построено), PBoundary (запрещённый завершённый объект)."
+  },
+  {
+   "line": 90,
+   "theorem": null,
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "*процессные формы* высоких теорем — полная теорема Крускала во всей общности и борелевская (Мартина) детерминированность (их откат — ниже)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус «не построено» честен: kruskal_full_statement (KruskalFull.v:158) — определение без доказательства; борелевской детерминированности в формализации нет."
+  },
+  {
+   "line": 92,
+   "theorem": null,
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "лемма Хигмана для алфавита из двух и более букв;",
+   "page_price": "не построено",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): на этом месте списка «не привлечено» прежде стоял «обратный мост сюръекция → инъекция (это сам выбор)» — он доказан ценой L4_witness (surjects_injects_back) и перенесён в таблицу цен. Лемма Хигмана для двух и более букв в формализации не доказана (строка реестра RHigmanGeneralAlphabet, PHorizon)."
+  },
+  {
+   "line": 95,
+   "theorem": "no_maximal_cardinality",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "его bool-предикатный слой $X\\not\\twoheadrightarrow(X\\to\\mathtt{bool})$ *доказан* в 10.3",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CardinalityWithoutChoice.v:108: forall X : Type, ~ surjects X (X -> bool) — Closed."
+  },
+  {
+   "line": 99,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "*Второй род — запрещено P4 (object-форма несовместима)*: завершённый граф выбора (`completed_inf_contradicts_P4`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "P4CompletedInfinity.v:64: CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False — Closed. Теорема общая (любое множество, содержащее все натуральные числа), о графе выбора — её частный случай completed_graph_contradicts_P4 (P4ProhibitsAC.v:108). Противоречие получено при условии bridge: все элементы актуальны на стадии 0."
+  },
+  {
+   "line": 101,
+   "theorem": "russell_requires_completed_totality",
+   "file": "src/foundation/P4ProhibitsImpredicative.v",
+   "claim": "импредикативная тотальность-в-себе (P1${}+{}$P4). Это не «пока не доказано», а *несовместимо* с конечной актуальностью.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 2): страница не менялась; теорема появилась. russell_collector_escapes, russell_needs_incomplete_range, russell_requires_completed_totality — Closed under the global context; запрет завершённой области — completed_inf_contradicts_P4, при условии bridge."
+  },
+  {
+   "line": 108,
+   "theorem": "tos_verdict",
+   "file": "src/foundation/ZFCAxiomLedger.v",
+   "claim": "Из *девяти* аксиом ZFC три — Расширяемость, Пары, Объединение — структурно тривиальны; Бесконечность, Выделение, Подстановка заменены P4; Фундирование — P1; Выбор — L5; и ровно *одна*, Powerset, ложится на role-limit-сторону границы",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пересказ совпадает с таблицей tos_verdict (ZFCAxiomLedger.v:74), записанной рукой; глава называет это аудитом, сноска 6 — «синтез/классификация, не новая теорема». Леммы-якоря со ссылкой на файл есть у четырёх вердиктов из девяти (Infinity, Choice, Foundation, Separation); у Replacement и трёх «тривиальных» ссылки на доказанное нет."
+  },
+  {
+   "line": 111,
+   "theorem": "bitvectors_length",
+   "file": "src/foundation/ZFCAxiomLedger.v",
+   "claim": "конечный степенной объект $2^n$ перечислим явно (Element, доказано)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ZFCAxiomLedger.v:119: forall n, length (bitvectors n) = 2 ^ n — Closed."
+  },
+  {
+   "line": 112,
+   "theorem": "only_powerset_is_role_limit",
+   "file": "src/foundation/ZFCAxiomLedger.v",
+   "claim": "Powerset — единственная «цена».[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ZFCAxiomLedger.v:132: forall a, tos_verdict a = RoleLimit <-> a = Powerset — свойство таблицы tos_verdict, доказано перебором девяти случаев; Closed. Сноска 6 называет реестр классификацией."
+  },
+  {
+   "line": 116,
+   "theorem": "former_walls_are_artifacts",
+   "file": "src/foundation/FormerWallsLedger.v",
+   "claim": "при разборе оказывается ZFC-*упаковкой*, а не стеной: для степени содержание достигается *без* завершённого объекта, для Крускала и Бореля без него построены нижние ступени.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «содержание достигается без завершённого объекта» для всех трёх. FormerWallsLedger.status: WPowersetObject — ReachedFreely; WMinimalBadSequence и WBorelTower — PartiallyReached. former_walls_are_artifacts — свойство таблицы; Closed under the global context."
+  },
+  {
+   "line": 118,
+   "theorem": "powerset_card",
+   "file": "src/foundation/PowersetRoleType.v",
+   "claim": "Степень есть роль-тип $\\mathbb{N}\\to\\mathtt{bool}$: на каждой конечной стадии ровно $2^n$ подмножеств, а её ядро «несчётность» — отсутствие перечислителя ролей (диагональ), 0-аксиомно",
+   "page_price": "0-аксиомно",
+   "verdict": "ok",
+   "note": "PowersetRoleType.v:34: forall l, length (powerset l) = 2 ^ length l — Closed."
+  },
+  {
+   "line": 118,
+   "theorem": "cantor_bool_seq",
+   "file": "src/foundation/PowersetRoleType.v",
+   "claim": "Степень есть роль-тип $\\mathbb{N}\\to\\mathtt{bool}$: на каждой конечной стадии ровно $2^n$ подмножеств, а её ядро «несчётность» — отсутствие перечислителя ролей (диагональ), 0-аксиомно",
+   "page_price": "0-аксиомно",
+   "verdict": "ok",
+   "note": "PowersetRoleType.v:45: forall f : nat -> (nat -> bool), exists g, forall n, g <> f n — Closed."
+  },
+  {
+   "line": 119,
+   "theorem": "finite_game_strategically_determined",
+   "file": "src/foundation/FiniteGameDeterminacy.v",
+   "claim": "конечная детерминированность — обратная индукция на дереве игры, тоже без башни",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): страница не менялась; слова теперь опираются на теорему, связывающую обратную индукцию с выигрышем. finite_game_strategically_determined : forall g, (Win g \\/ Lose g) /\\ ~ (Win g /\\ Lose g) /\\ (mover_wins g = true <-> Win g) /\\ (mover_wins g = false <-> Lose g). Closed under the global context. Прежняя finite_game_determined утверждала лишь, что булево значение равно true или false."
+  },
+  {
+   "line": 120,
+   "theorem": "only_completed_infinity_is_a_wall",
+   "file": "src/foundation/FormerWallsLedger.v",
+   "claim": "Остаётся ровно один подлинный запрет — завершённая актуальная бесконечность *как объект*; полный wqo и борелевская детерминированность — не стены, а *не привлечённые* процессные конструкции.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "FormerWallsLedger.v:70: forall w, forbidden (status w) = true <-> w = WCompletedInfinity — свойство таблицы status, записанной рукой; Closed. Сноска 7 называет свод классификацией. В таблице полный Крускал и Борель имеют статус PartiallyReached (см. запись строки 177)."
+  },
+  {
+   "line": 124,
+   "theorem": null,
+   "file": null,
+   "claim": "(процессные формы полного Крускала и Мартина, линейность шкалы — открыто)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): из перечня открытого убран «мост выбора» — он доказан (surjects_injects_back, L4_witness). Теоремы о линейности порядка вложений в формализации нет."
+  },
+  {
+   "line": 136,
+   "theorem": "Ord",
+   "file": "src/foundation/Ordinal.v",
+   "claim": "структурная рекурсия по `Ord`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ordinal.v:20: Inductive Ord := OZero | OSucc | OLim (nat -> Ord)."
+  },
+  {
+   "line": 157,
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Теория множеств перестроена без аксиомы выбора как постулата и без завершённой бесконечности",
+   "page_price": "без аксиомы выбора",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «без аксиомы выбора». Аксиома выбора не объявлена; но из записи L4_witness выбор по семейству следует (l4_statement_gives_functional_choice, Closed), и три результата берут L4 в полную силу — они названы в таблице цен."
+  },
+  {
+   "line": 158,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Содержательные теоремы выжили: Шрёдер–Бернштейн и общая теорема Кантора без выбора",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаг 1): страница не менялась. Schroeder_Bernstein_definite (SchroederBernstein_ERR.v): заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля; Closed under the global context. Schroeder_Bernstein, cardinal_antisym — те же теоремы на двух аксиомах: classic + L4_witness."
+  },
+  {
+   "line": 158,
+   "theorem": "no_maximal_bool_power",
+   "file": "src/settheory/CantorTheoremGeneral.v",
+   "claim": "Содержательные теоремы выжили: Шрёдер–Бернштейн и общая теорема Кантора без выбора",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "CantorTheoremGeneral.v:75: forall (X : Type) (f : X -> (X -> bool)), ~ surjective f — Closed. Теорема о предикатах со значениями в bool; глава оговаривает это в строках 86–87 и 164."
+  },
+  {
+   "line": 159,
+   "theorem": "Q_bijection",
+   "file": "src/Countability_Q.v",
+   "claim": "конструктивная счётность ℚ",
+   "page_price": "конструктивная",
+   "verdict": "ok",
+   "note": "Countability_Q.v:759: index_of_Q (enum_Q n) = n и enum_Q (index_of_Q q) == q — Closed."
+  },
+  {
+   "line": 159,
+   "theorem": "binary_processes_not_enumerable",
+   "file": "src/ProcessDiagonal.v",
+   "claim": "несчётность через диагональ и трисекцию",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ProcessDiagonal.v:108: ~ exists f : nat -> BinProcess, forall p, exists n, bp_eq (f n) p — Closed; unit_interval_uncountable_trisect_v2 — Closed, при условии регулярности перечисления."
+  },
+  {
+   "line": 159,
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "дихотомия замкнутых совокупностей (ценой L3 и L4)",
+   "page_price": "L3 и L4",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «дихотомия Кантора–Бендиксона» среди доказанного без выбора. process_continuum_hypothesis (ProcessContinuumHypothesis.v): Axioms: Classical_Prop.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 160,
+   "theorem": null,
+   "file": null,
+   "claim": "wqo-результаты Хигмана и Крускала для конкретных семейств",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Крускал — цепи, вилки, звёзды (kruskal_chains, kruskal_forks, depth1_wqo); Хигман — один алфавит, однобуквенный (higman_unit). См. запись строки 29."
+  },
+  {
+   "line": 160,
+   "theorem": "finite_game_strategically_determined",
+   "file": "src/foundation/FiniteGameDeterminacy.v",
+   "claim": "для конкретных семейств, конечная детерминированность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): страница не менялась. finite_game_strategically_determined : forall g, (Win g \\/ Lose g) /\\ ~ (Win g /\\ Lose g) /\\ (mover_wins g = true <-> Win g) /\\ (mover_wins g = false <-> Lose g). Closed under the global context. zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 161,
+   "theorem": null,
+   "file": null,
+   "claim": "Сильные аксиомы — выбор, бесконечность, импредикативность, ATR$_0$, $\\Pi^1_1$ — получили единый двухуровневый разбор",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Итоговая фраза о главах X.4 и X.5; формулировки сверяются в их ведомостях."
+  },
+  {
+   "line": 172,
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Доказуемое без выбора простирается до Шрёдера–Бернштейна, bool-варианта теоремы Кантора ($X\\not\\twoheadrightarrow(X\\to\\mathtt{bool})$), Кантора–Бендиксона и wqo",
+   "page_price": "без выбора",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаги 1 и 7): страница не менялась. Schroeder_Bernstein_definite (SchroederBernstein_ERR.v): заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля; Closed under the global context. Schroeder_Bernstein, cardinal_antisym — те же теоремы на двух аксиомах: classic + L4_witness. Кантор, Кантор — Бендиксон (производная, ядро при стабилизации), wqo — Closed under the global context."
+  },
+  {
+   "line": 180,
+   "theorem": "is_wqo",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "`HigmanLemma.v`: `is_wqo`, `wqo_nat_le`, `higman_unit` (списки над однобуквенным алфавитом), `dickson_pair` (лемма Диксона для пар, доказана конструктивно), `wqo_nat_pair`, итог — `higman_synthesis`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HigmanLemma.v:27: forall f : nat -> A, exists i j, i < j /\\ le (f i) (f j). Транзитивность и рефлексивность отношения в определение не входят."
+  },
+  {
+   "line": 180,
+   "theorem": "wqo_nat_le",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "`HigmanLemma.v`: `is_wqo`, `wqo_nat_le`, `higman_unit` (списки над однобуквенным алфавитом), `dickson_pair` (лемма Диксона для пар, доказана конструктивно), `wqo_nat_pair`, итог — `higman_synthesis`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HigmanLemma.v:59: is_wqo Nat.le — Closed."
+  },
+  {
+   "line": 180,
+   "theorem": "dickson_pair",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "`HigmanLemma.v`: `is_wqo`, `wqo_nat_le`, `higman_unit` (списки над однобуквенным алфавитом), `dickson_pair` (лемма Диксона для пар, доказана конструктивно), `wqo_nat_pair`, итог — `higman_synthesis`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора). dickson_pair доказана конструктивно (dickson_pair_constructive); higman_synthesis, wqo_nat_pair — Closed under the global context. Прежний классический путь (right_min, tail_min_exists, right_min_unbounded) снят по слову автора (вариант А); в файле 16 Qed и ни одного допущения."
+  },
+  {
+   "line": 180,
+   "theorem": "higman_unit",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "`HigmanLemma.v`: `is_wqo`, `wqo_nat_le`, `higman_unit` (списки над однобуквенным алфавитом), `dickson_pair` (лемма Диксона для пар, доказана конструктивно), `wqo_nat_pair`, итог — `higman_synthesis`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "HigmanLemma.v:158: is_wqo (list_le (fun _ _ : unit => True)) — Closed. Списки над однобуквенным алфавитом."
+  },
+  {
+   "line": 180,
+   "theorem": "higman_synthesis",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "`HigmanLemma.v`: `is_wqo`, `wqo_nat_le`, `higman_unit` (списки над однобуквенным алфавитом), `dickson_pair` (лемма Диксона для пар, доказана конструктивно), `wqo_nat_pair`, итог — `higman_synthesis`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора). dickson_pair доказана конструктивно (dickson_pair_constructive); higman_synthesis, wqo_nat_pair — Closed under the global context. Прежний классический путь (right_min, tail_min_exists, right_min_unbounded) снят по слову автора (вариант А); в файле 16 Qed и ни одного допущения."
+  },
+  {
+   "line": 180,
+   "theorem": null,
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "16 Qed, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было «15 Qed, использует classic (L3)». dickson_pair доказана конструктивно (dickson_pair_constructive); higman_synthesis, wqo_nat_pair — Closed under the global context. Прежний классический путь (right_min, tail_min_exists, right_min_unbounded) снят по слову автора (вариант А); в файле 16 Qed и ни одного допущения."
+  },
+  {
+   "line": 181,
+   "theorem": "kruskal_chains",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "`KruskalTree.v`: `kruskal_chains`, `kruskal_forks` — любая последовательность цепей, любая последовательность вилок; `KruskalFull.v`: `depth1_wqo` (звёзды), `depth_le1_wqo` (деревья глубины $\\le 1$, листья и звёзды вперемешку).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было имя chain_wqo — лемма об одной фиксированной последовательности. kruskal_chains : is_wqo (fun m n => tree_embed (chain m) (chain n)) — любая последовательность цепей. Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "kruskal_forks",
+   "file": "src/settheory/KruskalTree.v",
+   "claim": "`KruskalTree.v`: `kruskal_chains`, `kruskal_forks` — любая последовательность цепей, любая последовательность вилок; `KruskalFull.v`: `depth1_wqo` (звёзды), `depth_le1_wqo` (деревья глубины $\\le 1$, листья и звёзды вперемешку).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было имя fork_wqo — лемма об одной фиксированной последовательности. kruskal_forks — любая последовательность вилок. Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "depth_le1_wqo",
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "`KruskalTree.v`: `kruskal_chains`, `kruskal_forks` — любая последовательность цепей, любая последовательность вилок; `KruskalFull.v`: `depth1_wqo` (звёзды), `depth_le1_wqo` (деревья глубины $\\le 1$, листья и звёзды вперемешку).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было имя growing_wqo — лемма, возвращающая свою посылку. depth_le1_wqo : (forall k, depth_le1 (f k)) -> exists i j, i < j /\\ tree_embed (f i) (f j) — любая последовательность деревьев глубины <= 1. Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "depth1_wqo",
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "`KruskalTree.v`: `kruskal_chains`, `kruskal_forks` — любая последовательность цепей, любая последовательность вилок; `KruskalFull.v`: `depth1_wqo` (звёзды), `depth_le1_wqo` (деревья глубины $\\le 1$, листья и звёзды вперемешку).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "KruskalFull.v:129: для любой последовательности звёзд FNode (repeat FLeaf m) есть пара i < j с вложением; сводится к wqo_nat_le — Closed."
+  },
+  {
+   "line": 181,
+   "theorem": null,
+   "file": "src/settheory/KruskalFull.v",
+   "claim": "19 и 12 Qed, 0 аксиом.",
+   "page_price": "0 новых аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было «15 Qed»; в KruskalTree.v 19 Qed, в KruskalFull.v 12."
+  },
+  {
+   "line": 182,
+   "theorem": "CB_deriv",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "`CantorBendixsonFull.v`: `CB_deriv` (точки накопления), `CB_iter`, `CB_omega` ($\\omega$-предел).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CantorBendixsonFull.v:37: CB_deriv S x := is_accumulation S x — оставляет точки накопления. С «удалением изолированных точек» это совпадает при исключённом третьем; в файле доказана несовместимость двух свойств (isolated_not_accumulation, :122)."
+  },
+  {
+   "line": 182,
+   "theorem": "CB_omega",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "`CantorBendixsonFull.v`: `CB_deriv` (точки накопления), `CB_iter`, `CB_omega` ($\\omega$-предел).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "CantorBendixsonFull.v:48: CB_omega S x := forall n, CB_iter S n x — пересечение конечных итераций."
+  },
+  {
+   "line": 182,
+   "theorem": "perfect_kernel_in_omega",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "Всякое совершенное подмножество лежит в $\\omega$-пределе (`perfect_kernel_in_omega`); при стабилизации на конечном шаге этот шаг совершенен и совпадает с $\\omega$-пределом (`stable_stage_is_perfect_kernel`);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было «совершенное-или-пустое ядро» — такой теоремы в файле не было. Closed under the global context."
+  },
+  {
+   "line": 182,
+   "theorem": "finite_set_scattered",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "всякое конечное множество рассеяно (`finite_set_scattered`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): прежде доказано было для одного множества {0, 1, 2} (S_finite_scattered). finite_set_scattered : forall l : list Q, is_scattered (in_list l). Closed under the global context."
+  },
+  {
+   "line": 182,
+   "theorem": null,
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "35 Qed, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было 20; в CantorBendixsonFull.v 35 Qed."
+  },
+  {
+   "line": 183,
+   "theorem": "weak_determinacy",
+   "file": "src/settheory/BorelDeterminacy.v",
+   "claim": "`BorelDeterminacy.v`: `weak_determinacy` — исключённое третье для «у первого игрока есть стратегия», и частные случаи (`zero_game_determined`);",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): weak_determinacy : forall W K, determined_weak W K — вид «P или не P»; Axioms: BorelDeterminacy.classic. Страница это теперь говорит."
+  },
+  {
+   "line": 183,
+   "theorem": "zero_game_determined",
+   "file": "src/settheory/BorelDeterminacy.v",
+   "claim": "`BorelDeterminacy.v`: `weak_determinacy` — исключённое третье для «у первого игрока есть стратегия», и частные случаи (`zero_game_determined`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "BorelDeterminacy.v:164: forall W, determined W 0 — игра без ходов; BorelDeterminacy.classic."
+  },
+  {
+   "line": 183,
+   "theorem": "classic",
+   "file": "src/settheory/BorelDeterminacy.v",
+   "claim": "19 Qed, 1 аксиома (`classic`).",
+   "page_price": "1 аксиома (classic)",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора): было 15; в BorelDeterminacy.v 19 Qed."
+  },
+  {
+   "line": 183,
+   "theorem": "zermelo_determinacy",
+   "file": "src/settheory/ZermeloDeterminacy.v",
+   "claim": "NB: вопреки имени файла `BorelDeterminacy.v`, борелевская (Мартина) детерминированность здесь не доказана.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора). zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness."
+  },
+  {
+   "line": 184,
+   "theorem": "AxiomPrice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "`AxiomPrice` (`PZero`/`PL3`/`PL4`/`PL3_L4`/`PHorizon`/`PBoundary`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было четыре конструктора из пяти. Inductive AxiomPrice := PZero | PL3 | PL4 | PL3_L4 | PHorizon | PBoundary (ChoicePriceMap.v, после шага 8)."
+  },
+  {
+   "line": 184,
+   "theorem": "price",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "функция `price` и `proven_results_below_boundary` — строки реестра, не лежащие ниже границы, суть в точности пять: три непостроенные и две запрещённые.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ChoicePriceMap.v:110: функция на 18 именах. Построчная сверка с компилятором: 13 строк с названной опорной теоремой согласованы; у RFiniteChoice опорная теорема не названа; у RFunctionalChoice = PL4 названная лемма l4_statement_gives_functional_choice — Closed (L4 взят посылкой). Таблица сверки — в заметках."
+  },
+  {
+   "line": 184,
+   "theorem": "proven_results_below_boundary",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "функция `price` и `proven_results_below_boundary` — строки реестра, не лежащие ниже границы, суть в точности пять: три непостроенные и две запрещённые.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): прежде лемма была конъюнкцией десяти True. Теперь: forall r, below_boundary (price r) <-> ~ In r [RFullKruskal; RBorelDeterminacy; RHigmanGeneralAlphabet; RPowerSetObject; RCompletedChoiceGraph]. Свойство таблицы; Closed under the global context."
+  },
+  {
+   "line": 184,
+   "theorem": null,
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Это аудит-слой: таблица записана рукой и сверена с `Print Assumptions` построчно; свойство таблицы — не теорема о результатах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно. Сверх таблицы файл содержит три доказанных леммы о силе L4 (l4_statement_gives_functional_choice, l3_l4_statements_give_epsilon, ac_on_nat_free — Closed), которых страница не упоминает."
+  },
+  {
+   "line": 185,
+   "theorem": "eight_axioms_eliminated",
+   "file": "src/foundation/ZFCAxiomLedger.v",
+   "claim": "`foundation/ZFCAxiomLedger.v` (9 Qed, 0 аксиом): машинный реестр-вердикт девяти аксиом ZFC — `tos_verdict`, `eight_axioms_eliminated`, `only_powerset_is_role_limit`",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Счёт верен: 9 Qed (в шапке файла — 10), все 9 лемм — Closed. eight_axioms_eliminated (:141): forall a, a <> Powerset -> tos_verdict a <> RoleLimit — свойство таблицы; страница называет файл реестром."
+  },
+  {
+   "line": 185,
+   "theorem": null,
+   "file": "src/foundation/ZFCAxiomLedger.v",
+   "claim": "Реестр — *синтез/классификация* (вердикты цитируют существующие 0-аксиомные файлы), не новая теорема.",
+   "page_price": "0-аксиомные файлы",
+   "verdict": "ok",
+   "note": "Статус назван честно. Файлы, названные у вердиктов-якорей (P4_Eliminates_Infinity.v, P4_Eliminates_AC.v, P4ProhibitsImpredicative.v, P1_no_self_membership в TheoryOfSystems_Core_ERR.v), — Closed. В перечне «образующих» шапки есть P4_Eliminates_Pi11.v с Parameter eval_program; вердикт Replacement файла не называет."
+  },
+  {
+   "line": 186,
+   "theorem": null,
+   "file": "src/foundation/PowersetRoleType.v",
+   "claim": "Откат закреплён машинно (0 аксиом каждый)",
+   "page_price": "0 аксиом каждый",
+   "verdict": "ok",
+   "note": "Цена верна: все леммы PowersetRoleType.v (3), FiniteGameDeterminacy.v (2), FiniteWqoPigeonhole.v (1), FormerWallsLedger.v (4) — Closed."
+  },
+  {
+   "line": 186,
+   "theorem": "finite_game_strategically_determined",
+   "file": "src/foundation/FiniteGameDeterminacy.v",
+   "claim": "`foundation/FiniteGameDeterminacy.v` (`finite_game_strategically_determined`: каждая позиция конечного дерева выиграна ровно одной стороной, и обратная индукция `mover_wins` вычисляет, какой)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 7, слово автора). finite_game_strategically_determined : forall g, (Win g \\/ Lose g) /\\ ~ (Win g /\\ Lose g) /\\ (mover_wins g = true <-> Win g) /\\ (mover_wins g = false <-> Lose g). Closed under the global context."
+  },
+  {
+   "line": 186,
+   "theorem": null,
+   "file": "src/foundation/FiniteWqoPigeonhole.v",
+   "claim": "`foundation/FiniteWqoPigeonhole.v` (конечное голубятное ядро wqo)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "FiniteWqoPigeonhole.v:24, bool_pigeonhole3: forall a b c : bool, a = b \\/ b = c \\/ a = c — Closed. Единственная лемма файла; об упорядочениях и последовательностях она не говорит."
+  },
+  {
+   "line": 186,
+   "theorem": "former_walls_are_artifacts",
+   "file": "src/foundation/FormerWallsLedger.v",
+   "claim": "Свод-вердикт — `foundation/FormerWallsLedger.v` (`former_walls_are_artifacts`, `only_completed_infinity_is_a_wall`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "FormerWallsLedger.v:106 — конъюнкция двух свойств таблиц, записанных рукой; zfc_posits_completed_object (:87) не зависит от аргумента. Страница называет свод классификацией."
+  },
+  {
+   "line": 186,
+   "theorem": null,
+   "file": "src/foundation/FormerWallsLedger.v",
+   "claim": "ровно завершённая бесконечность запрещена, три «стены» откатываются: степень — полностью (`ReachedFreely`), Крускал и Борель — частично (`PartiallyReached`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть X, шаг 8, слово автора): было «(ReachedFreely / NotYetBuilt)» — статус NotYetBuilt в таблице никому не присвоен; у двух стен стоит PartiallyReached."
+  },
+  {
+   "line": 183,
+   "page_price": "classic и L4_witness",
+   "verdict": "ok",
+   "note": "Новый файл шага 7. zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness.",
+   "theorem": "zermelo_determinacy",
+   "file": "src/settheory/ZermeloDeterminacy.v",
+   "claim": "`ZermeloDeterminacy.v`: `zermelo_determinacy` — при любом условии выигрыша и любом числе раундов стратегия есть у одного из игроков; цена — `classic` и `L4_witness` (ходов бесконечно много, стратегию приходится извлекать)."
+  },
+  {
+   "line": 183,
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "finite_game_strategically_determined : forall g, (Win g \\/ Lose g) /\\ ~ (Win g /\\ Lose g) /\\ (mover_wins g = true <-> Win g) /\\ (mover_wins g = false <-> Lose g). Closed under the global context.",
+   "theorem": "finite_game_strategically_determined",
+   "file": "src/foundation/FiniteGameDeterminacy.v",
+   "claim": "Для конечных деревьев игры — без допущений: `finite_game_strategically_determined` (`foundation/FiniteGameDeterminacy.v`)."
+  },
+  {
+   "line": 43,
+   "page_price": "L3 и L4 в полную силу",
+   "verdict": "ok",
+   "note": "zermelo_determinacy (settheory/ZermeloDeterminacy.v) : forall W K, determined W K — стратегия есть у одного из двух игроков; Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness. finite_game_strategically_determined : forall g, (Win g \\/ Lose g) /\\ ~ (Win g /\\ Lose g) /\\ (mover_wins g = true <-> Win g) /\\ (mover_wins g = false <-> Lose g). Closed under the global context.",
+   "theorem": "zermelo_determinacy",
+   "file": "src/settheory/ZermeloDeterminacy.v",
+   "claim": "Одна оговорка: детерминированность игр с бесконечным числом ходов на каждом шаге требует извлечь стратегию и потому стоит на L3 и L4, взятом в полную силу; для конечных деревьев игры она доказана без допущений."
+  },
+  {
+   "line": 180,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "wqo_nat_pair : is_wqo (fun p q : nat * nat => fst p <= fst q /\\ snd p <= snd q). Closed under the global context.",
+   "theorem": "wqo_nat_pair",
+   "file": "src/settheory/HigmanLemma.v",
+   "claim": "`HigmanLemma.v`: `is_wqo`, `wqo_nat_le`, `higman_unit` (списки над однобуквенным алфавитом), `dickson_pair` (лемма Диксона для пар, доказана конструктивно), `wqo_nat_pair`, итог — `higman_synthesis`."
+  },
+  {
+   "line": 182,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint CB_ord — итерация производной вдоль Ord (шаг 6). Что ω-предел в общем случае не совершенен — известный факт (множество ранга ω + 1); примера в формализации нет, теорема об этом не доказана.",
+   "theorem": "CB_ord",
+   "file": "src/settheory/CantorBendixsonFull.v",
+   "claim": "В общем случае $\\omega$-предел совершенным ядром не является: ядро достигается продолжением итерации вдоль нотаций (`CB_ord`)."
+  },
+  {
+   "line": 62,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Schroeder_Bernstein_definite (SchroederBernstein_ERR.v): заключение из двух посылок — исключённого третьего и извлечения единственного свидетеля; Closed under the global context. Schroeder_Bernstein, cardinal_antisym — те же теоремы на двух аксиомах: classic + L4_witness.",
+   "theorem": "Schroeder_Bernstein_definite",
+   "file": "src/SchroederBernstein_ERR.v",
+   "claim": "Шрёдер–Бернштейн из исключённого третьего и единственного свидетеля, взятых посылками (`Schroeder_Bernstein_definite`)"
+  },
+  {
+   "line": 50,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "finite_game_strategically_determined — Closed under the global context (шаг 7).",
+   "theorem": "finite_game_strategically_determined",
+   "file": "src/foundation/FiniteGameDeterminacy.v",
+   "claim": "детерминированность конечных деревьев игры"
+  },
+  {
+   "line": 64,
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "surjects_injects_back — Axioms: ToS_Axioms.L4_witness (шаг 1).",
+   "theorem": "surjects_injects_back",
+   "file": "src/settheory/CardinalityWithoutChoice.v",
+   "claim": "| L4 | мост «сюръекция → вложение» (`surjects_injects_back`);"
+  },
+  {
+   "line": 64,
+   "page_price": "L4",
+   "verdict": "ok",
+   "note": "unit_interval_uncountable_general — Axioms: ToS_Axioms.L4_witness (шаг 3). С исключённым третьим и единственным свидетелем (посылками) — unit_interval_uncountable_general_definite, Closed.",
+   "theorem": "unit_interval_uncountable_general",
+   "file": "src/UnitIntervalUncountableGeneral.v",
+   "claim": "несчётность $[0,1]$ для произвольных сходящихся процессов без исключённого третьего"
+  },
+  {
+   "line": 65,
+   "page_price": "classic + L4",
+   "verdict": "ok",
+   "note": "process_continuum_hypothesis — Axioms: Classical_Prop.classic, ToS_Axioms.L4_witness.",
+   "theorem": "process_continuum_hypothesis",
+   "file": "src/ProcessContinuumHypothesis.v",
+   "claim": "дихотомия замкнутых совокупностей (`process_continuum_hypothesis`)"
+  },
+  {
+   "line": 65,
+   "page_price": "classic + L4",
+   "verdict": "ok",
+   "note": "zermelo_determinacy — Axioms: BorelDeterminacy.classic, ToS_Axioms.L4_witness (шаг 7).",
+   "theorem": "zermelo_determinacy",
+   "file": "src/settheory/ZermeloDeterminacy.v",
+   "claim": "детерминированность игр конечной длины (`zermelo_determinacy`)"
+  },
+  {
+   "line": 72,
+   "page_price": "0 аксиом (L4 — посылкой)",
+   "verdict": "ok",
+   "note": "l4_statement_gives_functional_choice : L4_statement -> forall I X R, (forall i, exists x, R i x) -> exists f, forall i, R i (f i). Closed under the global context.",
+   "theorem": "l4_statement_gives_functional_choice",
+   "file": "src/settheory/ChoicePriceMap.v",
+   "claim": "Из самой записи L4 выбор по семейству следует (`l4_statement_gives_functional_choice`); карта это называет."
+  }
+ ]
+}

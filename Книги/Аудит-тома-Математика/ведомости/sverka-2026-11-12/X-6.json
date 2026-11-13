@@ -7,34 +7,38 @@
   {
    "theorem": "unit_interval_uncountable_trisect_v2",
    "file": "src/ShrinkingIntervals_ERR.v",
-   "claim": "| 0 аксиом | счётность ℚ (Калкин–Уилф); диагональ (`diagonal_differs`); несчётность $[0,1]$ (трисекция)",
+   "claim": "| 0 аксиом | счётность ℚ (Калкин–Уилф); диагональ (`diagonal_differs`); несчётность $[0,1]$ при заданной скорости сходимости (трисекция)",
    "page_price": "ярус «0 аксиом»",
    "verdict": "ok",
-   "note": "исправлено 12.11 (перенесено из яруса classic); сверена цена; формулировка — при аудите части"
+   "note": "исправлено 12.11 (перенесено из яруса classic); сверена цена; формулировка — при аудите части",
+   "line": 62
   },
   {
    "theorem": "kruskal_chains",
    "file": "src/settheory/KruskalTree.v",
-   "claim": "Кантор–Бендиксон; Крускал (конкретные семейства)",
+   "claim": "Крускал (конкретные семейства)",
    "page_price": "ярус «0 аксиом»",
    "verdict": "ok",
-   "note": "исправлено 12.11 (перенесено из яруса classic); `kruskal_forks` (KruskalTree.v:276) — тоже без допущений"
+   "note": "исправлено 12.11 (перенесено из яруса classic); `kruskal_forks` (KruskalTree.v:276) — тоже без допущений",
+   "line": 62
   },
   {
-   "theorem": "S_finite_scattered",
+   "theorem": "finite_set_scattered",
    "file": "src/settheory/CantorBendixsonFull.v",
-   "claim": "общий Кантор $X\\to(X\\to\\mathtt{bool})$; Кантор–Бендиксон",
+   "claim": "Кантор–Бендиксон (производная, ядро при стабилизации, конечные множества)",
    "page_price": "ярус «0 аксиом»",
    "verdict": "ok",
-   "note": "речь о производной множества в CantorBendixsonFull.v (не о процессной континуум-гипотезе главы IV.5); `CB_omega_finite_empty`, `CB_omega_accumulation_in_parent` — тоже без допущений"
+   "note": "речь о производной множества в CantorBendixsonFull.v (не о процессной континуум-гипотезе главы IV.5); `CB_omega_finite_empty`, `CB_omega_accumulation_in_parent` — тоже без допущений",
+   "line": 62
   },
   {
-   "theorem": null,
+   "theorem": "higman_synthesis",
    "file": "src/settheory/HigmanLemma.v",
-   "claim": "| classic (L3) | Хигман; конечная детерминированность |",
-   "page_price": "classic (L3)",
-   "verdict": "not-checked",
-   "note": "12.11 не проверялось; сводная страница «Формализация» для `higman_unit` называет «нет», для `dickson_pair` — исключённое третье: сверить при аудите Части X"
+   "claim": "Хигман (однобуквенный алфавит) и лемма Диксона",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "закрыто 13.11 (Часть X, шаги 7 и 8): лемма Диксона для пар доказана конструктивно, higman_synthesis — Closed under the global context; на странице «Хигман» перенесён в ярус «0 аксиом». Детерминированность: деревья игры — 0 аксиом (finite_game_strategically_determined), weak_determinacy — classic, zermelo_determinacy — classic + L4_witness; каждая стоит в своём ярусе таблицы.",
+   "line": 62
   }
  ]
 }

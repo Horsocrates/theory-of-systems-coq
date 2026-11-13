@@ -1,13 +1,25 @@
 (** * CantorBendixsonFull.v -- Cantor-Bendixson for omega-iterations (separable Q)
     Elements: PointSet, CB_deriv, CB_iter, CB_omega, is_isolated, is_accumulation
     Roles:    Derivative removes isolated points, iteration forms decreasing chain
-    Rules:    omega-limit is perfect (or empty), finite sets are scattered
-    STATUS:   20 Qed, 0 Admitted, 0 axioms
+    Rules:    the omega-limit CONTAINS every perfect subset; if the process
+              stabilises at a finite step, that step is the perfect kernel;
+              every finite set is scattered
+    STATUS:   35 Qed, 0 Admitted, 0 axioms
     Author:   Horsocrates | Date: March 2026
 
     P4 perspective: CB derivative is a PROCESS operating on point sets.
-    Each iteration step removes isolated points -- the omega-limit is the
-    fixed point of this process, yielding the perfect kernel.
+    Each iteration step keeps the accumulation points of the previous one.
+
+    HONEST SCOPE (Nov 2026).  "The omega-limit is the perfect kernel" is NOT
+    proved here and is false in general: a set of Cantor-Bendixson rank
+    omega + 1 has a one-point omega-limit.  What is proved (last section):
+    every perfect subset survives all finite steps (perfect_kernel_in_omega);
+    if step n is stable it is perfect, equals the omega-limit and contains
+    every perfect subset (stable_stage_is_perfect_kernel); every finite set
+    of rationals is scattered and its derivative is empty
+    (finite_set_scattered, finite_set_deriv_empty).  The lemma
+    CB_omega_stable returns its own premise.  In general the kernel is
+    reached only by continuing the iteration along the notations (CB_ord).
 *)
 
 From Stdlib Require Import QArith Qabs Lia ZArith List Bool.
@@ -428,3 +440,177 @@ Qed.
 (* ================================================================= *)
 (* END OF FILE                                                         *)
 (* ================================================================= *)
+
+(* ================================================================= *)
+(* Nov 2026: THE DERIVATIVE ITERATED ALONG THE NOTATIONS               *)
+(* ================================================================= *)
+
+(* CB_ord_step above is not a recursion: at OSucc _ it takes ONE derivative
+   whatever the predecessor is.  Here the derivative is iterated along Ord by
+   structural recursion: zero, successor (derivative of the previous stage),
+   limit (intersection of the stages). *)
+Fixpoint CB_ord (X : PointSet) (a : Ord) : PointSet :=
+  match a with
+  | OZero => X
+  | OSucc b => CB_deriv (CB_ord X b)
+  | OLim f => fun x => forall k, CB_ord X (f k) x
+  end.
+
+(* every stage is a subset of the original set *)
+Lemma CB_ord_subset : forall X a x, CB_ord X a x -> X x.
+Proof.
+  intros X a. induction a as [| b IH | f IH]; intros x H; simpl in H.
+  - exact H.
+  - apply IH. apply CB_deriv_subset. exact H.
+  - apply (IH 0%nat). apply H.
+Qed.
+
+(* on finite notations the iteration is CB_iter *)
+Lemma CB_ord_nat : forall X n, CB_ord X (nat_to_ord n) = CB_iter X n.
+Proof.
+  intros X n. induction n as [| n IH]; simpl.
+  - reflexivity.
+  - rewrite IH. reflexivity.
+Qed.
+
+(* at the stage omega it is the intersection of the finite stages, CB_omega;
+   the stage omega + 1 is, by the same Fixpoint, the derivative of that *)
+Theorem CB_ord_omega : forall X x, CB_ord X omega x <-> CB_omega X x.
+Proof.
+  intros X x. unfold omega, CB_omega. simpl. split; intros H n.
+  - rewrite <- CB_ord_nat. apply H.
+  - rewrite CB_ord_nat. apply H.
+Qed.
+
+(* ================================================================= *)
+(* Nov 2026: THE PERFECT KERNEL AND THE OMEGA-LIMIT; FINITE SETS       *)
+(* ================================================================= *)
+
+(* 1. Every perfect subset of A survives every derivative step, hence lies in
+      the omega-limit: the omega-limit CONTAINS the perfect kernel. *)
+Lemma perfect_subset_in_iter : forall (A P : PointSet),
+  subset P A -> is_perfect P -> forall n x, P x -> CB_iter A n x.
+Proof.
+  intros A P Hsub Hperf. induction n as [| n IH]; intros x Hx.
+  - simpl. apply Hsub. exact Hx.
+  - simpl. unfold CB_deriv, is_accumulation. split.
+    + apply IH. exact Hx.
+    + intros eps Heps. destruct (Hperf x Hx) as [_ Hacc].
+      destruct (Hacc eps Heps) as [y [Hy [Hne Hd]]].
+      exists y. split; [apply IH; exact Hy | split; assumption].
+Qed.
+
+Theorem perfect_kernel_in_omega : forall (A P : PointSet),
+  subset P A -> is_perfect P -> subset P (CB_omega A).
+Proof.
+  intros A P Hsub Hperf x Hx n.
+  exact (perfect_subset_in_iter A P Hsub Hperf n x Hx).
+Qed.
+
+(* 2. If the omega-limit is empty, the set is scattered. *)
+Theorem omega_empty_scattered : forall A : PointSet,
+  (forall x, ~ CB_omega A x) -> is_scattered A.
+Proof.
+  intros A Hempty P Hsub Hperf [x Hx].
+  exact (Hempty x (perfect_kernel_in_omega A P Hsub Hperf x Hx)).
+Qed.
+
+(* 3. Every finite set of rationals (given by a list) is scattered. *)
+Definition in_list (l : list Q) : PointSet :=
+  fun x => exists q, In q l /\ x == q.
+
+Lemma Qabs_pos_of_neq : forall x q : Q, ~ x == q -> 0 < Qabs (x - q).
+Proof.
+  intros x q Hne.
+  destruct (Qlt_le_dec 0 (Qabs (x - q))) as [H | H]; [exact H |].
+  exfalso. apply Hne.
+  apply Qabs_Qle_condition in H. destruct H as [H1 H2]. lra.
+Qed.
+
+Lemma finite_gap : forall (l : list Q) (x : Q),
+  exists eps : Q, 0 < eps /\
+    forall q, In q l -> ~ x == q -> eps <= Qabs (x - q).
+Proof.
+  induction l as [| q0 l IH]; intro x.
+  - exists 1. split; [lra |]. intros q [].
+  - destruct (IH x) as [eps0 [Heps0 Hgap]].
+    destruct (Qeq_dec x q0) as [Heq | Hne].
+    + exists eps0. split; [exact Heps0 |].
+      intros q [Hq | Hq] Hxq.
+      * exfalso. apply Hxq. rewrite <- Hq. exact Heq.
+      * apply Hgap; assumption.
+    + pose proof (Qabs_pos_of_neq x q0 Hne) as Hd.
+      destruct (Qlt_le_dec eps0 (Qabs (x - q0))) as [Hlt | Hle].
+      * exists eps0. split; [exact Heps0 |].
+        intros q [Hq | Hq] Hxq.
+        -- rewrite <- Hq. apply Qlt_le_weak. exact Hlt.
+        -- apply Hgap; assumption.
+      * exists (Qabs (x - q0)). split; [exact Hd |].
+        intros q [Hq | Hq] Hxq.
+        -- rewrite <- Hq. apply Qle_refl.
+        -- apply Qle_trans with eps0; [exact Hle | apply Hgap; assumption].
+Qed.
+
+Theorem finite_set_scattered : forall l : list Q, is_scattered (in_list l).
+Proof.
+  intros l P Hsub Hperf [x Hx].
+  destruct (finite_gap l x) as [eps [Heps Hgap]].
+  destruct (Hperf x Hx) as [_ Hacc].
+  destruct (Hacc eps Heps) as [y [Hy [Hne Hd]]].
+  destruct (Hsub y Hy) as [q [Hq Hyq]].
+  assert (Hxq : ~ x == q).
+  { intro H. apply Hne. rewrite H. symmetry. exact Hyq. }
+  pose proof (Hgap q Hq Hxq) as Hge.
+  assert (Hsame : Qabs (x - y) == Qabs (x - q)) by (rewrite Hyq; reflexivity).
+  rewrite Hsame in Hd.
+  apply (Qlt_irrefl eps). apply Qle_lt_trans with (Qabs (x - q)); assumption.
+Qed.
+
+(* the omega-limit of a finite set is empty, and already the first derivative *)
+Theorem finite_set_deriv_empty : forall (l : list Q) (x : Q),
+  ~ CB_deriv (in_list l) x.
+Proof.
+  intros l x [Hx Hacc].
+  destruct (finite_gap l x) as [eps [Heps Hgap]].
+  destruct (Hacc eps Heps) as [y [[q [Hq Hyq]] [Hne Hd]]].
+  assert (Hxq : ~ x == q).
+  { intro H. apply Hne. rewrite H. symmetry. exact Hyq. }
+  pose proof (Hgap q Hq Hxq) as Hge.
+  assert (Hsame : Qabs (x - y) == Qabs (x - q)) by (rewrite Hyq; reflexivity).
+  rewrite Hsame in Hd.
+  apply (Qlt_irrefl eps). apply Qle_lt_trans with (Qabs (x - q)); assumption.
+Qed.
+
+(* 4. If the derivative process stabilizes at a finite stage n, that stage is
+      perfect and coincides with the omega-limit: the perfect kernel. *)
+Lemma stable_from : forall (A : PointSet) (n : nat),
+  (forall x, CB_iter A n x -> CB_iter A (S n) x) ->
+  forall (k : nat) x, CB_iter A n x -> CB_iter A (k + n)%nat x.
+Proof.
+  intros A n Hst. induction k as [| k IH]; intros x Hx.
+  - exact Hx.
+  - change (CB_deriv (CB_iter A (k + n)%nat) x). split.
+    + apply IH. exact Hx.
+    + intros eps Heps.
+      destruct (Hst x Hx) as [_ Hacc].
+      destruct (Hacc eps Heps) as [y [Hy [Hne Hd]]].
+      exists y. split; [apply IH; exact Hy | split; assumption].
+Qed.
+
+Theorem stable_stage_is_perfect_kernel : forall (A : PointSet) (n : nat),
+  (forall x, CB_iter A n x -> CB_iter A (S n) x) ->
+  is_perfect (CB_iter A n) /\
+  (forall x, CB_omega A x <-> CB_iter A n x) /\
+  (forall P : PointSet, subset P A -> is_perfect P -> subset P (CB_iter A n)).
+Proof.
+  intros A n Hst. split; [| split].
+  - intros x Hx. exact (Hst x Hx).
+  - intro x. split.
+    + intro H. exact (H n).
+    + intros Hx m. destruct (Nat.le_gt_cases m n) as [Hle | Hgt].
+      * exact (CB_iter_monotone A m n x Hle Hx).
+      * replace m with ((m - n) + n)%nat by lia.
+        exact (stable_from A n Hst (m - n)%nat x Hx).
+  - intros P Hsub Hperf x Hx.
+    exact (perfect_subset_in_iter A P Hsub Hperf n x Hx).
+Qed.

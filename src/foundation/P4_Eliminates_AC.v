@@ -2,7 +2,7 @@
     Elements: Finite lists, choice functions, maximal elements
     Roles:    L5 status assignment provides canonical choice
     Rules:    Head-of-list = constructive choice, no axiom needed
-    STATUS:   15 Qed, 0 Admitted, 0 new axioms
+    STATUS:   17 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY INSIGHT: The Axiom of Choice asserts that for any family of
@@ -222,4 +222,62 @@ Proof.
   intros family N Hne i Hi.
   apply finite_choice.
   apply Hne. exact Hi.
+Qed.
+
+(* ================================================================= *)
+(* Nov 2026: THE FINITE ZORN LEMMA FOR ANY TYPE AND ANY DECIDABLE     *)
+(* TRANSITIVE RELATION                                                *)
+(* ================================================================= *)
+
+(* [finite_zorn] above is the greatest number of a list of naturals.  The
+   lemma of Zorn speaks about a MAXIMAL element of a partial order: here it
+   is, for a nonempty finite list over any type. *)
+
+Section FiniteZorn.
+  Variable A : Type.
+  Variable le : A -> A -> bool.
+  Hypothesis le_trans : forall x y z, le x y = true -> le y z = true -> le x z = true.
+
+  (* m is maximal: whatever lies not below m lies not above m either *)
+  Theorem finite_zorn_general : forall l : list A, l <> nil ->
+    exists m, In m l /\ forall n, In n l -> le m n = true -> le n m = true.
+  Proof.
+    induction l as [| x xs IH]; intro Hne.
+    - contradiction.
+    - destruct xs as [| y ys].
+      + exists x. split; [left; reflexivity |].
+        intros n [Hn | []] H. subst n. exact H.
+      + assert (Hne' : y :: ys <> nil) by discriminate.
+        destruct (IH Hne') as [m [Hm Hmax]].
+        destruct (le m x) eqn:Hmx.
+        * destruct (le x m) eqn:Hxm.
+          -- exists m. split; [right; exact Hm |].
+             intros n [Hn | Hn] H.
+             ++ subst n. exact Hxm.
+             ++ apply Hmax; assumption.
+          -- exists x. split; [left; reflexivity |].
+             intros n [Hn | Hn] H.
+             ++ subst n. exact H.
+             ++ assert (Hmn : le m n = true) by (apply le_trans with x; assumption).
+                apply le_trans with m; [apply Hmax; assumption | exact Hmx].
+        * exists m. split; [right; exact Hm |].
+          intros n [Hn | Hn] H.
+          -- subst n. rewrite Hmx in H. discriminate.
+          -- apply Hmax; assumption.
+  Qed.
+End FiniteZorn.
+
+(* the order of naturals is one instance: a maximal element of a nonempty
+   list of naturals under <= *)
+Lemma finite_zorn_nat_from_general : forall l : list nat, l <> nil ->
+  exists m, In m l /\ forall n, In n l -> (m <= n)%nat -> (n <= m)%nat.
+Proof.
+  intros l Hne.
+  destruct (finite_zorn_general nat Nat.leb
+              (fun x y z Hxy Hyz =>
+                 proj2 (Nat.leb_le x z)
+                   (Nat.le_trans x y z (proj1 (Nat.leb_le x y) Hxy) (proj1 (Nat.leb_le y z) Hyz)))
+              l Hne) as [m [Hm Hmax]].
+  exists m. split; [exact Hm |].
+  intros n Hn Hle. apply Nat.leb_le. apply Hmax; [exact Hn |]. apply Nat.leb_le. exact Hle.
 Qed.

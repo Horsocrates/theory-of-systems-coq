@@ -1,8 +1,10 @@
 (** * P4_Eliminates_Pi11.v — Pi-1-1 comprehension collapses to arithmetic
     Elements: Program codes (nat), eval_program, function quantifiers
-    Roles:    Second-order quantification reduced to first-order via P4
-    Rules:    Every function = a program code, so forall f = forall c:nat
-    STATUS:   15 Qed, 0 Admitted, 0 new axioms
+    Roles:    Second-order quantification READ as first-order via P4
+    Rules:    the quantifier over codes = the quantifier over the functions
+              GIVEN BY codes; it is a choice of domain, not an equivalent
+              replacement of "forall f"
+    STATUS:   17 Qed, 0 Admitted, 0 new axioms
     Author:   Horsocrates | Date: March 2026
 
     KEY INSIGHT: Pi-1-1 comprehension asserts that {n : forall f, phi(n,f)}
@@ -10,6 +12,21 @@
     over ALL functions nat->nat, which classically means over an uncountable
     set. Under P4 (Finite Actuality), every function is a PROCESS = a
     program. So "forall f" becomes "forall c:nat" — purely arithmetic.
+
+    HONEST SCOPE (Nov 2026).
+    - eval_program used to be a Parameter.  It is now a VARIABLE of the
+      section: every statement holds for ANY table Program -> nat -> nat, and
+      nothing appears in Print Assumptions (except classic in pi11_negation).
+    - The file does not prove "every function has a code", and it cannot:
+      for any total table the diagonal function n |-> S (ev n n) is outside it
+      (no_table_covers_all_functions).  Hence the quantifier over codes is
+      strictly weaker than the quantifier over functions
+      (codes_reading_is_weaker).  Reading "forall f" as "forall c" is a choice
+      of ontology (P4: a function is a process given by a code).
+    - What IS proved: the quantifier over codes is the quantifier over the
+      functions given by codes (P4_eliminates_Pi11), and the two quantifiers
+      coincide exactly under the premise "every function has a code"
+      (pi11_hierarchy_collapse).
 *)
 
 From Stdlib Require Import Lia PeanoNat List Classical_Prop.
@@ -20,12 +37,15 @@ Import ListNotations.
 (* ================================================================= *)
 
 (* Under P4, a "function" is a program code.
-   eval_program c n = "run program c on input n".
-   This is a computational primitive, not an axiom —
-   it corresponds to a universal Turing machine. *)
+   eval_program c n = "the value of the function with code c at n".
+   Nov 2026: the table is a variable of the section, with no properties
+   assumed -- in particular it is total, so it is not a universal machine
+   (see cs/HaltingRoleLimit.v for the partial one). *)
 Definition Program := nat.
 
-Parameter eval_program : Program -> nat -> nat.
+Section Codes.
+
+Variable eval_program : Program -> nat -> nat.
 
 (* ================================================================= *)
 (* PI-1-1 COLLAPSE                                                    *)
@@ -134,14 +154,39 @@ Lemma pi11_witness : forall phi n c,
   P4_forall_functions phi n -> phi (eval_program c) n.
 Proof. intros. apply H. Qed.
 
-(* 13. The hierarchy collapses: Pi-1-1 = forall-nat *)
+(* 13. The hierarchy collapses -- Pi-1-1 = forall-nat -- exactly under the
+       premise that every function has a code.  (Nov 2026: the premise used to
+       be an equation that the proof ignored; now it is the real condition and
+       it is used.) *)
 Theorem pi11_hierarchy_collapse :
   forall (phi : (nat -> nat) -> nat -> Prop),
-  (fun n => forall f, phi f n) = (fun n => forall c : nat, phi (eval_program c) n) ->
-  (* Under P4 this holds because every f IS eval_program c for some c *)
-  forall n, P4_forall_functions phi n <-> forall c : nat, phi (eval_program c) n.
+  (forall f : nat -> nat, exists c : Program, f = eval_program c) ->
+  forall n, (forall f, phi f n) <-> P4_forall_functions phi n.
 Proof.
-  intros phi _ n. apply pi11_to_arithmetic.
+  intros phi Hcode n. split.
+  - intros H c. apply H.
+  - intros H f. destruct (Hcode f) as [c Hc]. rewrite Hc. apply H.
+Qed.
+
+(* 13a. That premise fails for every table: the diagonal function is outside it. *)
+Theorem no_table_covers_all_functions :
+  ~ (forall f : nat -> nat, exists c : Program, f = eval_program c).
+Proof.
+  intro H. destruct (H (fun n => S (eval_program n n))) as [c Hc].
+  pose proof (f_equal (fun g : nat -> nat => g c) Hc) as E. cbv beta in E.
+  exact (Nat.neq_succ_diag_l _ E).
+Qed.
+
+(* 13b. So the quantifier over codes is strictly weaker than the quantifier
+        over functions. *)
+Theorem codes_reading_is_weaker :
+  exists phi : (nat -> nat) -> nat -> Prop,
+    (forall n, P4_forall_functions phi n) /\ ~ (forall n f, phi f n).
+Proof.
+  exists (fun f _ => exists c : Program, forall m, f m = eval_program c m). split.
+  - intros n c. exists c. reflexivity.
+  - intro H. destruct (H 0 (fun n => S (eval_program n n))) as [c Hc].
+    specialize (Hc c). cbv beta in Hc. exact (Nat.neq_succ_diag_l _ Hc).
 Qed.
 
 (* 14. Concrete: constant zero function *)
@@ -150,11 +195,18 @@ Definition const_zero : nat -> nat := fun _ => 0.
 Lemma const_zero_property : forall n, const_zero n = 0.
 Proof. intros. reflexivity. Qed.
 
-(* 15. SYNTHESIS: P4 eliminates Pi-1-1 comprehension as a separate axiom.
-   Under P4, every function nat->nat is a program code c:nat.
-   Therefore "forall f:nat->nat" = "forall c:nat" = arithmetic.
-   Pi-1-1 comprehension becomes a theorem of arithmetic, not an axiom. *)
+(* 15. SYNTHESIS.  The P4 reading of "forall f" is the quantifier over codes;
+   it IS the quantifier over the functions given by codes.  (Nov 2026: the
+   statement used to repeat the definition; "every function has a code" is not
+   claimed and is false for a total table, see 13a.) *)
 Theorem P4_eliminates_Pi11 :
   forall phi n,
-  P4_forall_functions phi n <-> (forall c : nat, phi (eval_program c) n).
-Proof. intros. apply pi11_to_arithmetic. Qed.
+  P4_forall_functions phi n <->
+  (forall f : nat -> nat, (exists c : Program, f = eval_program c) -> phi f n).
+Proof.
+  intros phi n. split.
+  - intros H f [c Hc]. subst. apply H.
+  - intros H c. apply H. exists c. reflexivity.
+Qed.
+
+End Codes.
