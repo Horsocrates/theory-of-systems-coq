@@ -5,7 +5,7 @@
  "auto": true,
  "records": [
   {
-   "line": 420,
+   "line": 427,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
@@ -16,7 +16,7 @@
    "note": "Q — запись Stdlib.QArith.QArith_base.Q; собственного типа рациональных в src нет (поиск по объявлениям записей и типов), QArith подключают 1640 файлов src из 2048. Сравнение с целыми точно только в части типа: для целых в проекте есть ещё собственная запись FormalDiff с изоморфизмом Z (см. запись к стр. 826)."
   },
   {
-   "line": 428,
+   "line": 435,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
@@ -27,7 +27,7 @@
    "note": "Совпадает с исходником библиотеки: Stdlib/QArith/QArith_base.v:23 `Record Q : Set := Qmake {Qnum : Z; Qden : positive}.`; то же отвечает команда Print Q. Отметка инструмента «ОТЛИЧАЕТСЯ» ложная: блок сравнён с `Variable Q : Type` из src/cs/PumpingPigeonhole.v:38."
   },
   {
-   "line": 434,
+   "line": 441,
    "theorem": "Qnum",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -37,7 +37,7 @@
    "note": "Qnum : Q -> Z — поле записи Q (Stdlib.QArith.QArith_base.Qnum)."
   },
   {
-   "line": 436,
+   "line": 443,
    "theorem": "Qden",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -47,7 +47,7 @@
    "note": "Qden : Q -> positive — поле записи Q (Stdlib.QArith.QArith_base.Qden)."
   },
   {
-   "line": 439,
+   "line": 446,
    "theorem": "positive",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -57,7 +57,7 @@
    "note": "Inductive positive := xI | xO | xH (Corelib.Numbers.BinNums; в Rocq 9 объявление лежит в базовой библиотеке Corelib, обозначения — в Stdlib.PArith). В формализации то же имя носит поле записи Distinction (Distinction.positive : Distinction -> Prop) — другое объявление."
   },
   {
-   "line": 444,
+   "line": 451,
    "theorem": "Qden",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -67,17 +67,17 @@
    "note": "У типа positive три конструктора, нуля среди значений нет; forall x : Q, Z.pos (Qden x) <> 0 доказано в пробном файле (denominator_never_zero, Closed under the global context)."
   },
   {
-   "line": 445,
+   "line": 452,
    "theorem": "Qinv",
    "external": true,
    "assumptions": "Closed under the global context",
-   "claim": "Тем условие $q \\neq 0$ (§ 2.4) оказывается *встроенным в самый тип*: знаменатель просто не может быть нулём, и деления на нуль формальная запись не допускает не запретом, а устройством типа.",
+   "claim": "Тем условие $q \\neq 0$ (§ 2.4) оказывается *встроенным в самый тип*: знаменатель просто не может быть нулём, и дроби с нулевым знаменателем формальная запись не допускает не запретом, а устройством типа.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Верно для записи дроби: p # q с нулевым q не записать. Операция деления той же библиотеки определена на всех парах: Qinv 0 = 0 (QArith_base.v:254), Qdiv x y := x * / y, поэтому x / 0 == 0, а 1 / 0 вычисляется в 0. Закон обратного доказан под условием: Qmult_inv_r : forall x, ~ x == 0 -> x * / x == 1."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): было «деления на нуль формальная запись не допускает». Типом исключена дробь с нулевым знаменателем (denominator_never_zero, src/CommensurationQ.v); об операции деления страница теперь говорит отдельно."
   },
   {
-   "line": 469,
+   "line": 483,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
@@ -88,7 +88,7 @@
    "note": "Q — запись с одним конструктором Qmake; отождествления равнозначных дробей в самом типе нет."
   },
   {
-   "line": 472,
+   "line": 486,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
@@ -99,7 +99,7 @@
    "note": "(1 # 2) <> (2 # 4) доказано в пробном файле (half_neq_two_quarters, discriminate; Closed under the global context)."
   },
   {
-   "line": 475,
+   "line": 489,
    "theorem": "Qeq",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -109,7 +109,7 @@
    "note": "Qeq p q := Qnum p * QDen q = Qnum q * QDen p (QArith_base.v:48), знак == (там же, :54); Q_Setoid : Equivalence Qeq (:170). (1 # 2) == (2 # 4) — reflexivity (пробный файл, half_Qeq_two_quarters)."
   },
   {
-   "line": 482,
+   "line": 496,
    "theorem": "Qeq",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -119,7 +119,7 @@
    "note": "Q — запись, Qeq : Q -> Q -> Prop — отдельное определение; фактор-типа в библиотеке QArith нет."
   },
   {
-   "line": 523,
+   "line": 537,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
@@ -130,17 +130,17 @@
    "note": "Совпадает с объявлением QArith_base.v:23; собственного типа рациональных в src нет."
   },
   {
-   "line": 527,
+   "line": 541,
    "theorem": "Qinv",
    "external": true,
    "assumptions": "Closed under the global context",
-   "claim": "Ненулевость знаменателя встроена в тип: деления на нуль формальная запись не допускает устройством, а не запретом.",
+   "claim": "Ненулевость знаменателя встроена в тип: дроби с нулевым знаменателем формальная запись не допускает устройством, а не запретом; операция деления в библиотеке определена всюду и при нулевом делителе возвращает нуль по техническому соглашению.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "То же, что на стр. 445: устройством типа исключена дробь с нулевым знаменателем; операция деления библиотеки тотальна (Qinv 0 = 0, x / 0 == 0), а закон обратного Qmult_inv_r стоит под условием ~ x == 0."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): то же уточнение в итоге раздела. Qdiv_by_zero : forall x, x / 0 == 0 (src/CommensurationQ.v), Closed under the global context."
   },
   {
-   "line": 528,
+   "line": 544,
    "theorem": "Qeq",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -150,7 +150,7 @@
    "note": "(p # q) == (r # s) <-> p * Z.pos s = r * Z.pos q — по определению Qeq (пробный файл, Qeq_is_cross_product, Closed under the global context)."
   },
   {
-   "line": 567,
+   "line": 583,
    "theorem": "Z_ring",
    "file": "src/stdlib/RingField.v",
    "claim": "Целые числа суть кольцо: сумма, разность и произведение целых чисел всегда целые.",
@@ -159,7 +159,7 @@
    "note": "Глава теорему не называет. Z_ring : Ring (RingField.v:238) — экземпляр записи Ring проекта для Z с обычным равенством; Closed under the global context. Что закон обратного на Z невыполним, в src теоремой не записано (в пробном файле: Z_has_no_inverse_operation)."
   },
   {
-   "line": 577,
+   "line": 593,
    "theorem": "Q_field",
    "file": "src/stdlib/RingField.v",
    "claim": "Рациональные числа суть поле: у всякого ненулевого рационального числа $p/q$ есть обратное по умножению — $q/p$, — и произведение их есть единица.",
@@ -168,7 +168,7 @@
    "note": "Глава теорему не называет. Q_field : Field (RingField.v:314) — экземпляр записи Field проекта для Q с равенством Qeq: обратный — Qinv, закон x * / x == 1 при ~ x == 0 (Q_field_inv_r, из библиотечной Qmult_inv_r). Closed under the global context."
   },
   {
-   "line": 597,
+   "line": 613,
    "theorem": "Qnum",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -178,7 +178,7 @@
    "note": "Qnum : Q -> Z, Qden : Q -> positive — по объявлению записи Q."
   },
   {
-   "line": 602,
+   "line": 618,
    "theorem": "Qinv",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -188,7 +188,7 @@
    "note": "Qinv: при числителе Zneg p результат Zneg (Qden x) # p (QArith_base.v:254–259); / (-3 # 4) = (-4 # 3) — reflexivity (пробный файл, Qinv_m3_4; общий вид — Qinv_neg_general)."
   },
   {
-   "line": 702,
+   "line": 718,
    "theorem": "mediant_between_left",
    "file": "src/stdlib/SternBrocot.v",
    "claim": "если $a/b < c/d$ — две соразмерные позиции, то между ними лежит, например, их *медианта*",
@@ -197,7 +197,7 @@
    "note": "Глава теорему не называет. SternBrocot.v:97 и :102 (mediant_between_left, mediant_between_right): при 0 < b, 0 < d и a*d < c*b верно a*(b+d) < (a+c)*b и (a+c)*d < c*(b+d) — то же в перекрёстной записи над Z; Closed under the global context. Для типа Q следствие проверено в пробном файле (mediant_between_Q)."
   },
   {
-   "line": 796,
+   "line": 813,
    "theorem": "Qeq",
    "external": true,
    "assumptions": "Closed under the global context",
@@ -207,44 +207,44 @@
    "note": "Соответствует § 2.5: запись Q и отношение Qeq библиотеки QArith."
   },
   {
-   "line": 826,
-   "theorem": "FormalDiff",
-   "file": "src/CoordinateIntegers.v",
-   "claim": "Оговорка о статусе, как и для целых (Глава III.1): ToS не строит свой тип рациональных — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5);",
+   "line": 847,
+   "theorem": "Commens",
+   "file": "src/CommensurationQ.v",
+   "claim": "Соразмерное чтение, как и у целых (Глава III.1), имеет теперь свой файл-якорь — `CommensurationQ.v`: уравнение соразмерности задаёт шаг в точности при $q \\neq 0$ (`commensuration_determines_iff`), позиция $p/q$ есть малый шаг $1/q$, взятый $p$ раз (`position_is_multiple_of_small_step`), и дана запись соразмерной позиции `Commens` — число взятых шагов и число новых границ внутри единичного шага, — взаимно однозначно отвечающая `Q` (`cm_to_of`, `cm_of_to`);",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: о рациональных сказано верно, сравнение с целыми устарело. Для целых проект строит собственную запись FormalDiff (CoordinateIntegers.v:41) и доказывает её соответствие Z (fd_to_of_Z, fd_equiv_iff_Z, согласованность сложения и умножения; 13 Qed) — так говорит и оговорка Главы III.1 (стр. 1121–1128). Для рациональных такого файла нет."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 2, слово автора) (формализацией; развилка — А): было «как и для целых: ToS не строит свой тип». Record Commens := mkCm { cm_steps : Z ; cm_cuts : nat }; cm_to_of : cm_to_Q (cm_of_Q q) = q; cm_of_to : cm_of_Q (cm_to_Q x) = x; cm_eq_iff_Qeq, cm_add_to_Q, cm_mul_to_Q — Closed under the global context."
   },
   {
-   "line": 829,
+   "line": 843,
    "theorem": "Qsft",
    "external": true,
    "assumptions": "Closed under the global context",
-   "claim": "машинно проверенное — сама полевая арифметика `Q` и отношение `Qeq`, а соразмерное чтение несёт проза.",
+   "claim": "Оговорка о статусе: рабочий тип рациональных ToS не строит — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5); машинно проверены полевая арифметика `Q` и отношение `Qeq`.",
    "page_price": "",
    "verdict": "ok",
-   "note": "В библиотеке: Qsft : field_theory 0 1 Qplus Qmult Qminus Qopp Qdiv Qinv Qeq (Stdlib/QArith/Qfield.v:31), Qmult_inv_r, Q_Setoid : Equivalence Qeq. Объявлений о соразмерности в смысле главы в src нет (слово встречается только в файлах о соизмеримости углов с π)."
+   "note": "В библиотеке: Qsft : field_theory … Qeq (Stdlib/QArith/Qfield.v:31), Qmult_inv_r, Q_Setoid : Equivalence Qeq. Рабочий тип — стандартный Q; это верно."
   },
   {
-   "line": 829,
+   "line": 843,
    "theorem": "Q_field",
    "file": "src/stdlib/RingField.v",
-   "claim": "машинно проверенное — сама полевая арифметика `Q` и отношение `Qeq`, а соразмерное чтение несёт проза.",
+   "claim": "Оговорка о статусе: рабочий тип рациональных ToS не строит — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5); машинно проверены полевая арифметика `Q` и отношение `Qeq`.",
    "page_price": "",
    "verdict": "ok",
-   "note": "В проекте законы поля для Q с равенством Qeq собраны записью Q_field : Field (RingField.v:314), кольца — Q_ring (:282); Closed under the global context. Глава эти объявления не называет."
+   "note": "В проекте законы поля для Q собраны записью Q_field : Field (stdlib/RingField.v:314); Closed under the global context."
   },
   {
-   "line": 830,
+   "line": 855,
    "theorem": "QPos",
    "file": "src/Countability_Q.v",
-   "claim": "Файл `Countability_Q.v` (дерево Калкина–Уилфа) есть якорь *следующей* главы и работает с *положительными* парами `QPos` (§ 2.8.5).",
+   "claim": "Файл `Countability_Q.v` (дерево Калкина–Уилфа) есть якорь *следующей* главы: он работает с *положительными* парами `QPos` и достраивает обход до всего $ℚ$ (§ 2.8.5).",
    "page_price": "",
    "verdict": "ok",
-   "note": "QPos := (positive * positive)%type (Countability_Q.v:42). Описание неполное: разделы файла со стр. 534 работают со всем Q — enum_Q, Q_countable, index_of_Q, Q_bijection; об этом глава говорит ниже (стр. 949–956)."
+   "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): описание файла дополнено. QPos := (positive * positive)%type (Countability_Q.v:42); разделы со стр. 534 — enum_Q, Q_countable, index_of_Q, Q_bijection для всего Q."
   },
   {
-   "line": 913,
+   "line": 938,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
@@ -255,7 +255,7 @@
    "note": "Q : Set — запись, то есть индуктивный тип с одним конструктором (Locate Q: Inductive Stdlib.QArith.QArith_base.Q); кванторы forall q : Q стоят, например, в Q_countable и Q_bijection."
   },
   {
-   "line": 941,
+   "line": 966,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "В формализации ближайшим якорем следующей главы служит файл `Countability_Q.v` Rocq-репозитория ToS. Он конструктивно перечисляет *положительные* рациональные числа через дерево Калкина–Уилфа",
@@ -264,7 +264,7 @@
    "note": "Файл src/Countability_Q.v: 33 Qed, 0 Admitted, строк Axiom и Parameter нет; cw_left, cw_right, cw_node (:74–103) — дерево Калкина–Уилфа, узлы закодированы числами типа positive."
   },
   {
-   "line": 944,
+   "line": 969,
    "theorem": "QPos",
    "file": "src/Countability_Q.v",
    "claim": "положительное рациональное представлено там парой `QPos` (числитель и знаменатель, оба положительные)",
@@ -273,7 +273,7 @@
    "note": "Definition QPos := (positive * positive)%type (Countability_Q.v:42). Тип содержит и сократимые пары, например (2, 4); обход их не посещает — на странице это учтено словами «всякой несократимой пары»."
   },
   {
-   "line": 945,
+   "line": 970,
    "theorem": "enum_QPos",
    "file": "src/Countability_Q.v",
    "claim": "функция `enum_QPos` обходит дерево",
@@ -282,7 +282,7 @@
    "note": "enum_QPos n := cw_node (Pos.of_nat (S n)) (Countability_Q.v:106): узлы в порядке двоичных номеров; первые значения (1,1), (1,2), (2,1), (1,3), (3,2) получены вычислением."
   },
   {
-   "line": 946,
+   "line": 971,
    "theorem": "Q_positive_countable",
    "file": "src/Countability_Q.v",
    "claim": "теорема `Q_positive_countable` доказывает — вполне конструктивно, без единой аксиомы, — что этот обход инъективен и достигает всякой несократимой пары.",
@@ -291,16 +291,16 @@
    "note": "Countability_Q.v:471: (forall n m, enum_QPos n = enum_QPos m -> n = m) /\\ (forall a b, Z.gcd (Z.pos a) (Z.pos b) = 1 -> exists n, enum_QPos n = (a, b)). Closed under the global context. Обращение для положительных: index_of_QPos с леммами enum_QPos_index (:660) и index_of_QPos_enum (:673)."
   },
   {
-   "line": 949,
+   "line": 974,
    "theorem": "Q_bijection",
    "file": "src/Countability_Q.v",
    "claim": "*полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением доказана не только для положительных, но и для всего $ℚ$ — со знаком и нулём.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Countability_Q.v:759 доказывает две круговые формулы: index_of_Q (enum_Q n) = n и enum_Q (index_of_Q q) == q. Для биекции с рациональными, взятыми с точностью до Qeq, нужно ещё, чтобы номер не зависел от записи дроби: p == q -> index_of_Q p = index_of_Q q. Этой леммы в src нет; из двух формул она не следует. Она верна и доказана в пробном файле в две строки (index_of_Q_compat, Closed under the global context)."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией, шаг 3): биекция значений в полном виде — Q_bijection_values (src/CountabilityQValues.v); страница называет её ниже в том же абзаце. Q_bijection (Countability_Q.v:759) — два круговых обхода; Closed under the global context."
   },
   {
-   "line": 952,
+   "line": 977,
    "theorem": "enum_Q",
    "file": "src/Countability_Q.v",
    "claim": "Функция `enum_Q` приписывает обходу знак и позицию нуля",
@@ -309,7 +309,7 @@
    "note": "Countability_Q.v:582: enum_Q 0 = 0; enum_Q (S m) = ± qpos_to_Q (enum_QPos (Nat.div2 m)) по чётности m. Вычислено: enum_Q 0..4 = 0, 1, -1, 1#2, -1#2."
   },
   {
-   "line": 953,
+   "line": 978,
    "theorem": "index_of_Q",
    "file": "src/Countability_Q.v",
    "claim": "обратная `index_of_Q` по рациональному находит его номер",
@@ -318,16 +318,16 @@
    "note": "Countability_Q.v:683: номер берётся по несократимой записи Qred q — 0 для нуля, S (2k) для положительных, S (S (2k)) для отрицательных. Определение вычислимо: index_of_Q (1#2) = 3, index_of_Q (-3#4) = 28."
   },
   {
-   "line": 954,
+   "line": 979,
    "theorem": "Q_bijection",
    "file": "src/Countability_Q.v",
-   "claim": "теорема `Q_bijection` доказывает — тоже без аксиом, — что они взаимно обратны (с точностью до `Qeq`: $2/4$ и $1/2$ — получают один номер).",
+   "claim": "теорема `Q_bijection` доказывает — тоже без аксиом, — что они взаимно обратны (с точностью до `Qeq`);",
    "page_price": "без аксиом",
    "verdict": "ok",
-   "note": "Взаимная обратность доказана: первая формула — равенством номеров, вторая — с точностью до Qeq; Closed under the global context. Пример в скобках верен вычислением (index_of_Q (2#4) = index_of_Q (1#2) = 3), но утверждением теоремы не является: см. запись к стр. 949."
+   "note": "Взаимная обратность: первая формула — равенством номеров, вторая — с точностью до Qeq. Closed under the global context."
   },
   {
-   "line": 966,
+   "line": 992,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "Файл `Countability_Q.v` прямо отмечает этот контраст: рациональные точки перечислимы, а процессы приближения так не перечисляются.",
@@ -336,15 +336,115 @@
    "note": "Контраст отмечен комментариями файла (стр. 6–9 и 494–531), не теоремой: утверждение о процессах комментарий относит к ShrinkingIntervals. Там это unit_interval_uncountable_trisect_v2 (ShrinkingIntervals_ERR.v:3569) — с посылкой valid_regular_enumeration E; Closed under the global context."
   },
   {
-   "line": 976,
+   "line": 1002,
    "theorem": "Q",
    "file": "src/Countability_Q.v",
    "external": true,
    "assumptions": "не применимо (тип стандартной библиотеки)",
-   "claim": "Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), `QArith` есть часть самого Rocq, не Rocq-репозитория ToS.",
+   "claim": "Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), он принадлежит библиотеке Rocq, а не Rocq-репозиторию ToS.",
    "page_price": "",
    "verdict": "ok",
-   "note": "Объявление стоит в Stdlib.QArith.QArith_base (QArith_base.v:23), модуль QArith его вывозит. В репозитории ToS типа Q нет — это верно. В Rocq 9 стандартная библиотека поставляется отдельным пакетом Stdlib (в установке — user-contrib/Stdlib), тип Z объявлен в базовой библиотеке Corelib.Numbers.BinNums."
+   "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): вторая фраза. Объявление — Stdlib.QArith.QArith_base; в репозитории ToS типа Q нет."
+  },
+  {
+   "line": 183,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "position_is_multiple_of_small_step : forall (p : Z) (q : positive), p # q == inject_Z p * (1 # q). Closed under the global context.",
+   "theorem": "position_is_multiple_of_small_step",
+   "file": "src/CommensurationQ.v",
+   "claim": "$p/q$ есть $p$-кратное повторение малого шага $1/q$ (`position_is_multiple_of_small_step`; $q$ малых шагов составляют единицу — `small_steps_make_unit`; файл `CommensurationQ.v`)."
+  },
+  {
+   "line": 183,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "small_steps_make_unit : forall q : positive, inject_Z (Z.pos q) * (1 # q) == 1. Closed under the global context.",
+   "theorem": "small_steps_make_unit",
+   "file": "src/CommensurationQ.v",
+   "claim": "$p/q$ есть $p$-кратное повторение малого шага $1/q$ (`position_is_multiple_of_small_step`; $q$ малых шагов составляют единицу — `small_steps_make_unit`; файл `CommensurationQ.v`)."
+  },
+  {
+   "line": 364,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "zero_parts_no_step : forall p u : Q, ~ p == 0 -> ~ (0 * u == p). Closed under the global context.",
+   "theorem": "zero_parts_no_step",
+   "file": "src/CommensurationQ.v",
+   "claim": "Формально (файл `CommensurationQ.v`): при $q = 0$ и $p \\neq 0$ шага нет (`zero_parts_no_step`), при $q = 0$ и $p = 0$ годится всякий (`zero_parts_any_step`), и уравнение задаёт шаг — решение есть и оно одно — в точности при $q \\neq 0$ (`commensuration_determines_iff`)."
+  },
+  {
+   "line": 364,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "zero_parts_any_step : forall u : Q, 0 * u == 0. Closed under the global context.",
+   "theorem": "zero_parts_any_step",
+   "file": "src/CommensurationQ.v",
+   "claim": "Формально (файл `CommensurationQ.v`): при $q = 0$ и $p \\neq 0$ шага нет (`zero_parts_no_step`), при $q = 0$ и $p = 0$ годится всякий (`zero_parts_any_step`), и уравнение задаёт шаг — решение есть и оно одно — в точности при $q \\neq 0$ (`commensuration_determines_iff`)."
+  },
+  {
+   "line": 364,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "commensuration_determines_iff : forall q p : Q, determines_step q p <-> ~ q == 0, где determines_step q p := exists u, q * u == p /\\ forall u', q * u' == p -> u' == u. Closed under the global context.",
+   "theorem": "commensuration_determines_iff",
+   "file": "src/CommensurationQ.v",
+   "claim": "Формально (файл `CommensurationQ.v`): при $q = 0$ и $p \\neq 0$ шага нет (`zero_parts_no_step`), при $q = 0$ и $p = 0$ годится всякий (`zero_parts_any_step`), и уравнение задаёт шаг — решение есть и оно одно — в точности при $q \\neq 0$ (`commensuration_determines_iff`)."
+  },
+  {
+   "line": 455,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: Qinv 0 = 0 (QArith_base.v:254), Qdiv x y := x * / y; Qmult_inv_r : ~ x == 0 -> x * / x == 1. В src/CommensurationQ.v: Qinv_of_zero, Qdiv_by_zero (x / 0 == 0), inverse_law_fails_at_zero — Closed under the global context.",
+   "theorem": "Qinv",
+   "claim": "Об *операции* деления нужна оговорка: библиотечная функция деления определена для любой пары чисел и при нулевом делителе возвращает нуль — техническое соглашение, принятое, чтобы функция была определена всюду; закон обратного элемента библиотека доказывает при условии $x \\neq 0$.",
+   "external": true,
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 459,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "library_value_at_zero_is_not_a_solution : forall p : Q, ~ p == 0 -> ~ (0 * (p / 0) == p). Closed under the global context.",
+   "theorem": "library_value_at_zero_is_not_a_solution",
+   "file": "src/CommensurationQ.v",
+   "claim": "Уравнения соразмерности это соглашение не решает (§ 2.4; теорема `library_value_at_zero_is_not_a_solution`, файл `CommensurationQ.v`)."
+  },
+  {
+   "line": 725,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "mediant_between_Q : forall (a c : Z) (b d : positive), a # b < c # d -> a # b < (a + c) # (b + d) /\\ (a + c) # (b + d) < c # d. Closed under the global context.",
+   "theorem": "mediant_between_Q",
+   "file": "src/CommensurationQ.v",
+   "claim": "новая соразмерная позиция, полученная из двух данных (`mediant_between_Q`, файл `CommensurationQ.v`)."
+  },
+  {
+   "line": 854,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно и названо на странице прямо: Commens — пара Q с числом границ вместо числа частей (cm_parts x = cm_cuts x + 1); содержание несут теоремы.",
+   "theorem": "cm_to_of",
+   "file": "src/CommensurationQ.v",
+   "claim": "(`cm_to_of`, `cm_of_to`); это та же пара, прочитанная по границам, а не по частям."
+  },
+  {
+   "line": 854,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cm_of_to : forall x : Commens, cm_of_Q (cm_to_Q x) = x. Closed under the global context.",
+   "theorem": "cm_of_to",
+   "file": "src/CommensurationQ.v",
+   "claim": "(`cm_to_of`, `cm_of_to`); это та же пара, прочитанная по границам, а не по частям."
+  },
+  {
+   "line": 980,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q_bijection_values : (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) /\\ (forall q q', q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m, enum_Q n == enum_Q m <-> n = m). Closed under the global context.",
+   "theorem": "Q_bijection_values",
+   "file": "src/CountabilityQValues.v",
+   "claim": "что равные дроби — $2/4$ и $1/2$ — получают один номер и что обход не повторяет значений, доказано отдельно (теорема `Q_bijection_values`, файл `CountabilityQValues.v`)."
   }
  ]
 }

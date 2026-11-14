@@ -356,11 +356,11 @@
    "file": "src/Countability_Q.v",
    "claim": "Это *полная биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением* — уже не только для положительных, а для всего $ℚ$, конструктивно и *без единой аксиомы* (`Print Assumptions Q_bijection`: «Closed under the global context»).",
    "page_price": "без единой аксиомы; Closed under the global context",
-   "verdict": "mismatch-statement",
-   "note": "Цена верна: Closed under the global context. Утверждение Q_bijection — два круговых обхода. Для биекции значений (ℚ с точностью до Qeq) нужно ещё, чтобы номер был функцией значения: q == q' -> index_of_Q q = index_of_Q q' (равносильно: enum_Q n == enum_Q m -> n = m); такой теоремы в файле нет, и из двух обходов она не следует. Факт верен и доказывается без аксиом (Check.v: index_of_Q_Qeq, enum_Q_Qeq_injective, Q_bijection_values)."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): слова получили опору — биекция значений в полном виде записана теоремой Q_bijection_values (src/CountabilityQValues.v). Q_bijection (Countability_Q.v:759) — два круговых обхода; Closed under the global context."
   },
   {
-   "line": 565,
+   "line": 569,
    "theorem": "index_of_Q",
    "file": "src/Countability_Q.v",
    "claim": "Биекция связывает $ℕ$ с $ℚ$, *взятым с точностью до* `Qeq`: обратный ход проходит через приведение `Qred`, так что $2/4$ и $1/2$ получают один номер.",
@@ -369,16 +369,16 @@
    "note": "index_of_Q (:683) берёт числитель и знаменатель от Qred q; вычислено: index_of_Q (2 # 4) = index_of_Q (1 # 2) = 3 (Check.v). В общем виде (q == q' -> index_of_Q q = index_of_Q q') это в файле теоремой не записано — запись к стр. 559."
   },
   {
-   "line": 569,
-   "theorem": "Q_bijection",
-   "file": "src/Countability_Q.v",
-   "claim": "Потому `index_of_Q_enum_id` точна на $ℕ$ (равенство номеров), а `enum_Q_index_id` — с точностью до `Qeq` на $ℚ$; вместе это и есть биекция рациональных *значений*.",
+   "line": 573,
+   "theorem": "Q_bijection_values",
+   "file": "src/CountabilityQValues.v",
+   "claim": "Потому `index_of_Q_enum_id` точна на $ℕ$ (равенство номеров), а `enum_Q_index_id` — с точностью до `Qeq` на $ℚ$; вместе с тем, что равные дроби получают один номер (`index_of_Q_Qeq`), это и есть биекция рациональных *значений* (`Q_bijection_values`).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Первая половина фразы точна. «Вместе это и есть биекция значений» — двух обходов для этого недостаточно: схема I (E n) = n и E (I x) ≈ x выполняется и там, где E повторяет значения (Check.v, roundtrips_do_not_force_value_injectivity). Недостаёт согласованности index_of_Q с Qeq — запись к стр. 559."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): было «вместе это и есть биекция значений» при двух обходах. Q_bijection_values : (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) /\\ (forall q q', q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m, enum_Q n == enum_Q m <-> n = m). Closed under the global context."
   },
   {
-   "line": 577,
+   "line": 582,
    "theorem": "Q_positive_countable",
    "file": "src/Countability_Q.v",
    "claim": "Главная теорема `Q_positive_countable` утверждает, что перечисление инъективно и сюръективно, — то есть есть биекция для *положительных* рациональных чисел.",
@@ -387,16 +387,16 @@
    "note": "См. записи к стр. 478 и 491: соответствие номеров и несократимых пар; Closed under the global context."
   },
   {
-   "line": 585,
-   "theorem": "Q_bijection",
-   "file": "src/Countability_Q.v",
-   "claim": "и теорема `Q_bijection` доказывает их взаимную обратность — полную биекцию $ℕ \\leftrightarrow ℚ$ (с точностью до `Qeq`, 0 аксиом) уже для всего $ℚ$.",
+   "line": 590,
+   "theorem": "Q_bijection_values",
+   "file": "src/CountabilityQValues.v",
+   "claim": "и теорема `Q_bijection` доказывает их взаимную обратность, а теорема `Q_bijection_values` — полную биекцию $ℕ \\leftrightarrow ℚ$ (с точностью до `Qeq`, 0 аксиом) уже для всего $ℚ$.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Взаимная обратность доказана, цена верна (Closed under the global context). «Полная биекция с точностью до Qeq» — в утверждении Q_bijection нет согласованности номера с Qeq; запись к стр. 559."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): полная биекция отнесена к Q_bijection_values. Closed under the global context."
   },
   {
-   "line": 592,
+   "line": 598,
    "theorem": "Q_countable",
    "file": "src/Countability_Q.v",
    "claim": "Счётность рациональных чисел доказана — построением явного, вычислимого, конструктивно обоснованного обхода.",
@@ -405,7 +405,7 @@
    "note": "Q_countable (:610): forall q : Q, exists n : nat, enum_Q n == q; свидетель строится (Qred и index_of_QPos). Closed under the global context."
   },
   {
-   "line": 637,
+   "line": 643,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "Раз есть обход, ставящий натуральные числа и рациональные во взаимно однозначное соответствие, — всякая рациональная позиция имеет конечный номер обхода, достигается за конечное число шагов.",
@@ -415,7 +415,7 @@
    "assumptions": "enum_Q_index_id, Q_countable: Closed under the global context"
   },
   {
-   "line": 835,
+   "line": 841,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "через обратную процедуру и доказательство, что прямой и обратный обход точно обращают друг друга, — доказательство полностью конструктивное, без закона исключённого третьего (§ 3.5).",
@@ -425,7 +425,7 @@
    "assumptions": "path_cw_node_roundtrip, cw_node_path_roundtrip, index_of_QPos_enum, enum_QPos_index, Q_bijection: Closed under the global context"
   },
   {
-   "line": 848,
+   "line": 854,
    "theorem": "Q_countable",
    "file": "src/Countability_Q.v",
    "claim": "есть обход, который до всякого из них доходит за конечное число шагов, и обход этот построен, выписан и конструктивно обоснован.",
@@ -434,7 +434,7 @@
    "note": "Q_countable (:610), enum_Q_index_id (:703); Closed under the global context."
   },
   {
-   "line": 864,
+   "line": 870,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "Опорный файл — `Countability_Q.v` (776 строк, *без единой аксиомы*, даже без закона исключённого третьего): дерево Калкина–Уилфа, перечисление `enum_QPos` и обратная `index_of_QPos`, теорема `Q_positive_countable`;",
@@ -444,16 +444,16 @@
    "assumptions": "все 34 объявления файла: Closed under the global context"
   },
   {
-   "line": 869,
-   "theorem": "Q_bijection",
-   "file": "src/Countability_Q.v",
-   "claim": "Оговорка о статусе теперь снята: для всего $ℚ$ доказана *полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением — две круговые теоремы `enum_Q_index_id` и `index_of_Q_enum_id`, 0 аксиом — с единственной точностью, что $ℚ$ берётся до `Qeq` ($2/4$ и $1/2$ получают один номер), иначе биекции и быть не может.",
+   "line": 875,
+   "theorem": "Q_bijection_values",
+   "file": "src/CountabilityQValues.v",
+   "claim": "Оговорка о статусе теперь снята: для всего $ℚ$ доказана *полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением — две круговые теоремы `enum_Q_index_id` и `index_of_Q_enum_id` и лемма о том, что равные дроби получают один номер (`index_of_Q_Qeq`; сводная теорема `Q_bijection_values`, файл `CountabilityQValues.v`), 0 аксиом",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Две круговые теоремы доказаны, цена верна. «Полная биекция … до Qeq» требует третьего утверждения — что Qeq-равные дроби получают один номер; в файле оно проверяется вычислением на примерах, но теоремой не записано. Запись к стр. 559."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): названо третье утверждение, без которого биекции значений нет. Closed under the global context."
   },
   {
-   "line": 881,
+   "line": 889,
    "theorem": "Q_positive_countable",
    "file": "src/Countability_Q.v",
    "claim": "и *обратимость* прямого и обратного обхода (`enum_injective` и `enum_surjective` дают `Q_positive_countable`, § 3.5).",
@@ -462,16 +462,16 @@
    "note": "Доказательство Q_positive_countable (:474–478): split; exact enum_injective; exact enum_surjective."
   },
   {
-   "line": 883,
-   "theorem": "enum_coprime",
-   "file": "src/Countability_Q.v",
-   "claim": "И правило канона: несократимость (`enum_coprime`) — всякое рациональное *значение* встречается ровно раз, $2/4$ не появляется отдельно от $1/2$ (§ 3.3).",
+   "line": 891,
+   "theorem": "enum_QPos_each_value_once",
+   "file": "src/CountabilityQValues.v",
+   "claim": "И правило канона: несократимость (`enum_coprime`) — в обходе стоят только несократимые пары, и потому всякое положительное рациональное *значение* встречается ровно раз (`enum_QPos_each_value_once`), $2/4$ не появляется отдельно от $1/2$ (§ 3.3).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "enum_coprime (:189) утверждает одно: всякая пара обхода взаимно проста; отсюда «2/4 не появляется». «Всякое значение встречается ровно раз» доказано в файле для несократимых пар (enum_injective, enum_surjective); теоремы на уровне значений (qpos_to_Q (enum_QPos n) == qpos_to_Q (enum_QPos m) -> n = m) нет. Доказывается без аксиом (Check.v: enum_QPos_value_injective, enum_QPos_each_value_once)."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): enum_QPos_each_value_once : forall q, 0 < q -> exists n, qpos_to_Q (enum_QPos n) == q /\\ forall m, qpos_to_Q (enum_QPos m) == q -> m = n. Closed under the global context. enum_coprime (Countability_Q.v:189) — взаимная простота пар обхода."
   },
   {
-   "line": 890,
+   "line": 899,
    "theorem": "index_of_QPos",
    "file": "src/Countability_Q.v",
    "claim": "Роль, которую обход присваивает каждому рациональному, — его *номер*: место в перечислении, выдаваемое функцией `index_of_QPos`.",
@@ -480,25 +480,25 @@
    "note": "index_of_QPos (:144) — номер положительной несократимой пары: index_of_QPos_enum (:673), enum_QPos_index (:660). Номер произвольного рационального (с нулём и знаком) выдаёт index_of_Q (:683)."
   },
   {
-   "line": 911,
-   "theorem": "QPos",
-   "file": "src/Countability_Q.v",
-   "claim": "| навигация $\\leftrightarrow$ номер; обратимость | биекция `nat` $\\leftrightarrow$ `QPos` | Rule |",
+   "line": 920,
+   "theorem": "enum_QPos_bijection_coprime",
+   "file": "src/CountabilityQValues.v",
+   "claim": "| навигация $\\leftrightarrow$ номер; обратимость | биекция `nat` $\\leftrightarrow$ несократимые пары `QPos` (`enum_QPos_bijection_coprime`) | Rule |",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "QPos — тип всех пар positive * positive (:42; так и на стр. 209, 219–220). Обход взаимно однозначен с несократимыми парами, не со всем типом: пара (2,4) не достигается (Check.v, enum_QPos_misses_2_4), а index_of_QPos (2,4) = index_of_QPos (1,2) = 1."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора): было «биекция nat ↔ QPos». Обход взаимно однозначен с несократимыми парами: enum_QPos_bijection_coprime (три конъюнкта). Пара (2, 4) не достигается — enum_QPos_misses_2_4. Closed under the global context."
   },
   {
-   "line": 912,
-   "theorem": "enum_coprime",
-   "file": "src/Countability_Q.v",
-   "claim": "| несократимость (`enum_coprime`) | каждое значение однажды | Rule |",
+   "line": 921,
+   "theorem": "enum_QPos_each_value_once",
+   "file": "src/CountabilityQValues.v",
+   "claim": "| несократимость (`enum_coprime`) | каждое значение однажды (`enum_QPos_each_value_once`) | Rule |",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "enum_coprime утверждает взаимную простоту пар обхода; «каждое значение однажды» на уровне значений в файле теоремой не записано — запись к стр. 883."
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): «каждое значение однажды» — теорема enum_QPos_each_value_once. Closed under the global context."
   },
   {
-   "line": 917,
+   "line": 926,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "Обход сформирован верно: он *биективен* (прямой и обратный обращают друг друга, доказано) и *каноничен* по несократимости — ни одно значение не сосчитано дважды (нет $2/4$ рядом с $1/2$).",
@@ -508,7 +508,7 @@
    "assumptions": "index_of_QPos_enum, enum_QPos_index, Q_bijection, enum_coprime: Closed under the global context"
   },
   {
-   "line": 982,
+   "line": 991,
    "theorem": "gcd_cw_right",
    "file": "src/Countability_Q.v",
    "claim": "Сохранение несократимости доказано в файле `Countability_Q.v`: леммы о левом и правом ребёнке (наибольший общий делитель сохраняется при каждом из двух правил) и теорема `cw_node_coprime` — что во всяком узле дерева числитель и знаменатель взаимно просты.",
@@ -517,7 +517,7 @@
    "note": "Леммы gcd_cw_left (:151) и gcd_cw_right (:162), теорема cw_node_coprime (:174). Closed under the global context."
   },
   {
-   "line": 984,
+   "line": 993,
    "theorem": "fuel",
    "external": true,
    "claim": "Первый аргумент `fuel` — технический приём Rocq: он несёт заведомо достаточное число шагов, чтобы рекурсия была явно конечной.",
@@ -526,7 +526,7 @@
    "note": "`fuel` — имя первого аргумента функции path_to_node_fuel (src/Countability_Q.v:130), не объявление; рекурсия структурна по этому аргументу."
   },
   {
-   "line": 984,
+   "line": 993,
    "theorem": "path_fuel_cw_node",
    "file": "src/Countability_Q.v",
    "claim": "это стандартный способ сделать рекурсию структурной для проверяющей системы Rocq, и затем *доказывается* теоремой, что выбранного топлива всегда достаточно — что результат не зависит от того, сколько лишних шагов отпущено сверх нужного.",
@@ -535,7 +535,7 @@
    "note": "Lemma path_fuel_cw_node (:315): для узла cw_node p = (a, b) при любом запасе fuel >= a + b результат равен p; path_fuel_coprime_fuel_mono (:386) — то же для взаимно простых пар. Для сократимых пар утверждения в файле нет; независимость от запаса для всякой пары проверена в пробном файле (path_fuel_indep). Closed under the global context."
   },
   {
-   "line": 985,
+   "line": 994,
    "theorem": "path_cw_node_roundtrip",
    "file": "src/Countability_Q.v",
    "claim": "Теоремы о круговом обходе — `path_cw_node_roundtrip` и `cw_node_path_roundtrip` — доказаны в файле `Countability_Q.v`.",
@@ -544,13 +544,31 @@
    "note": "Оба объявления есть (:373, :439), вид объявления — Lemma. Closed under the global context."
   },
   {
-   "line": 986,
+   "line": 995,
    "theorem": null,
    "file": "src/Countability_Q.v",
    "claim": "Этот контраст уже намечен в комментариях к файлу `Countability_Q.v`: рациональные точки перечислимы как конечные объекты — пары числителя и знаменателя, — тогда как рациональные процессы (последовательности приближений) имеют иной статус и требуют отдельного разбора.",
    "page_price": "",
    "verdict": "ok",
    "note": "Комментарий раздела 10 файла (стр. 494–531): «THEOREM A (this file): ℚ⁺ is countable», «THEOREM B (ShrinkingIntervals): ℕ → (ℕ → ℚ) is not surjective». Это комментарий со ссылкой на другой файл; теоремы о процессах в Countability_Q.v нет. Страница так это и называет."
+  },
+  {
+   "line": 562,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "index_of_Q_Qeq : forall q q' : Q, q == q' -> index_of_Q q = index_of_Q q' (через Qred_complete). Closed under the global context. Что из двух обходов это не следует — roundtrips_do_not_force_value_injectivity.",
+   "theorem": "index_of_Q_Qeq",
+   "file": "src/CountabilityQValues.v",
+   "claim": "Сами две формулы дают взаимную обратность прямого и обратного хода; до биекции *значений* их доводит третье — номер зависит только от значения дроби (`index_of_Q_Qeq`), — и в полном виде биекция записана теоремой `Q_bijection_values` (файл `CountabilityQValues.v`, тоже без аксиом)."
+  },
+  {
+   "line": 562,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Q_bijection_values : (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) /\\ (forall q q', q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m, enum_Q n == enum_Q m <-> n = m). Closed under the global context.",
+   "theorem": "Q_bijection_values",
+   "file": "src/CountabilityQValues.v",
+   "claim": "Сами две формулы дают взаимную обратность прямого и обратного хода; до биекции *значений* их доводит третье — номер зависит только от значения дроби (`index_of_Q_Qeq`), — и в полном виде биекция записана теоремой `Q_bijection_values` (файл `CountabilityQValues.v`, тоже без аксиом)."
   }
  ]
 }

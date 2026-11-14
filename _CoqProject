@@ -2142,3 +2142,6 @@ src/foundation/BitStringCount.v
 src/foundation/StructuralPath.v
 src/foundation/FourPathsOneSeries.v
 src/CoordinateIntegersLaws.v
+src/CommensurationQ.v
+src/CountabilityQValues.v
+src/Sqrt2Processes.v

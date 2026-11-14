@@ -33028,7 +33028,140 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 420,
+  "line": 183,
+  "claim": "$p/q$ есть $p$-кратное повторение малого шага $1/q$ (`position_is_multiple_of_small_step`; $q$ малых шагов составляют единицу — `small_steps_make_unit`; файл `CommensurationQ.v`).",
+  "theorem": "position_is_multiple_of_small_step",
+  "file": "src/CommensurationQ.v",
+  "file_line": 163,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma position_is_multiple_of_small_step : forall (p : Z) (q : positive), p # q == inject_Z p * (1 # q).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "position_is_multiple_of_small_step : forall (p : Z) (q : positive), p # q == inject_Z p * (1 # q). Closed under the global context.",
+  "lines": [
+   184,
+   851
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 183,
+  "claim": "$p/q$ есть $p$-кратное повторение малого шага $1/q$ (`position_is_multiple_of_small_step`; $q$ малых шагов составляют единицу — `small_steps_make_unit`; файл `CommensurationQ.v`).",
+  "theorem": "small_steps_make_unit",
+  "file": "src/CommensurationQ.v",
+  "file_line": 167,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma small_steps_make_unit : forall q : positive, inject_Z (Z.pos q) * (1 # q) == 1.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "small_steps_make_unit : forall q : positive, inject_Z (Z.pos q) * (1 # q) == 1. Closed under the global context.",
+  "lines": [
+   185
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 185,
+  "claim": "единицу — `small_steps_make_unit`; файл `CommensurationQ.v`). Соразмерность",
+  "theorem": null,
+  "file": "src/CommensurationQ.v",
+  "file_line": null,
+  "file_num": null,
+  "kind": "файл",
+  "statement": null,
+  "assumptions": "not-checked",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "упоминание файла; проверено существование",
+  "lines": [
+   185,
+   365,
+   461,
+   726,
+   848
+  ],
+  "auto": true,
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 364,
+  "claim": "Формально (файл `CommensurationQ.v`): при $q = 0$ и $p \\neq 0$ шага нет (`zero_parts_no_step`), при $q = 0$ и $p = 0$ годится всякий (`zero_parts_any_step`), и уравнение задаёт шаг — решение есть и оно одно — в точности при $q \\neq 0$ (`commensuration_determines_iff`).",
+  "theorem": "commensuration_determines_iff",
+  "file": "src/CommensurationQ.v",
+  "file_line": 115,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem commensuration_determines_iff : forall q p : Q, determines_step q p <-> ~ q == 0.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "commensuration_determines_iff : forall q p : Q, determines_step q p <-> ~ q == 0, где determines_step q p := exists u, q * u == p /\\ forall u', q * u' == p -> u' == u. Closed under the global context.",
+  "lines": [
+   368,
+   850
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 364,
+  "claim": "Формально (файл `CommensurationQ.v`): при $q = 0$ и $p \\neq 0$ шага нет (`zero_parts_no_step`), при $q = 0$ и $p = 0$ годится всякий (`zero_parts_any_step`), и уравнение задаёт шаг — решение есть и оно одно — в точности при $q \\neq 0$ (`commensuration_determines_iff`).",
+  "theorem": "zero_parts_any_step",
+  "file": "src/CommensurationQ.v",
+  "file_line": 107,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem zero_parts_any_step : forall u : Q, 0 * u == 0.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "zero_parts_any_step : forall u : Q, 0 * u == 0. Closed under the global context.",
+  "lines": [
+   367
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 364,
+  "claim": "Формально (файл `CommensurationQ.v`): при $q = 0$ и $p \\neq 0$ шага нет (`zero_parts_no_step`), при $q = 0$ и $p = 0$ годится всякий (`zero_parts_any_step`), и уравнение задаёт шаг — решение есть и оно одно — в точности при $q \\neq 0$ (`commensuration_determines_iff`).",
+  "theorem": "zero_parts_no_step",
+  "file": "src/CommensurationQ.v",
+  "file_line": 103,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem zero_parts_no_step : forall p u : Q, ~ p == 0 -> ~ (0 * u == p).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "zero_parts_no_step : forall p u : Q, ~ p == 0 -> ~ (0 * u == p). Closed under the global context.",
+  "lines": [
+   366
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 427,
   "claim": "Как и для целых чисел, ToS не строит рациональные числа заново: для них есть готовая конструкция в стандартной библиотеке Rocq, и ToS берёт её рабочим инструментом.[^1]",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
@@ -33042,24 +33175,25 @@
   "checked": "2026-11-13",
   "note": "Q — запись Stdlib.QArith.QArith_base.Q; собственного типа рациональных в src нет (поиск по объявлениям записей и типов), QArith подключают 1640 файлов src из 2048. Сравнение с целыми точно только в части типа: для целых в проекте есть ещё собственная запись FormalDiff с изоморфизмом Z (см. запись к стр. 826).",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 428,
+  "line": 435,
   "claim": "Record Q : Set := Qmake { Qnum : Z; Qden : positive }.",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
@@ -33073,24 +33207,25 @@
   "checked": "2026-11-13",
   "note": "Совпадает с исходником библиотеки: Stdlib/QArith/QArith_base.v:23 `Record Q : Set := Qmake {Qnum : Z; Qden : positive}.`; то же отвечает команда Print Q. Отметка инструмента «ОТЛИЧАЕТСЯ» ложная: блок сравнён с `Variable Q : Type` из src/cs/PumpingPigeonhole.v:38.",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 434,
+  "line": 441,
   "claim": "Поле `Qnum` — числитель — есть целое число: позиция в двусторонней разметке целых чисел",
   "theorem": "Qnum",
   "file": null,
@@ -33104,15 +33239,15 @@
   "checked": "2026-11-13",
   "note": "Qnum : Q -> Z — поле записи Q (Stdlib.QArith.QArith_base.Qnum).",
   "lines": [
-   434,
-   525,
-   598
+   441,
+   539,
+   614
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 436,
+  "line": 443,
   "claim": "Поле `Qden` — знаменатель — есть число типа `positive`: на сколько частей разделён прежний шаг.",
   "theorem": "Qden",
   "file": null,
@@ -33126,14 +33261,14 @@
   "checked": "2026-11-13",
   "note": "Qden : Q -> positive — поле записи Q (Stdlib.QArith.QArith_base.Qden).",
   "lines": [
-   437,
-   525
+   444,
+   539
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 439,
+  "line": 446,
   "claim": "Тип `positive` в Rocq — это *технический* индуктивный тип положительных целых в двоичной записи, часть стандартной библиотеки",
   "theorem": "positive",
   "file": null,
@@ -33147,19 +33282,19 @@
   "checked": "2026-11-13",
   "note": "Inductive positive := xI | xO | xH (Corelib.Numbers.BinNums; в Rocq 9 объявление лежит в базовой библиотеке Corelib, обозначения — в Stdlib.PArith). В формализации то же имя носит поле записи Distinction (Distinction.positive : Distinction -> Prop) — другое объявление.",
   "lines": [
-   437,
-   439,
-   439,
    444,
+   446,
+   446,
    451,
-   526,
-   600
+   465,
+   540,
+   616
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 444,
+  "line": 451,
   "claim": "`positive` не имеет нуля среди своих значений, и потому знаменатель *конструктивно ненулевой*.",
   "theorem": "Qden",
   "file": null,
@@ -33173,15 +33308,15 @@
   "checked": "2026-11-13",
   "note": "У типа positive три конструктора, нуля среди значений нет; forall x : Q, Z.pos (Qden x) <> 0 доказано в пробном файле (denominator_never_zero, Closed under the global context).",
   "lines": [
-   437,
-   525
+   444,
+   539
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 445,
-  "claim": "Тем условие $q \\neq 0$ (§ 2.4) оказывается *встроенным в самый тип*: знаменатель просто не может быть нулём, и деления на нуль формальная запись не допускает не запретом, а устройством типа.",
+  "line": 452,
+  "claim": "Тем условие $q \\neq 0$ (§ 2.4) оказывается *встроенным в самый тип*: знаменатель просто не может быть нулём, и дроби с нулевым знаменателем формальная запись не допускает не запретом, а устройством типа.",
   "theorem": "Qinv",
   "file": null,
   "file_line": null,
@@ -33190,15 +33325,54 @@
   "statement": null,
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Верно для записи дроби: p # q с нулевым q не записать. Операция деления той же библиотеки определена на всех парах: Qinv 0 = 0 (QArith_base.v:254), Qdiv x y := x * / y, поэтому x / 0 == 0, а 1 / 0 вычисляется в 0. Закон обратного доказан под условием: Qmult_inv_r : forall x, ~ x == 0 -> x * / x == 1.",
+  "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): было «деления на нуль формальная запись не допускает». Типом исключена дробь с нулевым знаменателем (denominator_never_zero, src/CommensurationQ.v); об операции деления страница теперь говорит отдельно.",
   "lines": []
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 469,
+  "line": 455,
+  "claim": "Об *операции* деления нужна оговорка: библиотечная функция деления определена для любой пары чисел и при нулевом делителе возвращает нуль — техническое соглашение, принятое, чтобы функция была определена всюду; закон обратного элемента библиотека доказывает при условии $x \\neq 0$.",
+  "theorem": "Qinv",
+  "file": null,
+  "file_line": null,
+  "file_num": null,
+  "kind": "внешнее",
+  "statement": null,
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Верно: Qinv 0 = 0 (QArith_base.v:254), Qdiv x y := x * / y; Qmult_inv_r : ~ x == 0 -> x * / x == 1. В src/CommensurationQ.v: Qinv_of_zero, Qdiv_by_zero (x / 0 == 0), inverse_law_fails_at_zero — Closed under the global context.",
+  "lines": []
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 459,
+  "claim": "Уравнения соразмерности это соглашение не решает (§ 2.4; теорема `library_value_at_zero_is_not_a_solution`, файл `CommensurationQ.v`).",
+  "theorem": "library_value_at_zero_is_not_a_solution",
+  "file": "src/CommensurationQ.v",
+  "file_line": 132,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem library_value_at_zero_is_not_a_solution : forall p : Q, ~ p == 0 -> ~ (0 * (p / 0) == p).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "library_value_at_zero_is_not_a_solution : forall p : Q, ~ p == 0 -> ~ (0 * (p / 0) == p). Closed under the global context.",
+  "lines": [
+   461
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 483,
   "claim": "Тип `Q`, как показывает запись выше, — это `Record`: пара из числителя и знаменателя. Он *не* является quotient type",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
@@ -33212,24 +33386,25 @@
   "checked": "2026-11-13",
   "note": "Q — запись с одним конструктором Qmake; отождествления равнозначных дробей в самом типе нет.",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 469,
+  "line": 483,
   "claim": "Тип `Q`, как показывает запись выше, — это `Record`:",
   "theorem": "Record",
   "file": null,
@@ -33243,18 +33418,18 @@
   "checked": "2026-11-13",
   "note": "ключевое слово Rocq, не имя",
   "lines": [
-   469,
-   524,
-   828,
-   855,
-   872
+   483,
+   538,
+   845,
+   880,
+   897
   ],
   "auto": true
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 472,
+  "line": 486,
   "claim": "Записи `1#2` и `2#4` суть *разные* объекты типа `Q` — разные пары, — и по структурному равенству записей (`=`) они *не* равны.",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
@@ -33268,24 +33443,25 @@
   "checked": "2026-11-13",
   "note": "(1 # 2) <> (2 # 4) доказано в пробном файле (half_neq_two_quarters, discriminate; Closed under the global context).",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 475,
+  "line": 489,
   "claim": "Рациональное равенство задаётся *отдельным* отношением эквивалентности — `Qeq`, которое в Rocq принято записывать знаком `==`; и вот по нему, по `Qeq`, дроби `1#2` и `2#4` равны.",
   "theorem": "Qeq",
   "file": null,
@@ -33299,32 +33475,32 @@
   "checked": "2026-11-13",
   "note": "Qeq p q := Qnum p * QDen q = Qnum q * QDen p (QArith_base.v:48), знак == (там же, :54); Q_Setoid : Equivalence Qeq (:170). (1 # 2) == (2 # 4) — reflexivity (пробный файл, half_Qeq_two_quarters).",
   "lines": [
-   476,
-   477,
-   481,
-   483,
-   485,
-   494,
+   490,
+   491,
+   495,
    497,
-   498,
-   531,
-   532,
-   798,
-   830,
-   840,
-   852,
-   869,
-   871,
-   881,
-   883,
-   891,
-   955
+   499,
+   508,
+   511,
+   512,
+   547,
+   548,
+   815,
+   847,
+   865,
+   877,
+   894,
+   896,
+   906,
+   908,
+   916,
+   980
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 482,
+  "line": 496,
   "claim": "Стандартная библиотека реализует первое и второе раздельно: `Q` есть тип пар, а `Qeq` — отношение на нём;",
   "theorem": "Qeq",
   "file": null,
@@ -33338,32 +33514,32 @@
   "checked": "2026-11-13",
   "note": "Q — запись, Qeq : Q -> Q -> Prop — отдельное определение; фактор-типа в библиотеке QArith нет.",
   "lines": [
-   476,
-   477,
-   481,
-   483,
-   485,
-   494,
+   490,
+   491,
+   495,
    497,
-   498,
-   531,
-   532,
-   798,
-   830,
-   840,
-   852,
-   869,
-   871,
-   881,
-   883,
-   891,
-   955
+   499,
+   508,
+   511,
+   512,
+   547,
+   548,
+   815,
+   847,
+   865,
+   877,
+   894,
+   896,
+   906,
+   908,
+   916,
+   980
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 523,
+  "line": 537,
   "claim": "*Рациональные числа ToS берёт готовыми из стандартной библиотеки Rocq: тип `Q` — запись (`Record`) из числителя `Qnum` (целое число) и знаменателя `Qden` (тип `positive` — технический тип положительных целых, без нуля).",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
@@ -33377,25 +33553,26 @@
   "checked": "2026-11-13",
   "note": "Совпадает с объявлением QArith_base.v:23; собственного типа рациональных в src нет.",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 527,
-  "claim": "Ненулевость знаменателя встроена в тип: деления на нуль формальная запись не допускает устройством, а не запретом.",
+  "line": 541,
+  "claim": "Ненулевость знаменателя встроена в тип: дроби с нулевым знаменателем формальная запись не допускает устройством, а не запретом; операция деления в библиотеке определена всюду и при нулевом делителе возвращает нуль по техническому соглашению.",
   "theorem": "Qinv",
   "file": null,
   "file_line": null,
@@ -33404,15 +33581,15 @@
   "statement": null,
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "То же, что на стр. 445: устройством типа исключена дробь с нулевым знаменателем; операция деления библиотеки тотальна (Qinv 0 = 0, x / 0 == 0), а закон обратного Qmult_inv_r стоит под условием ~ x == 0.",
+  "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): то же уточнение в итоге раздела. Qdiv_by_zero : forall x, x / 0 == 0 (src/CommensurationQ.v), Closed under the global context.",
   "lines": []
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 528,
+  "line": 544,
   "claim": "Тип `Q` — не quotient type: `1#2` и `2#4` суть разные записи, равные не структурно, а по отдельному рациональному равенству `Qeq` (знак `==`), то есть при $p \\cdot s = r \\cdot q$.",
   "theorem": "Qeq",
   "file": null,
@@ -33426,32 +33603,32 @@
   "checked": "2026-11-13",
   "note": "(p # q) == (r # s) <-> p * Z.pos s = r * Z.pos q — по определению Qeq (пробный файл, Qeq_is_cross_product, Closed under the global context).",
   "lines": [
-   476,
-   477,
-   481,
-   483,
-   485,
-   494,
+   490,
+   491,
+   495,
    497,
-   498,
-   531,
-   532,
-   798,
-   830,
-   840,
-   852,
-   869,
-   871,
-   881,
-   883,
-   891,
-   955
+   499,
+   508,
+   511,
+   512,
+   547,
+   548,
+   815,
+   847,
+   865,
+   877,
+   894,
+   896,
+   906,
+   908,
+   916,
+   980
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 567,
+  "line": 583,
   "claim": "Целые числа суть кольцо: сумма, разность и произведение целых чисел всегда целые.",
   "theorem": "Z_ring",
   "file": "src/stdlib/RingField.v",
@@ -33470,7 +33647,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 577,
+  "line": 593,
   "claim": "Рациональные числа суть поле: у всякого ненулевого рационального числа $p/q$ есть обратное по умножению — $q/p$, — и произведение их есть единица.",
   "theorem": "Q_field",
   "file": "src/stdlib/RingField.v",
@@ -33489,7 +33666,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 597,
+  "line": 613,
   "claim": "В $ℚ$ числитель может быть отрицательным (поле `Qnum` есть целое число, $ℤ$), а знаменатель в реализации `Q` обязан быть положительным (тип `positive`).",
   "theorem": "Qnum",
   "file": null,
@@ -33503,15 +33680,15 @@
   "checked": "2026-11-13",
   "note": "Qnum : Q -> Z, Qden : Q -> positive — по объявлению записи Q.",
   "lines": [
-   434,
-   525,
-   598
+   441,
+   539,
+   614
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 602,
+  "line": 618,
   "claim": "Знак при обращении *переносится в числитель*: обратное к $(-3)/4$ есть $-4/3$, а не $4/(-3)$.",
   "theorem": "Qinv",
   "file": null,
@@ -33529,7 +33706,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 702,
+  "line": 718,
   "claim": "если $a/b < c/d$ — две соразмерные позиции, то между ними лежит, например, их *медианта*",
   "theorem": "mediant_between_left",
   "file": "src/stdlib/SternBrocot.v",
@@ -33548,7 +33725,28 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 796,
+  "line": 725,
+  "claim": "новая соразмерная позиция, полученная из двух данных (`mediant_between_Q`, файл `CommensurationQ.v`).",
+  "theorem": "mediant_between_Q",
+  "file": "src/CommensurationQ.v",
+  "file_line": 191,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma mediant_between_Q : forall (a c : Z) (b d : positive), a # b < c # d -> a # b < (a + c) # (b + d) /\\ (a + c) # (b + d) < c # d.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "mediant_between_Q : forall (a c : Z) (b d : positive), a # b < c # d -> a # b < (a + c) # (b + d) /\\ (a + c) # (b + d) < c # d. Closed under the global context.",
+  "lines": [
+   726
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 813,
   "claim": "Дана формальная запись — тип $ℚ$ стандартной библиотеки, рациональное число как запись с рациональным равенством `Qeq` (§ 2.5).",
   "theorem": "Qeq",
   "file": null,
@@ -33562,51 +33760,69 @@
   "checked": "2026-11-13",
   "note": "Соответствует § 2.5: запись Q и отношение Qeq библиотеки QArith.",
   "lines": [
-   476,
-   477,
-   481,
-   483,
-   485,
-   494,
+   490,
+   491,
+   495,
    497,
-   498,
-   531,
-   532,
-   798,
-   830,
-   840,
-   852,
-   869,
-   871,
-   881,
-   883,
-   891,
-   955
+   499,
+   508,
+   511,
+   512,
+   547,
+   548,
+   815,
+   847,
+   865,
+   877,
+   894,
+   896,
+   906,
+   908,
+   916,
+   980
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 826,
-  "claim": "Оговорка о статусе, как и для целых (Глава III.1): ToS не строит свой тип рациональных — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5);",
-  "theorem": "FormalDiff",
-  "file": "src/CoordinateIntegers.v",
-  "file_line": 41,
-  "file_num": 89,
-  "kind": "Record",
-  "statement": "Record FormalDiff := mkFD { fd_pos : nat ; fd_neg : nat }.",
+  "line": 843,
+  "claim": "Оговорка о статусе: рабочий тип рациональных ToS не строит — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5); машинно проверены полевая арифметика `Q` и отношение `Qeq`.",
+  "theorem": "Q_field",
+  "file": "src/stdlib/RingField.v",
+  "file_line": 314,
+  "file_num": 1618,
+  "kind": "Definition",
+  "statement": "Definition Q_field : Field := mkField Q_ring Qinv Q_field_inv_compat Q_field_inv_r.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "статус: о рациональных сказано верно, сравнение с целыми устарело. Для целых проект строит собственную запись FormalDiff (CoordinateIntegers.v:41) и доказывает её соответствие Z (fd_to_of_Z, fd_equiv_iff_Z, согласованность сложения и умножения; 13 Qed) — так говорит и оговорка Главы III.1 (стр. 1121–1128). Для рациональных такого файла нет.",
+  "note": "В проекте законы поля для Q собраны записью Q_field : Field (stdlib/RingField.v:314); Closed under the global context.",
   "lines": [],
-  "file_sha": "85760b7e34d3290ffc5f439bf67cc566548b8119"
+  "file_sha": "95dfcaece7961bec7d2a1c584d5219eef3af0274"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 828,
+  "line": 843,
+  "claim": "Оговорка о статусе: рабочий тип рациональных ToS не строит — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5); машинно проверены полевая арифметика `Q` и отношение `Qeq`.",
+  "theorem": "Qsft",
+  "file": null,
+  "file_line": null,
+  "file_num": null,
+  "kind": "внешнее",
+  "statement": null,
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "В библиотеке: Qsft : field_theory … Qeq (Stdlib/QArith/Qfield.v:31), Qmult_inv_r, Q_Setoid : Equivalence Qeq. Рабочий тип — стандартный Q; это верно.",
+  "lines": []
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 845,
   "claim": "`Q` из `QArith` (`Record` числитель/знаменатель,",
   "theorem": "QArith",
   "file": null,
@@ -33620,54 +33836,79 @@
   "checked": "2026-11-13",
   "note": "имя не объявлено на верхнем уровне формализации; найдено командой Locate (конструктор, поле записи или стандартная библиотека)",
   "lines": [
-   828,
-   976,
-   976
+   845,
+   1002
   ],
   "auto": true
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 829,
-  "claim": "машинно проверенное — сама полевая арифметика `Q` и отношение `Qeq`, а соразмерное чтение несёт проза.",
-  "theorem": "Q_field",
-  "file": "src/stdlib/RingField.v",
-  "file_line": 314,
-  "file_num": 1618,
-  "kind": "Definition",
-  "statement": "Definition Q_field : Field := mkField Q_ring Qinv Q_field_inv_compat Q_field_inv_r.",
-  "assumptions": "Closed under the global context",
-  "page_price": "",
-  "verdict": "ok",
-  "checked": "2026-11-13",
-  "note": "В проекте законы поля для Q с равенством Qeq собраны записью Q_field : Field (RingField.v:314), кольца — Q_ring (:282); Closed under the global context. Глава эти объявления не называет.",
-  "lines": [],
-  "file_sha": "95dfcaece7961bec7d2a1c584d5219eef3af0274"
- },
- {
-  "batch": "audit-part-03",
-  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 829,
-  "claim": "машинно проверенное — сама полевая арифметика `Q` и отношение `Qeq`, а соразмерное чтение несёт проза.",
-  "theorem": "Qsft",
-  "file": null,
-  "file_line": null,
+  "line": 847,
+  "claim": "Соразмерное чтение, как и у целых (Глава III.1), имеет теперь свой файл-якорь — `CommensurationQ.v`: уравнение соразмерности задаёт шаг в точности при $q \\neq 0$ (`commensuration_determines_iff`), позиция $p/q$ есть малый шаг $1/q$, взятый $p$ раз (`position_is_multiple_of_small_step`), и дана запись соразмерной позиции `Commens` — число взятых шагов и число новых границ внутри единичного шага, — взаимно однозначно отвечающая `Q` (`cm_to_of`, `cm_of_to`);",
+  "theorem": "Commens",
+  "file": "src/CommensurationQ.v",
+  "file_line": 211,
   "file_num": null,
-  "kind": "внешнее",
-  "statement": null,
+  "kind": "Record",
+  "statement": "Record Commens := mkCm { cm_steps : Z ; cm_cuts : nat }.",
   "assumptions": "Closed under the global context",
   "page_price": "",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "В библиотеке: Qsft : field_theory 0 1 Qplus Qmult Qminus Qopp Qdiv Qinv Qeq (Stdlib/QArith/Qfield.v:31), Qmult_inv_r, Q_Setoid : Equivalence Qeq. Объявлений о соразмерности в смысле главы в src нет (слово встречается только в файлах о соизмеримости углов с π).",
-  "lines": []
+  "note": "исправлено 14.11 (Часть III, шаг 2, слово автора) (формализацией; развилка — А): было «как и для целых: ToS не строит свой тип». Record Commens := mkCm { cm_steps : Z ; cm_cuts : nat }; cm_to_of : cm_to_Q (cm_of_Q q) = q; cm_of_to : cm_of_Q (cm_to_Q x) = x; cm_eq_iff_Qeq, cm_add_to_Q, cm_mul_to_Q — Closed under the global context.",
+  "lines": [
+   852
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 830,
-  "claim": "Файл `Countability_Q.v` (дерево Калкина–Уилфа) есть якорь *следующей* главы и работает с *положительными* парами `QPos` (§ 2.8.5).",
+  "line": 854,
+  "claim": "(`cm_to_of`, `cm_of_to`); это та же пара, прочитанная по границам, а не по частям.",
+  "theorem": "cm_of_to",
+  "file": "src/CommensurationQ.v",
+  "file_line": 231,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma cm_of_to : forall x : Commens, cm_of_Q (cm_to_Q x) = x.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "cm_of_to : forall x : Commens, cm_of_Q (cm_to_Q x) = x. Closed under the global context.",
+  "lines": [
+   854
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 854,
+  "claim": "(`cm_to_of`, `cm_of_to`); это та же пара, прочитанная по границам, а не по частям.",
+  "theorem": "cm_to_of",
+  "file": "src/CommensurationQ.v",
+  "file_line": 224,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma cm_to_of : forall q : Q, cm_to_Q (cm_of_Q q) = q.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Верно и названо на странице прямо: Commens — пара Q с числом границ вместо числа частей (cm_parts x = cm_cuts x + 1); содержание несут теоремы.",
+  "lines": [
+   854
+  ],
+  "file_sha": "4033774dd9f94d804a77e35be7e4eaf72b930f3a"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 855,
+  "claim": "Файл `Countability_Q.v` (дерево Калкина–Уилфа) есть якорь *следующей* главы: он работает с *положительными* парами `QPos` и достраивает обход до всего $ℚ$ (§ 2.8.5).",
   "theorem": "QPos",
   "file": "src/Countability_Q.v",
   "file_line": 42,
@@ -33678,17 +33919,17 @@
   "page_price": "",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "QPos := (positive * positive)%type (Countability_Q.v:42). Описание неполное: разделы файла со стр. 534 работают со всем Q — enum_Q, Q_countable, index_of_Q, Q_bijection; об этом глава говорит ниже (стр. 949–956).",
+  "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): описание файла дополнено. QPos := (positive * positive)%type (Countability_Q.v:42); разделы со стр. 534 — enum_Q, Q_countable, index_of_Q, Q_bijection для всего Q.",
   "lines": [
-   833,
-   945
+   858,
+   970
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 913,
+  "line": 938,
   "claim": "Формально тип $ℚ$ *существует* как тип языка Rocq, и в этом смысле по рациональным числам можно квантифицировать",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
@@ -33702,24 +33943,25 @@
   "checked": "2026-11-13",
   "note": "Q : Set — запись, то есть индуктивный тип с одним конструктором (Locate Q: Inductive Stdlib.QArith.QArith_base.Q); кванторы forall q : Q стоят, например, в Q_countable и Q_bijection.",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 941,
+  "line": 966,
   "claim": "В формализации ближайшим якорем следующей главы служит файл `Countability_Q.v` Rocq-репозитория ToS. Он конструктивно перечисляет *положительные* рациональные числа через дерево Калкина–Уилфа",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -33737,7 +33979,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 944,
+  "line": 969,
   "claim": "положительное рациональное представлено там парой `QPos` (числитель и знаменатель, оба положительные)",
   "theorem": "QPos",
   "file": "src/Countability_Q.v",
@@ -33751,15 +33993,15 @@
   "checked": "2026-11-13",
   "note": "Definition QPos := (positive * positive)%type (Countability_Q.v:42). Тип содержит и сократимые пары, например (2, 4); обход их не посещает — на странице это учтено словами «всякой несократимой пары».",
   "lines": [
-   833,
-   945
+   858,
+   970
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 945,
+  "line": 970,
   "claim": "функция `enum_QPos` обходит дерево",
   "theorem": "enum_QPos",
   "file": "src/Countability_Q.v",
@@ -33773,14 +34015,14 @@
   "checked": "2026-11-13",
   "note": "enum_QPos n := cw_node (Pos.of_nat (S n)) (Countability_Q.v:106): узлы в порядке двоичных номеров; первые значения (1,1), (1,2), (2,1), (1,3), (3,2) получены вычислением.",
   "lines": [
-   946
+   971
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 946,
+  "line": 971,
   "claim": "теорема `Q_positive_countable` доказывает — вполне конструктивно, без единой аксиомы, — что этот обход инъективен и достигает всякой несократимой пары.",
   "theorem": "Q_positive_countable",
   "file": "src/Countability_Q.v",
@@ -33794,14 +34036,14 @@
   "checked": "2026-11-13",
   "note": "Countability_Q.v:471: (forall n m, enum_QPos n = enum_QPos m -> n = m) /\\ (forall a b, Z.gcd (Z.pos a) (Z.pos b) = 1 -> exists n, enum_QPos n = (a, b)). Closed under the global context. Обращение для положительных: index_of_QPos с леммами enum_QPos_index (:660) и index_of_QPos_enum (:673).",
   "lines": [
-   947
+   972
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 949,
+  "line": 974,
   "claim": "*полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением доказана не только для положительных, но и для всего $ℚ$ — со знаком и нулём.",
   "theorem": "Q_bijection",
   "file": "src/Countability_Q.v",
@@ -33811,18 +34053,18 @@
   "statement": "Theorem Q_bijection : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q).",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Countability_Q.v:759 доказывает две круговые формулы: index_of_Q (enum_Q n) = n и enum_Q (index_of_Q q) == q. Для биекции с рациональными, взятыми с точностью до Qeq, нужно ещё, чтобы номер не зависел от записи дроби: p == q -> index_of_Q p = index_of_Q q. Этой леммы в src нет; из двух формул она не следует. Она верна и доказана в пробном файле в две строки (index_of_Q_compat, Closed under the global context).",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией, шаг 3): биекция значений в полном виде — Q_bijection_values (src/CountabilityQValues.v); страница называет её ниже в том же абзаце. Q_bijection (Countability_Q.v:759) — два круговых обхода; Closed under the global context.",
   "lines": [
-   954
+   979
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 952,
+  "line": 977,
   "claim": "Функция `enum_Q` приписывает обходу знак и позицию нуля",
   "theorem": "enum_Q",
   "file": "src/Countability_Q.v",
@@ -33836,14 +34078,14 @@
   "checked": "2026-11-13",
   "note": "Countability_Q.v:582: enum_Q 0 = 0; enum_Q (S m) = ± qpos_to_Q (enum_QPos (Nat.div2 m)) по чётности m. Вычислено: enum_Q 0..4 = 0, 1, -1, 1#2, -1#2.",
   "lines": [
-   952
+   977
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 953,
+  "line": 978,
   "claim": "обратная `index_of_Q` по рациональному находит его номер",
   "theorem": "index_of_Q",
   "file": "src/Countability_Q.v",
@@ -33857,15 +34099,15 @@
   "checked": "2026-11-13",
   "note": "Countability_Q.v:683: номер берётся по несократимой записи Qred q — 0 для нуля, S (2k) для положительных, S (S (2k)) для отрицательных. Определение вычислимо: index_of_Q (1#2) = 3, index_of_Q (-3#4) = 28.",
   "lines": [
-   953
+   978
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 954,
-  "claim": "теорема `Q_bijection` доказывает — тоже без аксиом, — что они взаимно обратны (с точностью до `Qeq`: $2/4$ и $1/2$ — получают один номер).",
+  "line": 979,
+  "claim": "теорема `Q_bijection` доказывает — тоже без аксиом, — что они взаимно обратны (с точностью до `Qeq`);",
   "theorem": "Q_bijection",
   "file": "src/Countability_Q.v",
   "file_line": 759,
@@ -33876,16 +34118,59 @@
   "page_price": "без аксиом",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Взаимная обратность доказана: первая формула — равенством номеров, вторая — с точностью до Qeq; Closed under the global context. Пример в скобках верен вычислением (index_of_Q (2#4) = index_of_Q (1#2) = 3), но утверждением теоремы не является: см. запись к стр. 949.",
+  "note": "Взаимная обратность: первая формула — равенством номеров, вторая — с точностью до Qeq. Closed under the global context.",
   "lines": [
-   954
+   979
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 966,
+  "line": 980,
+  "claim": "что равные дроби — $2/4$ и $1/2$ — получают один номер и что обход не повторяет значений, доказано отдельно (теорема `Q_bijection_values`, файл `CountabilityQValues.v`).",
+  "theorem": "Q_bijection_values",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 79,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem Q_bijection_values : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q) /\\ (forall q q' : Q, q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m : nat, enum_Q n == enum_Q m <-> n = m).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Q_bijection_values : (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) /\\ (forall q q', q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m, enum_Q n == enum_Q m <-> n = m). Closed under the global context.",
+  "lines": [
+   982
+  ],
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 982,
+  "claim": "отдельно (теорема `Q_bijection_values`, файл `CountabilityQValues.v`).",
+  "theorem": null,
+  "file": "src/CountabilityQValues.v",
+  "file_line": null,
+  "file_num": null,
+  "kind": "файл",
+  "statement": null,
+  "assumptions": "not-checked",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "упоминание файла; проверено существование",
+  "lines": [
+   982
+  ],
+  "auto": true,
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+  "line": 992,
   "claim": "Файл `Countability_Q.v` прямо отмечает этот контраст: рациональные точки перечислимы, а процессы приближения так не перечисляются.",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -33903,8 +34188,8 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 976,
-  "claim": "Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), `QArith` есть часть самого Rocq, не Rocq-репозитория ToS.",
+  "line": 1002,
+  "claim": "Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), он принадлежит библиотеке Rocq, а не Rocq-репозиторию ToS.",
   "theorem": "Q",
   "file": "src/Countability_Q.v",
   "file_line": null,
@@ -33915,27 +34200,28 @@
   "page_price": "",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Объявление стоит в Stdlib.QArith.QArith_base (QArith_base.v:23), модуль QArith его вывозит. В репозитории ToS типа Q нет — это верно. В Rocq 9 стандартная библиотека поставляется отдельным пакетом Stdlib (в установке — user-contrib/Stdlib), тип Z объявлен в базовой библиотеке Corelib.Numbers.BinNums.",
+  "note": "исправлено 14.11 (Часть III, шаг 2, слово автора): вторая фраза. Объявление — Stdlib.QArith.QArith_base; в репозитории ToS типа Q нет.",
   "lines": [
-   469,
-   473,
    483,
-   486,
-   524,
-   528,
-   599,
-   828,
-   829,
-   858,
-   976
+   487,
+   497,
+   500,
+   538,
+   544,
+   615,
+   845,
+   846,
+   853,
+   883,
+   1002
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
-  "line": 976,
-  "claim": "[^1]: Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), `QArith` есть часть самого Rocq, не Rocq-репозитория ToS.",
+  "line": 1002,
+  "claim": "[^1]: Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), он принадлежит библиотеке Rocq, а не Rocq-репозиторию ToS.",
   "theorem": "Z",
   "file": null,
   "file_line": null,
@@ -33948,7 +34234,7 @@
   "checked": "2026-11-13",
   "note": "имя не объявлено на верхнем уровне формализации; найдено командой Locate (конструктор, поле записи или стандартная библиотека)",
   "lines": [
-   976
+   1002
   ],
   "auto": true
  },
@@ -33970,9 +34256,9 @@
   "note": "Q_positive_countable (:471) — конъюнкция инъективности enum_QPos (равенство пар) и сюръективности на взаимно простые пары. Для всего ℚ форма иная: сюръекция Q_countable (:610) и два круговых обхода Q_bijection (:759). Closed under the global context.",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34032,8 +34318,8 @@
    209,
    219,
    220,
-   899,
-   911
+   908,
+   920
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34082,7 +34368,7 @@
   "note": "имя не объявлено на верхнем уровне формализации; найдено командой Locate (конструктор, поле записи или стандартная библиотека)",
   "lines": [
    214,
-   911
+   920
   ],
   "auto": true
  },
@@ -34103,8 +34389,8 @@
   "checked": "2026-11-13",
   "note": "enum_coprime (:189): всякая пара обхода взаимно проста; enum_surjective (:450): всякая взаимно простая пара достигается. Пара (2,4) в обход не входит (Check.v, enum_QPos_misses_2_4). Closed under the global context.",
   "lines": [
-   884,
-   912
+   892,
+   921
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34144,8 +34430,8 @@
   "checked": "2026-11-13",
   "note": "Definition cw_left (ab : QPos) : QPos := let (a, b) := ab in (a, a + b) (:74); блок кода совпадает. Одноимённое объявление есть ещё в src/stdlib/CalkinWilf.v:57; глава называет Countability_Q.v.",
   "lines": [
-   879,
-   910
+   887,
+   919
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34166,8 +34452,8 @@
   "checked": "2026-11-13",
   "note": "Definition cw_right (ab : QPos) : QPos := let (a, b) := ab in (a + b, b) (:78); блок кода совпадает. Одноимённое объявление есть ещё в src/stdlib/CalkinWilf.v:58.",
   "lines": [
-   879,
-   910
+   887,
+   919
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34190,7 +34476,7 @@
   "lines": [
    346,
    399,
-   983
+   992
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34248,7 +34534,7 @@
   "checked": "2026-11-13",
   "note": "Theorem cw_node_coprime : forall p, let (a, b) := cw_node p in Z.gcd (Z.pos a) (Z.pos b) = 1%Z (:174); индукция по пути. Closed under the global context.",
   "lines": [
-   982
+   991
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34287,7 +34573,7 @@
   "checked": "2026-11-13",
   "note": "cw_node_coprime (:174), для обхода — enum_coprime (:189). Closed under the global context.",
   "lines": [
-   982
+   991
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34329,7 +34615,7 @@
   "lines": [
    346,
    399,
-   983
+   992
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34417,8 +34703,8 @@
   "lines": [
    372,
    400,
-   866,
-   983
+   872,
+   992
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34441,8 +34727,8 @@
   "lines": [
    372,
    400,
-   866,
-   983
+   872,
+   992
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34482,8 +34768,8 @@
   "checked": "2026-11-13",
   "note": "Definition path_to_node (:140): path_to_node_fuel (Pos.to_nat a + Pos.to_nat b) a b. Достаточность запаса доказана для узлов дерева и взаимно простых пар (path_fuel_cw_node, :315; path_fuel_coprime_fuel_mono, :386); для произвольной пары — пробный файл, path_fuel_indep.",
   "lines": [
-   574,
-   984
+   579,
+   993
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34504,10 +34790,10 @@
   "checked": "2026-11-13",
   "note": "Definition index_of_QPos (ab : QPos) : nat := Pos.to_nat (path_to_node ab) - 1 (:144); блок кода совпадает с исходником.",
   "lines": [
-   867,
-   892,
-   913,
-   984
+   873,
+   901,
+   922,
+   993
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34528,7 +34814,7 @@
   "checked": "2026-11-13",
   "note": "Lemma path_cw_node_roundtrip : forall p, path_to_node (cw_node p) = p (:373). Closed under the global context.",
   "lines": [
-   985
+   994
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34549,7 +34835,7 @@
   "checked": "2026-11-13",
   "note": "Lemma cw_node_path_roundtrip : forall a b, Z.gcd (Z.pos a) (Z.pos b) = 1%Z -> cw_node (path_to_node (a, b)) = (a, b) (:439) — в форме «дробь → путь → дробь»; в форме «дробь → номер → дробь» — enum_QPos_index (:660). Closed under the global context.",
   "lines": [
-   985
+   994
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34570,7 +34856,7 @@
   "checked": "2026-11-13",
   "note": "Проверено: cw_node (path_to_node (2,4)) = (1,2) (Check.v, roundtrip_fails_off_coprime); в общем виде следует из cw_node_coprime — в узлах стоят только взаимно простые пары.",
   "lines": [
-   985
+   994
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34592,9 +34878,9 @@
   "note": "Блок кода (стр. 482–485) совпадает с исходником (:471). Утверждение: инъективность enum_QPos (равенство пар) и сюръективность на взаимно простые пары; вместе с enum_coprime (:189) это взаимно однозначное соответствие номеров и несократимых пар. Closed under the global context.",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34615,7 +34901,7 @@
   "checked": "2026-11-13",
   "note": "Theorem enum_injective : forall n m, enum_QPos n = enum_QPos m -> n = m (:291) — равенство пар. Closed under the global context.",
   "lines": [
-   882
+   890
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34636,7 +34922,7 @@
   "checked": "2026-11-13",
   "note": "Theorem enum_surjective : forall a b : positive, Z.gcd (Z.pos a) (Z.pos b) = 1%Z -> exists n : nat, enum_QPos n = (a, b) (:450); свидетель — index_of_QPos (a, b). Условие взаимной простоты страница называет. Closed under the global context.",
   "lines": [
-   882
+   890
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34658,9 +34944,9 @@
   "note": "В Rocq — соответствие номеров и несократимых пар (равенство пар); страница оговаривает это на стр. 514–516 («в несократимом представлении»). Чтение на уровне значений (с точностью до Qeq) отдельной теоремой не закреплено — заметки, расхождение 1, вторая часть.",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34682,9 +34968,9 @@
   "note": "Print Assumptions Q_positive_countable: Closed under the global context. Разбор случаев в доказательствах идёт по разрешимым сравнениям (Pos.compare_spec, Pos.eqb_spec, Pos.ltb_spec).",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34724,9 +35010,9 @@
   "note": "Точно: вторая половина теоремы имеет посылку Z.gcd (Z.pos a) (Z.pos b) = 1%Z, обе половины говорят о парах типа QPos.",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34786,8 +35072,8 @@
   "note": "Definition enum_Q (:582) записана через Nat.div2 и Nat.even; вид формулы страницы дают леммы enum_Q_hit_pos и enum_Q_hit_neg. Вычислено (Check.v): enum_Q 0…6 = 0, 1, −1, 1/2, −1/2, 2, −2.",
   "lines": [
    544,
-   583,
-   868
+   588,
+   874
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34809,8 +35095,8 @@
   "note": "Definition index_of_Q (:683): разбор Qnum (Qred q) на Z0, Zpos a, Zneg a; для ненулевых — S (2 * index_of_QPos (a, Qden (Qred q))) и S (S (2 * …)).",
   "lines": [
    547,
-   585,
-   869
+   590,
+   875
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34832,8 +35118,8 @@
   "note": "Theorem enum_Q_index_id : forall q : Q, enum_Q (index_of_Q q) == q (:703) — равенство Qeq. Closed under the global context.",
   "lines": [
    551,
-   570,
-   872
+   574,
+   878
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34855,8 +35141,8 @@
   "note": "Theorem index_of_Q_enum_id : forall n : nat, index_of_Q (enum_Q n) = n (:727) — равенство номеров. Closed under the global context.",
   "lines": [
    553,
-   569,
-   872
+   573,
+   878
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34878,8 +35164,8 @@
   "note": "Совпадает с утверждением Q_bijection (:759) с точностью до пометок типов (`n : nat`, `q : Q`).",
   "lines": [
    555,
-   586,
-   869
+   591,
+   875
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
@@ -34896,20 +35182,90 @@
   "statement": "Theorem Q_bijection : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q).",
   "assumptions": "Closed under the global context",
   "page_price": "без единой аксиомы; Closed under the global context",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Цена верна: Closed under the global context. Утверждение Q_bijection — два круговых обхода. Для биекции значений (ℚ с точностью до Qeq) нужно ещё, чтобы номер был функцией значения: q == q' -> index_of_Q q = index_of_Q q' (равносильно: enum_Q n == enum_Q m -> n = m); такой теоремы в файле нет, и из двух обходов она не следует. Факт верен и доказывается без аксиом (Check.v: index_of_Q_Qeq, enum_Q_Qeq_injective, Q_bijection_values).",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): слова получили опору — биекция значений в полном виде записана теоремой Q_bijection_values (src/CountabilityQValues.v). Q_bijection (Countability_Q.v:759) — два круговых обхода; Closed under the global context.",
   "lines": [
    555,
-   586,
-   869
+   591,
+   875
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 565,
+  "line": 562,
+  "claim": "Сами две формулы дают взаимную обратность прямого и обратного хода; до биекции *значений* их доводит третье — номер зависит только от значения дроби (`index_of_Q_Qeq`), — и в полном виде биекция записана теоремой `Q_bijection_values` (файл `CountabilityQValues.v`, тоже без аксиом).",
+  "theorem": "index_of_Q_Qeq",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 54,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma index_of_Q_Qeq : forall q q' : Q, q == q' -> index_of_Q q = index_of_Q q'.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "index_of_Q_Qeq : forall q q' : Q, q == q' -> index_of_Q q = index_of_Q q' (через Qred_complete). Closed under the global context. Что из двух обходов это не следует — roundtrips_do_not_force_value_injectivity.",
+  "lines": [
+   565,
+   576,
+   879
+  ],
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
+  "line": 562,
+  "claim": "Сами две формулы дают взаимную обратность прямого и обратного хода; до биекции *значений* их доводит третье — номер зависит только от значения дроби (`index_of_Q_Qeq`), — и в полном виде биекция записана теоремой `Q_bijection_values` (файл `CountabilityQValues.v`, тоже без аксиом).",
+  "theorem": "Q_bijection_values",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 79,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem Q_bijection_values : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q) /\\ (forall q q' : Q, q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m : nat, enum_Q n == enum_Q m <-> n = m).",
+  "assumptions": "Closed under the global context",
+  "page_price": "без аксиом",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Q_bijection_values : (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) /\\ (forall q q', q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m, enum_Q n == enum_Q m <-> n = m). Closed under the global context.",
+  "lines": [
+   566,
+   577,
+   592,
+   880
+  ],
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
+  "line": 566,
+  "claim": "`Q_bijection_values` (файл `CountabilityQValues.v`, тоже без аксиом).",
+  "theorem": null,
+  "file": "src/CountabilityQValues.v",
+  "file_line": null,
+  "file_num": null,
+  "kind": "файл",
+  "statement": null,
+  "assumptions": "not-checked",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "упоминание файла; проверено существование",
+  "lines": [
+   566,
+   880
+  ],
+  "auto": true,
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
+  "line": 569,
   "claim": "Биекция связывает $ℕ$ с $ℚ$, *взятым с точностью до* `Qeq`: обратный ход проходит через приведение `Qred`, так что $2/4$ и $1/2$ получают один номер.",
   "theorem": "index_of_Q",
   "file": "src/Countability_Q.v",
@@ -34924,15 +35280,15 @@
   "note": "index_of_Q (:683) берёт числитель и знаменатель от Qred q; вычислено: index_of_Q (2 # 4) = index_of_Q (1 # 2) = 3 (Check.v). В общем виде (q == q' -> index_of_Q q = index_of_Q q') это в файле теоремой не записано — запись к стр. 559.",
   "lines": [
    547,
-   585,
-   869
+   590,
+   875
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 566,
+  "line": 570,
   "claim": "точностью до* `Qeq`: обратный ход проходит через приведение",
   "theorem": "Qeq",
   "file": null,
@@ -34946,17 +35302,17 @@
   "checked": "2026-11-13",
   "note": "имя не объявлено на верхнем уровне формализации; найдено командой Locate (конструктор, поле записи или стандартная библиотека)",
   "lines": [
-   566,
-   571,
-   587,
-   873
+   570,
+   575,
+   593,
+   881
   ],
   "auto": true
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 567,
+  "line": 571,
   "claim": "`Qred`, так что $2/4$ и $1/2$ получают один номер. Иначе и",
   "theorem": "Qred",
   "file": null,
@@ -34970,37 +35326,38 @@
   "checked": "2026-11-13",
   "note": "имя не объявлено на верхнем уровне формализации; найдено командой Locate (конструктор, поле записи или стандартная библиотека)",
   "lines": [
-   567
+   571
   ],
   "auto": true
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 569,
-  "claim": "Потому `index_of_Q_enum_id` точна на $ℕ$ (равенство номеров), а `enum_Q_index_id` — с точностью до `Qeq` на $ℚ$; вместе это и есть биекция рациональных *значений*.",
-  "theorem": "Q_bijection",
-  "file": "src/Countability_Q.v",
-  "file_line": 759,
-  "file_num": 94,
+  "line": 573,
+  "claim": "Потому `index_of_Q_enum_id` точна на $ℕ$ (равенство номеров), а `enum_Q_index_id` — с точностью до `Qeq` на $ℚ$; вместе с тем, что равные дроби получают один номер (`index_of_Q_Qeq`), это и есть биекция рациональных *значений* (`Q_bijection_values`).",
+  "theorem": "Q_bijection_values",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 79,
+  "file_num": null,
   "kind": "Theorem",
-  "statement": "Theorem Q_bijection : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q).",
+  "statement": "Theorem Q_bijection_values : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q) /\\ (forall q q' : Q, q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m : nat, enum_Q n == enum_Q m <-> n = m).",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Первая половина фразы точна. «Вместе это и есть биекция значений» — двух обходов для этого недостаточно: схема I (E n) = n и E (I x) ≈ x выполняется и там, где E повторяет значения (Check.v, roundtrips_do_not_force_value_injectivity). Недостаёт согласованности index_of_Q с Qeq — запись к стр. 559.",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): было «вместе это и есть биекция значений» при двух обходах. Q_bijection_values : (forall n, index_of_Q (enum_Q n) = n) /\\ (forall q, enum_Q (index_of_Q q) == q) /\\ (forall q q', q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m, enum_Q n == enum_Q m <-> n = m). Closed under the global context.",
   "lines": [
-   555,
-   586,
-   869
+   566,
+   577,
+   592,
+   880
   ],
-  "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 577,
+  "line": 582,
   "claim": "Главная теорема `Q_positive_countable` утверждает, что перечисление инъективно и сюръективно, — то есть есть биекция для *положительных* рациональных чисел.",
   "theorem": "Q_positive_countable",
   "file": "src/Countability_Q.v",
@@ -35015,39 +35372,40 @@
   "note": "См. записи к стр. 478 и 491: соответствие номеров и несократимых пар; Closed under the global context.",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 585,
-  "claim": "и теорема `Q_bijection` доказывает их взаимную обратность — полную биекцию $ℕ \\leftrightarrow ℚ$ (с точностью до `Qeq`, 0 аксиом) уже для всего $ℚ$.",
-  "theorem": "Q_bijection",
-  "file": "src/Countability_Q.v",
-  "file_line": 759,
-  "file_num": 94,
+  "line": 590,
+  "claim": "и теорема `Q_bijection` доказывает их взаимную обратность, а теорема `Q_bijection_values` — полную биекцию $ℕ \\leftrightarrow ℚ$ (с точностью до `Qeq`, 0 аксиом) уже для всего $ℚ$.",
+  "theorem": "Q_bijection_values",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 79,
+  "file_num": null,
   "kind": "Theorem",
-  "statement": "Theorem Q_bijection : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q).",
+  "statement": "Theorem Q_bijection_values : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q) /\\ (forall q q' : Q, q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m : nat, enum_Q n == enum_Q m <-> n = m).",
   "assumptions": "Closed under the global context",
   "page_price": "0 аксиом",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Взаимная обратность доказана, цена верна (Closed under the global context). «Полная биекция с точностью до Qeq» — в утверждении Q_bijection нет согласованности номера с Qeq; запись к стр. 559.",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): полная биекция отнесена к Q_bijection_values. Closed under the global context.",
   "lines": [
-   555,
-   586,
-   869
+   566,
+   577,
+   592,
+   880
   ],
-  "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 592,
+  "line": 598,
   "claim": "Счётность рациональных чисел доказана — построением явного, вычислимого, конструктивно обоснованного обхода.",
   "theorem": "Q_countable",
   "file": "src/Countability_Q.v",
@@ -35066,7 +35424,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 637,
+  "line": 643,
   "claim": "Раз есть обход, ставящий натуральные числа и рациональные во взаимно однозначное соответствие, — всякая рациональная позиция имеет конечный номер обхода, достигается за конечное число шагов.",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -35084,7 +35442,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 835,
+  "line": 841,
   "claim": "через обратную процедуру и доказательство, что прямой и обратный обход точно обращают друг друга, — доказательство полностью конструктивное, без закона исключённого третьего (§ 3.5).",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -35102,7 +35460,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 848,
+  "line": 854,
   "claim": "есть обход, который до всякого из них доходит за конечное число шагов, и обход этот построен, выписан и конструктивно обоснован.",
   "theorem": "Q_countable",
   "file": "src/Countability_Q.v",
@@ -35121,7 +35479,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 864,
+  "line": 870,
   "claim": "Опорный файл — `Countability_Q.v` (776 строк, *без единой аксиомы*, даже без закона исключённого третьего): дерево Калкина–Уилфа, перечисление `enum_QPos` и обратная `index_of_QPos`, теорема `Q_positive_countable`;",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -35139,30 +35497,31 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 869,
-  "claim": "Оговорка о статусе теперь снята: для всего $ℚ$ доказана *полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением — две круговые теоремы `enum_Q_index_id` и `index_of_Q_enum_id`, 0 аксиом — с единственной точностью, что $ℚ$ берётся до `Qeq` ($2/4$ и $1/2$ получают один номер), иначе биекции и быть не может.",
-  "theorem": "Q_bijection",
-  "file": "src/Countability_Q.v",
-  "file_line": 759,
-  "file_num": 94,
+  "line": 875,
+  "claim": "Оговорка о статусе теперь снята: для всего $ℚ$ доказана *полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением — две круговые теоремы `enum_Q_index_id` и `index_of_Q_enum_id` и лемма о том, что равные дроби получают один номер (`index_of_Q_Qeq`; сводная теорема `Q_bijection_values`, файл `CountabilityQValues.v`), 0 аксиом",
+  "theorem": "Q_bijection_values",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 79,
+  "file_num": null,
   "kind": "Theorem",
-  "statement": "Theorem Q_bijection : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q).",
+  "statement": "Theorem Q_bijection_values : (forall n : nat, index_of_Q (enum_Q n) = n) /\\ (forall q : Q, enum_Q (index_of_Q q) == q) /\\ (forall q q' : Q, q == q' <-> index_of_Q q = index_of_Q q') /\\ (forall n m : nat, enum_Q n == enum_Q m <-> n = m).",
   "assumptions": "Closed under the global context",
   "page_price": "0 аксиом",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Две круговые теоремы доказаны, цена верна. «Полная биекция … до Qeq» требует третьего утверждения — что Qeq-равные дроби получают один номер; в файле оно проверяется вычислением на примерах, но теоремой не записано. Запись к стр. 559.",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): названо третье утверждение, без которого биекции значений нет. Closed under the global context.",
   "lines": [
-   555,
-   586,
-   869
+   566,
+   577,
+   592,
+   880
   ],
-  "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 881,
+  "line": 889,
   "claim": "и *обратимость* прямого и обратного обхода (`enum_injective` и `enum_surjective` дают `Q_positive_countable`, § 3.5).",
   "theorem": "Q_positive_countable",
   "file": "src/Countability_Q.v",
@@ -35177,38 +35536,38 @@
   "note": "Доказательство Q_positive_countable (:474–478): split; exact enum_injective; exact enum_surjective.",
   "lines": [
    515,
-   577,
-   867,
-   883
+   582,
+   873,
+   891
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 883,
-  "claim": "И правило канона: несократимость (`enum_coprime`) — всякое рациональное *значение* встречается ровно раз, $2/4$ не появляется отдельно от $1/2$ (§ 3.3).",
-  "theorem": "enum_coprime",
-  "file": "src/Countability_Q.v",
-  "file_line": 189,
-  "file_num": 94,
-  "kind": "Corollary",
-  "statement": "Corollary enum_coprime : forall n, let (a, b) := enum_QPos n in Z.gcd (Z.pos a) (Z.pos b) = 1%Z.",
+  "line": 891,
+  "claim": "И правило канона: несократимость (`enum_coprime`) — в обходе стоят только несократимые пары, и потому всякое положительное рациональное *значение* встречается ровно раз (`enum_QPos_each_value_once`), $2/4$ не появляется отдельно от $1/2$ (§ 3.3).",
+  "theorem": "enum_QPos_each_value_once",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 134,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem enum_QPos_each_value_once : forall q : Q, 0 < q -> exists n : nat, qpos_to_Q (enum_QPos n) == q /\\ forall m : nat, qpos_to_Q (enum_QPos m) == q -> m = n.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "enum_coprime (:189) утверждает одно: всякая пара обхода взаимно проста; отсюда «2/4 не появляется». «Всякое значение встречается ровно раз» доказано в файле для несократимых пар (enum_injective, enum_surjective); теоремы на уровне значений (qpos_to_Q (enum_QPos n) == qpos_to_Q (enum_QPos m) -> n = m) нет. Доказывается без аксиом (Check.v: enum_QPos_value_injective, enum_QPos_each_value_once).",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): enum_QPos_each_value_once : forall q, 0 < q -> exists n, qpos_to_Q (enum_QPos n) == q /\\ forall m, qpos_to_Q (enum_QPos m) == q -> m = n. Closed under the global context. enum_coprime (Countability_Q.v:189) — взаимная простота пар обхода.",
   "lines": [
-   884,
-   912
+   894,
+   921
   ],
-  "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 890,
+  "line": 899,
   "claim": "Роль, которую обход присваивает каждому рациональному, — его *номер*: место в перечислении, выдаваемое функцией `index_of_QPos`.",
   "theorem": "index_of_QPos",
   "file": "src/Countability_Q.v",
@@ -35222,64 +35581,60 @@
   "checked": "2026-11-13",
   "note": "index_of_QPos (:144) — номер положительной несократимой пары: index_of_QPos_enum (:673), enum_QPos_index (:660). Номер произвольного рационального (с нулём и знаком) выдаёт index_of_Q (:683).",
   "lines": [
-   867,
-   892,
-   913,
-   984
+   873,
+   901,
+   922,
+   993
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 911,
-  "claim": "| навигация $\\leftrightarrow$ номер; обратимость | биекция `nat` $\\leftrightarrow$ `QPos` | Rule |",
-  "theorem": "QPos",
-  "file": "src/Countability_Q.v",
-  "file_line": 42,
-  "file_num": 94,
-  "kind": "Definition",
-  "statement": "Definition QPos := (positive * positive)%type.",
+  "line": 920,
+  "claim": "| навигация $\\leftrightarrow$ номер; обратимость | биекция `nat` $\\leftrightarrow$ несократимые пары `QPos` (`enum_QPos_bijection_coprime`) | Rule |",
+  "theorem": "enum_QPos_bijection_coprime",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 149,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem enum_QPos_bijection_coprime : (forall n : nat, let (a, b) := enum_QPos n in Z.gcd (Z.pos a) (Z.pos b) = 1%Z) /\\ (forall n : nat, index_of_QPos (enum_QPos n) = n) /\\ (forall a b : positive, Z.gcd (Z.pos a) (Z.pos b) = 1%Z -> enum_QPos (index_of_QPos (a, b)) = (a, b)).",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "QPos — тип всех пар positive * positive (:42; так и на стр. 209, 219–220). Обход взаимно однозначен с несократимыми парами, не со всем типом: пара (2,4) не достигается (Check.v, enum_QPos_misses_2_4), а index_of_QPos (2,4) = index_of_QPos (1,2) = 1.",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора): было «биекция nat ↔ QPos». Обход взаимно однозначен с несократимыми парами: enum_QPos_bijection_coprime (три конъюнкта). Пара (2, 4) не достигается — enum_QPos_misses_2_4. Closed under the global context.",
   "lines": [
-   209,
-   219,
-   220,
-   899,
-   911
+   920
   ],
-  "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 912,
-  "claim": "| несократимость (`enum_coprime`) | каждое значение однажды | Rule |",
-  "theorem": "enum_coprime",
-  "file": "src/Countability_Q.v",
-  "file_line": 189,
-  "file_num": 94,
-  "kind": "Corollary",
-  "statement": "Corollary enum_coprime : forall n, let (a, b) := enum_QPos n in Z.gcd (Z.pos a) (Z.pos b) = 1%Z.",
+  "line": 921,
+  "claim": "| несократимость (`enum_coprime`) | каждое значение однажды (`enum_QPos_each_value_once`) | Rule |",
+  "theorem": "enum_QPos_each_value_once",
+  "file": "src/CountabilityQValues.v",
+  "file_line": 134,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem enum_QPos_each_value_once : forall q : Q, 0 < q -> exists n : nat, qpos_to_Q (enum_QPos n) == q /\\ forall m : nat, qpos_to_Q (enum_QPos m) == q -> m = n.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "enum_coprime утверждает взаимную простоту пар обхода; «каждое значение однажды» на уровне значений в файле теоремой не записано — запись к стр. 883.",
+  "note": "исправлено 14.11 (Часть III, шаг 3, слово автора) (формализацией): «каждое значение однажды» — теорема enum_QPos_each_value_once. Closed under the global context.",
   "lines": [
-   884,
-   912
+   894,
+   921
   ],
-  "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
+  "file_sha": "22a5ff00f3a48c5aa8eb84d5cc65fe7d26e2dc10"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 917,
+  "line": 926,
   "claim": "Обход сформирован верно: он *биективен* (прямой и обратный обращают друг друга, доказано) и *каноничен* по несократимости — ни одно значение не сосчитано дважды (нет $2/4$ рядом с $1/2$).",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -35297,7 +35652,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 982,
+  "line": 991,
   "claim": "Сохранение несократимости доказано в файле `Countability_Q.v`: леммы о левом и правом ребёнке (наибольший общий делитель сохраняется при каждом из двух правил) и теорема `cw_node_coprime` — что во всяком узле дерева числитель и знаменатель взаимно просты.",
   "theorem": "gcd_cw_right",
   "file": "src/Countability_Q.v",
@@ -35316,7 +35671,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 984,
+  "line": 993,
   "claim": "Первый аргумент `fuel` — технический приём Rocq: он несёт заведомо достаточное число шагов, чтобы рекурсия была явно конечной.",
   "theorem": "fuel",
   "file": null,
@@ -35330,14 +35685,14 @@
   "checked": "2026-11-13",
   "note": "`fuel` — имя первого аргумента функции path_to_node_fuel (src/Countability_Q.v:130), не объявление; рекурсия структурна по этому аргументу.",
   "lines": [
-   984,
-   984
+   993,
+   993
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 984,
+  "line": 993,
   "claim": "это стандартный способ сделать рекурсию структурной для проверяющей системы Rocq, и затем *доказывается* теоремой, что выбранного топлива всегда достаточно — что результат не зависит от того, сколько лишних шагов отпущено сверх нужного.",
   "theorem": "path_fuel_cw_node",
   "file": "src/Countability_Q.v",
@@ -35356,7 +35711,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 985,
+  "line": 994,
   "claim": "Теоремы о круговом обходе — `path_cw_node_roundtrip` и `cw_node_path_roundtrip` — доказаны в файле `Countability_Q.v`.",
   "theorem": "path_cw_node_roundtrip",
   "file": "src/Countability_Q.v",
@@ -35370,14 +35725,14 @@
   "checked": "2026-11-13",
   "note": "Оба объявления есть (:373, :439), вид объявления — Lemma. Closed under the global context.",
   "lines": [
-   985
+   994
   ],
   "file_sha": "94df41ff1a997d5ed4effff3384773f6dda8243f"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/03 Счётность рациональных чисел.md",
-  "line": 986,
+  "line": 995,
   "claim": "Этот контраст уже намечен в комментариях к файлу `Countability_Q.v`: рациональные точки перечислимы как конечные объекты — пары числителя и знаменателя, — тогда как рациональные процессы (последовательности приближений) имеют иной статус и требуют отдельного разбора.",
   "theorem": null,
   "file": "src/Countability_Q.v",
@@ -35485,7 +35840,7 @@
   "checked": "2026-11-13",
   "note": "Lemma sq_even_implies_even : forall n : Z, Z.even (n * n) = true -> Z.even n = true (:32). Closed. Доказана через Z.even_mul (чётность произведения), а не обращением леммы о нечётных; sq_odd_of_odd (:42) в цепочке не используется.",
   "lines": [
-   1044
+   1064
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
@@ -35506,7 +35861,7 @@
   "checked": "2026-11-13",
   "note": "Lemma sq_eq_2sq_both_even : forall p q : Z, p * p = 2 * (q * q) -> Z.even p = true /\\ Z.even q = true (:74). Closed. Ход доказательства совпадает с изложенным на странице.",
   "lines": [
-   1045
+   1065
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
@@ -35527,7 +35882,7 @@
   "checked": "2026-11-13",
   "note": "Lemma descent_step : forall p q : Z, p * p = 2 * (q * q) -> exists p' q' : Z, p = 2 * p' /\\ q = 2 * q' /\\ p' * p' = 2 * (q' * q') (:118). Closed.",
   "lines": [
-   1046
+   1066
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
@@ -35548,7 +35903,7 @@
   "checked": "2026-11-13",
   "note": "Доказательство descent_to_zero: induction n using lt_wf_ind, где n = Z.to_nat (Z.abs p + Z.abs q) (:146–176); случаи p = 0, q = 0 разобраны прямо, спуск применён к паре без нулей.",
   "lines": [
-   1047
+   1067
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
@@ -35569,7 +35924,7 @@
   "checked": "2026-11-13",
   "note": "Lemma descent_to_zero : forall n : nat, forall p q : Z, Z.to_nat (Z.abs p + Z.abs q) = n -> p * p = 2 * (q * q) -> p = 0 /\\ q = 0 (:146). Closed.",
   "lines": [
-   1047
+   1067
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
@@ -35629,8 +35984,8 @@
   "note": "Corollary sqrt2_not_in_Q : ~ (exists r : Q, r * r == 2) (:217) — в исходнике объявлено следствием теоремы no_rational_sqrt2. Closed.",
   "lines": [
    250,
-   947,
-   1048
+   966,
+   1068
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
@@ -35651,8 +36006,7 @@
   "checked": "2026-11-13",
   "note": "Fixpoint sqrt2_newton (:19) — итерация x' = (x + 2/x)/2 от 1. Что процесс «даёт» корень в смысле предиката стр. 340–348, в src теоремой не записано; страница говорит это сама (стр. 352–358). Проверено в пробном файле: newton_gives_sqrt2, Closed.",
   "lines": [
-   355,
-   1049
+   1069
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
@@ -35671,14 +36025,237 @@
   "page_price": "",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "В файле: newton_0, newton_1, newton_2, cf_0, cf_1, cf_2, newton_quality_2, cf_quality_2, newton_better_at_2 (13 Qed). Теорем о монотонном улучшении и о сходимости нет ни в файле, ни в src. Обе доказуемы без аксиом (пробный файл: newton_strictly_improves, newton_sq_to_2).",
+  "note": "О самом файле RefinementSqrt.v верно: в нём этих двух теорем нет. Обе доказаны в src/Sqrt2Processes.v (newton_strictly_improves, newton_quality_bound) — страница говорит это следующей фразой (шаг 4, 14.11).",
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 352,
-  "claim": "Стоит сразу сказать и о статусе этого предиката в репозитории: само определение `sqrt2_process` есть естественная формализация, но теоремы вида «`sqrt2_newton` удовлетворяет `sqrt2_process`» в текущем виде `RefinementSqrt.v` ещё не доказаны;",
+  "line": 327,
+  "claim": "Обе доказаны отдельно — в файле `Sqrt2Processes.v`: каждый шаг строго точнее предыдущего (`newton_strictly_improves`), а квадратичная погрешность на шаге $n$ не превосходит $1/2^n$ (`newton_quality_bound`), так что процесс достигает любой точности (§ 4.5).",
+  "theorem": "newton_quality_bound",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 361,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma newton_quality_bound : forall n : nat, Qabs (sqrt2_newton n * sqrt2_newton n - 2) * SI.Qpow2 n <= 1.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_quality_bound : forall n, Qabs (sqrt2_newton n * sqrt2_newton n - 2) * SI.Qpow2 n <= 1 (:361). Closed under the global context. Достижение любой точности — newton_gives_pos_sqrt2.",
+  "lines": [
+   330,
+   864
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 327,
+  "claim": "Обе доказаны отдельно — в файле `Sqrt2Processes.v`: каждый шаг строго точнее предыдущего (`newton_strictly_improves`), а квадратичная погрешность на шаге $n$ не превосходит $1/2^n$ (`newton_quality_bound`), так что процесс достигает любой точности (§ 4.5).",
+  "theorem": "newton_strictly_improves",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 410,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem newton_strictly_improves : forall n : nat, sqrt2_quality (sqrt2_newton (S n)) < sqrt2_quality (sqrt2_newton n).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_strictly_improves : forall n, sqrt2_quality (sqrt2_newton (S n)) < sqrt2_quality (sqrt2_newton n) (:410). Closed under the global context.",
+  "lines": [
+   329
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 328,
+  "claim": "`Sqrt2Processes.v`: каждый шаг строго точнее предыдущего",
+  "theorem": null,
+  "file": "src/Sqrt2Processes.v",
+  "file_line": null,
+  "file_num": null,
+  "kind": "файл",
+  "statement": null,
+  "assumptions": "not-checked",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "упоминание файла; проверено существование",
+  "lines": [
+   328,
+   355,
+   556,
+   608,
+   614,
+   863,
+   876,
+   941,
+   1075,
+   1079
+  ],
+  "auto": true,
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 353,
+  "claim": "Стоит сразу сказать и о статусе этого предиката в репозитории (файл `Sqrt2Processes.v`). В записанном виде он назван там `gives_sqrt2`.",
+  "theorem": "gives_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 127,
+  "file_num": null,
+  "kind": "Definition",
+  "statement": "Definition gives_sqrt2 (R : nat -> Q) : Prop := PC.is_Cauchy R /\\ sq_to_2 R.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): было «определение sqrt2_process есть естественная формализация» при том, что предиката в src не было, а имя носил ньютонов процесс. Definition gives_sqrt2 (R : nat -> Q) : Prop := PC.is_Cauchy R /\\ sq_to_2 R (:127) — предикат в записи страницы; sq_to_2 R := forall eps, 0 < eps -> exists N, forall n, (N <= n)%nat -> Qabs (R n * R n - 2) < eps. Closed under the global context.",
+  "lines": [
+   355
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 355,
+  "claim": "К двум условиям при формализации добавлено третье — неотрицательность членов $R$ (предикат `gives_pos_sqrt2`): без него тому же условию отвечал бы и процесс $-R$ (`gives_sqrt2_opp`).",
+  "theorem": "gives_pos_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 131,
+  "file_num": null,
+  "kind": "Definition",
+  "statement": "Definition gives_pos_sqrt2 (R : nat -> Q) : Prop := (forall n : nat, 0 <= R n) /\\ sq_to_2 R.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Definition gives_pos_sqrt2 (R : nat -> Q) : Prop := (forall n, 0 <= R n) /\\ sq_to_2 R (:131). Closed under the global context.",
+  "lines": [
+   357,
+   941
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 355,
+  "claim": "К двум условиям при формализации добавлено третье — неотрицательность членов $R$ (предикат `gives_pos_sqrt2`): без него тому же условию отвечал бы и процесс $-R$ (`gives_sqrt2_opp`).",
+  "theorem": "gives_sqrt2_opp",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 232,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem gives_sqrt2_opp : forall R : nat -> Q, gives_sqrt2 R -> gives_sqrt2 (fun n => - R n).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "gives_sqrt2_opp : forall R, gives_sqrt2 R -> gives_sqrt2 (fun n => - R n) (:232); что R и −R не эквивалентны — pos_not_equiv_opp, сводно page_predicate_two_classes. Closed under the global context.",
+  "lines": [
+   358
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 358,
+  "claim": "С ним условие Коши следует из сходимости квадрата (`pos_sqrt2_Cauchy`), а ньютонов процесс, процесс цепной дроби и процесс деления отрезка пополам предикату отвечают (`newton_gives_pos_sqrt2`, `cf_gives_pos_sqrt2`, `sqrt2_bisect_gives_pos_sqrt2`).",
+  "theorem": "cf_gives_pos_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 300,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem cf_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_cf.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "cf_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_cf (:300). Closed under the global context.",
+  "lines": [
+   361
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 358,
+  "claim": "С ним условие Коши следует из сходимости квадрата (`pos_sqrt2_Cauchy`), а ньютонов процесс, процесс цепной дроби и процесс деления отрезка пополам предикату отвечают (`newton_gives_pos_sqrt2`, `cf_gives_pos_sqrt2`, `sqrt2_bisect_gives_pos_sqrt2`).",
+  "theorem": "newton_gives_pos_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 396,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem newton_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_newton.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_newton (:396). Closed under the global context.",
+  "lines": [
+   361
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 358,
+  "claim": "С ним условие Коши следует из сходимости квадрата (`pos_sqrt2_Cauchy`), а ньютонов процесс, процесс цепной дроби и процесс деления отрезка пополам предикату отвечают (`newton_gives_pos_sqrt2`, `cf_gives_pos_sqrt2`, `sqrt2_bisect_gives_pos_sqrt2`).",
+  "theorem": "pos_sqrt2_Cauchy",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 193,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem pos_sqrt2_Cauchy : forall R : nat -> Q, gives_pos_sqrt2 R -> PC.is_Cauchy R.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "pos_sqrt2_Cauchy : forall R : nat -> Q, gives_pos_sqrt2 R -> PC.is_Cauchy R (:193). Closed under the global context.",
+  "lines": [
+   359,
+   876
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 358,
+  "claim": "С ним условие Коши следует из сходимости квадрата (`pos_sqrt2_Cauchy`), а ньютонов процесс, процесс цепной дроби и процесс деления отрезка пополам предикату отвечают (`newton_gives_pos_sqrt2`, `cf_gives_pos_sqrt2`, `sqrt2_bisect_gives_pos_sqrt2`).",
+  "theorem": "sqrt2_bisect_gives_pos_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 506,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem sqrt2_bisect_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_bisect.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "sqrt2_bisect_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_bisect (:506). Closed under the global context.",
+  "lines": [
+   362
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 362,
+  "claim": "Имя `sqrt2_process` в репозитории носит другое — сам ньютонов процесс (файл `QPhysicsProcesses.v`).",
   "theorem": "sqrt2_process",
   "file": "src/stdlib/qphysics/QPhysicsProcesses.v",
   "file_line": 47,
@@ -35687,20 +36264,40 @@
   "statement": "Fixpoint sqrt2_process (K : nat) : Q := match K with | O => 1 | S k => let xk := sqrt2_process k in (xk + 2 / xk) / 2 end.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "В src имя sqrt2_process носит не предикат, а сам ньютонов процесс: Fixpoint sqrt2_process (K : nat) : Q (QPhysicsProcesses.v:47), по шагам равный sqrt2_newton. Предиката «процесс Коши и квадрат сходится к 2» в src нет. В записи страницы предикату вместе с R отвечает и −R (два класса).",
+  "note": "Fixpoint sqrt2_process (K : nat) : Q (QPhysicsProcesses.v:47) — функция nat -> Q, не предикат; repo_sqrt2_process_is_newton : forall K, QPhysicsProcesses.sqrt2_process K = sqrt2_newton K (src/Sqrt2Processes.v:609). Closed under the global context.",
   "lines": [
-   354,
-   355,
-   923
+   362
   ],
   "file_sha": "d3869ffb3895d12773f379af9a2c0616cae679b8"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 406,
+  "line": 363,
+  "claim": "другое — сам ньютонов процесс (файл `QPhysicsProcesses.v`).",
+  "theorem": null,
+  "file": "src/stdlib/qphysics/QPhysicsProcesses.v",
+  "file_line": null,
+  "file_num": 1564,
+  "kind": "файл",
+  "statement": null,
+  "assumptions": "not-checked",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "упоминание файла; проверено существование",
+  "lines": [
+   363
+  ],
+  "auto": true,
+  "file_sha": "d3869ffb3895d12773f379af9a2c0616cae679b8"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 411,
   "claim": "ToS измеряет это качество явной величиной — модулем разности квадрата и двойки.[^8]",
   "theorem": "sqrt2_quality",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35714,16 +36311,16 @@
   "checked": "2026-11-13",
   "note": "Definition sqrt2_quality (x : Q) : Q := Qabs (x * x - 2) (:87).",
   "lines": [
-   930,
-   1050,
-   1054
+   949,
+   1070,
+   1074
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 418,
+  "line": 423,
   "claim": "$\\sqrt{2}$ как процесс не является рациональной позицией — это доказано (§ 4.2), — но все его *стадии* вполне рациональны.",
   "theorem": "sqrt2_not_in_Q",
   "file": "src/analysis/Sqrt2Irrational.v",
@@ -35738,15 +36335,15 @@
   "note": "Доказано: рационального числа с квадратом 2 нет (sqrt2_not_in_Q, :217); отсюда ни одна стадия процесса не даёт в квадрате двойку. Рациональность стадий — по типу: sqrt2_newton, sqrt2_cf : nat -> Q.",
   "lines": [
    250,
-   947,
-   1048
+   966,
+   1068
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 494,
+  "line": 499,
   "claim": "Наряду с ньютоновым $\\sqrt{2}$ даётся процессом *цепной дроби*.[^9]",
   "theorem": "sqrt2_cf",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35760,14 +36357,14 @@
   "checked": "2026-11-13",
   "note": "Definition sqrt2_cf (K : nat) : Q := inject_Z (sqrt2_cf_p K) / inject_Z (sqrt2_cf_q K) (:43), числители и знаменатели — рекуррентой a(k+2) = 2a(k+1) + a(k). Что процесс «даёт» корень, в src теоремой не записано; в пробном файле доказано (cf_gives_sqrt2; cf_eq_sx — совпадение с процессом Пелля из Sqrt2Approx.v).",
   "lines": [
-   1049
+   1069
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 523,
+  "line": 528,
   "claim": "На первом шаге оба дают $1$; на втором — оба дают $3/2$; процессы совпадают.[^10]",
   "theorem": "agree_at_0",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35781,14 +36378,14 @@
   "checked": "2026-11-13",
   "note": "Lemma agree_at_0 : sqrt2_newton 0 == sqrt2_cf 0 (:72); agree_at_1 (:75). Closed. «Первый» и «второй» шаги страницы — индексы 0 и 1.",
   "lines": [
-   1052
+   1072
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 525,
+  "line": 530,
   "claim": "Но на третьем шаге они расходятся: ньютонов даёт $17/12$, процесс цепной дроби — $7/5$. Это разные рациональные числа, и ToS отмечает их различие отдельной теоремой.[^11]",
   "theorem": "differ_at_2",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35802,14 +36399,14 @@
   "checked": "2026-11-13",
   "note": "Lemma differ_at_2 : ~ (sqrt2_newton 2 == sqrt2_cf 2) (:78); значения — newton_2 (17#12), cf_2 (7#5). Closed. «Третий шаг» страницы — индекс 2.",
   "lines": [
-   1053
+   1073
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 538,
+  "line": 543,
   "claim": "Качество $17/12$ есть $|(17/12)^2 - 2| = 1/144$; качество $7/5$ есть $|(7/5)^2 - 2| = 1/25$.",
   "theorem": "newton_quality_2",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35828,7 +36425,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 541,
+  "line": 546,
   "claim": "ToS доказывает это сравнение теоремой.[^12]",
   "theorem": "newton_better_at_2",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35842,14 +36439,14 @@
   "checked": "2026-11-13",
   "note": "Lemma newton_better_at_2 : sqrt2_quality (sqrt2_newton 2) < sqrt2_quality (sqrt2_cf 2) (:95). Closed.",
   "lines": [
-   1054
+   1074
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 545,
+  "line": 550,
   "claim": "В файле `RefinementSqrt.v` формально проверено *конкретное* сравнение — на шаге $2$: ньютоново приближение там точнее цепно-дробного.",
   "theorem": "newton_better_at_2",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -35863,14 +36460,35 @@
   "checked": "2026-11-13",
   "note": "Одно сравнение, на индексе 2. Сравнимость качеств на всяком шаге следует из линейности порядка на Q (пробный файл: quality_comparable, Closed); содержательным было бы утверждение, какой процесс точнее на всяком шаге, — его в src нет.",
   "lines": [
-   1054
+   1074
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 574,
+  "line": 555,
+  "claim": "оно следует из разрешимости порядка рациональных чисел и записано отдельно (`quality_comparable`, файл `Sqrt2Processes.v`).",
+  "theorem": "quality_comparable",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 84,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma quality_comparable : forall K : nat, sqrt2_quality (sqrt2_newton K) <= sqrt2_quality (sqrt2_cf K) \\/ sqrt2_quality (sqrt2_cf K) < sqrt2_quality (sqrt2_newton K).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "quality_comparable : forall K, sqrt2_quality (sqrt2_newton K) <= sqrt2_quality (sqrt2_cf K) \\/ sqrt2_quality (sqrt2_cf K) < sqrt2_quality (sqrt2_newton K) (:84). Closed under the global context.",
+  "lines": [
+   556
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 580,
   "claim": "равенство процессов «по шагам» (в репозитории — отношение `process_eq` файла `ProcessRefinement.v`, требующее совпадения на *каждом* шаге) для них не выполняется — они расходятся уже на третьем шаге.",
   "theorem": "process_eq",
   "file": "src/stdlib/ProcessRefinement.v",
@@ -35884,14 +36502,14 @@
   "checked": "2026-11-13",
   "note": "Definition process_eq (p q : Process) : Prop := forall K, p K == q K (:25). Отрицание для двух процессов в src теоремой не записано; следует из differ_at_2 одним шагом (пробный файл: newton_cf_not_process_eq, Closed).",
   "lines": [
-   575
+   581
   ],
   "file_sha": "5ba3f4c43ecfc6a72941dfa86b42577a173bef46"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 575,
+  "line": 581,
   "claim": "`process_eq` файла `ProcessRefinement.v`, требующее",
   "theorem": null,
   "file": "src/stdlib/ProcessRefinement.v",
@@ -35905,7 +36523,7 @@
   "checked": "2026-11-13",
   "note": "упоминание файла; проверено существование",
   "lines": [
-   575
+   581
   ],
   "auto": true,
   "file_sha": "5ba3f4c43ecfc6a72941dfa86b42577a173bef46"
@@ -35913,7 +36531,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 581,
+  "line": 587,
   "claim": "Такое отношение в репозитории уже есть — это `process_equiv` файла `ProcessCore.v`, определённое как",
   "theorem": "process_equiv",
   "file": "src/process/ProcessCore.v",
@@ -35927,21 +36545,20 @@
   "checked": "2026-11-13",
   "note": "Definition process_equiv (R1 R2 : RealProcess) : Prop := forall eps : Q, 0 < eps -> exists N : nat, forall n : nat, (N <= n)%nat -> Qabs (R1 n - R2 n) < eps (:170) — совпадает с формулой страницы.",
   "lines": [
-   582,
-   600,
-   645,
-   922,
-   928,
-   1055,
-   1055,
-   1055
+   588,
+   606,
+   656,
+   940,
+   947,
+   1075,
+   1075
   ],
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 582,
+  "line": 588,
   "claim": "есть — это `process_equiv` файла `ProcessCore.v`,",
   "theorem": null,
   "file": "src/process/ProcessCore.v",
@@ -35955,9 +36572,9 @@
   "checked": "2026-11-13",
   "note": "упоминание файла; проверено существование",
   "lines": [
-   582,
-   1055,
-   1058
+   588,
+   1075,
+   1078
   ],
   "auto": true,
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
@@ -35965,7 +36582,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 593,
+  "line": 599,
   "claim": "и для него там доказаны рефлексивность, симметрия и транзитивность — то есть это *настоящее* отношение эквивалентности.[^13]",
   "theorem": "process_equiv_refl",
   "file": "src/process/ProcessCore.v",
@@ -35979,14 +36596,36 @@
   "checked": "2026-11-13",
   "note": "process_equiv_refl (:177), process_equiv_sym (:184), process_equiv_trans (:194) — три леммы; все Closed under the global context.",
   "lines": [
-   1055
+   1075
   ],
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 604,
+  "line": 606,
+  "claim": "При условии неотрицательности членов класс этот один: любые два таких процесса эквивалентны (`pos_sqrt2_unique`, файл `Sqrt2Processes.v`).",
+  "theorem": "pos_sqrt2_unique",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 170,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem pos_sqrt2_unique : forall R S : nat -> Q, gives_pos_sqrt2 R -> gives_pos_sqrt2 S -> PC.process_equiv R S.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "pos_sqrt2_unique : forall R S : nat -> Q, gives_pos_sqrt2 R -> gives_pos_sqrt2 S -> PC.process_equiv R S (:170). Closed under the global context.",
+  "lines": [
+   608,
+   1075
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 612,
   "claim": "Формально в файле `RefinementSqrt.v` построены и сопоставлены *два* конкретных процесса — ньютонов и цепной дроби — и доказано их различие на шаге $2$.",
   "theorem": "differ_at_2",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -36000,14 +36639,98 @@
   "checked": "2026-11-13",
   "note": "sqrt2_newton (:19), sqrt2_cf (:43), differ_at_2 (:78). Что оба процесса дают один корень, в src не доказано (страница говорит это на стр. 352–358 и в сноске 13).",
   "lines": [
-   1053
+   1073
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 607,
+  "line": 614,
+  "claim": "В файле `Sqrt2Processes.v` к ним добавлен третий — процесс деления отрезка пополам (`sqrt2_bisect`), — и доказано, что все три дают $\\sqrt{2}$ и попарно эквивалентны (`newton_cf_equiv`, `newton_bisect_equiv`).",
+  "theorem": "cf_bisect_equiv",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 544,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem cf_bisect_equiv : PC.process_equiv sqrt2_cf sqrt2_bisect.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Третья пара (страница называет две теоремы): cf_bisect_equiv : PC.process_equiv sqrt2_cf sqrt2_bisect (:544) — дописана 14.11 при сверке, чтобы «попарно» стояло теоремами полностью. Closed under the global context.",
+  "lines": [],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 614,
+  "claim": "В файле `Sqrt2Processes.v` к ним добавлен третий — процесс деления отрезка пополам (`sqrt2_bisect`), — и доказано, что все три дают $\\sqrt{2}$ и попарно эквивалентны (`newton_cf_equiv`, `newton_bisect_equiv`).",
+  "theorem": "newton_bisect_equiv",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 541,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem newton_bisect_equiv : PC.process_equiv sqrt2_newton sqrt2_bisect.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_bisect_equiv : PC.process_equiv sqrt2_newton sqrt2_bisect (:541). Closed under the global context.",
+  "lines": [
+   617
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 614,
+  "claim": "В файле `Sqrt2Processes.v` к ним добавлен третий — процесс деления отрезка пополам (`sqrt2_bisect`), — и доказано, что все три дают $\\sqrt{2}$ и попарно эквивалентны (`newton_cf_equiv`, `newton_bisect_equiv`).",
+  "theorem": "newton_cf_equiv",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 538,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem newton_cf_equiv : PC.process_equiv sqrt2_newton sqrt2_cf.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_cf_equiv : PC.process_equiv sqrt2_newton sqrt2_cf (:538). Closed under the global context.",
+  "lines": [
+   617,
+   1075
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 614,
+  "claim": "В файле `Sqrt2Processes.v` к ним добавлен третий — процесс деления отрезка пополам (`sqrt2_bisect`), — и доказано, что все три дают $\\sqrt{2}$ и попарно эквивалентны (`newton_cf_equiv`, `newton_bisect_equiv`).",
+  "theorem": "sqrt2_bisect",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 441,
+  "file_num": null,
+  "kind": "Definition",
+  "statement": "Definition sqrt2_bisect : nat -> Q := SI.bisect_process sqrt2_choose sqrt2_start.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Definition sqrt2_bisect : nat -> Q := SI.bisect_process sqrt2_choose sqrt2_start (:441); половина выбирается сравнением квадрата середины с двойкой (sqrt2_choose, Qle_bool) — без ссылки на цель. Closed under the global context.",
+  "lines": [
+   615,
+   1079
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 618,
   "claim": "Более сильное утверждение — что таких процессов *открытое семейство* — естественно и математически стандартно, но в текущем виде репозитория оно не формализовано, и глава приводит его как содержательную программу, а не как доказанный факт.",
   "theorem": null,
   "file": null,
@@ -36024,7 +36747,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 642,
+  "line": 653,
   "claim": "Разные процессы дают одно $\\sqrt{2}$ не потому, что равны по шагам, а потому, что эквивалентны — их взаимное расстояние уходит к нулю (`process_equiv`).",
   "theorem": "process_equiv",
   "file": "src/process/ProcessCore.v",
@@ -36038,21 +36761,20 @@
   "checked": "2026-11-13",
   "note": "Отношение определено (ProcessCore.v:170). Эквивалентность ньютонова и цепно-дробного процессов в src теоремой не записана — сноска 13 говорит это; проверена в пробном файле (newton_cf_equiv, Closed).",
   "lines": [
-   582,
-   600,
-   645,
-   922,
-   928,
-   1055,
-   1055,
-   1055
+   588,
+   606,
+   656,
+   940,
+   947,
+   1075,
+   1075
   ],
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 700,
+  "line": 711,
   "claim": "ToS доказывает это строго.[^14]",
   "theorem": "Archimedean",
   "file": "src/Archimedean_ERR.v",
@@ -36066,15 +36788,15 @@
   "checked": "2026-11-13",
   "note": "Theorem Archimedean : forall eps : Q, eps > 0 -> exists N : nat, 1 / Qpow2 N < eps (:104). Closed. Одноимённая теорема с тем же утверждением — ShrinkingIntervals_ERR.v:392.",
   "lines": [
-   736,
-   1056
+   747,
+   1076
   ],
   "file_sha": "3767e260fc8de6df9713f13b9a1e1562fec07f17"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 704,
+  "line": 715,
   "claim": "Растут степени двойки не по допущению, а по доказанной лемме: ToS выводит их неограниченный рост из устройства самих натуральных чисел.",
   "theorem": "pow2_unbounded",
   "file": "src/Archimedean_ERR.v",
@@ -36093,7 +36815,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 736,
+  "line": 747,
   "claim": "файл `Archimedean_ERR.v` доказывает не только `Archimedean`, но и `Archimedean_width` (достижимость для масштабированной ширины)",
   "theorem": "Archimedean_width",
   "file": "src/Archimedean_ERR.v",
@@ -36107,15 +36829,15 @@
   "checked": "2026-11-13",
   "note": "Theorem Archimedean_width : forall (width eps : Q), width > 0 -> eps > 0 -> exists N : nat, width / Qpow2 N < eps (:116). Closed.",
   "lines": [
-   737
+   748
   ],
   "file_sha": "3767e260fc8de6df9713f13b9a1e1562fec07f17"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 738,
-  "claim": "`shrinking_interval_Cauchy` — теорему о том, что процесс, удерживаемый в интервалах с убывающей шириной, есть процесс Коши;",
+  "line": 749,
+  "claim": "`shrinking_interval_Cauchy` — теорему о том, что процесс, у которого взаимные расстояния приближений ограничены убывающей вдвое шириной — как у процесса, удерживаемого во вложенных интервалах, — есть процесс Коши;",
   "theorem": "shrinking_interval_Cauchy",
   "file": "src/Archimedean_ERR.v",
   "file_line": 158,
@@ -36124,21 +36846,21 @@
   "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R (:158). Интервалов в утверждении нет: посылка — оценка взаимных расстояний; a и b входят только разностью. Об интервалах — bisect_is_Cauchy (ShrinkingIntervals_ERR.v:845).",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора): было «процесс, удерживаемый в интервалах с убывающей шириной»; в посылке теоремы — оценка взаимных расстояний. shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R. Closed under the global context. (Archimedean_ERR.v:158). Форма с интервалами в посылке — interval_process_Cauchy (src/Sqrt2Processes.v:561).",
   "lines": [
-   738,
-   832,
-   1059,
-   1060
+   749,
+   845,
+   1079,
+   1080
   ],
   "file_sha": "3767e260fc8de6df9713f13b9a1e1562fec07f17"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 750,
+  "line": 763,
   "claim": "для всякой наперёд заданной точности $\\varepsilon$ найдётся шаг $N$, на котором доля $1/2^N$ уже меньше $\\varepsilon$. ToS его доказывает.",
   "theorem": "Archimedean",
   "file": "src/Archimedean_ERR.v",
@@ -36152,15 +36874,15 @@
   "checked": "2026-11-13",
   "note": "Формулировка совпадает с Archimedean (Archimedean_ERR.v:104). Closed.",
   "lines": [
-   736,
-   1056
+   747,
+   1076
   ],
   "file_sha": "3767e260fc8de6df9713f13b9a1e1562fec07f17"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 790,
+  "line": 803,
   "claim": "Свойство Коши ToS определяет точно.[^16]",
   "theorem": "is_Cauchy",
   "file": "src/ShrinkingIntervals_ERR.v",
@@ -36174,64 +36896,37 @@
   "checked": "2026-11-13",
   "note": "Definition is_Cauchy (R : RealProcess) : Prop := forall eps, eps > 0 -> exists N, forall m n, (m > N)%nat -> (n > N)%nat -> Qabs (R m - R n) < eps (ShrinkingIntervals_ERR.v:163) — совпадает со словами страницы.",
   "lines": [
-   1058,
-   1059
+   1078,
+   1079
   ],
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 827,
+  "line": 840,
   "claim": "ToS доказывает эту связь теоремой: процесс *сжимающихся интервалов*, задающий $\\sqrt{2}$, есть процесс Коши.[^17]",
-  "theorem": "shrinking_interval_Cauchy",
-  "file": "src/ShrinkingIntervals_ERR.v",
-  "file_line": 559,
-  "file_num": 1068,
+  "theorem": "sqrt2_bisect_Cauchy",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 445,
+  "file_num": null,
   "kind": "Theorem",
-  "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
+  "statement": "Theorem sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Теорема (:559) общая: о всяком процессе с оценкой |R m − R n| <= (b − a)/2^m. Процесса сжимающихся интервалов для квадрата, равного двум, в src нет; ни shrinking_interval_Cauchy, ни bisect_is_Cauchy к такому процессу не применены. Строится без аксиом (пробный файл: sqrt2_bisect, sqrt2_bisect_Cauchy, sqrt2_bisect_sq_to_2).",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): такого процесса в src не было; теперь он построен. sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect (:445); что этот процесс даёт корень — sqrt2_bisect_gives_pos_sqrt2, с оценкой |m_n^2 − 2| <= 4/2^n (sqrt2_bisect_quality). Closed under the global context.",
   "lines": [
-   738,
-   832,
-   1059,
-   1060
+   1079
   ],
-  "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
- },
- {
-  "batch": "audit-part-03",
-  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 831,
-  "claim": "Теорема `shrinking_interval_Cauchy` говорит о процессе *особого рода* — о процессе сжимающихся интервалов, удерживающем приближения во вложенных отрезках убывающей вдвое ширины.",
-  "theorem": "shrinking_interval_Cauchy",
-  "file": "src/ShrinkingIntervals_ERR.v",
-  "file_line": 559,
-  "file_num": 1068,
-  "kind": "Theorem",
-  "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
-  "assumptions": "Closed under the global context",
-  "page_price": "",
-  "verdict": "mismatch-statement",
-  "checked": "2026-11-13",
-  "note": "В утверждении (:559) род процесса не ограничен и интервалов нет: посылка — оценка |R m − R n| <= (b − a)/2^m при m <= n. Ньютонов процесс этой посылке отвечает, как только оценка доказана (пробный файл: newton_distance_bound, newton_Cauchy_by_shrinking). Вывод страницы — «нужна своя оценка» — верен.",
-  "lines": [
-   738,
-   832,
-   1059,
-   1060
-  ],
-  "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
   "line": 844,
-  "claim": "и процесс сжимающихся интервалов, задающий $\\sqrt{2}$, этим механизмом и есть процесс Коши.",
+  "claim": "Теорема `shrinking_interval_Cauchy` говорит о процессе с оценкой *особого рода*: расстояние между приближениями с номерами $m \\le n$ не превосходит ширины $(b - a)/2^m$ — так ведёт себя процесс сжимающихся интервалов, удерживающий приближения во вложенных отрезках убывающей вдвое ширины.",
   "theorem": "shrinking_interval_Cauchy",
   "file": "src/ShrinkingIntervals_ERR.v",
   "file_line": 559,
@@ -36239,81 +36934,211 @@
   "kind": "Theorem",
   "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
   "assumptions": "Closed under the global context",
-  "page_price": "",
-  "verdict": "mismatch-statement",
-  "checked": "2026-11-13",
-  "note": "статус: такого процесса в src нет (см. запись стр. 827). Общая теорема о процессе деления отрезка пополам — bisect_is_Cauchy : forall choose_half s, bis_left s < bis_right s -> is_Cauchy (bisect_process choose_half s) (:845), Closed; к корню из двух она не применена.",
-  "lines": [
-   738,
-   832,
-   1059,
-   1060
-  ],
-  "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
- },
- {
-  "batch": "audit-part-03",
-  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 846,
-  "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости — и эти оценки в текущем виде `RefinementSqrt.v` не доказаны (§ 4.5).[^18]",
-  "theorem": null,
-  "file": "src/stdlib/RefinementSqrt.v",
-  "file_line": null,
-  "file_num": 1610,
-  "kind": null,
-  "statement": null,
-  "assumptions": "not-checked",
   "page_price": "",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Теорем is_Cauchy sqrt2_newton, is_Cauchy sqrt2_cf в src нет (поиск по всему src). Ближайшее: точная погрешность процесса Пелля sx_abs_eq (Sqrt2Approx.v:143). Обе оценки и оба свойства Коши доказаны в пробном файле (newton_quality_bound, newton_Cauchy_SI, cf_Cauchy_SI — Closed).",
-  "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
- },
- {
-  "batch": "audit-part-03",
-  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 855,
-  "claim": "Часть III установила: $\\sqrt{2}$ даётся процессом — функциональной системой рациональных приближений (§ 4.4); процессов таких открытый класс (§ 4.5); всякий такой процесс достигает любой точности (§ 4.6) и есть процесс Коши (§ 4.7).",
-  "theorem": null,
-  "file": null,
-  "file_line": null,
-  "file_num": null,
-  "kind": null,
-  "statement": null,
-  "assumptions": "not-checked",
-  "page_price": "",
-  "verdict": "mismatch-statement",
-  "checked": "2026-11-13",
-  "note": "статус: «установила» — для ньютонова и цепно-дробного процессов ни сходимость квадрата к двум, ни свойство Коши в src не доказаны (страница говорит это сама: стр. 723–735, 846–848), открытое семейство не формализовано (стр. 607–611), процесса сжимающихся интервалов для корня нет."
- },
- {
-  "batch": "audit-part-03",
-  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 880,
-  "claim": "Процесс *сжимающихся интервалов*, задающий $\\sqrt{2}$, обладает им доказанно: вложенные отрезки убывающей вдвое ширины удерживают приближения, а архимедово свойство ручается, что взаимное расстояние делается меньше всякой меры.",
-  "theorem": "shrinking_interval_Cauchy",
-  "file": "src/ShrinkingIntervals_ERR.v",
-  "file_line": 559,
-  "file_num": 1068,
-  "kind": "Theorem",
-  "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
-  "assumptions": "Closed under the global context",
-  "page_price": "",
-  "verdict": "mismatch-statement",
-  "checked": "2026-11-13",
-  "note": "статус: «доказанно» — в src нет процесса сжимающихся интервалов для квадрата, равного двум; доказана общая теорема (см. записи стр. 827, 844).",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора): было «о процессе особого рода — о процессе сжимающихся интервалов»; род процесса в теореме не ограничен, посылка — оценка расстояний. shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R. Closed under the global context. (:559). Ньютонов процесс этой посылке отвечает: newton_distance_bound, newton_Cauchy_by_shrinking (src/Sqrt2Processes.v).",
   "lines": [
-   738,
-   832,
-   1059,
-   1060
+   749,
+   845,
+   1079,
+   1080
   ],
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 895,
+  "line": 859,
+  "claim": "и процесс сжимающихся интервалов, задающий $\\sqrt{2}$, этим механизмом и есть процесс Коши.",
+  "theorem": "sqrt2_bisect_Cauchy",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 445,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect (:445); что этот процесс даёт корень — sqrt2_bisect_gives_pos_sqrt2, с оценкой |m_n^2 − 2| <= 4/2^n (sqrt2_bisect_quality). Closed under the global context.",
+  "lines": [
+   1079
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 861,
+  "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости; они доказаны в файле `Sqrt2Processes.v`: для ньютонова процесса $|x_n^2 - 2| \\le 1/2^n$ (`newton_quality_bound`), процесс цепной дроби по шагам совпадает с процессом Пелля (`cf_eq_sx`), погрешность которого равна $1/q_n^2$, и оба суть процессы Коши (`newton_Cauchy_SI`, `cf_Cauchy_SI`; § 4.5).[^18]",
+  "theorem": "cf_Cauchy_SI",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 534,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem cf_Cauchy_SI : SI.is_Cauchy sqrt2_cf.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "cf_Cauchy_SI : SI.is_Cauchy sqrt2_cf (:534). Closed under the global context.",
+  "lines": [
+   866
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 861,
+  "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости; они доказаны в файле `Sqrt2Processes.v`: для ньютонова процесса $|x_n^2 - 2| \\le 1/2^n$ (`newton_quality_bound`), процесс цепной дроби по шагам совпадает с процессом Пелля (`cf_eq_sx`), погрешность которого равна $1/q_n^2$, и оба суть процессы Коши (`newton_Cauchy_SI`, `cf_Cauchy_SI`; § 4.5).[^18]",
+  "theorem": "cf_eq_sx",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 294,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma cf_eq_sx : forall k : nat, sqrt2_cf k == sx k.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "cf_eq_sx : forall k, sqrt2_cf k == sx k (:294) — sx есть процесс Пелля файла Sqrt2Approx.v. Closed under the global context.",
+  "lines": [
+   865
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 861,
+  "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости; они доказаны в файле `Sqrt2Processes.v`: для ньютонова процесса $|x_n^2 - 2| \\le 1/2^n$ (`newton_quality_bound`), процесс цепной дроби по шагам совпадает с процессом Пелля (`cf_eq_sx`), погрешность которого равна $1/q_n^2$, и оба суть процессы Коши (`newton_Cauchy_SI`, `cf_Cauchy_SI`; § 4.5).[^18]",
+  "theorem": "newton_Cauchy_SI",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 531,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem newton_Cauchy_SI : SI.is_Cauchy sqrt2_newton.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_Cauchy_SI : SI.is_Cauchy sqrt2_newton (:531). Closed under the global context.",
+  "lines": [
+   866
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 861,
+  "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости; они доказаны в файле `Sqrt2Processes.v`: для ньютонова процесса $|x_n^2 - 2| \\le 1/2^n$ (`newton_quality_bound`), процесс цепной дроби по шагам совпадает с процессом Пелля (`cf_eq_sx`), погрешность которого равна $1/q_n^2$, и оба суть процессы Коши (`newton_Cauchy_SI`, `cf_Cauchy_SI`; § 4.5).[^18]",
+  "theorem": "newton_quality_bound",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 361,
+  "file_num": null,
+  "kind": "Lemma",
+  "statement": "Lemma newton_quality_bound : forall n : nat, Qabs (sqrt2_newton n * sqrt2_newton n - 2) * SI.Qpow2 n <= 1.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): было «эти оценки … не доказаны». newton_quality_bound : forall n, Qabs (sqrt2_newton n * sqrt2_newton n - 2) * SI.Qpow2 n <= 1 (:361). Closed under the global context.",
+  "lines": [
+   330,
+   864
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 861,
+  "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости; они доказаны в файле `Sqrt2Processes.v`: для ньютонова процесса $|x_n^2 - 2| \\le 1/2^n$ (`newton_quality_bound`), процесс цепной дроби по шагам совпадает с процессом Пелля (`cf_eq_sx`), погрешность которого равна $1/q_n^2$, и оба суть процессы Коши (`newton_Cauchy_SI`, `cf_Cauchy_SI`; § 4.5).[^18]",
+  "theorem": "sx_abs_eq",
+  "file": "src/Sqrt2Approx.v",
+  "file_line": 143,
+  "file_num": 1869,
+  "kind": "Lemma",
+  "statement": "Lemma sx_abs_eq : forall N, Qabs (sx N * sx N - 2) == / inject_Z (qq N * qq N).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Погрешность процесса Пелля: sx_abs_eq : forall N, Qabs (sx N * sx N - 2) == / inject_Z (qq N * qq N) (Sqrt2Approx.v:143). Closed under the global context.",
+  "lines": [],
+  "file_sha": "88e62139bcd58f4326f0e201396da801820be38d"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 873,
+  "claim": "Часть III установила: $\\sqrt{2}$ даётся процессом — функциональной системой рациональных приближений (§ 4.4); процессов таких открытый класс (§ 4.5); всякий такой процесс достигает любой точности (§ 4.6) и есть процесс Коши (§ 4.7; теорема `pos_sqrt2_Cauchy`, файл `Sqrt2Processes.v`).",
+  "theorem": "pos_sqrt2_Cauchy",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 193,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem pos_sqrt2_Cauchy : forall R : nat -> Q, gives_pos_sqrt2 R -> PC.is_Cauchy R.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): «всякий такой процесс … есть процесс Коши» — теорема. pos_sqrt2_Cauchy : forall R : nat -> Q, gives_pos_sqrt2 R -> PC.is_Cauchy R (:193). Closed under the global context. Достижение любой точности входит в сам предикат (sq_to_2). Открытое семейство по-прежнему не формализовано — страница говорит это сама в § 4.5; предъявлены три члена класса.",
+  "lines": [
+   359,
+   876
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 898,
+  "claim": "Процесс *сжимающихся интервалов*, задающий $\\sqrt{2}$, обладает им доказанно: вложенные отрезки убывающей вдвое ширины удерживают приближения, а архимедово свойство ручается, что взаимное расстояние делается меньше всякой меры.",
+  "theorem": "sqrt2_bisect_Cauchy",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 445,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): «обладает им доказанно» — sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect (:445); что этот процесс даёт корень — sqrt2_bisect_gives_pos_sqrt2, с оценкой |m_n^2 − 2| <= 4/2^n (sqrt2_bisect_quality). Closed under the global context.",
+  "lines": [
+   1079
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 901,
+  "claim": "Для процессов иного типа — ньютонова и цепно-дробного — свойство Коши требует собственных оценок сходимости; они доказаны (§ 4.7).",
+  "theorem": "newton_Cauchy_SI",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 531,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem newton_Cauchy_SI : SI.is_Cauchy sqrt2_newton.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "newton_Cauchy_SI : SI.is_Cauchy sqrt2_newton (:531); cf_Cauchy_SI : SI.is_Cauchy sqrt2_cf (:534); оценки — newton_quality_bound и sx_abs_eq через cf_eq_sx. Closed under the global context.",
+  "lines": [
+   866
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 913,
   "claim": "И показала, строгим доказательством бесконечного спуска, что ни одна позиция соразмерной разметки этой задаче не отвечает (§ 4.2).",
   "theorem": "descent_to_zero",
   "file": "src/analysis/Sqrt2Irrational.v",
@@ -36327,31 +37152,35 @@
   "checked": "2026-11-13",
   "note": "Цепочка descent_step (:118) -> descent_to_zero (:146) -> sqrt2_irrational_Z (:182) -> no_rational_sqrt2 (:200); все Closed under the global context.",
   "lines": [
-   1047
+   1067
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 903,
+  "line": 921,
   "claim": "глава показала, что процесс достигает любой точности — по архимедову свойству (§ 4.6), — и что он есть процесс Коши: его приближения неограниченно сближаются между собой (§ 4.7).",
-  "theorem": null,
-  "file": null,
-  "file_line": null,
+  "theorem": "newton_gives_pos_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 396,
   "file_num": null,
-  "kind": null,
-  "statement": null,
-  "assumptions": "not-checked",
+  "kind": "Theorem",
+  "statement": "Theorem newton_gives_pos_sqrt2 : gives_pos_sqrt2 sqrt2_newton.",
+  "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "статус: «показала» — для разобранных процессов (ньютонова, цепной дроби) ни то, ни другое в src не доказано; § 4.6 сам говорит, что архимедово свойство без оценки погрешности сходимости конкретного процесса не даёт (стр. 723–735)."
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): для разобранных процессов и то и другое теперь доказано — newton_gives_pos_sqrt2, cf_gives_pos_sqrt2, sqrt2_bisect_gives_pos_sqrt2 (квадрат подходит к двум ближе всякой точности) и pos_sqrt2_Cauchy (процесс Коши). Closed under the global context.",
+  "lines": [
+   361
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 919,
+  "line": 937,
   "claim": "«система» здесь — содержательная интерпретация по образцу функциональной системы Части I, не построенный в коде объект `System` $L$;",
   "theorem": "System",
   "file": "src/TheoryOfSystems_Core_ERR.v",
@@ -36365,37 +37194,36 @@
   "checked": "2026-11-13",
   "note": "Record System (L : Level) (TheoryOfSystems_Core_ERR.v:203). Экземпляра System для корня из двух в src нет (поиск mkSystem в файлах, упоминающих sqrt2, пуст) — страница говорит это прямо.",
   "lines": [
-   921
+   939
   ],
   "file_sha": "5bd23ce711ad8368e557e2667226c8797f92f621"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 921,
-  "claim": "единство процессов взято через *слабое* отношение `process_equiv`, а предикат `sqrt2_process` — формализация-цель (§ 4.4–4.5).",
-  "theorem": "sqrt2_process",
-  "file": "src/stdlib/qphysics/QPhysicsProcesses.v",
-  "file_line": 47,
-  "file_num": 1564,
-  "kind": "Fixpoint",
-  "statement": "Fixpoint sqrt2_process (K : nat) : Q := match K with | O => 1 | S k => let xk := sqrt2_process k in (xk + 2 / xk) / 2 end.",
+  "line": 939,
+  "claim": "единство процессов взято через *слабое* отношение `process_equiv`, а предикат «даёт $\\sqrt{2}$» записан в файле `Sqrt2Processes.v` (`gives_pos_sqrt2`), и три процесса ему отвечают (§ 4.4–4.5).",
+  "theorem": "gives_pos_sqrt2",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 131,
+  "file_num": null,
+  "kind": "Definition",
+  "statement": "Definition gives_pos_sqrt2 (R : nat -> Q) : Prop := (forall n : nat, 0 <= R n) /\\ sq_to_2 R.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Статус «цель» назван честно, но имя занято: в src sqrt2_process — Fixpoint, сам ньютонов процесс nat -> Q (QPhysicsProcesses.v:47), не предикат (см. запись стр. 352).",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): было «предикат sqrt2_process — формализация-цель». Definition gives_pos_sqrt2 (R : nat -> Q) : Prop := (forall n, 0 <= R n) /\\ sq_to_2 R (:131). Closed under the global context. Три процесса: newton_gives_pos_sqrt2, cf_gives_pos_sqrt2, sqrt2_bisect_gives_pos_sqrt2.",
   "lines": [
-   354,
-   355,
-   923
+   357,
+   941
   ],
-  "file_sha": "d3869ffb3895d12773f379af9a2c0616cae679b8"
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 930,
+  "line": 949,
   "claim": "| качество `sqrt2_quality` $= |x \\cdot x - 2|$ | роль составляющей | Role |",
   "theorem": "sqrt2_quality",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -36409,17 +37237,17 @@
   "checked": "2026-11-13",
   "note": "Definition sqrt2_quality (x : Q) : Q := Qabs (x * x - 2) (:87).",
   "lines": [
-   930,
-   1050,
-   1054
+   949,
+   1070,
+   1074
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 932,
-  "claim": "| законы $L1$–$L5$ (здесь $L3$ для предела) | универсальный слой | Rule (универс.) |",
+  "line": 951,
+  "claim": "| законы $L1$–$L5$ (здесь $L3$ для предела; в теоремах этой главы не применяется) | универсальный слой | Rule (универс.) |",
   "theorem": null,
   "file": "src/ShrinkingIntervals_ERR.v",
   "file_line": null,
@@ -36427,16 +37255,16 @@
   "kind": null,
   "statement": null,
   "assumptions": "not-checked",
-  "page_price": "L3 для предела",
-  "verdict": "mismatch-price",
+  "page_price": "в теоремах главы L3 не применяется",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Ни одна теорема, названная главой, от исключённого третьего не зависит: Print Assumptions для всех объявлений Sqrt2Irrational.v, RefinementSqrt.v, Archimedean_ERR.v, ShrinkingIntervals_ERR.v (212 объявлений) и трёх лемм ProcessCore.v — Closed under the global context.",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора): слова автора оставлены, добавлен факт о цене. Print Assumptions для всех объявлений Sqrt2Irrational.v, RefinementSqrt.v, Archimedean_ERR.v, ShrinkingIntervals_ERR.v, Sqrt2Processes.v и трёх лемм ProcessCore.v — Closed under the global context.",
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 946,
+  "line": 965,
   "claim": "Честные границы при этом сохранены: `sqrt2_not_in_Q` доказано конструктивно (без $L3$)",
   "theorem": "sqrt2_not_in_Q",
   "file": "src/analysis/Sqrt2Irrational.v",
@@ -36451,16 +37279,16 @@
   "note": "Print Assumptions sqrt2_not_in_Q: Closed under the global context.",
   "lines": [
    250,
-   947,
-   1048
+   966,
+   1068
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 948,
-  "claim": "тогда как теория сжимающихся интервалов § 4.7 опирается на $L3$, — это разные статусы, смешивать их не следует.",
+  "line": 967,
+  "claim": "теоремы о сжимающихся интервалах § 4.7 также стоят без $L3$, хотя их файл подключает классическое окружение, — импорт и опора суть разные статусы, смешивать их не следует.",
   "theorem": "shrinking_interval_Cauchy",
   "file": "src/ShrinkingIntervals_ERR.v",
   "file_line": 559,
@@ -36468,22 +37296,22 @@
   "kind": "Theorem",
   "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
   "assumptions": "Closed under the global context",
-  "page_price": "опирается на L3",
-  "verdict": "mismatch-price",
+  "page_price": "без L3",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Print Assumptions shrinking_interval_Cauchy (оба файла), bisect_is_Cauchy, Archimedean, Archimedean_width: Closed under the global context; то же для всех 212 объявлений ShrinkingIntervals_ERR.v. Сноска 18 той же главы (исправлена 12.11) говорит это: «окружение — не опора».",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора): было «теория сжимающихся интервалов § 4.7 опирается на L3». Print Assumptions shrinking_interval_Cauchy (оба файла), bisect_is_Cauchy, Archimedean_width, sqrt2_bisect_Cauchy — Closed under the global context; файл ShrinkingIntervals_ERR.v подключает ToS_Axioms и Classical_Pred_Type.",
   "lines": [
-   738,
-   832,
-   1059,
-   1060
+   749,
+   845,
+   1079,
+   1080
   ],
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1043,
+  "line": 1063,
   "claim": "Доказательство, излагаемое в этом разделе, формализовано в файле `Sqrt2Irrational.v` Rocq-репозитория ToS (каталог `analysis`).",
   "theorem": "analysis",
   "file": null,
@@ -36497,13 +37325,13 @@
   "checked": "2026-11-13",
   "note": "Имя каталога: файл лежит в src/analysis/Sqrt2Irrational.v.",
   "lines": [
-   1043
+   1063
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1043,
+  "line": 1063,
   "claim": "Файл содержит 14 доказанных утверждений, не опирается ни на одну аксиому и не пользуется законом исключённого третьего.",
   "theorem": null,
   "file": "src/analysis/Sqrt2Irrational.v",
@@ -36521,7 +37349,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1046,
+  "line": 1066,
   "claim": "Шаг спуска — лемма `descent_step` файла `Sqrt2Irrational.v`: из $p^2 = 2 q^2$ строятся $p' = p/2$ и $q' = q/2$ с тем же $p'^2 = 2 q'^2$.",
   "theorem": "descent_step",
   "file": "src/analysis/Sqrt2Irrational.v",
@@ -36535,14 +37363,14 @@
   "checked": "2026-11-13",
   "note": "В лемме (:118) половины даны существованием: exists p' q', p = 2 * p' /\\ q = 2 * q' /\\ p' * p' = 2 * (q' * q').",
   "lines": [
-   1046
+   1066
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1047,
+  "line": 1067,
   "claim": "Это — лемма `descent_to_zero` файла `Sqrt2Irrational.v`, доказанная сильной индукцией (Rocq: `lt_wf_ind`) по мере $|p| + |q|$, точнее по $\\texttt{Z.to\\_nat}(|p| + |q|)$: всякое решение $p^2 = 2 q^2$ есть $p = 0$, $q = 0$.",
   "theorem": "lt_wf_ind",
   "file": null,
@@ -36556,13 +37384,13 @@
   "checked": "2026-11-13",
   "note": "Стандартная библиотека: Stdlib.Arith.Wf_nat.lt_wf_ind; применена в Sqrt2Irrational.v:151 (induction n as [n IH] using lt_wf_ind). Мера — Z.to_nat (Z.abs p + Z.abs q) (:147).",
   "lines": [
-   1047
+   1067
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1048,
+  "line": 1068,
   "claim": "`sqrt2_not_in_Q` файла `Sqrt2Irrational.v`: $\\lnot (\\exists r : ℚ,\\; r \\cdot r == 2)$.",
   "theorem": "sqrt2_not_in_Q",
   "file": "src/analysis/Sqrt2Irrational.v",
@@ -36577,15 +37405,15 @@
   "note": "Совпадает с исходником: ~ (exists r : Q, r * r == 2) (:217).",
   "lines": [
    250,
-   947,
-   1048
+   966,
+   1068
   ],
   "file_sha": "de048fa5a5cee6c2535a61cc6a9faf8f6eec60f0"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1049,
+  "line": 1069,
   "claim": "Файл определяет процессы `sqrt2_newton` и `sqrt2_cf` и доказывает их конкретные значения на первых шагах; о границах доказанного см. § 4.5.",
   "theorem": "sqrt2_cf",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -36599,14 +37427,14 @@
   "checked": "2026-11-13",
   "note": "sqrt2_newton (:19), sqrt2_cf (:43); значения на индексах 0, 1, 2 — newton_0, newton_1, newton_2, cf_0, cf_1, cf_2. Значения 577/408 и 17/12 на индексе 3 в файле леммами не записаны; вычислением подтверждены (пробный файл: newton_3, cf_3).",
   "lines": [
-   1049
+   1069
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1049,
+  "line": 1069,
   "claim": "Процессы, разбираемые в этом разделе и в следующем, формализованы в файле `RefinementSqrt.v` Rocq-репозитория ToS (каталог `stdlib`).",
   "theorem": "stdlib",
   "file": null,
@@ -36620,13 +37448,13 @@
   "checked": "2026-11-13",
   "note": "Имя каталога: файл лежит в src/stdlib/RefinementSqrt.v.",
   "lines": [
-   1049
+   1069
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1052,
+  "line": 1072,
   "claim": "Совпадение на шагах $0$ и $1$ доказано в `RefinementSqrt.v` леммами `agree_at_0` и `agree_at_1`.",
   "theorem": "agree_at_1",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -36640,14 +37468,14 @@
   "checked": "2026-11-13",
   "note": "Lemma agree_at_1 : sqrt2_newton 1 == sqrt2_cf 1 (:75). Closed.",
   "lines": [
-   1052
+   1072
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1054,
+  "line": 1074,
   "claim": "совпадение на ранних шагах и расхождение с преимуществом Ньютона на шаге $2$ сведены в теорему `sqrt2_strict_refinement` файла `RefinementSqrt.v`.",
   "theorem": "sqrt2_strict_refinement",
   "file": "src/stdlib/RefinementSqrt.v",
@@ -36661,31 +37489,58 @@
   "checked": "2026-11-13",
   "note": "Theorem sqrt2_strict_refinement (:104) — конъюнкция четырёх лемм: agree_at_0, agree_at_1, differ_at_2, newton_better_at_2; страница называет её сводной. Closed.",
   "lines": [
-   1054
+   1074
   ],
   "file_sha": "56088ef6cd850da36ddfa0836ecbccf7c2a9d090"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1055,
-  "claim": "но теорема «ньютонов процесс и процесс цепной дроби эквивалентны по `process_equiv`» в репозитории ещё не доказана;",
-  "theorem": null,
-  "file": null,
-  "file_line": null,
+  "line": 1075,
+  "claim": "Теорема «ньютонов процесс и процесс цепной дроби эквивалентны по `process_equiv`» доказана — `newton_cf_equiv` (файл `Sqrt2Processes.v`); там же общая теорема `pos_sqrt2_unique`: любые два процесса с неотрицательными членами, квадрат которых сходится к двум, эквивалентны.",
+  "theorem": "newton_cf_equiv",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 538,
   "file_num": null,
-  "kind": null,
-  "statement": null,
-  "assumptions": "not-checked",
+  "kind": "Theorem",
+  "statement": "Theorem newton_cf_equiv : PC.process_equiv sqrt2_newton sqrt2_cf.",
+  "assumptions": "Closed under the global context",
   "page_price": "",
   "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Поиск по src: process_equiv к sqrt2_newton, sqrt2_cf нигде не применено. Теорема доказуема без аксиом (пробный файл: newton_cf_equiv, Closed)."
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора) (формализацией): было «в репозитории ещё не доказана». newton_cf_equiv : PC.process_equiv sqrt2_newton sqrt2_cf (:538). Closed under the global context.",
+  "lines": [
+   617,
+   1075
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1055,
+  "line": 1075,
+  "claim": "Теорема «ньютонов процесс и процесс цепной дроби эквивалентны по `process_equiv`» доказана — `newton_cf_equiv` (файл `Sqrt2Processes.v`); там же общая теорема `pos_sqrt2_unique`: любые два процесса с неотрицательными членами, квадрат которых сходится к двум, эквивалентны.",
+  "theorem": "pos_sqrt2_unique",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 170,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem pos_sqrt2_unique : forall R S : nat -> Q, gives_pos_sqrt2 R -> gives_pos_sqrt2 S -> PC.process_equiv R S.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "pos_sqrt2_unique : forall R S : nat -> Q, gives_pos_sqrt2 R -> gives_pos_sqrt2 S -> PC.process_equiv R S (:170). Closed under the global context.",
+  "lines": [
+   608,
+   1075
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 1075,
   "claim": "`process_equiv` (нотация `~~`) файла `ProcessCore.v`; там же доказаны `process_equiv_refl`, `process_equiv_sym`, `process_equiv_trans`.",
   "theorem": "process_equiv_sym",
   "file": "src/process/ProcessCore.v",
@@ -36699,14 +37554,14 @@
   "checked": "2026-11-13",
   "note": "Lemma process_equiv_sym : forall R1 R2, R1 ~~ R2 -> R2 ~~ R1 (:184). Closed. Нотация ~~ объявлена на :175.",
   "lines": [
-   1055
+   1075
   ],
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1055,
+  "line": 1075,
   "claim": "`process_equiv` (нотация `~~`) файла `ProcessCore.v`; там же доказаны `process_equiv_refl`, `process_equiv_sym`, `process_equiv_trans`.",
   "theorem": "process_equiv_trans",
   "file": "src/process/ProcessCore.v",
@@ -36720,14 +37575,14 @@
   "checked": "2026-11-13",
   "note": "Lemma process_equiv_trans : forall R1 R2 R3, R1 ~~ R2 -> R2 ~~ R3 -> R1 ~~ R3 (:194). Closed.",
   "lines": [
-   1055
+   1075
   ],
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1056,
+  "line": 1076,
   "claim": "Архимедово свойство в этой форме — теорема `Archimedean` файла `Archimedean_ERR.v` Rocq-репозитория ToS: для всякого $\\varepsilon > 0$ существует $N$, для которого $1/2^N < \\varepsilon$.",
   "theorem": "Archimedean",
   "file": "src/Archimedean_ERR.v",
@@ -36741,15 +37596,15 @@
   "checked": "2026-11-13",
   "note": "Theorem Archimedean : forall eps : Q, eps > 0 -> exists N : nat, 1 / Qpow2 N < eps (:104); Qpow2 n = 2^n (:44–47). Closed.",
   "lines": [
-   736,
-   1056
+   747,
+   1076
   ],
   "file_sha": "3767e260fc8de6df9713f13b9a1e1562fec07f17"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1056,
+  "line": 1076,
   "claim": "Файл содержит 14 доказанных утверждений и не вводит ни одной аксиомы; в частности, не используется никакая аксиома бесконечности.",
   "theorem": null,
   "file": "src/Archimedean_ERR.v",
@@ -36767,7 +37622,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1057,
+  "line": 1077,
   "claim": "Файл `Archimedean_ERR.v` прямо отмечает, что архимедово свойство есть утверждение о процессах: для всякой точности процесс деления пополам её достигает, и завершённой бесконечности для этого не требуется.",
   "theorem": null,
   "file": null,
@@ -36784,7 +37639,7 @@
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1058,
+  "line": 1078,
   "claim": "в разных файлах формализации используются эквивалентные технические варианты условия Коши — с индексами $n > N$ (как в `ShrinkingIntervals_ERR.v` и `Archimedean_ERR.v`) либо с индексами $N \\le n$ (как в файле `ProcessCore.v`).",
   "theorem": "is_Cauchy",
   "file": "src/process/ProcessCore.v",
@@ -36798,16 +37653,37 @@
   "checked": "2026-11-13",
   "note": "ShrinkingIntervals_ERR.v:163 и Archimedean_ERR.v:152 — (m > N), (n > N); ProcessCore.v:68 — (N <= m), (N <= n). Равносильность в src доказана: si_cauchy_compat (process/ProcessUncountable.v:58), cauchy_compat (process/ProcessIVT.v:63), обе Closed.",
   "lines": [
-   1058,
-   1059
+   1078,
+   1079
   ],
   "file_sha": "5a7d1ee2a5a8b8e4c9ba0648d54467db4022cd88"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1059,
-  "claim": "Теорема `shrinking_interval_Cauchy` файла `ShrinkingIntervals_ERR.v`: если ширина вложенных интервалов убывает как половинные доли, то процесс, держащийся внутри них, удовлетворяет свойству `is_Cauchy`.",
+  "line": 1079,
+  "claim": "Для процесса деления отрезка пополам эта оценка проверена теоремой `bisect_is_Cauchy` того же файла, а сам процесс сжимающихся интервалов для $\\sqrt{2}$ — с выбором половины по сравнению квадрата середины с двойкой — построен в файле `Sqrt2Processes.v` (`sqrt2_bisect`, `sqrt2_bisect_Cauchy`).",
+  "theorem": "bisect_is_Cauchy",
+  "file": "src/ShrinkingIntervals_ERR.v",
+  "file_line": 845,
+  "file_num": 1068,
+  "kind": "Theorem",
+  "statement": "Theorem bisect_is_Cauchy : forall choose_half s, bis_left s < bis_right s -> is_Cauchy (bisect_process choose_half s).",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "bisect_is_Cauchy : forall choose_half s, bis_left s < bis_right s -> is_Cauchy (bisect_process choose_half s) (:845); доказательство применяет shrinking_interval_Cauchy и проверяет оценку расстояний (:851–). Closed under the global context.",
+  "lines": [
+   1079
+  ],
+  "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 1079,
+  "claim": "Теорема `shrinking_interval_Cauchy` файла `ShrinkingIntervals_ERR.v`: если расстояние между приближениями с номерами $m \\le n$ не превосходит $(b - a)/2^m$ — как у процесса, держащегося во вложенных интервалах, ширина которых убывает как половинные доли, — то процесс удовлетворяет свойству `is_Cauchy`.",
   "theorem": "shrinking_interval_Cauchy",
   "file": "src/ShrinkingIntervals_ERR.v",
   "file_line": 559,
@@ -36816,21 +37692,64 @@
   "statement": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R.",
   "assumptions": "Closed under the global context",
   "page_price": "",
-  "verdict": "mismatch-statement",
+  "verdict": "ok",
   "checked": "2026-11-13",
-  "note": "Утверждение (:559): forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R. Вложенных интервалов в посылке нет — стоит оценка взаимных расстояний. Опора на Archimedean_width подтверждена (:567).",
+  "note": "исправлено 14.11 (Часть III, шаг 4, слово автора): посылка названа как в теореме — оценка взаимных расстояний. shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R. Closed under the global context. (:559). Опора на Archimedean_width подтверждена (:567).",
   "lines": [
-   738,
-   832,
-   1059,
-   1060
+   749,
+   845,
+   1079,
+   1080
   ],
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1060,
+  "line": 1079,
+  "claim": "Для процесса деления отрезка пополам эта оценка проверена теоремой `bisect_is_Cauchy` того же файла, а сам процесс сжимающихся интервалов для $\\sqrt{2}$ — с выбором половины по сравнению квадрата середины с двойкой — построен в файле `Sqrt2Processes.v` (`sqrt2_bisect`, `sqrt2_bisect_Cauchy`).",
+  "theorem": "sqrt2_bisect",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 441,
+  "file_num": null,
+  "kind": "Definition",
+  "statement": "Definition sqrt2_bisect : nat -> Q := SI.bisect_process sqrt2_choose sqrt2_start.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "Definition sqrt2_bisect : nat -> Q := SI.bisect_process sqrt2_choose sqrt2_start (:441); половина выбирается сравнением квадрата середины с двойкой (sqrt2_choose, Qle_bool) — без ссылки на цель. Closed under the global context.",
+  "lines": [
+   615,
+   1079
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 1079,
+  "claim": "Для процесса деления отрезка пополам эта оценка проверена теоремой `bisect_is_Cauchy` того же файла, а сам процесс сжимающихся интервалов для $\\sqrt{2}$ — с выбором половины по сравнению квадрата середины с двойкой — построен в файле `Sqrt2Processes.v` (`sqrt2_bisect`, `sqrt2_bisect_Cauchy`).",
+  "theorem": "sqrt2_bisect_Cauchy",
+  "file": "src/Sqrt2Processes.v",
+  "file_line": 445,
+  "file_num": null,
+  "kind": "Theorem",
+  "statement": "Theorem sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect.",
+  "assumptions": "Closed under the global context",
+  "page_price": "",
+  "verdict": "ok",
+  "checked": "2026-11-13",
+  "note": "sqrt2_bisect_Cauchy : SI.is_Cauchy sqrt2_bisect (:445); что этот процесс даёт корень — sqrt2_bisect_gives_pos_sqrt2, с оценкой |m_n^2 − 2| <= 4/2^n (sqrt2_bisect_quality). Closed under the global context.",
+  "lines": [
+   1079
+  ],
+  "file_sha": "4819c7a6460523e5b6a382f3d9123c97aadbeac9"
+ },
+ {
+  "batch": "audit-part-03",
+  "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+  "line": 1080,
   "claim": "аксиома `classic` в их доказательствах не применяется.",
   "theorem": "classic",
   "file": null,
@@ -36844,13 +37763,13 @@
   "checked": "2026-11-13",
   "note": "Stdlib.Logic.Classical_Prop.classic; в выводе Print Assumptions ни для одного из 212 объявлений ShrinkingIntervals_ERR.v не встречается.",
   "lines": [
-   1060
+   1080
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1060,
+  "line": 1080,
   "claim": "Общий же файл `ShrinkingIntervals_ERR.v` работает в классическом окружении ToS: он импортирует `ToS_Axioms` и классическую логику (`Classical_Pred_Type`) и комментарий файла это прямо оговаривает.",
   "theorem": "Classical_Pred_Type",
   "file": null,
@@ -36864,13 +37783,13 @@
   "checked": "2026-11-13",
   "note": "ShrinkingIntervals_ERR.v:72–73 — From ToS Require Import ToS_Axioms; From Stdlib Require Import Classical_Pred_Type; комментарий — строки 75–85. Ни одна лемма этих модулей в тексте файла не применена.",
   "lines": [
-   1060
+   1080
   ]
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1060,
+  "line": 1080,
   "claim": "теоремы файла, на которые ссылается глава (`shrinking_interval_Cauchy`) и которые понадобятся дальше (`unit_interval_uncountable_trisect_v2`), по `Print Assumptions` замкнуты",
   "theorem": "shrinking_interval_Cauchy",
   "file": "src/ShrinkingIntervals_ERR.v",
@@ -36884,17 +37803,17 @@
   "checked": "2026-11-13",
   "note": "Print Assumptions shrinking_interval_Cauchy: Closed under the global context (исправлено 12.11; подтверждено).",
   "lines": [
-   738,
-   832,
-   1059,
-   1060
+   749,
+   845,
+   1079,
+   1080
   ],
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1060,
+  "line": 1080,
   "claim": "[^18]: Стоит отметить и различие в логическом окружении файлов. Доказательство иррациональности $\\sqrt{2}$ (§ 4.2, файл `Sqrt2Irrational.v`) полностью конструктивно — без закона исключённого третьего. Общий же файл `ShrinkingIntervals_ERR.v` работает в классич",
   "theorem": "ToS_Axioms",
   "file": "src/ToS_Axioms.v",
@@ -36908,14 +37827,14 @@
   "checked": "2026-11-13",
   "note": "имя модуля; файл существует",
   "lines": [
-   1060
+   1080
   ],
   "auto": true
  },
  {
   "batch": "audit-part-03",
   "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
-  "line": 1060,
+  "line": 1080,
   "claim": "теоремы файла, на которые ссылается глава (`shrinking_interval_Cauchy`) и которые понадобятся дальше (`unit_interval_uncountable_trisect_v2`), по `Print Assumptions` замкнуты",
   "theorem": "unit_interval_uncountable_trisect_v2",
   "file": "src/ShrinkingIntervals_ERR.v",
@@ -36929,7 +37848,7 @@
   "checked": "2026-11-13",
   "note": "Print Assumptions unit_interval_uncountable_trisect_v2: Closed under the global context. Формулировка теоремы — предмет Части IV.",
   "lines": [
-   1060
+   1080
   ],
   "file_sha": "f689023e3bd28b45eae92a0fff5ed7944ccf710c"
  },
