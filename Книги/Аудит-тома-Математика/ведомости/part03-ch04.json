@@ -1,0 +1,639 @@
+{
+ "batch": "audit-part-03",
+ "chapter": "03 От натуральных к рациональным/04 От позиции к процессу.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 56,
+   "theorem": "no_rational_sqrt2",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Ни одно рациональное число не даёт в квадрате двойку. Это — не предположение, а доказанный факт, и Часть III докажет его строго в следующем разделе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem no_rational_sqrt2 : forall r : Q, ~ (r * r == 2) (Sqrt2Irrational.v:200). Closed under the global context."
+  },
+  {
+   "line": 86,
+   "theorem": "positive",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "В стандартной записи рационального числа Rocq числитель есть целое, а знаменатель *положителен* по устройству типа (тип `positive`, Глава III.2, § 2.5).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Стандартная библиотека: Record Q := Qmake { Qnum : Z; Qden : positive }; positive — Inductive Corelib.Numbers.BinNums.positive. В доказательстве no_rational_sqrt2 знаменатель разбирается как Z.pos d (Sqrt2Irrational.v:204–211)."
+  },
+  {
+   "line": 88,
+   "theorem": "sqrt2_irrational_Z",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Поэтому доказательство строится в два приёма: сперва доказывается промежуточная теорема для произвольных целых $p$ и $q$ при условии $q \\neq 0$, а затем она применяется к рациональному числу, у которого знаменатель имеет вид $q = \\texttt{Z.pos}(d)$ с положительным $d$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem sqrt2_irrational_Z : forall p q : Z, q <> 0 -> p * p <> 2 * (q * q) (:182); применена в no_rational_sqrt2 к (p, Z.pos d) (:211). Обе — Closed under the global context."
+  },
+  {
+   "line": 96,
+   "theorem": null,
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "ToS доказывает это строго и конструктивно.[^1]",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "Print Assumptions для всех 14 объявлений файла — Closed under the global context; разбор случаев идёт по разрешимому равенству целых (Z.eq_dec)."
+  },
+  {
+   "line": 108,
+   "theorem": "sq_even_implies_even",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "ToS доказывает это наблюдение отдельной леммой.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma sq_even_implies_even : forall n : Z, Z.even (n * n) = true -> Z.even n = true (:32). Closed. Доказана через Z.even_mul (чётность произведения), а не обращением леммы о нечётных; sq_odd_of_odd (:42) в цепочке не используется."
+  },
+  {
+   "line": 118,
+   "theorem": "sq_eq_2sq_both_even",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Итак, из $p^2 = 2 q^2$ следует, что $p$ и $q$ оба чётны.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma sq_eq_2sq_both_even : forall p q : Z, p * p = 2 * (q * q) -> Z.even p = true /\\ Z.even q = true (:74). Closed. Ход доказательства совпадает с изложенным на странице."
+  },
+  {
+   "line": 125,
+   "theorem": "descent_step",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Половинки $p'$ и $q'$ удовлетворяют *тому же самому* равенству.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma descent_step : forall p q : Z, p * p = 2 * (q * q) -> exists p' q' : Z, p = 2 * p' /\\ q = 2 * q' /\\ p' * p' = 2 * (q' * q') (:118). Closed."
+  },
+  {
+   "line": 138,
+   "theorem": "descent_to_zero",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Формально это и есть *сильная индукция по мере* $|p| + |q|$: предполагая утверждение доказанным для всех пар с меньшей мерой, его доказывают для пары с данной мерой",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство descent_to_zero: induction n using lt_wf_ind, где n = Z.to_nat (Z.abs p + Z.abs q) (:146–176); случаи p = 0, q = 0 разобраны прямо, спуск применён к паре без нулей."
+  },
+  {
+   "line": 146,
+   "theorem": "descent_to_zero",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Вывод: всякое решение $p^2 = 2 q^2$ есть пара нулей.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma descent_to_zero : forall n : nat, forall p q : Z, Z.to_nat (Z.abs p + Z.abs q) = n -> p * p = 2 * (q * q) -> p = 0 /\\ q = 0 (:146). Closed."
+  },
+  {
+   "line": 159,
+   "theorem": "no_rational_sqrt2",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "ToS доказывает это конструктивно, без единой аксиомы и без закона исключённого третьего.*",
+   "page_price": "без аксиом, без исключённого третьего",
+   "verdict": "ok",
+   "note": "Print Assumptions no_rational_sqrt2, sqrt2_irrational_Z, descent_to_zero, sqrt2_not_in_Q: Closed under the global context."
+  },
+  {
+   "line": 188,
+   "theorem": "no_rational_sqrt2",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "И доказано: ни одна позиция соразмерной разметки этому условию не отвечает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem no_rational_sqrt2 : forall r : Q, ~ (r * r == 2) (:200). Closed under the global context."
+  },
+  {
+   "line": 250,
+   "theorem": "sqrt2_not_in_Q",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Формально это и есть теорема `sqrt2_not_in_Q` файла `Sqrt2Irrational.v`: не существует рационального $r$, для которого $r \\cdot r$ равно $2$.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Corollary sqrt2_not_in_Q : ~ (exists r : Q, r * r == 2) (:217) — в исходнике объявлено следствием теоремы no_rational_sqrt2. Closed."
+  },
+  {
+   "line": 300,
+   "theorem": "sqrt2_newton",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Возьмём конкретный процесс, дающий $\\sqrt{2}$.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint sqrt2_newton (:19) — итерация x' = (x + 2/x)/2 от 1. Что процесс «даёт» корень в смысле предиката стр. 340–348, в src теоремой не записано; страница говорит это сама (стр. 352–358). Проверено в пробном файле: newton_gives_sqrt2, Closed."
+  },
+  {
+   "line": 323,
+   "theorem": null,
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Файл `RefinementSqrt.v` доказывает конкретные значения первых членов и сравнивает качество приближения на шаге $2$; но утверждение, что *каждый* следующий шаг строго точнее предыдущего, и утверждение о сходимости процесса в этом файле не доказаны как теоремы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле: newton_0, newton_1, newton_2, cf_0, cf_1, cf_2, newton_quality_2, cf_quality_2, newton_better_at_2 (13 Qed). Теорем о монотонном улучшении и о сходимости нет ни в файле, ни в src. Обе доказуемы без аксиом (пробный файл: newton_strictly_improves, newton_sq_to_2)."
+  },
+  {
+   "line": 352,
+   "theorem": "sqrt2_process",
+   "file": "src/stdlib/qphysics/QPhysicsProcesses.v",
+   "claim": "Стоит сразу сказать и о статусе этого предиката в репозитории: само определение `sqrt2_process` есть естественная формализация, но теоремы вида «`sqrt2_newton` удовлетворяет `sqrt2_process`» в текущем виде `RefinementSqrt.v` ещё не доказаны;",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В src имя sqrt2_process носит не предикат, а сам ньютонов процесс: Fixpoint sqrt2_process (K : nat) : Q (QPhysicsProcesses.v:47), по шагам равный sqrt2_newton. Предиката «процесс Коши и квадрат сходится к 2» в src нет. В записи страницы предикату вместе с R отвечает и −R (два класса)."
+  },
+  {
+   "line": 406,
+   "theorem": "sqrt2_quality",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "ToS измеряет это качество явной величиной — модулем разности квадрата и двойки.[^8]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition sqrt2_quality (x : Q) : Q := Qabs (x * x - 2) (:87)."
+  },
+  {
+   "line": 418,
+   "theorem": "sqrt2_not_in_Q",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "$\\sqrt{2}$ как процесс не является рациональной позицией — это доказано (§ 4.2), — но все его *стадии* вполне рациональны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказано: рационального числа с квадратом 2 нет (sqrt2_not_in_Q, :217); отсюда ни одна стадия процесса не даёт в квадрате двойку. Рациональность стадий — по типу: sqrt2_newton, sqrt2_cf : nat -> Q."
+  },
+  {
+   "line": 494,
+   "theorem": "sqrt2_cf",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Наряду с ньютоновым $\\sqrt{2}$ даётся процессом *цепной дроби*.[^9]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition sqrt2_cf (K : nat) : Q := inject_Z (sqrt2_cf_p K) / inject_Z (sqrt2_cf_q K) (:43), числители и знаменатели — рекуррентой a(k+2) = 2a(k+1) + a(k). Что процесс «даёт» корень, в src теоремой не записано; в пробном файле доказано (cf_gives_sqrt2; cf_eq_sx — совпадение с процессом Пелля из Sqrt2Approx.v)."
+  },
+  {
+   "line": 523,
+   "theorem": "agree_at_0",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "На первом шаге оба дают $1$; на втором — оба дают $3/2$; процессы совпадают.[^10]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma agree_at_0 : sqrt2_newton 0 == sqrt2_cf 0 (:72); agree_at_1 (:75). Closed. «Первый» и «второй» шаги страницы — индексы 0 и 1."
+  },
+  {
+   "line": 525,
+   "theorem": "differ_at_2",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Но на третьем шаге они расходятся: ньютонов даёт $17/12$, процесс цепной дроби — $7/5$. Это разные рациональные числа, и ToS отмечает их различие отдельной теоремой.[^11]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma differ_at_2 : ~ (sqrt2_newton 2 == sqrt2_cf 2) (:78); значения — newton_2 (17#12), cf_2 (7#5). Closed. «Третий шаг» страницы — индекс 2."
+  },
+  {
+   "line": 538,
+   "theorem": "newton_quality_2",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Качество $17/12$ есть $|(17/12)^2 - 2| = 1/144$; качество $7/5$ есть $|(7/5)^2 - 2| = 1/25$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma newton_quality_2 : sqrt2_quality (17#12) == 1#144 (:89); cf_quality_2 : sqrt2_quality (7#5) == 1#25 (:92). Closed."
+  },
+  {
+   "line": 541,
+   "theorem": "newton_better_at_2",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "ToS доказывает это сравнение теоремой.[^12]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma newton_better_at_2 : sqrt2_quality (sqrt2_newton 2) < sqrt2_quality (sqrt2_cf 2) (:95). Closed."
+  },
+  {
+   "line": 545,
+   "theorem": "newton_better_at_2",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "В файле `RefinementSqrt.v` формально проверено *конкретное* сравнение — на шаге $2$: ньютоново приближение там точнее цепно-дробного.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Одно сравнение, на индексе 2. Сравнимость качеств на всяком шаге следует из линейности порядка на Q (пробный файл: quality_comparable, Closed); содержательным было бы утверждение, какой процесс точнее на всяком шаге, — его в src нет."
+  },
+  {
+   "line": 574,
+   "theorem": "process_eq",
+   "file": "src/stdlib/ProcessRefinement.v",
+   "claim": "равенство процессов «по шагам» (в репозитории — отношение `process_eq` файла `ProcessRefinement.v`, требующее совпадения на *каждом* шаге) для них не выполняется — они расходятся уже на третьем шаге.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition process_eq (p q : Process) : Prop := forall K, p K == q K (:25). Отрицание для двух процессов в src теоремой не записано; следует из differ_at_2 одним шагом (пробный файл: newton_cf_not_process_eq, Closed)."
+  },
+  {
+   "line": 581,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Такое отношение в репозитории уже есть — это `process_equiv` файла `ProcessCore.v`, определённое как",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition process_equiv (R1 R2 : RealProcess) : Prop := forall eps : Q, 0 < eps -> exists N : nat, forall n : nat, (N <= n)%nat -> Qabs (R1 n - R2 n) < eps (:170) — совпадает с формулой страницы."
+  },
+  {
+   "line": 593,
+   "theorem": "process_equiv_refl",
+   "file": "src/process/ProcessCore.v",
+   "claim": "и для него там доказаны рефлексивность, симметрия и транзитивность — то есть это *настоящее* отношение эквивалентности.[^13]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_equiv_refl (:177), process_equiv_sym (:184), process_equiv_trans (:194) — три леммы; все Closed under the global context."
+  },
+  {
+   "line": 604,
+   "theorem": "differ_at_2",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Формально в файле `RefinementSqrt.v` построены и сопоставлены *два* конкретных процесса — ньютонов и цепной дроби — и доказано их различие на шаге $2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sqrt2_newton (:19), sqrt2_cf (:43), differ_at_2 (:78). Что оба процесса дают один корень, в src не доказано (страница говорит это на стр. 352–358 и в сноске 13)."
+  },
+  {
+   "line": 607,
+   "theorem": null,
+   "claim": "Более сильное утверждение — что таких процессов *открытое семейство* — естественно и математически стандартно, но в текущем виде репозитория оно не формализовано, и глава приводит его как содержательную программу, а не как доказанный факт.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: теорем о сходимости семейства процессов к корню из двух нет. Параметризованный ньютонов процесс определён — Fixpoint sqrt_newton (a x0 : Q) (n : nat) (stdlib/PiBasel.v:45), — но о нём доказаны только отдельные значения."
+  },
+  {
+   "line": 642,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Разные процессы дают одно $\\sqrt{2}$ не потому, что равны по шагам, а потому, что эквивалентны — их взаимное расстояние уходит к нулю (`process_equiv`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отношение определено (ProcessCore.v:170). Эквивалентность ньютонова и цепно-дробного процессов в src теоремой не записана — сноска 13 говорит это; проверена в пробном файле (newton_cf_equiv, Closed)."
+  },
+  {
+   "line": 700,
+   "theorem": "Archimedean",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "ToS доказывает это строго.[^14]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem Archimedean : forall eps : Q, eps > 0 -> exists N : nat, 1 / Qpow2 N < eps (:104). Closed. Одноимённая теорема с тем же утверждением — ShrinkingIntervals_ERR.v:392."
+  },
+  {
+   "line": 704,
+   "theorem": "pow2_unbounded",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Растут степени двойки не по допущению, а по доказанной лемме: ToS выводит их неограниченный рост из устройства самих натуральных чисел.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pow2_ge_Sn : Z.pos (pow2 n) >= Z.of_nat (S n) (:63, индукция по n); pow2_exceeds_pos (:73); pow2_unbounded (:83). Archimedean опирается на pow2_exceeds_pos. Все — Closed."
+  },
+  {
+   "line": 736,
+   "theorem": "Archimedean_width",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "файл `Archimedean_ERR.v` доказывает не только `Archimedean`, но и `Archimedean_width` (достижимость для масштабированной ширины)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem Archimedean_width : forall (width eps : Q), width > 0 -> eps > 0 -> exists N : nat, width / Qpow2 N < eps (:116). Closed."
+  },
+  {
+   "line": 738,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "`shrinking_interval_Cauchy` — теорему о том, что процесс, удерживаемый в интервалах с убывающей шириной, есть процесс Коши;",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Theorem shrinking_interval_Cauchy : forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R (:158). Интервалов в утверждении нет: посылка — оценка взаимных расстояний; a и b входят только разностью. Об интервалах — bisect_is_Cauchy (ShrinkingIntervals_ERR.v:845)."
+  },
+  {
+   "line": 750,
+   "theorem": "Archimedean",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "для всякой наперёд заданной точности $\\varepsilon$ найдётся шаг $N$, на котором доля $1/2^N$ уже меньше $\\varepsilon$. ToS его доказывает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка совпадает с Archimedean (Archimedean_ERR.v:104). Closed."
+  },
+  {
+   "line": 790,
+   "theorem": "is_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Свойство Коши ToS определяет точно.[^16]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition is_Cauchy (R : RealProcess) : Prop := forall eps, eps > 0 -> exists N, forall m n, (m > N)%nat -> (n > N)%nat -> Qabs (R m - R n) < eps (ShrinkingIntervals_ERR.v:163) — совпадает со словами страницы."
+  },
+  {
+   "line": 827,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "ToS доказывает эту связь теоремой: процесс *сжимающихся интервалов*, задающий $\\sqrt{2}$, есть процесс Коши.[^17]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема (:559) общая: о всяком процессе с оценкой |R m − R n| <= (b − a)/2^m. Процесса сжимающихся интервалов для квадрата, равного двум, в src нет; ни shrinking_interval_Cauchy, ни bisect_is_Cauchy к такому процессу не применены. Строится без аксиом (пробный файл: sqrt2_bisect, sqrt2_bisect_Cauchy, sqrt2_bisect_sq_to_2)."
+  },
+  {
+   "line": 831,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Теорема `shrinking_interval_Cauchy` говорит о процессе *особого рода* — о процессе сжимающихся интервалов, удерживающем приближения во вложенных отрезках убывающей вдвое ширины.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В утверждении (:559) род процесса не ограничен и интервалов нет: посылка — оценка |R m − R n| <= (b − a)/2^m при m <= n. Ньютонов процесс этой посылке отвечает, как только оценка доказана (пробный файл: newton_distance_bound, newton_Cauchy_by_shrinking). Вывод страницы — «нужна своя оценка» — верен."
+  },
+  {
+   "line": 844,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "и процесс сжимающихся интервалов, задающий $\\sqrt{2}$, этим механизмом и есть процесс Коши.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: такого процесса в src нет (см. запись стр. 827). Общая теорема о процессе деления отрезка пополам — bisect_is_Cauchy : forall choose_half s, bis_left s < bis_right s -> is_Cauchy (bisect_process choose_half s) (:845), Closed; к корню из двух она не применена."
+  },
+  {
+   "line": 846,
+   "theorem": null,
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Для ньютонова же и цепно-дробного процессов утверждение «это процесс Коши» нуждается в собственных оценках сходимости — и эти оценки в текущем виде `RefinementSqrt.v` не доказаны (§ 4.5).[^18]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорем is_Cauchy sqrt2_newton, is_Cauchy sqrt2_cf в src нет (поиск по всему src). Ближайшее: точная погрешность процесса Пелля sx_abs_eq (Sqrt2Approx.v:143). Обе оценки и оба свойства Коши доказаны в пробном файле (newton_quality_bound, newton_Cauchy_SI, cf_Cauchy_SI — Closed)."
+  },
+  {
+   "line": 855,
+   "theorem": null,
+   "claim": "Часть III установила: $\\sqrt{2}$ даётся процессом — функциональной системой рациональных приближений (§ 4.4); процессов таких открытый класс (§ 4.5); всякий такой процесс достигает любой точности (§ 4.6) и есть процесс Коши (§ 4.7).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: «установила» — для ньютонова и цепно-дробного процессов ни сходимость квадрата к двум, ни свойство Коши в src не доказаны (страница говорит это сама: стр. 723–735, 846–848), открытое семейство не формализовано (стр. 607–611), процесса сжимающихся интервалов для корня нет."
+  },
+  {
+   "line": 880,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Процесс *сжимающихся интервалов*, задающий $\\sqrt{2}$, обладает им доказанно: вложенные отрезки убывающей вдвое ширины удерживают приближения, а архимедово свойство ручается, что взаимное расстояние делается меньше всякой меры.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: «доказанно» — в src нет процесса сжимающихся интервалов для квадрата, равного двум; доказана общая теорема (см. записи стр. 827, 844)."
+  },
+  {
+   "line": 895,
+   "theorem": "descent_to_zero",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "И показала, строгим доказательством бесконечного спуска, что ни одна позиция соразмерной разметки этой задаче не отвечает (§ 4.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Цепочка descent_step (:118) -> descent_to_zero (:146) -> sqrt2_irrational_Z (:182) -> no_rational_sqrt2 (:200); все Closed under the global context."
+  },
+  {
+   "line": 903,
+   "theorem": null,
+   "claim": "глава показала, что процесс достигает любой точности — по архимедову свойству (§ 4.6), — и что он есть процесс Коши: его приближения неограниченно сближаются между собой (§ 4.7).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: «показала» — для разобранных процессов (ньютонова, цепной дроби) ни то, ни другое в src не доказано; § 4.6 сам говорит, что архимедово свойство без оценки погрешности сходимости конкретного процесса не даёт (стр. 723–735)."
+  },
+  {
+   "line": 919,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«система» здесь — содержательная интерпретация по образцу функциональной системы Части I, не построенный в коде объект `System` $L$;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) (TheoryOfSystems_Core_ERR.v:203). Экземпляра System для корня из двух в src нет (поиск mkSystem в файлах, упоминающих sqrt2, пуст) — страница говорит это прямо."
+  },
+  {
+   "line": 921,
+   "theorem": "sqrt2_process",
+   "file": "src/stdlib/qphysics/QPhysicsProcesses.v",
+   "claim": "единство процессов взято через *слабое* отношение `process_equiv`, а предикат `sqrt2_process` — формализация-цель (§ 4.4–4.5).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Статус «цель» назван честно, но имя занято: в src sqrt2_process — Fixpoint, сам ньютонов процесс nat -> Q (QPhysicsProcesses.v:47), не предикат (см. запись стр. 352)."
+  },
+  {
+   "line": 930,
+   "theorem": "sqrt2_quality",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "| качество `sqrt2_quality` $= |x \\cdot x - 2|$ | роль составляющей | Role |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition sqrt2_quality (x : Q) : Q := Qabs (x * x - 2) (:87)."
+  },
+  {
+   "line": 932,
+   "theorem": null,
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "| законы $L1$–$L5$ (здесь $L3$ для предела) | универсальный слой | Rule (универс.) |",
+   "page_price": "L3 для предела",
+   "verdict": "mismatch-price",
+   "note": "Ни одна теорема, названная главой, от исключённого третьего не зависит: Print Assumptions для всех объявлений Sqrt2Irrational.v, RefinementSqrt.v, Archimedean_ERR.v, ShrinkingIntervals_ERR.v (212 объявлений) и трёх лемм ProcessCore.v — Closed under the global context."
+  },
+  {
+   "line": 946,
+   "theorem": "sqrt2_not_in_Q",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Честные границы при этом сохранены: `sqrt2_not_in_Q` доказано конструктивно (без $L3$)",
+   "page_price": "без L3",
+   "verdict": "ok",
+   "note": "Print Assumptions sqrt2_not_in_Q: Closed under the global context."
+  },
+  {
+   "line": 948,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "тогда как теория сжимающихся интервалов § 4.7 опирается на $L3$, — это разные статусы, смешивать их не следует.",
+   "page_price": "опирается на L3",
+   "verdict": "mismatch-price",
+   "note": "Print Assumptions shrinking_interval_Cauchy (оба файла), bisect_is_Cauchy, Archimedean, Archimedean_width: Closed under the global context; то же для всех 212 объявлений ShrinkingIntervals_ERR.v. Сноска 18 той же главы (исправлена 12.11) говорит это: «окружение — не опора»."
+  },
+  {
+   "line": 1043,
+   "theorem": "analysis",
+   "external": true,
+   "assumptions": "не применимо (имя каталога)",
+   "claim": "Доказательство, излагаемое в этом разделе, формализовано в файле `Sqrt2Irrational.v` Rocq-репозитория ToS (каталог `analysis`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя каталога: файл лежит в src/analysis/Sqrt2Irrational.v."
+  },
+  {
+   "line": 1043,
+   "theorem": null,
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Файл содержит 14 доказанных утверждений, не опирается ни на одну аксиому и не пользуется законом исключённого третьего.",
+   "page_price": "без аксиом, без исключённого третьего",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' = 14. Print Assumptions для всех 14 объявлений — Closed under the global context."
+  },
+  {
+   "line": 1046,
+   "theorem": "descent_step",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "Шаг спуска — лемма `descent_step` файла `Sqrt2Irrational.v`: из $p^2 = 2 q^2$ строятся $p' = p/2$ и $q' = q/2$ с тем же $p'^2 = 2 q'^2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В лемме (:118) половины даны существованием: exists p' q', p = 2 * p' /\\ q = 2 * q' /\\ p' * p' = 2 * (q' * q')."
+  },
+  {
+   "line": 1047,
+   "theorem": "lt_wf_ind",
+   "external": true,
+   "assumptions": "не применимо (лемма стандартной библиотеки)",
+   "claim": "Это — лемма `descent_to_zero` файла `Sqrt2Irrational.v`, доказанная сильной индукцией (Rocq: `lt_wf_ind`) по мере $|p| + |q|$, точнее по $\\texttt{Z.to\\_nat}(|p| + |q|)$: всякое решение $p^2 = 2 q^2$ есть $p = 0$, $q = 0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Стандартная библиотека: Stdlib.Arith.Wf_nat.lt_wf_ind; применена в Sqrt2Irrational.v:151 (induction n as [n IH] using lt_wf_ind). Мера — Z.to_nat (Z.abs p + Z.abs q) (:147)."
+  },
+  {
+   "line": 1048,
+   "theorem": "sqrt2_not_in_Q",
+   "file": "src/analysis/Sqrt2Irrational.v",
+   "claim": "`sqrt2_not_in_Q` файла `Sqrt2Irrational.v`: $\\lnot (\\exists r : ℚ,\\; r \\cdot r == 2)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с исходником: ~ (exists r : Q, r * r == 2) (:217)."
+  },
+  {
+   "line": 1049,
+   "theorem": "stdlib",
+   "external": true,
+   "assumptions": "не применимо (имя каталога)",
+   "claim": "Процессы, разбираемые в этом разделе и в следующем, формализованы в файле `RefinementSqrt.v` Rocq-репозитория ToS (каталог `stdlib`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя каталога: файл лежит в src/stdlib/RefinementSqrt.v."
+  },
+  {
+   "line": 1049,
+   "theorem": "sqrt2_cf",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Файл определяет процессы `sqrt2_newton` и `sqrt2_cf` и доказывает их конкретные значения на первых шагах; о границах доказанного см. § 4.5.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sqrt2_newton (:19), sqrt2_cf (:43); значения на индексах 0, 1, 2 — newton_0, newton_1, newton_2, cf_0, cf_1, cf_2. Значения 577/408 и 17/12 на индексе 3 в файле леммами не записаны; вычислением подтверждены (пробный файл: newton_3, cf_3)."
+  },
+  {
+   "line": 1052,
+   "theorem": "agree_at_1",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "Совпадение на шагах $0$ и $1$ доказано в `RefinementSqrt.v` леммами `agree_at_0` и `agree_at_1`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma agree_at_1 : sqrt2_newton 1 == sqrt2_cf 1 (:75). Closed."
+  },
+  {
+   "line": 1054,
+   "theorem": "sqrt2_strict_refinement",
+   "file": "src/stdlib/RefinementSqrt.v",
+   "claim": "совпадение на ранних шагах и расхождение с преимуществом Ньютона на шаге $2$ сведены в теорему `sqrt2_strict_refinement` файла `RefinementSqrt.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem sqrt2_strict_refinement (:104) — конъюнкция четырёх лемм: agree_at_0, agree_at_1, differ_at_2, newton_better_at_2; страница называет её сводной. Closed."
+  },
+  {
+   "line": 1055,
+   "theorem": "process_equiv_sym",
+   "file": "src/process/ProcessCore.v",
+   "claim": "`process_equiv` (нотация `~~`) файла `ProcessCore.v`; там же доказаны `process_equiv_refl`, `process_equiv_sym`, `process_equiv_trans`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma process_equiv_sym : forall R1 R2, R1 ~~ R2 -> R2 ~~ R1 (:184). Closed. Нотация ~~ объявлена на :175."
+  },
+  {
+   "line": 1055,
+   "theorem": "process_equiv_trans",
+   "file": "src/process/ProcessCore.v",
+   "claim": "`process_equiv` (нотация `~~`) файла `ProcessCore.v`; там же доказаны `process_equiv_refl`, `process_equiv_sym`, `process_equiv_trans`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma process_equiv_trans : forall R1 R2 R3, R1 ~~ R2 -> R2 ~~ R3 -> R1 ~~ R3 (:194). Closed."
+  },
+  {
+   "line": 1055,
+   "theorem": null,
+   "claim": "но теорема «ньютонов процесс и процесс цепной дроби эквивалентны по `process_equiv`» в репозитории ещё не доказана;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поиск по src: process_equiv к sqrt2_newton, sqrt2_cf нигде не применено. Теорема доказуема без аксиом (пробный файл: newton_cf_equiv, Closed)."
+  },
+  {
+   "line": 1056,
+   "theorem": "Archimedean",
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Архимедово свойство в этой форме — теорема `Archimedean` файла `Archimedean_ERR.v` Rocq-репозитория ToS: для всякого $\\varepsilon > 0$ существует $N$, для которого $1/2^N < \\varepsilon$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem Archimedean : forall eps : Q, eps > 0 -> exists N : nat, 1 / Qpow2 N < eps (:104); Qpow2 n = 2^n (:44–47). Closed."
+  },
+  {
+   "line": 1056,
+   "theorem": null,
+   "file": "src/Archimedean_ERR.v",
+   "claim": "Файл содержит 14 доказанных утверждений и не вводит ни одной аксиомы; в частности, не используется никакая аксиома бесконечности.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' = 14; строк Axiom и Parameter нет. Print Assumptions для всех 18 объявлений файла — Closed under the global context."
+  },
+  {
+   "line": 1057,
+   "theorem": null,
+   "claim": "Файл `Archimedean_ERR.v` прямо отмечает, что архимедово свойство есть утверждение о процессах: для всякой точности процесс деления пополам её достигает, и завершённой бесконечности для этого не требуется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий файла, строки 24–27: «This theorem is about PROCESSES - for any precision, the process of halving eventually reaches it. No completed infinity needed.»"
+  },
+  {
+   "line": 1058,
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "в разных файлах формализации используются эквивалентные технические варианты условия Коши — с индексами $n > N$ (как в `ShrinkingIntervals_ERR.v` и `Archimedean_ERR.v`) либо с индексами $N \\le n$ (как в файле `ProcessCore.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ShrinkingIntervals_ERR.v:163 и Archimedean_ERR.v:152 — (m > N), (n > N); ProcessCore.v:68 — (N <= m), (N <= n). Равносильность в src доказана: si_cauchy_compat (process/ProcessUncountable.v:58), cauchy_compat (process/ProcessIVT.v:63), обе Closed."
+  },
+  {
+   "line": 1059,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "Теорема `shrinking_interval_Cauchy` файла `ShrinkingIntervals_ERR.v`: если ширина вложенных интервалов убывает как половинные доли, то процесс, держащийся внутри них, удовлетворяет свойству `is_Cauchy`.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Утверждение (:559): forall (R : RealProcess) (a b : Q), a < b -> (forall m n, (m <= n)%nat -> Qabs (R m - R n) <= (b - a) / Qpow2 m) -> is_Cauchy R. Вложенных интервалов в посылке нет — стоит оценка взаимных расстояний. Опора на Archimedean_width подтверждена (:567)."
+  },
+  {
+   "line": 1060,
+   "theorem": "Classical_Pred_Type",
+   "external": true,
+   "assumptions": "не применимо (модуль стандартной библиотеки)",
+   "claim": "Общий же файл `ShrinkingIntervals_ERR.v` работает в классическом окружении ToS: он импортирует `ToS_Axioms` и классическую логику (`Classical_Pred_Type`) и комментарий файла это прямо оговаривает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ShrinkingIntervals_ERR.v:72–73 — From ToS Require Import ToS_Axioms; From Stdlib Require Import Classical_Pred_Type; комментарий — строки 75–85. Ни одна лемма этих модулей в тексте файла не применена."
+  },
+  {
+   "line": 1060,
+   "theorem": "shrinking_interval_Cauchy",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "теоремы файла, на которые ссылается глава (`shrinking_interval_Cauchy`) и которые понадобятся дальше (`unit_interval_uncountable_trisect_v2`), по `Print Assumptions` замкнуты",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Print Assumptions shrinking_interval_Cauchy: Closed under the global context (исправлено 12.11; подтверждено)."
+  },
+  {
+   "line": 1060,
+   "theorem": "unit_interval_uncountable_trisect_v2",
+   "file": "src/ShrinkingIntervals_ERR.v",
+   "claim": "теоремы файла, на которые ссылается глава (`shrinking_interval_Cauchy`) и которые понадобятся дальше (`unit_interval_uncountable_trisect_v2`), по `Print Assumptions` замкнуты",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Print Assumptions unit_interval_uncountable_trisect_v2: Closed under the global context. Формулировка теоремы — предмет Части IV."
+  },
+  {
+   "line": 1060,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "не применимо (аксиома стандартной библиотеки)",
+   "claim": "аксиома `classic` в их доказательствах не применяется.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "Stdlib.Logic.Classical_Prop.classic; в выводе Print Assumptions ни для одного из 212 объявлений ShrinkingIntervals_ERR.v не встречается."
+  }
+ ]
+}

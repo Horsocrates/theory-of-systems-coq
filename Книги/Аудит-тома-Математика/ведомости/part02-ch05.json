@@ -1,0 +1,806 @@
+{
+ "batch": "audit-part-02",
+ "chapter": "02 Натуральные числа/05 Структурный путь число как позиция в системе.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 221,
+   "theorem": "StructuredSystem",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Сопоставление это ToS задаёт как функцию от *позиции*: позиции сопоставляется занимающий её элемент.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record StructuredSystem (L : Level) (TheoryOfSystems_Core_ERR.v:567): поля ss_base : System L, ss_assignment : Position -> option (crit_domain L (sys_criterion L ss_base)), ss_L5_valid. Сопоставление — функция от позиции в option элемента. Closed under the global context."
+  },
+  {
+   "line": 222,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "И тип позиции в этом сопоставлении есть `nat` — тип натуральных чисел.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition Position := nat (TheoryOfSystems_Core_ERR.v:564). В пробном файле: Check (eq_refl : Position = nat) проходит."
+  },
+  {
+   "line": 248,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "То, что в репозитории ToS тип `Position` прямо определён как `nat`, — не посылка пути, но и не машинный вывод натурального ряда.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: Definition Position := nat (:564) — определение-сокращение; теоремы, получающей nat из StructuredSystem или из законов, в формализации нет, и страница её не заявляет."
+  },
+  {
+   "line": 250,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "В Rocq запись `Position := nat`, конечно, *использует* уже имеющийся тип `nat` — тип, данный языком. Поэтому машинная формализация не *создаёт* натуральный ряд заново и не *выводит* его из $L4$ и $L5$ как теорему.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Locate nat: Inductive Corelib.Init.Datatypes.nat — тип стандартной библиотеки; в src он не объявляется. Слова страницы о статусе записи совпадают с положением дел."
+  },
+  {
+   "line": 326,
+   "theorem": "ss_assignment",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "В текущем Rocq-коде тип `Position` задан как `nat`, а поле `ss_assignment` есть *частичная* функция: она может возвращать `None` для всякой позиции (пустая система) или быть занятой лишь на разреженном наборе позиций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле ss_assignment : Position -> option (…) (:569). Оба случая построены в пробном файле: empty_ss (всюду None) и sparse_ss (занята одна позиция 5) — обе записи типа StructuredSystem L2; Closed under the global context."
+  },
+  {
+   "line": 326,
+   "theorem": "None",
+   "external": true,
+   "assumptions": "не применимо (конструктор стандартной библиотеки)",
+   "claim": "В текущем Rocq-коде тип `Position` задан как `nat`, а поле `ss_assignment` есть *частичная* функция: она может возвращать `None` для всякой позиции (пустая система) или быть занятой лишь на разреженном наборе позиций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "None — конструктор option стандартной библиотеки (Corelib.Init.Datatypes.None). Пустая система empty_ss с назначением fun _ => None построена в пробном файле."
+  },
+  {
+   "line": 330,
+   "theorem": "StructuredSystem",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Поэтому «первая позиция» не следует из `StructuredSystem` автоматически — она требует, чтобы система была непустой; а чтобы первая занятая позиция несла номер $1$ — чтобы занятые позиции образовывали упорядоченный начальный ряд.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора): разведено, что нужно для первой позиции (непустота — first_position_iff_nonempty), а что — для номера 1 (начальный отрезок — normalized_first_number_one; без него sparse_first_is_5). src/foundation/StructuralPath.v, Closed under the global context."
+  },
+  {
+   "line": 336,
+   "theorem": "StructuredSystem",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Более общая частичная функция `Position -> option Element` текущего кода нормализацию не навязывает; она может быть добавлена отдельным условием.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В записи StructuredSystem условия на начальный отрезок нет: sparse_ss не нормализована (sparse_not_normalized, пробный файл, Closed). Условие normalized и следствия из него проверены там же."
+  },
+  {
+   "line": 341,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Здесь нужно развести два слоя — ровно как в Главе II.3 при разводе `level_depth` и `level_to_nat`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_depth (TheoryOfSystems_Core_ERR.v:78): L1 => 1, LS l' => S (level_depth l') — счёт с единицы. Связь двух счётов доказана: level_depth_eq : forall l, level_depth l = S (level_to_nat l) (foundation/LevelNatIso.v:121, Closed under the global context)."
+  },
+  {
+   "line": 341,
+   "theorem": "level_to_nat",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Здесь нужно развести два слоя — ровно как в Главе II.3 при разводе `level_depth` и `level_to_nat`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_to_nat (L5_NatFromHierarchy.v:17) на отдельном типе LBase/LSucc: LBase => 0 — счёт с нуля; этот файл называет Глава II.3. Одноимённая функция на основном типе Level есть в foundation/LevelNatIso.v:37 (L1 => 0)."
+  },
+  {
+   "line": 343,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Технически, поскольку `Position` в Rocq-коде задан как `nat`, возможна *нулевая* индексация: первый технический индекс есть $0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Position := nat; nat стандартной библиотеки начинается с O. В нормализованной непустой системе первая занятая позиция — 0 (normalized_first_is_zero, пробный файл, Closed)."
+  },
+  {
+   "line": 349,
+   "theorem": "pos_number",
+   "external": true,
+   "assumptions": "не применимо (объявления в формализации нет)",
+   "claim": "ToS-номер позиции есть технический индекс плюс единица, — что можно записать функцией `pos_number p := S p` (тогда `pos_number 0 = 1`, `pos_number 1 = 2`).[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявления pos_number в src нет, и страница это говорит (сноска 3). Определение и оба равенства проверены в пробном файле (pos_number_examples, reflexivity)."
+  },
+  {
+   "line": 395,
+   "theorem": "S",
+   "external": true,
+   "assumptions": "не применимо (конструктор стандартной библиотеки)",
+   "claim": "Четыре операции, и все четыре суть одна операция следования `S`, взятая в четырёх видах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "S — конструктор nat стандартной библиотеки (Corelib.Init.Datatypes.S); на структурном пути S : Position -> Position по определению Position := nat. Теоремы, сводящей четыре вида операции в одну, в формализации нет; страница подаёт это как довод (стр. 1037–1041)."
+  },
+  {
+   "line": 410,
+   "theorem": "ss_assignment",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "занятые места конечной системы образуют конечный начальный отрезок $1, 2, …, n$, а в общем случае частичная функция `ss_assignment` может задавать и иное, разреженное назначение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Разреженное назначение допустимо: sparse_ss (занята только позиция 5) — запись типа StructuredSystem L2; sparse_ss_only_5, Closed under the global context."
+  },
+  {
+   "line": 442,
+   "theorem": "ss_L5_valid",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "ToS закрепляет упорядоченность позиций формально. В структурированной системе действует закон $L5$: один и тот же элемент стоит на единственной позиции, и позиции расположены в порядке.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле ss_L5_valid : forall p1 p2 e, ss_assignment p1 = Some e -> ss_assignment p2 = Some e -> p1 = p2 (:573) — единственность позиции элемента. Порядок позиций в запись не входит: это порядок nat; сноска 4 говорит это прямо."
+  },
+  {
+   "line": 512,
+   "theorem": "compute_weight",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "Эта мера есть число: элементу отвечает его *вес*, выраженный натуральным числом, и вес складывается из частных оценок соответствия, тоже числовых.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "compute_weight : RawScores -> IntegrityGate -> nat (ERRProcess.v:96): при пройденных воротах rs_struct_points + rs_current_domain * 10 + rs_domain_points, иначе 0. Три слагаемых — числа, подаваемые на вход; второе — номер домена с множителем 10 (weight_formula, пробный файл)."
+  },
+  {
+   "line": 514,
+   "theorem": "candidate_iff_positive_weight",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "По весу и решается, занять элементу роль или нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора) (формализацией): слова страницы получили теорему. candidate_iff_positive_weight : forall id lg sig sc, 1 <= rs_current_domain sc -> (ent_status (process_entity id lg sig sc) = Candidate <-> 0 < ent_weight (process_entity id lg sig sc)). Closed under the global context. Условие (номер домена не меньше единицы) названо в сноске 5; без него обратная сторона неверна (candidate_with_zero_weight)."
+  },
+  {
+   "line": 515,
+   "theorem": "resolve_role",
+   "file": "src/Roles.v",
+   "claim": "А там, где роль допускает многих и нужно выбрать одного — первого среди подходящих, — разрешение тоже идёт числом: по порядку позиций-кандидатов.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "resolve_role (Roles.v:206) = L5_resolve (role_candidates S decide positions) default — наименьшее из позиций-кандидатов и позиции по умолчанию; разрешение идёт по порядку nat. О том, что итог есть кандидат, см. записи сносок 5 и 6."
+  },
+  {
+   "line": 537,
+   "theorem": "ent_weight",
+   "file": "src/foundation/ERRProcess.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи ERREntity)",
+   "claim": "формально это два разных употребления `nat`: `Position` в одном файле, `ent_weight` в другом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле ent_weight : nat записи ERREntity (ERRProcess.v:111); Position := nat — в TheoryOfSystems_Core_ERR.v:564. ERRProcess.v подключает только стандартную библиотеку; связи между двумя употреблениями в формализации нет."
+  },
+  {
+   "line": 537,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "формально это два разных употребления `nat`: `Position` в одном файле, `ent_weight` в другом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition Position := nat (TheoryOfSystems_Core_ERR.v:564); ent_weight : nat — поле ERREntity (foundation/ERRProcess.v:111). Два файла друг друга не подключают."
+  },
+  {
+   "line": 761,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Поскольку в текущем коде `Position := nat`, индукция по позициям *технически совпадает* со стандартной индукцией по `nat`: это не новый принцип, машинно выведенный из `StructuredSystem`, а обычная `nat`-индукция, применённая к типу позиций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно. В пробном файле: Definition position_ind : forall P : Position -> Prop, P 0 -> (forall p, P p -> P (S p)) -> forall p, P p := nat_ind — принимается без доказательства; отдельного принципа индукции для StructuredSystem в формализации нет."
+  },
+  {
+   "line": 776,
+   "theorem": "pos_number",
+   "external": true,
+   "assumptions": "не применимо (объявления в формализации нет)",
+   "claim": "На *ToS*-уровне позиционный номер сдвинут: `pos_number p = S p`, первая позиция несёт номер $1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявления pos_number в src нет (страница говорит это в сноске 3, стр. 350). В пробном файле индукция по номеру с базой 1 получена из nat-индукции по индексу (number_ind_from_one, Closed under the global context)."
+  },
+  {
+   "line": 858,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "`Position := nat` есть техническая запись, пользующаяся готовым `nat`, не посылка вывода и не машинный вывод $ℕ$ из системы (§ 5.3).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition Position := nat (:564). Статус назван честно: теоремы о получении nat из системы в формализации нет."
+  },
+  {
+   "line": 880,
+   "theorem": null,
+   "file": "src/Roles.v",
+   "claim": "Заголовки опорных файлов задают разметку: *элементы — $L1$, роли — $L4$, правила — $L5$* (`Roles.v`), а E/R/R-процесс идёт в направлении Rules $\\to$ Roles $\\to$ Elements (`ERRProcess.v`, § 5.5).[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка Roles.v:9–12: Elements ← L1, Roles ← L4, Rules ← L5; шапка ERRProcess.v:15: «Rules → determine → Roles → distinguish → Elements». Оба места — комментарии; страница называет их заголовками файлов."
+  },
+  {
+   "line": 883,
+   "theorem": "ss_L5_valid",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "Оговорка о статусе: «система» здесь — содержательная интерпретация (`StructuredSystem` с частичным назначением мест); `ss_L5_valid` фиксирует лишь одну сторону единственности, первая позиция требует непустоты (§ 5.3–5.4), а `process_entity` сейчас присваивает только `Candidate`/`Invalid` (§ 5.5); общие теоремы о первой позиции, о выборе первого кандидата и о выборе по весу — в файле `StructuralPath.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ss_L5_valid — единственность позиции элемента (TheoryOfSystems_Core_ERR.v:573). «Первая позиция требует непустоты» — first_position_iff_nonempty (src/foundation/StructuralPath.v), Closed under the global context."
+  },
+  {
+   "line": 883,
+   "theorem": "process_entity",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "Оговорка о статусе: «система» здесь — содержательная интерпретация (`StructuredSystem` с частичным назначением мест); `ss_L5_valid` фиксирует лишь одну сторону единственности, первая позиция требует непустоты (§ 5.3–5.4), а `process_entity` сейчас присваивает только `Candidate`/`Invalid` (§ 5.5); общие теоремы о первой позиции, о выборе первого кандидата и о выборе по весу — в файле `StructuralPath.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_entity (ERRProcess.v:194): статус — Candidate или Invalid (process_entity_two_statuses, src/foundation/StructuralPath.v). Общие теоремы — в названном файле; Closed under the global context."
+  },
+  {
+   "line": 897,
+   "theorem": "process_entity",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "E/R/R есть *процесс* — правила проверяют (ворота согласования), по проверке назначаются роли (статус), под роли подбираются элементы (по весу).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Повторяет шапку ERRProcess.v:15–16. В process_entity статус назначается по воротам, вес вычисляется и в выбор не входит; выбор по весу есть в соседнем файле — find_primary (foundation/StatusFromERR.v:46). Оговорка страницы на стр. 879–880 это учитывает."
+  },
+  {
+   "line": 910,
+   "theorem": "ss_assignment",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "Элементы — занимающие места (назначение `ss_assignment` частичное: место может пустовать).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ss_assignment : Position -> option (…) (:569); пример пустующих мест — sparse_ss (пробный файл)."
+  },
+  {
+   "line": 1047,
+   "theorem": null,
+   "claim": "Это — доказательство онтологическое, довод деривации, а не единая машинно проверенная цепочка теорем: формальные якоря отдельных шагов разобраны в соответствующих главах и их сопроводительных замечаниях, а здесь сведён воедино *довод* о структурной неизбежности $ℕ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: теоремы, сводящей четыре пути в один ряд, в формализации нет; на структурном пути позиция есть nat по определению (Position := nat), на иерархическом есть биекция уровней с nat (foundation/LevelNatIso.v)."
+  },
+  {
+   "line": 1064,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "стандартный же тип `nat` Rocq включает $0$ как конструктор, и там, где о нём идёт речь, это оговаривается особо.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора): было «Rocq-репозитория». nat — тип стандартной библиотеки Rocq (Corelib.Init.Datatypes), конструктор O есть."
+  },
+  {
+   "line": 1084,
+   "theorem": "StructuredSystem",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Структурированная система формализована в файле `TheoryOfSystems_Core_ERR.v` Rocq-репозитория ToS типом `StructuredSystem`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record StructuredSystem (L : Level) : Type, TheoryOfSystems_Core_ERR.v:567. Closed under the global context."
+  },
+  {
+   "line": 1084,
+   "theorem": "ss_assignment",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "Его поле `ss_assignment` есть *частичная* функция из `Position` в элемент — функция в `option` элемента, так что позиция может быть и не занята.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ss_assignment : Position -> option (crit_domain L (sys_criterion L ss_base)) (:569) — совпадает."
+  },
+  {
+   "line": 1084,
+   "theorem": "option",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Его поле `ss_assignment` есть *частичная* функция из `Position` в элемент — функция в `option` элемента, так что позиция может быть и не занята.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "option — тип стандартной библиотеки (Corelib.Init.Datatypes.option); тип поля — Position -> option (…)."
+  },
+  {
+   "line": 1084,
+   "theorem": "Position",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Тип `Position` определён там как `nat`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition Position := nat, TheoryOfSystems_Core_ERR.v:564. Одноимённые объявления в foundation/KnowledgeInsight.v:226 и foundation/KnowledgeWillStatus.v:98 к главе не относятся."
+  },
+  {
+   "line": 1084,
+   "theorem": "ss_L5_valid",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "Закон `ss_L5_valid` фиксирует *одну* сторону единственности: один и тот же элемент не может занимать две разные позиции (если $e$ стоит в $p_1$ и в $p_2$, то $p_1 = p_2$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ss_L5_valid : forall p1 p2 e, ss_assignment p1 = Some e -> ss_assignment p2 = Some e -> p1 = p2 (:573) — совпадает дословно."
+  },
+  {
+   "line": 1084,
+   "theorem": "ss_assignment",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "Другая сторона — что одна позиция не несёт двух разных элементов — обеспечена уже тем, что `ss_assignment` есть функция: всякой позиции она сопоставляет не более одного элемента.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено: one_position_one_element : ss_assignment L S p = Some e1 -> ss_assignment L S p = Some e2 -> e1 = e2 (пробный файл, Closed under the global context)."
+  },
+  {
+   "line": 1084,
+   "theorem": "StructuredSystem",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Более сильные условия — что каждая позиция занята, что занятые позиции образуют начальный отрезок, что у системы есть первая позиция, — из `StructuredSystem` как он сейчас задан *не* следуют и должны задаваться отдельно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено примерами: empty_ss — нет ни одной занятой позиции и нет первой (empty_has_no_first); sparse_ss — занята только позиция 5, начального отрезка нет (sparse_not_normalized). Первая занятая позиция следует уже из одной непустоты (nonempty_has_first_position); все леммы Closed under the global context."
+  },
+  {
+   "line": 1085,
+   "theorem": "nonempty_structured",
+   "external": true,
+   "assumptions": "не применимо (объявления в формализации нет)",
+   "claim": "Эта синхронизация внесена (файл `StructuralPath.v`): предикаты `nonempty_structured` (существует занятая позиция), `first_occupied_position` (занятая позиция, не большая всякой другой занятой) и `normalized` (занятые позиции образуют начальный отрезок).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора) (формализацией): Definition nonempty_structured {L} (S : StructuredSystem L) : Prop := exists p, position_occupied S p (src/foundation/StructuralPath.v).",
+   "file": "src/foundation/StructuralPath.v"
+  },
+  {
+   "line": 1085,
+   "theorem": "first_occupied_position",
+   "external": true,
+   "assumptions": "не применимо (объявления в формализации нет)",
+   "claim": "Эта синхронизация внесена (файл `StructuralPath.v`): предикаты `nonempty_structured` (существует занятая позиция), `first_occupied_position` (занятая позиция, не большая всякой другой занятой) и `normalized` (занятые позиции образуют начальный отрезок).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора) (формализацией): Definition first_occupied_position S p := position_occupied S p /\\ forall q, position_occupied S q -> p <= q (src/foundation/StructuralPath.v).",
+   "file": "src/foundation/StructuralPath.v"
+  },
+  {
+   "line": 1086,
+   "theorem": "pos_number",
+   "external": true,
+   "assumptions": "не применимо (объявления в формализации нет)",
+   "claim": "Функция `pos_number p := S p` определена в файле `StructuralPath.v` как способ согласовать `Position := nat` с ToS-нумерацией позиций с единицы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора) (формализацией): Definition pos_number (p : Position) : nat := S p (src/foundation/StructuralPath.v).",
+   "file": "src/foundation/StructuralPath.v"
+  },
+  {
+   "line": 1087,
+   "theorem": "ss_L5_valid",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи StructuredSystem)",
+   "claim": "Это требование выражено в файле `TheoryOfSystems_Core_ERR.v` условием `ss_L5_valid` структурированной системы. Как отмечено в § 5.3.2, `ss_L5_valid` фиксирует одну сторону единственности (один элемент — одна позиция); упорядоченность же позиций как таковая обеспечена тем, что `Position` есть `nat` с его порядком.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле ss_L5_valid (:573) — единственность позиции элемента; отношения порядка в записи StructuredSystem нет, порядок позиций — порядок nat. Сноска описывает это точно."
+  },
+  {
+   "line": 1088,
+   "theorem": null,
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "Этот процесс формализован в файле `ERRProcess.v` Rocq-репозитория ToS; его направление обозначено там как Rules $\\to$ Roles $\\to$ Elements.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Направление стоит в комментарии шапки (ERRProcess.v:15–16: «Rules → determine → Roles → distinguish → Elements»); в определениях файла оно выражено порядком вычисления: сигналы → ворота → вес и статус. Файл: 12 Qed (в шапке — 15), аксиом нет."
+  },
+  {
+   "line": 1088,
+   "theorem": "process_entity",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "Обработка одного элемента описана функцией `process_entity`: признаки элемента (`GateSignals`, семь булевых сигналов) сводятся в *ворота согласования* (`compute_gate`) — проверку из четырёх условий (налицо ли элемент, роль, правило и статус; объявлены ли зависимости; нет ли петель уровней; соблюдён ли порядок);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора): было «подбор элемента под роль… отвечает ли элемент требованию». process_entity (id legacy : nat) (sig : GateSignals) (scores : RawScores) — обработка одного элемента; роли среди аргументов нет (страница теперь говорит это прямо)."
+  },
+  {
+   "line": 1088,
+   "theorem": "GateSignals",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "Обработка одного элемента описана функцией `process_entity`: признаки элемента (`GateSignals`, семь булевых сигналов) сводятся в *ворота согласования* (`compute_gate`) — проверку из четырёх условий (налицо ли элемент, роль, правило и статус; объявлены ли зависимости; нет ли петель уровней; соблюдён ли порядок);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record GateSignals (ERRProcess.v:40) — семь булевых полей."
+  },
+  {
+   "line": 1088,
+   "theorem": "compute_gate",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "Обработка одного элемента описана функцией `process_entity`: признаки элемента (`GateSignals`, семь булевых сигналов) сводятся в *ворота согласования* (`compute_gate`) — проверку из четырёх условий (налицо ли элемент, роль, правило и статус; объявлены ли зависимости; нет ли петель уровней; соблюдён ли порядок);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "compute_gate (ERRProcess.v:81) сводит семь сигналов в четыре условия: ig_err (элемент, роль, правило, статус налицо), ig_deps, ig_levels, ig_order — как перечислено на странице."
+  },
+  {
+   "line": 1088,
+   "theorem": "compute_weight",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "по воротам и по числовым оценкам элемента вычисляется *вес* (`compute_weight`) — натуральное число, мера соответствия, обращаемая в нуль при непройденных воротах (теорема `zero_gate_law`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "compute_weight : RawScores -> IntegrityGate -> nat (ERRProcess.v:96): по воротам и трём поданным числам. Closed under the global context."
+  },
+  {
+   "line": 1088,
+   "theorem": "zero_gate_law",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "по воротам и по числовым оценкам элемента вычисляется *вес* (`compute_weight`) — натуральное число, мера соответствия, обращаемая в нуль при непройденных воротах (теорема `zero_gate_law`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "zero_gate_law : gate_valid gate = false -> compute_weight scores gate = 0 (ERRProcess.v:158). Closed under the global context."
+  },
+  {
+   "line": 1088,
+   "theorem": "Candidate",
+   "file": "src/foundation/ERRProcess.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Status)",
+   "claim": "По результату ворот `process_entity` присваивает элементу один из двух статусов — `Candidate` (ворота пройдены) или `Invalid` (не пройдены);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Candidate — конструктор Status (ERRProcess.v:65). process_entity_status_by_gate (src/foundation/StructuralPath.v): статус = if gate_valid (compute_gate sig) then Candidate else Invalid."
+  },
+  {
+   "line": 1088,
+   "theorem": "Invalid",
+   "file": "src/foundation/ERRProcess.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Status)",
+   "claim": "По результату ворот `process_entity` присваивает элементу один из двух статусов — `Candidate` (ворота пройдены) или `Invalid` (не пройдены);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Invalid — конструктор Status (ERRProcess.v:66); process_entity_two_statuses (src/foundation/StructuralPath.v), Closed under the global context."
+  },
+  {
+   "line": 1088,
+   "theorem": "Status",
+   "file": "src/foundation/ERRProcess.v",
+   "claim": "функция `assign_status` присваивает статусы `PrimaryMax`, `SecondaryMax`, `Candidate`, `Invalid` (статус `HistoricalMax` в типе `Status` объявлен, но пока не присваивается).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive Status := PrimaryMax | SecondaryMax | HistoricalMax | Candidate | Invalid (ERRProcess.v:61)."
+  },
+  {
+   "line": 1088,
+   "theorem": "PrimaryMax",
+   "file": "src/foundation/ERRProcess.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Status)",
+   "claim": "функция `assign_status` присваивает статусы `PrimaryMax`, `SecondaryMax`, `Candidate`, `Invalid` (статус `HistoricalMax` в типе `Status` объявлен, но пока не присваивается).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор Status; присваивается assign_status (StatusFromERR.v:63) элементу, чей ent_id совпал с найденным первым."
+  },
+  {
+   "line": 1088,
+   "theorem": "SecondaryMax",
+   "file": "src/foundation/ERRProcess.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Status)",
+   "claim": "функция `assign_status` присваивает статусы `PrimaryMax`, `SecondaryMax`, `Candidate`, `Invalid` (статус `HistoricalMax` в типе `Status` объявлен, но пока не присваивается).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор Status; присваивается assign_status при весе, равном весу первого."
+  },
+  {
+   "line": 1088,
+   "theorem": "HistoricalMax",
+   "file": "src/foundation/ERRProcess.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Status)",
+   "claim": "функция `assign_status` присваивает статусы `PrimaryMax`, `SecondaryMax`, `Candidate`, `Invalid` (статус `HistoricalMax` в типе `Status` объявлен, но пока не присваивается).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор Status; ни одной функцией формализации не присваивается — страница говорит это."
+  },
+  {
+   "line": 1088,
+   "theorem": "resolve_role",
+   "file": "src/Roles.v",
+   "claim": "Разрешение же по кандидатам — выбор одного из многих подходящих — формализовано в отдельном файле `Roles.v` механизмом `resolve_role` (через `L5_resolve`), и работает оно по *позициям*-кандидатам, не по весам `ERRProcess.v`: итог есть наименьшая из позиций-кандидатов и позиции по умолчанию, а при позиции по умолчанию, не меньшей хотя бы одного кандидата, — первый из кандидатов (`resolve_role_first_candidate`, файл `StructuralPath.v`; вариант без умолчания — `resolve_role_opt`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора) (формализацией): «выбор одного из подходящих» теперь доказан при названном условии — resolve_role_first_candidate (src/foundation/StructuralPath.v): позиция из списка, занята элементом, прошедшим проверку, не больше всякого кандидата. Без условия итог может не быть кандидатом (resolve_role_may_miss). Closed under the global context."
+  },
+  {
+   "line": 1088,
+   "theorem": "L5_resolve",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Разрешение же по кандидатам — выбор одного из многих подходящих — формализовано в отдельном файле `Roles.v` механизмом `resolve_role` (через `L5_resolve`), и работает оно по *позициям*-кандидатам, не по весам `ERRProcess.v`: итог есть наименьшая из позиций-кандидатов и позиции по умолчанию, а при позиции по умолчанию, не меньшей хотя бы одного кандидата, — первый из кандидатов (`resolve_role_first_candidate`, файл `StructuralPath.v`; вариант без умолчания — `resolve_role_opt`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition L5_resolve candidates default := fold_right Nat.min default candidates (TheoryOfSystems_Core_ERR.v:633) — наименьшее из кандидатов и умолчания, как сказано на странице."
+  },
+  {
+   "line": 1088,
+   "theorem": "find_primary",
+   "file": "src/foundation/StatusFromERR.v",
+   "claim": "Более богатая статусная машина — та, где веса *сравниваются* между кандидатами и из них выбирается первый, максимальный, — записана в соседнем файле `StatusFromERR.v`: функция `find_primary` берёт среди прошедших ворота элемент с наибольшим весом, а при равных весах — созданный раньше (в общем виде это доказано теоремой `find_primary_spec`, файл `StructuralPath.v`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора): было «потребовала бы связать ERRProcess.v с resolve_role». Машина записана в StatusFromERR.v: find_primary (:46) — допущенный воротами элемент наибольшего веса, при равных весах — с меньшим ent_legacy_idx."
+  },
+  {
+   "line": 1089,
+   "theorem": "resolve_role",
+   "file": "src/Roles.v",
+   "claim": "В текущей формализации эти части разнесены по файлам: вычисление веса и присвоение статуса `Candidate` / `Invalid` — в `ERRProcess.v`, сравнение весов и выбор первого по весу — в `StatusFromERR.v`, выбор первого из кандидатов по минимальной позиции — в `Roles.v` (`resolve_role`); общие теоремы о них — в `StructuralPath.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора): размещение по файлам дополнено (StatusFromERR.v, StructuralPath.v). «Выбор первого из кандидатов» — resolve_role_first_candidate."
+  },
+  {
+   "line": 1089,
+   "theorem": "find_primary",
+   "file": "src/foundation/StatusFromERR.v",
+   "claim": "В текущей формализации эти части разнесены по файлам: вычисление веса и присвоение статуса `Candidate` / `Invalid` — в `ERRProcess.v`, сравнение весов и выбор первого по весу — в `StatusFromERR.v`, выбор первого из кандидатов по минимальной позиции — в `Roles.v` (`resolve_role`); общие теоремы о них — в `StructuralPath.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора): было «требует их соединения». Выбор первого по весу — find_primary (StatusFromERR.v:46); общий закон — find_primary_spec (src/foundation/StructuralPath.v)."
+  },
+  {
+   "line": 1090,
+   "theorem": null,
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Разметка из шапок `Roles.v` и `ERRProcess.v`; тип `StructuredSystem` и `Position` — из `TheoryOfSystems_Core_ERR.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Roles.v:9–12 и ERRProcess.v:15–16 — комментарии шапок; StructuredSystem (:567) и Position (:564) объявлены в TheoryOfSystems_Core_ERR.v."
+  },
+  {
+   "line": 1085,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition normalized S := forall p q, q <= p -> position_occupied S p -> position_occupied S q.",
+   "theorem": "normalized",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Эта синхронизация внесена (файл `StructuralPath.v`): предикаты `nonempty_structured` (существует занятая позиция), `first_occupied_position` (занятая позиция, не большая всякой другой занятой) и `normalized` (занятые позиции образуют начальный отрезок)."
+  },
+  {
+   "line": 1085,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "first_position_iff_nonempty : nonempty_structured S <-> exists p, first_occupied_position S p. Closed under the global context.",
+   "theorem": "first_position_iff_nonempty",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Доказано: первая занятая позиция есть в точности у непустой системы, и она одна (`first_position_iff_nonempty`, `first_occupied_position_unique`);"
+  },
+  {
+   "line": 1085,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "first_occupied_position_unique : first_occupied_position S p -> first_occupied_position S q -> p = q. Closed under the global context.",
+   "theorem": "first_occupied_position_unique",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Доказано: первая занятая позиция есть в точности у непустой системы, и она одна (`first_position_iff_nonempty`, `first_occupied_position_unique`);"
+  },
+  {
+   "line": 1085,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "normalized_first_number_one : normalized S -> nonempty_structured S -> exists p, first_occupied_position S p /\\ pos_number p = 1. Closed under the global context.",
+   "theorem": "normalized_first_number_one",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "в нормализованной непустой системе она несёт номер $1$ (`normalized_first_number_one`);"
+  },
+  {
+   "line": 1085,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "поправлено 14.11 (моя неточность шага 6: было «одна пятая позиция»). sparse_first_is_5 : first_occupied_position sparse_ss 5 /\\ pos_number 5 = 6 (src/foundation/StructuralPath.v). Closed under the global context.",
+   "theorem": "sparse_first_is_5",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "без нормализации номер может быть иным (пример `sparse_first_is_5`: занята одна позиция с техническим индексом $5$, её номер $6$)."
+  },
+  {
+   "line": 1085,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в TheoryOfSystems_Core_ERR.v есть position_occupied (:587); новые предикаты определены через него в src/foundation/StructuralPath.v, основной файл не менялся.",
+   "theorem": "position_occupied",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В самом `TheoryOfSystems_Core_ERR.v` этих предикатов по-прежнему нет: они заданы поверх него."
+  },
+  {
+   "line": 1086,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pos_number_positive — src/foundation/StructuralPath.v, § 2; Closed under the global context.",
+   "theorem": "pos_number_positive",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Там же доказано, что номера позиций суть в точности положительные числа (`pos_number_positive`, `pos_number_onto_positive`, `pos_number_injective`) и что индукция по номеру с базой $1$ следует из индукции по позициям (`number_ind_from_one`)."
+  },
+  {
+   "line": 1086,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pos_number_onto_positive — src/foundation/StructuralPath.v, § 2; Closed under the global context.",
+   "theorem": "pos_number_onto_positive",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Там же доказано, что номера позиций суть в точности положительные числа (`pos_number_positive`, `pos_number_onto_positive`, `pos_number_injective`) и что индукция по номеру с базой $1$ следует из индукции по позициям (`number_ind_from_one`)."
+  },
+  {
+   "line": 1086,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pos_number_injective — src/foundation/StructuralPath.v, § 2; Closed under the global context.",
+   "theorem": "pos_number_injective",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Там же доказано, что номера позиций суть в точности положительные числа (`pos_number_positive`, `pos_number_onto_positive`, `pos_number_injective`) и что индукция по номеру с базой $1$ следует из индукции по позициям (`number_ind_from_one`)."
+  },
+  {
+   "line": 1086,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "number_ind_from_one — src/foundation/StructuralPath.v, § 2; Closed under the global context.",
+   "theorem": "number_ind_from_one",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Там же доказано, что номера позиций суть в точности положительные числа (`pos_number_positive`, `pos_number_onto_positive`, `pos_number_injective`) и что индукция по номеру с базой $1$ следует из индукции по позициям (`number_ind_from_one`)."
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Условие названо на странице: 1 <= rs_current_domain sc (комментарий ERRProcess.v:54 — «D1-D6 = 1-6»). Closed under the global context.",
+   "theorem": "candidate_iff_positive_weight",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "при номере домена не меньше единицы (в файле домены нумеруются от $1$ до $6$) допуск равносилен положительному весу — теорема `candidate_iff_positive_weight` (файл `StructuralPath.v`), и в этом смысле по весу и решается."
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 6, слово автора) (развилка — А): запись «роли с числовым требованием» оставлена. measured_role_first (раздел MeasuredRole: measure, threshold, fits e := threshold <=? measure e): при умолчании, не меньшем хотя бы одного кандидата, выбранная resolve_role позиция занята элементом e с threshold <= measure e и не больше всякой позиции с таким элементом. Closed under the global context.",
+   "theorem": "measured_role_first",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Сама роль и её требование аргументами в `process_entity` не входят; подбор элемента под роль с числовым требованием записан отдельно (там же, теорема `measured_role_first`): заданы мера соответствия и порог роли, и выбранная позиция занята элементом, мера которого достигает порога, причём она первая среди таких."
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "assign_status (StatusFromERR.v:63) присваивает Invalid, PrimaryMax, SecondaryMax, Candidate — четыре статуса из пяти.",
+   "theorem": "assign_status",
+   "file": "src/foundation/StatusFromERR.v",
+   "claim": "функция `assign_status` присваивает статусы `PrimaryMax`, `SecondaryMax`, `Candidate`, `Invalid` (статус `HistoricalMax` в типе `Status` объявлен, но пока не присваивается)."
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "find_primary_spec : find_primary es = Some p -> In p es /\\ gate_valid (ent_gate p) = true /\\ (forall e, In e es -> gate_valid (ent_gate e) = true -> ent_weight e < ent_weight p \\/ (ent_weight e = ent_weight p /\\ ent_legacy_idx p <= ent_legacy_idx e)). Closed under the global context. Существование — find_primary_exists.",
+   "theorem": "find_primary_spec",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Более богатая статусная машина — та, где веса *сравниваются* между кандидатами и из них выбирается первый, максимальный, — записана в соседнем файле `StatusFromERR.v`: функция `find_primary` берёт среди прошедших ворота элемент с наибольшим весом, а при равных весах — созданный раньше (в общем виде это доказано теоремой `find_primary_spec`, файл `StructuralPath.v`);"
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "resolve_role_first_candidate : (exists p, In p (role_candidates L S decide positions) /\\ p <= default) -> In (resolve_role …) positions /\\ (exists e, ss_assignment L S (resolve_role …) = Some e /\\ decide e = true) /\\ (forall q, In q (role_candidates …) -> resolve_role … <= q). Closed under the global context.",
+   "theorem": "resolve_role_first_candidate",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Разрешение же по кандидатам — выбор одного из многих подходящих — формализовано в отдельном файле `Roles.v` механизмом `resolve_role` (через `L5_resolve`), и работает оно по *позициям*-кандидатам, не по весам `ERRProcess.v`: итог есть наименьшая из позиций-кандидатов и позиции по умолчанию, а при позиции по умолчанию, не меньшей хотя бы одного кандидата, — первый из кандидатов (`resolve_role_first_candidate`, файл `StructuralPath.v`; вариант без умолчания — `resolve_role_opt`)."
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "resolve_role_opt := l5_resolve_gen (role_candidates L S decide positions) : option Position; resolve_role_opt_first, resolve_role_opt_none_iff, resolve_role_opt_agrees — Closed under the global context.",
+   "theorem": "resolve_role_opt",
+   "file": "src/foundation/StructuralPath.v",
+   "claim": "Разрешение же по кандидатам — выбор одного из многих подходящих — формализовано в отдельном файле `Roles.v` механизмом `resolve_role` (через `L5_resolve`), и работает оно по *позициям*-кандидатам, не по весам `ERRProcess.v`: итог есть наименьшая из позиций-кандидатов и позиции по умолчанию, а при позиции по умолчанию, не меньшей хотя бы одного кандидата, — первый из кандидатов (`resolve_role_first_candidate`, файл `StructuralPath.v`; вариант без умолчания — `resolve_role_opt`)."
+  },
+  {
+   "line": 1088,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: Roles.v не подключает ERRProcess.v и StatusFromERR.v; StatusFromERR.v не подключает Roles.v. Запись measured_role_first соединяет меру с разрешением по позиции отдельно, эти два файла не меняя.",
+   "theorem": "resolve_role",
+   "file": "src/Roles.v",
+   "claim": "Выбор по весу (`StatusFromERR.v`) и выбор по позиции (`Roles.v`) остаются двумя отдельными механизмами."
+  },
+  {
+   "line": 1089,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: два механизма — find_primary (по весу) и resolve_role (по позиции) — в формализации не связаны.",
+   "theorem": "resolve_role",
+   "file": "src/Roles.v",
+   "claim": "Выбор по весу и выбор по позиции между собой не связаны; см. сноску выше и итог главы."
+  },
+  {
+   "line": 645,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "внесено 14.11 (Часть II, закрывающий шаг, слово автора). four_bases_are_one : forall D, length [D] = 1 /\\ level_depth L1 = 1 /\\ bit_length one_bit = 1 /\\ pos_number 0 = 1. Closed under the global context.",
+   "theorem": "four_bases_are_one",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "Формальную сторону этого совпадения несёт файл `FourPathsOneSeries.v`: начала четырёх путей суть $1$, шаги — `S` (`four_bases_are_one`, `four_steps_are_S`);"
+  },
+  {
+   "line": 645,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "four_steps_are_S — четыре леммы шага (add_distinction_increments, level_depth_LS, add_bit_increments_length, pos_number_step) в одном утверждении. Closed under the global context.",
+   "theorem": "four_steps_are_S",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "Формальную сторону этого совпадения несёт файл `FourPathsOneSeries.v`: начала четырёх путей суть $1$, шаги — `S` (`four_bases_are_one`, `four_steps_are_S`);"
+  },
+  {
+   "line": 647,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "four_ranges_coincide : для всякого n каждое из четырёх условий (счёт от единицы; глубина уровня; длина непустой записи; номер позиции) равносильно 1 <= n. Closed under the global context.",
+   "theorem": "four_ranges_coincide",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "на каждом из четырёх путей достижимы в точности числа $n \\ge 1$ (`four_ranges_coincide`);"
+  },
+  {
+   "line": 648,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "four_paths_one_series : presented Ds -> binary_record Ds bs -> level_depth (level_of_count Ds) = length Ds /\\ bit_length bs = length Ds /\\ pos_number (position_of_level (level_of_count Ds)) = length Ds. Closed under the global context.",
+   "theorem": "four_paths_one_series",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "и пути связаны напрямую — счёт списка совершённых различений равен глубине его уровня, длине его двоичной записи и номеру его позиции (`four_paths_one_series`)"
+  },
+  {
+   "line": 651,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "one_more_act_moves_all_four : счёт +1, уровень — LS, запись — add_bit s bs (s — сторона, положенная актом), позиция — S. Closed under the global context.",
+   "theorem": "one_more_act_moves_all_four",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "а ещё один акт различения сдвигает все четыре разом (`one_more_act_moves_all_four`)."
+  },
+  {
+   "line": 1051,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно; статус назван на странице точно.",
+   "theorem": "four_paths_one_series",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "Машинно проверено другое и меньшее — что четыре записи пути сходятся в одном ряде (теорема `four_paths_one_series`, файл `FourPathsOneSeries.v`)."
+  },
+  {
+   "line": 1053,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: length, level_depth, bit_length, pos_number принимают значения в nat стандартной библиотеки; шапка файла говорит то же («NOT claimed»).",
+   "theorem": "four_paths_one_series",
+   "file": "src/foundation/FourPathsOneSeries.v",
+   "claim": "Независимости четырёх дериваций и неизбежности ряда она не доказывает: все четыре меры принимают значения в готовом типе `nat`."
+  }
+ ]
+}

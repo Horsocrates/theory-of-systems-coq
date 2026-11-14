@@ -1,0 +1,681 @@
+{
+ "batch": "audit-part-02",
+ "chapter": "02 Натуральные числа/02 Счёт как длина списка различий.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 265,
+   "theorem": "set_ignores_order",
+   "file": "src/settheory/ListModes.v",
+   "claim": "один и тот же набор значений получается из *разных* списков — $(a,b,c)$, $(c,b,a)$, $(a,a,b,c)$ все дают одно множество $\\{a,b,c\\}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава теорему не называет; опора в формализации (добавлена при аудите Части I): set_ignores_order : Permutation l1 l2 -> same_set l1 l2 (ListModes.v:79) и set_ignores_multiplicity : same_set (a :: a :: l) (a :: l) (:86). Closed under the global context."
+  },
+  {
+   "line": 277,
+   "theorem": "first_step_forgets_exactly_order",
+   "file": "src/settheory/ListModes.v",
+   "claim": "Первая ступень забывает *порядок* (список $\\to$ мультимножество), вторая — *кратность* (мультимножество $\\to$ множество).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава теорему не называет; слова подтверждаются: first_step_forgets_exactly_order : same_multiset l1 l2 <-> Permutation l1 l2 (ListModes.v:53), second_step_well_defined : same_multiset l1 l2 -> same_set l1 l2 (:70), order_is_forgotten (:105), multiplicity_is_forgotten (:114). Closed under the global context."
+  },
+  {
+   "line": 339,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Акт различения записан в ToS как `Distinction` (Глава I.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~ (positive /\\ negative); exhaustive : positive \\/ negative } (Distinction.v:71). Объявлений с таким именем в src пять; файл главы назван в сноске 1."
+  },
+  {
+   "line": 340,
+   "theorem": null,
+   "claim": "Список актов различения есть, соответственно, объект типа `list Distinction` — список, элементами которого служат различия.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тип `list Distinction` стоит под квантором существования в обоих предикатах главы (Distinction.v:162, PrimalityOfOne.v:56); `list` — тип стандартной библиотеки."
+  },
+  {
+   "line": 363,
+   "theorem": "length",
+   "external": true,
+   "assumptions": "не применимо (определение стандартной библиотеки)",
+   "claim": "Формально подсчёт записывается функцией `length`; но функция эта не «считывает присущее списку число», а *производит* число как итог прохождения списка.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Corelib.Init.Datatypes.length — рекурсия по списку: [] даёт 0, _ :: l' даёт S (length l') (Print length, пробный файл Check2.v); именно она стоит в обоих предикатах. В src нет теоремы о длине как итоге подсчёта; проверено в Check.v: всякая функция с f [] = 0 и f (a :: l) = S (f l) совпадает с length (length_is_the_count — Closed under the global context)."
+  },
+  {
+   "line": 374,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "ToS вводит предикат, связывающий натуральное число $n$ со списками различий, подсчёт которых даёт $n$. Формально он записывается так:[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition distinction_count (n : nat) : Prop := exists (Ds : list Distinction), length Ds = n (Distinction.v:161). Блок кода (стр. 376–377) отличается от исходника только скобками вокруг связанной переменной — запись та же."
+  },
+  {
+   "line": 383,
+   "theorem": "Prop",
+   "external": true,
+   "assumptions": "не применимо (сорт Rocq)",
+   "claim": "`distinction_count` — это *предикат* на натуральных числах: каждому $n$ он сопоставляет высказывание (`Prop`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тип определения — nat -> Prop (Distinction.v:161)."
+  },
+  {
+   "line": 386,
+   "theorem": "distinction_count_any",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Предикат `distinction_count` $n$ истинен, если такой список существует. Существует он для всякого $n$ — лемма `distinction_count_any` того же файла, без допущений; предикат, стало быть, выполнен для каждого натурального числа, включая нуль.",
+   "page_price": "без допущений",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): было «и ложен в противном случае». Lemma distinction_count_any : forall n, distinction_count n (Distinction.v). С 13.11 (замена свидетеля) — Closed under the global context."
+  },
+  {
+   "line": 392,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Оно не есть переопределение натурального числа: $n$ здесь — уже готовое натуральное число типа `nat`, и предикат лишь *что-то о нём высказывает*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: параметр определения — n : nat, Corelib.Init.Datatypes.nat; тип не строится и не переопределяется."
+  },
+  {
+   "line": 397,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`distinction_count` — именно предикат: высказывание о числе, а не определение числа; и высказывание это, как сказано, верно о всяком числе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): было «характеристика, которой число либо обладает, либо нет». Definition distinction_count (n : nat) : Prop := exists Ds, length Ds = n; верно для всякого n (distinction_count_any)."
+  },
+  {
+   "line": 408,
+   "theorem": "zero_distinctions",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Такой список есть — это пустой список, список без единого элемента. Формально это засвидетельствовано:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma zero_distinctions : distinction_count 0, доказательство `exists []. reflexivity.` (Distinction.v:164–165) — блок кода совпадает с исходником. Closed under the global context. Одноимённая лемма в IndivisibleDistinction.v:115 утверждает другое (distinction_count_nat [] = 0); глава называет Distinction.v."
+  },
+  {
+   "line": 467,
+   "theorem": "nil",
+   "external": true,
+   "assumptions": "не применимо (конструктор стандартной библиотеки)",
+   "claim": "Функция `length` *тотальна*: всякому списку-терму, включая `nil`, она сопоставляет терм типа `nat`, и `length nil` вычислительно редуцируется к `0` — оттого `zero_distinctions` и доказуема.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено: Eval cbv in length (@nil Distinction) даёт 0; равенство length nil = 0 закрыто eq_refl (Check2.v). Доказательство zero_distinctions — `reflexivity`."
+  },
+  {
+   "line": 484,
+   "theorem": "O",
+   "external": true,
+   "assumptions": "не применимо (конструктор стандартной библиотеки)",
+   "claim": "| тип `nat` | конструктор `O`, базовая точка типа |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Corelib.Init.Datatypes.O — первый конструктор типа nat."
+  },
+  {
+   "line": 498,
+   "theorem": "zero_distinctions",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`distinction_count` $0$ истинно, и истинно законно: список `nil` существует, подсчёт его определён и `length nil` есть `0`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "zero_distinctions : distinction_count 0 (Distinction.v:164), свидетель — пустой список. Closed under the global context."
+  },
+  {
+   "line": 519,
+   "theorem": "distinction_count_any",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`distinction_count` отвечает на технический вопрос: для каких $n$ существует список различий, подсчёт которого даёт $n$?",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Вопрос поставлен верно; ответ формализации — для всякого n: distinction_count_any (Distinction.v:182). Страница ответа не приводит — см. расхождение 1 в заметках (стр. 383, 392)."
+  },
+  {
+   "line": 575,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Такой предикат ToS вводит — предикат счёта совершённых актов. Формально он записывается так:[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition distinction_count_from_one (n : nat) : Prop := exists (Ds : list Distinction), length Ds = n /\\ (1 <= n)%nat (PrimalityOfOne.v:55). Блок кода (стр. 573–574) отличается скобками вокруг связанной переменной и пометкой области %nat — запись та же."
+  },
+  {
+   "line": 593,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "По записи `distinction_count_from_one` отличается от технического предиката *только* конъюнктом $1 \\le n$ — ничем более.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно; проверено теоремой: distinction_count_from_one n <-> distinction_count n /\\ 1 <= n (Check.v, from_one_iff_count_and_positive — Closed under the global context). В src такой теоремы нет."
+  },
+  {
+   "line": 598,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Формально это — *фильтр положительности*: предикат, отсекающий нулевую границу и пропускающий всякое $n \\ge 1$, для которого существует список нужной длины.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно. Точная форма: distinction_count_from_one n <-> 1 <= n (Check.v, from_one_iff_positive — Closed): список нужной длины существует для всякого n, так что оговорка «для которого существует» ничего не отсекает. В src равносильность не записана."
+  },
+  {
+   "line": 639,
+   "theorem": "zero_not_a_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Теорема `zero_not_a_count` утверждает: предикат `distinction_count_from_one` *не* выполнен для нуля.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem zero_not_a_count : ~ distinction_count_from_one 0 (PrimalityOfOne.v:65); блок кода с доказательством совпадает с исходником. Closed under the global context. Доказательство отбрасывает список и первое условие (`destruct H as [_ [_ Hge]]`) и пользуется одним конъюнктом 1 <= 0."
+  },
+  {
+   "line": 641,
+   "theorem": "lia",
+   "external": true,
+   "assumptions": "не применимо (тактика)",
+   "claim": "Доказательство коротко: если бы нуль удовлетворял предикату, в числе условий было бы $1 \\le 0$ — а это ложно, и тактика `lia` закрывает случай.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ход доказательства описан верно (PrimalityOfOne.v:68). `lia` — тактика стандартной библиотеки (Stdlib.micromega.Lia)."
+  },
+  {
+   "line": 659,
+   "theorem": "first_count_is_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Теорема `first_count_is_one` утверждает: предикат выполнен для единицы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem first_count_is_one : distinction_count_from_one 1 (PrimalityOfOne.v:58); блок кода совпадает с исходником. Print Assumptions: Axioms: Classical_Prop.classic — аксиому приносит свидетель distinction_of True; страница о цене не говорит. Со свидетелем True / False та же теорема закрыта (Check.v, first_count_is_one_closed — Closed under the global context). [13.11, Часть II, шаг 1: свидетель заменён на различение «истина | ложь» (distinction_true_false; в Distinction.v — тем же термом); теперь Closed under the global context.]"
+  },
+  {
+   "line": 660,
+   "theorem": "reflexivity",
+   "external": true,
+   "assumptions": "не применимо (тактика)",
+   "claim": "Доказательство предъявляет список из одного различия — `[distinction_true_false]`, список с единственным элементом, — и проверяет два условия: длина его равна единице (`reflexivity`), и $1 \\le 1$ (`lia`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 2, слово автора) (развилка «свидетель» — А): имя свидетеля на странице приведено к исходнику. PrimalityOfOne.v: exists [distinction_true_false]. split; [reflexivity | lia]. Здесь reflexivity и lia — тактики."
+  },
+  {
+   "line": 669,
+   "theorem": "zero_not_a_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "То, что в § 1.3 было онтологическим положением, здесь стало доказанной парой теорем.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора) (формализацией и оговоркой): слова «доказанной парой теорем» получили опору. В самом предикате границу проводит условие 1 <= n определения (zero_not_a_count его возвращает); выводом, без условия на число, исключение нуля дают zero_is_not_a_presented_count и from_one_iff_some_present_list (src/foundation/CountingPresence.v), обе Closed under the global context."
+  },
+  {
+   "line": 684,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "| `distinction_count_from_one` | `exists Ds,` `length Ds = n` `/\\ 1 <= n` | положительный счёт актов (при онтологическом чтении) | исключает |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Строки таблицы соответствуют определениям (Distinction.v:161, PrimalityOfOne.v:55); «исключает» — zero_not_a_count, «допускает» в строке выше — zero_distinctions (и всякое n — distinction_count_any)."
+  },
+  {
+   "line": 722,
+   "theorem": "first_count_is_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Нуль ему не удовлетворяет (`zero_not_a_count`), единица удовлетворяет (`first_count_is_one`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Обе теоремы есть (PrimalityOfOne.v:65, :58). zero_not_a_count — Closed under the global context; first_count_is_one — Classical_Prop.classic (свидетель distinction_of True). [13.11, Часть II, шаг 1: свидетель заменён на различение «истина | ложь» (distinction_true_false; в Distinction.v — тем же термом); теперь Closed under the global context.]"
+  },
+  {
+   "line": 748,
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Утверждение, к которому идёт раздел, таково: для любого $n \\ge 1$ предикат счёта от единицы выполнен. ToS устанавливает его как теорему; формально она записывается так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem positive_nat_is_distinction_count : forall n, (1 <= n)%nat -> distinction_count_from_one n (PrimalityOfOne.v:94); блок кода совпадает. Print Assumptions: Axioms: Classical_Prop.classic (через first_count_is_one и succ_is_new_distinction); страница о цене не говорит. Без аксиом — Check.v, positive_nat_is_distinction_count_closed. [13.11, Часть II, шаг 1: свидетель заменён на различение «истина | ложь» (distinction_true_false; в Distinction.v — тем же термом); теперь Closed under the global context.]"
+  },
+  {
+   "line": 778,
+   "theorem": "add_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Первая из приведённых записей, `add_distinction`, ставит новое различие $D$ в *начало* списка $Ds$ — технически это `D :: Ds`, присоединение к голове.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition add_distinction (Ds : list Distinction) (D : Distinction) := D :: Ds (PrimalityOfOne.v:76); блок кода совпадает. Вне своей теоремы add_distinction_increments определение в src не используется."
+  },
+  {
+   "line": 788,
+   "theorem": "snoc_distinction",
+   "claim": "Если же где-то понадобится хронологическое чтение слева направо, его даёт альтернативная операция присоединения в конец списка (`snoc_distinction`, файл `CountingPresence.v`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора) (формализацией): было имя `snoc`, которого нет. Definition snoc_distinction (Ds : list Distinction) (D : Distinction) : list Distinction := Ds ++ [D]; snoc_distinction_increments, snoc_is_reversed_add — Closed under the global context.",
+   "file": "src/foundation/CountingPresence.v"
+  },
+  {
+   "line": 796,
+   "theorem": "add_distinction_increments",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Теорема `add_distinction_increments` проверяет очевидное и существенное: подсчёт наращённого списка даёт на единицу больше, чем подсчёт исходного.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem add_distinction_increments : forall Ds D, length (add_distinction Ds D) = S (length Ds) (PrimalityOfOne.v:79), доказательство `reflexivity`; блок кода совпадает. Closed under the global context."
+  },
+  {
+   "line": 805,
+   "theorem": "succ_is_new_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "В формальных доказательствах списки различий строятся из *одного и того же* канонического элемента: `first_count_is_one` предъявляет `[distinction_true_false]`, а `succ_is_new_distinction` присоединяет `distinction_true_false` к уже имеющемуся списку.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 1, слово автора) (развилка «свидетель» — А): в исходнике свидетель заменён на distinction_true_false (PrimalityOfOne.v), теоремы — Closed under the global context."
+  },
+  {
+   "line": 826,
+   "theorem": "succ_is_new_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Отсюда — ключевой шаг кардинального пути: если число $n$ реализуемо, то реализуемо и число $n + 1$. ToS устанавливает это так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem succ_is_new_distinction : forall n, distinction_count_from_one n -> distinction_count_from_one (S n) (PrimalityOfOne.v:84); блок кода совпадает. Print Assumptions: Axioms: Classical_Prop.classic. Доказательство (:88–90) ни add_distinction, ни add_distinction_increments не применяет: «отсюда» — порядок изложения, не зависимость в формализации. [13.11, Часть II, шаг 1: свидетель заменён на различение «истина | ложь» (distinction_true_false; в Distinction.v — тем же термом); теперь Closed under the global context.]"
+  },
+  {
+   "line": 835,
+   "theorem": "succ_is_new_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`succ_is_new_distinction` говорит: из реализуемости $n$ следует реализуемость $n + 1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пересказ утверждения точен. Заключение верно и без посылки: forall n, distinction_count_from_one (S n) (Check.v, succ_conclusion_without_premise — Closed); при n = 0 посылка ложна, заключение истинно."
+  },
+  {
+   "line": 839,
+   "theorem": "succ_is_new_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Содержательно это доказательство проводит то, что Глава II.1 назвала бы переходом к следующему числу: *следующее число есть нынешнее плюс ещё один совершённый акт*. Само утверждение теоремы говорит только, что список длины $n + 1$ существует;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): было «содержательно теорема говорит». Верно: утверждение succ_is_new_distinction — существование списка длины S n; присоединение акта — ход доказательства (exists (distinction_true_false :: Ds)). Closed under the global context."
+  },
+  {
+   "line": 857,
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "ToS устанавливает соединение теоремой `positive_nat_is_distinction_count`; её доказательство устроено так.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): имя, разорванное переносом строки, набрано целиком. Theorem positive_nat_is_distinction_count : forall n, (1 <= n)%nat -> distinction_count_from_one n; с 13.11 — Closed under the global context."
+  },
+  {
+   "line": 858,
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Берётся произвольное $n \\ge 1$. Если $n$ есть единица — реализуемость дана прямо (`first_count_is_one`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ход доказательства описан верно (PrimalityOfOne.v:96–104): индукция по n; случай 0 исключён условием; для S n при n = 0 — first_count_is_one, иначе — succ_is_new_distinction к предположению индукции."
+  },
+  {
+   "line": 873,
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Формальная теорема `positive_nat_is_distinction_count` работает *внутри* уже имеющегося типа `nat`: она берёт произвольное `n : nat` и показывает, что при $n \\ge 1$ для него существует список различий длины $n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пересказ утверждения точен; статус («реализационный, а не типообразующий», стр. 863) назван честно. Из свойств записи Distinction теорема использует одно — что тип обитаем: список любой длины есть над любым обитаемым типом (Check.v, list_of_any_length — Closed)."
+  },
+  {
+   "line": 992,
+   "theorem": "induction",
+   "external": true,
+   "assumptions": "не применимо (тактика)",
+   "claim": "Машинное доказательство теоремы `positive_nat_is_distinction_count` (§ 2.5.3) использует *стандартную индукцию по* `nat` — тактику `induction`, опирающуюся на встроенный в Rocq принцип индукции для типа `nat`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в доказательстве стоит `induction n.` (PrimalityOfOne.v:98); терм доказательства применяет nat_ind (Print positive_nat_is_distinction_count, Check2.v). Здесь `induction` — тактика, не одноимённые леммы библиотеки."
+  },
+  {
+   "line": 996,
+   "theorem": null,
+   "claim": "То есть в формальном слое ToS *не* выводит сам принцип индукции из `Distinction`: принцип индукции по `nat` берётся готовым вместе с типом `nat`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно. Для сведения (Check.v, count_induction_from_list — Closed): база и шаг дают заключение о всяком n с distinction_count_from_one n, причём доказательство идёт индукцией по списку различий, nat_ind не применяется; в src такой теоремы нет."
+  },
+  {
+   "line": 1051,
+   "theorem": "nat_ind",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "В Rocq натуральные числа — тип `nat`, и принцип индукции для него доступен как `nat_ind` — он входит в устройство индуктивного типа.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Check nat_ind : forall P : nat -> Prop, P 0 -> (forall n, P n -> P (S n)) -> forall n, P n (Corelib.Init.Datatypes); Print Assumptions nat_ind — Closed under the global context (Check2.v): аксиомой в Rocq он не является."
+  },
+  {
+   "line": 1153,
+   "theorem": null,
+   "claim": "В Rocq утверждение `forall n : nat, P n` есть *зависимый функциональный тип* над `nat`: его обитатель — функция, которая по произвольному входу `n : nat` возвращает доказательство `P n`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верное описание квантора в исчислении конструкций; имён формализации здесь нет."
+  },
+  {
+   "line": 1160,
+   "theorem": "n",
+   "external": true,
+   "assumptions": "не применимо (связанная переменная формулы)",
+   "claim": "`forall n : nat, P n` не требует *перечисления* всех `n` и не предполагает `nat` *пройденным до конца как завершённую совокупность*;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`n` здесь — связанная переменная формулы `forall n : nat, P n`, не имя объявления (стр. 1137, 1140)."
+  },
+  {
+   "line": 1181,
+   "theorem": "P4_from_L5",
+   "file": "src/foundation/PrinciplesFromLaws.v",
+   "claim": "Это $P4$, выведенный в Главе I.4 из закона $L5$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отсылка к выводу в тексте главы I.4, не к Rocq. В формализации закон в посылках P4 не стоит: P4_from_L5 : forall (R : nat -> Q) n, (exists num den, R n = num # den) /\\ (n = 0 \\/ exists m, n = S m) (PrinciplesFromLaws.v:191) — без посылок; страница I.4 (стр. 44–48) говорит это прямо: «ход от закона к принципу проведён в тексте», в формализации P4 — выбор типа N -> Q. См. «Сомнительные места», п. 5."
+  },
+  {
+   "line": 1236,
+   "theorem": "potential_process_compatible_with_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "натуральный ряд не есть *completed actuality* — нет стадии, на которой весь ряд был бы актуально предъявлен.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава теорему не называет. В файле это свойство доказано для одной модели стадий: четвёртый конъюнкт potential_process_compatible_with_P4 (P4CompletedInfinity.v:190) — forall stage, exists n, ~ actual stage n при actual stage n := n <= stage. Общая форма проверена в Check.v: P4_stage_bounded actual -> forall stage, ~ (forall n, actual stage n) (P4_no_stage_holds_all — Closed under the global context)."
+  },
+  {
+   "line": 1238,
+   "theorem": "completed_inf_contradicts_P4",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "Формально несовместимость завершённой бесконечности с $P4$ разобрана в файле `P4CompletedInfinity.v` репозитория, и разобрана *условно*: соответствующая теорема выводит противоречие не из одного лишь существования бесконечного ряда, а из *трёх* посылок вместе",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem completed_inf_contradicts_P4 : forall S actual, CompletedInfSet S -> P4_stage_bounded actual -> bridge S actual -> False (P4CompletedInfinity.v:70); то же утверждение — P4_prohibition_infinity (:114), частный случай — nat_not_completed_under_P4 (:152). Три посылки, как и сказано. Closed under the global context. В файле 10 Qed."
+  },
+  {
+   "line": 1242,
+   "theorem": "CompletedInfSet",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "из предиката завершённого членства (`CompletedInfSet`, «всякое $n$ принадлежит $S$»),",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition CompletedInfSet (S : nat -> Prop) : Prop := forall n : nat, S n (P4CompletedInfinity.v:35) — пересказ точен."
+  },
+  {
+   "line": 1244,
+   "theorem": "P4_stage_bounded",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "из стадийной ограниченности по $P4$ (`P4_stage_bounded`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition P4_stage_bounded actual := forall stage, exists bound, forall n, actual stage n -> n <= bound (P4CompletedInfinity.v:39): на каждой стадии актуальные числа ограничены сверху."
+  },
+  {
+   "line": 1245,
+   "theorem": "bridge",
+   "file": "src/foundation/P4CompletedInfinity.v",
+   "claim": "и из *моста* (`bridge`), переводящего членство в ряду в актуальную предъявленность на одной стадии (в записи `bridge` — на нулевой;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): было «на конечной стадии». Definition bridge S actual := forall n, S n -> actual 0 n (P4CompletedInfinity.v:48) — мост ведёт на нулевую стадию."
+  },
+  {
+   "line": 1296,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Часть IV развернёт это формально через тип `RealProcess` (файл `ProcessCore.v`: `RealProcess` $:=\\texttt{nat}\\toℚ$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition RealProcess := nat -> Q (process/ProcessCore.v:34). Номер части верен: Часть IV — «Процессные действительные числа»."
+  },
+  {
+   "line": 1298,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "и отношение `process_equiv` — эквивалентность процессов, расхождение которых уходит ниже всякой точности (для процессов с рациональным пределом — *по пределу*), доказанное отношением эквивалентности",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): было «эквивалентность процессов по пределу». process_equiv R1 R2 := forall eps > 0, exists N, forall n >= N, Qabs (R1 n - R2 n) < eps (ProcessCore.v:170); сходимости не требует (equiv_does_not_require_convergence); для процессов с рациональным пределом — equiv_iff_same_limit_when_one_converges (src/process/ProcessEquivLimit.v). Отношение эквивалентности: process_equiv_refl, _sym, _trans; Instance process_equiv_Equivalence (RealPointSetoid.v:61)."
+  },
+  {
+   "line": 1345,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "добавив предикаты счёта (§ 2.3–2.4) и потенциальную бесконечность (§ 2.7), и проверим сформированность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): слово «доказанные» снято — предикаты суть определения."
+  },
+  {
+   "line": 1348,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "формальные предикаты `distinction_count` и `distinction_count_from_one` определены, и теоремы о них доказаны (`Distinction.v`, `PrimalityOfOne.v`, `CountingPresence.v`), но онтологическое чтение несёт проза.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): было «предикаты… доказаны». Оба имени — Definition; теоремы о них — в трёх названных файлах, с 13.11 все без допущений."
+  },
+  {
+   "line": 1373,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Честная граница: `distinction_count_from_one` есть фильтр положительности ($1\\le n$), а не проверка «совершённости» актов; индукция — стандартная по `nat`, не выведенная из различения (§ 2.6).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оба статуса названы честно: distinction_count_from_one n <-> 1 <= n (Check.v, from_one_iff_positive — Closed); доказательство positive_nat_is_distinction_count идёт через nat_ind."
+  },
+  {
+   "line": 1505,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Предикат `distinction_count`, как и тип `Distinction` и теоремы о нём (`zero_distinctions` и далее), определён в файле `Distinction.v` Rocq-репозитория ToS.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 1 (знак на стр. 373). src/foundation/Distinction.v: Record Distinction (:71), distinction_count (:161), zero_distinctions (:164), далее one_distinction_exists, two_distinctions_exist, distinction_count_succ, distinction_count_any (:167–187). В файле 20 Qed."
+  },
+  {
+   "line": 1506,
+   "theorem": "add_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Предикат `distinction_count_from_one`, операция `add_distinction` и относящиеся к ним теоремы (`first_count_is_one`, `zero_not_a_count`, `add_distinction_increments`, `succ_is_new_distinction`, `positive_nat_is_distinction_count`) находятся в файле `PrimalityOfOne.v` Rocq-репозитория ToS;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора): сноска 2. add_distinction названа операцией (Definition), в перечень теорем поставлена add_distinction_increments."
+  },
+  {
+   "line": 1506,
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Предикат `distinction_count_from_one`, операция `add_distinction` и относящиеся к ним теоремы (`first_count_is_one`, `zero_not_a_count`, `add_distinction_increments`, `succ_is_new_distinction`, `positive_nat_is_distinction_count`) находятся в файле `PrimalityOfOne.v` Rocq-репозитория ToS;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 2. Все названные имена объявлены в src/foundation/PrimalityOfOne.v; файл назван верно."
+  },
+  {
+   "line": 654,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Строка блока § 2.4 совпадает с исходником (PrimalityOfOne.v, доказательство first_count_is_one). Closed under the global context.",
+   "theorem": "first_count_is_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "exists [distinction_true_false]."
+  },
+  {
+   "line": 522,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "distinction_count_any : forall n, distinction_count n. Closed under the global context.",
+   "theorem": "distinction_count_any",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Ответ формализации: достижим всякий итог — для каждого $n$, включая нуль, список нужной длины существует (`distinction_count_any`)."
+  },
+  {
+   "line": 516,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 13.11 (Часть II, шаг 3, слово автора) (развилка — А): отсылка к Главе I.6 снята. Там техническим слоем названы два объявления платформы (classic, L4_witness); distinction_count — определение. Слово «технический» здесь — в смысле главы: запись о форме данных.",
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Сказанное помещает `distinction_count` на вполне определённое место — в *технический слой* формальной работы."
+  },
+  {
+   "line": 365,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "length_is_the_count : forall (A : Type) (f : list A -> nat), f [] = 0 -> (forall a l, f (a :: l) = S (f l)) -> forall l, f l = length l. Closed under the global context. Для списков различений и add_distinction — counting_of_acts_is_unique.",
+   "theorem": "length_is_the_count",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "Такой подсчёт один: всякая функция, дающая нуль на пустом списке и прибавляющая единицу на каждом встреченном различии, совпадает с `length` (`length_is_the_count`, файл `CountingStages.v`)."
+  },
+  {
+   "line": 671,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: zero_not_a_count : ~ distinction_count_from_one 0; доказательство отбрасывает список и берёт конъюнкт 1 <= 0 (intro H. destruct H as [_ [_ Hge]]. lia). Closed under the global context.",
+   "theorem": "zero_not_a_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Оговорка о первой из них: в самом предикате границу проводит условие $1 \\le n$, вписанное в определение, и `zero_not_a_count` это условие возвращает."
+  },
+  {
+   "line": 673,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "zero_is_not_a_presented_count : ~ exists Ds, counts_from_one Ds 0. Closed under the global context.",
+   "theorem": "zero_is_not_a_presented_count",
+   "file": "src/foundation/CountingPresence.v",
+   "claim": "Выводом, без условия на число, исключение нуля получено отдельно (файл `CountingPresence.v`): в списке, где предъявлен хотя бы один акт, счёт не нуль (`zero_is_not_a_presented_count`)"
+  },
+  {
+   "line": 675,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "from_one_iff_some_present_list : forall n, distinction_count_from_one n <-> exists Ds, counts_from_one Ds n. Closed under the global context.",
+   "theorem": "from_one_iff_some_present_list",
+   "file": "src/foundation/CountingPresence.v",
+   "claim": "и такие счёты — в точности числа, удовлетворяющие предикату (`from_one_iff_some_present_list`)."
+  },
+  {
+   "line": 791,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "add_and_snoc_same_count : forall Ds D n, counts (add_distinction Ds D) n <-> counts (snoc_distinction Ds D) n. Closed under the global context.",
+   "theorem": "add_and_snoc_same_count",
+   "file": "src/foundation/CountingPresence.v",
+   "claim": "счёт при ней тот же (`add_and_snoc_same_count`), и кардинальный путь настоящей главы в ней не нуждается, поскольку опирается на длину, а не на направление порядка."
+  },
+  {
+   "line": 842,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "succ_count_iff_one_more_act : forall (n : nat) (Ds : list Distinction), counts Ds (S n) <-> exists D Ds', Ds = add_distinction Ds' D /\\ counts Ds' n. Closed under the global context.",
+   "theorem": "succ_count_iff_one_more_act",
+   "file": "src/foundation/CountingPresence.v",
+   "claim": "связь двух списков удерживает теорема `succ_count_iff_one_more_act` (файл `CountingPresence.v`): список имеет счёт $n + 1$ в точности тогда, когда он получен присоединением одного различия к списку со счётом $n$."
+  },
+  {
+   "line": 1010,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "count_induction_along_list : forall P : nat -> Prop, P 1 -> (forall n, P n -> P (S n)) -> forall Ds : list Distinction, presented Ds -> P (length Ds). Closed under the global context. В терме доказательства (команда Print, _p02step3/Verify.out) из принципов индукции только list_ind; nat_ind не входит.",
+   "theorem": "count_induction_along_list",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "Один шаг навстречу в формальном слое сделан (файл `CountingStages.v`): теорема `count_induction_along_list` — база для счёта одного акта и шаг на ещё один акт дают свойство для счёта всякого списка, в котором предъявлен хотя бы один акт, — доказана индукцией по самому *списку различий*, без индукции по `nat`."
+  },
+  {
+   "line": 1014,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: positive_nat_is_distinction_count доказана тактикой induction n (nat_ind); list_ind порождён определением типа list. Страница называет границу прямо.",
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Полной замены это не даёт: индукция по списку приходит вместе с типом списков, а что список есть у всякого $n \\ge 1$, доказано индукцией по `nat`."
+  },
+  {
+   "line": 1224,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "present_at_iff : forall Ds n, present_at Ds n <-> 1 <= n /\\ n <= length Ds. Closed under the global context.",
+   "theorem": "present_at_iff",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "Обе стороны проверены вместе (файл `CountingStages.v`): на стадии, заданной списком различий, наличны в точности счёты от $1$ до длины списка (`present_at_iff`);"
+  },
+  {
+   "line": 1227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "next_stage_adds_exactly_one : forall Ds D n, present_at (add_distinction Ds D) n <-> present_at Ds n \\/ n = S (length Ds). Closed under the global context.",
+   "theorem": "next_stage_adds_exactly_one",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "следующая стадия сохраняет наличное и добавляет ровно один новый счёт (`next_stage_adds_exactly_one`);"
+  },
+  {
+   "line": 1228,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "every_number_but_not_all_at_once : (forall n, 1 <= n -> exists Ds, present_at Ds n) /\\ (forall Ds, ~ (forall n, 1 <= n -> present_at Ds n)). Closed under the global context.",
+   "theorem": "every_number_but_not_all_at_once",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "всякое $n \\ge 1$ налично на некоторой стадии, и ни одна стадия не предъявляет всех (`every_number_but_not_all_at_once`)."
+  },
+  {
+   "line": 1247,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "completed_inf_contradicts_P4_at_any_stage : forall M actual s, CompletedInfSet M -> P4_stage_bounded actual -> (forall n, M n -> actual s n) -> False. Closed under the global context.",
+   "theorem": "completed_inf_contradicts_P4_at_any_stage",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "для любой другой одной стадии противоречие то же — `completed_inf_contradicts_P4_at_any_stage`, файл `CountingStages.v`;"
+  },
+  {
+   "line": 1249,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pointwise_bridge_is_compatible : exists M actual, CompletedInfSet M /\\ P4_stage_bounded actual /\\ (forall n, M n -> exists stage, actual stage n). Closed under the global context.",
+   "theorem": "pointwise_bridge_is_compatible",
+   "file": "src/foundation/CountingStages.v",
+   "claim": "мост же «каждый член — на своей стадии» с $P4$ совместим — `pointwise_bridge_is_compatible`)."
+  },
+  {
+   "line": 1300,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "equiv_is_not_pointwise : exists R1 R2 : RealProcess, R1 ~~ R2 /\\ forall n : nat, ~ (R1 n == R2 n). Closed under the global context.",
+   "theorem": "equiv_is_not_pointwise",
+   "file": "src/process/ProcessEquivLimit.v",
+   "claim": "и не сводящееся к поточечному равенству (`equiv_is_not_pointwise`, файл `ProcessEquivLimit.v`)."
+  },
+  {
+   "line": 1506,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "add_distinction_increments : forall Ds D, length (add_distinction Ds D) = S (length Ds). Closed under the global context.",
+   "theorem": "add_distinction_increments",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Предикат `distinction_count_from_one`, операция `add_distinction` и относящиеся к ним теоремы (`first_count_is_one`, `zero_not_a_count`, `add_distinction_increments`, `succ_is_new_distinction`, `positive_nat_is_distinction_count`) находятся в файле `PrimalityOfOne.v` Rocq-репозитория ToS;"
+  },
+  {
+   "line": 1506,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: CountingPresence.v (30 Qed) — отношения counts, counts_from_one между данным списком и числом; CountingStages.v (22 Qed) — present_at и стадии. Все теоремы обоих файлов — Closed under the global context.",
+   "theorem": "counts_from_one",
+   "file": "src/foundation/CountingPresence.v",
+   "claim": "теоремы о счёте *данного* списка различий — в файле `CountingPresence.v`, о стадиях счёта — в файле `CountingStages.v`."
+  }
+ ]
+}

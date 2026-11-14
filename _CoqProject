@@ -2133,3 +2133,12 @@ src/foundation/ERRStratification.v
 src/foundation/StatusMechanism.v
 src/settheory/ListModes.v
 src/foundation/GraphTransitionN2.v
+src/foundation/CountingPresence.v
+src/foundation/DistinctionSideRole.v
+src/process/ProcessEquivLimit.v
+src/foundation/CountingStages.v
+src/foundation/LevelAscent.v
+src/foundation/BitStringCount.v
+src/foundation/StructuralPath.v
+src/foundation/FourPathsOneSeries.v
+src/CoordinateIntegersLaws.v

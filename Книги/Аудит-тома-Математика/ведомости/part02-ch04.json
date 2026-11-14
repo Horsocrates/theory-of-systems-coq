@@ -1,0 +1,541 @@
+{
+ "batch": "audit-part-02",
+ "chapter": "02 Натуральные числа/04 Бинарный путь число как количество двоичного выбора.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 119,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Сам *факт* двух сторон задаётся не законом $L2$, а *структурой различения*: положительная и отрицательная стороны уже присутствуют как две стороны акта — в записи `Distinction` это поля `positive` и `negative`, в типе `Side` из `Binarity.v` — два конструктора `Marked` и `Unmarked`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~ (positive /\\ negative); exhaustive : positive \\/ negative } (Distinction.v:71); Inductive Side := Marked | Unmarked (Binarity.v:11). Стороны в обоих случаях даны объявлением — глава говорит это прямо."
+  },
+  {
+   "line": 159,
+   "theorem": "L3_exhaustive",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Если стороны акта представлены типом `Side` с конструкторами `Marked` и `Unmarked`, то $L3$ *исчерпывает* именно это заданное пространство: всякий элемент типа `Side` есть *либо* `Marked`, *либо* `Unmarked`, и иного типом не предусмотрено.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma L3_exhaustive : forall s : Side, s = Marked \\/ s = Unmarked (Binarity.v:16); доказательство — разбор случаев индуктивного типа (destruct s). Closed under the global context: закон исключённого третьего (Classical_Prop.classic) в лемму не входит, исчерпанность есть свойство объявления типа. Глава говорит это словами «иного типом не предусмотрено»."
+  },
+  {
+   "line": 179,
+   "theorem": "Side",
+   "file": "src/foundation/Binarity.v",
+   "claim": "В файле `Binarity.v` Rocq-репозитория ToS стороны различения представлены не выводом из `Distinction`, а *отдельным* типом: объявлен `Inductive Side := Marked | Unmarked` — тип с двумя конструкторами",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive Side := Marked | Unmarked. (Binarity.v:11) — дословно. Типов с именем Side в src шесть; глава называет файл Binarity.v."
+  },
+  {
+   "line": 184,
+   "theorem": null,
+   "file": "src/foundation/Binarity.v",
+   "claim": "Файл `Binarity.v` не импортирует `Distinction.v` и не строит `Side` как теорему из полей `positive` / `negative` / `exclusive` / `exhaustive` записи `Distinction`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Binarity.v подключает только стандартную библиотеку (QArith, Lia, ZArith, List, Bool, Lqa; :6–7); записи Distinction в файле нет. Связи между типом Side и записью Distinction нет и в остальных файлах src (Binarity.v подключён одним файлом — BitString.v). Мост проверен в пробном файле: у всякого различения положена ровно одна сторона типа Side (distinction_has_exactly_one_side: существование — из поля exhaustive, единственность — из exclusive), Closed under the global context."
+  },
+  {
+   "line": 191,
+   "theorem": "L2_exclusive",
+   "file": "src/foundation/Binarity.v",
+   "claim": "в `Binarity.v` это обоснование *фиксируется* через отдельный тип `Side` с двумя конструкторами и две леммы о них: `L2_exclusive` (`Marked <> Unmarked` — конструкторы различны) и `L3_exhaustive` (`forall s : Side, s = Marked \\/ s = Unmarked` — всякий элемент типа исчерпывается двумя случаями).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma L2_exclusive : Marked <> Unmarked (Binarity.v:13), доказательство — discriminate. Closed under the global context. Формулировка главы дословна."
+  },
+  {
+   "line": 191,
+   "theorem": "L3_exhaustive",
+   "file": "src/foundation/Binarity.v",
+   "claim": "в `Binarity.v` это обоснование *фиксируется* через отдельный тип `Side` с двумя конструкторами и две леммы о них: `L2_exclusive` (`Marked <> Unmarked` — конструкторы различны) и `L3_exhaustive` (`forall s : Side, s = Marked \\/ s = Unmarked` — всякий элемент типа исчерпывается двумя случаями).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma L3_exhaustive : forall s : Side, s = Marked \\/ s = Unmarked (Binarity.v:16), доказательство — destruct s. Closed under the global context. Формулировка главы дословна."
+  },
+  {
+   "line": 196,
+   "theorem": "Side",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Двоичность, таким образом, не *выведена* в коде из записи `Distinction` — она *задана* типом `Side` и *подтверждена* двумя леммами, отвечающими $L2$ и $L3$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: обе леммы суть свойства объявления индуктивного типа (discriminate; destruct), законы посылками в них не входят. С 13.11.2026 для самой записи Distinction различие сторон — теорема: sides_distinct : forall D, positive D <> negative D и sides_not_equivalent (DistinctionCoDefinition.v:125, :117; используют оба поля), «третьего нет» из со-определения — binarity_from_codefinition (:193); все Closed under the global context. К типу Side эти теоремы не относятся."
+  },
+  {
+   "line": 214,
+   "theorem": "Side",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Формально это фиксирует тип `Side` из `Binarity.v` — два конструктора и две леммы, отвечающие $L2$ и $L3$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Binarity.v:11, :13, :16. Третья лемма о сторонах в том же файле, exactly_two_sides (:19), повторяет L3_exhaustive (сноска 1 главы)."
+  },
+  {
+   "line": 375,
+   "theorem": "two_pow",
+   "file": "src/foundation/Binarity.v",
+   "claim": "В текущем репозитории уже есть формальные *заготовки* этого моста: файл `Binarity.v` содержит функции `two_pow` и `microstates` и леммы о том, что добавление ещё одного различения *удваивает* число возможных состояний (рост числа состояний как $2^K$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint two_pow (Binarity.v:23) — функция 2^K; Definition microstates (n : nat) : nat := two_pow n (:53); new_dist_doubles : microstates (S K) = 2 * microstates K (:58) и pow_double (:68) — раскрытие определения two_pow (simpl; reflexivity). «Число состояний» здесь по определению есть 2^K: объекта, состояния которого считались бы, в файле нет. Слово «заготовки» это покрывает."
+  },
+  {
+   "line": 380,
+   "theorem": "microstates",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Это — арифметические леммы о степенях двойки плюс комментарии, намечающие связь с энтропией;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 5, слово автора): было «комбинаторные». Леммы Binarity.v о two_pow (pow_monotone, pow_positive, pow_double, new_dist_doubles и значения) — арифметика функции 2^K; счёта объектов в них нет. Все Closed under the global context."
+  },
+  {
+   "line": 437,
+   "theorem": null,
+   "file": "src/foundation/BitString.v",
+   "claim": "Файл `Binarity.v` содержит тип `Side` (с леммами $L2$ / $L3$) и комбинаторные леммы о $2^K$. Слой же *двоичных записей* — определения `Bit`, `BitString`, `bit_length`, `add_bit` и теоремы о длине записи и положительном бинарном счёте — теперь построен поверх него, в отдельном файле `BitString.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "BitString.v: Bit (:49), BitString (:50), bit_length (:52), add_bit (:54); add_bit_increments_length (:56), one_bit_length (:63), nonempty_positive_count (:69). Файл подключает foundation.Binarity и List, Bool, Lia стандартной библиотеки (:22–24); Distinction.v, PrimalityOfOne.v и файлы об уровнях не подключает."
+  },
+  {
+   "line": 442,
+   "theorem": "add_bit_increments_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "Это прямое перенесение кардинального аппарата Главы II.2 на тип `Side`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 434–450) совпадает с BitString.v:49–70. add_bit и add_bit_increments_length повторяют add_distinction и add_distinction_increments (PrimalityOfOne.v:76, :79); обе леммы — reflexivity (length (x :: l) = S (length l)). Closed under the global context. Число-сторона кардинального аппарата (distinction_count_from_one, positive_nat_is_distinction_count) в BitString.v не перенесена — см. запись стр. 459."
+  },
+  {
+   "line": 463,
+   "theorem": "one_bit_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "С этим слоем «один бит есть первый положительный счёт» получает прямой якорь: запись `one_bit := [Marked]` с леммой `one_bit_length` ($\\texttt{bit\\_length one\\_bit} = 1$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition one_bit : BitString := [Marked] (BitString.v:61); Lemma one_bit_length : bit_length one_bit = 1 (:63), reflexivity. Closed under the global context. Лемма говорит о длине одной записи; «первый» (наименьший) положительный счёт следует из определения positive_bit_count (>= 1), отдельной леммы нет (пробный файл: one_bit_is_least_positive_count, empty_not_positive_count — Closed)."
+  },
+  {
+   "line": 465,
+   "theorem": "nonempty_positive_count",
+   "file": "src/foundation/BitString.v",
+   "claim": "а *положительность счёта всякой непустой записи* — лемму `nonempty_positive_count` («непустая запись имеет `bit_length` $\\ge 1$»).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma nonempty_positive_count : forall bs, bs <> [] -> positive_bit_count bs (BitString.v:69). Closed under the global context. Пересказ главы точен."
+  },
+  {
+   "line": 468,
+   "theorem": "positive_bit_count",
+   "file": "src/foundation/BitString.v",
+   "claim": "Счёт здесь берётся со стороны *записи* (предикат `positive_bit_count` на `BitString`), а не индексируется числом;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition positive_bit_count (bs : BitString) : Prop := (bit_length bs >= 1)%nat (BitString.v:67) — предикат на записях; предиката на числах (двойника distinction_count_from_one) в файле нет."
+  },
+  {
+   "line": 470,
+   "theorem": "positive_nat_is_bit_count",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "число-сторона («для всякого $n \\ge 1$ есть запись длины $n$») доказана отдельно — теоремой `positive_nat_is_bit_count` (файл `BitStringCount.v`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 5, слово автора) (формализацией): было «читается с него прямо». positive_nat_is_bit_count : forall n, 1 <= n -> exists bs : BitString, bs <> [] /\\ bit_length bs = n. Closed under the global context (свидетель — запись из n знаков Marked)."
+  },
+  {
+   "line": 474,
+   "theorem": "positive_nat_is_distinction_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Она параллельна уже доказанной `positive_nat_is_distinction_count` из `PrimalityOfOne.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem positive_nat_is_distinction_count : forall n, (1 <= n)%nat -> distinction_count_from_one n (PrimalityOfOne.v); с 13.11 (замена свидетеля) — Closed under the global context. Совпадение двух счётов — cardinal_and_binary_counts_coincide (src/foundation/BitStringCount.v)."
+  },
+  {
+   "line": 476,
+   "theorem": null,
+   "file": "src/foundation/BitString.v",
+   "claim": "Слой `BitString.v` — 7 теорем, слой счёта над ним — файл `BitStringCount.v`; оба *без единой аксиомы*; формальным якорем бинарного пути служат теперь и тип `Side` с $L2$ / $L3$, и построенный над ним `BitString.v`.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "BitString.v: 7 строк Qed (не менялся); BitStringCount.v: 30 Qed и одно Defined. У всех объявлений обоих файлов Print Assumptions — Closed under the global context; строк Axiom и Parameter нет."
+  },
+  {
+   "line": 583,
+   "theorem": "S",
+   "external": true,
+   "assumptions": "не применимо (конструктор nat стандартной библиотеки)",
+   "claim": "Три операции, и все три суть одна операция следования `S`, взятая в трёх видах: `S` есть «ещё одно различие в списке», «ещё один уровень над уровнем», «ещё один бит в записи». На бинарном пути `S` есть добавление бита.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "S — конструктор nat стандартной библиотеки. В формализации это три отдельные леммы вида «мера (добавить) = S (мера)»: add_distinction_increments (PrimalityOfOne.v:79), level_to_nat_LS (LevelNatIso.v:50), add_bit_increments_length (BitString.v:56); все три меры принимают значения в одном готовом типе nat. Теоремы, сопоставляющей пути между собой, в src нет; глава о ней не заявляет."
+  },
+  {
+   "line": 590,
+   "theorem": null,
+   "file": "src/foundation/BitString.v",
+   "claim": "добавляется ли новый бит слева (`b :: bs`, в голову) или справа (`bs ++ [b]`, в конец), длина в обоих случаях возрастает ровно на единицу",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слева — add_bit_increments_length (BitString.v:56; add_bit b bs := b :: bs). Для добавления справа леммы в BitString.v нет; факт верен (length_app стандартной библиотеки) и проверен в пробном файле: add_bit_right_increments_length : bit_length (bs ++ [b]) = S (bit_length bs), Closed under the global context."
+  },
+  {
+   "line": 657,
+   "theorem": "add_bit_increments_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "Добавление бита есть операция следования `S`, взятая на бинарном пути.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma add_bit_increments_length : forall b bs, bit_length (add_bit b bs) = S (bit_length bs) (BitString.v:56). Closed under the global context. Обратного утверждения — что всякое n >= 1 достигается наращиванием записи — в src нет (см. запись стр. 459)."
+  },
+  {
+   "line": 727,
+   "theorem": "bit_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "Длина двоичной записи есть та же операция, что длина списка различий в Главе II.2: подсчёт элементов выстроенной последовательности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition bit_length (bs : BitString) : nat := length bs (BitString.v:52), BitString := list Bit (:50); в кардинальном аппарате — length Ds для Ds : list Distinction (PrimalityOfOne.v:55, :79). Одна функция length стандартной библиотеки; значение в обоих случаях — готовый тип nat."
+  },
+  {
+   "line": 747,
+   "theorem": "S",
+   "external": true,
+   "assumptions": "не применимо (конструктор nat стандартной библиотеки)",
+   "claim": "Начала всех трёх путей суть одна и та же единица; операции следования всех трёх — одна и та же операция `S`, взятая в трёх видах (§ 4.5.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "О доказанности в Rocq здесь не заявлено. В формализации «одна операция» означает: три леммы с S в заключении (см. запись стр. 566). О началах: one_bit_length даёт 1 (BitString.v:63), first_count_is_one — 1 (PrimalityOfOne.v:58, цена Classical_Prop.classic); у уровней level_to_nat L1 = 0, а level_depth L1 = 1 (LevelNatIso.v:37, :121) — предмет главы II.3."
+  },
+  {
+   "line": 861,
+   "theorem": "nonempty_bitstring_ind",
+   "file": "src/foundation/BitString.v",
+   "claim": "Индукция по двоичной записи не есть аксиома. База её отвечает наименьшей записи — одному биту, шаг — добавлению бита.",
+   "page_price": "не аксиома",
+   "verdict": "ok",
+   "note": "nonempty_bitstring_ind (BitString.v:77) — лемма, Closed under the global context; доказана индукцией по списку (induction bs), то есть принципом, который Rocq порождает вместе с индуктивным типом list. Заключение леммы — для непустых записей (bs <> [] -> P bs); в прозе § 4.7.2–4.7.3 условие непустоты не названо, оно названо ниже (стр. 866–873)."
+  },
+  {
+   "line": 876,
+   "theorem": "nonempty_bitstring_ind",
+   "file": "src/foundation/BitString.v",
+   "claim": "Формально база содержательного свойства есть не «$P$ для одной записи», а `forall b : Bit, P [b]` — $P$ для всякой односимвольной записи.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первая посылка nonempty_bitstring_ind: (forall b : Bit, P [b]) (BitString.v:79)."
+  },
+  {
+   "line": 887,
+   "theorem": "nonempty_bitstring_ind",
+   "file": "src/foundation/BitString.v",
+   "claim": "Поэтому бинарному пути отвечает не стандартный list-принцип, а отдельный принцип индукции по *непустым* двоичным записям — с базой по односимвольным записям и шагом, сохраняющим непустоту. Формально его можно записать так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 876–880) совпадает с BitString.v:77–81. Closed under the global context."
+  },
+  {
+   "line": 909,
+   "theorem": "nonempty_bitstring_ind",
+   "file": "src/foundation/BitString.v",
+   "claim": "Принцип `nonempty_bitstring_ind` лишь записывает его в форме, прямо отвечающей бинарному пути.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "nonempty_bitstring_ind (BitString.v:76) — принцип для непустых записей; Closed under the global context."
+  },
+  {
+   "line": 996,
+   "theorem": null,
+   "file": "src/foundation/Binarity.v",
+   "claim": "Заголовок опорного файла задаёт разметку: *элементы — стороны `Side`; правила — исключение ($L2$), исчерпание ($L3$), рост*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка Binarity.v (:2–4): «E: Side (Marked/Unmarked), two_pow, microstates», «R: L2 exclusion, L3 exhaustion, exponential growth», «R: Binary = derived from distinction. Shannon bit = 1 distinction.» Третья строка шапки и комментарий :62 («Binary code DERIVED from L2+L3») говорят больше, чем код и чем глава: в коде Side не выводится, а глава различает структурный бит и бит Шеннона."
+  },
+  {
+   "line": 1001,
+   "theorem": null,
+   "file": "src/foundation/BitString.v",
+   "claim": "в коде зафиксированы тип `Side` и леммы $L2$/$L3$ (`Binarity.v`), а слой двоичной записи (`Bit`, `BitString`, `bit_length`, `add_bit`, `nonempty_bitstring_ind`) построен поверх него в `BitString.v` (7 теорем, 0 аксиом; § 4.4); счёт сторон, счёт записей и связь с записью `Distinction` — в `BitStringCount.v` и `DistinctionSideRole.v`, тоже без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "BitString.v: 7 Qed; BitStringCount.v: 30 Qed; DistinctionSideRole.v: 8 Qed. У всех объявлений трёх файлов Print Assumptions — Closed under the global context."
+  },
+  {
+   "line": 1011,
+   "theorem": "L2_exclusive",
+   "file": "src/foundation/Binarity.v",
+   "claim": "$L2$ удерживает их раздельными (`L2_exclusive`: `Marked` $\\neq$ `Unmarked`), $L3$ исчерпывает рамку (`L3_exhaustive`: всякая сторона есть та или другая).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma L2_exclusive : Marked <> Unmarked (Binarity.v:13). Closed under the global context."
+  },
+  {
+   "line": 1011,
+   "theorem": "L3_exhaustive",
+   "file": "src/foundation/Binarity.v",
+   "claim": "$L2$ удерживает их раздельными (`L2_exclusive`: `Marked` $\\neq$ `Unmarked`), $L3$ исчерпывает рамку (`L3_exhaustive`: всякая сторона есть та или другая).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma L3_exhaustive : forall s : Side, s = Marked \\/ s = Unmarked (Binarity.v:16). Closed under the global context."
+  },
+  {
+   "line": 1015,
+   "theorem": "add_bit_increments_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "Второе правило — сборка: число есть *количество* бит, и добавление бита есть операция следования `S` (§ 4.5); сборка длиной общая с кардинальным путём.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bit_length bs := length bs (BitString.v:52); add_bit_increments_length (:56). Closed under the global context. Та же функция length — в PrimalityOfOne.v:55, :79."
+  },
+  {
+   "line": 1017,
+   "theorem": "two_pow",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Сюда же — правило роста: $K$ бит дают $2^K$ исходов (`two_pow`, `microstates`), но это заготовка иной задачи (§ 4.4.3).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "two_pow K — функция 2^K (Binarity.v:23), microstates := two_pow (:53); с типом BitString они не связаны, утверждения о числе записей длины K в src нет. Статус «заготовка» назван. Связь проверена в пробном файле (Closed under the global context): перечисление записей длины K полно, без повторов и имеет длину microstates K (bitstrings_of_length_count); всякое такое перечисление имеет длину two_pow K (bitstrings_count_is_forced)."
+  },
+  {
+   "line": 1033,
+   "theorem": "Side_eq_dec",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "По $L1$ каждая сторона тождественна себе (`Side` — тип с разрешимым равенством: `Side_eq_dec`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 5, слово автора) (формализацией): лемма названа. Side_eq_dec : forall a b : Side, {a = b} + {a <> b} (decide equality; Defined). Closed under the global context."
+  },
+  {
+   "line": 1036,
+   "theorem": "Side",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Стороны ToS не выводит из различения, а задаёт отдельным типом `Side`, двоичность которого *обоснована* законами $L2$/$L3$ (§ 4.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Согласуется с кодом: Side — отдельный индуктивный тип (Binarity.v:11); обоснование законами дано в прозе § 4.2, в коде — две леммы о конструкторах без посылок-законов."
+  },
+  {
+   "line": 1121,
+   "theorem": "exactly_two_sides",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Имеющаяся в `Binarity.v` лемма `exactly_two_sides` по формулировке совпадает с `L3_exhaustive` (она и доказана через неё) и потому фиксирует лишь исчерпанность, не различие сторон.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 1 (знак — стр. 199). Lemma exactly_two_sides : forall s : Side, s = Marked \\/ s = Unmarked (Binarity.v:19), Proof. exact L3_exhaustive. Qed. Closed under the global context. Оценка главы точна."
+  },
+  {
+   "line": 1121,
+   "theorem": "side_is_binary",
+   "file": "src/foundation/BitString.v",
+   "claim": "в файле `BitString.v` (поверх `Binarity.v`) двоичность записана одной пропозицией `side_binarity := Marked <> Unmarked /\\ (forall s : Side, s = Marked \\/ s = Unmarked)` и доказана леммой `side_is_binary` (из `L2_exclusive` и `L3_exhaustive`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 5, слово автора): сноска 1. Было «доказана синтетическая теорема side_binarity». side_binarity — Definition (BitString.v:30); Lemma side_is_binary : side_binarity (:33). Closed under the global context."
+  },
+  {
+   "line": 1121,
+   "theorem": "all_sides_complete",
+   "file": "src/foundation/BitString.v",
+   "claim": "а для буквального «счёт сторон $=2$» — список `all_sides := [Marked; Unmarked]` с леммами полноты (`all_sides_complete`) и длины (`all_sides_length`: `length all_sides = 2`), к которым в файле `BitStringCount.v` добавлены неповторяемость (`all_sides_nodup`) и теорема `side_count_exactly_two`: всякое перечисление сторон без повторов имеет длину $2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 5, слово автора) (формализацией): сноска 1. all_sides_complete (BitString.v:39), all_sides_length (:42); «ровно две» теперь доказано счётом — all_sides_nodup и side_count_exactly_two (src/foundation/BitStringCount.v). Closed under the global context."
+  },
+  {
+   "line": 1121,
+   "theorem": "all_sides_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "длины (`all_sides_length`: `length all_sides = 2`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 1. Lemma all_sides_length : length all_sides = 2%nat (BitString.v:42), reflexivity. Closed under the global context. Формулировка совпадает; о том, что вместе с полнотой это ещё не «счёт сторон = 2», — запись all_sides_complete."
+  },
+  {
+   "line": 1122,
+   "theorem": "nonempty_bitstring_ind",
+   "file": "src/foundation/BitString.v",
+   "claim": "Принцип `nonempty_bitstring_ind`, как и весь слой двоичных записей (`Bit`, `BitString`, `bit_length`, `add_bit`), теперь построен — в файле `BitString.v` поверх `Binarity.v` (последний даёт тип `Side` и леммы $L2$ / $L3$). Принцип доказан там в точности в приведённой форме; см. итог главы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 2 (знак — стр. 889). Lemma nonempty_bitstring_ind (BitString.v:77–81) совпадает с блоком кода главы (стр. 876–880). Closed under the global context."
+  },
+  {
+   "line": 1123,
+   "theorem": null,
+   "file": "src/foundation/Binarity.v",
+   "claim": "E/R/R-разметка в шапке файла `Binarity.v` (объекты `Side`, `two_pow`, `microstates`; леммы $L2$/$L3$; рост).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 3 (знак — стр. 976). Шапка Binarity.v:2–3: «E: Side (Marked/Unmarked), two_pow, microstates», «R: L2 exclusion, L3 exhaustion, exponential growth». Шапка не имеет принятого в проекте вида (нет строк Roles и STATUS); действительный счёт файла — 17 Qed, 0 Axiom."
+  },
+  {
+   "line": 199,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exactly_one_side_holds : forall D : Distinction, exists s : DistinctionSide, side_holds D s /\\ (forall s', side_holds D s' -> s' = s). Существование — из поля exhaustive, единственность — из поля exclusive. Closed under the global context. Тип Side остаётся отдельным объявлением (Binarity.v) — страница говорит это выше.",
+   "theorem": "exactly_one_side_holds",
+   "file": "src/foundation/DistinctionSideRole.v",
+   "claim": "Связь типа `Side` с записью `Distinction` записана отдельно: у всякого различения положена ровно одна из двух сторон типа `Side` — существование даёт исчерпанность ($L3$ записи), единственность — несовместность ($L2$ записи) (`exactly_one_side_holds`, файл `DistinctionSideRole.v`);"
+  },
+  {
+   "line": 203,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "every_list_has_exactly_one_record : forall Ds : list Distinction, exists bs : BitString, binary_record Ds bs /\\ bit_length bs = length Ds /\\ (forall bs', binary_record Ds bs' -> bs' = bs); binary_record Ds bs := Forall2 side_holds Ds bs. Closed under the global context.",
+   "theorem": "every_list_has_exactly_one_record",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "и всякий список совершённых различений имеет ровно одну двоичную запись, той же длины (`every_list_has_exactly_one_record`, файл `BitStringCount.v`)."
+  },
+  {
+   "line": 381,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bitstrings_of_length_count : forall K, NoDup (all_bitstrings K) /\\ (forall bs, In bs (all_bitstrings K) <-> bit_length bs = K) /\\ length (all_bitstrings K) = microstates K. Closed under the global context.",
+   "theorem": "bitstrings_of_length_count",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "счёт самих записей дан отдельно (файл `BitStringCount.v`, теорема `bitstrings_of_length_count`): записей длины $K$ ровно $2^K$ — их перечисление полно и без повторов,"
+  },
+  {
+   "line": 384,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bitstrings_count_is_forced : forall K l, NoDup l -> (forall bs, In bs l <-> bit_length bs = K) -> length l = two_pow K. Closed under the global context.",
+   "theorem": "bitstrings_count_is_forced",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "и всякое другое такое перечисление имеет ту же длину (`bitstrings_count_is_forced`)."
+  },
+  {
+   "line": 385,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в Binarity.v и BitStringCount.v об энтропии — только комментарии; теорем нет.",
+   "theorem": "microstates",
+   "file": "src/foundation/Binarity.v",
+   "claim": "Полный физический вывод энтропийных законов в них ещё не содержится и относится к физике."
+  },
+  {
+   "line": 472,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bit_count_iff_positive : forall n, (exists bs : BitString, bs <> [] /\\ bit_length bs = n) <-> 1 <= n. Closed under the global context.",
+   "theorem": "bit_count_iff_positive",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "а вместе с обратным направлением — `bit_count_iff_positive`: длины непустых записей суть в точности числа $n \\ge 1$."
+  },
+  {
+   "line": 534,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "empty_not_positive_count : ~ positive_bit_count []. Closed under the global context.",
+   "theorem": "empty_not_positive_count",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "Формально: пустая запись положительного счёта не имеет (`empty_not_positive_count`)"
+  },
+  {
+   "line": 535,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "one_bit_is_least_positive_count : forall bs : BitString, positive_bit_count bs -> bit_length one_bit <= bit_length bs; bit_length one_bit = 1 (one_bit_length). Closed under the global context.",
+   "theorem": "one_bit_is_least_positive_count",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "а единица — наименьший положительный счёт (`one_bit_is_least_positive_count`)."
+  },
+  {
+   "line": 592,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "add_bit_right_increments_length : forall (b : Bit) (bs : BitString), bit_length (bs ++ [b]) = S (bit_length bs). Closed under the global context.",
+   "theorem": "add_bit_right_increments_length",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "длина в обоих случаях возрастает ровно на единицу (`add_bit_increments_length`, `add_bit_right_increments_length`)"
+  },
+  {
+   "line": 592,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "add_bit_increments_length : forall b bs, bit_length (add_bit b bs) = S (bit_length bs) (BitString.v:56). Closed under the global context.",
+   "theorem": "add_bit_increments_length",
+   "file": "src/foundation/BitString.v",
+   "claim": "длина в обоих случаях возрастает ровно на единицу (`add_bit_increments_length`, `add_bit_right_increments_length`)"
+  },
+  {
+   "line": 829,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 5, слово автора) (развилка — А): вставлено слово «непустой» (здесь и в абзаце «Отсюда и правомерность»). Без него принцип неверен: induction_from_one_bit_misses_empty (src/foundation/BitStringCount.v), Closed under the global context.",
+   "theorem": "induction_from_one_bit_misses_empty",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "свойство было верно для всякой *непустой* двоичной записи, довольно двух вещей"
+  },
+  {
+   "line": 905,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "nonempty_bitstring_ind_via_nat — тот же принцип, доказанный индукцией по nat по длине записи. Closed under the global context.",
+   "theorem": "nonempty_bitstring_ind_via_nat",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "даёт тот же результат — это проверено в обе стороны (файл `BitStringCount.v`: `nonempty_bitstring_ind_via_nat`, `nat_ind_from_one_via_bitstrings`);"
+  },
+  {
+   "line": 905,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "nat_ind_from_one_via_bitstrings : forall Q, Q 1 -> (forall n, 1 <= n -> Q n -> Q (S n)) -> forall n, 1 <= n -> Q n — из nonempty_bitstring_ind. Closed under the global context.",
+   "theorem": "nat_ind_from_one_via_bitstrings",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "даёт тот же результат — это проверено в обе стороны (файл `BitStringCount.v`: `nonempty_bitstring_ind_via_nat`, `nat_ind_from_one_via_bitstrings`);"
+  },
+  {
+   "line": 908,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "induction_from_one_bit_misses_empty : ~ (forall P : BitString -> Prop, (forall b, P [b]) -> (forall b bs, P bs -> P (b :: bs)) -> forall bs, P bs). Closed under the global context.",
+   "theorem": "induction_from_one_bit_misses_empty",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "без условия непустоты принцип неверен — пустая запись им не покрыта (`induction_from_one_bit_misses_empty`)."
+  },
+  {
+   "line": 1121,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "side_count_exactly_two : forall l : list Side, NoDup l -> (forall s : Side, In s l) -> length l = 2. Closed under the global context.",
+   "theorem": "side_count_exactly_two",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "а для буквального «счёт сторон $=2$» — список `all_sides := [Marked; Unmarked]` с леммами полноты (`all_sides_complete`) и длины (`all_sides_length`: `length all_sides = 2`), к которым в файле `BitStringCount.v` добавлены неповторяемость (`all_sides_nodup`) и теорема `side_count_exactly_two`: всякое перечисление сторон без повторов имеет длину $2$."
+  },
+  {
+   "line": 1121,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "all_sides_nodup : NoDup all_sides — из L2_exclusive. Closed under the global context.",
+   "theorem": "all_sides_nodup",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "а для буквального «счёт сторон $=2$» — список `all_sides := [Marked; Unmarked]` с леммами полноты (`all_sides_complete`) и длины (`all_sides_length`: `length all_sides = 2`), к которым в файле `BitStringCount.v` добавлены неповторяемость (`all_sides_nodup`) и теорема `side_count_exactly_two`: всякое перечисление сторон без повторов имеет длину $2$."
+  },
+  {
+   "line": 1121,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition side_binarity : Prop (BitString.v:30) — запись страницы совпадает с исходником.",
+   "theorem": "side_binarity",
+   "file": "src/foundation/BitString.v",
+   "claim": "двоичность записана одной пропозицией `side_binarity := Marked <> Unmarked /\\ (forall s : Side, s = Marked \\/ s = Unmarked)`"
+  },
+  {
+   "line": 1121,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: complete_length_two_is_not_exactly_two : exists l : list unit, (forall u, In u l) /\\ length l = 2 — у типа с одним значением тоже есть полный список длины 2. Closed under the global context. Имя леммы на странице не названо.",
+   "theorem": "complete_length_two_is_not_exactly_two",
+   "file": "src/foundation/BitStringCount.v",
+   "claim": "Полнота и длина одни дают только «не больше двух»."
+  }
+ ]
+}

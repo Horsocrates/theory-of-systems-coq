@@ -1,0 +1,350 @@
+{
+ "batch": "audit-part-03",
+ "chapter": "03 От натуральных к рациональным/02 Рациональные числа.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 420,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Как и для целых чисел, ToS не строит рациональные числа заново: для них есть готовая конструкция в стандартной библиотеке Rocq, и ToS берёт её рабочим инструментом.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q — запись Stdlib.QArith.QArith_base.Q; собственного типа рациональных в src нет (поиск по объявлениям записей и типов), QArith подключают 1640 файлов src из 2048. Сравнение с целыми точно только в части типа: для целых в проекте есть ещё собственная запись FormalDiff с изоморфизмом Z (см. запись к стр. 826)."
+  },
+  {
+   "line": 428,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Record Q : Set := Qmake { Qnum : Z; Qden : positive }.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с исходником библиотеки: Stdlib/QArith/QArith_base.v:23 `Record Q : Set := Qmake {Qnum : Z; Qden : positive}.`; то же отвечает команда Print Q. Отметка инструмента «ОТЛИЧАЕТСЯ» ложная: блок сравнён с `Variable Q : Type` из src/cs/PumpingPigeonhole.v:38."
+  },
+  {
+   "line": 434,
+   "theorem": "Qnum",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Поле `Qnum` — числитель — есть целое число: позиция в двусторонней разметке целых чисел",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Qnum : Q -> Z — поле записи Q (Stdlib.QArith.QArith_base.Qnum)."
+  },
+  {
+   "line": 436,
+   "theorem": "Qden",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Поле `Qden` — знаменатель — есть число типа `positive`: на сколько частей разделён прежний шаг.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Qden : Q -> positive — поле записи Q (Stdlib.QArith.QArith_base.Qden)."
+  },
+  {
+   "line": 439,
+   "theorem": "positive",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Тип `positive` в Rocq — это *технический* индуктивный тип положительных целых в двоичной записи, часть стандартной библиотеки",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive positive := xI | xO | xH (Corelib.Numbers.BinNums; в Rocq 9 объявление лежит в базовой библиотеке Corelib, обозначения — в Stdlib.PArith). В формализации то же имя носит поле записи Distinction (Distinction.positive : Distinction -> Prop) — другое объявление."
+  },
+  {
+   "line": 444,
+   "theorem": "Qden",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "`positive` не имеет нуля среди своих значений, и потому знаменатель *конструктивно ненулевой*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "У типа positive три конструктора, нуля среди значений нет; forall x : Q, Z.pos (Qden x) <> 0 доказано в пробном файле (denominator_never_zero, Closed under the global context)."
+  },
+  {
+   "line": 445,
+   "theorem": "Qinv",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Тем условие $q \\neq 0$ (§ 2.4) оказывается *встроенным в самый тип*: знаменатель просто не может быть нулём, и деления на нуль формальная запись не допускает не запретом, а устройством типа.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Верно для записи дроби: p # q с нулевым q не записать. Операция деления той же библиотеки определена на всех парах: Qinv 0 = 0 (QArith_base.v:254), Qdiv x y := x * / y, поэтому x / 0 == 0, а 1 / 0 вычисляется в 0. Закон обратного доказан под условием: Qmult_inv_r : forall x, ~ x == 0 -> x * / x == 1."
+  },
+  {
+   "line": 469,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Тип `Q`, как показывает запись выше, — это `Record`: пара из числителя и знаменателя. Он *не* является quotient type",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q — запись с одним конструктором Qmake; отождествления равнозначных дробей в самом типе нет."
+  },
+  {
+   "line": 472,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Записи `1#2` и `2#4` суть *разные* объекты типа `Q` — разные пары, — и по структурному равенству записей (`=`) они *не* равны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "(1 # 2) <> (2 # 4) доказано в пробном файле (half_neq_two_quarters, discriminate; Closed under the global context)."
+  },
+  {
+   "line": 475,
+   "theorem": "Qeq",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Рациональное равенство задаётся *отдельным* отношением эквивалентности — `Qeq`, которое в Rocq принято записывать знаком `==`; и вот по нему, по `Qeq`, дроби `1#2` и `2#4` равны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Qeq p q := Qnum p * QDen q = Qnum q * QDen p (QArith_base.v:48), знак == (там же, :54); Q_Setoid : Equivalence Qeq (:170). (1 # 2) == (2 # 4) — reflexivity (пробный файл, half_Qeq_two_quarters)."
+  },
+  {
+   "line": 482,
+   "theorem": "Qeq",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Стандартная библиотека реализует первое и второе раздельно: `Q` есть тип пар, а `Qeq` — отношение на нём;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q — запись, Qeq : Q -> Q -> Prop — отдельное определение; фактор-типа в библиотеке QArith нет."
+  },
+  {
+   "line": 523,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "*Рациональные числа ToS берёт готовыми из стандартной библиотеки Rocq: тип `Q` — запись (`Record`) из числителя `Qnum` (целое число) и знаменателя `Qden` (тип `positive` — технический тип положительных целых, без нуля).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с объявлением QArith_base.v:23; собственного типа рациональных в src нет."
+  },
+  {
+   "line": 527,
+   "theorem": "Qinv",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Ненулевость знаменателя встроена в тип: деления на нуль формальная запись не допускает устройством, а не запретом.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "То же, что на стр. 445: устройством типа исключена дробь с нулевым знаменателем; операция деления библиотеки тотальна (Qinv 0 = 0, x / 0 == 0), а закон обратного Qmult_inv_r стоит под условием ~ x == 0."
+  },
+  {
+   "line": 528,
+   "theorem": "Qeq",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Тип `Q` — не quotient type: `1#2` и `2#4` суть разные записи, равные не структурно, а по отдельному рациональному равенству `Qeq` (знак `==`), то есть при $p \\cdot s = r \\cdot q$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "(p # q) == (r # s) <-> p * Z.pos s = r * Z.pos q — по определению Qeq (пробный файл, Qeq_is_cross_product, Closed under the global context)."
+  },
+  {
+   "line": 567,
+   "theorem": "Z_ring",
+   "file": "src/stdlib/RingField.v",
+   "claim": "Целые числа суть кольцо: сумма, разность и произведение целых чисел всегда целые.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава теорему не называет. Z_ring : Ring (RingField.v:238) — экземпляр записи Ring проекта для Z с обычным равенством; Closed under the global context. Что закон обратного на Z невыполним, в src теоремой не записано (в пробном файле: Z_has_no_inverse_operation)."
+  },
+  {
+   "line": 577,
+   "theorem": "Q_field",
+   "file": "src/stdlib/RingField.v",
+   "claim": "Рациональные числа суть поле: у всякого ненулевого рационального числа $p/q$ есть обратное по умножению — $q/p$, — и произведение их есть единица.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава теорему не называет. Q_field : Field (RingField.v:314) — экземпляр записи Field проекта для Q с равенством Qeq: обратный — Qinv, закон x * / x == 1 при ~ x == 0 (Q_field_inv_r, из библиотечной Qmult_inv_r). Closed under the global context."
+  },
+  {
+   "line": 597,
+   "theorem": "Qnum",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "В $ℚ$ числитель может быть отрицательным (поле `Qnum` есть целое число, $ℤ$), а знаменатель в реализации `Q` обязан быть положительным (тип `positive`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Qnum : Q -> Z, Qden : Q -> positive — по объявлению записи Q."
+  },
+  {
+   "line": 602,
+   "theorem": "Qinv",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Знак при обращении *переносится в числитель*: обратное к $(-3)/4$ есть $-4/3$, а не $4/(-3)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Qinv: при числителе Zneg p результат Zneg (Qden x) # p (QArith_base.v:254–259); / (-3 # 4) = (-4 # 3) — reflexivity (пробный файл, Qinv_m3_4; общий вид — Qinv_neg_general)."
+  },
+  {
+   "line": 702,
+   "theorem": "mediant_between_left",
+   "file": "src/stdlib/SternBrocot.v",
+   "claim": "если $a/b < c/d$ — две соразмерные позиции, то между ними лежит, например, их *медианта*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава теорему не называет. SternBrocot.v:97 и :102 (mediant_between_left, mediant_between_right): при 0 < b, 0 < d и a*d < c*b верно a*(b+d) < (a+c)*b и (a+c)*d < c*(b+d) — то же в перекрёстной записи над Z; Closed under the global context. Для типа Q следствие проверено в пробном файле (mediant_between_Q)."
+  },
+  {
+   "line": 796,
+   "theorem": "Qeq",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Дана формальная запись — тип $ℚ$ стандартной библиотеки, рациональное число как запись с рациональным равенством `Qeq` (§ 2.5).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует § 2.5: запись Q и отношение Qeq библиотеки QArith."
+  },
+  {
+   "line": 826,
+   "theorem": "FormalDiff",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Оговорка о статусе, как и для целых (Глава III.1): ToS не строит свой тип рациональных — пользуется стандартным `Q` из `QArith` (`Record` числитель/знаменатель, § 2.5);",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: о рациональных сказано верно, сравнение с целыми устарело. Для целых проект строит собственную запись FormalDiff (CoordinateIntegers.v:41) и доказывает её соответствие Z (fd_to_of_Z, fd_equiv_iff_Z, согласованность сложения и умножения; 13 Qed) — так говорит и оговорка Главы III.1 (стр. 1121–1128). Для рациональных такого файла нет."
+  },
+  {
+   "line": 829,
+   "theorem": "Qsft",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "машинно проверенное — сама полевая арифметика `Q` и отношение `Qeq`, а соразмерное чтение несёт проза.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В библиотеке: Qsft : field_theory 0 1 Qplus Qmult Qminus Qopp Qdiv Qinv Qeq (Stdlib/QArith/Qfield.v:31), Qmult_inv_r, Q_Setoid : Equivalence Qeq. Объявлений о соразмерности в смысле главы в src нет (слово встречается только в файлах о соизмеримости углов с π)."
+  },
+  {
+   "line": 829,
+   "theorem": "Q_field",
+   "file": "src/stdlib/RingField.v",
+   "claim": "машинно проверенное — сама полевая арифметика `Q` и отношение `Qeq`, а соразмерное чтение несёт проза.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В проекте законы поля для Q с равенством Qeq собраны записью Q_field : Field (RingField.v:314), кольца — Q_ring (:282); Closed under the global context. Глава эти объявления не называет."
+  },
+  {
+   "line": 830,
+   "theorem": "QPos",
+   "file": "src/Countability_Q.v",
+   "claim": "Файл `Countability_Q.v` (дерево Калкина–Уилфа) есть якорь *следующей* главы и работает с *положительными* парами `QPos` (§ 2.8.5).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "QPos := (positive * positive)%type (Countability_Q.v:42). Описание неполное: разделы файла со стр. 534 работают со всем Q — enum_Q, Q_countable, index_of_Q, Q_bijection; об этом глава говорит ниже (стр. 949–956)."
+  },
+  {
+   "line": 913,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Формально тип $ℚ$ *существует* как тип языка Rocq, и в этом смысле по рациональным числам можно квантифицировать",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q : Set — запись, то есть индуктивный тип с одним конструктором (Locate Q: Inductive Stdlib.QArith.QArith_base.Q); кванторы forall q : Q стоят, например, в Q_countable и Q_bijection."
+  },
+  {
+   "line": 941,
+   "theorem": null,
+   "file": "src/Countability_Q.v",
+   "claim": "В формализации ближайшим якорем следующей главы служит файл `Countability_Q.v` Rocq-репозитория ToS. Он конструктивно перечисляет *положительные* рациональные числа через дерево Калкина–Уилфа",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл src/Countability_Q.v: 33 Qed, 0 Admitted, строк Axiom и Parameter нет; cw_left, cw_right, cw_node (:74–103) — дерево Калкина–Уилфа, узлы закодированы числами типа positive."
+  },
+  {
+   "line": 944,
+   "theorem": "QPos",
+   "file": "src/Countability_Q.v",
+   "claim": "положительное рациональное представлено там парой `QPos` (числитель и знаменатель, оба положительные)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition QPos := (positive * positive)%type (Countability_Q.v:42). Тип содержит и сократимые пары, например (2, 4); обход их не посещает — на странице это учтено словами «всякой несократимой пары»."
+  },
+  {
+   "line": 945,
+   "theorem": "enum_QPos",
+   "file": "src/Countability_Q.v",
+   "claim": "функция `enum_QPos` обходит дерево",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "enum_QPos n := cw_node (Pos.of_nat (S n)) (Countability_Q.v:106): узлы в порядке двоичных номеров; первые значения (1,1), (1,2), (2,1), (1,3), (3,2) получены вычислением."
+  },
+  {
+   "line": 946,
+   "theorem": "Q_positive_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "теорема `Q_positive_countable` доказывает — вполне конструктивно, без единой аксиомы, — что этот обход инъективен и достигает всякой несократимой пары.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Countability_Q.v:471: (forall n m, enum_QPos n = enum_QPos m -> n = m) /\\ (forall a b, Z.gcd (Z.pos a) (Z.pos b) = 1 -> exists n, enum_QPos n = (a, b)). Closed under the global context. Обращение для положительных: index_of_QPos с леммами enum_QPos_index (:660) и index_of_QPos_enum (:673)."
+  },
+  {
+   "line": 949,
+   "theorem": "Q_bijection",
+   "file": "src/Countability_Q.v",
+   "claim": "*полная* биекция $ℕ \\leftrightarrow ℚ$ с вычислимым обращением доказана не только для положительных, но и для всего $ℚ$ — со знаком и нулём.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Countability_Q.v:759 доказывает две круговые формулы: index_of_Q (enum_Q n) = n и enum_Q (index_of_Q q) == q. Для биекции с рациональными, взятыми с точностью до Qeq, нужно ещё, чтобы номер не зависел от записи дроби: p == q -> index_of_Q p = index_of_Q q. Этой леммы в src нет; из двух формул она не следует. Она верна и доказана в пробном файле в две строки (index_of_Q_compat, Closed under the global context)."
+  },
+  {
+   "line": 952,
+   "theorem": "enum_Q",
+   "file": "src/Countability_Q.v",
+   "claim": "Функция `enum_Q` приписывает обходу знак и позицию нуля",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Countability_Q.v:582: enum_Q 0 = 0; enum_Q (S m) = ± qpos_to_Q (enum_QPos (Nat.div2 m)) по чётности m. Вычислено: enum_Q 0..4 = 0, 1, -1, 1#2, -1#2."
+  },
+  {
+   "line": 953,
+   "theorem": "index_of_Q",
+   "file": "src/Countability_Q.v",
+   "claim": "обратная `index_of_Q` по рациональному находит его номер",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Countability_Q.v:683: номер берётся по несократимой записи Qred q — 0 для нуля, S (2k) для положительных, S (S (2k)) для отрицательных. Определение вычислимо: index_of_Q (1#2) = 3, index_of_Q (-3#4) = 28."
+  },
+  {
+   "line": 954,
+   "theorem": "Q_bijection",
+   "file": "src/Countability_Q.v",
+   "claim": "теорема `Q_bijection` доказывает — тоже без аксиом, — что они взаимно обратны (с точностью до `Qeq`: $2/4$ и $1/2$ — получают один номер).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Взаимная обратность доказана: первая формула — равенством номеров, вторая — с точностью до Qeq; Closed under the global context. Пример в скобках верен вычислением (index_of_Q (2#4) = index_of_Q (1#2) = 3), но утверждением теоремы не является: см. запись к стр. 949."
+  },
+  {
+   "line": 966,
+   "theorem": null,
+   "file": "src/Countability_Q.v",
+   "claim": "Файл `Countability_Q.v` прямо отмечает этот контраст: рациональные точки перечислимы, а процессы приближения так не перечисляются.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Контраст отмечен комментариями файла (стр. 6–9 и 494–531), не теоремой: утверждение о процессах комментарий относит к ShrinkingIntervals. Там это unit_interval_uncountable_trisect_v2 (ShrinkingIntervals_ERR.v:3569) — с посылкой valid_regular_enumeration E; Closed under the global context."
+  },
+  {
+   "line": 976,
+   "theorem": "Q",
+   "file": "src/Countability_Q.v",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Тип `Q` рациональных чисел определён в стандартной библиотеке Rocq — в модуле `QArith`. Как и тип `Z` целых чисел (Глава III.1, § 1.6), `QArith` есть часть самого Rocq, не Rocq-репозитория ToS.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявление стоит в Stdlib.QArith.QArith_base (QArith_base.v:23), модуль QArith его вывозит. В репозитории ToS типа Q нет — это верно. В Rocq 9 стандартная библиотека поставляется отдельным пакетом Stdlib (в установке — user-contrib/Stdlib), тип Z объявлен в базовой библиотеке Corelib.Numbers.BinNums."
+  }
+ ]
+}

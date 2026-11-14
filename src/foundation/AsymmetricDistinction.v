@@ -3,7 +3,7 @@
     Roles:    co-constitution with structural asymmetry
     Rules:    distinction_asymmetric (D ≠ swap D), direction_stable
     Status:   Foundation File 5 of 9
-    STATUS: 25 Qed, 0 Admitted, 0 new axioms
+    STATUS: 18 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
 *)
 
@@ -92,15 +92,26 @@ Proof. reflexivity. Qed.
 Theorem distinction_asymmetric : forall P : Prop,
   positive (distinction_of P) <> positive (swap_distinction (distinction_of P)).
 Proof.
-  intro P. simpl.
-  intro H.
-  (* H : P = ~P — this is absurd for any concrete P,
-     but for arbitrary P it requires classic *)
-  destruct (classic P) as [Hp | Hnp].
-  - assert (Hnp : ~P) by (rewrite <- H; exact Hp).
-    exact (Hnp Hp).
-  - assert (Hp : P) by (rewrite H; exact Hnp).
-    exact (Hnp Hp).
+  (* The statement is P <> ~P, and it needs no axiom (audit of Part II of
+     the Mathematics volume, 2026-11-13; before that the proof went through
+     classic P): from P = ~P one gets ~P — if P, then ~P by the equality —
+     and then P by the same equality. *)
+  intro P. change (P <> ~ P). intro H.
+  assert (np : ~ P).
+  { intro p. assert (np : ~ P) by (rewrite <- H; exact p). exact (np p). }
+  apply np. rewrite H. exact np.
+Qed.
+
+(** The general form — for ANY distinction, not only the canonical one:
+    swapping the sides changes the positive side. It follows from the two
+    rules of the record, exclusive and exhaustive. *)
+Theorem swap_changes_positive_of_any : forall D : Distinction,
+  positive D <> positive (swap_distinction D).
+Proof.
+  intros D H. change (positive D = negative D) in H.
+  destruct (exhaustive D) as [p | n].
+  - apply (exclusive D). split; [exact p | rewrite <- H; exact p].
+  - apply (exclusive D). split; [rewrite H; exact n | exact n].
 Qed.
 
 (* ================================================================== *)

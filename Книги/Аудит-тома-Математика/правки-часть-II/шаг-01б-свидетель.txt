@@ -1,0 +1,20 @@
+@@FILE Направления/Математика/Том Математика/02 Натуральные числа/01 Первичность единицы.md
+@@OLD
+  exists (cons (distinction_of True) nil).
+@@NEW
+  exists (cons distinction_true_false nil).
+@@END
+@@FILE Направления/Математика/Том Математика/02 Натуральные числа/02 Счёт как длина списка различий.md
+@@OLD
+предъявляет `[distinction_of True]`, а
+`succ_is_new_distinction` присоединяет
+`distinction_of True` к уже имеющемуся списку. Список из трёх
+различий есть, таким образом,
+`[distinction_of True; distinction_of True; distinction_of True]` —
+@@NEW
+предъявляет `[distinction_true_false]`, а
+`succ_is_new_distinction` присоединяет
+`distinction_true_false` к уже имеющемуся списку. Список из трёх
+различий есть, таким образом,
+`[distinction_true_false; distinction_true_false; distinction_true_false]` —
+@@END

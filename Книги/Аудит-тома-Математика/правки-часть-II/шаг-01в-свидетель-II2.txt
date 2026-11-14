@@ -1,0 +1,11 @@
+@@FILE Направления/Математика/Том Математика/02 Натуральные числа/02 Счёт как длина списка различий.md
+@@OLD
+  exists [distinction_of True].
+@@NEW
+  exists [distinction_true_false].
+@@END
+@@OLD
+различия — `[distinction_of True]`, список с
+@@NEW
+различия — `[distinction_true_false]`, список с
+@@END

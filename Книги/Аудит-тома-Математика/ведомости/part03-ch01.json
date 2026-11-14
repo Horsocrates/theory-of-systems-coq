@@ -1,0 +1,425 @@
+{
+ "batch": "audit-part-03",
+ "chapter": "03 От натуральных к рациональным/01 Целые числа координатная разметка.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 163,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "в `Distinction` из Части I оно задано полем `negative` наравне с `positive`, как одна из двух сторон полного различения (Глава I.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 1, слово автора): номер части и главы. Запись Distinction введена в Главе I.2 (Record, foundation/Distinction.v:71)."
+  },
+  {
+   "line": 163,
+   "theorem": "negative",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "в `Distinction` из Части I оно задано полем `negative` наравне с `positive`, как одна из двух сторон полного различения (Глава I.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поля positive и negative (Distinction.v:72–73) — две стороны записи; negative D <-> ~ positive D — negative_iff_not_positive (src/foundation/DistinctionCoDefinition.v), Closed under the global context."
+  },
+  {
+   "line": 593,
+   "theorem": "Z0",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Z стандартной библиотеки)",
+   "claim": "| `Z0` | стандартная $ℤ$ | нейтральная позиция, нуль группы целых чисел |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Z0 — конструктор Corelib.Numbers.BinNums.Z, нуль сложения в стандартной арифметике. В CoordinateIntegers.v ему отвечает пара (0, 0): fd_of_Z Z0 = mkFD 0 0 (:76), fd_zero_to_Z : fd_to_Z fd_zero = 0 (:111)."
+  },
+  {
+   "line": 762,
+   "theorem": "Z",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Целые числа ToS не строит заново: для них есть готовая конструкция в стандартной библиотеке Rocq, и ToS берёт её как рабочий инструмент.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует формализации: во всех файлах src целые — тип Z стандартной библиотеки. Собственная запись FormalDiff (CoordinateIntegers.v:41) стоит отдельно: файл CoordinateIntegers.v не подключён ни одним другим файлом src (поиск по имени модуля и по имени FormalDiff). О том, что свой файл теперь есть, страница говорит ниже (стр. 1076)."
+  },
+  {
+   "line": 767,
+   "theorem": "Z",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Тип целых чисел задаётся тремя конструкторами:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Блок кода (стр. 764–767) совпадает с ответом `Print Z`: Inductive Z : Set := Z0 : Z | Zpos : BinNums.positive -> Z | Zneg : BinNums.positive -> Z. Объявление — Corelib.Numbers.BinNums.Z; в src объявления нет (инструмент сверки поэтому пишет «нет такого объявления»)."
+  },
+  {
+   "line": 776,
+   "theorem": "Zpos",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Z стандартной библиотеки)",
+   "claim": "`Z0` есть опора — нулевая позиция. `Zpos n` есть позиция в $n$ шагов по одну сторону опоры; `Zneg n` — позиция в $n$ шагов по другую сторону.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Чтение конструкторов согласовано с CoordinateIntegers.v: fd_of_Z (:74) переводит Z0 в пару (0, 0), Zpos p — в (Pos.to_nat p, 0), Zneg p — в (0, Pos.to_nat p); fd_to_of_Z (:82) — обратный переход возвращает исходное целое. Closed under the global context."
+  },
+  {
+   "line": 779,
+   "theorem": "positive",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Тип `positive` — это ненулевые натуральные числа, кратность шагов отклонения; нулю шагов отвечает не `Zpos` и не `Zneg`, а сама опора `Z0`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Corelib.Numbers.BinNums.positive — двоичная запись положительных целых (конструкторы xI, xO, xH); значения взаимно однозначно отвечают ненулевым nat (Pos.to_nat, им пользуется fd_of_Z). Одноимённость: в формализации `positive` — ещё и поле записи Distinction (стр. 164 главы); на стр. 773 и 848 имеется в виду тип BinNums.positive."
+  },
+  {
+   "line": 796,
+   "theorem": "fd_equiv",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "$(a, b)$ и $(c, d)$ равнозначны тогда и только тогда, когда $a + d = b + c$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition fd_equiv (x y : FormalDiff) : Prop := fd_pos x + fd_neg y = fd_pos y + fd_neg x (:48) — для пар (a, b), (c, d) это a + d = c + b, то же равенство. Отношение эквивалентности: fd_equiv_refl, fd_equiv_sym, fd_equiv_trans (:55–63). Closed under the global context."
+  },
+  {
+   "line": 797,
+   "theorem": "fd_equiv_iff_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Целое число есть класс таких равнозначных пар: класс $[(a, b)]$ отвечает позиции $a - b$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_to_Z x := Z.of_nat (fd_pos x) - Z.of_nat (fd_neg x) (:44); fd_equiv_iff_Z : fd_equiv x y <-> fd_to_Z x = fd_to_Z y (:70) — пары равнозначны в точности тогда, когда задают одно целое. Классы как отдельный тип не образованы: в файле тип пар FormalDiff и отношение fd_equiv на нём. Closed under the global context."
+  },
+  {
+   "line": 804,
+   "theorem": "FormalDiff",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "в конструкции через пары используется не первичный натуральный ряд, а *технический счёт шагов* — $ℕ_0 = \\{0, 1, 2, …\\}$, допускающий нулевую кратность шага.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record FormalDiff := mkFD { fd_pos : nat ; fd_neg : nat } (:41): оба поля — тип nat стандартной библиотеки, с нулём; fd_zero := mkFD 0 0, fd_of_Z ставит 0 в сторону без шагов. Страница говорит это точно."
+  },
+  {
+   "line": 820,
+   "theorem": "fd_equiv_iff_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "$(5, 3)$ и $(7, 5)$ обе означают «два шага в сторону роста», ибо $5 - 3 = 7 - 5$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено вычислением (Check.v, fd_to_Z_not_injective): mkFD 5 3 <> mkFD 7 5 и fd_to_Z (mkFD 5 3) = fd_to_Z (mkFD 7 5) — разные пары, одно целое. Closed under the global context."
+  },
+  {
+   "line": 833,
+   "theorem": "fd_to_of_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "конструкция через пары строит *полную* группу целых чисел, а не какую-либо ограниченную «минус-сторону»: разность $a - b$ определена для любых $a, b$, и отрицательные значения она даёт без всякой нижней границы — ровно как и положительные.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Полнота: fd_to_of_Z : forall z, fd_to_Z (fd_of_Z z) = z (:82) — всякое целое, в том числе сколь угодно далёкое на минус-стороне, задаётся парой. Из законов группы в файле записаны нуль слева (fd_add_zero_l :137) и перестановочность (fd_add_comm :140); сочетательность и противоположный элемент отдельными леммами не записаны, но верны (Check.v: fd_add_assoc, fd_add_opp_r — Closed under the global context)."
+  },
+  {
+   "line": 841,
+   "theorem": "FormalDiff_iso_Z",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Обе конструкции — через три конструктора и через классы пар — равнозначны: задают одни и те же целые числа — классы пар взаимно однозначно отвечают значениям типа `Z`, и сложение, умножение, смена знака и порядок при этом сохраняются (теорема `FormalDiff_iso_Z`, файл `CoordinateIntegersLaws.v`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 1, слово автора) (формализацией и словами): было «один и тот же тип». Типов два (Z и FormalDiff с fd_equiv; fd_of_to_Z_not_eq, fd_to_Z_not_injective); соответствие по классам пар в полном виде — FormalDiff_iso_Z (девять конъюнктов: оба обхода, сложение, умножение, смена знака, нуль, единица, порядок). Closed under the global context."
+  },
+  {
+   "line": 856,
+   "theorem": "Zneg",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Z стандартной библиотеки)",
+   "claim": "Тип `Z` стандартной библиотеки *симметричен*: `Zpos` и `Zneg` устроены одинаково, обе стороны принимают любую кратность шагов `positive`, и никакого «дна» у минус-стороны в типе не отражено.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Print Z`: Zpos : BinNums.positive -> Z, Zneg : BinNums.positive -> Z — типы двух конструкторов совпадают. В CoordinateIntegers.v симметрия сторон — fd_opp (перестановка полей, :102) с fd_opp_involutive (:144) и fd_opp_to_Z (:105)."
+  },
+  {
+   "line": 899,
+   "theorem": "Z",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Тип `Z` формализует третий режим, и формализует его точно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Третий режим таблицы — «формальная разность двух позитивных счётов, неограниченна, как и плюс». Соответствие типа Z формальным разностям доказано в CoordinateIntegers.v: fd_equiv_iff_Z (:70), fd_to_of_Z (:82); обе стороны Z принимают любую кратность (`Print Z`)."
+  },
+  {
+   "line": 902,
+   "theorem": "Z",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Целые числа ToS берёт готовыми из стандартной библиотеки Rocq: тип `Z` с тремя конструкторами — опора `Z0` и две стороны `Zpos`, `Zneg`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует формализации и ответу `Print Z` (три конструктора)."
+  },
+  {
+   "line": 904,
+   "theorem": "fd_to_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Равнозначная конструкция через классы пар прочитывает целое число как формальную разность двух позитивных счётов.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_to_Z x := Z.of_nat (fd_pos x) - Z.of_nat (fd_neg x) (:44) — разность двух счётов типа nat. «Равнозначная» подтверждено в смысле соответствия классов пар значениям Z (fd_equiv_iff_Z, fd_to_of_Z); о словах «один и тот же тип» — запись стр. 835."
+  },
+  {
+   "line": 974,
+   "theorem": "Z.mul_comm",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Умножение целых чисел *коммутативно*: $a \\times b = b \\times a$, и это доказанная теорема стандартной арифметики, которую ToS не оспаривает.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Стандартная библиотека: Z.mul_comm : forall n m : Z, n * m = m * n (Stdlib.ZArith.BinInt), Closed under the global context. В CoordinateIntegers.v отдельной леммы о перестановочности fd_mul нет; она верна равенством пар (Check.v, fd_mul_comm_eq — Closed under the global context)."
+  },
+  {
+   "line": 978,
+   "theorem": "fd_mul",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "по построении операции доказывается, что результат от такого ролевого чтения не зависит — умножение симметрично по множителям.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Для стандартного Z — Z.mul_comm. В CoordinateIntegers.v умножение задано формулой fd_mul (:115), симметричной по множителям; ролевого умножения (повторения смещения) в файле нет. Проверено в Check.v: умножение-повторение fd_mul_rep равно fd_mul и перестановочно (fd_mul_rep_eq, fd_mul_rep_comm — Closed under the global context)."
+  },
+  {
+   "line": 1088,
+   "theorem": "one_from_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Главы Части II опирались на собственные файлы Rocq-репозитория ToS — `Distinction.v`, `PrimalityOfOne.v`, `Binarity.v` и другие, — в которых чтение натурального ряда от акта различения записано и машинно проверено над стандартным типом `nat`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 1, слово автора): было «натуральный ряд и его устройство выведены и доказаны». Тип nat берётся готовым; чтение записано и проверено (после аудита Части II — без допущений: CountingPresence.v, FourPathsOneSeries.v). Согласовано со словами Главы II.1."
+  },
+  {
+   "line": 1091,
+   "theorem": "fd_equiv_iff_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Для целых чисел такой *отдельный* файл ToS теперь *есть*: `CoordinateIntegers.v` строит собственную координатную конструкцию целого (как формальной разности) и доказывает её изоморфизм готовому типу `Z` из `ZArith` (§ 1.6.1).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Изоморфизм доказан набором лемм, а не одной теоремой, и в смысле классов равнозначных пар: fd_equiv_iff_Z (:70) — отображение fd_to_Z корректно и взаимно однозначно на классах; fd_to_of_Z (:82) — на всё Z; fd_add_to_Z, fd_mul_to_Z, fd_opp_to_Z, fd_zero_to_Z (:98–123) — сложение, умножение, смена знака, нуль сохраняются. Обратный обход fd_of_Z (fd_to_Z x) ~ x, согласованность операций с fd_equiv, единица и порядок отдельно не записаны (первые два следуют в одну строку — Check.v). Все — Closed under the global context."
+  },
+  {
+   "line": 1094,
+   "theorem": "fd_to_of_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Машинно проверены и эта конструкция, и её изоморфизм `Z` — не только сам стандартный `Z`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл внесён в _CoqProject (строка 27) и собирается; 13 Qed, все Closed under the global context. Состав изоморфизма — запись стр. 1076."
+  },
+  {
+   "line": 1096,
+   "theorem": null,
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Онтологическое содержание главы — то, что отрицательное число читается как координатная позиция и формальная разность, а не как отрицательное существование, — несёт проза *над* этой машинной конструкцией; стандартный `Z` остаётся целью изоморфизма.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в файле нет ни выбора опоры в ряду, ни переноса опоры, ни порядка позиций — только пары счётов, их равнозначность и арифметика. Чтение «позиция от опоры» остаётся за прозой; его формальный след возможен без аксиом (Check.v: position_sign, anchor_shift, position_order — см. заметки)."
+  },
+  {
+   "line": 1137,
+   "theorem": "FormalDiff",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "`CoordinateIntegers.v` (§ 1.8.1) строит запись целого как формальной разности (`Record FormalDiff`) и доказывает её изоморфизм стандартному `Z`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record FormalDiff := mkFD { fd_pos : nat ; fd_neg : nat } (:41). Изоморфизм — в смысле классов по fd_equiv, набором лемм (запись стр. 1076)."
+  },
+  {
+   "line": 1139,
+   "theorem": "fd_mul_to_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Потому «система» здесь — координатная разметка с собственной машинной конструкцией (`FormalDiff`), изоморфной `Z`; машинно проверены и сам `Z`, и изоморфизм.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Изоморфна Z не запись FormalDiff с обычным равенством (одно целое задаётся многими парами), а она же по равнозначности fd_equiv; так и сказано в сноске 2. Сохранение операций: fd_add_to_Z (:98), fd_mul_to_Z (:119), fd_opp_to_Z (:105). Closed under the global context."
+  },
+  {
+   "line": 1152,
+   "theorem": "fd_equiv",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "И эквивалентное правило: целое как *формальная разность* двух позитивных счётов (пары с отождествлением $a+d=b+c$, § 1.6.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_equiv (:48) — то же отождествление; fd_equiv_iff_Z (:70)."
+  },
+  {
+   "line": 1166,
+   "theorem": "FormalDiff",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Элементы — позиции (равно: формальные разности), сложенные из опоры и шагов; материал шагов — натуральные счёты Части II.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поля записи — тип nat стандартной библиотеки (с нулём, как оговорено на стр. 798–809). Файлы Части II CoordinateIntegers.v не подключает (только ZArith и Lia); общее у них — тот же библиотечный nat."
+  },
+  {
+   "line": 1239,
+   "theorem": "ZArith",
+   "external": true,
+   "assumptions": "не применимо (модуль стандартной библиотеки)",
+   "claim": "Тип `Z` целых чисел принадлежит библиотеке самого Rocq: объявлен он в модуле `BinNums`, арифметика над ним — модуль `ZArith`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 1, слово автора): Locate Z — Inductive Corelib.Numbers.BinNums.Z; ZArith даёт арифметику и вывозит имя."
+  },
+  {
+   "line": 1240,
+   "theorem": "FormalDiff",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "`CoordinateIntegers.v` записывает целое как формальную разность (`Record FormalDiff` с двумя полями — счётами шагов по двум сторонам — и эквивалентностью по правилу $a + d = b + c$)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Запись с двумя полями fd_pos, fd_neg : nat (:41); эквивалентность — отдельное определение fd_equiv (:48), не поле записи; доказано, что это отношение эквивалентности (:55–63)."
+  },
+  {
+   "line": 1240,
+   "theorem": "fd_to_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "и доказывает её изоморфизм стандартному `Z` (`fd_to_Z`/`fd_of_Z`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_to_Z (:44) — отображение пар в Z; свойства — fd_equiv_iff_Z (:70), fd_add_to_Z, fd_opp_to_Z, fd_zero_to_Z, fd_mul_to_Z. Состав изоморфизма — запись стр. 1076."
+  },
+  {
+   "line": 1240,
+   "theorem": "fd_of_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "и доказывает её изоморфизм стандартному `Z` (`fd_to_Z`/`fd_of_Z`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_of_Z (:74) — обратное отображение, выбирающее приведённую пару (шаги в одной стороне). Доказан один обход: fd_to_of_Z : fd_to_Z (fd_of_Z z) = z (:82). Второй — fd_equiv (fd_of_Z (fd_to_Z x)) x — в файле не записан; следует из fd_equiv_iff_Z и fd_to_of_Z (Check.v, fd_of_to_Z — Closed under the global context); равенством он неверен (fd_of_to_Z_not_eq)."
+  },
+  {
+   "line": 1240,
+   "theorem": "fd_sign_rule",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "а правило знаков $(-a)(-b)=ab$ — как теорему о `FormalDiff` (13 лемм, 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 1, слово автора) (формализацией): слова остаются; к ним добавлено, что формула fd_mul правило уже содержит, а вывод из двух разворотов дан в CoordinateIntegersLaws.v. fd_sign_rule (CoordinateIntegers.v:127); в файле 13 Qed; Closed under the global context."
+  },
+  {
+   "line": 1240,
+   "theorem": null,
+   "file": "src/CoordinateIntegers.v",
+   "claim": "(13 лемм, 0 аксиом)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' — 13 (двенадцать Lemma и одно Corollary). Print Assumptions для всех тринадцати и для семи определений файла — Closed under the global context. Шапка файла (STATUS: 13 Qed, 0 Admitted, 0 axioms) совпадает."
+  },
+  {
+   "line": 1240,
+   "theorem": "fd_to_of_Z",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Стандартный `Z` остаётся *целью* изоморфизма; своя координатная конструкция машинно построена над счётами типа `nat`, с отображением в `Z`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть III, шаг 1, слово автора): было «построена над ним». Record FormalDiff — два поля типа nat; Z — область значений fd_to_Z."
+  },
+  {
+   "line": 376,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition position_from (k n : nat) : FormalDiff := mkFD n k — точка n, прочитанная от опоры k.",
+   "theorem": "position_from",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Формально это записано так (файл `CoordinateIntegersLaws.v`): пара читается как точка ряда, взятая от опоры (`position_from`); знак позиции задаётся положением точки относительно опоры (`position_sign`), перенос опоры на шаг сдвигает всю разметку на единицу (`anchor_shift`), и одна и та же точка положительна от одной опоры и отрицательна от другой (`same_point_both_signs`)."
+  },
+  {
+   "line": 376,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "position_sign : (fd_to_Z (position_from k n) > 0 <-> k < n) /\\ (… = 0 <-> n = k) /\\ (… < 0 <-> n < k). Closed under the global context.",
+   "theorem": "position_sign",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Формально это записано так (файл `CoordinateIntegersLaws.v`): пара читается как точка ряда, взятая от опоры (`position_from`); знак позиции задаётся положением точки относительно опоры (`position_sign`), перенос опоры на шаг сдвигает всю разметку на единицу (`anchor_shift`), и одна и та же точка положительна от одной опоры и отрицательна от другой (`same_point_both_signs`)."
+  },
+  {
+   "line": 376,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "anchor_shift : fd_to_Z (position_from (S k) n) = fd_to_Z (position_from k n) - 1. Closed under the global context.",
+   "theorem": "anchor_shift",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Формально это записано так (файл `CoordinateIntegersLaws.v`): пара читается как точка ряда, взятая от опоры (`position_from`); знак позиции задаётся положением точки относительно опоры (`position_sign`), перенос опоры на шаг сдвигает всю разметку на единицу (`anchor_shift`), и одна и та же точка положительна от одной опоры и отрицательна от другой (`same_point_both_signs`)."
+  },
+  {
+   "line": 376,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "same_point_both_signs : fd_to_Z (position_from 0 (S n)) > 0 /\\ fd_to_Z (position_from (S (S n)) (S n)) < 0. Closed under the global context.",
+   "theorem": "same_point_both_signs",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Формально это записано так (файл `CoordinateIntegersLaws.v`): пара читается как точка ряда, взятая от опоры (`position_from`); знак позиции задаётся положением точки относительно опоры (`position_sign`), перенос опоры на шаг сдвигает всю разметку на единицу (`anchor_shift`), и одна и та же точка положительна от одной опоры и отрицательна от другой (`same_point_both_signs`)."
+  },
+  {
+   "line": 845,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "unique_reduced_in_class : forall x, exists r, (fd_reduced r /\\ fd_equiv r x) /\\ (forall r', fd_reduced r' /\\ fd_equiv r' x -> r' = r). Closed under the global context.",
+   "theorem": "unique_reduced_in_class",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "в каждом классе пар ровно одна приведённая — с шагами по одну сторону (`unique_reduced_in_class`)."
+  },
+  {
+   "line": 1012,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_sign_rule_from_two_flips : forall x y, fd_mul_rep (fd_opp x) (fd_opp y) = fd_mul_rep x y. Доказательство: fd_mul_rep_opp_l, fd_mul_rep_opp_r, fd_opp_involutive; формула умножения не раскрывается, к Z обращения нет. Closed under the global context.",
+   "theorem": "fd_sign_rule_from_two_flips",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Этот вывод проведён и формально (файл `CoordinateIntegersLaws.v`): умножение задано повторением смещения (`fd_mul_rep`), разворот любого из множителей разворачивает результат (`fd_mul_rep_opp_l`, `fd_mul_rep_opp_r`), и правило знаков получено из двух разворотов — теорема `fd_sign_rule_from_two_flips`."
+  },
+  {
+   "line": 1012,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition fd_mul_rep x y := fd_add (fd_rep x (fd_pos y)) (fd_rep (fd_opp x) (fd_neg y)) — повторить прямо fd_pos y раз и с разворотом fd_neg y раз. Чтение взято из § 1.7 главы; это определение, не вывод (шапка файла говорит это).",
+   "theorem": "fd_mul_rep",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Этот вывод проведён и формально (файл `CoordinateIntegersLaws.v`): умножение задано повторением смещения (`fd_mul_rep`), разворот любого из множителей разворачивает результат (`fd_mul_rep_opp_l`, `fd_mul_rep_opp_r`), и правило знаков получено из двух разворотов — теорема `fd_sign_rule_from_two_flips`."
+  },
+  {
+   "line": 1012,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_mul_rep_opp_l : fd_mul_rep (fd_opp x) y = fd_opp (fd_mul_rep x y). Closed under the global context.",
+   "theorem": "fd_mul_rep_opp_l",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Этот вывод проведён и формально (файл `CoordinateIntegersLaws.v`): умножение задано повторением смещения (`fd_mul_rep`), разворот любого из множителей разворачивает результат (`fd_mul_rep_opp_l`, `fd_mul_rep_opp_r`), и правило знаков получено из двух разворотов — теорема `fd_sign_rule_from_two_flips`."
+  },
+  {
+   "line": 1012,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fd_mul_rep_opp_r : fd_mul_rep x (fd_opp y) = fd_opp (fd_mul_rep x y). Closed under the global context.",
+   "theorem": "fd_mul_rep_opp_r",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "Этот вывод проведён и формально (файл `CoordinateIntegersLaws.v`): умножение задано повторением смещения (`fd_mul_rep`), разворот любого из множителей разворачивает результат (`fd_mul_rep_opp_l`, `fd_mul_rep_opp_r`), и правило знаков получено из двух разворотов — теорема `fd_sign_rule_from_two_flips`."
+  },
+  {
+   "line": 1240,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: fd_mul x y := mkFD (pos x * pos y + neg x * neg y) (pos x * neg y + neg x * pos y) — произведение двух минус-счётов стоит в плюс-стороне по определению (fd_mul_neg_neg_by_definition, src/CoordinateIntegersLaws.v).",
+   "theorem": "fd_mul",
+   "file": "src/CoordinateIntegers.v",
+   "claim": "Умножение пар задано там формулой, которая правило уже содержит."
+  },
+  {
+   "line": 1240,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "fd_mul_rep_eq : forall x y, fd_mul_rep x y = fd_mul x y (равенство пар). В файле 35 Qed; у всех объявлений Print Assumptions — Closed under the global context.",
+   "theorem": "fd_mul_rep_eq",
+   "file": "src/CoordinateIntegersLaws.v",
+   "claim": "В файле `CoordinateIntegersLaws.v` (тоже без аксиом) умножение задано так, как его вводит § 1.7, — повторением смещения (`fd_mul_rep`); оно совпадает с формулой первого файла (`fd_mul_rep_eq`), а правило знаков получено из того, что двойной разворот есть тождество (`fd_sign_rule_from_two_flips`)."
+  }
+ ]
+}

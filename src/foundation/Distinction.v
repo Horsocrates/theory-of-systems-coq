@@ -165,17 +165,17 @@ Lemma zero_distinctions : distinction_count 0.
 Proof. exists []. reflexivity. Qed.
 
 Lemma one_distinction_exists : distinction_count 1.
-Proof. exists [distinction_of True]. reflexivity. Qed.
+Proof. exists [mkDistinction True False (fun H => proj2 H) (or_introl I)]. reflexivity. Qed. (* witness: True | False, no axiom *)
 
 Lemma two_distinctions_exist : distinction_count 2.
-Proof. exists [distinction_of True; distinction_of False]. reflexivity. Qed.
+Proof. exists [mkDistinction True False (fun H => proj2 H) (or_introl I); mkDistinction False True (fun H => proj1 H) (or_intror I)]. reflexivity. Qed.
 
 (** Distinction count is hereditary *)
 Lemma distinction_count_succ : forall n,
   distinction_count n -> distinction_count (S n).
 Proof.
   intros n [Ds Hlen].
-  exists (distinction_of True :: Ds). simpl. rewrite Hlen. reflexivity.
+  exists (mkDistinction True False (fun H => proj2 H) (or_introl I) :: Ds). simpl. rewrite Hlen. reflexivity.
 Qed.
 
 (** Any finite number of distinctions exist *)

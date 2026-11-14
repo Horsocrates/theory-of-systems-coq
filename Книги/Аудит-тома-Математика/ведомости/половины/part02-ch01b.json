@@ -1,0 +1,278 @@
+{
+  "batch": "audit-part-02",
+  "chapter": "02 Натуральные числа/01 Первичность единицы.md",
+  "checked": "2026-11-13",
+  "auto": true,
+  "records": [
+    {
+      "line": 1090,
+      "theorem": "Distinction",
+      "file": "src/foundation/Distinction.v",
+      "claim": "ToS своим путём — к записи `Distinction` и к единице как числовому отпечатку первого акта, разворачиваемому в Главах II.2–II.5 в полную конструкцию натурального ряда.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "Record Distinction (Distinction.v:71) — четыре поля; Closed under the global context. «Числовой отпечаток» в формализации — константа one_from_distinction D := 1 (PrimalityOfOne.v:40), числа — значения типа nat стандартной библиотеки; построение ряда — предмет ведомостей глав II.2–II.5."
+    },
+    {
+      "line": 1161,
+      "theorem": "nat",
+      "external": true,
+      "claim": "Эта картина согласована с теоретико-множественным построением (§ 1.1) и с синтаксическим порядком `nat` (§ 1.4): начинаем с `O`, применяем `S`, накапливаем.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "Тип nat стандартной библиотеки (Corelib.Init.Datatypes): Inductive nat := O | S : nat -> nat; порядок конструкторов назван верно. В src своего типа натуральных чисел для этой главы нет."
+    },
+    {
+      "line": 1243,
+      "theorem": "distinction_count_from_one",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "Этот предикат говорит: число $n$ *есть* в системе постольку, поскольку существует список из $n$ совершённых различий.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "PrimalityOfOne.v:55: distinction_count_from_one n := exists Ds : list Distinction, length Ds = n /\\ (1 <= n)%nat; Closed under the global context. Чтение дословное; второе условие (1 <= n) в этой фразе опущено, оно названо в § 1.3.3."
+    },
+    {
+      "line": 1245,
+      "theorem": "distinction_count_from_one",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "Он не описывает накопления от нуля — он регистрирует *наличие* совершённых актов и их число. «Сосчитать» в смысле этого предиката есть в точности «установить, для какого $n$ налицо список из $n$ различений».",
+      "page_price": "",
+      "verdict": "mismatch-statement",
+      "note": "Список стоит под exists, и годится любой список нужной длины: предикат равносилен условию 1 <= n (пробный файл, count_from_one_iff_positive, Closed under the global context) и верен сразу для всех положительных n. Числа совершённых актов он не выделяет и от самих различений не зависит."
+    },
+    {
+      "line": 1248,
+      "theorem": "distinction_count_from_one",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "Картина присутствия — словесное выражение того, что предикат `distinction_count_from_one` выражает формально.",
+      "page_price": "",
+      "verdict": "mismatch-statement",
+      "note": "Формально предикат выражает только границу n >= 1 (равносильность проверена в пробном файле). Счёт как фиксацию наличного выражает отношение между данным списком и числом — длина списка: distinction_count_nat (IndivisibleDistinction.v:93); набросок отношения counts_from_one проверен, Closed."
+    },
+    {
+      "line": 1744,
+      "theorem": "RealProcess",
+      "file": "src/process/ProcessCore.v",
+      "claim": "Репозиторий уже содержит ядро этого аппарата: файл `src/process/ProcessCore.v` определяет `RealProcess` $:= \\texttt{nat} \\to ℚ$ (процесс над $ℚ$, индексированный стадиями)",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessCore.v:34: Definition RealProcess := nat -> Q. Closed under the global context."
+    },
+    {
+      "line": 1747,
+      "theorem": "const_process",
+      "file": "src/process/ProcessCore.v",
+      "claim": "`const_process` $q$ (постоянный процесс, выдающий $q$ на каждой стадии)",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessCore.v:37: Definition const_process (q : Q) : RealProcess := fun _ => q. Closed under the global context."
+    },
+    {
+      "line": 1748,
+      "theorem": "process_equiv",
+      "file": "src/process/ProcessCore.v",
+      "claim": "отношение `process_equiv` (обозначаемое `~~`), которое связывает два процесса, *сходящихся к одному пределу*",
+      "page_price": "",
+      "verdict": "mismatch-statement",
+      "note": "ProcessCore.v:170: forall eps, 0 < eps -> exists N, forall n, N <= n -> Qabs (R1 n - R2 n) < eps — разность уходит ниже всякой точности; сходимости определение не требует. Слова повторяют комментарий над определением (:169): отношение выполнено и для процесса 0, 1, 2, …, у которого предела нет (пробный файл, equiv_does_not_require_convergence, Closed)."
+    },
+    {
+      "line": 1751,
+      "theorem": "process_equiv_refl",
+      "file": "src/process/ProcessCore.v",
+      "claim": "`process_equiv` доказано отношением эквивалентности (рефлексивным, симметричным, транзитивным).",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessCore.v:177: forall R, R ~~ R. Closed under the global context. Три леммы собраны в Instance process_equiv_Equivalence : Equivalence process_equiv (RealPointSetoid.v:61, Closed)."
+    },
+    {
+      "line": 1751,
+      "theorem": "process_equiv_sym",
+      "file": "src/process/ProcessCore.v",
+      "claim": "`process_equiv` доказано отношением эквивалентности (рефлексивным, симметричным, транзитивным).",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessCore.v:184: forall R1 R2, R1 ~~ R2 -> R2 ~~ R1. Closed under the global context."
+    },
+    {
+      "line": 1751,
+      "theorem": "process_equiv_trans",
+      "file": "src/process/ProcessCore.v",
+      "claim": "`process_equiv` доказано отношением эквивалентности (рефлексивным, симметричным, транзитивным).",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessCore.v:194: forall R1 R2 R3, R1 ~~ R2 -> R2 ~~ R3 -> R1 ~~ R3. Closed under the global context."
+    },
+    {
+      "line": 1752,
+      "theorem": "process_equiv",
+      "file": "src/process/ProcessCore.v",
+      "claim": "Существенно, что `process_equiv` есть *не* поточечное равенство: два процесса могут быть `process_equiv`, расходясь на каждой отдельной стадии.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "В ProcessCore.v отдельной теоремы об этом нет; свидетель есть в ProcessNinePoint.v: nine_raw_lt_one (:72) и nine_equiv_one (:84), обе Closed. В пробном файле собрано одной теоремой equiv_is_not_pointwise (Closed)."
+    },
+    {
+      "line": 1757,
+      "theorem": null,
+      "file": "src/process/ProcessNinePoint.v",
+      "claim": "В этом языке позиция ToS по поводу $0{,}999…$ формулируется точно — и это удобный мост к будущей формализации.",
+      "page_price": "формализация — будущая",
+      "verdict": "mismatch-statement",
+      "note": "статус: устарел. Формализация есть с 01.06.2026 (коммит dac7f92): src/process/ProcessNinePoint.v, 8 Qed, теоремы nine_raw_lt_one и nine_equiv_one — Closed under the global context; Глава IV.3 (§ 3.7) тома их уже разбирает."
+    },
+    {
+      "line": 1758,
+      "theorem": "nine_raw",
+      "file": "src/process/ProcessNinePoint.v",
+      "claim": "Запись $0{,}999…$ отвечает процессу $n \\mapsto 1 - 1/10^{ n+1}$; единица отвечает постоянному процессу `const_process` $1$.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessNinePoint.v:66: Definition nine_raw : RealProcess := fun n => 1 - 1 / ten_pow (S n) — та же формула; nine_raw 0 == 9#10 (nine_raw_0, :122). Имени nine_raw страница не называет."
+    },
+    {
+      "line": 1761,
+      "theorem": "nine_raw_lt_one",
+      "file": "src/process/ProcessNinePoint.v",
+      "claim": "Эти два процесса *не* равны поточечно — на каждой стадии первый строго меньше второго, — но они `process_equiv`: сходятся к одному пределу.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessNinePoint.v:72: forall n, nine_raw n < 1. Closed under the global context. Страница приводит это как факт без ссылки на теорему; теорема в репозитории есть."
+    },
+    {
+      "line": 1761,
+      "theorem": "nine_equiv_one",
+      "file": "src/process/ProcessNinePoint.v",
+      "claim": "Эти два процесса *не* равны поточечно — на каждой стадии первый строго меньше второго, — но они `process_equiv`: сходятся к одному пределу.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "ProcessNinePoint.v:84: nine_raw ~~ const_process 1. Closed under the global context. Для этой пары слова «сходятся к одному пределу» точны: эквивалентность постоянному процессу 1 и есть сходимость к 1."
+    },
+    {
+      "line": 1768,
+      "theorem": "nine_raw_lt_one",
+      "file": "src/process/ProcessNinePoint.v",
+      "claim": "Формальная проверка этой картины — через теоремы вида «процесс девяток не поточечно равен `const_process` $1$» и «процесс девяток `process_equiv` `const_process` $1$» — относится к Части IV; `ProcessCore.v` даёт для неё готовый язык, но самих этих теорем о девятках в репозитории пока нет.",
+      "page_price": "теорем в репозитории пока нет",
+      "verdict": "mismatch-statement",
+      "note": "статус: устарел. Первая из названных теорем есть: nine_raw_lt_one : forall n, nine_raw n < 1 (ProcessNinePoint.v:72, с 01.06.2026), Closed under the global context; из неё следует неравенство на каждой стадии (пробный файл, nines_not_pointwise_equal, Closed)."
+    },
+    {
+      "line": 1768,
+      "theorem": "nine_equiv_one",
+      "file": "src/process/ProcessNinePoint.v",
+      "claim": "Формальная проверка этой картины — через теоремы вида «процесс девяток не поточечно равен `const_process` $1$» и «процесс девяток `process_equiv` `const_process` $1$» — относится к Части IV; `ProcessCore.v` даёт для неё готовый язык, но самих этих теорем о девятках в репозитории пока нет.",
+      "page_price": "теорем в репозитории пока нет",
+      "verdict": "mismatch-statement",
+      "note": "статус: устарел. Вторая из названных теорем есть: nine_equiv_one : nine_raw ~~ const_process 1 (ProcessNinePoint.v:84, с 01.06.2026), Closed under the global context; то же на линии CauchySeq — nine_process_equiv_one (:150). Отсылка к Части IV верна: Глава IV.3, § 3.7."
+    },
+    {
+      "line": 1804,
+      "theorem": null,
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "Заголовок опорного файла размечает прямо: *элементы — счёт от различений; роли — единица есть первое различение, нуль есть отсутствие; правила — первое есть единица, нуль из отсутствия, следующее из различения*.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "Шапка PrimalityOfOne.v:2–4: Elements: ToS_nat, primality of 1, distinction-based counting; Roles: 1 = first distinction, 0 = absence of distinction; Rules: one_is_first, zero_from_absence, succ_from_distinction. Пересказ верен; это комментарий, а не объявления (см. записи стр. 1816–1818, 1837)."
+    },
+    {
+      "line": 1810,
+      "theorem": "one_from_distinction",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "`one_from_distinction` машинно проверяет *выбранную регистрацию* (каждому различению — отпечаток $1$), а не *доказывает* первичность",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "PrimalityOfOne.v:40: Definition one_from_distinction (D : Distinction) : nat := 1 — константа, от D не зависит; теорема one_is_first_from_existence (:46) закрыта reflexivity. Статус назван честно: регистрация, не доказательство. Closed under the global context."
+    },
+    {
+      "line": 1812,
+      "theorem": "distinction_order",
+      "file": "src/foundation/AsymmetricDistinction.v",
+      "claim": "онтологический порядок «$1$ прежде $0$» опирается на `distinction_order` (§ 1.2, § 1.4).",
+      "page_price": "",
+      "verdict": "mismatch-statement",
+      "note": "статус: AsymmetricDistinction.v:126: Definition distinction_order := (1%nat, 0%nat) — пара, вписанная рукой; one_precedes_zero_in_distinction (:128) закрыта reflexivity. Определение не упоминает Distinction и в src больше нигде не используется: это такая же регистрация, как one_from_distinction, а не опора порядка."
+    },
+    {
+      "line": 1816,
+      "theorem": "one_is_first",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "первый акт различения отмечается единицей (`one_is_first`)",
+      "page_price": "",
+      "verdict": "missing-name",
+      "note": "Объявления one_is_first нет: слово стоит только в шапке PrimalityOfOne.v:4. Ближайшее объявление — one_is_first_from_existence (:46): forall D, one_from_distinction D = 1, reflexivity на константе; слова «первый» в утверждении нет."
+    },
+    {
+      "line": 1817,
+      "theorem": "succ_from_distinction",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "всякое следующее различение даёт следующее число (`succ_from_distinction`)",
+      "page_price": "",
+      "verdict": "missing-name",
+      "note": "Объявления succ_from_distinction нет: слово стоит только в шапке PrimalityOfOne.v:4. Ближайшие объявления — succ_is_new_distinction (:84; свидетель distinction_of True, Axioms: Classical_Prop.classic) и add_distinction_increments (:79; length (D :: Ds) = S (length Ds), Closed)."
+    },
+    {
+      "line": 1818,
+      "theorem": "zero_from_absence",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "нуль — из отсутствия различения (`zero_from_absence`), а не из счёта.",
+      "page_price": "",
+      "verdict": "missing-name",
+      "note": "Объявления zero_from_absence нет: слово стоит только в шапке PrimalityOfOne.v:4. Ближайшие объявления — zero_from_no_distinction : nat := 0 (:43) и zero_is_absence : zero_from_no_distinction = 0 (:51), reflexivity на константе."
+    },
+    {
+      "line": 1820,
+      "theorem": "distinction_order",
+      "file": "src/foundation/AsymmetricDistinction.v",
+      "claim": "К ним — правило асимметрии: единица предшествует нулю (`distinction_order`, § 1.2.3), не наоборот.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "Ссылка на запись пары (1, 0) — AsymmetricDistinction.v:126; о её статусе см. запись стр. 1812. В § 1.2.3 носителем асимметрии названы mark и unmark, distinction_order там стоит только в сноске 3; основное место — § 1.4 (стр. 787–841)."
+    },
+    {
+      "line": 1837,
+      "theorem": "ToS_nat",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "Элементы — сами акты различения, которые счёт и пересчитывает (`ToS_nat` — счёт, основанный на различениях).",
+      "page_price": "",
+      "verdict": "missing-name",
+      "note": "Объявления ToS_nat нет нигде в src: слово стоит только в шапке PrimalityOfOne.v:2. Числа в файле — значения типа nat стандартной библиотеки, пересчитываемое — list Distinction; счёт данного списка — distinction_count_nat (IndivisibleDistinction.v:93)."
+    },
+    {
+      "line": 1852,
+      "theorem": "ToS_nat",
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "| акты различения (`ToS_nat`) | носители (конечны, $P4$) | Element |",
+      "page_price": "",
+      "verdict": "missing-name",
+      "note": "То же имя в таблице: объявления ToS_nat в src нет (только шапка PrimalityOfOne.v:2)."
+    },
+    {
+      "line": 1890,
+      "theorem": "nat",
+      "external": true,
+      "claim": "Инверсия первичности — не переопределение типа `nat`, а его переинтерпретация",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "В PrimalityOfOne.v и AsymmetricDistinction.v нет ни одного Inductive: числа — значения nat стандартной библиотеки, чтение задано определениями-константами (tos_first := 1, tos_absence := 0, one_from_distinction, distinction_order)."
+    },
+    {
+      "line": 1932,
+      "theorem": null,
+      "file": "src/foundation/PrimalityOfOne.v",
+      "claim": "E/R/R-разметка в шапке файла `PrimalityOfOne.v`; асимметрия «единица прежде нуля» — в `AsymmetricDistinction.v`.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "Сноска 15 (знак на стр. 1807). Шапка PrimalityOfOne.v:2–4 содержит строки Elements, Roles, Rules. Счёт Qed в файле — 15 (шапка и primality_theorem_count называют 20); на странице чисел нет."
+    },
+    {
+      "line": 1932,
+      "theorem": "one_precedes_zero_in_distinction",
+      "file": "src/foundation/AsymmetricDistinction.v",
+      "claim": "E/R/R-разметка в шапке файла `PrimalityOfOne.v`; асимметрия «единица прежде нуля» — в `AsymmetricDistinction.v`.",
+      "page_price": "",
+      "verdict": "ok",
+      "note": "Сноска 15. AsymmetricDistinction.v:128: fst distinction_order = 1 /\\ snd distinction_order = 0, Closed under the global context — в названном файле; по содержанию это запись пары (1, 0), см. запись стр. 1812."
+    }
+  ]
+}

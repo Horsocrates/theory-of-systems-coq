@@ -1,0 +1,646 @@
+{
+ "batch": "audit-part-02",
+ "chapter": "02 Натуральные числа/03 Иерархический путь число как уровень.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 167,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "ToS вводит такую структуру — тип *уровней*, `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive Level : Set := L1 | LS (TheoryOfSystems_Core_ERR.v:59). Тип объявлен индуктивно, из закона не выводится; слово страницы «вводит» этому соответствует. Типов с именем Level в репозитории пять объявлений; глава говорит об основном и о копии в L5_NatFromHierarchy.v."
+  },
+  {
+   "line": 177,
+   "theorem": "level_lt_irrefl",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "У оператора $\\ll$ есть свойства, доказанные в ToS как теоремы и формализующие $L5$. Он *иррефлексивен*: ни один уровень не ближе к основанию, чем он сам, — формально $\\neg (l \\ll l)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_lt_irrefl : forall l, ~ (l << l) (TheoryOfSystems_Core_ERR.v:96), из level_lt_depth. То же утверждение записано ещё как P1_no_self_membership (:126) и L5_hierarchy (foundation/LawsFromDistinction.v:125). Closed under the global context."
+  },
+  {
+   "line": 181,
+   "theorem": "level_lt_trans",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Он *транзитивен*: если $l_1$ ближе к основанию, чем $l_2$, а $l_2$ — чем $l_3$, то $l_1$ ближе к основанию, чем $l_3$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_lt_trans : forall l1 l2 l3, l1 << l2 -> l2 << l3 -> l1 << l3 (TheoryOfSystems_Core_ERR.v:104). Closed under the global context."
+  },
+  {
+   "line": 192,
+   "theorem": "level_lt",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Формализуется $L5$ типом уровней `Level` с оператором строгого порядка $\\ll$ («ближе к основанию»), иррефлексивным и транзитивным.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_lt (TheoryOfSystems_Core_ERR.v:68), запись `l1 << l2` (:74); иррефлексивность (:96) и транзитивность (:104) — леммы. В формализации L5 записан теоремой о заранее объявленном типе Level (L5_hierarchy, LawsFromDistinction.v:125); тип из закона не получен."
+  },
+  {
+   "line": 247,
+   "theorem": "L1",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Level)",
+   "claim": "В типе уровней `Level` базовый уровень есть отдельный, первичный элемент — `L1`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор L1 : Level (TheoryOfSystems_Core_ERR.v:60), без аргументов."
+  },
+  {
+   "line": 261,
+   "theorem": "LS",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа Level)",
+   "claim": "Других способов получить уровень нет: всякий уровень *либо* есть базовый `L1`, *либо* надстроен операцией `LS` над каким-то уровнем.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "У типа два конструктора: L1 и LS : Level -> Level (TheoryOfSystems_Core_ERR.v:59–61). Леммой: level_pred_exists : l <> L1 -> exists l', l = LS l' (UniversePolymorphism.v:231), Closed under the global context."
+  },
+  {
+   "line": 268,
+   "theorem": "level_nat_level",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Но надстраиваний, которыми получен данный уровень, *конечное* число — уровень получен из `L1` конечным числом применений `LS`, иначе он не был бы уровнем типа `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "На основном типе: level_nat_level : nat_to_level (level_to_nat l) = l (LevelNatIso.v:43) — всякий уровень есть LS, применённая level_to_nat l раз к L1. Closed under the global context. Глава на эту лемму не ссылается."
+  },
+  {
+   "line": 284,
+   "theorem": "no_infinite_level_regress",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "Такая теорема в иерархическом пути не используется; в репозитории она доказана отдельно — теоремой `no_infinite_level_regress` (файл `MetaPairStrength.v`), через убывание `level_depth` вдоль $\\ll$ (см. ниже).[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): было «в процитированных файлах не доказана; понадобилась бы отдельная формализация». no_infinite_level_regress : forall f : nat -> Level, ~ (forall n, level_lt (f (S n)) (f n)) (MetaPairStrength.v:137, с 12.06.2026); Closed under the global context."
+  },
+  {
+   "line": 298,
+   "theorem": "level_lt_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Формально это поддержано доказанными в `TheoryOfSystems_Core_ERR.v` свойствами оператора $\\ll$: леммой `level_lt_depth` (порядок строго убывает по глубине) и леммой `level_lt_irrefl` (ни один уровень не ниже самого себя).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_lt_depth : l1 << l2 -> level_depth l1 < level_depth l2 (TheoryOfSystems_Core_ERR.v:85); level_lt_irrefl (:96). Обе Closed under the global context. Само ¬(l << L1) верно по определению level_lt (ветвь `L1 => False`, :70) и записано леммой L1_minimal (UniversePolymorphism.v:225)."
+  },
+  {
+   "line": 302,
+   "theorem": "L1_minimal",
+   "file": "src/UniversePolymorphism.v",
+   "claim": "Прямая минимальность основания и открытость иерархии вверх выражены ещё двумя короткими леммами — $\\neg (l \\ll \\texttt{L1})$ для всякого $l$ (ниже основания уровней нет) и $l \\ll \\texttt{LS} l$ (над всяким уровнем есть следующий); обе доказываются прямо из определения $\\ll$.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): было «удобно было бы выразить… их добавление в основной файл сделало бы опору прямой». L1_minimal : forall l, ~ (l << L1) (UniversePolymorphism.v:225); level_lt_LS : forall l, l << LS l (:74). Closed under the global context."
+  },
+  {
+   "line": 313,
+   "theorem": "no_infinite_level_regress",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "Бесконечный спуск от данного уровня невозможен — это утверждение о каждом конкретном уровне; общая теорема о произвольных убывающих последовательностях доказана в репозитории отдельно, и путь на неё не опирается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): было «не общая теорема о произвольных убывающих последовательностях». Общая теорема — no_infinite_level_regress (MetaPairStrength.v:137); Closed under the global context."
+  },
+  {
+   "line": 355,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "ToS сопоставляет уровню его *глубину* — расстояние от основания, считаемое по ступеням. Глубина базового уровня `L1` есть *единица*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_depth L1 = 1 — первая строка определения (TheoryOfSystems_Core_ERR.v:78–82); значение основания задано определением, не получено теоремой. Положительность: level_depth_positive : level_depth l >= 1 (UniversePolymorphism.v:44)."
+  },
+  {
+   "line": 437,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Inductive Level : Set := | L1 : Level | LS : Level -> Level.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с TheoryOfSystems_Core_ERR.v:59–61 (в исходнике при конструкторах стоят комментарии)."
+  },
+  {
+   "line": 454,
+   "theorem": "level_to_nat_LS",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Поэтому они *структурно изоморфны* — и через изоморфизм `Level` с `nat` конструктор `LS` переходит *ровно* в `S`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "На основном типе: level_nat_level и nat_level_nat (LevelNatIso.v:43, :46) — взаимно обратные отображения; level_to_nat_LS : level_to_nat (LS l) = S (level_to_nat l) (:50, reflexivity). При этом изоморфизме L1 переходит в 0. Closed under the global context. Глава на LevelNatIso.v не ссылается (см. запись стр. 574)."
+  },
+  {
+   "line": 469,
+   "theorem": "level_depth_eq",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "В этом смысле натуральное число $n$ *есть* уровень: уровень, отстоящий от основания на $n - 1$ надстраиваний.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_depth_eq : level_depth l = S (level_to_nat l) (LevelNatIso.v:121). Счёт с единицы даёт level_depth: значения ≥ 1 (level_depth_positive, UniversePolymorphism.v:44), вложение (level_depth_injective, :59). Что всякое n ≥ 1 есть глубина некоторого уровня, отдельной теоремой не записано; следует из названных лемм (пробный файл, level_depth_counts_from_one, Closed under the global context)."
+  },
+  {
+   "line": 492,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Fixpoint level_depth (l : Level) : nat := match l with | L1 => 1 | LS l' => S (level_depth l') end.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с TheoryOfSystems_Core_ERR.v:78–82."
+  },
+  {
+   "line": 511,
+   "theorem": "level_depth_LS",
+   "claim": "Lemma level_depth_LS : forall l, level_depth (LS l) = S (level_depth l). Proof. reflexivity. Qed.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора) (формализацией): лемма внесена дословно — src/foundation/LevelAscent.v. Lemma level_depth_LS : forall l, level_depth (LS l) = S (level_depth l). Proof. reflexivity. Qed. Closed under the global context.",
+   "file": "src/foundation/LevelAscent.v"
+  },
+  {
+   "line": 516,
+   "theorem": "level_depth_LS",
+   "claim": "Лемма почти тривиальна — доказывается одним `reflexivity`, — но содержательна: она показывает, что `LS` на уровнях и `S` на числах согласованы через `level_depth` поэлементно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора) (формализацией): лемма есть в src/foundation/LevelAscent.v; доказательство — reflexivity. Closed under the global context.",
+   "file": "src/foundation/LevelAscent.v"
+  },
+  {
+   "line": 527,
+   "theorem": null,
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "То, что иерархия уровней изоморфна натуральному ряду, а свойства, которые в стандартном изложении вводятся аксиомами счёта, оказываются свойствами индуктивного типа уровней, ToS устанавливает и формально — отдельной группой доказанных теорем.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "L5_NatFromHierarchy.v — 15 Qed: взаимно обратные отображения (:29, :32), lsucc_injective (:55), base_not_succ (:58), level_lt_size (:75), hierarchy_irrefl (:84), level_lt_trans (:89), level_eq_dec (:102). Все Closed under the global context. На основном типе то же — foundation/LevelNatIso.v (15 Qed), сводная теорема core_level_is_peano (:150)."
+  },
+  {
+   "line": 535,
+   "theorem": "level_depth_eq",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "В репозитории есть *две* нумерации уровней, и они дают *разные* результаты для основания.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): было «две функции». Нумераций две: с единицы (level_depth) и с нуля (level_to_nat — в отдельном файле и, на основном типе, в LevelNatIso.v). Связь: level_depth_eq : level_depth l = S (level_to_nat l) (LevelNatIso.v:121). Closed under the global context."
+  },
+  {
+   "line": 536,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "В основном файле `TheoryOfSystems_Core_ERR.v` функция `level_depth` (листинг выше) сопоставляет базовому уровню `L1` глубину *единицу*: `level_depth L1 = 1`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Проверено вычислением (пробный файл, reflexivity): level_depth L1 = 1."
+  },
+  {
+   "line": 539,
+   "theorem": "level_to_nat",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "В отдельном файле `L5_NatFromHierarchy.v` функция `level_to_nat` сопоставляет базовому уровню *нуль*: там `level_to_nat LBase = 0`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_to_nat (L5_NatFromHierarchy.v:17); peano_zero : level_to_nat LBase = O (:52). Closed under the global context."
+  },
+  {
+   "line": 551,
+   "theorem": "level_to_nat",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "| `LS (LS L1)` / `LSucc (LSucc LBase)` | 3 | 2 |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все шесть значений таблицы стр. 547–549 проверены вычислением (пробный файл): level_depth даёт 1, 2, 3; level_to_nat копии — 0, 1, 2 (level_0_nat, level_1_nat, level_2_nat, L5_NatFromHierarchy.v:41–47)."
+  },
+  {
+   "line": 571,
+   "theorem": "nat_level_nat",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Файл `L5_NatFromHierarchy.v`[^4] доказывает изоморфизм типа уровней со стандартным `nat`, и доказывает его строго.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_nat_level (L5_NatFromHierarchy.v:29) и nat_level_nat (:32): обе композиции отображений тождественны. Основание и шаг согласованы по определению level_to_nat. Closed under the global context. Речь о типе, объявленном в самом файле (LBase/LSucc)."
+  },
+  {
+   "line": 573,
+   "theorem": "LBase",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "external": true,
+   "assumptions": "не применимо (конструктор)",
+   "claim": "Но *технически* этот файл использует *собственную копию* типа уровней: он объявляет `Inductive Level : Set := LBase : Level | LSucc : Level -> Level` и не импортирует основной файл.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): запись объявления приведена к исходнику (L5_NatFromHierarchy.v:13). Прежняя запись буквально задавала тип из двух констант."
+  },
+  {
+   "line": 579,
+   "theorem": "core_hier_core",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Два типа изоморфны по форме — база и один конструктор следования, — но это два разных Coq-объявления.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Два объявления: TheoryOfSystems_Core_ERR.v:59 и L5_NatFromHierarchy.v:13. С 12.06.2026 изоморфизм двух типов записан явно: core_to_hier, hier_to_core и леммы core_hier_core, hier_core_hier (LevelNatIso.v:128–144). Closed under the global context."
+  },
+  {
+   "line": 581,
+   "theorem": "core_level_is_peano",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Синхронизация проведена в файле `LevelNatIso.v`: он импортирует Core-определение и доказывает то же об основном типе `Level` — взаимную обратность отображений, переход `LS` в `S`, совпадение порядка $\\ll$ с порядком чисел в обе стороны (сводная теорема `core_level_is_peano`), — а два типа уровней связывает явным изоморфизмом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): было «желательно перенести… до этого изоморфизм доказан для standalone-копии». Перенос сделан 12.06.2026: core_level_is_peano (LevelNatIso.v:150) — семь конъюнктов об основном типе Level и о связи с копией; Closed under the global context."
+  },
+  {
+   "line": 590,
+   "theorem": "level_nat_level",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Доказано: индуктивная структура «база плюс один конструктор следования» изоморфна стандартному `nat`; шаг `LSucc` (на основном типе — `LS`) переходит при изоморфизме ровно в `S`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Взаимная обратность — level_nat_level, nat_level_nat (в отдельном файле и в LevelNatIso.v); переход шага на основном типе — level_to_nat_LS (LevelNatIso.v:50). Closed under the global context."
+  },
+  {
+   "line": 593,
+   "theorem": null,
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Натуральные числа на иерархическом пути не вводятся допущением — структура всякой иерархии уровней *уже* есть структура натурального ряда, и это *обнаруживается*, а не постулируется.",
+   "page_price": "не вводятся допущением",
+   "verdict": "ok",
+   "note": "Допущений нет: все объявления L5_NatFromHierarchy.v и LevelNatIso.v — Closed under the global context. Теоремы говорят о двух объявленных индуктивных типах и о `nat` стандартной библиотеки; общей теоремы о всякой структуре «основание и следование» в репозитории нет (набросок проверен: Check2.v, every_hierarchy_is_numbered_from_one). См. «Сомнительные места», п. 2."
+  },
+  {
+   "line": 601,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Тезис же о том, что *глубина* читается с единицы, есть онтологическое чтение (левый столбец таблицы), согласованное с `level_depth` основного файла.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: единица у основания — первая строка определения level_depth (TheoryOfSystems_Core_ERR.v:80), не теорема."
+  },
+  {
+   "line": 671,
+   "theorem": "LS_is_next_level",
+   "claim": "Theorem LS_is_next_level : forall l m : Level, l << m <-> (m = LS l \\/ LS l << m).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора) (развилка — А): блок заменён настоящими объявлениями. Прежняя первая лемма (exists l', l' = LS l) была верна для любой операции и в репозитории не объявлена. LS_is_next_level — src/foundation/LevelAscent.v, § 3; Closed under the global context.",
+   "file": "src/foundation/LevelAscent.v"
+  },
+  {
+   "line": 668,
+   "theorem": "level_lt_succ",
+   "claim": "Lemma level_lt_succ : forall L, L << LS L. Proof. intros L. simpl. left. reflexivity. Qed.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора) (развилка — А): имя приведено к исходнику. Lemma level_lt_succ (TransfiniteInductionLevel.v:61), текст доказательства совпадает дословно; Closed under the global context.",
+   "file": "src/foundation/TransfiniteInductionLevel.v"
+  },
+  {
+   "line": 674,
+   "theorem": "no_universal_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Theorem no_universal_level : ~ exists Top : Level, forall L : Level, L << Top \\/ L = Top.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формулировка блока совпадает с исходником (TransfiniteInductionLevel.v:83). Closed under the global context."
+  },
+  {
+   "line": 742,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "формально тип `Level` существует — это индуктивный тип Rocq (`Level : Set`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive Level : Set (TheoryOfSystems_Core_ERR.v:59)."
+  },
+  {
+   "line": 747,
+   "theorem": "no_universal_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "уровень-система, которая имела бы все уровни своими элементами (его нет — он нарушил бы $P1$, ибо содержал бы и себя)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формальный вид для порядка уровней: no_universal_level — нет уровня, под которым или в котором лежали бы все уровни (TransfiniteInductionLevel.v:83), Closed under the global context. Об элементах уровня формализация не говорит: значение типа Level элементов не имеет; о членстве, понижающем уровень, — no_self_membership_Level (foundation/PrinciplesFromLawsDerived.v:126)."
+  },
+  {
+   "line": 973,
+   "theorem": "Level_ind",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "В Rocq индукция по `Level` не вводится отдельной аксиомой: принцип `Level_ind` *автоматически порождается* самим индуктивным объявлением типа `Level` — так Rocq поступает со всяким индуктивным типом.",
+   "page_price": "не вводится отдельной аксиомой",
+   "verdict": "ok",
+   "note": "Отдельного объявления в src нет: Level_ind порождён командой Inductive (TheoryOfSystems_Core_ERR.v:59). Check Level_ind: forall P : Level -> Prop, P L1 -> (forall l, P l -> P (LS l)) -> forall l, P l. В явном виде индукция по уровням записана леммой forall_levels_induction (UniversePolymorphism.v:192), сильная — level_strong_induction (foundation/TransfiniteInductionLevel.v:50)."
+  },
+  {
+   "line": 999,
+   "theorem": "nat_ind",
+   "external": true,
+   "assumptions": "Closed under the global context",
+   "claim": "Через изоморфизм `Level` с `nat` эти два принципа имеют одну и ту же форму и переносятся друг в друга — но речь идёт не о буквальном равенстве двух Coq-объектов, а о *структурном совпадении* индуктивной схемы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя стандартной библиотеки. Теоремы о переносе в репозитории нет; перенос проверен пробным файлом в обе стороны (level_induction_from_nat_ind, nat_induction_from_Level_ind — Closed under the global context). Лемма level_nat_level, на которую перенос опирается, сама доказана индукцией по уровню."
+  },
+  {
+   "line": 1076,
+   "theorem": null,
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Заголовок отдельного файла-якоря задаёт разметку прямо: *элементы — уровни; роль — кодирование иерархии; правила — изоморфизм с `nat` и иррефлексивность порядка*.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "L5_NatFromHierarchy.v:2 — «E/R/R: Elements = Levels, Roles = hierarchy encoding, Rules = nat isomorphism + irreflexivity». Разметка стоит в комментарии; формальной записи E/R/R (таблицы ERRSystem) для системы уровней в репозитории нет."
+  },
+  {
+   "line": 1081,
+   "theorem": "core_level_is_peano",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "её формальная опора — индуктивный тип `Level` и доказанный изоморфизм с `nat`: строгий машинный изоморфизм установлен и на *отдельной копии* типа уровней, и на самом Core-типе (§ 3.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): было «установлен на отдельной копии». Об основном типе — core_level_is_peano (LevelNatIso.v:150); о копии — леммы L5_NatFromHierarchy.v. Closed under the global context."
+  },
+  {
+   "line": 1089,
+   "theorem": "level_to_nat_LS",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "К нему примыкают три правила, доказанные в коде. Первое — изоморфизм с `nat`: `LS` переходит ровно в `S` (§ 3.4), и ряд уровней есть натуральный ряд.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "О конструкторе LS основного типа: level_to_nat_LS (LevelNatIso.v:50), взаимная обратность (:43, :46). О копии — L5_NatFromHierarchy.v:29, :32. Closed under the global context."
+  },
+  {
+   "line": 1092,
+   "theorem": "hierarchy_irrefl",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Второе — *иррефлексивность* порядка (`hierarchy_irrefl`: ни один уровень не ниже самого себя) вместе с конечностью снизу: у иерархии есть основание, и ряд начинается с единицы (§ 3.3; теоремы `hierarchy_is_finite_from_below` и `level_depth_counts_from_one` файла `LevelAscent.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "hierarchy_irrefl : forall l, ~ level_lt l l (L5_NatFromHierarchy.v:84 — о копии; об основном типе — LevelNatIso.v:102 и level_lt_irrefl основного файла). Конечность снизу и счёт с единицы — названные теоремы LevelAscent.v. Closed under the global context."
+  },
+  {
+   "line": 1096,
+   "theorem": "forall_levels_induction",
+   "file": "src/UniversePolymorphism.v",
+   "claim": "Третье — индукция по уровням: база отвечает основанию, шаг — надстраиванию (§ 3.7).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Принцип Level_ind порождён объявлением типа; леммой записан как forall_levels_induction : P L1 -> (forall l, P l -> P (LS l)) -> ForAllLevels P (UniversePolymorphism.v:192). Closed under the global context."
+  },
+  {
+   "line": 1103,
+   "theorem": "level_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Функция `level_depth` сопоставляет каждому уровню это число и тем служит мостом уровень $\\to$ число (§ 3.4.5): роль уровня *и есть* его число.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_depth : Level -> nat (TheoryOfSystems_Core_ERR.v:78). Разным уровням отвечают разные числа: level_depth_injective (UniversePolymorphism.v:59), Closed under the global context."
+  },
+  {
+   "line": 1113,
+   "theorem": "level_eq_dec",
+   "file": "src/UniversePolymorphism.v",
+   "claim": "По $L1$ каждый уровень тождествен себе (равенство уровней разрешимо).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_eq_dec : forall l1 l2 : Level, {l1 = l2} + {l1 <> l2} — об основном типе (UniversePolymorphism.v:101) и о копии (L5_NatFromHierarchy.v:102). Closed under the global context."
+  },
+  {
+   "line": 1114,
+   "theorem": "level_nat_level",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "По $P4$ всякий уровень достигается за конечное число надстраиваний от основания — носитель конечен, хотя ряд их потенциально бесконечен.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_nat_level : nat_to_level (level_to_nat l) = l (LevelNatIso.v:43): уровень есть LS, применённая конечное число раз к L1; в пробном файле — level_is_iterated_LS : l = Nat.iter (pred (level_depth l)) LS L1. Closed under the global context."
+  },
+  {
+   "line": 1132,
+   "theorem": "hierarchy_irrefl",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "Принцип $P1$ (нет самочленства) выполнен здесь в особенно наглядной форме — как доказанная *иррефлексивность*: ни один уровень не ниже самого себя (`hierarchy_irrefl`), иерархия строго восходит, без петель",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "hierarchy_irrefl (L5_NatFromHierarchy.v:84; об основном типе — LevelNatIso.v:102). «Без петель» любой длины — tos_hierarchy_models_meta_pair : … ~ clos_trans Level level_lt L L … (foundation/MetaPairStrength.v:142). Closed under the global context."
+  },
+  {
+   "line": 1190,
+   "theorem": "level_lt_depth",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Формально убывание глубины вдоль порядка зафиксировано в `TheoryOfSystems_Core_ERR.v` леммой `level_lt_depth`: из $l_1 \\ll l_2$ следует $\\texttt{level\\_depth} l_1 < \\texttt{level\\_depth} l_2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение леммы передано дословно (TheoryOfSystems_Core_ERR.v:85). Closed under the global context."
+  },
+  {
+   "line": 1190,
+   "theorem": "level_lt_wf",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "Из неё выведены фундированность порядка уровней (`level_lt_wf`) и несуществование бесконечно убывающей цепи (`no_infinite_level_regress`) — обе теоремы в файле `MetaPairStrength.v`, без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): сноска 1. Было «в репозитории пока не оформлено». level_lt_wf : well_founded level_lt (MetaPairStrength.v:128), из неё no_infinite_level_regress (:137). Closed under the global context."
+  },
+  {
+   "line": 1191,
+   "theorem": "L1_minimal",
+   "file": "src/UniversePolymorphism.v",
+   "claim": "Леммы `L1_minimal` и `level_lt_LS` файла `UniversePolymorphism.v`; файл подключает `TheoryOfSystems_Core_ERR.v` и говорит о его типе `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): сноска 2. Было «нет как отдельных именованных утверждений… предмет будущей синхронизации». L1_minimal (UniversePolymorphism.v:225). Closed under the global context."
+  },
+  {
+   "line": 1191,
+   "theorem": "level_lt_LS",
+   "claim": "Леммы `L1_minimal` и `level_lt_LS` файла `UniversePolymorphism.v`; файл подключает `TheoryOfSystems_Core_ERR.v` и говорит о его типе `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): сноска 2. Имени level_lt_successor в репозитории не было; лемма называется level_lt_LS (UniversePolymorphism.v:74). Closed under the global context.",
+   "file": "src/UniversePolymorphism.v"
+  },
+  {
+   "line": 1192,
+   "theorem": "L5_hierarchy",
+   "file": "src/foundation/LawsFromDistinction.v",
+   "claim": "леммы об отношении порядка уровней — там же; в файле `LawsFromDistinction.v` они повторены как теоремы о законе $L5$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора): сноска 3. Леммы о порядке (level_lt_irrefl, level_lt_trans, level_lt_depth) доказаны в основном файле; L5_hierarchy, L5_transitivity, L5_no_infinite_descent (LawsFromDistinction.v) закрыты `exact` этими леммами."
+  },
+  {
+   "line": 1193,
+   "theorem": "level_nat_level",
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "В файле `L5_NatFromHierarchy.v`: отображения `level_to_nat` и `nat_to_level` вместе с двумя леммами кругового обхода — `level_nat_level` и `nat_level_nat` — устанавливают их взаимную обратность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_to_nat (:17), nat_to_level (:23), level_nat_level : nat_to_level (level_to_nat l) = l (:29), nat_level_nat : level_to_nat (nat_to_level n) = n (:32). Closed under the global context. Одноимённые объявления об основном типе — в LevelNatIso.v (:37–46)."
+  },
+  {
+   "line": 1194,
+   "theorem": "level_lt_succ",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Лемма `level_lt_succ` и теорема `no_universal_level` — в файле `TransfiniteInductionLevel.v`; теорема `LS_is_next_level` — в файле `LevelAscent.v` (там же три утверждения сведены в одно: `ascent_has_no_top`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 14.11 (Часть II, шаг 4, слово автора) (развилка — А): сноска 5. Файлы названы верно: level_lt_succ (:61) и no_universal_level (:83) — TransfiniteInductionLevel.v; LS_is_next_level — LevelAscent.v."
+  },
+  {
+   "line": 1195,
+   "theorem": null,
+   "file": "src/foundation/L5_NatFromHierarchy.v",
+   "claim": "E/R/R-разметка в шапке файла `L5_NatFromHierarchy.v`; тип уровней и глубина — из `TheoryOfSystems_Core_ERR.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка — L5_NatFromHierarchy.v:2; Level и level_depth — TheoryOfSystems_Core_ERR.v:59, :78. Файл-якорь основного файла не подключает: его разметка относится к собственной копии типа."
+  },
+  {
+   "line": 508,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл назван верно: лемма объявлена в src/foundation/LevelAscent.v, § 1.",
+   "theorem": "level_depth_LS",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "черта фиксируется простой леммой (файл `LevelAscent.v`):"
+  },
+  {
+   "line": 542,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint level_to_nat (l : Level) : nat (LevelNatIso.v:37): L1 переходит в 0, LS — в S (level_to_nat_LS, :50).",
+   "theorem": "level_to_nat",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "(такая же нумерация с нуля есть и на основном типе — функция `level_to_nat` файла `LevelNatIso.v`)."
+  },
+  {
+   "line": 560,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_depth_counts_from_one : (forall l, 1 <= level_depth l) /\\ (forall l, level_of_depth (level_depth l) = l) /\\ (forall n, 1 <= n -> level_depth (level_of_depth n) = n) /\\ level_depth L1 = 1 /\\ (forall l, level_depth (LS l) = S (level_depth l)) /\\ (forall l1 l2, l1 << l2 <-> level_depth l1 < level_depth l2). Closed under the global context.",
+   "theorem": "level_depth_counts_from_one",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Формально левый столбец сведён в одну теорему — `level_depth_counts_from_one` (файл `LevelAscent.v`): глубина есть взаимно однозначное соответствие уровней и *положительных* чисел, переводящее `L1` в $1$, `LS` в `S` и порядок $\\ll$ в порядок чисел;"
+  },
+  {
+   "line": 564,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "zero_is_not_a_depth : forall l : Level, level_depth l <> 0. Closed under the global context.",
+   "theorem": "zero_is_not_a_depth",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "нуль глубиной не является (`zero_is_not_a_depth`)."
+  },
+  {
+   "line": 586,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_depth_eq : forall l, level_depth l = S (level_to_nat l) (LevelNatIso.v:121). Closed under the global context.",
+   "theorem": "level_depth_eq",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Там же лемма `level_depth_eq` связывает два столбца таблицы: `level_depth l = S (level_to_nat l)`."
+  },
+  {
+   "line": 596,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "every_hierarchy_is_the_level_series : для всякого X с base, step при трёх посылках (step инъективен; base <> step x; индукция) — of_level L1 = base /\\ of_level (LS l) = step (of_level l) /\\ of_level инъективно /\\ сюръективно. Closed under the global context. Счёт с единицы — every_hierarchy_is_numbered_from_one.",
+   "theorem": "every_hierarchy_is_the_level_series",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Для «всякой» это доказано в общей форме (файл `LevelAscent.v`, теорема `every_hierarchy_is_the_level_series`): всякая структура «основание и надстраивание», в которой надстраивание инъективно, основание не есть результат надстраивания и действует индукция, нумеруется уровнями взаимно однозначно — основанию отвечает `L1`, надстраиванию — `LS`."
+  },
+  {
+   "line": 679,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: LS_is_next_level : l << m <-> (m = LS l \\/ LS l << m); следствие — no_level_between : ~ (l << m /\\ m << LS l). Closed under the global context.",
+   "theorem": "LS_is_next_level",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Первая теорема — что он *ближайший* сверху: всякий уровень выше данного есть либо надстроенный над ним, либо лежит выше надстроенного."
+  },
+  {
+   "line": 681,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: no_universal_level (TransfiniteInductionLevel.v:83); три утверждения блока сведены в ascent_has_no_top (src/foundation/LevelAscent.v). Closed under the global context.",
+   "theorem": "no_universal_level",
+   "file": "src/foundation/TransfiniteInductionLevel.v",
+   "claim": "Вторая — что уровня, под которым или в котором лежали бы все уровни, нет. Вместе они и означают: восхождение не упирается ни в какой высший уровень.[^5]"
+  },
+  {
+   "line": 1006,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "level_induction_from_nat_ind : forall P : Level -> Prop, P L1 -> (forall l, P l -> P (LS l)) -> forall l, P l — доказана через nat_ind и взаимно обратные отображения LevelNatIso.v. Closed under the global context.",
+   "theorem": "level_induction_from_nat_ind",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Перенос проверен в обе стороны (файл `LevelAscent.v`): `level_induction_from_nat_ind` получает индукцию по уровням из `nat_ind`, `nat_induction_from_Level_ind` — индукцию по числам из `Level_ind`."
+  },
+  {
+   "line": 1006,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "nat_induction_from_Level_ind : forall P : nat -> Prop, P 0 -> (forall n, P n -> P (S n)) -> forall n, P n — доказана через Level_ind. Closed under the global context.",
+   "theorem": "nat_induction_from_Level_ind",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Перенос проверен в обе стороны (файл `LevelAscent.v`): `level_induction_from_nat_ind` получает индукцию по уровням из `nat_ind`, `nat_induction_from_Level_ind` — индукцию по числам из `Level_ind`."
+  },
+  {
+   "line": 1009,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: LevelNatIso.level_nat_level (:43) доказана тактикой induction l. Страница называет границу прямо.",
+   "theorem": "level_nat_level",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Независимого вывода одной индукции из другой это не даёт: лемма о взаимной обратности отображений, на которую опирается перенос, сама доказана индукцией по уровню."
+  },
+  {
+   "line": 1092,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "hierarchy_is_finite_from_below : (forall l, ~ (l << L1)) /\\ (forall l, l = L1 \\/ L1 << l) /\\ (forall l, l = Nat.iter (pred (level_depth l)) LS L1) /\\ ~ (exists f : nat -> Level, forall n, f (S n) << f n). Closed under the global context.",
+   "theorem": "hierarchy_is_finite_from_below",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Второе — *иррефлексивность* порядка (`hierarchy_irrefl`: ни один уровень не ниже самого себя) вместе с конечностью снизу: у иерархии есть основание, и ряд начинается с единицы (§ 3.3; теоремы `hierarchy_is_finite_from_below` и `level_depth_counts_from_one` файла `LevelAscent.v`)."
+  },
+  {
+   "line": 1092,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Счёт с единицы: level_depth L1 = 1 и взаимно однозначное соответствие уровней и положительных чисел. Closed under the global context.",
+   "theorem": "level_depth_counts_from_one",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Второе — *иррефлексивность* порядка (`hierarchy_irrefl`: ни один уровень не ниже самого себя) вместе с конечностью снизу: у иерархии есть основание, и ряд начинается с единицы (§ 3.3; теоремы `hierarchy_is_finite_from_below` и `level_depth_counts_from_one` файла `LevelAscent.v`)."
+  },
+  {
+   "line": 1190,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "no_infinite_level_regress (MetaPairStrength.v:137). Closed under the global context.",
+   "theorem": "no_infinite_level_regress",
+   "file": "src/foundation/MetaPairStrength.v",
+   "claim": "Из неё выведены фундированность порядка уровней (`level_lt_wf`) и несуществование бесконечно убывающей цепи (`no_infinite_level_regress`) — обе теоремы в файле `MetaPairStrength.v`, без аксиом."
+  },
+  {
+   "line": 1190,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре конъюнкта теоремы названы на странице в том же порядке. Closed under the global context.",
+   "theorem": "hierarchy_is_finite_from_below",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Конечность снизу одним утверждением — `hierarchy_is_finite_from_below` (файл `LevelAscent.v`): ниже основания уровней нет; всякий уровень есть основание либо лежит выше него; всякий уровень получен из основания конечным числом надстраиваний; бесконечно убывающей последовательности уровней нет."
+  },
+  {
+   "line": 1194,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ascent_has_no_top : (forall l, l << LS l) /\\ (forall M, exists L, ~ (L << M \\/ L = M)) /\\ ~ (exists Top, forall L, L << Top \\/ L = Top). Closed under the global context.",
+   "theorem": "ascent_has_no_top",
+   "file": "src/foundation/LevelAscent.v",
+   "claim": "Лемма `level_lt_succ` и теорема `no_universal_level` — в файле `TransfiniteInductionLevel.v`; теорема `LS_is_next_level` — в файле `LevelAscent.v` (там же три утверждения сведены в одно: `ascent_has_no_top`)."
+  }
+ ]
+}

@@ -1,0 +1,675 @@
+{
+ "batch": "audit-part-02",
+ "chapter": "02 Натуральные числа/01 Первичность единицы.md",
+ "checked": "2026-11-13",
+ "auto": true,
+ "records": [
+  {
+   "line": 6,
+   "theorem": "Distinction",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`Distinction` как первый формализуемый след; $L1$–$L5$ как структурные свойства различения и иерархии;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record Distinction := mkDistinction { positive : Prop; negative : Prop; exclusive : ~ (positive /\\ negative); exhaustive : positive \\/ negative } (Distinction.v:71). Closed under the global context."
+  },
+  {
+   "line": 37,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "В формализации, принятой в Rocq, это записывается индуктивным типом[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Ответ `Print nat` (Rocq 9.0.1): Inductive nat : Set := O : nat | S : nat -> nat (Corelib.Init.Datatypes). Блок стр. 41 совпадает с точностью до записи типов конструкторов."
+  },
+  {
+   "line": 44,
+   "theorem": "O",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа nat стандартной библиотеки)",
+   "claim": "Здесь `O` — конструктор без аргументов, и он назван первым. Единица не есть отдельный конструктор: она есть `S O` — последователь нуля.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструкторы O : nat и S : nat -> nat; O в объявлении стоит первым."
+  },
+  {
+   "line": 138,
+   "theorem": "one_from_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "В репозитории это фиксируется простейшим из возможных определений. Каждому акту различения — каждому объекту типа `Distinction` — сопоставляется число, и это число есть единица:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition one_from_distinction (D : Distinction) : nat := 1 (PrimalityOfOne.v:40): число вписано в определение и от D не зависит. Блок совпадает с исходником. Вычисляемая форма в формализации есть: one_distinction : forall D, distinction_count_nat (D :: nil) = 1 (IndivisibleDistinction.v:118, Closed)."
+  },
+  {
+   "line": 150,
+   "theorem": "one_from_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Определение намеренно тривиально, и его тривиальность содержательна. Оно не *вычисляет* число акта и не *доказывает* первичность единицы в строгом смысле — оно *регистрирует* принятую интерпретацию: решение читать каждый акт различения как одну единицу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: определение-константа, единица в нём дана, а не выведена."
+  },
+  {
+   "line": 154,
+   "theorem": "one_is_first_from_existence",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Теорема `one_is_first_from_existence` доказывается одним словом `reflexivity` — то есть машинно проверяет это вычисление: в данной формальной интерпретации каждый объект `Distinction`, безотносительно к тому, что именно он различает, получает числовой отпечаток `1`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem one_is_first_from_existence : forall D : Distinction, one_from_distinction D = 1%nat. Proof. reflexivity. Qed. (PrimalityOfOne.v:46). Closed under the global context. После раскрытия определения это 1 = 1; страница так и читает."
+  },
+  {
+   "line": 161,
+   "theorem": "one_is_first_from_existence",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "код регистрирует выбранное прочтение и проверяет его непротиворечивость, но обосновывается это прочтение онтологией акта различения (§ 1.2), не теоремой.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус («не теоремой») назван честно. Слова «проверяет его непротиворечивость» шире кода: утверждения о непротиворечивости в файле нет, проверяется только 1 = 1 (заметки, сомнительное место 1)."
+  },
+  {
+   "line": 211,
+   "theorem": null,
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Их асимметрия — структурная. Файл репозитория `AsymmetricDistinction.v` фиксирует её формально; разберём её точно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл есть (17 Qed; в шапке — 25). В нём: две леммы о сторонах канонического различения (рефлексивность), distinction_asymmetric (P <> ~P), константы mark/unmark, пара distinction_order. Сама запись Distinction относительно перестановки сторон симметрична (заметки, сомнительное место 2)."
+  },
+  {
+   "line": 217,
+   "theorem": "positive_is_given",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Когда из пропозиции $P$ строится различие, его положительная сторона есть сама $P$, а отрицательная сторона есть $\\neg P$:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "positive_is_given : forall P, positive (distinction_of P) = P (AsymmetricDistinction.v:51) — рефлексивность по определению distinction_of; Closed under the global context (само distinction_of стоит на Classical_Prop.classic). Блок совпадает."
+  },
+  {
+   "line": 230,
+   "theorem": "negative_depends_on_positive",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Положительная сторона *дана*: она есть $P$, и определение к ней *прямое*. Отрицательная сторона *определена через* положительную: она есть $\\neg P$ — результат логической операции, применённой к $P$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "negative_depends_on_positive : forall P, negative (distinction_of P) = (~P) (AsymmetricDistinction.v:47), рефлексивность; Closed. Утверждение о каноническом построении distinction_of; для произвольной записи стороны определяют друг друга взаимно: sides_codetermined (DistinctionCoDefinition.v:85, Closed)."
+  },
+  {
+   "line": 249,
+   "theorem": "mark",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Положительная сторона — маркированная: та, через которую определяется другая. Отрицательная — немаркированная. И вот формальный мост от маркированности к числу:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition mark (D : Distinction) (holds_positive : positive D) : nat := 1 (AsymmetricDistinction.v:113): единица вписана в определение и от обоих аргументов не зависит. Блок страницы отличается именем аргумента (h). Статус моста страница оговаривает на стр. 269–307."
+  },
+  {
+   "line": 270,
+   "theorem": "unmark",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Функции `mark` и `unmark` принимают вторым аргументом не *сторону как роль*, а *доказательство* — объект типа `positive D` или `negative D`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition unmark (D : Distinction) (holds_negative : negative D) : nat := 0 (AsymmetricDistinction.v:114). Типы аргументов названы верно; значение от аргументов не зависит."
+  },
+  {
+   "line": 273,
+   "theorem": "D",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (связанная переменная)",
+   "claim": "Для одного и того же различия `D`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Связанная переменная формулы (различие D : Distinction), не имя объявления. Одноимённые объявления D в src/Catalan.v:87 и src/foundation/DOFCounting.v:37 к главе не относятся."
+  },
+  {
+   "line": 274,
+   "theorem": "exclusive",
+   "file": "src/foundation/Distinction.v",
+   "external": true,
+   "assumptions": "не применимо (поле записи Distinction)",
+   "claim": "доказательства *обеих* сторон одновременно невозможны: поле `exclusive` записи `Distinction` как раз и запрещает `positive D /\\ negative D`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Поле exclusive : ~ (positive /\\ negative) (Distinction.v:74)."
+  },
+  {
+   "line": 276,
+   "theorem": "marked_greater_than_unmarked",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Поэтому теорема `marked_greater_than_unmarked` в её буквальной форме — `forall D p n, unmark D n < mark D p` — сравнивает не две *реально совместимые* стороны одного различия, а два числовых значения при гипотетически данных доказательствах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem marked_greater_than_unmarked : forall D p n, (unmark D n < mark D p)%nat (AsymmetricDistinction.v:117), Closed. Посылки p и n несовместны, поэтому при них доказуемо и обратное неравенство (Check.v, marked_less_than_unmarked_too, Closed); доказательство посылок не использует — после раскрытия констант это 0 < 1 (заметки, сомнительное место 3)."
+  },
+  {
+   "line": 284,
+   "theorem": "marked_role_gt_unmarked_role",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "Точнее это последнее утверждение формализуется не через доказательства, а через *роль-сторону* — например, так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Предложение страницы: объявлений DistinctionSide, side_value, marked_role_gt_unmarked_role в формализации нет, и сноска 3 это говорит. Блок проверен (Check.v, Closed); в окружении AsymmetricDistinction.v неравенство нужно пометить %nat — без пометки блок не собирается (CheckBlock.v)."
+  },
+  {
+   "line": 298,
+   "theorem": "Marked",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "Здесь сравниваются именно две *роли* — `Marked` и `Unmarked` — как значения одного перечислимого типа, и неравенство $0 < 1$ выражает приоритет маркированной роли без обращения к доказательствам сторон.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор предложенного типа DistinctionSide; в формализации его нет (сноска 3). Неравенство side_value Unmarked < side_value Marked — свойство таблицы из двух строк, вписанной рукой."
+  },
+  {
+   "line": 299,
+   "theorem": "Unmarked",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "`Unmarked` — как значения одного перечислимого типа",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Конструктор предложенного типа DistinctionSide; в формализации его нет (сноска 3)."
+  },
+  {
+   "line": 304,
+   "theorem": "mark",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Содержательный аргумент главы — единица метит маркированную (данную) сторону, нуль немаркированную (выведенную) — опирается на role-level различение; `mark` / `unmark` суть его proof-level тень.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: role-level записи в формализации нет (сноска 3), есть константы mark и unmark."
+  },
+  {
+   "line": 339,
+   "theorem": "swap_distinction",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Определена операция `swap_distinction` — перестановка сторон местами;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition swap_distinction (D : Distinction) : Distinction (AsymmetricDistinction.v:66, Defined, Closed): определена для всякого D; дважды применённая возвращает те же стороны (swap_involution_positive, swap_involution_negative)."
+  },
+  {
+   "line": 340,
+   "theorem": "distinction_asymmetric",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "и доказано, что перестановка даёт *другое* различие, не то же самое:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem distinction_asymmetric : forall P : Prop, positive (distinction_of P) <> positive (swap_distinction (distinction_of P)) (AsymmetricDistinction.v:92) — о положительной стороне канонического различения, то есть P <> ~P. Для всякого D то же есть в формализации: sides_distinct : forall D, positive D <> negative D (DistinctionCoDefinition.v:125, Closed); swap_distinction D <> D проверено (Check.v, Closed)."
+  },
+  {
+   "line": 347,
+   "theorem": "distinction_asymmetric",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Proof. (* ... uses classic ... *) Qed.",
+   "page_price": "uses classic",
+   "verdict": "ok",
+   "note": "Формулировка блока совпадает с исходником. Print Assumptions: Classical_Prop.classic; в доказательстве стоит destruct (classic P). О том, нужна ли аксиома утверждению, — запись к сноске 4."
+  },
+  {
+   "line": 350,
+   "theorem": "swap_changes_positive",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Перестановка сторон есть переход к различию $\\neg P$ вместо $P$ — к *другому* акту.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "swap_changes_positive : forall P, positive (swap_distinction (distinction_of P)) = (~P) (AsymmetricDistinction.v:77, Closed). Положительные стороны переставленного различения и distinction_of (~P) совпадают; отрицательные — P и ~~P — равносильны ценой classic, равенства пропозиций нет (Check.v, swap_vs_distinction_of_neg)."
+  },
+  {
+   "line": 365,
+   "theorem": "before",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Файл `AsymmetricDistinction.v` вводит для сторон, взятых в их ориентации, имена `before` и `after`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition before (D : Distinction) : Prop := positive D (AsymmetricDistinction.v:166) — другое имя положительной стороны. Блок совпадает."
+  },
+  {
+   "line": 367,
+   "theorem": "after",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "имена `before` и `after`:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition after (D : Distinction) : Prop := negative D (AsymmetricDistinction.v:167) — другое имя отрицательной стороны."
+  },
+  {
+   "line": 375,
+   "theorem": "before_after_exhaustive",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Theorem before_after_exhaustive : forall D : Distinction, before D \\/ after D.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "AsymmetricDistinction.v:173; доказательство — exact (exhaustive D), проекция поля записи. Closed under the global context."
+  },
+  {
+   "line": 379,
+   "theorem": "before_after_exclusive",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "«До» и «после» суть положительная и отрицательная стороны, взятые со своей ориентацией; они взаимно исключены ($L2$) и совместно исчерпывающи ($L3$) — ровно как стороны акта, которыми они и являются.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "before_after_exclusive : forall D, ~ (before D /\\ after D) (AsymmetricDistinction.v:169) — exact (exclusive D). Обе теоремы — проекции полей записи под новыми именами, Closed under the global context; страница говорит это («которыми они и являются»)."
+  },
+  {
+   "line": 396,
+   "theorem": null,
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Шапка файла `AsymmetricDistinction.v` отмечает, что та же асимметрия — определительная первичность одной стороны над другой — проступает и за пределами числовых систем: за направленностью времени, за преобладанием вещества над антивеществом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Комментарий в начале файла (стр. 34–35): «structural asymmetry propagates to matter/antimatter (η > 0), time (arrow), counting (1 before 0)». Это комментарий, не теорема; страница говорит «отмечает» и оставляет связи физике."
+  },
+  {
+   "line": 452,
+   "theorem": "zero_from_no_distinction",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "В репозитории файл `PrimalityOfOne.v` фиксирует это так:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition zero_from_no_distinction : nat := 0 (PrimalityOfOne.v:43) — константа без аргументов: списка и стадии в определении нет, связь с «ситуацией» — в имени. Страница читает код точно (стр. 462–478). Счёт пустого списка теоремой: zero_distinctions : distinction_count_nat nil = 0 (IndivisibleDistinction.v:115, Closed)."
+  },
+  {
+   "line": 462,
+   "theorem": "zero_is_absence",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`zero_from_no_distinction` есть *числовое значение* `0`, сопоставленное ситуации «различений не предъявлено»; теорема `zero_is_absence` проверяет, что это значение действительно есть `0`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem zero_is_absence : zero_from_no_distinction = 0%nat. Proof. reflexivity. Qed. (PrimalityOfOne.v:51). Closed under the global context. Блок совпадает."
+  },
+  {
+   "line": 468,
+   "theorem": "one_distinction_exists",
+   "file": "src/foundation/Distinction.v",
+   "claim": "тип `Distinction` населён (например, `distinction_of True` существует, и файл `Distinction.v` это фиксирует леммами `one_distinction_exists`, `two_distinctions_exist`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma one_distinction_exists : distinction_count 1 (Distinction.v:167), свидетель [distinction_of True]. Print Assumptions: Classical_Prop.classic (через distinction_of); страница цены не называет. Населённость типа без аксиом: distinction_exists_without_axiom (DistinctionCoDefinition.v:321, Closed)."
+  },
+  {
+   "line": 470,
+   "theorem": "two_distinctions_exist",
+   "file": "src/foundation/Distinction.v",
+   "claim": "леммами `one_distinction_exists`, `two_distinctions_exist`",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma two_distinctions_exist : distinction_count 2 (Distinction.v:170), свидетель [distinction_of True; distinction_of False]. Print Assumptions: Classical_Prop.classic."
+  },
+  {
+   "line": 498,
+   "theorem": "zero_not_a_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Граничный статус нуля имеет точное формальное следствие, и оно важно для всей Части II: *нуль не входит в счёт различений*.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: в Rocq исключение нуля дано, а не следует: условие (1 <= n)%nat вписано в определение distinction_count_from_one (PrimalityOfOne.v:55), и zero_not_a_count (:65, Closed) закрывается им одним, свойства различений не участвуют. Следствием это становится, если условие наложить на список («список не пуст»): набросок проверен (Check.v, zero_is_not_a_presented_count, Closed)."
+  },
+  {
+   "line": 504,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "В файле `Distinction.v` определён предикат, сопоставляющий числу возможность быть реализованным списком различий:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition distinction_count (n : nat) : Prop := exists (Ds : list Distinction), length Ds = n (Distinction.v:161). Верен при всяком n: distinction_count_any (:182, Classical_Prop.classic; без аксиом — Check.v, distinction_count_any_closed). Блок отличается скобками."
+  },
+  {
+   "line": 512,
+   "theorem": "zero_distinctions",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Этот предикат *технический*: он спрашивает лишь, существует ли список различий заданной длины. И для `n = 0` ответ положителен — пустой список имеет длину нуль:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma zero_distinctions : distinction_count 0. Proof. exists []. reflexivity. Qed. (Distinction.v:164), Closed. На странице ключевое слово Theorem, в файле Lemma. Одноимённая лемма с другим утверждением — IndivisibleDistinction.v:115 (distinction_count_nat nil = 0)."
+  },
+  {
+   "line": 528,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Чтобы выразить счёт *актов* — счёт в том онтологическом смысле, который держит Часть II, — нужен предикат строже. Файл `PrimalityOfOne.v` его и вводит:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition distinction_count_from_one (n : nat) : Prop := exists (Ds : list Distinction), length Ds = n /\\ (1 <= n)%nat (PrimalityOfOne.v:55). Блок отличается скобками и пометкой %nat. Что выражает предикат — записи к стр. 498 и 581."
+  },
+  {
+   "line": 537,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`distinction_count_from_one` добавляет к технической длине условие $1 \\le n$: счёт актов начинается с единицы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Описание определения точное: добавлено условие на число n. Предикат равносилен 1 <= n (Check.v, count_from_one_iff_ge_one, Closed)."
+  },
+  {
+   "line": 555,
+   "theorem": "zero_not_a_count",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`zero_not_a_count` утверждает: нуль *не есть* счёт различений. Доказательство коротко — условие $1 \\le 0$ ложно, и `inversion` это закрывает, — но содержательно оно говорит существенное.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem zero_not_a_count : ~ distinction_count_from_one 0 (PrimalityOfOne.v:65), Closed; формулировка блока совпадает. В исходнике доказательство другое: intro H. destruct H as [_ [_ Hge]]. lia. — тактики inversion в нём нет; текст страницы тоже собирается (Check.v, zero_not_a_count_page)."
+  },
+  {
+   "line": 557,
+   "theorem": "inversion",
+   "external": true,
+   "assumptions": "не применимо (тактика Rocq)",
+   "claim": "`inversion` это закрывает",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Тактика Rocq, не имя объявления. В доказательстве zero_not_a_count в исходнике её нет (там lia); вариант страницы с inversion собирается (Check.v, zero_not_a_count_page)."
+  },
+  {
+   "line": 559,
+   "theorem": "first_count_is_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "А `first_count _is_one` показывает, с чего он начинается: первый счёт есть единица, и ему отвечает список из одного различия.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem first_count_is_one : distinction_count_from_one 1 (PrimalityOfOne.v:58), свидетель [distinction_of True]; Print Assumptions: Classical_Prop.classic (без аксиом — со свидетелем distinction_true_false, Check.v). Имя на странице разорвано переносом строки (стр. 559–560) и читается с пробелом. Текст доказательства на странице не тот, что в файле, но собирается."
+  },
+  {
+   "line": 565,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "зачем репозиторий держит *два* предиката счёта, `distinction_count` и `distinction_count_from_one`, если они различаются лишь судьбой нуля?",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: при n <> 0 предикаты равносильны (Check.v, counts_differ_only_at_zero, Closed). В формализации: distinction_count_any (Distinction.v:182) и positive_nat_is_distinction_count (PrimalityOfOne.v:94), оба на Classical_Prop.classic."
+  },
+  {
+   "line": 573,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "`distinction_count` отвечает на вопрос *технический*: какова длина данного списка различий?",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "distinction_count (n : nat) : Prop := exists Ds, length Ds = n (Distinction.v:161) списка не принимает и длины не сообщает: это свойство числа n, верное при всяком n (distinction_count_any, :182). Длину данного списка различений в формализации даёт distinction_count_nat Ds := length Ds (IndivisibleDistinction.v:93)."
+  },
+  {
+   "line": 576,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Этот предикат нужен везде, где речь идёт о списках как таковых: о длинах, индексах, конкатенациях.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В формализации distinction_count встречается только в пяти леммах своего файла (Distinction.v:164–187) и больше нигде в src. С длинами и конкатенациями списков различений работает distinction_count_nat (IndivisibleDistinction.v:93–120: count_is_natural, distinction_increment)."
+  },
+  {
+   "line": 581,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`distinction_count_from_one` отвечает на вопрос *онтологический*: сколько актов различения *совершено*?",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Предикат не принимает списка совершённых актов и их числа не сообщает: это свойство числа n, равносильное 1 <= n (Check.v, count_from_one_iff_ge_one, Closed); то же верно для списков над любым населённым типом (count_from_one_any_type, Closed). Вне PrimalityOfOne.v предикат не используется."
+  },
+  {
+   "line": 602,
+   "theorem": "zero_distinctions",
+   "file": "src/foundation/Distinction.v",
+   "claim": "Утверждение `distinction_count 0` истинно (длина пустого списка есть нуль) и утверждение $\\neg$ `distinction_count_from_one` `0` истинно (нуль не есть счёт совершённых актов) совместимы без всякого напряжения",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оба утверждения доказаны: zero_distinctions (Distinction.v:164) и zero_not_a_count (PrimalityOfOne.v:65), оба Closed under the global context."
+  },
+  {
+   "line": 613,
+   "theorem": "distinction_count_from_one",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Кардинальный путь к натуральному ряду, который развернёт Глава II.2, пойдёт через `distinction_count_from_one` — через счёт совершённых актов, начинающийся с единицы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Глава II.2 действительно разбирает этот предикат (её § «Онтологический предикат»). В формализации он используется только внутри PrimalityOfOne.v (succ_is_new_distinction, positive_nat_is_distinction_count, primality_summary). Сверка слов Главы II.2 — в её ведомости."
+  },
+  {
+   "line": 628,
+   "theorem": "distinction_count",
+   "file": "src/foundation/Distinction.v",
+   "claim": "| Список | длина пустого списка | предикат `distinction_count` $0$ |",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "distinction_count 0 доказано (zero_distinctions, Distinction.v:164, Closed); третья строка таблицы — zero_not_a_count (PrimalityOfOne.v:65, Closed)."
+  },
+  {
+   "line": 650,
+   "theorem": "S",
+   "external": true,
+   "assumptions": "не применимо (конструктор типа nat стандартной библиотеки)",
+   "claim": "единица есть `S O`, последователь нуля, — она определена *через* нуль.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В стандартной библиотеке 1 есть запись терма S O."
+  },
+  {
+   "line": 677,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "ToS формализована в Rocq, и натуральные числа в Rocq суть тип `nat` стандартной библиотеки.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В названных главой файлах (Distinction.v, AsymmetricDistinction.v, PrimalityOfOne.v) числа имеют тип nat стандартной библиотеки; собственного типа чисел в них нет."
+  },
+  {
+   "line": 727,
+   "theorem": "level_nat_level",
+   "file": "src/foundation/LevelNatIso.v",
+   "claim": "Каким бы он ни был, он оказался бы *изоморфен* `nat`: дискретный, с начальным элементом и оператором следования, он не может не быть изоморфен стандартному натуральному ряду — это будет показано в Главе II.3 на примере типа `Level`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Для типа Level ядра взаимно обратные отображения доказаны: level_nat_level, nat_level_nat (LevelNatIso.v:43, :46, Closed under the global context); для отдельной копии типа — L5_NatFromHierarchy.v:29, :32. Общее утверждение («каким бы он ни был») показано на одном примере, как и сказано."
+  },
+  {
+   "line": 786,
+   "theorem": "distinction_order",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "В репозитории оба порядка присутствуют явно, и их различённость зафиксирована формально. Файл `AsymmetricDistinction.v` определяет порядок различения — порядок, в котором маркированная сторона идёт прежде немаркированной:",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Definition distinction_order := (1%nat, 0%nat) (AsymmetricDistinction.v:126) — пара чисел, вписанная рукой; one_precedes_zero_in_distinction (:128) — её проекции по рефлексивности. Отношения порядка обоснования и утверждения, отличающего его от числового порядка (numerical_ordering : (0 < 1)%nat, PrimalityOfOne.v:136), в формализации нет: различие двух порядков названо только в комментарии (:121–124)."
+  },
+  {
+   "line": 799,
+   "theorem": "one_precedes_zero_in_distinction",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "`distinction_order` есть пара $(1, 0)$: единица на первом месте, нуль на втором. Это — онтологический порядок, порядок обоснования, записанный как объект.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem one_precedes_zero_in_distinction : fst distinction_order = 1%nat /\\ snd distinction_order = 0%nat. Proof. split; reflexivity. Qed. (AsymmetricDistinction.v:128), Closed. Теорема читает компоненты пары-константы; страница называет объект парой. Блок отличается пометками %nat; дословный текст блока в окружении файла не собирается (CheckBlock.v)."
+  },
+  {
+   "line": 821,
+   "theorem": "tos_ordering",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`tos_first` есть `1`, `tos_absence` есть `0`; теорема `tos_ordering` утверждает неравенство `tos_absence` `<` `tos_first`, то есть — поскольку `tos_absence` есть `0`, а `tos_first` есть `1`, — по существу $0 < 1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem tos_ordering : (tos_absence < tos_first)%nat (PrimalityOfOne.v:144), Closed. Утверждение конвертируемо в 0 < 1 (Check.v, tos_ordering_is_numerical_ordering, рефлексивность). Блок совпадает."
+  },
+  {
+   "line": 827,
+   "theorem": "orderings_dual",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Теорема `orderings_dual` в этом файле, строго говоря, не фиксирует две *противоположные пары*: обе её конъюнкты после раскрытия определений сводятся к одному и тому же неравенству $0 < 1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem orderings_dual : (tos_absence < tos_first)%nat /\\ (0 < 1)%nat (PrimalityOfOne.v:148), Closed. Оба конъюнкта — одно неравенство 0 < 1; страница называет это точно."
+  },
+  {
+   "line": 830,
+   "theorem": "distinction_order",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Поэтому *формальная* запись двойственности двух порядков как пары $(1,0)$ против пары $(0,1)$ содержится именно в `AsymmetricDistinction.v` — в `distinction_order` и `one_precedes_zero_in_distinction`",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В AsymmetricDistinction.v записана одна пара — (1,0); пары (0,1) и утверждения о противоположности двух пар в файле нет. Набросок с обеими парами проверен (Check.v, orderings_dual_pairs, Closed)."
+  },
+  {
+   "line": 834,
+   "theorem": "tos_first",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`PrimalityOfOne.v` регистрирует ту же мысль в более слабой форме: числовой порядок $0 < 1$ налицо, и онтологическое имя начала (`tos_first`) сопоставлено единице, а не нулю.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition tos_first := 1%nat (PrimalityOfOne.v:141) — имя для числа 1; numerical_ordering : (0 < 1)%nat (:136). Статус («регистрирует», «в более слабой форме») назван честно."
+  },
+  {
+   "line": 861,
+   "theorem": "tos_first",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Файл `PrimalityOfOne.v` проводит этот сдвиг не через новый индуктивный тип, а через определения и теоремы, фиксирующие *чтение* стандартного `nat` — `tos_first`, отмечающее единицу как первую распознаваемую величину;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Нового индуктивного типа в файле нет (слово ToS_nat в шапке — не объявление). tos_first := 1%nat — имя числа; «чтение» закреплено именем."
+  },
+  {
+   "line": 865,
+   "theorem": "tos_absence",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`tos_absence`, читающее нуль как границу;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition tos_absence := 0%nat (PrimalityOfOne.v:142) — имя числа 0; «чтение» закреплено именем."
+  },
+  {
+   "line": 866,
+   "theorem": "tos_ordering",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "`tos_ordering`, задающее порядок обоснования.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "tos_ordering : (tos_absence < tos_first)%nat (PrimalityOfOne.v:144) после раскрытия определений есть 0 < 1 — числовой порядок, в котором нуль стоит первым; сама страница говорит это на стр. 823–826. Порядка обоснования (единица прежде нуля) теорема не задаёт."
+  },
+  {
+   "line": 870,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "*ToS не переопределяет `nat` — она его переинтерпретирует. Тип остаётся стандартным; вся арифметика Rocq сохраняется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В названных главой файлах используется nat стандартной библиотеки; собственного типа чисел нет. Синтаксически тождественные nat типы уровней (Level) объявлены отдельно и изоморфны nat (запись к стр. 727)."
+  },
+  {
+   "line": 879,
+   "theorem": "Level",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Глава II.3 возьмёт тип `Level`, синтаксически тождественный `nat`, и наделит его *иной* интерпретацией — иерархической.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Inductive Level : Set := L1 : Level | LS : Level -> Level (TheoryOfSystems_Core_ERR.v:59) — константа и один конструктор следования, как у nat. Объявлений Level в формализации пять; Глава II.3 называет файл ядра и отдельную копию в L5_NatFromHierarchy.v:13."
+  },
+  {
+   "line": 1918,
+   "theorem": "nat",
+   "external": true,
+   "assumptions": "не применимо (тип стандартной библиотеки)",
+   "claim": "Тип `nat` стандартной библиотеки Rocq; конструктор `O` — нуль, `S` — последователь.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 1 (знак на стр. 38). Corelib.Init.Datatypes.nat с конструкторами O и S."
+  },
+  {
+   "line": 1920,
+   "theorem": "DistinctionSide",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "Тип `DistinctionSide` и `side_value` в текущем репозитории отсутствуют — это предложение по усилению `AsymmetricDistinction.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 3 (знак на стр. 307). Верно: объявлений DistinctionSide и side_value в src нет (поиск по src; Locate: No object). Набросок проверен (Check.v, CheckBlock.v)."
+  },
+  {
+   "line": 1920,
+   "theorem": "side_value",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "`side_value` в текущем репозитории отсутствуют",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 3. Верно: объявления side_value в src нет."
+  },
+  {
+   "line": 1920,
+   "theorem": "mark",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "До его внесения формальным носителем приоритета остаётся пара `mark` / `unmark` в её proof-level форме плюс `distinction_order` $=(1,0)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 3. mark, unmark (AsymmetricDistinction.v:113–114) и distinction_order (:126) есть; все три — константы, вписанные в определения."
+  },
+  {
+   "line": 1921,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "не применимо (аксиома стандартной библиотеки)",
+   "claim": "Доказательство `distinction_asymmetric` опирается на аксиому `classic` — техническое свидетельство $L3$ в CIC (Глава I.6).",
+   "page_price": "аксиома classic",
+   "verdict": "ok",
+   "note": "Сноска 4 (знак на стр. 353). Для нынешнего доказательства верно: Print Assumptions distinction_asymmetric — Classical_Prop.classic; объявление аксиомы одно, в стандартной библиотеке."
+  },
+  {
+   "line": 1921,
+   "theorem": "distinction_asymmetric",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "Это уместно: утверждение «$P$ и $\\neg P$ не совпадают» есть утверждение об *определённости* различия, а определённость различия и есть то, что $L3$ обеспечивает. Здесь `classic` работает не как привнесённое допущение, а как формальный след структурного закона акта различения.",
+   "page_price": "classic (L3) — «не как привнесённое допущение»",
+   "verdict": "mismatch-price",
+   "note": "Утверждению аксиома не нужна: P <> ~P верно при всяком P без допущений. Та же формулировка доказана без classic (CheckAsym.v, distinction_asymmetric', Closed under the global context), а общая форма для всякого D уже есть в формализации — sides_distinct (DistinctionCoDefinition.v:125, Closed). classic стоит только в нынешнем тексте доказательства (destruct (classic P))."
+  },
+  {
+   "line": 1922,
+   "theorem": "orderings_dual",
+   "file": "src/foundation/PrimalityOfOne.v",
+   "claim": "Чтобы `orderings_dual` в `PrimalityOfOne.v` фиксировала именно две противоположные пары, её следовало бы переписать через `tos_conceptual_ordering` $:= (1,0)$ и `number_ordering` $:= (0,1)$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 5 (знак на стр. 836). Предложение страницы; нынешняя orderings_dual (PrimalityOfOne.v:148) пар не содержит — это страница и говорит. Набросок проверен (Check.v, orderings_dual_pairs, Closed)."
+  },
+  {
+   "line": 1922,
+   "theorem": "tos_conceptual_ordering",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "`tos_conceptual_ordering` $:= (1,0)$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 5. Предложенное имя; объявления в src нет, и страница его не утверждает («следовало бы»)."
+  },
+  {
+   "line": 1922,
+   "theorem": "number_ordering",
+   "external": true,
+   "assumptions": "не применимо (в формализации объявления нет)",
+   "claim": "`number_ordering` $:= (0,1)$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 5. Предложенное имя; объявления в src нет, и страница его не утверждает («следовало бы»)."
+  },
+  {
+   "line": 1922,
+   "theorem": "distinction_order",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "как уже сделано для `distinction_order` в `AsymmetricDistinction.v`.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Сноска 5. Для distinction_order сделана одна пара — (1,0) (AsymmetricDistinction.v:126); пары (0,1) и сопоставления двух пар нет ни в этом файле, ни в PrimalityOfOne.v."
+  },
+  {
+   "line": 1922,
+   "theorem": "distinction_order",
+   "file": "src/foundation/AsymmetricDistinction.v",
+   "claim": "До такой синхронизации том опирается на `distinction_order` как на формальный носитель пары $(1,0)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 5. distinction_order = (1, 0) : nat * nat (AsymmetricDistinction.v:126) — пара-константа; носителем пары она является."
+  }
+ ]
+}

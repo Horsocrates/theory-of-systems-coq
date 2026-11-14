@@ -3,8 +3,20 @@
     Roles:    1 = first distinction, 0 = absence of distinction
     Rules:    one_is_first, zero_from_absence, succ_from_distinction
     Status:   Foundation File 6 of 9
-    STATUS: 20 Qed, 0 Admitted, 0 new axioms
+    STATUS: 19 Qed, 0 Admitted, 0 axioms
     Author: Horsocrates | Date: March 2026
+
+    NOTE (audit of Part II of the Mathematics volume, 2026-11-13):
+    - ToS_nat and the three rules of the Rules line are declared in
+      foundation/CountingPresence.v: ToS_nat is a list with at least one
+      performed act; one_is_first, zero_from_absence, succ_from_distinction
+      are theorems about a GIVEN list of distinctions.
+    - In this file one_from_distinction and zero_from_no_distinction are
+      constants (1 and 0), and distinction_count_from_one n is equivalent
+      to 1 <= n (count_from_one_iff_positive, CountingPresence.v).
+    - The witness of the counting theorems is distinction_true_false (the
+      distinction True | False, built without classic). Before the audit
+      it was distinction_of True, and four theorems rested on classic.
 *)
 
 From Stdlib Require Import QArith.
@@ -15,6 +27,7 @@ From Stdlib Require Import PeanoNat.
 
 From ToS Require Import foundation.Distinction.
 From ToS Require Import foundation.AsymmetricDistinction.
+From ToS Require Import foundation.DistinctionCoDefinition.
 
 (** ★★★ THE PRIMALITY OF ONE ★★★
 
@@ -58,7 +71,7 @@ Definition distinction_count_from_one (n : nat) : Prop :=
 Theorem first_count_is_one :
   distinction_count_from_one 1.
 Proof.
-  exists [distinction_of True].
+  exists [distinction_true_false].
   split; [reflexivity | lia].
 Qed.
 
@@ -86,7 +99,7 @@ Theorem succ_is_new_distinction : forall n,
   distinction_count_from_one (S n).
 Proof.
   intros n [Ds [Hlen Hge]].
-  exists (distinction_of True :: Ds).
+  exists (distinction_true_false :: Ds).
   split; [simpl; lia | lia].
 Qed.
 
@@ -148,6 +161,40 @@ Proof. unfold tos_absence, tos_first. lia. Qed.
 Theorem orderings_dual :
   (tos_absence < tos_first)%nat /\ (0 < 1)%nat.
 Proof. unfold tos_absence, tos_first. split; lia. Qed.
+
+(** The two orderings as two PAIRS (audit of Part II of the Mathematics
+    volume, 2026-11-13). orderings_dual above states one inequality twice:
+    both its conjuncts unfold to 0 < 1. The duality itself is the relation
+    of two pairs: the order of grounding (1, 0) — one first, zero second —
+    and the numerical order (0, 1). Both pairs are written by hand; the
+    theorems state what holds of these two records. *)
+Definition tos_conceptual_ordering : nat * nat := (1%nat, 0%nat).
+Definition number_ordering : nat * nat := (0%nat, 1%nat).
+
+(** The pair of AsymmetricDistinction.v is the pair of the order of grounding. *)
+Theorem distinction_order_is_conceptual :
+  distinction_order = tos_conceptual_ordering.
+Proof. reflexivity. Qed.
+
+(** The numerical pair is ordered by magnitude; the conceptual pair runs
+    against the magnitude. *)
+Theorem number_ordering_is_numerical :
+  (fst number_ordering < snd number_ordering)%nat.
+Proof. simpl. lia. Qed.
+
+Theorem conceptual_ordering_reverses_numerical :
+  (snd tos_conceptual_ordering < fst tos_conceptual_ordering)%nat.
+Proof. simpl. lia. Qed.
+
+(** The two pairs are mirror images of each other, and they are different. *)
+Theorem orderings_dual_pairs :
+  fst tos_conceptual_ordering = snd number_ordering /\
+  snd tos_conceptual_ordering = fst number_ordering /\
+  tos_conceptual_ordering <> number_ordering.
+Proof.
+  split; [reflexivity | split; [reflexivity | ]].
+  intro H. discriminate H.
+Qed.
 
 (* ================================================================== *)
 (*  SUMMARY                                                           *)
