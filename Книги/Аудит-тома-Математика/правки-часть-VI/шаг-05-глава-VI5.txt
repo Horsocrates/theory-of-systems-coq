@@ -1,0 +1,64 @@
+@@FILE Направления/Математика/Том Математика/06 Меры и интегрирование/05 L^1 и L^2 пространства как процессы, полнота как конструируемость.md
+@@OLD
+*Ортонормированная* (ОН) система — семейство $\{e_k\}$ с $\langle e_i,e_j\rangle=1$
+при $i=j$ и $0$ иначе. *Проекция* функции $f$ на первые $K$ направлений — сумма
+@@NEW
+*Ортонормированная* (ОН) система — конечное семейство $\{e_k\}_{k<K_0}$ с
+$\langle e_i,e_j\rangle=1$ при $i=j$ и $0$ иначе. *Проекция* функции $f$ на первые
+$K\le K_0$ направлений — сумма
+@@END
+@@OLD
+\sum_{k<K}c_k^2 \;\le\; \|f\|^2 \quad(\text{для любой ОН-системы и любого }K).
+@@NEW
+\sum_{k<K}c_k^2 \;\le\; \|f\|^2 \quad(\text{для любой ОН-системы и любого }K\le K_0).
+@@END
+@@OLD
+определение вещественного как процесса (`RealProcess`, $ℕ\toℚ$). Значит, предел
+@@NEW
+вещественное как процесс: `RealProcess` ($ℕ\toℚ$) с условием Коши `is_Cauchy`. Значит, предел
+@@END
+@@OLD
+[^1]: Опорные файлы каталога `src/process/` Rocq-репозитория ToS: `ProcessL2CauchySchwarz.v`, `ProcessL2Triangle.v`, `ProcessL2Bessel.v`, `ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v`, `ProcessL2RieszFischer.v`; их связки — в `ProcessL2HilbertSynthesis.v`. По шапкам этих файлов и синтез-файлу кластера — 0 аксиом; для полного аудита у ключевых теорем стоит `Print Assumptions`. Имена теорем — в сносках ниже.
+@@NEW
+[^1]: Опорные файлы каталога `src/process/` Rocq-репозитория ToS: `ProcessL2CauchySchwarz.v`, `ProcessL2Triangle.v`, `ProcessL2Bessel.v`, `ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v`, `ProcessL2RieszFischer.v`, `ProcessL2Orthonormal.v`; их связки — в `ProcessL2HilbertSynthesis.v`. По шапкам этих файлов и синтез-файлу кластера — 0 аксиом; для полного аудита у ключевых теорем стоит `Print Assumptions`. Имена теорем — в сносках ниже.
+@@END
+@@OLD
+[^3]: Прямое следствие `q_sum_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом) с $g\equiv1$. Записано в квадратной форме — множитель $\sqrt N$ возник бы лишь после извлечения корня, то есть после перехода к процессу-ℝ.
+@@NEW
+[^3]: Прямое следствие `q_sum_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом) с $g\equiv1$ — `l1_sq_le_N_l2_sq` (`ProcessL2Orthonormal.v`). Записано в квадратной форме — множитель $\sqrt N$ возник бы лишь после извлечения корня, то есть после перехода к процессу-ℝ.
+@@END
+@@OLD
+[^4]: `q_sum_cauchy_schwarz` и `l2_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом); опорные факты — неотрицательность квадрата `q_sq_nonneg` и тождество Лагранжа `sos_identity`.
+@@NEW
+[^4]: `q_sum_cauchy_schwarz` и `l2_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом); опорные факты — неотрицательность квадрата `q_sq_nonneg` и разложение суммы квадратов `sos_identity`. Тождество Лагранжа — `lagrange_identity`, в виде формулы выше — `cs_gap_is_sum_of_squares`, неравенство из него — `cauchy_schwarz_via_lagrange` (`ProcessL2Orthonormal.v`, 0 аксиом).
+@@END
+@@OLD
+[^5]: Симметрия `l2_inner_sym` и разложение квадрата нормы `l2_inner_expand` в `ProcessL2CauchySchwarz.v` (0 аксиом); поляризация — их прямое следствие.
+@@NEW
+[^5]: Симметрия `l2_inner_sym` и разложение квадрата нормы `l2_inner_expand` в `ProcessL2CauchySchwarz.v` (0 аксиом); поляризация — их прямое следствие (`l2_polarization`, `ProcessL2Orthonormal.v`).
+@@END
+@@OLD
+[^7]: Линейность по разложению — `inner_proj_swap` в `ProcessL2BesselGeneral.v` (через перестановку сумм `q_sum_swap`); ортогональность проекции — `proj_ortho`; тождество остатка для одного направления — `seq_inner_residual_identity` в `ProcessL2Bessel.v`. Всё — 0 аксиом.
+@@NEW
+[^7]: Линейность по разложению — `inner_proj_swap` в `ProcessL2BesselGeneral.v` (через перестановку сумм `q_sum_swap`); ортогональность проекции — `proj_ortho_b` (`ProcessL2Orthonormal.v`); тождество остатка для одного направления — `seq_inner_residual_identity` в `ProcessL2Bessel.v`. Всё — 0 аксиом.
+@@END
+@@OLD
+[^8]: `pythagoras_one` и `bessel_one` в `ProcessL2Bessel.v` (0 аксиом).
+@@NEW
+[^8]: `pythagoras_one` и `bessel_one` в `ProcessL2Bessel.v` (0 аксиом); ортогональность остатка — `resid_ortho_one`, наименьшая норма остатка среди кратных $e$ — `best_approx_one` (`ProcessL2Orthonormal.v`, 0 аксиом).
+@@END
+@@OLD
+[^9]: `bessel_general` в `ProcessL2BesselGeneral.v` (0 аксиом): из тождества остатка `resid_norm` и неотрицательности суммы квадратов.
+@@NEW
+[^9]: `bessel_b` в `ProcessL2Orthonormal.v` (0 аксиом): из тождества остатка `resid_norm_b` и неотрицательности суммы квадратов; посылка — ортонормированность первых $K_0$ векторов, $K\le K_0$. Наилучшее приближение — `best_approx_b`: проекция даёт наименьший остаток среди всех комбинаций первых $K$ векторов. Посылка выполнима: стандартный базис (`std_basis_on`) и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ (`rot_orthonormal`). Прежние `bessel_general` и `resid_norm` (`ProcessL2BesselGeneral.v`) требуют ортонормированности при всех номерах $i,j$; на $N$ координатах такая посылка невыполнима (`on_all_indices_unsat`).
+@@END
+@@OLD
+[^10]: `parseval_iff_complete` в `ProcessL2Parseval.v` (0 аксиом): `energy_split` $\sum c_k^2+\|r_K\|^2=\|f\|^2$, `parseval_iff_resid_zero`, и лемма `q_sum_sq_zero` (сумма квадратов нулевая $\Rightarrow$ каждое слагаемое нулевое, через целостность умножения в ℚ). Конкретный свидетель достижимости равенства — `parseval_std_concrete` (стандартный базис).
+@@NEW
+[^10]: `parseval_iff_complete_b` в `ProcessL2Orthonormal.v` (0 аксиом): `energy_split_b` $\sum c_k^2+\|r_K\|^2=\|f\|^2$, `parseval_iff_resid_zero_b`, и лемма `q_sum_sq_zero` из `ProcessL2Parseval.v` (сумма квадратов нулевая $\Rightarrow$ каждое слагаемое нулевое, через целостность умножения в ℚ). Равенство достигается на стандартном базисе при всяком $N$ и всякой $f$ — `parseval_std_all` — и на повёрнутом базисе — `parseval_rot`; частный свидетель — `parseval_std_concrete`.
+@@END
+@@OLD
+[^11]: `coord_sq_le_normsq`, `l2cauchy_coord_cauchy`, `l2_limit` и `l2_riesz_fischer` в `ProcessL2RieszFischer.v` (0 аксиом). Конкретный свидетель — `const_l2cauchy`.
+@@NEW
+[^11]: `coord_sq_le_normsq`, `l2cauchy_coord_cauchy`, `l2_limit` и `l2_riesz_fischer` в `ProcessL2RieszFischer.v` (0 аксиом). Конкретный свидетель — `const_l2cauchy`. Что каждая координата предела есть процесс Коши (`is_Cauchy`) — `l2_limit_coord_is_Cauchy`; трёхчастная форма (координаты предела — процессы Коши; расстояние от $f_n$ до предела — процесс Коши; оно стремится к нулю) — `riesz_fischer_process_form` (`ProcessL2Orthonormal.v`, 0 аксиом).
+@@END

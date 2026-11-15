@@ -1,0 +1,608 @@
+{
+ "batch": "audit-part-06",
+ "chapter": "06 Меры и интегрирование/03 Измеримые функции и интеграл Лебега.md",
+ "checked": "2026-11-14",
+ "auto": true,
+ "records": [
+  {
+   "line": 23,
+   "theorem": "L1Process",
+   "file": "src/analysis/L1Space.v",
+   "claim": "ToS, как и с мерой, идёт за Бишопом–Ченом и определяет не прообраз-измеримую, а *интегрируемую* функцию: ту, что есть *предел ступенчатых функций* по норме $\\|\\cdot\\|_1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record L1Process (:86): последовательность списков ступеней l1_seq с полем l1_cauchy. Типа прообраз-измеримой функции в src нет (поиск). О том, какой смысл имеет условие Коши в записи, — запись к стр. 97."
+  },
+  {
+   "line": 34,
+   "theorem": "step_fun_integral",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "*доказано без аксиом* — ступенчатый интеграл и его свойства, интеграл-процесс на ограниченных функциях, L¹-интеграл как предел и его классы (равенство почти всюду);",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Цена верна: все 24 объявления StepIntegral.v — Closed under the global context (PA_Step.v). Какие свойства доказаны для списка, а какие для одной ступени, — записи к стр. 65 и 67."
+  },
+  {
+   "line": 34,
+   "theorem": "lebesgue_bounded",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "*доказано без аксиом* — ступенчатый интеграл и его свойства, интеграл-процесс на ограниченных функциях, L¹-интеграл как предел и его классы (равенство почти всюду);",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "lebesgue_process (:42) определён для всякой f : Q -> Q как riemann_process; для ограниченной f доказана оценка стадии |процесс n| <= M * (b - a) (lebesgue_bounded, :51); постадийные аддитивность, однородность и монотонность (:73, :82, :91) — для произвольной f. Сходимость процесса для ограниченной f в файле не доказана (только для постоянных, lebesgue_const :119); страница доказанной её не называет. Все 19 объявлений файла — Closed under the global context (PA_PL.v)."
+  },
+  {
+   "line": 34,
+   "theorem": "l1_on_integral_is_Cauchy",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*доказано без аксиом* — ступенчатый интеграл и его свойства, интеграл-процесс на ограниченных функциях, L¹-интеграл как предел и его классы (равенство почти всюду);",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся): было — «L¹-интеграл как предел» опирался на определение l1_integral_approx типа L1Process, для которого последовательность интегралов не обязана быть последовательностью Коши. l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context. Тип — L1On (:521)."
+  },
+  {
+   "line": 34,
+   "theorem": "l1_on_equiv_equivalence",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*доказано без аксиом* — ступенчатый интеграл и его свойства, интеграл-процесс на ограниченных функциях, L¹-интеграл как предел и его классы (равенство почти всюду);",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся): было — о l1_equiv доказана одна рефлексивность. l1_on_equiv_equivalence : forall a b, (forall F : L1On a b, l1_on_equiv F F) /\\ (forall F G, l1_on_equiv F G -> l1_on_equiv G F) /\\ (forall F G K, l1_on_equiv F G -> l1_on_equiv G K -> l1_on_equiv F K) (:554). Closed under the global context. l1_on_equiv_integral : forall a b (F G : L1On a b), a < b -> l1_on_equiv F G -> on_integral F ~~ on_integral G (:576). Closed under the global context."
+  },
+  {
+   "line": 36,
+   "theorem": null,
+   "file": "src/analysis/L1Space.v",
+   "claim": "*остаётся содержательным чтением либо классическим сравнением* — прообраз-измеримость, совпадение Лебега с Риманом за пределами ступенчатого уровня и полностью поточечное «почти всюду».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус трёх названных вещей честен: типа прообраз-измеримой функции и поточечного «почти всюду» в src нет (поиск по объявлениям). О совпадении на самом ступенчатом уровне, которое фраза подразумевает доказанным, — запись к стр. 90.",
+   "assumptions": "не применимо"
+  },
+  {
+   "line": 60,
+   "theorem": "StepFun",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Кирпич всей конструкции — ступенчатая функция: конечный список ступеней, каждая со своим значением на своём интервале.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record Step (:27): значение, левый и правый концы, доказательство left <= right; Definition StepFun := list Step (:35). Условия, что интервалы не пересекаются или составляют разбиение, в типе нет."
+  },
+  {
+   "line": 61,
+   "theorem": "step_fun_integral",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Её интеграл точен и не требует предела — это конечная сумма площадей $\\sum_i v_i\\cdot w_i$ (значение на ширину), вычисляемая в рациональной арифметике.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint step_fun_integral (:42): сумма step_integral по списку; step_integral s := step_val s * (step_right s - step_left s) (:38). Closed under the global context."
+  },
+  {
+   "line": 65,
+   "theorem": "integral_app",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "На этом конечном уровне интеграл уже обладает всеми ожидаемыми свойствами, и все они доказаны как точные тождества: *аддитивность по конкатенации* (интеграл объединённого списка ступеней есть сумма интегралов слагаемых),",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma integral_app : forall f g, step_fun_integral (f ++ g) == step_fun_integral f + step_fun_integral g (:127) — для всяких двух списков. Closed under the global context."
+  },
+  {
+   "line": 67,
+   "theorem": "step_fun_integral_scale",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*однородность* (вынос постоянного множителя) и *монотонность* (если одна ступенчатая функция всюду не больше другой, то и её интеграл не больше).[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 2 переписана: было — integral_scale (StepIntegral.v:136) об одной ступени. step_fun_integral_scale : forall c f, SI.step_fun_integral (SI.step_fun_scale c f) == c * SI.step_fun_integral f (:312) — для списка ступеней. Closed under the global context."
+  },
+  {
+   "line": 67,
+   "theorem": "step_integral_monotone",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*однородность* (вынос постоянного множителя) и *монотонность* (если одна ступенчатая функция всюду не больше другой, то и её интеграл не больше).[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 2 переписана: было — integral_monotone_step (StepIntegral.v:145) о двух ступенях с равными концами; значение функции в точке не было определено. step_integral_monotone : forall f g : SI.StepFun, (forall x, step_eval f x <= step_eval g x) -> SI.step_fun_integral f <= SI.step_fun_integral g (:350) — сравнение значений во всех рациональных точках; условий на разбиения нет. Доказательство: оба списка лежат в некотором отрезке (inside_exists, :185), на достаточно мелкой сетке суммы Римана близки к ступенчатым интегралам (step_riemann_equiv, :266) и сравнимы (riemann_process_monotone). Fixpoint step_eval (f : SI.StepFun) (x : Q) : Q (:99) — значение в точке x функции, записанной списком f: сумма step_val s * indicator (step_left s) (step_right s) x по ступеням; склейка списков — поточечная сумма (step_eval_app, :143). Closed under the global context."
+  },
+  {
+   "line": 70,
+   "theorem": null,
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Здесь нет ни аксиом, ни предельных переходов — только конечная рациональная арифметика.",
+   "page_price": "нет аксиом",
+   "verdict": "ok",
+   "note": "В StepIntegral.v нет строк Axiom, Parameter, Admitted; подключена только стандартная библиотека; пределов и последовательностей в утверждениях нет. Монотонность для списков (step_integral_monotone, src/process/ProcessL1Integrable.v:350) — утверждение конечное и без аксиом; доказана она сравнением двух конечных сумм на одной достаточно мелкой сетке, а не общим измельчением разбиений; способ назван в сноске 2.",
+   "assumptions": "все 24 объявления файла: Closed under the global context"
+  },
+  {
+   "line": 77,
+   "theorem": "lebesgue_process",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "На ограниченной функции интеграл естественно читать как *процесс накопления*: на каждой стадии $n$ — конечная ступенчатая сумма, а сам интеграл — предел этих сумм, последовательность рациональных приближений, а не завершённое число.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "lebesgue_process f a b (:42) = riemann_process f a b = integral_process f a b: на стадии n — сумма Римана riemann_sum f a ((b - a)/(n + 1)) (S n) по левым узлам. Ограниченность в определение не входит; сходимость сумм для ограниченной f в файле не доказана (страница её доказанной не называет) — заметки, сомнительное место 3."
+  },
+  {
+   "line": 79,
+   "theorem": "lebesgue_riemann_equiv",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "В процессном слое кода этот интеграл-процесс *совпадает* с римановым — и совпадает не случайно: «процесс Лебега» там попросту *определён* как процесс Римана, так что их эквивалентность есть тождество по определению, а не отдельная содержательная теорема.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition lebesgue_process f a b := riemann_process f a b (:42); Lemma lebesgue_riemann_equiv : forall f a b, process_equiv (lebesgue_process f a b) (riemann_process f a b) (:132), доказательство — разность равна нулю. Страница говорит это сама. Closed under the global context."
+  },
+  {
+   "line": 90,
+   "theorem": "step_riemann_equiv",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Совпадение же Лебега с Риманом на ступенчатом уровне доказано точно: процесс Римана ступенчатой функции сходится к её ступенчатому интегралу (`step_riemann_equiv`), а значит, называет ту же точку, что и L¹-интеграл её вложения (`lebesgue_step_agrees`); для более широкого класса «хороших» функций оно остаётся ожидаемой следующей теоремой, а не опорным результатом этой главы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): было «доказано точно (вложение `step_to_l1`)» — интеграла Римана в L1Space.v нет, связи ступенчатого интеграла с суммами Римана не было. step_riemann_equiv : forall f a b, a < b -> inside a b f -> riemann_process (step_eval f) a b ~~ const_process (SI.step_fun_integral f) (:266); оценка стадии — step_eval_riemann_close (:220): отклонение не больше (сумма |v_i|) * integral_step a b n; оценка одной ступени — measure_process_rate (process/ProcessMeasureIntervals.v). Closed under the global context."
+  },
+  {
+   "line": 99,
+   "theorem": "L1On",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*Интегрируемая функция* — это Коши-последовательность ступенчатых функций по норме $\\|\\cdot\\|_1$ (интеграл модуля): последовательность $f_n$ ступенчатых функций, у которой $\\|f_n-f_m\\|_1$ становится сколь угодно малым.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 4 переписана: было — тип L1Process с разностью по месту в списке. Record L1On (a b : Q) (:521): on_seq : nat -> SI.StepFun; on_inside : forall n, inside a b (on_seq n); on_cauchy : forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> l1_close a b (on_seq m) (on_seq n) eps. Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context."
+  },
+  {
+   "line": 102,
+   "theorem": "l1_on_integral_is_Cauchy",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Её интеграл — предел интегралов приближающих ступенчатых функций; он определён как процесс и доказуемо устойчив.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 5 переписана: было — устойчивость доказана только для постоянных последовательностей, для типа L1Process неверна. Definition on_integral {a b : Q} (F : L1On a b) : RealProcess := fun n => SI.step_fun_integral (on_seq F n) (:534). l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context. Независимость от представителя — l1_on_equiv_integral : forall a b (F G : L1On a b), a < b -> l1_on_equiv F G -> on_integral F ~~ on_integral G (:576). Closed under the global context."
+  },
+  {
+   "line": 105,
+   "theorem": "L1On",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*Пополнение встроено в самый тип: L¹-объект уже является Коши-процессом ступенчатых функций, так что представители пополнения строятся напрямую — это не отдельная доказанная теорема Рисс–Фишера о готовом фактор-пространстве, а способ строить пополнение по построению.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Условие Коши — поле on_cauchy записи L1On (:521); теоремы о полноте (о пределе последовательности интегрируемых функций) нет, и страница говорит это сама. Представители, не сводящиеся к своим стадиям, строятся напрямую: Definition series_l1 (a b : Q) (s : nat -> SI.Step) (Hin : forall k, a <= SI.step_left (s k) /\\ SI.step_right (s k) <= b) (Hsum : summable s) : L1On a b (:769, Defined): стадии — первые n ступеней (prefix, :723); summable s (:763): для всякого eps > 0 норма списка ступеней с номерами от n до n + d меньше eps при всех достаточно больших n и всех d. Definition staircase : L1On 0 1 := series_l1 0 1 stair_step stair_inside stair_summable (:842); stair_step k — ступень высоты (1/2)^k на [0, (1/2)^k] (:796); суммируемость — stair_summable (:830) через оценку хвоста stair_tail_bound (:814)."
+  },
+  {
+   "line": 135,
+   "theorem": "l1_on_equiv",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "две L¹-функции эквивалентны, если интеграл модуля их разности сходится к нулю — то есть $\\|f-g\\|_1\\to 0$.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition l1_on_equiv {a b : Q} (F G : L1On a b) : Prop := forall eps, 0 < eps -> exists N, forall n, N <= n -> l1_close a b (on_seq F n) (on_seq G n) eps (:549). Формула страницы; близость l1_close — запись к сноске 4. О свойствах отношения — запись к стр. 148."
+  },
+  {
+   "line": 148,
+   "theorem": "l1_on_equiv_equivalence",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Как и в Главе 4.3, формально заданы *представители* (тип L¹-процессов) и *отношение* эквивалентности ($\\|f-g\\|_1\\to 0$), но отдельный фактор-тип L¹-классов не строится — класс остаётся режимом чтения, а не построенным объектом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 7 переписана: было — отношением эквивалентности l1_equiv не доказано, а на типе L1Process оно не транзитивно. l1_on_equiv_equivalence : forall a b, (forall F : L1On a b, l1_on_equiv F F) /\\ (forall F G, l1_on_equiv F G -> l1_on_equiv G F) /\\ (forall F G K, l1_on_equiv F G -> l1_on_equiv G K -> l1_on_equiv F K) (:554). Closed under the global context. Что фактор-тип не строится — верно."
+  },
+  {
+   "line": 163,
+   "theorem": null,
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "В основании — интеграл ступенчатой функции (точная сумма $\\sum v_i w_i$) и его свойства (аддитивность, однородность, монотонность).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Перечень свойств без уточнения. Аддитивность — integral_app (StepIntegral.v:127), для списков; однородность и монотонность для списков — step_fun_integral_scale (:312) и step_integral_monotone (:350) файла src/process/ProcessL1Integrable.v (шаг 3, 15.11); для одной ступени — integral_scale, integral_monotone_step (StepIntegral.v).",
+   "assumptions": "integral_app, integral_scale, integral_monotone_step: Closed under the global context"
+  },
+  {
+   "line": 167,
+   "theorem": "lebesgue_process",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "совпадение интеграла-процесса с римановым (на ограниченных функциях — по определению).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "lebesgue_process f a b := riemann_process f a b (:42) — по определению и для всякой f; ограниченность в определение не входит."
+  },
+  {
+   "line": 198,
+   "theorem": "lebesgue_riemann_equiv",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "Доказанная часть — ступенчатый интеграл и его свойства, интеграл Лебега как процесс, совпадение с Риманом, L¹-интеграл как предел и его классы — даёт прочную основу для следующего шага.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Совпадение с Риманом» в процессном слое — равенство по определению (:42, :132); страница оговаривает это на стр. 80–83 и 165–166. О совпадении на ступенчатом уровне — запись к стр. 90."
+  },
+  {
+   "line": 198,
+   "theorem": "l1_on_integral_is_Cauchy",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Доказанная часть — ступенчатый интеграл и его свойства, интеграл Лебега как процесс, совпадение с Риманом, L¹-интеграл как предел и его классы — даёт прочную основу для следующего шага.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся): «L¹-интеграл как предел» — l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context."
+  },
+  {
+   "line": 198,
+   "theorem": "l1_on_equiv_equivalence",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Доказанная часть — ступенчатый интеграл и его свойства, интеграл Лебега как процесс, совпадение с Риманом, L¹-интеграл как предел и его классы — даёт прочную основу для следующего шага.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся): «его классы» — l1_on_equiv_equivalence : forall a b, (forall F : L1On a b, l1_on_equiv F F) /\\ (forall F G, l1_on_equiv F G -> l1_on_equiv G F) /\\ (forall F G K, l1_on_equiv F G -> l1_on_equiv G K -> l1_on_equiv F K) (:554). Closed under the global context. l1_on_equiv_integral : forall a b (F G : L1On a b), a < b -> l1_on_equiv F G -> on_integral F ~~ on_integral G (:576). Closed under the global context."
+  },
+  {
+   "line": 206,
+   "theorem": "step_integral",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Тип ступенчатой функции и `step_integral` (площадь одной ступени), `step_fun_integral` (сумма) в `StepIntegral.v` (каталог `src/analysis/`, 17 доказанных утверждений, 0 `Admitted`, 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition step_integral (s : Step) : Q := step_val s * (step_right s - step_left s) (:38). Одноимённые определения повторены ещё в пяти файлах src/analysis (L1Space.v, DominatedConvergence.v, FubiniProcess.v, LebesgueMeasure.v, MeasureSynthesis.v) — каждое над своей копией записи Step; глава называет StepIntegral.v."
+  },
+  {
+   "line": 206,
+   "theorem": "step_fun_integral",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Тип ступенчатой функции и `step_integral` (площадь одной ступени), `step_fun_integral` (сумма) в `StepIntegral.v` (каталог `src/analysis/`, 17 доказанных утверждений, 0 `Admitted`, 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Fixpoint step_fun_integral (f : StepFun) : Q (:42) — сумма step_integral по списку. Тип: Record Step (:27), Definition StepFun := list Step (:35)."
+  },
+  {
+   "line": 206,
+   "theorem": null,
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Тип ступенчатой функции и `step_integral` (площадь одной ступени), `step_fun_integral` (сумма) в `StepIntegral.v` (каталог `src/analysis/`, 17 доказанных утверждений, 0 `Admitted`, 0 аксиом).",
+   "page_price": "0 Admitted, 0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): было «20 доказанных утверждений». В файле 17 строк Qed (grep -c 'Qed\\.'); шапка файла исправлена с 20 на 17 12.11.2026 (коммит 2ae17c2). «0 Admitted, 0 аксиом» верно: строк Admitted, Axiom, Parameter нет.",
+   "assumptions": "все 24 объявления файла: Closed under the global context"
+  },
+  {
+   "line": 206,
+   "theorem": "Admitted",
+   "external": true,
+   "claim": "Тип ступенчатой функции и `step_integral` (площадь одной ступени), `step_fun_integral` (сумма) в `StepIntegral.v` (каталог `src/analysis/`, 17 доказанных утверждений, 0 `Admitted`, 0 аксиом).",
+   "page_price": "0 Admitted",
+   "verdict": "ok",
+   "note": "`Admitted` — ключевое слово Rocq, не объявление. Сказанное верно: в StepIntegral.v и в L1Space.v (сноска 4, стр. 207) строк `Admitted.` нет; слово стоит только в шапках-комментариях («0 Admitted»)."
+  },
+  {
+   "line": 207,
+   "theorem": "integral_app",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "`integral_app` (аддитивность по конкатенации) в `StepIntegral.v`; там же для одной ступени — `integral_scale`, `integral_monotone_step`, `step_integral_nonneg`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявление есть (:127), утверждение — о списках. Closed under the global context."
+  },
+  {
+   "line": 207,
+   "theorem": "integral_scale",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "`integral_app` (аддитивность по конкатенации) в `StepIntegral.v`; там же для одной ступени — `integral_scale`, `integral_monotone_step`, `step_integral_nonneg`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявление есть (StepIntegral.v:136), файл назван верно. Утверждение — об одной ступени; сноска так и говорит (исправлено 15.11, шаг 3)."
+  },
+  {
+   "line": 207,
+   "theorem": "integral_monotone_step",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "`integral_app` (аддитивность по конкатенации) в `StepIntegral.v`; там же для одной ступени — `integral_scale`, `integral_monotone_step`, `step_integral_nonneg`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявление есть (StepIntegral.v:145), файл назван верно. Утверждение — о двух ступенях с равными концами; сноска называет её леммой об одной ступени (исправлено 15.11, шаг 3)."
+  },
+  {
+   "line": 207,
+   "theorem": "step_integral_nonneg",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "`integral_app` (аддитивность по конкатенации) в `StepIntegral.v`; там же для одной ступени — `integral_scale`, `integral_monotone_step`, `step_integral_nonneg`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma step_integral_nonneg : forall s, 0 <= step_val s -> 0 <= step_integral s (:163) — об одной ступени; страница называет имя без пересказа. Closed under the global context."
+  },
+  {
+   "line": 208,
+   "theorem": "lebesgue_process",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "В `ProcessLebesgue.v` (каталог `src/process/`) `lebesgue_process` определён как `riemann_process`, а `lebesgue_riemann_equiv` доказывает их `process_equiv` как тождество.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition lebesgue_process (f : Q -> Q) (a b : Q) : RealProcess := riemann_process f a b (:42). Каталог назван верно: файл с тем же именем есть ещё в src/stdlib/ (конечная перестановка сумм 2×2 и 3×3, 4 Qed), этих имён в нём нет."
+  },
+  {
+   "line": 208,
+   "theorem": null,
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "Это процессное отождествление, а не отдельная ценностно-слойная конструкция Лебега.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в src/process/ProcessLebesgue.v (17 Qed) все свойства «процесса Лебега» получены развёртыванием определения до процесса Римана; ступенчатых функций и L¹-нормы в файле нет. Файл src/stdlib/ProcessLebesgue.v — другой (4 Qed: перестановка конечных сумм 2×2 и 3×3); страница на него не ссылается.",
+   "assumptions": "все 19 объявлений файла: Closed under the global context"
+  },
+  {
+   "line": 208,
+   "theorem": "riemann_process",
+   "file": "src/process/ProcessSimple.v",
+   "claim": "В `ProcessLebesgue.v` (каталог `src/process/`) `lebesgue_process` определён как `riemann_process`, а `lebesgue_riemann_equiv` доказывает их `process_equiv` как тождество.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition riemann_process (f : Q -> Q) (a b : Q) : RealProcess := integral_process f a b (:60) — объявлено в process/ProcessSimple.v, в ProcessLebesgue.v подключено."
+  },
+  {
+   "line": 208,
+   "theorem": "lebesgue_riemann_equiv",
+   "file": "src/process/ProcessLebesgue.v",
+   "claim": "В `ProcessLebesgue.v` (каталог `src/process/`) `lebesgue_process` определён как `riemann_process`, а `lebesgue_riemann_equiv` доказывает их `process_equiv` как тождество.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma lebesgue_riemann_equiv (:132); доказательство: N = 0, разность членов равна нулю. Closed under the global context."
+  },
+  {
+   "line": 208,
+   "theorem": "process_equiv",
+   "file": "src/process/ProcessCore.v",
+   "claim": "В `ProcessLebesgue.v` (каталог `src/process/`) `lebesgue_process` определён как `riemann_process`, а `lebesgue_riemann_equiv` доказывает их `process_equiv` как тождество.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition process_equiv (R1 R2 : RealProcess) : Prop := forall eps, 0 < eps -> exists N, forall n, (N <= n)%nat -> Qabs (R1 n - R2 n) < eps (process/ProcessCore.v:170). Одноимённые определения есть ещё в src/ProcessGeneral.v и src/foundation/ProcessP4Synthesis.v; ProcessLebesgue.v подключает ProcessCore."
+  },
+  {
+   "line": 209,
+   "theorem": "step_fun_norm",
+   "file": "src/analysis/StepIntegral.v",
+   "claim": "Тип `L1On` (файл `ProcessL1Integrable.v`, каталог `src/process/`, 0 аксиом): последовательность ступенчатых функций на отрезке, у которой разность двух далёких стадий — как функция точки — записывается списком ступеней сколь угодно малой нормы (`l1_close`; норма — `step_fun_norm` из `StepIntegral.v`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition step_fun_norm (f : StepFun) : Q := step_fun_integral (step_fun_abs f) (StepIntegral.v:92) — сумма |v_i| * w_i; в l1_close стоит именно она (SI.step_fun_norm). Одноимённая копия — L1Space.v:51."
+  },
+  {
+   "line": 209,
+   "theorem": null,
+   "file": "src/analysis/L1Space.v",
+   "claim": "Прежний тип `L1Process` (`L1Space.v`, каталог `src/analysis/`, 16 доказанных утверждений, 0 `Admitted`, 0 аксиом) вычитает ступени по месту в списке;",
+   "page_price": "0 Admitted, 0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): было «25 доказанных утверждений». В файле 16 строк Qed (grep -c 'Qed\\.') и одно Defined (step_to_l1); число 25 стоит в шапке файла и устарело. «0 Admitted, 0 аксиом» верно.",
+   "assumptions": "все 27 объявлений файла: Closed under the global context"
+  },
+  {
+   "line": 210,
+   "theorem": "on_integral",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`on_integral` — интеграл интегрируемой функции как процесс интегралов её стадий; `l1_on_integral_is_Cauchy` — этот процесс есть процесс Коши; `l1_on_equiv_integral` — у эквивалентных функций он называет одну точку.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): было — имена типа L1Process (l1_integral_approx, step_to_l1, l1_constant_integral). Definition on_integral {a b : Q} (F : L1On a b) : RealProcess := fun n => SI.step_fun_integral (on_seq F n) (:534)."
+  },
+  {
+   "line": 210,
+   "theorem": "step_to_l1_on",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`step_to_l1_on` — вложение ступенчатой функции; `series_l1` — ряд ступеней с суммируемыми нормами есть интегрируемая функция; пример — `staircase`: бесконечно много ступеней, сгущающихся к нулю; она не эквивалентна ни одной из своих стадий (`staircase_beyond_every_stage`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition step_to_l1_on (a b : Q) (f : SI.StepFun) (Hf : inside a b f) : L1On a b (:586, Defined) — постоянная последовательность; on_integral (step_to_l1_on a b f Hf) n = SI.step_fun_integral f (step_to_l1_on_integral, :592); списки, записывающие одну функцию, вкладываются в один класс (step_to_l1_on_ext, :597)."
+  },
+  {
+   "line": 210,
+   "theorem": "series_l1",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`step_to_l1_on` — вложение ступенчатой функции; `series_l1` — ряд ступеней с суммируемыми нормами есть интегрируемая функция; пример — `staircase`: бесконечно много ступеней, сгущающихся к нулю; она не эквивалентна ни одной из своих стадий (`staircase_beyond_every_stage`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition series_l1 (a b : Q) (s : nat -> SI.Step) (Hin : forall k, a <= SI.step_left (s k) /\\ SI.step_right (s k) <= b) (Hsum : summable s) : L1On a b (:769, Defined): стадии — первые n ступеней (prefix, :723); summable s (:763): для всякого eps > 0 норма списка ступеней с номерами от n до n + d меньше eps при всех достаточно больших n и всех d."
+  },
+  {
+   "line": 211,
+   "theorem": "distinguishable",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "Для множеств различимость записана предикатом `distinguishable` (файл `ProcessMeasureIntervals.v`): множество совпадает с конечным набором отрезков — то есть его индикатор со ступенчатой функцией — с точностью до покрытия сколь угодно малой суммарной длины.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора): было «Процессный предикат различимости функции на стадии $n$ — `measurable_at`» — measurable_at (process/ProcessMeasureTheory.v:139) есть функция со значением 0 или 1 по одному биту, не предикат и не о функции. Definition distinguishable (A : RealProcess -> Prop) : Prop := forall eps, 0 < eps -> exists (l : list (Q * Q)) (lo hi : nat -> Q), (exists b, chain b l) /\\ (forall k, lo k <= hi k) /\\ (forall x, sym_diff A l x -> exists k, proc_in_closed x (lo k) (hi k)) /\\ (forall N, q_sum (fun k => hi k - lo k) N < eps) (:744); sym_diff A l x := (A x /\\ ~ in_union l x) \\/ (is_Cauchy x /\\ in_union l x /\\ ~ A x) (:736); chain (:387) — упорядоченная цепочка отрезков: следующий начинается не раньше конца предыдущего. Closed under the global context."
+  },
+  {
+   "line": 212,
+   "theorem": "l1_on_equiv",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`l1_on_equiv` в `ProcessL1Integrable.v`: $\\forall\\varepsilon>0\\ \\exists N\\ \\forall n\\ge N:\\ \\|f_n-g_n\\|_1<\\varepsilon$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): было «`l1_equiv` в `L1Space.v`» — норма разности по месту в списке. Definition l1_on_equiv {a b : Q} (F G : L1On a b) : Prop := forall eps, 0 < eps -> exists N, forall n, N <= n -> l1_close a b (on_seq F n) (on_seq G n) eps (:549). Формула сноски совпадает с определением, где норма разности — близость l1_close (:450)."
+  },
+  {
+   "line": 211,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Типа прообраз-измеримой функции в src нет — верно. Интегрируемость — тип L1On (src/process/ProcessL1Integrable.v:521, шаг 3). Предиката различимости для функций в src нет; страница так и говорит.",
+   "theorem": null,
+   "file": null,
+   "claim": "Для функций ту же роль несёт интегрируемость (§ «Интегрируемая функция как предел ступенчатых»); отдельный тип «прообраз-измеримой функции» в текущем корпусе не строится и подаётся как классическое сравнение."
+  },
+  {
+   "line": 90,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "lebesgue_step_agrees : forall a b f (Hf : inside a b f), a < b -> PL.lebesgue_process (step_eval f) a b ~~ on_integral (step_to_l1_on a b f Hf) (:608); то же для вложения step_to_l1 файла L1Space.v — lebesgue_step_agrees_l1space (:963). Closed under the global context.",
+   "theorem": "lebesgue_step_agrees",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Совпадение же Лебега с Риманом на ступенчатом уровне доказано точно: процесс Римана ступенчатой функции сходится к её ступенчатому интегралу (`step_riemann_equiv`), а значит, называет ту же точку, что и L¹-интеграл её вложения (`lebesgue_step_agrees`); для более широкого класса «хороших» функций оно остаётся ожидаемой следующей теоремой, а не опорным результатом этой главы."
+  },
+  {
+   "line": 207,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (добавлено): step_fun_integral_scale : forall c f, SI.step_fun_integral (SI.step_fun_scale c f) == c * SI.step_fun_integral f (:312) — для списка ступеней. Closed under the global context.",
+   "theorem": "step_fun_integral_scale",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Для списков ступеней (файл `ProcessL1Integrable.v`, каталог `src/process/`): однородность — `step_fun_integral_scale`;"
+  },
+  {
+   "line": 207,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (добавлено): step_integral_monotone : forall f g : SI.StepFun, (forall x, step_eval f x <= step_eval g x) -> SI.step_fun_integral f <= SI.step_fun_integral g (:350) — сравнение значений во всех рациональных точках; условий на разбиения нет. Доказательство: оба списка лежат в некотором отрезке (inside_exists, :185), на достаточно мелкой сетке суммы Римана близки к ступенчатым интегралам (step_riemann_equiv, :266) и сравнимы (riemann_process_monotone). Fixpoint step_eval (f : SI.StepFun) (x : Q) : Q (:99) — значение в точке x функции, записанной списком f: сумма step_val s * indicator (step_left s) (step_right s) x по ступеням; склейка списков — поточечная сумма (step_eval_app, :143). Closed under the global context.",
+   "theorem": "step_integral_monotone",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "монотонность — `step_integral_monotone`: если значение одной ступенчатой функции в каждой точке не больше значения другой, то и интеграл не больше, какими бы разбиениями они ни были записаны (доказано сравнением сумм на одной достаточно мелкой сетке)."
+  },
+  {
+   "line": 207,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "step_integral_depends_on_function : forall f g : SI.StepFun, (forall x, step_eval f x == step_eval g x) -> SI.step_fun_integral f == SI.step_fun_integral g (:362). Closed under the global context.",
+   "theorem": "step_integral_depends_on_function",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Следствие — интеграл зависит только от функции, а не от списка ступеней, которым она записана (`step_integral_depends_on_function`)."
+  },
+  {
+   "line": 209,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): Record L1On (a b : Q) (:521): on_seq : nat -> SI.StepFun; on_inside : forall n, inside a b (on_seq n); on_cauchy : forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> l1_close a b (on_seq m) (on_seq n) eps. Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context.",
+   "theorem": "L1On",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Тип `L1On` (файл `ProcessL1Integrable.v`, каталог `src/process/`, 0 аксиом): последовательность ступенчатых функций на отрезке, у которой разность двух далёких стадий — как функция точки — записывается списком ступеней сколь угодно малой нормы (`l1_close`; норма — `step_fun_norm` из `StepIntegral.v`)."
+  },
+  {
+   "line": 209,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context.",
+   "theorem": "l1_close",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Тип `L1On` (файл `ProcessL1Integrable.v`, каталог `src/process/`, 0 аксиом): последовательность ступенчатых функций на отрезке, у которой разность двух далёких стадий — как функция точки — записывается списком ступеней сколь угодно малой нормы (`l1_close`; норма — `step_fun_norm` из `StepIntegral.v`)."
+  },
+  {
+   "line": 209,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_close_same_function : forall a b f g eps, 0 < eps -> (forall x, step_eval f x == step_eval g x) -> l1_close a b f g eps (:507) — два списка, записывающие одну функцию точки, близки с любой оценкой; интеграл зависит только от функции — step_integral_depends_on_function (:362). Closed under the global context.",
+   "theorem": "l1_close_same_function",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Такая близость не зависит от того, какими разбиениями записаны стадии."
+  },
+  {
+   "line": 209,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record L1Process (analysis/L1Space.v:86): условие Коши записано через step_fun_norm (step_fun_diff (l1_seq m) (l1_seq n)); step_fun_diff (:54) вычитает значения ступеней с одинаковыми номерами, концы берёт у первого списка, длинный список обрезает.",
+   "theorem": "L1Process",
+   "file": "src/analysis/L1Space.v",
+   "claim": "Прежний тип `L1Process` (`L1Space.v`, каталог `src/analysis/`, 16 доказанных утверждений, 0 `Admitted`, 0 аксиом) вычитает ступени по месту в списке;"
+  },
+  {
+   "line": 209,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_integral_cauchy_aligned : forall f : L1.L1Process, l1_aligned f -> is_Cauchy (L1.l1_integral_approx f) (:1008), где l1_aligned f := forall m n, L1_aligned (L1.l1_seq f m) (L1.l1_seq f n) (:1004) — все стадии записаны на одном разбиении. На общем разбиении отношение — эквивалентность, сохраняющая интеграл: l1_equiv_al_equivalence (:1092), l1_equiv_al_integral (:1117). Closed under the global context.",
+   "theorem": "l1_integral_cauchy_aligned",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "сказанное в этом разделе верно для него, когда все стадии записаны на общем разбиении (`l1_integral_cauchy_aligned`), а без этого условия — нет (`l1_process_integral_unbounded`)."
+  },
+  {
+   "line": 209,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_process_integral_unbounded : exists f : L1.L1Process, (forall M : nat, inject_Z (Z.of_nat M) <= L1.l1_integral_approx f M) /\\ ~ is_Cauchy (L1.l1_integral_approx f) (:1162) — ступень высоты 1 на [0, n]; l1_equiv_not_transitive (:1184) — отношение l1_equiv без общего разбиения не транзитивно. Closed under the global context.",
+   "theorem": "l1_process_integral_unbounded",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "сказанное в этом разделе верно для него, когда все стадии записаны на общем разбиении (`l1_integral_cauchy_aligned`), а без этого условия — нет (`l1_process_integral_unbounded`)."
+  },
+  {
+   "line": 210,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context.",
+   "theorem": "l1_on_integral_is_Cauchy",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`on_integral` — интеграл интегрируемой функции как процесс интегралов её стадий; `l1_on_integral_is_Cauchy` — этот процесс есть процесс Коши; `l1_on_equiv_integral` — у эквивалентных функций он называет одну точку."
+  },
+  {
+   "line": 210,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_on_equiv_integral : forall a b (F G : L1On a b), a < b -> l1_on_equiv F G -> on_integral F ~~ on_integral G (:576). Closed under the global context.",
+   "theorem": "l1_on_equiv_integral",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`on_integral` — интеграл интегрируемой функции как процесс интегралов её стадий; `l1_on_integral_is_Cauchy` — этот процесс есть процесс Коши; `l1_on_equiv_integral` — у эквивалентных функций он называет одну точку."
+  },
+  {
+   "line": 210,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition staircase : L1On 0 1 := series_l1 0 1 stair_step stair_inside stair_summable (:842); stair_step k — ступень высоты (1/2)^k на [0, (1/2)^k] (:796); суммируемость — stair_summable (:830) через оценку хвоста stair_tail_bound (:814).",
+   "theorem": "staircase",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`step_to_l1_on` — вложение ступенчатой функции; `series_l1` — ряд ступеней с суммируемыми нормами есть интегрируемая функция; пример — `staircase`: бесконечно много ступеней, сгущающихся к нулю; она не эквивалентна ни одной из своих стадий (`staircase_beyond_every_stage`)."
+  },
+  {
+   "line": 210,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "staircase_beyond_every_stage : forall n, ~ l1_on_equiv staircase (step_to_l1_on 0 1 (prefix stair_step n) (inside_prefix 0 1 stair_step stair_inside n)) (:872). Не доказано: что лестница не эквивалентна никакой ступенчатой функции вообще. Closed under the global context.",
+   "theorem": "staircase_beyond_every_stage",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "`step_to_l1_on` — вложение ступенчатой функции; `series_l1` — ряд ступеней с суммируемыми нормами есть интегрируемая функция; пример — `staircase`: бесконечно много ступеней, сгущающихся к нулю; она не эквивалентна ни одной из своих стадий (`staircase_beyond_every_stage`)."
+  },
+  {
+   "line": 210,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions для всех 108 объявлений файла (83 доказательства и 25 определений) — Closed under the global context (tos-audit-build/_p06step3/Verify.out).",
+   "theorem": null,
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Все — в файле `ProcessL1Integrable.v`, 0 аксиом."
+  },
+  {
+   "line": 212,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_on_equiv_equivalence : forall a b, (forall F : L1On a b, l1_on_equiv F F) /\\ (forall F G, l1_on_equiv F G -> l1_on_equiv G F) /\\ (forall F G K, l1_on_equiv F G -> l1_on_equiv G K -> l1_on_equiv F K) (:554). Closed under the global context.",
+   "theorem": "l1_on_equiv_equivalence",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Доказано, что это отношение эквивалентности (`l1_on_equiv_equivalence`) и что оно сохраняет интеграл (`l1_on_equiv_integral`)."
+  },
+  {
+   "line": 212,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "l1_on_equiv_integral : forall a b (F G : L1On a b), a < b -> l1_on_equiv F G -> on_integral F ~~ on_integral G (:576). Closed under the global context.",
+   "theorem": "l1_on_equiv_integral",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Доказано, что это отношение эквивалентности (`l1_on_equiv_equivalence`) и что оно сохраняет интеграл (`l1_on_equiv_integral`)."
+  },
+  {
+   "line": 212,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "point_differs_but_equivalent : forall a b c (Hcc : c <= c) (Ha : a <= c) (Hb : c <= b), l1_on_equiv (step_to_l1_on a b [SI.mkStep 1 c c Hcc] (inside_point a b c Hcc Ha Hb)) (zero_on a b) /\\ step_eval [SI.mkStep 1 c c Hcc] c == 1 /\\ step_eval [] c == 0 (:699). Closed under the global context.",
+   "theorem": "point_differs_but_equivalent",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Пример: функция, равная единице в одной точке и нулю в остальных, эквивалентна нулевой (`point_differs_but_equivalent`), а постоянная единица — нет (`one_not_equiv_zero`)."
+  },
+  {
+   "line": 212,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "one_not_equiv_zero : ~ l1_on_equiv (step_to_l1_on 0 1 (const_step 1) (inside_const_step 1)) (zero_on 0 1) (:677), где const_step v — постоянная v на [0, 1] (:622). Closed under the global context.",
+   "theorem": "one_not_equiv_zero",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Пример: функция, равная единице в одной точке и нулю в остальных, эквивалентна нулевой (`point_differs_but_equivalent`), а постоянная единица — нет (`one_not_equiv_zero`)."
+  },
+  {
+   "line": 212,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: «различаются на множестве меры нуль ⇒ эквивалентны» в общем виде не доказано; доказан пример с одной точкой (point_differs_but_equivalent, src/process/ProcessL1Integrable.v:699).",
+   "theorem": null,
+   "file": null,
+   "claim": "Это L¹-смысл равенства почти всюду; полностью поточечное «различаются лишь на множестве меры нуль» — содержательное чтение поверх этого ядра."
+  }
+ ]
+}

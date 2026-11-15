@@ -1,0 +1,35 @@
+@@FILE Направления/Математика/Том Математика/06 Меры и интегрирование/06 Операторы на L^2 самосопряжённость, спектр и мост в квантовую динамику.md
+@@OLD
+Оператор числа $N=a^\dagger a$ считает кванты, а гамильтониан осциллятора имеет спектр,
+@@NEW
+Оператор числа $N=a^\dagger a$ считает кванты, а гамильтониан осциллятора $H=a^\dagger a+\tfrac12$ имеет спектр,
+@@END
+@@OLD
+Пространство состояний осциллятора — *пространство Фока* — удерживается процессно: как
+процесс конечных усечений (первые $K$ уровней), актуальных на каждой стадии. Иррациональный
+множитель $\sqrt n$, входящий в действие лестничных операторов, вводится *абстрактным
+параметром* $s$ с $s^2=n$; сама лестничная алгебра от него не зависит, и в наблюдаемых —
+уровнях, шаге, коммутаторе — $\sqrt{\;}$ сокращается, оставляя рациональные величины.
+@@NEW
+Пространство состояний осциллятора — *пространство Фока* — удерживается процессно: как
+процесс конечных усечений (первые $K$ уровней), актуальных на каждой стадии. На усечении
+коммутатор равен единице на всех уровнях ниже верхнего, а на верхнем уровне равен $-(K-1)$:
+дефект усечения сидит на его краю и с ростом $K$ уходит вверх. Иррациональный множитель
+$\sqrt n$, входящий в привычную запись лестничных операторов, в ToS не вводится: над ℚ
+числа $s$ с $s^2=2$ нет. Его место занимают два рациональных веса с произведением
+$\alpha_n\beta_n=n$ — понижение умножает на $\alpha_n$, повышение на $\beta_n$; простейший
+выбор — $\alpha_n=n$, $\beta_n=1$. Это запись в ненормированных состояниях,
+$\langle n|n\rangle=n!$: в скалярном произведении с весами $n!$ операторы $a$ и $a^\dagger$
+взаимно сопряжены. Лестничная алгебра от выбора весов не зависит, и в наблюдаемых —
+уровнях, шаге, коммутаторе — стоят одни рациональные величины.
+@@END
+@@OLD
+[^1]: Опорные файлы каталога `src/process/`: `ProcessSelfAdjointSpectral.v`, `ProcessCompactSpectral.v`, `ProcessHarmonicLadder.v`, `ProcessCanonicalCommutator.v`, `ProcessPositionMomentum.v`, `ProcessSchrodingerEvolution.v`, `ProcessEnergyConservation.v`; связки — в `ProcessL2HilbertSynthesis.v`. По шапкам файлов и синтез-файлу кластера — 0 аксиом; у ключевых теорем стоит `Print Assumptions`.
+@@NEW
+[^1]: Опорные файлы каталога `src/process/`: `ProcessSelfAdjointSpectral.v`, `ProcessCompactSpectral.v`, `ProcessHarmonicLadder.v`, `ProcessLadderRational.v`, `ProcessCanonicalCommutator.v`, `ProcessPositionMomentum.v`, `ProcessSchrodingerEvolution.v`, `ProcessEnergyConservation.v`; связки — в `ProcessL2HilbertSynthesis.v`. По шапкам файлов и синтез-файлу кластера — 0 аксиом; у ключевых теорем стоит `Print Assumptions`.
+@@END
+@@OLD
+[^9]: `commutator_canonical` ($[a,a^\dagger]=1$), `cre_ann_eq_num` ($N=a^\dagger a$), `energy_spacing` (шаг $1$), `ground_energy` ($\tfrac12$) и `energy_unbounded` (спектр неограничен) в `ProcessHarmonicLadder.v` (0 аксиом).
+@@NEW
+[^9]: Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\dagger]=1$), `number_operator_rational` ($N=a^\dagger a$), `ham_rational_eigen` ($(a^\dagger a+\tfrac12)|n\rangle=(n+\tfrac12)|n\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\dagger$ с весами $n!$); для любых весов с $\alpha_n\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`. Усечения: `truncated_commutator_below_top` и `truncated_commutator_top`. Свойства формулы уровней — `energy_spacing` (шаг $1$), `ground_energy` ($\tfrac12$) и `energy_unbounded` (спектр неограничен) в `ProcessHarmonicLadder.v` (0 аксиом). Прежние `commutator_canonical` и `cre_ann_eq_num` того же файла стоят под посылкой «рациональное $s$ с $s(n)^2=n$ при всех $n$», а такого $s$ нет (`ladder_premise_unsatisfiable`).
+@@END

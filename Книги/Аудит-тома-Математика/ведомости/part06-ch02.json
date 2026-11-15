@@ -1,0 +1,507 @@
+{
+ "batch": "audit-part-06",
+ "chapter": "06 Меры и интегрирование/02 Мера Лебега на процессном континууме.md",
+ "checked": "2026-11-14",
+ "auto": true,
+ "records": [
+  {
+   "line": 9,
+   "theorem": "measure_interval_eq",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "Глава 6.1 ввела меру как *правило приписывания*: $\\mu(A)=I(\\chi_A)$, интеграл индикатора. На интервалах это правило даёт точную меру $\\mu([c,d])=d-c$ без всякого предельного перехода;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "measure_interval (:72) — интеграл одной ступени высоты 1 на [c,d] при рациональных c <= d; measure_interval_eq (:76): measure_interval c d H == d - c. Правило mu(A)=I(chi_A) в Rocq определено только для A — интервала с рациональными концами. Closed under the global context."
+  },
+  {
+   "line": 11,
+   "theorem": null,
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "неотрицательность, конечная аддитивность и монотонность суть его следствия, а счётная аддитивность — сходимость процесса частичных сумм.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "measure_nonneg (:123), measure_additive (:140, два примыкающих интервала), measure_monotone (:130, вложенные интервалы) — все через measure_interval_eq; sigma_additive_converges (process/ProcessSigmaAdditive.v:98). Что конечная аддитивность доказана для двух примыкающих интервалов, страница говорит сама (стр. 78).",
+   "assumptions": "measure_nonneg, measure_additive, measure_monotone: Closed under the global context; sigma_additive_converges: Classical_Prop.classic"
+  },
+  {
+   "line": 13,
+   "theorem": null,
+   "file": null,
+   "claim": "Настоящая глава распространяет это правило на сам *процессный континуум* — на объединения интервалов и на множества, заданные процессами, — и доводит до меры нуль два эталонных множества: рациональные точки отрезка и канторово множество.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора) (формализацией; текст страницы не менялся). Шаг 1: множества точек-процессов и два эталонных множества определены, их мера нуль доказана (src/process/ProcessNullCovers.v: null_set, segment_rationals_null, cantor_null). Шаг 2: объединение интервалов — конечная цепочка отрезков (chain, in_union, total_len; src/process/ProcessMeasureIntervals.v :387, :383, :379); аддитивность по цепочке из n примыкающих интервалов — measure_finite_additive_chain (:243); для процесса меры — measure_process_additive_equiv (:356). Теоремы «объём объединения цепочки равен сумме длин» как отдельного утверждения нет: суммарная длина цепочки total_len входит в определения различимости; единственность объёма не доказана — горизонт."
+  },
+  {
+   "line": 22,
+   "theorem": "measure_scaling_nonneg",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "*Доказано без аксиом*: мера интервала и её инвариантность к сдвигу и масштабу;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора) (формализацией; текст страницы не менялся): было — measure_scale (analysis/LebesgueMeasure.v:172) есть measure_interval 0 k H == k, то есть мера отрезка [0, k]. measure_scaling_nonneg : forall k a b (Hk : 0 <= k) (Hab : a <= b), LM.measure_interval (k * a) (k * b) (scale_le k a b Hk Hab) == k * LM.measure_interval a b Hab (:219); то же с явной посылкой k * a <= k * b — measure_scaling (:205). Closed under the global context. Сдвиг: measure_translation (analysis/LebesgueMeasure.v:179) и measure_shift_general : forall a b t (Hab : a <= b) (Ht : a + t <= b + t), LM.measure_interval (a + t) (b + t) Ht == LM.measure_interval a b Hab (:227). Closed under the global context."
+  },
+  {
+   "line": 23,
+   "theorem": "segment_rationals_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "мера нуль рациональных точек отрезка и канторова множества — как сходимость покрывающего процесса к нулю.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было — две теоремы о сходимости (1/2)^n и (2/3)^n без покрытий. segment_rationals_null : forall c d : Q, null_set (segment_rational_point c d) (:300), где segment_rational_point c d x := exists q, c <= q /\\ q <= d /\\ x ~~ const_process q. Closed under the global context. Покрывающий процесс — rationals_covering_process, оценка half_pow ~~ const_process 0."
+  },
+  {
+   "line": 24,
+   "theorem": "sigma_additive_converges",
+   "file": "src/process/ProcessSigmaAdditive.v",
+   "claim": "*Доказано при явной цене* (L3): счётная аддитивность как сходимость частичных сумм (Глава 6.1).",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "sigma_additive_converges (:98): для mu : nat -> Q с mu k >= 0 и ограниченными частичными суммами процесс partial_measure mu есть is_Cauchy. Print Assumptions: Classical_Prop.classic (через monotone_bounded_Cauchy, process/ProcessArithmetic.v:311)."
+  },
+  {
+   "line": 25,
+   "theorem": null,
+   "file": null,
+   "claim": "*Остаётся программой либо классическим сравнением*: внешняя мера и измеримость по Каратеодори (в нашем порядке они не строятся и не нужны), мера на всём процессном континууме как завершённом объекте, и невозможность множества Витали (это не теорема системы, а диагноз отсутствия носителя).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теоремы о множестве Витали в src нет: имя встречается как конструктор VitaliSet перечня Construction с пометкой Illusory (nonstandard/IllusoryConstructions.v:72, :85) и в комментариях. Условие Каратеодори — только в комментариях. В process/ProcessMeasureTheory.v есть outer_approx (:172) и outer_sum (:186) — частичные суммы длин произвольной последовательности интервалов, без нижней грани и без отношения покрытия; глава их не называет."
+  },
+  {
+   "line": 34,
+   "theorem": "rationals_covering_process",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Название главы обозначает *направление* расширения: формально здесь доказаны мера интервала, нуль-покрытия и процессные правила накопления, а не завершённая мера на тотальности всех подмножеств континуума.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): нуль-покрытия теперь объявлены и доказаны. rationals_covering_process : covering_process rational_point (cov_lo enum_Q) (cov_hi enum_Q) half_pow (:289): отрезок вокруг k-й точки нумерации на стадии n имеет полуширину half_pow n * half_pow (S (S k)), то есть длину (1/2)^n·(1/2)^(k+1); сумма первых N длин равна (1/2)^n·(1 − (1/2)^N) (cov_sum). Closed under the global context. Для канторова множества — cantor_covering_process. Мера интервала и правило накопления — как прежде (measure_interval_eq, sigma_additive_converges)."
+  },
+  {
+   "line": 59,
+   "theorem": "measure_scaling_nonneg",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "Она зависит *только от ширины*, а не от положения: сдвиг интервала вдоль континуума меру не меняет, а растяжение меняет её пропорционально. Обе инвариантности доказаны как точные тождества над ℚ.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора) (формализацией; текст страницы не менялся, сноска 1 продолжена): было — о растяжении произвольного интервала утверждения не было. measure_scaling_nonneg : forall k a b (Hk : 0 <= k) (Hab : a <= b), LM.measure_interval (k * a) (k * b) (scale_le k a b Hk Hab) == k * LM.measure_interval a b Hab (:219); то же с явной посылкой k * a <= k * b — measure_scaling (:205). Closed under the global context. Сдвиг — measure_translation (analysis/LebesgueMeasure.v:179), measure_shift_general (:227)."
+  },
+  {
+   "line": 68,
+   "theorem": "measure_translation",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "У нас оно не постулируется, а *вычисляется* из того, что интеграл индикатора зависит лишь от ширины ступени.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "measure_translation (:179): measure_interval a (a + w) Ha == measure_interval b (b + w) Hb; доказательство — два применения measure_interval_eq и ring. Closed under the global context."
+  },
+  {
+   "line": 70,
+   "theorem": "measure_point_zero",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "Вырожденный интервал — одна точка — имеет меру нуль: прямоугольник нулевой ширины.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "measure_point_zero (:154): forall a (H : a <= a), measure_interval a a H == 0. Closed under the global context."
+  },
+  {
+   "line": 77,
+   "theorem": "measure_additive",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "Для *конечного* набора непересекающихся интервалов мера объединения есть сумма мер; доказан базовый случай двух примыкающих интервалов, $\\mu([a,b])+\\mu([b,c])=\\mu([a,c])$, и общий конечный случай есть естественное повторение этой схемы.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "measure_additive (:140): measure_interval a b Hab + measure_interval b c Hbc == measure_interval a c Hac. Страница сама называет доказанным только базовый случай. С 15.11 (шаг 2) цепочка из n примыкающих интервалов доказана — measure_finite_additive_chain (src/process/ProcessMeasureIntervals.v:243, названа в сноске 2); объединение как множество точек — in_union для цепочки отрезков (:383)."
+  },
+  {
+   "line": 82,
+   "theorem": "sigma_additive_converges",
+   "file": "src/process/ProcessSigmaAdditive.v",
+   "claim": "Для *счётного* набора работает результат Главы 6.1: частичные суммы мер $S_n=\\sum_{k<n}\\mu(A_k)$ при неотрицательности слагаемых монотонно растут, при конечной общей массе ограничены, а потому образуют сходящийся (Коши-) процесс.[^3]",
+   "page_price": "L3 (сноска 3)",
+   "verdict": "ok",
+   "note": "partial_measure_monotone (:63), sigma_additive_converges (:98). Предмет теоремы — произвольная последовательность mu : nat -> Q; множеств A_k и условия непересечения в утверждении нет, ограниченность частичных сумм стоит посылкой. Страница это оговаривает ниже (стр. 85–88: «в нашем прочтении», завершённое объединение не строится)."
+  },
+  {
+   "line": 87,
+   "theorem": null,
+   "file": "src/process/ProcessSigmaAdditive.v",
+   "claim": "Содержательная часть — сходимость накопления меры — доказана; завершённый объект ей не нужен.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказано is_Cauchy (partial_measure mu) при неотрицательности и ограниченности (sigma_additive_converges, :98); предела как объекта и равенства с мерой объединения в файле нет — страница так и говорит.",
+   "assumptions": "sigma_additive_converges: Classical_Prop.classic"
+  },
+  {
+   "line": 98,
+   "theorem": null,
+   "file": null,
+   "claim": "Причина проста: измеримость у нас уже определена иначе — как различимость, то есть приближаемость индикатора ступенчатыми функциями, а мера — как интеграл этого индикатора.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Мера как интеграл индикатора — measure_interval (analysis/LebesgueMeasure.v:72), для интервалов. С 15.11 (шаг 2) предикат различимости записан: distinguishable (src/process/ProcessMeasureIntervals.v:744) — множество совпадает с конечной цепочкой отрезков (то есть его индикатор со ступенчатой функцией) с точностью до покрытия сколь угодно малой суммарной длины; уровень объёма Жордана — finitely_distinguishable (:403). Мера произвольного различимого множества как число не определена — см. заметки, сомнительное место 1."
+  },
+  {
+   "line": 112,
+   "theorem": "null_set",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "В ToS это и есть определение: не «нижняя грань равна нулю» (завершённая операция), а *наличие покрывающего процесса, сходящегося к $0$* (в формализации — определение `null_set`, файл `ProcessNullCovers.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было — определением служил is_null_set, предикат от числового процесса без множества и покрытия. Definition null_set (A : RealProcess -> Prop) : Prop := exists lo hi mu, covering_process A lo hi mu /\\ mu ~~ const_process 0 (:126); covering_process (:120): на каждой стадии n отрезки [lo n k, hi n k] накрывают A (всякая точка множества лежит в одном из них — proc_in_closed, :74), lo n k <= hi n k, и всякая конечная сумма длин <= mu n. Closed under the global context. Мост к прежнему предикату — covering_measure_is_null (:173)."
+  },
+  {
+   "line": 118,
+   "theorem": "Q_countable",
+   "file": "src/Countability_Q.v",
+   "claim": "Рациональные точки отрезка — множество $ℚ\\cap[c,d]$ — счётны: их можно занумеровать (Глава 3.3, явный обход).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Q_countable (:610): forall q, exists n, enum_Q n == q; Q_bijection (:759). Занумеровано всё ℚ; отдельной нумерации точек отрезка нет, для покрытия она не нужна. Closed under the global context."
+  },
+  {
+   "line": 119,
+   "theorem": "segment_rationals_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Тогда $k$-ю точку накрывают интервалом длины, убывающей геометрически, и на стадии $n$ суммарная длина покрытия ведёт себя как $(1/2)^n$ — процесс, сходящийся к нулю. Значит $ℚ\\cap[c,d]$ имеет меру нуль.[^5]",
+   "page_price": "0 аксиом (сноска 5)",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было — только сходимость (1/2)^n. segment_rationals_null : forall c d : Q, null_set (segment_rational_point c d) (:300), где segment_rational_point c d x := exists q, c <= q /\\ q <= d /\\ x ~~ const_process q. Closed under the global context. rationals_covering_process : covering_process rational_point (cov_lo enum_Q) (cov_hi enum_Q) half_pow (:289): отрезок вокруг k-й точки нумерации на стадии n имеет полуширину half_pow n * half_pow (S (S k)), то есть длину (1/2)^n·(1/2)^(k+1); сумма первых N длин равна (1/2)^n·(1 − (1/2)^N) (cov_sum). Closed under the global context."
+  },
+  {
+   "line": 130,
+   "theorem": "cantor_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "на стадии $n$ остаётся $2^n$ отрезков длины $3^{-n}$, суммарной длины $(2/3)^n$. Эта суммарная длина — покрывающий процесс, сходящийся к нулю, поэтому канторово множество имеет меру нуль.[^6]",
+   "page_price": "0 аксиом (сноска 6)",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было — только сходимость (2/3)^n; стадий, отрезков и множества не было. cantor_null : null_set in_cantor (:536); покрывающий процесс — стадии построения (cantor_covering_process, :521), оценка — cantor_cover_measure. Closed under the global context."
+  },
+  {
+   "line": 133,
+   "theorem": "cantor_points_not_enumerable",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "В процессной линии доказана его *мера нуль* и несчётность в смысле Главы 4.4: всякий код из цифр $0$ и $2$ называет точку множества (`cantor_point_in_cantor`), разные коды называют разные точки (`cantor_points_distinct`), и никакая последовательность кодов не называет их все — диагональный код даёт точку множества, отличную от каждой перечисленной (`cantor_points_not_enumerable`, файл `ProcessNullCovers.v`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было «доказана лишь его мера нуль» при том, что и множества в формализации не было. cantor_points_not_enumerable : ~ exists f : nat -> (nat -> bool), forall dg : nat -> bool, exists n, cantor_point (f n) ~~ cantor_point dg (:687) — равенство точек, а не кодов; по форме то же, что binary_processes_not_enumerable Главы 4.4. Closed under the global context."
+  },
+  {
+   "line": 138,
+   "theorem": "cantor_points_not_enumerable",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Мощность континуума остаётся классическим чтением: последовательностей произвольных процессов, не заданных кодами, теорема не касается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора): было «отдельной Rocq-теоремы о мощности именно канторова множества здесь не используется» — теорема появилась. Оговорка верна: в cantor_points_not_enumerable (:687) перечисление есть f : nat -> (nat -> bool), последовательность кодов; о последовательностях произвольных процессов утверждения нет. Closed under the global context."
+  },
+  {
+   "line": 174,
+   "theorem": null,
+   "file": null,
+   "claim": "Всё содержательное — мера интервалов, инвариантность, меры нуль, сходимость накопления, теоремы сходимости (Глава 6.4) — работает без Аксиомы Выбора.",
+   "page_price": "без Аксиомы Выбора",
+   "verdict": "ok",
+   "note": "Цена: из восьми имён главы семь — Closed under the global context, sigma_additive_converges — Classical_Prop.classic; ToS_Axioms.L4_witness (переход от ex к sig) не используется ни одним. Теоремы Главы 6.4 по выводу tom-status: Closed либо Classical_Prop.classic. О словах «меры нуль» — записи стр. 119 и 130.",
+   "assumptions": "measure_translation, measure_scale, measure_point_zero, measure_additive, q_measure_additive, rationals_cover_to_zero, cantor_measure_zero: Closed under the global context; sigma_additive_converges: Classical_Prop.classic"
+  },
+  {
+   "line": 189,
+   "theorem": null,
+   "file": null,
+   "claim": "Это остаётся *программой* в том же смысле, что и завершённое счётное объединение: конечные приближения (мера на $[-N,N]$) доказуемы, а завершённый предельный объект не актуализируется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявлений о мере на [-N,N] в названных файлах нет; страница называет это программой. Ближайшее объявление — measure_process a b c d (process/ProcessMeasureTheory.v:39): процесс римановых сумм индикатора [c,d] на окне [a,b], с оценками 0 <= ... <= b - a (measure_process_nonneg, measure_process_bounded)."
+  },
+  {
+   "line": 200,
+   "theorem": null,
+   "file": null,
+   "claim": "Оговорка об уровне прежняя: «система меры на континууме» — содержательная интерпретация конструкции, а не объект, буквально объявленный в коде.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Записи или структуры «система меры» в названных файлах нет; оговорка верна. Под неё подпадают строки разбора E/R/R (стр. 44–55, 199–222). Правило «счётное => нуль» с шага 1 (15.11) есть теорема: countable_null (src/process/ProcessNullCovers.v:260) — для множества, исчерпанного последовательностью рациональных точек."
+  },
+  {
+   "line": 241,
+   "theorem": null,
+   "file": null,
+   "claim": "Положительная же часть — ровно та, что доказана: мера интервала и её инвариантность, меры нуль счётного и канторова множеств как сходящиеся процессы, накопление меры для объединений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора) (формализацией; текст страницы не менялся). Шаг 1: меры нуль счётного и канторова множеств доказаны с покрытиями (src/process/ProcessNullCovers.v: countable_null, segment_rationals_null, cantor_null). Шаг 2: инвариантность к растяжению — measure_scaling_nonneg (src/process/ProcessMeasureIntervals.v:219), к сдвигу — measure_translation, measure_shift_general (:227); накопление меры — measure_finite_additive_chain (:243) для цепочки и sigma_additive_converges (process/ProcessSigmaAdditive.v:98, на classic) для счётного набора."
+  },
+  {
+   "line": 250,
+   "theorem": "measure_translation",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "`measure_translation`: $\\mu([a,a+w])=\\mu([b,b+w])$ (мера зависит лишь от ширины $w$);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma measure_translation (:179): forall a b w (Ha : a <= a + w) (Hb : b <= b + w), measure_interval a (a + w) Ha == measure_interval b (b + w) Hb. Closed under the global context."
+  },
+  {
+   "line": 250,
+   "theorem": "measure_scale",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "`measure_scale`: $\\mu([0,k])=k$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma measure_scale (:172): forall k (H : 0 <= k), measure_interval 0 k H == k. Формула сноски совпадает с утверждением. Растяжение произвольного интервала — measure_scaling_nonneg (src/process/ProcessMeasureIntervals.v:219), названо в продолжении сноски (15.11). Closed under the global context."
+  },
+  {
+   "line": 250,
+   "theorem": "measure_point_zero",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "Плюс `measure_point_zero` (вырожденный интервал имеет меру нуль).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma measure_point_zero (:154): forall a (H : a <= a), measure_interval a a H == 0. Closed under the global context."
+  },
+  {
+   "line": 250,
+   "theorem": null,
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "Все — в `LebesgueMeasure.v`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Три леммы объявлены в src/analysis/LebesgueMeasure.v; строк Axiom, Parameter, Admitted в файле нет; файл подключает только стандартную библиотеку. В файле 22 Qed (шапка называет 20).",
+   "assumptions": "measure_translation, measure_scale, measure_point_zero: Closed under the global context"
+  },
+  {
+   "line": 251,
+   "theorem": "measure_additive",
+   "file": "src/analysis/LebesgueMeasure.v",
+   "claim": "`measure_additive` в `LebesgueMeasure.v` (случай двух примыкающих интервалов);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma measure_additive (:140). Одноимённое объявление есть в src/Measure.v:235; глава называет файл. Closed under the global context."
+  },
+  {
+   "line": 251,
+   "theorem": "measure_process_additive_equiv",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "Процессный аналог — `measure_process_additive_equiv`: сумма процессов мер $[c,d]$ и $[d,e]$ называет ту же точку, что процесс меры $[c,e]$; на каждой стадии они расходятся не более чем на один шаг сетки — общая точка $d$ сосчитана дважды (`measure_process_additive_upto_point`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора): было «процессный аналог — `q_measure_additive`» — это тождество о числе d − c (доказательство ring), а не о процессе меры. measure_process_additive_equiv : forall a b c d e, a < b -> c <= d -> d <= e -> (fun n => PMT.measure_process a b c d n + PMT.measure_process a b d e n) ~~ PMT.measure_process a b c e (:356). Closed under the global context."
+  },
+  {
+   "line": 252,
+   "theorem": "sigma_additive_converges",
+   "file": "src/process/ProcessSigmaAdditive.v",
+   "claim": "`sigma_additive_converges` (`ProcessSigmaAdditive.v`), цена — L3.",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Theorem sigma_additive_converges (:98): forall (mu : nat -> Q) (B : Q), (forall k, 0 <= mu k) -> (forall n, partial_measure mu n <= B) -> is_Cauchy (partial_measure mu). Print Assumptions: Classical_Prop.classic."
+  },
+  {
+   "line": 254,
+   "theorem": "rationals_covering_process",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): вокруг $k$-й точки нумерации на стадии $n$ взят отрезок длины $(1/2)^n\\cdot(1/2)^{k+1}$; всякая рациональная точка накрыта, а всякая конечная сумма длин не превосходит $(1/2)^n$ — `rationals_covering_process`; эта оценка сходится к нулю — `rationals_cover_to_zero` (`ProcessRationalsNull.v`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было — слово «покрывающий» теоремой не обеспечивалось. rationals_covering_process : covering_process rational_point (cov_lo enum_Q) (cov_hi enum_Q) half_pow (:289): отрезок вокруг k-й точки нумерации на стадии n имеет полуширину half_pow n * half_pow (S (S k)), то есть длину (1/2)^n·(1/2)^(k+1); сумма первых N длин равна (1/2)^n·(1 − (1/2)^N) (cov_sum). Closed under the global context."
+  },
+  {
+   "line": 255,
+   "theorem": "cantor_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): стадия $n$ состоит ровно из $2^n$ отрезков длины $3^{-n}$ (`cantor_stage_count`), их суммарная длина равна $(2/3)^n$ (`cantor_stage_total`), стадии вложены (`stage_nested`); множество — точки, лежащие во всех стадиях (`in_cantor`); покрывающий процесс — `cantor_covering_process`, мера нуль — `cantor_null`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора) (формализацией): было — слова «процесс покрытия» теоремой не обеспечивались. cantor_null : null_set in_cantor (:536); покрывающий процесс — стадии построения (cantor_covering_process, :521), оценка — cantor_cover_measure. Closed under the global context."
+  },
+  {
+   "line": 23,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "cantor_null : null_set in_cantor (:536); покрывающий процесс — стадии построения (cantor_covering_process, :521), оценка — cantor_cover_measure. Closed under the global context.",
+   "theorem": "cantor_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "мера нуль рациональных точек отрезка и канторова множества — как сходимость покрывающего процесса к нулю."
+  },
+  {
+   "line": 130,
+   "page_price": "0 аксиом (сноска 6)",
+   "verdict": "ok",
+   "note": "cantor_stage_count : forall n, length (cantor_stage n) = Nat.pow 2 n (:429); cantor_stage n — список левых концов отрезков длины third_pow n = 3^-n (:414). Closed under the global context.",
+   "theorem": "cantor_stage_count",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "на стадии $n$ остаётся $2^n$ отрезков длины $3^{-n}$, суммарной длины $(2/3)^n$. Эта суммарная длина — покрывающий процесс, сходящийся к нулю, поэтому канторово множество имеет меру нуль.[^6]"
+  },
+  {
+   "line": 130,
+   "page_price": "0 аксиом (сноска 6)",
+   "verdict": "ok",
+   "note": "cantor_stage_total : forall n, inject_Z (Z.of_nat (length (cantor_stage n))) * third_pow n == cantor_cover_measure n (:438). Closed under the global context.",
+   "theorem": "cantor_stage_total",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "на стадии $n$ остаётся $2^n$ отрезков длины $3^{-n}$, суммарной длины $(2/3)^n$. Эта суммарная длина — покрывающий процесс, сходящийся к нулю, поэтому канторово множество имеет меру нуль.[^6]"
+  },
+  {
+   "line": 133,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_null : null_set in_cantor (:536); покрывающий процесс — стадии построения (cantor_covering_process, :521), оценка — cantor_cover_measure. Closed under the global context.",
+   "theorem": "cantor_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "В процессной линии доказана его *мера нуль* и несчётность в смысле Главы 4.4: всякий код из цифр $0$ и $2$ называет точку множества (`cantor_point_in_cantor`), разные коды называют разные точки (`cantor_points_distinct`), и никакая последовательность кодов не называет их все — диагональный код даёт точку множества, отличную от каждой перечисленной (`cantor_points_not_enumerable`, файл `ProcessNullCovers.v`)."
+  },
+  {
+   "line": 133,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_point_in_cantor : forall dg, in_cantor (cantor_point dg) (:610); cantor_point dg — процесс приближений по коду dg : nat -> bool (true — цифра 2, false — цифра 0); процесс Коши — cantor_point_Cauchy (:614). Closed under the global context.",
+   "theorem": "cantor_point_in_cantor",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "В процессной линии доказана его *мера нуль* и несчётность в смысле Главы 4.4: всякий код из цифр $0$ и $2$ называет точку множества (`cantor_point_in_cantor`), разные коды называют разные точки (`cantor_points_distinct`), и никакая последовательность кодов не называет их все — диагональный код даёт точку множества, отличную от каждой перечисленной (`cantor_points_not_enumerable`, файл `ProcessNullCovers.v`)."
+  },
+  {
+   "line": 133,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cantor_points_distinct : forall dg dg' i, dg i <> dg' i -> ~ (cantor_point dg ~~ cantor_point dg') (:663). Closed under the global context.",
+   "theorem": "cantor_points_distinct",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "В процессной линии доказана его *мера нуль* и несчётность в смысле Главы 4.4: всякий код из цифр $0$ и $2$ называет точку множества (`cantor_point_in_cantor`), разные коды называют разные точки (`cantor_points_distinct`), и никакая последовательность кодов не называет их все — диагональный код даёт точку множества, отличную от каждой перечисленной (`cantor_points_not_enumerable`, файл `ProcessNullCovers.v`)."
+  },
+  {
+   "line": 144,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 1, слово автора): было «классически несчётно по первому вопросу и доказуемо нулево по второму». cantor_not_enumerable_and_null (:698): null_set in_cantor; всякий код называет точку множества, и процесс её Коши; никакая последовательность кодов не называет всех точек. Closed under the global context.",
+   "theorem": "cantor_not_enumerable_and_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Канторово множество несчётно по первому вопросу и нулево по второму — и то и другое доказано (`cantor_not_enumerable_and_null`)."
+  },
+  {
+   "line": 254,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "rationals_cover_to_zero : half_pow ~~ const_process 0 (:90) — сходимость оценки; покрытие, которое она оценивает, дано теоремой rationals_covering_process (src/process/ProcessNullCovers.v). Closed under the global context.",
+   "theorem": "rationals_cover_to_zero",
+   "file": "src/process/ProcessRationalsNull.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): вокруг $k$-й точки нумерации на стадии $n$ взят отрезок длины $(1/2)^n\\cdot(1/2)^{k+1}$; всякая рациональная точка накрыта, а всякая конечная сумма длин не превосходит $(1/2)^n$ — `rationals_covering_process`; эта оценка сходится к нулю — `rationals_cover_to_zero` (`ProcessRationalsNull.v`)."
+  },
+  {
+   "line": 254,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "rationals_null : null_set rational_point (:295), где rational_point x := exists q, x ~~ const_process q. Closed under the global context.",
+   "theorem": "rationals_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Отсюда `rationals_null` и `segment_rationals_null`; общее правило для множества, исчерпанного последовательностью рациональных точек, — `countable_null`."
+  },
+  {
+   "line": 254,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "segment_rationals_null : forall c d : Q, null_set (segment_rational_point c d) (:300), где segment_rational_point c d x := exists q, c <= q /\\ q <= d /\\ x ~~ const_process q. Closed under the global context.",
+   "theorem": "segment_rationals_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Отсюда `rationals_null` и `segment_rationals_null`; общее правило для множества, исчерпанного последовательностью рациональных точек, — `countable_null`."
+  },
+  {
+   "line": 254,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "countable_null : forall (A : RealProcess -> Prop) (e : nat -> Q), (forall x, A x -> exists k, x ~~ const_process (e k)) -> null_set A (:260) — для множества, исчерпанного последовательностью рациональных точек; для семейства произвольных точек-процессов правило не доказано (нужны модули сходимости). Closed under the global context.",
+   "theorem": "countable_null",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Отсюда `rationals_null` и `segment_rationals_null`; общее правило для множества, исчерпанного последовательностью рациональных точек, — `countable_null`."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cantor_stage_count : forall n, length (cantor_stage n) = Nat.pow 2 n (:429); cantor_stage n — список левых концов отрезков длины third_pow n = 3^-n (:414). Closed under the global context.",
+   "theorem": "cantor_stage_count",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): стадия $n$ состоит ровно из $2^n$ отрезков длины $3^{-n}$ (`cantor_stage_count`), их суммарная длина равна $(2/3)^n$ (`cantor_stage_total`), стадии вложены (`stage_nested`); множество — точки, лежащие во всех стадиях (`in_cantor`); покрывающий процесс — `cantor_covering_process`, мера нуль — `cantor_null`."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cantor_stage_total : forall n, inject_Z (Z.of_nat (length (cantor_stage n))) * third_pow n == cantor_cover_measure n (:438). Closed under the global context.",
+   "theorem": "cantor_stage_total",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): стадия $n$ состоит ровно из $2^n$ отрезков длины $3^{-n}$ (`cantor_stage_count`), их суммарная длина равна $(2/3)^n$ (`cantor_stage_total`), стадии вложены (`stage_nested`); множество — точки, лежащие во всех стадиях (`in_cantor`); покрывающий процесс — `cantor_covering_process`, мера нуль — `cantor_null`."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "stage_nested : forall n x, in_stage (S n) x -> in_stage n x (:458). Closed under the global context.",
+   "theorem": "stage_nested",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): стадия $n$ состоит ровно из $2^n$ отрезков длины $3^{-n}$ (`cantor_stage_count`), их суммарная длина равна $(2/3)^n$ (`cantor_stage_total`), стадии вложены (`stage_nested`); множество — точки, лежащие во всех стадиях (`in_cantor`); покрывающий процесс — `cantor_covering_process`, мера нуль — `cantor_null`."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition in_cantor (x : RealProcess) : Prop := forall n, in_stage n x (:455); in_stage n x := exists a, In a (cantor_stage n) /\\ proc_in_closed x a (a + third_pow n) (:452). Множество населено и не тривиально: zero_in_cantor, half_not_in_cantor, cantor_point_in_cantor. Closed under the global context.",
+   "theorem": "in_cantor",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): стадия $n$ состоит ровно из $2^n$ отрезков длины $3^{-n}$ (`cantor_stage_count`), их суммарная длина равна $(2/3)^n$ (`cantor_stage_total`), стадии вложены (`stage_nested`); множество — точки, лежащие во всех стадиях (`in_cantor`); покрывающий процесс — `cantor_covering_process`, мера нуль — `cantor_null`."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cantor_covering_process : covering_process in_cantor (fun n => list_lo (cantor_stage n)) (fun n => list_hi (cantor_stage n) (third_pow n)) cantor_cover_measure (:521). Closed under the global context.",
+   "theorem": "cantor_covering_process",
+   "file": "src/process/ProcessNullCovers.v",
+   "claim": "Доказано, 0 аксиом (файл `ProcessNullCovers.v`): стадия $n$ состоит ровно из $2^n$ отрезков длины $3^{-n}$ (`cantor_stage_count`), их суммарная длина равна $(2/3)^n$ (`cantor_stage_total`), стадии вложены (`stage_nested`); множество — точки, лежащие во всех стадиях (`in_cantor`); покрывающий процесс — `cantor_covering_process`, мера нуль — `cantor_null`."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cantor_measure_zero : cantor_cover_measure ~~ const_process 0 (:88) — сходимость оценки (2/3)^n; что она есть суммарная длина отрезков стадии — cantor_stage_total (src/process/ProcessNullCovers.v). Closed under the global context.",
+   "theorem": "cantor_measure_zero",
+   "file": "src/process/ProcessCantorMeasure.v",
+   "claim": "Оценка $(2/3)^n$ сходится к нулю — `cantor_measure_zero` (`ProcessCantorMeasure.v`)."
+  },
+  {
+   "line": 250,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора) (добавлено): measure_scaling_nonneg : forall k a b (Hk : 0 <= k) (Hab : a <= b), LM.measure_interval (k * a) (k * b) (scale_le k a b Hk Hab) == k * LM.measure_interval a b Hab (:219); то же с явной посылкой k * a <= k * b — measure_scaling (:205). Closed under the global context.",
+   "theorem": "measure_scaling_nonneg",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "Растяжение и сдвиг произвольного интервала — `measure_scaling_nonneg`: $\\mu([ka,kb])=k\\,\\mu([a,b])$ при $k\\ge 0$, и `measure_shift_general`: $\\mu([a+t,b+t])=\\mu([a,b])$ (файл `ProcessMeasureIntervals.v`, 0 аксиом)."
+  },
+  {
+   "line": 250,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "measure_shift_general : forall a b t (Hab : a <= b) (Ht : a + t <= b + t), LM.measure_interval (a + t) (b + t) Ht == LM.measure_interval a b Hab (:227). Closed under the global context.",
+   "theorem": "measure_shift_general",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "Растяжение и сдвиг произвольного интервала — `measure_scaling_nonneg`: $\\mu([ka,kb])=k\\,\\mu([a,b])$ при $k\\ge 0$, и `measure_shift_general`: $\\mu([a+t,b+t])=\\mu([a,b])$ (файл `ProcessMeasureIntervals.v`, 0 аксиом)."
+  },
+  {
+   "line": 251,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "measure_process_additive_upto_point : forall a b c d e n, a < b -> c <= d -> d <= e -> PMT.measure_process a b c d n + PMT.measure_process a b d e n == PMT.measure_process a b c e n + PMT.measure_process a b d d n (:290); добавок — процесс меры точки d: он неотрицателен (measure_process_nonneg, process/ProcessMeasureTheory.v:43) и не больше шага сетки (measure_process_point_le_step, :346). Closed under the global context.",
+   "theorem": "measure_process_additive_upto_point",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "Процессный аналог — `measure_process_additive_equiv`: сумма процессов мер $[c,d]$ и $[d,e]$ называет ту же точку, что процесс меры $[c,e]$; на каждой стадии они расходятся не более чем на один шаг сетки — общая точка $d$ сосчитана дважды (`measure_process_additive_upto_point`)."
+  },
+  {
+   "line": 251,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 2, слово автора) (добавлено): measure_finite_additive_chain : forall (p : nat -> Q) (Hm : forall k, p k <= p (S k)) n (H0n : p 0 <= p n), q_sum (fun k => LM.measure_interval (p k) (p (S k)) (Hm k)) n == LM.measure_interval (p 0) (p n) H0n (:243) — цепочка из n примыкающих интервалов с узлами p 0 <= p 1 <= … <= p n. Closed under the global context. Объявлена в src/process/ProcessMeasureIntervals.v (в сноске файл назван в конце: «Обе теоремы — в файле `ProcessMeasureIntervals.v`» — все три имени сноски из этого файла).",
+   "theorem": "measure_finite_additive_chain",
+   "file": "src/process/ProcessMeasureIntervals.v",
+   "claim": "цепочка из $n$ примыкающих интервалов — `measure_finite_additive_chain`."
+  }
+ ]
+}

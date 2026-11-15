@@ -1,0 +1,684 @@
+{
+ "batch": "audit-part-06",
+ "chapter": "06 Меры и интегрирование/05 L^1 и L^2 пространства как процессы, полнота как конструируемость.md",
+ "checked": "2026-11-14",
+ "auto": true,
+ "records": [
+  {
+   "line": 11,
+   "theorem": "L1On",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "$L^1$ — это пополнение ступенчатых функций по интегральной норме $\\|f\\|_1=\\int|f|$; оно уже было построено в Главе 6.3 как процесс.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 2 переписана: было — тип L1Process с разностью по месту в списке, для которого условие Коши интеграл не удерживает. Record L1On (a b : Q) (:521): on_seq : nat -> SI.StepFun; on_inside : forall n, inside a b (on_seq n); on_cauchy : forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> l1_close a b (on_seq m) (on_seq n) eps. Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context. l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context."
+  },
+  {
+   "line": 29,
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "*Доказано без аксиом* (на конечном носителе из $N$ точек, на каждой стадии): неравенство Коши–Шварца (через тождество суммы квадратов), бескорневая квадратная оценка для $L^2$-дистанции, наилучшее приближение и общее неравенство Бесселя, равенство Парсеваля как *конечный критерий полноты разложения*, и Рисс–Фишер *по построению* — предел Коши-последовательности строится покоординатно.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (формализацией; текст страницы не менялся): было — общее неравенство Бесселя и критерий Парсеваля доказаны под посылкой ортонормированности при всех номерах (невыполнима), наилучшее приближение в опорных файлах не записано. bessel_b : forall K, K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (:243). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context. best_approx_b : forall (a : nat -> Q) (K : nat), K <= K0 -> ‖f − Σ_{k<K}⟨e_k,f⟩e_k‖² <= ‖f − Σ_{k<K} a_k e_k‖² (:256) — для любых коэффициентов a. Closed under the global context. parseval_iff_complete_b : forall K, K <= K0 -> (Σ_{k<K}⟨e_k,f⟩² == ‖f‖²) <-> (forall m, m < N -> Σ_{k<K}⟨e_k,f⟩·e_k(m) == f m) (:296). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context. Остальное из перечня — как сказано."
+  },
+  {
+   "line": 33,
+   "theorem": null,
+   "file": null,
+   "claim": "*Остаётся честной границей* (P4): завершённое бесконечномерное $\\ell^2/L^2$ — где норма есть сумма по *всем* координатам ($N\\to\\infty$), — и завершённый ортобазис; это роль-пределы, не актуализируемые объекты.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: во всех семи названных файлах суммы конечны (q_sum до N и до K), объектов с суммой по всем координатам и завершённого базиса нет."
+  },
+  {
+   "line": 64,
+   "theorem": "L1On",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "*интегрируемая функция есть предел ступенчатых функций по интегральной норме* $\\|f\\|_1=\\int|f|$, то есть Коши-последовательность ступенчатых.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 2 переписана: Record L1On (a b : Q) (:521): on_seq : nat -> SI.StepFun; on_inside : forall n, inside a b (on_seq n); on_cauchy : forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> l1_close a b (on_seq m) (on_seq n) eps. Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context. l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context."
+  },
+  {
+   "line": 65,
+   "theorem": "l1_on_equiv_equivalence",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Само пространство $L^1$ — это тип таких Коши-процессов, с точностью до отношения «совпадать в среднем» ($\\|f-g\\|_1\\to0$, процессное чтение «почти всюду»).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (формализацией; текст страницы не менялся), сноска 2 переписана: было — отношением эквивалентности l1_equiv не являлось. Definition l1_on_equiv {a b : Q} (F G : L1On a b) : Prop := forall eps, 0 < eps -> exists N, forall n, N <= n -> l1_close a b (on_seq F n) (on_seq G n) eps (:549). l1_on_equiv_equivalence : forall a b, (forall F : L1On a b, l1_on_equiv F F) /\\ (forall F G, l1_on_equiv F G -> l1_on_equiv G F) /\\ (forall F G K, l1_on_equiv F G -> l1_on_equiv G K -> l1_on_equiv F K) (:554). Closed under the global context. l1_on_equiv_integral : forall a b (F G : L1On a b), a < b -> l1_on_equiv F G -> on_integral F ~~ on_integral G (:576). Closed under the global context."
+  },
+  {
+   "line": 67,
+   "theorem": null,
+   "file": "src/analysis/L1Space.v",
+   "claim": "Полнота $L^1$ при этом — не отдельная теорема, а *свойство построения*: $L^1$ и *есть* пространство Коши-процессов ступенчатых функций, его предельные элементы конструируемы по определению.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: теоремы о полноте (о пределе последовательности интегрируемых функций) нет, и страница её не заявляет. Тип — L1On (src/process/ProcessL1Integrable.v:521); представители сверх ступенчатых функций строятся напрямую — series_l1 (:769), staircase (:842)."
+  },
+  {
+   "line": 71,
+   "theorem": null,
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "На конечной выборке из $N$ точек оба измеряют ту же функцию, и доказанное неравенство Коши–Шварца (§ «Скалярное произведение и неравенство Коши–Шварца») немедленно их связывает: взяв вторым аргументом постоянную единицу, получаем",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Неравенство (Σ|f_i|)² ≤ (Σ f_i²)·N — l1_sq_le_N_l2_sq (src/process/ProcessL2Orthonormal.v:448, шаг 5; названа в сноске 3): следствие q_sum_cauchy_schwarz при втором аргументе 1. Closed under the global context."
+  },
+  {
+   "line": 90,
+   "theorem": null,
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "Скалярное произведение двух функций (на конечном носителе или на выборке из $N$ точек) есть $\\langle f,g\\rangle=\\sum_{i<N} f_i g_i$, а норма — $\\|f\\|^2=\\langle f,f\\rangle$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Два определения: seq_inner a b N := q_sum (fun i => a i * b i) N для a, b : nat -> Q (ProcessCompactSpectral.v:51) и l2_inner f g pts w N := w * q_sum (fun i => f (pts i) * g (pts i)) N для f, g : Q -> Q (ProcessL2CauchySchwarz.v:97). Нормы с корнем нет, везде квадрат нормы — как и на странице."
+  },
+  {
+   "line": 95,
+   "theorem": "l2_cauchy_schwarz",
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "Краеугольное неравенство геометрии $L^2$ — *Коши–Шварца*:",
+   "page_price": "0 аксиом (сноска 4)",
+   "verdict": "ok",
+   "note": "Theorem l2_cauchy_schwarz (:126): для f g : Q -> Q, точек pts, веса w и всякого N при посылке 0 <= w: ⟨f,g⟩² ≤ ⟨f,f⟩·⟨g,g⟩ — в форме квадратов, для конечной суммы длины N. Closed under the global context."
+  },
+  {
+   "line": 101,
+   "theorem": "cs_gap_is_sum_of_squares",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Оно говорит, что «косинус угла не больше единицы», и доказывается *точно, без аксиом* — через тождество Лагранжа, выражающее зазор как сумму квадратов:",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (формализацией; текст страницы не менялся), сноска 4 переписана: было — тождества страницы в формализации не было (sos_identity — разложение одной суммы квадратов). cs_gap_is_sum_of_squares (:412): ‖a‖²‖b‖² − ⟨a,b⟩² == (1/2)·Σ_j Σ_i (a_i b_j − a_j b_i)² — формула страницы. Closed under the global context. cauchy_schwarz_via_lagrange (:422): ⟨a,b⟩² <= ‖a‖²‖b‖² — выведено из cs_gap_is_sum_of_squares и неотрицательности суммы квадратов. Closed under the global context. lagrange_identity : forall (a b : nat -> Q) (N : nat), q_sum (fun j => q_sum (fun i => (a i * b j - a j * b i) * (a i * b j - a j * b i)) N) N == 2 * (q_sum (fun i => a i * a i) N * q_sum (fun i => b i * b i) N - q_sum (fun i => a i * b i) N * q_sum (fun i => a i * b i) N) (:397). Closed under the global context."
+  },
+  {
+   "line": 114,
+   "theorem": "l2_inner_sym",
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "Скалярное произведение симметрично, $\\langle f,g\\rangle=\\langle g,f\\rangle$, и из него *поляризацией* восстанавливается вся билинейная структура: произведение выражается через одни лишь нормы,",
+   "page_price": "0 аксиом (сноска 5)",
+   "verdict": "ok",
+   "note": "Lemma l2_inner_sym (:101): l2_inner f g pts w N == l2_inner g f pts w N. Closed under the global context."
+  },
+  {
+   "line": 134,
+   "theorem": "l2_dist_sq_triangle",
+   "file": "src/process/ProcessL2Triangle.v",
+   "claim": "Поэтому работаем с *квадратом* дистанции — с той её частью, что живёт в ℚ, — и доказываем бескорневую квадратную оценку",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Theorem l2_dist_sq_triangle (:74): l2_dist_sq a c N <= 2 * l2_dist_sq a b N + 2 * l2_dist_sq b c N для a b c : nat -> Q и всякого N; в доказательстве зазор слагаемого — (a_i − 2b_i + c_i)², как на странице. Closed under the global context."
+  },
+  {
+   "line": 144,
+   "theorem": null,
+   "file": "src/process/ProcessL2Triangle.v",
+   "claim": "*Важная оговорка.* Доказано *не* классическое треугольное неравенство $d(f,h)\\le d(f,g)+d(g,h)$, а его бескорневой квадратный заместитель, достаточный для *энергетического контроля* (оценок через квадрат нормы).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: в ProcessL2Triangle.v пять Qed — неотрицательность, симметрия, d²(a,a)=0, квадратная оценка и числовой пример; неравенства треугольника для самой нормы нет."
+  },
+  {
+   "line": 153,
+   "theorem": null,
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "*Ортонормированная* (ОН) система — конечное семейство $\\{e_k\\}_{k<K_0}$ с $\\langle e_i,e_j\\rangle=1$ при $i=j$ и $0$ иначе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «семейство $\\{e_k\\}$» — в формализации посылка стояла для всех натуральных номеров и была невыполнима. Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. on_all_indices_unsat : forall (e : nat -> nat -> Q) (N : nat), ~ (forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) (:134) — посылка «при всех номерах» невыполнима ни при каком N; стандартный базис ей не удовлетворяет (std_basis_fails_all_indices, :166). Closed under the global context."
+  },
+  {
+   "line": 157,
+   "theorem": "resid_norm_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Сердцевина теории — *тождество нормы остатка*:",
+   "page_price": "0 аксиом (сноска 9)",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (формализацией; текст страницы не менялся), сноска 9 переписана: было — resid_norm под невыполнимой посылкой. resid_norm_b : forall K, K <= K0 -> ‖f − Σ_{k<K}⟨e_k,f⟩e_k‖² == ‖f‖² − Σ_{k<K}⟨e_k,f⟩² (:231); общее тождество для произвольных коэффициентов — gen_resid (:208). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context."
+  },
+  {
+   "line": 163,
+   "theorem": "inner_proj_swap",
+   "file": "src/process/ProcessL2BesselGeneral.v",
+   "claim": "Доказывается оно индукцией по $K$ и опирается на *линейность скалярного произведения по конечному разложению* $\\langle h,\\sum_{k<K}c_k e_k\\rangle=\\sum_{k<K}c_k\\langle h,e_k\\rangle$ — а это перестановка двойной конечной суммы, дискретный аналог теоремы Фубини из Главы 5.7 (конец Части V), — плюс ортогональность.",
+   "page_price": "0 аксиом (сноска 7)",
+   "verdict": "ok",
+   "note": "Lemma inner_proj_swap (:81): для произвольных e, coef, h, K, N, без посылки ортонормированности; доказана через q_sum_swap. resid_norm доказана индукцией по K (:155). Глава 5.7 — «Теорема Фубини на процессах», последняя глава Части V. Closed under the global context."
+  },
+  {
+   "line": 168,
+   "theorem": "pythagoras_one",
+   "file": "src/process/ProcessL2Bessel.v",
+   "claim": "Для одного единичного направления тождество принимает вид *теоремы Пифагора*:",
+   "page_price": "0 аксиом (сноска 8)",
+   "verdict": "ok",
+   "note": "Theorem pythagoras_one (:69): seq_inner e e N == 1 -> ‖f‖² == ⟨e,f⟩² + ‖f − ⟨e,f⟩e‖² для e f : nat -> Q и всякого N. Посылка выполнима (один единичный вектор). Closed under the global context."
+  },
+  {
+   "line": 174,
+   "theorem": null,
+   "file": "src/process/ProcessL2Bessel.v",
+   "claim": "то есть энергия раскладывается на долю вдоль $e$ и энергию остатка, а остаток ортогонален $e$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Разложение энергии — pythagoras_one (ProcessL2Bessel.v:69). «Остаток ортогонален e» — resid_ortho_one (src/process/ProcessL2Orthonormal.v:477, шаг 5; названа в сноске 8). Closed under the global context."
+  },
+  {
+   "line": 178,
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Из неотрицательности $\\|r_K\\|^2\\ge0$ немедленно следует *общее неравенство Бесселя*:",
+   "page_price": "0 аксиом (сноска 9)",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (формализацией; в формуле добавлена оговорка K <= K0): было — bessel_general под невыполнимой посылкой. bessel_b : forall K, K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (:243). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context. Посылка выполнима: std_basis_on (:323), rot_orthonormal (:361)."
+  },
+  {
+   "line": 189,
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "*Равенство* в Бесселе — *равенство Парсеваля* — наступает ровно тогда, когда остаток исчезает:",
+   "page_price": "0 аксиом (сноска 10)",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (формализацией; текст страницы не менялся), сноска 10 переписана: было — parseval_iff_complete под невыполнимой посылкой. parseval_iff_complete_b : forall K, K <= K0 -> (Σ_{k<K}⟨e_k,f⟩² == ‖f‖²) <-> (forall m, m < N -> Σ_{k<K}⟨e_k,f⟩·e_k(m) == f m) (:296). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context. parseval_iff_resid_zero_b : forall K, K <= K0 -> (Σ_{k<K}⟨e_k,f⟩² == ‖f‖²) <-> (‖r_K‖² == 0) (:286). Closed under the global context."
+  },
+  {
+   "line": 197,
+   "theorem": "q_sum_sq_zero",
+   "file": "src/process/ProcessL2Parseval.v",
+   "claim": "Последняя эквивалентность держится потому, что над ℚ конечная сумма квадратов равна нулю тогда и только тогда, когда нуль каждое слагаемое.",
+   "page_price": "0 аксиом (сноска 10)",
+   "verdict": "ok",
+   "note": "Lemma q_sum_sq_zero (:52): Σ_{i<N} g_i² == 0 -> forall i < N, g i == 0 (через Qmult_integral); обратная сторона использована напрямую в parseval_of_complete (:107). Посылки ортонормированности у леммы нет. Closed under the global context."
+  },
+  {
+   "line": 200,
+   "theorem": null,
+   "file": "src/process/ProcessL2Parseval.v",
+   "claim": "Строго: при фиксированном усечении на $N$ координат первые $K$ направлений *восстанавливают каждую координату* $m<N$. Это конечный критерий полноты *данного разложения на данном усечении* — а не утверждение о завершённом бесконечном ортонормированном базисе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует правой части parseval_iff_complete_b (src/process/ProcessL2Orthonormal.v:296): forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m. Оговорка о конечности стоит честно."
+  },
+  {
+   "line": 214,
+   "theorem": "coord_sq_le_normsq",
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Движок построения — неравенство *«одна координата не больше нормы»*: для каждого $i<N$ выполнено $(a_i)^2\\le\\|a\\|^2$ (одно слагаемое не больше суммы неотрицательных).",
+   "page_price": "0 аксиом (сноска 11)",
+   "verdict": "ok",
+   "note": "Lemma coord_sq_le_normsq (:72): (i < N) -> a i * a i <= seq_inner a a N. Closed under the global context."
+  },
+  {
+   "line": 215,
+   "theorem": "l2cauchy_coord_cauchy",
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Отсюда: если $\\{f_n\\}$ есть Коши в $L^2$-норме, то *каждая координата* $\\bigl(f_n(i)\\bigr)_n$ есть Коши-последовательность в ℚ.",
+   "page_price": "0 аксиом (сноска 11)",
+   "verdict": "ok",
+   "note": "Lemma l2cauchy_coord_cauchy (ProcessL2RieszFischer.v:94): L2CauchySq F N -> для i < N и eps > 0 есть M: (F m i − F n i)² <= eps при m, n >= M — условие Коши для квадрата разности. В форме предиката is_Cauchy (ProcessCore.v:68) — l2_limit_coord_is_Cauchy (src/process/ProcessL2Orthonormal.v:530, шаг 5). Closed under the global context."
+  },
+  {
+   "line": 217,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "А Коши-последовательность в ℚ — это в точности вещественное как процесс: `RealProcess` ($ℕ\\toℚ$) с условием Коши `is_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «это в точности определение вещественного как процесса (`RealProcess`)» — тип RealProcess есть nat -> Q без условия Коши. Definition RealProcess := nat -> Q (ProcessCore.v:34); условие — предикат is_Cauchy (:68). Что координаты предела ему удовлетворяют — l2_limit_coord_is_Cauchy : forall (F : nat -> nat -> Q) (N : nat), L2CauchySq F N -> forall i, i < N -> is_Cauchy (l2_limit F i) (:530) — через sq_cauchy_is_Cauchy (:506): квадратичное условие Коши влечёт is_Cauchy (ProcessCore.v:68). Closed under the global context."
+  },
+  {
+   "line": 218,
+   "theorem": "l2_limit",
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Значит, предел *строится покоординатно* — координата $i$ есть вещественное-процесс",
+   "page_price": "0 аксиом (сноска 11)",
+   "verdict": "ok",
+   "note": "Definition l2_limit F := fun i s => F s i (:112): предел есть сама последовательность с переставленными аргументами — страница говорит это прямо (стр. 224: «предел — это сама последовательность»). Что координата — процесс Коши, доказано в квадратичной форме (l2_limit_is_cauchy_real, :116)."
+  },
+  {
+   "line": 226,
+   "theorem": "l2_riesz_fischer",
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Тогда сходимость «$\\|f_n-f_\\infty\\|_2\\to0$» *разворачивается в само условие Коши*: стадия-$s$ рациональное приближение предела $f_\\infty$ есть в точности $f_s$.",
+   "page_price": "0 аксиом (сноска 11)",
+   "verdict": "ok",
+   "note": "Theorem l2_riesz_fischer (:134): L2CauchySq F N -> forall eps > 0, exists M, forall n s >= M, ‖F n − l2_limit F · s‖² <= eps. После развёртывания l2_limit заключение совпадает с посылкой по определению (Check.v, rf_conclusion_is_hypothesis: равносильность доказана тождественной функцией). Страница говорит это здесь же и оговаривает конечное N (стр. 233–240). Теоремы «последовательность Коши в L² сходится к элементу L²» с отдельным пределом нет. Closed under the global context. См. заметки, сомнительные места."
+  },
+  {
+   "line": 234,
+   "theorem": null,
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Доказанная теорема работает при *фиксированном конечном усечении* $N$: квадрат нормы есть конечная сумма по $N$ координатам, и из $L^2$-Коши в этой конечной норме строится покоординатный предел-процесс — это конструктивное *ядро* Рисса–Фишера.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка стоит честно: L2CauchySq (:87) и l2_riesz_fischer (:134) — при фиксированном N, норма в квадрате. Содержательная часть файла — coord_sq_le_normsq и l2cauchy_coord_cauchy; сама l2_riesz_fischer повторяет посылку (см. запись к стр. 225)."
+  },
+  {
+   "line": 249,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«пространство» здесь — содержательная интерпретация процессного носителя, а не буквально типизированный объект `System`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (:203). Статус честный: ни один из восьми названных файлов TheoryOfSystems_Core_ERR не подключает и объекта типа System не строит."
+  },
+  {
+   "line": 285,
+   "theorem": "best_approx_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "правила (Коши–Шварц, бескорневая дистанция, наилучшее приближение, Бессель, Парсеваль) доказаны на конечных стадиях без аксиом, а полнота прочитана как конструируемость предела — его строят покоординатно, а не выбирают.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (формализацией; текст страницы не менялся): best_approx_b : forall (a : nat -> Q) (K : nat), K <= K0 -> ‖f − Σ_{k<K}⟨e_k,f⟩e_k‖² <= ‖f − Σ_{k<K} a_k e_k‖² (:256) — для любых коэффициентов a. Closed under the global context. bessel_b : forall K, K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (:243). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context. parseval_iff_complete_b : forall K, K <= K0 -> (Σ_{k<K}⟨e_k,f⟩² == ‖f‖²) <-> (forall m, m < N -> Σ_{k<K}⟨e_k,f⟩·e_k(m) == f m) (:296). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context."
+  },
+  {
+   "line": 302,
+   "theorem": null,
+   "file": "src/process/ProcessL2HilbertSynthesis.v",
+   "claim": "Опорные файлы каталога `src/process/` Rocq-репозитория ToS: `ProcessL2CauchySchwarz.v`, `ProcessL2Triangle.v`, `ProcessL2Bessel.v`, `ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v`, `ProcessL2RieszFischer.v`, `ProcessL2Orthonormal.v`; их связки — в `ProcessL2HilbertSynthesis.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все восемь файлов лежат в src/process/; ProcessL2Orthonormal.v добавлен 15.11 (шаг 5): 36 Qed, все объявления — Closed under the global context. В ProcessL2HilbertSynthesis.v три Qed — конъюнкции ранее доказанного; orthonormal_expansion_synthesis (:99) = bessel_general ∧ parseval_iff_complete под посылкой для всех номеров (невыполнима: on_all_indices_unsat) — на странице эта теорема не названа.",
+   "assumptions": "orthonormal_expansion_synthesis, signflip_conserves_norm_and_energy, position_selfadjoint_and_no_ccr: Closed under the global context"
+  },
+  {
+   "line": 302,
+   "theorem": null,
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "По шапкам этих файлов и синтез-файлу кластера — 0 аксиом; для полного аудита у ключевых теорем стоит `Print Assumptions`.",
+   "page_price": "0 аксиом (по шапкам)",
+   "verdict": "ok",
+   "note": "Компилятор подтверждает: все объявления главы и три теоремы синтеза — Closed under the global context; строк Axiom, Parameter, Admitted в семи файлах нет. Счёт Qed совпадает с шапками: CauchySchwarz 11, Triangle 5, Bessel 4, BesselGeneral 10, Parseval 7, RieszFischer 6, HilbertSynthesis 3. Команды Print Assumptions стоят в конце каждого из семи файлов."
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора): было «Файл `L1Space.v` (каталог `analysis/`, 25 Qed по шапке)». В новом файле 83 строки Qed (grep -c 'Qed\\.'); Print Assumptions для всех 108 объявлений — Closed under the global context."
+  },
+  {
+   "line": 303,
+   "theorem": "l1_close",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context."
+  },
+  {
+   "line": 303,
+   "theorem": "on_integral",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition on_integral {a b : Q} (F : L1On a b) : RealProcess := fun n => SI.step_fun_integral (on_seq F n) (:534). Что это процесс Коши — l1_on_integral_is_Cauchy : forall a b (F : L1On a b), a < b -> is_Cauchy (on_integral F) (:538). Closed under the global context."
+  },
+  {
+   "line": 303,
+   "theorem": "step_to_l1_on",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition step_to_l1_on (a b : Q) (f : SI.StepFun) (Hf : inside a b f) : L1On a b (:586, Defined) — постоянная последовательность; on_integral (step_to_l1_on a b f Hf) n = SI.step_fun_integral f (step_to_l1_on_integral, :592); списки, записывающие одну функцию, вкладываются в один класс (step_to_l1_on_ext, :597)."
+  },
+  {
+   "line": 304,
+   "theorem": "q_sum_cauchy_schwarz",
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "Прямое следствие `q_sum_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом) с $g\\equiv1$ — `l1_sq_le_N_l2_sq` (`ProcessL2Orthonormal.v`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma q_sum_cauchy_schwarz (:65): для a b : nat -> Q и всякого N: (Σ_{i<N} a_i b_i)² <= (Σ a_i²)(Σ b_i²). Closed under the global context. Само следствие записано: l1_sq_le_N_l2_sq (src/process/ProcessL2Orthonormal.v:448)."
+  },
+  {
+   "line": 305,
+   "theorem": "q_sq_nonneg",
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "`q_sum_cauchy_schwarz` и `l2_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом); опорные факты — неотрицательность квадрата `q_sq_nonneg` и разложение суммы квадратов `sos_identity`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma q_sq_nonneg (:45): forall x : Q, 0 <= x * x. Одноимённые леммы есть ещё в четырёх файлах; глава называет этот. Closed under the global context."
+  },
+  {
+   "line": 306,
+   "theorem": "l2_inner_expand",
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "Симметрия `l2_inner_sym` и разложение квадрата нормы `l2_inner_expand` в `ProcessL2CauchySchwarz.v` (0 аксиом); поляризация — их прямое следствие (`l2_polarization`, `ProcessL2Orthonormal.v`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma l2_inner_expand (:148): ⟨f+g,f+g⟩ == ⟨f,f⟩ + 2⟨f,g⟩ + ⟨g,g⟩. Closed under the global context. Формула поляризации записана: l2_polarization (src/process/ProcessL2Orthonormal.v:465)."
+  },
+  {
+   "line": 307,
+   "theorem": "l2_dist_sq",
+   "file": "src/process/ProcessL2Triangle.v",
+   "claim": "`l2_dist_sq_triangle` в `ProcessL2Triangle.v` (0 аксиом); квадрат расстояния `l2_dist_sq`, его симметрия и неотрицательность; зазор — через `q_sq_nonneg`, применённую к составному квадрату.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition l2_dist_sq a b N := q_sum (fun i => (a i - b i) * (a i - b i)) N (:46); симметрия — l2_dist_sq_sym (:56), неотрицательность — l2_dist_sq_nonneg (:50); обе Closed under the global context."
+  },
+  {
+   "line": 308,
+   "theorem": "q_sum_swap",
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "Линейность по разложению — `inner_proj_swap` в `ProcessL2BesselGeneral.v` (через перестановку сумм `q_sum_swap`);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem q_sum_swap (:78): dsum_xy f N M == dsum_yx f N M — перестановка порядка конечной двойной суммы; использована в доказательстве inner_proj_swap (ProcessL2BesselGeneral.v:92). Closed under the global context."
+  },
+  {
+   "line": 308,
+   "theorem": "proj_ortho_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "ортогональность проекции — `proj_ortho_b` (`ProcessL2Orthonormal.v`);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «`proj_ortho`» — лемма под посылкой для всех номеров (невыполнима). proj_ortho_b : forall (coef : nat -> Q) (K : nat), K < K0 -> seq_inner (e K) (fun m => q_sum (fun k => coef k * e k m) K) N == 0 (:193). Closed under the global context. Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах."
+  },
+  {
+   "line": 308,
+   "theorem": "seq_inner_residual_identity",
+   "file": "src/process/ProcessL2Bessel.v",
+   "claim": "тождество остатка для одного направления — `seq_inner_residual_identity` в `ProcessL2Bessel.v`. Всё — 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma seq_inner_residual_identity (:53): Σ(f_i − c·e_i)² == Σf_i² − 2c·Σe_i f_i + c²·Σe_i² для любых e, f, c, N, без посылок. Closed under the global context."
+  },
+  {
+   "line": 309,
+   "theorem": "bessel_one",
+   "file": "src/process/ProcessL2Bessel.v",
+   "claim": "`pythagoras_one` и `bessel_one` в `ProcessL2Bessel.v` (0 аксиом);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem bessel_one (:86): seq_inner e e N == 1 -> ⟨e,f⟩² <= ‖f‖². Посылка выполнима. Closed under the global context."
+  },
+  {
+   "line": 311,
+   "theorem": "energy_split_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`parseval_iff_complete_b` в `ProcessL2Orthonormal.v` (0 аксиом): `energy_split_b` $\\sum c_k^2+\\|r_K\\|^2=\\|f\\|^2$, `parseval_iff_resid_zero_b`,",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «`energy_split`» под невыполнимой посылкой. energy_split_b : forall K, K <= K0 -> Σ_{k<K}⟨e_k,f⟩² + ‖r_K‖² == ‖f‖² (:276). Closed under the global context."
+  },
+  {
+   "line": 311,
+   "theorem": "parseval_iff_resid_zero_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`parseval_iff_complete_b` в `ProcessL2Orthonormal.v` (0 аксиом): `energy_split_b` $\\sum c_k^2+\\|r_K\\|^2=\\|f\\|^2$, `parseval_iff_resid_zero_b`,",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «`parseval_iff_resid_zero`» под невыполнимой посылкой. parseval_iff_resid_zero_b : forall K, K <= K0 -> (Σ_{k<K}⟨e_k,f⟩² == ‖f‖²) <-> (‖r_K‖² == 0) (:286). Closed under the global context."
+  },
+  {
+   "line": 311,
+   "theorem": "parseval_std_concrete",
+   "file": "src/process/ProcessL2Parseval.v",
+   "claim": "Равенство достигается на стандартном базисе при всяком $N$ и всякой $f$ — `parseval_std_all` — и на повёрнутом базисе — `parseval_rot`; частный свидетель — `parseval_std_concrete`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Example parseval_std_concrete (ProcessL2Parseval.v:156): стандартный базис, N = 2, K = 2, f = (3, 4): 25 = 25, доказано vm_compute. Общий случай — parseval_std_all. Closed under the global context."
+  },
+  {
+   "line": 312,
+   "theorem": "const_l2cauchy",
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Конкретный свидетель — `const_l2cauchy`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Example const_l2cauchy (:150): постоянная последовательность векторов удовлетворяет L2CauchySq при любом N — свидетель выполнимости посылки l2_riesz_fischer. Closed under the global context."
+  },
+  {
+   "line": 303,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Record L1On (a b : Q) (:521): on_seq : nat -> SI.StepFun; on_inside : forall n, inside a b (on_seq n); on_cauchy : forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> l1_close a b (on_seq m) (on_seq n) eps. Definition l1_close (a b : Q) (f g : SI.StepFun) (eps : Q) : Prop := exists h : SI.StepFun, inside a b h /\\ (forall x, step_eval h x == step_eval f x - step_eval g x) /\\ SI.step_fun_norm h < eps (:450). Близость влечёт близость интегралов без условий на разбиения — l1_close_integral (:458); рефлексивность, симметрия, сложение оценок — l1_close_refl, l1_close_sym, l1_close_trans (:474, :481, :490). Closed under the global context.",
+   "theorem": "L1On",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`."
+  },
+  {
+   "line": 303,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition l1_on_equiv {a b : Q} (F G : L1On a b) : Prop := forall eps, 0 < eps -> exists N, forall n, N <= n -> l1_close a b (on_seq F n) (on_seq G n) eps (:549).",
+   "theorem": "l1_on_equiv",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`."
+  },
+  {
+   "line": 303,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "l1_on_equiv_equivalence : forall a b, (forall F : L1On a b, l1_on_equiv F F) /\\ (forall F G, l1_on_equiv F G -> l1_on_equiv G F) /\\ (forall F G K, l1_on_equiv F G -> l1_on_equiv G K -> l1_on_equiv F K) (:554). Closed under the global context.",
+   "theorem": "l1_on_equiv_equivalence",
+   "file": "src/process/ProcessL1Integrable.v",
+   "claim": "Файл `ProcessL1Integrable.v` (каталог `src/process/`, 83 доказанных утверждения, 0 аксиом): `L1On` (представители), `l1_close` (близость по интегральной норме), `on_integral`, `l1_on_equiv` ($\\|f-g\\|_1\\to0$; что это отношение эквивалентности — `l1_on_equiv_equivalence`), `step_to_l1_on`."
+  },
+  {
+   "line": 303,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 3, слово автора) (добавлено): в L1Space.v 16 строк Qed и одно Defined. Record L1Process (analysis/L1Space.v:86): условие Коши записано через step_fun_norm (step_fun_diff (l1_seq m) (l1_seq n)); step_fun_diff (:54) вычитает значения ступеней с одинаковыми номерами, концы берёт у первого списка, длинный список обрезает. Для стадий на общем разбиении — l1_integral_cauchy_aligned : forall f : L1.L1Process, l1_aligned f -> is_Cauchy (L1.l1_integral_approx f) (:1008), где l1_aligned f := forall m n, L1_aligned (L1.l1_seq f m) (L1.l1_seq f n) (:1004) — все стадии записаны на одном разбиении. На общем разбиении отношение — эквивалентность, сохраняющая интеграл: l1_equiv_al_equivalence (:1092), l1_equiv_al_integral (:1117). Closed under the global context.",
+   "theorem": "L1Process",
+   "file": "src/analysis/L1Space.v",
+   "claim": "Прежний файл `L1Space.v` (каталог `src/analysis/`, 16 доказанных утверждений): тип `L1Process` — для стадий на общем разбиении."
+  },
+  {
+   "line": 217,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition is_Cauchy (R : RealProcess) : Prop := forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> Qabs (R m - R n) < eps (ProcessCore.v:68). l2_limit_coord_is_Cauchy : forall (F : nat -> nat -> Q) (N : nat), L2CauchySq F N -> forall i, i < N -> is_Cauchy (l2_limit F i) (:530) — через sq_cauchy_is_Cauchy (:506): квадратичное условие Коши влечёт is_Cauchy (ProcessCore.v:68). Closed under the global context.",
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "А Коши-последовательность в ℚ — это в точности вещественное как процесс: `RealProcess` ($ℕ\\toℚ$) с условием Коши `is_Cauchy`."
+  },
+  {
+   "line": 304,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): l1_sq_le_N_l2_sq : forall (f : nat -> Q) (N : nat), q_sum (fun i => Qabs (f i)) N * q_sum (fun i => Qabs (f i)) N <= q_sum (fun i => f i * f i) N * inject_Z (Z.of_nat N) (:448) — из q_sum_cauchy_schwarz при втором аргументе 1. Closed under the global context.",
+   "theorem": "l1_sq_le_N_l2_sq",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Прямое следствие `q_sum_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом) с $g\\equiv1$ — `l1_sq_le_N_l2_sq` (`ProcessL2Orthonormal.v`)."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «тождество Лагранжа `sos_identity`». Lemma sos_identity (:50): q_sum (fun i => (a i * q - p * b i) * (a i * q - p * b i)) k == q * q * Σa_i² − 2 * p * q * Σa_i b_i + p * p * Σb_i² — разложение одной суммы квадратов при постоянных p, q; сноска теперь так её и называет. Closed under the global context.",
+   "theorem": "sos_identity",
+   "file": "src/process/ProcessL2CauchySchwarz.v",
+   "claim": "`q_sum_cauchy_schwarz` и `l2_cauchy_schwarz` в `ProcessL2CauchySchwarz.v` (0 аксиом); опорные факты — неотрицательность квадрата `q_sq_nonneg` и разложение суммы квадратов `sos_identity`."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): lagrange_identity : forall (a b : nat -> Q) (N : nat), q_sum (fun j => q_sum (fun i => (a i * b j - a j * b i) * (a i * b j - a j * b i)) N) N == 2 * (q_sum (fun i => a i * a i) N * q_sum (fun i => b i * b i) N - q_sum (fun i => a i * b i) N * q_sum (fun i => a i * b i) N) (:397). Closed under the global context.",
+   "theorem": "lagrange_identity",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Тождество Лагранжа — `lagrange_identity`, в виде формулы выше — `cs_gap_is_sum_of_squares`, неравенство из него — `cauchy_schwarz_via_lagrange` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cs_gap_is_sum_of_squares (:412): ‖a‖²‖b‖² − ⟨a,b⟩² == (1/2)·Σ_j Σ_i (a_i b_j − a_j b_i)² — формула страницы. Closed under the global context.",
+   "theorem": "cs_gap_is_sum_of_squares",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Тождество Лагранжа — `lagrange_identity`, в виде формулы выше — `cs_gap_is_sum_of_squares`, неравенство из него — `cauchy_schwarz_via_lagrange` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cauchy_schwarz_via_lagrange (:422): ⟨a,b⟩² <= ‖a‖²‖b‖² — выведено из cs_gap_is_sum_of_squares и неотрицательности суммы квадратов. Closed under the global context.",
+   "theorem": "cauchy_schwarz_via_lagrange",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Тождество Лагранжа — `lagrange_identity`, в виде формулы выше — `cs_gap_is_sum_of_squares`, неравенство из него — `cauchy_schwarz_via_lagrange` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  },
+  {
+   "line": 306,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): l2_polarization : forall f g pts w N, l2_inner f g pts w N == (1 # 2) * (l2_inner (fun x => f x + g x) (fun x => f x + g x) pts w N - l2_inner f f pts w N - l2_inner g g pts w N) (:465). Closed under the global context.",
+   "theorem": "l2_polarization",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Симметрия `l2_inner_sym` и разложение квадрата нормы `l2_inner_expand` в `ProcessL2CauchySchwarz.v` (0 аксиом); поляризация — их прямое следствие (`l2_polarization`, `ProcessL2Orthonormal.v`)."
+  },
+  {
+   "line": 309,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): resid_ortho_one : forall e f N, seq_inner e e N == 1 -> seq_inner e (fun m => f m - seq_inner e f N * e m) N == 0 (:477). Closed under the global context.",
+   "theorem": "resid_ortho_one",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "ортогональность остатка — `resid_ortho_one`, наименьшая норма остатка среди кратных $e$ — `best_approx_one` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  },
+  {
+   "line": 309,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "best_approx_one : forall e f c N, seq_inner e e N == 1 -> ‖f − ⟨e,f⟩e‖² <= ‖f − c·e‖² (:487). Closed under the global context.",
+   "theorem": "best_approx_one",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "ортогональность остатка — `resid_ortho_one`, наименьшая норма остатка среди кратных $e$ — `best_approx_one` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  },
+  {
+   "line": 310,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора): было «`bessel_general` в `ProcessL2BesselGeneral.v`». bessel_b : forall K, K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (:243). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context.",
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`bessel_b` в `ProcessL2Orthonormal.v` (0 аксиом): из тождества остатка `resid_norm_b` и неотрицательности суммы квадратов; посылка — ортонормированность первых $K_0$ векторов, $K\\le K_0$."
+  },
+  {
+   "line": 310,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "resid_norm_b : forall K, K <= K0 -> ‖f − Σ_{k<K}⟨e_k,f⟩e_k‖² == ‖f‖² − Σ_{k<K}⟨e_k,f⟩² (:231); общее тождество для произвольных коэффициентов — gen_resid (:208). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context.",
+   "theorem": "resid_norm_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`bessel_b` в `ProcessL2Orthonormal.v` (0 аксиом): из тождества остатка `resid_norm_b` и неотрицательности суммы квадратов; посылка — ортонормированность первых $K_0$ векторов, $K\\le K_0$."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): best_approx_b : forall (a : nat -> Q) (K : nat), K <= K0 -> ‖f − Σ_{k<K}⟨e_k,f⟩e_k‖² <= ‖f − Σ_{k<K} a_k e_k‖² (:256) — для любых коэффициентов a. Closed under the global context.",
+   "theorem": "best_approx_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Наилучшее приближение — `best_approx_b`: проекция даёт наименьший остаток среди всех комбинаций первых $K$ векторов."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_basis_on : forall N i j, i < N -> j < N -> seq_inner (delta i) (delta j) N == (if Nat.eqb i j then 1 else 0) (:323), где delta m — m-й вектор стандартного базиса (:74); следствия — bessel_std (:330), parseval_std_all (:337). Closed under the global context.",
+   "theorem": "std_basis_on",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Посылка выполнима: стандартный базис (`std_basis_on`) и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ (`rot_orthonormal`)."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "rot_orthonormal : forall i j, i < 2 -> j < 2 -> seq_inner (rot i) (rot j) 2 == (if Nat.eqb i j then 1 else 0) (:361), где rot 0 = (3/5, 4/5), rot 1 = (−4/5, 3/5) (:352); следствия — bessel_rot (:370), parseval_rot (:377). Closed under the global context.",
+   "theorem": "rot_orthonormal",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Посылка выполнима: стандартный базис (`std_basis_on`) и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ (`rot_orthonormal`)."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "on_all_indices_unsat : forall (e : nat -> nat -> Q) (N : nat), ~ (forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) (:134) — посылка «при всех номерах» невыполнима ни при каком N; стандартный базис ей не удовлетворяет (std_basis_fails_all_indices, :166). Closed under the global context.",
+   "theorem": "on_all_indices_unsat",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Прежние `bessel_general` и `resid_norm` (`ProcessL2BesselGeneral.v`) требуют ортонормированности при всех номерах $i,j$; на $N$ координатах такая посылка невыполнима (`on_all_indices_unsat`)."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem bessel_general (:175) — под посылкой Hon : forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) (:119), для всех натуральных i, j; сноска это говорит. Closed under the global context.",
+   "theorem": "bessel_general",
+   "file": "src/process/ProcessL2BesselGeneral.v",
+   "claim": "Прежние `bessel_general` и `resid_norm` (`ProcessL2BesselGeneral.v`) требуют ортонормированности при всех номерах $i,j$; на $N$ координатах такая посылка невыполнима (`on_all_indices_unsat`)."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma resid_norm (:150) — под той же посылкой Hon (:119). Closed under the global context.",
+   "theorem": "resid_norm",
+   "file": "src/process/ProcessL2BesselGeneral.v",
+   "claim": "Прежние `bessel_general` и `resid_norm` (`ProcessL2BesselGeneral.v`) требуют ортонормированности при всех номерах $i,j$; на $N$ координатах такая посылка невыполнима (`on_all_indices_unsat`)."
+  },
+  {
+   "line": 311,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "parseval_iff_complete_b : forall K, K <= K0 -> (Σ_{k<K}⟨e_k,f⟩² == ‖f‖²) <-> (forall m, m < N -> Σ_{k<K}⟨e_k,f⟩·e_k(m) == f m) (:296). Посылка раздела ONB (:189): Hypothesis Hon : forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) — ортонормированы первые K0 векторов семейства e на N координатах. Closed under the global context.",
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`parseval_iff_complete_b` в `ProcessL2Orthonormal.v` (0 аксиом): `energy_split_b` $\\sum c_k^2+\\|r_K\\|^2=\\|f\\|^2$, `parseval_iff_resid_zero_b`,"
+  },
+  {
+   "line": 311,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma q_sum_sq_zero (:52): Σ_{i<N} g_i² == 0 -> forall i < N, g i == 0 (через Qmult_integral); посылки ортонормированности у леммы нет. Closed under the global context.",
+   "theorem": "q_sum_sq_zero",
+   "file": "src/process/ProcessL2Parseval.v",
+   "claim": "и лемма `q_sum_sq_zero` из `ProcessL2Parseval.v` (сумма квадратов нулевая $\\Rightarrow$ каждое слагаемое нулевое, через целостность умножения в ℚ)."
+  },
+  {
+   "line": 311,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): parseval_std_all : forall (f : nat -> Q) (N : nat), q_sum (fun k => seq_inner (delta k) f N * seq_inner (delta k) f N) N == seq_inner f f N (:337). Closed under the global context.",
+   "theorem": "parseval_std_all",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Равенство достигается на стандартном базисе при всяком $N$ и всякой $f$ — `parseval_std_all` — и на повёрнутом базисе — `parseval_rot`; частный свидетель — `parseval_std_concrete`."
+  },
+  {
+   "line": 311,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "parseval_rot : forall f, q_sum (fun k => seq_inner (rot k) f 2 * seq_inner (rot k) f 2) 2 == seq_inner f f 2 (:377). Closed under the global context.",
+   "theorem": "parseval_rot",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Равенство достигается на стандартном базисе при всяком $N$ и всякой $f$ — `parseval_std_all` — и на повёрнутом базисе — `parseval_rot`; частный свидетель — `parseval_std_concrete`."
+  },
+  {
+   "line": 312,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 5, слово автора) (добавлено): l2_limit_coord_is_Cauchy : forall (F : nat -> nat -> Q) (N : nat), L2CauchySq F N -> forall i, i < N -> is_Cauchy (l2_limit F i) (:530) — через sq_cauchy_is_Cauchy (:506): квадратичное условие Коши влечёт is_Cauchy (ProcessCore.v:68). Closed under the global context.",
+   "theorem": "l2_limit_coord_is_Cauchy",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Что каждая координата предела есть процесс Коши (`is_Cauchy`) — `l2_limit_coord_is_Cauchy`; трёхчастная форма (координаты предела — процессы Коши; расстояние от $f_n$ до предела — процесс Коши; оно стремится к нулю) — `riesz_fischer_process_form` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  },
+  {
+   "line": 312,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "riesz_fischer_process_form : forall F N, L2CauchySq F N -> (forall i, i < N -> is_Cauchy (l2_limit F i)) /\\ (forall n, is_Cauchy (dist_to_limit F N n)) /\\ (forall eps, eps > 0 -> exists M, forall n, M <= n -> exists S, forall s, S <= s -> dist_to_limit F N n s <= eps) (:618); dist_to_limit F N n s — квадрат расстояния от F n до стадии s предела (:547). Closed under the global context.",
+   "theorem": "riesz_fischer_process_form",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Что каждая координата предела есть процесс Коши (`is_Cauchy`) — `l2_limit_coord_is_Cauchy`; трёхчастная форма (координаты предела — процессы Коши; расстояние от $f_n$ до предела — процесс Коши; оно стремится к нулю) — `riesz_fischer_process_form` (`ProcessL2Orthonormal.v`, 0 аксиом)."
+  }
+ ]
+}

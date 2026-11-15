@@ -1,0 +1,648 @@
+{
+ "batch": "audit-part-06",
+ "chapter": "06 Меры и интегрирование/04 Теоремы сходимости монотонная и мажорированная.md",
+ "checked": "2026-11-14",
+ "auto": true,
+ "records": [
+  {
+   "line": 27,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "*Доказано*: монотонная сходимость — растущая ограниченная последовательность интегралов сходится (цена — L3);",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "process_mct (:157): для fs : nat -> Q -> Q, узлов pts, веса w >= 0 и числа узлов N, при forall k x, fs k x <= fs (S k) x и forall k x, Qabs (fs k x) <= M последовательность k ↦ w·Σ_{i<N} fs k (pts i) есть is_Cauchy. «Интеграл» здесь — конечная сумма на фиксированной сетке, «сходится» — свойство Коши; то и другое оговорено в сноске 2. Axioms: Classical_Prop.classic."
+  },
+  {
+   "line": 29,
+   "theorem": "process_dct",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "*редукция* мажорированной сходимости — её движок и мажоранта-конверт доказаны *без аксиом*, а сходимость интегралов следует из сходимости невязок;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "dct_diff_bound (:73), dct_dom_bound (:99), process_dct (:123) — все три Closed under the global context. Интеграл в них — та же конечная сумма riemann_sum на фиксированной сетке (ProcessMCT.v:111)."
+  },
+  {
+   "line": 31,
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "сходимости невязок; лемма Фату на процессном уровне.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся): было — в ProcessFatou.v неравенства Фату не было ни в какой форме. process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context. process_fatou_tail (:124) — то же для минимума по k из [m, m + n] (хвост последовательности). Closed under the global context."
+  },
+  {
+   "line": 31,
+   "theorem": "process_dct_lebesgue",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "*Остаётся честной границей*: сам шаг «поточечная сходимость плюс мажоранта влечёт сходимость невязок к нулю» — тот самый шаг Фату над завершённой мерой — берётся как явная гипотеза-вход, а не доказывается внутри системы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся); в § «Мажорированная сходимость как редукция» добавлен абзац о месте границы: было — посылка process_dct говорила о сумме на фиксированной сетке, где шаг доказуем без мажоранты. process_dct_lebesgue : forall fs f a b, a < b -> integrals_converge (fun k => PL.lebesgue_process (fun x => Qabs (fs k x - f x)) a b) (const_process 0) -> integrals_converge (fun k => PL.lebesgue_process (fs k) a b) (PL.lebesgue_process f a b) (:374). Definition integrals_converge (I : nat -> RealProcess) (J : RealProcess) : Prop := forall eps, 0 < eps -> exists K, forall k, K <= k -> exists S0, forall s, S0 <= s -> Qabs (I k s - J s) < eps (:366) — сначала предел по сетке (по s), затем по k. Здесь посылка о невязках — утверждение о пределе по сетке. Closed under the global context. Что на этом уровне шаг внутри системы не выводится — pointwise_dominated_not_enough (:561): exists fs f g, (forall k x, fs k x <= fs (S k) x) /\\ (forall k x, Qabs (fs k x) <= g x) /\\ (forall x, (fun k => fs k x) ~~ const_process (f x)) /\\ (forall k, PL.lebesgue_process (fs k) 0 1 ~~ const_process 0) /\\ PL.lebesgue_process g 0 1 ~~ const_process 1 /\\ PL.lebesgue_process f 0 1 ~~ const_process 1. Свидетели: fs = first_ind enum_Q (:434 — индикатор первых k членов нумерации рациональных чисел), f = g = 1; интеграл индикатора равен нулю, потому что каждая точка стоит не больше шага сетки (first_ind_integral_null, :522). Closed under the global context."
+  },
+  {
+   "line": 41,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Правило обмена $\\int\\lim=\\lim\\int$ при условиях, расщеплённое на: «монотонно-ограниченное сходится» (цена L3);",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "monotone_bounded_Cauchy (:311): monotone_increasing R -> (forall n, R n <= ub) -> is_Cauchy R. Axioms: Classical_Prop.classic."
+  },
+  {
+   "line": 57,
+   "theorem": "riemann_sum_monotone",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Тогда их интегралы тоже растут (интеграл монотонен) и ограничены сверху — а растущая ограниченная последовательность *сходится*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "riemann_sum_monotone (:115) и riemann_sum_bounded (:126) — Closed under the global context; переход к свойству Коши — monotone_bounded_Cauchy (classic). Речь о конечных суммах на фиксированной сетке (сноска 2)."
+  },
+  {
+   "line": 58,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Это и есть монотонная сходимость: $\\int f_n$ возрастает к пределу, и предел этот существует как процесс.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_mct_nonneg (:177) даёт неотрицательность, монотонность и is_Cauchy последовательности сумм. Предельного числа в утверждении нет (над ℚ его может не быть); «существует как процесс» — чтение свойства Коши, оно названо в сноске 2. Равенства предела интегралу предельной функции в файле нет; на странице оно теоремой и не названо (стр. 65–67: «роль-предел»)."
+  },
+  {
+   "line": 61,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Доказательство процессно и опирается на единственный классический шаг — *монотонный ограниченный процесс есть процесс Коши*, — который стоит на Законе Исключённого Третьего.",
+   "page_price": "Закон Исключённого Третьего",
+   "verdict": "ok",
+   "note": "В доказательстве process_mct (:162–171) classic входит только через monotone_bounded_Cauchy; riemann_sum_monotone и riemann_sum_bounded — Closed under the global context. Print Assumptions process_mct: Classical_Prop.classic."
+  },
+  {
+   "line": 65,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "**Доказуемое ядро монотонной сходимости — теорема: процесс интегралов растущей ограниченной последовательности сходится.**",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Заключение process_mct — is_Cauchy (fun k => riemann_sum (fs k) pts w N), ProcessCore.is_Cauchy (:68). «Процесс интегралов» — последовательность по k конечных сумм при фиксированных узлах, весе и числе узлов; оговорено в сноске 2."
+  },
+  {
+   "line": 69,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Цена — L3 — это именно цена леммы `monotone_bounded_Cauchy`: перехода от монотонности и ограниченности к Cauchy-поведению процесса (та же зависимость, что у счётной аддитивности в Главе 6.1).",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Print Assumptions monotone_bounded_Cauchy: Classical_Prop.classic. Счётная аддитивность главы 6.1 — sigma_additive_converges (src/process/ProcessSigmaAdditive.v:98), Print Assumptions: Classical_Prop.classic."
+  },
+  {
+   "line": 71,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Это *честная и единственная* цена монотонной сходимости; никакой завершённой меры или Аксиомы Выбора она не требует.",
+   "page_price": "L3, единственная",
+   "verdict": "ok",
+   "note": "Print Assumptions process_mct и process_mct_nonneg: Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P — и только она."
+  },
+  {
+   "line": 81,
+   "theorem": "dominated",
+   "file": "src/process/ProcessFatou.v",
+   "claim": "В ToS $g$ — *данная* функция, предъявленная гипотезой; доминирование — отношение, берущее $g$ явным аргументом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dominated (:41) берёт аргументами fs, g и концы отрезка a, b. В теоремах, названных главой, сам предикат не участвует: process_fatou_bounded берёт посылку forall k x, Qabs (fs k x) <= g x напрямую, ProcessDCT.v — посылку Qabs (fs n x - f x) <= 2 * g x; предикат использован в двух леммах файла (dominated_pointwise :45, dominated_uniform_bound :54). Мажоранта во всех посылках — явный аргумент."
+  },
+  {
+   "line": 94,
+   "theorem": null,
+   "file": "src/process/ProcessDCT.v",
+   "claim": "ToS разлагает её на три звена, и первые два доказаны *без аксиом*.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "dct_diff_bound (:73) и dct_dom_bound (:99) — Closed under the global context. Третье звено process_dct (:123) — условное утверждение, тоже Closed under the global context."
+  },
+  {
+   "line": 103,
+   "theorem": "dct_diff_bound",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "Разность интегралов не превосходит интеграла модуля разности; это линейность плюс неравенство треугольника для конечных сумм, доказанные точно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dct_diff_bound (:73): 0 <= w -> Qabs (riemann_sum f1 pts w N - riemann_sum f2 pts w N) <= riemann_sum (fun x => Qabs (f1 x - f2 x)) pts w N. Доказательство — q_sum_minus (:50) и q_sum_abs_le (:59). Слова «для конечных сумм» стоят на странице."
+  },
+  {
+   "line": 112,
+   "theorem": "dct_dom_bound",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "Это монотонность интеграла, применённая к доменно-явной мажоранте.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dct_dom_bound (ProcessDCT.v:99): посылка forall x, Qabs (f1 x - f2 x) <= 2 * g x взята прямо, доказательство — riemann_sum_monotone. Переход от |f_n| <= g и |f| <= g к этой посылке — envelope_from_domination (src/process/ProcessConvergenceTheorems.v:191, шаг 4); для процесса интегралов конверт — lebesgue_envelope (:354)."
+  },
+  {
+   "line": 114,
+   "theorem": "process_dct",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "*Сжатие* — если интеграл невязки стремится к нулю, то по движку и $\\big|\\int f_n-\\int f\\big|\\to 0$, то есть $\\int f_n\\to\\int f$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_dct (:123): 0 <= w -> (fun n => riemann_sum (fun x => Qabs (fs n x - f x)) pts w N) ~~ const_process 0 -> (fun n => riemann_sum (fs n) pts w N) ~~ const_process (riemann_sum f pts w N). Сходимость — к рациональному числу, сумме f на той же фиксированной сетке. Оговорка о конечной сумме стоит в сноске 2 (о process_mct); у сносок 4–6 она не повторена."
+  },
+  {
+   "line": 117,
+   "theorem": null,
+   "file": "src/process/ProcessDCT.v",
+   "claim": "**Движок и конверт доказаны конструктивно, без единой аксиомы.**",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Print Assumptions dct_diff_bound, dct_dom_bound: Closed under the global context. В файле строк Axiom, Parameter, Admitted нет."
+  },
+  {
+   "line": 117,
+   "theorem": "process_dct_dominated",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "Сходимость интегралов мажорированной последовательности *редуцируется* к одному утверждению: интеграл невязки стремится к нулю.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_dct (:123) выводит сходимость сумм из одной посылки о невязках; мажоранты в его посылках нет. В process_dct_dominated (:148) посылка доминирования для вывода сходимости не используется (вторая половина доказана через process_dct)."
+  },
+  {
+   "line": 123,
+   "theorem": "process_dct_lebesgue",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "ToS берёт *её* как явную гипотезу-вход, а не доказывает внутри системы: именно тут жила бы завершённая мера, и именно её мы не актуализируем (P4). Что доказано — это *редукция*: вся арифметическая машина обмена (движок и конверт) собрана конструктивно, и остаётся ровно один инфинитарный шаг, честно вынесенный наружу.",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся), следом добавлен абзац о месте границы: process_dct_lebesgue : forall fs f a b, a < b -> integrals_converge (fun k => PL.lebesgue_process (fun x => Qabs (fs k x - f x)) a b) (const_process 0) -> integrals_converge (fun k => PL.lebesgue_process (fs k) a b) (PL.lebesgue_process f a b) (:374). Definition integrals_converge (I : nat -> RealProcess) (J : RealProcess) : Prop := forall eps, 0 < eps -> exists K, forall k, K <= k -> exists S0, forall s, S0 <= s -> Qabs (I k s - J s) < eps (:366) — сначала предел по сетке (по s), затем по k. Здесь посылка о невязках — утверждение о пределе по сетке. Closed under the global context. Движок и конверт для процесса интегралов — lebesgue_engine (:332), lebesgue_envelope (:354)."
+  },
+  {
+   "line": 142,
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Лемму Фату — что интеграл нижнего предела не превосходит нижнего предела интегралов — ToS удерживает на процессном уровне:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; продолжение фразы дополнено): process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context. Нижнего предела в утверждении нет: конечный минимум на стадии; хвостовая форма — process_fatou_tail (:124)."
+  },
+  {
+   "line": 144,
+   "theorem": "process_fatou_bounded_g",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "для неотрицательных функций нижняя огибающая последовательности интегралов неотрицательна, а при доминировании ограничена интегралом мажоранты.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора): было «при доминировании ограничена» — process_fatou_bounded (ProcessFatou.v:199) требует ещё g x <= M и даёт оценку M·(b − a). process_fatou_bounded_g : forall fs g a b n, a < b -> (forall k x, Qabs (fs k x) <= g x) -> Qabs (PF.q_min_seq (fun k => PF.integral_sequence fs a b k n) n) <= PL.lebesgue_process g a b n (:155) — оценка интегралом самой мажоранты на стадии n, без постоянной M; через lebesgue_abs_le_majorant (:138). Closed under the global context."
+  },
+  {
+   "line": 146,
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Это конечно-процессное ядро Фату: на каждой стадии $n$ величины определены и удовлетворяют нужным неравенствам.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся): среди доказанных неравенств теперь есть само неравенство Фату для конечного минимума. process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context."
+  },
+  {
+   "line": 153,
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Процессное ядро доказано; завершённый объект не актуализируется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся): process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context."
+  },
+  {
+   "line": 167,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Оно расщеплено на: «монотонно-ограниченное сходится» (монотонная сходимость, цена L3);",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "Print Assumptions process_mct: Classical_Prop.classic."
+  },
+  {
+   "line": 195,
+   "theorem": "monotone_bounded_Cauchy",
+   "file": "src/process/ProcessArithmetic.v",
+   "claim": "Монотонная сходимость честно платит L3 за единственный шаг «монотонно-ограниченное сходится».",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "classic входит в process_mct только через monotone_bounded_Cauchy (ProcessArithmetic.v:311)."
+  },
+  {
+   "line": 196,
+   "theorem": "process_dct_lebesgue",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Мажорированная сходимость *редуцирована*: её арифметическая машина (движок и конверт) доказана без аксиом, а единственный инфинитарный шаг — стремление невязки к нулю, классически идущее через завершённую меру и Фату, — вынесен в явную гипотезу.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся): process_dct_lebesgue : forall fs f a b, a < b -> integrals_converge (fun k => PL.lebesgue_process (fun x => Qabs (fs k x - f x)) a b) (const_process 0) -> integrals_converge (fun k => PL.lebesgue_process (fs k) a b) (PL.lebesgue_process f a b) (:374). Definition integrals_converge (I : nat -> RealProcess) (J : RealProcess) : Prop := forall eps, 0 < eps -> exists K, forall k, K <= k -> exists S0, forall s, S0 <= s -> Qabs (I k s - J s) < eps (:366) — сначала предел по сетке (по s), затем по k. Здесь посылка о невязках — утверждение о пределе по сетке. Closed under the global context. Цена названа верно."
+  },
+  {
+   "line": 204,
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Доказанная часть — монотонная сходимость, движок и конверт мажорированной, процессное ядро Фату — даёт рабочий аппарат предельного перехода под интегралом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (формализацией; текст страницы не менялся): «процессное ядро Фату» — process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context."
+  },
+  {
+   "line": 212,
+   "theorem": null,
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Опорные файлы — `ProcessMCT.v`, `ProcessDCT.v`, `ProcessFatou.v` (каталог `src/process/` Rocq-репозитория ToS).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Все три файла есть в src/process/: ProcessMCT.v — 9 Qed, ProcessDCT.v — 7 Qed, ProcessFatou.v — 16 Qed; строк Axiom, Parameter, Admitted нет. ProcessMCT.v и ProcessDCT.v файл ProcessFatou.v не подключают."
+  },
+  {
+   "line": 213,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Утверждение `process_mct`: для поточечно растущей и равномерно ограниченной последовательности интегрируемых функций последовательность их интегралов есть процесс Коши — `is_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылки process_mct (:157): 0 <= w; forall k x, fs k x <= fs (S k) x; forall k x, Qabs (fs k x) <= M. Условия интегрируемости в теореме нет: функции fs k : Q -> Q произвольны, для конечной суммы оно не требуется."
+  },
+  {
+   "line": 213,
+   "theorem": "is_Cauchy",
+   "file": "src/process/ProcessCore.v",
+   "claim": "последовательность их интегралов есть процесс Коши — `is_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В process_mct стоит ProcessCore.is_Cauchy (:68): forall eps, 0 < eps -> exists N, forall m n, N <= m -> N <= n -> Qabs (R m - R n) < eps (проверено командой About в окружении файла). Одноимённых определений в src девять; это — из process/ProcessCore.v. Closed under the global context."
+  },
+  {
+   "line": 213,
+   "theorem": "riemann_sum_monotone",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Опирается на `riemann_sum_monotone` (поточечное $f\\le g$ влечёт $\\int f\\le\\int g$) и `monotone_bounded_Cauchy`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "riemann_sum_monotone (ProcessMCT.v:115): 0 <= w -> (forall x, f x <= g x) -> riemann_sum f pts w N <= riemann_sum g pts w N; Closed under the global context. Одноимённая лемма есть в src/RiemannIntegration.v:110 — в главе речь о лемме ProcessMCT.v. В доказательстве участвует и riemann_sum_bounded (:126)."
+  },
+  {
+   "line": 213,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Цена — `classic` (L3); новых аксиом нет.",
+   "page_price": "classic (L3)",
+   "verdict": "ok",
+   "note": "Print Assumptions process_mct: Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P. Аксиома стандартной библиотеки; ProcessArithmetic.v подключает её строкой From Stdlib Require Import Classical."
+  },
+  {
+   "line": 213,
+   "theorem": "process_mct",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "В коде утверждение доказано для самодостаточного рационального интеграла-суммы $\\int f = w\\sum_i f(x_i)$; перенос на $L^1$-интегральный слой — содержательное чтение той же схемы (она использует лишь монотонность и ограниченность интегрального процесса), а не отдельная теорема этой главы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "riemann_sum (ProcessMCT.v:111) := w * q_sum (fun i => f (pts i)) N; узлы, вес и число узлов фиксированы. Перенос на lebesgue_process на каждой стадии сетки проверен в пробном файле (mct_lebesgue_stage: через lebesgue_monotone и lebesgue_bounded; Axioms: Classical_Prop.classic); теоремой в src он не записан — как и сказано на странице."
+  },
+  {
+   "line": 214,
+   "theorem": "dominated",
+   "file": "src/process/ProcessFatou.v",
+   "claim": "Предикат `dominated` в `ProcessFatou.v`: $\\forall k,\\ \\forall x\\in[a,b]:\\ |f_k(x)|\\le g(x)$, где $g$ и отрезок $[a,b]$ — параметры.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора): было «$\\forall k x$ … где $g$ — параметр» — без условия на отрезок. dominated (:41): forall k x, a <= x -> x <= b -> Qabs (fs k x) <= g x; fs, g, a, b — аргументы."
+  },
+  {
+   "line": 215,
+   "theorem": "dct_diff_bound",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "`dct_diff_bound` в `ProcessDCT.v` (0 аксиом): опирается на аддитивность сумм и покомпонентное неравенство треугольника `q_sum_abs_le`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions dct_diff_bound: Closed under the global context. В доказательстве — q_sum_minus (:50) и q_sum_abs_le (:59)."
+  },
+  {
+   "line": 215,
+   "theorem": "q_sum_abs_le",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "покомпонентное неравенство треугольника `q_sum_abs_le`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "q_sum_abs_le (:59): Qabs (q_sum g N) <= q_sum (fun i => Qabs (g i)) N. Closed under the global context."
+  },
+  {
+   "line": 216,
+   "theorem": "dct_dom_bound",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "`dct_dom_bound` в `ProcessDCT.v` (0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions dct_dom_bound: Closed under the global context."
+  },
+  {
+   "line": 217,
+   "theorem": "process_dct",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "`process_dct` в `ProcessDCT.v` (0 аксиом): из сходимости невязок $\\int|f_n-f|\\to 0$ следует сходимость интегралов.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions process_dct: Closed under the global context. Утверждение — о конечных суммах на фиксированной сетке (:123)."
+  },
+  {
+   "line": 217,
+   "theorem": "process_dct_dominated",
+   "file": "src/process/ProcessDCT.v",
+   "claim": "Пакет `process_dct_dominated` объединяет конверт и сжатие.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_dct_dominated (:148) — конъюнкция двух независимых утверждений: оценка невязки через сумму 2g (из посылки доминирования, без посылки о невязках) и сходимость сумм (из посылки о невязках, без посылки доминирования). Слово «объединяет» это описывает. Closed under the global context."
+  },
+  {
+   "line": 218,
+   "theorem": "process_fatou_nonneg",
+   "file": "src/process/ProcessFatou.v",
+   "claim": "В `ProcessFatou.v` (0 аксиом): `process_fatou_nonneg`, а также `process_fatou_bounded` и `dominated_integral_bound` — оценки с постоянной $M$ на месте мажоранты-функции.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена: Print Assumptions process_fatou_nonneg и process_fatou_bounded — Closed under the global context. process_fatou_nonneg (:187) — знак минимума интегралов неотрицательных функций."
+  },
+  {
+   "line": 218,
+   "theorem": "dominated_integral_bound",
+   "file": "src/process/ProcessFatou.v",
+   "claim": "В `ProcessFatou.v` (0 аксиом): `process_fatou_nonneg`, а также `process_fatou_bounded` и `dominated_integral_bound` — оценки с постоянной $M$ на месте мажоранты-функции.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора): было «оценка разности интегралов через мажоранту» — в dominated_integral_bound (:234) обе функции ограничены одной постоянной M, оценка 2 * M * (b - a); сноска теперь так и говорит. Оценка с мажорантой-функцией — dominated_integral_bound_g (src/process/ProcessConvergenceTheorems.v:167). Closed under the global context."
+  },
+  {
+   "line": 129,
+   "page_price": "без мажоранты",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (добавлено): grid_residual_from_pointwise : forall fs f pts w N, (forall i, i < N -> (fun n => fs n (pts i)) ~~ const_process (f (pts i))) -> (fun n => MCT.riemann_sum (fun x => Qabs (fs n x - f x)) pts w N) ~~ const_process 0 (:258) — без мажоранты. Closed under the global context.",
+   "theorem": "grid_residual_from_pointwise",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "На фиксированной сетке узлов границы нет: там стремление невязки к нулю равносильно поточечной сходимости в узлах и доказывается без мажоранты."
+  },
+  {
+   "line": 129,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "grid_pointwise_from_residual : то же в обратную сторону при 0 < w (:302): на фиксированной сетке посылка process_dct равносильна поточечной сходимости в узлах. Closed under the global context.",
+   "theorem": "grid_pointwise_from_residual",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "На фиксированной сетке узлов границы нет: там стремление невязки к нулю равносильно поточечной сходимости в узлах и доказывается без мажоранты."
+  },
+  {
+   "line": 131,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dct_fails_on_rational_grid : ~ integrals_converge (fun k => PL.lebesgue_process (first_ind enum_Q k) 0 1) (PL.lebesgue_process (fun _ => 1) 0 1) (:582). Closed under the global context.",
+   "theorem": "dct_fails_on_rational_grid",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Граница появляется при переходе к процессу интегралов — к пределу по сетке: там посылка о невязках уже не следует из поточечной сходимости и мажоранты."
+  },
+  {
+   "line": 133,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (добавлено): pointwise_dominated_not_enough (:561): exists fs f g, (forall k x, fs k x <= fs (S k) x) /\\ (forall k x, Qabs (fs k x) <= g x) /\\ (forall x, (fun k => fs k x) ~~ const_process (f x)) /\\ (forall k, PL.lebesgue_process (fs k) 0 1 ~~ const_process 0) /\\ PL.lebesgue_process g 0 1 ~~ const_process 1 /\\ PL.lebesgue_process f 0 1 ~~ const_process 1. Свидетели: fs = first_ind enum_Q (:434 — индикатор первых k членов нумерации рациональных чисел), f = g = 1; интеграл индикатора равен нулю, потому что каждая точка стоит не больше шага сетки (first_ind_integral_null, :522). Closed under the global context.",
+   "theorem": "pointwise_dominated_not_enough",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Пример: индикаторы первых $k$ точек нумерации рациональных чисел растут к единице в каждой рациональной точке и ограничены мажорантой $g\\equiv 1$; интеграл каждого равен нулю, а интеграл предела — единице."
+  },
+  {
+   "line": 135,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (добавлено): almost_uniform_residual (:613): при a < b, forall n x, Qabs (fs n x - f x) <= 2 * g x и условии «для всякого delta > 0 есть множество bad : Q -> bool и стадия S0 такие, что PL.lebesgue_process (fun x => if bad x then 2 * g x else 0) a b s < delta при s >= S0, а вне bad сходимость равномерна» невязки сходятся к нулю в смысле integrals_converge. Closed under the global context.",
+   "theorem": "almost_uniform_residual",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "И там же посылка снимается, если недостающее предъявлено как данные, подобно мажоранте: сходимость равномерна вне множества, на котором интеграл мажоранты сколь угодно мал, — тогда невязки стремятся к нулю, и сходимость интегралов доказана без аксиом."
+  },
+  {
+   "line": 135,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "dominated_almost_uniform_convergence (:664): при a < b, forall n x, Qabs (fs n x) <= g x, forall x, Qabs (f x) <= g x и том же условии почти равномерной сходимости — integrals_converge (fun k => PL.lebesgue_process (fs k) a b) (PL.lebesgue_process f a b). Мажоранта несёт оценку на «плохом» множестве. Closed under the global context.",
+   "theorem": "dominated_almost_uniform_convergence",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "И там же посылка снимается, если недостающее предъявлено как данные, подобно мажоранте: сходимость равномерна вне множества, на котором интеграл мажоранты сколь угодно мал, — тогда невязки стремятся к нулю, и сходимость интегралов доказана без аксиом."
+  },
+  {
+   "line": 143,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (добавлено): process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context.",
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "на каждой стадии интеграл нижней огибающей конечного набора функций не превосходит нижней огибающей их интегралов;"
+  },
+  {
+   "line": 143,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "process_fatou_tail (:124) — то же для минимума по k из [m, m + n] (хвост последовательности). Closed under the global context.",
+   "theorem": "process_fatou_tail",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "на каждой стадии интеграл нижней огибающей конечного набора функций не превосходит нижней огибающей их интегралов;"
+  },
+  {
+   "line": 144,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первая половина фразы: process_fatou_nonneg (:187): a < b -> (forall k x, 0 <= fs k x) -> 0 <= q_min_seq (fun k => integral_sequence fs a b k n) n. Closed under the global context.",
+   "theorem": "process_fatou_nonneg",
+   "file": "src/process/ProcessFatou.v",
+   "claim": "для неотрицательных функций нижняя огибающая последовательности интегралов неотрицательна, а при доминировании ограничена интегралом мажоранты."
+  },
+  {
+   "line": 217,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 4, слово автора) (добавлено): lebesgue_engine : forall f1 f2 a b s, a < b -> Qabs (PL.lebesgue_process f1 a b s - PL.lebesgue_process f2 a b s) <= PL.lebesgue_process (fun x => Qabs (f1 x - f2 x)) a b s (:332). Closed under the global context.",
+   "theorem": "lebesgue_engine",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Это утверждения о сумме на фиксированной сетке узлов; для процесса интегралов (предел по сетке) те же три звена — `lebesgue_engine`, `lebesgue_envelope`, `process_dct_lebesgue` (файл `ProcessConvergenceTheorems.v`, 0 аксиом)."
+  },
+  {
+   "line": 217,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "lebesgue_envelope : forall f1 f2 g a b s, a < b -> (forall x, Qabs (f1 x - f2 x) <= 2 * g x) -> PL.lebesgue_process (fun x => Qabs (f1 x - f2 x)) a b s <= PL.lebesgue_process (fun x => 2 * g x) a b s (:354); переход от |f1| <= g и |f2| <= g к посылке — envelope_from_domination (:191). Closed under the global context.",
+   "theorem": "lebesgue_envelope",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Это утверждения о сумме на фиксированной сетке узлов; для процесса интегралов (предел по сетке) те же три звена — `lebesgue_engine`, `lebesgue_envelope`, `process_dct_lebesgue` (файл `ProcessConvergenceTheorems.v`, 0 аксиом)."
+  },
+  {
+   "line": 217,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "process_dct_lebesgue : forall fs f a b, a < b -> integrals_converge (fun k => PL.lebesgue_process (fun x => Qabs (fs k x - f x)) a b) (const_process 0) -> integrals_converge (fun k => PL.lebesgue_process (fs k) a b) (PL.lebesgue_process f a b) (:374). Definition integrals_converge (I : nat -> RealProcess) (J : RealProcess) : Prop := forall eps, 0 < eps -> exists K, forall k, K <= k -> exists S0, forall s, S0 <= s -> Qabs (I k s - J s) < eps (:366) — сначала предел по сетке (по s), затем по k. Здесь посылка о невязках — утверждение о пределе по сетке. Closed under the global context.",
+   "theorem": "process_dct_lebesgue",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Это утверждения о сумме на фиксированной сетке узлов; для процесса интегралов (предел по сетке) те же три звена — `lebesgue_engine`, `lebesgue_envelope`, `process_dct_lebesgue` (файл `ProcessConvergenceTheorems.v`, 0 аксиом)."
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "process_fatou_bounded (:199): при forall k x, Qabs (fs k x) <= g x, forall x, g x <= M, 0 <= M, a < b — Qabs (q_min_seq …) <= M * (b - a): оценка с постоянной M. Closed under the global context.",
+   "theorem": "process_fatou_bounded",
+   "file": "src/process/ProcessFatou.v",
+   "claim": "В `ProcessFatou.v` (0 аксиом): `process_fatou_nonneg`, а также `process_fatou_bounded` и `dominated_integral_bound` — оценки с постоянной $M$ на месте мажоранты-функции."
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "process_fatou_inf : forall (fs : nat -> Q -> Q) (a b : Q) (n s : nat), a < b -> PL.lebesgue_process (fun x => PF.q_min_seq (fun k => fs k x) n) a b s <= PF.q_min_seq (fun k => PF.integral_sequence fs a b k s) n (:111) — на стадии s интеграл минимума функций fs 0 … fs n не больше минимума их интегралов. Closed under the global context.",
+   "theorem": "process_fatou_inf",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Неравенство — `process_fatou_inf` (по хвосту последовательности — `process_fatou_tail`, на сетке узлов — `grid_fatou`);"
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "process_fatou_tail (:124) — то же для минимума по k из [m, m + n] (хвост последовательности). Closed under the global context.",
+   "theorem": "process_fatou_tail",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Неравенство — `process_fatou_inf` (по хвосту последовательности — `process_fatou_tail`, на сетке узлов — `grid_fatou`);"
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "grid_fatou : forall fs pts w N n, 0 <= w -> MCT.riemann_sum (fun x => PF.q_min_seq (fun k => fs k x) n) pts w N <= PF.q_min_seq (fun k => MCT.riemann_sum (fs k) pts w N) n (:98) — на фиксированной сетке узлов. Closed under the global context.",
+   "theorem": "grid_fatou",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Неравенство — `process_fatou_inf` (по хвосту последовательности — `process_fatou_tail`, на сетке узлов — `grid_fatou`);"
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "process_fatou_bounded_g : forall fs g a b n, a < b -> (forall k x, Qabs (fs k x) <= g x) -> Qabs (PF.q_min_seq (fun k => PF.integral_sequence fs a b k n) n) <= PL.lebesgue_process g a b n (:155) — оценка интегралом самой мажоранты на стадии n, без постоянной M; через lebesgue_abs_le_majorant (:138). Closed under the global context.",
+   "theorem": "process_fatou_bounded_g",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "оценки через мажоранту-функцию — `process_fatou_bounded_g` (нижняя огибающая интегралов не больше интеграла $g$) и `dominated_integral_bound_g` (разность интегралов не больше интеграла $2g$)."
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "dominated_integral_bound_g : forall f1 f2 g a b s, a < b -> (forall x, Qabs (f1 x) <= g x) -> (forall x, Qabs (f2 x) <= g x) -> Qabs (PL.lebesgue_process f1 a b s - PL.lebesgue_process f2 a b s) <= PL.lebesgue_process (fun x => 2 * g x) a b s (:167). Closed under the global context.",
+   "theorem": "dominated_integral_bound_g",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "оценки через мажоранту-функцию — `process_fatou_bounded_g` (нижняя огибающая интегралов не больше интеграла $g$) и `dominated_integral_bound_g` (разность интегралов не больше интеграла $2g$)."
+  },
+  {
+   "line": 218,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions для всех 40 объявлений файла (37 доказательств и 3 определения) — Closed under the global context (tos-audit-build/_p06step4/Verify.out).",
+   "theorem": null,
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Все — в `ProcessConvergenceTheorems.v`, 0 аксиом."
+  },
+  {
+   "line": 219,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "grid_residual_from_pointwise : forall fs f pts w N, (forall i, i < N -> (fun n => fs n (pts i)) ~~ const_process (f (pts i))) -> (fun n => MCT.riemann_sum (fun x => Qabs (fs n x - f x)) pts w N) ~~ const_process 0 (:258) — без мажоранты. Closed under the global context.",
+   "theorem": "grid_residual_from_pointwise",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`grid_residual_from_pointwise`, `grid_pointwise_from_residual`, `grid_dct_pointwise` в `ProcessConvergenceTheorems.v` (0 аксиом)."
+  },
+  {
+   "line": 219,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "grid_pointwise_from_residual : то же в обратную сторону при 0 < w (:302): на фиксированной сетке посылка process_dct равносильна поточечной сходимости в узлах. Closed under the global context.",
+   "theorem": "grid_pointwise_from_residual",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`grid_residual_from_pointwise`, `grid_pointwise_from_residual`, `grid_dct_pointwise` в `ProcessConvergenceTheorems.v` (0 аксиом)."
+  },
+  {
+   "line": 219,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "grid_dct_pointwise : forall fs f pts w N, 0 <= w -> (forall i, i < N -> (fun n => fs n (pts i)) ~~ const_process (f (pts i))) -> (fun n => MCT.riemann_sum (fs n) pts w N) ~~ const_process (MCT.riemann_sum f pts w N) (:278) — на фиксированной сетке обмен верен при одной поточечной сходимости. Closed under the global context.",
+   "theorem": "grid_dct_pointwise",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`grid_residual_from_pointwise`, `grid_pointwise_from_residual`, `grid_dct_pointwise` в `ProcessConvergenceTheorems.v` (0 аксиом)."
+  },
+  {
+   "line": 220,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "pointwise_dominated_not_enough (:561): exists fs f g, (forall k x, fs k x <= fs (S k) x) /\\ (forall k x, Qabs (fs k x) <= g x) /\\ (forall x, (fun k => fs k x) ~~ const_process (f x)) /\\ (forall k, PL.lebesgue_process (fs k) 0 1 ~~ const_process 0) /\\ PL.lebesgue_process g 0 1 ~~ const_process 1 /\\ PL.lebesgue_process f 0 1 ~~ const_process 1. Свидетели: fs = first_ind enum_Q (:434 — индикатор первых k членов нумерации рациональных чисел), f = g = 1; интеграл индикатора равен нулю, потому что каждая точка стоит не больше шага сетки (first_ind_integral_null, :522). Closed under the global context.",
+   "theorem": "pointwise_dominated_not_enough",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`pointwise_dominated_not_enough` и `dct_fails_on_rational_grid` в `ProcessConvergenceTheorems.v` (0 аксиом)."
+  },
+  {
+   "line": 220,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "dct_fails_on_rational_grid : ~ integrals_converge (fun k => PL.lebesgue_process (first_ind enum_Q k) 0 1) (PL.lebesgue_process (fun _ => 1) 0 1) (:582). Closed under the global context.",
+   "theorem": "dct_fails_on_rational_grid",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`pointwise_dominated_not_enough` и `dct_fails_on_rational_grid` в `ProcessConvergenceTheorems.v` (0 аксиом)."
+  },
+  {
+   "line": 220,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первый член заключения теоремы — forall k x, fs k x <= fs (S k) x (first_ind_mono). Функции имеют тип Q -> Q; сходимость утверждается в каждой рациональной точке (Q_countable). Теорема главы о монотонной сходимости (process_mct) говорит о другом — что процесс интегралов есть процесс Коши, — и примером не затронута.",
+   "theorem": "pointwise_dominated_not_enough",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "Точки, в которых заданы функции, — рациональные; последовательность к тому же возрастает, так что пример касается и монотонной сходимости в полном виде."
+  },
+  {
+   "line": 221,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "almost_uniform_residual (:613): при a < b, forall n x, Qabs (fs n x - f x) <= 2 * g x и условии «для всякого delta > 0 есть множество bad : Q -> bool и стадия S0 такие, что PL.lebesgue_process (fun x => if bad x then 2 * g x else 0) a b s < delta при s >= S0, а вне bad сходимость равномерна» невязки сходятся к нулю в смысле integrals_converge. Closed under the global context.",
+   "theorem": "almost_uniform_residual",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`almost_uniform_residual` и `dominated_almost_uniform_convergence` в `ProcessConvergenceTheorems.v` (0 аксиом); равномерная сходимость — частный случай (`uniform_convergence_integral`, `uniform_is_almost_uniform`)."
+  },
+  {
+   "line": 221,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "dominated_almost_uniform_convergence (:664): при a < b, forall n x, Qabs (fs n x) <= g x, forall x, Qabs (f x) <= g x и том же условии почти равномерной сходимости — integrals_converge (fun k => PL.lebesgue_process (fs k) a b) (PL.lebesgue_process f a b). Мажоранта несёт оценку на «плохом» множестве. Closed under the global context.",
+   "theorem": "dominated_almost_uniform_convergence",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`almost_uniform_residual` и `dominated_almost_uniform_convergence` в `ProcessConvergenceTheorems.v` (0 аксиом); равномерная сходимость — частный случай (`uniform_convergence_integral`, `uniform_is_almost_uniform`)."
+  },
+  {
+   "line": 221,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "uniform_convergence_integral (:687): при forall n x, Qabs (fs n x - f x) <= e n и e ~~ const_process 0 интегралы сходятся равномерно по стадии сетки; uniform_is_almost_uniform (:715): равномерная сходимость удовлетворяет условию почти равномерной с пустым «плохим» множеством. Closed under the global context.",
+   "theorem": "uniform_convergence_integral",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`almost_uniform_residual` и `dominated_almost_uniform_convergence` в `ProcessConvergenceTheorems.v` (0 аксиом); равномерная сходимость — частный случай (`uniform_convergence_integral`, `uniform_is_almost_uniform`)."
+  },
+  {
+   "line": 221,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "uniform_convergence_integral (:687): при forall n x, Qabs (fs n x - f x) <= e n и e ~~ const_process 0 интегралы сходятся равномерно по стадии сетки; uniform_is_almost_uniform (:715): равномерная сходимость удовлетворяет условию почти равномерной с пустым «плохим» множеством. Closed under the global context.",
+   "theorem": "uniform_is_almost_uniform",
+   "file": "src/process/ProcessConvergenceTheorems.v",
+   "claim": "`almost_uniform_residual` и `dominated_almost_uniform_convergence` в `ProcessConvergenceTheorems.v` (0 аксиом); равномерная сходимость — частный случай (`uniform_convergence_integral`, `uniform_is_almost_uniform`)."
+  },
+  {
+   "line": 221,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Классическое сравнение; теоремы Егорова в src нет (и по примеру pointwise_dominated_not_enough для процесса интегралов над рациональными узлами она в таком виде неверна). Пример почти равномерной, но не равномерной сходимости в src не предъявлен.",
+   "theorem": null,
+   "file": null,
+   "claim": "Классически переход от поточечной сходимости к равномерной вне множества малой меры даёт теорема Егорова — над завершённой мерой."
+  }
+ ]
+}

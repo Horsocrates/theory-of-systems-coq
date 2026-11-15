@@ -1,0 +1,1034 @@
+{
+ "batch": "audit-part-06",
+ "chapter": "06 Меры и интегрирование/06 Операторы на L^2 самосопряжённость, спектр и мост в квантовую динамику.md",
+ "checked": "2026-11-14",
+ "auto": true,
+ "records": [
+  {
+   "line": 21,
+   "theorem": null,
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "Подчеркнём уровень: всё доказанное — операторная геометрия *конечных рациональных усечений* (матрицы над ℚ, конечные суммы, фиксированное $N$), process-core будущей $L^2$-теории; завершённое $\\ell^2/L^2$, точный пропагатор и произвольный компактный оператор — роль-пределы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оператор в названных файлах — матрица nat -> nat -> Q, действие op_apply (:51) — сумма q_sum до N; скалярное произведение seq_inner — конечная сумма (ProcessCompactSpectral.v:51). Оговорка страницы об уровне точна. Исключения из слов «конечные усечения»: diag_op (ProcessCompactSpectral.v:58) и лестничные ann, cre (ProcessHarmonicLadder.v:114, :117) заданы на полных последовательностях nat -> Q, без N, — см. запись стр. 187."
+  },
+  {
+   "line": 24,
+   "theorem": "adjoint_inner",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "*Доказано без аксиом* (на конечном носителе, на каждой стадии): самосопряжённость как коммутативность двойной суммы;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "adjoint_inner (:94): op_symmetric T N -> seq_inner (op_apply T v N) w N == seq_inner v (op_apply T w N) N; в доказательстве q_sum_swap и симметрия. Closed under the global context. О словах «на конечном носителе» применительно к лестнице — запись стр. 28."
+  },
+  {
+   "line": 26,
+   "theorem": "rayleigh_eq",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "тождество Рэлея $\\langle Tf,f\\rangle=\\lambda\\|f\\|^2$;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "rayleigh_eq (:112): is_eigenpair T v lam N -> seq_inner (op_apply T v N) v N == lam * seq_inner v v N; симметрия матрицы не требуется. Closed under the global context."
+  },
+  {
+   "line": 27,
+   "theorem": "eigvec_orthogonal",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "ортогональность собственных направлений при разных собственных значениях;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "eigvec_orthogonal (:148): op_symmetric T N -> is_eigenpair T v lam N -> is_eigenpair T w mu N -> ~ lam == mu -> seq_inner v w N == 0. Closed under the global context."
+  },
+  {
+   "line": 28,
+   "theorem": "commutator_canonical_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "каноническое $[a,a^\\dagger]=1$ для лестницы осциллятора и его бесконечный спектр;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (формализацией; текст страницы не менялся), сноска 9 переписана: было — commutator_canonical (ProcessHarmonicLadder.v:137) под невыполнимой посылкой s n * s n == n. commutator_canonical_rational : forall psi n, gann al1 (gcre be1 psi) n - gcre be1 (gann al1 psi) n == psi n (:256), где al1 n := inject_Z (Z.of_nat n), be1 n := 1 (:250, :251) — без посылок. Closed under the global context. На конечных стадиях — усечения: truncated_commutator_below_top : forall K psi n, S n < K -> tann K (tcre K psi) n - tcre K (tann K psi) n == psi n (:216); trunc K psi n := if n <? K then psi n else 0 (:191), tann, tcre — лестница усечения (:193, :194); для рациональной реализации — truncated_rational_below_top (:288). Closed under the global context. Бесконечный спектр — energy_unbounded (ProcessHarmonicLadder.v:93)."
+  },
+  {
+   "line": 29,
+   "theorem": "no_finite_ccr",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "отсутствие конечномерной реализации канонического коммутатора;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "no_finite_ccr (:125): для рациональных матриц A, B и рационального c при 1 <= N из равенства [A,B] = c·1 на координатах < N следует c == 0. Closed under the global context. О мнимой постоянной — запись стр. 150."
+  },
+  {
+   "line": 29,
+   "theorem": "isometry_commuting_preserves_energy",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "сохранение нормы (вероятности) при изометрической эволюции и энергии — когда шаг ещё и перестановочен с гамильтонианом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было «и энергии при изометрической эволюции» — посылка evolution_conserves_energy иная (шаг сохраняет энергию), а из изометричности сохранение энергии не следует. isometry_commuting_preserves_energy : forall (U H : nat -> nat -> Q) (N : nat), Isometry U N -> (forall w i, i < N -> op_apply H (op_apply U w N) N i == op_apply U (op_apply H w N) N i) -> EnergyPreserving U H N (:352); через isometry_polarization (:334): изометрия сохраняет скалярное произведение. Closed under the global context. isometry_not_energy_preserving : Isometry (rotation (3 # 5) (4 # 5)) 2 /\\ ~ EnergyPreserving (rotation (3 # 5) (4 # 5)) (Hdiag 1 0) 2 (:273). Closed under the global context."
+  },
+  {
+   "line": 31,
+   "theorem": null,
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "*Остаётся честной границей* (P4): *существование* собственного вектора у произвольного оператора («точная верхняя грань достигается» — над ℚ собственные значения вообще иррациональны);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теоремы существования собственного вектора в названных файлах нет; шапка ProcessSelfAdjointSpectral.v (стр. 17–24) называет её недоказанной. Статус на странице честный. Свидетель границы в src отсутствует; проверен в Check.v: симметричная матрица [[1,1],[1,-1]] не имеет ненулевого рационального собственного вектора (symmetric_without_rational_eigenvector)."
+  },
+  {
+   "line": 46,
+   "theorem": "isometry_commuting_preserves_energy",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "отсутствие конечной реализации канонического коммутатора; сохранение нормы при изометрической эволюции и энергии — при перестановочности шага с гамильтонианом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): в части об энергии — isometry_commuting_preserves_energy : forall (U H : nat -> nat -> Q) (N : nat), Isometry U N -> (forall w i, i < N -> op_apply H (op_apply U w N) N i == op_apply U (op_apply H w N) N i) -> EnergyPreserving U H N (:352); через isometry_polarization (:334): изометрия сохраняет скалярное произведение. Closed under the global context."
+  },
+  {
+   "line": 66,
+   "theorem": "op_apply",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "Оператор $T$ (матрица над ℚ, действующая $(Tf)_i=\\sum_j T_{ij}f_j$) *самосопряжён*, если перенос его на другую сторону скалярного произведения ничего не меняет:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition op_apply (T : nat -> nat -> Q) (v : nat -> Q) (N : nat) : nat -> Q := fun i => q_sum (fun j => T i j * v j) N (:51). Отдельного определения «самосопряжён» в файле нет: посылкой теорем служит симметрия матрицы op_symmetric (:55); страница говорит о ней как о достаточном условии (стр. 71)."
+  },
+  {
+   "line": 73,
+   "theorem": "q_sum_swap",
+   "file": "src/process/ProcessFubiniGeneral.v",
+   "claim": "Достаточное условие — симметрия матрицы, $T_{ij}=T_{ji}$. Доказательство этого равенства есть в точности *перестановка двойной суммы* (дискретная теорема Фубини из Главы 5.7) плюс симметрия:",
+   "page_price": "Без аксиом",
+   "verdict": "ok",
+   "note": "q_sum_swap (ProcessFubiniGeneral.v:78): dsum_xy f N M == dsum_yx f N M; Глава V.7 «Теорема Фубини на процессах» называет это имя. В adjoint_inner (ProcessSelfAdjointSpectral.v:94) лемма применена к fun i j => T i j * v j * w i, затем симметрия. Closed under the global context."
+  },
+  {
+   "line": 79,
+   "theorem": "is_eigenpair",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "В текущем рациональном слое собственное значение в формулировке собственной пары уже имеет тип ℚ; поэтому глава доказывает не «вещественность спектра» в классическом комплексном смысле (комплексного пространства здесь нет), а рациональную спектральную *структуру* для предъявленных собственных пар — отношение Рэлея и ортогональность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition is_eigenpair T v lam N := forall i, i < N -> op_apply T v N i == lam * v i (:59), lam : Q. Условия v ≠ 0 в определении нет: нулевой вектор образует «собственную пару» с любым lam; на названные теоремы это не влияет."
+  },
+  {
+   "line": 87,
+   "theorem": "rayleigh_eq",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "*Отношение Рэлея* связывает собственное значение с энергией направления: $\\langle Tf,f\\rangle=\\lambda\\|f\\|^2$. Доказано прямой выкладкой, без аксиом.[^3]",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "rayleigh_eq (:112): тождество для предъявленной собственной пары; покоординатная подстановка He и вынос множителя q_sum_scale. Closed under the global context."
+  },
+  {
+   "line": 89,
+   "theorem": "eigvec_orthogonal",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "Главный спектральный факт — *ортогональность*: собственные направления при *разных* собственных значениях взаимно ортогональны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "eigvec_orthogonal (:148); посылка симметрии матрицы названа на странице в следующем предложении («и самосопряжённости»). Выкладка страницы (стр. 91–96) повторяет доказательство: inner_op_eig_left, adjoint_inner, inner_op_eig_right, Qmult_integral."
+  },
+  {
+   "line": 98,
+   "theorem": "eigvec_orthogonal",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "Это структурное ядро спектральной теоремы, доказанное конструктивно.[^4]",
+   "page_price": "конструктивно",
+   "verdict": "ok",
+   "note": "Print Assumptions eigvec_orthogonal: Closed under the global context (classic не используется; разбор случаев — Qmult_integral). Общей теоремы о диагонализации в файле нет; страница её не заявляет (стр. 104–110)."
+  },
+  {
+   "line": 101,
+   "theorem": "diag_eigen_is_entry",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Для *диагонального* оператора, диагональ которого $\\lambda_n$ стремится к нулю (модель компактного оператора: для всякого порога лишь конечное число $\\lambda_n$ его превосходит), спектр *дискретен*: собственные значения — в точности сами числа $\\lambda_n$; всякое ненулевое встречается среди них конечное число раз, и его собственные векторы имеют лишь конечное число ненулевых координат; а сам оператор сколь угодно точно приближается операторами конечного ранга.[^5]",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было — «спектр дискретен: собственные значения убывают к нулю», за чем стояла теорема, повторяющая свою посылку. Стремление диагонали к нулю теперь названо условием. diag_eigen_is_entry : forall (lam v : nat -> Q) (mu : Q) (n : nat), (forall m, diag_op lam v m == mu * v m) -> ~ v n == 0 -> mu == lam n (:93) — собственное значение диагонального оператора есть элемент диагонали; обратно — diag_eigenvalue (ProcessCompactSpectral.v:72): diag_op lam (ket n) m == lam n * ket n m. Closed under the global context."
+  },
+  {
+   "line": 108,
+   "theorem": "diag_eigen_is_entry",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "**Доказана *структура* спектра — Рэлей, ортогональность, дискретность диагональной модели, — без аксиом.**",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора) (формализацией; текст страницы не менялся): «дискретность диагональной модели» — diag_eigen_is_entry : forall (lam v : nat -> Q) (mu : Q) (n : nat), (forall m, diag_op lam v m == mu * v m) -> ~ v n == 0 -> mu == lam n (:93) — собственное значение диагонального оператора есть элемент диагонали; обратно — diag_eigenvalue (ProcessCompactSpectral.v:72): diag_op lam (ket n) m == lam n * ket n m. Closed under the global context. diag_nonzero_value_finitely_often : forall lam mu, (lam ~~ const_process 0) -> ~ mu == 0 -> exists N, forall n, N <= n -> ~ lam n == mu (:104); diag_eigenspace_finite : при тех же посылках и diag_op lam v == mu * v — exists N, forall n, N <= n -> v n == 0 (:121). Closed under the global context. Рэлей и ортогональность — rayleigh_eq (:112) и eigvec_orthogonal (:148) файла ProcessSelfAdjointSpectral.v."
+  },
+  {
+   "line": 109,
+   "theorem": "symmetric_without_rational_eigenvector",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "А *существование* собственного вектора у *произвольного* самосопряжённого оператора — достижимость максимума отношения Рэлея — остаётся честной границей: над ℚ собственные значения, как правило, иррациональны (корень дискриминанта)[^15], и существование требует полноты / компактности",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора) (добавлена ссылка на пример): статус честный — теоремы существования нет. Слова об иррациональности собственных значений подкреплены примером: symmetric_without_rational_eigenvector (:401): для T = [[1,1],[1,−1]] — op_symmetric T 2 /\\ forall (v : nat -> Q) (lam : Q), is_eigenpair T v lam 2 -> v 0 == 0 /\\ v 1 == 0 (через no_rational_sqrt2: lam * lam == 2 невозможно). Closed under the global context."
+  },
+  {
+   "line": 119,
+   "theorem": "position_apply",
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "На решётке из $N$ узлов с позициями $x_i$ она *диагональна* и действует умножением:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "position_apply (:86): i < N -> op_apply (qhat x) v N i == x i * v i; qhat x := fun i j => if i =? j then x i else 0 (:78). Closed under the global context."
+  },
+  {
+   "line": 126,
+   "theorem": "position_eigenpair",
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "Её собственные направления — сами узлы решётки (базисные состояния $e_j$), а собственные значения — координаты узлов:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "position_eigenpair (:107): j < N -> is_eigenpair (qhat x) (basis_vec j) (x j) N. Доказано, что e_j — собственные векторы со значениями x_j; что иных собственных направлений нет (при различных x_i), в файле не утверждается."
+  },
+  {
+   "line": 134,
+   "theorem": "position_symmetric",
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "И, будучи диагональной с рациональными $x_i$, координата автоматически *самосопряжена*.[^6]",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "position_symmetric (ProcessPositionMomentum.v:94): op_symmetric (qhat x) N; вместе с adjoint_inner даёт равенство скалярных произведений. Одноимённое объявление есть в src/projective/ProcessOperator.v:211; глава называет ProcessPositionMomentum.v. Closed under the global context."
+  },
+  {
+   "line": 138,
+   "theorem": null,
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "Её спутник, импульс $\\hat p$ (на решётке — *разностный* оператор, не континуальный $-i\\hbar\\partial_x$), диагональным быть не может — и именно их совместное поведение ведёт к следующему разделу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Импульс в файле — не именованное определение, а местная матрица двух примеров при N = 3 (прямая разность: p i (S i) = 1, p i i = -1; :125, :134); эта матрица несимметрична. Слова «диагональным быть не может» теоремой не записаны и доказанными не названы; общий факт [q,B]_ij = (x_i - x_j) B_ij проверен в Check.v (position_commutator_entry)."
+  },
+  {
+   "line": 145,
+   "theorem": "no_finite_ccr",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "У него есть чисто алгебраическое следствие, объясняющее, *почему* $\\hat q,\\hat p$ обязаны быть бесконечномерными; неограниченность — следующий, более сильный классический факт, и от него здесь доказан след: в лестнице осциллятора один из двух весов растёт без границы.[^14]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было «обязаны быть неограниченными (бесконечномерными)» — доказано отсутствие конечномерной реализации. no_finite_ccr (ProcessCanonicalCommutator.v:125): матрицы N×N. Неограниченность (теорема Винтнера — Виландта) не формализована; страница теперь называет её классическим фактом. Closed under the global context."
+  },
+  {
+   "line": 149,
+   "theorem": "trace_commutator_zero",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "След коммутатора всегда нулевой — ибо $\\mathrm{tr}(AB)=\\mathrm{tr}(BA)$ (снова перестановка двойной суммы), — тогда как след $c\\cdot\\mathbf{1}$ равен $c\\cdot N$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "trace_commutator_zero (:89): mat_trace (mat_sub (mat_mul A B N) (mat_mul B A N)) N == 0; trace_mul_comm (:70) — через q_sum_swap; trace_scal_id (:111): mat_trace (mat_scal c mat_id) N == c * inject_Z (Z.of_nat N). Closed under the global context."
+  },
+  {
+   "line": 157,
+   "theorem": "no_finite_ccr_complex",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Канонический коммутатор с $c=i\\hbar\\ne0$ *не реализуем* никакими конечными матрицами. Доказано над ℚ, без аксиом: и для рациональной постоянной, и для комплексной, записанной парой рациональных чисел.[^7]",
+   "page_price": "над ℚ, без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было «Доказано над ℚ, без аксиом» при рациональной постоянной c : Q. no_finite_ccr_complex : forall (A1 A2 B1 B2 : nat -> nat -> Q) (c1 c2 : Q) (N : nat), 1 <= N -> ([A1,B1] − [A2,B2] == c1·1 на координатах < N) -> ([A1,B2] + [A2,B1] == c2·1 на координатах < N) -> c1 == 0 /\\ c2 == 0 (:213) — A = A1 + iA2, B = B1 + iB2, постоянная c1 + i c2. Closed under the global context."
+  },
+  {
+   "line": 161,
+   "theorem": "commutator_qp_zero_diagonal_N3",
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "На решётке это видно явно: координата $\\hat q$ диагональна (§ «Оператор координаты на решётке»), и её коммутатор с разностным импульсом имеет *тождественно нулевую диагональ* — и потому не может быть $i\\hbar\\mathbf{1}$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В файле — пример при N = 3, x_i = i, прямая разность: commutator_qp_zero_diagonal_N3 (:125) — три диагональных элемента равны 0. Конкретность оговорена сноской 8. Общей леммы (любые N, x, B) в src нет; проверена в Check.v (position_commutator_zero_diagonal)."
+  },
+  {
+   "line": 165,
+   "theorem": "no_finite_ccr",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "*Конечная актуальность (P4) не вмещает канонический коммутатор: он живёт лишь как процесс / бесконечномерный предел.* Сама теорема об отсутствии конечной реализации и есть строгое тому доказательство",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теорема — no_finite_ccr (:125), для рациональных матриц и рациональной постоянной; о мнимой постоянной — запись стр. 150. Слова «живёт лишь как процесс / бесконечномерный предел» — тезис автора, теоремой не являются."
+  },
+  {
+   "line": 171,
+   "theorem": "commutator_canonical_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Первый *бесконечномерный* квантовый объект — гармонический осциллятор — реализует каноническую алгебру *лестничными* операторами рождения $a^\\dagger$ и уничтожения $a$, чьё каноническое соотношение",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (формализацией; текст страницы не менялся): commutator_canonical_rational : forall psi n, gann al1 (gcre be1 psi) n - gcre be1 (gann al1 psi) n == psi n (:256), где al1 n := inject_Z (Z.of_nat n), be1 n := 1 (:250, :251) — без посылок. Closed under the global context. gcommutator_canonical : forall psi n, gann (gcre psi) n - gcre (gann psi) n == psi n (:114) — при al n * be n == n, на всех последовательностях nat -> Q. Definition gann (psi : nat -> Q) : nat -> Q := fun n => al (S n) * psi (S n) (:86); gcre psi n := match n with O => 0 | S m => be (S m) * psi m end (:89); посылка раздела GenLadder — Hab : forall n, al n * be n == inject_Z (Z.of_nat n). Closed under the global context. Сопряжённость a и a† — ladder_adjoint_factorial : forall psi phi K, q_sum (fun n => fq n * gann al1 psi n * phi n) K == q_sum (fun n => fq n * psi n * gcre be1 phi n) (S K) (:282), где fq n — n! (:271); общий вид для веса w с w (S n) * be (S n) == w n * al (S n) — ladder_adjoint_weighted (:170). Closed under the global context."
+  },
+  {
+   "line": 179,
+   "theorem": "number_operator_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Оператор числа $N=a^\\dagger a$ считает кванты, а гамильтониан осциллятора $H=a^\\dagger a+\\tfrac12$ имеет спектр, растущий без границы:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора): было «гамильтониан осциллятора имеет спектр» — гамильтониан был задан определением, с лестницей не связан; cre_ann_eq_num стояла под невыполнимой посылкой. number_operator_rational : forall psi n, gcre be1 (gann al1 psi) n == ProcessHarmonicLadder.num psi n (:260); для любых весов — gcre_gann_eq_num (:93). Closed under the global context."
+  },
+  {
+   "line": 186,
+   "theorem": "ground_energy",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "с основной энергией $\\tfrac12$ (не нулём — неустранимое нулевое колебание) и постоянным шагом $1$ между уровнями.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ground_energy (:89): energy 0 == 1 # 2; energy_spacing (:81): energy (S n) - energy n == 1. Это арифметика определения energy n := inject_Z (Z.of_nat n) + (1 # 2) (:55). Closed under the global context."
+  },
+  {
+   "line": 187,
+   "theorem": "energy_unbounded",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Спектр *бесконечен и неограничен* — осциллятор не вмещается ни в какую конечную размерность, что согласуется с обструкцией",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "energy_unbounded (:93): forall B : Q, exists n, B < energy n — по лемме Архимеда для функции n ↦ n + 1/2. Слова «не вмещается ни в какую конечную размерность» отдельной теоремой не записаны; смысл слова «спектр» оговорён на стр. 183–185. Closed under the global context."
+  },
+  {
+   "line": 191,
+   "theorem": "energy",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Здесь «бесконечный спектр» означает *формулу уровней* $E_n=n+\\tfrac12$ как процесс по $n$ (для всякой границы найдётся уровень выше), а не спектральную теорему о завершённом самосопряжённом операторе на полном пространстве Фока.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка страницы точна: Definition energy (n : nat) : Q := inject_Z (Z.of_nat n) + (1 # 2) (ProcessHarmonicLadder.v:55); ham_eigenvalue (:72): ham (ket n) m == energy n * ket n m. Что формула уровней следует из лестницы — ham_rational_eigen (src/process/ProcessLadderRational.v:264, шаг 6). Одноимённое определение energy есть в ProcessEnergyConservation.v:50 (другой предмет)."
+  },
+  {
+   "line": 195,
+   "theorem": "truncated_commutator_below_top",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Пространство состояний осциллятора — *пространство Фока* — удерживается процессно: как процесс конечных усечений (первые $K$ уровней), актуальных на каждой стадии.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (формализацией; следом добавлена фраза о коммутаторе усечения): было — усечений в формализации не было. truncated_commutator_below_top : forall K psi n, S n < K -> tann K (tcre K psi) n - tcre K (tann K psi) n == psi n (:216); trunc K psi n := if n <? K then psi n else 0 (:191), tann, tcre — лестница усечения (:193, :194); для рациональной реализации — truncated_rational_below_top (:288). Closed under the global context. truncated_commutator_top : forall k psi, tann (S k) (tcre (S k) psi) k - tcre (S k) (tann (S k) psi) k == - inject_Z (Z.of_nat k) * psi k (:233) — на верхнем уровне усечения до K = k + 1 уровней коммутатор равен −(K − 1); для рациональной реализации — truncated_rational_top (:292). Closed under the global context."
+  },
+  {
+   "line": 198,
+   "theorem": "ladder_premise_unsatisfiable",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Иррациональный множитель $\\sqrt n$, входящий в привычную запись лестничных операторов, в ToS не вводится: над ℚ числа $s$ с $s^2=2$ нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора): было «вводится абстрактным параметром $s$ с $s^2=n$» — такого рационального s нет, и теоремы раздела Ladder были верны впустую. ladder_premise_unsatisfiable : forall s : nat -> Q, (forall n, s n * s n == inject_Z (Z.of_nat n)) -> False (:69) — через no_rational_sqrt2 (analysis/Sqrt2Irrational.v): s 2 был бы рациональным корнем из двух. Closed under the global context."
+  },
+  {
+   "line": 207,
+   "theorem": "commutator_canonical_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "**Осциллятор — образец бесконечномерной наблюдаемой в ToS:** каноническая алгебра $[a,a^\\dagger]=1$ и формула уровней (с неограниченностью) доказаны над ℚ без аксиом;",
+   "page_price": "над ℚ без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (формализацией; текст страницы не менялся): каноническая алгебра — commutator_canonical_rational : forall psi n, gann al1 (gcre be1 psi) n - gcre be1 (gann al1 psi) n == psi n (:256), где al1 n := inject_Z (Z.of_nat n), be1 n := 1 (:250, :251) — без посылок. Closed under the global context. number_operator_rational : forall psi n, gcre be1 (gann al1 psi) n == ProcessHarmonicLadder.num psi n (:260); для любых весов — gcre_gann_eq_num (:93). Closed under the global context."
+  },
+  {
+   "line": 207,
+   "theorem": "ham_rational_eigen",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "**Осциллятор — образец бесконечномерной наблюдаемой в ToS:** каноническая алгебра $[a,a^\\dagger]=1$ и формула уровней (с неограниченностью) доказаны над ℚ без аксиом;",
+   "page_price": "над ℚ без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (формализацией; текст страницы не менялся): было — формула уровней задана определением и с лестницей не связана. ham_rational_eigen : forall n m, gcre be1 (gann al1 (ket n)) m + (1 # 2) * ket n m == energy n * ket n m (:264) — формула уровней как следствие лестницы, без посылок. Closed under the global context. gham_from_ladder : forall psi n, gcre (gann psi) n + (1 # 2) * psi n == ProcessHarmonicLadder.ham psi n (:124) — (a†a + ½)ψ = Hψ; на состояниях |n⟩ — gham_ladder_eigen (:133). Closed under the global context. Неограниченность — energy_unbounded (ProcessHarmonicLadder.v:93)."
+  },
+  {
+   "line": 215,
+   "theorem": "evolve",
+   "file": "src/process/ProcessSchrodingerEvolution.v",
+   "claim": "Точный пропагатор $e^{-i\\hat H t}$ — комплексная экспонента непрерывного времени — над ℚ недостижим; ToS удерживает его конструктивное ядро: *дискретную* эволюцию $\\psi_{n+1}=U\\psi_n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint evolve U N v n (:51): n-кратное применение op_apply U · N. Шаг U — произвольная рациональная матрица; гамильтониан в ProcessSchrodingerEvolution.v не участвует, U из Ĥ не выводится (шапка файла, стр. 20–23, называет это следующим шагом). См. запись стр. 216."
+  },
+  {
+   "line": 217,
+   "theorem": "evolution_conserves_norm",
+   "file": "src/process/ProcessSchrodingerEvolution.v",
+   "claim": "Если шаг $U$ — *изометрия* ($\\|U\\psi\\|=\\|\\psi\\|$, дискретная унитарность), то норма сохраняется на каждом шаге, $\\|\\psi_n\\|^2=\\|\\psi_0\\|^2$ для всех $n$, доказано индукцией по числу шагов.[^10]",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "evolution_conserves_norm (:70): Isometry U N -> forall v n, seq_inner (evolve U N v n) (evolve U N v n) N == seq_inner v v N; Isometry U N := forall w, seq_inner (op_apply U w N) (op_apply U w N) N == seq_inner w w N (:63). Индукция по n; посылка названа на странице. Closed under the global context."
+  },
+  {
+   "line": 223,
+   "theorem": "evolution_conserves_energy",
+   "file": "src/process/ProcessEnergyConservation.v",
+   "claim": "Если шаг сохраняет энергию (дискретный аналог коммутирования с $\\hat H$), то $E(\\psi_n)=E(\\psi_0)$ для всех $n$ — той же индукцией.[^11]",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "evolution_conserves_energy (:57): EnergyPreserving U H N -> forall v n, energy H (evolve U N v n) N == energy H v N; EnergyPreserving U H N := forall w, energy H (op_apply U w N) N == energy H w N (:53). Посылка названа на странице. Связь с перестановочностью в src не доказана; доказана в Check.v (isometry_commuting_preserves_energy). Closed under the global context."
+  },
+  {
+   "line": 225,
+   "theorem": null,
+   "file": "src/process/ProcessEnergyConservation.v",
+   "claim": "В общем виде это зачаток теоремы Нётер: симметрия эволюции (коммутирование с наблюдаемой) влечёт сохранение этой наблюдаемой — линия, естественно продолжаемая в физике.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный («зачаток», «продолжаемая»). Первый шаг теперь теорема: перестановочность изометрического шага с гамильтонианом влечёт сохранение энергии — isometry_commuting_preserves_energy (src/process/ProcessOperatorSpectrumEvolution.v:352, шаг 7); страница говорит об этом следующей фразой. Общего утверждения для произвольной наблюдаемой в src нет."
+  },
+  {
+   "line": 231,
+   "theorem": null,
+   "file": "src/process/ProcessEnergyConservation.v",
+   "claim": "**Оба закона сохранения квантовой механики — вероятности и энергии — доказаны как процессные факты, без аксиом.**",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Доказано: если один шаг сохраняет норму (Isometry) или энергию (EnergyPreserving), то их сохраняют все шаги (evolution_conserves_norm, evolution_conserves_energy; индукция). Условия названы в двух абзацах выше. Сохранение на одном шаге — посылка; предъявленные шаги — поворот 3-4-5 (норма) и знакоперемена (норма и энергия). Все — Closed under the global context."
+  },
+  {
+   "line": 232,
+   "theorem": "cayley_step_isometry",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Точный пропагатор $e^{-i\\hat H t}$ — роль-предел (непрерывное время, комплексная экспонента); дискретный шаг строится по образующей рационально (шаг Кэли) и остаётся изометрией, а законы сохранения держатся уже на нём.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было «процесс $\\psi_n$ его аппроксимирует» — утверждения о приближении в формализации нет. cayley_step_isometry : forall t : Q, Isometry (rotation (cn_c t) (cn_s t)) 2 (:291), где cn_c t := (1 - t * t) / (1 + t * t), cn_s t := (2 * t) / (1 + t * t) (:285, :286); cayley_step_equation (:299): шаг w = U v удовлетворяет w 0 - v 0 == - t * (w 1 + v 1) /\\ w 1 - v 1 == t * (w 0 + v 0); cayley_half_is_345 (:309). Closed under the global context."
+  },
+  {
+   "line": 248,
+   "theorem": "isometry_commuting_preserves_energy",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "каноническое $[a,a^\\dagger]=1$ лестницы и отсутствие конечной реализации коммутатора ($[A,B]=c\\mathbf{1}\\Rightarrow c=0$); сохранение нормы при изометрической эволюции и энергии — при перестановочности шага с гамильтонианом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): в части об энергии — isometry_commuting_preserves_energy : forall (U H : nat -> nat -> Q) (N : nat), Isometry U N -> (forall w i, i < N -> op_apply H (op_apply U w N) N i == op_apply U (op_apply H w N) N i) -> EnergyPreserving U H N (:352); через isometry_polarization (:334): изометрия сохраняет скалярное произведение. Closed under the global context. О лестнице — commutator_canonical_rational (src/process/ProcessLadderRational.v:256)."
+  },
+  {
+   "line": 277,
+   "theorem": "commutator_canonical_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Разбор показывает, что операторная теория на $L^2$ в ToS — процессная: правила (самосопряжённость, Рэлей, ортогональность, каноническая лестница, отсутствие конечного коммутатора, сохранение нормы и энергии) доказаны на конечных стадиях без аксиом,",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (формализацией; текст страницы не менялся): в части «каноническая лестница … на конечных стадиях» — commutator_canonical_rational : forall psi n, gann al1 (gcre be1 psi) n - gcre be1 (gann al1 psi) n == psi n (:256), где al1 n := inject_Z (Z.of_nat n), be1 n := 1 (:250, :251) — без посылок. Closed under the global context. truncated_commutator_below_top : forall K psi n, S n < K -> tann K (tcre K psi) n - tcre K (tann K psi) n == psi n (:216); trunc K psi n := if n <? K then psi n else 0 (:191), tann, tcre — лестница усечения (:193, :194); для рациональной реализации — truncated_rational_below_top (:288). Closed under the global context. Об энергии и спектре диагонального оператора в том же перечне — записи стр. 29 и 99 (шаг 7)."
+  },
+  {
+   "line": 281,
+   "theorem": "no_finite_ccr",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "Канонический коммутатор не просто «вынесен»: доказано, что конечная актуальность его *не вмещает*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "no_finite_ccr (:125), рациональные матрицы и рациональная постоянная; о мнимой постоянной — запись стр. 150."
+  },
+  {
+   "line": 285,
+   "theorem": null,
+   "file": null,
+   "claim": "Она прошла путь от меры нуль и интеграла Лебега как процессов (6.1–6.3) через теоремы сходимости (6.4) к пространствам $L^1$, $L^2$ и их полноте по построению (6.5), и наконец к операторам, спектру и квантовой динамике (6.6).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Нумерация совпадает с файлами Части VI: главы 1–3 — мера и интеграл Лебега, 4 — теоремы сходимости, 5 — L¹ и L², 6 — настоящая глава. Содержание тех глав — предмет их ведомостей."
+  },
+  {
+   "line": 297,
+   "theorem": null,
+   "file": "src/process/ProcessL2HilbertSynthesis.v",
+   "claim": "По шапкам файлов и синтез-файлу кластера — 0 аксиом; у ключевых теорем стоит `Print Assumptions`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Названные файлы существуют; строк Axiom, Parameter, Admitted в них нет; Qed в восьми прежних: 8, 6, 11, 8, 6, 5, 5, 3 (шапки совпадают со счётом), в ProcessLadderRational.v (добавлен в перечень 15.11, шаг 6) — 24. Для всех объявлений этих файлов (и для q_sum_swap) компилятор даёт Closed under the global context."
+  },
+  {
+   "line": 298,
+   "theorem": "op_symmetric",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "`adjoint_inner` в `ProcessSelfAdjointSpectral.v` (0 аксиом): через перестановку сумм `q_sum_swap` и симметрию `op_symmetric`. Диагональный оператор симметричен автоматически.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition op_symmetric T N := forall i j, i < N -> j < N -> T i j == T j i (:55). Диагональный случай: position_symmetric (ProcessPositionMomentum.v:94), diag_self_adjoint (ProcessCompactSpectral.v:65). Closed under the global context."
+  },
+  {
+   "line": 300,
+   "theorem": "eigvec_orthogonal",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "`eigvec_orthogonal` в `ProcessSelfAdjointSpectral.v` (0 аксиом): из `adjoint_inner` и целостности умножения в ℚ.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Доказательство (:155–168): inner_op_eig_left, adjoint_inner, inner_op_eig_right, затем Qmult_integral. Closed under the global context."
+  },
+  {
+   "line": 300,
+   "theorem": "spectral_2x2_concrete",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "над ℚ с собственными значениями $3$ и $-1$ и ортогональными собственными направлениями проверена вычислением (`spectral_2x2_concrete`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Example spectral_2x2_concrete (:172): T i j := if i =? j then 1 else 2 при N = 2; проверены четыре покоординатных равенства собственных пар (1,1) ↦ 3 и (1,-1) ↦ -1 и seq_inner v w 2 == 0; vm_compute. Это пример, общей теоремы о диагонализации нет — страница так и говорит. Closed under the global context."
+  },
+  {
+   "line": 302,
+   "theorem": "q_sum_delta",
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "опорная лемма — выделение диагонали из суммы `q_sum_delta`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "q_sum_delta (:51): i < N -> q_sum (fun k => (if i =? k then a else 0) * g k) N == a * g i. Closed under the global context."
+  },
+  {
+   "line": 303,
+   "theorem": "trace_mul_comm",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "`no_finite_ccr` в `ProcessCanonicalCommutator.v` (0 аксиом): из `trace_commutator_zero` ($\\mathrm{tr}[A,B]=0$, опирается на `trace_mul_comm`) и $\\mathrm{tr}(c\\mathbf{1})=cN$; постоянная $c$ здесь рациональна.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Ход доказательства no_finite_ccr (:130–146) именно такой: trace_commutator_zero (:89), trace_scal_id (:111), затем Qmult_integral; trace_mul_comm (:70) — через q_sum_swap. Closed under the global context."
+  },
+  {
+   "line": 303,
+   "theorem": "trace_commutator_concrete",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "Конкретный свидетель: $[A,B]=\\mathrm{diag}(1,-1)$ (`commutator_concrete_entries`), след $0$ (`trace_commutator_concrete`), не кратен $\\mathbf{1}$ (`commutator_concrete_not_scalar`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было — пример утверждал только нулевой след. Example trace_commutator_concrete (ProcessCanonicalCommutator.v:150): mat_trace (…) 2 == 0. Элементы коммутатора и «не кратен единичной» — отдельные утверждения нового файла. Closed under the global context."
+  },
+  {
+   "line": 304,
+   "theorem": "commutator_qp_defect_N3",
+   "file": "src/process/ProcessPositionMomentum.v",
+   "claim": "Конкретный коммутатор $[\\hat q, \\hat p]$ на решётке $N=3$ с нулевой диагональю и следом $0$ — в `ProcessPositionMomentum.v` (0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "commutator_qp_defect_N3 (:134): C 0 1 == -1, C 1 2 == -1, mat_trace C 3 == 0; нулевая диагональ — commutator_qp_zero_diagonal_N3 (:125). Оба — vm_compute, Closed under the global context."
+  },
+  {
+   "line": 305,
+   "theorem": "energy_spacing",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Свойства формулы уровней — `energy_spacing` (шаг $1$), `ground_energy` ($\\tfrac12$) и `energy_unbounded` (спектр неограничен) в `ProcessHarmonicLadder.v` (0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "energy_spacing (:81): forall n, energy (S n) - energy n == 1 — арифметика определения energy (:55). Одноимённое объявление есть в src/stdlib/OscillatorCorrection.v:42; глава называет ProcessHarmonicLadder.v. Closed under the global context."
+  },
+  {
+   "line": 306,
+   "theorem": "rotation_isometry",
+   "file": "src/process/ProcessSchrodingerEvolution.v",
+   "claim": "Конкретная рациональная унитарная — поворот $3\\text{-}4\\text{-}5$ ($c=3/5,\\ s=4/5,\\ c^2+s^2=1$), `rotation_isometry`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "rotation_isometry (:94): forall c s, c * c + s * s == 1 -> Isometry (rotation c s) 2 — общая лемма о вещественной матрице 2×2; случай 3-4-5 — rotation_345_isometry (:104) и evolution_345_conserves_norm (:108). «Унитарная» здесь — ортогональная матрица над ℚ. Closed under the global context."
+  },
+  {
+   "line": 307,
+   "theorem": "signflip_preserves_energy",
+   "file": "src/process/ProcessEnergyConservation.v",
+   "claim": "свидетель — знакоперемена $\\mathrm{diag}(1,-1)$ сохраняет энергию любого диагонального $\\hat H$ и норму.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "signflip_preserves_energy (:93): forall e0 e1, EnergyPreserving signflip (Hdiag e0 e1) 2; signflip_isometry (:86). «Любой диагональный Ĥ» — матрица 2×2 diag(e0, e1). Closed under the global context."
+  },
+  {
+   "line": 307,
+   "theorem": "signflip_conserves_norm_and_energy",
+   "file": "src/process/ProcessL2HilbertSynthesis.v",
+   "claim": "Связка обоих законов для одной эволюции — в `ProcessL2HilbertSynthesis.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "signflip_conserves_norm_and_energy (:83): конъюнкция evolution_conserves_norm и evolution_signflip_conserves_energy для знакоперемены и Hdiag e0 e1 при N = 2. Closed under the global context."
+  },
+  {
+   "line": 179,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "gham_from_ladder : forall psi n, gcre (gann psi) n + (1 # 2) * psi n == ProcessHarmonicLadder.ham psi n (:124) — (a†a + ½)ψ = Hψ; на состояниях |n⟩ — gham_ladder_eigen (:133). Closed under the global context.",
+   "theorem": "gham_from_ladder",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Оператор числа $N=a^\\dagger a$ считает кванты, а гамильтониан осциллятора $H=a^\\dagger a+\\tfrac12$ имеет спектр, растущий без границы:"
+  },
+  {
+   "line": 196,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (добавлено): truncated_commutator_below_top : forall K psi n, S n < K -> tann K (tcre K psi) n - tcre K (tann K psi) n == psi n (:216); trunc K psi n := if n <? K then psi n else 0 (:191), tann, tcre — лестница усечения (:193, :194); для рациональной реализации — truncated_rational_below_top (:288). Closed under the global context.",
+   "theorem": "truncated_commutator_below_top",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "На усечении коммутатор равен единице на всех уровнях ниже верхнего, а на верхнем уровне равен $-(K-1)$: дефект усечения сидит на его краю и с ростом $K$ уходит вверх."
+  },
+  {
+   "line": 196,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "truncated_commutator_top : forall k psi, tann (S k) (tcre (S k) psi) k - tcre (S k) (tann (S k) psi) k == - inject_Z (Z.of_nat k) * psi k (:233) — на верхнем уровне усечения до K = k + 1 уровней коммутатор равен −(K − 1); для рациональной реализации — truncated_rational_top (:292). Closed under the global context.",
+   "theorem": "truncated_commutator_top",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "На усечении коммутатор равен единице на всех уровнях ниже верхнего, а на верхнем уровне равен $-(K-1)$: дефект усечения сидит на его краю и с ростом $K$ уходит вверх."
+  },
+  {
+   "line": 200,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (добавлено): gcommutator_canonical : forall psi n, gann (gcre psi) n - gcre (gann psi) n == psi n (:114) — при al n * be n == n, на всех последовательностях nat -> Q. Definition gann (psi : nat -> Q) : nat -> Q := fun n => al (S n) * psi (S n) (:86); gcre psi n := match n with O => 0 | S m => be (S m) * psi m end (:89); посылка раздела GenLadder — Hab : forall n, al n * be n == inject_Z (Z.of_nat n). Closed under the global context.",
+   "theorem": "gcommutator_canonical",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Его место занимают два рациональных веса с произведением $\\alpha_n\\beta_n=n$ — понижение умножает на $\\alpha_n$, повышение на $\\beta_n$; простейший выбор — $\\alpha_n=n$, $\\beta_n=1$."
+  },
+  {
+   "line": 200,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Действие на состояниях: gann_ket_S : gann (ket (S n)) m == al (S n) * ket n m (:143); gann_ket_O : gann (ket 0) m == 0 (:152); gcre_ket : gcre (ket n) m == be (S n) * ket (S n) m (:157). Closed under the global context.",
+   "theorem": "gann_ket_S",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Его место занимают два рациональных веса с произведением $\\alpha_n\\beta_n=n$ — понижение умножает на $\\alpha_n$, повышение на $\\beta_n$; простейший выбор — $\\alpha_n=n$, $\\beta_n=1$."
+  },
+  {
+   "line": 200,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "al1_be1 : forall n, al1 n * be1 n == inject_Z (Z.of_nat n) (:253) — посылка лестницы выполнена для al1 n = n, be1 n = 1. Closed under the global context.",
+   "theorem": "al1_be1",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Его место занимают два рациональных веса с произведением $\\alpha_n\\beta_n=n$ — понижение умножает на $\\alpha_n$, повышение на $\\beta_n$; простейший выбор — $\\alpha_n=n$, $\\beta_n=1$."
+  },
+  {
+   "line": 202,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора) (добавлено): ladder_adjoint_factorial : forall psi phi K, q_sum (fun n => fq n * gann al1 psi n * phi n) K == q_sum (fun n => fq n * psi n * gcre be1 phi n) (S K) (:282), где fq n — n! (:271); общий вид для веса w с w (S n) * be (S n) == w n * al (S n) — ladder_adjoint_weighted (:170). Closed under the global context. «⟨n|n⟩ = n!» — чтение веса fq n.",
+   "theorem": "ladder_adjoint_factorial",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Это запись в ненормированных состояниях, $\\langle n|n\\rangle=n!$: в скалярном произведении с весами $n!$ операторы $a$ и $a^\\dagger$ взаимно сопряжены."
+  },
+  {
+   "line": 204,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Коммутатор и оператор числа — для любых весов с al n * be n == n: gcommutator_canonical (:114), gcre_gann_eq_num (:93); уровни — gham_from_ladder (:124); шаг уровней — energy_spacing (ProcessHarmonicLadder.v:81). Closed under the global context.",
+   "theorem": "gcommutator_canonical",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестничная алгебра от выбора весов не зависит, и в наблюдаемых — уровнях, шаге, коммутаторе — стоят одни рациональные величины."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ground_energy (:89): energy 0 == 1 # 2. Closed under the global context.",
+   "theorem": "ground_energy",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Свойства формулы уровней — `energy_spacing` (шаг $1$), `ground_energy` ($\\tfrac12$) и `energy_unbounded` (спектр неограничен) в `ProcessHarmonicLadder.v` (0 аксиом)."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "energy_unbounded (:93): forall B : Q, exists n, B < energy n. Closed under the global context.",
+   "theorem": "energy_unbounded",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Свойства формулы уровней — `energy_spacing` (шаг $1$), `ground_energy` ($\\tfrac12$) и `energy_unbounded` (спектр неограничен) в `ProcessHarmonicLadder.v` (0 аксиом)."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 6, слово автора): было — имена раздела Ladder под невыполнимой посылкой. commutator_canonical_rational : forall psi n, gann al1 (gcre be1 psi) n - gcre be1 (gann al1 psi) n == psi n (:256), где al1 n := inject_Z (Z.of_nat n), be1 n := 1 (:250, :251) — без посылок. Closed under the global context.",
+   "theorem": "commutator_canonical_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\\dagger]=1$), `number_operator_rational` ($N=a^\\dagger a$), `ham_rational_eigen` ($(a^\\dagger a+\\tfrac12)|n\\rangle=(n+\\tfrac12)|n\\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\\dagger$ с весами $n!$); для любых весов с $\\alpha_n\\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "number_operator_rational : forall psi n, gcre be1 (gann al1 psi) n == ProcessHarmonicLadder.num psi n (:260); для любых весов — gcre_gann_eq_num (:93). Closed under the global context.",
+   "theorem": "number_operator_rational",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\\dagger]=1$), `number_operator_rational` ($N=a^\\dagger a$), `ham_rational_eigen` ($(a^\\dagger a+\\tfrac12)|n\\rangle=(n+\\tfrac12)|n\\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\\dagger$ с весами $n!$); для любых весов с $\\alpha_n\\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ham_rational_eigen : forall n m, gcre be1 (gann al1 (ket n)) m + (1 # 2) * ket n m == energy n * ket n m (:264) — формула уровней как следствие лестницы, без посылок. Closed under the global context.",
+   "theorem": "ham_rational_eigen",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\\dagger]=1$), `number_operator_rational` ($N=a^\\dagger a$), `ham_rational_eigen` ($(a^\\dagger a+\\tfrac12)|n\\rangle=(n+\\tfrac12)|n\\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\\dagger$ с весами $n!$); для любых весов с $\\alpha_n\\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ladder_adjoint_factorial : forall psi phi K, q_sum (fun n => fq n * gann al1 psi n * phi n) K == q_sum (fun n => fq n * psi n * gcre be1 phi n) (S K) (:282), где fq n — n! (:271); общий вид для веса w с w (S n) * be (S n) == w n * al (S n) — ladder_adjoint_weighted (:170). Closed under the global context.",
+   "theorem": "ladder_adjoint_factorial",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\\dagger]=1$), `number_operator_rational` ($N=a^\\dagger a$), `ham_rational_eigen` ($(a^\\dagger a+\\tfrac12)|n\\rangle=(n+\\tfrac12)|n\\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\\dagger$ с весами $n!$); для любых весов с $\\alpha_n\\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "gcommutator_canonical : forall psi n, gann (gcre psi) n - gcre (gann psi) n == psi n (:114) — при al n * be n == n, на всех последовательностях nat -> Q. Definition gann (psi : nat -> Q) : nat -> Q := fun n => al (S n) * psi (S n) (:86); gcre psi n := match n with O => 0 | S m => be (S m) * psi m end (:89); посылка раздела GenLadder — Hab : forall n, al n * be n == inject_Z (Z.of_nat n). Closed under the global context.",
+   "theorem": "gcommutator_canonical",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\\dagger]=1$), `number_operator_rational` ($N=a^\\dagger a$), `ham_rational_eigen` ($(a^\\dagger a+\\tfrac12)|n\\rangle=(n+\\tfrac12)|n\\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\\dagger$ с весами $n!$); для любых весов с $\\alpha_n\\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`."
+  },
+  {
+   "line": 305,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "gham_from_ladder : forall psi n, gcre (gann psi) n + (1 # 2) * psi n == ProcessHarmonicLadder.ham psi n (:124) — (a†a + ½)ψ = Hψ; на состояниях |n⟩ — gham_ladder_eigen (:133). Closed under the global context.",
+   "theorem": "gham_from_ladder",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Лестница с рациональными весами — файл `ProcessLadderRational.v` (0 аксиом): `commutator_canonical_rational` ($[a,a^\\dagger]=1$), `number_operator_rational` ($N=a^\\dagger a$), `ham_rational_eigen` ($(a^\\dagger a+\\tfrac12)|n\\rangle=(n+\\tfrac12)|n\\rangle$ — формула уровней как следствие лестницы), `ladder_adjoint_factorial` (сопряжённость $a$ и $a^\\dagger$ с весами $n!$); для любых весов с $\\alpha_n\\beta_n=n$ — `gcommutator_canonical`, `gham_from_ladder`."
+  },
+  {
+   "line": 305,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "truncated_commutator_below_top : forall K psi n, S n < K -> tann K (tcre K psi) n - tcre K (tann K psi) n == psi n (:216); trunc K psi n := if n <? K then psi n else 0 (:191), tann, tcre — лестница усечения (:193, :194); для рациональной реализации — truncated_rational_below_top (:288). Closed under the global context.",
+   "theorem": "truncated_commutator_below_top",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Усечения: `truncated_commutator_below_top` и `truncated_commutator_top`."
+  },
+  {
+   "line": 305,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "truncated_commutator_top : forall k psi, tann (S k) (tcre (S k) psi) k - tcre (S k) (tann (S k) psi) k == - inject_Z (Z.of_nat k) * psi k (:233) — на верхнем уровне усечения до K = k + 1 уровней коммутатор равен −(K − 1); для рациональной реализации — truncated_rational_top (:292). Closed under the global context.",
+   "theorem": "truncated_commutator_top",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Усечения: `truncated_commutator_below_top` и `truncated_commutator_top`."
+  },
+  {
+   "line": 305,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ladder_premise_unsatisfiable : forall s : nat -> Q, (forall n, s n * s n == inject_Z (Z.of_nat n)) -> False (:69) — через no_rational_sqrt2 (analysis/Sqrt2Irrational.v): s 2 был бы рациональным корнем из двух. Closed under the global context.",
+   "theorem": "ladder_premise_unsatisfiable",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "Прежние `commutator_canonical` и `cre_ann_eq_num` того же файла стоят под посылкой «рациональное $s$ с $s(n)^2=n$ при всех $n$», а такого $s$ нет (`ladder_premise_unsatisfiable`)."
+  },
+  {
+   "line": 305,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem commutator_canonical (:137) — в разделе Ladder с посылкой Hs : forall n, s n * s n == inject_Z (Z.of_nat n) (:111), s : nat -> Q; сноска это говорит. Closed under the global context.",
+   "theorem": "commutator_canonical",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Прежние `commutator_canonical` и `cre_ann_eq_num` того же файла стоят под посылкой «рациональное $s$ с $s(n)^2=n$ при всех $n$», а такого $s$ нет (`ladder_premise_unsatisfiable`)."
+  },
+  {
+   "line": 305,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma cre_ann_eq_num (:121) — под той же посылкой Hs (:111). Closed under the global context.",
+   "theorem": "cre_ann_eq_num",
+   "file": "src/process/ProcessHarmonicLadder.v",
+   "claim": "Прежние `commutator_canonical` и `cre_ann_eq_num` того же файла стоят под посылкой «рациональное $s$ с $s(n)^2=n$ при всех $n$», а такого $s$ нет (`ladder_premise_unsatisfiable`)."
+  },
+  {
+   "line": 29,
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "commuting_isometric_evolution_conserves_both (:367): при тех же посылках для всех v, n — seq_inner (evolve U N v n) (evolve U N v n) N == seq_inner v v N /\\ energy H (evolve U N v n) N == energy H v N. Closed under the global context.",
+   "theorem": "commuting_isometric_evolution_conserves_both",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "сохранение нормы (вероятности) при изометрической эволюции и энергии — когда шаг ещё и перестановочен с гамильтонианом."
+  },
+  {
+   "line": 101,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diag_eigenvalue (:72): forall lam n m, diag_op lam (ket n) m == lam n * ket n m — всякое lam n есть собственное значение с собственным вектором ket n. Closed under the global context.",
+   "theorem": "diag_eigenvalue",
+   "file": "src/process/ProcessCompactSpectral.v",
+   "claim": "Для *диагонального* оператора, диагональ которого $\\lambda_n$ стремится к нулю (модель компактного оператора: для всякого порога лишь конечное число $\\lambda_n$ его превосходит), спектр *дискретен*: собственные значения — в точности сами числа $\\lambda_n$; всякое ненулевое встречается среди них конечное число раз, и его собственные векторы имеют лишь конечное число ненулевых координат; а сам оператор сколь угодно точно приближается операторами конечного ранга.[^5]"
+  },
+  {
+   "line": 101,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diag_nonzero_value_finitely_often : forall lam mu, (lam ~~ const_process 0) -> ~ mu == 0 -> exists N, forall n, N <= n -> ~ lam n == mu (:104); diag_eigenspace_finite : при тех же посылках и diag_op lam v == mu * v — exists N, forall n, N <= n -> v n == 0 (:121). Closed under the global context.",
+   "theorem": "diag_nonzero_value_finitely_often",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Для *диагонального* оператора, диагональ которого $\\lambda_n$ стремится к нулю (модель компактного оператора: для всякого порога лишь конечное число $\\lambda_n$ его превосходит), спектр *дискретен*: собственные значения — в точности сами числа $\\lambda_n$; всякое ненулевое встречается среди них конечное число раз, и его собственные векторы имеют лишь конечное число ненулевых координат; а сам оператор сколь угодно точно приближается операторами конечного ранга.[^5]"
+  },
+  {
+   "line": 101,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diag_nonzero_value_finitely_often : forall lam mu, (lam ~~ const_process 0) -> ~ mu == 0 -> exists N, forall n, N <= n -> ~ lam n == mu (:104); diag_eigenspace_finite : при тех же посылках и diag_op lam v == mu * v — exists N, forall n, N <= n -> v n == 0 (:121). Closed under the global context.",
+   "theorem": "diag_eigenspace_finite",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Для *диагонального* оператора, диагональ которого $\\lambda_n$ стремится к нулю (модель компактного оператора: для всякого порога лишь конечное число $\\lambda_n$ его превосходит), спектр *дискретен*: собственные значения — в точности сами числа $\\lambda_n$; всякое ненулевое встречается среди них конечное число раз, и его собственные векторы имеют лишь конечное число ненулевых координат; а сам оператор сколь угодно точно приближается операторами конечного ранга.[^5]"
+  },
+  {
+   "line": 101,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "diag_finite_rank_approx : forall lam, (lam ~~ const_process 0) -> forall eps, 0 < eps -> exists N, forall (f : nat -> Q) (M : nat), seq_inner (diag_op (lam_tail lam N) f) (diag_op (lam_tail lam N) f) M <= (eps * eps) * seq_inner f f M (:139); lam_tail lam N обнуляет диагональ ниже N (:134): хвост оператора мал по норме равномерно по f и по стадии M. Closed under the global context.",
+   "theorem": "diag_finite_rank_approx",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Для *диагонального* оператора, диагональ которого $\\lambda_n$ стремится к нулю (модель компактного оператора: для всякого порога лишь конечное число $\\lambda_n$ его превосходит), спектр *дискретен*: собственные значения — в точности сами числа $\\lambda_n$; всякое ненулевое встречается среди них конечное число раз, и его собственные векторы имеют лишь конечное число ненулевых координат; а сам оператор сколь угодно точно приближается операторами конечного ранга.[^5]"
+  },
+  {
+   "line": 145,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "ladder_weights_unbounded : forall al be : nat -> Q, (forall n, al n * be n == inject_Z (Z.of_nat n)) -> forall K : Q, exists n, K < al n * al n \\/ K < be n * be n (src/process/ProcessLadderRational.v:303). Closed under the global context.",
+   "theorem": "ladder_weights_unbounded",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "У него есть чисто алгебраическое следствие, объясняющее, *почему* $\\hat q,\\hat p$ обязаны быть бесконечномерными; неограниченность — следующий, более сильный классический факт, и от него здесь доказан след: в лестнице осциллятора один из двух весов растёт без границы.[^14]"
+  },
+  {
+   "line": 227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора) (добавлено): isometry_commuting_preserves_energy : forall (U H : nat -> nat -> Q) (N : nat), Isometry U N -> (forall w i, i < N -> op_apply H (op_apply U w N) N i == op_apply U (op_apply H w N) N i) -> EnergyPreserving U H N (:352); через isometry_polarization (:334): изометрия сохраняет скалярное произведение. Closed under the global context.",
+   "theorem": "isometry_commuting_preserves_energy",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Первый её шаг доказан: изометрический шаг, перестановочный с $\\hat H$, сохраняет энергию — а одной изометричности для этого мало.[^12]"
+  },
+  {
+   "line": 227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "isometry_not_energy_preserving : Isometry (rotation (3 # 5) (4 # 5)) 2 /\\ ~ EnergyPreserving (rotation (3 # 5) (4 # 5)) (Hdiag 1 0) 2 (:273). Closed under the global context.",
+   "theorem": "isometry_not_energy_preserving",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Первый её шаг доказан: изометрический шаг, перестановочный с $\\hat H$, сохраняет энергию — а одной изометричности для этого мало.[^12]"
+  },
+  {
+   "line": 232,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "cayley_evolution_conserves_both : forall (t e : Q) (v : nat -> Q) (n : nat), для U := rotation (cn_c t) (cn_s t) — норма и энергия при H = Hdiag e e сохраняются на всех шагах (:384). Closed under the global context.",
+   "theorem": "cayley_evolution_conserves_both",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Точный пропагатор $e^{-i\\hat H t}$ — роль-предел (непрерывное время, комплексная экспонента); дискретный шаг строится по образующей рационально (шаг Кэли) и остаётся изометрией, а законы сохранения держатся уже на нём."
+  },
+  {
+   "line": 235,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: оценки близости шага Кэли к exp(−iĤt) в src нет; шаг построен для одного уровня в вещественных координатах (Re, Im), образующая — tJ, J = [[0,−1],[1,0]].",
+   "theorem": null,
+   "file": null,
+   "claim": "Оценка близости такого шага к экспоненте — за границей главы.[^13]"
+  },
+  {
+   "line": 301,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "diag_eigenvalue (:72): forall lam n m, diag_op lam (ket n) m == lam n * ket n m. Closed under the global context.",
+   "theorem": "diag_eigenvalue",
+   "file": "src/process/ProcessCompactSpectral.v",
+   "claim": "Что всякое $\\lambda_n$ есть собственное значение — `diag_eigenvalue` в `ProcessCompactSpectral.v`; что других нет — `diag_eigen_is_entry`; конечная кратность ненулевого значения — `diag_nonzero_value_finitely_often` и `diag_eigenspace_finite`; приближение операторами конечного ранга — `diag_finite_rank_approx` (файл `ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 301,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора): было «`diag_spectrum_discrete` в `ProcessCompactSpectral.v` (0 аксиом)». diag_eigen_is_entry : forall (lam v : nat -> Q) (mu : Q) (n : nat), (forall m, diag_op lam v m == mu * v m) -> ~ v n == 0 -> mu == lam n (:93) — собственное значение диагонального оператора есть элемент диагонали; обратно — diag_eigenvalue (ProcessCompactSpectral.v:72): diag_op lam (ket n) m == lam n * ket n m. Closed under the global context.",
+   "theorem": "diag_eigen_is_entry",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Что всякое $\\lambda_n$ есть собственное значение — `diag_eigenvalue` в `ProcessCompactSpectral.v`; что других нет — `diag_eigen_is_entry`; конечная кратность ненулевого значения — `diag_nonzero_value_finitely_often` и `diag_eigenspace_finite`; приближение операторами конечного ранга — `diag_finite_rank_approx` (файл `ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 301,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "diag_nonzero_value_finitely_often : forall lam mu, (lam ~~ const_process 0) -> ~ mu == 0 -> exists N, forall n, N <= n -> ~ lam n == mu (:104); diag_eigenspace_finite : при тех же посылках и diag_op lam v == mu * v — exists N, forall n, N <= n -> v n == 0 (:121). Closed under the global context.",
+   "theorem": "diag_nonzero_value_finitely_often",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Что всякое $\\lambda_n$ есть собственное значение — `diag_eigenvalue` в `ProcessCompactSpectral.v`; что других нет — `diag_eigen_is_entry`; конечная кратность ненулевого значения — `diag_nonzero_value_finitely_often` и `diag_eigenspace_finite`; приближение операторами конечного ранга — `diag_finite_rank_approx` (файл `ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 301,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "diag_nonzero_value_finitely_often : forall lam mu, (lam ~~ const_process 0) -> ~ mu == 0 -> exists N, forall n, N <= n -> ~ lam n == mu (:104); diag_eigenspace_finite : при тех же посылках и diag_op lam v == mu * v — exists N, forall n, N <= n -> v n == 0 (:121). Closed under the global context.",
+   "theorem": "diag_eigenspace_finite",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Что всякое $\\lambda_n$ есть собственное значение — `diag_eigenvalue` в `ProcessCompactSpectral.v`; что других нет — `diag_eigen_is_entry`; конечная кратность ненулевого значения — `diag_nonzero_value_finitely_often` и `diag_eigenspace_finite`; приближение операторами конечного ранга — `diag_finite_rank_approx` (файл `ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 301,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "diag_finite_rank_approx : forall lam, (lam ~~ const_process 0) -> forall eps, 0 < eps -> exists N, forall (f : nat -> Q) (M : nat), seq_inner (diag_op (lam_tail lam N) f) (diag_op (lam_tail lam N) f) M <= (eps * eps) * seq_inner f f M (:139); lam_tail lam N обнуляет диагональ ниже N (:134): хвост оператора мал по норме равномерно по f и по стадии M. Closed under the global context.",
+   "theorem": "diag_finite_rank_approx",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Что всякое $\\lambda_n$ есть собственное значение — `diag_eigenvalue` в `ProcessCompactSpectral.v`; что других нет — `diag_eigen_is_entry`; конечная кратность ненулевого значения — `diag_nonzero_value_finitely_often` и `diag_eigenspace_finite`; приближение операторами конечного ранга — `diag_finite_rank_approx` (файл `ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 301,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "diag_spectrum_discrete (:82): (lam ~~ const_process 0) -> forall eps, 0 < eps -> exists N, forall n, N <= n -> Qabs (lam n) < eps — развёрнутое определение посылки; сноска это говорит. to_zero_unfold : forall lam, (lam ~~ const_process 0) <-> (forall eps, 0 < eps -> exists N, forall n, N <= n -> Qabs (lam n) < eps) (:81) — заключение diag_spectrum_discrete равносильно его посылке. Closed under the global context.",
+   "theorem": "diag_spectrum_discrete",
+   "file": "src/process/ProcessCompactSpectral.v",
+   "claim": "Стремление диагонали к нулю здесь — посылка; `diag_spectrum_discrete` (`ProcessCompactSpectral.v`, 0 аксиом) записывает её в развёрнутом виде."
+  },
+  {
+   "line": 301,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "to_zero_unfold : forall lam, (lam ~~ const_process 0) <-> (forall eps, 0 < eps -> exists N, forall n, N <= n -> Qabs (lam n) < eps) (:81) — заключение diag_spectrum_discrete равносильно его посылке. Closed under the global context.",
+   "theorem": "to_zero_unfold",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Стремление диагонали к нулю здесь — посылка; `diag_spectrum_discrete` (`ProcessCompactSpectral.v`, 0 аксиом) записывает её в развёрнутом виде."
+  },
+  {
+   "line": 303,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора) (добавлено): no_finite_ccr_complex : forall (A1 A2 B1 B2 : nat -> nat -> Q) (c1 c2 : Q) (N : nat), 1 <= N -> ([A1,B1] − [A2,B2] == c1·1 на координатах < N) -> ([A1,B2] + [A2,B1] == c2·1 на координатах < N) -> c1 == 0 /\\ c2 == 0 (:213) — A = A1 + iA2, B = B1 + iB2, постоянная c1 + i c2. Closed under the global context.",
+   "theorem": "no_finite_ccr_complex",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Для комплексных матриц и постоянной $c=c_1+ic_2$, записанных парами рациональных частей, — `no_finite_ccr_complex`: $c_1=c_2=0$."
+  },
+  {
+   "line": 303,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "commutator_concrete_entries (:163): для A = E_01, B = E_10 на двух координатах C = AB − BA имеет C 0 0 == 1, C 0 1 == 0, C 1 0 == 0, C 1 1 == −1. Closed under the global context.",
+   "theorem": "commutator_concrete_entries",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Конкретный свидетель: $[A,B]=\\mathrm{diag}(1,-1)$ (`commutator_concrete_entries`), след $0$ (`trace_commutator_concrete`), не кратен $\\mathbf{1}$ (`commutator_concrete_not_scalar`)."
+  },
+  {
+   "line": 303,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "commutator_concrete_not_scalar (:171): forall c : Q, ~ (C 0 0 == mat_scal c mat_id 0 0 /\\ C 1 1 == mat_scal c mat_id 1 1). Closed under the global context.",
+   "theorem": "commutator_concrete_not_scalar",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Конкретный свидетель: $[A,B]=\\mathrm{diag}(1,-1)$ (`commutator_concrete_entries`), след $0$ (`trace_commutator_concrete`), не кратен $\\mathbf{1}$ (`commutator_concrete_not_scalar`)."
+  },
+  {
+   "line": 303,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions для всех 29 объявлений файла (24 доказательства и 5 определений) — Closed under the global context (tos-audit-build/_p06step7/Verify.out).",
+   "theorem": null,
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Новые теоремы — в `ProcessOperatorSpectrumEvolution.v`, 0 аксиом."
+  },
+  {
+   "line": 304,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора) (добавлено): position_commutator_entry : forall (x : nat -> Q) (B : nat -> nat -> Q) (N i j : nat), i < N -> j < N -> mat_sub (mat_mul (qhat x) B N) (mat_mul B (qhat x) N) i j == (x i - x j) * B i j (:241); position_commutator_zero_diagonal (:259). Closed under the global context.",
+   "theorem": "position_commutator_entry",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "В общем виде, для любой решётки и любой матрицы $B$: $[\\hat q,B]_{ij}=(x_i-x_j)B_{ij}$, так что диагональ коммутатора нулевая, — `position_commutator_entry`, `position_commutator_zero_diagonal` (`ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 304,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "position_commutator_entry : forall (x : nat -> Q) (B : nat -> nat -> Q) (N i j : nat), i < N -> j < N -> mat_sub (mat_mul (qhat x) B N) (mat_mul B (qhat x) N) i j == (x i - x j) * B i j (:241); position_commutator_zero_diagonal (:259). Closed under the global context.",
+   "theorem": "position_commutator_zero_diagonal",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "В общем виде, для любой решётки и любой матрицы $B$: $[\\hat q,B]_{ij}=(x_i-x_j)B_{ij}$, так что диагональ коммутатора нулевая, — `position_commutator_entry`, `position_commutator_zero_diagonal` (`ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 308,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "isometry_commuting_preserves_energy : forall (U H : nat -> nat -> Q) (N : nat), Isometry U N -> (forall w i, i < N -> op_apply H (op_apply U w N) N i == op_apply U (op_apply H w N) N i) -> EnergyPreserving U H N (:352); через isometry_polarization (:334): изометрия сохраняет скалярное произведение. Closed under the global context.",
+   "theorem": "isometry_commuting_preserves_energy",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`isometry_commuting_preserves_energy` и `commuting_isometric_evolution_conserves_both` в `ProcessOperatorSpectrumEvolution.v` (0 аксиом); опорный факт — изометрия сохраняет и скалярное произведение (`isometry_polarization`)."
+  },
+  {
+   "line": 308,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "commuting_isometric_evolution_conserves_both (:367): при тех же посылках для всех v, n — seq_inner (evolve U N v n) (evolve U N v n) N == seq_inner v v N /\\ energy H (evolve U N v n) N == energy H v N. Closed under the global context.",
+   "theorem": "commuting_isometric_evolution_conserves_both",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`isometry_commuting_preserves_energy` и `commuting_isometric_evolution_conserves_both` в `ProcessOperatorSpectrumEvolution.v` (0 аксиом); опорный факт — изометрия сохраняет и скалярное произведение (`isometry_polarization`)."
+  },
+  {
+   "line": 308,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "isometry_polarization : forall (U : nat -> nat -> Q) (N : nat), Isometry U N -> forall a b, seq_inner (op_apply U a N) (op_apply U b N) N == seq_inner a b N (:334). Closed under the global context.",
+   "theorem": "isometry_polarization",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`isometry_commuting_preserves_energy` и `commuting_isometric_evolution_conserves_both` в `ProcessOperatorSpectrumEvolution.v` (0 аксиом); опорный факт — изометрия сохраняет и скалярное произведение (`isometry_polarization`)."
+  },
+  {
+   "line": 308,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "isometry_not_energy_preserving : Isometry (rotation (3 # 5) (4 # 5)) 2 /\\ ~ EnergyPreserving (rotation (3 # 5) (4 # 5)) (Hdiag 1 0) 2 (:273). Closed under the global context.",
+   "theorem": "isometry_not_energy_preserving",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Что одной изометричности мало — `isometry_not_energy_preserving`: поворот $3\\text{-}4\\text{-}5$ меняет энергию при $\\hat H=\\mathrm{diag}(1,0)$."
+  },
+  {
+   "line": 309,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cayley_step_isometry : forall t : Q, Isometry (rotation (cn_c t) (cn_s t)) 2 (:291), где cn_c t := (1 - t * t) / (1 + t * t), cn_s t := (2 * t) / (1 + t * t) (:285, :286); cayley_step_equation (:299): шаг w = U v удовлетворяет w 0 - v 0 == - t * (w 1 + v 1) /\\ w 1 - v 1 == t * (w 0 + v 0); cayley_half_is_345 (:309). Closed under the global context.",
+   "theorem": "cayley_step_isometry",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`cayley_step_isometry` (шаг Кэли — изометрия при всяком рациональном $t$), `cayley_step_equation` (он решает неявную схему средней точки $w-v=tJ(w+v)$), `cayley_half_is_345` (поворот $3\\text{-}4\\text{-}5$ есть шаг Кэли при $t=1/2$), `cayley_evolution_conserves_both` — в `ProcessOperatorSpectrumEvolution.v` (0 аксиом)."
+  },
+  {
+   "line": 309,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cayley_step_isometry : forall t : Q, Isometry (rotation (cn_c t) (cn_s t)) 2 (:291), где cn_c t := (1 - t * t) / (1 + t * t), cn_s t := (2 * t) / (1 + t * t) (:285, :286); cayley_step_equation (:299): шаг w = U v удовлетворяет w 0 - v 0 == - t * (w 1 + v 1) /\\ w 1 - v 1 == t * (w 0 + v 0); cayley_half_is_345 (:309). Closed under the global context.",
+   "theorem": "cayley_step_equation",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`cayley_step_isometry` (шаг Кэли — изометрия при всяком рациональном $t$), `cayley_step_equation` (он решает неявную схему средней точки $w-v=tJ(w+v)$), `cayley_half_is_345` (поворот $3\\text{-}4\\text{-}5$ есть шаг Кэли при $t=1/2$), `cayley_evolution_conserves_both` — в `ProcessOperatorSpectrumEvolution.v` (0 аксиом)."
+  },
+  {
+   "line": 309,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cayley_half_is_345 : cn_c (1 # 2) == 3 # 5 /\\ cn_s (1 # 2) == 4 # 5 (:309). Closed under the global context.",
+   "theorem": "cayley_half_is_345",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`cayley_step_isometry` (шаг Кэли — изометрия при всяком рациональном $t$), `cayley_step_equation` (он решает неявную схему средней точки $w-v=tJ(w+v)$), `cayley_half_is_345` (поворот $3\\text{-}4\\text{-}5$ есть шаг Кэли при $t=1/2$), `cayley_evolution_conserves_both` — в `ProcessOperatorSpectrumEvolution.v` (0 аксиом)."
+  },
+  {
+   "line": 309,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "cayley_evolution_conserves_both : forall (t e : Q) (v : nat -> Q) (n : nat), для U := rotation (cn_c t) (cn_s t) — норма и энергия при H = Hdiag e e сохраняются на всех шагах (:384). Closed under the global context.",
+   "theorem": "cayley_evolution_conserves_both",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "`cayley_step_isometry` (шаг Кэли — изометрия при всяком рациональном $t$), `cayley_step_equation` (он решает неявную схему средней точки $w-v=tJ(w+v)$), `cayley_half_is_345` (поворот $3\\text{-}4\\text{-}5$ есть шаг Кэли при $t=1/2$), `cayley_evolution_conserves_both` — в `ProcessOperatorSpectrumEvolution.v` (0 аксиом)."
+  },
+  {
+   "line": 310,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ladder_weights_unbounded : forall al be : nat -> Q, (forall n, al n * be n == inject_Z (Z.of_nat n)) -> forall K : Q, exists n, K < al n * al n \\/ K < be n * be n (src/process/ProcessLadderRational.v:303). Closed under the global context.",
+   "theorem": "ladder_weights_unbounded",
+   "file": "src/process/ProcessLadderRational.v",
+   "claim": "`ladder_weights_unbounded` в `ProcessLadderRational.v` (0 аксиом): во всякой лестнице с $\\alpha_n\\beta_n=n$ один из весов неограничен."
+  },
+  {
+   "line": 310,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: нормы оператора на полных последовательностях в src нет; доказано отсутствие конечномерной реализации (no_finite_ccr, no_finite_ccr_complex) и неограниченность весов лестницы (ladder_weights_unbounded).",
+   "theorem": null,
+   "file": null,
+   "claim": "Общая теорема о неограниченности операторов с $[A,B]=c\\mathbf{1}$ (Винтнер — Виландт) требует нормы оператора и здесь не формализована."
+  },
+  {
+   "line": 311,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 15.11 (Часть VI, шаг 7, слово автора) (добавлено): symmetric_without_rational_eigenvector (:401): для T = [[1,1],[1,−1]] — op_symmetric T 2 /\\ forall (v : nat -> Q) (lam : Q), is_eigenpair T v lam 2 -> v 0 == 0 /\\ v 1 == 0 (через no_rational_sqrt2: lam * lam == 2 невозможно). Closed under the global context.",
+   "theorem": "symmetric_without_rational_eigenvector",
+   "file": "src/process/ProcessOperatorSpectrumEvolution.v",
+   "claim": "Пример: симметричная матрица $\\bigl(\\begin{smallmatrix}1&1\\\\1&-1\\end{smallmatrix}\\bigr)$ не имеет ни одного рационального собственного вектора — её собственные значения $\\pm\\sqrt2$ (`symmetric_without_rational_eigenvector`, `ProcessOperatorSpectrumEvolution.v`, 0 аксиом)."
+  },
+  {
+   "line": 157,
+   "page_price": "над ℚ, без аксиом",
+   "verdict": "ok",
+   "note": "no_finite_ccr (:125): рациональные матрицы и рациональная постоянная c; при 1 <= N из [A,B] = c·1 на координатах < N следует c == 0. Closed under the global context.",
+   "theorem": "no_finite_ccr",
+   "file": "src/process/ProcessCanonicalCommutator.v",
+   "claim": "Канонический коммутатор с $c=i\\hbar\\ne0$ *не реализуем* никакими конечными матрицами. Доказано над ℚ, без аксиом: и для рациональной постоянной, и для комплексной, записанной парой рациональных чисел.[^7]"
+  }
+ ]
+}
