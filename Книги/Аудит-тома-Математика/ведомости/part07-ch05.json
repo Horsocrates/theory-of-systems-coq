@@ -1,0 +1,491 @@
+{
+ "batch": "audit-part-07",
+ "chapter": "07 Гармонический анализ/05 Сжатие, быстрое преобразование, свёртка.md",
+ "checked": "2026-11-15",
+ "auto": true,
+ "records": [
+  {
+   "line": 9,
+   "theorem": null,
+   "file": "src/process/ProcessFourierSeriesL2.v",
+   "claim": "Глава 7.4 дала конечное ядро контроля усечений: ошибка усечения равна отброшенной хвостовой энергии, не возрастает при добавлении коэффициентов и зануляется при Парсевале.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "fourier_error_eq (:57), fourier_error_monotone (:77), fourier_error_zero_iff (:87) стоят в разделе ON под посылкой Hon (:47) — ортонормированность при всех номерах i, j на N координатах; посылка невыполнима (on_all_indices_unsat, ProcessL2Orthonormal.v:134). Под выполнимой посылкой есть resid_norm_b и parseval_iff_resid_zero_b; невозрастание ошибки там не записано (проверено: Check.v, on_error_monotone). Заметки, расхождение 4.",
+   "assumptions": "fourier_error_eq, fourier_error_monotone, fourier_error_zero_iff: Closed under the global context"
+  },
+  {
+   "line": 13,
+   "theorem": null,
+   "file": null,
+   "claim": "и показывает, что для Уолша каждое из них чисто рационально:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Во всех четырёх файлах главы предметы — последовательности nat -> Q и конечные суммы q_sum; делений и корней в утверждениях нет. Что из трёх применений доказано, а что оставлено границей, страница оговаривает на стр. 29–34."
+  },
+  {
+   "line": 22,
+   "theorem": null,
+   "file": null,
+   "claim": "Доказано над ℚ, без аксиом.[^1]",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "В четырёх файлах 17 Qed и два определения (captured, fwht); строк Axiom, Parameter, Admitted, разделов и посылок Hypothesis нет. Print Assumptions всех 19 объявлений — Closed under the global context.",
+   "assumptions": "все 19 объявлений четырёх файлов: Closed under the global context"
+  },
+  {
+   "line": 22,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Ошибка усечения по первым $K$ коэффициентам равна сумме квадратов отброшенных и монотонна по $K$;",
+   "page_price": "без аксиом",
+   "verdict": "mismatch-statement",
+   "note": "truncation_error_eq (:61): для произвольной последовательности c и K <= N сумма квадратов до N равна сумме до K плюс сумма от K до N — расщепление конечной суммы (q_sum_split). Сигнала, его восстановления по K коэффициентам и ошибки как нормы разности в файлах главы нет. Заметки, расхождение 1."
+  },
+  {
+   "line": 23,
+   "theorem": "walsh_captured_le_energy",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "для Уолша она контролируется равенством Планшереля;",
+   "page_price": "без аксиом",
+   "verdict": "mismatch-statement",
+   "note": "walsh_captured_le_energy (:79): captured (Hf) K <= N * ||f||^2 при K <= 2^k — односторонняя оценка захваченной энергии; об ошибке (хвосте) утверждения нет. Точное равенство «хвост = N||f||^2 − captured» выводится из truncation_error_eq и parseval_walsh (Check.v, walsh_tail_eq). Заметки, расхождение 3."
+  },
+  {
+   "line": 24,
+   "theorem": "walsh_compaction",
+   "file": "src/process/ProcessWalshCompaction.v",
+   "claim": "*полосно-ограниченный* сигнал (спектр в первых $K$ модах) восстанавливается *без потерь*.",
+   "page_price": "без аксиом",
+   "verdict": "mismatch-statement",
+   "note": "walsh_compaction (:41): для произвольной последовательности c с c i == 0 при K <= i < N выполнено captured c N == captured c K — равенство двух частичных сумм квадратов. Преобразования Уолша, сигнала и его восстановления в утверждении нет. Восстановление доказано в пробном файле (walsh_bandlimited_lossless, walsh_lossless_iff). Заметки, расхождение 2."
+  },
+  {
+   "line": 25,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "Быстрый Уолш — рекурсивная бабочка — даёт *в точности* то же, что матричное преобразование, для всех $N=2^k$.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Theorem fwht_correct : forall k f i, (i < pow2 k)%nat -> fwht k f i == op_apply (had k) f (pow2 k) i (:61) — для всякого k и всякой последовательности f, индукцией по k. Closed under the global context."
+  },
+  {
+   "line": 26,
+   "theorem": "walsh_convolution",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "И теорема о свёртке $H(f\\ast g)=(Hf)\\cdot(Hg)$ доказана для всех $2^k$.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Theorem walsh_convolution : forall k f g i, (i < pow2 k)%nat -> op_apply (had k) (dconv f g (pow2 k)) (pow2 k) i == op_apply (had k) f (pow2 k) i * op_apply (had k) g (pow2 k) i (:193) — для всякого k. Closed under the global context."
+  },
+  {
+   "line": 29,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "Сложность $O(N\\log N)$ сама по себе — операционное свойство (счёт шагов), а не равенственное тождество; доказано *равенство* быстрого и матричного преобразований, а не оценка стоимости.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Так и есть: в ProcessFastWalsh.v два утверждения — mod_hi (:52) и fwht_correct (:61); утверждения о числе операций в формализации нет. О том, что определение fwht само по себе стоимости не уменьшает, и о счёте операций на списках (Check.v, fwht_c_ops) — заметки, сомнительные места."
+  },
+  {
+   "line": 31,
+   "theorem": "captured",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "*Оптимальное* $K$-членное сжатие — отбор $K$ *наибольших* по величине коэффициентов — требует слоя сравнения и сортировки; доказанное ядро — усечение по *первым* $K$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition captured (c : nat -> Q) (K : nat) : Q := q_sum (fun i => c i * c i) K (:42) — сумма по номерам i < K. Сравнения коэффициентов по величине и отбора в четырёх файлах нет."
+  },
+  {
+   "line": 41,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Ошибка сжатия = сумма квадратов отброшенных коэффициентов (монотонна);",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Та же формулировка, что на стр. 22 и 58: в Rocq — расщепление суммы квадратов последовательности (truncation_error_eq, :61) и неубывание частичных сумм (captured_mono, :49); ошибки как нормы разности сигнала и его восстановления нет. Заметки, расхождение 1."
+  },
+  {
+   "line": 42,
+   "theorem": "walsh_compaction",
+   "file": "src/process/ProcessWalshCompaction.v",
+   "claim": "полосно-ограниченный сигнал даёт нулевой хвост;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_compaction (:41): при c i == 0 для K <= i < N частичные суммы квадратов до N и до K равны; в доказательстве хвост q_sum (fun i => c (K + i) * c (K + i)) (N - K) приведён к нулю. Closed under the global context."
+  },
+  {
+   "line": 58,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Качество сжатия — это ошибка восстановления, и она в точности есть *отброшенная хвостовая энергия*:",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Lemma truncation_error_eq : forall (c : nat -> Q) (K N : nat), (K <= N)%nat -> captured c N == captured c K + q_sum (fun i => c (K + i)%nat * c (K + i)%nat) (N - K)%nat (:61). Слева — сумма квадратов коэффициентов, а не ||f||^2; восстановленного сигнала и ошибки восстановления в файлах главы нет. Для Уолша теорема об ошибке доказана в пробном файле (walsh_compression_error). Заметки, расхождение 1."
+  },
+  {
+   "line": 69,
+   "theorem": "captured_mono",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Захваченная энергия монотонно растёт с $K$ (а ошибка убывает) — то же свойство, что несло конечное ядро сходимости в Главе 7.4.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma captured_mono : forall c K K', (K <= K')%nat -> captured c K <= captured c K' (:49) — неубывание (нестрогое). На эту лемму опирается fourier_error_monotone Главы 7.4 (ProcessFourierSeriesL2.v:82); о посылке той теоремы — заметки, расхождение 4."
+  },
+  {
+   "line": 71,
+   "theorem": "parseval_walsh",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Оговорка о шкале: здесь $c_i$ — коэффициенты в *нормированной* ортонормированной шкале (Глава 7.1); для сырого спектра Уолша $(Hf)_i$ та же формула читается с масштабом $N$, ибо $\\sum_i (Hf)_i^2 = N\\norm{f}^2$ (Планшерель, Глава 7.2).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem parseval_walsh : forall k f, seq_inner (Hf) (Hf) (pow2 k) == inject_Z (Z.of_nat (pow2 k)) * seq_inner f f (pow2 k) (:91) — для всякого k. Формула страницы в сырой шкале (N||f||^2 = захвачено + отброшено) отдельной теоремой не записана; выводится (Check.v, walsh_tail_eq). О нормированной шкале — заметки, расхождения 1 и 4."
+  },
+  {
+   "line": 78,
+   "theorem": "walsh_compaction",
+   "file": "src/process/ProcessWalshCompaction.v",
+   "claim": "Если спектр сигнала *сосредоточен* на первых $K$ модах (относительно выбранного порядка Уолша) — то есть $c_i=0$ при $i\\ge K$,— то отброшенная энергия равна нулю, и первые $K$ коэффициентов восстанавливают сигнал *без потерь*: захваченная энергия совпадает с полной.[^3]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Theorem walsh_compaction : forall (c : nat -> Q) (K N : nat), (K <= N)%nat -> (forall i, (K <= i < N)%nat -> c i == 0) -> captured c N == captured c K (:41). Доказано равенство энергий для произвольной последовательности; что первые K коэффициентов восстанавливают сигнал, в формализации не записано (файл не подключает преобразование Уолша). Заметки, расхождение 2."
+  },
+  {
+   "line": 86,
+   "theorem": "captured",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Доказанное ядро — усечение по *первым* $K$ коэффициентам (индексы $0,…,K-1$): оно точно, рационально и конечно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "captured c K (:42) — сумма по i < K; все леммы файла — о частичных суммах по первым номерам. Сортировки и отбора по величине нет; страница называет это границей (стр. 88–91)."
+  },
+  {
+   "line": 93,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "*Ошибка сжатия = отброшенная энергия — точное рациональное тождество (для Уолша), а полосно-ограниченный сигнал сжимается без потерь.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В Rocq точное тождество — расщепление суммы квадратов произвольной последовательности (truncation_error_eq, :61); о Уолше в файле одна оценка (walsh_captured_le_energy, :79). Ошибка восстановления и восстановление без потерь для преобразования Уолша доказаны только в пробном файле. Заметки, расхождения 1 и 2."
+  },
+  {
+   "line": 100,
+   "theorem": "fwht",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "Но рекурсивная структура Сильвестра (Глава 7.2) даёт *бабочку*: преобразование размера $2N$ собирается из двух преобразований половин сложениями и вычитаниями ($\\text{lo}+\\text{hi}$ и $\\text{lo}-\\text{hi}$), а это — $O(N\\log N)$ операций.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint fwht (:41): на шаге S k' при i < 2^k' — сумма преобразований двух половин, при i >= 2^k' — их разность в точке i − 2^k'. Счёт операций в формализации не ведётся; страница оговаривает это (стр. 29–31, 110–111). Заметки, сомнительные места."
+  },
+  {
+   "line": 105,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "Доказано главное: *быстрая бабочка даёт в точности то же, что матричное преобразование*, для всех $N=2^k$.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fwht_correct (:61), квантор по k, f и i < pow2 k; равенство Qeq. Closed under the global context."
+  },
+  {
+   "line": 106,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "То есть оптимизация не меняет результата: процесс-алгоритм и матрица-определение совпадают как функции.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадение доказано в точках i < 2^k с точностью до Qeq — на всей области преобразования. Вне её значения различны (при k = 0: fwht 0 f i = f i, а op_apply (had 0) f 1 i == f 0), что к преобразованию размера N не относится."
+  },
+  {
+   "line": 109,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "*Быстрый Уолш — процесс-алгоритм, доказанно равный матричному преобразованию (точно над ℚ, все $2^k$). Сама оценка $O(N\\log N)$ — операционное свойство (счёт шагов), читается поверх доказанного равенства, но не входит в равенственное ядро.*",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Равенство — fwht_correct (:61), все k. Оценки числа шагов в формализации нет; страница говорит это прямо. Заметки, сомнительные места (счёт операций для бабочки на списках проверен: Check.v, fwht_c_cost_and_value)."
+  },
+  {
+   "line": 117,
+   "theorem": "dconv",
+   "file": "src/process/ProcessWalshConvolution.v",
+   "claim": "Для Уолша это *диадическая* (XOR-) свёртка",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition dconv (f g : nat -> Q) (N : nat) : nat -> Q := fun n => q_sum (fun m => f m * g (Nat.lxor n m)) N (:42) — совпадает с формулой страницы (стр. 120)."
+  },
+  {
+   "line": 129,
+   "theorem": "walsh_convolution",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "и это доказано *для всех* $N=2^k$ над ℚ.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_convolution (:193): квантор по k, по последовательностям f, g и по i < pow2 k; поточечное равенство Qeq. Пример на N = 4 (walsh_convolution_4, ProcessWalshConvolution.v:47) — отдельное вычисление. Closed under the global context."
+  },
+  {
+   "line": 131,
+   "theorem": "walsh_HH",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Поскольку ненормированный Уолш удовлетворяет $H^2=N\\cdot I$, обратный шаг есть $H/N$: преобразовать $f,g$, перемножить спектры, применить $H$ и разделить на $N$; с быстрым Уолшем всё это — $O(N\\log N)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem walsh_HH : forall k f m, (m < pow2 k)%nat -> op_apply (had k) (op_apply (had k) f (pow2 k)) (pow2 k) m == inject_Z (Z.of_nat (pow2 k)) * f m (:61). Сама формула свёртки через преобразование теоремой не записана; выведена в пробном файле (walsh_convolution_inverse, convolution_via_fwht). Оценка стоимости не доказывается — оговорено на стр. 29–31."
+  },
+  {
+   "line": 135,
+   "theorem": "had_character",
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "Доказательство и есть кульминация группового взгляда Главы 7.2: свёртка переходит в произведение *потому*, что функции Уолша — характеры группы $(ℤ_2^{ n},\\oplus)$, а характеры превращают групповую операцию $\\oplus$ в умножение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem had_character : forall k i a b, (i < pow2 k)%nat -> (a < pow2 k)%nat -> (b < pow2 k)%nat -> had k i (Nat.lxor a b) == had k i a * had k i b (:129). В доказательстве свёртки использована в inner_reindex (ProcessWalshConvolutionGeneral.v:185). Closed under the global context."
+  },
+  {
+   "line": 140,
+   "theorem": "walsh_convolution",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "*Теорема о свёртке $H(f\\ast g)=(Hf)\\cdot(Hg)$ — печать настоящего Фурье — у Уолша выполнена точно над ℚ для всех $2^k$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_convolution (:193), все k. Closed under the global context."
+  },
+  {
+   "line": 149,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Оговорка об уровне: это содержательная *интерпретация* трёх конструкций над уже построенным преобразованием Уолша, а не объект `System` в коде; разбор читает шапки опорных файлов, а не приписывает им новых утверждений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System — src/TheoryOfSystems_Core_ERR.v:203. В четырёх файлах главы `System` не встречается (поиск); разбор E/R/R стоит в шапках-комментариях."
+  },
+  {
+   "line": 154,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "ошибка сжатия $=$ отброшенная энергия (монотонна по $K$);",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Повтор формулировки стр. 58: в Rocq — расщепление суммы квадратов (truncation_error_eq, :61) и неубывание частичных сумм (captured_mono, :49). Заметки, расхождение 1."
+  },
+  {
+   "line": 172,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "| ошибка $=$ отброшенная энергия; полосно-огр. $\\Rightarrow$ хвост$=0$; быстрый $=$ матричный; $H(f\\ast g)=(Hf)\\cdot(Hg)$ | КАК устроены применения над преобразованием | Rules ($L5$) |",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Первый пункт строки — повтор формулировки стр. 58 (заметки, расхождение 1). Остальные три пункта отвечают теоремам walsh_compaction, fwht_correct, walsh_convolution."
+  },
+  {
+   "line": 187,
+   "theorem": null,
+   "file": "src/process/ProcessL2BesselGeneral.v",
+   "claim": "*Глава 7.1* переформулировала L<sup>2</sup>-аппарат Части VI как теорию коэффициентов Фурье: ортонормированная система, проекция, Бессель, Парсеваль, наилучшее приближение.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теоремы Главы 7.1 — bessel_general (ProcessL2BesselGeneral.v:175), parseval_iff_complete (ProcessL2Parseval.v:142), best_approx_ge, best_approx_unique (ProcessBestApproximation.v:161, :176) — стоят под посылкой Hon «при всех номерах i, j на N координатах», которая невыполнима (on_all_indices_unsat, ProcessL2Orthonormal.v:134). Закрывается теоремами bessel_b, parseval_iff_complete_b, best_approx_b того же нового файла. Заметки, расхождение 4.",
+   "assumptions": "bessel_general, parseval_iff_complete, best_approx_ge, best_approx_unique: Closed under the global context"
+  },
+  {
+   "line": 189,
+   "theorem": "hadamard_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "*Глава 7.2* предъявила конкретную рациональную систему — Уолша–Адамара — с ортогональностью $H^{\\mathsf T}H=N\\cdot I$, сохранением энергии и характерами булева куба: «Фурье без трансцендентностей».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "hadamard_orthogonal (:152): сумма had k i j * had k i' j по j < 2^k равна 2^k при i = i' и 0 иначе, для всех k; сохранение энергии — parseval_walsh (ProcessFourierON.v:91); характеры — had_character (ProcessWalshCharacter.v:129). Все три — Closed under the global context, посылок-разделов нет."
+  },
+  {
+   "line": 193,
+   "theorem": null,
+   "file": "src/process/ProcessFourierSeriesL2.v",
+   "claim": "*Глава 7.4* дала конечное ядро контроля усечений: ошибка усечения равна хвостовой энергии и монотонно не возрастает.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "fourier_error_eq (:57) и fourier_error_monotone (:77) — под невыполнимой посылкой Hon (:47). Под выполнимой посылкой тождество ошибки есть (resid_norm_b, ProcessL2Orthonormal.v:231), невозрастание не записано; набросок проверен (Check.v, on_error_monotone). Заметки, расхождение 4.",
+   "assumptions": "fourier_error_eq, fourier_error_monotone: Closed under the global context"
+  },
+  {
+   "line": 199,
+   "theorem": null,
+   "file": null,
+   "claim": "Доказанное рациональное ядро Части VII — над ℚ, без новых аксиом: ортогональность Уолша для всех $2^k$, дискретное сохранение энергии (Планшерель), характерное свойство $\\mathrm{w}_i(a\\oplus b)=\\mathrm{w}_i(a)\\mathrm{w}_i(b)$,",
+   "page_price": "без новых аксиом",
+   "verdict": "ok",
+   "note": "hadamard_orthogonal (ProcessWalshHadamard.v:152), parseval_walsh (ProcessFourierON.v:91), had_character (ProcessWalshCharacter.v:129) — для всех k, без посылок-разделов. Цена верна: аксиом нет вовсе.",
+   "assumptions": "hadamard_orthogonal, parseval_walsh, had_character: Closed under the global context"
+  },
+  {
+   "line": 201,
+   "theorem": null,
+   "file": "src/process/ProcessL2Parseval.v",
+   "claim": "неравенство Бесселя и критерий Парсеваля, наилучшее приближение, конечное ядро контроля усечений,",
+   "page_price": "без новых аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Названные результаты Глав 7.1 и 7.4 в формализации стоят под посылкой Hon при всех номерах (ProcessL2BesselGeneral.v:119, ProcessL2Parseval.v:80, ProcessBestApproximation.v:70, ProcessFourierSeriesL2.v:47), которой не удовлетворяет ни одна система: теоремы не имеют ни одного примера. Под выполнимой посылкой — bessel_b, parseval_iff_complete_b, best_approx_b, resid_norm_b (ProcessL2Orthonormal.v). Заметки, расхождение 4.",
+   "assumptions": "bessel_general, parseval_iff_complete, best_approx_ge, fourier_error_eq, fourier_error_monotone, fourier_error_zero_iff: Closed under the global context"
+  },
+  {
+   "line": 202,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "сжатие с точной ошибкой,",
+   "page_price": "без новых аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Ошибка сжатия как норма разности сигнала и его восстановления в формализации не определена; доказано расщепление суммы квадратов (truncation_error_eq, :61). Заметки, расхождение 1."
+  },
+  {
+   "line": 202,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "быстрый Уолш $=$ матричный и теорема о свёртке.",
+   "page_price": "без новых аксиом",
+   "verdict": "ok",
+   "note": "fwht_correct (ProcessFastWalsh.v:61) и walsh_convolution (ProcessWalshConvolutionGeneral.v:193) — для всех k; обе Closed under the global context."
+  },
+  {
+   "line": 203,
+   "theorem": null,
+   "file": null,
+   "claim": "Честные P4-границы, помеченные и не выданные за большее: нормировка $1/\\sqrt N$ (рациональна лишь при чётном $k$), комплексный DFT (корни единицы, $i$), непрерывная тригонометрия, завершённый бесконечный ряд, поточечная сходимость и Гиббс, сложность $O(N\\log N)$ как метаоценка, отбор лучших $K$ сортировкой.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Пометки стоят в шапках файлов (ProcessFourierON.v:15–18, ProcessFastWalsh.v:16–17, ProcessWalshCompaction.v:14–16, ProcessWalshConvolutionGeneral.v:15–16); доказанным ничего из перечня не названо. «Рациональна лишь при чётном k»: в файлах Части VII теоремы нет; целочисленная форма есть в src/stdlib/QubitCeiling.v (even_walsh_perfect_square, :88; odd_walsh_role_limit, :97 — для целого корня), для рационального s обе стороны проверены в пробном файле (Nq_double, walsh_odd_no_rational_norm)."
+  },
+  {
+   "line": 230,
+   "theorem": null,
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Опорные файлы (каталог `src/process/`): `ProcessFourierCompression.v` (6 утверждений),",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В файле 6 Qed: captured_step, captured_mono, truncation_error_eq, truncation_error_nonneg, walsh_captured_le_energy и пример compression_4_example; ещё определение captured. Все — Closed under the global context."
+  },
+  {
+   "line": 230,
+   "theorem": null,
+   "file": "src/process/ProcessWalshCompaction.v",
+   "claim": "`ProcessWalshCompaction.v` (1),",
+   "page_price": "0 аксиом",
+   "verdict": "wrong-number",
+   "note": "В файле 2 Qed: теорема walsh_compaction (:41) и пример compaction_4_example (:58). «1» — число из шапки файла (STATUS: 1 Qed); для остальных трёх файлов страница считает и примеры. Заметки, расхождение 5."
+  },
+  {
+   "line": 230,
+   "theorem": null,
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "`ProcessFastWalsh.v` (2),",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В файле 2 Qed: вспомогательная лемма mod_hi (:52) и теорема fwht_correct (:61); ещё определение fwht. Closed under the global context."
+  },
+  {
+   "line": 230,
+   "theorem": null,
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "`ProcessWalshConvolutionGeneral.v` (7);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В файле 7 Qed: div_pow2_S, lxor_recon, lxor_hi_lo, lxor_hi_hi, xor_perm_q_sum, inner_reindex, walsh_convolution. Все — Closed under the global context."
+  },
+  {
+   "line": 230,
+   "theorem": "Admitted",
+   "external": true,
+   "claim": "все 0 `Admitted`, 0 аксиом.",
+   "page_price": "0 Admitted, 0 аксиом",
+   "verdict": "ok",
+   "note": "`Admitted` — ключевое слово Rocq, не имя объявления (инструмент показывает его как имя без объявления). В четырёх файлах слово встречается только в строке STATUS шапки-комментария; незавершённых доказательств, строк Axiom и Parameter нет; Print Assumptions всех 19 объявлений — Closed under the global context."
+  },
+  {
+   "line": 231,
+   "theorem": "captured",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "В `ProcessFourierCompression.v`: `captured`$(c,K)=\\sum_{i<K}c_i^2$;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Definition captured (c : nat -> Q) (K : nat) : Q := q_sum (fun i => c i * c i) K (:42) — совпадает."
+  },
+  {
+   "line": 231,
+   "theorem": "truncation_error_eq",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "`truncation_error_eq` даёт баланс `captured`$(c,N)=$`captured`$(c,K)+$хвост;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Сноска передаёт утверждение точно (:61; посылка K <= N; хвост — q_sum (fun i => c (K + i) * c (K + i)) (N - K)). Это баланс частичных сумм квадратов; расхождение — в словах основного текста об ошибке восстановления (запись к стр. 58). Closed under the global context."
+  },
+  {
+   "line": 231,
+   "theorem": "captured_mono",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "`captured_mono` — монотонность по $K$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma captured_mono : forall (c : nat -> Q) (K K' : nat), (K <= K')%nat -> captured c K <= captured c K' (:49). Closed under the global context."
+  },
+  {
+   "line": 231,
+   "theorem": "walsh_captured_le_energy",
+   "file": "src/process/ProcessFourierCompression.v",
+   "claim": "Для Уолша полная энергия есть $N\\norm{f}^2$ (Планшерель), так что ошибка контролируется Парсевалем — `walsh_captured_le_energy`. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Theorem walsh_captured_le_energy : forall k f K, (K <= pow2 k)%nat -> captured (op_apply (had k) f (pow2 k)) K <= inject_Z (Z.of_nat (pow2 k)) * seq_inner f f (pow2 k) (:79) — оценка захваченной энергии сверху; ошибка в утверждение не входит, равенства нет. Цена верна. Заметки, расхождение 3."
+  },
+  {
+   "line": 232,
+   "theorem": "walsh_compaction",
+   "file": "src/process/ProcessWalshCompaction.v",
+   "claim": "`walsh_compaction` в `ProcessWalshCompaction.v`: при $c_i=0$ для $K\\le i<N$ выполнено `captured`$(c,N)=$`captured`$(c,K)$ — хвост нулевой. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Сноска передаёт утверждение точно (:41; ещё посылка K <= N). Предмет теоремы — произвольная последовательность c: преобразование Уолша в утверждение не входит. Слова о восстановлении сигнала — запись к стр. 78. Closed under the global context."
+  },
+  {
+   "line": 233,
+   "theorem": "fwht_correct",
+   "file": "src/process/ProcessFastWalsh.v",
+   "claim": "`fwht_correct` в `ProcessFastWalsh.v`: `fwht`$ k f i =$`op_apply`$ (\\texttt{had} k) f (2^k) i$ для $i<2^k$, индукцией по $k$ через блочную структуру Сильвестра. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Совпадает с утверждением (:61); равенство — Qeq. Доказательство — индукция по k с леммами had_lo, had_hi (ProcessWalshHadamard.v:104, :115). Closed under the global context."
+  },
+  {
+   "line": 233,
+   "theorem": "op_apply",
+   "file": "src/process/ProcessSelfAdjointSpectral.v",
+   "claim": "`fwht_correct` в `ProcessFastWalsh.v`: `fwht`$ k f i =$`op_apply`$ (\\texttt{had} k) f (2^k) i$ для $i<2^k$, индукцией по $k$ через блочную структуру Сильвестра. 0 аксиом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition op_apply (T : nat -> nat -> Q) (v : nat -> Q) (N : nat) : nat -> Q := fun i => q_sum (fun j => T i j * v j) N (:51) — произведение матрицы на вектор по первым N координатам. Одноимённое объявление есть в ProcessOperatorFA.v:267; файлы главы подключают ProcessSelfAdjointSpectral.v."
+  },
+  {
+   "line": 234,
+   "theorem": "walsh_convolution",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "`walsh_convolution` в `ProcessWalshConvolutionGeneral.v`: $H(f\\ast g)=(Hf)\\cdot(Hg)$ для всех $2^k$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem walsh_convolution (:193), квантор по k. Closed under the global context."
+  },
+  {
+   "line": 234,
+   "theorem": "had_character",
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "Доказательство опирается на характерное свойство Уолша (`had_character`, Глава 7.2) и на переиндексацию конечной суммы под XOR-биекцией ($\\texttt{xor\\_perm\\_q\\_sum}$, доказанную блочной рекурсией Сильвестра). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "had_character (ProcessWalshCharacter.v:129) применена в inner_reindex (ProcessWalshConvolutionGeneral.v:185), а та — в walsh_convolution (:211). Closed under the global context."
+  },
+  {
+   "line": 234,
+   "theorem": "xor_perm_q_sum",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "Доказательство опирается на характерное свойство Уолша (`had_character`, Глава 7.2) и на переиндексацию конечной суммы под XOR-биекцией ($\\texttt{xor\\_perm\\_q\\_sum}$, доказанную блочной рекурсией Сильвестра). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma xor_perm_q_sum : forall k m F, (m < pow2 k)%nat -> q_sum (fun n => F (Nat.lxor n m)) (pow2 k) == q_sum F (pow2 k) (:125) — индукция по k с разбиением суммы на две половины. Closed under the global context."
+  }
+ ]
+}

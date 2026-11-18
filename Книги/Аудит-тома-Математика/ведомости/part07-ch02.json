@@ -1,0 +1,480 @@
+{
+ "batch": "audit-part-07",
+ "chapter": "07 Гармонический анализ/02 Уолш–Адамар преобразование без трансцендентностей.md",
+ "checked": "2026-11-15",
+ "auto": true,
+ "records": [
+  {
+   "line": 31,
+   "theorem": null,
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Доказано здесь следующее, и всё — *без единой аксиомы*.[^1]",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Print Assumptions всех 37 утверждений пяти опорных файлов (ProcessWalshHadamard.v, ProcessWalshCharacter.v, ProcessFourierON.v, ProcessHadamardGate.v, ProcessWalshConvolutionGeneral.v) — Closed under the global context (PA.v); строк Axiom, Parameter, Admitted в них нет. Цена названа верно; о содержании пункта про вентиль — запись к стр. 37.",
+   "assumptions": "все 37 утверждений пяти файлов: Closed under the global context"
+  },
+  {
+   "line": 31,
+   "theorem": "hadamard_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Матрица Адамара $H_{2^k}$ строится рекурсией Сильвестра из значений $\\pm1$; её строки попарно ортогональны с квадратом нормы $N=2^k$, то есть $H_N^{\\mathsf T}H_N = N\\cdot I$, и это доказано *для всех* $2^k$.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Theorem hadamard_orthogonal (:152): forall k i i', i < pow2 k -> i' < pow2 k -> q_sum (fun j => had k i j * had k i' j) (pow2 k) == (if Nat.eqb i i' then inject_Z (Z.of_nat (pow2 k)) else 0) — для всякого k, индукцией по k. Матрица — Fixpoint had (:50). Closed under the global context."
+  },
+  {
+   "line": 33,
+   "theorem": "had_character",
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "Функции Уолша — характеры группы $(ℤ_2^{ n},\\oplus)$: значение на сумме (по модулю 2) аргументов есть произведение значений.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Theorem had_character (:129): forall k i a b, i < pow2 k -> a < pow2 k -> b < pow2 k -> had k i (Nat.lxor a b) == had k i a * had k i b — для всякого k. Closed under the global context."
+  },
+  {
+   "line": 35,
+   "theorem": "parseval_walsh",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Преобразование сохраняет энергию, $\\norm{Hf}^2 = N\\norm{f}^2$ (дискретное равенство Планшереля), и обратимо с точностью до масштаба, $H(Hf)=N f$.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Theorem parseval_walsh (:91): forall k f, seq_inner (op_apply (had k) f (pow2 k)) (op_apply (had k) f (pow2 k)) (pow2 k) == inject_Z (Z.of_nat (pow2 k)) * seq_inner f f (pow2 k) — для всякого k и всякого f : nat -> Q. Closed under the global context."
+  },
+  {
+   "line": 35,
+   "theorem": "walsh_HH",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Преобразование сохраняет энергию, $\\norm{Hf}^2 = N\\norm{f}^2$ (дискретное равенство Планшереля), и обратимо с точностью до масштаба, $H(Hf)=N f$.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "Theorem walsh_HH (:61): forall k f m, m < pow2 k -> op_apply (had k) (op_apply (had k) f (pow2 k)) (pow2 k) m == inject_Z (Z.of_nat (pow2 k)) * f m — для всякого k. Closed under the global context."
+  },
+  {
+   "line": 37,
+   "theorem": "hgate_involution",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Наконец, нормированный случай $N=2$, если вынести $1/\\sqrt2$ в абстрактный параметр $s$ с соотношением $s^2\\cdot2=1$, — это в точности квантовый вентиль Адамара.",
+   "page_price": "без единой аксиомы",
+   "verdict": "mismatch-statement",
+   "note": "В Rocq параметр — рациональное число: Variable s2inv : Q, Hypothesis Hs2 : s2inv * s2inv * 2 == 1 (:68–69). Ни одно рациональное этому соотношению не удовлетворяет (Check.v, hgate_premise_unsat, через Sqrt2Irrational.no_rational_sqrt2), так что теорема hgate_involution (:76) не имеет ни одного примера. Цена названа верно. Заметки, расхождение 1."
+  },
+  {
+   "line": 41,
+   "theorem": null,
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Буквальная *ортонормированность* $\\inner{e_i}{e_j}=\\delta_{ij}$ требует множителя $1/\\sqrt N$, рационального лишь когда $N$ — точный квадрат (для $N=2^k$ — лишь при чётном $k$); поэтому нормировка вводится абстрактным параметром, а не вычисляется.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Параметр нормировки в формализации есть только для N = 2 (раздел Gate, :64–103) и имеет тип Q; соотношению s2inv * s2inv * 2 == 1 не удовлетворяет ни одно рациональное (расхождение 1). Для общего N = 2^k параметра нет. Что 1/√N рационально лишь при чётном k, теоремой не записано; при чётном k нормированные строки рациональны и ортонормированы (Check.v, nwalsh_orthonormal)."
+  },
+  {
+   "line": 93,
+   "theorem": "had_sq",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Каждый элемент — $+1$ или $-1$, то есть чисто рациональное число; никакого предельного перехода, никаких трансцендентных значений.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma had_sq (:63): forall k i j, had k i j * had k i j == 1 — для всех k, i, j. Вычислено (Calc.v): строки had 1 и had 2 совпадают с матрицами H_2 и H_4 страницы (стр. 85–90). Closed under the global context."
+  },
+  {
+   "line": 94,
+   "theorem": "had",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Знак элемента $(i,j)$ определяется старшими битами индексов $i$ и $j$: верхне-левый, верхне-правый и нижне-левый блоки повторяют $H_N$, а нижне-правый берётся с минусом — ровно это и кодирует рекурсивная формула.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint had (:50): на шаге S k' знак −1 ровно при pow2 k' <= i и pow2 k' <= j, остальное — had k' (i mod pow2 k') (j mod pow2 k'). Блочный вид — леммы had_lo (:104) и had_hi (:115)."
+  },
+  {
+   "line": 133,
+   "theorem": "hadamard_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Разные строки ортогональны, а каждая имеет квадрат нормы $N$. И это доказано *для всех* $N=2^k$ — индукцией по рекурсивной структуре Сильвестра, как точное тождество над ℚ, без единой аксиомы.[^3]",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "hadamard_orthogonal (:152): индукция по k, шаг — разбиение суммы на две половины (q_sum_split, had_lo, had_hi, idx_high_neq). Для всякого k. Closed under the global context."
+  },
+  {
+   "line": 142,
+   "theorem": null,
+   "file": "src/process/ProcessL2BesselGeneral.v",
+   "claim": "Именно это и делает Уолша–Адамара точкой опоры рациональной гармонии: ортогональная система, на которой буквально выполняется вся абстрактная теория Главы 7.1 (коэффициенты, проекция, Бессель, Парсеваль), причём каждая её предпосылка — $\\inner{e_i}{e_j}=N\\delta_{ij}$ — не постулат, а доказанное равенство.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Посылка теорем Главы 7.1 в Rocq — seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) (Hon, :119; при всех номерах невыполнима — on_all_indices_unsat; выполнимая форма — раздел ONB файла ProcessL2Orthonormal.v), а строки Уолша дают N·δ. Теоремы Главы 7.1 к системе Уолша в формализации не применяются: отдельно доказаны равенство Планшереля (parseval_walsh) и оценка частичных сумм (walsh_captured_le_energy, ProcessFourierCompression.v:79); тождества остатка, проекции и наилучшего приближения для системы Уолша нет. Заметки, расхождение 2."
+  },
+  {
+   "line": 159,
+   "theorem": "had_character",
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "Группа здесь — булев куб $(ℤ_2^{ n},\\oplus)$ с операцией побитового сложения по модулю 2 (XOR), а значения характеров — $\\pm1$. Доказано:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "had_character (:129), операция — Nat.lxor; значения ±1 — had_sq. Замкнутость (a ⊕ b < 2^k) доказана внутри leb_pow2_lxor (:115–119) и отдельной леммой не вынесена (Check.v, lxor_lt_pow2). Closed under the global context."
+  },
+  {
+   "line": 167,
+   "theorem": "had_character",
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "то есть каждая функция Уолша $\\mathrm{w}_i$ — гомоморфизм $(ℤ_2^{ n},\\oplus)\\to(\\{\\pm1\\},\\cdot)$, *характер* булева куба.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "had_character (:129) — для всякого k и всех i, a, b < 2^k; значение в нейтральном элементе равно 1 (Check.v, had_char_unit). Closed under the global context."
+  },
+  {
+   "line": 186,
+   "theorem": "walsh_convolution",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "теорема о свёртке $H(f\\ast g)=(Hf)\\cdot(Hg)$ опирается на тот же характер и доказана *для всех* $2^k$ — через переиндексацию конечной суммы под XOR-биекцией — а разворачивается в Главе 7.5.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem walsh_convolution (:193): forall k f g i, i < pow2 k -> op_apply (had k) (dconv f g (pow2 k)) (pow2 k) i == op_apply (had k) f (pow2 k) i * op_apply (had k) g (pow2 k) i; dconv f g N n = Σ_{m<N} f m · g (n ⊕ m) (ProcessWalshConvolution.v:42). Опирается на had_character и xor_perm_q_sum (через inner_reindex, :174). Closed under the global context. Глава 7.5 — «Сжатие, быстрое преобразование, свёртка»."
+  },
+  {
+   "line": 194,
+   "theorem": "parseval_walsh",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Из ортогональности следует сохранение энергии. Преобразование Уолша функции $f$ — вектор её коэффициентов $(Hf)_i = \\sum_{j<N} H_{ij} f_j$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Преобразование — op_apply (had k) f (pow2 k) (op_apply: ProcessSelfAdjointSpectral.v:51, i ↦ q_sum (fun j => T i j * v j) N). parseval_walsh (:91) выведена из walsh_HH (она — из hadamard_orthogonal и had_symmetric) и adjoint_inner."
+  },
+  {
+   "line": 201,
+   "theorem": "parseval_walsh",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "дискретный аналог равенства Планшереля: энергия спектра равна энергии сигнала с множителем $N$.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "parseval_walsh (:91): ‖Hf‖² и ‖f‖² — seq_inner на первых pow2 k координатах, множитель — inject_Z (Z.of_nat (pow2 k)). Для всякого k. Closed under the global context."
+  },
+  {
+   "line": 202,
+   "theorem": "walsh_HH",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Преобразование к тому же обратимо: применённое дважды, оно лишь перемасштабирует сигнал,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_HH (:61): H(Hf)_m = N·f_m при m < pow2 k, для всякого k. Closed under the global context."
+  },
+  {
+   "line": 209,
+   "theorem": "walsh_HH",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "так что обратное преобразование есть $H^{-1} = \\tfrac1N H$ — снова без всякой трансцендентности.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Отдельной теоремой обратное преобразование не записано; оно следует из walsh_HH делением на N (Check.v, walsh_inverse: H((1/N)·Hf) = f для всякого k). В ProcessFourierSynthesis.v:57 walsh_invertible повторяет walsh_HH."
+  },
+  {
+   "line": 210,
+   "theorem": null,
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Переход к нормированной системе делит обе части на $N$ и возвращает Парсеваль Главы 7.1 в форме $\\sum_i c_i^2=\\norm{f}^2$ — но множитель $1/\\sqrt N$, делающий $H/\\sqrt N$ изометрией, рационален лишь при чётном $k$ и в общем случае остаётся роль-пределом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказанным это страница не называет. Деление на N выводится из parseval_walsh (Check.v, walsh_parseval_normalised: Σ_i (Hf)_i²/N == ‖f‖²; корень не нужен). Что 1/√N рационально лишь при чётном k, теоремой не записано; при k = a + a нормированные строки ортонормированы над ℚ (Check.v, nwalsh_orthonormal)."
+  },
+  {
+   "line": 220,
+   "theorem": "hgate_involution",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Две его определяющие черты доказаны как рациональные факты, с единственной трансцендентностью — нормировкой — вынесенной в абстрактный параметр.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Параметр — рациональное s2inv : Q с посылкой s2inv * s2inv * 2 == 1 (:68–69), которой не удовлетворяет ни одно рациональное (Check.v, hgate_premise_unsat). Первая черта (инволюция) доказана только под этой посылкой; вторая (hgate_superposition) посылкой не пользуется. Заметки, расхождение 1."
+  },
+  {
+   "line": 224,
+   "theorem": "hgate_involution",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Во-первых, вентиль есть *инволюция*: $H^2=I$, применённый дважды он возвращает исходное состояние.[^8]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "hgate_involution (:76): forall s2inv : Q, s2inv * s2inv * 2 == 1 -> forall f m, m < pow2 1 -> hgate s2inv (hgate s2inv f) m == f m. Посылка невыполнима; для всякого рационального s дважды применённый вентиль есть умножение на 2s² и тождественным не бывает (Check.v, hgate_sq_scale, hgate_never_involution_over_Q). Заметки, расхождение 1."
+  },
+  {
+   "line": 225,
+   "theorem": "hgate_superposition",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Во-вторых, он создаёт *равную суперпозицию*: из базисного состояния $\\lvert0\\rangle$ он делает вектор с равными амплитудами $1/\\sqrt2$ на обоих исходах.[^9]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "hgate_superposition (:92) после закрытия раздела: forall s2inv : Q, hgate s2inv e0 0 == s2inv /\\ hgate s2inv e0 1 == s2inv — для всякого рационального множителя, посылка s²·2 = 1 не используется. Равенство амплитуд доказано; значение 1/√2 рациональный параметр не принимает (расхождение 1). Над ℚ[√2] — Check.v, hgateR_superposition. Closed under the global context."
+  },
+  {
+   "line": 231,
+   "theorem": "hgate_involution",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Единственная иррациональность — нормировка $1/\\sqrt N$ — отделена и помечена; структура вентиля (инволюция, суперпозиция) рациональна.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Инволюция нормированного вентиля рациональным фактом не является: ни при каком рациональном множителе вентиль не инволюция (Check.v, hgate_never_involution_over_Q). Рациональны H(Hf) = 2f (hadamard_unnormalised_square, :59) и H e_0 = (1, 1). Заметки, расхождение 1."
+  },
+  {
+   "line": 239,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Оговорка об уровне: «система Уолша» здесь — содержательная *интерпретация* конкретной матрицы $H_{2^k}$ и её действия, а не объект, объявленный в коде как `System`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) (:203). В пяти опорных файлах главы тип System не встречается (поиск); оговорка страницы точна."
+  },
+  {
+   "line": 282,
+   "theorem": null,
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "группа $(ℤ_2^{ n},\\oplus)$ конечна, её характеров ровно $N$, и все они предъявлены как строки конкретной матрицы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Раздел E/R/R оговорён страницей как осмысление без новых формальных утверждений (стр. 241–242). Доказано: каждая строка — характер (had_character); разные строки — разные функции (следует из hadamard_orthogonal; Check.v, walsh_rows_distinct). Что других характеров нет («ровно N»), в формализации не записано — заметки, сомнительные места."
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Опорный файл — `ProcessWalshHadamard.v` (каталог `src/process/` Rocq-репозитория ToS, 12 доказанных утверждений, 0 `Admitted`, 0 аксиом)",
+   "page_price": "0 Admitted, 0 аксиом",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' — 12; строк Admitted, Axiom, Parameter нет; Print Assumptions всех 12 — Closed under the global context (PA.v).",
+   "assumptions": "все 12 утверждений файла: Closed under the global context"
+  },
+  {
+   "line": 303,
+   "theorem": "Admitted",
+   "external": true,
+   "claim": "12 доказанных утверждений, 0 `Admitted`, 0 аксиом",
+   "page_price": "0 Admitted, 0 аксиом",
+   "verdict": "ok",
+   "note": "Ключевое слово Rocq, не имя. В ProcessWalshHadamard.v строк «Admitted.» нет (слово встречается только в шапке, :31); строк Axiom и Parameter нет.",
+   "assumptions": "не применимо (ключевое слово)"
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "дополненный `ProcessFourierON.v` (5 утверждений), `ProcessWalshCharacter.v` (7 утверждений) и `ProcessHadamardGate.v` (5 утверждений).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' src/process/ProcessFourierON.v — 5 (had_symmetric, walsh_op_symmetric, walsh_HH, parseval_walsh, parseval_walsh_4_concrete). Все — Closed under the global context."
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "дополненный `ProcessFourierON.v` (5 утверждений), `ProcessWalshCharacter.v` (7 утверждений) и `ProcessHadamardGate.v` (5 утверждений).",
+   "page_price": "",
+   "verdict": "wrong-number",
+   "note": "grep -c 'Qed\\.' src/process/ProcessWalshCharacter.v — 8: шесть лемм о битах, had_character и пример had_character_ex. «7» стоит в шапке файла (:26). Заметки, расхождение 3."
+  },
+  {
+   "line": 303,
+   "theorem": null,
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "дополненный `ProcessFourierON.v` (5 утверждений), `ProcessWalshCharacter.v` (7 утверждений) и `ProcessHadamardGate.v` (5 утверждений).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' src/process/ProcessHadamardGate.v — 5 (hadamard_2x2, op_apply_scale, hadamard_unnormalised_square, hgate_involution, hgate_superposition). Число верно; о посылке hgate_involution — расхождение 1."
+  },
+  {
+   "line": 304,
+   "theorem": "had",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "В коде матрица задана рекурсивно: `had k i j` возвращает элемент $(i,j)$ матрицы $H_{2^k}$ как значение из $\\{+1,-1\\}$ (`ProcessWalshHadamard.v`); размер $N=2^k$ — `pow2 k`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint had (k i j : nat) : Q (:50) — рекурсия по k; значения ±1 закреплены had_sq. Вычислено (Calc.v): had 1 и had 2 дают H_2 и H_4 страницы."
+  },
+  {
+   "line": 304,
+   "theorem": "pow2",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "В коде матрица задана рекурсивно: `had k i j` возвращает элемент $(i,j)$ матрицы $H_{2^k}$ как значение из $\\{+1,-1\\}$ (`ProcessWalshHadamard.v`); размер $N=2^k$ — `pow2 k`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint pow2 (k : nat) : nat (:46); pow2 k = 2 ^ k — pow2_eq (ProcessWalshCharacter.v:42). Одноимённые объявления с другими типами есть ещё в девяти файлах src; глава называет ProcessWalshHadamard.v."
+  },
+  {
+   "line": 304,
+   "theorem": "had_sq",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Знаковая природа закреплена леммой `had_sq`: каждый элемент в квадрате равен $1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma had_sq (:63): forall k i j, had k i j * had k i j == 1. Closed under the global context."
+  },
+  {
+   "line": 305,
+   "theorem": "hadamard_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Центральная теорема `hadamard_orthogonal` в `ProcessWalshHadamard.v`: $\\sum_{j<2^k} H_{ij}H_{i'j} = 2^k \\delta_{ii'}$, доказано индукцией по $k$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Утверждение (:152) совпадает с формулой сноски; условия i, i' < pow2 k. Доказательство — induction k. Closed under the global context."
+  },
+  {
+   "line": 305,
+   "theorem": "walsh_norm",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Диагональный случай ($i=i'$) — `walsh_norm`: каждая строка имеет квадрат нормы $N$.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem walsh_norm (:78): forall k i, q_sum (fun j => had k i j * had k i j) (pow2 k) == inject_Z (Z.of_nat (pow2 k)) — для всякого k и всякого i (без условия i < pow2 k). Closed under the global context."
+  },
+  {
+   "line": 305,
+   "theorem": "hadamard_2_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Конкретные $N=2,4$ — `hadamard_2_orthogonal`, `hadamard_4_orthogonal`. Все — 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Example hadamard_2_orthogonal (:226): три суммы для had 1 — (0,0) = 2, (0,1) = 0, (1,1) = 2; vm_compute. Closed under the global context."
+  },
+  {
+   "line": 305,
+   "theorem": "hadamard_4_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Конкретные $N=2,4$ — `hadamard_2_orthogonal`, `hadamard_4_orthogonal`. Все — 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Example hadamard_4_orthogonal (:233): четыре суммы для had 2 — пары строк (0,1), (1,2), (1,3) дают 0, диагональ (2,2) даёт 4; это выборочные элементы, не все шестнадцать (полное утверждение — hadamard_orthogonal). Closed under the global context."
+  },
+  {
+   "line": 306,
+   "theorem": "had_character",
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "Теорема `had_character` в `ProcessWalshCharacter.v`: $\\texttt{had }k i (a\\oplus b) = \\texttt{had }k i a \\cdot \\texttt{had }k i b$, доказано индукцией по $k$ с разбором битовой структуры `Nat.lxor` (XOR). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Утверждение (:129) совпадает; условия i, a, b < pow2 k в формуле сноски опущены, в тексте (стр. 164) названы. Доказательство — induction k с леммами lxor_mod_pow2 (:75) и leb_pow2_lxor (:110). Closed under the global context."
+  },
+  {
+   "line": 306,
+   "theorem": "lxor",
+   "external": true,
+   "claim": "доказано индукцией по $k$ с разбором битовой структуры `Nat.lxor` (XOR).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`Nat.lxor` — функция стандартной библиотеки (Corelib.Init.Nat.lxor : nat -> nat -> nat), в src не объявлена; в файле используется именно она (ProcessWalshCharacter.v:131). Инструмент по короткому имени lxor показал N.lxor (на двоичных числах N) — это другая функция; файла Nat.v в формализации нет и быть не должно.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 307,
+   "theorem": "walsh_convolution",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "Общая свёртка — `walsh_convolution` в `ProcessWalshConvolutionGeneral.v`: $H(f\\ast g)=(Hf)\\cdot(Hg)$ для всех $2^k$, через характер (`had_character`) и лемму `xor_perm_q_sum` (инвариантность `q_sum` под XOR-биекцией, доказанная блочной рекурсией Сильвестра). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem walsh_convolution (:193) — для всякого k, всех f, g и i < pow2 k; свёртка — dconv (ProcessWalshConvolution.v:42). В файле 7 Qed. Closed under the global context."
+  },
+  {
+   "line": 307,
+   "theorem": "xor_perm_q_sum",
+   "file": "src/process/ProcessWalshConvolutionGeneral.v",
+   "claim": "Общая свёртка — `walsh_convolution` в `ProcessWalshConvolutionGeneral.v`: $H(f\\ast g)=(Hf)\\cdot(Hg)$ для всех $2^k$, через характер (`had_character`) и лемму `xor_perm_q_sum` (инвариантность `q_sum` под XOR-биекцией, доказанная блочной рекурсией Сильвестра). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma xor_perm_q_sum (:125): forall k m F, m < pow2 k -> q_sum (fun n => F (Nat.lxor n m)) (pow2 k) == q_sum F (pow2 k); индукция по k с разбиением суммы на две половины (lxor_hi_lo, lxor_hi_hi). Closed under the global context."
+  },
+  {
+   "line": 307,
+   "theorem": "q_sum",
+   "file": "src/process/ProcessMCT.v",
+   "claim": "Общая свёртка — `walsh_convolution` в `ProcessWalshConvolutionGeneral.v`: $H(f\\ast g)=(Hf)\\cdot(Hg)$ для всех $2^k$, через характер (`had_character`) и лемму `xor_perm_q_sum` (инвариантность `q_sum` под XOR-биекцией, доказанная блочной рекурсией Сильвестра). 0 аксиом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint q_sum (g : nat -> Q) (N : nat) : Q (:61) — конечная сумма g 0 + … + g (N−1)."
+  },
+  {
+   "line": 308,
+   "theorem": "parseval_walsh",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Теорема `parseval_walsh` в `ProcessFourierON.v`: $\\inner{Hf}{Hf}_N = N \\inner{f}{f}_N$, выведено из самосопряжённости преобразования (матрица Уолша симметрична — `had_symmetric`) и тождества $H^2=N\\cdot I$. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Утверждение (:91) совпадает. Доказательство: adjoint_inner (ProcessSelfAdjointSpectral.v:94) с walsh_op_symmetric (:53), затем walsh_HH. Closed under the global context."
+  },
+  {
+   "line": 308,
+   "theorem": "had_symmetric",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "Теорема `parseval_walsh` в `ProcessFourierON.v`: $\\inner{Hf}{Hf}_N = N \\inner{f}{f}_N$, выведено из самосопряжённости преобразования (матрица Уолша симметрична — `had_symmetric`) и тождества $H^2=N\\cdot I$. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma had_symmetric (:44): forall k i j, had k i j = had k j i — равенство Лейбница, для всех k, i, j. Closed under the global context."
+  },
+  {
+   "line": 309,
+   "theorem": "walsh_HH",
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "`walsh_HH` в `ProcessFourierON.v`: $H(Hf)=N f$ (обращение Фурье с точностью до $1/N$); следует из $H_N^{\\mathsf T}H_N=N\\cdot I$ и симметрии $H$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:61) совпадает, условие m < pow2 k. Доказательство опирается на hadamard_orthogonal и had_symmetric (:80–82). Closed under the global context."
+  },
+  {
+   "line": 310,
+   "theorem": "hgate_involution",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "`hgate_involution` в `ProcessHadamardGate.v`: для нормированного вентиля $\\texttt{hgate}(\\texttt{hgate } f)=f$. Нормировка $1/\\sqrt2$ введена абстрактным параметром $s$ с соотношением $s^2\\cdot2=1$;",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "hgate_involution (:76): forall s2inv : Q, s2inv * s2inv * 2 == 1 -> forall f m, m < pow2 1 -> hgate s2inv (hgate s2inv f) m == f m. Параметр рационален, а рационального числа с таким соотношением нет (Check.v, hgate_premise_unsat): теорема не имеет ни одного примера. Print Assumptions — Closed under the global context. Заметки, расхождение 1."
+  },
+  {
+   "line": 310,
+   "theorem": "hadamard_unnormalised_square",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "тождество $H(Hf)=2f$ (частный случай $N=2$) тогда даёт $s^2\\cdot 2\\cdot f=f$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Corollary hadamard_unnormalised_square (:59): forall f m, m < pow2 1 -> op_apply (had 1) (op_apply (had 1) f (pow2 1)) (pow2 1) m == inject_Z (Z.of_nat (pow2 1)) * f m — без посылок, частный случай walsh_HH. Без посылки верно и hgate s (hgate s f) m == (s·s·2)·f m для всякого рационального s (Check.v, hgate_sq_scale). Closed under the global context."
+  },
+  {
+   "line": 310,
+   "theorem": "hadamard_2x2",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "Сами элементы $H_2$ — из $\\{\\pm1\\}$ (`hadamard_2x2`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Example hadamard_2x2 (:44): had 1 0 0 == 1 /\\ had 1 0 1 == 1 /\\ had 1 1 0 == 1 /\\ had 1 1 1 == -(1). Closed under the global context."
+  },
+  {
+   "line": 311,
+   "theorem": "hgate_superposition",
+   "file": "src/process/ProcessHadamardGate.v",
+   "claim": "`hgate_superposition`: $\\texttt{hgate} e_0 = (s,s)$ — равные амплитуды на двух координатах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:92) после закрытия раздела: forall s2inv : Q, hgate s2inv e0 0 == s2inv /\\ hgate s2inv e0 1 == s2inv — совпадает с формулой сноски; верно для всякого рационального s, посылка s²·2 = 1 не используется. Closed under the global context."
+  },
+  {
+   "line": 312,
+   "theorem": null,
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "Шапки дают разметку прямо: `ProcessWalshHadamard.v` — Elements: $\\pm1$-матрица, размер $2^k$; Rules: рекурсия Сильвестра, $H^{\\mathsf T}H=N\\cdot I$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла (:4–8): «Elements: ±1 entries Hᵢⱼ; finite sums Σ_{j<2ᵏ}; bit-indices i,j; N = 2ᵏ», «Rules: Sylvester recursion H_{2N}=[[H,H],[H,−H]]; each Walsh row has ‖·‖²=N; HᵀH = N·I (orthogonality); Parseval-Walsh ‖Hf‖² = N‖f‖²». Пересказ точен."
+  },
+  {
+   "line": 312,
+   "theorem": null,
+   "file": "src/process/ProcessWalshCharacter.v",
+   "claim": "`ProcessWalshCharacter.v` — Rules: $\\mathrm{w}_i(a\\oplus b)=\\mathrm{w}_i(a)\\mathrm{w}_i(b)$; Roles: $\\mathrm{w}_i$ — характер $(ℤ_2^{ n},\\oplus)\\to\\{\\pm1\\}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла (:5–6): «Roles: had k i (·) = a character (homomorphism (ℤ₂ⁿ,⊕) → {±1}); ⊕ = group op», «Rules: had k i (a ⊕ b) = had k i a · had k i b». Пересказ точен."
+  },
+  {
+   "line": 312,
+   "theorem": null,
+   "file": "src/process/ProcessFourierON.v",
+   "claim": "`ProcessFourierON.v` — Rules: $\\norm{Hf}^2=N\\norm{f}^2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла (:6): «Rules: H symmetric (Hᵢⱼ=Hⱼᵢ); H² = N·I (on f: H(Hf)=N·f); Plancherel ‖Hf‖²=N‖f‖²». Пересказ точен (названо одно правило из трёх)."
+  }
+ ]
+}

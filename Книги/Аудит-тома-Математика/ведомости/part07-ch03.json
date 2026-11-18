@@ -1,0 +1,289 @@
+{
+ "batch": "audit-part-07",
+ "chapter": "07 Гармонический анализ/03 Тригонометрия и комплексный DFT где граница.md",
+ "checked": "2026-11-15",
+ "auto": true,
+ "records": [
+  {
+   "line": 20,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Доказанный результат главы условный: *если* принять одно свойство корней единицы (зануляющуюся геометрическую сумму), *то* дискретная ортогональность становится конечной теоремой над ℚ. Всё остальное — рациональная алгебра; трансцендентность сжата в одну посылку.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема (:63) стоит под тремя посылками раздела DiscreteChar (:49–52) для chi : nat -> nat -> Q. При N >= 3 этим посылкам над ℚ удовлетворяет только семейство, равное нулю на всех ненулевых частотах (Check.v, chi_forced_zero); корни единицы рациональными не являются и в посылки не подставляются. Заметки, расхождение 1."
+  },
+  {
+   "line": 27,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "*Первый* — доказанный над ℚ: дискретная ортогональность характеров *при явно названных алгебраических гипотезах* (характер как гомоморфизм плюс зануляющаяся геометрическая сумма); это конечная теорема, 0 аксиом.[^1]",
+   "page_price": "0 аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Цена верна: Closed under the global context. Посылок три (в скобках названы две; chi_0 названа на стр. 146), диапазон k + k' < N. При N >= 3 посылкам удовлетворяют только характеры, нулевые на точках выборки (chi_forced_zero), при N = 2 — знаковый характер Уолша (chi_w_model): ортогональность характеров DFT теоремой не покрыта. Заметки, расхождение 1."
+  },
+  {
+   "line": 30,
+   "theorem": null,
+   "file": "src/process/ProcessIntegral.v",
+   "claim": "*Второй* — процессные чтения: непрерывная ортогональность как предел римановых сумм над ℚ-сетками (процесс, Часть V), а не завершённый интеграл.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: утверждения о непрерывной ортогональности в формализации нет (функций sin и cos в src нет), и страница доказанным его не называет («в принципе доступна», стр. 87). Процесс римановых сумм — integral_process (:56)."
+  },
+  {
+   "line": 32,
+   "theorem": "imaginary_unit_is_element",
+   "file": "src/stdlib/GaussianMUB.v",
+   "claim": "*Третий* — честная P4-граница, которую ToS *не* строит: сами значения $\\sin/\\cos$, мнимая единица $i$, корни единицы $e^{2\\pi ik/N}$, поле $ℂ$, континуум-интеграл как готовый объект и завершённый бесконечный ряд Фурье.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: мнимая единица и корни единицы порядков 3 и 4 в формализации построены парами рациональных: gi с i² = −1, i⁴ = 1 (GaussianMUB.v:103), qi_i (process/ProcessGaussianQ.v:42, qi_i_squared :58), ω с ω³ = 1 (stdlib/EisensteinMUB.v:67, omega_is_element). Поля ℂ над процессными вещественными, функций sin и cos, завершённого интеграла и ряда в src нет. Заметки, расхождение 2."
+  },
+  {
+   "line": 35,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Первый уровень ведём как условно доказанный (при явных гипотезах о характерах), второй — как процесс, третий — как явно помеченную границу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Условность названа: после закрытия раздела теорема имеет вид forall N chi, (три посылки) -> forall k k', k + k' < N -> … . О выполнимости посылок — запись к стр. 20."
+  },
+  {
+   "line": 74,
+   "theorem": "hadamard_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "где стояла *конечная сумма знаков* $\\sum_{j<N}H_{ij}H_{i'j}=N\\delta_{ii'}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "hadamard_orthogonal (:152): forall k i i', i < pow2 k -> i' < pow2 k -> q_sum (fun j => had k i j * had k i' j) (pow2 k) == (if Nat.eqb i i' then inject_Z (Z.of_nat (pow2 k)) else 0); N = 2^k. Closed under the global context. По существу — предмет ведомости главы 7.2."
+  },
+  {
+   "line": 84,
+   "theorem": "integral_process",
+   "file": "src/process/ProcessIntegral.v",
+   "claim": "В рамках ToS интеграл — не готовое число, а *процесс* накопления римановых сумм над рациональными сетками (так он построен в Части V).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition integral_process (f : Q -> Q) (a b : Q) : RealProcess := fun n => riemann_sum f a (integral_step a b n) (S n) (:56); глава V.5 «Интеграл»."
+  },
+  {
+   "line": 85,
+   "theorem": null,
+   "file": null,
+   "claim": "Поэтому непрерывную ортогональность можно прочитать как утверждение о *пределе* процесса частичных сумм — и в этом прочтении она в принципе доступна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: сказано «в принципе доступна», не «доказано». В src такого утверждения нет; из тригонометрии есть частичные суммы ряда 1 − cos θ (gauge/CosineAction.v: cos_term, one_minus_cos_approx) и рациональные значения в отдельных точках (analysis/FourierBasis.v, stdlib/ClockModel.v)."
+  },
+  {
+   "line": 126,
+   "theorem": null,
+   "file": "src/process/ProcessGaussianQ.v",
+   "claim": "характеры живут в $ℂ^N$, полноценного поля $ℂ$ как уже построенного носителя над процессными вещественными ToS не строит, а корень единицы $\\omega^{kj}$ в общем случае иррационален и комплексен.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: пар процессов nat -> Q с комплексной арифметикой в src нет (поиск). Построены гауссовы рациональные ℚ[i] — пары рациональных: Qi (ProcessGaussianQ.v:29), TComplex (stdlib/TComplex.v:13), GQ (stdlib/GaussianMUB.v:57) — и ℚ[ω] (stdlib/EisensteinMUB.v:44); о них — запись к стр. 32."
+  },
+  {
+   "line": 131,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Алгебраический скелет (зануляющаяся сумма) становится рациональным, если значения характеров заменить абстрактными рациональными параметрами с нужными законами;",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Рациональные параметры с тремя законами раздела DiscreteChar при N >= 3 обязаны быть нулями на ненулевых частотах: из (2) и (3) при m = 2 следует Σ_j χ(1,j)² = 0 (Check.v, chi_forced_zero; Closed under the global context). Заметки, расхождение 1."
+  },
+  {
+   "line": 142,
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Возьмём значения характеров $\\chi(k,j)$ как *абстрактные* рациональные параметры (не строя $e^{2\\pi ikj/N}$) и потребуем от них лишь трёх свойств:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Variable chi : nat -> nat -> Q (:46); свойства (1)–(3) стр. 146–148 совпадают с посылками chi_0 (:49), chi_hom (:50, при всех натуральных k, k', j, без приведения по модулю N), chi_sum_zero (:51, 0 < m < N)."
+  },
+  {
+   "line": 150,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Свойства (1)–(2) чисто алгебраические; за пределы ℚ выходит *только* свойство (3) — это абстрактная форма факта «сумма корней единицы равна нулю».",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В формализации все три свойства — посылки о рациональных значениях; порознь каждое выполнимо над ℚ, а вместе при N >= 3 они оставляют только нулевые характеры (chi_forced_zero), и то же при (2), суженном до k + k' < N (chi_forced_zero_bounded). За пределы ℚ выходит носитель значений: над ℚ[i] (N = 4) и ℚ[ω] (N = 3) все три свойства выполнены характерами DFT (Check.v, chi4_model, chi3_model). Заметки, расхождение 1."
+  },
+  {
+   "line": 151,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "И вот при этих гипотезах дискретная ортогональность есть конечная теорема над ℚ (в диапазоне $k+k'<N$):",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формула стр. 155–159 и диапазон совпадают с утверждением (:63): q_sum (fun j => chi k j * chi k' j) N == (if (k + k' =? 0) then inject_Z (Z.of_nat N) else 0) при k + k' < N. Значение N достигается только при k = k' = 0. О содержании посылок — запись к стр. 150."
+  },
+  {
+   "line": 161,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "доказанная чистой рациональной алгеброй.[^3] Полная модульная DFT-формула $k+k'\\equiv0\\pmod N$ потребовала бы арифметики индексов по модулю $N$, которую этот файл сознательно не строит; в доказанном диапазоне $k+k'<N$ условие $k+k'\\equiv0$ совпадает с $k+k'=0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство (:66–73): q_sum_ext с chi_hom, затем разбор k + k' — char_sum_full или chi_sum_zero. Оговорка о диапазоне стоит честно: приведения по модулю N в файле нет. Closed under the global context."
+  },
+  {
+   "line": 163,
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "В классическом DFT это читается как ортогональность с обратным характером $k'=-k\\pmod N$, обычно реализуемая комплексным сопряжением, — но сопряжения и модульной арифметики характеров файл не строит: он доказывает рациональный скелет при явных гипотезах.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка стоит честно: в файле билинейная сумма без сопряжения. Следствие диапазона: норма ненулевого характера (пара k = k' >= 1) теоремой не утверждается; при 2k < N теорема даёт для неё нуль (Check.v, char_square_sum_zero)."
+  },
+  {
+   "line": 168,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "*Файл-граница ничего трансцендентного не строит: он показывает, что вся ортогональность DFT есть рациональная алгебра характеров плюс *один* вход — зануляющаяся сумма корней единицы. Граница сжата в единственную явную гипотезу.*",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "«Вся ортогональность DFT» шире доказанного: теорема покрывает пары k + k' < N билинейной суммы (без сопряжения), а её посылкам над ℚ характеры DFT не удовлетворяют ни при каком N >= 3 (chi_forced_zero); при N = 2 пара (1,1) вне диапазона (chi_w_norm_11). Посылок три, а не одна. Заметки, расхождение 1."
+  },
+  {
+   "line": 204,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Оговорка об уровне: формальный объект здесь один — условная теорема `discrete_orthogonality` при явных гипотезах; всё прочее (непрерывная тригонометрия, комплексный DFT) присутствует как *граница*, помеченная, а не построенная.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле два Qed: лемма char_sum_full (:55) и теорема discrete_orthogonality (:63); другого в нём нет. В других файлах src дискретное преобразование Фурье при N = 3 и N = 4 построено (stdlib/EisensteinMUB.v, analysis/FourierBasis.v) — запись к стр. 32."
+  },
+  {
+   "line": 207,
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Разбор есть осмысление структуры границы и чтение шапки `ProcessDiscreteTrig.v`,[^4] а не приписывание коду новых утверждений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла (:1–32) содержит разметку Elements / Roles / Rules, которую пересказывает сноска 4."
+  },
+  {
+   "line": 223,
+   "theorem": "omega_is_element",
+   "file": "src/stdlib/EisensteinMUB.v",
+   "claim": "А сами значения $\\sin/\\cos$, $e^{2\\pi ik/N}$, мнимая единица $i$, число $\\pi$, континуум-интеграл — роль-пределы: места, к которым процессы стремятся, но которые ToS не актуализирует.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: i и первообразный кубический корень ω в формализации заданы конечными данными — парами рациональных, с доказанными i⁴ = 1 (stdlib/GaussianMUB.v:103) и ω³ = 1 (omega_is_element, :67); главы 11.1 и 11.4 тома называют их «Элемент-ролями конечного порядка». Для π, общих значений sin/cos и интеграла слова страницы формализации не противоречат. Заметки, расхождение 2."
+  },
+  {
+   "line": 244,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Условная теорема не делает вид, что построила корни единицы — она показывает, что *при* их ключевом свойстве вся ортогональность рациональна.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема о рациональнозначном chi; «ключевому свойству» вместе с (1)–(2) при N >= 3 удовлетворяют только нулевые характеры (chi_forced_zero), так что о корнях единицы она ничего не утверждает; «вся ортогональность» — см. запись к стр. 168. Заметки, расхождение 1."
+  },
+  {
+   "line": 254,
+   "theorem": "hadamard_orthogonal",
+   "file": "src/process/ProcessWalshHadamard.v",
+   "claim": "предъявлено и доказано, а трансцендентные экземпляры — помечены и сжаты в явные гипотезы, не растворяя при этом ни одной содержательной теоремы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Предъявлено и доказано» об Уолше — hadamard_orthogonal (:152), walsh_norm (:78), Closed under the global context; по существу — ведомость главы 7.2. О словах «сжаты в явные гипотезы» — записи к стр. 20 и 150."
+  },
+  {
+   "line": 258,
+   "theorem": null,
+   "file": "src/process/ProcessFourierSeriesL2.v",
+   "claim": "Там частичная сумма — наилучшее приближение (Глава 7.1), ошибка усечения равна хвостовой энергии, и всё это конечно и рационально; а переход к завершённому бесконечному ряду — снова честная P4-граница.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Анонс главы 7.4, доказанным здесь не названо. Для сведения: fourier_error_eq (:57) и fourier_partial_best (:94) стоят в разделе ON под посылкой Hon для всех номеров (:47), невыполнимой (on_all_indices_unsat, process/ProcessL2Orthonormal.v); с выполнимой посылкой те же утверждения — resid_norm_b, best_approx_b. Предмет ведомостей глав 7.1 и 7.4."
+  },
+  {
+   "line": 264,
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Опорный файл — `ProcessDiscreteTrig.v` (каталог `src/process/`, 2 доказанных утверждения, 0 `Admitted`, 0 аксиом).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Числа верны: grep -c 'Qed\\.' — 2; строк Axiom, Parameter, Admitted нет; Print Assumptions обоих объявлений — Closed under the global context. Файл никем не подключается (поиск по src), примеров применения теоремы в формализации нет.",
+   "assumptions": "char_sum_full, discrete_orthogonality: Closed under the global context"
+  },
+  {
+   "line": 264,
+   "theorem": "Admitted",
+   "external": true,
+   "claim": "0 `Admitted`, 0 аксиом",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Ключевое слово Rocq, не имя. В ProcessDiscreteTrig.v строк «Admitted.» нет: слово стоит только в шапке-комментарии (:30).",
+   "assumptions": "не применимо (ключевое слово)"
+  },
+  {
+   "line": 264,
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Он *не* строит $\\sin/\\cos$, комплексные числа или формулу Эйлера; он формализует, *какие гипотезы* превращают тригонометрическую ортогональность в утверждение о конечной сумме.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Первая половина верна: в файле нет ни sin/cos, ни комплексных чисел. Вторая: посылки записаны для рациональных значений, и тригонометрические характеры им не удовлетворяют — при N >= 3 остаются только нулевые (chi_forced_zero). Гипотезы описывают ортогональность DFT лишь над расширенным носителем (discrete_orthogonality_gen, chi4_model, chi3_model в Check.v). Заметки, расхождение 1."
+  },
+  {
+   "line": 265,
+   "theorem": "RealProcess",
+   "file": "src/process/ProcessCore.v",
+   "claim": "Процессные вещественные — это $ℕ\\toℚ$ (Часть IV);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition RealProcess := nat -> Q (process/ProcessCore.v:34); условие Коши — отдельный предикат is_Cauchy."
+  },
+  {
+   "line": 265,
+   "theorem": "fourier_orthogonality",
+   "file": "src/stdlib/EisensteinMUB.v",
+   "claim": "комплексные потребовали бы пар таких процессов, но дело не в паре, а в *значениях*: $e^{2\\pi ik/N}$ трансцендентно. Поэтому комплексный DFT — роль-предел, а не построенный объект.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: при N = 3 базис DFT (1,1,1), (1,ω,ω²), (1,ω²,ω) построен над ℚ[ω], и его ортогональность доказана — fourier_orthogonality (:123); при N = 4 вещественная форма DFT построена над ℚ (analysis/FourierBasis.v: phi_0…phi_3, шесть ортогональностей, idft_inverts_dft_concrete). Значения e^{2πik/N} — алгебраические числа (так и сказано на стр. 133), а не трансцендентные. Заметки, расхождение 2."
+  },
+  {
+   "line": 266,
+   "theorem": "char_sum_full",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "В `ProcessDiscreteTrig.v`: `char_sum_full` (нулевая частота суммируется в $N$, из (1) и суммы констант)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma char_sum_full : q_sum (fun j => chi 0%nat j) N == inject_Z (Z.of_nat N) (:55); после закрытия раздела зависит только от посылки chi_0; доказательство — q_sum_ext и q_sum_const. Closed under the global context."
+  },
+  {
+   "line": 266,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "`discrete_orthogonality` ($\\sum_{j<N}\\chi(k,j)\\chi(k',j)=N$ при $k+k'=0$, иначе $0$, для $k+k'<N$). Доказательство: гомоморфизм (2) сворачивает произведение в $\\chi(k+k',j)$, далее (1) или (3).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:63) и ход доказательства (:66–73) пересказаны точно. Closed under the global context."
+  },
+  {
+   "line": 266,
+   "theorem": "discrete_orthogonality",
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "0 аксиом — трансцендентность в гипотезе (3), а не в аксиоме.",
+   "page_price": "0 аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Цена верна: Closed under the global context. Гипотеза (3) — рациональное равенство о рациональных значениях; содержания корней единицы она не несёт: вместе с (1)–(2) при N >= 3 её выполняют только нулевые характеры (chi_forced_zero). Заметки, расхождение 1."
+  },
+  {
+   "line": 267,
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteTrig.v",
+   "claim": "Шапка файла: Elements — абстрактные значения $\\chi(k,j)\\inℚ$; Roles — $\\chi_k$ как характер, гипотезы как алгебраическое содержание корней единицы; Rules — $\\chi_0=1$, $\\chi_k\\chi_{k'}=\\chi_{k+k'}$, $\\sum_j\\chi_m=0$ $\\Rightarrow$ ортогональность. Файл назван «boundary formaliser».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с шапкой (:4–11): «Elements: abstract character values χ k j ∈ ℚ; N sample points; finite sums», «Roles: … the hypotheses = the algebraic content of roots of unity», «A \"boundary formaliser\"». В строке Rules шапки стоит N·[k+k'≡0] без диапазона; страница диапазон называет."
+  }
+ ]
+}
