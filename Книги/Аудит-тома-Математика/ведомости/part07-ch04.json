@@ -15,49 +15,49 @@
   },
   {
    "line": 25,
-   "theorem": null,
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "theorem": "fourier_error_eq_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Доказано над ℚ следующее (для конечной ортонормированной системы на $N$ координатах), и всё — без аксиом.[^1]",
    "page_price": "без аксиом",
-   "verdict": "mismatch-statement",
-   "note": "статус: пять из шести утверждений ProcessFourierSeriesL2.v и семь из девяти ProcessBestApproximation.v стоят под посылкой раздела Hon : forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0) (:47, :70) — ортонормированность при всех натуральных номерах на N координатах. Она невыполнима (on_all_indices_unsat, ProcessL2Orthonormal.v:134): примеров у этих теорем нет. Цена названа верно: все объявления — Closed under the global context.",
-   "assumptions": "все 15 объявлений двух файлов: Closed under the global context"
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся) (сноска 1 переписана): утверждения перечня доказаны под выполнимой посылкой в ProcessOrthonormalFourier.v — fourier_error_eq_b (:294), ferr_nonneg (:269), fourier_error_monotone_b (:326), fourier_partial_best_b (:357), fourier_error_zero_iff_recovers_b (:344). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
    "line": 26,
-   "theorem": "fourier_error_eq",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "theorem": "fourier_error_eq_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Квадрат ошибки усечения равен полной энергии минус захваченная, $\\norm{f-P_K}^2=\\norm{f}^2-\\sum_{k<K}c_k^2$;",
    "page_price": "без аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_eq (:57): errK K == seq_inner f f N - captured cf K — формула та же, но лемма стоит под посылкой Hon (:47) для всех номеров, невыполнимой (on_all_indices_unsat). Закрывается: resid_norm_b (ProcessL2Orthonormal.v:231, K <= K0); в виде главы — fourier_error_eq_b (Check.v)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_error_eq_b : K <= K0 -> ferr e f N K == seq_inner f f N - captured (fun k => seq_inner (e k) f N) K (:294); ferr e f N K (:264) — ‖f − P_K‖²; из resid_norm_b (ProcessL2Orthonormal.v:231). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
    "line": 28,
-   "theorem": "fourier_error_monotone",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "theorem": "fourier_error_monotone_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "эта ошибка неотрицательна (Бессель) и *монотонно убывает* с ростом $K$;",
    "page_price": "без аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Неотрицательность — fourier_error_nonneg (:71), посылки не берёт (сумма квадратов). Монотонность — fourier_error_monotone (:77): K <= K' -> errK K' <= errK K (нестрого) — под невыполнимой посылкой Hon; без ортонормированности неверна (Check.v, monotone_fails_without_on). С выполнимой посылкой в src не записана; доказана в пробном файле: fourier_error_monotone_b (K <= K' <= K0)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_error_monotone_b : K <= K' -> K' <= K0 -> ferr e f N K' <= ferr e f N K (:326); из fourier_error_eq_b и captured_mono (ProcessFourierCompression.v:49). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. Неотрицательность — ferr_nonneg (:269)."
   },
   {
    "line": 28,
-   "theorem": "fourier_partial_best",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "theorem": "fourier_partial_best_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "частичная сумма $P_K$ — наилучшее $K$-членное приближение;",
    "page_price": "без аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Theorem fourier_partial_best (:94), она же best_approx_ge (ProcessBestApproximation.v:161): errK K <= ‖f − Σ_{k<K} a_k e_k‖² для любых a — под невыполнимой посылкой Hon. Закрывается: best_approx_b (ProcessL2Orthonormal.v:256, K <= K0)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_partial_best_b : K <= K0 -> ferr e f N K <= ‖f − Σ_{k<K} a_k e_k‖² для любых весов a (:357); то же, что best_approx_b (ProcessL2Orthonormal.v:256). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
    "line": 29,
-   "theorem": "fourier_error_zero_iff",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "theorem": "fourier_error_zero_iff_recovers_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "а ошибка обращается в нуль тогда и только тогда, когда выполнено равенство Парсеваля, то есть система полностью восстанавливает $f$.",
    "page_price": "без аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_zero_iff (:87): errK K == 0 <-> captured cf K == seq_inner f f N; «система восстанавливает f» — parseval_iff_complete (ProcessL2Parseval.v:142). Обе под невыполнимой посылкой Hon. Закрывается: parseval_iff_resid_zero_b (:286) и parseval_iff_complete_b (:296) в ProcessL2Orthonormal.v; одним утверждением — fourier_error_zero_iff_recovers_b (Check.v)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): обе половины фразы — fourier_error_zero_iff_b : K <= K0 -> ferr e f N K == 0 <-> captured (fun k => seq_inner (e k) f N) K == seq_inner f f N (:337). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. fourier_error_zero_iff_recovers_b : K <= K0 -> ferr e f N K == 0 <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (:344); из fourier_error_zero_iff_b (:337) и parseval_iff_complete_b (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
    "line": 33,
@@ -70,42 +70,44 @@
   },
   {
    "line": 41,
-   "theorem": null,
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "theorem": "fourier_truncation_ends_exactly",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "*Первый* — конечная теория усечений (ошибка = хвост, монотонность, наилучшее приближение, критерий полноты): доказано над ℚ, 0 аксиом.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "статус: «доказано» сказано о теоремах под посылкой ортонормированности при всех номерах (Hon, :47), которой не удовлетворяет ни одна система (on_all_indices_unsat). С выполнимой посылкой в src доказаны тождество ошибки, наилучшее приближение и критерий полноты (ProcessL2Orthonormal.v: resid_norm_b, best_approx_b, parseval_iff_complete_b); монотонность и единственность минимума — только в пробном файле. Цена названа верно."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): ошибка = полная − захваченная (fourier_error_eq_b, :294), хвост (fourier_error_is_tail_b, :365), монотонность (:326), наилучшее приближение (:357), критерий (:344). fourier_truncation_ends_exactly : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f, ferr e f N 0 == seq_inner f f N /\\ (forall K K', K <= K' -> K' <= N -> ferr e f N K' <= ferr e f N K) /\\ ferr e f N N == 0 (:500); std_truncation_ends_exactly (:516): ferr delta f N N == 0; rot_truncation_ends_exactly (:524). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
    "line": 43,
-   "theorem": "l2_riesz_fischer",
-   "file": "src/process/ProcessL2RieszFischer.v",
-   "claim": "*Второй* — процессное чтение: ряд Фурье как процесс $K\\mapsto P_K$ с убывающей ошибкой, L<sup>2</sup>-полнота по построению (Рисс–Фишер Части VI).",
+   "theorem": "std_fourier_l2_convergence_iff",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "*Второй* — процессное чтение: ряд Фурье как процесс $K\\mapsto P_K$ с убывающей ошибкой; для стандартной системы доказано и большее — остаток стремится к нулю при всех усечениях $N$ сразу тогда и только тогда, когда процесс энергии $\\sum_{i<n}f_i^2$ есть процесс Коши, и тогда частичные суммы L<sup>2</sup>-Коши, а предел, построенный по Риссу–Фишеру Части VI, есть сама $f$.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Theorem l2_riesz_fischer (:134) — при фиксированном усечении N, чего страница не оговаривает; её заключение после развёртывания l2_limit совпадает с посылкой L2CauchySq; к частичным суммам P_K она в src не применена — запись к стр. 110. Процесса K ↦ P_K как объекта и утверждения о нём в формализации нет; уровень подан как чтение, не как доказанное (стр. 46–47)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 5, слово автора): было «L²-полнота по построению (Рисс–Фишер Части VI)» — теорема Рисса — Фишера верна при фиксированном усечении и к частичным суммам не применялась. Теперь для стандартной системы названо доказанное. std_fourier_l2_convergence_iff : forall f : nat -> Q, is_Cauchy (fun n => captured f n) <-> (forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta f N K < eps) (:182); прямая сторона — std_fourier_tail_to_zero (:152), обратная — std_fourier_tail_to_zero_conv (:166). Здесь captured f n = Σ_{i<n} f_i², ferr delta f N K — квадрат ошибки K-членной частичной суммы стандартной системы на N координатах; стадия M не зависит от N. Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 91,
-   "theorem": "bessel_general",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 94,
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Неравенство Бесселя (Глава 7.1) даёт *энергетический бюджет*:",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Theorem bessel_general (:175): Σ_{k<K} ⟨e_k,f⟩² <= ‖f‖² — под посылкой Hon (:119) для всех номеров, невыполнимой (on_all_indices_unsat). Закрывается: bessel_b (ProcessL2Orthonormal.v:243, K <= K0); пример — bessel_std (:330)."
-  },
-  {
-   "line": 103,
-   "theorem": "fourier_error_zero_iff",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "В конечном усечении на $N$ координатах это проверяется конечным критерием (§ «Парсеваль как критерий сходимости к нулю»): при полном наборе направлений ошибка зануляется.",
-   "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Критерий — fourier_error_zero_iff (:87) и parseval_iff_complete (ProcessL2Parseval.v:142), обе под невыполнимой посылкой Hon — запись к стр. 162. С выполнимой посылкой: fourier_error_zero_iff_recovers_b (Check.v); всякие N ортонормированных векторов на N координатах — полный набор, ошибка нулевая при K = N для всякой f (Check.v, fourier_truncation_ends_exactly)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): bessel_b : K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (ProcessL2Orthonormal.v:243). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
    "line": 106,
+   "theorem": "fourier_truncation_ends_exactly",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "В конечном усечении на $N$ координатах это проверяется конечным критерием (§ «Парсеваль как критерий сходимости к нулю»): при полном наборе направлений ошибка зануляется.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_truncation_ends_exactly : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f, ferr e f N 0 == seq_inner f f N /\\ (forall K K', K <= K' -> K' <= N -> ferr e f N K' <= ferr e f N K) /\\ ferr e f N N == 0 (:500); std_truncation_ends_exactly (:516): ferr delta f N N == 0; rot_truncation_ends_exactly (:524). Closed under the global context. Критерий — fourier_error_zero_iff_recovers_b : K <= K0 -> ferr e f N K == 0 <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (:344); из fourier_error_zero_iff_b (:337) и parseval_iff_complete_b (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
+  },
+  {
+   "line": 109,
    "theorem": null,
    "file": "src/process/ProcessFourierSeriesL2.v",
    "claim": "Для бесконечной системы требуется отдельный Коши-процесс по $K$ и доказательство исчезновения хвоста — а это уже предельное утверждение, а не следствие одного Бесселя.",
@@ -114,16 +116,17 @@
    "note": "Оговорка честная: утверждения об исчезновении хвоста в формализации нет. Для стандартной системы оно доказано в пробном файле в процессной форме (усечение N не фиксировано): остаток стремится к нулю равномерно по N тогда и только тогда, когда энергетический процесс f — Коши (Check.v, std_fourier_l2_convergence_iff; пример с бесконечным числом ненулевых коэффициентов — geometric_fourier_converges)."
   },
   {
-   "line": 110,
+   "line": 113,
    "theorem": "l2_riesz_fischer",
    "file": "src/process/ProcessL2RieszFischer.v",
-   "claim": "Здесь и помогает Рисс–Фишер из Части VI: *если* такой Коши-процесс частичных сумм построен, его предел читается как L<sup>2</sup>-процесс (пространство L<sup>2</sup>-процессов Коши-полно по построению).[^2]",
+   "claim": "Здесь и помогает Рисс–Фишер из Части VI: *если* такой Коши-процесс частичных сумм построен, его предел читается как L<sup>2</sup>-процесс (пространство L<sup>2</sup>-процессов Коши-полно по построению — при каждом фиксированном усечении $N$).[^2]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Theorem l2_riesz_fischer (:134) — при фиксированном усечении N (L2CauchySq F N, :87); после развёртывания l2_limit F i s = F s i (:112) заключение совпадает с посылкой. Страница применяет её к бесконечной системе и усечения не оговаривает; на N координатах ортонормированных векторов не больше N. К частичным суммам P_K теорема в src не применена. Содержательная форма при фиксированном N — riesz_fischer_process_form (ProcessL2Orthonormal.v:618)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 5, слово автора): на странице оговорено фиксированное усечение. Theorem l2_riesz_fischer (ProcessL2RieszFischer.v:134): L2CauchySq F N -> forall eps > 0, exists M, forall n s >= M, ‖F n − l2_limit F · s‖²_N <= eps — при фиксированном N (L2CauchySq F N, :87); l2_limit F i s = F s i (:112). Closed under the global context. Содержательная форма — riesz_fischer_process_form (ProcessL2Orthonormal.v:618): при L2CauchySq F N — координаты предела суть процессы Коши, расстояние до предела dist_to_limit (:547) есть процесс Коши и стремится к нулю. Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 114,
+   "line": 117,
    "theorem": "l2_limit",
    "file": "src/process/ProcessL2RieszFischer.v",
    "claim": "Рисс–Фишер гарантирует *носитель* предела, а не то, что предел есть именно $f$.",
@@ -132,34 +135,34 @@
    "note": "Носитель — определение l2_limit (:112): координата i есть процесс s ↦ F s i; что координаты (i < N) — процессы Коши: l2_limit_is_cauchy_real (:116), l2_limit_coord_is_Cauchy (ProcessL2Orthonormal.v:530). Что предел есть f, в src не утверждается — страница так и говорит. Для стандартной системы это доказано в пробном файле: std_limit_is_f."
   },
   {
-   "line": 132,
-   "theorem": "fourier_error_eq",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "line": 137,
+   "theorem": "fourier_error_eq_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Квадрат ошибки усечения *в точности* равен отброшенной хвостовой энергии — той, что не схватили первые $K$ коэффициентов.[^3] Отсюда три следствия, и каждое доказано:",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: fourier_error_eq (:57) и следствия fourier_error_monotone (:77), fourier_error_zero_iff (:87) — под невыполнимой посылкой Hon; fourier_error_nonneg (:71) посылки не берёт. В Rocq правая часть — ‖f‖² − captured; суммой квадратов отброшенных коэффициентов Σ_{K<=k<K0} c_k² она становится при полной системе (Check.v, fourier_error_is_tail_b)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_error_eq_b : K <= K0 -> ferr e f N K == seq_inner f f N - captured (fun k => seq_inner (e k) f N) K (:294); ferr e f N K (:264) — ‖f − P_K‖²; из resid_norm_b (ProcessL2Orthonormal.v:231). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. В виде суммы квадратов отброшенных коэффициентов — fourier_error_is_tail_b : K <= K0 -> captured cf K0 == seq_inner f f N -> ferr e f N K == q_sum (fun i => seq_inner (e (K + i)) f N * seq_inner (e (K + i)) f N) (K0 - K) (:365). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 135,
-   "theorem": "bessel_general",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 140,
+   "theorem": "bessel_from_error_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "*Неотрицательность.* Ошибка $\\norm{f-P_K}^2\\ge0$ — значит, $\\sum_{k<K}c_k^2\\le \\norm{f}^2$ (неравенство Бесселя): захваченная энергия никогда не превышает полную.[^4]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Первая половина — fourier_error_nonneg (ProcessFourierSeriesL2.v:71), верна для любого семейства e. Переход к неравенству Бесселя идёт через тождество ошибки fourier_error_eq; оно и сама bessel_general (:175) стоят под невыполнимой посылкой Hon. Закрывается: resid_norm_b и bessel_b (ProcessL2Orthonormal.v:231, :243)."
-  },
-  {
-   "line": 139,
-   "theorem": "fourier_error_monotone",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "*Монотонное убывание.* С ростом $K$ захваченная энергия не убывает, значит ошибка *не возрастает*: $K\\le K'\\Rightarrow\\norm{f-P_{K'}}^2\\le\\norm{f-P_K}^2$.",
-   "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_monotone (:77): (K <= K')%nat -> errK K' <= errK K — формула та же, под невыполнимой посылкой Hon. С выполнимой посылкой в src не записана; в пробном файле: fourier_error_monotone_b (K <= K' <= K0) и точный шаг fourier_error_step_b: err(K+1) = err(K) − c_K²."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся) (сноска 4 переписана): ferr_nonneg : forall e f N K, 0 <= ferr e f N K (:269) — посылки не берёт (сумма квадратов). Closed under the global context. bessel_from_error_b : K <= K0 -> captured (fun k => seq_inner (e k) f N) K <= seq_inner f f N (:307) — из ferr_nonneg (:269) и fourier_error_eq_b (:294). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
    "line": 144,
+   "theorem": "fourier_error_monotone_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "*Монотонное убывание.* С ростом $K$ захваченная энергия не убывает, значит ошибка *не возрастает*: $K\\le K'\\Rightarrow\\norm{f-P_{K'}}^2\\le\\norm{f-P_K}^2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_error_monotone_b : K <= K' -> K' <= K0 -> ferr e f N K' <= ferr e f N K (:326); из fourier_error_eq_b и captured_mono (ProcessFourierCompression.v:49). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. fourier_error_step_b : S K <= K0 -> ferr e f N (S K) == ferr e f N K - seq_inner (e K) f N * seq_inner (e K) f N (:315). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
+  },
+  {
+   "line": 149,
    "theorem": null,
    "file": "src/process/ProcessFourierSeriesL2.v",
    "claim": "*Доказуемое ядро L<sup>2</sup>-сходимости — это контроль хвостовой энергии: она неотрицательна, не возрастает при добавлении коэффициентов и обращается в нуль ровно при Парсевале.",
@@ -168,52 +171,52 @@
    "note": "«Доказуемое» — верно при выполнимой посылке (Check.v, раздел 1); в названных файлах — под невыполнимой, запись к стр. 25. Утверждения о стремлении хвостовой энергии к нулю в перечне нет — нет его и в формализации."
   },
   {
-   "line": 154,
-   "theorem": "best_approx_unique",
-   "file": "src/process/ProcessBestApproximation.v",
+   "line": 159,
+   "theorem": "best_approx_unique_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "среди всех $K$-членных линейных комбинаций системы $\\{e_k\\}$ частичная сумма Фурье $P_K$ минимизирует L<sup>2</sup>-ошибку, и минимум этот единствен (Глава 7.1).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "best_approx_ge (:161) и best_approx_unique (:176): равенство ошибок <-> a k == ⟨e_k,f⟩ при k < K — под невыполнимой посылкой Hon (:70). Минимальность закрывается best_approx_b (ProcessL2Orthonormal.v:256); единственность с выполнимой посылкой в src не записана, доказана в пробном файле: best_approx_eq_b, best_approx_unique_b."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): best_approx_unique_b : K <= K0 -> (‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖²) <-> (forall k, k < K -> a k == seq_inner (e k) f N) (:178); из best_approx_eq_b (:161) и q_sum_sq_zero. Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. Минимальность — fourier_partial_best_b : K <= K0 -> ferr e f N K <= ‖f − Σ_{k<K} a_k e_k‖² для любых весов a (:357); то же, что best_approx_b (ProcessL2Orthonormal.v:256). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 156,
-   "theorem": "fourier_partial_best",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "line": 161,
+   "theorem": "fourier_partial_best_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Поэтому процесс усечения не просто убывает — он убывает *оптимально*: на каждом $K$ нельзя приблизить $f$ через $K$ направлений лучше, чем это делает $P_K$.[^6]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Theorem fourier_partial_best (:94) — под невыполнимой посылкой Hon. Закрывается: best_approx_b (ProcessL2Orthonormal.v:256); «на каждом K» — при K <= K0 <= N."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_partial_best_b : K <= K0 -> ferr e f N K <= ‖f − Σ_{k<K} a_k e_k‖² для любых весов a (:357); то же, что best_approx_b (ProcessL2Orthonormal.v:256). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. «На каждом K» — при K <= K0 <= N (on_count_le_dim, :208)."
   },
   {
-   "line": 162,
-   "theorem": "fourier_error_zero_iff",
-   "file": "src/process/ProcessFourierSeriesL2.v",
+   "line": 167,
+   "theorem": "fourier_error_zero_iff_recovers_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Когда же ошибка достигает нуля? Тогда и только тогда, когда выполнено равенство Парсеваля $\\sum_{k<K}c_k^2=\\norm{f}^2$ — то есть когда система *полностью* восстанавливает $f$.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_zero_iff (:87): errK K == 0 <-> captured cf K == seq_inner f f N — под невыполнимой посылкой Hon. Закрывается: parseval_iff_resid_zero_b (ProcessL2Orthonormal.v:286)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): fourier_error_zero_iff_b : K <= K0 -> ferr e f N K == 0 <-> captured (fun k => seq_inner (e k) f N) K == seq_inner f f N (:337). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. fourier_error_zero_iff_recovers_b : K <= K0 -> ferr e f N K == 0 <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (:344); из fourier_error_zero_iff_b (:337) и parseval_iff_complete_b (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 164,
-   "theorem": "parseval_iff_complete",
-   "file": "src/process/ProcessL2Parseval.v",
+   "line": 169,
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Это конечный критерий полноты Главы 7.1, прочитанный как критерий сходимости: нулевая хвостовая энергия эквивалентна точному восстановлению.[^7]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Одним утверждением «ошибка нулевая <-> восстановление на каждой координате» в названных файлах не записано: fourier_error_zero_iff даёт <-> равенство Парсеваля, parseval_iff_complete (:142) — равенство Парсеваля <-> восстановление; обе под невыполнимой посылкой Hon. С выполнимой: fourier_error_zero_iff_recovers_b (Check.v) из parseval_iff_resid_zero_b и parseval_iff_complete_b."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся) (сноска 7 переписана): «нулевая ошибка <-> восстановление на каждой координате» записано одним утверждением — fourier_error_zero_iff_recovers_b : K <= K0 -> ferr e f N K == 0 <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (:344); из fourier_error_zero_iff_b (:337) и parseval_iff_complete_b (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 166,
-   "theorem": "parseval_std_all",
-   "file": "src/process/ProcessL2Orthonormal.v",
-   "claim": "Если система полна на данном усечении $N$, ошибка зануляется при достаточно большом $K$; для стандартного полного $N$-направленного набора — точно при $K=N$: процесс усечения завершается *точным* восстановлением за конечное число шагов.",
+   "line": 171,
+   "theorem": "fourier_truncation_ends_exactly",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Если система полна на данном усечении $N$, ошибка зануляется при достаточно большом $K$; для всякого набора из $N$ ортонормированных векторов (в частности, стандартного) — точно при $K=N$: процесс усечения завершается *точным* восстановлением за конечное число шагов.",
    "page_price": "",
    "verdict": "ok",
-   "note": "В названных главой файлах — только числовой пример parseval_std_concrete (ProcessL2Parseval.v:156; N = 2, f = (3, 4)). В src для стандартного базиса при всяком N и f: parseval_std_all (:337); нулевая ошибка при K = N — Check.v, std_truncation_ends_exactly. То же верно для любых N ортонормированных векторов на N координатах: fourier_truncation_ends_exactly (Check.v)."
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): было «для стандартного полного N-направленного набора»; доказано для всякого набора из N ортонормированных векторов. fourier_truncation_ends_exactly : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f, ferr e f N 0 == seq_inner f f N /\\ (forall K K', K <= K' -> K' <= N -> ferr e f N K' <= ferr e f N K) /\\ ferr e f N N == 0 (:500); std_truncation_ends_exactly (:516): ferr delta f N N == 0; rot_truncation_ends_exactly (:524). Closed under the global context."
   },
   {
-   "line": 182,
+   "line": 187,
    "theorem": null,
    "file": "src/process/ProcessFourierSeriesL2.v",
    "claim": "Процессно к ним можно приближаться (ошибка убывает, пространство полно по построению), но *завершённого* предела ToS не актуализирует:",
@@ -222,7 +225,7 @@
    "note": "Граница названа честно: утверждений о завершённом ряде и о его пределе в формализации нет. О словах «пространство полно по построению» — запись к стр. 110."
   },
   {
-   "line": 208,
+   "line": 213,
    "theorem": "System",
    "file": "src/TheoryOfSystems_Core_ERR.v",
    "claim": "«система сходимости» здесь — содержательная *интерпретация* процесса $K\\mapsto P_K$ и его конечных теорем, а не объект, объявленный в коде как `System`.",
@@ -231,54 +234,55 @@
    "note": "Record System (:203); в ProcessFourierSeriesL2.v и ProcessBestApproximation.v это имя не встречается (поиск). Оговорка честная."
   },
   {
-   "line": 263,
+   "line": 268,
    "theorem": null,
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "Опорные файлы — `ProcessFourierSeriesL2.v` (6 утверждений, 0 аксиом) и `ProcessBestApproximation.v` (9 утверждений, 0 аксиом), оба в каталоге `src/process/`,",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Опорный файл — `ProcessOrthonormalFourier.v` (каталог `src/process/`, 30 утверждений, 0 `Admitted`, 0 аксиом), поверх `ProcessL2Orthonormal.v` (Часть VI):",
    "page_price": "0 аксиом",
    "verdict": "ok",
-   "note": "Число верно: в файле 6 Qed; строк Axiom, Parameter, Admitted нет; все шесть объявлений — Closed under the global context. Пять из шести стоят под невыполнимой посылкой Hon (:47) — запись к стр. 25; fourier_error_nonneg (:71) посылки не использует.",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): в ProcessOrthonormalFourier.v 30 строк Qed; Admitted, Axiom, Parameter нет; все объявления — Closed under the global context.",
    "assumptions": "все 6 объявлений файла: Closed under the global context"
   },
   {
-   "line": 263,
-   "theorem": null,
-   "file": "src/process/ProcessBestApproximation.v",
-   "claim": "Опорные файлы — `ProcessFourierSeriesL2.v` (6 утверждений, 0 аксиом) и `ProcessBestApproximation.v` (9 утверждений, 0 аксиом), оба в каталоге `src/process/`,",
-   "page_price": "0 аксиом",
-   "verdict": "ok",
-   "note": "Число верно: в файле 9 Qed; строк Axiom, Parameter, Admitted нет; все девять объявлений — Closed under the global context. Семь из девяти стоят под невыполнимой посылкой Hon (:70); seq_inner_expand_diff (:52) и inner_f_comb (:100) посылки не используют.",
-   "assumptions": "все 9 объявлений файла: Closed under the global context"
-  },
-  {
-   "line": 263,
-   "theorem": null,
-   "file": "src/process/ProcessL2RieszFischer.v",
-   "claim": "поверх L<sup>2</sup>-аппарата Части VI (`ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v`, `ProcessL2RieszFischer.v`).",
+   "line": 268,
+   "theorem": "on_all_indices_unsat",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "В прежних `ProcessFourierSeriesL2.v` и `ProcessBestApproximation.v` те же утверждения записаны под условием ортонормированности при всех номерах, на $N$ координатах невыполнимым (`on_all_indices_unsat`).",
    "page_price": "",
    "verdict": "ok",
-   "note": "ProcessFourierSeriesL2.v подключает ProcessL2BesselGeneral.v (resid_norm) и ProcessBestApproximation.v; тот — ProcessL2BesselGeneral.v и ProcessL2Parseval.v (q_sum_sq_zero). ProcessL2RieszFischer.v ни одним из двух опорных файлов не подключается: связь с ним — только в тексте главы (сноска 2)."
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): on_all_indices_unsat : forall e N, ~ (forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) (ProcessL2Orthonormal.v:134). Closed under the global context. Посылка Hon раздела ON — ProcessFourierSeriesL2.v:47, ProcessBestApproximation.v:70.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 264,
+   "line": 268,
+   "theorem": null,
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Процессное чтение предела — `ProcessL2RieszFischer.v` и `ProcessFourierConvergenceStd.v` (26 утверждений, 0 аксиом).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 5, слово автора): добавлен новый файл. ProcessFourierConvergenceStd.v подключает ProcessL2RieszFischer.v и ProcessL2Orthonormal.v и применяет Рисса — Фишера к частичным суммам стандартной системы (std_fourier_riesz_fischer, :245). Прежние опорные файлы ProcessFourierSeriesL2.v и ProcessBestApproximation.v файл ProcessL2RieszFischer.v не подключают."
+  },
+  {
+   "line": 269,
    "theorem": "l2_riesz_fischer",
    "file": "src/process/ProcessL2RieszFischer.v",
-   "claim": "Процессное прочтение Рисса–Фишера — `l2_riesz_fischer` в `ProcessL2RieszFischer.v` (Часть VI): L<sup>2</sup>-пространство процессов Коши-полно по построению; это *мост* к носителю предела,",
+   "claim": "Процессное прочтение Рисса–Фишера — `l2_riesz_fischer` в `ProcessL2RieszFischer.v` (Часть VI), при фиксированном усечении $N$: предел строится покоординатно как процесс (`l2_limit`), и заключение теоремы есть её посылка, развёрнутая по этому определению (`rf_conclusion_is_hypothesis`), — «полно по построению» в точном смысле;",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Theorem l2_riesz_fischer (:134): L2CauchySq F N -> forall eps > 0, exists M, forall n s >= M, ‖F n − l2_limit F · s‖²_N <= eps — при фиксированном N; заключение по определению l2_limit (:112) совпадает с посылкой (Check.v, rf_conclusion_is_hypothesis). Усечение на странице не оговорено; теоремы, применяющей её к частичным суммам ряда Фурье, в src нет. Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 5, слово автора): было «L²-пространство процессов Коши-полно по построению; это мост к носителю предела» — без оговорки об усечении и о том, что заключение совпадает с посылкой. Theorem l2_riesz_fischer (ProcessL2RieszFischer.v:134): L2CauchySq F N -> forall eps > 0, exists M, forall n s >= M, ‖F n − l2_limit F · s‖²_N <= eps — при фиксированном N (L2CauchySq F N, :87); l2_limit F i s = F s i (:112). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 265,
-   "theorem": "fourier_error_eq",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "`fourier_error_eq` в `ProcessFourierSeriesL2.v`: $\\norm{f-P_K}^2=\\norm{f}^2-\\texttt{captured}(c,K)$, где `captured`$(c,K)=\\sum_{k<K}c_k^2$.",
+   "line": 270,
+   "theorem": "fourier_error_eq_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`fourier_error_eq_b` в `ProcessOrthonormalFourier.v`: $\\norm{f-P_K}^2=\\norm{f}^2-\\texttt{captured}(c,K)$ при $K\\le K_0$, где `captured`$(c,K)=\\sum_{k<K}c_k^2$.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_eq (:57) — формула та же; после закрытия раздела лемма берёт посылку forall i j, seq_inner (e i) (e j) N == (if i =? j then 1 else 0), невыполнимую (on_all_indices_unsat). Закрывается: resid_norm_b (ProcessL2Orthonormal.v:231); fourier_error_eq_b (Check.v). Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): fourier_error_eq_b : K <= K0 -> ferr e f N K == seq_inner f f N - captured (fun k => seq_inner (e k) f N) K (:294); ferr e f N K (:264) — ‖f − P_K‖²; из resid_norm_b (ProcessL2Orthonormal.v:231). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 265,
+   "line": 270,
    "theorem": "captured",
    "file": "src/process/ProcessFourierCompression.v",
    "claim": "где `captured`$(c,K)=\\sum_{k<K}c_k^2$.",
@@ -287,97 +291,97 @@
    "note": "Definition captured (c : nat -> Q) (K : nat) : Q := q_sum (fun i => c i * c i) K (:42) — совпадает. Определение лежит в ProcessFourierCompression.v (файл Главы 7.5), ProcessFourierSeriesL2.v его подключает."
   },
   {
-   "line": 265,
-   "theorem": "resid_norm",
-   "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "Прямое следствие `resid_norm` (Часть VI). 0 аксиом.",
-   "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Зависимость названа верно: доказательство fourier_error_eq — rewrite (resid_norm e N Hon f K). Lemma resid_norm (:150) стоит под невыполнимой посылкой Hon (:119). Закрывается: resid_norm_b (ProcessL2Orthonormal.v:231). Closed under the global context."
-  },
-  {
-   "line": 266,
-   "theorem": "fourier_error_nonneg",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "`fourier_error_nonneg`; эквивалентно `bessel_general` (Глава 7.1).",
+   "line": 270,
+   "theorem": "resid_norm_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Прямое следствие `resid_norm_b` (Часть VI).",
    "page_price": "",
    "verdict": "ok",
-   "note": "Lemma fourier_error_nonneg (:71): forall K, 0 <= errK K. После закрытия раздела посылки Hon не берёт: forall e N f K, 0 <= ‖f − P_K‖² — сумма квадратов, верна для любого семейства e. Closed under the global context. О слове «эквивалентно» — следующая запись."
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): доказательство fourier_error_eq_b — rewrite (resid_norm_b e N K0 Hon f K HK). resid_norm_b : K <= K0 -> ‖f − P_K‖² == seq_inner f f N - q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K (ProcessL2Orthonormal.v:231); частный случай gen_resid (:208, произвольные веса; индукция по K). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 266,
-   "theorem": "bessel_general",
-   "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "`fourier_error_nonneg`; эквивалентно `bessel_general` (Глава 7.1).",
+   "line": 271,
+   "theorem": "ferr_nonneg",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`ferr_nonneg` — неотрицательность ошибки; она верна для любого семейства $e$ (сумма квадратов).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Неотрицательность ошибки верна для любого семейства, неравенство Бесселя — нет; равносильны они только вместе с тождеством ошибки fourier_error_eq. Theorem bessel_general (:175) стоит под невыполнимой посылкой Hon (:119). Закрывается: bessel_b (ProcessL2Orthonormal.v:243). Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): ferr_nonneg : forall e f N K, 0 <= ferr e f N K (:269) — посылки не берёт (сумма квадратов). Closed under the global context."
   },
   {
-   "line": 267,
-   "theorem": "fourier_error_monotone",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "`fourier_error_monotone`; опирается на монотонность захваченной энергии (`captured_mono`, Глава 7.5). 0 аксиом.",
+   "line": 271,
+   "theorem": "bessel_from_error_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Неравенство Бесселя следует из неё вместе с тождеством ошибки — `bessel_from_error_b` (то же, что `bessel_b`, Глава 7.1). Обе — в `ProcessOrthonormalFourier.v`, 0 аксиом.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_monotone (:77) — под невыполнимой посылкой Hon; доказательство: fourier_error_eq дважды и captured_mono (зависимость названа верно). С выполнимой посылкой в src не записана; fourier_error_monotone_b — Check.v. Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): было «эквивалентно bessel_general» — неотрицательность ошибки верна для любого семейства, неравенство Бесселя — нет; связывает их тождество ошибки. bessel_from_error_b : K <= K0 -> captured (fun k => seq_inner (e k) f N) K <= seq_inner f f N (:307) — из ferr_nonneg (:269) и fourier_error_eq_b (:294). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 267,
+   "line": 272,
+   "theorem": "fourier_error_monotone_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`fourier_error_monotone_b` ($K\\le K'\\le K_0$); опирается на монотонность захваченной энергии (`captured_mono`, Глава 7.5).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): fourier_error_monotone_b : K <= K' -> K' <= K0 -> ferr e f N K' <= ferr e f N K (:326); из fourier_error_eq_b и captured_mono (ProcessFourierCompression.v:49). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
+  },
+  {
+   "line": 272,
    "theorem": "captured_mono",
    "file": "src/process/ProcessFourierCompression.v",
-   "claim": "`fourier_error_monotone`; опирается на монотонность захваченной энергии (`captured_mono`, Глава 7.5). 0 аксиом.",
-   "page_price": "0 аксиом",
+   "claim": "`fourier_error_monotone_b` ($K\\le K'\\le K_0$); опирается на монотонность захваченной энергии (`captured_mono`, Глава 7.5).",
+   "page_price": "",
    "verdict": "ok",
    "note": "Lemma captured_mono (:49): (K <= K')%nat -> captured c K <= captured c K' — без посылок; файл относится к Главе 7.5, там имя названо. Closed under the global context."
   },
   {
-   "line": 268,
-   "theorem": "fourier_partial_best",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "`fourier_partial_best` в `ProcessFourierSeriesL2.v` (она же `best_approx_ge` из `ProcessBestApproximation.v`): $\\norm{f-P_K}^2\\le\\norm{f-\\sum_{k<K}a_k e_k}^2$ для любых весов $a_k$;",
+   "line": 273,
+   "theorem": "fourier_partial_best_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`fourier_partial_best_b` в `ProcessOrthonormalFourier.v` (она же `best_approx_b` из `ProcessL2Orthonormal.v`): $\\norm{f-P_K}^2\\le\\norm{f-\\sum_{k<K}a_k e_k}^2$ для любых весов $a_k$, $K\\le K_0$;",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Theorem fourier_partial_best (:94) — формула та же, доказательство: exact (best_approx_ge e N Hon f a K). Под невыполнимой посылкой Hon (:47). Закрывается: best_approx_b (ProcessL2Orthonormal.v:256). Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): fourier_partial_best_b : K <= K0 -> ferr e f N K <= ‖f − Σ_{k<K} a_k e_k‖² для любых весов a (:357); то же, что best_approx_b (ProcessL2Orthonormal.v:256). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 268,
-   "theorem": "best_approx_ge",
-   "file": "src/process/ProcessBestApproximation.v",
-   "claim": "`fourier_partial_best` в `ProcessFourierSeriesL2.v` (она же `best_approx_ge` из `ProcessBestApproximation.v`): $\\norm{f-P_K}^2\\le\\norm{f-\\sum_{k<K}a_k e_k}^2$ для любых весов $a_k$;",
+   "line": 273,
+   "theorem": "best_approx_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`fourier_partial_best_b` в `ProcessOrthonormalFourier.v` (она же `best_approx_b` из `ProcessL2Orthonormal.v`): $\\norm{f-P_K}^2\\le\\norm{f-\\sum_{k<K}a_k e_k}^2$ для любых весов $a_k$, $K\\le K_0$;",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Corollary best_approx_ge (:161) — под невыполнимой посылкой Hon (:70); следует из тождества best_approx_eq (:141). Закрывается: best_approx_b (ProcessL2Orthonormal.v:256). Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): best_approx_b : K <= K0 -> ‖f − P_K‖² <= ‖f − Σ_{k<K} a_k e_k‖² для любых весов a (ProcessL2Orthonormal.v:256). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 268,
-   "theorem": "best_approx_unique",
-   "file": "src/process/ProcessBestApproximation.v",
-   "claim": "единственность минимума — `best_approx_unique`. 0 аксиом.",
+   "line": 273,
+   "theorem": "best_approx_unique_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "единственность минимума — `best_approx_unique_b`. 0 аксиом.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Theorem best_approx_unique (:176): ‖f − Σ a_k e_k‖² == ‖f − P_K‖² <-> forall k, k < K -> a k == ⟨e_k,f⟩ — под невыполнимой посылкой Hon (:70). С выполнимой посылкой в src не записана; доказана в пробном файле: best_approx_unique_b (через best_approx_eq_b и q_sum_sq_zero). Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): best_approx_unique_b : K <= K0 -> (‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖²) <-> (forall k, k < K -> a k == seq_inner (e k) f N) (:178); из best_approx_eq_b (:161) и q_sum_sq_zero. Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 269,
-   "theorem": "fourier_error_zero_iff",
-   "file": "src/process/ProcessFourierSeriesL2.v",
-   "claim": "`fourier_error_zero_iff`: $\\norm{f-P_K}^2=0 \\Leftrightarrow \\sum_{k<K}c_k^2=\\norm{f}^2$;",
-   "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Lemma fourier_error_zero_iff (:87) — формула та же, под невыполнимой посылкой Hon (:47). Закрывается: parseval_iff_resid_zero_b (ProcessL2Orthonormal.v:286); fourier_error_zero_iff_b (Check.v). Closed under the global context."
+   "line": 274,
+   "theorem": "fourier_error_zero_iff_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`fourier_error_zero_iff_b`: $\\norm{f-P_K}^2=0 \\Leftrightarrow \\sum_{k<K}c_k^2=\\norm{f}^2$ — из тождества ошибки;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): fourier_error_zero_iff_b : K <= K0 -> ferr e f N K == 0 <-> captured (fun k => seq_inner (e k) f N) K == seq_inner f f N (:337). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 269,
-   "theorem": "parseval_iff_complete",
-   "file": "src/process/ProcessL2Parseval.v",
-   "claim": "опирается на критерий полноты `parseval_iff_complete` (Глава 7.1). 0 аксиом.",
-   "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Доказательство fourier_error_zero_iff (стр. 89–91 файла) пользуется только fourier_error_eq; parseval_iff_complete в нём не участвует. Theorem parseval_iff_complete (:142) стоит под невыполнимой посылкой Hon (:80). Закрывается: parseval_iff_complete_b (ProcessL2Orthonormal.v:296). Closed under the global context."
+   "line": 274,
+   "theorem": "fourier_error_zero_iff_recovers_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "«нулевая ошибка $\\Leftrightarrow$ $P_K(m)=f(m)$ при всех $m<N$» — `fourier_error_zero_iff_recovers_b`, через критерий полноты `parseval_iff_complete_b` (Глава 7.1).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): было «fourier_error_zero_iff опирается на parseval_iff_complete» — её доказательство критерием полноты не пользовалось. Теперь связь записана отдельной теоремой. fourier_error_zero_iff_recovers_b : K <= K0 -> ferr e f N K == 0 <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (:344); из fourier_error_zero_iff_b (:337) и parseval_iff_complete_b (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 270,
+   "line": 275,
    "theorem": null,
    "file": "src/process/ProcessFourierSeriesL2.v",
    "claim": "Шапки: `ProcessFourierSeriesL2.v` — Rules: ошибка $=\\norm{f}^2-$захваченная, монотонна, нуль $\\Leftrightarrow$ Парсеваль; Roles: $P_K$ — приближение, хвост — дефект полноты; $N\\to\\infty$ помечено как P4-граница.",
@@ -386,13 +390,311 @@
    "note": "Шапка файла (стр. 4–7, 15–18, 21–25): Rules и граница N→∞ — так. В строке Roles шапки стоят err(K) (хвостовая энергия, дефект полноты) и captured(K); P_K как наилучшее приближение названа ролью в шапке ProcessBestApproximation.v (стр. 5)."
   },
   {
-   "line": 270,
+   "line": 275,
    "theorem": null,
    "file": "src/process/ProcessBestApproximation.v",
    "claim": "`ProcessBestApproximation.v` — Rules: $P_K$ — единственный минимум невязки.",
    "page_price": "",
    "verdict": "ok",
    "note": "Шапка файла (стр. 6–7): «hence ≥ ‖f−P_K‖², with equality iff aₖ=cₖ (unique minimiser)»."
+  },
+  {
+   "line": 268,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). on_count_le_dim : forall e N K0, (forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> K0 <= N (:208). Closed under the global context.",
+   "theorem": "on_count_le_dim",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "условие ортонормированности наложено на первые $K_0$ векторов, теоремы доказаны для $K\\le K_0$, и $K_0\\le N$ (`on_count_le_dim`)."
+  },
+  {
+   "line": 270,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "fourier_error_is_tail_b : K <= K0 -> captured cf K0 == seq_inner f f N -> ferr e f N K == q_sum (fun i => seq_inner (e (K + i)) f N * seq_inner (e (K + i)) f N) (K0 - K) (:365). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "fourier_error_is_tail_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Если $K_0$ векторов полны для $f$, эта разность есть сумма квадратов отброшенных коэффициентов $\\sum_{K\\le k<K_0}c_k^2$ — `fourier_error_is_tail_b`. 0 аксиом."
+  },
+  {
+   "line": 272,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "fourier_error_step_b : S K <= K0 -> ferr e f N (S K) == ferr e f N K - seq_inner (e K) f N * seq_inner (e K) f N (:315). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "fourier_error_step_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Точнее: очередной коэффициент уменьшает ошибку ровно на свой квадрат, $\\norm{f-P_{K+1}}^2=\\norm{f-P_K}^2-c_K^2$, — `fourier_error_step_b`."
+  },
+  {
+   "line": 272,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "monotone_fails_without_on (:277): для семейства e_0 = (2) и f = (1) на одной координате ferr … 0 < ferr … 1 (1 < 9) — без ортонормированности ошибка растёт. Closed under the global context.",
+   "theorem": "monotone_fails_without_on",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Без ортонормированности ошибка может расти — `monotone_fails_without_on`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом."
+  },
+  {
+   "line": 274,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "fourier_truncation_ends_exactly : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f, ferr e f N 0 == seq_inner f f N /\\ (forall K K', K <= K' -> K' <= N -> ferr e f N K' <= ferr e f N K) /\\ ferr e f N N == 0 (:500); std_truncation_ends_exactly (:516): ferr delta f N N == 0; rot_truncation_ends_exactly (:524). Closed under the global context.",
+   "theorem": "fourier_truncation_ends_exactly",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Точное восстановление при $K=N$ для $N$ ортонормированных векторов — `fourier_truncation_ends_exactly` (через `full_on_recovers`); для стандартного базиса — `std_truncation_ends_exactly`, для повёрнутого — `rot_truncation_ends_exactly`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом."
+  },
+  {
+   "line": 275,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла: Roles — [ferr e f N K] — the squared error ||f - P_K||^2 of the K-term partial sum: a function of the stage K of the truncation process; P4 diagnostic — K ranges over the vectors actually given (K <= K0 <= N); the truncation process … ends with exact recovery at K = N.",
+   "theorem": null,
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`ProcessOrthonormalFourier.v` — Roles: `ferr` — квадрат ошибки как функция стадии $K$; P4: $K\\le K_0\\le N$, процесс усечений заканчивается точным восстановлением при $K=N$."
+  },
+  {
+   "line": 274,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "full_on_recovers : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) N == f m (:469); full_on_parseval (:491): Σ_{k<N} c_k² == seq_inner f f N для всякой f; через full_on_column_norm (:415) и full_on_dual (:450). Closed under the global context.",
+   "theorem": "full_on_recovers",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Точное восстановление при $K=N$ для $N$ ортонормированных векторов — `fourier_truncation_ends_exactly` (через `full_on_recovers`); для стандартного базиса — `std_truncation_ends_exactly`, для повёрнутого — `rot_truncation_ends_exactly`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом."
+  },
+  {
+   "line": 274,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "fourier_truncation_ends_exactly : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f, ferr e f N 0 == seq_inner f f N /\\ (forall K K', K <= K' -> K' <= N -> ferr e f N K' <= ferr e f N K) /\\ ferr e f N N == 0 (:500); std_truncation_ends_exactly (:516): ferr delta f N N == 0; rot_truncation_ends_exactly (:524). Closed under the global context.",
+   "theorem": "std_truncation_ends_exactly",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Точное восстановление при $K=N$ для $N$ ортонормированных векторов — `fourier_truncation_ends_exactly` (через `full_on_recovers`); для стандартного базиса — `std_truncation_ends_exactly`, для повёрнутого — `rot_truncation_ends_exactly`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом."
+  },
+  {
+   "line": 274,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "fourier_truncation_ends_exactly : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f, ferr e f N 0 == seq_inner f f N /\\ (forall K K', K <= K' -> K' <= N -> ferr e f N K' <= ferr e f N K) /\\ ferr e f N N == 0 (:500); std_truncation_ends_exactly (:516): ferr delta f N N == 0; rot_truncation_ends_exactly (:524). Closed under the global context.",
+   "theorem": "rot_truncation_ends_exactly",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Точное восстановление при $K=N$ для $N$ ортонормированных векторов — `fourier_truncation_ends_exactly` (через `full_on_recovers`); для стандартного базиса — `std_truncation_ends_exactly`, для повёрнутого — `rot_truncation_ends_exactly`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом."
+  },
+  {
+   "line": 43,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_partial_sums_cauchy : forall f, is_Cauchy (fun n => captured f n) -> forall eps, 0 < eps -> exists M, forall N K K', (M <= K)%nat -> (M <= K')%nat -> seq_inner (fun i => std_psum f N K i - std_psum f N K' i) (fun i => std_psum f N K i - std_psum f N K' i) N <= eps (:201); std_psum f N K — K-членная частичная сумма стандартной системы как вектор (:196); стадия M стоит до квантора по N. Closed under the global context.",
+   "theorem": "std_partial_sums_cauchy",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "*Второй* — процессное чтение: ряд Фурье как процесс $K\\mapsto P_K$ с убывающей ошибкой; для стандартной системы доказано и большее — остаток стремится к нулю при всех усечениях $N$ сразу тогда и только тогда, когда процесс энергии $\\sum_{i<n}f_i^2$ есть процесс Коши, и тогда частичные суммы L<sup>2</sup>-Коши, а предел, построенный по Риссу–Фишеру Части VI, есть сама $f$."
+  },
+  {
+   "line": 43,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_limit_is_f : forall f N m s, (m < N)%nat -> (m < s)%nat -> l2_limit (std_psum f N) m s == f m (:233): координата m построенного предела с некоторой стадии равна f m. Closed under the global context.",
+   "theorem": "std_limit_is_f",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "*Второй* — процессное чтение: ряд Фурье как процесс $K\\mapsto P_K$ с убывающей ошибкой; для стандартной системы доказано и большее — остаток стремится к нулю при всех усечениях $N$ сразу тогда и только тогда, когда процесс энергии $\\sum_{i<n}f_i^2$ есть процесс Коши, и тогда частичные суммы L<sup>2</sup>-Коши, а предел, построенный по Риссу–Фишеру Части VI, есть сама $f$."
+  },
+  {
+   "line": 111,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_fourier_l2_convergence_iff : forall f : nat -> Q, is_Cauchy (fun n => captured f n) <-> (forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta f N K < eps) (:182); прямая сторона — std_fourier_tail_to_zero (:152), обратная — std_fourier_tail_to_zero_conv (:166). Здесь captured f n = Σ_{i<n} f_i², ferr delta f N K — квадрат ошибки K-членной частичной суммы стандартной системы на N координатах; стадия M не зависит от N. Closed under the global context.",
+   "theorem": "std_fourier_l2_convergence_iff",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для стандартной системы оно доказано в процессной форме: остаток $\\norm{f-P_K}^2$ меньше любого $\\varepsilon$ при всех усечениях $N$ сразу, начиная с некоторого $K$, тогда и только тогда, когда процесс энергии $n\\mapsto\\sum_{i<n}f_i^2$ есть процесс Коши.[^9]"
+  },
+  {
+   "line": 115,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_fourier_tail_to_zero_conv : forall f, (forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta f N K < eps) -> is_Cauchy (fun n => captured f n) (:166): для стандартной системы сходимость остатка при всех усечениях влечёт, что процесс энергии есть процесс Коши, — условие необходимо. Closed under the global context.",
+   "theorem": "std_fourier_tail_to_zero_conv",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Но сама Коши-сходимость ряда Фурье к $f$ из одного Бесселя *не* следует: она требует полноты системы и сходимости процесса энергии."
+  },
+  {
+   "line": 118,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_partial_sums_cauchy : forall f, is_Cauchy (fun n => captured f n) -> forall eps, 0 < eps -> exists M, forall N K K', (M <= K)%nat -> (M <= K')%nat -> seq_inner (fun i => std_psum f N K i - std_psum f N K' i) (fun i => std_psum f N K i - std_psum f N K' i) N <= eps (:201); std_psum f N K — K-членная частичная сумма стандартной системы как вектор (:196); стадия M стоит до квантора по N. Closed under the global context.",
+   "theorem": "std_partial_sums_cauchy",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для стандартной системы оба недостающих звена доказаны: при процессе энергии Коши частичные суммы образуют L<sup>2</sup>-Коши-процесс со стадией, не зависящей от $N$, и координаты построенного предела совпадают с координатами $f$."
+  },
+  {
+   "line": 118,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_limit_is_f : forall f N m s, (m < N)%nat -> (m < s)%nat -> l2_limit (std_psum f N) m s == f m (:233): координата m построенного предела с некоторой стадии равна f m. Closed under the global context.",
+   "theorem": "std_limit_is_f",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для стандартной системы оба недостающих звена доказаны: при процессе энергии Коши частичные суммы образуют L<sup>2</sup>-Коши-процесс со стадией, не зависящей от $N$, и координаты построенного предела совпадают с координатами $f$."
+  },
+  {
+   "line": 190,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_fourier_l2_convergence_iff : forall f : nat -> Q, is_Cauchy (fun n => captured f n) <-> (forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta f N K < eps) (:182); прямая сторона — std_fourier_tail_to_zero (:152), обратная — std_fourier_tail_to_zero_conv (:166). Здесь captured f n = Σ_{i<n} f_i², ferr delta f N K — квадрат ошибки K-членной частичной суммы стандартной системы на N координатах; стадия M не зависит от N. Closed under the global context. Для произвольной ортонормированной системы при нефиксированном усечении такой теоремы в src нет: полные системы для неограниченного N, кроме стандартной, не построены.",
+   "theorem": "std_fourier_l2_convergence_iff",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для стандартной системы оно доказано в процессной форме (§ «Энергетический бюджет, не гарантия предела»); для произвольной — остаётся границей."
+  },
+  {
+   "line": 268,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В ProcessFourierConvergenceStd.v 26 строк Qed и два определения (std_psum, half_pow); Admitted, Axiom, Parameter нет; все объявления — Closed under the global context.",
+   "theorem": null,
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "assumptions": "все 28 объявлений файла: Closed under the global context",
+   "claim": "Процессное чтение предела — `ProcessL2RieszFischer.v` и `ProcessFourierConvergenceStd.v` (26 утверждений, 0 аксиом)."
+  },
+  {
+   "line": 269,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition l2_limit (F : nat -> nat -> Q) : nat -> (nat -> Q) := fun i s => F s i (ProcessL2RieszFischer.v:112): координата i предела есть процесс s ↦ F s i. Closed under the global context.",
+   "theorem": "l2_limit",
+   "file": "src/process/ProcessL2RieszFischer.v",
+   "claim": "Процессное прочтение Рисса–Фишера — `l2_riesz_fischer` в `ProcessL2RieszFischer.v` (Часть VI), при фиксированном усечении $N$: предел строится покоординатно как процесс (`l2_limit`), и заключение теоремы есть её посылка, развёрнутая по этому определению (`rf_conclusion_is_hypothesis`), — «полно по построению» в точном смысле;"
+  },
+  {
+   "line": 269,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "rf_conclusion_is_hypothesis : forall F N, L2CauchySq F N <-> (forall eps, eps > 0 -> exists M, forall n s, (M <= n)%nat -> (M <= s)%nat -> seq_inner (fun i => F n i - l2_limit F i s) (fun i => F n i - l2_limit F i s) N <= eps) (:372); доказательство — split; intro H; exact H: обе стороны совпадают по определению l2_limit. Closed under the global context.",
+   "theorem": "rf_conclusion_is_hypothesis",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Процессное прочтение Рисса–Фишера — `l2_riesz_fischer` в `ProcessL2RieszFischer.v` (Часть VI), при фиксированном усечении $N$: предел строится покоординатно как процесс (`l2_limit`), и заключение теоремы есть её посылка, развёрнутая по этому определению (`rf_conclusion_is_hypothesis`), — «полно по построению» в точном смысле;"
+  },
+  {
+   "line": 269,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "riesz_fischer_process_form (ProcessL2Orthonormal.v:618): при L2CauchySq F N — координаты предела суть процессы Коши, расстояние до предела dist_to_limit (:547) есть процесс Коши и стремится к нулю. Closed under the global context.",
+   "theorem": "riesz_fischer_process_form",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "содержательная трёхчастная форма — `riesz_fischer_process_form` (`ProcessL2Orthonormal.v`)."
+  },
+  {
+   "line": 269,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_partial_sums_L2CauchySq : forall f N, is_Cauchy (fun n => captured f n) -> L2CauchySq (std_psum f N) N (:225) — посылка l2_riesz_fischer (ProcessL2RieszFischer.v:134) для частичных сумм, при каждом N. Closed under the global context.",
+   "theorem": "std_partial_sums_L2CauchySq",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для частичных сумм стандартной системы посылка моста доказана — `std_partial_sums_L2CauchySq`, а предел опознан — `std_limit_is_f` (`ProcessFourierConvergenceStd.v`)."
+  },
+  {
+   "line": 269,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_limit_is_f : forall f N m s, (m < N)%nat -> (m < s)%nat -> l2_limit (std_psum f N) m s == f m (:233): координата m построенного предела с некоторой стадии равна f m. Closed under the global context.",
+   "theorem": "std_limit_is_f",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для частичных сумм стандартной системы посылка моста доказана — `std_partial_sums_L2CauchySq`, а предел опознан — `std_limit_is_f` (`ProcessFourierConvergenceStd.v`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_error_is_tail : forall f N K, (K <= N)%nat -> ferr delta f N K == captured f N - captured f K (:133); std_error_zero_beyond : forall f N K, (N <= K)%nat -> ferr delta f N K == 0 (:140). Closed under the global context.",
+   "theorem": "std_error_is_tail",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для стандартной системы ошибка на $N$ координатах есть кусок энергии: $\\norm{f-P_K}^2=\\sum_{K\\le i<N}f_i^2$ при $K\\le N$ (`std_error_is_tail`) и нуль при $N\\le K$ (`std_error_zero_beyond`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_error_is_tail : forall f N K, (K <= N)%nat -> ferr delta f N K == captured f N - captured f K (:133); std_error_zero_beyond : forall f N K, (N <= K)%nat -> ferr delta f N K == 0 (:140). Closed under the global context.",
+   "theorem": "std_error_zero_beyond",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Для стандартной системы ошибка на $N$ координатах есть кусок энергии: $\\norm{f-P_K}^2=\\sum_{K\\le i<N}f_i^2$ при $K\\le N$ (`std_error_is_tail`) и нуль при $N\\le K$ (`std_error_zero_beyond`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_fourier_l2_convergence_iff : forall f : nat -> Q, is_Cauchy (fun n => captured f n) <-> (forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta f N K < eps) (:182); прямая сторона — std_fourier_tail_to_zero (:152), обратная — std_fourier_tail_to_zero_conv (:166). Здесь captured f n = Σ_{i<n} f_i², ferr delta f N K — квадрат ошибки K-членной частичной суммы стандартной системы на N координатах; стадия M не зависит от N. Closed under the global context.",
+   "theorem": "std_fourier_l2_convergence_iff",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Отсюда `std_fourier_l2_convergence_iff`: процесс энергии есть процесс Коши $\\Leftrightarrow$ для всякого $\\varepsilon>0$ есть $M$, после которого ошибка меньше $\\varepsilon$ при всех $K\\ge M$ и всех $N$."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_partial_sums_cauchy : forall f, is_Cauchy (fun n => captured f n) -> forall eps, 0 < eps -> exists M, forall N K K', (M <= K)%nat -> (M <= K')%nat -> seq_inner (fun i => std_psum f N K i - std_psum f N K' i) (fun i => std_psum f N K i - std_psum f N K' i) N <= eps (:201); std_psum f N K — K-членная частичная сумма стандартной системы как вектор (:196); стадия M стоит до квантора по N. Closed under the global context.",
+   "theorem": "std_partial_sums_cauchy",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Тогда частичные суммы L<sup>2</sup>-Коши со стадией, не зависящей от $N$ (`std_partial_sums_cauchy`), посылка Рисса–Фишера выполнена (`std_partial_sums_L2CauchySq`, `std_fourier_riesz_fischer`), а координаты предела суть координаты $f$ (`std_limit_is_f`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_partial_sums_L2CauchySq : forall f N, is_Cauchy (fun n => captured f n) -> L2CauchySq (std_psum f N) N (:225) — посылка l2_riesz_fischer (ProcessL2RieszFischer.v:134) для частичных сумм, при каждом N. Closed under the global context.",
+   "theorem": "std_partial_sums_L2CauchySq",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Тогда частичные суммы L<sup>2</sup>-Коши со стадией, не зависящей от $N$ (`std_partial_sums_cauchy`), посылка Рисса–Фишера выполнена (`std_partial_sums_L2CauchySq`, `std_fourier_riesz_fischer`), а координаты предела суть координаты $f$ (`std_limit_is_f`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_fourier_riesz_fischer (:245): при процессе энергии Коши — (forall i, i < N -> is_Cauchy (l2_limit (std_psum f N) i)) /\\ (forall n, is_Cauchy (dist_to_limit (std_psum f N) N n)) /\\ (forall eps > 0, exists M, forall n >= M, exists S, forall s >= S, dist_to_limit (std_psum f N) N n s <= eps); получена из riesz_fischer_process_form (ProcessL2Orthonormal.v:618). Closed under the global context.",
+   "theorem": "std_fourier_riesz_fischer",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Тогда частичные суммы L<sup>2</sup>-Коши со стадией, не зависящей от $N$ (`std_partial_sums_cauchy`), посылка Рисса–Фишера выполнена (`std_partial_sums_L2CauchySq`, `std_fourier_riesz_fischer`), а координаты предела суть координаты $f$ (`std_limit_is_f`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_limit_is_f : forall f N m s, (m < N)%nat -> (m < s)%nat -> l2_limit (std_psum f N) m s == f m (:233): координата m построенного предела с некоторой стадии равна f m. Closed under the global context.",
+   "theorem": "std_limit_is_f",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Тогда частичные суммы L<sup>2</sup>-Коши со стадией, не зависящей от $N$ (`std_partial_sums_cauchy`), посылка Рисса–Фишера выполнена (`std_partial_sums_L2CauchySq`, `std_fourier_riesz_fischer`), а координаты предела суть координаты $f$ (`std_limit_is_f`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "finite_support_energy_cauchy : forall f n0, (forall i, (n0 <= i)%nat -> f i == 0) -> is_Cauchy (fun n => captured f n) (:270). Closed under the global context.",
+   "theorem": "finite_support_energy_cauchy",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Условие выполнимо: конечный носитель (`finite_support_energy_cauchy`) и $f_i=2^{-i}$ (`geometric_energy_cauchy`, `geometric_fourier_converges`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "geometric_energy_cauchy : is_Cauchy (fun n => captured half_pow n) (:330), где half_pow i = 2^(−i) (:281); замкнутая форма — geometric_energy_closed : 3 * captured half_pow n == 4 - 4 * (half_pow n * half_pow n) (:304); geometric_fourier_converges : forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta half_pow N K < eps (:360). Closed under the global context.",
+   "theorem": "geometric_energy_cauchy",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Условие выполнимо: конечный носитель (`finite_support_energy_cauchy`) и $f_i=2^{-i}$ (`geometric_energy_cauchy`, `geometric_fourier_converges`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "geometric_energy_cauchy : is_Cauchy (fun n => captured half_pow n) (:330), где half_pow i = 2^(−i) (:281); замкнутая форма — geometric_energy_closed : 3 * captured half_pow n == 4 - 4 * (half_pow n * half_pow n) (:304); geometric_fourier_converges : forall eps, 0 < eps -> exists M, forall K N, (M <= K)%nat -> ferr delta half_pow N K < eps (:360). Closed under the global context.",
+   "theorem": "geometric_fourier_converges",
+   "file": "src/process/ProcessFourierConvergenceStd.v",
+   "claim": "Условие выполнимо: конечный носитель (`finite_support_energy_cauchy`) и $f_i=2^{-i}$ (`geometric_energy_cauchy`, `geometric_fourier_converges`)."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус: такой теоремы в ProcessFourierConvergenceStd.v нет; посылка «процесс энергии есть процесс Коши» стоит в теоремах явно. Переход от ограниченной монотонной последовательности к процессу Коши без классической логики не выводится (шапка файла, раздел «NOT claimed»).",
+   "theorem": null,
+   "file": null,
+   "claim": "Что процесс энергии всякой $f$ с ограниченной энергией есть процесс Коши, не утверждается."
   }
  ]
 }

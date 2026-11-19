@@ -1,0 +1,131 @@
+@@FILE Направления/Математика/Том Математика/07 Гармонический анализ/01 Ортонормированные системы и коэффициенты Фурье.md
+@@OLD
+явно предъявленное условие на конкретный набор $e$, а не существование «какого-то
+базиса».[^4] Система
+@@NEW
+явно предъявленное условие на первые $K_0$ векторов конкретного набора $e$, а не
+существование «какого-то базиса».[^4] Таких векторов на $N$ координатах не больше $N$
+(доказано: $K_0\le N$), и всюду ниже $K\le K_0$. Система
+@@END
+@@OLD
+Энергия, захваченная любым числом $K$ направлений, не превосходит полной энергии
+@@NEW
+Энергия, захваченная любым числом $K\le K_0$ направлений, не превосходит полной энергии
+@@END
+@@OLD
+базис.[^13] Доказано конечное: критерий полноты на $N$ координатах. Этого достаточно,
+@@NEW
+базис.[^13] Доказано конечное: критерий полноты на $N$ координатах и полнота всякой системы из $N$ ортонормированных векторов — при $K=N$ разложение восстанавливает любую $f$. Этого достаточно,
+@@END
+@@OLD
+*рациональная* система, на которой работает эта геометрия? Ответ требует одной
+оговорки об уровне. Рациональная *ортогональная* система — да: её даёт
+@@NEW
+*рациональная* система, на которой работает эта геометрия? Простейшие предъявлены
+сразу: стандартный базис и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$
+удовлетворяют `Hon`. Для системы, несущей гармонический анализ, ответ требует одной
+оговорки об уровне. Рациональная *ортогональная* система — да: её даёт
+@@END
+@@OLD
+[^1]: Опорные файлы — `ProcessL2BesselGeneral.v` (каталог `src/process/` Rocq-репозитория ToS, 10 доказанных утверждений, 0 `Admitted`, 0 аксиом) и `ProcessL2Parseval.v` (7 утверждений, 0 аксиом). Имена лемм в сносках ниже — из них и из `ProcessFourierON.v`.
+@@NEW
+[^1]: Опорные файлы (каталог `src/process/` Rocq-репозитория ToS) — `ProcessL2Orthonormal.v` (36 доказанных утверждений) и `ProcessOrthonormalFourier.v` (30); оба — 0 `Admitted`, 0 аксиом. В них условие ортонормированности наложено на первые $K_0$ векторов системы, а теоремы доказаны для $K\le K_0$. Вспомогательные леммы о скалярном произведении — из `ProcessL2BesselGeneral.v` и `ProcessL2Parseval.v`. Имена лемм в сносках ниже — из этих файлов и из `ProcessFourierON.v`.
+@@END
+@@OLD
+[^3]: `seq_inner_sym` (симметрия) и `seq_inner_sub_r` (линейность по разности во втором аргументе) в `ProcessL2BesselGeneral.v`; оба — 0 аксиом.
+@@NEW
+[^3]: `seq_inner_sym` (симметрия) и `seq_inner_sub_r` (линейность по разности во втором аргументе) в `ProcessL2BesselGeneral.v`; линейность по каждому аргументу в общем виде — `seq_inner_lin_r`, `seq_inner_lin_l`, сводно — `seq_inner_bilinear_symmetric` в `ProcessOrthonormalFourier.v` (индукция по $N$ и `ring`). Все — 0 аксиом.
+@@END
+@@OLD
+[^4]: `Hypothesis Hon : forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)` в обоих файлах. Конкретная система, удовлетворяющая `Hon` (нормированный Уолш), — в § «Конкретная ортогональная система: Уолш–Адамар».
+@@NEW
+[^4]: `Hypothesis Hon : forall i j, (i < K0)%nat -> (j < K0)%nat -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)` в `ProcessL2Orthonormal.v` и `ProcessOrthonormalFourier.v`. Условию удовлетворяют стандартный базис (`std_basis_on`) и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ (`rot_orthonormal`); $K_0\le N$ — `on_count_le_dim`. В `ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v` и `ProcessBestApproximation.v` то же условие записано для всех номеров $i,j$; на $N$ координатах оно невыполнимо (`on_all_indices_unsat`), и теоремы под ним примеров не имеют. О системе Уолша–Адамара — \ «Конкретная ортогональная система: Уолш–Адамар».
+@@END
+@@OLD
+[^6]: `proj_ortho`: $\inner{e_K}{\sum_{k<K} c_k e_k}_N = 0$. Отсюда `coef_e_resid`: $\inner{e_K}{f-P_K}_N = \inner{e_K}{f}_N$ — проекция не трогает ещё не снятую координату. Оба в `ProcessL2BesselGeneral.v`, 0 аксиом.
+@@NEW
+[^6]: `proj_ortho_b` (`ProcessL2Orthonormal.v`): $\inner{e_K}{\sum_{k<K} c_k e_k}_N = 0$ при $K<K_0$. Отсюда `coef_e_resid_b`: $\inner{e_K}{f-P_K}_N = \inner{e_K}{f}_N$ — проекция не трогает ещё не снятую координату. Ортогональность остатка снятым направлениям, $\inner{e_j}{r_K}_N=0$ при $j<K\le K_0$, — `resid_ortho_b` (через `proj_coord_b`: $\inner{e_j}{\sum_{k<K} c_k e_k}_N=c_j$). Последние три — в `ProcessOrthonormalFourier.v`; все — 0 аксиом.
+@@END
+@@OLD
+[^7]: `resid_norm` в `ProcessL2BesselGeneral.v`: доказывается индукцией по $K$ через тождество $\norm{F-cE}^2 = \norm{F}^2 - 2c\inner{E}{F} + c^2\norm{E}^2$ (`seq_inner_resid`) и ортогональность остатка. 0 аксиом.
+@@NEW
+[^7]: `resid_norm_b` в `ProcessL2Orthonormal.v` ($K\le K_0$): частный случай общего тождества остатка для произвольных весов `gen_resid`, которое доказывается индукцией по $K$ через тождество $\norm{F-cE}^2 = \norm{F}^2 - 2c\inner{E}{F} + c^2\norm{E}^2$ (`seq_inner_resid`) и ортогональность проекции `proj_ortho_b`. 0 аксиом.
+@@END
+@@OLD
+[^8]: Тождество наилучшего приближения — `best_approx_eq`; следствие-минимум $\norm{f-P_K}^2\le\norm{f-\sum a_k e_k}^2$ — `best_approx_ge`; единственность (равенство $\Leftrightarrow$ $a_k=c_k$) — `best_approx_unique` (через лемму «конечная сумма квадратов над ℚ равна нулю лишь когда каждое слагаемое нуль», `q_sum_sq_zero`). Все — в `ProcessBestApproximation.v`, 0 аксиом. Единственность здесь — *конечная*, на фиксированном диапазоне $k<K$; сходимость бесконечного ряда — предмет Главы 7.4.
+@@NEW
+[^8]: Тождество наилучшего приближения — `best_approx_eq_b`; единственность (равенство $\Leftrightarrow$ $a_k=c_k$ при $k<K$) — `best_approx_unique_b` (через лемму «конечная сумма квадратов над ℚ равна нулю лишь когда каждое слагаемое нуль», `q_sum_sq_zero`); обе — в `ProcessOrthonormalFourier.v`. Следствие-минимум $\norm{f-P_K}^2\le\norm{f-\sum a_k e_k}^2$ — `best_approx_b` в `ProcessL2Orthonormal.v`. Все — при $K\le K_0$, 0 аксиом. Единственность здесь — *конечная*, на фиксированном диапазоне $k<K$; сходимость бесконечного ряда — предмет Главы 7.4.
+@@END
+@@OLD
+[^9]: `bessel_general` в `ProcessL2BesselGeneral.v`: из `resid_norm` и неотрицательности нормы остатка одним шагом `lra`. 0 аксиом. Это общее неравенство Бесселя для произвольной конечной ортонормированной системы — не привязанное к конкретному базису.
+@@NEW
+[^9]: `bessel_b` в `ProcessL2Orthonormal.v` ($K\le K_0$): из `resid_norm_b` и неотрицательности нормы остатка одним шагом `lra`. 0 аксиом. Это общее неравенство Бесселя для произвольной конечной ортонормированной системы — не привязанное к конкретному базису.
+@@END
+@@OLD
+[^10]: `energy_split` в `ProcessL2Parseval.v`: тривиальное следствие `resid_norm` (один `lra`). 0 аксиом.
+@@NEW
+[^10]: `energy_split_b` в `ProcessL2Orthonormal.v` ($K\le K_0$): прямое следствие `resid_norm_b` (переписывание и `ring`). 0 аксиом.
+@@END
+@@OLD
+[^11]: `parseval_iff_complete` в `ProcessL2Parseval.v` — капстоун файла; опирается на `q_sum_sq_zero` («сумма квадратов нуль $\Rightarrow$ каждый член нуль» над ℚ) и `energy_split`. 0 аксиом.
+@@NEW
+[^11]: `parseval_iff_complete_b` в `ProcessL2Orthonormal.v` ($K\le K_0$); опирается на `q_sum_sq_zero` («сумма квадратов нуль $\Rightarrow$ каждый член нуль» над ℚ) и тождество остатка `resid_norm_b`; промежуточная эквивалентность «Парсеваль $\Leftrightarrow$ нулевая норма остатка» — `parseval_iff_resid_zero_b`. 0 аксиом.
+@@END
+@@OLD
+[^12]: `parseval_std_concrete` в `ProcessL2Parseval.v`: проверяется `vm_compute`'ом — точной рациональной арифметикой. (Это пифагорова тройка $3,4,5$, прочитанная как сохранение энергии; сама тройка — рациональная точка единичной окружности, значение $t=1/2$ стереографической параметризации, выводимая, а не постулируемая — `PythagoreanTriples.v`.)
+@@NEW
+[^12]: `parseval_3_4_from_criterion` в `ProcessOrthonormalFourier.v`: стандартный базис удовлетворяет `Hon` (`std_basis_on`), равенство Парсеваля для него выполнено при всяком $N$ и всякой $f$ (`parseval_std_all`), и по критерию `parseval_iff_complete_b` разложение восстанавливает обе координаты $f=(3,4)$. Само равенство $25=25$ — `parseval_std_concrete` в `ProcessL2Parseval.v`: проверяется `vm_compute`'ом — точной рациональной арифметикой. (Это пифагорова тройка $3,4,5$, прочитанная как сохранение энергии; сама тройка — рациональная точка единичной окружности, значение $t=1/2$ стереографической параметризации, выводимая, а не постулируемая — `PythagoreanTriples.v`.)
+@@END
+@@OLD
+[^13]: Шапка `ProcessL2Parseval.v` помечает это прямо: бесконечный базис, замкнутая оболочка $=$ всё пространство, безусловное равенство для завершённого базиса — роль-пределы (P4-граница); доказан конечный критерий полноты.
+@@NEW
+[^13]: Шапка `ProcessL2Parseval.v` помечает это прямо: бесконечный базис, замкнутая оболочка $=$ всё пространство, безусловное равенство для завершённого базиса — роль-пределы (P4-граница); доказан конечный критерий полноты. Критерий — `parseval_iff_complete_b`; полнота системы из $N$ ортонормированных векторов — `full_on_recovers` и `full_on_parseval` (`ProcessOrthonormalFourier.v`), 0 аксиом.
+@@END
+@@FILE Направления/Математика/Том Математика/07 Гармонический анализ/04 Сходимость рядов Фурье в L2.md
+@@OLD
+сходится к ней в L<sup>2</sup»> — и берёт ряд как завершённую бесконечную
+@@NEW
+сходится к ней в L<sup>2</sup>» — и берёт ряд как завершённую бесконечную
+@@END
+@@OLD
+усечении $N$, ошибка зануляется при достаточно большом $K$; для стандартного полного
+$N$-направленного набора — точно при $K=N$: процесс усечения завершается *точным*
+@@NEW
+усечении $N$, ошибка зануляется при достаточно большом $K$; для всякого набора из $N$
+ортонормированных векторов (в частности, стандартного) — точно при $K=N$: процесс усечения завершается *точным*
+@@END
+@@OLD
+[^1]: Опорные файлы — `ProcessFourierSeriesL2.v` (6 утверждений, 0 аксиом) и `ProcessBestApproximation.v` (9 утверждений, 0 аксиом), оба в каталоге `src/process/`, поверх L<sup>2</sup>-аппарата Части VI (`ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v`, `ProcessL2RieszFischer.v`). Имена — в сносках ниже.
+@@NEW
+[^1]: Опорный файл — `ProcessOrthonormalFourier.v` (каталог `src/process/`, 30 утверждений, 0 `Admitted`, 0 аксиом), поверх `ProcessL2Orthonormal.v` (Часть VI): условие ортонормированности наложено на первые $K_0$ векторов, теоремы доказаны для $K\le K_0$, и $K_0\le N$ (`on_count_le_dim`). В прежних `ProcessFourierSeriesL2.v` и `ProcessBestApproximation.v` те же утверждения записаны под условием ортонормированности при всех номерах, на $N$ координатах невыполнимым (`on_all_indices_unsat`). Процессное чтение предела — `ProcessL2RieszFischer.v`. Имена — в сносках ниже.
+@@END
+@@OLD
+[^3]: `fourier_error_eq` в `ProcessFourierSeriesL2.v`: $\norm{f-P_K}^2=\norm{f}^2-\texttt{captured}(c,K)$, где `captured`$(c,K)=\sum_{k<K}c_k^2$. Прямое следствие `resid_norm` (Часть VI). 0 аксиом.
+@@NEW
+[^3]: `fourier_error_eq_b` в `ProcessOrthonormalFourier.v`: $\norm{f-P_K}^2=\norm{f}^2-\texttt{captured}(c,K)$ при $K\le K_0$, где `captured`$(c,K)=\sum_{k<K}c_k^2$. Прямое следствие `resid_norm_b` (Часть VI). Если $K_0$ векторов полны для $f$, эта разность есть сумма квадратов отброшенных коэффициентов $\sum_{K\le k<K_0}c_k^2$ — `fourier_error_is_tail_b`. 0 аксиом.
+@@END
+@@OLD
+[^4]: `fourier_error_nonneg`; эквивалентно `bessel_general` (Глава 7.1).
+@@NEW
+[^4]: `ferr_nonneg` — неотрицательность ошибки; она верна для любого семейства $e$ (сумма квадратов). Неравенство Бесселя следует из неё вместе с тождеством ошибки — `bessel_from_error_b` (то же, что `bessel_b`, Глава 7.1). Обе — в `ProcessOrthonormalFourier.v`, 0 аксиом.
+@@END
+@@OLD
+[^5]: `fourier_error_monotone`; опирается на монотонность захваченной энергии (`captured_mono`, Глава 7.5). 0 аксиом.
+@@NEW
+[^5]: `fourier_error_monotone_b` ($K\le K'\le K_0$); опирается на монотонность захваченной энергии (`captured_mono`, Глава 7.5). Точнее: очередной коэффициент уменьшает ошибку ровно на свой квадрат, $\norm{f-P_{K+1}}^2=\norm{f-P_K}^2-c_K^2$, — `fourier_error_step_b`. Без ортонормированности ошибка может расти — `monotone_fails_without_on`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом.
+@@END
+@@OLD
+[^6]: `fourier_partial_best` в `ProcessFourierSeriesL2.v` (она же `best_approx_ge` из `ProcessBestApproximation.v`): $\norm{f-P_K}^2\le\norm{f-\sum_{k<K}a_k e_k}^2$ для любых весов $a_k$; единственность минимума — `best_approx_unique`. 0 аксиом.
+@@NEW
+[^6]: `fourier_partial_best_b` в `ProcessOrthonormalFourier.v` (она же `best_approx_b` из `ProcessL2Orthonormal.v`): $\norm{f-P_K}^2\le\norm{f-\sum_{k<K}a_k e_k}^2$ для любых весов $a_k$, $K\le K_0$; единственность минимума — `best_approx_unique_b`. 0 аксиом.
+@@END
+@@OLD
+[^7]: `fourier_error_zero_iff`: $\norm{f-P_K}^2=0 \Leftrightarrow \sum_{k<K}c_k^2=\norm{f}^2$; опирается на критерий полноты `parseval_iff_complete` (Глава 7.1). 0 аксиом.
+@@NEW
+[^7]: `fourier_error_zero_iff_b`: $\norm{f-P_K}^2=0 \Leftrightarrow \sum_{k<K}c_k^2=\norm{f}^2$ — из тождества ошибки; «нулевая ошибка $\Leftrightarrow$ $P_K(m)=f(m)$ при всех $m<N$» — `fourier_error_zero_iff_recovers_b`, через критерий полноты `parseval_iff_complete_b` (Глава 7.1). Точное восстановление при $K=N$ для $N$ ортонормированных векторов — `fourier_truncation_ends_exactly` (через `full_on_recovers`); для стандартного базиса — `std_truncation_ends_exactly`, для повёрнутого — `rot_truncation_ends_exactly`. Все — в `ProcessOrthonormalFourier.v`, 0 аксиом.
+@@END
+@@OLD
+[^8]: Шапки: `ProcessFourierSeriesL2.v` — Rules: ошибка $=\norm{f}^2-$захваченная, монотонна, нуль $\Leftrightarrow$ Парсеваль; Roles: $P_K$ — приближение, хвост — дефект полноты; $N\to\infty$ помечено как P4-граница. `ProcessBestApproximation.v` — Rules: $P_K$ — единственный минимум невязки.
+@@NEW
+[^8]: Шапки: `ProcessFourierSeriesL2.v` — Rules: ошибка $=\norm{f}^2-$захваченная, монотонна, нуль $\Leftrightarrow$ Парсеваль; Roles: $P_K$ — приближение, хвост — дефект полноты; $N\to\infty$ помечено как P4-граница. `ProcessBestApproximation.v` — Rules: $P_K$ — единственный минимум невязки. `ProcessOrthonormalFourier.v` — Roles: `ferr` — квадрат ошибки как функция стадии $K$; P4: $K\le K_0\le N$, процесс усечений заканчивается точным восстановлением при $K=N$.
+@@END

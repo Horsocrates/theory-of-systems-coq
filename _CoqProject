@@ -2152,3 +2152,10 @@ src/process/ProcessConvergenceTheorems.v
 src/process/ProcessL2Orthonormal.v
 src/process/ProcessLadderRational.v
 src/process/ProcessOperatorSpectrumEvolution.v
+src/process/ProcessOrthonormalFourier.v
+src/process/ProcessOrthogonalWalsh.v
+src/process/ProcessHadamardGateSqrt2.v
+src/process/ProcessDiscreteCharacters.v
+src/process/ProcessFourierConvergenceStd.v
+src/process/ProcessWalshReconstruction.v
+src/process/ProcessFastWalshCost.v

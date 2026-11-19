@@ -6,24 +6,24 @@
  "records": [
   {
    "line": 20,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Доказанный результат главы условный: *если* принять одно свойство корней единицы (зануляющуюся геометрическую сумму), *то* дискретная ортогональность становится конечной теоремой над ℚ. Всё остальное — рациональная алгебра; трансцендентность сжата в одну посылку.",
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Доказанный результат главы таков: дискретная ортогональность есть конечная теорема о *любом* носителе значений, в котором выполнены три свойства характеров.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Теорема (:63) стоит под тремя посылками раздела DiscreteChar (:49–52) для chi : nat -> nat -> Q. При N >= 3 этим посылкам над ℚ удовлетворяет только семейство, равное нулю на всех ненулевых частотах (Check.v, chi_forced_zero); корни единицы рациональными не являются и в посылки не подставляются. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «если принять одно свойство корней единицы, то дискретная ортогональность становится конечной теоремой над ℚ… трансцендентность сжата в одну посылку» — посылок три, и над ℚ при N >= 3 им удовлетворяют только нулевые характеры. discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context."
   },
   {
-   "line": 27,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "*Первый* — доказанный над ℚ: дискретная ортогональность характеров *при явно названных алгебраических гипотезах* (характер как гомоморфизм плюс зануляющаяся геометрическая сумма); это конечная теорема, 0 аксиом.[^1]",
+   "line": 29,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "*Первый* — доказанный: дискретная ортогональность характеров *при явно названных алгебраических гипотезах* (значение на нулевой частоте, характер как гомоморфизм, зануляющаяся геометрическая сумма) над любым носителем значений, и её примеры — DFT при $N=4$ над ℚ[i] и при $N=3$ над ℚ[ω]; это конечные теоремы, 0 аксиом.[^1]",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Цена верна: Closed under the global context. Посылок три (в скобках названы две; chi_0 названа на стр. 146), диапазон k + k' < N. При N >= 3 посылкам удовлетворяют только характеры, нулевые на точках выборки (chi_forced_zero), при N = 2 — знаковый характер Уолша (chi_w_model): ортогональность характеров DFT теоремой не покрыта. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «доказанный над ℚ… (характер как гомоморфизм плюс зануляющаяся геометрическая сумма)» — названы все три посылки; носитель произвольный. discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context. Примеры: dft4_hermitian : forall k k', k < 4 -> k' < 4 -> qi_eq (qi_sum (fun j => qi_mul (chi4 k j) (qi_conj (chi4 k' j))) 4) (if (k =? k') then mkQi 4 0 else qi_zero) (:339); билинейная форма — dft4_bilinear (:324), из discrete_orthogonality_gen. Closed under the global context. dft3_hermitian : forall k k', k < 3 -> k' < 3 -> gw_eq (gw_sum (fun j => gwmul (chi3 k j) (gwconj (chi3 k' j))) 3) (if (k =? k') then (3, 0) else gw0) (:423); билинейная форма — dft3_bilinear (:411). Closed under the global context."
   },
   {
-   "line": 30,
+   "line": 33,
    "theorem": null,
    "file": "src/process/ProcessIntegral.v",
    "claim": "*Второй* — процессные чтения: непрерывная ортогональность как предел римановых сумм над ℚ-сетками (процесс, Часть V), а не завершённый интеграл.",
@@ -32,25 +32,25 @@
    "note": "Статус честный: утверждения о непрерывной ортогональности в формализации нет (функций sin и cos в src нет), и страница доказанным его не называет («в принципе доступна», стр. 87). Процесс римановых сумм — integral_process (:56)."
   },
   {
-   "line": 32,
-   "theorem": "imaginary_unit_is_element",
-   "file": "src/stdlib/GaussianMUB.v",
-   "claim": "*Третий* — честная P4-граница, которую ToS *не* строит: сами значения $\\sin/\\cos$, мнимая единица $i$, корни единицы $e^{2\\pi ik/N}$, поле $ℂ$, континуум-интеграл как готовый объект и завершённый бесконечный ряд Фурье.",
+   "line": 35,
+   "theorem": null,
+   "file": null,
+   "claim": "*Третий* — честная P4-граница, которую ToS *не* строит: сами значения $\\sin/\\cos$ в общих точках, корни единицы $e^{2\\pi ik/N}$ общего порядка $N$, поле $ℂ$, континуум-интеграл как готовый объект и завершённый бесконечный ряд Фурье.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: мнимая единица и корни единицы порядков 3 и 4 в формализации построены парами рациональных: gi с i² = −1, i⁴ = 1 (GaussianMUB.v:103), qi_i (process/ProcessGaussianQ.v:42, qi_i_squared :58), ω с ω³ = 1 (stdlib/EisensteinMUB.v:67, omega_is_element). Поля ℂ над процессными вещественными, функций sin и cos, завершённого интеграла и ряда в src нет. Заметки, расхождение 2."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): из перечня сняты мнимая единица и корни единицы порядков 3 и 4 (в формализации они построены). Статус: функций sin и cos, корней единицы общего порядка, поля ℂ над процессными вещественными, завершённого интеграла и завершённого ряда в src нет."
   },
   {
-   "line": 35,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Первый уровень ведём как условно доказанный (при явных гипотезах о характерах), второй — как процесс, третий — как явно помеченную границу.",
+   "line": 40,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Первый уровень ведём как доказанный при явных гипотезах о характерах, второй — как процесс, третий — как явно помеченную границу.",
    "page_price": "",
    "verdict": "ok",
    "note": "Условность названа: после закрытия раздела теорема имеет вид forall N chi, (три посылки) -> forall k k', k + k' < N -> … . О выполнимости посылок — запись к стр. 20."
   },
   {
-   "line": 74,
+   "line": 81,
    "theorem": "hadamard_orthogonal",
    "file": "src/process/ProcessWalshHadamard.v",
    "claim": "где стояла *конечная сумма знаков* $\\sum_{j<N}H_{ij}H_{i'j}=N\\delta_{ii'}$.",
@@ -59,7 +59,7 @@
    "note": "hadamard_orthogonal (:152): forall k i i', i < pow2 k -> i' < pow2 k -> q_sum (fun j => had k i j * had k i' j) (pow2 k) == (if Nat.eqb i i' then inject_Z (Z.of_nat (pow2 k)) else 0); N = 2^k. Closed under the global context. По существу — предмет ведомости главы 7.2."
   },
   {
-   "line": 84,
+   "line": 91,
    "theorem": "integral_process",
    "file": "src/process/ProcessIntegral.v",
    "claim": "В рамках ToS интеграл — не готовое число, а *процесс* накопления римановых сумм над рациональными сетками (так он построен в Части V).",
@@ -68,7 +68,7 @@
    "note": "Definition integral_process (f : Q -> Q) (a b : Q) : RealProcess := fun n => riemann_sum f a (integral_step a b n) (S n) (:56); глава V.5 «Интеграл»."
   },
   {
-   "line": 85,
+   "line": 92,
    "theorem": null,
    "file": null,
    "claim": "Поэтому непрерывную ортогональность можно прочитать как утверждение о *пределе* процесса частичных сумм — и в этом прочтении она в принципе доступна.",
@@ -77,88 +77,88 @@
    "note": "Статус честный: сказано «в принципе доступна», не «доказано». В src такого утверждения нет; из тригонометрии есть частичные суммы ряда 1 − cos θ (gauge/CosineAction.v: cos_term, one_minus_cos_approx) и рациональные значения в отдельных точках (analysis/FourierBasis.v, stdlib/ClockModel.v)."
   },
   {
-   "line": 126,
+   "line": 133,
    "theorem": null,
    "file": "src/process/ProcessGaussianQ.v",
-   "claim": "характеры живут в $ℂ^N$, полноценного поля $ℂ$ как уже построенного носителя над процессными вещественными ToS не строит, а корень единицы $\\omega^{kj}$ в общем случае иррационален и комплексен.[^2]",
+   "claim": "характеры живут в $ℂ^N$, полноценного поля $ℂ$ как уже построенного носителя над процессными вещественными ToS не строит, а корень единицы $\\omega^{kj}$ в общем случае иррационален и комплексен.",
    "page_price": "",
    "verdict": "ok",
    "note": "Верно: пар процессов nat -> Q с комплексной арифметикой в src нет (поиск). Построены гауссовы рациональные ℚ[i] — пары рациональных: Qi (ProcessGaussianQ.v:29), TComplex (stdlib/TComplex.v:13), GQ (stdlib/GaussianMUB.v:57) — и ℚ[ω] (stdlib/EisensteinMUB.v:44); о них — запись к стр. 32."
   },
   {
-   "line": 131,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Алгебраический скелет (зануляющаяся сумма) становится рациональным, если значения характеров заменить абстрактными рациональными параметрами с нужными законами;",
-   "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Рациональные параметры с тремя законами раздела DiscreteChar при N >= 3 обязаны быть нулями на ненулевых частотах: из (2) и (3) при m = 2 следует Σ_j χ(1,j)² = 0 (Check.v, chi_forced_zero; Closed under the global context). Заметки, расхождение 1."
-  },
-  {
-   "line": 142,
-   "theorem": null,
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Возьмём значения характеров $\\chi(k,j)$ как *абстрактные* рациональные параметры (не строя $e^{2\\pi ikj/N}$) и потребуем от них лишь трёх свойств:",
+   "line": 139,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Алгебраический скелет (зануляющаяся сумма) от носителя не зависит: он доказан для любых значений с нужными законами, но рациональных значений с этими законами при $N\\ge3$ нет, кроме нулевых;",
    "page_price": "",
    "verdict": "ok",
-   "note": "Variable chi : nat -> nat -> Q (:46); свойства (1)–(3) стр. 146–148 совпадают с посылками chi_0 (:49), chi_hom (:50, при всех натуральных k, k', j, без приведения по модулю N), chi_sum_zero (:51, 0 < m < N)."
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «становится рациональным, если значения характеров заменить абстрактными рациональными параметрами с нужными законами» — такие параметры при N >= 3 обязаны быть нулями. discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context."
   },
   {
    "line": 150,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Свойства (1)–(2) чисто алгебраические; за пределы ℚ выходит *только* свойство (3) — это абстрактная форма факта «сумма корней единицы равна нулю».",
-   "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "В формализации все три свойства — посылки о рациональных значениях; порознь каждое выполнимо над ℚ, а вместе при N >= 3 они оставляют только нулевые характеры (chi_forced_zero), и то же при (2), суженном до k + k' < N (chi_forced_zero_bounded). За пределы ℚ выходит носитель значений: над ℚ[i] (N = 4) и ℚ[ω] (N = 3) все три свойства выполнены характерами DFT (Check.v, chi4_model, chi3_model). Заметки, расхождение 1."
-  },
-  {
-   "line": 151,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "И вот при этих гипотезах дискретная ортогональность есть конечная теорема над ℚ (в диапазоне $k+k'<N$):",
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Возьмём значения характеров $\\chi(k,j)$ как *абстрактные* элементы какого-либо носителя со сложением и умножением (не строя $e^{2\\pi ikj/N}$) и потребуем от них лишь трёх свойств:",
    "page_price": "",
    "verdict": "ok",
-   "note": "Формула стр. 155–159 и диапазон совпадают с утверждением (:63): q_sum (fun j => chi k j * chi k' j) N == (if (k + k' =? 0) then inject_Z (Z.of_nat N) else 0) при k + k' < N. Значение N достигается только при k = k' = 0. О содержании посылок — запись к стр. 150."
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): значения — элементы носителя R (раздел DiscreteCharGen, :198–242); в ProcessDiscreteTrig.v они рациональны."
+  },
+  {
+   "line": 158,
+   "theorem": "chi_triv_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Каждое свойство порознь выполнимо и над ℚ; свойство (3) — абстрактная форма факта «сумма корней единицы равна нулю».",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «за пределы ℚ выходит только свойство (3)» — все три свойства суть равенства о значениях и над ℚ выполнимы (вместе — тривиальным семейством). chi_triv_model (:143): семейство chi_triv k j := if k =? 0 then 1 else 0 (:141) удовлетворяет трём посылкам при всяком N. Closed under the global context."
   },
   {
    "line": 161,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "доказанная чистой рациональной алгеброй.[^3] Полная модульная DFT-формула $k+k'\\equiv0\\pmod N$ потребовала бы арифметики индексов по модулю $N$, которую этот файл сознательно не строит; в доказанном диапазоне $k+k'<N$ условие $k+k'\\equiv0$ совпадает с $k+k'=0$.",
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "И при этих гипотезах дискретная ортогональность есть конечная теорема над любым носителем (в диапазоне $k+k'<N$):",
    "page_price": "",
    "verdict": "ok",
-   "note": "Доказательство (:66–73): q_sum_ext с chi_hom, затем разбор k + k' — char_sum_full или chi_sum_zero. Оговорка о диапазоне стоит честно: приведения по модулю N в файле нет. Closed under the global context."
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context. Рациональная теорема discrete_orthogonality (ProcessDiscreteTrig.v:63) — её частный случай: discrete_orthogonality_Q_from_gen (:246)."
   },
   {
-   "line": 163,
+   "line": 170,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "доказанная чистой алгеброй: нужны лишь три гипотезы и согласованность сложения с равенством.[^3] Полная модульная DFT-формула $k+k'\\equiv0\\pmod N$ потребовала бы арифметики индексов по модулю $N$, которую общая теорема не строит; в доказанном диапазоне $k+k'<N$ условие $k+k'\\equiv0$ совпадает с $k+k'=0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): посылки носителя — рефлексивность и транзитивность req, согласованность radd с req (:205–208); диапазон теоремы k + k' < N. Closed under the global context."
+  },
+  {
+   "line": 172,
    "theorem": null,
    "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "В классическом DFT это читается как ортогональность с обратным характером $k'=-k\\pmod N$, обычно реализуемая комплексным сопряжением, — но сопряжения и модульной арифметики характеров файл не строит: он доказывает рациональный скелет при явных гипотезах.",
+   "claim": "В классическом DFT это читается как ортогональность с обратным характером $k'=-k\\pmod N$, обычно реализуемая комплексным сопряжением.",
    "page_price": "",
    "verdict": "ok",
    "note": "Оговорка стоит честно: в файле билинейная сумма без сопряжения. Следствие диапазона: норма ненулевого характера (пара k = k' >= 1) теоремой не утверждается; при 2k < N теорема даёт для неё нуль (Check.v, char_square_sum_zero)."
   },
   {
-   "line": 168,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "*Файл-граница ничего трансцендентного не строит: он показывает, что вся ортогональность DFT есть рациональная алгебра характеров плюс *один* вход — зануляющаяся сумма корней единицы. Граница сжата в единственную явную гипотезу.*",
-   "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "«Вся ортогональность DFT» шире доказанного: теорема покрывает пары k + k' < N билинейной суммы (без сопряжения), а её посылкам над ℚ характеры DFT не удовлетворяют ни при каком N >= 3 (chi_forced_zero); при N = 2 пара (1,1) вне диапазона (chi_w_norm_11). Посылок три, а не одна. Заметки, расхождение 1."
-  },
-  {
-   "line": 204,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Оговорка об уровне: формальный объект здесь один — условная теорема `discrete_orthogonality` при явных гипотезах; всё прочее (непрерывная тригонометрия, комплексный DFT) присутствует как *граница*, помеченная, а не построенная.",
+   "line": 178,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "*Теорема-граница ничего трансцендентного не строит: она показывает, что ортогональность DFT есть алгебра характеров при трёх явных гипотезах, а выход за пределы ℚ сосредоточен в носителе значений. Там, где носитель — конечное расширение ℚ ($N=3$, $N=4$), граница пройдена: характеры построены, ортогональность доказана.*",
    "page_price": "",
    "verdict": "ok",
-   "note": "В файле два Qed: лемма char_sum_full (:55) и теорема discrete_orthogonality (:63); другого в нём нет. В других файлах src дискретное преобразование Фурье при N = 3 и N = 4 построено (stdlib/EisensteinMUB.v, analysis/FourierBasis.v) — запись к стр. 32."
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «вся ортогональность DFT есть рациональная алгебра характеров плюс один вход… Граница сжата в единственную явную гипотезу» — гипотез три, а над ℚ они вырождены. discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context. dft4_hermitian : forall k k', k < 4 -> k' < 4 -> qi_eq (qi_sum (fun j => qi_mul (chi4 k j) (qi_conj (chi4 k' j))) 4) (if (k =? k') then mkQi 4 0 else qi_zero) (:339); билинейная форма — dft4_bilinear (:324), из discrete_orthogonality_gen. Closed under the global context. dft3_hermitian : forall k k', k < 3 -> k' < 3 -> gw_eq (gw_sum (fun j => gwmul (chi3 k j) (gwconj (chi3 k' j))) 3) (if (k =? k') then (3, 0) else gw0) (:423); билинейная форма — dft3_bilinear (:411). Closed under the global context."
   },
   {
-   "line": 207,
+   "line": 216,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Оговорка об уровне: формальных объектов здесь два — условная теорема дискретной ортогональности при явных гипотезах и её примеры, DFT при $N=3$ и $N=4$; прочее (непрерывная тригонометрия, DFT общего порядка) присутствует как *граница*, помеченная, а не построенная.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): теорема — discrete_orthogonality_gen (:226) и discrete_orthogonality (ProcessDiscreteTrig.v:63); примеры — chi4_model (:306), dft4_hermitian (:339), chi3_model (:393), dft3_hermitian (:423). Closed under the global context."
+  },
+  {
+   "line": 220,
    "theorem": null,
    "file": "src/process/ProcessDiscreteTrig.v",
    "claim": "Разбор есть осмысление структуры границы и чтение шапки `ProcessDiscreteTrig.v`,[^4] а не приписывание коду новых утверждений.",
@@ -167,25 +167,25 @@
    "note": "Шапка файла (:1–32) содержит разметку Elements / Roles / Rules, которую пересказывает сноска 4."
   },
   {
-   "line": 223,
+   "line": 236,
    "theorem": "omega_is_element",
    "file": "src/stdlib/EisensteinMUB.v",
-   "claim": "А сами значения $\\sin/\\cos$, $e^{2\\pi ik/N}$, мнимая единица $i$, число $\\pi$, континуум-интеграл — роль-пределы: места, к которым процессы стремятся, но которые ToS не актуализирует.",
+   "claim": "Мнимая единица $i$ и кубический корень $\\omega$ — Элемент-роли конечного порядка (Часть XI): они построены парами рациональных чисел; корни единицы общего порядка — того же рода, но здесь не построены.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: i и первообразный кубический корень ω в формализации заданы конечными данными — парами рациональных, с доказанными i⁴ = 1 (stdlib/GaussianMUB.v:103) и ω³ = 1 (omega_is_element, :67); главы 11.1 и 11.4 тома называют их «Элемент-ролями конечного порядка». Для π, общих значений sin/cos и интеграла слова страницы формализации не противоречат. Заметки, расхождение 2."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «значения sin/cos, e^{2πik/N}, мнимая единица i, число π, континуум-интеграл — роль-пределы… которые ToS не актуализирует». Автор выбрал чтение главы XI (XI.1, XI.4: i и ω — Элемент-роли конечного порядка). omega_is_element (stdlib/EisensteinMUB.v:67): gww — пара (0, 1) в ℚ[ω] с ω³ = 1 и 1 + ω + ω² = 0; fourier_orthogonality (:123): трёхточечный базис (1,1,1), (1,ω,ω²), (1,ω²,ω) ортогонален. Closed under the global context."
   },
   {
-   "line": 244,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Условная теорема не делает вид, что построила корни единицы — она показывает, что *при* их ключевом свойстве вся ортогональность рациональна.",
+   "line": 260,
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Условная теорема не делает вид, что построила корни единицы общего порядка — она показывает, что *при* трёх свойствах характеров ортогональность есть чистая алгебра; а там, где корни построены ($N=3$, $N=4$), сами свойства доказаны.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Теорема о рациональнозначном chi; «ключевому свойству» вместе с (1)–(2) при N >= 3 удовлетворяют только нулевые характеры (chi_forced_zero), так что о корнях единицы она ничего не утверждает; «вся ортогональность» — см. запись к стр. 168. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «при их ключевом свойстве вся ортогональность рациональна». discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context."
   },
   {
-   "line": 254,
+   "line": 271,
    "theorem": "hadamard_orthogonal",
    "file": "src/process/ProcessWalshHadamard.v",
    "claim": "предъявлено и доказано, а трансцендентные экземпляры — помечены и сжаты в явные гипотезы, не растворяя при этом ни одной содержательной теоремы.",
@@ -194,7 +194,7 @@
    "note": "«Предъявлено и доказано» об Уолше — hadamard_orthogonal (:152), walsh_norm (:78), Closed under the global context; по существу — ведомость главы 7.2. О словах «сжаты в явные гипотезы» — записи к стр. 20 и 150."
   },
   {
-   "line": 258,
+   "line": 275,
    "theorem": null,
    "file": "src/process/ProcessFourierSeriesL2.v",
    "claim": "Там частичная сумма — наилучшее приближение (Глава 7.1), ошибка усечения равна хвостовой энергии, и всё это конечно и рационально; а переход к завершённому бесконечному ряду — снова честная P4-граница.",
@@ -203,17 +203,17 @@
    "note": "Анонс главы 7.4, доказанным здесь не названо. Для сведения: fourier_error_eq (:57) и fourier_partial_best (:94) стоят в разделе ON под посылкой Hon для всех номеров (:47), невыполнимой (on_all_indices_unsat, process/ProcessL2Orthonormal.v); с выполнимой посылкой те же утверждения — resid_norm_b, best_approx_b. Предмет ведомостей глав 7.1 и 7.4."
   },
   {
-   "line": 264,
+   "line": 281,
    "theorem": null,
    "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Опорный файл — `ProcessDiscreteTrig.v` (каталог `src/process/`, 2 доказанных утверждения, 0 `Admitted`, 0 аксиом).",
+   "claim": "Опорные файлы (каталог `src/process/`) — `ProcessDiscreteTrig.v` (2 доказанных утверждения; значения характеров рациональны) и `ProcessDiscreteCharacters.v` (30 утверждений: общий носитель значений и примеры); оба — 0 `Admitted`, 0 аксиом.",
    "page_price": "0 аксиом",
    "verdict": "ok",
    "note": "Числа верны: grep -c 'Qed\\.' — 2; строк Axiom, Parameter, Admitted нет; Print Assumptions обоих объявлений — Closed under the global context. Файл никем не подключается (поиск по src), примеров применения теоремы в формализации нет.",
    "assumptions": "char_sum_full, discrete_orthogonality: Closed under the global context"
   },
   {
-   "line": 264,
+   "line": 281,
    "theorem": "Admitted",
    "external": true,
    "claim": "0 `Admitted`, 0 аксиом",
@@ -223,16 +223,16 @@
    "assumptions": "не применимо (ключевое слово)"
   },
   {
-   "line": 264,
+   "line": 281,
    "theorem": null,
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "Он *не* строит $\\sin/\\cos$, комплексные числа или формулу Эйлера; он формализует, *какие гипотезы* превращают тригонометрическую ортогональность в утверждение о конечной сумме.",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Они *не* строят $\\sin/\\cos$, поле $ℂ$ или формулу Эйлера; они формализуют, *какие гипотезы* превращают ортогональность характеров в утверждение о конечной сумме и где эти гипотезы выполнены.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Первая половина верна: в файле нет ни sin/cos, ни комплексных чисел. Вторая: посылки записаны для рациональных значений, и тригонометрические характеры им не удовлетворяют — при N >= 3 остаются только нулевые (chi_forced_zero). Гипотезы описывают ортогональность DFT лишь над расширенным носителем (discrete_orthogonality_gen, chi4_model, chi3_model в Check.v). Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «он формализует, какие гипотезы превращают тригонометрическую ортогональность в утверждение о конечной сумме» — над ℚ гипотезам удовлетворяют только нулевые характеры (chi_forced_zero, :69). Теперь названо, где гипотезы выполнены: chi4_model (:306), chi3_model (:393). В файлах нет sin/cos, поля ℂ и формулы Эйлера."
   },
   {
-   "line": 265,
+   "line": 282,
    "theorem": "RealProcess",
    "file": "src/process/ProcessCore.v",
    "claim": "Процессные вещественные — это $ℕ\\toℚ$ (Часть IV);",
@@ -241,49 +241,347 @@
    "note": "Definition RealProcess := nat -> Q (process/ProcessCore.v:34); условие Коши — отдельный предикат is_Cauchy."
   },
   {
-   "line": 265,
+   "line": 282,
    "theorem": "fourier_orthogonality",
    "file": "src/stdlib/EisensteinMUB.v",
-   "claim": "комплексные потребовали бы пар таких процессов, но дело не в паре, а в *значениях*: $e^{2\\pi ik/N}$ трансцендентно. Поэтому комплексный DFT — роль-предел, а не построенный объект.",
+   "claim": "Значения $e^{2\\pi ik/N}$ — алгебраические числа: при $N=4$ это $\\pm1,\\pm i$, при $N=3$ — $1,\\omega,\\omega^2$, и они построены парами рациональных — `qi_i` (`ProcessGaussianQ.v`), `omega_is_element` (`EisensteinMUB.v`; там же ортогональность трёхточечного базиса, `fourier_orthogonality`).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: при N = 3 базис DFT (1,1,1), (1,ω,ω²), (1,ω²,ω) построен над ℚ[ω], и его ортогональность доказана — fourier_orthogonality (:123); при N = 4 вещественная форма DFT построена над ℚ (analysis/FourierBasis.v: phi_0…phi_3, шесть ортогональностей, idft_inverts_dft_concrete). Значения e^{2πik/N} — алгебраические числа (так и сказано на стр. 133), а не трансцендентные. Заметки, расхождение 2."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «e^{2πik/N} трансцендентно. Поэтому комплексный DFT — роль-предел, а не построенный объект» — корни единицы алгебраичны, а при N = 3, 4 построены. omega_is_element (stdlib/EisensteinMUB.v:67): gww — пара (0, 1) в ℚ[ω] с ω³ = 1 и 1 + ω + ω² = 0; fourier_orthogonality (:123): трёхточечный базис (1,1,1), (1,ω,ω²), (1,ω²,ω) ортогонален. Closed under the global context."
   },
   {
-   "line": 266,
+   "line": 283,
    "theorem": "char_sum_full",
    "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "В `ProcessDiscreteTrig.v`: `char_sum_full` (нулевая частота суммируется в $N$, из (1) и суммы констант)",
+   "claim": "В `ProcessDiscreteTrig.v` (значения в ℚ): `char_sum_full` (нулевая частота суммируется в $N$, из (1) и суммы констант)",
    "page_price": "",
    "verdict": "ok",
    "note": "Lemma char_sum_full : q_sum (fun j => chi 0%nat j) N == inject_Z (Z.of_nat N) (:55); после закрытия раздела зависит только от посылки chi_0; доказательство — q_sum_ext и q_sum_const. Closed under the global context."
   },
   {
-   "line": 266,
+   "line": 283,
    "theorem": "discrete_orthogonality",
    "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "`discrete_orthogonality` ($\\sum_{j<N}\\chi(k,j)\\chi(k',j)=N$ при $k+k'=0$, иначе $0$, для $k+k'<N$). Доказательство: гомоморфизм (2) сворачивает произведение в $\\chi(k+k',j)$, далее (1) или (3).",
+   "claim": "`discrete_orthogonality` ($\\sum_{j<N}\\chi(k,j)\\chi(k',j)=N$ при $k+k'=0$, иначе $0$, для $k+k'<N$).",
    "page_price": "",
    "verdict": "ok",
    "note": "Утверждение (:63) и ход доказательства (:66–73) пересказаны точно. Closed under the global context."
   },
   {
-   "line": 266,
-   "theorem": "discrete_orthogonality",
-   "file": "src/process/ProcessDiscreteTrig.v",
-   "claim": "0 аксиом — трансцендентность в гипотезе (3), а не в аксиоме.",
+   "line": 283,
+   "theorem": "chi_forced_zero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над ℚ при $N\\ge3$ гипотезы оставляют только нулевые характеры — `chi_forced_zero` (то же при гомоморфизме, суженном до $k+k'<N$, — `chi_forced_zero_bounded`); при $N=2$ им удовлетворяет знаковый характер Уолша — `chi_w_model`. 0 аксиом.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Цена верна: Closed under the global context. Гипотеза (3) — рациональное равенство о рациональных значениях; содержания корней единицы она не несёт: вместе с (1)–(2) при N >= 3 её выполняют только нулевые характеры (chi_forced_zero). Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 4, слово автора: вариант 1): было «трансцендентность в гипотезе (3)» — гипотеза (3) есть рациональное равенство и содержания корней единицы не несёт. chi_forced_zero : forall N (chi : nat -> nat -> Q), 3 <= N -> (forall j, chi 0 j == 1) -> (forall k k' j, chi k j * chi k' j == chi (k + k') j) -> (forall m, 0 < m -> m < N -> q_sum (fun j => chi m j) N == 0) -> forall m j, 0 < m -> j < N -> chi m j == 0 (:69); из (2) и (3) при m = 2: Σ_j chi(1,j)² = 0. Closed under the global context."
   },
   {
-   "line": 267,
+   "line": 284,
    "theorem": null,
    "file": "src/process/ProcessDiscreteTrig.v",
    "claim": "Шапка файла: Elements — абстрактные значения $\\chi(k,j)\\inℚ$; Roles — $\\chi_k$ как характер, гипотезы как алгебраическое содержание корней единицы; Rules — $\\chi_0=1$, $\\chi_k\\chi_{k'}=\\chi_{k+k'}$, $\\sum_j\\chi_m=0$ $\\Rightarrow$ ортогональность. Файл назван «boundary formaliser».",
    "page_price": "",
    "verdict": "ok",
    "note": "Совпадает с шапкой (:4–11): «Elements: abstract character values χ k j ∈ ℚ; N sample points; finite sums», «Roles: … the hypotheses = the algebraic content of roots of unity», «A \"boundary formaliser\"». В строке Rules шапки стоит N·[k+k'≡0] без диапазона; страница диапазон называет."
+  },
+  {
+   "line": 21,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi_forced_zero : forall N (chi : nat -> nat -> Q), 3 <= N -> (forall j, chi 0 j == 1) -> (forall k k' j, chi k j * chi k' j == chi (k + k') j) -> (forall m, 0 < m -> m < N -> q_sum (fun j => chi m j) N == 0) -> forall m j, 0 < m -> j < N -> chi m j == 0 (:69); из (2) и (3) при m = 2: Σ_j chi(1,j)² = 0. Closed under the global context.",
+   "theorem": "chi_forced_zero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над самим ℚ при $N\\ge3$ этим свойствам удовлетворяют только нулевые характеры, и это доказано; над конечными расширениями ℚ[i] ($N=4$) и ℚ[ω] ($N=3$), где корни единицы суть пары рациональных чисел, им удовлетворяют настоящие характеры DFT, и ортогональность доказана полностью, с сопряжением."
+  },
+  {
+   "line": 21,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi4_model (:306): для chi4 k j := i_pow (k * j) (:301; i_pow — степени мнимой единицы qi_i, :282) над гауссовыми рациональными Qi — (1) qi_eq (chi4 0 j) qi_one, (2) qi_eq (qi_mul (chi4 k j) (chi4 k' j)) (chi4 (k + k') j), (3) 0 < m -> m < 4 -> qi_eq (qi_sum (fun j => chi4 m j) 4) qi_zero; chi4_nonzero (:320). Closed under the global context.",
+   "theorem": "chi4_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над самим ℚ при $N\\ge3$ этим свойствам удовлетворяют только нулевые характеры, и это доказано; над конечными расширениями ℚ[i] ($N=4$) и ℚ[ω] ($N=3$), где корни единицы суть пары рациональных чисел, им удовлетворяют настоящие характеры DFT, и ортогональность доказана полностью, с сопряжением."
+  },
+  {
+   "line": 21,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi3_model (:393): для chi3 k j := w_pow (k * j) (:389; w_pow — степени ω, :356) над числами Эйзенштейна GQw — три посылки при N = 3; chi3_nonzero (:407). Closed under the global context.",
+   "theorem": "chi3_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над самим ℚ при $N\\ge3$ этим свойствам удовлетворяют только нулевые характеры, и это доказано; над конечными расширениями ℚ[i] ($N=4$) и ℚ[ω] ($N=3$), где корни единицы суть пары рациональных чисел, им удовлетворяют настоящие характеры DFT, и ортогональность доказана полностью, с сопряжением."
+  },
+  {
+   "line": 21,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft4_hermitian : forall k k', k < 4 -> k' < 4 -> qi_eq (qi_sum (fun j => qi_mul (chi4 k j) (qi_conj (chi4 k' j))) 4) (if (k =? k') then mkQi 4 0 else qi_zero) (:339); билинейная форма — dft4_bilinear (:324), из discrete_orthogonality_gen. Closed under the global context.",
+   "theorem": "dft4_hermitian",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над самим ℚ при $N\\ge3$ этим свойствам удовлетворяют только нулевые характеры, и это доказано; над конечными расширениями ℚ[i] ($N=4$) и ℚ[ω] ($N=3$), где корни единицы суть пары рациональных чисел, им удовлетворяют настоящие характеры DFT, и ортогональность доказана полностью, с сопряжением."
+  },
+  {
+   "line": 21,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft3_hermitian : forall k k', k < 3 -> k' < 3 -> gw_eq (gw_sum (fun j => gwmul (chi3 k j) (gwconj (chi3 k' j))) 3) (if (k =? k') then (3, 0) else gw0) (:423); билинейная форма — dft3_bilinear (:411). Closed under the global context.",
+   "theorem": "dft3_hermitian",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над самим ℚ при $N\\ge3$ этим свойствам удовлетворяют только нулевые характеры, и это доказано; над конечными расширениями ℚ[i] ($N=4$) и ℚ[ω] ($N=3$), где корни единицы суть пары рациональных чисел, им удовлетворяют настоящие характеры DFT, и ортогональность доказана полностью, с сопряжением."
+  },
+  {
+   "line": 38,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "imaginary_unit_is_element (stdlib/GaussianMUB.v:103): gi — пара (0, 1) с i² = −1 и i⁴ = 1; qi_i := mkQi 0 1 (process/ProcessGaussianQ.v:42), qi_i_squared (:58). Closed under the global context.",
+   "theorem": "imaginary_unit_is_element",
+   "file": "src/stdlib/GaussianMUB.v",
+   "claim": "Мнимая единица $i$ и кубический корень $\\omega$ в эту границу не входят: они построены парами рациональных чисел (Часть XI: Элемент-роли конечного порядка)."
+  },
+  {
+   "line": 38,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "omega_is_element (stdlib/EisensteinMUB.v:67): gww — пара (0, 1) в ℚ[ω] с ω³ = 1 и 1 + ω + ω² = 0; fourier_orthogonality (:123): трёхточечный базис (1,1,1), (1,ω,ω²), (1,ω²,ω) ортогонален. Closed under the global context.",
+   "theorem": "omega_is_element",
+   "file": "src/stdlib/EisensteinMUB.v",
+   "claim": "Мнимая единица $i$ и кубический корень $\\omega$ в эту границу не входят: они построены парами рациональных чисел (Часть XI: Элемент-роли конечного порядка)."
+  },
+  {
+   "line": 135,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi4_model (:306): для chi4 k j := i_pow (k * j) (:301; i_pow — степени мнимой единицы qi_i, :282) над гауссовыми рациональными Qi — (1) qi_eq (chi4 0 j) qi_one, (2) qi_eq (qi_mul (chi4 k j) (chi4 k' j)) (chi4 (k + k') j), (3) 0 < m -> m < 4 -> qi_eq (qi_sum (fun j => chi4 m j) 4) qi_zero; chi4_nonzero (:320). Closed under the global context.",
+   "theorem": "chi4_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "При $N=4$ и $N=3$ хватает конечных расширений ℚ[i] и ℚ[ω] — пар рациональных чисел,— и там характеры построены.[^2]"
+  },
+  {
+   "line": 135,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi3_model (:393): для chi3 k j := w_pow (k * j) (:389; w_pow — степени ω, :356) над числами Эйзенштейна GQw — три посылки при N = 3; chi3_nonzero (:407). Closed under the global context.",
+   "theorem": "chi3_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "При $N=4$ и $N=3$ хватает конечных расширений ℚ[i] и ℚ[ω] — пар рациональных чисел,— и там характеры построены.[^2]"
+  },
+  {
+   "line": 139,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi_forced_zero : forall N (chi : nat -> nat -> Q), 3 <= N -> (forall j, chi 0 j == 1) -> (forall k k' j, chi k j * chi k' j == chi (k + k') j) -> (forall m, 0 < m -> m < N -> q_sum (fun j => chi m j) N == 0) -> forall m j, 0 < m -> j < N -> chi m j == 0 (:69); из (2) и (3) при m = 2: Σ_j chi(1,j)² = 0. Closed under the global context.",
+   "theorem": "chi_forced_zero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Алгебраический скелет (зануляющаяся сумма) от носителя не зависит: он доказан для любых значений с нужными законами, но рациональных значений с этими законами при $N\\ge3$ нет, кроме нулевых;"
+  },
+  {
+   "line": 159,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi_forced_zero : forall N (chi : nat -> nat -> Q), 3 <= N -> (forall j, chi 0 j == 1) -> (forall k k' j, chi k j * chi k' j == chi (k + k') j) -> (forall m, 0 < m -> m < N -> q_sum (fun j => chi m j) N == 0) -> forall m j, 0 < m -> j < N -> chi m j == 0 (:69); из (2) и (3) при m = 2: Σ_j chi(1,j)² = 0. Closed under the global context.",
+   "theorem": "chi_forced_zero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Вместе же над ℚ при $N\\ge3$ они оставляют только нулевые характеры: из (2) и (3) следует $\\sum_j\\chi(1,j)^2=0$."
+  },
+  {
+   "line": 159,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "char_square_sum_zero (:124): из трёх посылок при 0 < k, k + k < N — q_sum (fun j => chi k j * chi k j) N == 0; orthogonality_terms_zero (:110): при N >= 3 каждое слагаемое суммы теоремы равно нулю, кроме k = k' = 0. Closed under the global context.",
+   "theorem": "char_square_sum_zero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Вместе же над ℚ при $N\\ge3$ они оставляют только нулевые характеры: из (2) и (3) следует $\\sum_j\\chi(1,j)^2=0$."
+  },
+  {
+   "line": 174,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft4_hermitian : forall k k', k < 4 -> k' < 4 -> qi_eq (qi_sum (fun j => qi_mul (chi4 k j) (qi_conj (chi4 k' j))) 4) (if (k =? k') then mkQi 4 0 else qi_zero) (:339); билинейная форма — dft4_bilinear (:324), из discrete_orthogonality_gen. Closed under the global context.",
+   "theorem": "dft4_hermitian",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Для двух размеров она доказана полностью: при $N=4$ над ℚ[i] и при $N=3$ над ℚ[ω] характеры $i^{kj}$ и $\\omega^{kj}$ удовлетворяют трём гипотезам, и $\\sum_j\\chi_k(j)\\,\\overline{\\chi_{k'}(j)}=N\\delta_{kk'}$ при всех $k,k'<N$.[^5]"
+  },
+  {
+   "line": 174,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft3_hermitian : forall k k', k < 3 -> k' < 3 -> gw_eq (gw_sum (fun j => gwmul (chi3 k j) (gwconj (chi3 k' j))) 3) (if (k =? k') then (3, 0) else gw0) (:423); билинейная форма — dft3_bilinear (:411). Closed under the global context.",
+   "theorem": "dft3_hermitian",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Для двух размеров она доказана полностью: при $N=4$ над ℚ[i] и при $N=3$ над ℚ[ω] характеры $i^{kj}$ и $\\omega^{kj}$ удовлетворяют трём гипотезам, и $\\sum_j\\chi_k(j)\\,\\overline{\\chi_{k'}(j)}=N\\delta_{kk'}$ при всех $k,k'<N$.[^5]"
+  },
+  {
+   "line": 236,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "imaginary_unit_is_element (stdlib/GaussianMUB.v:103): gi — пара (0, 1) с i² = −1 и i⁴ = 1; qi_i := mkQi 0 1 (process/ProcessGaussianQ.v:42), qi_i_squared (:58). Closed under the global context.",
+   "theorem": "imaginary_unit_is_element",
+   "file": "src/stdlib/GaussianMUB.v",
+   "claim": "Мнимая единица $i$ и кубический корень $\\omega$ — Элемент-роли конечного порядка (Часть XI): они построены парами рациональных чисел; корни единицы общего порядка — того же рода, но здесь не построены."
+  },
+  {
+   "line": 238,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус: функций sin и cos, числа π как завершённого объекта и завершённого интеграла в src нет; слова страницы формализации не противоречат.",
+   "theorem": null,
+   "file": null,
+   "claim": "А значения $\\sin/\\cos$, число $\\pi$, континуум-интеграл — роль-пределы: места, к которым процессы стремятся, но которые ToS не актуализирует."
+  },
+  {
+   "line": 260,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi4_model (:306): для chi4 k j := i_pow (k * j) (:301; i_pow — степени мнимой единицы qi_i, :282) над гауссовыми рациональными Qi — (1) qi_eq (chi4 0 j) qi_one, (2) qi_eq (qi_mul (chi4 k j) (chi4 k' j)) (chi4 (k + k') j), (3) 0 < m -> m < 4 -> qi_eq (qi_sum (fun j => chi4 m j) 4) qi_zero; chi4_nonzero (:320). Closed under the global context.",
+   "theorem": "chi4_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Условная теорема не делает вид, что построила корни единицы общего порядка — она показывает, что *при* трёх свойствах характеров ортогональность есть чистая алгебра; а там, где корни построены ($N=3$, $N=4$), сами свойства доказаны."
+  },
+  {
+   "line": 260,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi3_model (:393): для chi3 k j := w_pow (k * j) (:389; w_pow — степени ω, :356) над числами Эйзенштейна GQw — три посылки при N = 3; chi3_nonzero (:407). Closed under the global context.",
+   "theorem": "chi3_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Условная теорема не делает вид, что построила корни единицы общего порядка — она показывает, что *при* трёх свойствах характеров ортогональность есть чистая алгебра; а там, где корни построены ($N=3$, $N=4$), сами свойства доказаны."
+  },
+  {
+   "line": 281,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В ProcessDiscreteCharacters.v 30 строк Qed и одиннадцать определений; Admitted, Axiom, Parameter нет; все объявления — Closed under the global context.",
+   "theorem": null,
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "assumptions": "все 41 объявление файла: Closed under the global context",
+   "claim": "Опорные файлы (каталог `src/process/`) — `ProcessDiscreteTrig.v` (2 доказанных утверждения; значения характеров рациональны) и `ProcessDiscreteCharacters.v` (30 утверждений: общий носитель значений и примеры); оба — 0 `Admitted`, 0 аксиом."
+  },
+  {
+   "line": 282,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "omega_is_element (stdlib/EisensteinMUB.v:67): gww — пара (0, 1) в ℚ[ω] с ω³ = 1 и 1 + ω + ω² = 0; fourier_orthogonality (:123): трёхточечный базис (1,1,1), (1,ω,ω²), (1,ω²,ω) ортогонален. Closed under the global context.",
+   "theorem": "omega_is_element",
+   "file": "src/stdlib/EisensteinMUB.v",
+   "claim": "Значения $e^{2\\pi ik/N}$ — алгебраические числа: при $N=4$ это $\\pm1,\\pm i$, при $N=3$ — $1,\\omega,\\omega^2$, и они построены парами рациональных — `qi_i` (`ProcessGaussianQ.v`), `omega_is_element` (`EisensteinMUB.v`; там же ортогональность трёхточечного базиса, `fourier_orthogonality`)."
+  },
+  {
+   "line": 282,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "qi_i := mkQi 0 1 (ProcessGaussianQ.v:42) — мнимая единица как пара рациональных; qi_i_squared : qi_eq (qi_mul qi_i qi_i) (mkQi (-(1)) 0) (:58). Closed under the global context.",
+   "theorem": "qi_i",
+   "file": "src/process/ProcessGaussianQ.v",
+   "claim": "Значения $e^{2\\pi ik/N}$ — алгебраические числа: при $N=4$ это $\\pm1,\\pm i$, при $N=3$ — $1,\\omega,\\omega^2$, и они построены парами рациональных — `qi_i` (`ProcessGaussianQ.v`), `omega_is_element` (`EisensteinMUB.v`; там же ортогональность трёхточечного базиса, `fourier_orthogonality`)."
+  },
+  {
+   "line": 282,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "статус: в src построены ℚ[i] (ProcessGaussianQ.v, stdlib/GaussianMUB.v) и ℚ[ω] (stdlib/EisensteinMUB.v); круговых расширений ℚ[ζ_N] для общего N нет.",
+   "theorem": null,
+   "file": null,
+   "claim": "Для общего $N$ нужного расширения ℚ в формализации нет: DFT общего порядка не построен."
+  },
+  {
+   "line": 283,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "discrete_orthogonality_gen : для носителя R с отношением req (рефлексивным, транзитивным), сложением radd, согласованным с req, и умножением rmul; для chi : nat -> nat -> R с посылками (1) req (chi 0 j) rI, (2) req (rmul (chi k j) (chi k' j)) (chi (k + k') j), (3) 0 < m -> m < N -> req (r_sum (fun j => chi m j) N) rO — forall k k', k + k' < N -> req (r_sum (fun j => rmul (chi k j) (chi k' j)) N) (if (k + k' =? 0) then r_sum (fun _ => rI) N else rO) (:226); r_sum — конечная сумма в носителе (:204). Closed under the global context.",
+   "theorem": "discrete_orthogonality_gen",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над любым носителем — `discrete_orthogonality_gen` (`ProcessDiscreteCharacters.v`). Доказательство: гомоморфизм (2) сворачивает произведение в $\\chi(k+k',j)$, далее (1) или (3)."
+  },
+  {
+   "line": 283,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "chi_forced_zero_bounded (:90): то же при посылке (2), суженной до k + k' < N, — для 0 < m < N. Closed under the global context.",
+   "theorem": "chi_forced_zero_bounded",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над ℚ при $N\\ge3$ гипотезы оставляют только нулевые характеры — `chi_forced_zero` (то же при гомоморфизме, суженном до $k+k'<N$, — `chi_forced_zero_bounded`); при $N=2$ им удовлетворяет знаковый характер Уолша — `chi_w_model`. 0 аксиом."
+  },
+  {
+   "line": 283,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "chi_w_model (:168): при N = 2 трём посылкам удовлетворяет знаковый характер chi_w k j := (−1)^{k j} (:160); chi_w_nonzero (:179); chi_w_norm_11 (:184): Σ_j chi_w 1 j · chi_w 1 j == 2 — пара (1, 1) вне диапазона теоремы. Closed under the global context.",
+   "theorem": "chi_w_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Над ℚ при $N\\ge3$ гипотезы оставляют только нулевые характеры — `chi_forced_zero` (то же при гомоморфизме, суженном до $k+k'<N$, — `chi_forced_zero_bounded`); при $N=2$ им удовлетворяет знаковый характер Уолша — `chi_w_model`. 0 аксиом."
+  },
+  {
+   "line": 285,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi4_model (:306): для chi4 k j := i_pow (k * j) (:301; i_pow — степени мнимой единицы qi_i, :282) над гауссовыми рациональными Qi — (1) qi_eq (chi4 0 j) qi_one, (2) qi_eq (qi_mul (chi4 k j) (chi4 k' j)) (chi4 (k + k') j), (3) 0 < m -> m < 4 -> qi_eq (qi_sum (fun j => chi4 m j) 4) qi_zero; chi4_nonzero (:320). Closed under the global context.",
+   "theorem": "chi4_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "`ProcessDiscreteCharacters.v`. $N=4$, носитель ℚ[i] (`ProcessGaussianQ.v`): характеры $\\chi_k(j)=i^{kj}$ удовлетворяют трём гипотезам — `chi4_model`; общая теорема на них — `dft4_bilinear`; ортогональность с сопряжением при всех $k,k'<4$ — `dft4_hermitian`."
+  },
+  {
+   "line": 285,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft4_hermitian : forall k k', k < 4 -> k' < 4 -> qi_eq (qi_sum (fun j => qi_mul (chi4 k j) (qi_conj (chi4 k' j))) 4) (if (k =? k') then mkQi 4 0 else qi_zero) (:339); билинейная форма — dft4_bilinear (:324), из discrete_orthogonality_gen. Closed under the global context.",
+   "theorem": "dft4_bilinear",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "`ProcessDiscreteCharacters.v`. $N=4$, носитель ℚ[i] (`ProcessGaussianQ.v`): характеры $\\chi_k(j)=i^{kj}$ удовлетворяют трём гипотезам — `chi4_model`; общая теорема на них — `dft4_bilinear`; ортогональность с сопряжением при всех $k,k'<4$ — `dft4_hermitian`."
+  },
+  {
+   "line": 285,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft4_hermitian : forall k k', k < 4 -> k' < 4 -> qi_eq (qi_sum (fun j => qi_mul (chi4 k j) (qi_conj (chi4 k' j))) 4) (if (k =? k') then mkQi 4 0 else qi_zero) (:339); билинейная форма — dft4_bilinear (:324), из discrete_orthogonality_gen. Closed under the global context.",
+   "theorem": "dft4_hermitian",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "`ProcessDiscreteCharacters.v`. $N=4$, носитель ℚ[i] (`ProcessGaussianQ.v`): характеры $\\chi_k(j)=i^{kj}$ удовлетворяют трём гипотезам — `chi4_model`; общая теорема на них — `dft4_bilinear`; ортогональность с сопряжением при всех $k,k'<4$ — `dft4_hermitian`."
+  },
+  {
+   "line": 285,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "chi3_model (:393): для chi3 k j := w_pow (k * j) (:389; w_pow — степени ω, :356) над числами Эйзенштейна GQw — три посылки при N = 3; chi3_nonzero (:407). Closed under the global context.",
+   "theorem": "chi3_model",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "$N=3$, носитель ℚ[ω] (`EisensteinMUB.v`): `chi3_model`, `dft3_bilinear`, `dft3_hermitian`."
+  },
+  {
+   "line": 285,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft3_hermitian : forall k k', k < 3 -> k' < 3 -> gw_eq (gw_sum (fun j => gwmul (chi3 k j) (gwconj (chi3 k' j))) 3) (if (k =? k') then (3, 0) else gw0) (:423); билинейная форма — dft3_bilinear (:411). Closed under the global context.",
+   "theorem": "dft3_bilinear",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "$N=3$, носитель ℚ[ω] (`EisensteinMUB.v`): `chi3_model`, `dft3_bilinear`, `dft3_hermitian`."
+  },
+  {
+   "line": 285,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "dft3_hermitian : forall k k', k < 3 -> k' < 3 -> gw_eq (gw_sum (fun j => gwmul (chi3 k j) (gwconj (chi3 k' j))) 3) (if (k =? k') then (3, 0) else gw0) (:423); билинейная форма — dft3_bilinear (:411). Closed under the global context.",
+   "theorem": "dft3_hermitian",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "$N=3$, носитель ℚ[ω] (`EisensteinMUB.v`): `chi3_model`, `dft3_bilinear`, `dft3_hermitian`."
+  },
+  {
+   "line": 285,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "chi4_model (:306): для chi4 k j := i_pow (k * j) (:301; i_pow — степени мнимой единицы qi_i, :282) над гауссовыми рациональными Qi — (1) qi_eq (chi4 0 j) qi_one, (2) qi_eq (qi_mul (chi4 k j) (chi4 k' j)) (chi4 (k + k') j), (3) 0 < m -> m < 4 -> qi_eq (qi_sum (fun j => chi4 m j) 4) qi_zero; chi4_nonzero (:320). Closed under the global context.",
+   "theorem": "chi4_nonzero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Характеры ненулевые: `chi4_nonzero`, `chi3_nonzero`. 0 аксиом."
+  },
+  {
+   "line": 285,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "chi3_model (:393): для chi3 k j := w_pow (k * j) (:389; w_pow — степени ω, :356) над числами Эйзенштейна GQw — три посылки при N = 3; chi3_nonzero (:407). Closed under the global context.",
+   "theorem": "chi3_nonzero",
+   "file": "src/process/ProcessDiscreteCharacters.v",
+   "claim": "Характеры ненулевые: `chi4_nonzero`, `chi3_nonzero`. 0 аксиом."
   }
  ]
 }

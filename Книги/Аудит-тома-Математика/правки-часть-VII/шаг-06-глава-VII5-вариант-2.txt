@@ -1,0 +1,31 @@
+@@FILE Направления/Математика/Том Математика/07 Гармонический анализ/05 Сжатие, быстрое преобразование, свёртка.md
+@@OLD
+для сырого спектра Уолша $(Hf)_i$ та же формула читается с масштабом $N$, ибо $\sum_i
+(Hf)_i^2 = N\norm{f}^2$ (Планшерель, Глава 7.2).
+@@NEW
+для сырого спектра Уолша $(Hf)_i$ та же формула читается с масштабом $N$, ибо $\sum_i
+(Hf)_i^2 = N\norm{f}^2$ (Планшерель, Глава 7.2). Точнее: если $f_K$ — сигнал, восстановленный
+по первым $K$ сырым коэффициентам (обратным шагом $H/N$ от спектра, в котором коэффициенты
+с номерами $i\ge K$ заменены нулями), то $N\norm{f-f_K}^2=\sum_{K\le i<N}(Hf)_i^2$.
+Нормированная шкала у Уолша рациональна при чётном $k$, и тогда формула верна в ней дословно.
+@@END
+@@OLD
+[^1]: Опорные файлы (каталог `src/process/`): `ProcessFourierCompression.v` (6 утверждений), `ProcessWalshCompaction.v` (1), `ProcessFastWalsh.v` (2), `ProcessWalshConvolutionGeneral.v` (7); все 0 `Admitted`, 0 аксиом.
+@@NEW
+[^1]: Опорные файлы (каталог `src/process/`): `ProcessFourierCompression.v` (6 утверждений), `ProcessWalshCompaction.v` (2), `ProcessFastWalsh.v` (2), `ProcessWalshConvolutionGeneral.v` (7), `ProcessWalshReconstruction.v` (16); все 0 `Admitted`, 0 аксиом.
+@@END
+@@OLD
+[^2]: В `ProcessFourierCompression.v`: `captured`$(c,K)=\sum_{i<K}c_i^2$; `truncation_error_eq` даёт баланс `captured`$(c,N)=$`captured`$(c,K)+$хвост; `captured_mono` — монотонность по $K$. Для Уолша полная энергия есть $N\norm{f}^2$ (Планшерель), так что ошибка контролируется Парсевалем — `walsh_captured_le_energy`. 0 аксиом.
+@@NEW
+[^2]: В `ProcessFourierCompression.v`: `captured`$(c,K)=\sum_{i<K}c_i^2$; `truncation_error_eq` даёт баланс `captured`$(c,N)=$`captured`$(c,K)+$хвост для любой последовательности $c$; `captured_mono` — монотонность по $K$. Что хвост есть ошибка восстановления, доказано в `ProcessWalshReconstruction.v`: `walsh_rec` — сигнал $f_K$, восстановленный по первым $K$ сырым коэффициентам (он же частичная сумма разложения по функциям Уолша, `walsh_rec_partial_sum`); `walsh_compression_error` — $N\norm{f-f_K}^2=\sum_{K\le i<N}(Hf)_i^2$; `walsh_tail_eq` — эта сумма равна $N\norm{f}^2-$`captured`$(Hf,K)$ (равенство, по Планшерелю; `walsh_captured_le_energy` — оценка захваченной энергии сверху); `walsh_compression_error_mono` — ошибка не возрастает по $K$. В нормированной шкале: для полной ортонормированной системы — `fourier_error_is_tail_b` (Глава 7.4); для Уолша при рациональном $s$ с $s^2=N$ — `walsh_normalized_error_is_tail`, при $N=4^j$ — `walsh_4j_error_is_tail`. 0 аксиом.
+@@END
+@@OLD
+[^3]: `walsh_compaction` в `ProcessWalshCompaction.v`: при $c_i=0$ для $K\le i<N$ выполнено `captured`$(c,N)=$`captured`$(c,K)$ — хвост нулевой. 0 аксиом. Точное рациональное сжатие полосно-ограниченного сигнала.
+@@NEW
+[^3]: `walsh_bandlimited_lossless` в `ProcessWalshReconstruction.v`: если $(Hf)_i=0$ при $K\le i<N$, то $f_K(m)=f(m)$ при всех $m<N$; обратное — `walsh_lossless_iff`: восстановление точно тогда и только тогда, когда отброшенные коэффициенты равны нулю. Равенство энергий — `walsh_compaction` в `ProcessWalshCompaction.v`: при $c_i=0$ для $K\le i<N$ выполнено `captured`$(c,N)=$`captured`$(c,K)$ — хвост нулевой. 0 аксиом. Точное рациональное сжатие полосно-ограниченного сигнала.
+@@END
+@@OLD
+[^5]: `walsh_convolution` в `ProcessWalshConvolutionGeneral.v`: $H(f\ast g)=(Hf)\cdot(Hg)$ для всех $2^k$. Доказательство опирается на характерное свойство Уолша (`had_character`, Глава 7.2) и на переиндексацию конечной суммы под XOR-биекцией ($\texttt{xor\_perm\_q\_sum}$, доказанную блочной рекурсией Сильвестра). 0 аксиом.
+@@NEW
+[^5]: `walsh_convolution` в `ProcessWalshConvolutionGeneral.v`: $H(f\ast g)=(Hf)\cdot(Hg)$ для всех $2^k$. Доказательство опирается на характерное свойство Уолша (`had_character`, Глава 7.2) и на переиндексацию конечной суммы под XOR-биекцией ($\texttt{xor\_perm\_q\_sum}$, доказанную блочной рекурсией Сильвестра). Обратный шаг — `walsh_convolution_inverse` в `ProcessWalshReconstruction.v`: $N\,(f\ast g)=H\bigl((Hf)\cdot(Hg)\bigr)$; то же через быструю бабочку — `convolution_via_fwht`. 0 аксиом.
+@@END

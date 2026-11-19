@@ -15,33 +15,34 @@
   },
   {
    "line": 35,
-   "theorem": "bessel_general",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Глава работает с *конечной* ортонормированной системой $\\{e_k\\}_{k<K}$ из $K$ векторов на $N$ координатах над ℚ и доказывает о ней всё, что нужно для теории коэффициентов: линейность скалярного произведения по конечному разложению, ортогональность остатка проекции к её носителю, тождество «энергия $=$ захваченная часть $+$ остаток», неравенство Бесселя $\\sum_{k<K} c_k^2 \\le \\norm{f}^2$ и равенство Парсеваля как *критерий полноты* — всё это *без единой аксиомы*.[^1]",
    "page_price": "без единой аксиомы",
-   "verdict": "mismatch-statement",
-   "note": "Цена верна. Но proj_ortho, resid_norm, bessel_general (:123, :150, :175), energy_split и parseval_iff_complete (ProcessL2Parseval.v:91, :142) стоят под посылкой раздела Hon (:119): ортонормированность при ВСЕХ натуральных i, j на N координатах, а не для K векторов. Посылка невыполнима — on_all_indices_unsat (ProcessL2Orthonormal.v:134); примеров у этих теорем нет. Без посылки доказана только линейность inner_proj_swap (:81). С выполнимой посылкой (первые K0 векторов, K <= K0) то же доказано в ProcessL2Orthonormal.v: proj_ortho_b, resid_norm_b, bessel_b, energy_split_b, parseval_iff_complete_b."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): названные утверждения доказаны под выполнимой посылкой — proj_ortho_b (:193), resid_norm_b (:231), bessel_b (:243), energy_split_b (:276), parseval_iff_complete_b (:296) в ProcessL2Orthonormal.v; resid_ortho_b (ProcessOrthonormalFourier.v:138). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Прежние теоремы (ProcessL2BesselGeneral.v, ProcessL2Parseval.v) стоят под посылкой при всех номерах, невыполнимой (on_all_indices_unsat). Closed under the global context."
   },
   {
    "line": 43,
-   "theorem": null,
-   "file": "src/process/ProcessHadamardGate.v",
-   "claim": "Чего глава *не* делает: она не строит завершённый *бесконечный* ортонормированный базис, не утверждает, что замкнутая оболочка системы есть всё пространство, и не вводит нормировку $1/\\sqrt N$ иначе как абстрактным параметром (она иррациональна, если $N$ — не точный квадрат).",
+   "theorem": "walsh_rational_norm_iff_even",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Чего глава *не* делает: она не строит завершённый *бесконечный* ортонормированный базис, не утверждает, что замкнутая оболочка системы есть всё пространство, и не извлекает корень $\\sqrt N$: нормировка $1/\\sqrt N$ рациональна лишь когда $N$ — точный квадрат, а в остальных случаях теория ведётся для ортогональной системы без нормировки (§ «Конкретная ортогональная система: Уолш–Адамар»).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Первые два отказа честны. Нормировка же в опорных файлах главы не вводится никак: нормированной системы Уолша в них нет. Параметр есть только в ProcessHadamardGate.v (:68–69, файл Главы 7.2) для N = 2: s2inv : Q с посылкой s2inv * s2inv * 2 == 1, у которой нет рационального решения (пробный файл, hgate_premise_unsat). При нечётном k рационального s с s² = 2^k нет (walsh_odd_no_rational_norm), при чётном s = 2^(k/2) (walsh_4j_orthonormal)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 2, слово автора): было «не вводит нормировку 1/√N иначе как абстрактным параметром» — параметра нормировки в опорных файлах главы нет. Теперь: корень не извлекается, теория ведётся для ортогональной системы. walsh_rational_norm_iff_even : forall k, (exists s : Q, s * s == inject_Z (Z.of_nat (pow2 k))) <-> Nat.Even k (:512); из walsh_even_norm_exists (:464) и walsh_odd_no_rational_norm (:492). Closed under the global context. bessel_og : K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N / d k) K <= seq_inner f f N (:191). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 50,
-   "theorem": "parseval_iff_complete",
-   "file": "src/process/ProcessL2Parseval.v",
+   "line": 51,
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "*Первый* — конечная ортонормированная система на $N$ координатах: здесь Бессель, тождество энергии и критерий полноты доказаны точно над ℚ, без аксиом.",
    "page_price": "без аксиом",
-   "verdict": "mismatch-statement",
-   "note": "Цена верна. bessel_general (ProcessL2BesselGeneral.v:175), energy_split (:91), parseval_iff_complete (:142) доказаны под посылкой Hon «для всех номеров i, j», которой не удовлетворяет ни одна система (on_all_indices_unsat). Для конечной системы (первые K0 векторов) то же доказано: bessel_b, energy_split_b, parseval_iff_complete_b (ProcessL2Orthonormal.v:243, :276, :296)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): parseval_iff_complete_b : K <= K0 -> (Σ_{k<K} c_k² == seq_inner f f N) <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context. Бессель — bessel_b (:243), тождество энергии — energy_split_b (:276)."
   },
   {
-   "line": 93,
+   "line": 94,
    "theorem": "seq_inner",
    "file": "src/process/ProcessCompactSpectral.v",
    "claim": "Это рациональная конечная сумма — ни предела, ни завершённой бесконечности.[^2]",
@@ -50,7 +51,7 @@
    "note": "Definition seq_inner (a b : nat -> Q) (N : nat) : Q := q_sum (fun i => a i * b i) N (:51); q_sum — рекурсия по N (ProcessMCT.v:61). Сноска 2 верна: квадрат нормы записывается как seq_inner f f N."
   },
   {
-   "line": 94,
+   "line": 95,
    "theorem": "seq_inner_sym",
    "file": "src/process/ProcessL2BesselGeneral.v",
    "claim": "Оно симметрично и линейно по каждому аргументу: эти свойства — не постулаты, а простые тождества над ℚ, доказываемые одним шагом `ring` под знаком суммы.[^3]",
@@ -59,7 +60,7 @@
    "note": "seq_inner_sym (:43) доказана как сказано: q_sum_ext и ring. Линейность в названном файле записана одной леммой — seq_inner_sub_r (:58, разность во втором аргументе; в доказательстве кроме ring использована q_sum_minus), сноска 3 называет именно её; вынесение множителя — seq_inner_scale_r (ProcessL2Orthonormal.v:110). Билинейность в полном виде выведена в пробном файле (seq_inner_bilinear_symmetric)."
   },
   {
-   "line": 95,
+   "line": 96,
    "theorem": "ring",
    "external": true,
    "assumptions": "не применимо (тактика)",
@@ -69,18 +70,18 @@
    "note": "`ring` — тактика Rocq, не имя формализации. Ею под q_sum_ext закрывается seq_inner_sym (ProcessL2BesselGeneral.v:45)."
   },
   {
-   "line": 106,
-   "theorem": "Hon",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 107,
+   "theorem": "on_count_le_dim",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "external": true,
    "assumptions": "не применимо (посылка раздела)",
-   "claim": "В коде это *гипотеза* `Hon` раздела об ортонормированных системах — явно предъявленное условие на конкретный набор $e$, а не существование «какого-то базиса».[^4] Система конечна и рациональна; никакого завершённого бесконечного базиса здесь нет и не требуется.",
+   "claim": "В коде это *гипотеза* `Hon` раздела об ортонормированных системах — явно предъявленное условие на первые $K_0$ векторов конкретного набора $e$, а не существование «какого-то базиса».[^4] Таких векторов на $N$ координатах не больше $N$ (доказано: $K_0\\le N$), и всюду ниже $K\\le K_0$. Система конечна и рациональна; никакого завершённого бесконечного базиса здесь нет и не требуется.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "`Hon` — посылка раздела ON (:119; ProcessL2Parseval.v:80; ProcessBestApproximation.v:70), после закрытия раздела — условие каждой теоремы. Она требует $\\langle e_i,e_j\\rangle_N=\\delta_{ij}$ при ВСЕХ натуральных i, j, то есть бесконечного ортонормированного семейства на N координатах; конечной системы она не описывает. Такого семейства нет ни при каком N: on_all_indices_unsat (ProcessL2Orthonormal.v:134). Посылка для конечной системы — одноимённая Hon раздела ONB (ProcessL2Orthonormal.v:189): i, j < K0."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): было «условие на конкретный набор e» — посылка при всех номерах i, j, невыполнимая (on_all_indices_unsat). Теперь условие — на первые K0 векторов. on_count_le_dim : forall e N K0, (forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> K0 <= N (:208). Closed under the global context. std_basis_on : forall N i j, i < N -> j < N -> seq_inner (delta i) (delta j) N == (if Nat.eqb i j then 1 else 0) (ProcessL2Orthonormal.v:323); rot_orthonormal (:361): базис (3/5, 4/5), (−4/5, 3/5) на двух координатах. Closed under the global context."
   },
   {
-   "line": 137,
+   "line": 139,
    "theorem": "inner_proj_swap",
    "file": "src/process/ProcessL2BesselGeneral.v",
    "claim": "На процессном L<sup>2</sup> это утверждение о *перестановке двойной конечной суммы* (дискретная теорема Фубини, доказанная в Части V): внести $h_m$ под внутреннюю сумму, поменять порядок суммирования $m\\leftrightarrow k$, вынести $c_k$.[^5]",
@@ -89,70 +90,70 @@
    "note": "inner_proj_swap (:81): forall e coef h K N, seq_inner h (fun m => q_sum (fun k => coef k * e k m) K) N == q_sum (fun k => coef k * seq_inner h (e k) N) K — без посылок, для любых e, coef, h. Три шага доказательства те, что названы. q_sum_swap разобрана в Главе 5.7."
   },
   {
-   "line": 153,
-   "theorem": "proj_ortho",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 155,
+   "theorem": "proj_ortho_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Сначала промежуточное: $K$-й вектор ортогонален оболочке первых $K$, поскольку каждое слагаемое $c_k\\inner{e_K}{e_k}$ при $k<K$ зануляется ортонормированностью.[^6]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "proj_ortho (:123) стоит под невыполнимой посылкой Hon (:119; on_all_indices_unsat). С выполнимой посылкой то же доказано: proj_ortho_b : K < K0 -> seq_inner (e K) (fun m => q_sum (fun k => coef k * e k m) K) N == 0 (ProcessL2Orthonormal.v:193)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): proj_ortho_b : K < K0 -> seq_inner (e K) (fun m => q_sum (fun k => coef k * e k m) K) N == 0 (ProcessL2Orthonormal.v:193). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 155,
-   "theorem": "resid_ortho",
-   "file": "src/process/ProcessBestApproximation.v",
+   "line": 157,
+   "theorem": "resid_ortho_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Следствие: для всех уже снятых направлений $j<K$ выполнено $\\inner{e_j}{r_K}_N = c_j - c_j = 0$ — остаток «не виден» ни одному из векторов, по которым уже разложились.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Это утверждение — resid_ortho (:87; через proj_coord, :74), которую страница не называет; сноска 6 называет coef_e_resid — утверждение о следующем, K-м направлении. resid_ortho стоит под невыполнимой посылкой Hon (:70). С выполнимой посылкой в ProcessL2Orthonormal.v такой леммы нет; выведена в пробном файле: resid_ortho_b (j < K <= K0), Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся) (имя теперь названо в сноске 6): resid_ortho_b : j < K -> K <= K0 -> seq_inner (e j) (fun m => f m - q_sum (fun k => seq_inner (e k) f N * e k m) K) N == 0 (:138); через proj_coord_b : j < K -> K <= K0 -> seq_inner (e j) (fun m => q_sum (fun k => coef k * e k m) K) N == coef j (:125). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 168,
-   "theorem": "resid_norm",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 170,
+   "theorem": "resid_norm_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Это *теорема Пифагора* для ортогонального разложения: энергия функции распадается на захваченную проекцией ($\\sum_{k<K} c_k^2$) и оставшуюся ($\\norm{r_K}^2$), без перекрёстных членов.[^7]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "resid_norm (:150) — формула страницы, но под невыполнимой посылкой Hon (:119; on_all_indices_unsat). С выполнимой посылкой: resid_norm_b : K <= K0 -> ‖f − P_K‖² == ‖f‖² − Σ_{k<K}⟨e_k,f⟩² (ProcessL2Orthonormal.v:231). Ход доказательства в сноске 7 описан верно."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): resid_norm_b : K <= K0 -> ‖f − P_K‖² == seq_inner f f N - q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K (ProcessL2Orthonormal.v:231); частный случай gen_resid (:208, произвольные веса; индукция по K). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 184,
-   "theorem": "best_approx_unique",
-   "file": "src/process/ProcessBestApproximation.v",
+   "line": 186,
+   "theorem": "best_approx_unique_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "и это *доказанное тождество*, а не эвристика: правая часть не меньше $\\norm{f-P_K}^2$, с равенством тогда и только тогда, когда $a_k = c_k$ для всех $k<K$ — коэффициенты Фурье суть *единственный* минимум.[^8]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: best_approx_eq (:141), best_approx_ge (:161), best_approx_unique (:176) имеют вид, названный страницей, но стоят под невыполнимой посылкой Hon (:70). С выполнимой посылкой в ProcessL2Orthonormal.v есть только неравенство best_approx_b (:256); тождество и единственность выведены в пробном файле: best_approx_eq_b, best_approx_unique_b (K <= K0), Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): best_approx_unique_b : K <= K0 -> (‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖²) <-> (forall k, k < K -> a k == seq_inner (e k) f N) (:178); из best_approx_eq_b (:161) и q_sum_sq_zero. Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 202,
-   "theorem": "bessel_general",
-   "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "Энергия, захваченная любым числом $K$ направлений, не превосходит полной энергии функции.[^9]",
+   "line": 204,
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Энергия, захваченная любым числом $K\\le K_0$ направлений, не превосходит полной энергии функции.[^9]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "bessel_general (:175): forall K, Σ_{k<K}⟨e_k,f⟩² <= ‖f‖² — под невыполнимой посылкой Hon (:119). С выполнимой посылкой: bessel_b, K <= K0 (ProcessL2Orthonormal.v:243). «Любое число K» при этом не больше N: ортонормированных векторов на N координатах не больше N (пробный файл, on_count_le_dim)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): было «любым числом K направлений»; ортонормированных векторов на N координатах не больше N (on_count_le_dim, ProcessOrthonormalFourier.v:208). bessel_b : K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (ProcessL2Orthonormal.v:243). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 225,
-   "theorem": "energy_split",
-   "file": "src/process/ProcessL2Parseval.v",
+   "line": 227,
+   "theorem": "energy_split_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Полная энергия функции в точности делится между тем, что схватило разложение, и тем, что осталось в невязке.[^10]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "energy_split (:91) — под невыполнимой посылкой Hon (:80). С выполнимой посылкой: energy_split_b, K <= K0 (ProcessL2Orthonormal.v:276). Сноска 10 описывает доказательство верно (resid_norm и lra)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): energy_split_b : K <= K0 -> Σ_{k<K} c_k² + ‖f − P_K‖² == seq_inner f f N (ProcessL2Orthonormal.v:276). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 232,
-   "theorem": "parseval_iff_resid_zero",
-   "file": "src/process/ProcessL2Parseval.v",
+   "line": 234,
+   "theorem": "parseval_iff_resid_zero_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Расщепление энергии превращает его в точную эквивалентность: *Парсеваль выполнен тогда и только тогда, когда норма остатка равна нулю*.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "parseval_iff_resid_zero (:98; страница имени не называет) — под невыполнимой посылкой Hon (:80). С выполнимой посылкой: parseval_iff_resid_zero_b, K <= K0 (ProcessL2Orthonormal.v:286)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): parseval_iff_resid_zero_b : K <= K0 -> (Σ_{k<K} c_k² == seq_inner f f N) <-> (‖f − P_K‖² == 0) (ProcessL2Orthonormal.v:286). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 233,
+   "line": 235,
    "theorem": "q_sum_sq_zero",
    "file": "src/process/ProcessL2Parseval.v",
    "claim": "А над ℚ конечная сумма квадратов равна нулю в точности тогда, когда зануляется каждое слагаемое; значит, нулевой дефект эквивалентен тому, что разложение *полностью восстанавливает* $f$ на всех $N$ координатах:",
@@ -161,25 +162,25 @@
    "note": "q_sum_sq_zero (:52): q_sum (fun i => g i * g i) N == 0 -> forall i, i < N -> g i == 0 — без посылок раздела. Леммой записана одна сторона (сноски 8 и 11 называют её же); обратная использована в parseval_of_complete (:107) без отдельной леммы. Лемма объявлена в ProcessL2Parseval.v, а не в ProcessBestApproximation.v (сноска 8)."
   },
   {
-   "line": 244,
-   "theorem": "parseval_iff_complete",
-   "file": "src/process/ProcessL2Parseval.v",
+   "line": 246,
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Это и есть честное конструктивное содержание формулы «Парсеваль $=$ критерий полноты».[^11]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "parseval_iff_complete (:142) имеет вид формулы страницы, но стоит под невыполнимой посылкой Hon (:80): критерию не удовлетворяет ни одна система. С выполнимой посылкой: parseval_iff_complete_b, K <= K0 (ProcessL2Orthonormal.v:296). Сноска 11 описывает опоры верно."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся): parseval_iff_complete_b : K <= K0 -> (Σ_{k<K} c_k² == seq_inner f f N) <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 254,
-   "theorem": "parseval_std_concrete",
-   "file": "src/process/ProcessL2Parseval.v",
+   "line": 256,
+   "theorem": "parseval_3_4_from_criterion",
+   "file": "src/process/ProcessOrthonormalFourier.v",
    "claim": "Чтобы критерий не остался пустым, предъявлен явный свидетель достижения равенства: стандартный базис на $N=2$ координатах и функция $f=(3,4)$ дают $\\sum_{k<2} c_k^2 = 3^2 + 4^2 = 25 = \\norm{f}^2$ — полнота на двух координатах.[^12]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Пример (:156) верен как вычисление равенства 25 = 25. Примером критерия parseval_iff_complete он не является: стандартный базис посылке Hon не удовлетворяет ($\\langle e_N,e_N\\rangle_N=0$ — std_basis_fails_all_indices, ProcessL2Orthonormal.v:166), и критерий остаётся без примера; восстановление f («полнота») в примере не записано. Для критерия с выполнимой посылкой свидетели есть: parseval_std_all (ProcessL2Orthonormal.v:337, всякое N и всякое f), parseval_rot; пример (3,4) как следствие критерия — пробный файл, parseval_3_4_from_criterion."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся) (сноска 12 переписана): свидетель привязан к критерию. parseval_3_4_from_criterion (:246): для f = (3, 4) и стандартного базиса двух координат — равенство Парсеваля (из parseval_std_all, ProcessL2Orthonormal.v:337) /\\ forall m, m < 2 -> q_sum (fun k => seq_inner (delta k) f 2 * delta k m) 2 == f m (по критерию parseval_iff_complete_b, :296 того же файла, с посылкой std_basis_on). Closed under the global context. Само равенство 25 = 25 — parseval_std_concrete (ProcessL2Parseval.v:156)."
   },
   {
-   "line": 262,
+   "line": 264,
    "theorem": null,
    "file": "src/process/ProcessL2Parseval.v",
    "claim": "Парсеваль для *бесконечного* базиса ($K,N\\to\\infty$), утверждение, что замкнутая оболочка системы есть всё пространство, и безусловное равенство для завершённого ортонормированного базиса — всё это роль-пределы: ToS не строит завершённый базис.[^13]",
@@ -188,27 +189,27 @@
    "note": "Статус честный. Шапка файла (строки 18–21) говорит это дословно (сноска 13); объектов с суммой по всем координатам и завершённого базиса в названных файлах нет."
   },
   {
-   "line": 266,
-   "theorem": "parseval_iff_complete",
-   "file": "src/process/ProcessL2Parseval.v",
-   "claim": "Доказано конечное: критерий полноты на $N$ координатах.",
+   "line": 268,
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Доказано конечное: критерий полноты на $N$ координатах и полнота всякой системы из $N$ ортонормированных векторов — при $K=N$ разложение восстанавливает любую $f$.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: названный главой критерий parseval_iff_complete (:142) доказан под невыполнимой посылкой Hon (:80). Критерий для конечной системы доказан в ProcessL2Orthonormal.v: parseval_iff_complete_b (:296)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (добавлена полнота системы из N векторов): parseval_iff_complete_b : K <= K0 -> (Σ_{k<K} c_k² == seq_inner f f N) <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 272,
-   "theorem": "Hon",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 274,
+   "theorem": "std_basis_on",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "external": true,
    "assumptions": "не применимо (посылка раздела)",
    "claim": "Всё предыдущее говорилось об *абстрактной* ортонормированной системе, заданной гипотезой `Hon`. Закономерен вопрос: существует ли конкретная *рациональная* система, на которой работает эта геометрия?",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Для посылки Hon, как она записана (:119), ответ — нет: ей не удовлетворяет никакая система (on_all_indices_unsat). Для посылки с границей (ProcessL2Orthonormal.v:189) рациональные ортонормированные системы есть без нормировки: стандартный базис (std_basis_on, :323) и повёрнутый базис (rot_orthonormal, :361); нормированная система Уолша рациональна при N = 4^j (пробный файл, walsh_4j_orthonormal)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (следом добавлена фраза о простейших примерах): условию с границей K0 удовлетворяют стандартный и повёрнутый базисы. std_basis_on : forall N i j, i < N -> j < N -> seq_inner (delta i) (delta j) N == (if Nat.eqb i j then 1 else 0) (ProcessL2Orthonormal.v:323); rot_orthonormal (:361): базис (3/5, 4/5), (−4/5, 3/5) на двух координатах. Closed under the global context."
   },
   {
-   "line": 277,
+   "line": 280,
    "theorem": "hadamard_orthogonal",
    "file": "src/process/ProcessWalshHadamard.v",
    "claim": "Но буквальная *ортонормированность* $\\inner{e_i}{e_j}=\\delta_{ij}$ требует нормировки $1/\\sqrt N$ — и это уже следующий слой.",
@@ -217,7 +218,7 @@
    "note": "Для системы Уолша верно: hadamard_orthogonal (:152) даёт квадрат нормы 2^k, а не 1. Рациональный множитель есть только при чётном k (пробный файл: walsh_normalized_on, walsh_odd_no_rational_norm)."
   },
   {
-   "line": 287,
+   "line": 291,
    "theorem": "hadamard_orthogonal",
    "file": "src/process/ProcessWalshHadamard.v",
    "claim": "Это доказано *для всех* $N=2^k$ как точное тождество над ℚ (индукцией по рекурсивной структуре Сильвестра), без аксиом.[^14]",
@@ -226,25 +227,26 @@
    "note": "hadamard_orthogonal (:152): forall k i i', i < pow2 k -> i' < pow2 k -> q_sum (fun j => had k i j * had k i' j) (pow2 k) == (if Nat.eqb i i' then inject_Z (Z.of_nat (pow2 k)) else 0); индукция по k. Теорема говорит о строках (сумма по второму индексу), страница — о столбцах; матрица симметрична (had_symmetric, ProcessFourierON.v:44), так что это одно и то же."
   },
   {
-   "line": 288,
-   "theorem": "on_all_indices_unsat",
-   "file": "src/process/ProcessL2Orthonormal.v",
+   "line": 292,
+   "theorem": "walsh_normalized_on",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
    "claim": "Чтобы получить из них ортонормированную систему в смысле `Hon` ($\\inner{e_i}{e_j}=\\delta_{ij}$), нужно нормировать: $e_k = H_k/\\sqrt N$.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Посылке Hon (все номера i, j) нормированная система Уолша не удовлетворяет, как и никакая другая: on_all_indices_unsat (:134). При N = 4 строка с номером 4 повторяет строку 2 (пробный файл, normalized_walsh4_fails_Hon). В смысле посылки с границей (i, j < N) строки H_i/s при s² = N ортонормированы — в формализации этого нет, выведено в пробном файле (walsh_normalized_on)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 2, слово автора) (формализацией; текст страницы не менялся) (следующая фраза переписана): walsh_normalized_on : s * s == inject_Z (Z.of_nat (pow2 k)) -> forall i j, i < pow2 k -> j < pow2 k -> seq_inner (walsh_n k s i) (walsh_n k s j) (pow2 k) == (if Nat.eqb i j then 1 else 0) (:390) — посылка Hon раздела ONB (ProcessL2Orthonormal.v) с K0 = N; walsh_normalized_bessel (:408), walsh_normalized_parseval (:420), walsh_normalized_complete (:444). Рациональное s есть в точности при чётном k (:512). Closed under the global context."
   },
   {
-   "line": 290,
-   "theorem": null,
-   "file": "src/process/ProcessHadamardGate.v",
-   "claim": "И вот здесь — единственная иррациональность: множитель $1/\\sqrt N$ рационален лишь когда $N$ — точный квадрат (например $N=4$, $\\sqrt N=2$), а в общем случае вводится *абстрактным параметром* $s$ с условием $s^2=N$, в полном согласии с приёмом Части VI (корень параметризуется, а в наблюдаемых величинах сокращается).",
+   "line": 294,
+   "theorem": "walsh_4j_orthonormal",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "И вот здесь — единственная иррациональность: множитель $1/\\sqrt N$ рационален лишь когда $N$ — точный квадрат, то есть при чётном $k$ ($N=4^j$, $\\sqrt N=2^j$; например $N=4$, $\\sqrt N=2$): тогда нормированные строки удовлетворяют `Hon`, и это доказано.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "В опорных файлах главы параметра s нет. Он есть в ProcessHadamardGate.v (:68–69) только для N = 2, имеет тип Q и посылку s2inv * s2inv * 2 == 1 без рационального решения; при нечётном k рационального s с s² = 2^k нет вовсе (пробный файл: hgate_premise_unsat, walsh_odd_no_rational_norm). Приём Части VI стоит под такой же невыполнимой посылкой (ladder_premise_unsatisfiable, ProcessLadderRational.v:69). Без корня и без параметра теория доводится для ортогональной системы: пробный файл, раздел OG, и для Уолша при всяком k — walsh_bessel, walsh_best_approx, walsh_parseval_divided, walsh_complete."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 2, слово автора): было «в общем случае вводится абстрактным параметром s с условием s² = N» — такого параметра в формализации нет, а рационального s при нечётном k не существует. walsh_4j_orthonormal : i < pow2 (2 * j) -> i' < pow2 (2 * j) -> seq_inner (walsh_n (2 * j) s i) (walsh_n (2 * j) s i') (pow2 (2 * j)) == (if Nat.eqb i i' then 1 else 0) при s = inject_Z (Z.of_nat (pow2 j)) (:472); walsh_n k s i m := had k i m / s (:385); пример N = 4, s = 2 — walsh_4_orthonormal (:484). Closed under the global context. walsh_rational_norm_iff_even : forall k, (exists s : Q, s * s == inject_Z (Z.of_nat (pow2 k))) <-> Nat.Even k (:512); из walsh_even_norm_exists (:464) и walsh_odd_no_rational_norm (:492). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 295,
+   "line": 302,
    "theorem": "parseval_walsh",
    "file": "src/process/ProcessFourierON.v",
    "claim": "Само же сохранение энергии не требует нормировки и доказано напрямую: для ненормированного преобразования Уолша",
@@ -253,16 +255,17 @@
    "note": "parseval_walsh (:91): forall k f, seq_inner (op_apply (had k) f (pow2 k)) (op_apply (had k) f (pow2 k)) (pow2 k) == inject_Z (Z.of_nat (pow2 k)) * seq_inner f f (pow2 k) — для всякого k и всякого f, без посылок."
   },
   {
-   "line": 303,
-   "theorem": null,
-   "file": "src/process/ProcessFourierON.v",
-   "claim": "Переход к нормированной системе делит обе части на $N$ и возвращает Парсеваль в форме $\\sum_k c_k^2 = \\norm{f}^2$.",
+   "line": 310,
+   "theorem": "walsh_parseval_divided",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Деление обеих частей на $N$ возвращает Парсеваль в форме $\\sum_k c_k^2 = \\norm{f}^2$ с $c_k^2=\\inner{H_k}{f}^2/N$ — при всяком $k$ и без корня.",
    "page_price": "",
    "verdict": "ok",
-   "note": "Страница доказанным это не называет; теоремой в формализации не записано (шапка файла, строки 15–18, относит это к границе). Выведено в пробном файле: Σ_{i<N}⟨H_i,f⟩²/N == ‖f‖² при всяком k без корня (walsh_parseval_divided) и Σ c_i² == ‖f‖² для H_i/s при s² = N (walsh_normalized_parseval)."
+   "note": "исправлено 18.11 (Часть VII, шаг 2, слово автора): было «Переход к нормированной системе делит обе части на N» — нормированная система над ℚ есть только при чётном k; делённая форма равенства верна при всяком k. walsh_parseval_divided : forall k f, q_sum (fun i => seq_inner (had k i) f (pow2 k) * seq_inner (had k i) f (pow2 k) / inject_Z (Z.of_nat (pow2 k))) (pow2 k) == seq_inner f f (pow2 k) (:336); из parseval_walsh (ProcessFourierON.v:91). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 316,
+   "line": 323,
    "theorem": "System",
    "file": "src/TheoryOfSystems_Core_ERR.v",
    "claim": "Оговорка об уровне: «система разложения» здесь — содержательная *интерпретация* конструкции (скалярное произведение плюс ортонормированность плюс проекция), а не объект, буквально объявленный в коде как `System`.",
@@ -271,26 +274,26 @@
    "note": "Оговорка честная: Record System (:203) в названных главой файлах не используется (слово System в них не встречается)."
   },
   {
-   "line": 386,
+   "line": 393,
    "theorem": "hadamard_orthogonal",
    "file": "src/process/ProcessWalshHadamard.v",
-   "claim": "Следующая глава предъявляет конкретную рациональную ортонормированную систему во всей полноте — преобразование Уолша–Адамара. Там абстрактная гипотеза `Hon` сменяется доказанным тождеством $H_N^{\\mathsf T}H_N = N\\cdot I$, а сохранение энергии — дискретным равенством Планшереля $\\norm{Hf}^2 = N\\norm{f}^2$: Фурье, построенный без единой трансцендентности.",
+   "claim": "Следующая глава предъявляет конкретную рациональную ортогональную систему во всей полноте — преобразование Уолша–Адамара. Там абстрактная гипотеза `Hon` сменяется доказанным тождеством $H_N^{\\mathsf T}H_N = N\\cdot I$, а сохранение энергии — дискретным равенством Планшереля $\\norm{Hf}^2 = N\\norm{f}^2$: Фурье, построенный без единой трансцендентности.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Доказанное тождество (hadamard_orthogonal, :152) — ортогональность с квадратом нормы N; система Уолша ортогональна, но не ортонормирована, что сама глава оговаривает выше (стр. 275–278). Слово «ортонормированную» здесь сильнее доказанного; гипотезе Hon эта система не удовлетворяет."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 2, слово автора): было «ортонормированную систему» — строки Уолша ортогональны с квадратом нормы N. hadamard_orthogonal (ProcessWalshHadamard.v:152): при i, i' < 2^k сумма произведений строк равна 2^k при i = i' и 0 иначе. Closed under the global context."
   },
   {
-   "line": 394,
+   "line": 401,
    "theorem": null,
-   "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "Опорные файлы — `ProcessL2BesselGeneral.v` (каталог `src/process/` Rocq-репозитория ToS, 10 доказанных утверждений, 0 `Admitted`, 0 аксиом) и `ProcessL2Parseval.v` (7 утверждений, 0 аксиом).",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Опорные файлы (каталог `src/process/` Rocq-репозитория ToS) — `ProcessL2Orthonormal.v` (36 доказанных утверждений) и `ProcessOrthonormalFourier.v` (30); оба — 0 `Admitted`, 0 аксиом.",
    "page_price": "0 аксиом",
    "verdict": "ok",
-   "note": "Числа верны: 10 и 7 строк Qed; строк Axiom, Parameter, Admitted нет; Print Assumptions названных объявлений — Closed under the global context. Из десяти утверждений первого файла четыре, из семи второго пять стоят под невыполнимой посылкой Hon (см. запись к стр. 35).",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): в ProcessL2Orthonormal.v 36 строк Qed, в ProcessOrthonormalFourier.v — 30; Admitted, Axiom, Parameter в них нет; все объявления — Closed under the global context.",
    "assumptions": "названные в главе объявления обоих файлов: Closed under the global context"
   },
   {
-   "line": 394,
+   "line": 401,
    "theorem": "Admitted",
    "external": true,
    "assumptions": "не применимо (ключевое слово)",
@@ -300,45 +303,45 @@
    "note": "Ключевое слово Rocq, не имя. В ProcessL2BesselGeneral.v строк «Admitted.» нет (слово стоит только в шапке, :26)."
   },
   {
-   "line": 394,
+   "line": 401,
    "theorem": null,
    "file": "src/process/ProcessFourierON.v",
-   "claim": "Имена лемм в сносках ниже — из них и из `ProcessFourierON.v`.",
+   "claim": "Имена лемм в сносках ниже — из этих файлов и из `ProcessFourierON.v`.",
    "page_price": "",
    "verdict": "ok",
    "note": "Неполно, но остальные файлы сноски называют сами: ProcessCompactSpectral.v (сн. 2), ProcessBestApproximation.v (сн. 8), ProcessWalshHadamard.v (сн. 14), PythagoreanTriples.v (сн. 12). Без файла остались q_sum_swap и q_sum_scale (сн. 5): они объявлены в ProcessFubiniGeneral.v."
   },
   {
-   "line": 396,
+   "line": 403,
    "theorem": "seq_inner_sub_r",
    "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "`seq_inner_sym` (симметрия) и `seq_inner_sub_r` (линейность по разности во втором аргументе) в `ProcessL2BesselGeneral.v`; оба — 0 аксиом.",
+   "claim": "`seq_inner_sym` (симметрия) и `seq_inner_sub_r` (линейность по разности во втором аргументе) в `ProcessL2BesselGeneral.v`;",
    "page_price": "0 аксиом",
    "verdict": "ok",
    "note": "seq_inner_sub_r (:58): seq_inner h (fun m => a m - b m) N == seq_inner h a N - seq_inner h b N — как сказано; посылок нет."
   },
   {
-   "line": 397,
+   "line": 404,
    "theorem": "Hon",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "external": true,
    "assumptions": "не применимо (посылка раздела)",
-   "claim": "`Hypothesis Hon : forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)` в обоих файлах.",
+   "claim": "`Hypothesis Hon : forall i j, (i < K0)%nat -> (j < K0)%nat -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)` в `ProcessL2Orthonormal.v` и `ProcessOrthonormalFourier.v`.",
    "page_price": "",
    "verdict": "ok",
-   "note": "Текст посылки приведён дословно: ProcessL2BesselGeneral.v:119 и ProcessL2Parseval.v:80; та же строка — ProcessBestApproximation.v:70 и ProcessFourierSeriesL2.v:47. О выполнимости — запись к стр. 106."
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): посылка разделов ONB (ProcessL2Orthonormal.v:189), OrthonormalResidual, FourierError (ProcessOrthonormalFourier.v) — дословно."
   },
   {
-   "line": 397,
+   "line": 404,
    "theorem": "on_all_indices_unsat",
    "file": "src/process/ProcessL2Orthonormal.v",
-   "claim": "Конкретная система, удовлетворяющая `Hon` (нормированный Уолш), — в § «Конкретная ортогональная система: Уолш–Адамар».",
+   "claim": "В `ProcessL2BesselGeneral.v`, `ProcessL2Parseval.v` и `ProcessBestApproximation.v` то же условие записано для всех номеров $i,j$; на $N$ координатах оно невыполнимо (`on_all_indices_unsat`), и теоремы под ним примеров не имеют.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Системы, удовлетворяющей Hon, не существует: on_all_indices_unsat (:134) — forall e N, ~ (forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)). Нормированная система Уолша в формализации не построена; для посылки с границей (i, j < N) её ортонормированность при s² = N выведена в пробном файле (walsh_normalized_on)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): было «Конкретная система, удовлетворяющая Hon (нормированный Уолш)» — такой системы нет. on_all_indices_unsat : forall e N, ~ (forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) (ProcessL2Orthonormal.v:134). Closed under the global context."
   },
   {
-   "line": 398,
+   "line": 405,
    "theorem": "q_sum_swap",
    "file": "src/process/ProcessFubiniGeneral.v",
    "claim": "`inner_proj_swap` в `ProcessL2BesselGeneral.v`: доказывается через `q_sum_swap` (перестановка порядка суммирования) и `q_sum_scale`. 0 аксиом.",
@@ -347,7 +350,7 @@
    "note": "q_sum_swap (:78): forall f N M, dsum_xy f N M == dsum_yx f N M — равенство повторных конечных сумм; использована в inner_proj_swap (ProcessL2BesselGeneral.v:92). Объявлена в ProcessFubiniGeneral.v — сноска файла не называет."
   },
   {
-   "line": 398,
+   "line": 405,
    "theorem": "q_sum_scale",
    "file": "src/process/ProcessFubiniGeneral.v",
    "claim": "`inner_proj_swap` в `ProcessL2BesselGeneral.v`: доказывается через `q_sum_swap` (перестановка порядка суммирования) и `q_sum_scale`. 0 аксиом.",
@@ -356,71 +359,71 @@
    "note": "q_sum_scale (:63): q_sum (fun i => c * g i) N == c * q_sum g N; использована в inner_proj_swap дважды (ProcessL2BesselGeneral.v:89, :97). Объявлена в ProcessFubiniGeneral.v."
   },
   {
-   "line": 399,
-   "theorem": "coef_e_resid",
-   "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "Отсюда `coef_e_resid`: $\\inner{e_K}{f-P_K}_N = \\inner{e_K}{f}_N$ — проекция не трогает ещё не снятую координату. Оба в `ProcessL2BesselGeneral.v`, 0 аксиом.",
+   "line": 406,
+   "theorem": "coef_e_resid_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Отсюда `coef_e_resid_b`: $\\inner{e_K}{f-P_K}_N = \\inner{e_K}{f}_N$ — проекция не трогает ещё не снятую координату.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "coef_e_resid (:139) — формула сноски, под невыполнимой посылкой Hon (:119). С выполнимой посылкой в ProcessL2Orthonormal.v отдельной леммы нет (шаг встроен в gen_resid, :224–225); выведена в пробном файле: coef_e_resid_b (K < K0), Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): coef_e_resid_b : K < K0 -> seq_inner (e K) (fun m => f m - q_sum (fun k => seq_inner (e k) f N * e k m) K) N == seq_inner (e K) f N (:149). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 400,
+   "line": 407,
    "theorem": "seq_inner_resid",
    "file": "src/process/ProcessL2BesselGeneral.v",
-   "claim": "`resid_norm` в `ProcessL2BesselGeneral.v`: доказывается индукцией по $K$ через тождество $\\norm{F-cE}^2 = \\norm{F}^2 - 2c\\inner{E}{F} + c^2\\norm{E}^2$ (`seq_inner_resid`) и ортогональность остатка. 0 аксиом.",
+   "claim": "`resid_norm_b` в `ProcessL2Orthonormal.v` ($K\\le K_0$): частный случай общего тождества остатка для произвольных весов `gen_resid`, которое доказывается индукцией по $K$ через тождество $\\norm{F-cE}^2 = \\norm{F}^2 - 2c\\inner{E}{F} + c^2\\norm{E}^2$ (`seq_inner_resid`) и ортогональность проекции `proj_ortho_b`. 0 аксиом.",
    "page_price": "0 аксиом",
    "verdict": "ok",
    "note": "seq_inner_resid (:69): тождество сноски для любых F, E, c, N, без посылок. Ход доказательства resid_norm описан верно (индукция по K, seq_inner_resid, coef_e_resid). О посылке самой resid_norm — запись к стр. 168."
   },
   {
-   "line": 401,
-   "theorem": "best_approx_eq",
-   "file": "src/process/ProcessBestApproximation.v",
-   "claim": "Тождество наилучшего приближения — `best_approx_eq`;",
+   "line": 408,
+   "theorem": "best_approx_eq_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Тождество наилучшего приближения — `best_approx_eq_b`;",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "best_approx_eq (:141): ‖f − Σa_k e_k‖² == ‖f − P_K‖² + Σ_{k<K}(a_k − ⟨e_k,f⟩)² — под невыполнимой посылкой Hon (:70). С выполнимой посылкой тождества в ProcessL2Orthonormal.v нет; выведено в пробном файле: best_approx_eq_b (K <= K0), Closed under the global context."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): best_approx_eq_b : K <= K0 -> ‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖² + q_sum (fun k => (a k - seq_inner (e k) f N) * (a k - seq_inner (e k) f N)) K (:161). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 401,
-   "theorem": "best_approx_ge",
-   "file": "src/process/ProcessBestApproximation.v",
-   "claim": "следствие-минимум $\\norm{f-P_K}^2\\le\\norm{f-\\sum a_k e_k}^2$ — `best_approx_ge`;",
+   "line": 408,
+   "theorem": "best_approx_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Следствие-минимум $\\norm{f-P_K}^2\\le\\norm{f-\\sum a_k e_k}^2$ — `best_approx_b` в `ProcessL2Orthonormal.v`.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "best_approx_ge (:161) — под невыполнимой посылкой Hon (:70). С выполнимой посылкой то же доказано: best_approx_b, K <= K0 (ProcessL2Orthonormal.v:256)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): best_approx_b : K <= K0 -> ‖f − P_K‖² <= ‖f − Σ_{k<K} a_k e_k‖² для любых весов a (ProcessL2Orthonormal.v:256). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 401,
-   "theorem": "best_approx_unique",
-   "file": "src/process/ProcessBestApproximation.v",
-   "claim": "единственность (равенство $\\Leftrightarrow$ $a_k=c_k$) — `best_approx_unique` (через лемму «конечная сумма квадратов над ℚ равна нулю лишь когда каждое слагаемое нуль», `q_sum_sq_zero`). Все — в `ProcessBestApproximation.v`, 0 аксиом.",
+   "line": 408,
+   "theorem": "best_approx_unique_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "единственность (равенство $\\Leftrightarrow$ $a_k=c_k$ при $k<K$) — `best_approx_unique_b` (через лемму «конечная сумма квадратов над ℚ равна нулю лишь когда каждое слагаемое нуль», `q_sum_sq_zero`); обе — в `ProcessOrthonormalFourier.v`.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "best_approx_unique (:176): равенство остатков <-> forall k, k < K -> a k == ⟨e_k,f⟩ — под невыполнимой посылкой Hon (:70). С выполнимой посылкой выведено в пробном файле: best_approx_unique_b (K <= K0), Closed under the global context. q_sum_sq_zero объявлена в ProcessL2Parseval.v (:52), а не в ProcessBestApproximation.v."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора): best_approx_unique_b : K <= K0 -> (‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖²) <-> (forall k, k < K -> a k == seq_inner (e k) f N) (:178); из best_approx_eq_b (:161) и q_sum_sq_zero. Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 402,
+   "line": 409,
    "theorem": "lra",
    "external": true,
    "assumptions": "не применимо (тактика)",
-   "claim": "`bessel_general` в `ProcessL2BesselGeneral.v`: из `resid_norm` и неотрицательности нормы остатка одним шагом `lra`. 0 аксиом.",
+   "claim": "`bessel_b` в `ProcessL2Orthonormal.v` ($K\\le K_0$): из `resid_norm_b` и неотрицательности нормы остатка одним шагом `lra`. 0 аксиом.",
    "page_price": "0 аксиом",
    "verdict": "ok",
    "note": "`lra` — тактика стандартной библиотеки (Stdlib.micromega.Lqa), не имя формализации. Ход доказательства bessel_general описан верно (ProcessL2BesselGeneral.v:179–184); так же закрывается energy_split (ProcessL2Parseval.v:94, сноска 10)."
   },
   {
-   "line": 402,
-   "theorem": "bessel_general",
-   "file": "src/process/ProcessL2BesselGeneral.v",
+   "line": 409,
+   "theorem": "bessel_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
    "claim": "Это общее неравенство Бесселя для произвольной конечной ортонормированной системы — не привязанное к конкретному базису.",
    "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "После закрытия раздела: forall e N, (forall i j, seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f K, Σ_{k<K}⟨e_k,f⟩² <= ‖f‖². Посылке не удовлетворяет ни одна система (on_all_indices_unsat), в том числе ни одна конечная ортонормированная: теорема не применима ни к какому базису. Неравенство для произвольной конечной ортонормированной системы — bessel_b (ProcessL2Orthonormal.v:243)."
+   "verdict": "ok",
+   "note": "исправлено 18.11 (Часть VII, шаг 1, слово автора) (формализацией; текст страницы не менялся) (имя в сноске заменено): bessel_b : K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K <= seq_inner f f N (ProcessL2Orthonormal.v:243). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context."
   },
   {
-   "line": 405,
+   "line": 412,
    "theorem": "vm_compute",
    "external": true,
    "assumptions": "не применимо (тактика)",
@@ -430,7 +433,7 @@
    "note": "`vm_compute` — тактика Rocq, не имя формализации. Доказательство примера — vm_compute. reflexivity. (ProcessL2Parseval.v:160)."
   },
   {
-   "line": 405,
+   "line": 412,
    "theorem": "three_four_five_is_param_half",
    "file": "src/stdlib/PythagoreanTriples.v",
    "claim": "(Это пифагорова тройка $3,4,5$, прочитанная как сохранение энергии; сама тройка — рациональная точка единичной окружности, значение $t=1/2$ стереографической параметризации, выводимая, а не постулируемая — `PythagoreanTriples.v`.)",
@@ -439,7 +442,7 @@
    "note": "three_four_five_is_param_half (:104): px (1#2) == 3#5 /\\ py (1#2) == 4#5, где px t = (1 − t²)/(1 + t²), py t = 2t/(1 + t²) (:82–83); param_on_circle (:89): всякое рациональное t даёт точку окружности. Closed under the global context."
   },
   {
-   "line": 408,
+   "line": 415,
    "theorem": "parseval_walsh",
    "file": "src/process/ProcessFourierON.v",
    "claim": "`parseval_walsh` в `ProcessFourierON.v`: $\\inner{Hf}{Hf}_N = N \\inner{f}{f}_N$, выведено из самосопряжённости преобразования Уолша и тождества $H(Hf)=N f$. 0 аксиом.",
@@ -448,13 +451,347 @@
    "note": "Утверждение (:91) и ход доказательства совпадают со сноской: adjoint_inner с walsh_op_symmetric (:53) и walsh_HH (:61: op_apply (had k) (op_apply (had k) f (pow2 k)) (pow2 k) m == 2^k * f m при m < 2^k)."
   },
   {
-   "line": 409,
+   "line": 416,
    "theorem": null,
    "file": "src/process/ProcessL2Parseval.v",
    "claim": "Шапки дают разметку прямо: `ProcessL2BesselGeneral.v` — Elements: коэффициенты $c_k$, координаты $e_k(m)$, конечные двойные суммы; Roles: $\\inner{h}{\\sum c_k e_k}$ распределено по разложению, Бессель — энергия по $K$ направлениям; Rules: $\\inner{h}{\\sum c_k e_k}=\\sum c_k\\inner{h}{e_k}$.",
    "page_price": "",
    "verdict": "ok",
    "note": "Пересказ шапок верен: ProcessL2BesselGeneral.v, строки 4–6 и 19–22; ProcessL2Parseval.v, строки 4–8 и 24–28."
+  },
+  {
+   "line": 186,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "best_approx_eq_b : K <= K0 -> ‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖² + q_sum (fun k => (a k - seq_inner (e k) f N) * (a k - seq_inner (e k) f N)) K (:161). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "best_approx_eq_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "и это *доказанное тождество*, а не эвристика: правая часть не меньше $\\norm{f-P_K}^2$, с равенством тогда и только тогда, когда $a_k = c_k$ для всех $k<K$ — коэффициенты Фурье суть *единственный* минимум.[^8]"
+  },
+  {
+   "line": 268,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "full_on_recovers : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) N == f m (:469); full_on_parseval (:491): Σ_{k<N} c_k² == seq_inner f f N для всякой f; через full_on_column_norm (:415) и full_on_dual (:450). Closed under the global context.",
+   "theorem": "full_on_recovers",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Доказано конечное: критерий полноты на $N$ координатах и полнота всякой системы из $N$ ортонормированных векторов — при $K=N$ разложение восстанавливает любую $f$."
+  },
+  {
+   "line": 276,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_basis_on : forall N i j, i < N -> j < N -> seq_inner (delta i) (delta j) N == (if Nat.eqb i j then 1 else 0) (ProcessL2Orthonormal.v:323); rot_orthonormal (:361): базис (3/5, 4/5), (−4/5, 3/5) на двух координатах. Closed under the global context.",
+   "theorem": "rot_orthonormal",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Простейшие предъявлены сразу: стандартный базис и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ удовлетворяют `Hon`."
+  },
+  {
+   "line": 401,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). on_count_le_dim : forall e N K0, (forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> K0 <= N (:208). Closed under the global context.",
+   "theorem": "on_count_le_dim",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "В них условие ортонормированности наложено на первые $K_0$ векторов системы, а теоремы доказаны для $K\\le K_0$."
+  },
+  {
+   "line": 403,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "seq_inner_bilinear_symmetric (:99): симметрия, линейность по второму и по первому аргументу; seq_inner_lin_r (:83), seq_inner_lin_l (:91) — индукция по N и ring. Closed under the global context.",
+   "theorem": "seq_inner_bilinear_symmetric",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "линейность по каждому аргументу в общем виде — `seq_inner_lin_r`, `seq_inner_lin_l`, сводно — `seq_inner_bilinear_symmetric` в `ProcessOrthonormalFourier.v` (индукция по $N$ и `ring`). Все — 0 аксиом."
+  },
+  {
+   "line": 404,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "std_basis_on : forall N i j, i < N -> j < N -> seq_inner (delta i) (delta j) N == (if Nat.eqb i j then 1 else 0) (ProcessL2Orthonormal.v:323); rot_orthonormal (:361): базис (3/5, 4/5), (−4/5, 3/5) на двух координатах. Closed under the global context.",
+   "theorem": "std_basis_on",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "Условию удовлетворяют стандартный базис (`std_basis_on`) и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ (`rot_orthonormal`); $K_0\\le N$ — `on_count_le_dim`."
+  },
+  {
+   "line": 404,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "on_count_le_dim : forall e N K0, (forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> K0 <= N (:208). Closed under the global context.",
+   "theorem": "on_count_le_dim",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Условию удовлетворяют стандартный базис (`std_basis_on`) и повёрнутый рациональный базис $(3/5,4/5)$, $(-4/5,3/5)$ (`rot_orthonormal`); $K_0\\le N$ — `on_count_le_dim`."
+  },
+  {
+   "line": 406,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "proj_ortho_b : K < K0 -> seq_inner (e K) (fun m => q_sum (fun k => coef k * e k m) K) N == 0 (ProcessL2Orthonormal.v:193). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "proj_ortho_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`proj_ortho_b` (`ProcessL2Orthonormal.v`): $\\inner{e_K}{\\sum_{k<K} c_k e_k}_N = 0$ при $K<K_0$."
+  },
+  {
+   "line": 406,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "resid_ortho_b : j < K -> K <= K0 -> seq_inner (e j) (fun m => f m - q_sum (fun k => seq_inner (e k) f N * e k m) K) N == 0 (:138); через proj_coord_b : j < K -> K <= K0 -> seq_inner (e j) (fun m => q_sum (fun k => coef k * e k m) K) N == coef j (:125). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "resid_ortho_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Ортогональность остатка снятым направлениям, $\\inner{e_j}{r_K}_N=0$ при $j<K\\le K_0$, — `resid_ortho_b` (через `proj_coord_b`: $\\inner{e_j}{\\sum_{k<K} c_k e_k}_N=c_j$). Последние три — в `ProcessOrthonormalFourier.v`; все — 0 аксиом."
+  },
+  {
+   "line": 407,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "resid_norm_b : K <= K0 -> ‖f − P_K‖² == seq_inner f f N - q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K (ProcessL2Orthonormal.v:231); частный случай gen_resid (:208, произвольные веса; индукция по K). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "resid_norm_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`resid_norm_b` в `ProcessL2Orthonormal.v` ($K\\le K_0$): частный случай общего тождества остатка для произвольных весов `gen_resid`, которое доказывается индукцией по $K$ через тождество $\\norm{F-cE}^2 = \\norm{F}^2 - 2c\\inner{E}{F} + c^2\\norm{E}^2$ (`seq_inner_resid`) и ортогональность проекции `proj_ortho_b`. 0 аксиом."
+  },
+  {
+   "line": 410,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "energy_split_b : K <= K0 -> Σ_{k<K} c_k² + ‖f − P_K‖² == seq_inner f f N (ProcessL2Orthonormal.v:276). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "energy_split_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`energy_split_b` в `ProcessL2Orthonormal.v` ($K\\le K_0$): прямое следствие `resid_norm_b` (переписывание и `ring`). 0 аксиом."
+  },
+  {
+   "line": 411,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "parseval_iff_complete_b : K <= K0 -> (Σ_{k<K} c_k² == seq_inner f f N) <-> (forall m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) K == f m) (ProcessL2Orthonormal.v:296). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "parseval_iff_complete_b",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`parseval_iff_complete_b` в `ProcessL2Orthonormal.v` ($K\\le K_0$); опирается на `q_sum_sq_zero` («сумма квадратов нуль $\\Rightarrow$ каждый член нуль» над ℚ) и тождество остатка `resid_norm_b`; промежуточная эквивалентность «Парсеваль $\\Leftrightarrow$ нулевая норма остатка» — `parseval_iff_resid_zero_b`. 0 аксиом."
+  },
+  {
+   "line": 412,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "parseval_3_4_from_criterion (:246): для f = (3, 4) и стандартного базиса двух координат — равенство Парсеваля (из parseval_std_all, ProcessL2Orthonormal.v:337) /\\ forall m, m < 2 -> q_sum (fun k => seq_inner (delta k) f 2 * delta k m) 2 == f m (по критерию parseval_iff_complete_b, :296 того же файла, с посылкой std_basis_on). Closed under the global context.",
+   "theorem": "parseval_3_4_from_criterion",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "`parseval_3_4_from_criterion` в `ProcessOrthonormalFourier.v`: стандартный базис удовлетворяет `Hon` (`std_basis_on`), равенство Парсеваля для него выполнено при всяком $N$ и всякой $f$ (`parseval_std_all`), и по критерию `parseval_iff_complete_b` разложение восстанавливает обе координаты $f=(3,4)$."
+  },
+  {
+   "line": 413,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "full_on_recovers : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) N == f m (:469); full_on_parseval (:491): Σ_{k<N} c_k² == seq_inner f f N для всякой f; через full_on_column_norm (:415) и full_on_dual (:450). Closed under the global context.",
+   "theorem": "full_on_recovers",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Критерий — `parseval_iff_complete_b`; полнота системы из $N$ ортонормированных векторов — `full_on_recovers` и `full_on_parseval` (`ProcessOrthonormalFourier.v`), 0 аксиом."
+  },
+  {
+   "line": 403,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "seq_inner_bilinear_symmetric (:99): симметрия, линейность по второму и по первому аргументу; seq_inner_lin_r (:83), seq_inner_lin_l (:91) — индукция по N и ring. Closed under the global context.",
+   "theorem": "seq_inner_lin_r",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "линейность по каждому аргументу в общем виде — `seq_inner_lin_r`, `seq_inner_lin_l`, сводно — `seq_inner_bilinear_symmetric` в `ProcessOrthonormalFourier.v` (индукция по $N$ и `ring`). Все — 0 аксиом."
+  },
+  {
+   "line": 403,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "seq_inner_bilinear_symmetric (:99): симметрия, линейность по второму и по первому аргументу; seq_inner_lin_r (:83), seq_inner_lin_l (:91) — индукция по N и ring. Closed under the global context.",
+   "theorem": "seq_inner_lin_l",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "линейность по каждому аргументу в общем виде — `seq_inner_lin_r`, `seq_inner_lin_l`, сводно — `seq_inner_bilinear_symmetric` в `ProcessOrthonormalFourier.v` (индукция по $N$ и `ring`). Все — 0 аксиом."
+  },
+  {
+   "line": 406,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "resid_ortho_b : j < K -> K <= K0 -> seq_inner (e j) (fun m => f m - q_sum (fun k => seq_inner (e k) f N * e k m) K) N == 0 (:138); через proj_coord_b : j < K -> K <= K0 -> seq_inner (e j) (fun m => q_sum (fun k => coef k * e k m) K) N == coef j (:125). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "proj_coord_b",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Ортогональность остатка снятым направлениям, $\\inner{e_j}{r_K}_N=0$ при $j<K\\le K_0$, — `resid_ortho_b` (через `proj_coord_b`: $\\inner{e_j}{\\sum_{k<K} c_k e_k}_N=c_j$). Последние три — в `ProcessOrthonormalFourier.v`; все — 0 аксиом."
+  },
+  {
+   "line": 407,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "resid_norm_b : K <= K0 -> ‖f − P_K‖² == seq_inner f f N - q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N) K (ProcessL2Orthonormal.v:231); частный случай gen_resid (:208, произвольные веса; индукция по K). Посылка раздела — ортонормированность первых K0 векторов: forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0); теоремы — при K <= K0. Посылка выполнима: std_basis_on (ProcessL2Orthonormal.v:323), rot_orthonormal (:361). Closed under the global context.",
+   "theorem": "gen_resid",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`resid_norm_b` в `ProcessL2Orthonormal.v` ($K\\le K_0$): частный случай общего тождества остатка для произвольных весов `gen_resid`, которое доказывается индукцией по $K$ через тождество $\\norm{F-cE}^2 = \\norm{F}^2 - 2c\\inner{E}{F} + c^2\\norm{E}^2$ (`seq_inner_resid`) и ортогональность проекции `proj_ortho_b`. 0 аксиом."
+  },
+  {
+   "line": 412,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "parseval_std_all : forall f N, q_sum (fun k => seq_inner (delta k) f N * seq_inner (delta k) f N) N == seq_inner f f N (ProcessL2Orthonormal.v:337). Closed under the global context.",
+   "theorem": "parseval_std_all",
+   "file": "src/process/ProcessL2Orthonormal.v",
+   "claim": "`parseval_3_4_from_criterion` в `ProcessOrthonormalFourier.v`: стандартный базис удовлетворяет `Hon` (`std_basis_on`), равенство Парсеваля для него выполнено при всяком $N$ и всякой $f$ (`parseval_std_all`), и по критерию `parseval_iff_complete_b` разложение восстанавливает обе координаты $f=(3,4)$."
+  },
+  {
+   "line": 412,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "parseval_std_concrete (ProcessL2Parseval.v:156): для стандартного базиса двух координат и f = (3, 4) сумма квадратов коэффициентов равна seq_inner f f 2 (25 = 25); пример вне раздела ON, посылки Hon не берёт. Closed under the global context.",
+   "theorem": "parseval_std_concrete",
+   "file": "src/process/ProcessL2Parseval.v",
+   "claim": "Само равенство $25=25$ — `parseval_std_concrete` в `ProcessL2Parseval.v`: проверяется `vm_compute`'ом — точной рациональной арифметикой."
+  },
+  {
+   "line": 413,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "full_on_recovers : (forall i j, i < N -> j < N -> seq_inner (e i) (e j) N == (if Nat.eqb i j then 1 else 0)) -> forall f m, m < N -> q_sum (fun k => seq_inner (e k) f N * e k m) N == f m (:469); full_on_parseval (:491): Σ_{k<N} c_k² == seq_inner f f N для всякой f; через full_on_column_norm (:415) и full_on_dual (:450). Closed under the global context.",
+   "theorem": "full_on_parseval",
+   "file": "src/process/ProcessOrthonormalFourier.v",
+   "claim": "Критерий — `parseval_iff_complete_b`; полнота системы из $N$ ортонормированных векторов — `full_on_recovers` и `full_on_parseval` (`ProcessOrthonormalFourier.v`), 0 аксиом."
+  },
+  {
+   "line": 296,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_odd_no_rational_norm : forall j s, ~ (s * s == inject_Z (Z.of_nat (pow2 (S (2 * j))))) (:492); через Sqrt2Irrational.no_rational_sqrt2; для N = 2 — walsh_2_no_rational_norm (:508). Closed under the global context.",
+   "theorem": "walsh_odd_no_rational_norm",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "При нечётном $k$ рационального $s$ с $s^2=N$ нет — это тоже доказано,— и корень не вводится вовсе: вся теория главы пересказана для *ортогональной* системы с квадратами норм $d_k$ (коэффициент $c_k=\\inner{e_k}{f}/d_k$), так что в наблюдаемых величинах стоит $N$, а не $\\sqrt N$,— в согласии с приёмом Части VI (корень в наблюдаемых величинах сокращается).[^17]"
+  },
+  {
+   "line": 296,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bessel_og : K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N / d k) K <= seq_inner f f N (:191). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context. Остальные теоремы раздела — resid_norm_og (:176), best_approx_eq_og (:203), best_approx_unique_og (:233), parseval_iff_complete_og (:263).",
+   "theorem": "bessel_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "При нечётном $k$ рационального $s$ с $s^2=N$ нет — это тоже доказано,— и корень не вводится вовсе: вся теория главы пересказана для *ортогональной* системы с квадратами норм $d_k$ (коэффициент $c_k=\\inner{e_k}{f}/d_k$), так что в наблюдаемых величинах стоит $N$, а не $\\sqrt N$,— в согласии с приёмом Части VI (корень в наблюдаемых величинах сокращается).[^17]"
+  },
+  {
+   "line": 417,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В файле 32 строки Qed и два определения (og_coef, walsh_n); Admitted, Axiom, Parameter нет; все объявления — Closed under the global context.",
+   "theorem": null,
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "assumptions": "все 34 объявления файла: Closed under the global context",
+   "claim": "Файл `ProcessOrthogonalWalsh.v` (32 утверждения, 0 аксиом)."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "resid_norm_og : K <= K0 -> ‖f − Σ_{k<K} og_coef k · e_k‖² == seq_inner f f N - q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N / d k) K (:176). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "theorem": "resid_norm_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Ортогональная система с квадратами норм $d_k>0$, $K\\le K_0$: тождество остатка `resid_norm_og`, ортогональность остатка `resid_ortho_og`, Бессель `bessel_og` ($\\sum_{k<K}\\inner{e_k}{f}^2/d_k\\le\\norm{f}^2$), наилучшее приближение `best_approx_eq_og` с единственностью `best_approx_unique_og`, критерий полноты `parseval_iff_complete_og`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "resid_ortho_og : j < K -> K <= K0 -> seq_inner (e j) (fun m => f m - q_sum (fun k => og_coef k * e k m) K) N == 0 (:166); через proj_coord_og (:120). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "theorem": "resid_ortho_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Ортогональная система с квадратами норм $d_k>0$, $K\\le K_0$: тождество остатка `resid_norm_og`, ортогональность остатка `resid_ortho_og`, Бессель `bessel_og` ($\\sum_{k<K}\\inner{e_k}{f}^2/d_k\\le\\norm{f}^2$), наилучшее приближение `best_approx_eq_og` с единственностью `best_approx_unique_og`, критерий полноты `parseval_iff_complete_og`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "bessel_og : K <= K0 -> q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N / d k) K <= seq_inner f f N (:191). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "theorem": "bessel_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Ортогональная система с квадратами норм $d_k>0$, $K\\le K_0$: тождество остатка `resid_norm_og`, ортогональность остатка `resid_ortho_og`, Бессель `bessel_og` ($\\sum_{k<K}\\inner{e_k}{f}^2/d_k\\le\\norm{f}^2$), наилучшее приближение `best_approx_eq_og` с единственностью `best_approx_unique_og`, критерий полноты `parseval_iff_complete_og`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "best_approx_eq_og : K <= K0 -> ‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖² + q_sum (fun k => d k * ((a k - og_coef k) * (a k - og_coef k))) K (:203); best_approx_og (:217): ‖f − P_K‖² <= ‖f − Σ_{k<K} a_k e_k‖². Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "theorem": "best_approx_eq_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Ортогональная система с квадратами норм $d_k>0$, $K\\le K_0$: тождество остатка `resid_norm_og`, ортогональность остатка `resid_ortho_og`, Бессель `bessel_og` ($\\sum_{k<K}\\inner{e_k}{f}^2/d_k\\le\\norm{f}^2$), наилучшее приближение `best_approx_eq_og` с единственностью `best_approx_unique_og`, критерий полноты `parseval_iff_complete_og`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "best_approx_unique_og : K <= K0 -> (‖f − Σ_{k<K} a_k e_k‖² == ‖f − P_K‖²) <-> (forall k, k < K -> a k == og_coef k) (:233). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "theorem": "best_approx_unique_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Ортогональная система с квадратами норм $d_k>0$, $K\\le K_0$: тождество остатка `resid_norm_og`, ортогональность остатка `resid_ortho_og`, Бессель `bessel_og` ($\\sum_{k<K}\\inner{e_k}{f}^2/d_k\\le\\norm{f}^2$), наилучшее приближение `best_approx_eq_og` с единственностью `best_approx_unique_og`, критерий полноты `parseval_iff_complete_og`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "parseval_iff_complete_og : K <= K0 -> (q_sum (fun k => seq_inner (e k) f N * seq_inner (e k) f N / d k) K == seq_inner f f N) <-> (forall m, m < N -> q_sum (fun k => og_coef k * e k m) K == f m) (:263). Посылки раздела: forall k, k < K0 -> 0 < d k; forall i j, i < K0 -> j < K0 -> seq_inner (e i) (e j) N == (if Nat.eqb i j then d i else 0); og_coef k := seq_inner (e k) f N / d k (:160). Closed under the global context.",
+   "theorem": "parseval_iff_complete_og",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Ортогональная система с квадратами норм $d_k>0$, $K\\le K_0$: тождество остатка `resid_norm_og`, ортогональность остатка `resid_ortho_og`, Бессель `bessel_og` ($\\sum_{k<K}\\inner{e_k}{f}^2/d_k\\le\\norm{f}^2$), наилучшее приближение `best_approx_eq_og` с единственностью `best_approx_unique_og`, критерий полноты `parseval_iff_complete_og`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_bessel : K <= pow2 k -> q_sum (fun i => seq_inner (had k i) f (pow2 k) * seq_inner (had k i) f (pow2 k) / inject_Z (Z.of_nat (pow2 k))) K <= seq_inner f f (pow2 k) (:309); из bessel_og (:191) и walsh_og (:298). Closed under the global context.",
+   "theorem": "walsh_bessel",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Для строк Уолша при всяком $N=2^k$ ($d_k=N$): `walsh_bessel`, `walsh_best_approx`, `walsh_parseval_divided` ($\\sum_{i<N}\\inner{H_i}{f}^2/N=\\norm{f}^2$), `walsh_complete` ($f(m)=\\sum_{i<N}(\\inner{H_i}{f}/N)\\,H_i(m)$)."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_best_approx : K <= pow2 k -> ‖f − Σ_{i<K} (⟨H_i,f⟩/N) H_i‖² <= ‖f − Σ_{i<K} a_i H_i‖² для любых весов a (:321); из best_approx_og (:217). Closed under the global context.",
+   "theorem": "walsh_best_approx",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Для строк Уолша при всяком $N=2^k$ ($d_k=N$): `walsh_bessel`, `walsh_best_approx`, `walsh_parseval_divided` ($\\sum_{i<N}\\inner{H_i}{f}^2/N=\\norm{f}^2$), `walsh_complete` ($f(m)=\\sum_{i<N}(\\inner{H_i}{f}/N)\\,H_i(m)$)."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_parseval_divided : forall k f, q_sum (fun i => seq_inner (had k i) f (pow2 k) * seq_inner (had k i) f (pow2 k) / inject_Z (Z.of_nat (pow2 k))) (pow2 k) == seq_inner f f (pow2 k) (:336); из parseval_walsh (ProcessFourierON.v:91). Closed under the global context.",
+   "theorem": "walsh_parseval_divided",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Для строк Уолша при всяком $N=2^k$ ($d_k=N$): `walsh_bessel`, `walsh_best_approx`, `walsh_parseval_divided` ($\\sum_{i<N}\\inner{H_i}{f}^2/N=\\norm{f}^2$), `walsh_complete` ($f(m)=\\sum_{i<N}(\\inner{H_i}{f}/N)\\,H_i(m)$)."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_complete : m < pow2 k -> q_sum (fun i => seq_inner (had k i) f (pow2 k) / inject_Z (Z.of_nat (pow2 k)) * had k i m) (pow2 k) == f m (:353); из parseval_iff_complete_og (:263) и walsh_parseval_divided (:336). Closed under the global context.",
+   "theorem": "walsh_complete",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Для строк Уолша при всяком $N=2^k$ ($d_k=N$): `walsh_bessel`, `walsh_best_approx`, `walsh_parseval_divided` ($\\sum_{i<N}\\inner{H_i}{f}^2/N=\\norm{f}^2$), `walsh_complete` ($f(m)=\\sum_{i<N}(\\inner{H_i}{f}/N)\\,H_i(m)$)."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_rational_norm_iff_even : forall k, (exists s : Q, s * s == inject_Z (Z.of_nat (pow2 k))) <-> Nat.Even k (:512); из walsh_even_norm_exists (:464) и walsh_odd_no_rational_norm (:492). Closed under the global context.",
+   "theorem": "walsh_rational_norm_iff_even",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Нормировка: рациональное $s$ с $s^2=2^k$ существует тогда и только тогда, когда $k$ чётно, — `walsh_rational_norm_iff_even`; при $N=4^j$ строки, делённые на $2^j$, удовлетворяют `Hon` — `walsh_4j_orthonormal`; при нечётном $k$ такого $s$ нет — `walsh_odd_no_rational_norm`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_4j_orthonormal : i < pow2 (2 * j) -> i' < pow2 (2 * j) -> seq_inner (walsh_n (2 * j) s i) (walsh_n (2 * j) s i') (pow2 (2 * j)) == (if Nat.eqb i i' then 1 else 0) при s = inject_Z (Z.of_nat (pow2 j)) (:472); walsh_n k s i m := had k i m / s (:385); пример N = 4, s = 2 — walsh_4_orthonormal (:484). Closed under the global context.",
+   "theorem": "walsh_4j_orthonormal",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Нормировка: рациональное $s$ с $s^2=2^k$ существует тогда и только тогда, когда $k$ чётно, — `walsh_rational_norm_iff_even`; при $N=4^j$ строки, делённые на $2^j$, удовлетворяют `Hon` — `walsh_4j_orthonormal`; при нечётном $k$ такого $s$ нет — `walsh_odd_no_rational_norm`."
+  },
+  {
+   "line": 417,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "walsh_odd_no_rational_norm : forall j s, ~ (s * s == inject_Z (Z.of_nat (pow2 (S (2 * j))))) (:492); через Sqrt2Irrational.no_rational_sqrt2; для N = 2 — walsh_2_no_rational_norm (:508). Closed under the global context.",
+   "theorem": "walsh_odd_no_rational_norm",
+   "file": "src/process/ProcessOrthogonalWalsh.v",
+   "claim": "Нормировка: рациональное $s$ с $s^2=2^k$ существует тогда и только тогда, когда $k$ чётно, — `walsh_rational_norm_iff_even`; при $N=4^j$ строки, делённые на $2^j$, удовлетворяют `Hon` — `walsh_4j_orthonormal`; при нечётном $k$ такого $s$ нет — `walsh_odd_no_rational_norm`."
   }
  ]
 }
