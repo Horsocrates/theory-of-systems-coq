@@ -1,0 +1,354 @@
+{
+ "batch": "audit-part-08",
+ "chapter": "08 Обыкновенные дифференциальные уравнения/05 Экспонента, линейные уравнения, применения.md",
+ "checked": "2026-11-18",
+ "auto": true,
+ "records": [
+  {
+   "line": 11,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Глава 8.3 доказала, что оператор Пикара есть сжатие на пространстве грид-функций (сжимающий механизм и геометрическое сближение итератов), а Глава 8.4 разобрала устойчивость и Гронуолл.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_op_contraction (:102): при |y_j − z_j| ≤ D в узлах j ≤ N выполнено |Φy_k − Φz_k| ≤ (L·Tlen)·D, k ≤ N; коэффициент меньше единицы при L·T < 1 — это условие глава называет на стр. 123. Сближение итератов — picard_iter_gap (:234): |Φ^{n+1} − Φ^n| ≤ (L·T)^n·C. Оба — Closed under the global context."
+  },
+  {
+   "line": 27,
+   "theorem": null,
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "Доказанное ядро — конкретные процессы над ℚ: экспоненциальная траектория $y' = y$ как лестница $(1+h)^n y_0$, затухание $y' = -\\alpha y$, общее линейное $y' = L y$, векторный шаг для систем и гармонический осциллятор $y'' = -y$, дискретная динамика цены.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявления есть: exp_euler и euler_yeqy_closed (y' = y); decay_solution_bounded, decay_converges (затухание); linear_euler_step, cluster_linear_euler_gronwall (линейное); sys_euler, sho_euler; price_trajectory. Для линейного уравнения траектория Эйлера за n шагов отдельной теоремой не записана (лемма linear_euler_is_gronwall, :210, имеет вид x = x); она доказана в пробном файле (linear_euler_closed).",
+   "assumptions": "все 87 объявлений четырёх файлов главы: Closed under the global context"
+  },
+  {
+   "line": 33,
+   "theorem": null,
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "Чего глава *не* делает: она не предъявляет $e^t$, $\\sin$, $\\cos$ как завершённые трансцендентности, не доказывает точное сохранение энергии осциллятора и не строит глобальных во времени решений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Оговорка стоит честно: в четырёх файлах главы нет объявлений sin и cos, нет завершённой экспоненты, нет утверждений о сохранении энергии. Об энергии доказаны два вычисления (sho_energy2, sho_energy_drifts); общий закон явного Эйлера E_{k+1} == (1 + h²)·E_k доказан в пробном файле (sho_energy_step)."
+  },
+  {
+   "line": 35,
+   "theorem": "iterate_is_cauchy",
+   "file": "src/FixedPoint.v",
+   "claim": "Эти объекты — роль-пределы, и $\\varepsilon$-сходимость к ним наследует L3 (как в Главах 8.3–8.4).",
+   "page_price": "L3",
+   "verdict": "mismatch-price",
+   "note": "Утверждения о ε-сходимости, на которые ссылаются Главы 8.3–8.4, по компилятору аксиом не берут: iterate_is_cauchy (FixedPoint.v:263), Qpow_vanish (SeriesConvergence.v:164), euler_picard_cauchy (ProcessPicard.v:206), decay_converges (ProcessODEExamples.v:139) — Closed under the global context; строка шапки FixedPoint.v «AXIOMS: classic» устарела. Для e-процесса, sin и cos утверждение о сходимости в файлах главы не записано; свойство Коши e-процесса доказано в пробном файле без аксиом (exp1_is_Cauchy, модуль 4/(N0+1))."
+  },
+  {
+   "line": 41,
+   "theorem": "exp_euler",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "Метод Эйлера для него особенно прозрачен: поскольку наклон равен значению, каждый шаг умножает на $(1+h)$, и за $n$ шагов получается $(1+h)^n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exp_euler (:76) задан сразу замкнутой формулой y0 * Qpow (1 + h) n и не ссылается ни на exp_rhs, ни на метод Эйлера. Сам вывод «рекурсия Эйлера даёт (1+h)^n» доказан в ProcessExpProcess.v: euler_yeqy_closed (:71) для рекурсии y_{k+1} = y_k + h·y_k. Связь exp_euler с общим euler_method и с euler_yeqy — пробный файл (exp_euler_is_euler_method, euler_yeqy_is_exp_euler)."
+  },
+  {
+   "line": 43,
+   "theorem": "exp_euler_is_gronwall",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "Замечательно, что этот процесс совпадает с однородной итерацией Гронуолла из Главы 8.4: экспоненциальный рост и Гронуолл-оценка — буквально одна и та же рекурсия.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exp_euler_is_gronwall (:89): forall y0 h n, exp_euler y0 h n == gronwall_iterate 1 0 h y0 n; это gronwall_beta_zero (ProcessGronwall.v:80) при α = 1. Closed under the global context."
+  },
+  {
+   "line": 47,
+   "theorem": "exp1_lower",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Достигая момента $t=1$ за $N$ шагов размера $1/N$, получаем лестницу $(1+1/N)^N$ — $e$-процесс, разобранный в Главе 8.2: рациональные стадии $2, 9/4, 64/27, …$, ограниченные снизу двойкой для всех $N$ и начинающие классический процесс приближения к $e$ (завершённое $e$ — роль-предел).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Стадии — exp1_0, exp1_1, exp1_2 (:58–65): 2, 9/4, 64/27; нижняя граница — exp1_lower (:129): forall N, 2 <= exp1_process N. Рост и граница сверху проверены в файле на трёх стадиях (exp1_climb, exp1_below3), сходимость не утверждается — слова «начинающие… процесс приближения» этому соответствуют. Монотонность, граница 4 и свойство Коши для всех N доказаны в пробном файле."
+  },
+  {
+   "line": 50,
+   "theorem": "expt_process",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Для произвольного времени аналогично: $e^t$ — роль-предел процесса $(1+t/N)^N$, чьи стадии суть рациональные числа.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "expt_process (:51): определение стадии (1 + t/(N+1))^(N+1) при рациональном t. О нём в файле доказаны два значения (expt_0_0, expt_1_0); тождество с траекторией Эйлера и нижняя граница при общем t не записаны (доказаны в пробном файле: expt_is_euler, expt_lower, expt_zero)."
+  },
+  {
+   "line": 60,
+   "theorem": "linear_euler_step",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "Уравнение $y' = L y$ — общее линейное однородное — ведёт себя как масштабированная экспонента: шаг Эйлера умножает на $(1+Lh)$, и знак $L$ решает судьбу процесса.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "linear_euler_step (:216): euler_step (fun _ y => L * y) t y h == (1 + L * h) * y — один шаг, при любом L. linear_rhs_lipschitz (:194) — только при 0 < L; утверждений о росте при L > 0 в файле нет. Траектория за n шагов и рост доказаны в пробном файле (linear_euler_closed, linear_growth)."
+  },
+  {
+   "line": 66,
+   "theorem": "gronwall_decay_factor",
+   "file": "src/process/ProcessGronwall.v",
+   "claim": "Здесь множитель шага есть $1 - \\alpha h$, и при $0 \\le 1 - \\alpha h \\le 1$ процесс не растёт, а убывает — ровно случай затухающего Гронуолла из Главы 8.4: $u_n \\le u_0$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "gronwall_decay_factor (:112): 0 <= r -> r <= 1 -> 0 <= u0 -> u0 * Qpow r n <= u0; та же посылка 0 <= y0 стоит в decay_solution_bounded (ProcessODEExamples.v:131). На странице условия u_0 ≥ 0 нет, а без него оценка неверна: u0 = −1, r = 1/2, n = 1 (пробный файл, decay_bound_needs_nonneg). Доказано u_n ≤ u_0, а не убывание от шага к шагу."
+  },
+  {
+   "line": 79,
+   "theorem": "sys_euler",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "Векторный шаг Эйлера переносит всё сказанное на пары: состояние $(y, v)$ обновляется покомпонентно, $(y, v) \\mapsto (y + h f_1, v + h f_2)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sys_euler (:40): рекурсия на парах Q * Q с правыми частями f1, f2 : Q -> Q -> Q -> Q и узлами tg h k = k·h. О парах в файле доказаны законы шага и первое уравнение редукции порядка; липшицевость, сжатие и оценка расхождения для систем не записаны."
+  },
+  {
+   "line": 83,
+   "theorem": "order2_euler",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "Векторная форма позволяет свести *уравнение высшего порядка* к системе первого: $y'' = g(t, y, y')$ становится парой $y' = v$, $v' = g(t, y, v)$ — введение скорости как самостоятельной роли расширяет пространство состояний и понижает порядок.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "order2_euler g := sys_euler (fun _ _ v => v) g (:51) — случай второго порядка. Что позиция редуцированной системы удовлетворяет разностному уравнению второго порядка, в файле не записано; доказано в пробном файле: y_{k+2} − 2·y_{k+1} + y_k == h²·g(t_k, y_k, v_k) (order2_second_difference)."
+  },
+  {
+   "line": 86,
+   "theorem": "sho_euler",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "Классический пример — гармонический осциллятор $y'' = -y$, то есть пара $y' = v$, $v' = -y$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sho_euler := order2_euler (fun _ y _ => - y) (:54). Вычисленные стадии — sho_y2 (99/100) и sho_v2 (−1/5): вторая координата отрицательна; о знаке в словах «$(\\cos t, \\sin t)$» — заметки, раздел «Сомнительные места»."
+  },
+  {
+   "line": 91,
+   "theorem": "sho_energy_drifts",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "Осциллятор обнажает и *честную* сторону численного метода: явный Эйлер не сохраняет энергию. Величина $E = y^2 + v^2$, классически постоянная, на сетке *дрейфует вверх*: за два шага с $y_0=1, v_0=0, h=1/10$ она вырастает с $1$ до $1{,}0201$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sho_energy2 (:97) и sho_energy_drifts (:104) — вычисление на одном наборе чисел (vm_compute): E_2 == 10201 # 10000 и 1 < E_2; страница так и говорит («за два шага с…»). Общий закон E_{k+1} == (1 + h²)·E_k при любых h, y0, v0 в файле не записан; доказан в пробном файле (sho_energy_step, sho_energy_strict)."
+  },
+  {
+   "line": 118,
+   "theorem": "traj_final",
+   "file": "src/stdlib/trading/PriceDynamicsODE.v",
+   "claim": "Конкретно: цена $100$ под воздействиями $1, -\\tfrac12, \\tfrac34, -\\tfrac14, \\tfrac12$ проходит стадии $100, 101, \\tfrac{201}{2}, \\tfrac{405}{4}, 101$ и приходит в $\\tfrac{203}{2} = 101{,}5$ — точная рациональная траектория.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "p0_ex = 100, forces_ex = [1; −1/2; 3/4; −1/4; 1/2] (:55–56); traj_final (:79): price_trajectory p0_ex forces_ex == 203#2. Все шесть стадий подтверждены одним вычислением price_history (пробный файл, price_history_ex)."
+  },
+  {
+   "line": 121,
+   "theorem": "lipschitz_check",
+   "file": "src/stdlib/trading/PriceDynamicsODE.v",
+   "claim": "Файл вводит и проверку устойчивости через липшицев коэффициент — аналогичное липшицево условие (коэффициент сжатия меньше единицы), родственное условию $LT<1$ сжатия Пикара (Глава 8.3), прочитанное как признак устойчивой динамики.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "lipschitz_check L := Qle_bool L 1 (:38) — «не больше единицы»: lipschitz_check 1 = true, тогда как stability_signal 1 = −1 (:43). Это сравнение числа с порогами: ни одна теорема файла не связывает его с price_trajectory или иной траекторией, семь лемм о нём — вычисления на числах. У динамики p + f коэффициент по начальной цене равен единице (пробный файл, price_traj_shift); сжатие есть у mr_trajectory, но в файле не доказано (пробный файл: mr_deviation, mr_converges)."
+  },
+  {
+   "line": 143,
+   "theorem": "euler_picard_cauchy",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Над ними — гарантия: при липшицевости итерация сжимает (Глава 8.3), откуда Коши-сходимость процесса и контроль расхождения по Гронуоллу (Глава 8.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сжатие — picard_op_contraction (коэффициент L·T, меньше единицы при L·T < 1; условие названо на стр. 123). Свойство Коши записано для скалярной итерации: euler_picard_cauchy (:206; посылки — липшицевость, ограниченность правой части, L·h < 1); для итераций на сетке записан геометрический зазор picard_iter_gap. Контроль расхождения — euler_diff_bound (ProcessODEStability.v:86). Все — Closed under the global context."
+  },
+  {
+   "line": 145,
+   "theorem": null,
+   "file": null,
+   "claim": "Универсальный слой — L1–L5, причём L3 входит лишь там, где роль-предел читается как завершённый объект.",
+   "page_price": "L3",
+   "verdict": "ok",
+   "note": "В двенадцати файлах, на которые опираются главы Части VIII, ни одно из 293 объявлений не берёт classic (пробный файл PA.v): завершённый предел как объект в них не строится. Слова с компилятором согласуются.",
+   "assumptions": "293 объявления двенадцати файлов: Closed under the global context"
+  },
+  {
+   "line": 166,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "*Доказано над ℚ без аксиом*: метод Эйлера и его конкретные траектории; оператор Пикара как сжатие на грид-функциях ($ℚ^{N+1}$, sup-метрика) с геометрическим зазором итератов; единственность решения на сетке через конечный максимум; пошаговый и геометрический контроль расхождения; однородный Гронуолл и затухание; экспонента, линейные уравнения, осциллятор и динамика цены как конкретные рациональные процессы.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "euler_traj и его траектории (analysis/PicardLindelof.v); picard_op_contraction, picard_iter_gap, picard_unique (через gmax); euler_step_diff, euler_diff_bound; gronwall_beta_zero, gronwall_decay_factor; объявления четырёх файлов главы — Closed under the global context (пробный файл PA.v). Сжатие — при L·T < 1 (стр. 123).",
+   "assumptions": "293 объявления двенадцати файлов: Closed under the global context"
+  },
+  {
+   "line": 171,
+   "theorem": "decay_converges",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "*Граница* (L3 / роль-предел): $\\varepsilon$-сходимость итераций и множителей к завершённому пределу; завершённые функции-решения, $e^t$, $\\sin$, $\\cos$ как объекты; глобальное во времени продолжение, blow-up, максимальный интервал.",
+   "page_price": "L3",
+   "verdict": "mismatch-price",
+   "note": "ε-сходимость множителей доказана без аксиом в опорном файле самой главы: decay_converges (:139) — forall eps, 0 < eps -> exists N, y0 * Qpow (1 - alpha * h) N < eps; то же Qpow_limit_zero (SeriesConvergence.v:261). Свойство Коши итераций — iterate_is_cauchy, euler_picard_cauchy — тоже Closed under the global context. На сетке предел итераций Пикара есть ломаная Эйлера и достигается за N итераций (пробный файл, picard_iter_reaches_euler)."
+  },
+  {
+   "line": 197,
+   "theorem": "exp_rhs",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "Опорные файлы — `ProcessODEExamples.v` (экспонента `exp_rhs`, затухание `decay_rhs`, линейное), `ProcessExpProcess.v` ($e$-процесс, батч C), `ProcessODESystem.v` (системы и осциллятор, батч A), `PriceDynamicsODE.v` (динамика цены, каталог `stdlib/trading/`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Четыре файла есть: src/process/ProcessODEExamples.v (20 Qed), src/process/ProcessExpProcess.v (12), src/process/ProcessODESystem.v (8), src/stdlib/trading/PriceDynamicsODE.v (23). exp_rhs (:49): fun y => y."
+  },
+  {
+   "line": 197,
+   "theorem": null,
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Новые файлы — 0 аксиом (`Print Assumptions`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions всех объявлений четырёх файлов (16 + 26 + 12 + 33 = 87, пробный файл PA.v): Closed under the global context. Строк Axiom, Parameter, Admitted в файлах нет; библиотека Reals не подключается.",
+   "assumptions": "все 87 объявлений четырёх файлов главы: Closed under the global context"
+  },
+  {
+   "line": 198,
+   "theorem": "exp_euler_succ",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "`exp_rhs`${}= \\lambda y. y$ и `exp_euler` в `ProcessODEExamples.v`: `exp_euler_succ` даёт $y_{n+1}=(1+h)y_n$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exp_euler_succ (:82): forall y0 h n, exp_euler y0 h (S n) == (1 + h) * exp_euler y0 h n — свойство замкнутой формулы exp_euler. Closed under the global context."
+  },
+  {
+   "line": 198,
+   "theorem": "exp_rhs_lipschitz",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "`exp_rhs_lipschitz` — константа Липшица $1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exp_rhs_lipschitz (:52): is_lipschitz_auto exp_rhs 1, то есть 0 < 1 и |y1 − y2| ≤ 1·|y1 − y2|. Closed under the global context."
+  },
+  {
+   "line": 199,
+   "theorem": "exp_euler_is_gronwall",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "`exp_euler_is_gronwall` в `ProcessODEExamples.v`: `exp_euler y0 h n == gronwall_iterate 1 0 h y0 n`. Экспонента есть Гронуолл с $\\alpha=1$, $\\beta=0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Фрагмент кода в сноске совпадает с утверждением леммы (:89–90) дословно. gronwall_iterate (ProcessGronwall.v:48) — рекурсия u_{n+1} = (1 + α·h)·u_n + β·h."
+  },
+  {
+   "line": 200,
+   "theorem": "exp1_process",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "`exp1_process`, `exp1_is_euler` (тождество «$e$-процесс${}={}$траектория Эйлера для $y'=y$ при $t=1$»), `exp1_lower` ($\\ge 2$ для всех $N$, Бернулли) в `ProcessExpProcess.v`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "exp1_process N := qpow (1 + 1 / inject_Z (Z.of_nat (S N))) (S N) (:47) — стадия (1 + 1/(N+1))^(N+1). Closed under the global context."
+  },
+  {
+   "line": 200,
+   "theorem": "exp1_is_euler",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "`exp1_process`, `exp1_is_euler` (тождество «$e$-процесс${}={}$траектория Эйлера для $y'=y$ при $t=1$»), `exp1_lower` ($\\ge 2$ для всех $N$, Бернулли) в `ProcessExpProcess.v`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "exp1_is_euler (:81): forall N, exp1_process N == euler_yeqy (1 / inject_Z (Z.of_nat (S N))) 1 (S N), где euler_yeqy (:40) — рекурсия y_{k+1} = y_k + h·y_k; опирается на euler_yeqy_closed (:71). Closed under the global context."
+  },
+  {
+   "line": 201,
+   "theorem": "expt_process",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "`expt_process` в `ProcessExpProcess.v`: стадия $N$ есть $(1+t/(N{+}1))^{N+1}$; конкретно $\\texttt{expt\\_process} 0 0 = 1$ (значение $e^0$), $\\texttt{expt\\_process} 1 0 = 2$ (первая стадия $e^1$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "expt_0_0 (:160): expt_process 0 0 == 1; expt_1_0 (:163): expt_process 1 0 == 2 (равенство Qeq). Closed under the global context."
+  },
+  {
+   "line": 202,
+   "theorem": "decay_rhs",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "`decay_rhs`${}= \\lambda y. -\\alpha y$ и `decay_rhs_lipschitz` (константа $\\alpha$) в `ProcessODEExamples.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "decay_rhs alpha y := - alpha * y (:111). Что метод Эйлера с этой правой частью даёт y0·(1 − α·h)^n, в файле не записано (decay_solution_bounded говорит о gronwall_iterate (- alpha) 0 h y0 n); доказано в пробном файле (decay_euler_closed)."
+  },
+  {
+   "line": 202,
+   "theorem": "decay_rhs_lipschitz",
+   "file": "src/process/ProcessODEExamples.v",
+   "claim": "`decay_rhs`${}= \\lambda y. -\\alpha y$ и `decay_rhs_lipschitz` (константа $\\alpha$) в `ProcessODEExamples.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "decay_rhs_lipschitz (:114): forall alpha, 0 < alpha -> is_lipschitz_auto (decay_rhs alpha) alpha; условие α > 0 страница называет (стр. 64). Closed under the global context."
+  },
+  {
+   "line": 203,
+   "theorem": "sys_euler_fst_S",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "`sys_euler` в `ProcessODESystem.v` (батч A): векторный Эйлер для системы $y'=f_1$, $v'=f_2$; законы шага `sys_euler_fst_S`, `sys_euler_snd_S`. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "sys_euler_fst_S (:64): первая координата на шаге k+1 равна y_k + h·f1(t_k, y_k, v_k) — развёртывание определения sys_euler. Closed under the global context."
+  },
+  {
+   "line": 203,
+   "theorem": "sys_euler_snd_S",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "`sys_euler` в `ProcessODESystem.v` (батч A): векторный Эйлер для системы $y'=f_1$, $v'=f_2$; законы шага `sys_euler_fst_S`, `sys_euler_snd_S`. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "sys_euler_snd_S (:70): вторая координата на шаге k+1 равна v_k + h·f2(t_k, y_k, v_k) — развёртывание определения sys_euler. Closed under the global context."
+  },
+  {
+   "line": 204,
+   "theorem": "order2_position_step",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "`order2_euler` в `ProcessODESystem.v`; `order2_position_step`: в редуцированной системе позиция растёт на $h\\cdot v$, то есть уравнение $y'=v$ выполнено. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "order2_position_step (:78): fst (order2_euler g h y0 v0 (S k)) == fst (order2_euler g h y0 v0 k) + h * snd (order2_euler g h y0 v0 k) — развёртывание определения (первая правая часть есть v по построению). Closed under the global context."
+  },
+  {
+   "line": 205,
+   "theorem": "sho_energy2",
+   "file": "src/process/ProcessODESystem.v",
+   "claim": "`sho_euler` (осциллятор $y''=-y$) в `ProcessODESystem.v`: `sho_energy2` ($E_2 = 10201/10000$) и `sho_energy_drifts` ($1 < E_2$).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "sho_energy2 (:97): y_2·y_2 + v_2·v_2 == 10201 # 10000 при h = 1/10, y0 = 1, v0 = 0 (vm_compute); число совпадает с (1 + 1/100)². Closed under the global context."
+  },
+  {
+   "line": 206,
+   "theorem": "price_step",
+   "file": "src/stdlib/trading/PriceDynamicsODE.v",
+   "claim": "`price_step`${}= \\lambda p f. p+f$ и `price_trajectory` в `PriceDynamicsODE.v` (`stdlib/trading/`). Это Эйлеров шаг с внешним притоком — частный случай правой части $f(t, p)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "price_step p f_val := p + f_val (:15): воздействие от цены не зависит, шаг сетки равен единице. Совпадение с euler_step (fun _ _ => f) t p 1 в файле не записано; доказано в пробном файле (price_step_is_euler_step)."
+  },
+  {
+   "line": 206,
+   "theorem": "price_trajectory",
+   "file": "src/stdlib/trading/PriceDynamicsODE.v",
+   "claim": "`price_step`${}= \\lambda p f. p+f$ и `price_trajectory` в `PriceDynamicsODE.v` (`stdlib/trading/`). Это Эйлеров шаг с внешним притоком — частный случай правой части $f(t, p)$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "price_trajectory (:19): рекурсия по списку воздействий, возвращает последнюю цену; промежуточные цены собирает price_history (:26). Каталог src/stdlib/trading/ есть."
+  },
+  {
+   "line": 207,
+   "theorem": "traj_step1",
+   "file": "src/stdlib/trading/PriceDynamicsODE.v",
+   "claim": "`traj_final` в `PriceDynamicsODE.v`: `price_trajectory p0_ex forces_ex == 203#2`; промежуточные шаги — `traj_step1`–`traj_step4`. Точная арифметика над ℚ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "traj_step1 (:67): price_step 100 1 = 101 (равенство Лейбница); traj_step2–traj_step4 (:70–77) — с Qeq. Это вычисления price_step на числах; фрагмент кода в сноске совпадает с утверждением traj_final (:79) дословно."
+  },
+  {
+   "line": 207,
+   "theorem": "traj_step4",
+   "file": "src/stdlib/trading/PriceDynamicsODE.v",
+   "claim": "`traj_final` в `PriceDynamicsODE.v`: `price_trajectory p0_ex forces_ex == 203#2`; промежуточные шаги — `traj_step1`–`traj_step4`. Точная арифметика над ℚ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "traj_step4 (:76): price_step (405#4) (-(1#4)) == 101. Closed under the global context."
+  }
+ ]
+}

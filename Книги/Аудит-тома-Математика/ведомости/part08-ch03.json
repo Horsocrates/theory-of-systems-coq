@@ -1,0 +1,398 @@
+{
+ "batch": "audit-part-08",
+ "chapter": "08 Обыкновенные дифференциальные уравнения/03 Пикар–Линделёф оператор-сжатие на пространстве функций.md",
+ "checked": "2026-11-18",
+ "auto": true,
+ "records": [
+  {
+   "line": 12,
+   "theorem": "picard_iter_gap",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Ломаная Эйлера — это последовательность рациональных стадий; что гарантирует, что они сближаются, а не разбегаются? Настоящая глава даёт гарантию, и она — центральный результат Части VIII.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теоремы главы говорят не о стадиях ломаной Эйлера, а об итерациях оператора Пикара при фиксированной сетке (h и N неизменны): picard_iter_gap (:234) оценивает picard_iter (S n) k − picard_iter n k. О сближении ломаных при измельчении сетки в файле утверждений нет. Предел итераций на сетке — сама ломаная Эйлера этой сетки (Check.v: picard_iter_reaches_fix, picard_fix_eq_euler, picard_fix_eq_euler_traj). См. заметки, расхождение 3."
+  },
+  {
+   "line": 31,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Предыдущий слой формализации тома доказывал сжатие для *скалярной* итерации Эйлера–Пикара — отображения $y \\mapsto y_0 + f(y) h$ одного рационального значения в другое, с коэффициентом $L h$.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_picard_contraction (:165): is_contraction (euler_picard g y0 h) (y0 − M·h) (y0 + M·h) (L·h); euler_picard g y0 h y := y0 + g y * h (:115). Условия теоремы (ограниченность правой части, отрезок) — в записи сноски 1 (стр. 299)."
+  },
+  {
+   "line": 36,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Настоящая глава предъявляет именно теорему на пространстве функций — и она доказана.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказаны оценка сжатия (picard_op_contraction :102), зазор итераций (picard_iter_gap :234) и единственность при L·Tlen < 1 (picard_unique :183) для функций nat -> Q на узлах k ≤ N. Что «пространство функций» здесь — значения в N+1 узле, страница оговаривает рядом (стр. 39–43); что существование предела теоремой не записано — стр. 45–50 (о цене этой оговорки — расхождение 1)."
+  },
+  {
+   "line": 42,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Над таким *конечным* пространством сжатие, геометрический зазор и единственность — точные алгебраические факты без единой аксиомы.",
+   "page_price": "без единой аксиомы",
+   "verdict": "ok",
+   "note": "В файле 11 Qed, строк Axiom, Parameter, Admitted нет; подключены стандартная библиотека и ProcessCore, ProcessArithmetic, ProcessMCT.",
+   "assumptions": "picard_op_contraction, picard_iter_gap, picard_unique и восемь вспомогательных лемм файла: Closed under the global context"
+  },
+  {
+   "line": 45,
+   "theorem": "Qpow_vanish",
+   "file": "src/SeriesConvergence.v",
+   "claim": "Чего глава *не* делает: *геометрический зазор* итератов доказан алгебраически, но его *чтение* как $\\varepsilon$-Коши-сходимости («для всякого $\\varepsilon$ найдётся номер») использует затухание $(LT)^n\\to 0$, а завершённая функция-предел — ещё один роль-предел; эти два шага наследуют закон исключённого третьего (L3) и в этой главе не актуализируются.[^3]",
+   "page_price": "ε-сходимость и предел наследуют L3",
+   "verdict": "mismatch-price",
+   "note": "Затухание — Qpow_vanish (SeriesConvergence.v:164): Closed under the global context (Бернулли и свойство Архимеда). ε-сходимость итераций оператора при L·T < 1 доказывается без аксиом (Check.v: picard_iter_sup_cauchy), неподвижная точка на сетке существует как грид-функция (picard_fixed_exists) — тоже без аксиом. В самом файле главы этих двух теорем нет: «не актуализируются» верно, «наследуют L3» — нет. См. заметки, расхождение 1."
+  },
+  {
+   "line": 52,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "*Первый* — сжатие оператора Пикара на грид-функциях, геометрический зазор итератов и единственность решения на сетке: доказаны над ℚ без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "picard_op_contraction (:102), picard_iter_gap (:234), picard_unique (:183): Closed under the global context."
+  },
+  {
+   "line": 56,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "*Третий* — завершённый предел и глобальное решение — роль-пределы и L3-слой.",
+   "page_price": "L3-слой",
+   "verdict": "mismatch-price",
+   "note": "Ни одно объявление, названное главой, на classic не опирается; предел итераций на сетке — конечная грид-функция, её существование доказывается без аксиом (Check.v: picard_fixed_exists, picard_iter_reaches_fix). Теорем о функции-решении на отрезке (предел по измельчению сетки) и о продолжении в файле нет — их цена не определена. См. расхождение 1."
+  },
+  {
+   "line": 62,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Опираемся на авторскую E/R/R-шапку файла `ProcessPicardOperator.v`.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла: строки 4–7 (Elements, Roles, Rules) и 24–33 (E/R/R-разбор)."
+  },
+  {
+   "line": 66,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Оператор Пикара на сетке $\\Phi(y)_k = y_0 + h\\sum_{j<k} f(t_j, y_j)$; при липшицевости $f$ он есть сжатие в sup-метрике с коэффициентом $L\\cdot T$ (где $T = N h$ — длина интервала); итераты $\\Phi^n$ имеют геометрический зазор $(LT)^n$; при $LT<1$ неподвижная точка единственна.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_op (:63), Tlen (:57), picard_op_contraction (:102), picard_iter_gap (:234; множитель rpow n = (L·Tlen)^n, :216), picard_unique (:183, посылка Hrate : L * Tlen < 1). Единственность на сетке верна и без посылки L·T < 1 (Check.v: picard_unique_any_rate) — см. расхождение 2."
+  },
+  {
+   "line": 91,
+   "theorem": "picard_op",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "На рациональной сетке $t_k = k h$ интеграл становится процессом накопления Части V — левой суммой по узлам, а оператор — конечной формулой:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_op y := fun k => y0 + h * picard_sum y k (:63); picard_sum y k := q_sum (fun j => f (tgrid j) (y j)) k (:61); q_sum — сумма по j < k (ProcessMCT.v:61); tgrid j = j·h (:58). Сумма в файле определена сама по себе; с интегралом Части V (integral_process) теоремой не связана — страница этого и не утверждает."
+  },
+  {
+   "line": 98,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Здесь $y = (y_0, y_1, …, y_N)$ — грид-функция, набор значений в узлах, а $\\Phi(y)$ — такая же грид-функция.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Грид-функция в файле — y : nat -> Q; теоремы говорят об узлах k ≤ N. picard_op : (nat -> Q) -> nat -> Q. Начальное значение y0 — параметр оператора: Φ(y)_0 = y0 при любом y."
+  },
+  {
+   "line": 103,
+   "theorem": "gmax",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Расстояние между двумя кандидатами $y$ и $z$ — их максимальное рассогласование по узлам, *sup-метрика*:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Максимум по узлам 0…N — gmax (:156) с леммами gmax_ub (:159), gmax_lub (:168). Отдельного определения расстояния между функциями в файле нет: теорема о сжатии записана через общую оценку D, gmax применён внутри доказательства picard_unique. Запись сжатия и зазора прямо через максимум выводится (Check.v: picard_op_contraction_sup, picard_iter_gap_sup)."
+  },
+  {
+   "line": 120,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Центральная теорема главы: *при липшицевости правой части оператор Пикара есть сжатие в sup-метрике с коэффициентом $L\\cdot T$*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_op_contraction (:102): 0 <= D -> k <= N -> (forall j, j <= N -> Qabs (y j − z j) <= D) -> Qabs (picard_op y k − picard_op z k) <= (L * Tlen) * D — в точности развёрнутая запись страницы (стр. 125–129). Посылки раздела: 0 < L, липшицевость f по второму аргументу на всём ℚ при всех t, 0 <= h. Условия L·T < 1 в теореме нет — страница говорит о нём отдельно (стр. 146–148)."
+  },
+  {
+   "line": 138,
+   "theorem": "picard_diff_bound",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Слагаемых — ровно $k$, а поскольку $k\\le N$, их не больше $N$; поэтому сумма по модулю не превосходит $N\\cdot L D$, а умножение на шаг даёт",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_diff_bound (:67): (forall j, j < k -> Qabs (y j − z j) <= D) -> Qabs (picard_sum y k − picard_sum z k) <= k * (L * D); переход от k к N — в доказательстве picard_op_contraction (:116, :130)."
+  },
+  {
+   "line": 153,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Подлинная теорема Пикара–Линделёфа — именно вторая, и её процессное ядро — сжатие на пространстве грид-функций — теперь доказано, конечно и над ℚ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказанным названо сжатие на грид-функциях — это picard_op_contraction (:102). Полная теорема (существование и единственность решения) доказанной здесь не названа."
+  },
+  {
+   "line": 167,
+   "theorem": "picard_iter_gap",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Запустим процесс с постоянной функции $y^{(0)} \\equiv y_0$ и будем применять $\\Phi$; тогда зазор между соседними итерациями убывает как степень коэффициента:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_iter 0 = fun _ => y0, picard_iter (S n) = picard_op (picard_iter n) (:213). picard_iter_gap (:234): если Qabs (picard_iter 1 k − picard_iter 0 k) <= C при k ≤ N, то Qabs (picard_iter (S n) k − picard_iter n k) <= rpow n * C при k ≤ N; условие L·T < 1 теореме не нужно. Запись через максимум (формула страницы) — Check.v: picard_iter_gap_sup."
+  },
+  {
+   "line": 175,
+   "theorem": "picard_iter_gap",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "При $LT<1$ степени $(LT)^n$ убывают, и зазоры стягиваются — это и есть *Коши-содержание* процесса: итерации в конце концов сближаются сколь угодно тесно.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле доказан зазор соседних итераций; утверждения «для всякого ε найдётся номер» в файле нет — страница оговаривает это следующей фразой (стр. 177–180). Утверждение верно и доказывается без аксиом (Check.v: picard_iter_sup_cauchy); о цене оговорки — расхождение 1."
+  },
+  {
+   "line": 177,
+   "theorem": "Qpow_vanish",
+   "file": "src/SeriesConvergence.v",
+   "claim": "Подчеркнём честно: *геометрический зазор* доказан без аксиом; переход от него к самой Коши-сходимости в форме «для всякого $\\varepsilon$ найдётся номер» и к завершённому пределу использует затухание $(LT)^n\\to 0$, наследующее L3.",
+   "page_price": "зазор — без аксиом; затухание (LT)^n → 0 наследует L3",
+   "verdict": "mismatch-price",
+   "note": "Qpow_vanish (SeriesConvergence.v:164): forall r eps, 0 < r -> r < 1 -> 0 < eps -> exists N, Qpow r N < eps — Closed under the global context. Переход к ε-сходимости итераций оператора проверен без аксиом (Check.v: picard_iter_tel, picard_iter_sup_cauchy). См. расхождение 1."
+  },
+  {
+   "line": 184,
+   "theorem": "picard_unique",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Сжатие даёт и *единственность*, причём — что примечательно — конструктивно, без закона исключённого третьего.",
+   "page_price": "конструктивно, без закона исключённого третьего",
+   "verdict": "ok",
+   "note": "picard_unique (:183): при L * Tlen < 1 две неподвижные точки picard_op совпадают (==) во всех узлах k ≤ N. Closed under the global context."
+  },
+  {
+   "line": 194,
+   "theorem": "picard_unique",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "При $LT<1$ это возможно лишь при $D^{*} = 0$ — то есть $y$ и $z$ совпадают во всех узлах.[^8]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Так и идёт доказательство picard_unique (:189–207): Dstar := gmax (fun j => Qabs (y j − z j)) N, Dstar <= (L * Tlen) * Dstar, откуда Dstar == 0. Заключение теоремы верно и без посылки L·T < 1 — см. расхождение 2."
+  },
+  {
+   "line": 196,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Существенно, что максимум берётся по *конечной* сетке: это рациональное число, а не предел, и потому единственность не требует L3 — в отличие от *существования* завершённого предела.",
+   "page_price": "единственность не требует L3; существование завершённого предела требует",
+   "verdict": "mismatch-price",
+   "note": "Первая половина верна (picard_unique: Closed under the global context). Вторая — нет: предел итераций на сетке есть (N+1)-я итерация, она неподвижна; существование доказано без аксиом и без условия L·T < 1 (Check.v: picard_fix_is_fixed, picard_fixed_exists, picard_iter_reaches_fix). См. расхождение 1."
+  },
+  {
+   "line": 208,
+   "theorem": "picard_unique",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Теорема главы — *локальная*. Коэффициент сжатия есть $L\\cdot T$, и режим гарантированной сходимости — $L\\cdot T < 1$, то есть интервал короче $1/L$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Как описание доказанных теорем верно: единственность picard_unique стоит под посылкой Hrate : L * Tlen < 1 (:181), оценка зазора убывает при L·T < 1. Что сами заключения на сетке от этого условия не зависят — расхождение 2 (стр. 223)."
+  },
+  {
+   "line": 209,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "На таком интервале процесс итераций Пикара — Коши (геометрический зазор), а решение единственно. Это *локальное* существование и единственность: на достаточно коротком отрезке.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Единственность — picard_unique (:183). Существование в файле теоремой не записано: под «Коши» страница понимает зазор соседних итераций и оговаривает это (стр. 45–50, 177–180). Существование неподвижной точки на сетке доказывается (Check.v: picard_fixed_exists) — см. расхождения 1 и 2."
+  },
+  {
+   "line": 216,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Но глобальная картина — продолжение на всё время, анализ возможного обращения решения в бесконечность за конечное время (blow-up), максимальный интервал существования — в нашей формализации *не* доказана.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: теорем о продолжении, о максимальном интервале и об уходе в бесконечность нет ни в ProcessPicardOperator.v, ни в ProcessPicard.v, ProcessODE.v, ProcessODEStability.v, analysis/PicardLindelof.v (поиск по словам и чтение объявлений). Шапка файла (строки 20–22) говорит то же."
+  },
+  {
+   "line": 223,
+   "theorem": "picard_unique",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "*Локальность — не дефект, а точное содержание над ℚ: гарантия касается режима $LT<1$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "На сетке условие L·T < 1 не есть точное содержание: Φ(y)_k зависит только от y_j при j < k, поэтому неподвижная точка существует, единственна и достигается итерациями за N+1 шаг при любом L·T (Check.v: picard_grid_exists_unique, picard_unique_any_rate, picard_iter_eventually_constant; пример с L·T = 3 — fix_lin_values, fix_lin_unique). Посылка Hrate теоремы picard_unique для её заключения не нужна. См. расхождение 2."
+  },
+  {
+   "line": 233,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "читая авторскую E/R/R-шапку файла `ProcessPicardOperator.v`.[^9] Это онтологическое осмысление и чтение шапки, а не приписывание коду новых утверждений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла, строки 24–33; статус раздела назван честно."
+  },
+  {
+   "line": 245,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Универсальный слой включает L3 там, где мы хотим прочитать геометрический зазор как $\\varepsilon$-сходимость и завершённый предел; само конечное сжатие и единственность как алгебраические факты его не требуют.",
+   "page_price": "ε-сходимость и предел — L3; сжатие и единственность — без L3",
+   "verdict": "mismatch-price",
+   "note": "Вторая половина верна. Первая — нет: ε-сходимость итераций и неподвижная точка на сетке доказываются без аксиом (Check.v: picard_iter_sup_cauchy, picard_fixed_exists; Qpow_vanish — Closed under the global context). См. расхождение 1."
+  },
+  {
+   "line": 276,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Именно эта конечность арены отделяет доказанное (сжатие, зазор, единственность — 0 аксиом) от границы (завершённый предел — L3-слой).",
+   "page_price": "сжатие, зазор, единственность — 0 аксиом; завершённый предел — L3-слой",
+   "verdict": "mismatch-price",
+   "note": "«0 аксиом» верно (три теоремы: Closed under the global context). «Завершённый предел — L3-слой» компилятором не подтверждается: предел итераций на конечной арене — грид-функция, доказан без аксиом (Check.v); о функции-решении на отрезке теорем нет. См. расхождение 1."
+  },
+  {
+   "line": 287,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Процессное ядро теоремы Пикара–Линделёфа здесь *есть*, и оно конечно: сжатие на $ℚ^{N+1}$, геометрическое сближение итератов и единственность неподвижной точки на сетке.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Перечислены ровно три доказанные теоремы файла: picard_op_contraction (:102), picard_iter_gap (:234), picard_unique (:183)."
+  },
+  {
+   "line": 299,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "`euler_picard_contraction` в `ProcessPicard.v`: сжатие отображения $ℚ\\toℚ$ с коэффициентом $Lh$ при $Lh<1$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В теореме (:165) ещё две посылки: 0 <= h и is_bounded_auto g M — правая часть ограничена на всём ℚ (0 < M, forall y, Qabs (g y) <= M); сжатие доказано не на ℚ, а на отрезке [y0 − M·h, y0 + M·h]. Правая часть y' = y посылке не удовлетворяет (Check.v: id_not_bounded_auto). Сама оценка с коэффициентом L·h на всём ℚ без ограниченности — euler_picard_lip (:149). См. расхождение 4."
+  },
+  {
+   "line": 300,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Опорный файл — `ProcessPicardOperator.v` (Rocq-репозиторий ToS): оператор Пикара на грид-функциях, теорема о сжатии в sup-метрике (`picard_op_contraction`), геометрический зазор итератов (`picard_iter_gap`) и единственность решения на сетке (`picard_unique`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три теоремы объявлены в файле: :102, :234, :183; формулировки — в записях стр. 120, 167, 184."
+  },
+  {
+   "line": 300,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Ключевые теоремы — 0 аксиом (`Print Assumptions`: «closed under the global context»).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Файл сам печатает Print Assumptions трёх теорем (строки 256–258); вывод компилятора для каждой — Closed under the global context.",
+   "assumptions": "picard_op_contraction, picard_unique, picard_iter_gap: Closed under the global context"
+  },
+  {
+   "line": 301,
+   "theorem": "iterate_is_cauchy",
+   "file": "src/FixedPoint.v",
+   "claim": "Обёртка «итераты сходятся к пределу» идёт через `iterate_is_cauchy` / `Qpow_vanish` в `FixedPoint.v`, наследующие `classic`.",
+   "page_price": "наследуют classic",
+   "verdict": "mismatch-price",
+   "note": "iterate_is_cauchy (:263): Closed under the global context — classic не наследует. Кроме того, лемма говорит о сжатии f : Q -> Q на отрезке (is_contraction, :47) и к оператору picard_op : (nat -> Q) -> nat -> Q по типу не применима; обёртки для итераций оператора в формализации нет (picard_iter вне своего файла не используется). См. расхождение 1."
+  },
+  {
+   "line": 301,
+   "theorem": "Qpow_vanish",
+   "file": "src/SeriesConvergence.v",
+   "claim": "Обёртка «итераты сходятся к пределу» идёт через `iterate_is_cauchy` / `Qpow_vanish` в `FixedPoint.v`, наследующие `classic`.",
+   "page_price": "наследуют classic",
+   "verdict": "mismatch-price",
+   "note": "Qpow_vanish объявлена в SeriesConvergence.v:164, а не в FixedPoint.v (там она используется, строки 290, 415, 479). Closed under the global context — classic не наследует. См. расхождение 1."
+  },
+  {
+   "line": 301,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "аксиома стандартной библиотеки: Stdlib.Logic.Classical_Prop.classic",
+   "claim": "Сжатие, зазор и единственность — 0 аксиом; предел — L3-слой.",
+   "page_price": "сжатие, зазор, единственность — 0 аксиом; предел — L3-слой",
+   "verdict": "mismatch-price",
+   "note": "Первая половина верна. classic не входит в допущения ни одного объявления, названного главой, и ни одной из теорем о сходимости итераций и о неподвижной точке, проверенных в Check.v (все — Closed under the global context). В файле главы слово classic стоит только в комментариях (строки 21 и 233). См. расхождение 1."
+  },
+  {
+   "line": 302,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Шапка размечает прямо: Rules — $\\Phi(y)_k=y_0+h\\sum_{j<k}f(t_j,y_j)$, Липшиц $\\Rightarrow$ $\\Phi$ сжатие, rate $L\\cdot T$; Roles — $\\Phi$ роль-оператор, равномерная оценка роль-метрика; Elements — грид-функции, значения $y_k$, конечные суммы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует строкам 4–7 и 25–30 шапки файла."
+  },
+  {
+   "line": 303,
+   "theorem": "picard_sum",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "`picard_sum` ${}= \\texttt{q\\_sum} (\\lambda j. f(t_j, y_j)) k$ и `picard_op`${}(y)_k = y_0 + h\\cdot \\texttt{picard\\_sum} y k$ в `ProcessPicardOperator.v`; узлы $t_j = \\texttt{tgrid} j = j\\cdot h$, длина $T = \\texttt{Tlen} = N\\cdot h$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition picard_sum (y : nat -> Q) (k : nat) : Q := q_sum (fun j => f (tgrid j) (y j)) k (:61); q_sum (ProcessMCT.v:61) — сумма по j < k."
+  },
+  {
+   "line": 303,
+   "theorem": "picard_op",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "`picard_sum` ${}= \\texttt{q\\_sum} (\\lambda j. f(t_j, y_j)) k$ и `picard_op`${}(y)_k = y_0 + h\\cdot \\texttt{picard\\_sum} y k$ в `ProcessPicardOperator.v`; узлы $t_j = \\texttt{tgrid} j = j\\cdot h$, длина $T = \\texttt{Tlen} = N\\cdot h$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition picard_op (y : nat -> Q) : nat -> Q := fun k => y0 + h * picard_sum y k (:63); tgrid j := inject_Z (Z.of_nat j) * h (:58); Tlen := inject_Z (Z.of_nat N) * h (:57)."
+  },
+  {
+   "line": 304,
+   "theorem": "picard_diff_bound",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "`picard_diff_bound` (оценка разности сумм Пикара индукцией по $k$) и `picard_op_contraction` (сжатие с коэффициентом $L\\cdot\\texttt{Tlen}$) в `ProcessPicardOperator.v`, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "picard_diff_bound (:67) доказана индукцией по k (:71); picard_op_contraction (:102) — оценка (L * Tlen) * D. Обе: Closed under the global context."
+  },
+  {
+   "line": 305,
+   "theorem": "picard_iter_gap",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "`picard_iter_gap` в `ProcessPicardOperator.v`: $\\supnorm{\\Phi^{n+1}-\\Phi^n}\\le (L\\cdot T)^n C_0$, где $C_0$ — оценка первого зазора; доказано индукцией по $n$ через теорему о сжатии. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "picard_iter_gap (:234): индукция по n (:240), шаг — picard_op_contraction (:245); оценка поузловая при k ≤ N, множитель rpow n (:216). Closed under the global context."
+  },
+  {
+   "line": 306,
+   "theorem": "picard_unique",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "`picard_unique` в `ProcessPicardOperator.v`: единственность неподвижной точки на сетке.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "picard_unique (:183): (forall k, k <= N -> picard_op y k == y k) -> (forall k, k <= N -> picard_op z k == z k) -> forall k, k <= N -> y k == z k, под посылкой раздела L * Tlen < 1 (:181)."
+  },
+  {
+   "line": 306,
+   "theorem": "gmax",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Максимум по конечной сетке реализован как `gmax` — наибольшее из $N{+}1$ рациональных значений; отсюда $D^*\\le(LT)D^*$ и $LT<1$ дают $D^*=0$ *без* обращения к пределу. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Fixpoint gmax (g : nat -> Q) (n : nat) : Q (:156) — максимум g 0 … g n через qmax2 (:137); gmax_ub (:159), gmax_lub (:168). Шаги Dstar <= (L * Tlen) * Dstar и Dstar == 0 — строки 200–203. Closed under the global context."
+  },
+  {
+   "line": 307,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Шапка файла ведёт разбор прямо: Rules — $\\Phi(y)_k=y_0+h\\sum_{j<k}f(t_j,y_j)$, Липшиц $\\Rightarrow$ сжатие rate $L\\cdot T$, итераты с зазором $(LT)^n$, единственность неподвижной точки;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Соответствует строкам 25–30 шапки файла (Rules, Roles, Elements)."
+  }
+ ]
+}

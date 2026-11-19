@@ -1,0 +1,446 @@
+{
+ "batch": "audit-part-08",
+ "chapter": "08 Обыкновенные дифференциальные уравнения/01 Задача Коши и решение как процесс.md",
+ "checked": "2026-11-18",
+ "auto": true,
+ "records": [
+  {
+   "line": 30,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Конкретные методы (Эйлер на сетке — Глава 8.2), полноценная теорема Пикара–Линделёфа как сжатие на пространстве функций (центр Части, Глава 8.3), устойчивость и единственность (Глава 8.4), экспонента и линейные уравнения (Глава 8.5) разворачивают этот каркас в подробностях.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "picard_op_contraction (:102) — оценка для сеточных функций nat -> Q на узлах k <= N; оператор picard_op y k = y0 + h * sum_{j<k} f(t_j, y_j) — левая сумма Римана с шагом сетки, его неподвижная точка есть траектория явного метода Эйлера (Check.v, picard_fixed_is_grid_euler). Слов «сеточных функций» на странице нет; существования решения файл не утверждает. Заметки, расхождение 6.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 48,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Доказанное ядро — конкретное: траектория Эйлера и (скалярная) итерация Эйлера–Пикара суть рациональные процессы; при липшицевости и достаточно малом шаге итерация есть *сжатие*, а значит — процесс Коши (банахова неподвижная точка).[^1]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "euler_picard_contraction (:165) и euler_picard_cauchy (:206) берут посылку is_bounded_auto g M (|g y| <= M при всех рациональных y) и автономную правую часть g : Q -> Q; на странице названы только липшицевость и малость шага. Линейная правая часть посылке не удовлетворяет (Check.v, linear_not_bounded_auto). Посылка снимается: Check.v, euler_picard_contraction_lip, euler_picard_cauchy_lip. Заметки, расхождение 3."
+  },
+  {
+   "line": 55,
+   "theorem": "iterate_is_cauchy",
+   "file": "src/FixedPoint.v",
+   "claim": "В текущем формальном слое сам переход от геометрического убывания итератов к их *Коши-сходимости* и к завершённому пределу наследует закон исключённого третьего (L3); это честно отмечается там, где используется, и не маскируется под конструкцию.[^2]",
+   "page_price": "наследует L3 (classic)",
+   "verdict": "mismatch-price",
+   "note": "Print Assumptions iterate_is_cauchy, euler_picard_cauchy, Qpow_vanish: Closed under the global context — Коши-сходимость итератов доказана без аксиом. Теоремы о завершённом пределе в названных файлах нет. Заметки, расхождение 1.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 60,
+   "theorem": "euler_picard_step_shrink",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "*Первый* — конкретные процессы над ℚ: траектория Эйлера, скалярная итерация Эйлера–Пикара, её сжатие и геометрический зазор итератов — доказаны точно, без аксиом;",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "euler_picard_contraction (:165), euler_picard_step_shrink (:245): |y_{n+1} - y_n| <= (L h)^n * |g(y0) h|; оба — Closed under the global context. Посылка ограниченности g — запись к стр. 48.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 62,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Коши-свойство наследует `classic` (сноски 2 и 6).",
+   "page_price": "наследует classic",
+   "verdict": "mismatch-price",
+   "note": "Имя стандартной библиотеки (Classical_Prop.classic). Print Assumptions euler_picard_cauchy и iterate_is_cauchy: Closed under the global context — classic в них не используется. Заметки, расхождение 1."
+  },
+  {
+   "line": 67,
+   "theorem": null,
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Первые два уровня глава ведёт как доказанные (с явной отметкой там, где предел требует L3), третий — как честно помеченную границу.",
+   "page_price": "предел требует L3",
+   "verdict": "mismatch-statement",
+   "note": "статус: чтения второго уровня («существование как Коши-свойство приближений») теоремами не записаны; доказано Коши-свойство итерации одного скалярного шага (euler_picard_cauchy, :206), и доказано без аксиом, так что отметки об L3 компилятор не подтверждает. Заметки, расхождения 1 и 4."
+  },
+  {
+   "line": 158,
+   "theorem": "euler_method",
+   "file": "src/process/ProcessODE.v",
+   "claim": "траектория Эйлера — это *процесс* в точном смысле тома, отображение номера стадии в рациональное приближение.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_method (:48) : VectorField -> Q -> Q -> Q -> nat -> Q; euler_process (:57) : RealProcess := fun n => euler_method f t0 y0 h n. В stdlib/ODE.v — euler_process (sys : ODE) : GenProcess Q (:52)."
+  },
+  {
+   "line": 174,
+   "theorem": "picard_step",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Итерация Пикара строит её как процесс: стартуем с постоянной $y^{(0)}(t) \\equiv y_0$ и последовательно применяем оператор, $y^{(m+1)} = \\Phi(y^{(m)})$. Каждая итерация — функция, приближающая решение; вся последовательность — процесс на пространстве функций.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Построение определено так: picard_step (:308), picard_iterate (:313), picard_process (:321); интеграл берётся на стадии N процесса integral_process. Теорем о сходимости picard_iterate в файле нет (только picard_iterate_0, picard_process_0, picard_iterate_succ); страница здесь доказанным это и не называет. Сжатие и равномерное Коши-свойство для picard_iterate доказаны в Check.v (раздел 6)."
+  },
+  {
+   "line": 196,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Если $f$ липшицева по $y$ с константой $L$, то на достаточно малом шаге итерация Эйлера–Пикара — *сжатие*: расстояние между образами двух приближений строго меньше расстояния между самими приближениями, с коэффициентом $r < 1$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "euler_picard_contraction (:165): для автономной g : Q -> Q при is_lipschitz_auto g L, is_bounded_auto g M, 0 <= h, L * h < 1 отображение y |-> y0 + g y * h есть is_contraction на [y0 - M h, y0 + M h] с коэффициентом L h. Посылка ограниченности на странице не названа. Заметки, расхождение 3."
+  },
+  {
+   "line": 199,
+   "theorem": "iterate_is_cauchy",
+   "file": "src/FixedPoint.v",
+   "claim": "А сжатие, по банаховой схеме, порождает процесс Коши: последовательные приближения сближаются геометрически.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "iterate_is_cauchy (:263): is_contraction f a b c -> a <= x -> x <= b -> is_cauchy (fun n => iterate f x n); iterate_step_shrink (:108): |x_{n+1} - x_n| <= c^n |f x - x|. Оба — Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 202,
+   "theorem": "euler_picard_cauchy",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Таким образом существование решения переписывается *без* обращения к завершённой функции: *приближения, порождённые уравнением, образуют процесс Коши*.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "euler_picard_cauchy (:206) — Коши-свойство последовательности y_{n+1} = y0 + g(y_n) h при фиксированном шаге h. Её неподвижная точка p = y0 + h g(p) есть значение одного неявного шага Эйлера, а не решение на отрезке: для y' = y, y0 = 1, h = 1/2 итерация сходится к 2 (Check.v, linear_scalar_iteration_limit). Ни траектория Эйлера, ни итерации Пикара на функциях этой теоремой не охвачены. Заметки, расхождение 4."
+  },
+  {
+   "line": 220,
+   "theorem": "euler_picard_cauchy",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Доказано конечное и процессное: уравнение порождает процесс приближений, и при липшицевости этот процесс — Коши.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Доказано для итерации одного скалярного шага (euler_picard_cauchy, :206; посылки — автономная g, липшицева и ограниченная на всём Q, L * h < 1). Для итераций Пикара на сетке и на функциях Q -> Q утверждение доводится: Check.v, picard_iter_is_Cauchy, picard_iterate_uniformly_cauchy. Заметки, расхождение 4."
+  },
+  {
+   "line": 226,
+   "theorem": "picard_iter_gap",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Доказано конструктивно (0 аксиом) — алгебра сжатия и геометрический зазор итератов (Глава 8.3, `picard_iter_gap`);",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "picard_iter_gap (:234): на узлах k <= N при первом зазоре <= C выполнено |picard_iter (S n) k - picard_iter n k| <= rpow n * C, rpow n = (L * Tlen)^n. Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 228,
+   "theorem": "Qpow_vanish",
+   "file": "src/SeriesConvergence.v",
+   "claim": "сама Коши-сходимость и завершённый предел в текущем формальном слое наследуют L3 через `Qpow_vanish` и честно помечаются по `Print Assumptions`.",
+   "page_price": "наследуют L3 через Qpow_vanish",
+   "verdict": "mismatch-price",
+   "note": "Qpow_vanish (:164) доказана через неравенство Бернулли и nat_archimedean; Print Assumptions Qpow_vanish, iterate_is_cauchy, euler_picard_cauchy: Closed under the global context. Завершённого предела названные файлы не строят. Заметки, расхождение 1.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 238,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "Оговорка об уровне: «система решения» здесь — содержательная *интерпретация* конструкции (уравнение плюс правило порождения приближений плюс сходимость), а не объект, буквально объявленный в коде как `System`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в шести опорных файлах главы запись System (TheoryOfSystems_Core_ERR.v:203) не используется (поиск по слову System — пусто)."
+  },
+  {
+   "line": 304,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Следующая глава предъявляет простейший из этих процессов во всей конкретности — метод Эйлера на рациональной сетке: траекторию как порождающий процесс, строгое различение номера стадии и шага сетки, и явные рациональные приближения к экспоненте, линейному и квадратичному решениям.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В PicardLindelof.v: euler_traj (:36); вычисления для f(t,y) = y (euler_traj_exp_1, _2, _4: 2, 9/4, 625/256), f = 1 (euler_traj_linear_1, _2, _4), f = 2t (euler_traj_quadratic_4 = 3/4). Содержание Главы 8.2 здесь не сверялось."
+  },
+  {
+   "line": 311,
+   "theorem": "ODE",
+   "file": "src/stdlib/ODE.v",
+   "claim": "Опорные файлы — `ProcessODE.v` и `ProcessPicard.v` (каталог `src/process/` Rocq-репозитория ToS), плюс `stdlib/ODE.v` (запись `ODE` с шагом Эйлера как `GenProcess`, 22 доказанных утверждения, 0 `Admitted`).",
+   "page_price": "0 Admitted",
+   "verdict": "ok",
+   "note": "Record ODE := mkODE { ode_f; ode_x0; ode_h } (:33); в файле 22 Qed, строк Admitted, Axiom, Parameter нет. Одноимённое объявление: Definition ODE := Q -> Q -> Q (analysis/PicardLindelof.v:31)."
+  },
+  {
+   "line": 311,
+   "theorem": "GenProcess",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Опорные файлы — `ProcessODE.v` и `ProcessPicard.v` (каталог `src/process/` Rocq-репозитория ToS), плюс `stdlib/ODE.v` (запись `ODE` с шагом Эйлера как `GenProcess`, 22 доказанных утверждения, 0 `Admitted`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition GenProcess (A : Type) := nat -> A (ProcessGeneral.v:50); в stdlib/ODE.v:52 — Definition euler_process (sys : ODE) : GenProcess Q := fun n => euler_steps sys n. В саму запись ODE поле типа GenProcess не входит."
+  },
+  {
+   "line": 311,
+   "theorem": "Admitted",
+   "external": true,
+   "assumptions": "не применимо (ключевое слово)",
+   "claim": "Опорные файлы — `ProcessODE.v` и `ProcessPicard.v` (каталог `src/process/` Rocq-репозитория ToS), плюс `stdlib/ODE.v` (запись `ODE` с шагом Эйлера как `GenProcess`, 22 доказанных утверждения, 0 `Admitted`).",
+   "page_price": "0 Admitted",
+   "verdict": "ok",
+   "note": "Ключевое слово Rocq, не имя. В stdlib/ODE.v строк «Admitted.» нет (слово стоит только в шапке и в итоговом комментарии); то же в остальных пяти файлах главы."
+  },
+  {
+   "line": 311,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Скалярное сжатие Эйлера–Пикара и его Коши-свойство — `euler_picard_contraction` и `euler_picard_cauchy` в `ProcessPicard.v`; банахов слой — `iterate_is_cauchy` в `FixedPoint.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Объявление есть (:165), вид — Theorem. Closed under the global context. О посылке ограниченности — запись к стр. 48.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 311,
+   "theorem": "euler_picard_cauchy",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Скалярное сжатие Эйлера–Пикара и его Коши-свойство — `euler_picard_contraction` и `euler_picard_cauchy` в `ProcessPicard.v`; банахов слой — `iterate_is_cauchy` в `FixedPoint.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem euler_picard_cauchy (:206): 0 <= h -> is_lipschitz_auto g L -> is_bounded_auto g M -> L * h < 1 -> is_cauchy (euler_picard_process g y0 h). Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 311,
+   "theorem": "iterate_is_cauchy",
+   "file": "src/FixedPoint.v",
+   "claim": "Скалярное сжатие Эйлера–Пикара и его Коши-свойство — `euler_picard_contraction` и `euler_picard_cauchy` в `ProcessPicard.v`; банахов слой — `iterate_is_cauchy` в `FixedPoint.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma iterate_is_cauchy (:263); на неё опирается доказательство euler_picard_cauchy (ProcessPicard.v:213). Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": "banach_fixed_point",
+   "file": "src/FixedPoint.v",
+   "claim": "Банахова теорема о неподвижной точке (`banach_fixed_point`) и Коши-сходимость итератов (`iterate_is_cauchy`) в `FixedPoint.v` наследуют `classic` через лемму о затухании $c^n$ (`Qpow_vanish`) — шапка файла отмечает это прямо, и в нём стоят `Print Assumptions` для обеих.",
+   "page_price": "наследуют classic",
+   "verdict": "mismatch-price",
+   "note": "Print Assumptions banach_fixed_point: Closed under the global context. Объявление (:386) — Definition, а не теорема: оно упаковывает последовательность итератов в запись CauchySeq. Шапка файла (:12) действительно называет classic — она устарела; команды Print Assumptions в файле стоят (:730, :731). Заметки, расхождения 1 и 2.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": "iterate_is_cauchy",
+   "file": "src/FixedPoint.v",
+   "claim": "Банахова теорема о неподвижной точке (`banach_fixed_point`) и Коши-сходимость итератов (`iterate_is_cauchy`) в `FixedPoint.v` наследуют `classic` через лемму о затухании $c^n$ (`Qpow_vanish`) — шапка файла отмечает это прямо, и в нём стоят `Print Assumptions` для обеих.",
+   "page_price": "наследуют classic",
+   "verdict": "mismatch-price",
+   "note": "Print Assumptions iterate_is_cauchy: Closed under the global context. Цена на странице названа по шапке файла (:12), а не по компилятору. Заметки, расхождение 1.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": "Qpow_vanish",
+   "file": "src/SeriesConvergence.v",
+   "claim": "Банахова теорема о неподвижной точке (`banach_fixed_point`) и Коши-сходимость итератов (`iterate_is_cauchy`) в `FixedPoint.v` наследуют `classic` через лемму о затухании $c^n$ (`Qpow_vanish`) — шапка файла отмечает это прямо, и в нём стоят `Print Assumptions` для обеих.",
+   "page_price": "наследуют classic",
+   "verdict": "mismatch-price",
+   "note": "Lemma Qpow_vanish (:164): 0 < r -> r < 1 -> 0 < eps -> exists N, Qpow r N < eps; доказательство — неравенство Бернулли и nat_archimedean, без MCT. Print Assumptions: Closed under the global context. В том же файле classic стоит у Qpow_cauchy (:232) и geometric_series_cauchy (:389), которыми FixedPoint.v не пользуется. Заметки, расхождение 1.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Банахова теорема о неподвижной точке (`banach_fixed_point`) и Коши-сходимость итератов (`iterate_is_cauchy`) в `FixedPoint.v` наследуют `classic` через лемму о затухании $c^n$ (`Qpow_vanish`) — шапка файла отмечает это прямо, и в нём стоят `Print Assumptions` для обеих.",
+   "page_price": "наследуют classic",
+   "verdict": "mismatch-price",
+   "note": "Имя стандартной библиотеки (Classical_Prop.classic). В допущениях banach_fixed_point, iterate_is_cauchy, Qpow_vanish его нет: все три — Closed under the global context. Заметки, расхождение 1."
+  },
+  {
+   "line": 312,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "*Конструктивно (0 аксиом)* здесь другое: алгебраическая оценка *сжатия* (`euler_picard_contraction`, `ProcessPicard.v`) и — в расширенном слое Главы 8.3 — *геометрический зазор* итератов и *единственность* решения на сетке (`picard_iter_gap`, `picard_unique` в `ProcessPicardOperator.v`, проверено `Print Assumptions`: «closed under the global context»).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions euler_picard_contraction: Closed under the global context. Слова «здесь другое» относятся к противопоставлению, которого компилятор не подтверждает, — запись к той же строке о цене iterate_is_cauchy.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": "picard_iter_gap",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "*Конструктивно (0 аксиом)* здесь другое: алгебраическая оценка *сжатия* (`euler_picard_contraction`, `ProcessPicard.v`) и — в расширенном слое Главы 8.3 — *геометрический зазор* итератов и *единственность* решения на сетке (`picard_iter_gap`, `picard_unique` в `ProcessPicardOperator.v`, проверено `Print Assumptions`: «closed under the global context»).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem picard_iter_gap (:234). Print Assumptions: Closed under the global context; команда стоит в файле (:258).",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": "picard_unique",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "*Конструктивно (0 аксиом)* здесь другое: алгебраическая оценка *сжатия* (`euler_picard_contraction`, `ProcessPicard.v`) и — в расширенном слое Главы 8.3 — *геометрический зазор* итератов и *единственность* решения на сетке (`picard_iter_gap`, `picard_unique` в `ProcessPicardOperator.v`, проверено `Print Assumptions`: «closed under the global context»).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Theorem picard_unique (:183): две неподвижные точки picard_op на узлах k <= N совпадают; посылки раздела — липшицевость и L * Tlen < 1. Closed under the global context. Сомнительное: заключение верно без обеих посылок (Check.v, picard_unique_any_step) — заметки, сомнительные места, п. 1.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 312,
+   "theorem": null,
+   "file": "src/FixedPoint.v",
+   "claim": "Стержень главы — именно это различие: алгебра сжатия и зазор строятся без аксиом, переход к завершённому пределу — L3-слой.",
+   "page_price": "переход к завершённому пределу — L3",
+   "verdict": "mismatch-price",
+   "note": "Различия цены между сжатием, зазором и Коши-сходимостью компилятор не показывает: все названные теоремы — Closed under the global context. Теоремы о завершённом пределе с допущением classic в названных файлах нет. Заметки, расхождение 1."
+  },
+  {
+   "line": 314,
+   "theorem": "euler_step",
+   "file": "src/process/ProcessODE.v",
+   "claim": "Шаг Эйлера и метод — `euler_step` и `euler_method` в `ProcessODE.v`; траектория Эйлера на рациональной сетке — `euler_traj` в `analysis/PicardLindelof.v`; в `stdlib/ODE.v` шаг Эйлера оформлен как `GenProcess` — порождающий процесс тома, отображение $ℕ \\to ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition euler_step (f : VectorField) (t y h : Q) : Q := y + h * f t y (ProcessODE.v:44). Одноимённые объявления: analysis/PicardLindelof.v:33 (порядок аргументов f h t y), navier_stokes/InvariantRegion.v:463, navier_stokes/ResolutionRegularity.v:44."
+  },
+  {
+   "line": 314,
+   "theorem": "euler_method",
+   "file": "src/process/ProcessODE.v",
+   "claim": "Шаг Эйлера и метод — `euler_step` и `euler_method` в `ProcessODE.v`; траектория Эйлера на рациональной сетке — `euler_traj` в `analysis/PicardLindelof.v`; в `stdlib/ODE.v` шаг Эйлера оформлен как `GenProcess` — порождающий процесс тома, отображение $ℕ \\to ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint euler_method (:48): y_0 = y0, y_{m+1} = euler_step f (t0 + m h) y_m h. Вычислено (Check.v): для f(t,y) = y, y0 = 1 — один шаг h = 1/2 даёт 3/2, два шага h = 1/4 дают 25/16."
+  },
+  {
+   "line": 314,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Шаг Эйлера и метод — `euler_step` и `euler_method` в `ProcessODE.v`; траектория Эйлера на рациональной сетке — `euler_traj` в `analysis/PicardLindelof.v`; в `stdlib/ODE.v` шаг Эйлера оформлен как `GenProcess` — порождающий процесс тома, отображение $ℕ \\to ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint euler_traj (f : ODE) (y0 : Q) (N k : nat) : Q (:36): шаг 1/N, узлы grid N k = k/N — сетка отрезка [0, 1]."
+  },
+  {
+   "line": 314,
+   "theorem": "GenProcess",
+   "file": "src/ProcessGeneral.v",
+   "claim": "Шаг Эйлера и метод — `euler_step` и `euler_method` в `ProcessODE.v`; траектория Эйлера на рациональной сетке — `euler_traj` в `analysis/PicardLindelof.v`; в `stdlib/ODE.v` шаг Эйлера оформлен как `GenProcess` — порождающий процесс тома, отображение $ℕ \\to ℚ$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "stdlib/ODE.v:52 — Definition euler_process (sys : ODE) : GenProcess Q := fun n => euler_steps sys n; GenProcess Q = nat -> Q (ProcessGeneral.v:50). Как GenProcess оформлена последовательность шагов (траектория), а не один шаг."
+  },
+  {
+   "line": 314,
+   "theorem": "ode_is_process",
+   "file": "src/process/ProcessODE.v",
+   "claim": "Что решение *есть* процесс, а не его предел, зафиксировано в `ode_is_process` (`ProcessODE.v`): пара «процесс-решение / процесс-ошибка», где процесс-решение совпадает с итерацией Эйлера–Пикара.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "ode_is_process (:333): exists sol_proc err_proc, (forall n, sol_proc n == euler_picard_iterate g y0 h n) /\\ (forall n, 0 <= err_proc n) /\\ is_Cauchy sol_proc. От err_proc требуется только неотрицательность — годится любой неотрицательный процесс, в том числе нулевой (Check.v, ode_is_process_with_zero_err); с процессом-решением он не связан. Доводится: Check.v, ode_is_process_err. Заметки, расхождение 5.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 315,
+   "theorem": "picard_step",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Интегральный шаг Пикара `picard_step` определён в `ProcessPicard.v`; интеграл в нём — процесс накопления Части V.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition picard_step f y0 y_prev t N := y0 + integral_process (fun s => f s (y_prev s)) 0 t N (:308); integral_process (process/ProcessIntegral.v:56) — процесс Главы V.5: сумма Римана по левым концам с N + 1 отрезками. В picard_step взята одна стадия N этого процесса."
+  },
+  {
+   "line": 315,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Полноценная теорема о сжатии оператора Пикара *на пространстве функций* (а не только скалярного шага) — центр Части, Глава 8.3 (`ProcessPicardOperator.v`).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Теорема файла говорит не о picard_step, названном в той же сноске, а о другом операторе: picard_op (:63) на сеточных функциях nat -> Q, сумма по узлам j < k с шагом сетки h, сравнение на k <= N. О picard_step в формализации нет ни одной теоремы о сжатии. Доводится: Check.v, picard_step_contraction, picard_iterate_gap, picard_iterate_uniformly_cauchy. Заметки, расхождение 6.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 316,
+   "theorem": "euler_picard_contraction",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "В скалярном слое: `euler_picard_contraction` (`ProcessPicard.v`) доказывает, что отображение $y \\mapsto y_0 + f(y) h$ есть сжатие (`is_contraction`) с коэффициентом $Lh$ при $Lh<1$ — это конструктивно, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "mismatch-statement",
+   "note": "Цена верна (Closed under the global context). В утверждении (:165) есть ещё посылка is_bounded_auto g M, и сжатие доказано на отрезке [y0 - M h, y0 + M h]; на странице ограниченность не названа. Заметки, расхождение 3.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 316,
+   "theorem": "is_contraction",
+   "file": "src/FixedPoint.v",
+   "claim": "В скалярном слое: `euler_picard_contraction` (`ProcessPicard.v`) доказывает, что отображение $y \\mapsto y_0 + f(y) h$ есть сжатие (`is_contraction`) с коэффициентом $Lh$ при $Lh<1$ — это конструктивно, 0 аксиом.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition is_contraction f a b c (:47): 0 <= c, c < 1, f переводит [a, b] в себя, |f x - f y| <= c |x - y| на [a, b]. Сжатие определено на отрезке рациональных чисел."
+  },
+  {
+   "line": 316,
+   "theorem": "euler_picard_cauchy",
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Переход от сжатия к самой *Коши-сходимости* итератов (`euler_picard_cauchy` там же; `iterate_is_cauchy` в `FixedPoint.v`) идёт через лемму о затухании $c^n$ (`Qpow_vanish`) и потому наследует `classic`.",
+   "page_price": "наследует classic",
+   "verdict": "mismatch-price",
+   "note": "Print Assumptions euler_picard_cauchy, iterate_is_cauchy, Qpow_vanish: Closed under the global context. Путь через Qpow_vanish назван верно (FixedPoint.v:290), но classic эта лемма не использует. Заметки, расхождение 1.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 316,
+   "theorem": null,
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Иными словами, «приближения образуют процесс Коши» распадается на конструктивную алгебру сжатия и L3-зависимый предельный переход — что и проверяется `Print Assumptions`.",
+   "page_price": "L3-зависимый предельный переход",
+   "verdict": "mismatch-price",
+   "note": "Print Assumptions показывает обратное: и сжатие, и Коши-свойство — Closed under the global context. Заметки, расхождение 1."
+  },
+  {
+   "line": 317,
+   "theorem": "banach_fixed_point",
+   "file": "src/FixedPoint.v",
+   "claim": "Полная банахова теорема в форме «неподвижная точка *существует*» (`banach_fixed_point`) наследует `classic`;",
+   "page_price": "наследует classic",
+   "verdict": "mismatch-statement",
+   "note": "banach_fixed_point (:386) — Definition: по сжатию и начальной точке строит запись CauchySeq из итератов; утверждения «существует p с f p == p» в файле нет, и над Q оно неверно: x |-> x/2 + 1/x — сжатие отрезка [1, 2] без рациональной неподвижной точки (Check.v, contraction_without_rational_fixed_point). Цена тоже иная: Closed under the global context. Заметки, расхождение 2.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 317,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Полная банахова теорема в форме «неподвижная точка *существует*» (`banach_fixed_point`) наследует `classic`;",
+   "page_price": "наследует classic",
+   "verdict": "mismatch-price",
+   "note": "Имя стандартной библиотеки (Classical_Prop.classic). Print Assumptions banach_fixed_point: Closed under the global context. Заметки, расхождения 1 и 2."
+  },
+  {
+   "line": 317,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "см. также `ProcessPicardOperator.v` (Глава 8.3), где *сжатие на пространстве функций*, *единственность* решения на сетке и *геометрический зазор* итератов доказаны без аксиом, а явная обёртка «итераты $\\to$ завершённое решение» честно отнесена к этому L3-слою.",
+   "page_price": "без аксиом; обёртка — L3-слой",
+   "verdict": "mismatch-price",
+   "note": "Три теоремы файла — Closed under the global context, это верно. Обёртки в файле нет (о ней говорит комментарий, :20–22, :230–233), и слой, к которому она отнесена, аксиом не требует: Коши-свойство сеточных итераций доказано без аксиом двумя путями (Check.v, picard_iter_is_Cauchy, picard_iter_sup_cauchy). О словах «на пространстве функций» — запись к стр. 315. Заметки, расхождения 1 и 6."
+  },
+  {
+   "line": 318,
+   "theorem": null,
+   "file": "src/process/ProcessPicard.v",
+   "claim": "Шапки дают разметку прямо: `ProcessODE.v` и `ProcessPicard.v` — Elements: рациональные приближения, узлы сетки, шаг $h$; Roles: приближение — стадия, решение — предел, $f$ — поле скорости; Rules: шаг Эйлера / оператор Пикара, сжатие при липшицевости.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В шапках двух названных файлов разметка иная: ProcessPicard.v (:2–4) — Elements: Picard iterates y_n(t) (rational approximations); Roles: Cauchy process converging to ODE solution; Rules: Lipschitz contraction via FixedPoint.v; ProcessODE.v (:2–4) — Euler method iterates, Picard-Lindelöf process; existence and uniqueness; Picard contraction + Gronwall stability. Узлы сетки, шаг и «f -> VectorField» стоят в шапках analysis/PicardLindelof.v и stdlib/ODE.v, где шаг назван ролью (StepSize). Заметки, расхождение 7."
+  },
+  {
+   "line": 318,
+   "theorem": null,
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "Шапка `ProcessPicardOperator.v` (Глава 8.3) помечает завершённую функцию-решение как роль-предел явно.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка (:20–22): «global continuation, blow-up, and the COMPLETED solution-function as an object remain role-limits»; (:33): «завершённая функция-решение (предел) / глобальное продолжение — роль-предел / граница»."
+  }
+ ]
+}

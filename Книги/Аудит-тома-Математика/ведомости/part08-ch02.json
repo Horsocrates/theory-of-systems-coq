@@ -1,0 +1,453 @@
+{
+ "batch": "audit-part-08",
+ "chapter": "08 Обыкновенные дифференциальные уравнения/02 Метод Эйлера решение на сетке.md",
+ "checked": "2026-11-18",
+ "auto": true,
+ "records": [
+  {
+   "line": 11,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Настоящая глава предъявляет *простейший* такой процесс во всей конкретности — метод Эйлера на рациональной сетке. Здесь нет ни одного предельного перехода: всё, что строится, — конечные рациональные числа, вычислимые точной арифметикой над ℚ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint euler_traj (f : ODE) (y0 : Q) (N k : nat) : Q (:36) — значения в Q; подключены только QArith, Qabs, Lia, ZArith, List, Lqa. Утверждений о пределе в PicardLindelof.v и ProcessExpProcess.v нет."
+  },
+  {
+   "line": 27,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Траектория Эйлера определена как рекурсия над ℚ;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint euler_traj (:36): O => y0; S k' => euler_step f (1 / inject_Z (Z.of_nat N)) (grid N k') (euler_traj f y0 N k') — структурная рекурсия по k."
+  },
+  {
+   "line": 28,
+   "theorem": "euler_traj_linear_4",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "её значения на эталонных уравнениях вычислены точно: для линейного уравнения метод *точен*,",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В названном файле совпадение с решением доказано в трёх узлах одной сетки: euler_traj f_const_one 0 4 k при k = 1, 2, 4 (:142, :148, :154), и в одном узле для y' = 3 (euler_linear_exact_2, :324). Общего утверждения о euler_traj нет; для другой рекурсии оно есть — euler_constant_explicit (stdlib/ODE.v:139), на странице не названо. Доводится: euler_traj_const_exact (Check.v, раздел 1), Closed. Заметки, расхождение 2."
+  },
+  {
+   "line": 29,
+   "theorem": "euler_quadratic_error",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "для квадратичного даёт явную рациональную ошибку,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_quadratic_error : 1 - euler_traj f_two_t 0 4 4 == 1 # 4 (:172) — ошибка на одной сетке (N = 4) в момент t = 1. Об общих словах стр. 142–143 — отдельная запись."
+  },
+  {
+   "line": 29,
+   "theorem": "euler_traj_exp_converges",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "для экспоненциального — последовательность $(1+1/N)^N$ рациональных приближений, ограниченную снизу двойкой и сверху тройкой.[^1]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Сверху тройкой оценены четыре стадии: N = 4 (euler_traj_exp_converges : 625 # 256 < 3, :120; euler_exp_sandwich, :282) и N = 1, 2, 3 (exp1_below3, ProcessExpProcess.v:152). Для всех N оценки < 3 в src нет — страница сама говорит это на стр. 185–187. Снизу двойкой — exp1_lower, для всех N. Доводится: exp1_upper : forall N, exp1_process N < 3 (Check.v, раздел 4), Closed. Заметки, расхождение 1."
+  },
+  {
+   "line": 33,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Чего глава *не* делает: она не берёт предел $N\\to\\infty$ как завершённый объект, не утверждает, что Эйлер *сходится* к точному решению как к готовой функции, и не предъявляет $e$ как завершённую трансцендентность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный: в двух названных файлах нет ни определения предела, ни теоремы о сходимости. Лемма с именем euler_traj_exp_converges (:120) по утверждению есть сравнение чисел 625 # 256 < 3."
+  },
+  {
+   "line": 39,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "*Первый* — конкретные рациональные траектории и их точные значения над ℚ: доказаны без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "В PicardLindelof.v 23 Qed, в ProcessExpProcess.v 12 Qed; строк Axiom, Parameter, Admitted нет. Print Assumptions всех 35 утверждений (PA.v) — Closed under the global context.",
+   "assumptions": "все 23 утверждения PicardLindelof.v и все 12 утверждений ProcessExpProcess.v: Closed under the global context"
+  },
+  {
+   "line": 40,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "*Второй* — процессные *чтения*: сетка как разрешение, номер шага как стадия, ломаная как процесс-решение, измельчение как уточнение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Чтение, не теорема. В коде ему отвечает вид определения: N и k — отдельные аргументы euler_traj (:36), euler_traj f y0 N имеет тип nat -> Q. Типы RealProcess и GenProcess в файле не упоминаются (ProcessCore не подключён)."
+  },
+  {
+   "line": 43,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Первые два глава ведёт как доказанные, третий — как честно помеченную границу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказанным в Rocq является первый уровень (конкретные значения; сверх того нижняя оценка 2 для всех N и тождество exp1_is_euler). Второй уровень страница сама называет чтениями; утверждений о сходимости и о пределе она не заявляет (стр. 33–37)."
+  },
+  {
+   "line": 86,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Это определение — буквальная *рекурсия* над ℚ: каждое следующее значение получается из предыдущего одним рациональным шагом, и вся последовательность $y_0, y_1, y_2, …$ есть процесс в точном смысле тома — отображение номера стадии в рациональное приближение.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Fixpoint euler_traj (:36); при фиксированных f, y0, N это функция nat -> Q — тот же тип, что развёрнутый RealProcess; в самом файле на тип процесса тома ссылки нет."
+  },
+  {
+   "line": 114,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Вызов `euler_traj f y0 N k` принимает оба индекса отдельно, и шаг $h = 1/N$ зависит от разрешения, а не от номера стадии.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: (N : nat) (k : nat) — два аргумента (:36); шаг 1 / inject_Z (Z.of_nat N) от k не зависит. Запись вызова совпадает с порядком аргументов."
+  },
+  {
+   "line": 115,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Два эталонных режима ниже показывают это наглядно: для экспоненты мы растим $N$ (уточняем сетку, держа конечное время $t=1$, то есть $k = N$); для линейного и квадратичного — продвигаем $k$ по фиксированной сетке $N = 4$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Леммы устроены так: для f_identity — (N, k) = (1, 1), (2, 2), (4, 4) (:87, :98, :109); для f_const_one — N = 4, k = 1, 2, 4 (:142–:154); для f_two_t — N = 4 и один узел k = 4 (:165)."
+  },
+  {
+   "line": 129,
+   "theorem": "euler_traj_linear_1",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Метод Эйлера на сетке $N = 4$ даёт значения, *в точности* совпадающие с решением в узлах: $y_1 = 1/4$, $y_2 = 1/2$, $y_4 = 1$.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_traj f_const_one 0 4 1 == 1 # 4 (:142), … 4 2 == 1 # 2 (:148), … 4 4 == 1 (:154). Узел k = 3 леммой не записан; вычислено: 3 # 4 (Check.v, linear_node_3). Решение y(t) = t в файле не объявлено: леммы сравнивают с числами."
+  },
+  {
+   "line": 131,
+   "theorem": "euler_traj_linear_4",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Причина точности проста: наклон постоянен, касательная *совпадает* с графиком, и шаг по касательной не накапливает ошибки. Для уравнений без кривизны метод Эйлера не приближает, а *воспроизводит* решение.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Общее утверждение («для уравнений без кривизны») в названном файле опоры не имеет: три узла сетки N = 4 для y' = 1 и один узел для y' = 3 (:324). Для траектории главы доводится: euler_traj_const_exact : forall a y0 N k, euler_traj (f_const a) y0 N k == y0 + a * grid N k (Check.v, раздел 1), Closed. Заметки, расхождение 2."
+  },
+  {
+   "line": 139,
+   "theorem": "euler_traj_quadratic_4",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "На сетке $N = 4$ в конечный момент $t = 1$ метод даёт $3/4$, тогда как точное значение — $1$; ошибка — ровно $1/4$.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_traj_quadratic_4 : euler_traj f_two_t 0 4 4 == 3 # 4 (:165); euler_quadratic_error : 1 - euler_traj f_two_t 0 4 4 == 1 # 4 (:172). Точное значение входит в утверждение числом 1."
+  },
+  {
+   "line": 142,
+   "theorem": "euler_quadratic_error",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Метод недооценивает решение (выпуклая кривая обгоняет свои касательные), и мера этого отставания на каждой конкретной сетке вычислена точно.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Ошибка вычислена на одной сетке: N = 4, t = 1 (:172); для других N и других узлов утверждений в src нет. Доводится: euler_traj_quadratic_closed (y_k = t_k² − t_k·h) и euler_quadratic_error_general : forall N, (0 < N)%nat -> 1 - euler_traj f_two_t 0 N N == 1 / inject_Z (Z.of_nat N) (Check.v, раздел 2), Closed. Заметки, расхождение 3."
+  },
+  {
+   "line": 149,
+   "theorem": "euler_step_concrete",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Шаг Эйлера здесь особенно прозрачен: поскольку $f(t,y) = y$, каждый шаг умножает значение на $(1 + h)$,",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma euler_step_concrete : forall h t y, euler_step f_identity h t y == y * (1 + h) (:65), для любого h."
+  },
+  {
+   "line": 157,
+   "theorem": "euler_yeqy_closed",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "так что после $N$ шагов размера $h = 1/N$ значение в момент $t = 1$ есть $(1 + 1/N)^N$.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сноска 7 называет лемму об одном шаге. Замкнутый вид доказан для локальной рекурсии euler_yeqy: euler_yeqy h y0 M == y0 * qpow (1 + h) M (ProcessExpProcess.v:71); для euler_traj главы — только при N = 1, 2, 4 (:87, :98, :109). Связь двух рекурсий теоремой не записана; доказана в Check.v, раздел 3 (euler_traj_exp_closed, euler_traj_is_euler_yeqy). Заметки, сомнительное место 1."
+  },
+  {
+   "line": 166,
+   "theorem": "euler_traj_exp_4",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "растущую в сторону $e$; для показанных стадий проверены и точные значения, и оценки — в частности $2 < 625/256 < 3$.[^8]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Значения: euler_traj_exp_1, _2, _4 (:87, :98, :109). Рост на показанных стадиях: euler_monotone_exp (:258), euler_monotone_exp_2_4 (:270). Оценки для N = 4: euler_exp_sandwich (:282). При N = 1 стадия равна 2, нижняя оценка там нестрогая."
+  },
+  {
+   "line": 175,
+   "theorem": null,
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Последовательность $(1+1/N)^N$ — это *не* завершённое число $e$ с «хвостом приближений», а сам процесс, чьи стадии суть рациональные числа $2, 9/4, 64/27, 625/256, …$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "2, 9/4, 625/256 — euler_traj_exp_1, _2, _4 (PicardLindelof.v); 64/27 — exp1_2 (ProcessExpProcess.v:64). Для euler_traj при N = 3 леммы нет; вычислено в Check.v (frag_exp_stages)."
+  },
+  {
+   "line": 182,
+   "theorem": "exp1_is_euler",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "тамошняя последовательность $(1+1/(N{+}1))^{N+1}$ — та же лестница рациональных стадий, и доказано, что она *есть* траектория Эйлера уравнения $y' = y$ при $t = 1$ и ограничена снизу двойкой *для всех* $N$ (по неравенству Бернулли); рост проверен на конкретных стадиях.[^9]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma exp1_is_euler : forall N, exp1_process N == euler_yeqy (1 / inject_Z (Z.of_nat (S N))) 1 (S N) (:81). euler_yeqy (:40) — локальная рекурсия y + h·y этого файла, не euler_traj главы; «та же лестница» с euler_traj совпадает по значениям при N = 1, 2 (леммы), в общем виде — Check.v, exp1_is_euler_traj. Заметки, сомнительное место 1."
+  },
+  {
+   "line": 182,
+   "theorem": "exp1_lower",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "тамошняя последовательность $(1+1/(N{+}1))^{N+1}$ — та же лестница рациональных стадий, и доказано, что она *есть* траектория Эйлера уравнения $y' = y$ при $t = 1$ и ограничена снизу двойкой *для всех* $N$ (по неравенству Бернулли); рост проверен на конкретных стадиях.[^9]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma exp1_lower : forall N, 2 <= exp1_process N (:129); доказательство — через bernoulli_nonneg (:91): 0 <= x -> 1 + n·x <= qpow (1 + x) n."
+  },
+  {
+   "line": 182,
+   "theorem": "exp1_climb",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "тамошняя последовательность $(1+1/(N{+}1))^{N+1}$ — та же лестница рациональных стадий, и доказано, что она *есть* траектория Эйлера уравнения $y' = y$ при $t = 1$ и ограничена снизу двойкой *для всех* $N$ (по неравенству Бернулли); рост проверен на конкретных стадиях.[^9]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma exp1_climb : exp1_process 0 < exp1_process 1 /\\ exp1_process 1 < exp1_process 2 (:149) — две пары соседних стадий."
+  },
+  {
+   "line": 185,
+   "theorem": null,
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Полная монотонность для всех $N$ и оценка $< 3$ для всех $N$ (через бином) в нашей формализации не доказаны — это честная граница данного слоя; явное число $e$ как завершённая трансцендентность — роль-предел.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус честный на 18.11: exp1_process и euler_yeqy встречаются только в ProcessExpProcess.v, euler_traj — только в PicardLindelof.v; в них и в PeanoExistence.v — только конкретные стадии. Оба утверждения доказаны в пробном файле без аксиом и без бинома: exp1_upper (раздел 4), exp1_increasing (раздел 5); при переносе в src фразу нужно будет переписать (заметки, расхождение 1)."
+  },
+  {
+   "line": 188,
+   "theorem": "exp1_below3",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Доказано конкретное: отдельные рациональные стадии, нижняя оценка ${}\\ge 2$ для всех $N$ и проверяемые верхние оценки для показанных стадий; завершённое $e$ не строится.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Стадии: exp1_0, exp1_1, exp1_2 (:58–:64); нижняя оценка: exp1_lower (:129); верхние: exp1_below3 : exp1_process 0 < 3 /\\ exp1_process 1 < 3 /\\ exp1_process 2 < 3 (:152) и 625 # 256 < 3 (PicardLindelof.v:120)."
+  },
+  {
+   "line": 203,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«система приближения» здесь — содержательная *интерпретация* конструкции (сетка плюс рекуррентный шаг плюс измельчение), а не объект, буквально объявленный в коде как `System`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) — TheoryOfSystems_Core_ERR.v:203. PicardLindelof.v и ProcessExpProcess.v этот модуль не подключают и объектов типа System не строят; оговорка честная."
+  },
+  {
+   "line": 268,
+   "theorem": "picard_op_contraction",
+   "file": "src/process/ProcessPicardOperator.v",
+   "claim": "от траектории Эйлера — к оператору Пикара, действующему на целые функции, и к доказанной теореме о том, что этот оператор есть *сжатие на пространстве функций* — на конечной сетке, в sup-метрике над $ℚ^{N+1}$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem picard_op_contraction (:102): при 0 < L, липшицевости f по y и 0 <= h — если |y j − z j| <= D при всех j <= N, то |picard_op y k − picard_op z k| <= (L * Tlen) * D при k <= N. Это оценка с множителем L·T; сжатием она становится при L·T < 1 — условие в этой фразе не названо, Глава 8.3 его называет. Сверка по существу — в ведомости Главы 8.3."
+  },
+  {
+   "line": 276,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Опорный файл — `analysis/PicardLindelof.v` (Rocq-репозиторий ToS): `grid`, `euler_step`, `euler_traj` и теоремы о конкретных траекториях (`euler_traj_linear_4`, `euler_quadratic_error`, `euler_traj_exp_4` и др.).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл и все шесть объявлений есть: grid (:28), euler_step (:33), euler_traj (:36), euler_traj_linear_4 (:154), euler_quadratic_error (:172), euler_traj_exp_4 (:109). В файле 23 Qed (шапка: 23)."
+  },
+  {
+   "line": 276,
+   "theorem": "vm_compute",
+   "external": true,
+   "assumptions": "не применимо (тактика)",
+   "claim": "Все — точная рациональная арифметика (`vm_compute` или `ring`), 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Цена верна: Print Assumptions всех 23 утверждений файла — Closed under the global context. Перечень тактик неполон: vm_compute закрывает три леммы о стадиях экспоненты (:87, :98, :109); названные euler_traj_linear_4 и euler_quadratic_error закрыты тактикой field (:157, :175). Заметки, сомнительное место 3."
+  },
+  {
+   "line": 276,
+   "theorem": "ring",
+   "external": true,
+   "assumptions": "не применимо (тактика)",
+   "claim": "Все — точная рациональная арифметика (`vm_compute` или `ring`), 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "ring закрывает euler_step_concrete (:68), euler_step_additive, euler_step_scaling, grid_0; леммы о линейной и квадратичной траекториях — field; сравнения чисел — lia после развёртывания Qlt; euler_traj_0 — lra."
+  },
+  {
+   "line": 277,
+   "theorem": "grid",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`grid N k` ${}= \\texttt{inject\\_Z(Z.of\\_nat k)} / \\texttt{inject\\_Z(Z.of\\_nat N)}$ в `PicardLindelof.v` — это $k/N$ над ℚ. Шаг $h = 1/N$ зашит в определение траектории.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition grid (N k : nat) : Q := inject_Z (Z.of_nat k) / inject_Z (Z.of_nat N) (:28) — совпадает. Шаг 1 / inject_Z (Z.of_nat N) стоит в теле euler_traj (:39). При N = 0 деление в Q даёт нуль и траектория постоянна (Check.v, traj_N0_constant); страница берёт N >= 1 (стр. 71)."
+  },
+  {
+   "line": 278,
+   "theorem": "euler_step",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_step f h t y` ${}= y + h \\cdot f t y$ и `euler_traj f y0 N k` (рекурсия по $k$ с шагом $1/N$ и узлами `grid N k'`) в `PicardLindelof.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition euler_step (f : ODE) (h t y : Q) : Q := y + h * f t y (:33); euler_traj (:36) — как сказано. Одноимённые euler_step есть ещё в трёх файлах (process/ProcessODE.v:44 — с другим порядком аргументов; два в navier_stokes — шаг для модальных состояний); глава называет PicardLindelof.v."
+  },
+  {
+   "line": 278,
+   "theorem": "euler_traj_0",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "База `euler_traj_0`: `euler_traj f y0 N 0 == y0`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma euler_traj_0 : forall f y0 N, euler_traj f y0 N 0 == y0 (:76) — совпадает дословно."
+  },
+  {
+   "line": 279,
+   "theorem": "euler_traj",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Именно поэтому в `euler_traj` разрешение $N$ и номер $k$ — разные аргументы, а шаг $1/\\texttt{inject\\_Z(Z.of\\_nat N)}$ берётся от $N$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно (:36–:41)."
+  },
+  {
+   "line": 279,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Сходимость $(1+1/N)^N \\to e$ — это рост $N$ *при* $k = N$ (фиксированное конечное время $t = 1$); движение по линейной траектории — рост $k$ при фиксированном $N$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Описание двух режимов; форма лемм ему отвечает (euler_traj f_identity 1 N N при N = 1, 2, 4; euler_traj f_const_one 0 4 k при k = 1, 2, 4). Теоремы о сходимости в файле нет, и страница её не заявляет (стр. 33–37)."
+  },
+  {
+   "line": 280,
+   "theorem": "euler_traj_linear_4",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_traj_linear_1`, `_2`, `_4` в `PicardLindelof.v`: `euler_traj f_const_one 0 4 k` даёт $1/4, 1/2, 1$ для $k = 1, 2, 4$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_traj_linear_1 (:142), euler_traj_linear_2 (:148), euler_traj_linear_4 (:154) — значения 1 # 4, 1 # 2, 1. Closed under the global context."
+  },
+  {
+   "line": 280,
+   "theorem": "_2",
+   "external": true,
+   "claim": "`euler_traj_linear_1`, `_2`, `_4` в `PicardLindelof.v`: `euler_traj f_const_one 0 4 k` даёт $1/4, 1/2, 1$ для $k = 1, 2, 4$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сокращённая запись имён: в сноске 5 — euler_traj_linear_2 (PicardLindelof.v:148), в сноске 8 — euler_traj_exp_2 (:98), в сноске 9 — exp1_2 (ProcessExpProcess.v:64). Все три объявления есть, каждое — Closed under the global context; отдельного имени _2 нет, и глава его не утверждает."
+  },
+  {
+   "line": 280,
+   "theorem": "_4",
+   "external": true,
+   "claim": "`euler_traj_linear_1`, `_2`, `_4` в `PicardLindelof.v`: `euler_traj f_const_one 0 4 k` даёт $1/4, 1/2, 1$ для $k = 1, 2, 4$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сокращённая запись имён: в сноске 5 — euler_traj_linear_4 (PicardLindelof.v:154), в сноске 8 — euler_traj_exp_4 (:109). Оба объявления есть, Closed under the global context; отдельного имени _4 нет."
+  },
+  {
+   "line": 280,
+   "theorem": "lipschitz_const",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`lipschitz_const`: поле $f \\equiv 1$ липшицево с $L = 0$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma lipschitz_const : is_lipschitz_y f_const_one 0 (:195); is_lipschitz_y f L := forall t y1 y2, Qabs (f t y1 - f t y2) <= L * Qabs (y1 - y2) (:57). Одноимённая лемма есть в analysis/FTC.v:61; глава называет PicardLindelof.v."
+  },
+  {
+   "line": 281,
+   "theorem": "euler_quadratic_error",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_traj_quadratic_4`: `euler_traj f_two_t 0 4 4 == 3#4`; `euler_quadratic_error`: $1 - 3/4 = 1/4$. Оба в `PicardLindelof.v`, точная арифметика.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждения совпадают: euler_traj f_two_t 0 4 4 == 3 # 4 (:165); 1 - euler_traj f_two_t 0 4 4 == 1 # 4 (:172). Обе леммы закрыты тактикой field."
+  },
+  {
+   "line": 282,
+   "theorem": "euler_step_concrete",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_step_concrete`: `euler_step f_identity h t y == y*(1+h)` в `PicardLindelof.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с утверждением (:65) с точностью до пробелов: euler_step f_identity h t y == y * (1 + h)."
+  },
+  {
+   "line": 282,
+   "theorem": "lipschitz_identity",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`lipschitz_identity`: поле $f(t,y)=y$ липшицево с $L = 1$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma lipschitz_identity : is_lipschitz_y f_identity 1 (:183). Одноимённая лемма есть в analysis/FTC.v:73; глава называет PicardLindelof.v."
+  },
+  {
+   "line": 283,
+   "theorem": "euler_traj_exp_1",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_traj_exp_1`, `_2`, `_4`: значения $2,\\ 9/4,\\ 625/256$; `euler_traj_exp_lower` ($2 < 625/256$) и `euler_traj_exp_converges` ($625/256 < 3$). Все в `PicardLindelof.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_traj f_identity 1 1 1 == 2 (:87); euler_traj f_identity 1 2 2 == 9 # 4 (:98); euler_traj f_identity 1 4 4 == 625 # 256 (:109)."
+  },
+  {
+   "line": 283,
+   "theorem": "euler_traj_exp_lower",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_traj_exp_1`, `_2`, `_4`: значения $2,\\ 9/4,\\ 625/256$; `euler_traj_exp_lower` ($2 < 625/256$) и `euler_traj_exp_converges` ($625/256 < 3$). Все в `PicardLindelof.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma euler_traj_exp_lower : 2 < 625 # 256 (:131) — сравнение двух чисел, траектория в утверждение не входит; с траекторией его связывает euler_traj_exp_4, а в одном утверждении — euler_exp_sandwich (:282). Страница пересказывает утверждение верно."
+  },
+  {
+   "line": 283,
+   "theorem": "euler_traj_exp_converges",
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "`euler_traj_exp_1`, `_2`, `_4`: значения $2,\\ 9/4,\\ 625/256$; `euler_traj_exp_lower` ($2 < 625/256$) и `euler_traj_exp_converges` ($625/256 < 3$). Все в `PicardLindelof.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma euler_traj_exp_converges : 625 # 256 < 3 (:120) — сравнение двух чисел; о сходимости утверждение не говорит, слово «converges» есть только в имени. Страница пересказывает утверждение верно («625/256 < 3»)."
+  },
+  {
+   "line": 284,
+   "theorem": "exp1_0",
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "`exp1_is_euler` (тождество «$e$-процесс${}={}$траектория Эйлера для $y'=y$ при $t=1$») и `exp1_lower` ($e$-процесс${}\\ge 2$ *для всех* $N$, через Бернулли) — общие; `exp1_climb` (рост на первых стадиях) и стадии $2, 9/4, 64/27$ (`exp1_0`, `_1`, `_2`) — конкретные.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "exp1_process 0 == 2 (:58), exp1_process 1 == 9 # 4 (:61), exp1_process 2 == 64 # 27 (:64). Деление на общие и конкретные названо верно: exp1_is_euler и exp1_lower — с квантором forall N; exp1_climb — стадии 0, 1, 2."
+  },
+  {
+   "line": 284,
+   "theorem": "_1",
+   "external": true,
+   "claim": "`exp1_is_euler` (тождество «$e$-процесс${}={}$траектория Эйлера для $y'=y$ при $t=1$») и `exp1_lower` ($e$-процесс${}\\ge 2$ *для всех* $N$, через Бернулли) — общие; `exp1_climb` (рост на первых стадиях) и стадии $2, 9/4, 64/27$ (`exp1_0`, `_1`, `_2`) — конкретные.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Сокращённая запись имени exp1_1 (ProcessExpProcess.v:61): exp1_process 1 == 9 # 4, Closed under the global context; отдельного имени _1 нет."
+  },
+  {
+   "line": 284,
+   "theorem": null,
+   "file": "src/process/ProcessExpProcess.v",
+   "claim": "Все в `ProcessExpProcess.v` (Глава 8.5, батч C), 0 аксиом (проверено `Print Assumptions`).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Файл — src/process/ProcessExpProcess.v, 12 Qed (шапка: 12). Print Assumptions всех 12 утверждений — Closed under the global context; команды Print Assumptions exp1_is_euler и exp1_lower стоят в конце самого файла (:166–:167). Глава 8.5 называет этот файл (сноски 1, 4, 5).",
+   "assumptions": "все 12 утверждений ProcessExpProcess.v: Closed under the global context"
+  },
+  {
+   "line": 285,
+   "theorem": null,
+   "file": "src/analysis/PicardLindelof.v",
+   "claim": "Шапка `PicardLindelof.v` даёт разметку прямо: Elements — правая часть $f$, узлы сетки $t_k$, значения траектории $y_k$; Roles — шаг как приближение, траектория как процесс-решение; Rules — $y_{k+1} = y_k + h f(t_k,y_k)$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Шапка (:10–:15): «Elements: ODE rhs f, grid points t_k, trajectory values y_k» — совпадает; «Roles: f -> VectorField, y_k -> Approximation, h -> StepSize» — на странице иначе: приближением названо значение y_k, шаг h назван размером шага, поле f пропущено; «траектория как процесс» стоит в строке «P4 connection», не в Roles; «Rules: Euler recurrence (constitution), Lipschitz contraction (bound)» — вторая половина на странице пропущена. Заметки, расхождение 4."
+  }
+ ]
+}
