@@ -1,0 +1,640 @@
+{
+ "batch": "audit-part-09",
+ "chapter": "09 Уравнения в частных производных/02 Уравнение теплопроводности диффузия как сглаживание.md",
+ "checked": "2026-11-23",
+ "auto": true,
+ "records": [
+  {
+   "line": 31,
+   "theorem": "heat_step",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Доказанное ядро — конкретное и над ℚ. Явная схема теплопроводности определена как рекурсия над grid-функциями;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition heat_step (:46): fun j => r * u (ppred N j) + (1 - 2*r) * u j + r * u (S j); рекурсия по номеру шага — Fixpoint heat_iter (:49). grid_fn := nat -> Q (GridFunction.v:132): профиль — последовательность по всем натуральным номерам; левый сосед узла 0 — u (N−1), правый сосед узла j — u (S j) при всех j (у узла N−1 это u N). Closed under the global context."
+  },
+  {
+   "line": 32,
+   "theorem": "heat_iter_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "при $0\\le r\\le \\tfrac12$ доказан *принцип максимума* (значения не выходят за начальные пределы) и *диссипация энергии* (на периодической сетке норма не растёт ни на одном шаге), а сглаживание импульса вычислено точно.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Принцип максимума: heat_step_box (:74) — один шаг, heat_iter_box (:87) — forall n u, для всякой grid-функции, всякого N и всякого числа шагов при 0 <= r, 2*r <= 1. Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 32,
+   "theorem": "heat_iter_energy_step",
+   "file": "src/process/ProcessHeatProcess.v",
+   "claim": "при $0\\le r\\le \\tfrac12$ доказан *принцип максимума* (значения не выходят за начальные пределы) и *диссипация энергии* (на периодической сетке норма не растёт ни на одном шаге), а сглаживание импульса вычислено точно.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): названа периодическая сетка и «ни на одном шаге». heat_iter_energy_step : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u (S n)) <= gf_norm_sq N (heat_iter r N u n) (ProcessHeatProcess.v:131) — на каждом шаге; между любыми двумя шагами — heat_iter_energy_mono (:140). Closed under the global context. Прежняя лемма одного шага — heat_step_energy (ProcessHeatEquation.v:124), при u N == u 0.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 36,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Чего глава *не* делает: она не строит завершённую функцию-решение $u(x,t)$, не доказывает непрерывный предел (измельчение сетки до нуля), не вводит тепловое ядро (гауссиану) как готовый объект и не доказывает сходимость к равновесию при $t\\to\\infty$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: в файле нет ни сравнения двух сеток, ни предела по шагу сетки, ни ядра, ни утверждения о поведении heat_iter при растущем номере шага (кроме сохранения бокса)."
+  },
+  {
+   "line": 41,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "*Первый* — конечная схема над ℚ: выпуклая комбинация, принцип максимума, диссипация энергии, конкретное сглаживание — доказаны без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Все восемь лемм файла (heat_step_linear, heat_step_box, heat_iter_box, jensen3, heat_step_energy, heat_peak_drops, heat_energy_value, heat_energy_decreased) — Closed under the global context; строк Axiom, Parameter, Admitted в файле нет. Диссипация — для одного шага (запись к стр. 144).",
+   "assumptions": "все 8 лемм файла: Closed under the global context"
+  },
+  {
+   "line": 53,
+   "theorem": "heat_step",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "**Rules (Правила, $\\leftrightarrow$ L5).** Явная схема $u^{n+1}_j = r u_{j-1} + (1-2r) u_j + r u_{j+1}$; при $0\\le r\\le\\tfrac12$ коэффициенты неотрицательны и в сумме дают единицу (выпуклая комбинация); отсюда принцип максимума и диссипация энергии $\\sum_j u_j^2$; условие устойчивости (CFL) $r\\le\\tfrac12$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формула совпадает с heat_step (:46) и с шапкой файла (стр. 8–10, 20–21). Условие 0 <= r, 2*r <= 1 стоит посылкой в heat_step_box, heat_iter_box, jensen3, heat_step_energy. Определения «устойчивости» в файле нет: доказаны сохранение бокса на всех шагах и невозрастание энергии за шаг; необходимость условия не записана (заметки, сомнительное место 2)."
+  },
+  {
+   "line": 70,
+   "theorem": "heat_step",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Лапласиан в узле — центрированная вторая разность $u_{j+1}-2u_j+u_{j-1}$,[^2] и шаг схемы есть",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_step (:46) записан сразу в перегруппированном виде; запись u_j + r·(u_{j+1} − 2u_j + u_{j−1}) в файле отдельным утверждением не стоит. Две записи равны тождественно (ring): Check.v, heat_step_euler_form."
+  },
+  {
+   "line": 84,
+   "theorem": "heat_step",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "При $0\\le r\\le\\tfrac12$ три коэффициента $r,\\ 1-2r,\\ r$ неотрицательны и в сумме равны единице. Значит, новое значение — *выпуклое среднее* (взвешенное, с весами-долями) старого значения и двух его соседей.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Следует из вида heat_step (:46): веса r, 1 − 2r, r. Отдельной леммы о весах в файле нет; свойство используется внутри доказательств heat_step_box (nra) и jensen3. Постоянный профиль неподвижен при любом r: Check.v, heat_step_const."
+  },
+  {
+   "line": 86,
+   "theorem": "heat_box_iff",
+   "file": "src/process/ProcessHeatProcess.v",
+   "claim": "Условие устойчивости $r\\le\\tfrac12$ есть в точности требование, чтобы веса были долями (неотрицательны): тогда шаг *усредняет*.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (формализацией; текст фразы не менялся): «в точности» теперь теорема (при r >= 0): heat_box_iff : forall r N, (forall (u : grid_fn) lo hi, in_box u lo hi -> in_box (heat_step r N u) lo hi) <-> (0 <= r /\\ 2*r <= 1) (ProcessHeatProcess.v:222). Closed under the global context. Вне условия энергия может расти: heat_alt_energy_grows (:255).",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 107,
+   "theorem": "heat_step_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Это доказано прямо из выпуклости комбинации, при $0\\le r\\le\\tfrac12$.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma heat_step_box : forall r N (u : grid_fn) lo hi, 0 <= r -> 2*r <= 1 -> in_box u lo hi -> in_box (heat_step r N u) lo hi (:74). Квантор — по всякой grid-функции, всякому N и всяким границам; in_box — по всем натуральным номерам узлов. Closed under the global context."
+  },
+  {
+   "line": 107,
+   "theorem": "heat_iter_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "По индукции принцип держится *на всём процессе*: сколько бы шагов ни прошло, значения не выходят за начальные пределы.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma heat_iter_box : forall r N lo hi, 0 <= r -> 2*r <= 1 -> forall n u, in_box u lo hi -> in_box (heat_iter r N u n) lo hi (:87); индукция по n. Периодичности не требует. Closed under the global context."
+  },
+  {
+   "line": 114,
+   "theorem": "heat_step_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Это — дискретный принцип максимума, и над ℚ он есть конечный факт о выпуклых комбинациях, а не предельная теорема.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение в .v — сохранение двусторонней границы [lo, hi] на всех узлах и всех шагах; для схемы без пространственной границы это и есть дискретный принцип максимума (границы начального слоя не превышаются). Необходимость условия на r — заметки, сомнительное место 2."
+  },
+  {
+   "line": 124,
+   "theorem": null,
+   "file": "src/navier_stokes/GridFunction.v",
+   "claim": "Под энергией здесь понимаем дискретную $L^2$-энергию $E = \\sum_j u_j^2$ — простую меру величины (концентрации) профиля; при сохранённой массе её убывание соответствует сглаживанию.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Энергия — gf_norm_sq N u = sum_Q_ns (fun i => u i * u i) N (GridFunction.v:189), сумма по узлам 0..N−1 без множителя 1/N. О сохранении суммы значений («массы») в формализации утверждения нет; страница о доказанности не говорит. Закон верен: Check.v, heat_step_mass (один шаг, N > 0, u N == u 0, любое r) и heat_iter_mass (весь процесс, периодический профиль) — заметки, сомнительное место 1."
+  },
+  {
+   "line": 126,
+   "theorem": "heat_step_energy",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Усреднение сглаживает, поэтому энергия не должна расти — и не растёт:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma heat_step_energy : forall r N (u : grid_fn), 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> u N == u 0%nat -> gf_norm_sq N (heat_step r N u) <= gf_norm_sq N u (:124). Оба условия формулы на стр. 130 (0 <= r <= 1/2, периодическая сетка) в посылках есть; периодичность записана одним равенством u N == u 0. Утверждение — об одном шаге. Closed under the global context."
+  },
+  {
+   "line": 133,
+   "theorem": "jensen3",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Механизм — неравенство Йенсена: квадрат выпуклого среднего не превосходит того же среднего квадратов (геометрически это неотрицательность дисперсии).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma jensen3 : forall r a b c : Q, 0 <= r -> 2*r <= 1 -> (r*a + (1-2*r)*b + r*c) * (r*a + (1-2*r)*b + r*c) <= r*(a*a) + (1-2*r)*(b*b) + r*(c*c) (:102); доказательство — тождество с тремя неотрицательными слагаемыми (стр. 109–112). Closed under the global context."
+  },
+  {
+   "line": 142,
+   "theorem": "sum_pred_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "а на периодической сетке суммы сдвинутых квадратов равны несдвинутой (циклическая перестановка узлов не меняет суммы), поэтому правая часть равна $[ r+(1-2r)+r ]\\sum_j u_j^2 = \\sum_j u_j^2$.[^6]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Левый сдвиг: sum_pred_shift_periodic (:67) — при 0 < N сумма по ppred N j равна сумме (перестановка узлов 0..N−1). Правый сдвиг: sum_ns_shift_periodic (:48) — сумма g (S j) по j < N равна сумме g при посылке g N == g 0 (узел N приравнен к узлу 0 посылкой, а не определением). Так и идёт доказательство heat_step_energy (стр. 138–145). Closed under the global context."
+  },
+  {
+   "line": 144,
+   "theorem": "heat_iter_energy_step",
+   "file": "src/process/ProcessHeatProcess.v",
+   "claim": "Энергия диссипирует: с каждым шагом профиль становится более «гладким» в этой точной рациональной мере.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (формализацией; текст фразы не менялся): «с каждым шагом» теперь доказано на периодической сетке: heat_iter_energy_step : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u (S n)) <= gf_norm_sq N (heat_iter r N u n) (ProcessHeatProcess.v:131) — на каждом шаге; между любыми двумя шагами — heat_iter_energy_mono (:140). Closed under the global context. Одной посылки u N == u 0 для этого мало: energy_two_steps_fails (:95).",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 147,
+   "theorem": "sum_ns_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "Здесь существенно использована именно периодическая сетка: левый и правый сдвиг суть перестановки конечного набора узлов; для иных границ (Дирихле, Неймана) появились бы отдельные граничные члены.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В определении шага циклическим сделан только левый сосед (ppred, ProcessPDEGreen.v:63); правый сосед — S j, и правый сдвиг суммы есть перестановка лишь при посылке g N == g 0 (sum_ns_shift_periodic, :48). Граничные члены без этой посылки выписаны: sum_ns_shift_S (:38) — сумма g (S j) равна сумме g минус g 0 плюс g N. Схем с границами Дирихле и Неймана в файле нет — страница так и говорит. О следствии для многих шагов — запись к стр. 144."
+  },
+  {
+   "line": 162,
+   "theorem": "heat_impulse_profile",
+   "file": "src/process/ProcessHeatProcess.v",
+   "claim": "Пик оседает с $1$ до $\\tfrac12$, а соседи поднимаются до $\\tfrac14$: профиль $(1,0,0,0)$ переходит в $(\\tfrac12,\\tfrac14,0,\\tfrac14)$.[^7]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (формализацией; текст фразы не менялся): все четыре значения профиля записаны одной леммой: heat_impulse_profile : heat_step (1#4) 4 u_imp 0 == 1#2 /\\ heat_step (1#4) 4 u_imp 1 == 1#4 /\\ heat_step (1#4) 4 u_imp 2 == 0 /\\ heat_step (1#4) 4 u_imp 3 == 1#4 (ProcessHeatProcess.v:428). Closed under the global context. Прежняя heat_peak_drops (ProcessHeatEquation.v:157) даёт значение узла 0.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 164,
+   "theorem": "heat_energy_value",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Энергия падает с $1$ до $\\tfrac38$,[^8]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_energy_value (:161): gf_norm_sq 4 (heat_step (1#4) 4 u_imp) == 3#8; heat_energy_decreased (:165): строгое сравнение с gf_norm_sq 4 u_imp. Начальная энергия 1 отдельной леммой не записана; проверена вычислением (Check.v, imp_energy0). Оба — одно вычисление на одном наборе чисел; страница так и подаёт. Closed under the global context."
+  },
+  {
+   "line": 169,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "*Где граница.* Доказано конечное: одна сетка, конечное число шагов, точные рациональные значения.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Точно для принципа максимума (всякое N, всякое число шагов n — heat_iter_box). Для энергии доказан один шаг (запись к стр. 144). Сравнения разных сеток в файле нет."
+  },
+  {
+   "line": 216,
+   "theorem": "in_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Существенно, что принцип максимума выражен как сохранение *интервала-инварианта*, а не через построение максимума и минимума как отдельных объектов; а диссипация — как монотонность конечной суммы.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition in_box (u : grid_fn) (lo hi : Q) : Prop := forall k, lo <= u k /\\ u k <= hi (:56) — границы задаются извне, максимум и минимум не строятся. Диссипация — неравенство между двумя конечными суммами gf_norm_sq N за один шаг (heat_step_energy). Одноимённое in_box есть ещё в src/process/ProcessTransport.v:50; глава называет ProcessHeatEquation.v."
+  },
+  {
+   "line": 237,
+   "theorem": "heat_step",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Опорный файл — `ProcessHeatEquation.v` (каталог `process/` Rocq-репозитория ToS): `heat_step`, принцип максимума `heat_step_box`/`heat_iter_box`, диссипация `heat_step_energy`, конкретное сглаживание `heat_peak_drops` и `heat_energy_decreased`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл src/process/ProcessHeatEquation.v есть (170 строк); все шесть имён объявлены в нём: heat_step (:46), heat_step_box (:74), heat_iter_box (:87), heat_step_energy (:124), heat_peak_drops (:157), heat_energy_decreased (:165)."
+  },
+  {
+   "line": 237,
+   "theorem": "heat_energy_decreased",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "8 доказанных утверждений, 0 аксиом (`Print Assumptions`: «closed under the global context»).",
+   "page_price": "0 аксиом; closed under the global context",
+   "verdict": "ok",
+   "note": "Число верно: grep -c 'Qed\\.' даёт 8 (шапка — тоже 8). Print Assumptions всех восьми лемм: Closed under the global context; в конце файла стоят две команды Print Assumptions (heat_step_box, heat_step_energy). Допущения по компилятору — все 8 лемм файла: Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 237,
+   "theorem": "sum_pred_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "Инструменты диссипации — из `ProcessPDEGreen.v` (Глава 9.1).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Из ProcessPDEGreen.v доказательство heat_step_energy берёт ppred (:63), sum_pred_shift_periodic (:67), sum_ns_shift_periodic (:48); формулу Грина green_dirichlet_periodic и оценку lap_norm_bound того же файла оно не использует (Глава 9.1, сноска 4, это оговаривает). Суммы и нормы — из navier_stokes/GridFunction.v."
+  },
+  {
+   "line": 238,
+   "theorem": "dd",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "Здесь, как и предупреждалось в Главе 9.1, используется *центрированный* лапласиан (а не повторная прямая разность `dd`);",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition dd (f : grid_fn) : grid_fn := fun i => f (S (S i)) - 2 * f (S i) + f i (:75). Предупреждение — Глава 9.1, стр. 128. Это та же вторая разность со сдвигом номера: heat_step r N u (S k) == u (S k) + r * dd u k (Check.v, heat_step_dd); отличие — только в узле 0, где левый сосед берётся циклически. В heat_step имя dd не используется."
+  },
+  {
+   "line": 238,
+   "theorem": "ppred",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "левый сосед на периодической сетке — циклический предшественник `ppred`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition ppred (N j : nat) : nat := match j with O => Nat.pred N | S k => k end (:63): у узла 0 левый сосед — узел N−1. Правый сосед в heat_step — S j, не циклический: у узла N−1 это узел N, и периодичность правого края входит посылкой u N == u 0 (запись к стр. 144)."
+  },
+  {
+   "line": 239,
+   "theorem": "heat_step_linear",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_step` в `ProcessHeatEquation.v`; линейность — `heat_step_linear`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma heat_step_linear : forall r N a b (f g : grid_fn) j, heat_step r N (fun k => a * f k + b * g k) j == a * heat_step r N f j + b * heat_step r N g j (:63); доказательство — ring, условия на r нет. Closed under the global context."
+  },
+  {
+   "line": 239,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Условие $0\\le r\\le\\tfrac12$ ровно и есть неотрицательность весов: это *и* CFL-условие устойчивости.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первая половина — арифметика весов r, 1 − 2r, r. Вторая — название условия: в файле оно стоит посылкой четырёх лемм; утверждения о том, что при r > 1/2 граница или энергия нарушаются, в файле нет. Оно верно: Check.v, heat_box_iff и heat_alt_energy_grows (заметки, сомнительное место 2)."
+  },
+  {
+   "line": 240,
+   "theorem": "heat_step_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_step_box` в `ProcessHeatEquation.v`: при $0\\le r$ и $2r\\le1$ из `in_box u lo hi` следует `in_box (heat_step r N u) lo hi`.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Совпадает с утверждением heat_step_box (:74) дословно. Closed under the global context."
+  },
+  {
+   "line": 240,
+   "theorem": "in_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Доказательство — неотрицательность весов плюс то, что они в сумме единица; ни максимума, ни минимума как отдельных объектов строить не нужно — работаем с инвариантом интервала. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Доказательство heat_step_box (стр. 76–84): три применения посылки in_box (к узлам ppred N k, k, S k) и nra для каждой из двух границ. in_box (:56) — границы lo, hi даны параметрами. Closed under the global context."
+  },
+  {
+   "line": 241,
+   "theorem": "heat_iter_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_iter_box`: для любого числа шагов `in_box` сохраняется. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "heat_iter_box (:87): forall n u; посылки 0 <= r, 2*r <= 1 сноска не повторяет — они названы в тексте (стр. 107) и в сноске 4. Closed under the global context."
+  },
+  {
+   "line": 242,
+   "theorem": "heat_step_energy",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_step_energy` в `ProcessHeatEquation.v`: поузельный Йенсен `jensen3` (неотрицательность дисперсии трёхточечной выпуклой комбинации) плюс леммы о циклическом сдвиге суммы (`sum_pred_shift_periodic`, `sum_ns_shift_periodic` из `ProcessPDEGreen.v`, Глава 9.1). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Так и устроено доказательство (стр. 127–146): sum_ns_le с jensen3, затем sum_pred_shift_periodic и sum_ns_shift_periodic. Посылки леммы — 0 <= r, 2*r <= 1, (0 < N)%nat, u N == u 0%nat; один шаг. Closed under the global context."
+  },
+  {
+   "line": 242,
+   "theorem": "jensen3",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_step_energy` в `ProcessHeatEquation.v`: поузельный Йенсен `jensen3` (неотрицательность дисперсии трёхточечной выпуклой комбинации) плюс леммы о циклическом сдвиге суммы (`sum_pred_shift_periodic`, `sum_ns_shift_periodic` из `ProcessPDEGreen.v`, Глава 9.1). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "jensen3 (:102) — для любых рациональных a, b, c при 0 <= r, 2*r <= 1. Closed under the global context."
+  },
+  {
+   "line": 242,
+   "theorem": "sum_pred_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "`heat_step_energy` в `ProcessHeatEquation.v`: поузельный Йенсен `jensen3` (неотрицательность дисперсии трёхточечной выпуклой комбинации) плюс леммы о циклическом сдвиге суммы (`sum_pred_shift_periodic`, `sum_ns_shift_periodic` из `ProcessPDEGreen.v`, Глава 9.1). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma sum_pred_shift_periodic : forall (g : nat -> Q) N, (0 < N)%nat -> sum_Q_ns (fun j => g (ppred N j)) N == sum_Q_ns g N (:67). Closed under the global context."
+  },
+  {
+   "line": 242,
+   "theorem": "sum_ns_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "`heat_step_energy` в `ProcessHeatEquation.v`: поузельный Йенсен `jensen3` (неотрицательность дисперсии трёхточечной выпуклой комбинации) плюс леммы о циклическом сдвиге суммы (`sum_pred_shift_periodic`, `sum_ns_shift_periodic` из `ProcessPDEGreen.v`, Глава 9.1). 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma sum_ns_shift_periodic : forall (g : nat -> Q) N, g N == g 0%nat -> sum_Q_ns (fun j => g (S j)) N == sum_Q_ns g N (:48). Closed under the global context."
+  },
+  {
+   "line": 243,
+   "theorem": "heat_peak_drops",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_peak_drops`: `heat_step (1#4) 4 u_imp 0 == 1#2`. Точная рациональная арифметика (`vm_compute`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с утверждением (:157) с точностью до пометок области (4%nat, 0%nat). u_imp (:153) равна 1 в узлах 0 и 4 и нулю в остальных. Доказательство — vm_compute. reflexivity. Closed under the global context."
+  },
+  {
+   "line": 243,
+   "theorem": "vm_compute",
+   "external": true,
+   "assumptions": "не применимо (тактика)",
+   "claim": "`heat_peak_drops`: `heat_step (1#4) 4 u_imp 0 == 1#2`. Точная рациональная арифметика (`vm_compute`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "`vm_compute` — тактика Rocq, не имя формализации. Ею закрыты три леммы примера: heat_peak_drops (:158), heat_energy_value (:162), heat_energy_decreased (:167)."
+  },
+  {
+   "line": 244,
+   "theorem": "heat_energy_value",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_energy_value` ($E = 3/8$) и `heat_energy_decreased` ($3/8 < 1$) в `ProcessHeatEquation.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma heat_energy_value : gf_norm_sq 4%nat (heat_step (1#4) 4%nat u_imp) == 3#8 (:161). Closed under the global context."
+  },
+  {
+   "line": 244,
+   "theorem": "heat_energy_decreased",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "`heat_energy_value` ($E = 3/8$) и `heat_energy_decreased` ($3/8 < 1$) в `ProcessHeatEquation.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma heat_energy_decreased : gf_norm_sq 4%nat (heat_step (1#4) 4%nat u_imp) < gf_norm_sq 4%nat u_imp (:165) — сравнение с начальной энергией, равной 1 (Check.v, imp_energy0). Closed under the global context."
+  },
+  {
+   "line": 245,
+   "theorem": "heat_step",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Шапка размечает прямо: Rules — `heat_step` как выпуклая комбинация при $r\\le\\tfrac12$, принцип максимума, диссипация; Roles — $u^n$ роль-состояние, $r$ роль-скорость, бокс роль-инвариант, энергия роль-диссипирующая; Elements — рациональные $u_j$, конечная сетка, шаг.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с шапкой файла (стр. 19–24): «Rules (L5): heat_step = выпуклая комбинация соседей при r≤1/2; принцип максимума; энергия не растёт; CFL r≤1/2», «Roles (L4): u^n = роль-состояние; r = роль-скорость; бокс = роль-инвариант; энергия = роль-диссипирующая; сглаживание = роль-процесс», «Elements: рациональные u_j, конечная сетка, шаг n». «Равномерный предел — роль-предел» (стр. 61 страницы) в шапке не стоит: там роль-пределами названы u(x,t) и непрерывный предел."
+  },
+  {
+   "line": 124,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (формализацией; текст фразы не менялся): «при сохранённой массе» — закон сохранения суммы записан: heat_iter_mass : forall r N u n, (0 < N)%nat -> gperiodic N u -> sum_Q_ns (heat_iter r N u n) N == sum_Q_ns u N (ProcessHeatProcess.v:184) — при любом r; один шаг — heat_step_mass (:162). Closed under the global context.",
+   "theorem": "heat_iter_mass",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Под энергией здесь понимаем дискретную $L^2$-энергию $E = \\sum_j u_j^2$ — простую меру величины (концентрации) профиля; при сохранённой массе её убывание соответствует сглаживанию."
+  },
+  {
+   "line": 145,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (вопрос 2 шага 1, вариант 1): новая фраза. «Шаг схемы её сохраняет»: heat_step_gperiodic : forall r N u, (0 < N)%nat -> gperiodic N u -> gperiodic N (heat_step r N u) (ProcessHeatProcess.v:113); на всём процессе — heat_iter_gperiodic (:122). Closed under the global context.",
+   "theorem": "heat_step_gperiodic",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Периодичность здесь — свойство самого профиля, $u_{j+N}=u_j$ при всех $j$: шаг схемы её сохраняет, и потому оценка действует на каждом шаге, на всём процессе."
+  },
+  {
+   "line": 145,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Оценка действует на каждом шаге, на всём процессе»: heat_iter_energy : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u n) <= gf_norm_sq N u (ProcessHeatProcess.v:149). Closed under the global context.",
+   "theorem": "heat_iter_energy",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Периодичность здесь — свойство самого профиля, $u_{j+N}=u_j$ при всех $j$: шаг схемы её сохраняет, и потому оценка действует на каждом шаге, на всём процессе."
+  },
+  {
+   "line": 145,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Свойство самого профиля»: Definition gperiodic (N : nat) (u : grid_fn) : Prop := forall j, u (j + N)%nat == u j (ProcessPeriodicGrid.v:60) — периодичность как свойство профиля. Следствия: u N == u 0 (gperiodic_N0, :63), u (S N) == u 1 (gperiodic_SN, :66), u j == u (j mod N) (gperiodic_mod, :82); периодическое продолжение всякого профиля — pext (:94), pext_gperiodic (:96).",
+   "theorem": "gperiodic",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "Периодичность здесь — свойство самого профиля, $u_{j+N}=u_j$ при всех $j$: шаг схемы её сохраняет, и потому оценка действует на каждом шаге, на всём процессе."
+  },
+  {
+   "line": 237,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новый опорный файл в сноске. src/process/ProcessHeatProcess.v: 42 Qed и пять определений; строк Axiom, Parameter, Admitted нет.",
+   "theorem": null,
+   "file": "src/process/ProcessHeatProcess.v",
+   "claim": "Законы на всём процессе — `ProcessHeatProcess.v` (сохранение периодичности шагом, энергия и сумма значений на всём процессе, точность условия на $r$; 42 утверждения, 0 аксиом); периодичность как свойство профиля — `ProcessPeriodicGrid.v` (27 утверждений, 0 аксиом).",
+   "assumptions": "все 47 объявлений ProcessHeatProcess.v: Closed under the global context"
+  },
+  {
+   "line": 237,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "src/process/ProcessPeriodicGrid.v: 27 Qed и пять определений; строк Axiom, Parameter, Admitted нет.",
+   "theorem": null,
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "Законы на всём процессе — `ProcessHeatProcess.v` (сохранение периодичности шагом, энергия и сумма значений на всём процессе, точность условия на $r$; 42 утверждения, 0 аксиом); периодичность как свойство профиля — `ProcessPeriodicGrid.v` (27 утверждений, 0 аксиом).",
+   "assumptions": "все 32 объявления ProcessPeriodicGrid.v: Closed under the global context"
+  },
+  {
+   "line": 238,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. В heat_step правый сосед — u (S j), левый — u (ppred N j) (ProcessHeatEquation.v:46–47); сетку замыкает свойство профиля. Definition gperiodic (N : nat) (u : grid_fn) : Prop := forall j, u (j + N)%nat == u j (ProcessPeriodicGrid.v:60) — периодичность как свойство профиля. Следствия: u N == u 0 (gperiodic_N0, :63), u (S N) == u 1 (gperiodic_SN, :66), u j == u (j mod N) (gperiodic_mod, :82); периодическое продолжение всякого профиля — pext (:94), pext_gperiodic (:96).",
+   "theorem": "gperiodic",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "Правый сосед — узел $j+1$; сетку замыкает периодичность профиля, $u_{j+N}=u_j$ (`gperiodic`, `ProcessPeriodicGrid.v`)."
+  },
+  {
+   "line": 238,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. heat_step_euler_form : forall r N (u : grid_fn) j, heat_step r N u j == u j + r * (u (S j) - 2 * u j + u (ppred N j)) (ProcessHeatProcess.v:381). Closed under the global context.",
+   "theorem": "heat_step_euler_form",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Запись шага через центрированную разность — `heat_step_euler_form`; во внутренних узлах она есть `dd` со сдвигом номера — `heat_step_dd` (`ProcessHeatProcess.v`)."
+  },
+  {
+   "line": 238,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_step_dd : forall r N (u : grid_fn) k, heat_step r N u (S k) == u (S k) + r * dd u k (ProcessHeatProcess.v:386). Closed under the global context.",
+   "theorem": "heat_step_dd",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Запись шага через центрированную разность — `heat_step_euler_form`; во внутренних узлах она есть `dd` со сдвигом номера — `heat_step_dd` (`ProcessHeatProcess.v`)."
+  },
+  {
+   "line": 238,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition dd (FiniteDifference.v:75): f (S (S i)) - 2 * f (S i) + f i — повторная прямая разность.",
+   "theorem": "dd",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "Запись шага через центрированную разность — `heat_step_euler_form`; во внутренних узлах она есть `dd` со сдвигом номера — `heat_step_dd` (`ProcessHeatProcess.v`)."
+  },
+  {
+   "line": 239,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. heat_box_iff : forall r N, (forall (u : grid_fn) lo hi, in_box u lo hi -> in_box (heat_step r N u) lo hi) <-> (0 <= r /\\ 2*r <= 1) (ProcessHeatProcess.v:222). Closed under the global context.",
+   "theorem": "heat_box_iff",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Что условие точное — `heat_box_iff` (`ProcessHeatProcess.v`): принцип максимума для всякого профиля равносилен $0\\le r\\le\\tfrac12$; при $r>\\tfrac12$ энергия знакопеременного профиля растёт (`heat_alt_energy_grows`). 0 аксиом."
+  },
+  {
+   "line": 239,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "heat_alt_energy_grows : forall r, 1 < 2*r -> gf_norm_sq 2 heat_alt < gf_norm_sq 2 (heat_step r 2 heat_alt) (ProcessHeatProcess.v:255); heat_alt — профиль 1, −1, 1, −1, …, периодический с периодом 2 (heat_alt_gperiodic, :238). Closed under the global context.",
+   "theorem": "heat_alt_energy_grows",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Что условие точное — `heat_box_iff` (`ProcessHeatProcess.v`): принцип максимума для всякого профиля равносилен $0\\le r\\le\\tfrac12$; при $r>\\tfrac12$ энергия знакопеременного профиля растёт (`heat_alt_energy_grows`). 0 аксиом."
+  },
+  {
+   "line": 241,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. heat_iter_stable : forall r N (u v : grid_fn) d n, 0 <= r -> 2*r <= 1 -> (forall k, Qabs (u k - v k) <= d) -> forall k, Qabs (heat_iter r N u n k - heat_iter r N v n k) <= d (ProcessHeatProcess.v:410) — следствие линейности шага и heat_iter_box. Closed under the global context.",
+   "theorem": "heat_iter_stable",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Следствие — устойчивость по начальным данным: два процесса, начальные профили которых различаются не больше чем на $d$ в каждом узле, различаются не больше чем на $d$ на каждом шаге (`heat_iter_stable`, `ProcessHeatProcess.v`)."
+  },
+  {
+   "line": 242,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. premise_not_preserved : ~ (heat_step (1#4) 2 u_bad 2 == heat_step (1#4) 2 u_bad 0) (ProcessHeatProcess.v:83); u_bad — профиль 1, 0, 1, 100, 0, … (посылка u 2 == u 0 выполнена). Closed under the global context.",
+   "theorem": "premise_not_preserved",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Лемма говорит об одном шаге и берёт посылкой равенство $u_N=u_0$; одного его недостаточно: шаг это равенство не сохраняет, и есть профиль, у которого энергия на втором шаге растёт (`premise_not_preserved`, `energy_two_steps_fails`)."
+  },
+  {
+   "line": 242,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "energy_two_steps_fails : exists (r : Q) (N : nat) (u : grid_fn), 0 <= r /\\ 2*r <= 1 /\\ (0 < N)%nat /\\ u N == u 0 /\\ gf_norm_sq N u < gf_norm_sq N (heat_iter r N u 2) (ProcessHeatProcess.v:95); значения энергии 1, 1/2, 733/16 — u_bad_energies (:88). Closed under the global context.",
+   "theorem": "energy_two_steps_fails",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Лемма говорит об одном шаге и берёт посылкой равенство $u_N=u_0$; одного его недостаточно: шаг это равенство не сохраняет, и есть профиль, у которого энергия на втором шаге растёт (`premise_not_preserved`, `energy_two_steps_fails`)."
+  },
+  {
+   "line": 242,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_step_gperiodic : forall r N u, (0 < N)%nat -> gperiodic N u -> gperiodic N (heat_step r N u) (ProcessHeatProcess.v:113); на всём процессе — heat_iter_gperiodic (:122). Closed under the global context.",
+   "theorem": "heat_step_gperiodic",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При периодичности профиля шаг её сохраняет (`heat_step_gperiodic`), и энергия не растёт на каждом шаге и на всём процессе (`heat_iter_energy_step`, `heat_iter_energy`), а сумма значений («масса») сохраняется (`heat_iter_mass`)."
+  },
+  {
+   "line": 242,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_iter_energy_step : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u (S n)) <= gf_norm_sq N (heat_iter r N u n) (ProcessHeatProcess.v:131) — на каждом шаге; между любыми двумя шагами — heat_iter_energy_mono (:140). Closed under the global context.",
+   "theorem": "heat_iter_energy_step",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При периодичности профиля шаг её сохраняет (`heat_step_gperiodic`), и энергия не растёт на каждом шаге и на всём процессе (`heat_iter_energy_step`, `heat_iter_energy`), а сумма значений («масса») сохраняется (`heat_iter_mass`)."
+  },
+  {
+   "line": 242,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_iter_energy : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u n) <= gf_norm_sq N u (ProcessHeatProcess.v:149). Closed under the global context.",
+   "theorem": "heat_iter_energy",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При периодичности профиля шаг её сохраняет (`heat_step_gperiodic`), и энергия не растёт на каждом шаге и на всём процессе (`heat_iter_energy_step`, `heat_iter_energy`), а сумма значений («масса») сохраняется (`heat_iter_mass`)."
+  },
+  {
+   "line": 242,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_iter_mass : forall r N u n, (0 < N)%nat -> gperiodic N u -> sum_Q_ns (heat_iter r N u n) N == sum_Q_ns u N (ProcessHeatProcess.v:184) — при любом r; один шаг — heat_step_mass (:162). Closed under the global context.",
+   "theorem": "heat_iter_mass",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При периодичности профиля шаг её сохраняет (`heat_step_gperiodic`), и энергия не растёт на каждом шаге и на всём процессе (`heat_iter_energy_step`, `heat_iter_energy`), а сумма значений («масса») сохраняется (`heat_iter_mass`)."
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "heat_energy_balance : forall r N (u : grid_fn), (0 < N)%nat -> u N == u 0 -> gf_norm_sq N (heat_step r N u) + sum_Q_ns (heat_diss r N u) N == gf_norm_sq N u (ProcessHeatProcess.v:293); heat_diss (:274) — сумма трёх квадратов разностей соседних значений с весами r(1−2r), r², (1−2r)r; неотрицательна при 0 <= r <= 1/2 (heat_diss_nonneg, :279). На каждом шаге процесса — heat_iter_energy_balance (:319). Closed under the global context.",
+   "theorem": "heat_energy_balance",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Точный баланс: энергия после шага и поузельная диссипация в сумме равны энергии до шага (`heat_energy_balance`); при $0<r<\\tfrac12$ и непостоянном профиле убывание строгое (`heat_energy_strict`), при $r=\\tfrac12$ энергия может сохраниться (`heat_alt_energy_conserved_half`). Все — `ProcessHeatProcess.v`, 0 аксиом."
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "heat_energy_strict : forall r N (u : grid_fn) k, 0 < r -> 2*r < 1 -> (0 < N)%nat -> u N == u 0 -> (k < N)%nat -> ~ u k == u (S k) -> gf_norm_sq N (heat_step r N u) < gf_norm_sq N u (ProcessHeatProcess.v:352). Closed under the global context.",
+   "theorem": "heat_energy_strict",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Точный баланс: энергия после шага и поузельная диссипация в сумме равны энергии до шага (`heat_energy_balance`); при $0<r<\\tfrac12$ и непостоянном профиле убывание строгое (`heat_energy_strict`), при $r=\\tfrac12$ энергия может сохраниться (`heat_alt_energy_conserved_half`). Все — `ProcessHeatProcess.v`, 0 аксиом."
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "heat_alt_energy_conserved_half : gf_norm_sq 2 (heat_step (1#2) 2 heat_alt) == gf_norm_sq 2 heat_alt (ProcessHeatProcess.v:264). Closed under the global context.",
+   "theorem": "heat_alt_energy_conserved_half",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Точный баланс: энергия после шага и поузельная диссипация в сумме равны энергии до шага (`heat_energy_balance`); при $0<r<\\tfrac12$ и непостоянном профиле убывание строгое (`heat_energy_strict`), при $r=\\tfrac12$ энергия может сохраниться (`heat_alt_energy_conserved_half`). Все — `ProcessHeatProcess.v`, 0 аксиом."
+  },
+  {
+   "line": 243,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. heat_impulse_profile : heat_step (1#4) 4 u_imp 0 == 1#2 /\\ heat_step (1#4) 4 u_imp 1 == 1#4 /\\ heat_step (1#4) 4 u_imp 2 == 0 /\\ heat_step (1#4) 4 u_imp 3 == 1#4 (ProcessHeatProcess.v:428). Closed under the global context.",
+   "theorem": "heat_impulse_profile",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Все четыре узла — `heat_impulse_profile` (`ProcessHeatProcess.v`). Функция `u_imp` равна единице в узлах 0 и 4 и нулю в прочих; импульс, продолженный периодически (`pext`), на первом шаге даёт тот же профиль (`pext_impulse_profile`)."
+  },
+  {
+   "line": 243,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition u_imp : grid_fn := fun j => match j with O => 1 | S (S (S (S O))) => 1 | _ => 0 end (ProcessHeatEquation.v:153) — единица в узлах 0 и 4.",
+   "theorem": "u_imp",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Все четыре узла — `heat_impulse_profile` (`ProcessHeatProcess.v`). Функция `u_imp` равна единице в узлах 0 и 4 и нулю в прочих; импульс, продолженный периодически (`pext`), на первом шаге даёт тот же профиль (`pext_impulse_profile`)."
+  },
+  {
+   "line": 243,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition pext (N : nat) (u : grid_fn) : grid_fn := fun j => u (j mod N)%nat (ProcessPeriodicGrid.v:94) — периодическое продолжение; pext_gperiodic (:96), pext_agrees (:104).",
+   "theorem": "pext",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "Все четыре узла — `heat_impulse_profile` (`ProcessHeatProcess.v`). Функция `u_imp` равна единице в узлах 0 и 4 и нулю в прочих; импульс, продолженный периодически (`pext`), на первом шаге даёт тот же профиль (`pext_impulse_profile`)."
+  },
+  {
+   "line": 243,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "pext_impulse_profile (ProcessHeatProcess.v:459): те же четыре значения для периодически продолженного импульса pext 4 u_imp; энергия после шага 3/8 — pext_impulse_energy (:466). Сама u_imp не периодична (u_imp_not_gperiodic, :440): её посылка u 4 == u 0 теряется на шаге 4 (imp_premise_lost_step4, :445), и на шаге 5 сумма уже 1023/1024 (imp_mass_leaks_step5, :450). Closed under the global context.",
+   "theorem": "pext_impulse_profile",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Все четыре узла — `heat_impulse_profile` (`ProcessHeatProcess.v`). Функция `u_imp` равна единице в узлах 0 и 4 и нулю в прочих; импульс, продолженный периодически (`pext`), на первом шаге даёт тот же профиль (`pext_impulse_profile`)."
+  }
+ ]
+}

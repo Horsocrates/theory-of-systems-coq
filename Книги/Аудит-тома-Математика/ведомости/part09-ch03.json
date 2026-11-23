@@ -1,0 +1,280 @@
+{
+ "batch": "audit-part-09",
+ "chapter": "09 Уравнения в частных производных/03 Волновое уравнение распространение.md",
+ "checked": "2026-11-23",
+ "auto": true,
+ "records": [
+  {
+   "line": 28,
+   "theorem": "wave_step",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Схема чехарды (leapfrog) определена на парах grid-функций",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition wave_step (s : Q) (N : nat) (uprev ucur : grid_fn) : grid_fn (:42): fun j => 2 * ucur j - uprev j + s * (ucur (S j) - 2 * ucur j + ucur (ppred N j)); grid_fn := nat -> Q. Левый сосед узла 0 — узел N-1 (ppred, ProcessPDEGreen.v:63), правый сосед узла j — узел j+1 без заворачивания; N входит в определение только через левого соседа узла 0. Одноимённое определение есть в src/acoustics/WavePropagation.v:25 (за краем сетки — нуль); внутри сетки оба совпадают (Check.v, раздел 3)."
+  },
+  {
+   "line": 29,
+   "theorem": "wave_step_local_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "доказана *локальная причинность* (конечная область зависимости)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma wave_step_local_zero (:62): forall s N uprev ucur j, ucur (ppred N j) == 0 -> ucur j == 0 -> ucur (S j) == 0 -> uprev j == 0 -> wave_step s N uprev ucur j == 0. При всяком s и всяком N, один шаг. Область зависимости записана в форме нулей; форма «совпадающие данные дают совпадающее значение» в файле не записана (следует из определения; Check.v, wave_step_dep). Closed under the global context."
+  },
+  {
+   "line": 30,
+   "theorem": "wave_step_interior_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "*конечная скорость распространения* (тихая область остаётся тихой в своей внутренности)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma wave_step_interior_zero (:73): оба уровня нулевые на [a,b] -> следующий уровень нулевой при S a <= j, S j <= b. Утверждение об одном шаге — как и сказано в скобках. Утверждения о n шагах в файле нет: см. запись стр. 124. Closed under the global context."
+  },
+  {
+   "line": 31,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "а распространение импульса вычислено точно.[^1]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Три вычисления одного шага на числах (vm_compute): wave_peak_value (:98), wave_reaches_neighbor (:102), wave_finite_speed_concrete (:106) — s = 1/2, N = 5, прошлый уровень wzero, текущий wimp (единица в узле 2). Все три — Closed under the global context."
+  },
+  {
+   "line": 33,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Чего глава *не* делает: она не доказывает *сохранение энергии* волны.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Верно: в ProcessWaveEnergy.v (несмотря на имя файла) нет ни определения энергии, ни утверждения о ней; шапка файла относит сохранение энергии к границе. В src слово leapfrog встречается только в этом файле; сохранения энергии для схемы чехарды нет нигде. В родственном acoustics/WavePropagation.v есть energy_density (:94) и два её значения на числах, без закона."
+  },
+  {
+   "line": 40,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "*Первый* — конечная схема над ℚ: чехарда, локальная причинность, конечная скорость, конкретное распространение — доказаны без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions всех шести лемм файла и трёх определений (wave_step, wzero, wimp) — Closed under the global context (PA.v). Строк Axiom, Parameter, Admitted в файле нет, Reals не подключается. «Конечная скорость» доказана в форме одного шага (стр. 124).",
+   "assumptions": "все 9 объявлений файла: Closed under the global context"
+  },
+  {
+   "line": 52,
+   "theorem": "wave_step",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Схема чехарды $u^{n+1}_j = 2u^n_j - u^{n-1}_j + s (u^n_{j+1} - 2u^n_j + u^n_{j-1})$, где $s = c^2(\\Delta t/\\Delta x)^2$",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формула совпадает с телом wave_step (:42–44). В определении s — произвольное рациональное число; c, Δt, Δx объектами формализации не являются, равенство s = c²(Δt/Δx)² стоит только в комментарии шапки."
+  },
+  {
+   "line": 56,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Условие устойчивости (CFL) $c^2\\le1$ нужно для энергетического слоя (граница главы), а не для самой причинности.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Обе леммы причинности стоят под квантором «для всякого s» без условий — верно. Условие CFL в файле есть только в комментарии шапки, ни одна теорема его не берёт. К сведению: при s = c²(Δt/Δx)² условием на схему служит s <= 1 (Check.v, раздел 5: при 0 <= s <= 1 энергия неотрицательна; при s = 2 пример с отрицательной энергией и ростом значений); запись c² <= 1 совпадает с ним только при Δt = Δx — см. заметки, сомнительное место 1."
+  },
+  {
+   "line": 64,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Рациональные значения в узлах на двух уровнях времени, конечная сетка.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Значения рациональны (Q), уровней два (uprev, ucur). Грид-функция — nat -> Q, шаг определён при всех натуральных j; конечность сетки выражена параметром N, который входит только в левого соседа узла 0. Граничные условия страница не называет; комментарий исходника (:38) говорит «periodic» — периодической схема становится для N-периодически продолженных функций (Check.v, wave_step_periodic); ни одна из шести лемм периодичности не берёт."
+  },
+  {
+   "line": 88,
+   "theorem": null,
+   "file": "src/acoustics/HierarchyTheorem.v",
+   "claim": "(Иерархия «колебание $\\to$ вибрация $\\to$ волна» прослежена в акустическом слое репозитория.)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Слой есть: src/acoustics/ (10 файлов), в том числе Oscillation.v, VibrationCore.v, WavePropagation.v, HierarchyTheorem.v (11 Qed; шапка — «Oscillation < Vibration < Wave > Sound»). Вложения уровней заданы записями: wave_has_vibration (:59) есть поле записи, остальное — вычисления на цепочке из четырёх узлов (no_coupling_collapse, both_present_oscillation, hierarchy_synthesis). Слово «прослежена» доказательства не заявляет. hierarchy_synthesis: Closed under the global context."
+  },
+  {
+   "line": 103,
+   "theorem": "wave_step_local_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Отсюда немедленно — локальная причинность: если волна «молчит» в узле и его соседях (и молчала там на прошлом шаге), она будет молчать в этом узле и дальше:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формула страницы (стр. 106–109) совпадает с леммой: нули в j-1, j, j+1 текущего уровня и в j прошлого дают нуль следующего уровня в j. Лемма говорит об одном следующем шаге; слова «и дальше» шире (через два шага возмущение от дальних узлов может прийти) — формула рядом это уточняет."
+  },
+  {
+   "line": 122,
+   "theorem": "wave_step_interior_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Если оба уровня волны равны нулю на отрезке узлов $[a,b]$, то после шага волна по-прежнему равна нулю на его *внутренности* $[a+1, b-1]$: возмущение проникает в тихую область не более чем на один узел с каждого края.[^4]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Совпадает с леммой (:73) дословно: посылки — нули ucur и uprev при a <= k <= b; вывод — wave_step s N uprev ucur j == 0 при S a <= j и S j <= b. При всяком s и N. Closed under the global context."
+  },
+  {
+   "line": 124,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "За $n$ шагов фронт продвигается не более чем на $n$ узлов — это и есть конечная скорость распространения (не быстрее одного узла за шаг), дискретный аналог конуса влияния.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В файле нет ни состояния схемы после n шагов (итерация wave_step не объявлена), ни утверждения о n шагах: доказан один шаг (wave_step_interior_zero). Страница называет конечной скоростью утверждение о n шагах и относит конечную скорость к доказанному (стр. 40–41, 154). Доводится без аксиом: Check.v, раздел 2 — wave_iter, wave_finite_speed_n (нули на [a,b] дают нули на [a+n, b-n] после n шагов), wave_dependence_cone_n (то же для совпадающих данных)."
+  },
+  {
+   "line": 128,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Поместим острый импульс в узел $2$ пятиузловой сетки (нулевая начальная «скорость»: прошлый уровень нулевой) и сделаем шаг с $s=\\tfrac12$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Данные трёх лемм: прошлый уровень wzero, текущий wimp (:98–107) — разность уровней в узле 2 равна 1, то есть сеточная скорость там ненулевая. Нулевой начальной скорости отвечает равенство уровней (так и в комментарии исходника :94: «zero initial velocity (uprev = ucur)», хотя леммы берут uprev = wzero). При равных уровнях результат другой: пик становится 0, а не 1; соседи получают 1/2 (Check.v, wave_zero_velocity_profile). Числа страницы отвечают данным «прошлый уровень нулевой»."
+  },
+  {
+   "line": 130,
+   "theorem": "wave_peak_value",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Пик в узле $2$ становится равным $1$; *соседние* узлы $1$ и $3$ получают значение $\\tfrac12$ — возмущение их достигло; а узлы $0$ и $4$, отстоящие на *два* шага, остаются нулевыми — фронт до них ещё не дошёл.[^5]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле вычислены узлы 2 (wave_peak_value, :98), 1 (wave_reaches_neighbor, :102) и 0 (wave_finite_speed_concrete, :106); узлы 3 и 4 в файле не вычислены — сноска 5 называет ровно три леммы. Значения узлов 3 и 4 страницей названы верно: 1/2 и 0 (Check.v, wave_node3, wave_node4). Правым соседом узла 4 в определении служит индекс 5 (wimp 5 = 0)."
+  },
+  {
+   "line": 144,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "существует дискретный сохраняющийся аналог, но его форма *неочевидна*: устойчивая дискретная энергия связывает *два соседних уровня* времени перекрёстным членом",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В формализации этого нет, и страница так и говорит (стр. 146–149). Слова подтверждены пробным файлом: величина sum (b_j - a_j)^2 + s * sum (D b)_j (D a)_j сохраняется шагом схемы (Check.v, wave_energy_step), а энергия с потенциальной частью на одном уровне — нет (пример wave_energy_naive_not_conserved: 2 и 1)."
+  },
+  {
+   "line": 146,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Честно: в настоящем изложении он *не* доказан; доказанным ядром служит причинность (конечная скорость), а дискретное сохранение энергии волны оставлено как граница — естественный следующий инкремент формализации.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Статус назван честно: энергии в файле нет. Граница доводится делом без аксиом: сохранение доказано в пробном файле для всякого s, всякого N > 0, всяких N-периодических начальных уровней и всякого числа шагов (Check.v, раздел 4: wave_energy_step, wave_energy_conserved; Closed under the global context)."
+  },
+  {
+   "line": 154,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Доказано конечное и робастное: причинность и конечная скорость распространения над ℚ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "wave_step_local_zero и wave_step_interior_zero — над Q, при всяком s и N, без аксиом. Конечная скорость — в форме одного шага; форма «за n шагов» записана расхождением на стр. 124."
+  },
+  {
+   "line": 160,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "(его можно доказать и без перехода к пределу — это просто не сделано здесь)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Подтверждено пробным доказательством: сохранение перекрёстной энергии — тождество конечных сумм на периодической сетке (суммирование по частям abel_periodic и сдвиг суммы), предел не нужен (Check.v, wave_green, wave_energy_step, wave_energy_conserved)."
+  },
+  {
+   "line": 178,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Условие устойчивости $c^2\\le1$ (CFL) и сохранение энергии относятся к энергетическому слою, оставленному границей; доказанное ядро — причинность и конечная скорость.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В файле нет ни теоремы с условием CFL, ни энергии — отнесение к границе честно. О записи условия (c² <= 1 при s = c²(Δt/Δx)²) — заметки, сомнительное место 1."
+  },
+  {
+   "line": 224,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Опорный файл — `ProcessWaveEnergy.v` (`process/` Rocq-репозитория ToS): `wave_step`, локальная причинность `wave_step_local_zero`, конечная скорость `wave_step_interior_zero`, конкретное распространение `wave_reaches_neighbor` и `wave_finite_speed_concrete`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл src/process/ProcessWaveEnergy.v (110 строк), все пять имён объявлены в нём: :42, :62, :73, :102, :106. Файл записан в _CoqProject, другими файлами не подключается."
+  },
+  {
+   "line": 224,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "6 доказанных утверждений, 0 аксиом (`Print Assumptions`: «closed under the global context»).",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "grep -c 'Qed\\.' = 6 (шапка: 6 Qed — верно). Print Assumptions всех шести — Closed under the global context; в самом файле команда стоит для двух лемм (:109–110), остальные проверены в PA.v.",
+   "assumptions": "все 6 лемм файла: Closed under the global context"
+  },
+  {
+   "line": 224,
+   "theorem": null,
+   "file": "src/acoustics/WavePropagation.v",
+   "claim": "Родственный ранний файл — `acoustics/WavePropagation.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Файл есть (апрель 2026; 13 Qed, в шапке — 12). В нём своё определение wave_step (:25): за краем сетки стоит нуль, а не циклический сосед; внутри сетки (0 < v < N-1) оно совпадает с wave_step главы, на краю отличается (Check.v, wave_step_defs_agree_interior, wave_step_defs_differ_boundary). Все 13 лемм — вычисления на цепочке из четырёх узлов; Closed under the global context."
+  },
+  {
+   "line": 225,
+   "theorem": "wave_step_linear",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "`wave_step` и его линейность `wave_step_linear` в `ProcessWaveEnergy.v`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma wave_step_linear (:50): шаг от пары линейных комбинаций a*p1 + b*p2, a*q1 + b*q2 равен a * (шаг от p1, q1) + b * (шаг от p2, q2), при всех s, N, a, b, j. Линейность по паре уровней. Closed under the global context."
+  },
+  {
+   "line": 226,
+   "theorem": "wave_step_local_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "`wave_step_local_zero` в `ProcessWaveEnergy.v`: при нулевых трёх соседних текущих значениях и нулевом собственном прошлом следующее значение нуль. Доказательство — подстановка нулей в формулу шага. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Утверждение (:62) и доказательство (unfold, rewrite четырёх посылок, ring) — как сказано. Левый сосед взят как ppred N j (у узла 0 — узел N-1). Closed under the global context."
+  },
+  {
+   "line": 227,
+   "theorem": "wave_step_interior_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "`wave_step_interior_zero` в `ProcessWaveEnergy.v`: из обнуления обоих уровней на $[a,b]$ следует обнуление следующего уровня на $[a+1,b-1]$. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Утверждение (:73) — как сказано; один шаг. Параметр N в нём роли не играет (j >= 1, циклический сосед не задействован). Closed under the global context."
+  },
+  {
+   "line": 228,
+   "theorem": "wave_reaches_neighbor",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "`wave_reaches_neighbor`: `wave_step (1#2) 5 wzero wimp 1 == 1#2` (сосед достигнут)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:102): wave_step (1#2) 5%nat wzero wimp 1%nat == 1#2 — на странице опущены пометки %nat, в остальном дословно. Одно вычисление (vm_compute). Closed under the global context."
+  },
+  {
+   "line": 228,
+   "theorem": "wave_finite_speed_concrete",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "`wave_finite_speed_concrete`: `wave_step (1#2) 5 wzero wimp 0 == 0` (узел на расстоянии 2 не достигнут)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:106): wave_step (1#2) 5%nat wzero wimp 0%nat == 0 — на странице опущены пометки %nat. Одно вычисление; левым соседом узла 0 здесь служит узел 4 (ppred 5 0 = 4), его значение тоже нуль. Closed under the global context."
+  },
+  {
+   "line": 228,
+   "theorem": "wave_peak_value",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "`wave_peak_value`: пик $=1$. Точная рациональная арифметика.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Утверждение (:98): wave_step (1#2) 5%nat wzero wimp 2%nat == 1. Одно вычисление над Q. Closed under the global context."
+  },
+  {
+   "line": 229,
+   "theorem": null,
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Шапка размечает прямо: Rules — чехарда, конечная область зависимости, конечная скорость, CFL $c^2\\le1$; Roles — $(u^n,u^{n-1})$ роль-пара, $s$ роль-Куранта, фронт роль-граница, конечная скорость роль-причинность; Elements — рациональные значения на двух уровнях, конечная сетка.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка файла (:4–10, :19–23) содержит все перечисленное; s в шапке — «role-Courant²» (квадрат числа Куранта), на стр. 60–61 страницы это оговорено. «CFL c² ≤ 1» стоит в шапке так же, как на странице; теоремой не подкреплено."
+  }
+ ]
+}

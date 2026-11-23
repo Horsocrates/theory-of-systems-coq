@@ -2168,3 +2168,7 @@ src/process/ProcessPicardStepContraction.v
 src/process/ProcessGronwallInequality.v
 src/process/ProcessODELinearLaws.v
 src/stdlib/trading/PriceDynamicsStability.v
+src/process/ProcessPeriodicGrid.v
+src/process/ProcessHeatProcess.v
+src/process/ProcessTransportProcess.v
+src/process/ProcessBurgersStep.v

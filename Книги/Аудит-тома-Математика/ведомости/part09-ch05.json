@@ -1,0 +1,476 @@
+{
+ "batch": "audit-part-09",
+ "chapter": "09 Уравнения в частных производных/05 Навье–Стокс и синтез.md",
+ "checked": "2026-11-23",
+ "auto": true,
+ "records": [
+  {
+   "line": 24,
+   "theorem": "NSCoupling",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Во-первых, опорный НС-кластер ToS — большой формальный слой, и он *условен*: его теоремы берут посылками положительность константы связи и оценку связи нелинейного члена (запись посылок `NSCoupling`: `C_B_positive`, `B_raw_antisym_bounded`); с ноября 2026 года это посылки теорем, а не аксиомы проекта.",
+   "page_price": "посылки теорем, а не аксиомы проекта",
+   "verdict": "ok",
+   "note": "Class NSCoupling (:216) с полями B_raw, C_B, C_B_positive, B_raw_antisym_bounded; строк Axiom и Parameter в 36 файлах каталога нет; экземпляр есть — NSCoupling_inhabited (:228, нулевая связь, C_B = 1). Запись получают аргументом 318 теорем из 881 (Types.out); какие из названных на странице её не получают и где используется поле-оценка — запись к стр. 178 и заметки, расхождение 7."
+  },
+  {
+   "line": 24,
+   "theorem": "C_B_positive",
+   "external": true,
+   "assumptions": "не применимо (поле записи)",
+   "claim": "(запись посылок `NSCoupling`: `C_B_positive`, `B_raw_antisym_bounded`)",
+   "page_price": "посылка",
+   "verdict": "ok",
+   "note": "Поле записи NSCoupling: C_B_positive : 0 < C_B (src/navier_stokes/GalerkinSystem.v:219). Не объявление верхнего уровня; аксиомой не является."
+  },
+  {
+   "line": 24,
+   "theorem": "B_raw_antisym_bounded",
+   "external": true,
+   "assumptions": "не применимо (поле записи)",
+   "claim": "(запись посылок `NSCoupling`: `C_B_positive`, `B_raw_antisym_bounded`)",
+   "page_price": "посылка",
+   "verdict": "ok",
+   "note": "Поле записи NSCoupling (src/navier_stokes/GalerkinSystem.v:220): forall k l m, Qabs (B_raw k l m - B_raw k m l) <= C_B * inject_Z (Z.of_nat (Nat.max k (Nat.max l m))). Как посылка названо верно; о том, какие теоремы на него опираются, — запись к стр. 178."
+  },
+  {
+   "line": 24,
+   "theorem": "galerkin_finite_regularity_capstone",
+   "file": "src/navier_stokes/GalerkinFiniteRegularity.v",
+   "claim": "Из теорем кластера на `classic` опирается одна — `galerkin_finite_regularity_capstone`.",
+   "page_price": "classic — одна теорема кластера",
+   "verdict": "ok",
+   "note": "Print Assumptions снят для всех 881 объявлений Lemma/Theorem 36 файлов каталога (PA.v): 880 — Closed under the global context, одно — galerkin_finite_regularity_capstone (:110) — Classical_Prop.classic (через ns_is_classified, foundation/RoleLimitSpecies.v:440). Запись NSCoupling эта теорема аргументом не получает; первые два её конъюнкта стоят под посылкой energy_decreasing.",
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P"
+  },
+  {
+   "line": 24,
+   "theorem": "classic",
+   "external": true,
+   "assumptions": "Axioms: Classical_Prop.classic : forall P : Prop, P \\/ ~ P",
+   "claim": "Из теорем кластера на `classic` опирается одна — `galerkin_finite_regularity_capstone`.",
+   "page_price": "classic",
+   "verdict": "ok",
+   "note": "Classical_Prop.classic стандартной библиотеки — единственное объявление classic в проекте. В каталоге navier_stokes в выводе компилятора оно стоит у одной теоремы из 881."
+  },
+  {
+   "line": 25,
+   "theorem": "B_antisym",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Антисимметрия нелинейного члена — лемма.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma B_antisym : forall k l m, B_coeff k l m == -(B_coeff k m l) (:249), доказана ring из определения B_coeff k l m := B_raw k l m - B_raw k m l (:245). Closed under the global context. О следствии этой антисимметрии — запись к стр. 60."
+  },
+  {
+   "line": 25,
+   "theorem": "regularity_3d_small_data",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "Во-вторых, трёхмерная регулярность доказана лишь *условно*;",
+   "page_price": "условно",
+   "verdict": "mismatch-statement",
+   "note": "статус: условием в теореме стоит само сохранение. regularity_3d_small_data (:255): conditionally_regular K u nu C -> enstrophy_at K u 0 < critical_enstrophy nu C -> forall n, enstrophy_at K u n < critical_enstrophy nu C, где conditionally_regular (:248) — «докритическая энстрофия на следующем шаге не растёт» для произвольной последовательности состояний u. Размерности, вытяжения вихря и траектории системы в утверждении нет. Заметки, расхождение 6."
+  },
+  {
+   "line": 32,
+   "theorem": "energy_bounded_by_initial",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "*Безусловно*: энергия диссипирует и ограничена начальной;",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "energy_bounded_by_initial (:73): forall K u, energy_decreasing K u -> forall n, energy_at K u n <= energy_at K u 0. Посылка energy_decreasing (:45) — «энергия не растёт от шага к шагу» для произвольной последовательности состояний; ни для одной траектории она в src не доказана. Без посылки оценка неверна (Check.v, energy_bound_needs_premise). Заметки, расхождение 4."
+  },
+  {
+   "line": 32,
+   "theorem": "unconditional_2d",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "двумерное течение регулярно (нет вытяжения вихря).",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "unconditional_2d (:293): stretching_2d == 0, где Definition stretching_2d : Q := 0 (Vorticity.v:189) — утверждение имеет вид 0 == 0. Размерности в формализации нет: моды нумерует одно натуральное число. full_regularity_2d (EnergyEstimate.v:201) берёт посылками убывание энергии и энстрофии. Заметки, расхождение 5."
+  },
+  {
+   "line": 33,
+   "theorem": "conditional_regularity_theorem",
+   "file": "src/navier_stokes/ConcentrationBound.v",
+   "claim": "*Условно* (в инвариантной области, при докритической энстрофии): трёхмерная регулярность.[^1]",
+   "page_price": "условно",
+   "verdict": "mismatch-statement",
+   "note": "conditional_regularity_theorem (:232): при 0 < nu, 0 < E0 число per_mode_amplitude nu E0 k = 2*C_B*E0/(nu*k) положительно и не возрастает по k, а enstrophy_contribution неотрицательно. Это три свойства замкнутой формулы; состояния, траектории, области и энстрофии состояния в утверждении нет. «Инвариантность области» — region_invariant (InvariantRegion.v:448): числовое неравенство forcing_in_region nu k <= boundary_damping nu k. Заметки, расхождение 6."
+  },
+  {
+   "line": 37,
+   "theorem": null,
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "не строит завершённое непрерывное решение и не претендует на 0-аксиомность НС-слоя.",
+   "page_price": "НС-слой не 0-аксиомный",
+   "verdict": "mismatch-price",
+   "note": "По компилятору слой аксиом не берёт: из 881 теоремы 36 файлов 880 — Closed under the global context, одна — Classical_Prop.classic (PA.v). Константа связи и оценка — поля записи-посылки (стр. 24 страницы говорит это же). Заметки, расхождение 9."
+  },
+  {
+   "line": 40,
+   "theorem": null,
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "*Первый* — доказанное (с доменными аксиомами): диссипация энергии, двумерная регулярность безусловно, трёхмерная — условно.",
+   "page_price": "с доменными аксиомами",
+   "verdict": "mismatch-price",
+   "note": "Доменных аксиом нет: Print Assumptions теорем EnergyEstimate.v, AttackSynthesis.v, ConcentrationBound.v — Closed under the global context; строк Axiom и Parameter в каталоге нет. О самих трёх результатах — записи к стр. 32–33. Заметки, расхождение 9."
+  },
+  {
+   "line": 56,
+   "theorem": "triple_sum",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "ToS ведёт это как процесс — галёркинский (модальный): поле раскладывается по конечному числу мод, и эволюция каждой амплитуды задаётся системой обыкновенных уравнений с *триадным* взаимодействием $B(k,l,m)$ между модами.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: система уравнений в .v не объявлена — она стоит в комментарии шапки GalerkinSystem.v (стр. 4–5). Объявлены состояние (modal_state), энергия, энстрофия и кубическая сумма triple_sum (:281). Шаги по времени есть только вязкие: euler_step (ResolutionRegularity.v:44, InvariantRegion.v:463) нелинейного члена не содержит; B_coeff и triple_sum вне GalerkinSystem.v и TriadicInteraction.v не используются. Правила отбора триад у коэффициента нет. Заметки, расхождение 2."
+  },
+  {
+   "line": 58,
+   "theorem": "B_antisym",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Ключевое свойство нелинейности — антисимметрия коэффициента, $B(k,l,m) = -B(k,m,l)$; в формализации это лемма: коэффициент задан как антисимметризация абстрактной связи.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Формула страницы совпадает с утверждением B_antisym (:249); B_coeff k l m := B_raw k l m - B_raw k m l (:245) — антисимметризация по двум последним индексам. Closed under the global context."
+  },
+  {
+   "line": 60,
+   "theorem": "nonlinear_energy_zero",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Антисимметрия означает: нелинейность энергию только *перераспределяет*, как линейный перенос перераспределял массу (Глава 9.4). Тогда единственный сток энергии — вязкая диффузия.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "nonlinear_energy_zero (:326): triple_sum K a == 0 — верно, но по вырожденной причине: при антисимметрии по (l,m) нелинейный член КАЖДОЙ моды равен нулю, inner_double_sum K k a == 0 (следует из inner_double_sum_self_neg, :300; Check.v, nl_mode_zero), потому что a_l*a_m симметрично по (l,m). Перераспределения между модами в формализации нет: правая часть уравнения моды совпадает с вязкой (formal_rhs_is_viscous). Заметки, расхождение 1."
+  },
+  {
+   "line": 61,
+   "theorem": "transport_mass",
+   "file": "src/process/ProcessTransport.v",
+   "claim": "как линейный перенос перераспределял массу (Глава 9.4).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_mass (:103): (0 < N)%nat -> sum_Q_ns (transport_step nu N u) N == sum_Q_ns u N — сохранение суммы за один шаг периодической схемы, при любом nu. Closed under the global context. Содержание Главы 9.4 — предмет её ведомости."
+  },
+  {
+   "line": 78,
+   "theorem": "energy_rate_formula",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "В модальном (галёркинском) слое это записано как эволюционное тождество для скорости энергии (`energy_rate_formula`, над рациональными процессами); классическая запись $dE/dt$ — его непрерывное чтение.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "energy_rate_formula (:393): total_energy_rate nu K a == -(2) * nu * modal_enstrophy K a, где total_energy_rate := viscous_energy_rate + nonlinear_energy_rate (:364), а viscous_energy_rate := -(2) * nu * modal_enstrophy K a ПО ОПРЕДЕЛЕНИЮ (:149). Содержание теоремы — triple_sum == 0. «Скорость» есть функция одного состояния; с правой частью системы и с разностью энергий E(n+1) - E(n) какой-либо траектории она теоремой не связана. Заметки, расхождение 3."
+  },
+  {
+   "line": 81,
+   "theorem": "energy_monotone",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "Поэтому энергия *монотонно убывает* и ограничена начальной, $E(t)\\le E(0)$ — и это *безусловный* результат.[^3]",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "energy_monotone (:84) и energy_bounded_by_initial (:73) берут посылкой energy_decreasing K u — то самое убывание, которое на странице подано выводом («поэтому»); вывода из тождества для скорости в .v нет. Для явной схемы Эйлера оценка без условия на шаг неверна (Check.v, galerkin_euler_energy_can_grow). Заметки, расхождение 4."
+  },
+  {
+   "line": 83,
+   "theorem": "heat_step_energy",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Это прямой родственник диссипации тепла (Глава 9.2): там убывала $L^2$-энергия профиля, здесь — кинетическая энергия течения, и по той же причине — из-за лапласиана.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_step_energy (:124): 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> u N == u 0%nat -> gf_norm_sq N (heat_step r N u) <= gf_norm_sq N u — невозрастание за один шаг схемы при r <= 1/2 на периодической сетке; Closed under the global context. В Главе 9.2 убывание выведено из шага схемы; здесь, в НС-слое, оно стоит посылкой (запись к стр. 81)."
+  },
+  {
+   "line": 92,
+   "theorem": "energy_rate_formula",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Энергетическое тождество $dE/dt=-2\\nu\\Omega$ — роль-правило; оно безусловно и есть фундамент всего, что доказано о НС.*",
+   "page_price": "безусловно",
+   "verdict": "ok",
+   "note": "Как тождество для состояния energy_rate_formula от посылок-оценок не зависит: по Print All Dependencies она опирается на B_raw, B_coeff и B_antisym, но не на C_B_positive и не на B_raw_antisym_bounded (Deps.out). О том, что в ней определение, а что теорема, — запись к стр. 78. Теоремы об оценке E(n) <= E(0) на неё не опираются (запись к стр. 180)."
+  },
+  {
+   "line": 99,
+   "theorem": "unconditional_2d",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "Поэтому энстрофия остаётся под контролем, и в формальном галёркинском (модальном) слое кластера двумерное течение *регулярно безусловно*.[^4]",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "В слое нет ни размерности, ни вытяжения как величины, зависящей от состояния: stretching_2d := 0 (Vorticity.v:189), unconditional_2d — 0 == 0; enstrophy_dissipation_2d (Vorticity.v:289) — формула -2*nu*P + C_s*Omega^2 при подставленном C_s = 0; full_regularity_2d (EnergyEstimate.v:201) берёт убывание энстрофии посылкой. Заметки, расхождение 5."
+  },
+  {
+   "line": 104,
+   "theorem": "regularity_3d_small_data",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "В том же модальном слое регулярность доказана *условно* — если поле остаётся в инвариантной области (энстрофия докритична относительно $\\nu$), оно регулярно; но что система туда попадает и там остаётся *безусловно*, не доказано.[^5]",
+   "page_price": "условно",
+   "verdict": "mismatch-statement",
+   "note": "regularity_3d_small_data (:255): посылка conditionally_regular — пошаговая форма заключения; теорема есть индукция по посылке. «Область» in_region (InvariantRegion.v:65) — покомпонентная оценка |a_k| <= A/k, с энстрофией она теоремой не связана; её сохранение шагом какой-либо схемы в .v не записано (region_invariant — неравенство между двумя формулами). Доказано в пробном файле: region_invariant_step, region_invariant_iter. Заметки, расхождение 6."
+  },
+  {
+   "line": 108,
+   "theorem": "millennium_gap_precise",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "Безусловная трёхмерная регулярность — открытая задача тысячелетия; в ToS она помечена точно: между двумя показателями (квадратичной нелинейностью и тем, что было бы нужно для безусловного контроля) лежит зазор, который ни один известный приём не закрывает.[^6]",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "millennium_gap_precise (:249) — конъюнкция пяти утверждений: оценка энергии под посылкой energy_decreasing; неотрицательность и монотонность по K числа k_dependent_rate = C^2*E0*K^2/nu; stretching_2d == 0 (то есть 0 == 0); неравенство Omega^2 <= E*P. Показателей 2 и 1 в утверждении нет, о «приёмах» теоремы нет. Заметки, расхождение 8."
+  },
+  {
+   "line": 112,
+   "theorem": null,
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "ToS не претендует на её решение — он формализует, *что именно* доказуемо (диссипация, двумерная регулярность, условная трёхмерная) и *где* проходит граница.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "статус: «не претендует на решение» — верно (итоговые теоремы MillenniumComplete.v переименованы, их шапка оговаривает условность; старых имён на странице нет). Три названных результата в .v стоят под посылками, совпадающими с заключением по шагам, или суть свойства определений — записи к стр. 32, 33, 99, 104."
+  },
+  {
+   "line": 126,
+   "theorem": null,
+   "file": "src/navier_stokes/ResolutionRegularity.v",
+   "claim": "*Rules*: на всех уровнях — сетка, конечно-разностная схема $u^{n+1}=u^n+\\Delta t \\mathcal L_h u^n$ и конечные законы (энергия, масса, причинность, максимум).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Для тепла и переноса схема такого вида объявлена (heat_step, transport_step); для волны схема двухслойная (wave_step берёт u^n и u^{n-1}). На уровне Навье–Стокса схемы с соединённым оператором в .v нет: объявлены только вязкие шаги (euler_step, :44; InvariantRegion.v:463), а законы энергии стоят под посылкой. Заметки, расхождение 2."
+  },
+  {
+   "line": 137,
+   "theorem": "heat_iter_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "| 9.2 Тепло | принцип максимума, диссипация энергии, CFL | 0 аксиом |",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "heat_iter_box (:87) — сохранение бокса на всех шагах при 0 <= r <= 1/2; heat_step_energy (:124) — невозрастание энергии за один шаг на периодической сетке при том же условии. Все 16 объявлений ProcessHeatEquation.v и ProcessPDEGreen.v — Closed under the global context (PA2.v). Формулировки — предмет ведомости Главы 9.2."
+  },
+  {
+   "line": 138,
+   "theorem": "wave_step_interior_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "| 9.3 Волна | причинность, конечная скорость | 0 аксиом |",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "wave_step_interior_zero (:73) — локальность одного шага (нуль внутри отрезка, где нулевые оба слоя); wave_finite_speed_concrete (:106) — одно вычисление на сетке из пяти узлов. Все 19 объявлений ProcessWaveEnergy.v и acoustics/WavePropagation.v — Closed under the global context (PA2.v). Формулировки — предмет ведомости Главы 9.3."
+  },
+  {
+   "line": 139,
+   "theorem": "transport_mass",
+   "file": "src/process/ProcessTransport.v",
+   "claim": "| 9.4 Перенос | сохранение массы, бокс, сдвиг | 0 аксиом |",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "transport_mass (:103, один шаг, периодическая сетка), transport_iter_box (:78, все шаги при 0 <= nu <= 1), transport_shift (:120, при nu = 1). Все 8 объявлений файла — Closed under the global context (PA2.v). Формулировки — предмет ведомости Главы 9.4."
+  },
+  {
+   "line": 140,
+   "theorem": null,
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "| 9.5 Навье–Стокс | диссипация, 2D регулярно, 3D условно | доменные аксиомы о константе связи (+ L3) |",
+   "page_price": "доменные аксиомы о константе связи (+ L3)",
+   "verdict": "mismatch-price",
+   "note": "Доменных аксиом нет: константа связи и оценка — поля записи NSCoupling (:216), 880 теорем из 881 — Closed under the global context; L3 (Classical_Prop.classic) берёт одна — galerkin_finite_regularity_capstone. О содержании трёх результатов средней клетки — записи к стр. 32, 33. Заметки, расхождение 9."
+  },
+  {
+   "line": 141,
+   "theorem": null,
+   "file": "src/navier_stokes/GalerkinConvergence.v",
+   "claim": "| Граница всей Части | непрерывный предел, слабые решения в $L^2$/Соболеве, ударные волны, безусловная 3D-регулярность | роль-пределы / открыто |",
+   "page_price": "роль-пределы / открыто",
+   "verdict": "ok",
+   "note": "Статус назван верно: в .v ни один из четырёх предметов не доказан. Файлы с названиями о слабых решениях и нормах Соболева (GalerkinConvergence.v, ClassicalRegularity.v, UniformBounds.v) содержат теоремы о положительности постоянных (например, pressure_from_velocity, GalerkinConvergence.v:326: 0 < sobolev_bound nu E0 2); страница на них не опирается."
+  },
+  {
+   "line": 143,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Триптих (тепло, волна, перенос) — 0-аксиомный над ℚ;",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions всех 43 объявлений пяти файлов триптиха (ProcessHeatEquation.v, ProcessPDEGreen.v, ProcessWaveEnergy.v, acoustics/WavePropagation.v, ProcessTransport.v) и 84 объявлений GridFunction.v и FiniteDifference.v — Closed under the global context (PA2.v, PA.v). Библиотека Reals не подключается.",
+   "assumptions": "все 43 объявления пяти файлов: Closed under the global context"
+  },
+  {
+   "line": 143,
+   "theorem": null,
+   "file": "src/navier_stokes/TriadicInteraction.v",
+   "claim": "Навье–Стокс — доказательно богаче, но честно несёт доменные аксиомы о константе связи и упирается в открытую трёхмерную стену.",
+   "page_price": "доменные аксиомы о константе связи",
+   "verdict": "mismatch-price",
+   "note": "Аксиом слой не несёт (запись к стр. 140): C_B, C_B_positive и оценка связи — поля записи-посылки с 13.11.2026; шапка TriadicInteraction.v («2 Axioms (C_B)», :18) устарела. Заметки, расхождение 9."
+  },
+  {
+   "line": 178,
+   "theorem": "energy_bounded_by_initial",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "Опорный кластер — каталог `navier_stokes/` Rocq-репозитория ToS: `energy_bounded_by_initial` (`EnergyEstimate.v`, $E(t)\\le E(0)$ безусловно),",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "Theorem energy_bounded_by_initial : forall K u, energy_decreasing K u -> forall n, energy_at K u n <= energy_at K u 0 (:73). Оценка стоит под посылкой energy_decreasing; запись NSCoupling теорема аргументом не получает (About, Check.out). Closed under the global context. Заметки, расхождение 4."
+  },
+  {
+   "line": 178,
+   "theorem": "unconditional_2d",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "`unconditional_2d` (`AttackSynthesis.v`, двумерное вытяжение нулевое),",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Theorem unconditional_2d : stretching_2d == 0 (:293); stretching_2d — постоянная 0 по определению (Vorticity.v:189), от состояния и от размерности не зависит. Теорема есть 0 == 0 (Check.v, stretching_2d_is_literal_zero). Заметки, расхождение 5."
+  },
+  {
+   "line": 178,
+   "theorem": "conditional_regularity_theorem",
+   "file": "src/navier_stokes/ConcentrationBound.v",
+   "claim": "`conditional_regularity_theorem` (трёхмерная регулярность при условии),",
+   "page_price": "условно",
+   "verdict": "mismatch-statement",
+   "note": "Утверждение (:232) — положительность и монотонность по k выражения 2*C_B*E0/(nu*k) и неотрицательность его взвешенного квадрата при 0 < nu, 0 < E0. Условия на состояние и вывода о состоянии нет. По Print All Dependencies теорема опирается на C_B_positive и не опирается на B_raw_antisym_bounded (Deps.out). Заметки, расхождение 6."
+  },
+  {
+   "line": 178,
+   "theorem": "millennium_gap_precise",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "`millennium_gap_precise` (точная формулировка открытого зазора).",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Конъюнкция пяти утверждений (:249), ни одно из которых зазора не формулирует; третий конъюнкт — 0 == 0. Запись NSCoupling теорема не получает. Заметки, расхождение 8."
+  },
+  {
+   "line": 178,
+   "theorem": "B_raw_antisym_bounded",
+   "external": true,
+   "assumptions": "не применимо (поле записи)",
+   "claim": "*Посылки:* теоремы кластера получают аргументом запись `NSCoupling` (`GalerkinSystem.v`) — константу связи с её положительностью (`C_B_positive`) и оценку связи `B_raw_antisym_bounded`, на которой держится условность трёхмерной регулярности (в `TriadicInteraction.v` она же — лемма `B_coeff_bounded`).",
+   "page_price": "условно по посылкам",
+   "verdict": "mismatch-statement",
+   "note": "Поле-оценку используют пять объявлений TriadicInteraction.v (B_coeff_bounded, coupling_for_sum_triad, nonlinear_term_bounded, forcing_bound, triadic_interaction_main), и ни одно из них другими файлами не используется. Теоремы, названные на странице трёхмерной регулярностью (conditional_regularity_theorem, region_invariant), и итоговые теоремы MillenniumComplete.v опираются только на C_B_positive (Print All Dependencies, Deps.out). Запись получают 318 теорем из 881; energy_bounded_by_initial, unconditional_2d, millennium_gap_precise её не получают. Заметки, расхождение 7."
+  },
+  {
+   "line": 178,
+   "theorem": "B_coeff_bounded",
+   "file": "src/navier_stokes/TriadicInteraction.v",
+   "claim": "(в `TriadicInteraction.v` она же — лемма `B_coeff_bounded`).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma B_coeff_bounded : forall k l m, Qabs (B_coeff k l m) <= C_B * inject_Z (Z.of_nat (Nat.max k (Nat.max l m))) (:126); доказательство — unfold B_coeff; apply B_raw_antisym_bounded. Closed under the global context."
+  },
+  {
+   "line": 178,
+   "theorem": "NSCoupling",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Объявлений-аксиом кластер не делает; в отличие от триптиха Глав 9.2–9.4, его результаты условны по этим посылкам.",
+   "page_price": "аксиом нет; условно по посылкам",
+   "verdict": "ok",
+   "note": "Строк Axiom и Parameter в 36 файлах каталога нет; Print Assumptions 880 теорем из 881 — Closed under the global context. Посылки выполнимы: NSCoupling_inhabited (:228) — нулевая связь, C_B = 1; экземпляра с коэффициентами действительной адвекции нет (комментарий :225–227 говорит это же). Какие результаты действительно условны по записи — запись к этой же строке о B_raw_antisym_bounded."
+  },
+  {
+   "line": 178,
+   "theorem": "README",
+   "external": true,
+   "assumptions": "не применимо (файл)",
+   "claim": "Точные имена и счётчики — по `README`/`CLAUDE` репозитория.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя файла, не объявление. src/navier_stokes/README.md отстал: «34 files | 654 Qed | 3 axioms (classic, C_B_positive, B_coeff_bounded)» при действительных 36 файлах, 882 строках «Qed.» и отсутствии аксиом; из пяти его «Key Theorems» двух имён в src нет (energy_dissipation_identity, invariant_region_stable). Заметки, сомнительное место 6."
+  },
+  {
+   "line": 178,
+   "theorem": "CLAUDE",
+   "external": true,
+   "assumptions": "не применимо (файл)",
+   "claim": "Точные имена и счётчики — по `README`/`CLAUDE` репозитория.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Имя файла, не объявление. CLAUDE.md о цене говорит верно (посылки записи NSCoupling, аксиом нет); счёт в нём отстал: «34 .v files, 869 Qed» при действительных 36 и 882."
+  },
+  {
+   "line": 179,
+   "theorem": "B_antisym",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "`B_antisym` в `GalerkinSystem.v` — лемма: `B_coeff k l m := B_raw k l m - B_raw k m l`, `B_raw` — абстрактный параметр; аксиом в файле нет.",
+   "page_price": "аксиом в файле нет",
+   "verdict": "ok",
+   "note": "Определение совпадает с исходником (:245); B_antisym (:249) — Lemma. Строк Axiom и Parameter в файле нет; все 31 объявление — Closed under the global context."
+  },
+  {
+   "line": 179,
+   "theorem": "B_raw",
+   "external": true,
+   "assumptions": "не применимо (поле записи)",
+   "claim": "`B_raw` — абстрактный параметр; аксиом в файле нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "B_raw : nat -> nat -> nat -> Q — поле записи NSCoupling (src/navier_stokes/GalerkinSystem.v:217), с 13.11.2026 не строка Parameter. «Параметр» в смысле «произвольная функция, по которой стоит квантор» — верно."
+  },
+  {
+   "line": 179,
+   "theorem": "nonlinear_energy_zero",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Она формализует, что конвекция *сохраняет* энергию (лишь перебрасывает её между модами), не создавая и не уничтожая — дискретный аналог того, что $\\int (u\\cdot\\nabla u)\\cdot u = 0$.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "При антисимметрии по (l,m) сумма по (l,m) с множителем a_l*a_m равна нулю для каждой моды k в отдельности (Check.v: nl_mode_zero; без записи посылок — antisym_quadratic_form_zero). Между модами ничего не перебрасывается: формальная конвекция тождественно нулевая. Энергию при ненулевом переносе сохраняет антисимметрия по первому и третьему индексу (Check.v: adv_energy_zero, adv_nl_nonzero). Сеточный аналог интеграла доказан в другом файле — burgers_conserves_energy (AdvectionEnergyConservation.v:118). Заметки, расхождение 1."
+  },
+  {
+   "line": 180,
+   "theorem": "energy_rate_formula",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "`energy_rate_formula` (`GalerkinSystem.v`: $dE/dt=-2\\nu\\Omega$; нелинейный вклад нулевой — `nonlinear_energy_zero`)",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "Вязкое слагаемое скорости задано определением viscous_energy_rate := -(2) * nu * modal_enstrophy K a (:149); из правой части системы оно не вычислено, производной или разности по времени в утверждении нет. Выведенное тождество — Check.v: galerkin_energy_rate. Заметки, расхождение 3."
+  },
+  {
+   "line": 180,
+   "theorem": "nonlinear_energy_zero",
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "нелинейный вклад нулевой — `nonlinear_energy_zero`)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem nonlinear_energy_zero : forall K a, triple_sum K a == 0 (:326) — как сказано. Closed under the global context. Причина нуля — запись к стр. 60."
+  },
+  {
+   "line": 180,
+   "theorem": "energy_bounded_by_initial",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "и `energy_bounded_by_initial`, `energy_monotone` (`EnergyEstimate.v`): $E$ монотонна и ограничена начальной, безусловно. Опираются на `B_antisym`.",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "Обе теоремы (:73, :84) стоят под посылкой energy_decreasing K u и доказаны индукцией по ней (lra). На B_antisym они не опираются: записи NSCoupling аргументом не получают (About, Check.out), в доказательствах B_coeff не встречается. На B_antisym опираются energy_rate_formula и nonlinear_energy_zero. Заметки, расхождение 4."
+  },
+  {
+   "line": 180,
+   "theorem": "energy_monotone",
+   "file": "src/navier_stokes/EnergyEstimate.v",
+   "claim": "и `energy_bounded_by_initial`, `energy_monotone` (`EnergyEstimate.v`): $E$ монотонна и ограничена начальной, безусловно.",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "Theorem energy_monotone : forall K u, energy_decreasing K u -> forall m n, (m <= n)%nat -> energy_at K u n <= energy_at K u m (:84): заключение есть посылка, распространённая с соседних номеров на любые. Одноимённая теорема есть в MillenniumComplete.v:224 — глава называет EnergyEstimate.v. Заметки, расхождение 4."
+  },
+  {
+   "line": 181,
+   "theorem": "unconditional_2d",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "`unconditional_2d`: `stretching_2d == 0` (`AttackSynthesis.v`). Отсутствие вытяжения — причина безусловной двумерной регулярности.",
+   "page_price": "безусловно",
+   "verdict": "mismatch-statement",
+   "note": "Фрагмент кода совпадает с утверждением (:293). Вытяжение в формализации — постоянная, заданная нулём (Vorticity.v:189); теоремы, выводящей из неё регулярность, нет. Заметки, расхождение 5."
+  },
+  {
+   "line": 182,
+   "theorem": "conditional_regularity_theorem",
+   "file": "src/navier_stokes/ConcentrationBound.v",
+   "claim": "`conditional_regularity_theorem` и инвариантная область (`ConcentrationBound.v`, `EnergyEstimate.v`): при докритической энстрофии регулярность сохраняется. Безусловного перехода в эту область нет — это и есть зазор.",
+   "page_price": "условно",
+   "verdict": "mismatch-statement",
+   "note": "conditional_regularity_theorem (:232) об энстрофии состояния и об области не говорит. Область объявлена в третьем файле, которого сноска не называет: in_region (InvariantRegion.v:65). «При докритической энстрофии сохраняется» — regularity_3d_small_data (EnergyEstimate.v:255) под посылкой conditionally_regular. Заметки, расхождение 6."
+  },
+  {
+   "line": 183,
+   "theorem": "millennium_gap_precise",
+   "file": "src/navier_stokes/AttackSynthesis.v",
+   "claim": "`millennium_gap_precise` (`AttackSynthesis.v`): точная формулировка зазора $\\alpha=2$ против $\\alpha=1$; сопровождается честной оценкой (`HonestAssessment.v`), что задача остаётся открытой.",
+   "page_price": "",
+   "verdict": "mismatch-statement",
+   "note": "В утверждении (:249) показателей нет. Показатель 2 в кластере стоит в определении stretching_enstrophy_bound C_s omega := C_s * omega * omega (Vorticity.v:196), показатель 1 — в discrete_gronwall (GronwallAnalysis.v:148); теоремы, сопоставляющей их, нет. HonestAssessment.v: 26 теорем о положительности и сравнении чисел (not_solved, :339, — неравенство (C0 + A)^2 > A^2); «задача открыта» сказано в комментариях. Заметки, расхождение 8."
+  }
+ ]
+}

@@ -1,0 +1,423 @@
+{
+ "batch": "audit-part-09",
+ "chapter": "09 Уравнения в частных производных/01 Решение как процесс на пространственно-временной сетке.md",
+ "checked": "2026-11-23",
+ "auto": true,
+ "records": [
+  {
+   "line": 37,
+   "theorem": "grid_fn",
+   "file": "src/navier_stokes/GridFunction.v",
+   "claim": "Доказанное ядро — конечная дискретная математика над ℚ. Grid-функция есть отображение $ℕ\\toℚ$; прямая разность — дискретный градиент, вторая разность — дискретный лапласиан;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition grid_fn := nat -> Q (GridFunction.v:132); fd (FiniteDifference.v:24): f (S i) - f i; dd (:75): f (S (S i)) - 2 * f (S i) + f i. Функция задана на всех натуральных номерах; число узлов N входит только верхним пределом сумм sum_Q_ns. Деления на шаг сетки в разностях нет — как и в формулах страницы."
+  },
+  {
+   "line": 39,
+   "theorem": null,
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "суммирование по частям (формула Абеля) и дискретная формула Грина связывают энергию с градиентом; норма лапласиана ограничена нормой градиента.[^1] Всё это — конечные рациональные тождества и неравенства.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "abel_summation (FiniteDifference.v:170) — без условий на края; green_dirichlet_periodic (ProcessPDEGreen.v:87) — при u N == u 0 и u (S N) == u 1; lap_norm_bound (:123) — при fd u N == fd u 0. В этой сводной фразе условия не названы; с шага 1 Части IX они названы на стр. 141–144 и в сноске 4, а без условий обе формулы даны с граничными членами (green_boundary, lap_norm_bound_boundary, ProcessPeriodicGrid.v:194, :218).",
+   "assumptions": "abel_summation, green_dirichlet_periodic, lap_norm_bound: Closed under the global context"
+  },
+  {
+   "line": 51,
+   "theorem": null,
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "*Первый* — конечная дискретная математика над ℚ: grid-функции, конечные разности, суммирование по частям, формула Грина — доказаны без аксиом.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions всех 109 объявлений трёх файлов главы (GridFunction.v — 53, FiniteDifference.v — 47, ProcessPDEGreen.v — 9; пробный файл PA.v) — Closed under the global context. Строк Axiom, Parameter, Admitted в файлах нет, библиотека Reals не подключается.",
+   "assumptions": "все 109 объявлений трёх файлов: Closed under the global context"
+  },
+  {
+   "line": 53,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "*Второй* — процессные *чтения*: решение как процесс grid-функций, пространственная производная как разность, законы сохранения как конечные суммы, устойчивость как условие Куранта.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "В трёх файлах главы нет ни шага по времени, ни схемы, ни числа Куранта; они объявлены в файлах Глав 9.2–9.4: heat_iter (ProcessHeatEquation.v:49), transport_iter (ProcessTransport.v:44), wave_step (ProcessWaveEnergy.v:42, один шаг). Условие на шаг стоит посылкой лемм о сохранении интервала значений: 0 <= r, 2*r <= 1 (heat_step_box) и 0 <= nu, nu <= 1 (transport_step_box); в леммах о волновом шаге параметр s ни в одной посылке не стоит. Понятие устойчивости в файлах не определено. Страница называет этот уровень чтениями."
+  },
+  {
+   "line": 57,
+   "theorem": null,
+   "file": null,
+   "claim": "Первые два глава ведёт как доказанные, третий — как честно помеченную границу.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Первый уровень доказан в трёх файлах главы без аксиом. Второй уровень страница называет чтениями; схемы, законы и условия на шаг — предмет Глав 9.2–9.4, что оговорено на стр. 235–237. Завершённого решения, предела измельчения сетки и пространств Соболева в названных файлах нет — как и сказано на стр. 44–49."
+  },
+  {
+   "line": 77,
+   "theorem": null,
+   "file": "src/navier_stokes/GridFunction.v",
+   "claim": "Grid-функции $u^n:ℕ\\toℚ$ (на периодической сетке — с периодом $N$: их задают значения в узлах $0,…,N{-}1$), рациональные значения в узлах $u^n_j$, конечная пространственная сетка, конечный номер шага.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (вопрос 1 шага 1, вариант 1): запись приведена к типу формализации. Definition grid_fn := nat -> Q (GridFunction.v:132); число узлов N входит верхним пределом сумм и периодом. Definition gperiodic (N : nat) (u : grid_fn) : Prop := forall j, u (j + N)%nat == u j (ProcessPeriodicGrid.v:60) — периодичность как свойство профиля. Следствия: u N == u 0 (gperiodic_N0, :63), u (S N) == u 1 (gperiodic_SN, :66), u j == u (j mod N) (gperiodic_mod, :82); периодическое продолжение всякого профиля — pext (:94), pext_gperiodic (:96)."
+  },
+  {
+   "line": 101,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "есть в точности метод Эйлера во времени, но *на пространстве grid-функций*. Весь аппарат Части VIII — шаг Эйлера, сжатие, устойчивость, Гронуолл — переносится сюда;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Общей схемы u + Δt·L_h u в src нет; шаги теплопроводности и переноса объявлены как выпуклые комбинации (heat_step :46, ProcessTransport.v:41), вид «u + r·(вторая разность)» получается тождеством (Check.v, раздел 4); волновой шаг — двухуровневый. Модули Части VIII в файлах Части IX не подключены; сжатия и неравенства Гронуолла для сеточных функций в src нет. Фраза о доказанном не говорит. Сомнительное место 3 в заметках."
+  },
+  {
+   "line": 112,
+   "theorem": "fd",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "Пространственная производная на сетке становится *конечной разностью*. Прямая разность — дискретный градиент:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition fd (f : grid_fn) : grid_fn := fun i => f (S i) - f i (:24) — совпадает с формулой страницы; разность не делится на шаг сетки, условий на края в определении нет."
+  },
+  {
+   "line": 119,
+   "theorem": "dd_eq_fd_fd",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "а её повторное применение — дискретный лапласиан (вторая разность):",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma dd_eq_fd_fd : forall (f : grid_fn) i, dd f i == fd (fd f) i (:78); определение dd (:75) совпадает с формулой страницы. Closed under the global context."
+  },
+  {
+   "line": 125,
+   "theorem": "dd",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "Это конечные рациональные операции над grid-функцией, без предельного перехода.[^2]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Definition dd (f : grid_fn) : grid_fn := fun i => f (S (S i)) - 2 * f (S i) + f i (:75). Вне FiniteDifference.v и ProcessPDEGreen.v оператор dd в src не используется: шаги схем Глав 9.2–9.4 записаны прямо через u (S j) и u (ppred N j)."
+  },
+  {
+   "line": 126,
+   "theorem": null,
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Техническая оговорка: эта вторая разность — *повторная прямая* ($u_{j+2}-2u_{j+1}+u_j$); для классической схемы теплопроводности (Глава 9.2) удобнее *центрированная* запись $u_{j+1}-2u_j+u_{j-1}$, вводимая там локально с явной оговоркой об индексации.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_step (:46): r * u (ppred N j) + (1 - 2*r) * u j + r * u (S j); левый сосед — циклический предшественник ppred (ProcessPDEGreen.v:63). Оговорка об индексации стоит в Главе 9.2, сноска 2. Связь с dd: heat_step r N u (S k) == u (S k) + r * dd u k — в src не записана, проверена в Check.v (раздел 4)."
+  },
+  {
+   "line": 131,
+   "theorem": "abel_summation",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "На конечной сетке роль интеграла играет конечная сумма $\\sum_{j} u_j$, и для неё выполнено *суммирование по частям* (формула Абеля): спаривание разности одной функции с другой переносится на вторую с граничными членами, а на периодической сетке граничные члены сокращаются.[^3]",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Theorem abel_summation : forall N (f g : grid_fn), sum_Q_ns (fun i => fd f i * g i) N + sum_Q_ns (fun i => f (S i) * fd g i) N == f N * g N - f 0 * g 0 (:170) — для всякой пары сеточных функций и всякого N, без условий на края. sum_Q_ns f N = f 0 + … + f (N-1) (GridFunction.v:26). Closed under the global context."
+  },
+  {
+   "line": 135,
+   "theorem": "green_dirichlet_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "Отсюда — дискретная *формула Грина*, энергетическое тождество, связывающее лапласиан с градиентом:",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma green_dirichlet_periodic : forall N (u : grid_fn), u N == u 0 -> u (S N) == u 1 -> sum_Q_ns (fun i => u (S i) * dd u i) N == - gradient_norm_sq N u (:87) — совпадает с формулой страницы; «периодическая сетка» в посылках — два равенства на узлах N и N+1. Доказательство идёт через abel_summation. Одного равенства u N == u 0 (is_periodic, FiniteDifference.v:216) недостаточно (Check.v, раздел 1). Closed under the global context."
+  },
+  {
+   "line": 144,
+   "theorem": "lap_norm_bound",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "и, при том же условии, сопутствующая оценка $\\norm{\\Delta_h u}^2 \\le 4 \\norm{\\nabla_h u}^2$.[^4] Эти тождества — конечные суммы над ℚ;",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): названо условие («при том же условии»). Lemma lap_norm_bound : forall N (u : grid_fn), fd u N == fd u 0 -> gf_norm_sq N (dd u) <= 4 * gradient_norm_sq N u (ProcessPDEGreen.v:123). Без посылки оценка неверна (lap_bound_not_unconditional, ProcessPeriodicGrid.v:246); при периодичности профиля — gperiodic_lap_bound (:180). Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 160,
+   "theorem": "heat_iter_box",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Пространственный оператор — лапласиан; процесс *сглаживает*: каждый шаг заменяет значение средневзвешенным с соседями, профиль растекается. Роль оператора — *диссипация*: энергия убывает, действует принцип максимума (значения не выходят за начальные пределы).",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "heat_step (:46) — комбинация трёх значений с неотрицательными весами при 0 <= r и 2*r <= 1. heat_iter_box (:87): при этом условии интервал [lo, hi] сохраняется за любое число шагов. heat_step_energy (:124): за один шаг энергия не возрастает — при том же условии, N > 0 и u N == u 0. Условие на шаг на этих строках не названо (в главе названо «условие Куранта», без числа); предмет ведомости Главы 9.2. Сомнительные места 4 и 5 в заметках."
+  },
+  {
+   "line": 166,
+   "theorem": "wave_step_interior_zero",
+   "file": "src/process/ProcessWaveEnergy.v",
+   "claim": "Уравнение второго порядка по времени; процесс *распространяет*: возмущение бежит по сетке. Роль оператора — *конечная скорость*: причинность, фронт продвигается не более чем на один узел за шаг.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "wave_step_interior_zero (:73): если оба уровня равны нулю на узлах a..b, то следующий уровень равен нулю на узлах a+1..b-1 — один шаг, любое s. Итерации волнового шага, закона энергии и условия на s в файле нет (шапка файла это оговаривает). Предмет ведомости Главы 9.3."
+  },
+  {
+   "line": 171,
+   "theorem": "transport_mass",
+   "file": "src/process/ProcessTransport.v",
+   "claim": "Пространственный оператор — первая производная; процесс *движет* профиль без изменения формы. Роль оператора — *сохранение*: полная масса не меняется, профиль лишь сдвигается.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_mass (:103): сумма по N узлам сохраняется за один шаг при любом nu и N > 0. Точный сдвиг — transport_shift (:120), только при nu = 1; при 0 < nu < 1 шаг смешивает узел с предшественником, и профиль меняет форму (Check.v, раздел 7). Интервал значений сохраняется при 0 <= nu <= 1 (transport_step_box, :68). Предмет ведомости Главы 9.4. Сомнительное место 6 в заметках."
+  },
+  {
+   "line": 177,
+   "theorem": null,
+   "file": "src/navier_stokes/GalerkinSystem.v",
+   "claim": "Кульминация — уравнения Навье–Стокса (Глава 9.5), нелинейная система, где те же энергетические методы дают диссипацию и условную регулярность.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Теоремы раздела берут запись посылок NSCoupling (GalerkinSystem.v:216) неявным аргументом; слово «условную» на странице стоит. Экземпляр записи есть — NSCoupling_inhabited (:228), нулевая связь. GridFunction.v и FiniteDifference.v лежат в том же каталоге navier_stokes/. Утверждения о диссипации и регулярности не читались — предмет ведомости Главы 9.5."
+  },
+  {
+   "line": 190,
+   "theorem": "System",
+   "file": "src/TheoryOfSystems_Core_ERR.v",
+   "claim": "«система решения» здесь — содержательная *интерпретация* конструкции (сетка плюс конечно-разностная схема плюс дискретные законы), а не объект, буквально объявленный в коде как `System`.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Record System (L : Level) (TheoryOfSystems_Core_ERR.v:203). В шести файлах Части IX (GridFunction.v, FiniteDifference.v, ProcessPDEGreen.v, ProcessHeatEquation.v, ProcessWaveEnergy.v, ProcessTransport.v) имя System не встречается — оговорка страницы верна."
+  },
+  {
+   "line": 193,
+   "theorem": null,
+   "file": null,
+   "claim": "Разбор есть онтологическое осмысление структуры Части и чтение авторских E/R/R-шапок опорных файлов,[^5] а не приписывание коду новых формальных утверждений.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапки с разметкой Elements / Roles / Rules стоят в четырёх файлах каталога process/ (ProcessPDEGreen.v, ProcessHeatEquation.v, ProcessWaveEnergy.v, ProcessTransport.v); в GridFunction.v и FiniteDifference.v такой разметки нет. Роли и правила разбора (профиль — состояние, число Куранта, законы) стоят в шапках файлов Глав 9.2–9.4."
+  },
+  {
+   "line": 235,
+   "theorem": null,
+   "file": null,
+   "claim": "Именно эта конечность каждой стадии отделяет доказанное (дискретное исчисление над ℚ, без аксиом; законы и устойчивость конкретных схем — в следующих главах, тоже как конечные рациональные факты) от границы (непрерывное решение и предел — роль-предел).",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "Print Assumptions всех 142 объявлений шести файлов Части IX (три файла главы и ProcessHeatEquation.v, ProcessWaveEnergy.v, ProcessTransport.v; PA.v) — Closed under the global context. Что доказано о схемах: теплопроводность — интервал значений за любое число шагов и энергия за один шаг при 0 <= r, 2*r <= 1; перенос — интервал при 0 <= nu <= 1 и масса за один шаг; волна — конечная область зависимости одного шага, без закона сохранения и без условия на шаг.",
+   "assumptions": "все 142 объявления шести файлов: Closed under the global context"
+  },
+  {
+   "line": 249,
+   "theorem": "heat_step_energy",
+   "file": "src/process/ProcessHeatEquation.v",
+   "claim": "Следующая глава предъявляет первый и канонический процесс этого рода — уравнение теплопроводности: диффузию как процесс сглаживания, с доказанным принципом максимума и диссипацией энергии над ℚ.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Принцип максимума — heat_step_box (:74) и heat_iter_box (:87), любое число шагов, при 0 <= r и 2*r <= 1. Диссипация — heat_step_energy (:124): один шаг, при том же условии, N > 0 и u N == u 0. Посылка u N == u 0 шагом не наследуется; при полной периодичности невозрастание энергии вдоль процесса доказывается (Check.v, раздел 5; в src такой теоремы нет). Сомнительное место 5 в заметках. Closed under the global context."
+  },
+  {
+   "line": 255,
+   "theorem": null,
+   "file": "src/navier_stokes/GridFunction.v",
+   "claim": "Опорная инфраструктура — `GridFunction.v` и `FiniteDifference.v` (каталог `navier_stokes/` Rocq-репозитория ToS; grid-функции, суммы, нормы, `fd`, `dd`, суммирование по частям `abel_summation`; 84 доказанных утверждения — 43 и 41, 0 аксиом)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): число исправлено. Счёт Qed: GridFunction.v — 43, FiniteDifference.v — 41, вместе 84. Каталог и состав названы верно; цена верна: все 100 объявлений двух файлов — Closed under the global context.",
+   "assumptions": "все 100 объявлений двух файлов: Closed under the global context"
+  },
+  {
+   "line": 255,
+   "theorem": null,
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "плюс новый файл `ProcessPDEGreen.v` (`process/`: дискретная формула Грина и оценка $\\norm{\\Delta u}^2\\le 4\\norm{\\nabla u}^2$; 8 утверждений, 0 аксиом, `Print Assumptions`: «closed under the global context»)",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "В файле 8 Qed и одно определение (ppred); три команды Print Assumptions стоят в конце файла (:144–146). Все 9 объявлений — Closed under the global context (PA.v).",
+   "assumptions": "все 9 объявлений файла: Closed under the global context"
+  },
+  {
+   "line": 256,
+   "theorem": "fd_linear",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "`fd` (прямая разность) и `dd` (вторая разность) в `FiniteDifference.v`; тождество `dd_eq_fd_fd`: вторая разность есть композиция первых. Линейность обоих операторов — там же, 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "fd_linear (:48): fd (fun j => a * f j + b * g j) i == a * fd f i + b * fd g i; dd_linear (:100) — то же для dd; dd_eq_fd_fd (:78). Все три — Closed under the global context."
+  },
+  {
+   "line": 257,
+   "theorem": "abel_periodic",
+   "file": "src/navier_stokes/FiniteDifference.v",
+   "claim": "`abel_summation` и `abel_periodic` в `FiniteDifference.v`: $\\sum (\\nabla_h f)_i g_i + \\sum f_{i+1}(\\nabla_h g)_i = f_N g_N - f_0 g_0$, и для периодических — правая часть нуль. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Формула сноски совпадает с abel_summation (:170). Theorem abel_periodic : forall N (f g : grid_fn), f N == f 0 -> g N == g 0 -> sum_Q_ns (fun i => fd f i * g i) N == - sum_Q_ns (fun i => f (S i) * fd g i) N (:183); «периодические» в посылке — по одному равенству на узле N для каждой функции. Closed under the global context."
+  },
+  {
+   "line": 258,
+   "theorem": "green_dirichlet_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "`green_dirichlet_periodic` и `lap_norm_bound` в `ProcessPDEGreen.v` (новый файл Части IX, проверено `Print Assumptions`: «closed under the global context»), 0 аксиом — для прямого лапласиана; посылки — $u_N=u_0$, $u_{N+1}=u_1$ у тождества и $(\\nabla_h u)_N=(\\nabla_h u)_0$ у оценки.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): названы посылки. Lemma green_dirichlet_periodic : forall N (u : grid_fn), u N == u 0 -> u (S N) == u 1 -> sum_Q_ns (fun i => u (S i) * dd u i) N == - gradient_norm_sq N u (ProcessPDEGreen.v:87); lap_norm_bound (:123) — при fd u N == fd u 0. Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 258,
+   "theorem": "sum_ns_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "Энергетическую оценку теплопроводности (Глава 9.2) даёт не это тождество напрямую, а выпуклость (неравенство Йенсена) вместе с леммами о циклическом сдвиге суммы (`sum_ns_shift_periodic`, `sum_pred_shift_periodic`, там же); формула Грина — канонический дискретный инструмент сам по себе.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Доказательство heat_step_energy (ProcessHeatEquation.v:124) использует jensen3 (:102), sum_pred_shift_periodic и sum_ns_shift_periodic — слова сноски верны. Lemma sum_ns_shift_periodic : forall (g : nat -> Q) N, g N == g 0 -> sum_Q_ns (fun j => g (S j)) N == sum_Q_ns g N (ProcessPDEGreen.v:48). Леммы green_dirichlet_periodic и lap_norm_bound вне своего файла в src не используются."
+  },
+  {
+   "line": 258,
+   "theorem": "sum_pred_shift_periodic",
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "(`sum_ns_shift_periodic`, `sum_pred_shift_periodic`, там же)",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Lemma sum_pred_shift_periodic : forall (g : nat -> Q) N, (0 < N)%nat -> sum_Q_ns (fun j => g (ppred N j)) N == sum_Q_ns g N (ProcessPDEGreen.v:67). Условия периодичности в посылке нет: ppred N 0 = N-1, и сдвиг назад есть перестановка узлов 0..N-1. Closed under the global context."
+  },
+  {
+   "line": 259,
+   "theorem": null,
+   "file": "src/process/ProcessPDEGreen.v",
+   "claim": "Шапки размечают прямо: `ProcessPDEGreen.v` — Elements: grid-функции, конечные суммы; Roles: `fd` роль-градиент, `dd` роль-лапласиан, формула Грина роль-инструмент; Rules: суммирование по частям, $\\norm{\\Delta u}^2\\le4\\norm{\\nabla u}^2$.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Шапка ProcessPDEGreen.v (:4–8, :16–19) содержит эту разметку; сверх названного в ней: узлы среди элементов, сумма как роль-интеграл, циклический сдвиг периодической суммы среди правил."
+  },
+  {
+   "line": 217,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (вопрос 1 шага 1, вариант 1): запись в разборе приведена к типу формализации. Definition gperiodic (N : nat) (u : grid_fn) : Prop := forall j, u (j + N)%nat == u j (ProcessPeriodicGrid.v:60) — периодичность как свойство профиля. Следствия: u N == u 0 (gperiodic_N0, :63), u (S N) == u 1 (gperiodic_SN, :66), u j == u (j mod N) (gperiodic_mod, :82); периодическое продолжение всякого профиля — pext (:94), pext_gperiodic (:96).",
+   "theorem": "gperiodic",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "grid-функции $u^n:ℕ\\toℚ$ (на периодической сетке — с периодом $N$), значения в узлах $u^n_j\\inℚ$, конечные суммы $\\sum_{j<N}$, конечная сетка и конечный номер шага."
+  },
+  {
+   "line": 144,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«При том же условии» — на периодической сетке: gperiodic_lap_bound : forall N (u : grid_fn), gperiodic N u -> gf_norm_sq N (dd u) <= 4 * gradient_norm_sq N u (ProcessPeriodicGrid.v:180). Closed under the global context.",
+   "theorem": "gperiodic_lap_bound",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "и, при том же условии, сопутствующая оценка $\\norm{\\Delta_h u}^2 \\le 4 \\norm{\\nabla_h u}^2$.[^4] Эти тождества — конечные суммы над ℚ;"
+  },
+  {
+   "line": 160,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (формализацией; текст фразы не менялся): «энергия убывает» теперь доказано на всём процессе (неравенство нестрогое): heat_iter_energy : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u n) <= gf_norm_sq N u (ProcessHeatProcess.v:149). Closed under the global context.",
+   "theorem": "heat_iter_energy",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Пространственный оператор — лапласиан; процесс *сглаживает*: каждый шаг заменяет значение средневзвешенным с соседями, профиль растекается. Роль оператора — *диссипация*: энергия убывает, действует принцип максимума (значения не выходят за начальные пределы)."
+  },
+  {
+   "line": 249,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора) (формализацией; текст фразы не менялся): «с доказанным принципом максимума и диссипацией энергии»: heat_iter_energy : forall r N u n, 0 <= r -> 2*r <= 1 -> (0 < N)%nat -> gperiodic N u -> gf_norm_sq N (heat_iter r N u n) <= gf_norm_sq N u (ProcessHeatProcess.v:149). Closed under the global context.",
+   "theorem": "heat_iter_energy",
+   "file": "src/process/ProcessHeatProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Следующая глава предъявляет первый и канонический процесс этого рода — уравнение теплопроводности: диффузию как процесс сглаживания, с доказанным принципом максимума и диссипацией энергии над ℚ."
+  },
+  {
+   "line": 255,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новый опорный файл в сноске. src/process/ProcessPeriodicGrid.v: 27 Qed и пять определений; строк Axiom, Parameter, Admitted нет.",
+   "theorem": null,
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "и `ProcessPeriodicGrid.v` (там же: периодичность как свойство профиля, формула Грина и оценка лапласиана с граничными членами; 27 утверждений, 0 аксиом).",
+   "assumptions": "все 32 объявления ProcessPeriodicGrid.v: Closed under the global context"
+  },
+  {
+   "line": 258,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "Lemma lap_norm_bound : forall N (u : grid_fn), fd u N == fd u 0 -> gf_norm_sq N (dd u) <= 4 * gradient_norm_sq N u (ProcessPDEGreen.v:123). Closed under the global context.",
+   "theorem": "lap_norm_bound",
+   "file": "src/process/ProcessPDEGreen.v",
+   "assumptions": "Closed under the global context",
+   "claim": "`green_dirichlet_periodic` и `lap_norm_bound` в `ProcessPDEGreen.v` (новый файл Части IX, проверено `Print Assumptions`: «closed under the global context»), 0 аксиом — для прямого лапласиана; посылки — $u_N=u_0$, $u_{N+1}=u_1$ у тождества и $(\\nabla_h u)_N=(\\nabla_h u)_0$ у оценки."
+  },
+  {
+   "line": 258,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. Definition gperiodic (N : nat) (u : grid_fn) : Prop := forall j, u (j + N)%nat == u j (ProcessPeriodicGrid.v:60) — периодичность как свойство профиля. Следствия: u N == u 0 (gperiodic_N0, :63), u (S N) == u 1 (gperiodic_SN, :66), u j == u (j mod N) (gperiodic_mod, :82); периодическое продолжение всякого профиля — pext (:94), pext_gperiodic (:96).",
+   "theorem": "gperiodic",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "claim": "Периодичность как свойство профиля — $u_{j+N}=u_j$ при всех $j$ (`gperiodic`, `ProcessPeriodicGrid.v`); из неё следуют обе посылки (`gperiodic_green`, `gperiodic_lap_bound`)."
+  },
+  {
+   "line": 258,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "gperiodic_green : forall N (u : grid_fn), gperiodic N u -> sum_Q_ns (fun i => u (S i) * dd u i) N == - gradient_norm_sq N u (ProcessPeriodicGrid.v:172). Closed under the global context.",
+   "theorem": "gperiodic_green",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Периодичность как свойство профиля — $u_{j+N}=u_j$ при всех $j$ (`gperiodic`, `ProcessPeriodicGrid.v`); из неё следуют обе посылки (`gperiodic_green`, `gperiodic_lap_bound`)."
+  },
+  {
+   "line": 258,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "gperiodic_lap_bound : forall N (u : grid_fn), gperiodic N u -> gf_norm_sq N (dd u) <= 4 * gradient_norm_sq N u (ProcessPeriodicGrid.v:180). Closed under the global context.",
+   "theorem": "gperiodic_lap_bound",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Периодичность как свойство профиля — $u_{j+N}=u_j$ при всех $j$ (`gperiodic`, `ProcessPeriodicGrid.v`); из неё следуют обе посылки (`gperiodic_green`, `gperiodic_lap_bound`)."
+  },
+  {
+   "line": 258,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 1, слово автора): новая фраза. green_boundary : forall N (u : grid_fn), sum_Q_ns (fun i => u (S i) * dd u i) N == - gradient_norm_sq N u + (u N * fd u N - u 0 * fd u 0) (ProcessPeriodicGrid.v:194) — без условий на края. Closed under the global context.",
+   "theorem": "green_boundary",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для всякой grid-функции тождество и оценка верны с граничными членами (`green_boundary`, `lap_norm_bound_boundary`), при нулевых значениях на краях тождество — `green_zero_boundary`; без условия на края оценка неверна (`lap_bound_not_unconditional`), а постоянная 4 достигается (`lap_bound_sharp`). 0 аксиом."
+  },
+  {
+   "line": 258,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "lap_norm_bound_boundary : forall N (u : grid_fn), gf_norm_sq N (dd u) <= 4 * gradient_norm_sq N u + 2 * (fd u N * fd u N - fd u 0 * fd u 0) (ProcessPeriodicGrid.v:218) — без условий на края. Closed under the global context.",
+   "theorem": "lap_norm_bound_boundary",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для всякой grid-функции тождество и оценка верны с граничными членами (`green_boundary`, `lap_norm_bound_boundary`), при нулевых значениях на краях тождество — `green_zero_boundary`; без условия на края оценка неверна (`lap_bound_not_unconditional`), а постоянная 4 достигается (`lap_bound_sharp`). 0 аксиом."
+  },
+  {
+   "line": 258,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "green_zero_boundary : forall N (u : grid_fn), u 0 == 0 -> u N == 0 -> sum_Q_ns (fun i => u (S i) * dd u i) N == - gradient_norm_sq N u (ProcessPeriodicGrid.v:207). Closed under the global context.",
+   "theorem": "green_zero_boundary",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для всякой grid-функции тождество и оценка верны с граничными членами (`green_boundary`, `lap_norm_bound_boundary`), при нулевых значениях на краях тождество — `green_zero_boundary`; без условия на края оценка неверна (`lap_bound_not_unconditional`), а постоянная 4 достигается (`lap_bound_sharp`). 0 аксиом."
+  },
+  {
+   "line": 258,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "lap_bound_not_unconditional : ~ (forall N (u : grid_fn), gf_norm_sq N (dd u) <= 4 * gradient_norm_sq N u) (ProcessPeriodicGrid.v:246); свидетель — cex_lap при N = 1. Одного равенства u N == u 0 мало и для формулы Грина: green_not_from_is_periodic (:264). Closed under the global context.",
+   "theorem": "lap_bound_not_unconditional",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для всякой grid-функции тождество и оценка верны с граничными членами (`green_boundary`, `lap_norm_bound_boundary`), при нулевых значениях на краях тождество — `green_zero_boundary`; без условия на края оценка неверна (`lap_bound_not_unconditional`), а постоянная 4 достигается (`lap_bound_sharp`). 0 аксиом."
+  },
+  {
+   "line": 258,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "lap_bound_sharp : gf_norm_sq 2 (dd zigzag) == 4 * gradient_norm_sq 2 zigzag (ProcessPeriodicGrid.v:281); zigzag — профиль 0,1,0,1,…, периодический с периодом 2 (zigzag_gperiodic, :275). Closed under the global context.",
+   "theorem": "lap_bound_sharp",
+   "file": "src/process/ProcessPeriodicGrid.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для всякой grid-функции тождество и оценка верны с граничными членами (`green_boundary`, `lap_norm_bound_boundary`), при нулевых значениях на краях тождество — `green_zero_boundary`; без условия на края оценка неверна (`lap_bound_not_unconditional`), а постоянная 4 достигается (`lap_bound_sharp`). 0 аксиом."
+  }
+ ]
+}
