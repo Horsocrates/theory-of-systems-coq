@@ -1,0 +1,91 @@
+@@FILE Направления/Математика/Том Математика/08 Обыкновенные дифференциальные уравнения/04 Устойчивость, единственность, неравенство Гронуолла.md
+@@OLD
+Глава 8.3 дала гарантию: при липшицевости правой части оператор Пикара сжимает, а
+значит, процесс приближений сходится и решение единственно. Но у задачи Коши есть
+@@NEW
+Глава 8.3 дала гарантию: при липшицевости правой части на достаточно коротком отрезке
+($LT<1$) оператор Пикара сжимает, и его итерации сближаются геометрически; а на сетке
+решение существует и единственно при любой длине отрезка. Но у задачи Коши есть
+@@END
+@@OLD
+проверен `Print Assumptions`; переход к $\varepsilon$-сходимости множителя к
+завершённому $e^{Lt}$ относится к L3-слою (как в Главе 8.3).
+@@NEW
+проверен `Print Assumptions`; без аксиом доказана и $\varepsilon$-сходимость множителя —
+свойство Коши лестницы $(1+Lt/n)^n$; завершённый $e^{Lt}$ как объект формальный слой не
+строит.
+@@END
+@@OLD
+$\varepsilon$-сходимость к нему наследует L3 (как и в Главе 8.3).
+@@NEW
+$\varepsilon$-сходимость есть свойство Коши самого процесса и аксиом не требует.
+@@END
+@@OLD
+не растёт, а *убывает*: $u_n \le u_0$.[^7]
+@@NEW
+с неотрицательным началом $u_0 \ge 0$ не растёт, а *убывает*: $u_{n+1} \le u_n \le u_0$.[^7]
+@@END
+@@OLD
+два его режима ($\alpha$ положительно или отрицательно.)*
+@@NEW
+два его режима ($\alpha$ положительно — или отрицательно при $\lvert\alpha\rvert h \le 1$.)*
+@@END
+@@OLD
+$e$-процесса, что разбирался в Главах 8.2 и 8.5.[^8] Так классическая форма $e^{Lt}$ оказывается не предзаданной
+@@NEW
+$e$-процесса, что разбирался в Главе 8.2 и разбирается в Главе 8.5.[^8] Так классическая форма $e^{Lt}$ оказывается не предзаданной
+@@END
+@@OLD
+совпадение с однородным Гронуоллом, тождество множителя со стадией $e^{Lt}$-процесса.
+$\varepsilon$-сходимость множителя к завершённому $e^{Lt}$ и безусловная оценка на
+бесконечном интервале — роль-предел и граница, наследующие L3 (как в
+Главе 8.3).
+@@NEW
+совпадение с однородным Гронуоллом, тождество множителя со стадией $e^{Lt}$-процесса,
+оценка расхождения в момент $t$ числом, не зависящим от числа шагов, и
+$\varepsilon$-сходимость самой лестницы множителей. Завершённый $e^{Lt}$ и безусловная
+оценка на бесконечном интервале — роль-предел и граница: в формальном слое их нет.
+@@END
+@@OLD
+затухание при множителе $\le 1$). Венчает — тождество множителя $(1+Lt/n)^n$ со
+стадией $e^{Lt}$-процесса. Универсальный слой включает L3 лишь там, где
+множитель читается как $\varepsilon$-сходимость к $e^{Lt}$; сами рациональные оценки
+его не требуют.
+@@NEW
+затухание при множителе $\le 1$). Венчает — тождество множителя $(1+Lt/n)^n$ со
+стадией $e^{Lt}$-процесса и оценка расхождения в момент $t$ этой стадией: лестница стадий
+не убывает, ограничена и образует процесс Коши. Универсальный слой L3 в доказанное не
+входит: ни рациональные оценки, ни $\varepsilon$-сходимость множителя его не требуют; к L3
+относится лишь актуализация $e^{Lt}$ как завершённого объекта (Глава 8.1, § «Где
+появляется граница»), и в формальном слое её нет.
+@@END
+@@OLD
+[^1]: Опорные файлы — `ProcessODEStability.v` (непрерывная зависимость: `euler_step_diff`, `euler_diff_bound`; 0 аксиом, `Print Assumptions` «closed under the global context») и `ProcessGronwall.v` (`gronwall_step`, `gronwall_iterate`, `gronwall_beta_zero`: $u_0(1+\alpha h)^n$; `gronwall_decay_factor`: затухание при множителе $\le 1$). Единственность — `picard_unique` (`ProcessPicardOperator.v`, Глава 8.3).
+@@NEW
+[^1]: Опорные файлы — `ProcessODEStability.v` (непрерывная зависимость: `euler_step_diff`, `euler_diff_bound`; 0 аксиом, `Print Assumptions` «closed under the global context») и `ProcessGronwall.v` (`gronwall_step`, `gronwall_iterate`, `gronwall_beta_zero`: $u_0(1+\alpha h)^n$; `gronwall_decay_factor`: затухание при множителе $\le 1$), а также `ProcessGronwallInequality.v` (неравенство Гронуолла для произвольной последовательности, оценка расхождения как его случай, оценки в момент $t$, затухание; 0 аксиом) и `ProcessExpLadder.v` (лестница $(1+s/n)^n$: рост, ограниченность, свойство Коши; 0 аксиом). Единственность — `picard_unique` (`ProcessPicardOperator.v`, Глава 8.3).
+@@END
+@@OLD
+[^2]: `picard_unique` в `ProcessPicardOperator.v`: если две грид-функции неподвижны под оператором Пикара, они совпадают во всех узлах. 0 аксиом (Глава 8.3).
+@@NEW
+[^2]: `picard_unique` в `ProcessPicardOperator.v`: при $LT<1$, если две грид-функции неподвижны под оператором Пикара, они совпадают во всех узлах сетки; без условия на $LT$ — `picard_unique_any_rate` (`ProcessPicardGridSolution.v`). Прочтение «единственность есть устойчивость при нулевом возмущении» записано теоремами в `ProcessGronwallInequality.v`: две неподвижные точки с началами $y_0$ и $\tilde y_0$ расходятся в узле $k$ не более чем в $(1+Lh)^k$ раз от $\lvert y_0 - \tilde y_0\rvert$ (`picard_fixed_stability`), при равных началах они совпадают (`picard_unique_as_zero_perturbation`); для самих ломаных Эйлера — `euler_same_start`. 0 аксиом (Глава 8.3).
+@@END
+@@OLD
+[^4]: `euler_diff_bound` в `ProcessODEStability.v`: $\lvert\Delta_n\rvert \le (1+Lh)^n\lvert\Delta_0\rvert$, индукцией по $n$ через `euler_step_diff`. 0 аксиом.
+@@NEW
+[^4]: `euler_diff_bound` в `ProcessODEStability.v`: $\lvert\Delta_n\rvert \le (1+Lh)^n\lvert\Delta_0\rvert$, индукцией по $n$ через `euler_step_diff`. 0 аксиом. Оценка точна: для $f(t,y) = Ly$ в ней стоит равенство (`euler_diff_bound_sharp`). «Малое возмущение даёт малое расхождение» в форме «для всякого $\varepsilon$ найдётся $\delta$» — `euler_continuous_dependence` (на данном шаге) и `euler_continuous_dependence_uniform` (в момент $t$: одно $\delta$ для всякого числа шагов) в `ProcessGronwallInequality.v`. 0 аксиом.
+@@END
+@@OLD
+[^6]: `gronwall_beta_zero` в `ProcessGronwall.v`: `gronwall_iterate alpha 0 h u0 n == u0 * Qpow (1+alpha*h) n`. 0 аксиом. При $\alpha=L$ это правая часть `euler_diff_bound`.
+@@NEW
+[^6]: `gronwall_beta_zero` в `ProcessGronwall.v`: `gronwall_iterate alpha 0 h u0 n == u0 * Qpow (1+alpha*h) n`. 0 аксиом. При $\alpha=L$ это правая часть `euler_diff_bound` (`euler_bound_is_gronwall_iterate`). Само неравенство — для всякой последовательности, растущей не быстрее шага, при неотрицательном множителе $1+\alpha h$ — `gronwall_inequality` (однородный случай — `gronwall_inequality_hom`, с притоком в явном виде — `gronwall_inequality_forced`); оценка расхождения как его случай — `euler_divergence_gronwall`. Все — в `ProcessGronwallInequality.v`, 0 аксиом.
+@@END
+@@OLD
+[^7]: `gronwall_decay_factor` в `ProcessGronwall.v`: для $0 \le r \le 1$ выполнено $u_0 r^n \le u_0$. 0 аксиом.
+@@NEW
+[^7]: `gronwall_decay_factor` в `ProcessGronwall.v`: для $0 \le r \le 1$ и $u_0 \ge 0$ выполнено $u_0 r^n \le u_0$; без условия $u_0 \ge 0$ это неверно (`decay_factor_needs_u0_nonneg`). Для самой итерации — `gronwall_iterate_decay` ($u_n \le u_0$) и `gronwall_iterate_decay_monotone` ($u_{n+1} \le u_n$) в `ProcessGronwallInequality.v`. При начале любого знака убывает модуль: если $\lvert r\rvert \le 1$, то $\lvert u_{n+1}\rvert \le \lvert u_n\rvert \le \lvert u_0\rvert$ (`gronwall_iterate_abs_monotone`, `gronwall_iterate_abs_decay`), а при $\lvert r\rvert < 1$ итерация стремится к нулю (`gronwall_iterate_vanishes`). 0 аксиом.
+@@END
+@@OLD
+[^8]: `euler_growth_is_expt_process` в `ProcessODEStability.v`: множитель $(1+s/(k{+}1))^{k+1}$ *есть* стадия $\texttt{expt\_process} s k$ из `ProcessExpProcess.v` (батч C). 0 аксиом. При $s = Lt$ это $(1+Lt/n)^n$.
+@@NEW
+[^8]: `euler_growth_is_expt_process` в `ProcessODEStability.v`: множитель $(1+s/(k{+}1))^{k+1}$ *есть* стадия $\texttt{expt\_process} s k$ из `ProcessExpProcess.v` — по определению этого процесса. 0 аксиом. При $s = Lt$ это $(1+Lt/n)^n$. Содержание тождеству дают теоремы: подстановка шага $h = t/n$ в оценку расхождения — `euler_divergence_expt` (`ProcessGronwallInequality.v`): расхождение в момент $t$ не больше стадии лестницы, умноженной на $\lvert\Delta_0\rvert$; стадии не убывают (`expt_monotone`) и ограничены числом, одним для всех (`expt_bounded`; оба — `ProcessExpLadder.v`), так что расхождение в момент $t$ оценено независимо от числа шагов (`euler_divergence_uniform`); лестница множителей — процесс Коши с явным модулем (`expt_process_is_Cauchy`, `expt_modulus`); при $s = 1$ она совпадает с $e$-процессом (`expt_at_one`). 0 аксиом.
+@@END

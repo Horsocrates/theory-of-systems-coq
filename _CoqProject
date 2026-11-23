@@ -2159,3 +2159,12 @@ src/process/ProcessDiscreteCharacters.v
 src/process/ProcessFourierConvergenceStd.v
 src/process/ProcessWalshReconstruction.v
 src/process/ProcessFastWalshCost.v
+src/process/ProcessExpLadder.v
+src/analysis/EulerTrajectoryGeneral.v
+src/process/ProcessPicardGridSolution.v
+src/process/ProcessEulerRefinement.v
+src/process/ProcessPicardLipschitz.v
+src/process/ProcessPicardStepContraction.v
+src/process/ProcessGronwallInequality.v
+src/process/ProcessODELinearLaws.v
+src/stdlib/trading/PriceDynamicsStability.v

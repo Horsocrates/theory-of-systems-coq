@@ -8,13 +8,14 @@
    "line": 9,
    "theorem": "picard_op_contraction",
    "file": "src/process/ProcessPicardOperator.v",
-   "claim": "Глава 8.3 дала гарантию: при липшицевости правой части оператор Пикара сжимает, а значит, процесс приближений сходится и решение единственно.",
+   "claim": "Глава 8.3 дала гарантию: при липшицевости правой части на достаточно коротком отрезке ($LT<1$) оператор Пикара сжимает, и его итерации сближаются геометрически; а на сетке решение существует и единственно при любой длине отрезка.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "picard_op_contraction (:102) даёт оценку |Φy_k − Φz_k| ≤ (L·T)·D; сжатием она становится при посылке L * Tlen < 1 (Hrate, :181), которой в словах нет. О приближениях доказан зазор соседних итераций picard_iter_gap (:234); утверждения о сходимости в файле нет. Единственность — picard_unique (:183): на сетке, при L·T < 1. Closed under the global context. Заметки, расхождение 5."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): в пересказе Главы 8.3 названо условие сжатия. picard_op_contraction (ProcessPicardOperator.v:102): |Φy_k − Φz_k| <= (L·T)·D на узлах k <= N; сжатием оценка становится при L * Tlen < 1 (посылка Hrate, :181). «Итерации сближаются геометрически» — picard_iter_gap (:234). «На сетке решение существует и единственно при любой длине отрезка» — picard_fixed_exists (ProcessPicardGridSolution.v:243), picard_unique_any_rate (:330); шаг 2 Части VIII. Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 27,
+   "line": 28,
    "theorem": "euler_diff_bound",
    "file": "src/process/ProcessODEStability.v",
    "claim": "Доказанное ядро — конкретные процессные оценки над ℚ. Расхождение двух Эйлеровых траекторий с разными начальными условиями на каждом шаге растёт не более чем в $(1+Lh)$ раз, а за $n$ шагов — не более чем в $(1+Lh)^n$;",
@@ -23,7 +24,7 @@
    "note": "euler_step_diff (:64) и euler_diff_bound (:86): Qabs (euler y0 n - euler z0 n) <= qpow (1 + L * h) n * Qabs (y0 - z0) для двух ломаных Эйлера одного уравнения с одним шагом h; посылки раздела: 0 <= L, липшицевость f по y при всех t, 0 <= h. Closed under the global context."
   },
   {
-   "line": 29,
+   "line": 30,
    "theorem": "gronwall_beta_zero",
    "file": "src/process/ProcessGronwall.v",
    "claim": "однородная итерация Гронуолла даёт ту же геометрическую форму $u_0 (1+\\alpha h)^n$, а при множителе не больше единицы — затухание.[^1]",
@@ -32,7 +33,7 @@
    "note": "gronwall_beta_zero (:80): итерация шага, заданного равенством, при beta = 0 равна u0 * Qpow (1 + alpha * h) n; затухание — gronwall_decay_factor (:112), при 0 <= r <= 1 и 0 <= u0. Слова страницы («итерация даёт геометрическую форму») утверждению отвечают. Closed under the global context."
   },
   {
-   "line": 31,
+   "line": 32,
    "theorem": null,
    "file": "src/process/ProcessODEStability.v",
    "claim": "Эти оценки — точные рациональные неравенства над ℚ, и их 0-аксиомный статус проверен `Print Assumptions`;",
@@ -42,16 +43,17 @@
    "assumptions": "euler_step_diff, euler_diff_bound, gronwall_beta_zero, gronwall_decay_factor: Closed under the global context"
   },
   {
-   "line": 32,
-   "theorem": null,
-   "file": "src/process/ProcessExpProcess.v",
-   "claim": "переход к $\\varepsilon$-сходимости множителя к завершённому $e^{Lt}$ относится к L3-слою (как в Главе 8.3).",
-   "page_price": "L3",
-   "verdict": "mismatch-price",
-   "note": "Теоремы о ε-сходимости множителя (свойстве Коши процесса expt_process) в src нет — ни с classic, ни без: имя expt_process встречается только в ProcessExpProcess.v и ProcessODEStability.v, о нём доказаны два вычисленных значения (expt_0_0, expt_1_0). Цена «L3» с компилятора не снята. В пробном файле свойство Коши доказано без аксиом (expt_process_is_Cauchy); через монотонность и ограниченность — с classic (expt_cauchy_via_mct). Заметки, расхождение 3."
+   "line": 33,
+   "theorem": "expt_process_is_Cauchy",
+   "file": "src/process/ProcessExpLadder.v",
+   "claim": "без аксиом доказана и $\\varepsilon$-сходимость множителя — свойство Коши лестницы $(1+Lt/n)^n$; завершённый $e^{Lt}$ как объект формальный слой не строит.",
+   "page_price": "без аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): слова «относится к L3-слою» сняты — цена названа по компилятору. expt_process_is_Cauchy : forall s, 0 <= s -> is_Cauchy (expt_process s) (ProcessExpLadder.v:565); is_Cauchy (ProcessCore.v:68): для всякого eps > 0 найдётся N, за которым стадии отличаются меньше чем на eps. При s = L·t — growth_factor_is_Cauchy (ProcessGronwallInequality.v:502). Closed under the global context. Числа e^{Lt} как завершённого объекта, равенства потолка этому числу и оценки расхождения при неограниченном числе шагов с постоянной, не зависящей от n, в ProcessGronwallInequality.v и ProcessExpLadder.v нет (шапки файлов, раздел «NOT claimed»).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 35,
+   "line": 37,
    "theorem": null,
    "file": "src/process/ProcessODEStability.v",
    "claim": "Чего глава *не* делает: она не предъявляет классический множитель $e^{Lt}$ как завершённую экспоненту, не утверждает безусловную оценку на бесконечном интервале и не доказывает глобальное продолжение решения.",
@@ -60,16 +62,17 @@
    "note": "Статус назван верно: в четырёх файлах главы нет утверждений о завершённой экспоненте, об оценке при неограниченном числе шагов с постоянной, не зависящей от n, и о продолжении решения; шапка ProcessODEStability.v (:24–27) относит это к границе."
   },
   {
-   "line": 38,
-   "theorem": null,
-   "file": "src/process/ProcessExpProcess.v",
-   "claim": "Множитель $(1+Lh)^n$ — рациональный процесс; его предел $e^{Lt}$ — роль-предел, а $\\varepsilon$-сходимость к нему наследует L3 (как и в Главе 8.3).",
-   "page_price": "L3",
-   "verdict": "mismatch-price",
-   "note": "То же место, что на стр. 32: теоремы о ε-сходимости множителя в src нет; названные в Главе 8.3 леммы слоя (iterate_is_cauchy, FixedPoint.v:263; Qpow_vanish, SeriesConvergence.v:164) по компилятору Closed under the global context. Заметки, расхождение 3."
+   "line": 40,
+   "theorem": "expt_process_is_Cauchy",
+   "file": "src/process/ProcessExpLadder.v",
+   "claim": "Множитель $(1+Lh)^n$ — рациональный процесс; его предел $e^{Lt}$ — роль-предел, а $\\varepsilon$-сходимость есть свойство Коши самого процесса и аксиом не требует.",
+   "page_price": "аксиом не требует",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): слова «наследует L3» сняты. expt_process_is_Cauchy : forall s, 0 <= s -> is_Cauchy (expt_process s) (ProcessExpLadder.v:565); is_Cauchy (ProcessCore.v:68): для всякого eps > 0 найдётся N, за которым стадии отличаются меньше чем на eps. При s = L·t — growth_factor_is_Cauchy (ProcessGronwallInequality.v:502). Closed under the global context. Явный модуль — expt_modulus (ProcessExpLadder.v:538).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 41,
+   "line": 43,
    "theorem": "euler_diff_bound",
    "file": "src/process/ProcessODEStability.v",
    "claim": "*Первый* — рациональные оценки расхождения и роста: доказаны над ℚ без аксиом.",
@@ -79,7 +82,7 @@
    "assumptions": "Closed under the global context"
   },
   {
-   "line": 50,
+   "line": 52,
    "theorem": null,
    "file": "src/process/ProcessODEStability.v",
    "claim": "Опираемся на E/R/R-шапку `ProcessODEStability.v`.",
@@ -88,7 +91,7 @@
    "note": "Шапка файла (:1–31) содержит раздел «E/R/R разбор» (:15–22) с Rules, Roles, Elements."
   },
   {
-   "line": 53,
+   "line": 55,
    "theorem": "euler_step_diff",
    "file": "src/process/ProcessODEStability.v",
    "claim": "Липшицевость даёт пошаговую оценку $\\lvert\\Delta_{n+1}\\rvert \\le (1+Lh)\\lvert\\Delta_n\\rvert$, откуда геометрическая $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\lvert\\Delta_0\\rvert$;",
@@ -97,25 +100,27 @@
    "note": "euler_step_diff (:64): Qabs (euler y0 (S k) - euler z0 (S k)) <= (1 + L * h) * Qabs (euler y0 k - euler z0 k); euler_diff_bound (:86) — индукцией по n. Closed under the global context."
   },
   {
-   "line": 55,
-   "theorem": "gronwall_beta_zero",
-   "file": "src/process/ProcessGronwall.v",
+   "line": 57,
+   "theorem": "gronwall_inequality_hom",
+   "file": "src/process/ProcessGronwallInequality.v",
    "claim": "неравенство Гронуолла обобщает: рост, ограниченный кратным себя, влечёт геометрическую оценку $u_0(1+\\alpha h)^n$;",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Утверждения вида «u (S n) <= (1 + alpha*h) * u n при всех n влечёт u n <= u 0 * (1 + alpha*h)^n» для произвольной последовательности в ProcessGronwall.v нет. gronwall_beta_zero (:80) — явный вид последовательности, заданной равенством u(n+1) = (1+alpha*h)*u(n); discrete_gronwall (:183) говорит о той же итерации и является равенством. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (формализацией; текст фразы не менялся): «рост, ограниченный кратным себя, влечёт геометрическую оценку» теперь теорема для произвольной последовательности. gronwall_inequality_hom : forall alpha h (u : nat -> Q), 0 <= 1 + alpha * h -> (forall n, u (S n) <= (1 + alpha * h) * u n) -> forall n, u n <= u 0 * Qpow (1 + alpha * h) n (ProcessGronwallInequality.v:115) — от рекуррентной оценки произвольной последовательности к геометрической оценке. Closed under the global context. С притоком — gronwall_inequality : forall alpha beta h (u : nat -> Q), 0 <= 1 + alpha * h -> (forall n, u (S n) <= (1 + alpha * h) * u n + beta * h) -> forall n, u n <= gronwall_iterate alpha beta h (u 0) n (ProcessGronwallInequality.v:104); с отдельным началом u 0 <= u0 — gronwall_inequality_from (:90). Последовательность u произвольна; условие на множитель существенно — gronwall_inequality_needs_nonneg_factor (:174). Closed under the global context. Прежняя опора gronwall_beta_zero (ProcessGronwall.v:80) — явный вид последовательности, заданной равенством.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 57,
+   "line": 59,
    "theorem": "euler_growth_is_expt_process",
    "file": "src/process/ProcessODEStability.v",
    "claim": "множитель $(1+Lh)^n$ есть стадия процесса для $e^{Lt}$.",
    "page_price": "",
    "verdict": "ok",
-   "note": "euler_growth_is_expt_process (:110): qpow (1 + s / inject_Z (Z.of_nat (S k))) (S k) == expt_process s k — при h = t/n, s = L*t. Это развёрнутое определение expt_process (ProcessExpProcess.v:51); о статусе — запись к стр. 162 и заметки, расхождение 2."
+   "note": "euler_growth_is_expt_process : qpow (1 + s / inject_Z (Z.of_nat (S k))) (S k) == expt_process s k (ProcessODEStability.v:110) — развёрнутое определение expt_process (ProcessExpProcess.v:51); доказательство — unfold expt_process; reflexivity. Closed under the global context. Содержание тождеству дают теоремы шага 4 Части VIII: оценка расхождения в момент t стадией лестницы (euler_divergence_expt, ProcessGronwallInequality.v:381), рост, ограниченность и свойство Коши лестницы (ProcessExpLadder.v) — сноска 8.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 71,
+   "line": 73,
    "theorem": "picard_unique",
    "file": "src/process/ProcessPicardOperator.v",
    "claim": "Единственность решения — уже доказанный факт (Глава 8.3): у сжимающего оператора Пикара не более одной неподвижной точки на сетке, и эта единственность установлена конструктивно, через конечный максимум, без закона исключённого третьего.[^2]",
@@ -124,16 +129,17 @@
    "note": "picard_unique (:183): при 0 < L, липшицевости f, 0 <= h и L * Tlen < 1 две функции, неподвижные под picard_op в узлах k <= N, совпадают в этих узлах; доказательство через конечный максимум gmax (:156). Closed under the global context. Условие сжатия для единственности на сетке не требуется (пробный файл, picard_unique_any_interval) — заметки, сомнительное место 1."
   },
   {
-   "line": 75,
-   "theorem": "euler_diff_bound",
-   "file": "src/process/ProcessODEStability.v",
+   "line": 77,
+   "theorem": "euler_same_start",
+   "file": "src/process/ProcessGronwallInequality.v",
    "claim": "*единственность есть устойчивость при нулевом возмущении*. Если начальные условия совпадают, $\\Delta_0 = 0$, то оценка расхождения $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\cdot 0 = 0$ заставляет траектории совпадать на каждом шаге.",
    "page_price": "",
    "verdict": "ok",
-   "note": "Следует из euler_diff_bound (:86); отдельной теоремой в src не записано (пробный файл: euler_same_start). picard_unique говорит о неподвижных точках сеточного оператора Пикара, оценка расхождения — о ломаных Эйлера; в src эти предметы не связаны. Связь доказана в пробном файле (picard_fixed_is_euler, picard_fixed_stability, picard_unique_as_zero_perturbation) — заметки, сомнительное место 1."
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (формализацией; текст фразы не менялся): прочтение записано теоремами. euler_same_start : forall y0 z0 n, y0 == z0 -> euler f h y0 n == euler f h z0 n (ProcessGronwallInequality.v:255) — следствие оценки расхождения при нулевом возмущении. Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. Closed under the global context. Для неподвижных точек оператора Пикара — picard_fixed_stability (:284) и picard_unique_as_zero_perturbation (:299); сноска 2.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 97,
+   "line": 99,
    "theorem": "euler_step_diff",
    "file": "src/process/ProcessODEStability.v",
    "claim": "Каждый шаг растягивает расхождение не более чем в $(1+Lh)$ раз.[^3]",
@@ -142,25 +148,27 @@
    "note": "euler_step_diff (:64), формула страницы (стр. 92–95) совпадает с утверждением. Closed under the global context."
   },
   {
-   "line": 104,
+   "line": 106,
    "theorem": "euler_diff_bound",
    "file": "src/process/ProcessODEStability.v",
    "claim": "Расхождение в любой момент ограничено начальным возмущением, умноженным на геометрический множитель.[^4]",
    "page_price": "",
    "verdict": "ok",
-   "note": "euler_diff_bound (:86): при всяком n. Closed under the global context. Оценка точна: для f(t,y) = L*y расхождение равно qpow (1 + L*h) n * Qabs (y0 - z0) (пробный файл, euler_diff_bound_sharp)."
+   "note": "euler_diff_bound (ProcessODEStability.v:86): при всяком n. Closed under the global context. Оценка точна: euler_diff_bound_sharp : forall L h y0 z0 n, 0 <= L -> 0 <= h -> Qabs (euler (fun _ y => L * y) h y0 n - euler (fun _ y => L * y) h z0 n) == qpow (1 + L * h) n * Qabs (y0 - z0) (ProcessGronwallInequality.v:360) — для правой части L·y в оценке стоит равенство; липшицевость этой правой части — linear_is_lipschitz (:351). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 105,
-   "theorem": "euler_diff_bound",
-   "file": "src/process/ProcessODEStability.v",
+   "line": 107,
+   "theorem": "euler_continuous_dependence",
+   "file": "src/process/ProcessGronwallInequality.v",
    "claim": "На *конечном* интервале множитель конечен, и потому малое возмущение даёт малое расхождение — это и есть содержательная устойчивость над ℚ — дискретная процессная форма непрерывной зависимости",
    "page_price": "",
    "verdict": "ok",
-   "note": "Вывод из euler_diff_bound; в виде «для всякого eps найдётся delta» в src не записано (пробный файл: euler_continuous_dependence). Отрезка в утверждениях файла нет: n и h независимы, множитель при каждом n — рациональное число. Оценка, не зависящая от числа шагов на отрезке длины t, в src не записана; в пробном файле доказана (euler_divergence_uniform) — заметки, сомнительное место 2."
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (формализацией; текст фразы не менялся): «малое возмущение даёт малое расхождение» записано в форме «для всякого eps найдётся delta». euler_continuous_dependence : forall n eps, 0 < eps -> exists delta, 0 < delta /\\ forall y0 z0, Qabs (y0 - z0) < delta -> Qabs (euler f h y0 n - euler f h z0 n) < eps (ProcessGronwallInequality.v:319) — при данном шаге h и данном числе шагов n. Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. Closed under the global context. В момент t, с одним delta для всякого числа шагов, — euler_continuous_dependence_uniform (:467). Опора обеих — euler_diff_bound (ProcessODEStability.v:86).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 121,
+   "line": 123,
    "theorem": "gronwall_step",
    "file": "src/process/ProcessGronwall.v",
    "claim": "В дискретной процессной форме рекуррентный шаг Гронуолла — это",
@@ -169,7 +177,7 @@
    "note": "Definition gronwall_step (alpha beta h : Q) (u_n : Q) : Q := (1 + alpha * h) * u_n + beta * h (:44) — правая часть формулы страницы (стр. 124–126); шаг задан равенством."
   },
   {
-   "line": 128,
+   "line": 130,
    "theorem": "gronwall_beta_zero",
    "file": "src/process/ProcessGronwall.v",
    "claim": "В однородном случае ($\\beta = 0$) итерация решается явно и даёт в точности геометрический рост:",
@@ -178,52 +186,56 @@
    "note": "gronwall_beta_zero (:80): gronwall_iterate alpha 0 h u0 n == u0 * Qpow (1 + alpha * h) n, при любых знаках alpha, h, u0. Closed under the global context."
   },
   {
-   "line": 135,
+   "line": 137,
    "theorem": "gronwall_beta_zero",
    "file": "src/process/ProcessGronwall.v",
    "claim": "Это и есть процессная форма Гронуолла, и при $\\alpha = L$, $u_0 = \\lvert\\Delta_0\\rvert$ она совпадает с оценкой расхождения предыдущего раздела — устойчивость есть Гронуолл для расхождения.[^6]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Названная лемма — формула n-го члена геометрической прогрессии, заданной равенством; неравенства Гронуолла (от рекуррентной оценки произвольной последовательности к геометрической оценке) в названном файле нет. «Совпадение с оценкой расхождения» теоремой не записано: euler_diff_bound написана через qpow (ProcessExpProcess.v:36), gronwall_beta_zero — через Qpow (SeriesConvergence.v:35), леммы о равенстве двух функций в src нет. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (формализацией; текст фразы не менялся): «это» — явный вид однородной итерации: gronwall_beta_zero (ProcessGronwall.v:80). «Совпадает с оценкой расхождения» — euler_bound_is_gronwall_iterate (ProcessGronwallInequality.v:197); «устойчивость есть Гронуолл для расхождения» — euler_divergence_gronwall (:227). Само неравенство — gronwall_inequality (:104); сноска 6. Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 137,
-   "theorem": "gronwall_decay_factor",
-   "file": "src/process/ProcessGronwall.v",
-   "claim": "А если множитель не превосходит единицы ($r = 1+\\alpha h$ в диапазоне $0 \\le r \\le 1$ — затухающий режим), итерация не растёт, а *убывает*: $u_n \\le u_0$.[^7]",
+   "line": 139,
+   "theorem": "gronwall_iterate_decay_monotone",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "claim": "А если множитель не превосходит единицы ($r = 1+\\alpha h$ в диапазоне $0 \\le r \\le 1$ — затухающий режим), итерация с неотрицательным началом $u_0 \\ge 0$ не растёт, а *убывает*: $u_{n+1} \\le u_n \\le u_0$.[^7]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "gronwall_decay_factor (:112): 0 <= r -> r <= 1 -> 0 <= u0 -> u0 * Qpow r n <= u0 — третья посылка 0 <= u0 на странице опущена; без неё неравенство неверно (u0 = −1, r = 1/2, n = 1; пробный файл, decay_factor_needs_u0_nonneg). Для самой итерации — gronwall_decay_bound (:151), её страница не называет. Заметки, расхождение 4."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): названо условие u0 >= 0, оценка записана шаг за шагом. gronwall_iterate_decay_monotone : forall alpha h u0 n, 0 <= 1 + alpha * h -> 1 + alpha * h <= 1 -> 0 <= u0 -> gronwall_iterate alpha 0 h u0 (S n) <= gronwall_iterate alpha 0 h u0 n (ProcessGronwallInequality.v:544); неотрицательность итерации — gronwall_iterate_hom_nonneg (:531). Closed under the global context. Без условия на начало формула неверна — decay_factor_needs_u0_nonneg (:513).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 155,
+   "line": 157,
    "theorem": "euler_growth_is_expt_process",
    "file": "src/process/ProcessODEStability.v",
-   "claim": "Если взять шаг $h = t/n$ (то есть достичь момента $t$ за $n$ шагов), множитель станет $(1 + L t/n)^n$ — а это в точности стадия процесса для $e^{Lt}$, того самого $e$-процесса, что разбирался в Главах 8.2 и 8.5.[^8]",
+   "claim": "Если взять шаг $h = t/n$ (то есть достичь момента $t$ за $n$ шагов), множитель станет $(1 + L t/n)^n$ — а это в точности стадия процесса для $e^{Lt}$, того самого $e$-процесса, что разбирался в Главе 8.2 и разбирается в Главе 8.5.[^8]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: лемма (:110) есть развёрнутое определение expt_process (ProcessExpProcess.v:51), доказательство — unfold expt_process; reflexivity. Подстановка h = t/n в euler_diff_bound теоремой не записана (комментарий :106–109). Свойств, делающих expt_process процессом экспоненты (монотонность, ограниченность, свойство Коши), в src нет: доказаны два значения expt_0_0, expt_1_0; с exp1_process он связан только сходством определений. Заметки, расхождение 2."
-  },
-  {
-   "line": 162,
-   "theorem": null,
-   "file": "src/process/ProcessODEStability.v",
-   "claim": "Доказано конкретное и процессное: пошаговая и геометрическая оценки расхождения, их совпадение с однородным Гронуоллом, тождество множителя со стадией $e^{Lt}$-процесса.",
-   "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: из четырёх названных «доказанными» вещей теоремами записаны две оценки расхождения (euler_step_diff, euler_diff_bound). «Совпадение с однородным Гронуоллом» теоремой не записано (расхождение 1); «тождество множителя со стадией» есть равенство по определению (расхождение 2). В пробном файле: euler_divergence_gronwall, euler_bound_is_gronwall_iterate, euler_divergence_expt."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (вопрос 3 шага 4, вариант 1): «разбирался в Главах 8.2 и 8.5» → «разбирался в Главе 8.2 и разбирается в Главе 8.5». euler_growth_is_expt_process : qpow (1 + s / inject_Z (Z.of_nat (S k))) (S k) == expt_process s k (ProcessODEStability.v:110) — развёрнутое определение expt_process (ProcessExpProcess.v:51); доказательство — unfold expt_process; reflexivity. Closed under the global context. Подстановка h = t/n в оценку расхождения — euler_divergence_expt (ProcessGronwallInequality.v:381); «того самого e-процесса» — expt_at_one (ProcessExpLadder.v:347). Сноска 8.",
+   "assumptions": "Closed under the global context"
   },
   {
    "line": 164,
-   "theorem": null,
-   "file": "src/process/ProcessExpProcess.v",
-   "claim": "$\\varepsilon$-сходимость множителя к завершённому $e^{Lt}$ и безусловная оценка на бесконечном интервале — роль-предел и граница, наследующие L3 (как в Главе 8.3).",
-   "page_price": "L3",
-   "verdict": "mismatch-price",
-   "note": "Теоремы о ε-сходимости множителя в src нет; цена «L3» с компилятора не снята. Свойство Коши процесса expt_process s при s >= 0 доказано в пробном файле без аксиом (expt_process_is_Cauchy, явный модуль expt_modulus). Заметки, расхождение 3."
+   "theorem": "euler_divergence_uniform",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "claim": "Доказано конкретное и процессное: пошаговая и геометрическая оценки расхождения, их совпадение с однородным Гронуоллом, тождество множителя со стадией $e^{Lt}$-процесса, оценка расхождения в момент $t$ числом, не зависящим от числа шагов, и $\\varepsilon$-сходимость самой лестницы множителей.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): перечень доказанного приведён к теоремам. Пошаговая и геометрическая оценки — euler_step_diff, euler_diff_bound (ProcessODEStability.v:64, :86); совпадение с однородным Гронуоллом — euler_bound_is_gronwall_iterate (ProcessGronwallInequality.v:197); тождество множителя со стадией — euler_growth_is_expt_process (ProcessODEStability.v:110), по определению; оценка в момент t числом, не зависящим от числа шагов: euler_divergence_uniform : те же посылки и forall k0 : nat, L * t < inject_Z (Z.of_nat (S k0)) -> forall (k : nat) (y0 z0 : Q), Qabs (...) <= 1 / qpow (1 - L * t / inject_Z (Z.of_nat (S k0))) (S k0) * Qabs (y0 - z0) (ProcessGronwallInequality.v:405) — правая часть от числа шагов k не зависит. При L·t < 1 — euler_divergence_expt_small (:423): не больше |y0 − z0| / (1 − L·t). Closed under the global context. ε-сходимость лестницы — expt_process_is_Cauchy (ProcessExpLadder.v:565).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 179,
+   "line": 167,
+   "theorem": null,
+   "file": "src/process/ProcessGronwallInequality.v",
+   "claim": "Завершённый $e^{Lt}$ и безусловная оценка на бесконечном интервале — роль-предел и граница: в формальном слое их нет.",
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): цена «L3» со страницы снята. Статус честный. Числа e^{Lt} как завершённого объекта, равенства потолка этому числу и оценки расхождения при неограниченном числе шагов с постоянной, не зависящей от n, в ProcessGronwallInequality.v и ProcessExpLadder.v нет (шапки файлов, раздел «NOT claimed»)."
+  },
+  {
+   "line": 181,
    "theorem": null,
    "file": "src/process/ProcessODEStability.v",
    "claim": "читая E/R/R-шапку `ProcessODEStability.v`.[^9]",
@@ -232,7 +244,7 @@
    "note": "Шапка файла (:1–31), раздел «E/R/R разбор» (:15–22)."
   },
   {
-   "line": 185,
+   "line": 187,
    "theorem": "euler_step_diff",
    "file": "src/process/ProcessODEStability.v",
    "claim": "В основании — пошаговая оценка расхождения $\\lvert\\Delta_{n+1}\\rvert \\le (1+Lh)\\lvert\\Delta_n\\rvert$ из липшицевости.",
@@ -241,52 +253,56 @@
    "note": "euler_step_diff (:64); посылки — липшицевость f по второму аргументу и 0 <= h. Closed under the global context."
   },
   {
-   "line": 187,
+   "line": 189,
    "theorem": "gronwall_beta_zero",
    "file": "src/process/ProcessGronwall.v",
    "claim": "Над ней — геометрическая оценка $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\lvert\\Delta_0\\rvert$ и её обобщение — неравенство Гронуолла ($u_n = u_0(1+\\alpha h)^n$ в однородном случае, затухание при множителе $\\le 1$).",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "Геометрическая оценка — euler_diff_bound (:86), верно. «Обобщение — неравенство Гронуолла»: названные леммы gronwall_beta_zero (:80) и gronwall_decay_factor (:112) говорят о последовательности, заданной равенством, и о числе u0 * r^n; оценка расхождения из них не получается и частным их случаем в src не является. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (формализацией; текст фразы не менялся): геометрическая оценка — euler_diff_bound (ProcessODEStability.v:86). Формула в скобках — gronwall_beta_zero (ProcessGronwall.v:80). «Её обобщение — неравенство Гронуолла» теперь теорема: gronwall_inequality (ProcessGronwallInequality.v:104), оценка расхождения получена её применением (euler_divergence_gronwall, :227). «Затухание при множителе <= 1» — gronwall_iterate_decay (:523), при u0 >= 0. Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 189,
+   "line": 191,
    "theorem": "euler_growth_is_expt_process",
    "file": "src/process/ProcessODEStability.v",
-   "claim": "Венчает — тождество множителя $(1+Lt/n)^n$ со стадией $e^{Lt}$-процесса.",
+   "claim": "Венчает — тождество множителя $(1+Lt/n)^n$ со стадией $e^{Lt}$-процесса и оценка расхождения в момент $t$ этой стадией: лестница стадий не убывает, ограничена и образует процесс Коши.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "статус: тождество есть определение expt_process, записанное леммой (доказательство — unfold; reflexivity); в пробном файле то же равенство записей доказано одной командой reflexivity (expt_stage_is_definition). Заметки, расхождение 2."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): к тождеству добавлено то, что даёт ему содержание. euler_growth_is_expt_process : qpow (1 + s / inject_Z (Z.of_nat (S k))) (S k) == expt_process s k (ProcessODEStability.v:110) — развёрнутое определение expt_process (ProcessExpProcess.v:51); доказательство — unfold expt_process; reflexivity. Closed under the global context. Оценка расхождения в момент t стадией — euler_divergence_expt (ProcessGronwallInequality.v:381); лестница не убывает (expt_monotone, ProcessExpLadder.v:396), ограничена (expt_bounded, :519), процесс Коши (expt_process_is_Cauchy, :565).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 190,
+   "line": 193,
    "theorem": null,
-   "file": "src/process/ProcessExpProcess.v",
-   "claim": "Универсальный слой включает L3 лишь там, где множитель читается как $\\varepsilon$-сходимость к $e^{Lt}$; сами рациональные оценки его не требуют.",
-   "page_price": "L3 только для ε-сходимости; рациональные оценки без L3",
-   "verdict": "mismatch-price",
-   "note": "Вторая половина верна: рациональные оценки — Closed under the global context. Первая: теоремы о ε-сходимости множителя в src нет; в пробном файле она доказана без аксиом (expt_process_is_Cauchy). Заметки, расхождение 3."
+   "file": "src/process/ProcessGronwallInequality.v",
+   "claim": "Универсальный слой L3 в доказанное не входит: ни рациональные оценки, ни $\\varepsilon$-сходимость множителя его не требуют; к L3 относится лишь актуализация $e^{Lt}$ как завершённого объекта (Глава 8.1, § «Где появляется граница»), и в формальном слое её нет.",
+   "page_price": "L3 в доказанное не входит",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (вопрос 1 шага 4, вариант 1): слово об L3 оставлено один раз и отнесено к тезису автора — Глава 8.1, § «Где появляется граница» («актуализация как готовой функции — уже не конструкция, а постулат L3»). По компилятору: рациональные оценки и свойство Коши лестницы множителей — без допущений (ProcessODEStability.v, ProcessGronwall.v, ProcessGronwallInequality.v, ProcessExpLadder.v). Числа e^{Lt} как завершённого объекта, равенства потолка этому числу и оценки расхождения при неограниченном числе шагов с постоянной, не зависящей от n, в ProcessGronwallInequality.v и ProcessExpLadder.v нет (шапки файлов, раздел «NOT claimed»).",
+   "assumptions": "все 38 объявлений ProcessGronwallInequality.v: Closed under the global context; все 44 утверждения ProcessExpLadder.v: Closed under the global context"
   },
   {
-   "line": 208,
+   "line": 212,
    "theorem": "euler_step_diff",
    "file": "src/process/ProcessODEStability.v",
    "claim": "| $\\lvert\\Delta_{n+1}\\rvert\\le(1+Lh)\\lvert\\Delta_n\\rvert$; Гронуолл $u_0(1+\\alpha h)^n$; множитель${}={}$стадия $e^{Lt}$ | КАК контролируется рост расхождения | Rules ($L5$) |",
    "page_price": "",
    "verdict": "ok",
-   "note": "Строка таблицы повторяет три формулы: euler_step_diff (:64), gronwall_beta_zero (ProcessGronwall.v:80), euler_growth_is_expt_process (:110). О словах «Гронуолл» и «множитель = стадия» — заметки, расхождения 1 и 2."
+   "note": "Строка таблицы повторяет три формулы: euler_step_diff (ProcessODEStability.v:64), gronwall_beta_zero (ProcessGronwall.v:80), euler_growth_is_expt_process (ProcessODEStability.v:110). С шага 4 Части VIII за словом «Гронуолл» стоит неравенство для произвольной последовательности (gronwall_inequality, ProcessGronwallInequality.v:104), за словами «множитель = стадия» — оценка расхождения стадией (euler_divergence_expt, :381)."
   },
   {
-   "line": 224,
-   "theorem": "gronwall_beta_zero",
-   "file": "src/process/ProcessGronwall.v",
+   "line": 228,
+   "theorem": "euler_divergence_gronwall",
+   "file": "src/process/ProcessGronwallInequality.v",
    "claim": "Единственность вписывается как предельный случай (нулевое возмущение), а Гронуолл — как общее Правило, частным случаем которого служит оценка расхождения.",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "В src оценка расхождения доказана прямой индукцией (euler_diff_bound, :86) и на леммы ProcessGronwall.v не опирается: ProcessODEStability.v этот файл не подключает. Общего утверждения, частным случаем которого она была бы, в названных файлах нет. В пробном файле: gronwall_inequality_from и вывод оценки расхождения из него (euler_divergence_gronwall). Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (формализацией; текст фразы не менялся): «Гронуолл — общее Правило, частным случаем которого служит оценка расхождения» теперь теорема: euler_divergence_gronwall : forall y0 z0 n, Qabs (euler f h y0 n - euler f h z0 n) <= gronwall_iterate L 0 h (Qabs (y0 - z0)) n (ProcessGronwallInequality.v:227); доказательство — применение gronwall_inequality_from (:90) к последовательности |Δ_n| с шагом euler_step_diff (ProcessODEStability.v:64). Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. В записи страницы — euler_divergence_gronwall_Qpow (:243). Closed under the global context. «Единственность как предельный случай (нулевое возмущение)» — picard_unique_as_zero_perturbation (:299), euler_same_start (:255).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 237,
+   "line": 241,
    "theorem": null,
    "file": "src/process/ProcessODEStability.v",
    "claim": "Опорные файлы — `ProcessODEStability.v` (непрерывная зависимость: `euler_step_diff`, `euler_diff_bound`; 0 аксиом, `Print Assumptions` «closed under the global context»)",
@@ -296,17 +312,17 @@
    "assumptions": "qmul_le_l, euler_step_diff, euler_diff_bound, euler_growth_is_expt_process, stability_mult_8: Closed under the global context"
   },
   {
-   "line": 237,
+   "line": 241,
    "theorem": null,
    "file": "src/process/ProcessGronwall.v",
-   "claim": "`ProcessGronwall.v` (`gronwall_step`, `gronwall_iterate`, `gronwall_beta_zero`: $u_0(1+\\alpha h)^n$; `gronwall_decay_factor`: затухание при множителе $\\le 1$).",
+   "claim": "`ProcessGronwall.v` (`gronwall_step`, `gronwall_iterate`, `gronwall_beta_zero`: $u_0(1+\\alpha h)^n$; `gronwall_decay_factor`: затухание при множителе $\\le 1$)",
    "page_price": "",
    "verdict": "ok",
    "note": "В файле 18 Qed; строк Axiom, Parameter, Admitted нет; Print Assumptions всех 18 утверждений — Closed under the global context. Названные имена есть: gronwall_step (:44), gronwall_iterate (:48), gronwall_beta_zero (:80), gronwall_decay_factor (:112).",
    "assumptions": "все 18 утверждений файла: Closed under the global context"
   },
   {
-   "line": 237,
+   "line": 241,
    "theorem": "picard_unique",
    "file": "src/process/ProcessPicardOperator.v",
    "claim": "Единственность — `picard_unique` (`ProcessPicardOperator.v`, Глава 8.3).",
@@ -315,16 +331,17 @@
    "note": "Theorem picard_unique (:183). Closed under the global context."
   },
   {
-   "line": 238,
+   "line": 242,
    "theorem": "picard_unique",
    "file": "src/process/ProcessPicardOperator.v",
-   "claim": "`picard_unique` в `ProcessPicardOperator.v`: если две грид-функции неподвижны под оператором Пикара, они совпадают во всех узлах. 0 аксиом (Глава 8.3).",
+   "claim": "`picard_unique` в `ProcessPicardOperator.v`: при $LT<1$, если две грид-функции неподвижны под оператором Пикара, они совпадают во всех узлах сетки; без условия на $LT$ — `picard_unique_any_rate` (`ProcessPicardGridSolution.v`).",
    "page_price": "0 аксиом",
    "verdict": "ok",
-   "note": "picard_unique (:183): forall y z, (forall k, k <= N -> picard_op y k == y k) -> (forall k, k <= N -> picard_op z k == z k) -> forall k, k <= N -> y k == z k. Посылка раздела L * Tlen < 1 (:181) в сноске не названа; в тексте, к которому сноска относится, сказано «у сжимающего оператора». Closed under the global context."
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): названо условие LT < 1. picard_unique (ProcessPicardOperator.v:183): при 0 < L, липшицевости f, 0 <= h и L * Tlen < 1 (посылка раздела Hrate, :181) две функции, неподвижные под picard_op в узлах k <= N, совпадают в этих узлах; доказательство через конечный максимум gmax (:156). Closed under the global context. Без условия — picard_unique_any_rate (ProcessPicardGridSolution.v:330).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 239,
+   "line": 243,
    "theorem": "euler_step_diff",
    "file": "src/process/ProcessODEStability.v",
    "claim": "`euler_step_diff` в `ProcessODEStability.v`: $\\lvert\\Delta_{k+1}\\rvert \\le (1+Lh)\\lvert\\Delta_k\\rvert$, через неравенство треугольника и Липшица. 0 аксиом.",
@@ -333,7 +350,7 @@
    "note": "Утверждение (:64) совпадает с формулой сноски; доказательство — Qabs_triangle и посылка Hlip. Closed under the global context."
   },
   {
-   "line": 240,
+   "line": 244,
    "theorem": "euler_diff_bound",
    "file": "src/process/ProcessODEStability.v",
    "claim": "`euler_diff_bound` в `ProcessODEStability.v`: $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\lvert\\Delta_0\\rvert$, индукцией по $n$ через `euler_step_diff`. 0 аксиом.",
@@ -342,7 +359,7 @@
    "note": "Утверждение (:86) совпадает с формулой сноски; доказательство — индукция по n с euler_step_diff. Closed under the global context."
   },
   {
-   "line": 241,
+   "line": 245,
    "theorem": "gronwall_step",
    "file": "src/process/ProcessGronwall.v",
    "claim": "`gronwall_step` и `gronwall_iterate` в `ProcessGronwall.v`; `gronwall_process` — соответствующий `RealProcess`.",
@@ -351,7 +368,7 @@
    "note": "Definition gronwall_step (:44)."
   },
   {
-   "line": 241,
+   "line": 245,
    "theorem": "gronwall_iterate",
    "file": "src/process/ProcessGronwall.v",
    "claim": "`gronwall_step` и `gronwall_iterate` в `ProcessGronwall.v`; `gronwall_process` — соответствующий `RealProcess`.",
@@ -360,7 +377,7 @@
    "note": "Fixpoint gronwall_iterate (:48): 0 ↦ u0, S m ↦ gronwall_step alpha beta h (gronwall_iterate alpha beta h u0 m)."
   },
   {
-   "line": 241,
+   "line": 245,
    "theorem": "gronwall_process",
    "file": "src/process/ProcessGronwall.v",
    "claim": "`gronwall_step` и `gronwall_iterate` в `ProcessGronwall.v`; `gronwall_process` — соответствующий `RealProcess`.",
@@ -369,7 +386,7 @@
    "note": "Definition gronwall_process (alpha beta h u0 : Q) : RealProcess := fun n => gronwall_iterate alpha beta h u0 n (:55)."
   },
   {
-   "line": 241,
+   "line": 245,
    "theorem": "RealProcess",
    "file": "src/process/ProcessCore.v",
    "claim": "`gronwall_step` и `gronwall_iterate` в `ProcessGronwall.v`; `gronwall_process` — соответствующий `RealProcess`.",
@@ -378,7 +395,7 @@
    "note": "В ProcessGronwall.v имя RealProcess разрешается в ToS.process.ProcessCore.RealProcess (Locate в окружении файла): Definition RealProcess := nat -> Q (ProcessCore.v:34). Условие Коши в тип не входит."
   },
   {
-   "line": 242,
+   "line": 246,
    "theorem": "gronwall_beta_zero",
    "file": "src/process/ProcessGronwall.v",
    "claim": "`gronwall_beta_zero` в `ProcessGronwall.v`: `gronwall_iterate alpha 0 h u0 n == u0 * Qpow (1+alpha*h) n`. 0 аксиом.",
@@ -387,40 +404,513 @@
    "note": "Запись сноски совпадает с утверждением (:80) с точностью до пробелов. Closed under the global context."
   },
   {
-   "line": 242,
+   "line": 246,
    "theorem": "euler_diff_bound",
    "file": "src/process/ProcessODEStability.v",
-   "claim": "При $\\alpha=L$ это правая часть `euler_diff_bound`.",
+   "claim": "При $\\alpha=L$ это правая часть `euler_diff_bound` (`euler_bound_is_gronwall_iterate`).",
    "page_price": "",
    "verdict": "ok",
-   "note": "Правая часть euler_diff_bound — qpow (1 + L * h) n * Qabs (y0 - z0), со степенной функцией qpow (ProcessExpProcess.v:36); в gronwall_beta_zero стоит Qpow (SeriesConvergence.v:35). Функции совпадают (пробный файл, qpow_is_Qpow), но леммы об этом в src нет. Запись к стр. 135; заметки, расхождение 1."
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): совпадение названо теоремой. Правая часть euler_diff_bound (ProcessODEStability.v:86) — qpow (1 + L * h) n * Qabs (y0 - z0). euler_bound_is_gronwall_iterate : forall L h d n, qpow (1 + L * h) n * d == gronwall_iterate L 0 h d n (ProcessGronwallInequality.v:197) — правая часть euler_diff_bound есть однородная итерация Гронуолла с alpha = L, u0 = d. Две степенные функции, qpow (ProcessExpProcess.v:36) и Qpow (SeriesConvergence.v:35), совпадают — qpow_is_Qpow (:189). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 243,
+   "line": 247,
    "theorem": "gronwall_decay_factor",
    "file": "src/process/ProcessGronwall.v",
-   "claim": "`gronwall_decay_factor` в `ProcessGronwall.v`: для $0 \\le r \\le 1$ выполнено $u_0 r^n \\le u_0$. 0 аксиом.",
-   "page_price": "0 аксиом",
-   "verdict": "mismatch-statement",
-   "note": "В утверждении (:112) три посылки: 0 <= r, r <= 1, 0 <= u0; третьей в сноске нет, а без неё неравенство неверно (u0 = −1, r = 1/2, n = 1). Цена названа верно: Closed under the global context. Заметки, расхождение 4."
-  },
-  {
-   "line": 244,
-   "theorem": "euler_growth_is_expt_process",
-   "file": "src/process/ProcessODEStability.v",
-   "claim": "`euler_growth_is_expt_process` в `ProcessODEStability.v`: множитель $(1+s/(k{+}1))^{k+1}$ *есть* стадия $\\texttt{expt\\_process} s k$ из `ProcessExpProcess.v` (батч C). 0 аксиом.",
+   "claim": "`gronwall_decay_factor` в `ProcessGronwall.v`: для $0 \\le r \\le 1$ и $u_0 \\ge 0$ выполнено $u_0 r^n \\le u_0$; без условия $u_0 \\ge 0$ это неверно (`decay_factor_needs_u0_nonneg`).",
    "page_price": "0 аксиом",
    "verdict": "ok",
-   "note": "Утверждение (:110) записано в сноске точно; expt_process — Definition в ProcessExpProcess.v:51. Доказательство — unfold expt_process; reflexivity: лемма повторяет определение. Closed under the global context. О статусе — записи к стр. 155 и 162."
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): названа третья посылка. gronwall_decay_factor : 0 <= r -> r <= 1 -> 0 <= u0 -> u0 * Qpow r n <= u0 (ProcessGronwall.v:112) — три посылки; утверждение о числе u0·r^n. Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 245,
+   "line": 248,
+   "theorem": "euler_growth_is_expt_process",
+   "file": "src/process/ProcessODEStability.v",
+   "claim": "`euler_growth_is_expt_process` в `ProcessODEStability.v`: множитель $(1+s/(k{+}1))^{k+1}$ *есть* стадия $\\texttt{expt\\_process} s k$ из `ProcessExpProcess.v` — по определению этого процесса. 0 аксиом.",
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): статус тождества назван («по определению этого процесса»); слово «батч C» снято. euler_growth_is_expt_process : qpow (1 + s / inject_Z (Z.of_nat (S k))) (S k) == expt_process s k (ProcessODEStability.v:110) — развёрнутое определение expt_process (ProcessExpProcess.v:51); доказательство — unfold expt_process; reflexivity. Closed under the global context.",
+   "assumptions": "Closed under the global context"
+  },
+  {
+   "line": 249,
    "theorem": null,
    "file": "src/process/ProcessODEStability.v",
    "claim": "Шапка размечает прямо: Rules — Липшиц $\\Rightarrow$ $\\lvert\\Delta_{n+1}\\rvert\\le(1+Lh)\\lvert\\Delta_n\\rvert$ $\\Rightarrow$ $\\lvert\\Delta_n\\rvert\\le(1+Lh)^n\\lvert\\Delta_0\\rvert$; Roles — $\\lvert\\Delta_n\\rvert$ роль-расхождение, $(1+Lh)^n$ роль-роста, $e^{Lt}$ роль-предел; Elements — рациональные $\\lvert\\Delta_n\\rvert$, $(1+Lh)^n$, конечный $n$.",
    "page_price": "",
    "verdict": "ok",
    "note": "Совпадает с шапкой (:16–20): Rules — Липшиц ⟹ пошаговая ⟹ геометрическая оценка; Roles — «роль-расхождение», «роль-множитель роста», «роль-предел»; Elements — рациональные |Δ_n|, (1+Lh)^n, конечные n."
+  },
+  {
+   "line": 9,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«На сетке решение существует при любой длине отрезка»: picard_fixed_exists : forall N, exists y : nat -> Q, forall k, (k <= N)%nat -> picard_op f h y0 y k == y k (ProcessPicardGridSolution.v:243); условия на L·T нет. Closed under the global context.",
+   "theorem": "picard_fixed_exists",
+   "file": "src/process/ProcessPicardGridSolution.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Глава 8.3 дала гарантию: при липшицевости правой части на достаточно коротком отрезке ($LT<1$) оператор Пикара сжимает, и его итерации сближаются геометрически; а на сетке решение существует и единственно при любой длине отрезка."
+  },
+  {
+   "line": 9,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«И единственно при любой длине отрезка»: picard_unique_any_rate : forall (f : Q -> Q -> Q) (L : Q), (forall t y1 y2, Qabs (f t y1 - f t y2) <= L * Qabs (y1 - y2)) -> forall (h y0 : Q) (N : nat) (y z : nat -> Q), (forall k, (k <= N)%nat -> picard_op f h y0 y k == y k) -> (forall k, (k <= N)%nat -> picard_op f h y0 z k == z k) -> forall k, (k <= N)%nat -> y k == z k (ProcessPicardGridSolution.v:330); посылки L * Tlen < 1 нет. Closed under the global context.",
+   "theorem": "picard_unique_any_rate",
+   "file": "src/process/ProcessPicardGridSolution.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Глава 8.3 дала гарантию: при липшицевости правой части на достаточно коротком отрезке ($LT<1$) оператор Пикара сжимает, и его итерации сближаются геометрически; а на сетке решение существует и единственно при любой длине отрезка."
+  },
+  {
+   "line": 77,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "Связь двух предметов — неподвижных точек сеточного оператора Пикара (о них picard_unique) и ломаных Эйлера (о них оценка расхождения): picard_fixed_stability : forall y0 z0 N (y z : nat -> Q), (forall k, (k <= N)%nat -> picard_op f h y0 y k == y k) -> (forall k, (k <= N)%nat -> picard_op f h z0 z k == z k) -> forall k, (k <= N)%nat -> Qabs (y k - z k) <= qpow (1 + L * h) k * Qabs (y0 - z0) (ProcessGronwallInequality.v:284). Опора — picard_fixed_eq_euler (ProcessPicardGridSolution.v:366): неподвижная точка сеточного оператора Пикара есть ломаная Эйлера; ломаная неподвижна — euler_is_picard_fixed (:274). Условия L·T < 1 нет. Closed under the global context.",
+   "theorem": "picard_fixed_stability",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "*единственность есть устойчивость при нулевом возмущении*. Если начальные условия совпадают, $\\Delta_0 = 0$, то оценка расхождения $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\cdot 0 = 0$ заставляет траектории совпадать на каждом шаге."
+  },
+  {
+   "line": 107,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«На конечном интервале множитель конечен» — в момент t множитель ограничен числом, не зависящим от сетки: euler_continuous_dependence_uniform : forall f L, 0 <= L -> (липшицевость f по y) -> forall t, 0 <= t -> forall eps, 0 < eps -> exists delta, 0 < delta /\\ forall (k : nat) (y0 z0 : Q), Qabs (y0 - z0) < delta -> Qabs (euler f (t / inject_Z (Z.of_nat (S k))) y0 (S k) - euler f (t / inject_Z (Z.of_nat (S k))) z0 (S k)) < eps (ProcessGronwallInequality.v:467) — delta выбирается до числа шагов k: одно для всех сеток, приводящих в момент t. Closed under the global context. Опора — euler_divergence_uniform : те же посылки и forall k0 : nat, L * t < inject_Z (Z.of_nat (S k0)) -> forall (k : nat) (y0 z0 : Q), Qabs (...) <= 1 / qpow (1 - L * t / inject_Z (Z.of_nat (S k0))) (S k0) * Qabs (y0 - z0) (ProcessGronwallInequality.v:405) — правая часть от числа шагов k не зависит. При L·t < 1 — euler_divergence_expt_small (:423): не больше |y0 − z0| / (1 − L·t). Closed under the global context.",
+   "theorem": "euler_continuous_dependence_uniform",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На *конечном* интервале множитель конечен, и потому малое возмущение даёт малое расхождение — это и есть содержательная устойчивость над ℚ — дискретная процессная форма непрерывной зависимости"
+  },
+  {
+   "line": 137,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«При $\\alpha = L$, $u_0 = \\lvert\\Delta_0\\rvert$ она совпадает с оценкой расхождения»: euler_bound_is_gronwall_iterate : forall L h d n, qpow (1 + L * h) n * d == gronwall_iterate L 0 h d n (ProcessGronwallInequality.v:197) — правая часть euler_diff_bound есть однородная итерация Гронуолла с alpha = L, u0 = d. Две степенные функции, qpow (ProcessExpProcess.v:36) и Qpow (SeriesConvergence.v:35), совпадают — qpow_is_Qpow (:189). Closed under the global context.",
+   "theorem": "euler_bound_is_gronwall_iterate",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Это и есть процессная форма Гронуолла, и при $\\alpha = L$, $u_0 = \\lvert\\Delta_0\\rvert$ она совпадает с оценкой расхождения предыдущего раздела — устойчивость есть Гронуолл для расхождения.[^6]"
+  },
+  {
+   "line": 137,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Устойчивость есть Гронуолл для расхождения»: euler_divergence_gronwall : forall y0 z0 n, Qabs (euler f h y0 n - euler f h z0 n) <= gronwall_iterate L 0 h (Qabs (y0 - z0)) n (ProcessGronwallInequality.v:227); доказательство — применение gronwall_inequality_from (:90) к последовательности |Δ_n| с шагом euler_step_diff (ProcessODEStability.v:64). Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. В записи страницы — euler_divergence_gronwall_Qpow (:243). Closed under the global context.",
+   "theorem": "euler_divergence_gronwall",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Это и есть процессная форма Гронуолла, и при $\\alpha = L$, $u_0 = \\lvert\\Delta_0\\rvert$ она совпадает с оценкой расхождения предыдущего раздела — устойчивость есть Гронуолл для расхождения.[^6]"
+  },
+  {
+   "line": 139,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«$u_n \\le u_0$» для самой итерации: gronwall_iterate_decay : forall alpha h u0 n, 0 <= 1 + alpha * h -> 1 + alpha * h <= 1 -> 0 <= u0 -> gronwall_iterate alpha 0 h u0 n <= u0 (ProcessGronwallInequality.v:523) — о самой итерации. Closed under the global context.",
+   "theorem": "gronwall_iterate_decay",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "А если множитель не превосходит единицы ($r = 1+\\alpha h$ в диапазоне $0 \\le r \\le 1$ — затухающий режим), итерация с неотрицательным началом $u_0 \\ge 0$ не растёт, а *убывает*: $u_{n+1} \\le u_n \\le u_0$.[^7]"
+  },
+  {
+   "line": 145,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора) (вопрос 2 шага 4, вариант 1): курсив уточнён условием. При alpha < 0, h >= 0 и |alpha|·h <= 1 множитель 1 + alpha·h лежит в [0, 1] — посылки затухания: gronwall_iterate_decay : forall alpha h u0 n, 0 <= 1 + alpha * h -> 1 + alpha * h <= 1 -> 0 <= u0 -> gronwall_iterate alpha 0 h u0 n <= u0 (ProcessGronwallInequality.v:523) — о самой итерации. Closed under the global context. По модулю затухание держится до |1 + alpha·h| <= 1 (gronwall_iterate_abs_decay, :570); при |1 + alpha·h| > 1 модуль растёт: gronwall_iterate_abs : forall alpha h u0 n, Qabs (gronwall_iterate alpha 0 h u0 n) == Qabs u0 * Qpow (Qabs (1 + alpha * h)) n (ProcessGronwallInequality.v:558). Closed under the global context.",
+   "theorem": "gronwall_iterate_decay",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "устойчивость и затухание — два его режима ($\\alpha$ положительно — или отрицательно при $\\lvert\\alpha\\rvert h \\le 1$.)"
+  },
+  {
+   "line": 157,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Множитель станет (1 + Lt/n)^n» — подстановка шага теоремой: euler_divergence_expt : forall f L, 0 <= L -> (липшицевость f по y) -> forall t, 0 <= t -> forall (k : nat) (y0 z0 : Q), Qabs (euler f (t / inject_Z (Z.of_nat (S k))) y0 (S k) - euler f (t / inject_Z (Z.of_nat (S k))) z0 (S k)) <= expt_process (L * t) k * Qabs (y0 - z0) (ProcessGronwallInequality.v:381) — подстановка шага h = t/(k+1) в оценку расхождения: за k+1 шагов, то есть в момент t. Closed under the global context.",
+   "theorem": "euler_divergence_expt",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Если взять шаг $h = t/n$ (то есть достичь момента $t$ за $n$ шагов), множитель станет $(1 + L t/n)^n$ — а это в точности стадия процесса для $e^{Lt}$, того самого $e$-процесса, что разбирался в Главе 8.2 и разбирается в Главе 8.5.[^8]"
+  },
+  {
+   "line": 157,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Того самого e-процесса»: expt_at_one : forall k, expt_process 1 k = exp1_process k (ProcessExpLadder.v:347); exp1_process (ProcessExpProcess.v:47) — процесс (1 + 1/n)^n Глав 8.2 и 8.5. Closed under the global context.",
+   "theorem": "expt_at_one",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Если взять шаг $h = t/n$ (то есть достичь момента $t$ за $n$ шагов), множитель станет $(1 + L t/n)^n$ — а это в точности стадия процесса для $e^{Lt}$, того самого $e$-процесса, что разбирался в Главе 8.2 и разбирается в Главе 8.5.[^8]"
+  },
+  {
+   "line": 164,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Их совпадение с однородным Гронуоллом»: euler_bound_is_gronwall_iterate : forall L h d n, qpow (1 + L * h) n * d == gronwall_iterate L 0 h d n (ProcessGronwallInequality.v:197) — правая часть euler_diff_bound есть однородная итерация Гронуолла с alpha = L, u0 = d. Две степенные функции, qpow (ProcessExpProcess.v:36) и Qpow (SeriesConvergence.v:35), совпадают — qpow_is_Qpow (:189). Closed under the global context.",
+   "theorem": "euler_bound_is_gronwall_iterate",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Доказано конкретное и процессное: пошаговая и геометрическая оценки расхождения, их совпадение с однородным Гронуоллом, тождество множителя со стадией $e^{Lt}$-процесса, оценка расхождения в момент $t$ числом, не зависящим от числа шагов, и $\\varepsilon$-сходимость самой лестницы множителей."
+  },
+  {
+   "line": 164,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«$\\varepsilon$-сходимость самой лестницы множителей»: expt_process_is_Cauchy : forall s, 0 <= s -> is_Cauchy (expt_process s) (ProcessExpLadder.v:565); is_Cauchy (ProcessCore.v:68): для всякого eps > 0 найдётся N, за которым стадии отличаются меньше чем на eps. При s = L·t — growth_factor_is_Cauchy (ProcessGronwallInequality.v:502). Closed under the global context.",
+   "theorem": "expt_process_is_Cauchy",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Доказано конкретное и процессное: пошаговая и геометрическая оценки расхождения, их совпадение с однородным Гронуоллом, тождество множителя со стадией $e^{Lt}$-процесса, оценка расхождения в момент $t$ числом, не зависящим от числа шагов, и $\\varepsilon$-сходимость самой лестницы множителей."
+  },
+  {
+   "line": 189,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«И её обобщение — неравенство Гронуолла»: gronwall_inequality : forall alpha beta h (u : nat -> Q), 0 <= 1 + alpha * h -> (forall n, u (S n) <= (1 + alpha * h) * u n + beta * h) -> forall n, u n <= gronwall_iterate alpha beta h (u 0) n (ProcessGronwallInequality.v:104); с отдельным началом u 0 <= u0 — gronwall_inequality_from (:90). Последовательность u произвольна; условие на множитель существенно — gronwall_inequality_needs_nonneg_factor (:174). Closed under the global context.",
+   "theorem": "gronwall_inequality",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Над ней — геометрическая оценка $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\lvert\\Delta_0\\rvert$ и её обобщение — неравенство Гронуолла ($u_n = u_0(1+\\alpha h)^n$ в однородном случае, затухание при множителе $\\le 1$)."
+  },
+  {
+   "line": 189,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Затухание при множителе $\\le 1$»: gronwall_iterate_decay : forall alpha h u0 n, 0 <= 1 + alpha * h -> 1 + alpha * h <= 1 -> 0 <= u0 -> gronwall_iterate alpha 0 h u0 n <= u0 (ProcessGronwallInequality.v:523) — о самой итерации. Closed under the global context.",
+   "theorem": "gronwall_iterate_decay",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Над ней — геометрическая оценка $\\lvert\\Delta_n\\rvert \\le (1+Lh)^n\\lvert\\Delta_0\\rvert$ и её обобщение — неравенство Гронуолла ($u_n = u_0(1+\\alpha h)^n$ в однородном случае, затухание при множителе $\\le 1$)."
+  },
+  {
+   "line": 191,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Оценка расхождения в момент t этой стадией»: euler_divergence_expt : forall f L, 0 <= L -> (липшицевость f по y) -> forall t, 0 <= t -> forall (k : nat) (y0 z0 : Q), Qabs (euler f (t / inject_Z (Z.of_nat (S k))) y0 (S k) - euler f (t / inject_Z (Z.of_nat (S k))) z0 (S k)) <= expt_process (L * t) k * Qabs (y0 - z0) (ProcessGronwallInequality.v:381) — подстановка шага h = t/(k+1) в оценку расхождения: за k+1 шагов, то есть в момент t. Closed under the global context.",
+   "theorem": "euler_divergence_expt",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Венчает — тождество множителя $(1+Lt/n)^n$ со стадией $e^{Lt}$-процесса и оценка расхождения в момент $t$ этой стадией: лестница стадий не убывает, ограничена и образует процесс Коши."
+  },
+  {
+   "line": 191,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Лестница стадий не убывает»: expt_monotone : forall s k, 0 <= s -> expt_process s k <= expt_process s (S k) (ProcessExpLadder.v:396). Closed under the global context.",
+   "theorem": "expt_monotone",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Венчает — тождество множителя $(1+Lt/n)^n$ со стадией $e^{Lt}$-процесса и оценка расхождения в момент $t$ этой стадией: лестница стадий не убывает, ограничена и образует процесс Коши."
+  },
+  {
+   "line": 191,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Ограничена»: expt_bounded : forall s m k0, 0 <= s -> s < inject_Z (Z.of_nat (S k0)) -> expt_process s m <= 1 / qpow (1 - s / inject_Z (Z.of_nat (S k0))) (S k0) (ProcessExpLadder.v:519) — потолок рационален и от номера стадии m не зависит. Closed under the global context.",
+   "theorem": "expt_bounded",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Венчает — тождество множителя $(1+Lt/n)^n$ со стадией $e^{Lt}$-процесса и оценка расхождения в момент $t$ этой стадией: лестница стадий не убывает, ограничена и образует процесс Коши."
+  },
+  {
+   "line": 191,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«И образует процесс Коши»: expt_process_is_Cauchy : forall s, 0 <= s -> is_Cauchy (expt_process s) (ProcessExpLadder.v:565); is_Cauchy (ProcessCore.v:68): для всякого eps > 0 найдётся N, за которым стадии отличаются меньше чем на eps. При s = L·t — growth_factor_is_Cauchy (ProcessGronwallInequality.v:502). Closed under the global context.",
+   "theorem": "expt_process_is_Cauchy",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Венчает — тождество множителя $(1+Lt/n)^n$ со стадией $e^{Lt}$-процесса и оценка расхождения в момент $t$ этой стадией: лестница стадий не убывает, ограничена и образует процесс Коши."
+  },
+  {
+   "line": 228,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Единственность вписывается как предельный случай (нулевое возмущение)»: picard_unique_as_zero_perturbation : forall y0 z0 N (y z : nat -> Q), y0 == z0 -> (forall k, (k <= N)%nat -> picard_op f h y0 y k == y k) -> (forall k, (k <= N)%nat -> picard_op f h z0 z k == z k) -> forall k, (k <= N)%nat -> y k == z k (ProcessGronwallInequality.v:299) — единственность получена из picard_fixed_stability (:284) при нулевом возмущении. Closed under the global context.",
+   "theorem": "picard_unique_as_zero_perturbation",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Единственность вписывается как предельный случай (нулевое возмущение), а Гронуолл — как общее Правило, частным случаем которого служит оценка расхождения."
+  },
+  {
+   "line": 228,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«Гронуолл — общее Правило»: gronwall_inequality : forall alpha beta h (u : nat -> Q), 0 <= 1 + alpha * h -> (forall n, u (S n) <= (1 + alpha * h) * u n + beta * h) -> forall n, u n <= gronwall_iterate alpha beta h (u 0) n (ProcessGronwallInequality.v:104); с отдельным началом u 0 <= u0 — gronwall_inequality_from (:90). Последовательность u произвольна; условие на множитель существенно — gronwall_inequality_needs_nonneg_factor (:174). Closed under the global context.",
+   "theorem": "gronwall_inequality",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Единственность вписывается как предельный случай (нулевое возмущение), а Гронуолл — как общее Правило, частным случаем которого служит оценка расхождения."
+  },
+  {
+   "line": 241,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новый опорный файл в сноске. ProcessGronwallInequality.v: 37 Qed и одно определение (gronwall_cex); строк Axiom, Parameter, Admitted нет. Неравенство для произвольной последовательности — gronwall_inequality (:104); оценка расхождения как его случай — euler_divergence_gronwall (:227); оценки в момент t — euler_divergence_expt (:381), euler_divergence_uniform (:405); затухание — gronwall_iterate_decay (:523), gronwall_iterate_vanishes (:596).",
+   "theorem": null,
+   "file": "src/process/ProcessGronwallInequality.v",
+   "claim": "а также `ProcessGronwallInequality.v` (неравенство Гронуолла для произвольной последовательности, оценка расхождения как его случай, оценки в момент $t$, затухание; 0 аксиом)",
+   "assumptions": "все 38 объявлений ProcessGronwallInequality.v: Closed under the global context"
+  },
+  {
+   "line": 241,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новый опорный файл в сноске (шаг 1 Части VIII). ProcessExpLadder.v: 44 Qed; строк Axiom, Parameter, Admitted нет. Рост — expt_monotone (:396); ограниченность — expt_bounded (:519); свойство Коши — expt_process_is_Cauchy (:565).",
+   "theorem": null,
+   "file": "src/process/ProcessExpLadder.v",
+   "claim": "`ProcessExpLadder.v` (лестница $(1+s/n)^n$: рост, ограниченность, свойство Коши; 0 аксиом)",
+   "assumptions": "все 44 утверждения ProcessExpLadder.v: Closed under the global context"
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новое имя в сноске. picard_unique_any_rate : forall (f : Q -> Q -> Q) (L : Q), (forall t y1 y2, Qabs (f t y1 - f t y2) <= L * Qabs (y1 - y2)) -> forall (h y0 : Q) (N : nat) (y z : nat -> Q), (forall k, (k <= N)%nat -> picard_op f h y0 y k == y k) -> (forall k, (k <= N)%nat -> picard_op f h y0 z k == z k) -> forall k, (k <= N)%nat -> y k == z k (ProcessPicardGridSolution.v:330); посылки L * Tlen < 1 нет. Closed under the global context.",
+   "theorem": "picard_unique_any_rate",
+   "file": "src/process/ProcessPicardGridSolution.v",
+   "assumptions": "Closed under the global context",
+   "claim": "`picard_unique` в `ProcessPicardOperator.v`: при $LT<1$, если две грид-функции неподвижны под оператором Пикара, они совпадают во всех узлах сетки; без условия на $LT$ — `picard_unique_any_rate` (`ProcessPicardGridSolution.v`)."
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. picard_fixed_stability : forall y0 z0 N (y z : nat -> Q), (forall k, (k <= N)%nat -> picard_op f h y0 y k == y k) -> (forall k, (k <= N)%nat -> picard_op f h z0 z k == z k) -> forall k, (k <= N)%nat -> Qabs (y k - z k) <= qpow (1 + L * h) k * Qabs (y0 - z0) (ProcessGronwallInequality.v:284). Опора — picard_fixed_eq_euler (ProcessPicardGridSolution.v:366): неподвижная точка сеточного оператора Пикара есть ломаная Эйлера; ломаная неподвижна — euler_is_picard_fixed (:274). Условия L·T < 1 нет. Closed under the global context.",
+   "theorem": "picard_fixed_stability",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Прочтение «единственность есть устойчивость при нулевом возмущении» записано теоремами в `ProcessGronwallInequality.v`: две неподвижные точки с началами $y_0$ и $\\tilde y_0$ расходятся в узле $k$ не более чем в $(1+Lh)^k$ раз от $\\lvert y_0 - \\tilde y_0\\rvert$ (`picard_fixed_stability`), при равных началах они совпадают (`picard_unique_as_zero_perturbation`); для самих ломаных Эйлера — `euler_same_start`. 0 аксиом (Глава 8.3)."
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "picard_unique_as_zero_perturbation : forall y0 z0 N (y z : nat -> Q), y0 == z0 -> (forall k, (k <= N)%nat -> picard_op f h y0 y k == y k) -> (forall k, (k <= N)%nat -> picard_op f h z0 z k == z k) -> forall k, (k <= N)%nat -> y k == z k (ProcessGronwallInequality.v:299) — единственность получена из picard_fixed_stability (:284) при нулевом возмущении. Closed under the global context.",
+   "theorem": "picard_unique_as_zero_perturbation",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Прочтение «единственность есть устойчивость при нулевом возмущении» записано теоремами в `ProcessGronwallInequality.v`: две неподвижные точки с началами $y_0$ и $\\tilde y_0$ расходятся в узле $k$ не более чем в $(1+Lh)^k$ раз от $\\lvert y_0 - \\tilde y_0\\rvert$ (`picard_fixed_stability`), при равных началах они совпадают (`picard_unique_as_zero_perturbation`); для самих ломаных Эйлера — `euler_same_start`. 0 аксиом (Глава 8.3)."
+  },
+  {
+   "line": 242,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "euler_same_start : forall y0 z0 n, y0 == z0 -> euler f h y0 n == euler f h z0 n (ProcessGronwallInequality.v:255) — следствие оценки расхождения при нулевом возмущении. Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. Closed under the global context.",
+   "theorem": "euler_same_start",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Прочтение «единственность есть устойчивость при нулевом возмущении» записано теоремами в `ProcessGronwallInequality.v`: две неподвижные точки с началами $y_0$ и $\\tilde y_0$ расходятся в узле $k$ не более чем в $(1+Lh)^k$ раз от $\\lvert y_0 - \\tilde y_0\\rvert$ (`picard_fixed_stability`), при равных началах они совпадают (`picard_unique_as_zero_perturbation`); для самих ломаных Эйлера — `euler_same_start`. 0 аксиом (Глава 8.3)."
+  },
+  {
+   "line": 244,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. euler_diff_bound_sharp : forall L h y0 z0 n, 0 <= L -> 0 <= h -> Qabs (euler (fun _ y => L * y) h y0 n - euler (fun _ y => L * y) h z0 n) == qpow (1 + L * h) n * Qabs (y0 - z0) (ProcessGronwallInequality.v:360) — для правой части L·y в оценке стоит равенство; липшицевость этой правой части — linear_is_lipschitz (:351). Closed under the global context.",
+   "theorem": "euler_diff_bound_sharp",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Оценка точна: для $f(t,y) = Ly$ в ней стоит равенство (`euler_diff_bound_sharp`)."
+  },
+  {
+   "line": 244,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. euler_continuous_dependence : forall n eps, 0 < eps -> exists delta, 0 < delta /\\ forall y0 z0, Qabs (y0 - z0) < delta -> Qabs (euler f h y0 n - euler f h z0 n) < eps (ProcessGronwallInequality.v:319) — при данном шаге h и данном числе шагов n. Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. Closed under the global context.",
+   "theorem": "euler_continuous_dependence",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "«Малое возмущение даёт малое расхождение» в форме «для всякого $\\varepsilon$ найдётся $\\delta$» — `euler_continuous_dependence` (на данном шаге) и `euler_continuous_dependence_uniform` (в момент $t$: одно $\\delta$ для всякого числа шагов) в `ProcessGronwallInequality.v`. 0 аксиом."
+  },
+  {
+   "line": 244,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "euler_continuous_dependence_uniform : forall f L, 0 <= L -> (липшицевость f по y) -> forall t, 0 <= t -> forall eps, 0 < eps -> exists delta, 0 < delta /\\ forall (k : nat) (y0 z0 : Q), Qabs (y0 - z0) < delta -> Qabs (euler f (t / inject_Z (Z.of_nat (S k))) y0 (S k) - euler f (t / inject_Z (Z.of_nat (S k))) z0 (S k)) < eps (ProcessGronwallInequality.v:467) — delta выбирается до числа шагов k: одно для всех сеток, приводящих в момент t. Closed under the global context.",
+   "theorem": "euler_continuous_dependence_uniform",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "«Малое возмущение даёт малое расхождение» в форме «для всякого $\\varepsilon$ найдётся $\\delta$» — `euler_continuous_dependence` (на данном шаге) и `euler_continuous_dependence_uniform` (в момент $t$: одно $\\delta$ для всякого числа шагов) в `ProcessGronwallInequality.v`. 0 аксиом."
+  },
+  {
+   "line": 246,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новое имя в сноске. euler_bound_is_gronwall_iterate : forall L h d n, qpow (1 + L * h) n * d == gronwall_iterate L 0 h d n (ProcessGronwallInequality.v:197) — правая часть euler_diff_bound есть однородная итерация Гронуолла с alpha = L, u0 = d. Две степенные функции, qpow (ProcessExpProcess.v:36) и Qpow (SeriesConvergence.v:35), совпадают — qpow_is_Qpow (:189). Closed under the global context.",
+   "theorem": "euler_bound_is_gronwall_iterate",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При $\\alpha=L$ это правая часть `euler_diff_bound` (`euler_bound_is_gronwall_iterate`)."
+  },
+  {
+   "line": 246,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. gronwall_inequality : forall alpha beta h (u : nat -> Q), 0 <= 1 + alpha * h -> (forall n, u (S n) <= (1 + alpha * h) * u n + beta * h) -> forall n, u n <= gronwall_iterate alpha beta h (u 0) n (ProcessGronwallInequality.v:104); с отдельным началом u 0 <= u0 — gronwall_inequality_from (:90). Последовательность u произвольна; условие на множитель существенно — gronwall_inequality_needs_nonneg_factor (:174). Closed under the global context.",
+   "theorem": "gronwall_inequality",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Само неравенство — для всякой последовательности, растущей не быстрее шага, при неотрицательном множителе $1+\\alpha h$ — `gronwall_inequality` (однородный случай — `gronwall_inequality_hom`, с притоком в явном виде — `gronwall_inequality_forced`); оценка расхождения как его случай — `euler_divergence_gronwall`. Все — в `ProcessGronwallInequality.v`, 0 аксиом."
+  },
+  {
+   "line": 246,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "gronwall_inequality_hom : forall alpha h (u : nat -> Q), 0 <= 1 + alpha * h -> (forall n, u (S n) <= (1 + alpha * h) * u n) -> forall n, u n <= u 0 * Qpow (1 + alpha * h) n (ProcessGronwallInequality.v:115) — от рекуррентной оценки произвольной последовательности к геометрической оценке. Closed under the global context.",
+   "theorem": "gronwall_inequality_hom",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Само неравенство — для всякой последовательности, растущей не быстрее шага, при неотрицательном множителе $1+\\alpha h$ — `gronwall_inequality` (однородный случай — `gronwall_inequality_hom`, с притоком в явном виде — `gronwall_inequality_forced`); оценка расхождения как его случай — `euler_divergence_gronwall`. Все — в `ProcessGronwallInequality.v`, 0 аксиом."
+  },
+  {
+   "line": 246,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "gronwall_inequality_forced : forall alpha beta h (u : nat -> Q), 0 < alpha -> 0 <= h -> (forall n, u (S n) <= (1 + alpha * h) * u n + beta * h) -> forall n, u n <= (u 0 + beta / alpha) * Qpow (1 + alpha * h) n - beta / alpha (ProcessGronwallInequality.v:150); посылки здесь сильнее: 0 < alpha и 0 <= h. Явный вид итерации — gronwall_iterate_closed (:131); при alpha = 0 приток накапливается линейно — gronwall_iterate_alpha_zero (:141). Closed under the global context.",
+   "theorem": "gronwall_inequality_forced",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Само неравенство — для всякой последовательности, растущей не быстрее шага, при неотрицательном множителе $1+\\alpha h$ — `gronwall_inequality` (однородный случай — `gronwall_inequality_hom`, с притоком в явном виде — `gronwall_inequality_forced`); оценка расхождения как его случай — `euler_divergence_gronwall`. Все — в `ProcessGronwallInequality.v`, 0 аксиом."
+  },
+  {
+   "line": 246,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "euler_divergence_gronwall : forall y0 z0 n, Qabs (euler f h y0 n - euler f h z0 n) <= gronwall_iterate L 0 h (Qabs (y0 - z0)) n (ProcessGronwallInequality.v:227); доказательство — применение gronwall_inequality_from (:90) к последовательности |Δ_n| с шагом euler_step_diff (ProcessODEStability.v:64). Посылки раздела StabilityIsGronwall: 0 <= L, липшицевость f по второму аргументу с константой L, 0 <= h. В записи страницы — euler_divergence_gronwall_Qpow (:243). Closed under the global context.",
+   "theorem": "euler_divergence_gronwall",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Само неравенство — для всякой последовательности, растущей не быстрее шага, при неотрицательном множителе $1+\\alpha h$ — `gronwall_inequality` (однородный случай — `gronwall_inequality_hom`, с притоком в явном виде — `gronwall_inequality_forced`); оценка расхождения как его случай — `euler_divergence_gronwall`. Все — в `ProcessGronwallInequality.v`, 0 аксиом."
+  },
+  {
+   "line": 247,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новое имя в сноске. decay_factor_needs_u0_nonneg : ~ (forall r u0 n, 0 <= r -> r <= 1 -> u0 * Qpow r n <= u0) (ProcessGronwallInequality.v:513) — свидетель: u0 = −1, r = 1/2, n = 1. Closed under the global context.",
+   "theorem": "decay_factor_needs_u0_nonneg",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "`gronwall_decay_factor` в `ProcessGronwall.v`: для $0 \\le r \\le 1$ и $u_0 \\ge 0$ выполнено $u_0 r^n \\le u_0$; без условия $u_0 \\ge 0$ это неверно (`decay_factor_needs_u0_nonneg`)."
+  },
+  {
+   "line": 247,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. gronwall_iterate_decay : forall alpha h u0 n, 0 <= 1 + alpha * h -> 1 + alpha * h <= 1 -> 0 <= u0 -> gronwall_iterate alpha 0 h u0 n <= u0 (ProcessGronwallInequality.v:523) — о самой итерации. Closed under the global context.",
+   "theorem": "gronwall_iterate_decay",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для самой итерации — `gronwall_iterate_decay` ($u_n \\le u_0$) и `gronwall_iterate_decay_monotone` ($u_{n+1} \\le u_n$) в `ProcessGronwallInequality.v`."
+  },
+  {
+   "line": 247,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "gronwall_iterate_decay_monotone : forall alpha h u0 n, 0 <= 1 + alpha * h -> 1 + alpha * h <= 1 -> 0 <= u0 -> gronwall_iterate alpha 0 h u0 (S n) <= gronwall_iterate alpha 0 h u0 n (ProcessGronwallInequality.v:544); неотрицательность итерации — gronwall_iterate_hom_nonneg (:531). Closed under the global context.",
+   "theorem": "gronwall_iterate_decay_monotone",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Для самой итерации — `gronwall_iterate_decay` ($u_n \\le u_0$) и `gronwall_iterate_decay_monotone` ($u_{n+1} \\le u_n$) в `ProcessGronwallInequality.v`."
+  },
+  {
+   "line": 247,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза; r на странице — множитель 1 + alpha·h. gronwall_iterate_abs_monotone : forall alpha h u0 n, Qabs (1 + alpha * h) <= 1 -> Qabs (gronwall_iterate alpha 0 h u0 (S n)) <= Qabs (gronwall_iterate alpha 0 h u0 n) (ProcessGronwallInequality.v:578). Closed under the global context.",
+   "theorem": "gronwall_iterate_abs_monotone",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При начале любого знака убывает модуль: если $\\lvert r\\rvert \\le 1$, то $\\lvert u_{n+1}\\rvert \\le \\lvert u_n\\rvert \\le \\lvert u_0\\rvert$ (`gronwall_iterate_abs_monotone`, `gronwall_iterate_abs_decay`), а при $\\lvert r\\rvert < 1$ итерация стремится к нулю (`gronwall_iterate_vanishes`). 0 аксиом."
+  },
+  {
+   "line": 247,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "gronwall_iterate_abs_decay : forall alpha h u0 n, Qabs (1 + alpha * h) <= 1 -> Qabs (gronwall_iterate alpha 0 h u0 n) <= Qabs u0 (ProcessGronwallInequality.v:570) — начало любого знака. Closed under the global context. Равенство для модуля: gronwall_iterate_abs : forall alpha h u0 n, Qabs (gronwall_iterate alpha 0 h u0 n) == Qabs u0 * Qpow (Qabs (1 + alpha * h)) n (ProcessGronwallInequality.v:558). Closed under the global context.",
+   "theorem": "gronwall_iterate_abs_decay",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При начале любого знака убывает модуль: если $\\lvert r\\rvert \\le 1$, то $\\lvert u_{n+1}\\rvert \\le \\lvert u_n\\rvert \\le \\lvert u_0\\rvert$ (`gronwall_iterate_abs_monotone`, `gronwall_iterate_abs_decay`), а при $\\lvert r\\rvert < 1$ итерация стремится к нулю (`gronwall_iterate_vanishes`). 0 аксиом."
+  },
+  {
+   "line": 247,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "gronwall_iterate_vanishes : forall alpha h u0, Qabs (1 + alpha * h) < 1 -> forall eps, 0 < eps -> exists N : nat, forall n, (N <= n)%nat -> Qabs (gronwall_iterate alpha 0 h u0 n) < eps (ProcessGronwallInequality.v:596); опора — Qpow_vanish (SeriesConvergence.v:164). Closed under the global context.",
+   "theorem": "gronwall_iterate_vanishes",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При начале любого знака убывает модуль: если $\\lvert r\\rvert \\le 1$, то $\\lvert u_{n+1}\\rvert \\le \\lvert u_n\\rvert \\le \\lvert u_0\\rvert$ (`gronwall_iterate_abs_monotone`, `gronwall_iterate_abs_decay`), а при $\\lvert r\\rvert < 1$ итерация стремится к нулю (`gronwall_iterate_vanishes`). 0 аксиом."
+  },
+  {
+   "line": 248,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. n на странице — число шагов k + 1. euler_divergence_expt : forall f L, 0 <= L -> (липшицевость f по y) -> forall t, 0 <= t -> forall (k : nat) (y0 z0 : Q), Qabs (euler f (t / inject_Z (Z.of_nat (S k))) y0 (S k) - euler f (t / inject_Z (Z.of_nat (S k))) z0 (S k)) <= expt_process (L * t) k * Qabs (y0 - z0) (ProcessGronwallInequality.v:381) — подстановка шага h = t/(k+1) в оценку расхождения: за k+1 шагов, то есть в момент t. Closed under the global context.",
+   "theorem": "euler_divergence_expt",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Содержание тождеству дают теоремы: подстановка шага $h = t/n$ в оценку расхождения — `euler_divergence_expt` (`ProcessGronwallInequality.v`): расхождение в момент $t$ не больше стадии лестницы, умноженной на $\\lvert\\Delta_0\\rvert$;"
+  },
+  {
+   "line": 248,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. expt_monotone : forall s k, 0 <= s -> expt_process s k <= expt_process s (S k) (ProcessExpLadder.v:396). Closed under the global context.",
+   "theorem": "expt_monotone",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "стадии не убывают (`expt_monotone`) и ограничены числом, одним для всех (`expt_bounded`; оба — `ProcessExpLadder.v`), так что расхождение в момент $t$ оценено независимо от числа шагов (`euler_divergence_uniform`);"
+  },
+  {
+   "line": 248,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "expt_bounded : forall s m k0, 0 <= s -> s < inject_Z (Z.of_nat (S k0)) -> expt_process s m <= 1 / qpow (1 - s / inject_Z (Z.of_nat (S k0))) (S k0) (ProcessExpLadder.v:519) — потолок рационален и от номера стадии m не зависит. Closed under the global context.",
+   "theorem": "expt_bounded",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "стадии не убывают (`expt_monotone`) и ограничены числом, одним для всех (`expt_bounded`; оба — `ProcessExpLadder.v`), так что расхождение в момент $t$ оценено независимо от числа шагов (`euler_divergence_uniform`);"
+  },
+  {
+   "line": 248,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "euler_divergence_uniform : те же посылки и forall k0 : nat, L * t < inject_Z (Z.of_nat (S k0)) -> forall (k : nat) (y0 z0 : Q), Qabs (...) <= 1 / qpow (1 - L * t / inject_Z (Z.of_nat (S k0))) (S k0) * Qabs (y0 - z0) (ProcessGronwallInequality.v:405) — правая часть от числа шагов k не зависит. При L·t < 1 — euler_divergence_expt_small (:423): не больше |y0 − z0| / (1 − L·t). Closed under the global context.",
+   "theorem": "euler_divergence_uniform",
+   "file": "src/process/ProcessGronwallInequality.v",
+   "assumptions": "Closed under the global context",
+   "claim": "стадии не убывают (`expt_monotone`) и ограничены числом, одним для всех (`expt_bounded`; оба — `ProcessExpLadder.v`), так что расхождение в момент $t$ оценено независимо от числа шагов (`euler_divergence_uniform`);"
+  },
+  {
+   "line": 248,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 20.11 (Часть VIII, шаг 4, слово автора): новая фраза. expt_process_is_Cauchy : forall s, 0 <= s -> is_Cauchy (expt_process s) (ProcessExpLadder.v:565); is_Cauchy (ProcessCore.v:68): для всякого eps > 0 найдётся N, за которым стадии отличаются меньше чем на eps. При s = L·t — growth_factor_is_Cauchy (ProcessGronwallInequality.v:502). Closed under the global context.",
+   "theorem": "expt_process_is_Cauchy",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "лестница множителей — процесс Коши с явным модулем (`expt_process_is_Cauchy`, `expt_modulus`); при $s = 1$ она совпадает с $e$-процессом (`expt_at_one`). 0 аксиом."
+  },
+  {
+   "line": 248,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "expt_modulus : forall s k0, 0 <= s -> s < inject_Z (Z.of_nat (S k0)) -> forall m n, (k0 <= n)%nat -> expt_process s m - expt_process s n <= 1 / qpow (1 - s / inject_Z (Z.of_nat (S k0))) (S k0) * (s * s / inject_Z (Z.of_nat (S n))) (ProcessExpLadder.v:538) — явный модуль: зазор не больше B·s²/(n+1). Closed under the global context.",
+   "theorem": "expt_modulus",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "лестница множителей — процесс Коши с явным модулем (`expt_process_is_Cauchy`, `expt_modulus`); при $s = 1$ она совпадает с $e$-процессом (`expt_at_one`). 0 аксиом."
+  },
+  {
+   "line": 248,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "expt_at_one : forall k, expt_process 1 k = exp1_process k (ProcessExpLadder.v:347); exp1_process (ProcessExpProcess.v:47) — процесс (1 + 1/n)^n Глав 8.2 и 8.5. Closed under the global context.",
+   "theorem": "expt_at_one",
+   "file": "src/process/ProcessExpLadder.v",
+   "assumptions": "Closed under the global context",
+   "claim": "лестница множителей — процесс Коши с явным модулем (`expt_process_is_Cauchy`, `expt_modulus`); при $s = 1$ она совпадает с $e$-процессом (`expt_at_one`). 0 аксиом."
   }
  ]
 }
