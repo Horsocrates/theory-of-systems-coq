@@ -2,7 +2,7 @@
 title: Logic
 lang: en
 translationOf: "Библиотека/Направления/Логика/index.md"
-sourceBlob: 70836efecd8f81d3c3678aa9dd5191a0c5fa9a03
+sourceBlob: 30fcbefefe68f722619b7131f61026691288da23
 translated: 2026-10-14
 status: draft
 ---
@@ -44,7 +44,7 @@ A step toward such reintegration is taken here. Logic is the structure of being 
 
 ## Conditions of Existence
 
-René Descartes identified the Archimedean point: the existence of the one who thinks is the first and most certain of all truths.[^16] But before answering how what exists is structured, it is worth asking a deeper question: **why is there something at all, rather than nothing**?
+René Descartes began with what cannot be doubted: the existence of the one who thinks is the first and most certain of all truths.[^16] But before answering how what exists is structured, it is worth asking a deeper question: **why is there something at all, rather than nothing**?
 
 This question is the first and the most fundamental. Gottfried Leibniz formulated it in the *Principles of Nature and Grace*.[^17] Martin Heidegger made it the starting point of metaphysics: “Why are there beings at all, and not rather nothing?”[^18] Yet Leibniz himself gave, at the same time, the key to the answer—a principle that here receives the status of a meta-law.
 
@@ -80,7 +80,7 @@ It should be noted that this derivation is epistemic, not ontological. The path 
 
 **The structure of primary distinction.**
 
-The primary distinction has a definite form: ***A* | not-*A***, where the bar is the boundary of the distinction. On one side stands the distinguished (*A*): that which has been marked out. On the other stands the background (not-*A*): everything from which *A* has been distinguished.
+The primary distinction has a definite form: ***A* | not-*A***, where the bar is the boundary of the distinction. On one side stands the distinguished (*A*): that which has been marked out. On the other stands the background (not-*A*): everything from which *A* has been distinguished. Not-*A* is neither named nor defined: to give a definition is to name exactly. What is named is already *B*: it belongs to not-*A*, yet it is not all that not-*A* is.
 
 The distinction is **exhaustive**: it divides all that is into two regions—what satisfies the criterion of *A* and what does not; in the primary distinction there is no third region (“neither *A* nor not-*A*”).
 
