@@ -4,7 +4,7 @@ aliases:
   - Law of Identity
 lang: en
 translationOf: "Библиотека/Направления/Логика/Тождество.md"
-sourceBlob: f95d8b0606b7e7e69491eab893e3a3ee99c3f2d1
+sourceBlob: 8d8180c4a0c85c78c1940302153091c1ca30d048
 translated: 2026-10-09
 status: draft
 ---
@@ -22,7 +22,7 @@ The law seems too obvious to be worth naming. Yet all determinacy stands on it: 
 
 Among the five laws ([[Logic]]), Identity is one of the two **primary** laws: it articulates an irreducible feature of the act of distinction—*stability*. For the distinction to occur, the distinguished must remain the same throughout the act of distinction: if *A* changed in the very act of being marked out, there would be no determinate *A* to mark out. Identity nonetheless allows for change: it requires only that *A* be identical to itself at any given moment and in any given respect; change is the transition from *A*-at-t₁ to *A*-at-t₂, and each state is identical to itself. The failure of identity is the collapse of determinacy: if *A* ≠ *A*, there is simply no single *A*—only a confusion of different things under one sign.
 
-The second primary law is [[Non-Contradiction]]: neither of the two derives from the other. [[Excluded Middle]] is derived from their joint operation; [[Sufficient Reason]] and [[Order]] are meta-laws.
+The second primary law is [[Non-Contradiction]]: neither of the two derives from the other. [[Excluded Middle]] is derived from their joint operation. [[Sufficient Reason]] and [[Order]], for their part, are meta-laws.
 
 The law has three facets. *Ontologically:* each thing is identical to itself at every moment; through all change and development, *A* remains *A* in its essence (what the essence is—see “What Exactly Remains” below). *Logically:* every statement, if true, is true. *Epistemologically:* a concept must keep its meaning throughout the course of reasoning.[^1] All three facets express one principle: *something is what it is*.
 
@@ -44,7 +44,7 @@ In being, the law makes **differentiation** possible: something is itself and th
 
 **Recognition.** We recognize things because they remain themselves: an apple is an apple through all the variety of cultivars. Without identity, every moment would be an encounter with the unknown. The first domain of reasoning stands on this—[[1 Recognition|registering what is there]].
 
-**Definition.** We can say what “justice” or “triangle” is because these concepts keep their meaning. If “justice” means one thing at the beginning of a conversation and another at the end, the conversation is meaningless. Socrates took care to agree on the definition of a subject before reasoning about it. The second domain stands on this—[[2 Clarification|clarification]].
+**Definition.** We can say what “justice” or “triangle” is because these concepts keep their meaning. If “justice” means one thing to one interlocutor and another to the other, the conversation is meaningless. Socrates took care to agree on the definition of a subject before reasoning about it. The second domain stands on this—[[2 Clarification|clarification]].
 
 **Communication.** Words work because they keep their meaning. When I say “table,” you understand what is meant. Without identity, language is impossible.
 
@@ -105,7 +105,7 @@ Navigation: ← [[Logic|Branch overview]] · [[Non-Contradiction]] →
 
 [^1]: Concepts *can* change—this is part of the work of [[2 Clarification|clarification]], when we specify what exactly we mean. But once a concept has been settled and we move on in reasoning, it must keep its meaning. If the meaning has shifted, we must return to clarification rather than pretend that nothing has changed.
 
-[^2]: Parmenides of Elea (c. 515 – c. 450 BCE). The poem *On Nature* survives in fragments; the key formulations are fragment B2 in the Diels–Kranz numbering (the two ways: “that it is and that it is impossible for it not to be” and “that it is not and that it is necessary for it not to be”) and fragment B3: “for to think and to be are one and the same.” For the Greek text and the edition, see [[Logic]].
+[^2]: Parmenides of Elea (c. 515 – c. 450 BCE). The poem *On Nature* survives in fragments; the key formulations are fragment B2 in the Diels–Kranz numbering (the two ways: “that it is and that it is impossible for it not to be” and “that it is not and that it is necessary for it not to be”) and fragment B3: “for to think and to be are one and the same.” For the Greek text and the edition, see [[Logic]]. The words “Whatever can be thought, is; there is no non-being” render fragment B6, lines 1–2: χρὴ τὸ λέγειν τε νοεῖν τ' ἐὸν ἔμμεναι· ἔστι γὰρ εἶναι, / μηδὲν δ' οὐκ ἔστιν.
 
 [^3]: Plato, *Sophist* 254d, trans. H. N. Fowler, Loeb Classical Library (Cambridge, MA: Harvard University Press, 1921).
 

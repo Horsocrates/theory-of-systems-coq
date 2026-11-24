@@ -4,7 +4,7 @@ aliases:
   - Law of Non-Contradiction
 lang: en
 translationOf: "Библиотека/Направления/Логика/Непротиворечие.md"
-sourceBlob: c238d45a4c06782a44648c02565fc114be1bb10f
+sourceBlob: 9b07a13963eff1c9a70db93c4f79dc6a7fa3b81c
 translated: 2026-10-09
 status: draft
 ---
@@ -22,7 +22,7 @@ All determinacy rests on this exclusivity: where something is *A* and not-*A* at
 
 Among the five laws ([[Logic]]), Non-Contradiction is the second of the two **primary** laws: it articulates the *exclusivity* of the sides of the distinction. The distinction places *A* and not-*A* in mutually exclusive positions on opposite sides of the boundary; to be both is to be on both sides of the boundary at once—that is, to be determinately nowhere. A contradiction describes the collapse of a state of affairs: a contradictory “something” has no determinate character.
 
-The first primary law is [[Identity]]: neither of the two derives from the other. [[Excluded Middle]] is derived from their joint operation; [[Sufficient Reason]] and [[Order]] are meta-laws.
+The first primary law is [[Identity]]: neither of the two derives from the other. [[Excluded Middle]] is derived from their joint operation. [[Sufficient Reason]] and [[Order]], for their part, are meta-laws.
 
 ## History
 
