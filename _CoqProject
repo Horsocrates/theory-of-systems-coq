@@ -2172,3 +2172,9 @@ src/process/ProcessPeriodicGrid.v
 src/process/ProcessHeatProcess.v
 src/process/ProcessTransportProcess.v
 src/process/ProcessBurgersStep.v
+src/process/ProcessWaveProcess.v
+src/process/ProcessWaveConservation.v
+src/navier_stokes/GalerkinAdvection.v
+src/navier_stokes/GalerkinEnergyEstimate.v
+src/navier_stokes/GalerkinEnstrophyRegion.v
+src/process/ProcessGrowthExponentGap.v

@@ -18,13 +18,13 @@
    "line": 34,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
-   "claim": "Чего глава *не* делает: она не формализует *нелинейный* перенос (уравнение Бюргерса), ударные волны и слабые (энтропийные) решения.",
+   "claim": "Чего глава *не* делает: она не формализует ударные волны и слабые (энтропийные) решения *нелинейного* переноса (уравнения Бюргерса); о нелинейной схеме доказаны лишь свойства одного шага.",
    "page_price": "",
    "verdict": "ok",
-   "note": "Оговорка стоит честно: в ProcessTransport.v нет ни определения нелинейного шага, ни утверждений о нём (слово Burgers — только в комментарии шапки). В src оно встречается ещё в одном файле — navier_stokes/AdvectionEnergyConservation.v: burgers_conserves_energy (:118) есть телескопическое тождество для кубического потока периодической грид-функции, не шаг схемы; страницы Части IX этот файл не называют."
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (вопрос 1 шага 2, вариант 1): названо доказанное о нелинейной схеме. Ударных волн, слабых и энтропийных решений в формализации нет; об одном шаге схемы для уравнения Бюргерса — ProcessBurgersStep.v (5 Qed), см. сноску 10."
   },
   {
-   "line": 37,
+   "line": 38,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Не строится и завершённое непрерывное решение $u(x-at)$ — роль-предел.",
@@ -33,7 +33,7 @@
    "note": "Верно: в файле о сдвиге есть одна лемма — transport_shift (:120), один шаг при nu = 1. Сеточный образ формулы u_0(x − at) — сдвиг на n узлов за n шагов — в файле не записан; доказан в пробном файле (transport_iter_shift: transport_iter 1 N u n (n + k) == u k)."
   },
   {
-   "line": 40,
+   "line": 41,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "*Первый* — конечная схема над ℚ: upwind, сохранение массы, бокс, сдвиг — доказаны без аксиом.",
@@ -43,7 +43,7 @@
    "assumptions": "все 8 лемм файла: Closed under the global context"
   },
   {
-   "line": 52,
+   "line": 53,
    "theorem": "transport_step",
    "file": "src/process/ProcessTransport.v",
    "claim": "Схема против потока $u^{n+1}_j = (1-\\nu) u_j + \\nu u_{j-1}$, где $\\nu = a \\Delta t/\\Delta x$ — число Куранта;",
@@ -52,7 +52,7 @@
    "note": "Definition transport_step (nu : Q) (N : nat) (u : grid_fn) : grid_fn := fun j => (1 - nu) * u j + nu * u (ppred N j) (:41) — формула страницы. Величин a, Δt, Δx в определениях нет: nu — один рациональный параметр; равенство nu = aΔt/Δx — чтение, страница относит его ко второму уровню (стр. 41–42)."
   },
   {
-   "line": 54,
+   "line": 55,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "при $0\\le\\nu\\le1$ это выпуклая комбинация (сохранение бокса и неотрицательности); полная масса $\\sum_j u_j$ сохраняется; при $\\nu=1$ — точный сдвиг на один узел;",
@@ -62,7 +62,7 @@
    "assumptions": "transport_step_box, transport_step_nonneg, transport_mass, transport_shift: Closed under the global context"
   },
   {
-   "line": 56,
+   "line": 57,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "условие CFL $\\nu\\le1$ (в этой главе оно проявляется как неотрицательность весов и сохранение бокса, а не отдельная спектральная оценка).",
@@ -71,7 +71,7 @@
    "note": "Оговорка стоит честно: условие входит в файл посылками 0 <= nu, nu <= 1 трёх лемм (:68, :78, :88); спектральной оценки в файле нет. В файле доказана достаточность условия; необходимость и рост вне условия не записаны — доказаны в пробном файле (transport_nonneg_iff_cfl, transport_unstable_outside_cfl)."
   },
   {
-   "line": 64,
+   "line": 65,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Рациональные значения в узлах $u^n_j$, конечная сетка, конечный шаг.",
@@ -80,7 +80,7 @@
    "note": "Значения — Q; профиль имеет тип grid_fn = nat -> Q (navier_stokes/GridFunction.v:132), то есть задан на всех натуральных номерах; конечная сетка из N узлов входит параметром N — в соседе ppred N j и в верхнем пределе суммы sum_Q_ns … N. Условия периодичности на сам профиль нет. См. заметки, сомнительное место 1."
   },
   {
-   "line": 79,
+   "line": 80,
    "theorem": "transport_step",
    "file": "src/process/ProcessTransport.v",
    "claim": "при $0\\le\\nu\\le1$ новое значение есть *выпуклое среднее* текущего узла и его левого соседа (веса $1-\\nu$ и $\\nu$ — доли).[^2]",
@@ -89,17 +89,17 @@
    "note": "По определению transport_step (:41) веса суть 1 − nu и nu, в сумме 1; их неотрицательность при 0 <= nu <= 1 используется в transport_step_box (:68, доказательство — nra по двум оценкам соседних значений)."
   },
   {
-   "line": 81,
-   "theorem": null,
-   "file": "src/process/ProcessTransport.v",
+   "line": 82,
+   "theorem": "transport_nonneg_iff_cfl",
+   "file": "src/process/ProcessTransportProcess.v",
    "claim": "Условие устойчивости $\\nu\\le1$ — это снова требование, чтобы веса были неотрицательны: профиль не может за один шаг сместиться больше чем на один узел (информация не обгоняет сетку).",
    "page_price": "",
    "verdict": "ok",
-   "note": "В файле устойчивость представлена удержанием в боксе на всём процессе: transport_iter_box (:78) при 0 <= nu <= 1 — оценка значений для любого числа шагов. Что вне условия оценка нарушается, в файле не записано; в пробном файле доказано: при N >= 2 неотрицательность сохраняется тогда и только тогда, когда 0 <= nu <= 1 (transport_nonneg_iff_cfl), а при nu > 1 или nu < 0 знакопеременный профиль на сетке с чётным N растёт без границы (transport_unstable_outside_cfl).",
-   "assumptions": "transport_iter_box: Closed under the global context"
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (формализацией; текст фразы не менялся): условие теперь доказано точным (при N >= 2): transport_nonneg_iff_cfl : forall nu N, (2 <= N)%nat -> ((forall u : grid_fn, (forall k, 0 <= u k) -> forall j, (j < N)%nat -> 0 <= transport_step nu N u j) <-> (0 <= nu /\\ nu <= 1)) (ProcessTransportProcess.v:212); необходимость — transport_nonneg_needs_cfl (:198), свидетель — единичный импульс delta0 (:193). Closed under the global context. Вне условия значения растут без границы: transport_unstable_outside_cfl (:309).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 85,
+   "line": 86,
    "theorem": "transport_shift",
    "file": "src/process/ProcessTransport.v",
    "claim": "При $\\nu=1$ веса становятся $(0,1)$, и шаг есть *точный сдвиг*: $u^{n+1}_j = u^n_{j-1}$ — весь профиль переезжает ровно на один узел вправо, без искажения.[^3]",
@@ -108,16 +108,17 @@
    "note": "Lemma transport_shift : forall N (u : grid_fn) j, transport_step 1 N u j == u (ppred N j) (:120) — для всякого профиля и всякого узла; у узла 0 сосед — узел N−1 (периодичность)."
   },
   {
-   "line": 98,
-   "theorem": "transport_mass",
-   "file": "src/process/ProcessTransport.v",
+   "line": 99,
+   "theorem": "transport_iter_mass",
+   "file": "src/process/ProcessTransportProcess.v",
    "claim": "Полная масса $\\sum_j u_j$ не меняется со временем: перенос ничего не создаёт и не уничтожает, лишь перемещает. На непустой периодической сетке это доказывается прямо:",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "transport_mass (:103) говорит об одном шаге: sum_Q_ns (transport_step nu N u) N == sum_Q_ns u N при 0 < N. Для процесса transport_iter (любое число шагов) утверждения о массе в файле нет — о нём доказан только бокс (transport_iter_box). Доводится индукцией по числу шагов: transport_iter_mass в пробном файле, Closed under the global context. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (формализацией; текст фразы не менялся): «не меняется со временем» теперь доказано на всём процессе: transport_iter_mass : forall nu N (u : grid_fn) n, (0 < N)%nat -> sum_Q_ns (transport_iter nu N u n) N == sum_Q_ns u N (ProcessTransportProcess.v:108) — при любом nu и любом числе шагов. Периодичность посылкой не берётся: шаг использует только левого соседа, а он завёрнут в определении (ppred). Closed under the global context. Прежняя лемма одного шага — transport_mass (ProcessTransport.v).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 106,
+   "line": 107,
    "theorem": "sum_pred_shift_periodic",
    "file": "src/process/ProcessPDEGreen.v",
    "claim": "где использовано, что сумма по сдвинутым узлам равна сумме по исходным (циклическая перестановка узлов).[^4]",
@@ -126,7 +127,7 @@
    "note": "Lemma sum_pred_shift_periodic : forall (g : nat -> Q) N, (0 < N)%nat -> sum_Q_ns (fun j => g (ppred N j)) N == sum_Q_ns g N (ProcessPDEGreen.v:67); в доказательстве transport_mass применена к g := u (:110)."
   },
   {
-   "line": 107,
+   "line": 108,
    "theorem": "transport_mass",
    "file": "src/process/ProcessTransport.v",
    "claim": "Существенно, что для сохранения массы даже не нужно $\\nu\\le1$: масса сохраняется при любом числе Куранта, потому что перенос есть перераспределение.",
@@ -135,16 +136,17 @@
    "note": "Верно: у transport_mass (:103) посылка одна — (0 < N)%nat; на nu условий нет."
   },
   {
-   "line": 111,
-   "theorem": "transport_step_nonneg",
-   "file": "src/process/ProcessTransport.v",
+   "line": 112,
+   "theorem": "transport_iter_nonneg",
+   "file": "src/process/ProcessTransportProcess.v",
    "claim": "*Неотрицательность*: если профиль всюду неотрицателен (например, плотность), он таким и останется.[^5]",
    "page_price": "",
-   "verdict": "mismatch-statement",
-   "note": "transport_step_nonneg (:88) говорит об одном шаге: при 0 <= nu, nu <= 1 и forall k, 0 <= u k — forall j, 0 <= transport_step nu N u j. Для любого числа шагов утверждения нет; из transport_iter_box оно не следует (профиль может быть не ограничен сверху). Доводится индукцией: transport_iter_nonneg в пробном файле, Closed under the global context. Заметки, расхождение 1."
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (формализацией; текст фразы не менялся): «он таким и останется» теперь доказано на всём процессе: transport_iter_nonneg : forall nu N, 0 <= nu -> nu <= 1 -> forall n (u : grid_fn), (forall k, 0 <= u k) -> forall j, 0 <= transport_iter nu N u n j (ProcessTransportProcess.v:121). Closed under the global context. Прежняя лемма одного шага — transport_step_nonneg (ProcessTransport.v).",
+   "assumptions": "Closed under the global context"
   },
   {
-   "line": 113,
+   "line": 114,
    "theorem": "transport_iter_box",
    "file": "src/process/ProcessTransport.v",
    "claim": "И *сохранение бокса*: значения не выходят за начальные пределы — на всём процессе.[^6]",
@@ -153,7 +155,7 @@
    "note": "Lemma transport_iter_box : forall nu N lo hi, 0 <= nu -> nu <= 1 -> forall n u, in_box u lo hi -> in_box (transport_iter nu N u n) lo hi (:78) — для любого числа шагов; условие на nu страница называет (стр. 111). in_box (:50) берёт оценку по всем номерам k, не только по узлам j < N; вариант на узлах сетки доказан в пробном файле (transport_iter_box_grid)."
   },
   {
-   "line": 122,
+   "line": 123,
    "theorem": "transport_mass_concrete",
    "file": "src/process/ProcessTransport.v",
    "claim": "Возьмём профиль $(5, 3, 0, 0)$ на четырёхузловой сетке — полная масса $8$. Полушаг ($\\nu=\\tfrac12$) сдвигает и слегка размывает его, но масса остаётся $8$.[^7]",
@@ -162,7 +164,7 @@
    "note": "p_prof (:129) — 5, 3 и нули; transport_mass_concrete (:133): sum_Q_ns (transport_step (1#2) 4%nat p_prof) 4%nat == 8, вычисление. Вычислено в пробном файле: исходная масса 8 (p_prof_mass), после полушага профиль (5/2, 4, 3/2, 0) (p_prof_half_step)."
   },
   {
-   "line": 124,
+   "line": 125,
    "theorem": "transport_full_shift",
    "file": "src/process/ProcessTransport.v",
    "claim": "А полный шаг ($\\nu=1$) переносит профиль ровно на узел: значение, бывшее в узле $0$ (равное $5$), оказывается в узле $1$.[^8]",
@@ -171,7 +173,7 @@
    "note": "transport_full_shift (:138): transport_step 1 4%nat p_prof 1%nat == 5 — проверен один узел, как и сказано. Все четыре узла: (5,3,0,0) -> (0,5,3,0) (пробный файл, p_prof_full_step); в общем виде — transport_shift (:120)."
   },
   {
-   "line": 145,
+   "line": 146,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Нелинейный перенос, ударные волны и энтропийные решения — граница формализации этой части.",
@@ -180,7 +182,7 @@
    "note": "Верно: в файлах, названных страницами Части IX, нелинейного шага нет; поиск по src (Burgers, shock, upwind, entropy solution) даёт только ProcessTransport.v (комментарий шапки) и navier_stokes/AdvectionEnergyConservation.v (тождество о потоке). Что о сеточном шаге Бюргерса доводится без аксиом — заметки, сомнительное место 7 (пробный файл, раздел 10)."
   },
   {
-   "line": 165,
+   "line": 166,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Разберём построенную систему — перенос как процесс движения профиля — в терминах E/R/R, читая E/R/R-шапку `ProcessTransport.v`.[^9] Это онтологическое осмысление и чтение шапки.",
@@ -189,7 +191,7 @@
    "note": "Шапка файла (стр. 4–24) содержит строки Elements, Roles, Rules и раздел «E/R/R разбор». Объявлений, записывающих перенос как систему E/R/R (запись системы, назначение ролей), в файле нет; страница называет разбор чтением шапки."
   },
   {
-   "line": 172,
+   "line": 173,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "В основании — схема против потока $u^{n+1}_j = (1-\\nu)u_j + \\nu u_{j-1}$, при $0\\le\\nu\\le1$ выпуклая. Над ней — сохранение массы (циклический сдвиг суммы), неотрицательность и сохранение бокса; при $\\nu=1$ — точный сдвиг.",
@@ -199,7 +201,7 @@
    "assumptions": "все названные леммы: Closed under the global context"
   },
   {
-   "line": 175,
+   "line": 176,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Венчает — условие устойчивости $\\nu\\le1$ (неотрицательность весов).",
@@ -208,7 +210,7 @@
    "note": "См. запись к стр. 81: в файле условие стоит посылкой лемм о боксе и неотрицательности (достаточность); необходимость и рост вне условия — в пробном файле."
   },
   {
-   "line": 177,
+   "line": 178,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Универсальный E/R/R-слой задаёт роли и правила; конкретный формальный слой — формула шага, сохранение массы, бокс и CFL.",
@@ -217,7 +219,7 @@
    "note": "Формальный слой файла: определения transport_step, transport_iter, in_box, p_prof и 8 лемм; CFL — посылки 0 <= nu, nu <= 1."
   },
   {
-   "line": 193,
+   "line": 194,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "| upwind $u^{n+1}_j=(1-\\nu)u_j+\\nu u_{j-1}$; сохранение массы; бокс; сдвиг при $\\nu=1$; CFL $\\nu\\le1$ | КАК профиль движется с сохранением массы | Rules ($L5$) |",
@@ -226,7 +228,7 @@
    "note": "Строка таблицы повторяет раздел Rules шапки файла (стр. 7–9); каждому пункту отвечает объявление: transport_step, transport_mass, transport_step_box / transport_iter_box, transport_shift, посылки 0 <= nu, nu <= 1."
   },
   {
-   "line": 200,
+   "line": 201,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Существенно, что сохранение массы выражено как равенство конечных сумм (через циклический сдвиг), а не через интеграл по завершённой области;",
@@ -235,7 +237,7 @@
    "note": "Верно: transport_mass (:103) — равенство двух сумм sum_Q_ns … N (конечная сумма по узлам 0…N−1, GridFunction.v:26); интеграла в файле нет."
   },
   {
-   "line": 204,
+   "line": 205,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Именно поэтому линейный перенос здесь полностью конечен и рационален, а нелинейный честно отложен.",
@@ -244,7 +246,7 @@
    "note": "Значения — Q, суммы конечны, шагов — натуральное число; нелинейного шага в файле нет (запись к стр. 34)."
   },
   {
-   "line": 221,
+   "line": 222,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Опорный файл — `ProcessTransport.v` (`process/` Rocq-репозитория ToS): `transport_step`, сохранение бокса `transport_step_box`/`transport_iter_box`, неотрицательность `transport_step_nonneg`, сохранение массы `transport_mass`, точный сдвиг `transport_shift`, конкретный прогон `transport_mass_concrete` и `transport_full_shift`.",
@@ -253,7 +255,7 @@
    "note": "Файл src/process/ProcessTransport.v есть (143 строки); все восемь названных объявлений в нём: :41, :68, :78, :88, :103, :120, :133, :138."
   },
   {
-   "line": 221,
+   "line": 222,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "8 доказанных утверждений, 0 аксиом (`Print Assumptions`: «closed under the global context»).",
@@ -263,7 +265,7 @@
    "assumptions": "все 8 лемм файла: Closed under the global context"
   },
   {
-   "line": 222,
+   "line": 223,
    "theorem": "transport_step_linear",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_step` в `ProcessTransport.v`; линейность — `transport_step_linear`.",
@@ -272,7 +274,7 @@
    "note": "Lemma transport_step_linear : forall nu N a b (f g : grid_fn) j, transport_step nu N (fun k => a * f k + b * g k) j == a * transport_step nu N f j + b * transport_step nu N g j (:57) — линейность шага по профилю, при любом nu."
   },
   {
-   "line": 222,
+   "line": 223,
    "theorem": "ppred",
    "file": "src/process/ProcessPDEGreen.v",
    "claim": "Левый сосед на периодической сетке — циклический предшественник `ppred`.",
@@ -281,7 +283,7 @@
    "note": "Definition ppred (N j : nat) : nat := match j with O => Nat.pred N | S k => k end (ProcessPDEGreen.v:63) — объявлен не в ProcessTransport.v, а в файле Главы 9.1, откуда подключён. На узлах j < N значение лежит в 0…N−1 (пробный файл, ppred_lt)."
   },
   {
-   "line": 223,
+   "line": 224,
    "theorem": "transport_shift",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_shift`: `transport_step 1 N u j == u (ppred N j)`. Точный сдвиг — предельно допустимое по CFL движение за шаг.",
@@ -290,7 +292,7 @@
    "note": "Фрагмент кода совпадает с утверждением леммы (:120–121) дословно."
   },
   {
-   "line": 224,
+   "line": 225,
    "theorem": "transport_mass",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_mass` в `ProcessTransport.v`: `sum_Q_ns (transport_step nu N u) N == sum_Q_ns u N`.",
@@ -299,7 +301,7 @@
    "note": "Фрагмент кода совпадает с заключением леммы (:103–104); сноска называет утверждение точно — один шаг."
   },
   {
-   "line": 224,
+   "line": 225,
    "theorem": "sum_pred_shift_periodic",
    "file": "src/process/ProcessPDEGreen.v",
    "claim": "Опирается на `sum_pred_shift_periodic` (Глава 9.1); требует лишь $N>0$ — циклический сдвиг суммы — и не зависит от $\\nu$. 0 аксиом.",
@@ -308,7 +310,7 @@
    "note": "Верно: в доказательстве transport_mass (:110) стоит rewrite (sum_pred_shift_periodic u N HN); единственная посылка — (0 < N)%nat. Лемма объявлена в ProcessPDEGreen.v:67; Глава 9.1 называет её в сноске 4. Closed under the global context."
   },
   {
-   "line": 225,
+   "line": 226,
    "theorem": "transport_step_nonneg",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_step_nonneg`: при $0\\le\\nu\\le1$ из неотрицательности следует неотрицательность.",
@@ -317,7 +319,7 @@
    "note": "Lemma transport_step_nonneg : forall nu N (u : grid_fn), 0 <= nu -> nu <= 1 -> (forall k, 0 <= u k) -> forall j, 0 <= transport_step nu N u j (:88) — один шаг; посылка и заключение — по всем номерам. Сноска называет утверждение точно."
   },
   {
-   "line": 226,
+   "line": 227,
    "theorem": "transport_step_box",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_step_box` и `transport_iter_box`: выпуклая комбинация удерживает значения в $[ m,M ]$, как и в тепле.",
@@ -326,7 +328,7 @@
    "note": "Lemma transport_step_box : forall nu N (u : grid_fn) lo hi, 0 <= nu -> nu <= 1 -> in_box u lo hi -> in_box (transport_step nu N u) lo hi (:68); transport_iter_box (:78) — то же для любого числа шагов. В тепле — heat_step_box и heat_iter_box (ProcessHeatEquation.v:74, :87) с тем же определением in_box."
   },
   {
-   "line": 227,
+   "line": 228,
    "theorem": "transport_mass_concrete",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_mass_concrete`: `sum_Q_ns (transport_step (1#2) 4 p_prof) 4 == 8`. Точная рациональная арифметика.",
@@ -335,7 +337,7 @@
    "note": "В исходнике (:133–134): sum_Q_ns (transport_step (1#2) 4%nat p_prof) 4%nat == 8 — фрагмент страницы отличается только пометками области %nat. Доказательство — vm_compute."
   },
   {
-   "line": 228,
+   "line": 229,
    "theorem": "transport_full_shift",
    "file": "src/process/ProcessTransport.v",
    "claim": "`transport_full_shift`: `transport_step 1 4 p_prof 1 == 5`.",
@@ -344,13 +346,291 @@
    "note": "В исходнике (:138–139): transport_step 1 4%nat p_prof 1%nat == 5 — отличие только в пометках области %nat. Доказательство — vm_compute."
   },
   {
-   "line": 229,
+   "line": 230,
    "theorem": null,
    "file": "src/process/ProcessTransport.v",
    "claim": "Шапка размечает прямо: Rules — upwind-шаг, выпуклая комбинация при $\\nu\\le1$, сохранение массы, сдвиг при $\\nu=1$, CFL; Roles — $u^n$ роль-профиль, $\\nu$ роль-Куранта, масса роль-сохраняющаяся, сдвиг роль-перенос; Elements — рациональные $u_j$, конечная сетка.",
    "page_price": "",
    "verdict": "ok",
    "note": "Совпадает с шапкой файла (стр. 4–9 и 18–22): Elements — rational node values u_j, finite periodic grid, finite time step; Roles — role-profile, role-Courant-number, role-conserved, role-transport, a = role-velocity; Rules — upwind step, 0≤ν≤1 ⟹ convex combination, mass conserved, ν=1 ⟹ exact one-node shift, CFL."
+  },
+  {
+   "line": 34,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«О нелинейной схеме доказаны лишь свойства одного шага»: Definition burgers_step (lam : Q) (N : nat) (u : grid_fn) : grid_fn := fun j => u j - lam * (1#2) * (u j * u j - u (ppred N j) * u (ppred N j)) (ProcessBurgersStep.v:50) — разность потоков u²/2 против потока; lam — отношение шагов Δt/Δx. Свойства шага — burgers_step_local_courant (:55), burgers_mass (:61), burgers_step_box (:80); итерации шага в файле нет.",
+   "theorem": "burgers_step",
+   "file": "src/process/ProcessBurgersStep.v",
+   "claim": "Чего глава *не* делает: она не формализует ударные волны и слабые (энтропийные) решения *нелинейного* переноса (уравнения Бюргерса); о нелинейной схеме доказаны лишь свойства одного шага."
+  },
+  {
+   "line": 86,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (формализацией; текст фразы не менялся): transport_step_zero : forall N (u : grid_fn) j, transport_step 0 N u j == u j (ProcessTransportProcess.v:101). Closed under the global context.",
+   "theorem": "transport_step_zero",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При $\\nu=0$ (нет движения) профиль стоит."
+  },
+  {
+   "line": 88,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (формализацией; текст фразы не менялся): «слегка размывается (численная диффузия)» записано точным балансом: transport_step_energy : forall nu N (u : grid_fn), (0 < N)%nat -> sum_Q_ns (fun j => transport_step nu N u j * transport_step nu N u j) N == sum_Q_ns (fun j => u j * u j) N - nu * (1 - nu) * sum_Q_ns (fun j => (u j - u (ppred N j)) * (u j - u (ppred N j))) N (ProcessTransportProcess.v:409) — равенство при любом nu; при 0 <= nu <= 1 сумма квадратов не растёт — transport_step_energy_le (:436). Closed under the global context.",
+   "theorem": "transport_step_energy",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При промежуточных $\\nu$ профиль движется и слегка размывается (численная диффузия), но всегда остаётся выпуклым средним — отсюда все его свойства."
+  },
+  {
+   "line": 222,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новый опорный файл в сноске. src/process/ProcessTransportProcess.v: 40 Qed и пять определений; строк Axiom, Parameter, Admitted нет.",
+   "theorem": null,
+   "file": "src/process/ProcessTransportProcess.v",
+   "claim": "Законы на всём процессе — `ProcessTransportProcess.v` (масса, неотрицательность и бокс на любом числе шагов, точность условия Куранта, сдвиг на $n$ узлов, баланс суммы квадратов; 40 утверждений, 0 аксиом).",
+   "assumptions": "все 45 объявлений ProcessTransportProcess.v: Closed under the global context"
+  },
+  {
+   "line": 223,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_nonneg_iff_cfl : forall nu N, (2 <= N)%nat -> ((forall u : grid_fn, (forall k, 0 <= u k) -> forall j, (j < N)%nat -> 0 <= transport_step nu N u j) <-> (0 <= nu /\\ nu <= 1)) (ProcessTransportProcess.v:212); необходимость — transport_nonneg_needs_cfl (:198), свидетель — единичный импульс delta0 (:193). Closed under the global context.",
+   "theorem": "transport_nonneg_iff_cfl",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Что условие точное — `transport_nonneg_iff_cfl` (`ProcessTransportProcess.v`): при $N\\ge2$ неотрицательность для всякого неотрицательного профиля равносильна $0\\le\\nu\\le1$; вне условия значения знакопеременного профиля на сетке с чётным числом узлов превосходят любую границу (`transport_unstable_outside_cfl`). 0 аксиом."
+  },
+  {
+   "line": 223,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "transport_unstable_outside_cfl : forall nu N, (0 < N)%nat -> Nat.even N = true -> nu < 0 \\/ 1 < nu -> forall B : Q, exists n, B < Qabs (transport_iter nu N transport_alt n 0%nat) (ProcessTransportProcess.v:309); transport_alt (:226) — профиль 1, −1, 1, −1, …; он собственный вектор шага с множителем 1 − 2 nu (alt_mode_step, :237; alt_mode_iter, :276; оценка роста alt_mode_growth, :294). Closed under the global context.",
+   "theorem": "transport_unstable_outside_cfl",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Что условие точное — `transport_nonneg_iff_cfl` (`ProcessTransportProcess.v`): при $N\\ge2$ неотрицательность для всякого неотрицательного профиля равносильна $0\\le\\nu\\le1$; вне условия значения знакопеременного профиля на сетке с чётным числом узлов превосходят любую границу (`transport_unstable_outside_cfl`). 0 аксиом."
+  },
+  {
+   "line": 224,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_step_zero : forall N (u : grid_fn) j, transport_step 0 N u j == u j (ProcessTransportProcess.v:101). Closed under the global context.",
+   "theorem": "transport_step_zero",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "При $\\nu=0$ профиль стоит (`transport_step_zero`)."
+  },
+  {
+   "line": 224,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_iter_shift : forall N (u : grid_fn) n k, transport_iter 1 N u n (n + k)%nat == u k (ProcessTransportProcess.v:476). Closed under the global context.",
+   "theorem": "transport_iter_shift",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "За $n$ шагов при $\\nu=1$ профиль сдвигается на $n$ узлов (`transport_iter_shift`), а на периодической сетке за $N$ шагов возвращается на место (`transport_full_cycle`)."
+  },
+  {
+   "line": 224,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_full_cycle : forall N (u : grid_fn) k, (0 < N)%nat -> gperiodic N u -> transport_iter 1 N u N k == u k (ProcessTransportProcess.v:486); периодичность профиля шаг сохраняет — transport_step_gperiodic (:460), transport_iter_gperiodic (:467). Closed under the global context.",
+   "theorem": "transport_full_cycle",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "За $n$ шагов при $\\nu=1$ профиль сдвигается на $n$ узлов (`transport_iter_shift`), а на периодической сетке за $N$ шагов возвращается на место (`transport_full_cycle`)."
+  },
+  {
+   "line": 224,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_step_energy : forall nu N (u : grid_fn), (0 < N)%nat -> sum_Q_ns (fun j => transport_step nu N u j * transport_step nu N u j) N == sum_Q_ns (fun j => u j * u j) N - nu * (1 - nu) * sum_Q_ns (fun j => (u j - u (ppred N j)) * (u j - u (ppred N j))) N (ProcessTransportProcess.v:409) — равенство при любом nu; при 0 <= nu <= 1 сумма квадратов не растёт — transport_step_energy_le (:436). Closed under the global context.",
+   "theorem": "transport_step_energy",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Численная диффузия записана точным балансом: за шаг сумма квадратов убывает на $\\nu(1-\\nu)$, умноженное на сумму квадратов разностей соседних значений (`transport_step_energy`); при $\\nu=1$ она сохраняется. Все — `ProcessTransportProcess.v`, 0 аксиом."
+  },
+  {
+   "line": 224,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "«При $\\nu=1$ она сохраняется»: transport_full_step_energy : forall N (u : grid_fn), (0 < N)%nat -> sum_Q_ns (fun j => transport_step 1 N u j * transport_step 1 N u j) N == sum_Q_ns (fun j => u j * u j) N (ProcessTransportProcess.v:451). Closed under the global context.",
+   "theorem": "transport_full_step_energy",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Численная диффузия записана точным балансом: за шаг сумма квадратов убывает на $\\nu(1-\\nu)$, умноженное на сумму квадратов разностей соседних значений (`transport_step_energy`); при $\\nu=1$ она сохраняется. Все — `ProcessTransportProcess.v`, 0 аксиом."
+  },
+  {
+   "line": 225,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_iter_mass : forall nu N (u : grid_fn) n, (0 < N)%nat -> sum_Q_ns (transport_iter nu N u n) N == sum_Q_ns u N (ProcessTransportProcess.v:108) — при любом nu и любом числе шагов. Периодичность посылкой не берётся: шаг использует только левого соседа, а он завёрнут в определении (ppred). Closed under the global context.",
+   "theorem": "transport_iter_mass",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На всём процессе — `transport_iter_mass` (`ProcessTransportProcess.v`): сумма сохраняется при любом числе шагов."
+  },
+  {
+   "line": 226,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_iter_nonneg : forall nu N, 0 <= nu -> nu <= 1 -> forall n (u : grid_fn), (forall k, 0 <= u k) -> forall j, 0 <= transport_iter nu N u n j (ProcessTransportProcess.v:121). Closed under the global context.",
+   "theorem": "transport_iter_nonneg",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На всём процессе — `transport_iter_nonneg`; то же для профиля, заданного только на узлах сетки, — `transport_iter_nonneg_grid` (`ProcessTransportProcess.v`)."
+  },
+  {
+   "line": 226,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_iter_nonneg_grid : forall nu N, 0 <= nu -> nu <= 1 -> forall n (u : grid_fn), (forall k, (k < N)%nat -> 0 <= u k) -> forall j, (j < N)%nat -> 0 <= transport_iter nu N u n j (ProcessTransportProcess.v:161) — посылка и заключение только на узлах сетки. Closed under the global context.",
+   "theorem": "transport_iter_nonneg_grid",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На всём процессе — `transport_iter_nonneg`; то же для профиля, заданного только на узлах сетки, — `transport_iter_nonneg_grid` (`ProcessTransportProcess.v`)."
+  },
+  {
+   "line": 227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_iter_box_grid : forall nu N lo hi, 0 <= nu -> nu <= 1 -> forall n (u : grid_fn), in_box_grid N u lo hi -> in_box_grid N (transport_iter nu N u n) lo hi (ProcessTransportProcess.v:151); in_box_grid (:138) — границы только на узлах k < N. Различие двух посылок: off_grid_in_box_grid (:177), off_grid_not_in_box (:184). Closed under the global context.",
+   "theorem": "transport_iter_box_grid",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На узлах сетки — `transport_iter_box_grid`."
+  },
+  {
+   "line": 227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. transport_iter_mono : forall nu N, 0 <= nu -> nu <= 1 -> forall n (u v : grid_fn), (forall k, u k <= v k) -> forall j, transport_iter nu N u n j <= transport_iter nu N v n j (ProcessTransportProcess.v:339); один шаг — transport_step_mono (:331). Closed under the global context.",
+   "theorem": "transport_iter_mono",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Следствия на всём процессе: принцип сравнения (`transport_iter_mono`) и устойчивость по начальным данным (`transport_iter_stable`); сумма модулей за шаг не растёт (`transport_step_l1`). Все — `ProcessTransportProcess.v`."
+  },
+  {
+   "line": 227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_iter_stable : forall nu N eps, 0 <= nu -> nu <= 1 -> forall (u v : grid_fn), (forall k, Qabs (u k - v k) <= eps) -> forall n j, Qabs (transport_iter nu N u n j - transport_iter nu N v n j) <= eps (ProcessTransportProcess.v:375) — через линейность шага (transport_iter_diff, :362) и transport_iter_sup (:350). Closed under the global context.",
+   "theorem": "transport_iter_stable",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Следствия на всём процессе: принцип сравнения (`transport_iter_mono`) и устойчивость по начальным данным (`transport_iter_stable`); сумма модулей за шаг не растёт (`transport_step_l1`). Все — `ProcessTransportProcess.v`."
+  },
+  {
+   "line": 227,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_step_l1 : forall nu N (u : grid_fn), 0 <= nu -> nu <= 1 -> (0 < N)%nat -> sum_Q_ns (fun j => Qabs (transport_step nu N u j)) N <= sum_Q_ns (fun j => Qabs (u j)) N (ProcessTransportProcess.v:385). Closed under the global context.",
+   "theorem": "transport_step_l1",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Следствия на всём процессе: принцип сравнения (`transport_iter_mono`) и устойчивость по начальным данным (`transport_iter_stable`); сумма модулей за шаг не растёт (`transport_step_l1`). Все — `ProcessTransportProcess.v`."
+  },
+  {
+   "line": 228,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. p_prof_half_step : transport_step (1#2) 4 p_prof 0 == 5#2 /\\ transport_step (1#2) 4 p_prof 1 == 4 /\\ transport_step (1#2) 4 p_prof 2 == 3#2 /\\ transport_step (1#2) 4 p_prof 3 == 0 (ProcessTransportProcess.v:77); сумма 8 — p_prof_mass (:73). Closed under the global context.",
+   "theorem": "p_prof_half_step",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Все четыре узла после полушага — $(5/2, 4, 3/2, 0)$ (`p_prof_half_step`, `ProcessTransportProcess.v`)."
+  },
+  {
+   "line": 229,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора): новая фраза. p_prof_full_step : transport_step 1 4 p_prof 0 == 0 /\\ transport_step 1 4 p_prof 1 == 5 /\\ transport_step 1 4 p_prof 2 == 3 /\\ transport_step 1 4 p_prof 3 == 0 (ProcessTransportProcess.v:85). Closed under the global context.",
+   "theorem": "p_prof_full_step",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Все четыре узла — $(0, 5, 3, 0)$ (`p_prof_full_step`); четыре полных шага возвращают профиль на место (`p_prof_full_cycle`)."
+  },
+  {
+   "line": 229,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "p_prof_full_cycle : transport_iter 1 4 p_prof 4 0 == 5 /\\ transport_iter 1 4 p_prof 4 1 == 3 /\\ transport_iter 1 4 p_prof 4 2 == 0 /\\ transport_iter 1 4 p_prof 4 3 == 0 (ProcessTransportProcess.v:93). Closed under the global context.",
+   "theorem": "p_prof_full_cycle",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Все четыре узла — $(0, 5, 3, 0)$ (`p_prof_full_step`); четыре полных шага возвращают профиль на место (`p_prof_full_cycle`)."
+  },
+  {
+   "line": 231,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (вопрос 1 шага 2, вариант 1): новая сноска. Definition burgers_step (lam : Q) (N : nat) (u : grid_fn) : grid_fn := fun j => u j - lam * (1#2) * (u j * u j - u (ppred N j) * u (ppred N j)) (ProcessBurgersStep.v:50) — разность потоков u²/2 против потока; lam — отношение шагов Δt/Δx.",
+   "theorem": "burgers_step",
+   "file": "src/process/ProcessBurgersStep.v",
+   "claim": "По эту сторону границы доказаны свойства одного шага консервативной схемы против потока для уравнения Бюргерса (`burgers_step`, `ProcessBurgersStep.v`): он есть шаг переноса с местным числом Куранта, зависящим от решения (`burgers_step_local_courant`); сохраняет массу (`burgers_mass`); удерживает неотрицательный профиль в его боксе, пока $\\lambda\\cdot\\max u\\le1$, где $\\lambda=\\Delta t/\\Delta x$ (`burgers_step_box`)."
+  },
+  {
+   "line": 231,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "burgers_step_local_courant : forall lam N (u : grid_fn) j, burgers_step lam N u j == transport_step (lam * (1#2) * (u j + u (ppred N j))) N u j (ProcessBurgersStep.v:55). Closed under the global context.",
+   "theorem": "burgers_step_local_courant",
+   "file": "src/process/ProcessBurgersStep.v",
+   "assumptions": "Closed under the global context",
+   "claim": "По эту сторону границы доказаны свойства одного шага консервативной схемы против потока для уравнения Бюргерса (`burgers_step`, `ProcessBurgersStep.v`): он есть шаг переноса с местным числом Куранта, зависящим от решения (`burgers_step_local_courant`); сохраняет массу (`burgers_mass`); удерживает неотрицательный профиль в его боксе, пока $\\lambda\\cdot\\max u\\le1$, где $\\lambda=\\Delta t/\\Delta x$ (`burgers_step_box`)."
+  },
+  {
+   "line": 231,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "burgers_mass : forall lam N (u : grid_fn), (0 < N)%nat -> sum_Q_ns (burgers_step lam N u) N == sum_Q_ns u N (ProcessBurgersStep.v:61) — при любом lam. Closed under the global context.",
+   "theorem": "burgers_mass",
+   "file": "src/process/ProcessBurgersStep.v",
+   "assumptions": "Closed under the global context",
+   "claim": "По эту сторону границы доказаны свойства одного шага консервативной схемы против потока для уравнения Бюргерса (`burgers_step`, `ProcessBurgersStep.v`): он есть шаг переноса с местным числом Куранта, зависящим от решения (`burgers_step_local_courant`); сохраняет массу (`burgers_mass`); удерживает неотрицательный профиль в его боксе, пока $\\lambda\\cdot\\max u\\le1$, где $\\lambda=\\Delta t/\\Delta x$ (`burgers_step_box`)."
+  },
+  {
+   "line": 231,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "burgers_step_box : forall lam N (u : grid_fn) lo hi, 0 <= lam -> 0 <= lo -> lam * hi <= 1 -> in_box u lo hi -> in_box (burgers_step lam N u) lo hi (ProcessBurgersStep.v:80); hi — верхняя граница бокса (на странице — max u). Closed under the global context.",
+   "theorem": "burgers_step_box",
+   "file": "src/process/ProcessBurgersStep.v",
+   "assumptions": "Closed under the global context",
+   "claim": "По эту сторону границы доказаны свойства одного шага консервативной схемы против потока для уравнения Бюргерса (`burgers_step`, `ProcessBurgersStep.v`): он есть шаг переноса с местным числом Куранта, зависящим от решения (`burgers_step_local_courant`); сохраняет массу (`burgers_mass`); удерживает неотрицательный профиль в его боксе, пока $\\lambda\\cdot\\max u\\le1$, где $\\lambda=\\Delta t/\\Delta x$ (`burgers_step_box`)."
+  },
+  {
+   "line": 231,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "burgers_steepens_concrete : bdiff 8 ramp8 2 == - (1#4) /\\ bdiff 8 (burgers_step 1 8 ramp8) 2 == - (5#16) /\\ sum_Q_ns (burgers_step 1 8 ramp8) 8 == sum_Q_ns ramp8 8 (ProcessBurgersStep.v:113); ramp8 (:102) — профиль 1, 3/4, 1/2, 1/4, 0, …, лежит в боксе [0, 1] (ramp8_in_box, :107). Одно вычисление, не общая теорема об укручении. Closed under the global context.",
+   "theorem": "burgers_steepens_concrete",
+   "file": "src/process/ProcessBurgersStep.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На одном примере наклон спадающего участка растёт с $1/4$ до $5/16$ (`burgers_steepens_concrete`); линейный шаг разностей соседних узлов не увеличивает (`transport_no_steepening`)."
+  },
+  {
+   "line": 231,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "transport_no_steepening : forall nu N (u : grid_fn) lo hi, 0 <= nu -> nu <= 1 -> in_box (bdiff N u) lo hi -> in_box (bdiff N (transport_step nu N u)) lo hi (ProcessTransportProcess.v:505); bdiff (:499) — разность соседних узлов u j − u (ppred N j); шаг и разность перестановочны — transport_step_bdiff (:501). Closed under the global context.",
+   "theorem": "transport_no_steepening",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "На одном примере наклон спадающего участка растёт с $1/4$ до $5/16$ (`burgers_steepens_concrete`); линейный шаг разностей соседних узлов не увеличивает (`transport_no_steepening`)."
+  },
+  {
+   "line": 231,
+   "page_price": "0 аксиом",
+   "verdict": "ok",
+   "note": "src/process/ProcessBurgersStep.v: 5 Qed и два определения; строк Axiom, Parameter, Admitted нет. Итерации шага, ударных волн, слабых и энтропийных решений в файле нет.",
+   "theorem": null,
+   "file": "src/process/ProcessBurgersStep.v",
+   "claim": "Ударные волны, слабые решения и поведение на многих шагах не формализованы. 0 аксиом.",
+   "assumptions": "все 7 объявлений ProcessBurgersStep.v: Closed under the global context"
   }
  ]
 }

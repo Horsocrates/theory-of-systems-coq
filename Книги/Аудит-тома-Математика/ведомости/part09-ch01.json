@@ -153,12 +153,13 @@
   },
   {
    "line": 171,
-   "theorem": "transport_mass",
-   "file": "src/process/ProcessTransport.v",
-   "claim": "Пространственный оператор — первая производная; процесс *движет* профиль без изменения формы. Роль оператора — *сохранение*: полная масса не меняется, профиль лишь сдвигается.",
+   "theorem": "transport_iter_mass",
+   "file": "src/process/ProcessTransportProcess.v",
+   "claim": "Пространственный оператор — первая производная; процесс *движет* профиль — при числе Куранта $\\nu=1$ без изменения формы, при меньшем слегка размывая его. Роль оператора — *сохранение*: полная масса не меняется.",
    "page_price": "",
    "verdict": "ok",
-   "note": "transport_mass (:103): сумма по N узлам сохраняется за один шаг при любом nu и N > 0. Точный сдвиг — transport_shift (:120), только при nu = 1; при 0 < nu < 1 шаг смешивает узел с предшественником, и профиль меняет форму (Check.v, раздел 7). Интервал значений сохраняется при 0 <= nu <= 1 (transport_step_box, :68). Предмет ведомости Главы 9.4. Сомнительное место 6 в заметках."
+   "note": "исправлено 23.11 (Часть IX, шаг 2, слово автора) (вопрос 2 шага 2, вариант 1): «без изменения формы» уточнено условием на число Куранта. «Полная масса не меняется» — на всём процессе: transport_iter_mass : forall nu N (u : grid_fn) n, (0 < N)%nat -> sum_Q_ns (transport_iter nu N u n) N == sum_Q_ns u N (ProcessTransportProcess.v:108) — при любом nu и любом числе шагов. Периодичность посылкой не берётся: шаг использует только левого соседа, а он завёрнут в определении (ppred). Closed under the global context.",
+   "assumptions": "Closed under the global context"
   },
   {
    "line": 177,
@@ -418,6 +419,36 @@
    "file": "src/process/ProcessPeriodicGrid.v",
    "assumptions": "Closed under the global context",
    "claim": "Для всякой grid-функции тождество и оценка верны с граничными членами (`green_boundary`, `lap_norm_bound_boundary`), при нулевых значениях на краях тождество — `green_zero_boundary`; без условия на края оценка неверна (`lap_bound_not_unconditional`), а постоянная 4 достигается (`lap_bound_sharp`). 0 аксиом."
+  },
+  {
+   "line": 171,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«При числе Куранта $\\nu=1$ без изменения формы»: transport_iter_shift : forall N (u : grid_fn) n k, transport_iter 1 N u n (n + k)%nat == u k (ProcessTransportProcess.v:476). Closed under the global context.",
+   "theorem": "transport_iter_shift",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Пространственный оператор — первая производная; процесс *движет* профиль — при числе Куранта $\\nu=1$ без изменения формы, при меньшем слегка размывая его. Роль оператора — *сохранение*: полная масса не меняется."
+  },
+  {
+   "line": 171,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "«При меньшем слегка размывая его»: transport_step_energy : forall nu N (u : grid_fn), (0 < N)%nat -> sum_Q_ns (fun j => transport_step nu N u j * transport_step nu N u j) N == sum_Q_ns (fun j => u j * u j) N - nu * (1 - nu) * sum_Q_ns (fun j => (u j - u (ppred N j)) * (u j - u (ppred N j))) N (ProcessTransportProcess.v:409) — равенство при любом nu; при 0 <= nu <= 1 сумма квадратов не растёт — transport_step_energy_le (:436). Closed under the global context.",
+   "theorem": "transport_step_energy",
+   "file": "src/process/ProcessTransportProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Пространственный оператор — первая производная; процесс *движет* профиль — при числе Куранта $\\nu=1$ без изменения формы, при меньшем слегка размывая его. Роль оператора — *сохранение*: полная масса не меняется."
+  },
+  {
+   "line": 166,
+   "page_price": "",
+   "verdict": "ok",
+   "note": "исправлено 23.11 (Часть IX, шаг 3, слово автора) (формализацией; текст фразы не менялся): «фронт продвигается не более чем на один узел за шаг» теперь доказано на всём процессе: wave_finite_speed_n : forall s N (u0 u1 : grid_fn) a b, (forall k, (a <= k <= b)%nat -> u0 k == 0) -> (forall k, (a <= k <= b)%nat -> u1 k == 0) -> forall n j, (a + n <= j)%nat -> (j + n <= b)%nat -> fst (wave_iter s N u0 u1 n) j == 0 /\\ snd (wave_iter s N u0 u1 n) j == 0 (ProcessWaveProcess.v:154) — при всяком s и всяком N; узел с тихой окрестностью радиуса n молчит n шагов — wave_quiet_n (:172). Closed under the global context.",
+   "theorem": "wave_finite_speed_n",
+   "file": "src/process/ProcessWaveProcess.v",
+   "assumptions": "Closed under the global context",
+   "claim": "Уравнение второго порядка по времени; процесс *распространяет*: возмущение бежит по сетке. Роль оператора — *конечная скорость*: причинность, фронт продвигается не более чем на один узел за шаг."
   }
  ]
 }

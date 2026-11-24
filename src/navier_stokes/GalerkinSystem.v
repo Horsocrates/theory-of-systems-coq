@@ -186,12 +186,12 @@ Qed.
 (*  ============ E/R/R разбор ============                                    *)
 (*    Elements: сырое модальное сопряжение B_raw k l m : Q (проекция          *)
 (*              адвекционного тензора на тройку мод; носитель без структуры). *)
-(*    Roles:    в кубической сумме энергии Σ B·a_k·a_l·a_m фактор a_l·a_m     *)
-(*              СИММЕТРИЧЕН по (l,m) — работу совершает только                *)
-(*              антисимметричная часть сопряжения; симметричная часть         *)
-(*              аннулируется в сумме тождественно.                            *)
-(*    Rules:    B_coeff := B_raw k l m − B_raw k m l — антисимметризация      *)
-(*              (выделение работающей части); антисимметрия по построению.    *)
+(*    Roles:    в сумме Σ B·a_l·a_m фактор a_l·a_m СИММЕТРИЧЕН по (l,m), поэтому антисимметричная *)
+(*              по (l,m) часть сопряжения даёт нуль в уравнении каждой моды; в нелинейный член   *)
+(*              входит только симметричная по (l,m) часть.                                       *)
+(*    Rules:    B_coeff := B_raw k l m − B_raw k m l — антисимметризация по (l,m); антисимметрия  *)
+(*              по построению. Нелинейный член с таким коэффициентом нулевой; перенос энергии    *)
+(*              между модами даёт антисимметрия по (k,m) — GalerkinAdvection.v.                   *)
 (*  ДИАГНОСТИКА (P4): постулировать антисимметрию у абстрактного B — значит   *)
 (*  приписать Элементу то, что следует из его Роли в Правиле энергобаланса.   *)
 (*  Не затронуто (честный обрыв): B_coeff_bounded (величина каскада, стена    *)
@@ -238,10 +238,10 @@ Qed.
 Section WithNSCoupling.
 Context `{nsc : NSCoupling}.
 
-(** The advection coefficient IS the antisymmetrization of the raw coupling
-    in its last two slots.  Only this part does work in the cubic energy
-    sum: a_l * a_m is (l,m)-symmetric, so the symmetric part of any
-    coupling cancels there identically. *)
+(** The coefficient is the antisymmetrization of the raw coupling in its last
+    two slots.  Since a_l * a_m is (l,m)-symmetric, this part contributes ZERO
+    to the equation of every mode (nl_mode_zero, GalerkinAdvection.v); energy
+    conservation with transport is the (k,m)-antisymmetry (adv, same file). *)
 Definition B_coeff (k l m : nat) : Q := B_raw k l m - B_raw k m l.
 
 (** The former axiom, now a STRUCTURAL lemma: antisymmetry by construction

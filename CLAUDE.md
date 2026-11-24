@@ -498,9 +498,11 @@ coupling-dependent definitions must have an instance of `NSCoupling` in context.
 ELIMINATED 2026-06-10 (Axiom -> Lemma, same names/statements, downstream unchanged):
 - `B_antisym` (was GalerkinSystem.v Axiom): `B_coeff` is now the ANTISYMMETRIZATION of an
   abstract raw coupling — `B_coeff k l m := B_raw k l m - B_raw k m l` — so antisymmetry is
-  a Lemma by `ring`. Only the antisymmetric part does work in the cubic energy sum anyway
-  (a_l*a_m is (l,m)-symmetric). Grid-space descent of the same content (0-axiom):
-  navier_stokes/AdvectionEnergyConservation.v.
+  a Lemma by `ring`. CORRECTED 2026-11-23: with this antisymmetry (in the last two slots) the
+  nonlinear term of EVERY mode is zero, since a_l*a_m is (l,m)-symmetric (`nl_mode_zero`,
+  navier_stokes/GalerkinAdvection.v); energy conservation with nonzero transport is the
+  antisymmetry in the first and the third slot (`adv_energy_zero`, same file). Grid-space
+  descent of the conservation (0-axiom): navier_stokes/AdvectionEnergyConservation.v.
 - `functional_equation_structure` (was zeta/FunctionalEquation.v Axiom): now a 2-line Lemma —
   `is_nontrivial_zero` is FORMALLY `Cauchy /\ critical strip` (no vanishing condition), and
   both conjuncts are reflection-stable (reflect_zero_cauchy + reflect_zero_critical_strip).
