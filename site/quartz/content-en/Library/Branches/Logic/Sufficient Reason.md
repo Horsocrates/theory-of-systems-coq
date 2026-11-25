@@ -4,7 +4,7 @@ aliases:
   - Law of Sufficient Reason
 lang: en
 translationOf: "Библиотека/Направления/Логика/Достаточное основание.md"
-sourceBlob: fafdabee4ca2d936bc61a048db0dd444bb0d0f0c
+sourceBlob: 941cf2ea66befcdc4c6c2181a93a2e303621b36d
 translated: 2026-10-14
 status: draft
 ---
@@ -72,7 +72,7 @@ What Hume doubts is the *connection* of cause and effect—the relation between 
 
 **The objection from quantum mechanics.** Quantum mechanics, on the standard reading, describes events without full causal determination: the moment of the radioactive decay of an individual atom has no exact cause in time—there is only a probability. But the law does not promise that the future can be computed from the present. It says: whatever is has a ground. Before the decay, the question “decayed or not decayed” has two sides, and neither is occupied; the ground of the possibility is there—the nucleus is unstable, and the probability is set by its structure. The moment of decay itself is the execution of Sufficient Reason: the assignment has taken place, the status has changed from “can be, but is not” to “can be—and is.” From the past this moment cannot be derived—both continuations are lawful; the law requires a ground, not predetermination.[^9]
 
-**Russell’s objection.** The demand for a ground for everything leads to the question of the ground of the world itself—and to this question there may be no answer: “I should say that the universe is just there, and that’s all”—the famous phrase from Russell’s debate with Copleston (1948). Later, what simply is, with no ground, came to be called a “brute fact.”[^10]
+**Russell’s objection.** The demand for a ground for everything leads to the question of the ground of the world itself—and to this question there may be no answer: “I should say that the universe is just there, and that’s all”—the famous phrase from Russell’s debate with Copleston (1948). What simply is, with no ground, is called a “brute fact.”[^10]
 
 Let us go back to the starting points. “Just there” means: it might not have been, and there is no ground. But “might not have been” presupposes that “non-existence” is a meaningful alternative. An alternative is a choice between *A* and not-*A*, and a choice is possible only where there is a logical structure that distinguishes *A* from not-*A*. This structure is already *something*. For “nothing” to be a possible alternative to being, there must exist a logical space in which this alternative is meaningful—but logical space is not nothing. “Absolute nothing”—the absence even of a structure of possibility—cannot be an alternative: there is no place where it could *be* an alternative. The existence of logical structure is necessary: even to conceive of its absence is already to use it. This is the first level of the question: reality itself “cannot not be.” That this particular world has been realized in it is the second level: what has passed from possible to actual has a cause. Russell points to the limits of explanation, but his “brute fact” itself rests on a logical structure that he declines to explain.
 
