@@ -2,7 +2,7 @@
 title: Philosophy
 lang: en
 translationOf: "Библиотека/Направления/Логика/Философия.md"
-sourceBlob: 3ba7bc6d04f1999051b58a98d5c54ae420088e86
+sourceBlob: d8297e86ab38f9eb992687173c01ea29dee560aa
 translated: 2026-10-20
 status: draft
 ---
@@ -62,7 +62,7 @@ Hence the objection of Pythagoras becomes a **theorem**, and the name becomes ex
 >
 > Beside this search stood the mystery. In the forecourt of the temple at Delphi were written the sayings of the seven sages—“Know thyself,” “Nothing in excess”;[^2] here too the Pythia gave her oracles. For the Greeks there was no contradiction in this: reason and revelation were two paths to absolute truth. The chief of the sayings became the program of the life of a man who did not serve in the temple—and it was his thought that made Delphi a source of European philosophy.
 >
-> Socrates maintained that he knew only that he knew nothing. Behind this stands a story. His friend Chaerephon asked the Pythia whether anyone was wiser than Socrates; the oracle answered that no one was. Socrates was puzzled—he did not consider himself wise, and the god could not lie; so the answer had to be understood. He began to question those reputed to be wise—politicians, poets, craftsmen—and found that all of them think they know, but on examination turn out not to know; those skilled in their own craft imagine that they understand everything else as well. Thus the oracle was solved: Socrates is wiser in one thing—he knows of his own not-knowing.[^3] Out of the solution a method was born. Socrates wrote no treatises; his instrument was *dialogue*, a joint inquiry through questions. He called himself a midwife: he helped his interlocutor give birth to a thought and tested whether it was true—destroying the illusion of knowledge and leaving him at the point from which alone a genuine search is possible.[^4] A mystical riddle led to a philosophical method: the Pythia gave the riddle—dialogue became the way to solve it. The philosopher is first of all one who knows how to ask honestly.
+> In Plato, Socrates says: “I neither know nor think that I know.” Behind this stands a story. His friend Chaerephon asked the Pythia whether anyone was wiser than Socrates; the oracle answered that no one was. Socrates was puzzled—he did not consider himself wise, and the god could not lie; so the answer had to be understood. He began to question those reputed to be wise—politicians, poets, craftsmen—and found that all of them think they know, but on examination turn out not to know; those skilled in their own craft imagine that they understand everything else as well. Thus the oracle was solved: Socrates is wiser in one thing—he knows of his own not-knowing.[^3] Out of the solution a method was born. Socrates wrote no treatises; his instrument was *dialogue*, a joint inquiry through questions. He called himself a midwife: he helped his interlocutor give birth to a thought and tested whether it was true—destroying the illusion of knowledge and leaving him at the point from which alone a genuine search is possible.[^4] A mystical riddle led to a philosophical method: the Pythia gave the riddle—dialogue became the way to solve it. The philosopher is first of all one who knows how to ask honestly.
 >
 > Plato gave the search an image that has become lasting. In the allegory of the cave people sit with their backs to the light and take the shadows on the wall for reality; the philosopher is the one who is freed from the fetters, turns toward the light, and goes out to see things as they are. The ascent goes by steps—from opinion to knowledge, from separate things to the structure that holds them, up to the Idea of the Good, the source of the being and knowability of everything—and for Plato philosophy is not a profession or an amusement of the mind but a path that changes the one who walks it. That is why, according to Plato, the one who sees the good should rule—and for that very reason does not seek power.[^5]
 >
@@ -142,7 +142,7 @@ Navigation: ← [[Order]] · [[Logic|Branch overview]] · [[Metaphysics]] →
 
 [^2]: Pausanias, *Description of Greece*, X.24.1: the maxims are written “in the fore-temple,” ἐν τῷ προνάῳ (en tō pronaō): Γνῶθι σαυτόν (gnōthi sauton) and Μηδὲν ἄγαν (mēden agan).
 
-[^3]: Plato, *Apology*, 21a–23b.
+[^3]: Plato, *Apology*, 21a–23b; Socrates’ words—21d, trans. B. Jowett.
 
 [^4]: Plato, *Theaetetus*, 149a–151d.
 
