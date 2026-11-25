@@ -4,7 +4,7 @@ aliases:
   - Law of Excluded Middle
 lang: en
 translationOf: "Библиотека/Направления/Логика/Исключённое третье.md"
-sourceBlob: 4796565f672923a8c32207f9280c4bcd16d42f6a
+sourceBlob: 9ed49674ee8107c0b3a83a6b4e0442046cddd1b1
 translated: 2026-10-09
 status: draft
 ---
@@ -49,7 +49,7 @@ Brouwer’s objection was opposed by David Hilbert—perhaps the most influentia
 That is why intuitionism was for him not a philosophical subtlety but a direct threat. Giving up Excluded Middle cut away a huge part of classical mathematics: non-constructive existence proofs, work with Cantor’s completed infinities, whole branches of analysis. “From the paradise that Cantor created for us, no one shall be able to drive us out,” Hilbert replied,[^5] and Excluded Middle was for him the very air of that paradise. Hence the famous retort: “To take this *tertium non datur* away from the mathematician would be like forbidding the astronomer the telescope or the boxer the use of his fists.”[^6]
 
 > [!note]- The Dispute and Its Price
-> The dispute grew into personal enmity. In 1928 Hilbert, ill and fearing for the fate of the leading mathematical journal of the era, secured Brouwer’s removal from the editorial board of *Mathematische Annalen*—an episode that Einstein, also a member of the board, mockingly called a “war of the frogs and the mice” and in which he refused to take part. Brouwer, shaken, fell almost silent. And there is an irony in his fate: in his later years he acknowledged that his own topological results lacked an intuitionistic foundation, since they rest on Excluded Middle. Philosophical consistency outweighed mathematical fame.
+> The dispute grew into personal enmity. In 1928 Hilbert, ill and fearing for the fate of the leading mathematical journal of the era, secured Brouwer’s removal from the editorial board of *Mathematische Annalen*—an episode that Einstein, also a member of the board, mockingly called a “war of the frogs and the mice” and in which he refused to take part. Brouwer, shaken, fell almost silent. And there is an irony in his fate: in his later years he himself showed that his celebrated fixed-point theorem, in its classical form, has no intuitionistic foundation: the point it promises cannot in general be found; only its approximate analogue holds. Philosophical consistency outweighed mathematical fame.
 
 Behind the outward sharpness stood a genuine question: what makes a mathematical statement true. For Brouwer, it is our ability to construct it; for Hilbert, its derivability in a consistent formal system. Intuitionism was no mere formal exercise: it offered a different ontology of mathematics and gave rise to a whole school—constructive logic.
 
