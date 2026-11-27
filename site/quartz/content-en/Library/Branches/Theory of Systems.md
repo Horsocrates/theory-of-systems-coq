@@ -6,7 +6,7 @@ aliases:
   - Efficiency
 lang: en
 translationOf: "Библиотека/Направления/Теория Систем.md"
-sourceBlob: abe092861e141e68d81b3ef91486b85e593e7ec3
+sourceBlob: d1d2cbe8a763e4dd51e258b00f25ad6c3a3f669d
 translated: 2026-10-14
 status: draft
 ---
@@ -23,16 +23,16 @@ The structure of every system is Rules, Roles, and Elements. From this triad the
 A system is an organized multiplicity. To exist as a determinate whole it needs three components—and each is derived from the laws of [[Logic|logic]]:
 
 - **Rules**—*how* the assignment of roles is arranged: the operations, relations, and constraints that determine which elements carry which roles. This corresponds to the Law of [[Order]]: the rules give the structure that makes a system a system and not a collection.
-- **Roles**—*what* an element is significant *for*. An element without a role—without a reason to be distinguished—is, within the system, indistinguishable from the non-existent: to exist significantly in a system is to carry a role. This corresponds to the Law of [[Sufficient Reason]].
-- **Elements**—*what* exists in the system. A system without elements is empty: not a system but only its possibility. This corresponds to the Law of [[Identity]]: every element is identical to itself and distinct from the others.
+- **Roles**—*which function* the system needs: a place assigned by the rules, which are composed from the goal of the system; an element is selected for a role according to the rules. An element without a role is, within the system, indistinguishable from the non-existent: to exist significantly in a system is to carry a role. This corresponds to the Law of [[Sufficient Reason]]: the ground of a role is the rules, the ground of the rules is the goal.
+- **Elements**—*what* exists in the system: that which is selected for the roles according to the rules. A system without elements is empty: not a system but only its possibility. This corresponds to the Law of [[Identity]]: every element is identical to itself and distinct from the others.
 
 | Component | Question | Law | Function |
 |---|---|---|---|
 | Rules | How is it arranged? | Order | Operations and constraints |
-| Roles | What is it significant for? | Sufficient Reason | Assignment and grounding |
+| Roles | Which function? | Sufficient Reason | Assignment by the rules |
 | Elements | What exists? | Identity | The substrate of the system |
 
-The asymmetry of ranks in the triad: **Rules** determine **Roles**, roles distinguish **Elements**, elements carry the system. An example is an optimization problem: the rules lay down how the status of maximum is assigned to a definite position—comparisons, order, convergence (*how*); the role “maximum” singles out the significant point (*what for*); the elements are the points of the domain (*what*).
+The asymmetry of ranks in the triad: **Rules** determine **Roles**, roles distinguish **Elements**, elements carry the system. An example is an optimization problem: the rules lay down how the status of maximum is assigned to a definite position—comparisons, order, convergence (*how*); the role “maximum” singles out the significant point (*which function*); the elements are the points of the domain (*what*).
 
 ## The Generating Order and the Representation Theorem
 
