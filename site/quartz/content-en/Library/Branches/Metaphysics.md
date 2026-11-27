@@ -9,7 +9,7 @@ aliases:
   - Thought
 lang: en
 translationOf: "Библиотека/Направления/Метафизика.md"
-sourceBlob: 70807d122aeea53474a63ba57df2952a7eadc5b3
+sourceBlob: d42f875eb4ec29635354f5cbb09e91075d374c69
 translated: 2026-10-20
 status: draft
 ---
@@ -49,7 +49,7 @@ Metaphysics is the doctrine of ontological principles: what being is and how the
 3. **Distribution.** Every determinate thing is filling in form—both at once. The two principles do not divide what exists into two classes.
 4. **Meeting.** The act of distinction—the meeting of form and content—is real, constitutive, and witnessed: not a causal link between two ready-made things but the very becoming of the determinate. The question of a bridge between the principles does not arise.
 5. **The third.** What is manifest requires Light (above): the third is Light, and the system is dual in its ground and trinitarian in manifestation. The record of the meetings belongs to another system—the mental field: it is the actualized layer of the objective field.
-6. **No tilt of value.** Neither principle is lower or darker than the other; both are unchanged in actualization: the Source remains full, Logic remains constant.
+6. **No tilt of value.** The principles stand on a par, outside moral evaluation; both are unchanged in actualization: the Source remains full, Logic remains constant.
 
 **A check by Spinoza.** Spinoza’s criterion—“is conceived through itself”—is met by both principles. But in Spinoza himself this criterion is also met by the attributes of one substance: each attribute is conceived through itself, and “it is far from absurd to ascribe several attributes to one substance” (*Ethics*, I, Proposition 10 and its scholium); thought and extension are irreducible and not interchangeable—and yet this is one substance. His second move decides the matter: things that have nothing in common with one another cannot be the cause of one another (I, Proposition 3). Logic and the Source meet in the act of distinction; therefore they do have something in common—one whole, the Absolute. In Spinoza’s vocabulary the position would read “one substance, two attributes”—with one divergence, which is its very point: Spinoza’s attributes run in parallel and do not interact (II, Proposition 7); here, by contrast, the principles meet, and one of them sets the rules for the other.
 
@@ -62,7 +62,7 @@ Metaphysics is the doctrine of ontological principles: what being is and how the
 | Descartes | Mind and body—two created substances (*Principles of Philosophy*, I, 51–60) | Separable—a real distinction; their interaction is a problem: the question of Elisabeth of Bohemia (1643) | The principles are necessary and uncreated, nested, and inseparable in Reality; the meeting needs no bridge |
 | Spinoza | One substance, two known attributes | Parallelism without interaction | The distinctness is the same; in place of parallelism—meeting and nesting |
 | Sāṃkhya | Puruṣa and Prakṛti | Conjunction—saṃyoga: the one who sees does not act, the one who acts does not see; the goal is isolation | The witness is placed as a principle; here the witness is a role—see below |
-| Manichaeism, the Gnostics | Light and darkness; spirit, and matter as evil | Struggle | The principles are functions, not values; there is no darkness in the ground |
+| Manichaeism, the Gnostics | Light and darkness; spirit, and matter as evil | Struggle | The principles are functions, not values; there is no evil in the ground |
 | The Egyptian tradition | Nun—the primeval waters—and Atum, who created himself | Atum is alone in the waters of Nun; he creates himself and rises—becomes manifest—out of them (*Pyramid Texts*, utterance 587; *Book of the Dead*, chapter 17) | No divergence—the nearest of all: Nun is the Source, the unmanifest fullness; Atum, who created himself, is Logic, which is its own ground |
 | The Book of Genesis, opening verses | Elohim—“Gods”: a name in the plural with a verb in the singular—“In the beginning God created the heaven and the earth” (Gen 1:1) | A plural name with a single action: the principles act as one; “darkness upon the face of the deep” is the Source in the state of potential, “the Spirit of God moved upon the face of the waters” is the witness, “let there be light” is the act of distinction (Gen 1:2–3) | No divergence—the first line names the plurality of the beginning with unity of action: two principles of one whole |
 | The Gospel of John, prologue | Logos and God: “In the beginning was the Logos, and the Logos was with God, and the Logos was God” (John 1:1) | The Logos is with God and is God: two Gods; all things come to be through the Logos (John 1:3) | No divergence—a direct description: the Logos is Logic; the God with whom the Logos is, is the Source. The status is the same: each principle “cannot not be,” and each has its own witness |
