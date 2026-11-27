@@ -20,7 +20,7 @@ aliases:
   - Consequence
 lang: en
 translationOf: "Библиотека/Направления/Этика.md"
-sourceBlob: ff4db4cf4e9203b120f29867c94ebfee115180b4
+sourceBlob: 71928ddf079b7694b1092cde1fedde23c2428cd8
 translated: 2026-10-15
 status: draft
 ---
@@ -67,7 +67,7 @@ The laws of logic are given together with being ([[Sufficient Reason]]). For eth
 
 Distinction is the mechanism of determinacy itself. Below it returns as the polarity of the status “right—wrong” (step 14, the Law of Polarity).
 
-**Step 4** *(support)*. Every system is analyzed by the triad: Rules—how it is arranged; Roles—what an element is significant for; Elements—what exists. The generating order runs from the Rules through the Roles to the Elements.
+**Step 4** *(support)*. Every system is analyzed by the triad: Rules—how it is arranged; Roles—which function the system needs; Elements—what exists. The generating order runs from the Rules through the Roles to the Elements.
 
 The triad of the [[Theory of Systems]]. The rules determine the roles and the selection of elements—this order is at work in every step below.
 

@@ -6,7 +6,7 @@ aliases:
   - Efficiency
 lang: en
 translationOf: "Библиотека/Направления/Теория Систем.md"
-sourceBlob: d1d2cbe8a763e4dd51e258b00f25ad6c3a3f669d
+sourceBlob: 7d0dd2be105038dfe37bf469f923c05a996ba13d
 translated: 2026-10-14
 status: draft
 ---
@@ -32,7 +32,7 @@ A system is an organized multiplicity. To exist as a determinate whole it needs 
 | Roles | Which function? | Sufficient Reason | Assignment by the rules |
 | Elements | What exists? | Identity | The substrate of the system |
 
-The asymmetry of ranks in the triad: **Rules** determine **Roles**, roles distinguish **Elements**, elements carry the system. An example is an optimization problem: the rules lay down how the status of maximum is assigned to a definite position—comparisons, order, convergence (*how*); the role “maximum” singles out the significant point (*which function*); the elements are the points of the domain (*what*).
+The asymmetry of ranks in the triad: **Rules** determine **Roles**, roles distinguish **Elements**, elements carry the system. An example is an optimization problem: the rules lay down how the status of maximum is assigned to a definite position—comparisons, order, convergence (*how*); the role “candidate” is carried by every point—a participant in the comparison (*which function*); the elements are the points of the domain (*what*). “Maximum” is a status: the rules assign it to one of the points.
 
 ## The Generating Order and the Representation Theorem
 
