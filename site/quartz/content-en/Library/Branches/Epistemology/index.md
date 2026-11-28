@@ -7,7 +7,7 @@ aliases:
   - Depth
 lang: en
 translationOf: "Библиотека/Направления/Эпистемология/index.md"
-sourceBlob: 820909d4baaa4ea8ab8cbc3421b42a67deb554a0
+sourceBlob: 2adc5873a3b748a1459a9df74847b7212b310a74
 translated: 2026-10-11
 status: draft
 ---
@@ -41,7 +41,7 @@ And this coincides with what knowability led to. To exist is to be distinguishab
 
 How does knowledge grow out of the act of distinction? To draw a difference is to separate *this* from *that*, to pick something out against the background of what is other. When a difference has been drawn and fixed, a trace remains of it—a fixed “this, not that.” Such is the actualized layer of the objective field—the record of the meetings of Logic and the Source ([[Metaphysics#The Mental Field|Metaphysics]]); for a witness this trace is **data**: a unit of difference that carries only the difference itself and nothing beyond. A minimal sense is already there in data—the “this, not that” itself; but what this difference turns into and what it means, the data themselves do not say.
 
-Meaning comes with the witness. Taking up a difference, the witness relates it to something and makes sense of what it is for the witness—and a difference that has become significant for a witness is **information**: **a unit of sense**. The boundary between data and information is the watershed of the whole theory, and it is seen in simple cases. One and the same light, one and the same wave, enters the eye of a colour-blind person and the eye of one who distinguishes colours: the data are identical, the wave has not changed—but the colour-blind person will draw from it a more modest set of differences, less information. Or speech: the sounds of which a word is made are heard the same by all—these are data; but each unpacks the sense from them in their own way, according to their own store of what is understood. Data are objective and presented to all; information is always someone’s—what in the data will become sense depends on the witness.
+Meaning comes with the witness. Taking up a difference, the witness relates it to something and makes sense of what it is for the witness—and a difference that has become significant for a witness is **information**: **a unit of sense**. The boundary between data and information is the watershed of the whole theory, and it is seen in simple cases. One and the same light, one and the same wave, enters an eye with ordinary colour vision and the eye of a colour-blind person: the data are identical, the wave has not changed—but the channel of the second takes fewer differences from it: the distortion occurs at the level of the channel, and less information arrives. Or speech: the sounds of which a word is made are heard the same by all—these are data; but each unpacks the sense from them in their own way, according to their own store of what is understood. Data are objective and presented to all; information is always someone’s—what in the data will get through and become sense depends on the channel and on the witness.
 
 So from the act of distinction a road opens to knowledge: a difference is fixed as data, taken up by a witness and made sense of as information, then retained. Knowledge is distinction that has travelled this road to the end.
 
@@ -51,7 +51,7 @@ The path on which data become information, and information becomes knowledge, go
 
 - **Data**—differences presented by the knowable, before any reading.
 
-- **Reading**—attention turns to the data: one set per step and to the accessible depth; reading is finite and selective. On depth, see below; the channel of reading is [[1 Recognition|perception]].
+- **Reading**—attention turns to the data: one set per step and to the accessible depth; reading is finite and selective. On depth, see below; reading is an act of [[1 Recognition|perception]], and its mechanism is the channels.
 
 - **Information**—a difference read and made sense of: data that have become sense for a witness.
 
@@ -59,7 +59,7 @@ The path on which data become information, and information becomes knowledge, go
 
 Every transition stands on [[Sufficient Reason]]: what is presented gives something to read, what is read gives something to become sense, what is made sense of gives something to retain. And the order of the rungs is one: data before information, information before the record. This is the horizontal of the [[Order|Law of Order]], at work within knowing itself.
 
-Hence **the rule of the building** of knowledge: a record arises only through witnessing, unfolded as the ladder. This rule is primary—the ladder is the very order that binds the rest—and by it the roles and elements of the system are read: **the roles**—that which presents (the knowable), that which reads and retains (the knower); **the elements**—data, information, the record. From the one rule of building the whole composition is read off.
+Hence the build of knowledge as a system, in the order of building. **The goal** is to learn how it is. From the goal comes **the rule of the building**: a record arises only through witnessing, unfolded as the ladder; the ladder is the very order that binds the rest. The rule assigns **the roles**—the functions the system needs: to present, to read, and to retain. For the roles **the elements** are selected: the knowable presents, the knower reads and retains. Data, information, and the record are what passes along the rungs. From the goal and the rule of building the whole composition is read off.
 
 Knowledge itself exists too—and since it exists, it is itself knowable: a record about records is possible, and this page is the sign of such a record.
 
@@ -129,7 +129,7 @@ The record, for its part, goes by a finite step, one object at a time: such are 
 
 What follows from this is proved by **the theorem of the nondecreasing gap** ([[Formalization]]). It follows two quantities through the steps of knowing: the **field** *F(n)*—how much about a system is accessible to knowledge by step *n*—and the **slice** *S(n)*—how much has been recorded by the same step; their difference is the **gap**. Three conditions: the slice stays within the field (*S(n) ≤ F(n)*); the slice only grows—what is recorded stays recorded; the field grows by at least as much as the slice (*F(n+1) − F(n) ≥ S(n+1) − S(n)*). The conclusion: **at every step the gap is preserved or grows**—once opened, it no longer narrows. The conclusion does not depend on the speed of recording: speed the knower up, and the slice grows faster—and by the same condition the field grows faster.
 
-The gap is the engine of knowing: while it is there, knowledge has somewhere to go; and in a dynamic whole it is always there. And this gap is **twofold**: **in breadth**—the field of the knowable is greater than what is recorded (the potential to learn more of the “what”); **in depth**—beneath an already known “what” lies a “why” not yet understood (the potential to bring knowledge to depth—to understanding). The gap is a **potential** that gives birth to the pull of the will toward its realization: potency → act, and the will is the engine of the transition (the full mechanics of the will is in [[Metaphysics#The Operator and the Will|Metaphysics]]).
+While the gap is there, knowledge has somewhere to go; and in a dynamic whole it is always there. And this gap is **twofold**: **in breadth**—the field of the knowable is greater than what is recorded (the potential to learn more of the “what”); **in depth**—beneath an already known “what” lies a “why” not yet understood (the potential to bring knowledge to depth—to understanding). The gap is a **potential** that gives birth to the pull of the will toward its realization: potency → act, and the will is the engine of the transition (the full mechanics of the will is in [[Metaphysics#The Operator and the Will|Metaphysics]]).
 
 The same gap gives the exact measure of all-embracingness. All-embracingness *in the course* there is: for everything that exists a step will be found at which it is taken. A ready-made corpus there is not: a single step at which everything has been taken at once does not exist. Hence “omniscience” in the sense of a finished object of possession is a **category mistake**: the turning of a process into an object. Knowledge embraces everything—in the course; **a completed corpus it cannot be**: a completed corpus is the same role-limit ([[Theory of Systems#The Boundary of the Theory: The Role-Limit|the boundary of the theory]]).
 
