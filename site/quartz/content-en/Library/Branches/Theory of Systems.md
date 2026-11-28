@@ -6,7 +6,7 @@ aliases:
   - Efficiency
 lang: en
 translationOf: "Библиотека/Направления/Теория Систем.md"
-sourceBlob: 7d0dd2be105038dfe37bf469f923c05a996ba13d
+sourceBlob: cb401cec5916c48f07aa53ac4718e1cfd453e1d2
 translated: 2026-10-14
 status: draft
 ---
@@ -23,7 +23,7 @@ The structure of every system is Rules, Roles, and Elements. From this triad the
 A system is an organized multiplicity. To exist as a determinate whole it needs three components—and each is derived from the laws of [[Logic|logic]]:
 
 - **Rules**—*how* the assignment of roles is arranged: the operations, relations, and constraints that determine which elements carry which roles. This corresponds to the Law of [[Order]]: the rules give the structure that makes a system a system and not a collection.
-- **Roles**—*which function* the system needs: a place assigned by the rules, which are composed from the goal of the system; an element is selected for a role according to the rules. An element without a role is, within the system, indistinguishable from the non-existent: to exist significantly in a system is to carry a role. This corresponds to the Law of [[Sufficient Reason]]: the ground of a role is the rules, the ground of the rules is the goal.
+- **Roles**—*which function* the system needs: a place assigned by the rules, which are composed from the goal of the system; an element is selected for a role according to the rules. An element must have a role, and every element has one: to be in a system is to carry a role. This corresponds to the Law of [[Sufficient Reason]]: the ground of a role is the rules, the ground of the rules is the goal.
 - **Elements**—*what* exists in the system: that which is selected for the roles according to the rules. A system without elements is empty: not a system but only its possibility. This corresponds to the Law of [[Identity]]: every element is identical to itself and distinct from the others.
 
 | Component | Question | Law | Function |
